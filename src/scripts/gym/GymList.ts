@@ -2289,7 +2289,7 @@ GymList['Temple of Sinnoh'] = new Gym(
 );
 
 // Paldea Gyms
-GymList['Cortondo'] = new Gym(
+GymList.Cortondo = new Gym(
     'Katy',
     'Cortondo',
     [
@@ -2302,7 +2302,7 @@ GymList['Cortondo'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-GymList['Artazon'] = new Gym(
+GymList.Artazon = new Gym(
     'Brassius',
     'Artazon',
     [
@@ -2315,7 +2315,7 @@ GymList['Artazon'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-GymList['Levincia'] = new Gym(
+GymList.Levincia = new Gym(
     'Iono',
     'Levincia',
     [
@@ -2329,7 +2329,7 @@ GymList['Levincia'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-GymList['Cascarrafa'] = new Gym(
+GymList.Cascarrafa = new Gym(
     'Kofu',
     'Cascarrafa',
     [
@@ -2342,7 +2342,7 @@ GymList['Cascarrafa'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-GymList['Medali'] = new Gym(
+GymList.Medali = new Gym(
     'Larry',
     'Medali',
     [
@@ -2355,7 +2355,7 @@ GymList['Medali'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-GymList['Montenevera'] = new Gym(
+GymList.Montenevera = new Gym(
     'Ryme',
     'Montenevera',
     [
@@ -2369,7 +2369,7 @@ GymList['Montenevera'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-GymList['Alfornada'] = new Gym(
+GymList.Alfornada = new Gym(
     'Tulip',
     'Alfornada',
     [

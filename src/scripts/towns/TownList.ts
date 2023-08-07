@@ -8997,7 +8997,7 @@ TownList['Los Platos'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
-TownList['Mesagoza'] = new Town(
+TownList.Mesagoza = new Town(
     'Mesagoza',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
@@ -9017,7 +9017,7 @@ TownList['Naranjuva Academy'] = new Town(
         npcs: [PaldeaRoamerNPC],
     }
 );
-TownList['Cortondo'] = new Town(
+TownList.Cortondo = new Town(
     'Cortondo',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
@@ -9026,7 +9026,7 @@ TownList['Cortondo'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
-TownList['Artazon'] = new Town(
+TownList.Artazon = new Town(
     'Artazon',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
@@ -9035,7 +9035,7 @@ TownList['Artazon'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
-TownList['Levincia'] = new Town(
+TownList.Levincia = new Town(
     'Levincia',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
@@ -9044,7 +9044,7 @@ TownList['Levincia'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
-TownList['Alfornada'] = new Town(
+TownList.Alfornada = new Town(
     'Alfornada',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
@@ -9053,7 +9053,7 @@ TownList['Alfornada'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
-TownList['Cascarrafa'] = new Town(
+TownList.Cascarrafa = new Town(
     'Cascarrafa',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
@@ -9071,7 +9071,7 @@ TownList['Porto Marinada'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
-TownList['Medali'] = new Town(
+TownList.Medali = new Town(
     'Medali',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
@@ -9080,7 +9080,7 @@ TownList['Medali'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
-TownList['Zapapico'] = new Town(
+TownList.Zapapico = new Town(
     'Zapapico',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
@@ -9089,7 +9089,7 @@ TownList['Zapapico'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
-TownList['Montenevera'] = new Town(
+TownList.Montenevera = new Town(
     'Montenevera',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,

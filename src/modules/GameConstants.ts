@@ -1278,7 +1278,7 @@ export const PaldeaGyms = [
     'Pokémon Trainer Arven',
     'AI Sada',
     'AI Turo',
-]
+];
 
 export const OrangeGyms = [
     'Mikan Island',
