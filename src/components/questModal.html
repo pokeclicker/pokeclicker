@@ -96,13 +96,11 @@
                                         <td class="text-nowrap align-middle text-center" data-bind="text: `${$data.curQuest() + 1} / ${$data.totalQuests}`"></td>
                                         <td class="align-middle text-center">
                                             <button type="button" class="btn btn-danger btn-sm" data-bind="click: () => { $data.suspendQuest() }, tooltip: {
-                                                title: $data.bulletinBoard == GameConstants.BulletinBoards.None ?
-                                                    'This is a story or progression related quest and it cannot be paused.'
-                                                    : 'Pausing this quest line will remove it from your quest list and prevent any progress.<br /><br />It can be resumed from the current step at the Bulletin Board it was originally accepted.',
+                                                title: $data.pauseTooltip,
                                                 trigger: 'hover',
                                                 placement: 'top',
                                                 html: true
-                                            }, attr: { disabled: $data.bulletinBoard == GameConstants.BulletinBoards.None }">Pause</button>
+                                            }, enable: $data.isPausable()">Pause</button>
                                         </td>
                                     </tr>
                                 </tbody>
