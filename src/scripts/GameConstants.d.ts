@@ -105,7 +105,7 @@ namespace GameConstants {
         'Battle Frontier',
         'Vitamins',
         'Pokerus',
-        'Shadow',
+        'Shadow Pokemon',
     }
     declare enum DungeonTile {
         empty = 0,
