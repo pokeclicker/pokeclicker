@@ -2283,7 +2283,9 @@ GymList['Temple of Sinnoh'] = new Gym(
     128000,
     'Why? Why you?! Why do you have the blessing of Arceus?!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Pokémon Wielder Volo' }
+    () => {},
+    { champion: true },
+    { displayName: 'Pokémon Wielder Volo' }
 );
 
 // Paldea Gyms
