@@ -3691,7 +3691,7 @@ class QuestLineHelper {
     // Paldea Questlines
 
     public static createPaldeaLegendsQuestLine() {
-        const paldeaLegendsQuestLine = new QuestLine('Path of Legends', 'Help Arven search for the Herba Mystica.', new RouteKillRequirement(10, GameConstants.Region.paldea, 1));
+        const paldeaLegendsQuestLine = new QuestLine('Path of Legends', 'Help Arven search for the Herba Mystica.');
 
         const clearTrainerArven = new CustomQuest(1, 0, 'Arven wants to test you and himself. Defeat him at Poco Path Lighthouse', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pokémon Trainer Arven')]());
         paldeaLegendsQuestLine.addQuest(clearTrainerArven);
@@ -3700,16 +3700,16 @@ class QuestLineHelper {
     }
 
     public static createPaldeaVictoryQuestLine() {
-        const paldeaVictoryQuestLine = new QuestLine('Victory Road', 'Challenge Paldea\'s Gyms to challenge your new rival, Nemona.', new RouteKillRequirement(10, GameConstants.Region.paldea, 1));
+        const paldeaVictoryQuestLine = new QuestLine('Victory Road', 'Challenge Paldea\'s Gyms to challenge your new rival, Nemona.');
 
-        const clearChampionNemona = new CustomQuest(1, 0, 'Finally, it\'s time to fight Nemona as equals! Defeat Champion Nemona in Mesagoza.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Nemona')]());
+        const clearChampionNemona = new CustomQuest(1, 0, 'Finally, it\'s time to fight Nemona as equals! Defeat Champion Nemona in Mesagoza.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Nemona')]();
         paldeaVictoryQuestLine.addQuest(clearChampionNemona);
 
         App.game.quests.questLines().push(paldeaVictoryQuestLine);
     }
 
     public static createPaldeaStarfallQuestLine() {
-        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Casseiopia disband Team Star.', new RouteKillRequirement(10, GameConstants.Region.paldea, 1));
+        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Casseiopia disband Team Star.');
 
         const clearCasseiopia = new CustomQuest(1, 0, 'Penny has revealed herself to be Casseiopia. Defeat her at Naranjuva Academy.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Penny of Team Star')]());
         paldeaStarfallQuestLine.addQuest(clearCasseiopia);

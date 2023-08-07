@@ -28430,7 +28430,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 150,
-        'evolutions': [LevelEvolution('Tandemaus', 'Maushold (Family of Three)', 25)],
+        'evolutions': [LevelEvolution('Tandemaus', 'Maushold (Family of Four)', 25)],
         'gender': {
             'type': Genders.Genderless,
         },
