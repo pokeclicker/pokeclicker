@@ -52,6 +52,7 @@ const allButAlola: Array<Region> = [
     Region.kalos,
     Region.galar,
     Region.hisui,
+    Region.paldea,
 ];
 const allButGalar: Array<Region> = [
     Region.kanto,
@@ -62,6 +63,7 @@ const allButGalar: Array<Region> = [
     Region.kalos,
     Region.alola,
     Region.hisui,
+    Region.paldea,
 ];
 const allButHisui: Array<Region> = [
     Region.kanto,
@@ -72,6 +74,7 @@ const allButHisui: Array<Region> = [
     Region.kalos,
     Region.alola,
     Region.galar,
+    Region.paldea,
 ];
 
 export type PokemonListData = {
