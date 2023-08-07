@@ -12618,44 +12618,44 @@ dungeonList['Ancient Lake Acuity'] = new Dungeon('Ancient Lake Acuity',
     96500, 54);
 
 dungeonList['Temple of Sinnoh'] = new Dungeon('Temple of Sinnoh',
-['Bronzong', 'Floatzel', 'Magnezone', 'Lumineon', 'Lucario', 'Bibarel', 'Garchomp'],
-{
-    common: [
-        {loot: 'Token_collector', weight: 2},
-        {loot: 'Aspear'},
+    ['Bronzong', 'Floatzel', 'Magnezone', 'Lumineon', 'Lucario', 'Bibarel', 'Garchomp'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    1350400,
+    [
+        new DungeonTrainer('The Galaxy Team\'s Kamado',
+            [
+                new GymPokemon('Hisuian Braviary', 1128000, 61),
+                new GymPokemon('Golem', 1128000, 61),
+                new GymPokemon('Clefable', 1128000, 61),
+                new GymPokemon('Snorlax', 1128000, 61),
+            ], { weight: 4 }),
+        new DungeonBossPokemon('Dialga (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Palkia (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
-},
-1350400,
-[
-    new DungeonTrainer('The Galaxy Team\'s Kamado',
-        [
-            new GymPokemon('Hisuian Braviary', 1128000, 61),
-            new GymPokemon('Golem', 1128000, 61),
-            new GymPokemon('Clefable', 1128000, 61),
-            new GymPokemon('Snorlax', 1128000, 61),
-        ], { weight: 4 }),
-    new DungeonBossPokemon('Dialga (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
-    new DungeonBossPokemon('Palkia (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
-],
-96500, 46);
+    96500, 46);
 
 dungeonList['Turnback Cave'] = new Dungeon('Turnback Cave',
-['Gabite', 'Hisuian Sliggoo', 'Dusclops', 'Gengar', 'Rotom', 'Drifblim', 'Hisuian Zorua'],
-{
-    common: [
-        {loot: 'Token_collector', weight: 2},
-        {loot: 'Aspear'},
+    ['Gabite', 'Hisuian Sliggoo', 'Dusclops', 'Gengar', 'Rotom', 'Drifblim', 'Hisuian Zorua'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Garchomp', 10000000, 58),
+        new DungeonBossPokemon('Dusknoir', 10000000, 58),
+        new DungeonBossPokemon('Mismagius', 10000000, 58),
+        new DungeonBossPokemon('Froslass', 10000000, 58),
+        new DungeonBossPokemon('Giratina (Origin)', 10000000, 70),
     ],
-},
-2603000,
-[
-    new DungeonBossPokemon('Garchomp', 10000000, 58),
-    new DungeonBossPokemon('Dusknoir', 10000000, 58),
-    new DungeonBossPokemon('Mismagius', 10000000, 58),
-    new DungeonBossPokemon('Froslass', 10000000, 58),
-    new DungeonBossPokemon('Giratina (Origin)', 10000000, 70),
-],
-96500, 32);
+    96500, 32);
 
 // Paldea Dungeons
 dungeonList['Inlet Grotto'] = new Dungeon('Inlet Grotto',
