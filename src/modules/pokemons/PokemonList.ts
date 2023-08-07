@@ -18488,7 +18488,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
-        'heldItem': { type: ItemType.item, id: 'Leaders_crest' },//Need this to not drop until Paldea
+        // 'heldItem': { type: ItemType.item, id: 'Leaders_crest' },// Need this to not drop until Paldea
     },
     {
         'id': 626,
