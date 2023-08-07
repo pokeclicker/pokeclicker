@@ -3804,41 +3804,33 @@ Paldea
 */
 // I am currently unsure if fixed encounter only pokemon should be included. They have been for now, and are clearly separated.
 Routes.add(new RegionRoute(
-    'Poco Path', GameConstants.Region.paldea, 1,
+    'Poco Path', Region.paldea, 1,
     new RoutePokemon({
         land: ['Lechonk', 'Pawmi', 'Tarountula', 'Hoppip', 'Fletchling', 'Scatterbug', 'Wingull', 'Buizel'],
         water: ['Magikarp', 'Arrokuda'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-    undefined,
-    GameConstants.PaldeaSubRegions.Paldea
 ));
 Routes.add(new RegionRoute(
-    'South Province (Area One)', GameConstants.Region.paldea, 2,
+    'South Province (Area One)', Region.paldea, 2,
     new RoutePokemon({
         land: ['Hoppip', 'Paldean Wooper', 'Wingull', 'Ralts', 'Combee', 'Sunkern', 'Buizel', 'Pawmi', 'Gastly', 'Fletchling', 'Scatterbug', 'Spewpa', 'Oricorio (Pom-Pom)', 'Lechonk', 'Tarountula', 'Fidough', 'Happiny', 'Pichu', 'Bonsly', 'Skwovet', 'Shroodle', 'Bounsweet', 'Igglybuff', 'Drowzee', /*Fixed encounter only:*/'Wiglett', 'Pachirisu', 'Flamigo', 'Gimmighoul (Chest)'],
         water: ['Magikarp', 'Arrokuda', 'Azurill', 'Chewtle', 'Psyduck', 'Surskit'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-    undefined,
-    GameConstants.PaldeaSubRegions.Paldea
 ));
 Routes.add(new RegionRoute(
-    'South Province (Area Two)', GameConstants.Region.paldea, 3,
+    'South Province (Area Two)', Region.paldea, 3,
     new RoutePokemon({
         land: ['Pikachu', 'Jigglypuff', 'Eevee', 'Mareep', 'Hoppip', 'Starly', 'Fletchling', 'Smoliv', 'Fidough', 'Maschiff', 'Happiny', 'Pichu', 'Bonsly', 'Bounsweet', 'Skwovet', 'Shroodle', 'Applin', /*Charcadet is very rare. There's a chance it might be restricted to just Fire Eggs*/'Charcadet', 'Igglybuff', 'Rockruff', 'Misdreavus', 'Makuhita', 'Skiddo', 'Yungoos', 'Nacli', 'Sunkern', 'Combee', 'Flabébé (Red)', 'Flabébé (Yellow)', 'Flabébé (Orange)', 'Flabébé (Blue)', 'Flabébé (White)', 'Kricketot', 'Diglett', 'Gastly', 'Drowzee', 'Bronzor', 'Tinkatink', 'Squawkabilly (Green)', 'Squawkabilly (Blue)', 'Squawkabilly (Yellow)', 'Squawkabilly (White)', /*Fixed encounter only:*/'Staravia', 'Vespiquen', 'Gimmighoul (Chest)'],
         water: ['Psyduck', 'Magikarp', 'Azurill', 'Buizel', 'Chewtle', 'Arrokuda', 'Tadbulb'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-    undefined,
-    GameConstants.PaldeaSubRegions.Paldea
 ));
 Routes.add(new RegionRoute(
-    'South Province (Area Three)', GameConstants.Region.paldea, 4,
+    'South Province (Area Three)', Region.paldea, 4,
     new RoutePokemon({
         land: ['Growlithe', 'Gulpin', 'Spoink', 'Shuppet', 'Shinx', 'Oricorio (Baile)', 'Rookidee', 'Nymble', 'Pawmi', 'Klawf', 'Murkrow', 'Dunsparce', 'Happiny', 'Tandemaus', 'Squawkabilly (Green)', 'Squawkabilly (Blue)', 'Squawkabilly (Yellow)', 'Squawkabilly (White)', 'Drifloon', 'Makuhita', 'Yungoos', 'Skiddo', 'Nacli', 'Charcadet', 'Gastly', 'Drowzee', 'Bronzor', 'Tinkatink', /*Fixed encounter only:*/'Talonflame', 'Staraptor', 'Gimmighoul (Chest)'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-    undefined,
-    GameConstants.PaldeaSubRegions.Paldea
 ));

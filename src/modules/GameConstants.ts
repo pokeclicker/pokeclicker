@@ -111,6 +111,7 @@ export enum HisuiSubRegions {
 
 export enum PaldeaSubRegions {
     Paldea = 0,
+}
 
 export enum FinalSubRegions {
     Final = 0,
