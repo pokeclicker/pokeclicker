@@ -3702,7 +3702,7 @@ class QuestLineHelper {
     public static createPaldeaVictoryQuestLine() {
         const paldeaVictoryQuestLine = new QuestLine('Victory Road', 'Challenge Paldea\'s Gyms to challenge your new rival, Nemona.');
 
-        const clearChampionNemona = new CustomQuest(1, 0, 'Finally, it\'s time to fight Nemona as equals! Defeat Champion Nemona in Mesagoza.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Nemona')]();
+        const clearChampionNemona = new CustomQuest(1, 0, 'Finally, it\'s time to fight Nemona as equals! Defeat Champion Nemona in Mesagoza.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Nemona')]());
         paldeaVictoryQuestLine.addQuest(clearChampionNemona);
 
         App.game.quests.questLines().push(paldeaVictoryQuestLine);
