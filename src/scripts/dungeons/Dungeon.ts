@@ -13322,9 +13322,7 @@ dungeonList['Area Zero Depths'] = new Dungeon('Area Zero Depths',
             {loot: 'Lucky_egg'},
             {loot: 'Lucky_incense'},
         ],
-        epic: [
-            {loot: 'Heart Scale'},
-        ],
+        epic: [{loot: 'Heart Scale'}],
     },
     33915762,
     [
