@@ -2403,15 +2403,11 @@ class QuestLineHelper {
         const defeatUnrivaledPsychic = new CustomQuest(1500, 0, 'Defeat 1500 Psychic-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
-        const catchUnrivaledPsychic = new CustomQuest(600, 0, 'Capture or hatch 600 Psychic-type Pokémon.', () => {
-            return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
-        });
+        const catchUnrivaledPsychic = new CapturePokemonTypesQuest(600, undefined, PokemonType.Psychic);
         const defeatUnrivaledFighting = new CustomQuest(750, 0, 'Defeat 750 Psychic-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
-        const catchUnrivaledFighting = new CustomQuest(300, 0, 'Capture or hatch 300 Psychic-type Pokémon.', () => {
-            return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
-        });
+        const catchUnrivaledFighting = new CapturePokemonTypesQuest(600, undefined, PokemonType.Fighting);
         unrivaledPowerQuestLine.addQuest(new MultipleQuestsQuest([
             defeatUnrivaledPsychic,
             catchUnrivaledPsychic,
@@ -2469,8 +2465,8 @@ class QuestLineHelper {
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo2);
 
         const findGreatTwistedSpoon = new CustomQuest(1, undefined, 'Find the Great Twisted Spoon in P2 Lab.', () => player.itemList.Great_Twisted_Spoon());
-        const unrivaledPsychicGems = new GainGemsQuest(50000, 0, PokemonType.Psychic);
-        const unrivaledFightingGems = new GainGemsQuest(50000, 0, PokemonType.Fighting);
+        const unrivaledPsychicGems = new GainGemsQuest(60000, 0, PokemonType.Psychic);
+        const unrivaledFightingGems = new GainGemsQuest(60000, 0, PokemonType.Fighting);
         unrivaledPowerQuestLine.addQuest(new MultipleQuestsQuest([
             findGreatTwistedSpoon,
             unrivaledPsychicGems,

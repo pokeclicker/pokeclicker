@@ -6023,7 +6023,7 @@ const AnomalyMewtwo2 = new NPC('Anomaly Mewtwo', [
     '<i>.......Thank you.</i>',
     '<i>I would like to give you something, but first, may I ask two things of you?</i>',
     '<i>First, I would like to gather 110,000 each of Psychic and Fighting Gems to boost the power of my attacks.</i>',
-    '<i>If you could gather 50,000 of each I can take care of the rest.</i>',
+    '<i>If you could gather 60,000 of each I can take care of the rest.</i>',
     '<i>Also, you have heard of Twisted Spoons, yes? They are items that greatly boost the power of psychic type Pokémon.</i>',
     '<i>When I was created, I had an enhanced version of this item created for me. I have heard it is now in the hands of an organisation named Team Plasma, in an area named P2 Laboratory.</i>',
     '<i>I would greatly appreciate it if you would retrieve this item for me.</i>',
