@@ -44,7 +44,7 @@ export enum Region {
     hisui = 8,
     paldea = 9,
     // Throws an error if no region after the final region
-    final = 9,
+    final = 10,
 }
 
 export const MAX_AVAILABLE_REGION = Region.galar;

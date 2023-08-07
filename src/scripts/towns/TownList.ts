@@ -8976,7 +8976,7 @@ TownList['Cabo Poco'] = new Town(
     GameConstants.PaldeaSubRegions.Paldea,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Volo)],
     }
 );
 TownList['Poco Path Lighthouse'] = new Town(
@@ -9233,6 +9233,6 @@ TownList['Final Region Town'] = new Town(
     GameConstants.FinalSubRegions.Final,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)],
     }
 );
