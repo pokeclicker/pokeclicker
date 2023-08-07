@@ -47,7 +47,7 @@ export enum Region {
     final = 10,
 }
 
-export const MAX_AVAILABLE_REGION = Region.paldea;
+export const MAX_AVAILABLE_REGION = Region.galar;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
