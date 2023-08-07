@@ -47,7 +47,7 @@ export enum Region {
     final = 10,
 }
 
-export const MAX_AVAILABLE_REGION = Region.galar;
+export const MAX_AVAILABLE_REGION = Region.paldea;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -1607,7 +1607,7 @@ export const PaldeaDungeons = [
     'Groundblight Shrine',
     'Firescourge Shrine',
     'Area Zero',
-    'Area Zero: Depths', // 219
+    'Area Zero Depths', // 219
 ];
 
 export const RegionDungeons = [

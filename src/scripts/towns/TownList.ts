@@ -9167,7 +9167,7 @@ TownList['Zero Lab'] = new Town(
     GameConstants.PaldeaSubRegions.Paldea,
     [GymList['AI Sada'], GymList['AI Turo'], TemporaryBattleList['Paradise Protection Protocol']],
     {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero: Depths'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero Depths'))],
     }
 );
 
@@ -9219,8 +9219,8 @@ TownList['Area Zero'] = new DungeonTown(
     ])]*/
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Inlet Grotto'))]
 );
-TownList['Area Zero: Depths'] = new DungeonTown(
-    'Area Zero: Depths',
+TownList['Area Zero Depths'] = new DungeonTown(
+    'Area Zero Depths',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero'))]
