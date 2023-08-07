@@ -329,7 +329,7 @@ class Quests implements Saveable {
                             ql.resumeAt(questLine.quest, questLine.initial);
                         }
                         if (questLine.state == QuestLineState.suspended) {
-                            ql.suspendQuest();
+                            ql.suspendQuest(true);
                         }
                     }
                 }
