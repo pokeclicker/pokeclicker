@@ -57,7 +57,7 @@ class Breeding implements Feature {
             ['Fennekin', 'Litleo'],
             ['Litten', 'Salandit'],
             ['Scorbunny', 'Sizzlipede'],
-            ['Fuecoco'],
+            ['Fuecoco', 'Charcadet'],
         ];
         this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Slowpoke'],

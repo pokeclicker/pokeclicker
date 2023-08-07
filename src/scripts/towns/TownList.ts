@@ -8974,7 +8974,7 @@ TownList['Cabo Poco'] = new Town(
     'Cabo Poco',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Paldea)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Volo)],
     }

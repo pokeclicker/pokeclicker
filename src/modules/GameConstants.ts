@@ -1056,6 +1056,7 @@ export enum BulletinBoards {
     Crown,
     Hisui,
     Arceus,
+    Paldea,
 }
 
 // Underground

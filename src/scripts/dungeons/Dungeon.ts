@@ -13234,7 +13234,7 @@ dungeonList['Inlet Grotto'] = new Dungeon('Inlet Grotto',
 
 //This is ridiculous. Should certainly be split up if a way to do so is found, and possibly some encounters removed outright.
 dungeonList['Glaseado Mountain'] = new Dungeon('Glaseado Mountain',
-    ['Magneton', 'Haunter', 'Sneasel', 'Ursaring', 'Delibird', 'Kirlia', 'Gardevoir', 'Vigoroth', 'Grumpig', 'Banette', 'Snorunt', 'Snover', 'Abomasnow', 'Gothita', 'Deerling (Winter)', 'Sawsbuck (Winter)', 'Axew', 'Fraxure', 'Cubchoo', 'Cryogonal', 'Pyroar', 'Bergmite', 'Avalugg', 'Crabominable', 'Fomantis', 'Lurantis', 'Mimikyu', 'Snom', 'Greavard', 'Revavroom', 'Cetoddle', /*Frigibax may end up Dragon Egg exclusive.*/'Frigibax', 'Tinkatuff', 'Murkrow', 'Drifblim', 'Klefki', 'Chansey', 'Flareon', 'Misdreavus', 'Gallade', 'Honchkrow', 'Rufflet', 'Gogoat', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Mudbray', 'Mudsdale', 'Greedent', 'Lokix', 'Flittle', 'Espathra', 'Scovillian', 'Pawmo', 'Bronzong', 'Glaceon', 'Froslass', 'Beartic', 'Crabrawler', 'Psyduck', 'Golduck', 'Magikarp', 'Vaporeon', 'Dunsparce', 'Altaria', 'Whiscash', 'Mismagius', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Goomy', 'Drednaw', 'Hattrem', 'Dreepy', 'Flamigo', 'Clodsire', 'Floatzel', 'Barraskewda', 'Tadbulb', 'Bellibolt', 'Shellder', 'Cloyster', 'Gyarados', 'Qwilfish', 'Skrelp', 'Clauncher', 'Clawitzer', 'Finizen', 'Kilowattrel', 'Hariyama', 'Gumshoos', 'Copperajah', 'Naclstack', 'Chansey', 'Jumpluff', 'Sunflora', 'Vespiquen', 'Vivillon (Fancy)', 'Floette (Red)', 'Floette (Yellow)', 'Floette (Orange)', 'Floette (Blue)', 'Floette (White)', 'Dolliv', 'Hypno', 'Bronzong', 'Tinkatuff', 'Gastly', 'Mareep', 'Hoppip', 'Teddiursa', 'Phanpy', 'Ralts', 'Makuhita', 'Spoink', 'Swablu', 'Barboach', 'Combee', 'Buizel', 'Drifloon', 'Gible', 'Litleo', 'Bergmite', 'Yungoos', 'Salandit', 'Skwovet', 'Chewtle', 'Arrokuda', 'Hatenna', 'Cufant', 'Pawmi', 'Smoliv', 'Nacli', 'Varoom', 'Paldean Wooper', /*Fixed encounter only:*/'Weavile', 'Frosmoth', 'Gimmighoul (Chest)'],
+    ['Magneton', 'Haunter', 'Sneasel', 'Ursaring', 'Delibird', 'Kirlia', 'Gardevoir', 'Vigoroth', 'Grumpig'],
     {
         common: [
             {loot: 'Lucky_egg'},
@@ -13298,7 +13298,6 @@ dungeonList['Firescourge Shrine'] = new Dungeon('Firescourge Shrine',
     2200000, 1);
 
 // May be split up into two areas (Area Zero: Heights & Area Zero: Lower (Needs better name)).
-// Will likely have Dudunsparce (Three-Segment) be obtained here unless a fun evo method is thought up (I don't think it should be as simple as just a level evo)
 //To have some of the regular Paradox mons be exclusive to one area, I am likely going to have Slither Wing/Iron Moth and Sandy Shocks/Iron Thorns be exclusive to Area Zero (pretty sure they actually are, anyway), and Great Tusk/Iron Treads and Flutter Mane/Iron Jugulis be exclusive to Area Zero Depths
 dungeonList['Area Zero'] = new Dungeon('Area Zero',
     ['Venomoth', 'Meditite', 'Medicham', 'Braviary', 'Corviknight', 'Floette (White)', 'Raichu', 'Jumpluff', 'Girafarig', 'Volcarona', 'Frosmoth', 'Farigiraf', 'Swablu', 'Altaria', 'Flamigo', 'Phanpy', 'Donphan', 'Talonflame', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Garganacl', 'Masquerain', 'Tadbulb', 'Bellibolt', 'Pawniard', 'Bisharp', 'Numel', 'Camerupt', 'Sneasel', 'Weavile', 'Scream Tail', 'Iron Bundle', 'Brute Bonnet', 'Iron Hands', 'Flutter Mane', 'Iron Jugulis', 'Slither Wing', 'Iron Moth', 'Sandy Shocks', 'Iron Thorns'],
@@ -13324,8 +13323,7 @@ dungeonList['Area Zero Depths'] = new Dungeon('Area Zero Depths',
             {loot: 'Lucky_incense'},
         ],
         epic: [
-            {loot: 'Heart Scale', weight: 99},
-            {loot: 'Dudunsparce (Three-Segment)'},
+            {loot: 'Heart Scale'},
         ],
     },
     33915762,

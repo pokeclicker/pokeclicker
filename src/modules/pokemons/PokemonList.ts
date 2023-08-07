@@ -8273,10 +8273,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 145,
         'eggCycles': 20,
-        'evolutions': [
-            LevelEvolution('Dunsparce', 'Dudunsparce (Two-Segment)', 32),
-            LevelEvolution('Dunsparce', 'Dudunsparce (Three-Segment)', 32),
-        ],
+        'evolutions': [LevelEvolution('Dunsparce', 'Dudunsparce (Two-Segment)', 32)],
         'base': {
             'hitpoints': 100,
             'attack': 70,
@@ -28433,10 +28430,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 150,
-        'evolutions': [
-            LevelEvolution('Tandemaus', 'Maushold (Family of Four)', 25),
-            LevelEvolution('Tandemaus', 'Maushold (Family of Three)', 25),
-        ],
+        'evolutions': [LevelEvolution('Tandemaus', 'Maushold (Family of Three)', 25)],
         'gender': {
             'type': Genders.Genderless,
         },
