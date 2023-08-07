@@ -129,8 +129,7 @@ ItemList.Rusted_Sword = new AttackBonusHeldItem('Rusted_Sword', 10000, GameConst
 ItemList.Rusted_Shield = new AttackBonusHeldItem('Rusted_Shield', 10000, GameConstants.Currency.money, undefined, 'Rusted Shield', 1.5, GameConstants.Region.galar, 'Zamazenta',
     (pokemon) => Math.floor(pokemon.id) == 889);
 ItemList.Booster_Energy = new AttackBonusHeldItem('Booster_Energy', 10000, GameConstants.Currency.money, undefined, 'Booster Energy', 1.33, GameConstants.Region.paldea, /*16 Pokémon. Probably too many to list.*/'Paradox Pokémon',
-    (pokemon) => Math.floor(pokemon.id) == 984 ||  Math.floor(pokemon.id) == 985 ||  Math.floor(pokemon.id) == 986 ||  Math.floor(pokemon.id) == 987 ||  Math.floor(pokemon.id) == 988 ||  Math.floor(pokemon.id) == 989 ||  Math.floor(pokemon.id) == 990 ||  Math.floor(pokemon.id) == 991 ||  Math.floor(pokemon.id) == 992 ||  Math.floor(pokemon.id) == 993 ||  Math.floor(pokemon.id) == 994 ||  Math.floor(pokemon.id) == 995 ||  Math.floor(pokemon.id) == 1005 ||  Math.floor(pokemon.id) == 1006 || Math.floor(pokemon.id) == 1009 ||  Math.floor(pokemon.id) == 1010);
-// Typebased attack items
+    (pokemon) => [984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 1005, 1006, 1009, 1010].includes(Math.floor(pokemon.id)));
 ItemList.Black_Belt = new TypeRestrictedAttackBonusHeldItem('Black_Belt', 10000, GameConstants.Currency.money, undefined, 'Black Belt', 1.2, PokemonType.Fighting, GameConstants.Region.johto);
 ItemList.Black_Glasses = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.2, PokemonType.Dark, GameConstants.Region.johto);
 ItemList.Charcoal = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.2, PokemonType.Fire, GameConstants.Region.johto);
