@@ -280,6 +280,7 @@ export const SpriteCredits: Credit[] = [
             'Galarian Moltres overworld image',
             'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
+            'Gimmighoul Coin',
             'Go-Rock Squad Commander',
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
