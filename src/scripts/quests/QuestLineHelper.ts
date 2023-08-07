@@ -2268,21 +2268,43 @@ class QuestLineHelper {
     }
 
     public static createUnrivaledPowerQuestLine() {
-        const unrivaledPowerQuestLine = new QuestLine('An Unrivaled Power', 'It has been said that Mewtwo can Mega Evolve. Search for clues on how to find its Mega Stones, so you can control this unrivaled power.', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), GameConstants.BulletinBoards.Kalos);
+        const unrivaledPowerQuestLine = new QuestLine('An Unrivaled Power', 'It has been said that Mewtwo can Mega Evolve. Search for clues on how to find its Mega Stones, so you can control this unrivaled power.', new MultiRequirement([new ObtainedPokemonRequirement('Mewtwo'), new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]), GameConstants.BulletinBoards.Kalos);
 
-        const clearUnrivaledRed = new CustomQuest(1, 0, 'Red might know something. Fight him at Indigo Plateau Kanto then ask him what he knows.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Red')]());
+        0const clearUnrivaledRed = new CustomQuest(1, 0, 'Red might know something. Fight him at Indigo Plateau Kanto then ask him what he knows.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Red')]());
         unrivaledPowerQuestLine.addQuest(clearUnrivaledRed);
 
-        const clearUnrivaledBlue = new CustomQuest(1, 0, '.....right. Of course..... Anyway, Blue has contacted you, saying he knows something but wants a fight first. He is at Viridian City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Blue')]());
+        1const defeatUnrivaledPsychic = new CustomQuest(1500, 0, 'Defeat 1500 Psychic-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        const catchUnrivaledPsychic = new CustomQuest(600, 0, 'Capture or hatch 600 Psychic-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        const defeatUnrivaledFighting = new CustomQuest(750, 0, 'Defeat 750 Psychic-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        const catchUnrivaledFighting = new CustomQuest(300, 0, 'Capture or hatch 300 Psychic-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        unrivaledPowerQuestLine.addQuest(new MultipleQuestsQuest([
+            defeatUnrivaledPsychic,
+            catchUnrivaledPsychic,
+            defeatUnrivaledFighting,
+            catchUnrivaledFighting,
+        ],'.....right. Of course..... Well, you have no leads for now, so may as well defeat and catch some Psychic and Fighting-type Pokémon.'));
+
+        2const clearUnrivaledBlue = new CustomQuest(1, 0, 'Blue has contacted you, saying he knows something but wants a fight first. He is at Viridian City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Blue')]());
         unrivaledPowerQuestLine.addQuest(clearUnrivaledBlue);
 
-        const talkToUnrivaledBlue = new TalkToNPCQuest(UnrivaledBlue, 'Talk to Blue in Viridian City.');
+        3const talkToUnrivaledBlue = new TalkToNPCQuest(UnrivaledBlue, 'Talk to Blue in Viridian City.');
         unrivaledPowerQuestLine.addQuest(talkToUnrivaledBlue);
 
-        const talkToUnrivaledGreen1 = new TalkToNPCQuest(UnrivaledGreen1, 'You found a trainer standing where Mewtwo once did in Cerulean Cave. Talk to Green.');
+        4const clear150CeruleanCave = new CustomQuest(150, 0, 'Look for Blue\'s old rival in Cerulean Cave', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cerulean Cave')]());
+        unrivaledPowerQuestLine.addQuest(clear150CeruleanCave);
+
+        5const talkToUnrivaledGreen1 = new TalkToNPCQuest(UnrivaledGreen1, 'You eventually found a trainer standing where Mewtwo once did in Cerulean Cave. Talk to Green.');
         unrivaledPowerQuestLine.addQuest(talkToUnrivaledGreen1);
 
-        const clearUnrivaledGreen = new CustomQuest(1, 0, 'It seems Green is irritated that you caught Mewtwo before she could. Defeat her in Cerulean Cave.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Green')]());
+        6const clearUnrivaledGreen = new CustomQuest(1, 0, 'It seems Green is irritated that you caught Mewtwo before she could. Defeat her in Cerulean Cave.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Green')]());
         unrivaledPowerQuestLine.addQuest(clearUnrivaledGreen);
 
         const MewtwoniteXReward = () => {
@@ -2295,37 +2317,43 @@ class QuestLineHelper {
             });
         };
 
-        const talkToUnrivaledGreen2 = new TalkToNPCQuest(UnrivaledGreen2, 'Talk to Green in Cerulean Cave.', MewtwoniteXReward);
+        7const talkToUnrivaledGreen2 = new TalkToNPCQuest(UnrivaledGreen2, 'Talk to Green in Cerulean Cave.', MewtwoniteXReward);
         unrivaledPowerQuestLine.addQuest(talkToUnrivaledGreen2);
 
-        const talkToAnomalyMewtwo1 = new TalkToNPCQuest(AnomalyMewtwo1, 'Talk to Anomaly Mewtwo in Cerulean Cave.');
+        8const talkToAnomalyMewtwo1 = new TalkToNPCQuest(AnomalyMewtwo1, 'Talk to Anomaly Mewtwo in Cerulean Cave.');
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo1);
 
-        const clearAnomalyMewtwo1 = new CustomQuest(1, 0, 'Mewtwo wishes to find a place it can live undisturbed. You know of such a place, but it seems unwilling to listen. Defeat Anomaly Mewtwo near Cerulean Cave so you may attempt to talk to it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 1')]());
+        9const clearAnomalyMewtwo1 = new CustomQuest(1, 0, 'Mewtwo wishes to find a place it can live undisturbed. You know of such a place, but it seems unwilling to listen. Defeat Anomaly Mewtwo near Cerulean Cave so you may attempt to talk to it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 1')]());
         unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo1);
 
-        const clearAnomalyMewtwo2 = new CustomQuest(1, 0, 'It escaped to the west. Defeat Anomaly Mewtwo again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 2')]());
+        10const clearAnomalyMewtwo2 = new CustomQuest(1, 0, 'It escaped to the west. Defeat Anomaly Mewtwo again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 2')]());
         unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo2);
 
-        const clearAnomalyMewtwo3 = new CustomQuest(1, 0, 'It changed form and flew off in the direction of the sea. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 3')]());
+        11const clearAnomalyMewtwo3 = new CustomQuest(1, 0, 'It changed form and flew off in the direction of the sea. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 3')]());
         unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo3);
 
-        const clearAnomalyMewtwo4 = new CustomQuest(1, 0, 'It flew off to the peak of a great mountain. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 4')]());
+        12const clearAnomalyMewtwo4 = new CustomQuest(1, 0, 'It flew off to the peak of a great mountain. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 4')]());
         unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo4);
 
-        const clearAnomalyMewtwo5 = new CustomQuest(1, 0, 'It flew off to a faraway region to hide in a large city. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 5')]());
+        13const clearAnomalyMewtwo5 = new CustomQuest(1, 0, 'It flew off to a faraway region to hide in a large city. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 5')]());
         unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo5);
 
-        const talkToAnomalyMewtwo2 = new TalkToNPCQuest(AnomalyMewtwo2, 'Talk to Anomaly Mewtwo in Pokémon Village.');
+        14const talkToAnomalyMewtwo2 = new TalkToNPCQuest(AnomalyMewtwo2, 'Talk to Anomaly Mewtwo in Pokémon Village.');
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo2);
 
-        const findGreatTwistedSpoon = new CustomQuest(1, undefined, 'Find the Great Twisted Spoon in P2 Lab.', () => player.itemList.Great_Twisted_Spoon());
-        unrivaledPowerQuestLine.addQuest(findGreatTwistedSpoon);
+        15const findGreatTwistedSpoon = new CustomQuest(1, undefined, 'Find the Great Twisted Spoon in P2 Lab.', () => player.itemList.Great_Twisted_Spoon());
+        const unrivaledPsychicGems = new GainGemsQuest(50000, 0, PokemonType.Psychic);
+        const unrivaledFightingGems = new GainGemsQuest(50000, 0, PokemonType.Fighting);
+        unrivaledPowerQuestLine.addQuest(new MultipleQuestsQuest([
+            findGreatTwistedSpoon,
+            unrivaledPsychicGems,
+            unrivaledFightingGems,
+        ],'Gather the Great Twisted Spoon, Psychic Gems and Fighing Gems for Mewtwo.'));
 
-        const talkToAnomalyMewtwo3 = new TalkToNPCQuest(AnomalyMewtwo3, 'Talk to Anomaly Mewtwo in Pokémon Village.');
+        16const talkToAnomalyMewtwo3 = new TalkToNPCQuest(AnomalyMewtwo3, 'Talk to Anomaly Mewtwo in Pokémon Village.');
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo3);
 
-        const clearAnomalyMewtwo6 = new CustomQuest(1, 0, 'Defeat Anomaly Mewtwo in Pokémon Village.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pokémon Village')]());
+        17const clearAnomalyMewtwo6 = new CustomQuest(1, 0, 'Defeat Anomaly Mewtwo in Pokémon Village.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pokémon Village')]());
         unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo6);
 
         const MewtwoniteYReward = () => {
@@ -2338,7 +2366,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToAnomalyMewtwo4 = new TalkToNPCQuest(AnomalyMewtwo4, 'Talk to Anomaly Mewtwo in Pokémon Village.', MewtwoniteYReward);
+        18const talkToAnomalyMewtwo4 = new TalkToNPCQuest(AnomalyMewtwo4, 'Talk to Anomaly Mewtwo in Pokémon Village.', MewtwoniteYReward);
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo4);
 
         App.game.quests.questLines().push(unrivaledPowerQuestLine);
