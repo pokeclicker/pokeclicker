@@ -611,9 +611,15 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
             ], { weight: 1 }, 'Miguel'),
         new DungeonBossPokemon('Vivillon (High Plains)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (High Plains)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 28),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 29, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (High Plains)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     75, 4,
@@ -1534,9 +1540,15 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
         new DungeonBossPokemon('Mewtwo', 255512, 100),
         new DungeonBossPokemon('Vivillon (Modern)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Modern)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 2),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 3, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Modern)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     2500, 23);
@@ -1932,9 +1944,15 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
             { weight: 1 }, 'Li'),
         new DungeonBossPokemon('Vivillon (Archipelago)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Archipelago)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 12),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 13, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Archipelago)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     2500, 31);
@@ -2603,9 +2621,15 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
         new DungeonBossPokemon('Dunsparce', 460000, 55),
         new DungeonBossPokemon('Vivillon (Monsoon)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Monsoon)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 6),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 7, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Monsoon)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     6500, 45);
@@ -2949,9 +2973,15 @@ dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
             ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
         new DungeonBossPokemon('Vivillon (Sun)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Sun)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 10),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 11, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Sun)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     20000, 101);
@@ -3033,9 +3063,15 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
         new DungeonBossPokemon('Electrode', 1650000, 20),
         new DungeonBossPokemon('Vivillon (Continental)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Continental)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 18),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 19, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Continental)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     24000, 101);
@@ -3517,9 +3553,15 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
         new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
         new DungeonBossPokemon('Vivillon (Polar)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Polar)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 22),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 23, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Polar)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     34000, 101);
@@ -6347,9 +6389,15 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
         ])}),
         new DungeonBossPokemon('Vivillon (River)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (River)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 20),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 21, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (River)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     48000, 205);
@@ -6717,9 +6765,15 @@ dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
         new DungeonBossPokemon('Azelf', 10060000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Marine)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 0),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 1, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     69500, 218);
@@ -6773,9 +6827,15 @@ dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
             ], { weight: 1 }, 'Mars', '(mars)'),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Marine)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 0),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 1, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     72500, 218);
@@ -6838,9 +6898,15 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
         new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Marine)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 0),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 1, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     78000, 217);
@@ -7316,9 +7382,15 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
             ])}),
         new DungeonBossPokemon('Vivillon (Garden)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Garden)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 26),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 27, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Garden)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     96500, 230);
@@ -7720,9 +7792,15 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}),
         new DungeonBossPokemon('Vivillon (Sandstorm)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Sandstorm)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 24),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 25, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Sandstorm)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     166500, 25);
@@ -8797,9 +8875,15 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
         new DungeonBossPokemon('Zekrom', 50000000, 100),
         new DungeonBossPokemon('Vivillon (Savanna)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Savanna)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 30),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 31, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Savanna)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     356500, 7);
@@ -8865,9 +8949,15 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
         new DungeonBossPokemon('Keldeo', 50000000, 100),
         new DungeonBossPokemon('Vivillon (Jungle)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Jungle)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 4),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 5, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Jungle)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     356500, 8);
@@ -9161,9 +9251,15 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
         new DungeonBossPokemon('Latios', 48000000, 100),
         new DungeonBossPokemon('Vivillon (Ocean)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Ocean)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 16),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 17, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Ocean)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     356500, 3);
@@ -9594,9 +9690,15 @@ dungeonList['Poké Ball Factory'] = new Dungeon('Poké Ball Factory',
             { weight: 1 }),
         new DungeonBossPokemon('Vivillon (Tundra)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Tundra)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 8),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 9, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Tundra)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     615000, 14);
@@ -9671,9 +9773,15 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
         new DungeonBossPokemon('Rotom', 82376500, 38),
         new DungeonBossPokemon('Vivillon (Elegant)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Elegant)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 14),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 15, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Elegant)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     635000, 15);
@@ -9796,9 +9904,15 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
         new DungeonBossPokemon('Abomasnow', 85376500, 50, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 17)}),
         new DungeonBossPokemon('Vivillon (Icy Snow)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Icy Snow)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 32),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 33, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Icy Snow)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     665500, 15);
