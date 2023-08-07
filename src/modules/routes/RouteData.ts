@@ -3809,7 +3809,7 @@ Routes.add(new RegionRoute(
         land: ['Lechonk', 'Pawmi', 'Tarountula', 'Hoppip', 'Fletchling', 'Scatterbug', 'Wingull', 'Buizel'],
         water: ['Magikarp', 'Arrokuda'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Elite_Volo)],
 ));
 Routes.add(new RegionRoute(
     'South Province (Area One)', Region.paldea, 2,
