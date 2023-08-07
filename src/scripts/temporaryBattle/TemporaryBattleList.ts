@@ -221,6 +221,24 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Biker Goon 3'),
     ]
 );
+TemporaryBattleList['Ash Ketchum New Island'] = new TemporaryBattle(
+    'Ash Ketchum New Island',
+    [
+        new GymPokemon('Bulbasaur', 151664, 25),
+        new GymPokemon('Squirtle', 151664, 25),
+        new GymPokemon('Pikachu', 151664, 30),
+    ],
+    'I found this Clone Mewtwo left behind. Can you take care of it?',
+    [new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('New Island'))],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        imageName: 'Ash Ketchum',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Pikachu (Clone)');
+        },
+    }
+);
 TemporaryBattleList['Bill\'s Grandpa'] = new TemporaryBattle(
     'Bill\'s Grandpa',
     [
@@ -963,8 +981,8 @@ TemporaryBattleList['Cipher Peon Kass'] = new TemporaryBattle(
 TemporaryBattleList['Cipher Peon Naps'] = new TemporaryBattle(
     'Cipher Peon Naps',
     [new GymPokemon('Teddiursa', 110813753, 11, undefined, undefined, GameConstants.ShadowStatus.Shadow)], // Slightly weaker than Calem 1
-    'What was that? My Shadow Pokémon!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    'What was that? My Shadow Pokémon! It doesn\'t matter though, my teammates escaped with Professor Krane!',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
     undefined,
     {
         displayName: 'Cipher Peon Naps',
@@ -978,7 +996,7 @@ TemporaryBattleList['Chobin 1'] = new TemporaryBattle(
         new GymPokemon('Magikarp', 57406876, 6),
     ],
     'Huh? Closer observation reveals that the subject is a trainer. Ergo, the subject is not a burglar! Ahaha! Chobin wishes you spoke up right away. You\'re $playername$? Chobin apologizes for jumping to the wrong conclusion.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
     undefined,
     {
         displayName: 'Chobin',
@@ -993,8 +1011,8 @@ TemporaryBattleList['Miror B. 1'] = new TemporaryBattle(
         new GymPokemon('Lombre', 34444125, 17),
         new GymPokemon('Voltorb', 34444125, 19, undefined, undefined, GameConstants.ShadowStatus.Shadow),
     ],
-    'You messed up my rhythm! I just can\'t, no, I just can\'t do it!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')], // TODO put on overworld
+    'You messed up my rhythm! I just can\'t, no, I just can\'t do it! Shouldn\'t you be paying more attention to what\'s happening in the Pyrite Buiding than to me?',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 9)],
     undefined,
     {
         displayName: 'Miror B.',
@@ -1018,7 +1036,7 @@ TemporaryBattleList['Chobin 2'] = new TemporaryBattle(
         new GymPokemon('Tropius', 48221775, 26),
     ],
     'Huh? Oh, you\'re that trainer from before?! Chobin wishes you spoke up right away.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 17)],
     undefined,
     {
         displayName: 'Chobin',
@@ -1034,7 +1052,7 @@ TemporaryBattleList['Cipher Peon Smarton'] = new TemporaryBattle(
         new GymPokemon('Koffing', 49221775, 27),
     ],
     'You\'re too late! We already took everything we needed!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
     undefined,
     {
         displayName: 'Cipher Peon Smarton',
@@ -1051,7 +1069,7 @@ TemporaryBattleList.Zook = new TemporaryBattle(
         new GymPokemon('Relicanth', 35797654, 26),
     ],
     'Yeah, whatever! I was leaving anyways.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 21)],
     undefined,
     {
         displayName: 'Zook',
@@ -1067,8 +1085,8 @@ TemporaryBattleList['Miror B. 2'] = new TemporaryBattle(
         new GymPokemon('Nosepass', 38797654, 25, undefined, undefined, GameConstants.ShadowStatus.Shadow),
         new GymPokemon('Ludicolo', 38797654, 26),
     ],
-    'I shouldn\'t have done something this strenuous right after eating…',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    'I shouldn\'t have done something this strenuous right after eating… I\'ll need to get some new Shadow Pokémon from Team Snagem.',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 22)],
     undefined,
     {
         displayName: 'Miror B.',
@@ -2095,7 +2113,7 @@ TemporaryBattleList['Sycamore 1'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('A Beautiful World').beginQuest();
+            App.game.quests.getQuestLine('A Beautiful World').beginQuest(0, undefined, true);
         },
         displayName: 'Pokémon Professor Sycamore',
         imageName: 'Sycamore',
@@ -3379,9 +3397,9 @@ TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
     ],
     'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/Gengarite.png"/></br>',
     [
-        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666),
-        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444),
-        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666, 'Encounter at least 666 wild Gastly.'),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444, 'Encounter at least 444 wild Haunter.'),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13, 'Encounter at least 13 wild Gengar.'),
         new ObtainedPokemonRequirement('Gengar'),
     ],
     undefined,
@@ -3406,7 +3424,7 @@ TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
     [
         new ObtainedPokemonRequirement('Houndoom'),
         new WeatherRequirement([WeatherType.Sunny]),
-        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500, 'Capture a total of 500 or more Houndour.'),
         new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
     ],
     undefined,
@@ -3433,7 +3451,7 @@ TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
     [
         new ObtainedPokemonRequirement('Manectric'),
         new WeatherRequirement([WeatherType.Thunderstorm]),
-        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Electrike').id], 500),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Electrike').id], 500, 'Capture a total of 500 or more Electrike.'),
         new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
     ],
     undefined,
@@ -3671,7 +3689,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
         },
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',
@@ -5722,22 +5740,6 @@ TemporaryBattleList.Beni = new TemporaryBattle(
         imageName: 'Beni (Ninja)',
     }
 );
-TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
-    'Kamado 1',
-    [
-        new GymPokemon('Hisuian Braviary', 348526193, 61),
-        new GymPokemon('Golem', 348526193, 61),
-        new GymPokemon('Clefable', 348526193, 61),
-        new GymPokemon('Snorlax', 348526193, 62),
-    ],
-    'Any Pokémon that threatens our life here...must be eliminated!',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado (Armor)',
-    }
-);
 TemporaryBattleList['Charm 2'] = new TemporaryBattle(
     'Charm 2',
     [
@@ -5752,32 +5754,30 @@ TemporaryBattleList['Charm 2'] = new TemporaryBattle(
         imageName: 'Charm',
     }
 );
-TemporaryBattleList['Dialga (Origin) 1'] = new TemporaryBattle(
-    'Dialga (Origin) 1',
+TemporaryBattleList['Dialga (Origin)'] = new TemporaryBattle(
+    'Dialga (Origin)',
     [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
     'Dialga was captured in the Origin Ball and returned to its base form!',
     [new DevelopmentRequirement()],
     undefined,
     {
-        displayName: 'Dialga - Origin Form',
         hideTrainer: true,
         imageName: '../pokemon/483.01',
     }
 );
-TemporaryBattleList['Palkia (Origin) 1'] = new TemporaryBattle(
-    'Palkia (Origin) 1',
+TemporaryBattleList['Palkia (Origin)'] = new TemporaryBattle(
+    'Palkia (Origin)',
     [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
     'Palkia was captured in the Origin Ball and returned to its base form!',
     [new DevelopmentRequirement()],
     undefined,
     {
-        displayName: 'Palkia - Origin Form',
         hideTrainer: true,
         imageName: '../pokemon/484.01',
     }
 );
-TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
-    'Kamado 2',
+TemporaryBattleList['The Galaxy Team\'s Kamado'] = new TemporaryBattle(
+    'The Galaxy Team\'s Kamado',
     [
         new GymPokemon('Golem', 348526193, 65),
         new GymPokemon('Clefable', 348526193, 65),
@@ -5786,12 +5786,7 @@ TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
         new GymPokemon('Snorlax', 348526193, 66),
     ],
     'Even frightful creatures like Pokémon can become powerful allies...',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado (Armor)',
-    }
+    [new DevelopmentRequirement()]
 );
 TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
     'Adaman 2',
@@ -5823,32 +5818,6 @@ TemporaryBattleList['Irida 3'] = new TemporaryBattle(
         imageName: 'Irida',
     }
 );
-TemporaryBattleList['Dialga (Origin) 2'] = new TemporaryBattle(
-    'Dialga (Origin) 2',
-    [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Dialga (Origin)')],
-    {
-        isTrainerBattle: false,
-        displayName: 'Dialga - Origin Form',
-        hideTrainer: true,
-        imageName: '../pokemon/483.01',
-    }
-);
-TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
-    'Palkia (Origin) 2',
-    [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Palkia (Origin)')],
-    {
-        isTrainerBattle: false,
-        displayName: 'Palkia (Origin)',
-        hideTrainer: true,
-        imageName: '../pokemon/484.01',
-    }
-);
 TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     'Volo 3',
     [
@@ -5861,18 +5830,6 @@ TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Wielder Volo',
         imageName: 'Volo',
-    }
-);
-TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
-    'Giratina (Origin)',
-    [new GymPokemon('Giratina (Origin)', 2031393560, 70)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Giratina (Origin)'), new TemporaryBattleRequirement('Giratina (Origin)')],
-    {
-        isTrainerBattle: false,
-        imageName: '../pokemon/487.01',
-        hideTrainer: true,
     }
 );
 TemporaryBattleList['Tornadus 1'] = new TemporaryBattle(
@@ -6032,4 +5989,18 @@ TemporaryBattleList.Arceus = new TemporaryBattle(
         hideTrainer: true,
         imageName: '../pokemon/493',
     }
+);
+
+// Paldea Temporary Battles
+TemporaryBattleList['Paradise Protection Protocol'] = new TemporaryBattle(
+    'Paradise Protection Protocol',
+    [
+        new GymPokemon('Koraidon', 710987746, 70),
+        new GymPokemon('Miraidon', 710987746, 70),
+    ],
+    '<i>The Guardians of Paradise were defeated!</i>',
+    [
+        new GymBadgeRequirement(BadgeEnums.Elite_Sada),
+        new GymBadgeRequirement(BadgeEnums.Elite_Turo),
+    ]
 );

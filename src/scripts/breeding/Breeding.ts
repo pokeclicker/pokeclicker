@@ -57,6 +57,7 @@ class Breeding implements Feature {
             ['Fennekin', 'Litleo'],
             ['Litten', 'Salandit'],
             ['Scorbunny', 'Sizzlipede'],
+            ['Fuecoco', 'Charcadet'],
         ];
         this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Slowpoke'],
@@ -67,6 +68,7 @@ class Breeding implements Feature {
             ['Froakie', 'Clauncher', 'Skrelp'],
             ['Popplio', 'Wimpod', 'Mareanie'],
             ['Sobble', 'Chewtle', 'Arrokuda'],
+            ['Quaxly'],
         ];
         this.hatchList[EggType.Grass] = [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Paras'],
@@ -77,6 +79,7 @@ class Breeding implements Feature {
             ['Chespin', 'Skiddo', 'Phantump'],
             ['Rowlet', 'Morelull', 'Fomantis'],
             ['Grookey', 'Gossifleur','Applin'],
+            ['Sprigatito'],
         ];
         this.hatchList[EggType.Fighting] = [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
@@ -107,6 +110,7 @@ class Breeding implements Feature {
             ['Goomy', 'Sliggoo', 'Goodra'],
             ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
             ['Dreepy', 'Drakloak', 'Dragapult', 'Duraludon'],
+            ['Frigibax', 'Arctibax', 'Baxcalibur'],
         ];
         this.hatchList[EggType.Mystery] = [
             ['Gastly', 'Jigglypuff', 'Geodude', 'Doduo'],
