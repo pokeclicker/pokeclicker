@@ -444,7 +444,7 @@ class QuestLineHelper {
 
     // Available upon clearing Route 37
     public static createJohtoBeastsQuestLine() {
-        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new RouteKillRequirement(10, GameConstants.Region.johto, 37), GameConstants.BulletinBoards.Johto);
+        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new RouteKillRequirement(10, GameConstants.Region.johto, 37), GameConstants.BulletinBoards.Johto, true);
 
         const talktoEusine1 = new TalkToNPCQuest(EcruteakEusine, 'Talk to Eusine in Ecruteak City.');
         johtoBeastsQuestLine.addQuest(talktoEusine1);
@@ -455,7 +455,7 @@ class QuestLineHelper {
         const clearSilver = new CustomQuest(1, 0, 'Defeat Silver.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Silver 3')]());
         johtoBeastsQuestLine.addQuest(clearSilver);
 
-        const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest());
+        const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest(0, undefined, true));
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
         const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch or hatch Raikou', 1, true);
@@ -1090,7 +1090,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'How, how, how dare you! Don\'t you dare think you\'ll get away with your latest outrage! One of these days, I will take great pleasure in kicking you about with my elegant dance steps! Oh, and I\'m not giving up our Shadow Pokémon plan!',
                 npcDisplayName: 'Miror B.',
-                npcImageName: 'Cipher Admin (miror b)',
+                npcImageName: 'Cipher Admin Miror B',
             });
         orreColosseumQuestLine.addQuest(clearPyriteCave);
 
@@ -1117,7 +1117,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'This isn\'t over yet. Stronger Pokémon are being made even now. You\'d better get serious about training your Pokémon for our next meeting. Daahahah!',
                 npcDisplayName: 'Dakim',
-                npcImageName: 'Cipher Admin (dakim)',
+                npcImageName: 'Cipher Admin Dakim',
             });
         orreColosseumQuestLine.addQuest(fightMtBattle);
 
@@ -1128,7 +1128,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Aiyeeeeh! How dare you! How could I get bested by a mere child? Remember this! I\'ll get you back for this!',
                 npcDisplayName: 'Venus',
-                npcImageName: 'Cipher Admin (Venus)',
+                npcImageName: 'Cipher Admin Venus',
             });
         orreColosseumQuestLine.addQuest(fightTheUnder);
 
@@ -1139,7 +1139,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Humph! Your struggle to get here was all in vain! The Shadow Pokémon we produced have already been moved elsewhere. And that, of course, includes the ultimate Shadow Pokémon I created for the boss! Wahahahah!',
                 npcDisplayName: 'Ein',
-                npcImageName: 'Cipher Admin (ein)',
+                npcImageName: 'Cipher Admin Ein',
             });
         orreColosseumQuestLine.addQuest(fightCipherLab);
 
@@ -1497,10 +1497,144 @@ class QuestLineHelper {
     }
     // XD Questline, available after Unova E4
     public static createOrreXDQuestLine() {
-        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hoenn);
+        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]), GameConstants.BulletinBoards.Unova);
 
-        const talkToWillie = new TalkToNPCQuest(Willie, 'This is a placeholder for locking content'); // TODO make the quest for real
-        orreXDQuestLine.addQuest(talkToWillie);
+        const talkToGateonSailor = new TalkToNPCQuest(GateonSailor, 'Ask around Gateon Port for clues about new Team Cipher activity.');
+        orreXDQuestLine.addQuest(talkToGateonSailor);
+
+        const battleNaps = new CustomQuest (1, 0,  'Fight the Cipher Peons attacking the Pokemon HQ Lab.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cipher Peon Naps')]());
+        orreXDQuestLine.addQuest(battleNaps);
+
+        const clearGateonPort = new CustomQuest(1, 0, 'Clear Gateon Port to search for the Cipher Peons who kidnapped Professor Krane.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Gateon Port Battles')](), undefined, undefined,
+            {
+                clearedMessage: 'Cipher? Nah, I don\'t play with those punks. I\m my own man, flying solo. No, I won\'t say where I got this Zangoose.',
+                npcDisplayName: 'Thug Zook',
+                npcImageName: 'Thug',
+            });
+        orreXDQuestLine.addQuest(clearGateonPort);
+
+        const battleChobin1 = new CustomQuest (1, 0,  'Talk to Chobin at Kaminko\'s Manor, if he\'s willing to talk.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Chobin 1')]());
+        orreXDQuestLine.addQuest(battleChobin1);
+
+        const talkToChobin1 = new TalkToNPCQuest(Chobin1, 'Talk to Chobin at Kaminko\'s Manor.');
+        orreXDQuestLine.addQuest(talkToChobin1);
+
+        const talkToEagun2 = new TalkToNPCQuest(Eagun2, 'Talk to Grandpa Eagun at the Relic Stone.'); // Step 5
+        orreXDQuestLine.addQuest(talkToEagun2);
+
+        const clearMtBattle = new CustomQuest(1, 0, 'Clear Mount Battle and see if anyone there has a lead on the source of Shadow Pokémon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Battle')](), undefined, undefined,
+            {
+                clearedMessage: 'Wow, you\'ve got some strong Pokémon! You might be able to beat Team Cipher! I heard they re-activated their operations at the Cipher Lab.',
+                npcDisplayName: 'Vander',
+                npcImageName: 'Cooltrainer (male)',
+            });
+        orreXDQuestLine.addQuest(clearMtBattle);
+
+        const defeatLovrina = new DefeatDungeonBossQuest('Cipher Lab', 'Cipher Admin Lovrina', 0, 'Track down the new boss of the Cipher Lab.'); //Step 7
+        orreXDQuestLine.addQuest(defeatLovrina);
+
+        const talkToLovrina = new TalkToNPCQuest(Lovrina, 'Talk to Cipher Admin Lovrina at the Cipher Lab.');
+        orreXDQuestLine.addQuest(talkToLovrina);
+
+        const clearPyriteTown = new CustomQuest(1, 0, 'Pyrite Town is in chaos! Battle your way through to get some answers.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pyrite Town Battles')](), undefined, undefined,
+            {
+                clearedMessage: 'This is Marcia live on the scene! Chaos in Pyrite Town as Team Cipher has returned! Rumors are swirling about an infamous dance machine making a scene!',
+                npcDisplayName: 'Marcia',
+                npcImageName: 'Reporter',
+            });
+        orreXDQuestLine.addQuest(clearPyriteTown);
+
+        const battleMirorB1 = new CustomQuest (1, 0,  'Find and defeat Miror B. near a cool cave.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Miror B. 1')]()); // Step 10
+        orreXDQuestLine.addQuest(battleMirorB1);
+
+        const defeatExol = new DefeatDungeonBossQuest('Pyrite Building', 'Cipher Commander Exol', 0, 'Track down the new boss of the Pyrite Building.');
+        orreXDQuestLine.addQuest(defeatExol);
+
+        const talkToExol = new TalkToNPCQuest(Exol, 'Talk to Cipher Commander Exol at the Pyrite Building.');
+        orreXDQuestLine.addQuest(talkToExol);
+
+        const fightPhenacCity = new CustomQuest(10, 0, 'Battle through the new Cipher Peons in Phenac City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Phenac City Battles')]());
+        orreXDQuestLine.addQuest(fightPhenacCity);
+
+        const defeatSnattle = new DefeatDungeonBossQuest('Phenac Stadium', 'Cipher Admin Snattle', 0, 'Track down the new boss of the Phenac Stadium.');
+        orreXDQuestLine.addQuest(defeatSnattle);
+
+        const talkToSnattle = new TalkToNPCQuest(Snattle, 'Talk to Cipher Admin Snattle at the Phenac Stadium.'); //Step 15
+        orreXDQuestLine.addQuest(talkToSnattle);
+
+        const RareCandyReward = () => {
+            player.gainItem('Rare_Candy', 50);
+            Notifier.notify({
+                title: orreXDQuestLine.name,
+                message: 'Mayor Trest has given a big box of Rare Candy.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToMayorTrest = new TalkToNPCQuest(Trest, 'Talk to Mayor Trest at the Phenac City.', RareCandyReward);
+        orreXDQuestLine.addQuest(talkToMayorTrest);
+
+        const talkToVerich = new TalkToNPCQuest(Verich, 'Talk to the wealthy Mr. Verich at Gateon Port to learn more about the S. S. Libra.');
+        orreXDQuestLine.addQuest(talkToVerich);
+
+        const battleChobin2 = new CustomQuest (1, 0,  'Talk to Chobin at Kaminko\'s Manor, if he\'s willing to talk.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Chobin 2')]());
+        orreXDQuestLine.addQuest(battleChobin2);
+
+        const talkToChobin2 = new TalkToNPCQuest(Chobin2, 'Talk to Chobin at Kaminko\'s Manor.'); // Step 19
+        orreXDQuestLine.addQuest(talkToChobin2);
+
+        const battleSmarton = new CustomQuest (1, 0,  'Fight the Cipher Peon at the wreck of the S. S. Libra.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cipher Peon Smarton')]()); // Step 20
+        orreXDQuestLine.addQuest(battleSmarton);
+
+        const LuxuryReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Luxuryball, 100, false);
+            Notifier.notify({
+                title: orreXDQuestLine.name,
+                message: 'You find a crate of Luxury Balls in the wreckage.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const searchSSLibra = new TalkToNPCQuest(SearchLibra, 'Search the S. S. Libra for clues.', LuxuryReward);
+        orreXDQuestLine.addQuest(searchSSLibra);
+
+        const battleZook = new CustomQuest (1, 0,  'Fight Zook outside of the Cipher Key Lair.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zook')]());
+        orreXDQuestLine.addQuest(battleZook);
+
+        const battleMirorB2 = new CustomQuest (1, 0,  'Miror B. has surfaced again! Fight him at the Outskirt Stand.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Miror B. 2')]());
+        orreXDQuestLine.addQuest(battleMirorB2);
+
+        const fightSnagemHideout = new CustomQuest(10, 0, 'Battle through the Snagem Hideout and look for clues.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Snagem Hideout')]());
+        orreXDQuestLine.addQuest(fightSnagemHideout);
+
+        const clearCipherKeyLair = new CustomQuest(1, 0, 'You found a key to the Cipher Key Lair. Find out what\'s inside!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cipher Key Lair')](), undefined, undefined, // Step 25
+            {
+                clearedMessage: 'Bah! No Fair! Fine, you have take your precious Professor Krane. Get out of here!',
+                npcDisplayName: 'Gorigan',
+                npcImageName: 'Cipher Admin Gorigan',
+            });
+        orreXDQuestLine.addQuest(clearCipherKeyLair);
+
+        const KraneReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: orreXDQuestLine.name,
+                message: 'Professor Krane gives you a Master Ball.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToProfKrane = new TalkToNPCQuest(ProfKrane, 'Talk to Professor Krane at the Pokémon HQ Lab.', KraneReward);
+        orreXDQuestLine.addQuest(talkToProfKrane);
+
+        const fightCitadarkIsle = new CustomQuest(10, 0, 'Battle through Team Cipher on Citadark Isle', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Citadark Isle')]());
+        orreXDQuestLine.addQuest(fightCitadarkIsle);
+
+        const fightCitadarkIsleDome = new CustomQuest(1, 0, 'Defeat Grand Master Greevil and XD001 in the Citradark Isle Dome.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Citadark Isle Dome')]());
+        orreXDQuestLine.addQuest(fightCitadarkIsleDome);
 
         App.game.quests.questLines().push(orreXDQuestLine);
     }
@@ -2033,7 +2167,7 @@ class QuestLineHelper {
     public static createVivillonQuestLine() {
         const vivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon.', new GymBadgeRequirement(BadgeEnums.Iceberg), GameConstants.BulletinBoards.Kalos);
 
-        const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, dungeons: Array<string>, hint: string) => {
+        const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, hint: string) => {
             // Capture 100 Water type Pokemon
             const catchType = new CustomQuest(100, undefined, `Capture or hatch 100 ${PokemonType[type]}-type Pokémon.`, () => {
                 return pokemonMap.filter(p => p.type.includes(type)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
@@ -2042,9 +2176,6 @@ class QuestLineHelper {
 
             // Capture Vivillon in a dungeon
             const vivillonAdd = () => {
-                dungeons.forEach(dungeon => {
-                    dungeonList[dungeon].bossList.push(new DungeonBossPokemon(vivillon, 93659450, 80));
-                });
                 Notifier.notify({
                     title: vivillonQuestLine.name,
                     message: `A Vivillon is hiding somewhere.\n${hint}`,
@@ -2052,9 +2183,6 @@ class QuestLineHelper {
                 });
             };
             const vivillonRemove = () => {
-                dungeons.forEach(dungeon => {
-                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon || (boss.name == vivillon && boss.options?.requirement));
-                });
                 Notifier.notify({
                     title: vivillonQuestLine.name,
                     message: `You caught the rare ${vivillon}!`,
@@ -2071,23 +2199,23 @@ class QuestLineHelper {
             vivillonQuestLine.addQuest(catchVivillon);
         };
 
-        createVivillonQuest(PokemonType.Water, 'Vivillon (Marine)', ['Lake Verity', 'Lake Valor', 'Lake Acuity'], 'It has been spotted at some Lakes.');
-        createVivillonQuest(PokemonType.Psychic, 'Vivillon (Modern)', ['Cerulean Cave'], 'It\'s surrounded by strong Pokémon.');
-        createVivillonQuest(PokemonType.Poison, 'Vivillon (Jungle)', ['Moor of Icirrus'], 'It has been spotted in a swamp.');
-        createVivillonQuest(PokemonType.Dark, 'Vivillon (Monsoon)', ['Dark Cave'], 'It\'s hiding at a dark place.');
-        createVivillonQuest(PokemonType.Steel, 'Vivillon (Tundra)', ['Poké Ball Factory'], 'It flew into a factory.');
-        createVivillonQuest(PokemonType.Fire, 'Vivillon (Sun)', ['Mt. Chimney Crater'], 'It seems to like hot places.');
-        createVivillonQuest(PokemonType.Fighting, 'Vivillon (Archipelago)', ['Sprout Tower'], 'It\'s sitting on a swaying pillar.');
-        createVivillonQuest(PokemonType.Ghost, 'Vivillon (Elegant)', ['Lost Hotel'], 'It\'s visiting an abandoned and spooky place.');
-        createVivillonQuest(PokemonType.Fairy, 'Vivillon (Ocean)', ['Dreamyard'], 'It\'s flying around an overgrown place full of dreams.');
-        createVivillonQuest(PokemonType.Electric, 'Vivillon (Continental)', ['New Mauville'], 'It\'s currently in a City full of Electric-type Pokémon.');
-        createVivillonQuest(PokemonType.Bug, 'Vivillon (River)', ['Eterna Forest'], 'It hides in a dark Forest.');
-        createVivillonQuest(PokemonType.Flying, 'Vivillon (Polar)', ['Sky Pillar'], 'It\'s high up in the sky.');
-        createVivillonQuest(PokemonType.Ground, 'Vivillon (Sandstorm)', ['Relic Castle'], 'It got lost in the desert sand.');
-        createVivillonQuest(PokemonType.Grass, 'Vivillon (Garden)', ['Flower Paradise'], 'It only shows up amongst the most beautiful flowers.');
-        createVivillonQuest(PokemonType.Rock, 'Vivillon (High Plains)', ['Mt. Moon'], 'It has been spotted dancing in the moonlight.');
-        createVivillonQuest(PokemonType.Dragon, 'Vivillon (Savanna)', ['Dragonspiral Tower'], 'It\'s surrounded by dragons.');
-        createVivillonQuest(PokemonType.Ice, 'Vivillon (Icy Snow)', ['Frost Cavern'], 'It can be found at a very cold place.');
+        createVivillonQuest(PokemonType.Water, 'Vivillon (Marine)', 'It has been spotted at some Lakes.');
+        createVivillonQuest(PokemonType.Psychic, 'Vivillon (Modern)', 'It\'s surrounded by strong Pokémon.');
+        createVivillonQuest(PokemonType.Poison, 'Vivillon (Jungle)', 'It has been spotted in a swamp.');
+        createVivillonQuest(PokemonType.Dark, 'Vivillon (Monsoon)', 'It\'s hiding at a dark place.');
+        createVivillonQuest(PokemonType.Steel, 'Vivillon (Tundra)', 'It flew into a factory.');
+        createVivillonQuest(PokemonType.Fire, 'Vivillon (Sun)', 'It seems to like hot places.');
+        createVivillonQuest(PokemonType.Fighting, 'Vivillon (Archipelago)', 'It\'s sitting on a swaying pillar.');
+        createVivillonQuest(PokemonType.Ghost, 'Vivillon (Elegant)', 'It\'s visiting an abandoned and spooky place.');
+        createVivillonQuest(PokemonType.Fairy, 'Vivillon (Ocean)', 'It\'s flying around an overgrown place full of dreams.');
+        createVivillonQuest(PokemonType.Electric, 'Vivillon (Continental)', 'It\'s currently in a City full of Electric-type Pokémon.');
+        createVivillonQuest(PokemonType.Bug, 'Vivillon (River)', 'It hides in a dark Forest.');
+        createVivillonQuest(PokemonType.Flying, 'Vivillon (Polar)', 'It\'s high up in the sky.');
+        createVivillonQuest(PokemonType.Ground, 'Vivillon (Sandstorm)', 'It got lost in the desert sand.');
+        createVivillonQuest(PokemonType.Grass, 'Vivillon (Garden)', 'It only shows up amongst the most beautiful flowers.');
+        createVivillonQuest(PokemonType.Rock, 'Vivillon (High Plains)', 'It has been spotted dancing in the moonlight.');
+        createVivillonQuest(PokemonType.Dragon, 'Vivillon (Savanna)', 'It\'s surrounded by dragons.');
+        createVivillonQuest(PokemonType.Ice, 'Vivillon (Icy Snow)', 'It can be found at a very cold place.');
 
         // Capture 200 Normal type Pokemon
         const catchNormal = new CustomQuest(200, undefined, 'Capture or hatch 200 Normal-type Pokémon.', () => {
@@ -2097,7 +2225,6 @@ class QuestLineHelper {
 
         // Capture Vivillon (Pokéball)
         const viviBallAdd = () => {
-            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Poké Ball)'));
             Notifier.notify({
                 title: vivillonQuestLine.name,
                 message: 'A Vivillon is hiding somewhere.\nOnly the strongest Challengers can reach it.',
@@ -2758,7 +2885,7 @@ class QuestLineHelper {
 
     // Available post-E4
     public static createMeltanQuestLine() {
-        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
+        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola, true);
 
         // Multi-step #0:
 
@@ -2869,12 +2996,12 @@ class QuestLineHelper {
             meltanCatch20Lileep,
             meltanCatch20Aerodactyl,
             meltanDefeatHau15,
-        ],'Step 10 of Let\'s Go, Meltan!', () => App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest()));
+        ],'Step 10 of Let\'s Go, Meltan!', () => App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest(0, undefined, true)));
 
         // Multi-step #10
 
         const meltanCatch400Meltan = new CaptureSpecificPokemonQuest('Meltan','Catch 400 Meltan in Alola.', 400, false, 0, undefined);
-        const meltanRainbowRocket = new CustomQuest(1, 0, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
+        const meltanRainbowRocket = new CustomQuest(1, 0, 'Defeat Team Rainbow Rocket.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
 
         const meltanGetMelmetal = () => {
             App.game.party.gainPokemonByName('Melmetal');
@@ -3691,9 +3818,6 @@ class QuestLineHelper {
     public static createFindSurpriseTogepiForEasterQuestLine() {
         const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
 
-        const togepiInKantoSetup = () => {
-            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
-        };
         const afterDefeatingTogepiInKanto = () => {
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
@@ -3702,15 +3826,10 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.info,
                 timeout: 3e4,
             });
-
-            dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', togepiInKantoSetup);
+        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.');
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
-        const togepiInJohtoSetup = () => {
-            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 900000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
-        };
         const afterDefeatingTogepiInJohto = () => {
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
@@ -3719,14 +3838,10 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.info,
                 timeout: 3e4,
             });
-            dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!', togepiInJohtoSetup);
+        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!');
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
-        const togepiInHoennSetup = () => {
-            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
-        };
         const afterDefeatingTogepiInHoenn = () => {
             App.game.party.gainPokemonByName('Surprise Togepi');
             Notifier.notify({
@@ -3735,9 +3850,8 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
-            dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?', togepiInHoennSetup);
+        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);

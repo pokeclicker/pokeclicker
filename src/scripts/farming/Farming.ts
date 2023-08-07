@@ -629,7 +629,9 @@ class Farming implements Feature {
             [
                 'This Berry endemic to Pinkan Island has an incredibly sweet taste.',
                 'It has a vibrant pink pigment, and it is found in such abundance on Pinkan Island that all Pokémon found there are colored Pink!',
-            ]
+            ],
+            undefined,
+            ['Pinkan Scyther']
         );
         //#endregion
 
@@ -849,7 +851,7 @@ class Farming implements Feature {
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
             ],
             new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]),
-            ['Pinsir', 'Shuckle', 'Nincada', 'Sizzlipede']
+            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Sizzlipede']
         );
 
         this.berryData[BerryType.Charti] = new Berry(
@@ -988,6 +990,23 @@ class Farming implements Feature {
             new Aura(AuraType.Attract, [1.01, 1.02, 1.03]),
             ['Clefairy', 'Togepi', 'Ralts']
         );
+
+        this.berryData[BerryType.Snover] = new Berry(
+            BerryType.Snover,
+            [3600, 7200, 10800, 14400, 28800],
+            5,
+            0.01,
+            1250,
+            15,
+            [0, 0, 20, 0, 10],
+            35,
+            BerryColor.Green,
+            5,
+            BerryFirmness.Soft,
+            ['This berry grows around the waist of certain Snover.'],
+            undefined,
+            ['Snover (Berry)']
+        );
         //#endregion
 
         //#region Fifth Generation
@@ -1027,7 +1046,8 @@ class Farming implements Feature {
                 'The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.',
                 'This inspires Pokémon to train harder.',
             ],
-            new Aura(AuraType.Xp, [1.005, 1.01, 1.015])
+            new Aura(AuraType.Xp, [1.005, 1.01, 1.015]),
+            ['Burmy (No Coat)']
         );
 
         this.berryData[BerryType.Jaboca] = new Berry(
@@ -1509,7 +1529,7 @@ class Farming implements Feature {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
         }));
         // Chople
-        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Blaze_Cassette));
+        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Magma_Stone));
         // Kebia
         this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItemType.Rocky_Helmet));
         // Kebia Parasite
@@ -1582,6 +1602,11 @@ class Farming implements Feature {
                 BerryType.Magost,
                 BerryType.Watmel,
             ]));
+        // Snover
+        this.mutations.push(new FieldMutation(.00002, BerryType.Snover, [{ berry: BerryType.Babiri, amountRequired: 20 }], {
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Snover').id]() > 0,
+            hint: 'I\'ve heard of a Berry that can appear in a field of Babiri when Snover are around.',
+        }));
         //#endregion
 
         //#region Fifth Generation

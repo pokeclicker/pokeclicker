@@ -936,6 +936,16 @@
          })
      %>
 
+        <%- include('templates/mapOverlay',
+            { name: "Secret Berry Shop"
+            , x: 29, y: 7
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Secret Berry Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Secret Berry Shop') }"
+            , visible:  "App.game.statistics.routeKills['sinnoh'][217]() >= 10"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
+
      <%- include('templates/mapOverlay',
          { name: "Professor Rowan's Blimp"
          , x: 12, y: 53

@@ -177,6 +177,7 @@ export type ItemNameType
     | 'Togepi'
     | 'Probably Chimecho'
     | 'Beldum'
+    | 'Grotle (Acorn)'
     | 'Skorupi'
     | 'Combee'
     | 'Burmy (Plant)'
