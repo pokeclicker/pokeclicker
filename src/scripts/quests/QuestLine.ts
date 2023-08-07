@@ -99,9 +99,9 @@ class QuestLine {
         }
     }
 
-    suspendQuest() {
-        if (!this.isPausable() || this.state() == QuestLineState.suspended) {
-            // Do nothing if already suspended or not a bulletin board quest
+    suspendQuest(skipPausableCheck = false) {
+        if ((!skipPausableCheck && !this.isPausable()) || this.state() == QuestLineState.suspended) {
+            // Do nothing if already suspended or not pausable.
             return;
         }
 
