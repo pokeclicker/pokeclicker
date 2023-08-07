@@ -2503,7 +2503,8 @@ GymList['Segin Squad\'s Base'] = new Gym(
     BadgeEnums.Dark_Star,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Giacomo of Team Star' }
 );
 GymList['Schedar Squad\'s Base'] = new Gym(
     'Mela',
@@ -2515,7 +2516,8 @@ GymList['Schedar Squad\'s Base'] = new Gym(
     BadgeEnums.Fire_Star,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Mela of Team Star' }
 );
 GymList['Navi Squad\'s Base'] = new Gym(
     'Atticus',
@@ -2529,7 +2531,8 @@ GymList['Navi Squad\'s Base'] = new Gym(
     BadgeEnums.Poison_Star,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Atticus of Team Star' }
 );
 GymList['Ruchbah Squad\'s Base'] = new Gym(
     'Ortega',
@@ -2543,7 +2546,8 @@ GymList['Ruchbah Squad\'s Base'] = new Gym(
     BadgeEnums.Fairy_Star,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Ortega of Team Star' }
 );
 GymList['Caph Squad\'s Base'] = new Gym(
     'Eri',
@@ -2558,7 +2562,8 @@ GymList['Caph Squad\'s Base'] = new Gym(
     BadgeEnums.Fighting_Star,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Eri of Team Star' }
 );
 GymList['Director Clavell'] = new Gym(
     'Clavell',
@@ -2580,7 +2585,8 @@ GymList['Director Clavell'] = new Gym(
     BadgeEnums.Elite_Clavell,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Director Clavell' }
 );
 GymList['Penny of Team Star'] = new Gym(
     'Penny',
@@ -2596,7 +2602,8 @@ GymList['Penny of Team Star'] = new Gym(
     BadgeEnums.Elite_Penny,
     250000,
     '',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Clavell)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Clavell)],
+    undefined, undefined, { displayName: 'Penny of Team Star' }
 );
 GymList['Stony Cliff Titan'] = new Gym(
     'Stony Cliff Titan',
@@ -2663,10 +2670,11 @@ GymList['Pokémon Trainer Arven'] = new Gym(
     BadgeEnums.Elite_Arven,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Arven' }
 );
 GymList['AI Sada'] = new Gym(
-    'Sada',
+    'AI Sada',
     'AI Sada',
     [
         new GymPokemon('Slither Wing', 203123316, 66),
@@ -2679,10 +2687,11 @@ GymList['AI Sada'] = new Gym(
     BadgeEnums.Elite_Sada,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'AI Sada' }
 );
 GymList['AI Turo'] = new Gym(
-    'Turo',
+    'AI Turo',
     'AI Turo',
     [
         new GymPokemon('Iron Moth', 203123316, 66),
@@ -2695,5 +2704,6 @@ GymList['AI Turo'] = new Gym(
     BadgeEnums.Elite_Turo,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'AI Turo' }
 );
