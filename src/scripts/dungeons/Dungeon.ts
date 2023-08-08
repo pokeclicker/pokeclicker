@@ -3857,9 +3857,9 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
             ], { weight: 1}, 'Trudly', '(trudly)'),
         new DungeonTrainer('Cipher Peon',
             [
-                new GymPokemon('Loudred', 23925000, 22),
-                new GymPokemon('Girafarig', 23925000, 20),
-                new GymPokemon('Mawile', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Kirlia', 23925000, 22),
+                new GymPokemon('Linoone', 23925000, 20),
+                new GymPokemon('Natu', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Eloin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
