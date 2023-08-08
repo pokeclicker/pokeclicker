@@ -594,6 +594,7 @@ namespace GameConstants {
         'Pinkan Pokémon Reserve',
         'Hearthome City',
         'Secret Berry Shop',
+        'Driftveil City',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',

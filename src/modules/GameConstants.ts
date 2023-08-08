@@ -2151,6 +2151,7 @@ export enum BerryTraderLocations {
     'Pinkan Pokémon Reserve',
     'Hearthome City',
     'Secret Berry Shop',
+    'Driftveil City',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
