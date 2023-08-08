@@ -878,4 +878,10 @@ namespace GameConstants {
     declare const ZMOVE_COUNTERACTIVE_MULTIPLIER: number;
     declare const ZMOVE_ACTIVE_TIME: number;
     declare const ZMOVE_COUNTERACTIVE_TIME: number;
+    declare enum ContestResults {
+        Normal,
+        Super,
+        Hyper,
+        Master,
+    }
 }
