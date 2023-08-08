@@ -6409,10 +6409,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'eggCycles': 120,
-        // 'evolutions': [
-        //    DayTimedMegaEvolution(MegaStoneType.Mewtwonite_X, 'Mewtwo', 'Mega Mewtwo X'),
-        //    NightTimedMegaEvolution(MegaStoneType.Mewtwonite_Y, 'Mewtwo', 'Mega Mewtwo Y'),
-        // ],
+        'evolutions': [
+            DayTimedMegaEvolution(MegaStoneType.Mewtwonite_X, 'Mewtwo', 'Mega Mewtwo X'),
+            NightTimedMegaEvolution(MegaStoneType.Mewtwonite_Y, 'Mewtwo', 'Mega Mewtwo Y'),
+        ],
         'base': {
             'hitpoints': 106,
             'attack': 110,

@@ -806,6 +806,49 @@ const CandyMan = new NPC('The Candy Man', [
     'I\'ve got a real SWEET-TOOTH!',
 ]);
 
+const UnrivaledBlue = new NPC('Blue', [
+    'So, you said you want to know where you might find Mewtwo\'s Mega Stones, right?',
+    'Well, you\'re in luck! I was talking to an old rival of mine the other day, and she said she was looking for Mewtwo, and that she already had two of its Mega Stones. Unfortunately for her, they were the same one.',
+    'Not much use in having two of the same Mega Stone, so she might be willing to give one up. If you want to find her, you should check out Cerulean Cave.',
+], {
+    image: 'assets/images/npcs/Blue-lgpe.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 2), new QuestLineStepCompletedRequirement('An Unrivaled Power', 4, GameConstants.AchievementOption.less)]),
+});
+
+const UnrivaledGreen1 = new NPC('Green', [
+    '<i>Ow! You were hit by a low-flying Poké Ball!</i>',
+    'Oh, whoops! You\'re not a Pokémon! Sorry, it\'s so dark in here, I saw you and thought you were some kind of Pokémon.',
+    'Well, uh... nice to meet you. I\'m Green! So hey, I\'m just curious... Are you here because you\'re also looking for... y\'know, something special?',
+    'R-right! Mewtwo! ...Drat, so you knew about it already, huh.......',
+    'Whaaaaaaaaaat?! You\'ve already caught it?! Hey, no fair! I was planning on catching it first!',
+], {
+    image: 'assets/images/npcs/Green.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 4), new QuestLineStepCompletedRequirement('An Unrivaled Power', 6, GameConstants.AchievementOption.less)]),
+});
+
+const UnrivaledGreen2 = new NPC('Green', [
+    'Wow, you\'re strong! Well, I guess that\'s that. Here, you can have this.',
+    '</i></br><img src="assets/images/megaStone/Mewtwonite_X.png"/></br><i>You obtained the Mewtwonite X!</i>',
+    'Oh, I know! Why don\'t you become one of my Pokémon, together with Mewtwo?',
+    '<i>A Poké Ball came flying at you!</i>',
+    '<i>A Poké Ball came flying at you!</i>',
+    'Hee hee hee... <i>A Poké Ball came flying at you!</i>',
+    '<i>A Poké Ball came flying at you!</i>',
+    '<i>A Poké Ball came flying at you!</i> Think about it, ok?',
+], {
+    image: 'assets/images/npcs/Green.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 6), new QuestLineStepCompletedRequirement('An Unrivaled Power', 8, GameConstants.AchievementOption.less)]),
+});
+
+const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
+    '<i>That child... She wished to possess me, like a mere animal. She would have cared little for my own desires. I wish only to live in peace, without being disturbed.</i>',
+    '<i>You say you would help me? But you are no different. You even possess another of my kind. You do not fool me.</i>',
+    '<i>I will leave this place now, to find what I desire. Do not follow me.</i>',
+], {
+    image: 'assets/images/pokemon/150.01.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 7), new QuestLineStepCompletedRequirement('An Unrivaled Power', 9, GameConstants.AchievementOption.less)]),
+});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -820,10 +863,10 @@ TownList['Viridian City'] = new Town(
     'Viridian City',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [ViridianCityShop],
+    [ViridianCityShop, TemporaryBattleList['Unrivaled Blue']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
-        npcs: [ViridianCityOldMan1, ViridianCityOldMan2, ViridianCityOldMan3],
+        npcs: [ViridianCityOldMan1, ViridianCityOldMan2, ViridianCityOldMan3, UnrivaledBlue],
     }
 );
 TownList['Pewter City'] = new Town(
@@ -955,7 +998,7 @@ TownList['Indigo Plateau Kanto'] = new Town(
     'Indigo Plateau Kanto',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [GymList['Elite Lorelei'], GymList['Elite Bruno'], GymList['Elite Agatha'], GymList['Elite Lance'], GymList['Champion Blue'], pokeLeagueShop()],
+    [GymList['Elite Lorelei'], GymList['Elite Bruno'], GymList['Elite Agatha'], GymList['Elite Lance'], GymList['Champion Blue'], pokeLeagueShop(), TemporaryBattleList['Unrivaled Red']],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
@@ -1268,7 +1311,11 @@ TownList['Cerulean Cave'] = new DungeonTown(
     'Cerulean Cave',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
+    [TemporaryBattleList['Unrivaled Green']],
+    {
+        npcs: [UnrivaledGreen1, UnrivaledGreen2, AnomalyMewtwo1],
+    }
 );
 TownList['Ruby Path'] = new DungeonTown(
     'Ruby Path',
@@ -2860,7 +2907,7 @@ const Duking1 = new NPC('Duking', [
     '<i>Grr...</i>.',
     'Those masked trainers went and kidnapped my beloved Plusle! How dare they!',
     'They told me that I had to let them have free reign in town, or there would be trouble. They\'re out at the Colosseum causing trouble.',
-], {image: 'assets/images/npcs/Duking.png',
+], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 7), new QuestLineStepCompletedRequirement('Shadows in the Desert', 9, GameConstants.AchievementOption.less)]),
 });
 const Doken1 = new NPC('Doken', [
@@ -2938,7 +2985,7 @@ const RelicSage = new NPC('Relic Stone Sage', [
     '<img src="./assets/images/status/shadow.svg" height="60px"/> <img src="./assets/images/arrow.svg" height="30px"/> <img src="./assets/images/status/purified.svg" height="60px"/>',
 ], {image: 'assets/images/npcs/Sage.png'});
 const GateonSailor = new NPC('Sailor', [
-    'I\'ve been waiting for the S. S. Libra to some in for HOURS!',
+    'I\'ve been waiting for the S. S. Libra to come into port for HOURS!',
     'Rumor has it that some giant Pokémon picked it up and flew away with it, but that has to be impossible.',
     'If such a Pokémon existed, Professor Krane at the Pokémon HQ Lab would know about it.',
 ], {image: 'assets/images/npcs/Sailor.png',
@@ -2946,7 +2993,7 @@ const GateonSailor = new NPC('Sailor', [
 });
 const Chobin1 = new NPC('Chobin', [
     'Chobin has heard all about the Shadow Pokémon from Dr. Kaminko!',
-    'There is a stone near Agate Village that can purify the sould of Pokémon, yes indeed.',
+    'There is a stone near Agate Village that can purify the souls of Pokémon, yes indeed.',
 ], {image: 'assets/images/npcs/Chobin.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 3), new QuestLineStepCompletedRequirement('Gale of Darkness', 5, GameConstants.AchievementOption.less)]),
 });
@@ -2971,7 +3018,7 @@ const Exol = new NPC('Cipher Commander Exol', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 11), new QuestLineStepCompletedRequirement('Gale of Darkness', 13, GameConstants.AchievementOption.less)]),
 });
 const Snattle = new NPC('Cipher Admin Snattle', [
-    '"How is this possible?! I\'ve never seen a trainer so strong! But, no matter! Surely I\'ve bought Gorigan enough time.',
+    'How is this possible?! I\'ve never seen a trainer so strong! But, no matter! Surely I\'ve bought Gorigan enough time.',
     'His precious recovery operation must be finished by now. Today, we will leave quietly. But don\'t you forget us!',
 ], {image: 'assets/images/npcs/Cipher Admin Snattle.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 14), new QuestLineStepCompletedRequirement('Gale of Darkness', 16, GameConstants.AchievementOption.less)]),
@@ -2990,7 +3037,7 @@ const Verich = new NPC('Mr. Verich', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 16), new QuestLineStepCompletedRequirement('Gale of Darkness', 18, GameConstants.AchievementOption.less)]),
 });
 const Chobin2 = new NPC('Chobin', [
-    'Dr. Kaminko and Chobin have indented this most wonderful device! The Robo Groudon!',
+    'Dr. Kaminko and Chobin have invented this most wonderful device! The Robo Groudon!',
     'With this robot, we can explore the deserts of Orre! Surely Chobin and $playername$ will find something interesting!',
 ], {image: 'assets/images/npcs/Robo Groudon.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 18), new QuestLineStepCompletedRequirement('Gale of Darkness', 20, GameConstants.AchievementOption.less)]),
@@ -3002,7 +3049,7 @@ const SearchLibra = new NPC('Search the S. S. Libra', [
 });
 const ProfKrane = new NPC('Professor Krane', [
     '$playername$! Thank you for rescuing me from those fiends!',
-    'In my time in captivity, I learned that the new Grand Master of Team Cipher has used a powerful Shadow Pokémon to kidnap all the trainers and Pokémon from the S. S. Libra, and took them to Citadark Island!',
+    'In my time in captivity, I learned that the new Grand Master of Team Cipher has used a powerful Shadow Pokémon to kidnap all the trainers and Pokémon from the S. S. Libra and has taken them to Citadark Island!',
     'Snagging this powerful Shadow Pokémon will be hard, take this Master Ball!',
 ], {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 25), new QuestLineStepCompletedRequirement('Gale of Darkness', 27, GameConstants.AchievementOption.less)]),
 });
@@ -3326,7 +3373,7 @@ TownList['Gateon Port'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles'])],
     {
-        requirements: [new QuestLineStartedRequirement('Gale of Darkness')],
+        requirements: [new QuestLineStartedRequirement('Shadows in the Desert')],
         npcs: [GateonSailor, Verich],
     }
 );
@@ -5978,6 +6025,39 @@ const BugCatcherScizor = new NPC('Bug Catcher Elliot', [
     'It takes a very experienced trainer to find it, though.',
 ], {image: 'assets/images/npcs/Bug Catcher.png'});
 
+const AnomalyMewtwo2 = new NPC('Anomaly Mewtwo', [
+    '<i>This place is... beautiful. I am amazed such a place truly exists.</i>',
+    '<i>.......Thank you.</i>',
+    '<i>I would like to give you something, but first, may I ask two things of you?</i>',
+    '<i>First, I would like to gather 110,000 each of Psychic and Fighting Gems to boost the power of my attacks.</i>',
+    '<i>If you could gather 60,000 of each I can take care of the rest.</i>',
+    '<i>Also, you have heard of Twisted Spoons, yes? They are items that greatly boost the power of psychic type Pokémon.</i>',
+    '<i>When I was created, I had an enhanced version of this item created for me. I have heard it is now in the hands of an organisation named Team Plasma, in an area named P2 Laboratory.</i>',
+    '<i>I would greatly appreciate it if you would retrieve this item for me.</i>',
+], {
+    image: 'assets/images/pokemon/150.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 13), new QuestLineStepCompletedRequirement('An Unrivaled Power', 15, GameConstants.AchievementOption.less)]),
+});
+
+const AnomalyMewtwo3 = new NPC('Anomaly Mewtwo', [
+    '<i>I am even more in your debt. But there is one more thing I would like to ask of you.</i>',
+    '<i>Would you be willing to fight me, one last time, in this new home you have given me?</i>',
+    '<i>With my Twisted Spoon in hand, my moves boosted by Gems, and my Mega Evolution, I can finally show you the true heights of my power!</i>',
+], {
+    image: 'assets/images/pokemon/150.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 15), new QuestLineStepCompletedRequirement('An Unrivaled Power', 17, GameConstants.AchievementOption.less)]),
+});
+
+const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
+    '<i>Hah! Your strength is truly unyielding!</i>',
+    '<i>I would like to apolagise for accusing you of merely possessing the Mewtwo in your care. It is clear that you greatly care for it, as well as all your other Pokémon. Take this.</i>',
+    '</i></br><img src="assets/images/megaStone/Mewtwonite_Y.png"/></br><i>You obtained the Mewtwonite Y!</i>',
+    '<i>You are truly deserving of this Mega Stone. Use it to give your Mewtwo a truly unrivaled power.</i>',
+], {
+    image: 'assets/images/pokemon/150.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 17), new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less)]),
+});
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -6258,7 +6338,11 @@ TownList['Pokémon Village'] = new DungeonTown(
     'Pokémon Village',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 20)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 20)],
+    [],
+    {
+        npcs: [AnomalyMewtwo2, AnomalyMewtwo3, AnomalyMewtwo4],
+    }
 );
 TownList['Victory Road Kalos'] = new DungeonTown(
     'Victory Road Kalos',
