@@ -1017,6 +1017,7 @@ TemporaryBattleList['Miror B. 1'] = new TemporaryBattle(
     {
         displayName: 'Miror B.',
         imageName: 'Cipher Admin Miror B',
+        returnTown: 'Pyrite Town',
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Magnet'}, 1);
             Notifier.notify({
@@ -1074,6 +1075,7 @@ TemporaryBattleList.Zook = new TemporaryBattle(
     {
         displayName: 'Zook',
         imageName: 'Thug',
+        returnTown: 'Pyrite Town',
     }
 );
 TemporaryBattleList['Miror B. 2'] = new TemporaryBattle(
@@ -6103,4 +6105,18 @@ TemporaryBattleList.Arceus = new TemporaryBattle(
         hideTrainer: true,
         imageName: '../pokemon/493',
     }
+);
+
+// Paldea Temporary Battles
+TemporaryBattleList['Paradise Protection Protocol'] = new TemporaryBattle(
+    'Paradise Protection Protocol',
+    [
+        new GymPokemon('Koraidon', 710987746, 70),
+        new GymPokemon('Miraidon', 710987746, 70),
+    ],
+    '<i>The Guardians of Paradise were defeated!</i>',
+    [
+        new GymBadgeRequirement(BadgeEnums.Elite_Sada),
+        new GymBadgeRequirement(BadgeEnums.Elite_Turo),
+    ]
 );

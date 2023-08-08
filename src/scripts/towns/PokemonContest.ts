@@ -15,7 +15,7 @@ class PokemonContest implements Feature {
     }
 
     canAccess(): boolean {
-        return true;
+        return PokemonContestController.requirements.isCompleted();
     }
 
     update(delta: number): void {
@@ -35,6 +35,7 @@ class PokemonContestController {
     static pokemonType: KnockoutObservable<PokemonType> = ko.observable(PokemonType.None);
     static inProgress = ko.observable<boolean>(false);
     static contestText: KnockoutObservable<string> = ko.observable(undefined);
+    static requirements = new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.hoenn), new DevelopmentRequirement()]);
 
     static entryAmount = 3;
 
@@ -143,7 +144,7 @@ enum ContestStyle {
 
 class PokemonContestTownContent extends TownContent {
     constructor() {
-        super([new DevelopmentRequirement()]);
+        super([PokemonContestController.requirements]);
     }
     public cssClass(): string {
         return 'btn btn-primary';
@@ -153,7 +154,7 @@ class PokemonContestTownContent extends TownContent {
     }
     public isVisible(): boolean {
         //return true;
-        return new DevelopmentRequirement().isCompleted();
+        return this.isUnlocked(); //TODO: always visible, when released
     }
     public onclick(): void {
         $('#pokemonContestModal').modal('show');

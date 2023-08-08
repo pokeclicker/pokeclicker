@@ -1507,7 +1507,7 @@ class QuestLineHelper {
 
         const clearGateonPort = new CustomQuest(1, 0, 'Clear Gateon Port to search for the Cipher Peons who kidnapped Professor Krane.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Gateon Port Battles')](), undefined, undefined,
             {
-                clearedMessage: 'Cipher? Nah, I don\'t play with those punks. I\m my own man, flying solo. No, I won\'t say where I got this Zangoose.',
+                clearedMessage: 'Cipher? Nah, I don\'t play with those punks. I\'m my own man, flying solo. No, I won\'t say where I got this Zangoose.',
                 npcDisplayName: 'Thug Zook',
                 npcImageName: 'Thug',
             });
@@ -1611,7 +1611,7 @@ class QuestLineHelper {
 
         const clearCipherKeyLair = new CustomQuest(1, 0, 'You found a key to the Cipher Key Lair. Find out what\'s inside!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cipher Key Lair')](), undefined, undefined, // Step 25
             {
-                clearedMessage: 'Bah! No Fair! Fine, you have take your precious Professor Krane. Get out of here!',
+                clearedMessage: 'Bah! No Fair! Fine, you can take your precious Professor Krane. Get out of here!',
                 npcDisplayName: 'Gorigan',
                 npcImageName: 'Cipher Admin Gorigan',
             });
@@ -3790,6 +3790,45 @@ class QuestLineHelper {
         App.game.quests.questLines().push(hisuiArceusQuestLine);
     }
 
+    // Paldea Questlines
+
+    public static createPaldeaLegendsQuestLine() {
+        const paldeaLegendsQuestLine = new QuestLine('Path of Legends', 'Help Arven search for the Herba Mystica.');
+
+        const clearTrainerArven = new CustomQuest(1, 0, 'Arven wants to test you and himself. Defeat him at Poco Path Lighthouse', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pokémon Trainer Arven')]());
+        paldeaLegendsQuestLine.addQuest(clearTrainerArven);
+
+        App.game.quests.questLines().push(paldeaLegendsQuestLine);
+    }
+
+    public static createPaldeaVictoryQuestLine() {
+        const paldeaVictoryQuestLine = new QuestLine('Victory Road', 'Challenge Paldea\'s Gyms to challenge your new rival, Nemona.');
+
+        const clearChampionNemona = new CustomQuest(1, 0, 'Finally, it\'s time to fight Nemona as equals! Defeat Champion Nemona in Mesagoza.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Nemona')]());
+        paldeaVictoryQuestLine.addQuest(clearChampionNemona);
+
+        App.game.quests.questLines().push(paldeaVictoryQuestLine);
+    }
+
+    public static createPaldeaStarfallQuestLine() {
+        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Casseiopia disband Team Star.');
+
+        const clearCasseiopia = new CustomQuest(1, 0, 'Penny has revealed herself to be Casseiopia. Defeat her at Naranjuva Academy.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Penny of Team Star')]());
+        paldeaStarfallQuestLine.addQuest(clearCasseiopia);
+
+        App.game.quests.questLines().push(paldeaStarfallQuestLine);
+    }
+
+    public static createPaldeaWayHomeQuestLine() {
+        const paldeaWayHomeQuestLine = new QuestLine('The Way Home', 'Help Koraidon and Miraidon find their homes in the mysterious Area Zero.', new MultiRequirement([
+            new QuestLineCompletedRequirement('Path of Legends'),
+            new QuestLineCompletedRequirement('Victory Road'),
+            new QuestLineCompletedRequirement('Starfall Street'),
+        ]), GameConstants.BulletinBoards.Paldea);
+
+        App.game.quests.questLines().push(paldeaWayHomeQuestLine);
+    }
+
     /* Event QuestLines */
 
     // Open the game on April 1 (Hoopa Day).
@@ -3909,6 +3948,10 @@ class QuestLineHelper {
         this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
         this.createHisuiArceusQuestLine();
+        this.createPaldeaLegendsQuestLine();
+        this.createPaldeaVictoryQuestLine();
+        this.createPaldeaStarfallQuestLine();
+        this.createPaldeaWayHomeQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();

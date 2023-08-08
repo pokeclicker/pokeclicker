@@ -3858,9 +3858,9 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
             ], { weight: 1}, 'Trudly', '(trudly)'),
         new DungeonTrainer('Cipher Peon',
             [
-                new GymPokemon('Loudred', 23925000, 22),
-                new GymPokemon('Girafarig', 23925000, 20),
-                new GymPokemon('Mawile', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Kirlia', 23925000, 22),
+                new GymPokemon('Linoone', 23925000, 20),
+                new GymPokemon('Natu', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Eloin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
@@ -13237,3 +13237,116 @@ dungeonList['Turnback Cave'] = new Dungeon('Turnback Cave',
         new DungeonBossPokemon('Giratina (Origin)', 10000000, 70),
     ],
     96500, 32);
+
+// Paldea Dungeons
+dungeonList['Inlet Grotto'] = new Dungeon('Inlet Grotto',
+    ['Diglett', 'Houndour', 'Yungoos'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Houndoom', 161099869, 30)],
+    2200000, 1);
+
+//This is ridiculous. Should certainly be split up if a way to do so is found, and possibly some encounters removed outright.
+dungeonList['Glaseado Mountain'] = new Dungeon('Glaseado Mountain',
+    ['Magneton', 'Haunter', 'Sneasel', 'Ursaring', 'Delibird', 'Kirlia', 'Gardevoir', 'Vigoroth', 'Grumpig'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Spiritomb', 161099869, 30),
+        new DungeonBossPokemon('Cetitan', 161099869, 30),
+        new DungeonBossPokemon('Arctibax', 161099869, 30),
+    ],
+    2200000, 1);
+
+dungeonList['Grasswither Shrine'] = new Dungeon('Grasswither Shrine',
+    ['Shiftry', 'Cacturne'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Wo-Chien', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Icerend Shrine'] = new Dungeon('Icerend Shrine',
+    ['Weavile'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Chien-Pao', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Groundblight Shrine'] = new Dungeon('Groundblight Shrine',
+    ['Krookodile'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Ting-Lu', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Firescourge Shrine'] = new Dungeon('Firescourge Shrine',
+    ['Houndoom'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Chi-Yu', 161099869, 60)],
+    2200000, 1);
+
+// May be split up into two areas (Area Zero: Heights & Area Zero: Lower (Needs better name)).
+//To have some of the regular Paradox mons be exclusive to one area, I am likely going to have Slither Wing/Iron Moth and Sandy Shocks/Iron Thorns be exclusive to Area Zero (pretty sure they actually are, anyway), and Great Tusk/Iron Treads and Flutter Mane/Iron Jugulis be exclusive to Area Zero Depths
+dungeonList['Area Zero'] = new Dungeon('Area Zero',
+    ['Venomoth', 'Meditite', 'Medicham', 'Braviary', 'Corviknight', 'Floette (White)', 'Raichu', 'Jumpluff', 'Girafarig', 'Volcarona', 'Frosmoth', 'Farigiraf', 'Swablu', 'Altaria', 'Flamigo', 'Phanpy', 'Donphan', 'Talonflame', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Garganacl', 'Masquerain', 'Tadbulb', 'Bellibolt', 'Pawniard', 'Bisharp', 'Numel', 'Camerupt', 'Sneasel', 'Weavile', 'Scream Tail', 'Iron Bundle', 'Brute Bonnet', 'Iron Hands', 'Flutter Mane', 'Iron Jugulis', 'Slither Wing', 'Iron Moth', 'Sandy Shocks', 'Iron Thorns'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Glimmora', 161099869, 30, { weight: 4 }),
+        new DungeonBossPokemon('Roaring Moon', 161099869, 30, {hide: true, weight: 2, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+        new DungeonBossPokemon('Iron Valiant', 161099869, 30, {hide: true, weight: 2, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+    ],
+    2200000, 1);
+
+dungeonList['Area Zero Depths'] = new Dungeon('Area Zero Depths',
+    ['Glimmet', 'Dunsparce', 'Gible', 'Gabite', 'Sableye', 'Garganacl', 'Greavard', 'Houndstone', 'Dugtrio', 'Zweilous', 'Dreepy', 'Drakloak', 'Espathra', 'Dudunsparce (Two-Segment)', 'Great Tusk', 'Iron Treads', 'Scream Tail', 'Iron Bundle', 'Flutter Mane', 'Iron Jugulis', 'Brute Bonnet', 'Iron Hands', /*Slither Wing and Iron Moth are only found in Grass. I have never seen Grass, nor these Pokémon, in the depths, so they may not actually spawn here*/'Slither Wing', 'Iron Moth', /*Sandy Shocks have the same situation as Slither Wing and Iron Moth, except in Rocky environment*/'Sandy Shocks', 'Iron Thorns'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+        epic: [{loot: 'Heart Scale'}],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Glimmora', 161099869, 30, { weight: 5 }),
+        new DungeonBossPokemon('Koraidon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+        new DungeonBossPokemon('Miraidon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+    ],
+    2200000, 1);
