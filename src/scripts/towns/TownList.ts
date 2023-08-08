@@ -2860,7 +2860,7 @@ const Duking1 = new NPC('Duking', [
     '<i>Grr...</i>.',
     'Those masked trainers went and kidnapped my beloved Plusle! How dare they!',
     'They told me that I had to let them have free reign in town, or there would be trouble. They\'re out at the Colosseum causing trouble.',
-], {image: 'assets/images/npcs/Duking.png',
+], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 7), new QuestLineStepCompletedRequirement('Shadows in the Desert', 9, GameConstants.AchievementOption.less)]),
 });
 const Doken1 = new NPC('Doken', [
