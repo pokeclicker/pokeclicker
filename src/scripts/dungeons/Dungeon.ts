@@ -2,6 +2,7 @@
 ///<reference path="DungeonBossPokemon.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
@@ -9289,6 +9290,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Iron Plate', weight: 2},
             {loot: 'Insect Plate', weight: 2},
             {loot: 'Zap Plate'},
+            {loot: 'Great_Twisted_Spoon', ignoreDebuff : true, weight: 3, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemRequirement(1, 'Great_Twisted_Spoon', GameConstants.AchievementOption.less)])},
         ],
         legendary: [{loot: 'Revive'}],
     },
@@ -10142,8 +10144,25 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     },
     9003000,
     [
-        new DungeonBossPokemon('Ditto', 94836530, 50),
-        new DungeonBossPokemon('Zoroark', 95743340, 50),
+        new DungeonBossPokemon('Ditto', 94836530, 50,
+            { hide: true, requirement: new OneFromManyRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16, GameConstants.AchievementOption.less),
+                new QuestLineCompletedRequirement('An Unrivaled Power'),
+            ])}),
+        new DungeonBossPokemon('Zoroark', 95743340, 50,
+            { hide: true, requirement: new OneFromManyRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16, GameConstants.AchievementOption.less),
+                new QuestLineCompletedRequirement('An Unrivaled Power'),
+            ])}),
+        new DungeonTrainer('Anomaly Mewtwo',
+            [new GymPokemon('Mega Mewtwo X', 120000000, 70)],
+            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power')}, undefined, 'X'),
+        new DungeonTrainer('Anomaly Mewtwo',
+            [new GymPokemon('Mega Mewtwo Y', 120000000, 70)],
+            { hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16),
+                new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less),
+            ])}, undefined, 'Y'),
     ],
     725000, 20);
 

@@ -1036,4 +1036,14 @@
          })
      %>
 
+     <%- include('templates/mapOverlay',
+         { name: "Anomaly Mewtwo"
+         , x: 39, y: 26
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Anomaly Mewtwo 4'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Anomaly Mewtwo 4'] && TemporaryBattleList['Anomaly Mewtwo 4'].isVisible()"
+         , image: "assets/images/map/mewtwoy.png"
+         })
+     %>
+
 </g>

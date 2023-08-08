@@ -3465,6 +3465,120 @@ TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
         returnTown: 'Dendemille Town',
     }
 );
+TemporaryBattleList['Unrivaled Red'] = new TemporaryBattle(
+    'Unrivaled Red',
+    [
+        new GymPokemon('Pikachu', 82741389, 85),
+        new GymPokemon('Machamp', 82239926, 85),
+        new GymPokemon('Arcanine', 82239926, 85),
+        new GymPokemon('Lapras', 82239926, 85),
+        new GymPokemon('Snorlax', 82239926, 85),
+        new GymPokemon('Mega Venusaur', 90263333, 85),
+    ],
+    '... ... ...!',
+    [new QuestLineStartedRequirement('An Unrivaled Power')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Red',
+        imageName: 'Red',
+    }
+);
+TemporaryBattleList['Unrivaled Blue'] = new TemporaryBattle(
+    'Unrivaled Blue',
+    [
+        new GymPokemon('Tauros', 82390364, 66),
+        new GymPokemon('Alakazam', 82390364, 66),
+        new GymPokemon('Gyarados', 82390364, 66),
+        new GymPokemon('Exeggutor', 82390364, 66),
+        new GymPokemon('Aerodactyl', 82390364, 66),
+        new GymPokemon('Mega Charizard Y', 90363626, 68),
+    ],
+    'Aw man, what was I doing?',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 1)],
+    undefined,
+    {
+        displayName: 'Gym Leader Blue',
+        imageName: 'Blue-lgpe',
+    }
+);
+TemporaryBattleList['Unrivaled Green'] = new TemporaryBattle(
+    'Unrivaled Green',
+    [
+        new GymPokemon('Clefable', 82490657, 66),
+        new GymPokemon('Gengar', 82490657, 66),
+        new GymPokemon('Victreebel', 82490657, 66),
+        new GymPokemon('Ninetales', 82490657, 66),
+        new GymPokemon('Kangaskhan', 82490657, 66),
+        new GymPokemon('Mega Blastoise', 90514065, 68),
+    ],
+    'Come on! What\'s with that...?',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 5)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Green',
+        imageName: 'Green',
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 1'] = new TemporaryBattle(
+    'Anomaly Mewtwo 1',
+    [new GymPokemon('Mega Mewtwo X', 500000000, 70)],
+    '<i>I see. You are indeed strong. But I do not wish to talk to you. As I already told you, do not continue to follow me.</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 8)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.01',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 2'] = new TemporaryBattle(
+    'Anomaly Mewtwo 2',
+    [new GymPokemon('Mega Mewtwo X', 510000000, 70)],
+    '<i>Do you not comprehend human speech?! Fine then, if you will not leave me alone, then I will not let you catch up to me!</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 9)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.01',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 3'] = new TemporaryBattle(
+    'Anomaly Mewtwo 3',
+    [new GymPokemon('Mega Mewtwo Y', 520000000, 70)],
+    '<i>Damn it! How could you possibly pursue me so quickly!</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 10)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.02',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 4'] = new TemporaryBattle(
+    'Anomaly Mewtwo 4',
+    [new GymPokemon('Mega Mewtwo Y', 530000000, 70)],
+    '<i>WHAT DO YOU WANT WITH ME, HUMAN?!</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 11)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.02',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
+    'Anomaly Mewtwo 5',
+    [new GymPokemon('Mega Mewtwo Y', 540000000, 70)],
+    '<i>GAARGH!!! ......... What? ......... You say you truly just want to help me? You are irritatingly persistant. Fine then. You say you know of a place where I can live undisturbed? Take me there.</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 12)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.02',
+        hideTrainer: true,
+    }
+);
 
 //Alola Temporary Battles
 TemporaryBattleList['Hau 1'] = new TemporaryBattle(
