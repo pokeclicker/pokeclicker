@@ -8955,6 +8955,277 @@ TownList['Turnback Cave'] = new DungeonTown(
     [new DevelopmentRequirement()]
 );
 
+//Paldea Shops
+const ZapapicoShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Auspicious_armor,
+    ItemList.Malicious_armor,
+]);
+
+// Paldea NPCs
+const PaldeaRoamerNPC = new RoamerNPC('Student Emily', [
+    'Hey, hey, did you hear? A group of students saw some super rare Pokémon on {ROUTE_NAME}!',
+], GameConstants.Region.paldea, RoamingPokemonList.findGroup(GameConstants.Region.paldea, GameConstants.PaldeaSubRegions.Paldea));
+
+//Paldea Towns
+TownList['Cabo Poco'] = new Town(
+    'Cabo Poco',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new BulletinBoard(GameConstants.BulletinBoards.Paldea)],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Volo)],
+    }
+);
+TownList['Poco Path Lighthouse'] = new Town(
+    'Poco Path Lighthouse',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [GymList['Pokémon Trainer Arven']],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Los Platos'] = new Town(
+    'Los Platos',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList.Mesagoza = new Town(
+    'Mesagoza',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [GymList['Champion Nemona']],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+//Dunno what do about Naranja and Uva Academy's names. For now I've merged them.
+TownList['Naranjuva Academy'] = new Town(
+    'Naranjuva Academy',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [GymList['Director Clavell'], GymList['Penny of Team Star']],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+        npcs: [PaldeaRoamerNPC],
+    }
+);
+TownList.Cortondo = new Town(
+    'Cortondo',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList.Artazon = new Town(
+    'Artazon',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList.Levincia = new Town(
+    'Levincia',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList.Alfornada = new Town(
+    'Alfornada',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList.Cascarrafa = new Town(
+    'Cascarrafa',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Porto Marinada'] = new Town(
+    'Porto Marinada',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList.Medali = new Town(
+    'Medali',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList.Zapapico = new Town(
+    'Zapapico',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [ZapapicoShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList.Montenevera = new Town(
+    'Montenevera',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Pokémon League Paldea'] = new Town(
+    'Pokémon League Paldea',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [GymList['Elite Rika'], GymList['Elite Poppy'], GymList['Elite Larry'], GymList['Elite Hassel'], GymList['Top Champion Geeta'], pokeLeagueShop()],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Segin Squad\'s Base'] = new Town(
+    'Segin Squad\'s Base',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Schedar Squad\'s Base'] = new Town(
+    'Schedar Squad\'s Base',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Navi Squad\'s Base'] = new Town(
+    'Navi Squad\'s Base',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Ruchbah Squad\'s Base'] = new Town(
+    'Ruchbah Squad\'s Base',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Caph Squad\'s Base'] = new Town(
+    'Caph Squad\'s Base',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Zero Gate'] = new Town(
+    'Zero Gate',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
+TownList['Zero Lab'] = new Town(
+    'Zero Lab',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [GymList['AI Sada'], GymList['AI Turo'], TemporaryBattleList['Paradise Protection Protocol']],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero Depths'))],
+    }
+);
+
+// Paldea Dungeons
+TownList['Inlet Grotto'] = new DungeonTown(
+    'Inlet Grotto',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Glaseado Mountain'] = new DungeonTown(
+    'Glaseado Mountain',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Grasswither Shrine'] = new DungeonTown(
+    'Grasswither Shrine',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Icerend Shrine'] = new DungeonTown(
+    'Icerend Shrine',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Groundblight Shrine'] = new DungeonTown(
+    'Groundblight Shrine',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Firescourge Shrine'] = new DungeonTown(
+    'Firescourge Shrine',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Area Zero'] = new DungeonTown(
+    'Area Zero',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    /*[new MultiRequirement([
+        new QuestLineCompletedRequirement('Path of Legends'),
+        new QuestLineCompletedRequirement('Victory Road'),
+        new QuestLineCompletedRequirement('Starfall Street'),
+    ])]*/
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Inlet Grotto'))]
+);
+TownList['Area Zero Depths'] = new DungeonTown(
+    'Area Zero Depths',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero'))]
+);
+
 // Used to check if next region can be reached, for example for professor NPC
 TownList['Final Region Town'] = new Town(
     'Final Region Town',
@@ -8962,6 +9233,6 @@ TownList['Final Region Town'] = new Town(
     GameConstants.FinalSubRegions.Final,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)],
     }
 );

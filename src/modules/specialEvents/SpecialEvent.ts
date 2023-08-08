@@ -98,7 +98,7 @@ export default class SpecialEvent {
         }
         Notifier.confirm({
             title: 'Do you want to start this event early?',
-            message: `Starting '${this.title}' early will cost you ${price} QP for 24 hours of event time.`,
+            message: `Starting '${this.title}' early will cost you ${price.toLocaleString('en-US')} QP for 24 hours of event time.`,
         }).then((result: boolean) => {
             if (result) {
                 App.game.wallet.loseAmount({ amount: price, currency: Currency.questPoint });

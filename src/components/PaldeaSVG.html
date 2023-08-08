@@ -1,0 +1,347 @@
+<g data-bind='visible: player.region == GameConstants.Region.paldea'>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/paldea.png?v=$VERSION',
+        href:'assets/images/paldea.png?v=$VERSION'
+    }"></image>
+
+    <!-- ------ -->
+    <!-- ROUTES -->
+    <!-- ------ -->
+
+    <!--Poco Path-->
+    <%- include('templates/mapRoute',
+        { route: 1, region: 9
+        , width: 3, height: 3
+        , x: 0, y: 0, name: "PP"
+        })
+    %>
+
+    <!--South Province (Area One)-->
+    <%- include('templates/mapRoute',
+        { route: 2, region: 9
+        , width: 3, height: 3
+        , x: 3, y: 0, name: "SP1"
+        })
+    %>
+
+    <!--South Province (Area Two)-->
+    <%- include('templates/mapRoute',
+        { route: 3, region: 9
+        , width: 3, height: 3
+        , x: 6, y: 0, name: "SP2"
+        })
+    %>
+
+    <!--South Province (Area Three)-->
+    <%- include('templates/mapRoute',
+        { route: 4, region: 9
+        , width: 3, height: 3
+        , x: 9, y: 0, name: "SP3"
+        })
+    %>
+
+    <!-- ----- -->
+    <!-- TOWNS -->
+    <!-- ----- -->
+
+    <!--Cabo Poco-->
+    <%- include('templates/mapTown',
+        { name: "Cabo Poco"
+        , x: 0, y: 20
+        , width: 3, height: 3
+        , home: true
+        })
+    %>
+
+    <!--Poco Path Lighthouse-->
+    <%- include('templates/mapTown',
+        { name: "Poco Path Lighthouse"
+        , x: 3, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Los Platos-->
+    <%- include('templates/mapTown',
+        { name: "Los Platos"
+        , x: 6, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Mesagoza-->
+    <%- include('templates/mapTown',
+        { name: "Mesagoza"
+        , x: 9, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Naranjuva Academy-->
+    <%- include('templates/mapTown',
+        { name: "Naranjuva Academy"
+        , x: 12, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Cortondo-->
+    <%- include('templates/mapTown',
+        { name: "Cortondo"
+        , x: 15, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Artazon-->
+    <%- include('templates/mapTown',
+        { name: "Artazon"
+        , x: 18, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Levincia-->
+    <%- include('templates/mapTown',
+        { name: "Levincia"
+        , x: 21, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Alfornada-->
+    <%- include('templates/mapTown',
+        { name: "Alfornada"
+        , x: 24, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Cascarrafa-->
+    <%- include('templates/mapTown',
+        { name: "Cascarrafa"
+        , x: 27, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Porto Marinada-->
+    <%- include('templates/mapTown',
+        { name: "Porto Marinada"
+        , x: 30, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Medali-->
+    <%- include('templates/mapTown',
+        { name: "Medali"
+        , x: 33, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Zapapico-->
+    <%- include('templates/mapTown',
+        { name: "Zapapico"
+        , x: 36, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Montenevera-->
+    <%- include('templates/mapTown',
+        { name: "Montenevera"
+        , x: 39, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Pokémon League Paldea-->
+    <%- include('templates/mapTown',
+        { name: "Pokémon League Paldea"
+        , x: 42, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Segin Squad's Base-->
+    <%- include('templates/mapTown',
+        { name: "Segin Squad's Base"
+        , x: 45, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Schedar Squad's Base-->
+    <%- include('templates/mapTown',
+        { name: "Schedar Squad's Base"
+        , x: 48, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Navi Squad's Base-->
+    <%- include('templates/mapTown',
+        { name: "Navi Squad's Base"
+        , x: 51, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Ruchbah Squad's Base-->
+    <%- include('templates/mapTown',
+        { name: "Ruchbah Squad's Base"
+        , x: 54, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Caph Squad's Base-->
+    <%- include('templates/mapTown',
+        { name: "Caph Squad's Base"
+        , x: 57, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Zero Gate-->
+    <%- include('templates/mapTown',
+        { name: "Zero Gate"
+        , x: 60, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Zero Lab-->
+    <%- include('templates/mapTown',
+        { name: "Zero Lab"
+        , x: 63, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
+    <!-- ----- -->
+    <!--DUNGEONS-->
+    <!-- ----- -->
+
+    <!--Inlet Grotto-->
+    <%- include('templates/mapDungeon',
+        { name: "Inlet Grotto"
+        , x: 0, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Glaseado Mountain-->
+    <%- include('templates/mapDungeon',
+        { name: "Glaseado Mountain"
+        , x: 3, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Grasswither Shrine-->
+    <%- include('templates/mapDungeon',
+        { name: "Grasswither Shrine"
+        , x: 6, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Icerend Shrine-->
+    <%- include('templates/mapDungeon',
+        { name: "Icerend Shrine"
+        , x: 9, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Groundblight Shrine-->
+    <%- include('templates/mapDungeon',
+        { name: "Groundblight Shrine"
+        , x: 12, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Firescourge Shrine-->
+    <%- include('templates/mapDungeon',
+        { name: "Firescourge Shrine"
+        , x: 15, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Area Zero-->
+    <%- include('templates/mapDungeon',
+        { name: "Area Zero"
+        , x: 18, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Area Zero Depths-->
+    <%- include('templates/mapDungeon',
+        { name: "Area Zero Depths"
+        , x: 21, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!-- ------------------ -->
+    <!-- PLACES OF INTEREST -->
+    <!-- ------------------ -->
+
+    <%- include('templates/mapPOI',
+        { name: "Dock"
+        , x: 0, y: 57
+        , width: 3, height: 3
+        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Coumarine City') }"
+        })
+    %>
+
+    <%- include('templates/mapPOI',
+        { name: "Underground Entrance"
+        , x: 3, y: 56
+        , width: 3, height: 4
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 6, y: 57
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Pokémon Day Care"
+        , x: 9, y: 56
+        , width: 4, height: 4
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Instructor Jacq's Blimp"
+         , x: 94, y: 57
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Cabo Poco')}, attr:{ class: MapHelper.calculateTownCssClass('Cabo Poco') }"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
+         , image: "assets/images/map/blimp_empty.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Instructor Jacq's Blimp"
+         , x: 94, y: 57
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Cabo Poco')}, attr:{ class: MapHelper.calculateTownCssClass('Cabo Poco') }"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
+         , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
+</g>

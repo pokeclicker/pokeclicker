@@ -653,7 +653,7 @@ class Farming implements Feature {
                 'It has a tendency to overtake nearby plants.',
             ],
             undefined,
-            ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Scorbunny']
+            ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Scorbunny', 'Fuecoco']
         );
 
         this.berryData[BerryType.Passho] = new Berry(
@@ -673,7 +673,7 @@ class Farming implements Feature {
                 'This Berry promotes the fruiting of nearby Berry plants.',
             ],
             new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]),
-            ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Froakie', 'Popplio', 'Sobble']
+            ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Froakie', 'Popplio', 'Sobble', 'Quaxly']
         );
 
         this.berryData[BerryType.Wacan] = new Berry(
@@ -693,7 +693,7 @@ class Farming implements Feature {
                 'The same energy promotes the growth of nearby Berries.',
             ],
             new Aura(AuraType.Growth, [1.1, 1.2, 1.3]),
-            ['Pikachu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)']
+            ['Pikachu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)', 'Pawmi']
         );
 
         this.berryData[BerryType.Rindo] = new Berry(
@@ -713,7 +713,7 @@ class Farming implements Feature {
                 'It has a tendency to expand into nearby plots.',
             ],
             undefined,
-            ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey']
+            ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey', 'Sprigatito']
         );
 
         this.berryData[BerryType.Yache] = new Berry(
