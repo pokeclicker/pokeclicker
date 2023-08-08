@@ -478,6 +478,103 @@ export class ShardDeal {
                     1),
             ],
         );
+        ShardDeal.list[ShardTraderLocations['Pokemon HQ Lab']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [{ shardTypeString: 'Blue Shard', amount: 40 }],
+                    ItemList.Water_stone,
+                    1),
+                new ShardDeal(
+                    [{ shardTypeString: 'Red Shard', amount: 40 }],
+                    ItemList.Fire_stone,
+                    1),
+                new ShardDeal(
+                    [{ shardTypeString: 'Green Shard', amount: 40 }],
+                    ItemList.Leaf_stone,
+                    1),
+                new ShardDeal(
+                    [{ shardTypeString: 'Yellow Shard', amount: 40 }],
+                    ItemList.Thunder_stone,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Blue Shard', amount: 20 },
+                        { shardTypeString: 'Grey Shard', amount: 30 },
+                    ],
+                    ItemList.Kings_rock,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Green Shard', amount: 20 },
+                        { shardTypeString: 'Grey Shard', amount: 30 },
+                    ],
+                    ItemList.Soothe_bell,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Yellow Shard', amount: 20 },
+                        { shardTypeString: 'Grey Shard', amount: 30 },
+                    ],
+                    ItemList.Metal_coat,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Green Shard', amount: 20 },
+                        { shardTypeString: 'Blue Shard', amount: 20 },
+                    ],
+                    ItemList.Moon_stone,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Red Shard', amount: 20 },
+                        { shardTypeString: 'Grey Shard', amount: 30 },
+                    ],
+                    ItemList.Sun_stone,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Red Shard', amount: 20 },
+                        { shardTypeString: 'Yellow Shard', amount: 20 },
+                    ],
+                    ItemList.Linking_cord,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Yellow Shard', amount: 20 },
+                        { shardTypeString: 'Purple Shard', amount: 30 },
+                    ],
+                    ItemList.Upgrade,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Blue Shard', amount: 20 },
+                        { shardTypeString: 'Purple Shard', amount: 30 },
+                    ],
+                    ItemList.Dragon_scale,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Blue Shard', amount: 20 },
+                        { shardTypeString: 'Ochre Shard', amount: 30 },
+                    ],
+                    ItemList.Prism_scale,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Red Shard', amount: 20 },
+                        { shardTypeString: 'Ochre Shard', amount: 30 },
+                    ],
+                    ItemList.Deepsea_tooth,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Green Shard', amount: 20 },
+                        { shardTypeString: 'Ochre Shard', amount: 30 },
+                    ],
+                    ItemList.Deepsea_scale,
+                    1),
+            ],
+        );
     }
 
     public static generateSinnohDeals() {

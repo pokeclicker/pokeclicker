@@ -42,8 +42,9 @@ export enum Region {
     alola = 6,
     galar = 7,
     hisui = 8,
+    paldea = 9,
     // Throws an error if no region after the final region
-    final = 9,
+    final = 10,
 }
 
 export const MAX_AVAILABLE_REGION = Region.galar;
@@ -58,6 +59,7 @@ export const MaxIDPerRegion = [
     809, // 88 - Alola
     898, // 89 - Galar
     905, // 7 - Hisui
+    1010, // 105 - Paldea
 ];
 
 // Subregions
@@ -107,6 +109,10 @@ export enum HisuiSubRegions {
     Hisui = 0,
 }
 
+export enum PaldeaSubRegions {
+    Paldea = 0,
+}
+
 export enum FinalSubRegions {
     Final = 0,
 }
@@ -121,6 +127,7 @@ export type SubRegions =
     | AlolaSubRegions
     | GalarSubRegions
     | HisuiSubRegions
+    | PaldeaSubRegions
     | FinalSubRegions;
 
 // Battle Items
@@ -225,7 +232,7 @@ export enum AchievementType {
     'Battle Frontier',
     'Vitamins',
     'Pokerus',
-    'Shadow',
+    'Shadow Pokemon',
 }
 
 // Held item chance
@@ -252,33 +259,91 @@ export const GYM_GEMS = 5;
 
 // Safari Zone
 export const SAFARI_BATTLE_CHANCE = 5;
-
 export const SAFARI_BASE_POKEBALL_COUNT = 30;
 
-export const LEGAL_WALK_BLOCKS = [
-    0,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    37, // Tree top left
-    38, // Tree top mid
-    39, // Tree top right
+export enum SafariTile {
+    ground = 0,
+    waterUL = 1,
+    waterU = 2,
+    waterUR = 3,
+    waterL = 4,
+    waterC = 5,
+    waterR = 6,
+    waterDL = 7,
+    waterD = 8,
+    waterDR = 9,
+    grass = 10,
+    sandUL = 11,
+    sandU = 12,
+    sandUR = 13,
+    sandL = 14,
+    sandC = 15,
+    sandR = 16,
+    sandDL = 17,
+    sandD = 18,
+    sandDR = 19,
+    sandURinverted = 21,
+    sandDRinverted = 22,
+    sandDLinverted = 23,
+    sandULinverted = 24,
+    fenceUL = 25,
+    fenceU = 26,
+    fenceUR = 27,
+    fenceL = 28,
+    fenceR = 29,
+    fenceDL = 30,
+    fenceD = 31,
+    fenceDR = 32,
+    fenceDRend = 33,
+    fenceURend = 34,
+    fenceULend = 35,
+    fenceDLend = 36,
+    treeTopL = 37,
+    treeTopC = 38,
+    treeTopR = 39,
+    treeLeavesL = 40,
+    treeLeavesC = 41,
+    treeLeavesR = 42,
+    treeTrunkL = 43,
+    treeTrunkC = 44,
+    treeTrunkR = 45,
+    treeRootsL = 46,
+    treeRootsC = 47,
+    treeRootsR = 48,
+    sign = 51,
+}
+
+export const SAFARI_LEGAL_WALK_BLOCKS = [
+    SafariTile.ground,
+    SafariTile.grass,
+    SafariTile.sandUL,
+    SafariTile.sandU,
+    SafariTile.sandUR,
+    SafariTile.sandL,
+    SafariTile.sandC,
+    SafariTile.sandR,
+    SafariTile.sandDL,
+    SafariTile.sandD,
+    SafariTile.sandDR,
+    SafariTile.sandURinverted,
+    SafariTile.sandDRinverted,
+    SafariTile.sandDLinverted,
+    SafariTile.sandULinverted,
+    SafariTile.treeTopL,
+    SafariTile.treeTopC,
+    SafariTile.treeTopR,
 ];
 
 export const SAFARI_WATER_BLOCKS = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9,
+    SafariTile.waterUL,
+    SafariTile.waterU,
+    SafariTile.waterUR,
+    SafariTile.waterL,
+    SafariTile.waterC,
+    SafariTile.waterR,
+    SafariTile.waterDL,
+    SafariTile.waterD,
+    SafariTile.waterDR,
 ];
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
@@ -700,7 +765,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     PowerPlant: {
-        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
+        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant', 'New Island']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
         [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Near Space', 'Pyrite Colosseum', 'Cipher Lab', 'Realgam Tower Battles', 'Realgam Colosseum', 'Cipher Key Lair']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
@@ -771,6 +836,7 @@ export const RegionalStarters = [
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
     [724.01, 157.01, 503.01], // Hisui
+    [906, 909, 912], // Paldea
 ];
 
 export enum StoneType {
@@ -818,6 +884,10 @@ export enum StoneType {
     'White_mane_hair',
     'Black_augurite',
     'Peat_block',
+    'Auspicious_armor',
+    'Malicious_armor',
+    'Leaders_crest',
+    'Gimmighoul_coin',
 }
 
 export enum FossilPieceType {
@@ -869,6 +939,7 @@ export enum PokemonItemType {
     'Porygon',
     'Togepi',
     'Beldum',
+    'Grotle (Acorn)',
     'Skorupi',
     'Combee',
     'Burmy (Plant)',
@@ -985,6 +1056,7 @@ export enum BulletinBoards {
     Crown,
     Hisui,
     Arceus,
+    Paldea,
 }
 
 // Underground
@@ -1177,6 +1249,38 @@ export const HisuiGyms = [
     'Temple of Sinnoh',
 ];
 
+export const PaldeaGyms = [
+    'Cortondo',
+    'Artazon',
+    'Levincia',
+    'Cascarrafa',
+    'Medali',
+    'Montenevera',
+    'Alfornada',
+    'Glaseado Mountain',
+    'Elite Rika',
+    'Elite Poppy',
+    'Elite Larry',
+    'Elite Hassel',
+    'Top Champion Geeta',
+    'Champion Nemona',
+    'Segin Squad\'s Base',
+    'Schedar Squad\'s Base',
+    'Navi Squad\'s Base',
+    'Ruchbah Squad\'s Base',
+    'Caph Squad\'s Base',
+    'Director Clavell',
+    'Penny of Team Star',
+    'Stony Cliff Titan',
+    'Open Sky Titan',
+    'Lurking Steel Titan',
+    'Asado Desert',
+    'Casseroya Lake',
+    'Pokémon Trainer Arven',
+    'AI Sada',
+    'AI Turo',
+];
+
 export const OrangeGyms = [
     'Mikan Island',
     'Navel Island',
@@ -1215,6 +1319,7 @@ export const RegionGyms = [
     AlolaGyms,
     GalarGyms,
     HisuiGyms,
+    PaldeaGyms,
     // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
     MagikarpJumpGyms,
@@ -1242,6 +1347,7 @@ export const KantoDungeons = [
     'Pokémon Mansion',
     'Mt. Ember Summit',
     'Berry Forest',
+    'New Island',
     'Victory Road',
     'Cerulean Cave',
     'Ruby Path',
@@ -1251,11 +1357,11 @@ export const KantoDungeons = [
     'Pattern Bush',
     'Altering Cave',
     'Tanoby Ruins',
-    'Pinkan Mountain', // 21
+    'Pinkan Mountain', // 22
 ];
 
 export const JohtoDungeons = [
-    'Sprout Tower', // 22
+    'Sprout Tower', // 23
     'Ruins of Alph',
     'Union Cave',
     'Slowpoke Well',
@@ -1270,11 +1376,11 @@ export const JohtoDungeons = [
     'Dark Cave',
     'Tohjo Falls',
     'Victory Road Johto',
-    'Mt. Silver', // 37
+    'Mt. Silver', // 38
 ];
 
 export const HoennDungeons = [
-    'Petalburg Woods', // 38
+    'Petalburg Woods', // 39
     'Rusturf Tunnel',
     'Granite Cave',
     'Fiery Path',
@@ -1312,7 +1418,7 @@ export const HoennDungeons = [
     'Gateon Port Battles',
     'Cipher Key Lair',
     'Citadark Isle',
-    'Citadark Isle Dome', // 76
+    'Citadark Isle Dome', // 77
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1341,7 +1447,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate', // 77
+    'Oreburgh Gate', // 78
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1364,11 +1470,11 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin', // 100
+    'Hall of Origin', // 101
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 101
+    'Floccesy Ranch', // 102
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1390,11 +1496,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 123
+    'P2 Laboratory', // 124
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 124
+    'Santalune Forest', // 125
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1407,12 +1513,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 136
+    'Victory Road Kalos', // 137
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 137
+    'Trainers\' School', // 138
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1441,11 +1547,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 166
+    'Resolution Cave', // 167
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 167
+    'Slumbering Weald Shrine', // 168
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1465,12 +1571,14 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 187
+    'Crown Shrine', // 188
 ];
 
 export const HisuiDungeons = [
-    'Oreburrow Tunnel', // 188
+    'Floaro Gardens', // 189
+    'Oreburrow Tunnel',
     'Heartwood',
+    'Ancient Solaceon Ruins',
     'Shrouded Ruins',
     'Veilstone Cape',
     'Firespit Island',
@@ -1480,7 +1588,6 @@ export const HisuiDungeons = [
     'Clamberclaw Cliffs',
     'Celestica Ruins',
     'Sacred Plaza',
-    'Crevasse Passage',
     'Avalugg\'s Legacy',
     'Ice Column Chamber',
     'Icepeak Cavern',
@@ -1488,7 +1595,20 @@ export const HisuiDungeons = [
     'Seaside Hollow',
     'Ancient Lake Verity',
     'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 207
+    'Ancient Lake Acuity',
+    'Temple of Sinnoh',
+    'Turnback Cave', // 211
+];
+
+export const PaldeaDungeons = [
+    'Inlet Grotto', // 212
+    'Glaseado Mountain',
+    'Grasswither Shrine',
+    'Icerend Shrine',
+    'Groundblight Shrine',
+    'Firescourge Shrine',
+    'Area Zero',
+    'Area Zero Depths', // 219
 ];
 
 export const RegionDungeons = [
@@ -1501,6 +1621,7 @@ export const RegionDungeons = [
     AlolaDungeons,
     GalarDungeons,
     HisuiDungeons,
+    PaldeaDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
@@ -1520,6 +1641,8 @@ export const StartingTowns = [
     'Vaniville Town', // Kalos
     'Iki Town Outskirts', // Alola
     'Postwick', // Galar
+    'Prelude Beach', // Hisui
+    'Cabo Poco', // Paldea
     'Final Region Town', // Final
 ];
 
@@ -1532,6 +1655,8 @@ export const StartingRoutes = [
     1, // Kalos
     1, // Alola
     1, // Galar
+    1, // Hisui
+    1, // Paldea
 ];
 
 export const DockTowns = [
@@ -1544,6 +1669,7 @@ export const DockTowns = [
     'Hau\'oli City', // Alola
     'Hulbury', // Galar
     'Prelude Beach', // Hisui
+    'Porto Marinada', // Paldea
 ];
 
 export const TemporaryBattles = [
@@ -1559,6 +1685,7 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Ash Ketchum New Island',
     'Bill\'s Grandpa',
     'Blue 6',
     'Silver 1',
@@ -1752,6 +1879,14 @@ export const TemporaryBattles = [
     'Team Flare Boss Lysandre 2',
     'Wild Houndour Horde',
     'Wild Electrike Horde',
+    'Unrivaled Red',
+    'Unrivaled Blue',
+    'Unrivaled Green',
+    'Anomaly Mewtwo 1',
+    'Anomaly Mewtwo 2',
+    'Anomaly Mewtwo 3',
+    'Anomaly Mewtwo 4',
+    'Anomaly Mewtwo 5',
     'Hau 1',
     'Hau 2',
     'Hau 3',
@@ -1905,17 +2040,13 @@ export const TemporaryBattles = [
     'Hisuian Braviary',
     'Lord of the Tundra: Avalugg',
     'Beni',
-    'Kamado 1',
     'Charm 2',
-    'Dialga (Origin) 1',
-    'Palkia (Origin) 1',
-    'Kamado 2',
+    'Dialga (Origin)',
+    'Palkia (Origin)',
+    'The Galaxy Team\'s Kamado',
     'Adaman 2',
     'Irida 3',
-    'Dialga (Origin) 2',
-    'Palkia (Origin) 2',
     'Volo 3',
-    'Giratina (Origin)',
     'Tornadus 1',
     'Tornadus 2',
     'Tornadus 3',
@@ -1929,6 +2060,7 @@ export const TemporaryBattles = [
     'Enamorus 2',
     'Enamorus 3',
     'Arceus',
+    'Paradise Protection Protocol',
 ];
 
 export enum ShardTraderLocations {
@@ -1970,7 +2102,6 @@ export enum ShardTraderLocations {
     'Sunyshore City',
     'Survival Area',
     'Resort Area',
-    'Jubilife Village',
     'Castelia City',
     'Nimbasa City',
     'Driftveil City',
@@ -2018,6 +2149,7 @@ export enum ShardTraderLocations {
     'Circhester',
     'Spikemuth',
     'Master Dojo',
+    'Jubilife Village',
 }
 
 export enum BerryTraderLocations {
@@ -2026,6 +2158,7 @@ export enum BerryTraderLocations {
     'Mauville City',
     'Pinkan Pokémon Reserve',
     'Hearthome City',
+    'Secret Berry Shop',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

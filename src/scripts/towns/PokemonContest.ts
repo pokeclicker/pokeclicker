@@ -15,7 +15,7 @@ class PokemonContest implements Feature {
     }
 
     canAccess(): boolean {
-        return true;
+        return PokemonContestController.requirements.isCompleted();
     }
 
     update(delta: number): void {
@@ -35,6 +35,7 @@ class PokemonContestController {
     static pokemonType: KnockoutObservable<PokemonType> = ko.observable(PokemonType.None);
     //static inProgress = ko.observable<boolean>(false); //TODO: this should be used for some sort of animation or something
     static contestText: KnockoutObservable<string> = ko.observable(undefined);
+    static requirements = new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.hoenn), new DevelopmentRequirement()]);
 
     static entryAmount = 3;
 
@@ -138,7 +139,7 @@ class ContestEntry {
         switch (PokemonContestController.contestStyle()) {
             case ContestStyle.Cool:
                 stylePoints = baseStats.attack + baseStats.specialDefense;
-                flavorType = FlavorType.Bitter;
+                flavorType = FlavorType.Spicy;
                 break;
             case ContestStyle.Beautiful:
                 stylePoints = baseStats.specialAttack + baseStats.defense;
@@ -150,11 +151,11 @@ class ContestEntry {
                 break;
             case ContestStyle.Clever:
                 stylePoints = baseStats.specialAttack + baseStats.speed;
-                flavorType = FlavorType.Sour;
+                flavorType = FlavorType.Bitter;
                 break;
             case ContestStyle.Tough:
                 stylePoints = baseStats.hitpoints + baseStats.defense;
-                flavorType = FlavorType.Spicy;
+                flavorType = FlavorType.Sour;
                 break;
         }
 
@@ -176,7 +177,7 @@ enum ContestStyle {
 
 class PokemonContestTownContent extends TownContent {
     constructor() {
-        super([new DevelopmentRequirement()]);
+        super([PokemonContestController.requirements]);
     }
     public cssClass(): string {
         return 'btn btn-primary';
@@ -186,7 +187,7 @@ class PokemonContestTownContent extends TownContent {
     }
     public isVisible(): boolean {
         //return true;
-        return new DevelopmentRequirement().isCompleted();
+        return this.isUnlocked(); //TODO: always visible, when released
     }
     public onclick(): void {
         $('#pokemonContestModal').modal('show');

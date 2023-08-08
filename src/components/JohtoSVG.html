@@ -791,4 +791,14 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
     %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Anomaly Mewtwo"
+        , x: 84, y: 35
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Anomaly Mewtwo 2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Anomaly Mewtwo 2'] && TemporaryBattleList['Anomaly Mewtwo 2'].isVisible()"
+        , image: "assets/images/map/mewtwox.png"
+        })
+    %>
 </g>
