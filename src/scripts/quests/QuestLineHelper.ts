@@ -1507,7 +1507,7 @@ class QuestLineHelper {
 
         const clearGateonPort = new CustomQuest(1, 0, 'Clear Gateon Port to search for the Cipher Peons who kidnapped Professor Krane.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Gateon Port Battles')](), undefined, undefined,
             {
-                clearedMessage: 'Cipher? Nah, I don\'t play with those punks. I\m my own man, flying solo. No, I won\'t say where I got this Zangoose.',
+                clearedMessage: 'Cipher? Nah, I don\'t play with those punks. I\'m my own man, flying solo. No, I won\'t say where I got this Zangoose.',
                 npcDisplayName: 'Thug Zook',
                 npcImageName: 'Thug',
             });
@@ -1611,7 +1611,7 @@ class QuestLineHelper {
 
         const clearCipherKeyLair = new CustomQuest(1, 0, 'You found a key to the Cipher Key Lair. Find out what\'s inside!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cipher Key Lair')](), undefined, undefined, // Step 25
             {
-                clearedMessage: 'Bah! No Fair! Fine, you have take your precious Professor Krane. Get out of here!',
+                clearedMessage: 'Bah! No Fair! Fine, you can take your precious Professor Krane. Get out of here!',
                 npcDisplayName: 'Gorigan',
                 npcImageName: 'Cipher Admin Gorigan',
             });

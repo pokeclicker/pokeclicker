@@ -2938,7 +2938,7 @@ const RelicSage = new NPC('Relic Stone Sage', [
     '<img src="./assets/images/status/shadow.svg" height="60px"/> <img src="./assets/images/arrow.svg" height="30px"/> <img src="./assets/images/status/purified.svg" height="60px"/>',
 ], {image: 'assets/images/npcs/Sage.png'});
 const GateonSailor = new NPC('Sailor', [
-    'I\'ve been waiting for the S. S. Libra to some in for HOURS!',
+    'I\'ve been waiting for the S. S. Libra to come into port for HOURS!',
     'Rumor has it that some giant Pokémon picked it up and flew away with it, but that has to be impossible.',
     'If such a Pokémon existed, Professor Krane at the Pokémon HQ Lab would know about it.',
 ], {image: 'assets/images/npcs/Sailor.png',
@@ -2946,7 +2946,7 @@ const GateonSailor = new NPC('Sailor', [
 });
 const Chobin1 = new NPC('Chobin', [
     'Chobin has heard all about the Shadow Pokémon from Dr. Kaminko!',
-    'There is a stone near Agate Village that can purify the sould of Pokémon, yes indeed.',
+    'There is a stone near Agate Village that can purify the souls of Pokémon, yes indeed.',
 ], {image: 'assets/images/npcs/Chobin.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 3), new QuestLineStepCompletedRequirement('Gale of Darkness', 5, GameConstants.AchievementOption.less)]),
 });
@@ -2971,7 +2971,7 @@ const Exol = new NPC('Cipher Commander Exol', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 11), new QuestLineStepCompletedRequirement('Gale of Darkness', 13, GameConstants.AchievementOption.less)]),
 });
 const Snattle = new NPC('Cipher Admin Snattle', [
-    '"How is this possible?! I\'ve never seen a trainer so strong! But, no matter! Surely I\'ve bought Gorigan enough time.',
+    'How is this possible?! I\'ve never seen a trainer so strong! But, no matter! Surely I\'ve bought Gorigan enough time.',
     'His precious recovery operation must be finished by now. Today, we will leave quietly. But don\'t you forget us!',
 ], {image: 'assets/images/npcs/Cipher Admin Snattle.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 14), new QuestLineStepCompletedRequirement('Gale of Darkness', 16, GameConstants.AchievementOption.less)]),
@@ -2990,7 +2990,7 @@ const Verich = new NPC('Mr. Verich', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 16), new QuestLineStepCompletedRequirement('Gale of Darkness', 18, GameConstants.AchievementOption.less)]),
 });
 const Chobin2 = new NPC('Chobin', [
-    'Dr. Kaminko and Chobin have indented this most wonderful device! The Robo Groudon!',
+    'Dr. Kaminko and Chobin have invented this most wonderful device! The Robo Groudon!',
     'With this robot, we can explore the deserts of Orre! Surely Chobin and $playername$ will find something interesting!',
 ], {image: 'assets/images/npcs/Robo Groudon.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 18), new QuestLineStepCompletedRequirement('Gale of Darkness', 20, GameConstants.AchievementOption.less)]),
@@ -3002,7 +3002,7 @@ const SearchLibra = new NPC('Search the S. S. Libra', [
 });
 const ProfKrane = new NPC('Professor Krane', [
     '$playername$! Thank you for rescuing me from those fiends!',
-    'In my time in captivity, I learned that the new Grand Master of Team Cipher has used a powerful Shadow Pokémon to kidnap all the trainers and Pokémon from the S. S. Libra, and took them to Citadark Island!',
+    'In my time in captivity, I learned that the new Grand Master of Team Cipher has used a powerful Shadow Pokémon to kidnap all the trainers and Pokémon from the S. S. Libra and has taken them to Citadark Island!',
     'Snagging this powerful Shadow Pokémon will be hard, take this Master Ball!',
 ], {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 25), new QuestLineStepCompletedRequirement('Gale of Darkness', 27, GameConstants.AchievementOption.less)]),
 });
@@ -3326,7 +3326,7 @@ TownList['Gateon Port'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles'])],
     {
-        requirements: [new QuestLineStartedRequirement('Gale of Darkness')],
+        requirements: [new QuestLineStartedRequirement('Shadows in the Desert')],
         npcs: [GateonSailor, Verich],
     }
 );
