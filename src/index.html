@@ -215,12 +215,12 @@
                                     <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <!--<td class="col">
+                            <td class="col" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue() && PokemonContestController.requirements.isCompleted()">
                                 <span style="display: inline; position: relative;">
                                     <img title="Contest Tokens&#013;&#010;Gained by competing in Contests" src="assets/images/currency/contestToken.svg" height="25px">
                                     <span id="animateCurrency-contestToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.contestToken]()) : App.game.wallet.currencies[GameConstants.Currency.contestToken]().toLocaleString('en-US')">0</span>
                                 </span>
-                            </td> -->
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -441,6 +441,7 @@
                             @import "AlolaSVG.html"
                             @import "GalarSVG.html"
                             @import "HisuiSVG.html"
+                            @import "PaldeaSVG.html"
 
                             <g id="playerSprite">
                                 <!-- This group is cleared actively via koExtenders.ts added to fix #3358 -->
@@ -639,6 +640,12 @@
 
 <!-- Weather App Modal -->
 @import "weatherAppModal.html"
+
+<!-- Consumable Modal -->
+@import "consumableModal.html"
+
+<!-- Pokemon Contest Modal -->
+@import "pokemonContestModal.html"
 
 <script type="text/javascript">
 // Check if we are running in an iframe

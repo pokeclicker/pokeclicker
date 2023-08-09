@@ -2319,6 +2319,125 @@ class Update implements Saveable {
                 }
             }
         },
+
+        '0.10.14': ({ playerData, saveData, settingsData }) => {
+
+            // Hoopa battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 167);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 168);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 169);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 170);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 171);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 172);
+
+            // Add XD dungeons
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 73);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 74);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 75);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 76);
+
+            // Update Mewtwo Strikes Back! event
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 12);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+
+            // Add XD Temp Battles
+
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 55);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 56);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 57);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 58);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 59);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 60);
+
+            // Add Mega Mewtwo battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 205);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 206);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 207);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 208);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 209);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 210);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 211);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 212);
+
+            // ZCrystals
+            const crystalOrder = [
+                'Normalium Z',
+                'Fightinium Z',
+                'Waterium Z',
+                'Firium Z',
+                'Grassium Z',
+                'Rockium Z',
+                'Electrium Z',
+                'Ghostium Z',
+                'Darkinium Z',
+                'Dragonium Z',
+                'Fairium Z',
+                'Groundium Z',
+            ];
+            const crystalFirstID = 88;
+            crystalOrder.forEach((crystalName, rid) => {
+                if (!!saveData.badgeCase[crystalFirstID + rid]) {
+                    playerData._itemList[crystalName] = 1;
+                }
+            });
+
+            // Fixing Silvally item amounts
+            Object.keys(playerData._itemList).filter(itemName => itemName.includes('Memory_Silvally')).forEach(itemName => playerData._itemList[itemName] = Math.min(1, playerData._itemList[itemName]));
+
+            //Replace Blaze Cassette with Magma Stone
+            saveData.oakItems.Magma_Stone = saveData.oakItems.Blaze_Cassette;
+            delete saveData.oakItems.Blaze_Cassette;
+
+            // Snover Berry
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 54);
+            saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 54);
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 50);
+            saveData.statistics.berriesHarvested = Update.moveIndex(saveData.statistics.berriesHarvested, 54);
+            saveData.statistics.berriesObtained = Update.moveIndex(saveData.statistics.berriesObtained, 54);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 54) {
+                    p.berry++;
+                }
+            });
+
+            // Add milestone for Vivillon (Poké Ball) if the quest is complete.
+            const vivillonQuestLine = saveData.quests.questLines.find((q) => q.name == 'The Great Vivillon Hunt!');
+            if (saveData.battleFrontier?.milestones && vivillonQuestLine?.state == 2) {
+                saveData.battleFrontier.milestones.push([666, 'Vivillon (Poké Ball)']);
+            }
+
+            // Add Paldea Gyms
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 120);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 121);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 122);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 123);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 124);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 125);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 126);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 127);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 128);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 129);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 130);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 131);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 132);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 133);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 134);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 135);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 136);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 137);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 138);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 139);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 140);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 141);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 142);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 143);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 144);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 145);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 146);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 147);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 148);
+        },
     };
 
     constructor() {

@@ -154,6 +154,16 @@ class PartyController {
         return PartyController.heldItemSortedList;
     }).extend({ rateLimit: 500 });
 
+    private static consumableSortedList = [];
+    static getConsumableSortedList = ko.pureComputed(() => {
+        // If the consumable modal is open, we should sort it.
+        if (modalUtils.observableState.consumableModal === 'show') {
+            PartyController.consumableSortedList = [...App.game.party.caughtPokemon];
+            return PartyController.consumableSortedList.sort(PartyController.compareBy(Settings.getSetting('consumableSort').observableValue(), Settings.getSetting('consumableSortDirection').observableValue()));
+        }
+        return PartyController.consumableSortedList;
+    }).extend({ rateLimit: 500 });
+
     private static pokemonsWithHeldItemSortedList = [];
     static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.

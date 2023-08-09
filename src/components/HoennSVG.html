@@ -1107,6 +1107,17 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Anomaly Mewtwo"
+         , x: 66, y: 25
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Anomaly Mewtwo 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Anomaly Mewtwo 3'] && TemporaryBattleList['Anomaly Mewtwo 3'].isVisible()"
+         , image: "assets/images/map/mewtwoy.png"
+         })
+     %>
+
      <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Orre').id">
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/orre.png?v=$VERSION',
@@ -1248,9 +1259,143 @@
             })
         %>
 
+        <!--Gateon Port-->
+        <%- include('templates/mapTown',
+            { name: "Gateon Port"
+            , x: 3, y: 25
+            , width: 9, height: 6
+            })
+        %>
+
+        <!--Gateon Port extension-->
+        <%- include('templates/mapTown',
+            { name: "Gateon Port"
+            , x: 3, y: 24
+            , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Gateon Port extension-->
+        <%- include('templates/mapTown',
+            { name: "Gateon Port"
+            , x: 3, y: 24
+            , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Gateon Port extension-->
+        <%- include('templates/mapTown',
+            { name: "Gateon Port"
+            , x: 3, y: 31
+            , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Gateon Port extension-->
+        <%- include('templates/mapTown',
+            { name: "Gateon Port"
+            , x: 3, y: 32
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Gateon Port extension-->
+        <%- include('templates/mapTown',
+            { name: "Gateon Port"
+            , x: 12, y: 27
+            , width: 1, height: 4
+            , isExtension: true
+            })
+        %>
+
+        <!--Pokemon HQ Lab-->
+        <%- include('templates/mapTown',
+            { name: "Pokemon HQ Lab"
+            , x: 6, y: 12
+            , width: 11, height: 7
+            })
+        %>
+
+        <!--Pokemon HQ Lab extension-->
+        <%- include('templates/mapTown',
+            { name: "Pokemon HQ Lab"
+            , x: 9, y: 19
+            , width: 5, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Kaminko's Manor-->
+        <%- include('templates/mapTown',
+            { name: "Kaminko's Manor"
+            , x: 17, y: 23
+            , width: 6, height: 11
+            })
+        %>
+
+        <!--Kaminko's Manor extension-->
+        <%- include('templates/mapTown',
+            { name: "Kaminko's Manor"
+            , x: 16, y: 25
+            , width: 1, height: 7
+            , isExtension: true
+            })
+        %>
+
+        <!--Kaminko's Manor extension-->
+        <%- include('templates/mapTown',
+            { name: "Kaminko's Manor"
+            , x: 23, y: 24
+            , width: 1, height: 9
+            , isExtension: true
+            })
+        %>
+
+        <!--Kaminko's Manor extension-->
+        <%- include('templates/mapTown',
+            { name: "Kaminko's Manor"
+            , x: 24, y: 25
+            , width: 1, height: 7
+            , isExtension: true
+            })
+        %>
+
+        <!--Kaminko's Manor extension-->
+        <%- include('templates/mapTown',
+            { name: "Kaminko's Manor"
+            , x: 25, y: 26
+            , width: 1, height: 5
+            , isExtension: true
+            })
+        %>
+
+        <!--S. S. Libra-->
+        <%- include('templates/mapTown',
+            { name: "S. S. Libra"
+            , x: 69, y: 31
+            , width: 6, height: 3
+            })
+        %>
+
+
+
         <!-- -------- -->
         <!-- DUNGEONS -->
         <!-- -------- -->
+
+		<!--Phenac City Battles-->
+		<%- include('templates/mapDungeon',
+			{ name: "Phenac City Battles"
+            , x: 72, y: 39
+            , width: 7, height: 7
+			, moveToTown: "Phenac City"
+			, invisible: true
+			})
+		%>
 
         <!--Phenac Stadium-->
         <%- include('templates/mapDungeon',
@@ -1259,6 +1404,16 @@
             , width: 5, height: 3
             })
         %>
+
+		<!--Pyrite Town Battles-->
+		<%- include('templates/mapDungeon',
+			{ name: "Pyrite Town Battles"
+            , x: 30, y: 45
+            , width: 8, height: 4
+			, moveToTown: "Pyrite Town"
+			, invisible: true
+			})
+		%>
 
         <!--Pyrite Colosseum-->
         <%- include('templates/mapDungeon',
@@ -1284,6 +1439,16 @@
             })
         %>
 
+		<!--Relic Cave-->
+		<%- include('templates/mapDungeon',
+			{ name: "Relic Cave"
+            , x: 24, y: 17
+            , width: 4, height: 6
+			, moveToTown: "Agate Village"
+			, invisible: true
+			})
+		%>
+
         <!--Mt. Battle-->
         <%- include('templates/mapDungeon',
             { name: "Mt. Battle"
@@ -1292,6 +1457,16 @@
             })
         %>
 
+		<!--The Under-->
+		<%- include('templates/mapDungeon',
+			{ name: "The Under"
+            , x: 30, y: 45
+            , width: 8, height: 4
+			, moveToTown: "Pyrite Town"
+			, invisible: true
+			})
+		%>
+
         <!--Cipher Lab-->
         <%- include('templates/mapDungeon',
             { name: "Cipher Lab"
@@ -1299,6 +1474,26 @@
             , width: 7, height: 5
             })
         %>
+
+		<!--Realgam Tower Battles-->
+		<%- include('templates/mapDungeon',
+			{ name: "Realgam Tower Battles"
+            , x: 59, y: 34
+            , width: 6, height: 4
+			, moveToTown: "Realgam Tower"
+			, invisible: true
+			})
+		%>
+
+		<!--Realgam Colosseum-->
+		<%- include('templates/mapDungeon',
+			{ name: "Realgam Colosseum"
+            , x: 59, y: 34
+            , width: 6, height: 4
+			, moveToTown: "Realgam Tower"
+			, invisible: true
+			})
+		%>
 
         <!--Snagem Hideout-->
         <%- include('templates/mapDungeon',
@@ -1316,6 +1511,26 @@
             , isExtension: true
             })
         %>
+
+		<!--Deep Colosseum-->
+		<%- include('templates/mapDungeon',
+			{ name: "Deep Colosseum"
+            , x: 30, y: 45
+            , width: 8, height: 4
+			, moveToTown: "Pyrite Town"
+			, invisible: true
+			})
+		%>
+
+		<!--Under Colosseum-->
+		<%- include('templates/mapDungeon',
+			{ name: "Under Colosseum"
+            , x: 30, y: 45
+            , width: 8, height: 4
+			, moveToTown: "Pyrite Town"
+			, invisible: true
+			})
+		%>
 
         <!--Orre Colosseum-->
         <%- include('templates/mapDungeon',
@@ -1342,6 +1557,151 @@
             , isExtension: true
             })
         %>
+
+		<!--Gateon Port Battles-->
+		<%- include('templates/mapDungeon',
+			{ name: "Gateon Port Battles"
+            , x: 3, y: 25
+            , width: 9, height: 6
+			, moveToTown: "Gateon Port"
+			, invisible: true
+			})
+		%>
+
+        <!--Cipher Key Lair-->
+        <%- include('templates/mapDungeon',
+            { name: "Cipher Key Lair"
+            , x: 73, y: 13
+            , width: 7, height: 10
+            })
+        %>
+
+        <!--Cipher Key Lair extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Cipher Key Lair"
+            , x: 76, y: 23
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Citadark Isle-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle"
+            , x: 0, y: 53
+            , width: 8, height: 4
+            })
+        %>
+
+        <!--Citadark Isle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle"
+            , x: 0, y: 57
+            , width: 7, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Citadark Isle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle"
+            , x: 0, y: 59
+            , width: 4, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Citadark Isle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle"
+            , x: 0, y: 51
+            , width: 2, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Citadark Isle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle"
+            , x: 1, y: 50
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Citadark Isle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle"
+            , x: 3, y: 48
+            , width: 2, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Citadark Isle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle"
+            , x: 6, y: 50
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Citadark Isle extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle"
+            , x: 6, y: 51
+            , width: 2, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Citadark Isle Dome-->
+        <%- include('templates/mapDungeon',
+            { name: "Citadark Isle Dome"
+            , x: 2, y: 50
+            , width: 4, height: 4
+            })
+        %>
+
+    <!-- ------------------ -->
+    <!-- PLACES OF INTEREST -->
+    <!-- ------------------ -->
+
+    <%- include('templates/mapPOI',
+        { name: "Dock"
+        , x: 8, y: 31
+        , width: 2, height: 1
+        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Gateon Port') }"
+        })
+    %>
+
+    <%- include('templates/mapPOI',
+        { name: "S. S. Anne"
+        , x: 5, y: 32
+        , width: 8, height: 3
+        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Gateon Port') }"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Miror B."
+        , x: 56, y: 17
+        , width: 4, height: 6
+        , databind: "click: () => TemporaryBattleList['Miror B. 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Miror B. 1'] && TemporaryBattleList['Miror B. 1'].isVisible()"
+        , image: "assets/images/map/Miror B.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Zook"
+        , x: 73, y: 18
+        , width: 4, height: 6
+        , databind: "click: () => TemporaryBattleList['Zook'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Zook'] && TemporaryBattleList['Zook'].isVisible()"
+        , image: "assets/images/map/Zook.png"
+        })
+    %>
 
     </g>
 </g>

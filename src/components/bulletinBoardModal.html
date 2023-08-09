@@ -16,12 +16,19 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                                 <div class="card-footer">
                                     <h5 class="card-title m-0" data-bind="text: $data.name">Card title</h5>
                                 </div>
-                                <div class="card-body">
-                                    <p class="card-text" data-bind="text: $data.description">Description</p>
+                                <div class="card-body d-flex flex-column">
+                                    <p class="card-text flex-grow-1" data-bind="text: $data.description">Description</p>
+                                    <!-- ko if: $data.state() == QuestLineState.suspended -->
+                                    <div class="text-center text-muted small">
+                                        <p class="m-0">Previously Started</p>
+                                        <p class="m-0" data-bind="text: `Step: ${$data.curQuest() + 1} / ${$data.totalQuests}`"></p>
+                                    </div>
+                                    <!-- /ko -->
                                 </div>
                                 <div class="card-footer p-0">
-                                    <button class="btn btn-primary btn-block" data-bind="visible: !$data.state(), click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>
+                                    <button class="btn btn-primary btn-block" data-bind="visible: !$data.state(), click: () => { $data.beginQuest(); }">Accept</button>
                                     <button class="btn btn-primary btn-block" data-bind="visible: $data.state() == QuestLineState.started" disabled>Started</button>
+                                    <button class="btn btn-primary btn-block" data-bind="visible: $data.state() == QuestLineState.suspended, click: () => { $data.resumeSuspendedQuest() }">Resume</button>
                                 </div>
                             </div>
                         </td>
