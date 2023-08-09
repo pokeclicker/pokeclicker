@@ -104,6 +104,7 @@ export default class Statistics implements Saveable {
     safariBaitThrown: KnockoutObservable<number>;
     safariBallsThrown: KnockoutObservable<number>;
     safariPokemonCaptured: KnockoutObservable<number>;
+    safariShinyPokemonCaptured: KnockoutObservable<number>;
     safariStepsTaken: KnockoutObservable<number>;
     safariItemsObtained: KnockoutObservable<number>;
 
@@ -235,6 +236,7 @@ export default class Statistics implements Saveable {
         'safariBaitThrown',
         'safariBallsThrown',
         'safariPokemonCaptured',
+        'safariShinyPokemonCaptured',
         'safariStepsTaken',
         'safariItemsObtained',
     ];
