@@ -387,4 +387,5 @@ export type ItemNameType
 | 'Dragonium Z'
 | 'Darkinium Z'
 | 'Steelium Z'
-| 'Fairium Z';
+| 'Fairium Z'
+| 'Great_Twisted_Spoon';

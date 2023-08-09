@@ -31,7 +31,7 @@ class PokemonContest implements Feature {
     }
 
     canAccess(): boolean {
-        return true;
+        return PokemonContestController.requirements.isCompleted();
     }
 
     update(delta: number): void {
@@ -59,8 +59,9 @@ class PokemonContest implements Feature {
 class PokemonContestController {
     static contestStyle: KnockoutObservable<ContestStyle> = ko.observable(undefined);
     static pokemonType: KnockoutObservable<PokemonType> = ko.observable(PokemonType.None);
-    static inProgress = ko.observable<boolean>(false);
+    //static inProgress = ko.observable<boolean>(false); //TODO: this should be used for some sort of animation or something
     static contestText: KnockoutObservable<string> = ko.observable(undefined);
+    static requirements = new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.hoenn), new DevelopmentRequirement()]);
 
     static entryAmount = 3;
 
@@ -91,18 +92,51 @@ class PokemonContestController {
         return App.game.pokemonContest.entries().reduce((sum, e) => sum + e.getStylePoints(), 0);
     });
 
-    private static canEnterContest() {
+    private static canEnterContest() : boolean {
+        if (App.game.pokemonContest.lastEnteredDate() && App.game.pokemonContest.lastEnteredDate().toDateString() == (new Date()).toDateString()) {
+            Notifier.notify({
+                title: 'You can\'t enter the contest',
+                message: 'You have already entered the contest today',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return false;
+        }
         return true;
     }
 
     public static startContest() {
-        if (PokemonContestController.canEnterContest()) {
+        if (!PokemonContestController.canEnterContest()) {
             return;
         }
+        //PokemonContestController.inProgress(true);
+        App.game.pokemonContest.lastEnteredDate(new Date());
+        //TODO: take some berries from the user
 
-        PokemonContestController.inProgress(true);
+        const stylePoints = PokemonContestController.getTotalStylePoints();
+        const contestTokensGained = stylePoints;
+        let result : GameConstants.ContestResults = undefined;
+        if (stylePoints > 700) {
+            result = GameConstants.ContestResults.Master;
+        } else if (stylePoints > 450) {
+            result = GameConstants.ContestResults.Hyper;
+        } else if (stylePoints > 200) {
+            result = GameConstants.ContestResults.Super;
+        } else {
+            result = GameConstants.ContestResults.Normal;
+        }
 
-
+        App.game.wallet.gainContestTokens(contestTokensGained);
+        GameHelper.incrementObservable(App.game.statistics.contestResults[result], 1);
+        const message = `Your Result is ${GameConstants.ContestResults[result]}!\n` +
+            `You gained ${contestTokensGained} Contest Tokens.\n` +
+            'Please check our Reward stand to see if you won anything new.\n' +
+            'I hope to see you again tomorrow.';
+        Notifier.notify({
+            title: 'Contest is over!',
+            message: message,
+            type: NotificationConstants.NotificationOption.success,
+            timeout: GameConstants.MINUTE * 3,
+        });
     }
 }
 
@@ -131,7 +165,7 @@ class ContestEntry {
         switch (PokemonContestController.contestStyle()) {
             case ContestStyle.Cool:
                 stylePoints = baseStats.attack + baseStats.specialDefense;
-                flavorType = FlavorType.Bitter;
+                flavorType = FlavorType.Spicy;
                 break;
             case ContestStyle.Beautiful:
                 stylePoints = baseStats.specialAttack + baseStats.defense;
@@ -143,11 +177,11 @@ class ContestEntry {
                 break;
             case ContestStyle.Clever:
                 stylePoints = baseStats.specialAttack + baseStats.speed;
-                flavorType = FlavorType.Sour;
+                flavorType = FlavorType.Bitter;
                 break;
             case ContestStyle.Tough:
                 stylePoints = baseStats.hitpoints + baseStats.defense;
-                flavorType = FlavorType.Spicy;
+                flavorType = FlavorType.Sour;
                 break;
         }
 
@@ -169,7 +203,7 @@ enum ContestStyle {
 
 class PokemonContestTownContent extends TownContent {
     constructor() {
-        super([new DevelopmentRequirement()]);
+        super([PokemonContestController.requirements]);
     }
     public cssClass(): string {
         return 'btn btn-primary';
@@ -179,7 +213,7 @@ class PokemonContestTownContent extends TownContent {
     }
     public isVisible(): boolean {
         //return true;
-        return new DevelopmentRequirement().isCompleted();
+        return this.isUnlocked(); //TODO: always visible, when released
     }
     public onclick(): void {
         $('#pokemonContestModal').modal('show');
