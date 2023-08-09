@@ -1,9 +1,25 @@
 class PokemonContest implements Feature {
-    name: 'Pokemon Contest';
-    saveKey: 'pokemonContest';
+    name = 'Pokemon Contest';
+    saveKey = 'pokemonContest';
 
     public lastEnteredDate: KnockoutObservable<Date>;
     public entries: KnockoutObservableArray<ContestEntry>;
+
+    public prizes = [
+        new PokemonContestPrizes('10 Rare Candy',
+            'Get 10 Rare Candy by catching a Machop! (real requirement will be added later)',
+            'Rare_Candy',
+            10,
+            new ObtainedPokemonRequirement('Machop')
+        ),
+        new PokemonContestPrizes('Secret Mega Stone',
+            'Get a secret Mega Stone for reaching Kalos. (real requirement will be added later)',
+            'Altarianite',
+            10,
+            new MaxRegionRequirement(GameConstants.Region.kalos),
+            new MaxRegionRequirement(GameConstants.Region.kalos)
+        ),
+    ];
 
     constructor() {
         this.lastEnteredDate = ko.observable(undefined);
@@ -23,10 +39,20 @@ class PokemonContest implements Feature {
 
     defaults: Record<string, any>;
     toJSON(): Record<string, any> {
-        throw new Error('Method not implemented.');
+        return {
+            prizes: this.prizes.map(p => p.toJSON()),
+        };
     }
     fromJSON(json: Record<string, any>): void {
-        throw new Error('Method not implemented.');
+        if (!json) {
+            return;
+        }
+        this.prizes.forEach(p => {
+            const jsonPrize = json?.prizes.find(p2 => p2.title == p.title);
+            if (jsonPrize) {
+                p.fromJSON(jsonPrize);
+            }
+        });
     }
 }
 
@@ -191,5 +217,53 @@ class PokemonContestTownContent extends TownContent {
     }
     public onclick(): void {
         $('#pokemonContestModal').modal('show');
+    }
+}
+
+class PokemonContestPrizes {
+    private item: Item;
+    public claimed: KnockoutObservable<boolean> = ko.observable<boolean>(false);
+
+    constructor(
+        public title: string,
+        public description: string,
+        itemName: ItemNameType,
+        private amount: number,
+        private claimRequirement: Requirement,
+        private visibleRequirement?: Requirement
+    ) {
+        this.item = ItemList[itemName];
+    }
+
+    getImage() {
+        return this.item.image;
+    }
+
+    isVisible() {
+        return this.item.isAvailable() && !this.item.isSoldOut() && (!this.visibleRequirement || this.visibleRequirement.isCompleted());
+    }
+
+    canBeClaimed() {
+        return !this.claimed() && this.claimRequirement.isCompleted();
+    }
+
+    claim() {
+        if (!this.canBeClaimed()) {
+            return;
+        }
+        this.claimed(true);
+        this.item.gain(this.amount);
+    }
+
+    toJSON(): Record<string, any> {
+        return {
+            title: this.title,
+            claimed: this.claimed(),
+        };
+    }
+    fromJSON(json: Record<string, any>): void {
+        if (json) {
+            this.claimed(json.claimed);
+        }
     }
 }
