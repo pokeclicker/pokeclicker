@@ -59,7 +59,12 @@ export default class Weather {
                 [{ type: PokemonType.Rock, multiplier: 1.1 }, { type: PokemonType.Ground, multiplier: 1.1 }]),
         [WeatherType.Fog]:
             new WeatherCondition(WeatherType.Fog, '#d2c2ef', 'The fog is deep...', 10,
-                [{ type: PokemonType.Ghost, multiplier: 1.2 }, { type: PokemonType.Psychic, multiplier: 1.1 }, { type: PokemonType.Dark, multiplier: 1.1 }, { type: PokemonType.Electric, multiplier: 0.9 }]),
+                [
+                    { type: PokemonType.Ghost, multiplier: 1.2 },
+                    { type: PokemonType.Psychic, multiplier: 1.1 }, 
+                    { type: PokemonType.Dark, multiplier: 1.1 },
+                    { type: PokemonType.Electric, multiplier: 0.9 },
+                ]),
         [WeatherType.Windy]:
             new WeatherCondition(WeatherType.Windy, '#81c4ca', 'Mysterious strong winds blow.', 3,
                 [{ type: PokemonType.Flying, multiplier: 1.2 }, { type: PokemonType.Dragon, multiplier: 1.1 }]),
