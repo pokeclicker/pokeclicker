@@ -425,6 +425,12 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Strategic Chucker', 'Catch 100 Pokémon in a Safari Zone', new SafariCatchRequirement(100), 0.2);
         AchievementHandler.addAchievement('Master of the Safari', 'Catch 250 Pokémon in a Safari Zone', new SafariCatchRequirement(250), 0.4);
 
+        const totalMegaStones = Object.values(ItemList).filter((i) => i instanceof MegaStoneItem).length;
+        const halfTotalMegaStones = Math.floor(totalMegaStones / 2);
+        AchievementHandler.addAchievement('What a neat rock!', 'Obtain your first Mega Stone.', new TotalMegaStoneObtainedRequirement(1), 0.1);
+        AchievementHandler.addAchievement('Aspiring Geologist', `Obtain ${halfTotalMegaStones} Mega Stones.`, new TotalMegaStoneObtainedRequirement(halfTotalMegaStones), 0.25);
+        AchievementHandler.addAchievement('Ya\'ll got any more of them Mega Stones?', `Obtain all ${totalMegaStones} Mega Stones.`, new TotalMegaStoneObtainedRequirement(totalMegaStones), 0.5);
+
         /*
          * REGIONAL
          */
