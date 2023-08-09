@@ -2407,7 +2407,7 @@ class QuestLineHelper {
         const defeatUnrivaledFighting = new CustomQuest(750, 0, 'Defeat 750 Fighting-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
-        const catchUnrivaledFighting = new CapturePokemonTypesQuest(600, undefined, PokemonType.Fighting);
+        const catchUnrivaledFighting = new CapturePokemonTypesQuest(300, undefined, PokemonType.Fighting);
         unrivaledPowerQuestLine.addQuest(new MultipleQuestsQuest([
             defeatUnrivaledPsychic,
             catchUnrivaledPsychic,
