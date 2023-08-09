@@ -66,7 +66,7 @@
                                 <h4 data-bind="text: $data.title"></h4>
                                 <div data-bind="text: $data.description"></div>
                                 <div><img data-bind="attr:{ src: $data.getImage() }"></img></div>
-                                <button class="btn btn-secondary" data-bind="click: $data.claim, enabled: $data.canBeClaimed()">Claim</button>
+                                <button class="btn btn-primary btn-block" data-bind="click: $data.claim, attr:{ disabled: !$data.canBeClaimed() }">Claim</button>
                             </div>
                             <!-- /ko -->
                         </div>
