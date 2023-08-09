@@ -735,10 +735,13 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Dynamic BG Meltan',
             'Dynamic BG Melmetal',
+            'Kyurem (Overworld)',
             'Mega Houndoom (Overworld)',
             'Mega Manectric (Overworld)',
             'Primal Groudon (Overworld)',
             'Primal Kyogre (Overworld)',
+            'Reshiram (Overworld)',
+            'Zekrom (Overworld)',
         ],
         // Notes: Permission given on image page if credited.
     },
