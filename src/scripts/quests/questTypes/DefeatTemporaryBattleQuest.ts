@@ -8,6 +8,10 @@ class DefeatTemporaryBattleQuest extends Quest implements QuestInterface {
         this.customReward = typeof customReward == 'function' ? customReward : undefined;
     }
 
+    begin(): void {
+        this.initial(0);
+    }
+
     claim(): boolean {
         if (this.customReward !== undefined) {
             this.customReward();
