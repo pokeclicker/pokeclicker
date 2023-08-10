@@ -1,11 +1,9 @@
 class DefeatTemporaryBattleQuest extends Quest implements QuestInterface {
-    customReward?: () => void;
 
-    constructor(public temporaryBattle: string, public customDescription: string, customReward?: (() => void)) {
-        super(1, 0);
+    constructor(public temporaryBattle: string, public customDescription: string, reward : number = 0) {
+        super(1, reward);
         this.focus = App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.temporaryBattle)];
         this.customDescription = customDescription;
-        this.customReward = typeof customReward == 'function' ? customReward : undefined;
     }
 
     begin(): void {

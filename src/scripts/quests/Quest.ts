@@ -1,6 +1,13 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+type QuestOptionalArgument = {
+    clearedMessage?: string;
+    npcDisplayName?: string,
+    npcImageName?: string,
+};
 
 abstract class Quest {
+    public static questObservable: KnockoutObservable<Quest> = ko.observable();
+    
     index: number;
     amount: number
     customDescription?: string;
@@ -22,6 +29,8 @@ abstract class Quest {
     onLoadCalled: boolean;
     suspended: boolean;
     customReward?: () => void;
+    optionalArgs?: QuestOptionalArgument;
+    initialValue?: number;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -59,8 +68,12 @@ abstract class Quest {
     claim() {
         if (this.isCompleted() && !this.claimed()) {
             App.game.quests.addXP(this.xpReward);
-            if (this.customReward) {
+            if (this.customReward !== undefined) {
                 this.customReward();
+            }
+            if (this.optionalArgs?.clearedMessage !== undefined) {
+                Quest.questObservable(this);
+                $('#customQuestStepClearedModal').modal('show');
             }
             this.focusSub?.dispose?.();
             this.claimed(true);
@@ -114,7 +127,8 @@ abstract class Quest {
     }
 
     begin() {
-        this.initial(this.focus());
+        this.initial(this.initialValue ?? this.focus());
+        this.onLoad();
     }
 
     set focus(value: KnockoutObservable<any>) {
@@ -219,18 +233,46 @@ abstract class Quest {
         this.autoCompleter?.dispose();
     }
 
-    withDescription(description: string) {
+    withDescription(description: string): Quest {
         this.customDescription = description;
         return this;
     }
 
-    withOnLoad(onLoad: () => void) {
+    withOnLoad(onLoad: () => void): Quest {
         this._onLoad = onLoad;
         return this;
     }
     
-    withCustomReward(customReward: () => void) {
-        this.customReward = customReward;
+    withCustomReward(customReward: () => void): Quest {
+        this.customReward = typeof customReward === 'function' ? customReward : undefined;
+        return this;
+    }
+
+    withOptionalArgs(optionalArgs: QuestOptionalArgument): Quest {
+        this.optionalArgs = optionalArgs;
+        return this
+    }
+
+    withInitialValue(initialValue: number): Quest {
+        this.initialValue = initialValue;
+        return this;
+    }
+
+    public getClearedMessage() {
+        return this.optionalArgs.clearedMessage;
+    }
+
+    public getNpcDisplayName() {
+        return this.optionalArgs.npcDisplayName;
+    }
+
+    public getNpcImageName() {
+        return this.optionalArgs.npcImageName;
+    }
+
+    public getNpcImage() {
+        const npcImageName = this.optionalArgs?.npcImageName;
+        return `assets/images/npcs/${npcImageName}.png`;
     }
 
     //#endregion
