@@ -21,6 +21,7 @@ abstract class Quest {
     _onLoad?: () => void;
     onLoadCalled: boolean;
     suspended: boolean;
+    customReward?: () => void;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -58,6 +59,9 @@ abstract class Quest {
     claim() {
         if (this.isCompleted() && !this.claimed()) {
             App.game.quests.addXP(this.xpReward);
+            if (this.customReward) {
+                this.customReward();
+            }
             this.focusSub?.dispose?.();
             this.claimed(true);
             if (this.pointsReward) {
@@ -213,6 +217,20 @@ abstract class Quest {
 
     deleteAutoCompleter() {
         this.autoCompleter?.dispose();
+    }
+
+    withDescription(description: string) {
+        this.customDescription = description;
+        return this;
+    }
+
+    withOnLoad(onLoad: () => void) {
+        this._onLoad = onLoad;
+        return this;
+    }
+    
+    withCustomReward(customReward: () => void) {
+        this.customReward = customReward;
     }
 
     //#endregion
