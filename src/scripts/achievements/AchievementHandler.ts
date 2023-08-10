@@ -424,6 +424,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Just Keep Chuckin\' Balls', 'Catch 50 Pokémon in a Safari Zone', new SafariCatchRequirement(50), 0.1);
         AchievementHandler.addAchievement('Strategic Chucker', 'Catch 100 Pokémon in a Safari Zone', new SafariCatchRequirement(100), 0.2);
         AchievementHandler.addAchievement('Master of the Safari', 'Catch 250 Pokémon in a Safari Zone', new SafariCatchRequirement(250), 0.4);
+        AchievementHandler.addAchievement('Do Shines Cost Extra?', 'Catch a Shiny Pokémon in a Safari Zone', new SafariCatchRequirement(1, true), 0.5);
 
         const totalMegaStones = Object.values(ItemList).filter((i) => i instanceof MegaStoneItem).length;
         AchievementHandler.addAchievement('What a neat rock!', 'Obtain your first Mega Stone.', new TotalMegaStoneObtainedRequirement(1), 0.1);
