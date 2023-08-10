@@ -233,6 +233,7 @@ export enum AchievementType {
     'Vitamins',
     'Pokerus',
     'Shadow Pokemon',
+    'Mega Stone',
 }
 
 // Held item chance
