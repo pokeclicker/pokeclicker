@@ -59,7 +59,7 @@ describe('Test SeededRand & Rand', () => {
 
     it('Test enum', () => {
         SeededRand.seedWithDateHour(new Date());
-        expect(SeededRand.fromEnum(AchievementType)).toBe(20);
+        expect(SeededRand.fromEnum(AchievementType)).toBe(21);
     });
 
     it('Test random string', () => {

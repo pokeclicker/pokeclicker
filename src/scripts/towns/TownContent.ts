@@ -11,8 +11,8 @@ abstract class TownContent {
         this.parent = parent;
     }
 
-    public areaStatus() {
-        return areaStatus.completed;
+    public areaStatus() : areaStatus {
+        return this.isUnlocked() ? areaStatus.completed : areaStatus.locked;
     }
 
     public isUnlocked(): boolean {
