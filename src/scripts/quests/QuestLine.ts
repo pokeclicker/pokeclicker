@@ -7,12 +7,14 @@ class QuestLine {
     totalQuests: number;
 
     autoBegin: KnockoutSubscription;
+    private pausableStates = [GameConstants.GameState.town, GameConstants.GameState.fighting];
 
     constructor(
         public name: string,
         public description: string,
         public requirement?: Requirement,
-        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None
+        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None,
+        private disablePausing = false // applies to bulletin board quests only
     ) {
         this.name = name;
         this.description = description;
@@ -47,7 +49,7 @@ class QuestLine {
 
         this.autoBegin = this.curQuest.subscribe((num) => {
             if (this.curQuest() < this.totalQuests) {
-                if (this.curQuestObject().initial() == null) {
+                if (this.curQuestObject().initial() == null && this.state() != QuestLineState.suspended) {
                     this.beginQuest(this.curQuest());
                 }
             } else {
@@ -87,8 +89,7 @@ class QuestLine {
     resumeAt(index: number, initial) {
         if (initial != undefined) {
             for (let i = 0; i < Math.min(index, this.totalQuests); i++) {
-                this.quests()[i].autoCompleter.dispose();
-                this.quests()[i].complete();
+                this.quests()[i].complete(true);
             }
             if (index < this.totalQuests) {
                 this.beginQuest(index, initial);
@@ -98,15 +99,68 @@ class QuestLine {
         }
     }
 
+    suspendQuest(skipPausableCheck = false) {
+        if ((!skipPausableCheck && !this.isPausable()) || this.state() == QuestLineState.suspended) {
+            // Do nothing if already suspended or not pausable.
+            return;
+        }
+
+        // Mark quest (or sub quests if multi quest) as suspended to prevent progress
+        const quest = this.quests()[this.curQuest()];
+        if (quest instanceof MultipleQuestsQuest) {
+            quest.quests.forEach((q) => q.suspended = true);
+        }
+
+        quest.suspended = true;
+        this.state(QuestLineState.suspended);
+    }
+
+    resumeSuspendedQuest() {
+        if (this.state() != QuestLineState.suspended) {
+            return;
+        }
+
+        // Re-activate suspended quest
+        const quest = this.quests()[this.curQuest()];
+        if (quest instanceof MultipleQuestsQuest) {
+            quest.quests.forEach((q) => q.suspended = false);
+        }
+
+        quest.suspended = false;
+        this.state(QuestLineState.started);
+    }
+
+    isPausable(): boolean {
+        if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None
+            || !this.pausableStates.includes(App.game.gameState)
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    get pauseTooltip(): string {
+        if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None) {
+            return 'This quest line cannot be paused. It is either a story, progression related, or otherwise required quest.';
+        }
+
+        if (!this.pausableStates.includes(App.game.gameState)) {
+            return 'Quest Lines can only be paused while in a town or fighting on a route.';
+        }
+
+        return 'Pausing this quest line will remove it from your quest list and prevent any progress.<br /><br />It can be resumed from the current step at the Bulletin Board it was originally accepted.';
+    }
+
     toJSON() {
         const json = {
             state: this.state(),
             name: this.name,
             quest: this.curQuest(),
-            initial: this.curQuestInitial(),
+            initial: this.curQuestObject().initial?.() ?? this.curQuestInitial(),
         };
         if (this.curQuestObject() instanceof MultipleQuestsQuest) {
-            json.initial = this.curQuestObject().quests.map((q) => q.initial());
+            json.initial = this.curQuestObject().quests.map((q) => q.isCompleted() ? true : q.initial());
         }
         return json;
     }
