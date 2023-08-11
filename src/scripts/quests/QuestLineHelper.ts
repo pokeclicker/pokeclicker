@@ -553,7 +553,7 @@ class QuestLineHelper {
         const talktoKimonoGirlsWhirl = new TalkToNPCQuest(KimonoGirlsWhirl, 'Meet the Kimono Girls at the Whirl Islands.').withCustomReward(() => ItemList.Tidal_Bell_Lugia.gain(1));
         lugiaJohtoQuestLine.addQuest(talktoKimonoGirlsWhirl);
 
-        const LugiaCatch = new CaptureSpecificPokemonQuest('Lugia');
+        const LugiaCatch = new CaptureSpecificPokemonQuest('Lugia').withDescription('Catch Lugia in the Whirl Islands.');
         lugiaJohtoQuestLine.addQuest(LugiaCatch);
 
         App.game.quests.questLines().push(lugiaJohtoQuestLine);
@@ -869,7 +869,7 @@ class QuestLineHelper {
         const collectPinkanMaterials = new MultipleQuestsQuest(
             [
                 new GainGemsQuest(1000, 0, PokemonType.Fairy),
-                new CustomQuest(10, undefined, 'Gain 10 Pixie Plates', () => player.mineInventory().find(item => item.name == 'Pixie Plate')?.amount() ?? 0),
+                new CustomQuest(10, 0, 'Gain 10 Pixie Plates', () => player.mineInventory().find(item => item.name == 'Pixie Plate')?.amount() ?? 0),
             ], 'Collect Fairy Gems and Pixie Plates');
         pinkanThemeparkQuestLine.addQuest(collectPinkanMaterials);
 
@@ -1195,7 +1195,7 @@ class QuestLineHelper {
         const investigateBoulders = new TalkToNPCQuest(ManaphyBoulders, 'Search for clues in Eterna Forest.');
         manaphyQuestLine.addQuest(investigateBoulders);
 
-        const catchPolitoedSubstitutes = new CustomQuest(50, undefined, 'Catch or hatch 50 Water-type Pokémon, and see if those boulders are really just boulders.', () => {
+        const catchPolitoedSubstitutes = new CustomQuest(50, 0, 'Catch or hatch 50 Water-type Pokémon, and see if those boulders are really just boulders.', () => {
 
             return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
@@ -1269,7 +1269,7 @@ class QuestLineHelper {
         const happinyChase10 = new TalkToNPCQuest(HappinyBoulders, 'After leaving Sandgem, the Happiny went south-east, across the water. There\'s only one place it could be now...');
         manaphyQuestLine.addQuest(happinyChase10);
 
-        const catchBunearySubstitutes = new CustomQuest(50, undefined, 'Oh no, you\'re not gonna let more boulders stop you now. Catch or hatch 50 Fighting-types and smash right through them.', () => {
+        const catchBunearySubstitutes = new CustomQuest(50, 0, 'Oh no, you\'re not gonna let more boulders stop you now. Catch or hatch 50 Fighting-types and smash right through them.', () => {
 
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
@@ -1301,19 +1301,19 @@ class QuestLineHelper {
         const talktoMesprit = new TalkToNPCQuest(VerityMesprit, 'Ask Mesprit about the Distortion World in Lake Verity.');
         giratinaQuestLine.addQuest(talktoMesprit);
 
-        const obtain10PurpleShards = new CustomQuest(10, undefined, 'Obtain 10 Purple Shards.', () => player.mineInventory().find(item => item.name == 'Purple Shard')?.amount() ?? 0);
+        const obtain10PurpleShards = new CustomQuest(10, 0, 'Obtain 10 Purple Shards.', () => player.mineInventory().find(item => item.name == 'Purple Shard')?.amount() ?? 0);
         giratinaQuestLine.addQuest(obtain10PurpleShards);
 
         const talktoAzelf = new TalkToNPCQuest(ValorAzelf, 'Ask Azelf about the Distortion World in Lake Valor.');
         giratinaQuestLine.addQuest(talktoAzelf);
 
-        const obtain10OchreShards = new CustomQuest(10, undefined, 'Obtain 10 Ochre Shards.', () => player.mineInventory().find(item => item.name == 'Ochre Shard')?.amount() ?? 0);
+        const obtain10OchreShards = new CustomQuest(10, 0, 'Obtain 10 Ochre Shards.', () => player.mineInventory().find(item => item.name == 'Ochre Shard')?.amount() ?? 0);
         giratinaQuestLine.addQuest(obtain10OchreShards);
 
         const talktoUxie = new TalkToNPCQuest(AcuityUxie, 'Ask Uxie about the Distortion World in Lake Acuity.');
         giratinaQuestLine.addQuest(talktoUxie);
 
-        const obtain10CrimsonShards = new CustomQuest(10, undefined, 'Obtain 10 Crimson Shards.', () => player.mineInventory().find(item => item.name == 'Crimson Shard')?.amount() ?? 0);
+        const obtain10CrimsonShards = new CustomQuest(10, 0, 'Obtain 10 Crimson Shards.', () => player.mineInventory().find(item => item.name == 'Crimson Shard')?.amount() ?? 0);
         giratinaQuestLine.addQuest(obtain10CrimsonShards);
 
         const clearSendoffSpring = new CustomQuest(1, 0, 'Clear Sendoff Spring to meet the Lake Trio.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sendoff Spring')]());
@@ -1325,7 +1325,7 @@ class QuestLineHelper {
         const chargeDistortionKey = new MultipleQuestsQuest(
             [
                 new GainGemsQuest(500, 0, PokemonType.Ghost),
-                new CustomQuest(1, undefined, 'Gain 1 Spooky Plate.', () => player.mineInventory().find(item => item.name == 'Spooky Plate')?.amount() ?? 0),
+                new CustomQuest(1, 0, 'Gain 1 Spooky Plate.', () => player.mineInventory().find(item => item.name == 'Spooky Plate')?.amount() ?? 0),
             ], 'Charge the key to the Distortion World.');
         giratinaQuestLine.addQuest(chargeDistortionKey);
 
@@ -1849,7 +1849,7 @@ class QuestLineHelper {
 
         const clearGranite = new CustomQuest(10, 0, 'Clear Granite Cave 10 times.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Granite Cave')]());
 
-        const findStars = new CustomQuest(1, undefined, 'Find a Star Piece.', () => player.mineInventory().find(item => item.name == 'Star Piece')?.amount() ?? 0);
+        const findStars = new CustomQuest(1, 0, 'Find a Star Piece.', () => player.mineInventory().find(item => item.name == 'Star Piece')?.amount() ?? 0);
 
         deltaEpisodeQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -1992,11 +1992,11 @@ class QuestLineHelper {
         const talkToStern2 = new TalkToNPCQuest(Stern2, 'Talk to Captain Stern at Sea Mauville about the mysteries of the sea.');
         primalReversionQuestLine.addQuest(talkToStern2);
 
-        const findMetalCoats = new CustomQuest(10, undefined, 'Find 10 Metal Coats.', () => player.itemList.Metal_coat());
+        const findMetalCoats = new CustomQuest(10, 0, 'Find 10 Metal Coats.', () => player.itemList.Metal_coat());
 
-        const findMysticWater = new CustomQuest(1, undefined, 'Find one Mystic Water.', () => player.itemList.Mystic_Water());
+        const findMysticWater = new CustomQuest(1, 0, 'Find one Mystic Water.', () => player.itemList.Mystic_Water());
 
-        const findHeatRocks = new CustomQuest(3, undefined, 'Find 3 Heat Rocks.', () => player.mineInventory().find(item => item.name == 'Heat Rock')?.amount() ?? 0);
+        const findHeatRocks = new CustomQuest(3, 0, 'Find 3 Heat Rocks.', () => player.mineInventory().find(item => item.name == 'Heat Rock')?.amount() ?? 0);
 
         primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -2131,7 +2131,7 @@ class QuestLineHelper {
 
         const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, hint: string) => {
             // Capture 100 Water type Pokemon
-            const catchType = new CustomQuest(100, undefined, `Capture or hatch 100 ${PokemonType[type]}-type Pokémon.`, () => {
+            const catchType = new CustomQuest(100, 0, `Capture or hatch 100 ${PokemonType[type]}-type Pokémon.`, () => {
                 return pokemonMap.filter(p => p.type.includes(type)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
             });
             vivillonQuestLine.addQuest(catchType);
@@ -2240,7 +2240,7 @@ class QuestLineHelper {
     public static createPrincessDiancieQuestLine() {
         const princessDiancieQuestLine = new QuestLine('Princess Diancie', 'Princess Diancie has been spotted in Kalos! She\'s searching for something.', new MultiRequirement([new ObtainedPokemonRequirement('Doublade'), new GymBadgeRequirement(BadgeEnums.Elite_Malva), new GymBadgeRequirement(BadgeEnums.Elite_Siebold), new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom), new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]) , GameConstants.BulletinBoards.Kalos);
 
-        const catchFairy = new CustomQuest(100, undefined, 'Capture or hatch 100 Fairy-type Pokémon to follow Diancie\'s Fairy Aura.', () => {
+        const catchFairy = new CustomQuest(100, 0, 'Capture or hatch 100 Fairy-type Pokémon to follow Diancie\'s Fairy Aura.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fairy)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         princessDiancieQuestLine.addQuest(catchFairy);
@@ -2251,7 +2251,7 @@ class QuestLineHelper {
         const fightMerilyn = new DefeatTemporaryBattleQuest('Merilyn', 'Diancie has escaped to the shopping mall in Lumiose City, but is under attack again!');
         princessDiancieQuestLine.addQuest(fightMerilyn);
 
-        const diamondDomain = new CustomQuest(5, undefined, 'Diancie has fled to the Diamond Domain. Dig in the Underground to find it.', App.game.statistics.undergroundLayersMined);
+        const diamondDomain = new CustomQuest(5, 0, 'Diancie has fled to the Diamond Domain. Dig in the Underground to find it.', App.game.statistics.undergroundLayersMined);
         princessDiancieQuestLine.addQuest(diamondDomain);
 
         const fightSteels = new DefeatTemporaryBattleQuest('Millis and Argus Steel', 'Millis and Argus Steel let you do the hard work while they set up an ambush in Shalour City.');
@@ -2407,7 +2407,7 @@ class QuestLineHelper {
         const talkToAnomalyMewtwo2 = new TalkToNPCQuest(AnomalyMewtwo2, 'Talk to Anomaly Mewtwo in Pokémon Village.');
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo2);
 
-        const findGreatTwistedSpoon = new CustomQuest(1, undefined, 'Find the Great Twisted Spoon in P2 Lab.', () => player.itemList.Great_Twisted_Spoon());
+        const findGreatTwistedSpoon = new CustomQuest(1, 0, 'Find the Great Twisted Spoon in P2 Lab.', () => player.itemList.Great_Twisted_Spoon());
         const unrivaledPsychicGems = new GainGemsQuest(60000, 0, PokemonType.Psychic);
         const unrivaledFightingGems = new GainGemsQuest(60000, 0, PokemonType.Fighting);
         unrivaledPowerQuestLine.addQuest(new MultipleQuestsQuest([
@@ -2540,7 +2540,7 @@ class QuestLineHelper {
         const talkToLanaSilvally = new TalkToNPCQuest(LanaSilvally1, 'Search for Silvally\'s Memory near pools of freshwater. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToLanaSilvally);
 
-        const BuyWaterMemory = new CustomQuest(1, undefined, 'Buy the Water Memory from Captain Lana with Dungeon Tokens.', () => player.itemList.Water_Memory_Silvally())
+        const BuyWaterMemory = new CustomQuest(1, 0, 'Buy the Water Memory from Captain Lana with Dungeon Tokens.', () => player.itemList.Water_Memory_Silvally())
             .withOptionalArgs({
                 clearedMessage: 'Thank you so much $playername$! Now I can finally buy that rod I\'ve always wanted!',
                 npcDisplayName: 'Captain Lana',
@@ -2551,7 +2551,7 @@ class QuestLineHelper {
         const talkToMallowSilvally = new TalkToNPCQuest(MallowSilvally1, 'Search for Silvally\'s Memory in overgrown forests. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToMallowSilvally);
 
-        const BuyGrassMemory = new CustomQuest(1, undefined, 'Buy the Grass Memory from Captain Mallow with Quest Points.', () => player.itemList.Grass_Memory_Silvally())
+        const BuyGrassMemory = new CustomQuest(1, 0, 'Buy the Grass Memory from Captain Mallow with Quest Points.', () => player.itemList.Grass_Memory_Silvally())
             .withOptionalArgs({
                 clearedMessage: 'Thank you, $playername$. I\'ll go to the market and buy the new ingredients right now!',
                 npcDisplayName: 'Captain Mallow',
@@ -2562,7 +2562,7 @@ class QuestLineHelper {
         const talkToKiaweSilvally = new TalkToNPCQuest(KiaweSilvally1, 'Search for Silvally\'s Memory near fiery hotspots. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToKiaweSilvally);
 
-        const BuyFireMemory = new CustomQuest(1, undefined, 'Buy the Fire Memory from Captain Kiawe with Battle Points.', () => player.itemList.Fire_Memory_Silvally())
+        const BuyFireMemory = new CustomQuest(1, 0, 'Buy the Fire Memory from Captain Kiawe with Battle Points.', () => player.itemList.Fire_Memory_Silvally())
             .withOptionalArgs({
                 clearedMessage: 'Thanks, $playername$. I\'ll be going to the market to buy the project supplies this instant.',
                 npcDisplayName: 'Captain Kiawe',
@@ -2573,7 +2573,7 @@ class QuestLineHelper {
         const talkToSophoclesSilvally = new TalkToNPCQuest(SophoclesSilvally1, 'Search for Silvally\'s Memory in electrical institutions. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToSophoclesSilvally);
 
-        const BuyElectricMemory = new CustomQuest(1, undefined, 'Buy the Electric Memory from Captain Sophocles with Pokédollars.', () => player.itemList.Electric_Memory_Silvally())
+        const BuyElectricMemory = new CustomQuest(1, 0, 'Buy the Electric Memory from Captain Sophocles with Pokédollars.', () => player.itemList.Electric_Memory_Silvally())
             .withOptionalArgs({
                 clearedMessage: 'Thank you, $playername$! Now I\'ll go buy some new equipment for my laboratory.',
                 npcDisplayName: 'Captain Sophocles',
@@ -2584,7 +2584,7 @@ class QuestLineHelper {
         const talkToVeteranSilvally = new TalkToNPCQuest(VeteranSilvally1, 'Search for Silvally\'s Memory near snow-covered peaks. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToVeteranSilvally);
 
-        const BuyIceMemory = new CustomQuest(1, undefined, 'Buy the Ice Memory from Veteran Aristo with Diamonds.', () => player.itemList.Ice_Memory_Silvally())
+        const BuyIceMemory = new CustomQuest(1, 0, 'Buy the Ice Memory from Veteran Aristo with Diamonds.', () => player.itemList.Ice_Memory_Silvally())
             .withOptionalArgs({
                 clearedMessage: 'You\'re the best, kiddo! I\'m sure she\'ll love the ring I\'ll buy her with these diamonds!',
                 npcDisplayName: 'Veteran Aristo',
@@ -2595,7 +2595,7 @@ class QuestLineHelper {
         const talkToHapuSilvally = new TalkToNPCQuest(HapuSilvally1, 'Search for Silvally\'s Memory in isolated ground. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToHapuSilvally);
 
-        const BuyGroundMemory = new CustomQuest(1, undefined, 'Buy the Ground Memory from Kahuna Hapu with Farm Points.', () => player.itemList.Ground_Memory_Silvally())
+        const BuyGroundMemory = new CustomQuest(1, 0, 'Buy the Ground Memory from Kahuna Hapu with Farm Points.', () => player.itemList.Ground_Memory_Silvally())
             .withOptionalArgs({
                 clearedMessage: 'Wow you\'re pretty good at the farm, $playername$! I\'ll go buy the palm tree seeds right this instant!',
                 npcDisplayName: 'Kahuna Hapu',

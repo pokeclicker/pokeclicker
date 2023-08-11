@@ -33,7 +33,7 @@ abstract class Quest {
     initialValue?: number;
 
     constructor(amount: number, pointsReward: number) {
-        this.amount = amount;
+        this.amount = isNaN(amount) ? 0 : amount;
         this.pointsReward = pointsReward;
         this.initial = ko.observable(null);
         this.claimed = ko.observable(false);
