@@ -856,7 +856,7 @@ class QuestLineHelper {
         const talktoTeamRocket = new TalkToNPCQuest(ThemeparkTeamRocket1, 'Talk to Team Rocket on Pinkan Island to hear about their plans.');
         pinkanThemeparkQuestLine.addQuest(talktoTeamRocket);
 
-        const farmPinkan = new HarvestBerriesQuest(1, undefined, BerryType.Pinkan).withDescription('Mutate and harvest 1 Pinkan Berry at the farm.');
+        const farmPinkan = new HarvestBerriesQuest(1, 0, BerryType.Pinkan).withDescription('Mutate and harvest 1 Pinkan Berry at the farm.');
         pinkanThemeparkQuestLine.addQuest(farmPinkan);
 
         const defeatPinkans = new MultipleQuestsQuest(
@@ -2174,7 +2174,7 @@ class QuestLineHelper {
         createVivillonQuest(PokemonType.Ice, 'Vivillon (Icy Snow)', 'It can be found at a very cold place.');
 
         // Capture 200 Normal type Pokemon
-        const catchNormal = new CustomQuest(200, undefined, 'Capture or hatch 200 Normal-type Pokémon.', () => {
+        const catchNormal = new CustomQuest(200, 0, 'Capture or hatch 200 Normal-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         vivillonQuestLine.addQuest(catchNormal);
@@ -2303,7 +2303,7 @@ class QuestLineHelper {
         const talkToBaraz2 = new TalkToNPCQuest(Baraz2, 'That didn\'t work. Talk to Baraz in Kiloude City.');
         clashOfAgesQuestLine.addQuest(talkToBaraz2);
 
-        const hoopaCatchPsychic = new CapturePokemonTypesQuest(100, undefined, PokemonType.Psychic);
+        const hoopaCatchPsychic = new CapturePokemonTypesQuest(100, 0, PokemonType.Psychic);
         clashOfAgesQuestLine.addQuest(hoopaCatchPsychic);
 
         const talkToBaraz3 = new TalkToNPCQuest(Baraz3, 'That didn\'t work either. Talk to Baraz in Kiloude City.');
@@ -2346,11 +2346,11 @@ class QuestLineHelper {
         const defeatUnrivaledPsychic = new CustomQuest(1500, 0, 'Defeat 1500 Psychic-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
-        const catchUnrivaledPsychic = new CapturePokemonTypesQuest(600, undefined, PokemonType.Psychic);
+        const catchUnrivaledPsychic = new CapturePokemonTypesQuest(600, 0, PokemonType.Psychic);
         const defeatUnrivaledFighting = new CustomQuest(750, 0, 'Defeat 750 Fighting-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
-        const catchUnrivaledFighting = new CapturePokemonTypesQuest(300, undefined, PokemonType.Fighting);
+        const catchUnrivaledFighting = new CapturePokemonTypesQuest(300, 0, PokemonType.Fighting);
         unrivaledPowerQuestLine.addQuest(new MultipleQuestsQuest([
             defeatUnrivaledPsychic,
             catchUnrivaledPsychic,
@@ -2512,7 +2512,7 @@ class QuestLineHelper {
 
         const createMultiTypeCaptureQuest = (types: Array<PokemonType>, description: string) => {
             const quest = new MultipleQuestsQuest(types.map(type => {
-                return new CapturePokemonTypesQuest(100, undefined, type);
+                return new CapturePokemonTypesQuest(100, 0, type);
             }), description);
             SilvallyTypesQuestLine.addQuest(quest);
         };
@@ -2792,8 +2792,8 @@ class QuestLineHelper {
 
         // Multi-step #3:
 
-        const meltanCatch50Steel = new CapturePokemonTypesQuest(50, undefined, PokemonType.Steel);
-        const meltanCatch50Electric = new CapturePokemonTypesQuest(50, undefined, PokemonType.Electric);
+        const meltanCatch50Steel = new CapturePokemonTypesQuest(50, 0, PokemonType.Steel);
+        const meltanCatch50Electric = new CapturePokemonTypesQuest(50, 0, PokemonType.Electric);
         const meltanDefeatOlivia10 = new DefeatGymQuest(10, 0, 'Elite Olivia');
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
@@ -2951,16 +2951,16 @@ class QuestLineHelper {
         const talkToDrSplash1 = new TalkToNPCQuest(DrSplash1, 'Talk to Dr. Splash in Hoppy Town.');
         drSplashQuestLine.addQuest(talkToDrSplash1);
 
-        const farmOran = new HarvestBerriesQuest(129, undefined, BerryType.Oran);
-        const farmSitrus = new HarvestBerriesQuest(129, undefined, BerryType.Sitrus);
-        const farmPecha = new HarvestBerriesQuest(129, undefined, BerryType.Pecha);
-        const farmRindo = new HarvestBerriesQuest(129, undefined, BerryType.Rindo);
-        const farmWacan = new HarvestBerriesQuest(129, undefined, BerryType.Wacan);
-        const farmLeppa = new HarvestBerriesQuest(129, undefined, BerryType.Leppa);
-        const farmRawst = new HarvestBerriesQuest(129, undefined, BerryType.Rawst);
-        const farmAspear = new HarvestBerriesQuest(129, undefined, BerryType.Aspear);
-        const farmRazz = new HarvestBerriesQuest(129, undefined, BerryType.Razz);
-        const farmBluk = new HarvestBerriesQuest(129, undefined, BerryType.Bluk);
+        const farmOran = new HarvestBerriesQuest(129, 0, BerryType.Oran);
+        const farmSitrus = new HarvestBerriesQuest(129, 0, BerryType.Sitrus);
+        const farmPecha = new HarvestBerriesQuest(129, 0, BerryType.Pecha);
+        const farmRindo = new HarvestBerriesQuest(129, 0, BerryType.Rindo);
+        const farmWacan = new HarvestBerriesQuest(129, 0, BerryType.Wacan);
+        const farmLeppa = new HarvestBerriesQuest(129, 0, BerryType.Leppa);
+        const farmRawst = new HarvestBerriesQuest(129, 0, BerryType.Rawst);
+        const farmAspear = new HarvestBerriesQuest(129, 0, BerryType.Aspear);
+        const farmRazz = new HarvestBerriesQuest(129, 0, BerryType.Razz);
+        const farmBluk = new HarvestBerriesQuest(129, 0, BerryType.Bluk);
 
         drSplashQuestLine.addQuest(new MultipleQuestsQuest([
             farmOran,
@@ -3413,7 +3413,9 @@ class QuestLineHelper {
             [
                 oldCemetery,
                 snowslideSlope,
-            ], 'Calyrex is going to Old Cemetery and Snowslide Slope to grow a Shaderoot Carrot and an Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.').withCustomReward(() => {
+            ],
+            'Calyrex is going to Old Cemetery and Snowslide Slope to grow a Shaderoot Carrot and an Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.')
+            .withCustomReward(() => {
                 ItemList.Shaderoot_Carrot_Calyrex.gain(1);
                 ItemList.Iceroot_Carrot_Calyrex.gain(1);
             }));

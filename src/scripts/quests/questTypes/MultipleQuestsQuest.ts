@@ -2,7 +2,7 @@
 
 class MultipleQuestsQuest extends Quest implements QuestInterface {
 
-    constructor(public quests: Quest[], description: string, reward: number = 0, questCompletedRequired?: number) {
+    constructor(public quests: Quest[], description: string, reward = 0, questCompletedRequired?: number) {
         super(questCompletedRequired ?? quests.length, reward);
 
         // Hide the quest ready to claim notifications

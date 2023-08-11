@@ -6,7 +6,7 @@ class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
     customReward: () => void;
     includeBreeding: boolean;
 
-    constructor(pokemonName: PokemonNameType, capturesNeeded = 1, includeBreeding = false, reward: number = 0) {
+    constructor(pokemonName: PokemonNameType, capturesNeeded = 1, includeBreeding = false, reward = 0) {
         super(capturesNeeded, reward);
         this.pokemon = pokemonMap[pokemonName];
         this.focus = ko.pureComputed(() => App.game.statistics.pokemonCaptured[this.pokemon.id]() - (includeBreeding ? 0 : App.game.statistics.pokemonHatched[this.pokemon.id]()));

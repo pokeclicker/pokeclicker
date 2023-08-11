@@ -7,7 +7,7 @@ type QuestOptionalArgument = {
 
 abstract class Quest {
     public static questObservable: KnockoutObservable<Quest> = ko.observable();
-    
+
     index: number;
     amount: number
     customDescription?: string;
@@ -242,7 +242,7 @@ abstract class Quest {
         this._onLoad = onLoad;
         return this;
     }
-    
+
     withCustomReward(customReward: () => void): Quest {
         this.customReward = typeof customReward === 'function' ? customReward : undefined;
         return this;
@@ -250,7 +250,7 @@ abstract class Quest {
 
     withOptionalArgs(optionalArgs: QuestOptionalArgument): Quest {
         this.optionalArgs = optionalArgs;
-        return this
+        return this;
     }
 
     withInitialValue(initialValue: number): Quest {

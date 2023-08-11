@@ -1,6 +1,6 @@
 class DefeatDungeonBossQuest extends Quest implements QuestInterface {
 
-    constructor(public dungeon: string, public dungeonBoss : PokemonNameType | string, reward: number = 0) {
+    constructor(public dungeon: string, public dungeonBoss : PokemonNameType | string, reward = 0) {
         super(1, reward);
         this.focus = ko.observable(0);
     }
