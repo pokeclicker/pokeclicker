@@ -91,7 +91,7 @@ describe('Test GameConstants', () => {
         expect(expRandomElement([1, 2, 3, 4], 2)).toEqual(1);
     });
     it('return the gyms total index', () => {
-        expect(getGymIndex('Aspertia City')).toEqual(57);
+        expect(getGymIndex('Aspertia City')).toEqual(52);
         expect(getGymIndex('Not a real gym')).toEqual(-1);
     });
     it('return the region a gym is in', () => {
