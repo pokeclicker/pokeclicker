@@ -45,7 +45,7 @@ export default class OakItems implements Feature {
                 false, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 60, 1),
             new OakItem(OakItemType.Shiny_Charm, 'Shiny Charm', 'Encounter shinies more often',
                 true, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 70, 150),
-            new OakItem(OakItemType.Blaze_Cassette, 'Blaze Cassette', 'Hatch eggs faster',
+            new OakItem(OakItemType.Magma_Stone, 'Magma Stone', 'Hatch eggs faster',
                 false, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 80, 10),
             new OakItem(OakItemType.Cell_Battery, 'Cell Battery', 'More passive mining energy regen',
                 false, [1.5, 1.6, 1.7, 1.8, 1.9, 2], 1, 90, 20),
@@ -63,7 +63,7 @@ export default class OakItems implements Feature {
         this.addMultiplier('exp', OakItemType.Exp_Share);
         this.addMultiplier('money', OakItemType.Amulet_Coin);
         this.addMultiplier('shiny', OakItemType.Shiny_Charm);
-        this.addMultiplier('eggStep', OakItemType.Blaze_Cassette);
+        this.addMultiplier('eggStep', OakItemType.Magma_Stone);
 
         this.itemList.forEach((i) => i.levelKO.subscribe(() => this.maxLevelOakItems(this.itemList.filter((i2) => i2.isMaxLevel()).length)));
     }

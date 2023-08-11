@@ -936,6 +936,16 @@
          })
      %>
 
+        <%- include('templates/mapOverlay',
+            { name: "Secret Berry Shop"
+            , x: 29, y: 7
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Secret Berry Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Secret Berry Shop') }"
+            , visible:  "App.game.statistics.routeKills['sinnoh'][217]() >= 10"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
+
      <%- include('templates/mapOverlay',
          { name: "Professor Rowan's Blimp"
          , x: 12, y: 53
@@ -1023,6 +1033,16 @@
          , databind: "click: () => TemporaryBattleList['Ash Ketchum Sinnoh'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Ash Ketchum Sinnoh'] && TemporaryBattleList['Ash Ketchum Sinnoh'].isVisible()"
          , image: "assets/images/map/ashketchumoverworld.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Anomaly Mewtwo"
+         , x: 39, y: 26
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Anomaly Mewtwo 4'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Anomaly Mewtwo 4'] && TemporaryBattleList['Anomaly Mewtwo 4'].isVisible()"
+         , image: "assets/images/map/mewtwoy.png"
          })
      %>
 

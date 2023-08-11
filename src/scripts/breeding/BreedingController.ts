@@ -165,7 +165,7 @@ class BreedingController {
             case 'stepsPerAttack': return `Steps/Att: ${(pokemon.getEggSteps() / (pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
-            case 'evs': return `EVs: ${pokemon.evs()}`;
+            case 'evs': return `EVs: ${pokemon.evs().toLocaleString('en-US')}`;
         }
     }
 
