@@ -313,6 +313,7 @@ namespace GameConstants {
         Outdoors: EnvironmentData,
         Cave: EnvironmentData,
         Indoors: EnvironmentData,
+        JubilifeVillage: EnvironmentData,
         ObsidianFieldlands: EnvironmentData,
         CrimsonMirelands: EnvironmentData,
         CobaltCoastlands: EnvironmentData,
