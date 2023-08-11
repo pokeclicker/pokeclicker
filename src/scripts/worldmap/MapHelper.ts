@@ -91,7 +91,7 @@ class MapHelper {
             ([, regions]) => regions[player.region]?.has(area)
         ) || [];
 
-        return (env as GameConstants.Environment);
+        return (env as GameConstants.Environment || 'Outdoors'); // Default to Outdoors so we don't have to list all "other" routes for Burmy
     }
 
     public static getCurrentSubEnvironment(): GameConstants.SubEnvironment {
