@@ -718,7 +718,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.johto]: new Set(),
         [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout', 'Mt. Battle']),
         [Region.sinnoh]: new Set(['Stark Mountain']),
-        [Region.unova]: new Set(),
+        [Region.unova]: new Set(['Reversal Mountain']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(['Wela Volcano Park']),
         [Region.galar]: new Set(['Motostoke']),
@@ -760,12 +760,12 @@ export const Environments: Record<string, EnvironmentData> = {
     Desert: {
         [Region.kanto]: new Set(),
         [Region.johto]: new Set(),
-        [Region.hoenn]: new Set([111, 135, 'Outskirt Stand', 'Pyrite Town', 'Pyrite Town Battles', 'Orre Colosseum']),
+        [Region.hoenn]: new Set([111, 135, 'Outskirt Stand', 'Pyrite Town', 'Orre Colosseum']),
         [Region.sinnoh]: new Set([228]),
-        [Region.unova]: new Set([4, 25, 'Lentimas Town', 'Reversal Mountain']),
+        [Region.unova]: new Set([4, 25, 'Lentimas Town']),
         [Region.kalos]: new Set([13]),
         [Region.alola]: new Set([23]),
-        [Region.galar]: new Set([23, 25, 39, 'Dusty Bowl', 'Stow-on-Side']),
+        [Region.galar]: new Set([23, 25, 39, 'Stow-on-Side']),
     },
 
     PowerPlant: {
@@ -782,7 +782,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Citadark Isle Dome']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Town Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Citadark Isle Dome']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
