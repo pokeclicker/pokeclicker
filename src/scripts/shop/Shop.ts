@@ -8,6 +8,9 @@ class Shop extends TownContent {
         return this.name ?? 'Poké Mart';
     }
     public isVisible(): boolean {
+        if (!super.isVisible()) {
+            return false;
+        }
         return !(this.hideBeforeUnlocked && !this.isUnlocked());
     }
     public onclick(): void {
