@@ -8,6 +8,7 @@
                 </button>
             </div>
             <div class="modal-body p-0" style="background-color: inherit;">
+                <!-- ko if: HeldItem.heldItemSelected() -->
                 <img data-bind="attr: { src: HeldItem.heldItemSelected().image }" width="40%"/>
                 <br/>
                 <div class="sticky-top" style="background-color: inherit;">
@@ -66,6 +67,7 @@
                     </div>
                   </div>
                 </div>
+                <!-- /ko -->
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                       <tr class="text-light">
