@@ -1576,11 +1576,12 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 187
+    'Crown Shrine',
+    'Max Lair', // 188
 ];
 
 export const HisuiDungeons = [
-    'Floaro Gardens', // 188
+    'Floaro Gardens', // 189
     'Oreburrow Tunnel',
     'Heartwood',
     'Ancient Solaceon Ruins',
@@ -1602,7 +1603,7 @@ export const HisuiDungeons = [
     'Ancient Lake Valor',
     'Ancient Lake Acuity',
     'Temple of Sinnoh',
-    'Turnback Cave', // 210
+    'Turnback Cave', // 211
 ];
 
 export const PaldeaDungeons = [
@@ -2018,6 +2019,9 @@ export const TemporaryBattles = [
     'Galarian Moltres 2',
     'Galarian Moltres 3',
     'Regigigas',
+    'Max Raid 1',
+    'Max Raid 2',
+    'Max Raid 3',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
