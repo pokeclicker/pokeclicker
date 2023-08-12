@@ -434,32 +434,6 @@ class PartyPokemon implements Saveable {
         return true;
     });
 
-    public hideFromProteinList = ko.pureComputed(() => {
-        // Check if search matches nickname or translated name
-        if (
-            !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this._translatedName())
-            && !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.displayName)
-        ) {
-            return true;
-        }
-        if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('vitaminRegionFilter').observableValue()) {
-                return true;
-            }
-        }
-        const type = Settings.getSetting('vitaminTypeFilter').observableValue();
-        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
-            return true;
-        }
-        if (this.vitaminUsesRemaining() == 0 && Settings.getSetting('vitaminHideMaxedPokemon').observableValue()) {
-            return true;
-        }
-        if (this._shiny() && Settings.getSetting('vitaminHideShinyPokemon').observableValue()) {
-            return true;
-        }
-        return false;
-    });
-
     public giveHeldItem = (heldItem: HeldItem): void => {
         if (!this.heldItem() || heldItem.name != this.heldItem().name) {
             if (heldItem && !heldItem.canUse(this)) {
