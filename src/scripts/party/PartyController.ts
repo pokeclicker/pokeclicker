@@ -173,11 +173,39 @@ class PartyController {
     static getHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
         if (modalUtils.observableState.heldItemModal === 'show') {
-            PartyController.heldItemSortedList = [...App.game.party.caughtPokemon];
+            PartyController.heldItemSortedList = PartyController.getHeldItemFilteredList();
             return PartyController.heldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
         }
         return PartyController.heldItemSortedList;
-    }).extend({ rateLimit: 500 });
+    }).extend({ rateLimit: 100 });
+
+    static getHeldItemFilteredList(): Array<PartyPokemon> {
+        return [...App.game.party.caughtPokemon].filter((pokemon) => {
+            if (!HeldItem.heldItemSelected()?.canUse(pokemon)) {
+                return false;
+            }
+            if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+                return false;
+            }
+            if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
+                if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
+                    return false;
+                }
+            }
+            const type = Settings.getSetting('heldItemTypeFilter').observableValue();
+            if (type > -2 && !pokemonMap[pokemon.name].type.includes(type)) {
+                return false;
+            }
+            if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && pokemon.heldItem()) {
+                return false;
+            }
+            if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && pokemon.heldItem() !== HeldItem.heldItemSelected()) {
+                return false;
+            }
+
+            return true;
+        });
+    }
 
     private static consumableSortedList = [];
     static getConsumableSortedList = ko.pureComputed(() => {
