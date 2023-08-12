@@ -5687,13 +5687,6 @@ dungeonList['Under Colosseum'] = new Dungeon('Under Colosseum',
     ],
     91500, 134);
 
-dungeonList['Orre Colosseum'] = new Dungeon('Orre Colosseum', //Difficulty comperable to P2 Laboratory
-    [],
-    {},
-    5403000,
-    [],
-    396500, 134);
-
 dungeonList['Gateon Port Battles'] = new Dungeon('Gateon Port Battles',
     [
         new DungeonTrainer('Chaser',
