@@ -169,7 +169,7 @@ class PartyPokemon implements Saveable {
         const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
         for (let i = this.level - 1; i < levelRequirements[levelType].length; i++) {
             if (levelRequirements[levelType][i] > this.exp) {
-                return i;
+                return Math.min(i, App.game.badgeCase.maxLevel());
             }
         }
         return this.level;
@@ -177,7 +177,9 @@ class PartyPokemon implements Saveable {
 
     public gainExp(exp: number) : number {
         const expGained = exp * this.getExpMultiplier();
-        this.exp += expGained;
+        if (this.level < App.game.badgeCase.maxLevel()) {
+            this.exp += expGained;
+        }
         const oldLevel = this.level;
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
