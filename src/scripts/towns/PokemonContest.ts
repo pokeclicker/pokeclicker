@@ -1,9 +1,25 @@
 class PokemonContest implements Feature {
-    name: 'Pokemon Contest';
-    saveKey: 'pokemonContest';
+    name = 'Pokemon Contest';
+    saveKey = 'pokemonContest';
 
     public lastEnteredDate: KnockoutObservable<Date>;
     public entries: KnockoutObservableArray<ContestEntry>;
+
+    public prizes = [
+        new PokemonContestPrizes('10 Rare Candy',
+            'Get 10 Rare Candy by catching a Machop! (real requirement will be added later)',
+            'Rare_Candy',
+            10,
+            new ObtainedPokemonRequirement('Machop')
+        ),
+        new PokemonContestPrizes('Secret Mega Stone',
+            'Get a secret Mega Stone for reaching Kalos. (real requirement will be added later)',
+            'Altarianite',
+            10,
+            new MaxRegionRequirement(GameConstants.Region.kalos),
+            new MaxRegionRequirement(GameConstants.Region.kalos)
+        ),
+    ];
 
     constructor() {
         this.lastEnteredDate = ko.observable(undefined);
@@ -15,7 +31,7 @@ class PokemonContest implements Feature {
     }
 
     canAccess(): boolean {
-        return true;
+        return PokemonContestController.requirements.isCompleted();
     }
 
     update(delta: number): void {
@@ -23,18 +39,29 @@ class PokemonContest implements Feature {
 
     defaults: Record<string, any>;
     toJSON(): Record<string, any> {
-        throw new Error('Method not implemented.');
+        return {
+            prizes: this.prizes.map(p => p.toJSON()),
+        };
     }
     fromJSON(json: Record<string, any>): void {
-        throw new Error('Method not implemented.');
+        if (!json) {
+            return;
+        }
+        this.prizes.forEach(p => {
+            const jsonPrize = json?.prizes.find(p2 => p2.title == p.title);
+            if (jsonPrize) {
+                p.fromJSON(jsonPrize);
+            }
+        });
     }
 }
 
 class PokemonContestController {
     static contestStyle: KnockoutObservable<ContestStyle> = ko.observable(undefined);
     static pokemonType: KnockoutObservable<PokemonType> = ko.observable(PokemonType.None);
-    static inProgress = ko.observable<boolean>(false);
+    //static inProgress = ko.observable<boolean>(false); //TODO: this should be used for some sort of animation or something
     static contestText: KnockoutObservable<string> = ko.observable(undefined);
+    static requirements = new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.hoenn), new DevelopmentRequirement()]);
 
     static entryAmount = 3;
 
@@ -65,18 +92,51 @@ class PokemonContestController {
         return App.game.pokemonContest.entries().reduce((sum, e) => sum + e.getStylePoints(), 0);
     });
 
-    private static canEnterContest() {
+    private static canEnterContest() : boolean {
+        if (App.game.pokemonContest.lastEnteredDate() && App.game.pokemonContest.lastEnteredDate().toDateString() == (new Date()).toDateString()) {
+            Notifier.notify({
+                title: 'You can\'t enter the contest',
+                message: 'You have already entered the contest today',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return false;
+        }
         return true;
     }
 
     public static startContest() {
-        if (PokemonContestController.canEnterContest()) {
+        if (!PokemonContestController.canEnterContest()) {
             return;
         }
+        //PokemonContestController.inProgress(true);
+        App.game.pokemonContest.lastEnteredDate(new Date());
+        //TODO: take some berries from the user
 
-        PokemonContestController.inProgress(true);
+        const stylePoints = PokemonContestController.getTotalStylePoints();
+        const contestTokensGained = stylePoints;
+        let result : GameConstants.ContestResults = undefined;
+        if (stylePoints > 700) {
+            result = GameConstants.ContestResults.Master;
+        } else if (stylePoints > 450) {
+            result = GameConstants.ContestResults.Hyper;
+        } else if (stylePoints > 200) {
+            result = GameConstants.ContestResults.Super;
+        } else {
+            result = GameConstants.ContestResults.Normal;
+        }
 
-
+        App.game.wallet.gainContestTokens(contestTokensGained);
+        GameHelper.incrementObservable(App.game.statistics.contestResults[result], 1);
+        const message = `Your Result is ${GameConstants.ContestResults[result]}!\n` +
+            `You gained ${contestTokensGained} Contest Tokens.\n` +
+            'Please check our Reward stand to see if you won anything new.\n' +
+            'I hope to see you again tomorrow.';
+        Notifier.notify({
+            title: 'Contest is over!',
+            message: message,
+            type: NotificationConstants.NotificationOption.success,
+            timeout: GameConstants.MINUTE * 3,
+        });
     }
 }
 
@@ -143,7 +203,7 @@ enum ContestStyle {
 
 class PokemonContestTownContent extends TownContent {
     constructor() {
-        super([new DevelopmentRequirement()]);
+        super([PokemonContestController.requirements]);
     }
     public cssClass(): string {
         return 'btn btn-primary';
@@ -151,11 +211,55 @@ class PokemonContestTownContent extends TownContent {
     public text(): string {
         return 'Pokémon Contest';
     }
-    public isVisible(): boolean {
-        //return true;
-        return new DevelopmentRequirement().isCompleted();
-    }
     public onclick(): void {
         $('#pokemonContestModal').modal('show');
+    }
+}
+
+class PokemonContestPrizes {
+    private item: Item;
+    public claimed: KnockoutObservable<boolean> = ko.observable<boolean>(false);
+
+    constructor(
+        public title: string,
+        public description: string,
+        itemName: ItemNameType,
+        private amount: number,
+        private claimRequirement: Requirement,
+        private visibleRequirement?: Requirement
+    ) {
+        this.item = ItemList[itemName];
+    }
+
+    getImage() {
+        return this.item.image;
+    }
+
+    isVisible() {
+        return this.item.isAvailable() && !this.item.isSoldOut() && (!this.visibleRequirement || this.visibleRequirement.isCompleted());
+    }
+
+    canBeClaimed() {
+        return !this.claimed() && this.claimRequirement.isCompleted();
+    }
+
+    claim() {
+        if (!this.canBeClaimed()) {
+            return;
+        }
+        this.claimed(true);
+        this.item.gain(this.amount);
+    }
+
+    toJSON(): Record<string, any> {
+        return {
+            title: this.title,
+            claimed: this.claimed(),
+        };
+    }
+    fromJSON(json: Record<string, any>): void {
+        if (json) {
+            this.claimed(json.claimed);
+        }
     }
 }
