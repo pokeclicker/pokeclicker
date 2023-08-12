@@ -118,6 +118,7 @@ import QuestRequirement from './requirements/QuestRequirement';
 import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
+import SeededDateSelectNRequirement from './requirements/SeededDateSelectNRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
@@ -125,6 +126,7 @@ import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
+import TotalMegaStoneObtainedRequirement from './requirements/TotalMegaStoneObtainedRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundItemValueType from './enums/UndergroundItemValueType';
 import UndergroundItem from './underground/UndergroundItem';
@@ -317,6 +319,7 @@ Object.assign(<any>window, {
     QuestLevelRequirement,
     RouteKillRequirement,
     SeededDateRequirement,
+    SeededDateSelectNRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     ShadowPokemonRequirement,
@@ -324,6 +327,7 @@ Object.assign(<any>window, {
     SubregionRequirement,
     StarterRequirement,
     TokenRequirement,
+    TotalMegaStoneObtainedRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundItemValueType,
     UndergroundItem,

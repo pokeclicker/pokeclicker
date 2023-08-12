@@ -22,7 +22,7 @@ class BerryMasterShop extends Shop {
         const berryListIndex = GameConstants.BerryTraderLocations[this.parent.name];
         if (berryListIndex > -1) {
             const berryDeals = BerryDeal.list[berryListIndex]();
-            const berryTraderPokemon = berryDeals.filter(d => d.item.itemType instanceof PokemonItem).map(d => d.item.itemType.name) as PokemonNameType[];
+            const berryTraderPokemon = berryDeals.filter(d => d.item.itemType instanceof PokemonItem).map(d => d.item.itemType.type) as PokemonNameType[];
 
             if (!RouteHelper.listCompleted(berryTraderPokemon, false)) {
                 itemStatusArray.push(areaStatus.uncaughtPokemon);

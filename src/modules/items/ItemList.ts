@@ -98,7 +98,7 @@ ItemList.Absolite           = new MegaStoneItem(MegaStoneType.Absolite, 'Absol',
 ItemList.Aerodactylite      = new MegaStoneItem(MegaStoneType.Aerodactylite, 'Aerodactyl', 10000);
 ItemList.Aggronite          = new MegaStoneItem(MegaStoneType.Aggronite, 'Aggron', 10000);
 ItemList.Alakazite          = new MegaStoneItem(MegaStoneType.Alakazite, 'Alakazam', 10000);
-//ItemList.Altarianite        = new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
+ItemList.Altarianite        = new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
 ItemList.Ampharosite        = new MegaStoneItem(MegaStoneType.Ampharosite, 'Ampharos', 10000);
 ItemList.Audinite           = new MegaStoneItem(MegaStoneType.Audinite, 'Audino', 10000);
 //ItemList.Banettite          = new MegaStoneItem(MegaStoneType.Banettite, 'Banette', 10000);
@@ -213,6 +213,7 @@ ItemList.Dragon_Memory_Silvally = new QuestItem('Dragon_Memory_Silvally', 'Drago
 ItemList.Max_Mushroom_IoA = new QuestItem('Max_Mushroom_IoA', 'Max Mushroom', 'A Mushroom that contains the power of Dynamax forms', 'The Dojo\'s Armor');
 ItemList.Shaderoot_Carrot_Calyrex = new QuestItem('Shaderoot_Carrot_Calyrex', 'Shaderoot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a gloomy field.', 'The Crown of Galar');
 ItemList.Iceroot_Carrot_Calyrex = new QuestItem('Iceroot_Carrot_Calyrex', 'Iceroot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a field covered in snow.', 'The Crown of Galar');
+ItemList.Wishing_Piece = new QuestItem('Wishing_Piece', 'Wishing Piece', 'Used for Gigantamax stuff', 'TODO Gigantamax questline name');
 
 // Vitamins
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {

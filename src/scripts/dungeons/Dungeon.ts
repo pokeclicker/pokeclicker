@@ -5687,13 +5687,6 @@ dungeonList['Under Colosseum'] = new Dungeon('Under Colosseum',
     ],
     91500, 134);
 
-dungeonList['Orre Colosseum'] = new Dungeon('Orre Colosseum', //Difficulty comperable to P2 Laboratory
-    [],
-    {},
-    5403000,
-    [],
-    396500, 134);
-
 dungeonList['Gateon Port Battles'] = new Dungeon('Gateon Port Battles',
     [
         new DungeonTrainer('Chaser',
@@ -12433,6 +12426,24 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Trevenant', 161099869, 60),
         new DungeonBossPokemon('Weavile', 161099869, 60),
         new DungeonBossPokemon('Calyrex', 169578810, 80, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 8) }),
+    ],
+    2200000, 55);
+
+// Function, because we don't have 'player' on load
+const maxLairQuestStepRandomIndex = (index: number) => {
+    SeededRand.seed(+player.trainerId);
+    return SeededRand.shuffleArray([0, 1])[index];
+};
+dungeonList['Max Lair'] = new Dungeon('Max Lair',
+    ['Machop'],
+    {
+        common: [{loot: 'Lucky_egg'}],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Machoke', 161099869, 60),
+        new DungeonBossPokemon('Gigantamax Machamp', 161099869, 60, {requirement: new QuestLineStepCompletedRequirement('TODO Gigantamax questline name', () => maxLairQuestStepRandomIndex(0))}),
+        new DungeonBossPokemon('Gigantamax Snorlax', 161099869, 60, {requirement: new QuestLineStepCompletedRequirement('TODO Gigantamax questline name', () => maxLairQuestStepRandomIndex(1))}),
     ],
     2200000, 55);
 

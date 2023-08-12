@@ -5530,6 +5530,45 @@ TemporaryBattleList.Regigigas = new TemporaryBattle(
         imageName: '../pokemon/486',
     }
 );
+TemporaryBattleList['Max Raid 1'] = new TemporaryBattle(
+    'Max Raid 1',
+    [new GymPokemon('Gigantamax Machamp', 1, 100)],
+    undefined,
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name'), new SeededDateSelectNRequirement(0, 3, 2)],
+    undefined,
+    {
+        hideTrainer: true,
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid 2'] = new TemporaryBattle(
+    'Max Raid 2',
+    [new GymPokemon('Gigantamax Snorlax', 1, 100)],
+    undefined,
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name'), new SeededDateSelectNRequirement(1, 3, 2)],
+    undefined,
+    {
+        hideTrainer: true,
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid 3'] = new TemporaryBattle(
+    'Max Raid 3',
+    [new GymPokemon('Gigantamax Eevee', 1, 100)],
+    'You gained a Wishing Piece!',
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name'), new SeededDateSelectNRequirement(2, 3, 2)],
+    undefined,
+    {
+        hideTrainer: true,
+        returnTown: 'Professor Magnolia\'s House',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
 
 // Hisui Temporary Battles
 TemporaryBattleList['Volo 1'] = new TemporaryBattle(

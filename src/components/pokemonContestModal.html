@@ -59,7 +59,31 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="contest-prizes-tab" role="tabpanel">
-                        <span>prizes tab</span>
+                        <h2>Rewards</h2>
+                        <div class="row ml-0 mr-0">
+                            <!-- ko foreach: App.game.pokemonContest.prizes.filter(r => !r.claimed() && r.isVisible()) -->
+                            <div class="col-md-3 border card">
+                                <div class="card-header" data-bind="text: $data.title"></div>
+                                <div class="card-body">
+                                    <div data-bind="text: $data.description"></div>
+                                    <div><img height="80px" data-bind="attr:{ src: $data.getImage() }"></img></div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-primary btn-block" data-bind="click: $data.claim, attr:{ disabled: !$data.canBeClaimed() }">Claim</button>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <h2>Claimed rewards</h2>
+                        <div class="row ml-0 mr-0">
+                            <!-- ko foreach: App.game.pokemonContest.prizes.filter(r => r.claimed()) -->
+                            <div class="col-md-3 border">
+                                <h4 data-bind="text: $data.title"></h4>
+                                <div data-bind="text: $data.description"></div>
+                                <div><img data-bind="attr:{ src: $data.getImage() }"></img></div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="contest-help-tab" role="tabpanel">
                         <span>help tab</span>

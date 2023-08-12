@@ -8,6 +8,9 @@ class Shop extends TownContent {
         return this.name ?? 'Poké Mart';
     }
     public isVisible(): boolean {
+        if (!super.isVisible()) {
+            return false;
+        }
         return !(this.hideBeforeUnlocked && !this.isUnlocked());
     }
     public onclick(): void {
@@ -25,7 +28,7 @@ class Shop extends TownContent {
     }
 
     public areaStatus() {
-        const itemStatusArray = [areaStatus.completed];
+        const itemStatusArray = [super.areaStatus()];
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         this.items.forEach(i => {
             if (i instanceof PokemonItem) {

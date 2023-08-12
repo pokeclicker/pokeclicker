@@ -2360,6 +2360,12 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 211);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 212);
 
+            // Max Raids
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 340);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 341);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 342);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 189);
+
             // ZCrystals
             const crystalOrder = [
                 'Normalium Z',
@@ -2437,6 +2443,17 @@ class Update implements Saveable {
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 146);
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 147);
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 148);
+
+            // Remove Orre Colosseum Dungeon
+            saveData.statistics.dungeonsCleared.splice(73, 1);
+
+            // Adding Orre XD badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 49);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 50);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 51);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 52);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 53);
+
         },
     };
 
