@@ -211,11 +211,33 @@ class PartyController {
     static getConsumableSortedList = ko.pureComputed(() => {
         // If the consumable modal is open, we should sort it.
         if (modalUtils.observableState.consumableModal === 'show') {
-            PartyController.consumableSortedList = [...App.game.party.caughtPokemon];
+            PartyController.consumableSortedList = PartyController.getConsumableFilteredList();
             return PartyController.consumableSortedList.sort(PartyController.compareBy(Settings.getSetting('consumableSort').observableValue(), Settings.getSetting('consumableSortDirection').observableValue()));
         }
         return PartyController.consumableSortedList;
-    }).extend({ rateLimit: 500 });
+    }).extend({ rateLimit: 100 });
+
+    static getConsumableFilteredList(): Array<PartyPokemon> {
+        return [...App.game.party.caughtPokemon].filter((pokemon) => {
+            if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+                return false;
+            }
+            if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
+                if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('consumableRegionFilter').observableValue()) {
+                    return false;
+                }
+            }
+            const type = Settings.getSetting('consumableTypeFilter').observableValue();
+            if (type > -2 && !pokemonMap[pokemon.name].type.includes(type)) {
+                return false;
+            }
+            if (Settings.getSetting('consumableHideShinyPokemon').observableValue() && pokemon.shiny) {
+                return false;
+            }
+
+            return true;
+        });
+    }
 
     private static pokemonsWithHeldItemSortedList = [];
     static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {

@@ -477,26 +477,6 @@ class PartyPokemon implements Saveable {
         }
     }
 
-    public hideFromConsumableList = ko.pureComputed(() => {
-        if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(this.displayName)) {
-            return true;
-        }
-        if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('consumableRegionFilter').observableValue()) {
-                return true;
-            }
-        }
-        const type = Settings.getSetting('consumableTypeFilter').observableValue();
-        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
-            return true;
-        }
-        if (Settings.getSetting('consumableHideShinyPokemon').observableValue() && this.shiny) {
-            return true;
-        }
-
-        return false;
-    });
-
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
