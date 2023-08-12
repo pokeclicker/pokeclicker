@@ -140,7 +140,6 @@ class Party implements Feature {
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
         let shadowExpGained = 0;
 
-        const maxLevel = App.game.badgeCase.maxLevel();
         for (const pokemon of this.caughtPokemon) {
             const exp = pokemon.gainExp(expTotal);
             if (pokemon.shadow >= GameConstants.ShadowStatus.Shadow) {
