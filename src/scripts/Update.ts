@@ -2455,7 +2455,9 @@ class Update implements Saveable {
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 53);
 
             // Fix None category color being incomplete
-            saveData.categories.categories[0].color = '#333333';
+            if (saveData.categories.categories[0].color === '#333') {
+                saveData.categories.categories[0].color = '#333333';
+            }
         },
     };
 
