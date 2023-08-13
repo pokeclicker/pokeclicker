@@ -2412,7 +2412,7 @@ class Update implements Saveable {
                     helper.sortOption++;
                 }
             });
-          
+
             //Replace Blaze Cassette with Magma Stone
             saveData.oakItems.Magma_Stone = saveData.oakItems.Blaze_Cassette;
             delete saveData.oakItems.Blaze_Cassette;
