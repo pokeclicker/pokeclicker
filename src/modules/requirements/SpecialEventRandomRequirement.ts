@@ -12,4 +12,8 @@ export default class SpecialEventRandomRequirement extends SpecialEventRequireme
     public getProgress(): number {
         return +(this.isAvailable && super.getProgress());
     }
+
+    public hint(): string {
+        return this.isAvailable ? super.hint() : 'The Pokémon seems to be avoiding the area this year.';
+    }
 }
