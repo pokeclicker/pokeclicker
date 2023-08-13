@@ -1,7 +1,6 @@
 <div class="modal noselect fade" id="consumableModal" tabindex="-1" role="dialog" aria-labelledby="consumableModal">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
         <div class="modal-content">
-            <!-- ko if: modalUtils.observableState['consumableModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -69,15 +68,14 @@
                           <th class="text-left bg-dark align-middle">Attack</th>
                       </tr>
                   </thead>
-                  <tbody data-bind="foreach: PartyController.getConsumableSortedList()">
-                    <tr class="clickable" data-bind="click: () => { $data.useConsumable(ConsumableController.currentlySelected(), ConsumableController.getMultiplier()); }, hidden: $data.hideFromConsumableList()">
+                  <tbody data-bind="foreach: lazyLoad($element, PartyController.getConsumableSortedList, { reset: modalUtils.observableState.consumableModalObservable })">
+                    <tr class="clickable" data-bind="click: () => { $data.useConsumable(ConsumableController.currentlySelected(), ConsumableController.getMultiplier()); }">
                       <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.calculateAttack(true).toLocaleString('en-US')">Attack</td>
                     </tr>
                   </tbody>
                 </table>
             </div>
-            <!-- /ko -->
         </div>
     </div>
 </div>

@@ -3056,7 +3056,9 @@ const ProfKrane = new NPC('Professor Krane', [
 const DrKaminko = new NPC('Dr. Kaminko', [
     'Leave me alone! I\'m WORKING!']
 );
-
+const OrreColosseumSpectator = new NPC('Colosseum Spectator', [
+    'Only the toughest trainers in Orre are allowed to fight here! I\'m just watching until I get stronger.']
+);
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -3371,7 +3373,7 @@ TownList['Gateon Port'] = new Town(
     'Gateon Port',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles'])],
+    [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles']), new DockTownContent()],
     {
         requirements: [new QuestLineStartedRequirement('Shadows in the Desert')],
         npcs: [GateonSailor, Verich],
@@ -3410,7 +3412,16 @@ TownList['S. S. Libra'] = new Town(
         npcs: [SearchLibra],
     }
 );
-
+TownList['Orre Colosseum'] = new Town(
+    'Orre Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [GymList['Cipher Admin Lovrina'], GymList['Cipher Admin Snattle'], GymList['Cipher Admin Gorigan'], GymList['Cipher Admin Ardos'], GymList['Cipher Admin Eldes']],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [OrreColosseumSpectator],
+    }
+);
 //Hoenn Dungeons
 TownList['Petalburg Woods'] = new DungeonTown(
     'Petalburg Woods',
@@ -3748,14 +3759,6 @@ TownList['Under Colosseum'] = new DungeonTown(
     GameConstants.HoennSubRegions.Orre,
     [
         new QuestLineCompletedRequirement('Shadows in the Desert'),
-    ]
-);
-TownList['Orre Colosseum'] = new DungeonTown(
-    'Orre Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement, //TODO Populate this
     ]
 );
 TownList['Gateon Port Battles'] = new DungeonTown(
@@ -8606,7 +8609,8 @@ TownList['Tunnel to the Top'] = new DungeonTown(
     'Tunnel to the Top',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)],
+    [new MoveToDungeon(dungeonList['Max Lair'])]
 );
 TownList['Crown Shrine'] = new DungeonTown(
     'Crown Shrine',
@@ -8617,6 +8621,12 @@ TownList['Crown Shrine'] = new DungeonTown(
     {
         npcs: [Calyrex4, Calyrex5, CrownShrineExplorer],
     }
+);
+TownList['Max Lair'] = new DungeonTown(
+    'Max Lair',
+    GameConstants.Region.galar,
+    GameConstants.GalarSubRegions.CrownTundra,
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name')]
 );
 
 //Hisui shops
