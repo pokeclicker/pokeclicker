@@ -53,6 +53,11 @@ enum BadgeEnums {
     'Elite_L_Disk',
     'Elite_R_Disk',
     'Elite_U_Disk',
+    'Elite_ColosseumLovrina',
+    'Elite_ColosseumSnattle',
+    'Elite_ColosseumGorigan',
+    'Elite_ColosseumArdos',
+    'Elite_ColosseumEldes',
     // Sinnoh
     'Coal',
     'Forest',

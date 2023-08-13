@@ -108,7 +108,7 @@ class BerryDeal {
     public static generateDeals(date: Date) {
         SeededRand.seedWithDate(date);
 
-        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve'], GameConstants.BerryTraderLocations['Secret Berry Shop']];
+        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve'], GameConstants.BerryTraderLocations['Secret Berry Shop'], GameConstants.BerryTraderLocations['Driftveil City']];
 
         // Removing old deals
         for (const town of berryMasterTowns) {
@@ -123,6 +123,7 @@ class BerryDeal {
         BerryDeal.list[GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']].push(...this.generatePinkanDeals());
         BerryDeal.list[GameConstants.BerryTraderLocations['Hearthome City']].push(...this.generateHearthomeDeals());
         BerryDeal.list[GameConstants.BerryTraderLocations['Secret Berry Shop']].push(...this.generateSecretBerryShopDeals());
+        BerryDeal.list[GameConstants.BerryTraderLocations['Driftveil City']].push(...this.generateDriftveilDeals());
     }
 
     private static generateGoldenrodDeals() {
@@ -227,6 +228,7 @@ class BerryDeal {
             ItemList.Masterball,
             1
         ));
+
         list.push(new BerryDeal(
             [this.randomBerry(fourthGen)],
             [SeededRand.intBetween(50, 100)],
@@ -234,21 +236,12 @@ class BerryDeal {
             1
         ));
 
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Basic)) {
-            list.push(new BerryDeal(
-                [this.randomBerry(fifthGen)],
-                [SeededRand.intBetween(10, 50)],
-                ItemList.Calcium,
-                1
-            ));
-
-            list.push(new BerryDeal(
-                [this.randomBerry(fifthGen)],
-                [SeededRand.intBetween(10, 50)],
-                ItemList.Carbos,
-                1
-            ));
-        }
+        list.push(new BerryDeal(
+            [this.randomBerry(fifthGen)],
+            [SeededRand.intBetween(10, 50)],
+            ItemList.Calcium,
+            1
+        ));
 
         return [SeededRand.fromArray(list)];
     }
@@ -311,6 +304,106 @@ class BerryDeal {
         ));
 
         return list;
+    }
+
+    private static generateDriftveilDeals() {
+        const firstGen = Farming.getGeneration(0);
+        const secondGen = Farming.getGeneration(1);
+        const thirdGen = Farming.getGeneration(2);
+        const fourthGen = Farming.getGeneration(3);
+        const fifthGen = [ // only use berries that can grow in under a day so players have time to grow them
+            BerryType.Micle,
+            BerryType.Custap,
+            BerryType.Jaboca,
+            BerryType.Rowap,
+            BerryType.Kee,
+            BerryType.Maranga,
+        ];
+
+        const pokeballList = [
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                    this.randomBerry(thirdGen),
+                ],
+                [
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                    SeededRand.intBetween(5, 10),
+                ],
+                ItemList.Diveball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                    this.randomBerry(thirdGen),
+                ],
+                [
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                    SeededRand.intBetween(5, 10),
+                ],
+                ItemList.Lureball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                    this.randomBerry(thirdGen),
+                ],
+                [
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                    SeededRand.intBetween(5, 10),
+                ],
+                ItemList.Nestball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                    this.randomBerry(thirdGen),
+                ],
+                [
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                    SeededRand.intBetween(5, 10),
+                ],
+                ItemList.Repeatball,
+                1
+            ),
+        ];
+
+        const vitaminList = [
+            new BerryDeal(
+                [this.randomBerry(fourthGen)],
+                [SeededRand.intBetween(50, 100)],
+                ItemList.Protein,
+                1
+            ),
+            new BerryDeal(
+                [this.randomBerry(fifthGen)],
+                [SeededRand.intBetween(10, 50)],
+                ItemList.Calcium,
+                1
+            ),
+            new BerryDeal(
+                [this.randomBerry(fifthGen)],
+                [SeededRand.intBetween(10, 50)],
+                ItemList.Carbos,
+                1
+            ),
+        ];
+
+        return [
+            SeededRand.fromArray(pokeballList),
+            SeededRand.fromArray(vitaminList),
+        ];
     }
 
     public static canUse(town: GameConstants.BerryTraderLocations, i: number): boolean {

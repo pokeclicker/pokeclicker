@@ -2,6 +2,7 @@
 ///<reference path="DungeonBossPokemon.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
@@ -3857,9 +3858,9 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
             ], { weight: 1}, 'Trudly', '(trudly)'),
         new DungeonTrainer('Cipher Peon',
             [
-                new GymPokemon('Loudred', 23925000, 22),
-                new GymPokemon('Girafarig', 23925000, 20),
-                new GymPokemon('Mawile', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Kirlia', 23925000, 22),
+                new GymPokemon('Linoone', 23925000, 20),
+                new GymPokemon('Natu', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Eloin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
@@ -5685,13 +5686,6 @@ dungeonList['Under Colosseum'] = new Dungeon('Under Colosseum',
             ], { weight: 1 }, 'Fein', '(wes)'),
     ],
     91500, 134);
-
-dungeonList['Orre Colosseum'] = new Dungeon('Orre Colosseum', //Difficulty comperable to P2 Laboratory
-    [],
-    {},
-    5403000,
-    [],
-    396500, 134);
 
 dungeonList['Gateon Port Battles'] = new Dungeon('Gateon Port Battles',
     [
@@ -9289,6 +9283,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Iron Plate', weight: 2},
             {loot: 'Insect Plate', weight: 2},
             {loot: 'Zap Plate'},
+            {loot: 'Great_Twisted_Spoon', ignoreDebuff : true, weight: 3, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemRequirement(1, 'Great_Twisted_Spoon', GameConstants.AchievementOption.less)])},
         ],
         legendary: [{loot: 'Revive'}],
     },
@@ -10142,8 +10137,25 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     },
     9003000,
     [
-        new DungeonBossPokemon('Ditto', 94836530, 50),
-        new DungeonBossPokemon('Zoroark', 95743340, 50),
+        new DungeonBossPokemon('Ditto', 94836530, 50,
+            { hide: true, requirement: new OneFromManyRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16, GameConstants.AchievementOption.less),
+                new QuestLineCompletedRequirement('An Unrivaled Power'),
+            ])}),
+        new DungeonBossPokemon('Zoroark', 95743340, 50,
+            { hide: true, requirement: new OneFromManyRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16, GameConstants.AchievementOption.less),
+                new QuestLineCompletedRequirement('An Unrivaled Power'),
+            ])}),
+        new DungeonTrainer('Anomaly Mewtwo',
+            [new GymPokemon('Mega Mewtwo X', 120000000, 70)],
+            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power')}, undefined, 'X'),
+        new DungeonTrainer('Anomaly Mewtwo',
+            [new GymPokemon('Mega Mewtwo Y', 120000000, 70)],
+            { hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16),
+                new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less),
+            ])}, undefined, 'Y'),
     ],
     725000, 20);
 
@@ -12414,6 +12426,24 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Trevenant', 161099869, 60),
         new DungeonBossPokemon('Weavile', 161099869, 60),
         new DungeonBossPokemon('Calyrex', 169578810, 80, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 8) }),
+    ],
+    2200000, 55);
+
+// Function, because we don't have 'player' on load
+const maxLairQuestStepRandomIndex = (index: number) => {
+    SeededRand.seed(+player.trainerId);
+    return SeededRand.shuffleArray([0, 1])[index];
+};
+dungeonList['Max Lair'] = new Dungeon('Max Lair',
+    ['Machop'],
+    {
+        common: [{loot: 'Lucky_egg'}],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Machoke', 161099869, 60),
+        new DungeonBossPokemon('Gigantamax Machamp', 161099869, 60, {requirement: new QuestLineStepCompletedRequirement('TODO Gigantamax questline name', () => maxLairQuestStepRandomIndex(0))}),
+        new DungeonBossPokemon('Gigantamax Snorlax', 161099869, 60, {requirement: new QuestLineStepCompletedRequirement('TODO Gigantamax questline name', () => maxLairQuestStepRandomIndex(1))}),
     ],
     2200000, 55);
 

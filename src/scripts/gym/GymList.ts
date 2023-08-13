@@ -768,6 +768,91 @@ GymList['Cipher Admin Venus'] = new Gym (
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Venus' }
 );
+GymList['Cipher Admin Lovrina'] = new Gym ( //Kalos E4 difficulty, plus 10% per Orre Colosseum boss
+    'Cipher Admin Lovrina',
+    'Cipher Admin Lovrina',
+    [
+        new GymPokemon('Shuckle', 30994948, 100),
+        new GymPokemon('Milotic', 30994948, 100),
+        new GymPokemon('Wobbuffet', 30994948, 100),
+        new GymPokemon('Blissey', 30994948, 100),
+        new GymPokemon('Misdreavus', 30994948, 100),
+        new GymPokemon('Meganium', 30994948, 100),
+    ],
+    BadgeEnums.Elite_ColosseumLovrina,
+    100000,
+    'I was so impressed by your toughness! Because you are so tough, I\'ll let you be the first member in my fan club! Doesn\'t that so make your day?',
+    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    undefined, undefined, { displayName: 'Challenge Lovrina' }
+);
+GymList['Cipher Admin Snattle'] = new Gym (
+    'Cipher Admin Snattle',
+    'Cipher Admin Snattle',
+    [
+        new GymPokemon('Electrode', 34094443, 100),
+        new GymPokemon('Gengar', 34094443, 100),
+        new GymPokemon('Muk', 34094443, 100),
+        new GymPokemon('Glalie', 34094443, 100),
+        new GymPokemon('Regirock', 34094443, 100),
+        new GymPokemon('Regice', 34094443, 100),
+    ],
+    BadgeEnums.Elite_ColosseumSnattle,
+    100000,
+    'In the near future, when I become the Governor of Orre, I shall appoint you as my official secretary. Let that be a motivation for you to constantly better your skills!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumLovrina)],
+    undefined, undefined, { displayName: 'Challenge Snattle' }
+);
+GymList['Cipher Admin Gorigan'] = new Gym (
+    'Cipher Admin Gorigan',
+    'Cipher Admin Gorigan',
+    [
+        new GymPokemon('Salamence', 37503887, 100),
+        new GymPokemon('Granbull', 37503887, 100),
+        new GymPokemon('Arcanine', 37503887, 100),
+        new GymPokemon('Tauros', 37503887, 100),
+        new GymPokemon('Hitmontop', 37503887, 100),
+        new GymPokemon('Gyarados', 37503887, 100),
+    ],
+    BadgeEnums.Elite_ColosseumGorigan,
+    100000,
+    'You\'re some kind of special! You\'re worthy of sharing my camaraderie as a friend.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumSnattle)],
+    undefined, undefined, { displayName: 'Challenge Gorigan' }
+);
+GymList['Cipher Admin Ardos'] = new Gym (
+    'Cipher Admin Ardos',
+    'Cipher Admin Ardos',
+    [
+        new GymPokemon('Sceptile', 41254276, 100),
+        new GymPokemon('Charizard', 41254276, 100),
+        new GymPokemon('Gengar', 41254276, 100),
+        new GymPokemon('Aerodactyl', 41254276, 100),
+        new GymPokemon('Tauros', 41254276, 100),
+        new GymPokemon('Starmie', 41254276, 100),
+    ],
+    BadgeEnums.Elite_ColosseumArdos,
+    120000,
+    'In all of Orre, I\'ve never seen a Pokémon Trainer of your caliber. You appear to be the biggest threat to Cipher. To make sure my underlings watch you with caution, I give you the title “Cipher\'s Biggest Enemy.”',
+    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumGorigan)],
+    undefined, undefined, { displayName: 'Challenge Ardos' }
+);
+GymList['Cipher Admin Eldes'] = new Gym (
+    'Cipher Admin Eldes',
+    'Cipher Admin Eldes',
+    [
+        new GymPokemon('Latios', 45379704, 100),
+        new GymPokemon('Latias', 45379704, 100),
+        new GymPokemon('Gengar', 45379704, 100),
+        new GymPokemon('Metagross', 45379704, 100),
+        new GymPokemon('Snorlax', 45379704, 100),
+        new GymPokemon('Tauros', 45379704, 100),
+    ],
+    BadgeEnums.Elite_ColosseumEldes,
+    150000,
+    'I\'m satisfied that I was able to battle to my heart\'s content. I would like to confer on you the title “Eldes\'s Top Rival.”',
+    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumArdos)],
+    undefined, undefined, { displayName: 'Challenge Eldes' }
+);
 //Sinnoh Gyms
 GymList['Oreburgh City'] = new Gym(
     'Roark',

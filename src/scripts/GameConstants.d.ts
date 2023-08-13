@@ -105,7 +105,7 @@ namespace GameConstants {
         'Battle Frontier',
         'Vitamins',
         'Pokerus',
-        'Shadow',
+        'Shadow Pokemon',
     }
     declare enum DungeonTile {
         empty = 0,
@@ -594,6 +594,7 @@ namespace GameConstants {
         'Pinkan Pokémon Reserve',
         'Hearthome City',
         'Secret Berry Shop',
+        'Driftveil City',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',
@@ -878,4 +879,10 @@ namespace GameConstants {
     declare const ZMOVE_COUNTERACTIVE_MULTIPLIER: number;
     declare const ZMOVE_ACTIVE_TIME: number;
     declare const ZMOVE_COUNTERACTIVE_TIME: number;
+    declare enum ContestResults {
+        Normal,
+        Super,
+        Hyper,
+        Master,
+    }
 }
