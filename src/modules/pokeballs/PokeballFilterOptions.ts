@@ -4,7 +4,6 @@ import Setting from '../settings/Setting';
 import GameHelper from '../GameHelper';
 import SettingOption from '../settings/SettingOption';
 import KeyItemType from '../enums/KeyItemType';
-import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import Requirement from '../requirements/Requirement';
 import CustomRequirement from '../requirements/CustomRequirement';
 import PokemonType from '../enums/PokemonType';
@@ -30,7 +29,7 @@ class PokeballFilterOption<T, M = T> {
     }
 }
 
-const tempShadowRequirement = new DevelopmentRequirement();
+const tempShadowRequirement = new QuestLineStepCompletedRequirement('Shadows in the Desert', 3);
 
 const encounterTypeRequirements: Partial<Record<EncounterType, Requirement>> = {
     [EncounterType.trainer]: tempShadowRequirement,

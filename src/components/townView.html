@@ -77,7 +77,7 @@
            <div class="list-group" data-bind="foreach: player.town().npcs">
                <!-- ko if: $data.isVisible() -->
                 <button class="btn btn-info"
-                        data-bind="text: $data.name, click: $data.openDialog">
+                        data-bind="text: $data.name, click: () => NPCController.openDialog($data)">
                     NPC
                 </button>
                 <!-- /ko -->
@@ -132,6 +132,12 @@
                 placement: 'bottom',
                 trigger: 'hover'
             }">
+          </li>
+          <!-- /ko -->
+          <!-- ko if: player.town().dungeon.allAvailableShadowPokemon().some(p => App.game.party.getPokemonByName(p)?.shadow < GameConstants.ShadowStatus.Shadow) -->
+          <li class="list-inline-item">
+            <img class="boss" src="assets/images/status/shadow.svg"/>
+            <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src="assets/images/npcs/specialNPCs/Mysterious Trainer.png"/>
           </li>
           <!-- /ko -->
         </ul>

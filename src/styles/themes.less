@@ -50,15 +50,22 @@
   }
 }
 
+/* Fixes font-light being too bright / unreadable for table-warnings theme specific colour themes */
+.journal, .lux, .materia, .pulse, .sketchy, .spacelab, .united {
+  .table-warning.text-light {
+    color: black !important;
+  }
+}
+
 /* Individual themes */
 .cerulean {
-    /* Evolution items */
-    #evo-item-list, #evo-pokemon-list {
-        .item-selected, .pokemon-selected {
-            color: whitesmoke;
-            background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
-        }
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .item-selected, .pokemon-selected {
+      color: whitesmoke;
+      background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
     }
+  }
 }
 
 .cosmo {
@@ -210,13 +217,29 @@
     }
   }
 
+  //Still had double close for Battle Frontier
+  .close span {
+    visibility: hidden !important;
+  }
+
+  //Fixes margins causing white to float off modal
+  #battleContainer table .row {
+    margin: 0 !important
+  }
+
+  //Fixes save containers having a white table
+  .save-container table td {
+    background-color:unset !important;
+  }
+
   .modal-header {
     border-radius: 0;
   }
 
+   // Font was not visible on the footer of battle-views
   .pageItemFooter {
-    // Font was not visible on the footer of battle-views
-    color: rgba(0, 0, 0);
+    background-color: white; // Ensures background is white
+    color: black;
     font-weight: 700;
   }
 

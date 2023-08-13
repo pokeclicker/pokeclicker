@@ -142,3 +142,35 @@
     filter: brightness(50%) opacity(90%);
   }
 }
+
+#wanderRow {
+  #wanderPokemonList {
+    width: 100%;
+
+    .list-inline-item {
+      position: relative;
+      margin-top: 7px;
+
+      .lock {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+      }
+
+      .shiny {
+        position: absolute;
+        top: 10px;
+        right: -5px;
+      }
+    }
+
+    .list-inline-item:nth-child(n+6) {
+      margin-top: 14px;
+    }
+
+    .no-pokerus {
+      margin-bottom: -10px;
+    }
+  }
+}
