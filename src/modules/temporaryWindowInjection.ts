@@ -118,6 +118,7 @@ import QuestRequirement from './requirements/QuestRequirement';
 import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
+import SeededDateSelectNRequirement from './requirements/SeededDateSelectNRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
@@ -318,6 +319,7 @@ Object.assign(<any>window, {
     QuestLevelRequirement,
     RouteKillRequirement,
     SeededDateRequirement,
+    SeededDateSelectNRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     ShadowPokemonRequirement,

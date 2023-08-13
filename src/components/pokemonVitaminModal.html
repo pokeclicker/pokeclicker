@@ -1,7 +1,6 @@
 <div class="modal noselect fade" id="pokemonVitaminModal" tabindex="-1" role="dialog" aria-labelledby="pokemonVitaminModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
         <div class="modal-content">
-            <!-- ko if: modalUtils.observableState['pokemonVitaminModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp; <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -90,7 +89,6 @@
                             <tr class="clickable" data-bind="
                                 click: () => VitaminController.add() ? $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()) : $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier());,
                                 event: { contextmenu: () => { $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false; } },
-                                hidden: $data.hideFromProteinList(),
                                 css: { 'text-muted': $data.breeding }">
                                 <td class="text-left">
                                     <knockout data-bind="text: $data.displayName"></knockout>
@@ -106,8 +104,7 @@
                     </table>
                 </div>
             </div>
-            <!-- /ko -->
-            <span class="bg-dark text-light text-right align-right p-1" data-bind="text:`Showing ${PartyController.getvitaminSortedList().filter(p => !p.hideFromProteinList()).length.toLocaleString('en-US')} Pokémon`"></span>
+            <span class="bg-dark text-light text-right align-right p-1" data-bind="text:`Showing ${PartyController.getvitaminSortedList().length.toLocaleString('en-US')} Pokémon`"></span>
         </div>
     </div>
 </div>

@@ -1042,7 +1042,7 @@ class QuestLineHelper {
 
     // Orre Questlines - Available post-Hoenn-E4
     public static createOrreColosseumQuestLine() {
-        const orreColosseumQuestLine = new QuestLine('Shadows in the Desert', 'Explore Orre and uncover the origin of Shadow Pokémon.', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()]), GameConstants.BulletinBoards.Hoenn);
+        const orreColosseumQuestLine = new QuestLine('Shadows in the Desert', 'Explore Orre and uncover the origin of Shadow Pokémon.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
 
         const exploreStand = new TalkToNPCQuest(ExploreStand, 'Travel to Orre and explore the Outskirt Stand.');
         orreColosseumQuestLine.addQuest(exploreStand);
@@ -3634,6 +3634,15 @@ class QuestLineHelper {
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
 
+    public static createGigantamax() {
+        const gigantiamaxQuestLine = new QuestLine('TODO Gigantamax questline name', 'TODO', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new DevelopmentRequirement()]), GameConstants.BulletinBoards.Galar);
+
+        gigantiamaxQuestLine.addQuest(new CustomQuest(1, undefined, 'Obtain 1 Wishing Piece', player.itemList.Wishing_Piece, 0));
+        gigantiamaxQuestLine.addQuest(new CustomQuest(2, undefined, 'Obtain 2 Wishing Piece', player.itemList.Wishing_Piece, 0));
+
+        App.game.quests.questLines().push(gigantiamaxQuestLine);
+    }
+
     public static createOriginalColorMagearnaQuestLine() {
         const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have recieved a Mystery Gift.',
             new MultiRequirement([
@@ -3877,6 +3886,7 @@ class QuestLineHelper {
         this.createGalarCrownQuestLine();
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
+        this.createGigantamax();
         this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
         this.createHisuiArceusQuestLine();
