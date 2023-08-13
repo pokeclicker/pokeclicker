@@ -452,6 +452,13 @@ class Game {
                 SafariPokemonList.generateKalosSafariList();
 
                 DayOfWeekRequirement.date(now.getDay());
+
+                // Reset some temporary battles
+                Object.values(TemporaryBattleList).forEach(t => {
+                    if (t.optionalArgs?.resetDaily) {
+                        this.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(t.name)](0);
+                    }
+                });
             }
 
             // Check if it's a new hour

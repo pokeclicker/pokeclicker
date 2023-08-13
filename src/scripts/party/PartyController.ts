@@ -136,33 +136,108 @@ class PartyController {
 
     private static vitaminSortedList = [];
     static getvitaminSortedList = ko.pureComputed(() => {
-        // If the protein modal is open, we should sort it.
+        // If the vitamin modal is open, we should sort it.
         if (modalUtils.observableState.pokemonVitaminModal === 'show' || modalUtils.observableState.pokemonVitaminExpandedModal === 'show') {
-            PartyController.vitaminSortedList = [...App.game.party.caughtPokemon];
+            PartyController.vitaminSortedList = PartyController.getVitaminFilteredList();
             return PartyController.vitaminSortedList.sort(PartyController.compareBy(Settings.getSetting('vitaminSort').observableValue(), Settings.getSetting('vitaminSortDirection').observableValue()));
         }
         return PartyController.vitaminSortedList;
-    }).extend({ rateLimit: 500 });
+    }).extend({ rateLimit: 100 });
+
+    static getVitaminFilteredList(): Array<PartyPokemon> {
+        return [...App.game.party.caughtPokemon].filter((pokemon) => {
+            if (!new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+                return false;
+            }
+            if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
+                if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('vitaminRegionFilter').observableValue()) {
+                    return false;
+                }
+            }
+            const type = Settings.getSetting('vitaminTypeFilter').observableValue();
+            if (type > -2 && !pokemonMap[pokemon.name].type.includes(type)) {
+                return false;
+            }
+            if (pokemon.vitaminUsesRemaining() == 0 && Settings.getSetting('vitaminHideMaxedPokemon').observableValue()) {
+                return false;
+            }
+            if (pokemon.shiny && Settings.getSetting('vitaminHideShinyPokemon').observableValue()) {
+                return false;
+            }
+
+            return true;
+        });
+    }
 
     private static heldItemSortedList = [];
     static getHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
         if (modalUtils.observableState.heldItemModal === 'show') {
-            PartyController.heldItemSortedList = [...App.game.party.caughtPokemon];
+            PartyController.heldItemSortedList = PartyController.getHeldItemFilteredList();
             return PartyController.heldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
         }
         return PartyController.heldItemSortedList;
-    }).extend({ rateLimit: 500 });
+    }).extend({ rateLimit: 100 });
+
+    static getHeldItemFilteredList(): Array<PartyPokemon> {
+        return [...App.game.party.caughtPokemon].filter((pokemon) => {
+            if (!HeldItem.heldItemSelected()?.canUse(pokemon)) {
+                return false;
+            }
+            if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+                return false;
+            }
+            if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
+                if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
+                    return false;
+                }
+            }
+            const type = Settings.getSetting('heldItemTypeFilter').observableValue();
+            if (type > -2 && !pokemonMap[pokemon.name].type.includes(type)) {
+                return false;
+            }
+            if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && pokemon.heldItem()) {
+                return false;
+            }
+            if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && pokemon.heldItem() !== HeldItem.heldItemSelected()) {
+                return false;
+            }
+
+            return true;
+        });
+    }
 
     private static consumableSortedList = [];
     static getConsumableSortedList = ko.pureComputed(() => {
         // If the consumable modal is open, we should sort it.
         if (modalUtils.observableState.consumableModal === 'show') {
-            PartyController.consumableSortedList = [...App.game.party.caughtPokemon];
+            PartyController.consumableSortedList = PartyController.getConsumableFilteredList();
             return PartyController.consumableSortedList.sort(PartyController.compareBy(Settings.getSetting('consumableSort').observableValue(), Settings.getSetting('consumableSortDirection').observableValue()));
         }
         return PartyController.consumableSortedList;
-    }).extend({ rateLimit: 500 });
+    }).extend({ rateLimit: 100 });
+
+    static getConsumableFilteredList(): Array<PartyPokemon> {
+        return [...App.game.party.caughtPokemon].filter((pokemon) => {
+            if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+                return false;
+            }
+            if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
+                if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('consumableRegionFilter').observableValue()) {
+                    return false;
+                }
+            }
+            const type = Settings.getSetting('consumableTypeFilter').observableValue();
+            if (type > -2 && !pokemonMap[pokemon.name].type.includes(type)) {
+                return false;
+            }
+            if (Settings.getSetting('consumableHideShinyPokemon').observableValue() && pokemon.shiny) {
+                return false;
+            }
+
+            return true;
+        });
+    }
 
     private static pokemonsWithHeldItemSortedList = [];
     static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {

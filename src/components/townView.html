@@ -134,6 +134,12 @@
             }">
           </li>
           <!-- /ko -->
+          <!-- ko if: player.town().dungeon.allAvailableShadowPokemon().some(p => App.game.party.getPokemonByName(p)?.shadow < GameConstants.ShadowStatus.Shadow) -->
+          <li class="list-inline-item">
+            <img class="boss" src="assets/images/status/shadow.svg"/>
+            <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src="assets/images/npcs/specialNPCs/Mysterious Trainer.png"/>
+          </li>
+          <!-- /ko -->
         </ul>
       </div>
     </knockout>

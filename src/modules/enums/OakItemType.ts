@@ -5,7 +5,7 @@ enum OakItemType {
     'Exp_Share',
     'Sprayduck',
     'Shiny_Charm',
-    'Blaze_Cassette',
+    'Magma_Stone',
     'Cell_Battery',
     'Squirtbottle',
     'Sprinklotad',
