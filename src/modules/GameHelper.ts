@@ -210,13 +210,9 @@ export default class GameHelper {
         return hash;
     }
 
-    public static getAdjustedColor(color: string, farthest = true): string {
+    public static isColorLight(color: string): boolean {
         const r = parseInt(color.substring(1, 3), 16), g = parseInt(color.substring(3, 5), 16), b = parseInt(color.substring(5), 16);
-        const greyed = r * 0.299 + g * 0.587 + b * 0.114;
-        const distBlack = greyed;
-        const distWhite = 255 - greyed;
-        let whiteSelected = distWhite > distBlack;
-        whiteSelected = farthest ? whiteSelected : !whiteSelected;
-        return whiteSelected ? 'white' : 'black';
+        const grey = r * 0.299 + g * 0.587 + b * 0.114; // Range between 0 and 255, based on NTSC formula.
+        return grey > 127;
     }
 }
