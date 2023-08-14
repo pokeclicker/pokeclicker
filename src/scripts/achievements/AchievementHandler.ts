@@ -438,7 +438,7 @@ class AchievementHandler {
          */
         const addGymAchievements = (gyms: string[], category: GameConstants.Region | GameConstants.ExtraAchievementCategories, subregion?: string) => {
             gyms.forEach(gym => {
-                if (GymList[gym].requirements.some(((req) => req instanceof DevelopmentRequirement))) {
+                if (GymList[gym].requirements.some((req) => req instanceof DevelopmentRequirement)) {
                     return;
                 }
                 const elite = gym.includes('Elite') || gym.includes('Champion') || gym.includes('Supreme');
@@ -494,7 +494,7 @@ class AchievementHandler {
             }
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
-                if (TownList[dungeon].requirements.some(((req) => req instanceof DevelopmentRequirement))) {
+                if (TownList[dungeon].requirements.some((req) => req instanceof DevelopmentRequirement)) {
                     return;
                 }
                 let category = region;
