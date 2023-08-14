@@ -3767,6 +3767,7 @@ TownList['Gateon Port Battles'] = new DungeonTown(
     GameConstants.HoennSubRegions.Orre,
     [
         new QuestLineStepCompletedRequirement('Gale of Darkness', 1),
+        new DevelopmentRequirement(),
     ]
 );
 TownList['Cipher Key Lair'] = new DungeonTown(
@@ -3775,6 +3776,7 @@ TownList['Cipher Key Lair'] = new DungeonTown(
     GameConstants.HoennSubRegions.Orre,
     [
         new QuestLineStepCompletedRequirement('Gale of Darkness', 24),
+        new DevelopmentRequirement(),
     ],
     [],
     {
@@ -3787,6 +3789,7 @@ TownList['Citadark Isle'] = new DungeonTown(
     GameConstants.HoennSubRegions.Orre,
     [
         new QuestLineStepCompletedRequirement('Gale of Darkness', 26),
+        new DevelopmentRequirement(),
     ]
 );
 TownList['Citadark Isle Dome'] = new DungeonTown(
@@ -3795,6 +3798,7 @@ TownList['Citadark Isle Dome'] = new DungeonTown(
     GameConstants.HoennSubRegions.Orre,
     [
         new QuestLineStepCompletedRequirement('Gale of Darkness', 27),
+        new DevelopmentRequirement(),
     ]
 );
 
@@ -8626,7 +8630,7 @@ TownList['Max Lair'] = new DungeonTown(
     'Max Lair',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new QuestLineStartedRequirement('TODO Gigantamax questline name')]
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name'), new DevelopmentRequirement()]
 );
 
 //Hisui shops
