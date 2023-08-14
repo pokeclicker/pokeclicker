@@ -184,7 +184,10 @@ RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee', ne
 RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
     regionGroups.forEach((_, subRegionGroup) => {
         if (RoamingPokemonList.list[region][subRegionGroup]?.length) {
-            RoamingPokemonList.add(region, subRegionGroup, new RoamingPokemon('Santa Snorlax', new SpecialEventRequirement('Merry Christmas!')));
+            RoamingPokemonList.add(region, subRegionGroup, new RoamingPokemon('Snorlax (Snowman)', new SpecialEventRequirement('Merry Christmas!')));
+            if (region >= Region.sinnoh) {
+                RoamingPokemonList.add(region, subRegionGroup, new RoamingPokemon('Elf Munchlax', new SpecialEventRequirement('Merry Christmas!')));
+            }
         }
     });
 });

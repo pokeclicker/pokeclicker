@@ -199,11 +199,11 @@ class SpecialEvents implements Feature {
         );
         /* Christmas
         RoamingPokemonList.ts:
-            Santa Snorlax
+            Snorlax (Snowman)
         Dungeon.ts:
             Grinch Celebi in Ilex Forest
         */
-        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
+        this.newEvent('Merry Christmas!', 'Encounter Snorlax Snowman roaming the regions and discover the Grinch of Ilex Forest.',
             // Start
             new Date(new Date().getFullYear(), 11, 24, 1), () => {
             },
