@@ -68,7 +68,7 @@ class Pokeballs implements Feature {
                     return 15;
                 }
                 return 0;
-            }, 1250, 'Increased catch rate on water routes', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
+            }, 1250, 'Increased catch rate in water environments', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
             new Pokeball(GameConstants.Pokeball.Lureball, () => {
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {

@@ -25,6 +25,7 @@ import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
+import SafariEnvironments from './enums/SafariEnvironments';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -117,6 +118,7 @@ import QuestRequirement from './requirements/QuestRequirement';
 import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
+import SeededDateSelectNRequirement from './requirements/SeededDateSelectNRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
@@ -124,6 +126,7 @@ import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
+import TotalMegaStoneObtainedRequirement from './requirements/TotalMegaStoneObtainedRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundItemValueType from './enums/UndergroundItemValueType';
 import UndergroundItem from './underground/UndergroundItem';
@@ -145,6 +148,7 @@ import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import ClientRequirement from './requirements/ClientRequirement';
+import ContestWonRequirement from './requirements/ContestWonRequirement';
 import lazyLoad from './utilities/LazyLoader';
 import {
     beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
@@ -167,6 +171,8 @@ import PokeballItem from './items/PokeballItem';
 import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
+import Consumable from './items/Consumable';
+import ConsumableController from './items/ConsumableController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -186,6 +192,7 @@ import SafariBaitRequirement from './requirements/SafariBaitRequirement';
 import SafariStepsRequirement from './requirements/SafariStepsRequirement';
 import SafariRocksRequirement from './requirements/SafariRocksRequirement';
 import SafariItemsRequirement from './requirements/SafariItemsRequirement';
+import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 
 Object.assign(<any>window, {
@@ -214,6 +221,7 @@ Object.assign(<any>window, {
     PlotStage,
     QuestLineState,
     WeatherForecastStatus,
+    SafariEnvironments,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -311,6 +319,7 @@ Object.assign(<any>window, {
     QuestLevelRequirement,
     RouteKillRequirement,
     SeededDateRequirement,
+    SeededDateSelectNRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     ShadowPokemonRequirement,
@@ -318,6 +327,7 @@ Object.assign(<any>window, {
     SubregionRequirement,
     StarterRequirement,
     TokenRequirement,
+    TotalMegaStoneObtainedRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundItemValueType,
     UndergroundItem,
@@ -341,6 +351,7 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     ClientRequirement,
+    ContestWonRequirement,
     lazyLoad,
     LevelEvolution,
     StoneEvolution,
@@ -365,6 +376,8 @@ Object.assign(<any>window, {
     QuestItem,
     Vitamin,
     VitaminController,
+    Consumable,
+    ConsumableController,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,
@@ -383,5 +396,6 @@ Object.assign(<any>window, {
     SafariStepsRequirement,
     SafariRocksRequirement,
     SafariItemsRequirement,
+    SafariCatchRequirement,
     ItemRequirement,
 });

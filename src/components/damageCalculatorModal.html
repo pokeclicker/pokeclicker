@@ -1,5 +1,5 @@
 <script type="text/html" id="damageDetailTemplate">
-  <tr>
+  <tr data-toggle="modal" href="#pokemonStatisticsModal" data-bind="click: () => { App.game.statistics.selectedPokemonID($data.id) }" >
       <td>
           <img class="smallImage" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }" src=""/>
       <td class="text-nowrap">

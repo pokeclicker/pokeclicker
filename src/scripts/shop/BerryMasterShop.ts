@@ -22,7 +22,7 @@ class BerryMasterShop extends Shop {
         const berryListIndex = GameConstants.BerryTraderLocations[this.parent.name];
         if (berryListIndex > -1) {
             const berryDeals = BerryDeal.list[berryListIndex]();
-            const berryTraderPokemon = berryDeals.filter(d => d.item.itemType instanceof PokemonItem).map(d => d.item.itemType.name) as PokemonNameType[];
+            const berryTraderPokemon = berryDeals.filter(d => d.item.itemType instanceof PokemonItem).map(d => d.item.itemType.type) as PokemonNameType[];
 
             if (!RouteHelper.listCompleted(berryTraderPokemon, false)) {
                 itemStatusArray.push(areaStatus.uncaughtPokemon);
@@ -32,7 +32,7 @@ class BerryMasterShop extends Shop {
                 itemStatusArray.push(areaStatus.uncaughtShinyPokemon);
             }
 
-            if (RouteHelper.minPokerus(berryTraderPokemon) < 3) {
+            if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(berryTraderPokemon) < GameConstants.Pokerus.Resistant) {
                 itemStatusArray.push(areaStatus.missingResistant);
             }
         }

@@ -38,6 +38,7 @@ namespace GameConstants {
     declare const TEMP_BATTLE_TIME: number;
     declare const TEMP_BATTLE_TICK: number;
     declare const SPECIAL_EVENT_TICK: number;
+    declare const ZMOVE_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -102,8 +103,9 @@ namespace GameConstants {
         'Underground',
         'Safari',
         'Battle Frontier',
-        'Protein',
+        'Vitamins',
         'Pokerus',
+        'Shadow Pokemon',
     }
     declare enum DungeonTile {
         empty = 0,
@@ -126,8 +128,61 @@ namespace GameConstants {
     declare const GYM_GEMS: number;
     declare const SAFARI_BATTLE_CHANCE: number;
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
-    declare const LEGAL_WALK_BLOCKS: number[];
+    declare enum SafariTile {
+        ground,
+        waterUL,
+        waterU,
+        waterUR,
+        waterL,
+        waterC,
+        waterR,
+        waterDL,
+        waterD,
+        waterDR,
+        grass,
+        sandUL,
+        sandU,
+        sandUR,
+        sandL,
+        sandC,
+        sandR,
+        sandDL,
+        sandD,
+        sandDR,
+        sandURinverted,
+        sandDRinverted,
+        sandDLinverted,
+        sandULinverted,
+        fenceUL,
+        fenceU,
+        fenceUR,
+        fenceL,
+        fenceR,
+        fenceDL,
+        fenceD,
+        fenceDR,
+        fenceDRend,
+        fenceURend,
+        fenceULend,
+        fenceDLend,
+        treeTopL,
+        treeTopC,
+        treeTopR,
+        treeLeavesL,
+        treeLeavesC,
+        treeLeavesR,
+        treeTrunkL,
+        treeTrunkC,
+        treeTrunkR,
+        treeRootsL,
+        treeRootsC,
+        treeRootsR,
+        sign,
+    }
+    declare const SAFARI_LEGAL_WALK_BLOCKS: number[];
+    declare const SAFARI_WATER_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
+    declare const FRIEND_SAFARI_POKEMON: number;
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
@@ -240,6 +295,7 @@ namespace GameConstants {
         alola,
         galar,
         hisui,
+        paldea,
         final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
@@ -316,6 +372,10 @@ namespace GameConstants {
         'White_mane_hair',
         'Black_augurite',
         'Peat_block',
+        'Auspicious_armor',
+        'Malicious_armor',
+        'Leaders_crest',
+        'Gimmighoul_coin',
     }
     declare enum FossilPieceType {
         'None',
@@ -363,6 +423,7 @@ namespace GameConstants {
         'Porygon',
         'Togepi',
         'Beldum',
+        'Grotle (Acorn)',
         'Skorupi',
         'Combee',
         'Burmy (plant)',
@@ -438,6 +499,7 @@ namespace GameConstants {
         Hoenn,
         Sevii4567,
         Sinnoh,
+        Unova,
         Kalos,
         Alola,
         Hoppy,
@@ -445,7 +507,8 @@ namespace GameConstants {
         Armor,
         Crown,
         Hisui,
-        Arceus
+        Arceus,
+        Paldea
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -486,7 +549,9 @@ namespace GameConstants {
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
     declare const HisuiGyms: string[];
+    declare const PaldeaGyms: string[];
     declare const OrangeGyms: string[];
+    declare const OrreGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
     declare function getGymRegion(gym: string): Region;
@@ -498,6 +563,7 @@ namespace GameConstants {
     declare const KalosDungeons: string[];
     declare const GalarDungeons: string[];
     declare const HisuiDungeons: string[];
+    declare const PaldeaDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare function getDungeonRegion(dungeon: string): Region;
@@ -527,6 +593,8 @@ namespace GameConstants {
         'Mauville City',
         'Pinkan Pokémon Reserve',
         'Hearthome City',
+        'Secret Berry Shop',
+        'Driftveil City',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',
@@ -652,6 +720,9 @@ namespace GameConstants {
     declare enum HisuiSubRegions {
         Hisui,
     }
+    declare enum PaldeaSubRegions {
+        Paldea,
+    }
     declare enum FinalSubRegions {
         Final,
     }
@@ -666,6 +737,7 @@ namespace GameConstants {
         | AlolaSubRegions
         | GalarSubRegions
         | HisuiSubRegions
+        | PaldeaSubRegions
         | FinalSubRegions
 
     // Gender Types
@@ -794,4 +866,23 @@ namespace GameConstants {
         HeldKeybind,
     }
     declare const ModalCollapseList: string[];
+    declare enum ConsumableType {
+        Rare_Candy,
+    }
+    declare const zCrystalItemType: string[];
+    declare enum ZMoveStatus {
+        inactive,
+        counteractive,
+        active,
+    }
+    declare const ZMOVE_ACTIVE_MULTIPLIER: number;
+    declare const ZMOVE_COUNTERACTIVE_MULTIPLIER: number;
+    declare const ZMOVE_ACTIVE_TIME: number;
+    declare const ZMOVE_COUNTERACTIVE_TIME: number;
+    declare enum ContestResults {
+        Normal,
+        Super,
+        Hyper,
+        Master,
+    }
 }

@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 
 class BadgeCaseController {
-    private static optionalLeagueNames = ['Orange League', 'Magikarp Jump'];
+    private static optionalLeagueNames = ['Orange League', 'Magikarp Jump', 'Orre'];
 
     static getDisplayableBadges() {
         const highestRegion = player.highestRegion();
@@ -12,7 +12,10 @@ class BadgeCaseController {
                 if (!region.some(gym => App.game.badgeCase.hasBadge(GymList[gym].badgeReward))) {
                     return;
                 }
-                result[this.optionalLeagueNames[i - GameConstants.Region.final]] = this.regionToBadges(region);
+                const badges = this.regionToBadges(region);
+                if (badges.length) {
+                    result[this.optionalLeagueNames[i - GameConstants.Region.final]] = badges;
+                }
                 return;
             }
 

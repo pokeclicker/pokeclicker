@@ -215,12 +215,12 @@
                                     <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <!--<td class="col">
+                            <td class="col" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue() && PokemonContestController.requirements.isCompleted()">
                                 <span style="display: inline; position: relative;">
                                     <img title="Contest Tokens&#013;&#010;Gained by competing in Contests" src="assets/images/currency/contestToken.svg" height="25px">
                                     <span id="animateCurrency-contestToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.contestToken]()) : App.game.wallet.currencies[GameConstants.Currency.contestToken]().toLocaleString('en-US')">0</span>
                                 </span>
-                            </td> -->
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -369,76 +369,23 @@
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
                     <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
-                    data-content="
-                    <div class='row map-legend'>
-                        <div class='col-12'>
-                            Map locations will be coloured based on the following:
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Locked:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-locked'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Incomplete:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-incomplete'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Quest at Location:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-questAtLocation'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Uncaught Pokemon:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Uncaught Shadow Pokemon:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-uncaughtShadowPokemon'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Uncaught Shiny Pokemon and Missing Achievement:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-uncaughtShinyPokemonAndMissingAchievement'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Uncaught Shiny Pokemon:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-uncaughtShinyPokemon'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Missing Achievement:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Missing Resistant:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-missingResistant'>&nbsp;</span>
-                        </div>
-                        <div class='col-10 legend-item'>
-                            <span>Completed:</span>
-                        </div>
-                        <div class='col-2'>
-                            <span class='float-right px-4 bg-completed'>&nbsp;</span>
-                        </div>
-                        <div class='col-12'>
-                            <i>NOTE: These colors can be customized in the settings menu</i>
-                        </div>
-                    </div>"
-                    data-placement="bottom">ⓘ</button>
+                    data-content=""
+                    data-placement="bottom" data-bind="attr: {'data-content': `<div class='row map-legend'>
+                            <div class='col-12'>
+                                Map locations will be coloured based on the following:
+                            </div>
+                            ${MapHelper.getUsableFilters().map(setting => {
+                                return `<div class='col-10 legend-item'>
+                                    <span>${setting.displayName}:</span>
+                                </div>
+                                <div class='col-2'>
+                                    <span class='float-right px-4 bg-${setting.name.substring(2)}'>&nbsp;</span>
+                                </div>`
+                            }).join('\n')}
+                            <div class='col-12'>
+                                <i>NOTE: These colors can be customized in the settings menu</i>
+                            </div>
+                        </div>`}">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: DayCycle.color() },
                         tooltip: {
@@ -494,6 +441,7 @@
                             @import "AlolaSVG.html"
                             @import "GalarSVG.html"
                             @import "HisuiSVG.html"
+                            @import "PaldeaSVG.html"
 
                             <g id="playerSprite">
                                 <!-- This group is cleared actively via koExtenders.ts added to fix #3358 -->
@@ -692,6 +640,12 @@
 
 <!-- Weather App Modal -->
 @import "weatherAppModal.html"
+
+<!-- Consumable Modal -->
+@import "consumableModal.html"
+
+<!-- Pokemon Contest Modal -->
+@import "pokemonContestModal.html"
 
 <script type="text/javascript">
 // Check if we are running in an iframe

@@ -116,7 +116,7 @@ export default class Notifier {
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
                 <h5>${title}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="promptClose${modalID}" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -138,6 +138,9 @@ export default class Notifier {
                 if (key === 'Enter') {
                     $(`#modal${modalID}`).modal('hide');
                 }
+                if (key === 'Escape') {
+                    $(`#promptInput${modalID}`).val('');
+                }
             });
 
             $(`#modal${modalID}`).modal({
@@ -155,6 +158,11 @@ export default class Notifier {
                 }
             });
 
+            // Clean the input if the player closes the modal with the X
+            (document.getElementById(`promptClose${modalID}`) as HTMLInputElement).addEventListener('click', () => {
+                $(`#promptInput${modalID}`).val('');
+            });
+
             // Once hidden remove the element
             $(`#modal${modalID}`).on('hidden.bs.modal', () => {
                 const inputEl = document.getElementById(`promptInput${modalID}`) as HTMLInputElement;
@@ -162,6 +170,7 @@ export default class Notifier {
                 document.getElementById(`modal${modalID}`).remove();
                 resolve(inputValue);
             });
+            
         });
     }
 

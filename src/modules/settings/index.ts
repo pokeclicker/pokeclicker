@@ -16,6 +16,7 @@ import {
     ExtraAchievementCategories,
     camelCaseToString,
     ModalCollapseList,
+    getDungeonIndex,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -25,6 +26,8 @@ import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
 import FilterSetting from './FilterSetting';
 import { LogBookTypes } from '../logbook/LogBookTypes';
+import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
+import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 
 export default Settings;
 
@@ -138,11 +141,11 @@ Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'))
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokemon', [], '#a11131'));
+Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokemon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
-Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ffffff'));
+Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ab1707', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
 Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
 
 // Other settings
@@ -203,17 +206,28 @@ const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
-// Protein Sorting
+// Vitamin Sorting
 const vitaminSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
 Settings.add(new Setting<number>('vitaminSort', 'Sort', vitaminSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('vitaminSortDirection', 'reverse', false));
-Settings.add(new BooleanSetting('vitaminHideMaxedPokemon', 'Hide Pokémon with max protein', false));
+Settings.add(new BooleanSetting('vitaminHideMaxedPokemon', 'Hide Pokémon with max vitamin', false));
 Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon', false));
 Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
 Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
+
+// Consumable Sorting
+const consumableSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('consumableSort', 'Sort', consumableSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('consumableSortDirection', 'reverse', false));
+Settings.add(new BooleanSetting('consumableHideShinyPokemon', 'Hide shiny Pokémon', false));
+Settings.add(new Setting<string>('consumableSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (

@@ -26,7 +26,7 @@ GymList['Cerulean City'] = new Gym(
     'Wow! You\'re too much, all right! You can have the CascadeBadge to show that you beat me.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
     () => {
-        App.game.quests.getQuestLine('Team Rocket').beginQuest();
+        App.game.quests.getQuestLine('Team Rocket').beginQuest(0, undefined, true);
     }
 );
 GymList['Vermilion City'] = new Gym(
@@ -92,7 +92,7 @@ GymList['Fuchsia City'] = new Gym(
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
-        App.game.quests.getQuestLine('Mining Expedition').beginQuest();
+        App.game.quests.getQuestLine('Mining Expedition').beginQuest(0, undefined, true);
     }
 );
 GymList['Cinnabar Island'] = new Gym(
@@ -109,7 +109,7 @@ GymList['Cinnabar Island'] = new Gym(
     'I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))],
     () => {
-        App.game.quests.getQuestLine('Bill\'s Errand').beginQuest();
+        App.game.quests.getQuestLine('Bill\'s Errand').beginQuest(0, undefined, true);
     }
 );
 GymList['Viridian City'] = new Gym(
@@ -133,7 +133,7 @@ GymList['Viridian City'] = new Gym(
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
-        App.game.quests.getQuestLine('Persons of Interest').beginQuest();
+        App.game.quests.getQuestLine('Persons of Interest').beginQuest(0, undefined, true);
     },
     undefined,
     { imageName: 'Team Rocket Boss Giovanni' }
@@ -294,7 +294,7 @@ GymList['Ecruteak City'] = new Gym(
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
-        App.game.quests.getQuestLine('Team Rocket Again').beginQuest();
+        App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
     }
 );
 GymList['Cianwood City'] = new Gym(
@@ -473,7 +473,7 @@ GymList['Mauville City'] = new Gym(
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
     [new TemporaryBattleRequirement('Wally 1')],
     () => {
-        App.game.quests.getQuestLine('Land vs. Water').beginQuest();
+        App.game.quests.getQuestLine('Land vs. Water').beginQuest(0, undefined, true);
     }
 );
 GymList['Lavaridge Town'] = new Gym(
@@ -703,6 +703,156 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
     'You really deserve that trophy. You\'re a great Pokémon trainer.'
 );
 
+// Orre Gyms
+GymList['Cipher Admin Ein'] = new Gym (
+    'Cipher Admin Ein',
+    'Cipher Admin Ein',
+    [
+        new GymPokemon('Crobat', 12099520, 48),
+        new GymPokemon('Pelipper', 12099520, 49),
+        new GymPokemon('Rhydon', 12099520, 50),
+        new GymPokemon('Starmie', 12099520, 49),
+        new GymPokemon('Manectric', 12099520, 50),
+    ],
+    BadgeEnums.Elite_F_Disk,
+    10000,
+    'Urrrgh… What unbelievable power…',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Ein' }
+);
+GymList['Cipher Admin Miror B.'] = new Gym (
+    'Cipher Admin Miror B',
+    'Cipher Admin Miror B.',
+    [
+        new GymPokemon('Ludicolo', 11599520, 44),
+        new GymPokemon('Ludicolo', 11599520, 45),
+        new GymPokemon('Loudred', 11599520, 46),
+        new GymPokemon('Golduck', 11599520, 45),
+        new GymPokemon('Armaldo', 11599520, 43),
+    ],
+    BadgeEnums.Elite_L_Disk,
+    10000,
+    'I\'m an awesome dancer… But I can\'t win in battles!',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Miror B.' }
+);
+GymList['Cipher Admin Dakim'] = new Gym (
+    'Cipher Admin Dakim',
+    'Cipher Admin Dakim',
+    [
+        new GymPokemon('Claydol', 11999520, 46),
+        new GymPokemon('Forretress', 11999520, 45),
+        new GymPokemon('Flygon', 11999520, 46),
+        new GymPokemon('Whiscash', 11999520, 46),
+        new GymPokemon('Houndoom', 11999520, 47),
+    ],
+    BadgeEnums.Elite_R_Disk,
+    10000,
+    'This can\'t be! The mighty Dakim loses again?',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Dakim' }
+);
+GymList['Cipher Admin Venus'] = new Gym (
+    'Cipher Admin Venus',
+    'Cipher Admin Venus',
+    [
+        new GymPokemon('Bellossom', 12299520, 47),
+        new GymPokemon('Misdreavus', 12299520, 47),
+        new GymPokemon('Raichu', 12299520, 48),
+        new GymPokemon('Wigglytuff', 12299520, 48),
+        new GymPokemon('Milotic', 12299520, 48),
+    ],
+    BadgeEnums.Elite_U_Disk,
+    10000,
+    'I shall forget that I ever battled with you. Yes, that\'s what I\'ll do. Ohohohoh!',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Venus' }
+);
+GymList['Cipher Admin Lovrina'] = new Gym ( //Kalos E4 difficulty, plus 10% per Orre Colosseum boss
+    'Cipher Admin Lovrina',
+    'Cipher Admin Lovrina',
+    [
+        new GymPokemon('Shuckle', 30994948, 100),
+        new GymPokemon('Milotic', 30994948, 100),
+        new GymPokemon('Wobbuffet', 30994948, 100),
+        new GymPokemon('Blissey', 30994948, 100),
+        new GymPokemon('Misdreavus', 30994948, 100),
+        new GymPokemon('Meganium', 30994948, 100),
+    ],
+    BadgeEnums.Elite_ColosseumLovrina,
+    100000,
+    'I was so impressed by your toughness! Because you are so tough, I\'ll let you be the first member in my fan club! Doesn\'t that so make your day?',
+    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    undefined, undefined, { displayName: 'Challenge Lovrina' }
+);
+GymList['Cipher Admin Snattle'] = new Gym (
+    'Cipher Admin Snattle',
+    'Cipher Admin Snattle',
+    [
+        new GymPokemon('Electrode', 34094443, 100),
+        new GymPokemon('Gengar', 34094443, 100),
+        new GymPokemon('Muk', 34094443, 100),
+        new GymPokemon('Glalie', 34094443, 100),
+        new GymPokemon('Regirock', 34094443, 100),
+        new GymPokemon('Regice', 34094443, 100),
+    ],
+    BadgeEnums.Elite_ColosseumSnattle,
+    100000,
+    'In the near future, when I become the Governor of Orre, I shall appoint you as my official secretary. Let that be a motivation for you to constantly better your skills!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumLovrina)],
+    undefined, undefined, { displayName: 'Challenge Snattle' }
+);
+GymList['Cipher Admin Gorigan'] = new Gym (
+    'Cipher Admin Gorigan',
+    'Cipher Admin Gorigan',
+    [
+        new GymPokemon('Salamence', 37503887, 100),
+        new GymPokemon('Granbull', 37503887, 100),
+        new GymPokemon('Arcanine', 37503887, 100),
+        new GymPokemon('Tauros', 37503887, 100),
+        new GymPokemon('Hitmontop', 37503887, 100),
+        new GymPokemon('Gyarados', 37503887, 100),
+    ],
+    BadgeEnums.Elite_ColosseumGorigan,
+    100000,
+    'You\'re some kind of special! You\'re worthy of sharing my camaraderie as a friend.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumSnattle)],
+    undefined, undefined, { displayName: 'Challenge Gorigan' }
+);
+GymList['Cipher Admin Ardos'] = new Gym (
+    'Cipher Admin Ardos',
+    'Cipher Admin Ardos',
+    [
+        new GymPokemon('Sceptile', 41254276, 100),
+        new GymPokemon('Charizard', 41254276, 100),
+        new GymPokemon('Gengar', 41254276, 100),
+        new GymPokemon('Aerodactyl', 41254276, 100),
+        new GymPokemon('Tauros', 41254276, 100),
+        new GymPokemon('Starmie', 41254276, 100),
+    ],
+    BadgeEnums.Elite_ColosseumArdos,
+    120000,
+    'In all of Orre, I\'ve never seen a Pokémon Trainer of your caliber. You appear to be the biggest threat to Cipher. To make sure my underlings watch you with caution, I give you the title “Cipher\'s Biggest Enemy.”',
+    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumGorigan)],
+    undefined, undefined, { displayName: 'Challenge Ardos' }
+);
+GymList['Cipher Admin Eldes'] = new Gym (
+    'Cipher Admin Eldes',
+    'Cipher Admin Eldes',
+    [
+        new GymPokemon('Latios', 45379704, 100),
+        new GymPokemon('Latias', 45379704, 100),
+        new GymPokemon('Gengar', 45379704, 100),
+        new GymPokemon('Metagross', 45379704, 100),
+        new GymPokemon('Snorlax', 45379704, 100),
+        new GymPokemon('Tauros', 45379704, 100),
+    ],
+    BadgeEnums.Elite_ColosseumEldes,
+    150000,
+    'I\'m satisfied that I was able to battle to my heart\'s content. I would like to confer on you the title “Eldes\'s Top Rival.”',
+    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumArdos)],
+    undefined, undefined, { displayName: 'Challenge Eldes' }
+);
 //Sinnoh Gyms
 GymList['Oreburgh City'] = new Gym(
     'Roark',
@@ -717,7 +867,7 @@ GymList['Oreburgh City'] = new Gym(
     'This is embarrassing... I went and lost to a Trainer who didn\'t have a single Gym Badge... But that\'s tough. You were strong, and I was weak. That\'s all there is. According to Pokémon League rules, I have to give you our Gym Badge since you\'ve beaten me, the Leader. Heres your official Pokémon League Coal Badge.',
     [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
     () => {
-        App.game.quests.getQuestLine('A New World').beginQuest();
+        App.game.quests.getQuestLine('A New World').beginQuest(0, undefined, true);
     }
 );
 GymList['Eterna City'] = new Gym(
@@ -924,7 +1074,7 @@ GymList['Virbank City'] = new Gym(
     'Sigh! What are you doing losing, Roxie?! Well…I guess that means you\'re strong! This stinks, but I gave it everything I had, and I feel revitalized and refreshed now! Here! Proof that you beat me!',
     [new GymBadgeRequirement(BadgeEnums.Basic)],
     () => {
-        App.game.quests.getQuestLine('Hollow Truth and Ideals').beginQuest();
+        App.game.quests.getQuestLine('Hollow Truth and Ideals').beginQuest(0, undefined, true);
     }
 );
 GymList['Castelia City'] = new Gym(
@@ -1302,7 +1452,10 @@ GymList['Iki Town'] = new Gym(
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!',
     [new TemporaryBattleRequirement('Hau 3')],
-    undefined, undefined, { displayName: 'Hala\'s Grand Trial' }
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fighting], 1);
+    },
+    undefined, { displayName: 'Hala\'s Grand Trial' }
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
@@ -1317,7 +1470,8 @@ GymList['Konikoni City'] = new Gym(
     'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!',
     [new TemporaryBattleRequirement('Plumeria 1')],
     () => {
-        App.game.quests.getQuestLine('Eater of Light').beginQuest();
+        App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined, true);
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Rock], 1);
     },
     undefined, { displayName: 'Olivia\'s Grand Trial' }
 );
@@ -1332,7 +1486,10 @@ GymList['Malie City'] = new Gym(
     BadgeEnums.DarkiniumZ,
     128000,
     'Hmph... heh. Let me fix your team up for you. Here. This is yours.',
-    [new TemporaryBattleRequirement('Gladion 2')], undefined, undefined, { displayName: 'Nanu\'s Grand Trial' }
+    [new TemporaryBattleRequirement('Gladion 2')],
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dark], 1);
+    }, undefined, { displayName: 'Nanu\'s Grand Trial' }
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
@@ -1347,7 +1504,9 @@ GymList['Exeggutor Island'] = new Gym(
     128000,
     'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
-    undefined, undefined, { displayName: 'Hapu\'s Grand Trial' }
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ground], 1);
+    }, undefined, { displayName: 'Hapu\'s Grand Trial' }
 );
 //trials
 GymList['Ilima\'s Trial'] = new Gym(
@@ -1362,7 +1521,9 @@ GymList['Ilima\'s Trial'] = new Gym(
     128000,
     'What an incredible Trainer you are! The Z-Crystal from the pedestal is yours now! It is known as Normalium Z!',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Normal], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1380,7 +1541,9 @@ GymList['Lana\'s Trial'] = new Gym(
     128000,
     'Very well done! You do know what this is, don\'t you? Please take this Waterium Z.',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Water], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1398,7 +1561,9 @@ GymList['Kiawe\'s Trial'] = new Gym(
     128000,
     'Whoa! S-spectacular! That Pokémon was protecting this Firium Z. Now it is yours.',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fire], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1416,7 +1581,9 @@ GymList['Mallow\'s Trial'] = new Gym(
     128000,
     'Wow, you\'re even stronger than I thought! Looks like you\'ve cleared all three of Akala\'s trials! Here! A gift for such an inspiring young Trainer!',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Grass], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1434,7 +1601,9 @@ GymList['Sophocles\' Trial'] = new Gym(
     128000,
     'That Pokémon was really something else! Here, I\'ll give you this Electrium Z to reward you for beating it.',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Electric], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1452,7 +1621,9 @@ GymList['Acerola\'s Trial'] = new Gym(
     128000,
     'Welcome back! Now let\'s see how you did... Yup! You passed my trial! Here you go!',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ghost], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1470,7 +1641,9 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
     128000,
     '<i>You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!<i>',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dragon], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1489,7 +1662,9 @@ GymList['Mina\'s Trial'] = new Gym(
     128000,
     'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fairy], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1857,7 +2032,7 @@ GymList['Stow-on-Side1'] = new Gym(
     // Starts Galar story quest if both Stow-on-Side gyms are defeated.
     () => {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
-            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest(0, undefined, true);
         }
     }, undefined, { displayName: 'Bea\'s Stow-on-Side Gym' }
 );
@@ -1877,7 +2052,7 @@ GymList['Stow-on-Side2'] = new Gym(
     // Starts Galar story quest if both Stow-on-Side gyms are defeated.
     () => {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
-            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest(0, undefined, true);
         }
     }, undefined, { displayName: 'Allister\'s Stow-on-Side Gym' }
 );
@@ -2193,5 +2368,427 @@ GymList['Temple of Sinnoh'] = new Gym(
     128000,
     'Why? Why you?! Why do you have the blessing of Arceus?!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Pokémon Wielder Volo' }
+    () => {},
+    { champion: true },
+    { displayName: 'Pokémon Wielder Volo' }
+);
+
+// Paldea Gyms
+GymList.Cortondo = new Gym(
+    'Katy',
+    'Cortondo',
+    [
+        new GymPokemon('Nymble', 203123316, 14),
+        new GymPokemon('Tarountula', 203123316, 14),
+        new GymPokemon('Teddiursa', 203123316, 15),
+    ],
+    BadgeEnums.Bug_Gym,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList.Artazon = new Gym(
+    'Brassius',
+    'Artazon',
+    [
+        new GymPokemon('Petilil', 203123316, 16),
+        new GymPokemon('Smoliv', 203123316, 14),
+        new GymPokemon('Sudowoodo', 203123316, 17),
+    ],
+    BadgeEnums.Grass_Gym,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList.Levincia = new Gym(
+    'Iono',
+    'Levincia',
+    [
+        new GymPokemon('Wattrel', 203123316, 23),
+        new GymPokemon('Bellibolt', 203123316, 23),
+        new GymPokemon('Luxio', 203123316, 23),
+        new GymPokemon('Mismagius', 203123316, 24),
+    ],
+    BadgeEnums.Electric_Gym,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList.Cascarrafa = new Gym(
+    'Kofu',
+    'Cascarrafa',
+    [
+        new GymPokemon('Veluza', 203123316, 29),
+        new GymPokemon('Wugtrio', 203123316, 29),
+        new GymPokemon('Crabominable', 203123316, 30),
+    ],
+    BadgeEnums.Water_Gym,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList.Medali = new Gym(
+    'Larry',
+    'Medali',
+    [
+        new GymPokemon('Komala', 203123316, 35),
+        new GymPokemon('Dudunsparce (Two-Segment)', 203123316, 35),
+        new GymPokemon('Staraptor', 203123316, 36),
+    ],
+    BadgeEnums.Normal_Gym,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList.Montenevera = new Gym(
+    'Ryme',
+    'Montenevera',
+    [
+        new GymPokemon('Banette', 203123316, 41),
+        new GymPokemon('Mimikyu', 203123316, 41),
+        new GymPokemon('Houndstone', 203123316, 41),
+        new GymPokemon('Toxtricity (Low Key)', 203123316, 42),
+    ],
+    BadgeEnums.Ghost_Gym,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList.Alfornada = new Gym(
+    'Tulip',
+    'Alfornada',
+    [
+        new GymPokemon('Farigiraf', 203123316, 44),
+        new GymPokemon('Gardevoir', 203123316, 44),
+        new GymPokemon('Espathra', 203123316, 44),
+        new GymPokemon('Florges (Red)', 203123316, 45),
+    ],
+    BadgeEnums.Psychic_Gym,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList['Glaseado Mountain'] = new Gym(
+    'Grusha',
+    'Glaseado Mountain',
+    [
+        new GymPokemon('Frosmoth', 203123316, 47),
+        new GymPokemon('Beartic', 203123316, 47),
+        new GymPokemon('Cetitan', 203123316, 47),
+        new GymPokemon('Altaria', 203123316, 48),
+    ],
+    BadgeEnums.Ice_Gym,
+    250000,
+    '',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glaseado Mountain'))]
+);
+GymList['Elite Rika'] = new Gym(
+    'Rika',
+    'Elite Rika',
+    [
+        new GymPokemon('Whiscash', 203123316, 57),
+        new GymPokemon('Camerupt', 203123316, 57),
+        new GymPokemon('Donphan', 203123316, 57),
+        new GymPokemon('Dugtrio', 203123316, 57),
+        new GymPokemon('Clodsire', 203123316, 58),
+    ],
+    BadgeEnums.Elite_Rika,
+    250000,
+    '',
+    [new GymBadgeRequirement(BadgeEnums.Bug_Gym), new GymBadgeRequirement(BadgeEnums.Grass_Gym), new GymBadgeRequirement(BadgeEnums.Electric_Gym), new GymBadgeRequirement(BadgeEnums.Water_Gym), new GymBadgeRequirement(BadgeEnums.Normal_Gym), new GymBadgeRequirement(BadgeEnums.Ghost_Gym), new GymBadgeRequirement(BadgeEnums.Psychic_Gym), new GymBadgeRequirement(BadgeEnums.Ice_Gym)]
+);
+GymList['Elite Poppy'] = new Gym(
+    'Poppy',
+    'Elite Poppy',
+    [
+        new GymPokemon('Copperajah', 203123316, 58),
+        new GymPokemon('Magnezone', 203123316, 58),
+        new GymPokemon('Bronzong', 203123316, 58),
+        new GymPokemon('Corviknight', 203123316, 58),
+        new GymPokemon('Tinkaton', 203123316, 59),
+    ],
+    BadgeEnums.Elite_Poppy,
+    250000,
+    '',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Rika)]
+);
+GymList['Elite Larry'] = new Gym(
+    'Larry',
+    'Elite Larry',
+    [
+        new GymPokemon('Tropius', 203123316, 59),
+        new GymPokemon('Oricorio (Pom-Pom)', 203123316, 59),
+        new GymPokemon('Altaria', 203123316, 59),
+        new GymPokemon('Staraptor', 203123316, 59),
+        new GymPokemon('Flamigo', 203123316, 60),
+    ],
+    BadgeEnums.Elite_Larry,
+    250000,
+    '',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Poppy)]
+);
+GymList['Elite Hassel'] = new Gym(
+    'Hassel',
+    'Elite Hassel',
+    [
+        new GymPokemon('Noivern', 203123316, 60),
+        new GymPokemon('Haxorus', 203123316, 60),
+        new GymPokemon('Dragalge', 203123316, 60),
+        new GymPokemon('Flapple', 203123316, 60),
+        new GymPokemon('Baxcalibur', 203123316, 61),
+    ],
+    BadgeEnums.Elite_Hassel,
+    250000,
+    '',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Larry)]
+);
+GymList['Top Champion Geeta'] = new Gym(
+    'Geeta',
+    'Top Champion Geeta',
+    [
+        new GymPokemon('Espathra', 203123316, 61),
+        new GymPokemon('Gogoat', 203123316, 61),
+        new GymPokemon('Veluza', 203123316, 61),
+        new GymPokemon('Avalugg', 203123316, 61),
+        new GymPokemon('Kingambit', 203123316, 61),
+        new GymPokemon('Glimmora', 203123316, 62),
+    ],
+    BadgeEnums.Elite_PaldeaChampion,
+    250000,
+    '',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Hassel)],
+    () => {},
+    { champion: true }
+);
+GymList['Champion Nemona'] = new Gym(
+    'Nemona',
+    'Champion Nemona',
+    [
+        new GymPokemon('Lycanroc (Midday)', 203123316, 65),
+        new GymPokemon('Goodra', 203123316, 65),
+        new GymPokemon('Dudunsparce (Three-Segment)', 203123316, 65),
+        new GymPokemon('Orthworm', 203123316, 65),
+        new GymPokemon('Pawmot', 203123316, 65),
+        new GymPokemon('Quaquaval', 203123316, 66, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Meowscarada', 203123316, 66, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Skeledirge', 203123316, 66, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+    ],
+    BadgeEnums.Elite_Nemona,
+    250000,
+    '',
+    [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)]
+);
+GymList['Segin Squad\'s Base'] = new Gym(
+    'Giacomo',
+    'Segin Squad\'s Base',
+    [
+        new GymPokemon('Pawniard', 203123316, 21),
+        new GymPokemon('Segin Starmobile', 203123316, 20),
+    ],
+    BadgeEnums.Dark_Star,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Giacomo of Team Star' }
+);
+GymList['Schedar Squad\'s Base'] = new Gym(
+    'Mela',
+    'Schedar Squad\'s Base',
+    [
+        new GymPokemon('Torkoal', 203123316, 27),
+        new GymPokemon('Schedar Starmobile', 203123316, 26),
+    ],
+    BadgeEnums.Fire_Star,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Mela of Team Star' }
+);
+GymList['Navi Squad\'s Base'] = new Gym(
+    'Atticus',
+    'Navi Squad\'s Base',
+    [
+        new GymPokemon('Skuntank', 203123316, 32),
+        new GymPokemon('Muk', 203123316, 32),
+        new GymPokemon('Revavroom', 203123316, 33),
+        new GymPokemon('Navi Starmobile', 203123316, 32),
+    ],
+    BadgeEnums.Poison_Star,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Atticus of Team Star' }
+);
+GymList['Ruchbah Squad\'s Base'] = new Gym(
+    'Ortega',
+    'Ruchbah Squad\'s Base',
+    [
+        new GymPokemon('Azumarill', 203123316, 50),
+        new GymPokemon('Wigglytuff', 203123316, 50),
+        new GymPokemon('Dachsbun', 203123316, 51),
+        new GymPokemon('Ruchbah Starmobile', 203123316, 50),
+    ],
+    BadgeEnums.Fairy_Star,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Ortega of Team Star' }
+);
+GymList['Caph Squad\'s Base'] = new Gym(
+    'Eri',
+    'Caph Squad\'s Base',
+    [
+        new GymPokemon('Toxicroak', 203123316, 55),
+        new GymPokemon('Passimian', 203123316, 55),
+        new GymPokemon('Lucario', 203123316, 55),
+        new GymPokemon('Annihilape', 203123316, 56),
+        new GymPokemon('Caph Starmobile', 203123316, 56),
+    ],
+    BadgeEnums.Fighting_Star,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Eri of Team Star' }
+);
+GymList['Director Clavell'] = new Gym(
+    'Clavell',
+    'Director Clavell',
+    [
+        new GymPokemon('Oranguru', 203123316, 60),
+        new GymPokemon('Abomasnow', 203123316, 60),
+        new GymPokemon('Polteageist', 203123316, 60),
+        new GymPokemon('Amoonguss', 203123316, 60, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Houndoom', 203123316, 60, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Gyarados', 203123316, 60, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Gyarados', 203123316, 60, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Amoonguss', 203123316, 60, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Houndoom', 203123316, 60, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Skeledirge', 203123316, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Quaquaval', 203123316, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Meowscarada', 203123316, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+    ],
+    BadgeEnums.Elite_Clavell,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Director Clavell' }
+);
+GymList['Penny of Team Star'] = new Gym(
+    'Penny',
+    'Penny of Team Star',
+    [
+        new GymPokemon('Umbreon', 203123316, 62),
+        new GymPokemon('Vaporeon', 203123316, 62),
+        new GymPokemon('Jolteon', 203123316, 62),
+        new GymPokemon('Flareon', 203123316, 62),
+        new GymPokemon('Leafeon', 203123316, 62),
+        new GymPokemon('Sylveon', 203123316, 63),
+    ],
+    BadgeEnums.Elite_Penny,
+    250000,
+    '',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Clavell)],
+    undefined, undefined, { displayName: 'Penny of Team Star' }
+);
+GymList['Stony Cliff Titan'] = new Gym(
+    'Stony Cliff Titan',
+    'Stony Cliff Titan',
+    [new GymPokemon('Titan Klawf', 203123316, 16)],
+    BadgeEnums.Rock_Titan,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList['Open Sky Titan'] = new Gym(
+    'Open Sky Titan',
+    'Open Sky Titan',
+    [new GymPokemon('Titan Bombirdier', 203123316, 20)],
+    BadgeEnums.Flying_Titan,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList['Lurking Steel Titan'] = new Gym(
+    'Lurking Steel Titan',
+    'Lurking Steel Titan',
+    [new GymPokemon('Titan Orthworm', 203123316, 29)],
+    BadgeEnums.Steel_Titan,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList['Asado Desert'] = new Gym(
+    'Quaking Earth Titan',
+    'Asado Desert',
+    [
+        new GymPokemon('Titan Great Tusk', 203123316, 45),
+        new GymPokemon('Titan Iron Treads', 203123316, 45),
+    ],
+    BadgeEnums.Ground_Titan,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList['Casseroya Lake'] = new Gym(
+    'False Dragon Titan',
+    'Casseroya Lake',
+    [
+        new GymPokemon('Titan Dondozo', 203123316, 56),
+        new GymPokemon('Titan Tatsugiri', 203123316, 57),
+    ],
+    BadgeEnums.Dragon_Titan,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+);
+GymList['Pokémon Trainer Arven'] = new Gym(
+    'Arven',
+    'Pokémon Trainer Arven',
+    [
+        new GymPokemon('Greedent', 203123316, 58),
+        new GymPokemon('Cloyster', 203123316, 59),
+        new GymPokemon('Scovillian', 203123316, 60),
+        new GymPokemon('Toedscruel', 203123316, 61),
+        new GymPokemon('Garganacl', 203123316, 62),
+        new GymPokemon('Mabostiff', 203123316, 63),
+    ],
+    BadgeEnums.Elite_Arven,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'Arven' }
+);
+GymList['AI Sada'] = new Gym(
+    'AI Sada',
+    'AI Sada',
+    [
+        new GymPokemon('Slither Wing', 203123316, 66),
+        new GymPokemon('Scream Tail', 203123316, 66),
+        new GymPokemon('Brute Bonnet', 203123316, 66),
+        new GymPokemon('Flutter Mane', 203123316, 66),
+        new GymPokemon('Sandy Shocks', 203123316, 66),
+        new GymPokemon('Roaring Moon', 203123316, 67),
+    ],
+    BadgeEnums.Elite_Sada,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'AI Sada' }
+);
+GymList['AI Turo'] = new Gym(
+    'AI Turo',
+    'AI Turo',
+    [
+        new GymPokemon('Iron Moth', 203123316, 66),
+        new GymPokemon('Iron Bundle', 203123316, 66),
+        new GymPokemon('Iron Hands', 203123316, 66),
+        new GymPokemon('Iron Jugulis', 203123316, 66),
+        new GymPokemon('Iron Thorns', 203123316, 66),
+        new GymPokemon('Iron Valiant', 203123316, 67),
+    ],
+    BadgeEnums.Elite_Turo,
+    250000,
+    '',
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { displayName: 'AI Turo' }
 );

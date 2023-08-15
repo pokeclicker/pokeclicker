@@ -34,9 +34,6 @@ class Gym extends TownContent {
     public text(): string {
         return this.buttonText;
     }
-    public isVisible(): boolean {
-        return true;
-    }
     public onclick(): void {
         GymRunner.startGym(this);
     }
@@ -50,7 +47,7 @@ class Gym extends TownContent {
         if (!this.isUnlocked()) {
             return areaStatus.locked;
         } else if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
-            return areaStatus.unlockedUnfinished;
+            return areaStatus.incomplete;
         } else if (this.isThereQuestAtLocation()) {
             return areaStatus.questAtLocation;
         } else if (!this.isAchievementsComplete()) {

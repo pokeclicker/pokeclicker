@@ -21,4 +21,9 @@ export default class QuestItem extends Item {
         return App.game.quests.getQuestLine(this.questlineName).state() > QuestLineState.inactive &&
             App.game.quests.getQuestLine(this.endQuestlineName).state() < QuestLineState.ended;
     }
+
+    isSoldOut(): boolean {
+        return player.itemList[this.name]() > 0;
+    }
+
 }

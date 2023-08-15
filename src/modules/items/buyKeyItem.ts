@@ -24,8 +24,8 @@ export default class BuyKeyItem extends Item {
         App.game.keyItems.gainKeyItem(this.item);
     }
 
-    isAvailable(): boolean {
-        return super.isAvailable() && !App.game.keyItems.hasKeyItem(this.item);
+    isSoldOut(): boolean {
+        return App.game.keyItems.hasKeyItem(this.item);
     }
 
     get image(): string {
