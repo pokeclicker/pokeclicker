@@ -112,6 +112,7 @@ import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequiremen
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
+import PokemonLevelRequirement from './requirements/PokemonLevelRequirement';
 import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
 import VitaminObtainRequirement from './requirements/VitaminObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
@@ -313,6 +314,7 @@ Object.assign(<any>window, {
     MaxRegionRequirement,
     ObtainedPokemonRequirement,
     PokeballRequirement,
+    PokemonLevelRequirement,
     PokerusStatusRequirement,
     VitaminObtainRequirement,
     QuestRequirement,
