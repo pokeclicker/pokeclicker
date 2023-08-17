@@ -187,6 +187,7 @@ import { Mine } from './underground/Mine';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import UndergroundUpgrade from './underground/UndergroundUpgrade';
+import SpecialEventRandomRequirement from './requirements/SpecialEventRandomRequirement';
 import SpecialEventRequirement from './requirements/SpecialEventRequirement';
 import EncounterType from './enums/EncounterType';
 import SafariBaitRequirement from './requirements/SafariBaitRequirement';
@@ -348,6 +349,7 @@ Object.assign(<any>window, {
     QuestLineStepCompletedRequirement,
     QuestLineStartedRequirement,
     TemporaryBattleRequirement,
+    SpecialEventRandomRequirement,
     SpecialEventRequirement,
     Translate,
     DayOfWeekRequirement,
