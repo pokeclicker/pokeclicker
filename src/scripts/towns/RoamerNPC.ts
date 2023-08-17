@@ -17,7 +17,9 @@ class RoamerNPC extends NPC {
 
         // If no roaming Pokemon yet
         if (!roamers.length) {
-            return `There hasn't been any reports of roaming Pokémon around ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} lately.`;
+            const regionName = RoamingPokemonList.roamerGroups[this.region]?.[this.subRegionRoamerGroup]?.name
+                ?? GameConstants.camelCaseToString(GameConstants.Region[this.region]);
+            return `There haven't been any reports of roaming Pokémon around ${regionName} lately.`;
         }
 
         roamers.forEach((roamer) => {
