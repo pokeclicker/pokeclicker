@@ -2198,13 +2198,17 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
 
 //Hoenn Contest Shop
 const HoennContestShop = new Shop([
+    ItemList['Tangela (Pom-pom)'],
+    ItemList['Goldeen (Diva)'],
+    ItemList['Weepinbell (Fancy)'],
+    ItemList['Onix (Rocker)'],
     ItemList['Dugtrio (Punk)'],
     ItemList['Gengar (Punk)'],
-    ItemList['Goldeen (Diva)'],
-    ItemList['Onix (Rocker)'],
-    ItemList['Tangela (Pom-pom)'],
-    ItemList['Weepinbell (Fancy)'],
-], 'Contest Shop', [new DevelopmentRequirement()]);
+    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+], 'Contest Shop', [PokemonContestController.requirements]);
 
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMaster);
@@ -3215,7 +3219,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop, new PokemonContestTownContent()], // HoennContestShop
+    [new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -5488,6 +5492,7 @@ const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Dandy)'],
     ItemList['Furfrou (Kabuki)'],
     ItemList['Furfrou (Pharaoh)'],
+    ItemList['Furfrou (Heart)'],
 ], 'Friseur Furfrou');
 const CamphrierTownShop = new Shop([
     ItemList.Pokeball,
