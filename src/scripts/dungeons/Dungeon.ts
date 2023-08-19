@@ -374,7 +374,7 @@ class Dungeon {
         let pokemonName: PokemonNameType;
         let hideEncounter = false;
 
-        const getEncounterInfo = function(pokemonName, mimic) {
+        const getEncounterInfo = (pokemonName, mimic) => {
             const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
             const encounter = {
                 image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
@@ -386,6 +386,7 @@ class Dungeon {
                 lock: false,
                 lockMessage: '',
                 mimic: mimic,
+                mimicTier: this.getMimicTier(pokemonName),
             };
             return encounter;
         };
@@ -460,6 +461,10 @@ class Dungeon {
     public isThereQuestAtLocation = ko.pureComputed(() => {
         return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
     });
+
+    public getMimicTier(pokemonName: PokemonNameType): LootTier {
+        return (Object.keys(this.lootTable) as LootTier[]).find((tier) => this.lootTable[tier].find((loot) => loot.loot == pokemonName));
+    }
 }
 
 /**
