@@ -3386,7 +3386,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
+        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
         npcs: [ProfKrane],
     }
 );
@@ -3397,7 +3397,7 @@ TownList['Kaminko\'s Manor'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
+        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
         npcs: [DrKaminko, Chobin1, Chobin2],
     }
 );
@@ -3408,7 +3408,7 @@ TownList['S. S. Libra'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Cipher Peon Smarton']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
+        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
         npcs: [SearchLibra],
     }
 );
@@ -3418,7 +3418,7 @@ TownList['Orre Colosseum'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [GymList['Cipher Admin Lovrina'], GymList['Cipher Admin Snattle'], GymList['Cipher Admin Gorigan'], GymList['Cipher Admin Ardos'], GymList['Cipher Admin Eldes']],
     {
-        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        requirements: [new DevelopmentRequirement(), new QuestLineCompletedRequirement('Gale of Darkness')],
         npcs: [OrreColosseumSpectator],
     }
 );
@@ -3766,8 +3766,8 @@ TownList['Gateon Port Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 1),
         new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Gale of Darkness', 1),
     ]
 );
 TownList['Cipher Key Lair'] = new DungeonTown(
@@ -3775,8 +3775,8 @@ TownList['Cipher Key Lair'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 24),
         new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Gale of Darkness', 24),
     ],
     [],
     {
@@ -3788,8 +3788,8 @@ TownList['Citadark Isle'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 26),
         new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Gale of Darkness', 26),
     ]
 );
 TownList['Citadark Isle Dome'] = new DungeonTown(
@@ -3797,8 +3797,8 @@ TownList['Citadark Isle Dome'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 27),
         new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Gale of Darkness', 27),
     ]
 );
 
@@ -8614,7 +8614,7 @@ TownList['Tunnel to the Top'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 54)],
-    [new MoveToDungeon(dungeonList['Max Lair'])]
+    [new MoveToDungeon(dungeonList['Max Lair'], new DevelopmentRequirement())]
 );
 TownList['Crown Shrine'] = new DungeonTown(
     'Crown Shrine',
