@@ -10,6 +10,32 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.14
+    new ChangelogUpdate('v0.10.14', new Date(2023, 7, 20)),
+    new Changelog(changelogType.NEW, 'Enter the Colosseum - Orre is now available!'),
+    new Changelog(changelogType.NEW, 'Snover Berry'),
+    new Changelog(changelogType.NEW, 'Unova Berry Master'),
+    new Changelog(changelogType.NEW, 'Quest Lines menu'),
+    new Changelog(changelogType.NEW, 'Rare Candy'),
+    new Changelog(changelogType.NEW, 'New Pokémon'),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.NEW, 'New Achievements'),
+    new Changelog(changelogType.CHANGE, 'Added ability to Surf on water in Safari zone'),
+    new Changelog(changelogType.CHANGE, 'Safari animation speed increases with level'),
+    new Changelog(changelogType.CHANGE, 'Weather rebalanced slightly'),
+    new Changelog(changelogType.CHANGE, 'Blaze Cassette replaced with Magma Stone'),
+    new Changelog(changelogType.CHANGE, 'Mewtwo strikes back! event reworked'),
+    new Changelog(changelogType.CHANGE, 'Halloween! event can now be activated with the Event Calendar'),
+    new Changelog(changelogType.CHANGE, 'EXP Aura added to Custap berry'),
+    new Changelog(changelogType.CHANGE, 'Catching a shiny in the Safari zone grants additional Safari EXP'),
+    new Changelog(changelogType.CHANGE, 'Performance improvements'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.FIXED, 'Safari items spawning in inaccessible locations'),
+    new Changelog(changelogType.FIXED, 'Gem & Shard traders not having map overlay colors'),
+    new Changelog(changelogType.FIXED, 'Friend Safari appearing as uncaught on the map'),
+
     // v0.10.13
     new ChangelogUpdate('v0.10.13', new Date(2023, 6, 15)),
     new Changelog(changelogType.NEW, 'New Battle Frontier reward'),

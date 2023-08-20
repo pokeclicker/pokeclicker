@@ -15,6 +15,7 @@ interface EnemyOptions {
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
     reward?: Amount,
     hide?: boolean,
+    hideTrainer?: boolean,
 }
 
 interface DetailedPokemon {
@@ -10149,13 +10150,13 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
             ])}),
         new DungeonTrainer('Anomaly Mewtwo',
             [new GymPokemon('Mega Mewtwo X', 120000000, 70)],
-            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power')}, undefined, 'X'),
+            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power'), hideTrainer: true}, undefined, 'X'),
         new DungeonTrainer('Anomaly Mewtwo',
             [new GymPokemon('Mega Mewtwo Y', 120000000, 70)],
             { hide: true, requirement: new MultiRequirement([
                 new QuestLineStepCompletedRequirement('An Unrivaled Power', 16),
                 new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less),
-            ])}, undefined, 'Y'),
+            ]), hideTrainer: true}, undefined, 'Y'),
     ],
     725000, 20);
 
