@@ -65,6 +65,8 @@ class PokedexHelper {
             // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
+            const alreadyCaughtShadow = App.game.party.alreadyCaughtPokemon(pokemon.id, false, true);
+            const alreadyCaughtPurified = App.game.party.alreadyCaughtPokemon(pokemon.id, false, true, true);
 
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
@@ -126,6 +128,7 @@ class PokedexHelper {
             }
 
             const caughtShiny = PokedexFilters.caughtShiny.value();
+
             // Only uncaught
             if (caughtShiny == 'uncaught' && alreadyCaught) {
                 return false;
@@ -143,6 +146,21 @@ class PokedexHelper {
 
             // Only caught shiny
             if (caughtShiny == 'caught-shiny' && !alreadyCaughtShiny) {
+                return false;
+            }
+
+            // Only caught not shadow
+            if (caughtShiny == 'caught-not-shadow' && (!alreadyCaught || alreadyCaughtShadow)) {
+                return false;
+            }
+
+            // Only caught shadow
+            if (caughtShiny == 'caught-shadow' && (!alreadyCaughtShadow || alreadyCaughtPurified)) {
+                return false;
+            }
+
+            // Only caught purified
+            if (caughtShiny == 'caught-purified' && !alreadyCaughtPurified) {
                 return false;
             }
 

@@ -803,7 +803,7 @@ const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
 
 const CandyMan = new NPC('The Candy Man', [
     'I sure do love candy. The rarer, the better!',
-    'I\'ve got a real SWEET-TOOTH!',
+    'I\'ve got a real <b>SWEET-TOOTH<b/>',
 ]);
 
 const UnrivaledBlue = new NPC('Blue', [
@@ -2968,7 +2968,7 @@ const EviceEscape = new NPC('Watch Evice Escape', [
 const PhenacRoller = new NPC('Cool Dude', [
     'There\'s been a lot of crime around here recently. But nothing I can\'t handle!',
     'Some folks have been corrupting their Pokémon and making them commit totally jank acts.',
-    'Those Pokémon would be better off in the hands of a radical trainer who knows how use Catch Filters, like me!',
+    'Those Pokémon would be better off in the hands of a radical trainer who knows how to use Catch Filters, like me!',
 ], {image: 'assets/images/npcs/Roller Boy.png'});
 const OrreRoamerNPC = new RoamerNPC('Fateen\'s Fortune Telling', [
     'I sense the presence of rare Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
@@ -4291,8 +4291,8 @@ const HappinyBoulders = new NPC('Strange Boulders', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 22), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24, GameConstants.AchievementOption.less)]),
 });
 const SnoverBreeder = new NPC('Snover Breeder', [
-    'I\'ve been finding ways to grow Snover Berries using humane methods',
-    'Snover are happy to let you pick their berries, then they wander away into the wilderness. Just be kind to them.',
+    'I\'ve been finding ways to grow Snover Berries using humane methods.',
+    'Snover are happy to let you pick their berries.  They then wander away into the wilderness. Please be kind to them!',
 ], {image: 'assets/images/npcs/Pokémon Breeder (female).png'});
 const GrotleAcornParty = new NPC('Grotle and Friends', [
     '<i>Several friendly Pokémon are snacking on a Grotle\'s acorns.</i>',
