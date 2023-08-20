@@ -277,21 +277,24 @@ class Dungeon {
         return this.mimicList.filter(p => App.game.party.alreadyCaughtPokemonByName(p));
     }
 
-    public getRandomLootTier(clears: number, debuffed = false): LootTier {
-        const tierWeights = this.getLootTierWeights(clears, debuffed);
+    public getRandomLootTier(clears: number, debuffed = false, onlyDebuffable = false): LootTier {
+        const tierWeights = this.getLootTierWeights(clears, debuffed, onlyDebuffable);
         return Rand.fromWeightedArray(Object.keys(tierWeights), Object.values(tierWeights)) as LootTier;
     }
 
+    private lootFilter = (loot: Loot, onlyDebuffable: boolean) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff);
+
     public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff));
+        const lootTable = this.lootTable[tier].filter((loot) => this.lootFilter(loot, onlyDebuffable));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
-    public getLootTierWeights(clears: number, debuffed : boolean): Record<LootTier, number> {
+    public getLootTierWeights(clears: number, debuffed : boolean, onlyDebuffable = false): Record<LootTier, number> {
         if (debuffed) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
                 if (tier in this.lootTable &&
-                    this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
+                    this.lootTable[tier].some((loot: Loot) => this.lootFilter(loot, onlyDebuffable))
+                ) {
                     chances[tier] = chance;
                 }
                 return chances;
