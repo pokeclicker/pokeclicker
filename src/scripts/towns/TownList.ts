@@ -8614,7 +8614,7 @@ TownList['Tunnel to the Top'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 54)],
-    [new MoveToDungeon(dungeonList['Max Lair'])]
+    [new MoveToDungeon(dungeonList['Max Lair'], new DevelopmentRequirement())]
 );
 TownList['Crown Shrine'] = new DungeonTown(
     'Crown Shrine',
