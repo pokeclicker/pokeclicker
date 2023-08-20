@@ -5118,7 +5118,7 @@ dungeonList['Snagem Hideout'] = new Dungeon('Snagem Hideout',
             [
                 new GymPokemon('Grovyle', 80200, 52),
                 new GymPokemon('Rhyhorn', 80200, 52),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Niver', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Niver'),
         new DungeonTrainer('Rider',
             [
                 new GymPokemon('Poochyena', 80200, 54),
@@ -5442,7 +5442,7 @@ dungeonList['Phenac Stadium'] = new Dungeon('Phenac Stadium',
             [
                 new GymPokemon('Remoraid', 89500, 40),
                 new GymPokemon('Skitty', 89500, 40),
-            ], { weight: 1}, 'Rima', '(female)'),
+            ], { weight: 1}, 'Rima'),
         new DungeonTrainer('Old Man',
             [
                 new GymPokemon('Spheal', 89500, 40),
