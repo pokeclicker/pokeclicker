@@ -9,6 +9,11 @@
         <h5 class="modal-title text-light ml-1" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)">
           <img width="18px" src=""
             data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny() ? '-shiny' : ''}.svg`}, click: () => PokedexHelper.toggleStatisticShiny(!PokedexHelper.toggleStatisticShiny())" />
+          
+            <!-- ko if: App.game.party.getPokemon($data)?.shadow > GameConstants.ShadowStatus.None -->
+              <img width="18px" src=""
+                data-bind="attr: { src: `assets/images/status/${PokedexHelper.toggleStatisticShadow() ? 'shadow' : 'purified'}.svg`}, click: () => PokedexHelper.toggleStatisticShadow(!PokedexHelper.toggleStatisticShadow())" />
+            <!-- /ko -->
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -17,7 +22,7 @@
       <div class="modal-body p-0 pb-1">
         <div class="row m-0 mt-1">
           <div class="col">
-            <img data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id, App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny(), App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id) && App.game.party.getPokemon(pokemonMap[$data].id).defaultFemaleSprite()) }" src=""/>
+            <img data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id, App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny(), App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id) && App.game.party.getPokemon(pokemonMap[$data].id).defaultFemaleSprite(), (App.game.party.getPokemon($data)?.shadow > GameConstants.ShadowStatus.None && PokedexHelper.toggleStatisticShadow()) ? GameConstants.ShadowStatus.Shadow : GameConstants.ShadowStatus.None) }" src=""/>
             <div class="position-absolute" style="top: 0px; right: 15px;"
               data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus">
               <img width="40px" src=""

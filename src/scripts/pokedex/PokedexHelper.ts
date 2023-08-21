@@ -2,6 +2,7 @@ import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
     public static toggleStatisticShiny = ko.observable(true);
+    public static toggleStatisticShadow = ko.observable(false);
     public static hideShinyImages = ko.observable(false);
 
     public static getBackgroundColors(name: PokemonNameType): string {
@@ -224,5 +225,6 @@ class PokedexHelper {
 $(document).ready(() => {
     $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
         PokedexHelper.toggleStatisticShiny(true);
+        PokedexHelper.toggleStatisticShadow(false);
     });
 });
