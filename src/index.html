@@ -241,8 +241,8 @@
                                     <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
                                     <knockout style="position: relative; top: -1px;"
                                         data-bind="template: { name: 'pokerusStatusTemplate', data: {
-                                            'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id),
-                                            'evs': App.game.party.getPokemon(DungeonBattle.enemyPokemon().id)?.evs() }}">
+                                            'pokerus': PartyController.getPokerusStatus(Battle.enemyPokemon().id),
+                                            'evs': App.game.party.getPokemon(Battle.enemyPokemon().id)?.evs() }}">
                                     </knockout>
                                 </knockout>
                             </h2>
