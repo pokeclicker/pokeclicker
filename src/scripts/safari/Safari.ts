@@ -197,10 +197,12 @@ class Safari {
             [[x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]]
                 .forEach(([nx, ny]) => {
                     if (// but skip if:
+                        // outside map
+                        !(0 <= y && y < Safari.grid.length && 0 <= x && x < Safari.grid[y].length) ||
                         // already processed,
                         this.accessibleTiles[ny]?.[nx] ||
                         // already queued,
-                        toProcess.find(([px, py]) => px === nx && py === ny) ||
+                        toProcess.some(([px, py]) => px === nx && py === ny) ||
                         // or can't access
                         !Safari.canMove(nx, ny)
                     ) {
@@ -318,7 +320,7 @@ class Safari {
         const img = `assets/images/safari/${tile}.png`;
         const divId = `safari-${j}-${i}`;
         // Add z-index if tiles are tree top tiles
-        const zIndex = tile === GameConstants.SafariTile.treeTopL || tile === GameConstants.SafariTile.treeTopC || tile === GameConstants.SafariTile.treeTopR ? 'z-index: 2;' : '';
+        const zIndex = (tile === GameConstants.SafariTile.treeTopL || tile === GameConstants.SafariTile.treeTopC || tile === GameConstants.SafariTile.treeTopR) ? 'z-index: 2;' : '';
 
         return `<div id='${divId}' style="background-image:url('${img}'); ${zIndex}" class='safariSquare'></div>`;
     }
@@ -484,13 +486,13 @@ class Safari {
     }
 
     private static canPlaceAtPosition(x: number, y: number, isItem = false) {
-        // Items doesn't spawn on water
-        const canPlace = isItem ? GameConstants.SAFARI_LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]) : true;
+        // Items don't spawn on water
+        const canPlace = GameConstants.SAFARI_LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]) && !(isItem && GameConstants.SAFARI_WATER_BLOCKS.includes(Safari.grid[y][x]));
         return this.canMove(x, y) && canPlace &&
             this.isAccessible(x, y) &&
             !(x == this.playerXY.x && y == this.playerXY.y) &&
-            !this.pokemonGrid().find(p => p.x === x && p.y === y) &&
-            !this.itemGrid().find(i => i.x === x && i.y === y);
+            !this.pokemonGrid().some(p => p.x === x && p.y === y) &&
+            !this.itemGrid().some(i => i.x === x && i.y === y);
     }
 
     private static directionToXY(dir: string) {
@@ -509,16 +511,10 @@ class Safari {
         if (!Safari.inProgress()) {
             return false;
         }
-        for (let i = 0; i < GameConstants.SAFARI_LEGAL_WALK_BLOCKS.length; i++) {
-            if (Safari.grid[y] && Safari.grid[y][x] === GameConstants.SAFARI_LEGAL_WALK_BLOCKS[i]) {
-                return true;
-            }
+        if (!(0 <= y && y < Safari.grid.length && 0 <= x && x < Safari.grid[y].length)) {
+            return false;
         }
-        // Passable water tiles
-        if (Safari.grid[y] && GameConstants.SAFARI_WATER_BLOCKS.includes(Safari.grid[y][x])) {
-            return true;
-        }
-        return false;
+        return GameConstants.SAFARI_LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]);
     }
 
     private static isAccessible(x: number, y: number): boolean {
@@ -560,7 +556,8 @@ class Safari {
             Safari.pokemonGrid.splice(pokemonOnPlayer, 1);
             return true;
         }
-        if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10 || GameConstants.SAFARI_WATER_BLOCKS.includes(Safari.grid[Safari.playerXY.y][Safari.playerXY.x])) {
+        const currentTile = Safari.grid[Safari.playerXY.y][Safari.playerXY.x];
+        if (currentTile === GameConstants.SafariTile.grass || GameConstants.SAFARI_WATER_BLOCKS.includes(currentTile)) {
             if (Rand.chance(GameConstants.SAFARI_BATTLE_CHANCE)) {
                 SafariBattle.load();
                 return true;

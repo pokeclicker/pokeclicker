@@ -58,7 +58,7 @@ class SafariBattle {
     private static delay(ms) {
         return function (pass) {
             return new Promise((resolve, reject) => {
-                setTimeout((pass) => {
+                setTimeout(() => {
                     resolve(pass);
                 }, ms);
             });
@@ -96,11 +96,8 @@ class SafariBattle {
     }
 
     private static delayRoll(result) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(result);
-            }, (0.2 + 1.2 * result[1]) * SafariBattle.Speed.ballRoll * SafariBattle.tierMultiplier(Safari.safariLevel()));
-        });
+        const delayLength = (0.2 + 1.7 * result[1]) * SafariBattle.Speed.ballRoll * SafariBattle.tierMultiplier(Safari.safariLevel());
+        return SafariBattle.delay(delayLength)(result);
     }
 
     private static finishCapture(result) {
@@ -121,7 +118,7 @@ class SafariBattle {
                 SafariBattle.particle.remove();
                 setTimeout(() => {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
-                }, 1 * SafariBattle.Speed.enemyTransition);
+                }, SafariBattle.Speed.enemyTransition);
             }
         });
     }
@@ -133,7 +130,7 @@ class SafariBattle {
         $('#safariBall').addClass('safari-roll-left');
         setTimeout(() => {
             SafariBattle.safariRoll(n - 1);
-        }, 1200 * SafariBattle.tierMultiplier(Safari.safariLevel()));
+        }, 1.7 * SafariBattle.Speed.ballRoll * SafariBattle.tierMultiplier(Safari.safariLevel()));
     }
 
     private static safariRoll = function (n) {
@@ -141,7 +138,7 @@ class SafariBattle {
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
             setTimeout(() => {
                 SafariBattle.safariRoll(n - 1);
-            }, 1200 * SafariBattle.tierMultiplier(Safari.safariLevel()));
+            }, 1.7 * SafariBattle.Speed.ballRoll * SafariBattle.tierMultiplier(Safari.safariLevel()));
         }
     }
 
@@ -169,7 +166,7 @@ class SafariBattle {
                 setTimeout(() => {
                     SafariBattle.text('What will you do?');
                     SafariBattle.busy(false);
-                }, 1500);
+                }, SafariBattle.Speed.turnLength);
                 return;
             }
             SafariBattle.text(`You throw ${bait.useName} at ${SafariBattle.enemy.displayName}`);
@@ -178,8 +175,8 @@ class SafariBattle {
             const enemy = $('#safariBattleModal .enemy').offset();
             enemy.left += 30;
             enemy.top += 70;
-            SafariBattle.dropParticle(`<img width=16px src="${bait.image}">`, $('#safariBattleModal .pageItemFooter').offset(), enemy, 1000 * SafariBattle.tierMultiplier(Safari.safariLevel()), 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
-            setTimeout(SafariBattle.enemyTurn, 1500 * SafariBattle.tierMultiplier(Safari.safariLevel()));
+            SafariBattle.dropParticle(`<img width=16px src="${bait.image}">`, $('#safariBattleModal .pageItemFooter').offset(), enemy, SafariBattle.Speed.bait * SafariBattle.tierMultiplier(Safari.safariLevel()), 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
+            setTimeout(SafariBattle.enemyTurn, SafariBattle.Speed.turnLength * SafariBattle.tierMultiplier(Safari.safariLevel()));
         }
     }
 
@@ -193,7 +190,7 @@ class SafariBattle {
             const enemy = $('#safariBattleModal .enemy').offset();
             enemy.left += 40;
             enemy.top += 10;
-            SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariBattleModal .pageItemFooter').offset(), enemy, 800 * SafariBattle.tierMultiplier(Safari.safariLevel()), 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
+            SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariBattleModal .pageItemFooter').offset(), enemy, 0.4 * SafariBattle.Speed.rock * SafariBattle.tierMultiplier(Safari.safariLevel()), 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
             setTimeout(() => {
                 const hitSplash = $('<ptcl>').html('<img src="assets/images/safari/hit.png">').children().appendTo('#safariBattleModal');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
@@ -215,11 +212,11 @@ class SafariBattle {
                         ang.offset(newOffset);
                         setTimeout(() => {
                             ang.remove();
-                        }, 350 * SafariBattle.tierMultiplier(Safari.safariLevel()));
-                    }, 350 * SafariBattle.tierMultiplier(Safari.safariLevel()));
-                }, 300 * SafariBattle.tierMultiplier(Safari.safariLevel()));
-            }, 800 * SafariBattle.tierMultiplier(Safari.safariLevel()));
-            setTimeout(SafariBattle.enemyTurn, 2000 * SafariBattle.tierMultiplier(Safari.safariLevel()));
+                        }, 0.4375 * SafariBattle.Speed.rock * SafariBattle.tierMultiplier(Safari.safariLevel()));
+                    }, 0.4375 * SafariBattle.Speed.rock * SafariBattle.tierMultiplier(Safari.safariLevel()));
+                }, 0.375 * SafariBattle.Speed.rock * SafariBattle.tierMultiplier(Safari.safariLevel()));
+            }, SafariBattle.Speed.rock * SafariBattle.tierMultiplier(Safari.safariLevel()));
+            setTimeout(SafariBattle.enemyTurn, 1.33 * SafariBattle.Speed.turnLength * SafariBattle.tierMultiplier(Safari.safariLevel()));
         }
     }
 
@@ -227,7 +224,7 @@ class SafariBattle {
         if (Safari.inBattle() && !SafariBattle.busy()) {
             SafariBattle.busy(true);
             SafariBattle.text('You flee.');
-            setTimeout(SafariBattle.endBattle, 1500 * SafariBattle.tierMultiplier(Safari.safariLevel()));
+            setTimeout(SafariBattle.endBattle, SafariBattle.Speed.turnLength * SafariBattle.tierMultiplier(Safari.safariLevel()));
         }
     }
 
@@ -235,7 +232,8 @@ class SafariBattle {
         // Enemy turn to flee;
         if (Rand.chance(SafariBattle.enemy.escapeFactor / 100)) {
             SafariBattle.text(`${SafariBattle.enemy.displayName} has fled.`);
-            setTimeout(SafariBattle.endBattle, 1000 * SafariBattle.tierMultiplier(Safari.safariLevel()));
+            setTimeout(SafariBattle.endBattle, SafariBattle.Speed.enemyFlee * SafariBattle.tierMultiplier(Safari.safariLevel()));
+            return;
         } else if (SafariBattle.enemy.eating > 0) {
             SafariBattle.text(`${SafariBattle.enemy.displayName} is eating..`);
         } else if (SafariBattle.enemy.angry > 0) {
@@ -248,7 +246,7 @@ class SafariBattle {
         setTimeout(() => {
             SafariBattle.text('What will you do?');
             SafariBattle.busy(false);
-        }, 1500);
+        }, SafariBattle.Speed.turnLength);
     }
 
     private static endBattle() {
@@ -266,7 +264,7 @@ class SafariBattle {
             SafariBattle.busy(false);
             $('#safariBattleModal').modal('hide');
             $('#safariModal').modal('hide');
-        }, 2000 * SafariBattle.tierMultiplier(Safari.safariLevel()));
+        }, SafariBattle.Speed.gameOver * SafariBattle.tierMultiplier(Safari.safariLevel()));
     }
 
     private static dropParticle(html: string, pos, target, time = 2, top, persistentParticle = false) {
@@ -311,6 +309,11 @@ namespace SafariBattle {
         ballBounce: 850,
         ballRoll: 700,
         enemyTransition: 1000,
+        enemyFlee: 1000,
+        bait: 1000,
+        rock: 800,
+        turnLength: 1500,
+        gameOver: 2000,
     };
 
     export const CATCH_MESSAGES = [
