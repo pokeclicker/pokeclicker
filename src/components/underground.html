@@ -182,13 +182,21 @@
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: item1.image }'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
+                                    <td class="vertical-middle">
+                                        <span data-bind="text: amount1"></span>
+                                        <span data-bind="visible: App.game.underground.tradeAmount() > 1, text: ` (${(amount1 * App.game.underground.tradeAmount()).toLocaleString('en-US')})`"></span>
+                                        <span data-bind="text: ` × ${item1.name}`"></span>
+                                    </td>
                                     <td class='vertical-middle'>→</td>
                                     <td class='vertical-middle text-center' data-bind="text: player.getUndergroundItemAmount(item2.id).toLocaleString('en-US')"></td>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: item2.image }'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
+                                    <td class="vertical-middle">
+                                        <span data-bind="text: amount2"></span>
+                                        <span data-bind="visible: App.game.underground.tradeAmount() > 1, text: ` (${(amount2 * App.game.underground.tradeAmount()).toLocaleString('en-US')})`"></span>
+                                        <span data-bind="text: ` × ${item2.name}`"></span>
+                                    </td>
                                     <td class='vertical-middle'>
                                         <div class="btn-group btn-block">
                                             <button class="btn btn-primary btn-block" data-bind="click: () => DailyDeal.use($index(), App.game.underground.tradeAmount()), css: { disabled: !DailyDeal.canUse($index()) }">
@@ -201,7 +209,7 @@
                                                 <div class="dropdown-divider m-0"></div>
                                                 <!-- ko foreach: [10, 25, 50, 75, 100] -->
                                                 <button class="dropdown-item small py-1" type="button" data-bind="text: `${$data}%`,
-                                                    click: () => { App.game.underground.tradeAmount(player.getUndergroundItemAmount($parent.item1.id) * ($data / 100)) }"></button>
+                                                    click: () => { App.game.underground.tradeAmount(Math.floor(player.getUndergroundItemAmount($parent.item1.id) * ($data / 100) / $parent.amount1)) }"></button>
                                                 <!-- /ko -->
                                             </div>
                                         </div>
@@ -223,7 +231,7 @@
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont"
                                         data-bind="click: () => App.game.underground.tradeAmount(1)">Reset</button>
                                 </div>
-                                <input type="number" class="outline-dark form-control form-control-number" data-bind="value: App.game.underground.tradeAmount" />
+                                <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: App.game.underground.tradeAmount" />
                                 <div class="input-group-append">
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(10)">
