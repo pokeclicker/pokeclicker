@@ -233,6 +233,11 @@
                                 </div>
                                 <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: App.game.underground.tradeAmount" />
                                 <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split rounded-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" data-bind="foreach: [10, 100, 1000]">
+                                        <button class="dropdown-item py-1" type="button" data-bind="text: $data.toLocaleString('en-US'),
+                                            click: () => App.game.underground.tradeAmount($data)"></button>
+                                    </div>
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(10)">
                                         +10
