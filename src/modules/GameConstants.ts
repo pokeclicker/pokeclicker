@@ -779,7 +779,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Town Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Orre Colosseum', 'Citadark Isle Dome']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Town Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Citadark Isle Dome', 'Orre Colosseum']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -1295,6 +1295,11 @@ export const OrreGyms = [
     'Cipher Admin Miror B.',
     'Cipher Admin Dakim',
     'Cipher Admin Venus',
+    'Cipher Admin Lovrina',
+    'Cipher Admin Snattle',
+    'Cipher Admin Gorigan',
+    'Cipher Admin Ardos',
+    'Cipher Admin Eldes',
 ];
 
 export const MagikarpJumpGyms = [
@@ -1415,11 +1420,10 @@ export const HoennDungeons = [
     'Deep Colosseum',
     'Phenac Stadium',
     'Under Colosseum',
-    'Orre Colosseum',
     'Gateon Port Battles',
     'Cipher Key Lair',
     'Citadark Isle',
-    'Citadark Isle Dome', // 77
+    'Citadark Isle Dome', // 76
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1448,7 +1452,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate', // 78
+    'Oreburgh Gate', // 77
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1471,11 +1475,11 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin', // 101
+    'Hall of Origin', // 100
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 102
+    'Floccesy Ranch', // 101
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1497,11 +1501,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 124
+    'P2 Laboratory', // 123
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 125
+    'Santalune Forest', // 124
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1514,12 +1518,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 137
+    'Victory Road Kalos', // 136
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 138
+    'Trainers\' School', // 137
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1548,11 +1552,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 167
+    'Resolution Cave', // 166
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 168
+    'Slumbering Weald Shrine', // 167
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1572,7 +1576,8 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 188
+    'Crown Shrine',
+    'Max Lair', // 188
 ];
 
 export const HisuiDungeons = [
@@ -1602,14 +1607,14 @@ export const HisuiDungeons = [
 ];
 
 export const PaldeaDungeons = [
-    'Inlet Grotto', // 212
+    'Inlet Grotto', // 211
     'Glaseado Mountain',
     'Grasswither Shrine',
     'Icerend Shrine',
     'Groundblight Shrine',
     'Firescourge Shrine',
     'Area Zero',
-    'Area Zero Depths', // 219
+    'Area Zero Depths', // 218
 ];
 
 export const RegionDungeons = [
@@ -2014,6 +2019,9 @@ export const TemporaryBattles = [
     'Galarian Moltres 2',
     'Galarian Moltres 3',
     'Regigigas',
+    'Max Raid 1',
+    'Max Raid 2',
+    'Max Raid 3',
     'Volo 1',
     'Akari 1',
     'Warden Mai',

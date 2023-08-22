@@ -18,6 +18,8 @@ import RegionRoute from './RegionRoute';
 import RoutePokemon from './RoutePokemon';
 import Routes from './Routes';
 import SpecialRoutePokemon from './SpecialRoutePokemon';
+import SpecialEventRandomRequirement from '../requirements/SpecialEventRandomRequirement';
+import SeededRand from '../utilities/SeededRand';
 
 /*
 KANTO
@@ -1036,7 +1038,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Sandshrew', 'Gligar', 'Trapinch'],
     }),
-    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
     undefined,
     HoennSubRegions.Orre,
     true,
@@ -1047,7 +1049,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Hoppip', 'Phanpy', 'Surskit'],
     }),
-    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
     undefined,
     HoennSubRegions.Orre,
     true,
@@ -1058,7 +1060,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zubat', 'Aron', 'Wooper'],
     }),
-    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
     undefined,
     HoennSubRegions.Orre,
     true,
@@ -3834,3 +3836,25 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
 ));
+
+// Halloween Event
+SeededRand.seed(new Date().getFullYear());
+Routes.getRoutesByRegion(Region.kanto).forEach((route) => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Spooky Bulbasaur'], new SpecialEventRandomRequirement('Halloween!')),
+        new SpecialRoutePokemon(['Gastly'], new SpecialEventRandomRequirement('Halloween!')),
+    );
+});
+Routes.getRoutesByRegion(Region.johto).forEach(route => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Spooky Togepi'], new SpecialEventRandomRequirement('Halloween!')),
+        new SpecialRoutePokemon(['Misdreavus'], new SpecialEventRandomRequirement('Halloween!')),
+    );
+});
+Routes.getRoutesByRegion(Region.hoenn).forEach(route => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Pikachu (Gengar)'], new SpecialEventRandomRequirement('Halloween!')),
+        new SpecialRoutePokemon(['Shuppet'], new SpecialEventRandomRequirement('Halloween!')),
+        new SpecialRoutePokemon(['Duskull'], new SpecialEventRandomRequirement('Halloween!')),
+    );
+});

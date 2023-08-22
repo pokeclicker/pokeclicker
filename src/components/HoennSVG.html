@@ -1381,7 +1381,31 @@
             })
         %>
 
+        <!--Orre Colosseum-->
+        <%- include('templates/mapTown',
+            { name: "Orre Colosseum"
+            , x: 20, y: 36
+            , width: 7, height: 5
+            })
+        %>
 
+        <!--Orre Colosseum extension-->
+        <%- include('templates/mapTown',
+            { name: "Orre Colosseum"
+            , x: 21, y: 41
+            , width: 5, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Orre Colosseum extension-->
+        <%- include('templates/mapTown',
+            { name: "Orre Colosseum"
+            , x: 22, y: 34
+            , width: 5, height: 2
+            , isExtension: true
+            })
+        %>
 
         <!-- -------- -->
         <!-- DUNGEONS -->
@@ -1531,32 +1555,6 @@
 			, invisible: true
 			})
 		%>
-
-        <!--Orre Colosseum-->
-        <%- include('templates/mapDungeon',
-            { name: "Orre Colosseum"
-            , x: 20, y: 36
-            , width: 7, height: 5
-            })
-        %>
-
-        <!--Orre Colosseum extension-->
-        <%- include('templates/mapDungeon',
-            { name: "Orre Colosseum"
-            , x: 21, y: 41
-            , width: 5, height: 2
-            , isExtension: true
-            })
-        %>
-
-        <!--Orre Colosseum extension-->
-        <%- include('templates/mapDungeon',
-            { name: "Orre Colosseum"
-            , x: 22, y: 34
-            , width: 5, height: 2
-            , isExtension: true
-            })
-        %>
 
 		<!--Gateon Port Battles-->
 		<%- include('templates/mapDungeon',

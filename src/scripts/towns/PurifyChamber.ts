@@ -29,6 +29,7 @@ class PurifyChamber implements Saveable {
     public selectedPokemon: KnockoutObservable<PartyPokemon>;
     public currentFlow: KnockoutObservable<number>;
     public flowNeeded: KnockoutComputed<number>;
+    private notified = false;
 
     constructor() {
         this.selectedPokemon = ko.observable(undefined);
@@ -61,6 +62,7 @@ class PurifyChamber implements Saveable {
         }
         this.selectedPokemon().shadow = GameConstants.ShadowStatus.Purified;
         this.currentFlow(0);
+        this.notified = false;
     }
 
     public gainFlow(exp: number) {
@@ -69,6 +71,16 @@ class PurifyChamber implements Saveable {
         }
         const newFlow = Math.round(this.currentFlow() + exp / 1000);
         this.currentFlow(Math.min(newFlow, this.flowNeeded()));
+
+        if (!this.notified && this.currentFlow() >= this.flowNeeded()) {
+            this.notified = true;
+            Notifier.notify({
+                title: 'Purify Chamber',
+                message: 'Maximum Flow has accumulated at the Purify Chamber!',
+                type: NotificationConstants.NotificationOption.primary,
+                timeout: 6e4,
+            });
+        }
     }
 
     saveKey = 'PurifyChamber';

@@ -770,9 +770,9 @@ const RedSpearow = new NPC('Red Spearow', [
     '<i>The Red Spearow seems to appreciate your visit.</i>',
 ], {image: 'assets/images/pokemon/21.01.png'});
 
-const NewIslandJessieAndJames = new RoamerNPC('Jessie And James',
-    ['Mewtwo\'s Clones have escape and are Roaming freely across Kanto. Will you help us track them down? It\'s for a good cause, we swear.'],
-    GameConstants.Region.kanto, 0, 'assets/images/npcs/Jessie And James.png',
+const NewIslandJessieAndJames = new RoamerNPC('Jessie and James',
+    ['Mewtwo\'s Clones have escaped and are Roaming freely across Kanto. Will you help us track them down? It\'s for a good cause, we swear.'],
+    GameConstants.Region.kanto, 0, 'assets/images/npcs/Jessie and James.png',
     new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island'))
 );
 
@@ -803,7 +803,7 @@ const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
 
 const CandyMan = new NPC('The Candy Man', [
     'I sure do love candy. The rarer, the better!',
-    'I\'ve got a real SWEET-TOOTH!',
+    'I\'ve got a real <b>SWEET-TOOTH<b/>',
 ]);
 
 const UnrivaledBlue = new NPC('Blue', [
@@ -2968,7 +2968,7 @@ const EviceEscape = new NPC('Watch Evice Escape', [
 const PhenacRoller = new NPC('Cool Dude', [
     'There\'s been a lot of crime around here recently. But nothing I can\'t handle!',
     'Some folks have been corrupting their Pokémon and making them commit totally jank acts.',
-    'Those Pokémon would be better off in the hands of a radical trainer who knows how use Catch Filters, like me!',
+    'Those Pokémon would be better off in the hands of a radical trainer who knows how to use Catch Filters, like me!',
 ], {image: 'assets/images/npcs/Roller Boy.png'});
 const OrreRoamerNPC = new RoamerNPC('Fateen\'s Fortune Telling', [
     'I sense the presence of rare Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
@@ -3056,7 +3056,9 @@ const ProfKrane = new NPC('Professor Krane', [
 const DrKaminko = new NPC('Dr. Kaminko', [
     'Leave me alone! I\'m WORKING!']
 );
-
+const OrreColosseumSpectator = new NPC('Colosseum Spectator', [
+    'Only the toughest trainers in Orre are allowed to fight here! I\'m just watching until I get stronger.']
+);
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -3371,7 +3373,7 @@ TownList['Gateon Port'] = new Town(
     'Gateon Port',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles'])],
+    [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles']), new DockTownContent()],
     {
         requirements: [new QuestLineStartedRequirement('Shadows in the Desert')],
         npcs: [GateonSailor, Verich],
@@ -3384,7 +3386,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
+        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
         npcs: [ProfKrane],
     }
 );
@@ -3395,7 +3397,7 @@ TownList['Kaminko\'s Manor'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
+        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
         npcs: [DrKaminko, Chobin1, Chobin2],
     }
 );
@@ -3406,11 +3408,20 @@ TownList['S. S. Libra'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Cipher Peon Smarton']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
+        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
         npcs: [SearchLibra],
     }
 );
-
+TownList['Orre Colosseum'] = new Town(
+    'Orre Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [GymList['Cipher Admin Lovrina'], GymList['Cipher Admin Snattle'], GymList['Cipher Admin Gorigan'], GymList['Cipher Admin Ardos'], GymList['Cipher Admin Eldes']],
+    {
+        requirements: [new DevelopmentRequirement(), new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [OrreColosseumSpectator],
+    }
+);
 //Hoenn Dungeons
 TownList['Petalburg Woods'] = new DungeonTown(
     'Petalburg Woods',
@@ -3750,19 +3761,12 @@ TownList['Under Colosseum'] = new DungeonTown(
         new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Orre Colosseum'] = new DungeonTown(
-    'Orre Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement, //TODO Populate this
-    ]
-);
 TownList['Gateon Port Battles'] = new DungeonTown(
     'Gateon Port Battles',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
+        new DevelopmentRequirement(),
         new QuestLineStepCompletedRequirement('Gale of Darkness', 1),
     ]
 );
@@ -3771,6 +3775,7 @@ TownList['Cipher Key Lair'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
+        new DevelopmentRequirement(),
         new QuestLineStepCompletedRequirement('Gale of Darkness', 24),
     ],
     [],
@@ -3783,6 +3788,7 @@ TownList['Citadark Isle'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
+        new DevelopmentRequirement(),
         new QuestLineStepCompletedRequirement('Gale of Darkness', 26),
     ]
 );
@@ -3791,6 +3797,7 @@ TownList['Citadark Isle Dome'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
+        new DevelopmentRequirement(),
         new QuestLineStepCompletedRequirement('Gale of Darkness', 27),
     ]
 );
@@ -4284,8 +4291,8 @@ const HappinyBoulders = new NPC('Strange Boulders', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 22), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24, GameConstants.AchievementOption.less)]),
 });
 const SnoverBreeder = new NPC('Snover Breeder', [
-    'I\'ve been finding ways to grow Snover Berries using humane methods',
-    'Snover are happy to let you pick their berries, then they wander away into the wilderness. Just be kind to them.',
+    'I\'ve been finding ways to grow Snover Berries using humane methods.',
+    'Snover are happy to let you pick their berries.  They then wander away into the wilderness. Please be kind to them!',
 ], {image: 'assets/images/npcs/Pokémon Breeder (female).png'});
 const GrotleAcornParty = new NPC('Grotle and Friends', [
     '<i>Several friendly Pokémon are snacking on a Grotle\'s acorns.</i>',
@@ -8606,7 +8613,8 @@ TownList['Tunnel to the Top'] = new DungeonTown(
     'Tunnel to the Top',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)],
+    [new MoveToDungeon(dungeonList['Max Lair'], new DevelopmentRequirement())]
 );
 TownList['Crown Shrine'] = new DungeonTown(
     'Crown Shrine',
@@ -8617,6 +8625,12 @@ TownList['Crown Shrine'] = new DungeonTown(
     {
         npcs: [Calyrex4, Calyrex5, CrownShrineExplorer],
     }
+);
+TownList['Max Lair'] = new DungeonTown(
+    'Max Lair',
+    GameConstants.Region.galar,
+    GameConstants.GalarSubRegions.CrownTundra,
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name'), new DevelopmentRequirement()]
 );
 
 //Hisui shops

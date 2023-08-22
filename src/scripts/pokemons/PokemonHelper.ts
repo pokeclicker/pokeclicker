@@ -19,7 +19,8 @@ enum PokemonLocationType {
     TempBattleReward,
     GymReward,
     DungeonReward,
-    Trade
+    Trade,
+    GiftNPC,
 }
 
 class PokemonHelper extends TmpPokemonHelper {
@@ -357,6 +358,28 @@ class PokemonHelper extends TmpPokemonHelper {
         return trades;
     }
 
+    public static getPokemonGifts(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<object> {
+        const gifts = [];
+        Object.entries(TownList).forEach(([townName, town]) => {
+            // If we only want to check up to a maximum region
+            if (maxRegion != GameConstants.Region.none && town.region > maxRegion) {
+                return false;
+            }
+
+            const npcs = town.npcs?.filter(n => n instanceof GiftNPC);
+            npcs?.forEach(npc => {
+                if ((npc as GiftNPC).giftFunction?.toString().includes(`'${pokemonName}'`)) {
+                    gifts.push({
+                        town: townName,
+                        npc: npc.name,
+                        requirements: npc.options?.requirement?.hint(),
+                    });
+                }
+            });
+        });
+        return gifts;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.MAX_AVAILABLE_REGION) => {
         const encounterTypes = {};
         // Routes
@@ -461,6 +484,12 @@ class PokemonHelper extends TmpPokemonHelper {
         const trades = PokemonHelper.getPokemonTrades(pokemonName);
         if (trades.length) {
             encounterTypes[PokemonLocationType.Trade] = trades;
+        }
+
+        // Gift NPC
+        const gifts = PokemonHelper.getPokemonGifts(pokemonName);
+        if (gifts.length) {
+            encounterTypes[PokemonLocationType.GiftNPC] = gifts;
         }
 
         // Return the list of items
