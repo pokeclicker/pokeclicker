@@ -12,12 +12,13 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
         return this.cachedQuest;
     }
 
-    constructor(private questLineName: string, private questIndex: number, option = AchievementOption.equal) {
+    constructor(private questLineName: string, private questIndex: (() => number) | number, option = AchievementOption.equal) {
         super(1, option);
     }
 
     public getProgress(): number {
-        return (this.quest.state() === QuestLineState.ended || this.quest.curQuest() > this.questIndex) ? 1 : 0;
+        let questIndex = typeof this.questIndex === 'number' ? this.questIndex : (typeof this.questIndex === 'function' ? this.questIndex() : 0);
+        return (this.quest.state() === QuestLineState.ended || this.quest.curQuest() > questIndex) ? 1 : 0;
     }
 
     public isCompleted() {

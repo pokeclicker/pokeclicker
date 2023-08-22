@@ -65,6 +65,7 @@ class Safari {
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
+        Safari.activeEnvironment(SafariEnvironments.Grass);
         Safari.inBattle(false);
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());

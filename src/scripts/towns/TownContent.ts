@@ -1,7 +1,6 @@
 abstract class TownContent {
     public abstract cssClass(): string;
     public abstract text(): string;
-    public abstract isVisible(): boolean;
     public abstract onclick(): void;
     public tooltip: string = undefined;
 
@@ -21,6 +20,13 @@ abstract class TownContent {
 
     public clears(): number {
         return undefined;
+    }
+
+    public isVisible(): boolean {
+        if (this.requirements.some(r => r instanceof DevelopmentRequirement || (r instanceof MultiRequirement && r.requirements.some(r2 => r2 instanceof DevelopmentRequirement)))) {
+            return this.isUnlocked();
+        }
+        return true;
     }
 
     public protectedOnclick(): void {
@@ -69,10 +75,6 @@ class DockTownContent extends TownContent {
 class BattleFrontierTownContent extends TownContent {
     public cssClass() {
         return 'btn btn-primary';
-    }
-
-    public isVisible() {
-        return true;
     }
 
     public onclick(): void {

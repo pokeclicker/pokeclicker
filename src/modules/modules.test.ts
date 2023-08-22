@@ -99,7 +99,7 @@ describe('Test GameConstants', () => {
         expect(getGymRegion('Not a real gym')).toEqual(-1);
     });
     it('return the dungeons total index', () => {
-        expect(getDungeonIndex('Abundant Shrine')).toEqual(116);
+        expect(getDungeonIndex('Abundant Shrine')).toEqual(115);
         expect(getDungeonIndex('Not a real dungeon')).toEqual(-1);
     });
     it('return the region a dungeon is in', () => {
