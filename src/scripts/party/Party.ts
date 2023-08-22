@@ -272,13 +272,14 @@ class Party implements Feature {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
 
-    alreadyCaughtPokemon(id: number, shiny = false, shadow = false) {
+    alreadyCaughtPokemon(id: number, shiny = false, shadow = false, purified = false) {
         const pokemon = this.getPokemon(id);
 
         if (pokemon) {
             const shinyOkay = (!shiny || pokemon.shiny);
             const shadowOkay = (!shadow || (pokemon.shadow > GameConstants.ShadowStatus.None));
-            return shinyOkay && shadowOkay;
+            const purifiedOkay = (!purified || (pokemon.shadow == GameConstants.ShadowStatus.Purified));
+            return shinyOkay && shadowOkay && purifiedOkay;
         }
         return false;
     }

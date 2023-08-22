@@ -2454,6 +2454,9 @@ class Update implements Saveable {
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 52);
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 53);
 
+            // Reset Red temp battle
+            saveData.statistics.temporaryBattleDefeated[31] = 0;
+
         },
     };
 
