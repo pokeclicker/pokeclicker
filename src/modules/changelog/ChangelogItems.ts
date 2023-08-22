@@ -10,6 +10,15 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // V0.10.15
+    new ChangelogUpdate('v0.10.15', new Date(2023, 7, 21)),
+    new Changelog(changelogType.NEW, 'Pokédex shadow and purified caught status filters'),
+    new Changelog(changelogType.NEW, 'Notification for when the Purify Chamber is ready'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Dungeon chests could not be opened in rare instances'),
+    new Changelog(changelogType.FIXED, 'Orre Poké Spots not accessible'),
+
     // v0.10.14
     new ChangelogUpdate('v0.10.14', new Date(2023, 7, 20)),
     new Changelog(changelogType.NEW, 'Enter the Colosseum - Orre is now available!'),
