@@ -2459,7 +2459,7 @@ class Update implements Saveable {
 
         },
         '0.10.16': ({ playerData, saveData, settingsData }) => {
-            
+
             // ClearBattleFrontier → ClearBattleFrontierQuest
             saveData.quests.questList = saveData.quests.questList?.map(q => {
                 if (q.name == 'ClearBattleFrontier') {
