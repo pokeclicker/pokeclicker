@@ -75,7 +75,7 @@ aria-labelledby="pokedexModalLabel">
                                     <div class="form-group col-lg-6 col-6">
                                         <label>Region</label>
                                         <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
-                                                data-bind="options: PokedexFilters.region.options,
+                                                data-bind="options: PokedexFilters.region.options.filter(r => r.value <= player.highestRegion()),
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
                                                         value: PokedexFilters.region.value">
