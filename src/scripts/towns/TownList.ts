@@ -803,7 +803,7 @@ const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
 
 const CandyMan = new NPC('The Candy Man', [
     'I sure do love candy. The rarer, the better!',
-    'I\'ve got a real SWEET-TOOTH!',
+    'I\'ve got a real <b>SWEET-TOOTH<b/>',
 ]);
 
 const UnrivaledBlue = new NPC('Blue', [
@@ -2198,13 +2198,17 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
 
 //Hoenn Contest Shop
 const HoennContestShop = new Shop([
+    ItemList['Tangela (Pom-pom)'],
+    ItemList['Goldeen (Diva)'],
+    ItemList['Weepinbell (Fancy)'],
+    ItemList['Onix (Rocker)'],
     ItemList['Dugtrio (Punk)'],
     ItemList['Gengar (Punk)'],
-    ItemList['Goldeen (Diva)'],
-    ItemList['Onix (Rocker)'],
-    ItemList['Tangela (Pom-pom)'],
-    ItemList['Weepinbell (Fancy)'],
-], 'Contest Shop', [new DevelopmentRequirement()]);
+    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+], 'Contest Shop', [PokemonContestController.requirements]);
 
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMaster);
@@ -2968,7 +2972,7 @@ const EviceEscape = new NPC('Watch Evice Escape', [
 const PhenacRoller = new NPC('Cool Dude', [
     'There\'s been a lot of crime around here recently. But nothing I can\'t handle!',
     'Some folks have been corrupting their Pokémon and making them commit totally jank acts.',
-    'Those Pokémon would be better off in the hands of a radical trainer who knows how use Catch Filters, like me!',
+    'Those Pokémon would be better off in the hands of a radical trainer who knows how to use Catch Filters, like me!',
 ], {image: 'assets/images/npcs/Roller Boy.png'});
 const OrreRoamerNPC = new RoamerNPC('Fateen\'s Fortune Telling', [
     'I sense the presence of rare Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
@@ -3215,7 +3219,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop, new PokemonContestTownContent()], // HoennContestShop
+    [new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -4291,8 +4295,8 @@ const HappinyBoulders = new NPC('Strange Boulders', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 22), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24, GameConstants.AchievementOption.less)]),
 });
 const SnoverBreeder = new NPC('Snover Breeder', [
-    'I\'ve been finding ways to grow Snover Berries using humane methods',
-    'Snover are happy to let you pick their berries, then they wander away into the wilderness. Just be kind to them.',
+    'I\'ve been finding ways to grow Snover Berries using humane methods.',
+    'Snover are happy to let you pick their berries.  They then wander away into the wilderness. Please be kind to them!',
 ], {image: 'assets/images/npcs/Pokémon Breeder (female).png'});
 const GrotleAcornParty = new NPC('Grotle and Friends', [
     '<i>Several friendly Pokémon are snacking on a Grotle\'s acorns.</i>',
@@ -5488,6 +5492,7 @@ const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Dandy)'],
     ItemList['Furfrou (Kabuki)'],
     ItemList['Furfrou (Pharaoh)'],
+    ItemList['Furfrou (Heart)'],
 ], 'Friseur Furfrou');
 const CamphrierTownShop = new Shop([
     ItemList.Pokeball,
