@@ -110,7 +110,7 @@ class SafariBattle {
                 setTimeout(() => {
                     SafariBattle.particle.remove();
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
-                }, 1.7 * SafariBattle.Speed.enemyTransition);
+                }, SafariBattle.Speed.enemyCaught);
             } else {
                 $('#safariBattleModal .enemy > img').css('opacity', '1');
                 $('#safariBattleModal .enemy').removeClass('safariCapture');
@@ -118,7 +118,7 @@ class SafariBattle {
                 SafariBattle.particle.remove();
                 setTimeout(() => {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
-                }, SafariBattle.Speed.enemyTransition);
+                }, SafariBattle.Speed.enemyEscape);
             }
         });
     }
@@ -310,6 +310,8 @@ namespace SafariBattle {
         ballRoll: 700,
         enemyTransition: 1000,
         enemyFlee: 1000,
+        enemyCaught: 1700,
+        enemyEscape: 1000,
         bait: 1000,
         rock: 800,
         turnLength: 1500,
