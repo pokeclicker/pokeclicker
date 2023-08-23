@@ -209,4 +209,10 @@ export default class GameHelper {
         }
         return hash;
     }
+
+    public static isColorLight(color: string): boolean {
+        const r = parseInt(color.substring(1, 3), 16), g = parseInt(color.substring(3, 5), 16), b = parseInt(color.substring(5), 16);
+        const grey = r * 0.299 + g * 0.587 + b * 0.114; // Range between 0 and 255, based on NTSC formula.
+        return grey > 127;
+    }
 }
