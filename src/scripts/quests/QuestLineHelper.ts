@@ -1118,7 +1118,7 @@ class QuestLineHelper {
         const talkToRui3 = new TalkToNPCQuest(Rui3, 'Discuss your next move with Rui at Mt. Battle.');
         orreColosseumQuestLine.addQuest(talkToRui3);
 
-        const fightTheUnder = new CustomQuest(1, 0, 'Track down the TV broadcast coming The Under in Pyrite Town. Clear The Under.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('The Under')](), undefined, undefined,
+        const fightTheUnder = new CustomQuest(1, 0, 'Track down the TV broadcast coming from The Under in Pyrite Town. Clear The Under.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('The Under')](), undefined, undefined,
             {
                 clearedMessage: 'Aiyeeeeh! How dare you! How could I get bested by a mere child? Remember this! I\'ll get you back for this!',
                 npcDisplayName: 'Venus',
