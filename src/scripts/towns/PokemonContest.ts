@@ -12,13 +12,13 @@ class PokemonContest implements Feature {
             10,
             new ObtainedPokemonRequirement('Machop')
         ),
-        new PokemonContestPrizes('Secret Mega Stone',
+        /*new PokemonContestPrizes('Secret Mega Stone',
             'Get a secret Mega Stone for reaching Kalos. (real requirement will be added later)',
             'Altarianite',
             10,
             new MaxRegionRequirement(GameConstants.Region.kalos),
             new MaxRegionRequirement(GameConstants.Region.kalos)
-        ),
+        ),*/
     ];
 
     constructor() {
@@ -150,7 +150,7 @@ class ContestEntry {
     }
 
     public getPokemonImage() {
-        return !this.pokemonName() ? '/assets/images/pokeball/Pokeball.svg' : PokemonHelper.getImage(pokemonMap[this.pokemonName()].id);
+        return !this.pokemonName() ? 'assets/images/pokeball/Pokeball.svg' : PokemonHelper.getImage(pokemonMap[this.pokemonName()].id);
     }
 
     getStylePoints = ko.pureComputed((): number => {
