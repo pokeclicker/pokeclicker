@@ -21,6 +21,7 @@ enum PokemonLocationType {
     DungeonReward,
     Trade,
     GiftNPC,
+    ShadowPokemon
 }
 
 class PokemonHelper extends TmpPokemonHelper {
@@ -118,6 +119,24 @@ class PokemonHelper extends TmpPokemonHelper {
                     dungeons.push(data);
                 }
             });
+        });
+        return dungeons;
+    }
+
+    public static getShadowPokemonDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        const dungeons = [];
+        Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
+            // If we only want to check up to a maximum region
+            if (maxRegion != GameConstants.Region.none) {
+                const region = GameConstants.RegionDungeons.findIndex(d => d.includes(dungeonName));
+                if (region > maxRegion) {
+                    return false;
+                }
+            }
+            // Shadow Pokemon
+            if (dungeon.allAvailableShadowPokemon().includes(pokemonName)) {
+                dungeons.push(dungeonName);
+            }
         });
         return dungeons;
     }
@@ -402,6 +421,11 @@ class PokemonHelper extends TmpPokemonHelper {
         if (chestDungeons.length) {
             encounterTypes[PokemonLocationType.DungeonChest] = chestDungeons;
         }
+        // Shadow Pokemon
+        const shadowPokemon = PokemonHelper.getShadowPokemonDungeons(pokemonName, maxRegion);
+        if (shadowPokemon.length) {
+            encounterTypes[PokemonLocationType.ShadowPokemon] = shadowPokemon;
+        }
         // Eggs
         const eggs = PokemonHelper.getPokemonEggs(pokemonName, maxRegion);
         if (eggs.length) {
@@ -507,7 +531,8 @@ class PokemonHelper extends TmpPokemonHelper {
             locations[PokemonLocationType.Safari] ||
             locations[PokemonLocationType.Shop] ||
             locations[PokemonLocationType.Wandering] ||
-            locations[PokemonLocationType.Trade];
+            locations[PokemonLocationType.Trade] ||
+            locations[PokemonLocationType.ShadowPokemon];
         return !isEvable && Object.keys(locations).length;
     };
 }
