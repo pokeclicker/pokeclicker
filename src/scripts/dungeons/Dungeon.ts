@@ -2153,7 +2153,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Noctowl', 340000, 30),
         new DungeonBossPokemon('Beedrill', 340000, 30),
         new DungeonBossPokemon('Butterfree', 340000, 30),
-        new DungeonBossPokemon('Celebi', 800000, 50, {hide: true, requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 12)}),
+        new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 12)}),
         new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {
             hide: true,
             requirement: new MultiRequirement([
@@ -2218,7 +2218,7 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     [
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
-        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {hide: true, requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
+        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
     ],
     4500, 37);
 
@@ -2243,7 +2243,7 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
     [
         new DungeonBossPokemon('Dewgong', 400000, 40),
         new DungeonBossPokemon('Kingler', 400000, 40),
-        new DungeonBossPokemon('Lugia', 1410000, 100, {hide: true, requirement: new QuestLineStepCompletedRequirement('Whirl Guardian', 9)}),
+        new DungeonBossPokemon('Lugia', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Whirl Guardian', 9)}),
     ],
     5000, 41);
 
