@@ -56,40 +56,58 @@ class SafariPokemonList {
         SafariPokemonList.list[GameConstants.Region.kanto](pokemon);
     }
 
-    public static generateKalosSafariList() {
-        SeededRand.seed(+player.trainerId);
-
-        // Obtain the list of non-EVable pokemon and shuffle it
-        // There may not be an evenly divisible number of pokemon so repeat list 5 times
-        const shuffledPokemon = new Array(GameConstants.FRIEND_SAFARI_POKEMON).fill(
-            SeededRand.shuffleArray(
-                pokemonList.filter((p) => PokemonHelper.isObtainableAndNotEvable(p.name)
-                    && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION).map((p) => p.name))
-        ).flat();
-
-        // Rotation is fixed, use the current date to determine where in the list to select the 5 pokemon
-        const batchCount = Math.ceil(shuffledPokemon.length / GameConstants.FRIEND_SAFARI_POKEMON);
-        const now = new Date();
-        const startIndex = (Math.floor((now.getTime() - now.getTimezoneOffset() * 60 * 1000) / (24 * 60 * 60 * 1000)) % batchCount) * GameConstants.FRIEND_SAFARI_POKEMON;
-        const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
-
-        const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true);
-        });
-
-        pokemon.push(new SafariEncounter('Shuckle', 2));
-        pokemon.push(new SafariEncounter('Stunfisk', 2));
-        pokemon.push(new SafariEncounter('Magmar', 2));
-        pokemon.push(new SafariEncounter('Maractus', 2));
-        pokemon.push(new SafariEncounter('Klefki', 2));
-        pokemon.push(new SafariEncounter('Breloom', 2));
-        pokemon.push(new SafariEncounter('Woobat', 2));
-        pokemon.push(new SafariEncounter('Golurk', 2));
-        pokemon.push(new SafariEncounter('Marowak', 2));
-        // Water
-        pokemon.push(new SafariEncounter('Lapras', 2, [SafariEnvironments.Water]));
+    public static async generateKalosSafariList() {
+        // Populate filler pokemon so nothing weird happens if the player enters
+        // the safari before the full list is generated
+        const pokemon: SafariEncounter[] = [
+            new SafariEncounter('Shuckle', 2),
+            new SafariEncounter('Stunfisk', 2),
+            new SafariEncounter('Magmar', 2),
+            new SafariEncounter('Maractus', 2),
+            new SafariEncounter('Klefki', 2),
+            new SafariEncounter('Breloom', 2),
+            new SafariEncounter('Woobat', 2),
+            new SafariEncounter('Golurk', 2),
+            new SafariEncounter('Marowak', 2),
+            // Water
+            new SafariEncounter('Lapras', 2, [SafariEnvironments.Water]),
+        ];
 
         SafariPokemonList.list[GameConstants.Region.kalos](pokemon);
+
+        this.getAllFriendSafariPokemon().then((friendSafariPokemon) => {
+            SeededRand.seed(+player.trainerId);
+            const shuffledPokemon = new Array(GameConstants.FRIEND_SAFARI_POKEMON)
+                .fill(SeededRand.shuffleArray(friendSafariPokemon)).flat();
+
+            const batchCount = Math.ceil(shuffledPokemon.length / GameConstants.FRIEND_SAFARI_POKEMON);
+            const now = new Date();
+            const startIndex = (Math.floor((now.getTime() - now.getTimezoneOffset() * 60 * 1000) / (24 * 60 * 60 * 1000)) % batchCount) * GameConstants.FRIEND_SAFARI_POKEMON;
+            const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
+
+            const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
+                return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true);
+            });
+
+            SafariPokemonList.list[GameConstants.Region.kalos]().splice(0, 0, ...pokemon);
+        });
+    }
+
+    private static async getAllFriendSafariPokemon(): Promise<PokemonNameType[]> {
+        const pokemon = [];
+        let lastYield = Date.now();
+        for (const p of pokemonList) {
+            if (Date.now() - 25 > lastYield) {
+                lastYield = Date.now();
+                await new Promise(resolve => setTimeout(resolve));
+            }
+
+            if (p.id > 0 && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION && PokemonHelper.isObtainableAndNotEvable(p.name)) {
+                pokemon.push(p.name);
+            }
+        }
+
+        return pokemon;
     }
 
     // Get SafariEnvironment according to the Pokemon types
