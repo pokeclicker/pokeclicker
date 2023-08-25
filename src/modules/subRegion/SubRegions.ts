@@ -10,6 +10,7 @@ import {
     AlolaSubRegions,
     GalarSubRegions,
     HisuiSubRegions,
+    PaldeaSubRegions,
 } from '../GameConstants';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
@@ -78,3 +79,5 @@ SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubReg
 SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
 
 SubRegions.addSubRegion(Region.hisui, new SubRegion('Hisui', HisuiSubRegions.Hisui, undefined, 'Prelude Beach'));
+
+SubRegions.addSubRegion(Region.paldea, new SubRegion('Paldea', PaldeaSubRegions.Paldea));

@@ -1,7 +1,6 @@
 <div class="modal noselect fade" id="pokemonVitaminExpandedModal" tabindex="-1" role="dialog" aria-labelledby="pokemonVitaminExpandedModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <!-- ko if: modalUtils.observableState['pokemonVitaminExpandedModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Vitamins</h5>&nbsp; <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -103,7 +102,7 @@
                             </tr>
                         </thead>
                         <tbody data-bind="foreach: lazyLoad($element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable })">
-                            <tr data-bind="hidden: $data.hideFromProteinList(), css: { 'text-muted': $data.breeding }">
+                            <tr data-bind="css: { 'text-muted': $data.breeding }">
                                 <td class="text-left align-middle">
                                     <knockout data-bind="text: $data.displayName"></knockout>
                                     <sup data-bind="visible: $data.shiny">✨</sup>
@@ -130,7 +129,6 @@
                     </table>
                 </div>
             </div>
-            <!-- /ko -->
         </div>
     </div>
 </div>

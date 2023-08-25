@@ -333,7 +333,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Who Planted These Here?', 'Unlock 8 Berries.', new BerriesUnlockedRequirement(8), 0.1);
         AchievementHandler.addAchievement('Farmer in Training', 'Unlock 18 Berries.', new BerriesUnlockedRequirement(18), 0.2);
         AchievementHandler.addAchievement('Farming Apprentice', 'Unlock 36 Berries.', new BerriesUnlockedRequirement(36), 0.3);
-        AchievementHandler.addAchievement('Master Farmer', 'Unlock all 68 Berries.', new BerriesUnlockedRequirement(68), 0.4);
+        AchievementHandler.addAchievement('Master Farmer', 'Unlock all 69 Berries.', new BerriesUnlockedRequirement(69), 0.4);
 
         AchievementHandler.addAchievement('Getting Some Help at the Farm', 'Unlock 3 Farm Hands.', new FarmHandRequirement(3), 0.2);
         AchievementHandler.addAchievement('Starting a Farming Empire', 'Unlock 6 Farm Hands.', new FarmHandRequirement(6), 0.3);
@@ -393,13 +393,15 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('In the Shadow of Giants', 'Capture your first Shadow Pokémon', new ShadowPokemonRequirement(1), 1, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('That\'s some Shady Pokémon! Do You Want to Sell Them?', 'Capture 10 unique Shadow Pokémon', new ShadowPokemonRequirement(10), 2, GameConstants.ExtraAchievementCategories.orre);
-        AchievementHandler.addAchievement('Now Go Purify Them!', 'Capture 50 unique Shadow Pokémon', new ShadowPokemonRequirement(50), 4, GameConstants.ExtraAchievementCategories.orre);
-        AchievementHandler.addAchievement('Beyond a Shadow of a Doubt', 'Capture all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131), 8, GameConstants.ExtraAchievementCategories.orre);
+        AchievementHandler.addAchievement('Now Go Purify Them!', 'Capture 51 unique Shadow Pokémon', new ShadowPokemonRequirement(51), 4, GameConstants.ExtraAchievementCategories.orre);
+        // Commented out until Orre XD content is released
+        //AchievementHandler.addAchievement('Beyond a Shadow of a Doubt', 'Capture all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131), 8, GameConstants.ExtraAchievementCategories.orre);
 
         AchievementHandler.addAchievement('Cleaning Crew', 'Purify your first Shadow Pokémon', new ShadowPokemonRequirement(1, GameConstants.ShadowStatus.Purified), 1.5, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Almost Clean Enough to Look Shiny', 'Purify 10 unique Shadow Pokémon', new ShadowPokemonRequirement(10, GameConstants.ShadowStatus.Purified), 3, GameConstants.ExtraAchievementCategories.orre);
-        AchievementHandler.addAchievement('Priest in Training', 'Purify 50 unique Shadow Pokémon', new ShadowPokemonRequirement(50, GameConstants.ShadowStatus.Purified), 6, GameConstants.ExtraAchievementCategories.orre);
-        AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
+        AchievementHandler.addAchievement('Priest in Training', 'Purify 51 unique Shadow Pokémon', new ShadowPokemonRequirement(51, GameConstants.ShadowStatus.Purified), 6, GameConstants.ExtraAchievementCategories.orre);
+        // Commented out until Orre XD content is released
+        //AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
 
         AchievementHandler.addAchievement('Who Dropped These Here?', 'Pick up 10 Items in a Safari Zone', new SafariItemsRequirement(10), 0.1);
         AchievementHandler.addAchievement('Cheaper Than Buying It', 'Pick up 50 Items in a Safari Zone', new SafariItemsRequirement(50), 0.2);
@@ -424,12 +426,21 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Just Keep Chuckin\' Balls', 'Catch 50 Pokémon in a Safari Zone', new SafariCatchRequirement(50), 0.1);
         AchievementHandler.addAchievement('Strategic Chucker', 'Catch 100 Pokémon in a Safari Zone', new SafariCatchRequirement(100), 0.2);
         AchievementHandler.addAchievement('Master of the Safari', 'Catch 250 Pokémon in a Safari Zone', new SafariCatchRequirement(250), 0.4);
+        AchievementHandler.addAchievement('Do Shines Cost Extra?', 'Catch a Shiny Pokémon in a Safari Zone', new SafariCatchRequirement(1, true), 0.5);
+
+        const totalMegaStones = Object.values(ItemList).filter((i) => i instanceof MegaStoneItem).length;
+        AchievementHandler.addAchievement('What a neat rock!', 'Obtain your first Mega Stone.', new TotalMegaStoneObtainedRequirement(1), 5, GameConstants.Region.kalos);
+        AchievementHandler.addAchievement('Go, Go, Mega Force!', 'Obtain 25 Mega Stones.', new TotalMegaStoneObtainedRequirement(25), 7, GameConstants.Region.kalos);
+        AchievementHandler.addAchievement('Y\'all got any more of them Mega Stones?', `Obtain all ${totalMegaStones} Mega Stones.`, new TotalMegaStoneObtainedRequirement(totalMegaStones), 10, GameConstants.Region.kalos);
 
         /*
          * REGIONAL
          */
         const addGymAchievements = (gyms: string[], category: GameConstants.Region | GameConstants.ExtraAchievementCategories, subregion?: string) => {
             gyms.forEach(gym => {
+                if (GymList[gym].requirements.some((req) => req instanceof DevelopmentRequirement)) {
+                    return;
+                }
                 const elite = gym.includes('Elite') || gym.includes('Champion') || gym.includes('Supreme');
                 const displayName = GymList[gym]?.displayName;
 
@@ -483,6 +494,9 @@ class AchievementHandler {
             }
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
+                if (TownList[dungeon].requirements.some((req) => req instanceof DevelopmentRequirement)) {
+                    return;
+                }
                 let category = region;
                 // Split bigger subregions into their own achievement pool
                 if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
@@ -523,6 +537,8 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 34 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(34, true), 9, GameConstants.ExtraAchievementCategories.sevii);
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
+
+        addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 2], GameConstants.ExtraAchievementCategories.orre, 'Orre');
 
 
         // load filters

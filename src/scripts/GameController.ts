@@ -341,7 +341,7 @@ class GameController {
             // Only run if no modals are open
             if (visibleModals === 0) {
                 // Route Battles
-                if (App.game.gameState === GameConstants.GameState.fighting) {
+                if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
                     const idx = cycle.findIndex(r => r == player.route());
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
@@ -399,7 +399,7 @@ class GameController {
                             NPCController.openDialog(filteredNPCs[numberKey - filteredContent.length]);
                         }
                         return e.preventDefault();
-                    } else if (player.town() instanceof DungeonTown) {
+                    } else if (player.town() instanceof DungeonTown && !GameController.keyHeld.Control) {
                         const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
                         const idx = cycle.findIndex(d => d.name == player.town().name);
                         switch (key) {

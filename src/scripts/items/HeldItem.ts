@@ -99,7 +99,7 @@ class ExpGainedBonusHeldItem extends HeldItem {
 }
 
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.25, GameConstants.Region.johto);
-ItemList.Miracle_Chest = new ExpGainedBonusHeldItem('Miracle_Chest', 30000, GameConstants.Currency.money, undefined, 'Miracle Chest', 1.5, GameConstants.Region.sinnoh);
+ItemList.Miracle_Chest = new ExpGainedBonusHeldItem('Miracle_Chest', 30000, GameConstants.Currency.money, { visible: new MaxRegionRequirement(GameConstants.Region.sinnoh) }, 'Miracle Chest', 1.5, GameConstants.Region.sinnoh);
 ItemList.Joy_Scent = new ExpGainedBonusHeldItem('Joy_Scent', 10000, GameConstants.Currency.money, undefined, 'Joy Scent', 1.75, GameConstants.Region.hoenn, ' the holding Shadow Pokémon',
     (p) => p.shadow == GameConstants.ShadowStatus.Shadow );
 ItemList.Excite_Scent = new ExpGainedBonusHeldItem('Excite_Scent', 10000, GameConstants.Currency.money, undefined, 'Excite Scent', 2, GameConstants.Region.hoenn, 'the holding Shadow Pokémon',
@@ -128,7 +128,8 @@ ItemList.Rusted_Sword = new AttackBonusHeldItem('Rusted_Sword', 10000, GameConst
     (pokemon) => Math.floor(pokemon.id) == 888);
 ItemList.Rusted_Shield = new AttackBonusHeldItem('Rusted_Shield', 10000, GameConstants.Currency.money, undefined, 'Rusted Shield', 1.5, GameConstants.Region.galar, 'Zamazenta',
     (pokemon) => Math.floor(pokemon.id) == 889);
-// Typebased attack items
+ItemList.Booster_Energy = new AttackBonusHeldItem('Booster_Energy', 10000, GameConstants.Currency.money, undefined, 'Booster Energy', 1.33, GameConstants.Region.paldea, /*16 Pokémon. Probably too many to list.*/'Paradox Pokémon',
+    (pokemon) => [984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 1005, 1006, 1009, 1010].includes(Math.floor(pokemon.id)));
 ItemList.Black_Belt = new TypeRestrictedAttackBonusHeldItem('Black_Belt', 10000, GameConstants.Currency.money, undefined, 'Black Belt', 1.2, PokemonType.Fighting, GameConstants.Region.johto);
 ItemList.Black_Glasses = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.2, PokemonType.Dark, GameConstants.Region.johto);
 ItemList.Charcoal = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.2, PokemonType.Fire, GameConstants.Region.johto);

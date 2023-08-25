@@ -18,6 +18,8 @@ import RegionRoute from './RegionRoute';
 import RoutePokemon from './RoutePokemon';
 import Routes from './Routes';
 import SpecialRoutePokemon from './SpecialRoutePokemon';
+import SpecialEventRandomRequirement from '../requirements/SpecialEventRandomRequirement';
+import SeededRand from '../utilities/SeededRand';
 
 /*
 KANTO
@@ -1036,7 +1038,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Sandshrew', 'Gligar', 'Trapinch'],
     }),
-    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
     undefined,
     HoennSubRegions.Orre,
     true,
@@ -1047,7 +1049,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Hoppip', 'Phanpy', 'Surskit'],
     }),
-    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
     undefined,
     HoennSubRegions.Orre,
     true,
@@ -1058,7 +1060,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zubat', 'Aron', 'Wooper'],
     }),
-    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
     undefined,
     HoennSubRegions.Orre,
     true,
@@ -3798,3 +3800,61 @@ Routes.add(new RegionRoute(
     }),
     [new DevelopmentRequirement()],
 ));
+
+/*
+Paldea
+*/
+// I am currently unsure if fixed encounter only pokemon should be included. They have been for now, and are clearly separated.
+Routes.add(new RegionRoute(
+    'Poco Path', Region.paldea, 1,
+    new RoutePokemon({
+        land: ['Lechonk', 'Pawmi', 'Tarountula', 'Hoppip', 'Fletchling', 'Scatterbug', 'Wingull', 'Buizel'],
+        water: ['Magikarp', 'Arrokuda'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Elite_Volo)],
+));
+Routes.add(new RegionRoute(
+    'South Province (Area One)', Region.paldea, 2,
+    new RoutePokemon({
+        land: ['Hoppip', 'Paldean Wooper', 'Wingull', 'Ralts', 'Combee', 'Sunkern', 'Buizel', 'Pawmi', 'Gastly', 'Fletchling', 'Scatterbug', 'Spewpa', 'Oricorio (Pom-Pom)', 'Lechonk', 'Tarountula', 'Fidough', 'Happiny', 'Pichu', 'Bonsly', 'Skwovet', 'Shroodle', 'Bounsweet', 'Igglybuff', 'Drowzee', /*Fixed encounter only:*/'Wiglett', 'Pachirisu', 'Flamigo', 'Gimmighoul (Chest)'],
+        water: ['Magikarp', 'Arrokuda', 'Azurill', 'Chewtle', 'Psyduck', 'Surskit'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+));
+Routes.add(new RegionRoute(
+    'South Province (Area Two)', Region.paldea, 3,
+    new RoutePokemon({
+        land: ['Pikachu', 'Jigglypuff', 'Eevee', 'Mareep', 'Hoppip', 'Starly', 'Fletchling', 'Smoliv', 'Fidough', 'Maschiff', 'Happiny', 'Pichu', 'Bonsly', 'Bounsweet', 'Skwovet', 'Shroodle', 'Applin', 'Igglybuff', 'Rockruff', 'Misdreavus', 'Makuhita', 'Skiddo', 'Yungoos', 'Nacli', 'Sunkern', 'Combee', 'Flabébé (Red)', 'Flabébé (Yellow)', 'Flabébé (Orange)', 'Flabébé (Blue)', 'Flabébé (White)', 'Kricketot', 'Diglett', 'Gastly', 'Drowzee', 'Bronzor', 'Tinkatink', 'Squawkabilly (Green)', 'Squawkabilly (Blue)', 'Squawkabilly (Yellow)', 'Squawkabilly (White)', /*Fixed encounter only:*/'Staravia', 'Vespiquen', 'Gimmighoul (Chest)'],
+        water: ['Psyduck', 'Magikarp', 'Azurill', 'Buizel', 'Chewtle', 'Arrokuda', 'Tadbulb'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+));
+Routes.add(new RegionRoute(
+    'South Province (Area Three)', Region.paldea, 4,
+    new RoutePokemon({
+        land: ['Growlithe', 'Gulpin', 'Spoink', 'Shuppet', 'Shinx', 'Oricorio (Baile)', 'Rookidee', 'Nymble', 'Pawmi', 'Klawf', 'Murkrow', 'Dunsparce', 'Happiny', 'Tandemaus', 'Squawkabilly (Green)', 'Squawkabilly (Blue)', 'Squawkabilly (Yellow)', 'Squawkabilly (White)', 'Drifloon', 'Makuhita', 'Yungoos', 'Skiddo', 'Nacli', 'Gastly', 'Drowzee', 'Bronzor', 'Tinkatink', /*Fixed encounter only:*/'Talonflame', 'Staraptor', 'Gimmighoul (Chest)'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+));
+
+// Halloween Event
+SeededRand.seed(new Date().getFullYear());
+Routes.getRoutesByRegion(Region.kanto).forEach((route) => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Spooky Bulbasaur'], new SpecialEventRandomRequirement('Halloween!')),
+        new SpecialRoutePokemon(['Gastly'], new SpecialEventRandomRequirement('Halloween!')),
+    );
+});
+Routes.getRoutesByRegion(Region.johto).forEach(route => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Spooky Togepi'], new SpecialEventRandomRequirement('Halloween!')),
+        new SpecialRoutePokemon(['Misdreavus'], new SpecialEventRandomRequirement('Halloween!')),
+    );
+});
+Routes.getRoutesByRegion(Region.hoenn).forEach(route => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Pikachu (Gengar)'], new SpecialEventRandomRequirement('Halloween!')),
+        new SpecialRoutePokemon(['Shuppet'], new SpecialEventRandomRequirement('Halloween!')),
+        new SpecialRoutePokemon(['Duskull'], new SpecialEventRandomRequirement('Halloween!')),
+    );
+});

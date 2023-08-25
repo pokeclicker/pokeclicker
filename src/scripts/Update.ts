@@ -2350,6 +2350,22 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 59);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 60);
 
+            // Add Mega Mewtwo battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 205);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 206);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 207);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 208);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 209);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 210);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 211);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 212);
+
+            // Max Raids
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 340);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 341);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 342);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 189);
+
             // ZCrystals
             const crystalOrder = [
                 'Normalium Z',
@@ -2391,6 +2407,65 @@ class Update implements Saveable {
                 }
             });
 
+            // Add milestone for Vivillon (Poké Ball) if the quest is complete.
+            const vivillonQuestLine = saveData.quests.questLines.find((q) => q.name == 'The Great Vivillon Hunt!');
+            if (saveData.battleFrontier?.milestones && vivillonQuestLine?.state == 2) {
+                saveData.battleFrontier.milestones.push([666, 'Vivillon (Poké Ball)']);
+            }
+
+            // Add Paldea Gyms
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 120);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 121);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 122);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 123);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 124);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 125);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 126);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 127);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 128);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 129);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 130);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 131);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 132);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 133);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 134);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 135);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 136);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 137);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 138);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 139);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 140);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 141);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 142);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 143);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 144);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 145);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 146);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 147);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 148);
+
+            // Remove Orre Colosseum Dungeon
+            saveData.statistics.dungeonsCleared.splice(73, 1);
+
+            // Adding Orre XD badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 49);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 50);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 51);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 52);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 53);
+
+            // Reset Red temp battle
+            saveData.statistics.temporaryBattleDefeated[31] = 0;
+
+        },
+
+        '0.10.16': ({ playerData, saveData, settingsData }) => {
+
+
+            // Fix None category color being incomplete
+            if (saveData.categories.categories[0].color === '#333') {
+                saveData.categories.categories[0].color = '#333333';
+            }
         },
     };
 

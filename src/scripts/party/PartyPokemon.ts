@@ -97,6 +97,7 @@ class PartyPokemon implements Saveable {
                     message: `${this.name} has become Resistant to Pokérus.`,
                     pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
                     type: NotificationConstants.NotificationOption.info,
+                    sound: NotificationConstants.NotificationSound.General.pokerus,
                     setting: NotificationConstants.NotificationSetting.General.pokerus,
                 });
                 App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
@@ -169,7 +170,7 @@ class PartyPokemon implements Saveable {
         const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
         for (let i = this.level - 1; i < levelRequirements[levelType].length; i++) {
             if (levelRequirements[levelType][i] > this.exp) {
-                return i;
+                return Math.min(i, App.game.badgeCase.maxLevel());
             }
         }
         return this.level;
@@ -177,7 +178,9 @@ class PartyPokemon implements Saveable {
 
     public gainExp(exp: number) : number {
         const expGained = exp * this.getExpMultiplier();
-        this.exp += expGained;
+        if (this.level < App.game.badgeCase.maxLevel()) {
+            this.exp += expGained;
+        }
         const oldLevel = this.level;
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
@@ -434,32 +437,6 @@ class PartyPokemon implements Saveable {
         return true;
     });
 
-    public hideFromProteinList = ko.pureComputed(() => {
-        // Check if search matches nickname or translated name
-        if (
-            !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this._translatedName())
-            && !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.displayName)
-        ) {
-            return true;
-        }
-        if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('vitaminRegionFilter').observableValue()) {
-                return true;
-            }
-        }
-        const type = Settings.getSetting('vitaminTypeFilter').observableValue();
-        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
-            return true;
-        }
-        if (this.vitaminUsesRemaining() == 0 && Settings.getSetting('vitaminHideMaxedPokemon').observableValue()) {
-            return true;
-        }
-        if (this._shiny() && Settings.getSetting('vitaminHideShinyPokemon').observableValue()) {
-            return true;
-        }
-        return false;
-    });
-
     public giveHeldItem = (heldItem: HeldItem): void => {
         if (!this.heldItem() || heldItem.name != this.heldItem().name) {
             if (heldItem && !heldItem.canUse(this)) {
@@ -502,52 +479,6 @@ class PartyPokemon implements Saveable {
             this.heldItem(heldItem);
         }
     }
-
-    public hideFromHeldItemList = ko.pureComputed(() => {
-        if (!HeldItem.heldItemSelected()?.canUse(this)) {
-            return true;
-        }
-        if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.displayName)) {
-            return true;
-        }
-        if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
-                return true;
-            }
-        }
-        const type = Settings.getSetting('heldItemTypeFilter').observableValue();
-        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
-            return true;
-        }
-        if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && this.heldItem()) {
-            return true;
-        }
-        if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && this.heldItem() !== HeldItem.heldItemSelected()) {
-            return true;
-        }
-
-        return false;
-    });
-
-    public hideFromConsumableList = ko.pureComputed(() => {
-        if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(this.displayName)) {
-            return true;
-        }
-        if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('consumableRegionFilter').observableValue()) {
-                return true;
-            }
-        }
-        const type = Settings.getSetting('consumableTypeFilter').observableValue();
-        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
-            return true;
-        }
-        if (Settings.getSetting('consumableHideShinyPokemon').observableValue() && this.shiny) {
-            return true;
-        }
-
-        return false;
-    });
 
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
