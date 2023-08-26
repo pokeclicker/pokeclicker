@@ -6570,6 +6570,26 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ], {image: 'assets/images/npcs/Owner.png'});
+const PikachuValleyPikachuGeneric = new NPC('Pikachu', [
+    'Pikachu!',
+    '<i>The Pikachu looks happy playing with all its friends!</i>',
+], {
+    image: 'assets/images/pokemon/25.png',
+});
+const PikachuValleyAlolaCap = new NPC('Pikachu', [
+    'Pi-Pikachu!',
+    '<i>The Pikachu is waving at you supportively! Its goodwill carries you forward on your journey to Alola Championship!</i>',
+], {
+    image: 'assets/images/pokemon/25.06.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion, GameConstants.AchievementOption.less),
+});
+const PikachuValleyPikachuWorldCap = new NPC('Pikachu', [
+    'Pii-kachu!',
+    '<i>The Pikachu is staring at you intently! Is it waiting for you to become stronger?</i>',
+], {
+    image: 'assets/images/pokemon/25.07.png',
+    requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.galar), new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion, GameConstants.AchievementOption.less)]),
+});
 const PaniolaTownActor = new NPC('Actor Meredith', [
     'I love Oricorio. I can tell you all about it!',
     'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
@@ -7351,7 +7371,11 @@ TownList['Pikachu Valley'] = new DungeonTown(
     'Pikachu Valley',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+    undefined,
+    {
+        npcs: [PikachuValleyPikachuGeneric, PikachuValleyAlolaCap, PikachuValleyPikachuWorldCap],
+    }
 );
 TownList['Paniola Ranch'] = new DungeonTown(
     'Paniola Ranch',
