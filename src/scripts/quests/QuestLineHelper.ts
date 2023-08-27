@@ -3791,46 +3791,45 @@ class QuestLineHelper {
     }
 
     // Open the game between April 8-29 (Easter).
-    public static createFindSurpriseTogepiForEasterQuestLine() {
-        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
+    public static createEasterQuestLine() {
+        const easterQuestLine = new QuestLine('Egg Hunt', 'A basket of strange eggs has been spotted. See if you can find it!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
 
         const afterDefeatingTogepiInKanto = () => {
             Notifier.notify({
-                title: findSurpriseTogepiForEasterQuestLine.name,
+                title: easterQuestLine.name,
                 message: 'Seems like this was just an Easter egg after all...',
                 image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
                 type: NotificationConstants.NotificationOption.info,
                 timeout: 3e4,
             });
         };
-        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.');
-        findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
+        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'Some strange eggs have been seen around Kanto. Go look for it! Maybe Erika knows more?');
+        easterQuestLine.addQuest(defeatTogepiInKanto);
 
         const afterDefeatingTogepiInJohto = () => {
             Notifier.notify({
-                title: findSurpriseTogepiForEasterQuestLine.name,
+                title: easterQuestLine.name,
                 message: 'I swear that was a Togepi... well, maybe not.',
                 image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
                 type: NotificationConstants.NotificationOption.info,
                 timeout: 3e4,
             });
         };
-        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!');
-        findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
+        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of some strange eggs in a forest in Johto!');
+        easterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
         const afterDefeatingTogepiInHoenn = () => {
-            App.game.party.gainPokemonByName('Surprise Togepi');
             Notifier.notify({
-                title: findSurpriseTogepiForEasterQuestLine.name,
-                message: 'You found the special Togepi!',
+                title: easterQuestLine.name,
+                message: 'The eggs ran away! Go find them!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
         };
         const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
-        findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
+        easterQuestLine.addQuest(encounterTogepiInHoenn);
 
-        App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
+        App.game.quests.questLines().push(easterQuestLine);
     }
 
     public static isQuestLineCompleted(name: string) {
@@ -3894,7 +3893,7 @@ class QuestLineHelper {
         this.createPaldeaVictoryQuestLine();
         this.createPaldeaStarfallQuestLine();
         this.createPaldeaWayHomeQuestLine();
-        this.createFindSurpriseTogepiForEasterQuestLine();
+        this.createEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();

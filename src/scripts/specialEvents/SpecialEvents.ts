@@ -105,8 +105,9 @@ class SpecialEvents implements Feature {
             }
         );
         // Easter
-        // QuestLineHelper.ts: Surprise Togepi quest; 'Togepi Egg Hunt'
-        this.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
+        // QuestLineHelper.ts: Introduction questline; 'Egg Hunt'
+        // Dungeons.ts: Togepi (Flowering Crown) and Pikachu (Easter) jumping from forest to forest
+        this.newEvent('Easter', 'Encounter  Togepi (Flowering Crown) and Pikachu (Easter) for a limited time with a dedicated Quest Line.',
             // Start
             new Date(new Date().getFullYear(), 3, 8, 1), () => {
             },
