@@ -134,6 +134,17 @@ export const pokeballFilterOptions = {
         ),
         (type) => `Is ${GameHelper.anOrA(type)} ${type} encounter`,
     ),
+
+    category: new PokeballFilterOption<number>(
+        (category = 0) => new Setting(
+            'pokeballFilterCategory',
+            'Category',
+            //PokemonCategories.categories().map((c) => new SettingOption(c.name(), c.id)),
+            [],
+            category,
+        ),
+        (category) => `Is in the ${category} category`,
+    ),
 };
 
 type PokeballFilterValueType<T>

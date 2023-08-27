@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { ObservableArray } from 'knockout';
+import { Computed, ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
@@ -9,6 +9,10 @@ import NotificationOption from '../notifications/NotificationOption';
 import { findRight } from '../utilities/arrayUtils';
 import Settings from '../settings';
 import PokemonType from '../enums/PokemonType';
+import Setting from '../settings/Setting';
+import EncounterType from '../enums/EncounterType';
+import PokemonCategories from '../party/Category';
+import SettingOption from '../settings/SettingOption';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';
@@ -28,32 +32,8 @@ export default class PokeballFilters implements Feature {
         () => this.list().filter((f) => !PokeballFilters.hideFilter(f)),
     );
 
-    public testSettings = (() => {
-        const settings = Object.fromEntries(
-            Object.entries(pokeballFilterOptions).map(([k, pfo]) => [k, pfo.createSetting()]),
-        );
-
-        // Create two Pokemon Type settings
-        delete settings.pokemonType;
-        settings.type1 = pokeballFilterOptions.pokemonType.createSetting(
-            PokemonType.Normal, 'pokeballFilterPokemonType1', 'Pokémon Type 1',
-        );
-        settings.type2 = pokeballFilterOptions.pokemonType.createSetting(
-            PokemonType.Normal, 'pokeballFilterPokemonType2', 'Pokémon Type 2',
-        );
-
-        return settings;
-    })();
-    public testSettingsData = ko.pureComputed(() => {
-        const data: any = Object.fromEntries(Object.entries(this.testSettings).map(([k, v]) => [k, v.observableValue()]));
-
-        // Handle Pokemon Types
-        data.pokemonType = [data.type1, data.type2];
-        delete data.type1;
-        delete data.type2;
-
-        return data;
-    });
+    public testSettings: { [k: string] : Setting<boolean> | Setting<EncounterType> | Setting<number> };
+    public testSettingsData: Computed<any>;
 
     public static hideFilter(filter: PokeballFilter) {
         return Object.keys(filter.options).some(
@@ -62,6 +42,30 @@ export default class PokeballFilters implements Feature {
     }
 
     initialize() {
+        this.testSettings = Object.fromEntries(
+            Object.entries(pokeballFilterOptions).map(([k, pfo]) => [k, pfo.createSetting()]),
+        );
+
+        // Create two Pokemon Type settings
+        delete this.testSettings.pokemonType;
+        this.testSettings.type1 = pokeballFilterOptions.pokemonType.createSetting(
+            PokemonType.Normal, 'pokeballFilterPokemonType1', 'Pokémon Type 1',
+        );
+        this.testSettings.type2 = pokeballFilterOptions.pokemonType.createSetting(
+            PokemonType.Normal, 'pokeballFilterPokemonType2', 'Pokémon Type 2',
+        );
+
+        this.testSettingsData = ko.pureComputed(() => {
+            const data: any = Object.fromEntries(Object.entries(this.testSettings).map(([k, v]) => [k, v.observableValue()]));
+
+            // Handle Pokemon Types
+            data.pokemonType = [data.type1, data.type2];
+            delete data.type1;
+            delete data.type2;
+
+            return data;
+        });
+
         this.testSettings.caught.observableValue.subscribe((isCaught) => {
             if (!isCaught) {
                 // If not caught, we can't have shiny or shadow either
@@ -81,6 +85,17 @@ export default class PokeballFilters implements Feature {
                 this.testSettings.caught.observableValue(true);
             }
         }, undefined, undefined);
+
+        // Category nonsense
+        const categories = PokemonCategories.categories().map((c) => new SettingOption(c.name(), c.id));
+        const setting = pokeballFilterOptions.category.defaultSetting;
+        pokeballFilterOptions.category.createSetting = () => new Setting(setting.name, setting.displayName, categories, setting.defaultValue);
+
+        this.list().forEach((filter) => {
+            if (filter.options.category) {
+                filter.options.category.options = categories;
+            }
+        });
     }
 
     canAccess() { return true; }
