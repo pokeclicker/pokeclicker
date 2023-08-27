@@ -2155,7 +2155,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Butterfree', 340000, 30),
         new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new MultiRequirement([
             new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), // for hint clarity
-            new QuestLineStepCompletedRequirement('Unfinished Business', 12)
+            new QuestLineStepCompletedRequirement('Unfinished Business', 12),
         ])}),
         new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {
             hide: true,
@@ -11929,11 +11929,11 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
             { weight: 3 }, 'Rose', '(rose)'),
         new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new MultiRequirement([
             new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), // for hint clarity
-            new QuestLineStepCompletedRequirement('Sword and Shield', 18)
+            new QuestLineStepCompletedRequirement('Sword and Shield', 18),
         ])}),
         new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new MultiRequirement([
             new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), // for hint clarity
-            new QuestLineStepCompletedRequirement('Sword and Shield', 18)
+            new QuestLineStepCompletedRequirement('Sword and Shield', 18),
         ])}),
     ],
     1850000, 32);
