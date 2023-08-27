@@ -70,10 +70,10 @@ type Boss = DungeonBossPokemon | DungeonTrainer;
 interface EncounterInfo {
     image: string,
     shiny: boolean,
-    hide: boolean,
+    hide: boolean, // try not to hide pokemon required as per the Pokedex Challenge if they're only obtainable as a dungeon boss in their native region
     uncaught: boolean,
     locked: boolean,
-    lockMessage: string,
+    lockMessage: string, // if the pokemon is not hidden, also include relevant info. ie. not just the questline required for the pokemon but requirements for the questline itself too
 }
 
 // Gain a gym badge after first completion of a dungeon
@@ -2153,7 +2153,10 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Noctowl', 340000, 30),
         new DungeonBossPokemon('Beedrill', 340000, 30),
         new DungeonBossPokemon('Butterfree', 340000, 30),
-        new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 12)}),
+        new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), // for hint clarity
+            new QuestLineStepCompletedRequirement('Unfinished Business', 12)
+        ])}),
         new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {
             hide: true,
             requirement: new MultiRequirement([
@@ -2218,7 +2221,13 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     [
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
-        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
+        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Raikou'), // these four for hint clarity
+            new ObtainedPokemonRequirement('Suicune'), //
+            new ObtainedPokemonRequirement('Entei'), //
+            new QuestLineStepCompletedRequirement('Whirl Guardian', 9), //
+            new QuestLineStepCompletedRequirement('Rainbow Guardian', 1),
+        ])}),
     ],
     4500, 37);
 
@@ -7117,7 +7126,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 2 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new TemporaryBattleRequirement('Zero')}),
+        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}), // only requirement needed because Distortion World is unlocked through the questline
     ],
     86500, 217);
 
@@ -7787,7 +7796,7 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         new DungeonTrainer('Psychic',
             [new GymPokemon('Sigilyph', 16000000, 23)],
             { weight: 2 }, 'Perry', '(male)'),
-        new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}), // don't hide, because Relic Castle is an optional dungeon
+        new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}), // don't hide, because the dungeons associated with it are optional
         new DungeonBossPokemon('Vivillon (Sandstorm)',  96662023, 60, {
             hide: true,
             requirement: new OneFromManyRequirement([
@@ -8456,10 +8465,7 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Tangrowth', 30000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
         new DungeonBossPokemon('Audino', 32000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
         new DungeonBossPokemon('Mamoswine', 32000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
-        new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
-            new TemporaryBattleRequirement('Ghetsis 2'),
-            new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
-        ])}),
+        new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}), // only requirement needed because league is locked behind the associated story quest
     ],
     266500, 22);
 
@@ -9526,7 +9532,13 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
                 new GymPokemon('Granbull', 23366400, 24),
                 new GymPokemon('Helioptile', 25476400, 25),
             ], { weight: 1.5 }, 'Monique', '(female)'),
-        new DungeonBossPokemon('Diancie', 69694200, 100, {requirement: new QuestLineStepCompletedRequirement('Princess Diancie', 7)}),
+        new DungeonBossPokemon('Diancie', 69694200, 100, {requirement: new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_Malva), // for hint clarity
+            new GymBadgeRequirement(BadgeEnums.Elite_Siebold), //
+            new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom), //
+            new GymBadgeRequirement(BadgeEnums.Elite_Drasna), //
+            new QuestLineStepCompletedRequirement('Princess Diancie', 7),
+        ])}),
     ],
     555000, 11);
 
@@ -9604,7 +9616,6 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
                 requirement: new MultiRequirement([
                     new ClearDungeonRequirement(5, GameConstants.getDungeonIndex('Kalos Power Plant')),
                     new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
-                    new QuestLineStepCompletedRequirement('A Beautiful World', 11),
                 ])}),
     ],
     575000, 13);
@@ -10401,7 +10412,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         {pokemon: 'Alolan Diglett', options: { weight: 0.75 }},
         {pokemon: 'Noibat', options: { weight: 0.75 }},
         {pokemon: 'Yungoos', options: { weight: 0.75 }},
-        {pokemon: 'Pheromosa', options: { weight: 0.75, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}},
+        {pokemon: 'Pheromosa', options: { weight: 0.75, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Team Skull Grunt',
             [new GymPokemon('Drowzee', 11595673, 11)], { weight: 1 }, undefined, '(male)'),
     ],
@@ -10439,7 +10450,7 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
         {pokemon: 'Cottonee', options: { weight: 0.55 }},
         {pokemon: 'Petilil', options: { weight: 0.55 }},
         {pokemon: 'Cutiefly', options: { weight: 0.55 }},
-        {pokemon: 'Buzzwole', options: { weight: 0.55, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}},
+        {pokemon: 'Buzzwole', options: { weight: 0.55, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Pom-Pom)', 11769270, 12)], { weight: 1 }, 'Meredith'),
     ],
@@ -10491,7 +10502,17 @@ dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
     830000, 3);
 
 dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
-    ['Zubat', 'Machop', 'Psyduck', 'Mawile', 'Roggenrola'],
+    [
+        {pokemon: 'Zubat', options: { weight: 1 }},
+        {pokemon: 'Machop', options: { weight: 1 }},
+        {pokemon: 'Psyduck', options: { weight: 1 }},
+        {pokemon: 'Mawile', options: { weight: 1 }},
+        {pokemon: 'Roggenrola', options: { weight: 1 }},
+        {pokemon: 'Necrozma', options: { weight: 1, hide: true, requirement: new MultiRequirement([
+            new QuestLineCompletedRequirement('Ultra Beast Hunt'),
+            new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Must have never encountered Necrozma before.', GameConstants.AchievementOption.less),
+        ])}},
+    ],
     {
         common: [
             {loot: 'xAttack'},
@@ -10654,7 +10675,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         {pokemon: 'Magby', options: { weight: 1.7 }},
         {pokemon: 'Fletchling', options: { weight: 1.7 }},
         {pokemon: 'Salandit', options: { weight: 1.7 }},
-        {pokemon: 'Nihilego', options: { weight: 1.7, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}},
+        {pokemon: 'Nihilego', options: { weight: 1.7, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Sightseer',
             [new GymPokemon('Meowth', 12896392, 19)], { weight: 1 }, 'Mariah', '(female)'),
         new DungeonTrainer('Ace Trainer',
@@ -10707,7 +10728,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         {pokemon: 'Comfey', options: { weight: 1 }},
         {pokemon: 'Oranguru', options: { weight: 1 }},
         {pokemon: 'Passimian', options: { weight: 1 }},
-        {pokemon: 'Xurkitree', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 9)}},
+        {pokemon: 'Xurkitree', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 9)}}, // hide UBs because they show up in too many dungeons and will distract the players
     ],    {
         common: [
             {loot: 'xClick'},
@@ -10741,7 +10762,7 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [
         {pokemon: 'Zubat', options: { weight: 6.5 }},
         {pokemon: 'Alolan Diglett', options: { weight: 6.5 }},
-        {pokemon: 'Nihilego', options: { weight: 6.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}},
+        {pokemon: 'Nihilego', options: { weight: 6.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Worker',
             [new GymPokemon('Shieldon', 13215839, 22)], { weight: 1 }, 'Frank', '(male)'),
         new DungeonTrainer('Worker',
@@ -10784,7 +10805,7 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
         {pokemon: 'Zubat', options: { weight: 7.5 }},
         {pokemon: 'Gastly', options: { weight: 7.5 }},
         {pokemon: 'Phantump', options: { weight: 7.5 }},
-        {pokemon: 'Xurkitree', options: { weight: 7.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 9)}},
+        {pokemon: 'Xurkitree', options: { weight: 7.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 9)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Preschooler',
             [
                 new GymPokemon('Magby', 13286024, 23),
@@ -10841,8 +10862,8 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
         {pokemon: 'Cottonee', options: { weight: 1 }},
         {pokemon: 'Petilil', options: { weight: 1 }},
         {pokemon: 'Araquanid', options: { weight: 1 }},
-        {pokemon: 'Kartana', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)}},
-        {pokemon: 'Celesteela', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)}},
+        {pokemon: 'Kartana', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)}}, // hide UBs because they show up in too many dungeons and will distract the players
+        {pokemon: 'Celesteela', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Sightseer',
             [new GymPokemon('Raticate', 13483476, 28)], { weight: 1 }, 'Mitch', '(male)'),
         new DungeonTrainer('Preschooler',
@@ -11449,7 +11470,11 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
-        new DungeonBossPokemon('Necrozma', 83527125, 65),
+        new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), // for hint clarity
+            new QuestLineCompletedRequirement('Ultra Beast Hunt'), // because we don't want to unhide all the other ultra beasts and it's a reference to SM
+            new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Encounter at least 1 Necrozma.'),
+        ])}),
     ],
     1175000, 26);
 
@@ -11902,8 +11927,14 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Gigantamax Copperajah', 26704124, 52),
             ],
             { weight: 3 }, 'Rose', '(rose)'),
-        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
-        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), // for hint clarity
+            new QuestLineStepCompletedRequirement('Sword and Shield', 18)
+        ])}),
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), // for hint clarity
+            new QuestLineStepCompletedRequirement('Sword and Shield', 18)
+        ])}),
     ],
     1850000, 32);
 
