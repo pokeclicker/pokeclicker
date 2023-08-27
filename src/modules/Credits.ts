@@ -245,7 +245,7 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
-        name: 'DraK4y',
+        name: 'DraKay',
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-121.png',
         resources: [
@@ -468,6 +468,7 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Aliana',
             'Team Magma and Aqua Admins',
             'Team Magma Grunts',
+            'Togepi (Flowering Crown)',
             'Tourist Couple/Bellhop',
             'Tower of Darkness',
             'Tower of Waters',
@@ -644,7 +645,6 @@ export const SpriteCredits: Credit[] = [
         image: 'https://avatars.githubusercontent.com/u/14893450?v=4',
         resources: [
             'Egg Hunter',
-            'Surprise Togepi',
         ],
         // NOTES: Permission given via PRs
     },

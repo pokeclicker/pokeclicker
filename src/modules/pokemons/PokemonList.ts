@@ -7044,7 +7044,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 175.02,
-        'name': 'Surprise Togepi',
+        'name': 'Togepi (Flowering Crown)',
         'catchRate': 190,
         'type': [PokemonType.Fairy],
         'levelType': LevelType.fast,
