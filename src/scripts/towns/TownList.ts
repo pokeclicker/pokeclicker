@@ -6932,6 +6932,12 @@ const RoadsideMotelAnabel5 = new NPC('Anabel', [
     image: 'assets/images/npcs/Anabel.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 18, GameConstants.AchievementOption.less)]),
 });
+const NecrozmaLooker = new NPC('Looker', [
+    'There haven\'t been any new reports of Ultra Beasts in Alola, but I did see something strange over in Ten Carat Hill. It was black, yet shining. It seemed to be fleeing, no doubt about that. Must have been in a weakened state. Was it involved in some kind of battle? If you find it, I doubt it will have much energy left.',
+], {
+    image: 'assets/images/npcs/Looker.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Ultra Beast Hunt'), new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Must have never encountered Necrozma before.', GameConstants.AchievementOption.less)]),
+});
 const BattleTreeRed = new NPC('Red', [
     '...',
 ], {image: 'assets/images/npcs/Red-masters.png'});
@@ -7062,6 +7068,7 @@ TownList['Hau\'oli City'] = new Town(
     [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+        npcs: [NecrozmaLooker],
     }
 );
 TownList['Melemele Woods'] = new Town(
