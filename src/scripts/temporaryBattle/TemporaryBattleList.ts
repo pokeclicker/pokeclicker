@@ -5540,7 +5540,7 @@ TemporaryBattleList['Max Raid Venusaur'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Motostoke',
+        returnTown: 'Master Dojo',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5568,7 +5568,7 @@ TemporaryBattleList['Max Raid Blastoise'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Master Dojo',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5582,7 +5582,7 @@ TemporaryBattleList['Max Raid Butterfree'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Master Dojo',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5596,7 +5596,7 @@ TemporaryBattleList['Max Raid Pikachu'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Freezington',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5610,7 +5610,7 @@ TemporaryBattleList['Max Raid Meowth'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Tunnel to the Top',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5624,7 +5624,7 @@ TemporaryBattleList['Max Raid Machamp'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Motostoke',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5638,7 +5638,7 @@ TemporaryBattleList['Max Raid Gengar'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Motostoke',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5652,7 +5652,7 @@ TemporaryBattleList['Max Raid Kingler'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Motostoke',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5666,7 +5666,7 @@ TemporaryBattleList['Max Raid Lapras'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Roaring-Sea Caves',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5680,7 +5680,7 @@ TemporaryBattleList['Max Raid Eevee'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Freezington',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5694,7 +5694,7 @@ TemporaryBattleList['Max Raid Snorlax'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Dyna Tree Hill',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5708,7 +5708,7 @@ TemporaryBattleList['Max Raid Garbodor'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Warm-Up Tunnel',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5722,7 +5722,7 @@ TemporaryBattleList['Max Raid Rillaboom'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Tower of Waters',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5736,7 +5736,7 @@ TemporaryBattleList['Max Raid Cinderace'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Tower of Darkness',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5750,7 +5750,7 @@ TemporaryBattleList['Max Raid Inteleon'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Tower of Waters',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5778,7 +5778,7 @@ TemporaryBattleList['Max Raid Orbeetle'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Dusty Bowl',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5806,7 +5806,7 @@ TemporaryBattleList['Max Raid Coalossal'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Motostoke',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5820,7 +5820,7 @@ TemporaryBattleList['Max Raid Flapple'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Roaring-Sea Caves',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5834,7 +5834,7 @@ TemporaryBattleList['Max Raid Appletun'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Rock Peak Ruins',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5848,7 +5848,7 @@ TemporaryBattleList['Max Raid Sandaconda'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Warm-Up Tunnel',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5862,7 +5862,7 @@ TemporaryBattleList['Max Raid Toxtricity'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Tower of Waters',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5876,7 +5876,7 @@ TemporaryBattleList['Max Raid Centiskorch'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Motostoke',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5890,7 +5890,7 @@ TemporaryBattleList['Max Raid Hatterene'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Roaring-Sea Caves',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5904,7 +5904,7 @@ TemporaryBattleList['Max Raid Grimmsnarl'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Split-Decision Ruins',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5918,7 +5918,7 @@ TemporaryBattleList['Max Raid Alcremie'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Dusty Bowl',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -5932,7 +5932,7 @@ TemporaryBattleList['Max Raid Copperajah'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Professor Magnolia\'s House',
+        returnTown: 'Iron Ruins',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
