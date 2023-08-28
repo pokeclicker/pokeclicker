@@ -444,7 +444,7 @@ const EggHuntErika = new NPC('Erika', [
     'Hello... Isn\'t the spring weather so relaxing? I adore how lovely the blooming flowers look during this time of year...',
     'Oh! I\'m sorry, I almost dozed off. I was reminiscing about my stroll in Viridian Forest earlier today. I came across the loveliest patch of flowers over there and...',
     '...',
-    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a colorful, round Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
+    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a basket full of Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
 ], {
     image: 'assets/images/npcs/Erika.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Egg Hunt'), new QuestLineCompletedRequirement('Egg Hunt', GameConstants.AchievementOption.less)]),

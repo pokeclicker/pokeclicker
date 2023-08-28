@@ -3794,28 +3794,10 @@ class QuestLineHelper {
     public static createEasterQuestLine() {
         const easterQuestLine = new QuestLine('Egg Hunt', 'A basket of strange eggs has been spotted. See if you can find it!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
 
-        const afterDefeatingTogepiInKanto = () => {
-            Notifier.notify({
-                title: easterQuestLine.name,
-                message: 'Seems like this was just an Easter egg after all...',
-                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
-                type: NotificationConstants.NotificationOption.info,
-                timeout: 3e4,
-            });
-        };
-        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'Some strange eggs have been seen around Kanto. Go look for it! Maybe Erika knows more?');
+        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', undefined, 'Seems like this was just an Easter egg after all...\nSome strange eggs have been seen around Kanto. Go look for it! Maybe Erika knows more?');
         easterQuestLine.addQuest(defeatTogepiInKanto);
 
-        const afterDefeatingTogepiInJohto = () => {
-            Notifier.notify({
-                title: easterQuestLine.name,
-                message: 'I swear that was a Togepi... well, maybe not.',
-                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
-                type: NotificationConstants.NotificationOption.info,
-                timeout: 3e4,
-            });
-        };
-        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of some strange eggs in a forest in Johto!');
+        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', undefined, 'That looked like a Togepi!... well, maybe not. But no time to dwell on that. Another report just came in, there have been sightings of some strange eggs in a forest in Johto!');
         easterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
         const afterDefeatingTogepiInHoenn = () => {
