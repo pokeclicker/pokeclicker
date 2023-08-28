@@ -3333,7 +3333,7 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [GymList['Cipher Admin Miror B.'], new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
+    [GymList['Cipher Admin Miror B.'], new MoveToDungeon(dungeonList['Pyrite Colosseum']), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
         npcs: [OrreRoamerNPC, Duking1],
