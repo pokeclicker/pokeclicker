@@ -12441,7 +12441,20 @@ const maxLairQuestStepRandomIndex = (index: number) => {
 dungeonList['Max Lair'] = new Dungeon('Max Lair',
     ['Ivysaur', 'Charmeleon', 'Wartortle', 'Grovyle', 'Sceptile', 'Combusken', 'Blaziken', 'Marshtomp', 'Swampert', 'Cradily', 'Cofagrigus', 'Fraxure', 'Toxtricity (Amped)', 'Toxtricity (Low Key)'],
     {
-        common: [{loot: 'Lucky_egg'}],
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'xClick'},
+        ],
+        rare: [
+            {loot: 'Brown Shard'},
+            {loot: 'Rose Shard'},
+        ],
+        epic: [
+            {loot: 'Draco Plate'},
+            {loot: 'Toxic Plate'},
+        ],
+        legendary: [{loot: 'Max Revive'}],
+        mythic: [{loot: 'Heart Scale'}],
     },
     33915762,
     [
