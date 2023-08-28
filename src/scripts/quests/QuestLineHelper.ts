@@ -2355,19 +2355,19 @@ class QuestLineHelper {
         const talkToBaraz4 = new TalkToNPCQuest(Baraz4, 'This is ridiculous. Talk to Baraz in Kiloude City.', () => ItemList.Prison_Bottle.gain(1));
         clashOfAgesQuestLine.addQuest(talkToBaraz4);
 
-        const clearHoopa1 = new DefeatTemporaryBattleQuest('Hoopa 1', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Kiloude City.');
+        const clearHoopa1 = new DefeatTemporaryBattleQuest('Hoopa 1', 'Defeat the Unbound Hoopa and its summoned defenders near Kiloude City.');
         clashOfAgesQuestLine.addQuest(clearHoopa1);
 
-        const clearHoopa2 = new DefeatTemporaryBattleQuest('Hoopa 2', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Shalour City.');
+        const clearHoopa2 = new DefeatTemporaryBattleQuest('Hoopa 2', 'Defeat the Unbound Hoopa and its summoned defenders near Shalour City.');
         clashOfAgesQuestLine.addQuest(clearHoopa2);
 
-        const clearHoopa3 = new DefeatTemporaryBattleQuest('Hoopa 3', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Lumiose City.');
+        const clearHoopa3 = new DefeatTemporaryBattleQuest('Hoopa 3', 'Defeat the Unbound Hoopa and its summoned defenders near Lumiose City.');
         clashOfAgesQuestLine.addQuest(clearHoopa3);
 
-        const clearHoopa4 = new DefeatTemporaryBattleQuest('Hoopa 4', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Anistar City.');
+        const clearHoopa4 = new DefeatTemporaryBattleQuest('Hoopa 4', 'Defeat the Unbound Hoopa and its summoned defenders near Anistar City.');
         clashOfAgesQuestLine.addQuest(clearHoopa4);
 
-        const clearHoopa5 = new DefeatTemporaryBattleQuest('Hoopa 5', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Laverre City.');
+        const clearHoopa5 = new DefeatTemporaryBattleQuest('Hoopa 5', 'Defeat the Unbound Hoopa and its summoned defenders near Laverre City.');
         clashOfAgesQuestLine.addQuest(clearHoopa5);
 
         const clearHoopa6 = new DefeatTemporaryBattleQuest('Hoopa 6', 'Defeat the Unbound Hoopa near Kiloude City, this time for real.');
