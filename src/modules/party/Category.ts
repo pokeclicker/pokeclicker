@@ -72,7 +72,7 @@ export default class PokemonCategories implements Saveable {
             return;
         }
 
-        const pokeballFilter =  App.game.pokeballFilters.list().find(f => f.options?.category?.observableValue() == cat.id);
+        const pokeballFilter = App.game.pokeballFilters.list().find(f => f.options?.category?.observableValue() == cat.id);
         if (pokeballFilter) {
             Notifier.notify({
                 title: 'Remove Category',
