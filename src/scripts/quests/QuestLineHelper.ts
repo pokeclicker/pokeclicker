@@ -3821,7 +3821,7 @@ class QuestLineHelper {
         const afterDefeatingTogepiInHoenn = () => {
             Notifier.notify({
                 title: easterQuestLine.name,
-                message: 'The eggs ran away! Go find them!',
+                message: 'The eggs ran away! You can now find them, during Easter!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });

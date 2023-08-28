@@ -2384,6 +2384,16 @@ const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
 ], {image: 'assets/images/npcs/Cooltrainer (male).png',
 });
 
+const EasterEggHunter = new NPC('Egg Hunter', [
+    'My eggs! They ran away!',
+    'Can you help me get them back? They have most likely fleed to a dungeon in Hoenn or Johto.',
+    'But be careful! If you defeat them, they will run away again!',
+    'And if the crew likes this questline, I will make Easter Pikachu do the same in Kanto.',
+], {
+    image: 'assets/images/npcs/Egg Hunter.png',
+    requirement: new MultiRequirement([new SpecialEventRequirement('Easter'), new QuestLineCompletedRequirement('Egg Hunt')]),
+});
+
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
 ], {image: 'assets/images/npcs/other/Regi Entrance.png',
@@ -3431,7 +3441,9 @@ TownList['Petalburg Woods'] = new DungeonTown(
     'Petalburg Woods',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 104)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 104)],
+    [],
+    { npcs: [EasterEggHunter] }
 );
 TownList['Rusturf Tunnel'] = new DungeonTown(
     'Rusturf Tunnel',
