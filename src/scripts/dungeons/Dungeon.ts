@@ -73,7 +73,7 @@ interface EncounterInfo {
     hide: boolean, // try not to hide pokemon required as per the Pokedex Challenge if they're only obtainable as a dungeon boss in their native region
     uncaught: boolean,
     locked: boolean,
-    lockMessage: string, // if the pokemon is not hidden, also include relevant info. ie. not just the questline required for the pokemon but requirements for the questline itself too
+    lockMessage: string,
 }
 
 // Gain a gym badge after first completion of a dungeon
