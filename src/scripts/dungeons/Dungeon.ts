@@ -2153,10 +2153,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Noctowl', 340000, 30),
         new DungeonBossPokemon('Beedrill', 340000, 30),
         new DungeonBossPokemon('Butterfree', 340000, 30),
-        new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), // for hint clarity
-            new QuestLineStepCompletedRequirement('Unfinished Business', 12),
-        ])}),
+        new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 12)}),
         new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {
             hide: true,
             requirement: new MultiRequirement([
@@ -2221,13 +2218,7 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     [
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
-        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement('Raikou'), // these four for hint clarity
-            new ObtainedPokemonRequirement('Suicune'), //
-            new ObtainedPokemonRequirement('Entei'), //
-            new QuestLineStepCompletedRequirement('Whirl Guardian', 9), //
-            new QuestLineStepCompletedRequirement('Rainbow Guardian', 1),
-        ])}),
+        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
     ],
     4500, 37);
 
@@ -7126,7 +7117,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 2 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}), // only requirement needed because Distortion World is unlocked through the questline
+        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new QuestLineStepCompletedRequirement('Zero\'s Ambition', 13)}),
     ],
     86500, 217);
 
@@ -8465,7 +8456,10 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Tangrowth', 30000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
         new DungeonBossPokemon('Audino', 32000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
         new DungeonBossPokemon('Mamoswine', 32000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
-        new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}), // only requirement needed because league is locked behind the associated story quest
+        new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
+            new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
+            new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+        ])}),
     ],
     266500, 22);
 
@@ -9532,13 +9526,7 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
                 new GymPokemon('Granbull', 23366400, 24),
                 new GymPokemon('Helioptile', 25476400, 25),
             ], { weight: 1.5 }, 'Monique', '(female)'),
-        new DungeonBossPokemon('Diancie', 69694200, 100, {requirement: new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_Malva), // for hint clarity
-            new GymBadgeRequirement(BadgeEnums.Elite_Siebold), //
-            new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom), //
-            new GymBadgeRequirement(BadgeEnums.Elite_Drasna), //
-            new QuestLineStepCompletedRequirement('Princess Diancie', 7),
-        ])}),
+        new DungeonBossPokemon('Diancie', 69694200, 100, {requirement: new QuestLineStepCompletedRequirement('Princess Diancie', 7)}),
     ],
     555000, 11);
 
@@ -11471,7 +11459,6 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
         new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), // for hint clarity
             new QuestLineCompletedRequirement('Ultra Beast Hunt'), // because we don't want to unhide all the other ultra beasts and it's a reference to SM
             new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Encounter at least 1 Necrozma.'),
         ])}),
@@ -11927,14 +11914,8 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Gigantamax Copperajah', 26704124, 52),
             ],
             { weight: 3 }, 'Rose', '(rose)'),
-        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), // for hint clarity
-            new QuestLineStepCompletedRequirement('Sword and Shield', 18),
-        ])}),
-        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), // for hint clarity
-            new QuestLineStepCompletedRequirement('Sword and Shield', 18),
-        ])}),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
     ],
     1850000, 32);
 
