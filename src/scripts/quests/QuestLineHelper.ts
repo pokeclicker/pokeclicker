@@ -3800,16 +3800,11 @@ class QuestLineHelper {
         const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', undefined, 'That looked like a Togepi!... well, maybe not. But no time to dwell on that. Another report just came in, there have been sightings of some strange eggs in a forest in Johto!');
         easterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
-        const afterDefeatingTogepiInHoenn = () => {
-            Notifier.notify({
-                title: easterQuestLine.name,
-                message: 'The eggs ran away! You can now find them, during Easter!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
+        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', undefined, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
         easterQuestLine.addQuest(encounterTogepiInHoenn);
+
+        const talkToEggHunter = new TalkToNPCQuest(EasterEggHunter, 'The eggs ran away! Talk to the egg hunter.');
+        easterQuestLine.addQuest(talkToEggHunter);
 
         App.game.quests.questLines().push(easterQuestLine);
     }
