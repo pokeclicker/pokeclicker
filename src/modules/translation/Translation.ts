@@ -8,6 +8,7 @@ import type Setting from '../settings/Setting';
 import memoize from '../utilities/memoize';
 import Language from './Language';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 
 export type TranslationVar = string | number | PokemonNameType;
 export type TranslationVars = Record<string, TranslationVar>;
@@ -47,7 +48,7 @@ export default class Translate {
             .use(Backend)
             .use(LanguageDetector)
             .init({
-                debug: true,
+                debug: new DevelopmentRequirement().isCompleted(),
                 ns: ['pokemon', 'logbook', 'settings'],
                 fallbackLng: 'en',
                 backend: {
