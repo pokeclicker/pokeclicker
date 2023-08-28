@@ -2185,6 +2185,18 @@ export enum DayOfWeek {
     'Saturday',
 }
 
+export enum MoonPhase {
+    'New Moon' = 0,
+    'Waxing Crescent',
+    'First Quarter',
+    'Waxing Gibbous',
+    'Full Moon',
+    'Waning Gibbous',
+    'Last Quarter',
+    'Waning Crescent',
+}
+
+
 export enum Pokerus {
     'Uninfected' = 0,
     'Infected',
