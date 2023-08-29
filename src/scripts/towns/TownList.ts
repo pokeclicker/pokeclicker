@@ -6566,7 +6566,7 @@ const TrainerSchoolTeacher = new NPC('Teacher Emily', [
     'Just as Alola has multiple islands, its dungeons have multiple floors! Hurry to the ladder to find your way to the next floor.',
     'Watch the clock, if you make it to the next floor you\'ll get a time boost to help you find the boss.',
     'Good luck with your island challenge!',
-], {image: 'assets/images/npcs/Teacher-gen7.png'});
+], {image: 'assets/images/npcs/Teacher (gen7).png'});
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
