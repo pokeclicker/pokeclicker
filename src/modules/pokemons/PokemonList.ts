@@ -3885,7 +3885,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             StoneEvolution('Haunter', 'Gengar', StoneType.Linking_cord),
-            DummyEvolution('', 'Gigantamax '),
+            DummyEvolution('Haunter', 'Gigantamax Gengar'),
         ],
         'base': {
             'hitpoints': 45,
