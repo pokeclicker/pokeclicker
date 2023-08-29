@@ -10362,7 +10362,7 @@ dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
                 new GymPokemon('Litten', 19012230, 10),
                 new GymPokemon('Popplio', 19012230, 10),
                 new GymPokemon('Rowlet', 19012230, 10),
-            ], { weight: 1 }, 'Emily'),
+            ], { weight: 1 }, 'Emily', '(gen7)'),
     ],
     757500, 18);
 
