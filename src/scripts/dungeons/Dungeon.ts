@@ -4362,8 +4362,6 @@ dungeonList['Relic Cave'] = new Dungeon('Relic Cave',
                 new GymPokemon('Rhyhorn', 48000, 39),
                 new GymPokemon('Sunflora', 48000, 40),
             ], { weight: 1 }, 'Dury', '(male)'),
-        new DungeonTrainer('Cipher Peon',
-            [new GymPokemon('Hitmontop', 48000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow)], { weight: 1 }, 'Skrub', '(male)'),
         new DungeonTrainer('Cipher Admin',
             [
                 new GymPokemon('Lombre', 48000, 39),
