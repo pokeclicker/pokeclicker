@@ -5535,7 +5535,7 @@ TemporaryBattleList['Max Raid Venusaur'] = new TemporaryBattle(
     'Max Raid Venusaur',
     [new GymPokemon('Gigantamax Venusaur', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 0, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5549,7 +5549,7 @@ TemporaryBattleList['Max Raid Charizard'] = new TemporaryBattle(
     'Max Raid Charizard',
     [new GymPokemon('Gigantamax Charizard', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 0, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5563,7 +5563,7 @@ TemporaryBattleList['Max Raid Blastoise'] = new TemporaryBattle(
     'Max Raid Blastoise',
     [new GymPokemon('Gigantamax Blastoise', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 0, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5577,7 +5577,7 @@ TemporaryBattleList['Max Raid Butterfree'] = new TemporaryBattle(
     'Max Raid Butterfree',
     [new GymPokemon('Gigantamax Butterfree', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 0, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5591,7 +5591,7 @@ TemporaryBattleList['Max Raid Pikachu'] = new TemporaryBattle(
     'Max Raid Pikachu',
     [new GymPokemon('Gigantamax Pikachu', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 1, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(4, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5605,7 +5605,7 @@ TemporaryBattleList['Max Raid Meowth'] = new TemporaryBattle(
     'Max Raid Meowth',
     [new GymPokemon('Gigantamax Meowth', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 1, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(5, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5619,7 +5619,7 @@ TemporaryBattleList['Max Raid Machamp'] = new TemporaryBattle(
     'Max Raid Machamp',
     [new GymPokemon('Gigantamax Machamp', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 1, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(6, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5633,7 +5633,7 @@ TemporaryBattleList['Max Raid Gengar'] = new TemporaryBattle(
     'Max Raid Gengar',
     [new GymPokemon('Gigantamax Gengar', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 1, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(7, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5647,7 +5647,7 @@ TemporaryBattleList['Max Raid Kingler'] = new TemporaryBattle(
     'Max Raid Kingler',
     [new GymPokemon('Gigantamax Kingler', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 2, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(8, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5661,7 +5661,7 @@ TemporaryBattleList['Max Raid Lapras'] = new TemporaryBattle(
     'Max Raid Lapras',
     [new GymPokemon('Gigantamax Lapras', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 2, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(9, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5675,7 +5675,7 @@ TemporaryBattleList['Max Raid Eevee'] = new TemporaryBattle(
     'Max Raid Eevee',
     [new GymPokemon('Gigantamax Eevee', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 2, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(10, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5689,7 +5689,7 @@ TemporaryBattleList['Max Raid Snorlax'] = new TemporaryBattle(
     'Max Raid Snorlax',
     [new GymPokemon('Gigantamax Snorlax', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 2, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(11, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5703,7 +5703,7 @@ TemporaryBattleList['Max Raid Garbodor'] = new TemporaryBattle(
     'Max Raid Garbodor',
     [new GymPokemon('Gigantamax Garbodor', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 3, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(12, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5717,7 +5717,7 @@ TemporaryBattleList['Max Raid Rillaboom'] = new TemporaryBattle(
     'Max Raid Rillaboom',
     [new GymPokemon('Gigantamax Rillaboom', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 3, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(13, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5731,7 +5731,7 @@ TemporaryBattleList['Max Raid Cinderace'] = new TemporaryBattle(
     'Max Raid Cinderace',
     [new GymPokemon('Gigantamax Cinderace', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 3, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(14, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5745,7 +5745,7 @@ TemporaryBattleList['Max Raid Inteleon'] = new TemporaryBattle(
     'Max Raid Inteleon',
     [new GymPokemon('Gigantamax Inteleon', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 3, 0)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(15, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5759,7 +5759,7 @@ TemporaryBattleList['Max Raid Corviknight'] = new TemporaryBattle(
     'Max Raid Corviknight',
     [new GymPokemon('Gigantamax Corviknight', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 0, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(16, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5773,7 +5773,7 @@ TemporaryBattleList['Max Raid Orbeetle'] = new TemporaryBattle(
     'Max Raid Orbeetle',
     [new GymPokemon('Gigantamax Orbeetle', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 0, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(17, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5787,7 +5787,7 @@ TemporaryBattleList['Max Raid Drednaw'] = new TemporaryBattle(
     'Max Raid Drednaw',
     [new GymPokemon('Gigantamax Drednaw', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 0, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(18, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5801,7 +5801,7 @@ TemporaryBattleList['Max Raid Coalossal'] = new TemporaryBattle(
     'Max Raid Coalossal',
     [new GymPokemon('Gigantamax Coalossal', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 0, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(19, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5815,7 +5815,7 @@ TemporaryBattleList['Max Raid Flapple'] = new TemporaryBattle(
     'Max Raid Flapple',
     [new GymPokemon('Gigantamax Flapple', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 1, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(20, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5829,7 +5829,7 @@ TemporaryBattleList['Max Raid Appletun'] = new TemporaryBattle(
     'Max Raid Appletun',
     [new GymPokemon('Gigantamax Appletun', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 1, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(21, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5843,7 +5843,7 @@ TemporaryBattleList['Max Raid Sandaconda'] = new TemporaryBattle(
     'Max Raid Sandaconda',
     [new GymPokemon('Gigantamax Sandaconda', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 1, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(22, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5857,7 +5857,7 @@ TemporaryBattleList['Max Raid Toxtricity'] = new TemporaryBattle(
     'Max Raid Toxtricity',
     [new GymPokemon('Gigantamax Toxtricity', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 1, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(23, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5871,7 +5871,7 @@ TemporaryBattleList['Max Raid Centiskorch'] = new TemporaryBattle(
     'Max Raid Centiskorch',
     [new GymPokemon('Gigantamax Centiskorch', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 2, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(24, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5885,7 +5885,7 @@ TemporaryBattleList['Max Raid Hatterene'] = new TemporaryBattle(
     'Max Raid Hatterene',
     [new GymPokemon('Gigantamax Hatterene', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 2, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(25, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5899,7 +5899,7 @@ TemporaryBattleList['Max Raid Grimmsnarl'] = new TemporaryBattle(
     'Max Raid Grimmsnarl',
     [new GymPokemon('Gigantamax Grimmsnarl', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 2, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(26, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5913,7 +5913,7 @@ TemporaryBattleList['Max Raid Alcremie'] = new TemporaryBattle(
     'Max Raid Alcremie',
     [new GymPokemon('Gigantamax Alcremie', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 2, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(27, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5927,7 +5927,7 @@ TemporaryBattleList['Max Raid Copperajah'] = new TemporaryBattle(
     'Max Raid Copperajah',
     [new GymPokemon('Gigantamax Copperajah', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 3, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(28, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5941,7 +5941,7 @@ TemporaryBattleList['Max Raid Duraludon'] = new TemporaryBattle(
     'Max Raid Duraludon',
     [new GymPokemon('Gigantamax Duraludon', 2031393560, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 3, 1)],
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(29, 30, 10)],
     undefined,
     {
         hideTrainer: true,
