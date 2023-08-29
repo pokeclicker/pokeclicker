@@ -4362,6 +4362,22 @@ dungeonList['Relic Cave'] = new Dungeon('Relic Cave',
                 new GymPokemon('Rhyhorn', 48000, 39),
                 new GymPokemon('Sunflora', 48000, 40),
             ], { weight: 1 }, 'Dury', '(male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Spheal', 48000, 33),
+                new GymPokemon('Carvanha', 48000, 34),
+            ], { weight: 1 }, 'Doven', '(female)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Shroomish', 48000, 34),
+                new GymPokemon('Cacnea', 48000, 34),
+            ], { weight: 1 }, 'Silton', '(male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Baltoy', 48000, 35),
+                new GymPokemon('Ralts', 48000, 35),
+                new GymPokemon('Kirlia', 48000, 35),
+            ], { weight: 1 }, 'Kass', '(female)'),
         new DungeonTrainer('Cipher Admin',
             [
                 new GymPokemon('Lombre', 48000, 39),
