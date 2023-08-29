@@ -12436,7 +12436,7 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
 // Function, because we don't have 'player' on load
 const maxLairQuestStepRandomIndex = (index: number) => {
     SeededRand.seed(+player.trainerId);
-    return SeededRand.shuffleArray([0, 29])[index];
+    return SeededRand.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29])[index];
 };
 dungeonList['Max Lair'] = new Dungeon('Max Lair',
     ['Ivysaur', 'Charmeleon', 'Wartortle', 'Grovyle', 'Sceptile', 'Combusken', 'Blaziken', 'Marshtomp', 'Swampert', 'Cradily', 'Cofagrigus', 'Fraxure', 'Toxtricity (Amped)', 'Toxtricity (Low Key)'],
