@@ -24022,7 +24022,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 3,
         'evolutions': [
             DummyEvolution('Meltan', 'Melmetal'),
-            DummyEvolution('meltan', 'Gigantamax Melmetal'),
+            DummyEvolution('Meltan', 'Gigantamax Melmetal'),
         ],
         'base': {
             'hitpoints': 46,
