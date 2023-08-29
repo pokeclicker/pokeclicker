@@ -1731,6 +1731,15 @@ const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news, they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
 ], GameConstants.Region.johto, RoamingPokemonList.findGroup(GameConstants.Region.johto, GameConstants.JohtoSubRegions.Johto), 'assets/images/npcs/Pokéfan (male).png');
 
+const RedOldManJohtoNPC = new NPC('Old Man', [
+    'This young fellow comes here every day.',
+    'He is a sore loser, poor boy. But he always comes back next day!',
+    'But even though he is a sore loser, he will always give his opponent a shiny ball, as a reward for winning.',
+], {
+    image: 'assets/images/npcs/Old Man.png',
+    requirement: new TemporaryBattleRequirement('Red'),
+});
+
 const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion', [
     '<i>You are experiencing that same feeling again. Like you\'re not really here.</i>',
     '<i>A man sits in the back of the cave. He is listening to a portable radio.</i>',
@@ -2018,7 +2027,10 @@ TownList['Mt. Silver'] = new DungeonTown(
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
-    [TemporaryBattleList.Red]
+    [TemporaryBattleList.Red],
+    {
+        npcs: [RedOldManJohtoNPC],
+    }
 );
 
 //Hoenn Shops
@@ -3333,7 +3345,7 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [GymList['Cipher Admin Miror B.'], new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
+    [GymList['Cipher Admin Miror B.'], new MoveToDungeon(dungeonList['Pyrite Colosseum']), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
         npcs: [OrreRoamerNPC, Duking1],
