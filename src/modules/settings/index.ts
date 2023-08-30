@@ -341,6 +341,7 @@ Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
 
 Settings.add(new HotkeySetting('hotkey.town.start', 'Starts first content in the town', 'Space'));
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
+Settings.add(new HotkeySetting('hotkey.downloadSave', 'Download save game', 'D', { prefix: 'Shift + ' }));
 Settings.add(new HotkeySetting('hotkey.mute', 'Mute/Unmute Sounds', 'M', { prefix: 'Shift + ' }));
 
 Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
