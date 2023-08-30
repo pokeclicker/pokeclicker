@@ -36,9 +36,9 @@ class PurifyChamber implements Saveable {
         this.currentFlow = ko.observable(0);
         this.flowNeeded = ko.pureComputed(() => {
             const purifiedPokemon = App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Purified).length;
-            const flow = 10 * purifiedPokemon * purifiedPokemon +
-                10 * purifiedPokemon +
-                1000 * Math.exp(0.1 * purifiedPokemon);
+            const flow = 15 * purifiedPokemon * purifiedPokemon +
+                15 * purifiedPokemon +
+                1500 * Math.exp(0.1 * purifiedPokemon);
             return Math.round(flow);
         });
     }
@@ -69,7 +69,7 @@ class PurifyChamber implements Saveable {
         if (!PurifyChamber.requirements.isCompleted() || !App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow)) {
             return;
         }
-        const newFlow = Math.round(this.currentFlow() + exp / 1000) * 1.5;
+        const newFlow = Math.round(this.currentFlow() + exp / 1000);
         this.currentFlow(Math.min(newFlow, this.flowNeeded()));
 
         if (!this.notified && this.currentFlow() >= this.flowNeeded()) {
