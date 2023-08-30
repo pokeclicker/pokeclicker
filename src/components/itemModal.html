@@ -61,7 +61,7 @@
                                             <div class="d-inline-block" data-bind="text: displayName" style="margin-left: 20px; margin-top: 8px;">Name</div>
                                             <span class="mr-1" style="float: right; margin-top: 8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsPokerusData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
                                                 <span class="stoneEvolutionStatuses" data-bind="foreach: statuses">
-                                                    <span class="" data-bind="template: { name: 'pokerusStatusTemplate', data: { pokerus: $data.status } }"></span>
+                                                    <span class="" data-bind="template: { name: 'pokerusStatusTemplate', data: { pokerus: $data.status, evs: $data.evs } }"></span>
                                                 </span>
                                             </span>
                                             <span class="mr-1" style="float: right; margin-top: 8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">

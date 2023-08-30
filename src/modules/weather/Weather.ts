@@ -34,7 +34,7 @@ export default class Weather {
         [WeatherType.Clear]:
             new WeatherCondition(WeatherType.Clear, '#ffe57a', 'The weather is clear and pleasant.', 30),
         [WeatherType.Overcast]:
-            new WeatherCondition(WeatherType.Overcast, '#bed8ff', 'Clouds fill the skies.', 15,
+            new WeatherCondition(WeatherType.Overcast, '#a7db8d', 'Clouds fill the skies.', 15,
                 [{ type: PokemonType.Normal, multiplier: 1.1 }, { type: PokemonType.Fighting, multiplier: 1.1 }, { type: PokemonType.Poison, multiplier: 1.1 }]),
         [WeatherType.Rain]:
             new WeatherCondition(WeatherType.Rain, '#9db7f5', 'It\'s rainy and humid.', 10,

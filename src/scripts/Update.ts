@@ -2460,6 +2460,12 @@ class Update implements Saveable {
         },
         '0.10.16': ({ playerData, saveData, settingsData }) => {
 
+
+            // Fix None category color being incomplete
+            if (saveData.categories.categories[0].color === '#333') {
+                saveData.categories.categories[0].color = '#333333';
+            }
+
             // ClearBattleFrontier → ClearBattleFrontierQuest
             saveData.quests.questList = saveData.quests.questList?.map(q => {
                 if (q.name == 'ClearBattleFrontier') {
@@ -2467,7 +2473,6 @@ class Update implements Saveable {
                 }
                 return q;
             }) || [];
-
         },
     };
 
