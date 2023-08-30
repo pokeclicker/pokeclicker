@@ -3634,13 +3634,41 @@ class QuestLineHelper {
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
 
-    public static createGigantamax() {
-        const gigantiamaxQuestLine = new QuestLine('TODO Gigantamax questline name', 'TODO', new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)), GameConstants.BulletinBoards.Galar);
+    public static createGigantamaxQuestLine() {
+        const gigantamaxQuestLine = new QuestLine('The Lair of Giants', 'TODO', new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)), GameConstants.BulletinBoards.Galar);
 
-        gigantiamaxQuestLine.addQuest(new CustomQuest(1, undefined, 'Obtain 1 Wishing Piece', player.itemList.Wishing_Piece, 0));
-        gigantiamaxQuestLine.addQuest(new CustomQuest(2, undefined, 'Obtain 2 Wishing Piece', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(1, undefined, 'Obtain 1 Wishing Piece', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(2, undefined, 'Obtain 2 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(3, undefined, 'Obtain 3 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(4, undefined, 'Obtain 4 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(5, undefined, 'Obtain 5 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(6, undefined, 'Obtain 6 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(7, undefined, 'Obtain 7 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(8, undefined, 'Obtain 8 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(9, undefined, 'Obtain 9 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(10, undefined, 'Obtain 10 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(11, undefined, 'Obtain 11 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(12, undefined, 'Obtain 12 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(13, undefined, 'Obtain 13 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(14, undefined, 'Obtain 14 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(15, undefined, 'Obtain 15 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(16, undefined, 'Obtain 16 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(17, undefined, 'Obtain 17 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(18, undefined, 'Obtain 18 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(19, undefined, 'Obtain 19 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(20, undefined, 'Obtain 20 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(21, undefined, 'Obtain 21 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(22, undefined, 'Obtain 22 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(23, undefined, 'Obtain 23 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(24, undefined, 'Obtain 24 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(25, undefined, 'Obtain 25 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(26, undefined, 'Obtain 26 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(27, undefined, 'Obtain 27 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(28, undefined, 'Obtain 28 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(29, undefined, 'Obtain 29 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(30, undefined, 'Obtain 30 Wishing Pieces', player.itemList.Wishing_Piece, 0));
 
-        App.game.quests.questLines().push(gigantiamaxQuestLine);
+        App.game.quests.questLines().push(gigantamaxQuestLine);
     }
 
     public static createOriginalColorMagearnaQuestLine() {
@@ -3886,7 +3914,7 @@ class QuestLineHelper {
         this.createGalarCrownQuestLine();
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
-        this.createGigantamax();
+        this.createGigantamaxQuestLine();
         this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
         this.createHisuiArceusQuestLine();
