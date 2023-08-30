@@ -69,7 +69,7 @@ class PurifyChamber implements Saveable {
         if (!PurifyChamber.requirements.isCompleted() || !App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow)) {
             return;
         }
-        const newFlow = Math.round(this.currentFlow() + exp / 1000);
+        const newFlow = Math.round(this.currentFlow() + exp / 1000) * 1.5;
         this.currentFlow(Math.min(newFlow, this.flowNeeded()));
 
         if (!this.notified && this.currentFlow() >= this.flowNeeded()) {
