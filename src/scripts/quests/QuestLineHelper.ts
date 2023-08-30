@@ -3633,7 +3633,7 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
-  
+
     public static createGigantamaxQuestLine() {
         const gigantamaxQuestLine = new QuestLine('The Lair of Giants', 'TODO', new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)), GameConstants.BulletinBoards.Galar);
 
