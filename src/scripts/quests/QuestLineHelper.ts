@@ -1485,7 +1485,7 @@ class QuestLineHelper {
     }
     // XD Questline, available after Unova E4
     public static createOrreXDQuestLine() {
-        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]), GameConstants.BulletinBoards.Unova);
+        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new DevelopmentRequirement(new MultiRequirement([new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)])), GameConstants.BulletinBoards.Unova);
 
         const talkToGateonSailor = new TalkToNPCQuest(GateonSailor, 'Ask around Gateon Port for clues about new Team Cipher activity.');
         orreXDQuestLine.addQuest(talkToGateonSailor);
@@ -3635,7 +3635,7 @@ class QuestLineHelper {
     }
 
     public static createGigantamax() {
-        const gigantiamaxQuestLine = new QuestLine('TODO Gigantamax questline name', 'TODO', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new DevelopmentRequirement()]), GameConstants.BulletinBoards.Galar);
+        const gigantiamaxQuestLine = new QuestLine('TODO Gigantamax questline name', 'TODO', new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)), GameConstants.BulletinBoards.Galar);
 
         gigantiamaxQuestLine.addQuest(new CustomQuest(1, undefined, 'Obtain 1 Wishing Piece', player.itemList.Wishing_Piece, 0));
         gigantiamaxQuestLine.addQuest(new CustomQuest(2, undefined, 'Obtain 2 Wishing Piece', player.itemList.Wishing_Piece, 0));

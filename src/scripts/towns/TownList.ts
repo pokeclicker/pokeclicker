@@ -3402,7 +3402,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
-        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
+        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 0))],
         npcs: [ProfKrane],
     }
 );
@@ -3413,7 +3413,7 @@ TownList['Kaminko\'s Manor'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
     {
-        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
+        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 2))],
         npcs: [DrKaminko, Chobin1, Chobin2],
     }
 );
@@ -3424,7 +3424,7 @@ TownList['S. S. Libra'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Cipher Peon Smarton']],
     {
-        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
+        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 19))],
         npcs: [SearchLibra],
     }
 );
@@ -3434,7 +3434,7 @@ TownList['Orre Colosseum'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [GymList['Cipher Admin Lovrina'], GymList['Cipher Admin Snattle'], GymList['Cipher Admin Gorigan'], GymList['Cipher Admin Ardos'], GymList['Cipher Admin Eldes']],
     {
-        requirements: [new DevelopmentRequirement(), new QuestLineCompletedRequirement('Gale of Darkness')],
+        requirements: [new DevelopmentRequirement(new QuestLineCompletedRequirement('Gale of Darkness'))],
         npcs: [OrreColosseumSpectator],
     }
 );
@@ -8647,7 +8647,7 @@ TownList['Max Lair'] = new DungeonTown(
     'Max Lair',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new QuestLineStartedRequirement('TODO Gigantamax questline name'), new DevelopmentRequirement()]
+    [new DevelopmentRequirement(new QuestLineStartedRequirement('TODO Gigantamax questline name'))]
 );
 
 //Hisui shops
