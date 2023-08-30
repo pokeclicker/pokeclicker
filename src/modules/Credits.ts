@@ -1260,7 +1260,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1428,
+            1429,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -1276,7 +1276,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            463,
+            464,
         ],
         name: 'Aegyo',
         link: 'https://github.com/Aegyo',
@@ -1316,7 +1316,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            110,
+            111,
         ],
         name: 'Farboo171',
         link: 'https://github.com/Farboo171',
@@ -1324,7 +1324,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            104,
+            107,
         ],
         name: 'CypherX',
         link: 'https://github.com/CypherX',
@@ -1388,7 +1388,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            37,
+            38,
         ],
         name: 'Crobat4',
         link: 'https://github.com/Crobat4',
@@ -1756,6 +1756,14 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            3,
+        ],
+        name: 'Razorflamekun',
+        link: 'https://github.com/Razorflamekun',
+        image: 'https://avatars.githubusercontent.com/u/53189811?v=4',
+    },
+    {
+        resources: [
             2,
         ],
         name: 'adapap',
@@ -1809,14 +1817,6 @@ export const CodeCredits: Credit[] = [
         name: 'Penguindude2000',
         link: 'https://github.com/Penguindude2000',
         image: 'https://avatars.githubusercontent.com/u/80924419?v=4',
-    },
-    {
-        resources: [
-            2,
-        ],
-        name: 'Razorflamekun',
-        link: 'https://github.com/Razorflamekun',
-        image: 'https://avatars.githubusercontent.com/u/53189811?v=4',
     },
     {
         resources: [
@@ -1998,6 +1998,14 @@ export const CodeCredits: Credit[] = [
         resources: [
             1,
         ],
+        name: 'UnicornSnuggler',
+        link: 'https://github.com/UnicornSnuggler',
+        image: 'https://avatars.githubusercontent.com/u/10764837?v=4',
+    },
+    {
+        resources: [
+            1,
+        ],
         name: 'oohwooh',
         link: 'https://github.com/oohwooh',
         image: 'https://avatars.githubusercontent.com/u/11283815?v=4',
@@ -2025,14 +2033,6 @@ export const CodeCredits: Credit[] = [
         name: 'MatthieuMesnager',
         link: 'https://github.com/MatthieuMesnager',
         image: 'https://avatars.githubusercontent.com/u/38081186?v=4',
-    },
-    {
-        resources: [
-            1,
-        ],
-        name: 'Rohydre',
-        link: 'https://github.com/Rohydre',
-        image: 'https://avatars.githubusercontent.com/u/9746574?v=4',
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));

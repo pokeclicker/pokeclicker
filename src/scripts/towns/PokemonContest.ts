@@ -150,7 +150,7 @@ class ContestEntry {
     }
 
     public getPokemonImage() {
-        return !this.pokemonName() ? '/assets/images/pokeball/Pokeball.svg' : PokemonHelper.getImage(pokemonMap[this.pokemonName()].id);
+        return !this.pokemonName() ? 'assets/images/pokeball/Pokeball.svg' : PokemonHelper.getImage(pokemonMap[this.pokemonName()].id);
     }
 
     getStylePoints = ko.pureComputed((): number => {
