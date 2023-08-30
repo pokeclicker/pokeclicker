@@ -656,24 +656,24 @@ export function expRandomElement<T>(array: T[], ratio: number): T {
 }
 
 export const TypeColor = [
-    '#A8A77A', // Normal
-    '#EE8130', // Fire
-    '#6390F0', // Water
-    '#F7D02C', // Electric
-    '#7AC74C', // Grass
-    '#96D9D6', // Ice
-    '#C22E28', // Fighting
-    '#A33EA1', // Poison
-    '#E2BF65', // Ground
-    '#A98FF3', // Flying
-    '#F95587', // Psychic
-    '#A6B91A', // Bug
-    '#B6A136', // Rock
-    '#735797', // Ghost
-    '#6F35FC', // Dragon
-    '#705746', // Dark
-    '#B7B7CE', // Steel
-    '#D685AD', // Fairy
+    '#9FA19E', // Normal
+    '#E62728', // Fire
+    '#2981EF', // Water
+    '#F9BF00', // Electric
+    '#3EA12A', // Grass
+    '#3FD8FE', // Ice
+    '#FE7F00', // Fighting
+    '#8E40CB', // Poison
+    '#915120', // Ground
+    '#80B7ED', // Flying
+    '#EE4078', // Psychic
+    '#90A01C', // Bug
+    '#ADA880', // Rock
+    '#704070', // Ghost
+    '#5062DF', // Dragon
+    '#50413E', // Dark
+    '#60A0B7', // Steel
+    '#EE71EE', // Fairy
 ];
 
 export const ROUTE_KILLS_NEEDED = 10;
@@ -726,7 +726,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.johto]: new Set(),
         [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout', 'Mt. Battle']),
         [Region.sinnoh]: new Set(['Stark Mountain']),
-        [Region.unova]: new Set(['Reversal Mountain']),
+        [Region.unova]: new Set([]),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(['Wela Volcano Park']),
         [Region.galar]: new Set(['Motostoke']),
@@ -746,10 +746,10 @@ export const Environments: Record<string, EnvironmentData> = {
     Cave: {
         [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave', 'Tanoby Ruins']),
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
-        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn', 135, 'Pyrite Cave', 'Relic Cave', 'The Under', 'Citadark Isle']),
+        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn', 'Pyrite Cave', 'Relic Cave', 'The Under', 'Citadark Isle']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
-        [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
+        [Region.kalos]: new Set([9, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
         [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
     },
@@ -763,6 +763,17 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
         [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Iron Ruins']),
+    },
+
+    Desert: {
+        [Region.kanto]: new Set(),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set([111, 135, 'Outskirt Stand', 'Pyrite Town', 'Pyrite Town Battles', 'Orre Colosseum']),
+        [Region.sinnoh]: new Set([228]),
+        [Region.unova]: new Set([4, 25, 'Lentimas Town', 'Reversal Mountain']),
+        [Region.kalos]: new Set([13]),
+        [Region.alola]: new Set([23]),
+        [Region.galar]: new Set([23, 25, 39, 'Stow-on-Side', 'Dusty Bowl']),
     },
 
     PowerPlant: {
@@ -779,12 +790,12 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Town Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Citadark Isle Dome', 'Orre Colosseum']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Citadark Isle Dome']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
-        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
     },
 
     Graveyard: {
@@ -795,7 +806,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
-        [Region.galar]: new Set(['Dusty Bowl', 49]),
+        [Region.galar]: new Set([49]),
     },
 
     // No need to set anything here, only exists for battle overrides
@@ -811,6 +822,7 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     Forest: 'forest',
     Cave: 'cave',
     GemCave: 'cave-gem',
+    Desert: 'desert',
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',

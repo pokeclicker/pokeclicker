@@ -607,7 +607,7 @@ TemporaryBattleList.Red = new TemporaryBattle(
     ],
     '...',
     [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Silver'))],
-    [new NullRequirement],
+    undefined,
     {
         rewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Light_Ball'}, 1);
@@ -617,6 +617,7 @@ TemporaryBattleList.Red = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
         },
+        resetDaily: true,
     }
 );
 

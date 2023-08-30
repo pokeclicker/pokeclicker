@@ -22,7 +22,7 @@ export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
         [new RoamingGroup('Kanto', [KantoSubRegions.Kanto]), new RoamingGroup('Kanto - Sevii Islands', [KantoSubRegions.Sevii123, KantoSubRegions.Sevii4567])],
         [new RoamingGroup('Johto', [JohtoSubRegions.Johto])],
-        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn]), new RoamingGroup('Orre', [HoennSubRegions.Orre])],
+        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn]), new RoamingGroup('Hoenn - Orre', [HoennSubRegions.Orre])],
         [new RoamingGroup('Sinnoh', [SinnohSubRegions.Sinnoh])],
         [new RoamingGroup('Unova', [UnovaSubRegions.Unova])],
         [new RoamingGroup('Kalos', [KalosSubRegions.Kalos])],

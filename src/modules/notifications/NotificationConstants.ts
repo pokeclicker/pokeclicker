@@ -18,6 +18,7 @@ const NotificationConstants = {
             underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
             battle_frontier: new Sound('battle_frontier', 'Battle Frontier'),
             dream_orb: new Sound('dream_orb', 'Opening Dream Orb'),
+            pokerus: new Sound('pokerus_resistant', 'Pokémon has become Resistant to Pokérus'),
         },
         Hatchery: {
             ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),

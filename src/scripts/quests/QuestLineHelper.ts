@@ -1118,7 +1118,7 @@ class QuestLineHelper {
         const talkToRui3 = new TalkToNPCQuest(Rui3, 'Discuss your next move with Rui at Mt. Battle.');
         orreColosseumQuestLine.addQuest(talkToRui3);
 
-        const fightTheUnder = new CustomQuest(1, 0, 'Track down the TV broadcast coming The Under in Pyrite Town. Clear The Under.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('The Under')](), undefined, undefined,
+        const fightTheUnder = new CustomQuest(1, 0, 'Track down the TV broadcast coming from The Under in Pyrite Town. Clear The Under.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('The Under')](), undefined, undefined,
             {
                 clearedMessage: 'Aiyeeeeh! How dare you! How could I get bested by a mere child? Remember this! I\'ll get you back for this!',
                 npcDisplayName: 'Venus',
@@ -1525,7 +1525,7 @@ class QuestLineHelper {
 
     // XD Questline, available after Unova E4
     public static createOrreXDQuestLine() {
-        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]), GameConstants.BulletinBoards.Unova);
+        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new DevelopmentRequirement(new MultiRequirement([new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)])), GameConstants.BulletinBoards.Unova);
 
         const talkToGateonSailor = new TalkToNPCQuest(GateonSailor, 'Ask around Gateon Port for clues about new Team Cipher activity.');
         orreXDQuestLine.addQuest(talkToGateonSailor);
@@ -2395,19 +2395,19 @@ class QuestLineHelper {
         const talkToBaraz4 = new TalkToNPCQuest(Baraz4, 'This is ridiculous. Talk to Baraz in Kiloude City.', () => ItemList.Prison_Bottle.gain(1));
         clashOfAgesQuestLine.addQuest(talkToBaraz4);
 
-        const clearHoopa1 = new DefeatTemporaryBattleQuest('Hoopa 1', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Kiloude City.');
+        const clearHoopa1 = new DefeatTemporaryBattleQuest('Hoopa 1', 'Defeat the Unbound Hoopa and its summoned defenders near Kiloude City.');
         clashOfAgesQuestLine.addQuest(clearHoopa1);
 
-        const clearHoopa2 = new DefeatTemporaryBattleQuest('Hoopa 2', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Shalour City.');
+        const clearHoopa2 = new DefeatTemporaryBattleQuest('Hoopa 2', 'Defeat the Unbound Hoopa and its summoned defenders near Shalour City.');
         clashOfAgesQuestLine.addQuest(clearHoopa2);
 
-        const clearHoopa3 = new DefeatTemporaryBattleQuest('Hoopa 3', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Lumiose City.');
+        const clearHoopa3 = new DefeatTemporaryBattleQuest('Hoopa 3', 'Defeat the Unbound Hoopa and its summoned defenders near Lumiose City.');
         clashOfAgesQuestLine.addQuest(clearHoopa3);
 
-        const clearHoopa4 = new DefeatTemporaryBattleQuest('Hoopa 4', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Anistar City.');
+        const clearHoopa4 = new DefeatTemporaryBattleQuest('Hoopa 4', 'Defeat the Unbound Hoopa and its summoned defenders near Anistar City.');
         clashOfAgesQuestLine.addQuest(clearHoopa4);
 
-        const clearHoopa5 = new DefeatTemporaryBattleQuest('Hoopa 5', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Laverre City.');
+        const clearHoopa5 = new DefeatTemporaryBattleQuest('Hoopa 5', 'Defeat the Unbound Hoopa and its summoned defenders near Laverre City.');
         clashOfAgesQuestLine.addQuest(clearHoopa5);
 
         const clearHoopa6 = new DefeatTemporaryBattleQuest('Hoopa 6', 'Defeat the Unbound Hoopa near Kiloude City, this time for real.');
@@ -3675,7 +3675,7 @@ class QuestLineHelper {
     }
 
     public static createGigantamax() {
-        const gigantiamaxQuestLine = new QuestLine('TODO Gigantamax questline name', 'TODO', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new DevelopmentRequirement()]), GameConstants.BulletinBoards.Galar);
+        const gigantiamaxQuestLine = new QuestLine('TODO Gigantamax questline name', 'TODO', new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)), GameConstants.BulletinBoards.Galar);
 
         gigantiamaxQuestLine.addQuest(new CustomQuest(1, undefined, 'Obtain 1 Wishing Piece', player.itemList.Wishing_Piece, 0));
         gigantiamaxQuestLine.addQuest(new CustomQuest(2, undefined, 'Obtain 2 Wishing Piece', player.itemList.Wishing_Piece, 0));

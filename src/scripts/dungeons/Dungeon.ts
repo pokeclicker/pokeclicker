@@ -15,6 +15,7 @@ interface EnemyOptions {
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
     reward?: Amount,
     hide?: boolean,
+    hideTrainer?: boolean,
 }
 
 interface DetailedPokemon {
@@ -276,21 +277,24 @@ class Dungeon {
         return this.mimicList.filter(p => App.game.party.alreadyCaughtPokemonByName(p));
     }
 
-    public getRandomLootTier(clears: number, debuffed = false): LootTier {
-        const tierWeights = this.getLootTierWeights(clears, debuffed);
+    public getRandomLootTier(clears: number, debuffed = false, onlyDebuffable = false): LootTier {
+        const tierWeights = this.getLootTierWeights(clears, debuffed, onlyDebuffable);
         return Rand.fromWeightedArray(Object.keys(tierWeights), Object.values(tierWeights)) as LootTier;
     }
 
+    private lootFilter = (loot: Loot, onlyDebuffable: boolean) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff);
+
     public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff));
+        const lootTable = this.lootTable[tier].filter((loot) => this.lootFilter(loot, onlyDebuffable));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
-    public getLootTierWeights(clears: number, debuffed : boolean): Record<LootTier, number> {
+    public getLootTierWeights(clears: number, debuffed : boolean, onlyDebuffable = false): Record<LootTier, number> {
         if (debuffed) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
                 if (tier in this.lootTable &&
-                    this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
+                    this.lootTable[tier].some((loot: Loot) => this.lootFilter(loot, onlyDebuffable))
+                ) {
                     chances[tier] = chance;
                 }
                 return chances;
@@ -4359,7 +4363,21 @@ dungeonList['Relic Cave'] = new Dungeon('Relic Cave',
                 new GymPokemon('Sunflora', 48000, 40),
             ], { weight: 1 }, 'Dury', '(male)'),
         new DungeonTrainer('Cipher Peon',
-            [new GymPokemon('Hitmontop', 48000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow)], { weight: 1 }, 'Skrub', '(male)'),
+            [
+                new GymPokemon('Spheal', 48000, 33),
+                new GymPokemon('Carvanha', 48000, 34),
+            ], { weight: 1 }, 'Doven', '(female)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Shroomish', 48000, 34),
+                new GymPokemon('Cacnea', 48000, 34),
+            ], { weight: 1 }, 'Silton', '(male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Baltoy', 48000, 35),
+                new GymPokemon('Ralts', 48000, 35),
+                new GymPokemon('Kirlia', 48000, 35),
+            ], { weight: 1 }, 'Kass', '(female)'),
         new DungeonTrainer('Cipher Admin',
             [
                 new GymPokemon('Lombre', 48000, 39),
@@ -5114,7 +5132,7 @@ dungeonList['Snagem Hideout'] = new Dungeon('Snagem Hideout',
             [
                 new GymPokemon('Grovyle', 80200, 52),
                 new GymPokemon('Rhyhorn', 80200, 52),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Niver', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Niver'),
         new DungeonTrainer('Rider',
             [
                 new GymPokemon('Poochyena', 80200, 54),
@@ -5438,7 +5456,7 @@ dungeonList['Phenac Stadium'] = new Dungeon('Phenac Stadium',
             [
                 new GymPokemon('Remoraid', 89500, 40),
                 new GymPokemon('Skitty', 89500, 40),
-            ], { weight: 1}, 'Rima', '(female)'),
+            ], { weight: 1}, 'Rima'),
         new DungeonTrainer('Old Man',
             [
                 new GymPokemon('Spheal', 89500, 40),
@@ -10158,13 +10176,13 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
             ])}),
         new DungeonTrainer('Anomaly Mewtwo',
             [new GymPokemon('Mega Mewtwo X', 120000000, 70)],
-            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power')}, undefined, 'X'),
+            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power'), hideTrainer: true}, undefined, 'X'),
         new DungeonTrainer('Anomaly Mewtwo',
             [new GymPokemon('Mega Mewtwo Y', 120000000, 70)],
             { hide: true, requirement: new MultiRequirement([
                 new QuestLineStepCompletedRequirement('An Unrivaled Power', 16),
                 new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less),
-            ])}, undefined, 'Y'),
+            ]), hideTrainer: true}, undefined, 'Y'),
     ],
     725000, 20);
 
@@ -10367,7 +10385,7 @@ dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
                 new GymPokemon('Litten', 19012230, 10),
                 new GymPokemon('Popplio', 19012230, 10),
                 new GymPokemon('Rowlet', 19012230, 10),
-            ], { weight: 1 }, 'Emily'),
+            ], { weight: 1 }, 'Emily', '(gen7)'),
     ],
     757500, 18);
 

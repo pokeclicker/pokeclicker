@@ -97,6 +97,7 @@ class PartyPokemon implements Saveable {
                     message: `${this.name} has become Resistant to Pokérus.`,
                     pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
                     type: NotificationConstants.NotificationOption.info,
+                    sound: NotificationConstants.NotificationSound.General.pokerus,
                     setting: NotificationConstants.NotificationSetting.General.pokerus,
                 });
                 App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
