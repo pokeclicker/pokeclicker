@@ -73,7 +73,7 @@ abstract class Quest {
             }
             if (this.optionalArgs?.clearedMessage !== undefined) {
                 Quest.questObservable(this);
-                $('#customQuestStepClearedModal').modal('show');
+                $('#questStepClearedModal').modal('show');
             }
             this.focusSub?.dispose?.();
             this.claimed(true);
@@ -264,10 +264,6 @@ abstract class Quest {
 
     public getNpcDisplayName() {
         return this.optionalArgs.npcDisplayName;
-    }
-
-    public getNpcImageName() {
-        return this.optionalArgs.npcImageName;
     }
 
     public getNpcImage() {

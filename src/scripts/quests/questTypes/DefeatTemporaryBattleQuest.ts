@@ -5,16 +5,4 @@ class DefeatTemporaryBattleQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.temporaryBattle)];
         this.customDescription = customDescription;
     }
-
-    begin(): void {
-        this.initial(0);
-    }
-
-    claim(): boolean {
-        if (this.customReward !== undefined) {
-            this.customReward();
-        }
-        return super.claim();
-    }
-
 }
