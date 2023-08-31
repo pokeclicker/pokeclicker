@@ -12,13 +12,13 @@ class PurifyChamberTownContent extends TownContent {
         $('#purifyChamberModal').modal('show');
     }
 
+    public isUnlocked(): boolean {
+        return PurifyChamber.requirements.isCompleted();
+    }
+
     public areaStatus(): areaStatus {
-        if (!PurifyChamber.requirements.isCompleted()) {
-            return super.areaStatus();
-        }
-        if (App.game.purifyChamber.currentFlow() >= App.game.purifyChamber.flowNeeded() && App.game.party.caughtPokemon.some(p => p.shadow == GameConstants.ShadowStatus.Shadow)) {
-            return areaStatus.uncaughtPokemon;
-        }
+        const canPurify = App.game.purifyChamber.currentFlow() >= App.game.purifyChamber.flowNeeded() && App.game.party.caughtPokemon.some(p => p.shadow == GameConstants.ShadowStatus.Shadow);
+        return Math.min(canPurify ? areaStatus.uncaughtPokemon : areaStatus.completed, super.areaStatus());
     }
 
 }
@@ -36,9 +36,9 @@ class PurifyChamber implements Saveable {
         this.currentFlow = ko.observable(0);
         this.flowNeeded = ko.pureComputed(() => {
             const purifiedPokemon = App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Purified).length;
-            const flow = 10 * purifiedPokemon * purifiedPokemon +
-                10 * purifiedPokemon +
-                1000 * Math.exp(0.1 * purifiedPokemon);
+            const flow = 15 * purifiedPokemon * purifiedPokemon +
+                15 * purifiedPokemon +
+                1500 * Math.exp(0.1 * purifiedPokemon);
             return Math.round(flow);
         });
     }
