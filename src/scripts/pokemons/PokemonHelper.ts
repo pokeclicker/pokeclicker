@@ -31,7 +31,6 @@ class PokemonHelper extends TmpPokemonHelper {
     /*
     PRETTY MUCH ONLY USED BY THE BOT BELOW
     */
-    private static pokemonRewardRegex = /gainPokemonByName\('(.+?)'/g;
 
     private static getPokemonRegionRoutesCache: {[name: string] : any}[] = [];
     public static getPokemonRegionRoutes(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) {
@@ -389,15 +388,14 @@ class PokemonHelper extends TmpPokemonHelper {
         pokemonList.forEach(p => tempBattleList[p.name] = []);
 
         Object.entries(TemporaryBattleList).forEach(tempBattle => {
-            const firstTimeReward = tempBattle[1].optionalArgs?.firstTimeRewardFunction?.toString();
-            let match;
-            while ((match = this.pokemonRewardRegex.exec(firstTimeReward)) !== null) {
-                tempBattleList[match[1]].push(tempBattle[0]);
-            }
-            const reward = tempBattle[1].optionalArgs?.rewardFunction?.toString();
-            while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
-                tempBattleList[match[1]].push(tempBattle[0]);
-            }
+            const firstTimeRewardFunction = tempBattle[1].optionalArgs?.firstTimeRewardFunction?.toString();
+            this.getPokemonRewards(firstTimeRewardFunction).forEach(pokemon => {
+                tempBattleList[pokemon].push(tempBattle[0]);
+            });
+            const rewardFunction = tempBattle[1].optionalArgs?.rewardFunction?.toString();
+            this.getPokemonRewards(rewardFunction).forEach(pokemon => {
+                tempBattleList[pokemon].push(tempBattle[0]);
+            });
 
             if (tempBattle[1].optionalArgs?.isTrainerBattle === false) {
                 tempBattle[1].getPokemonList().forEach(p => {
@@ -416,11 +414,10 @@ class PokemonHelper extends TmpPokemonHelper {
         const gymList = this.getPokemonGymRewardCache = {};
         pokemonList.forEach(p => gymList[p.name] = []);
         Object.values(GymList).forEach(gym => {
-            const reward = gym.rewardFunction?.toString();
-            let match;
-            while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
-                gymList[match[1]].push(gym.leaderName);
-            }
+            const rewardFunction = gym.rewardFunction?.toString();
+            this.getPokemonRewards(rewardFunction).forEach(pokemon => {
+                gymList[pokemon].push(gym.leaderName);
+            });
         });
         return gymList[pokemonName];
     }
@@ -433,11 +430,10 @@ class PokemonHelper extends TmpPokemonHelper {
         const dungeons = this.getPokemonDungeonRewardCache = {};
         pokemonList.forEach(p => dungeons[p.name] = []);
         Object.values(dungeonList).forEach(dungeon => {
-            const reward = dungeon.rewardFunction?.toString();
-            let match;
-            while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
-                dungeons[match[1]].push(dungeon.name);
-            }
+            const rewardFunction = dungeon.rewardFunction?.toString();
+            this.getPokemonRewards(rewardFunction).forEach(pokemon => {
+                dungeons[pokemon].push(dungeon.name);
+            });
         });
         return dungeons[pokemonName];
     }
@@ -450,11 +446,10 @@ class PokemonHelper extends TmpPokemonHelper {
         const questLines = this.getPokemonQuestLineRewardCache = {};
         pokemonList.forEach(p => questLines[p.name] = []);
         App.game.quests.questLines().forEach(questLine => questLine.quests().forEach(quest => {
-            const reward = (quest as any).customReward?.toString();
-            let match;
-            while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
-                questLines[match[1]].push(questLine.name);
-            }
+            const rewardFunction = (quest as any).customReward?.toString();
+            this.getPokemonRewards(rewardFunction).forEach(pokemon => {
+                questLines[pokemon].push(questLine.name);
+            });
         }));
         return questLines[pokemonName];
     }
@@ -514,15 +509,14 @@ class PokemonHelper extends TmpPokemonHelper {
 
             const npcs = town.npcs?.filter(n => n instanceof GiftNPC);
             npcs?.forEach(npc => {
-                const reward = (npc as GiftNPC).giftFunction?.toString();
-                let match;
-                while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
-                    gifts[match[1]].push({
+                const rewardFunction = (npc as GiftNPC).giftFunction?.toString();
+                this.getPokemonRewards(rewardFunction).forEach(pokemon => {
+                    gifts[pokemon].push({
                         town: townName,
                         npc: npc.name,
                         requirements: npc.options?.requirement?.hint(),
                     });
-                }
+                });
             });
         });
         return gifts[pokemonName];
@@ -578,6 +572,16 @@ class PokemonHelper extends TmpPokemonHelper {
             }
         });
         return res;
+    }
+
+    private static getPokemonRewards(rewardFunction: string) {
+        const pokemonRewardRegex = /gainPokemonByName\('(.+?)'/g;
+        const rewards = [];
+        let match;
+        while ((match = pokemonRewardRegex.exec(rewardFunction)) != null) {
+            rewards.push(match[1]);
+        }
+        return rewards;
     }
 
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.MAX_AVAILABLE_REGION) => {
