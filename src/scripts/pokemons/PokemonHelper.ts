@@ -531,7 +531,8 @@ class PokemonHelper extends TmpPokemonHelper {
             locations[PokemonLocationType.Safari] ||
             locations[PokemonLocationType.Shop] ||
             locations[PokemonLocationType.Wandering] ||
-            locations[PokemonLocationType.Trade];
+            locations[PokemonLocationType.Trade] ||
+            locations[PokemonLocationType.DreamOrb];
         return !isEvable && Object.keys(locations).length;
     };
 }
