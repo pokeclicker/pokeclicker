@@ -2077,7 +2077,7 @@ GymList.Circhester1 = new Gym(
         new GymPokemon('Barbaracle', 148495838, 40),
         new GymPokemon('Shuckle', 148495838, 40),
         new GymPokemon('Stonjourner', 148495838, 41),
-        new GymPokemon('Gigantamax Coalossal', 111540241, 42),
+        new GymPokemon('Gigantamax Coalossal', 160617947, 42),
     ],
     BadgeEnums.Galar_Rock,
     80000,
