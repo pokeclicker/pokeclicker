@@ -152,6 +152,7 @@ class Pokeballs implements Feature {
             pokerus: App.game.party.getPokemon(id)?.pokerus,
             pokemonType: [pokemon.type1, pokemon.type2],
             encounterType,
+            category: App.game.party.getPokemon(id)?.category,
         })?.ball() ?? GameConstants.Pokeball.None;
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;

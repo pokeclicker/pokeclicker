@@ -1072,6 +1072,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Blue Raindrops',
             'Magikarp Saucy Violet',
             'Magikarp Violet Raindrops',
+            'Max Raid Den map sprites (active and inactive)',
             'Meta Groudon',
             'Millis Steel',
             'Mireland route map sprites',
