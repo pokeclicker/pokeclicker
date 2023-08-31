@@ -5575,8 +5575,8 @@ TemporaryBattleList['Max Raid Blastoise'] = new TemporaryBattle(
 );
 TemporaryBattleList['Max Raid Butterfree'] = new TemporaryBattle(
     'Max Raid Butterfree',
-    undefined,
     [new GymPokemon('Gigantamax Butterfree', 3258585042, 70)],
+    undefined,
     [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 30, 10)],
     undefined,
     {
