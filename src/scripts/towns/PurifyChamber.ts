@@ -12,13 +12,13 @@ class PurifyChamberTownContent extends TownContent {
         $('#purifyChamberModal').modal('show');
     }
 
+    public isUnlocked(): boolean {
+        return PurifyChamber.requirements.isCompleted();
+    }
+
     public areaStatus(): areaStatus {
-        if (!PurifyChamber.requirements.isCompleted()) {
-            return super.areaStatus();
-        }
-        if (App.game.purifyChamber.currentFlow() >= App.game.purifyChamber.flowNeeded() && App.game.party.caughtPokemon.some(p => p.shadow == GameConstants.ShadowStatus.Shadow)) {
-            return areaStatus.uncaughtPokemon;
-        }
+        const canPurify = App.game.purifyChamber.currentFlow() >= App.game.purifyChamber.flowNeeded() && App.game.party.caughtPokemon.some(p => p.shadow == GameConstants.ShadowStatus.Shadow);
+        return Math.min(canPurify ? areaStatus.uncaughtPokemon : areaStatus.completed, super.areaStatus());
     }
 
 }
