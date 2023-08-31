@@ -31,9 +31,15 @@ class PokemonHelper extends TmpPokemonHelper {
     /*
     PRETTY MUCH ONLY USED BY THE BOT BELOW
     */
+    private static pokemonRewardRegex = /gainPokemonByName\('(.+?)'/g;
 
+    private static getPokemonRegionRoutesCache: {[name: string] : any}[] = [];
     public static getPokemonRegionRoutes(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) {
-        const regionRoutes = {};
+        if (this.getPokemonRegionRoutesCache[maxRegion]) {
+            return this.getPokemonRegionRoutesCache[maxRegion][pokemonName];
+        }
+        const regionRoutes = this.getPokemonRegionRoutesCache[maxRegion] = {};
+        pokemonList.forEach(p => regionRoutes[p.name] = {});
         Routes.regionRoutes.forEach(routeData => {
             const region = routeData.region;
             // If we only want to check up to a maximum region
@@ -41,28 +47,34 @@ class PokemonHelper extends TmpPokemonHelper {
                 return false;
             }
             Object.entries(routeData.pokemon).forEach(([encounterType, pokemon]) => {
-                if (Object.values(pokemon).flat().includes(pokemonName)) {
-                    if (!regionRoutes[region]) {
-                        regionRoutes[region] = [];
+                Object.values(pokemon).flat().forEach((name: any) => {
+                    if (name instanceof SpecialRoutePokemon) return false;
+                    if (!regionRoutes[name][region]) {
+                        regionRoutes[name][region] = [];
                     }
-                    regionRoutes[region].push({ route: routeData.number });
-                }
+                    regionRoutes[name][region].push({ route: routeData.number });
+                });
             });
             routeData.pokemon.special?.forEach(special => {
-                if (special.pokemon.includes(pokemonName)) {
-                    if (!regionRoutes[region]) {
-                        regionRoutes[region] = [];
+                special.pokemon.forEach((name: string) => {
+                    if (!regionRoutes[name][region]) {
+                        regionRoutes[name][region] = [];
                     }
-                    regionRoutes[region].push({ route: routeData.number, requirements: special.req.hint() });
-                }
+                    regionRoutes[name][region].push({ route: routeData.number, requirements: special.req.hint() });
+                });
             });
             return true;
         });
-        return regionRoutes;
+        return regionRoutes[pokemonName];
     }
 
+    private static getPokemonDungeonsCache: {[name: string] : string[]}[] = [];
     public static getPokemonDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const dungeons = [];
+        if (this.getPokemonDungeonsCache[maxRegion]) {
+            return this.getPokemonDungeonsCache[maxRegion][pokemonName];
+        }
+        const dungeons = this.getPokemonDungeonsCache[maxRegion] = {};
+        pokemonList.forEach(p => dungeons[p.name] = []);
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // If we only want to check up to a maximum region
             if (maxRegion != GameConstants.Region.none) {
@@ -72,15 +84,20 @@ class PokemonHelper extends TmpPokemonHelper {
                 }
             }
             // Dungeon Grunt
-            if (dungeon.pokemonList.includes(pokemonName)) {
-                dungeons.push(dungeonName);
-            }
+            dungeon.pokemonList.forEach((name) => {
+                dungeons[name].push(dungeonName);
+            });
         });
-        return dungeons;
+        return dungeons[pokemonName];
     }
 
+    private static getPokemonBossDungeonsCache: {[name: string] : string[]}[] = [];
     public static getPokemonBossDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const dungeons = [];
+        if (this.getPokemonBossDungeonsCache[maxRegion]) {
+            return this.getPokemonBossDungeonsCache[maxRegion][pokemonName];
+        }
+        const dungeons = this.getPokemonBossDungeonsCache[maxRegion] = {};
+        pokemonList.forEach(p => dungeons[p.name] = []);
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // If we only want to check up to a maximum region
             if (maxRegion != GameConstants.Region.none) {
@@ -90,20 +107,24 @@ class PokemonHelper extends TmpPokemonHelper {
                 }
             }
             // Dungeon Boss
-            const boss = dungeon.availableBosses(false, true).find(boss => boss.name == pokemonName);
-            if (boss) {
+            dungeon.availableBosses(false, true).forEach(boss => {
                 const data = {
                     dungeon: dungeonName,
                     requirements: boss.options?.requirement?.hint(),
                 };
-                dungeons.push(data);
-            }
+                dungeons[boss.name].push(data);
+            });
         });
-        return dungeons;
+        return dungeons[pokemonName];
     }
 
+    private static getPokemonChestDungeonsCache: {[name: string] : string[]}[] = [];
     public static getPokemonChestDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const dungeons = [];
+        if (this.getPokemonChestDungeonsCache[maxRegion]) {
+            return this.getPokemonChestDungeonsCache[maxRegion][pokemonName];
+        }
+        const dungeons = this.getPokemonChestDungeonsCache[maxRegion] = {};
+        pokemonList.forEach(p => dungeons[p.name] = []);
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // If we only want to check up to a maximum region
             if (maxRegion != GameConstants.Region.none) {
@@ -114,20 +135,25 @@ class PokemonHelper extends TmpPokemonHelper {
             }
             // Dungeon Chest
             Object.values(dungeon.lootTable).flat().forEach(i => {
-                if (i.loot == pokemonName) {
+                if (i.loot in dungeons) {
                     const data = {
                         dungeon: dungeonName,
                         requirements: i.requirement?.hint(),
                     };
-                    dungeons.push(data);
+                    dungeons[i.loot].push(data);
                 }
             });
         });
-        return dungeons;
+        return dungeons[pokemonName];
     }
 
+    private static getShadowPokemonDungeonsCache: {[name: string] : string[]}[] = [];
     public static getShadowPokemonDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const dungeons = [];
+        if (this.getShadowPokemonDungeonsCache[maxRegion]) {
+            return this.getShadowPokemonDungeonsCache[maxRegion][pokemonName];
+        }
+        const dungeons = this.getShadowPokemonDungeonsCache[maxRegion] = {};
+        pokemonList.forEach(p => dungeons[p.name] = []);
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // If we only want to check up to a maximum region
             if (maxRegion != GameConstants.Region.none) {
@@ -137,31 +163,41 @@ class PokemonHelper extends TmpPokemonHelper {
                 }
             }
             // Shadow Pokemon
-            if (dungeon.allAvailableShadowPokemon().includes(pokemonName)) {
-                dungeons.push(dungeonName);
-            }
+            dungeon.allAvailableShadowPokemon().forEach(pokemon => {
+                dungeons[pokemon].push(dungeonName);
+            });
         });
-        return dungeons;
+        return dungeons[pokemonName];
     }
 
+    private static getPokemonEggsCache: {[name: string] : string[]}[] = [];
     public static getPokemonEggs(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const eggTypes = [];
+        if (this.getPokemonEggsCache[maxRegion]) {
+            return this.getPokemonEggsCache[maxRegion][pokemonName];
+        }
+        const eggTypes = this.getPokemonEggsCache[maxRegion] = {};
+        pokemonList.forEach(p => eggTypes[p.name] = []);
         Object.entries(App.game.breeding.hatchList).forEach(([eggType, eggArr]) => {
             eggArr.forEach((pokemonArr, region) => {
                 // If we only want to check up to a maximum region
                 if (maxRegion != GameConstants.Region.none && region > maxRegion)  {
                     return false;
                 }
-                if (pokemonArr.includes(pokemonName)) {
-                    eggTypes.push(EggType[eggType]);
-                }
+                pokemonArr.forEach(name => {
+                    eggTypes[name].push(EggType[eggType]);
+                })
             });
         });
-        return eggTypes;
+        return eggTypes[pokemonName];
     }
 
+    private static getPokemonShopsCache: {[name: string] : string[]}[] = [];
     public static getPokemonShops(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const shops = [];
+        if (this.getPokemonShopsCache[maxRegion]) {
+            return this.getPokemonShopsCache[maxRegion][pokemonName];
+        }
+        const shops = this.getPokemonShopsCache[maxRegion] = {};
+        pokemonList.forEach(p => shops[p.name] = []);
         Object.entries(TownList).forEach(([townName, town]) => {
             // Check if the shop has items
             const townShops = town.content.filter(c => c instanceof Shop && c.items);
@@ -171,61 +207,79 @@ class PokemonHelper extends TmpPokemonHelper {
                 if (maxRegion != GameConstants.Region.none && region > maxRegion) {
                     return false;
                 }
-                const hasPokemon = townShops.find(ts => (ts as Shop).items?.find(item => item.name == pokemonName));
-                if (hasPokemon) {
-                    shops.push(townName);
-                }
+                townShops.find(ts => (ts as Shop).items?.forEach(item => {
+                    if (item.name in shops) {
+                        shops[item.name].push(townName);
+                    }
+                }));
             }
         });
-        return shops;
+        return shops[pokemonName];
     }
 
+    private static getPokemonRoamingRegionsCache: {[name: string] : string[]}[] = [];
     public static getPokemonRoamingRegions(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const regions = [];
+        if (this.getPokemonRoamingRegionsCache[maxRegion]) {
+            return this.getPokemonRoamingRegionsCache[maxRegion][pokemonName];
+        }
+        const regions = this.getPokemonRoamingRegionsCache[maxRegion] = {};
+        pokemonList.forEach(p => regions[p.name] = []);
         Object.entries(RoamingPokemonList.list).forEach(([region, regionArr]) => {
             if (maxRegion != GameConstants.Region.none && (+region) > maxRegion) {
                 return false;
             }
             RoamingPokemonList.roamerGroups[region].forEach((group, i) => {
-                const pokemon = regionArr[i]?.find(r => r.pokemon.name == pokemonName);
-                if (pokemon) {
-                    const data = {
-                        region: +region,
-                        requirements: pokemon.unlockRequirement?.hint(),
-                        roamingGroup: group,
-                    };
-                    regions.push(data);
-                }
+                regionArr[i]?.forEach(r => {
+                    if (r.pokemon.name in regions) {
+                        const data = {
+                            region: +region,
+                            requirements: r.unlockRequirement?.hint(),
+                            roamingGroup: group,
+                        };
+                        regions[r.pokemon.name].push(data);
+                    }
+                });
             });
         });
-        return regions;
+        return regions[pokemonName];
     }
 
+    private static getPokemonParentsCache: {[name: string] : string[]}[] = [];
     public static getPokemonParents(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const parents = [];
+        if (this.getPokemonParentsCache[maxRegion]) {
+            return this.getPokemonParentsCache[maxRegion][pokemonName];
+        }
+        const parents = this.getPokemonParentsCache[maxRegion] = {};
+        pokemonList.forEach(p => parents[p.name] = []);
         Object.entries(pokemonBabyPrevolutionMap).forEach(([parent, baby]) => {
-            if (baby == pokemonName) {
-                if (maxRegion != GameConstants.Region.none && pokemonMap[parent].nativeRegion > maxRegion) {
-                    return false;
-                }
-                parents.push(parent);
+            if (maxRegion != GameConstants.Region.none && pokemonMap[parent].nativeRegion > maxRegion) {
+                return false;
             }
+            parents[baby].push(parent);
         });
-        return parents;
+        return parents[pokemonName];
     }
 
+    private static getPokemonFossilsCache: {[name: string] : string[]} = {};
     public static getPokemonFossils(pokemonName: PokemonNameType): Array<string> {
-        const fossils = [];
+        if (this.getPokemonFossilsCache[pokemonName]) {
+            return this.getPokemonFossilsCache[pokemonName];
+        }
+        const fossils = this.getPokemonFossilsCache = {};
+        pokemonList.forEach(p => fossils[p.name] = []);
         Object.entries(GameConstants.FossilToPokemon).forEach(([fossil, pokemon]) => {
-            if (pokemon == pokemonName) {
-                fossils.push(fossil);
-            }
+            fossils[pokemon].push(fossil);
         });
-        return fossils;
+        return fossils[pokemonName];
     }
 
+    private static getPokemonSafariChanceCache: {[name: string] : Record<GameConstants.Region, Record<number, number>>};
     public static getPokemonSafariChance(pokemonName: PokemonNameType): Record<GameConstants.Region, Record<number, number>> {
-        const list = {};
+        if (this.getPokemonSafariChanceCache) {
+            return this.getPokemonSafariChanceCache[pokemonName];
+        }
+        const list = this.getPokemonSafariChanceCache = {};
+        pokemonList.forEach(p => list[p.name] = {});
         Object.entries(SafariPokemonList.list).forEach(([region]) => {
             if (region == GameConstants.Region.kalos.toString()) {
                 // Friendly safari might cause infinite recursion
@@ -233,31 +287,33 @@ class PokemonHelper extends TmpPokemonHelper {
             }
             const zoneList = SafariPokemonList.list[region]();
             const safariWeight = zoneList.reduce((sum, p) => sum += p.weight, 0);
-            const safariPokemon = zoneList.find(p => p.name == pokemonName);
-            if (safariPokemon) {
-                list[+region] = list[+region] || {};
-                list[+region][0] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
-            }
+            zoneList.forEach(safariPokemon => {
+                list[safariPokemon.name][+region] = list[safariPokemon.name][+region] || {};
+                list[safariPokemon.name][+region][0] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
+            });
         });
-        return list;
+        return list[pokemonName];
     }
 
+    private static getPokemonPrevolutionCache: {[name: string] : EvoData[]}[] = [];
     public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<EvoData> {
-        const evolutions = [];
-        const prevolutionPokemon = pokemonList.filter((p: PokemonListData) => p.evolutions?.find(e => e.evolvedPokemon == pokemonName));
+        if (this.getPokemonPrevolutionCache[maxRegion]) {
+            return this.getPokemonPrevolutionCache[maxRegion][pokemonName];
+        }
+        const evolutions = this.getPokemonPrevolutionCache[maxRegion] = {};
+        pokemonList.forEach(p => evolutions[p.name] = []);
+        const prevolutionPokemon = pokemonList.filter((p: PokemonListData) => p.evolutions);
         prevolutionPokemon.forEach((p: PokemonListData) => p.evolutions.forEach(e => {
-            if (e.evolvedPokemon == pokemonName) {
-                // ignore dummy evolutions
-                if (e.trigger === EvoTrigger.NONE) {
-                    return false;
-                }
-                if (maxRegion != GameConstants.Region.none && p.nativeRegion > maxRegion) {
-                    return false;
-                }
-                evolutions.push(e);
+            // ignore dummy evolutions
+            if (e.trigger === EvoTrigger.NONE) {
+                return false;
             }
+            if (maxRegion != GameConstants.Region.none && p.nativeRegion > maxRegion) {
+                return false;
+            }
+            evolutions[e.evolvedPokemon].push(e);
         }));
-        return evolutions;
+        return evolutions[pokemonName];
     }
 
     public static getPokemonLevelPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): EvoData {
@@ -276,83 +332,140 @@ class PokemonHelper extends TmpPokemonHelper {
         return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.evolvedPokemon == pokemonName);
     }
 
+    private static getPokemonBattleFrontierCache: {[name: string] : number[]};
     public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<number> {
-        const stages = [];
-        BattleFrontierMilestones.milestoneRewards.filter(m => m instanceof BattleFrontierMilestonePokemon).forEach(milestone => {
-            if (milestone._description == pokemonName) {
-                stages.push(milestone.stage);
-            }
-        });
-        return stages;
-    }
-
-    public static getPokemonWandering(pokemonName: PokemonNameType): Array<string> {
-        const berries = [];
-        if (Berry.baseWander.includes(pokemonName)) {
-            return ['Always'];
+        if (this.getPokemonBattleFrontierCache) {
+            return this.getPokemonBattleFrontierCache[pokemonName];
         }
+        const stages = this.getPokemonBattleFrontierCache = {};
+        pokemonList.forEach(p => stages[p.name] = []);
+        BattleFrontierMilestones.milestoneRewards.filter(m => m instanceof BattleFrontierMilestonePokemon).forEach(milestone => {
+            if (milestone._description in stages) {
+                stages[milestone._description].push(milestone.stage);
+            }
+        });
+        return stages[pokemonName];
+    }
+
+    private static getPokemonWanderingCache: {[name: string] : string[]};
+    public static getPokemonWandering(pokemonName: PokemonNameType): Array<string> {
+        if (this.getPokemonWanderingCache) {
+            return this.getPokemonWanderingCache[pokemonName];
+        }
+        const berries = this.getPokemonWanderingCache = {};
+        pokemonList.forEach(p => berries[p.name] = []);
+        Berry.baseWander.forEach(pokemon => {
+            berries[pokemon] = ['Always'];
+        });
         App.game.farming.berryData.forEach((berry) => {
-            if (berry.wander.includes(pokemonName)) {
-                berries.push(BerryType[berry.type]);
-            }
+            berry.wander.forEach(pokemon => {
+                berries[pokemon].push(BerryType[berry.type]);
+            });
         });
-        return berries;
+        return berries[pokemonName];
     }
 
+    private static getPokemonDiscordCache: {[name: string] : number[]};
     public static getPokemonDiscord(pokemonName: PokemonNameType): Array<number> {
-        const codes = [];
+        if (this.getPokemonDiscordCache) {
+            return this.getPokemonDiscordCache[pokemonName];
+        }
+        const codes = this.getPokemonDiscordCache = {};
+        pokemonList.forEach(p => codes[p.name] = []);
         App.game.discord.codes.forEach(code => {
-            if (code.name == pokemonName) {
-                codes.push(code.price);
+            if (code.name in codes) {
+                codes[code.name].push(code.price);
             }
         });
-        return codes;
+        return codes[pokemonName];
     }
 
+    private static getPokemonTempBattleRewardCache: {[name: string] : string[]};
     public static getPokemonTempBattleReward(pokemonName: PokemonNameType): Array<string> {
-        const tempBattleList = [];
+        if (this.getPokemonTempBattleRewardCache) {
+            return this.getPokemonTempBattleRewardCache[pokemonName];
+        }
+        const tempBattleList = this.getPokemonTempBattleRewardCache = {};
+        pokemonList.forEach(p => tempBattleList[p.name] = []);
+
         Object.entries(TemporaryBattleList).forEach(tempBattle => {
-            if (tempBattle[1].optionalArgs?.firstTimeRewardFunction?.toString().includes(`'${pokemonName}'`) ||
-                tempBattle[1].optionalArgs?.rewardFunction?.toString().includes(`'${pokemonName}'`) ||
-                (tempBattle[1].optionalArgs?.isTrainerBattle === false && tempBattle[1].getPokemonList().some((p) => p.name === pokemonName))) {
-                tempBattleList.push(tempBattle[0]);
+            const firstTimeReward = tempBattle[1].optionalArgs?.firstTimeRewardFunction?.toString();
+            let match;
+            while ((match = this.pokemonRewardRegex.exec(firstTimeReward)) !== null) {
+                tempBattleList[match[1]].push(tempBattle[0]);
+            }
+            const reward = tempBattle[1].optionalArgs?.rewardFunction?.toString();
+            while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
+                tempBattleList[match[1]].push(tempBattle[0]);
+            }
+
+            if (tempBattle[1].optionalArgs?.isTrainerBattle === false) {
+                tempBattle[1].getPokemonList().forEach(p => {
+                    tempBattleList[p.name].push(tempBattle[0]);
+                })
             }
         });
-        return tempBattleList;
+        return tempBattleList[pokemonName];
     }
 
+    private static getPokemonGymRewardCache: {[name: string] : string[]};
     public static getPokemonGymReward(pokemonName: PokemonNameType): Array<string> {
-        const gymList = [];
+        if (this.getPokemonGymRewardCache) {
+            return this.getPokemonGymRewardCache[pokemonName];
+        }
+        const gymList = this.getPokemonGymRewardCache = {};
+        pokemonList.forEach(p => gymList[p.name] = []);
         Object.values(GymList).forEach(gym => {
-            if (gym.rewardFunction?.toString().includes(`'${pokemonName}'`)) {
-                gymList.push(gym.leaderName);
+            const reward = gym.rewardFunction?.toString();
+            let match;
+            while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
+                gymList[match[1]].push(gym.leaderName);
             }
         });
-        return gymList;
+        return gymList[pokemonName];
     }
 
+    private static getPokemonDungeonRewardCache: {[name: string] : string[]};
     public static getPokemonDungeonReward(pokemonName: PokemonNameType): Array<string> {
-        const dungeons = [];
+        if (this.getPokemonDungeonRewardCache) {
+            return this.getPokemonDungeonRewardCache[pokemonName];
+        }
+        const dungeons = this.getPokemonDungeonRewardCache = {};
+        pokemonList.forEach(p => dungeons[p.name] = []);
         Object.values(dungeonList).forEach(dungeon => {
-            if (dungeon.rewardFunction?.toString().includes(`'${pokemonName}'`)) {
-                dungeons.push(dungeon.name);
+            const reward = dungeon.rewardFunction?.toString();
+            let match;
+            while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
+                dungeons[match[1]].push(dungeon.name);
             }
         });
-        return dungeons;
+        return dungeons[pokemonName];
     }
 
+    private static getPokemonQuestLineRewardCache: {[name: string] : string[]};
     public static getPokemonQuestLineReward(pokemonName: PokemonNameType): Array<string> {
-        const questLines = [];
+        if (this.getPokemonQuestLineRewardCache) {
+            return this.getPokemonQuestLineRewardCache[pokemonName];
+        }
+        const questLines = this.getPokemonQuestLineRewardCache = {};
+        pokemonList.forEach(p => questLines[p.name] = []);
         App.game.quests.questLines().forEach(questLine => questLine.quests().forEach(quest => {
-            if ((quest as any).customReward?.toString().includes(`'${pokemonName}'`)) {
-                questLines.push(questLine.name);
+            const reward = (quest as any).customReward?.toString();
+            let match;
+            while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
+                questLines[match[1]].push(questLine.name);
             }
         }));
-        return questLines;
+        return questLines[pokemonName];
     }
 
+    private static getPokemonTradesCache: {[name: string] : string[]}[] = [];
     public static getPokemonTrades(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const trades = [];
+        if (this.getPokemonTradesCache[maxRegion]) {
+            return this.getPokemonTradesCache[maxRegion][pokemonName];
+        }
+        const trades = this.getPokemonTradesCache[maxRegion] = {};
+        pokemonList.forEach(p => trades[p.name] = []);
         Object.entries(TownList).forEach(([townName, town]) => {
             // If we only want to check up to a maximum region
             if (maxRegion != GameConstants.Region.none && town.region > maxRegion) {
@@ -361,27 +474,38 @@ class PokemonHelper extends TmpPokemonHelper {
 
             const townShops = town.content.filter(c => c instanceof Shop);
             if (townShops.length) {
-                let hasPokemon = false;
-                for (let i = 0; i < townShops.length && !hasPokemon; i++) {
+                const townTrades = {};
+                for (let i = 0; i < townShops.length; i++) {
                     const shop = townShops[i];
+                    let deals;
                     if (shop instanceof GemMasterShop) {
-                        hasPokemon = GemDeal.list[shop.shop]?.().some(deal => deal.item.itemType.type == pokemonName);
+                        deals = GemDeal.list[shop.shop]?.();
                     } else if (shop instanceof ShardTraderShop) {
-                        hasPokemon = ShardDeal.list[shop.location]?.().some(deal => deal.item.itemType.type == pokemonName);
+                        deals = ShardDeal.list[shop.location]?.();
                     } else if (shop instanceof BerryMasterShop) {
-                        hasPokemon = BerryDeal.list[shop.location]?.().some(deal => deal.item.itemType.type == pokemonName);
+                        deals = BerryDeal.list[shop.location]?.();
                     }
+                    deals?.forEach(deal => {
+                        if (deal.item.itemType.type in trades) {
+                            townTrades[deal.item.itemType.type] = true;
+                        }
+                    });
                 }
-                if (hasPokemon) {
-                    trades.push(townName);
-                }
+                Object.keys(townTrades).forEach(pokemon => {
+                    trades[pokemon].push(townName);
+                });
             }
         });
-        return trades;
+        return trades[pokemonName];
     }
 
+    private static getPokemonGiftsCache: {[name: string] : object[]}[] = [];
     public static getPokemonGifts(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<object> {
-        const gifts = [];
+        if (this.getPokemonGiftsCache[maxRegion]) {
+            return this.getPokemonGiftsCache[maxRegion][pokemonName];
+        }
+        const gifts = this.getPokemonGiftsCache[maxRegion] = {};
+        pokemonList.forEach(p => gifts[p.name] = []);
         Object.entries(TownList).forEach(([townName, town]) => {
             // If we only want to check up to a maximum region
             if (maxRegion != GameConstants.Region.none && town.region > maxRegion) {
@@ -390,8 +514,10 @@ class PokemonHelper extends TmpPokemonHelper {
 
             const npcs = town.npcs?.filter(n => n instanceof GiftNPC);
             npcs?.forEach(npc => {
-                if ((npc as GiftNPC).giftFunction?.toString().includes(`'${pokemonName}'`)) {
-                    gifts.push({
+                const reward = (npc as GiftNPC).giftFunction?.toString();
+                let match;
+                while ((match = this.pokemonRewardRegex.exec(reward)) !== null) {
+                    gifts[match[1]].push({
                         town: townName,
                         npc: npc.name,
                         requirements: npc.options?.requirement?.hint(),
@@ -399,7 +525,7 @@ class PokemonHelper extends TmpPokemonHelper {
                 }
             });
         });
-        return gifts;
+        return gifts[pokemonName];
     }
 
     public static getPokemonDreamOrbs(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
