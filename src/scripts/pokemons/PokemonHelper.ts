@@ -21,6 +21,7 @@ enum PokemonLocationType {
     DungeonReward,
     Trade,
     GiftNPC,
+    DreamOrb,
 }
 
 class PokemonHelper extends TmpPokemonHelper {
@@ -380,6 +381,23 @@ class PokemonHelper extends TmpPokemonHelper {
         return gifts;
     }
 
+    public static getPokemonDreamOrbs(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        // Dream orbs are unavailable before Unova
+        if (maxRegion !== GameConstants.Region.none && maxRegion < GameConstants.Region.unova) {
+            return [];
+        }
+        return App.game.dreamOrbController.orbs.filter(orb => orb.items.some(dreamOrbLoot => {
+            if (dreamOrbLoot.item.type === ItemType.item) {
+                const item = ItemList[dreamOrbLoot.item.id];
+
+                if (item instanceof PokemonItem && item.type === pokemonName) {
+                    return true;
+                }
+            }
+            return false;
+        })).map(orb => orb.color);
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.MAX_AVAILABLE_REGION) => {
         const encounterTypes = {};
         // Routes
@@ -481,15 +499,21 @@ class PokemonHelper extends TmpPokemonHelper {
         }
 
         // Trades
-        const trades = PokemonHelper.getPokemonTrades(pokemonName);
+        const trades = PokemonHelper.getPokemonTrades(pokemonName, maxRegion);
         if (trades.length) {
             encounterTypes[PokemonLocationType.Trade] = trades;
         }
 
         // Gift NPC
-        const gifts = PokemonHelper.getPokemonGifts(pokemonName);
+        const gifts = PokemonHelper.getPokemonGifts(pokemonName, maxRegion);
         if (gifts.length) {
             encounterTypes[PokemonLocationType.GiftNPC] = gifts;
+        }
+
+        // Dream Orbs
+        const dreamOrbs = PokemonHelper.getPokemonDreamOrbs(pokemonName, maxRegion);
+        if (dreamOrbs.length) {
+            encounterTypes[PokemonLocationType.DreamOrb] = dreamOrbs;
         }
 
         // Return the list of items
@@ -507,7 +531,8 @@ class PokemonHelper extends TmpPokemonHelper {
             locations[PokemonLocationType.Safari] ||
             locations[PokemonLocationType.Shop] ||
             locations[PokemonLocationType.Wandering] ||
-            locations[PokemonLocationType.Trade];
+            locations[PokemonLocationType.Trade] ||
+            locations[PokemonLocationType.DreamOrb];
         return !isEvable && Object.keys(locations).length;
     };
 }
