@@ -462,6 +462,12 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
+                case Settings.getSetting('hotkey.downloadSave').value:
+                    if (GameController.keyHeld.Shift) {
+                        Save.download();
+                        return e.preventDefault();
+                    }
+                    break;
                 case Settings.getSetting('hotkey.mute').value:
                     if (GameController.keyHeld.Shift) {
                         (Settings.getSetting('sound.muted') as BooleanSetting).toggle();
