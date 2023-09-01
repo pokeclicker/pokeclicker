@@ -3598,6 +3598,17 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
         imageName: 'Rival Hau',
     }
 );
+TemporaryBattleList['Melemele Spearow'] = new TemporaryBattle(
+    'Melemele Spearow',
+    [new GymPokemon('Spearow', 93889860, 4)],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Agitated Spearow',
+        imageName: '../pokemon/789',
+    }
+);
 TemporaryBattleList['Hau 2'] = new TemporaryBattle(
     'Hau 2',
     [
@@ -3615,14 +3626,63 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
         imageName: 'Rival Hau',
     }
 );
+TemporaryBattleList['Skull 1'] = new TemporaryBattle(
+    'Skull 1',
+    [new GymPokemon('Zubat', 167906100, 9)],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Team Skull Grunts',
+        returnTown: 'Hau\'oli City',
+        imageName: 'Team Skull Grunts (male)',
+    }
+);
+TemporaryBattleList['Ilima'] = new TemporaryBattle(
+    'Ilima',
+    [
+        new GymPokemon('Yungoos', 73686000, 10),
+        new GymPokemon('Smeargle', 147372000, 11),
+    ],
+    'You- or should I say you and your Pokémon- make quite the interesting team! I do hope you\'ll come to Verdant Cavern and attempt my trial! You can get there from Route 2.',
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Captain Ilima',
+        returnTown: 'Hau\'oli City',
+    }
+);
+TemporaryBattleList['Skull 2'] = new TemporaryBattle(
+    'Skull 2',
+    [new GymPokemon('Drowzee', 221671200, 10)],
+    'Seriously, home slice?! You\'re too strong for a kid, yo! I\'ve gotta go make someone else miserable to feel better! We\'re gonna go mess with Verdant Cavern!',
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Team Skull Grunts',
+        returnTown: 'Hau\'oli City',
+        imageName: 'Team Skull Grunts (male)',
+    }
+);
+TemporaryBattleList['Recon Squad 1'] = new TemporaryBattle(
+    'Recon Squad 1',
+    [new GymPokemon('Furfrou', 252879000, 13)],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Ultra Recon Squad',
+        imageName: 'specialNPCs/Recon Squad (ultra moon)',
+    }
+);
 TemporaryBattleList['Hau 3'] = new TemporaryBattle(
     'Hau 3',
     [
-        new GymPokemon('Popplio', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
-        new GymPokemon('Rowlet', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
-        new GymPokemon('Litten', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
-        new GymPokemon('Noibat', 92470422, 11),
-        new GymPokemon('Pikachu', 93893044, 12),
+        new GymPokemon('Popplio', 104010968, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Rowlet', 104010968, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Litten', 104010968, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Noibat', 97981348, 11),
+        new GymPokemon('Pikachu', 99488753, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
