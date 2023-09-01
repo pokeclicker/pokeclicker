@@ -85,6 +85,7 @@ export const SpriteCredits: Credit[] = [
             'Aether Foundation Employee (male)',
             'Aether President Lusamine',
             'Gladion',
+            'Gladion (stance)',
             'Hala',
             'Hapu',
             'Hau',
@@ -100,8 +101,10 @@ export const SpriteCredits: Credit[] = [
             'Nanu',
             'Olivia',
             'Plumeria',
+            'Professor Burnet (gen7)',
             'Professor Kukui',
             'Rising Star (male)',
+            'Rival Hau',
             'Ryuki',
             'Sightseer (female)',
             'Sophocles',
@@ -1004,6 +1007,15 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'RekiemLock',
+        link: 'https://www.deviantart.com/rekiemlock',
+        image: 'https://a.deviantart.net/avatars-big/r/e/rekiemlock.jpg',
+        resources: [
+            'Team Skull overworld sprite',
+        ],
+        // Notes: Permission given if credited
+    },
+    {
         name: 'SageDeoxys, Wolfang62, LarryTurbo, tammyclaydon',
         link: 'https://www.pokecommunity.com/showthread.php?t=474312',
         resources: [
@@ -1210,6 +1222,7 @@ export const SpriteCredits: Credit[] = [
             'Charm',
             'Coin',
             'Dexio (Gen 6)',
+            'Dulse',
             'Eri',
             'Giacomo',
             'Green',
@@ -1217,6 +1230,9 @@ export const SpriteCredits: Credit[] = [
             'Mela',
             'Ortega',
             'Penny',
+            'Phyco',
+            'Soliera',
+            'Zossie',
         ],
         // Notes: Permission given if credited.
     },

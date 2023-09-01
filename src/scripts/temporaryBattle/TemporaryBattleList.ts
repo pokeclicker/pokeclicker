@@ -3595,7 +3595,7 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town Outskirts',
-        imageName: 'Hau',
+        imageName: 'Rival Hau',
     }
 );
 TemporaryBattleList['Hau 2'] = new TemporaryBattle(
@@ -3612,7 +3612,7 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town',
-        imageName: 'Hau',
+        imageName: 'Rival Hau',
     }
 );
 TemporaryBattleList['Hau 3'] = new TemporaryBattle(
@@ -3630,7 +3630,7 @@ TemporaryBattleList['Hau 3'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Melemele Woods',
-        imageName: 'Hau',
+        imageName: 'Rival Hau',
     }
 );
 TemporaryBattleList.Dexio = new TemporaryBattle(
@@ -3675,7 +3675,7 @@ TemporaryBattleList['Hau 4'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Paniola Town',
-        imageName: 'Hau',
+        imageName: 'Rival Hau',
     }
 );
 TemporaryBattleList['Gladion 1'] = new TemporaryBattle(
@@ -3753,7 +3753,7 @@ TemporaryBattleList['Hau 5'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Malie City',
-        imageName: 'Hau',
+        imageName: 'Rival Hau',
     }
 );
 TemporaryBattleList['Plumeria 2'] = new TemporaryBattle(
@@ -3784,7 +3784,7 @@ TemporaryBattleList['Gladion 2'] = new TemporaryBattle(
     {
         displayName: 'Team Skull Gladion',
         returnTown: 'Tapu Village',
-        imageName: 'Gladion',
+        imageName: 'Gladion (stance)',
     }
 );
 TemporaryBattleList.Necrozma = new TemporaryBattle(
