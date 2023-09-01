@@ -656,24 +656,24 @@ export function expRandomElement<T>(array: T[], ratio: number): T {
 }
 
 export const TypeColor = [
-    '#9FA19E', // Normal
-    '#E62728', // Fire
-    '#2981EF', // Water
-    '#F9BF00', // Electric
-    '#3EA12A', // Grass
-    '#3FD8FE', // Ice
-    '#FE7F00', // Fighting
-    '#8E40CB', // Poison
-    '#915120', // Ground
-    '#80B7ED', // Flying
-    '#EE4078', // Psychic
-    '#90A01C', // Bug
-    '#ADA880', // Rock
-    '#704070', // Ghost
-    '#5062DF', // Dragon
-    '#50413E', // Dark
-    '#60A0B7', // Steel
-    '#EE71EE', // Fairy
+    '#A8A77A', // Normal
+    '#EE8130', // Fire
+    '#6390F0', // Water
+    '#F7D02C', // Electric
+    '#7AC74C', // Grass
+    '#96D9D6', // Ice
+    '#C22E28', // Fighting
+    '#A33EA1', // Poison
+    '#E2BF65', // Ground
+    '#A98FF3', // Flying
+    '#F95587', // Psychic
+    '#A6B91A', // Bug
+    '#B6A136', // Rock
+    '#735797', // Ghost
+    '#6F35FC', // Dragon
+    '#705746', // Dark
+    '#B7B7CE', // Steel
+    '#D685AD', // Fairy
 ];
 
 export const ROUTE_KILLS_NEEDED = 10;
