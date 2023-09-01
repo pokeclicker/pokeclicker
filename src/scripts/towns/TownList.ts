@@ -798,7 +798,7 @@ const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
 
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
-    'But... I don\'t have enough Safari Experience to find it.',
+    'But... I don\'t have a high enough Safari Level to find it.',
 ], {image: 'assets/images/npcs/Bug Catcher.png', requirement: new MaxRegionRequirement(GameConstants.Region.kalos)});
 
 const CandyMan = new NPC('The Candy Man', [
@@ -8665,8 +8665,7 @@ TownList['Tunnel to the Top'] = new DungeonTown(
     'Tunnel to the Top',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)],
-    [new MoveToDungeon(dungeonList['Max Lair'], new DevelopmentRequirement())]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );
 TownList['Crown Shrine'] = new DungeonTown(
     'Crown Shrine',
@@ -8682,7 +8681,7 @@ TownList['Max Lair'] = new DungeonTown(
     'Max Lair',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new DevelopmentRequirement(new QuestLineStartedRequirement('TODO Gigantamax questline name'))]
+    [new DevelopmentRequirement(new QuestLineStartedRequirement('The Lair of Giants'))]
 );
 
 //Hisui shops

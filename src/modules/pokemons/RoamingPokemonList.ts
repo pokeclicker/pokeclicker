@@ -107,6 +107,7 @@ RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new QuestLi
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
 // Orre
 RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Ho-Oh', new QuestLineCompletedRequirement('Shadows in the Desert')));
+RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Bonsly', new QuestLineCompletedRequirement('Gale of Darkness')));
 
 // Sinnoh
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Manaphy', new QuestLineCompletedRequirement('Recover the Precious Egg!')));
