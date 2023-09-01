@@ -885,4 +885,11 @@ namespace GameConstants {
         Hyper,
         Master,
     }
+    declare enum ContestStyle {
+        Cool,
+        Beautiful,
+        Cute,
+        Clever,
+        Tough,
+    }
 }
