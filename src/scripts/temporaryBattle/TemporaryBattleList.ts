@@ -3754,6 +3754,31 @@ TemporaryBattleList['Gladion 1'] = new TemporaryBattle(
         imageName: 'Gladion',
     }
 );
+TemporaryBattleList['Recon Squad 2'] = new TemporaryBattle(
+    'Recon Squad 2',
+    [new GymPokemon('Poipole', 135172109, 20)],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Ultra Recon Squad',
+        returnTown: 'Paniola Town',
+        imageName: 'specialNPCs/Recon Squad (ultra sun)',
+        visibleRequirement: new TemporaryBattleRequirement('Gladion 1'),
+    }
+);
+TemporaryBattleList['Skull 3'] = new TemporaryBattle(
+    'Skull 3',
+    [new GymPokemon('Drowzee', 135172109, 17)],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Team Skull Grunts',
+        returnTown: 'Heahea City',
+        imageName: 'Team Skull Grunts (male)',
+    }
+);
 TemporaryBattleList['Battle Royal'] = new TemporaryBattle(
     'Battle Royal',
     [

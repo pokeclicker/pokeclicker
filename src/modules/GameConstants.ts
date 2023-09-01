@@ -1905,6 +1905,8 @@ export const TemporaryBattles = [
     'Sina',
     'Hau 4',
     'Gladion 1',
+    'Recon Squad 2',
+    'Skull 3',
     'Battle Royal',
     'Plumeria 1',
     'Ultra Wormhole',
