@@ -7,7 +7,7 @@ class PokemonContest implements Feature {
 
     public prizes = [
         new PokemonContestPrizes('10 Rare Candy',
-            'Get 10 Rare Candy by catching a entering a contest! (real requirement will be added later)',
+            'Get 10 Rare Candy by catching Machop, not at all related to entering a contest! (real requirement will be added later)',
             'Rare_Candy',
             10,
             new ObtainedPokemonRequirement('Machop')
