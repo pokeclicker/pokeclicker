@@ -7133,10 +7133,19 @@ TownList['Tapu Village'] = new Town(
     'Tapu Village',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
-    [TapuVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Tapu Village']), TemporaryBattleList['Kahuna Nanu']],
+    [TapuVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Tapu Village'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
         npcs: [TapuWorker],
+    }
+);
+TownList['Aether House'] = new Town(
+    'Aether House',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.UlaulaIsland,
+    [TemporaryBattleList['Kahuna Nanu']],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
     }
 );
 TownList['Seafolk Village'] = new Town(

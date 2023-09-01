@@ -3868,7 +3868,7 @@ TemporaryBattleList['Gladion 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Skull Gladion',
-        returnTown: 'Tapu Village',
+        returnTown: 'Aether House',
         imageName: 'Gladion (stance)',
     }
 );
@@ -3967,7 +3967,7 @@ TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
         new GymPokemon('Magnezone', 189973142, 51),
         new GymPokemon('Alolan Golem', 198608284, 51),
     ],
-    'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon... You\'ve gotta finish Mina\'s trial, right? Are you going to Tapu Village?',
+    'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon... You\'ve gotta finish Mina\'s trial, right? Are you going to Aether House?',
     [new TemporaryBattleRequirement('Captain Kiawe')],
     undefined,
     {imageName: 'Sophocles'}
