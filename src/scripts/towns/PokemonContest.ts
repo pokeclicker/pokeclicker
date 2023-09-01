@@ -7,7 +7,7 @@ class PokemonContest implements Feature {
 
     public prizes = [
         new PokemonContestPrizes('10 Rare Candy',
-            'Get 10 Rare Candy by catching a Machop! (real requirement will be added later)',
+            'Get 10 Rare Candy by catching a entering a contest! (real requirement will be added later)',
             'Rare_Candy',
             10,
             new ObtainedPokemonRequirement('Machop')
@@ -19,6 +19,36 @@ class PokemonContest implements Feature {
             new MaxRegionRequirement(GameConstants.Region.kalos),
             new MaxRegionRequirement(GameConstants.Region.kalos)
         ),*/
+        new PokemonContestPrizes('Rock Star Pikachu',
+            'Impress Rock Star Pikachu by being very Cool! (real requirement will be added later)',
+            'Pikachu (Rock Star)',
+            1,
+            new ObtainedPokemonRequirement('Machop')
+        ),
+        new PokemonContestPrizes('Belle Pikachu',
+            'Impress Belle Pikachu by being very Beautiful! (real requirement will be added later)',
+            'Pikachu (Belle)',
+            1,
+            new ObtainedPokemonRequirement('Machop')
+        ),
+        new PokemonContestPrizes('Pop Star Pikachu',
+            'Impress Pop Star Pikachu by being very Cute! (real requirement will be added later)',
+            'Pikachu (Pop Star)',
+            1,
+            new ObtainedPokemonRequirement('Machop')
+        ),
+        new PokemonContestPrizes('Ph. D. Pikachu',
+            'Impress Ph. D. Pikachu by being very Clever! (real requirement will be added later)',
+            'Pikachu (Ph. D.)',
+            1,
+            new ObtainedPokemonRequirement('Machop')
+        ),
+        new PokemonContestPrizes('Libre Pikachu',
+            'Impress Libre Pikachu by being very Tough! (real requirement will be added later)',
+            'Pikachu (Libre)',
+            1,
+            new ObtainedPokemonRequirement('Machop')
+        ),
     ];
 
     constructor() {
@@ -172,11 +202,11 @@ class ContestEntry {
                 flavorType = FlavorType.Dry;
                 break;
             case ContestStyle.Cute:
-                stylePoints = baseStats.specialDefense + baseStats.hitpoints;
+                stylePoints = baseStats.speed + baseStats.hitpoints;
                 flavorType = FlavorType.Sweet;
                 break;
             case ContestStyle.Clever:
-                stylePoints = baseStats.specialAttack + baseStats.speed;
+                stylePoints = baseStats.specialAttack + baseStats.specialDefense;
                 flavorType = FlavorType.Bitter;
                 break;
             case ContestStyle.Tough:
