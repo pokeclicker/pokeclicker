@@ -2303,8 +2303,7 @@ class QuestLineHelper {
         princessDiancieQuestLine.addQuest(bladeForme);
 
         //const heartDiamond = new CustomQuest(1000, undefined, 'Diancie needs help building a Heart Diamond to stabilize the Diamond Domain. Gather some Fairy Gems for her.', App.game.statistics.gemsGained[17], 0, () => ItemList.Heart_Diamond_Diancie.gain(1));
-        const heartDiamond = new GainGemsQuest(1000, 0, PokemonType.Fairy);
-        heartDiamond.customDescription = 'Diancie needs help building a Heart Diamond to stabilize the Diamond Domain. Gather some Fairy Gems for her.';
+        const heartDiamond = new GainGemsQuest(1000, 0, PokemonType.Fairy, 'Diancie needs help building a Heart Diamond to stabilize the Diamond Domain. Gather some Fairy Gems for her.');
         heartDiamond.onLoad = () => ItemList.Heart_Diamond_Diancie.gain(1);
         princessDiancieQuestLine.addQuest(heartDiamond);
 
