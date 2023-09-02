@@ -18,6 +18,14 @@ class PartyController {
         return CaughtStatus.NotCaught;
     }
 
+    static getEvs(id:number): number {
+        return App.game.party.getPokemon(id)?.evs() ?? 0;
+    }
+
+    static getEvsByName(name: PokemonNameType): number {
+        return this.getEvs(PokemonHelper.getPokemonByName(name).id);
+    }
+
     static getPokerusStatusByName(name: PokemonNameType): GameConstants.Pokerus {
         return this.getPokerusStatus(PokemonHelper.getPokemonByName(name).id);
     }
@@ -49,6 +57,7 @@ class PartyController {
         return PartyController.getPokemonStoneEvos(pokemon, evoType)
             .map((evo) => ({
                 status: getStatus(evo),
+                evs: PartyController.getEvsByName(evo.evolvedPokemon),
                 locked: !EvolutionHandler.isSatisfied(evo),
                 lockHint: evo.restrictions.filter(r => !r.isCompleted()).map(r => r.hint()).join('<br>'),
             }));
