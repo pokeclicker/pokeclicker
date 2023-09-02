@@ -1275,12 +1275,26 @@
             , isExtension: true
             })
         %>
+        
+        <!--Mahalo Trail-->
+        <%- include('templates/mapOverlay',
+            { name: "Mahalo Trail"
+            , x: 34, y: 13
+            , width: 7, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Mahalo Trail')}, attr:{ class: MapHelper.calculateTownCssClass('Mahalo Trail') }"
+            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() == 0"
+            , connectedToTown: "Mahalo Trail"
+            })
+        %>
 
         <!--Melemele Woods-->
-        <%- include('templates/mapTown',
+        <%- include('templates/mapOverlay',
             { name: "Melemele Woods"
             , x: 28, y: 13
             , width: 14, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Melemele Woods')}, attr:{ class: MapHelper.calculateTownCssClass('Melemele Woods') }"
+            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() >= 1"
+            , connectedToTown: "Melemele Woods"
             })
         %>
 

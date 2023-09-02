@@ -1791,7 +1791,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Spearow', 'Ekans', 'Alolan Meowth', 'Growlithe', 'Abra', 'Drowzee', 'Smeargle', 'Makuhita', 'Furfrou', 'Yungoos', 'Cutiefly'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Trainers\' School'))],
+    [new TemporaryBattleRequirement('Ilima')],
     undefined,
     AlolaSubRegions.MelemeleIsland,
 ));

@@ -7091,7 +7091,7 @@ TownList['Melemele Woods'] = new Town(
     GameConstants.AlolaSubRegions.MelemeleIsland,
     [new MoveToTown('Mahalo Trail'), new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
+        requirements: [new TemporaryBattleRequirement('Skull 2')],
     }
 );
 TownList['Roadside Motel'] = new Town(
@@ -7358,7 +7358,7 @@ TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise,cousin!', 2)],
     undefined,
     { npcs: [TrainerSchoolTeacher] }
 );
@@ -7373,7 +7373,7 @@ TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)]
+    [new TemporaryBattleRequirement('Skull 2')],
 );
 TownList['Melemele Meadow'] = new DungeonTown(
     'Melemele Meadow',
