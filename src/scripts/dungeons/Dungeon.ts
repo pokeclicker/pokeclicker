@@ -10853,7 +10853,7 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
             [
                 new GymPokemon('Alolan Vulpix', 13483476, 28),
                 new GymPokemon('Vulpix', 13483476, 28),
-            ], { weight: 1 }, 'Landon and Yukiro'),
+            ], { weight: 1, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 3) }, 'Landon and Yukiro'),
     ],
     {
         common: [
@@ -10872,12 +10872,19 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
     },
     13483476,
     [
+        new DungeonBossPokemon('Alolan Persian', 76702881, 23),
+        new DungeonTrainer('Tourist Couple',
+            [
+                new GymPokemon('Alolan Vulpix', 33708690, 28),
+                new GymPokemon('Vulpix', 33708690, 28),
+            ],
+            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less) }, 'Landon and Yukiro'),
         new DungeonTrainer('Team Skull Boss',
             [
                 new GymPokemon('Golisopod', 33708690, 34),
                 new GymPokemon('Masquerain', 33708690, 34),
             ],
-            { weight: 1 }, 'Guzma', '(guzma)'),
+            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 3) }, 'Guzma', '(guzma)'),
     ],
     975000, 21);
 

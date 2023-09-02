@@ -3851,6 +3851,10 @@ TemporaryBattleList['Hau 5'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Ultra Wormhole')],
     undefined,
     {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('Child of the Stars').beginQuest(0, undefined, true);
+            
+        },
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Malie City',
         imageName: 'Rival Hau',
@@ -3864,7 +3868,12 @@ TemporaryBattleList['Skull 4'] = new TemporaryBattle(
         new GymPokemon('Alolan Raticate', 8352109, 29),
     ],
     'Yo, think about the bus drivers! If we take this bus stop, they can all chill!',
-    [new DevelopmentRequirement()],
+    [
+        new MultiRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.alola, 10),
+            new QuestLineStepCompletedRequirement('Child of the Stars', 0),
+        ])
+    ],
     undefined,
     {
         displayName: 'Skull Grunts',
@@ -3881,7 +3890,7 @@ TemporaryBattleList['Skull 5'] = new TemporaryBattle(
         new GymPokemon('Scraggy', 2131436, 36),
     ],
     undefined,
-    [new DevelopmentRequirement()],
+    [new QuestLineStepCompletedRequirement('Child of the Stars', 3)],
     undefined,
     {
         displayName: 'Team Skull Grunts',
@@ -3911,8 +3920,8 @@ TemporaryBattleList['Gladion 2'] = new TemporaryBattle(
         new GymPokemon('Zoroark', 138153002, 42),
         new GymPokemon('Type: Null', 146525911, 43),
     ],
-    'That was wrong of me... I shouldn\'t have dragged you into a meaningless battle like that...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))],
+    'That was wrong of me... I shouldn\'t have dragged you into a meaningless battle like that...</br>But that Cosmog will bring disaster to all of Alola! I have to get it back from them! You\'re coming with me whether you like it or not. Get on the boat.',
+    [new QuestLineStepCompletedRequirement('Child of the Stars', 6)],
     undefined,
     {
         displayName: 'Team Skull Gladion',

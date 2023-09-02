@@ -2650,16 +2650,64 @@ class QuestLineHelper {
         App.game.quests.questLines().push(akalaAlolaQuestLine);
     }
 
+    // Ula'ula Island guide - Started upon defeating Hau in Malie
+    public static createUlaulaAlolaQuestLine(){
+        const ulaulaAlolaQuestLine = new QuestLine('Child of the Stars', 'Help Lillie learn more about Nebby\'s origins while completing Ula\'Ula Island\'s trials.');
+        // 0 - Talk to NPC: Lillie
+        const talkeToLillie5 = new TalkToNPCQuest(Lillie5, 'Learn about the legends of Alola from Lillie in Malie City.');
+        ulaulaAlolaQuestLine.addQuest(talkeToLillie5);
+
+        // 1 - Temp Battle: Skull 4
+        const battleSkull4 = new DefeatTemporaryBattleQuest('Skull 4', 'Team Skull are trying to steal a bus stop on Route 10. Beat them.');
+        ulaulaAlolaQuestLine.addQuest(battleSkull4);
+
+        // 2 - Clear dungeon: Hokulani Observatory, Sophocles' Trial
+        const clearHokulaniObservatory = new CustomQuest(1, 0, 'Clear Hokulani Observatory and complete Sophocles\' trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Hokulani Observatory')]());
+        ulaulaAlolaQuestLine.addQuest(clearHokulaniObservatory);
+        
+        // 3 - Defeat dungeon boss: Guzma, Malie Garden
+        const defeatGuzmaMalieGarden = new DefeatDungeonBossQuest('Malie Garden', 'Team Skull Boss Guzma', 0, 'Team Skull are being annoying. Get rid of them. Beat their boss Guzma in the Malie Garden dungeon.');
+        ulaulaAlolaQuestLine.addQuest(defeatGuzmaMalieGarden);
+
+        // 4 - Temp battle: Skull 5
+        const battleSkull5 = new CustomQuest (1, 0,  'Lillie has run into Team Skull! Protect her at Aether House!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 5')](), undefined, undefined,
+        {
+            clearedMessage: 'I just wanted to go for a stroll on my own, to see what it must feel like to be a Trainer... So Hapu and I went our separate ways... but then Nebby tried to get out of my bag...',
+            npcDisplayName: 'Lillie',
+            npcImageName: 'Lillie',
+        });
+        ulaulaAlolaQuestLine.addQuest(battleSkull5);
+
+        // 5 - Clear dungeon: Thrifty Megamart, Acerola's Trial
+        const clearThriftyMegamart = new CustomQuest(1, 0, 'Clear Thrifty Megamart and complete Acerola\'s trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Thrifty Megamart')]());
+        ulaulaAlolaQuestLine.addQuest(clearThriftyMegamart);
+
+        // 6 - Clear dungeon: Po Town
+        // no custom message in case Bug Z Crystal is obtained via Island Challenge
+        const defeatGuzmaPoTown = new DefeatDungeonBossQuest('Po Town', 'Team Skull Boss Guzma', 0, 'Team Skull have stolen the child\'s Yungoos! Raid their base. Chase after them and clear the Po Town dungeon.');
+        ulaulaAlolaQuestLine.addQuest(defeatGuzmaPoTown);
+
+        // 7 - Temp Battle: Gladion 2
+        const battleGladion2Reward = () => {
+            MapHelper.moveToTown('Malie City');
+        };
+
+        const battleGladion2 = new DefeatTemporaryBattleQuest('Gladion 2', 'Team Skull have stolen Nebby! Battle Gladion at Aether House.', battleGladion2Reward);
+        ulaulaAlolaQuestLine.addQuest(battleGladion2);
+
+        // 8 - Gym battle: Nanu
+        const battleKahunaNanu = new CustomQuest (1, 0,  'Kahuna Nanu is challenging you to a Grand Trial! Test your strength by defeating him.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Malie City')]());
+        ulaulaAlolaQuestLine.addQuest(battleKahunaNanu);
+
+        App.game.quests.questLines().push(ulaulaAlolaQuestLine);
+    }
+
     // Started upon defeating Konikoni City's gym.
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
 
-        const clearMalieGarden = new CustomQuest(1, 0, 'Team Skull are being annoying. Get rid of them. Clear the Malie Garden dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Malie Garden')]());
-        skullAetherAlolaQuestLine.addQuest(clearMalieGarden);
 
-        const clearPoTown = new CustomQuest(1, 0, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Po Town')]());
-        skullAetherAlolaQuestLine.addQuest(clearPoTown);
 
         const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
         skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
@@ -4045,6 +4093,7 @@ class QuestLineHelper {
         this.createUnrivaledPowerQuestLine();
         this.createMelemeleAlolaQuestLine();
         this.createAkalaAlolaQuestLine();
+        this.createUlaulaAlolaQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createSilvallyTypesQuestLine();

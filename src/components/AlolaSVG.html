@@ -3988,6 +3988,16 @@
         %>
 
         <%- include('templates/mapOverlay',
+            { name: "Team Skull Grunts"
+            , x: 45, y: 15
+            , width: 8, height: 4
+            , databind: "click: () => TemporaryBattleList['Skull 4'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Skull 4'] && TemporaryBattleList['Skull 4'].isVisible()"
+            , image: "assets/images/map/skullgrunts.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
             { name: "Team Skull Admin Plumeria"
             , x: 46, y: 43
             , width: 4, height: 4

@@ -1484,7 +1484,7 @@ GymList['Malie City'] = new Gym(
     ],
     BadgeEnums.DarkiniumZ,
     128000,
-    'Hmph... heh. Let me fix your team up for you. Here. This is yours.',
+    'Hmph... heh. Let me fix your team up for you. Here. This is yours.</br>There. Congratulations or whatever. You\'ve officially finished your Ula\'ula trials. You\'ve got somewhere else to be, don\'t you? Try not to destroy the whole place.',
     [new TemporaryBattleRequirement('Gladion 2')],
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dark], 1);

@@ -6664,6 +6664,14 @@ const Lillie4 = new NPC('Ask Lillie to tag along', [
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Trials Galore!', 6), new QuestLineStepCompletedRequirement('Trials Galore!', 8, GameConstants.AchievementOption.less)]),
 });
+const Lillie5 = new NPC('Lillie', [
+    'I ended up getting lost, and then I saw this outfit, and it was the last one they had in stock, so I bought it... Hah...',
+    'But I found the library I was planning to visit. There\'s an old book that seems to suggest that Alola\'s Legendary Pokémon came from another world and can be summoned by a pair of flutes at an altar.',
+    'Oh, that girl over there... Is she a friend of yours, $playername$? How polite of her! She\'s offering to accompany me and Nebby to this island\'s ruins.',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),
+});
 const RotomDexKukui = new NPC('Kukui\'s Gift', [
     '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on your tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing! Can it even help you with the Island Challenge quest on that <i>Bulletin Board</i> over there?',
     'Well, if you\'re ever feelin\' lost, you can alwayzzz find me at a dock town! I know everything there izzz to know about thezzze islandzzz!',
@@ -7184,7 +7192,7 @@ TownList['Malie City'] = new Town(
     [MalieCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Malie City']), new MoveToDungeon(dungeonList['Malie Garden']), new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Ultra Wormhole')],
-        npcs: [MalieKahuna, SilvallyNanu],
+        npcs: [MalieKahuna, SilvallyNanu, Lillie5],
     }
 );
 TownList['Tapu Village'] = new Town(
@@ -7201,7 +7209,7 @@ TownList['Aether House'] = new Town(
     'Aether House',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
-    [TemporaryBattleList['Kahuna Nanu']],
+    [TemporaryBattleList['Skull 5'], TemporaryBattleList['Kahuna Nanu']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
     }
@@ -7487,7 +7495,7 @@ TownList['Thrifty Megamart'] = new DungeonTown(
     'Thrifty Megamart',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 14)],
+    [new TemporaryBattleRequirement('Skull 5')],
     [TemporaryBattleList['Acerola Ghost Memory']],
     {npcs: [AcerolaSilvally]}
 );

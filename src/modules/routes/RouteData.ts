@@ -1916,7 +1916,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Fearow', 'Ledian', 'Ariados', 'Skarmory', 'Pancham', 'Gumshoos', 'Pidgeot'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Malie Garden'))],
+    [new TemporaryBattleRequirement('Hau 5')],
     undefined,
     AlolaSubRegions.UlaulaIsland,
 ));
@@ -1926,7 +1926,10 @@ Routes.add(new RegionRoute(
         land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new RouteKillRequirement(10, Region.alola, 10)],
+    [
+        new RouteKillRequirement(10, Region.alola, 10),
+        new TemporaryBattleRequirement('Skull 4')
+    ],
     10.1,
     AlolaSubRegions.UlaulaIsland,
 ));
@@ -1940,7 +1943,7 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Shiinotic'], new ObtainedPokemonRequirement('Shiinotic')),
         ],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Malie Garden'))],
+    [new TemporaryBattleRequirement('Hau 5')],
     undefined,
     AlolaSubRegions.UlaulaIsland,
 ));
