@@ -74,7 +74,7 @@ class PokemonHelper extends TmpPokemonHelper {
                 return false;
             }
             Object.entries(routeData.pokemon).forEach(([encounterType, pokemon]) => {
-                Object.values(pokemon).flat().forEach((name: any) => {
+                new Set(Object.values(pokemon).flat()).forEach((name: any) => {
                     if (name instanceof SpecialRoutePokemon) {
                         return false;
                     }
@@ -188,7 +188,7 @@ class PokemonHelper extends TmpPokemonHelper {
                 }
             }
             // Shadow Pokemon
-            dungeon.allAvailableShadowPokemon().forEach(pokemon => {
+            new Set(dungeon.allAvailableShadowPokemon()).forEach(pokemon => {
                 cacheLine[pokemon].push(dungeonName);
             });
         });
@@ -376,7 +376,9 @@ class PokemonHelper extends TmpPokemonHelper {
         });
         App.game.farming.berryData.forEach((berry) => {
             berry.wander.forEach(pokemon => {
-                cacheLine[pokemon].push(BerryType[berry.type]);
+                if (cacheLine[pokemon][0] !== 'Always') {
+                    cacheLine[pokemon].push(BerryType[berry.type]);
+                }
             });
         });
         return cacheLine[pokemonName];
