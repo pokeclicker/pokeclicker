@@ -110,7 +110,7 @@ class SafariPokemonList {
             new SafariEncounter('Snom', 2, [SafariEnvironments.Grass], true),
 
             // Water
-            new SafariEncounter('Krabby', 1), //TODO Replace if possible
+            new SafariEncounter('Krabby', 1, [SafariEnvironments.Water]), //TODO Replace if possible
             new SafariEncounter('Surskit', 5, [SafariEnvironments.Water], true),
             new SafariEncounter('Dewpider', 5, [SafariEnvironments.Water], true),
             new SafariEncounter('Araquanid', 1, [SafariEnvironments.Water], true),
