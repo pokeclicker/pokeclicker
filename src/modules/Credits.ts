@@ -861,6 +861,7 @@ export const SpriteCredits: Credit[] = [
             'Lusamine (nihilego) shiny',
             'Rider (male and female)',
             'Roller Boy',
+            'Rotom-Dex',
             'Rui',
             'Street Performer',
             'Team Snagem',
