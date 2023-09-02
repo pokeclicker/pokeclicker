@@ -3905,6 +3905,67 @@ TemporaryBattleList['Gladion 2'] = new TemporaryBattle(
         imageName: 'Gladion (stance)',
     }
 );
+TemporaryBattleList['Exeggutor Tree'] = new TemporaryBattle(
+    'Exeggutor Tree',
+    [new GymPokemon('Alolan Exeggutor', 189990, 40)],
+    undefined,
+    undefined,
+    undefined,
+    {
+        displayName: 'A Tree?',
+        isTrainerBattle: false,
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
+    'Recon Squad 3',
+    [new GymPokemon('Poipole', 6614774, 49)],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Ultra Recon Squad',
+        returnTown: 'Vast Poni Canyon',
+        imageName: 'specialNPCs/Ultra Recon Squad (all)',
+    },
+);
+TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
+    'Lusamine 1',
+    [
+        new GymPokemon('Clefable', 15619682, 47),
+        new GymPokemon('Lilligant', 15619682, 47),
+        new GymPokemon('Mismagius', 15619682, 47),
+        new GymPokemon('Milotic', 15619682, 47),
+        new GymPokemon('Bewear', 15619682, 47),
+        new GymPokemon('Help us Solgaleo!', 15619682, 47, new ObtainedPokemonRequirement('Solgaleo')),
+        new GymPokemon('Help us Lunala!', 15619682, 47, new ObtainedPokemonRequirement('Lunala')),
+    ],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: '../pokemon/-793.01',
+        displayName: 'Lusamine',
+    }
+);
+TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
+    'Lusamine 2',
+    [
+        new GymPokemon('Clefable', 15619682, 47),
+        new GymPokemon('Lilligant', 15619682, 47),
+        new GymPokemon('Mismagius', 15619682, 47),
+        new GymPokemon('Milotic', 15619682, 47),
+        new GymPokemon('Bewear', 15619682, 47),
+        new GymPokemon('You hateful little Trainer!', 15619682, 47),
+    ],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/-793.01'
+    }
+);
 TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
     [
