@@ -3589,10 +3589,13 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
         new GymPokemon('Rowlet', 71131094, 5, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
         new GymPokemon('Litten', 71131094, 5, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
-    'Whoa! That was awesome! You and your Pokémon were both so cool!',
+    'Whoa! That was awesome! You and your Pokémon were both so cool!<br>Oh yeah! I\'m Hau! You should totally check out Iki Town! We\'re holding a festival soon!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
     undefined,
     {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('Welcome to paradise, cousin!').beginQuest(0, undefined, true);
+        },
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town Outskirts',
         imageName: 'Rival Hau',
@@ -3602,7 +3605,7 @@ TemporaryBattleList['Melemele Spearow'] = new TemporaryBattle(
     'Melemele Spearow',
     [new GymPokemon('Spearow', 93889860, 4)],
     undefined,
-    [new DevelopmentRequirement()],
+    [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
     undefined,
     {
         displayName: 'Agitated Spearow',
@@ -3618,7 +3621,7 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
         new GymPokemon('Litten', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'Phew... That was awesome! That was a really great battle! I had a blast fighting you!',
-    [new TemporaryBattleRequirement('Hau 1')],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',
@@ -3629,8 +3632,8 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
 TemporaryBattleList['Skull 1'] = new TemporaryBattle(
     'Skull 1',
     [new GymPokemon('Zubat', 167906100, 9)],
-    undefined,
-    [new DevelopmentRequirement()],
+    undefined, // custom quest message
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3)],
     undefined,
     {
         displayName: 'Team Skull Grunts',
@@ -3645,7 +3648,7 @@ TemporaryBattleList['Ilima'] = new TemporaryBattle(
         new GymPokemon('Smeargle', 147372000, 11),
     ],
     'You- or should I say you and your Pokémon- make quite the interesting team! I do hope you\'ll come to Verdant Cavern and attempt my trial! You can get there from Route 2.',
-    [new DevelopmentRequirement()],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4)],
     undefined,
     {
         displayName: 'Captain Ilima',
@@ -3656,7 +3659,7 @@ TemporaryBattleList['Skull 2'] = new TemporaryBattle(
     'Skull 2',
     [new GymPokemon('Drowzee', 221671200, 10)],
     'Seriously, home slice?! You\'re too strong for a kid, yo! I\'ve gotta go make someone else miserable to feel better! We\'re gonna go mess with Verdant Cavern!',
-    [new DevelopmentRequirement()],
+    [new TemporaryBattleRequirement('Ilima')],
     undefined,
     {
         displayName: 'Team Skull Grunts',
@@ -3667,8 +3670,8 @@ TemporaryBattleList['Skull 2'] = new TemporaryBattle(
 TemporaryBattleList['Recon Squad 1'] = new TemporaryBattle(
     'Recon Squad 1',
     [new GymPokemon('Furfrou', 252879000, 13)],
-    undefined,
-    [new DevelopmentRequirement()],
+    undefined, // custom quest message
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8)],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
@@ -3685,11 +3688,11 @@ TemporaryBattleList['Hau 3'] = new TemporaryBattle(
         new GymPokemon('Pikachu', 99488753, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',
-        returnTown: 'Melemele Woods',
+        returnTown: 'Melemele Meadow',
         imageName: 'Rival Hau',
     }
 );

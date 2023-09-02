@@ -6633,6 +6633,37 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
     'With that, you can stamp your ticket to the noble Galar region!',
     'assets/images/npcs/Professor Kukui.png');
 
+// Alola Story NPCs
+// Lillies
+const Lillie1 = new NPC('Mysterious Girl', [
+    'Oh... Oh, thank goodness! So...you\'re also one of the professor\'s acquaintances? It\'s nice to meet you...',
+    'I am so grateful to you for helping us out of that dangerous spot. Come on. Into the bag, Nebby.',
+    'Oh...um...yes! You can call me Lillie. I know it\'s too much for me to ask it, but... Do you think you could see us back to town?',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
+});
+const Lillie2 = new NPC('Return Nebby to Lillie', [
+    'Nebby! Oh thank goodness you\'re safe. Thank you $playername$, let me heal your Poké- No? Um, very well then.',
+    'It seems Hau is outside on Route 3. Are you two having another battle?',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11, GameConstants.AchievementOption.less)]),
+});
+const Lillie3 = new NPC('Lillie', [
+    'Nebby is... Its real home is far away from here. And I want to help it get home. Thank you for helping me. The two of us will be heading to the next island as well!',
+    'Oh, and here, $playername$. Some Revives. It\'s the least I can do after all the running around I\'ve made you do.'
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hau 3'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
+});
+const RotomDexKukui = new NPC('Kukui\'s Gift', [
+    '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on your tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing! Can it even help you with the Island Challenge quest on that <i>Bulletin Board</i> over there?',
+    'Well, if you\'re ever feelin\' lost, you can alwayzzz find me at a dock town! I know everything there izzz to know about thezzze islandzzz!',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hau 1'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4, GameConstants.AchievementOption.less)]),
+});
 //Silvally Types NPC
 const SilvallyGladion1 = new NPC('Gladion', [
     'Oh, it\'s you. I thought the professor would help when I put my request up at the Bulletin Board, but the Champion\'s even better.',
@@ -7022,7 +7053,17 @@ TownList['Iki Town'] = new Town(
     [IkiTownShop],
     {
         requirements: [new TemporaryBattleRequirement('Hau 1')],
-        npcs: [IkiKahuna, SilvallyHala],
+        npcs: [IkiKahuna, SilvallyHala, Lillie3],
+    }
+);
+TownList['Mahalo Trail'] = new Town(
+    'Mahalo Trail',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MelemeleIsland,
+    [TemporaryBattleList['Melemele Spearow']],
+    {
+        requirements: [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
+        npcs: [Lillie1],
     }
 );
 TownList['Professor Kukui\'s Lab'] = new Town(
@@ -7032,14 +7073,14 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Alola)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [ProfKukui],
+        npcs: [ProfKukui, RotomDexKukui],
     }
 );
 TownList['Hau\'oli City'] = new Town(
     'Hau\'oli City',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City'])],
+    [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City']), TemporaryBattleList['Ilima']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
     }
@@ -7048,7 +7089,7 @@ TownList['Melemele Woods'] = new Town(
     'Melemele Woods',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
+    [new MoveToTown('Mahalo Trail'), new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
     }
@@ -7338,13 +7379,16 @@ TownList['Melemele Meadow'] = new DungeonTown(
     'Melemele Meadow',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)],
+    [new MoveToDungeon(dungeonList['Seaward Cave'])],
+    { npcs: [Lillie2] }
 );
 TownList['Seaward Cave'] = new DungeonTown(
     'Seaward Cave',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
+    [TemporaryBattleList['Recon Squad 1']]
 );
 TownList['Ten Carat Hill'] = new DungeonTown(
     'Ten Carat Hill',

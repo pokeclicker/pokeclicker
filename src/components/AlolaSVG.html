@@ -1653,6 +1653,26 @@
             , image: "assets/images/map/hau.png"
             })
         %>
+        
+        <%- include('templates/mapOverlay',
+            { name: "Team Skull Grunts"
+            , x: 27, y: 39
+            , width: 8, height: 4
+            , databind: "click: () => TemporaryBattleList['Skull 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Skull 1'] && TemporaryBattleList['Skull 1'].isVisible()"
+            , image: "assets/images/map/skullgrunts.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Team Skull Grunts"
+            , x: 9, y: 12
+            , width: 8, height: 4
+            , databind: "click: () => TemporaryBattleList['Skull 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Skull 2'] && TemporaryBattleList['Skull 2'].isVisible()"
+            , image: "assets/images/map/skullgrunts.png"
+            })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">

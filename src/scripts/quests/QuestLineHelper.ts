@@ -2478,6 +2478,110 @@ class QuestLineHelper {
     }
 
     /* Alola QuestLines */
+    // Melemele Island guide - Started upon deafting Hau 1
+    public static createMelemeleAlolaQuestLine() {
+        const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'Time to kick off your Alolan vacation!');
+        // 0 - Temp Battle: Melemele Spearow
+        const battleMelemeleSpearow = new CustomQuest (1, 0,  'Protect the mysterious girl\'s Pokémon! Battle the Spearow on Mahalo Trail.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Melemele Spearow')](), undefined, undefined,
+            {
+                clearedMessage: '<i>The bridge collapses and you and the floating Pokémon start falling to the turbulent cascades below... But a swift creature zaps to your rescue! It seems fixated on the safety of the little one.</i>',
+                npcDisplayName: 'Melemele Guardian',
+                npcImageName: '../pokemon/785',
+            });
+        melemeleAlolaQuestLine.addQuest(battleMelemeleSpearow);
+
+        // 1 - Talk to NPC:
+        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Ask the mysterious girl in white if she\'s okay.');
+        melemeleAlolaQuestLine.addQuest(talkToLillie1);
+
+        // 2 - Talk to NPC: Kukui/Rotomdex (to integrate Island Challenge quest seamlessly)
+        const talkToRotomDex1 = new TalkToNPCQuest(RotomDex1, 'Go visit Professor Kukui\'s Lab past Hau\'oli Outskirts. Seems he has a gift for you!');
+        melemeleAlolaQuestLine.addQuest(talkToRotomDex1);
+
+        // 3 - Clear dungeon: Trainers' School
+        const clearTrainersSchool = new CustomQuest(1, 0, 'Follow Lillie to the Trainers\' School dungeon and clear it.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Trainers\' School')](), undefined, undefined,
+            {
+                clearedMessage: 'You seemed to be in perfect sync with your Pokémon—weren\'t you? Um... Since we\'ve come this far together, why don\'t I show you some more of the city?',
+                npcDisplayName: 'Lillie',
+                npcImageName: 'Lillie',
+            });
+        melemeleAlolaQuestLine.addQuest(clearTrainersSchool);
+
+        // 4 - Temp Battle: Skull 1
+        const battleSkullGrunts1 = new CustomQuest (1, 0,  'Beat up a grunt or two in Hau\'oli City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 1')](), undefined, undefined,
+            {
+                clearedMessage: 'My thanks to you and your Pokémon. These grunts are always bothering me and my trial site. You... you\'re the trainer who cleared the Trainers\' School so effortlessly! Allow me to see if you\'re ready for my trial!',
+                npcDisplayName: 'Ilima',
+                npcImageName: 'Ilima',
+            });
+        melemeleAlolaQuestLine.addQuest(battleSkullGrunts1);
+
+        // 5 - Temp Battle: Ilima
+        const battleIlimaHauoli = new DefeatTemporaryBattleQuest('Ilima', 'Battle Ilima in Hau\'oli City.');
+        melemeleAlolaQuestLine.addQuest(battleIlimaHauoli);
+
+        // 6 - Clear dungeon: Verdant Cavern, Ilima's Trial
+        const clearVerdantCavern = new CustomQuest(1, 0, 'Clear Verdant Cavern to complete Ilima\'s Trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Verdant Cavern')]());
+        melemeleAlolaQuestLine.addQuest(clearVerdantCavern);
+
+        // 7 - Clear dungeon: Melemele Meadow
+        const clearMelemeleMeadow = new CustomQuest(1, 0, 'Ignore the Ultra Recon Squad stalking you. Continue past Route 3 and clear Melemele Meadow.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Melemele Meadow')](), undefined, undefined,
+            {
+                clearedMessage: 'Pew!<br><br><i>Nebby flees.</i>',
+                npcDisplayName: 'Nebby',
+                npcImageName: '../pokemon/789',
+            });
+        melemeleAlolaQuestLine.addQuest(clearMelemeleMeadow);
+
+        // 8 - Clear dungeon: Seaward Cave
+        const clearSeawardCave = new CustomQuest(1, 0, 'What the- Nebby escaped into a hole! Clear the Seaward Cave dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seaward Cave')](), undefined, undefined,
+            {
+                clearedMessage: 'Pew~<br><br><i>Nebby stays. It seems like it\'s following you now!</i>',
+                npcDisplayName: 'Nebby',
+                npcImageName: '../pokemon/789',
+            });
+        melemeleAlolaQuestLine.addQuest(clearSeawardCave);
+
+        // 9 - Temp Battle: Recon Squad 1
+        const battleReconSquad1Reward = () => {
+            MapHelper.moveToTown('Melemele Meadow');
+        };
+
+        const battleReconSquad1 = new CustomQuest(1, battleReconSquad1Reward, 'The Ultra Recon Squad is awaiting a battle in Seaward Cave. Show them the thrill of the fight!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Recon Squad 1')](), undefined, undefined,
+            {
+                clearedMessage: 'That one you have come to collect... You must know that it is able to warp away when threatened, but the holes that are created when it does so leave a path open to dangerous beings. Be careful of who you trust it to.',
+                npcDisplayName: 'Phyco',
+                npcImageName: 'Phyco',
+            });
+        melemeleAlolaQuestLine.addQuest(battleReconSquad1);
+
+        // 10 - Talk to NPC: Lillie2
+        const talkToLillie2 = new TalkToNPCQuest(Lillie2, 'Nebby seemed to have enjoyed that. Return to Lillie in Melemele Meadow.');
+        melemeleAlolaQuestLine.addQuest(talkToLillie2);
+
+        // 11 - Talk to NPC: Lillie3
+        const LillieReviveReward = () => {
+            const item = 'Revive';
+            Underground.gainMineItem(UndergroundItems.getByName(item).id, 10);
+            Notifier.notify({
+                title: melemeleAlolaQuestLine.name,
+                message: `Lillie has given you 10 ${GameConstants.humanifyString(item)}s!`,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToLillie3 = new TalkToNPCQuest(Lillie3, 'Lillie still has something on her mind. Talk to her in Iki Town.', LillieReviveReward);
+        melemeleAlolaQuestLine.addQuest(talkToLillie3);
+
+        // end - Gym Battle: Hala
+        const clearHala = new CustomQuest(1, 0, 'Defeat Hala to complete Melemele\'s Grand Trial!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Iki Town')]());
+        melemeleAlolaQuestLine.addQuest(clearHala);
+
+        App.game.quests.questLines().push(melemeleAlolaQuestLine);
+    }
 
     // Started upon defeating Konikoni City's gym.
     public static createSkullAetherAlolaQuestLine() {
@@ -3874,6 +3978,7 @@ class QuestLineHelper {
         this.createClashOfAgesQuestLine();
         this.createAshKetchumQuestLine();
         this.createUnrivaledPowerQuestLine();
+        this.createMelemeleAlolaQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createSilvallyTypesQuestLine();
