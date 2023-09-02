@@ -1859,7 +1859,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Brooklet Hill'))],
+    [new TemporaryBattleRequirement('Recon Squad 2')],
     undefined,
     AlolaSubRegions.AkalaIsland,
 ));

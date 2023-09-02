@@ -6657,6 +6657,13 @@ const Lillie3 = new NPC('Lillie', [
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new TemporaryBattleRequirement('Hau 3'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
 });
+const Lillie4 = new NPC('Ask Lillie to tag along', [
+    'Th...the Aether Foundation...? U-um! I think I\'ll stay here.',
+    'Here! Some Dream Orbs! See, Professor Burnet has been studying dimensions for a very long time. I still have some things I want to talk to her about. Bye!',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Trials Galore!', 6), new QuestLineStepCompletedRequirement('Trials Galore!', 8, GameConstants.AchievementOption.less)]),
+});
 const RotomDexKukui = new NPC('Kukui\'s Gift', [
     '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on your tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing! Can it even help you with the Island Challenge quest on that <i>Bulletin Board</i> over there?',
     'Well, if you\'re ever feelin\' lost, you can alwayzzz find me at a dock town! I know everything there izzz to know about thezzze islandzzz!',
@@ -7130,7 +7137,7 @@ TownList['Royal Avenue'] = new Town(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [TemporaryBattleList['Battle Royal'], DepartmentStoreShop, TemporaryBattleList['Molayne Steel Memory']],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
+        requirements: [new TemporaryBattleRequirement('Skull 3')],
         npcs: [RoyalAvenueSpectator, MolayneSilvally],
     }
 );
@@ -7140,8 +7147,18 @@ TownList['Konikoni City'] = new Town(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [KonikoniCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Konikoni City'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
-        npcs: [KonikoniKahuna, SilvallyOlivia],
+        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+        npcs: [KonikoniKahuna, SilvallyOlivia, Lillie4],
+    }
+);
+TownList['Ruins of Life Entrance'] = new Town(
+    'Ruins of Life Entrance',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.AkalaIsland,
+    [GymList['Konikoni City']],
+    { 
+        requirements: [new TemporaryBattleRequirement('Plumeria 1')],
+        npcs: [Lillie4],
     }
 );
 TownList['Aether Paradise'] = new Town(

@@ -2583,12 +2583,77 @@ class QuestLineHelper {
         App.game.quests.questLines().push(melemeleAlolaQuestLine);
     }
 
+    // Akala Island guide - Started upon deafting Sina and Dexio
+    public static createAkalaAlolaQuestLine() {
+        const akalaAlolaQuestLine = new QuestLine('Trials Galore!', 'Explore Akala Island and its trials.');
+        // 0 - Clear dungeon: Brooklet Hill, Lana's trial
+        const clearBrookletHill = new CustomQuest(1, 0, 'Clear Brooklet Hill and complete Lana\'s trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Brooklet Hill')]());
+        akalaAlolaQuestLine.addQuest(clearBrookletHill);
+
+        // 1 - Temp battle: Recon Squad 2
+        const battleReconSquad2 = new CustomQuest(1, 0, 'The Ultra Recon Squad is investigating a tree that reminds you of a region west of Kanto. Go check it out on Route 5.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Recon Squad 2')](), undefined, undefined,
+            {
+                clearedMessage: 'Your Z-Crystals... might they be like the beautiful light our ancestors once saw?',
+                npcDisplayName: 'Dulse',
+                npcImageName: 'Dulse',
+            });
+        akalaAlolaQuestLine.addQuest(battleReconSquad2);
+
+        // 2 - Temp battle: Skull 3
+        const clearSkull3 = new DefeatTemporaryBattleQuest('Skull 3', 'Team Skull is causing trouble on Route 6!');
+        akalaAlolaQuestLine.addQuest(clearSkull3);
+
+        // 3 - Clear dungeon: Wela Volcano Park, Kiawe's trial
+        const clearWelaVolcano = new CustomQuest(1, 0, 'Clear Wela Volcano Park and complete Kiawe\'s trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Wela Volcano Park')]());
+        akalaAlolaQuestLine.addQuest(clearWelaVolcano);
+
+        // 4 - Clear dungeon: Lush Jungle, Mallow's trial
+        const clearLushJungle = new CustomQuest(1, 0, 'Clear Lush Jungle and complete Mallow\'s trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lush Jungle')]());
+        akalaAlolaQuestLine.addQuest(clearLushJungle);
+
+        // 5 - Clear dungeon: Diglett's tunnel
+        const clearDiglettsTunnel = new CustomQuest (1, 0,  'You hear the echoes of bad rap and low self-esteem nearby. Clear Diglett\'s Tunnel.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Diglett\'s Tunnel')](), undefined, undefined,
+        {
+            clearedMessage: 'Just when things were startin\' to heat up, yo, I got surrounded by Diglett and beat up, yo!',
+            npcDisplayName: 'Team Skull',
+            npcImageName: 'Team Skull Grunts (both)',
+        });
+        akalaAlolaQuestLine.addQuest(clearDiglettsTunnel);
+
+        // 6 - Gym battle: Olivia
+        const battleKahunaOlivia = new CustomQuest (1, 0,  'Reach Kahuna Olivia and Lillie outside the Ruins of Life and complete Akala\'s Grand Trial!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Konikoni City')]());
+        akalaAlolaQuestLine.addQuest(battleKahunaOlivia);
+
+        // 7 - Talk to NPC: Lillie4
+        const AkalaDreamOrbReward = () => {
+            const orbsEarned = 10;
+            const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
+            for (let i = 0; i < orbsEarned; i++) {
+                GameHelper.incrementObservable(Rand.fromArray(orbsUnlocked).amount);
+            }
+            Notifier.notify({
+                title: akalaAlolaQuestLine.name,
+                message: `Lillie has gifted you ${orbsEarned} Orbs!`,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToLillie4 = new TalkToNPCQuest(Lillie4, 'You have been invited to Aether Paradise. Ask Lillie if she wants to join you.', AkalaDreamOrbReward);
+        akalaAlolaQuestLine.addQuest(talkToLillie4);
+
+        // end - Temp battle: Ultra Wormhole
+        const clearUltraWormhole = new DefeatTemporaryBattleQuest('Ultra Wormhole', 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.');
+        akalaAlolaQuestLine.addQuest(clearUltraWormhole);
+
+        App.game.quests.questLines().push(akalaAlolaQuestLine);
+    }
+
     // Started upon defeating Konikoni City's gym.
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
-        const clearUltraWormhole = new DefeatTemporaryBattleQuest('Ultra Wormhole', 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.');
-        skullAetherAlolaQuestLine.addQuest(clearUltraWormhole);
 
         const clearMalieGarden = new CustomQuest(1, 0, 'Team Skull are being annoying. Get rid of them. Clear the Malie Garden dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Malie Garden')]());
         skullAetherAlolaQuestLine.addQuest(clearMalieGarden);
@@ -3979,6 +4044,7 @@ class QuestLineHelper {
         this.createAshKetchumQuestLine();
         this.createUnrivaledPowerQuestLine();
         this.createMelemeleAlolaQuestLine();
+        this.createAkalaAlolaQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createSilvallyTypesQuestLine();

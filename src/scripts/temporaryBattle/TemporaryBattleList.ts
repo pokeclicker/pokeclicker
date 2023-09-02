@@ -3706,6 +3706,12 @@ TemporaryBattleList.Dexio = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
     undefined,
     {
+        // Starts Akala story quest if both Sina and Dexio are defeated.
+        firstTimeRewardFunction: () => {
+            if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sina')]() >= 1) {
+                App.game.quests.getQuestLine('Trials Galore!').beginQuest(0, undefined, true);
+            }
+        },
         displayName: 'Pokémon Trainer Dexio',
     }
 );
@@ -3719,6 +3725,12 @@ TemporaryBattleList.Sina = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
     undefined,
     {
+        // Starts Akala story quest if both Sina and Dexio are defeated.
+        firstTimeRewardFunction: () => {
+            if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dexio')]() >= 1) {
+                App.game.quests.getQuestLine('Trials Galore!').beginQuest(0, undefined, true);
+            }
+        },
         displayName: 'Pokémon Trainer Sina',
     }
 );
@@ -3760,8 +3772,8 @@ TemporaryBattleList['Gladion 1'] = new TemporaryBattle(
 TemporaryBattleList['Recon Squad 2'] = new TemporaryBattle(
     'Recon Squad 2',
     [new GymPokemon('Poipole', 135172109, 20)],
-    undefined,
-    [new DevelopmentRequirement()],
+    undefined, // custom quest message
+    [new QuestLineStepCompletedRequirement('Trials Galore!', 0)],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
@@ -3773,8 +3785,8 @@ TemporaryBattleList['Recon Squad 2'] = new TemporaryBattle(
 TemporaryBattleList['Skull 3'] = new TemporaryBattle(
     'Skull 3',
     [new GymPokemon('Drowzee', 135172109, 17)],
-    undefined,
-    [new DevelopmentRequirement()],
+    undefined, // custom quest message
+    [new MultiRequirement([new RouteKillRequirement(10, GameConstants.Region.alola, 6), new QuestLineStepCompletedRequirement('Trials Galore!', 1)])],
     undefined,
     {
         displayName: 'Team Skull Grunts',
@@ -3815,7 +3827,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 345252381, 27)],
     '<i>The creature escaped back into the ultra wormhole.</i>',
-    [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+    [new QuestLineStepCompletedRequirement('Trials Galore!', 7)],
     undefined,
     {
         hideTrainer: true,

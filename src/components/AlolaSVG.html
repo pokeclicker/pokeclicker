@@ -2394,6 +2394,17 @@
             })
         %>
 
+        <!--Ruins of Life Entrance-->
+        <%- include('templates/mapOverlay',
+            { name: "Ruins of Life Entrance"
+            , x: 59, y: 46
+            , width: 4, height: 4
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Life Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Life Entrance') }"
+            , visible:  "App.game.quests.getQuestLine('Trials Galore!').curQuest() <= 7"
+            , connectedToTown: "Ruins of Life Entrance"
+            })
+        %>
+
         <!--Aether Paradise-->
         <%- include('templates/mapTown',
             { name: "Aether Paradise"
@@ -2616,10 +2627,12 @@
         %>
 
         <!--Ruins of Life-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Ruins of Life"
             , x: 59, y: 46
             , width: 4, height: 4
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Life')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Life') }"
+            , visible:  "App.game.quests.getQuestLine('Trials Galore!').curQuest() > 7"
             })
         %>
 
@@ -2706,6 +2719,26 @@
             , databind: "click: () => TemporaryBattleList['Gladion 1'].protectedOnclick()"
             , visible:  "TemporaryBattleList['Gladion 1'] && TemporaryBattleList['Gladion 1'].isVisible()"
             , image: "assets/images/map/gladion.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Familiar Tree"
+            , x: 64, y: 18
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Recon Squad 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Recon Squad 2'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Recon Squad 2'] && TemporaryBattleList['Recon Squad 2'].isVisible()"
+            , image: "assets/images/map/sudowoodooverworld.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Team Skull Grunts"
+            , x: 66, y: 30
+            , width: 8, height: 4
+            , databind: "click: () => TemporaryBattleList['Skull 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Skull 3'] && TemporaryBattleList['Skull 3'].isVisible()"
+            , image: "assets/images/map/skullgrunts.png"
             })
         %>
 
