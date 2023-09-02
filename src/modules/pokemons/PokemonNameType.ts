@@ -384,6 +384,7 @@ export type PokemonNameType
     | 'Marill'
     | 'Azumarill'
     | 'Sudowoodo'
+    | 'Sudowoodo (Golden)'
     | 'Politoed'
     | 'Hoppip'
     | 'Hoppip (Chimecho)'

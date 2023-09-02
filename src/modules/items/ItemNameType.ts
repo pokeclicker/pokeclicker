@@ -370,6 +370,7 @@ export type ItemNameType
 | 'Onix (Rocker)'
 | 'Tangela (Pom-pom)'
 | 'Weepinbell (Fancy)'
+| 'Sudowoodo (Golden)'
 | 'Normalium Z'
 | 'Firium Z'
 | 'Waterium Z'
