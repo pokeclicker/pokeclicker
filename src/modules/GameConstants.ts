@@ -1911,6 +1911,8 @@ export const TemporaryBattles = [
     'Plumeria 1',
     'Ultra Wormhole',
     'Hau 5',
+    'Skull 4',
+    'Skull 5',
     'Plumeria 2',
     'Gladion 2',
     'Necrozma',

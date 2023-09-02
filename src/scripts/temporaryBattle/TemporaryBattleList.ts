@@ -3841,6 +3841,39 @@ TemporaryBattleList['Hau 5'] = new TemporaryBattle(
         imageName: 'Rival Hau',
     }
 );
+TemporaryBattleList['Skull 4'] = new TemporaryBattle(
+    'Skull 4',
+    [
+        new GymPokemon('Houndour', 7798038, 28),
+        new GymPokemon('Golbat', 7798038, 28),
+        new GymPokemon('Alolan Raticate', 8352109, 29),
+    ],
+    'Yo, think about the bus drivers! If we take this bus stop, they can all chill!',
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Skull Grunts',
+        returnTown: 'Malie City',
+        imageName: 'Team Skull Grunts (male)',
+    }
+);
+TemporaryBattleList['Skull 5'] = new TemporaryBattle(
+    'Skull 5',
+    [
+        new GymPokemon('Drowzee', 2007275, 34),
+        new GymPokemon('Haunter', 2131436, 34),
+        new GymPokemon('Pawniard', 2007275, 36),
+        new GymPokemon('Scraggy', 2131436, 36),
+    ],
+    undefined,
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        displayName: 'Team Skull Grunts',
+        returnTown: 'Aether House',
+        imageName: 'Team Skull Grunt (male)',
+    }
+);
 TemporaryBattleList['Plumeria 2'] = new TemporaryBattle(
     'Plumeria 2',
     [
