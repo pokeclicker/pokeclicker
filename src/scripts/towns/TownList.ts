@@ -1489,7 +1489,7 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
 //Johto Contest Shop
 const JohtoContestShop = new Shop([
     ItemList['Sudowoodo (Golden)'],
-], 'Contest Shop', [PokemonContestController.requirements]);
+], 'Contest Shop');
 // Johto NPCs
 
 const CherrygroveMrPokemon = new NPC('Mr. Pokémon', [
