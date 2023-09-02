@@ -5,42 +5,45 @@ class ExternalHelper {
     private static routeCache: {[name: string] : boolean} = {};
     private static gymCache: {[name: string] : boolean} = {};
 
-    public static isInLiveVersion(content: Town | QuestLine | TemporaryBattle | RegionRoute | Gym) {
+    public static isInDevelopment(content: Town | Dungeon | QuestLine | TemporaryBattle | RegionRoute | Gym) {
         if (content instanceof Town) {
             if (content.region > GameConstants.MAX_AVAILABLE_REGION) {
-                return false;
+                return true;
             }
             if (ExternalHelper.townCache[content.name] == undefined) {
                 ExternalHelper.townCache[content.name] = ExternalHelper.containsDevRequirement(content.requirements);
             }
-            return !ExternalHelper.townCache[content.name];
+            return ExternalHelper.townCache[content.name];
+        }
+        if (content instanceof Dungeon) {
+            return ExternalHelper.isInDevelopment(TownList[content.name]);
         }
         if (content instanceof QuestLine) {
             if (ExternalHelper.questlineCache[content.name] == undefined) {
                 ExternalHelper.questlineCache[content.name] = ExternalHelper.containsDevRequirement(content.requirement);
             }
-            return !ExternalHelper.questlineCache[content.name];
+            return ExternalHelper.questlineCache[content.name];
         }
         if (content instanceof TemporaryBattle) {
             if (ExternalHelper.temporaryBattleCache[content.name] == undefined) {
                 ExternalHelper.temporaryBattleCache[content.name] = ExternalHelper.containsDevRequirement(content.requirements);
             }
-            return !ExternalHelper.temporaryBattleCache[content.name];
+            return ExternalHelper.temporaryBattleCache[content.name];
         }
         if (content instanceof RegionRoute) {
             if (content.region > GameConstants.MAX_AVAILABLE_REGION) {
-                return false;
+                return true;
             }
             if (ExternalHelper.routeCache[content.routeName] == undefined) {
                 ExternalHelper.routeCache[content.routeName] = ExternalHelper.containsDevRequirement(content.requirements);
             }
-            return !ExternalHelper.routeCache[content.routeName];
+            return ExternalHelper.routeCache[content.routeName];
         }
         if (content instanceof Gym) {
             if (ExternalHelper.gymCache[content.town] == undefined) {
                 ExternalHelper.gymCache[content.town] = ExternalHelper.containsDevRequirement(content.requirements);
             }
-            return !ExternalHelper.gymCache[content.town];
+            return ExternalHelper.gymCache[content.town];
         }
         return true;
     }
@@ -58,23 +61,23 @@ class ExternalHelper {
             if (r instanceof DevelopmentRequirement) {
                 containsDevRequirement = true;
             } else if (r instanceof QuestLineCompletedRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
+                containsDevRequirement = ExternalHelper.isInDevelopment(r.cachedQuest);
             } else if (r instanceof QuestLineStartedRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
+                containsDevRequirement = ExternalHelper.isInDevelopment(r.cachedQuest);
             } else if (r instanceof QuestLineStepCompletedRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
+                containsDevRequirement = ExternalHelper.isInDevelopment(r.cachedQuest);
             } else if (r instanceof TemporaryBattleRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(TemporaryBattleList[r.battleName]);
+                containsDevRequirement = ExternalHelper.isInDevelopment(TemporaryBattleList[r.battleName]);
             } else if (r instanceof RouteKillRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(Routes.getRoute(r.region, r.route));
+                containsDevRequirement = ExternalHelper.isInDevelopment(Routes.getRoute(r.region, r.route));
             } else if (r instanceof ClearGymRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(Object.values(GymList).find(g => GameConstants.getGymIndex(g.town) == r.gymIndex));
+                containsDevRequirement = ExternalHelper.isInDevelopment(Object.values(GymList).find(g => GameConstants.getGymIndex(g.town) == r.gymIndex));
             } else if (r instanceof MaxRegionRequirement) {
                 containsDevRequirement = r.requiredValue > GameConstants.MAX_AVAILABLE_REGION;
             } else if (r instanceof ObtainedPokemonRequirement) {
-                containsDevRequirement = ExternalHelper.pokemonIsInLiveVersion(r.pokemon);
+                containsDevRequirement = ExternalHelper.pokemonIsInDevelopment(r.pokemon);
             } else if (r instanceof PokemonLevelRequirement) {
-                containsDevRequirement = ExternalHelper.pokemonIsInLiveVersion(r.pokemon);
+                containsDevRequirement = ExternalHelper.pokemonIsInDevelopment(r.pokemon);
             } else if (r instanceof StarterRequirement) {
                 containsDevRequirement = r.region > GameConstants.MAX_AVAILABLE_REGION;
             } else if (r instanceof MultiRequirement) {
@@ -100,17 +103,17 @@ class ExternalHelper {
         return containsDevRequirement;
     }
 
-    public static pokemonIsInLiveVersion(name: PokemonNameType) {
+    public static pokemonIsInDevelopment(name: PokemonNameType) {
         if (PokemonHelper.calcNativeRegion(name) > GameConstants.MAX_AVAILABLE_REGION) {
-            return false;
+            return true;
         }
 
         const locations = PokemonHelper.getPokemonLocations(name);
         if (!locations) {
-            return false;
+            return true;
         }
         //TODO: run ExternalHelper.isInLiveVersion for each location
 
-        return true;
+        return false;
     }
 }
