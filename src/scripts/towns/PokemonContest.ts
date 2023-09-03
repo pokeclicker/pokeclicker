@@ -117,6 +117,7 @@ class PokemonContestController {
         let result : GameConstants.ContestResults = undefined;
         if (stylePoints > 700) {
             result = GameConstants.ContestResults.Master;
+            GameHelper.incrementObservable(App.game.statistics.contestStyleMaster[PokemonContestController.contestStyle()], 1);
         } else if (stylePoints > 450) {
             result = GameConstants.ContestResults.Hyper;
         } else if (stylePoints > 200) {
