@@ -70,7 +70,7 @@ type Boss = DungeonBossPokemon | DungeonTrainer;
 interface EncounterInfo {
     image: string,
     shiny: boolean,
-    hide: boolean, // try not to hide pokemon required as per the Pokedex Challenge if they're only obtainable as a dungeon boss in their native region
+    hide: boolean, // try to not hide pokemon required as per the Pokedex Challenge whose unlock method can be avoided through regular gameplay
     uncaught: boolean,
     locked: boolean,
     lockMessage: string,
@@ -6781,7 +6781,7 @@ dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
                 new GymPokemon('Bronzor', 1533334, 38),
                 new GymPokemon('Toxicroak', 1533334, 40),
             ], { weight: 2 }, 'Saturn', '(saturn)'),
-        new DungeonBossPokemon('Azelf', 10060000, 50, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+        new DungeonBossPokemon('Azelf', 10060000, 50, {requirement: new QuestLineCompletedRequirement('A New World')}),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
             requirement: new OneFromManyRequirement([
@@ -6914,7 +6914,7 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
                 new GymPokemon('Bronzor', 1690000, 38),
                 new GymPokemon('Skuntank', 1690000, 40),
             ], { weight: 2 }, 'Jupiter', '(jupiter)'),
-        new DungeonBossPokemon('Uxie', 10070000, 50, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+        new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new QuestLineCompletedRequirement('A New World')}),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
             requirement: new OneFromManyRequirement([
@@ -10050,8 +10050,8 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
                 new GymPokemon('Mega Gyarados', 27385730, 51),
             ],
             { weight: 3, hide: true, requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 33)}),
-        new DungeonBossPokemon('Xerneas', 93659460, 100, {hide: true, requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
-        new DungeonBossPokemon('Yveltal', 93659450, 100, {hide: true, requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
+        new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
+        new DungeonBossPokemon('Yveltal', 93659450, 100, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
     ],
     675000, 16);
 
