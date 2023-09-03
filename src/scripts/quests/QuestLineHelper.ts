@@ -2767,8 +2767,6 @@ class QuestLineHelper {
 
 
 
-        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
-        skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
 
         const UltraMegalopolisReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
