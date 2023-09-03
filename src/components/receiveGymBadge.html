@@ -5,7 +5,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        <div class="modal-header">
            <div style="width: 100%;">
                <img src="" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png'"
-                    data-bind="attr:{ src: 'assets/images/npcs/' + GymRunner.gymObservable().leaderName + '.png'}">
+                    data-bind="attr:{ src: GymRunner.gymObservable().imagePath }">
                <h5 class="modal-title" id="receiveBadgeModalLabel"
                    data-bind="text: GymRunner.gymObservable().leaderName.replace(/\d/g,'')">Modal title</h5>
 
