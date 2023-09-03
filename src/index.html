@@ -388,6 +388,16 @@
                                 <i>NOTE: These colors can be customized in the settings menu</i>
                             </div>
                         </div>`}">ⓘ</button>
+                    <button class='btn btn-sm' style="position: absolute; right: 96px; top: 0px; width: auto; height: 41px;"
+                    data-bind='style: { background: MoonCycle.color() },
+                        tooltip: {
+                            title: MoonCycle.tooltip(),
+                            html: true,
+                            placement: "bottom",
+                            trigger: "hover"
+                        }'>
+                        <img width=30px src="" data-bind="attr: { src: MoonCycle.image() }"/>
+                    </button>
                     <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: DayCycle.color() },
                         tooltip: {

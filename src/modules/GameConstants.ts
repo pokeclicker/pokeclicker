@@ -1,4 +1,5 @@
 import DayCyclePart from './dayCycle/DayCyclePart';
+import MoonCyclePhase from './moonCycle/MoonCyclePhase';
 
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
@@ -2260,6 +2261,17 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Day]: 6,
     [DayCyclePart.Dusk]: 17,
     [DayCyclePart.Night]: 18,
+};
+
+export const MoonCycleValues: Record<MoonCyclePhase, number> = {
+    [MoonCyclePhase.NewMoon]: 0,
+    [MoonCyclePhase.WaxingCrescent]: 1,
+    [MoonCyclePhase.FirstQuarter]: 2,
+    [MoonCyclePhase.WaxingGibbous]: 3,
+    [MoonCyclePhase.FullMoon]: 4,
+    [MoonCyclePhase.WaningGibbous]: 5,
+    [MoonCyclePhase.LastQuarter]: 6,
+    [MoonCyclePhase.WaningCrescent]: 7,
 };
 
 export enum ShadowStatus {

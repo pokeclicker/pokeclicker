@@ -794,6 +794,16 @@ namespace GameConstants {
         [DayCyclePart.Dusk]: 17,
         [DayCyclePart.Night]: 18,
     };
+    declare const MoonCycleValues: Record<MoonCyclePhase, number> = {
+        [MoonCyclePhase.NewMoon]: 0,
+        [MoonCyclePhase.WaxingCrescent]: 1,
+        [MoonCyclePhase.FirstQuarter]: 2,
+        [MoonCyclePhase.WaxingGibbous]: 3,
+        [MoonCyclePhase.FullMoon]: 4,
+        [MoonCyclePhase.WaningGibbous]: 5,
+        [MoonCyclePhase.LastQuarter]: 6,
+        [MoonCyclePhase.WaningCrescent]: 7,
+    };
     declare enum ShadowStatus {
         None,
         Shadow,
