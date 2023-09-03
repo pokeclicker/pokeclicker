@@ -2495,8 +2495,8 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(talkToLillie1);
 
         // 2 - Talk to NPC: Kukui/Rotomdex (to integrate Island Challenge quest seamlessly)
-        const talkToRotomDex1 = new TalkToNPCQuest(RotomDex1, 'Go visit Professor Kukui\'s Lab past Hau\'oli Outskirts. Seems he has a gift for you!');
-        melemeleAlolaQuestLine.addQuest(talkToRotomDex1);
+        const talkToRotomDexKukui = new TalkToNPCQuest(RotomDexKukui, 'Go visit Professor Kukui\'s Lab past Hau\'oli Outskirts. Seems he has a gift for you!');
+        melemeleAlolaQuestLine.addQuest(talkToRotomDexKukui);
 
         // 3 - Clear dungeon: Trainers' School
         const clearTrainersSchool = new CustomQuest(1, 0, 'Follow Lillie to the Trainers\' School dungeon and clear it.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Trainers\' School')](), undefined, undefined,
