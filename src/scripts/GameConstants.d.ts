@@ -313,6 +313,7 @@ namespace GameConstants {
         Forest: EnvironmentData,
         Cave: EnvironmentData,
         GemCave: EnvironmentData,
+        Desert: EnvironmentData,
         PowerPlant: EnvironmentData,
         Mansion: EnvironmentData,
         Graveyard: EnvironmentData,
