@@ -4781,13 +4781,13 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
                 new GymPokemon('Snubbull', 62000, 16),
                 new GymPokemon('Kecleon', 62000, 16),
             ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6) }, 'Klots', '(male)'),
-        new DungeonTrainer('Cipher Peon Naps',
+        new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Beldum', 62000, 18),
                 new GymPokemon('Murkrow', 62000, 18),
                 new GymPokemon('Teddiursa', 62000, 18, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Rhyhorn', 62000, 18),
-            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6) }, 'Klots', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6) }, 'Naps', '(yellow)'),
     ],
     {
         common: [
