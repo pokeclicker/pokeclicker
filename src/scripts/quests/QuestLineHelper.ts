@@ -2760,19 +2760,19 @@ class QuestLineHelper {
         App.game.quests.questLines().push(ulaulaAlolaQuestLine);
     }
 
-    // Started upon defeating Konikoni City's gym.
+
+
+
+
+    // Old Alola quest. Name is too good to ignore so it's only one step. Makes for a good climax
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
-
-
-
-
-        const UltraMegalopolisReward = () => {
+        const UltraMegalopolisReward = () => { // change to sun and moon flutes
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
                 title: skullAetherAlolaQuestLine.name,
-                message: 'You found a Master Ball!',
+                message: 'You got the Sun and Moon flutes!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
