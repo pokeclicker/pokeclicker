@@ -8,6 +8,8 @@ import { Saveable } from '../DataStore/common/Saveable';
 import BreedingFilters from '../settings/BreedingFilters';
 import PokedexFilters from '../settings/PokedexFilters';
 import Settings from '../settings/Settings';
+import Notifier from '../notifications/Notifier';
+import NotificationConstants from '../notifications/NotificationConstants';
 
 export type PokemonCategory = {
     id: number,
@@ -67,6 +69,17 @@ export default class PokemonCategories implements Saveable {
         const cat = PokemonCategories.categories()[index];
         // Cannot remove None or Favorite categories
         if (!force && cat.id < 2) {
+            return;
+        }
+
+        const pokeballFilter = App.game.pokeballFilters.list().find(f => f.options?.category?.observableValue() == cat.id);
+        if (pokeballFilter) {
+            Notifier.notify({
+                title: 'Remove Category',
+                message: `This category is in use by the <strong>${pokeballFilter.name}</strong> Pokéball filter and cannot be removed.`,
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: 1e4,
+            });
             return;
         }
 

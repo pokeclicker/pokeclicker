@@ -798,7 +798,7 @@ const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
 
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
-    'But... I don\'t have enough Safari Experience to find it.',
+    'But... I don\'t have a high enough Safari Level to find it.',
 ], {image: 'assets/images/npcs/Bug Catcher.png', requirement: new MaxRegionRequirement(GameConstants.Region.kalos)});
 
 const CandyMan = new NPC('The Candy Man', [
