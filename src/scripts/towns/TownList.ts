@@ -7399,7 +7399,7 @@ TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new QuestLineStepCompletedRequirement('Welcome to paradise,cousin!', 2)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2)],
     undefined,
     { npcs: [TrainerSchoolTeacher] }
 );
