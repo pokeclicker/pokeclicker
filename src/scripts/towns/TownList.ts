@@ -6672,6 +6672,22 @@ const Lillie5 = new NPC('Lillie', [
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),
 });
+const Gladion1 = new NPC('Gladion', [
+    'The Sun Flute and the Moon Flute. When sounded together, it\'s said that they can call the Legendary Pokémon... That is, if you believe in old myths, anyway. I found one of them downstairs and gave it to Lillie.',
+    'Here. Take this Master Ball you. I\'m counting on you to help Lillie. This is the least I can do.',
+    'Even if she is...like that, Lusamine is still our mother. We can\'t just leave her in the beast\'s world.',
+], {
+    image: 'assets/images/npcs/Gladion.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
+});
+const Lillie6 = new NPC('Lillie', [
+    'Nebby changed forms... and it\'s not moving...',
+    '<img src="assets/images/pokemon/790.png">',
+    'I feel like there\'s so much I have to do now... to save Nebby... to save my mother... That\'s why I\'m going to try my hardest! This is my Z-Powered form! Come on! Let\'s show the world what we can really do!'
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
+});
 const RotomDexKukui = new NPC('Kukui\'s Gift', [
     '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on your tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing! Can it even help you with the Island Challenge quest on that <i>Bulletin Board</i> over there?',
     'Well, if you\'re ever feelin\' lost, you can alwayzzz find me at a dock town! I know everything there izzz to know about thezzze islandzzz!',
@@ -7182,7 +7198,7 @@ TownList['Aether Paradise'] = new Town(
     ],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
-        npcs: [AetherParadiseAlolaRoamerNPC, FabaSilvally],
+        npcs: [AetherParadiseAlolaRoamerNPC, FabaSilvally, Lillie6, Gladion1],
     }
 );
 TownList['Malie City'] = new Town(

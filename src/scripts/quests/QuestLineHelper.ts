@@ -2699,6 +2699,64 @@ class QuestLineHelper {
         const battleKahunaNanu = new CustomQuest (1, 0,  'Kahuna Nanu is challenging you to a Grand Trial! Test your strength by defeating him.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Malie City')]());
         ulaulaAlolaQuestLine.addQuest(battleKahunaNanu);
 
+        // 9 - Clear dungeon: Aether Foundation
+        const clearAetherFoundation1 = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull and is using Nebby to open an Ultra Wormhole. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')](), undefined, undefined,
+                {
+                clearedMessage: 'That Lusamine! We will need you to leave us in peace so that we may do our job. Please don\'t get in our way. Leave Cosmog to us.',
+                npcDisplayName: 'Ultra Recon Squad',
+                npcImageName: 'specialNPCs/Ultra Recon Squad (all)',
+            });
+        ulaulaAlolaQuestLine.addQuest(clearAetherFoundation1);
+        
+        // 10 - Clear dungeon boss: Aether Branch Chief Faba
+        const clearAetherFoundation2 = new CustomQuest(1, 0, 'Get past Faba.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')](), undefined, undefined,
+        // TODO: const defeatFabaAether = new DefeatDungeonBossQuest('Aether Foundation', 'Aether Branch Chief Faba', 0).withDescription('defeat faba').withOptionalArgs(
+                {
+                clearedMessage: 'H-h-how can this be?! How could this child... If you\'re looking for Cosmog, I suppose it might be downstairs.',
+                npcDisplayName: 'Faba',
+                npcImageName: 'Aether Branch Chief (faba)',
+            });
+        ulaulaAlolaQuestLine.addQuest(clearAetherFoundation2);
+
+        // 11 - Clear dungeon boss: Team Skull Boss Guzma
+        const clearAetherFoundation3 = new CustomQuest(1, 0, 'Get past ya boy Guzma.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')](), undefined, undefined,
+        // TODO: const defeatGuzmaAether = new DefeatDungeonBossQuest('Aether Foundation', 'Team Skull Boss Guzma', 0).withDescription('Get past ya boy.').withOptionalArgs(
+                {
+                clearedMessage: 'The daughter who stole my Cosmog from me and the son who took my Type: Null! All I ever did was give you two all the love I had, and all you did was betray me! You have no right to ask for my attention now!</br>But it doesn\'t matter now. None of that matters now! Watch... I will open the Ultra Wormhole for you... Come to me, my sweet beast!',
+                npcDisplayName: 'Lusamine',
+                npcImageName: 'Aether President (lusamine)',
+            });
+        ulaulaAlolaQuestLine.addQuest(clearAetherFoundation3);
+
+        // 12 - Clear dungeon boss: Aether President Lusamine
+        const clearAetherFoundation4 = new CustomQuest(1, 0, 'Stop Lusamine!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')](), undefined, undefined,
+        // TODO: const defeatLusamineAether = new DefeatDungeonBossQuest('Aether Foundation', 'Aether President Lusamine', 0).withDescription('No! Nebby!').withOptionalArgs(
+                {
+                clearedMessage: 'All that I want is my precious beast! I don\'t care about any of the rest of you!</br><i>Lusamine left into the Ultra Wormhole.</i>',
+                npcDisplayName: 'Wormhole',
+                npcImageName: 'specialNPCs/Wormhole',
+            });
+        ulaulaAlolaQuestLine.addQuest(clearAetherFoundation4);
+
+        // end - Talk to NPC: Lillie and Gladion
+        const AlolaMasterballReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: ulaulaAlolaQuestLine.name,
+                message: 'Gladion gave you a Master Ball!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToLillie6 = new TalkToNPCQuest(Lillie6, 'Talk to Lillie.');
+        const talktoGladion1 = new TalkToNPCQuest(Gladion1, 'Talk to Gladion.');
+        
+        ulaulaAlolaQuestLine.addQuest(new MultipleQuestsQuest([
+            talkToLillie6,
+            talktoGladion1,
+        ], 'Talk to Lillie and Gladion at Aether Paradise when you\'re ready to go to the next island.', AlolaMasterballReward));
+
         App.game.quests.questLines().push(ulaulaAlolaQuestLine);
     }
 
