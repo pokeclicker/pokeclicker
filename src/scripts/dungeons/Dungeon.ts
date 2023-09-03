@@ -9604,6 +9604,7 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
                 requirement: new MultiRequirement([
                     new ClearDungeonRequirement(5, GameConstants.getDungeonIndex('Kalos Power Plant')),
                     new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+                    new QuestLineStepCompletedRequirement('A Beautiful World', 11), // TODO: remove requirement and change quest step to defeatDungeonBoss
                 ])}),
     ],
     575000, 13);
