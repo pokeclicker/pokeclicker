@@ -123,8 +123,8 @@ class PartyPokemon implements Saveable {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         const evsMultiplier = this.calculateEVAttackBonus();
-        const heldItemMultiplier = this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
-        const shadowMultiplier = this.shadow == GameConstants.ShadowStatus.Shadow ? 0.8 : (this.shadow == GameConstants.ShadowStatus.Purified ? 1.2 : 1);
+        const heldItemMultiplier = this.heldItemAttackBonus();
+        const shadowMultiplier = this.shadowAttackBonus();
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
 
@@ -350,8 +350,21 @@ class PartyPokemon implements Saveable {
         return (this.baseAttack * attackBonusPercent) + proteinBoost;
     });
 
+    heldItemAttackBonus = ko.pureComputed((): number => {
+        return this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
+    });
+
+    shadowAttackBonus = ko.pureComputed((): number => {
+        return this.shadow == GameConstants.ShadowStatus.Shadow ? 0.8 : (this.shadow == GameConstants.ShadowStatus.Purified ? 1.2 : 1);
+    });
+
     breedingEfficiency = ko.pureComputed((): number => {
-        return ((this.getBreedingAttackBonus() * this.calculateEVAttackBonus()) / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
+        let breedingAttackBonus = this.getBreedingAttackBonus();
+        if (Settings.getSetting('breedingEfficiencyAllModifiers').observableValue()) {
+            breedingAttackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
+        }
+
+        return (breedingAttackBonus / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
     });
 
     public isHatchable = ko.pureComputed(() => {
