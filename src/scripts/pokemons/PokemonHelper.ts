@@ -583,6 +583,7 @@ class PokemonHelper extends TmpPokemonHelper {
             encounterTypes[PokemonLocationType.BattleCafe] = combination;
         }
 
+        // Safari Items
         const safariItems = PokemonHelper.getPokemonSafariItem(pokemonName, maxRegion);
         if (Object.keys(safariItems).length) {
             encounterTypes[PokemonLocationType.SafariItem] = safariItems;
