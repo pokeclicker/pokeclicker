@@ -7421,7 +7421,7 @@ TownList['Melemele Meadow'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 3)],
-    [new MoveToDungeon(dungeonList['Seaward Cave'])],
+    [new MoveToTown('Seaward Cave', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow')), false)],
     { npcs: [Lillie2] }
 );
 TownList['Seaward Cave'] = new DungeonTown(
@@ -7429,7 +7429,7 @@ TownList['Seaward Cave'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
-    [TemporaryBattleList['Recon Squad 1']]
+    [new MoveToTown('Melemele Meadow', undefined, false), TemporaryBattleList['Recon Squad 1']]
 );
 TownList['Ten Carat Hill'] = new DungeonTown(
     'Ten Carat Hill',

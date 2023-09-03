@@ -2400,7 +2400,7 @@
             , x: 59, y: 46
             , width: 4, height: 4
             , databind: "click:function(){MapHelper.moveToTown('Ruins of Life Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Life Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Trials Galore!').curQuest() <= 7"
+            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Wormhole')]() == 0"
             , connectedToTown: "Ruins of Life Entrance"
             })
         %>
@@ -2632,7 +2632,7 @@
             , x: 59, y: 46
             , width: 4, height: 4
             , databind: "click:function(){MapHelper.moveToTown('Ruins of Life')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Life') }"
-            , visible:  "App.game.quests.getQuestLine('Trials Galore!').curQuest() > 7"
+            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() >= 1"
             })
         %>
 
