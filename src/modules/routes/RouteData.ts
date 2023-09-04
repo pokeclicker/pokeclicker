@@ -7,6 +7,7 @@ import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
+import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
 import QuestLineCompletedRequirement from '../requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
 import RouteKillRequirement from '../requirements/RouteKillRequirement';
@@ -2033,7 +2034,7 @@ Routes.add(new RegionRoute(
         land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Aether Foundation'))],
+    [new QuestLineStartedRequirement('Emissary of Light')],
     undefined,
     AlolaSubRegions.PoniIsland,
 ));

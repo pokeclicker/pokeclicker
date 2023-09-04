@@ -1502,7 +1502,7 @@ GymList['Exeggutor Island'] = new Gym(
     BadgeEnums.GroundiumZ,
     128000,
     'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
+    [new TemporaryBattleRequirement('Recon Squad 3')],
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ground], 1);
     }, undefined, { displayName: 'Hapu\'s Grand Trial' }
@@ -1629,7 +1629,7 @@ GymList['Acerola\'s Trial'] = new Gym(
     }
 );
 GymList['Vast Poni Canyon Trial'] = new Gym(
-    'Totem Kommo-o',
+    'Trial Site',
     'Vast Poni Canyon',
     [
         new GymPokemon('Jangmo-o', 2458300, 51),
@@ -1647,7 +1647,6 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
         quest: false,
         achievement: false,
     },
-    { imageName: '../pokemon/784.01' }
 );
 GymList['Mina\'s Trial'] = new Gym(
     'Mina',

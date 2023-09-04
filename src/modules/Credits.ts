@@ -865,6 +865,7 @@ export const SpriteCredits: Credit[] = [
             'Rui',
             'Street Performer',
             'Team Snagem',
+            'Trial Site',
             'Willie',
         ],
         // Notes: Made specifically for PokéClicker.

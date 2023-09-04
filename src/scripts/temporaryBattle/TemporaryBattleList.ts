@@ -3944,12 +3944,12 @@ TemporaryBattleList['Exeggutor Tree'] = new TemporaryBattle(
 TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
     'Recon Squad 3',
     [new GymPokemon('Poipole', 6614774, 49)],
-    undefined,
-    [new DevelopmentRequirement()],
+    'poyple no',
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 2)],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
-        returnTown: 'Vast Poni Canyon',
+        returnTown: 'Vast Poni Canyon Entrance',
         imageName: 'specialNPCs/Ultra Recon Squad (all)',
     },
 );
@@ -3965,7 +3965,11 @@ TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
         new GymPokemon('Help us Lunala!', 15619682, 47, new ObtainedPokemonRequirement('Lunala')),
     ],
     undefined,
-    [new DevelopmentRequirement()],
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 5),
+    new OneFromManyRequirement([
+        new ObtainedPokemonRequirement('Solgaleo'),
+        new ObtainedPokemonRequirement('Lunala'),
+    ])],
     undefined,
     {
         imageName: '../pokemon/-793.01',
@@ -3983,11 +3987,16 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
         new GymPokemon('You hateful little Trainer!', 15619682, 47),
     ],
     undefined,
-    [new DevelopmentRequirement()],
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 5),
+    new MultiRequirement([
+        new ObtainedPokemonRequirement('Solgaleo', true),
+        new ObtainedPokemonRequirement('Lunala', true),
+    ])],
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/-793.01'
+        imageName: '../pokemon/-793.01',
+        displayName: 'Lusamine',
     }
 );
 TemporaryBattleList.Necrozma = new TemporaryBattle(

@@ -2732,7 +2732,7 @@ class QuestLineHelper {
         const clearAetherFoundation4 = new CustomQuest(1, 0, 'Stop Lusamine!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')](), undefined, undefined,
         // TODO: const defeatLusamineAether = new DefeatDungeonBossQuest('Aether Foundation', 'Aether President Lusamine', 0).withDescription('No! Nebby!').withOptionalArgs(
                 {
-                clearedMessage: 'All that I want is my precious beast! I don\'t care about any of the rest of you!</br><i>Lusamine left into the Ultra Wormhole.</i>',
+                clearedMessage: 'All that I want is my precious beast! I don\'t care about any of the rest of you! I don\'t care if you are my child or not! If you\'re not beautiful enough to be worthy of my love, then I don\'t NEED you!</br><i>Lusamine left into the Ultra Wormhole.</i>',
                 npcDisplayName: 'Wormhole',
                 npcImageName: 'specialNPCs/Wormhole',
             });
@@ -2747,6 +2747,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
+            App.game.quests.getQuestLine('Emissary of Light').beginQuest(0, undefined, true);
         };
 
         const talkToLillie6 = new TalkToNPCQuest(Lillie6, 'Talk to Lillie.');
@@ -2760,9 +2761,79 @@ class QuestLineHelper {
         App.game.quests.questLines().push(ulaulaAlolaQuestLine);
     }
 
+    // Poni Island guide - Started upon finishing Child of the Stars (Ula'ula quest)
+    public static createPoniAlolaQuestLine() {
+        const poniAlolaQuestLine = new QuestLine('Emissary of Light', 'Seek out the Pokémon of Alola\'s legends on Poni Island.');
+        // 0 - Route Kill: Clear Alola 25, Ancient Poni Path
+        const alolaRoute25 = new CustomQuest(10, 0, 'Explore Poni Island for signs of its kahuna. Clear Ancient Poni Path.', () => App.game.statistics.routeKills[GameConstants.Region.alola]['25'](), undefined, undefined,
+                {
+                clearedMessage: 'Oh! Been a while, friends. The kahuna? Hrmm. Well, I suppose the time might be right now... All right. Let us all proceed to the ruins. You stick with me, you two.',
+                npcDisplayName: 'Hapu',
+                npcImageName: 'Hapu',
+            });
+        poniAlolaQuestLine.addQuest(alolaRoute25);
 
+        // 1 - Talk to NPC: HapuHope
+        const talkeToHapuHope = new TalkToNPCQuest(HapuHope, 'Talk to Hapu at the Ruins of Hope Altar.');
+        poniAlolaQuestLine.addQuest(talkeToHapuHope);
 
+        // 2 - Clear dungeon: Exeggutor Island Hill
+        const exeggutorIslandReward = () => {
+            MapHelper.moveToTown('Seafolk Village');
+        };
 
+        const clearExeggutorIslandHill = new CustomQuest(1, exeggutorIslandReward, 'Find the other flute. Clear Exeggutor Island Hill.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Exeggutor Island Hill')](), undefined, undefined,
+            {
+                clearedMessage: 'it\'s just sitting here lmao</br><img src="assets/images/items/fluteItem/Sun_Flute.png"/>', // Now we have both the Sun Flute and the Moon Flute!
+                npcDisplayName: 'Lillie',
+                npcImageName: 'Lillie (z powered)',
+            });
+        poniAlolaQuestLine.addQuest(clearExeggutorIslandHill);
+
+        // 3 - Gym battle: Hapu
+        const battleHapuReward = () => {
+            MapHelper.moveToTown('Vast Poni Canyon');
+        };
+
+        const battleKahunaHapu = new CustomQuest(1, battleHapuReward, 'Go to Vast Poni Canyon Entrance and prove your skills against Poni\'s new kahuna, Hapu!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Exeggutor Island')]());
+        poniAlolaQuestLine.addQuest(battleKahunaHapu);
+
+        // 4 - Clear dungeon: Vast Poni Canyon, Dragonium Z trial
+        const clearPoniCanyon = new CustomQuest(1, 0, 'Clear the ancient trial site of Vast Poni Canyon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Vast Poni Canyon')]());
+        poniAlolaQuestLine.addQuest(clearPoniCanyon);
+
+        const talkToLillieDay = new TalkToNPCQuest(SunFlute, 'Play the Sun Flute during Day.');
+        const talkToLillieNight = new TalkToNPCQuest(MoonFlute, 'Play the Moon Flute during Night.');
+        
+        // 5 - Talk to NPC: Play a flute. (Flute npc is locked to day or night to give the illusion that the gift npc is affected by this in cases where the step is completed right before dusk or dawn)
+        poniAlolaQuestLine.addQuest(new MultipleQuestsQuest([
+            talkToLillieDay,
+            talkToLillieNight,
+        ], 'Choose a flute and play it with Lillie at the Altar.', 0, 1));
+
+        // 6 - Temp battle: Clear Lusamine1 or Lusamine2
+        const EaterOfLightReward= () => {
+            App.game.quests.getQuestLine('Eater of Light').beginQuest(0);
+            Notifier.notify({
+                title: 'New Quest Line Started!',
+                message: `A dangerous Pokémon from another world threatens the Alola region.\n<i>"Eater of Light" added to the Quest List!</i>`,
+                type: NotificationConstants.NotificationOption.dark, // unique dark color theme for dramatic effect
+                timeout: 5 * GameConstants.MINUTE,
+            });
+        };
+
+        const clearBeastLusamine = new CustomQuest(1, EaterOfLightReward, 'Help Lillie get through to her mother with the help of the legendary Pokémon! Clear Lusamine at the Altar of the Sunne and Moone.', () =>
+        App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 1')]() +
+        App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 2')](), undefined, undefined,
+        {
+            clearedMessage: 'Lillie...</br>...</br>Heh...</br>When did you... start becoming so beautiful?',
+            npcDisplayName: 'Lusamine',
+            npcImageName: 'Aether President (lusamine)',
+        });
+        poniAlolaQuestLine.addQuest(clearBeastLusamine);
+
+        App.game.quests.questLines().push(poniAlolaQuestLine);
+    }
 
     // Old Alola quest. Name is too good to ignore so it's only one step. Makes for a good climax
     public static createSkullAetherAlolaQuestLine() {
@@ -4150,6 +4221,7 @@ class QuestLineHelper {
         this.createMelemeleAlolaQuestLine();
         this.createAkalaAlolaQuestLine();
         this.createUlaulaAlolaQuestLine();
+        this.createPoniAlolaQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createSilvallyTypesQuestLine();

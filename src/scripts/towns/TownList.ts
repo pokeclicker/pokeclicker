@@ -6688,6 +6688,94 @@ const Lillie6 = new NPC('Lillie', [
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
 });
+const SunFlute = new NPC('Play the Sun Flute', [
+    'omg nebby u evolve sun',
+    '<img src="assets/images/pokemon/791.png">',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement:
+    new MultiRequirement ([
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less),
+        new DayCyclePartRequirement([1]),
+    ])
+});
+const MoonFlute = new NPC('Play the Moon Flute', [
+    'omg nebby u evolve moon',
+    '<img src="assets/images/pokemon/792.png">',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement:
+    new MultiRequirement ([
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less),
+        new DayCyclePartRequirement([3]),
+    ])
+});
+const DuskFlute = new NPC('Ask Lillie what to do', [
+    'Let\'s wait until the Sun or Moon have risen.',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement:
+    new MultiRequirement ([
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less),
+        new OneFromManyRequirement([
+            new DayCyclePartRequirement([0]),
+            new DayCyclePartRequirement([2]),
+        ])])
+});
+// Lillie gifts
+const SolgaleoGift = new GiftNPC('Capture Solgaleo', [
+    'Please! Take Solgaleo, and let\'s go after mother!',
+], () => {
+    App.game.party.gainPokemonByName('Solgaleo');
+}, 'assets/images/pokemon/791.png', {
+    saveKey: 'solgaleogift',
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([
+        new QuestLineStepCompletedRequirement('Emissary of Light', 6),
+        new ObtainedPokemonRequirement('Solgaleo', true),
+        new ObtainedPokemonRequirement('Lunala', true),
+        new OneFromManyRequirement([
+            new DayCyclePartRequirement([1]),
+            new DayCyclePartRequirement([2]),
+        ])
+    ])
+});
+const LunalaGift = new GiftNPC('Capture Lunala', [
+    'Please! Take Lunala, and let\'s go after mother!',
+], () => {
+    App.game.party.gainPokemonByName('Lunala');
+}, 'assets/images/pokemon/792.png', {
+    saveKey: 'lunalagift',
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([
+        new QuestLineStepCompletedRequirement('Emissary of Light', 6),
+        new ObtainedPokemonRequirement('Solgaleo', true),
+        new ObtainedPokemonRequirement('Lunala', true),
+        new OneFromManyRequirement([
+            new DayCyclePartRequirement([0]),
+            new DayCyclePartRequirement([3]),
+        ])
+    ])
+});
+
+const HapuHope = new NPC('Hapu', [
+    'My grandfather died suddenly some years back, and we were left without a kahuna on Poni. So I set out on my own sort of island challenge, traveling Alola and trying to grow stronger. Lillie. The kahuna you wished to meet is now here.',
+    'There is a ceremony held for the Legendary Pokémon at the Altar of the Sunne and Moone that uses two particular flutes. Ho! You already have the one. The other is said to be held on Exeggutor Island.',
+], {
+    image: 'assets/images/npcs/Hapu.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 0), new  QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)]),
+});
+const HapuCanyon = new NPC('Hapu', [
+    'People cannot survive all on their own. They have got to help one another out. Same for Pokémon, too. That is what my grandfather used to say.',
+    '$playername%... you have done well in guiding Lillie. The path to the shrine is through the canyon.',
+    'Look at the two of you. I think this might just work out. No, I am quite sure of it!',
+], {
+    image: 'assets/images/npcs/Hapu.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 3), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
+});
 const RotomDexKukui = new NPC('Kukui\'s Gift', [
     '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on your tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing! Can it even help you with the Island Challenge quest on that <i>Bulletin Board</i> over there?',
     'Well, if you\'re ever feelin\' lost, you can alwayzzz find me at a dock town! I know everything there izzz to know about thezzze islandzzz!',
@@ -7240,22 +7328,47 @@ TownList['Seafolk Village'] = new Town(
         npcs: [SeafolkCaptain, SilvallyMina],
     }
 );
+TownList['Ruins of Hope Altar'] = new Town(
+    'Ruins of Hope Altar',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.PoniIsland,
+    undefined,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 26)],
+        npcs: [HapuHope],
+    }
+);
+TownList['Vast Poni Canyon Entrance'] = new Town(
+    'Vast Poni Canyon Entrance',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.PoniIsland,
+    [
+        GymList['Exeggutor Island'],
+        TemporaryBattleList['Recon Squad 3'],
+        new MoveToTown('Vast Poni Canyon', new GymBadgeRequirement(BadgeEnums.GroundiumZ)),
+    ],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
+        npcs: [HapuCanyon],
+    }
+);
 TownList['Exeggutor Island'] = new Town(
     'Exeggutor Island',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), new MoveToDungeon(dungeonList['Exeggutor Island Hill'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
+        requirements: [new QuestLineCompletedRequirement('Emissary of Light')],
     }
 );
 TownList['Altar of the Sunne and Moone'] = new Town(
     'Altar of the Sunne and Moone',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
+    [TemporaryBattleList['Lusamine 1'], TemporaryBattleList['Lusamine 2'], TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
+        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
@@ -7552,17 +7665,17 @@ TownList['Exeggutor Island Hill'] = new DungeonTown(
     'Exeggutor Island Hill',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
-    [ExeggutorIslandHillShop],
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 1)],
+    [ExeggutorIslandHillShop, TemporaryBattleList['Exeggutor Tree']],
     {npcs: [HapuSilvally1]}
 );
 TownList['Vast Poni Canyon'] = new DungeonTown(
     'Vast Poni Canyon',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 2)],
     [TemporaryBattleList['Plumeria Poison Memory']],
-    {npcs: [PlumeriaSilvally]}
+    {npcs: [HapuCanyon, PlumeriaSilvally]}
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
     'Mina\'s Houseboat',
