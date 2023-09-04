@@ -2186,18 +2186,6 @@ export enum DayOfWeek {
     'Saturday',
 }
 
-export enum MoonPhase {
-    'New Moon' = 0,
-    'Waxing Crescent',
-    'First Quarter',
-    'Waxing Gibbous',
-    'Full Moon',
-    'Waning Gibbous',
-    'Last Quarter',
-    'Waning Crescent',
-}
-
-
 export enum Pokerus {
     'Uninfected' = 0,
     'Infected',
@@ -2265,13 +2253,13 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
 
 export const MoonCycleValues: Record<MoonCyclePhase, number> = {
     [MoonCyclePhase.NewMoon]: 0,
-    [MoonCyclePhase.WaxingCrescent]: 1,
-    [MoonCyclePhase.FirstQuarter]: 2,
-    [MoonCyclePhase.WaxingGibbous]: 3,
+    [MoonCyclePhase.WaxingCrescentMoon]: 1,
+    [MoonCyclePhase.FirstQuarterMoon]: 2,
+    [MoonCyclePhase.WaxingGibbousMoon]: 3,
     [MoonCyclePhase.FullMoon]: 4,
-    [MoonCyclePhase.WaningGibbous]: 5,
-    [MoonCyclePhase.LastQuarter]: 6,
-    [MoonCyclePhase.WaningCrescent]: 7,
+    [MoonCyclePhase.WaningGibbousMoon]: 5,
+    [MoonCyclePhase.LastQuarterMoon]: 6,
+    [MoonCyclePhase.WaningCrescentMoon]: 7,
 };
 
 export enum ShadowStatus {

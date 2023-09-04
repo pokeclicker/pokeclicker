@@ -34,19 +34,19 @@ export default class MoonCycle {
     public static currentMoonPhases: Record<MoonCyclePhase, CurrentMoonPhase> = {
         [MoonCyclePhase.NewMoon]:
             new CurrentMoonPhase(MoonCyclePhase.NewMoon, '#3b365e', 'New Moon'),
-        [MoonCyclePhase.WaxingCrescent]:
-            new CurrentMoonPhase(MoonCyclePhase.WaxingCrescent, '#3b365e', 'Waxing Crescent Moon'),
-        [MoonCyclePhase.FirstQuarter]:
-            new CurrentMoonPhase(MoonCyclePhase.FirstQuarter, '#3b365e', 'First Quarter Moon'),
-        [MoonCyclePhase.WaxingGibbous]:
-            new CurrentMoonPhase(MoonCyclePhase.WaxingGibbous, '#3b365e', 'Waxing Gibbous Moon'),
+        [MoonCyclePhase.WaxingCrescentMoon]:
+            new CurrentMoonPhase(MoonCyclePhase.WaxingCrescentMoon, '#3b365e', 'Waxing Crescent Moon'),
+        [MoonCyclePhase.FirstQuarterMoon]:
+            new CurrentMoonPhase(MoonCyclePhase.FirstQuarterMoon, '#3b365e', 'First Quarter Moon'),
+        [MoonCyclePhase.WaxingGibbousMoon]:
+            new CurrentMoonPhase(MoonCyclePhase.WaxingGibbousMoon, '#3b365e', 'Waxing Gibbous Moon'),
         [MoonCyclePhase.FullMoon]:
             new CurrentMoonPhase(MoonCyclePhase.FullMoon, '#3b365e', 'Full Moon'),
-        [MoonCyclePhase.WaningGibbous]:
-            new CurrentMoonPhase(MoonCyclePhase.WaningGibbous, '#3b365e', 'Waning Gibbous Moon'),
-        [MoonCyclePhase.LastQuarter]:
-            new CurrentMoonPhase(MoonCyclePhase.LastQuarter, '#3b365e', 'Last Quarter Moon'),
-        [MoonCyclePhase.WaningCrescent]:
-            new CurrentMoonPhase(MoonCyclePhase.WaningCrescent, '#3b365e', 'Waning Crescent Moon'),
+        [MoonCyclePhase.WaningGibbousMoon]:
+            new CurrentMoonPhase(MoonCyclePhase.WaningGibbousMoon, '#3b365e', 'Waning Gibbous Moon'),
+        [MoonCyclePhase.LastQuarterMoon]:
+            new CurrentMoonPhase(MoonCyclePhase.LastQuarterMoon, '#3b365e', 'Last Quarter Moon'),
+        [MoonCyclePhase.WaningCrescentMoon]:
+            new CurrentMoonPhase(MoonCyclePhase.WaningCrescentMoon, '#3b365e', 'Waning Crescent Moon'),
     };
 }

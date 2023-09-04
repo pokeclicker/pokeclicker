@@ -6,8 +6,6 @@ import {
     dayRestrict,
     nightRestrict,
     moonCyclePhaseRestrict,
-    fullmoonRestrict,
-    newmoonRestrict,
     dungeonRestrict,
     anyDungeonRestrict,
     anyGymRestrict,
@@ -34,20 +32,10 @@ export const DayTimedStoneEvolution = dayRestrict(StoneEvolution);
 // NightTimedStoneEvolution(basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType)
 export const NightTimedStoneEvolution = nightRestrict(StoneEvolution);
 
-// DayCyclePartRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
+// MoonCyclePhaseRestrictedLevelEvolution(phase: MoonCyclePhase.PhaseName, basePokemon: string, evolvedPokemon: string, level: number)
 export const MoonCyclePhaseRestrictedLevelEvolution = moonCyclePhaseRestrict(LevelEvolution);
-// DayCyclePartRestrictedStoneEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType
+// MoonCyclePhaseRestrictedStoneEvolution(phase: MoonCyclePhase.PhaseName, basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType
 export const MoonCyclePhaseRestrictedStoneEvolution = moonCyclePhaseRestrict(StoneEvolution);
-
-// DayTimedLevelEvolution(basePokemon: string, evolvedPokemon: string, level: number)
-export const FullMoonLevelEvolution = fullmoonRestrict(LevelEvolution);
-// NightTimedLevelEvolution(basePokemon: string, evolvedPokemon: string, level: number)
-export const NewMoonLevelEvolution = newmoonRestrict(LevelEvolution);
-
-// DayTimedStoneEvolution(basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType)
-export const FullMoonStoneEvolution = fullmoonRestrict(StoneEvolution);
-// NightTimedStoneEvolution(basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType)
-export const NewMoonStoneEvolution = newmoonRestrict(StoneEvolution);
 
 // DungeonRestrictedLevelEvolution(dungeon: string, basePokemon: string, evolvedPokemon: string, level: number)
 export const DungeonRestrictedLevelEvolution = dungeonRestrict(LevelEvolution);
@@ -80,11 +68,6 @@ export const RegionDayTimedLevelEvolution = regionRestrict(DayTimedLevelEvolutio
 // RegionLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
 export const RegionNightTimedLevelEvolution = regionRestrict(NightTimedLevelEvolution);
 
-// RegionLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
-export const RegionFullMoonLevelEvolution = regionRestrict(FullMoonLevelEvolution);
-
-// RegionLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
-export const RegionNewMoonLevelEvolution = regionRestrict(NewMoonLevelEvolution);
 
 // QuestlineLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
 export const QuestlineLevelEvolution = questlineRestrict(LevelEvolution);

@@ -1,4 +1,4 @@
-import { AchievementOption } from '../GameConstants';
+import { AchievementOption, camelCaseToString } from '../GameConstants';
 import Requirement from './Requirement';
 import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
 import MoonCycle from '../moonCycle/MoonCycle';
@@ -13,6 +13,6 @@ export default class MoonCyclePhaseRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Your moon in your sky must be the ${this.moonCyclePhases.map((moonCyclePhase) => MoonCyclePhase[moonCyclePhase]).join(' or ')}`;
+        return `The moon in your sky must be the ${camelCaseToString(this.moonCyclePhases.map((moonCyclePhase) => MoonCyclePhase[moonCyclePhase]).join(' or '))}`;
     }
 }

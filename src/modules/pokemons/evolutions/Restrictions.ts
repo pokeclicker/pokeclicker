@@ -115,15 +115,6 @@ export const moonCyclePhaseRestrict = <T extends EvoFn>(evo: T) => (
     new MoonCyclePhaseRequirement(moonCyclePhases),
 );
 
-export const fullmoonRestrict = <T extends EvoFn>(evo: T) => (
-    ...rest: Parameters<T>
-) => moonCyclePhaseRestrict(evo)([MoonCyclePhase.FullMoon], ...rest);
-
-export const newmoonRestrict = <T extends EvoFn>(evo: T) => (
-    ...rest: Parameters<T>
-) => moonCyclePhaseRestrict(evo)([MoonCyclePhase.NewMoon], ...rest);
-
-
 export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
     megaStone: MegaStoneType,
     ...rest: Parameters<T>
