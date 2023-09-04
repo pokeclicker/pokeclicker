@@ -10853,7 +10853,7 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
             [
                 new GymPokemon('Alolan Vulpix', 13483476, 28),
                 new GymPokemon('Vulpix', 13483476, 28),
-            ], { weight: 1, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 3) }, 'Landon and Yuriko'),
+            ], { weight: 1, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2) }, 'Landon and Yuriko'),
     ],
     {
         common: [
@@ -10878,13 +10878,13 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
                 new GymPokemon('Alolan Vulpix', 33708690, 28),
                 new GymPokemon('Vulpix', 33708690, 28),
             ],
-            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less) }, 'Landon and Yuriko'),
+            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2, GameConstants.AchievementOption.less) }, 'Landon and Yuriko'),
         new DungeonTrainer('Team Skull Boss',
             [
                 new GymPokemon('Golisopod', 33708690, 34),
                 new GymPokemon('Masquerain', 33708690, 34),
             ],
-            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 3) }, 'Guzma', '(guzma)'),
+            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2) }, 'Guzma', '(guzma)'),
     ],
     975000, 21);
 
@@ -11172,7 +11172,12 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
             [
                 new GymPokemon('Poipole', 78098410, 47),
             ],
-            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 10, GameConstants.AchievementOption.less) }),
+            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9, GameConstants.AchievementOption.less) }),
+        new DungeonTrainer('Soliera',
+            [
+                new GymPokemon('Poipole', 78098410, 47),
+            ],
+            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9, GameConstants.AchievementOption.less) }),
         new DungeonTrainer('Aether Branch Chief',
             [
                 new GymPokemon('Claydol', 26032803, 44),

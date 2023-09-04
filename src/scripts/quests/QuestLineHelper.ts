@@ -2778,11 +2778,7 @@ class QuestLineHelper {
         poniAlolaQuestLine.addQuest(talkeToHapuHope);
 
         // 2 - Clear dungeon: Exeggutor Island Hill
-        const exeggutorIslandReward = () => {
-            MapHelper.moveToTown('Seafolk Village');
-        };
-
-        const clearExeggutorIslandHill = new CustomQuest(1, exeggutorIslandReward, 'Find the other flute. Clear Exeggutor Island Hill.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Exeggutor Island Hill')](), undefined, undefined,
+        const clearExeggutorIslandHill = new CustomQuest(1, 0, 'Find the other flute. Clear Exeggutor Island Hill.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Exeggutor Island Hill')](), undefined, undefined,
             {
                 clearedMessage: 'it\'s just sitting here lmao</br><img src="assets/images/items/fluteItem/Sun_Flute.png"/>', // Now we have both the Sun Flute and the Moon Flute!
                 npcDisplayName: 'Lillie',
@@ -2843,7 +2839,7 @@ class QuestLineHelper {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
                 title: skullAetherAlolaQuestLine.name,
-                message: 'You got the Sun and Moon flutes!',
+                message: 'You got the Sun and Moon flutes! (but not really)',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });

@@ -4670,50 +4670,175 @@
             })
         %>
 
+        <!--Ruins of Hope Altar-->
+        <%- include('templates/mapOverlay',
+            { name: "Ruins of Hope Altar"
+            , x: 68, y: 39
+            , width: 5, height: 5
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope Altar')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope Altar') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , connectedToTown: "Ruins of Hope Altar"
+            })
+        %>
+        <!--Ruins of Hope Altar extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Ruins of Hope Altar"
+            , x: 67, y: 40
+            , width: 1, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope Altar')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope Altar') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <!--Ruins of Hope Altar extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Ruins of Hope Altar"
+            , x: 70, y: 38
+            , width: 2, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope Altar')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope Altar') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <!--Ruins of Hope Altar extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Ruins of Hope Altar"
+            , x: 73, y: 40
+            , width: 1, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope Altar')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope Altar') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <!--Ruins of Hope Altar extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Ruins of Hope Altar"
+            , x: 68, y: 44
+            , width: 4, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope Altar')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope Altar') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+
         <!--Exeggutor Island-->
-        <%- include('templates/mapTown',
+        <%- include('templates/mapOverlay',
             { name: "Exeggutor Island"
             , x: 13, y: 44
             , width: 4, height: 6
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , connectedToTown: "Exeggutor Island"
             })
         %>
-        <!--Exeggutor Island-->
-        <%- include('templates/mapTown',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapOverlay',
             { name: "Exeggutor Island"
             , x: 12, y: 45
             , width: 1, height: 4
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <!--Exeggutor Island-->
-        <%- include('templates/mapTown',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapOverlay',
             { name: "Exeggutor Island"
             , x: 17, y: 43
             , width: 1, height: 6
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <!--Exeggutor Island-->
-        <%- include('templates/mapTown',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapOverlay',
             { name: "Exeggutor Island"
             , x: 18, y: 44
             , width: 1, height: 2
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <!--Exeggutor Island-->
-        <%- include('templates/mapTown',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapOverlay',
             { name: "Exeggutor Island"
             , x: 19, y: 44
             , width: 4, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <!--Exeggutor Island-->
-        <%- include('templates/mapTown',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapOverlay',
             { name: "Exeggutor Island"
             , x: 13, y: 43
             , width: 3, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+
+        <!--Vast Poni Canyon Entrance-->
+        <%- include('templates/mapOverlay',
+            { name: "Vast Poni Canyon"
+            , x: 47, y: 26
+            , width: 8, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3"
+            , connectedToTown: "Vast Poni Canyon"
+            })
+        %>
+        <!--Vast Poni Canyon Entrance extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Vast Poni Canyon"
+            , x: 48, y: 29
+            , width: 7, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3"
+            , isExtension: true
+            })
+        %>
+        <!--Vast Poni Canyon Entrance extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Vast Poni Canyon"
+            , x: 49, y: 30
+            , width: 6, height: 2
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3"
+            , isExtension: true
+            })
+        %>
+        <!--Vast Poni Canyon Entrance extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Vast Poni Canyon"
+            , x: 50, y: 32
+            , width: 4, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3"
+            , isExtension: true
+            })
+        %>
+        <!--Vast Poni Canyon Entrance extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Vast Poni Canyon"
+            , x: 46, y: 25
+            , width: 7, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3"
+            , isExtension: true
+            })
+        %>
+        <!--Vast Poni Canyon Entrance extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Vast Poni Canyon"
+            , x: 46, y: 24
+            , width: 6, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3"
             , isExtension: true
             })
         %>
@@ -4835,65 +4960,157 @@
         <!-- -------- -->
 
         <!--Exeggutor Island Hill-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Exeggutor Island Hill"
             , x: 18, y: 39
             , width: 6, height: 5
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , connectedToTown: "Exeggutor Island Hill"
             })
         %>
-        <!--Exeggutor Island Hill-->
-        <%- include('templates/mapDungeon',
-            { name: "Exeggutor Island Hill"
+        <%- include('templates/mapOverlay',
+        { name: "Exeggutor Island Hill"
             , x: 19, y: 38
             , width: 4, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , connectedToTown: "Exeggutor Island Hill"
+            , isExtension: true
+            })
+        %>
+
+        <!--Exeggutor Island Hill during Quest-->
+        <%- include('templates/mapOverlay',
+            { name: "Exeggutor Island"
+            , x: 18, y: 39
+            , width: 6, height: 5
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Exeggutor Island"
+            , x: 19, y: 38
+            , width: 4, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Exeggutor Island"
+            , x: 13, y: 44
+            , width: 4, height: 6
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , connectedToTown: "Exeggutor Island Hill"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Exeggutor Island"
+            , x: 12, y: 45
+            , width: 1, height: 4
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Exeggutor Island"
+            , x: 17, y: 43
+            , width: 1, height: 6
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Exeggutor Island"
+            , x: 18, y: 44
+            , width: 1, height: 2
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Exeggutor Island"
+            , x: 19, y: 44
+            , width: 4, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , isExtension: true
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Exeggutor Island"
+            , x: 13, y: 43
+            , width: 3, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
 
         <!--Vast Poni Canyon-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Vast Poni Canyon"
             , x: 47, y: 26
             , width: 8, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3"
+            , connectedToTown: "Vast Poni Canyon"
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Vast Poni Canyon"
             , x: 48, y: 29
             , width: 7, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3"
             , isExtension: true
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Vast Poni Canyon"
             , x: 49, y: 30
             , width: 6, height: 2
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3"
             , isExtension: true
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Vast Poni Canyon"
             , x: 50, y: 32
             , width: 4, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3"
             , isExtension: true
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Vast Poni Canyon"
             , x: 46, y: 25
             , width: 7, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3"
             , isExtension: true
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Vast Poni Canyon"
             , x: 46, y: 24
             , width: 6, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3"
             , isExtension: true
             })
         %>
@@ -4955,41 +5172,51 @@
         %>
 
         <!--Ruins of Hope-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Ruins of Hope"
             , x: 68, y: 39
             , width: 5, height: 5
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             })
         %>
         <!--Ruins of Hope extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Ruins of Hope"
             , x: 67, y: 40
             , width: 1, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
         <!--Ruins of Hope extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Ruins of Hope"
             , x: 70, y: 38
             , width: 2, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
         <!--Ruins of Hope extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Ruins of Hope"
             , x: 73, y: 40
             , width: 1, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
         <!--Ruins of Hope extension-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Ruins of Hope"
             , x: 68, y: 44
             , width: 4, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Hope')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Hope') }"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>

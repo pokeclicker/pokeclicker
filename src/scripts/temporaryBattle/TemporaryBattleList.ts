@@ -3884,16 +3884,13 @@ TemporaryBattleList['Skull 4'] = new TemporaryBattle(
 TemporaryBattleList['Skull 5'] = new TemporaryBattle(
     'Skull 5',
     [
-        new GymPokemon('Drowzee', 2007275, 34),
-        new GymPokemon('Haunter', 2131436, 34),
-        new GymPokemon('Pawniard', 2007275, 36),
-        new GymPokemon('Scraggy', 2131436, 36),
+        new GymPokemon('Drowzee', 2007275, 33),
     ],
     undefined,
     [new QuestLineStepCompletedRequirement('Child of the Stars', 3)],
     undefined,
     {
-        displayName: 'Team Skull Grunts',
+        displayName: 'Team Skull Grunt',
         returnTown: 'Aether House',
         imageName: 'Team Skull Grunt (male)',
     }
@@ -4006,7 +4003,7 @@ TemporaryBattleList.Necrozma = new TemporaryBattle(
         new GymPokemon('Necrozma (Dawn Wings)', 267954010, 50),
     ],
     'Necrozma retreated into the Ultra Wormhole',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
+    [new QuestLineCompletedRequirement('Emissary of Light')],
     undefined,
     {imageName: 'specialNPCs/Wormhole'}
 );
