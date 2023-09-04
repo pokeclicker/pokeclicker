@@ -13,6 +13,6 @@ export default class MoonCyclePhaseRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `The moon in your sky must be the ${camelCaseToString(this.moonCyclePhases.map((moonCyclePhase) => MoonCyclePhase[moonCyclePhase]).join(' or '))}`;
+        return `The moon phase must be ${camelCaseToString(this.moonCyclePhases.map((moonCyclePhase) => MoonCyclePhase[moonCyclePhase]).join(' or '))}`;
     }
 }

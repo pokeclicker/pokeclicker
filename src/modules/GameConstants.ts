@@ -2253,13 +2253,13 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
 
 export const MoonCycleValues: Record<MoonCyclePhase, number> = {
     [MoonCyclePhase.NewMoon]: 0,
-    [MoonCyclePhase.WaxingCrescentMoon]: 1,
-    [MoonCyclePhase.FirstQuarterMoon]: 2,
-    [MoonCyclePhase.WaxingGibbousMoon]: 3,
+    [MoonCyclePhase.WaxingCrescent]: 1,
+    [MoonCyclePhase.FirstQuarter]: 2,
+    [MoonCyclePhase.WaxingGibbous]: 3,
     [MoonCyclePhase.FullMoon]: 4,
-    [MoonCyclePhase.WaningGibbousMoon]: 5,
-    [MoonCyclePhase.LastQuarterMoon]: 6,
-    [MoonCyclePhase.WaningCrescentMoon]: 7,
+    [MoonCyclePhase.WaningGibbous]: 5,
+    [MoonCyclePhase.LastQuarter]: 6,
+    [MoonCyclePhase.WaningCrescent]: 7,
 };
 
 export enum ShadowStatus {

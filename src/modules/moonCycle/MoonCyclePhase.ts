@@ -1,12 +1,12 @@
 enum MoonCyclePhase {
     NewMoon = 0,
-    WaxingCrescentMoon,
-    FirstQuarterMoon,
-    WaxingGibbousMoon,
+    WaxingCrescent,
+    FirstQuarter,
+    WaxingGibbous,
     FullMoon,
-    WaningGibbousMoon,
-    LastQuarterMoon,
-    WaningCrescentMoon,
+    WaningGibbous,
+    LastQuarter,
+    WaningCrescent,
 }
 
 export default MoonCyclePhase;

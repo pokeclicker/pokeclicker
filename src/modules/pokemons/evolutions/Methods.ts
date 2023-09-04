@@ -33,9 +33,9 @@ export const DayTimedStoneEvolution = dayRestrict(StoneEvolution);
 export const NightTimedStoneEvolution = nightRestrict(StoneEvolution);
 
 // MoonCyclePhaseRestrictedLevelEvolution(phase: MoonCyclePhase.PhaseName, basePokemon: string, evolvedPokemon: string, level: number)
-export const MoonCyclePhaseRestrictedLevelEvolution = moonCyclePhaseRestrict(LevelEvolution);
+export const MoonCyclePhaseLevelEvolution = moonCyclePhaseRestrict(LevelEvolution);
 // MoonCyclePhaseRestrictedStoneEvolution(phase: MoonCyclePhase.PhaseName, basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType
-export const MoonCyclePhaseRestrictedStoneEvolution = moonCyclePhaseRestrict(StoneEvolution);
+export const MoonCyclePhaseStoneEvolution = moonCyclePhaseRestrict(StoneEvolution);
 
 // DungeonRestrictedLevelEvolution(dungeon: string, basePokemon: string, evolvedPokemon: string, level: number)
 export const DungeonRestrictedLevelEvolution = dungeonRestrict(LevelEvolution);
