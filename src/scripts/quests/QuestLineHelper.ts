@@ -2791,7 +2791,7 @@ class QuestLineHelper {
             MapHelper.moveToTown('Vast Poni Canyon');
         };
 
-        const battleKahunaHapu = new CustomQuest(1, battleHapuReward, 'Go to Vast Poni Canyon Entrance and prove your skills against Poni\'s new kahuna, Hapu!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Exeggutor Island')]());
+        const battleKahunaHapu = new CustomQuest(1, battleHapuReward, 'Go to Vast Poni Canyon\'s Entrance and prove your skills against Poni\'s new kahuna, Hapu!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Exeggutor Island')]());
         poniAlolaQuestLine.addQuest(battleKahunaHapu);
 
         // 4 - Clear dungeon: Vast Poni Canyon, Dragonium Z trial

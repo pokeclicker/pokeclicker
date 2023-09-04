@@ -7179,7 +7179,7 @@ TownList['Mahalo Trail'] = new Town(
     'Mahalo Trail',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [TemporaryBattleList['Melemele Spearow']],
+    [TemporaryBattleList['Melemele Spearow'], new MoveToTown('Ruins of Confict', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), false)],
     {
         requirements: [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
         npcs: [Lillie1],
@@ -7267,7 +7267,7 @@ TownList['Ruins of Life Entrance'] = new Town(
     'Ruins of Life Entrance',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [GymList['Konikoni City']],
+    [new MoveToTown('Ruins of Life', undefined, false), GymList['Konikoni City']],
     { 
         requirements: [new TemporaryBattleRequirement('Plumeria 1')],
         npcs: [Lillie4],
@@ -7332,7 +7332,7 @@ TownList['Ruins of Hope Altar'] = new Town(
     'Ruins of Hope Altar',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    undefined,
+    [new MoveToTown('Ruins of Hope', undefined, false)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 26)],
         npcs: [HapuHope],
@@ -7674,7 +7674,7 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 2)],
-    [TemporaryBattleList['Plumeria Poison Memory']],
+    [new MoveToTown('Vast Poni Canyon Entrance', undefined, false), TemporaryBattleList['Plumeria Poison Memory']],
     {npcs: [HapuCanyon, PlumeriaSilvally]}
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
@@ -7712,7 +7712,8 @@ TownList['Ruins of Life'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 21),
         new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
-    ]
+    ],
+    [new MoveToTown('Ruins of Life Entrance', undefined, false)]
 );
 TownList['Ruins of Abundance'] = new DungeonTown(
     'Ruins of Abundance',
@@ -7730,7 +7731,8 @@ TownList['Ruins of Hope'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 26),
         new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
-    ]
+    ],
+    [new MoveToTown('Ruins of Hope Altar', undefined, false)]
 );
 TownList['Poni Meadow'] = new DungeonTown(
     'Poni Meadow',
