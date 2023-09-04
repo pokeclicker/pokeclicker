@@ -528,8 +528,9 @@ class AchievementHandler {
         });
 
         // Unown pokédex for Johto
-        const unownDexFilter = (p: PartyPokemon) => p.name.startsWith('Unown');
-        const unownAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Unown')), 0);
+        const unownID = pokemonMap['Unown (A)'].id;
+        const unownDexFilter = (p: PartyPokemon) => Math.floor(p.id) === unownID;
+        const unownAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === unownID), 0);
         AchievementHandler.addAchievement('Alphabet Soup for Ruin Maniac', 'Catch all unique Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount), 2, GameConstants.Region.johto);
         AchievementHandler.addAchievement('"I am the Alpha and the Omega"', 'Catch all unique Shiny Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount, true), 3, GameConstants.Region.johto);
 
