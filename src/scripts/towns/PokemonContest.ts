@@ -13,7 +13,7 @@ class PokemonContest implements Feature {
             new ObtainedPokemonRequirement('Machop')
         ),
         /*new PokemonContestPrizes('Secret Mega Stone',
-            'Obtain the Megastone for Altaria by reacking Master ranking in any contest.',
+            'Obtain the Megastone for Altaria by reaching Master ranking in any contest.',
             'Altarianite',
             10,
             new StatisticRequirement(['contestResults', GameConstants.ContestResults.Master], 1, 'Win a Pokemon Contest at Master ranking.'),
