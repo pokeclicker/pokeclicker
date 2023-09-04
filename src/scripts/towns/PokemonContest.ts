@@ -13,41 +13,41 @@ class PokemonContest implements Feature {
             new ObtainedPokemonRequirement('Machop')
         ),
         /*new PokemonContestPrizes('Secret Mega Stone',
-            'Get a secret Mega Stone for reaching Kalos. (real requirement will be added later)',
+            'Obtain the Megastone for Altaria by reacking Master ranking in any contest.',
             'Altarianite',
             10,
-            new MaxRegionRequirement(GameConstants.Region.kalos),
+            new StatisticRequirement(['contestResults', GameConstants.ContestResults.Master], 1, 'Win a Pokemon Contest at Master ranking.'),
             new MaxRegionRequirement(GameConstants.Region.kalos)
         ),*/
         new PokemonContestPrizes('Rock Star Pikachu',
-            'Impress Rock Star Pikachu by being very Cool! (real requirement will be added later)',
+            'Impress Rock Star Pikachu by being very Cool!',
             'Pikachu (Rock Star)',
             1,
-            new ObtainedPokemonRequirement('Machop')
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Cool], 1, 'Win a Pokemon Contest at Master ranking when the style is Cool.')
         ),
         new PokemonContestPrizes('Belle Pikachu',
-            'Impress Belle Pikachu by being very Beautiful! (real requirement will be added later)',
+            'Impress Belle Pikachu by being very Beautiful!',
             'Pikachu (Belle)',
             1,
-            new ObtainedPokemonRequirement('Machop')
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Beautiful], 1, 'Win a Pokemon Contest at Master ranking when the style is Beautiful.')
         ),
         new PokemonContestPrizes('Pop Star Pikachu',
-            'Impress Pop Star Pikachu by being very Cute! (real requirement will be added later)',
+            'Impress Pop Star Pikachu by being very Cute!',
             'Pikachu (Pop Star)',
             1,
-            new ObtainedPokemonRequirement('Machop')
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Cute], 1, 'Win a Pokemon Contest at Master ranking when the style is Cute.')
         ),
         new PokemonContestPrizes('Ph. D. Pikachu',
-            'Impress Ph. D. Pikachu by being very Clever! (real requirement will be added later)',
+            'Impress Ph. D. Pikachu by being very Clever!',
             'Pikachu (Ph. D.)',
             1,
-            new ObtainedPokemonRequirement('Machop')
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Clever], 1, 'Win a Pokemon Contest at Master ranking when the style is Clever.')
         ),
         new PokemonContestPrizes('Libre Pikachu',
-            'Impress Libre Pikachu by being very Tough! (real requirement will be added later)',
+            'Impress Libre Pikachu by being very Tough!',
             'Pikachu (Libre)',
             1,
-            new ObtainedPokemonRequirement('Machop')
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Tough], 1, 'Win a Pokemon Contest at Master ranking when the style is Tough.')
         ),
     ];
 
