@@ -1685,6 +1685,7 @@ class QuestLineHelper {
         const talkToLysandre2 = new TalkToNPCQuest(Lysandre2, 'Lysandre is calling you while you are standing in Coumarine City, pick up the phone.');
         flareKalosQuestLine.addQuest(talkToLysandre2);
 
+        // TODO: new new DefeatDungeonBossQuest('Kalos Power Plant', 'Team Flare Aliana').withCustomReward(clearedMessage) to keep story logic with old players who have unlocked volcanion
         const clearKalosPowerPlant = new CustomQuest(1, 0, 'Well, that was extremely awkward... But ignoring that, Lumiose City still hasn\'t fixed the power outage, go clear the Kalos Power Plant.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Kalos Power Plant')](), undefined, undefined,
             {
                 clearedMessage: 'You\'re quite strong. Oh yes... very strong, indeed. I certainly didn\'t expect you to be so interesting. But it matters not, we already have enough energy to power the device. I do hope we can meet again!',

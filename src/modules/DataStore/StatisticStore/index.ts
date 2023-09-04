@@ -3,7 +3,7 @@ import getRouteKillsProxy from './getRouteKillsProxy';
 import { Saveable } from '../common/Saveable';
 import '../../koExtenders';
 import type { PokemonList } from '../../pokemons/PokemonList';
-import { ContestResults } from '../../GameConstants';
+import { ContestResults, ContestStyle } from '../../GameConstants';
 
 const failedSetValue = () => 0;
 
@@ -128,6 +128,7 @@ export default class Statistics implements Saveable {
     temporaryBattleDefeated: Array<KnockoutObservable<number>>;
     // Contests
     contestResults: Record<ContestResults, KnockoutObservable<number>>;
+    contestStyleMaster: Record<ContestStyle, KnockoutObservable<number>>;
 
     /*
      * objectObservables
@@ -253,6 +254,7 @@ export default class Statistics implements Saveable {
         'mulchesUsed',
         'temporaryBattleDefeated',
         'contestResults',
+        'contestStyleMaster',
     ];
     // These will allow negative values (special events etc)
     objectObservables = [
