@@ -193,7 +193,8 @@ class SafariBattle {
             SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariBattleModal .pageItemFooter').offset(), enemy, SafariBattle.Speed.rock * SafariBattle.getTierMultiplier(), 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
             setTimeout(() => {
                 const hitSplash = $('<ptcl>').html('<img src="assets/images/safari/hit.png">').children().appendTo('#safariBattleModal');
-                hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
+                hitSplash.css({'position': 'absolute', 'opacity': 0.8, 'z-index': 9998});
+                hitSplash.offset(enemy);
                 hitSplash.fadeOut(0.5 * SafariBattle.Speed.rock, () => {
                     hitSplash.remove();
                 });
@@ -203,7 +204,7 @@ class SafariBattle {
                         left: enemy.left - 20,
                     };
                     const ang = $('<ptcl>').html('<img src="assets/images/safari/angry.png">').children().appendTo('#safariBattleModal');
-                    ang.css('position', 'absolute').css('z-index', 9999);
+                    ang.css({'position': 'absolute', 'z-index': 9999});
                     ang.offset(newOffset);
                     ang.addClass('pulse');
                     setTimeout(() => {
