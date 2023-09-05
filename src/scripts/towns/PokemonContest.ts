@@ -12,13 +12,13 @@ class PokemonContest implements Feature {
             10,
             new ObtainedPokemonRequirement('Machop')
         ),
-        new PokemonContestPrizes('Secret Mega Stone',
+        /*new PokemonContestPrizes('Secret Mega Stone',
             'Get a secret Mega Stone for reaching Kalos. (real requirement will be added later)',
             'Altarianite',
             10,
             new MaxRegionRequirement(GameConstants.Region.kalos),
             new MaxRegionRequirement(GameConstants.Region.kalos)
-        ),
+        ),*/
     ];
 
     constructor() {
@@ -57,7 +57,7 @@ class PokemonContest implements Feature {
 }
 
 class PokemonContestController {
-    static contestStyle: KnockoutObservable<ContestStyle> = ko.observable(undefined);
+    static contestStyle: KnockoutObservable<GameConstants.ContestStyle> = ko.observable(undefined);
     static pokemonType: KnockoutObservable<PokemonType> = ko.observable(PokemonType.None);
     //static inProgress = ko.observable<boolean>(false); //TODO: this should be used for some sort of animation or something
     static contestText: KnockoutObservable<string> = ko.observable(undefined);
@@ -69,7 +69,7 @@ class PokemonContestController {
         SeededRand.seedWithDate(date);
 
         // Generate Contest Style and Pokemon Type constraints
-        this.contestStyle(SeededRand.fromArray(GameHelper.enumNumbers(ContestStyle)));
+        this.contestStyle(SeededRand.fromArray(GameHelper.enumNumbers(GameConstants.ContestStyle)));
         const validTypes = GameHelper.enumNumbers(PokemonType).filter((t) => t !== PokemonType.None);
         this.pokemonType(SeededRand.fromArray(validTypes));
     }
@@ -117,6 +117,7 @@ class PokemonContestController {
         let result : GameConstants.ContestResults = undefined;
         if (stylePoints > 700) {
             result = GameConstants.ContestResults.Master;
+            GameHelper.incrementObservable(App.game.statistics.contestStyleMaster[PokemonContestController.contestStyle()], 1);
         } else if (stylePoints > 450) {
             result = GameConstants.ContestResults.Hyper;
         } else if (stylePoints > 200) {
@@ -150,7 +151,7 @@ class ContestEntry {
     }
 
     public getPokemonImage() {
-        return !this.pokemonName() ? '/assets/images/pokeball/Pokeball.svg' : PokemonHelper.getImage(pokemonMap[this.pokemonName()].id);
+        return !this.pokemonName() ? 'assets/images/pokeball/Pokeball.svg' : PokemonHelper.getImage(pokemonMap[this.pokemonName()].id);
     }
 
     getStylePoints = ko.pureComputed((): number => {
@@ -163,23 +164,23 @@ class ContestEntry {
         const baseStats = pokemonMap[this.pokemonName()].base;
 
         switch (PokemonContestController.contestStyle()) {
-            case ContestStyle.Cool:
+            case GameConstants.ContestStyle.Cool:
                 stylePoints = baseStats.attack + baseStats.specialDefense;
                 flavorType = FlavorType.Spicy;
                 break;
-            case ContestStyle.Beautiful:
+            case GameConstants.ContestStyle.Beautiful:
                 stylePoints = baseStats.specialAttack + baseStats.defense;
                 flavorType = FlavorType.Dry;
                 break;
-            case ContestStyle.Cute:
+            case GameConstants.ContestStyle.Cute:
                 stylePoints = baseStats.specialDefense + baseStats.hitpoints;
                 flavorType = FlavorType.Sweet;
                 break;
-            case ContestStyle.Clever:
+            case GameConstants.ContestStyle.Clever:
                 stylePoints = baseStats.specialAttack + baseStats.speed;
                 flavorType = FlavorType.Bitter;
                 break;
-            case ContestStyle.Tough:
+            case GameConstants.ContestStyle.Tough:
                 stylePoints = baseStats.hitpoints + baseStats.defense;
                 flavorType = FlavorType.Sour;
                 break;
@@ -193,14 +194,6 @@ class ContestEntry {
     });
 }
 
-enum ContestStyle {
-    Cool,
-    Beautiful,
-    Cute,
-    Clever,
-    Tough,
-}
-
 class PokemonContestTownContent extends TownContent {
     constructor() {
         super([PokemonContestController.requirements]);
@@ -210,10 +203,6 @@ class PokemonContestTownContent extends TownContent {
     }
     public text(): string {
         return 'Pokémon Contest';
-    }
-    public isVisible(): boolean {
-        //return true;
-        return this.isUnlocked(); //TODO: always visible, when released
     }
     public onclick(): void {
         $('#pokemonContestModal').modal('show');

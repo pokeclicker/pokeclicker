@@ -9,6 +9,7 @@ type TemporaryBattleOptionalArgument = {
     hideTrainer?: boolean,
     environment?: GameConstants.Environment // For game mechanics
     subEnvironment?: GameConstants.SubEnvironment // For visuals
+    resetDaily?: boolean
 };
 
 class TemporaryBattle extends TownContent {
