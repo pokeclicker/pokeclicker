@@ -12,6 +12,7 @@ import type Challenges from './challenges/Challenges';
 import type Multiplier from './multiplier/Multiplier';
 import type {
     Environment,
+    SubEnvironment,
     ExtraAchievementCategories,
     GameState,
     Region,
@@ -83,6 +84,7 @@ type TmpMapHelperType = {
     normalizeRoute: (route: number, region: Region)=>number;
     accessToRoute: (route: number, region: Region)=>boolean;
     getCurrentEnvironment: ()=>Environment;
+    getCurrentSubEnvironment: ()=>SubEnvironment;
     calculateBattleCssClass: ()=>string;
     calculateRouteCssClass: (route: number, region: Region)=>string;
     calculateTownCssClass: (townName: string)=>string;
