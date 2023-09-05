@@ -2600,7 +2600,12 @@ class QuestLineHelper {
         akalaAlolaQuestLine.addQuest(battleReconSquad2);
 
         // 2 - Temp battle: Skull 3
-        const clearSkull3 = new DefeatTemporaryBattleQuest('Skull 3', 'Team Skull is causing trouble on Route 6!');
+        const clearSkull3 = new CustomQuest(1, 0, 'Team Skull is causing trouble on Route 6!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 3')](), undefined, undefined,
+            {
+                clearedMessage: 'Give me your name, Trainer. $playername$, eh? That\'s a fine name. I like the way you handled yourself in battle. Perhaps we\'ll meet again someday.',
+                npcDisplayName: 'Hapu',
+                npcImageName: 'Hapu',
+            });
         akalaAlolaQuestLine.addQuest(clearSkull3);
 
         // 3 - Clear dungeon: Wela Volcano Park, Kiawe's trial

@@ -6690,7 +6690,10 @@ const Lillie6 = new NPC('Lillie', [
 });
 const Lillie7 = new NPC('Lillie', [
     'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
-    'And thank you too, $playernam$! Here, take these flutes and- Wha- what is that creature? Oh my goodness!',
+    'And thank you too, $playername$! You\'ve helped gain so much confidence in myself. I am very grateful for that. I was able to achieve things I had never dreamed I could... Getting to meet you, traveling together with you... I\'m so glad I got to part of your journey!',
+    '',
+    'Here, take these flutes and- Wait- what is this darkness in the sky? Oh my goodness! $playername$! In the sky! Another Ultra Wormhole!',
+    'It seems there are still other matters to resolve, but don\'t worry! Whatever it is, Nebby and I will be by your side, no matter what!',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
