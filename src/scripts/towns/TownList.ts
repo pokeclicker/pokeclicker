@@ -7179,7 +7179,7 @@ TownList['Mahalo Trail'] = new Town(
     'Mahalo Trail',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [TemporaryBattleList['Melemele Spearow'], new MoveToTown('Ruins of Confict', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), false)],
+    [new MoveToTown('Ruins of Conflict', undefined, false), TemporaryBattleList['Melemele Spearow']],
     {
         requirements: [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
         npcs: [Lillie1],
@@ -7208,7 +7208,7 @@ TownList['Melemele Woods'] = new Town(
     'Melemele Woods',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new MoveToTown('Mahalo Trail'), new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
+    [new MoveToTown('Mahalo Trail', new QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)), new MoveToDungeon(dungeonList['Ruins of Conflict'], new QuestLineCompletedRequirement('Emissary of Light')), new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow'])],
     {
         requirements: [new TemporaryBattleRequirement('Skull 2')],
     }
@@ -7267,7 +7267,7 @@ TownList['Ruins of Life Entrance'] = new Town(
     'Ruins of Life Entrance',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new MoveToTown('Ruins of Life', undefined, false), GymList['Konikoni City']],
+    [GymList['Konikoni City'], new MoveToTown('Ruins of Life', undefined, false)],
     { 
         requirements: [new TemporaryBattleRequirement('Plumeria 1')],
         npcs: [Lillie4],
@@ -7345,7 +7345,7 @@ TownList['Vast Poni Canyon Entrance'] = new Town(
     [
         GymList['Exeggutor Island'],
         TemporaryBattleList['Recon Squad 3'],
-        new MoveToTown('Vast Poni Canyon', new GymBadgeRequirement(BadgeEnums.GroundiumZ)),
+        new MoveToTown('Vast Poni Canyon', new GymBadgeRequirement(BadgeEnums.GroundiumZ), false),
     ],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
@@ -7674,7 +7674,7 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 2)],
-    [new MoveToTown('Vast Poni Canyon Entrance', undefined, false), TemporaryBattleList['Plumeria Poison Memory']],
+    [new MoveToTown('Vast Poni Canyon Entrance', new QuestLineCompletedRequirement('Emissary of Light'), false), TemporaryBattleList['Plumeria Poison Memory']],
     {npcs: [HapuCanyon, PlumeriaSilvally]}
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
@@ -7703,7 +7703,8 @@ TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+    [new MoveToTown('Mahalo Trail', undefined, false)]
 );
 TownList['Ruins of Life'] = new DungeonTown(
     'Ruins of Life',
