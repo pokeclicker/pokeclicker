@@ -875,6 +875,7 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
         [Region.alola]: new Set(['Seaward Cave', 'Brooklet Hill', 'Poni Meadow']),
         [Region.galar]: new Set(['Courageous Cavern', 'Roaring-Sea Caves']),
         [Region.hisui]: new Set([]),
+    },
 
     Desert: {
         [Region.kanto]: new Set(),
