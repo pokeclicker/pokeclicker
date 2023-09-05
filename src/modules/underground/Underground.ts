@@ -69,8 +69,15 @@ export class Underground implements Feature {
         return `<u>Owned:</u><br>Mine items: ${nMineItems.toLocaleString('en-US')}<br>Fossils: ${nFossils.toLocaleString('en-US')}<br>Plates: ${nPlates.toLocaleString('en-US')}<br>Shards: ${nShards.toLocaleString('en-US')}`;
     });
 
+    public tradeAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
+
     constructor() {
         this.upgradeList = [];
+        this.tradeAmount.subscribe((value) => {
+            if (value < 1) {
+                this.tradeAmount(1);
+            }
+        });
     }
 
     initialize() {
@@ -482,6 +489,14 @@ export class Underground implements Feature {
     calculateItemEffect(item: EnergyRestoreSize) {
         const effect: number = EnergyRestoreEffect[EnergyRestoreSize[item]];
         return effect * this.getMaxEnergy();
+    }
+
+    public increaseTradeAmount(amount: number) {
+        this.tradeAmount(this.tradeAmount() + amount);
+    }
+
+    public multiplyTradeAmount(amount: number) {
+        this.tradeAmount(this.tradeAmount() * amount);
     }
 
     fromJSON(json: Record<string, any>): void {

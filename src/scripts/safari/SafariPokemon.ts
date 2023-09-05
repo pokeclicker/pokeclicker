@@ -7,6 +7,7 @@ class SafariPokemon implements PokemonInterface {
     baseCatchFactor: number;
     baseEscapeFactor: number;
     gender: number;
+    shadow = GameConstants.ShadowStatus.None;
 
     // Used for overworld sprites
     x = 0;
