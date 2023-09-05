@@ -3675,7 +3675,7 @@ TemporaryBattleList['Recon Squad 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ultra Recon Squad',
-        imageName: 'specialNPCs/Recon Squad (ultra moon)',
+        imageName: 'specialNPCs/Ultra Recon Squad (ultra moon)',
     }
 );
 TemporaryBattleList['Hau 3'] = new TemporaryBattle(
@@ -3778,7 +3778,7 @@ TemporaryBattleList['Recon Squad 2'] = new TemporaryBattle(
     {
         displayName: 'Ultra Recon Squad',
         returnTown: 'Paniola Town',
-        imageName: 'specialNPCs/Recon Squad (ultra sun)',
+        imageName: 'specialNPCs/Ultra Recon Squad (ultra sun)',
         visibleRequirement: new TemporaryBattleRequirement('Gladion 1'),
     }
 );

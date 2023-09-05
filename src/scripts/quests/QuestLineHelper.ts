@@ -2612,7 +2612,7 @@ class QuestLineHelper {
         akalaAlolaQuestLine.addQuest(clearLushJungle);
 
         // 5 - Clear dungeon: Diglett's tunnel
-        const clearDiglettsTunnel = new CustomQuest (1, 0,  'You hear the echoes of bad rap and low self-esteem nearby. Clear Diglett\'s Tunnel.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Diglett\'s Tunnel')](), undefined, undefined,
+        const clearDiglettsTunnel = new CustomQuest (1, 0,  'You hear the echoes of bad rap and low self-esteem in the distance. Clear Diglett\'s Tunnel.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Diglett\'s Tunnel')](), undefined, undefined,
         {
             clearedMessage: 'Just when things were startin\' to heat up, yo, I got surrounded by Diglett and beat up, yo!',
             npcDisplayName: 'Team Skull',
@@ -2696,7 +2696,7 @@ class QuestLineHelper {
         ulaulaAlolaQuestLine.addQuest(battleGladion2);
 
         // 8 - Gym battle: Nanu
-        const battleKahunaNanu = new CustomQuest (1, 0,  'Kahuna Nanu is challenging you to a Grand Trial! Test your strength by defeating him.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Malie City')]());
+        const battleKahunaNanu = new CustomQuest (1, 0,  'Kahuna Nanu is challenging you to a Grand Trial! Test your strength before you go to Aether by defeating him.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Malie City')]());
         ulaulaAlolaQuestLine.addQuest(battleKahunaNanu);
 
         // 9 - Clear dungeon: Aether Foundation
@@ -2732,7 +2732,7 @@ class QuestLineHelper {
         const clearAetherFoundation4 = new CustomQuest(1, 0, 'Stop Lusamine!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')](), undefined, undefined,
         // TODO: const defeatLusamineAether = new DefeatDungeonBossQuest('Aether Foundation', 'Aether President Lusamine', 0).withDescription('No! Nebby!').withOptionalArgs(
                 {
-                clearedMessage: 'All that I want is my precious beast! I don\'t care about any of the rest of you! I don\'t care if you are my child or not! If you\'re not beautiful enough to be worthy of my love, then I don\'t NEED you!</br><i>Lusamine left into the Ultra Wormhole.</i>',
+                clearedMessage: 'All that I want is my precious beast! I don\'t care about any of the rest of you! I don\'t care if you are my child or not! If you\'re not beautiful enough to be worthy of my love, then I don\'t NEED you!</br></br><i>Lusamine left into the Ultra Wormhole.</i>',
                 npcDisplayName: 'Wormhole',
                 npcImageName: 'specialNPCs/Wormhole',
             });
@@ -2808,25 +2808,23 @@ class QuestLineHelper {
         ], 'Choose a flute and play it with Lillie at the Altar.', 0, 1));
 
         // 6 - Temp battle: Clear Lusamine1 or Lusamine2
-        const EaterOfLightReward= () => {
-            App.game.quests.getQuestLine('Eater of Light').beginQuest(0);
-            Notifier.notify({
-                title: 'New Quest Line Started!',
-                message: `A dangerous Pokémon from another world threatens the Alola region.\n<i>"Eater of Light" added to the Quest List!</i>`,
-                type: NotificationConstants.NotificationOption.dark, // unique dark color theme for dramatic effect
-                timeout: 5 * GameConstants.MINUTE,
-            });
-        };
-
-        const clearBeastLusamine = new CustomQuest(1, EaterOfLightReward, 'Help Lillie get through to her mother with the help of the legendary Pokémon! Clear Lusamine at the Altar of the Sunne and Moone.', () =>
+        const clearBeastLusamine = new CustomQuest(1, 0, 'Help Lillie get through to her mother with the help of the legendary Pokémon! Clear Lusamine at the Altar of the Sunne and Moone.', () =>
         App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 1')]() +
         App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 2')](), undefined, undefined,
         {
-            clearedMessage: 'Lillie...</br>...</br>Heh...</br>When did you... start becoming so beautiful?',
+            clearedMessage: 'Lillie...</br>...</br>Heh...</br>When did you... start becoming so beautiful?', // Lillie: Mother!
             npcDisplayName: 'Lusamine',
             npcImageName: 'Aether President (lusamine)',
         });
         poniAlolaQuestLine.addQuest(clearBeastLusamine);
+
+        // 7 - Talk to NPC: Lillie7
+        const EaterOfLightReward= () => {
+            App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined, true);
+        };
+
+        const talkToLillie7 = new TalkToNPCQuest(Lillie7, 'Talk to Lillie.', EaterOfLightReward);
+        poniAlolaQuestLine.addQuest(talkToLillie7);
 
         App.game.quests.questLines().push(poniAlolaQuestLine);
     }

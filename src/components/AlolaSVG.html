@@ -2400,7 +2400,7 @@
             , x: 59, y: 46
             , width: 4, height: 4
             , databind: "click:function(){MapHelper.moveToTown('Ruins of Life Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Life Entrance') }"
-            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Wormhole')]() == 0"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , connectedToTown: "Ruins of Life Entrance"
             })
         %>
@@ -2632,7 +2632,7 @@
             , x: 59, y: 46
             , width: 4, height: 4
             , databind: "click:function(){MapHelper.moveToTown('Ruins of Life')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Life') }"
-            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() >= 1"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             })
         %>
 

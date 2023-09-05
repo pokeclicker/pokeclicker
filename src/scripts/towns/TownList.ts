@@ -6666,8 +6666,8 @@ const Lillie4 = new NPC('Ask Lillie to tag along', [
 });
 const Lillie5 = new NPC('Lillie', [
     'I ended up getting lost, and then I saw this outfit, and it was the last one they had in stock, so I bought it... Hah...',
-    'But I found the library I was planning to visit. There\'s an old book that seems to suggest that Alola\'s Legendary Pokémon came from another world and can be summoned by a pair of flutes at an altar.',
-    'Oh, that girl over there... Is she a friend of yours, $playername$? How polite of her! She\'s offering to accompany me and Nebby to this island\'s ruins.',
+    'But I found the library I was planning to visit. There\'s an old book with myths about Alola\'s Legendary Pokémon. It seems to suggest they brought life to an heir that was to be protected by the island guardians.',
+    'Oh, that girl over there... Is she a friend of yours, $playername$?',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),
@@ -6688,6 +6688,13 @@ const Lillie6 = new NPC('Lillie', [
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
 });
+const Lillie7 = new NPC('Lillie', [
+    'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
+    'And thank you too, $playernam$! Here, take these flutes and- Wha- what is that creature? Oh my goodness!',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
+});
 const SunFlute = new NPC('Play the Sun Flute', [
     'omg nebby u evolve sun',
     '<img src="assets/images/pokemon/791.png">',
@@ -6695,8 +6702,8 @@ const SunFlute = new NPC('Play the Sun Flute', [
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement:
     new MultiRequirement ([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
-        new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 4),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less),
         new DayCyclePartRequirement([1]),
     ])
 });
@@ -6707,8 +6714,8 @@ const MoonFlute = new NPC('Play the Moon Flute', [
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement:
     new MultiRequirement ([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
-        new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 4),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less),
         new DayCyclePartRequirement([3]),
     ])
 });
@@ -6718,8 +6725,8 @@ const DuskFlute = new NPC('Ask Lillie what to do', [
     image: 'assets/images/npcs/Lillie.png',
     requirement:
     new MultiRequirement ([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
-        new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 4),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less),
         new OneFromManyRequirement([
             new DayCyclePartRequirement([0]),
             new DayCyclePartRequirement([2]),
@@ -6734,7 +6741,7 @@ const SolgaleoGift = new GiftNPC('Capture Solgaleo', [
     saveKey: 'solgaleogift',
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 6),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.equal),
         new ObtainedPokemonRequirement('Solgaleo', true),
         new ObtainedPokemonRequirement('Lunala', true),
         new OneFromManyRequirement([
@@ -6751,7 +6758,7 @@ const LunalaGift = new GiftNPC('Capture Lunala', [
     saveKey: 'lunalagift',
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 6),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.equal),
         new ObtainedPokemonRequirement('Solgaleo', true),
         new ObtainedPokemonRequirement('Lunala', true),
         new OneFromManyRequirement([
@@ -7368,7 +7375,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList['Lusamine 1'], TemporaryBattleList['Lusamine 2'], TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift],
+        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, Lillie7],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
