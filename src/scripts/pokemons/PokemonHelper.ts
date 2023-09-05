@@ -536,55 +536,69 @@ class PokemonHelper extends TmpPokemonHelper {
     }
 
     public static getPokemonDreamOrbs(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        const cache = this.getRegionalCache<string[]>(this.getPokemonDreamOrbs.name);
+        if (cache[maxRegion]) {
+            return cache[maxRegion][pokemonName];
+        }
+        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<string>);
         // Dream orbs are unavailable before Unova
         if (maxRegion !== GameConstants.Region.none && maxRegion < GameConstants.Region.unova) {
-            return [];
+            return cacheLine[pokemonName];
         }
-        return App.game.dreamOrbController.orbs.filter(orb => orb.items.some(dreamOrbLoot => {
+        App.game.dreamOrbController.orbs.forEach(orb => orb.items.forEach(dreamOrbLoot => {
             if (dreamOrbLoot.item.type === ItemType.item) {
                 const item = ItemList[dreamOrbLoot.item.id];
-
-                if (item instanceof PokemonItem && item.type === pokemonName) {
-                    return true;
+                if (item instanceof PokemonItem && this.pokemonNames.includes(item.type)) {
+                    cacheLine[item.type].push(orb.color);
                 }
             }
-            return false;
-        })).map(orb => orb.color);
+        }));
+        return cacheLine[pokemonName];
     }
 
     public static getBattleCafeCombination(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): {spin?: GameConstants.AlcremieSpins, sweet?: GameConstants.AlcremieSweet} {
+        const cache = this.getRegionalCache<object>(this.getBattleCafeCombination.name);
+        if (cache[maxRegion]) {
+            return cache[maxRegion][pokemonName];
+        }
+        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Object);
         if (maxRegion !== GameConstants.Region.none && maxRegion < GameConstants.Region.galar) {
-            return null;
+            return cacheLine[pokemonName];
         }
-        if (pokemonName === 'Milcery (Cheesy)') {
-            return {spin: GameConstants.AlcremieSpins.Any3600};
-        }
-        let sweet, spin;
+        cacheLine['Milcery (Cheesy)'] = {spin: GameConstants.AlcremieSpins.Any3600};
+        let sweet: GameConstants.AlcremieSpins, spin: GameConstants.AlcremieSweet;
         for (sweet of GameHelper.enumNumbers(GameConstants.AlcremieSweet)) {
             for (spin of GameHelper.enumNumbers(GameConstants.AlcremieSpins)) {
-                if (BattleCafeController.evolutions[sweet][spin]?.name === pokemonName) {
-                    return {spin: spin, sweet: sweet};
+                const spinReward = BattleCafeController.evolutions[sweet][spin]?.name;
+                if (this.pokemonNames.includes(spinReward)) {
+                    cacheLine[spinReward] = {spin: spin, sweet: sweet};
                 }
             }
         }
-        return null;
+        return cacheLine[pokemonName];
     }
 
     public static getPokemonSafariItem(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Record<GameConstants.Region, {chance: number, requirement?: string }> {
-        const res = {};
+        const cache = this.getRegionalCache<Record<GameConstants.Region, {chance: number, requirement?: string }>>(this.getPokemonSafariItem.name);
+        if (cache[maxRegion]) {
+            return cache[maxRegion][pokemonName];
+        }
+        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Object);
         Object.entries(SafariItemController.list).forEach(([region, list]) => {
             if (maxRegion !== GameConstants.Region.none && maxRegion < Number(region)) {
                 return;
             }
-            const item = list.find(it => it.item.id === pokemonName);
-            if (item) {
-                res[region] = {chance : item.weight / list.reduce((acc, it) => acc + it.weight, 0)};
-                if (item.requirement) {
-                    res[region].requirement = item.requirement.hint();
+            list.forEach(item => {
+                const pokemonItem = item.item.id as string;
+                if (this.pokemonNames.includes(pokemonItem)) {
+                    cacheLine[pokemonItem][region] = {chance : item.weight / list.reduce((acc, it) => acc + it.weight, 0)};
+                    if (item.requirement) {
+                        cacheLine[pokemonItem][region].requirement = item.requirement.hint();
+                    }
                 }
-            }
+            });
         });
-        return res;
+        return cacheLine[pokemonName] as Record<GameConstants.Region, {chance: number, requirement?: string }>;
     }
 
     private static getPokemonRewards(rewardFunction: string) {
@@ -724,7 +738,7 @@ class PokemonHelper extends TmpPokemonHelper {
 
         // Battle Café
         const combination = PokemonHelper.getBattleCafeCombination(pokemonName, maxRegion);
-        if (combination) {
+        if (Object.keys(combination).length) {
             encounterTypes[PokemonLocationType.BattleCafe] = combination;
         }
 
