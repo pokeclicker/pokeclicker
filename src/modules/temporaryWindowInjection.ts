@@ -126,6 +126,7 @@ import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
 import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
+import InSubEnvironmentRequirement from './requirements/InSubEnvironmentRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import TotalMegaStoneObtainedRequirement from './requirements/TotalMegaStoneObtainedRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
@@ -329,6 +330,7 @@ Object.assign(<any>window, {
     StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
+    InSubEnvironmentRequirement,
     TokenRequirement,
     TotalMegaStoneObtainedRequirement,
     UndergroundItemsFoundRequirement,
