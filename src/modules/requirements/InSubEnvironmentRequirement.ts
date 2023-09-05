@@ -2,7 +2,7 @@ import { AchievementOption, SubEnvironment, camelCaseToString } from '../GameCon
 import GameHelper from '../GameHelper';
 import Requirement from './Requirement';
 
-export default class InEnvironmentRequirement extends Requirement {
+export default class InSubEnvironmentRequirement extends Requirement {
     constructor(public subEnvironment: SubEnvironment, option = AchievementOption.more) {
         super(1, option);
     }
