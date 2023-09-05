@@ -820,7 +820,7 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
         [Region.alola]: new Set(['Mount Lanakila']),
         [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 'Freezington', 26, 28, 31, 32, 46, 47, 54, 55]),
     },
-    
+
     Fire: {
         [Region.kanto]: new Set(['Cinnabar Island', 'Mt. Ember', 'Mt. Ember Summit', 'Ruby Path']),
         [Region.johto]: new Set(),
@@ -831,7 +831,7 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
         [Region.alola]: new Set(['Wela Volcano Park']),
         [Region.galar]: new Set(['Motostoke']),
     },
-    
+
     Forest: {
         [Region.kanto]: new Set([25, 30, 'Fuchsia City', 'Viridian Forest', 'Berry Forest', 'Pattern Bush', 'Valencia Island', 'Pinkan Forest']),
         [Region.johto]: new Set([36, 38, 43, 'Azalea Town', 'Ilex Forest']),
@@ -880,12 +880,23 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
     Desert: {
         [Region.kanto]: new Set(),
         [Region.johto]: new Set(),
-        [Region.hoenn]: new Set([111, 135, 'Outskirt Stand', 'Pyrite Town', 'Pyrite Town Battles', 'Orre Colosseum']),
+        [Region.hoenn]: new Set(['Pyrite Town', 'Pyrite Town Battles']),
         [Region.sinnoh]: new Set([228]),
-        [Region.unova]: new Set([4, 25, 'Lentimas Town', 'Reversal Mountain']),
+        [Region.unova]: new Set(['Lentimas Town', 'Reversal Mountain']),
         [Region.kalos]: new Set([13]),
-        [Region.alola]: new Set([23]),
+        [Region.alola]: new Set(),
         [Region.galar]: new Set([23, 25, 39, 'Stow-on-Side', 'Dusty Bowl']),
+    },
+
+    DesertCactus: {
+        [Region.kanto]: new Set(),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set(['Outskirt Stand', 'Orre Colosseum']),
+        [Region.sinnoh]: new Set(),
+        [Region.unova]: new Set([4, 25]),
+        [Region.kalos]: new Set(),
+        [Region.alola]: new Set([23]),
+        [Region.galar]: new Set(),
     },
 
     PowerPlant: {
@@ -936,6 +947,7 @@ export const SubEnvironmentCssClass: Record<SubEnvironment, string> = {
     GemCave: 'cave-gem',
     WaterCave: 'cave-water',
     Desert: 'desert',
+    DesertCactus: 'desert-cactus',
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',

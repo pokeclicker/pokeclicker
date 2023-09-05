@@ -331,6 +331,7 @@ namespace GameConstants {
         GemCave: SubEnvironmentData,
         WaterCave: SubEnvironmentData,
         Desert: SubEnvironmentData,
+        DesertCactus: SubEnvironmentData,
         PowerPlant: SubEnvironmentData,
         Mansion: SubEnvironmentData,
         Graveyard: SubEnvironmentData,
