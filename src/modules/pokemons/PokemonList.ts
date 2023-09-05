@@ -13194,8 +13194,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Trash)', 'Burmy (Plant)', 1),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1),
+            EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
