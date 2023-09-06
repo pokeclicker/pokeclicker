@@ -18,7 +18,7 @@
             </knockout>
 
             <knockout class="left">
-                <!-- ko if: DungeonBattle.trainer() -->
+                <!-- ko if: DungeonBattle.trainer() && !DungeonBattle.trainer().options?.hideTrainer -->
                 <knockout data-bind="text: DungeonBattle.trainer().name">Trainer name</knockout>
                 <!-- /ko -->
             </knockout>
@@ -50,7 +50,7 @@
 
         <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
         <div data-bind="if: DungeonBattle.enemyPokemon">
-            <div class="trainer" data-bind="if: DungeonBattle.trainer()">
+            <div class="trainer" data-bind="if: DungeonBattle.trainer() && !DungeonBattle.trainer().options?.hideTrainer">
                 <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
             </div>
             <div class="dungeon-enemy">

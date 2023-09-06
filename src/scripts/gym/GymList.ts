@@ -782,7 +782,7 @@ GymList['Cipher Admin Lovrina'] = new Gym ( //Kalos E4 difficulty, plus 10% per 
     BadgeEnums.Elite_ColosseumLovrina,
     100000,
     'I was so impressed by your toughness! Because you are so tough, I\'ll let you be the first member in my fan club! Doesn\'t that so make your day?',
-    [new QuestLineCompletedRequirement('Gale of Darkness'), new DevelopmentRequirement()],
+    [new DevelopmentRequirement(new QuestLineCompletedRequirement('Gale of Darkness'))],
     undefined, undefined, { displayName: 'Challenge Lovrina' }
 );
 GymList['Cipher Admin Snattle'] = new Gym (
@@ -799,7 +799,7 @@ GymList['Cipher Admin Snattle'] = new Gym (
     BadgeEnums.Elite_ColosseumSnattle,
     100000,
     'In the near future, when I become the Governor of Orre, I shall appoint you as my official secretary. Let that be a motivation for you to constantly better your skills!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumLovrina), new DevelopmentRequirement()],
+    [new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_ColosseumLovrina))],
     undefined, undefined, { displayName: 'Challenge Snattle' }
 );
 GymList['Cipher Admin Gorigan'] = new Gym (
@@ -816,7 +816,7 @@ GymList['Cipher Admin Gorigan'] = new Gym (
     BadgeEnums.Elite_ColosseumGorigan,
     100000,
     'You\'re some kind of special! You\'re worthy of sharing my camaraderie as a friend.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumSnattle), new DevelopmentRequirement()],
+    [new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_ColosseumSnattle))],
     undefined, undefined, { displayName: 'Challenge Gorigan' }
 );
 GymList['Cipher Admin Ardos'] = new Gym (
@@ -833,7 +833,7 @@ GymList['Cipher Admin Ardos'] = new Gym (
     BadgeEnums.Elite_ColosseumArdos,
     120000,
     'In all of Orre, I\'ve never seen a Pokémon Trainer of your caliber. You appear to be the biggest threat to Cipher. To make sure my underlings watch you with caution, I give you the title “Cipher\'s Biggest Enemy.”',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumGorigan), new DevelopmentRequirement()],
+    [new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_ColosseumGorigan))],
     undefined, undefined, { displayName: 'Challenge Ardos' }
 );
 GymList['Cipher Admin Eldes'] = new Gym (
@@ -850,7 +850,7 @@ GymList['Cipher Admin Eldes'] = new Gym (
     BadgeEnums.Elite_ColosseumEldes,
     150000,
     'I\'m satisfied that I was able to battle to my heart\'s content. I would like to confer on you the title “Eldes\'s Top Rival.”',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumArdos), new DevelopmentRequirement()],
+    [new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_ColosseumArdos))],
     undefined, undefined, { displayName: 'Challenge Eldes' }
 );
 //Sinnoh Gyms

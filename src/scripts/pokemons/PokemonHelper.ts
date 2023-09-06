@@ -19,7 +19,12 @@ enum PokemonLocationType {
     TempBattleReward,
     GymReward,
     DungeonReward,
-    Trade
+    Trade,
+    GiftNPC,
+    ShadowPokemon,
+    DreamOrb,
+    BattleCafe,
+    SafariItem
 }
 
 class PokemonHelper extends TmpPokemonHelper {
@@ -117,6 +122,24 @@ class PokemonHelper extends TmpPokemonHelper {
                     dungeons.push(data);
                 }
             });
+        });
+        return dungeons;
+    }
+
+    public static getShadowPokemonDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        const dungeons = [];
+        Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
+            // If we only want to check up to a maximum region
+            if (maxRegion != GameConstants.Region.none) {
+                const region = GameConstants.RegionDungeons.findIndex(d => d.includes(dungeonName));
+                if (region > maxRegion) {
+                    return false;
+                }
+            }
+            // Shadow Pokemon
+            if (dungeon.allAvailableShadowPokemon().includes(pokemonName)) {
+                dungeons.push(dungeonName);
+            }
         });
         return dungeons;
     }
@@ -357,6 +380,80 @@ class PokemonHelper extends TmpPokemonHelper {
         return trades;
     }
 
+    public static getPokemonGifts(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<object> {
+        const gifts = [];
+        Object.entries(TownList).forEach(([townName, town]) => {
+            // If we only want to check up to a maximum region
+            if (maxRegion != GameConstants.Region.none && town.region > maxRegion) {
+                return false;
+            }
+
+            const npcs = town.npcs?.filter(n => n instanceof GiftNPC);
+            npcs?.forEach(npc => {
+                if ((npc as GiftNPC).giftFunction?.toString().includes(`'${pokemonName}'`)) {
+                    gifts.push({
+                        town: townName,
+                        npc: npc.name,
+                        requirements: npc.options?.requirement?.hint(),
+                    });
+                }
+            });
+        });
+        return gifts;
+    }
+
+    public static getPokemonDreamOrbs(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        // Dream orbs are unavailable before Unova
+        if (maxRegion !== GameConstants.Region.none && maxRegion < GameConstants.Region.unova) {
+            return [];
+        }
+        return App.game.dreamOrbController.orbs.filter(orb => orb.items.some(dreamOrbLoot => {
+            if (dreamOrbLoot.item.type === ItemType.item) {
+                const item = ItemList[dreamOrbLoot.item.id];
+
+                if (item instanceof PokemonItem && item.type === pokemonName) {
+                    return true;
+                }
+            }
+            return false;
+        })).map(orb => orb.color);
+    }
+
+    public static getBattleCafeCombination(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): {spin?: GameConstants.AlcremieSpins, sweet?: GameConstants.AlcremieSweet} {
+        if (maxRegion !== GameConstants.Region.none && maxRegion < GameConstants.Region.galar) {
+            return null;
+        }
+        if (pokemonName === 'Milcery (Cheesy)') {
+            return {spin: GameConstants.AlcremieSpins.Any3600};
+        }
+        let sweet, spin;
+        for (sweet of GameHelper.enumNumbers(GameConstants.AlcremieSweet)) {
+            for (spin of GameHelper.enumNumbers(GameConstants.AlcremieSpins)) {
+                if (BattleCafeController.evolutions[sweet][spin]?.name === pokemonName) {
+                    return {spin: spin, sweet: sweet};
+                }
+            }
+        }
+        return null;
+    }
+
+    public static getPokemonSafariItem(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Record<GameConstants.Region, {chance: number, requirement?: string }> {
+        const res = {};
+        Object.entries(SafariItemController.list).forEach(([region, list]) => {
+            if (maxRegion !== GameConstants.Region.none && maxRegion < Number(region)) {
+                return;
+            }
+            const item = list.find(it => it.item.id === pokemonName);
+            if (item) {
+                res[region] = {chance : item.weight / list.reduce((acc, it) => acc + it.weight, 0)};
+                if (item.requirement) {
+                    res[region].requirement = item.requirement.hint();
+                }
+            }
+        });
+        return res;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.MAX_AVAILABLE_REGION) => {
         const encounterTypes = {};
         // Routes
@@ -378,6 +475,11 @@ class PokemonHelper extends TmpPokemonHelper {
         const chestDungeons = PokemonHelper.getPokemonChestDungeons(pokemonName, maxRegion);
         if (chestDungeons.length) {
             encounterTypes[PokemonLocationType.DungeonChest] = chestDungeons;
+        }
+        // Shadow Pokemon
+        const shadowPokemon = PokemonHelper.getShadowPokemonDungeons(pokemonName, maxRegion);
+        if (shadowPokemon.length) {
+            encounterTypes[PokemonLocationType.ShadowPokemon] = shadowPokemon;
         }
         // Eggs
         const eggs = PokemonHelper.getPokemonEggs(pokemonName, maxRegion);
@@ -458,9 +560,33 @@ class PokemonHelper extends TmpPokemonHelper {
         }
 
         // Trades
-        const trades = PokemonHelper.getPokemonTrades(pokemonName);
+        const trades = PokemonHelper.getPokemonTrades(pokemonName, maxRegion);
         if (trades.length) {
             encounterTypes[PokemonLocationType.Trade] = trades;
+        }
+
+        // Gift NPC
+        const gifts = PokemonHelper.getPokemonGifts(pokemonName, maxRegion);
+        if (gifts.length) {
+            encounterTypes[PokemonLocationType.GiftNPC] = gifts;
+        }
+
+        // Dream Orbs
+        const dreamOrbs = PokemonHelper.getPokemonDreamOrbs(pokemonName, maxRegion);
+        if (dreamOrbs.length) {
+            encounterTypes[PokemonLocationType.DreamOrb] = dreamOrbs;
+        }
+
+        // Battle Café
+        const combination = PokemonHelper.getBattleCafeCombination(pokemonName, maxRegion);
+        if (combination) {
+            encounterTypes[PokemonLocationType.BattleCafe] = combination;
+        }
+
+        // Safari Items
+        const safariItems = PokemonHelper.getPokemonSafariItem(pokemonName, maxRegion);
+        if (Object.keys(safariItems).length) {
+            encounterTypes[PokemonLocationType.SafariItem] = safariItems;
         }
 
         // Return the list of items
@@ -478,7 +604,11 @@ class PokemonHelper extends TmpPokemonHelper {
             locations[PokemonLocationType.Safari] ||
             locations[PokemonLocationType.Shop] ||
             locations[PokemonLocationType.Wandering] ||
-            locations[PokemonLocationType.Trade];
+            locations[PokemonLocationType.Trade] ||
+            locations[PokemonLocationType.ShadowPokemon] ||
+            locations[PokemonLocationType.DreamOrb] ||
+            locations[PokemonLocationType.BattleCafe] ||
+            locations[PokemonLocationType.SafariItem];
         return !isEvable && Object.keys(locations).length;
     };
 }
