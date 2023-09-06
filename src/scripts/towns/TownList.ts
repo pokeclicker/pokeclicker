@@ -6634,7 +6634,6 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
     'assets/images/npcs/Professor Kukui.png');
 
 // Alola Story NPCs
-// Lillies
 const Lillie1 = new NPC('Mysterious Girl', [
     'Oh... Oh, thank goodness! So...you\'re also one of the professor\'s acquaintances? It\'s nice to meet you...',
     'I am so grateful to you for helping us out of that dangerous spot. Come on. Into the bag, Nebby.',
@@ -6642,6 +6641,13 @@ const Lillie1 = new NPC('Mysterious Girl', [
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
+});
+const RotomDexKukui = new NPC('Kukui\'s Surprise', [
+    '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on your tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing!',
+    'Well, if you\'re ever feelin\' lost, you can alwayzzz find me at a dock town! I know everything there izzz to know about thezzze islandzzz! Especially if you choozzze to take on the Island Challenge!',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4, GameConstants.AchievementOption.less)]),
 });
 const Lillie2 = new NPC('Return Nebby to Lillie', [
     'Nebby! Oh thank goodness you\'re safe. Thank you $playername$, let me heal your Poké- No? Um, very well then.',
@@ -6672,6 +6678,14 @@ const Lillie5 = new NPC('Lillie', [
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),
 });
+const Lillie6 = new NPC('Lillie', [
+    'Nebby changed forms... and it\'s not moving...',
+    '<img src="assets/images/pokemon/790.png">',
+    'I feel like there\'s so much I have to do now... to save Nebby... to save my mother... That\'s why I\'m going to try my hardest! This is my Z-Powered form! Come on! Let\'s show the world what we can really do!'
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
+});
 const Gladion1 = new NPC('Gladion', [
     'The Sun Flute and the Moon Flute. When sounded together, it\'s said that they can call the Legendary Pokémon... That is, if you believe in old myths, anyway. I found one of them downstairs and gave it to Lillie.',
     'Here. Take this Master Ball you. I\'m counting on you to help Lillie. This is the least I can do.',
@@ -6680,13 +6694,12 @@ const Gladion1 = new NPC('Gladion', [
     image: 'assets/images/npcs/Gladion.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
 });
-const Lillie6 = new NPC('Lillie', [
-    'Nebby changed forms... and it\'s not moving...',
-    '<img src="assets/images/pokemon/790.png">',
-    'I feel like there\'s so much I have to do now... to save Nebby... to save my mother... That\'s why I\'m going to try my hardest! This is my Z-Powered form! Come on! Let\'s show the world what we can really do!'
+const HapuHope = new NPC('Hapu', [
+    'My grandfather died suddenly some years back, and we were left without a kahuna on Poni. So I set out on my own sort of island challenge, traveling Alola and trying to grow stronger. Lillie. The kahuna you wished to meet is now here.',
+    'There is a ceremony held for the Legendary Pokémon at the Altar of the Sunne and Moone that uses two particular flutes. Ho! You already have the one. The other is said to be held on Exeggutor Island.',
 ], {
-    image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
+    image: 'assets/images/npcs/Hapu.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 0), new  QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)]),
 });
 const Lillie7 = new NPC('Lillie', [
     'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
@@ -6703,37 +6716,20 @@ const SunFlute = new NPC('Play the Sun Flute', [
     '<img src="assets/images/pokemon/791.png">',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement:
-    new MultiRequirement ([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 4),
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less),
-        new DayCyclePartRequirement([1]),
-    ])
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 4), new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less), new DayCyclePartRequirement([1])]),
 });
 const MoonFlute = new NPC('Play the Moon Flute', [
     'omg nebby u evolve moon',
     '<img src="assets/images/pokemon/792.png">',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement:
-    new MultiRequirement ([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 4),
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less),
-        new DayCyclePartRequirement([3]),
-    ])
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 4), new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less), new DayCyclePartRequirement([3])]),
 });
 const DuskFlute = new NPC('Ask Lillie what to do', [
-    'Let\'s wait until the Sun or Moon have risen.',
+    'Let\'s wait until Day or Night comes.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement:
-    new MultiRequirement ([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 4),
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less),
-        new OneFromManyRequirement([
-            new DayCyclePartRequirement([0]),
-            new DayCyclePartRequirement([2]),
-        ])])
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 4), new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([2])])]),
 });
 // Lillie gifts
 const SolgaleoGift = new GiftNPC('Capture Solgaleo', [
@@ -6743,15 +6739,7 @@ const SolgaleoGift = new GiftNPC('Capture Solgaleo', [
 }, 'assets/images/pokemon/791.png', {
     saveKey: 'solgaleogift',
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.equal),
-        new ObtainedPokemonRequirement('Solgaleo', true),
-        new ObtainedPokemonRequirement('Lunala', true),
-        new OneFromManyRequirement([
-            new DayCyclePartRequirement([1]),
-            new DayCyclePartRequirement([2]),
-        ])
-    ])
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new ObtainedPokemonRequirement('Solgaleo', true), new ObtainedPokemonRequirement('Lunala', true), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])]),
 });
 const LunalaGift = new GiftNPC('Capture Lunala', [
     'Please! Take Lunala, and let\'s go after mother!',
@@ -6760,38 +6748,7 @@ const LunalaGift = new GiftNPC('Capture Lunala', [
 }, 'assets/images/pokemon/792.png', {
     saveKey: 'lunalagift',
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.equal),
-        new ObtainedPokemonRequirement('Solgaleo', true),
-        new ObtainedPokemonRequirement('Lunala', true),
-        new OneFromManyRequirement([
-            new DayCyclePartRequirement([0]),
-            new DayCyclePartRequirement([3]),
-        ])
-    ])
-});
-
-const HapuHope = new NPC('Hapu', [
-    'My grandfather died suddenly some years back, and we were left without a kahuna on Poni. So I set out on my own sort of island challenge, traveling Alola and trying to grow stronger. Lillie. The kahuna you wished to meet is now here.',
-    'There is a ceremony held for the Legendary Pokémon at the Altar of the Sunne and Moone that uses two particular flutes. Ho! You already have the one. The other is said to be held on Exeggutor Island.',
-], {
-    image: 'assets/images/npcs/Hapu.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 0), new  QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)]),
-});
-const HapuCanyon = new NPC('Hapu', [
-    'People cannot survive all on their own. They have got to help one another out. Same for Pokémon, too. That is what my grandfather used to say.',
-    '$playername%... you have done well in guiding Lillie. The path to the shrine is through the canyon.',
-    'Look at the two of you. I think this might just work out. No, I am quite sure of it!',
-], {
-    image: 'assets/images/npcs/Hapu.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 3), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
-});
-const RotomDexKukui = new NPC('Kukui\'s Gift', [
-    '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on your tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing! Can it even help you with the Island Challenge quest on that <i>Bulletin Board</i> over there?',
-    'Well, if you\'re ever feelin\' lost, you can alwayzzz find me at a dock town! I know everything there izzz to know about thezzze islandzzz!',
-], {
-    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hau 1'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new ObtainedPokemonRequirement('Solgaleo', true), new ObtainedPokemonRequirement('Lunala', true), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])]),
 });
 //Silvally Types NPC
 const SilvallyGladion1 = new NPC('Gladion', [

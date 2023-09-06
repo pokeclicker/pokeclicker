@@ -2495,7 +2495,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(talkToLillie1);
 
         // 2 - Talk to NPC: Kukui/Rotomdex (to integrate Island Challenge quest seamlessly)
-        const talkToRotomDexKukui = new TalkToNPCQuest(RotomDexKukui, 'Go visit Professor Kukui\'s Lab past Hau\'oli Outskirts. Seems he has a gift for you!');
+        const talkToRotomDexKukui = new TalkToNPCQuest(RotomDexKukui, 'Go check the Bulletin Board at Professor Kukui\'s Lab past Hau\'oli Outskirts. He also has a surprise for you!');
         melemeleAlolaQuestLine.addQuest(talkToRotomDexKukui);
 
         // 3 - Clear dungeon: Trainers' School
@@ -2593,7 +2593,7 @@ class QuestLineHelper {
         // 1 - Temp battle: Recon Squad 2
         const battleReconSquad2 = new CustomQuest(1, 0, 'The Ultra Recon Squad is investigating a tree that reminds you of a region west of Kanto. Go check it out on Route 5.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Recon Squad 2')](), undefined, undefined,
             {
-                clearedMessage: 'Your Z-Crystals... might they be like the beautiful light our ancestors once saw?',
+                clearedMessage: 'Our research is insufficient to define what it means to be a Pokémon Trainer... We\'ll never be able to stop the Blinding One like this...',
                 npcDisplayName: 'Dulse',
                 npcImageName: 'Dulse',
             });
@@ -2817,9 +2817,9 @@ class QuestLineHelper {
         App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 1')]() +
         App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 2')](), undefined, undefined,
         {
-            clearedMessage: 'Lillie...</br>...</br>Heh...</br>When did you... start becoming so beautiful?', // Lillie: Mother!
+            clearedMessage: 'Lillie...</br>...</br>Heh...</br>When did you... start becoming so beautiful?',
             npcDisplayName: 'Lusamine',
-            npcImageName: 'Aether President (lusamine)',
+            npcImageName: 'specialNPCs/Aether President (lillie)',
         });
         poniAlolaQuestLine.addQuest(clearBeastLusamine);
 
@@ -2849,6 +2849,13 @@ class QuestLineHelper {
         };
 
         const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis', 'Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.', UltraMegalopolisReward);
+        /*
+        {
+            clearedMessage: 'Necrozma shone with such blinding light, as it used to, only to lose that light all over again... It seems to have fled to Alola now. We are grateful to you, human of Alola. May we all eventually be awash in light again.',
+            npcDisplayName: 'Ultra Recon Squad',
+            npcImageName: 'specialNPCs/Ultra Recon Squad (all)',
+        });
+        */
         skullAetherAlolaQuestLine.addQuest(clearUltraMegalopolis);
 
         App.game.quests.questLines().push(skullAetherAlolaQuestLine);

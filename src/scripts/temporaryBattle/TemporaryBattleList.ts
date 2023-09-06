@@ -3941,7 +3941,7 @@ TemporaryBattleList['Exeggutor Tree'] = new TemporaryBattle(
 TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
     'Recon Squad 3',
     [new GymPokemon('Poipole', 6614774, 49)],
-    'poyple no',
+    'Perhaps it is time that we stop taking matters into our own hands and instead start relying on others. Must we start by putting our faith in you?',
     [new QuestLineStepCompletedRequirement('Emissary of Light', 2)],
     undefined,
     {
