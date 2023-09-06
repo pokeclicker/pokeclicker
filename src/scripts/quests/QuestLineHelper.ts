@@ -2675,12 +2675,7 @@ class QuestLineHelper {
         ulaulaAlolaQuestLine.addQuest(defeatGuzmaMalieGarden);
 
         // 4 - Temp battle: Skull 5
-        const battleSkull5 = new CustomQuest (1, 0,  'Lillie has run into Team Skull! Protect her at Aether House!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 5')](), undefined, undefined,
-        {
-            clearedMessage: 'I just wanted to go for a stroll on my own, to see what it must feel like to be a Trainer... So Hapu and I went our separate ways... but then Nebby tried to get out of my bag...',
-            npcDisplayName: 'Lillie',
-            npcImageName: 'Lillie',
-        });
+        const battleSkull5 = new DefeatTemporaryBattleQuest('Skull 5', 'Lillie has run into Team Skull! Protect her at Aether House!');
         ulaulaAlolaQuestLine.addQuest(battleSkull5);
 
         // 5 - Clear dungeon: Thrifty Megamart, Acerola's Trial

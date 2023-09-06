@@ -3886,7 +3886,7 @@ TemporaryBattleList['Skull 5'] = new TemporaryBattle(
     [
         new GymPokemon('Drowzee', 2007275, 33),
     ],
-    undefined,
+    'For real, girl?! Your bag was moving! Right in front of my eyes! And I\'m just supposed to ignore that?! Even if it\'s not that rare of a Pokémon, I bet I could still get paid, yo.',
     [new QuestLineStepCompletedRequirement('Child of the Stars', 3)],
     undefined,
     {
