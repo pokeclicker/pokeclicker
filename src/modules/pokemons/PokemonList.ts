@@ -13172,7 +13172,11 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
             LevelEvolution('Burmy (Sand)', 'Mothim', 20),
             EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('JubilifeVillage', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('ObsidianFieldlands', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
             EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('AlabasterIcelands', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13195,7 +13199,11 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
             EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('JubilifeVillage', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('ObsidianFieldlands', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
             EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('CrimsonMirelands', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('CobaltCoastlands', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
