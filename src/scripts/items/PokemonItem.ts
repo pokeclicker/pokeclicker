@@ -46,12 +46,17 @@ class PokemonItem extends CaughtIndicatingItem {
             });
         }
         if (shiny) {
-            App.game.logbook.newLog(
-                LogBookTypes.SHINY,
-                App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true)
-                    ? createLogContent.purchasedShinyDupe({ pokemon: pokemonName })
-                    : createLogContent.purchasedShiny({ pokemon: pokemonName })
-            );
+            if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true)) {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY_DUPLICATE,
+                    createLogContent.purchasedShinyDupe({ pokemon: pokemonName })
+                );
+            } else {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY,
+                    createLogContent.purchasedShiny({ pokemon: pokemonName })
+                );
+            }
         }
 
         App.game.party.gainPokemonById(pokemonID, shiny, true);

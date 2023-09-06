@@ -31,12 +31,17 @@ class EvolutionHandler {
 
         // Add shiny to logbook
         if (shiny) {
-            App.game.logbook.newLog(
-                LogBookTypes.SHINY,
-                App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true)
-                    ? createLogContent.evolvedShinyDupe({ basePokemon: data.basePokemon, evolvedPokemon})
-                    : createLogContent.evolvedShiny({ basePokemon: data.basePokemon, evolvedPokemon })
-            );
+            if (App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true)) {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY_DUPLICATE,
+                    createLogContent.evolvedShinyDupe({ basePokemon: data.basePokemon, evolvedPokemon})
+                );
+            } else {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY,
+                    createLogContent.evolvedShiny({ basePokemon: data.basePokemon, evolvedPokemon})
+                );
+            }
         }
 
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);

@@ -161,12 +161,17 @@ class Egg implements Saveable {
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
             const pokemon = PokemonHelper.getPokemonById(this.pokemon).name;
-            App.game.logbook.newLog(
-                LogBookTypes.SHINY,
-                App.game.party.alreadyCaughtPokemon(pokemonID, true)
-                    ? createLogContent.hatchedShinyDupe({ pokemon })
-                    : createLogContent.hatchedShiny({ pokemon })
-            );
+            if (App.game.party.alreadyCaughtPokemon(pokemonID, true)) {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY_DUPLICATE,
+                    createLogContent.hatchedShinyDupe({ pokemon })
+                );
+            } else {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY,
+                    createLogContent.hatchedShiny({ pokemon })
+                );
+            }
         } else {
             Notifier.notify({
                 message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()}!`,

@@ -166,12 +166,17 @@ class Battle {
         if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon, route, region);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
-            App.game.logbook.newLog(
-                LogBookTypes.ESCAPED,
-                App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true)
-                    ? createLogContent.escapedShinyDupe({ pokemon: enemyPokemon.name })
-                    : createLogContent.escapedShiny({ pokemon: enemyPokemon.name })
-            );
+            if (App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true)) {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY_DUPLICATE,
+                    createLogContent.escapedShinyDupe({ pokemon: enemyPokemon.name })
+                );
+            } else {
+                App.game.logbook.newLog(
+                    LogBookTypes.ESCAPED,
+                    createLogContent.escapedShiny({ pokemon: enemyPokemon.name })
+                );
+            }
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
             App.game.logbook.newLog(
                 LogBookTypes.ESCAPED,
