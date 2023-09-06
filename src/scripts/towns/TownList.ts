@@ -6564,12 +6564,34 @@ const IkiKahuna = new NPC('Kahuna Hala', [
     image: 'assets/images/npcs/Hala.png',
     requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more)]),
 });
+const LagunaKahuna = new NPC('Kahuna Hala', [
+    'Dooot doo doo, just a kahuna on a stroll to the laguna. ♪',
+], {
+    image: 'assets/images/npcs/Hala.png',
+    requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!'),
+});
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
     'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ], {image: 'assets/images/npcs/Owner.png'});
+const HeaheaBurnet1 = new NPC('Professor Burnet', [
+    'Cosmog. That\'s what Pokémon species Nebby is. In ancient times it was known also as the child of the stars.',
+    'I research Ultra Wormholes. They have nothing to do with Cosmog and probably don\'t exist, but if they did this would be some killer foreshadowing don\'t you think?',
+    'You say I look familiar? Oh, you\'ve probably seen me with Kukui. He\'s my husband!',
+], {
+    image: 'assets/images/npcs/Professor Burnet (gen7).png',
+    requirement: new TemporaryBattleRequirement('Ultra Wormhole', 1, GameConstants.AchievementOption.less),
+});
+const HeaheaBurnet2 = new NPC('Professor Burnet', [
+    'I can\'t believe you saw an Ultra Wormhole! I hope I can unravel its mysteries myself someday!',
+    'The name of Nebby\'s Pokémon species, Cosmog, was coined by a researcher in that very same Aether Paradise! In ancient times it was known as the child of the stars.',
+    'Oh, an <i>Ultra Wormhole</i>! Wait until my husband Kukui hears about this!',
+], {
+    image: 'assets/images/npcs/Professor Burnet (gen7).png',
+    requirement: new TemporaryBattleRequirement('Ultra Wormhole'),
+});
 const PaniolaTownActor = new NPC('Actor Meredith', [
     'I love Oricorio. I can tell you all about it!',
     'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
@@ -6589,25 +6611,53 @@ const KonikoniKahuna = new NPC('Kahuna Olivia', [
     requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more)]),
 });
 const MalieKahuna = new NPC('Kahuna Nanu', [
-    'A trial-goer, huh? Figures.',
-    'Just go clear Captain Sophocles\' trial at the Hokulani Observatory and Captain Acerola\'s Trial at the Thrifty Megamart. And take care of those Team Skull punks in Po Town while you\'re at it.',
-    'Then come back here so we can get this Grand trial over with.',
+    'What do I think of Grand trials? They\'re just like gym battles. Yup, it\'s totally the same thing. They\'re even making a Pokémon League.',
+    'What? Why are you looking at me like that? If you don\'t wanna battle, I\'m going home.',
 ], {
     image: 'assets/images/npcs/Nanu.png',
-    requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more)]),
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Gladion 2'), new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more)])]),
 });
 const TapuWorker = new NPC('Worker Ovid', [
     'Yesterday was my first day working on Mount Lanakila. I was up there maintaining the paths to the new Pokémon League.',
     'My trusty Crabrawler was with me. He was smashing some rocks that were blocking the path, having a grand ol\' time like usual, when suddenly we were attacked by a wild Pokémon!',
     'After the battle, Crabrawler evolved! I didn\'t even know he could do that. He\'s so different now. But I still love him. He\'s my best friend, and he\'s even better at rock smashing now!',
 ], {image: 'assets/images/npcs/Worker (male).png'});
+const PoTownNanu = new NPC('Officer Nanu', [
+    'A trial-goer, huh? Figures. Look, I\'m not gonna fight someone who is taking on Team Skull. So...go. Just go.'
+], {
+    image: 'assets/images/npcs/Nanu.png',
+    requirement: new  QuestLineStepCompletedRequirement('Child of the Stars', 8, GameConstants.AchievementOption.less),
+});
+const PoTownHomeowner = new NPC('Office Worker Royce', [
+    'My house! My car! MY LAWN! What did those Team Skull kids do!?',
+], {
+    image: 'assets/images/npcs/Office Worker (male).png',
+    requirement: new  QuestLineStepCompletedRequirement('Child of the Stars', 8),
+});
+const YungoosAetherHouse = new NPC('Yungoos', [
+    'Grrrssssss',
+], {
+    image: 'assets/images/pokemon/734.png',
+    requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 6, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Child of the Stars', 6)]),
+});
 const SeafolkCaptain = new NPC('Captain Mina', [
-    'My trial is in this town. Right there, inside my very own houseboat. However, I want you to clear the trial in Vast Poni Canyon first. It has no Captain, so you\'ll be all on your own. Be careful.',
-    'If you can clear my trial you\'ll find our Kahuna on Exeggutor Island.',
+    'We don\'t have a kahuna on Poni, so I don\'t have an actual trial or anything...',
+    'Old man Nanu has been looking after our grand trials up until now. I\'m the captain and all, so I\'ve gotta come up with a trial.',
 ], {
     image: 'assets/images/npcs/Mina.png',
-    requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more)]),
+    requirement: new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less),
 });
+const SeafolkCaptainMina = new NPC('Captain Mina', [
+    'My trial is in this town. Right there, inside my very own houseboat. Normally you\'d have to clear my trial to find our Kahuna on Exeggutor Island, but I guess you took care of some things, huh?',
+    'Well, in that case, I\'d better add a little something more. This is the final trial of your island challenge, afte all. I hope you\'re ready for your toughest oppenents yet!',
+], {
+    image: 'assets/images/npcs/Mina.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more)])]),
+});
+const SeafolkTourist = new NPC('Sightseer Marcus', [
+    'Wow! These people used to travel all over the ocean using nothing but the sun and stars to guide them! Did you know the sun and moon are called \'luminaries\'? No, it doesn\'t have to do with the Lumen theme, it\'s cause they cast light!',
+    'In older times, people thought the sun and moon were two parts of whole, connected to each other in some way. It\'s kind of like a branched Pokémon evolution, don\'tcha think?',
+], {image: 'assets/images/npcs/Sightseer (male).png'});
 const LanakilaColress = new NPC('Colress', [
     'It\'s been a while. You must be a formidable Trainer indeed if you are able to get Necrozma as one of your allies.',
     'Good! And this is from me! The Ultra Recon Squad asked me to develop a device that would be able to control Necrozma. But I improved it to my own liking! And now it is a device that makes it possible to draw out even more power from Necrozma!',
@@ -7149,7 +7199,7 @@ TownList['Mahalo Trail'] = new Town(
     [new MoveToTown('Ruins of Conflict', undefined, false), TemporaryBattleList['Melemele Spearow']],
     {
         requirements: [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
-        npcs: [Lillie1],
+        npcs: [Lillie1, LagunaKahuna],
     }
 );
 TownList['Professor Kukui\'s Lab'] = new Town(
@@ -7197,7 +7247,7 @@ TownList['Heahea City'] = new Town(
     [TemporaryBattleList.Dexio, TemporaryBattleList.Sina, HeaheaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Heahea City']), new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
-        npcs: [HeaheaCafeOwner],
+        npcs: [HeaheaCafeOwner, HeaheaBurnet1, HeaheaBurnet2],
     }
 );
 TownList['Paniola Town'] = new Town(
@@ -7283,6 +7333,7 @@ TownList['Aether House'] = new Town(
     [TemporaryBattleList['Skull 5'], TemporaryBattleList['Kahuna Nanu']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
+        npcs: [YungoosAetherHouse],
     }
 );
 TownList['Seafolk Village'] = new Town(
@@ -7292,7 +7343,7 @@ TownList['Seafolk Village'] = new Town(
     [SeafolkVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Seafolk Village']), new MoveToDungeon(dungeonList['Mina\'s Houseboat']), new DockTownContent(), TemporaryBattleList['Captain Mina']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
-        npcs: [SeafolkCaptain, SilvallyMina],
+        npcs: [SeafolkCaptain, SeafolkCaptainMina, SilvallyMina, SeafolkTourist],
     }
 );
 TownList['Ruins of Hope Altar'] = new Town(
@@ -7607,7 +7658,7 @@ TownList['Po Town'] = new DungeonTown(
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 17)],
     [TemporaryBattleList['Guzma Bug Memory']],
-    {npcs: [GuzmaSilvally]}
+    {npcs: [PoTownNanu, PoTownHomeowner, GuzmaSilvally]}
 );
 TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
