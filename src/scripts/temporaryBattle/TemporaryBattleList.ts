@@ -170,9 +170,6 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
     {
         displayName: 'Rival Blue',
         imageName: 'Blue2',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Lapras');
-        },
     }
 );
 TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
@@ -223,6 +220,24 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Biker Goon 2'),
         new TemporaryBattleRequirement('Biker Goon 3'),
     ]
+);
+TemporaryBattleList['Ash Ketchum New Island'] = new TemporaryBattle(
+    'Ash Ketchum New Island',
+    [
+        new GymPokemon('Bulbasaur', 151664, 25),
+        new GymPokemon('Squirtle', 151664, 25),
+        new GymPokemon('Pikachu', 151664, 30),
+    ],
+    'I found this Clone Mewtwo left behind. Can you take care of it?',
+    [new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('New Island'))],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        imageName: 'Ash Ketchum',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Pikachu (Clone)');
+        },
+    }
 );
 TemporaryBattleList['Bill\'s Grandpa'] = new TemporaryBattle(
     'Bill\'s Grandpa',
@@ -592,7 +607,7 @@ TemporaryBattleList.Red = new TemporaryBattle(
     ],
     '...',
     [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Silver'))],
-    [new NullRequirement],
+    undefined,
     {
         rewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Light_Ball'}, 1);
@@ -602,6 +617,7 @@ TemporaryBattleList.Red = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
         },
+        resetDaily: true,
     }
 );
 
@@ -917,7 +933,7 @@ TemporaryBattleList.Folly = new TemporaryBattle(
     undefined,
     {
         displayName: 'Shady Guy',
-        imageName: 'Peon (folly)',
+        imageName: 'Miror B. Peon (folly)',
     }
 );
 TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
@@ -966,12 +982,12 @@ TemporaryBattleList['Cipher Peon Kass'] = new TemporaryBattle(
 TemporaryBattleList['Cipher Peon Naps'] = new TemporaryBattle(
     'Cipher Peon Naps',
     [new GymPokemon('Teddiursa', 110813753, 11, undefined, undefined, GameConstants.ShadowStatus.Shadow)], // Slightly weaker than Calem 1
-    'What was that? My Shadow Pokémon!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    'What was that? My Shadow Pokémon! It doesn\'t matter though, my teammates escaped with Professor Krane!',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
     undefined,
     {
         displayName: 'Cipher Peon Naps',
-        imageName: 'Cipher Peon (male)',
+        imageName: 'Cipher Peon (yellow)',
     }
 );
 TemporaryBattleList['Chobin 1'] = new TemporaryBattle(
@@ -981,7 +997,7 @@ TemporaryBattleList['Chobin 1'] = new TemporaryBattle(
         new GymPokemon('Magikarp', 57406876, 6),
     ],
     'Huh? Closer observation reveals that the subject is a trainer. Ergo, the subject is not a burglar! Ahaha! Chobin wishes you spoke up right away. You\'re $playername$? Chobin apologizes for jumping to the wrong conclusion.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
     undefined,
     {
         displayName: 'Chobin',
@@ -996,12 +1012,13 @@ TemporaryBattleList['Miror B. 1'] = new TemporaryBattle(
         new GymPokemon('Lombre', 34444125, 17),
         new GymPokemon('Voltorb', 34444125, 19, undefined, undefined, GameConstants.ShadowStatus.Shadow),
     ],
-    'You messed up my rhythm! I just can\'t, no, I just can\'t do it!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')], // TODO put on overworld
+    'You messed up my rhythm! I just can\'t, no, I just can\'t do it! Shouldn\'t you be paying more attention to what\'s happening in the Pyrite Buiding than to me?',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 9)],
     undefined,
     {
         displayName: 'Miror B.',
         imageName: 'Cipher Admin Miror B',
+        returnTown: 'Pyrite Town',
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Magnet'}, 1);
             Notifier.notify({
@@ -1021,7 +1038,7 @@ TemporaryBattleList['Chobin 2'] = new TemporaryBattle(
         new GymPokemon('Tropius', 48221775, 26),
     ],
     'Huh? Oh, you\'re that trainer from before?! Chobin wishes you spoke up right away.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 17)],
     undefined,
     {
         displayName: 'Chobin',
@@ -1037,11 +1054,11 @@ TemporaryBattleList['Cipher Peon Smarton'] = new TemporaryBattle(
         new GymPokemon('Koffing', 49221775, 27),
     ],
     'You\'re too late! We already took everything we needed!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
     undefined,
     {
         displayName: 'Cipher Peon Smarton',
-        imageName: 'Cipher Peon (male)',
+        imageName: 'Cipher Peon (yellow)',
     }
 );
 TemporaryBattleList.Zook = new TemporaryBattle(
@@ -1054,11 +1071,12 @@ TemporaryBattleList.Zook = new TemporaryBattle(
         new GymPokemon('Relicanth', 35797654, 26),
     ],
     'Yeah, whatever! I was leaving anyways.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 21)],
     undefined,
     {
         displayName: 'Zook',
         imageName: 'Thug',
+        returnTown: 'Pyrite Town',
     }
 );
 TemporaryBattleList['Miror B. 2'] = new TemporaryBattle(
@@ -1070,8 +1088,8 @@ TemporaryBattleList['Miror B. 2'] = new TemporaryBattle(
         new GymPokemon('Nosepass', 38797654, 25, undefined, undefined, GameConstants.ShadowStatus.Shadow),
         new GymPokemon('Ludicolo', 38797654, 26),
     ],
-    'I shouldn\'t have done something this strenuous right after eating…',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    'I shouldn\'t have done something this strenuous right after eating… I\'ll need to get some new Shadow Pokémon from Team Snagem.',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 22)],
     undefined,
     {
         displayName: 'Miror B.',
@@ -2098,7 +2116,7 @@ TemporaryBattleList['Sycamore 1'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('A Beautiful World').beginQuest();
+            App.game.quests.getQuestLine('A Beautiful World').beginQuest(0, undefined, true);
         },
         displayName: 'Pokémon Professor Sycamore',
         imageName: 'Sycamore',
@@ -3382,9 +3400,9 @@ TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
     ],
     'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/Gengarite.png"/></br>',
     [
-        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666),
-        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444),
-        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666, 'Encounter at least 666 wild Gastly.'),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444, 'Encounter at least 444 wild Haunter.'),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13, 'Encounter at least 13 wild Gengar.'),
         new ObtainedPokemonRequirement('Gengar'),
     ],
     undefined,
@@ -3409,7 +3427,7 @@ TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
     [
         new ObtainedPokemonRequirement('Houndoom'),
         new WeatherRequirement([WeatherType.Sunny]),
-        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500, 'Capture a total of 500 or more Houndour.'),
         new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
     ],
     undefined,
@@ -3436,7 +3454,7 @@ TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
     [
         new ObtainedPokemonRequirement('Manectric'),
         new WeatherRequirement([WeatherType.Thunderstorm]),
-        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Electrike').id], 500),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Electrike').id], 500, 'Capture a total of 500 or more Electrike.'),
         new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
     ],
     undefined,
@@ -3446,6 +3464,120 @@ TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
         imageName: '../pokemon/310.01',
         hideTrainer: true,
         returnTown: 'Dendemille Town',
+    }
+);
+TemporaryBattleList['Unrivaled Red'] = new TemporaryBattle(
+    'Unrivaled Red',
+    [
+        new GymPokemon('Pikachu', 82741389, 85),
+        new GymPokemon('Machamp', 82239926, 85),
+        new GymPokemon('Arcanine', 82239926, 85),
+        new GymPokemon('Lapras', 82239926, 85),
+        new GymPokemon('Snorlax', 82239926, 85),
+        new GymPokemon('Mega Venusaur', 90263333, 85),
+    ],
+    '... ... ...!',
+    [new QuestLineStartedRequirement('An Unrivaled Power')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Red',
+        imageName: 'Red',
+    }
+);
+TemporaryBattleList['Unrivaled Blue'] = new TemporaryBattle(
+    'Unrivaled Blue',
+    [
+        new GymPokemon('Tauros', 82390364, 66),
+        new GymPokemon('Alakazam', 82390364, 66),
+        new GymPokemon('Gyarados', 82390364, 66),
+        new GymPokemon('Exeggutor', 82390364, 66),
+        new GymPokemon('Aerodactyl', 82390364, 66),
+        new GymPokemon('Mega Charizard Y', 90363626, 68),
+    ],
+    'Aw man, what was I doing?',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 1)],
+    undefined,
+    {
+        displayName: 'Gym Leader Blue',
+        imageName: 'Blue-lgpe',
+    }
+);
+TemporaryBattleList['Unrivaled Green'] = new TemporaryBattle(
+    'Unrivaled Green',
+    [
+        new GymPokemon('Clefable', 82490657, 66),
+        new GymPokemon('Gengar', 82490657, 66),
+        new GymPokemon('Victreebel', 82490657, 66),
+        new GymPokemon('Ninetales', 82490657, 66),
+        new GymPokemon('Kangaskhan', 82490657, 66),
+        new GymPokemon('Mega Blastoise', 90514065, 68),
+    ],
+    'Come on! What\'s with that...?',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 5)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Green',
+        imageName: 'Green',
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 1'] = new TemporaryBattle(
+    'Anomaly Mewtwo 1',
+    [new GymPokemon('Mega Mewtwo X', 500000000, 70)],
+    '<i>I see. You are indeed strong. But I do not wish to talk to you. As I already told you, do not continue to follow me.</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 8)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.01',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 2'] = new TemporaryBattle(
+    'Anomaly Mewtwo 2',
+    [new GymPokemon('Mega Mewtwo X', 510000000, 70)],
+    '<i>Do you not comprehend human speech?! Fine then, if you will not leave me alone, then I will not let you catch up to me!</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 9)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.01',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 3'] = new TemporaryBattle(
+    'Anomaly Mewtwo 3',
+    [new GymPokemon('Mega Mewtwo Y', 520000000, 70)],
+    '<i>Damn it! How could you possibly pursue me so quickly!</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 10)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.02',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 4'] = new TemporaryBattle(
+    'Anomaly Mewtwo 4',
+    [new GymPokemon('Mega Mewtwo Y', 530000000, 70)],
+    '<i>WHAT DO YOU WANT WITH ME, HUMAN?!</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 11)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.02',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
+    'Anomaly Mewtwo 5',
+    [new GymPokemon('Mega Mewtwo Y', 540000000, 70)],
+    '<i>GAARGH!!! ......... What? ......... You say you truly just want to help me? You are irritatingly persistant. Fine then. You say you know of a place where I can live undisturbed? Take me there.</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 12)],
+    undefined,
+    {
+        displayName: 'Anomaly Mewtwo',
+        imageName: '../pokemon/150.02',
+        hideTrainer: true,
     }
 );
 
@@ -3674,7 +3806,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
         },
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',
@@ -4704,13 +4836,10 @@ TemporaryBattleList.Eternatus = new TemporaryBattle(
 TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     'The Darkest Day',
     [new GymPokemon('Eternamax Eternatus', 1567895148, 60)],
-    '<b><i>You caught Eternatus!</i></b>',
+    '<b><i>You finally defeated Eternatus!</i></b>',
     [new TemporaryBattleRequirement('Eternatus')],
     undefined,
     {
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Eternatus');
-        },
         hideTrainer: true,
         imageName: '../pokemon/890',
     }
@@ -5402,6 +5531,427 @@ TemporaryBattleList.Regigigas = new TemporaryBattle(
         imageName: '../pokemon/486',
     }
 );
+TemporaryBattleList['Max Raid Venusaur'] = new TemporaryBattle(
+    'Max Raid Venusaur',
+    [new GymPokemon('Gigantamax Venusaur', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(0, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Master Dojo',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Charizard'] = new TemporaryBattle(
+    'Max Raid Charizard',
+    [new GymPokemon('Gigantamax Charizard', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Blastoise'] = new TemporaryBattle(
+    'Max Raid Blastoise',
+    [new GymPokemon('Gigantamax Blastoise', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(2, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Master Dojo',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Butterfree'] = new TemporaryBattle(
+    'Max Raid Butterfree',
+    [new GymPokemon('Gigantamax Butterfree', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(3, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Master Dojo',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Pikachu'] = new TemporaryBattle(
+    'Max Raid Pikachu',
+    [new GymPokemon('Gigantamax Pikachu', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(4, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Freezington',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Meowth'] = new TemporaryBattle(
+    'Max Raid Meowth',
+    [new GymPokemon('Gigantamax Meowth', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(5, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Tunnel to the Top',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Machamp'] = new TemporaryBattle(
+    'Max Raid Machamp',
+    [new GymPokemon('Gigantamax Machamp', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(6, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Gengar'] = new TemporaryBattle(
+    'Max Raid Gengar',
+    [new GymPokemon('Gigantamax Gengar', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(7, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Kingler'] = new TemporaryBattle(
+    'Max Raid Kingler',
+    [new GymPokemon('Gigantamax Kingler', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(8, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Lapras'] = new TemporaryBattle(
+    'Max Raid Lapras',
+    [new GymPokemon('Gigantamax Lapras', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(9, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Roaring-Sea Caves',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Eevee'] = new TemporaryBattle(
+    'Max Raid Eevee',
+    [new GymPokemon('Gigantamax Eevee', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(10, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Freezington',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Snorlax'] = new TemporaryBattle(
+    'Max Raid Snorlax',
+    [new GymPokemon('Gigantamax Snorlax', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(11, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Dyna Tree Hill',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Garbodor'] = new TemporaryBattle(
+    'Max Raid Garbodor',
+    [new GymPokemon('Gigantamax Garbodor', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(12, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Warm-Up Tunnel',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Rillaboom'] = new TemporaryBattle(
+    'Max Raid Rillaboom',
+    [new GymPokemon('Gigantamax Rillaboom', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(13, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Tower of Waters',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Cinderace'] = new TemporaryBattle(
+    'Max Raid Cinderace',
+    [new GymPokemon('Gigantamax Cinderace', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(14, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Tower of Darkness',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Inteleon'] = new TemporaryBattle(
+    'Max Raid Inteleon',
+    [new GymPokemon('Gigantamax Inteleon', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(15, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Tower of Waters',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Corviknight'] = new TemporaryBattle(
+    'Max Raid Corviknight',
+    [new GymPokemon('Gigantamax Corviknight', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(16, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Professor Magnolia\'s House',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Orbeetle'] = new TemporaryBattle(
+    'Max Raid Orbeetle',
+    [new GymPokemon('Gigantamax Orbeetle', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(17, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Dusty Bowl',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Drednaw'] = new TemporaryBattle(
+    'Max Raid Drednaw',
+    [new GymPokemon('Gigantamax Drednaw', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(18, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Professor Magnolia\'s House',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Coalossal'] = new TemporaryBattle(
+    'Max Raid Coalossal',
+    [new GymPokemon('Gigantamax Coalossal', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(19, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Flapple'] = new TemporaryBattle(
+    'Max Raid Flapple',
+    [new GymPokemon('Gigantamax Flapple', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(20, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Roaring-Sea Caves',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Appletun'] = new TemporaryBattle(
+    'Max Raid Appletun',
+    [new GymPokemon('Gigantamax Appletun', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(21, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Rock Peak Ruins',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Sandaconda'] = new TemporaryBattle(
+    'Max Raid Sandaconda',
+    [new GymPokemon('Gigantamax Sandaconda', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(22, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Warm-Up Tunnel',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Toxtricity'] = new TemporaryBattle(
+    'Max Raid Toxtricity',
+    [new GymPokemon('Gigantamax Toxtricity', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(23, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Tower of Waters',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Centiskorch'] = new TemporaryBattle(
+    'Max Raid Centiskorch',
+    [new GymPokemon('Gigantamax Centiskorch', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(24, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Hatterene'] = new TemporaryBattle(
+    'Max Raid Hatterene',
+    [new GymPokemon('Gigantamax Hatterene', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(25, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Roaring-Sea Caves',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Grimmsnarl'] = new TemporaryBattle(
+    'Max Raid Grimmsnarl',
+    [new GymPokemon('Gigantamax Grimmsnarl', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(26, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Split-Decision Ruins',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Alcremie'] = new TemporaryBattle(
+    'Max Raid Alcremie',
+    [new GymPokemon('Gigantamax Alcremie', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(27, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Dusty Bowl',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Copperajah'] = new TemporaryBattle(
+    'Max Raid Copperajah',
+    [new GymPokemon('Gigantamax Copperajah', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(28, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Iron Ruins',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+TemporaryBattleList['Max Raid Duraludon'] = new TemporaryBattle(
+    'Max Raid Duraludon',
+    [new GymPokemon('Gigantamax Duraludon', 2031393560, 70)],
+    undefined,
+    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(29, 30, 10)],
+    undefined,
+    {
+        hideTrainer: true,
+        displayName: 'Max Raid',
+        returnTown: 'Professor Magnolia\'s House',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
+    }
+);
+
 
 // Hisui Temporary Battles
 TemporaryBattleList['Volo 1'] = new TemporaryBattle(
@@ -5728,22 +6278,6 @@ TemporaryBattleList.Beni = new TemporaryBattle(
         imageName: 'Beni (Ninja)',
     }
 );
-TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
-    'Kamado 1',
-    [
-        new GymPokemon('Hisuian Braviary', 348526193, 61),
-        new GymPokemon('Golem', 348526193, 61),
-        new GymPokemon('Clefable', 348526193, 61),
-        new GymPokemon('Snorlax', 348526193, 62),
-    ],
-    'Any Pokémon that threatens our life here...must be eliminated!',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado (Armor)',
-    }
-);
 TemporaryBattleList['Charm 2'] = new TemporaryBattle(
     'Charm 2',
     [
@@ -5758,32 +6292,30 @@ TemporaryBattleList['Charm 2'] = new TemporaryBattle(
         imageName: 'Charm',
     }
 );
-TemporaryBattleList['Dialga (Origin) 1'] = new TemporaryBattle(
-    'Dialga (Origin) 1',
+TemporaryBattleList['Dialga (Origin)'] = new TemporaryBattle(
+    'Dialga (Origin)',
     [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
     'Dialga was captured in the Origin Ball and returned to its base form!',
     [new DevelopmentRequirement()],
     undefined,
     {
-        displayName: 'Dialga - Origin Form',
         hideTrainer: true,
         imageName: '../pokemon/483.01',
     }
 );
-TemporaryBattleList['Palkia (Origin) 1'] = new TemporaryBattle(
-    'Palkia (Origin) 1',
+TemporaryBattleList['Palkia (Origin)'] = new TemporaryBattle(
+    'Palkia (Origin)',
     [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
     'Palkia was captured in the Origin Ball and returned to its base form!',
     [new DevelopmentRequirement()],
     undefined,
     {
-        displayName: 'Palkia - Origin Form',
         hideTrainer: true,
         imageName: '../pokemon/484.01',
     }
 );
-TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
-    'Kamado 2',
+TemporaryBattleList['The Galaxy Team\'s Kamado'] = new TemporaryBattle(
+    'The Galaxy Team\'s Kamado',
     [
         new GymPokemon('Golem', 348526193, 65),
         new GymPokemon('Clefable', 348526193, 65),
@@ -5792,12 +6324,7 @@ TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
         new GymPokemon('Snorlax', 348526193, 66),
     ],
     'Even frightful creatures like Pokémon can become powerful allies...',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado (Armor)',
-    }
+    [new DevelopmentRequirement()]
 );
 TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
     'Adaman 2',
@@ -5829,32 +6356,6 @@ TemporaryBattleList['Irida 3'] = new TemporaryBattle(
         imageName: 'Irida',
     }
 );
-TemporaryBattleList['Dialga (Origin) 2'] = new TemporaryBattle(
-    'Dialga (Origin) 2',
-    [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Dialga (Origin)')],
-    {
-        isTrainerBattle: false,
-        displayName: 'Dialga - Origin Form',
-        hideTrainer: true,
-        imageName: '../pokemon/483.01',
-    }
-);
-TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
-    'Palkia (Origin) 2',
-    [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Palkia (Origin)')],
-    {
-        isTrainerBattle: false,
-        displayName: 'Palkia (Origin)',
-        hideTrainer: true,
-        imageName: '../pokemon/484.01',
-    }
-);
 TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     'Volo 3',
     [
@@ -5867,18 +6368,6 @@ TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Wielder Volo',
         imageName: 'Volo',
-    }
-);
-TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
-    'Giratina (Origin)',
-    [new GymPokemon('Giratina (Origin)', 2031393560, 70)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Giratina (Origin)'), new TemporaryBattleRequirement('Giratina (Origin)')],
-    {
-        isTrainerBattle: false,
-        imageName: '../pokemon/487.01',
-        hideTrainer: true,
     }
 );
 TemporaryBattleList['Tornadus 1'] = new TemporaryBattle(
@@ -6038,4 +6527,18 @@ TemporaryBattleList.Arceus = new TemporaryBattle(
         hideTrainer: true,
         imageName: '../pokemon/493',
     }
+);
+
+// Paldea Temporary Battles
+TemporaryBattleList['Paradise Protection Protocol'] = new TemporaryBattle(
+    'Paradise Protection Protocol',
+    [
+        new GymPokemon('Koraidon', 710987746, 70),
+        new GymPokemon('Miraidon', 710987746, 70),
+    ],
+    '<i>The Guardians of Paradise were defeated!</i>',
+    [
+        new GymBadgeRequirement(BadgeEnums.Elite_Sada),
+        new GymBadgeRequirement(BadgeEnums.Elite_Turo),
+    ]
 );

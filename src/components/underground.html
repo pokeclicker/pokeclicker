@@ -175,34 +175,96 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody data-bind='foreach: DailyDeal.list'>
+                            <tbody>
+                                <!-- ko foreach: DailyDeal.list -->
                                 <tr>
                                     <td class='vertical-middle text-center' data-bind="text: player.getUndergroundItemAmount(item1.id).toLocaleString('en-US')"></td>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: item1.image }'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
+                                    <td class="vertical-middle">
+                                        <span data-bind="text: amount1"></span>
+                                        <span data-bind="visible: App.game.underground.tradeAmount() > 1, text: ` (${(amount1 * App.game.underground.tradeAmount()).toLocaleString('en-US')})`"></span>
+                                        <span data-bind="text: ` × ${item1.name}`"></span>
+                                    </td>
                                     <td class='vertical-middle'>→</td>
                                     <td class='vertical-middle text-center' data-bind="text: player.getUndergroundItemAmount(item2.id).toLocaleString('en-US')"></td>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: item2.image }'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
+                                    <td class="vertical-middle">
+                                        <span data-bind="text: amount2"></span>
+                                        <span data-bind="visible: App.game.underground.tradeAmount() > 1, text: ` (${(amount2 * App.game.underground.tradeAmount()).toLocaleString('en-US')})`"></span>
+                                        <span data-bind="text: ` × ${item2.name}`"></span>
+                                    </td>
                                     <td class='vertical-middle'>
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){DailyDeal.use($index(), tradeAmount())}, css: { disabled: !DailyDeal.canUse($index()) }'>
+                                        <div class="btn-group btn-block">
+                                            <button class="btn btn-primary btn-block" data-bind="click: () => DailyDeal.use($index(), App.game.underground.tradeAmount()), css: { disabled: !DailyDeal.canUse($index()) }">
                                                 Trade
                                             </button>
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !DailyDeal.canUse($index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            </button>
-                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data.toLocaleString('en-US')"></button>
+                                            <button type="button" data-bind="css: { disabled: !DailyDeal.canUse($index()) }"
+                                                class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                            <div class="dropdown-menu text-center p-0">
+                                                <p class="small py-2 m-0">Set Trade Amount</p>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <!-- ko foreach: [10, 25, 50, 75, 100] -->
+                                                <button class="dropdown-item small py-1" type="button" data-bind="text: `${$data}%`,
+                                                    click: () => { App.game.underground.tradeAmount(Math.floor(player.getUndergroundItemAmount($parent.item1.id) * ($data / 100) / $parent.amount1)) }"></button>
+                                                <!-- /ko -->
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
+                                <!-- /ko -->
+                                <!-- ko ifnot: App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max).isMaxLevel() -->
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted p-2">Upgrade the Underground to unlock additional deals!</td>
+                                </tr>
+                                <!-- /ko -->
                             </tbody>
                         </table>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center p-2">
+                        <div class="col-12 col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont"
+                                        data-bind="click: () => App.game.underground.tradeAmount(1)">Reset</button>
+                                </div>
+                                <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: App.game.underground.tradeAmount" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split rounded-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" data-bind="foreach: [10, 100, 1000]">
+                                        <button class="dropdown-item py-1" type="button" data-bind="text: $data.toLocaleString('en-US'),
+                                            click: () => App.game.underground.tradeAmount($data)"></button>
+                                    </div>
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(10)">
+                                        +10
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(100)">
+                                        +100
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.multiplyTradeAmount(10)">
+                                        &times;10
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.multiplyTradeAmount(0.1)">
+                                        &div;10
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(100)">
+                                        +100
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(1000)">
+                                        +1,000
+                                    </button>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

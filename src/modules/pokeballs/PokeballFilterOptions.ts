@@ -4,12 +4,12 @@ import Setting from '../settings/Setting';
 import GameHelper from '../GameHelper';
 import SettingOption from '../settings/SettingOption';
 import KeyItemType from '../enums/KeyItemType';
-import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import Requirement from '../requirements/Requirement';
 import CustomRequirement from '../requirements/CustomRequirement';
 import PokemonType from '../enums/PokemonType';
 import EncounterType from '../enums/EncounterType';
 import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
+import PokemonCategories from '../party/Category';
 
 class PokeballFilterOption<T, M = T> {
     public defaultSetting: Setting<T>;
@@ -30,7 +30,7 @@ class PokeballFilterOption<T, M = T> {
     }
 }
 
-const tempShadowRequirement = new DevelopmentRequirement();
+const tempShadowRequirement = new QuestLineStepCompletedRequirement('Shadows in the Desert', 3);
 
 const encounterTypeRequirements: Partial<Record<EncounterType, Requirement>> = {
     [EncounterType.trainer]: tempShadowRequirement,
@@ -134,6 +134,16 @@ export const pokeballFilterOptions = {
             type,
         ),
         (type) => `Is ${GameHelper.anOrA(type)} ${type} encounter`,
+    ),
+
+    category: new PokeballFilterOption<number>(
+        (category = 0) => new Setting(
+            'pokeballFilterCategory',
+            'Category',
+            () => PokemonCategories.categories().map((c) => new SettingOption(c.name(), c.id)),
+            category,
+        ),
+        (category) => `In the ${PokemonCategories.categories().find(c => c.id == category)?.name()} category`,
     ),
 };
 

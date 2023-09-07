@@ -7,6 +7,7 @@ class SafariPokemon implements PokemonInterface {
     baseCatchFactor: number;
     baseEscapeFactor: number;
     gender: number;
+    shadow = GameConstants.ShadowStatus.None;
 
     // Used for overworld sprites
     x = 0;
@@ -112,9 +113,11 @@ class SafariPokemon implements PokemonInterface {
         this._eatingBait(value);
     }
 
-    public static random() {
+    public static random(environment = SafariEnvironments.Grass) {
         // Get a random pokemon from current region and zone for Safari Zone
-        const safariPokemon = SafariPokemonList.list[Safari.activeRegion()]().filter((p) => p.isAvailable());
+        const safariPokemon = SafariPokemonList.list[Safari.activeRegion()]().filter(
+            (p) => p.isAvailable() && p.environments.includes(environment)
+        );
         const pokemon = Rand.fromWeightedArray(safariPokemon, safariPokemon.map(p => p.weight));
         return new SafariPokemon(pokemon.name);
     }

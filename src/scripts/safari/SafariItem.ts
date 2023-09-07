@@ -10,7 +10,7 @@ type SafariItemWeighed = {
 }
 
 class SafariItemController {
-    private static list: Record<GameConstants.Region, Array<SafariItemWeighed>> = {
+    public static list: Record<GameConstants.Region, Array<SafariItemWeighed>> = {
         [GameConstants.Region.kanto]: [
             {item: {id: 'Razz', type: ItemType.berry}, weight: 1.8},
             {item: {id: 'Nanab', type: ItemType.berry}, weight: 1.8},

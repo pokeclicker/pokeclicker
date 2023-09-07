@@ -22,6 +22,7 @@ class PartyPokemon implements Saveable {
     public exp = 0;
     public evs: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
+    private _canUseHeldItem: KnockoutComputed<boolean>;
 
     defaults = {
         attackBonusPercent: 0,
@@ -96,6 +97,7 @@ class PartyPokemon implements Saveable {
                     message: `${this.name} has become Resistant to Pokérus.`,
                     pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
                     type: NotificationConstants.NotificationOption.info,
+                    sound: NotificationConstants.NotificationSound.General.pokerus,
                     setting: NotificationConstants.NotificationSetting.General.pokerus,
                 });
                 App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
@@ -109,14 +111,20 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
+        this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
+        this._canUseHeldItem.subscribe((canUse) => {
+            if (!canUse && this.heldItem()) {
+                this.addOrRemoveHeldItem(this.heldItem());
+            }
+        });
     }
 
     public calculateAttack(ignoreLevel = false): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         const evsMultiplier = this.calculateEVAttackBonus();
-        const heldItemMultiplier = this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
-        const shadowMultiplier = this.shadow == GameConstants.ShadowStatus.Shadow ? 0.8 : (this.shadow == GameConstants.ShadowStatus.Purified ? 1.2 : 1);
+        const heldItemMultiplier = this.heldItemAttackBonus();
+        const shadowMultiplier = this.shadowAttackBonus();
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
 
@@ -162,7 +170,7 @@ class PartyPokemon implements Saveable {
         const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
         for (let i = this.level - 1; i < levelRequirements[levelType].length; i++) {
             if (levelRequirements[levelType][i] > this.exp) {
-                return i;
+                return Math.min(i, App.game.badgeCase.maxLevel());
             }
         }
         return this.level;
@@ -170,7 +178,9 @@ class PartyPokemon implements Saveable {
 
     public gainExp(exp: number) : number {
         const expGained = exp * this.getExpMultiplier();
-        this.exp += expGained;
+        if (this.level < App.game.badgeCase.maxLevel()) {
+            this.exp += expGained;
+        }
         const oldLevel = this.level;
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
@@ -340,8 +350,21 @@ class PartyPokemon implements Saveable {
         return (this.baseAttack * attackBonusPercent) + proteinBoost;
     });
 
+    heldItemAttackBonus = ko.pureComputed((): number => {
+        return this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
+    });
+
+    shadowAttackBonus = ko.pureComputed((): number => {
+        return this.shadow == GameConstants.ShadowStatus.Shadow ? 0.8 : (this.shadow == GameConstants.ShadowStatus.Purified ? 1.2 : 1);
+    });
+
     breedingEfficiency = ko.pureComputed((): number => {
-        return ((this.getBreedingAttackBonus() * this.calculateEVAttackBonus()) / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
+        let breedingAttackBonus = this.getBreedingAttackBonus();
+        if (Settings.getSetting('breedingEfficiencyAllModifiers').observableValue()) {
+            breedingAttackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
+        }
+
+        return (breedingAttackBonus / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
     });
 
     public isHatchable = ko.pureComputed(() => {
@@ -427,32 +450,6 @@ class PartyPokemon implements Saveable {
         return true;
     });
 
-    public hideFromProteinList = ko.pureComputed(() => {
-        // Check if search matches nickname or translated name
-        if (
-            !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this._translatedName())
-            && !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.displayName)
-        ) {
-            return true;
-        }
-        if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('vitaminRegionFilter').observableValue()) {
-                return true;
-            }
-        }
-        const type = Settings.getSetting('vitaminTypeFilter').observableValue();
-        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
-            return true;
-        }
-        if (this.vitaminUsesRemaining() == 0 && Settings.getSetting('vitaminHideMaxedPokemon').observableValue()) {
-            return true;
-        }
-        if (this._shiny() && Settings.getSetting('vitaminHideShinyPokemon').observableValue()) {
-            return true;
-        }
-        return false;
-    });
-
     public giveHeldItem = (heldItem: HeldItem): void => {
         if (!this.heldItem() || heldItem.name != this.heldItem().name) {
             if (heldItem && !heldItem.canUse(this)) {
@@ -495,52 +492,6 @@ class PartyPokemon implements Saveable {
             this.heldItem(heldItem);
         }
     }
-
-    public hideFromHeldItemList = ko.pureComputed(() => {
-        if (!HeldItem.heldItemSelected()?.canUse(this)) {
-            return true;
-        }
-        if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.displayName)) {
-            return true;
-        }
-        if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
-                return true;
-            }
-        }
-        const type = Settings.getSetting('heldItemTypeFilter').observableValue();
-        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
-            return true;
-        }
-        if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && this.heldItem()) {
-            return true;
-        }
-        if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && this.heldItem() !== HeldItem.heldItemSelected()) {
-            return true;
-        }
-
-        return false;
-    });
-
-    public hideFromConsumableList = ko.pureComputed(() => {
-        if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(this.displayName)) {
-            return true;
-        }
-        if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('consumableRegionFilter').observableValue()) {
-                return true;
-            }
-        }
-        const type = Settings.getSetting('consumableTypeFilter').observableValue();
-        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
-            return true;
-        }
-        if (Settings.getSetting('consumableHideShinyPokemon').observableValue() && this.shiny) {
-            return true;
-        }
-
-        return false;
-    });
 
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {

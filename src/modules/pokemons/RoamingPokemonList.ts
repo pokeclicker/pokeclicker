@@ -1,7 +1,7 @@
 import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
-    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, Region, getDungeonIndex,
+    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, Region, getDungeonIndex,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
@@ -22,13 +22,14 @@ export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
         [new RoamingGroup('Kanto', [KantoSubRegions.Kanto]), new RoamingGroup('Kanto - Sevii Islands', [KantoSubRegions.Sevii123, KantoSubRegions.Sevii4567])],
         [new RoamingGroup('Johto', [JohtoSubRegions.Johto])],
-        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn]), new RoamingGroup('Orre', [HoennSubRegions.Orre])],
+        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn]), new RoamingGroup('Hoenn - Orre', [HoennSubRegions.Orre])],
         [new RoamingGroup('Sinnoh', [SinnohSubRegions.Sinnoh])],
         [new RoamingGroup('Unova', [UnovaSubRegions.Unova])],
         [new RoamingGroup('Kalos', [KalosSubRegions.Kalos])],
         [new RoamingGroup('Alola', [AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland]), new RoamingGroup('Alola - Magikarp Jump', [AlolaSubRegions.MagikarpJump])],
         [new RoamingGroup('Galar - South', [GalarSubRegions.SouthGalar]), new RoamingGroup('Galar - North', [GalarSubRegions.NorthGalar]), new RoamingGroup('Galar - Isle of Armor', [GalarSubRegions.IsleofArmor]), new RoamingGroup('Galar - Crown Tundra', [GalarSubRegions.CrownTundra])],
         [new RoamingGroup('Hisui', [HisuiSubRegions.Hisui])],
+        [new RoamingGroup('Paldea', [PaldeaSubRegions.Paldea])],
     ];
 
     public static list: Partial<Record<Region, Array<Array<RoamingPokemon>>>> = {};
@@ -106,6 +107,7 @@ RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new QuestLi
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
 // Orre
 RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Ho-Oh', new QuestLineCompletedRequirement('Shadows in the Desert')));
+RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Bonsly', new QuestLineCompletedRequirement('Gale of Darkness')));
 
 // Sinnoh
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Manaphy', new QuestLineCompletedRequirement('Recover the Precious Egg!')));
@@ -150,6 +152,11 @@ RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Thundurus', new Ques
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Landorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Enamorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3)));
 
+// Paldea - Note: Gimmighoul, Walking Wake and Iron Leaves will be put somewhere else if future content gives somewhere more interesting.
+RoamingPokemonList.add(Region.paldea, 0, new RoamingPokemon('Gimmighoul (Roaming)'));
+RoamingPokemonList.add(Region.paldea, 0, new RoamingPokemon('Walking Wake'));
+RoamingPokemonList.add(Region.paldea, 0, new RoamingPokemon('Iron Leaves'));
+
 // Events
 // Lunar New Year (Jan 24 - Feb 7)
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year')));
@@ -165,9 +172,10 @@ RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)', 
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Flying Pikachu', new SpecialEventRequirement('Flying Pikachu')));
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Red Spearow', new SpecialEventRequirement('Flying Pikachu')));
 // First movie anniversay (Jul 18 - Jul 24)
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Charmander (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Charmander (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Pikachu (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ObtainedPokemonRequirement('Pikachu (Clone)')])));
 // Halloween (Oct 30 - Nov 5)
 // Let's Go Pikachu Eevee (Nov 16 - Nov 23)
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu', new SpecialEventRequirement('Let\'s GO!')));
