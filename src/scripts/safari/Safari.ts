@@ -3,7 +3,6 @@ class Safari {
     static accessibleTiles: Array<Array<boolean>>;
     static pokemonGrid: KnockoutObservableArray<SafariPokemon> = ko.observableArray([]);
     static itemGrid: KnockoutObservableArray<SafariItem> = ko.observableArray([]);
-    static player: Point = new Point(12, 20);
     static lastDirection = 'up';
     static nextDirection: string;
     static steps = 0;
@@ -568,7 +567,9 @@ class Safari {
     }
 
     private static getEnvironmentTile(x, y) {
-        if (GameConstants.SAFARI_WATER_BLOCKS.includes(Safari.grid[y][x])) { // Water environment
+        if (!(0 <= y && y < Safari.grid.length && 0 <= x && x < Safari.grid[y].length)) {
+            return null;
+        } else if (GameConstants.SAFARI_WATER_BLOCKS.includes(Safari.grid[y][x])) { // Water environment
             return SafariEnvironments.Water;
         } else { // Grass environment by default
             return SafariEnvironments.Grass;
