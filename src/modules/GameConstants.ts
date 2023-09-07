@@ -2258,7 +2258,7 @@ export const MoonCycleValues: Record<MoonCyclePhase, number> = {
     [MoonCyclePhase.WaxingGibbous]: 3,
     [MoonCyclePhase.FullMoon]: 4,
     [MoonCyclePhase.WaningGibbous]: 5,
-    [MoonCyclePhase.LastQuarter]: 6,
+    [MoonCyclePhase.ThirdQuarter]: 6,
     [MoonCyclePhase.WaningCrescent]: 7,
 };
 

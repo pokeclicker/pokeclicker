@@ -799,7 +799,7 @@ namespace GameConstants {
         [MoonCyclePhase.WaxingCrescent]: 1,
         [MoonCyclePhase.FirstQuarter]: 2,
         [MoonCyclePhase.WaxingGibbous]: 3,
-        [MoonCyclePhase.FullMoonMoon]: 4,
+        [MoonCyclePhase.FullMoon]: 4,
         [MoonCyclePhase.WaningGibbous]: 5,
         [MoonCyclePhase.ThirdQuarter]: 6,
         [MoonCyclePhase.WaningCrescent]: 7,
