@@ -8686,7 +8686,6 @@ const JubilifeVillageShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Black_augurite,
-    ItemList.Peat_block,
 ]);
 
 // Hisui NPCs
