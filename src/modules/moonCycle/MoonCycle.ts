@@ -33,19 +33,19 @@ export default class MoonCycle {
 
     public static currentMoonPhases: Record<MoonCyclePhase, CurrentMoonPhase> = {
         [MoonCyclePhase.NewMoon]:
-            new CurrentMoonPhase(MoonCyclePhase.NewMoon, '#3b365e', 'New Moon'),
+            new CurrentMoonPhase(MoonCyclePhase.NewMoon, '#221f3c', 'New Moon'),
         [MoonCyclePhase.WaxingCrescent]:
             new CurrentMoonPhase(MoonCyclePhase.WaxingCrescent, '#3b365e', 'Waxing Crescent Moon'),
         [MoonCyclePhase.FirstQuarter]:
-            new CurrentMoonPhase(MoonCyclePhase.FirstQuarter, '#3b365e', 'First Quarter Moon'),
+            new CurrentMoonPhase(MoonCyclePhase.FirstQuarter, '#544e80', 'First Quarter Moon'),
         [MoonCyclePhase.WaxingGibbous]:
-            new CurrentMoonPhase(MoonCyclePhase.WaxingGibbous, '#3b365e', 'Waxing Gibbous Moon'),
+            new CurrentMoonPhase(MoonCyclePhase.WaxingGibbous, '#7e77af', 'Waxing Gibbous Moon'),
         [MoonCyclePhase.FullMoon]:
-            new CurrentMoonPhase(MoonCyclePhase.FullMoon, '#3b365e', 'Full Moon'),
+            new CurrentMoonPhase(MoonCyclePhase.FullMoon, '#9d97c7', 'Full Moon'),
         [MoonCyclePhase.WaningGibbous]:
-            new CurrentMoonPhase(MoonCyclePhase.WaningGibbous, '#3b365e', 'Waning Gibbous Moon'),
+            new CurrentMoonPhase(MoonCyclePhase.WaningGibbous, '#7e77af', 'Waning Gibbous Moon'),
         [MoonCyclePhase.ThirdQuarter]:
-            new CurrentMoonPhase(MoonCyclePhase.ThirdQuarter, '#3b365e', 'Third Quarter Moon'),
+            new CurrentMoonPhase(MoonCyclePhase.ThirdQuarter, '#544e80', 'Third Quarter Moon'),
         [MoonCyclePhase.WaningCrescent]:
             new CurrentMoonPhase(MoonCyclePhase.WaningCrescent, '#3b365e', 'Waning Crescent Moon'),
     };
