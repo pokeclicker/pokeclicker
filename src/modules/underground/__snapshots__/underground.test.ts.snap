@@ -5,7 +5,7 @@ exports[`DailyDeal > generates the same deals as last build > 2023-01-01 1`] = `
   {
     "amount1": 2,
     "amount2": 3,
-    "item1": "Heat Rock",
+    "item1": "Icy Rock",
     "item2": "Iron Plate",
   },
   {
@@ -18,19 +18,19 @@ exports[`DailyDeal > generates the same deals as last build > 2023-01-01 1`] = `
     "amount1": 2,
     "amount2": 1,
     "item1": "Icicle Plate",
-    "item2": "Dome Fossil",
+    "item2": "Old Amber",
   },
   {
     "amount1": 1,
     "amount2": 2,
     "item1": "Sky Plate",
-    "item2": "Thunder Stone",
+    "item2": "Moon Stone",
   },
   {
     "amount1": 1,
     "amount2": 3,
-    "item1": "Splash Plate",
-    "item2": "Dusk Stone",
+    "item1": "Spooky Plate",
+    "item2": "Dawn Stone",
   },
   {
     "amount1": 2,
@@ -41,8 +41,8 @@ exports[`DailyDeal > generates the same deals as last build > 2023-01-01 1`] = `
   {
     "amount1": 1,
     "amount2": 1,
-    "item1": "Dread Plate",
-    "item2": "Mind Plate",
+    "item1": "Earth Plate",
+    "item2": "Sky Plate",
   },
   {
     "amount1": 1,
@@ -57,10 +57,10 @@ exports[`DailyDeal > generates the same deals as last build > 2023-01-01 1`] = `
     "item2": "Cyan Shard",
   },
   {
-    "amount1": 1,
+    "amount1": 3,
     "amount2": 3,
-    "item1": "Fossilized Dino",
-    "item2": "Fossilized Drake",
+    "item1": "Oval Stone",
+    "item2": "Fire Stone",
   },
 ]
 `;
@@ -70,19 +70,19 @@ exports[`DailyDeal > generates the same deals as last build > 2023-05-01 1`] = `
   {
     "amount1": 2,
     "amount2": 3,
-    "item1": "Hard Stone",
-    "item2": "Skull Fossil",
+    "item1": "Oval Stone",
+    "item2": "Cover Fossil",
   },
   {
     "amount1": 2,
     "amount2": 3,
-    "item1": "Fist Plate",
-    "item2": "Purple Shard",
+    "item1": "Flame Plate",
+    "item2": "Grey Shard",
   },
   {
     "amount1": 2,
     "amount2": 3,
-    "item1": "Fossilized Drake",
+    "item1": "Fossilized Dino",
     "item2": "Heart Scale",
   },
   {
@@ -101,13 +101,13 @@ exports[`DailyDeal > generates the same deals as last build > 2023-05-01 1`] = `
     "amount1": 2,
     "amount2": 2,
     "item1": "Meadow Plate",
-    "item2": "Skull Fossil",
+    "item2": "Cover Fossil",
   },
   {
     "amount1": 2,
     "amount2": 3,
-    "item1": "Fossilized Drake",
-    "item2": "Iron Plate",
+    "item1": "Fossilized Dino",
+    "item2": "Meadow Plate",
   },
   {
     "amount1": 1,
@@ -124,7 +124,7 @@ exports[`DailyDeal > generates the same deals as last build > 2023-05-01 1`] = `
   {
     "amount1": 1,
     "amount2": 3,
-    "item1": "Sail Fossil",
+    "item1": "Fossilized Bird",
     "item2": "Damp Rock",
   },
 ]
@@ -136,61 +136,61 @@ exports[`DailyDeal > generates the same deals as last build > 2023-09-01 1`] = `
     "amount1": 3,
     "amount2": 3,
     "item1": "Everstone",
-    "item2": "Skull Fossil",
+    "item2": "Cover Fossil",
   },
   {
     "amount1": 2,
     "amount2": 2,
     "item1": "Hard Stone",
-    "item2": "Green Shard",
-  },
-  {
-    "amount1": 2,
-    "amount2": 3,
-    "item1": "Earth Plate",
-    "item2": "Dread Plate",
+    "item2": "Yellow Shard",
   },
   {
     "amount1": 3,
     "amount2": 3,
-    "item1": "Fossilized Fish",
-    "item2": "Dusk Stone",
+    "item1": "Fossilized Drake",
+    "item2": "Ice Stone",
   },
   {
     "amount1": 2,
     "amount2": 3,
-    "item1": "Sky Plate",
-    "item2": "Fossilized Fish",
-  },
-  {
-    "amount1": 3,
-    "amount2": 1,
-    "item1": "Insect Plate",
+    "item1": "Splash Plate",
     "item2": "Fossilized Drake",
   },
   {
     "amount1": 3,
     "amount2": 1,
-    "item1": "Sail Fossil",
+    "item1": "Insect Plate",
+    "item2": "Fossilized Dino",
+  },
+  {
+    "amount1": 3,
+    "amount2": 1,
+    "item1": "Fossilized Bird",
     "item2": "Sky Plate",
   },
   {
     "amount1": 2,
     "amount2": 1,
-    "item1": "Mind Plate",
+    "item1": "Sky Plate",
     "item2": "Hard Stone",
   },
   {
     "amount1": 3,
     "amount2": 3,
-    "item1": "Armor Fossil",
-    "item2": "Dusk Stone",
+    "item1": "Skull Fossil",
+    "item2": "Ice Stone",
   },
   {
     "amount1": 1,
     "amount2": 1,
     "item1": "Zap Plate",
-    "item2": "Oval Stone",
+    "item2": "Everstone",
+  },
+  {
+    "amount1": 2,
+    "amount2": 1,
+    "item1": "Iron Plate",
+    "item2": "Hard Stone",
   },
 ]
 `;
