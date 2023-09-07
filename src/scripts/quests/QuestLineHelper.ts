@@ -1485,7 +1485,7 @@ class QuestLineHelper {
     }
     // XD Questline, available after Unova E4
     public static createOrreXDQuestLine() {
-        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]), GameConstants.BulletinBoards.Unova);
+        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new DevelopmentRequirement(new MultiRequirement([new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)])), GameConstants.BulletinBoards.Unova);
 
         const talkToGateonSailor = new TalkToNPCQuest(GateonSailor, 'Ask around Gateon Port for clues about new Team Cipher activity.');
         orreXDQuestLine.addQuest(talkToGateonSailor);
@@ -1685,6 +1685,7 @@ class QuestLineHelper {
         const talkToLysandre2 = new TalkToNPCQuest(Lysandre2, 'Lysandre is calling you while you are standing in Coumarine City, pick up the phone.');
         flareKalosQuestLine.addQuest(talkToLysandre2);
 
+        // TODO: new new DefeatDungeonBossQuest('Kalos Power Plant', 'Team Flare Aliana').withCustomReward(clearedMessage) to keep story logic with old players who have unlocked volcanion
         const clearKalosPowerPlant = new CustomQuest(1, 0, 'Well, that was extremely awkward... But ignoring that, Lumiose City still hasn\'t fixed the power outage, go clear the Kalos Power Plant.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Kalos Power Plant')](), undefined, undefined,
             {
                 clearedMessage: 'You\'re quite strong. Oh yes... very strong, indeed. I certainly didn\'t expect you to be so interesting. But it matters not, we already have enough energy to power the device. I do hope we can meet again!',
@@ -2355,19 +2356,19 @@ class QuestLineHelper {
         const talkToBaraz4 = new TalkToNPCQuest(Baraz4, 'This is ridiculous. Talk to Baraz in Kiloude City.', () => ItemList.Prison_Bottle.gain(1));
         clashOfAgesQuestLine.addQuest(talkToBaraz4);
 
-        const clearHoopa1 = new DefeatTemporaryBattleQuest('Hoopa 1', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Kiloude City.');
+        const clearHoopa1 = new DefeatTemporaryBattleQuest('Hoopa 1', 'Defeat the Unbound Hoopa and its summoned defenders near Kiloude City.');
         clashOfAgesQuestLine.addQuest(clearHoopa1);
 
-        const clearHoopa2 = new DefeatTemporaryBattleQuest('Hoopa 2', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Shalour City.');
+        const clearHoopa2 = new DefeatTemporaryBattleQuest('Hoopa 2', 'Defeat the Unbound Hoopa and its summoned defenders near Shalour City.');
         clashOfAgesQuestLine.addQuest(clearHoopa2);
 
-        const clearHoopa3 = new DefeatTemporaryBattleQuest('Hoopa 3', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Lumiose City.');
+        const clearHoopa3 = new DefeatTemporaryBattleQuest('Hoopa 3', 'Defeat the Unbound Hoopa and its summoned defenders near Lumiose City.');
         clashOfAgesQuestLine.addQuest(clearHoopa3);
 
-        const clearHoopa4 = new DefeatTemporaryBattleQuest('Hoopa 4', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Anistar City.');
+        const clearHoopa4 = new DefeatTemporaryBattleQuest('Hoopa 4', 'Defeat the Unbound Hoopa and its summoned defenders near Anistar City.');
         clashOfAgesQuestLine.addQuest(clearHoopa4);
 
-        const clearHoopa5 = new DefeatTemporaryBattleQuest('Hoopa 5', 'Defeat the Unbound Hoopa and it\'s summoned defenders near Laverre City.');
+        const clearHoopa5 = new DefeatTemporaryBattleQuest('Hoopa 5', 'Defeat the Unbound Hoopa and its summoned defenders near Laverre City.');
         clashOfAgesQuestLine.addQuest(clearHoopa5);
 
         const clearHoopa6 = new DefeatTemporaryBattleQuest('Hoopa 6', 'Defeat the Unbound Hoopa near Kiloude City, this time for real.');
@@ -2453,7 +2454,7 @@ class QuestLineHelper {
             findGreatTwistedSpoon,
             unrivaledPsychicGems,
             unrivaledFightingGems,
-        ],'Gather the Great Twisted Spoon, Psychic Gems and Fighing Gems for Mewtwo.'));
+        ],'Gather the Great Twisted Spoon, Psychic Gems, and Fighting Gems for Mewtwo.'));
 
         const talkToAnomalyMewtwo3 = new TalkToNPCQuest(AnomalyMewtwo3, 'Talk to Anomaly Mewtwo in Pokémon Village.');
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo3);
@@ -3634,13 +3635,41 @@ class QuestLineHelper {
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
 
-    public static createGigantamax() {
-        const gigantiamaxQuestLine = new QuestLine('TODO Gigantamax questline name', 'TODO', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new DevelopmentRequirement()]), GameConstants.BulletinBoards.Galar);
+    public static createGigantamaxQuestLine() {
+        const gigantamaxQuestLine = new QuestLine('The Lair of Giants', 'TODO', new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)), GameConstants.BulletinBoards.Galar);
 
-        gigantiamaxQuestLine.addQuest(new CustomQuest(1, undefined, 'Obtain 1 Wishing Piece', player.itemList.Wishing_Piece, 0));
-        gigantiamaxQuestLine.addQuest(new CustomQuest(2, undefined, 'Obtain 2 Wishing Piece', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(1, undefined, 'Obtain 1 Wishing Piece', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(2, undefined, 'Obtain 2 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(3, undefined, 'Obtain 3 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(4, undefined, 'Obtain 4 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(5, undefined, 'Obtain 5 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(6, undefined, 'Obtain 6 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(7, undefined, 'Obtain 7 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(8, undefined, 'Obtain 8 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(9, undefined, 'Obtain 9 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(10, undefined, 'Obtain 10 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(11, undefined, 'Obtain 11 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(12, undefined, 'Obtain 12 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(13, undefined, 'Obtain 13 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(14, undefined, 'Obtain 14 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(15, undefined, 'Obtain 15 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(16, undefined, 'Obtain 16 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(17, undefined, 'Obtain 17 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(18, undefined, 'Obtain 18 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(19, undefined, 'Obtain 19 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(20, undefined, 'Obtain 20 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(21, undefined, 'Obtain 21 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(22, undefined, 'Obtain 22 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(23, undefined, 'Obtain 23 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(24, undefined, 'Obtain 24 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(25, undefined, 'Obtain 25 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(26, undefined, 'Obtain 26 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(27, undefined, 'Obtain 27 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(28, undefined, 'Obtain 28 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(29, undefined, 'Obtain 29 Wishing Pieces', player.itemList.Wishing_Piece, 0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(30, undefined, 'Obtain 30 Wishing Pieces', player.itemList.Wishing_Piece, 0));
 
-        App.game.quests.questLines().push(gigantiamaxQuestLine);
+        App.game.quests.questLines().push(gigantamaxQuestLine);
     }
 
     public static createOriginalColorMagearnaQuestLine() {
@@ -3886,7 +3915,7 @@ class QuestLineHelper {
         this.createGalarCrownQuestLine();
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
-        this.createGigantamax();
+        this.createGigantamaxQuestLine();
         this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
         this.createHisuiArceusQuestLine();

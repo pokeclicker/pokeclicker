@@ -106,7 +106,7 @@
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
             hidden: !$data.lock,
             tooltip: {
-                title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
+                title: $data.lockMessage,
                 placement: 'bottom',
                 trigger: 'hover'
             }">
@@ -128,7 +128,7 @@
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
             tooltip: {
-                title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
+                title: $data.lockMessage,
                 placement: 'bottom',
                 trigger: 'hover'
             }">
