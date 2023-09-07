@@ -7374,7 +7374,7 @@ TownList['Exeggutor Island'] = new Town(
     'Exeggutor Island',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), new MoveToDungeon(dungeonList['Exeggutor Island Hill'])],
+    [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), new MoveToTown('Exeggutor Island Hill', undefined, false)],
     {
         requirements: [new QuestLineCompletedRequirement('Emissary of Light')],
     }
