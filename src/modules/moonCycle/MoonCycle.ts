@@ -44,8 +44,8 @@ export default class MoonCycle {
             new CurrentMoonPhase(MoonCyclePhase.FullMoon, '#3b365e', 'Full Moon'),
         [MoonCyclePhase.WaningGibbous]:
             new CurrentMoonPhase(MoonCyclePhase.WaningGibbous, '#3b365e', 'Waning Gibbous Moon'),
-        [MoonCyclePhase.LastQuarter]:
-            new CurrentMoonPhase(MoonCyclePhase.LastQuarter, '#3b365e', 'Last Quarter Moon'),
+        [MoonCyclePhase.ThirdQuarter]:
+            new CurrentMoonPhase(MoonCyclePhase.ThirdQuarter, '#3b365e', 'Third Quarter Moon'),
         [MoonCyclePhase.WaningCrescent]:
             new CurrentMoonPhase(MoonCyclePhase.WaningCrescent, '#3b365e', 'Waning Crescent Moon'),
     };

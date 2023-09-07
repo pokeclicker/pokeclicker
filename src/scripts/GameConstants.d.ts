@@ -801,7 +801,7 @@ namespace GameConstants {
         [MoonCyclePhase.WaxingGibbous]: 3,
         [MoonCyclePhase.FullMoonMoon]: 4,
         [MoonCyclePhase.WaningGibbous]: 5,
-        [MoonCyclePhase.LastQuarter]: 6,
+        [MoonCyclePhase.ThirdQuarter]: 6,
         [MoonCyclePhase.WaningCrescent]: 7,
     };
     declare enum ShadowStatus {

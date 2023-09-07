@@ -5,7 +5,7 @@ enum MoonCyclePhase {
     WaxingGibbous,
     FullMoon,
     WaningGibbous,
-    LastQuarter,
+    ThirdQuarter,
     WaningCrescent,
 }
 
