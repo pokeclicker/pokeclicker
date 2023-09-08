@@ -2454,7 +2454,7 @@ class QuestLineHelper {
             findGreatTwistedSpoon,
             unrivaledPsychicGems,
             unrivaledFightingGems,
-        ],'Gather the Great Twisted Spoon, Psychic Gems and Fighing Gems for Mewtwo.'));
+        ],'Gather the Great Twisted Spoon, Psychic Gems, and Fighting Gems for Mewtwo.'));
 
         const talkToAnomalyMewtwo3 = new TalkToNPCQuest(AnomalyMewtwo3, 'Talk to Anomaly Mewtwo in Pokémon Village.');
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo3);

@@ -2417,3 +2417,11 @@ export enum ContestResults {
     Hyper,
     Master,
 }
+
+export enum ContestStyle {
+    Cool,
+    Beautiful,
+    Cute,
+    Clever,
+    Tough,
+}
