@@ -4,17 +4,19 @@ import CurrentMoonPhase from './CurrentMoonPhase';
 import MoonCyclePhase from './MoonCyclePhase';
 import { MoonCycleValues } from '../GameConstants';
 import { DAY } from '../GameConstants';
+import GameHelper from '../GameHelper';
 
 export default class MoonCycle {
     public static currentMoonCyclePhase: Computed<MoonCyclePhase> = ko.pureComputed(() => {
-        const moonOrigin = (new Date('01/01/1970'));
+        /*const moonOrigin = (new Date('01/01/1970'));
         const moonToday = (new Date(Date.now()));
         moonToday.setHours(0);
 	    moonToday.setMinutes(0);
 	    moonToday.setSeconds(0);
         moonToday.setMilliseconds(0);
         const moonDif = (moonToday.getTime() + moonOrigin.getTime()) / DAY;
-        const moonPhaseNow = (Math.floor(moonDif % 8));
+        const moonPhaseNow = (Math.floor(moonDif % 8));*/
+        const moonPhaseNow = (Math.floor((GameHelper.currentTime().getTime() / DAY) % 8));
 
         return Number(Object.entries(MoonCycleValues).find(([, moonPhaseC]) => moonPhaseC == moonPhaseNow)?.[0] ?? Object.keys(MoonCycleValues));
     });
