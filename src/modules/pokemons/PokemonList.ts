@@ -2470,7 +2470,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 53,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Diglett', 'Dugtrio', 26)],
+        'evolutions': [
+            LevelEvolution('Diglett', 'Dugtrio', 26),
+            DummyEvolution('Diglett', 'Dugtrio (Punk)'),
+        ],
         'base': {
             'hitpoints': 10,
             'attack': 55,
@@ -3132,6 +3135,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Bellsprout', 'Weepinbell', 21),
             DummyEvolution('Bellsprout', 'Valencian Weepinbell'),
+            DummyEvolution('Bellsprout', 'Weepinbell (Fancy)'),
         ],
         'base': {
             'hitpoints': 50,
@@ -3886,6 +3890,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             StoneEvolution('Haunter', 'Gengar', StoneType.Linking_cord),
             DummyEvolution('Haunter', 'Gigantamax Gengar'),
+            DummyEvolution('Haunter', 'Gengar (Punk)'),
         ],
         'base': {
             'hitpoints': 45,
