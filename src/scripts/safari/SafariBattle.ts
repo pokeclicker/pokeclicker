@@ -96,7 +96,7 @@ class SafariBattle {
     }
 
     private static delayRoll(result) {
-        const delayLength = (0.12 + result[1]) * SafariBattle.Speed.ballRollDelay * SafariBattle.getTierMultiplier();
+        const delayLength = (0.2 + result[1]) * SafariBattle.Speed.ballRollAnim * SafariBattle.getTierMultiplier();
         return SafariBattle.delay(delayLength)(result);
     }
 
@@ -314,7 +314,7 @@ namespace SafariBattle {
         ballBounceAnim: 1360,
         ballBounceDelay: 1445,
         ballRollAnim: 700,
-        ballRollDelay: 1190,
+        ballRollDelay: 1200,
         enemyTransition: 750,
         enemyFlee: 1000,
         enemyCaught: 1700,
