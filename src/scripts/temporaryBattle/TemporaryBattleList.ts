@@ -6538,7 +6538,7 @@ TemporaryBattleList['Paradise Protection Protocol'] = new TemporaryBattle(
     ],
     '<i>The Guardians of Paradise were defeated!</i>',
     [
-        new GymBadgeRequirement(BadgeEnums.Elite_Sada),
-        new GymBadgeRequirement(BadgeEnums.Elite_Turo),
+        new GymBadgeRequirement(BadgeEnums.Scarlet),
+        new GymBadgeRequirement(BadgeEnums.Violet),
     ]
 );
