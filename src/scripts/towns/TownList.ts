@@ -2398,12 +2398,11 @@ const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
 
 const EasterEggHunter = new NPC('Egg Hunter', [
     'My eggs! They ran away!',
-    'Can you help me get them back? They have most likely fleed to a dungeon in Hoenn or Johto.',
+    'Can you help me get them back? They have most likely fleed to a dungeon in Kanto, Hoenn or Johto.',
     'But be careful! If you defeat them, they will run away again!',
-    'And if the crew likes this questline, I will make Easter Pikachu do the same in Kanto.',
 ], {
     image: 'assets/images/npcs/Egg Hunter.png',
-    requirement: new MultiRequirement([new SpecialEventRequirement('Easter'), new QuestLineCompletedRequirement('Egg Hunt')]),
+    requirement: new MultiRequirement([new SpecialEventRequirement('Easter'), new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.more)]),
 });
 
 const SCEntrance = new NPC('Strange Markings', [
