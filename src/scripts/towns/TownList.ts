@@ -6576,21 +6576,12 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ], {image: 'assets/images/npcs/Owner.png'});
-const HeaheaBurnet1 = new NPC('Professor Burnet', [
-    'Cosmog. That\'s what Pokémon species Nebby is. In ancient times it was known also as the child of the stars.',
-    'I research Ultra Wormholes. They have nothing to do with Cosmog and probably don\'t exist, but if they did this would be some killer foreshadowing don\'t you think?',
+const ProfBurnetAlola = new NPC('Professor Burnet', [
+    'Hi there! I research Ultra Wormholes. They appear sometimes in the skies of Alola, and give off similar signals to the Pokémon Lillie has been looking after.',
+    'By the way, the name of Nebby\'s Pokémon species, Cosmog, was coined by a researcher in Aether Paradise! In ancient times it was known as the child of the stars.',
     'You say I look familiar? Oh, you\'ve probably seen me with Kukui. He\'s my husband!',
 ], {
     image: 'assets/images/npcs/Professor Burnet (gen7).png',
-    requirement: new TemporaryBattleRequirement('Ultra Wormhole', 1, GameConstants.AchievementOption.less),
-});
-const HeaheaBurnet2 = new NPC('Professor Burnet', [
-    'I can\'t believe you saw an Ultra Wormhole! I hope I can unravel its mysteries myself someday!',
-    'The name of Nebby\'s Pokémon species, Cosmog, was coined by a researcher in that very same Aether Paradise! In ancient times it was known as the child of the stars.',
-    'Oh, an <i>Ultra Wormhole</i>! Wait until my husband Kukui hears about this!',
-], {
-    image: 'assets/images/npcs/Professor Burnet (gen7).png',
-    requirement: new TemporaryBattleRequirement('Ultra Wormhole'),
 });
 const PaniolaTownActor = new NPC('Actor Meredith', [
     'I love Oricorio. I can tell you all about it!',
@@ -6626,19 +6617,19 @@ const PoTownNanu = new NPC('Officer Nanu', [
     'A trial-goer, huh? Figures. Look, I\'m not gonna fight someone who is taking on Team Skull. So...go. Just go.'
 ], {
     image: 'assets/images/npcs/Nanu.png',
-    requirement: new  QuestLineStepCompletedRequirement('Child of the Stars', 8, GameConstants.AchievementOption.less),
+    requirement: new TemporaryBattleRequirement('Gladion 2', undefined, GameConstants.AchievementOption.less),
 });
 const PoTownHomeowner = new NPC('Office Worker Royce', [
     'My house! My car! MY LAWN! What did those Team Skull kids do!?',
 ], {
     image: 'assets/images/npcs/Office Worker (male).png',
-    requirement: new  QuestLineStepCompletedRequirement('Child of the Stars', 8),
+    requirement: new TemporaryBattleRequirement('Gladion 2'),
 });
 const YungoosAetherHouse = new NPC('Yungoos', [
     'Grrrssssss',
 ], {
     image: 'assets/images/pokemon/734.png',
-    requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 6, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Child of the Stars', 6)]),
+    requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 5, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Child of the Stars', 6)]),
 });
 const SeafolkCaptain = new NPC('Captain Mina', [
     'We don\'t have a kahuna on Poni, so I don\'t have an actual trial or anything...',
@@ -6649,15 +6640,11 @@ const SeafolkCaptain = new NPC('Captain Mina', [
 });
 const SeafolkCaptainMina = new NPC('Captain Mina', [
     'My trial is in this town. Right there, inside my very own houseboat. Normally you\'d have to clear my trial to find our Kahuna on Exeggutor Island, but I guess you took care of some things, huh?',
-    'Well, in that case, I\'d better add a little something more. This is the final trial of your island challenge, afte all. I hope you\'re ready for your toughest oppenents yet!',
+    'Well, in that case, I\'d better add a little something more. This is the final trial of your island challenge, after all. I hope you\'re ready for your toughest opponents yet!',
 ], {
     image: 'assets/images/npcs/Mina.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more)])]),
 });
-const SeafolkTourist = new NPC('Sightseer Marcus', [
-    'Wow! These people used to travel all over the ocean using nothing but the sun and stars to guide them! Did you know the sun and moon are called \'luminaries\'? No, it doesn\'t have to do with the Lumen theme, it\'s cause they cast light!',
-    'In older times, people thought the sun and moon were two parts of whole, connected to each other in some way. It\'s kind of like a branched Pokémon evolution, don\'tcha think?',
-], {image: 'assets/images/npcs/Sightseer (male).png'});
 const LanakilaColress = new NPC('Colress', [
     'It\'s been a while. You must be a formidable Trainer indeed if you are able to get Necrozma as one of your allies.',
     'Good! And this is from me! The Ultra Recon Squad asked me to develop a device that would be able to control Necrozma. But I improved it to my own liking! And now it is a device that makes it possible to draw out even more power from Necrozma!',
@@ -6689,44 +6676,44 @@ const Lillie1 = new NPC('Mysterious Girl', [
     'I am so grateful to you for helping us out of that dangerous spot. Come on. Into the bag, Nebby.',
     'Oh...um...yes! You can call me Lillie. I know it\'s too much for me to ask it, but... Do you think you could see us back to town?',
 ], {
-    image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1, GameConstants.AchievementOption.less)]),
 });
 const RotomDexKukui = new NPC('Kukui\'s Surprise', [
-    '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on your tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing!',
-    'Well, if you\'re ever feelin\' lost, you can alwayzzz find me at a dock town! I know everything there izzz to know about thezzze islandzzz! Especially if you choozzze to take on the Island Challenge!',
+    'Zzzt! Pleazzzure to meet you! Interested in taking on the',
+    '<b><i>Island Challenge Quest on the Bulletin Board</i></b>',
+    'over there? If you do, you can alwayzzz find me at a dock town to help you out! I know everything there izzz to know about thezzze islandzzz!',
+    'I could also be your new Pokédex- if you didn\'t already have one of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing!',
 ], {
     image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3, GameConstants.AchievementOption.less)]),
 });
 const Lillie2 = new NPC('Return Nebby to Lillie', [
     'Nebby! Oh thank goodness you\'re safe. Thank you $playername$, let me heal your Poké- No? Um, very well then.',
     'It seems Hau is outside on Route 3. Are you two having another battle?',
 ], {
-    image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10, GameConstants.AchievementOption.less)]),
 });
 const Lillie3 = new NPC('Lillie', [
     'Nebby is... Its real home is far away from here. And I want to help it get home. Thank you for helping me. The two of us will be heading to the next island as well!',
     'Oh, and here, $playername$. Some Revives. It\'s the least I can do after all the running around I\'ve made you do.'
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hau 3'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
 });
 const Lillie4 = new NPC('Ask Lillie to tag along', [
     'Th...the Aether Foundation...? U-um! I think I\'ll stay here.',
     'Here! Some Dream Orbs! See, Professor Burnet has been studying dimensions for a very long time. I still have some things I want to talk to her about. Bye!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Trials Galore!', 6), new QuestLineStepCompletedRequirement('Trials Galore!', 8, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Trials Galore!', 6), new QuestLineStepCompletedRequirement('Trials Galore!', 7, GameConstants.AchievementOption.less)]),
 });
-const Lillie5 = new NPC('Lillie', [
-    'I ended up getting lost, and then I saw this outfit, and it was the last one they had in stock, so I bought it... Hah...',
-    'But I found the library I was planning to visit. There\'s an old book with myths about Alola\'s Legendary Pokémon. It seems to suggest they brought life to an heir that was to be protected by the island guardians.',
-    'Oh, that girl over there... Is she a friend of yours, $playername$?',
+const Lillie5 = new NPC('Talk to Lillie', [
+    'There\'s an old book with myths about Alola\'s Legendary Pokémon here. It seems to suggest they came from another world and brought life to an heir that was to be protected by the island guardians.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 1, GameConstants.AchievementOption.less)]),
 });
 const Lillie6 = new NPC('Lillie', [
     'Nebby changed forms... and it\'s not moving...',
@@ -6751,16 +6738,6 @@ const HapuHope = new NPC('Hapu', [
     image: 'assets/images/npcs/Hapu.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 0), new  QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)]),
 });
-const Lillie7 = new NPC('Lillie', [
-    'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
-    'And thank you too, $playername$! You\'ve helped gain so much confidence in myself. I am very grateful for that. I was able to achieve things I had never dreamed I could... Getting to meet you, traveling together with you... I\'m so glad I got to part of your journey!',
-    '',
-    'Here, take these flutes and- Wait- what is this darkness in the sky? Oh my goodness! $playername$! In the sky! Another Ultra Wormhole!',
-    'It seems there are still other matters to resolve, but don\'t worry! Whatever it is, Nebby and I will be by your side, no matter what!',
-], {
-    image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
-});
 const SunFlute = new NPC('Play the Sun Flute', [
     'omg nebby u evolve sun',
     '<img src="assets/images/pokemon/791.png">',
@@ -6778,8 +6755,18 @@ const MoonFlute = new NPC('Play the Moon Flute', [
 const DuskFlute = new NPC('Ask Lillie what to do', [
     'Let\'s wait until Day or Night comes.',
 ], {
-    image: 'assets/images/npcs/Lillie.png',
+    image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 4), new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([2])])]),
+});
+const Lillie7 = new NPC('Lillie', [
+    'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
+    'And thank you too, $playername$! You\'ve helped gain so much confidence in myself. I am very grateful for that. I was able to achieve things I had never dreamed I could... Getting to meet you, traveling together with you... I\'m so glad I got to part of your journey!',
+    '',
+    'Here, take these flutes and- Wait- what is this darkness in the sky? Oh my goodness! $playername$! In the sky! Another Ultra Wormhole!',
+    'It seems there are still other matters to resolve, but don\'t worry! Whatever it is, Nebby and I will be by your side, no matter what!',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
 });
 // Lillie gifts
 const SolgaleoGift = new GiftNPC('Capture Solgaleo', [
@@ -6799,6 +6786,139 @@ const LunalaGift = new GiftNPC('Capture Lunala', [
     saveKey: 'lunalagift',
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new ObtainedPokemonRequirement('Solgaleo', true), new ObtainedPokemonRequirement('Lunala', true), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])]),
+});
+// Optional Story NPCs
+// Lillies
+const LillieMahaloTrail1 = new NPC('Mysterious Girl', [
+    'H-help... Save Nebby!',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Welcome to paradise, cousin!'), new TemporaryBattleRequirement('Melemele Spearow', 1, GameConstants.AchievementOption.less)]),
+});
+const LillieMahaloTrail2 = new NPC('Lillie', [
+    'Please... Don\'t tell anyone about this... About seeing Nebby... It\'s...it\'s a secret, OK?',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
+});
+const LillieMelemeleMeadow1 = new NPC('Lillie', [
+    'Nebby! Nebby, come back!',
+    'Ah... $playername$...',
+    'Nebby ran off into the meadow here... What if a wild Pokémon attacks it? It doesn\'t have any moves it can use to battle!',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 6), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9, GameConstants.AchievementOption.less)]),
+});
+const LillieMelemeleMeadow2 = new NPC('Lillie', [
+    'Hello, $playername$. Are you done with your battle against Hau on Route 3? We should all head back to Iki Town, now.',
+], {
+    image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
+});
+const LillieRuinsOfLife = new NPC('Lillie', [
+    'Nebby! I know you tried to drag me along to the Ruins of Conflict on Melemele Island, too... Why are these ruins important to you? What do the guardians mean to you?',
+    '$playername$ if it\'s all right with you, I think Nebby and I would like to watch your Grand Trial.',
+], {
+    image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
+    requirement: new  QuestLineStepCompletedRequirement('Trials Galore!', 6, GameConstants.AchievementOption.less),
+});
+const LillieMalie = new NPC('Lillie', [
+    'I ended up getting lost, and then I saw this outfit, and it was the last one they had in stock, so I bought it... Hah...',
+    '<i>Beast of sun and beast of moon</i>... That\'s what is written here. Is it referring to the legendary Pokémon of Alola?',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 0), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),
+});
+const LillieAetherHouse = new NPC('Lillie', [
+    'Pokémon being abducted like that... Maybe even hurt... I just can\'t stand the idea! <Player>! Please...help them!',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 5), new QuestLineStepCompletedRequirement('Child of the Stars', 7, GameConstants.AchievementOption.less)]),
+});
+// Other story characters
+const HauAether = new NPC('Hau', [
+    'So the foundation really was working together with Team Skull? Lillie, Gladion, and Lusamine all are a family?! This is, like, way too mind-blowing to think about right now. $playername$! Let\'s knock some skulls together for now!'
+], {
+    image: 'assets/images/npcs/Hau.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 8), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
+});
+const GladionAether = new NPC('Gladion', [
+    'Mother! You mustn\'t open the Ultra Wormhole. You cannot let the beasts run wild!',
+    '$playername$! Stop the president!!! If we don\'t, Alola will be flooded with beasts!'
+], {
+    image: 'assets/images/npcs/Gladion (stance).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 10), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
+});
+const LillieAether = new NPC('Lillie', [
+    'Mother! Do not sacrifice Cosmog for that beast\'s sake! Please... Stop... If Nebby isn\'t— If you make it use up too much of its power... you don\'t understand what will happen! If you use too much of its power, it will die!'
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 11), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
+});
+const HapuMalie = new NPC('Hapu', [
+    '$playername$. Been a while, friend. And who might this be?',
+    '...',
+    'Lillie? And she plans to visit Ula\'ula\'s ruins? Well, that\'s some fine initiative. I\'d be happy to show her the way whenever she\'d like to go.',
+], {
+    image: 'assets/images/npcs/Hapu.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),
+});
+const HapuCanyon = new NPC('Hapu', [
+    'People cannot survive all on their own. They have got to help one another out. Same for Pokémon, too. That is what my grandfather used to say.',
+    '$playername%... you have done well in guiding Lillie. The path to the shrine is through the canyon.',
+    'Look at the two of you. I think this might just work out. No, I am quite sure of it!',
+], {
+    image: 'assets/images/npcs/Hapu.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 3), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
+});
+const HapuAltar = new NPC('Hapu', [
+    'I was concerned so I ascended. And what do I find but the Legendary Pokémon... and a strange hole in the sky.',
+    'I\'ll await your arrival on Exeggutor Island, if training is something you desire before challenging this beast.',
+], {
+    image: 'assets/images/npcs/Hapu.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Eater of Light'), new  QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
+});
+const PhycoAltar = new NPC('Captain Phyco', [
+    'Necrozma...and us ourselves... we have both suffered so many long years in this darkness, living a life we did not wish for...',
+    'Our Ultra Megalopolis was once a world filled with light... Necrozma was called the Blinding One, and it gave us all the energy we needed.',
+    'Our ancestors were greedy, though. They sought to control all of Necrozma\'s light... They hurt Necrozma... They left it incomplete, and in such a state, it went mad with fury... And so our light was stolen by Necrozma. Now, the one that wields light to its will... It would steal all of Alola\'s light!',
+], {
+    image: 'assets/images/npcs/Phyco.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Eater of Light'), new  QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
+});
+const PoipoleGift = new GiftNPC('Accept Poipole', [
+    'It seems Poipole has become inspired by your actions. Do you wish to take it with you? ',
+], () => {
+    App.game.party.gainPokemonByName('Poipole');
+}, 'assets/images/pokemon/803.png', {
+    saveKey: 'poipolegift',
+    image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new TemporaryBattleRequirement('Lusamine 2')]),
+});
+// Rotom-Dex
+const RotomDexSun = new NPC('Rotom Dex', [
+    'Zzzzt!!! How\'zzz it going, kiddo? Havin\' fun in the Alolan sun?',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3), new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])]),
+});
+const RotomDexMoon = new NPC('Rotom Dex', [
+    'Zzzzt!!! How\'zzz it going, kiddo? Feelin\' calm under the Alolan moon?',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3), new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])]),
+});
+const RotomDexPreChamp = new NPC('Rotom Dex', [
+    'Zzzzt!!! You\'ve almost made it, kiddo! Championship is on the horizzzon! I\'m rootin\' for ya!',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion, GameConstants.AchievementOption.less)]),
+});
+const RotomDexChamp = new NPC('Rotom Dex', [
+    'Congratulationzzz, bucko! You\'re the new reigning Alola Champion! You really are something, kiddo!',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
 });
 //Silvally Types NPC
 const SilvallyGladion1 = new NPC('Gladion', [
@@ -7199,7 +7319,7 @@ TownList['Mahalo Trail'] = new Town(
     [new MoveToTown('Ruins of Conflict', undefined, false), TemporaryBattleList['Melemele Spearow']],
     {
         requirements: [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
-        npcs: [Lillie1, LagunaKahuna],
+        npcs: [Lillie1, LillieMahaloTrail1, LillieMahaloTrail2, LagunaKahuna],
     }
 );
 TownList['Professor Kukui\'s Lab'] = new Town(
@@ -7209,7 +7329,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Alola)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [ProfKukui, RotomDexKukui],
+        npcs: [ProfKukui, RotomDexKukui, RotomDexSun, RotomDexMoon, RotomDexPreChamp, RotomDexChamp],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -7247,7 +7367,7 @@ TownList['Heahea City'] = new Town(
     [TemporaryBattleList.Dexio, TemporaryBattleList.Sina, HeaheaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Heahea City']), new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
-        npcs: [HeaheaCafeOwner, HeaheaBurnet1, HeaheaBurnet2],
+        npcs: [HeaheaCafeOwner, ProfBurnetAlola],
     }
 );
 TownList['Paniola Town'] = new Town(
@@ -7284,10 +7404,10 @@ TownList['Ruins of Life Entrance'] = new Town(
     'Ruins of Life Entrance',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [GymList['Konikoni City'], new MoveToTown('Ruins of Life', undefined, false)],
+    [new MoveToTown('Ruins of Life', undefined, false), GymList['Konikoni City']],
     { 
         requirements: [new TemporaryBattleRequirement('Plumeria 1')],
-        npcs: [Lillie4],
+        npcs: [Lillie4, LillieRuinsOfLife],
     }
 );
 TownList['Aether Paradise'] = new Town(
@@ -7313,7 +7433,7 @@ TownList['Malie City'] = new Town(
     [MalieCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Malie City']), new MoveToDungeon(dungeonList['Malie Garden']), new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Ultra Wormhole')],
-        npcs: [MalieKahuna, SilvallyNanu, Lillie5],
+        npcs: [MalieKahuna, SilvallyNanu, Lillie5, LillieMalie, HapuMalie],
     }
 );
 TownList['Tapu Village'] = new Town(
@@ -7333,7 +7453,7 @@ TownList['Aether House'] = new Town(
     [TemporaryBattleList['Skull 5'], TemporaryBattleList['Kahuna Nanu']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
-        npcs: [YungoosAetherHouse],
+        npcs: [YungoosAetherHouse, LillieAetherHouse],
     }
 );
 TownList['Seafolk Village'] = new Town(
@@ -7343,7 +7463,7 @@ TownList['Seafolk Village'] = new Town(
     [SeafolkVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Seafolk Village']), new MoveToDungeon(dungeonList['Mina\'s Houseboat']), new DockTownContent(), TemporaryBattleList['Captain Mina']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
-        npcs: [SeafolkCaptain, SeafolkCaptainMina, SilvallyMina, SeafolkTourist],
+        npcs: [SeafolkCaptain, SeafolkCaptainMina, SilvallyMina],
     }
 );
 TownList['Ruins of Hope Altar'] = new Town(
@@ -7386,7 +7506,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList['Lusamine 1'], TemporaryBattleList['Lusamine 2'], TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, Lillie7],
+        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, Lillie7, HapuAltar, PhycoAltar, PoipoleGift],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
@@ -7545,7 +7665,7 @@ TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new TemporaryBattleRequirement('Skull 2')],
+    [new MultiRequirement([new RouteKillRequirement(10, GameConstants.Region.alola, 2), new TemporaryBattleRequirement('Skull 2')])]
 );
 TownList['Melemele Meadow'] = new DungeonTown(
     'Melemele Meadow',
@@ -7553,7 +7673,7 @@ TownList['Melemele Meadow'] = new DungeonTown(
     GameConstants.AlolaSubRegions.MelemeleIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 3)],
     [new MoveToTown('Seaward Cave', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow')), false)],
-    { npcs: [Lillie2] }
+    { npcs: [Lillie2, LillieMelemeleMeadow1, LillieMelemeleMeadow2] }
 );
 TownList['Seaward Cave'] = new DungeonTown(
     'Seaward Cave',
@@ -7676,7 +7796,7 @@ TownList['Aether Foundation'] = new DungeonTown(
         TemporaryBattleList['Team Rainbow Leader Giovanni'],
     ],
     {
-        npcs: [SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4, SilvallyGladion2Hints, SilvallyGladion3Hints],
+        npcs: [HauAether, GladionAether, LillieAether, SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4, SilvallyGladion2Hints, SilvallyGladion3Hints],
     }
 );
 TownList['Exeggutor Island Hill'] = new DungeonTown(

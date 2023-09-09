@@ -3786,7 +3786,10 @@ TemporaryBattleList['Skull 3'] = new TemporaryBattle(
     'Skull 3',
     [new GymPokemon('Drowzee', 135172109, 17)],
     undefined, // custom quest message
-    [new MultiRequirement([new RouteKillRequirement(10, GameConstants.Region.alola, 6), new QuestLineStepCompletedRequirement('Trials Galore!', 1)])],
+    [
+        new RouteKillRequirement(10, GameConstants.Region.alola, 6),
+        new QuestLineStepCompletedRequirement('Trials Galore!', 1),
+    ],
     undefined,
     {
         displayName: 'Team Skull Grunts',
@@ -3869,10 +3872,8 @@ TemporaryBattleList['Skull 4'] = new TemporaryBattle(
     ],
     'Yo, think about the bus drivers! If we take this bus stop, they can all chill!',
     [
-        new MultiRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.alola, 10),
-            new QuestLineStepCompletedRequirement('Child of the Stars', 0),
-        ])
+        new RouteKillRequirement(10, GameConstants.Region.alola, 10),
+        new QuestLineStepCompletedRequirement('Child of the Stars', 0),
     ],
     undefined,
     {
@@ -3886,7 +3887,7 @@ TemporaryBattleList['Skull 5'] = new TemporaryBattle(
     [
         new GymPokemon('Drowzee', 2007275, 33),
     ],
-    'For real, girl?! Your bag was moving! Right in front of my eyes! And I\'m just supposed to ignore that?! Even if it\'s not that rare of a Pokémon, I bet I could still get paid, yo.',
+    undefined, // custom quest message
     [new QuestLineStepCompletedRequirement('Child of the Stars', 3)],
     undefined,
     {
@@ -3984,11 +3985,11 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
         new GymPokemon('You hateful little Trainer!', 15619682, 47),
     ],
     undefined,
-    [new QuestLineStepCompletedRequirement('Emissary of Light', 5),
-    new MultiRequirement([
+    [
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
         new ObtainedPokemonRequirement('Solgaleo', true),
         new ObtainedPokemonRequirement('Lunala', true),
-    ])],
+    ],
     undefined,
     {
         hideTrainer: true,
@@ -4009,8 +4010,8 @@ TemporaryBattleList.Necrozma = new TemporaryBattle(
 );
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
-    [new GymPokemon('Ultra Necrozma', 536098161, 60)],
-    '<i>Necrozma fled.</i>',
+    [new GymPokemon('Ultra Necrozma', 536061, 60)],
+    undefined, // custom quest message
     [new TemporaryBattleRequirement('Necrozma')],
     undefined,
     {

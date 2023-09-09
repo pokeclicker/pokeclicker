@@ -2675,7 +2675,12 @@ class QuestLineHelper {
         ulaulaAlolaQuestLine.addQuest(defeatGuzmaMalieGarden);
 
         // 4 - Temp battle: Skull 5
-        const battleSkull5 = new DefeatTemporaryBattleQuest('Skull 5', 'Lillie has run into Team Skull! Protect her at Aether House!');
+        const battleSkull5 = new CustomQuest (1, 0,  'Lillie has run into Team Skull! Protect her at Aether House!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 5')](), undefined, undefined,
+        {
+            clearedMessage: 'I just wanted to go for a stroll on my own, to see what it must feel like to be a Trainer... So Hapu and I went our separate ways... but then Nebby tried to get out of my bag...',
+            npcDisplayName: 'Lillie',
+            npcImageName: 'Lillie',
+        });
         ulaulaAlolaQuestLine.addQuest(battleSkull5);
 
         // 5 - Clear dungeon: Thrifty Megamart, Acerola's Trial
@@ -2780,7 +2785,7 @@ class QuestLineHelper {
         // 2 - Clear dungeon: Exeggutor Island Hill
         const clearExeggutorIslandHill = new CustomQuest(1, 0, 'Find the other flute. Clear Exeggutor Island Hill.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Exeggutor Island Hill')](), undefined, undefined,
             {
-                clearedMessage: 'it\'s just sitting here lmao</br><img src="assets/images/items/fluteItem/Sun_Flute.png"/>', // Now we have both the Sun Flute and the Moon Flute!
+                clearedMessage: 'Now we have both the Sun Flute and the Moon Flute!</br><img src="assets/images/items/fluteItem/Sun_Flute.png"/><img src="assets/images/items/fluteItem/Moon_Flute.png"/>',
                 npcDisplayName: 'Lillie',
                 npcImageName: 'Lillie (z powered)',
             });
@@ -2798,10 +2803,10 @@ class QuestLineHelper {
         const clearPoniCanyon = new CustomQuest(1, 0, 'Clear the ancient trial site of Vast Poni Canyon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Vast Poni Canyon')]());
         poniAlolaQuestLine.addQuest(clearPoniCanyon);
 
+        // 5 - Talk to NPC: Play a flute on the Altar of the Sunne and Moone. (Flute npc is locked to day or night to give the illusion that the gift npc is affected by this in cases where the step is completed right before dusk or dawn)
         const talkToLillieDay = new TalkToNPCQuest(SunFlute, 'Play the Sun Flute during Day.');
         const talkToLillieNight = new TalkToNPCQuest(MoonFlute, 'Play the Moon Flute during Night.');
-        
-        // 5 - Talk to NPC: Play a flute. (Flute npc is locked to day or night to give the illusion that the gift npc is affected by this in cases where the step is completed right before dusk or dawn)
+
         poniAlolaQuestLine.addQuest(new MultipleQuestsQuest([
             talkToLillieDay,
             talkToLillieNight,
@@ -2833,24 +2838,31 @@ class QuestLineHelper {
     public static createSkullAetherAlolaQuestLine() {
         const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
-        const UltraMegalopolisReward = () => { // change to sun and moon flutes
-            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
-            Notifier.notify({
-                title: skullAetherAlolaQuestLine.name,
-                message: 'You got the Sun and Moon flutes! (but not really)',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
+        // const UltraMegalopolisReward = () => { // change to sun and moon flutes
+        //     App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+        //     Notifier.notify({
+        //         title: skullAetherAlolaQuestLine.name,
+        //         message: 'You got the Sun and Moon flutes! (but not really)',
+        //         type: NotificationConstants.NotificationOption.success,
+        //         timeout: 3e4,
+        //     });
+        // };
 
-        const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis', 'Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.', UltraMegalopolisReward);
+        // const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis', 'Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.', UltraMegalopolisReward);
         /*
+        const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis').withDescription('Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.').withOptionalArgs(
         {
-            clearedMessage: 'Necrozma shone with such blinding light, as it used to, only to lose that light all over again... It seems to have fled to Alola now. We are grateful to you, human of Alola. May we all eventually be awash in light again.',
+            clearedMessage: 'Necrozma shone with such blinding light, as it used to, only to lose that light all over again... It seems to have fled somewhere now. We are grateful to you, human of Alola. Perhaps we may all be eventually awash in light again.',
             npcDisplayName: 'Ultra Recon Squad',
             npcImageName: 'specialNPCs/Ultra Recon Squad (all)',
         });
         */
+        const clearUltraMegalopolis = new CustomQuest (1, 0,  'Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ultra Megalopolis')](), undefined, undefined,
+        {
+            clearedMessage: 'Necrozma shone with such blinding light, as it used to, only to lose that light all over again... It seems to have fled somewhere now. We are grateful to you, human of Alola. May we all eventually be awash in light again.',
+            npcDisplayName: 'Ultra Recon Squad',
+            npcImageName: 'specialNPCs/Ultra Recon Squad (all)',
+        });
         skullAetherAlolaQuestLine.addQuest(clearUltraMegalopolis);
 
         App.game.quests.questLines().push(skullAetherAlolaQuestLine);
