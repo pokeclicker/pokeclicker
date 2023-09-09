@@ -3,35 +3,19 @@ import { Computed } from 'knockout';
 import CurrentMoonPhase from './CurrentMoonPhase';
 import MoonCyclePhase from './MoonCyclePhase';
 import { MoonCycleValues } from '../GameConstants';
-import { DAY } from '../GameConstants';
-//import GameHelper from '../GameHelper';
+import { DAY, MINUTE } from '../GameConstants';
+import GameHelper from '../GameHelper';
 
 export default class MoonCycle {
     public static currentMoonCyclePhase: Computed<MoonCyclePhase> = ko.pureComputed(() => {
-        // [[Original Code]]
-        const moonOrigin = (new Date('01/01/1970'));
-        const moonToday = (new Date(Date.now()));
-        moonToday.setHours(0);
-	    moonToday.setMinutes(0);
-	    moonToday.setSeconds(0);
-        moonToday.setMilliseconds(0);
-        const moonDif = (moonToday.getTime() + moonOrigin.getTime()) / DAY;
-        const moonPhaseNow = (Math.floor(moonDif % 8));
 
-        // [[Test B]]
-        /*const moonOrigin = (new Date('01/01/1970'));
-        const moonToday = (new Date(GameHelper.currentTime()));
-        moonToday.setHours(0);
-	    moonToday.setMinutes(0);
-	    moonToday.setSeconds(0);
-        moonToday.setMilliseconds(0);
-        const moonDif = (moonToday.getTime() + moonOrigin.getTime()) / DAY;
-        const moonPhaseNow = (Math.floor(moonDif % 8));*/
 
-        // [[Test C]]
-        //const moonPhaseNow = (Math.floor((GameHelper.currentTime().getTime() / DAY) % 8)); [[Test C]]
+        const date = GameHelper.currentTime();
+        const dayCycle = Math.floor((date.getTime() - date.getTimezoneOffset() * MINUTE) / DAY);
+        const moonPhaseLength = 1; // How many Days each Moon Phase lasts
+        const moonPhase = Math.floor((dayCycle % (Object.entries(MoonCycleValues).length * moonPhaseLength)) / moonPhaseLength) ;
 
-        return Number(Object.entries(MoonCycleValues).find(([, moonPhaseC]) => moonPhaseC == moonPhaseNow)?.[0] ?? Object.keys(MoonCycleValues));
+        return Number(Object.entries(MoonCycleValues).reverse().find(([, moonPhaseC]) => moonPhaseC == moonPhase)?.[0] ?? Object.keys(MoonCycleValues));
     });
 
     public static image: Computed<string> = ko.pureComputed(() => {
