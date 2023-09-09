@@ -5925,12 +5925,11 @@ const Spelunker = new NPC('Spelunker', [
     'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
-const ExamineAegislash = new NPC('Examine Your Doublade', [
-    '<i>Your Doublade evolves and shifts into an aggressive stance, revealing its Blade Forme.</i>',
-], {
-    image: 'assets/images/pokemon/681.01.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4), new QuestLineStepCompletedRequirement('Princess Diancie', 5, GameConstants.AchievementOption.less)]),
-});
+const ExamineAegislash = new GiftNPC('Millis and Argus Steels\' Aeglislash', [
+    '<i>Aegislash wants to join you on your adventure.</i>',
+], () => {
+    App.game.party.gainPokemonByName('Aegislash (Blade)');
+}, 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
 const ThanksDiancie = new NPC('Princess Diancie', [
     'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
