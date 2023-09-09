@@ -1800,6 +1800,11 @@ const ParkAttendant = new NPC('Park Attendant', [
     'Lots of people come through here to take a stroll, and some come from far away to participate in our Bug Catching Contest!',
     'All kinds of Bug Pokémon can be found in the park, with different ones showing up every day! Each one can be caught for Contest Tokens, and more powerful Pokémon are worth more Tokens!',
 ], { image: 'assets/images/npcs/Pokémon Ranger (male).png' });
+const ParkResearcher = new NPC('Researcher', [
+    'Welcome to the National Park!',
+    'Thanks to recent breakthroughs in the field of alloying and electroplating, we have discovered a way to coat some Pokémon in metal!',
+    'An experimental specimen can be bought here: A Sudowoodo that is no longer weak against Water attacks!',
+], { image: 'assets/images/npcs/Scientist (male).png' });
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
@@ -1924,7 +1929,7 @@ TownList['National Park'] = new Town(
     [new SafariTownContent(), JohtoContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 35)],
-        npcs: [ParkAttendant],
+        npcs: [ParkAttendant, ParkResearcher],
     }
 );
 
