@@ -1,7 +1,8 @@
+import { AchievementOption } from '../GameConstants';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import TmpPokemonHelper from '../pokemons/TmpPokemonHelper';
 import SeededRand from '../utilities/SeededRand';
-import SelectNRequirement from './SelectNRequirement';
+import Requirement from './Requirement';
 
 export default class PokemonDefeatedSelectNRequirement extends Requirement {
     constructor(private pokemon: PokemonNameType, private index: number, private total: number, private select: number) {
