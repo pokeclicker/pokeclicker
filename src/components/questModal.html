@@ -100,7 +100,7 @@
                                                 trigger: 'hover',
                                                 placement: 'top',
                                                 html: true
-                                            }, enable: $data.isPausable()">Pause</button>
+                                            }, css: { disabled: !$data.isPausable() }">Pause</button>
                                         </td>
                                     </tr>
                                 </tbody>
