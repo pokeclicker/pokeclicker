@@ -11,8 +11,8 @@ export default class SeededRand {
         return this.state / this.MOD;
     }
 
-    public static seedWithDate(d: Date, bonusSeed: number = undefined): void {
-        this.state = Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate() + (bonusSeed ?? 0));
+    public static seedWithDate(d: Date): void {
+        this.state = Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
     }
 
     // hours specifies how many hours the seed should remain the same
