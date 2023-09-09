@@ -499,6 +499,7 @@ export type PokemonNameType
     | 'Sceptile'
     | 'Mega Sceptile'
     | 'Torchic'
+    | 'Torchic (Egg)'
     | 'Combusken'
     | 'Blaziken'
     | 'Mega Blaziken'

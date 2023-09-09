@@ -2727,9 +2727,7 @@ dungeonList['Mt. Silver'] = new Dungeon('Mt. Silver',
         ],
     },
     130500,
-    [
-        new DungeonBossPokemon('Larvitar', 840000, 60),
-    ],
+    [new DungeonBossPokemon('Larvitar', 840000, 60)],
     10000, 28);
 
 // Hoenn Dungeons
@@ -2789,9 +2787,9 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
                     new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
                 ]),
             }),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 0, 6, 1),
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 0, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
@@ -2835,9 +2833,9 @@ dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Poochyena', 900000, 11)],
             { weight: 1 }, undefined, '(male)'),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 1, 6, 1),
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 1, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
@@ -2949,9 +2947,9 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
                 new GymPokemon('Haxorus', 4073950, 57),
                 new GymPokemon('Garchomp', 4073950, 57),
             ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 2, 6, 1),
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 2, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
@@ -3104,9 +3102,9 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
                     new SpecialEventRequirement('Lunar New Year'),
                 ]),
             ])}),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 3, 6, 1),
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 3, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
@@ -3602,9 +3600,9 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
                     new SpecialEventRequirement('Lunar New Year'),
                 ]),
             ])}),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 5, 6, 1),
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 5, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),

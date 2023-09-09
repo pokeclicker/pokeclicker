@@ -9543,6 +9543,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 255.01,
+        'name': 'Torchic (Egg)',
+        'type': [PokemonType.Fire],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 62,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 45,
+            'attack': 60,
+            'specialAttack': 70,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 45,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
         'id': 256,
         'name': 'Combusken',
         'type': [PokemonType.Fire, PokemonType.Fighting],
