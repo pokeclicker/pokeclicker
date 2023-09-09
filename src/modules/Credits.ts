@@ -649,6 +649,15 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Permission given via PRs
     },
     {
+        name: 'JorMxDos',
+        link: 'https://www.deviantart.com/jormxdos',
+        image: 'https://a.deviantart.net/avatars-big/j/o/jormxdos.png?8',
+        resources: [
+            'All Vectorized Badges images',
+        ],
+        // NOTES: Permission given in the bio comment section
+    },
+    {
         name: 'Kensuyjin33',
         link: 'https://www.deviantart.com/kensuyjin33',
         image: 'https://a.deviantart.net/avatars-big/k/e/kensuyjin33.png',

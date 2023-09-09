@@ -10754,7 +10754,6 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
             {loot: 'Nestball'},
         ],
         legendary: [
-            {loot: 'MediumRestore', weight: 2},
             {loot: 'LargeRestore'},
             {loot: 'Miracle_Seed'},
         ],
