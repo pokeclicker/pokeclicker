@@ -2007,6 +2007,14 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
             hide: true,
             requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
         })),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 0, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     3000, 32);
 
@@ -2115,6 +2123,14 @@ dungeonList['Slowpoke Well'] = new Dungeon('Slowpoke Well',
         new DungeonTrainer('Rocket Executive',
             [new GymPokemon('Koffing', 320000, 14)],
             { weight: 1 }, 'Proton', '(proton)'),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 1, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     3500, 33);
 
@@ -2171,6 +2187,14 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
                     new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
                 ]),
             }),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 2, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     4000, 34);
 
@@ -2219,6 +2243,14 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
         new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 4, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     4500, 37);
 
@@ -2244,6 +2276,14 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
         new DungeonBossPokemon('Dewgong', 400000, 40),
         new DungeonBossPokemon('Kingler', 400000, 40),
         new DungeonBossPokemon('Lugia', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Whirl Guardian', 9)}),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 3, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     5000, 41);
 
@@ -2598,7 +2638,17 @@ dungeonList['Ice Path'] = new Dungeon('Ice Path',
         mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Ice Path'))}],
     },
     120400,
-    [new DungeonBossPokemon('Delibird', 440000, 50)],
+    [
+        new DungeonBossPokemon('Delibird', 440000, 50),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 5, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
+    ],
     6000, 44);
 
 dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
