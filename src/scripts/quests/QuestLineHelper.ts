@@ -2258,7 +2258,7 @@ class QuestLineHelper {
         const fightSteels = new DefeatTemporaryBattleQuest('Millis and Argus Steel', 'Millis and Argus Steel let you do the hard work while they set up an ambush in Shalour City.');
         princessDiancieQuestLine.addQuest(fightSteels);
 
-         const bladeForme = new TalkToNPCQuest(ExamineAegislash, 'Millis and Argus Steel fled but their Aegislash stayed behind. Look for it in Shalour City and find out what it wants!');
+        const bladeForme = new TalkToNPCQuest(ExamineAegislash, 'Millis and Argus Steel fled but their Aegislash stayed behind. Look for it in Shalour City and find out what it wants!');
         princessDiancieQuestLine.addQuest(bladeForme);
 
         const heartDiamond = new GainGemsQuest(1000, 0, PokemonType.Fairy).withCustomReward(() => ItemList.Heart_Diamond_Diancie.gain(1)).withDescription('Diancie needs help building a Heart Diamond to stabilize the Diamond Domain. Gather some Fairy Gems for her.');
