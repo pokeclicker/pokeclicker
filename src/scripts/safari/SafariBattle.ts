@@ -41,6 +41,7 @@ class SafariBattle {
             enemyImg.top += 16;
 
             const ptclhtml = '<div><img id="safariBall" class="spin" src="assets/images/pokeball/Safariball.svg" height="30px"></div>';
+            SafariBattle.particle?.remove();
             SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariBattleModal .pageItemFooter').offset(), enemyImg, SafariBattle.Speed.ballThrowAnim * SafariBattle.getTierMultiplier(), 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
 
             SafariBattle.delay(SafariBattle.Speed.ballThrowDelay * SafariBattle.getTierMultiplier())(0)            // throwing the ball
