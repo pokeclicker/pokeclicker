@@ -528,6 +528,14 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
                     new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion),
                 ]),
             }),
+        new DungeonBossPokemon('Pikachu (Easter', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 0, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     50, 1);
 
@@ -656,7 +664,17 @@ dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
         ],
     },
     2962,
-    [new DungeonBossPokemon('Dugtrio', 16040, 31)],
+    [
+        new DungeonBossPokemon('Dugtrio', 16040, 31),
+        new DungeonBossPokemon('Pikachu (Easter', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 1, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
+    ],
     250, 11);
 
 dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
@@ -960,7 +978,17 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
         ],
     },
     7523,
-    [new DungeonBossPokemon('Marowak', 37615, 30)],
+    [
+        new DungeonBossPokemon('Marowak', 37615, 30),
+        new DungeonBossPokemon('Pikachu (Easter', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 2, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
+    ],
     750, 7);
 
 dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
@@ -1182,6 +1210,14 @@ dungeonList['Power Plant'] = new Dungeon('Power Plant',
     [
         new DungeonBossPokemon('Electabuzz', 67535, 35),
         new DungeonBossPokemon('Zapdos', 101302, 50),
+        new DungeonBossPokemon('Pikachu (Easter', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 3, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     1000, 18);
 
@@ -1200,6 +1236,14 @@ dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
     [
         new DungeonBossPokemon('Seel', 86130, 35),
         new DungeonBossPokemon('Articuno', 129195, 50),
+        new DungeonBossPokemon('Pikachu (Easter', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 4, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     1250, 19);
 
@@ -1513,6 +1557,14 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
                 new GymPokemon('Nidoking', 61488, 45),
                 new GymPokemon('Nidoqueen', 61488, 45),
             ], { weight: 1 }, 'Ray & Tyra'),
+        new DungeonBossPokemon('Pikachu (Easter', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 5, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     2000, 23);
 
