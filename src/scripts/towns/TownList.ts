@@ -798,7 +798,7 @@ const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
 
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
-    'But... I don\'t have enough Safari Experience to find it.',
+    'But... I don\'t have a high enough Safari Level to find it.',
 ], {image: 'assets/images/npcs/Bug Catcher.png', requirement: new MaxRegionRequirement(GameConstants.Region.kalos)});
 
 const CandyMan = new NPC('The Candy Man', [
@@ -1731,6 +1731,15 @@ const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news, they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
 ], GameConstants.Region.johto, RoamingPokemonList.findGroup(GameConstants.Region.johto, GameConstants.JohtoSubRegions.Johto), 'assets/images/npcs/Pokéfan (male).png');
 
+const RedOldManJohtoNPC = new NPC('Old Man', [
+    'This young fellow comes here every day.',
+    'He is a sore loser, poor boy. But he always comes back next day!',
+    'But even though he is a sore loser, he will always give his opponent a shiny ball, as a reward for winning.',
+], {
+    image: 'assets/images/npcs/Old Man.png',
+    requirement: new TemporaryBattleRequirement('Red'),
+});
+
 const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion', [
     '<i>You are experiencing that same feeling again. Like you\'re not really here.</i>',
     '<i>A man sits in the back of the cave. He is listening to a portable radio.</i>',
@@ -2018,7 +2027,10 @@ TownList['Mt. Silver'] = new DungeonTown(
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
-    [TemporaryBattleList.Red]
+    [TemporaryBattleList.Red],
+    {
+        npcs: [RedOldManJohtoNPC],
+    }
 );
 
 //Hoenn Shops
@@ -3343,7 +3355,7 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [GymList['Cipher Admin Miror B.'], new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
+    [GymList['Cipher Admin Miror B.'], new MoveToDungeon(dungeonList['Pyrite Colosseum']), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
         npcs: [OrreRoamerNPC, Duking1],
@@ -3400,7 +3412,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
-        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
+        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 0))],
         npcs: [ProfKrane],
     }
 );
@@ -3411,7 +3423,7 @@ TownList['Kaminko\'s Manor'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
     {
-        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
+        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 2))],
         npcs: [DrKaminko, Chobin1, Chobin2],
     }
 );
@@ -3422,7 +3434,7 @@ TownList['S. S. Libra'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Cipher Peon Smarton']],
     {
-        requirements: [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
+        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 19))],
         npcs: [SearchLibra],
     }
 );
@@ -3432,7 +3444,7 @@ TownList['Orre Colosseum'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [GymList['Cipher Admin Lovrina'], GymList['Cipher Admin Snattle'], GymList['Cipher Admin Gorigan'], GymList['Cipher Admin Ardos'], GymList['Cipher Admin Eldes']],
     {
-        requirements: [new DevelopmentRequirement(), new QuestLineCompletedRequirement('Gale of Darkness')],
+        requirements: [new DevelopmentRequirement(new QuestLineCompletedRequirement('Gale of Darkness'))],
         npcs: [OrreColosseumSpectator],
     }
 );
@@ -6566,7 +6578,7 @@ const TrainerSchoolTeacher = new NPC('Teacher Emily', [
     'Just as Alola has multiple islands, its dungeons have multiple floors! Hurry to the ladder to find your way to the next floor.',
     'Watch the clock, if you make it to the next floor you\'ll get a time boost to help you find the boss.',
     'Good luck with your island challenge!',
-], {image: 'assets/images/npcs/Teacher-gen7.png'});
+], {image: 'assets/images/npcs/Teacher (gen7).png'});
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
@@ -6582,6 +6594,26 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ], {image: 'assets/images/npcs/Owner.png'});
+const PikachuValleyPikachuGeneric = new NPC('Pikachu', [
+    'Pikachu!',
+    '<i>The Pikachu looks happy playing with all its friends!</i>',
+], {
+    image: 'assets/images/pokemon/25.png',
+});
+const PikachuValleyAlolaCap = new NPC('Pikachu', [
+    'Pi-Pikachu!',
+    '<i>The Pikachu is waving at you supportively! Its goodwill carries you forward on your journey to Alola Championship!</i>',
+], {
+    image: 'assets/images/pokemon/25.06.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion, GameConstants.AchievementOption.less),
+});
+const PikachuValleyPikachuWorldCap = new NPC('Pikachu', [
+    'Pii-kachu!',
+    '<i>The Pikachu is staring at you intently! Is it waiting for you to become stronger?</i>',
+], {
+    image: 'assets/images/pokemon/25.07.png',
+    requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.galar), new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion, GameConstants.AchievementOption.less)]),
+});
 const PaniolaTownActor = new NPC('Actor Meredith', [
     'I love Oricorio. I can tell you all about it!',
     'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
@@ -6924,6 +6956,12 @@ const RoadsideMotelAnabel5 = new NPC('Anabel', [
     image: 'assets/images/npcs/Anabel.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 18, GameConstants.AchievementOption.less)]),
 });
+const NecrozmaLooker = new NPC('Looker', [
+    'There haven\'t been any new reports of Ultra Beasts in Alola, but I did see something strange over in Ten Carat Hill. It was black, yet shining. It seemed to be fleeing, no doubt about that. Must have been in a weakened state. Was it involved in some kind of battle? If you find it, I doubt it will have much energy left.',
+], {
+    image: 'assets/images/npcs/Looker.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Ultra Beast Hunt'), new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Must have never encountered Necrozma before.', GameConstants.AchievementOption.less)]),
+});
 const BattleTreeRed = new NPC('Red', [
     '...',
 ], {image: 'assets/images/npcs/Red-masters.png'});
@@ -7054,6 +7092,7 @@ TownList['Hau\'oli City'] = new Town(
     [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+        npcs: [NecrozmaLooker],
     }
 );
 TownList['Melemele Woods'] = new Town(
@@ -7363,7 +7402,11 @@ TownList['Pikachu Valley'] = new DungeonTown(
     'Pikachu Valley',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+    undefined,
+    {
+        npcs: [PikachuValleyPikachuGeneric, PikachuValleyAlolaCap, PikachuValleyPikachuWorldCap],
+    }
 );
 TownList['Paniola Ranch'] = new DungeonTown(
     'Paniola Ranch',
@@ -8630,8 +8673,7 @@ TownList['Tunnel to the Top'] = new DungeonTown(
     'Tunnel to the Top',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)],
-    [new MoveToDungeon(dungeonList['Max Lair'], new DevelopmentRequirement())]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 54)]
 );
 TownList['Crown Shrine'] = new DungeonTown(
     'Crown Shrine',
@@ -8647,7 +8689,7 @@ TownList['Max Lair'] = new DungeonTown(
     'Max Lair',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new QuestLineStartedRequirement('TODO Gigantamax questline name'), new DevelopmentRequirement()]
+    [new DevelopmentRequirement(new QuestLineStartedRequirement('The Lair of Giants'))]
 );
 
 //Hisui shops
@@ -9098,7 +9140,7 @@ TownList['Cabo Poco'] = new Town(
     GameConstants.PaldeaSubRegions.Paldea,
     [new BulletinBoard(GameConstants.BulletinBoards.Paldea)],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Volo)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Azure)],
     }
 );
 TownList['Poco Path Lighthouse'] = new Town(
