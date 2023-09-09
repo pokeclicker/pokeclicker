@@ -3,17 +3,20 @@ import TmpPokemonHelper from '../pokemons/TmpPokemonHelper';
 import SeededRand from '../utilities/SeededRand';
 import SelectNRequirement from './SelectNRequirement';
 
-export default class PokemonDefeatedSelectNRequirement extends SelectNRequirement {
-    constructor(private pokemon: PokemonNameType, index: number, total: number, select: number) {
-        super(index, total, select);
+export default class PokemonDefeatedSelectNRequirement extends Requirement {
+    constructor(private pokemon: PokemonNameType, private index: number, private total: number, private select: number) {
+        super(1, AchievementOption.equal);
+    }
+
+    public getProgress(): number {
+        SeededRand.seed(App.game.statistics.pokemonDefeated[TmpPokemonHelper.getPokemonByName(this.pokemon).id]());
+        const numbersSelected = SeededRand.shuffleArray([...Array(this.total).keys()]).slice(0, this.select);
+
+        return +numbersSelected.includes(this.index);
     }
 
     // eslint-disable-next-line class-methods-use-this
     public hint(): string {
         return 'Find it elsewhere.';
-    }
-
-    setSeed(): void {
-        SeededRand.seed(App.game.statistics.pokemonDefeated[TmpPokemonHelper.getPokemonByName(this.pokemon).id]());
     }
 }
