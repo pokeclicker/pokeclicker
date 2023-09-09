@@ -2171,14 +2171,6 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
                     new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
                 ]),
             }),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
-            requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 4, 8, 1),
-                new SpecialEventRequirement('Easter'),
-                new QuestLineCompletedRequirement('Egg Hunt'),
-            ]),
-            hide: true,
-        }),
     ],
     4000, 34);
 
@@ -2304,14 +2296,6 @@ dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
                 new GymPokemon('Hitmonchan', 210000, 34),
             ], { weight: 1 }, 'Kiyo'),
         new DungeonBossPokemon('Tyrogue', 420000, 45, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar'))}),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
-            requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 5, 8, 1),
-                new SpecialEventRequirement('Easter'),
-                new QuestLineCompletedRequirement('Egg Hunt'),
-            ]),
-            hide: true,
-        }),
     ],
     5500, 42,
     () => {
@@ -2652,14 +2636,6 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
                     new SpecialEventRequirement('Lunar New Year'),
                 ]),
             ])}),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
-            requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 6, 8, 1),
-                new SpecialEventRequirement('Easter'),
-                new QuestLineCompletedRequirement('Egg Hunt'),
-            ]),
-            hide: true,
-        }),
     ],
     6500, 45);
 
@@ -2753,14 +2729,6 @@ dungeonList['Mt. Silver'] = new Dungeon('Mt. Silver',
     130500,
     [
         new DungeonBossPokemon('Larvitar', 840000, 60),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
-            requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 7, 8, 1),
-                new SpecialEventRequirement('Easter'),
-                new QuestLineCompletedRequirement('Egg Hunt'),
-            ]),
-            hide: true,
-        }),
     ],
     10000, 28);
 
@@ -2823,7 +2791,7 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
             }),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 0, 8, 1),
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 0, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
@@ -2869,7 +2837,7 @@ dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
             { weight: 1 }, undefined, '(male)'),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 1, 8, 1),
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 1, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
@@ -2983,7 +2951,7 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
             ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 2, 8, 1),
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 2, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
@@ -3138,7 +3106,7 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
             ])}),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 3, 8, 1),
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 3, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
@@ -3634,6 +3602,14 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
                     new SpecialEventRequirement('Lunar New Year'),
                 ]),
             ])}),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 5, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     34000, 101);
 
@@ -3666,6 +3642,14 @@ dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
         new DungeonBossPokemon('Regirock', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
         new DungeonBossPokemon('Regice', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
         new DungeonBossPokemon('Registeel', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 4, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     36000, 101);
 
