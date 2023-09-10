@@ -97,12 +97,12 @@ class PokemonHelper extends TmpPokemonHelper {
         return cacheLine[pokemonName] as {[name: string]: Array<object>};
     }
 
-    public static getPokemonDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const cache = this.getRegionalCache<string[]>(this.getPokemonDungeons.name);
+    public static getPokemonDungeons(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<object> {
+        const cache = this.getRegionalCache<object[]>(this.getPokemonDungeons.name);
         if (cache[maxRegion]) {
             return cache[maxRegion][pokemonName];
         }
-        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<string>);
+        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<object>);
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // If we only want to check up to a maximum region
             if (maxRegion != GameConstants.Region.none) {
@@ -112,8 +112,20 @@ class PokemonHelper extends TmpPokemonHelper {
                 }
             }
             // Dungeon Grunt
-            dungeon.pokemonList.forEach((name) => {
-                cacheLine[name].push(dungeonName);
+            dungeon.enemyList.forEach((enemy) => {
+                // Skip trainers
+                if (enemy instanceof DungeonTrainer) {
+                    return;
+                }
+
+                if (typeof enemy === 'string') {
+                    cacheLine[enemy].push({ dungeon: dungeonName });
+                } else if (enemy.hasOwnProperty('pokemon')) {
+                    cacheLine[(<DetailedPokemon>enemy).pokemon].push({
+                        dungeon: dungeonName,
+                        requirements: enemy?.options?.requirement?.hint(),
+                    });
+                }
             });
         });
         return cacheLine[pokemonName];
