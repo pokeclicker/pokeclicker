@@ -2454,6 +2454,18 @@ class Update implements Saveable {
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 52);
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 53);
 
+            // Reset Red temp battle
+            saveData.statistics.temporaryBattleDefeated[31] = 0;
+
+        },
+
+        '0.10.16': ({ playerData, saveData, settingsData }) => {
+
+
+            // Fix None category color being incomplete
+            if (saveData.categories.categories[0].color === '#333') {
+                saveData.categories.categories[0].color = '#333333';
+            }
         },
     };
 

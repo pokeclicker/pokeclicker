@@ -313,6 +313,7 @@ namespace GameConstants {
         Forest: EnvironmentData,
         Cave: EnvironmentData,
         GemCave: EnvironmentData,
+        Desert: EnvironmentData,
         PowerPlant: EnvironmentData,
         Mansion: EnvironmentData,
         Graveyard: EnvironmentData,
@@ -780,7 +781,8 @@ namespace GameConstants {
         nightCounterclockwiseBelow5,
         dayClockwiseAbove5,
         dayCounterclockwiseAbove5,
-        at5Above10
+        at5Above10,
+        Any3600
     }
     declare enum ExtraAchievementCategories {
         global,
@@ -884,5 +886,12 @@ namespace GameConstants {
         Super,
         Hyper,
         Master,
+    }
+    declare enum ContestStyle {
+        Cool,
+        Beautiful,
+        Cute,
+        Clever,
+        Tough,
     }
 }
