@@ -457,7 +457,8 @@ GymList['Dewford Town'] = new Gym(
     ],
     BadgeEnums.Knuckle,
     2000,
-    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!'
+    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
+    [new TemporaryBattleRequirement('May 2')]
 );
 GymList['Mauville City'] = new Gym(
     'Wattson',
@@ -487,7 +488,8 @@ GymList['Lavaridge Town'] = new Gym(
     ],
     BadgeEnums.Heat,
     4000,
-    'Oh... I guess I was trying too hard... I... I\'ve only recently become a Gym Leader. I tried too hard to be someone I\'m not. I have to do things my natural way. If I don\'t, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this.'
+    'Oh... I guess I was trying too hard... I... I\'ve only recently become a Gym Leader. I tried too hard to be someone I\'m not. I have to do things my natural way. If I don\'t, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this.',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))]
 );
 GymList['Petalburg City'] = new Gym(
     'Norman',
@@ -532,7 +534,8 @@ GymList['Mossdeep City'] = new Gym(
     ],
     BadgeEnums.Mind,
     8000,
-    'What? Our combination... was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.'
+    'What? Our combination... was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.',
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)]
 );
 GymList['Sootopolis City'] = new Gym(
     'Juan',
@@ -646,7 +649,8 @@ GymList['Mikan Island'] = new Gym(
     BadgeEnums['Coral-Eye'],
     740,
     'I can see why you made it so far in the Indigo League, and I bet you\'ll do pretty well in the Orange League.\n' +
-    'This is the Coral-Eye Badge of the Mikan Gym, to prove that you won your match!'
+    'This is the Coral-Eye Badge of the Mikan Gym, to prove that you won your match!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tanoby Ruins'))]
 );
 GymList['Navel Island'] = new Gym(
     'Danny',
@@ -660,7 +664,8 @@ GymList['Navel Island'] = new Gym(
     ],
     BadgeEnums.Sea_Ruby,
     740,
-    'You and the others were great.\nNow I\'d like to give you and your fellow challengers something you really deserve. The Sea Ruby badge. It\'s yours.'
+    'You and the others were great.\nNow I\'d like to give you and your fellow challengers something you really deserve. The Sea Ruby badge. It\'s yours.',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lost Cave'))]
 );
 GymList['Trovita Island'] = new Gym(
     'Rudy',
@@ -672,7 +677,8 @@ GymList['Trovita Island'] = new Gym(
     ],
     BadgeEnums.Spike_Shell,
     740,
-    'Nice job, guys. Here are your Spike Shell badges, guys.'
+    'Nice job, guys. Here are your Spike Shell badges, guys.',
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 41)]
 );
 GymList['Kumquat Island'] = new Gym(
     'Luana',
@@ -683,7 +689,8 @@ GymList['Kumquat Island'] = new Gym(
     ],
     BadgeEnums.Jade_Star,
     740, //TODO
-    'You did a fine job.\nAnd now, as Kumquat Island gym leader, and a member of the Orange Crew, I happily present this token of your victory.'
+    'You did a fine job.\nAnd now, as Kumquat Island gym leader, and a member of the Orange Crew, I happily present this token of your victory.',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Icefall Cave'))]
 );
 
 // Orange league champion
@@ -700,7 +707,13 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
     ],
     BadgeEnums.Elite_OrangeChampion,
     4800,
-    'You really deserve that trophy. You\'re a great Pokémon trainer.'
+    'You really deserve that trophy. You\'re a great Pokémon trainer.',
+    [
+        new GymBadgeRequirement(BadgeEnums['Coral-Eye']),
+        new GymBadgeRequirement(BadgeEnums.Sea_Ruby),
+        new GymBadgeRequirement(BadgeEnums.Spike_Shell),
+        new GymBadgeRequirement(BadgeEnums.Jade_Star),
+    ]
 );
 
 // Orre Gyms
@@ -1670,6 +1683,7 @@ GymList['Mina\'s Trial'] = new Gym(
         achievement: false,
     }
 );
+
 
 //Alola Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.
