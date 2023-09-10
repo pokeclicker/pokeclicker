@@ -6713,7 +6713,7 @@ const Lillie5 = new NPC('Talk to Lillie', [
     'There\'s an old book with myths about Alola\'s Legendary Pokémon here. It seems to suggest they came from another world and brought life to an heir that was to be protected by the island guardians.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Child of the Stars'), new  QuestLineStepCompletedRequirement('Child of the Stars', 0, GameConstants.AchievementOption.less)]),
 });
 const Lillie6 = new NPC('Lillie', [
     'Nebby changed forms... and it\'s not moving...',
@@ -6824,7 +6824,7 @@ const LillieRuinsOfLife = new NPC('Lillie', [
 });
 const LillieMalie = new NPC('Lillie', [
     'I ended up getting lost, and then I saw this outfit, and it was the last one they had in stock, so I bought it... Hah...',
-    '<i>Beast of sun and beast of moon</i>... That\'s what is written here. Is it referring to the legendary Pokémon of Alola?',
+    '<i>Beast of sun and beast of moon</i>... That\'s what is written here. Is it referring to the legendary Pokémon of Alola? And why are the island guarians protecting their "heir"?',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 0), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),

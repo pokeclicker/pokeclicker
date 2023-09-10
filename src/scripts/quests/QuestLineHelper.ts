@@ -2484,17 +2484,17 @@ class QuestLineHelper {
         // 0 - Temp Battle: Melemele Spearow
         const battleMelemeleSpearow = new CustomQuest (1, 0,  'Protect the mysterious girl\'s Pokémon! Battle the Spearow on Mahalo Trail.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Melemele Spearow')](), undefined, undefined,
             {
-                clearedMessage: '<i>The bridge collapses and you and the floating Pokémon start falling to the turbulent cascades below... But a swift creature zaps to your rescue! It seems fixated on the safety of the little one.</i>',
+                clearedMessage: '<i>The bridge collapses and you and the floating Pokémon start falling to your doom... But you are saved by a mysterious Pokémon!</i>',
                 npcDisplayName: 'Melemele Guardian',
                 npcImageName: '../pokemon/785',
             });
         melemeleAlolaQuestLine.addQuest(battleMelemeleSpearow);
 
-        // 1 - Talk to NPC:
-        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Ask the mysterious girl in white if she\'s okay.');
+        // 1 - Talk to NPC: Lillie 1
+        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Ask the mysterious girl if she\'s okay.');
         melemeleAlolaQuestLine.addQuest(talkToLillie1);
 
-        // 2 - Talk to NPC: Kukui/Rotomdex (to integrate Island Challenge quest seamlessly)
+        // 2 - Talk to NPC: RotomDexKukui
         const talkToRotomDexKukui = new TalkToNPCQuest(RotomDexKukui, 'Go check the Bulletin Board at Professor Kukui\'s Lab past Hau\'oli Outskirts. He also has a surprise for you!');
         melemeleAlolaQuestLine.addQuest(talkToRotomDexKukui);
 
@@ -2508,7 +2508,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(clearTrainersSchool);
 
         // 4 - Temp Battle: Skull 1
-        const battleSkullGrunts1 = new CustomQuest (1, 0,  'Beat up a grunt or two in Hau\'oli City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 1')](), undefined, undefined,
+        const battleSkullGrunts1 = new CustomQuest (1, 0,  'Beat up the Skull Grunt in Hau\'oli City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 1')](), undefined, undefined,
             {
                 clearedMessage: 'My thanks to you and your Pokémon. These grunts are always bothering me and my trial site. You... you\'re the trainer who cleared the Trainers\' School so effortlessly! Allow me to see if you\'re ready for my trial!',
                 npcDisplayName: 'Ilima',
@@ -2525,7 +2525,8 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(clearVerdantCavern);
 
         // 7 - Clear dungeon: Melemele Meadow
-        const clearMelemeleMeadow = new CustomQuest(1, 0, 'Ignore the Ultra Recon Squad stalking you. Continue past Route 3 and clear Melemele Meadow.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Melemele Meadow')](), undefined, undefined,
+        // const clearMelemeleMeadow = new defeatDungeonQuest(1, 0, 'Melemele Meadow').withOptionalArgs(
+        const clearMelemeleMeadow = new CustomQuest(1, 0, 'Continue past Route 3 and clear Melemele Meadow.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Melemele Meadow')](), undefined, undefined,
             {
                 clearedMessage: 'Pew!<br><br><i>Nebby flees.</i>',
                 npcDisplayName: 'Nebby',
@@ -2534,7 +2535,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(clearMelemeleMeadow);
 
         // 8 - Clear dungeon: Seaward Cave
-        const clearSeawardCave = new CustomQuest(1, 0, 'What the- Nebby escaped into a hole! Clear the Seaward Cave dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seaward Cave')](), undefined, undefined,
+        const clearSeawardCave = new CustomQuest(1, 0, 'Nebby escaped into a hole! Clear the Seaward Cave dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seaward Cave')](), undefined, undefined,
             {
                 clearedMessage: 'Pew~<br><br><i>Nebby stays. It seems like it\'s following you now!</i>',
                 npcDisplayName: 'Nebby',
@@ -2556,7 +2557,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(battleReconSquad1);
 
         // 10 - Talk to NPC: Lillie2
-        const talkToLillie2 = new TalkToNPCQuest(Lillie2, 'Nebby seemed to have enjoyed that. Return to Lillie in Melemele Meadow.');
+        const talkToLillie2 = new TalkToNPCQuest(Lillie2, 'Return Nebby to Lillie in Melemele Meadow.');
         melemeleAlolaQuestLine.addQuest(talkToLillie2);
 
         // 11 - Talk to NPC: Lillie3
