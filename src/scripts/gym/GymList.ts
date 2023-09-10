@@ -1533,7 +1533,7 @@ GymList['Ilima\'s Trial'] = new Gym(
     BadgeEnums.NormaliumZ,
     128000,
     'What an incredible Trainer you are! The Z-Crystal from the pedestal is yours now! It is known as Normalium Z!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
+    undefined,
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Normal], 1);
     },
@@ -1553,7 +1553,7 @@ GymList['Lana\'s Trial'] = new Gym(
     BadgeEnums.WateriumZ,
     128000,
     'Very well done! You do know what this is, don\'t you? Please take this Waterium Z.',
-    [new TemporaryBattleRequirement('Gladion 1')],
+    undefined,
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Water], 1);
     },
@@ -1573,7 +1573,7 @@ GymList['Kiawe\'s Trial'] = new Gym(
     BadgeEnums.FiriumZ,
     128000,
     'Whoa! S-spectacular! That Pokémon was protecting this Firium Z. Now it is yours.',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 7)],
+    undefined,
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fire], 1);
     },
@@ -1593,7 +1593,7 @@ GymList['Mallow\'s Trial'] = new Gym(
     BadgeEnums.GrassiumZ,
     128000,
     'Wow, you\'re even stronger than I thought! Looks like you\'ve cleared all three of Akala\'s trials! Here! A gift for such an inspiring young Trainer!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 8)],
+    undefined,
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Grass], 1);
     },
@@ -1613,7 +1613,7 @@ GymList['Sophocles\' Trial'] = new Gym(
     BadgeEnums.ElectriumZ,
     128000,
     'That Pokémon was really something else! Here, I\'ll give you this Electrium Z to reward you for beating it.',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
+    undefined,
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Electric], 1);
     },
@@ -1633,7 +1633,7 @@ GymList['Acerola\'s Trial'] = new Gym(
     BadgeEnums.GhostiumZ,
     128000,
     'Welcome back! Now let\'s see how you did... Yup! You passed my trial! Here you go!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 14)],
+    undefined,
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ghost], 1);
     },
@@ -1653,7 +1653,7 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
     BadgeEnums.DragoniumZ,
     128000,
     '<i>You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!<i>',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
+    undefined,
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dragon], 1);
     },
@@ -1674,7 +1674,7 @@ GymList['Mina\'s Trial'] = new Gym(
     BadgeEnums.FairiumZ,
     128000,
     'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!',
-    [new TemporaryBattleRequirement('Kahuna Nanu')],
+    undefined,
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fairy], 1);
     },
@@ -1683,6 +1683,7 @@ GymList['Mina\'s Trial'] = new Gym(
         achievement: false,
     }
 );
+
 
 //Alola Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.
