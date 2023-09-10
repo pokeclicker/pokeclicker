@@ -19,8 +19,8 @@
     <!--Route 26-->
     <%- include('templates/mapRoute',
         { route: 26, region: 1
-        , width: 20, height: 3
-        , x: 93, y: 22
+        , width: 21, height: 3
+        , x: 93, y: 21
         , rotate: true
         })
      %>
@@ -28,8 +28,35 @@
     <!--Route 28-->
     <%- include('templates/mapRoute',
         { route: 28, region: 1
-        , width: 12, height: 3
-        , x: 81, y: 33
+        , width: 8, height: 3
+        , x: 85, y: 27
+        })
+     %>
+
+     <!--Route 28 Extension-->
+     <%- include('templates/mapRoute',
+        { route: 28, region: 1
+        , width: 3, height: 4
+        , x: 85, y: 30
+        , noText: true
+        })
+     %>
+
+     <!--Route 28 Extension-->
+     <%- include('templates/mapRoute',
+        { route: 28, region: 1
+        , width: 2, height: 4
+        , x: 83, y: 31
+        , noText: true
+        })
+     %>
+
+     <!--Route 28 Extension-->
+     <%- include('templates/mapRoute',
+        { route: 28, region: 1
+        , width: 2, height: 4
+        , x: 81, y: 32
+        , noText: true
         })
      %>
 
@@ -174,8 +201,16 @@
     <!--Extra bit of Route 41-->
     <%- include('templates/mapRoute',
         { route: 41, region: 1
-        , width: 6, height: 3
+        , width: 4, height: 3
         , x: 8, y: 42
+        , noText: true
+        })
+    %>
+    <!--Extra bit of Route 41-->
+    <%- include('templates/mapRoute',
+        { route: 41, region: 1
+        , width: 2, height: 2
+        , x: 12, y: 43
         , noText: true
         })
     %>
@@ -240,46 +275,36 @@
      <!--Extra bit of Route 45-->
     <%- include('templates/mapRoute',
         { route: 45, region: 1
-        , width: 2, height: 3
-        , x: 70, y: 12
+        , width: 1, height: 3
+        , x: 70, y: 13
         , noText: true
         , rotate: true
         })
     %>
-    <!--Extra bit of Route 45-->
-   <%- include('templates/mapRoute',
-       { route: 45, region: 1
-       , width: 4, height: 2
-       , x: 71, y: 27
-       , noText: true
-       , rotate: true
-       })
-   %>
+     <!--Extra bit of Route 45-->
+    <%- include('templates/mapRoute',
+    { route: 45, region: 1
+    , width: 2, height: 4
+    , x: 71, y: 27
+    , noText: true
+    })
+    %>
 
     <!--Route 46-->
     <%- include('templates/mapRoute',
         { route: 46, region: 1
-        , width: 12, height: 3
-        , x: 65, y: 30
+        , width: 11, height: 3
+        , x: 65, y: 31
         , rotate: true
         })
-    %>
-    <!--Extra bit of Route 46-->
-    <%- include('templates/mapRoute',
-        { route: 46, region: 1
-        , width: 2, height: 1
-        , x: 68, y: 30
-        , noText: true
-       })
     %>
     <!--Extra bit of Route 46-->
     <%- include('templates/mapRoute',
         { route: 46, region: 1
         , width: 2, height: 2
-        , x: 65, y: 28
+        , x: 65, y: 29
         , noText: true
-        , rotate: true
-        })
+       })
     %>
 
      <!--Route 47-->
@@ -419,22 +444,27 @@
     <!--Indigo Plateau 2.0-->
     <%- include('templates/mapTown',
         { name: "Indigo Plateau Johto"
-        , x: 90, y: 4
-        , width: 9, height: 5.5
+        , x: 89, y: 0
+        , width: 11, height: 1
         })
      %>
 
     <!--Indigo Plateau 2.0 Extension-->
     <%- include('templates/mapTown',
         { name: "Indigo Plateau Johto"
-        , x: 93, y: 9.5
-        , width: 3, height: 9.5
+        , x: 88, y: 1
+        , width: 12, height: 1
         , isExtension: true
         })
      %>
-
-
-
+    <!--Indigo Plateau 2.0 Extension-->
+    <%- include('templates/mapTown',
+        { name: "Indigo Plateau Johto"
+        , x: 87, y: 2
+        , width: 13, height: 11
+        , isExtension: true
+        })
+     %>
 
     <!-- -------- -->
     <!-- DUNGEONS -->
@@ -523,6 +553,31 @@
     <%- include('templates/mapDungeon',
         { name: "Whirl Islands"
         , x: 12, y: 39
+        , width: 4, height:4
+        })
+     %>
+
+    <!--Whirl Islands Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Whirl Islands"
+        , x: 16, y: 39
+        , width: 1, height: 3
+        })
+     %>
+
+    <!--Whirl Islands Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Whirl Islands"
+        , x: 16, y: 44
+        , width: 3, height: 2
+        })
+     %>
+
+    <!--Whirl Islands Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Whirl Islands"
+        , x: 19, y: 43
+        , width: 1, height: 2
         })
      %>
 
@@ -572,31 +627,17 @@
     <%- include('templates/mapDungeon',
         { name: "Ice Path"
         , x: 69, y: 9
+        , width: 6, height: 4
         })
      %>
-     <!--Ice Path Extension-->
-     <%- include('templates/mapDungeon',
-         { name: "Ice Path"
-         , x: 73, y: 11
-         , width: 1, height: 1
-         , isExtension: true
-         })
-      %>
 
     <!--Dark Cave-->
     <%- include('templates/mapDungeon',
         { name: "Dark Cave"
         , x: 67, y: 27
+        , width: 4, height: 4
         })
      %>
-     <!--Dark Cave Extension-->
-     <%- include('templates/mapDungeon',
-         { name: "Dark Cave"
-         , x: 70, y: 30
-         , width: 1, height: 1
-         , isExtension: true
-         })
-      %>
      <!--Dark Cave Extension-->
      <%- include('templates/mapDungeon',
          { name: "Dark Cave"
@@ -615,7 +656,8 @@
     <!--Victory Road Johto-->
     <%- include('templates/mapDungeon',
         { name: "Victory Road Johto"
-        , x: 93, y: 19
+        , x: 91, y: 13
+        , width: 7, height: 8
         })
      %>
 
@@ -634,9 +676,30 @@
          , isExtension: true
          })
       %>
-
-
-
+     <!--Mt. Silver Extension-->
+     <%- include('templates/mapDungeon',
+         { name: "Mt. Silver"
+         , x: 77, y: 19
+         , width: 7, height: 4
+         , isExtension: true
+         })
+      %>
+     <!--Mt. Silver Extension-->
+     <%- include('templates/mapDungeon',
+         { name: "Mt. Silver"
+         , x: 75, y: 23
+         , width: 9, height: 6
+         , isExtension: true
+         })
+      %>
+     <!--Mt. Silver Extension-->
+     <%- include('templates/mapDungeon',
+         { name: "Mt. Silver"
+         , x: 75, y: 29
+         , width: 5, height: 2
+         , isExtension: true
+         })
+      %>
 
     <!-- ------------------ -->
     <!-- PLACES OF INTEREST -->
@@ -656,7 +719,7 @@
      , width: 3, height: 8
      , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Olivine City') }"
     })
- %>
+     %>
 
      <%- include('templates/mapPOI',
         { name: "Underground Entrance"
@@ -679,6 +742,17 @@
         , x: 28, y: 38
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Route 22"
+        , width: 4, height: 3
+        , x: 96, y: 26
+        , databind: `attr: { class: MapHelper.accessToRoute(22, GameConstants.Region.johto) ? 'unlockedRoute' : 'lockedRoute' },
+        click: () => {
+            Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Olivine City.'});
+            }`
         })
      %>
 

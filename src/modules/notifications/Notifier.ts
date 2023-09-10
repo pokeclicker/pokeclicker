@@ -10,11 +10,11 @@ export default class Notifier {
         title = '',
         timeout = 3000,
         time = 'just now',
-        sound = null,
-        setting = null,
-        image = null,
-        pokemonImage = null,
-        strippedMessage = null,
+        sound,
+        setting,
+        image,
+        pokemonImage,
+        strippedMessage,
     }: {
         message?: string;
         type?: NotificationOption;
