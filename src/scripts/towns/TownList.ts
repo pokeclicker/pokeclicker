@@ -803,8 +803,15 @@ const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
 
 const CandyMan = new NPC('The Candy Man', [
     'I sure do love candy. The rarer, the better!',
-    'I\'ve got a real <b>SWEET-TOOTH<b/>',
+    'I\'ve got a real <b>SWEET-TOOTH</b>',
 ]);
+
+const SpeedyRunner = new NPC('Speedy Runner', [
+    'I don\'t have time to listen to people explain stuff I already know.',
+    'Some old man tried to teach me how to catch Pokémon earlier. I just shouted',
+    '<b>HOW-BLU-COIN?</b>',
+    'at him and left.',
+], {image: 'assets/images/npcs/Jogger.png'});
 
 const UnrivaledBlue = new NPC('Blue', [
     'So, you said you want to know where you might find Mewtwo\'s Mega Stones, right?',
@@ -1004,6 +1011,7 @@ TownList['Indigo Plateau Kanto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
         ],
+        npcs: [SpeedyRunner],
     }
 );
 TownList['One Island'] = new Town(
@@ -5925,12 +5933,11 @@ const Spelunker = new NPC('Spelunker', [
     'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
-const ExamineAegislash = new NPC('Examine Your Doublade', [
-    '<i>Your Doublade evolves and shifts into an aggressive stance, revealing its Blade Forme.</i>',
-], {
-    image: 'assets/images/pokemon/681.01.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4), new QuestLineStepCompletedRequirement('Princess Diancie', 5, GameConstants.AchievementOption.less)]),
-});
+const ExamineAegislash = new GiftNPC('Millis and Argus Steels\' Aeglislash', [
+    '<i>Aegislash wants to join you on your adventure.</i>',
+], () => {
+    App.game.party.gainPokemonByName('Aegislash (Blade)');
+}, 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
 const ThanksDiancie = new NPC('Princess Diancie', [
     'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
@@ -9128,7 +9135,7 @@ TownList['Cabo Poco'] = new Town(
     GameConstants.PaldeaSubRegions.Paldea,
     [new BulletinBoard(GameConstants.BulletinBoards.Paldea)],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Volo)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Azure)],
     }
 );
 TownList['Poco Path Lighthouse'] = new Town(
