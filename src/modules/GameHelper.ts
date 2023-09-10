@@ -215,4 +215,13 @@ export default class GameHelper {
         const grey = r * 0.299 + g * 0.587 + b * 0.114; // Range between 0 and 255, based on NTSC formula.
         return grey > 127;
     }
+
+    public static isDevelopmentBuild(): boolean {
+        // This was done like this so es/tslint doesn't throw errors
+        try {
+            return !!JSON.parse('$DEVELOPMENT');
+        } catch (e) {
+            return false;
+        }
+    }
 }

@@ -153,12 +153,12 @@ enum BadgeEnums {
     // Crown
     'Elite_CrownChampion',
     // Hisui
-    'Elite_NobleKleavor',
-    'Elite_NobleLilligant',
-    'Elite_NobleArcanine',
-    'Elite_NobleElectrode',
-    'Elite_NobleAvalugg',
-    'Elite_Volo',
+    'Noble_Kleavor',
+    'Noble_Lilligant',
+    'Noble_Arcanine',
+    'Noble_Electrode',
+    'Noble_Avalugg',
+    'Azure',
     //Paldea Victory Road
     'Bug_Gym',
     'Grass_Gym',
@@ -190,8 +190,8 @@ enum BadgeEnums {
     'Dragon_Titan',
     'Elite_Arven',
     // The Way Home
-    'Elite_Sada',
-    'Elite_Turo',
+    'Scarlet',
+    'Violet',
 }
 
 export default BadgeEnums;
