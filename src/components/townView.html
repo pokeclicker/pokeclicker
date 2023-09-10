@@ -92,7 +92,12 @@
         <ul class="list-inline mb-0">
           <!-- ko foreach: player.town().dungeon.normalEncounterList.filter(i => !i.hide) -->
           <li class="list-inline-item">
-            <img class="boss" src="assets/images/dungeons/chest.png" data-bind="hidden: !$data.mimic"/>
+            <!-- ko if: $data.mimic -->
+            <img class="boss" data-bind="attr: { src: `assets/images/dungeons/chest-${$data.mimicTier}.png` }, tooltip: {
+                title: GameConstants.camelCaseToString($data.mimicTier),
+                trigger: 'hover'
+            }"/>
+            <!-- /ko -->
             <img class="dungeon-pokemon-pkrs" src="" data-bind="
                 attr:{ src: $data.pkrsImage },
                 tooltip: {
