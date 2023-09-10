@@ -2466,6 +2466,9 @@ class Update implements Saveable {
             if (saveData.categories.categories[0].color === '#333') {
                 saveData.categories.categories[0].color = '#333333';
             }
+
+            // Move Pokéball Selector Slots down by one to make room for the Moon Ball
+            saveData.pokeballs.pokeballs = Update.moveIndex(saveData.pokeballs.pokeballs, 5);
         },
     };
 

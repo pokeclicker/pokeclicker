@@ -40,6 +40,7 @@ export type ItemNameType
 | 'Ultraball'
 | 'Masterball'
 | 'Fastball'
+| 'Moonball'
 | 'Quickball'
 | 'Timerball'
 | 'Duskball'

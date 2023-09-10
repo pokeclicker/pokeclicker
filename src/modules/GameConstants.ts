@@ -1,5 +1,6 @@
 import DayCyclePart from './dayCycle/DayCyclePart';
 import MoonCyclePhase from './moonCycle/MoonCyclePhase';
+import { PokemonNameType } from './pokemons/PokemonNameType';
 
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
@@ -437,6 +438,7 @@ export enum Pokeball {
     'Ultraball',
     'Masterball',
     'Fastball',
+    'Moonball',
     'Quickball',
     'Timerball',
     'Duskball',
@@ -2301,6 +2303,34 @@ export const MoonCycleValues: Record<MoonCyclePhase, number> = {
     [MoonCyclePhase.ThirdQuarter]: 6,
     [MoonCyclePhase.WaningCrescent]: 7,
 };
+
+export const MoonEvoPokemon = new Set<PokemonNameType>([
+    'Nidoran(F)', // 29
+    'Nidorina', // 30
+    'Nidoqueen', // 31
+    'Nidoran(M)', // 32
+    'Nidorino', // 33
+    'Nidoking', // 34
+    'Clefairy', // 35
+    'Clefable', // 36
+    'Jigglypuff', // 39
+    'Wigglytuff', // 40
+    'Cleffa', // 173
+    'Igglybuff', // 174
+    //'Teddiursa', // 216
+    //'Ursaring', // 217
+    'Skitty', // 300
+    'Delcatty', // 301
+    //'Lunatone', // 337
+    // 'Cresselia', // 488
+    //'Darkrai', // 491
+    'Munna', // 517
+    'Musharna', // 518
+    //'Lunala', // 792
+    //'Lunala (Full Moon)', // 792.01
+    //'Necrozma (Dawn Wings)', // 800.02
+    //'Ursaluna', // 901
+]);
 
 export enum ShadowStatus {
     None,
