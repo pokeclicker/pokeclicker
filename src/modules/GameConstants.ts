@@ -438,7 +438,6 @@ export enum Pokeball {
     'Ultraball',
     'Masterball',
     'Fastball',
-    'Moonball',
     'Quickball',
     'Timerball',
     'Duskball',
@@ -448,6 +447,7 @@ export enum Pokeball {
     'Nestball',
     'Repeatball',
     'Beastball',
+    'Moonball',
 }
 
 export enum Currency {

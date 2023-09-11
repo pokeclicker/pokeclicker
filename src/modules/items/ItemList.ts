@@ -63,7 +63,6 @@ ItemList.Ultraball  = new PokeballItem(Pokeball.Ultraball, 2000, undefined, unde
 ItemList.Masterball = new PokeballItem(Pokeball.Masterball, 2500, Currency.questPoint, undefined, 'Master Ball');
 // Not sold in shops
 ItemList.Fastball = new PokeballItem(Pokeball.Fastball, Infinity, Currency.farmPoint, undefined, 'Fast Ball');
-ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmPoint, undefined, 'Moon Ball');
 ItemList.Quickball = new PokeballItem(Pokeball.Quickball, Infinity, Currency.farmPoint, undefined, 'Quick Ball');
 ItemList.Timerball = new PokeballItem(Pokeball.Timerball, Infinity, Currency.farmPoint, undefined, 'Timer Ball');
 ItemList.Duskball = new PokeballItem(Pokeball.Duskball, Infinity, Currency.farmPoint, undefined, 'Dusk Ball');
@@ -73,6 +72,7 @@ ItemList.Lureball = new PokeballItem(Pokeball.Lureball, Infinity, Currency.battl
 ItemList.Nestball = new PokeballItem(Pokeball.Nestball, Infinity, Currency.battlePoint, undefined, 'Nest Ball');
 ItemList.Repeatball = new PokeballItem(Pokeball.Repeatball, Infinity, Currency.battlePoint, undefined, 'Repeat Ball');
 ItemList.Beastball = new PokeballItem(Pokeball.Beastball, 500, Currency.questPoint, undefined, 'Beast Ball');
+ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmPoint, undefined, 'Moon Ball');
 
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
