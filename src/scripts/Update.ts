@@ -2466,6 +2466,7 @@ class Update implements Saveable {
             if (saveData.categories.categories[0].color === '#333') {
                 saveData.categories.categories[0].color = '#333333';
             }
+
         },
     };
 
