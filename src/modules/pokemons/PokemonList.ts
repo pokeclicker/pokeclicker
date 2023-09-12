@@ -4828,7 +4828,7 @@ export const pokemonList = createPokemonArray(
         'exp': 207,
         'catchRate': 45,
         'baby': true,
-        'evolutions': [DummyEvolution('Baby Kangaskhan', 'Mega Kangaskhan')],
+        'evolutions': [DummyEvolution('Kangaskhan', 'Mega Kangaskhan')],
         'base': {
             'hitpoints': 53,
             'attack': 63,
