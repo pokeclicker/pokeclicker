@@ -378,7 +378,7 @@ class Dungeon {
         let pokemonName: PokemonNameType;
         let hideEncounter = false;
 
-        const getEncounterInfo = function(pokemonName, mimic) {
+        const getEncounterInfo = (pokemonName, mimic) => {
             const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
             const encounter = {
                 image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
@@ -390,6 +390,7 @@ class Dungeon {
                 lock: false,
                 lockMessage: '',
                 mimic: mimic,
+                mimicTier: this.getMimicTier(pokemonName),
             };
             return encounter;
         };
@@ -464,6 +465,10 @@ class Dungeon {
     public isThereQuestAtLocation = ko.pureComputed(() => {
         return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
     });
+
+    public getMimicTier(pokemonName: PokemonNameType): LootTier {
+        return (Object.keys(this.lootTable) as LootTier[]).find((tier) => this.lootTable[tier].find((loot) => loot.loot == pokemonName));
+    }
 }
 
 /**
@@ -4781,13 +4786,13 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
                 new GymPokemon('Snubbull', 62000, 16),
                 new GymPokemon('Kecleon', 62000, 16),
             ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6) }, 'Klots', '(male)'),
-        new DungeonTrainer('Cipher Peon Naps',
+        new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Beldum', 62000, 18),
                 new GymPokemon('Murkrow', 62000, 18),
                 new GymPokemon('Teddiursa', 62000, 18, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Rhyhorn', 62000, 18),
-            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6) }, 'Klots', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6) }, 'Naps', '(yellow)'),
     ],
     {
         common: [

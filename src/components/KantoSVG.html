@@ -285,6 +285,58 @@
             })
         %>
 
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Route 26-->
+        <%- include('templates/mapPOI',
+            { name: "Route 26"
+            , width: 3, height: 15
+            , x: 7, y: 29
+            , databind: `attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Vermilion City.'});
+                }`
+            })
+        %>
+
+        <!--Route 27-->
+        <%- include('templates/mapPOI',
+            { name: "Route 27"
+            , width: 7, height: 3
+            , x: 0, y: 41
+            , databind: `attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Vermilion City.'});
+                }`
+            })
+        %>
+
+        <!--Route 28-->
+        <%- include('templates/mapPOI',
+            { name: "Route 28"
+            , width: 7, height: 3
+            , x: 0, y: 26
+            , databind: `attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Vermilion City.'});
+                }`
+            })
+        %>
+
+        <!--Route 28 Extension-->
+        <%- include('templates/mapPOI',
+            { name: "Route 28"
+            , width: 2, height: 4
+            , x: 0, y: 30
+            , databind: `attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Vermilion City.'});
+                }`
+            })
+        %>
+
         <!-- ----- -->
         <!-- TOWNS -->
         <!-- ----- -->

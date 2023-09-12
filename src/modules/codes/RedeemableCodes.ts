@@ -201,6 +201,13 @@ export default class RedeemableCodes implements Saveable {
                 while (quest.curQuest() < quest.totalQuests) {
                     quest.curQuestObject().complete();
                 }
+                App.game.wallet.gainDungeonTokens(200);
+                Notifier.notify({
+                    title: 'Tutorial Skip',
+                    message: 'You have skipped the tutorial, and found a stash of Dungeon Tokens.',
+                    type: NotificationConstants.NotificationOption.warning,
+                    timeout: 1e4,
+                });
 
                 return true;
             }),
