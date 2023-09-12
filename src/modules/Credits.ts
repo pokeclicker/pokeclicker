@@ -265,6 +265,7 @@ export const SpriteCredits: Credit[] = [
             'Client Island town image',
             'Clouds',
             'Clown Jessie & James',
+            'Cosplay Pikachu Shuffle Icons',
             'Cracked pot big icon',
             'Danny',
             'Day cycle images',
@@ -648,6 +649,15 @@ export const SpriteCredits: Credit[] = [
             'Surprise Togepi',
         ],
         // NOTES: Permission given via PRs
+    },
+    {
+        name: 'JorMxDos',
+        link: 'https://www.deviantart.com/jormxdos',
+        image: 'https://a.deviantart.net/avatars-big/j/o/jormxdos.png?8',
+        resources: [
+            'All Vectorized Badges images',
+        ],
+        // NOTES: Permission given in the bio comment section
     },
     {
         name: 'Kensuyjin33',

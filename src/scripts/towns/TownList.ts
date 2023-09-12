@@ -803,8 +803,15 @@ const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
 
 const CandyMan = new NPC('The Candy Man', [
     'I sure do love candy. The rarer, the better!',
-    'I\'ve got a real <b>SWEET-TOOTH<b/>',
+    'I\'ve got a real <b>SWEET-TOOTH</b>',
 ]);
+
+const SpeedyRunner = new NPC('Speedy Runner', [
+    'I don\'t have time to listen to people explain stuff I already know.',
+    'Some old man tried to teach me how to catch Pokémon earlier. I just shouted',
+    '<b>HOW-BLU-COIN?</b>',
+    'at him and left.',
+], {image: 'assets/images/npcs/Jogger.png'});
 
 const UnrivaledBlue = new NPC('Blue', [
     'So, you said you want to know where you might find Mewtwo\'s Mega Stones, right?',
@@ -1004,6 +1011,7 @@ TownList['Indigo Plateau Kanto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
         ],
+        npcs: [SpeedyRunner],
     }
 );
 TownList['One Island'] = new Town(
@@ -5960,12 +5968,11 @@ const Spelunker = new NPC('Spelunker', [
     'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
-const ExamineAegislash = new NPC('Examine Your Doublade', [
-    '<i>Your Doublade evolves and shifts into an aggressive stance, revealing its Blade Forme.</i>',
-], {
-    image: 'assets/images/pokemon/681.01.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4), new QuestLineStepCompletedRequirement('Princess Diancie', 5, GameConstants.AchievementOption.less)]),
-});
+const ExamineAegislash = new GiftNPC('Millis and Argus Steels\' Aeglislash', [
+    '<i>Aegislash wants to join you on your adventure.</i>',
+], () => {
+    App.game.party.gainPokemonByName('Aegislash (Blade)');
+}, 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
 const ThanksDiancie = new NPC('Princess Diancie', [
     'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
@@ -6617,6 +6624,26 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ], {image: 'assets/images/npcs/Owner.png'});
+const PikachuValleyPikachuGeneric = new NPC('Pikachu', [
+    'Pikachu!',
+    '<i>The Pikachu looks happy playing with all its friends!</i>',
+], {
+    image: 'assets/images/pokemon/25.png',
+});
+const PikachuValleyAlolaCap = new NPC('Pikachu', [
+    'Pi-Pikachu!',
+    '<i>The Pikachu is waving at you supportively! Its goodwill carries you forward on your journey to Alola Championship!</i>',
+], {
+    image: 'assets/images/pokemon/25.06.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion, GameConstants.AchievementOption.less),
+});
+const PikachuValleyPikachuWorldCap = new NPC('Pikachu', [
+    'Pii-kachu!',
+    '<i>The Pikachu is staring at you intently! Is it waiting for you to become stronger?</i>',
+], {
+    image: 'assets/images/pokemon/25.07.png',
+    requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.galar), new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion, GameConstants.AchievementOption.less)]),
+});
 const PaniolaTownActor = new NPC('Actor Meredith', [
     'I love Oricorio. I can tell you all about it!',
     'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
@@ -6959,6 +6986,12 @@ const RoadsideMotelAnabel5 = new NPC('Anabel', [
     image: 'assets/images/npcs/Anabel.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 18, GameConstants.AchievementOption.less)]),
 });
+const NecrozmaLooker = new NPC('Looker', [
+    'There haven\'t been any new reports of Ultra Beasts in Alola, but I did see something strange over in Ten Carat Hill. It was black, yet shining. It seemed to be fleeing, no doubt about that. Must have been in a weakened state. Was it involved in some kind of battle? If you find it, I doubt it will have much energy left.',
+], {
+    image: 'assets/images/npcs/Looker.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Ultra Beast Hunt'), new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Must have never encountered Necrozma before.', GameConstants.AchievementOption.less)]),
+});
 const BattleTreeRed = new NPC('Red', [
     '...',
 ], {image: 'assets/images/npcs/Red-masters.png'});
@@ -7089,6 +7122,7 @@ TownList['Hau\'oli City'] = new Town(
     [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+        npcs: [NecrozmaLooker],
     }
 );
 TownList['Melemele Woods'] = new Town(
@@ -7398,7 +7432,11 @@ TownList['Pikachu Valley'] = new DungeonTown(
     'Pikachu Valley',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+    undefined,
+    {
+        npcs: [PikachuValleyPikachuGeneric, PikachuValleyAlolaCap, PikachuValleyPikachuWorldCap],
+    }
 );
 TownList['Paniola Ranch'] = new DungeonTown(
     'Paniola Ranch',
@@ -9132,7 +9170,7 @@ TownList['Cabo Poco'] = new Town(
     GameConstants.PaldeaSubRegions.Paldea,
     [new BulletinBoard(GameConstants.BulletinBoards.Paldea)],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_Volo)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Azure)],
     }
 );
 TownList['Poco Path Lighthouse'] = new Town(

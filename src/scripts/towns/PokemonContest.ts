@@ -7,18 +7,48 @@ class PokemonContest implements Feature {
 
     public prizes = [
         new PokemonContestPrizes('10 Rare Candy',
-            'Get 10 Rare Candy by catching a Machop! (real requirement will be added later)',
+            'Get 10 Rare Candy by catching Machop, not at all related to entering a contest! (real requirement will be added later)',
             'Rare_Candy',
             10,
             new ObtainedPokemonRequirement('Machop')
         ),
         /*new PokemonContestPrizes('Secret Mega Stone',
-            'Get a secret Mega Stone for reaching Kalos. (real requirement will be added later)',
+            'Obtain the Megastone for Altaria by reaching Master ranking in any contest.',
             'Altarianite',
             10,
-            new MaxRegionRequirement(GameConstants.Region.kalos),
+            new StatisticRequirement(['contestResults', GameConstants.ContestResults.Master], 1, 'Win a Pokemon Contest at Master ranking.'),
             new MaxRegionRequirement(GameConstants.Region.kalos)
         ),*/
+        new PokemonContestPrizes('Pikachu (Rock Star)',
+            'Impress Pikachu (Rock Star) by being very Cool!',
+            'Pikachu (Rock Star)',
+            1,
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Cool], 1, 'Win a Pokemon Contest at Master ranking when the style is Cool.')
+        ),
+        new PokemonContestPrizes('Pikachu (Belle)',
+            'Impress Pikachu (Belle) by being very Beautiful!',
+            'Pikachu (Belle)',
+            1,
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Beautiful], 1, 'Win a Pokemon Contest at Master ranking when the style is Beautiful.')
+        ),
+        new PokemonContestPrizes('Pikachu (Pop Star)',
+            'Impress Pikachu (Pop Star) by being very Cute!',
+            'Pikachu (Pop Star)',
+            1,
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Cute], 1, 'Win a Pokemon Contest at Master ranking when the style is Cute.')
+        ),
+        new PokemonContestPrizes('Pikachu (Ph. D.)',
+            'Impress Pikachu (Ph. D.) by being very Clever!',
+            'Pikachu (Ph. D.)',
+            1,
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Clever], 1, 'Win a Pokemon Contest at Master ranking when the style is Clever.')
+        ),
+        new PokemonContestPrizes('Pikachu (Libre)',
+            'Impress Pikachu (Libre) by being very Tough!',
+            'Pikachu (Libre)',
+            1,
+            new StatisticRequirement(['contestStyleMaster', GameConstants.ContestStyle.Tough], 1, 'Win a Pokemon Contest at Master ranking when the style is Tough.')
+        ),
     ];
 
     constructor() {
@@ -57,7 +87,7 @@ class PokemonContest implements Feature {
 }
 
 class PokemonContestController {
-    static contestStyle: KnockoutObservable<ContestStyle> = ko.observable(undefined);
+    static contestStyle: KnockoutObservable<GameConstants.ContestStyle> = ko.observable(undefined);
     static pokemonType: KnockoutObservable<PokemonType> = ko.observable(PokemonType.None);
     //static inProgress = ko.observable<boolean>(false); //TODO: this should be used for some sort of animation or something
     static contestText: KnockoutObservable<string> = ko.observable(undefined);
@@ -69,7 +99,7 @@ class PokemonContestController {
         SeededRand.seedWithDate(date);
 
         // Generate Contest Style and Pokemon Type constraints
-        this.contestStyle(SeededRand.fromArray(GameHelper.enumNumbers(ContestStyle)));
+        this.contestStyle(SeededRand.fromArray(GameHelper.enumNumbers(GameConstants.ContestStyle)));
         const validTypes = GameHelper.enumNumbers(PokemonType).filter((t) => t !== PokemonType.None);
         this.pokemonType(SeededRand.fromArray(validTypes));
     }
@@ -117,6 +147,7 @@ class PokemonContestController {
         let result : GameConstants.ContestResults = undefined;
         if (stylePoints > 700) {
             result = GameConstants.ContestResults.Master;
+            GameHelper.incrementObservable(App.game.statistics.contestStyleMaster[PokemonContestController.contestStyle()], 1);
         } else if (stylePoints > 450) {
             result = GameConstants.ContestResults.Hyper;
         } else if (stylePoints > 200) {
@@ -163,23 +194,23 @@ class ContestEntry {
         const baseStats = pokemonMap[this.pokemonName()].base;
 
         switch (PokemonContestController.contestStyle()) {
-            case ContestStyle.Cool:
+            case GameConstants.ContestStyle.Cool:
                 stylePoints = baseStats.attack + baseStats.specialDefense;
                 flavorType = FlavorType.Spicy;
                 break;
-            case ContestStyle.Beautiful:
+            case GameConstants.ContestStyle.Beautiful:
                 stylePoints = baseStats.specialAttack + baseStats.defense;
                 flavorType = FlavorType.Dry;
                 break;
-            case ContestStyle.Cute:
+            case GameConstants.ContestStyle.Cute:
                 stylePoints = baseStats.specialDefense + baseStats.hitpoints;
                 flavorType = FlavorType.Sweet;
                 break;
-            case ContestStyle.Clever:
+            case GameConstants.ContestStyle.Clever:
                 stylePoints = baseStats.specialAttack + baseStats.speed;
                 flavorType = FlavorType.Bitter;
                 break;
-            case ContestStyle.Tough:
+            case GameConstants.ContestStyle.Tough:
                 stylePoints = baseStats.hitpoints + baseStats.defense;
                 flavorType = FlavorType.Sour;
                 break;
@@ -191,14 +222,6 @@ class ContestEntry {
 
         return stylePoints;
     });
-}
-
-enum ContestStyle {
-    Cool,
-    Beautiful,
-    Cute,
-    Clever,
-    Tough,
 }
 
 class PokemonContestTownContent extends TownContent {

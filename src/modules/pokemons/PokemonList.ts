@@ -1697,6 +1697,106 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 25.17,
+        'name': 'Pikachu (Rock Star)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric, PokemonType.Steel],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 25.18,
+        'name': 'Pikachu (Belle)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric, PokemonType.Ice],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 25.19,
+        'name': 'Pikachu (Pop Star)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric, PokemonType.Fairy],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 25.20,
+        'name': 'Pikachu (Ph. D.)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 25.21,
+        'name': 'Pikachu (Libre)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric, PokemonType.Fighting],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
         'id': 26,
         'name': 'Raichu',
         'catchRate': 75,
@@ -2470,7 +2570,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 53,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Diglett', 'Dugtrio', 26)],
+        'evolutions': [
+            LevelEvolution('Diglett', 'Dugtrio', 26),
+            DummyEvolution('Diglett', 'Dugtrio (Punk)'),
+        ],
         'base': {
             'hitpoints': 10,
             'attack': 55,
@@ -3132,6 +3235,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Bellsprout', 'Weepinbell', 21),
             DummyEvolution('Bellsprout', 'Valencian Weepinbell'),
+            DummyEvolution('Bellsprout', 'Weepinbell (Fancy)'),
         ],
         'base': {
             'hitpoints': 50,
@@ -3886,6 +3990,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             StoneEvolution('Haunter', 'Gengar', StoneType.Linking_cord),
             DummyEvolution('Haunter', 'Gigantamax Gengar'),
+            DummyEvolution('Haunter', 'Gengar (Punk)'),
         ],
         'base': {
             'hitpoints': 45,
@@ -13154,11 +13259,11 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Plant)', 'Burmy (Trash)', 1),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Plant)', 'Burmy (Trash)', 1),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13180,6 +13285,10 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
             LevelEvolution('Burmy (Sand)', 'Mothim', 20),
+            EnvironmentRestrictedLevelEvolution('Forest', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13201,6 +13310,9 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
+            EnvironmentRestrictedLevelEvolution('Forest', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13236,6 +13348,13 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
+        'evolutions': [
+            EnvironmentRestrictedLevelEvolution('Cave', 'Wormadam (Plant)', 'Wormadam (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('GemCave', 'Wormadam (Plant)', 'Wormadam (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Mansion', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Graveyard', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 59,
@@ -13256,6 +13375,12 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
+        'evolutions': [
+            EnvironmentRestrictedLevelEvolution('Forest', 'Wormadam (Sand)', 'Wormadam (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Mansion', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Graveyard', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 79,
@@ -13276,6 +13401,11 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
+        'evolutions': [
+            EnvironmentRestrictedLevelEvolution('Forest', 'Wormadam (Trash)', 'Wormadam (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('Cave', 'Wormadam (Trash)', 'Wormadam (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('GemCave', 'Wormadam (Trash)', 'Wormadam (Sand)', 1, true),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 69,
@@ -13414,7 +13544,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 55,
         'catchRate': 190,
-        'evolutions': [LevelEvolution('Cherubi', 'Cherrim (Overcast)', 25)],
+        'evolutions': [LevelEvolution('Cherubi', 'Cherrim (Overcast)', 25), DummyEvolution('Cherubi', 'Cherrim (Sunshine)')],
         'base': {
             'hitpoints': 45,
             'attack': 35,
@@ -13432,7 +13562,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
-        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Sunny], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1)],
+        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Sunny], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, true)],
         'base': {
             'hitpoints': 70,
             'attack': 60,
@@ -30686,7 +30816,8 @@ pokemonList.forEach((p) => {
         // Calculate evolutions egg steps to be higher than the base forms
         (p as PokemonListData).evolutions?.forEach((evo) => {
             const poke = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
-            poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
+            poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * (evo.ignoreECChange ? 1 : 1.5)));
+
         });
     }
     // Calculate this pokemons native region
