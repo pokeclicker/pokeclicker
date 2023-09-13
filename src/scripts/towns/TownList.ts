@@ -7486,7 +7486,7 @@ TownList['Vast Poni Canyon Entrance'] = new Town(
         new MoveToTown('Vast Poni Canyon', new GymBadgeRequirement(BadgeEnums.GroundiumZ), false),
     ],
     {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
+        requirements: [new TemporaryBattleRequirement('Skull 6')],
         npcs: [HapuCanyon],
     }
 );
@@ -7755,7 +7755,7 @@ TownList['Hokulani Observatory'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
-    [HokulaniObservatoryShop, TemporaryBattleList['Captain Sophocles']],
+    [HokulaniObservatoryShop, TemporaryBattleList['Captain Sophocles'], TemporaryBattleList['Molayne']],
     {npcs: [SophoclesSilvally1]}
 );
 TownList['Thrifty Megamart'] = new DungeonTown(

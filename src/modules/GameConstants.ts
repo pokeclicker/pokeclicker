@@ -1916,6 +1916,7 @@ export const TemporaryBattles = [
     'Plumeria 2',
     'Gladion 2',
     'Exeggutor Tree',
+    'Skull 6',
     'Recon Squad 3',
     'Lusamine 1',
     'Lusamine 2',

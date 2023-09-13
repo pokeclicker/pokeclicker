@@ -3882,6 +3882,14 @@ TemporaryBattleList['Skull 4'] = new TemporaryBattle(
         imageName: 'Team Skull Grunts (male)',
     }
 );
+TemporaryBattleList['Molayne'] = new TemporaryBattle(
+    'Molayne',
+    [
+        new GymPokemon('Skarmory', 170174638, 29),
+        new GymPokemon('Metang', 170174638, 29),
+        new GymPokemon('Alolan Dugtrio', 175257094, 30),
+    ],
+);
 TemporaryBattleList['Skull 5'] = new TemporaryBattle(
     'Skull 5',
     [
@@ -3938,6 +3946,25 @@ TemporaryBattleList['Exeggutor Tree'] = new TemporaryBattle(
         isTrainerBattle: false,
         hideTrainer: true,
     }
+);
+TemporaryBattleList['Skull 6'] = new TemporaryBattle(
+    'Skull 6',
+    [
+        new GymPokemon('Ekans', 104373405, 45),
+        new GymPokemon('Fomantis', 104373405, 45),
+        new GymPokemon('Alolan Raticate', 104373405, 45),
+        new GymPokemon('Mareanie', 104373405, 45),
+        new GymPokemon('Golbat', 104373405, 45),
+        new GymPokemon('Houndour', 104373405, 45),
+    ],
+    undefined,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
+    undefined,
+    {
+        displayName: 'Team Skull Grunts',
+        returnTown: 'Seafolk Village',
+        imageName: 'specialNPCs/Team Skull Grunts (group)',
+    },
 );
 TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
     'Recon Squad 3',
