@@ -213,7 +213,7 @@ ItemList.Dragon_Memory_Silvally = new QuestItem('Dragon_Memory_Silvally', 'Drago
 ItemList.Max_Mushroom_IoA = new QuestItem('Max_Mushroom_IoA', 'Max Mushroom', 'A Mushroom that contains the power of Dynamax forms', 'The Dojo\'s Armor');
 ItemList.Shaderoot_Carrot_Calyrex = new QuestItem('Shaderoot_Carrot_Calyrex', 'Shaderoot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a gloomy field.', 'The Crown of Galar');
 ItemList.Iceroot_Carrot_Calyrex = new QuestItem('Iceroot_Carrot_Calyrex', 'Iceroot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a field covered in snow.', 'The Crown of Galar');
-ItemList.Wishing_Piece = new QuestItem('Wishing_Piece', 'Wishing Piece', 'Used for Gigantamax stuff', 'TODO Gigantamax questline name');
+ItemList.Wishing_Piece = new QuestItem('Wishing_Piece', 'Wishing Piece', 'Attracts Gigantamax Pokémon to the Max Lair', 'The Lair of Giants');
 
 // Vitamins
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
