@@ -6577,8 +6577,8 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ], {image: 'assets/images/npcs/Owner.png'});
 const ProfBurnetAlola = new NPC('Professor Burnet', [
-    'Hi there! I research Ultra Wormholes. They appear sometimes in the skies of Alola, and give off similar signals to the Pokémon Lillie has been looking after.',
-    'By the way, the name of Nebby\'s Pokémon species, Cosmog, was coined by a researcher in Aether Paradise! In ancient times it was known as the child of the stars.',
+    'Nebby\'s Pokémon species, Cosmog, used to be known as the child of the stars. Its modern name coined by a researcher in Aether Paradise!',
+    'Oh, where are my manners! Hi there! I\'m Burnet, a professor who researches Ultra Wormholes. They sometimes appear in the skies of Alola and give off similar signals Cosmog\'s powers.',
     'You say I look familiar? Oh, you\'ve probably seen me with Kukui. He\'s my husband!',
 ], {
     image: 'assets/images/npcs/Professor Burnet (gen7).png',
@@ -6865,7 +6865,7 @@ const HapuMalie = new NPC('Hapu', [
 });
 const HapuCanyon = new NPC('Hapu', [
     'People cannot survive all on their own. They have got to help one another out. Same for Pokémon, too. That is what my grandfather used to say.',
-    '$playername%... you have done well in guiding Lillie. The path to the shrine is through the canyon.',
+    '$playername$... you have done well in guiding Lillie. The path to the shrine is through the canyon.',
     'Look at the two of you. I think this might just work out. No, I am quite sure of it!',
 ], {
     image: 'assets/images/npcs/Hapu.png',
@@ -7347,7 +7347,7 @@ TownList['Melemele Woods'] = new Town(
     GameConstants.AlolaSubRegions.MelemeleIsland,
     [new MoveToTown('Mahalo Trail', new QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)), new MoveToDungeon(dungeonList['Ruins of Conflict'], new QuestLineCompletedRequirement('Emissary of Light')), new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow'])],
     {
-        requirements: [new TemporaryBattleRequirement('Skull 2')],
+        requirements: [new MultiRequirement([new RouteKillRequirement(10, GameConstants.Region.alola, 2), new TemporaryBattleRequirement('Skull 2')])],
     }
 );
 TownList['Roadside Motel'] = new Town(
