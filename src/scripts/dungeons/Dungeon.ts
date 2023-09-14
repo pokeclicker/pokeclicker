@@ -11535,8 +11535,7 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
             {loot: 'Pixie Plate'},
         ],
         legendary:
-            [{loot: 'Twisted_Spoon'},]
-        ],
+            [{loot: 'Twisted_Spoon'},],
     },
     16435490,
     [
