@@ -7793,7 +7793,8 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         ],
         legendary: [
             {loot: 'Revive'},
-            {loot: 'LargeRestore'},
+            {loot: 'Smooth Rock'},
+            {loot: 'LargeRestore', weight: 2},
         ],
         mythic: [
             {loot: 'Heart Scale'},
