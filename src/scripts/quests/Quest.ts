@@ -130,16 +130,15 @@ abstract class Quest {
         this.focusValue = this._focus();
         this.focusSub = this._focus.subscribe?.((newValue) => {
             // If we aren't actively completing this quests, don't do anything
-            if (!this.inProgress()) {
-                return;
-            }
-            // If the focus goes down, adjust our initial value
-            if (newValue < this.focusValue) {
-                this.initial(this.initial() - (this.focusValue - newValue));
-            }
-            // Prevent progress on suspended quests by adjusting the initial value
-            if (this.suspended && newValue > this.focusValue) {
-                this.initial(this.initial() + (newValue - this.focusValue));
+            if (this.inProgress()) {
+                // If the focus goes down, adjust our initial value
+                if (newValue < this.focusValue) {
+                    this.initial(this.initial() - (this.focusValue - newValue));
+                }
+                // Prevent progress on suspended quests by adjusting the initial value
+                if (this.suspended && newValue > this.focusValue) {
+                    this.initial(this.initial() + (newValue - this.focusValue));
+                }
             }
             this.focusValue = newValue;
         });
