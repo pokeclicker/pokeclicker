@@ -2,6 +2,7 @@
 ///<reference path="DungeonBossPokemon.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
@@ -14,6 +15,7 @@ interface EnemyOptions {
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
     reward?: Amount,
     hide?: boolean,
+    hideTrainer?: boolean,
 }
 
 interface DetailedPokemon {
@@ -68,7 +70,7 @@ type Boss = DungeonBossPokemon | DungeonTrainer;
 interface EncounterInfo {
     image: string,
     shiny: boolean,
-    hide: boolean,
+    hide: boolean, // try to not hide pokemon required as per the Pokedex Challenge whose unlock method can be avoided through regular gameplay
     uncaught: boolean,
     locked: boolean,
     lockMessage: string,
@@ -124,6 +126,22 @@ class Dungeon {
             Notifier.notify({
                 message: 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>',
                 type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        // Player may not meet the requirements to start the dungeon
+        const dungeonTown = TownList[this.name];
+        if (!dungeonTown.isUnlocked()) {
+            const reqsList = [];
+            dungeonTown.requirements?.forEach(req => {
+                if (!req.isCompleted()) {
+                    reqsList.push(req.hint());
+                }
+            });
+
+            Notifier.notify({
+                message: `You don't have access to this dungeon yet.\n<i>${reqsList.join('\n')}</i>`,
+                type: NotificationConstants.NotificationOption.warning,
             });
             return false;
         }
@@ -259,21 +277,24 @@ class Dungeon {
         return this.mimicList.filter(p => App.game.party.alreadyCaughtPokemonByName(p));
     }
 
-    public getRandomLootTier(clears: number, debuffed = false): LootTier {
-        const tierWeights = this.getLootTierWeights(clears, debuffed);
+    public getRandomLootTier(clears: number, debuffed = false, onlyDebuffable = false): LootTier {
+        const tierWeights = this.getLootTierWeights(clears, debuffed, onlyDebuffable);
         return Rand.fromWeightedArray(Object.keys(tierWeights), Object.values(tierWeights)) as LootTier;
     }
 
+    private lootFilter = (loot: Loot, onlyDebuffable: boolean) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff);
+
     public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff));
+        const lootTable = this.lootTable[tier].filter((loot) => this.lootFilter(loot, onlyDebuffable));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
-    public getLootTierWeights(clears: number, debuffed : boolean): Record<LootTier, number> {
+    public getLootTierWeights(clears: number, debuffed : boolean, onlyDebuffable = false): Record<LootTier, number> {
         if (debuffed) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
                 if (tier in this.lootTable &&
-                    this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
+                    this.lootTable[tier].some((loot: Loot) => this.lootFilter(loot, onlyDebuffable))
+                ) {
                     chances[tier] = chance;
                 }
                 return chances;
@@ -357,7 +378,7 @@ class Dungeon {
         let pokemonName: PokemonNameType;
         let hideEncounter = false;
 
-        const getEncounterInfo = function(pokemonName, mimic) {
+        const getEncounterInfo = (pokemonName, mimic) => {
             const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
             const encounter = {
                 image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
@@ -369,6 +390,7 @@ class Dungeon {
                 lock: false,
                 lockMessage: '',
                 mimic: mimic,
+                mimicTier: this.getMimicTier(pokemonName),
             };
             return encounter;
         };
@@ -443,6 +465,10 @@ class Dungeon {
     public isThereQuestAtLocation = ko.pureComputed(() => {
         return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
     });
+
+    public getMimicTier(pokemonName: PokemonNameType): LootTier {
+        return (Object.keys(this.lootTable) as LootTier[]).find((tier) => this.lootTable[tier].find((loot) => loot.loot == pokemonName));
+    }
 }
 
 /**
@@ -496,6 +522,17 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
         new DungeonTrainer('Bug Catcher',
             [new GymPokemon('Weedle', 510, 9)],
             { weight: 1 }, 'Sammy'),
+        new DungeonTrainer('Egg Hunter',
+            [new GymPokemon('Surprise Togepi', 300000, 100)],
+            {
+                hide: true,
+                weight: 1,
+                requirement: new MultiRequirement([
+                    new QuestLineStartedRequirement('Togepi Egg Hunt'),
+                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 0, GameConstants.AchievementOption.less),
+                    new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion),
+                ]),
+            }),
     ],
     50, 1);
 
@@ -584,9 +621,15 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
             ], { weight: 1 }, 'Miguel'),
         new DungeonBossPokemon('Vivillon (High Plains)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (High Plains)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 28),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 29, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (High Plains)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     75, 4,
@@ -1306,6 +1349,59 @@ dungeonList['Berry Forest'] = new Dungeon('Berry Forest',
     ],
     1750, 29);
 
+dungeonList['New Island'] = new Dungeon('New Island',
+    [
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Tentacruel', 18500, 40),
+                new GymPokemon('Gyarados', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Sandslash', 18500, 40),
+                new GymPokemon('Vaporeon', 18500, 40),
+                new GymPokemon('Golduck', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Nidoqueen', 18500, 40),
+                new GymPokemon('Ninetales', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Blastoise (Clone)', 20000, 50)],
+            { weight: 2 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Venusaur (Clone)', 20000, 50)]
+            , { weight: 2 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Charmander (Clone)', 20000, 50)],
+            { weight: 2 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Vulpix', 18500, 40),
+                new GymPokemon('Vileplume', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Wigglytuff', 18500, 40),
+                new GymPokemon('Rapidash', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Rhydon', 18500, 40)],
+            { weight: 1 }, ''),
+        new DungeonTrainer('Jessie and James',
+            [new GymPokemon('Meowth', 150, 10)],
+            { weight: 1 }, ''),
+    ],
+    {
+        common: [{loot: 'xClick'}],
+        rare: [{loot: 'Yellow Shard'}],
+        mythic: [{loot: 'Heart Scale'}],
+    },
+    18500,
+    [new DungeonBossPokemon('Armored Mewtwo', 131500, 70)],
+    1800, 40);
+
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
     [
         {pokemon: 'Arbok', options: { weight: 4.88 }},
@@ -1452,15 +1548,17 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     [
         new DungeonBossPokemon('Kadabra', 183675, 60),
         new DungeonBossPokemon('Mewtwo', 255512, 100),
-        new DungeonBossPokemon('Armored Mewtwo', 1000000, 80, {
-            hide: true,
-            requirement: new SpecialEventRequirement('Mewtwo strikes back!'),
-        }),
         new DungeonBossPokemon('Vivillon (Modern)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Modern)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 2),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 3, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Modern)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     2500, 23);
@@ -1666,7 +1764,10 @@ dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
             {loot: 'Oran'},
             {loot: 'Sitrus'},
         ],
-        rare: [{loot: 'Green Shard'}],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Ochre Shard'},
+        ],
         epic: [
             {loot: 'Persim'},
             {loot: 'Razz'},
@@ -1853,9 +1954,15 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
             { weight: 1 }, 'Li'),
         new DungeonBossPokemon('Vivillon (Archipelago)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Archipelago)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 12),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 13, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Archipelago)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     2500, 31);
@@ -2051,13 +2158,24 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Noctowl', 340000, 30),
         new DungeonBossPokemon('Beedrill', 340000, 30),
         new DungeonBossPokemon('Butterfree', 340000, 30),
-        new DungeonBossPokemon('Celebi', 800000, 50, {hide: true, requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 12)}),
+        new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 12)}),
         new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {
             hide: true,
             requirement: new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
                 new SpecialEventRequirement('Merry Christmas!'),
             ])}),
+        new DungeonTrainer('Egg Hunter',
+            [new GymPokemon('Surprise Togepi', 900000, 100)],
+            {
+                hide: true,
+                weight: 1,
+                requirement: new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 0),
+                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 1, GameConstants.AchievementOption.less),
+                    new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
+                ]),
+            }),
     ],
     4000, 34);
 
@@ -2105,7 +2223,7 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     [
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
-        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {hide: true, requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
+        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
     ],
     4500, 37);
 
@@ -2130,7 +2248,7 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
     [
         new DungeonBossPokemon('Dewgong', 400000, 40),
         new DungeonBossPokemon('Kingler', 400000, 40),
-        new DungeonBossPokemon('Lugia', 1410000, 100, {hide: true, requirement: new QuestLineStepCompletedRequirement('Whirl Guardian', 9)}),
+        new DungeonBossPokemon('Lugia', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Whirl Guardian', 9)}),
     ],
     5000, 41);
 
@@ -2160,10 +2278,7 @@ dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
             {loot: 'xAttack', weight: 6},
             {loot: 'Graveler'},
         ],
-        rare: [
-            {loot: 'Green Shard'},
-            {loot: 'Grey Shard'},
-        ],
+        rare: [{loot: 'Grey Shard'}],
         epic: [
             {loot: 'Iron Plate'},
             {loot: 'Stone Plate'},
@@ -2185,7 +2300,7 @@ dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
                 new GymPokemon('Hitmonlee', 210000, 34),
                 new GymPokemon('Hitmonchan', 210000, 34),
             ], { weight: 1 }, 'Kiyo'),
-        new DungeonBossPokemon('Tyrogue', 420000, 45, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar'))}),
+        new DungeonBossPokemon('Tyrogue', 420000, 45, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar'))}),
     ],
     5500, 42,
     () => {
@@ -2265,7 +2380,11 @@ dungeonList['Team Rocket\'s Hideout'] = new Dungeon('Team Rocket\'s Hideout',
             {loot: 'Electrode'},
         ],
         rare: [
+            {loot: 'Red Shard'},
             {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
             {loot: 'Purple Shard'},
         ],
         legendary: [
@@ -2473,7 +2592,7 @@ dungeonList['Ice Path'] = new Dungeon('Ice Path',
             {loot: 'Token_collector'},
         ],
         rare: [
-            {loot: 'Yellow Shard'},
+            {loot: 'Blue Shard'},
             {loot: 'Purple Shard'},
         ],
         legendary: [
@@ -2512,9 +2631,15 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
         new DungeonBossPokemon('Dunsparce', 460000, 55),
         new DungeonBossPokemon('Vivillon (Monsoon)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Monsoon)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 6),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 7, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Monsoon)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     6500, 45);
@@ -2652,10 +2777,21 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
     },
     380000,
     [
-        new DungeonBossPokemon('Slakoth', 860000, 10, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Petalburg Woods'))}),
+        new DungeonBossPokemon('Slakoth', 860000, 10, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Petalburg Woods'))}),
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Poochyena', 860000, 9)],
             { weight: 1 }, undefined, '(male)'),
+        new DungeonTrainer('Egg Hunter',
+            [new GymPokemon('Surprise Togepi', 2700000, 100)],
+            {
+                hide: true,
+                weight: 1,
+                requirement: new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 1),
+                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 2, GameConstants.AchievementOption.less),
+                    new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
+                ]),
+            }),
     ],
     12000, 101);
 
@@ -2847,9 +2983,15 @@ dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
             ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
         new DungeonBossPokemon('Vivillon (Sun)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Sun)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 10),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 11, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Sun)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     20000, 101);
@@ -2915,7 +3057,10 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
             {loot: 'Cheri', weight: 3},
             {loot: 'Voltorb'},
         ],
-        rare: [{loot: 'Yellow Shard'}],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+        ],
         epic: [
             {loot: 'Razz'},
             {loot: 'Ultraball'},
@@ -2928,9 +3073,15 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
         new DungeonBossPokemon('Electrode', 1650000, 20),
         new DungeonBossPokemon('Vivillon (Continental)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Continental)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 18),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 19, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Continental)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     24000, 101);
@@ -2968,7 +3119,8 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
             {loot: 'Lucky_egg'},
         ],
         rare: [
-            {loot: 'Green Shard'},
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
             {loot: 'Yellow Shard'},
         ],
         epic: [
@@ -2994,7 +3146,10 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
                 new GymPokemon('Carvanha', 4500000, 58),
                 new GymPokemon('Mightyena', 4500000, 58),
             ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 9)}, 'Shelly', '(shelly)'),
-        new DungeonBossPokemon('Castform', 1820000, 20, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
+        new DungeonBossPokemon('Castform', 1820000, 20, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
+        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Sunny])])}),
+        new DungeonBossPokemon('Castform (Rainy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])])}),
+        new DungeonBossPokemon('Castform (Snowy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail])])}),
     ],
     26000, 101);
 
@@ -3080,10 +3235,7 @@ dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
             {loot: 'xAttack'},
             {loot: 'Lucky_incense'},
         ],
-        rare: [
-            {loot: 'Green Shard'},
-            {loot: 'Blue Shard'},
-        ],
+        rare: [{loot: 'Purple Shard'}],
         epic: [{loot: 'Ultraball'}],
         legendary: [
             {loot: 'Spooky Plate'},
@@ -3302,50 +3454,50 @@ dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
         {pokemon: 'Wailmer', options: { weight: 4.8 }},
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Poochyena', 32000, 36)],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(male)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(male)'),
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Carvanha', 32000, 36)],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(male)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(male)'),
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Zubat', 32000, 36)],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(male)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(male)'),
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Carvanha', 32000, 36)],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(female)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(female)'),
         new DungeonTrainer('Team Aqua Grunt',
             [
                 new GymPokemon('Mightyena', 32000, 35),
                 new GymPokemon('Golbat', 32000, 35),
             ],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(male)'),
+            { weight: 1 ,  requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, undefined, '(male)'),
         new DungeonTrainer('Aqua Admin',
             [
                 new GymPokemon('Sharpedo', 32000, 37),
                 new GymPokemon('Mightyena', 32000, 37),
-            ], { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, 'Shelly', '(shelly)'),
+            ], { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)}, 'Shelly', '(shelly)'),
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Poochyena', 3200000, 36)],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(male)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(male)'),
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Carvanha', 3200000, 36)],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(male)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(male)'),
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Zubat', 3200000, 36)],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(male)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(male)'),
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Carvanha', 3200000, 36)],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(female)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(female)'),
         new DungeonTrainer('Team Aqua Grunt',
             [
                 new GymPokemon('Mightyena', 3200000, 35),
                 new GymPokemon('Golbat', 3200000, 35),
             ],
-            { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(male)'),
+            { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, undefined, '(male)'),
         new DungeonTrainer('Aqua Admin',
             [
                 new GymPokemon('Sharpedo', 3200000, 37),
                 new GymPokemon('Mightyena', 3200000, 37),
-            ], { weight: 1 , hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, 'Shelly', '(shelly)'),
+            ], { weight: 1 , requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 7)}, 'Shelly', '(shelly)'),
 
     ],
     {
@@ -3411,9 +3563,15 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
         new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
         new DungeonBossPokemon('Vivillon (Polar)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Polar)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 22),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 23, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Polar)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     34000, 101);
@@ -3426,7 +3584,8 @@ dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
             {loot: 'Token_collector'},
         ],
         rare: [
-            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Grey Shard'},
             {loot: 'Ochre Shard'},
         ],
         epic: [
@@ -3551,6 +3710,8 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
             {loot: 'Ochre Shard'},
         ],
         epic: [{loot: 'Ultraball'}],
@@ -3593,9 +3754,9 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
     9000000,
     [
         new DungeonBossPokemon('Deoxys', 95743340, 80),
-        new DungeonBossPokemon('Deoxys (Attack)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Attack)')}),
-        new DungeonBossPokemon('Deoxys (Defense)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Defense)')}),
-        new DungeonBossPokemon('Deoxys (Speed)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Speed)')}),
+        new DungeonBossPokemon('Deoxys (Attack)', 95743340, 80, {hide: true, requirement: new ObtainedPokemonRequirement('Deoxys (Attack)')}),
+        new DungeonBossPokemon('Deoxys (Defense)', 95743340, 80, {hide: true, requirement: new ObtainedPokemonRequirement('Deoxys (Defense)')}),
+        new DungeonBossPokemon('Deoxys (Speed)', 95743340, 80, {hide: true, requirement: new ObtainedPokemonRequirement('Deoxys (Speed)')}),
     ],
     700000, 131,
     () => {},
@@ -3605,7 +3766,7 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
 
 dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
     [
-        new DungeonTrainer('Peon',
+        new DungeonTrainer('Miror B. Peon',
             [
                 new GymPokemon('Whismur', 38000, 24),
                 new GymPokemon('Whismur', 38000, 25),
@@ -3615,7 +3776,7 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
                 new GymPokemon('Corphish', 38000, 25),
                 new GymPokemon('Koffing', 38000, 27),
             ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Wakin'),
-        new DungeonTrainer('Peon',
+        new DungeonTrainer('Miror B. Peon',
             [
                 new GymPokemon('Whismur', 38000, 26),
                 new GymPokemon('Lotad', 38000, 25),
@@ -3638,12 +3799,12 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
                 new GymPokemon('Spoink', 38000, 24),
                 new GymPokemon('Croconaw', 38000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 0.25}, 'Bluno'),
-        new DungeonTrainer('Peon',
+        new DungeonTrainer('Miror B. Peon',
             [
                 new GymPokemon('Exploud', 38000, 53),
                 new GymPokemon('Ludicolo', 38000, 55),
             ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(folly)'),
-        new DungeonTrainer('Peon',
+        new DungeonTrainer('Miror B. Peon',
             [
                 new GymPokemon('Dusclops', 38000, 54),
                 new GymPokemon('Spinarak', 38000, 53),
@@ -3655,19 +3816,19 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
                 new GymPokemon('Snorunt', 38000, 20, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Golbat', 38000, 22),
                 new GymPokemon('Mightyena', 38000, 21),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Exinn', '(female)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 12)}, 'Exinn', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Murkrow', 38000, 22),
                 new GymPokemon('Pineco', 38000, 20, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Ariados', 38000, 22),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Gonrag', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 12)}, 'Gonrag', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Nuzleaf', 38000, 23),
                 new GymPokemon('Torkoal', 38000, 22),
                 new GymPokemon('Swinub', 38000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Greck', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 12)}, 'Greck', 'XD (male)'),
     ],
     {
         common: [
@@ -3682,7 +3843,6 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
             {loot: 'Joy_Scent', ignoreDebuff : true},
         ],
         epic: [
-            {loot: 'Ultraball'},
             {loot: 'Flame Plate'},
             {loot: 'Splash Plate'},
             {loot: 'Meadow Plate'},
@@ -3699,7 +3859,7 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
     },
     570000,
     [
-        new DungeonTrainer('Peon',
+        new DungeonTrainer('Miror B. Peon',
             [
                 new GymPokemon('Duskull', 870000, 25),
                 new GymPokemon('Spinarak', 870000, 25),
@@ -3707,23 +3867,23 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
             ], { weight: 1}, 'Trudly', '(trudly)'),
         new DungeonTrainer('Cipher Peon',
             [
-                new GymPokemon('Loudred', 23925000, 22),
-                new GymPokemon('Girafarig', 23925000, 20),
-                new GymPokemon('Mawile', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Eloin', '(female)'),
+                new GymPokemon('Kirlia', 23925000, 22),
+                new GymPokemon('Linoone', 23925000, 20),
+                new GymPokemon('Natu', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Eloin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Remoraid', 23925000, 22),
                 new GymPokemon('Golbat', 23925000, 20),
                 new GymPokemon('Roselia', 23925000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Fasin', '(female)'),
+            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Fasin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Kadabra', 21125000, 22),
                 new GymPokemon('Sneasel', 21125000, 22),
                 new GymPokemon('Misdreavus', 21125000, 22),
                 new GymPokemon('Meowth', 21125000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Eloin', '(female)'),
+            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Fostin', 'XD (male)'),
     ],
     38000, 110);
 
@@ -3763,7 +3923,7 @@ dungeonList['Pyrite Town Battles'] = new Dungeon('Pyrite Town Battles',
                 new GymPokemon('Ledyba', 41000, 27),
                 new GymPokemon('Wingull', 41000, 27),
                 new GymPokemon('Noctowl', 41000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Nover'),
+            ], { weight: 0.25}, 'Nover', '(male)'),
         new DungeonTrainer('Street Performer',
             [
                 new GymPokemon('Shroomish', 41000, 29),
@@ -3977,13 +4137,13 @@ dungeonList['Pyrite Building'] = new Dungeon('Pyrite Building',
                 new GymPokemon('Cacnea', 45000, 32),
                 new GymPokemon('Tentacool', 45000, 33),
             ], { weight: 1, requirement: new ClearDungeonRequirement(225, GameConstants.getDungeonIndex('Pyrite Building'), GameConstants.AchievementOption.less) }, 'Elidi', '(female)'),
-        new DungeonTrainer('Peon',
+        new DungeonTrainer('Miror B. Peon',
             [
                 new GymPokemon('Remoraid', 45000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Spinarak', 45000, 33),
                 new GymPokemon('Luvdisc', 45000, 32),
             ], { weight: 0.5 }, 'Reath', '(reath)'),
-        new DungeonTrainer('Peon',
+        new DungeonTrainer('Miror B. Peon',
             [
                 new GymPokemon('Mantine', 45000, 28, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Aipom', 45000, 28),
@@ -3995,28 +4155,28 @@ dungeonList['Pyrite Building'] = new Dungeon('Pyrite Building',
                 new GymPokemon('Kecleon', 45000, 19),
                 new GymPokemon('Surskit', 45000, 21),
                 new GymPokemon('Makuhita', 45000, 18, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Torkin', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 10)}, 'Torkin', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Spinarak', 45000, 20),
                 new GymPokemon('Beautifly', 45000, 19),
                 new GymPokemon('Dustox', 45000, 20),
                 new GymPokemon('Vulpix', 45000, 18, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Mesin', '(female)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 10)}, 'Mesin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Sneasel', 45000, 20),
                 new GymPokemon('Yanma', 45000, 19),
                 new GymPokemon('Misdreavus', 45000, 20),
                 new GymPokemon('Duskull', 45000, 18, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Lobar', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 10)}, 'Lobar', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Kadabra', 41000, 20),
                 new GymPokemon('Flaaffy', 41000, 19),
                 new GymPokemon('Vigoroth', 41000, 20),
                 new GymPokemon('Ralts', 41000, 18, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Feldas', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 10)}, 'Feldas', 'XD (male)'),
     ],
     {
         common: [
@@ -4031,7 +4191,7 @@ dungeonList['Pyrite Building'] = new Dungeon('Pyrite Building',
             {loot: 'Ochre Shard'},
             {loot: 'Joy_Scent', ignoreDebuff : true},
         ],
-        epic: [{loot: 'Ultraball'}],
+        epic: [{loot: 'Fastball'}],
         legendary: [
             {loot: 'LargeRestore'},
             {loot: 'Revive'},
@@ -4050,13 +4210,13 @@ dungeonList['Pyrite Building'] = new Dungeon('Pyrite Building',
                 new GymPokemon('Goldeen', 950000, 33),
                 new GymPokemon('Linoone', 950000, 33),
             ], { weight: 1 }, 'Doken', '(male)'),
-        new DungeonTrainer('Cipher Admin',
+        new DungeonTrainer('Cipher',
             [
                 new GymPokemon('Loudred', 21750000, 23),
                 new GymPokemon('Girafarig', 21750000, 23),
                 new GymPokemon('Mawile', 21750000, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Raichu', 21750000, 23),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Exol', 'Exol'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 10)}, 'Commander Exol', '(commander)'),
     ],
     45000, 126);
 
@@ -4147,7 +4307,7 @@ dungeonList['Pyrite Cave'] = new Dungeon('Pyrite Cave',
                 new GymPokemon('Lombre', 46000, 17),
                 new GymPokemon('Lombre', 46000, 17),
                 new GymPokemon('Voltorb', 46000, 19, undefined, undefined, GameConstants.ShadowStatus.Shadow), // Located here as make-up if missed in Temp Battle
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Miror B.', 'Miror B'),
+            ], { weight: 0.25, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Miror B.', 'Miror B'),
     ],
     {
         common: [
@@ -4159,7 +4319,7 @@ dungeonList['Pyrite Cave'] = new Dungeon('Pyrite Cave',
             {loot: 'Ochre Shard'},
         ],
         epic: [
-            {loot: 'Ultraball'},
+            {loot: 'Fastball'},
             {loot: 'Joy_Scent', ignoreDebuff : true},
         ],
         legendary: [
@@ -4208,14 +4368,28 @@ dungeonList['Relic Cave'] = new Dungeon('Relic Cave',
                 new GymPokemon('Sunflora', 48000, 40),
             ], { weight: 1 }, 'Dury', '(male)'),
         new DungeonTrainer('Cipher Peon',
-            [new GymPokemon('Hitmontop', 48000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow)], { weight: 1 }, 'Skrub', '(male)'),
+            [
+                new GymPokemon('Spheal', 48000, 33),
+                new GymPokemon('Carvanha', 48000, 34),
+            ], { weight: 1 }, 'Doven', '(female)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Shroomish', 48000, 34),
+                new GymPokemon('Cacnea', 48000, 34),
+            ], { weight: 1 }, 'Silton', '(male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Baltoy', 48000, 35),
+                new GymPokemon('Ralts', 48000, 35),
+                new GymPokemon('Kirlia', 48000, 35),
+            ], { weight: 1 }, 'Kass', '(female)'),
         new DungeonTrainer('Cipher Admin',
             [
                 new GymPokemon('Lombre', 48000, 39),
                 new GymPokemon('Lombre', 48000, 39),
                 new GymPokemon('Lombre', 48000, 39),
                 new GymPokemon('Voltorb', 48000, 39, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25,  hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness') }, 'Miror B.', 'Miror B'),
+            ], { weight: 0.25,  requirement: new QuestLineCompletedRequirement('Gale of Darkness') }, 'Miror B.', 'Miror B'),
     ],
     {
         common: [
@@ -4358,15 +4532,22 @@ dungeonList['The Under'] = new Dungeon('The Under',
             [
                 new GymPokemon('Skitty', 57000, 35),
                 new GymPokemon('Oddish', 57000, 34),
-                new GymPokemon('Jigglypuff', 57000, 35),
-                new GymPokemon('Shuppet', 57000, 35),
             ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('The Under'), GameConstants.AchievementOption.less) }, 'Zada', '(female)'),
         new DungeonTrainer('Chaser',
             [
                 new GymPokemon('Magikarp', 57000, 36),
-                new GymPokemon('Feebas', 57000, 36),
                 new GymPokemon('Wailord', 57000, 40),
             ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('The Under'), GameConstants.AchievementOption.less) }, 'Gurks', '(male)'),
+        new DungeonTrainer('Hunter',
+            [
+                new GymPokemon('Skitty', 57000, 35),
+                new GymPokemon('Oddish', 57000, 34),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('The Under'), GameConstants.AchievementOption.less) }, 'Zada', '(female)'),
+        new DungeonTrainer('Chaser',
+            [
+                new GymPokemon('Feebas', 57000, 36),
+                new GymPokemon('Wailord', 57000, 40),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('The Under'), GameConstants.AchievementOption.less) }, 'Gurks', '(male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Ledian', 57000, 40, undefined, undefined, GameConstants.ShadowStatus.Shadow),
@@ -4376,9 +4557,13 @@ dungeonList['The Under'] = new Dungeon('The Under',
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Ariados', 57000, 38),
+                new GymPokemon('Illumise', 57000, 40),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('The Under'), GameConstants.AchievementOption.less) }, 'Dagur', '(female)'),
+        new DungeonTrainer('Cipher Peon',
+            [
                 new GymPokemon('Gloom', 57000, 39),
                 new GymPokemon('Illumise', 57000, 40),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('The Under'), GameConstants.AchievementOption.less) }, 'Dagur', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('The Under'), GameConstants.AchievementOption.less) }, 'Dagur', '(female)'),
         new DungeonTrainer('Hunter',
             [
                 new GymPokemon('Shroomish', 57000, 35),
@@ -4451,7 +4636,7 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
             [
                 new GymPokemon('Voltorb', 62000, 38),
                 new GymPokemon('Voltorb', 62000, 38),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Myron', '(male)'),
+            ], { weight: 1 }, 'Myron', '(male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Furret', 62000, 37),
@@ -4462,12 +4647,10 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
         new DungeonTrainer('Scientist',
             [
                 new GymPokemon('Electrode', 62000, 39),
-                new GymPokemon('Magnemite', 62000, 38),
                 new GymPokemon('Magneton', 62000, 39),
             ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Odlow', '(male)'),
         new DungeonTrainer('Scientist',
             [
-                new GymPokemon('Electrode', 62000, 40),
                 new GymPokemon('Magnemite', 62000, 39),
                 new GymPokemon('Magneton', 62000, 40),
             ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Coren', '(male)'),
@@ -4475,8 +4658,22 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
             [
                 new GymPokemon('Chinchou', 62000, 38),
                 new GymPokemon('Magnemite', 62000, 37),
-                new GymPokemon('Electrike', 62000, 39),
             ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Lethco', '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Electrode', 62000, 39),
+                new GymPokemon('Magnemite', 62000, 38),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(125, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Odlow', '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Electrode', 62000, 40),
+                new GymPokemon('Magneton', 62000, 40),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Coren', '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Chinchou', 62000, 38),
+                new GymPokemon('Electrike', 62000, 39),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Lethco', '(male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Nuzleaf', 62000, 38),
@@ -4507,13 +4704,17 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
             [
                 new GymPokemon('Electrode', 62000, 37),
                 new GymPokemon('Electrode', 62000, 37),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(125, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Dubik', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Dubik', '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Magneton', 62000, 40),
+                new GymPokemon('Ampharos', 62000, 41),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(225, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Kotan', '(male)'),
         new DungeonTrainer('Scientist',
             [
                 new GymPokemon('Electrode', 62000, 42),
-                new GymPokemon('Magneton', 62000, 40),
                 new GymPokemon('Ampharos', 62000, 41),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Kotan', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Cipher Lab'), GameConstants.AchievementOption.less) }, 'Kotan', '(male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Kadabra', 62000, 42),
@@ -4525,31 +4726,31 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
             [
                 new GymPokemon('Slugma', 62000, 14),
                 new GymPokemon('Houndour', 62000, 17, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Resix', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Resix', '(hexagon)'), // will need unique sprites for all hexagon bros
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Horsea', 62000, 11),
                 new GymPokemon('Goldeen', 62000, 12),
                 new GymPokemon('Spheal', 62000, 17, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Blusix', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Blusix', '(hexagon)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Hoothoot', 62000, 14),
                 new GymPokemon('Baltoy', 62000, 17, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Browsix', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Browsix', '(hexagon)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Chinchou', 62000, 11),
                 new GymPokemon('Electrike', 62000, 12),
                 new GymPokemon('Mareep', 62000, 17, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25 }, 'Yellosix', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Yellosix', '(hexagon)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Grimer', 62000, 11),
                 new GymPokemon('Koffing', 62000, 10),
                 new GymPokemon('Tentacool', 62000, 10),
                 new GymPokemon('Gulpin', 62000, 17, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Purpsix', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Purpsix', '(hexagon)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Lotad', 62000, 11),
@@ -4558,33 +4759,40 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
                 new GymPokemon('Shroomish', 62000, 10),
                 new GymPokemon('Pineco', 62000, 10),
                 new GymPokemon('Seedot', 62000, 17, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Greesix', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Greesix', '(hexagon)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Swinub', 62000, 14),
                 new GymPokemon('Shuppet', 62000, 13),
                 new GymPokemon('Spinarak', 62000, 14, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Nexir', '(female)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Nexir', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Ralts', 62000, 14),
                 new GymPokemon('Voltorb', 62000, 13),
                 new GymPokemon('Bagon', 62000, 13),
                 new GymPokemon('Numel', 62000, 14, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Solox', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Solox', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Carvanha', 62000, 15, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Magnemite', 62000, 15),
                 new GymPokemon('Psyduck', 62000, 15),
                 new GymPokemon('Remoraid', 62000, 16),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Cabol', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Cabol', 'XD (male)'),
         new DungeonTrainer('Scientist',
             [
                 new GymPokemon('Shroomish', 62000, 15, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Snubbull', 62000, 16),
                 new GymPokemon('Kecleon', 62000, 16),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Klots', '(male)'),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6) }, 'Klots', '(male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Beldum', 62000, 18),
+                new GymPokemon('Murkrow', 62000, 18),
+                new GymPokemon('Teddiursa', 62000, 18, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Rhyhorn', 62000, 18),
+            ], { weight: 0.25, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6) }, 'Naps', '(yellow)'),
     ],
     {
         common: [
@@ -4596,7 +4804,7 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
             {loot: 'Ochre Shard'},
         ],
         epic: [
-            {loot: 'Greatball'},
+            {loot: 'Diveball'},
             {loot: 'Joy_Scent', ignoreDebuff : true},
         ],
         legendary: [
@@ -4626,7 +4834,7 @@ dungeonList['Cipher Lab'] = new Dungeon('Cipher Lab',
                 new GymPokemon('Beautifly', 17400000, 19),
                 new GymPokemon('Roselia', 17400000, 19),
                 new GymPokemon('Delcatty', 17400000, 18, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Lovrina', 'Lovrina'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 6)}, 'Lovrina', 'Lovrina'),
     ],
     62000, 131);
 
@@ -4635,9 +4843,13 @@ dungeonList['Realgam Tower Battles'] = new Dungeon('Realgam Tower Battles',
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Grimer', 70000, 39),
-                new GymPokemon('Dustox', 70000, 38),
                 new GymPokemon('Seviper', 70000, 40),
             ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Bopen', '(male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Dustox', 70000, 38),
+                new GymPokemon('Seviper', 70000, 40),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Bopen', '(male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Delibird', 70000, 45, undefined, undefined, GameConstants.ShadowStatus.Shadow),
@@ -4660,67 +4872,79 @@ dungeonList['Realgam Tower Battles'] = new Dungeon('Realgam Tower Battles',
             [
                 new GymPokemon('Muk', 70000, 45),
                 new GymPokemon('Grumpig', 70000, 44),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Verde'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Verde'),
         new DungeonTrainer('Mystery Troop Red',
             [
                 new GymPokemon('Muk', 70000, 45),
                 new GymPokemon('Grumpig', 70000, 44),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Rosso'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Rosso'),
         new DungeonTrainer('Mystery Troop Blue',
             [
                 new GymPokemon('Muk', 70000, 45),
                 new GymPokemon('Grumpig', 70000, 44),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Bluno'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Bluno'),
         new DungeonTrainer('Chaser',
             [
                 new GymPokemon('Shelgon', 70000, 40),
                 new GymPokemon('Vigoroth', 70000, 41),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Rugen', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Rugen', '(male)'),
+        new DungeonTrainer('Bandana Guy',
+            [
+                new GymPokemon('Hariyama', 70000, 41),
+                new GymPokemon('Lombre', 70000, 42),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Klest'),
         new DungeonTrainer('Bandana Guy',
             [
                 new GymPokemon('Nuzleaf', 70000, 39),
                 new GymPokemon('Graveler', 70000, 42),
-                new GymPokemon('Hariyama', 70000, 41),
-                new GymPokemon('Lombre', 70000, 42),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(125, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Klest'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Klest'),
         new DungeonTrainer('Hunter',
             [
                 new GymPokemon('Metang', 70000, 39),
                 new GymPokemon('Mawile', 70000, 40),
                 new GymPokemon('Lairon', 70000, 41),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Aline', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(225, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Aline', '(female)'),
+        new DungeonTrainer('Street Performer',
+            [
+                new GymPokemon('Seadra', 70000, 39),
+                new GymPokemon('Feraligatr', 70000, 40),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Luper'),
         new DungeonTrainer('Street Performer',
             [
                 new GymPokemon('Qwilfish', 70000, 40),
                 new GymPokemon('Octillery', 70000, 39),
-                new GymPokemon('Seadra', 70000, 39),
-                new GymPokemon('Feraligatr', 70000, 40),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Luper'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(275, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Luper'),
         new DungeonTrainer('Bodybuilder',
             [
                 new GymPokemon('Loudred', 70000, 45),
                 new GymPokemon('Wigglytuff', 70000, 43),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Givern', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Givern', '(male)'),
+        new DungeonTrainer('Chaser',
+            [
+                new GymPokemon('Ninetales', 70000, 40),
+                new GymPokemon('Machoke', 70000, 40),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(325, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Trus', '(male)'),
         new DungeonTrainer('Chaser',
             [
                 new GymPokemon('Swellow', 70000, 40),
                 new GymPokemon('Magneton', 70000, 40),
-                new GymPokemon('Ninetales', 70000, 40),
-                new GymPokemon('Machoke', 70000, 40),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(225, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Trus', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Trus', '(male)'),
         new DungeonTrainer('Rider',
             [
                 new GymPokemon('Quagsire', 70000, 41),
                 new GymPokemon('Donphan', 70000, 40),
                 new GymPokemon('Sandslash', 70000, 40),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Kevel', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(375, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Kevel', '(male)'),
+        new DungeonTrainer('Rider',
+            [
+                new GymPokemon('Swalot', 70000, 40),
+                new GymPokemon('Chimecho', 70000, 41),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Elose', '(female)'),
         new DungeonTrainer('Rider',
             [
                 new GymPokemon('Cradily', 70000, 41),
                 new GymPokemon('Noctowl', 70000, 41),
-                new GymPokemon('Swalot', 70000, 40),
-                new GymPokemon('Chimecho', 70000, 41),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(275, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Elose', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(425, GameConstants.getDungeonIndex('Realgam Tower Battles'), GameConstants.AchievementOption.less) }, 'Elose', '(female)'),
     ],
     {
         common: [
@@ -4733,7 +4957,7 @@ dungeonList['Realgam Tower Battles'] = new Dungeon('Realgam Tower Battles',
             {loot: 'Ochre Shard'},
             {loot: 'Joy_Scent', ignoreDebuff : true},
         ],
-        epic: [{loot: 'Ultraball'}],
+        epic: [{loot: 'Lureball'}],
         legendary: [
             {loot: 'Never_Melt_Ice'},
             {loot: 'Sharp_Beak'},
@@ -4823,7 +5047,7 @@ dungeonList['Realgam Colosseum'] = new Dungeon('Realgam Colosseum',
                 new GymPokemon('Lombre', 75200, 49),
                 new GymPokemon('Nosepass', 75200, 49, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Ludicolo', 75200, 49),
-            ], { weight: 0.5,  hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness') }, 'Miror B.', 'Miror B'),
+            ], { weight: 0.5,  requirement: new QuestLineCompletedRequirement('Gale of Darkness') }, 'Miror B.', 'Miror B'),
     ],
     {
         common: [
@@ -4873,109 +5097,139 @@ dungeonList['Snagem Hideout'] = new Dungeon('Snagem Hideout',
     [
         new DungeonTrainer('Team Snagem',
             [
-                new GymPokemon('Seadra', 80200, 55),
-                new GymPokemon('Pelipper', 80200, 53),
                 new GymPokemon('Lanturn', 80200, 50),
                 new GymPokemon('Starmie', 80200, 52),
             ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Driton'),
         new DungeonTrainer('Bodybuilder',
             [
-                new GymPokemon('Pupitar', 80200, 54),
-                new GymPokemon('Spinda', 80200, 51),
                 new GymPokemon('Shelgon', 80200, 54),
                 new GymPokemon('Carvanha', 80200, 51),
             ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Colas', '(male)'),
         new DungeonTrainer('Bandana Guy',
             [
-                new GymPokemon('Sandslash', 80200, 53),
-                new GymPokemon('Linoone', 80200, 55),
                 new GymPokemon('Weezing', 80200, 52),
                 new GymPokemon('Swalot', 80200, 51),
             ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Crudo'),
         new DungeonTrainer('Team Snagem',
             [
-                new GymPokemon('Grovyle', 80200, 52),
-                new GymPokemon('Rhyhorn', 80200, 52),
                 new GymPokemon('Vigoroth', 80200, 52),
                 new GymPokemon('Zangoose', 80200, 53),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Niver', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Niver'),
         new DungeonTrainer('Rider',
             [
-                new GymPokemon('Poochyena', 80200, 54),
-                new GymPokemon('Kadabra', 80200, 53),
                 new GymPokemon('Mightyena', 80200, 50),
                 new GymPokemon('Linoone', 80200, 53),
             ], { weight: 1, requirement: new ClearDungeonRequirement(125, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Rions', '(male)'),
         new DungeonTrainer('Team Snagem',
             [
-                new GymPokemon('Beautifly', 80200, 53),
-                new GymPokemon('Delibird', 80200, 54),
                 new GymPokemon('Swellow', 80200, 54),
                 new GymPokemon('Golbat', 80200, 53),
             ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Fuston'),
+        new DungeonTrainer('Team Snagem',
+            [
+                new GymPokemon('Seadra', 80200, 55),
+                new GymPokemon('Pelipper', 80200, 53),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Driton'),
+        new DungeonTrainer('Bodybuilder',
+            [
+                new GymPokemon('Pupitar', 80200, 54),
+                new GymPokemon('Spinda', 80200, 51),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Colas', '(male)'),
+        new DungeonTrainer('Bandana Guy',
+            [
+                new GymPokemon('Sandslash', 80200, 53),
+                new GymPokemon('Linoone', 80200, 55),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(225, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Crudo'),
+        new DungeonTrainer('Team Snagem',
+            [
+                new GymPokemon('Grovyle', 80200, 52),
+                new GymPokemon('Rhyhorn', 80200, 52),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Niver'),
+        new DungeonTrainer('Rider',
+            [
+                new GymPokemon('Poochyena', 80200, 54),
+                new GymPokemon('Kadabra', 80200, 53),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(275, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Rions', '(male)'),
+        new DungeonTrainer('Team Snagem',
+            [
+                new GymPokemon('Beautifly', 80200, 53),
+                new GymPokemon('Delibird', 80200, 54),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Fuston'),
         new DungeonTrainer('Mystery Troop Green',
             [
                 new GymPokemon('Muk', 80200, 55),
                 new GymPokemon('Grumpig', 80200, 54),
                 new GymPokemon('Sharpedo', 80200, 53),
                 new GymPokemon('Bayleef', 80200, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Verde', '(male)'),
+            ], { weight: 0.25}, 'Verde'),
         new DungeonTrainer('Mystery Troop Red',
             [
                 new GymPokemon('Muk', 80200, 55),
                 new GymPokemon('Grumpig', 80200, 54),
                 new GymPokemon('Breloom', 80200, 53),
                 new GymPokemon('Quilava', 80200, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Rosso', '(male)'),
+            ], { weight: 0.25}, 'Rosso'),
         new DungeonTrainer('Mystery Troop Blue',
             [
                 new GymPokemon('Muk', 80200, 55),
                 new GymPokemon('Grumpig', 80200, 54),
                 new GymPokemon('Camerupt', 80200, 53),
                 new GymPokemon('Croconaw', 80200, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Bluno', '(male)'),
+            ], { weight: 0.25}, 'Bluno'),
+        new DungeonTrainer('Bodybuilder',
+            [
+                new GymPokemon('Octillery', 80200, 54),
+                new GymPokemon('Walrein', 80200, 52),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(325, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Lonia', '(female)'),
+        new DungeonTrainer('Rider',
+            [
+                new GymPokemon('Seviper', 80200, 52),
+                new GymPokemon('Sharpedo', 80200, 50),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Nelis', '(female)'),
+        new DungeonTrainer('Hunter',
+            [
+                new GymPokemon('Mawile', 80200, 53),
+                new GymPokemon('Donphan', 80200, 51),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(375, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Frena', '(female)'),
+        new DungeonTrainer('Chaser',
+            [
+                new GymPokemon('Jumpluff', 80200, 53),
+                new GymPokemon('Noctowl', 80200, 52),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Liaks', '(female)'),
         new DungeonTrainer('Bodybuilder',
             [
                 new GymPokemon('Flaaffy', 80200, 55),
                 new GymPokemon('Dunsparce', 80200, 51),
-                new GymPokemon('Octillery', 80200, 54),
-                new GymPokemon('Walrein', 80200, 52),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Lonia', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(425, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Lonia', '(female)'),
         new DungeonTrainer('Rider',
             [
                 new GymPokemon('Corsola', 80200, 51),
                 new GymPokemon('Loudred', 80200, 54),
-                new GymPokemon('Seviper', 80200, 52),
-                new GymPokemon('Sharpedo', 80200, 50),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Nelis', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Nelis', '(female)'),
         new DungeonTrainer('Hunter',
             [
                 new GymPokemon('Jigglypuff', 80200, 52),
                 new GymPokemon('Shroomish', 80200, 53),
-                new GymPokemon('Mawile', 80200, 53),
-                new GymPokemon('Donphan', 80200, 51),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(225, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Frena', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(475, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Frena', '(female)'),
         new DungeonTrainer('Chaser',
             [
                 new GymPokemon('Gloom', 80200, 53),
                 new GymPokemon('Golduck', 80200, 53),
-                new GymPokemon('Jumpluff', 80200, 53),
-                new GymPokemon('Noctowl', 80200, 52),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Liaks', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(500, GameConstants.getDungeonIndex('Snagem Hideout'), GameConstants.AchievementOption.less) }, 'Liaks', '(female)'),
         new DungeonTrainer('Team Snagem',
             [
                 new GymPokemon('Smeargle', 80200, 52),
                 new GymPokemon('Smeargle', 80200, 51),
                 new GymPokemon('Smeargle', 80200, 50),
                 new GymPokemon('Smeargle', 80200, 45, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Biden', '(male)'),
+            ], { weight: 0.25}, 'Biden'),
         new DungeonTrainer('Team Snagem',
             [
                 new GymPokemon('Marshtomp', 80200, 55),
                 new GymPokemon('Machoke', 80200, 52),
                 new GymPokemon('Shiftry', 80200, 50),
                 new GymPokemon('Ursaring', 80200, 45, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Agrev', '(male)'),
+            ], { weight: 0.25}, 'Agrev'),
     ],
     {
         common: [
@@ -4990,7 +5244,7 @@ dungeonList['Snagem Hideout'] = new Dungeon('Snagem Hideout',
             {loot: 'Ochre Shard'},
             {loot: 'Joy_Scent', ignoreDebuff : true},
         ],
-        epic: [{loot: 'Ultraball'}],
+        epic: [{loot: 'Timerball'}],
         legendary: [
             {loot: 'Max Revive'},
             {loot: 'Miracle_Seed'},
@@ -5033,10 +5287,13 @@ dungeonList['Deep Colosseum'] = new Dungeon('Deep Colosseum',
             ], { weight: 1}, 'Palen', '(female)'),
         new DungeonTrainer('Worker',
             [
-                new GymPokemon('Ledian', 88800, 63),
-                new GymPokemon('Girafarig', 88800, 62),
                 new GymPokemon('Houndour', 88800, 62),
                 new GymPokemon('Dodrio', 88800, 62),
+            ], { weight: 1}, 'Toway', '(male)'),
+        new DungeonTrainer('Worker',
+            [
+                new GymPokemon('Ledian', 88800, 63),
+                new GymPokemon('Girafarig', 88800, 62),
             ], { weight: 1}, 'Toway', '(male)'),
         new DungeonTrainer('Street Performer',
             [
@@ -5052,10 +5309,13 @@ dungeonList['Deep Colosseum'] = new Dungeon('Deep Colosseum',
             ], { weight: 1}, 'Gorbel'),
         new DungeonTrainer('Bandana Guy',
             [
-                new GymPokemon('Medicham', 88800, 62),
-                new GymPokemon('Azumarill', 88800, 62),
                 new GymPokemon('Linoone', 88800, 63),
                 new GymPokemon('Xatu', 88800, 62),
+            ], { weight: 1}, 'Lobert'),
+        new DungeonTrainer('Bandana Guy',
+            [
+                new GymPokemon('Medicham', 88800, 62),
+                new GymPokemon('Azumarill', 88800, 62),
             ], { weight: 1}, 'Lobert'),
         new DungeonTrainer('Bodybuilder',
             [
@@ -5071,24 +5331,33 @@ dungeonList['Deep Colosseum'] = new Dungeon('Deep Colosseum',
             ], { weight: 1}, 'Zogo', '(male)'),
         new DungeonTrainer('Rider',
             [
-                new GymPokemon('Wailmer', 88800, 63),
-                new GymPokemon('Graveler', 88800, 61),
                 new GymPokemon('Wigglytuff', 88800, 62),
                 new GymPokemon('Donphan', 88800, 61),
             ], { weight: 1}, 'Shatol', '(female)'),
         new DungeonTrainer('Chaser',
             [
-                new GymPokemon('Nuzleaf', 88800, 60),
-                new GymPokemon('Jumpluff', 88800, 61),
                 new GymPokemon('Volbeat', 88800, 60),
                 new GymPokemon('Beautifly', 88800, 60),
             ], { weight: 1}, 'Drook', '(male)'),
         new DungeonTrainer('Roller Boy',
             [
-                new GymPokemon('Lanturn', 88800, 60),
-                new GymPokemon('Lairon', 88800, 60),
                 new GymPokemon('Octillery', 88800, 61),
                 new GymPokemon('Exploud', 88800, 61),
+            ], { weight: 1}, 'Dult'),
+        new DungeonTrainer('Rider',
+            [
+                new GymPokemon('Wailmer', 88800, 63),
+                new GymPokemon('Graveler', 88800, 61),
+            ], { weight: 1}, 'Shatol', '(female)'),
+        new DungeonTrainer('Chaser',
+            [
+                new GymPokemon('Nuzleaf', 88800, 60),
+                new GymPokemon('Jumpluff', 88800, 61),
+            ], { weight: 1}, 'Drook', '(male)'),
+        new DungeonTrainer('Roller Boy',
+            [
+                new GymPokemon('Lanturn', 88800, 60),
+                new GymPokemon('Lairon', 88800, 60),
             ], { weight: 1}, 'Dult'),
         new DungeonTrainer('Hunter',
             [
@@ -5199,7 +5468,7 @@ dungeonList['Phenac Stadium'] = new Dungeon('Phenac Stadium',
             [
                 new GymPokemon('Remoraid', 89500, 40),
                 new GymPokemon('Skitty', 89500, 40),
-            ], { weight: 1}, 'Rima', '(female)'),
+            ], { weight: 1}, 'Rima'),
         new DungeonTrainer('Old Man',
             [
                 new GymPokemon('Spheal', 89500, 40),
@@ -5242,20 +5511,20 @@ dungeonList['Phenac Stadium'] = new Dungeon('Phenac Stadium',
                 new GymPokemon('Pelipper', 89500, 23),
                 new GymPokemon('Electrike', 89500, 22),
                 new GymPokemon('Spearow', 89500, 22, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Ezin', '(female)'),
+            ], { weight: 1, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Ezin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Chimecho', 89500, 23),
                 new GymPokemon('Stantler', 89500, 23),
                 new GymPokemon('Grimer', 89500, 23, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Faltly', '(male)'),
+            ], { weight: 1, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Faltly', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Hoothoot', 89500, 25),
                 new GymPokemon('Graveler', 89500, 26),
                 new GymPokemon('Gulpin', 89500, 26),
                 new GymPokemon('Seel', 89500, 23, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Egrog', '(male)'),
+            ], { weight: 1, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Egrog', '(yellow)'),
     ],
     {
         common: [
@@ -5268,7 +5537,7 @@ dungeonList['Phenac Stadium'] = new Dungeon('Phenac Stadium',
         ],
         epic: [
             {loot: 'Splash Plate'},
-            {loot: 'Ultraball'},
+            {loot: 'Diveball'},
             {loot: 'Joy_Scent', ignoreDebuff : true},
         ],
         legendary: [
@@ -5307,7 +5576,7 @@ dungeonList['Phenac Stadium'] = new Dungeon('Phenac Stadium',
                 new GymPokemon('Lunatone', 15790500, 25, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Castform', 15790500, 27),
                 new GymPokemon('Metang', 15790500, 28),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Snattle', 'Snattle'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Gale of Darkness', 13)}, 'Snattle', 'Snattle'),
     ],
     89500, 134);
 
@@ -5315,75 +5584,99 @@ dungeonList['Under Colosseum'] = new Dungeon('Under Colosseum',
     [
         new DungeonTrainer('School Kid',
             [
-                new GymPokemon('Dustox', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Yanma', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Ariados', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
                 new GymPokemon('Rhyhorn', 91500, 50),
                 new GymPokemon('Grovyle', 91500, 50),
                 new GymPokemon('Masquerain', 91500, 50),
             ], { weight: 1}, 'Sainz', '(male)'),
         new DungeonTrainer('Teacher',
             [
-                new GymPokemon('Delcatty', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Beautifly', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Roselia', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
                 new GymPokemon('Mawile', 91500, 50),
                 new GymPokemon('Luvdisc', 91500, 50),
                 new GymPokemon('Kirlia', 91500, 50),
             ], { weight: 1}, 'Foshe'),
         new DungeonTrainer('Bodybuilder',
             [
-                new GymPokemon('Lunatone', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Metang', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Electrode', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
                 new GymPokemon('Wailord', 91500, 50),
                 new GymPokemon('Piloswine', 91500, 50),
                 new GymPokemon('Illumise', 91500, 50),
             ], { weight: 1}, 'Glya', '(female)'),
         new DungeonTrainer('Rider',
             [
-                new GymPokemon('Shuckle', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Murkrow', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Misdreavus', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
                 new GymPokemon('Azumarill', 91500, 50),
                 new GymPokemon('Breloom', 91500, 50),
                 new GymPokemon('Wobbuffet', 91500, 50),
             ], { weight: 1}, 'Fokil', '(male)'),
         new DungeonTrainer('Reporter',
             [
-                new GymPokemon('Castform', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Torkoal', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Glalie', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
                 new GymPokemon('Jumpluff', 91500, 50),
                 new GymPokemon('Sealeo', 91500, 50),
                 new GymPokemon('Lanturn', 91500, 50),
             ], { weight: 1}, 'Sclim'),
         new DungeonTrainer('Hunter',
             [
-                new GymPokemon('Forretress', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Cacturne', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Skarmory', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
                 new GymPokemon('Sandslash', 91500, 50),
                 new GymPokemon('Camerupt', 91500, 50),
                 new GymPokemon('Magcargo', 91500, 50),
             ], { weight: 1}, 'Rina', '(female)'),
         new DungeonTrainer('Rider',
             [
-                new GymPokemon('Tentacruel', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Cradily', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Hariyama', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
                 new GymPokemon('Zangoose', 91500, 50),
                 new GymPokemon('Grumpig', 91500, 50),
                 new GymPokemon('Absol', 91500, 50),
             ], { weight: 1}, 'Kou', '(female)'),
         new DungeonTrainer('Bandana Guy',
             [
-                new GymPokemon('Armaldo', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Exploud', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
-                new GymPokemon('Aggron', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
                 new GymPokemon('Rhydon', 91500, 50),
                 new GymPokemon('Tropius', 91500, 50),
                 new GymPokemon('Seviper', 91500, 50),
+            ], { weight: 1}, 'Roblin'),
+        new DungeonTrainer('School Kid',
+            [
+                new GymPokemon('Dustox', 91500, 50),
+                new GymPokemon('Yanma', 91500, 50),
+                new GymPokemon('Ariados', 91500, 50),
+            ], { weight: 1}, 'Sainz', '(male)'),
+        new DungeonTrainer('Teacher',
+            [
+                new GymPokemon('Delcatty', 91500, 50),
+                new GymPokemon('Beautifly', 91500, 50),
+                new GymPokemon('Roselia', 91500, 50),
+            ], { weight: 1}, 'Foshe'),
+        new DungeonTrainer('Bodybuilder',
+            [
+                new GymPokemon('Lunatone', 91500, 50),
+                new GymPokemon('Metang', 91500, 50),
+                new GymPokemon('Electrode', 91500, 50),
+            ], { weight: 1}, 'Glya', '(female)'),
+        new DungeonTrainer('Rider',
+            [
+                new GymPokemon('Shuckle', 91500, 50),
+                new GymPokemon('Murkrow', 91500, 50),
+                new GymPokemon('Misdreavus', 91500, 50),
+            ], { weight: 1}, 'Fokil', '(male)'),
+        new DungeonTrainer('Reporter',
+            [
+                new GymPokemon('Castform', 91500, 50),
+                new GymPokemon('Torkoal', 91500, 50),
+                new GymPokemon('Glalie', 91500, 50),
+            ], { weight: 1}, 'Sclim'),
+        new DungeonTrainer('Hunter',
+            [
+                new GymPokemon('Forretress', 91500, 50),
+                new GymPokemon('Cacturne', 91500, 50),
+                new GymPokemon('Skarmory', 91500, 50),
+            ], { weight: 1}, 'Rina', '(female)'),
+        new DungeonTrainer('Rider',
+            [
+                new GymPokemon('Tentacruel', 91500, 50),
+                new GymPokemon('Cradily', 91500, 50),
+                new GymPokemon('Hariyama', 91500, 50),
+            ], { weight: 1}, 'Kou', '(female)'),
+        new DungeonTrainer('Bandana Guy',
+            [
+                new GymPokemon('Armaldo', 91500, 50),
+                new GymPokemon('Exploud', 91500, 50),
+                new GymPokemon('Aggron', 91500, 50),
             ], { weight: 1}, 'Roblin'),
     ],
     {
@@ -5424,13 +5717,6 @@ dungeonList['Under Colosseum'] = new Dungeon('Under Colosseum',
     ],
     91500, 134);
 
-dungeonList['Orre Colosseum'] = new Dungeon('Orre Colosseum', //Difficulty comperable to P2 Laboratory
-    [],
-    {},
-    5403000,
-    [],
-    396500, 134);
-
 dungeonList['Gateon Port Battles'] = new Dungeon('Gateon Port Battles',
     [
         new DungeonTrainer('Chaser',
@@ -5458,15 +5744,6 @@ dungeonList['Gateon Port Battles'] = new Dungeon('Gateon Port Battles',
                 new GymPokemon('Zubat', 80200, 6),
                 new GymPokemon('Poochyena', 80200, 10, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 0.25}, 'Kilen', '(female)'),
-        new DungeonTrainer('Cipher Admin',
-            [
-                new GymPokemon('Ludicolo', 80200, 49),
-                new GymPokemon('Ludicolo', 80200, 49),
-                new GymPokemon('Ludicolo', 80200, 49),
-                new GymPokemon('Ludicolo', 80200, 49),
-                new GymPokemon('Ludicolo', 80200, 49),
-                new GymPokemon('Dragonite', 75200, 49, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.5,  hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness') }, 'Miror B.', 'Miror B'),
     ],
     {
         common: [
@@ -5509,39 +5786,51 @@ dungeonList['Cipher Key Lair'] = new Dungeon('Cipher Key Lair',
     [
         new DungeonTrainer('Cipher Peon',
             [
-                new GymPokemon('Clamperl', 6708000, 31),
-                new GymPokemon('Octillery', 6708000, 31),
                 new GymPokemon('Lanturn', 6708000, 31),
                 new GymPokemon('Relicanth', 6708000, 32),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Kollo', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Kollo', 'XD (female)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Ledian', 6708000, 28),
+                new GymPokemon('Illumise', 6708000, 31),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Grezle', 'XD (female)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Clamperl', 6708000, 31),
+                new GymPokemon('Octillery', 6708000, 31),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Kollo', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Minun', 6708000, 30),
                 new GymPokemon('Beautifly', 6708000, 30),
-                new GymPokemon('Ledian', 6708000, 28),
-                new GymPokemon('Illumise', 6708000, 31),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Grezle', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Grezle', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Seviper', 6708000, 29),
                 new GymPokemon('Murkrow', 6708000, 29),
                 new GymPokemon('Paras', 6708000, 28, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Growlithe', 6708000, 28, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Humah', '(male)'),
+            ], { weight: 0.25}, 'Humah', 'XD (male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Xatu', 6708000, 31),
+                new GymPokemon('Volbeat', 6708000, 31),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(125, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Ibsol', 'XD (female)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Masquerain', 6708000, 31),
+                new GymPokemon('Bellossom', 6708000, 32),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Jelstin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Plusle', 6708000, 30),
                 new GymPokemon('Dustox', 6708000, 30),
-                new GymPokemon('Xatu', 6708000, 31),
-                new GymPokemon('Volbeat', 6708000, 31),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Ibsol', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Ibsol', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Roselia', 6708000, 32),
                 new GymPokemon('Hoppip', 6708000, 32),
-                new GymPokemon('Masquerain', 6708000, 31),
-                new GymPokemon('Bellossom', 6708000, 32),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Jelstin', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Jelstin', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Shellder', 6708000, 29, undefined, undefined, GameConstants.ShadowStatus.Shadow),
@@ -5549,29 +5838,36 @@ dungeonList['Cipher Key Lair'] = new Dungeon('Cipher Key Lair',
                 new GymPokemon('Swalot', 6708000, 29),
                 new GymPokemon('Golbat', 6708000, 29),
                 new GymPokemon('Sharpedo', 6708000, 30),
-            ], { weight: 0.25}, 'Gorog', '(male)'),
+            ], { weight: 0.25}, 'Gorog', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Beedrill', 6708000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Furret', 6708000, 30),
                 new GymPokemon('Togetic', 6708000, 31),
                 new GymPokemon('Pidgeotto', 6708000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Lok', '(male)'),
+            ], { weight: 0.25}, 'Lok', 'XD (male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Donphan', 6708000, 30),
+                new GymPokemon('Ampharos', 6708000, 31),
+                new GymPokemon('Tentacruel', 6708000, 31),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(225, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Kleto', 'XD (female)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Noctowl', 6708000, 30),
+                new GymPokemon('Mightyena', 6708000, 29),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Flipis', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Absol', 6708000, 30),
                 new GymPokemon('Smeargle', 6708000, 31),
-                new GymPokemon('Donphan', 6708000, 30),
-                new GymPokemon('Ampharos', 6708000, 31),
                 new GymPokemon('Tentacruel', 6708000, 31),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(125, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Kleto', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(275, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Kleto', 'XD (female)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Chimecho', 6708000, 31),
                 new GymPokemon('Kecleon', 6708000, 30),
-                new GymPokemon('Noctowl', 6708000, 30),
-                new GymPokemon('Mightyena', 6708000, 29),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(125, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Flipis', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Flipis', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Ninetales', 6708000, 30),
@@ -5579,46 +5875,58 @@ dungeonList['Cipher Key Lair'] = new Dungeon('Cipher Key Lair',
                 new GymPokemon('Azumarill', 6708000, 32),
                 new GymPokemon('Tangela', 6708000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Butterfree', 6708000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Targ', '(female)'),
+            ], { weight: 0.25}, 'Targ', 'XD (female)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Vileplume', 6708000, 31),
+                new GymPokemon('Stantler', 6708000, 31),
+                new GymPokemon('Granbull', 6708000, 31),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(325, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Hospel', '(male)'),
         new DungeonTrainer('Scientist',
             [
                 new GymPokemon('Ariados', 6708000, 30),
                 new GymPokemon('Girafarig', 6708000, 29),
-                new GymPokemon('Vileplume', 6708000, 31),
-                new GymPokemon('Stantler', 6708000, 31),
                 new GymPokemon('Granbull', 6708000, 31),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Flipis', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(350, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Hospel', '(male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Shedinja', 6708000, 31),
                 new GymPokemon('Wobbuffet', 6708000, 30),
                 new GymPokemon('Vibrava', 6708000, 35),
                 new GymPokemon('Magneton', 6708000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Snidle', '(male)'),
-        new DungeonTrainer('Cipher Peon',
+            ], { weight: 0.25}, 'Snidle', 'XD (male)'),
+        new DungeonTrainer('Cipher',
+            [
+                new GymPokemon('Forretress', 6708000, 31),
+                new GymPokemon('Mantine', 6708000, 32),
+                new GymPokemon('Crobat', 6708000, 31),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(375, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Peon Fudler', '(commander)'),
+        new DungeonTrainer('Cipher',
             [
                 new GymPokemon('Machoke', 6708000, 31),
                 new GymPokemon('Golem', 6708000, 31),
                 new GymPokemon('Forretress', 6708000, 31),
-                new GymPokemon('Mantine', 6708000, 32),
-                new GymPokemon('Crobat', 6708000, 31),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Fudler', '(male)'),
-        new DungeonTrainer('Cipher Peon',
+            ], { weight: 1, requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Peon Fudler', '(commander)'),
+        new DungeonTrainer('Cipher',
             [
                 new GymPokemon('Golduck', 6708000, 33),
                 new GymPokemon('Hitmontop', 6708000, 33),
                 new GymPokemon('Hariyama', 6708000, 34),
                 new GymPokemon('Venomoth', 6708000, 32, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Weepinbell', 6708000, 32, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Angic', '(male)'),
+            ], { weight: 0.25}, 'Peon Angic', '(commander)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Camerupt', 6708000, 35),
+                new GymPokemon('Seaking', 6708000, 34),
+                new GymPokemon('Piloswine', 6708000, 34),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(425, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Acrod', '(male)'),
         new DungeonTrainer('Scientist',
             [
                 new GymPokemon('Grumpig', 6708000, 34),
                 new GymPokemon('Seadra', 6708000, 34),
                 new GymPokemon('Camerupt', 6708000, 35),
-                new GymPokemon('Seaking', 6708000, 34),
-                new GymPokemon('Piloswine', 6708000, 34),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Acrod', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Cipher Key Lair'), GameConstants.AchievementOption.less) }, 'Acrod', '(male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Huntail', 6708000, 33),
@@ -5626,7 +5934,7 @@ dungeonList['Cipher Key Lair'] = new Dungeon('Cipher Key Lair',
                 new GymPokemon('Weezing', 6708000, 34),
                 new GymPokemon('Ursaring', 6708000, 34),
                 new GymPokemon('Arbok', 6708000, 32, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Smarton', '(male)'),
+            ], { weight: 0.25}, 'Smarton', '(yellow)'),
     ],
     {
         common: [
@@ -5665,131 +5973,117 @@ dungeonList['Cipher Key Lair'] = new Dungeon('Cipher Key Lair',
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.unova});
 
-dungeonList['Citadark Isle'] = new Dungeon('Citadark Isle', //Skipped some filler trainers with no shadow mons, since this dungeon is very full
+dungeonList['Citadark Isle'] = new Dungeon('Citadark Isle',
     [
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Mantine', 7409000, 33),
+                new GymPokemon('Golduck', 7409000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Sableye', 7409000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Abson'),
+        new DungeonTrainer('Chaser',
+            [
+                new GymPokemon('Dodrio', 7409000, 34, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Whiscash', 7409000, 33),
+                new GymPokemon('Raticate', 7409000, 34, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Furgy', '(male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Claydol', 7409000, 36),
+                new GymPokemon('Kangaskhan', 7409000, 35, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Banette', 7409000, 37, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Litnar', 'XD (male)'),
+        new DungeonTrainer('Cipher',
+            [
+                new GymPokemon('Vileplume', 7409000, 34),
+                new GymPokemon('Magmar', 7409000, 36, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Pinsir', 7409000, 35, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Peon Grupel', '(commander)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Muk', 7409000, 38),
+                new GymPokemon('Rapidash', 7409000, 40, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Magcargo', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Kolest', 'XD (male)'),
+        new DungeonTrainer('Cipher',
+            [
+                new GymPokemon('Xatu', 7409000, 38),
+                new GymPokemon('Hitmonchan', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Peon Karbon', '(commander)'),
+        new DungeonTrainer('Cipher',
+            [
+                new GymPokemon('Metang', 7409000, 39),
+                new GymPokemon('Hariyama', 7409000, 39),
+                new GymPokemon('Hitmonlee', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Peon Petro', '(commander)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Magneton', 7409000, 41),
+                new GymPokemon('Lickitung', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Geftal', 'XD (male)'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Exploud', 7409000, 41),
+                new GymPokemon('Scyther', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Chansey', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1}, 'Leden', 'XD (female)'),
         new DungeonTrainer('Sailor',
             [
                 new GymPokemon('Crawdaunt', 7409000, 33),
                 new GymPokemon('Pelipper', 7409000, 33),
-                new GymPokemon('Mantine', 7409000, 33),
                 new GymPokemon('Golduck', 7409000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Sableye', 7409000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Abson'),
-        new DungeonTrainer('Cipher Peon',
-            [
-                new GymPokemon('Shuckle', 7409000, 44),
-                new GymPokemon('Blissey', 7409000, 42),
-                new GymPokemon('Weezing', 7409000, 41),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Citadark Isle'), GameConstants.AchievementOption.less) }, 'Kleef', '(male)'),
-        new DungeonTrainer('Cipher Peon',
-            [
-                new GymPokemon('Masquerain', 7409000, 33),
-                new GymPokemon('Dunsparce', 7409000, 33),
-                new GymPokemon('Roselia', 7409000, 33),
-                new GymPokemon('Spinda', 7409000, 33),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Citadark Isle'), GameConstants.AchievementOption.less) }, 'Haben', '(female)'),
+            ], { weight: 1}, 'Abson'),
         new DungeonTrainer('Chaser',
             [
                 new GymPokemon('Xatu', 7409000, 34),
                 new GymPokemon('Dodrio', 7409000, 34, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-                new GymPokemon('Whiscash', 7409000, 33),
                 new GymPokemon('Raticate', 7409000, 34, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Furgy', '(male)'),
-        new DungeonTrainer('Sailor',
-            [
-                new GymPokemon('Aron', 7409000, 34),
-                new GymPokemon('Corsola', 7409000, 34),
-                new GymPokemon('Pupitar', 7409000, 37),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Citadark Isle'), GameConstants.AchievementOption.less) }, 'Golos'),
-        new DungeonTrainer('Hunter',
-            [
-                new GymPokemon('Sneasel', 7409000, 33),
-                new GymPokemon('Girafarig', 7409000, 33),
-                new GymPokemon('Golbat', 7409000, 33),
-                new GymPokemon('Seaking', 7409000, 33),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Citadark Isle'), GameConstants.AchievementOption.less) }, 'Golos', '(male)'),
-        new DungeonTrainer('Cipher Peon',
-            [
-                new GymPokemon('Crobat', 7409000, 34),
-                new GymPokemon('Seviper', 7409000, 34),
-                new GymPokemon('Chimecho', 7409000, 34),
-                new GymPokemon('Masquerain', 7409000, 34),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(125, GameConstants.getDungeonIndex('Citadark Isle'), GameConstants.AchievementOption.less) }, 'Bastil', '(female)'),
+            ], { weight: 1}, 'Furgy', '(male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Electrode', 7409000, 34),
                 new GymPokemon('Misdreavus', 7409000, 34),
-                new GymPokemon('Claydol', 7409000, 36),
                 new GymPokemon('Kangaskhan', 7409000, 35, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Banette', 7409000, 37, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Litnar', '(male)'),
-        new DungeonTrainer('Cipher Peon',
-            [
-                new GymPokemon('Absol', 7409000, 35),
-                new GymPokemon('Ninjask', 7409000, 34),
-                new GymPokemon('Sandslash', 7409000, 37),
-                new GymPokemon('Mawile', 7409000, 35),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Citadark Isle'), GameConstants.AchievementOption.less) }, 'Grason', '(male)'),
-        new DungeonTrainer('Cipher Peon',
+            ], { weight: 1}, 'Litnar', 'XD (male)'),
+        new DungeonTrainer('Cipher',
             [
                 new GymPokemon('Houndoom', 7409000, 37),
                 new GymPokemon('Ninetales', 7409000, 37),
-                new GymPokemon('Vileplume', 7409000, 34),
                 new GymPokemon('Magmar', 7409000, 36, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Pinsir', 7409000, 35, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Grupel', '(male)'),
-        new DungeonTrainer('Cipher Peon',
-            [
-                new GymPokemon('Mightyena', 7409000, 35),
-                new GymPokemon('Stantler', 7409000, 34),
-                new GymPokemon('Zangoose', 7409000, 37),
-                new GymPokemon('Sharpedo', 7409000, 35),
-                new GymPokemon('Sunflora', 7409000, 34),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Citadark Isle'), GameConstants.AchievementOption.less) }, 'Kimly', '(female)'),
+            ], { weight: 1}, 'Peon Grupel', '(commander)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Camerupt', 7409000, 37),
                 new GymPokemon('Weezing', 7409000, 37),
-                new GymPokemon('Muk', 7409000, 38),
                 new GymPokemon('Rapidash', 7409000, 40, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Magcargo', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Kolest', '(male)'),
-        new DungeonTrainer('Cipher Peon',
-            [
-                new GymPokemon('Cacturne', 7409000, 35),
-                new GymPokemon('Ninetales', 7409000, 34),
-                new GymPokemon('Torkoal', 7409000, 37),
-                new GymPokemon('Mantine', 7409000, 35),
-                new GymPokemon('Tropius', 7409000, 34),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(175, GameConstants.getDungeonIndex('Citadark Isle'), GameConstants.AchievementOption.less) }, 'Kimly', '(female)'),
-        new DungeonTrainer('Cipher Peon',
+            ], { weight: 1}, 'Kolest', 'XD (male)'),
+        new DungeonTrainer('Cipher',
             [
                 new GymPokemon('Medicham', 7409000, 38),
                 new GymPokemon('Golem', 7409000, 38),
-                new GymPokemon('Xatu', 7409000, 38),
                 new GymPokemon('Hitmonchan', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Karbon', '(male)'),
-        new DungeonTrainer('Cipher Peon',
+            ], { weight: 1}, 'Peon Karbon', '(commander)'),
+        new DungeonTrainer('Cipher',
             [
                 new GymPokemon('Grumpig', 7409000, 39),
                 new GymPokemon('Skarmory', 7409000, 39),
-                new GymPokemon('Metang', 7409000, 39),
-                new GymPokemon('Hariyama', 7409000, 39),
                 new GymPokemon('Hitmonlee', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Karbon', '(male)'),
+            ], { weight: 1}, 'Peon Petro', '(commander)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Lanturn', 7409000, 41),
-                new GymPokemon('Magneton', 7409000, 41),
                 new GymPokemon('Lickitung', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Geftal', '(male)'),
+            ], { weight: 1}, 'Geftal', 'XD (male)'),
         new DungeonTrainer('Cipher Peon',
             [
                 new GymPokemon('Stantler', 7409000, 41),
-                new GymPokemon('Exploud', 7409000, 41),
                 new GymPokemon('Scyther', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Chansey', 7409000, 38, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Leden', '(female)'),
+            ], { weight: 1}, 'Leden', 'XD (female)'),
     ],
     {
         common: [
@@ -5801,7 +6095,7 @@ dungeonList['Citadark Isle'] = new Dungeon('Citadark Isle', //Skipped some fille
             {loot: 'Black Shard'},
         ],
         epic: [
-            {loot: 'Ultraball'},
+            {loot: 'Duskball'},
             {loot: 'Flame Plate'},
             {loot: 'Joy_Scent', ignoreDebuff : true},
         ],
@@ -5836,8 +6130,6 @@ dungeonList['Citadark Isle Dome'] = new Dungeon('Citadark Isle Dome', // Difficu
     [
         new DungeonTrainer('Cipher Admin',
             [
-                new GymPokemon('Metang', 8173950, 42),
-                new GymPokemon('Quagsire', 8173950, 42),
                 new GymPokemon('Scizor', 8173950, 42),
                 new GymPokemon('Solrock', 8173950, 41, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Castform', 8173950, 42),
@@ -5846,16 +6138,12 @@ dungeonList['Citadark Isle Dome'] = new Dungeon('Citadark Isle Dome', // Difficu
         new DungeonTrainer('Cipher Admin',
             [
                 new GymPokemon('Swellow', 8173950, 43, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-                new GymPokemon('Alakazam', 8173950, 44),
-                new GymPokemon('Kingdra', 8173950, 44),
                 new GymPokemon('Heracross', 8173950, 44),
                 new GymPokemon('Electabuzz', 8173950, 43, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Snorlax', 8173950, 43, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 0.25}, 'Ardos', 'Ardos'),
         new DungeonTrainer('Cipher Admin',
             [
-                new GymPokemon('Slowking', 7409000, 42),
-                new GymPokemon('Ursaring', 7409000, 43),
                 new GymPokemon('Aggron', 7409000, 43),
                 new GymPokemon('Walrein', 7409000, 44),
                 new GymPokemon('Poliwrath', 7409000, 42, undefined, undefined, GameConstants.ShadowStatus.Shadow),
@@ -5863,15 +6151,12 @@ dungeonList['Citadark Isle Dome'] = new Dungeon('Citadark Isle Dome', // Difficu
             ], { weight: 0.25}, 'Gorigan', 'Gorigan'),
         new DungeonTrainer('Cipher Peon',
             [
-                new GymPokemon('Glalie', 7409000, 41),
-                new GymPokemon('Ampharos', 7409000, 44),
                 new GymPokemon('Breloom', 7409000, 42),
                 new GymPokemon('Donphan', 7409000, 44),
                 new GymPokemon('Dugtrio', 7409000, 40, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Kolax', '(male)'),
+            ], { weight: 0.25}, 'Kolax', 'XD (male)'),
         new DungeonTrainer('Cipher Admin',
             [
-                new GymPokemon('Ninjask', 8173950, 45),
                 new GymPokemon('Manectric', 8173950, 44, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Salamence', 8173950, 50, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Flygon', 8173950, 45),
@@ -5880,20 +6165,64 @@ dungeonList['Citadark Isle Dome'] = new Dungeon('Citadark Isle Dome', // Difficu
             ], { weight: 0.25}, 'Eldes', 'Eldes'),
         new DungeonTrainer('Scientist',
             [
-                new GymPokemon('Shiftry', 8173950, 44),
-                new GymPokemon('Granbull', 8173950, 44),
                 new GymPokemon('Miltank', 8173950, 44),
                 new GymPokemon('Armaldo', 8173950, 41),
                 new GymPokemon('Slaking', 8173950, 43),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Citadark Isle Dome'), GameConstants.AchievementOption.less) }, 'Loket', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Citadark Isle Dome'), GameConstants.AchievementOption.less) }, 'Loket', '(male)'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Cradily', 8173950, 44),
+                new GymPokemon('Milotic', 8173950, 44),
+                new GymPokemon('Gyarados', 8173950, 42),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Citadark Isle Dome'), GameConstants.AchievementOption.less) }, 'Kaller', '(male)'),
+        new DungeonTrainer('Cipher Admin',
+            [
+                new GymPokemon('Metang', 8173950, 42),
+                new GymPokemon('Quagsire', 8173950, 42),
+                new GymPokemon('Solrock', 8173950, 41, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Starmie', 8173950, 41, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 0.25}, 'Snattle', 'Snattle'),
+        new DungeonTrainer('Cipher Admin',
+            [
+                new GymPokemon('Swellow', 8173950, 43, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Alakazam', 8173950, 44),
+                new GymPokemon('Kingdra', 8173950, 44),
+                new GymPokemon('Electabuzz', 8173950, 43, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Snorlax', 8173950, 43, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 0.25}, 'Ardos', 'Ardos'),
+        new DungeonTrainer('Cipher Admin',
+            [
+                new GymPokemon('Slowking', 7409000, 42),
+                new GymPokemon('Ursaring', 7409000, 43),
+                new GymPokemon('Poliwrath', 7409000, 42, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Mr. Mime', 7409000, 42, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 0.25}, 'Gorigan', 'Gorigan'),
+        new DungeonTrainer('Cipher Peon',
+            [
+                new GymPokemon('Glalie', 7409000, 41),
+                new GymPokemon('Ampharos', 7409000, 44),
+                new GymPokemon('Dugtrio', 7409000, 40, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 0.25}, 'Kolax', 'XD (male)'),
+        new DungeonTrainer('Cipher Admin',
+            [
+                new GymPokemon('Ninjask', 8173950, 45),
+                new GymPokemon('Manectric', 8173950, 44, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Salamence', 8173950, 50, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Marowak', 8173950, 44, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Lapras', 8173950, 44, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 0.25}, 'Eldes', 'Eldes'),
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Shiftry', 8173950, 44),
+                new GymPokemon('Granbull', 8173950, 44),
+                new GymPokemon('Slaking', 8173950, 43),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Citadark Isle Dome'), GameConstants.AchievementOption.less) }, 'Loket', '(male)'),
         new DungeonTrainer('Scientist',
             [
                 new GymPokemon('Corsola', 8173950, 44),
                 new GymPokemon('Tentacruel', 8173950, 44),
-                new GymPokemon('Cradily', 8173950, 44),
-                new GymPokemon('Milotic', 8173950, 44),
                 new GymPokemon('Gyarados', 8173950, 42),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Citadark Isle Dome'), GameConstants.AchievementOption.less) }, 'Kaller', '(male)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Citadark Isle Dome'), GameConstants.AchievementOption.less) }, 'Kaller', '(male)'),
     ],
     {
         common: [
@@ -5929,7 +6258,7 @@ dungeonList['Citadark Isle Dome'] = new Dungeon('Citadark Isle Dome', // Difficu
                 new GymPokemon('Articuno', 13958953, 50, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Zapdos', 13958953, 50, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ],
-            { weight: 1 }, 'Greevil', 'Greevil'),
+            { weight: 1, requirement: new QuestLineCompletedRequirement('Gale of Darkness') }, 'Greevil', 'Greevil'),
     ],
     615000, 134,
     () => {},
@@ -6015,7 +6344,7 @@ dungeonList['Valley Windworks'] = new Dungeon('Valley Windworks',
                 new GymPokemon('Zubat', 1901500, 15),
                 new GymPokemon('Purugly', 1901500, 17),
             ], { weight: 1 }, 'Mars', '(mars)'),
-        new DungeonBossPokemon('Drifloon', 3803000, 14, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Valley Windworks'))}),
+        new DungeonBossPokemon('Drifloon', 3803000, 14, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Valley Windworks'))}),
     ],
     43000, 204);
 
@@ -6064,7 +6393,7 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
             {loot: 'Bluk'},
             {loot: 'Greatball'},
         ],
-        rare: [{loot: 'Green Shard'}],
+        rare: [{loot: 'Lime Shard'}],
         epic: [
             {loot: 'Insect Plate'},
             {loot: 'Meadow Plate'},
@@ -6084,9 +6413,15 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
         ])}),
         new DungeonBossPokemon('Vivillon (River)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (River)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 20),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 21, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (River)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     48000, 205);
@@ -6099,8 +6434,8 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
             {loot: 'Dowsing_machine'},
         ],
         rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Purple Shard'},
         ],
         epic: [
             {loot: 'Dread Plate'},
@@ -6150,8 +6485,11 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
             {loot: 'Lucky_incense'},
         ],
         rare: [
-            {loot: 'Yellow Shard'},
             {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Purple Shard'},
         ],
         epic: [{loot: 'Toxic Plate'}],
         legendary: [{loot: 'Revive'}],
@@ -6163,23 +6501,23 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
                 new GymPokemon('Zubat', 2150000, 21),
                 new GymPokemon('Skuntank', 2150000, 23),
             ], { weight: 1 }, 'Jupiter', '(jupiter)'),
-        new DungeonBossPokemon('Rotom (Heat)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Heat)', 4300000, 100, {hide: true, requirement: new MultiRequirement([
             new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
-        new DungeonBossPokemon('Rotom (Wash)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Wash)', 4300000, 100, {hide: true, requirement: new MultiRequirement([
             new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
-        new DungeonBossPokemon('Rotom (Frost)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Frost)', 4300000, 100, {hide: true, requirement: new MultiRequirement([
             new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
-        new DungeonBossPokemon('Rotom (Fan)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Fan)', 4300000, 100, {hide: true, requirement: new MultiRequirement([
             new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
-        new DungeonBossPokemon('Rotom (Mow)', 4300000, 100, {requirement: new MultiRequirement([
+        new DungeonBossPokemon('Rotom (Mow)', 4300000, 100, {hide: true, requirement: new MultiRequirement([
             new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
@@ -6230,10 +6568,9 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
         ],
         rare: [
             {loot: 'Red Shard'},
-            {loot: 'Green Shard'},
+            {loot: 'Grey Shard'},
         ],
         epic: [
-            {loot: 'Greatball'},
             {loot: 'Earth Plate'},
             {loot: 'Draco Plate'},
         ],
@@ -6373,13 +6710,9 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
             {loot: 'Dowsing_machine', weight: 2},
             {loot: 'Pokeball'},
         ],
-        rare: [
-            {loot: 'Blue Shard'},
-            {loot: 'Yellow Shard'},
-        ],
+        rare: [{loot: 'Grey Shard'}],
         epic: [
             {loot: 'Iron Plate', weight: 2},
-            {loot: 'Ultraball', weight: 2},
             {loot: 'Revive'},
             {loot: 'Duskball'},
         ],
@@ -6453,12 +6786,18 @@ dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
                 new GymPokemon('Bronzor', 1533334, 38),
                 new GymPokemon('Toxicroak', 1533334, 40),
             ], { weight: 2 }, 'Saturn', '(saturn)'),
-        new DungeonBossPokemon('Azelf', 10060000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+        new DungeonBossPokemon('Azelf', 10060000, 50, {requirement: new QuestLineCompletedRequirement('A New World')}),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Marine)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 0),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 1, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     69500, 218);
@@ -6497,8 +6836,8 @@ dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
             {loot: 'Sitrus'},
         ],
         rare: [
-            {loot: 'Green Shard'},
-            {loot: 'Lime Shard'},
+            {loot: 'Red Shard'},
+            {loot: 'Crimson Shard'},
         ],
         epic: [{loot: 'Mind Plate'}],
     },
@@ -6512,9 +6851,15 @@ dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
             ], { weight: 1 }, 'Mars', '(mars)'),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Marine)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 0),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 1, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     72500, 218);
@@ -6535,7 +6880,6 @@ dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
             {loot: 'Draco Plate'},
         ],
         legendary: [
-            {loot: 'Ultraball', weight: 4},
             {loot: 'Light Clay', weight: 2},
             {loot: 'LargeRestore', weight: 2},
             {loot: 'Star Piece'},
@@ -6561,10 +6905,7 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
             {loot: 'Lucky_egg', weight: 2},
             {loot: 'Sitrus'},
         ],
-        rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Blue Shard'},
-        ],
+        rare: [{loot: 'Yellow Shard'}],
         epic: [
             {loot: 'Mind Plate'},
             {loot: 'Icicle Plate'},
@@ -6578,12 +6919,18 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
                 new GymPokemon('Bronzor', 1690000, 38),
                 new GymPokemon('Skuntank', 1690000, 40),
             ], { weight: 2 }, 'Jupiter', '(jupiter)'),
-        new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+        new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new QuestLineCompletedRequirement('A New World')}),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Marine)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 0),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 1, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     78000, 217);
@@ -6652,10 +6999,7 @@ dungeonList['Team Galactic HQ'] = new Dungeon('Team Galactic HQ',
             {loot: 'Crimson Shard'},
             {loot: 'Lime Shard'},
         ],
-        epic: [
-            {loot: 'Sky Plate'},
-            {loot: 'Ultraball'},
-        ],
+        epic: [{loot: 'Sky Plate'}],
         legendary: [
             {loot: 'LargeRestore'},
             {loot: 'Poison_Barb'},
@@ -6746,8 +7090,9 @@ dungeonList['Spear Pillar'] = new Dungeon('Spear Pillar',
             {loot: 'Dowsing_machine'},
         ],
         rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Yellow Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Crimson Shard'},
         ],
         epic: [
             {loot: 'Iron Plate'},
@@ -6779,11 +7124,13 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
             {loot: 'Lucky_incense', weight: 2},
             {loot: 'Banette'},
         ],
-        rare: [{loot: 'Lime Shard'}],
+        rare: [
+            {loot: 'Purple Shard'},
+            {loot: 'Crimson Shard'},
+        ],
         legendary: [
             {loot: 'Rare Bone'},
             {loot: 'Odd Keystone'},
-            {loot: 'Ultraball'},
         ],
     },
     1350400,
@@ -6796,7 +7143,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 2 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new TemporaryBattleRequirement('Zero')}),
+        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new QuestLineStepCompletedRequirement('Zero\'s Ambition', 13)}),
     ],
     86500, 217);
 
@@ -6894,15 +7241,15 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
             {loot: 'Crimson Shard'},
             {loot: 'Lime Shard'},
-            {loot: 'White Shard'},
             {loot: 'Black Shard'},
+            {loot: 'White Shard'},
         ],
-        legendary: [
-            {loot: 'Ultraball'},
-            {loot: 'Repeatball'},
-        ],
+        legendary: [{loot: 'Repeatball'}],
         mythic: [
             {loot: 'Max Revive'},
             {loot: 'Heart Scale'},
@@ -6924,6 +7271,7 @@ dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
             {loot: 'Token_collector'},
         ],
         rare: [
+            {loot: 'Green Shard'},
             {loot: 'White Shard'},
             {loot: 'Black Shard'},
         ],
@@ -6953,6 +7301,9 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
             {loot: 'Crimson Shard'},
             {loot: 'Lime Shard'},
             {loot: 'White Shard'},
@@ -7046,7 +7397,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Parasect', 9900000, 50),
         new DungeonBossPokemon('Breloom', 9900000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
-        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
+        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {hide: true, requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
         new DungeonBossPokemon('Bulbasaur (Rose)', 16000000, 100, {
             hide: true,
             requirement: new MultiRequirement([
@@ -7055,9 +7406,15 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
             ])}),
         new DungeonBossPokemon('Vivillon (Garden)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Garden)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 26),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 27, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Garden)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     96500, 230);
@@ -7186,14 +7543,13 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
         ],
         rare: [
             {loot: 'Red Shard'},
-            {loot: 'Black Shard'},
+            {loot: 'Grey Shard'},
         ],
         epic: [
             {loot: 'Flame Plate'},
             {loot: 'Iron Plate'},
         ],
         legendary: [
-            {loot: 'Ultraball'},
             {loot: 'Metal_Powder'},
             {loot: 'Star Piece', weight: 2},
             {loot: 'LargeRestore'},
@@ -7263,14 +7619,13 @@ dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
             {loot: 'Greatball'},
         ],
         rare: [
-            {loot: 'Blue Shard'},
+            {loot: 'Red Shard'},
             {loot: 'Green Shard'},
         ],
         epic: [
             {loot: 'Flame Plate'},
             {loot: 'Mind Plate'},
         ],
-        legendary: [{loot: 'Ultraball'}],
     },
     2703000,
     [
@@ -7319,8 +7674,8 @@ dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
             {loot: 'xAttack'},
         ],
         rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Purple Shard'},
         ],
         epic: [
             {loot: 'Toxic Plate'},
@@ -7329,7 +7684,6 @@ dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
         legendary: [
             {loot: 'MediumRestore', weight: 2},
             {loot: 'SmallRestore'},
-            {loot: 'Ultraball'},
             {loot: 'Revive'},
             {loot: 'Rare Bone'},
             {loot: 'LargeRestore'},
@@ -7435,8 +7789,9 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
             {loot: 'Greatball'},
         ],
         rare: [
-            {loot: 'Blue Shard'},
+            {loot: 'Red Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Lime Shard'},
         ],
         epic: [
             {loot: 'Earth Plate'},
@@ -7445,7 +7800,6 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         ],
         legendary: [
             {loot: 'Revive'},
-            {loot: 'Ultraball'},
             {loot: 'MediumRestore', weight: 2},
             {loot: 'LargeRestore'},
         ],
@@ -7459,12 +7813,18 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         new DungeonTrainer('Psychic',
             [new GymPokemon('Sigilyph', 16000000, 23)],
             { weight: 2 }, 'Perry', '(male)'),
-        new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}),
+        new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}), // don't hide, because the dungeons associated with it are optional
         new DungeonBossPokemon('Vivillon (Sandstorm)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Sandstorm)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 24),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 25, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Sandstorm)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     166500, 25);
@@ -7505,11 +7865,11 @@ dungeonList['Lostlorn Forest'] = new Dungeon('Lostlorn Forest',
             {loot: 'Greatball', weight: 2},
             {loot: 'Foongus'},
         ],
-        rare: [{loot: 'Green Shard'}],
-        legendary: [
-            {loot: 'Ultraball'},
-            {loot: 'Zoroark', requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lostlorn Forest'))},
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Lime Shard'},
         ],
+        legendary: [{loot: 'Zoroark', requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Lostlorn Forest'))}],
         mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(300, GameConstants.getDungeonIndex('Lostlorn Forest'))}],
     },
     3003000,
@@ -7641,8 +8001,8 @@ dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
             {loot: 'Greatball'},
         ],
         rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Green Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Ochre Shard'},
         ],
         epic: [
             {loot: 'Draco Plate'},
@@ -7650,7 +8010,6 @@ dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
             {loot: 'Iron Plate'},
         ],
         legendary: [
-            {loot: 'Ultraball'},
             {loot: 'Revive'},
             {loot: 'Hard Stone'},
             {loot: 'Duskball'},
@@ -7811,7 +8170,10 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
             {loot: 'Dowsing_machine', weight: 2},
             {loot: 'Ultraball'},
         ],
-        rare: [{loot: 'Red Shard'}],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Grey Shard'},
+        ],
         epic: [
             {loot: 'Iron Plate'},
             {loot: 'Flame Plate'},
@@ -7828,7 +8190,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
         new DungeonBossPokemon('Cacturne', 24000000, 100),
         new DungeonBossPokemon('Vibrava', 24000000, 100),
         new DungeonBossPokemon('Excadrill', 26000000, 100),
-        new DungeonBossPokemon('Heatran', 30000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
+        new DungeonBossPokemon('Heatran', 30000000, 100, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
     ],
     226500, 14);
 
@@ -7971,7 +8333,16 @@ dungeonList['Plasma Frigate'] = new Dungeon('Plasma Frigate',
         ],
         rare: [
             {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
         ],
         epic: [
             {loot: 'Iron Plate'},
@@ -8086,8 +8457,8 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
             {loot: 'Amoonguss'},
         ],
         rare: [
-            {loot: 'Green Shard'},
-            {loot: 'Yellow Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'White Shard'},
         ],
         epic: [
             {loot: 'Icicle Plate'},
@@ -8096,7 +8467,6 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         ],
         legendary: [
             {loot: 'Star Piece', weight: 2},
-            {loot: 'Ultraball'},
             {loot: 'LargeRestore'},
         ],
         mythic: [{loot: 'Max Revive'}],
@@ -8109,11 +8479,11 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
                 new GymPokemon('Cryogonal', 12000000, 49),
                 new GymPokemon('Weavile', 12500000, 51),
             ], { weight: 1 }, 'Zinzolin', '(zinzolin)'),
-        new DungeonBossPokemon('Tangrowth', 30000000, 100, {requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
-        new DungeonBossPokemon('Audino', 32000000, 100, {requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
-        new DungeonBossPokemon('Mamoswine', 32000000, 100, {requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
+        new DungeonBossPokemon('Tangrowth', 30000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
+        new DungeonBossPokemon('Audino', 32000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
+        new DungeonBossPokemon('Mamoswine', 32000000, 100, {hide: true, requirement: new TemporaryBattleRequirement('Ghetsis 2')}),
         new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
-            new TemporaryBattleRequirement('Ghetsis 2'),
+            new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
         ])}),
     ],
@@ -8133,6 +8503,7 @@ dungeonList['Cave of Being'] = new Dungeon('Cave of Being',
         rare: [
             {loot: 'Red Shard'},
             {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
         ],
         epic: [{loot: 'Mind Plate'}],
     },
@@ -8188,12 +8559,9 @@ dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
         ],
         rare: [
             {loot: 'Red Shard'},
-            {loot: 'Green Shard'},
+            {loot: 'Ochre Shard'},
         ],
-        legendary: [
-            {loot: 'Ultraball'},
-            {loot: 'LargeRestore'},
-        ],
+        legendary: [{loot: 'LargeRestore'}],
         mythic: [{loot: 'Max Revive'}],
     },
     4803000,
@@ -8360,6 +8728,13 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
         ],
         epic: [
             {loot: 'Quickball'},
@@ -8369,7 +8744,6 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
             {loot: 'Repeatball'},
         ],
         legendary: [
-            {loot: 'Ultraball'},
             {loot: 'Star Piece'},
             {loot: 'LargeRestore'},
         ],
@@ -8467,14 +8841,10 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
             {loot: 'Lucky_incense', weight: 3},
             {loot: 'Greatball'},
         ],
-        rare: [
-            {loot: 'Blue Shard'},
-            {loot: 'Yellow Shard'},
-        ],
+        rare: [{loot: 'White Shard'}],
         legendary: [
             {loot: 'Rare Bone', weight: 2},
             {loot: 'Revive'},
-            {loot: 'Ultraball'},
             {loot: 'Duskball'},
             {loot: 'LargeRestore'},
         ],
@@ -8500,6 +8870,7 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
         rare: [
             {loot: 'Red Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Crimson Shard'},
         ],
         epic: [
             {loot: 'Draco Plate'},
@@ -8528,9 +8899,15 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
         new DungeonBossPokemon('Zekrom', 50000000, 100),
         new DungeonBossPokemon('Vivillon (Savanna)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Savanna)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 30),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 31, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Savanna)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     356500, 7);
@@ -8575,11 +8952,11 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
             {loot: 'Greatball'},
         ],
         rare: [
+            {loot: 'Red Shard'},
             {loot: 'Blue Shard'},
-            {loot: 'Green Shard'},
+            {loot: 'Ochre Shard'},
         ],
         legendary: [
-            {loot: 'Ultraball', weight: 2},
             {loot: 'Revive', weight: 2},
             {loot: 'LargeRestore'},
         ],
@@ -8596,9 +8973,15 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
         new DungeonBossPokemon('Keldeo', 50000000, 100),
         new DungeonBossPokemon('Vivillon (Jungle)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Jungle)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 4),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 5, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Jungle)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     356500, 8);
@@ -8612,16 +8995,14 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
         ],
         rare: [
             {loot: 'Red Shard'},
-            {loot: 'Green Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Ochre Shard'},
         ],
         epic: [
             {loot: 'Splash Plate'},
             {loot: 'Fist Plate'},
         ],
-        legendary: [
-            {loot: 'Ultraball'},
-            {loot: 'Sharp_Beak'},
-        ],
+        legendary: [{loot: 'Sharp_Beak'}],
     },
     5203000,
     [
@@ -8794,7 +9175,8 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
         ],
         rare: [
             {loot: 'Green Shard'},
-            {loot: 'Yellow Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Lime Shard'},
         ],
         epic: [
             {loot: 'Meadow Plate'},
@@ -8804,7 +9186,6 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
             {loot: 'MediumRestore', weight: 2},
             {loot: 'Star Piece', weight: 2},
             {loot: 'LargeRestore'},
-            {loot: 'Ultraball'},
             {loot: 'Nestball'},
             {loot: 'Miracle_Seed'},
         ],
@@ -8874,6 +9255,7 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
         rare: [
             {loot: 'Red Shard'},
             {loot: 'Blue Shard'},
+            {loot: 'Crimson Shard'},
         ],
         epic: [
             {loot: 'Mind Plate', weight: 2},
@@ -8881,7 +9263,6 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
         ],
         legendary: [
             {loot: 'SmallRestore', weight: 2},
-            {loot: 'Ultraball', weight: 2},
             {loot: 'Revive', weight: 2},
             {loot: 'LargeRestore'},
         ],
@@ -8894,9 +9275,15 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
         new DungeonBossPokemon('Latios', 48000000, 100),
         new DungeonBossPokemon('Vivillon (Ocean)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Ocean)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 16),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 17, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Ocean)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     356500, 3);
@@ -8914,19 +9301,27 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
         ],
         epic: [
             {loot: 'Iron Plate', weight: 2},
             {loot: 'Insect Plate', weight: 2},
             {loot: 'Zap Plate'},
+            {loot: 'Great_Twisted_Spoon', ignoreDebuff : true, weight: 3, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemRequirement(1, 'Great_Twisted_Spoon', GameConstants.AchievementOption.less)])},
         ],
         legendary: [{loot: 'Revive'}],
     },
     5403000,
     [
-        new DungeonBossPokemon('Stoutland', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Magnezone', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Klinklang', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Stoutland', 58000000, 100, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Magnezone', 58000000, 100, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Klinklang', 58000000, 100, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
         new DungeonTrainer('Team Plasma',
             [
                 new GymPokemon('Magneton', 10000000, 72),
@@ -8967,7 +9362,11 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
             {loot: 'Pokeball', weight: 2},
             {loot: 'Lucky_incense'},
         ],
-        rare: [{loot: 'Green Shard'}],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Lime Shard'},
+        ],
         epic: [
             {loot: 'Insect Plate'},
             {loot: 'Fist Plate'},
@@ -9053,7 +9452,10 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
             {loot: 'xClick'},
             {loot: 'xAttack'},
         ],
-        rare: [{loot: 'Red Shard'}],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'White Shard'},
+        ],
         legendary: [
             {loot: 'Hard Stone'},
             {loot: 'Revive'},
@@ -9123,7 +9525,7 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
         ],
         rare: [
             {loot: 'Green Shard'},
-            {loot: 'Red Shard'},
+            {loot: 'Pink Shard'},
         ],
         epic: [
             {loot: 'Fist Plate'},
@@ -9204,7 +9606,11 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
             {loot: 'Dowsing_machine'},
             {loot: 'xAttack'},
         ],
-        rare: [{loot: 'Yellow Shard'}],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
         epic: [
             {loot: 'Zap Plate'},
             {loot: 'Dread Plate'},
@@ -9224,7 +9630,7 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
                 requirement: new MultiRequirement([
                     new ClearDungeonRequirement(5, GameConstants.getDungeonIndex('Kalos Power Plant')),
                     new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
-                    new QuestLineStepCompletedRequirement('A Beautiful World', 11),
+                    new QuestLineStepCompletedRequirement('A Beautiful World', 11), // TODO: remove requirement and change quest step to defeatDungeonBoss
                 ])}),
     ],
     575000, 13);
@@ -9285,7 +9691,7 @@ dungeonList['Poké Ball Factory'] = new Dungeon('Poké Ball Factory',
             {loot: 'Ultraball'},
         ],
         rare: [
-            {loot: 'Yellow Shard'},
+            {loot: 'Red Shard'},
             {loot: 'Pink Shard'},
         ],
         epic: [
@@ -9309,9 +9715,15 @@ dungeonList['Poké Ball Factory'] = new Dungeon('Poké Ball Factory',
             { weight: 1 }),
         new DungeonBossPokemon('Vivillon (Tundra)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Tundra)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 8),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 9, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Tundra)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     615000, 14);
@@ -9358,7 +9770,10 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
             {loot: 'Trubbish', weight: 2},
             {loot: 'Garbodor'},
         ],
-        rare: [{loot: 'Pink Shard'}],
+        rare: [
+            {loot: 'Pink Shard'},
+            {loot: 'Purple Shard'},
+        ],
         epic: [
             {loot: 'Dread Plate'},
             {loot: 'Duskball'},
@@ -9383,9 +9798,15 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
         new DungeonBossPokemon('Rotom', 82376500, 38),
         new DungeonBossPokemon('Vivillon (Elegant)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Elegant)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 14),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 15, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Elegant)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     635000, 15);
@@ -9482,7 +9903,8 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
         ],
         rare: [
             {loot: 'Blue Shard'},
-            {loot: 'Yellow Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'White Shard'},
         ],
         epic: [
             {loot: 'Icicle Plate'},
@@ -9504,12 +9926,18 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
         new DungeonTrainer('Team Flare Mable',
             [new GymPokemon('Houndoom', 87365830, 48)],
             { weight: 1 }),
-        new DungeonBossPokemon('Abomasnow', 85376500, 50, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 17)}),
+        new DungeonBossPokemon('Abomasnow', 85376500, 50, {hide: true, requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 17)}),
         new DungeonBossPokemon('Vivillon (Icy Snow)',  96662023, 60, {
             hide: true,
-            requirement: new MultiRequirement([
-                new ObtainedPokemonRequirement('Vivillon (Icy Snow)'),
-                new SpecialEventRequirement('Lunar New Year'),
+            requirement: new OneFromManyRequirement([
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 32),
+                    new QuestLineStepCompletedRequirement('The Great Vivillon Hunt!', 33, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new ObtainedPokemonRequirement('Vivillon (Icy Snow)'),
+                    new SpecialEventRequirement('Lunar New Year'),
+                ]),
             ])}),
     ],
     665500, 15);
@@ -9558,6 +9986,8 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
         ],
         rare: [
             {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Black Shard'},
             {loot: 'Pink Shard'},
         ],
         epic: [
@@ -9686,8 +10116,8 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
             {loot: 'Pokeball'},
         ],
         rare: [
-            {loot: 'Blue Shard'},
-            {loot: 'Pink Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Crimson Shard'},
         ],
         epic: [
             {loot: 'Iron Plate'},
@@ -9724,10 +10154,7 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
             {loot: 'Garbodor'},
             {loot: 'Banette'},
         ],
-        rare: [
-            {loot: 'Green Shard'},
-            {loot: 'Pink Shard'},
-        ],
+        rare: [{loot: 'Pink Shard'}],
         epic: [
             {loot: 'Pixie Plate'},
             {loot: 'Repeatball'},
@@ -9740,8 +10167,25 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     },
     9003000,
     [
-        new DungeonBossPokemon('Ditto', 94836530, 50),
-        new DungeonBossPokemon('Zoroark', 95743340, 50),
+        new DungeonBossPokemon('Ditto', 94836530, 50,
+            { hide: true, requirement: new OneFromManyRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16, GameConstants.AchievementOption.less),
+                new QuestLineCompletedRequirement('An Unrivaled Power'),
+            ])}),
+        new DungeonBossPokemon('Zoroark', 95743340, 50,
+            { hide: true, requirement: new OneFromManyRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16, GameConstants.AchievementOption.less),
+                new QuestLineCompletedRequirement('An Unrivaled Power'),
+            ])}),
+        new DungeonTrainer('Anomaly Mewtwo',
+            [new GymPokemon('Mega Mewtwo X', 120000000, 70)],
+            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power'), hideTrainer: true}, undefined, 'X'),
+        new DungeonTrainer('Anomaly Mewtwo',
+            [new GymPokemon('Mega Mewtwo Y', 120000000, 70)],
+            { hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16),
+                new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less),
+            ]), hideTrainer: true}, undefined, 'Y'),
     ],
     725000, 20);
 
@@ -9847,11 +10291,17 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
             {loot: 'Pink Shard'},
         ],
         legendary: [
             {loot: 'Star Piece', weight: 2},
-            {loot: 'Ultraball'},
             {loot: 'Smooth Rock'},
             {loot: 'Revive'},
             {loot: 'Duskball'},
@@ -9924,12 +10374,11 @@ dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
         ],
         rare: [
             {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
         ],
-        epic: [
-            {loot: 'Flame Plate'},
-            {loot: 'Greatball'},
-        ],
+        epic: [{loot: 'Flame Plate'}],
         legendary: [{loot: 'SmallRestore'}],
     },
     11407338,
@@ -9939,7 +10388,7 @@ dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
                 new GymPokemon('Litten', 19012230, 10),
                 new GymPokemon('Popplio', 19012230, 10),
                 new GymPokemon('Rowlet', 19012230, 10),
-            ], { weight: 1 }, 'Emily'),
+            ], { weight: 1 }, 'Emily', '(gen7)'),
     ],
     757500, 18);
 
@@ -9960,10 +10409,7 @@ dungeonList['Hau\'oli Cemetery'] = new Dungeon('Hau\'oli Cemetery',
             {loot: 'xClick'},
             {loot: 'Dowsing_machine'},
         ],
-        rare: [
-            {loot: 'Blue Shard'},
-            {loot: 'Green Shard'},
-        ],
+        rare: [{loot: 'Purple Shard'}],
         epic: [{loot: 'Spooky Plate'}],
         legendary: [{loot: 'MediumRestore'}],
     },
@@ -9981,7 +10427,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         {pokemon: 'Alolan Diglett', options: { weight: 0.75 }},
         {pokemon: 'Noibat', options: { weight: 0.75 }},
         {pokemon: 'Yungoos', options: { weight: 0.75 }},
-        {pokemon: 'Pheromosa', options: { weight: 0.75, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}},
+        {pokemon: 'Pheromosa', options: { weight: 0.75, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Team Skull Grunt',
             [new GymPokemon('Drowzee', 11595673, 11)], { weight: 1 }, undefined, '(male)'),
     ],
@@ -9992,13 +10438,10 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
             {loot: 'Sitrus'},
         ],
         rare: [
-            {loot: 'Green Shard'},
-            {loot: 'Yellow Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
         ],
-        epic: [
-            {loot: 'Greatball'},
-            {loot: 'Meadow Plate'},
-        ],
+        epic: [{loot: 'Meadow Plate'}],
         legendary: [
             {loot: 'MediumRestore'},
             {loot: 'Revive'},
@@ -10008,8 +10451,8 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     [
         new DungeonBossPokemon('Alolan Raticate', 57978365, 12),
         new DungeonBossPokemon('Gumshoos', 57978365, 12),
-        new DungeonBossPokemon('Totem Raticate', 82543791, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Raticate', 82543791, 70, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     805000, 2,
     () => DungeonGainGymBadge(GymList['Ilima\'s Trial']));
@@ -10022,7 +10465,7 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
         {pokemon: 'Cottonee', options: { weight: 0.55 }},
         {pokemon: 'Petilil', options: { weight: 0.55 }},
         {pokemon: 'Cutiefly', options: { weight: 0.55 }},
-        {pokemon: 'Buzzwole', options: { weight: 0.55, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}},
+        {pokemon: 'Buzzwole', options: { weight: 0.55, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 5)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Pom-Pom)', 11769270, 12)], { weight: 1 }, 'Meredith'),
     ],
@@ -10032,13 +10475,10 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
             {loot: 'xClick'},
         ],
         rare: [
-            {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Cyan Shard'},
         ],
-        epic: [
-            {loot: 'Greatball'},
-            {loot: 'Meadow Plate'},
-        ],
+        epic: [{loot: 'Meadow Plate'}],
     },
     11769270,
     [
@@ -10077,23 +10517,26 @@ dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
     830000, 3);
 
 dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
-    ['Zubat', 'Machop', 'Psyduck', 'Mawile', 'Roggenrola'],
+    [
+        {pokemon: 'Zubat', options: { weight: 1 }},
+        {pokemon: 'Machop', options: { weight: 1 }},
+        {pokemon: 'Psyduck', options: { weight: 1 }},
+        {pokemon: 'Mawile', options: { weight: 1 }},
+        {pokemon: 'Roggenrola', options: { weight: 1 }},
+        {pokemon: 'Necrozma', options: { weight: 1, hide: true, requirement: new MultiRequirement([
+            new QuestLineCompletedRequirement('Ultra Beast Hunt'),
+            new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Must have never encountered Necrozma before.', GameConstants.AchievementOption.less),
+        ])}},
+    ],
     {
         common: [
             {loot: 'xAttack'},
             {loot: 'xClick'},
         ],
-        rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Yellow Shard'},
-        ],
-        epic: [
-            {loot: 'Greatball'},
-            {loot: 'MediumRestore'},
-        ],
+        rare: [{loot: 'Cyan Shard'}],
+        epic: [{loot: 'MediumRestore'}],
         legendary: [
             {loot: 'Hard Stone'},
-            {loot: 'Ultraball'},
             {loot: 'Star Piece'},
             {loot: 'Sharp_Beak'},
         ],
@@ -10129,7 +10572,7 @@ dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
         new DungeonBossPokemon('Pikachu (Sinnoh Cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Unova Cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Kalos Cap)', 59764020, 15),
-        new DungeonBossPokemon('Pikachu (Alola Cap)', 59764020, 15, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Pikachu (Alola Cap)', 59764020, 15, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Pikachu (World Cap)', 59764020, 15, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)}),
     ],
     850000, 4);
@@ -10159,8 +10602,8 @@ dungeonList['Paniola Ranch'] = new Dungeon('Paniola Ranch',
             {loot: 'Lucky_incense'},
         ],
         rare: [
-            {loot: 'Red Shard'},
             {loot: 'Green Shard'},
+            {loot: 'White Shard'},
         ],
         epic: [{loot: 'Splash Plate'}],
         legendary: [
@@ -10214,7 +10657,10 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
             {loot: 'xAttack'},
             {loot: 'Lucky_incense'},
         ],
-        rare: [{loot: 'Blue Shard'}],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Lime Shard'},
+        ],
         epic: [
             {loot: 'Splash Plate'},
             {loot: 'Diveball'},
@@ -10230,8 +10676,8 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
     [
         new DungeonBossPokemon('Wishiwashi (School)', 60690300, 20),
         new DungeonBossPokemon('Araquanid', 60690300, 20),
-        new DungeonBossPokemon('Totem Wishiwashi', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Araquanid', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Wishiwashi', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Araquanid', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     875000, 5,
     () => DungeonGainGymBadge(GymList['Lana\'s Trial']));
@@ -10244,7 +10690,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         {pokemon: 'Magby', options: { weight: 1.7 }},
         {pokemon: 'Fletchling', options: { weight: 1.7 }},
         {pokemon: 'Salandit', options: { weight: 1.7 }},
-        {pokemon: 'Nihilego', options: { weight: 1.7, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}},
+        {pokemon: 'Nihilego', options: { weight: 1.7, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Sightseer',
             [new GymPokemon('Meowth', 12896392, 19)], { weight: 1 }, 'Mariah', '(female)'),
         new DungeonTrainer('Ace Trainer',
@@ -10260,7 +10706,10 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
             {loot: 'Dowsing_machine'},
             {loot: 'Rawst'},
         ],
-        rare: [{loot: 'Red Shard'}],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Purple Shard'},
+        ],
         epic: [
             {loot: 'Flame Plate'},
             {loot: 'Quickball'},
@@ -10274,8 +10723,8 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
         new DungeonBossPokemon('Alolan Marowak', 64481960, 22),
         new DungeonBossPokemon('Salazzle', 64481960, 22),
-        new DungeonBossPokemon('Totem Marowak', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Salazzle', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Marowak', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Salazzle', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     900000, 7,
     () => DungeonGainGymBadge(GymList['Kiawe\'s Trial']));
@@ -10294,20 +10743,22 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         {pokemon: 'Comfey', options: { weight: 1 }},
         {pokemon: 'Oranguru', options: { weight: 1 }},
         {pokemon: 'Passimian', options: { weight: 1 }},
-        {pokemon: 'Xurkitree', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 9)}},
+        {pokemon: 'Xurkitree', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 9)}}, // hide UBs because they show up in too many dungeons and will distract the players
     ],    {
         common: [
             {loot: 'xClick'},
             {loot: 'xAttack'},
             {loot: 'Mago'},
         ],
-        rare: [{loot: 'Green Shard'}],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Lime Shard'},
+        ],
         epic: [
             {loot: 'Meadow Plate'},
             {loot: 'Nestball'},
         ],
         legendary: [
-            {loot: 'MediumRestore', weight: 2},
             {loot: 'LargeRestore'},
             {loot: 'Miracle_Seed'},
         ],
@@ -10316,7 +10767,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     13090332,
     [
         new DungeonBossPokemon('Lurantis', 65451660, 24),
-        new DungeonBossPokemon('Totem Lurantis', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Lurantis', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     925000, 8,
     () => DungeonGainGymBadge(GymList['Mallow\'s Trial']));
@@ -10325,7 +10776,7 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [
         {pokemon: 'Zubat', options: { weight: 6.5 }},
         {pokemon: 'Alolan Diglett', options: { weight: 6.5 }},
-        {pokemon: 'Nihilego', options: { weight: 6.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}},
+        {pokemon: 'Nihilego', options: { weight: 6.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 3)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Worker',
             [new GymPokemon('Shieldon', 13215839, 22)], { weight: 1 }, 'Frank', '(male)'),
         new DungeonTrainer('Worker',
@@ -10368,7 +10819,7 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
         {pokemon: 'Zubat', options: { weight: 7.5 }},
         {pokemon: 'Gastly', options: { weight: 7.5 }},
         {pokemon: 'Phantump', options: { weight: 7.5 }},
-        {pokemon: 'Xurkitree', options: { weight: 7.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 9)}},
+        {pokemon: 'Xurkitree', options: { weight: 7.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 9)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Preschooler',
             [
                 new GymPokemon('Magby', 13286024, 23),
@@ -10391,7 +10842,7 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
         ],
         rare: [
             {loot: 'Green Shard'},
-            {loot: 'Yellow Shard'},
+            {loot: 'Purple Shard'},
         ],
         epic: [
             {loot: 'Spooky Plate'},
@@ -10425,8 +10876,8 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
         {pokemon: 'Cottonee', options: { weight: 1 }},
         {pokemon: 'Petilil', options: { weight: 1 }},
         {pokemon: 'Araquanid', options: { weight: 1 }},
-        {pokemon: 'Kartana', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)}},
-        {pokemon: 'Celesteela', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)}},
+        {pokemon: 'Kartana', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)}}, // hide UBs because they show up in too many dungeons and will distract the players
+        {pokemon: 'Celesteela', options: { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)}}, // hide UBs because they show up in too many dungeons and will distract the players
         new DungeonTrainer('Sightseer',
             [new GymPokemon('Raticate', 13483476, 28)], { weight: 1 }, 'Mitch', '(male)'),
         new DungeonTrainer('Preschooler',
@@ -10445,8 +10896,8 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
             {loot: 'Token_collector'},
         ],
         rare: [
-            {loot: 'Green Shard'},
-            {loot: 'Blue Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'Lime Shard'},
         ],
         epic: [
             {loot: 'Spooky Plate'},
@@ -10472,7 +10923,10 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
             {loot: 'Dowsing_machine'},
             {loot: 'Token_collector'},
         ],
-        rare: [{loot: 'Yellow Shard'}],
+        rare: [
+            {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+        ],
         epic: [
             {loot: 'Zap Plate'},
             {loot: 'Iron Plate'},
@@ -10483,8 +10937,8 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
     [
         new DungeonBossPokemon('Vikavolt', 69418380, 29),
         new DungeonBossPokemon('Togedemaru', 69418380, 33),
-        new DungeonBossPokemon('Totem Vikavolt', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
-        new DungeonBossPokemon('Totem Togedemaru', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Vikavolt', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Togedemaru', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1000000, 22,
     () => DungeonGainGymBadge(GymList['Sophocles\' Trial']));
@@ -10497,8 +10951,8 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
             {loot: 'Token_collector'},
         ],
         rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Blue Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Pink Shard'},
         ],
         epic: [{loot: 'Spooky Plate'}],
         mythic: [{loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Thrifty Megamart'))}],
@@ -10506,7 +10960,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     14705422,
     [
         new DungeonBossPokemon('Mimikyu', 73527110, 35),
-        new DungeonBossPokemon('Totem Mimikyu', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Mimikyu', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Vivillon (Poké Ball)',  96662023, 60, {
             hide: true,
             requirement: new MultiRequirement([
@@ -10551,7 +11005,7 @@ dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
         ],
         rare: [
             {loot: 'Red Shard'},
-            {loot: 'Yellow Shard'},
+            {loot: 'Cyan Shard'},
         ],
         epic: [{loot: 'Flame Plate'}],
         legendary: [{loot: 'Repeatball'}],
@@ -10630,7 +11084,7 @@ dungeonList['Po Town'] = new Dungeon('Po Town',
         ],
         rare: [
             {loot: 'Blue Shard'},
-            {loot: 'Green Shard'},
+            {loot: 'Lime Shard'},
         ],
         epic: [
             {loot: 'Insect Plate'},
@@ -10727,7 +11181,21 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
             {loot: 'xAttack'},
             {loot: 'Chesto'},
         ],
-        rare: [{loot: 'Cyan Shard'}],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
+            {loot: 'Pink Shard'},
+            {loot: 'Cyan Shard'},
+        ],
         epic: [
             {loot: 'Revive'},
             {loot: 'Iron Ball'},
@@ -10760,8 +11228,8 @@ dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
             {loot: 'Dowsing_machine'},
         ],
         rare: [
-            {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
+            {loot: 'Crimson Shard'},
         ],
         epic: [
             {loot: 'Earth Plate'},
@@ -10866,8 +11334,8 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
             {loot: 'xAttack'},
         ],
         rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Cyan Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
         ],
         epic: [
             {loot: 'Draco Plate'},
@@ -10888,7 +11356,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
     15992044,
     [
         new DungeonBossPokemon('Kommo-o', 79960220, 49),
-        new DungeonBossPokemon('Totem Kommo-o', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Kommo-o', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1125000, 25,
     () => DungeonGainGymBadge(GymList['Vast Poni Canyon Trial']));
@@ -10901,8 +11369,8 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
             {loot: 'Lucky_incense'},
         ],
         rare: [
-            {loot: 'Blue Shard'},
-            {loot: 'Yellow Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Pink Shard'},
         ],
         epic: [{loot: 'Pixie Plate'}],
         legendary: [{loot: 'Pink_Bow'}],
@@ -10911,7 +11379,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     16217412,
     [
         new DungeonBossPokemon('Ribombee', 81087060, 55),
-        new DungeonBossPokemon('Totem Ribombee', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Ribombee', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     1150000, 25,
     () => DungeonGainGymBadge(GymList['Mina\'s Trial']));
@@ -10997,6 +11465,14 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
+            {loot: 'Pink Shard'},
             {loot: 'Cyan Shard'},
         ],
         epic: [{loot: 'Icicle Plate'}],
@@ -11008,7 +11484,10 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
-        new DungeonBossPokemon('Necrozma', 83527125, 65),
+        new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new MultiRequirement([
+            new QuestLineCompletedRequirement('Ultra Beast Hunt'), // because we don't want to unhide all the other ultra beasts and it's a reference to SM
+            new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Encounter at least 1 Necrozma.'),
+        ])}),
     ],
     1175000, 26);
 
@@ -11020,8 +11499,10 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
             {loot: 'Chesto'},
         ],
         rare: [
-            {loot: 'Red Shard'},
             {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
         ],
         epic: [
             {loot: 'Mind Plate', weight: 2},
@@ -11031,12 +11512,12 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     },
     16435490,
     [
-        new DungeonBossPokemon('Minior (Meteor)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
-        new DungeonBossPokemon('Minior (Yellow Core)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
-        new DungeonBossPokemon('Minior (Violet Core)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
         new DungeonBossPokemon('Cosmog', 82177450, 70),
+        new DungeonBossPokemon('Minior (Meteor)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmoem', true)}),
         new DungeonBossPokemon('Cosmoem', 82177450, 70, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmoem')}),
+        new DungeonBossPokemon('Minior (Yellow Core)', 82177450, 60, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo', true), new ObtainedPokemonRequirement('Necrozma', true)])}),
         new DungeonBossPokemon('Solgaleo', 90673816, 100, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Necrozma')])}),
+        new DungeonBossPokemon('Minior (Violet Core)', 82177450, 60, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Lunala', true), new ObtainedPokemonRequirement('Necrozma', true)])}),
         new DungeonBossPokemon('Lunala', 90673816, 100, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new ObtainedPokemonRequirement('Necrozma')])}),
     ],
     1200000, 27);
@@ -11050,7 +11531,7 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
         ],
         rare: [
             {loot: 'Yellow Shard'},
-            {loot: 'Cyan Shard'},
+            {loot: 'Pink Shard'},
         ],
         epic: [
             {loot: 'Zap Plate'},
@@ -11073,10 +11554,7 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
             {loot: 'Dowsing_machine'},
             {loot: 'Cheri'},
         ],
-        rare: [
-            {loot: 'Green Shard'},
-            {loot: 'Cyan Shard'},
-        ],
+        rare: [{loot: 'Pink Shard'}],
         epic: [
             {loot: 'Stone Plate'},
             {loot: 'Mind Plate'},
@@ -11101,8 +11579,8 @@ dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
             {loot: 'Rawst'},
         ],
         rare: [
-            {loot: 'Red Shard'},
-            {loot: 'Cyan Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Pink Shard'},
         ],
         epic: [
             {loot: 'Insect Plate'},
@@ -11127,7 +11605,7 @@ dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
         ],
         rare: [
             {loot: 'Blue Shard'},
-            {loot: 'Cyan Shard'},
+            {loot: 'Pink Shard'},
         ],
         epic: [
             {loot: 'Splash Plate'},
@@ -11206,6 +11684,14 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
+            {loot: 'Pink Shard'},
             {loot: 'Cyan Shard'},
         ],
         epic: [
@@ -11397,8 +11883,21 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
             {loot: 'Lucky_incense'},
         ],
         rare: [
-            {loot: 'Rose Shard'},
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
             {loot: 'Grey Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
+            {loot: 'Pink Shard'},
+            {loot: 'Cyan Shard'},
+            {loot: 'Brown Shard'},
+            {loot: 'Rose Shard'},
         ],
         epic: [{loot: 'Iron Plate'}],
     },
@@ -11441,8 +11940,8 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Gigantamax Copperajah', 26704124, 52),
             ],
             { weight: 3 }, 'Rose', '(rose)'),
-        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
-        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
     ],
     1850000, 32);
 
@@ -11759,10 +12258,7 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
             {loot: 'Dowsing_machine'},
             {loot: 'Lucky_incense'},
         ],
-        rare: [
-            {loot: 'Brown Shard'},
-            {loot: 'Grey Shard'},
-        ],
+        rare: [{loot: 'Brown Shard'}],
         epic: [
             {loot: 'Hard Stone'},
             {loot: 'Everstone'},
@@ -11837,7 +12333,7 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
             {loot: 'White Shard'},
             {loot: 'Grey Shard'},
             {loot: 'Yellow Shard'},
-            {loot: 'Purple Shard'},
+            {loot: 'Crimson Shard'},
         ],
         legendary: [
             {loot: 'Dragon_Fang'},
@@ -11893,7 +12389,6 @@ dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
         ],
         rare: [
             {loot: 'Green Shard'},
-            {loot: 'Cyan Shard'},
             {loot: 'Rose Shard'},
         ],
         epic: [
@@ -11972,31 +12467,175 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Abomasnow', 161099869, 60),
         new DungeonBossPokemon('Trevenant', 161099869, 60),
         new DungeonBossPokemon('Weavile', 161099869, 60),
-        new DungeonBossPokemon('Calyrex', 169578810, 80, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 8) }),
+        new DungeonBossPokemon('Calyrex', 169578810, 80, { requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 8) }),
     ],
     2200000, 55);
 
+// Function, because we don't have 'player' on load
+const maxLairQuestStepRandomIndex = (index: number) => {
+    SeededRand.seed(+player.trainerId);
+    return SeededRand.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29])[index];
+};
+dungeonList['Max Lair'] = new Dungeon('Max Lair',
+    ['Ivysaur', 'Charmeleon', 'Wartortle', 'Grovyle', 'Sceptile', 'Combusken', 'Blaziken', 'Marshtomp', 'Swampert', 'Cradily', 'Cofagrigus', 'Fraxure', 'Toxtricity (Amped)', 'Toxtricity (Low Key)'],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'xClick'},
+        ],
+        rare: [
+            {loot: 'Brown Shard'},
+            {loot: 'Rose Shard'},
+        ],
+        epic: [
+            {loot: 'Draco Plate'},
+            {loot: 'Toxic Plate'},
+        ],
+        legendary: [{loot: 'Max Revive'}],
+        mythic: [{loot: 'Heart Scale'}],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Gigantamax Venusaur', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(0)), new ObtainedPokemonRequirement('Gigantamax Venusaur', true)]) }),
+        new DungeonBossPokemon('Gigantamax Venusaur', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Venusaur') }),
+        new DungeonBossPokemon('Gigantamax Charizard', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(1)), new ObtainedPokemonRequirement('Gigantamax Charizard', true)]) }),
+        new DungeonBossPokemon('Gigantamax Charizard', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Charizard') }),
+        new DungeonBossPokemon('Gigantamax Blastoise', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(2)), new ObtainedPokemonRequirement('Gigantamax Blastoise', true)]) }),
+        new DungeonBossPokemon('Gigantamax Blastoise', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Blastoise') }),
+        new DungeonBossPokemon('Gigantamax Butterfree', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(3)), new ObtainedPokemonRequirement('Gigantamax Butterfree', true)]) }),
+        new DungeonBossPokemon('Gigantamax Butterfree', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Butterfree') }),
+        new DungeonBossPokemon('Gigantamax Pikachu', 164353300, 70, { hide: true, weight: 4, requirement: new ObtainedPokemonRequirement('Gigantamax Pikachu', true) }),
+        new DungeonBossPokemon('Gigantamax Pikachu', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Pikachu') }),
+        new DungeonBossPokemon('Gigantamax Meowth', 164353300, 70, { hide: true, weight: 4, requirement: new ObtainedPokemonRequirement('Gigantamax Meowth', true) }),
+        new DungeonBossPokemon('Gigantamax Meowth', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Meowth') }),
+        new DungeonBossPokemon('Gigantamax Machamp', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(4)), new ObtainedPokemonRequirement('Gigantamax Machamp', true)]) }),
+        new DungeonBossPokemon('Gigantamax Machamp', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Machamp') }),
+        new DungeonBossPokemon('Gigantamax Gengar', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(5)), new ObtainedPokemonRequirement('Gigantamax Gengar', true)]) }),
+        new DungeonBossPokemon('Gigantamax Gengar', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Gengar') }),
+        new DungeonBossPokemon('Gigantamax Kingler', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(6)), new ObtainedPokemonRequirement('Gigantamax Kingler', true)]) }),
+        new DungeonBossPokemon('Gigantamax Kingler', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Kingler') }),
+        new DungeonBossPokemon('Gigantamax Lapras', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(7)), new ObtainedPokemonRequirement('Gigantamax Lapras', true)]) }),
+        new DungeonBossPokemon('Gigantamax Lapras', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Lapras') }),
+        new DungeonBossPokemon('Gigantamax Eevee', 164353300, 70, { hide: true, weight: 4, requirement: new ObtainedPokemonRequirement('Gigantamax Eevee', true) }),
+        new DungeonBossPokemon('Gigantamax Eevee', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Eevee') }),
+        new DungeonBossPokemon('Gigantamax Snorlax', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(8)), new ObtainedPokemonRequirement('Gigantamax Snorlax', true)]) }),
+        new DungeonBossPokemon('Gigantamax Snorlax', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Snorlax') }),
+        new DungeonBossPokemon('Gigantamax Garbodor', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(9)), new ObtainedPokemonRequirement('Gigantamax Garbodor', true)]) }),
+        new DungeonBossPokemon('Gigantamax Garbodor', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Garbodor') }),
+        new DungeonBossPokemon('Gigantamax Melmetal', 169578810, 70, { hide: true, weight: 2, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(10)), new ObtainedPokemonRequirement('Gigantamax Melmetal', true)]) }),
+        new DungeonBossPokemon('Gigantamax Melmetal', 169578810, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Melmetal') }),
+        new DungeonBossPokemon('Gigantamax Rillaboom', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(11)), new ObtainedPokemonRequirement('Gigantamax Rillaboom', true)]) }),
+        new DungeonBossPokemon('Gigantamax Rillaboom', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Rillaboom') }),
+        new DungeonBossPokemon('Gigantamax Cinderace', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(12)), new ObtainedPokemonRequirement('Gigantamax Cinderace', true)]) }),
+        new DungeonBossPokemon('Gigantamax Cinderace', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Cinderace') }),
+        new DungeonBossPokemon('Gigantamax Inteleon', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(13)), new ObtainedPokemonRequirement('Gigantamax Inteleon', true)]) }),
+        new DungeonBossPokemon('Gigantamax Inteleon', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Inteleon') }),
+        new DungeonBossPokemon('Gigantamax Corviknight', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(14)), new ObtainedPokemonRequirement('Gigantamax Corviknight', true)]) }),
+        new DungeonBossPokemon('Gigantamax Corviknight', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Corviknight') }),
+        new DungeonBossPokemon('Gigantamax Orbeetle', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(15)), new ObtainedPokemonRequirement('Gigantamax Orbeetle', true)]) }),
+        new DungeonBossPokemon('Gigantamax Orbeetle', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Orbeetle') }),
+        new DungeonBossPokemon('Gigantamax Drednaw', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(16)), new ObtainedPokemonRequirement('Gigantamax Drednaw', true)]) }),
+        new DungeonBossPokemon('Gigantamax Drednaw', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Drednaw') }),
+        new DungeonBossPokemon('Gigantamax Coalossal', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(17)), new ObtainedPokemonRequirement('Gigantamax Coalossal', true)]) }),
+        new DungeonBossPokemon('Gigantamax Coalossal', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Coalossal') }),
+        new DungeonBossPokemon('Gigantamax Flapple', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(18)), new ObtainedPokemonRequirement('Gigantamax Flapple', true)]) }),
+        new DungeonBossPokemon('Gigantamax Flapple', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Flapple') }),
+        new DungeonBossPokemon('Gigantamax Appletun', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(19)), new ObtainedPokemonRequirement('Gigantamax Appletun', true)]) }),
+        new DungeonBossPokemon('Gigantamax Appletun', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Appletun') }),
+        new DungeonBossPokemon('Gigantamax Sandaconda', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(20)), new ObtainedPokemonRequirement('Gigantamax Sandaconda', true)]) }),
+        new DungeonBossPokemon('Gigantamax Sandaconda', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Sandaconda') }),
+        new DungeonBossPokemon('Gigantamax Toxtricity', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(21)), new ObtainedPokemonRequirement('Gigantamax Toxtricity', true)]) }),
+        new DungeonBossPokemon('Gigantamax Toxtricity', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Toxtricity') }),
+        new DungeonBossPokemon('Gigantamax Centiskorch', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(22)), new ObtainedPokemonRequirement('Gigantamax Centiskorch', true)]) }),
+        new DungeonBossPokemon('Gigantamax Centiskorch', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Centiskorch') }),
+        new DungeonBossPokemon('Gigantamax Hatterene', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(23)), new ObtainedPokemonRequirement('Gigantamax Hatterene', true)]) }),
+        new DungeonBossPokemon('Gigantamax Hatterene', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Hatterene') }),
+        new DungeonBossPokemon('Gigantamax Grimmsnarl', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(24)), new ObtainedPokemonRequirement('Gigantamax Grimmsnarl', true)]) }),
+        new DungeonBossPokemon('Gigantamax Grimmsnarl', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Grimmsnarl') }),
+        new DungeonBossPokemon('Gigantamax Alcremie', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(25)), new ObtainedPokemonRequirement('Gigantamax Alcremie', true)]) }),
+        new DungeonBossPokemon('Gigantamax Alcremie', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Alcremie') }),
+        new DungeonBossPokemon('Gigantamax Copperajah', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(26)), new ObtainedPokemonRequirement('Gigantamax Copperajah', true)]) }),
+        new DungeonBossPokemon('Gigantamax Copperajah', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Copperajah') }),
+        new DungeonBossPokemon('Gigantamax Duraludon', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(27)), new ObtainedPokemonRequirement('Gigantamax Duraludon', true)]) }),
+        new DungeonBossPokemon('Gigantamax Duraludon', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Duraludon') }),
+        new DungeonBossPokemon('Gigantamax Urshifu (Single Strike)', 169578810, 70, { hide: true, weight: 2, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(28)), new ObtainedPokemonRequirement('Gigantamax Urshifu (Single Strike)', true)]) }),
+        new DungeonBossPokemon('Gigantamax Urshifu (Single Strike)', 169578810, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Urshifu (Single Strike)') }),
+        new DungeonBossPokemon('Gigantamax Urshifu (Rapid Strike)', 169578810, 70, { hide: true, weight: 2, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(29)), new ObtainedPokemonRequirement('Gigantamax Urshifu (Rapid Strike)', true)]) }),
+        new DungeonBossPokemon('Gigantamax Urshifu (Rapid Strike)', 169578810, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Urshifu (Rapid Strike)') }),
+        new DungeonBossPokemon('Eternamax Eternatus', 176361964, 100, { hide: true, requirement: new QuestLineCompletedRequirement('The Lair of Giants') }),
+    ],
+    2500000, 46);
+
 //Hisui Dungeons
+
+dungeonList['Floaro Gardens'] = new Dungeon('Floaro Gardens',
+    ['Wurmple', 'Silcoon', 'Cascoon', 'Pichu', 'Drifloon', 'Shinx', 'Luxio'],
+    {
+        common: [
+            {loot: 'Cheri'},
+            {loot: 'Rawst'},
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Nanab'},
+            {loot: 'Pinap'},
+        ],
+        rare: [{loot: 'Green Shard'}],
+        epic: [
+            {loot: 'Meadow Plate'},
+            {loot: 'Star Piece'},
+        ],
+        legendary: [{loot: 'Miracle_Seed'}],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Beautifly', 10000000, 31),
+        new DungeonBossPokemon('Dustox', 10000000, 31),
+        new DungeonBossPokemon('Shaymin (Land)', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+    ],
+    96500, 1);
 
 dungeonList['Oreburrow Tunnel'] = new Dungeon('Oreburrow Tunnel',
     ['Geodude', 'Machop', 'Zubat', 'Happiny'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri'},
+            {loot: 'Rawst'},
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Nanab'},
+            {loot: 'Pinap'},
         ],
+        rare: [
+            {loot: 'Brown Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Stone Plate'}],
+        legendary: [{loot: 'Rock_Incense'}],
     },
     2603000,
     [new DungeonBossPokemon('Graveler', 10000000, 28)],
-    96500, 1);
+    96500, 11);
 
 dungeonList.Heartwood = new Dungeon('Heartwood',
     ['Geodude', 'Zubat', 'Golbat', 'Psyduck', 'Wurmple', 'Silcoon', 'Cascoon', 'Combee', 'Buneary'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri'},
+            {loot: 'Rawst'},
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Nanab'},
+            {loot: 'Pinap'},
         ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Lime Shard'},
+        ],
+        epic: [{loot: 'Insect Plate'}],
+        legendary: [{loot: 'Silver_Powder'}],
     },
     2603000,
     [
@@ -12004,29 +12643,92 @@ dungeonList.Heartwood = new Dungeon('Heartwood',
         new DungeonBossPokemon('Beautifly', 10000000, 31),
         new DungeonBossPokemon('Dustox', 10000000, 31),
     ],
-    96500, 1);
+    96500, 10);
+
+// All Unown
+SeededRand.seed(123);
+const AncientSolaceonUnownList = SeededRand.shuffleArray('ABCDEFGHIJKLMNOPQRSTUVWXYZ?!'.split(''));
+
+dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
+    ['Paras', 'Carnivine', 'Croagunk', 'Yanma', 'Stunky', 'Kirlia'],
+    {
+        common: [
+            {loot: 'Cheri'},
+            {loot: 'Pecha'},
+            {loot: 'Chesto'},
+            {loot: 'Aspear'},
+            {loot: 'Leppa'},
+            {loot: 'Razz'},
+        ],
+        rare: [
+            {loot: 'Pink Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Mind Plate'}],
+        legendary: [{loot: 'Twisted_Spoon'}],
+    },
+    960000,
+    [
+        ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AncientSolaceonUnownList) == char),
+        })),
+    ],
+    96500, 13);
 
 dungeonList['Shrouded Ruins'] = new Dungeon('Shrouded Ruins',
     ['Geodude', 'Graveler', 'Rhyhorn', 'Gastly', 'Haunter', 'Lickitung', 'Ralts', 'Kirlia', 'Carnivine', 'Burmy (Sand)'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
+            {loot: 'Cheri'},
+            {loot: 'Pecha'},
+            {loot: 'Chesto'},
             {loot: 'Aspear'},
+            {loot: 'Leppa'},
+            {loot: 'Razz'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
         ],
+        rare: [
+            {loot: 'Black Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [
+            {loot: 'Spooky Plate'},
+            {loot: 'Dread Plate'},
+        ],
+        legendary: [{loot: 'Black_Glasses'}],
     },
     2603000,
     [
         new DungeonBossPokemon('Lickilicky', 10000000, 52),
         new DungeonBossPokemon('Spiritomb', 10000000, 80),
     ],
-    96500, 1);
+    96500, 16);
 
 dungeonList['Veilstone Cape'] = new Dungeon('Veilstone Cape',
     ['Glameow', 'Murkrow', 'Vulpix', 'Mothim', 'Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [{loot: 'Flame Plate'}],
+        legendary: [
+            {loot: 'Charcoal'},
+            {loot: 'Rock_Incense'},
         ],
     },
     2603000,
@@ -12036,78 +12738,265 @@ dungeonList['Veilstone Cape'] = new Dungeon('Veilstone Cape',
         new DungeonBossPokemon('Dustox', 10000000, 47),
         new DungeonBossPokemon('Hisuian Growlithe', 10000000, 47),
     ],
-    96500, 1);
+    96500, 31);
 
 dungeonList['Firespit Island'] = new Dungeon('Firespit Island',
     ['Graveler', 'Magby', 'Magmar'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
+            {loot: 'Cheri'},
+            {loot: 'Pecha'},
+            {loot: 'Chesto'},
             {loot: 'Aspear'},
+            {loot: 'Leppa'},
+            {loot: 'Razz'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Grey Shard'},
+        ],
+        epic: [
+            {loot: 'Flame Plate'},
+            {loot: 'Iron Plate'},
+        ],
+        legendary: [
+            {loot: 'Charcoal'},
+            {loot: 'Metal_Powder'},
         ],
     },
     2603000,
-    [new DungeonBossPokemon('Ninetales', 10000000, 61)],
-    96500, 1);
+    [
+        new DungeonBossPokemon('Ninetales', 10000000, 61),
+        new DungeonBossPokemon('Heatran', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+    ],
+    96500, 36);
 
 dungeonList['Ancient Wayward Cave'] = new Dungeon('Ancient Wayward Cave',
     ['Zubat', 'Golbat', 'Barboach', 'Whiscash', 'Gible'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Chesto', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Aspear', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Mago', weight: 2},
+            {loot: 'Iapapa', weight: 2},
+            {loot: 'Wiki', weight: 2},
+            {loot: 'Aguav', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Cyan Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Revive'}],
+        legendary: [
+            {loot: 'Star Piece'},
+            {loot: 'MediumRestore'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ancient Wayward Cave'))},
         ],
     },
     2603000,
     [new DungeonBossPokemon('Crobat', 10000000, 60)],
-    96500, 1);
+    96500, 38);
 
 dungeonList['Ancient Quarry'] = new Dungeon('Ancient Quarry',
-    ['Bronzor'],
+    ['Bronzor', 'Goomy', 'Stunky', 'Croagunk', 'Skuntank', 'Toxicroak'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Chesto', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Aspear', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Mago', weight: 2},
+            {loot: 'Iapapa', weight: 2},
+            {loot: 'Wiki', weight: 2},
+            {loot: 'Aguav', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Grey Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Revive'}],
+        legendary: [
+            {loot: 'Star Piece'},
+            {loot: 'MediumRestore'},
+            {loot: 'LargeRestore'},
+            {loot: 'Metal_Powder'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ancient Quarry'))},
         ],
     },
     2603000,
-    [new DungeonBossPokemon('Bronzong', 10000000, 55)],
-    96500, 1);
+    [
+        new DungeonBossPokemon('Bronzong', 10000000, 55),
+        new DungeonBossPokemon('Hisuian Sliggoo', 10000000, 55),
+    ],
+    96500, 39);
 
 dungeonList['Primeval Grotto'] = new Dungeon('Primeval Grotto',
-    ['Bronzor'],
+    ['Bronzor', 'Scyther', 'Gligar', 'Nosepass', 'Gyarados', 'Cherubi', 'Cherrim (Overcast)'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Chesto', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Aspear', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Mago', weight: 2},
+            {loot: 'Iapapa', weight: 2},
+            {loot: 'Wiki', weight: 2},
+            {loot: 'Aguav', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Brown Shard'},
+            {loot: 'Purple Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Revive'}],
+        legendary: [
+            {loot: 'Star Piece'},
+            {loot: 'MediumRestore'},
+            {loot: 'LargeRestore'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Primeval Grotto'))},
         ],
     },
     2603000,
-    [new DungeonBossPokemon('Nosepass', 10000000, 71)],
-    96500, 1);
+    [
+        new DungeonBossPokemon('Probopass', 10000000, 71),
+        new DungeonBossPokemon('Gliscor', 10000000, 71),
+        new DungeonBossPokemon('Hisuian Sneasel', 10000000, 71),
+    ],
+    96500, 42);
 
 dungeonList['Clamberclaw Cliffs'] = new Dungeon('Clamberclaw Cliffs',
     ['Gligar', 'Geodude', 'Graveler', 'Gastly', 'Haunter', 'Gible', 'Burmy (Sand)', 'Wormadam (Sand)', 'Bronzor'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Chesto', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Aspear', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Mago', weight: 2},
+            {loot: 'Iapapa', weight: 2},
+            {loot: 'Wiki', weight: 2},
+            {loot: 'Aguav', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Black Shard'},
+            {loot: 'Purple Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [
+            {loot: 'Revive'},
+            {loot: 'Toxic Plate'},
+        ],
+        legendary: [
+            {loot: 'Star Piece'},
+            {loot: 'MediumRestore'},
+            {loot: 'LargeRestore'},
+            {loot: 'Poison_Barb'},
+            {loot: 'Black_Glasses'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Clamberclaw Cliffs'))},
         ],
     },
     2603000,
     [
         new DungeonBossPokemon('Bronzong', 10000000, 44),
         new DungeonBossPokemon('Gabite', 10000000, 47),
-        new DungeonBossPokemon('Darkrai', 10000000, 70),
+        new DungeonBossPokemon('Darkrai', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
-    96500, 1);
+    96500, 40);
 
 dungeonList['Celestica Ruins'] = new Dungeon('Celestica Ruins',
     ['Geodude', 'Graveler', 'Nosepass', 'Gligar', 'Burmy (Sand)', 'Gastly', 'Haunter', 'Bonsly', 'Misdreavus'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Chesto', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Aspear', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Mago', weight: 2},
+            {loot: 'Iapapa', weight: 2},
+            {loot: 'Wiki', weight: 2},
+            {loot: 'Aguav', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Lime Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Revive'}],
+        legendary: [
+            {loot: 'Star Piece'},
+            {loot: 'MediumRestore'},
+            {loot: 'LargeRestore'},
+            {loot: 'Silver_Powder'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Celestica Ruins'))},
         ],
     },
     2603000,
@@ -12115,14 +13004,45 @@ dungeonList['Celestica Ruins'] = new Dungeon('Celestica Ruins',
         new DungeonBossPokemon('Sudowoodo', 10000000, 57),
         new DungeonBossPokemon('Wormadam (Sand)', 10000000, 57),
     ],
-    96500, 1);
+    96500, 40);
 
 dungeonList['Sacred Plaza'] = new Dungeon('Sacred Plaza',
     ['Geodude', 'Graveler', 'Rhyhorn', 'Gastly', 'Haunter', 'Burmy (Sand)', 'Wormadam (Sand)', 'Nosepass', 'Luxio', 'Chingling', 'Chimecho', 'Misdreavus', 'Rotom', 'Hisuian Voltorb'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Chesto', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Aspear', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Mago', weight: 2},
+            {loot: 'Iapapa', weight: 2},
+            {loot: 'Wiki', weight: 2},
+            {loot: 'Aguav', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Revive'}],
+        legendary: [
+            {loot: 'Star Piece'},
+            {loot: 'MediumRestore'},
+            {loot: 'LargeRestore'},
+            {loot: 'Soft_Sand'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Celestica Ruins'))},
         ],
     },
     2603000,
@@ -12130,127 +13050,433 @@ dungeonList['Sacred Plaza'] = new Dungeon('Sacred Plaza',
         new DungeonBossPokemon('Rhydon', 10000000, 71),
         new DungeonBossPokemon('Luxray', 10000000, 55),
     ],
-    96500, 1);
-
-dungeonList['Crevasse Passage'] = new Dungeon('Crevasse Passage',
-    ['Bergmite'],
-    {
-        common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
-        ],
-    },
-    2603000,
-    [new DungeonBossPokemon('Bergmite', 10000000, 51)],
-    96500, 1);
+    96500, 45);
 
 dungeonList['Avalugg\'s Legacy'] = new Dungeon('Avalugg\'s Legacy',
-    ['Bergmite', 'Swinub', 'Piloswine', 'Drifloon', 'Drifblim', 'Bibarel', 'Glalie', 'Froslass'],
+    ['Hisuian Sneasel', 'Bergmite', 'Swinub', 'Piloswine', 'Drifloon', 'Drifblim', 'Bibarel', 'Glalie', 'Froslass'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
+            {loot: 'Chesto'},
             {loot: 'Aspear'},
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Razz'},
         ],
+        rare: [
+            {loot: 'White Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Icicle Plate'}],
+        legendary: [{loot: 'Never_Melt_Ice'}],
     },
     2603000,
     [
         new DungeonBossPokemon('Mamoswine', 10000000, 68),
         new DungeonBossPokemon('Hisuian Avalugg', 10000000, 51),
     ],
-    96500, 1);
+    96500, 48);
 
 dungeonList['Ice Column Chamber'] = new Dungeon('Ice Column Chamber',
     ['Bergmite', 'Misdreavus'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
+            {loot: 'Chesto'},
             {loot: 'Aspear'},
+            {loot: 'Pecha'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Razz'},
         ],
+        rare: [{loot: 'White Shard'}],
+        epic: [{loot: 'Icicle Plate'}],
     },
     2603000,
     [new DungeonBossPokemon('Froslass', 10000000, 72)],
-    96500, 1);
+    96500, 51);
 
 dungeonList['Icepeak Cavern'] = new Dungeon('Icepeak Cavern',
     ['Bergmite', 'Misdreavus', 'Hisuian Zorua'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
+            {loot: 'Chesto'},
             {loot: 'Aspear'},
+            {loot: 'Pecha'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Razz'},
         ],
+        rare: [
+            {loot: 'White Shard'},
+            {loot: 'Purple Shard'},
+        ],
+        epic: [{loot: 'Icicle Plate'}],
+        legendary: [{loot: 'Never_Melt_Ice'}],
     },
     2603000,
     [new DungeonBossPokemon('Hisuian Zoroark', 10000000, 67)],
-    96500, 1);
+    96500, 49);
 
 dungeonList['Ancient Snowpoint Temple'] = new Dungeon('Ancient Snowpoint Temple',
     ['Zubat', 'Golbat', 'Graveler', 'Ralts', 'Kirlia', 'Glalie', 'Froslass', 'Bronzor', 'Bronzong'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
+            {loot: 'Chesto'},
             {loot: 'Aspear'},
+            {loot: 'Pecha'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Razz'},
         ],
+        rare: [{loot: 'White Shard'}],
+        // epic: [{loot: 'Blank Plate'}],
+        legendary: [{loot: 'Silk_Scarf'}],
     },
     2603000,
     [
         new DungeonBossPokemon('Gallade', 10000000, 70),
-        new DungeonBossPokemon('Regigigas', 10000000, 70),
+        new DungeonBossPokemon('Regigigas', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
-    96500, 1);
+    96500, 54);
 
 dungeonList['Seaside Hollow'] = new Dungeon('Seaside Hollow',
     ['Octillery', 'Phione'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
         ],
+        rare: [{loot: 'Blue Shard'}],
+        epic: [{loot: 'Splash Plate'}],
+        legendary: [{loot: 'Mystic_Water'}],
     },
     2603000,
     [new DungeonBossPokemon('Manaphy', 10000000, 50)],
-    96500, 1);
+    96500, 36);
 
 dungeonList['Ancient Lake Verity'] = new Dungeon('Ancient Lake Verity',
     ['Magikarp', 'Gyarados', 'Luxio', 'Luxray', 'Wormadam (Plant)', 'Drifblim', 'Togekiss'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
+            {loot: 'Cheri'},
+            {loot: 'Rawst'},
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Razz'},
+            {loot: 'Nanab'},
+            {loot: 'Pinap'},
         ],
+        rare: [
+            {loot: 'Red Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Draco Plate'}],
+        legendary: [{loot: 'Twisted_Spoon'}],
     },
     2603000,
     [
         new DungeonBossPokemon('Hisuian Goodra', 10000000, 58),
-        new DungeonBossPokemon('Mesprit', 10000000, 70),
+        new DungeonBossPokemon('Mesprit', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
-    96500, 1);
+    96500, 3);
 
 dungeonList['Ancient Lake Valor'] = new Dungeon('Ancient Lake Valor',
     ['Graveler', 'Barboach', 'Whiscash'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Cheri'},
+            {loot: 'Pecha'},
+            {loot: 'Chesto'},
             {loot: 'Aspear'},
+            {loot: 'Leppa'},
+            {loot: 'Razz'},
         ],
+        rare: [
+            {loot: 'Blue Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Draco Plate'}],
+        legendary: [{loot: 'Twisted_Spoon'}],
     },
     2603000,
     [
         new DungeonBossPokemon('Overqwil', 10000000, 58),
-        new DungeonBossPokemon('Azelf', 10000000, 70),
+        new DungeonBossPokemon('Azelf', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
-    96500, 1);
+    96500, 16);
 
 dungeonList['Ancient Lake Acuity'] = new Dungeon('Ancient Lake Acuity',
     ['Abra', 'Kadabra', 'Chingling', 'Chimecho', 'Burmy (Trash)', 'Wormadam (Trash)', 'Rufflet', 'Basculin (White-Striped)'],
     {
         common: [
-            {loot: 'Token_collector', weight: 2},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Chesto'},
             {loot: 'Aspear'},
+            {loot: 'Leppa'},
+            {loot: 'Razz'},
         ],
+        rare: [
+            {loot: 'Yellow Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [{loot: 'Draco Plate'}],
+        legendary: [{loot: 'Twisted_Spoon'}],
     },
     2603000,
     [
         new DungeonBossPokemon('Hisuian Zoroark', 10000000, 58),
-        new DungeonBossPokemon('Uxie', 10000000, 70),
+        new DungeonBossPokemon('Uxie', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
-    96500, 1);
+    96500, 54);
+
+dungeonList['Temple of Sinnoh'] = new Dungeon('Temple of Sinnoh',
+    ['Bronzong', 'Floatzel', 'Magnezone', 'Lumineon', 'Lucario', 'Bibarel', 'Garchomp'],
+    {
+        common: [
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Chesto', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Aspear', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Figy', weight: 2},
+            {loot: 'Mago', weight: 2},
+            {loot: 'Iapapa', weight: 2},
+            {loot: 'Wiki', weight: 2},
+            {loot: 'Aguav', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Grey Shard'},
+            {loot: 'Ochre Shard'},
+            {loot: 'Crimson Shard'},
+            {loot: 'Lime Shard'},
+            {loot: 'Black Shard'},
+            {loot: 'White Shard'},
+            {loot: 'Pink Shard'},
+            {loot: 'Cyan Shard'},
+            {loot: 'Brown Shard'},
+            {loot: 'Rose Shard'},
+            // {loot: 'Beige Shard'},
+        ],
+        epic: [
+            // {loot: 'Blank Plate'},
+            {loot: 'Draco Plate'},
+            {loot: 'Dread Plate'},
+            {loot: 'Earth Plate'},
+            {loot: 'Fist Plate'},
+            {loot: 'Flame Plate'},
+            {loot: 'Icicle Plate'},
+            {loot: 'Insect Plate'},
+            {loot: 'Iron Plate'},
+            {loot: 'Meadow Plate'},
+            {loot: 'Mind Plate'},
+            {loot: 'Pixie Plate'},
+            {loot: 'Sky Plate'},
+            {loot: 'Splash Plate'},
+            {loot: 'Spooky Plate'},
+            {loot: 'Stone Plate'},
+            {loot: 'Toxic Plate'},
+            {loot: 'Zap Plate'},
+            {loot: 'Revive'},
+        ],
+        legendary: [
+            {loot: 'MediumRestore'},
+            {loot: 'LargeRestore'},
+            {loot: 'Silk_Scarf'},
+        ],
+        mythic: [
+            {loot: 'Max Revive'},
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Temple of Sinnoh'))},
+        ],
+    },
+    1350400,
+    [
+        new DungeonTrainer('The Galaxy Team\'s Kamado',
+            [
+                new GymPokemon('Hisuian Braviary', 1128000, 61),
+                new GymPokemon('Golem', 1128000, 61),
+                new GymPokemon('Clefable', 1128000, 61),
+                new GymPokemon('Snorlax', 1128000, 61),
+            ], { weight: 4 }),
+        new DungeonBossPokemon('Dialga (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Palkia (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+    ],
+    96500, 46);
+
+dungeonList['Turnback Cave'] = new Dungeon('Turnback Cave',
+    ['Gabite', 'Hisuian Sliggoo', 'Dusclops', 'Gengar', 'Rotom', 'Drifblim', 'Hisuian Zorua'],
+    {
+        common: [
+            {loot: 'Cheri', weight: 2},
+            {loot: 'Pecha', weight: 2},
+            {loot: 'Rawst', weight: 2},
+            {loot: 'Oran', weight: 2},
+            {loot: 'Sitrus', weight: 2},
+            {loot: 'Nanab', weight: 2},
+            {loot: 'Leppa', weight: 2},
+            {loot: 'Pinap', weight: 2},
+            {loot: 'Razz', weight: 2},
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Greatball', weight: 1.5},
+            {loot: 'Ultraball'},
+        ],
+        rare: [
+            {loot: 'Purple Shard'},
+            {loot: 'Black Shard'},
+        ],
+        epic: [
+            {loot: 'Spooky Plate'},
+            {loot: 'Draco Plate'},
+        ],
+        legendary: [
+            {loot: 'Spell_Tag'},
+            {loot: 'Dragon_Fang'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Garchomp', 10000000, 58),
+        new DungeonBossPokemon('Dusknoir', 10000000, 58),
+        new DungeonBossPokemon('Mismagius', 10000000, 58),
+        new DungeonBossPokemon('Froslass', 10000000, 58),
+        new DungeonBossPokemon('Giratina (Origin)', 10000000, 70),
+    ],
+    96500, 32);
+
+// Paldea Dungeons
+dungeonList['Inlet Grotto'] = new Dungeon('Inlet Grotto',
+    ['Diglett', 'Houndour', 'Yungoos'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Houndoom', 161099869, 30)],
+    2200000, 1);
+
+//This is ridiculous. Should certainly be split up if a way to do so is found, and possibly some encounters removed outright.
+dungeonList['Glaseado Mountain'] = new Dungeon('Glaseado Mountain',
+    ['Magneton', 'Haunter', 'Sneasel', 'Ursaring', 'Delibird', 'Kirlia', 'Gardevoir', 'Vigoroth', 'Grumpig'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Spiritomb', 161099869, 30),
+        new DungeonBossPokemon('Cetitan', 161099869, 30),
+        new DungeonBossPokemon('Arctibax', 161099869, 30),
+    ],
+    2200000, 1);
+
+dungeonList['Grasswither Shrine'] = new Dungeon('Grasswither Shrine',
+    ['Shiftry', 'Cacturne'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Wo-Chien', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Icerend Shrine'] = new Dungeon('Icerend Shrine',
+    ['Weavile'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Chien-Pao', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Groundblight Shrine'] = new Dungeon('Groundblight Shrine',
+    ['Krookodile'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Ting-Lu', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Firescourge Shrine'] = new Dungeon('Firescourge Shrine',
+    ['Houndoom'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Chi-Yu', 161099869, 60)],
+    2200000, 1);
+
+// May be split up into two areas (Area Zero: Heights & Area Zero: Lower (Needs better name)).
+//To have some of the regular Paradox mons be exclusive to one area, I am likely going to have Slither Wing/Iron Moth and Sandy Shocks/Iron Thorns be exclusive to Area Zero (pretty sure they actually are, anyway), and Great Tusk/Iron Treads and Flutter Mane/Iron Jugulis be exclusive to Area Zero Depths
+dungeonList['Area Zero'] = new Dungeon('Area Zero',
+    ['Venomoth', 'Meditite', 'Medicham', 'Braviary', 'Corviknight', 'Floette (White)', 'Raichu', 'Jumpluff', 'Girafarig', 'Volcarona', 'Frosmoth', 'Farigiraf', 'Swablu', 'Altaria', 'Flamigo', 'Phanpy', 'Donphan', 'Talonflame', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Garganacl', 'Masquerain', 'Tadbulb', 'Bellibolt', 'Pawniard', 'Bisharp', 'Numel', 'Camerupt', 'Sneasel', 'Weavile', 'Scream Tail', 'Iron Bundle', 'Brute Bonnet', 'Iron Hands', 'Flutter Mane', 'Iron Jugulis', 'Slither Wing', 'Iron Moth', 'Sandy Shocks', 'Iron Thorns'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Glimmora', 161099869, 30, { weight: 4 }),
+        new DungeonBossPokemon('Roaring Moon', 161099869, 30, {hide: true, weight: 2, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+        new DungeonBossPokemon('Iron Valiant', 161099869, 30, {hide: true, weight: 2, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+    ],
+    2200000, 1);
+
+dungeonList['Area Zero Depths'] = new Dungeon('Area Zero Depths',
+    ['Glimmet', 'Dunsparce', 'Gible', 'Gabite', 'Sableye', 'Garganacl', 'Greavard', 'Houndstone', 'Dugtrio', 'Zweilous', 'Dreepy', 'Drakloak', 'Espathra', 'Dudunsparce (Two-Segment)', 'Great Tusk', 'Iron Treads', 'Scream Tail', 'Iron Bundle', 'Flutter Mane', 'Iron Jugulis', 'Brute Bonnet', 'Iron Hands', /*Slither Wing and Iron Moth are only found in Grass. I have never seen Grass, nor these Pokémon, in the depths, so they may not actually spawn here*/'Slither Wing', 'Iron Moth', /*Sandy Shocks have the same situation as Slither Wing and Iron Moth, except in Rocky environment*/'Sandy Shocks', 'Iron Thorns'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+        epic: [{loot: 'Heart Scale'}],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Glimmora', 161099869, 30, { weight: 5 }),
+        new DungeonBossPokemon('Koraidon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+        new DungeonBossPokemon('Miraidon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+    ],
+    2200000, 1);

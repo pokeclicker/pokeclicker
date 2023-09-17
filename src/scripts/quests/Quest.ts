@@ -20,6 +20,7 @@ abstract class Quest {
     inQuestLine: boolean;
     _onLoad?: () => void;
     onLoadCalled: boolean;
+    suspended: boolean;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -28,6 +29,7 @@ abstract class Quest {
         this.claimed = ko.observable(false);
         this.notified = false;
         this.onLoadCalled = false;
+        this.suspended = false;
     }
 
     public static canComplete() {
@@ -135,6 +137,10 @@ abstract class Quest {
             if (newValue < this.focusValue) {
                 this.initial(this.initial() - (this.focusValue - newValue));
             }
+            // Prevent progress on suspended quests by adjusting the initial value
+            if (this.suspended && newValue > this.focusValue) {
+                this.initial(this.initial() + (newValue - this.focusValue));
+            }
             this.focusValue = newValue;
         });
 
@@ -186,7 +192,12 @@ abstract class Quest {
         }
     }
 
-    complete() {
+    complete(bypassAutoCompleter = false) {
+        if (bypassAutoCompleter) {
+            this.deleteAutoCompleter();
+            // Was consequently disposed on auto completion.
+            this.focusSub?.dispose();
+        }
         this.initial(this.focus() - this.amount);
     }
 
@@ -195,9 +206,13 @@ abstract class Quest {
         this.autoCompleter = this.isCompleted.subscribe(() => {
             if (this.isCompleted()) {
                 this.claim();
-                this.autoCompleter.dispose();
+                this.deleteAutoCompleter();
             }
         });
+    }
+
+    deleteAutoCompleter() {
+        this.autoCompleter?.dispose();
     }
 
     //#endregion

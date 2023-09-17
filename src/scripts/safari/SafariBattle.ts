@@ -14,7 +14,7 @@ class SafariBattle {
         SafariBattle._enemy(pokemon);
     }
 
-    public static load(enemy = SafariPokemon.random()) {
+    public static load(enemy = SafariPokemon.random(Safari.activeEnvironment())) {
         // Stop left over keypresses
         GameController.simulateKey('ArrowUp', 'up');
         GameController.simulateKey('ArrowDown', 'up');
@@ -148,6 +148,9 @@ class SafariBattle {
     private static capturePokemon(isgameOver: boolean) {
         SafariBattle.text(`GOTCHA!<br>${SafariBattle.enemy.displayName} was caught!`);
         GameHelper.incrementObservable(App.game.statistics.safariPokemonCaptured, 1);
+        if (SafariBattle.enemy.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.safariShinyPokemonCaptured, 1);
+        }
         const pokemonID = PokemonHelper.getPokemonByName(SafariBattle.enemy.name).id;
         App.game.party.gainPokemonById(pokemonID, SafariBattle.enemy.shiny);
         const partyPokemon = App.game.party.getPokemon(pokemonID);

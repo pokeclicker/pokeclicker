@@ -53,6 +53,11 @@ enum BadgeEnums {
     'Elite_L_Disk',
     'Elite_R_Disk',
     'Elite_U_Disk',
+    'Elite_ColosseumLovrina',
+    'Elite_ColosseumSnattle',
+    'Elite_ColosseumGorigan',
+    'Elite_ColosseumArdos',
+    'Elite_ColosseumEldes',
     // Sinnoh
     'Coal',
     'Forest',
@@ -148,12 +153,45 @@ enum BadgeEnums {
     // Crown
     'Elite_CrownChampion',
     // Hisui
-    'Elite_NobleKleavor',
-    'Elite_NobleLilligant',
-    'Elite_NobleArcanine',
-    'Elite_NobleElectrode',
-    'Elite_NobleAvalugg',
-    'Elite_Volo',
+    'Noble_Kleavor',
+    'Noble_Lilligant',
+    'Noble_Arcanine',
+    'Noble_Electrode',
+    'Noble_Avalugg',
+    'Azure',
+    //Paldea Victory Road
+    'Bug_Gym',
+    'Grass_Gym',
+    'Electric_Gym',
+    'Water_Gym',
+    'Normal_Gym',
+    'Ghost_Gym',
+    'Psychic_Gym',
+    'Ice_Gym',
+    'Elite_Rika',
+    'Elite_Poppy',
+    'Elite_Larry',
+    'Elite_Hassel',
+    'Elite_PaldeaChampion',
+    'Elite_Nemona',
+    // Starfall Street
+    'Dark_Star',
+    'Fire_Star',
+    'Poison_Star',
+    'Fairy_Star',
+    'Fighting_Star',
+    'Elite_Clavell',
+    'Elite_Penny',
+    // Path of Legends
+    'Rock_Titan',
+    'Flying_Titan',
+    'Steel_Titan',
+    'Ground_Titan',
+    'Dragon_Titan',
+    'Elite_Arven',
+    // The Way Home
+    'Scarlet',
+    'Violet',
 }
 
 export default BadgeEnums;

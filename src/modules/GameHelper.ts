@@ -187,4 +187,41 @@ export default class GameHelper {
         $outer.remove();
         return 100 - widthWithScroll;
     }
+
+    /**
+     * Insecure hash, but should keep some of the nosy people out.
+     * @param text
+     */
+    public static hash(text: string): number {
+        let hash = 0;
+        let i = 0;
+        let chr = 0;
+        if (text.length === 0) {
+            return hash;
+        }
+
+        for (i = 0; i < text.length; i++) {
+            chr = text.charCodeAt(i);
+            // eslint-disable-next-line no-bitwise
+            hash = ((hash << 5) - hash) + chr;
+            // eslint-disable-next-line no-bitwise
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    }
+
+    public static isColorLight(color: string): boolean {
+        const r = parseInt(color.substring(1, 3), 16), g = parseInt(color.substring(3, 5), 16), b = parseInt(color.substring(5), 16);
+        const grey = r * 0.299 + g * 0.587 + b * 0.114; // Range between 0 and 255, based on NTSC formula.
+        return grey > 127;
+    }
+
+    public static isDevelopmentBuild(): boolean {
+        // This was done like this so es/tslint doesn't throw errors
+        try {
+            return !!JSON.parse('$DEVELOPMENT');
+        } catch (e) {
+            return false;
+        }
+    }
 }

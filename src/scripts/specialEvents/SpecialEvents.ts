@@ -144,10 +144,12 @@ class SpecialEvents implements Feature {
             Bulbausaur (Clone)
             Charmander (Clone)
             Squirtle (Clone)
+            Pikachu (Clone)
         Dungeon.ts:
-            Armored Mewtwo in Cerulean Cave
+            New Island as a dungeon
+            Armored Mewtwo in New Island
         */
-        this.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokémon roaming in Kanto.',
+        this.newEvent('Mewtwo strikes back!', '"New Island" has appeared off the coast of Kanto. Go stop Mewtwo!',
             // Start
             new Date(new Date().getFullYear(), 6, 18, 1), () => {
             },
@@ -159,28 +161,10 @@ class SpecialEvents implements Feature {
         this.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
             // Start
             new Date(new Date().getFullYear(), 9, 30, 1), () => {
-                SeededRand.seed(new Date().getFullYear());
-                Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
-                    SeededRand.boolean() ? route.pokemon.land.push('Spooky Bulbasaur') : null;
-                    SeededRand.boolean() ? route.pokemon.land.push('Gastly') : null;
-                });
-                Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => {
-                    SeededRand.boolean() ? route.pokemon.land.push('Spooky Togepi') : null;
-                    SeededRand.boolean() ? route.pokemon.land.push('Misdreavus') : null;
-                });
-                Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => {
-                    SeededRand.boolean() ? route.pokemon.land.push('Pikachu (Gengar)') : null;
-                    SeededRand.boolean() ? route.pokemon.land.push('Shuppet') : null;
-                    SeededRand.boolean() ? route.pokemon.land.push('Duskull') : null;
-                });
             },
             // End
             new Date(new Date().getFullYear(), 10, 5, 23), () => {
-                Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Bulbasaur', 'Gastly'].includes(p)));
-                Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Togepi', 'Misdreavus'].includes(p)));
-                Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
-            },
-            true
+            }
         );
         /* Let's Go P/E release date
         RoamingPokemonList.ts:

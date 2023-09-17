@@ -138,15 +138,15 @@ class Party implements Feature {
         const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
-        let expGained = 0;
+        let shadowExpGained = 0;
 
-        const maxLevel = App.game.badgeCase.maxLevel();
         for (const pokemon of this.caughtPokemon) {
-            if (pokemon.level < maxLevel) {
-                expGained += pokemon.gainExp(expTotal);
+            const exp = pokemon.gainExp(expTotal);
+            if (pokemon.shadow >= GameConstants.ShadowStatus.Shadow) {
+                shadowExpGained += exp;
             }
         }
-        App.game.purifyChamber.gainFlow(expGained);
+        App.game.purifyChamber.gainFlow(shadowExpGained);
     }
 
     /**
@@ -272,13 +272,14 @@ class Party implements Feature {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
 
-    alreadyCaughtPokemon(id: number, shiny = false, shadow = false) {
+    alreadyCaughtPokemon(id: number, shiny = false, shadow = false, purified = false) {
         const pokemon = this.getPokemon(id);
 
         if (pokemon) {
             const shinyOkay = (!shiny || pokemon.shiny);
             const shadowOkay = (!shadow || (pokemon.shadow > GameConstants.ShadowStatus.None));
-            return shinyOkay && shadowOkay;
+            const purifiedOkay = (!purified || (pokemon.shadow == GameConstants.ShadowStatus.Purified));
+            return shinyOkay && shadowOkay && purifiedOkay;
         }
         return false;
     }
