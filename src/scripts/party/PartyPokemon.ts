@@ -376,11 +376,6 @@ class PartyPokemon implements Saveable {
     });
 
     public matchesHatcheryFilters = ko.pureComputed(() => {
-        // Check _category() again since matchesHatcheryFiltersNonCat doesn't subscribe to it
-        return this.matchesHatcheryFiltersNonCat && !(BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value());
-    });
-
-    public matchesHatcheryFiltersNonCat = ko.pureComputed(() => {
         // Check if search matches englishName or displayName
         const displayName = PokemonHelper.displayName(this.name)();
         const filterName = BreedingFilters.name.value();
@@ -394,8 +389,8 @@ class PartyPokemon implements Saveable {
             return false;
         }
 
-        // Check based on category, but avoid subscribing to not recompute BreedingController.hatcherySortedFilteredList too often
-        if (BreedingFilters.category.value() >= 0 && this._category.peek() !== BreedingFilters.category.value()) {
+        // Check based on category
+        if (BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value()) {
             return false;
         }
 
@@ -456,6 +451,11 @@ class PartyPokemon implements Saveable {
         return true;
     });
 
+    // Used in breedingModal display
+    public matchesHatcheryCategoryFilter = ko.pureComputed(() => {
+        return !(BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value());
+    });
+
     public giveHeldItem = (heldItem: HeldItem): void => {
         if (!this.heldItem() || heldItem.name != this.heldItem().name) {
             if (heldItem && !heldItem.canUse(this)) {
@@ -488,8 +488,8 @@ class PartyPokemon implements Saveable {
         } else { // Notifier.confirm is async
             this.addOrRemoveHeldItem(heldItem);
         }
-
     }
+
     private addOrRemoveHeldItem(heldItem: HeldItem) {
         if (this.heldItem() && this.heldItem().name == heldItem.name) {
             this.heldItem(undefined);

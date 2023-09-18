@@ -92,9 +92,18 @@ class BreedingController {
     ]
 
     public static initialize() {
-        // Create computed observable after App.game.party has been initialized
-        BreedingController.updateSortedFilteredList = ko.computed(BreedingController.updateSortedFilteredList)
-            .extend({ rateLimit: 550 }); // slightly longer than getFilteredList
+        Object.keys(BreedingFilters).forEach((key) => {
+            BreedingFilters[key].value.subscribe(() => {
+                BreedingController.awaitViewReset(true);
+            });
+        });
+
+        Settings.getSetting('hatcherySort').observableValue.subscribe(() => {
+            BreedingController.awaitViewReset(true);
+        });
+        Settings.getSetting('hatcherySortDirection').observableValue.subscribe(() => {
+            BreedingController.awaitViewReset(true);
+        });
     }
 
     public static openBreedingModal() {
@@ -191,29 +200,24 @@ class BreedingController {
     // Queue size limit setting
     public static queueSizeLimit = ko.observable(-1);
 
-    // Sorted list of pokemon matching hatchery filters (not guaranteed to be up-to-date for categories)
-    public static hatcherySortedFilteredList = ko.observable([]);
-
-    // Will be wrapped in a computed observable when BreedingController initializes
-    private static updateSortedFilteredList = function() {
+    private static _cachedSortedFilteredList = [];
+    public static hatcherySortedFilteredList = ko.pureComputed(() => {
         if (modalUtils.observableState.breedingModal !== 'show') {
-            return;
+            return BreedingController._cachedSortedFilteredList;
         }
-        // Reset the hatchery display if needed
-        if (BreedingController.shouldResetHatcheryView()) {
-            // Avoid immediately loading several pages if scrolled down
-            document.querySelector('#breeding-pokemon-list-container .scrolling-div-breeding-list').scrollTop = 0;
-            // Force reset the lazyloader
-            BreedingController.hatcherySortedFilteredList([]);
-            ko.tasks.runEarly();
-        }
-        // Copy to avoid modifying the cached array
-        const filteredList = [...BreedingController.getFilteredList()];
+        // Work in place to avoid modifying the cached list and to ensure the LazyLoader displays correctly
+        BreedingController._cachedSortedFilteredList.length = 0;
+        BreedingController._cachedSortedFilteredList.push(...BreedingController.getFilteredList());
         // Don't adjust attack based on region if debuff is disabled
         const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
-        filteredList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
-        BreedingController.hatcherySortedFilteredList(filteredList);
-    };
+        BreedingController._cachedSortedFilteredList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
+        if (BreedingController.awaitViewReset()) {
+            document.querySelector('#breeding-pokemon-list-container .scrolling-div-breeding-list').scrollTop = 0;
+            BreedingController.resetHatcheryView.notifySubscribers();
+            BreedingController.awaitViewReset(false);
+        }
+        return BreedingController._cachedSortedFilteredList;
+    }).extend({ rateLimit: 550 }); // slightly longer than getFilteredList
 
     private static _cachedFilteredList;
     // Filters for pokemon that match hatchery filters, but don't subscribe to PartyPokemon categories (can change too frequently with the modal open)
@@ -222,30 +226,16 @@ class BreedingController {
         if (BreedingController._cachedFilteredList && modalUtils.observableState.breedingModal !== 'show') {
             return BreedingController._cachedFilteredList;
         }
-        BreedingController._cachedFilteredList = App.game.party.caughtPokemon.filter((pokemon) => pokemon.matchesHatcheryFiltersNonCat());
+        const newFilteredList = App.game.party.caughtPokemon.filter((pokemon) => pokemon.matchesHatcheryFilters());
+        BreedingController._cachedFilteredList = newFilteredList;
         return BreedingController._cachedFilteredList;
     }).extend({ rateLimit: 500 });
 
-
-    private static _defaultViewSettings = Object.freeze(
-        Object.values(BreedingFilters).map((filter) => filter.value())
-            .concat(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue())
-    );
-    private static _oldViewSettings;
-    // Check whether to reset the lazy loader on filter/sort setting changes that affect hatcherySortedFilteredList
-    // i.e. not when a filter changes from its default value, which can remove pokemon from the list but not add or reorder them
-    private static shouldResetHatcheryView = function() {
-        const currentViewSettings = Object.values(BreedingFilters).map((filter) => filter.value());
-        let result = false;
-        currentViewSettings.push(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue());
-        if (BreedingController._oldViewSettings && currentViewSettings.some((val, i) => val !== BreedingController._oldViewSettings[i] && BreedingController._oldViewSettings[i] !== BreedingController._defaultViewSettings[i])) {
-            result = true;
-        }
-        BreedingController._oldViewSettings = currentViewSettings;
-        return result;
-    };
-
+    // Flag for the LazyLoader
     public static resetHatcheryView = ko.pureComputed(() => {
-        return BreedingController.hatcherySortedFilteredList().length == 0 || modalUtils.observableState.breedingModalObservable;
+        return modalUtils.observableState.breedingModalObservable;
     });
+
+    // Used to pause modal graphics changes before a full view refresh
+    public static awaitViewReset = ko.observable(false);
 }

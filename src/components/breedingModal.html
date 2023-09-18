@@ -229,7 +229,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </button>
                                     <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
                                     <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, BreedingController.hatcherySortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryView })">
-                                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="if: $data.matchesHatcheryFilters(), visible: $data.isHatchableFiltered(), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
+                                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable() && (BreedingController.awaitViewReset() || $data.matchesHatcheryCategoryFilter()), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                             <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
                                             <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
                                             <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
