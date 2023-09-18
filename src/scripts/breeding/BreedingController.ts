@@ -217,7 +217,7 @@ class BreedingController {
             BreedingController.awaitViewReset(false);
         }
         return BreedingController._cachedSortedFilteredList;
-    }).extend({ rateLimit: 550 }); // slightly longer than getFilteredList
+    }).extend({ rateLimit: 500 }); // slightly longer than getFilteredList
 
     private static _cachedFilteredList;
     // Filters for pokemon that match hatchery filters, but don't subscribe to PartyPokemon categories (can change too frequently with the modal open)
@@ -229,7 +229,7 @@ class BreedingController {
         const newFilteredList = App.game.party.caughtPokemon.filter((pokemon) => pokemon.matchesHatcheryFilters());
         BreedingController._cachedFilteredList = newFilteredList;
         return BreedingController._cachedFilteredList;
-    }).extend({ rateLimit: 500 });
+    }).extend({ rateLimit: 475 });
 
     // Flag for the LazyLoader
     public static resetHatcheryView = ko.pureComputed(() => {
