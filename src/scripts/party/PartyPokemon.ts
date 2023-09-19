@@ -432,6 +432,14 @@ class PartyPokemon implements Saveable {
             return false;
         }
 
+        // Check based on alternate form status (if native to a different region have to include for that region's progression)
+        if (BreedingFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
+            const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == region);
+            if (hasBaseFormInSameRegion) {
+                return false;
+            }
+        }
+
         // Check if either of the types match
         const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
         const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
