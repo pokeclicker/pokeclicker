@@ -103,7 +103,7 @@ class SafariBattle {
 
     private static finishCapture(result) {
         const [random, index] = result;
-        const isgameOver = (Safari.balls() == 0);
+        const isgameOver = (Safari.balls() <= 0);
         return new Promise((resolve, reject) => {
             if (random * 100 < SafariBattle.enemy.catchFactor) {
                 SafariBattle.capturePokemon(isgameOver);
