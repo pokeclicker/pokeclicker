@@ -10454,8 +10454,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
         new DungeonBossPokemon('Totem Raticate', 82543791, 70, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
         new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
     ],
-    805000, 2,
-    () => DungeonGainGymBadge(GymList['Ilima\'s Trial']));
+    805000, 2);
 
 dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
     [
@@ -10679,8 +10678,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
         new DungeonBossPokemon('Totem Wishiwashi', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
         new DungeonBossPokemon('Totem Araquanid', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
     ],
-    875000, 5,
-    () => DungeonGainGymBadge(GymList['Lana\'s Trial']));
+    875000, 5);
 
 dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
@@ -10726,8 +10724,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         new DungeonBossPokemon('Totem Marowak', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
         new DungeonBossPokemon('Totem Salazzle', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
     ],
-    900000, 7,
-    () => DungeonGainGymBadge(GymList['Kiawe\'s Trial']));
+    900000, 7);
 
 dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     [
@@ -10769,8 +10766,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         new DungeonBossPokemon('Lurantis', 65451660, 24),
         new DungeonBossPokemon('Totem Lurantis', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
     ],
-    925000, 8,
-    () => DungeonGainGymBadge(GymList['Mallow\'s Trial']));
+    925000, 8);
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     [
@@ -10940,8 +10936,7 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
         new DungeonBossPokemon('Totem Vikavolt', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
         new DungeonBossPokemon('Totem Togedemaru', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
     ],
-    1000000, 22,
-    () => DungeonGainGymBadge(GymList['Sophocles\' Trial']));
+    1000000, 22);
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
@@ -10968,8 +10963,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
                 new SpecialEventRequirement('Lunar New Year'),
             ])}),
     ],
-    1025000, 14,
-    () => DungeonGainGymBadge(GymList['Acerola\'s Trial']));
+    1025000, 14);
 
 dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     [
@@ -11358,8 +11352,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         new DungeonBossPokemon('Kommo-o', 79960220, 49),
         new DungeonBossPokemon('Totem Kommo-o', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
     ],
-    1125000, 25,
-    () => DungeonGainGymBadge(GymList['Vast Poni Canyon Trial']));
+    1125000, 25);
 
 dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],
@@ -11381,8 +11374,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
         new DungeonBossPokemon('Ribombee', 81087060, 55),
         new DungeonBossPokemon('Totem Ribombee', 82543791, 60, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)}),
     ],
-    1150000, 25,
-    () => DungeonGainGymBadge(GymList['Mina\'s Trial']));
+    1150000, 25);
 
 dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     [

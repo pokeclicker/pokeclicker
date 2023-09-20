@@ -102,17 +102,9 @@ enum BadgeEnums {
     'Elite_KalosChampion',
     // Alola
     // TODO: these are unordered and some may be missing
-    'NormaliumZ',
     'Melemele_Stamp',
-    'WateriumZ',
-    'FiriumZ',
-    'GrassiumZ',
     'Akala_Stamp',
-    'ElectriumZ',
-    'GhostiumZ',
     'Ula_Ula_Stamp',
-    'DragoniumZ',
-    'FairiumZ',
     'Poni_Stamp',
     'Elite_Olivia',
     'Elite_Acerola',
