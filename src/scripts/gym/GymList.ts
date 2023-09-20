@@ -1461,7 +1461,7 @@ GymList['Iki Town'] = new Gym(
         new GymPokemon('Makuhita', 62058739, 15),
         new GymPokemon('Crabrawler', 63069612, 16),
     ],
-    BadgeEnums.FightiniumZ,
+    BadgeEnums.Melemele_Stamp,
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!',
     [new TemporaryBattleRequirement('Hau 3')],
@@ -1478,7 +1478,7 @@ GymList['Konikoni City'] = new Gym(
         new GymPokemon('Lileep', 66147743, 27),
         new GymPokemon('Lycanroc (Midnight)', 67478674, 28),
     ],
-    BadgeEnums.RockiumZ,
+    BadgeEnums.Akala_Stamp,
     128000,
     'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!',
     [new TemporaryBattleRequirement('Plumeria 1')],
@@ -1496,7 +1496,7 @@ GymList['Malie City'] = new Gym(
         new GymPokemon('Krokorok', 70650480, 43),
         new GymPokemon('Alolan Persian', 71735104, 44),
     ],
-    BadgeEnums.DarkiniumZ,
+    BadgeEnums.Ula_Ula_Stamp,
     128000,
     'Hmph... heh. Let me fix your team up for you. Here. This is yours.',
     [new TemporaryBattleRequirement('Gladion 2')],
@@ -1513,7 +1513,7 @@ GymList['Exeggutor Island'] = new Gym(
         new GymPokemon('Flygon', 76658268, 53),
         new GymPokemon('Mudsdale', 77747374, 54),
     ],
-    BadgeEnums.GroundiumZ,
+    BadgeEnums.Poni_Stamp,
     128000,
     'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
@@ -1700,7 +1700,7 @@ GymList['Elite Molayne'] = new Gym(
     BadgeEnums.Elite_Molayne,
     64000,
     'That Kukui... He certainly found an interesting Trainer for me to face!',
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+    [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
 GymList['Elite Olivia'] = new Gym(
     'Olivia',
@@ -1715,7 +1715,7 @@ GymList['Elite Olivia'] = new Gym(
     BadgeEnums.Elite_Olivia,
     64000,
     'I don\'t see the same look in your eyes that I saw when we first met on Akala Island. Have you had some experiences that you\'ll carry with you in your heart forever? Well, it\'s time for you to move on.',
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+    [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
 GymList['Elite Acerola'] = new Gym(
     'Acerola',
@@ -1730,7 +1730,7 @@ GymList['Elite Acerola'] = new Gym(
     BadgeEnums.Elite_Acerola,
     64000,
     'I\'m...I\'m speechless! You\'ve done me in!',
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+    [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
 GymList['Elite Kahili'] = new Gym(
     'Kahili',
@@ -1745,7 +1745,7 @@ GymList['Elite Kahili'] = new Gym(
     BadgeEnums.Elite_Kahili,
     64000,
     'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+    [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
 
 // Alola Champion
@@ -1765,7 +1765,7 @@ GymList['Champion Hau'] = new Gym(
         new GymPokemon('Leafeon', 89636471, 58, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
         new GymPokemon('Incineroar', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
-    BadgeEnums.Elite_AlolaChampion,
+    BadgeEnums.Champion_Stamp,
     100000,
     'We\'re gonna keep moving forward, by staying at full power all the time!',
     [
