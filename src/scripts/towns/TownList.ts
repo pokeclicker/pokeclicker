@@ -2035,7 +2035,7 @@ TownList['Mt. Silver'] = new DungeonTown(
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
-    [TemporaryBattleList.Red],
+    [],
     {
         npcs: [RedOldManJohtoNPC],
     }
