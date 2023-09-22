@@ -803,8 +803,15 @@ const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
 
 const CandyMan = new NPC('The Candy Man', [
     'I sure do love candy. The rarer, the better!',
-    'I\'ve got a real <b>SWEET-TOOTH<b/>',
+    'I\'ve got a real <b>SWEET-TOOTH</b>',
 ]);
+
+const SpeedyRunner = new NPC('Speedy Runner', [
+    'I don\'t have time to listen to people explain stuff I already know.',
+    'Some old man tried to teach me how to catch Pokémon earlier. I just shouted',
+    '<b>HOW-BLU-COIN?</b>',
+    'at him and left.',
+], {image: 'assets/images/npcs/Jogger.png'});
 
 const UnrivaledBlue = new NPC('Blue', [
     'So, you said you want to know where you might find Mewtwo\'s Mega Stones, right?',
@@ -1004,6 +1011,7 @@ TownList['Indigo Plateau Kanto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
         ],
+        npcs: [SpeedyRunner],
     }
 );
 TownList['One Island'] = new Town(

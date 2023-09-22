@@ -179,6 +179,7 @@ export default class Statistics implements Saveable {
         'totalDiamonds',
         'totalFarmPoints',
         'totalBattlePoints',
+        'totalContestTokens',
         'totalPokemonCaptured',
         'totalPokemonDefeated',
         'totalPokemonEncountered',
