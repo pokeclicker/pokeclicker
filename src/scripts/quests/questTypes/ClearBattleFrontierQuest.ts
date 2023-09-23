@@ -1,6 +1,6 @@
 /// <reference path="../Quest.ts" />
 
-class ClearBattleFrontier extends Quest implements QuestInterface {
+class ClearBattleFrontierQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
         super(amount, reward);
