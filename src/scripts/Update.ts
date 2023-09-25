@@ -2457,13 +2457,20 @@ class Update implements Saveable {
             // Reset Red temp battle
             saveData.statistics.temporaryBattleDefeated[31] = 0;
         },
-
         '0.10.16': ({ playerData, saveData, settingsData }) => {
 
             // Fix None category color being incomplete
             if (saveData.categories.categories[0].color === '#333') {
                 saveData.categories.categories[0].color = '#333333';
             }
+
+            // ClearBattleFrontier → ClearBattleFrontierQuest
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name == 'ClearBattleFrontier') {
+                    q.name = 'ClearBattleFrontierQuest';
+                }
+                return q;
+            }) || [];
 
             // Updates Sorting indices for new method
             if (settingsData.hatcherySort >= 5) {
