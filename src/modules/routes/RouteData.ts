@@ -2348,7 +2348,7 @@ Routes.add(new RegionRoute(
       [
           new SpecialRoutePokemon(['Oddish', 'Jellicent'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Bounsweet', 'Bunnelby'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Frillish'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast,WeatherType.Rain, WeatherType.Snow, WeatherType.Sunny, WeatherType.Sandstorm, WeatherType.Fog])),
+          new SpecialRoutePokemon(['Frillish'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Snow, WeatherType.Sunny, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Xatu'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sunny, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Garbodor'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Seaking'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Sunny, WeatherType.Sandstorm])),
