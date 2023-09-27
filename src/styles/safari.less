@@ -180,8 +180,7 @@
 
 .spin {
   animation-name: spin;
-  animation-duration: 750ms;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
   animation-timing-function: linear;
 }
 
@@ -217,6 +216,9 @@
     @media (max-width: 768px) {
       font-size: 25px;
     }
+
+    /* above Safari particles */
+    z-index: 10000;
   }
 
   .enemy {

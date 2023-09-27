@@ -40,19 +40,19 @@ class SafariBattle {
             enemyImg.left += 36;
             enemyImg.top += 16;
 
-            const ptclhtml = '<div><img id="safariBall" class="spin" src="assets/images/pokeball/Safariball.svg" height="30px"></div>';
+            const ballSpeed = SafariBattle.Speed.ballThrowAnim * SafariBattle.getTierMultiplier();
+            const ptclhtml = `<div><img id="safariBall" class="spin" style="animation-duration: ${SafariBattle.Speed.ballThrowAnim * SafariBattle.getTierMultiplier()}ms;" src="assets/images/pokeball/Safariball.svg" height="30px"></div>`;
             SafariBattle.particle?.remove();
-            SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariBattleModal .pageItemFooter').offset(), enemyImg, SafariBattle.Speed.ballThrowAnim * SafariBattle.getTierMultiplier(), 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
+            SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariBattleModal .pageItemFooter').offset(), enemyImg, ballSpeed, 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
 
             SafariBattle.delay(SafariBattle.Speed.ballThrowDelay * SafariBattle.getTierMultiplier())(0)            // throwing the ball
                 .then(SafariBattle.startCapture)                                   // pokemon being sucked into ball
-                .then(SafariBattle.delay(SafariBattle.Speed.enemyTransition))
+                .then(SafariBattle.delay(SafariBattle.Speed.enemyTransition * SafariBattle.getTierMultiplier()))
                 .then(SafariBattle.startBounce)                                    // pokeball dropping to ground
-                .then(SafariBattle.delay(SafariBattle.Speed.ballBounceDelay))
-                .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
+                .then(SafariBattle.delay(SafariBattle.Speed.ballBounceDelay * SafariBattle.getTierMultiplier()))
+                .then(SafariBattle.calcCapture)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
                 .then(SafariBattle.delayRoll)
                 .then(SafariBattle.finishCapture);                                  // capture pokemon or break free
-
         }
     }
 
@@ -83,63 +83,63 @@ class SafariBattle {
         });
     }
 
-    private static calcIndex() {
+    private static calcCapture() {
         return new Promise((resolve, reject) => {
             const random = Math.random();
             const catchF = SafariBattle.enemy.catchFactor / 100;
-            const index = catchF >= 1 ? 3 : Math.floor(4 * (1 - Math.max(random, catchF)) / (1 - catchF));
-            if (index != 0) {
-                $('#safariBattleModal').css('animation-duration', `${SafariBattle.Speed.ballRollAnim * SafariBattle.getTierMultiplier()}ms`);
-                SafariBattle.startRoll(index);
-            }
-            resolve([random, index]);
+            const isCaught = random <= catchF;
+            const numRolls = isCaught ? 3 : Math.min(Math.floor(4 * (1 - random) / (1 - catchF)), 3);
+            resolve([isCaught, numRolls]);
         });
     }
 
-    private static delayRoll(result) {
-        const delayLength = (0.2 + result[1]) * SafariBattle.Speed.ballRollAnim * SafariBattle.getTierMultiplier();
-        return SafariBattle.delay(delayLength)(result);
+    private static delayRoll([isCaught, numRolls]) {
+        const delayLength = numRolls == 0 ? 0 : (numRolls * SafariBattle.Speed.ballRollAnim + (numRolls - 1 + numRolls / 3) * SafariBattle.Speed.ballRollDelay) * SafariBattle.getTierMultiplier();
+        SafariBattle.startRoll(numRolls);
+        return SafariBattle.delay(delayLength)([isCaught, numRolls]);
     }
 
-    private static finishCapture(result) {
-        const [random, index] = result;
+    private static finishCapture([isCaught, numRolls]) {
         const isgameOver = (Safari.balls() <= 0);
         return new Promise((resolve, reject) => {
-            if (random * 100 < SafariBattle.enemy.catchFactor) {
+            if (isCaught) {
                 SafariBattle.capturePokemon(isgameOver);
                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
                 setTimeout(() => {
                     SafariBattle.particle.remove();
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
-                }, SafariBattle.Speed.enemyCaught);
+                }, SafariBattle.Speed.enemyCaught * (1 + SafariBattle.getTierMultiplier()) / 2);
             } else {
                 $('#safariBattleModal .enemy > img').css('opacity', '1');
                 $('#safariBattleModal .enemy').removeClass('safariCapture');
-                SafariBattle.text(SafariBattle.CATCH_MESSAGES[index]);
+                SafariBattle.text(SafariBattle.CATCH_MESSAGES[numRolls]);
                 SafariBattle.particle.remove();
                 setTimeout(() => {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
-                }, SafariBattle.Speed.enemyEscape);
+                }, SafariBattle.Speed.enemyEscape * (1 + SafariBattle.getTierMultiplier()) / 2);
             }
         });
     }
 
     private static startRoll = function (n) {
-        if (n == 4) {
-            n--;
+        if (n == 0) {
+            return;
         }
+        $('#safariBattleModal').css('animation-duration', `${SafariBattle.Speed.ballRollAnim * SafariBattle.getTierMultiplier()}ms`);
         $('#safariBall').addClass('safari-roll-left');
         setTimeout(() => {
             SafariBattle.safariRoll(n - 1);
-        }, SafariBattle.Speed.ballRollDelay * SafariBattle.getTierMultiplier());
+        }, (SafariBattle.Speed.ballRollAnim + SafariBattle.Speed.ballRollDelay) * SafariBattle.getTierMultiplier());
     }
 
     private static safariRoll = function (n) {
-        if (n != 0) {
+        if (n > 0) {
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
             setTimeout(() => {
                 SafariBattle.safariRoll(n - 1);
-            }, SafariBattle.Speed.ballRollDelay * SafariBattle.getTierMultiplier());
+            }, (SafariBattle.Speed.ballRollAnim + SafariBattle.Speed.ballRollDelay) * SafariBattle.getTierMultiplier());
+        } else {
+            $('#safariBall').removeClass('safari-roll-left safari-roll-right');
         }
     }
 
@@ -310,13 +310,13 @@ class SafariBattle {
 
 namespace SafariBattle {
     export const Speed = {
-        ballThrowAnim: 750,
+        ballThrowAnim: 700,
         ballThrowDelay: 825,
-        ballBounceAnim: 1360,
-        ballBounceDelay: 1445,
-        ballRollAnim: 700,
-        ballRollDelay: 1200,
-        enemyTransition: 750,
+        ballBounceAnim: 1200,
+        ballBounceDelay: 1500,
+        ballRollAnim: 600,
+        ballRollDelay: 450,
+        enemyTransition: 700,
         enemyFlee: 1000,
         enemyCaught: 1700,
         enemyEscape: 1000,
