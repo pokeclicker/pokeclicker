@@ -120,10 +120,9 @@
 
 .bounce {
   position: relative;
-  display:inline-block;
+  display: inline-block;
   transform: translateY(62px);
   animation-name: bounceall;
-  animation-duration: inherit;
   animation-timing-function: ease-in-out;
 }
 
@@ -141,7 +140,6 @@
 
 .safari-roll-left {
   animation-name: roll-left;
-  animation-duration: inherit;
   animation-timing-function: ease-in-out;
 }
 
@@ -153,12 +151,11 @@
 
 .safari-roll-right {
   animation-name: roll-right;
-  animation-duration: inherit;
   animation-timing-function: ease-in-out;
 }
 
 @keyframes roll-right{
-  0%{transform: rotate(0deg);}
+  0%{transform: rotate(0deg); }
   50%{transform: rotate(45deg) translate(8px, -10px);}
   100%{transform: rotate(0deg);}
 }
@@ -224,6 +221,12 @@
   .enemy {
     @media (max-width: 768px) {
       margin-top: 50px;
+    }
+  }
+
+  .modal-footer.p-0 {
+    .dropdown-menu {
+      z-index: 10001;
     }
   }
 }
