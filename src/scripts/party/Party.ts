@@ -16,7 +16,6 @@ class Party implements Feature {
 
     _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
 
-
     constructor(private multiplier: Multiplier) {
         this._caughtPokemon = ko.observableArray([]);
 
@@ -284,24 +283,29 @@ class Party implements Feature {
         return false;
     }
 
-    calculateClickAttack(useItem = false): number {
-        // Base power
-        // Shiny pokemon help with a 100% boost
-        // Resistant pokemon give a 100% boost
+    public calculateClickAttack(useItem = false): number {
+        const clickAttack = this.calculateBaseClickAttack();
+        const bonus = this.multiplier.getBonus('clickAttack', useItem);
+        return Math.floor(clickAttack * bonus);
+    }
+
+    private calculateBaseClickAttack: KnockoutComputed<number> = ko.pureComputed(() => {
         let caughtPokemon = this.caughtPokemon;
         if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
             // Only magikarps can attack in magikarp jump subregion
             caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
         }
+        // Base power is number of caught pokemon
         const caught = caughtPokemon.length;
+        // Shiny pokemon have a 100% boost
         const shiny = caughtPokemon.filter(p => p.shiny).length;
+        // Resistant pokemon have a 100% boost
         const resistant = caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
-        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4);
 
-        const bonus = this.multiplier.getBonus('clickAttack', useItem);
+        const baseClickAttack = Math.pow(caught + shiny + resistant + 1, 1.4);
 
-        return Math.floor(clickAttack * bonus);
-    }
+        return baseClickAttack;
+    }).extend({rateLimit: 1000});
 
     canAccess(): boolean {
         return true;
