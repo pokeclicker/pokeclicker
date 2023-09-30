@@ -104,6 +104,13 @@ class BreedingController {
         Settings.getSetting('hatcherySortDirection').observableValue.subscribe(() => {
             BreedingController.awaitViewReset(true);
         });
+
+        $(document).ready(() => {
+            const eggList = $('#eggList');
+            BreedingController.isBreedingDisplayCollapsed(!eggList.hasClass('show'));
+            eggList.on('show.bs.collapse', () => BreedingController.isBreedingDisplayCollapsed(false));
+            eggList.on('hidden.bs.collapse', () => BreedingController.isBreedingDisplayCollapsed(true));
+        });
     }
 
     public static openBreedingModal() {
@@ -238,4 +245,6 @@ class BreedingController {
 
     // Used to pause modal graphics changes before a full view refresh
     public static awaitViewReset = ko.observable(false);
+
+    public static isBreedingDisplayCollapsed = ko.observable(false);
 }
