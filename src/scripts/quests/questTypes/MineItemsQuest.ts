@@ -23,6 +23,9 @@ class MineItemsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
+        if (this.customDescription) {
+            return this.customDescription;
+        }
         const suffix = this.amount > 1 ? 's' : '';
         return `Mine ${this.amount.toLocaleString('en-US')} item${suffix} in the Underground.`;
     }
