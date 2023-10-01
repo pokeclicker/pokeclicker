@@ -2458,7 +2458,6 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated[31] = 0;
 
         },
-
         '0.10.16': ({ playerData, saveData, settingsData }) => {
 
 
@@ -2467,8 +2466,17 @@ class Update implements Saveable {
                 saveData.categories.categories[0].color = '#333333';
             }
 
+            // ClearBattleFrontier → ClearBattleFrontierQuest
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name == 'ClearBattleFrontier') {
+                    q.name = 'ClearBattleFrontierQuest';
+                }
+                return q;
+            }) || [];
+
             // Remove erroneous BreedingFilter search setting
             delete settingsData[''];
+
         },
     };
 
