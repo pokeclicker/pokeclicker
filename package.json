@@ -56,7 +56,7 @@
     "eslint-plugin-import": "^2.22.1",
     "gh-pages": "^4.0.0",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-changed": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.0",
