@@ -2456,8 +2456,10 @@ class Update implements Saveable {
 
             // Reset Red temp battle
             saveData.statistics.temporaryBattleDefeated[31] = 0;
+
         },
         '0.10.16': ({ playerData, saveData, settingsData }) => {
+
 
             // Fix None category color being incomplete
             if (saveData.categories.categories[0].color === '#333') {
@@ -2471,28 +2473,6 @@ class Update implements Saveable {
                 }
                 return q;
             }) || [];
-
-            // Updates Sorting indices for new method
-            if (settingsData.hatcherySort >= 5) {
-                settingsData.hatcherySort++;
-            } else if (settingsData.partySort == 2) {
-                // Sort by attack -> attack at lv100
-                settingsData.hatcherySort = 5;
-            }
-            if (settingsData.partySort >= 5) {
-                settingsData.partySort++;
-            }
-            if (settingsData.vitaminSort >= 5) {
-                settingsData.vitaminSort++;
-            }
-            if (settingsData.heldItemSort >= 5) {
-                settingsData.heldItemSort++;
-            }
-            saveData.breeding.hatcheryHelpers?.forEach(helper => {
-                if (helper.sortOption >= 5) {
-                    helper.sortOption++;
-                }
-            });
         },
     };
 

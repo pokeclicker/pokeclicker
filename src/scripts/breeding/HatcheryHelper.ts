@@ -227,7 +227,7 @@ class HatcheryHelpers {
                     if (!useHatcheryFilters && !pokemon.isHatchable()) {
                         return best;
                     }
-                    if (categories.length && categories.indexOf(pokemon.category) === -1) {
+                    if (categories.length && categories.indexOf(pokemon.category) === -1 && categories.indexOf(best.category) !== -1) {
                         return best;
                     }
                     if (best === null) {

@@ -15,7 +15,6 @@ import GameHelper from '../GameHelper';
 import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
-import { PokemonListData } from '../pokemons/PokemonList';
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -132,10 +131,6 @@ export function displayName(englishName: string): Computed<string> {
 
 export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
     return !!P.pokemonMap[pokemonName].evolutions?.some((e) => e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
-}
-
-export function isMegaEvolution(pokemonName: PokemonNameType): boolean {
-    return !!P.pokemonList.some((p: PokemonListData) => p.evolutions?.some((e) => e.evolvedPokemon == pokemonName && e.restrictions.some((r) => r instanceof MegaEvolveRequirement)));
 }
 
 export function getMegaStones(pokemonName: PokemonNameType): MegaStoneItem[] {

@@ -425,11 +425,11 @@ class PartyPokemon implements Saveable {
             return false;
         }
         // Only Base Pokémon without Mega Evolution
-        if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon) && e.restrictions.some((r) => r instanceof MegaEvolveRequirement)))) {
+        if (uniqueTransformation == 'mega-unobtained' && !(pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon) && e.restrictions.some((r) => r instanceof MegaEvolveRequirement))) {
             return false;
         }
         // Only Mega Pokémon
-        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.isMegaEvolution(pokemon.name))) {
+        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name).some((e) => e.restrictions.some((r) => r instanceof MegaEvolveRequirement)))) {
             return false;
         }
 
@@ -449,11 +449,6 @@ class PartyPokemon implements Saveable {
         }
 
         return true;
-    });
-
-    // Used in breedingModal display
-    public matchesHatcheryCategoryFilter = ko.pureComputed(() => {
-        return !(BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value());
     });
 
     public giveHeldItem = (heldItem: HeldItem): void => {

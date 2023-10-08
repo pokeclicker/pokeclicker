@@ -1,6 +1,8 @@
 /// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
+/// <reference path="../../declarations/utilities/Modal.d.ts" />
+/// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../party/PartyController.ts" />
 
 class BreedingController {
@@ -92,19 +94,17 @@ class BreedingController {
     ]
 
     public static initialize() {
-        Object.keys(BreedingFilters).forEach((key) => {
-            BreedingFilters[key].value.subscribe(() => {
+        // Track view settings for hatchery list rerendering
+        const hatcherySettingObervables = Object.values(BreedingFilters).map(f => f.value)
+            .concat(Settings.getSetting('hatcherySort').observableValue, Settings.getSetting('hatcherySortDirection').observableValue);
+
+        hatcherySettingObervables.forEach((setting) => {
+            setting.subscribe(() => {
                 BreedingController.awaitViewReset(true);
             });
         });
 
-        Settings.getSetting('hatcherySort').observableValue.subscribe(() => {
-            BreedingController.awaitViewReset(true);
-        });
-        Settings.getSetting('hatcherySortDirection').observableValue.subscribe(() => {
-            BreedingController.awaitViewReset(true);
-        });
-
+        // Sync observable with breedingDisplay visibility
         $(document).ready(() => {
             const eggList = $('#eggList');
             BreedingController.isBreedingDisplayCollapsed(!eggList.hasClass('show'));
@@ -208,10 +208,7 @@ class BreedingController {
     public static queueSizeLimit = ko.observable(-1);
 
     private static _cachedSortedFilteredList = [];
-    public static hatcherySortedFilteredList = ko.pureComputed(() => {
-        if (modalUtils.observableState.breedingModal !== 'show') {
-            return BreedingController._cachedSortedFilteredList;
-        }
+    public static hatcherySortedFilteredList: KnockoutComputed<Array<PartyPokemon>> = ko.pureComputed(() => {
         // Work in place to avoid modifying the cached list and to ensure the LazyLoader displays correctly
         BreedingController._cachedSortedFilteredList.length = 0;
         BreedingController._cachedSortedFilteredList.push(...BreedingController.getFilteredList());
@@ -219,32 +216,35 @@ class BreedingController {
         const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
         BreedingController._cachedSortedFilteredList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
         if (BreedingController.awaitViewReset()) {
-            document.querySelector('#breeding-pokemon-list-container .scrolling-div-breeding-list').scrollTop = 0;
+            BreedingController.scrollToTop();
             BreedingController.resetHatcheryView.notifySubscribers();
             BreedingController.awaitViewReset(false);
         }
         return BreedingController._cachedSortedFilteredList;
     }).extend({ rateLimit: 500 }); // slightly longer than getFilteredList
 
-    private static _cachedFilteredList;
-    // Filters for pokemon that match hatchery filters, but don't subscribe to PartyPokemon categories (can change too frequently with the modal open)
-    private static getFilteredList = ko.pureComputed(() => {
-        // Only rebuild the list when the modal is open
-        if (BreedingController._cachedFilteredList && modalUtils.observableState.breedingModal !== 'show') {
-            return BreedingController._cachedFilteredList;
-        }
-        const newFilteredList = App.game.party.caughtPokemon.filter((pokemon) => pokemon.matchesHatcheryFilters());
-        BreedingController._cachedFilteredList = newFilteredList;
-        return BreedingController._cachedFilteredList;
+    // Filters for pokemon that match hatchery filters
+    private static getFilteredList: KnockoutComputed<Array<PartyPokemon>> = ko.pureComputed(() => {
+        return App.game.party.caughtPokemon.filter((pokemon) => pokemon.matchesHatcheryFilters());
     }).extend({ rateLimit: 475 });
 
-    // Flag for the LazyLoader
-    public static resetHatcheryView = ko.pureComputed(() => {
-        return modalUtils.observableState.breedingModalObservable;
+    // Used to reset LazyLoader
+    public static resetHatcheryView = ko.computed(() => {
+        const modalState = modalUtils.observableState.breedingModal;
+        if (modalState === 'hide') {
+            // Only works before modal is fully hidden
+            BreedingController.scrollToTop();
+        }
+        return modalState === 'hidden';
     });
 
     // Used to pause modal graphics changes before a full view refresh
     public static awaitViewReset = ko.observable(false);
 
+    // Used to pause hatchery egg progress rendering while container is collapsed
     public static isBreedingDisplayCollapsed = ko.observable(false);
+
+    public static scrollToTop() {
+        document.querySelector('#breeding-pokemon-list-container .scrolling-div-breeding-list').scrollTop = 0;
+    }
 }
