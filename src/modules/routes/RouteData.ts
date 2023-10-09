@@ -642,7 +642,12 @@ Routes.add(new RegionRoute(
         water: ['Goldeen', 'Seaking', 'Magikarp'],
         headbutt: ['Aipom', 'Heracross'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Fog)],
+    [
+        new OneFromManyRequirement([
+            new ClearDungeonRequirement(1, getDungeonIndex('Mt. Mortar')),
+            new GymBadgeRequirement(BadgeEnums.Fog),
+        ]),
+    ],
 ));
 Routes.add(new RegionRoute(
     'Johto Route 43', Region.johto, 43,
@@ -651,15 +656,8 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Poliwag'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Pineco'],
     }),
-    [
-        new OneFromManyRequirement([
-            new MultiRequirement([
-                new ClearDungeonRequirement(1, getDungeonIndex('Mt. Mortar')),
-                new GymBadgeRequirement(BadgeEnums.Fog),
-            ]),
-            new RouteKillRequirement(10, Region.johto, 42),
-        ]),
-    ],
+    [new RouteKillRequirement(10, Region.johto, 42)],
+
 ));
 Routes.add(new RegionRoute(
     'Johto Route 44', Region.johto, 44,
