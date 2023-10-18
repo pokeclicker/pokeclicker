@@ -1503,7 +1503,7 @@ export type PokemonNameType
     | 'Wattrel'
     | 'Kilowattrel'
     | 'Maschiff'
-    | 'Mabostiff'
+    | 'Mabosstiff'
     | 'Shroodle'
     | 'Grafaiai'
     | 'Bramblin'

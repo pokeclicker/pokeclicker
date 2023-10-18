@@ -29007,11 +29007,11 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 68,
         'catchRate': 150,
-        'evolutions': [LevelEvolution('Maschiff', 'Mabostiff', 30)],
+        'evolutions': [LevelEvolution('Maschiff', 'Mabosstiff', 30)],
     },
     {
         'id': 943,
-        'name': 'Mabostiff',
+        'name': 'Mabosstiff',
         'type': [PokemonType.Dark],
         'base': {
             'hitpoints': 80,
