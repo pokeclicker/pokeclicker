@@ -28085,7 +28085,7 @@ export const pokemonList = createPokemonArray(
             'speed': 50,
         },
     },
-        {
+    {
         'id': 901.01,
         'name': 'Bloodmoon Ursaluna',
         'catchRate': 20,
