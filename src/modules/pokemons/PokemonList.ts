@@ -30573,7 +30573,7 @@ export const pokemonList = createPokemonArray(
         'exp': 278,
         'catchRate': 3,
         'gender': {
-            'type': Genders.Genderless,
+            'femaleRatio': 0,
         },
     },
     {
@@ -30593,7 +30593,7 @@ export const pokemonList = createPokemonArray(
         'exp': 278,
         'catchRate': 3,
         'gender': {
-            'type': Genders.Genderless,
+            'femaleRatio': 0,
         },
     },
     {
@@ -30613,7 +30613,7 @@ export const pokemonList = createPokemonArray(
         'exp': 278,
         'catchRate': 3,
         'gender': {
-            'type': Genders.Genderless,
+            'femaleRatio': 0,
         },
     },
     {
