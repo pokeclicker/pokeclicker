@@ -21,6 +21,7 @@ class PartyPokemon implements Saveable {
     saveKey: string;
     public exp = 0;
     public evs: KnockoutComputed<number>;
+    public clickAttackBonus: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
     private _canUseHeldItem: KnockoutComputed<boolean>;
 
@@ -116,6 +117,12 @@ class PartyPokemon implements Saveable {
             if (!canUse && this.heldItem()) {
                 this.addOrRemoveHeldItem(this.heldItem());
             }
+        });
+        this.clickAttackBonus = ko.computed((): number => {
+            // Caught + Shiny + Resistant
+            const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
+            const heldItemMultiplier = this.heldItem && this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
+            return bonus * heldItemMultiplier;
         });
     }
 

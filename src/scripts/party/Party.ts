@@ -293,10 +293,9 @@ class Party implements Feature {
             // Only magikarps can attack in magikarp jump subregion
             caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
         }
-        const caught = caughtPokemon.length;
-        const shiny = caughtPokemon.filter(p => p.shiny).length;
-        const resistant = caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
-        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4);
+
+        const partyClickBonus = caughtPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
+        const clickAttack = Math.pow(partyClickBonus, 1.4);
 
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
 
