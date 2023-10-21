@@ -8542,7 +8542,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 88,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Hisuian Qwilfish', 'Overqwil', 25)],
+        'evolutions': [HeldItemLevelEvolution('Strong_Scroll', 'Hisuian Qwilfish', 'Overqwil', 25)],
         'base': {
             'hitpoints': 65,
             'attack': 95,
@@ -9093,7 +9093,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 163,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Stantler', 'Wyrdeer', 31)],
+        'evolutions': [HeldItemLevelEvolution('Agile_Scroll', 'Stantler', 'Wyrdeer', 31)],
         'base': {
             'hitpoints': 73,
             'attack': 95,
