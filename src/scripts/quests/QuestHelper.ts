@@ -1,7 +1,7 @@
 /// <reference path="./questTypes/DefeatPokemonsQuest.ts" />
 /// <reference path="./questTypes/CapturePokemonsQuest.ts" />
 /// <reference path="./questTypes/CapturePokemonTypesQuest.ts" />
-/// <reference path="./questTypes/ClearBattleFrontier.ts" />
+/// <reference path="./questTypes/ClearBattleFrontierQuest.ts" />
 /// <reference path="./questTypes/GainFarmPointsQuest.ts" />
 /// <reference path="./questTypes/GainMoneyQuest.ts" />
 /// <reference path="./questTypes/GainTokensQuest.ts" />
@@ -23,7 +23,7 @@ class QuestHelper {
         DefeatPokemonsQuest,
         CapturePokemonsQuest,
         CapturePokemonTypesQuest,
-        ClearBattleFrontier,
+        ClearBattleFrontierQuest,
         GainFarmPointsQuest,
         GainMoneyQuest,
         GainTokensQuest,

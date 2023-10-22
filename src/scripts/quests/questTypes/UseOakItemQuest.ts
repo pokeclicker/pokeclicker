@@ -41,6 +41,9 @@ class UseOakItemQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
+        if (this.customDescription) {
+            return this.customDescription;
+        }
         const desc = [];
         desc.push(`Equip the ${GameConstants.humanifyString(OakItemType[this.item])} and`);
         if (this.item == OakItemType.Magic_Ball) {
