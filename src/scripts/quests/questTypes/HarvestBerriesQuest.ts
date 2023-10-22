@@ -4,10 +4,9 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
 
     private berryType: BerryType;
 
-    constructor(amount: number, reward: number, berryType: BerryType, description: string = undefined) {
+    constructor(amount: number, reward: number, berryType: BerryType) {
         super(amount, reward);
         this.berryType = berryType;
-        this.customDescription = description;
         this.focus = App.game.statistics.berriesHarvested[this.berryType];
     }
 

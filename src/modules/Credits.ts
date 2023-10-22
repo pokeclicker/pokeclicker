@@ -266,6 +266,7 @@ export const SpriteCredits: Credit[] = [
             'Client Island town image',
             'Clouds',
             'Clown Jessie & James',
+            'Cosplay Pikachu Shuffle Icons',
             'Cracked pot big icon',
             'Danny',
             'Day cycle images',
