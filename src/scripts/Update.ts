@@ -2458,7 +2458,6 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated[31] = 0;
 
         },
-
         '0.10.16': ({ playerData, saveData, settingsData }) => {
 
 
@@ -2466,6 +2465,14 @@ class Update implements Saveable {
             if (saveData.categories.categories[0].color === '#333') {
                 saveData.categories.categories[0].color = '#333333';
             }
+
+            // ClearBattleFrontier → ClearBattleFrontierQuest
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name == 'ClearBattleFrontier') {
+                    q.name = 'ClearBattleFrontierQuest';
+                }
+                return q;
+            }) || [];
         },
     };
 

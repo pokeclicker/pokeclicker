@@ -19,7 +19,7 @@ class CatchShiniesQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Catch ${this.amount.toLocaleString('en-US')} shiny Pokémon.`;
+        return this.customDescription ?? `Catch ${this.amount.toLocaleString('en-US')} shiny Pokémon.`;
     }
 
     toJSON() {
