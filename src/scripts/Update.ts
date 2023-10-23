@@ -2225,6 +2225,9 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 delete p[14]; // megaStone
             });
+
+            // Hopo Berry
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 70);
         },
 
         '0.10.12': ({ playerData, saveData, settingsData }) => {
@@ -2473,6 +2476,9 @@ class Update implements Saveable {
                 }
                 return q;
             }) || [];
+
+            // Fix Hopo berry visible in berrydex when not available
+            saveData.farming.mutations[71] = false;
         },
     };
 
