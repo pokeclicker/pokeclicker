@@ -121,7 +121,7 @@ class PartyPokemon implements Saveable {
         this.clickAttackBonus = ko.computed((): number => {
             // Caught + Shiny + Resistant
             const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
-            const heldItemMultiplier = this.heldItem && this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
+            const heldItemMultiplier = this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
             return bonus * heldItemMultiplier;
         });
     }
