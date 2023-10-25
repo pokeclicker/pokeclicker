@@ -30631,7 +30631,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 10,
         'levelType': LevelType.slow,
         'exp': 275,
-        'catchRate': 3,
+        'catchRate': 5,
         'gender': {
             'femaleRatio': 1,
         },
@@ -30651,13 +30651,13 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 10,
         'levelType': LevelType.slow,
         'exp': 275,
-        'catchRate': 3,
+        'catchRate': 5,
         'gender': {
             'femaleRatio': 1,
         },
     },
     {
-        'id': 1017,
+        'id': 1017.02,
         'name': 'Ogerpon (Hearthflame Mask)',
         'type': [PokemonType.Grass, PokemonType.Fire],
         'base': {
@@ -30671,13 +30671,13 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 10,
         'levelType': LevelType.slow,
         'exp': 275,
-        'catchRate': 3,
+        'catchRate': 5,
         'gender': {
             'femaleRatio': 1,
         },
     },
     {
-        'id': 1017,
+        'id': 1017.03,
         'name': 'Ogerpon (Cornerstone Mask)',
         'type': [PokemonType.Grass, PokemonType.Rock],
         'base': {
@@ -30691,7 +30691,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 10,
         'levelType': LevelType.slow,
         'exp': 275,
-        'catchRate': 3,
+        'catchRate': 5,
         'gender': {
             'femaleRatio': 1,
         },
