@@ -21,7 +21,6 @@ class PartyPokemon implements Saveable {
     saveKey: string;
     public exp = 0;
     public evs: KnockoutComputed<number>;
-    public clickAttackBonus: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
     private _canUseHeldItem: KnockoutComputed<boolean>;
 
@@ -118,12 +117,6 @@ class PartyPokemon implements Saveable {
                 this.addOrRemoveHeldItem(this.heldItem());
             }
         });
-        this.clickAttackBonus = ko.computed((): number => {
-            // Caught + Shiny + Resistant
-            const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
-            const heldItemMultiplier = this.heldItem && this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
-            return bonus * heldItemMultiplier;
-        });
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -134,6 +127,13 @@ class PartyPokemon implements Saveable {
         const shadowMultiplier = this.shadowAttackBonus();
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
+
+    public clickAttackBonus = ko.pureComputed((): number => {
+        // Caught + Shiny + Resistant
+        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
+        const heldItemMultiplier = this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
+        return bonus * heldItemMultiplier;
+    });
 
     public canCatchPokerus(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);

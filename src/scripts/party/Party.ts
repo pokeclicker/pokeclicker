@@ -285,6 +285,12 @@ class Party implements Feature {
     }
 
     calculateClickAttack(useItem = false): number {
+        const clickAttack =  this.calculateBaseClickAttack();
+        const bonus = this.multiplier.getBonus('clickAttack', useItem);
+        return Math.floor(clickAttack * bonus);
+    }
+
+    private calculateBaseClickAttack: KnockoutComputed<number> = ko.pureComputed(() => {
         // Base power
         // Shiny pokemon help with a 100% boost
         // Resistant pokemon give a 100% boost
@@ -295,12 +301,8 @@ class Party implements Feature {
         }
 
         const partyClickBonus = caughtPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
-        const clickAttack = Math.pow(partyClickBonus, 1.4);
-
-        const bonus = this.multiplier.getBonus('clickAttack', useItem);
-
-        return Math.floor(clickAttack * bonus);
-    }
+        return Math.pow(partyClickBonus, 1.4);
+    });
 
     canAccess(): boolean {
         return true;
