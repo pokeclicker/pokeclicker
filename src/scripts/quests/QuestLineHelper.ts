@@ -1497,7 +1497,7 @@ class QuestLineHelper {
         const battleRedGenesect2 = new DefeatTemporaryBattleQuest('Red Genesect 2', 'The Red Genesect is trying to escape the Castelia Sewers, stop it!');
         genesectQuestLine.addQuest(battleRedGenesect2);
 
-        const catchGenesect = new CaptureSpecificPokemonQuest('Genesect', 'Catch or hatch Genesect.', 1, true, 0, undefined);
+        const catchGenesect = new CaptureSpecificPokemonQuest('Genesect').withDescription('Catch Genesect in P2 Lab.');
         genesectQuestLine.addQuest(catchGenesect);
 
         App.game.quests.questLines().push(genesectQuestLine);
