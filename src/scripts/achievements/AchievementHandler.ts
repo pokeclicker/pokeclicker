@@ -315,7 +315,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs.', new HatchRequirement(10), 0.04);
         AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs.', new HatchRequirement(100), 0.15);
         AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs.', new HatchRequirement(1000), 0.3);
-        AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs.', new HatchRequirement(10000), 0.4);
+        AchievementHandler.addAchievement('Official Easter Bunny', 'Hatch 10,000 eggs.', new HatchRequirement(10000), 0.4);
         AchievementHandler.addAchievement('What Do You Do With All the Eggshells?', 'Hatch 100,000 eggs.', new HatchRequirement(100000), 0.5);
         AchievementHandler.addAchievement('Day Care Is My Home', 'Hatch 250,000 eggs.', new HatchRequirement(250000), 0.7);
 
