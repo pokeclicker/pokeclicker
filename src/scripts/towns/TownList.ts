@@ -2882,8 +2882,8 @@ const MrStone2 = new NPC('Mr. Stone', [
 const ZinniaOrigin = new NPC('Zinnia', [
     'Wow, $playername$! You\'ve been busy!',
     'Now that things are calmer in Hoenn, I\'ve decided to keep an eye on Kyogre and Groudon and make sure they don\'t cause any more trouble.',
-    'Groudon reverts to its Primal form in when it\'s sunny, and Kyogre reverts to its Primal form in the rain.',
-    'Archie and Maxie are still lurking somewhere in Hoenn,but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
+    'Groudon reverts to its Primal form when it\'s sunny, and Kyogre reverts to its Primal form in the rain.',
+    'Archie and Maxie are still lurking somewhere in Hoenn, but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
 });
@@ -5016,6 +5016,37 @@ const UnovaFossilNpc = new NPC('Friendly Waitress', [
     '... Do you think they\'re hiring?',
 ], {image: 'assets/images/npcs/Waitress.png'});
 
+const InvestigateP2 = new NPC('Investigate the P2 Laboratory', [
+    '<i>A bright red Pokémon flies past you at a high speed, heading west.</i>',
+], {
+    image: 'assets/images/shinypokemon/649.05.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legend Awakened'), new QuestLineStepCompletedRequirement('The Legend Awakened', 1, GameConstants.AchievementOption.less)]),
+});
+
+const AncientBugHunter1 = new NPC('Ancient Bug Hunter', [
+    'Did you see it come through? The Paleozoic Pokémon, Genesect?',
+    'They haven\'t been seen in Unova for millions of years! If one is here now, it\'s sure to be a little confused about what the world is like.',
+    'I worry it might attack the city out of fear.',
+], {
+    image: 'assets/images/npcs/Super Nerd.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Legend Awakened', 2), new QuestLineStepCompletedRequirement('The Legend Awakened', 4, GameConstants.AchievementOption.less)]),
+});
+
+const GenesectFight = new NPC('Witness the battle', [
+    '<i>The Red Genesect and a powerful Pokémon you don\'t recognize exchange energy blasts. The Red Genesect flees the battle, heading east.</i>',
+], {
+    image: 'assets/images/npcs/other/GenesectFight.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Legend Awakened', 4), new QuestLineStepCompletedRequirement('The Legend Awakened', 6, GameConstants.AchievementOption.less)]),
+});
+
+const AncientBugHunter2 = new NPC('Ancient Bug Hunter', [
+    'Wow! A real, live Genesect!',
+    'I hear that when you equip them with powerful Drive devices, they change forms!',
+    'They also have a high-speed form, which I hear has been sighted across Unova.',
+], {
+    image: 'assets/images/npcs/Super Nerd.png',
+    requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
+});
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -5055,7 +5086,7 @@ TownList['Castelia City'] = new Town(
     [CasteliaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Castelia City']), new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0)],
-        npcs: [CasteliaMusician],
+        npcs: [CasteliaMusician, GenesectFight],
     }
 );
 TownList['A Perfectly Ordinary Frigate'] = new Town(
@@ -5321,7 +5352,11 @@ TownList['Castelia Sewers'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0),
-    ]
+    ],
+    [TemporaryBattleList['Red Genesect 1'], TemporaryBattleList['Red Genesect 2']],
+    {
+        npcs: [AncientBugHunter1, AncientBugHunter2],
+    }
 );
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
@@ -5486,7 +5521,7 @@ TownList['P2 Laboratory'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
     [],
     {
-        npcs: [P2LaboratoryColress],
+        npcs: [P2LaboratoryColress, InvestigateP2],
     }
 );
 
