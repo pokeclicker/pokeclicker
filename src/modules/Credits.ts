@@ -231,6 +231,7 @@ export const SpriteCredits: Credit[] = [
             'Dynamic Background Sneasler',
             'Dynamic Background Overqwil',
             'Dynamic Background Enamorus',
+            'Paldea dynamic background before edits',
         ],
         // Notes: Allowed use with credit
     },
