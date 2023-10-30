@@ -618,6 +618,7 @@ TemporaryBattleList.Red = new TemporaryBattle(
             });
         },
         resetDaily: true,
+        returnTown: 'Mt. Silver',
     }
 );
 
