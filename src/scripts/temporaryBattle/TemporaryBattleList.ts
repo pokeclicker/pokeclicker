@@ -2075,6 +2075,82 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.'}),
     }
 );
+TemporaryBattleList['Red Genesect 1'] = new TemporaryBattle(
+    'Red Genesect 1',
+    [new GymPokemon('Genesect', 174858488, 80, undefined, true)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 0)],
+    undefined,
+    {
+        displayName: 'Red Genesect',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 0),
+    }
+);
+TemporaryBattleList['Genesect Burn'] = new TemporaryBattle(
+    'Genesect Burn',
+    [new GymPokemon('Genesect (Burn)', 180858488, 80, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 3)],
+    undefined,
+    {
+        displayName: 'Burn Drive Genesect',
+        returnTown: 'Castelia Sewers',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 3),
+    }
+);
+TemporaryBattleList['Genesect Chill'] = new TemporaryBattle(
+    'Genesect Chill',
+    [new GymPokemon('Genesect (Chill)', 180858488, 80, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 3)],
+    undefined,
+    {
+        displayName: 'Chill Drive Genesect',
+        returnTown: 'Castelia Sewers',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 3),
+    }
+);
+TemporaryBattleList['Genesect Douse'] = new TemporaryBattle(
+    'Genesect Douse',
+    [new GymPokemon('Genesect (Douse)', 180858488, 80, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 3)],
+    undefined,
+    {
+        displayName: 'Douse Drive Genesect',
+        returnTown: 'Castelia Sewers',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 3),
+    }
+);
+TemporaryBattleList['Genesect Shock'] = new TemporaryBattle(
+    'Genesect Shock',
+    [new GymPokemon('Genesect (Shock)', 180858488, 80, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 3)],
+    undefined,
+    {
+        displayName: 'Shock Drive Genesect',
+        returnTown: 'Castelia Sewers',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 3),
+    }
+);
+TemporaryBattleList['Red Genesect 2'] = new TemporaryBattle(
+    'Red Genesect 2',
+    [new GymPokemon('Genesect (High-Speed)', 182858488, 80, undefined, true)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 6)],
+    undefined,
+    {
+        displayName: 'Red Genesect',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 6),
+    }
+);
 TemporaryBattleList.DreamResearcher = new TemporaryBattle(
     'Dream Researcher',
     [new GymPokemon('Mega Audino', 125000000, 32)],
