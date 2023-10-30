@@ -4820,6 +4820,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 115.02,
+        'name': 'Baby Kangaskhan',
+        'type': [PokemonType.Normal],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 207,
+        'catchRate': 45,
+        'baby': true,
+        'evolutions': [DummyEvolution('Baby Kangaskhan', 'Kangaskhan')],
+        'base': {
+            'hitpoints': 53,
+            'attack': 63,
+            'specialAttack': 30,
+            'defense': 50,
+            'specialDefense': 50,
+            'speed': 50,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
         'id': 116,
         'name': 'Horsea',
         'catchRate': 225,
