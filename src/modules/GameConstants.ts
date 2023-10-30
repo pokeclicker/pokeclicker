@@ -59,7 +59,7 @@ export const MaxIDPerRegion = [
     809, // 88 - Alola
     898, // 89 - Galar
     905, // 7 - Hisui
-    1010, // 105 - Paldea
+    1017, // 112 - Paldea
 ];
 
 // Subregions
@@ -901,6 +901,8 @@ export enum StoneType {
     'Malicious_armor',
     'Leaders_crest',
     'Gimmighoul_coin',
+    'Syrupy_apple',
+    'Unremarkable_teacup',
 }
 
 export enum FossilPieceType {
