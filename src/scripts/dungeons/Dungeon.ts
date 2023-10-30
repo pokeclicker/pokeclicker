@@ -9315,7 +9315,12 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Zap Plate'},
             {loot: 'Great_Twisted_Spoon', ignoreDebuff : true, weight: 3, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemRequirement(1, 'Great_Twisted_Spoon', GameConstants.AchievementOption.less)])},
         ],
-        legendary: [{loot: 'Revive'}],
+        legendary: [
+            {loot: 'Burn_Drive', ignoreDebuff: true},
+            {loot: 'Chill_Drive', ignoreDebuff: true},
+            {loot: 'Douse_Drive', ignoreDebuff: true},
+            {loot: 'Shock_Drive', ignoreDebuff: true},
+        ],
     },
     5403000,
     [
@@ -9331,7 +9336,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
                 new GymPokemon('Magnezone', 10000000, 72),
                 new GymPokemon('Klinklang', 11000000, 74),
             ], { weight: 1 }, 'Colress', '(colress)'),
-        new DungeonBossPokemon('Genesect', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Genesect', 62000000, 100, {requirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 7)}),
     ],
     396500, 18);
 
