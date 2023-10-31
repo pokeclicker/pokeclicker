@@ -43,8 +43,9 @@ class DungeonRunner {
         DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.optionalParameters.dungeonRegionalDifficulty ?? player.region);
-        // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
-        dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
+        // Decrease dungeon size by 1 for every (n(n+1)/2) * 50
+        dungeonSize -= Math.max(0, Math.floor(-1 + Math.sqrt(1 + 4 * App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() / 25) / 2));
+
         const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
         const generateChestLoot = () => {
             const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon.name)]();
