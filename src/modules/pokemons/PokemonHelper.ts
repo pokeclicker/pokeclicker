@@ -133,6 +133,10 @@ export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
     return !!P.pokemonMap[pokemonName].evolutions?.some((e) => e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
 }
 
+export function hasUncaughtMegaEvolution(pokemonName: PokemonNameType): boolean {
+    return !!P.pokemonMap[pokemonName].evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon) && e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
+}
+
 export function getMegaStones(pokemonName: PokemonNameType): MegaStoneItem[] {
     return GameHelper.enumStrings(MegaStoneType)
         .filter(s => (ItemList[s] as MegaStoneItem)?.basePokemon == pokemonName)
