@@ -66,14 +66,16 @@ class Safari {
         Safari.lastDirection = 'up';
         Safari.activeEnvironment(SafariEnvironments.Grass);
         Safari.inBattle(false);
-        
+
         Safari.balls(Safari.calculateStartPokeballs());
         for ( let i = 0; i < Safari.sizeY(); i++) {
             Safari.grid.push(Array(Safari.sizeX()).fill(GameConstants.SafariTile.ground));
         }
 
-        const bodyOrder = [FenceBody, WaterBody, SandBody, WaterBody, WaterBody, SandBody, TreeBody, TreeBody, TreeBody, TreeBody, TreeBody, 
-            FenceBody, SandBody, FenceBody, WaterBody, SandBody, WaterBody, WaterBody, SandBody, SandBody, GrassBody, GrassBody, GrassBody, GrassBody];
+        const bodyOrder = [
+            FenceBody, WaterBody, SandBody, WaterBody, WaterBody, SandBody, TreeBody, TreeBody, TreeBody, TreeBody, TreeBody, FenceBody,
+            SandBody, FenceBody, WaterBody, SandBody, WaterBody, WaterBody, SandBody, SandBody, GrassBody, GrassBody, GrassBody, GrassBody,
+        ];
         bodyOrder.forEach((bodyType) => Safari.addRandomBody(new bodyType()));
 
         Safari.calculateAccessibleTiles();
