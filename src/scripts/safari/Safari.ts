@@ -66,40 +66,18 @@ class Safari {
         Safari.lastDirection = 'up';
         Safari.activeEnvironment(SafariEnvironments.Grass);
         Safari.inBattle(false);
-        Safari.inProgress(true);
+        
         Safari.balls(Safari.calculateStartPokeballs());
         for ( let i = 0; i < Safari.sizeY(); i++) {
-            Safari.grid.push(Array(Safari.sizeX()).fill(0));
+            Safari.grid.push(Array(Safari.sizeX()).fill(GameConstants.SafariTile.ground));
         }
 
-        Safari.addRandomBody(new FenceBody());
-        Safari.addRandomBody(new WaterBody());
-        Safari.addRandomBody(new SandBody());
-        Safari.addRandomBody(new WaterBody());
-        Safari.addRandomBody(new WaterBody());
-        Safari.addRandomBody(new SandBody());
-        Safari.addRandomBody(new TreeBody());
-        Safari.addRandomBody(new TreeBody());
-        Safari.addRandomBody(new TreeBody());
-        Safari.addRandomBody(new TreeBody());
-        Safari.addRandomBody(new TreeBody());
-        Safari.addRandomBody(new FenceBody());
-        Safari.addRandomBody(new SandBody());
-        Safari.addRandomBody(new FenceBody());
-        Safari.addRandomBody(new WaterBody());
-        Safari.addRandomBody(new SandBody());
-        Safari.addRandomBody(new WaterBody());
-        Safari.addRandomBody(new WaterBody());
-        Safari.addRandomBody(new SandBody());
-        Safari.addRandomBody(new SandBody());
-        Safari.addRandomBody(new GrassBody());
-        Safari.addRandomBody(new GrassBody());
-        Safari.addRandomBody(new GrassBody());
-        Safari.addRandomBody(new GrassBody());
+        const bodyOrder = [FenceBody, WaterBody, SandBody, WaterBody, WaterBody, SandBody, TreeBody, TreeBody, TreeBody, TreeBody, TreeBody, 
+            FenceBody, SandBody, FenceBody, WaterBody, SandBody, WaterBody, WaterBody, SandBody, SandBody, GrassBody, GrassBody, GrassBody, GrassBody];
+        bodyOrder.forEach((bodyType) => Safari.addRandomBody(new bodyType()));
 
         Safari.calculateAccessibleTiles();
-
-        Safari.show();
+        Safari.inProgress(true);
     }
 
     private static addRandomBody(body: SafariBody) {
@@ -146,8 +124,8 @@ class Safari {
         for (let i = 0; i < body.grid.length; i++) {
             for (let j = 0; j < body.grid[i].length; j++) {
                 if ( (i + y) < Safari.sizeY() && (j + x) < Safari.sizeX()) {
-                    if (body.grid[i][j] !== 0) {
-                        if (Safari.grid[i + y][j + x] !== 0) {
+                    if (body.grid[i][j] !== GameConstants.SafariTile.ground) {
+                        if (Safari.grid[i + y][j + x] !== GameConstants.SafariTile.ground) {
                             return false;
                         }
                     }
@@ -175,9 +153,7 @@ class Safari {
 
     // Check if grid has water tiles
     private static hasWaterTiles() {
-        // Check if mid center water tile (5) exists
-        // Water body is 3x3 at min so that tile will always appear if there is a water body
-        return Safari.grid.some((row) => row.includes(5));
+        return Safari.grid.some((row) => row.some((tile) => GameConstants.SAFARI_WATER_BLOCKS.includes(tile)));
     }
 
     private static calculateAccessibleTiles() {
@@ -297,43 +273,15 @@ class Safari {
         return [Math.floor((Safari.sizeX() - 1) / 2), Safari.sizeY() - 1];
     }
 
-    static show() {
-        let html = '';
-
-        for (let i = 0; i < Safari.grid.length; i++) {
-            html += '<div class="row flex-nowrap">';
-            for (let j = 0; j < Safari.grid[0].length; j++) {
-                html += Safari.square(i, j);
-            }
-            html += '</div>';
-        }
-
-        $('#safariBody').html(html);
-
-        const [x, y] = Safari.getPlayerStartCoords();
-        Safari.addPlayer(x, y);
-
-    }
-
-    private static square(i: number, j: number): string {
-        const tile = Safari.grid[i][j];
-        const img = `assets/images/safari/${tile}.png`;
-        const divId = `safari-${j}-${i}`;
-        // Add z-index if tiles are tree top tiles
-        const zIndex = (tile === GameConstants.SafariTile.treeTopL || tile === GameConstants.SafariTile.treeTopC || tile === GameConstants.SafariTile.treeTopR) ? 'z-index: 2;' : '';
-
-        return `<div id='${divId}' style="background-image:url('${img}'); ${zIndex}" class='safariSquare'></div>`;
-    }
-
-    private static addPlayer(i: number, j: number) {
+    // Called by knockout once map is done rendering
+    private static addPlayer() {
+        const [i, j] = Safari.getPlayerStartCoords();
         const topLeft = $('#safari-0-0').offset();
         const offset = {
             top: 32 * j + topLeft.top - 24,
             left: 32 * i + topLeft.left - 12,
         };
-        $('#safariBody').append('<div id="sprite"></div>');
         document.getElementById('sprite').classList.value = `walk${Safari.lastDirection}`;
-        $('#sprite').css('position', 'absolute');
         $('#sprite').offset( offset );
         Safari.playerXY.x = i;
         Safari.playerXY.y = j;
