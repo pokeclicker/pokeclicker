@@ -377,6 +377,8 @@ namespace GameConstants {
         'Malicious_armor',
         'Leaders_crest',
         'Gimmighoul_coin',
+        'Syrupy_apple',
+        'Unremarkable_teacup',
     }
     declare enum FossilPieceType {
         'None',
