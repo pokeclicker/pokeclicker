@@ -856,6 +856,28 @@
          })
      %>
 
+    <%- include('templates/mapOverlay',
+        { name: "Red"
+        , x: 79, y: 19.5
+        , width: 4, height: 4
+        , databind: `click: () => {
+            Notifier.notify({message: '...'});
+        }`
+        , visible:  "App.game.badgeCase.hasBadge(BadgeEnums.Elite_JohtoChampion)"
+        , image: "assets/images/map/red-back.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Red"
+        , x: 79, y: 19.5
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Red'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Red'] && TemporaryBattleList['Red'].isVisible()"
+        , image: "assets/images/map/red.png"
+        })
+    %>
+
      <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 0, y: 21
