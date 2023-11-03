@@ -6340,7 +6340,7 @@ export const pokemonList = createPokemonArray(
         'id': 143.02,
         'name': 'Santa Snorlax',
         'catchRate': 25,
-        'type': [PokemonType.Normal],
+        'type': [PokemonType.Normal, PokemonType.Ice],
         'levelType': LevelType.slow,
         'exp': 189,
         'eggCycles': 40,
