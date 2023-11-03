@@ -13,4 +13,8 @@ export default class PokerusStatusRequirement extends AchievementRequirement {
     public hint(): string {
         return `${this.requiredValue} Pokémon needs to be infected.`;
     }
+
+    public toString(): string {
+        return `${super.toString()} ${this.statusRequired}`;
+    }
 }

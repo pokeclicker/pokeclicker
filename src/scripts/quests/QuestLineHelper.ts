@@ -1463,6 +1463,46 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
+
+    // Genesect quest - Available after clearing P2 lab
+    public static createGenesectQuestLine() {
+        const genesectQuestLine = new QuestLine('The Legend Awakened', 'Learn about the powerful Pokémon discovered under the P2 Laboratory.', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory')), GameConstants.BulletinBoards.Unova);
+
+        const investigateP2 = new TalkToNPCQuest(InvestigateP2, 'Investigate the basement of the P2 Laboratory.');
+        genesectQuestLine.addQuest(investigateP2);
+
+        const battleRedGenesect1 = new DefeatTemporaryBattleQuest('Red Genesect 1', 'Fight the mysterious Pokémon in the Castelia Sewers.');
+        genesectQuestLine.addQuest(battleRedGenesect1);
+
+        const fightCasteliaSewers = new CustomQuest(10, 0, 'Search the Castelia Sewers for clues about the Red Genesect.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Castelia Sewers')]());
+        genesectQuestLine.addQuest(fightCasteliaSewers);
+
+        const talkToAncientBugHunter = new TalkToNPCQuest(AncientBugHunter1, 'Talk to the Ancient Bug Hunter in the Castelia Sewers.');
+        genesectQuestLine.addQuest(talkToAncientBugHunter);
+
+        const fightDriveGenesect = new CustomQuest (4, 0, 'Defeat the four Genesect surrounding Castelia City.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Genesect Burn')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Genesect Chill')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Genesect Douse')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Genesect Shock')]()
+        );
+        genesectQuestLine.addQuest(fightDriveGenesect);
+
+        const watchGenesectFight = new TalkToNPCQuest(GenesectFight, 'Witness the battle between the Red Genesect and another powerful Pokémon in Castelia City.');
+        genesectQuestLine.addQuest(watchGenesectFight);
+
+        const digP2 = new CustomQuest(5, undefined, 'The Red Genesect has crashed into the P2 Lab, leaving a pile of rubble in its wake. Dig through the rubble to learn more.', App.game.statistics.undergroundLayersMined);
+        genesectQuestLine.addQuest(digP2);
+
+        const battleRedGenesect2 = new DefeatTemporaryBattleQuest('Red Genesect 2', 'The Red Genesect is trying to escape the Castelia Sewers, stop it!');
+        genesectQuestLine.addQuest(battleRedGenesect2);
+
+        const catchGenesect = new CaptureSpecificPokemonQuest('Genesect').withDescription('Catch Genesect in P2 Lab.');
+        genesectQuestLine.addQuest(catchGenesect);
+
+        App.game.quests.questLines().push(genesectQuestLine);
+    }
+
     // XD Questline, available after Unova E4
     public static createOrreXDQuestLine() {
         const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new DevelopmentRequirement(new MultiRequirement([new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)])), GameConstants.BulletinBoards.Unova);
@@ -3827,6 +3867,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createGenesectQuestLine();
         this.createOrreXDQuestLine();
         this.createDeltaEpisodeQuestLine();
         this.createPrimalReversionQuestLine();
