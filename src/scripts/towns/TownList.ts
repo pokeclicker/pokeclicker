@@ -375,19 +375,19 @@ const BillsGrandpa6 = new NPC('Bill\'s Grandpa', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 9), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 11, GameConstants.AchievementOption.less)]),
 });
 
-const BillsGrandpa7 = new NPC('Bill\'s Grandpa', [
+const BillsGrandpa7 = new GiftNPC('Bill\'s Grandpa', [
     'As I said, that was one of the best battles I\'ve ever had.',
     'There is someone I would like to go with you, it\'s my partner, Eevee.',
     'I think Eevee is gonna be better with you than with me. I\'m sure that, with you, Eevee is gonna grow up healthy and strong!',
-], {image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 11), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13, GameConstants.AchievementOption.less)]),
-});
+], () => {
+    App.game.party.gainPokemonByName('Eevee');
+}, 'assets/images/npcs/Bill\'s Grandpa with Eevee.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 11, GameConstants.AchievementOption.more), new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13, GameConstants.AchievementOption.less),new ObtainedPokemonRequirement('Eevee', true)])])  });
 
 const BillsGrandpa8 = new NPC('Bill\'s Grandpa', [
-    'Hello again, I see you are treating Eevee very well.',
+    'Hello again! I see you are treating your Eevee very well.',
     'I\'m still house-sitting for my grandson, I\'m sure he\'s doing well.',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
-    requirement: new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13), new ObtainedPokemonRequirement('Eevee', false)]) ,
 });
 
 const BillsHouseEusine = new NPC('Eusine', [
@@ -1624,7 +1624,7 @@ const PlayWithPichu = new GiftNPC('Spiky-eared Pichu', [
     '<i>Pichu runs circles around your legs. It seems like Pichu wants you to pick it up.</i>',
 ], () => {
     App.game.party.gainPokemonByName('Spiky-eared Pichu');
-}, 'assets/images/pokemon/172.01.png', { requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 7, GameConstants.AchievementOption.more) });
+}, 'assets/images/pokemon/172.01.png', { requirement: new MultiRequirement([ new QuestLineStepCompletedRequirement('Unfinished Business', 7, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Spiky-eared Pichu', true)]) });
 
 
 const IlexForestShrine2 = new NPC('Investigate the Shrine', [

@@ -259,18 +259,18 @@ class QuestLineHelper {
         BillsGrandpaQuestLine.addQuest(fightBillsGrandpa);
 
         // Talk to Bill's Grandpa after battling him
-        const EeveeReward = () => {
-            App.game.party.gainPokemonByName('Eevee');
-            Notifier.notify({
-                title: BillsGrandpaQuestLine.name,
-                message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
-                type: NotificationConstants.NotificationOption.success,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-                timeout: 3e4,
-            });
-        };
+        //const EeveeReward = () => {
+        //    App.game.party.gainPokemonByName('Eevee');
+        //    Notifier.notify({
+        //        title: BillsGrandpaQuestLine.name,
+        //        message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
+        //        type: NotificationConstants.NotificationOption.success,
+        //        sound: NotificationConstants.NotificationSound.General.new_catch,
+        //        timeout: 3e4,
+        //    });
+        //};
 
-        const talkToBillsGrandpa7 = new TalkToNPCQuest(BillsGrandpa7, 'Talk to Bill\'s Grandpa one last time.').withCustomReward(EeveeReward);
+        const talkToBillsGrandpa7 = new TalkToNPCQuest(BillsGrandpa7, 'Talk to Bill\'s Grandpa one last time.');
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa7);
 
         App.game.quests.questLines().push(BillsGrandpaQuestLine);
