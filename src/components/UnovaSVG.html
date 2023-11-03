@@ -1030,4 +1030,45 @@
          })
      %>
 
+    <%- include('templates/mapOverlay',
+        { name: "Genesect Burn"
+        , x: 45, y: 45
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Genesect Burn'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Genesect Burn'] && TemporaryBattleList['Genesect Burn'].isVisible()"
+        , image: "assets/images/map/Overworld Genesect.png"
+        })
+    %>
+
+
+    <%- include('templates/mapOverlay',
+        { name: "Genesect Chill"
+        , x: 54, y: 51
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Genesect Chill'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Genesect Chill'] && TemporaryBattleList['Genesect Chill'].isVisible()"
+        , image: "assets/images/map/Overworld Genesect.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Genesect Douse"
+        , x: 45, y: 51
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Genesect Douse'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Genesect Douse'] && TemporaryBattleList['Genesect Douse'].isVisible()"
+        , image: "assets/images/map/Overworld Genesect.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Genesect Shock"
+        , x: 54, y: 45
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Genesect Shock'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Genesect Shock'] && TemporaryBattleList['Genesect Shock'].isVisible()"
+        , image: "assets/images/map/Overworld Genesect.png"
+        })
+    %>
+
 </g>

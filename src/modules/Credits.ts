@@ -540,6 +540,7 @@ export const SpriteCredits: Credit[] = [
         image: 'assets/images/profile/trainer-119.png',
         resources: [
             'Dugtrio (Punk)',
+            'Genesect (High-Speed) and Drive Forms',
             'Koga Trainer',
             'Miracle Chest',
             'Pinkan Geodude',

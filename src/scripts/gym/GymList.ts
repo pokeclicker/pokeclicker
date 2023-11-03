@@ -2764,7 +2764,7 @@ GymList['Pokémon Trainer Arven'] = new Gym(
         new GymPokemon('Scovillian', 203123316, 60),
         new GymPokemon('Toedscruel', 203123316, 61),
         new GymPokemon('Garganacl', 203123316, 62),
-        new GymPokemon('Mabostiff', 203123316, 63),
+        new GymPokemon('Mabosstiff', 203123316, 63),
     ],
     BadgeEnums.Elite_Arven,
     250000,
