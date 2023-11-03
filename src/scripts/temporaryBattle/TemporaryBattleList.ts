@@ -532,7 +532,7 @@ TemporaryBattleList['Kimono Girls'] = new TemporaryBattle(
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     'Spiky-eared Pichu',
     [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],
-    '<b><i>You caught the Spiky-eared Pichu!</i></b>',
+    '<i>Spiky-eared Pichu stopped fighting!</i>',
     [new QuestLineStepCompletedRequirement('Unfinished Business', 6)],
     undefined,
     {
@@ -550,7 +550,7 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
         new GymPokemon('Kangaskhan', 875275, 40),
     ],
     'What in the world are you? How this is possible...? How can a kid like you manage to destroy my dream once again? The precious dream of Team Rocket has become little more than an illusion...',
-    [new QuestLineStepCompletedRequirement('Unfinished Business', 9)]
+    [new QuestLineStepCompletedRequirement('Unfinished Business', 10)]
 );
 TemporaryBattleList['Silver 6'] = new TemporaryBattle(
     'Silver 6',

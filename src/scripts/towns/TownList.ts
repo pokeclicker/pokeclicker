@@ -1584,7 +1584,7 @@ const AzaleaCelebiOak2 = new NPC('Prof. Oak', [
     'It sounds like you encountered a Time Distortion. Celebi is sensitive to time, it must be distressed. I have heard rumors of something similar going on at Tohjo Falls. Maybe if you clear up that Time Distortion, Celebi will want to come out to play?',
 ], {
     image: 'assets/images/npcs/Professor Oak.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 7), new QuestLineStepCompletedRequirement('Unfinished Business', 9, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 8), new QuestLineStepCompletedRequirement('Unfinished Business', 10, GameConstants.AchievementOption.less)]),
 });
 
 const AzaleaCelebiOak3 = new NPC('Prof. Oak', [
@@ -1592,7 +1592,7 @@ const AzaleaCelebiOak3 = new NPC('Prof. Oak', [
     'The Time Distortion seems to have cleared up. Celebi should be happy now. You should go check out the Shrine again.',
 ], {
     image: 'assets/images/npcs/Professor Oak.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 10), new QuestLineStepCompletedRequirement('Unfinished Business', 12, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 11), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less)]),
 });
 
 const AzaleaCelebiOak4 = new NPC('Prof. Oak', [
@@ -1600,7 +1600,7 @@ const AzaleaCelebiOak4 = new NPC('Prof. Oak', [
     'If it wants to play I\'m sure a great trainer such as yourself can figure out a way that you can be friends and play all the time!',
 ], {
     image: 'assets/images/npcs/Professor Oak.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 12), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 13), new QuestLineStepCompletedRequirement('Unfinished Business', 14, GameConstants.AchievementOption.less)]),
 });
 
 const AzaleaCelebiOak5 = new NPC('Prof. Oak', [
@@ -1609,7 +1609,7 @@ const AzaleaCelebiOak5 = new NPC('Prof. Oak', [
     'Goodbye Celebi.',
 ], {
     image: 'assets/images/npcs/Professor Oak.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 13), new QuestLineCompletedRequirement('Unfinished Business', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 14), new QuestLineCompletedRequirement('Unfinished Business', GameConstants.AchievementOption.less)]),
 });
 
 const IlexForestShrine1 = new NPC('Investigate the Shrine', [
@@ -1620,14 +1620,22 @@ const IlexForestShrine1 = new NPC('Investigate the Shrine', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 5), new QuestLineStepCompletedRequirement('Unfinished Business', 7, GameConstants.AchievementOption.less)]),
 });
 
+const PlayWithPichu = new GiftNPC('Spiky-eared Pichu', [
+    '<i>Pichu runs circles around your legs. It seems like Pichu wants you to pick it up.</i>',
+], () => {
+    App.game.party.gainPokemonByName('Spiky-eared Pichu');
+}, 'assets/images/pokemon/172.01.png', { requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 7, GameConstants.AchievementOption.more) });
+
+
 const IlexForestShrine2 = new NPC('Investigate the Shrine', [
     '<i>Everything is normal.</i>',
     '<i>Celebi is here! It seems to want to play with you, but every time you approach it backs off. It\'s luring you deeper into the forest!</i>',
     '<i>What would the professor do?</i>',
 ], {
     image: 'assets/images/npcs/other/Ilex Forest.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 11), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 12), new QuestLineStepCompletedRequirement('Unfinished Business', 14, GameConstants.AchievementOption.less)]),
 });
+
 
 const EcruteakBill = new NPC('Bill', [
     'I traveled here all the way from Goldenrod to buy a Soothe Bell for my Eevee.',
@@ -1954,7 +1962,7 @@ TownList['Ilex Forest'] = new DungeonTown(
     ],
     [TemporaryBattleList['Spiky-eared Pichu']],
     {
-        npcs: [IlexForestShrine1, IlexForestShrine2, Naoko],
+        npcs: [IlexForestShrine1, IlexForestShrine2, PlayWithPichu, Naoko],
     }
 );
 TownList['Burned Tower'] = new DungeonTown(
