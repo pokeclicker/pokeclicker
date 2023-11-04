@@ -2484,7 +2484,7 @@ class Update implements Saveable {
 
             // Remove erroneous BreedingFilter search setting
             delete settingsData[''];
-            
+
             // Remove Z Crystal gyms and badges (remove furthest down the index first as to not get confused by index numbers)
             // Mina\'s Trial
             saveData.statistics.gymsDefeated.splice(88, 1);
