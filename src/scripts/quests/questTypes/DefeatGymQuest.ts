@@ -36,6 +36,9 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
+        if (this.customDescription) {
+            return this.customDescription;
+        }
         const elite = this.gymTown.includes('Elite') || this.gymTown.includes('Champion');
         const displayName = GymList[this.gymTown]?.displayName;
         const leaderName = GymList[this.gymTown].leaderName.replace(/\d/g, '');

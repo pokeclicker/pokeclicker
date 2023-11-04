@@ -29,4 +29,8 @@ export default class RouteKillRequirement extends AchievementRequirement {
 
         return `${Routes.getName(this.route, this.region, true)} still needs to be completed.`;
     }
+
+    public toString(): string {
+        return `${super.toString()} ${this.region} ${this.route}`;
+    }
 }
