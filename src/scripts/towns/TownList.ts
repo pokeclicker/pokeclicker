@@ -1494,7 +1494,10 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.ChartiBerry,
 ], 'Johto Berry Master');
 
-
+//Johto Contest Shop
+const JohtoContestShop = new Shop([
+    ItemList['Sudowoodo (Golden)'],
+], 'Contest Shop');
 // Johto NPCs
 
 const CherrygroveMrPokemon = new NPC('Mr. Pokémon', [
@@ -1800,7 +1803,16 @@ const HowardClifford3 = new NPC('Howard Clifford', [
     image: 'assets/images/npcs/Howard Clifford.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 13), new QuestLineStepCompletedRequirement('Detective Pikachu', 15, GameConstants.AchievementOption.less)]),
 });
-
+const ParkAttendant = new NPC('Park Attendant', [
+    'Welcome to the National Park!',
+    'Lots of people come through here to take a stroll, and some come from far away to participate in our Bug Catching Contest!',
+    'All kinds of Bug Pokémon can be found in the park, with different ones showing up every day! Each one can be caught for Contest Tokens, and more powerful Pokémon are worth more Tokens!',
+], { image: 'assets/images/npcs/Pokémon Ranger (male).png' });
+const ParkResearcher = new NPC('Researcher', [
+    'Welcome to the National Park!',
+    'Thanks to recent breakthroughs in the field of alloying and electroplating, we have discovered a way to coat some Pokémon in metal!',
+    'An experimental specimen can be bought here: A Sudowoodo that is no longer weak against Water attacks!',
+], { image: 'assets/images/npcs/Scientist (male).png' });
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
@@ -1916,6 +1928,16 @@ TownList['Indigo Plateau Johto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 26),
             new TemporaryBattleRequirement('Silver 5'),
         ],
+    }
+);
+TownList['National Park'] = new Town(
+    'National Park',
+    GameConstants.Region.johto,
+    GameConstants.JohtoSubRegions.Johto,
+    [new SafariTownContent(), JohtoContestShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 35)],
+        npcs: [ParkAttendant, ParkResearcher],
     }
 );
 
@@ -2035,7 +2057,7 @@ TownList['Mt. Silver'] = new DungeonTown(
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
-    [TemporaryBattleList.Red],
+    [],
     {
         npcs: [RedOldManJohtoNPC],
     }
@@ -2891,8 +2913,8 @@ const MrStone2 = new NPC('Mr. Stone', [
 const ZinniaOrigin = new NPC('Zinnia', [
     'Wow, $playername$! You\'ve been busy!',
     'Now that things are calmer in Hoenn, I\'ve decided to keep an eye on Kyogre and Groudon and make sure they don\'t cause any more trouble.',
-    'Groudon reverts to its Primal form in when it\'s sunny, and Kyogre reverts to its Primal form in the rain.',
-    'Archie and Maxie are still lurking somewhere in Hoenn,but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
+    'Groudon reverts to its Primal form when it\'s sunny, and Kyogre reverts to its Primal form in the rain.',
+    'Archie and Maxie are still lurking somewhere in Hoenn, but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
 });
@@ -5027,6 +5049,37 @@ const UnovaFossilNpc = new NPC('Friendly Waitress', [
     '... Do you think they\'re hiring?',
 ], {image: 'assets/images/npcs/Waitress.png'});
 
+const InvestigateP2 = new NPC('Investigate the P2 Laboratory', [
+    '<i>A bright red Pokémon flies past you at a high speed, heading west.</i>',
+], {
+    image: 'assets/images/shinypokemon/649.05.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legend Awakened'), new QuestLineStepCompletedRequirement('The Legend Awakened', 1, GameConstants.AchievementOption.less)]),
+});
+
+const AncientBugHunter1 = new NPC('Ancient Bug Hunter', [
+    'Did you see it come through? The Paleozoic Pokémon, Genesect?',
+    'They haven\'t been seen in Unova for millions of years! If one is here now, it\'s sure to be a little confused about what the world is like.',
+    'I worry it might attack the city out of fear.',
+], {
+    image: 'assets/images/npcs/Super Nerd.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Legend Awakened', 2), new QuestLineStepCompletedRequirement('The Legend Awakened', 4, GameConstants.AchievementOption.less)]),
+});
+
+const GenesectFight = new NPC('Witness the battle', [
+    '<i>The Red Genesect and a powerful Pokémon you don\'t recognize exchange energy blasts. The Red Genesect flees the battle, heading east.</i>',
+], {
+    image: 'assets/images/npcs/other/GenesectFight.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Legend Awakened', 4), new QuestLineStepCompletedRequirement('The Legend Awakened', 6, GameConstants.AchievementOption.less)]),
+});
+
+const AncientBugHunter2 = new NPC('Ancient Bug Hunter', [
+    'Wow! A real, live Genesect!',
+    'I hear that when you equip them with powerful Drive devices, they change forms!',
+    'They also have a high-speed form, which I hear has been sighted across Unova.',
+], {
+    image: 'assets/images/npcs/Super Nerd.png',
+    requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
+});
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -5066,7 +5119,7 @@ TownList['Castelia City'] = new Town(
     [CasteliaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Castelia City']), new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0)],
-        npcs: [CasteliaMusician],
+        npcs: [CasteliaMusician, GenesectFight],
     }
 );
 TownList['A Perfectly Ordinary Frigate'] = new Town(
@@ -5332,7 +5385,11 @@ TownList['Castelia Sewers'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0),
-    ]
+    ],
+    [TemporaryBattleList['Red Genesect 1'], TemporaryBattleList['Red Genesect 2']],
+    {
+        npcs: [AncientBugHunter1, AncientBugHunter2],
+    }
 );
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
@@ -5497,7 +5554,7 @@ TownList['P2 Laboratory'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
     [],
     {
-        npcs: [P2LaboratoryColress],
+        npcs: [P2LaboratoryColress, InvestigateP2],
     }
 );
 
@@ -6611,7 +6668,7 @@ const PikachuValleyAlolaCap = new NPC('Pikachu', [
     '<i>The Pikachu is waving at you supportively! Its goodwill carries you forward on your journey to Alola Championship!</i>',
 ], {
     image: 'assets/images/pokemon/25.06.png',
-    requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion, GameConstants.AchievementOption.less),
+    requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp, GameConstants.AchievementOption.less),
 });
 const PikachuValleyPikachuWorldCap = new NPC('Pikachu', [
     'Pii-kachu!',
@@ -7126,7 +7183,7 @@ TownList['Heahea City'] = new Town(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [TemporaryBattleList.Dexio, TemporaryBattleList.Sina, HeaheaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Heahea City']), new DockTownContent()],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
         npcs: [HeaheaCafeOwner],
     }
 );
@@ -7172,7 +7229,7 @@ TownList['Aether Paradise'] = new Town(
         TemporaryBattleList['Faba Psychic Memory'],
     ],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
         npcs: [AetherParadiseAlolaRoamerNPC, FabaSilvally],
     }
 );
@@ -7398,7 +7455,7 @@ TownList['Ten Carat Hill'] = new DungeonTown(
     'Ten Carat Hill',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
     [TemporaryBattleList['Kahili Flying Memory']],
     {
         npcs:[KahiliSilvally],
@@ -7500,7 +7557,7 @@ TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Ula_Ula_Stamp)],
     [
         new GemMasterShop(GameConstants.GemShops.SilvallyTrader, 'Memory Replicator', [new QuestLineStepCompletedRequirement('Typing some Memories', 3)], true),
         TemporaryBattleList['Aether Branch Chief Faba'],
@@ -7551,13 +7608,13 @@ TownList['Lake of the Sunne and Moone'] = new DungeonTown(
     'Lake of the Sunne and Moone',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]
 );
 TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]
 );
 TownList['Ruins of Life'] = new DungeonTown(
     'Ruins of Life',
@@ -7565,7 +7622,7 @@ TownList['Ruins of Life'] = new DungeonTown(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 21),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Ruins of Abundance'] = new DungeonTown(
@@ -7574,7 +7631,7 @@ TownList['Ruins of Abundance'] = new DungeonTown(
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 23),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Ruins of Hope'] = new DungeonTown(
@@ -7583,7 +7640,7 @@ TownList['Ruins of Hope'] = new DungeonTown(
     GameConstants.AlolaSubRegions.PoniIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 26),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Poni Meadow'] = new DungeonTown(
@@ -8329,7 +8386,7 @@ TownList.Postwick = new Town(
     GameConstants.GalarSubRegions.SouthGalar,
     [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
         npcs: [PostwickMum, MagearnaMysteryGift],
     }
 );
