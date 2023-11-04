@@ -526,7 +526,7 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
             [new GymPokemon('Togepi (Flowering Crown)', 300000, 100)],
             {
                 hide: true,
-                weight: 1,
+                weight: 2,
                 requirement: new MultiRequirement([
                     new QuestLineStartedRequirement('Egg Hunt'),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 0, GameConstants.AchievementOption.less),
@@ -2229,7 +2229,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
             [new GymPokemon('Togepi (Flowering Crown)', 900000, 100)],
             {
                 hide: true,
-                weight: 1,
+                weight: 2,
                 requirement: new MultiRequirement([
                     new QuestLineStepCompletedRequirement('Egg Hunt', 0),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 1, GameConstants.AchievementOption.less),
@@ -2879,7 +2879,7 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
             [new GymPokemon('Togepi (Flowering Crown)', 2700000, 100)],
             {
                 hide: true,
-                weight: 1,
+                weight: 0.34,
                 requirement: new MultiRequirement([
                     new QuestLineStepCompletedRequirement('Egg Hunt', 1),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.less),
