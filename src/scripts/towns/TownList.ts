@@ -1494,7 +1494,10 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.ChartiBerry,
 ], 'Johto Berry Master');
 
-
+//Johto Contest Shop
+const JohtoContestShop = new Shop([
+    ItemList['Sudowoodo (Golden)'],
+], 'Contest Shop');
 // Johto NPCs
 
 const CherrygroveMrPokemon = new NPC('Mr. Pokémon', [
@@ -1800,7 +1803,16 @@ const HowardClifford3 = new NPC('Howard Clifford', [
     image: 'assets/images/npcs/Howard Clifford.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 13), new QuestLineStepCompletedRequirement('Detective Pikachu', 15, GameConstants.AchievementOption.less)]),
 });
-
+const ParkAttendant = new NPC('Park Attendant', [
+    'Welcome to the National Park!',
+    'Lots of people come through here to take a stroll, and some come from far away to participate in our Bug Catching Contest!',
+    'All kinds of Bug Pokémon can be found in the park, with different ones showing up every day! Each one can be caught for Contest Tokens, and more powerful Pokémon are worth more Tokens!',
+], { image: 'assets/images/npcs/Pokémon Ranger (male).png' });
+const ParkResearcher = new NPC('Researcher', [
+    'Welcome to the National Park!',
+    'Thanks to recent breakthroughs in the field of alloying and electroplating, we have discovered a way to coat some Pokémon in metal!',
+    'An experimental specimen can be bought here: A Sudowoodo that is no longer weak against Water attacks!',
+], { image: 'assets/images/npcs/Scientist (male).png' });
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
@@ -1916,6 +1928,16 @@ TownList['Indigo Plateau Johto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 26),
             new TemporaryBattleRequirement('Silver 5'),
         ],
+    }
+);
+TownList['National Park'] = new Town(
+    'National Park',
+    GameConstants.Region.johto,
+    GameConstants.JohtoSubRegions.Johto,
+    [new SafariTownContent(), JohtoContestShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 35)],
+        npcs: [ParkAttendant, ParkResearcher],
     }
 );
 

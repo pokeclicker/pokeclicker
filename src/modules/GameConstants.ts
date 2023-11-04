@@ -349,6 +349,7 @@ export const SAFARI_WATER_BLOCKS = [
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
+export const BUG_SAFARI_POKEMON = 10;
 export const FRIEND_SAFARI_POKEMON = 5;
 
 // Quests
