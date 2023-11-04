@@ -7420,6 +7420,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 185.01,
+        'name': 'Sudowoodo (Golden)',
+        'catchRate': 65,
+        'type': [PokemonType.Steel],
+        'levelType': LevelType.mediumfast,
+        'exp': 144,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 70,
+            'attack': 100,
+            'specialAttack': 30,
+            'defense': 115,
+            'specialDefense': 65,
+            'speed': 30,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+    },
+    {
         'id': 186,
         'name': 'Politoed',
         'catchRate': 45,

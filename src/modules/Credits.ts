@@ -285,6 +285,7 @@ export const SpriteCredits: Credit[] = [
             'Go-Rock Squad Commander',
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
+            'Sudowoodo (Golden) Shop Icon',
             'Grotle (Acorn)',
             'Grotle (Acorn) Shop Icon',
             'Grotle and Friends',
@@ -656,6 +657,7 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/j/o/jormxdos.png?8',
         resources: [
             'All Vectorized Badges images',
+            'Vectorized Z Crystals',
         ],
         // NOTES: Permission given in the bio comment section
     },
@@ -1066,6 +1068,7 @@ export const SpriteCredits: Credit[] = [
             'Draconid Elder',
             'Dyna Tree',
             'Friend Safari',
+            'Sudowoodo (Golden)',
             'Heart Diamond',
             'Iceland route map sprites',
             'Macro Cosmos (male) and (female)',

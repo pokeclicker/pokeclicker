@@ -2536,7 +2536,7 @@ class QuestLineHelper {
 
     // Silvally Typings Questline - Available post-E4
     public static createSilvallyTypesQuestLine() {
-        const SilvallyTypesQuestLine = new QuestLine('Typing some Memories', 'Help Gladion restore his Silvally\'s memories.', new MultiRequirement([new ObtainedPokemonRequirement('Silvally (Normal)'), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]) , GameConstants.BulletinBoards.Alola);
+        const SilvallyTypesQuestLine = new QuestLine('Typing some Memories', 'Help Gladion restore his Silvally\'s memories.', new MultiRequirement([new ObtainedPokemonRequirement('Silvally (Normal)'), new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]) , GameConstants.BulletinBoards.Alola);
 
         const talkToGladion1 = new TalkToNPCQuest(SilvallyGladion1, 'Talk to Gladion in the Aether Foundation.');
         SilvallyTypesQuestLine.addQuest(talkToGladion1);
@@ -2690,7 +2690,7 @@ class QuestLineHelper {
 
     // Ultra Beasts Questline - Available post-E4
     public static createUltraBeastQuestLine() {
-        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
+        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts', new GymBadgeRequirement(BadgeEnums.Champion_Stamp), GameConstants.BulletinBoards.Alola);
 
         const talkToLooker = new TalkToNPCQuest(RoadsideMotelLooker1, 'Talk to Looker at the Roadside Motel.');
         UltraBeastQuestLine.addQuest(talkToLooker);
@@ -2789,7 +2789,7 @@ class QuestLineHelper {
 
     // Available post-E4
     public static createMeltanQuestLine() {
-        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola, true);
+        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Champion_Stamp), GameConstants.BulletinBoards.Alola, true);
 
         // Multi-step #0:
 
@@ -2967,7 +2967,7 @@ class QuestLineHelper {
 
     // Available post-E4
     public static createMagikarpJumpQuestLine() {
-        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
+        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp.', new GymBadgeRequirement(BadgeEnums.Champion_Stamp), GameConstants.BulletinBoards.Alola);
 
         const talkToMayor = new TalkToNPCQuest(MayorKarp, 'Use the subregion travel to talk to Mayor Karp in Hoppy Town.');
         magikarpJumpQuestLine.addQuest(talkToMayor);
