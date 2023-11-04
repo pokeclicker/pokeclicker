@@ -6657,7 +6657,7 @@ const PikachuValleyAlolaCap = new NPC('Pikachu', [
     '<i>The Pikachu is waving at you supportively! Its goodwill carries you forward on your journey to Alola Championship!</i>',
 ], {
     image: 'assets/images/pokemon/25.06.png',
-    requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion, GameConstants.AchievementOption.less),
+    requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp, GameConstants.AchievementOption.less),
 });
 const PikachuValleyPikachuWorldCap = new NPC('Pikachu', [
     'Pii-kachu!',
@@ -7172,7 +7172,7 @@ TownList['Heahea City'] = new Town(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [TemporaryBattleList.Dexio, TemporaryBattleList.Sina, HeaheaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Heahea City']), new DockTownContent()],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
         npcs: [HeaheaCafeOwner],
     }
 );
@@ -7218,7 +7218,7 @@ TownList['Aether Paradise'] = new Town(
         TemporaryBattleList['Faba Psychic Memory'],
     ],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
         npcs: [AetherParadiseAlolaRoamerNPC, FabaSilvally],
     }
 );
@@ -7444,7 +7444,7 @@ TownList['Ten Carat Hill'] = new DungeonTown(
     'Ten Carat Hill',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
     [TemporaryBattleList['Kahili Flying Memory']],
     {
         npcs:[KahiliSilvally],
@@ -7546,7 +7546,7 @@ TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Ula_Ula_Stamp)],
     [
         new GemMasterShop(GameConstants.GemShops.SilvallyTrader, 'Memory Replicator', [new QuestLineStepCompletedRequirement('Typing some Memories', 3)], true),
         TemporaryBattleList['Aether Branch Chief Faba'],
@@ -7597,13 +7597,13 @@ TownList['Lake of the Sunne and Moone'] = new DungeonTown(
     'Lake of the Sunne and Moone',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]
 );
 TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]
 );
 TownList['Ruins of Life'] = new DungeonTown(
     'Ruins of Life',
@@ -7611,7 +7611,7 @@ TownList['Ruins of Life'] = new DungeonTown(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 21),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Ruins of Abundance'] = new DungeonTown(
@@ -7620,7 +7620,7 @@ TownList['Ruins of Abundance'] = new DungeonTown(
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 23),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Ruins of Hope'] = new DungeonTown(
@@ -7629,7 +7629,7 @@ TownList['Ruins of Hope'] = new DungeonTown(
     GameConstants.AlolaSubRegions.PoniIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 26),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Poni Meadow'] = new DungeonTown(
@@ -8375,7 +8375,7 @@ TownList.Postwick = new Town(
     GameConstants.GalarSubRegions.SouthGalar,
     [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
         npcs: [PostwickMum, MagearnaMysteryGift],
     }
 );
