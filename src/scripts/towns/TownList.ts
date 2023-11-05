@@ -1934,7 +1934,7 @@ TownList['National Park'] = new Town(
     'National Park',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new SafariTownContent(), JohtoContestShop],
+    [new SafariTownContent('Bug Catching Contest'), JohtoContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 35)],
         npcs: [ParkAttendant, ParkResearcher],
