@@ -524,16 +524,24 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
             [new GymPokemon('Weedle', 510, 9)],
             { weight: 1 }, 'Sammy'),
         new DungeonTrainer('Egg Hunter',
-            [new GymPokemon('Surprise Togepi', 300000, 100)],
+            [new GymPokemon('Togepi (Flowering Crown)', 300000, 100)],
             {
                 hide: true,
-                weight: 1,
+                weight: 2,
                 requirement: new MultiRequirement([
-                    new QuestLineStartedRequirement('Togepi Egg Hunt'),
-                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 0, GameConstants.AchievementOption.less),
+                    new QuestLineStartedRequirement('Egg Hunt'),
+                    new QuestLineStepCompletedRequirement('Egg Hunt', 0, GameConstants.AchievementOption.less),
                     new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion),
                 ]),
             }),
+        new DungeonBossPokemon('Pikachu (Easter)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 0, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     50, 1);
 
@@ -662,7 +670,17 @@ dungeonList['Diglett\'s Cave'] = new Dungeon('Diglett\'s Cave',
         ],
     },
     2962,
-    [new DungeonBossPokemon('Dugtrio', 16040, 31)],
+    [
+        new DungeonBossPokemon('Dugtrio', 16040, 31),
+        new DungeonBossPokemon('Pikachu (Easter)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 1, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
+    ],
     250, 11);
 
 dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
@@ -966,7 +984,17 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
         ],
     },
     7523,
-    [new DungeonBossPokemon('Marowak', 37615, 30)],
+    [
+        new DungeonBossPokemon('Marowak', 37615, 30),
+        new DungeonBossPokemon('Pikachu (Easter)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 2, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
+    ],
     750, 7);
 
 dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
@@ -1188,6 +1216,14 @@ dungeonList['Power Plant'] = new Dungeon('Power Plant',
     [
         new DungeonBossPokemon('Electabuzz', 67535, 35),
         new DungeonBossPokemon('Zapdos', 101302, 50),
+        new DungeonBossPokemon('Pikachu (Easter)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 3, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     1000, 18);
 
@@ -1519,6 +1555,14 @@ dungeonList['Victory Road'] = new Dungeon('Victory Road',
                 new GymPokemon('Nidoking', 61488, 45),
                 new GymPokemon('Nidoqueen', 61488, 45),
             ], { weight: 1 }, 'Ray & Tyra'),
+        new DungeonBossPokemon('Pikachu (Easter)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 5, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     2000, 23);
 
@@ -2013,6 +2057,14 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
             hide: true,
             requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
         })),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 0, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     3000, 32);
 
@@ -2121,6 +2173,14 @@ dungeonList['Slowpoke Well'] = new Dungeon('Slowpoke Well',
         new DungeonTrainer('Rocket Executive',
             [new GymPokemon('Koffing', 320000, 14)],
             { weight: 1 }, 'Proton', '(proton)'),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 1, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     3500, 33);
 
@@ -2167,16 +2227,24 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
                 new SpecialEventRequirement('Merry Christmas!'),
             ])}),
         new DungeonTrainer('Egg Hunter',
-            [new GymPokemon('Surprise Togepi', 900000, 100)],
+            [new GymPokemon('Togepi (Flowering Crown)', 900000, 100)],
             {
                 hide: true,
-                weight: 1,
+                weight: 2,
                 requirement: new MultiRequirement([
-                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 0),
-                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 1, GameConstants.AchievementOption.less),
+                    new QuestLineStepCompletedRequirement('Egg Hunt', 0),
+                    new QuestLineStepCompletedRequirement('Egg Hunt', 1, GameConstants.AchievementOption.less),
                     new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
                 ]),
             }),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 2, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     4000, 34);
 
@@ -2225,6 +2293,14 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
         new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 4, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     4500, 37);
 
@@ -2250,6 +2326,14 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
         new DungeonBossPokemon('Dewgong', 400000, 40),
         new DungeonBossPokemon('Kingler', 400000, 40),
         new DungeonBossPokemon('Lugia', 1410000, 100, {requirement: new QuestLineStepCompletedRequirement('Whirl Guardian', 9)}),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 3, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     5000, 41);
 
@@ -2604,7 +2688,17 @@ dungeonList['Ice Path'] = new Dungeon('Ice Path',
         mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(450, GameConstants.getDungeonIndex('Ice Path'))}],
     },
     120400,
-    [new DungeonBossPokemon('Delibird', 440000, 50)],
+    [
+        new DungeonBossPokemon('Delibird', 440000, 50),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 5, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
+    ],
     6000, 44);
 
 dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
@@ -2783,16 +2877,24 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
             [new GymPokemon('Poochyena', 860000, 9)],
             { weight: 1 }, undefined, '(male)'),
         new DungeonTrainer('Egg Hunter',
-            [new GymPokemon('Surprise Togepi', 2700000, 100)],
+            [new GymPokemon('Togepi (Flowering Crown)', 2700000, 100)],
             {
                 hide: true,
-                weight: 1,
+                weight: 0.34,
                 requirement: new MultiRequirement([
-                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 1),
-                    new QuestLineStepCompletedRequirement('Togepi Egg Hunt', 2, GameConstants.AchievementOption.less),
+                    new QuestLineStepCompletedRequirement('Egg Hunt', 1),
+                    new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.less),
                     new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
                 ]),
             }),
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 0, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     12000, 101);
 
@@ -2831,6 +2933,14 @@ dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
         new DungeonTrainer('Team Aqua Grunt',
             [new GymPokemon('Poochyena', 900000, 11)],
             { weight: 1 }, undefined, '(male)'),
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 1, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     14000, 101);
 
@@ -2937,6 +3047,14 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
                 new GymPokemon('Haxorus', 4073950, 57),
                 new GymPokemon('Garchomp', 4073950, 57),
             ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}),
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 2, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     18000, 101);
 
@@ -3084,6 +3202,14 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
                     new SpecialEventRequirement('Lunar New Year'),
                 ]),
             ])}),
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 3, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     24000, 101);
 
@@ -3574,6 +3700,14 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
                     new SpecialEventRequirement('Lunar New Year'),
                 ]),
             ])}),
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 5, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     34000, 101);
 
@@ -3606,6 +3740,14 @@ dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
         new DungeonBossPokemon('Regirock', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
         new DungeonBossPokemon('Regice', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
         new DungeonBossPokemon('Registeel', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
+        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 4, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     36000, 101);
 

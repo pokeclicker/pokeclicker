@@ -444,10 +444,10 @@ const EggHuntErika = new NPC('Erika', [
     'Hello... Isn\'t the spring weather so relaxing? I adore how lovely the blooming flowers look during this time of year...',
     'Oh! I\'m sorry, I almost dozed off. I was reminiscing about my stroll in Viridian Forest earlier today. I came across the loveliest patch of flowers over there and...',
     '...',
-    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a colorful, round Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
+    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a basket full of Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
 ], {
     image: 'assets/images/npcs/Erika.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Togepi Egg Hunt'), new QuestLineCompletedRequirement('Togepi Egg Hunt', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Egg Hunt'), new QuestLineCompletedRequirement('Egg Hunt', GameConstants.AchievementOption.less)]),
 });
 
 const SaffronBattleItemRival = new NPC('Battle Item Master', [
@@ -2426,6 +2426,15 @@ const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
 ], {image: 'assets/images/npcs/Cooltrainer (male).png',
 });
 
+const EasterEggHunter = new NPC('Egg Hunter', [
+    'My eggs! They ran away!',
+    'Can you help me get them back? They have most likely fleed to a dungeon in Kanto, Hoenn or Johto.',
+    'But be careful! If you defeat them, they will run away again!',
+], {
+    image: 'assets/images/npcs/Egg Hunter.png',
+    requirement: new MultiRequirement([new SpecialEventRequirement('Easter'), new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.more)]),
+});
+
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
 ], {image: 'assets/images/npcs/other/Regi Entrance.png',
@@ -3473,7 +3482,9 @@ TownList['Petalburg Woods'] = new DungeonTown(
     'Petalburg Woods',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 104)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 104)],
+    [],
+    { npcs: [EasterEggHunter] }
 );
 TownList['Rusturf Tunnel'] = new DungeonTown(
     'Rusturf Tunnel',
