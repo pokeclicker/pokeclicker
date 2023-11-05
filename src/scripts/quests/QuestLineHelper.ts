@@ -2153,17 +2153,17 @@ class QuestLineHelper {
         const searchForClues10 = new TalkToNPCQuest(Mewtwo2, 'Talk to Mewtwo near Cerulean Cave about Detective Pikachu\'s partner.');
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
-        const DetectiveRaichuReward = () => {
-            App.game.party.gainPokemonByName('Detective Raichu');
-            Notifier.notify({
-                title: detectivePikachuQuestLine.name,
-                message: 'Detective Pikachu\'s partner has been nursed back to health!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
+        //const DetectiveRaichuReward = () => {
+        //    App.game.party.gainPokemonByName('Detective Raichu');
+        //    Notifier.notify({
+        //        title: detectivePikachuQuestLine.name,
+        //        message: 'Detective Pikachu\'s partner has been nursed back to health!',
+        //        type: NotificationConstants.NotificationOption.success,
+        //        timeout: 3e4,
+        //    });
+        //};
 
-        const searchForClues11 = new TalkToNPCQuest(DetectiveRaichu, 'Talk to Detective Raichu').withCustomReward(DetectiveRaichuReward);
+        const searchForClues11 = new TalkToNPCQuest(DetectiveRaichu, 'Talk to Detective Raichu');
         detectivePikachuQuestLine.addQuest(searchForClues11);
 
         App.game.quests.questLines().push(detectivePikachuQuestLine);
