@@ -2264,15 +2264,15 @@ class QuestLineHelper {
         const clearUnovaAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Unova', 'The kid is hiding in Unova!');
         ashKetchumQuestLine.addQuest(clearUnovaAsh);
 
-        const AshKetchumReward = () => {
-            App.game.party.gainPokemonByName('Ash-Greninja');
-            Notifier.notify({
-                title: ashKetchumQuestLine.name,
-                message: 'You obtained Ash-Greninja!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
+        //const AshKetchumReward = () => {
+        //    App.game.party.gainPokemonByName('Ash-Greninja');
+        //    Notifier.notify({
+        //        title: ashKetchumQuestLine.name,
+        //        message: 'You obtained Ash-Greninja!',
+        //        type: NotificationConstants.NotificationOption.success,
+        //        timeout: 3e4,
+        //    });
+        //};
 
         const clearKalosAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Kalos', 'Maybe you were too hard on the kid... You should offer him an apology in Kalos.');
         ashKetchumQuestLine.addQuest(clearKalosAsh);
@@ -2913,20 +2913,25 @@ class QuestLineHelper {
         const meltanCatch400Meltan = new CaptureSpecificPokemonQuest('Meltan', 400).withDescription('Catch 400 Meltan in Alola.');
         const meltanRainbowRocket = new DefeatTemporaryBattleQuest('Team Rainbow Leader Giovanni', 'Defeat Team Rainbow Rocket.');
 
-        const meltanGetMelmetal = () => {
-            App.game.party.gainPokemonByName('Melmetal');
-            Notifier.notify({
-                title: meltanQuestLine.name,
-                message: 'You found Melmetal!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
+        //const meltanGetMelmetal = () => {
+        //    App.game.party.gainPokemonByName('Melmetal');
+        //    Notifier.notify({
+        //        title: meltanQuestLine.name,
+        //        message: 'You found Melmetal!',
+        //        type: NotificationConstants.NotificationOption.success,
+        //        timeout: 3e4,
+        //    });
+        //};
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
             meltanCatch400Meltan,
             meltanRainbowRocket,
-        ],'Let\'s Go, Meltan!').withCustomReward(meltanGetMelmetal));
+        ],'Let\'s Go, Meltan!'));
+
+        // Multi-step #11
+
+        const talkMeltanNPC = new TalkToNPCQuest(MeltanBlob, 'Your Meltan are gathering in the Aether Foundation. Take a look what they\'re doing.');
+        meltanQuestLine.addQuest(talkMeltanNPC);
 
         App.game.quests.questLines().push(meltanQuestLine);
 

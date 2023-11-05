@@ -6723,6 +6723,15 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
     'With that, you can stamp your ticket to the noble Galar region!',
     'assets/images/npcs/Professor Kukui.png');
 
+const MeltanBlob = new GiftNPC('Blob of Meltan', [
+    '<i>Your Meltan are gathering and forming a new Pokémon.</i>',
+    '<i>Melmetal wants to join your adventures.</i>',
+], () => {
+    App.game.party.gainPokemonByName('Melmetal');
+}, 'assets/images/pokemon/809.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 11, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Melmetal', true)]) });
+
+
+
 //Silvally Types NPC
 const SilvallyGladion1 = new NPC('Gladion', [
     'Oh, it\'s you. I thought the professor would help when I put my request up at the Bulletin Board, but the Champion\'s even better.',
@@ -7552,7 +7561,7 @@ TownList['Aether Foundation'] = new DungeonTown(
         TemporaryBattleList['Team Rainbow Leader Giovanni'],
     ],
     {
-        npcs: [SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4, SilvallyGladion2Hints, SilvallyGladion3Hints],
+        npcs: [MeltanBlob, SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4, SilvallyGladion2Hints, SilvallyGladion3Hints],
     }
 );
 TownList['Exeggutor Island Hill'] = new DungeonTown(
