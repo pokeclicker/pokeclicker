@@ -157,7 +157,8 @@ class SafariBattle {
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, SafariBattle.enemy.shiny, GameConstants.ShadowStatus.None, GameConstants.SAFARI_EP_YIELD);
         switch (player.region) {
             case (GameConstants.Region.johto):
-                const bugReward = Math.floor(partyPokemon.baseAttack / 5);
+                const shinyModifier = SafariBattle.enemy.shiny ? GameConstants.BUG_SAFARI_SHINY_MODIFIER : 1;
+                const bugReward = Math.floor(partyPokemon.baseAttack / 5) * shinyModifier;
                 App.game.wallet.gainContestTokens(bugReward);
                 Notifier.notify({
                     title: 'Bug Catching Contest',
