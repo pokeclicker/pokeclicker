@@ -2391,12 +2391,12 @@ const Butler2 = new NPC('Butler', [
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Meta Discovery'), new QuestLineStepCompletedRequirement('A Meta Discovery', 1, GameConstants.AchievementOption.less)]),
 });
 
-const Butler3 = new NPC('Butler', [
+const Butler3 = new GiftNPC('Butler', [
     'I, the Great Butler, thank you for all of your help in fulfilling my greatest wish!',
-    'Please treat this Meta Groudon responsibly, and go forth to do great things!',
-], {image: 'assets/images/npcs/Butler.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Meta Discovery', 2), new QuestLineStepCompletedRequirement('A Meta Discovery', 3, GameConstants.AchievementOption.less)]),
-});
+    'Please treat this Meta Groudon responsibly, and go forth to do great things!'
+], () => {
+    App.game.party.gainPokemonByName('Meta Groudon');
+}, 'assets/images/npcs/Butler.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Meta Discovery', 2), new ObtainedPokemonRequirement('Meta Groudon', true)]) });
 
 const ProfBirch = new ProfNPC('Prof. Birch',
     GameConstants.Region.hoenn,
