@@ -5962,6 +5962,14 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ], {image: 'assets/images/npcs/Hiker.png'});
 
+const AshKetchumGift = new GiftNPC('Ash Ketchum', [
+    'You totally beat me, and you deserve it! Take this super cool Greninja with you!',
+], () => {
+    App.game.party.gainPokemonByName('Ash-Greninja');
+}, 'assets/images/npcs/Ash Ketchum.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The New Kid', 5, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Ash-Greninja', true)]) });
+
+
+
 const ProfSycamore = new ProfNPC('Prof. Sycamore',
     GameConstants.Region.kalos,
     'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
@@ -6297,7 +6305,7 @@ TownList['Kiloude City'] = new Town(
     [TemporaryBattleList['Calem 6']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [KiloudeConfusedHiker, Baraz1, Baraz2, Baraz3, Baraz4],
+        npcs: [KiloudeConfusedHiker, AshKetchumGift, Baraz1, Baraz2, Baraz3, Baraz4],
     }
 );
 TownList['Pokémon League Kalos'] = new Town(

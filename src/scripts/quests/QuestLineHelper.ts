@@ -2274,8 +2274,11 @@ class QuestLineHelper {
             });
         };
 
-        const clearKalosAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Kalos', 'Maybe you were too hard on the kid... You should offer him an apology in Kalos.').withCustomReward(AshKetchumReward);
+        const clearKalosAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Kalos', 'Maybe you were too hard on the kid... You should offer him an apology in Kalos.');
         ashKetchumQuestLine.addQuest(clearKalosAsh);
+
+        const talkToKalosAsh = new TalkToNPCQuest(AshKetchumGift, 'Seems like the kid wants to reconcile.');
+        ashKetchumQuestLine.addQuest(talkToKalosAsh);
 
         App.game.quests.questLines().push(ashKetchumQuestLine);
     }
