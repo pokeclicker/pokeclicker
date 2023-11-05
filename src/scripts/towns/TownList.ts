@@ -6341,7 +6341,7 @@ TownList['Friend Safari'] = new Town(
     'Friend Safari',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new SafariTownContent()],
+    [new SafariTownContent('Enter Friend Safari')],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         npcs: [KalosSafariRanger, FriendlyAttendant, BugCatcherScizor],
