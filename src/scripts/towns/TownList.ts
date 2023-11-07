@@ -7086,14 +7086,15 @@ const DrSplash4 = new NPC('Dr. Splash', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7, GameConstants.AchievementOption.less)]),
 });
 
-const DrSplash5 = new NPC('Dr. Splash', [
+const DrSplash5 = new GiftNPC('Dr. Splash', [
     'Thank you for all your help!',
     'Now that the laboratory and training program are up and running, I\'ll be very busy!',
     'Please take this Magikarp as a thank you! Train them for greatness!',
-], {
-    image: 'assets/images/npcs/Dr Splash.png',
-    requirement: new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7),
-});
+], () => {
+    App.game.party.gainPokemonByName('Magikarp Saucy Blue');
+}, 'assets/images/npcs/Dr Splash.png', { requirement: new MultiRequirement([ new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Magikarp Saucy Blue', true)]) });
+
+
 
 const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
     'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable price.',

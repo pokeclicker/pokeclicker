@@ -3062,18 +3062,18 @@ class QuestLineHelper {
         const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5,000 Pokémon', App.game.statistics.totalPokemonDefeated);
         drSplashQuestLine.addQuest(tackleMachine);
 
-        const SaucyBlueReward = () => {
-            App.game.party.gainPokemonByName('Magikarp Saucy Blue');
-            Notifier.notify({
-                title: drSplashQuestLine.name,
-                message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-        };
+        //const SaucyBlueReward = () => {
+        //    App.game.party.gainPokemonByName('Magikarp Saucy Blue');
+        //    Notifier.notify({
+        //        title: drSplashQuestLine.name,
+        //        message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
+        //        type: NotificationConstants.NotificationOption.success,
+        //        timeout: 3e4,
+        //        sound: NotificationConstants.NotificationSound.General.new_catch,
+        //    });
+        //};
 
-        const talkToDrSplash5 = new TalkToNPCQuest(DrSplash5, 'Wrap up your research project by talking to Dr. Splash in Hoppy Town.').withCustomReward(SaucyBlueReward);
+        const talkToDrSplash5 = new TalkToNPCQuest(DrSplash5, 'Wrap up your research project by talking to Dr. Splash in Hoppy Town.');
         drSplashQuestLine.addQuest(talkToDrSplash5);
 
         App.game.quests.questLines().push(drSplashQuestLine);
