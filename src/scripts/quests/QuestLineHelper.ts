@@ -1463,6 +1463,46 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
+
+    // Genesect quest - Available after clearing P2 lab
+    public static createGenesectQuestLine() {
+        const genesectQuestLine = new QuestLine('The Legend Awakened', 'Learn about the powerful Pokémon discovered under the P2 Laboratory.', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory')), GameConstants.BulletinBoards.Unova);
+
+        const investigateP2 = new TalkToNPCQuest(InvestigateP2, 'Investigate the basement of the P2 Laboratory.');
+        genesectQuestLine.addQuest(investigateP2);
+
+        const battleRedGenesect1 = new DefeatTemporaryBattleQuest('Red Genesect 1', 'Fight the mysterious Pokémon in the Castelia Sewers.');
+        genesectQuestLine.addQuest(battleRedGenesect1);
+
+        const fightCasteliaSewers = new CustomQuest(10, 0, 'Search the Castelia Sewers for clues about the Red Genesect.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Castelia Sewers')]());
+        genesectQuestLine.addQuest(fightCasteliaSewers);
+
+        const talkToAncientBugHunter = new TalkToNPCQuest(AncientBugHunter1, 'Talk to the Ancient Bug Hunter in the Castelia Sewers.');
+        genesectQuestLine.addQuest(talkToAncientBugHunter);
+
+        const fightDriveGenesect = new CustomQuest (4, 0, 'Defeat the four Genesect surrounding Castelia City.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Genesect Burn')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Genesect Chill')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Genesect Douse')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Genesect Shock')]()
+        );
+        genesectQuestLine.addQuest(fightDriveGenesect);
+
+        const watchGenesectFight = new TalkToNPCQuest(GenesectFight, 'Witness the battle between the Red Genesect and another powerful Pokémon in Castelia City.');
+        genesectQuestLine.addQuest(watchGenesectFight);
+
+        const digP2 = new CustomQuest(5, undefined, 'The Red Genesect has crashed into the P2 Lab, leaving a pile of rubble in its wake. Dig through the rubble to learn more.', App.game.statistics.undergroundLayersMined);
+        genesectQuestLine.addQuest(digP2);
+
+        const battleRedGenesect2 = new DefeatTemporaryBattleQuest('Red Genesect 2', 'The Red Genesect is trying to escape the Castelia Sewers, stop it!');
+        genesectQuestLine.addQuest(battleRedGenesect2);
+
+        const catchGenesect = new CaptureSpecificPokemonQuest('Genesect').withDescription('Catch Genesect in P2 Lab.');
+        genesectQuestLine.addQuest(catchGenesect);
+
+        App.game.quests.questLines().push(genesectQuestLine);
+    }
+
     // XD Questline, available after Unova E4
     public static createOrreXDQuestLine() {
         const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new DevelopmentRequirement(new MultiRequirement([new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)])), GameConstants.BulletinBoards.Unova);
@@ -2496,7 +2536,7 @@ class QuestLineHelper {
 
     // Silvally Typings Questline - Available post-E4
     public static createSilvallyTypesQuestLine() {
-        const SilvallyTypesQuestLine = new QuestLine('Typing some Memories', 'Help Gladion restore his Silvally\'s memories.', new MultiRequirement([new ObtainedPokemonRequirement('Silvally (Normal)'), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]) , GameConstants.BulletinBoards.Alola);
+        const SilvallyTypesQuestLine = new QuestLine('Typing some Memories', 'Help Gladion restore his Silvally\'s memories.', new MultiRequirement([new ObtainedPokemonRequirement('Silvally (Normal)'), new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]) , GameConstants.BulletinBoards.Alola);
 
         const talkToGladion1 = new TalkToNPCQuest(SilvallyGladion1, 'Talk to Gladion in the Aether Foundation.');
         SilvallyTypesQuestLine.addQuest(talkToGladion1);
@@ -2650,7 +2690,7 @@ class QuestLineHelper {
 
     // Ultra Beasts Questline - Available post-E4
     public static createUltraBeastQuestLine() {
-        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
+        const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts', new GymBadgeRequirement(BadgeEnums.Champion_Stamp), GameConstants.BulletinBoards.Alola);
 
         const talkToLooker = new TalkToNPCQuest(RoadsideMotelLooker1, 'Talk to Looker at the Roadside Motel.');
         UltraBeastQuestLine.addQuest(talkToLooker);
@@ -2749,7 +2789,7 @@ class QuestLineHelper {
 
     // Available post-E4
     public static createMeltanQuestLine() {
-        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola, true);
+        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Champion_Stamp), GameConstants.BulletinBoards.Alola, true);
 
         // Multi-step #0:
 
@@ -2927,7 +2967,7 @@ class QuestLineHelper {
 
     // Available post-E4
     public static createMagikarpJumpQuestLine() {
-        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
+        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp.', new GymBadgeRequirement(BadgeEnums.Champion_Stamp), GameConstants.BulletinBoards.Alola);
 
         const talkToMayor = new TalkToNPCQuest(MayorKarp, 'Use the subregion travel to talk to Mayor Karp in Hoppy Town.');
         magikarpJumpQuestLine.addQuest(talkToMayor);
@@ -3332,7 +3372,7 @@ class QuestLineHelper {
 
     // Available after defeating Ash Ketchum Alola
     public static createJungleSecretsQuestLine() {
-        const jungleSecretsQuestLine = new QuestLine('Secrets of the Jungle', 'Discover the secrets of the jungle.', new TemporaryBattleRequirement('Ash Ketchum Alola'), GameConstants.BulletinBoards.Armor);
+        const jungleSecretsQuestLine = new QuestLine('Secrets of the Jungle', 'Discover the secrets of the jungle.', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new TemporaryBattleRequirement('Ash Ketchum Alola')]), GameConstants.BulletinBoards.Armor);
 
         const talktoJungleAsh1 = new TalkToNPCQuest(JungleAsh1, 'Ash Ketchum wants to talk to you at the Master Dojo.');
         jungleSecretsQuestLine.addQuest(talktoJungleAsh1);
@@ -3754,46 +3794,22 @@ class QuestLineHelper {
     }
 
     // From any bulletin board between April 8-29 (Easter).
-    public static createFindSurpriseTogepiForEasterQuestLine() {
-        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
+    public static createEasterQuestLine() {
+        const easterQuestLine = new QuestLine('Egg Hunt', 'A basket of strange eggs has been spotted, see if you can find it!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
 
-        const afterDefeatingTogepiInKanto = () => {
-            Notifier.notify({
-                title: findSurpriseTogepiForEasterQuestLine.name,
-                message: 'Seems like this was just an Easter egg after all...',
-                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
-                type: NotificationConstants.NotificationOption.info,
-                timeout: 3e4,
-            });
-        };
-        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter').withCustomReward(afterDefeatingTogepiInKanto).withDescription('A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.');
-        findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
+        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter').withDescription('Some strange eggs have been seen around Kanto. Go look for it! Maybe Erika knows more?');
+        easterQuestLine.addQuest(defeatTogepiInKanto);
 
-        const afterDefeatingTogepiInJohto = () => {
-            Notifier.notify({
-                title: findSurpriseTogepiForEasterQuestLine.name,
-                message: 'I swear that was a Togepi... well, maybe not.',
-                image: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`,
-                type: NotificationConstants.NotificationOption.info,
-                timeout: 3e4,
-            });
-        };
-        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter').withCustomReward(afterDefeatingTogepiInJohto).withDescription('Another report just came in, there have been sightings of a strange egg in a forest in Johto!');
-        findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
+        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter').withDescription('Seems like this was just an Easter egg after all... But no time to dwell on that. Another report just came in, there have been sightings of some strange eggs in a forest in Johto!');
+        easterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
-        const afterDefeatingTogepiInHoenn = () => {
-            App.game.party.gainPokemonByName('Surprise Togepi');
-            Notifier.notify({
-                title: findSurpriseTogepiForEasterQuestLine.name,
-                message: 'You found the special Togepi!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter').withCustomReward(afterDefeatingTogepiInHoenn).withDescription('There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
-        findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
+        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter').withDescription('That looked like a Togepi!... well, maybe not. Anyway, there is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
+        easterQuestLine.addQuest(encounterTogepiInHoenn);
 
-        App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
+        const talkToEggHunter = new TalkToNPCQuest(EasterEggHunter, 'The eggs ran away! Talk to the egg hunter.');
+        easterQuestLine.addQuest(talkToEggHunter);
+
+        App.game.quests.questLines().push(easterQuestLine);
     }
 
     public static isQuestLineCompleted(name: string) {
@@ -3827,6 +3843,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createGenesectQuestLine();
         this.createOrreXDQuestLine();
         this.createDeltaEpisodeQuestLine();
         this.createPrimalReversionQuestLine();
@@ -3857,7 +3874,7 @@ class QuestLineHelper {
         this.createPaldeaVictoryQuestLine();
         this.createPaldeaStarfallQuestLine();
         this.createPaldeaWayHomeQuestLine();
-        this.createFindSurpriseTogepiForEasterQuestLine();
+        this.createEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();

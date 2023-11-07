@@ -14,11 +14,13 @@ class SafariEncounter {
 class SafariPokemonList {
     public static list: Record<GameConstants.Region, KnockoutObservable<Array<SafariEncounter>>> = {
         [GameConstants.Region.kanto]: ko.observableArray(),
+        [GameConstants.Region.johto]: ko.observableArray(),
         [GameConstants.Region.kalos]: ko.observableArray(),
     };
 
     public static generateSafariLists() {
         this.generateKantoSafariList();
+        this.generateJohtoSafariList();
         this.generateKalosSafariList();
     }
 
@@ -54,6 +56,69 @@ class SafariPokemonList {
         ];
 
         SafariPokemonList.list[GameConstants.Region.kanto](pokemon);
+    }
+
+    public static generateJohtoSafariList() {
+        // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
+        // Unlocks new mons after being caught
+        const pokemon : SafariEncounter[] = [
+            // Grass
+            new SafariEncounter('Caterpie', 5),
+            new SafariEncounter('Metapod', 2),
+            new SafariEncounter('Butterfree', 1),
+            new SafariEncounter('Weedle', 5),
+            new SafariEncounter('Kakuna', 2),
+            new SafariEncounter('Beedrill', 1),
+            new SafariEncounter('Venonat', 3),
+            new SafariEncounter('Ledyba', 3),
+            new SafariEncounter('Spinarak', 3),
+            new SafariEncounter('Paras', 3),
+            new SafariEncounter('Scyther', 3),
+            new SafariEncounter('Pinsir', 2),
+            new SafariEncounter('Pineco', 3),
+            new SafariEncounter('Shuckle', 2),
+            new SafariEncounter('Wurmple', 5, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Silcoon', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Beautifly', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Cascoon', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Dustox', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Masquerain', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Nincada', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Kricketot', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Kricketune', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Combee', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Vespiquen', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Yanmega', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Sewaddle', 5, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Swadloon', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Leavanny', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Venipede', 5, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Whirlipede', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Scolipede', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Dwebble', 5, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Durant', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Scatterbug', 5, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Spewpa', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Grubbin', 5, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Charjabug', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Vikavolt', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Cutiefly', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Blipbug', 5, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Dottler', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Orbeetle', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Sizzlipede', 2, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Snom', 2, [SafariEnvironments.Grass], true),
+
+            // Water
+            new SafariEncounter('Yanma', 1, [SafariEnvironments.Water]),
+            new SafariEncounter('Surskit', 5, [SafariEnvironments.Water], true),
+            new SafariEncounter('Dewpider', 5, [SafariEnvironments.Water], true),
+            new SafariEncounter('Araquanid', 1, [SafariEnvironments.Water], true),
+            new SafariEncounter('Wimpod', 1, [SafariEnvironments.Water], true),
+            new SafariEncounter('Golisopod', 1, [SafariEnvironments.Water], true),
+        ];
+
+        SafariPokemonList.list[GameConstants.Region.johto](pokemon);
     }
 
     public static generateKalosSafariList() {

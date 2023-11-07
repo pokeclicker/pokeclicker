@@ -23,6 +23,7 @@ abstract class Quest {
     initial: KnockoutObservable<any>;
     notified: boolean;
     autoComplete: boolean;
+    mainQuest: Quest;
     autoCompleter: KnockoutSubscription;
     inQuestLine: boolean;
     _onLoad?: () => void;
@@ -75,7 +76,7 @@ abstract class Quest {
                 Quest.questObservable(this);
                 $('#questStepClearedModal').modal('show');
             }
-            this.focusSub?.dispose?.();
+            this.deleteFocusSub();
             this.claimed(true);
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
@@ -142,22 +143,21 @@ abstract class Quest {
 
     protected createProgressObservables() {
         // Dispose of our old subscriber if one exists
-        this.focusSub?.dispose?.();
+        this.focusSub?.dispose();
 
         // Subscribe to the new focus
         this.focusValue = this._focus();
         this.focusSub = this._focus.subscribe?.((newValue) => {
             // If we aren't actively completing this quests, don't do anything
-            if (!this.inProgress()) {
-                return;
-            }
-            // If the focus goes down, adjust our initial value
-            if (newValue < this.focusValue) {
-                this.initial(this.initial() - (this.focusValue - newValue));
-            }
-            // Prevent progress on suspended quests by adjusting the initial value
-            if (this.suspended && newValue > this.focusValue) {
-                this.initial(this.initial() + (newValue - this.focusValue));
+            if (this.inProgress()) {
+                // If the focus goes down, adjust our initial value
+                if (newValue < this.focusValue) {
+                    this.initial(this.initial() - (this.focusValue - newValue));
+                }
+                // Prevent progress on suspended quests by adjusting the initial value
+                if (this.suspended && newValue > this.focusValue) {
+                    this.initial(this.initial() + (newValue - this.focusValue));
+                }
             }
             this.focusValue = newValue;
         });
@@ -180,7 +180,7 @@ abstract class Quest {
         });
 
         this.inProgress = ko.pureComputed(() => {
-            return this.initial() !== null && !this.claimed();
+            return this.initial() !== null && (!this.claimed() || this.mainQuest?.inProgress());
         });
 
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
@@ -214,7 +214,7 @@ abstract class Quest {
         if (bypassAutoCompleter) {
             this.deleteAutoCompleter();
             // Was consequently disposed on auto completion.
-            this.focusSub?.dispose();
+            this.deleteFocusSub();
         }
         this.initial(this.focus() - this.amount);
     }
@@ -231,6 +231,14 @@ abstract class Quest {
 
     deleteAutoCompleter() {
         this.autoCompleter?.dispose();
+    }
+
+    deleteFocusSub(fromMainQuest = false): boolean {
+        if (fromMainQuest >= !!this.mainQuest) {
+            this.focusSub?.dispose();
+            return true;
+        }
+        return false;
     }
 
     withDescription(description: string): Quest {
@@ -256,6 +264,11 @@ abstract class Quest {
     withInitialValue(initialValue: number): Quest {
         this.initialValue = initialValue;
         return this;
+    }
+
+    public asSubQuest(mainQuest: Quest) {
+        this.mainQuest = mainQuest;
+        this.autoComplete = true;
     }
 
     public getClearedMessage() {
