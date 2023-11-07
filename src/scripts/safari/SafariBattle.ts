@@ -155,6 +155,12 @@ class SafariBattle {
         App.game.party.gainPokemonById(pokemonID, SafariBattle.enemy.shiny);
         const partyPokemon = App.game.party.getPokemon(pokemonID);
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, SafariBattle.enemy.shiny, GameConstants.ShadowStatus.None, GameConstants.SAFARI_EP_YIELD);
+        const bugReward = Math.floor(partyPokemon.baseAttack / 5);
+        switch (player.region) {
+            case (GameConstants.Region.johto):
+                App.game.wallet.gainContestTokens(bugReward);
+                break;
+        }
         if (!isgameOver) {
             Safari.spawnItemCheck();
         }
