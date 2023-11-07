@@ -8364,13 +8364,12 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
     'assets/images/npcs/Professor Magnolia.png');
 
-const MagearnaMysteryGift = new NPC('Mystery Gift', [
+const MagearnaMysteryGift = new GiftNPC('Mystery Gift', [
     'You have received a Mystery Gift for completing the National Shiny Dex!',
-], {
-    image: 'assets/images/pokemon/801.01.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
-}
-);
+], () => {
+    App.game.party.gainPokemonByName('Magearna (Original Color)');
+}, 'assets/images/pokemon/801.01.png', { requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new ObtainedPokemonRequirement('Magearna (Original Color)', true)]) });
+
 
 //Galar Towns
 TownList.Postwick = new Town(

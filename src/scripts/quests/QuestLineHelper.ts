@@ -3677,15 +3677,16 @@ class QuestLineHelper {
                 new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
             ]), GameConstants.BulletinBoards.Galar);
 
-        const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift').withCustomReward(() => {
-            App.game.party.gainPokemonByName('Magearna (Original Color)');
-            Notifier.notify({
-                title: magearnaQuestLine.name,
-                message: 'You obtained Magearna (Original Color)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        });
+        const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift');
+        //    .withCustomReward(() => {
+        //    App.game.party.gainPokemonByName('Magearna (Original Color)');
+        //    Notifier.notify({
+        //        title: magearnaQuestLine.name,
+        //        message: 'You obtained Magearna (Original Color)!',
+        //        type: NotificationConstants.NotificationOption.success,
+        //        timeout: 3e4,
+        //    });
+        //});
         magearnaQuestLine.addQuest(mysteryGift);
 
         App.game.quests.questLines().push(magearnaQuestLine);
