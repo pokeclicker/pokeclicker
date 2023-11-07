@@ -219,6 +219,7 @@ ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 500, Currency.con
 ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 1000, Currency.contestToken);
 ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 400, Currency.contestToken);
 ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 700, Currency.contestToken);
+ItemList['Sudowoodo (Golden)'] = new PokemonItem('Sudowoodo (Golden)', 2000, Currency.contestToken);
 ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)', 1000, Currency.contestToken);
 ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)', 1000, Currency.contestToken);
 ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)', 1000, Currency.contestToken);

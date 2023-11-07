@@ -3717,7 +3717,7 @@ TemporaryBattleList.Dexio = new TemporaryBattle(
         new GymPokemon('Espeon', 195395639, 15),
     ],
     'That\'s what I would expect from a Trainer doing the island challenge. I felt the bond between you and your Pokémon!',
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
     undefined,
     {
         displayName: 'Pokémon Trainer Dexio',
@@ -3730,7 +3730,7 @@ TemporaryBattleList.Sina = new TemporaryBattle(
         new GymPokemon('Glaceon', 195395639, 15),
     ],
     'I get it... Facing trials helps you grow close to your team. I think that\'s absolutely wonderful!',
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
     undefined,
     {
         displayName: 'Pokémon Trainer Sina',
@@ -3804,7 +3804,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 345252381, 27)],
     '<i>The creature escaped back into the ultra wormhole.</i>',
-    [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
     undefined,
     {
         hideTrainer: true,
@@ -3987,7 +3987,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         new GymPokemon('Silvally (Grass)', 209152017, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.',
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)],
     undefined,
     {
         displayName: 'Pokémon Trainer Gladion',
@@ -4678,7 +4678,7 @@ TemporaryBattleList['Hop 1'] = new TemporaryBattle(
         new GymPokemon('Scorbunny', 142807378, 5, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'Well, that was a shock! Guess I know now why Lee thought he should give you a Pokémon, too...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',
