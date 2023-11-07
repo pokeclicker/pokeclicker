@@ -2588,7 +2588,7 @@ const DeltaMay1 = new NPC('May', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 1), new QuestLineStepCompletedRequirement('The Delta Episode', 3, GameConstants.AchievementOption.less)]),
 });
 
-const NewsBirch = new NPC('Discuss the news with Dr. Birch', [
+const NewsBirch = new NPC('Discuss the news with Professor Birch', [
     'Hello again, $playername$! It\'s been a while since you last visited!',
     'There\'s been a lot of hubbub and excitement in the region since the Mossdeep Space Center announced that a meteor was headed our way. This has lead to a lot of new faces in Hoenn.',
     'Some of them have been carrying small but powerful items known as Key Stones. These have the power to let Pokémon Mega Evolve! You may have experienced something like that in Kalos, but it\'s new to us here.',
