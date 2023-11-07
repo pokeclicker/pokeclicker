@@ -258,18 +258,6 @@ class QuestLineHelper {
         const fightBillsGrandpa = new DefeatTemporaryBattleQuest('Bill\'s Grandpa', 'Bill\'s Grandpa would like to have a battle with you!');
         BillsGrandpaQuestLine.addQuest(fightBillsGrandpa);
 
-        // Talk to Bill's Grandpa after battling him
-        //const EeveeReward = () => {
-        //    App.game.party.gainPokemonByName('Eevee');
-        //    Notifier.notify({
-        //        title: BillsGrandpaQuestLine.name,
-        //        message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
-        //        type: NotificationConstants.NotificationOption.success,
-        //        sound: NotificationConstants.NotificationSound.General.new_catch,
-        //        timeout: 3e4,
-        //    });
-        //};
-
         const talkToBillsGrandpa7 = new TalkToNPCQuest(BillsGrandpa7, 'Talk to Bill\'s Grandpa one last time.');
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa7);
 
@@ -598,16 +586,6 @@ class QuestLineHelper {
 
         const talktoIlexForestShrine1 = new TalkToNPCQuest(IlexForestShrine1, 'Investigate the shrine in Ilex Forest.');
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
-
-        //const SpikyEaredPichuReward = () => {
-        //    App.game.party.gainPokemonByName('Spiky-eared Pichu');
-        //    Notifier.notify({
-        //        title: celebiJohtoQuestLine.name,
-        //        message: 'You captured the Spiky-eared Pichu!',
-        //        type: NotificationConstants.NotificationOption.success,
-        //        timeout: 3e4,
-        //    });
-        //};
 
         const clearSpikyEaredPichu = new DefeatTemporaryBattleQuest('Spiky-eared Pichu', 'Defeat the strange Pichu.');
         celebiJohtoQuestLine.addQuest(clearSpikyEaredPichu);
@@ -1005,16 +983,6 @@ class QuestLineHelper {
 
         const calibrateMachine = new CaptureSpecificPokemonQuest('Groudon', 5, true).withDescription('Calibrate the machine by catching or hatching 5 Groudon');
         metaGroudonQuestLine.addQuest(calibrateMachine);
-
-        //const MetaGroudonReward = () => {
-        //    App.game.party.gainPokemonByName('Meta Groudon');
-        //    Notifier.notify({
-        //        title: metaGroudonQuestLine.name,
-        //        message: 'Butler turns control of Meta Groudon over to you!',
-        //        type: NotificationConstants.NotificationOption.success,
-        //        timeout: 3e4,
-        //    });
-        //};
 
         const talkToButler3 = new TalkToNPCQuest(Butler3, 'Deliver the materials to Butler in the Jagged Pass and start the resurrection machine.');
         metaGroudonQuestLine.addQuest(talkToButler3);
@@ -2153,16 +2121,6 @@ class QuestLineHelper {
         const searchForClues10 = new TalkToNPCQuest(Mewtwo2, 'Talk to Mewtwo near Cerulean Cave about Detective Pikachu\'s partner.');
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
-        //const DetectiveRaichuReward = () => {
-        //    App.game.party.gainPokemonByName('Detective Raichu');
-        //    Notifier.notify({
-        //        title: detectivePikachuQuestLine.name,
-        //        message: 'Detective Pikachu\'s partner has been nursed back to health!',
-        //        type: NotificationConstants.NotificationOption.success,
-        //        timeout: 3e4,
-        //    });
-        //};
-
         const searchForClues11 = new TalkToNPCQuest(DetectiveRaichu, 'Talk to Detective Raichu');
         detectivePikachuQuestLine.addQuest(searchForClues11);
 
@@ -2263,16 +2221,6 @@ class QuestLineHelper {
 
         const clearUnovaAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Unova', 'The kid is hiding in Unova!');
         ashKetchumQuestLine.addQuest(clearUnovaAsh);
-
-        //const AshKetchumReward = () => {
-        //    App.game.party.gainPokemonByName('Ash-Greninja');
-        //    Notifier.notify({
-        //        title: ashKetchumQuestLine.name,
-        //        message: 'You obtained Ash-Greninja!',
-        //        type: NotificationConstants.NotificationOption.success,
-        //        timeout: 3e4,
-        //    });
-        //};
 
         const clearKalosAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Kalos', 'Maybe you were too hard on the kid... You should offer him an apology in Kalos.');
         ashKetchumQuestLine.addQuest(clearKalosAsh);
@@ -2913,16 +2861,6 @@ class QuestLineHelper {
         const meltanCatch400Meltan = new CaptureSpecificPokemonQuest('Meltan', 400).withDescription('Catch 400 Meltan in Alola.');
         const meltanRainbowRocket = new DefeatTemporaryBattleQuest('Team Rainbow Leader Giovanni', 'Defeat Team Rainbow Rocket.');
 
-        //const meltanGetMelmetal = () => {
-        //    App.game.party.gainPokemonByName('Melmetal');
-        //    Notifier.notify({
-        //        title: meltanQuestLine.name,
-        //        message: 'You found Melmetal!',
-        //        type: NotificationConstants.NotificationOption.success,
-        //        timeout: 3e4,
-        //    });
-        //};
-
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
             meltanCatch400Meltan,
             meltanRainbowRocket,
@@ -3061,17 +2999,6 @@ class QuestLineHelper {
 
         const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5,000 Pokémon', App.game.statistics.totalPokemonDefeated);
         drSplashQuestLine.addQuest(tackleMachine);
-
-        //const SaucyBlueReward = () => {
-        //    App.game.party.gainPokemonByName('Magikarp Saucy Blue');
-        //    Notifier.notify({
-        //        title: drSplashQuestLine.name,
-        //        message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
-        //        type: NotificationConstants.NotificationOption.success,
-        //        timeout: 3e4,
-        //        sound: NotificationConstants.NotificationSound.General.new_catch,
-        //    });
-        //};
 
         const talkToDrSplash5 = new TalkToNPCQuest(DrSplash5, 'Wrap up your research project by talking to Dr. Splash in Hoppy Town.');
         drSplashQuestLine.addQuest(talkToDrSplash5);
@@ -3678,15 +3605,6 @@ class QuestLineHelper {
             ]), GameConstants.BulletinBoards.Galar);
 
         const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift');
-        //    .withCustomReward(() => {
-        //    App.game.party.gainPokemonByName('Magearna (Original Color)');
-        //    Notifier.notify({
-        //        title: magearnaQuestLine.name,
-        //        message: 'You obtained Magearna (Original Color)!',
-        //        type: NotificationConstants.NotificationOption.success,
-        //        timeout: 3e4,
-        //    });
-        //});
         magearnaQuestLine.addQuest(mysteryGift);
 
         App.game.quests.questLines().push(magearnaQuestLine);
