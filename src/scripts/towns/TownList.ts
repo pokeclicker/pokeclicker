@@ -1627,7 +1627,7 @@ const PlayWithPichu = new GiftNPC('Spiky-eared Pichu', [
     '<i>Pichu runs circles around your legs. It seems like Pichu wants you to pick it up.</i>',
 ], () => {
     App.game.party.gainPokemonByName('Spiky-eared Pichu');
-}, 'assets/images/pokemon/172.01.png', { requirement: new MultiRequirement([ new QuestLineStepCompletedRequirement('Unfinished Business', 7, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Spiky-eared Pichu', true)]) });
+}, 'assets/images/pokemon/172.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 7, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Spiky-eared Pichu', true)]) });
 
 
 const IlexForestShrine2 = new NPC('Investigate the Shrine', [
@@ -2415,7 +2415,7 @@ const Butler2 = new NPC('Butler', [
 
 const Butler3 = new GiftNPC('Butler', [
     'I, the Great Butler, thank you for all of your help in fulfilling my greatest wish!',
-    'Please treat this Meta Groudon responsibly, and go forth to do great things!'
+    'Please treat this Meta Groudon responsibly, and go forth to do great things!',
 ], () => {
     App.game.party.gainPokemonByName('Meta Groudon');
 }, 'assets/images/npcs/Butler.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Meta Discovery', 2), new ObtainedPokemonRequirement('Meta Groudon', true)]) });
@@ -7125,7 +7125,7 @@ const DrSplash5 = new GiftNPC('Dr. Splash', [
     'Please take this Magikarp as a thank you! Train them for greatness!',
 ], () => {
     App.game.party.gainPokemonByName('Magikarp Saucy Blue');
-}, 'assets/images/npcs/Dr Splash.png', { requirement: new MultiRequirement([ new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Magikarp Saucy Blue', true)]) });
+}, 'assets/images/npcs/Dr Splash.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Magikarp Saucy Blue', true)]) });
 
 
 
