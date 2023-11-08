@@ -2427,7 +2427,7 @@ class QuestLineHelper {
         const talkToAnomalyMewtwo3 = new TalkToNPCQuest(AnomalyMewtwo3, 'Talk to Anomaly Mewtwo in Pokémon Village.');
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo3);
 
-        const clearAnomalyMewtwo6 = new DefeatDungeonBossQuest('Pokémon Village', 'Anomaly Mewtwo Y').withDescription('Defeat Anomaly Mewtwo in Pokémon Village.');
+        const clearAnomalyMewtwo6 = new DefeatDungeonBossQuest('Pokémon Village', 'Anomaly Mewtwo').withDescription('Defeat Anomaly Mewtwo in Pokémon Village.');
         unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo6);
 
         const MewtwoniteYReward = () => {
