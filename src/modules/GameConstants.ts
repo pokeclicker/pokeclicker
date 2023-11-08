@@ -1216,17 +1216,9 @@ export const KalosGyms = [
 ];
 
 export const AlolaGyms = [
-    'Ilima\'s Trial',
     'Iki Town',
-    'Lana\'s Trial',
-    'Kiawe\'s Trial',
-    'Mallow\'s Trial',
     'Konikoni City',
-    'Sophocles\' Trial',
-    'Acerola\'s Trial',
     'Malie City',
-    'Vast Poni Canyon Trial',
-    'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
     'Elite Olivia',

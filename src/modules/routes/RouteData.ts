@@ -2065,7 +2065,7 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
         ],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
     undefined,
     AlolaSubRegions.PoniIsland,
 ));
@@ -2222,7 +2222,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Skwovet', 'Rookidee', 'Blipbug', 'Wooloo', 'Nickit', 'Caterpie', 'Hoothoot', 'Grubbin'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
     undefined,
     GalarSubRegions.SouthGalar,
 ));

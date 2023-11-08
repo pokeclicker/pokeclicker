@@ -1797,6 +1797,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 25.22,
+        'name': 'Pikachu (Easter)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
         'id': 26,
         'name': 'Raichu',
         'catchRate': 75,
@@ -7178,7 +7198,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 175.02,
-        'name': 'Surprise Togepi',
+        'name': 'Togepi (Flowering Crown)',
         'catchRate': 190,
         'type': [PokemonType.Fairy],
         'levelType': LevelType.fast,
@@ -9687,6 +9707,26 @@ export const pokemonList = createPokemonArray(
         'exp': 62,
         'catchRate': 45,
         'evolutions': [LevelEvolution('Torchic', 'Combusken', 16)],
+        'base': {
+            'hitpoints': 45,
+            'attack': 60,
+            'specialAttack': 70,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 45,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 255.01,
+        'name': 'Torchic (Egg)',
+        'type': [PokemonType.Fire],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 62,
+        'catchRate': 45,
         'base': {
             'hitpoints': 45,
             'attack': 60,
