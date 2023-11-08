@@ -3596,7 +3596,7 @@ class QuestLineHelper {
         const talktoPeonia1 = new TalkToNPCQuest(Peonia1, 'Peony\'s daughter, Peonia, wants to talk to you in Freezington.');
         gigantamaxQuestLine.addQuest(talktoPeonia1);
 
-        const clearMaxLair = new CustomQuest(1, 0, 'Clear Max Lair to encounter a Gigantamax Pokémon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Max Lair')]());
+        const clearMaxLair = new DefeatDungeonQuest(1, 0, 'Max Lair').withDescription('Clear Max Lair to encounter a Gigantamax Pokémon.');
         gigantamaxQuestLine.addQuest(clearMaxLair);
 
         const talktoPeonia2 = new TalkToNPCQuest(Peonia2, 'Report back to Peonia in Max Lair.');
