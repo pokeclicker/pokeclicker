@@ -13,6 +13,8 @@ import {
     hasMegaEvolution,
     hasUncaughtMegaEvolution,
     getMegaStones,
+    hasGigantamaxForm,
+    hasUncaughtGigantamaxForm,
 } from './PokemonHelper';
 
 // Tmp class for scripts/pokemons/PokemonHelper to extend
@@ -32,4 +34,6 @@ export default class TmpPokemonHelper {
     static hasMegaEvolution = hasMegaEvolution;
     static hasUncaughtMegaEvolution = hasUncaughtMegaEvolution;
     static getMegaStones = getMegaStones;
+    static hasGigantamaxForm = hasGigantamaxForm;
+    static hasUncaughtGigantamaxForm = hasUncaughtGigantamaxForm;
 }
