@@ -9602,8 +9602,8 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
                 new GymPokemon('Scraggy', 33084827, 20),
                 new GymPokemon('Croagunk', 31937395, 20),
             ], { weight: 1 }, undefined),
-        new DungeonBossPokemon('Kangaskhan', 63749659, 20),
-        new DungeonBossPokemon('Mawile', 61285398, 20),
+        new DungeonBossPokemon('Kangaskhan', 63749659, 20, { requirement : new QuestLineStepCompletedRequirement('A Beautiful World', 3) }),
+        new DungeonBossPokemon('Mawile', 61285398, 20, { requirement : new QuestLineStepCompletedRequirement('A Beautiful World', 3) }),
     ],
     505000, 9);
 
@@ -9763,7 +9763,6 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
                 requirement: new MultiRequirement([
                     new ClearDungeonRequirement(5, GameConstants.getDungeonIndex('Kalos Power Plant')),
                     new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
-                    new QuestLineStepCompletedRequirement('A Beautiful World', 11), // TODO: remove requirement and change quest step to defeatDungeonBoss
                 ])}),
     ],
     575000, 13);
@@ -10299,16 +10298,8 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     },
     9003000,
     [
-        new DungeonBossPokemon('Ditto', 94836530, 50,
-            { hide: true, requirement: new OneFromManyRequirement([
-                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16, GameConstants.AchievementOption.less),
-                new QuestLineCompletedRequirement('An Unrivaled Power'),
-            ])}),
-        new DungeonBossPokemon('Zoroark', 95743340, 50,
-            { hide: true, requirement: new OneFromManyRequirement([
-                new QuestLineStepCompletedRequirement('An Unrivaled Power', 16, GameConstants.AchievementOption.less),
-                new QuestLineCompletedRequirement('An Unrivaled Power'),
-            ])}),
+        new DungeonBossPokemon('Ditto', 94836530, 50),
+        new DungeonBossPokemon('Zoroark', 95743340, 50),
         new DungeonTrainer('Anomaly Mewtwo',
             [new GymPokemon('Mega Mewtwo X', 120000000, 70)],
             { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power'), hideTrainer: true}, undefined, 'X'),
