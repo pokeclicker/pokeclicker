@@ -155,6 +155,10 @@ export function hasUncaughtGigantamaxForm(pokemonName: PokemonNameType): boolean
     return !!(gmaxForm.id > 0 && !App.game.party.alreadyCaughtPokemon(gmaxForm.id));
 }
 
+export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
+    return pokemonName.startsWith('Gigantamax') || pokemonName.startsWith('Eternamax');
+}
+
 // To have encounter/caught/defeat/hatch statistics in a single place
 export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: number, shadow: ShadowStatus) {
     const pokemonStatistics = {

@@ -15,6 +15,7 @@ import {
     getMegaStones,
     hasGigantamaxForm,
     hasUncaughtGigantamaxForm,
+    isGigantamaxForm,
 } from './PokemonHelper';
 
 // Tmp class for scripts/pokemons/PokemonHelper to extend
@@ -36,4 +37,5 @@ export default class TmpPokemonHelper {
     static getMegaStones = getMegaStones;
     static hasGigantamaxForm = hasGigantamaxForm;
     static hasUncaughtGigantamaxForm = hasUncaughtGigantamaxForm;
+    static isGigantamaxForm = isGigantamaxForm;
 }
