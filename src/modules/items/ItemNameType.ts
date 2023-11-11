@@ -380,6 +380,7 @@ export type ItemNameType
 | 'Onix (Rocker)'
 | 'Tangela (Pom-pom)'
 | 'Weepinbell (Fancy)'
+| 'Sudowoodo (Golden)'
 | 'Pikachu (Rock Star)'
 | 'Pikachu (Belle)'
 | 'Pikachu (Pop Star)'

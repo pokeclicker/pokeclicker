@@ -215,7 +215,7 @@
                                     <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <td class="col" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue() && PokemonContestController.requirements.isCompleted()">
+                            <td class="col" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue() && (App.game.wallet.currencies[GameConstants.Currency.contestToken]() > 0)">
                                 <span style="display: inline; position: relative;">
                                     <img title="Contest Tokens&#013;&#010;Gained by competing in Contests" src="assets/images/currency/contestToken.svg" height="25px">
                                     <span id="animateCurrency-contestToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.contestToken]()) : App.game.wallet.currencies[GameConstants.Currency.contestToken]().toLocaleString('en-US')">0</span>
