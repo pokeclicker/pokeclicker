@@ -191,11 +191,11 @@ class Player {
     }
 
     public gainItem(itemName: string, amount: number) {
-        this._itemList[itemName](this._itemList[itemName]() + amount);
+        this._itemList[itemName](Math.min(this._itemList[itemName]() + amount, ItemList[itemName].maxAmount));
     }
 
     public loseItem(itemName: string, amount: number) {
-        this._itemList[itemName](this._itemList[itemName]() - amount);
+        this._itemList[itemName](Math.max(this._itemList[itemName]() - amount, 0));
     }
 
     public lowerItemMultipliers(multiplierDecreaser: MultiplierDecreaser, amount = 1) {
