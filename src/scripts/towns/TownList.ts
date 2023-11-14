@@ -2588,7 +2588,7 @@ const DeltaMay1 = new NPC('May', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 1), new QuestLineStepCompletedRequirement('The Delta Episode', 3, GameConstants.AchievementOption.less)]),
 });
 
-const NewsBirch = new NPC('Discuss the news with Dr. Birch', [
+const NewsBirch = new NPC('Discuss the news with Professor Birch', [
     'Hello again, $playername$! It\'s been a while since you last visited!',
     'There\'s been a lot of hubbub and excitement in the region since the Mossdeep Space Center announced that a meteor was headed our way. This has lead to a lot of new faces in Hoenn.',
     'Some of them have been carrying small but powerful items known as Key Stones. These have the power to let Pokémon Mega Evolve! You may have experienced something like that in Kalos, but it\'s new to us here.',
@@ -3085,7 +3085,7 @@ const Trest = new NPC('Mayor Trest', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 15), new QuestLineStepCompletedRequirement('Gale of Darkness', 17, GameConstants.AchievementOption.less)]),
 });
 const Verich = new NPC('Mr. Verich', [
-    'Hohoho! You must be $playername$ I\'m hearing so much about from my.... employees.',
+    'Hohoho! You must be $playername$ I\'m hearing so much about you from my.... employees.',
     'There\'s a lot of rumors buzzing around about the S. S. Libra, but if you ask me, it\'s long gone and may never be found.',
     'You\'d have to be as crazy as Kamino to go looking for it.',
 ], {image: 'assets/images/npcs/Grand Master Greevil.png',
@@ -3441,7 +3441,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
-        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 0))],
+        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
         npcs: [ProfKrane],
     }
 );
@@ -3452,7 +3452,7 @@ TownList['Kaminko\'s Manor'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
     {
-        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 2))],
+        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
         npcs: [DrKaminko, Chobin1, Chobin2],
     }
 );
@@ -3463,7 +3463,7 @@ TownList['S. S. Libra'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Cipher Peon Smarton']],
     {
-        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 19))],
+        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
         npcs: [SearchLibra],
     }
 );
@@ -3473,7 +3473,7 @@ TownList['Orre Colosseum'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [GymList['Cipher Admin Lovrina'], GymList['Cipher Admin Snattle'], GymList['Cipher Admin Gorigan'], GymList['Cipher Admin Ardos'], GymList['Cipher Admin Eldes']],
     {
-        requirements: [new DevelopmentRequirement(new QuestLineCompletedRequirement('Gale of Darkness'))],
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
         npcs: [OrreColosseumSpectator],
     }
 );
@@ -3822,41 +3822,25 @@ TownList['Gateon Port Battles'] = new DungeonTown(
     'Gateon Port Battles',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 1),
-    ]
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 1)]
 );
 TownList['Cipher Key Lair'] = new DungeonTown(
     'Cipher Key Lair',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 24),
-    ],
-    [],
-    {
-        npcs: [],
-    }
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 24)]
 );
 TownList['Citadark Isle'] = new DungeonTown(
     'Citadark Isle',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 26),
-    ]
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 26)]
 );
 TownList['Citadark Isle Dome'] = new DungeonTown(
     'Citadark Isle Dome',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 27),
-    ]
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 27)]
 );
 
 //Sinnoh Shops

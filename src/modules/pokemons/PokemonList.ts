@@ -1800,7 +1800,7 @@ export const pokemonList = createPokemonArray(
         'id': 25.22,
         'name': 'Pikachu (Easter)',
         'catchRate': 190,
-        'type': [PokemonType.Electric],
+        'type': [PokemonType.Electric, PokemonType.Fairy],
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
@@ -7200,7 +7200,7 @@ export const pokemonList = createPokemonArray(
         'id': 175.02,
         'name': 'Togepi (Flowering Crown)',
         'catchRate': 190,
-        'type': [PokemonType.Fairy],
+        'type': [PokemonType.Fairy, PokemonType.Grass],
         'levelType': LevelType.fast,
         'exp': 49,
         'eggCycles': 8, // lowered to match base form
@@ -9722,7 +9722,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 255.01,
         'name': 'Torchic (Egg)',
-        'type': [PokemonType.Fire],
+        'type': [PokemonType.Fire, PokemonType.Fairy],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 62,
