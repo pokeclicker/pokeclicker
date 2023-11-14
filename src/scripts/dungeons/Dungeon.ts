@@ -9107,7 +9107,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
         new DungeonBossPokemon('Whiscash', 48000000, 100),
         new DungeonBossPokemon('Keldeo', 50000000, 100, {
             hide: false,
-            requirement: new MultiRequirement(new ObtainedPokemonRequirement('Cobalion'), new ObtainedPokemonRequirement('Terrakion'), new ObtainedPokemonRequirement('Virizion')),
+            requirement: new MultiRequirement([new ObtainedPokemonRequirement('Cobalion'), new ObtainedPokemonRequirement('Terrakion'), new ObtainedPokemonRequirement('Virizion')]),
         }),
         new DungeonBossPokemon('Vivillon (Jungle)',  96662023, 60, {
             hide: true,
