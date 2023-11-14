@@ -29,18 +29,9 @@ class AchievementTracker implements Feature {
         const tracked = this.trackedAchievement();
         let next = tracked;
         let max = Infinity;
+        // Grabs the next tier achievement with the same custom signature.
         AchievementHandler.achievementList.forEach((current) => {
-            if (tracked.property.constructor == current.property.constructor
-            && (tracked.property as CaughtUniquePokemonsByRegionRequirement).region == (current.property as CaughtUniquePokemonsByRegionRequirement).region
-            && (tracked.property as RouteKillRequirement).route == (current.property as RouteKillRequirement).route
-            && (tracked.property as PokeballRequirement).pokeball == (current.property as PokeballRequirement).pokeball
-            && (tracked.property as ClearGymRequirement).gymIndex == (current.property as ClearGymRequirement).gymIndex
-            && (tracked.property as ClearDungeonRequirement).dungeonIndex == (current.property as ClearDungeonRequirement).dungeonIndex
-            && (tracked.property as SeviiCaughtRequirement).shiny == (current.property as SeviiCaughtRequirement).shiny
-            && (tracked.property as HatcheryHelperRequirement).bonusRequired == (current.property as HatcheryHelperRequirement).bonusRequired
-            && (tracked.property as PokerusStatusRequirement).statusRequired == (current.property as PokerusStatusRequirement).statusRequired
-            && tracked.property.requiredValue < current.property.requiredValue
-            && current.property.requiredValue < max) {
+            if (`${tracked.property}` === `${current.property}` && tracked.property.requiredValue < current.property.requiredValue && current.property.requiredValue < max) {
                 next = current;
                 max = current.property.requiredValue;
             }

@@ -19,4 +19,8 @@ export default class ClearGymRequirement extends AchievementRequirement {
         }
         return `Requires the ${GameConstants.RegionGyms.flat()[this.gymIndex]} Gym to be defeated ${this.requiredValue} times.`;
     }
+
+    public toString(): string {
+        return `${super.toString()} ${this.gymIndex}`;
+    }
 }

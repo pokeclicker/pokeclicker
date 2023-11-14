@@ -270,6 +270,8 @@ class Safari {
         switch (player.region) {
             case GameConstants.Region.kanto:
                 return new Amount(100, GameConstants.Currency.questPoint);
+            case GameConstants.Region.johto:
+                return new Amount(500, GameConstants.Currency.questPoint);
             case GameConstants.Region.kalos:
                 return new Amount(1000, GameConstants.Currency.questPoint);
             default:
@@ -637,6 +639,9 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (player.region) {
             case GameConstants.Region.kanto:
                 MapHelper.moveToTown('Safari Zone');
+                break;
+            case GameConstants.Region.johto:
+                MapHelper.moveToTown('National Park');
                 break;
             case GameConstants.Region.kalos:
                 MapHelper.moveToTown('Friend Safari');
