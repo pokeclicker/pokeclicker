@@ -1485,7 +1485,11 @@ class QuestLineHelper {
         const talkToCobalion3 = new TalkToNPCQuest(Cobalion3, 'Meet up with the Swords of Justice at Moor of Icirrus and talk to Cobalion.');
         swordsofJusticeQuest.addQuest(talkToCobalion3);
 
-        const defeatSwordsofJustice = new DefeatTemporaryBattleQuest('Swords of Justice 1', 'They need you to prove you\'re strong enough to deal with the possible dangers. Defeat the Swords of Justice.');
+        const defeatSwordsofJustice = new DefeatTemporaryBattleQuest('Swords of Justice 1', 'They need you to prove you\'re strong enough to deal with the possible dangers. Defeat the Swords of Justice.').withOptionalArgs({
+            clearedMessage: 'It seems like you\'re really strong, $playername$. I\'ll let you help us since you were able to defeat us. Now onto discussing the plan. We\'ll start by searching for clues on where Kyurem might attack so you\'ll start by looking around the Giant Chasm. Good Luck, if you find anything we\'ll meet here again.',
+            npcDisplayName: 'Cobalion',
+            npcImageName: 'Cobalion',
+        });
         swordsofJusticeQuest.addQuest(defeatSwordsofJustice);
 
         const searchForKyurem1 = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('Now that you\'ve proven you\'re strong enough listen to Cobalion and search for Kyurem in the Giant Chasm.');
