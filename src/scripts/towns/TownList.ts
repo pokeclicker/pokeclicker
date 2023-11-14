@@ -5049,6 +5049,94 @@ const UnovaFossilNpc = new NPC('Friendly Waitress', [
     '... Do you think they\'re hiring?',
 ], {image: 'assets/images/npcs/Waitress.png'});
 
+// Swords of Justice Quest Npcs
+const OldManSwords = new NPC('Old Man', [
+    'Hello kiddo. You must be $playername$, nice to meet you.',
+    'You might\'ve heard about the Swords of Justice. They seem to be really worried recently and that also worries me alot, but you seem to be a really nice lad so I\'ll tell you how to find their leader, Cobalion.',
+    'They usually lurk around the deepest layers of Mistralton Cave so you might be able to find them by exploring around here.',
+], {
+    image: 'assets/images/npcs/Old Man.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Swords of Justice'), new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.less)]),
+});
+const Cobalion1 = new NPC('Cobalion', [
+    'Hello, may I ask who are you? Oh, you\'re a friend of the Old Man? that\'s great and he sent you here to find me I assume.',
+    'Well since he said for you to find me there must be a reason unless you\'re here to help me gather back the Swords of Justice. If you are then thank you, meet me at Moor of Icirrus when you find them, but you should look for Terrakion first, they usually stay in the depths of the Victory Road. Goodluck, trainer.',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.less)]),
+});
+const Terrakion1 = new NPC('Terrakion', [
+    'Uhm. How did you find me? Cobalion told me this place was well hidden! anyways, what do you want from me? Cobalion wants to gather back the Swords of Justice? Do you think i\'m dumb enough to fall for that right?',
+    'I\'d only trust you if you\'d beat me in a battle right here.',
+], {
+    image: 'assets/images/pokemon/639.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.less)]),
+});
+const Cobalion2 = new NPC('Cobalion', [
+    'TODO thanks for bringing Terrakion.',
+    'TODO tells the player where to look for Virizion.',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.less)]),
+});
+const Virizion1 = new NPC('Virizion', [
+    'TODO they don\'t believe too much in humans',
+    'TODO they want you\'re trustworthy by gathering something that requires patience which means gathering 5k grass gems',
+], {
+    image: 'assets/images/pokemon/640.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 9, GameConstants.AchievementOption.less)]),
+});
+const Virizion2 = new NPC('Virizion', [
+    'TODO how they trust you now and saying they\'ll meet you and the others at Moor of Icirrus',
+], {
+    image: 'assets/images/pokemon/640.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 9, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.less)]),
+});
+const Cobalion3 = new NPC('Cobalion', [
+    'TODO how they thank you for reuniting them',
+    'TODO you "ask" what they\'ll do and Cobalion says you won\'t be able to help since we\'re too weak to help and tell you can only help them if you defeat the 3 of them',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 12, GameConstants.AchievementOption.less)]),
+});
+const Cobalion4 = new NPC('Cobalion', [
+    'TODO they haven\t found much either except that Kyurem has been seen near Lacunosa Town',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 13, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.less)]),
+});
+const Cobalion5 = new NPC('Cobalion', [
+    'TODO talk about it wasn\'t our fault they escaped and they probably have gone to their hideout this moment',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 17, GameConstants.AchievementOption.less)]),
+});
+const Cobalion6 = new NPC('Cobalion', [
+    'TODO not to worry about them and defeat and lock kyurem there once and for all',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 18, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.less)]),
+});
+const Cobalion7 = new NPC('Cobalion', [
+    'TODO thanking you for helping and saying they\'ll be right where you found them waiting to join your team if you want',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
+});
+const Terrakion2 = new NPC('Terrakion', [
+    'TODO thanking you for helping and saying they\'ll be right where you found them waiting to join your team if you want',
+], {
+    image: 'assets/images/pokemon/639.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
+});
+const Virizion3 = new NPC('Virizion', [
+    'TODO thanking you for helping and saying they\'ll be right where you found them waiting to join your team if you want',
+], {
+    image: 'assets/images/pokemon/640.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
+});
+
+// Genesect Quest Npcs
 const InvestigateP2 = new NPC('Investigate the P2 Laboratory', [
     '<i>A bright red Pokémon flies past you at a high speed, heading west.</i>',
 ], {
@@ -5212,12 +5300,13 @@ TownList['Lacunosa Town'] = new Town(
     'Lacunosa Town',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [LacunosaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lacunosa Town']), TemporaryBattleList['Team Plasma Grunt 6'], TemporaryBattleList['Zinzolin 1']],
+    [LacunosaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lacunosa Town']), TemporaryBattleList['Team Plasma Grunt 6'], TemporaryBattleList['Zinzolin 1'], TemporaryBattleList['Kyurem 1']],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 13),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
         ],
+        npcs: [Cobalion5],
     }
 );
 TownList['Opelucid City'] = new Town(
@@ -5426,7 +5515,11 @@ TownList['Mistralton Cave'] = new DungeonTown(
     [
         new TemporaryBattleRequirement('Colress 2'),
         new RouteKillRequirement(10, GameConstants.Region.unova, 6),
-    ]
+    ],
+    [],
+    {
+        npcs: [OldManSwords, Cobalion1],
+    }
 );
 TownList['Celestial Tower'] = new DungeonTown(
     'Celestial Tower',
@@ -5478,7 +5571,10 @@ TownList['Giant Chasm'] = new DungeonTown(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
         new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15),
     ],
-    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']]
+    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3']],
+    {
+        npcs: [Cobalion6, Cobalion7, Virizion3, Terrakion2],
+    }
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
@@ -5501,7 +5597,11 @@ TownList['Victory Road Unova'] = new DungeonTown(
     'Victory Road Unova',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 23)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 23)],
+    [TemporaryBattleList['Terrakion 1']],
+    {
+        npcs: [Terrakion1],
+    }
 );
 TownList['Twist Mountain'] = new DungeonTown(
     'Twist Mountain',
@@ -5530,16 +5630,22 @@ TownList['Moor of Icirrus'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 8),
-        new ObtainedPokemonRequirement('Cobalion'),
-        new ObtainedPokemonRequirement('Terrakion'),
-        new ObtainedPokemonRequirement('Virizion'),
-    ]
+        new QuestLineStepCompletedRequirement('Swords of Justice', 2, GameConstants.AchievementOption.more),
+    ],
+    [TemporaryBattleList['Swords of Justice 1']],
+    {
+        npcs: [Cobalion2, Cobalion3, Cobalion4],
+    }
 );
 TownList['Pinwheel Forest'] = new DungeonTown(
     'Pinwheel Forest',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    [],
+    {
+        npcs: [Virizion1, Virizion2],
+    }
 );
 TownList.Dreamyard = new DungeonTown(
     'Dreamyard',

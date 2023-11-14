@@ -2076,6 +2076,78 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.'}),
     }
 );
+TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
+    'Terrakion 1',
+    [new GymPokemon('Terrakion', 175698480, 50, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 4)],
+    undefined,
+    {
+        displayName: 'Terrakion',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 5),
+    }
+);
+TemporaryBattleList['Swords of Justice 1'] = new TemporaryBattle(
+    'Swords of Justice 1',
+    [
+        new GymPokemon('Cobalion', 60042160, 55, undefined, false),
+        new GymPokemon('Terrakion', 60042160, 55, undefined, false),
+        new GymPokemon('Virizion', 60042160, 55, undefined, false),
+    ],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 11)],
+    undefined,
+    {
+        displayName: 'Swords of Justice',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 11),
+    }
+);
+TemporaryBattleList['Kyurem 1'] = new TemporaryBattle(
+    'Kyurem 1',
+    [new GymPokemon('Kyurem', 3060808, 60, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 14)],
+    undefined,
+    {
+        displayName: 'Kyurem',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 14),
+    }
+);
+TemporaryBattleList['Kyurem 2'] = new TemporaryBattle(
+    'Kyurem 2',
+    [
+        new GymPokemon('Kyurem', 62098860, 60, undefined, false),
+        new GymPokemon('Kyurem (Black)', 62098860, 60, undefined, false),
+        new GymPokemon('Kyurem (White)', 62098860, 60, undefined, false),
+    ],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 17)],
+    undefined,
+    {
+        displayName: 'Kyurem',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 17),
+    }
+);
+TemporaryBattleList['Kyurem 3'] = new TemporaryBattle(
+    'Kyurem 3',
+    [
+        new GymPokemon('Kyurem', 66667405, 60, undefined, false),
+        new GymPokemon('Kyurem (Black)', 66667405, 60, undefined, false),
+        new GymPokemon('Kyurem (White)', 66667405, 60, undefined, false),
+    ],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 19)],
+    undefined,
+    {
+        displayName: 'Kyurem',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 19),
+    }
+);
 TemporaryBattleList['Red Genesect 1'] = new TemporaryBattle(
     'Red Genesect 1',
     [new GymPokemon('Genesect', 174858488, 80, undefined, true)],
