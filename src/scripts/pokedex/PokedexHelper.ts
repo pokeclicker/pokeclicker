@@ -52,12 +52,20 @@ class PokedexHelper {
 
     public static formatSearch(value: string) {
         if (/[^\d]/.test(value)) {
-            PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
+            // non-integer, use as name filter
+            PokedexFilters.name.value(value);
             PokedexFilters.id.value(-1);
         } else {
+            // integer, use as ID filter
             PokedexFilters.id.value(value != '' ? +value : -1);
-            PokedexFilters.name.value(new RegExp('', 'i'));
+            PokedexFilters.name.value('');
         }
+    }
+
+    public static getSearchString() {
+        const name = PokedexFilters.name.value.peek();
+        const id = PokedexFilters.id.value.peek();
+        return id == -1 ? name : id;
     }
 
     public static getList(): typeof pokemonList {
@@ -100,10 +108,10 @@ class PokedexHelper {
             }
 
             // Check if the englishName or displayName contains the string
+            const nameFilter = PokedexFilters.name.regex();
             const displayName = PokemonHelper.displayName(pokemon.name)();
-            const filterName = PokedexFilters.name.value();
             const partyName = App.game.party.getPokemonByName(pokemon.name)?.displayName;
-            if (!filterName.test(displayName) && !filterName.test(pokemon.name) && !(partyName != undefined && filterName.test(partyName))) {
+            if (!nameFilter.test(displayName) && !nameFilter.test(pokemon.name) && !(partyName != undefined && nameFilter.test(partyName))) {
                 return false;
             }
 

@@ -154,8 +154,8 @@ class PartyController {
     }).extend({ rateLimit: 100 });
 
     static getVitaminFilteredList(): Array<PartyPokemon> {
-        return [...App.game.party.caughtPokemon].filter((pokemon) => {
-            if (!new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+        return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (!(Settings.getSetting('vitaminSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
                 return false;
             }
             if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
@@ -189,11 +189,11 @@ class PartyController {
     }).extend({ rateLimit: 100 });
 
     static getHeldItemFilteredList(): Array<PartyPokemon> {
-        return [...App.game.party.caughtPokemon].filter((pokemon) => {
+        return App.game.party.caughtPokemon.filter((pokemon) => {
             if (!HeldItem.heldItemSelected()?.canUse(pokemon)) {
                 return false;
             }
-            if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+            if (!(Settings.getSetting('heldItemSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
                 return false;
             }
             if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
@@ -227,8 +227,8 @@ class PartyController {
     }).extend({ rateLimit: 100 });
 
     static getConsumableFilteredList(): Array<PartyPokemon> {
-        return [...App.game.party.caughtPokemon].filter((pokemon) => {
-            if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+        return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (!(Settings.getSetting('consumableSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
                 return false;
             }
             if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
@@ -252,7 +252,7 @@ class PartyController {
     static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
         if (modalUtils.observableState.heldItemModal === 'show') {
-            PartyController.pokemonsWithHeldItemSortedList = [...App.game.party.caughtPokemon.filter(p => p.heldItem())];
+            PartyController.pokemonsWithHeldItemSortedList = App.game.party.caughtPokemon.filter(p => p.heldItem());
             return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
         }
         return PartyController.pokemonsWithHeldItemSortedList;

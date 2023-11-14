@@ -4,6 +4,7 @@ import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
 import CssVariableSetting from './CssVariableSetting';
 import RangeSetting from './RangeSetting';
+import SearchSetting from './SearchSetting';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
@@ -208,7 +209,7 @@ Settings.add(new Setting<number>('vitaminSort', 'Sort', vitaminSortSettings, Sor
 Settings.add(new BooleanSetting('vitaminSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('vitaminHideMaxedPokemon', 'Hide Pokémon with max vitamin', false));
 Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon', false));
-Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
+Settings.add(new SearchSetting('vitaminSearchFilter', 'Search', ''));
 Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
@@ -219,7 +220,7 @@ const consumableSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('consumableSort', 'Sort', consumableSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('consumableSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('consumableHideShinyPokemon', 'Hide shiny Pokémon', false));
-Settings.add(new Setting<string>('consumableSearchFilter', 'Search', [], ''));
+Settings.add(new SearchSetting('consumableSearchFilter', 'Search', ''));
 Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
@@ -229,29 +230,19 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
-Settings.add(new Setting<string>('heldItemSearchFilter', 'Search', [], ''));
+Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', ''));
 Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
 Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false));
 
 // Breeding Filters
-Object.keys(BreedingFilters).forEach((key) => {
-    // One-off because search isn't stored in settings
-    if (key === 'search') {
-        return;
-    }
-    const filter = BreedingFilters[key];
-    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+Object.values(BreedingFilters).forEach((filter) => {
+    Settings.add(new FilterSetting(filter));
 });
 
 // Pokedex Filters
-Object.keys(PokedexFilters).forEach((key) => {
-    // dont store name filter
-    if (key === 'name') {
-        return;
-    }
-    const filter = PokedexFilters[key];
+Object.values(PokedexFilters).forEach((filter) => {
     Settings.add(new FilterSetting(filter));
 });
 

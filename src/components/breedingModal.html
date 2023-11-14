@@ -67,12 +67,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <div class="form-row text-left">
                                             <div class="form-group col-lg-12 col-12">
                                                 <label>Search</label>
-                                                <input autocomplete="off" class="form-control" oninput="BreedingController.formatSearch(this.value)" placeholder="Search here"/>
+                                                <input autocomplete="off" class="form-control" oninput="BreedingController.formatSearch(this.value)" placeholder="Search here" data-bind="value: BreedingController.getSearchString()" />
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
                                                 <label>Types</label>
-                                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(+this.value), Settings.setSettingByName(this.name, +this.value)">
                                                     <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
                                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter1').value === $data.value }, text: $data.text">Type</option>
                                                     <!-- /ko -->
@@ -80,7 +80,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             </div>
                                             <div class="form-group col-lg-6 col-6">
                                                 <label> </label>
-                                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(+this.value), Settings.setSettingByName(this.name, +this.value)">
                                                     <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
                                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter2').value === $data.value }, text: $data.text">Type</option>
                                                     <!-- /ko -->
@@ -147,15 +147,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                                             <div class="form-group col-lg-6 col-6">
                                                 <label>Shiny Status</label>
-                                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.shinyStatus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <option value="-1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '-1' }">All</option>
-                                                    <option value="0" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '0' }">Not Shiny</option>
-                                                    <option value="1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '1' }">Shiny</option>
+                                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.shinyStatus.value(+this.value), Settings.setSettingByName(this.name, +this.value)">
+                                                    <option value="-1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === -1 }">All</option>
+                                                    <option value="0" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === 0 }">Not Shiny</option>
+                                                    <option value="1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === 1 }">Shiny</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-lg-6 col-6">
                                                 <label>Pokérus Status</label>
-                                                <select name="breedingPokerusFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.pokerus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                                <select name="breedingPokerusFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.pokerus.value(+this.value), Settings.setSettingByName(this.name, +this.value)">
                                                     <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
                                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingPokerusFilter').value === $data.value }, text: $data.text"></option>
                                                     <!-- /ko -->

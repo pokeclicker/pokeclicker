@@ -3,15 +3,24 @@ import { Pokerus } from '../GameConstants';
 import SettingOption from './SettingOption';
 import Settings from './Settings';
 import FilterOption from './FilterOption';
+import GameHelper from '../GameHelper';
 
 const BreedingFilters: Record<string, FilterOption> = {
-    name: new FilterOption<RegExp>(
+    name: new FilterOption(
         'Search',
-        ko.observable(new RegExp('', 'i')),
+        ko.observable(''),
+        'breedingNameFilter',
+        [],
+        {
+            regex: function () { 
+                return GameHelper.safelyBuildRegex(this.value());
+            },
+        },
     ),
     id: new FilterOption<number>(
         'SearchID',
         ko.observable(-1),
+        'breedingIDFilter',
     ),
     category: new FilterOption<number>(
         'Category',
@@ -23,9 +32,9 @@ const BreedingFilters: Record<string, FilterOption> = {
         ko.observable(-1).extend({ numeric: 0 }),
         'breedingShinyFilter',
         [
-            new SettingOption('All', '-1'),
-            new SettingOption('Not Shiny', '0'),
-            new SettingOption('Shiny', '1'),
+            new SettingOption('All', -1),
+            new SettingOption('Not Shiny', 0),
+            new SettingOption('Shiny', 1),
         ],
     ),
     type1: new FilterOption<number>(
@@ -33,9 +42,9 @@ const BreedingFilters: Record<string, FilterOption> = {
         ko.observable(-2).extend({ numeric: 0 }),
         'breedingTypeFilter1',
         [
-            new SettingOption('All', '-2'),
-            ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-            new SettingOption('None', '-1'),
+            new SettingOption('All', -2),
+            ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+            new SettingOption('None', -1),
         ],
     ),
     type2: new FilterOption<number>(
@@ -43,9 +52,9 @@ const BreedingFilters: Record<string, FilterOption> = {
         ko.observable(-2).extend({ numeric: 0 }),
         'breedingTypeFilter2',
         [
-            new SettingOption('All', '-2'),
-            ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-            new SettingOption('None', '-1'),
+            new SettingOption('All', -2),
+            ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+            new SettingOption('None', -1),
         ],
     ),
     region: new FilterOption<number>(
@@ -59,8 +68,8 @@ const BreedingFilters: Record<string, FilterOption> = {
         ko.observable(-1).extend({ numeric: 0 }),
         'breedingPokerusFilter',
         [
-            new SettingOption('All', '-1'),
-            ...Settings.enumToSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
+            new SettingOption('All', -1),
+            ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
         ],
     ),
     uniqueTransformation: new FilterOption<string>(

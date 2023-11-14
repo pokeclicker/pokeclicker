@@ -47,8 +47,8 @@ aria-labelledby="pokedexModalLabel">
                                     <!--Name or ID-->
                                     <div class="form-group col-lg-12 col-12">
                                         <label>Name or ID</label>
-                                        <input id="nameIDFilter" class="form-control" placeholder="Bulbasaur or 1" value=""
-                                        oninput="PokedexHelper.formatSearch(this.value)">
+                                        <input id="nameIDFilter" class="form-control" placeholder="Bulbasaur or 1"
+                                        oninput="PokedexHelper.formatSearch(this.value)" data-bind="value: PokedexHelper.getSearchString()">
                                     </div>
 
                                     <!--Types-->

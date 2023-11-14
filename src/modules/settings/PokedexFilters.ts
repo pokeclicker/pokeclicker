@@ -6,13 +6,22 @@ import FilterOption from './FilterOption';
 import GameHelper from '../GameHelper';
 
 const PokedexFilters: Record<string, FilterOption> = {
-    name: new FilterOption<RegExp>(
+    name: new FilterOption(
         'Search',
-        ko.observable(new RegExp('', 'i')),
+        ko.observable(''),
+        'pokedexNameFilter',
+        [],
+        {
+            regex: function () { 
+                return GameHelper.safelyBuildRegex(this.value());
+            },
+        },
     ),
     id: new FilterOption<number>(
         'SearchID',
         ko.observable(-1),
+        'pokedexIDFilter',
+        [],
     ),
     region: new FilterOption<Region>(
         'Region',

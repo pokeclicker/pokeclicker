@@ -378,15 +378,15 @@ class PartyPokemon implements Saveable {
         }
 
         // Check if search matches englishName or displayName
+        const nameFilter = BreedingFilters.name.regex();
         const displayName = PokemonHelper.displayName(this.name)();
-        const filterName = BreedingFilters.name.value();
         const partyName = this.displayName;
-        if (!filterName.test(displayName) && !filterName.test(this.name) && !(partyName != undefined && filterName.test(partyName))) {
+        if (!nameFilter.test(displayName) && !nameFilter.test(this.name) && !(partyName != undefined && nameFilter.test(partyName))) {
             return false;
         }
 
-        const filterID = BreedingFilters.id.value();
-        if (filterID > -1 && filterID != Math.floor(this.id)) {
+        const idFilter = BreedingFilters.id.value();
+        if (idFilter > -1 && idFilter != Math.floor(this.id)) {
             return false;
         }
 

@@ -137,12 +137,20 @@ class BreedingController {
 
     public static formatSearch(value: string) {
         if (/[^\d]/.test(value)) {
-            BreedingFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
+            // non-integer, use as name filter
+            BreedingFilters.name.value(value);
             BreedingFilters.id.value(-1);
         } else {
+            // integer, use as ID filter
             BreedingFilters.id.value(value != '' ? +value : -1);
-            BreedingFilters.name.value(new RegExp('', 'i'));
+            BreedingFilters.name.value('');
         }
+    }
+
+    public static getSearchString() {
+        const name = BreedingFilters.name.value.peek();
+        const id = BreedingFilters.id.value.peek();
+        return id == -1 ? name : id;
     }
 
     public static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {

@@ -2485,8 +2485,17 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
 
-            // Remove erroneous BreedingFilter search setting
+            // Remove erroneous nameless settings
             delete settingsData[''];
+
+            // Update BreedingFilter to use numeric values
+            Object.values(BreedingFilters).filter(filter => Number.isInteger(filter.value())).forEach(filter => {
+                if (settingsData[filter.optionName] != null && settingsData[filter.optionName] != '') {
+                    settingsData[filter.optionName] = Number.parseInt(settingsData[filter.optionName]);
+                } else {
+                    settingsData[filter.optionName] = -1;
+                }
+            });
 
             // Remove Z Crystal gyms and badges (remove furthest down the index first as to not get confused by index numbers)
             // Mina\'s Trial
