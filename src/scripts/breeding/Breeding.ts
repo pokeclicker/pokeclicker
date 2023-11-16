@@ -74,7 +74,7 @@ class Breeding implements Feature {
             ['Bulbasaur', 'Oddish', 'Tangela', 'Paras'],
             ['Chikorita', 'Hoppip', 'Sunkern'],
             ['Treecko', 'Tropius', 'Roselia'],
-            ['Turtwig', 'Carnivine', 'Budew'],
+            ['Turtwig', 'Snover', 'Budew'],
             ['Snivy', 'Pansage', 'Maractus'],
             ['Chespin', 'Skiddo', 'Phantump'],
             ['Rowlet', 'Morelull', 'Fomantis'],
