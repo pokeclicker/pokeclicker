@@ -620,7 +620,7 @@ class Safari {
         if (level == Safari.maxSafariLevel) {
             tooltip.title = 'Max level reached';
         } else {
-            tooltip.title = `${Safari.safariExp() - Safari.expRequiredForLevel(level)} / ${Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level)}`;
+            tooltip.title = `${(Safari.safariExp() - Safari.expRequiredForLevel(level)).toLocaleString('en-US')} / ${(Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level)).toLocaleString('en-US')}`;
         }
         return tooltip;
     }
