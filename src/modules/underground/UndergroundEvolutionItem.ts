@@ -7,12 +7,13 @@ export default class UndergroundEvolutionItem extends UndergroundItem {
     constructor(
         name: string,
         id: number,
+        itemName: string,
         space: Array<Array<number>>,
         public type: StoneType,
         value = 1,
         requirement?: Requirement,
         weight?: (() => number) | number,
     ) {
-        super(name, id, space, value, UndergroundItemValueType.EvolutionItem, requirement, weight);
+        super(name, id, itemName, space, value, UndergroundItemValueType.EvolutionItem, requirement, weight);
     }
 }

@@ -31,6 +31,8 @@ export class Underground implements Feature {
 
     public static sortDirection = -1;
     public static lastPropSort = 'none';
+    public static sortOption: Observable<string> = ko.observable('None');
+    public static sortFactor: Observable<number> = ko.observable(-1);
 
     public static BASE_ENERGY_MAX = 50;
     public static BASE_ITEMS_MAX = 3;
@@ -49,20 +51,44 @@ export class Underground implements Feature {
     public static BOMB_ENERGY = 10;
     public static SURVEY_ENERGY = 15;
 
+    // Sort UndergroundItems.list whenever the sort method or quantities change
+    public static sortedMineInventory: Computed<Array<UndergroundItem>> = ko.computed(function () {
+        const sortOption = Underground.sortOption();
+        const direction = Underground.sortFactor();
+        return UndergroundItems.list.sort((a: UndergroundItem, b: UndergroundItem) => {
+            let result = 0;
+            switch (sortOption) {
+                case 'Amount':
+                    result = (player.itemList[a.itemName]() - player.itemList[b.itemName]()) * direction;
+                    break;
+                case 'Value':
+                    result = (a.value - b.value) * direction;
+                    break;
+                case 'Item':
+                    result = a.name > b.name ? direction : -direction;
+                    break;
+            }
+            if (result == 0) {
+                return a.id - b.id;
+            }
+            return result;
+        });
+    });
+
     public static netWorthTooltip: Computed<string> = ko.pureComputed(() => {
         let nMineItems = 0;
         let nFossils = 0;
         let nPlates = 0;
         let nShards = 0;
-        player.mineInventory().forEach(mineItem => {
+        UndergroundItems.list.forEach(mineItem => {
             if (mineItem.valueType == UndergroundItemValueType.Diamond) {
-                nMineItems += mineItem.amount();
+                nMineItems += player.itemList[mineItem.itemName]();
             } else if (mineItem.valueType == UndergroundItemValueType.Fossil) {
-                nFossils += mineItem.amount();
+                nFossils += player.itemList[mineItem.itemName]();
             } else if (mineItem.valueType == UndergroundItemValueType.Gem) {
-                nPlates += mineItem.amount();
+                nPlates += player.itemList[mineItem.itemName]();
             } else if (mineItem.valueType == UndergroundItemValueType.Shard) {
-                nShards += mineItem.amount();
+                nShards += player.itemList[mineItem.itemName]();
             }
         });
 
@@ -225,7 +251,6 @@ export class Underground implements Feature {
     }
 
     public static gainMineItem(id: number, num = 1) {
-        const index = player.mineInventoryIndex(id);
         const item = UndergroundItems.getById(id);
 
         if (item.valueType == UndergroundItemValueType.EvolutionItem) {
@@ -238,29 +263,15 @@ export class Underground implements Feature {
             player.gainMegaStone((item as UndergroundMegaStoneItem).megaStone);
             return;
         }
-
-        if (index == -1) {
-            const tempItem = {
-                name: item.name,
-                amount: ko.observable(num),
-                id: id,
-                value: item.value,
-                valueType: item.valueType,
-                sellLocked: ko.observable(false),
-            };
-            player.mineInventory.push(tempItem);
-        } else {
-            const amt = player.mineInventory()[index].amount();
-            player.mineInventory()[index].amount(amt + num);
-            this.sortMineItems(this.lastPropSort, false);
-        }
+        // Can not directly use item.gain from Item in the ItemList until HeldItems are in modules too.
+        player.gainItem(item.itemName, num);
     }
 
     public static getDiamondNetWorth(): number {
         let diamondNetWorth = 0;
-        player.mineInventory().forEach(mineItem => {
+        UndergroundItems.list.forEach(mineItem => {
             if (mineItem.valueType == UndergroundItemValueType.Diamond) {
-                diamondNetWorth += mineItem.value * mineItem.amount();
+                diamondNetWorth += mineItem.value * player.itemList[mineItem.itemName]();
             }
         });
 
@@ -269,19 +280,13 @@ export class Underground implements Feature {
 
     public static getCumulativeValues(): Record<string, { cumulativeValue: number, imgSrc: string }> {
         const cumulativeValues = {};
-        player.mineInventory().forEach(item => {
+        UndergroundItems.list.forEach(item => {
             if (
-                // Cannot sell Shards or Fossils
-                item.valueType !== UndergroundItemValueType.Fossil
-                && item.valueType !== UndergroundItemValueType.Shard
-                && item.valueType != UndergroundItemValueType.FossilPiece
-                && item.amount() > 0
-                && !item.sellLocked()
-            ) {
+                item.hasSellValue() && player.itemList[item.itemName]() > 0 && !item.sellLocked()) {
                 let valueType;
                 switch (item.valueType) {
                     case UndergroundItemValueType.Gem:
-                        valueType = `${PokemonType[UndergroundItems.getById(item.id).type]} Gems`;
+                        valueType = `${PokemonType[item.type]} Gems`;
                         break;
                     case UndergroundItemValueType.Diamond:
                     default:
@@ -295,12 +300,12 @@ export class Underground implements Feature {
                     if (item.valueType == UndergroundItemValueType.Diamond) {
                         cumulativeValueOfType.imgSrc = 'assets/images/underground/diamond.svg';
                     } else {
-                        cumulativeValueOfType.imgSrc = UndergroundItems.getById(item.id).image;
+                        cumulativeValueOfType.imgSrc = item.image;
                     }
                     cumulativeValues[valueType] = cumulativeValueOfType;
                 }
 
-                cumulativeValueOfType.cumulativeValue += item.value * item.amount();
+                cumulativeValueOfType.cumulativeValue += item.value * player.itemList[item.itemName]();
             }
         });
 
@@ -335,103 +340,51 @@ export class Underground implements Feature {
         });
     }
 
-    public static sortMineItems(prop: string, flip = true) {
-        const prevEl = document.querySelector(`[data-undergroundsort=${Underground.lastPropSort}]`);
-        const nextEl = prop == this.lastPropSort ? prevEl : document.querySelector(`[data-undergroundsort=${prop}]`);
-
-        // If new sort by, update old sort by
-        if (prop != this.lastPropSort) {
-            // Remove sort direction from previous element
-            if (prevEl) {
-                prevEl.textContent = this.lastPropSort;
-            }
-            this.lastPropSort = prop;
-        } else if (flip) {
-            // Flip sort direction
-            this.sortDirection *= -1;
+    public static updateTreasureSorting(newSortOption: string) {
+        if (Underground.sortOption() === newSortOption) {
+            Underground.sortFactor(Underground.sortFactor() * -1);
+        } else {
+            Underground.sortOption(newSortOption);
         }
-
-        // Update element text to dispaly sort direction
-        if (nextEl) {
-            nextEl.textContent = `${prop} ${this.sortDirection > 0 ? '▴' : '▾'}`;
-        }
-
-        player.mineInventory.sort((a, b) => {
-            let result = 0;
-            switch (prop) {
-                case 'Amount':
-                    result = (a.amount() - b.amount()) * this.sortDirection;
-                    break;
-                case 'Value':
-                    result = (a.value - b.value) * this.sortDirection;
-                    break;
-                case 'Item':
-                    result = a.name > b.name ? 1 * this.sortDirection : -1 * this.sortDirection;
-                    break;
-            }
-            if (result == 0) {
-                return a.id - b.id;
-            }
-            return result;
-        });
     }
 
-    public static sellMineItem(id: number, amount = 1) {
-        for (let i = 0; i < player.mineInventory().length; i++) {
-            const item = player.mineInventory()[i];
-            if (item.id == id) {
-                if (item.sellLocked()) {
-                    Notifier.notify({
-                        message: 'Item is locked for selling, you first have to unlock it.',
-                        type: NotificationConstants.NotificationOption.warning,
-                    });
-                    return;
-                }
-                if (item.valueType == UndergroundItemValueType.Fossil) {
-                    amount = 1;
-                }
-                const curAmt = item.amount();
-                if (curAmt > 0) {
-                    const sellAmt = Math.min(curAmt, amount);
-                    const success = Underground.gainProfit(item, sellAmt);
-                    if (success) {
-                        player.mineInventory()[i].amount(curAmt - sellAmt);
-                        this.sortMineItems(this.lastPropSort, false);
-                    }
-                    return;
-                }
+    public static playerHasMineItems(): boolean {
+        return UndergroundItems.list.some(i => player.itemList[i.itemName]());
+    }
+
+    public static sellMineItem(item: UndergroundItem, amount = 1) {
+        if (item.sellLocked()) {
+            Notifier.notify({
+                message: 'Item is locked for selling, you first have to unlock it.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+        if (item.valueType == UndergroundItemValueType.Fossil) {
+            amount = 1;
+        }
+        const curAmt = player.itemList[item.itemName]();
+        if (curAmt > 0) {
+            const sellAmt = Math.min(curAmt, amount);
+            const success = Underground.gainProfit(item, sellAmt);
+            if (success) {
+                player.loseItem(item.itemName, sellAmt);
             }
+            return;
         }
     }
 
     public static sellAllMineItems() {
-        for (let i = 0; i < player.mineInventory().length; i++) {
-            const item = player.mineInventory()[i];
-            if (
-                !item.sellLocked()
-                && item.valueType != UndergroundItemValueType.Fossil
-                && item.valueType != UndergroundItemValueType.Shard
-                && item.valueType != UndergroundItemValueType.FossilPiece
-            ) {
-                Underground.sellMineItem(item.id, Infinity);
+        UndergroundItems.list.forEach((item) => {
+            if (!item.sellLocked() && item.isSellable()) {
+                Underground.sellMineItem(item, Infinity);
             }
-        }
+        });
         $('#mineSellAllTreasuresModal').modal('hide');
-    }
-
-    public static setSellLockOfMineItem(id: number, sellLocked: boolean) {
-        for (let i = 0; i < player.mineInventory().length; i++) {
-            const item = player.mineInventory()[i];
-            if (item.id == id) {
-                player.mineInventory()[i].sellLocked(sellLocked);
-                return;
-            }
-        }
     }
 
     private static gainProfit(item: UndergroundItem, amount: number): boolean {
         let success = true;
-        const uItem = UndergroundItems.getById(item.id);
         switch (item.valueType) {
             case UndergroundItemValueType.Diamond:
                 App.game.wallet.gainDiamonds(item.value * amount);
@@ -443,7 +396,7 @@ export class Underground implements Feature {
                 success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
                 break;
             case UndergroundItemValueType.Gem:
-                const type = uItem.type;
+                const type = item.type;
                 App.game.gems.gainGems(PLATE_VALUE * amount, type);
                 break;
             // Nothing else can be sold
@@ -519,6 +472,7 @@ export class Underground implements Feature {
         } else {
             Mine.loadMine();
         }
+        UndergroundItems.list.forEach(it => it.sellLocked(json.sellLocks[it.itemName] || false));
     }
 
     toJSON(): Record<string, any> {
@@ -532,6 +486,12 @@ export class Underground implements Feature {
         undergroundSave.upgrades = upgradesSave;
         undergroundSave.energy = this.energy;
         undergroundSave.mine = Mine.save();
+        undergroundSave.sellLocks = UndergroundItems.list.reduce((sellLocks, item) => {
+            if (item.sellLocked()) {
+                sellLocks[item.itemName] = true;
+            }
+            return sellLocks;
+        }, {});
         return undergroundSave;
     }
 
