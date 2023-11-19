@@ -22,6 +22,18 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
             });
         });
         const max = Math.max(...types);
+
+        const allCaughtMons = App.game.party.caughtPokemon;
+        const allCaughtDataMons = [];
+        for(let i = 0; i < allCaughtMons.length; i++){
+            allCaughtDataMons.push(PokemonHelper.getPokemonByName(allCaughtMons[i].name));
+        }
+
+        for (let i = 0; i < types.length; i++) {
+            types[i] = (allCaughtDataMons.some(p => p.type1 == i || p.type2 == i)) ? types[i] : 0;
+        }
+
+
         // Calculate the weight
         return types.map(v => ((-v + max) / max) * (this.maxWeight - this.minWeight))
             // map the type and rounded values
