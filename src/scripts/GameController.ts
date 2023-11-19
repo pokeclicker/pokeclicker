@@ -530,6 +530,70 @@ class GameController {
             }
         });
     }
+
+    static setupResizableModules() {
+        const moduleResizeObserver = new ResizeObserver((entries) => {
+            entries.forEach((entry) => {
+                const height = entry.target.getBoundingClientRect().height;
+                if (height > 0) {
+                    Settings.setSettingByName(`moduleHeight.${entry.target.id}`, height);
+                }
+            });
+        });
+
+        // Things get wonky if we continue to observe resize events or have a height set on the
+        // element during collapse/expand. We also use max-height while collapsed to preserve the original height
+        // and return the element to the correct height upon expanding.
+
+        // Collapse/Expand events
+        const hide = (e: JQuery.TriggeredEvent) => {
+            moduleResizeObserver.unobserve(e.currentTarget);
+            e.currentTarget.style.maxHeight = `${Settings.getSetting(`moduleHeight.${e.currentTarget.id}`).value}px`;
+            e.currentTarget.style.height = null;
+            e.currentTarget.classList.remove('resize-drag-handle');
+            e.currentTarget.querySelector('.card-footer').classList.add('d-none');
+        };
+
+        const show = (e: JQuery.TriggeredEvent) => {
+            e.currentTarget.style.maxHeight = `${Settings.getSetting(`moduleHeight.${e.currentTarget.id}`).value}px`;
+        };
+
+        const shown = (e: JQuery.TriggeredEvent) => {
+            e.currentTarget.style.height = `${Settings.getSetting(`moduleHeight.${e.currentTarget.id}`).value}px`;
+            e.currentTarget.style.maxHeight = null;
+            e.currentTarget.classList.add('resize-drag-handle');
+            e.currentTarget.querySelector('.card-footer').classList.remove('d-none');
+            moduleResizeObserver.observe(e.currentTarget);
+        };
+
+        document.querySelectorAll<HTMLElement>('.resizable-module').forEach((element) => {
+            const cardBodyElem = element.querySelector('.card-body');
+            const isCollapsed = !cardBodyElem.classList.contains('show');
+
+            // card-footer to hold drag handle
+            const cardFooterElem = document.createElement('div');
+            cardFooterElem.classList.add('card-footer', 'py-2');
+            cardFooterElem.classList.toggle('d-none', isCollapsed);
+            element.insertBefore(cardFooterElem, cardBodyElem.nextSibling);
+
+            if (!isCollapsed) {
+                element.classList.add('resize-drag-handle');
+                element.style.height = `${Settings.getSetting(`moduleHeight.${element.id}`).value}px`;
+                moduleResizeObserver.observe(element);
+            }
+
+            $(element).on({
+                'hide.bs.collapse': hide,
+                'show.bs.collapse': show,
+                'shown.bs.collapse': shown,
+            });
+
+            // Apply a min-height once the UI is loaded so the module header is always visible
+            setTimeout(() => {
+                element.style.minHeight = `${element.querySelector('.card-header').getBoundingClientRect().height}px`;
+            }, 0);
+        });
+    }
 }
 
 // when stacking modals allow scrolling after top modal hidden
