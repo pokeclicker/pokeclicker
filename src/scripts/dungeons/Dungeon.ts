@@ -1242,6 +1242,14 @@ dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
     [
         new DungeonBossPokemon('Seel', 86130, 35),
         new DungeonBossPokemon('Articuno', 129195, 50),
+        new DungeonBossPokemon('Pikachu (Easter)', 2700000, 23, {
+            requirement: new MultiRequirement([
+                new PokemonDefeatedSelectNRequirement('Pikachu (Easter)', 4, 6, 1),
+                new SpecialEventRequirement('Easter'),
+                new QuestLineCompletedRequirement('Egg Hunt'),
+            ]),
+            hide: true,
+        }),
     ],
     1250, 19);
 
@@ -3740,9 +3748,9 @@ dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
         new DungeonBossPokemon('Regirock', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
         new DungeonBossPokemon('Regice', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
         new DungeonBossPokemon('Registeel', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
-        new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
+        new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
             requirement: new MultiRequirement([
-                new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 4, 6, 1),
+                new PokemonDefeatedSelectNRequirement('Torchic (Egg)', 4, 6, 1),
                 new SpecialEventRequirement('Easter'),
                 new QuestLineCompletedRequirement('Egg Hunt'),
             ]),
