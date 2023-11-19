@@ -25,7 +25,7 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
 
         const allCaughtMons = App.game.party.caughtPokemon;
         const allCaughtDataMons = [];
-        for(let i = 0; i < allCaughtMons.length; i++){
+        for (let i = 0; i < allCaughtMons.length; i++) {
             allCaughtDataMons.push(PokemonHelper.getPokemonByName(allCaughtMons[i].name));
         }
 
