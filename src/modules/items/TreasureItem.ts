@@ -5,7 +5,7 @@ import { Currency } from '../GameConstants';
 export default class TreasureItem extends Item {
 
     constructor(id: string, public valueType: UndergroundItemValueType, value: number = 0, displayName?: string) {
-        super(id, value, Currency.diamond, undefined, displayName, `${displayName || id} digged out in the Underground.`);
+        super(id, value, Currency.diamond, undefined, displayName, `${displayName || id} dug out from the Underground.`);
     }
 
     get image() {
