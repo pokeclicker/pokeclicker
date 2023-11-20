@@ -74,7 +74,7 @@ class MapHelper {
         return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked();
     };
 
-    public static getCurrentEnvironment(): GameConstants.Environment {
+    public static getCurrentEnvironment(): GameConstants.Environment[] {
         const area = player.route() ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
                 ? TemporaryBattleRunner.getEnvironmentArea() : 'Outdoors') ||
@@ -87,11 +87,11 @@ class MapHelper {
             return area;
         }
 
-        const [env] = Object.entries(GameConstants.Environments).find(
-            ([, regions]) => regions[player.region]?.has(area)
-        ) || [];
+        const env = Object.keys(GameConstants.Environments).filter(
+            (env) => GameConstants.Environments[env][player.region]?.has(area)
+        );
 
-        return (env as GameConstants.Environment || 'Outdoors'); // Default to Outdoors so we don't have to list all "other" routes for Burmy
+        return (env as GameConstants.Environment[])
     }
 
     public static getCurrentSubEnvironment(): GameConstants.SubEnvironment {
