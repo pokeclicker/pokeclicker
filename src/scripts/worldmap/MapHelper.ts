@@ -101,7 +101,7 @@ class MapHelper {
             envs.push('Outdoors');
         }
 
-        return (envs as GameConstants.Environment[])
+        return (envs as GameConstants.Environment[]);
     }
 
     public static getBattleBackground(): GameConstants.BattleBackground {
