@@ -705,7 +705,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kanto]: new Set([]),
         [Region.johto]: new Set([]),
         [Region.hoenn]: new Set(['New Mauville']),
-        [Region.sinnoh]: new Set(['Mt. Coronet', 'Mt. Coronet North', 'Mt. Coronet South', 'Spear Pillar', 'Hall of Origin']),
+        [Region.sinnoh]: new Set(['Mt. Coronet', 'Mt. Coronet South', 'Mt. Coronet North', 'Spear Pillar', 'Hall of Origin']),
         [Region.unova]: new Set(['Chargestone Cave']),
         [Region.kalos]: new Set([13, 'Kalos Power Plant']),
         [Region.alola]: new Set([12, 'Vast Poni Canyon']), // Route 12 until Blush Mountain is added
@@ -747,13 +747,13 @@ export const Environments: Record<string, EnvironmentData> = {
     Cave: { // Burmy Sand Cloak - Caves and Beaches
         [Region.kanto]: new Set(['Mt. Moon', 'Diglett\'s Cave', 'Rock Tunnel', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave', 'Ruby Path', 'Icefall Cave', 'Lost Cave', 'Altering Cave']),
         [Region.johto]: new Set(['Union Cave', 'Slowpoke Well', 'Burned Tower', 'Mt. Mortar', 'Whirl Islands', 'Ice Path', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto', 'Mt. Silver']),
-        [Region.hoenn]: new Set(['Rusturf Tunnel', 'Granite Cave', 'Fiery Path', 'Meteor Falls', 'Seafloor Cavern', 'Sealed Chamber', 'Cave of Origin', 'Victory Road Hoenn', 'Pyrite Cave', 'Relic Cave', 'Mt. Battle', 'The Under', 'Under Colosseum', 'Citadark Isle']),
-        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Wayward Cave', 'Iron Island', 'Victory Road Sinnoh', 'Stark Mountain']),
-        [Region.unova]: new Set(['Relic Passage', 'Relic Castle', 'Mistralton Cave', 'Reversal Mountain', 'Seaside Cave', 'Giant Chasm', 'Cave of Being', 'Victory Road Unova']),
-        [Region.kalos]: new Set(['Connecting Cave', 'Glittering Cave', 'Reflection Cave', 'Sea Spirit\'s Den', 'Terminus Cave', 'Victory Road Kalos']),
-        [Region.alola]: new Set(['Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Resolution Cave']),
+        [Region.hoenn]: new Set(['Rusturf Tunnel', 'Granite Cave', 'Fiery Path', 'Meteor Falls', 'Shoal Cave', 'Seafloor Cavern', 'Sealed Chamber', 'Cave of Origin', 'Victory Road Hoenn', 'Pyrite Cave', 'Relic Cave', 'Mt. Battle', 'The Under', 'Under Colosseum', 'Citadark Isle']),
+        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh', 'Spear Pillar', 'Stark Mountain', 'Hall of Origin']),
+        [Region.unova]: new Set(['Relic Passage', 'Relic Castle', 'Chargestone Cave', 'Mistralton Cave', 'Reversal Mountain', 'Seaside Cave', 'Giant Chasm', 'Cave of Being', 'Victory Road Unova', 'Twist Mountain']),
+        [Region.kalos]: new Set(['Connecting Cave', 'Glittering Cave', 'Reflection Cave', 'Sea Spirit\'s Den', 'Frost Cavern', 'Terminus Cave', 'Victory Road Kalos']),
+        [Region.alola]: new Set(['Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon', 'Mount Lanakila', 'Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Courageous Cavern', 'Brawler\'s Cave', 'Warm-Up Tunnel', 'Roaring-Sea Caves', 'Tunnel to the Top']),
-        [Region.hisui]: new Set([]),
+        [Region.hisui]: new Set([]), // dependent on broader location
     },
 
     Indoors: { // Burmy Trash Cloak - Only inside buildings
@@ -765,7 +765,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set(['Kalos Power Plant', 'Poké Ball Factory', 'Lost Hotel', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Trainers\' School', 'Hokulani Observatory', 'Thrifty Megamart', 'Aether Foundation', 'Mina\'s Houseboat']),
         [Region.galar]: new Set(['Rose Tower', 'Energy Plant']),
-        [Region.hisui]: new Set([]),
+        [Region.hisui]: new Set([]), // dependent on broader location
     },
 
     // Hisui Areas
