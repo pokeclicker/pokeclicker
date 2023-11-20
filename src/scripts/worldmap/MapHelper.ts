@@ -152,7 +152,7 @@ class MapHelper {
         }
 
         // Water routes
-        if (GameConstants.SubEnvironments.Water[region]?.has(route)) {
+        if (GameConstants.Environments.Water[region]?.has(route)) {
             cls = `${cls} waterRoute`;
         }
 
