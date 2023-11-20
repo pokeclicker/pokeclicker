@@ -74,7 +74,7 @@ class MapHelper {
         return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked();
     };
 
-    public static getCurrentEnvironment(): GameConstants.Environment[] {
+    public static getCurrentEnvironments(): GameConstants.Environment[] {
         const area = player.route() ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
                 ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
@@ -87,15 +87,15 @@ class MapHelper {
             return area;
         }
 
-        const env = Object.keys(GameConstants.Environments).filter(
+        const envs = Object.keys(GameConstants.Environments).filter(
             (env) => GameConstants.Environments[env][player.region]?.has(area)
         );
 
-        if (!env.includes('Cave' || 'Indoors')) {
-            env.push('Outdoors');
+        if (!envs.includes('Cave' || 'Indoors')) {
+            envs.push('Outdoors');
         }
 
-        return (env as GameConstants.Environment[])
+        return (envs as GameConstants.Environment[])
     }
 
     public static getCurrentSubEnvironment(): GameConstants.SubEnvironment {

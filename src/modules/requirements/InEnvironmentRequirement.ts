@@ -8,7 +8,7 @@ export default class InEnvironmentRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Number(MapHelper.getCurrentEnvironment().includes(this.environment));
+        return Number(MapHelper.getCurrentEnvironments().includes(this.environment));
     }
 
     public hint(): string {
