@@ -182,6 +182,7 @@ namespace GameConstants {
     declare const SAFARI_LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_WATER_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
+    declare const BUG_SAFARI_POKEMON: number;
     declare const FRIEND_SAFARI_POKEMON: number;
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
@@ -377,6 +378,8 @@ namespace GameConstants {
         'Malicious_armor',
         'Leaders_crest',
         'Gimmighoul_coin',
+        'Syrupy_apple',
+        'Unremarkable_teacup',
     }
     declare enum FossilPieceType {
         'None',

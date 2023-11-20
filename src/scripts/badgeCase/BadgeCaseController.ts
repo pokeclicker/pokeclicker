@@ -31,6 +31,6 @@ class BadgeCaseController {
     private static regionToBadges(region: string[]) {
         return region
             .map(gym => BadgeEnums[GymList[gym].badgeReward])
-            .filter(b => !b.startsWith('Elite') && !b.endsWith('iumZ') && b != 'None');
+            .filter(b => !b.startsWith('Elite') && b != 'None');
     }
 }
