@@ -95,9 +95,14 @@ class MapHelper {
             envs.push(battleArea);
         }
 
-        // Only three Burmy forms. If not in Cave or Indoors, it evolves into (Plant)
-        // Used for realEvolutions challenge
-        if (!envs.includes('Cave' || 'Indoors')) {
+        // determine Hisui environments for Burmy and electric friends
+        if (envs.includes('CrimsonMirelands')) {
+            envs.push('Cave');
+        } else if(envs.includes('CoronetHighlands')) {
+            envs.push('MagneticField', 'Cave');
+        } else if (envs.includes('CobatlCoastlands' || 'AlabasterIcelands')) {
+            envs.push('Indoors');
+        } else if (!envs.includes('Cave' || 'Indoors')) { // if not in Cave or Indoors, Burmy evolves into (Plant). (this is mainly for realEvos challenge)
             envs.push('Outdoors');
         }
 

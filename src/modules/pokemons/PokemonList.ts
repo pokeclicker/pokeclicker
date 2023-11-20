@@ -3596,7 +3596,6 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             EnvironmentRestrictedLevelEvolution('MagneticField', 'Magneton', 'Magnezone', 20),
             RegionStoneEvolution(galarOnly, 'Magneton', 'Magnezone', StoneType.Thunder_stone),
-            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Magneton', 'Magnezone', 20),
         ],
         'base': {
             'hitpoints': 50,
@@ -5902,8 +5901,6 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Eevee', 'Sylveon', 29),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
-            EnvironmentRestrictedLevelEvolution('ObsidianFieldands', 'Eevee', 'Leafeon', 20),
-            EnvironmentRestrictedLevelEvolution('AlabasterIcelands', 'Eevee', 'Glaceon', 20),
         ],
         'base': {
             'hitpoints': 55,
@@ -10463,7 +10460,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 255,
         'evolutions': [
             EnvironmentRestrictedLevelEvolution('MagneticField', 'Nosepass', 'Probopass', 20),
-            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Nosepass', 'Probopass', 20),
         ],
         'base': {
             'hitpoints': 30,
@@ -13145,11 +13141,7 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
             EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CrimsonMirelands', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
             EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CobaltCoastlands', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('AlabasterIcelands', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13172,11 +13164,7 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
             LevelEvolution('Burmy (Sand)', 'Mothim', 20),
             EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('JubilifeVillage', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('ObsidianFieldlands', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
             EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CobaltCoastlands', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('AlabasterIcelands', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13199,11 +13187,7 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
             EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('JubilifeVillage', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('ObsidianFieldlands', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
             EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CrimsonMirelands', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
         ],
         'base': {
             'hitpoints': 40,

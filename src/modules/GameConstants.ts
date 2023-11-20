@@ -710,7 +710,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set([13, 'Kalos Power Plant']),
         [Region.alola]: new Set([12, 'Vast Poni Canyon']), // Route 12 until Blush Mountain is added
         [Region.galar]: new Set([]),
-        [Region.hisui]: new Set([]),
+        [Region.hisui]: new Set([]), // Coronet Highlands; see getCurrentEnvironments() in MapHelper.ts for adding evolution environments to Hisui
     },
 
     MossRock: { // Leafeon
@@ -722,7 +722,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set([20, 'Pokémon Village']),
         [Region.alola]: new Set(['Lush Jungle']),
         [Region.galar]: new Set([]),
-        [Region.hisui]: new Set([]),
+        [Region.hisui]: new Set(['Heartwood']),
     },
 
     IceRock: { // Glaceon
@@ -734,7 +734,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set(['Frost Cavern']),
         [Region.alola]: new Set(['Mount Lanakila']),
         [Region.galar]: new Set([]),
-        [Region.hisui]: new Set([]),
+        [Region.hisui]: new Set(['Icepeak Cavern']),
     },
 
     // TODO: Change Dusty Bowl from a dungeon into a route
@@ -753,7 +753,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set(['Connecting Cave', 'Glittering Cave', 'Reflection Cave', 'Sea Spirit\'s Den', 'Frost Cavern', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set(['Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon', 'Mount Lanakila', 'Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Courageous Cavern', 'Brawler\'s Cave', 'Warm-Up Tunnel', 'Roaring-Sea Caves', 'Tunnel to the Top']),
-        [Region.hisui]: new Set([]), // dependent on broader location
+        [Region.hisui]: new Set([]), // Mirelands and Highlands
     },
 
     Indoors: { // Burmy Trash Cloak - Only inside buildings
@@ -765,7 +765,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set(['Kalos Power Plant', 'Poké Ball Factory', 'Lost Hotel', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Trainers\' School', 'Hokulani Observatory', 'Thrifty Megamart', 'Aether Foundation', 'Mina\'s Houseboat']),
         [Region.galar]: new Set(['Rose Tower', 'Energy Plant']),
-        [Region.hisui]: new Set([]), // dependent on broader location
+        [Region.hisui]: new Set([]), // Coastlands and Icelands
     },
 
     // Diveball and, for Kanto, Surf RouteCss
@@ -773,11 +773,12 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Sunburst Island', 'Tanoby Ruins']),
         [Region.johto]: new Set([40, 41, 'Union Cave', 'Slowpoke Well', 'Tohjo Falls']),
         [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Meteor Falls', 'Seafloor Cavern', 'Relic Cave', 'Gateon Port Battles']),
-        [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
+        [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Lake Acuity', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Castelia Sewers', 'Seaside Cave']),
         [Region.kalos]: new Set([8, 23, 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 'Seaward Cave', 'Brooklet Hill', 'Poni Meadow', 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set([5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53, 'Courageous Cavern', 'Roaring-Sea Caves']),
+        [Region.hisui]: new Set([]),
     },
 
     // Hisui Areas
