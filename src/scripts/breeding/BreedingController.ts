@@ -1,4 +1,3 @@
-/// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
 
@@ -138,19 +137,36 @@ class BreedingController {
     public static formatSearch(value: string) {
         if (/[^\d]/.test(value)) {
             // non-integer, use as name filter
-            BreedingFilters.name.value(value);
-            BreedingFilters.id.value(-1);
+            Settings.setSettingByName('breedingNameFilter', value);
+            Settings.setSettingByName('breedingIDFilter', -1);
         } else {
             // integer, use as ID filter
-            BreedingFilters.id.value(value != '' ? +value : -1);
-            BreedingFilters.name.value('');
+            Settings.setSettingByName('breedingIDFilter', (value != '' ? +value : -1));
+            Settings.setSettingByName('breedingNameFilter', '');
         }
     }
 
     public static getSearchString() {
-        const name = BreedingFilters.name.value.peek();
-        const id = BreedingFilters.id.value.peek();
+        const name = Settings.getSetting('breedingNameFilter').value;
+        const id = Settings.getSetting('breedingIDFilter').value;
         return id == -1 ? name : id;
+    }
+
+    public static getRegionFilterString() {
+        const unlockedRegionsMask = (2 << player.highestRegion()) - 1;
+        const showRegions = Settings.getSetting('breedingRegionFilter').observableValue() & unlockedRegionsMask;
+        if (showRegions == unlockedRegionsMask) {
+            return 'All';
+        } else if (showRegions > 0) {
+            const highestBit = Math.floor(Math.log2(showRegions));
+            let txt = GameConstants.camelCaseToString(GameConstants.Region[highestBit]);
+            if (showRegions > (1 << highestBit)) {
+                txt += ' & more';
+            }
+            return txt;
+        } else {
+            return 'None';
+        }
     }
 
     public static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {
@@ -159,12 +175,9 @@ class BreedingController {
     }
 
     // Value displayed at bottom of image
-    public static displayValue = ko.observable('attack');
-
     public static getDisplayValue(pokemon: PartyPokemon): string {
         const pokemonData = pokemonMap[pokemon.name];
-        switch (this.displayValue()) {
-            case 'attack': return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
+        switch (Settings.getSetting('breedingDisplayTextSetting').observableValue()) {
             case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${pokemon.getEggSteps().toLocaleString('en-US')}`;
@@ -174,23 +187,21 @@ class BreedingController {
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
             case 'evs': return `EVs: ${pokemon.evs().toLocaleString('en-US')}`;
+            case 'attack':
+            default:
+                return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
         }
     }
 
-    // Applied regional debuff
-    public static regionalAttackDebuff = ko.observable(-1);
-
     public static calculateRegionalMultiplier(pokemon: PartyPokemon): number {
-        // Check if reginal debnuff is active
+        // Check if reginal debuff is active
         if (App.game.challenges.list.regionalAttackDebuff.active()) {
             // Check if regional debuff being applied for sorting
-            if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
+            const regionalAttackDebuff = Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue();
+            if (regionalAttackDebuff > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== regionalAttackDebuff) {
                 return App.game.party.getRegionAttackMultiplier();
             }
         }
         return 1.0;
     }
-
-    // Queue size limit setting
-    public static queueSizeLimit = ko.observable(-1);
 }

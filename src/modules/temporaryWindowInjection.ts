@@ -31,7 +31,6 @@ import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
-import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import WeatherApp from './weather/WeatherApp';
@@ -43,7 +42,7 @@ import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
-import Settings from './settings/index';
+import Settings, { breedingFilterNames, pokedexFilterNames } from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
 import AchievementCategory from './achievements/AchievementCategory';
@@ -158,7 +157,6 @@ import {
 import * as OtherEvos from './pokemons/evolutions/Methods';
 import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
 import TmpPokemonHelper from './pokemons/TmpPokemonHelper';
-import PokedexFilters from './settings/PokedexFilters';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
@@ -242,9 +240,10 @@ Object.assign(<any>window, {
     SeededDateRand,
     Rand,
     Settings,
+    breedingFilterNames,
+    pokedexFilterNames,
     NotificationConstants,
     Notifier,
-    BreedingFilters,
     SortOptionConfigs,
     SortOptions,
     AchievementSortOptionConfigs,
@@ -369,7 +368,6 @@ Object.assign(<any>window, {
     pokemonMap,
     pokemonBabyPrevolutionMap,
     TmpPokemonHelper,
-    PokedexFilters,
     ItemList,
     Item,
     MultiplierDecreaser,

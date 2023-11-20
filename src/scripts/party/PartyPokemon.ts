@@ -378,50 +378,48 @@ class PartyPokemon implements Saveable {
         }
 
         // Check if search matches englishName or displayName
-        const nameFilter = BreedingFilters.name.regex();
+        const nameFilter = (Settings.getSetting('breedingNameFilter') as SearchSetting).regex();
         const displayName = PokemonHelper.displayName(this.name)();
         const partyName = this.displayName;
         if (!nameFilter.test(displayName) && !nameFilter.test(this.name) && !(partyName != undefined && nameFilter.test(partyName))) {
             return false;
         }
 
-        const idFilter = BreedingFilters.id.value();
+        const idFilter = Settings.getSetting('breedingIDFilter').observableValue();
         if (idFilter > -1 && idFilter != Math.floor(this.id)) {
             return false;
         }
 
         // Check based on category
-        if (BreedingFilters.category.value() >= 0) {
-            if (this.category !== BreedingFilters.category.value()) {
-                return false;
-            }
+        const categoryFilter = Settings.getSetting('breedingCategoryFilter').observableValue();
+        if (categoryFilter >= 0 && this.category !== categoryFilter) {
+            return false;
         }
 
         // Check based on shiny status
-        if (BreedingFilters.shinyStatus.value() >= 0) {
-            if (+this.shiny !== BreedingFilters.shinyStatus.value()) {
-                return false;
-            }
+        const shinyFilter = Settings.getSetting('breedingShinyFilter').observableValue();
+        if (shinyFilter >= 0 && +this.shiny !== shinyFilter) {
+            return false;
         }
 
         // Check based on native region
-        const showRegions = BreedingFilters.region.value();
+        const unlockedRegionsMask = (2 << player.highestRegion()) - 1;
+        const showRegions = Settings.getSetting('breedingRegionFilter').observableValue() & unlockedRegionsMask;
         const region = PokemonHelper.calcNativeRegion(this.name);
-        const regionBitInFilter = 1 << region & showRegions;
-        const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
-            && region === GameConstants.Region.none;
+        const regionBitInFilter = (1 << region) & showRegions;
+        // Regionless pokemon should be shown if no or all regions are selected
+        const noneRegionCheck = region === GameConstants.Region.none && (showRegions === 0 || showRegions === unlockedRegionsMask);
         if (!regionBitInFilter && !noneRegionCheck) {
             return false;
         }
 
-        // check based on Pokerus status
-        if (BreedingFilters.pokerus.value() > -1) {
-            if (this.pokerus !== BreedingFilters.pokerus.value()) {
-                return false;
-            }
+        // Check based on Pokerus status
+        const pokerusFilter = Settings.getSetting('breedingPokerusFilter').observableValue();
+        if (pokerusFilter > -1 && this.pokerus !== pokerusFilter) {
+            return false;
         }
 
-        const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
+        const uniqueTransformation = Settings.getSetting('breedingUniqueTransformationFilter').observableValue();
         const pokemon = PokemonHelper.getPokemonById(this.id);
         // Only Base Pokémon with Mega available
         if (uniqueTransformation == 'mega-available' && !PokemonHelper.hasMegaEvolution(pokemon.name)) {
@@ -445,8 +443,8 @@ class PartyPokemon implements Saveable {
         }
 
         // Check if either of the types match
-        const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
-        const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
+        const type1: (PokemonType | null) = Settings.getSetting('breedingType1Filter').observableValue();
+        const type2: (PokemonType | null) = Settings.getSetting('breedingType2Filter').observableValue();
         if (type1 !== null || type2 !== null) {
             const { type: types } = pokemonMap[this.name];
             if ([type1, type2].includes(PokemonType.None)) {

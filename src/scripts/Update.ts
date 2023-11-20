@@ -2488,14 +2488,35 @@ class Update implements Saveable {
             // Remove erroneous nameless settings
             delete settingsData[''];
 
-            // Update BreedingFilter to use numeric values
-            Object.values(BreedingFilters).filter(filter => Number.isInteger(filter.value())).forEach(filter => {
-                if (settingsData[filter.optionName] != null && settingsData[filter.optionName] != '') {
-                    settingsData[filter.optionName] = Number.parseInt(settingsData[filter.optionName]);
-                } else {
-                    settingsData[filter.optionName] = -1;
-                }
-            });
+            // Update breeding filters to use numeric values
+            ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingTypeFilter1', 'breedingTypeFilter2', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
+                .forEach((filter) => {
+                    if (settingsData[filter]?.length) {
+                        settingsData[filter] = Number.parseInt(settingsData[filter]);
+                    } else {
+                        delete settingsData[filter];
+                    }
+                });
+
+            // Represent 'any type' as null to match pokedex settings
+            if (settingsData.breedingTypeFilter1 == -2) {
+                settingsData.breedingTypeFilter1 = null;
+            }
+            if (settingsData.breedingTypeFilter2 == -2) {
+                settingsData.breedingTypeFilter2 = null;
+            }
+
+            // Rename settings to accurately describe purpose
+            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
+            delete settingsData.pokedexShinyFilter;
+            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
+            delete settingsData.breedingDisplayFilter;
+
+            // Rename settings to match pokedex settings name convention
+            settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
+            delete settingsData.breedingTypeFilter1;
+            settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
+            delete settingsData.breedingTypeFilter2;
 
             // Remove Z Crystal gyms and badges (remove furthest down the index first as to not get confused by index numbers)
             // Mina\'s Trial

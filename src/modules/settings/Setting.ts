@@ -39,7 +39,7 @@ export default class Setting<T> {
             this.observableValue(value);
         } else {
             // eslint-disable-next-line no-console
-            console.warn(`${value} is not a valid value for setting ${this.name}`);
+            console.warn(`${value.toString() == '[object Object]' ? value.constructor?.name : value} is not a valid value for setting ${this.name}`);
         }
     }
 

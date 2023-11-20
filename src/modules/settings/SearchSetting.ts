@@ -1,7 +1,8 @@
-import Setting from './Setting';
 import GameHelper from '../GameHelper';
+import FilterSetting from './FilterSetting';
+import { PureComputed } from 'knockout';
 
-export default class SearchSetting extends Setting<string> {
+export default class SearchSetting extends FilterSetting<string> {
     public regex: ko.PureComputed<RegExp>;
 
     constructor(name: string, displayName: string, defaultValue: string) {
@@ -11,11 +12,6 @@ export default class SearchSetting extends Setting<string> {
             [],
             defaultValue,
         );
-
-        // Updates the value from user input
-        this.observableValue.subscribe(() => {
-            this.value = this.observableValue();
-        });
 
         this.regex = ko.pureComputed(() => {
             return GameHelper.safelyBuildRegex(this.observableValue());
