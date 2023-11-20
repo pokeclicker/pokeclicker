@@ -16,8 +16,8 @@ interface gymFlags {
 interface optionalGymArgs {
     displayName?: string,
     imageName?: string,
-    environment?: GameConstants.Environment, // For game mechanics
-    subEnvironment?: GameConstants.SubEnvironment, // For visuals
+    environment?: GameConstants.Environment,
+    battleBackground?: GameConstants.BattleBackground,
 }
 
 /**

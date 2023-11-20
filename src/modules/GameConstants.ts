@@ -808,9 +808,9 @@ export const Environments: Record<string, EnvironmentData> = {
 
 export type Environment = keyof typeof Environments;
 
-// Use SubEnvironments to choose background image (Cerulean Cave has Gems)
-// If changing Environment to SubEnvironment or vice versa, don't forget to change it in GameConstants.d.ts, GymList.ts, TemporaryBattleList.ts, or elsewhere too (PokemonList.ts, Pokeballs.ts, etc.)
-export const SubEnvironments: Record<string, EnvironmentData> = {
+// Use BattleBackgrounds to choose background image (ex. a forest for Viridian Forest)
+export type BattleBackgroundData = Partial<Record<Region, Set<string | number>>>;
+export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
     Water: {
         [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Cerulean City']),
         [Region.johto]: new Set([40, 41]),
@@ -948,9 +948,9 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
     Default: {},
 };
 
-export type SubEnvironment = keyof typeof SubEnvironments;
+export type BattleBackground = keyof typeof BattleBackgrounds;
 
-export const SubEnvironmentCssClass: Record<SubEnvironment, string> = {
+export const BattleBackgroundImage: Record<BattleBackground, string> = {
     Water: 'water',
     Ice: 'ice',
     Fire: 'fire',

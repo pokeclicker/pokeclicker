@@ -138,9 +138,9 @@ class GymRunner {
         return gym.optionalArgs.environment;
     }
 
-    public static getSubEnvironmentArea() {
+    public static getBattleBackgroundImage() {
         const gym = GymRunner.gymObservable();
-        return gym.optionalArgs.subEnvironment;
+        return gym.optionalArgs.battleBackground;
     }
 
 }

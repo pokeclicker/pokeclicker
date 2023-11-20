@@ -322,24 +322,24 @@ namespace GameConstants {
         AlabasterIcelands: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
-    declare type SubEnvironmentData = Partial<Record<number, Set<string | number>>>
-    declare const SubEnvironments: {
-        Water: SubEnvironmentData,
-        Ice: SubEnvironmentData,
-        Fire: SubEnvironmentData,
-        Forest: SubEnvironmentData,
-        Cave: SubEnvironmentData,
-        GemCave: SubEnvironmentData,
-        WaterCave: SubEnvironmentData,
-        Desert: SubEnvironmentData,
-        DesertCactus: SubEnvironmentData,
-        PowerPlant: SubEnvironmentData,
-        Mansion: SubEnvironmentData,
-        Graveyard: SubEnvironmentData,
-        Default: SubEnvironmentData,
+    declare type BattleBackgroundData = Partial<Record<number, Set<string | number>>>
+    declare const BattleBackgrounds: {
+        Water: BattleBackgroundData,
+        Ice: BattleBackgroundData,
+        Fire: BattleBackgroundData,
+        Forest: BattleBackgroundData,
+        Cave: BattleBackgroundData,
+        GemCave: BattleBackgroundData,
+        WaterCave: BattleBackgroundData,
+        Desert: BattleBackgroundData,
+        DesertCactus: BattleBackgroundData,
+        PowerPlant: BattleBackgroundData,
+        Mansion: BattleBackgroundData,
+        Graveyard: BattleBackgroundData,
+        Default: BattleBackgroundData,
     };
-    declare type SubEnvironment = keyof typeof SubEnvironments;
-    declare const SubEnvironmentCssClass:Record<SubEnvironment, string>;
+    declare type BattleBackground = keyof typeof BattleBackgrounds;
+    declare const BattleBackgroundImage:Record<BattleBackground, string>;
     declare enum Starter {
         None = -1,
         Grass = 0,

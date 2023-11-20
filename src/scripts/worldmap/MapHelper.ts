@@ -104,28 +104,28 @@ class MapHelper {
         return (envs as GameConstants.Environment[])
     }
 
-    public static getCurrentSubEnvironment(): GameConstants.SubEnvironment {
+    public static getBattleBackground(): GameConstants.BattleBackground {
         const area = player.route() ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
-                ? TemporaryBattleRunner.getSubEnvironmentArea() : undefined) ||
+                ? TemporaryBattleRunner.getBattleBackgroundImage() : undefined) ||
             (App.game.gameState == GameConstants.GameState.gym
-                ? GymRunner.getSubEnvironmentArea() : undefined) ||
+                ? GymRunner.getBattleBackgroundImage() : undefined) ||
             player.town()?.name ||
             undefined;
 
-        if (area in GameConstants.SubEnvironments) {
+        if (area in GameConstants.BattleBackgrounds) {
             return area;
         }
 
-        const [subEnv] = Object.entries(GameConstants.SubEnvironments).find(
+        const [img] = Object.entries(GameConstants.BattleBackgrounds).find(
             ([, regions]) => regions[player.region]?.has(area)
         ) || [];
 
-        return (subEnv as GameConstants.SubEnvironment);
+        return (img as GameConstants.BattleBackground);
     }
 
     public static calculateBattleCssClass(): string {
-        return GameConstants.SubEnvironmentCssClass[this.getCurrentSubEnvironment()];
+        return GameConstants.BattleBackgroundImage[this.getBattleBackground()];
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {

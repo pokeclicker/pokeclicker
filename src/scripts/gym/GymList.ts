@@ -156,7 +156,7 @@ GymList['Elite Lorelei'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Earth)],
     undefined,
     undefined,
-    { subEnvironment: 'Ice' }
+    { battleBackground: 'Ice' }
 );
 GymList['Elite Bruno'] = new Gym(
     'Bruno',
@@ -174,7 +174,7 @@ GymList['Elite Bruno'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lorelei)],
     undefined,
     undefined,
-    { subEnvironment: 'Cave' }
+    { battleBackground: 'Cave' }
 );
 GymList['Elite Agatha'] = new Gym(
     'Agatha',
@@ -192,7 +192,7 @@ GymList['Elite Agatha'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno)],
     undefined,
     undefined,
-    { subEnvironment: 'Graveyard' }
+    { battleBackground: 'Graveyard' }
 );
 GymList['Elite Lance'] = new Gym(
     'Lance',
@@ -210,7 +210,7 @@ GymList['Elite Lance'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Agatha)],
     undefined,
     undefined,
-    { subEnvironment: 'GemCave' }
+    { battleBackground: 'GemCave' }
 );
 // Kanto Champion
 GymList['Champion Blue'] = new Gym(
@@ -239,7 +239,7 @@ GymList['Champion Blue'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
     () => {},
     { champion: true },
-    { subEnvironment: 'GemCave' }
+    { battleBackground: 'GemCave' }
 );
 
 //Johto Gyms

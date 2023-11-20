@@ -114,9 +114,9 @@ class TemporaryBattleRunner {
         return battle?.optionalArgs.environment;
     }
 
-    public static getSubEnvironmentArea() {
+    public static getBattleBackgroundImage() {
         const battle = TemporaryBattleRunner.battleObservable();
-        return battle?.optionalArgs.subEnvironment
+        return battle?.optionalArgs.battleBackground
         ?? battle?.parent?.name
         ?? battle?.optionalArgs.returnTown;
     }
