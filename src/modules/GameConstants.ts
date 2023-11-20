@@ -701,6 +701,7 @@ export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
 // If there is overlap, only the first environment an area is assigned to will register
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
 export const Environments: Record<string, EnvironmentData> = {
+    // Evolutions
     MagneticField: { // For Magnezone, Probopass, and Vikavolt
         [Region.kanto]: new Set([]),
         [Region.johto]: new Set([]),
@@ -766,6 +767,18 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.alola]: new Set(['Trainers\' School', 'Hokulani Observatory', 'Thrifty Megamart', 'Aether Foundation', 'Mina\'s Houseboat']),
         [Region.galar]: new Set(['Rose Tower', 'Energy Plant']),
         [Region.hisui]: new Set([]), // dependent on broader location
+    },
+
+    // Diveball
+    Water: {
+        [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Sunburst Island', 'Tanoby Ruins']),
+        [Region.johto]: new Set([40, 41, 'Union Cave', 'Slowpoke Well', 'Tohjo Falls']),
+        [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Meteor Falls', 'Seafloor Cavern', 'Relic Cave', 'Gateon Port Battles']),
+        [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
+        [Region.unova]: new Set([17, 18, 21, 24, 'Castelia Sewers', 'Seaside Cave', 'Undella Town', 'Humilau City']),
+        [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
+        [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 'Seaward Cave', 'Brooklet Hill', 'Poni Meadow', 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
+        [Region.galar]: new Set(['Hulbury', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53, 'Courageous Cavern', 'Roaring-Sea Caves']),
     },
 
     // Hisui Areas
