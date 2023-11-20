@@ -2482,24 +2482,20 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
 
-            // Update sort settings for new sort type
-            if (settingsData.hatcherySort >= 5) {
-                settingsData.hatcherySort++;
-            } else if (settingsData.partySort == 2) {
-                // Sort by attack -> sort by attack at lv100
+            // Update sort settings for new lv. 100 sort option
+            ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
+                .forEach((sortSetting) => {
+                    if (settingsData[sortSetting] >= 5) {
+                        settingsData[sortSetting]++;
+                    }
+                });
+            // Sort by attack -> sort by attack at lv100
+            if (settingsData.hatcherySort == 2) {
                 settingsData.hatcherySort = 5;
-            }
-            if (settingsData.partySort >= 5) {
-                settingsData.partySort++;
-            }
-            if (settingsData.vitaminSort >= 5) {
-                settingsData.vitaminSort++;
-            }
-            if (settingsData.heldItemSort >= 5) {
-                settingsData.heldItemSort++;
             }
             saveData.breeding.hatcheryHelpers?.forEach(helper => {
                 if (helper.sortOption >= 5) {
+                    // Move index
                     helper.sortOption++;
                 } else if (helper.sortOption == 2) {
                     // Sort by attack -> sort by attack at lv100
