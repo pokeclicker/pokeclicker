@@ -98,7 +98,7 @@ class MapHelper {
         // determine Hisui environments for Burmy and electric friends
         if (envs.includes('CrimsonMirelands')) {
             envs.push('Cave');
-        } else if(envs.includes('CoronetHighlands')) {
+        } else if (envs.includes('CoronetHighlands')) {
             envs.push('MagneticField', 'Cave');
         } else if (envs.includes('CobatlCoastlands' || 'AlabasterIcelands')) {
             envs.push('Indoors');
