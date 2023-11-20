@@ -13146,9 +13146,9 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
             EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
             EnvironmentRestrictedLevelEvolution('CrimsonMirelands', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CobaltCoastlands', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
             EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('CobaltCoastlands', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
             EnvironmentRestrictedLevelEvolution('AlabasterIcelands', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
@@ -13175,7 +13175,7 @@ export const pokemonList = createPokemonArray(
             EnvironmentRestrictedLevelEvolution('JubilifeVillage', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
             EnvironmentRestrictedLevelEvolution('ObsidianFieldlands', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
             EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('CobaltCoastlands', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
             EnvironmentRestrictedLevelEvolution('AlabasterIcelands', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
@@ -13203,7 +13203,7 @@ export const pokemonList = createPokemonArray(
             EnvironmentRestrictedLevelEvolution('ObsidianFieldlands', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
             EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
             EnvironmentRestrictedLevelEvolution('CrimsonMirelands', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('CobaltCoastlands', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
