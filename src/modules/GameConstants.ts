@@ -349,6 +349,7 @@ export const SAFARI_WATER_BLOCKS = [
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
+export const BUG_SAFARI_POKEMON = 10;
 export const FRIEND_SAFARI_POKEMON = 5;
 
 // Quests
@@ -1215,17 +1216,9 @@ export const KalosGyms = [
 ];
 
 export const AlolaGyms = [
-    'Ilima\'s Trial',
     'Iki Town',
-    'Lana\'s Trial',
-    'Kiawe\'s Trial',
-    'Mallow\'s Trial',
     'Konikoni City',
-    'Sophocles\' Trial',
-    'Acerola\'s Trial',
     'Malie City',
-    'Vast Poni Canyon Trial',
-    'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
     'Elite Olivia',
