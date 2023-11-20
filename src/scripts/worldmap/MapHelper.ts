@@ -76,20 +76,24 @@ class MapHelper {
 
     public static getCurrentEnvironments(): GameConstants.Environment[] {
         const area = player.route() ||
-            (App.game.gameState == GameConstants.GameState.temporaryBattle
-                ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
-            (App.game.gameState == GameConstants.GameState.gym
-                ? GymRunner.getEnvironmentArea() : 'Indoors') ||
             player.town()?.name ||
             undefined;
 
-        if (area in GameConstants.Environments) {
-            return area;
-        }
+        const battleArea =
+            (App.game.gameState == GameConstants.GameState.temporaryBattle
+                ? TemporaryBattleRunner.getEnvironmentArea() : undefined) || // temp battles default to environment of return town
+            (App.game.gameState == GameConstants.GameState.gym
+                ? GymRunner.getEnvironmentArea() : 'Indoors') || // gyms default to Indoors
+            undefined;
 
         const envs = Object.keys(GameConstants.Environments).filter(
             (env) => GameConstants.Environments[env][player.region]?.has(area)
         );
+
+        // Add the environment of the temp or gym battle
+        if (battleArea != undefined) {
+            envs.push(battleArea);
+        }
 
         // Only three Burmy forms. If not in Cave or Indoors, it evolves into (Plant)
         // Used for realEvolutions challenge
