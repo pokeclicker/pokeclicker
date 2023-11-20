@@ -77,7 +77,7 @@ class MapHelper {
     public static getCurrentEnvironment(): GameConstants.Environment[] {
         const area = player.route() ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
-                ? TemporaryBattleRunner.getEnvironmentArea() : 'Outdoors') ||
+                ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
             (App.game.gameState == GameConstants.GameState.gym
                 ? GymRunner.getEnvironmentArea() : 'Indoors') ||
             player.town()?.name ||
@@ -90,6 +90,10 @@ class MapHelper {
         const env = Object.keys(GameConstants.Environments).filter(
             (env) => GameConstants.Environments[env][player.region]?.has(area)
         );
+
+        if (!env.includes('Cave' || 'Indoors')) {
+            env.push('Outdoors');
+        }
 
         return (env as GameConstants.Environment[])
     }
