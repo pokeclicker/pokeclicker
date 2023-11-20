@@ -12,4 +12,8 @@ class CaughtUniquePokemonByFilterRequirement extends AchievementRequirement {
     public hint(): string {
         return this.hintText;
     }
+
+    public toString(): string {
+        return `${super.toString()} ${this.filter} ${this.shiny}`;
+    }
 }
