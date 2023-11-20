@@ -91,6 +91,8 @@ class MapHelper {
             (env) => GameConstants.Environments[env][player.region]?.has(area)
         );
 
+        // Only three Burmy forms. If not in Cave or Indoors, it evolves into (Plant)
+        // Used for realEvolutions challenge
         if (!envs.includes('Cave' || 'Indoors')) {
             envs.push('Outdoors');
         }
