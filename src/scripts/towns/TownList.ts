@@ -6394,7 +6394,7 @@ TownList['Pokémon Village'] = new DungeonTown(
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 20)],
-    undefined,
+    [],
     {
         npcs: [MossRock, AnomalyMewtwo2, AnomalyMewtwo3, AnomalyMewtwo4],
     }
@@ -9003,7 +9003,11 @@ TownList.Heartwood = new DungeonTown(
     'Heartwood',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        npcs: [MossRock],
+    }
 );
 TownList['Ancient Solaceon Ruins'] = new DungeonTown(
     'Ancient Solaceon Ruins',
@@ -9087,7 +9091,11 @@ TownList['Icepeak Cavern'] = new DungeonTown(
     'Icepeak Cavern',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        npcs: [IceRock],
+    }
 );
 TownList['Ancient Snowpoint Temple'] = new DungeonTown(
     'Ancient Snowpoint Temple',
