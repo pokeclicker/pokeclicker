@@ -5,7 +5,6 @@ import BooleanSetting from './BooleanSetting';
 import CssVariableSetting from './CssVariableSetting';
 import RangeSetting from './RangeSetting';
 import SearchSetting from './SearchSetting';
-import FilterSetting from './FilterSetting';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
@@ -240,37 +239,37 @@ export const breedingFilterNames = ['breedingNameFilter', 'breedingIDFilter', 'b
     'breedingShinyFilter', 'breedingPokerusFilter', 'breedingCategoryFilter', 'breedingUniqueTransformationFilter'];
 
 Settings.add(new SearchSetting('breedingNameFilter', 'Search', ''));
-Settings.add(new FilterSetting<number>('breedingIDFilter', 'SearchID', [], -1));
-Settings.add(new FilterSetting<number>('breedingRegionFilter', 'Region', [], (2 << Region.final - 1) - 1));
-Settings.add(new FilterSetting<PokemonType | null>('breedingType1Filter', 'Type 1',
+Settings.add(new Setting<number>('breedingIDFilter', 'SearchID', [], -1));
+Settings.add(new Setting<number>('breedingRegionFilter', 'Region', [], (2 << Region.final - 1) - 1));
+Settings.add(new Setting<PokemonType | null>('breedingType1Filter', 'Type 1',
     [
         new SettingOption('All', null),
         ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
         new SettingOption('None', PokemonType.None),
     ],
     null));
-Settings.add(new FilterSetting<PokemonType | null>('breedingType2Filter', 'Type 2',
+Settings.add(new Setting<PokemonType | null>('breedingType2Filter', 'Type 2',
     [
         new SettingOption('All', null),
         ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
         new SettingOption('None', PokemonType.None),
     ],
     null));
-Settings.add(new FilterSetting<number>('breedingShinyFilter', 'Shiny Status',
+Settings.add(new Setting<number>('breedingShinyFilter', 'Shiny Status',
     [
         new SettingOption('All', -1),
         new SettingOption('Not Shiny', 0),
         new SettingOption('Shiny', 1),
     ],
     -1));
-Settings.add(new FilterSetting<number>('breedingPokerusFilter', 'Pokerus',
+Settings.add(new Setting<number>('breedingPokerusFilter', 'Pokerus',
     [
         new SettingOption('All', -1),
         ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
     ],
     -1));
-Settings.add(new FilterSetting<number>('breedingCategoryFilter', 'Category', [], -1));
-Settings.add(new FilterSetting<string>('breedingUniqueTransformationFilter', 'Unique Transformations',
+Settings.add(new Setting<number>('breedingCategoryFilter', 'Category', [], -1));
+Settings.add(new Setting<string>('breedingUniqueTransformationFilter', 'Unique Transformations',
     [
         new SettingOption('Show All Pokémon', 'all'),
         new SettingOption('Mega Evolution/Primal Reversion Available', 'mega-available'),
@@ -304,29 +303,29 @@ export const pokedexFilterNames = ['pokedexNameFilter', 'pokedexIDFilter', 'poke
     'pokedexPokerusFilter', 'pokedexCategoryFilter', 'pokedexUniqueTransformationFilter', 'pokedexHeldItemFilter', 'pokedexHideAltFilter'];
 
 Settings.add(new SearchSetting('pokedexNameFilter', 'Search', ''));
-Settings.add(new FilterSetting<number>('pokedexIDFilter', 'SearchID', [], -1));
-Settings.add(new FilterSetting<Region | null>('pokedexRegionFilter', 'Region',
+Settings.add(new Setting<number>('pokedexIDFilter', 'SearchID', [], -1));
+Settings.add(new Setting<Region | null>('pokedexRegionFilter', 'Region',
     [
         new SettingOption('All', null),
         ...Settings.enumToNumberSettingOptionArray(Region).filter((opt) => !['None', 'Final'].includes(opt.text)),
         new SettingOption('None', Region.none),
     ],
     null));
-Settings.add(new FilterSetting<PokemonType | null>('pokedexType1Filter', 'Type 1',
+Settings.add(new Setting<PokemonType | null>('pokedexType1Filter', 'Type 1',
     [
         new SettingOption('All', null),
         ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
         new SettingOption('None', PokemonType.None),
     ],
     null));
-Settings.add(new FilterSetting<PokemonType | null>('pokedexType2Filter', 'Type 2',
+Settings.add(new Setting<PokemonType | null>('pokedexType2Filter', 'Type 2',
     [
         new SettingOption('All', null),
         ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
         new SettingOption('None', PokemonType.None),
     ],
     null));
-Settings.add(new FilterSetting<string>('pokedexCaughtFilter', 'Caught Status',
+Settings.add(new Setting<string>('pokedexCaughtFilter', 'Caught Status',
     [
         new SettingOption('All', 'all'),
         new SettingOption('Uncaught', 'uncaught'),
@@ -338,14 +337,14 @@ Settings.add(new FilterSetting<string>('pokedexCaughtFilter', 'Caught Status',
         new SettingOption('Caught Purified', 'caught-purified'),
     ],
     'all'));
-Settings.add(new FilterSetting<number>('pokedexPokerusFilter', 'Pokerus',
+Settings.add(new Setting<number>('pokedexPokerusFilter', 'Pokerus',
     [
         new SettingOption('All', -1),
         ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
     ],
     -1));
-Settings.add(new FilterSetting<number>('pokedexCategoryFilter', 'Category', [], -1));
-Settings.add(new FilterSetting<string>('pokedexUniqueTransformationFilter', 'Unique Transformations',
+Settings.add(new Setting<number>('pokedexCategoryFilter', 'Category', [], -1));
+Settings.add(new Setting<string>('pokedexUniqueTransformationFilter', 'Unique Transformations',
     [
         new SettingOption('Show All Pokémon', 'all'),
         new SettingOption('Mega Evolution/Primal Reversion Available', 'mega-available'),
@@ -353,8 +352,8 @@ Settings.add(new FilterSetting<string>('pokedexUniqueTransformationFilter', 'Uni
         new SettingOption('Obtained Mega Evolution/Primal Reversion', 'mega-evolution'),
     ],
     'all'));
-Settings.add(new FilterSetting<boolean>('pokedexHeldItemFilter', 'Rare Held Item', [], false));
-Settings.add(new FilterSetting<boolean>('pokedexHideAltFilter', 'Hide alternate forms', [], false));
+Settings.add(new BooleanSetting('pokedexHeldItemFilter', 'Rare Held Item', false));
+Settings.add(new BooleanSetting('pokedexHideAltFilter', 'Hide alternate forms', false));
 
 // Achievement sorting
 const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (

@@ -435,7 +435,7 @@ class PartyPokemon implements Saveable {
         }
 
         // Check based on alternate form status (if native to a different region have to include for that region's progression)
-        if (BreedingFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
+        if (Settings.getSetting('breedingHideAltFilter').observableValue() && !Number.isInteger(pokemon.id)) {
             const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == region);
             if (hasBaseFormInSameRegion) {
                 return false;

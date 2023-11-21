@@ -1,9 +1,8 @@
 import GameHelper from '../GameHelper';
-import FilterSetting from './FilterSetting';
-import { PureComputed } from 'knockout';
+import Setting from './Setting';
 
-export default class SearchSetting extends FilterSetting<string> {
-    public regex: ko.PureComputed<RegExp>;
+export default class SearchSetting extends Setting<string> {
+    public readonly regex: ko.PureComputed<RegExp>;
 
     constructor(name: string, displayName: string, defaultValue: string) {
         super(
