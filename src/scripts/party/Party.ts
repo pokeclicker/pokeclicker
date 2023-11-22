@@ -62,16 +62,15 @@ class Party implements Feature {
 
         // Handle shadow
         if (pokemon.shadow) {
-            // Handle setting status
+            // Only set the shadow status if we have the regular in our party it doesn't already have the shadow status
             if (alreadyCaughtRegular && !alreadyCaughtShadow) {
                 this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
             }
 
-            // Handle logging and notifying
+            // Only log and notify the first time we catch a shadow pokemon
             if (!alreadyCaughtShadow) {
                 App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: pokemon.name }));
 
-                // Notify if not already caught
                 Notifier.notify({
                     message: `You have captured a shadow ${pokemon.displayName}!`,
                     type: NotificationConstants.NotificationOption.warning,
@@ -83,12 +82,13 @@ class Party implements Feature {
 
         // Handle shiny
         if (pokemon.shiny) {
-            // Handle setting status
+            // Only set the shiny status if we have the regular in our party it doesn't already have the shiny status
             if (alreadyCaughtRegular && !alreadyCaughtShiny) {
                 this.getPokemon(pokemon.id).shiny = true;
             }
 
-            // Handle logging and notifying
+            // If we already have the shiny, log it
+            // If we catch a new shiny, log it and notify
             if (alreadyCaughtShiny) {
                 App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShinyDupe({ pokemon: pokemon.name }));
             } else {
@@ -104,9 +104,9 @@ class Party implements Feature {
             }
         }
 
-        // Handle the base pokemon, we want to add this poke
+        // Handle the regular
         if (!alreadyCaughtRegular) {
-            // Handle party
+            // We don't have this pokemon in our party yet, so add it
             this._caughtPokemon.push(pokemon);
 
             // Handle logging and notifying
