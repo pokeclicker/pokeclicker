@@ -378,8 +378,9 @@ class Dungeon {
         const encounterInfo = [];
         let pokemonName: PokemonNameType;
         let hideEncounter = false;
+        let lockedMessage = '';
 
-        const getEncounterInfo = (pokemonName, mimic) => {
+        const getEncounterInfo = (pokemonName, mimicData) => {
             const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
             const encounter = {
                 image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
@@ -388,10 +389,10 @@ class Dungeon {
                 shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
                 hide: hideEncounter,
                 uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                lock: false,
-                lockMessage: '',
-                mimic: mimic,
-                mimicTier: this.getMimicTier(pokemonName),
+                lock: !!mimicData?.lockedMessage,
+                lockMessage: mimicData?.lockedMessage ?? '',
+                mimic: !!mimicData,
+                mimicTier: mimicData?.tier,
             };
             return encounter;
         };
@@ -414,7 +415,7 @@ class Dungeon {
         // Handling Mimics
         this.getCaughtMimics().forEach(enemy => {
             pokemonName = <PokemonNameType>enemy;
-            encounterInfo.push(getEncounterInfo(pokemonName, true));
+            encounterInfo.push(getEncounterInfo(pokemonName, this.getMimicData(pokemonName)));
         });
 
         return encounterInfo;
@@ -467,8 +468,16 @@ class Dungeon {
         return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
     });
 
-    public getMimicTier(pokemonName: PokemonNameType): LootTier {
-        return (Object.keys(this.lootTable) as LootTier[]).find((tier) => this.lootTable[tier].find((loot) => loot.loot == pokemonName));
+    public getMimicData(pokemonName): {tier: LootTier, lockedMessage: string} {
+        let res;
+        (Object.keys(this.lootTable) as LootTier[]).forEach(tier => {
+            this.lootTable[tier].forEach(loot => {
+                if (loot.loot === pokemonName) {
+                    res = {tier: tier, lockedMessage: (loot.requirement?.isCompleted() ?? true) ? '' : loot.requirement.hint()};
+                }
+            })
+        })
+        return res;
     }
 }
 
