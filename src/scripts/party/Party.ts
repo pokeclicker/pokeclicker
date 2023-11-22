@@ -56,9 +56,19 @@ class Party implements Feature {
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
         PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender, pokemon.shadow);
 
+        const alreadyCaughtRegular = this.alreadyCaughtPokemon(pokemon.id);
+        const alreadyCaughtShiny = this.alreadyCaughtPokemon(pokemon.id, true);
+        const alreadyCaughtShadow = this.alreadyCaughtPokemon(pokemon.id, false, true);
+
+        // Handle shadow
         if (pokemon.shadow) {
-            // Already caught (shadow)
-            if (!this.alreadyCaughtPokemon(pokemon.id, false, true)) {
+            // Handle setting status
+            if (alreadyCaughtRegular && !alreadyCaughtShadow) {
+                this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
+            }
+
+            // Handle logging and notifying
+            if (!alreadyCaughtShadow) {
                 App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: pokemon.name }));
 
                 // Notify if not already caught
@@ -68,66 +78,50 @@ class Party implements Feature {
                     sound: NotificationConstants.NotificationSound.General.new_catch,
                     setting: NotificationConstants.NotificationSetting.General.new_catch,
                 });
-
-                // Already caught (non shadow) we need to update the party pokemon directly
-                if (this.alreadyCaughtPokemon(pokemon.id, false, false)) {
-                    this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
-                    if (!pokemon.shiny && pokemon.shiny) { // Will almost never happen, so don't want to have a log message, that we need to keep track of
-                        this.getPokemon(pokemon.id).shiny = true;
-                    }
-                    return;
-                }
             }
         }
 
+        // Handle shiny
         if (pokemon.shiny) {
-            // Add all shiny catches to the log book
-            App.game.logbook.newLog(
-                LogBookTypes.CAUGHT,
-                this.alreadyCaughtPokemon(pokemon.id, true)
-                    ? createLogContent.capturedShinyDupe({ pokemon: pokemon.name })
-                    : createLogContent.capturedShiny({ pokemon: pokemon.name })
-            );
-            // Already caught (shiny)
-            if (this.alreadyCaughtPokemon(pokemon.id, true)) {
-                return;
-            }
-            // Notify if not already caught
-            Notifier.notify({
-                message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
-                pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
-                type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-            });
-
-            // Already caught (non shiny) we need to update the party pokemon directly
-            if (this.alreadyCaughtPokemon(pokemon.id, false)) {
+            // Handle setting status
+            if (alreadyCaughtRegular && !alreadyCaughtShiny) {
                 this.getPokemon(pokemon.id).shiny = true;
-                return;
+            }
+
+            // Handle logging and notifying
+            if (alreadyCaughtShiny) {
+                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShinyDupe({ pokemon: pokemon.name }));
+            } else {
+                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShiny({ pokemon: pokemon.name }));
+
+                Notifier.notify({
+                    message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
+                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
+                    type: NotificationConstants.NotificationOption.warning,
+                    sound: NotificationConstants.NotificationSound.General.new_catch,
+                    setting: NotificationConstants.NotificationSetting.General.new_catch,
+                });
             }
         }
 
-        // Already caught (non shiny)
-        if (this.alreadyCaughtPokemon(pokemon.id, false)) {
-            return;
-        }
+        // Handle the base pokemon, we want to add this poke
+        if (!alreadyCaughtRegular) {
+            // Handle party
+            this._caughtPokemon.push(pokemon);
 
-        if (!suppressNotification) {
-            Notifier.notify({
-                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
-                pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
-                type: NotificationConstants.NotificationOption.success,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-            });
-        }
+            // Handle logging and notifying
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: pokemon.name }));
 
-        App.game.logbook.newLog(
-            LogBookTypes.CAUGHT,
-            createLogContent.captured({ pokemon: pokemon.name })
-        );
-        this._caughtPokemon.push(pokemon);
+            if (!suppressNotification) {
+                Notifier.notify({
+                    message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
+                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.General.new_catch,
+                    setting: NotificationConstants.NotificationSetting.General.new_catch,
+                });
+            }
+        }
     }
 
     public removePokemonByName(name: PokemonNameType) {
