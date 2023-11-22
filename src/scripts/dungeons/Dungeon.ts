@@ -378,7 +378,6 @@ class Dungeon {
         const encounterInfo = [];
         let pokemonName: PokemonNameType;
         let hideEncounter = false;
-        let lockedMessage = '';
 
         const getEncounterInfo = (pokemonName, mimicData) => {
             const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
@@ -475,8 +474,8 @@ class Dungeon {
                 if (loot.loot === pokemonName) {
                     res = {tier: tier, lockedMessage: (loot.requirement?.isCompleted() ?? true) ? '' : loot.requirement.hint()};
                 }
-            })
-        })
+            });
+        });
         return res;
     }
 }
