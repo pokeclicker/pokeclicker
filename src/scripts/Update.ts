@@ -2518,6 +2518,9 @@ class Update implements Saveable {
             saveData.badgeCase.splice(95, 1);
             // NormaliumZ
             saveData.badgeCase.splice(93, 1);
+
+            // Elf Munchlax → Snorlax (Snowman)
+            Update.updatePokemonId(saveData, 446.01, 143.03);
         },
     };
 

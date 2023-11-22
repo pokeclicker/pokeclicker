@@ -471,6 +471,7 @@ export const SpriteCredits: Credit[] = [
             'Silvally (Rock) Shuffle',
             'Silvally (Steel) Shuffle',
             'Silvally (Water) Shuffle',
+            'Snorlax (Snowman)',
             'Snover Berry and Trees',
             'Snover (Berry)',
             'Spooky Togepi (shiny)',
