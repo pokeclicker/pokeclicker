@@ -72,7 +72,7 @@ class Party implements Feature {
                 // Already caught (non shadow) we need to update the party pokemon directly
                 if (this.alreadyCaughtPokemon(pokemon.id, false, false)) {
                     this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
-                    if (!pokemon.shiny && pokemon.shiny) { // Will almost never happen, so don't want to have a log message, that we need to keep track of
+                    if (pokemon.shiny) { // Will almost never happen, so don't want to have a log message, that we need to keep track of
                         this.getPokemon(pokemon.id).shiny = true;
                     }
                     return;
