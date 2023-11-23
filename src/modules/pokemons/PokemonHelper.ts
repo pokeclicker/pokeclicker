@@ -144,15 +144,15 @@ export function getMegaStones(pokemonName: PokemonNameType): MegaStoneItem[] {
 }
 
 export function hasGigantamaxForm(pokemonName: PokemonNameType): boolean {
-    return P.pokemonMap['Gigantamax ' + pokemonName].id > 0 || P.pokemonMap['Eternamax ' + pokemonName].id > 0;
+    return P.pokemonMap[`Gigantamax ${pokemonName}`].id > 0 || P.pokemonMap[`Eternamax ${pokemonName}`].id > 0;
 }
 
 export function hasUncaughtGigantamaxForm(pokemonName: PokemonNameType): boolean {
-    let gmaxForm = P.pokemonMap['Gigantamax ' + pokemonName];
+    let gmaxForm = P.pokemonMap[`Gigantamax ${pokemonName}`];
     if (gmaxForm.id <= 0) {
-        gmaxForm = P.pokemonMap['Eternamax ' + pokemonName];
+        gmaxForm = P.pokemonMap[`Eternamax ${pokemonName}`];
     }
-    return !!(gmaxForm.id > 0 && !App.game.party.alreadyCaughtPokemon(gmaxForm.id));
+    return gmaxForm.id > 0 && !App.game.party.alreadyCaughtPokemon(gmaxForm.id);
 }
 
 export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
