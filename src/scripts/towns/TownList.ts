@@ -3903,7 +3903,6 @@ const PastoriaShop = new Shop([
     ItemList.Water_egg,
     ItemList.Water_stone,
     ItemList.Prism_scale,
-    ItemList.Skorupi,
 ]);
 const CelesticTownShop = new Shop([
     ItemList.Pokeball,
@@ -4034,6 +4033,10 @@ const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
     'Hello young one, have you come here to learn of Sinnoh’s mysteries?',
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
+
+const SinnohSafariRanger = new SafariPokemonNPC('Safari Ranger', [
+    'There are some Pokémon here that can\'t be found anywhere else in Sinnoh!',
+], GameConstants.Region.sinnoh, 'assets/images/npcs/Pokemon Ranger (female).png');
 
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
@@ -4483,6 +4486,16 @@ TownList['Canalave City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
         npcs: [CanalaveRiley, CanalaveYoungBoy, CanalaveSinnohMyth, ManaphyHastings3, ManaphyHastings4],
+    }
+);
+TownList['Great Marsh'] = new Town(
+    'Great Marsh',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Sinnoh,
+    [new SafariTownContent()],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
+        npcs: [SinnohSafariRanger],
     }
 );
 TownList['Snowpoint City'] = new Town(
