@@ -3085,7 +3085,7 @@ const Trest = new NPC('Mayor Trest', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 15), new QuestLineStepCompletedRequirement('Gale of Darkness', 17, GameConstants.AchievementOption.less)]),
 });
 const Verich = new NPC('Mr. Verich', [
-    'Hohoho! You must be $playername$ I\'m hearing so much about you from my.... employees.',
+    'Hohoho! You must be the $playername$ I\'m hearing so much about you from my.... employees.',
     'There\'s a lot of rumors buzzing around about the S. S. Libra, but if you ask me, it\'s long gone and may never be found.',
     'You\'d have to be as crazy as Kamino to go looking for it.',
 ], {image: 'assets/images/npcs/Grand Master Greevil.png',
