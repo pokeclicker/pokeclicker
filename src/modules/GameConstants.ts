@@ -956,7 +956,6 @@ export enum PokemonItemType {
     'Togepi',
     'Beldum',
     'Grotle (Acorn)',
-    'Skorupi',
     'Combee',
     'Burmy (Plant)',
     'Spiritomb',

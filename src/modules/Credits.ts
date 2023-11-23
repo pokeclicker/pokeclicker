@@ -245,6 +245,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
+        name: 'DommyThicc',
+        link: 'https://discordapp.com/users/519860373890007050/',
+        resources: [
+            'Chobin',
+            'Cipher Admin Ardos',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'DraKay',
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-121.png',
@@ -261,6 +270,9 @@ export const SpriteCredits: Credit[] = [
             'Blimp base',
             'Butler',
             'Camp map sprite',
+            'Cipher Admin Lovrina',
+            'Cipher Commander Exol',
+            'Cipher Peon Yellosix',
             'Charitative chansey shuffle',
             'Client Island town image',
             'Clouds',
@@ -353,6 +365,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Weezing',
             'Professor Burnet',
             'Purify Icon',
+            'Robo Groudon',
             'Roddy Tackle',
             'Rudy',
             'Rusted Shield and Sword icons',
@@ -471,6 +484,7 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Aliana',
             'Team Magma and Aqua Admins',
             'Team Magma Grunts',
+            'Thug Zook',
             'Togepi (Flowering Crown)',
             'Torchic (Egg)',
             'Tourist Couple/Bellhop',
@@ -662,6 +676,27 @@ export const SpriteCredits: Credit[] = [
             'Vectorized Z Crystals',
         ],
         // NOTES: Permission given in the bio comment section
+    },
+    {
+        name: 'Jostav',
+        link: 'https://discordapp.com/users/823666951565344828/',
+        resources: [
+            'Cipher Peon (yellow)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
+        name: 'Kelp1490',
+        link: 'https://discordapp.com/users/463397969102766080/',
+        resources: [
+            'cipher Admin Eldes',
+            'Cipher Admin Gorigan',
+            'Cipher Admin Snattle',
+            'Cipher Peon Browsix',
+            'Cipher Peon Greesix',
+            'Cipher Peon Purpsix',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'Kensuyjin33',
@@ -1015,6 +1050,14 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'Robbinspook',
+        link: 'https://discordapp.com/users/359364624526868480/',
+        resources: [
+            'Grand Master Greevil',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'SageDeoxys, Wolfang62, LarryTurbo, tammyclaydon',
         link: 'https://www.pokecommunity.com/showthread.php?t=474312',
         resources: [
@@ -1059,6 +1102,8 @@ export const SpriteCredits: Credit[] = [
             'Cissy',
             'Cipher Key Lair',
             'Miror B. Peons', // placeholder
+            'Cipher Peon Blusix',
+            'Cipher Peon Resix',
             'Cipher Peon (skrub)',
             'Cipher Peon (mirakle b)',
             'Coastland route map sprites',
