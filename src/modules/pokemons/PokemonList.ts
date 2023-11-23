@@ -13433,13 +13433,6 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
-        'evolutions': [
-            EnvironmentRestrictedLevelEvolution('Cave', 'Wormadam (Plant)', 'Wormadam (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Wormadam (Plant)', 'Wormadam (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
-        ],
         'base': {
             'hitpoints': 60,
             'attack': 59,
@@ -13460,12 +13453,6 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
-        'evolutions': [
-            EnvironmentRestrictedLevelEvolution('Forest', 'Wormadam (Sand)', 'Wormadam (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
-        ],
         'base': {
             'hitpoints': 60,
             'attack': 79,
@@ -13486,11 +13473,6 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
-        'evolutions': [
-            EnvironmentRestrictedLevelEvolution('Forest', 'Wormadam (Trash)', 'Wormadam (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Wormadam (Trash)', 'Wormadam (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Wormadam (Trash)', 'Wormadam (Sand)', 1, true),
-        ],
         'base': {
             'hitpoints': 60,
             'attack': 69,
