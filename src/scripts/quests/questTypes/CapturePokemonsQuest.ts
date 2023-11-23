@@ -19,7 +19,7 @@ class CapturePokemonsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Capture or hatch ${this.amount.toLocaleString('en-US')} Pokémon.`;
+        return this.customDescription ?? `Capture or hatch ${this.amount.toLocaleString('en-US')} Pokémon.`;
     }
 
     toJSON() {

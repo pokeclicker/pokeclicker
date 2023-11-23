@@ -59,7 +59,7 @@ export const MaxIDPerRegion = [
     809, // 88 - Alola
     898, // 89 - Galar
     905, // 7 - Hisui
-    1010, // 105 - Paldea
+    1017, // 112 - Paldea
 ];
 
 // Subregions
@@ -349,6 +349,7 @@ export const SAFARI_WATER_BLOCKS = [
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
+export const BUG_SAFARI_POKEMON = 10;
 export const FRIEND_SAFARI_POKEMON = 5;
 
 // Quests
@@ -901,6 +902,8 @@ export enum StoneType {
     'Malicious_armor',
     'Leaders_crest',
     'Gimmighoul_coin',
+    'Syrupy_apple',
+    'Unremarkable_teacup',
 }
 
 export enum FossilPieceType {
@@ -953,7 +956,6 @@ export enum PokemonItemType {
     'Togepi',
     'Beldum',
     'Grotle (Acorn)',
-    'Skorupi',
     'Combee',
     'Burmy (Plant)',
     'Spiritomb',
@@ -1213,17 +1215,9 @@ export const KalosGyms = [
 ];
 
 export const AlolaGyms = [
-    'Ilima\'s Trial',
     'Iki Town',
-    'Lana\'s Trial',
-    'Kiawe\'s Trial',
-    'Mallow\'s Trial',
     'Konikoni City',
-    'Sophocles\' Trial',
-    'Acerola\'s Trial',
     'Malie City',
-    'Vast Poni Canyon Trial',
-    'Mina\'s Trial',
     'Exeggutor Island',
     'Elite Molayne',
     'Elite Olivia',
@@ -1813,6 +1807,12 @@ export const TemporaryBattles = [
     'Hugh 5',
     'Hugh 6',
     'Hugh 7',
+    'Red Genesect 1',
+    'Genesect Burn',
+    'Genesect Chill',
+    'Genesect Douse',
+    'Genesect Shock',
+    'Red Genesect 2',
     'Dream Researcher',
     'Shauna 1',
     'Sycamore 1',

@@ -19,4 +19,8 @@ export default class ClearDungeonRequirement extends AchievementRequirement {
         }
         return `${GameConstants.RegionDungeons.flat()[this.dungeonIndex]} needs to be completed ${this.requiredValue} times.`;
     }
+
+    public toString(): string {
+        return `${super.toString()} ${this.dungeonIndex}`;
+    }
 }
