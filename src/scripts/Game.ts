@@ -85,6 +85,7 @@ class Game {
         FluteEffectRunner.initialize(this.multiplier);
         ItemHandler.initilizeEvoStones();
         BreedingController.initialize();
+        PokedexHelper.initialize();
         this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();

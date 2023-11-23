@@ -2473,6 +2473,51 @@ class Update implements Saveable {
                 }
                 return q;
             }) || [];
+
+            // Add Genesect Quest Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 122);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 123);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 124);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 125);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
+
+            // Remove erroneous BreedingFilter search setting
+            delete settingsData[''];
+
+            // Remove Z Crystal gyms and badges (remove furthest down the index first as to not get confused by index numbers)
+            // Mina\'s Trial
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            // Vast Poni Canyon Trial
+            saveData.statistics.gymsDefeated.splice(87, 1);
+            // Acerola\'s Trial
+            saveData.statistics.gymsDefeated.splice(85, 1);
+            // Sophocles\' Trial
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            // Mallow\'s Trial
+            saveData.statistics.gymsDefeated.splice(82, 1);
+            // Kiawe\'s Trial
+            saveData.statistics.gymsDefeated.splice(81, 1);
+            // Lana\'s Trial
+            saveData.statistics.gymsDefeated.splice(80, 1);
+            // Ilima\'s Trial
+            saveData.statistics.gymsDefeated.splice(78, 1);
+            // FairiumZ
+            saveData.badgeCase.splice(103, 1);
+            // DragoniumZ
+            saveData.badgeCase.splice(102, 1);
+            // GhostiumZ
+            saveData.badgeCase.splice(100, 1);
+            // ElectriumZ
+            saveData.badgeCase.splice(99, 1);
+            // GrassiumZ
+            saveData.badgeCase.splice(97, 1);
+            // FiriumZ
+            saveData.badgeCase.splice(96, 1);
+            // WateriumZ
+            saveData.badgeCase.splice(95, 1);
+            // NormaliumZ
+            saveData.badgeCase.splice(93, 1);
         },
     };
 

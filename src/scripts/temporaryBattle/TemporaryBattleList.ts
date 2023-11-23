@@ -618,6 +618,7 @@ TemporaryBattleList.Red = new TemporaryBattle(
             });
         },
         resetDaily: true,
+        returnTown: 'Mt. Silver',
     }
 );
 
@@ -2073,6 +2074,82 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
         imageName: 'Hugh',
         rewardFunction: () =>
             Notifier.notify({message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.'}),
+    }
+);
+TemporaryBattleList['Red Genesect 1'] = new TemporaryBattle(
+    'Red Genesect 1',
+    [new GymPokemon('Genesect', 174858488, 80, undefined, true)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 0)],
+    undefined,
+    {
+        displayName: 'Red Genesect',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 0),
+    }
+);
+TemporaryBattleList['Genesect Burn'] = new TemporaryBattle(
+    'Genesect Burn',
+    [new GymPokemon('Genesect (Burn)', 180858488, 80, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 3)],
+    undefined,
+    {
+        displayName: 'Burn Drive Genesect',
+        returnTown: 'Castelia Sewers',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 3),
+    }
+);
+TemporaryBattleList['Genesect Chill'] = new TemporaryBattle(
+    'Genesect Chill',
+    [new GymPokemon('Genesect (Chill)', 180858488, 80, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 3)],
+    undefined,
+    {
+        displayName: 'Chill Drive Genesect',
+        returnTown: 'Castelia Sewers',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 3),
+    }
+);
+TemporaryBattleList['Genesect Douse'] = new TemporaryBattle(
+    'Genesect Douse',
+    [new GymPokemon('Genesect (Douse)', 180858488, 80, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 3)],
+    undefined,
+    {
+        displayName: 'Douse Drive Genesect',
+        returnTown: 'Castelia Sewers',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 3),
+    }
+);
+TemporaryBattleList['Genesect Shock'] = new TemporaryBattle(
+    'Genesect Shock',
+    [new GymPokemon('Genesect (Shock)', 180858488, 80, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 3)],
+    undefined,
+    {
+        displayName: 'Shock Drive Genesect',
+        returnTown: 'Castelia Sewers',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 3),
+    }
+);
+TemporaryBattleList['Red Genesect 2'] = new TemporaryBattle(
+    'Red Genesect 2',
+    [new GymPokemon('Genesect (High-Speed)', 182858488, 80, undefined, true)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 6)],
+    undefined,
+    {
+        displayName: 'Red Genesect',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 6),
     }
 );
 TemporaryBattleList.DreamResearcher = new TemporaryBattle(
@@ -3640,7 +3717,7 @@ TemporaryBattleList.Dexio = new TemporaryBattle(
         new GymPokemon('Espeon', 195395639, 15),
     ],
     'That\'s what I would expect from a Trainer doing the island challenge. I felt the bond between you and your Pokémon!',
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
     undefined,
     {
         displayName: 'Pokémon Trainer Dexio',
@@ -3653,7 +3730,7 @@ TemporaryBattleList.Sina = new TemporaryBattle(
         new GymPokemon('Glaceon', 195395639, 15),
     ],
     'I get it... Facing trials helps you grow close to your team. I think that\'s absolutely wonderful!',
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
     undefined,
     {
         displayName: 'Pokémon Trainer Sina',
@@ -3727,7 +3804,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 345252381, 27)],
     '<i>The creature escaped back into the ultra wormhole.</i>',
-    [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
     undefined,
     {
         hideTrainer: true,
@@ -3910,7 +3987,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         new GymPokemon('Silvally (Grass)', 209152017, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.',
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)],
     undefined,
     {
         displayName: 'Pokémon Trainer Gladion',
@@ -4601,7 +4678,7 @@ TemporaryBattleList['Hop 1'] = new TemporaryBattle(
         new GymPokemon('Scorbunny', 142807378, 5, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'Well, that was a shock! Guess I know now why Lee thought he should give you a Pokémon, too...',
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',

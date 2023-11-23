@@ -16,7 +16,7 @@ export default class Setting<T> {
     // Leave options array empty to allow all options.
     constructor(
         public name: string,
-        private defaultDisplayName: string,
+        private _defaultDisplayName: string,
         private _options: SettingOption<T>[] | (() => SettingOption<T>[]),
         public defaultValue: T,
         public requirement : Requirement = undefined,
@@ -78,9 +78,13 @@ export default class Setting<T> {
             this.cachedTranslatedName = App.translation.get(
                 this.name,
                 'settings',
-                { defaultValue: this.defaultDisplayName },
+                { defaultValue: this._defaultDisplayName },
             );
         }
         return this.cachedTranslatedName();
+    }
+
+    get defaultDisplayName(): string {
+        return this._defaultDisplayName;
     }
 }
