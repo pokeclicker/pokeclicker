@@ -25,7 +25,7 @@ function createStateObservable(modalID: string): Observable<ModalState> {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const observableState: Record<string, ModalState> = new Proxy({}, {
+export const observableState: Record<string, ModalState | Observable<ModalState>> = new Proxy({}, {
     get(target, modalID: string) {
         let returnObservable = false;
         if (modalID.endsWith('Observable')) {
@@ -38,6 +38,6 @@ export const observableState: Record<string, ModalState> = new Proxy({}, {
             target[modalID] = createStateObservable(modalID);
         }
 
-        return returnObservable ? target[modalID] : target[modalID]();
+        return returnObservable ? (target[modalID] as Observable<ModalState>) : (target[modalID]() as ModalState);
     },
 });

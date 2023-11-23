@@ -1555,7 +1555,7 @@ class QuestLineHelper {
             player.gainItem('Rare_Candy', 50);
             Notifier.notify({
                 title: orreXDQuestLine.name,
-                message: 'Mayor Trest has given a big box of Rare Candy.',
+                message: 'Mayor Trest has given you a big box of Rare Candy.',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
             });
@@ -1600,7 +1600,7 @@ class QuestLineHelper {
 
         const clearCipherKeyLair = new DefeatDungeonQuest(1, 0, 'Cipher Key Lair').withDescription('You found a key to the Cipher Key Lair. Find out what\'s inside!') // Step 25
             .withOptionalArgs({
-                clearedMessage: 'Bah! No Fair! Fine, you can take your precious Professor Krane. Get out of here!',
+                clearedMessage: 'Bah! No fair! Fine, you can take your precious Professor Krane. Get out of here!',
                 npcDisplayName: 'Gorigan',
                 npcImageName: 'Cipher Admin Gorigan',
             });
