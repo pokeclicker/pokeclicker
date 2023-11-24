@@ -1,6 +1,6 @@
 import BadgeEnums from '../enums/Badges';
 import {
-    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions, HoennSubRegions,
+    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions, HoennSubRegions, AchievementOption,
 } from '../GameConstants';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
@@ -20,6 +20,7 @@ import Routes from './Routes';
 import SpecialRoutePokemon from './SpecialRoutePokemon';
 import SpecialEventRandomRequirement from '../requirements/SpecialEventRandomRequirement';
 import SeededRand from '../utilities/SeededRand';
+import ItemRequirement from '../requirements/ItemRequirement';
 
 /*
 KANTO
@@ -4155,5 +4156,29 @@ Routes.getRoutesByRegion(Region.hoenn).forEach(route => {
         new SpecialRoutePokemon(['Pikachu (Gengar)'], new SpecialEventRandomRequirement('Halloween!')),
         new SpecialRoutePokemon(['Shuppet'], new SpecialEventRandomRequirement('Halloween!')),
         new SpecialRoutePokemon(['Duskull'], new SpecialEventRandomRequirement('Halloween!')),
+    );
+});
+
+
+Routes.getRoutesByRegion(Region.kanto).forEach((route) => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Santa Jynx'], new OneFromManyRequirement([
+            new MultiRequirement([
+                new ItemRequirement(11, 'Christmas_present', AchievementOption.less),
+                new TemporaryBattleRequirement('Santa Jynx 1'),
+            ]),
+            new MultiRequirement([
+                new ItemRequirement(27, 'Christmas_present', AchievementOption.less),
+                new TemporaryBattleRequirement('Santa Jynx 2'),
+            ]),
+            new MultiRequirement([
+                new ItemRequirement(49, 'Christmas_present', AchievementOption.less),
+                new TemporaryBattleRequirement('Santa Jynx 3'),
+            ]),
+            new MultiRequirement([
+                new ItemRequirement(150, 'Christmas_present', AchievementOption.less),
+                new TemporaryBattleRequirement('Santa Jynx 4'),
+            ]),
+        ])),
     );
 });

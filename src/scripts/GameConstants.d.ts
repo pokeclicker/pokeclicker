@@ -216,6 +216,7 @@ namespace GameConstants {
     declare const LIGHT_ITEM_CHANCE: number;
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
+    declare const CHRISTMAS_ITEM_CHANCE: number;
     declare enum GameState {
         loading,
         idle,

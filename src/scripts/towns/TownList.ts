@@ -916,7 +916,13 @@ TownList['Bill\'s House'] = new Town(
     'Bill\'s House',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [TemporaryBattleList['Bill\'s Grandpa']],
+    [
+        TemporaryBattleList['Bill\'s Grandpa'],
+        TemporaryBattleList['Santa Jynx 1'],
+        TemporaryBattleList['Santa Jynx 2'],
+        TemporaryBattleList['Santa Jynx 3'],
+        TemporaryBattleList['Santa Jynx 4'],
+    ],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 25)],
         npcs: [BillsGrandpa1, BillsGrandpa2, BillsGrandpa3, BillsGrandpa4, BillsGrandpa5, BillsGrandpa6, BillsGrandpa7, BillsGrandpa8, BillsHouseEusine],

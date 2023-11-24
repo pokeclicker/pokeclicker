@@ -274,6 +274,7 @@ export type PokemonNameType
     | 'Scyther'
     | 'Pinkan Scyther'
     | 'Jynx'
+    | 'Santa Jynx'
     | 'Electabuzz'
     | 'Pinkan Electabuzz'
     | 'Magmar'
