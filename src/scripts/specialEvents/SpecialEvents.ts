@@ -185,9 +185,11 @@ class SpecialEvents implements Feature {
             Santa Snorlax
         Dungeon.ts:
             Grinch Celebi in Ilex Forest
-
+            Snorlax (Snowman) in Seafoam Islands
+        RouteData.ts:
+            Santa Jynx
         */
-        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest and the Snowman of Seafoam Islands.',
+        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions, discover the Grinch of Ilex Forest and the Snowman of Seafoam Islands or enjoy presents at Bill\'s House.',
             // Start
             new Date(new Date().getFullYear(), 11, 24, 1), () => {
             },
