@@ -1934,7 +1934,7 @@ TownList['National Park'] = new Town(
     'National Park',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new SafariTownContent(), JohtoContestShop],
+    [new SafariTownContent('Bug Catching Contest'), JohtoContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 35)],
         npcs: [ParkAttendant, ParkResearcher],
@@ -3085,7 +3085,7 @@ const Trest = new NPC('Mayor Trest', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 15), new QuestLineStepCompletedRequirement('Gale of Darkness', 17, GameConstants.AchievementOption.less)]),
 });
 const Verich = new NPC('Mr. Verich', [
-    'Hohoho! You must be $playername$ I\'m hearing so much about you from my.... employees.',
+    'Hohoho! You must be the $playername$ I\'m hearing so much about you from my.... employees.',
     'There\'s a lot of rumors buzzing around about the S. S. Libra, but if you ask me, it\'s long gone and may never be found.',
     'You\'d have to be as crazy as Kamino to go looking for it.',
 ], {image: 'assets/images/npcs/Grand Master Greevil.png',
@@ -3903,7 +3903,6 @@ const PastoriaShop = new Shop([
     ItemList.Water_egg,
     ItemList.Water_stone,
     ItemList.Prism_scale,
-    ItemList.Skorupi,
 ]);
 const CelesticTownShop = new Shop([
     ItemList.Pokeball,
@@ -4034,6 +4033,10 @@ const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
     'Hello young one, have you come here to learn of Sinnoh’s mysteries?',
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
+
+const SinnohSafariRanger = new SafariPokemonNPC('Safari Ranger', [
+    'There are some Pokémon here that can\'t be found anywhere else in Sinnoh!',
+], GameConstants.Region.sinnoh, 'assets/images/npcs/Pokemon Ranger (female).png');
 
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
@@ -4483,6 +4486,16 @@ TownList['Canalave City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
         npcs: [CanalaveRiley, CanalaveYoungBoy, CanalaveSinnohMyth, ManaphyHastings3, ManaphyHastings4],
+    }
+);
+TownList['Great Marsh'] = new Town(
+    'Great Marsh',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Sinnoh,
+    [new SafariTownContent()],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
+        npcs: [SinnohSafariRanger],
     }
 );
 TownList['Snowpoint City'] = new Town(
@@ -6431,7 +6444,7 @@ TownList['Friend Safari'] = new Town(
     'Friend Safari',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new SafariTownContent()],
+    [new SafariTownContent('Enter Friend Safari')],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         npcs: [KalosSafariRanger, FriendlyAttendant, BugCatcherScizor],
