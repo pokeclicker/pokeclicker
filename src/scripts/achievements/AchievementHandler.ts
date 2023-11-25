@@ -394,14 +394,12 @@ class AchievementHandler {
         AchievementHandler.addAchievement('In the Shadow of Giants', 'Capture your first Shadow Pokémon', new ShadowPokemonRequirement(1), 1, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('That\'s some Shady Pokémon! Do You Want to Sell Them?', 'Capture 10 unique Shadow Pokémon', new ShadowPokemonRequirement(10), 2, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Now Go Purify Them!', 'Capture 51 unique Shadow Pokémon', new ShadowPokemonRequirement(51), 4, GameConstants.ExtraAchievementCategories.orre);
-        // Commented out until Orre XD content is released
-        //AchievementHandler.addAchievement('Beyond a Shadow of a Doubt', 'Capture all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131), 8, GameConstants.ExtraAchievementCategories.orre);
+        AchievementHandler.addAchievement('Beyond a Shadow of a Doubt', 'Capture all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131), 8, GameConstants.ExtraAchievementCategories.orre);
 
         AchievementHandler.addAchievement('Cleaning Crew', 'Purify your first Shadow Pokémon', new ShadowPokemonRequirement(1, GameConstants.ShadowStatus.Purified), 1.5, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Almost Clean Enough to Look Shiny', 'Purify 10 unique Shadow Pokémon', new ShadowPokemonRequirement(10, GameConstants.ShadowStatus.Purified), 3, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Priest in Training', 'Purify 51 unique Shadow Pokémon', new ShadowPokemonRequirement(51, GameConstants.ShadowStatus.Purified), 6, GameConstants.ExtraAchievementCategories.orre);
-        // Commented out until Orre XD content is released
-        //AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
+        AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
 
         AchievementHandler.addAchievement('Who Dropped These Here?', 'Pick up 10 Items in a Safari Zone', new SafariItemsRequirement(10), 0.1);
         AchievementHandler.addAchievement('Cheaper Than Buying It', 'Pick up 50 Items in a Safari Zone', new SafariItemsRequirement(50), 0.2);

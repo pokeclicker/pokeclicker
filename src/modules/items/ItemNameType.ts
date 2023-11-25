@@ -303,7 +303,6 @@ export type ItemNameType
 | 'Togepi'
 | 'Hoppip (Chimecho)'
 | 'Beldum'
-| 'Skorupi'
 | 'Combee'
 | 'Burmy (Plant)'
 | 'Cherubi'
