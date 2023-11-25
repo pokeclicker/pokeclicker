@@ -4,7 +4,13 @@
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill w-100">
                     <li class="nav-item" onclick="$('#refreshQuests').show()"><a class="nav-link active" href="#questsModalQuestsPane" data-toggle="tab">Quests</a></li>
-                    <li class="nav-item" onclick="$('#refreshQuests').hide()"><a class="nav-link" href="#questsModalQuestLinesPane" data-toggle="tab">Quest Lines</a></li>
+                    <li class="nav-item" onclick="$('#refreshQuests').hide()">
+                        <a class="nav-link position-relative" href="#questsModalQuestLinesPane" data-toggle="tab">
+                            Quest Lines
+                            <span class="position-absolute rounded-circle bg-danger p-1"
+                                data-bind="visible: App.game.quests.questLines().some(q => q.state() === QuestLineState.inactive && q.bulletinBoard !== GameConstants.BulletinBoards.None && q.requirement?.isCompleted())"></span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="modal-body p-0">
