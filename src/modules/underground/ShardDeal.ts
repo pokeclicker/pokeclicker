@@ -573,6 +573,76 @@ export class ShardDeal {
                     ],
                     ItemList.Deepsea_scale,
                     1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Yellow Shard', amount: 20 },
+                        { shardTypeString: 'Crimson Shard', amount: 30 },
+                    ],
+                    ItemList.Shiny_stone,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Blue Shard', amount: 20 },
+                        { shardTypeString: 'Crimson Shard', amount: 30 },
+                    ],
+                    ItemList.Dusk_stone,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Green Shard', amount: 20 },
+                        { shardTypeString: 'Crimson Shard', amount: 20 },
+                    ],
+                    ItemList.Dawn_stone,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Red Shard', amount: 20 },
+                        { shardTypeString: 'Lime Shard', amount: 30 },
+                    ],
+                    ItemList.Razor_claw,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Blue Shard', amount: 20 },
+                        { shardTypeString: 'Lime Shard', amount: 20 },
+                    ],
+                    ItemList.Razor_fang,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Yellow Shard', amount: 20 },
+                        { shardTypeString: 'White Shard', amount: 30 },
+                    ],
+                    ItemList.Electirizer,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Red Shard', amount: 20 },
+                        { shardTypeString: 'White Shard', amount: 30 },
+                    ],
+                    ItemList.Magmarizer,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Green Shard', amount: 20 },
+                        { shardTypeString: 'Black Shard', amount: 30 },
+                    ],
+                    ItemList.Protector,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Yellow Shard', amount: 20 },
+                        { shardTypeString: 'Black Shard', amount: 30 },
+                    ],
+                    ItemList.Dubious_disc,
+                    1),
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Blue Shard', amount: 20 },
+                        { shardTypeString: 'Black Shard', amount: 30 },
+                    ],
+                    ItemList.Reaper_cloth,
+                    1),
             ],
         );
     }
