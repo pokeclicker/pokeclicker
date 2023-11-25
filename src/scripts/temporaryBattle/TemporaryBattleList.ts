@@ -2079,7 +2079,7 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
 TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
     'Terrakion 1',
     [new GymPokemon('Terrakion', 175698480, 50, undefined, false)],
-    undefined,
+    'You\'re actually very strong. It\'s very possible that Cobalion trusted you to find us, well then. Where are we supposed to meet? Ok, i\'ll be making my way to there right now, you should come too so Cobalion can tell you where you\'ll be able to find Virizion.',
     [new QuestLineStepCompletedRequirement('Swords of Justice', 4)],
     undefined,
     {
@@ -2095,7 +2095,7 @@ TemporaryBattleList['Swords of Justice 1'] = new TemporaryBattle(
         new GymPokemon('Terrakion', 60042160, 55, undefined, false),
         new GymPokemon('Virizion', 60042160, 55, undefined, false),
     ],
-    undefined,
+    'It seems like you\'re really strong, $playername$. I\'ll let you help us since you were able to defeat us. Now onto discussing the plan. We\'ll start by searching for clues on where Kyurem might attack so you\'ll start by looking around the Giant Chasm. Good Luck, if you find anything we\'ll meet here again.',
     [new QuestLineStepCompletedRequirement('Swords of Justice', 11)],
     undefined,
     {

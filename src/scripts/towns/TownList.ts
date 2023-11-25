@@ -5043,7 +5043,7 @@ const OldManSwords = new NPC('Old Man', [
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Swords of Justice'), new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.less)]),
 });
 const Cobalion1 = new NPC('Cobalion', [
-    'Hello, may I ask who are you? Oh, you\'re a friend of the Old Man? that\'s great and he sent you here to find me I assume.',
+    'Hello, may I ask who are you? Oh, you\'re a friend of the Old Man? That\'s great and he sent you here to find me I assume.',
     'Well since he said for you to find me there must be a reason unless you\'re here to help me gather back the Swords of Justice. If you are then thank you, meet me at Moor of Icirrus when you find them, but you should look for Terrakion first, they usually stay in the depths of the Victory Road. Goodluck, trainer.',
 ], {
     image: 'assets/images/pokemon/638.png',
@@ -5078,7 +5078,7 @@ const Virizion2 = new NPC('Virizion', [
 });
 const Cobalion3 = new NPC('Cobalion', [
     'Oh, welcome back $playername$. I see you brought back Virizion, thank you for helping me reunite the Swords of Justice.',
-    'Now let\'s dicuss the plan. Wait, you want to help too? You do know this is gonna be a very dangerous mission, $playername$. I don\'t think I can protect you from all the dangers we might face off, the only way for us to know you\'re gonna be safe is to know if you can defeat all 3 of us. If you can then i\'ll let you help but if you can\'t then i\'m sorry but you\'re not goingto be able to join the mission.',
+    'Now let\'s dicuss the plan. Wait, you want to help too? You do know this is gonna be a very dangerous mission, $playername$. I don\'t think I can protect you from all the dangers we might face off, the only way for us to know you\'re gonna be safe is to know if you can defeat all 3 of us. If you can then i\'ll let you help but if you can\'t then i\'m sorry but you\'re not going to be able to join the mission.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 12, GameConstants.AchievementOption.less)]),
@@ -5096,7 +5096,7 @@ const Cobalion5 = new NPC('Cobalion', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 17, GameConstants.AchievementOption.less)]),
 });
 const Cobalion6 = new NPC('Cobalion', [
-    '$playername$... Do not worry about us... We\'ll be fine... Defeat Kyurem once and for and for all so we can live calmly..',
+    '$playername$... Do not worry about us... We\'ll be fine... Defeat Kyurem once and for all so we can live calmly..',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 18, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.less)]),

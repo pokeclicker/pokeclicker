@@ -8155,7 +8155,7 @@ dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
         new DungeonBossPokemon('Drilbur', 23000000, 100),
         new DungeonBossPokemon('Axew', 24000000, 100),
         new DungeonBossPokemon('Cobalion', 25000000, 100, {
-            requirement: new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.more),
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
         }),
     ],
     196500, 6);
@@ -8888,7 +8888,7 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
         new DungeonBossPokemon('Golurk', 44000000, 100),
         new DungeonBossPokemon('Audino', 45000000, 100),
         new DungeonBossPokemon('Terrakion', 45000000, 100, {
-            requirement: new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.more),
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
         }),
     ],
     326500, 23);
@@ -9107,7 +9107,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
         new DungeonBossPokemon('Whiscash', 48000000, 100),
         new DungeonBossPokemon('Keldeo', 50000000, 100, {
             hide: false,
-            requirement: new MultiRequirement([new ObtainedPokemonRequirement('Cobalion'), new ObtainedPokemonRequirement('Terrakion'), new ObtainedPokemonRequirement('Virizion')]),
+            requirement: new QuestLineCompletedRequirement('Swords of Justice'),
         }),
         new DungeonBossPokemon('Vivillon (Jungle)',  96662023, 60, {
             hide: true,
@@ -9337,7 +9337,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
         new DungeonBossPokemon('Scolipede', 48000000, 100),
         new DungeonBossPokemon('Seismitoad', 48000000, 100),
         new DungeonBossPokemon('Virizion', 48000000, 100, {
-            requirement: new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.more),
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
         }),
     ],
     356500, 3);

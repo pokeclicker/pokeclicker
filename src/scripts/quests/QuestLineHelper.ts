@@ -1485,11 +1485,7 @@ class QuestLineHelper {
         const talkToCobalion3 = new TalkToNPCQuest(Cobalion3, 'Meet up with the Swords of Justice at Moor of Icirrus and talk to Cobalion.');
         swordsofJusticeQuest.addQuest(talkToCobalion3);
 
-        const defeatSwordsofJustice = new DefeatTemporaryBattleQuest('Swords of Justice 1', 'They need you to prove you\'re strong enough to deal with the possible dangers. Defeat the Swords of Justice.').withOptionalArgs({
-            clearedMessage: 'It seems like you\'re really strong, $playername$. I\'ll let you help us since you were able to defeat us. Now onto discussing the plan. We\'ll start by searching for clues on where Kyurem might attack so you\'ll start by looking around the Giant Chasm. Good Luck, if you find anything we\'ll meet here again.',
-            npcDisplayName: 'Cobalion',
-            npcImageName: 'Cobalion',
-        });
+        const defeatSwordsofJustice = new DefeatTemporaryBattleQuest('Swords of Justice 1', 'They need you to prove you\'re strong enough to deal with the possible dangers. Defeat the Swords of Justice.');
         swordsofJusticeQuest.addQuest(defeatSwordsofJustice);
 
         const searchForKyurem1 = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('Now that you\'ve proven you\'re strong enough listen to Cobalion and search for Kyurem in the Giant Chasm.');
@@ -1522,6 +1518,14 @@ class QuestLineHelper {
         swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
             [TalkToCobalion7, TalkToTerrakion2, TalkToVirizion3],
             'You\'ve finally defeat Kyurem, locking them on Giant Chasm forever. Talk to the Swords of Justice inside the Giant Chasm'
+        ));
+
+        const CatchCobalion = new CaptureSpecificPokemonQuest('Cobalion').withDescription('Capture the Leader of the Swords of Justice, Cobalion in Mistralton Cave.');
+        const CatchVirizion = new CaptureSpecificPokemonQuest('Virizion').withDescription('Capture the Cleverest of the Swords of Justice, Virizon in Pinwheel Forest.');
+        const CatchTerrakion = new CaptureSpecificPokemonQuest('Terrakion').withDescription('Capture the Toughest of the Swords of Justice, Terrakion in Victory Road.');
+        swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
+            [CatchCobalion, CatchVirizion, CatchTerrakion],
+            undefined
         ));
 
         App.game.quests.questLines().push(swordsofJusticeQuest);
