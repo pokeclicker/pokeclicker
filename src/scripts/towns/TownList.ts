@@ -1934,7 +1934,7 @@ TownList['National Park'] = new Town(
     'National Park',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new SafariTownContent(), JohtoContestShop],
+    [new SafariTownContent('Bug Catching Contest'), JohtoContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 35)],
         npcs: [ParkAttendant, ParkResearcher],
@@ -6338,7 +6338,7 @@ TownList['Friend Safari'] = new Town(
     'Friend Safari',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new SafariTownContent()],
+    [new SafariTownContent('Enter Friend Safari')],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         npcs: [KalosSafariRanger, FriendlyAttendant, BugCatcherScizor],

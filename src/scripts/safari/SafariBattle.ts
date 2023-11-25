@@ -155,10 +155,17 @@ class SafariBattle {
         App.game.party.gainPokemonById(pokemonID, SafariBattle.enemy.shiny);
         const partyPokemon = App.game.party.getPokemon(pokemonID);
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, SafariBattle.enemy.shiny, GameConstants.ShadowStatus.None, GameConstants.SAFARI_EP_YIELD);
-        const bugReward = Math.floor(partyPokemon.baseAttack / 5);
         switch (player.region) {
             case (GameConstants.Region.johto):
+                const shinyModifier = SafariBattle.enemy.shiny ? GameConstants.BUG_SAFARI_SHINY_MODIFIER : 1;
+                const bugReward = Math.floor(partyPokemon.baseAttack / 5) * shinyModifier;
                 App.game.wallet.gainContestTokens(bugReward);
+                Notifier.notify({
+                    title: 'Bug Catching Contest',
+                    message: `<img src="assets/images/currency/contestToken.svg" height="24px"/> You earned ${bugReward} Contest Tokens!`,
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 5000,
+                });
                 break;
         }
         if (!isgameOver) {
