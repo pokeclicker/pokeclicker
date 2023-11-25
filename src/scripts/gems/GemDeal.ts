@@ -384,7 +384,9 @@ class GemDeal {
             if (ItemList[deal.item.itemType.name].isSoldOut()) {
                 return false;
             } else {
-                return deal.gems.every((value) => App.game.gems.gemWallet[value.gemType]() >= value.amount);
+                const playerAmount = player.itemList[deal.item.itemType.name]();
+                return deal.gems.every((value) => App.game.gems.gemWallet[value.gemType]() >= value.amount)
+                    && Number.isSafeInteger(playerAmount + deal.item.amount);
             }
         }
         return false;
@@ -406,7 +408,9 @@ class GemDeal {
                     const maxTrades = Math.floor(amt / gem.amount);
                     return maxTrades;
                 });
-                const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
+                const playerAmount = player.itemList[deal.item.itemType.name]();
+                const maxSafeTrades = Math.floor((Number.MAX_SAFE_INTEGER - playerAmount) / deal.item.amount);
+                const maxTrades = Math.min(trades.reduce((a,b) => Math.min(a,b), tradeTimes), maxSafeTrades);
                 deal.gems.forEach((value) =>
                     GameHelper.incrementObservable(App.game.gems.gemWallet[value.gemType], -value.amount * maxTrades));
                 deal.item.itemType.gain(deal.item.amount * maxTrades);
