@@ -2063,6 +2063,7 @@ export const TemporaryBattles = [
     'Max Raid Alcremie',
     'Max Raid Copperajah',
     'Max Raid Duraludon',
+    'Eternamax Eternatus',
     'Volo 1',
     'Akari 1',
     'Warden Mai',

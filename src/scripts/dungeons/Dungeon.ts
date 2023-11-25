@@ -12213,9 +12213,19 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Klinklang', 26704124, 51),
                 new GymPokemon('Gigantamax Copperajah', 26704124, 52),
             ],
-            { weight: 3 }, 'Rose', '(rose)'),
+            { hide: true, weight: 3, requirement: new QuestLineStepCompletedRequirement('The Lair of Giants', 36, GameConstants.AchievementOption.less) }, 'Rose', '(rose)'),
+        new DungeonTrainer('Macro Cosmos',
+            [
+                new GymPokemon('Escavalier', 26704124, 50),
+                new GymPokemon('Ferrothorn', 26704124, 50),
+                new GymPokemon('Perrserker', 26704124, 50),
+                new GymPokemon('Klinklang', 26704124, 51),
+                new GymPokemon('Gigantamax Copperajah', 26704124, 52),
+            ],
+            { hide: true, weight: 2, requirement: new QuestLineStepCompletedRequirement('The Lair of Giants', 36) }, 'Rose', '(rose)'),
         new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
         new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
+        new DungeonBossPokemon('Eternatus', 169578810, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('The Lair of Giants', 36)}),
     ],
     1850000, 32);
 
@@ -12742,7 +12752,7 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
 // Function, because we don't have 'player' on load
 const maxLairQuestStepRandomIndex = (index: number) => {
     SeededRand.seed(+player.trainerId);
-    return SeededRand.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29])[index];
+    return SeededRand.shuffleArray([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32])[index];
 };
 dungeonList['Max Lair'] = new Dungeon('Max Lair',
     ['Ivysaur', 'Charmeleon', 'Wartortle', 'Grovyle', 'Sceptile', 'Combusken', 'Blaziken', 'Marshtomp', 'Swampert', 'Cradily', 'Cofagrigus', 'Fraxure', 'Toxtricity (Amped)', 'Toxtricity (Low Key)'],
@@ -12774,7 +12784,7 @@ dungeonList['Max Lair'] = new Dungeon('Max Lair',
         new DungeonBossPokemon('Gigantamax Butterfree', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Butterfree') }),
         new DungeonBossPokemon('Gigantamax Pikachu', 164353300, 70, { hide: true, weight: 4, requirement: new ObtainedPokemonRequirement('Gigantamax Pikachu', true) }),
         new DungeonBossPokemon('Gigantamax Pikachu', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Pikachu') }),
-        new DungeonBossPokemon('Gigantamax Meowth', 164353300, 70, { hide: true, weight: 4, requirement: new ObtainedPokemonRequirement('Gigantamax Meowth', true) }),
+        new DungeonBossPokemon('Gigantamax Meowth', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Gigantamax Meowth', true), new QuestLineStepCompletedRequirement('The Lair of Giants', 2)]) }),
         new DungeonBossPokemon('Gigantamax Meowth', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Meowth') }),
         new DungeonBossPokemon('Gigantamax Machamp', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(4)), new ObtainedPokemonRequirement('Gigantamax Machamp', true)]) }),
         new DungeonBossPokemon('Gigantamax Machamp', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Machamp') }),
@@ -12784,7 +12794,7 @@ dungeonList['Max Lair'] = new Dungeon('Max Lair',
         new DungeonBossPokemon('Gigantamax Kingler', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Kingler') }),
         new DungeonBossPokemon('Gigantamax Lapras', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(7)), new ObtainedPokemonRequirement('Gigantamax Lapras', true)]) }),
         new DungeonBossPokemon('Gigantamax Lapras', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Lapras') }),
-        new DungeonBossPokemon('Gigantamax Eevee', 164353300, 70, { hide: true, weight: 4, requirement: new ObtainedPokemonRequirement('Gigantamax Eevee', true) }),
+        new DungeonBossPokemon('Gigantamax Eevee', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Gigantamax Eevee', true), new QuestLineStepCompletedRequirement('The Lair of Giants', 2)]) }),
         new DungeonBossPokemon('Gigantamax Eevee', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Eevee') }),
         new DungeonBossPokemon('Gigantamax Snorlax', 164353300, 70, { hide: true, weight: 4, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', () => maxLairQuestStepRandomIndex(8)), new ObtainedPokemonRequirement('Gigantamax Snorlax', true)]) }),
         new DungeonBossPokemon('Gigantamax Snorlax', 164353300, 70, { hide: true, requirement: new ObtainedPokemonRequirement('Gigantamax Snorlax') }),
