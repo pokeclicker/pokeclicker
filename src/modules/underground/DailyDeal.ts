@@ -99,16 +99,20 @@ export class DailyDeal {
     public static canUse(i: number): boolean {
         const deal = DailyDeal.list.peek()[i];
         const amount = player.getUndergroundItemAmount(deal.item1.id);
-        return amount >= deal.amount1;
+        const amount2 = player.getUndergroundItemAmount(deal.item2.id);
+        return amount >= deal.amount1 && Number.isSafeInteger(amount2 + deal.amount2);
     }
 
     public static use(i: number, tradeTimes = 1) {
         const deal = DailyDeal.list.peek()[i];
-        const item1Index = player.mineInventoryIndex(deal.item1.id);
         if (DailyDeal.canUse(i)) {
+            const item1Index = player.mineInventoryIndex(deal.item1.id);
             const amt = player.mineInventory()[item1Index].amount();
+            const amt2 = player.getUndergroundItemAmount(deal.item2.id);
             const maxTrades = Math.floor(amt / deal.amount1);
-            tradeTimes = Math.min(tradeTimes, maxTrades);
+            // Limit number of trades so the player cannot go over Number.MAX_SAFE_INTEGER of an item
+            const maxSafeTrades = Math.floor((Number.MAX_SAFE_INTEGER - amt2) / deal.amount2);
+            tradeTimes = Math.min(tradeTimes, maxTrades, maxSafeTrades);
             player.mineInventory()[item1Index].amount(amt - (deal.amount1 * tradeTimes));
             Underground.gainMineItem(deal.item2.id, deal.amount2 * tradeTimes);
             GameHelper.incrementObservable(App.game.statistics.undergroundDailyDealTrades, tradeTimes);
