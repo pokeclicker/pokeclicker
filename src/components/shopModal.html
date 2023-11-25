@@ -89,6 +89,13 @@
                             'evs': App.game.party.getPokemonByName($data.type)?.evs() }}">
                     </span>
                </knockout>
+               <knockout data-bind="if: ($data instanceof EvolutionStone)">
+                    <span style="position: absolute; top: 12px; left: 20px;"
+                        data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                            'pokerus': ItemList[$data.name].getPokerusStatus(), 'width': '32px',
+                            'evsProgress': ItemList[$data.name].getPokerusProgress() }}">
+                    </span>
+               </knockout>
                <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
                    <span style="position: absolute; top: 15px; right: 20px;"
                          data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
