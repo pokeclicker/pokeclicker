@@ -27,6 +27,7 @@ export default class ChristmasPresent extends Item {
         Notifier.notify({
             message: `You opened the gift and earnt <img src="/assets/images/currency/${Currency[cur]}.svg" height="24px"/> ${amount.toLocaleString('en-US')}.`,
             type: NotificationConstants.NotificationOption.success,
+            image: this.image,
         });
     }
     

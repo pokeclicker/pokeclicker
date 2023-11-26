@@ -4159,8 +4159,8 @@ Routes.getRoutesByRegion(Region.hoenn).forEach(route => {
     );
 });
 
-
-Routes.getRoutesByRegion(Region.kanto).forEach((route) => {
+// Christmas Event
+Routes.getRoutesByRegion(Region.kanto).forEach(route => {
     route.pokemon.special.push(
         new SpecialRoutePokemon(['Santa Jynx'], new OneFromManyRequirement([
             new MultiRequirement([

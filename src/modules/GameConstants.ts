@@ -2142,6 +2142,7 @@ export enum ShardTraderLocations {
     'Pacifidlog Town',
     'Sootopolis City',
     'Ever Grande City',
+    'Sandgem City',
     'Oreburgh City',
     'Floaroma Town',
     'Eterna City',

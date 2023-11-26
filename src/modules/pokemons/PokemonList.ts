@@ -9210,6 +9210,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 234.01,
+        'name': 'Reindeer Stantler',
+        'catchRate': 45,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.slow,
+        'exp': 163,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 73,
+            'attack': 95,
+            'specialAttack': 85,
+            'defense': 62,
+            'specialDefense': 65,
+            'speed': 85,
+        },
+    },
+    {
         'id': 235,
         'name': 'Smeargle',
         'catchRate': 45,
@@ -14305,6 +14322,26 @@ export const pokemonList = createPokemonArray(
         'catchRate': 50,
         'evolutions': [StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell)],
         'baby': true,
+        'base': {
+            'hitpoints': 135,
+            'attack': 85,
+            'specialAttack': 40,
+            'defense': 40,
+            'specialDefense': 85,
+            'speed': 5,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },    {
+        'id': 446.01,
+        'name': 'Elf Munchlax',
+        'type': [PokemonType.Normal, PokemonType.Fairy],
+        'eggCycles': 32,
+        'levelType': LevelType.slow,
+        'exp': 78,
+        'catchRate': 50,
+        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
         'base': {
             'hitpoints': 135,
             'attack': 85,
@@ -31136,7 +31173,7 @@ pokemonList.forEach((p) => {
         // Calculate evolutions egg steps to be higher than the base forms
         (p as PokemonListData).evolutions?.forEach((evo) => {
             const poke = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
-            poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * (evo.ignoreECChange ? 1 : 1.5)));
+            poke.eggCycles = Math.min(maxEggCycles, Math.round(poke.eggCycles * (evo.ignoreECChange ? 1 : 1.5)));
 
         });
     }

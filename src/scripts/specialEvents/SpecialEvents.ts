@@ -183,13 +183,16 @@ class SpecialEvents implements Feature {
         /* Christmas
         RoamingPokemonList.ts:
             Santa Snorlax
+            Reindeer Stantler
         Dungeon.ts:
             Grinch Celebi in Ilex Forest
             Snorlax (Snowman) in Seafoam Islands
         RouteData.ts:
             Santa Jynx
+        ShardDeal.ts:
+            Elf Munchlax
         */
-        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions, discover the Grinch of Ilex Forest and the Snowman of Seafoam Islands or enjoy presents at Bill\'s House.',
+        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and Reindeer Stantler in Johto, discover the mystical creatures of Ilex Forest and Seafoam Islands or party at Bill\'s House.',
             // Start
             new Date(new Date().getFullYear(), 11, 24, 1), () => {
             },

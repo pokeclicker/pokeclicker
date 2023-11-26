@@ -2519,8 +2519,7 @@ class Update implements Saveable {
             // NormaliumZ
             saveData.badgeCase.splice(93, 1);
 
-            // Elf Munchlax → Snorlax (Snowman) + Santa Jynx TempBattles
-            Update.updatePokemonId(saveData, 446.01, 143.03);
+            // Santa Jynx TempBattles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
