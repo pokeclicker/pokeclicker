@@ -68,7 +68,7 @@
                                 <div id="safariBody" style="position: relative; width: max-content; overflow-x: hidden;">
                                     <div data-bind="foreach: Safari.grid, childrenComplete: () => Safari.addPlayer()">
                                         <div class="row flex-nowrap" data-bind="foreach: $data" style="margin: 0 -1px !important;">
-                                            <div class="safariSquare" data-bind="attr: { id: `safari-${$parentContext.$index()}-${$context.$index()}` }, style: { 'background-image': `url('assets/images/safari/${$data}.png')`, 'z-index': ([GameConstants.SafariTile.treeTopL, GameConstants.SafariTile.treeTopC, GameConstants.SafariTile.treeTopR].includes($data) ? '3' : 'auto') } ">
+                                            <div class="safariSquare" data-bind="attr: { id: `safari-${$parentContext.$index()}-${$context.$index()}` }, style: { 'background-image': `url('assets/images/safari/tiles/${GameConstants.SafariTile[$data]}.png')`, 'z-index': ([GameConstants.SafariTile.treeTopL, GameConstants.SafariTile.treeTopC, GameConstants.SafariTile.treeTopR].includes($data) ? '3' : 'auto') } ">
                                             </div>
                                         </div>
                                     </div>
