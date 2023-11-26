@@ -1,9 +1,13 @@
 class SafariTownContent extends TownContent {
+    constructor(private buttonText?: string) {
+        super();
+    }
+
     public cssClass(): string {
         return 'btn btn-primary';
     }
     public text(): string {
-        return 'Enter Safari Zone';
+        return this.buttonText ?? 'Enter Safari Zone';
     }
     public onclick(): void {
         Safari.openModal();

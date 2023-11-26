@@ -16,7 +16,12 @@ class SafariPokemonNPC extends NPC {
         }
 
         let pokemonHTML = SafariPokemonList.list[this.region]().map((p) => {
-            let html = `<img width="72" class="d-block ${!p.isAvailable() ? 'dungeon-pokemon-locked' : ''}" src="assets/images/pokemon/${PokemonHelper.getPokemonByName(p.name).id}.png" />`;
+            const isAvailable = p.isAvailable();
+            if (!isAvailable && !p.showUncaught) {
+                // Don't show uncaught pokemon
+                return '';
+            }
+            let html = `<img width="72" class="d-block ${!isAvailable ? 'dungeon-pokemon-locked' : ''}" src="assets/images/pokemon/${PokemonHelper.getPokemonByName(p.name).id}.png" />`;
             if (this.region === GameConstants.Region.kalos) {
                 const partyPokemon = App.game.party.getPokemonByName(p.name);
                 if (partyPokemon?.pokerus) {
