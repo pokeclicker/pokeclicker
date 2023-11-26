@@ -881,7 +881,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
     Desert: {
         [Region.kanto]: new Set(),
         [Region.johto]: new Set(),
-        [Region.hoenn]: new Set(['Pyrite Town', 'Pyrite Town Battles', 'Outskirt Stand', 'Orre Colosseum']),
+        [Region.hoenn]: new Set([111, 135, 'Outskirt Stand', 'Pyrite Town', 'Pyrite Town Battles', 'Orre Colosseum']),
         [Region.sinnoh]: new Set([228]),
         [Region.unova]: new Set([4, 25, 'Lentimas Town', 'Reversal Mountain']),
         [Region.kalos]: new Set([13]),
