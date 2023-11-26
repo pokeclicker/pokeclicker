@@ -1934,7 +1934,7 @@ TownList['National Park'] = new Town(
     'National Park',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new SafariTownContent(), JohtoContestShop],
+    [new SafariTownContent('Bug Catching Contest'), JohtoContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 35)],
         npcs: [ParkAttendant, ParkResearcher],
@@ -6338,7 +6338,7 @@ TownList['Friend Safari'] = new Town(
     'Friend Safari',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new SafariTownContent()],
+    [new SafariTownContent('Enter Friend Safari')],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         npcs: [KalosSafariRanger, FriendlyAttendant, BugCatcherScizor],
@@ -8361,6 +8361,65 @@ const PeonyComplete = new NPC ('Peony', [
     image: 'assets/images/npcs/Peony.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Crown of Galar'), new QuestLineCompletedRequirement('The Birds of the Dyna Tree'), new QuestLineCompletedRequirement('The Ancient Golems')]),
 });
+
+const Peonia1 = new NPC ('Peonia', [
+    'Hang on-I recognize you! You\'re that kid who was able to beat my dad earlier, right? That\'s impressive, he\'s no pushover!',
+    'Actually, a strong trainer like you, I think might be interested in a nearby place I was just about to go to.',
+    'It\'s a cave system just to the north of here, called the Max Lair. It\'s the only known place where you can catch wild Gigantamax Pokémon!',
+    'If you\'re interested, you should go take a look!',
+], {
+    image: 'assets/images/npcs/Peonia.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Lair of Giants'), new QuestLineStepCompletedRequirement('The Lair of Giants', 1, GameConstants.AchievementOption.less )]),
+});
+const Peonia2 = new NPC ('Peonia', [
+    'You\'re back! So I take it you saw one? A Gigantamax Pikachu, huh? Yeah, I saw one of those too! I also saw 2 others: Meowth and Eevee. Maybe you\'ll see them when you go back in.',
+    'Unfortunately, it seems these 3 are the only ones here at the moment. However, there\'s something you could do if you want to lure in more of them.',
+    'I imagine you\'ve noticed some haxagonal rock formations on your journey, right? Those are called Raid Dens. You can find them in the mainland\'s Wild area, the Isle of Armor, and here in the Crown Tundra.',
+    'Every day some of them glow red and emit a purple beam. It seems there are 10 a day, consistently, for some unknown reason. Here, download this app, and they\'ll show up on your map!',
+    'Anyway, in each of these Raid Dens, there\'s a Gigantamax Pokémon! You can\'t catch \'em though, they\'ll turn back to their regular form and run before you get the chance.',
+    'However! They\'ll each drop a stone called a Wishing Piece. If you gather enough of those stones here, more Gigantamax Pokémon\'ll show up! Dunno which ones, probably just your luck.',
+    'Including the 3 already here, there are 33 Gigantamax Pokémon. I imagine you\'ll need more than 200 Wishing Pieces to get all of \'em to show up.',
+], {
+    image: 'assets/images/npcs/Peonia.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 1), new QuestLineStepCompletedRequirement('The Lair of Giants', 32, GameConstants.AchievementOption.less )]),
+});
+const Peonia3 = new NPC ('Peonia', [
+    'They\'re all here! That took quite a while, but it was well worth it!',
+    'Hey, what\'s that purple glow? It looks to be around... Hammerlocke?',
+    'Hang on, this looks a lot like when uncle Rose started the Darkest Day! You were the one who stopped that whole thing, right? You should probably get going!',
+], {
+    image: 'assets/images/npcs/Peonia.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 32), new QuestLineStepCompletedRequirement('The Lair of Giants', 34, GameConstants.AchievementOption.less )]),
+});
+const GigantamaxLeon1 = new NPC ('Leon', [
+    'Champion?! What are you.... Doesn\'t matter, I\'m glad you\'re here!',
+    'Eternamax Eternatus has showed up again! No time to talk, let\'s fight it together!',
+], {
+    image: 'assets/images/npcs/Leon.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 33), new QuestLineStepCompletedRequirement('The Lair of Giants', 35, GameConstants.AchievementOption.less )]),
+});
+const GigantamaxLeon2 = new NPC ('Leon', [
+    'Wow. You\'re just as amazing as ever. You\'re truly worthy of your title.',
+    'I think Eternatus absorbed the leftover power it used to transform the first time to do so again. There\'s none left now, though, so that should be the last time. It flew south...',
+    'I have a feeling it\'ll come back here, but it shouldn\'t be a problem if it can\'t return to its Eternamax form here, right?',
+    'Anyway, thanks for your help! Feel free to come over to Wyndon Stadium anytime if you fancy a match!',
+], {
+    image: 'assets/images/npcs/Leon.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 35), new QuestLineStepCompletedRequirement('The Lair of Giants', 37, GameConstants.AchievementOption.less )]),
+});
+const Peonia4 = new NPC ('Peonia', [
+    'It really was Eternatus again? Given the purple glow has vanished, I guess already you took care of it. Congrats!',
+    'Actually, I just saw some purple and red Pokémon fly into the caves. Maybe that was Eternatus? I think this place might let it return to it\'s Eternamax form. Maybe you can catch it!',
+    'At any rate, I\'m real thankful for all your help. There\'s so many more people coming here now there\'s more Gigantamax Pokémon to find, it\'s been a lot of fun!',
+], {
+    image: 'assets/images/npcs/Peonia.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 36), new QuestLineCompletedRequirement('The Lair of Giants', GameConstants.AchievementOption.less )]),
+});
+const MaxLairScientist = new NPC ('Scientist', [
+    'I\'m sure you\'ll have noticed that there\'s quite a few Gigantamax Pokémon. As more get here, it\'s going to get progressively harder to find the one you want.',
+    'I have some good news for you though! It seems that those you\'ve already caught will show up less often. That should make it easier to catch \'em all!',
+], { image: 'assets/images/npcs/Scientist (female).png' });
+
 const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
     'Ahhh, how incredible. Look how far you have come, dear trainer. Congratulations on another complete Pokédex.',
@@ -8564,7 +8623,7 @@ TownList.Freezington = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Crown), GymList['Elite Trainer Peony'], TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
-        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, BirdPeony4, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, CrownTundraRoamerNPC],
+        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, BirdPeony4, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, Peonia1, CrownTundraRoamerNPC],
     }
 );
 
@@ -8615,9 +8674,9 @@ TownList['Energy Plant'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
-    [TemporaryBattleList.Eternatus, TemporaryBattleList['Sordward 2'], TemporaryBattleList['Shielbert 2'], TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
+    [TemporaryBattleList.Eternatus, TemporaryBattleList['Sordward 2'], TemporaryBattleList['Shielbert 2'], TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day'], TemporaryBattleList['Eternamax Eternatus']],
     {
-        npcs: [EnergyPlantRose, EternatusCatch, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
+        npcs: [EnergyPlantRose, EternatusCatch, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop, GigantamaxLeon1, GigantamaxLeon2],
     }
 );
 TownList['Dusty Bowl'] = new DungeonTown(
@@ -8749,7 +8808,11 @@ TownList['Max Lair'] = new DungeonTown(
     'Max Lair',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new DevelopmentRequirement(new QuestLineStartedRequirement('The Lair of Giants'))]
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 0)],
+    [],
+    {
+        npcs: [Peonia2, Peonia3, Peonia4, MaxLairScientist],
+    }
 );
 
 //Hisui shops

@@ -352,6 +352,8 @@ export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari bal
 export const BUG_SAFARI_POKEMON = 10;
 export const FRIEND_SAFARI_POKEMON = 5;
 
+export const BUG_SAFARI_SHINY_MODIFIER = 5;
+
 // Quests
 
 // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
@@ -2061,6 +2063,7 @@ export const TemporaryBattles = [
     'Max Raid Alcremie',
     'Max Raid Copperajah',
     'Max Raid Duraludon',
+    'Eternamax Eternatus',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
