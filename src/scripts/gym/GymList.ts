@@ -1455,11 +1455,7 @@ GymList['Iki Town'] = new Gym(
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fighting], 1);
     },
-    undefined,
-    {
-        displayName: 'Hala\'s Grand Trial',
-        environment: 'Outdoors',
-    }
+    undefined, { displayName: 'Hala\'s Grand Trial' }
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
@@ -1477,11 +1473,7 @@ GymList['Konikoni City'] = new Gym(
         App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined, true);
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Rock], 1);
     },
-    undefined,
-    {
-        displayName: 'Olivia\'s Grand Trial',
-        environment: 'Outdoors',
-    }
+    undefined, { displayName: 'Olivia\'s Grand Trial' }
 );
 GymList['Malie City'] = new Gym(
     'Nanu',
@@ -1497,11 +1489,7 @@ GymList['Malie City'] = new Gym(
     [new TemporaryBattleRequirement('Gladion 2')],
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dark], 1);
-    }, undefined,
-    {
-        displayName: 'Nanu\'s Grand Trial',
-        environment: 'Outdoors',
-    }
+    }, undefined, { displayName: 'Nanu\'s Grand Trial' }
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
@@ -1518,11 +1506,7 @@ GymList['Exeggutor Island'] = new Gym(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
     () => {
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ground], 1);
-    }, undefined,
-    {
-        displayName: 'Hapu\'s Grand Trial',
-        environment: 'Outdoors',
-    }
+    }, undefined, { displayName: 'Hapu\'s Grand Trial' }
 );
 //trials
 GymList['Ilima\'s Trial'] = new Gym(
