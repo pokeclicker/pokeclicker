@@ -62,11 +62,11 @@ export default class Notifier {
                     <small class="text-muted">${time}</small>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>
                 </div>` : ''}
-                <div class="toast-body text-light">
+                <div class="toast-body text-light d-flex align-items-center">
                     ${!title && image ? `<img src="${image}" class="icon" />` : ''}
                     ${!title && pokemonImage ? `<img src="${pokemonImage}" class="pokemonIcon" />` : ''}
-                    ${message.replace(/\n/g, '<br/>')}
-                    ${title ? '' : '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>'}
+                    <span class="flex-grow-1">${message.replace(/\n/g, '<br/>')}</span>
+                    ${title ? '' : '<button type="button" class="close align-self-start" data-dismiss="toast">×</button>'}
                 </div>
                 </div>`;
 
@@ -170,7 +170,7 @@ export default class Notifier {
                 document.getElementById(`modal${modalID}`).remove();
                 resolve(inputValue);
             });
-            
+
         });
     }
 
