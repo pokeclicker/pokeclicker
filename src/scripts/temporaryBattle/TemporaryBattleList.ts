@@ -5732,7 +5732,7 @@ TemporaryBattleList['Max Raid Venusaur'] = new TemporaryBattle(
     'Max Raid Venusaur',
     [new GymPokemon('Gigantamax Venusaur', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 33), new SeededDateSelectNRequirement(0, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 33), new SeededDateSelectNRequirement(0, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5746,7 +5746,7 @@ TemporaryBattleList['Max Raid Charizard'] = new TemporaryBattle(
     'Max Raid Charizard',
     [new GymPokemon('Gigantamax Charizard', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(1, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new SeededDateSelectNRequirement(1, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5760,7 +5760,7 @@ TemporaryBattleList['Max Raid Blastoise'] = new TemporaryBattle(
     'Max Raid Blastoise',
     [new GymPokemon('Gigantamax Blastoise', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 41), new SeededDateSelectNRequirement(2, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 41), new SeededDateSelectNRequirement(2, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5774,7 +5774,7 @@ TemporaryBattleList['Max Raid Butterfree'] = new TemporaryBattle(
     'Max Raid Butterfree',
     [new GymPokemon('Gigantamax Butterfree', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 34), new SeededDateSelectNRequirement(3, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 34), new SeededDateSelectNRequirement(3, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5788,7 +5788,7 @@ TemporaryBattleList['Max Raid Pikachu'] = new TemporaryBattle(
     'Max Raid Pikachu',
     [new GymPokemon('Gigantamax Pikachu', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 48), new SeededDateSelectNRequirement(4, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 48), new SeededDateSelectNRequirement(4, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5802,7 +5802,7 @@ TemporaryBattleList['Max Raid Meowth'] = new TemporaryBattle(
     'Max Raid Meowth',
     [new GymPokemon('Gigantamax Meowth', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 54), new SeededDateSelectNRequirement(5, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 54), new SeededDateSelectNRequirement(5, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5816,7 +5816,7 @@ TemporaryBattleList['Max Raid Machamp'] = new TemporaryBattle(
     'Max Raid Machamp',
     [new GymPokemon('Gigantamax Machamp', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(6, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new SeededDateSelectNRequirement(6, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5830,7 +5830,7 @@ TemporaryBattleList['Max Raid Gengar'] = new TemporaryBattle(
     'Max Raid Gengar',
     [new GymPokemon('Gigantamax Gengar', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 11), new SeededDateSelectNRequirement(7, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 11), new SeededDateSelectNRequirement(7, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5844,7 +5844,7 @@ TemporaryBattleList['Max Raid Kingler'] = new TemporaryBattle(
     'Max Raid Kingler',
     [new GymPokemon('Gigantamax Kingler', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 5), new SeededDateSelectNRequirement(8, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 5), new SeededDateSelectNRequirement(8, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5858,7 +5858,7 @@ TemporaryBattleList['Max Raid Lapras'] = new TemporaryBattle(
     'Max Raid Lapras',
     [new GymPokemon('Gigantamax Lapras', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 51), new SeededDateSelectNRequirement(9, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 51), new SeededDateSelectNRequirement(9, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5872,7 +5872,7 @@ TemporaryBattleList['Max Raid Eevee'] = new TemporaryBattle(
     'Max Raid Eevee',
     [new GymPokemon('Gigantamax Eevee', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(10, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new SeededDateSelectNRequirement(10, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5886,7 +5886,7 @@ TemporaryBattleList['Max Raid Snorlax'] = new TemporaryBattle(
     'Max Raid Snorlax',
     [new GymPokemon('Gigantamax Snorlax', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 53), new SeededDateSelectNRequirement(11, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 53), new SeededDateSelectNRequirement(11, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5900,7 +5900,7 @@ TemporaryBattleList['Max Raid Garbodor'] = new TemporaryBattle(
     'Max Raid Garbodor',
     [new GymPokemon('Gigantamax Garbodor', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 38), new SeededDateSelectNRequirement(12, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 38), new SeededDateSelectNRequirement(12, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5914,7 +5914,7 @@ TemporaryBattleList['Max Raid Rillaboom'] = new TemporaryBattle(
     'Max Raid Rillaboom',
     [new GymPokemon('Gigantamax Rillaboom', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 35), new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.galar, 34), new RouteKillRequirement(10, GameConstants.Region.galar, 40)]), new SeededDateSelectNRequirement(13, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 35), new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.galar, 34), new RouteKillRequirement(10, GameConstants.Region.galar, 40)]), new SeededDateSelectNRequirement(13, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5928,7 +5928,7 @@ TemporaryBattleList['Max Raid Cinderace'] = new TemporaryBattle(
     'Max Raid Cinderace',
     [new GymPokemon('Gigantamax Cinderace', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 40), new SeededDateSelectNRequirement(14, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 40), new SeededDateSelectNRequirement(14, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5942,7 +5942,7 @@ TemporaryBattleList['Max Raid Inteleon'] = new TemporaryBattle(
     'Max Raid Inteleon',
     [new GymPokemon('Gigantamax Inteleon', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 43), new SeededDateSelectNRequirement(15, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 43), new SeededDateSelectNRequirement(15, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5956,7 +5956,7 @@ TemporaryBattleList['Max Raid Corviknight'] = new TemporaryBattle(
     'Max Raid Corviknight',
     [new GymPokemon('Gigantamax Corviknight', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(16, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new SeededDateSelectNRequirement(16, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5970,7 +5970,7 @@ TemporaryBattleList['Max Raid Orbeetle'] = new TemporaryBattle(
     'Max Raid Orbeetle',
     [new GymPokemon('Gigantamax Orbeetle', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 21), new SeededDateSelectNRequirement(17, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 21), new SeededDateSelectNRequirement(17, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5984,7 +5984,7 @@ TemporaryBattleList['Max Raid Drednaw'] = new TemporaryBattle(
     'Max Raid Drednaw',
     [new GymPokemon('Gigantamax Drednaw', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 8), new SeededDateSelectNRequirement(18, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 8), new SeededDateSelectNRequirement(18, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5998,7 +5998,7 @@ TemporaryBattleList['Max Raid Coalossal'] = new TemporaryBattle(
     'Max Raid Coalossal',
     [new GymPokemon('Gigantamax Coalossal', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(19, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new SeededDateSelectNRequirement(19, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6012,7 +6012,7 @@ TemporaryBattleList['Max Raid Flapple'] = new TemporaryBattle(
     'Max Raid Flapple',
     [new GymPokemon('Gigantamax Flapple', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 50), new SeededDateSelectNRequirement(20, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 50), new SeededDateSelectNRequirement(20, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6026,7 +6026,7 @@ TemporaryBattleList['Max Raid Appletun'] = new TemporaryBattle(
     'Max Raid Appletun',
     [new GymPokemon('Gigantamax Appletun', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 48), new SeededDateSelectNRequirement(21, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 48), new SeededDateSelectNRequirement(21, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6040,7 +6040,7 @@ TemporaryBattleList['Max Raid Sandaconda'] = new TemporaryBattle(
     'Max Raid Sandaconda',
     [new GymPokemon('Gigantamax Sandaconda', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 39), new SeededDateSelectNRequirement(22, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 39), new SeededDateSelectNRequirement(22, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6054,7 +6054,7 @@ TemporaryBattleList['Max Raid Toxtricity'] = new TemporaryBattle(
     'Max Raid Toxtricity',
     [new GymPokemon('Gigantamax Toxtricity', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 36), new SeededDateSelectNRequirement(23, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 36), new SeededDateSelectNRequirement(23, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6068,7 +6068,7 @@ TemporaryBattleList['Max Raid Centiskorch'] = new TemporaryBattle(
     'Max Raid Centiskorch',
     [new GymPokemon('Gigantamax Centiskorch', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(24, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new SeededDateSelectNRequirement(24, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6082,7 +6082,7 @@ TemporaryBattleList['Max Raid Hatterene'] = new TemporaryBattle(
     'Max Raid Hatterene',
     [new GymPokemon('Gigantamax Hatterene', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 50), new SeededDateSelectNRequirement(25, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 50), new SeededDateSelectNRequirement(25, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6096,7 +6096,7 @@ TemporaryBattleList['Max Raid Grimmsnarl'] = new TemporaryBattle(
     'Max Raid Grimmsnarl',
     [new GymPokemon('Gigantamax Grimmsnarl', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 52), new SeededDateSelectNRequirement(26, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 52), new SeededDateSelectNRequirement(26, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6110,7 +6110,7 @@ TemporaryBattleList['Max Raid Alcremie'] = new TemporaryBattle(
     'Max Raid Alcremie',
     [new GymPokemon('Gigantamax Alcremie', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new SeededDateSelectNRequirement(27, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new SeededDateSelectNRequirement(27, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6124,7 +6124,7 @@ TemporaryBattleList['Max Raid Copperajah'] = new TemporaryBattle(
     'Max Raid Copperajah',
     [new GymPokemon('Gigantamax Copperajah', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 49), new SeededDateSelectNRequirement(28, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 49), new SeededDateSelectNRequirement(28, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6138,7 +6138,7 @@ TemporaryBattleList['Max Raid Duraludon'] = new TemporaryBattle(
     'Max Raid Duraludon',
     [new GymPokemon('Gigantamax Duraludon', 3077552890, 70)],
     undefined,
-    [new QuestLineStartedRequirement('The Lair of Giants'), new RouteKillRequirement(10, GameConstants.Region.galar, 7), new SeededDateSelectNRequirement(29, 30, 10)],
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 2), new RouteKillRequirement(10, GameConstants.Region.galar, 7), new SeededDateSelectNRequirement(29, 30, 10)],
     undefined,
     {
         hideTrainer: true,
@@ -6146,6 +6146,17 @@ TemporaryBattleList['Max Raid Duraludon'] = new TemporaryBattle(
         returnTown: 'Professor Magnolia\'s House',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
+    }
+);
+TemporaryBattleList['Eternamax Eternatus'] = new TemporaryBattle(
+    'Eternamax Eternatus',
+    [new GymPokemon('Eternamax Eternatus', 3148573341, 60)],
+    '<b><i>Defeated again, Eternatus fled far to the south!</i></b>',
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 34)],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/890',
     }
 );
 
