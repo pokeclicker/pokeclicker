@@ -291,7 +291,7 @@ TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
         new GymPokemon('Santa Jynx', 12240, 20),
         new GymPokemon('Santa Jynx', 12240, 20),
     ],
-    'Huh ? They are gone by the routes now.',
+    'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
         new ItemRequirement(11, 'Christmas_present', GameConstants.AchievementOption.less),
@@ -319,7 +319,7 @@ TemporaryBattleList['Santa Jynx 2'] = new TemporaryBattle(
         new GymPokemon('Santa Jynx', 12240, 20),
         new GymPokemon('Santa Jynx', 12240, 20),
     ],
-    'Huh ? They are gone by the routes now.',
+    'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
         new ItemRequirement(27, 'Christmas_present', GameConstants.AchievementOption.less),
@@ -349,7 +349,7 @@ TemporaryBattleList['Santa Jynx 3'] = new TemporaryBattle(
         new GymPokemon('Santa Jynx', 12240, 20),
         new GymPokemon('Santa Jynx', 12240, 20),
     ],
-    'Huh ? They are gone by the routes now.',
+    'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
         new ItemRequirement(49, 'Christmas_present', GameConstants.AchievementOption.less),
@@ -378,7 +378,7 @@ TemporaryBattleList['Santa Jynx 4'] = new TemporaryBattle(
         new GymPokemon('Santa Jynx', 18360, 20),
         new GymPokemon('Santa Jynx', 18360, 20),
     ],
-    'Huh ? They are gone by the routes now.',
+    'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
         new ItemRequirement(49, 'Christmas_present'),
