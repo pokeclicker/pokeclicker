@@ -263,8 +263,7 @@ export class Underground implements Feature {
             player.gainMegaStone((item as UndergroundMegaStoneItem).megaStone);
             return;
         }
-        // Can not directly use item.gain from Item in the ItemList until HeldItems are in modules too.
-        player.gainItem(item.itemName, num);
+        ItemList[item.itemName].gain(num);
     }
 
     public static getDiamondNetWorth(): number {
