@@ -13,13 +13,17 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.gymTown)];
     }
 
+    // Only add Defeat Gym Quest if the player has defeated the first gym (Brock).
+    public static canComplete() {
+        return App.game.badgeCase.hasBadge(BadgeEnums.Boulder);
+    }
+
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(5, 20);
         const region = SeededRand.intBetween(0, player.highestRegion());
         // Only use unlocked gyms
-        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].isUnlocked());
-        // If no gyms unlocked in this region, just use the first gym of the region
-        const gymTown = possibleGyms.length ? SeededRand.fromArray(possibleGyms) : GameConstants.RegionGyms[region][0];
+        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears());
+        const gymTown = SeededRand.fromArray(possibleGyms);
         const reward = this.calcReward(amount, gymTown);
         return [amount, reward, gymTown];
     }
