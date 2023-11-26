@@ -87,20 +87,24 @@ class PartyPokemon implements Saveable {
             const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
             return Math.floor(this._effortPoints() / GameConstants.EP_EV_RATIO / power);
         });
-        this.evs.subscribe((newValue) => {
+        const resistantSub = this.evs.subscribe((newValue) => {
             // Change Pokerus status to Resistant when reaching 50 EVs
-            if (this.pokerus && this.pokerus < GameConstants.Pokerus.Resistant && newValue >= 50) {
-                this.pokerus = GameConstants.Pokerus.Resistant;
+            if (this.pokerus && newValue >= 50) {
+                // Only notify if not yet Resistant, i.e. not when game loads already-Resistant party members
+                if (this.pokerus < GameConstants.Pokerus.Resistant) {
+                    this.pokerus = GameConstants.Pokerus.Resistant;
 
-                // Log and notify player
-                Notifier.notify({
-                    message: `${this.name} has become Resistant to Pokérus.`,
-                    pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
-                    type: NotificationConstants.NotificationOption.info,
-                    sound: NotificationConstants.NotificationSound.General.pokerus,
-                    setting: NotificationConstants.NotificationSetting.General.pokerus,
-                });
-                App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
+                    // Log and notify player
+                    Notifier.notify({
+                        message: `${this.name} has become Resistant to Pokérus.`,
+                        pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
+                        type: NotificationConstants.NotificationOption.info,
+                        sound: NotificationConstants.NotificationSound.General.pokerus,
+                        setting: NotificationConstants.NotificationSetting.General.pokerus,
+                    });
+                    App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
+                }
+                resistantSub.dispose();
             }
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
