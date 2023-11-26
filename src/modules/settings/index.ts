@@ -236,7 +236,7 @@ Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokém
 
 // Breeding Filters
 export const breedingFilterNames = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',
-    'breedingShinyFilter', 'breedingPokerusFilter', 'breedingCategoryFilter', 'breedingUniqueTransformationFilter'];
+    'breedingShinyFilter', 'breedingPokerusFilter', 'breedingCategoryFilter', 'breedingUniqueTransformationFilter', 'breedingHideAltFilter'];
 
 Settings.add(new SearchSetting('breedingNameFilter', 'Search', ''));
 Settings.add(new Setting<number>('breedingIDFilter', 'SearchID', [], -1));
