@@ -176,7 +176,7 @@ class Safari {
                 .forEach(([nx, ny]) => {
                     if (// but skip if:
                         // outside map
-                        !(0 <= y && y < Safari.grid.length && 0 <= x && x < Safari.grid[y].length) ||
+                        !Safari.isInMap(nx, ny) ||
                         // already processed,
                         Safari.accessibleTiles[ny]?.[nx] ||
                         // already queued,
@@ -318,6 +318,10 @@ class Safari {
     }
 
     private static step(direction: string) {
+        if (!Safari.inProgress()) {
+            return;
+        }
+
         Safari.lastDirection = direction;
         const directionOffset = Safari.directionToXY(direction);
 
@@ -441,7 +445,7 @@ class Safari {
 
     private static canPlaceAtPosition(x: number, y: number, isItem = false) {
         // Items don't spawn on water
-        const canPlace = GameConstants.SAFARI_LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]) && !(isItem && GameConstants.SAFARI_WATER_BLOCKS.includes(Safari.grid[y][x]));
+        const canPlace = !(isItem && GameConstants.SAFARI_WATER_BLOCKS.includes(Safari.grid[y][x]));
         return Safari.canMove(x, y) && canPlace &&
             Safari.isAccessible(x, y) &&
             !(x == Safari.playerXY.x && y == Safari.playerXY.y) &&
@@ -462,13 +466,14 @@ class Safari {
     }
 
     private static canMove(x: number, y: number): boolean {
-        if (!Safari.inProgress()) {
-            return false;
-        }
-        if (!(0 <= y && y < Safari.grid.length && 0 <= x && x < Safari.grid[y].length)) {
+        if (!Safari.isInMap(x, y)) {
             return false;
         }
         return GameConstants.SAFARI_LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]);
+    }
+
+    private static isInMap(x: number, y: number): boolean {
+        return 0 <= y && y < Safari.grid.length && 0 <= x && x < Safari.grid[y].length;
     }
 
     private static isAccessible(x: number, y: number): boolean {
@@ -521,7 +526,7 @@ class Safari {
     }
 
     private static getEnvironmentTile(x, y) {
-        if (!(0 <= y && y < Safari.grid.length && 0 <= x && x < Safari.grid[y].length)) {
+        if (!Safari.isInMap(x, y)) {
             return null;
         } else if (GameConstants.SAFARI_WATER_BLOCKS.includes(Safari.grid[y][x])) { // Water environment
             return SafariEnvironments.Water;
