@@ -192,7 +192,7 @@ class SpecialEvents implements Feature {
         ShardDeal.ts:
             Elf Munchlax
         */
-        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and Reindeer Stantler in Johto, discover the mystical creatures of Ilex Forest and Seafoam Islands or party at Bill\'s House.',
+        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and Reindeer Stantler in Johto, discover the mystical creatures of Ilex Forest, Seafoam Islands and Sandgem Town or party at Bill\'s House.',
             // Start
             new Date(new Date().getFullYear(), 11, 24, 1), () => {
             },
