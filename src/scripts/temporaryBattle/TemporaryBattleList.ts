@@ -286,10 +286,10 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
 TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
     'Santa Jynx 1',
     [
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
     ],
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
@@ -313,11 +313,11 @@ TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
 TemporaryBattleList['Santa Jynx 2'] = new TemporaryBattle(
     'Santa Jynx 2',
     [
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
     ],
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
@@ -342,12 +342,12 @@ TemporaryBattleList['Santa Jynx 2'] = new TemporaryBattle(
 TemporaryBattleList['Santa Jynx 3'] = new TemporaryBattle(
     'Santa Jynx 3',
     [
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
-        new GymPokemon('Santa Jynx', 12240, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
     ],
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
@@ -372,11 +372,11 @@ TemporaryBattleList['Santa Jynx 3'] = new TemporaryBattle(
 TemporaryBattleList['Santa Jynx 4'] = new TemporaryBattle(
     'Santa Jynx 4',
     [
-        new GymPokemon('Santa Jynx', 18360, 20),
-        new GymPokemon('Santa Jynx', 18360, 20),
-        new GymPokemon('Santa Jynx', 18360, 20),
-        new GymPokemon('Santa Jynx', 18360, 20),
-        new GymPokemon('Santa Jynx', 18360, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
     ],
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
