@@ -424,12 +424,20 @@ class PartyPokemon implements Saveable {
             return false;
         }
         // Only Base Pokémon without Mega Evolution
-        if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
+        if (uniqueTransformation == 'mega-unobtained' && !PokemonHelper.hasUncaughtMegaEvolution(pokemon.name)) {
             return false;
         }
         // Only Mega Pokémon
-        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+        if (uniqueTransformation == 'mega-evolution' && !PokemonHelper.isMegaEvolution(pokemon.name)) {
             return false;
+        }
+
+        // Check based on alternate form status (if native to a different region have to include for that region's progression)
+        if (BreedingFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
+            const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == region);
+            if (hasBaseFormInSameRegion) {
+                return false;
+            }
         }
 
         // Check if either of the types match

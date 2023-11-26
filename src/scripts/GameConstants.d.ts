@@ -184,6 +184,7 @@ namespace GameConstants {
     declare const SAFARI_OUT_OF_BALLS: string;
     declare const BUG_SAFARI_POKEMON: number;
     declare const FRIEND_SAFARI_POKEMON: number;
+    declare const BUG_SAFARI_SHINY_MODIFIER: number;
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
