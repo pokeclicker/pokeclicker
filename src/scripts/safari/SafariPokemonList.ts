@@ -3,7 +3,8 @@ class SafariEncounter {
         public name: PokemonNameType,
         public weight: number,
         public environments: SafariEnvironments[] = [SafariEnvironments.Grass],
-        private requireCaught = false
+        private requireCaught = false,
+        public showUncaught = false // Whether the pokemon silhouette will be shown in the ranger NPC when uncaught
     ) {}
 
     public isAvailable(): boolean {
@@ -175,7 +176,7 @@ class SafariPokemonList {
         const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
 
         const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true);
+            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true, true);
         });
 
         pokemon.push(new SafariEncounter('Shuckle', 2));
