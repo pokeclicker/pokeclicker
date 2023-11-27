@@ -20,8 +20,13 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(5, 20);
-        const region = SeededRand.intBetween(0, player.highestRegion());
-        // Only use unlocked gyms
+        let maxRegion = player.highestRegion();
+        // Check if first gym of highest region has been cleared. If not, pick one region lower than highest.
+        if (!App.game.badgeCase.hasBadge(GymList[GameConstants.RegionGyms[player.highestRegion()][0]].badgeReward)) {
+            maxRegion -= 1;
+        }
+        const region = SeededRand.intBetween(0, maxRegion);
+        // Only use cleared gyms.
         const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears());
         const gymTown = SeededRand.fromArray(possibleGyms);
         const reward = this.calcReward(amount, gymTown);
