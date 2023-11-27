@@ -7,7 +7,11 @@ class SafariPokemonNPC extends NPC {
         image: string = undefined,
         requirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
-        super(name, dialog, {image: image, requirement: requirement});
+        super(name, dialog, {
+            image: image,
+            requirement: requirement,
+            afterOpenFunction: (modal) => $(modal).find('[data-toggle="tooltip"]').tooltip(),
+        });
     }
 
     get dialogHTML(): string {
@@ -25,7 +29,7 @@ class SafariPokemonNPC extends NPC {
             if (this.region === GameConstants.Region.kalos) {
                 const partyPokemon = App.game.party.getPokemonByName(p.name);
                 if (partyPokemon?.pokerus) {
-                    html += `<img class="d-block mx-auto" src="assets/images/breeding/pokerus/${GameConstants.Pokerus[partyPokemon.pokerus]}.png" />`;
+                    html += `<img class="d-block mx-auto" data-toggle="tooltip" title="EVs: ${partyPokemon.evs()}" src="assets/images/breeding/pokerus/${GameConstants.Pokerus[partyPokemon.pokerus]}.png" />`;
                 }
                 return `<div class="mb-1">${html}</div>`;
             }

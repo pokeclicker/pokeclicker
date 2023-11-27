@@ -3,7 +3,10 @@ class NPCController {
 
     public static openDialog(npc: NPC) {
         this.selectedNPC(npc);
-        $('#npc-modal').modal();
+        $('#npc-modal').modal().one('shown.bs.modal', npc.options.afterOpenFunction && function () {
+            npc.options.afterOpenFunction(this);
+        });
+
         npc.setTalkedTo();
     }
 }
