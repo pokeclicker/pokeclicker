@@ -33,12 +33,12 @@ class RoamerNPC extends NPC {
         });
 
         const roamersHTML = roamers.map(({pokemon}) => {
-            let html = `<img class="npc-roamer-image" src="assets/images/pokemon/${pokemon.id}.png" />`;
+            let html = `<img src="assets/images/pokemon/${pokemon.id}.png" />`;
             const partyPokemon = App.game.party.getPokemonByName(pokemon.name);
             if (partyPokemon?.pokerus) {
                 html += `<img class="d-block mx-auto" data-toggle="tooltip" title="EVs: ${partyPokemon.evs()}" src="assets/images/breeding/pokerus/${GameConstants.Pokerus[partyPokemon.pokerus]}.png" />`;
             }
-            return `<div class="mb-3">${html}</div>`;
+            return `<div class="mb-1">${html}</div>`;
         }).join('');
 
         return `${super.dialogHTML.replace(/{ROUTE_NAME}/g, route()?.routeName)}<div class="d-flex flex-wrap justify-content-around">${roamersHTML}</div>`;
