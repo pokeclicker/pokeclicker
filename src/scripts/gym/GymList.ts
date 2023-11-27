@@ -2349,7 +2349,7 @@ GymList['Icepeak Arena'] = new Gym(
     128000,
     'You defeated Lord Avalugg once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Avalugg', imageName: '../pokemon/713.02', environment: ['AlabasterIcelands'] }
+    undefined, undefined, { displayName: 'Lord Avalugg', imageName: '../pokemon/713.02' }
 );
 GymList['Temple of Sinnoh'] = new Gym(
     'Volo',
