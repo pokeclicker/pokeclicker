@@ -18,7 +18,7 @@ export default class ChristmasPresent extends Item {
         const values = {
             [Currency.money]: 50 * 3 ** scaling,
             [Currency.questPoint]: 5 * (1 + scaling) ** 2,
-            [Currency.dungeonToken] : 30 * 2 ** scaling,
+            [Currency.dungeonToken] : 50 * 2 ** scaling,
             [Currency.diamond]: 1 + scaling * 2,
             [Currency.farmPoint]: 15 * (1 + scaling) ** 2,
         };
