@@ -38,7 +38,7 @@ class RoamerNPC extends NPC {
             if (partyPokemon?.pokerus) {
                 html += `<img class="d-block mx-auto" data-toggle="tooltip" title="EVs: ${partyPokemon.evs()}" src="assets/images/breeding/pokerus/${GameConstants.Pokerus[partyPokemon.pokerus]}.png" />`;
             }
-            return `<div class="mb-1">${html}</div>`;
+            return `<div class="mb-3">${html}</div>`;
         }).join('');
 
         return `${super.dialogHTML.replace(/{ROUTE_NAME}/g, route()?.routeName)}<div class="d-flex flex-wrap justify-content-around">${roamersHTML}</div>`;
