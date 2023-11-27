@@ -119,6 +119,7 @@ namespace GameConstants {
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
+    declare const HELD_CANDY_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
     declare const GEM_UPGRADE_COST: number;
     declare const GEM_UPGRADE_STEP: number;
