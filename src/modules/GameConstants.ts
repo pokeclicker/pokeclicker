@@ -753,7 +753,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Relic Passage', 'Relic Castle', 'Giant Chasm']),
         [Region.kalos]: new Set(['Sea Spirit\'s Den']),
         [Region.alola]: new Set(['Ten Carat Hill', 'Vast Poni Canyon']),
-        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2',]),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2']),
         [Region.hisui]: new Set([]), // Mirelands and Highlands; see getCurrentEnvironments() in MapHelper.ts for adding evolution environments to Hisui
     },
 

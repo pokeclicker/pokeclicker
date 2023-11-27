@@ -85,7 +85,7 @@ class MapHelper {
         const envs = Object.keys(GameConstants.Environments).filter(
             (env) => GameConstants.Environments[env][player.region]?.has(area)
         ) as GameConstants.Environment[];
-        
+
         // Now that we have an array we can push (add) environments straight up
         // Hisui
         // determine Hisui environments for Burmy and electric friends
@@ -105,7 +105,7 @@ class MapHelper {
         } else if (['City', 'League', 'Tower'].some(word => area.includes(word))) {
             envs.push('TrashCloak');
         }
-        
+
         // Get environments from Gym and Temp battles lists, if any
         const battleArea =
             (App.game.gameState == GameConstants.GameState.temporaryBattle
