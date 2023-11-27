@@ -7,8 +7,8 @@ type TemporaryBattleOptionalArgument = {
     imageName?: string,
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
-    environment?: GameConstants.Environment
-    battleBackground?: GameConstants.BattleBackground
+    environment?: GameConstants.Environment[],
+    battleBackground?: GameConstants.BattleBackground,
     resetDaily?: boolean
 };
 

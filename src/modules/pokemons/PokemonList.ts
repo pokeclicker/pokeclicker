@@ -13140,8 +13140,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('SandyCloak', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('TrashCloak', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13163,8 +13163,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
             LevelEvolution('Burmy (Sand)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PlantCloak', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('TrashCloak', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13186,8 +13186,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PlantCloak', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('SandyCloak', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
         ],
         'base': {
             'hitpoints': 40,

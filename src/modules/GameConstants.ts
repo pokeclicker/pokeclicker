@@ -742,30 +742,31 @@ export const Environments: Record<string, EnvironmentData> = {
     //     [Region.galar]: new Set([]),
     // },
 
-    Outdoors: {}, // Burmy Plant Cloak - Default (Tall Grass)
-
-    Cave: { // Burmy Sand Cloak - Caves and Beaches
-        [Region.kanto]: new Set(['Mt. Moon', 'Diglett\'s Cave', 'Rock Tunnel', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave', 'Ruby Path', 'Icefall Cave', 'Lost Cave', 'Altering Cave']),
-        [Region.johto]: new Set(['Union Cave', 'Slowpoke Well', 'Burned Tower', 'Mt. Mortar', 'Whirl Islands', 'Ice Path', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto', 'Mt. Silver']),
-        [Region.hoenn]: new Set(['Rusturf Tunnel', 'Granite Cave', 'Fiery Path', 'Meteor Falls', 'Shoal Cave', 'Seafloor Cavern', 'Sealed Chamber', 'Cave of Origin', 'Victory Road Hoenn', 'Pyrite Cave', 'Relic Cave', 'Mt. Battle', 'The Under', 'Under Colosseum', 'Citadark Isle']),
-        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh', 'Spear Pillar', 'Stark Mountain', 'Hall of Origin']),
-        [Region.unova]: new Set(['Relic Passage', 'Relic Castle', 'Chargestone Cave', 'Mistralton Cave', 'Reversal Mountain', 'Seaside Cave', 'Giant Chasm', 'Cave of Being', 'Victory Road Unova', 'Twist Mountain']),
-        [Region.kalos]: new Set(['Connecting Cave', 'Glittering Cave', 'Reflection Cave', 'Sea Spirit\'s Den', 'Frost Cavern', 'Terminus Cave', 'Victory Road Kalos']),
-        [Region.alola]: new Set(['Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon', 'Mount Lanakila', 'Resolution Cave']),
-        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Courageous Cavern', 'Brawler\'s Cave', 'Warm-Up Tunnel', 'Roaring-Sea Caves', 'Tunnel to the Top']),
-        [Region.hisui]: new Set([]), // Mirelands and Highlands
+    PlantCloak: { // Burmy Plant Cloak - if not in Sandy or TrashCloak
     },
 
-    Indoors: { // Burmy Trash Cloak - Only inside buildings
-        [Region.kanto]: new Set(['Rocket Game Corner', 'Pokémon Tower', 'Silph Co.', 'Power Plant', 'Pokémon Mansion']),
-        [Region.johto]: new Set(['Sprout Tower', 'Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
-        [Region.hoenn]: new Set(['Weather Institute', 'Pyrite Building', 'Cipher Lab', 'Realgam Tower Battles', 'Cipher Key Lair']),
+    SandyCloak: { // Burmy Sandy Cloak - Caves, Tunnels, Mountains, Ruins, and Victory Road get included in getCurrentEnvironments() method
+        [Region.kanto]: new Set(['Seafoam Islands', 'Ruby Path']),
+        [Region.johto]: new Set(['Slowpoke Well', 'Whirl Islands', 'Ice Path', 'Tohjo Falls']),
+        [Region.hoenn]: new Set(['Fiery Path', 'Meteor Falls', 'Sealed Chamber', 'The Under', 'Under Colosseum', 'Citadark Isle']),
+        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Iron Island', 'Spear Pillar', 'Hall of Origin']),
+        [Region.unova]: new Set(['Relic Passage', 'Relic Castle', 'Giant Chasm']),
+        [Region.kalos]: new Set(['Sea Spirit\'s Den']),
+        [Region.alola]: new Set(['Ten Carat Hill', 'Vast Poni Canyon']),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2',]),
+        [Region.hisui]: new Set([]), // Mirelands and Highlands; see getCurrentEnvironments() in MapHelper.ts for adding evolution environments to Hisui
+    },
+
+    TrashCloak: { // Burmy Trash Cloak - Cities, Leagues, and Towers get included in getCurrentEnvironments() method
+        [Region.kanto]: new Set(['Rocket Game Corner', 'Silph Co.', 'Power Plant', 'Pokémon Mansion', 'Indigo Plateau']),
+        [Region.johto]: new Set(['Team Rocket\'s Hideout', 'Indigo Plateau Johto']),
+        [Region.hoenn]: new Set(['Weather Institute', 'Pyrite Building', 'Cipher Lab', 'Cipher Key Lair']),
         [Region.sinnoh]: new Set(['Valley Windworks', 'Old Chateau', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
-        [Region.unova]: new Set(['Liberty Garden', 'Castelia Sewers', 'Celestial Tower', 'P2 Laboratory']),
+        [Region.unova]: new Set(['Liberty Garden', 'Castelia Sewers', 'P2 Laboratory']),
         [Region.kalos]: new Set(['Kalos Power Plant', 'Poké Ball Factory', 'Lost Hotel', 'Team Flare Secret HQ']),
         [Region.alola]: new Set(['Trainers\' School', 'Hokulani Observatory', 'Thrifty Megamart', 'Aether Foundation', 'Mina\'s Houseboat']),
-        [Region.galar]: new Set(['Rose Tower', 'Energy Plant']),
-        [Region.hisui]: new Set([]), // Coastlands and Icelands
+        [Region.galar]: new Set(['Energy Plant']),
+        [Region.hisui]: new Set([]), // Coastlands and Icelands; see getCurrentEnvironments() in MapHelper.ts for adding evolution environments to Hisui
     },
 
     // Diveball and, for Kanto, Surf RouteCss

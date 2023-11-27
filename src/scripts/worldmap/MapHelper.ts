@@ -75,38 +75,53 @@ class MapHelper {
     };
 
     public static getCurrentEnvironments(): GameConstants.Environment[] {
+        // Environments aren't stored in the locations themselves, so we need to:
+        // 1. Get the player's current area and then...
         const area = player.route() ||
             player.town()?.name ||
             undefined;
 
-        const battleArea =
-            (App.game.gameState == GameConstants.GameState.temporaryBattle
-                ? TemporaryBattleRunner.getEnvironmentArea() : undefined) || // temp battles default to environment of return town
-            (App.game.gameState == GameConstants.GameState.gym
-                ? GymRunner.getEnvironmentArea() : 'Indoors') || // gyms default to Indoors
-            undefined;
-
+        // 2. Refer to the record in GameConstants.Environments to get an array (list) of all the environments we've assigned it under
         const envs = Object.keys(GameConstants.Environments).filter(
             (env) => GameConstants.Environments[env][player.region]?.has(area)
-        );
+        ) as GameConstants.Environment[];
+        
+        // Now that we have an array we can push (add) environments straight up
+        // Add general envs for Burmy based on Town name (Towns include cities and dungeons). We will use the area we defined in step 1 for this, since we need .includes to look at the string (name)
+        if (area.includes('Cave' || 'Tunnel' || 'Mount' || 'Mt.' || 'Ruins' || 'Victory Road')) { // 'Cave' also catches instances like 'Cavern'
+            envs.push('SandyCloak');
+        } else if (area.includes('City' || 'League' || 'Tower')) {
+            envs.push('TrashCloak');
+        }
+        
+        // Get environments from Gym and Temp battles lists, if any
+        const battleArea =
+            (App.game.gameState == GameConstants.GameState.temporaryBattle
+                ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
+            (App.game.gameState == GameConstants.GameState.gym
+                ? GymRunner.getEnvironmentArea() : undefined) ||
+            undefined;
 
-        // Add the environment of the temp or gym battle
+        // Combine the environment arrays
         if (battleArea != undefined) {
-            envs.push(battleArea);
+            envs.concat(battleArea);
         }
 
+        // Hisui
         // determine Hisui environments for Burmy and electric friends
         if (envs.includes('CrimsonMirelands')) {
-            envs.push('Cave');
+            envs.filter((env) => env != 'TrashCloak').push('SandyCloak');
         } else if (envs.includes('CoronetHighlands')) {
-            envs.push('MagneticField', 'Cave');
-        } else if (envs.includes('CobatlCoastlands' || 'AlabasterIcelands')) {
-            envs.push('Indoors');
-        } else if (!envs.includes('Cave' || 'Indoors')) { // if not in Cave or Indoors, Burmy evolves into (Plant). (this is mainly for realEvos challenge)
-            envs.push('Outdoors');
+            envs.filter((env) => env != 'TrashCloak').push('MagneticField', 'SandyCloak');
+        } else if (envs.includes('CobaltCoastlands' || 'AlabasterIcelands')) {
+            envs.filter((env) => env != 'SandyCloak').push('TrashCloak');
+
+        // if not in Cave or TrashCloak, Burmy evolves into (Plant). (this is mainly for realEvos challenge)
+        } else if (!envs.includes('SandyCloak' || 'TrashCloak')) {
+            envs.push('PlantCloak');
         }
 
-        return (envs as GameConstants.Environment[]);
+        return (envs);
     }
 
     public static getBattleBackground(): GameConstants.BattleBackground {
