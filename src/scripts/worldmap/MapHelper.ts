@@ -87,10 +87,22 @@ class MapHelper {
         ) as GameConstants.Environment[];
         
         // Now that we have an array we can push (add) environments straight up
+        // Hisui
+        // determine Hisui environments for Burmy and electric friends
+        if (player.region === GameConstants.Region.hisui) {
+            if (envs.includes('CrimsonMirelands')) {
+                envs.push('SandyCloak');
+            } else if (envs.includes('CoronetHighlands')) {
+                envs.push('MagneticField', 'SandyCloak');
+            } else if (envs.includes('CobaltCoastlands')) {
+                envs.push('TrashCloak');
+            } else if (envs.includes('AlabasterIcelands')) {
+                envs.push('TrashCloak');
+            }
         // Add general envs for Burmy based on Town name (Towns include cities and dungeons). We will use the area we defined in step 1 for this, since we need .includes to look at the string (name)
-        if (area.includes('Cave' || 'Tunnel' || 'Mount' || 'Mt.' || 'Ruins' || 'Victory Road')) { // 'Cave' also catches instances like 'Cavern'
+        } else if (['Cave', 'Tunnel', 'Mount', 'Mt.', 'Ruins', 'Victory Road'].some(word => area.includes(word))) { // 'Cave' also catches instances like 'Cavern'
             envs.push('SandyCloak');
-        } else if (area.includes('City' || 'League' || 'Tower')) {
+        } else if (['City', 'League', 'Tower'].some(word => area.includes(word))) {
             envs.push('TrashCloak');
         }
         
@@ -107,17 +119,8 @@ class MapHelper {
             envs.concat(battleArea);
         }
 
-        // Hisui
-        // determine Hisui environments for Burmy and electric friends
-        if (envs.includes('CrimsonMirelands')) {
-            envs.filter((env) => env != 'TrashCloak').push('SandyCloak');
-        } else if (envs.includes('CoronetHighlands')) {
-            envs.filter((env) => env != 'TrashCloak').push('MagneticField', 'SandyCloak');
-        } else if (envs.includes('CobaltCoastlands' || 'AlabasterIcelands')) {
-            envs.filter((env) => env != 'SandyCloak').push('TrashCloak');
-
         // if not in Cave or TrashCloak, Burmy evolves into (Plant). (this is mainly for realEvos challenge)
-        } else if (!envs.includes('SandyCloak' || 'TrashCloak')) {
+        if (!envs.includes('SandyCloak') || !envs.includes('TrashCloak')) {
             envs.push('PlantCloak');
         }
 
