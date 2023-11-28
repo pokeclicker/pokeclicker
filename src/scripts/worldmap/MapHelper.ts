@@ -81,13 +81,12 @@ class MapHelper {
             player.town()?.name ||
             undefined;
 
-        // 2. Refer to the record in GameConstants.Environments to get an array (list) of all the environments we've assigned it under
+        // 2. Refer to the record in GameConstants.Environments to get an array (list) of all the environments we've written it under
         const envs = Object.keys(GameConstants.Environments).filter(
             (env) => GameConstants.Environments[env][player.region]?.has(area)
         ) as GameConstants.Environment[];
 
         // Now that we have an array we can push (add) environments straight up
-        // Hisui
         // determine Hisui environments for Burmy and electric friends
         if (player.region === GameConstants.Region.hisui) {
             if (envs.includes('CrimsonMirelands')) {
@@ -99,11 +98,16 @@ class MapHelper {
             } else if (envs.includes('AlabasterIcelands')) {
                 envs.push('TrashCloak');
             }
-        // Add general envs for Burmy based on Town name (Towns include cities and dungeons). We will use the area we defined in step 1 for this, since we need .includes to look at the string (name)
-        } else if (['Cave', 'Tunnel', 'Mount', 'Mt.', 'Ruins', 'Victory Road'].some(word => area.includes(word))) { // 'Cave' also catches instances like 'Cavern'
+        // if not in Hisui, add general envs for Burmy
+        } else if (envs.includes('Cave')) {
             envs.push('SandyCloak');
-        } else if (['City', 'League', 'Tower'].some(word => area.includes(word))) {
+        } else if (isNaN(area) && ['City', 'League', 'Tower'].some(word => area.includes(word))) {
             envs.push('TrashCloak');
+        }
+
+        // if not in Cave or TrashCloak, Burmy evolves into (Plant). (this is mainly for realEvos challenge)
+        if (!envs.includes('SandyCloak') || !envs.includes('TrashCloak')) {
+            envs.push('PlantCloak');
         }
 
         // Get environments from Gym and Temp battles lists, if any
@@ -114,14 +118,9 @@ class MapHelper {
                 ? GymRunner.getEnvironmentArea() : undefined) ||
             undefined;
 
-        // Combine the environment arrays
+        // Add the battle environment arrays
         if (battleArea != undefined) {
-            envs.concat(battleArea);
-        }
-
-        // if not in Cave or TrashCloak, Burmy evolves into (Plant). (this is mainly for realEvos challenge)
-        if (!envs.includes('SandyCloak') || !envs.includes('TrashCloak')) {
-            envs.push('PlantCloak');
+            envs.push(...battleArea);
         }
 
         return (envs);

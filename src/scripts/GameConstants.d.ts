@@ -314,6 +314,7 @@ namespace GameConstants {
         SandyCloak: EnvironmentData,
         TrashCloak: EnvironmentData,
         Water: EnvironmentData,
+        Cave: EnvironmentData,
         JubilifeVillage: EnvironmentData,
         ObsidianFieldlands: EnvironmentData,
         CrimsonMirelands: EnvironmentData,
