@@ -119,6 +119,7 @@ namespace GameConstants {
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
+    declare const HELD_CANDY_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
     declare const GEM_UPGRADE_COST: number;
     declare const GEM_UPGRADE_STEP: number;
@@ -182,7 +183,9 @@ namespace GameConstants {
     declare const SAFARI_LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_WATER_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
+    declare const BUG_SAFARI_POKEMON: number;
     declare const FRIEND_SAFARI_POKEMON: number;
+    declare const BUG_SAFARI_SHINY_MODIFIER: number;
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
@@ -215,6 +218,7 @@ namespace GameConstants {
     declare const LIGHT_ITEM_CHANCE: number;
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
+    declare const CHRISTMAS_ITEM_CHANCE: number;
     declare enum GameState {
         loading,
         idle,
@@ -395,6 +399,8 @@ namespace GameConstants {
         'Malicious_armor',
         'Leaders_crest',
         'Gimmighoul_coin',
+        'Syrupy_apple',
+        'Unremarkable_teacup',
     }
     declare enum FossilPieceType {
         'None',
@@ -640,6 +646,7 @@ namespace GameConstants {
         'Pacifidlog Town',
         'Sootopolis City',
         'Ever Grande City',
+        'Sandgem Town',
         'Oreburgh City',
         'Floaroma Town',
         'Eterna City',

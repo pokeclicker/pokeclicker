@@ -245,7 +245,16 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
-        name: 'DraK4y',
+        name: 'DommyThicc',
+        link: 'https://discordapp.com/users/519860373890007050/',
+        resources: [
+            'Chobin',
+            'Cipher Admin Ardos',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
+        name: 'DraKay',
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-121.png',
         resources: [
@@ -261,10 +270,14 @@ export const SpriteCredits: Credit[] = [
             'Blimp base',
             'Butler',
             'Camp map sprite',
+            'Cipher Admin Lovrina',
+            'Cipher Commander Exol',
+            'Cipher Peon Yellosix',
             'Charitative chansey shuffle',
             'Client Island town image',
             'Clouds',
             'Clown Jessie & James',
+            'Cosplay Pikachu Shuffle Icons',
             'Cracked pot big icon',
             'Danny',
             'Day cycle images',
@@ -284,6 +297,7 @@ export const SpriteCredits: Credit[] = [
             'Go-Rock Squad Commander',
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
+            'Sudowoodo (Golden) Shop Icon',
             'Grotle (Acorn)',
             'Grotle (Acorn) Shop Icon',
             'Grotle and Friends',
@@ -330,6 +344,7 @@ export const SpriteCredits: Credit[] = [
             'New Island Overworld',
             'Peat Block',
             'Pikachu (Clone)',
+            'Pikachu (Easter)',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
             'Pink Bow',
@@ -350,6 +365,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Weezing',
             'Professor Burnet',
             'Purify Icon',
+            'Robo Groudon',
             'Roddy Tackle',
             'Rudy',
             'Rusted Shield and Sword icons',
@@ -455,6 +471,7 @@ export const SpriteCredits: Credit[] = [
             'Silvally (Rock) Shuffle',
             'Silvally (Steel) Shuffle',
             'Silvally (Water) Shuffle',
+            'Snorlax (Snowman)',
             'Snover Berry and Trees',
             'Snover (Berry)',
             'Spooky Togepi (shiny)',
@@ -468,6 +485,9 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Aliana',
             'Team Magma and Aqua Admins',
             'Team Magma Grunts',
+            'Thug Zook',
+            'Togepi (Flowering Crown)',
+            'Torchic (Egg)',
             'Tourist Couple/Bellhop',
             'Tower of Darkness',
             'Tower of Waters',
@@ -539,6 +559,7 @@ export const SpriteCredits: Credit[] = [
         image: 'assets/images/profile/trainer-119.png',
         resources: [
             'Dugtrio (Punk)',
+            'Genesect (High-Speed) and Drive Forms',
             'Koga Trainer',
             'Miracle Chest',
             'Pinkan Geodude',
@@ -549,6 +570,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Oddish',
             'Pinkan Primeape',
             'Pinkan Venonat',
+            'Reindeer Stantler',
             'Spooky Ivysaur',
             'Spooky Venusaur',
         ],
@@ -644,9 +666,39 @@ export const SpriteCredits: Credit[] = [
         image: 'https://avatars.githubusercontent.com/u/14893450?v=4',
         resources: [
             'Egg Hunter',
-            'Surprise Togepi',
         ],
         // NOTES: Permission given via PRs
+    },
+    {
+        name: 'JorMxDos',
+        link: 'https://www.deviantart.com/jormxdos',
+        image: 'https://a.deviantart.net/avatars-big/j/o/jormxdos.png?8',
+        resources: [
+            'All Vectorized Badges images',
+            'Vectorized Z Crystals',
+        ],
+        // NOTES: Permission given in the bio comment section
+    },
+    {
+        name: 'Jostav',
+        link: 'https://discordapp.com/users/823666951565344828/',
+        resources: [
+            'Cipher Peon (yellow)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
+        name: 'Kelp1490',
+        link: 'https://discordapp.com/users/463397969102766080/',
+        resources: [
+            'cipher Admin Eldes',
+            'Cipher Admin Gorigan',
+            'Cipher Admin Snattle',
+            'Cipher Peon Browsix',
+            'Cipher Peon Greesix',
+            'Cipher Peon Purpsix',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'Kensuyjin33',
@@ -1000,6 +1052,14 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'Robbinspook',
+        link: 'https://discordapp.com/users/359364624526868480/',
+        resources: [
+            'Grand Master Greevil',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'SageDeoxys, Wolfang62, LarryTurbo, tammyclaydon',
         link: 'https://www.pokecommunity.com/showthread.php?t=474312',
         resources: [
@@ -1044,9 +1104,12 @@ export const SpriteCredits: Credit[] = [
             'Cissy',
             'Cipher Key Lair',
             'Miror B. Peons', // placeholder
+            'Cipher Peon Blusix',
+            'Cipher Peon Resix',
             'Cipher Peon (skrub)',
             'Cipher Peon (mirakle b)',
             'Coastland route map sprites',
+            'Christmas Present',
             'Crystalline Cocoon',
             'Dead tree map sprite',
             'Detective Pikachu',
@@ -1054,7 +1117,9 @@ export const SpriteCredits: Credit[] = [
             'Dr Cozmo',
             'Draconid Elder',
             'Dyna Tree',
+            'Elf Munchlax Shuffle',
             'Friend Safari',
+            'Sudowoodo (Golden)',
             'Heart Diamond',
             'Iceland route map sprites',
             'Macro Cosmos (male) and (female)',
@@ -1098,6 +1163,7 @@ export const SpriteCredits: Credit[] = [
             'Realgam Tower',
             'Riot',
             'Salazzle overworld images',
+            'Santa Jynx',
             'Shadow Aipom',
             'Shadow Bayleef',
             'Shadow Delibird',

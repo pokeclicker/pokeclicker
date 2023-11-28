@@ -74,6 +74,11 @@ const BreedingFilters: Record<string, FilterOption> = {
             new SettingOption('Obtained Mega Evolution/Primal Reversion', 'mega-evolution'),
         ],
     ),
+    hideAlternate: new FilterOption<boolean>(
+        'Hide alternate forms',
+        ko.observable(false),
+        'breedingHideAltFilter',
+    ),
 };
 
 export default BreedingFilters;

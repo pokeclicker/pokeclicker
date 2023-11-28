@@ -29,41 +29,43 @@
                                 </tr>
                             </thead>
                             <tbody data-bind='foreach: ShardDeal.getDeals(ShopHandler.shopObservable().location)'>
-                                <!-- ko foreach: shards -->
-                                <tr>
-                                    <td data-bind="text: player.getUndergroundItemAmount($data.shardType.id).toLocaleString('en-US')"></td>
-                                    <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: $data.shardType.image }'>
-                                    </td>
-                                    <td data-bind="text: amount.toLocaleString('en-US') + ' x ' + $data.shardType.name"></td>
-                                    <!-- ko if: $index() === 0 -->
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost.toLocaleString('en-US')"></td>
-                                    <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
-                                          <img src='assets/images/currency/questPoint.svg' width="20px'">
-                                    </td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
-                                          <img class='mineInventoryItem' data-bind="attr: {
-                                            src: $parent.item.itemType.image
-                                          }">
-                                    </td>
-                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length, hidden: ShopHandler.shopObservable().hidePlayerInventory }, text: player.itemList[$parent.item.itemType.name]().toLocaleString('en-US')"></td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
-                                                <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
-                                            </button>
-                                            <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            </button>
-                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100]">
-                                                <button class="dropdown-item" type="button" data-bind="visible: ItemList[$parents[1].item.itemType.name].maxAmount > 1, click: function(){tradeAmount($data)}, text: $data"></button>
+                                <!-- ko if: $data.isVisible() -->
+                                    <!-- ko foreach: shards -->
+                                    <tr>
+                                        <td data-bind="text: player.getUndergroundItemAmount($data.shardType.id).toLocaleString('en-US')"></td>
+                                        <td class='vertical-middle'>
+                                            <img class='mineInventoryItem' data-bind='attr: {src: $data.shardType.image }'>
+                                        </td>
+                                        <td data-bind="text: amount.toLocaleString('en-US') + ' x ' + $data.shardType.name"></td>
+                                        <!-- ko if: $index() === 0 -->
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost.toLocaleString('en-US')"></td>
+                                        <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                            <img src='assets/images/currency/questPoint.svg' width="20px'">
+                                        </td>
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                            <img class='mineInventoryItem' data-bind="attr: {
+                                                src: $parent.item.itemType.image
+                                            }">
+                                        </td>
+                                        <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length, hidden: ShopHandler.shopObservable().hidePlayerInventory }, text: player.itemList[$parent.item.itemType.name]().toLocaleString('en-US')"></td>
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                            <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                                <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
+                                                    <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
+                                                </button>
+                                                <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                </button>
+                                                <div class="dropdown-menu" data-bind="foreach: [1, 10, 100]">
+                                                    <button class="dropdown-item" type="button" data-bind="visible: ItemList[$parents[1].item.itemType.name].maxAmount > 1, click: function(){tradeAmount($data)}, text: $data"></button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
+                                        <!-- /ko -->
+                                    </tr>
                                     <!-- /ko -->
-                                </tr>
                                 <!-- /ko -->
                             </tbody>
                         </table>
