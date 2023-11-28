@@ -20,7 +20,6 @@ namespace GameConstants {
     declare const DAY: number;
     declare const TICK_TIME: number;
     declare const BATTLE_TICK: number;
-    declare const BATTLE_FRONTIER_TICK: number;
     declare const UNDERGROUND_TICK: number;
     declare const DUNGEON_TIME: number;
     declare const DUNGEON_TICK: number;

@@ -9,7 +9,6 @@ export const WEEK = DAY * 7;
 // Ticks
 export const TICK_TIME = 0.1 * SECOND;
 export const BATTLE_TICK = 1 * SECOND;
-export const BATTLE_FRONTIER_TICK = 0.5 * SECOND;
 export const UNDERGROUND_TICK = 1 * SECOND;
 export const DUNGEON_TIME = 60 * SECOND;
 export const DUNGEON_TICK = 0.1 * SECOND;

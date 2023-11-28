@@ -16,7 +16,7 @@
         </p>
         <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start(false)">Start</a>
         <!-- ko if: BattleFrontierRunner.hasCheckpoint() -->
-            <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start(true)">Start at latest checkpoint (Stage <knockout data-bind="text: BattleFrontierRunner.checkpoint">0</knockout>)</a>
+            <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start(true)">Start at latest checkpoint (Stage <knockout data-bind="text: BattleFrontierRunner.computedDifficultyCheckpoint">0</knockout>)</a>
         <!-- /ko -->
         <a class="btn btn-block btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
     </div>

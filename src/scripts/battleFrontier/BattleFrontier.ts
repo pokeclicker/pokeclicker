@@ -34,6 +34,7 @@ class BattleFrontier implements Feature {
         return {
             milestones: this.milestones.milestoneRewards.filter(m => m.obtained()).map(m => [m.stage, m.description]),
             checkpoint: BattleFrontierRunner.checkpoint(),
+            highest: BattleFrontierRunner.highest(),
         };
     }
 
@@ -47,5 +48,6 @@ class BattleFrontier implements Feature {
         });
 
         BattleFrontierRunner.checkpoint(json.checkpoint);
+        BattleFrontierRunner.highest(json.highest);
     }
 }

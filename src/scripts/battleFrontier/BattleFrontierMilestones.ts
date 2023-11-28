@@ -11,54 +11,32 @@ class BattleFrontierMilestones {
         this.milestoneRewards.sort((a, b) => a.stage - b.stage);
     }
 
-    public static nextMileStone() {
-        // Get next reward that is unlocked, not obtained, and earned past the latest stage beaten in the active run.
-        return this.milestoneRewards.find(r => r.isUnlocked() && !r.obtained() && (r.stage > (BattleFrontierRunner.checkpoint() - 1)));
-    }
-
     public static availableMilestones() {
-        return BattleFrontierMilestones.milestoneRewards.filter(r => r.isUnlocked() && !r.obtained() && r.stage > (BattleFrontierRunner.checkpoint() - 1));
-    }
-
-    public static nextMileStoneStage(): number {
-        // Return the stage number the next reward is unlocked at
-        const reward = this.nextMileStone();
-        if (reward) {
-            return reward.stage;
-        } else {
-            return Infinity;
-        }
-    }
-
-    public static nextMileStoneRewardDescription(): string {
-        // Return the description of the next reward
-        const reward = this.nextMileStone();
-        if (reward) {
-            return reward.description;
-        } else {
-            return 'Nothing';
-        }
+        return BattleFrontierMilestones.milestoneRewards.filter(r => r.isUnlocked() && !r.obtained() && r.stage > (BattleFrontierRunner.computedPreviousDifficultyStage()));
     }
 
     public static gainReward(defeatedStage: number): void {
-        const reward = this.nextMileStone();
-        if (reward && reward.stage == defeatedStage) {
-            Notifier.notify({
-                title: 'Battle Frontier',
-                message: `You've successfully defeated stage ${defeatedStage.toLocaleString('en-US')} and earned:\n<span><img src="${reward.image}" height="24px"/> ${reward.description}</span>!`,
-                type: NotificationConstants.NotificationOption.info,
-                setting: NotificationConstants.NotificationSetting.General.battle_frontier,
-                timeout: 1e4,
-            });
-            App.game.logbook.newLog(
-                LogBookTypes.FRONTIER,
-                createLogContent.gainBattleFrontierReward({
-                    reward: reward.description,
-                    stage: defeatedStage.toLocaleString('en-US'),
-                })
-            );
-            reward.gain();
-        }
+        const rewards = this.availableMilestones();
+        rewards.forEach((reward) => {
+            if (reward.stage <= defeatedStage) {
+                Notifier.notify({
+                    title: 'Battle Frontier',
+                    message: `You've successfully defeated stage ${reward.stage.toLocaleString('en-US')} and earned:\n<span><img src="${reward.image}" height="24px"/> ${reward.description}</span>!`,
+                    type: NotificationConstants.NotificationOption.info,
+                    setting: NotificationConstants.NotificationSetting.General.battle_frontier,
+                    timeout: 1e4,
+                });
+                App.game.logbook.newLog(
+                    LogBookTypes.FRONTIER,
+                    createLogContent.gainBattleFrontierReward({
+                        reward: reward.description,
+                        stage: defeatedStage.toLocaleString('en-US'),
+                    })
+                );
+                reward.gain();
+            }
+
+        });
     }
 }
 
