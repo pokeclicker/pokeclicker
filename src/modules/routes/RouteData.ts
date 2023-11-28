@@ -21,6 +21,7 @@ import SpecialRoutePokemon from './SpecialRoutePokemon';
 import SpecialEventRandomRequirement from '../requirements/SpecialEventRandomRequirement';
 import SeededRand from '../utilities/SeededRand';
 import ItemRequirement from '../requirements/ItemRequirement';
+import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 
 /*
 KANTO
@@ -4166,18 +4167,22 @@ Routes.getRoutesByRegion(Region.kanto).forEach(route => {
             new MultiRequirement([
                 new ItemRequirement(11, 'Christmas_present', AchievementOption.less),
                 new TemporaryBattleRequirement('Santa Jynx 1'),
+                new SpecialEventRequirement('Merry Christmas!'),
             ]),
             new MultiRequirement([
                 new ItemRequirement(27, 'Christmas_present', AchievementOption.less),
                 new TemporaryBattleRequirement('Santa Jynx 2'),
+                new SpecialEventRequirement('Merry Christmas!'),
             ]),
             new MultiRequirement([
                 new ItemRequirement(49, 'Christmas_present', AchievementOption.less),
                 new TemporaryBattleRequirement('Santa Jynx 3'),
+                new SpecialEventRequirement('Merry Christmas!'),
             ]),
             new MultiRequirement([
                 new ItemRequirement(150, 'Christmas_present', AchievementOption.less),
                 new TemporaryBattleRequirement('Santa Jynx 4'),
+                new SpecialEventRequirement('Merry Christmas!'),
             ]),
         ])),
     );
