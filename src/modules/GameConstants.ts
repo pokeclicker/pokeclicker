@@ -248,6 +248,7 @@ export const DNA_ITEM_CHANCE = 45;
 export const LIGHT_ITEM_CHANCE = 75;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
+export const CHRISTMAS_ITEM_CHANCE = 10;
 
 // Gems
 export const GEM_UPGRADE_COST = 500;
@@ -1703,6 +1704,10 @@ export const TemporaryBattles = [
     'Ash Ketchum New Island',
     'Bill\'s Grandpa',
     'Blue 6',
+    'Santa Jynx 1',
+    'Santa Jynx 2',
+    'Santa Jynx 3',
+    'Santa Jynx 4',
     'Silver 1',
     'Silver 2',
     'Sudowoodo',
@@ -2141,6 +2146,7 @@ export enum ShardTraderLocations {
     'Pacifidlog Town',
     'Sootopolis City',
     'Ever Grande City',
+    'Sandgem City',
     'Oreburgh City',
     'Floaroma Town',
     'Eterna City',

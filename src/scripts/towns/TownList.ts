@@ -856,6 +856,31 @@ const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 7), new QuestLineStepCompletedRequirement('An Unrivaled Power', 9, GameConstants.AchievementOption.less)]),
 });
 
+const BillGrandpaChristmas = new NPC('Bill\'s Grandpa', [
+    'Did you find all of the Santa Jynx?',
+    'I hope they don\'t come back!',
+], {
+    image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
+    requirement: new OneFromManyRequirement([
+        new MultiRequirement([
+            new ItemRequirement(11, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 1'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(27, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 2'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(49, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 3'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(150, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 4'),
+        ]),
+    ]),
+});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -916,10 +941,16 @@ TownList['Bill\'s House'] = new Town(
     'Bill\'s House',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [TemporaryBattleList['Bill\'s Grandpa']],
+    [
+        TemporaryBattleList['Bill\'s Grandpa'],
+        TemporaryBattleList['Santa Jynx 1'],
+        TemporaryBattleList['Santa Jynx 2'],
+        TemporaryBattleList['Santa Jynx 3'],
+        TemporaryBattleList['Santa Jynx 4'],
+    ],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 25)],
-        npcs: [BillsGrandpa1, BillsGrandpa2, BillsGrandpa3, BillsGrandpa4, BillsGrandpa5, BillsGrandpa6, BillsGrandpa7, BillsGrandpa8, BillsHouseEusine],
+        npcs: [BillsGrandpa1, BillsGrandpa2, BillsGrandpa3, BillsGrandpa4, BillsGrandpa5, BillsGrandpa6, BillsGrandpa7, BillsGrandpa8, BillsHouseEusine, BillGrandpaChristmas],
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -4361,7 +4392,7 @@ TownList['Sandgem Town'] = new Town(
     'Sandgem Town',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher']],
+    [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher'], new ShardTraderShop(GameConstants.ShardTraderLocations['Sandgem Town'], 'Santa\'s Secret Daycare', true, 'Plates')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
         npcs: [ProfRowan, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],

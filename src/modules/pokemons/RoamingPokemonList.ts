@@ -190,3 +190,4 @@ RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
         }
     });
 });
+RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Reindeer Stantler', new SpecialEventRequirement('Merry Christmas!')));

@@ -282,6 +282,126 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         imageName: 'Blue2',
     }
 );
+// Kanto Christmas Temporary Battles, based on Blue 2
+TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
+    'Santa Jynx 1',
+    [
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+    ],
+    'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
+    [
+        new SpecialEventRequirement('Merry Christmas!'),
+        new ItemRequirement(11, 'Christmas_present', GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
+    ],
+    undefined,
+    {
+        displayName: 'Santa Jynx Band',
+        firstTimeRewardFunction: () => {
+            (ItemList.Christmas_present as ChristmasPresent).gain();
+        },
+        resetDaily: true,
+        hideTrainer: true,
+        imageName: 'Bill\'s Grandpa without Eevee',
+    }
+);
+TemporaryBattleList['Santa Jynx 2'] = new TemporaryBattle(
+    'Santa Jynx 2',
+    [
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+    ],
+    'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
+    [
+        new SpecialEventRequirement('Merry Christmas!'),
+        new ItemRequirement(27, 'Christmas_present', GameConstants.AchievementOption.less),
+        new ItemRequirement(11, 'Christmas_present'),
+        new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
+    ],
+    undefined,
+    {
+        displayName: 'Santa Jynx Band',
+        firstTimeRewardFunction: () => {
+            new ChristmasPresent(3).gain();
+        },
+        resetDaily: true,
+        hideTrainer: true,
+        imageName: 'Bill\'s Grandpa without Eevee',
+    }
+);
+TemporaryBattleList['Santa Jynx 3'] = new TemporaryBattle(
+    'Santa Jynx 3',
+    [
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+        new GymPokemon('Santa Jynx', 2512, 20),
+    ],
+    'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
+    [
+        new SpecialEventRequirement('Merry Christmas!'),
+        new ItemRequirement(49, 'Christmas_present', GameConstants.AchievementOption.less),
+        new ItemRequirement(27, 'Christmas_present'),
+        new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
+    ],
+    undefined,
+    {
+        displayName: 'Santa Jynx Band',
+        firstTimeRewardFunction: () => {
+            new ChristmasPresent(6).gain();
+        },
+        resetDaily: true,
+        hideTrainer: true,
+        imageName: 'Bill\'s Grandpa without Eevee',
+    }
+);
+TemporaryBattleList['Santa Jynx 4'] = new TemporaryBattle(
+    'Santa Jynx 4',
+    [
+        new GymPokemon('Santa Jynx', 3768, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
+        new GymPokemon('Santa Jynx', 3768, 20),
+    ],
+    'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
+    [
+        new SpecialEventRequirement('Merry Christmas!'),
+        new ItemRequirement(49, 'Christmas_present'),
+        new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
+    ],
+    undefined,
+    {
+        displayName: 'Santa Jynx Band',
+        firstTimeRewardFunction: () => {
+            new ChristmasPresent(10).gain();
+        },
+        rewardFunction: () => {
+            if (player.itemList.Christmas_present() >= 150) {
+                player.itemList.Christmas_present(50);
+            }
+        },
+        resetDaily: true,
+        hideTrainer: true,
+        imageName: 'Bill\'s Grandpa without Eevee',
+    }
+);
 
 //Johto Temporary Battles
 TemporaryBattleList['Silver 1'] = new TemporaryBattle(

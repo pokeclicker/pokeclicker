@@ -107,7 +107,7 @@ describe('Test GameConstants', () => {
         expect(getDungeonRegion('Not a real dungeon')).toEqual(-1);
     });
     it('return the temp battles total index', () => {
-        expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(169);
+        expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(173);
         expect(getTemporaryBattlesIndex('Not a real temp battle')).toEqual(-1);
     });
 });

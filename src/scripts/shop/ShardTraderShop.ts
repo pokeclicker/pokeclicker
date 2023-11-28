@@ -20,7 +20,7 @@ class ShardTraderShop extends Shop {
 
         const deals = ShardDeal.getDeals(this.location)?.();
         if (deals) {
-            const pokemonDeals = deals.filter(d => d.item.itemType instanceof PokemonItem).map(d => d.item.itemType.type) as PokemonNameType[];
+            const pokemonDeals = deals.filter(d => d.item.itemType instanceof PokemonItem && d.item.itemType.isVisible()).map(d => d.item.itemType.type) as PokemonNameType[];
 
             if (!RouteHelper.listCompleted(pokemonDeals, false)) {
                 itemStatusArray.push(areaStatus.uncaughtPokemon);
@@ -35,5 +35,13 @@ class ShardTraderShop extends Shop {
             }
         }
         return Math.min(...itemStatusArray);
+    }
+
+    public isVisible(): boolean {
+        if (super.isVisible()) {
+            const deals = ShardDeal.getDeals(this.location)?.();
+            return !deals?.some(d => !d.item.itemType.isVisible()) ?? true;
+        }
+        return false;
     }
 }
