@@ -825,11 +825,11 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     CoronetHighlands: {
-        [Region.hisui]: new Set([38, 39, 40, 41, 42, 43, 44, 45, 46, 'Ancient Wayward Cave', 'Ancient Quarry', 'Primeval Grotto', 'Clamberclaw Cliffs', 'Celestica Ruins', 'Sacred Plaza', 'Temple of Sinnoh', 'Highlands Camp', 'Mountain Camp', 'Summit Camp', 'Moonview Arena']),
+        [Region.hisui]: new Set([38, 39, 40, 41, 42, 43, 44, 45, 46, 'Ancient Wayward Cave', 'Ancient Quarry', 'Primeval Grotto', 'Clamberclaw Cliffs', 'Celestica Ruins', 'Sacred Plaza', 'Temple of Sinnoh', 'Highlands Camp', 'Mountain Camp', 'Summit Camp', 'Moonview Arena', 'Stone Portal']),
     },
 
     AlabasterIcelands: {
-        [Region.hisui]: new Set([47, 48, 49, 50, 51, 52, 53, 54, 'Avalugg\'s Legacy', 'Ice Column Chamber', 'Icepeak Cavern', 'Ancient Snowpoint Temple', 'Ancient Lake Acuity', 'Snowfields Camp', 'Icepeak Camp', 'Pearl Settlement', 'Icepeak Arena', 'Stone Portal']),
+        [Region.hisui]: new Set([47, 48, 49, 50, 51, 52, 53, 54, 'Avalugg\'s Legacy', 'Ice Column Chamber', 'Icepeak Cavern', 'Ancient Snowpoint Temple', 'Ancient Lake Acuity', 'Snowfields Camp', 'Icepeak Camp', 'Pearl Settlement', 'Icepeak Arena']),
     },
 };
 
