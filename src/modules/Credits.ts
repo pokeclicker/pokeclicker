@@ -684,6 +684,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/823666951565344828/',
         resources: [
             'Cipher Peon (yellow)',
+            'XD001',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -1192,7 +1193,6 @@ export const SpriteCredits: Credit[] = [
             'Gengar (Punk)',
             'Tangela (Pom-pom)',
             'Goldeen (Diva)',
-            'XD001',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },
