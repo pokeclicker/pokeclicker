@@ -27,6 +27,10 @@ export class ShardDeal {
         this.questPointCost = this.item.itemType.basePrice / 4 || 1;
     }
 
+    public isVisible(): boolean {
+        return this.item.itemType.isVisible();
+    }
+
     public static getDeals(town: ShardTraderLocations) {
         return ShardDeal.list[town];
     }
@@ -648,6 +652,17 @@ export class ShardDeal {
     }
 
     public static generateSinnohDeals() {
+        ShardDeal.list[ShardTraderLocations['Sandgem Town']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Meadow Plate', amount: 5 },
+                        { shardTypeString: 'Pixie Plate', amount: 5 },
+                    ],
+                    ItemList['Elf Munchlax'],
+                    1),
+            ],
+        );
         ShardDeal.list[ShardTraderLocations['Oreburgh City']] = ko.observableArray(
             [
                 new ShardDeal(
