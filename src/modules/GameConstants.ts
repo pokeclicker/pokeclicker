@@ -318,6 +318,15 @@ export enum SafariTile {
 
 export const SAFARI_LEGAL_WALK_BLOCKS = [
     SafariTile.ground,
+    SafariTile.waterUL,
+    SafariTile.waterU,
+    SafariTile.waterUR,
+    SafariTile.waterL,
+    SafariTile.waterC,
+    SafariTile.waterR,
+    SafariTile.waterDL,
+    SafariTile.waterD,
+    SafariTile.waterDR,
     SafariTile.grass,
     SafariTile.sandUL,
     SafariTile.sandU,
