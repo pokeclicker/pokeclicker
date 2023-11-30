@@ -2514,6 +2514,12 @@ class Update implements Saveable {
             // NormaliumZ
             saveData.badgeCase.splice(93, 1);
 
+            // Santa Jynx TempBattles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+
             // Fix Hopo berry visible in berrydex when not available
             saveData.farming.mutations[71] = false;
 

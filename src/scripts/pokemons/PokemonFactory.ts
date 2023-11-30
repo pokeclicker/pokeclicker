@@ -318,6 +318,8 @@ class PokemonFactory {
             case 'Rare_Candy':
                 chance = GameConstants.HELD_CANDY_ITEM_CHANCE;
                 break;
+            case 'Christmas_present':
+                chance = GameConstants.CHRISTMAS_ITEM_CHANCE;
         }
 
         chance /= modifier;
