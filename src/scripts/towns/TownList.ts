@@ -8405,7 +8405,7 @@ const Peonia1 = new NPC ('Peonia', [
 const Peonia2 = new NPC ('Peonia', [
     'You\'re back! So I take it you saw one? A Gigantamax Pikachu, huh? Yeah, I saw one of those too! I also saw 2 others: Meowth and Eevee. Maybe you\'ll see them when you go back in.',
     'Unfortunately, it seems these 3 are the only ones here at the moment. However, there\'s something you could do if you want to lure in more of them.',
-    'I imagine you\'ve noticed some haxagonal rock formations on your journey, right? Those are called Raid Dens. You can find them in the mainland\'s Wild area, the Isle of Armor, and here in the Crown Tundra.',
+    'I imagine you\'ve noticed some hexagonal rock formations on your journey, right? Those are called Raid Dens. You can find them in the mainland\'s Wild Area, the Isle of Armor, and here in the Crown Tundra.',
     'Every day some of them glow red and emit a purple beam. It seems there are 10 a day, consistently, for some unknown reason. Here, download this app, and they\'ll show up on your map!',
     'Anyway, in each of these Raid Dens, there\'s a Gigantamax Pokémon! You can\'t catch \'em though, they\'ll turn back to their regular form and run before you get the chance.',
     'However! They\'ll each drop a stone called a Wishing Piece. If you gather enough of those stones here, more Gigantamax Pokémon\'ll show up! Dunno which ones, probably just your luck.',
