@@ -241,12 +241,14 @@ export const ROUTE_HELD_ITEM_MODIFIER = 1;
 export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
+export const HELD_CANDY_ITEM_CHANCE = 1024;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const GRISEOUS_ITEM_CHANCE = 50;
 export const DNA_ITEM_CHANCE = 45;
 export const LIGHT_ITEM_CHANCE = 75;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
+export const CHRISTMAS_ITEM_CHANCE = 10;
 
 // Gems
 export const GEM_UPGRADE_COST = 500;
@@ -1711,6 +1713,10 @@ export const TemporaryBattles = [
     'Ash Ketchum New Island',
     'Bill\'s Grandpa',
     'Blue 6',
+    'Santa Jynx 1',
+    'Santa Jynx 2',
+    'Santa Jynx 3',
+    'Santa Jynx 4',
     'Silver 1',
     'Silver 2',
     'Sudowoodo',
@@ -2149,6 +2155,7 @@ export enum ShardTraderLocations {
     'Pacifidlog Town',
     'Sootopolis City',
     'Ever Grande City',
+    'Sandgem City',
     'Oreburgh City',
     'Floaroma Town',
     'Eterna City',
