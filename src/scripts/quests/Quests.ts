@@ -281,7 +281,7 @@ class Quests implements Saveable {
     public questProgressTooltip() {
         const level = this.level();
         const xp = this.xp();
-        return {title : `${xp - this.levelToXP(level)} / ${this.levelToXP(level + 1) - this.levelToXP(level)}`, trigger : 'hover' };
+        return {title : `${(xp - this.levelToXP(level)).toLocaleString('en-US')} / ${(this.levelToXP(level + 1) - this.levelToXP(level)).toLocaleString('en-US')}`, trigger : 'hover' };
     }
 
     public isDailyQuestsUnlocked() {
