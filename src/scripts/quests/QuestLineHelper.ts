@@ -3652,7 +3652,7 @@ class QuestLineHelper {
     }
 
     public static createOriginalColorMagearnaQuestLine() {
-        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have recieved a Mystery Gift.',
+        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have received a Mystery Gift.',
             new MultiRequirement([
                 new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
                 new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
