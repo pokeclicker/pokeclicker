@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.10.15"></script>
+    <script src="scripts/modules.min.js?v=0.10.16"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.10.15"></script>
+    <script src="scripts/script.min.js?v=0.10.16"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.10.15" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.10.16" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -499,7 +499,7 @@
                                             <div class="d-inline-block" data-bind="text: displayName" style="margin-left: 20px; margin-top: 8px;">Name</div>
                                             <span class="mr-1" style="float: right; margin-top: 8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsPokerusData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
                                                 <span class="stoneEvolutionStatuses" data-bind="foreach: statuses">
-                                                    <span class="" data-bind="template: { name: 'pokerusStatusTemplate', data: { pokerus: $data.status } }"></span>
+                                                    <span class="" data-bind="template: { name: 'pokerusStatusTemplate', data: { pokerus: $data.status, evs: $data.evs } }"></span>
                                                 </span>
                                             </span>
                                             <span class="mr-1" style="float: right; margin-top: 8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
@@ -1223,7 +1223,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                 <img src="" data-bind="attr: { src: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].image,  }">
               </td>
               <td class="p-0 bg-secondary" colspan="4" rowspan="2">
-                <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1) * 100}% Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
+                <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent' })} Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
               </td>
             </tr>
             <tr></tr>
@@ -1459,7 +1459,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                                     <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
-                            <td class="col" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue() && PokemonContestController.requirements.isCompleted()">
+                            <td class="col" data-bind="visible: Settings.getSetting('currencyMainDisplayExtended').observableValue() && (App.game.wallet.currencies[GameConstants.Currency.contestToken]() > 0)">
                                 <span style="display: inline; position: relative;">
                                     <img title="Contest Tokens&#013;&#010;Gained by competing in Contests" src="assets/images/currency/contestToken.svg" height="25px">
                                     <span id="animateCurrency-contestToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.contestToken]()) : App.game.wallet.currencies[GameConstants.Currency.contestToken]().toLocaleString('en-US')">0</span>
@@ -1484,7 +1484,9 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                                     <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon name</knockout>
                                     <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
                                     <knockout style="position: relative; top: -1px;"
-                                        data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': PartyController.getPokerusStatus(Battle.enemyPokemon().id) }}">
+                                        data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                            'pokerus': PartyController.getPokerusStatus(Battle.enemyPokemon().id),
+                                            'evs': App.game.party.getPokemon(Battle.enemyPokemon().id)?.evs() }}">
                                     </knockout>
                                 </knockout>
                             </h2>
@@ -1582,7 +1584,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
             </knockout>
 
             <knockout class="left">
-                <!-- ko if: DungeonBattle.trainer() && !DungeonBattle.trainer().options?.hideTrainer -->
+                <!-- ko if: DungeonBattle.trainer() -->
                 <knockout data-bind="text: DungeonBattle.trainer().name">Trainer name</knockout>
                 <!-- /ko -->
             </knockout>
@@ -2028,29 +2030,34 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </div>
     <div style="flex-grow: 1;"></div>
     <knockout data-bind="if: (player.town().dungeon && player.town() instanceof DungeonTown)">
-      <div id="dungeonPokemonList" class="card">
+      <div id="dungeonPokemonList" class="card pt-2 pb-3 px-1">
         <!--Display all available Pokémon in this dungeon-->
-        <ul class="list-inline">
+        <ul class="list-inline mb-0">
           <!-- ko foreach: player.town().dungeon.normalEncounterList.filter(i => !i.hide) -->
           <li class="list-inline-item">
-            <img class="boss" src="assets/images/dungeons/chest.png" data-bind="hidden: !$data.mimic"/>
-            <img class="dungeon-pokemon-pkrs" src="" data-bind="
-            attr:{ src: $data.pkrsImage },
-            tooltip: {
-                title: $data.EVs,
-                placement: 'bottom',
+            <!-- ko if: $data.mimic -->
+            <img class="boss" data-bind="attr: { src: `assets/images/dungeons/chest-${$data.mimicTier}.png` }, tooltip: {
+                title: GameConstants.camelCaseToString($data.mimicTier),
                 trigger: 'hover'
-            }" />
+            }"/>
+            <!-- /ko -->
+            <img class="dungeon-pokemon-pkrs" src="" data-bind="
+                attr:{ src: $data.pkrsImage },
+                tooltip: {
+                    title: $data.EVs,
+                    placement: 'bottom',
+                    trigger: 'hover'
+                }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-            css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+                css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
-            hidden: !$data.lock,
-            tooltip: {
-                title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
-                placement: 'bottom',
-                trigger: 'hover'
-            }">
+                hidden: !$data.lock,
+                tooltip: {
+                    title: $data.lockMessage,
+                    placement: 'left',
+                    trigger: 'hover'
+                }" />
           </li>
           <!-- /ko -->
           <!--Display all available bosses in this dungeon-->
@@ -2058,24 +2065,24 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
           <li class="list-inline-item">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
             <img class="dungeon-pokemon-pkrs" src="" data-bind="
-            attr:{ src: $data.pkrsImage },
-            tooltip: {
-                title: $data.EVs,
-                placement: 'bottom',
-                trigger: 'hover'
-            }" />
+                attr:{ src: $data.pkrsImage },
+                tooltip: {
+                    title: $data.EVs,
+                    placement: 'bottom',
+                    trigger: 'hover'
+                }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-            css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+                css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
-            tooltip: {
-                title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
-                placement: 'bottom',
-                trigger: 'hover'
-            }">
+                tooltip: {
+                    title: $data.lockMessage,
+                    placement: 'bottom',
+                    trigger: 'hover'
+                }" />
           </li>
           <!-- /ko -->
-          <!-- ko if: player.town().dungeon.allAvailableShadowPokemon().some(p => App.game.party.getPokemonByName(p)?.shadow < GameConstants.ShadowStatus.Shadow) -->
+          <!-- ko if: player.town().dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) -->
           <li class="list-inline-item">
             <img class="boss" src="assets/images/status/shadow.svg"/>
             <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src="assets/images/npcs/specialNPCs/Mysterious Trainer.png"/>
@@ -2242,8 +2249,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.15',
-            href:'assets/images/kanto-kanto.png?v=0.10.15'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.16',
+            href:'assets/images/kanto-kanto.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -3298,6 +3305,78 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     
 
 </g>
+
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Route 26-->
+        
+
+<rect class="city"
+    data-town="Route 26" 
+    x="112"
+    y="464"
+    height="240"
+    width="48"
+    data-bind="attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? &#39;unlockedRoute&#39; : &#39;lockedRoute&#39; },
+            click: () =&gt; {
+                Notifier.notify({message: &#39;Seems like this path leads to another region. You can travel there using the dock in Vermilion City.&#39;});
+                },
+		playerSpriteMove">
+</rect>
+
+
+        <!--Route 27-->
+        
+
+<rect class="city"
+    data-town="Route 27" 
+    x="0"
+    y="656"
+    height="48"
+    width="112"
+    data-bind="attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? &#39;unlockedRoute&#39; : &#39;lockedRoute&#39; },
+            click: () =&gt; {
+                Notifier.notify({message: &#39;Seems like this path leads to another region. You can travel there using the dock in Vermilion City.&#39;});
+                },
+		playerSpriteMove">
+</rect>
+
+
+        <!--Route 28-->
+        
+
+<rect class="city"
+    data-town="Route 28" 
+    x="0"
+    y="416"
+    height="48"
+    width="112"
+    data-bind="attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? &#39;unlockedRoute&#39; : &#39;lockedRoute&#39; },
+            click: () =&gt; {
+                Notifier.notify({message: &#39;Seems like this path leads to another region. You can travel there using the dock in Vermilion City.&#39;});
+                },
+		playerSpriteMove">
+</rect>
+
+
+        <!--Route 28 Extension-->
+        
+
+<rect class="city"
+    data-town="Route 28" 
+    x="0"
+    y="480"
+    height="64"
+    width="32"
+    data-bind="attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? &#39;unlockedRoute&#39; : &#39;lockedRoute&#39; },
+            click: () =&gt; {
+                Notifier.notify({message: &#39;Seems like this path leads to another region. You can travel there using the dock in Vermilion City.&#39;});
+                },
+		playerSpriteMove">
+</rect>
 
 
         <!-- ----- -->
@@ -4733,8 +4812,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.15',
-            href:'assets/images/kanto-sevii123.png?v=0.10.15'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.16',
+            href:'assets/images/kanto-sevii123.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -5302,8 +5381,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.15',
-            href:'assets/images/kanto-sevii4567.png?v=0.10.15'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.16',
+            href:'assets/images/kanto-sevii4567.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -6899,8 +6978,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.10.15',
-        href:'assets/images/johto.png?v=0.10.15'
+        'xlink:href':'assets/images/johto.png?v=0.10.16',
+        href:'assets/images/johto.png?v=0.10.16'
     }"></image>
 
     <!-- ------ -->
@@ -6948,30 +7027,30 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 <g
 
-    transform="rotate(90 ,1488, 352)"
+    transform="rotate(90 ,1488, 336)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(26, 1); } ">
     <rect data-route='26'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 1) }"
         height="48"
-        width="320"
-        x="1488" y="304">
+        width="336"
+        x="1488" y="288">
     </rect>
 
     <text style="font-size: 32px"
-        x="1632"
-        y="338"
+        x="1640"
+        y="322"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(26, 1)">
         26
     </text>
     <image width="48" height="48"
-        x="1624"
-        y="304"
+        x="1632"
+        y="288"
         class="iconLocation hide"
         transform='rotate(-90)'
         rotate="true"
         localx="1488"
-        localy="352"
+        localy="336"
         data-bind="visible: MapHelper.isRouteCurrentLocation(26, 1),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
             playerSpriteMove">
@@ -6990,29 +7069,80 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <rect data-route='28'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 1) }"
         height="48"
-        width="192"
-        x="1296" y="528">
+        width="128"
+        x="1360" y="432">
     </rect>
 
     <text style="font-size: 32px"
-        x="1376"
-        y="562"
+        x="1408"
+        y="466"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(28, 1)">
         28
     </text>
     <image width="48" height="48"
-        x="1368"
-        y="528"
+        x="1400"
+        y="432"
         class="iconLocation hide"
         transform='rotate(0)'
         rotate=""
-        localx="1296"
-        localy="528"
+        localx="1360"
+        localy="432"
         data-bind="visible: MapHelper.isRouteCurrentLocation(28, 1),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
             playerSpriteMove">
     </image>
     
+
+</g>
+
+
+     <!--Route 28 Extension-->
+     
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(28, 1); } ">
+    <rect data-route='28'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 1) }"
+        height="64"
+        width="48"
+        x="1360" y="480">
+    </rect>
+
+
+</g>
+
+
+     <!--Route 28 Extension-->
+     
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(28, 1); } ">
+    <rect data-route='28'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 1) }"
+        height="64"
+        width="32"
+        x="1328" y="496">
+    </rect>
+
+
+</g>
+
+
+     <!--Route 28 Extension-->
+     
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(28, 1); } ">
+    <rect data-route='28'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 1) }"
+        height="64"
+        width="32"
+        x="1296" y="512">
+    </rect>
+
 
 </g>
 
@@ -7563,8 +7693,24 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <rect data-route='41'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 1) }"
         height="48"
-        width="96"
+        width="64"
         x="128" y="672">
+    </rect>
+
+
+</g>
+
+    <!--Extra bit of Route 41-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(41, 1); } ">
+    <rect data-route='41'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 1) }"
+        height="32"
+        width="32"
+        x="192" y="688">
     </rect>
 
 
@@ -7771,32 +7917,30 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 <g
 
-    transform="rotate(90 ,1120, 192)"
+    transform="rotate(90 ,1120, 208)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(45, 1); } ">
     <rect data-route='45'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(45, 1) }"
         height="48"
-        width="32"
-        x="1120" y="144">
+        width="16"
+        x="1120" y="160">
     </rect>
 
 
 </g>
 
-    <!--Extra bit of Route 45-->
-   
+     <!--Extra bit of Route 45-->
+    
 
 <g
-
-    transform="rotate(90 ,1136, 432)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(45, 1); } ">
     <rect data-route='45'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(45, 1) }"
-        height="32"
-        width="64"
-        x="1136" y="400">
+        height="64"
+        width="32"
+        x="1136" y="432">
     </rect>
 
 
@@ -7808,30 +7952,30 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 <g
 
-    transform="rotate(90 ,1040, 480)"
+    transform="rotate(90 ,1040, 496)"
 
     data-bind="click:function(){ MapHelper.moveToRoute(46, 1); } ">
     <rect data-route='46'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(46, 1) }"
         height="48"
-        width="192"
-        x="1040" y="432">
+        width="176"
+        x="1040" y="448">
     </rect>
 
     <text style="font-size: 32px"
-        x="1120"
-        y="466"
+        x="1112"
+        y="482"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(46, 1)">
         46
     </text>
     <image width="48" height="48"
-        x="1112"
-        y="432"
+        x="1104"
+        y="448"
         class="iconLocation hide"
         transform='rotate(-90)'
         rotate="true"
         localx="1040"
-        localy="480"
+        localy="496"
         data-bind="visible: MapHelper.isRouteCurrentLocation(46, 1),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
             playerSpriteMove">
@@ -7848,27 +7992,9 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     data-bind="click:function(){ MapHelper.moveToRoute(46, 1); } ">
     <rect data-route='46'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(46, 1) }"
-        height="16"
-        width="32"
-        x="1088" y="480">
-    </rect>
-
-
-</g>
-
-    <!--Extra bit of Route 46-->
-    
-
-<g
-
-    transform="rotate(90 ,1040, 448)"
-
-    data-bind="click:function(){ MapHelper.moveToRoute(46, 1); } ">
-    <rect data-route='46'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(46, 1) }"
         height="32"
         width="32"
-        x="1040" y="416">
+        x="1040" y="464">
     </rect>
 
 
@@ -8141,6 +8267,32 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 
 
+    <!--National Park-->
+    
+
+<rect class="city"
+    data-town="National Park"
+    x="352"
+    y="232"
+    height="72"
+    width="96"
+    data-bind="
+        click:function(){MapHelper.moveToTown('National Park')},
+        attr: { class: MapHelper.calculateTownCssClass('National Park') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="376"
+        y="244"
+        class="iconLocation hide"
+        data-bind="visible: MapHelper.isTownCurrentLocation('National Park'),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+            playerSpriteMove">
+    </image>
+
+
+
     <!--Ecruteak City-->
     
 
@@ -8292,10 +8444,10 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 <rect class="city"
     data-town="Indigo Plateau Johto"
-    x="1440"
-    y="64"
-    height="88"
-    width="144"
+    x="1424"
+    y="0"
+    height="16"
+    width="176"
     data-bind="
         click:function(){MapHelper.moveToTown('Indigo Plateau Johto')},
         attr: { class: MapHelper.calculateTownCssClass('Indigo Plateau Johto') },
@@ -8304,7 +8456,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="1488"
-        y="84"
+        y="-16"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Indigo Plateau Johto'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -8318,10 +8470,10 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 <rect class="city"
     data-town="Indigo Plateau Johto"
-    x="1488"
-    y="152"
-    height="152"
-    width="48"
+    x="1408"
+    y="16"
+    height="16"
+    width="192"
     data-bind="
         click:function(){MapHelper.moveToTown('Indigo Plateau Johto')},
         attr: { class: MapHelper.calculateTownCssClass('Indigo Plateau Johto') },
@@ -8329,7 +8481,20 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 </rect>
 
 
+    <!--Indigo Plateau 2.0 Extension-->
+    
 
+<rect class="city"
+    data-town="Indigo Plateau Johto"
+    x="1392"
+    y="32"
+    height="176"
+    width="208"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Indigo Plateau Johto')},
+        attr: { class: MapHelper.calculateTownCssClass('Indigo Plateau Johto') },
+        ">
+</rect>
 
 
 
@@ -8575,7 +8740,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
         data-town="Whirl Islands"
         x="192"
         y="624"
-        height="48"
+        height="64"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Whirl Islands')},
             attr: { class: MapHelper.calculateTownCssClass('Whirl Islands') }">
@@ -8584,7 +8749,85 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="200"
+        y="632"
+        class="iconLocation hide"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Whirl Islands'),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+            playerSpriteMove">
+    </image>
+
+
+
+    <!--Whirl Islands Extension-->
+    
+
+
+    <rect class="city"
+        data-town="Whirl Islands"
+        x="256"
         y="624"
+        height="48"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Whirl Islands')},
+            attr: { class: MapHelper.calculateTownCssClass('Whirl Islands') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="240"
+        y="624"
+        class="iconLocation hide"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Whirl Islands'),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+            playerSpriteMove">
+    </image>
+
+
+
+    <!--Whirl Islands Extension-->
+    
+
+
+    <rect class="city"
+        data-town="Whirl Islands"
+        x="256"
+        y="704"
+        height="32"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Whirl Islands')},
+            attr: { class: MapHelper.calculateTownCssClass('Whirl Islands') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="256"
+        y="696"
+        class="iconLocation hide"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Whirl Islands'),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+            playerSpriteMove">
+    </image>
+
+
+
+    <!--Whirl Islands Extension-->
+    
+
+
+    <rect class="city"
+        data-town="Whirl Islands"
+        x="304"
+        y="688"
+        height="32"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Whirl Islands')},
+            attr: { class: MapHelper.calculateTownCssClass('Whirl Islands') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="288"
+        y="680"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Whirl Islands'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -8702,37 +8945,21 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
         data-town="Ice Path"
         x="1104"
         y="144"
-        height="48"
-        width="64"
+        height="64"
+        width="96"
         data-bind="click:function(){MapHelper.moveToTown('Ice Path')},
             attr: { class: MapHelper.calculateTownCssClass('Ice Path') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="1112"
-        y="144"
+        x="1128"
+        y="152"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Ice Path'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
             playerSpriteMove">
     </image>
-
-
-     <!--Ice Path Extension-->
-     
-
-
-    <rect class="city"
-        data-town="Ice Path"
-        x="1168"
-        y="176"
-        height="16"
-        width="16"
-        data-bind="click:function(){MapHelper.moveToTown('Ice Path')},
-            attr: { class: MapHelper.calculateTownCssClass('Ice Path') }">
-    </rect>
-
 
 
 
@@ -8744,7 +8971,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
         data-town="Dark Cave"
         x="1072"
         y="432"
-        height="48"
+        height="64"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Dark Cave')},
             attr: { class: MapHelper.calculateTownCssClass('Dark Cave') }">
@@ -8753,28 +8980,12 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="1080"
-        y="432"
+        y="440"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Dark Cave'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
             playerSpriteMove">
     </image>
-
-
-     <!--Dark Cave Extension-->
-     
-
-
-    <rect class="city"
-        data-town="Dark Cave"
-        x="1120"
-        y="480"
-        height="16"
-        width="16"
-        data-bind="click:function(){MapHelper.moveToTown('Dark Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Dark Cave') }">
-    </rect>
-
 
 
      <!--Dark Cave Extension-->
@@ -8835,18 +9046,18 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <rect class="city"
         data-town="Victory Road Johto"
-        x="1488"
-        y="304"
-        height="48"
-        width="64"
+        x="1456"
+        y="208"
+        height="128"
+        width="112"
         data-bind="click:function(){MapHelper.moveToTown('Victory Road Johto')},
             attr: { class: MapHelper.calculateTownCssClass('Victory Road Johto') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="1496"
-        y="304"
+        x="1488"
+        y="248"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Victory Road Johto'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -8896,6 +9107,51 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 
 
+     <!--Mt. Silver Extension-->
+     
+
+
+    <rect class="city"
+        data-town="Mt. Silver"
+        x="1232"
+        y="304"
+        height="64"
+        width="112"
+        data-bind="click:function(){MapHelper.moveToTown('Mt. Silver')},
+            attr: { class: MapHelper.calculateTownCssClass('Mt. Silver') }">
+    </rect>
+
+
+
+     <!--Mt. Silver Extension-->
+     
+
+
+    <rect class="city"
+        data-town="Mt. Silver"
+        x="1200"
+        y="368"
+        height="96"
+        width="144"
+        data-bind="click:function(){MapHelper.moveToTown('Mt. Silver')},
+            attr: { class: MapHelper.calculateTownCssClass('Mt. Silver') }">
+    </rect>
+
+
+
+     <!--Mt. Silver Extension-->
+     
+
+
+    <rect class="city"
+        data-town="Mt. Silver"
+        x="1200"
+        y="464"
+        height="32"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Mt. Silver')},
+            attr: { class: MapHelper.calculateTownCssClass('Mt. Silver') }">
+    </rect>
 
 
 
@@ -8965,6 +9221,22 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     height="64"
     width="64"
     data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; },
+		playerSpriteMove">
+</rect>
+
+
+     
+
+<rect class="city"
+    data-town="Route 22" 
+    x="1536"
+    y="416"
+    height="48"
+    width="64"
+    data-bind="attr: { class: MapHelper.accessToRoute(22, GameConstants.Region.johto) ? &#39;unlockedRoute&#39; : &#39;lockedRoute&#39; },
+        click: () =&gt; {
+            Notifier.notify({message: &#39;Seems like this path leads to another region. You can travel there using the dock in Olivine City.&#39;});
+            },
 		playerSpriteMove">
 </rect>
 
@@ -9229,6 +9501,60 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 </image>
 
 
+    
+
+<image href="assets/images/map/red-back.png" xlink:href="assets/images/map/red-back.png"
+    x="1264"
+    y="312"
+    height="64"
+    width="64"
+    data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Elite_JohtoChampion)"/>
+<rect class="city"
+    data-town="Red"
+    x="1264"
+    y="312"
+    height="64"
+    width="64"
+    data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Elite_JohtoChampion), click: () =&gt; {
+            Notifier.notify({message: &#39;...&#39;});
+        }">
+</rect>
+<image width="48" height="48"
+    x="1272"
+    y="320"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && App.game.badgeCase.hasBadge(BadgeEnums.Elite_JohtoChampion),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+    
+
+<image href="assets/images/map/red.png" xlink:href="assets/images/map/red.png"
+    x="1264"
+    y="312"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Red&#39;] &amp;&amp; TemporaryBattleList[&#39;Red&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Red"
+    x="1264"
+    y="312"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Red&#39;] &amp;&amp; TemporaryBattleList[&#39;Red&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Red&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1272"
+    y="320"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Red&#39;] &amp;&amp; TemporaryBattleList[&#39;Red&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
      
 
 <image href="assets/images/map/ashketchumoverworld.png" xlink:href="assets/images/map/ashketchumoverworld.png"
@@ -9284,8 +9610,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.10.15',
-        href:'assets/images/hoenn.png?v=0.10.15'
+        'xlink:href':'assets/images/hoenn.png?v=0.10.16',
+        href:'assets/images/hoenn.png?v=0.10.16'
     }"></image>
 
     <!-- ------ -->
@@ -9886,7 +10212,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <rect data-route='115'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(115, 2) }"
         height="48"
-        width="32"
+        width="16"
         x="16" y="160">
     </rect>
 
@@ -10872,6 +11198,21 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 </g>
 
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(134, 2); } ">
+    <rect data-route='134'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(134, 2) }"
+        height="16"
+        width="48"
+        x="624" y="640">
+    </rect>
+
+
+</g>
+
 
     <!-- ----- -->
     <!-- TOWNS -->
@@ -11109,8 +11450,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 <rect class="city"
     data-town="Mt. Chimney"
     x="336"
-    y="176"
-    height="80"
+    y="160"
+    height="96"
     width="128"
     data-bind="
         click:function(){MapHelper.moveToTown('Mt. Chimney')},
@@ -11120,7 +11461,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="376"
-        y="192"
+        y="184"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Mt. Chimney'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -11662,7 +12003,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
         data-town="Granite Cave"
         x="64"
         y="864"
-        height="64"
+        height="48"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Granite Cave')},
             attr: { class: MapHelper.calculateTownCssClass('Granite Cave') }">
@@ -11671,12 +12012,57 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="72"
-        y="872"
+        y="864"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Granite Cave'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
             playerSpriteMove">
     </image>
+
+
+    
+
+
+    <rect class="city"
+        data-town="Granite Cave"
+        x="48"
+        y="880"
+        height="64"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Granite Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Granite Cave') }">
+    </rect>
+
+
+
+    
+
+
+    <rect class="city"
+        data-town="Granite Cave"
+        x="64"
+        y="912"
+        height="16"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Granite Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Granite Cave') }">
+    </rect>
+
+
+
+    
+
+
+    <rect class="city"
+        data-town="Granite Cave"
+        x="64"
+        y="928"
+        height="16"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Granite Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Granite Cave') }">
+    </rect>
+
 
 
 
@@ -11687,7 +12073,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="376"
-        y="192"
+        y="184"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Fiery Path'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -11703,7 +12089,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="376"
-        y="192"
+        y="184"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Mt. Chimney Crater'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -11719,7 +12105,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="376"
-        y="192"
+        y="184"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Jagged Pass'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -11735,7 +12121,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="376"
-        y="192"
+        y="184"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Magma Hideout'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -11769,6 +12155,21 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </image>
 
 
+    
+
+
+    <rect class="city"
+        data-town="New Mauville"
+        x="528"
+        y="480"
+        height="16"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('New Mauville')},
+            attr: { class: MapHelper.calculateTownCssClass('New Mauville') }">
+    </rect>
+
+
+
 
     <!--Meteor Falls-->
     
@@ -11776,23 +12177,38 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <rect class="city"
         data-town="Meteor Falls"
-        x="48"
-        y="160"
-        height="48"
-        width="64"
+        x="32"
+        y="112"
+        height="96"
+        width="80"
         data-bind="click:function(){MapHelper.moveToTown('Meteor Falls')},
             attr: { class: MapHelper.calculateTownCssClass('Meteor Falls') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="56"
-        y="160"
+        x="48"
+        y="136"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Meteor Falls'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
             playerSpriteMove">
     </image>
+
+
+    
+
+
+    <rect class="city"
+        data-town="Meteor Falls"
+        x="48"
+        y="96"
+        height="16"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Meteor Falls')},
+            attr: { class: MapHelper.calculateTownCssClass('Meteor Falls') }">
+    </rect>
+
 
 
 
@@ -11829,8 +12245,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <rect class="city"
         data-town="Mt. Pyre"
         x="928"
-        y="288"
-        height="64"
+        y="272"
+        height="80"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Mt. Pyre')},
             attr: { class: MapHelper.calculateTownCssClass('Mt. Pyre') }">
@@ -11839,7 +12255,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <image width="48" height="48"
         x="936"
-        y="296"
+        y="288"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Mt. Pyre'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -11854,8 +12270,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <rect class="city"
         data-town="Mt. Pyre"
         x="992"
-        y="304"
-        height="48"
+        y="288"
+        height="64"
         width="16"
         data-bind="click:function(){MapHelper.moveToTown('Mt. Pyre')},
             attr: { class: MapHelper.calculateTownCssClass('Mt. Pyre') }">
@@ -11895,10 +12311,10 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <rect class="city"
         data-town="Aqua Hideout"
-        x="1168"
+        x="1152"
         y="176"
         height="32"
-        width="16"
+        width="32"
         data-bind="click:function(){MapHelper.moveToTown('Aqua Hideout')},
             attr: { class: MapHelper.calculateTownCssClass('Aqua Hideout') }">
     </rect>
@@ -12019,14 +12435,14 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
         x="1472"
         y="560"
         height="64"
-        width="112"
+        width="128"
         data-bind="click:function(){MapHelper.moveToTown('Victory Road Hoenn')},
             attr: { class: MapHelper.calculateTownCssClass('Victory Road Hoenn') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="1504"
+        x="1512"
         y="568"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Victory Road Hoenn'),
@@ -12041,10 +12457,25 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <rect class="city"
         data-town="Victory Road Hoenn"
-        x="1520"
+        x="1488"
         y="544"
         height="16"
-        width="48"
+        width="96"
+        data-bind="click:function(){MapHelper.moveToTown('Victory Road Hoenn')},
+            attr: { class: MapHelper.calculateTownCssClass('Victory Road Hoenn') }">
+    </rect>
+
+
+
+    
+
+
+    <rect class="city"
+        data-town="Victory Road Hoenn"
+        x="1472"
+        y="624"
+        height="16"
+        width="96"
         data-bind="click:function(){MapHelper.moveToTown('Victory Road Hoenn')},
             attr: { class: MapHelper.calculateTownCssClass('Victory Road Hoenn') }">
     </rect>
@@ -12670,8 +13101,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
      <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Orre').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/orre.png?v=0.10.15',
-            href:'assets/images/orre.png?v=0.10.15'
+            'xlink:href':'assets/images/orre.png?v=0.10.16',
+            href:'assets/images/orre.png?v=0.10.16'
         }"></image>
 
     <!-- ------ -->
@@ -14030,8 +14461,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.10.15',
-        href:'assets/images/sinnoh.png?v=0.10.15'
+        'xlink:href':'assets/images/sinnoh.png?v=0.10.16',
+        href:'assets/images/sinnoh.png?v=0.10.16'
     }"></image>
 
     <!-- ------ -->
@@ -15930,6 +16361,32 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 
 
+    <!--Great Marsh-->
+    
+
+<rect class="city"
+    data-town="Great Marsh"
+    x="928"
+    y="720"
+    height="80"
+    width="96"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Great Marsh')},
+        attr: { class: MapHelper.calculateTownCssClass('Great Marsh') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="952"
+        y="736"
+        class="iconLocation hide"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Great Marsh'),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+            playerSpriteMove">
+    </image>
+
+
+
     <!--Sunyshore City-->
     
 
@@ -17100,8 +17557,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.10.15',
-        href:'assets/images/unova.png?v=0.10.15'
+        'xlink:href':'assets/images/unova.png?v=0.10.16',
+        href:'assets/images/unova.png?v=0.10.16'
     }"></image>
 
     <!-- ------ -->
@@ -20170,12 +20627,117 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 </image>
 
 
+    
+
+<image href="assets/images/map/Overworld Genesect.png" xlink:href="assets/images/map/Overworld Genesect.png"
+    x="720"
+    y="720"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Genesect Burn&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Burn&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Genesect Burn"
+    x="720"
+    y="720"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Genesect Burn&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Burn&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Genesect Burn&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="728"
+    y="728"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Genesect Burn&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Burn&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+
+    
+
+<image href="assets/images/map/Overworld Genesect.png" xlink:href="assets/images/map/Overworld Genesect.png"
+    x="864"
+    y="816"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Genesect Chill&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Chill&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Genesect Chill"
+    x="864"
+    y="816"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Genesect Chill&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Chill&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Genesect Chill&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="872"
+    y="824"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Genesect Chill&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Chill&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+    
+
+<image href="assets/images/map/Overworld Genesect.png" xlink:href="assets/images/map/Overworld Genesect.png"
+    x="720"
+    y="816"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Genesect Douse&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Douse&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Genesect Douse"
+    x="720"
+    y="816"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Genesect Douse&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Douse&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Genesect Douse&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="728"
+    y="824"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Genesect Douse&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Douse&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+    
+
+<image href="assets/images/map/Overworld Genesect.png" xlink:href="assets/images/map/Overworld Genesect.png"
+    x="864"
+    y="720"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Genesect Shock&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Shock&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Genesect Shock"
+    x="864"
+    y="720"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Genesect Shock&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Shock&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Genesect Shock&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="872"
+    y="728"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Genesect Shock&#39;] &amp;&amp; TemporaryBattleList[&#39;Genesect Shock&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.10.15',
-        href:'assets/images/kalos.png?v=0.10.15'
+        'xlink:href':'assets/images/kalos.png?v=0.10.16',
+        href:'assets/images/kalos.png?v=0.10.16'
     }"></image>
 
     <!-- ------ -->
@@ -22795,8 +23357,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.10.15',
-            href:'assets/images/alola-melemele.png?v=0.10.15'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.10.16',
+            href:'assets/images/alola-melemele.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -26153,8 +26715,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.10.15',
-            href:'assets/images/alola-akala.png?v=0.10.15'
+            'xlink:href':'assets/images/alola-akala.png?v=0.10.16',
+            href:'assets/images/alola-akala.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -27238,7 +27800,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <rect data-route='21'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 6) }"
         height="96"
-        width="32"
+        width="48"
         x="960" y="800">
     </rect>
 
@@ -28186,18 +28748,18 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <rect class="city"
         data-town="Ruins of Life"
-        x="944"
-        y="736"
-        height="64"
-        width="64"
+        x="960"
+        y="760"
+        height="40"
+        width="48"
         data-bind="click:function(){MapHelper.moveToTown('Ruins of Life')},
             attr: { class: MapHelper.calculateTownCssClass('Ruins of Life') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="952"
-        y="744"
+        x="960"
+        y="756"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Ruins of Life'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -28405,8 +28967,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.15',
-            href:'assets/images/alola-ulaula.png?v=0.10.15'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.16',
+            href:'assets/images/alola-ulaula.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -29179,25 +29741,25 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
     <rect data-route='23'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
-        height="104"
-        width="96"
-        x="976" y="472">
+        height="96"
+        width="80"
+        x="976" y="480">
     </rect>
 
     <text style="font-size: 32px"
-        x="992"
-        y="534"
+        x="984"
+        y="538"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(23, 6)">
         H.D.
     </text>
     <image width="48" height="48"
-        x="1000"
-        y="500"
+        x="992"
+        y="504"
         class="iconLocation hide"
         transform='rotate(0)'
         rotate=""
         localx="976"
-        localy="472"
+        localy="480"
         data-bind="visible: MapHelper.isRouteCurrentLocation(23, 6),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
             playerSpriteMove">
@@ -29215,9 +29777,9 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
     <rect data-route='23'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
-        height="40"
+        height="16"
         width="24"
-        x="976" y="432">
+        x="976" y="464">
     </rect>
 
 
@@ -29232,9 +29794,9 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
     <rect data-route='23'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
-        height="40"
+        height="32"
         width="24"
-        x="1048" y="432">
+        x="1032" y="448">
     </rect>
 
 
@@ -29249,9 +29811,9 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
     <rect data-route='23'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
-        height="96"
-        width="16"
-        x="1072" y="448">
+        height="80"
+        width="32"
+        x="1056" y="464">
     </rect>
 
 
@@ -29286,6 +29848,23 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
         height="16"
         width="32"
         x="1024" y="576">
+    </rect>
+
+
+</g>
+
+
+        <!--Haina Desert extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
+        height="32"
+        width="16"
+        x="1056" y="544">
     </rect>
 
 
@@ -30926,17 +31505,17 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <rect class="city"
         data-town="Ruins of Abundance"
         x="1000"
-        y="416"
-        height="56"
-        width="48"
+        y="440"
+        height="48"
+        width="32"
         data-bind="click:function(){MapHelper.moveToTown('Ruins of Abundance')},
             attr: { class: MapHelper.calculateTownCssClass('Ruins of Abundance') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="1000"
-        y="420"
+        x="992"
+        y="440"
         class="iconLocation hide"
         data-bind="visible: MapHelper.isTownCurrentLocation('Ruins of Abundance'),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
@@ -31110,8 +31689,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.10.15',
-            href:'assets/images/alola-poni.png?v=0.10.15'
+            'xlink:href':'assets/images/alola-poni.png?v=0.10.16',
+            href:'assets/images/alola-poni.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -33205,8 +33784,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Magikarp Jump').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.15',
-            href:'assets/images/alola-magikarp-jump.png?v=0.10.15'
+            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.16',
+            href:'assets/images/alola-magikarp-jump.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -35304,8 +35883,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.10.15',
-            href:'assets/images/galar-south.png?v=0.10.15'
+            'xlink:href':'assets/images/galar-south.png?v=0.10.16',
+            href:'assets/images/galar-south.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -37500,25 +38079,25 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
             
 
-<image href="assets/images/map/Raid.png" xlink:href="assets/images/map/Raid.png"
-    x="416"
-    y="464"
-    height="64"
-    width="64"
-    data-bind="visible: TemporaryBattleList[&#39;Max Raid 1&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 1&#39;].isVisible()"/>
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="816"
+    y="192"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Charizard&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Charizard&#39;].isVisible()"/>
 <rect class="city"
     data-town="Max Raid"
-    x="416"
-    y="464"
-    height="64"
-    width="64"
-    data-bind="visible: TemporaryBattleList[&#39;Max Raid 1&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 1&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid 1&#39;].protectedOnclick()">
+    x="816"
+    y="192"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Charizard&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Charizard&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Charizard&#39;].protectedOnclick()">
 </rect>
 <image width="48" height="48"
-    x="424"
-    y="472"
+    x="816"
+    y="192"
     class="iconLocation hide"
-    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid 1&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 1&#39;].isVisible(),
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Charizard&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Charizard&#39;].isVisible(),
         attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
         playerSpriteMove">
 </image>
@@ -37526,25 +38105,25 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
             
 
-<image href="assets/images/map/Raid.png" xlink:href="assets/images/map/Raid.png"
-    x="1056"
-    y="288"
-    height="64"
-    width="64"
-    data-bind="visible: TemporaryBattleList[&#39;Max Raid 2&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 2&#39;].isVisible()"/>
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="880"
+    y="240"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Machamp&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Machamp&#39;].isVisible()"/>
 <rect class="city"
     data-town="Max Raid"
-    x="1056"
-    y="288"
-    height="64"
-    width="64"
-    data-bind="visible: TemporaryBattleList[&#39;Max Raid 2&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 2&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid 2&#39;].protectedOnclick()">
+    x="880"
+    y="240"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Machamp&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Machamp&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Machamp&#39;].protectedOnclick()">
 </rect>
 <image width="48" height="48"
-    x="1064"
-    y="296"
+    x="880"
+    y="240"
     class="iconLocation hide"
-    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid 2&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 2&#39;].isVisible(),
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Machamp&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Machamp&#39;].isVisible(),
         attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
         playerSpriteMove">
 </image>
@@ -37552,25 +38131,233 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
             
 
-<image href="assets/images/map/Raid.png" xlink:href="assets/images/map/Raid.png"
-    x="896"
-    y="800"
-    height="64"
-    width="64"
-    data-bind="visible: TemporaryBattleList[&#39;Max Raid 3&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 3&#39;].isVisible()"/>
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="576"
+    y="464"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Gengar&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Gengar&#39;].isVisible()"/>
 <rect class="city"
     data-town="Max Raid"
-    x="896"
-    y="800"
-    height="64"
-    width="64"
-    data-bind="visible: TemporaryBattleList[&#39;Max Raid 3&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 3&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid 3&#39;].protectedOnclick()">
+    x="576"
+    y="464"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Gengar&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Gengar&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Gengar&#39;].protectedOnclick()">
 </rect>
 <image width="48" height="48"
-    x="904"
-    y="808"
+    x="576"
+    y="464"
     class="iconLocation hide"
-    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid 3&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid 3&#39;].isVisible(),
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Gengar&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Gengar&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+            
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="656"
+    y="464"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Kingler&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Kingler&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="656"
+    y="464"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Kingler&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Kingler&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Kingler&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="656"
+    y="464"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Kingler&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Kingler&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+            
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="784"
+    y="560"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Corviknight&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Corviknight&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="784"
+    y="560"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Corviknight&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Corviknight&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Corviknight&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="784"
+    y="560"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Corviknight&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Corviknight&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+            
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="736"
+    y="64"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Orbeetle&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Orbeetle&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="736"
+    y="64"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Orbeetle&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Orbeetle&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Orbeetle&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="736"
+    y="64"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Orbeetle&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Orbeetle&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+            
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="832"
+    y="560"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Drednaw&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Drednaw&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="832"
+    y="560"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Drednaw&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Drednaw&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Drednaw&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="832"
+    y="560"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Drednaw&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Drednaw&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+            
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="752"
+    y="416"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Coalossal&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Coalossal&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="752"
+    y="416"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Coalossal&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Coalossal&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Coalossal&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="752"
+    y="416"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Coalossal&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Coalossal&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+            
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="864"
+    y="368"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Centiskorch&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Centiskorch&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="864"
+    y="368"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Centiskorch&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Centiskorch&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Centiskorch&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="864"
+    y="368"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Centiskorch&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Centiskorch&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+            
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="832"
+    y="0"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Alcremie&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Alcremie&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="832"
+    y="0"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Alcremie&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Alcremie&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Alcremie&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="832"
+    y="0"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Alcremie&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Alcremie&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+            
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="912"
+    y="576"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Duraludon&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Duraludon&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="912"
+    y="576"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Duraludon&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Duraludon&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Duraludon&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="912"
+    y="576"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Duraludon&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Duraludon&#39;].isVisible(),
         attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
         playerSpriteMove">
 </image>
@@ -37578,8 +38365,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.10.15',
-            href:'assets/images/galar-north.png?v=0.10.15'
+            'xlink:href':'assets/images/galar-north.png?v=0.10.16',
+            href:'assets/images/galar-north.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -38665,8 +39452,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.15',
-            href:'assets/images/galar-isle-of-armor.png?v=0.10.15'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.16',
+            href:'assets/images/galar-isle-of-armor.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -41310,11 +42097,245 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
         playerSpriteMove">
 </image>
 
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="832"
+    y="720"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Venusaur&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Venusaur&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="832"
+    y="720"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Venusaur&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Venusaur&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Venusaur&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="832"
+    y="720"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Venusaur&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Venusaur&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="1152"
+    y="624"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Blastoise&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Blastoise&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="1152"
+    y="624"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Blastoise&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Blastoise&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Blastoise&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1152"
+    y="624"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Blastoise&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Blastoise&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="832"
+    y="576"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Butterfree&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Butterfree&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="832"
+    y="576"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Butterfree&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Butterfree&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Butterfree&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="832"
+    y="576"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Butterfree&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Butterfree&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="896"
+    y="288"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Garbodor&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Garbodor&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="896"
+    y="288"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Garbodor&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Garbodor&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Garbodor&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="896"
+    y="288"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Garbodor&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Garbodor&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="736"
+    y="384"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Rillaboom&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Rillaboom&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="736"
+    y="384"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Rillaboom&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Rillaboom&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Rillaboom&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="736"
+    y="384"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Rillaboom&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Rillaboom&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="1040"
+    y="320"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Cinderace&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Cinderace&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="1040"
+    y="320"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Cinderace&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Cinderace&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Cinderace&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1040"
+    y="320"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Cinderace&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Cinderace&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="448"
+    y="192"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Inteleon&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Inteleon&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="448"
+    y="192"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Inteleon&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Inteleon&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Inteleon&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="448"
+    y="192"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Inteleon&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Inteleon&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="976"
+    y="96"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Sandaconda&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Sandaconda&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="976"
+    y="96"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Sandaconda&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Sandaconda&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Sandaconda&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="976"
+    y="96"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Sandaconda&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Sandaconda&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+               
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="688"
+    y="560"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Toxtricity&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Toxtricity&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="688"
+    y="560"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Toxtricity&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Toxtricity&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Toxtricity&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="688"
+    y="560"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Toxtricity&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Toxtricity&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.15',
-            href:'assets/images/galar-crown-tundra.png?v=0.10.15'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.16',
+            href:'assets/images/galar-crown-tundra.png?v=0.10.16'
         }"></image>
 
         <!-- ------ -->
@@ -41366,7 +42387,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <rect data-route='46'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(46, 7) }"
         height="16"
-        width="96"
+        width="80"
         x="512" y="240">
     </rect>
 
@@ -42842,6 +43863,32 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
 
 
+        <!--Max Lair-->
+        
+
+
+    <rect class="city"
+        data-town="Max Lair"
+        x="592"
+        y="208"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Max Lair')},
+            attr: { class: MapHelper.calculateTownCssClass('Max Lair') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="600"
+        y="208"
+        class="iconLocation hide"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Max Lair'),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+            playerSpriteMove">
+    </image>
+
+
+
         <!-- ------------------ -->
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
@@ -43050,13 +44097,273 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
         playerSpriteMove">
 </image>
 
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="528"
+    y="480"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Pikachu&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Pikachu&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="528"
+    y="480"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Pikachu&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Pikachu&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Pikachu&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="528"
+    y="480"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Pikachu&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Pikachu&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="736"
+    y="224"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Meowth&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Meowth&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="736"
+    y="224"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Meowth&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Meowth&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Meowth&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="736"
+    y="224"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Meowth&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Meowth&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="1264"
+    y="304"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Lapras&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Lapras&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="1264"
+    y="304"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Lapras&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Lapras&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Lapras&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1264"
+    y="304"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Lapras&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Lapras&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="544"
+    y="240"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Eevee&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Eevee&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="544"
+    y="240"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Eevee&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Eevee&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Eevee&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="544"
+    y="240"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Eevee&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Eevee&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="832"
+    y="848"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Snorlax&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Snorlax&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="832"
+    y="848"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Snorlax&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Snorlax&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Snorlax&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="832"
+    y="848"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Snorlax&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Snorlax&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="832"
+    y="496"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Flapple&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Flapple&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="832"
+    y="496"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Flapple&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Flapple&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Flapple&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="832"
+    y="496"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Flapple&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Flapple&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="992"
+    y="624"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Appletun&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Appletun&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="992"
+    y="624"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Appletun&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Appletun&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Appletun&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="992"
+    y="624"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Appletun&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Appletun&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="992"
+    y="464"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Hatterene&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Hatterene&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="992"
+    y="464"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Hatterene&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Hatterene&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Hatterene&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="992"
+    y="464"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Hatterene&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Hatterene&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="1168"
+    y="432"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Grimmsnarl&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Grimmsnarl&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="1168"
+    y="432"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Grimmsnarl&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Grimmsnarl&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Grimmsnarl&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1168"
+    y="432"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Grimmsnarl&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Grimmsnarl&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
+
+         
+
+<image href="assets/images/map/raidden.png" xlink:href="assets/images/map/raidden.png"
+    x="688"
+    y="624"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Copperajah&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Copperajah&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Max Raid"
+    x="688"
+    y="624"
+    height="48"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Max Raid Copperajah&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Copperajah&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Max Raid Copperajah&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="688"
+    y="624"
+    class="iconLocation hide"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Max Raid Copperajah&#39;] &amp;&amp; TemporaryBattleList[&#39;Max Raid Copperajah&#39;].isVisible(),
+        attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+        playerSpriteMove">
+</image>
+
     </g>
 </g>
 
                             <g data-bind='visible: player.region == GameConstants.Region.hisui'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hsiui.png?v=0.10.15',
-        href:'assets/images/hisui.png?v=0.10.15'
+        'xlink:href':'assets/images/hsiui.png?v=0.10.16',
+        href:'assets/images/hisui.png?v=0.10.16'
     }"></image>
 
     <!-- ------ -->
@@ -51816,8 +53123,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.paldea'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/paldea.png?v=0.10.15',
-        href:'assets/images/paldea.png?v=0.10.15'
+        'xlink:href':'assets/images/paldea.png?v=0.10.16',
+        href:'assets/images/paldea.png?v=0.10.16'
     }"></image>
 
     <!-- ------ -->
@@ -53379,7 +54686,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        <div class="modal-header">
            <div style="width: 100%;">
                <img src="" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png'"
-                    data-bind="attr:{ src: 'assets/images/npcs/' + GymRunner.gymObservable().leaderName + '.png'}">
+                    data-bind="attr:{ src: GymRunner.gymObservable().imagePath }">
                <h5 class="modal-title" id="receiveBadgeModalLabel"
                    data-bind="text: GymRunner.gymObservable().leaderName.replace(/\d/g,'')">Modal title</h5>
 
@@ -53388,7 +54695,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        <div class="modal-body">
            <p data-bind="html: GymRunner.gymObservable().defeatMessage"></p>
            <!-- ko if: !BadgeEnums[GymRunner.gymObservable().badgeReward].startsWith('Elite') -->
-           <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + BadgeEnums[GymRunner.gymObservable().badgeReward] + '.png'}" onerror="this.src='assets/images/badges/Unknown.png'">
+           <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + BadgeEnums[GymRunner.gymObservable().badgeReward] + '.svg'}" onerror="this.src='assets/images/badges/Unknown.png'">
            <!-- /ko -->
 
        </div>
@@ -53440,22 +54747,22 @@ aria-labelledby="temporaryBattleWonModalLabel" aria-hidden="true">
 
 
 <!-- Quest Step Cleared -->
-<div class="modal fade" data-keyboard="false" data-backdrop="static" id="customQuestStepClearedModal" tabindex="-1" role="dialog"
-aria-labelledby="customQuestStepClearedModalLabel" aria-hidden="true">
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="questStepClearedModal" tabindex="-1" role="dialog"
+aria-labelledby="questStepClearedModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" role="document">
    <div class="modal-content">
-    <!-- ko if: CustomQuest.questObservable()?.optionalArgs -->
+    <!-- ko if: Quest.questObservable()?.optionalArgs -->
        <div class="modal-header">
            <div style="width: 100%;">
             <img src="" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png'"
-                data-bind="attr:{ src: CustomQuest.questObservable().getNpcImage()}">
-            <h5 class="modal-title" id="customQuestStepClearedModalLabel"
-                data-bind="text: CustomQuest.questObservable().getNpcDisplayName()">Modal title</h5>
+                data-bind="attr:{ src: Quest.questObservable().getNpcImage()}">
+            <h5 class="modal-title" id="questStepClearedModalLabel"
+                data-bind="text: Quest.questObservable().getNpcDisplayName()">Modal title</h5>
 
            </div>
         </div>
         <div class="modal-body">
-            <p data-bind="html: TextMerger.mergeText(CustomQuest.questObservable()?.getClearedMessage())"></p>
+            <p data-bind="html: TextMerger.mergeText(Quest.questObservable()?.getClearedMessage())"></p>
 
         </div>
         <div class="modal-footer">
@@ -53973,6 +55280,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.initialEnabled')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('breedingEfficiencyAllModifiers')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
                                 <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
@@ -54186,6 +55494,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                     </td>
                                 </tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.forceSave')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.downloadSave')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.mute')}"></tr>
                             </tbody>
                         </table>
@@ -54498,6 +55807,8 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <p><strong>If I evolve a shiny Pokémon, will the evolution be shiny?</strong><br/>
             <span class="text-muted">No, you will need to obtain the evolution's shiny via a different method.</span></p>
             <p><h5 class="text-primary"><strong>Items:</strong></h5></p>
+            <p><strong>How do I evolve Pokémon that require an item to evolve?</strong><br/>
+            <span class="text-muted">You can use evolution items by clicking <strong>Items</strong> in the Start Menu.</span></p>
             <p><strong>What is the small/medium/large restore used for?</strong><br/>
             <span class="text-muted">They can be used in the underground to restore some stamina.</span></p>
             <p><strong>What are berries used for?</strong><br/>
@@ -54627,19 +55938,18 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <span class="text-muted">EVs can be gained in a variety of ways, but are primarily gained by capturing (not breeding) Pokémon.</span></p>
             <p class="text-muted">You can use the Contagious Poké Ball selector (unlocked after getting Pokérus) to focus catching Pokémon with less than 50 EVs. Note that setting this selector to "Do not catch" will prevent you from catching any Contagious Pokémon, even if your Caught selector has a Poké Ball set.</p>
             <span class="text-muted">Base Yield: <code>0.1EV</code><br/>
-            Evolution Item Yield: <code>1EV</code><br/>
+            Base Wanderer Yield: <code>0EV</code><br/>
             Wanderer Yield: <code>0.5EV</code><br/>
-            Base Wanderer Yield: <code>0xEV</code><br/>
-            Shopmon Yield: <code>1EV</code><br/>
-            Safari Yield: <code>1EV</code><br/>
+            Evolution Item / Shopmon / Safari Yield: <code>1EV</code><br/>
+            Shadow Modifier: <code>2×</code><br/>
             Shiny Modifier: <code>5×</code><br/>
             Dungeon Modifier: <code>3×</code><br/>
-            Dungeon Mimic Modifier: <code>10×</code><br/>
-            Dungeon Boss Modifier: <code>10×</code><br/>
+            Dungeon Mimic / Dungeon Boss Modifier: <code>10×</code><br/>
             Roamer Modifier: <code>50×</code><br/>
             Repeat Ball Modifier: <code>5×</code><br/>
             Macho Brace Modifier: <code>1.5×</code><br/>
-            Power Brace Modifier: <code>2×</code><br/>
+            Power Bracer Modifier: <code>2×</code><br/>
+            Rowap Aura Modifier: <code>Multiplier</code> based off Farm Setup<br/>
             Blue Flute Modifier: <code>%</code> based off Achievement Bonus</span></p>
             <p><strong>Why aren't some of my wanderers getting EVs?</strong><br/>
             <span class="text-muted">The wanderers that are attracted by any berry (base wanderers) don't get EVs</span></p>
@@ -54658,8 +55968,8 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <span class="text-muted"><strong>Note:</strong> You can deactivate the challenges at any moment, but can't be activated later.</span></p>
             <strong>What do I get for activating challenge modes?</strong><br/>
             <span class="text-muted">You don't get anything special for having challenges active, but each challenge will give you a ribbon on your trainer profile.</span></p>
-            <strong>Regional debuff attack</strong><br/>
-            <span class="text-muted">Lower the attack of the Pokémon that aren't native to the current region.</span><br/>
+            <strong>Regional Attack Debuff</strong><br/>
+            <span class="text-muted">Lowers the attack of the Pokémon that aren't native to the current region.</span><br/>
             <span class="text-muted">The strength of the debuff is based on your highest region, not the region you are battling in.</span><br/>
             <span class="text-muted">The Pokémon retain 20% of their attack in Johto and this value raises by 10% each region.</span><br/>
             <span class="text-muted">The following table shows <strong>Bulbasaur's</strong> attack in different regions:</span></p>
@@ -54696,36 +56006,36 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                 </tr>
             </table>
             <span class="text-muted"><strong>Important:</strong>This challenge is activated by default.</span></p>
-            <strong>Complete Pokedex</strong><br/>
-            <span class="text-muted">Requires a complete regional Pokedex before moving on to the next region.</span><br/>
+            <strong>Require Complete Pokédex</strong><br/>
+            <span class="text-muted">Requires a complete regional Pokédex before moving on to the next region.</span><br/>
             <span class="text-muted">You only need <strong>one of each Pokémon</strong> to be able to move to the next region. Any form of the Pokémon is valid even if it isn't the base form.</span><br/>
             <span class="text-muted"><strong>Important:</strong>This challenge is activated by default.</span></p>
-            <strong>No click attack</strong><br/>
-            <span class="text-muted">Disables the ability to use click attacks</span><br/>
+            <strong>No Click Attack</strong><br/>
+            <span class="text-muted">Disables the ability to use click attacks.</span><br/>
             <span class="text-muted">You still can click in the very first battle of the game.</span></p>
-            <strong>No battle items</strong><br/>
-            <span class="text-muted">Disables the usage of x attack, x click, lucky egg, token collector, dowsing machine and lucky incense.</span><br/>
+            <strong>No Battle Items</strong><br/>
+            <span class="text-muted">Disables the usage of X Attack, X Click, Lucky Egg, Token Collector, Dowsing Machine, and Lucky Incense.</span><br/>
             <span class="text-muted">This challenge also disables the usage of flutes.</span><br/>
             <span class="text-muted">Caution! You still can buy these items even if you can't use them.</span></p>
-            <strong>No Master balls</strong><br/>
-            <span class="text-muted">Disables the usage of Master Balls</span><br/>
+            <strong>No Master Balls</strong><br/>
+            <span class="text-muted">Disables the usage of Master Balls.</span><br/>
             <span class="text-muted">You still can buy them, so you can complete the related achievements.</span></p>
-            <strong>No Oak items</strong><br/>
+            <strong>No Oak Items</strong><br/>
             <span class="text-muted">Disables the usage of all Oak items.</span><br/>
-            <span class="text-muted">The achievements related with level up will dissappear and the percentage will be distributed between the other general achievements.</span><br/>
+            <span class="text-muted">The achievements related to leveling up these items will disappear, and the percentages will be distributed among the other general achievements.</span><br/>
             <span class="text-muted">In order to get the berries that mutate while using some Oak Items you can buy them in Johto berry master once you have unlocked the berry that evolves to them.</span></p>
-            <strong>No gems</strong><br/>
+            <strong>No Gems</strong><br/>
             <span class="text-muted">Disables the usage of gems to increase damage multipliers.</span><br/>
             <span class="text-muted">You still can get gems and use them to buy items such as flutes or Pokémon.</span></p>
-            <strong>No vitamins</strong><br/>
-            <span class="text-muted">Disables the usage of vitamins</span><br/>
+            <strong>No Vitamins</strong><br/>
+            <span class="text-muted">Disables the usage of vitamins.</span><br/>
             <span class="text-muted">You still can buy them, so you can complete the related achievements. After getting them you can get a money refund by inputting the code: "REFUND-VITAMINS" (one use only).</span></p>
             <strong>Slow EVs</strong><br/>
             <span class="text-muted">Gain EVs 10x times slower.</span><br/>
-            <span class="text-muted">If the challenge is deactivated, the EV get multiplied back</span></p>
-            <strong>Real evolutions</strong><br/>
-            <span class="text-muted">Your Pokémon go away when they evolve</span><br/>
-            <span class="text-muted">When your Pokémon evolve their stats are carried over to the evolution. This include times hatched, EVs and shiny status.</span><br/>
+            <span class="text-muted">If the challenge is deactivated, the EVs will get multiplied back.</span></p>
+            <strong>Real Evolution</strong><br/>
+            <span class="text-muted">Your Pokémon go away when they evolve.</span><br/>
+            <span class="text-muted">When your Pokémon evolve their stats are carried over to the evolution. This includes times hatched, EVs, and shiny status.</span><br/>
             <span class="text-muted">If the base Pokémon had a Held Item, it will be carried over to the evolution unless the item is incompatible. For example, Light Ball won't be transferred to a Raichu but a Magnet will.</span><br/>
             <span class="text-muted">Baby Pokémon aren't considered evolutions but gifts.</span></p>
 
@@ -55175,7 +56485,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                    <strong>There are a few things you should know before you depart:</strong><br/>
                    You will gain <strong data-bind="text: App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion())"></strong> queue slots in the Hatchery.<br/><br/>
                    <!-- ko if: App.game.challenges.list.regionalAttackDebuff.active() -->
-                   When Pokémon are in a Region they're not native to, they will only retain <strong data-bind="text: App.game.party.getRegionAttackMultiplier(player.highestRegion() + 1).toLocaleString(undefined,{style: 'percent'})"></strong> of their total attack.<br/><br/>
+                   When Pokémon are in a Region they're not native to, they will only retain <strong data-bind="text: App.game.party.getRegionAttackMultiplier(player.highestRegion() + 1).toLocaleString('en-US',{style: 'percent'})"></strong> of their total attack.<br/><br/>
                    <!-- /ko -->
                    <!-- ko if: player.highestRegion() - 2 >= GameConstants.Region.kanto -->
                    Dungeons in the <strong data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() - 2])"></strong> Region will be significantly less likely to drop Epic, Legendary, and Mythic loot.<br /><br/>
@@ -55398,7 +56708,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         </div>
                                                         <div class="dropdown-divider"></div>
                                                         <!-- ko foreach : PokemonCategories.categories -->
-                                                        <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
+                                                        <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color(), color: GameHelper.isColorLight($data.color()) ? 'black' : 'white' },
                                                             click : function(){ BreedingFilters.category.value($data.id); Settings.setSettingByName('breedingCategoryFilter', $data.id) }">
                                                         </div>
                                                         <!-- /ko-->
@@ -55438,6 +56748,17 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 </select>
                                             </div>
                                             <!-- /ko -->
+                                            <!--Hide alternate forms-->
+                                            <div class="form-group col-lg-12 col-12 mb-0">
+                                                <label for="breedingHideAlternateFilter">Hide alternate forms</label>
+                                                <label class="form-check-label toggler-wrapper style-1 float-right">
+                                                    <input class="form-check-input" type="checkbox" id="breedingHideAlternateFilter"
+                                                        data-bind="checked: BreedingFilters.hideAlternate.value">
+                                                    <div class="toggler-slider">
+                                                        <div class="toggler-knob"></div>
+                                                    </div>
+                                                </label>
+                                            </div>
 
                                             <div class="col-12">
                                                 <hr style="border-color:grey;">
@@ -55517,7 +56838,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
                                                 <div class="border-secondary dropdown-menu">
                                                     <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
-                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
+                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
                                                     <!-- /ko -->
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
@@ -55954,34 +57275,96 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody data-bind='foreach: DailyDeal.list'>
+                            <tbody>
+                                <!-- ko foreach: DailyDeal.list -->
                                 <tr>
                                     <td class='vertical-middle text-center' data-bind="text: player.getUndergroundItemAmount(item1.id).toLocaleString('en-US')"></td>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: item1.image }'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
+                                    <td class="vertical-middle">
+                                        <span data-bind="text: amount1"></span>
+                                        <span data-bind="visible: App.game.underground.tradeAmount() > 1, text: ` (${(amount1 * App.game.underground.tradeAmount()).toLocaleString('en-US')})`"></span>
+                                        <span data-bind="text: ` × ${item1.name}`"></span>
+                                    </td>
                                     <td class='vertical-middle'>→</td>
                                     <td class='vertical-middle text-center' data-bind="text: player.getUndergroundItemAmount(item2.id).toLocaleString('en-US')"></td>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: item2.image }'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
+                                    <td class="vertical-middle">
+                                        <span data-bind="text: amount2"></span>
+                                        <span data-bind="visible: App.game.underground.tradeAmount() > 1, text: ` (${(amount2 * App.game.underground.tradeAmount()).toLocaleString('en-US')})`"></span>
+                                        <span data-bind="text: ` × ${item2.name}`"></span>
+                                    </td>
                                     <td class='vertical-middle'>
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){DailyDeal.use($index(), tradeAmount())}, css: { disabled: !DailyDeal.canUse($index()) }'>
+                                        <div class="btn-group btn-block">
+                                            <button class="btn btn-primary btn-block" data-bind="click: () => DailyDeal.use($index(), App.game.underground.tradeAmount()), css: { disabled: !DailyDeal.canUse($index()) }">
                                                 Trade
                                             </button>
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !DailyDeal.canUse($index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            </button>
-                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data.toLocaleString('en-US')"></button>
+                                            <button type="button" data-bind="css: { disabled: !DailyDeal.canUse($index()) }"
+                                                class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                            <div class="dropdown-menu text-center p-0">
+                                                <p class="small py-2 m-0">Set Trade Amount</p>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <!-- ko foreach: [0.1, 0.25, 0.5, 0.75, 1] -->
+                                                <button class="dropdown-item small py-1" type="button" data-bind="text: `${$data.toLocaleString('en-US', { style: 'percent' })}`,
+                                                    click: () => { App.game.underground.tradeAmount(Math.floor(player.getUndergroundItemAmount($parent.item1.id) * ($data) / $parent.amount1)) }"></button>
+                                                <!-- /ko -->
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
+                                <!-- /ko -->
+                                <!-- ko ifnot: App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max).isMaxLevel() -->
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted p-2">Upgrade the Underground to unlock additional deals!</td>
+                                </tr>
+                                <!-- /ko -->
                             </tbody>
                         </table>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center p-2">
+                        <div class="col-12 col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont"
+                                        data-bind="click: () => App.game.underground.tradeAmount(1)">Reset</button>
+                                </div>
+                                <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: App.game.underground.tradeAmount" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split rounded-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" data-bind="foreach: [10, 100, 1000]">
+                                        <button class="dropdown-item py-1" type="button" data-bind="text: $data.toLocaleString('en-US'),
+                                            click: () => App.game.underground.tradeAmount($data)"></button>
+                                    </div>
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(10)">
+                                        +10
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(100)">
+                                        +100
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.multiplyTradeAmount(10)">
+                                        &times;10
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.multiplyTradeAmount(0.1)">
+                                        &div;10
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(100)">
+                                        +100
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(1000)">
+                                        +1,000
+                                    </button>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56134,7 +57517,7 @@ aria-labelledby="pokedexModalLabel">
 
                         <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                         <div class="pokedex-border-bottom pt-2">
-                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
+                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length.toLocaleString('en-US')} Pokémon`"></h4>
                         </div>
                         <!-- /ko -->
                     </div>
@@ -56189,7 +57572,7 @@ aria-labelledby="pokedexModalLabel">
                                     <div class="form-group col-lg-6 col-6">
                                         <label>Region</label>
                                         <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
-                                                data-bind="options: PokedexFilters.region.options,
+                                                data-bind="options: PokedexFilters.region.options.filter(r => r.value <= player.highestRegion()),
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
                                                         value: PokedexFilters.region.value">
@@ -56210,7 +57593,7 @@ aria-labelledby="pokedexModalLabel">
                                                 </div>
                                                 <div class="dropdown-divider"></div>
                                                 <!-- ko foreach : PokemonCategories.categories -->
-                                                <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
+                                                <div class="dropdown-item" data-bind="text : $data.name(), style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: $data.color() },
                                                     click : function(){ Settings.setSettingByName('pokedexCategoryFilter', $data.id) }">
                                                 </div>
                                                 <!-- /ko-->
@@ -56321,7 +57704,7 @@ aria-labelledby="pokedexModalLabel">
 
                         <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                         <div class="pokedex-border-bottom pt-2 d-lg-none d-block">
-                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
+                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length.toLocaleString('en-US')} Pokémon`"></h4>
                         </div>
                         <!-- /ko -->
                         <div class="scrolling-div-pokedex">
@@ -56330,7 +57713,7 @@ aria-labelledby="pokedexModalLabel">
                                 <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
                             </div>
                             <!-- /ko -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { pageSize: 60, reset: modalUtils.observableState.pokedexModalObservable })">
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexView })">
                                 <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                                         data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                         <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
@@ -56385,7 +57768,7 @@ aria-labelledby="pokedexModalLabel">
                                                     <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
                                                     <div class="border-secondary dropdown-menu">
                                                         <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
-                                                        <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
+                                                        <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
                                                         <!-- /ko -->
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
@@ -56565,7 +57948,7 @@ aria-labelledby="pokedexModalLabel">
                 <!-- /ko -->
                 <!-- ko if: App.game.party.getPokemon($data)?.shiny -->
                 <tr>
-                  <td class="text-left align-middle text-nowrap">Hide Party Pokémon shiny</td>
+                  <td class="text-left align-middle text-nowrap">Hide Shiny</td>
                   <td class="text-left tight">
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
@@ -56579,7 +57962,7 @@ aria-labelledby="pokedexModalLabel">
                 <!-- /ko -->
                 <!-- ko if: App.game.party.getPokemon($data)?.shadow == GameConstants.ShadowStatus.Purified -->
                 <tr>
-                  <td class="text-left align-middle text-nowrap">Show Party Pokémon shadow</td>
+                  <td class="text-left align-middle text-nowrap">Show Shadow</td>
                   <td class="text-left tight">
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
@@ -57050,7 +58433,7 @@ aria-labelledby="badgeCaseModalLabel">
                         data-bind="foreach: $data[1]">
                         <div class="col-3 badgeEntry">
                             <img src="" width="60px"
-                                data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
+                                data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.svg'},
                                 css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeEnums[$data])}">
 
                             <p style="bottom: 0;"
@@ -57142,7 +58525,13 @@ aria-labelledby="badgeCaseModalLabel">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill w-100">
                     <li class="nav-item" onclick="$('#refreshQuests').show()"><a class="nav-link active" href="#questsModalQuestsPane" data-toggle="tab">Quests</a></li>
-                    <li class="nav-item" onclick="$('#refreshQuests').hide()"><a class="nav-link" href="#questsModalQuestLinesPane" data-toggle="tab">Quest Lines</a></li>
+                    <li class="nav-item" onclick="$('#refreshQuests').hide()">
+                        <a class="nav-link position-relative" href="#questsModalQuestLinesPane" data-toggle="tab">
+                            Quest Lines
+                            <span class="position-absolute rounded-circle bg-danger p-1"
+                                data-bind="visible: App.game.quests.questLines().some(q => q.state() === QuestLineState.inactive && q.bulletinBoard !== GameConstants.BulletinBoards.None && q.requirement?.isCompleted())"></span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="modal-body p-0">
@@ -57238,7 +58627,7 @@ aria-labelledby="badgeCaseModalLabel">
                                                 trigger: 'hover',
                                                 placement: 'top',
                                                 html: true
-                                            }, enable: $data.isPausable()">Pause</button>
+                                            }, css: { disabled: !$data.isPausable() }">Pause</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -58313,41 +59702,43 @@ aria-labelledby="badgeCaseModalLabel">
                                 </tr>
                             </thead>
                             <tbody data-bind='foreach: ShardDeal.getDeals(ShopHandler.shopObservable().location)'>
-                                <!-- ko foreach: shards -->
-                                <tr>
-                                    <td data-bind="text: player.getUndergroundItemAmount($data.shardType.id).toLocaleString('en-US')"></td>
-                                    <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: $data.shardType.image }'>
-                                    </td>
-                                    <td data-bind="text: amount.toLocaleString('en-US') + ' x ' + $data.shardType.name"></td>
-                                    <!-- ko if: $index() === 0 -->
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost.toLocaleString('en-US')"></td>
-                                    <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
-                                          <img src='assets/images/currency/questPoint.svg' width="20px'">
-                                    </td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
-                                          <img class='mineInventoryItem' data-bind="attr: {
-                                            src: $parent.item.itemType.image
-                                          }">
-                                    </td>
-                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length, hidden: ShopHandler.shopObservable().hidePlayerInventory }, text: player.itemList[$parent.item.itemType.name]().toLocaleString('en-US')"></td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
-                                                <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
-                                            </button>
-                                            <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            </button>
-                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100]">
-                                                <button class="dropdown-item" type="button" data-bind="visible: ItemList[$parents[1].item.itemType.name].maxAmount > 1, click: function(){tradeAmount($data)}, text: $data"></button>
+                                <!-- ko if: $data.isVisible() -->
+                                    <!-- ko foreach: shards -->
+                                    <tr>
+                                        <td data-bind="text: player.getUndergroundItemAmount($data.shardType.id).toLocaleString('en-US')"></td>
+                                        <td class='vertical-middle'>
+                                            <img class='mineInventoryItem' data-bind='attr: {src: $data.shardType.image }'>
+                                        </td>
+                                        <td data-bind="text: amount.toLocaleString('en-US') + ' x ' + $data.shardType.name"></td>
+                                        <!-- ko if: $index() === 0 -->
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost.toLocaleString('en-US')"></td>
+                                        <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                            <img src='assets/images/currency/questPoint.svg' width="20px'">
+                                        </td>
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                            <img class='mineInventoryItem' data-bind="attr: {
+                                                src: $parent.item.itemType.image
+                                            }">
+                                        </td>
+                                        <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length, hidden: ShopHandler.shopObservable().hidePlayerInventory }, text: player.itemList[$parent.item.itemType.name]().toLocaleString('en-US')"></td>
+                                        <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
+                                            <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                                <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
+                                                    <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
+                                                </button>
+                                                <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                </button>
+                                                <div class="dropdown-menu" data-bind="foreach: [1, 10, 100]">
+                                                    <button class="dropdown-item" type="button" data-bind="visible: ItemList[$parents[1].item.itemType.name].maxAmount > 1, click: function(){tradeAmount($data)}, text: $data"></button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
+                                        <!-- /ko -->
+                                    </tr>
                                     <!-- /ko -->
-                                </tr>
                                 <!-- /ko -->
                             </tbody>
                         </table>
@@ -58503,26 +59894,31 @@ aria-labelledby="badgeCaseModalLabel">
                                 <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
 
-                            <div style="position: relative; overflow-x: hidden;">
-                                <div id="safariBody"
-                                    class='container-fluid'
-                                    data-bind="visible: Safari.inProgress()">
+                            <div class='container-fluid' data-bind="if: Safari.inProgress()" style="overflow-x: auto; padding: 0px;">
+                                <div id="safariBody" style="position: relative; width: max-content; overflow-x: hidden;">
+                                    <div data-bind="foreach: Safari.grid, childrenComplete: () => Safari.addPlayer()">
+                                        <div class="row flex-nowrap" data-bind="foreach: $data" style="margin: 0 -1px !important;">
+                                            <div class="safariSquare" data-bind="attr: { id: `safari-${$parentContext.$index()}-${$context.$index()}` }, style: { 'background-image': `url('assets/images/safari/tiles/${GameConstants.SafariTile[$data]}.png')`, 'z-index': ([GameConstants.SafariTile.treeTopL, GameConstants.SafariTile.treeTopC, GameConstants.SafariTile.treeTopR].includes($data) ? '3' : 'auto') } ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="sprite" style="position: absolute;"></div>
+                                    <!-- ko foreach: Safari.pokemonGrid -->
+                                        <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
+                                        style: {
+                                            backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${Math.floor($data.id).toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
+                                            top: `${32 * $data.y - 8}px`,
+                                            left: `${32 * $data.x - 4}px`,
+                                        }"></div>
+                                    <!-- /ko -->
+                                    <!-- ko foreach: Safari.itemGrid -->
+                                        <div class="safari-item" data-bind="
+                                        style: {
+                                            top: `${32 * $data.y}px`,
+                                            left: `${32 * $data.x}px`,
+                                        }"></div>
+                                    <!-- /ko -->
                                 </div>
-                                <!-- ko foreach: Safari.pokemonGrid -->
-                                    <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
-                                    style: {
-                                        backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${Math.floor($data.id).toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
-                                        top: `${32 * $data.y - 8}px`,
-                                        left: `${32 * $data.x - 4}px`,
-                                    }"></div>
-                                <!-- /ko -->
-                                <!-- ko foreach: Safari.itemGrid -->
-                                    <div class="safari-item" data-bind="
-                                    style: {
-                                        top: `${32 * $data.y}px`,
-                                        left: `${32 * $data.x}px`,
-                                    }"></div>
-                                <!-- /ko -->
                             </div>
                         </div>
                     </div>
@@ -59784,7 +61180,7 @@ aria-labelledby="purifyChamberModalLabel">
                 <div class="d-flex bg-secondary p-3 justify-content-around shadow">
                     <div>
                         <span class="text-danger font-weight-bold">Style:</span>
-                        <knockout data-bind="text: ContestStyle[PokemonContestController.contestStyle()]"></knockout>
+                        <knockout data-bind="text: GameConstants.ContestStyle[PokemonContestController.contestStyle()]"></knockout>
                     </div>
                     <div>
                         <span class="text-danger font-weight-bold">Type:</span>
@@ -59854,7 +61250,47 @@ aria-labelledby="purifyChamberModalLabel">
                         </div>
                     </div>
                     <div class="tab-pane fade" id="contest-help-tab" role="tabpanel">
-                        <span>help tab</span>
+                        <h3>Contests</h3>
+                        <p>In Pokemon Contests, you select a lineup of three Pokemon to compete in the day’s contest. Each day, there will be only one pokemon Type allowed to enter the contest.</p>
+                        <p>The contestants will be judged according to one Style. Each Pokemon can be given one berry to use as part of their entry.</p>
+                        <p>Pokemon Contests can only be entered once per day, and all entries are final. The total score of the team and their held berries is compared to the Rank requirements and the corresponding Prizes are awarded.</p>
+                        <h3>Style</h3>
+                        <p>There are five Contest Styles. Each Pokemon’s style rating is a sum of two of their base stats.</p>
+                        <p>Each Style also has an associated flavor.</p>
+
+                            The Contest Styles are:
+                            <table class="table table-bordered table-sm" style="color: inherit;">
+                                <tr>
+                                    <td class="align-middle"><b>Cool</b></td>
+                                    <td>This Style is associated with Attack, Special Defense, and Spicy flavor.</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle"><b>Beautiful</b></td>
+                                    <td>This Style is associated with Special Attack, Defense, and Dry flavor.</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle"><b>Cute</b></td>
+                                    <td>This Style is associated with Speed, Hit Points, and Sweet flavor.</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle"><b>Clever</b></td>
+                                    <td>This Style is associated with Special Attack, Special Defense, and Bitter flavor.</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle"><b>Tough</b></td>
+                                    <td>This Style is associated with Hit Points, Defense, and Sour flavor.</td>
+                                </tr>
+                            </table>
+                        </p>
+                        <h3>Ranks</h3>
+                        <p>Getting more Style Points in a contest will give a reward of Contest Tokens. If your score is high enough, you may achieve a Rank for the contest.</p>
+                        <p>The number of Style Points for each Rank are:</p>
+                        <p>Normal Rank: 1-200</p>
+                        <p>Super Rank: 201-450</p>
+                        <p>Hyper Rank: 451-700</p>
+                        <p>Master Rank: >700</p>
+
+                        <p>Earning specific combinations of Style and Rank may unlock special prizes!</p>
                     </div>
                 </div>
             </div>
