@@ -18,8 +18,7 @@ class FluteItem extends Item {
     }
 
     getDescription(): string {
-        const multiplier = ((this.getMultiplier() - 1) * 100).toFixed(2);
-        return `+${multiplier}% bonus to ${this.description}`;
+        return `+${(this.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} bonus to ${this.description}`;
     }
 
     public getMultiplier() {
