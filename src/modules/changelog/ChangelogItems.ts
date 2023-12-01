@@ -10,6 +10,29 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.16
+    new ChangelogUpdate('v0.10.16', new Date(2023, 11, 2)),
+    new Changelog(changelogType.NEW, 'Orre - Gale of Darkness'),
+    new Changelog(changelogType.NEW, 'Gigantamax'),
+    new Changelog(changelogType.NEW, 'Bug Catching Contest in Johto'),
+    new Changelog(changelogType.NEW, 'Great Marsh Safari Zone in Sinnoh'),
+    new Changelog(changelogType.NEW, 'Pokéball filter option - Category'),
+    new Changelog(changelogType.NEW, 'New Pokémon'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.NEW, 'New Achievements'),
+    new Changelog(changelogType.CHANGE, 'Easter & Christmas events reworked'),
+    new Changelog(changelogType.CHANGE, 'Daily deal UI improvements'),
+    new Changelog(changelogType.CHANGE, 'Galar rebalanced'),
+    new Changelog(changelogType.CHANGE, 'Weather adjustments'),
+    new Changelog(changelogType.CHANGE, 'Scent held items can now be used on purified Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Dungeon loot adjustments'),
+    new Changelog(changelogType.CHANGE, 'Regional map improvements'),
+    new Changelog(changelogType.CHANGE, 'Performance improvements'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Negative & decreasing quest progress (again)'),
+
     // V0.10.15
     new ChangelogUpdate('v0.10.15', new Date(2023, 7, 21)),
     new Changelog(changelogType.NEW, 'Pokédex shadow and purified caught status filters'),
