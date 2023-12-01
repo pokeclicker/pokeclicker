@@ -1472,11 +1472,11 @@ class QuestLineHelper {
         const watchGenesectFight = new TalkToNPCQuest(GenesectFight, 'Witness the battle between the Red Genesect and another powerful Pokémon in Castelia City.');
         genesectQuestLine.addQuest(watchGenesectFight);
 
-        const digP2 = new MineLayersQuest(5, 0).withDescription('The Red Genesect has crashed into the P2 Lab and escaped underground. Start digging to learn more.');
-        genesectQuestLine.addQuest(digP2);
-
         const battleRedGenesect2 = new DefeatTemporaryBattleQuest('Red Genesect 2', 'The Red Genesect is trying to escape the Castelia Sewers, stop it!');
         genesectQuestLine.addQuest(battleRedGenesect2);
+
+        const digP2 = new MineLayersQuest(5, 0).withDescription('The Red Genesect has crashed into the P2 Lab and escaped underground. Start digging to learn more.');
+        genesectQuestLine.addQuest(digP2);
 
         const catchGenesect = new CaptureSpecificPokemonQuest('Genesect').withDescription('Catch Genesect in P2 Lab.');
         genesectQuestLine.addQuest(catchGenesect);
