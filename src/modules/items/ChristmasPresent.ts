@@ -25,7 +25,7 @@ export default class ChristmasPresent extends Item {
         const cur = Number(Rand.fromArray(Object.keys(values)));
         const { amount } = App.game.wallet.addAmount(new Amount(Math.round(values[cur] * this.size), cur), false);
         Notifier.notify({
-            message: `You opened the gift and received <img src="/assets/images/currency/${Currency[cur]}.svg" height="24px"/> ${amount.toLocaleString('en-US')}.`,
+            message: `You opened the gift and received <img src="assets/images/currency/${Currency[cur]}.svg" height="24px"/> ${amount.toLocaleString('en-US')}.`,
             type: NotificationConstants.NotificationOption.success,
             image: this.image,
         });
