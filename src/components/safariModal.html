@@ -64,26 +64,31 @@
                                 <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
 
-                            <div style="position: relative; overflow-x: hidden;">
-                                <div id="safariBody"
-                                    class='container-fluid'
-                                    data-bind="visible: Safari.inProgress()">
+                            <div class='container-fluid' data-bind="if: Safari.inProgress()" style="overflow-x: auto; padding: 0px;">
+                                <div id="safariBody" style="position: relative; width: max-content; overflow-x: hidden;">
+                                    <div data-bind="foreach: Safari.grid, childrenComplete: () => Safari.addPlayer()">
+                                        <div class="row flex-nowrap" data-bind="foreach: $data" style="margin: 0 -1px !important;">
+                                            <div class="safariSquare" data-bind="attr: { id: `safari-${$parentContext.$index()}-${$context.$index()}` }, style: { 'background-image': `url('assets/images/safari/tiles/${GameConstants.SafariTile[$data]}.png')`, 'z-index': ([GameConstants.SafariTile.treeTopL, GameConstants.SafariTile.treeTopC, GameConstants.SafariTile.treeTopR].includes($data) ? '3' : 'auto') } ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="sprite" style="position: absolute;"></div>
+                                    <!-- ko foreach: Safari.pokemonGrid -->
+                                        <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
+                                        style: {
+                                            backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${Math.floor($data.id).toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
+                                            top: `${32 * $data.y - 8}px`,
+                                            left: `${32 * $data.x - 4}px`,
+                                        }"></div>
+                                    <!-- /ko -->
+                                    <!-- ko foreach: Safari.itemGrid -->
+                                        <div class="safari-item" data-bind="
+                                        style: {
+                                            top: `${32 * $data.y}px`,
+                                            left: `${32 * $data.x}px`,
+                                        }"></div>
+                                    <!-- /ko -->
                                 </div>
-                                <!-- ko foreach: Safari.pokemonGrid -->
-                                    <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
-                                    style: {
-                                        backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${Math.floor($data.id).toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
-                                        top: `${32 * $data.y - 8}px`,
-                                        left: `${32 * $data.x - 4}px`,
-                                    }"></div>
-                                <!-- /ko -->
-                                <!-- ko foreach: Safari.itemGrid -->
-                                    <div class="safari-item" data-bind="
-                                    style: {
-                                        top: `${32 * $data.y}px`,
-                                        left: `${32 * $data.x}px`,
-                                    }"></div>
-                                <!-- /ko -->
                             </div>
                         </div>
                     </div>
