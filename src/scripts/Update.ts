@@ -2225,6 +2225,9 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 delete p[14]; // megaStone
             });
+
+            // Hopo Berry
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 70);
         },
 
         '0.10.12': ({ playerData, saveData, settingsData }) => {
@@ -2519,7 +2522,19 @@ class Update implements Saveable {
             // NormaliumZ
             saveData.badgeCase.splice(93, 1);
 
-            // Update sort settings for new lv. 100 sort option
+            // Santa Jynx TempBattles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+
+            // Fix Hopo berry visible in berrydex when not available
+            saveData.farming.mutations[71] = false;
+
+        },
+        '0.10.17':  ({ playerData, saveData, settingsData }) => {
+
+            // Update sort settings to make room for new lv. 100 sort option
             ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
                 .forEach((sortSetting) => {
                     if (settingsData[sortSetting] >= 5) {
@@ -2541,7 +2556,7 @@ class Update implements Saveable {
                 }
             });
 
-        },
+        }
     };
 
     constructor() {

@@ -2,7 +2,7 @@
 
 class CaughtUniquePokemonByFilterRequirement extends AchievementRequirement {
     constructor(public filter: (pokemon: PartyPokemon) => boolean, private hintText, amount: number, public shiny = false, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(amount, option, GameConstants.AchievementType['Caught Pokemon']);
+        super(amount, option, GameConstants.AchievementType[shiny ? 'Shiny Pokemon' : 'Caught Pokemon']);
     }
 
     public getProgress() {

@@ -207,9 +207,9 @@
                                             <div class="dropdown-menu text-center p-0">
                                                 <p class="small py-2 m-0">Set Trade Amount</p>
                                                 <div class="dropdown-divider m-0"></div>
-                                                <!-- ko foreach: [10, 25, 50, 75, 100] -->
-                                                <button class="dropdown-item small py-1" type="button" data-bind="text: `${$data}%`,
-                                                    click: () => { App.game.underground.tradeAmount(Math.floor(player.getUndergroundItemAmount($parent.item1.id) * ($data / 100) / $parent.amount1)) }"></button>
+                                                <!-- ko foreach: [0.1, 0.25, 0.5, 0.75, 1] -->
+                                                <button class="dropdown-item small py-1" type="button" data-bind="text: `${$data.toLocaleString('en-US', { style: 'percent' })}`,
+                                                    click: () => { App.game.underground.tradeAmount(Math.floor(player.getUndergroundItemAmount($parent.item1.id) * ($data) / $parent.amount1)) }"></button>
                                                 <!-- /ko -->
                                             </div>
                                         </div>

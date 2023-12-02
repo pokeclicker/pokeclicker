@@ -3,7 +3,8 @@ class SafariEncounter {
         public name: PokemonNameType,
         public weight: number,
         public environments: SafariEnvironments[] = [SafariEnvironments.Grass],
-        private requireCaught = false
+        private requireCaught = false,
+        public showUncaught = false // Whether the pokemon silhouette will be shown in the ranger NPC when uncaught
     ) {}
 
     public isAvailable(): boolean {
@@ -15,12 +16,14 @@ class SafariPokemonList {
     public static list: Record<GameConstants.Region, KnockoutObservable<Array<SafariEncounter>>> = {
         [GameConstants.Region.kanto]: ko.observableArray(),
         [GameConstants.Region.johto]: ko.observableArray(),
+        [GameConstants.Region.sinnoh]: ko.observableArray(),
         [GameConstants.Region.kalos]: ko.observableArray(),
     };
 
     public static generateSafariLists() {
         this.generateKantoSafariList();
         this.generateJohtoSafariList();
+        this.generateSinnohSafariList();
         this.generateKalosSafariList();
     }
 
@@ -121,6 +124,40 @@ class SafariPokemonList {
         SafariPokemonList.list[GameConstants.Region.johto](pokemon);
     }
 
+    private static generateSinnohSafariList() {
+        // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
+        const pokemon : SafariEncounter[] = [
+            // Grass
+            new SafariEncounter('Tangela', 20),
+            new SafariEncounter('Paras', 10),
+            new SafariEncounter('Exeggcute', 10),
+            new SafariEncounter('Kangaskhan', 10),
+            new SafariEncounter('Hoothoot', 15),
+            new SafariEncounter('Noctowl', 10),
+            new SafariEncounter('Yanma', 25),
+            new SafariEncounter('Shroomish', 10),
+            new SafariEncounter('Gulpin', 10),
+            new SafariEncounter('Kecleon', 10),
+            new SafariEncounter('Tropius', 15),
+            new SafariEncounter('Bibarel', 20),
+            new SafariEncounter('Skorupi', 10),
+            new SafariEncounter('Drapion', 5),
+            new SafariEncounter('Croagunk', 10),
+            new SafariEncounter('Toxicroak', 5),
+            new SafariEncounter('Carnivine', 10),
+            // Water
+            new SafariEncounter('Magikarp', 20, [SafariEnvironments.Water]),
+            new SafariEncounter('Gyarados', 10, [SafariEnvironments.Water]),
+            new SafariEncounter('Wooper', 20, [SafariEnvironments.Water]),
+            new SafariEncounter('Quagsire', 5, [SafariEnvironments.Water]),
+            new SafariEncounter('Barboach', 10, [SafariEnvironments.Water]),
+            new SafariEncounter('Whiscash', 5, [SafariEnvironments.Water]),
+            new SafariEncounter('Carvanha', 10, [SafariEnvironments.Water]),
+        ];
+
+        SafariPokemonList.list[GameConstants.Region.sinnoh](pokemon);
+    }
+
     public static generateKalosSafariList() {
         SeededRand.seed(+player.trainerId);
 
@@ -139,7 +176,7 @@ class SafariPokemonList {
         const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
 
         const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true);
+            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true, true);
         });
 
         pokemon.push(new SafariEncounter('Shuckle', 2));
