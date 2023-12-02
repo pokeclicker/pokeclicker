@@ -1469,11 +1469,11 @@ class QuestLineHelper {
         );
         genesectQuestLine.addQuest(fightDriveGenesect);
 
-        const watchGenesectFight = new TalkToNPCQuest(GenesectFight, 'Witness the battle between the Red Genesect and another powerful Pokémon in Castelia City.');
-        genesectQuestLine.addQuest(watchGenesectFight);
-
         const battleRedGenesect2 = new DefeatTemporaryBattleQuest('Red Genesect 2', 'The Red Genesect is trying to escape the Castelia Sewers, stop it!');
         genesectQuestLine.addQuest(battleRedGenesect2);
+
+        const watchGenesectFight  = new TalkToNPCQuest(GenesectFight, 'Witness the battle between the Red Genesect and another powerful Pokémon in Castelia City.');
+        genesectQuestLine.addQuest(watchGenesectFight);
 
         const digP2 = new MineLayersQuest(5, 0).withDescription('The Red Genesect has crashed into the P2 Lab and escaped underground. Start digging to learn more.');
         genesectQuestLine.addQuest(digP2);
@@ -1622,7 +1622,7 @@ class QuestLineHelper {
         const fightCitadarkIsle = new DefeatDungeonQuest(10, 0, 'Citadark Isle').withDescription('Battle through Team Cipher on Citadark Isle');
         orreXDQuestLine.addQuest(fightCitadarkIsle);
 
-        const fightCitadarkIsleDome = new DefeatDungeonQuest(1, 0, 'Citadark Isle Dome').withDescription('Defeat Grand Master Greevil and XD001 in the Citradark Isle Dome.');
+        const fightCitadarkIsleDome = new DefeatDungeonQuest(1, 0, 'Citadark Isle Dome').withDescription('Defeat Grand Master Greevil and XD001 in the Citadark Isle Dome.');
         orreXDQuestLine.addQuest(fightCitadarkIsleDome);
 
         App.game.quests.questLines().push(orreXDQuestLine);
