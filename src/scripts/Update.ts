@@ -2531,10 +2531,12 @@ class Update implements Saveable {
             // Fix Hopo berry visible in berrydex when not available
             saveData.farming.mutations[71] = false;
 
+            // Fix Hopo berry visible in berrydex when not available
+            saveData.farming.mutations[71] = false;
         },
         '0.10.17':  ({ playerData, saveData, settingsData }) => {
 
-            // Update sort settings to make room for new lv. 100 sort option
+            // Update sort settings to make room for new attack at lv 100 sort option
             ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
                 .forEach((sortSetting) => {
                     if (settingsData[sortSetting] >= 5) {
@@ -2556,7 +2558,7 @@ class Update implements Saveable {
                 }
             });
 
-        }
+        },
     };
 
     constructor() {
