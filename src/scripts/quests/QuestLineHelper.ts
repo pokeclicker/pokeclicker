@@ -3804,7 +3804,7 @@ class QuestLineHelper {
         const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter').withDescription('That looked like a Togepi!... well, maybe not. Anyway, there is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
         easterQuestLine.addQuest(encounterTogepiInHoenn);
 
-        const talkToEggHunter = new TalkToNPCQuest(EasterEggHunter, 'The eggs ran away! Talk to the egg hunter.');
+        const talkToEggHunter = new TalkToNPCQuest(EasterEggHunter, 'The eggs ran away! Talk to the egg hunter in Petalburg Woods.');
         easterQuestLine.addQuest(talkToEggHunter);
 
         App.game.quests.questLines().push(easterQuestLine);
