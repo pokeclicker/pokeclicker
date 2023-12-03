@@ -103,14 +103,6 @@ class BreedingController {
                 BreedingController.awaitViewReset(true);
             });
         });
-
-        // Sync observable with breedingDisplay visibility
-        $(document).ready(() => {
-            const eggList = $('#eggList');
-            BreedingController.isBreedingDisplayCollapsed(!eggList.hasClass('show'));
-            eggList.on('show.bs.collapse', () => BreedingController.isBreedingDisplayCollapsed(false));
-            eggList.on('hidden.bs.collapse', () => BreedingController.isBreedingDisplayCollapsed(true));
-        });
     }
 
     public static openBreedingModal() {
@@ -240,9 +232,6 @@ class BreedingController {
 
     // Used to pause modal graphics changes before a full view refresh
     public static awaitViewReset = ko.observable(false);
-
-    // Used to pause hatchery egg progress rendering while container is collapsed
-    public static isBreedingDisplayCollapsed = ko.observable(false);
 
     public static scrollToTop() {
         document.querySelector('#breeding-pokemon-list-container .scrolling-div-breeding-list').scrollTop = 0;

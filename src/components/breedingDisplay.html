@@ -32,7 +32,7 @@
                   }" />
               </div>
             </div>
-            <!-- ko ifnot: $data.isNone() || BreedingController.isBreedingDisplayCollapsed() -->
+            <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == EggType.Fossil -->
                 <img class="egg" data-bind="attr: {src: BreedingController.getEggImage($data)}, class: BreedingController.getEggCssClass($data)"/>
