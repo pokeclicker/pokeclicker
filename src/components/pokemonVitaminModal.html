@@ -85,7 +85,7 @@
                                 <th class="text-center bg-dark align-middle">Breeding Efficiency</th>
                             </tr>
                         </thead>
-                        <tbody data-bind="foreach: lazyLoad($element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminModalObservable })">
+                        <tbody data-bind="foreach: lazyLoad($element, PartyController.getVitaminSortedList, { reset: () => (DisplayUtils.modalState.pokemonVitaminModal === 'hidden') })">
                             <tr class="clickable" data-bind="
                                 click: () => VitaminController.add() ? $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()) : $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier());,
                                 event: { contextmenu: () => { $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false; } },
@@ -104,7 +104,7 @@
                     </table>
                 </div>
             </div>
-            <span class="bg-dark text-light text-right align-right p-1" data-bind="text:`Showing ${PartyController.getvitaminSortedList().length.toLocaleString('en-US')} Pokémon`"></span>
+            <span class="bg-dark text-light text-right align-right p-1" data-bind="text:`Showing ${PartyController.getVitaminSortedList().length.toLocaleString('en-US')} Pokémon`"></span>
         </div>
     </div>
 </div>

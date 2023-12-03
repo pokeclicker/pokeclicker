@@ -7,7 +7,7 @@ class PokedexHelper {
     public static initialize() {
         Object.values(PokedexFilters).forEach((filter) => {
             filter.value.subscribe(() => {
-                document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;
+                PokedexHelper.scrollToTop();
                 PokedexHelper.resetPokedexView.notifySubscribers();
             });
         });
@@ -42,7 +42,7 @@ class PokedexHelper {
 
     private static cachedFilteredList: typeof pokemonList;
     public static filteredList = ko.pureComputed<typeof pokemonList>(() => {
-        if (PokedexHelper.cachedFilteredList && modalUtils.observableState.pokedexModal !== 'show') {
+        if (PokedexHelper.cachedFilteredList && DisplayUtils.modalState.pokedexModal !== 'show') {
             return PokedexHelper.cachedFilteredList;
         }
 
@@ -231,8 +231,17 @@ class PokedexHelper {
 
     // Flag for the LazyLoader
     public static resetPokedexView = ko.pureComputed(() => {
-        return modalUtils.observableState.pokedexModalObservable;
+        const modalState = DisplayUtils.modalState.pokedexModal;
+        if (modalState === 'hide') {
+            // Only works before modal is fully hidden
+            PokedexHelper.scrollToTop();
+        }
+        return modalState === 'hidden';
     });
+
+    private static scrollToTop() {
+        document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;
+    }
 }
 
 $(document).ready(() => {

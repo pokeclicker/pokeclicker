@@ -239,7 +239,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
                                     <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                                    <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { pageSize: 60, reset: modalUtils.observableState.breedingModalObservable })">
+                                    <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { pageSize: 60, reset: DisplayUtils.modalState.breedingModalObservable })">
                                         <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable(), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                             <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
                                             <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
