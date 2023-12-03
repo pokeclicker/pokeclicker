@@ -11111,7 +11111,7 @@ dungeonList['Po Town'] = new Dungeon('Po Town',
             [
                 new GymPokemon('Elgyem', 38351440, 40),
                 new GymPokemon('Metang', 38351440, 40),
-            ], { weight: 1, hide: true, requirement: new TemporaryBattleRequirement('Gladion 2')}, 'Royce', '(male)'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 7)}, 'Royce', '(male)'),
     ],
     1075000, 17);
 

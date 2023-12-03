@@ -1670,7 +1670,7 @@
         
         <%- include('templates/mapOverlay',
             { name: "Team Skull Grunts"
-            , x: 27, y: 39
+            , x: 27, y: 46
             , width: 8, height: 4
             , databind: "click: () => TemporaryBattleList['Skull 1'].protectedOnclick()"
             , visible:  "TemporaryBattleList['Skull 1'] && TemporaryBattleList['Skull 1'].isVisible()"
@@ -4797,7 +4797,7 @@
             , x: 47, y: 26
             , width: 8, height: 3
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3 && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4 && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , connectedToTown: "Vast Poni Canyon Entrance"
             })
         %>
@@ -4807,7 +4807,7 @@
             , x: 48, y: 29
             , width: 7, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -4817,7 +4817,7 @@
             , x: 49, y: 30
             , width: 6, height: 2
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -4827,7 +4827,7 @@
             , x: 50, y: 32
             , width: 4, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -4837,7 +4837,7 @@
             , x: 46, y: 25
             , width: 7, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -4847,7 +4847,7 @@
             , x: 46, y: 24
             , width: 6, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 3  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -5068,7 +5068,7 @@
             , x: 47, y: 26
             , width: 8, height: 3
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , connectedToTown: "Vast Poni Canyon"
             })
         %>
@@ -5078,7 +5078,7 @@
             , x: 48, y: 29
             , width: 7, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -5088,7 +5088,7 @@
             , x: 49, y: 30
             , width: 6, height: 2
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -5098,7 +5098,7 @@
             , x: 50, y: 32
             , width: 4, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -5108,7 +5108,7 @@
             , x: 46, y: 25
             , width: 7, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
@@ -5118,7 +5118,7 @@
             , x: 46, y: 24
             , width: 6, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 3 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>

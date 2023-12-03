@@ -2501,7 +2501,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(clearTrainersSchool);
 
         // 4 - Temp Battle: Skull 1
-        const battleSkullGrunts1 = new CustomQuest (1, 0,  'Beat up the Skull Grunt in Hau\'oli City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 1')](), undefined, undefined,
+        const battleSkullGrunts1 = new CustomQuest (1, 0,  'Beat up Team Skull Grunt on Hau\'oli City\'s Dock.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 1')](), undefined, undefined,
             {
                 clearedMessage: 'My thanks to you and your Pokémon. These grunts are always bothering me and my trial site. You... you\'re the trainer who cleared the Trainers\' School so effortlessly! Allow me to see if you\'re ready for my trial!',
                 npcDisplayName: 'Ilima',
@@ -2510,14 +2510,10 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(battleSkullGrunts1);
 
         // 5 - Temp Battle: Ilima
-        const battleIlimaHauoli = new DefeatTemporaryBattleQuest('Ilima', 'Battle Ilima in Hau\'oli City.');
-        melemeleAlolaQuestLine.addQuest(battleIlimaHauoli);
+        const battleIlima = new DefeatTemporaryBattleQuest('Ilima', 'Battle Ilima in Hau\'oli City.');
+        melemeleAlolaQuestLine.addQuest(battleIlima);
 
-        // 6 - Clear dungeon: Verdant Cavern, Ilima's Trial
-        const clearVerdantCavern = new CustomQuest(1, 0, 'Clear Verdant Cavern to complete Ilima\'s Trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Verdant Cavern')]());
-        melemeleAlolaQuestLine.addQuest(clearVerdantCavern);
-
-        // 7 - Clear dungeon: Melemele Meadow
+        // 6 - Clear dungeon: Melemele Meadow
         // const clearMelemeleMeadow = new defeatDungeonQuest(1, 0, 'Melemele Meadow').withOptionalArgs(
         const clearMelemeleMeadow = new CustomQuest(1, 0, 'Continue past Route 3 and clear Melemele Meadow.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Melemele Meadow')](), undefined, undefined,
             {
@@ -2527,7 +2523,7 @@ class QuestLineHelper {
             });
         melemeleAlolaQuestLine.addQuest(clearMelemeleMeadow);
 
-        // 8 - Clear dungeon: Seaward Cave
+        // 7 - Clear dungeon: Seaward Cave
         const clearSeawardCave = new CustomQuest(1, 0, 'Nebby escaped into a hole! Clear the Seaward Cave dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seaward Cave')](), undefined, undefined,
             {
                 clearedMessage: 'Pew~<br><br><i>Nebby stays. It seems like it\'s following you now!</i>',
@@ -2536,7 +2532,7 @@ class QuestLineHelper {
             });
         melemeleAlolaQuestLine.addQuest(clearSeawardCave);
 
-        // 9 - Temp Battle: Recon Squad 1
+        // 8 - Temp Battle: Recon Squad 1
         const battleReconSquad1Reward = () => {
             MapHelper.moveToTown('Melemele Meadow');
         };
@@ -2549,11 +2545,11 @@ class QuestLineHelper {
             });
         melemeleAlolaQuestLine.addQuest(battleReconSquad1);
 
-        // 10 - Talk to NPC: Lillie2
+        // 9 - Talk to NPC: Lillie2
         const talkToLillie2 = new TalkToNPCQuest(Lillie2, 'Return Nebby to Lillie in Melemele Meadow.');
         melemeleAlolaQuestLine.addQuest(talkToLillie2);
 
-        // 11 - Talk to NPC: Lillie3
+        // 10 - Talk to NPC: Lillie3
         const LillieReviveReward = () => {
             const item = 'Revive';
             Underground.gainMineItem(UndergroundItems.getByName(item).id, 10);
@@ -2579,12 +2575,16 @@ class QuestLineHelper {
 
     // Akala Island guide - Started upon deafting Sina and Dexio
     public static createAkalaAlolaQuestLine() {
-        const akalaAlolaQuestLine = new QuestLine('Trials Galore!', 'Explore Akala Island and its trials.');
-        // 0 - Clear dungeon: Brooklet Hill, Lana's trial
-        const clearBrookletHill = new CustomQuest(1, 0, 'Clear Brooklet Hill and complete Lana\'s trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Brooklet Hill')]());
-        akalaAlolaQuestLine.addQuest(clearBrookletHill);
+        const akalaAlolaQuestLine = new QuestLine('Symbiotic Relations', 'Meet some helpful people with Lillie on Akala Island.');
+        // 0 - Talk to NPC: Lillie4
+        const talkToLillie4 = new TalkToNPCQuest(Lillie4, 'Meet up with Lillie at Heahea City.');
+        akalaAlolaQuestLine.addQuest(talkToLillie4);
 
-        // 1 - Temp battle: Recon Squad 2
+        // 1 - Talk to NPC: ProfBurnetAlola
+        const talkToBurnet1 = new TalkToNPCQuest(ProfBurnetAlola, 'Talk to Professor Burnet.');
+        akalaAlolaQuestLine.addQuest(talkToBurnet1);
+
+        // 2 - Temp battle: Recon Squad 2
         const battleReconSquad2 = new CustomQuest(1, 0, 'The Ultra Recon Squad is investigating a tree that reminds you of a region west of Kanto. Go check it out on Route 5.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Recon Squad 2')](), undefined, undefined,
             {
                 clearedMessage: 'Our research is insufficient to define what it means to be a Pokémon Trainer... We\'ll never be able to stop the Blinding One like this...',
@@ -2593,7 +2593,7 @@ class QuestLineHelper {
             });
         akalaAlolaQuestLine.addQuest(battleReconSquad2);
 
-        // 2 - Temp battle: Skull 3
+        // 3 - Temp battle: Skull 3
         const clearSkull3 = new CustomQuest(1, 0, 'Team Skull is causing trouble on Route 6!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 3')](), undefined, undefined,
             {
                 clearedMessage: 'Give me your name, Trainer. $playername$, eh? That\'s a fine name. I like the way you handled yourself in battle. Perhaps we\'ll meet again someday.',
@@ -2602,15 +2602,7 @@ class QuestLineHelper {
             });
         akalaAlolaQuestLine.addQuest(clearSkull3);
 
-        // 3 - Clear dungeon: Wela Volcano Park, Kiawe's trial
-        const clearWelaVolcano = new CustomQuest(1, 0, 'Clear Wela Volcano Park and complete Kiawe\'s trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Wela Volcano Park')]());
-        akalaAlolaQuestLine.addQuest(clearWelaVolcano);
-
-        // 4 - Clear dungeon: Lush Jungle, Mallow's trial
-        const clearLushJungle = new CustomQuest(1, 0, 'Clear Lush Jungle and complete Mallow\'s trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lush Jungle')]());
-        akalaAlolaQuestLine.addQuest(clearLushJungle);
-
-        // 5 - Clear dungeon: Diglett's tunnel
+        // 4 - Clear dungeon: Diglett's tunnel
         const clearDiglettsTunnel = new CustomQuest (1, 0,  'You hear the echoes of bad rap and low self-esteem in the distance. Clear Diglett\'s Tunnel.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Diglett\'s Tunnel')](), undefined, undefined,
         {
             clearedMessage: 'Just when things were startin\' to heat up, yo, I got surrounded by Diglett and beat up, yo!',
@@ -2619,11 +2611,11 @@ class QuestLineHelper {
         });
         akalaAlolaQuestLine.addQuest(clearDiglettsTunnel);
 
-        // 6 - Gym battle: Olivia
+        // 5 - Gym battle: Olivia
         const battleKahunaOlivia = new CustomQuest (1, 0,  'Reach Kahuna Olivia and Lillie outside the Ruins of Life and complete Akala\'s Grand Trial!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Konikoni City')]());
         akalaAlolaQuestLine.addQuest(battleKahunaOlivia);
 
-        // 7 - Talk to NPC: Lillie4
+        // 6 - Talk to NPC: Lillie5
         const AkalaDreamOrbReward = () => {
             const orbsEarned = 10;
             const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
@@ -2639,8 +2631,8 @@ class QuestLineHelper {
             });
         };
 
-        const talkToLillie4 = new TalkToNPCQuest(Lillie4, 'You have been invited to Aether Paradise. Ask Lillie if she wants to join you.', AkalaDreamOrbReward);
-        akalaAlolaQuestLine.addQuest(talkToLillie4);
+        const talkToLillie5 = new TalkToNPCQuest(Lillie5, 'You have been invited to Aether Paradise. Ask Lillie if she wants to join you.', AkalaDreamOrbReward);
+        akalaAlolaQuestLine.addQuest(talkToLillie5);
 
         // end - Temp battle: Ultra Wormhole
         const clearUltraWormhole = new DefeatTemporaryBattleQuest('Ultra Wormhole', 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.');
@@ -2651,17 +2643,17 @@ class QuestLineHelper {
 
     // Ula'ula Island guide - Started upon defeating Hau in Malie
     public static createUlaulaAlolaQuestLine(){
-        const ulaulaAlolaQuestLine = new QuestLine('Child of the Stars', 'Help Lillie learn more about Nebby\'s origins while completing Ula\'Ula Island\'s trials.');
+        const ulaulaAlolaQuestLine = new QuestLine('Child of the Stars', 'Help Lillie learn more about Nebby\'s origins on Ula\'Ula Island.');
         // 0 - Talk to NPC: Lillie
-        const talkeToLillie5 = new TalkToNPCQuest(Lillie5, 'Learn about the legends of Alola from Lillie in Malie City.');
-        ulaulaAlolaQuestLine.addQuest(talkeToLillie5);
+        const talkeToLillie6 = new TalkToNPCQuest(Lillie6, 'Learn about the legends of Alola from Lillie in Malie City.');
+        ulaulaAlolaQuestLine.addQuest(talkeToLillie6);
 
         // 1 - Temp Battle: Skull 4
         const battleSkull4 = new DefeatTemporaryBattleQuest('Skull 4', 'Team Skull are trying to steal a bus stop on Route 10. Beat them.');
         ulaulaAlolaQuestLine.addQuest(battleSkull4);
 
         // 2 - Clear dungeon: Hokulani Observatory, Sophocles' Trial
-        const clearHokulaniObservatory = new CustomQuest(1, 0, 'Clear Hokulani Observatory and complete Sophocles\' trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Hokulani Observatory')]());
+        const clearHokulaniObservatory = new CustomQuest(1, 0, 'Clear Hokulani Observatory.', () => +!!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Hokulani Observatory')](), 0);
         ulaulaAlolaQuestLine.addQuest(clearHokulaniObservatory);
         
         // 3 - Defeat dungeon boss: Guzma, Malie Garden
@@ -2678,13 +2670,12 @@ class QuestLineHelper {
         ulaulaAlolaQuestLine.addQuest(battleSkull5);
 
         // 5 - Clear dungeon: Thrifty Megamart, Acerola's Trial
-        const clearThriftyMegamart = new CustomQuest(1, 0, 'Clear Thrifty Megamart and complete Acerola\'s trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Thrifty Megamart')]());
+        const clearThriftyMegamart = new CustomQuest(1, 0, 'Clear Thrifty Megamart.', () => +!!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Thrifty Megamart')](), 0);
         ulaulaAlolaQuestLine.addQuest(clearThriftyMegamart);
 
         // 6 - Clear dungeon: Po Town
-        // no custom message in case Bug Z Crystal is obtained via Island Challenge
-        const defeatGuzmaPoTown = new DefeatDungeonBossQuest('Po Town', 'Team Skull Boss Guzma', 0, 'Team Skull have stolen the child\'s Yungoos! Raid their base. Chase after them and clear the Po Town dungeon.');
-        ulaulaAlolaQuestLine.addQuest(defeatGuzmaPoTown);
+        const clearPoTown = new CustomQuest(1, 0, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Po Town')]());
+        ulaulaAlolaQuestLine.addQuest(clearPoTown);
 
         // 7 - Temp Battle: Gladion 2
         const battleGladion2Reward = () => {
@@ -2749,11 +2740,11 @@ class QuestLineHelper {
             App.game.quests.getQuestLine('Emissary of Light').beginQuest(0, undefined, true);
         };
 
-        const talkToLillie6 = new TalkToNPCQuest(Lillie6, 'Talk to Lillie.');
+        const talkToLillie7 = new TalkToNPCQuest(Lillie7, 'Talk to Lillie.');
         const talktoGladion1 = new TalkToNPCQuest(Gladion1, 'Talk to Gladion.');
         
         ulaulaAlolaQuestLine.addQuest(new MultipleQuestsQuest([
-            talkToLillie6,
+            talkToLillie7,
             talktoGladion1,
         ], 'Talk to Lillie and Gladion at Aether Paradise when you\'re ready to go to the next island.', AlolaMasterballReward));
 
@@ -2785,17 +2776,22 @@ class QuestLineHelper {
             });
         poniAlolaQuestLine.addQuest(clearExeggutorIslandHill);
 
-        // 3 - Gym battle: Hapu
+        // 3 - Temp Battle: Skull 6
+        const battleSkullGrunts6 = new CustomQuest (1, 0,  'Settle the score with the Skull Gang.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 6')](), undefined, undefined,
+            {
+                clearedMessage: 'That\'s enough, grunts. No one wants to see a sore loser.</br></br>You. To be honest, I\'ve treated you really badly. Even if I apologize, I know it\'s probably too late for you to forgive me. This is my way of saying sorry, OK? Take it. It\'s Poisonium Z.</br><img src="assets/images/items/zCrystal/Poisonium Z.png">',
+                npcDisplayName: 'Plumeria',
+                npcImageName: 'Plumeria (league)',
+            });
+        poniAlolaQuestLine.addQuest(battleSkullGrunts6);
+
+        // 4 - Gym battle: Hapu
         const battleHapuReward = () => {
             MapHelper.moveToTown('Vast Poni Canyon');
         };
 
         const battleKahunaHapu = new CustomQuest(1, battleHapuReward, 'Go to Vast Poni Canyon\'s Entrance and prove your skills against Poni\'s new kahuna, Hapu!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Exeggutor Island')]());
         poniAlolaQuestLine.addQuest(battleKahunaHapu);
-
-        // 4 - Clear dungeon: Vast Poni Canyon, Dragonium Z trial
-        const clearPoniCanyon = new CustomQuest(1, 0, 'Clear the ancient trial site of Vast Poni Canyon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Vast Poni Canyon')]());
-        poniAlolaQuestLine.addQuest(clearPoniCanyon);
 
         // 5 - Talk to NPC: Play a flute on the Altar of the Sunne and Moone. (Flute npc is locked to day or night to give the illusion that the gift npc is affected by this in cases where the step is completed right before dusk or dawn)
         const talkToLillieDay = new TalkToNPCQuest(SunFlute, 'Play the Sun Flute during Day.');
@@ -2817,13 +2813,19 @@ class QuestLineHelper {
         });
         poniAlolaQuestLine.addQuest(clearBeastLusamine);
 
-        // 7 - Talk to NPC: Lillie7
+        // 7 - Talk to NPC: Lillie8
         const EaterOfLightReward= () => {
-            App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined, true);
+            App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined);
+            Notifier.notify({
+                title: '<del>Emissary</del> Eater of Light',
+                message: `A dangerous Pokémon from another world threatens the Alola region.`,
+                type: NotificationConstants.NotificationOption.dark, // dramatic dark color for plot stuff
+                timeout: 5 * GameConstants.MINUTE,
+            });
         };
 
-        const talkToLillie7 = new TalkToNPCQuest(Lillie7, 'Talk to Lillie.', EaterOfLightReward);
-        poniAlolaQuestLine.addQuest(talkToLillie7);
+        const talkToLillie8 = new TalkToNPCQuest(Lillie8, 'Talk to Lillie.', EaterOfLightReward);
+        poniAlolaQuestLine.addQuest(talkToLillie8);
 
         App.game.quests.questLines().push(poniAlolaQuestLine);
     }

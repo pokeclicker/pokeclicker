@@ -3647,7 +3647,7 @@ TemporaryBattleList['Ilima'] = new TemporaryBattle(
         new GymPokemon('Yungoos', 99760695, 10),
         new GymPokemon('Smeargle', 184903445, 11),
     ],
-    'You- or should I say you and your Pokémon- make quite the interesting team! I do hope you\'ll come to Verdant Cavern and attempt my trial! You can get there from Route 2.',
+    'You- or should I say you and your Pokémon- make quite the interesting team! I do hope you\'ll come to Verdant Cavern and attempt my trial!',
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4)],
     undefined,
     {
@@ -3671,7 +3671,7 @@ TemporaryBattleList['Recon Squad 1'] = new TemporaryBattle(
     'Recon Squad 1',
     [new GymPokemon('Furfrou', 334332002, 13)],
     undefined, // custom quest message
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7)],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
@@ -3688,7 +3688,7 @@ TemporaryBattleList['Hau 3'] = new TemporaryBattle(
         new GymPokemon('Pikachu', 104983480, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',
@@ -3709,7 +3709,7 @@ TemporaryBattleList.Dexio = new TemporaryBattle(
         // Starts Akala story quest if both Sina and Dexio are defeated.
         firstTimeRewardFunction: () => {
             if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sina')]() >= 1) {
-                App.game.quests.getQuestLine('Trials Galore!').beginQuest(0, undefined, true);
+                App.game.quests.getQuestLine('Symbiotic Relations').beginQuest(0, undefined, true);
             }
         },
         displayName: 'Pokémon Trainer Dexio',
@@ -3728,7 +3728,7 @@ TemporaryBattleList.Sina = new TemporaryBattle(
         // Starts Akala story quest if both Sina and Dexio are defeated.
         firstTimeRewardFunction: () => {
             if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dexio')]() >= 1) {
-                App.game.quests.getQuestLine('Trials Galore!').beginQuest(0, undefined, true);
+                App.game.quests.getQuestLine('Symbiotic Relations').beginQuest(0, undefined, true);
             }
         },
         displayName: 'Pokémon Trainer Sina',
@@ -3773,7 +3773,7 @@ TemporaryBattleList['Recon Squad 2'] = new TemporaryBattle(
     'Recon Squad 2',
     [new GymPokemon('Poipole', 412520122, 20)],
     undefined, // custom quest message
-    [new QuestLineStepCompletedRequirement('Trials Galore!', 0)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
@@ -3788,7 +3788,7 @@ TemporaryBattleList['Skull 3'] = new TemporaryBattle(
     undefined, // custom quest message
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 6),
-        new QuestLineStepCompletedRequirement('Trials Galore!', 1),
+        new QuestLineStepCompletedRequirement('Symbiotic Relations', 2),
     ],
     undefined,
     {
@@ -3830,7 +3830,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 508485861, 27)],
     '<i>The creature escaped back into the ultra wormhole.</i>',
-    [new QuestLineStepCompletedRequirement('Trials Galore!', 7)],
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 6)],
     undefined,
     {
         hideTrainer: true,
@@ -3889,6 +3889,8 @@ TemporaryBattleList['Molayne'] = new TemporaryBattle(
         new GymPokemon('Metang', 170174638, 29),
         new GymPokemon('Alolan Dugtrio', 175257094, 30),
     ],
+    'Here\'s a little something to remember our meeting by! I gathered these Z-Crystals when I was on my own island challenge back in my own day, adventuring with Kukui and my Pokémon in search of strength. Take it, and use it well.</br></br><img src="assets/images/items/zCrystal/Steelium Z.png">',
+    [new DevelopmentRequirement()],
 );
 TemporaryBattleList['Skull 5'] = new TemporaryBattle(
     'Skull 5',
@@ -3915,7 +3917,7 @@ TemporaryBattleList['Plumeria 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Skull Admin Plumeria',
-        returnTown: 'Tapu Village',
+        returnTown: 'Aether House',
         imageName: 'Plumeria',
     }
 );
@@ -3958,7 +3960,7 @@ TemporaryBattleList['Skull 6'] = new TemporaryBattle(
         new GymPokemon('Houndour', 104373405, 45),
     ],
     undefined,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 2)],
     undefined,
     {
         displayName: 'Team Skull Grunts',
@@ -3986,8 +3988,8 @@ TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
         new GymPokemon('Mismagius', 109925182, 47),
         new GymPokemon('Milotic', 109925182, 47),
         new GymPokemon('Bewear', 109925182, 47),
-        new GymPokemon('Help us Solgaleo!', 183208637, 47, new ObtainedPokemonRequirement('Solgaleo')),
-        new GymPokemon('Help us Lunala!', 183208637, 47, new ObtainedPokemonRequirement('Lunala')),
+        new GymPokemon('Help us Solgaleo!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Lunala', true), new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])])])),
+        new GymPokemon('Help us Lunala!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo', true), new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])])])),
     ],
     undefined,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 5),
@@ -4039,7 +4041,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
     [new GymPokemon('Ultra Necrozma', 800540100, 60)],
     undefined, // custom quest message
-    [new TemporaryBattleRequirement('Necrozma')],
+    [new TemporaryBattleRequirement('Necrozma'), new QuestLineCompletedRequirement('Emissary of Light')],
     undefined,
     {
         firstTimeRewardFunction: () => {
