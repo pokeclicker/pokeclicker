@@ -194,10 +194,10 @@ class SpecialEvents implements Feature {
         */
         this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and Reindeer Stantler in Johto, discover the mystical creatures of Ilex Forest, Seafoam Islands and Sandgem Town or party at Bill\'s House.',
             // Start
-            new Date(new Date().getFullYear(), 11, 24, 1), () => {
+            new Date(new Date().getFullYear(), 11, 18, 1), () => {
             },
             // End
-            new Date(new Date().getFullYear(), 11, 30, 23), () => {
+            new Date(new Date().getFullYear(), 11, 31, 23), () => {
             }
         );
     }

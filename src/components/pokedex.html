@@ -20,7 +20,7 @@ aria-labelledby="pokedexModalLabel">
 
                         <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                         <div class="pokedex-border-bottom pt-2">
-                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
+                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length.toLocaleString('en-US')} Pokémon`"></h4>
                         </div>
                         <!-- /ko -->
                     </div>
@@ -207,7 +207,7 @@ aria-labelledby="pokedexModalLabel">
 
                         <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                         <div class="pokedex-border-bottom pt-2 d-lg-none d-block">
-                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
+                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length.toLocaleString('en-US')} Pokémon`"></h4>
                         </div>
                         <!-- /ko -->
                         <div class="scrolling-div-pokedex">

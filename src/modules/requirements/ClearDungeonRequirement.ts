@@ -2,7 +2,7 @@ import * as GameConstants from '../GameConstants';
 import AchievementRequirement from './AchievementRequirement';
 
 export default class ClearDungeonRequirement extends AchievementRequirement {
-    public dungeonIndex: number; // Gym name index in array GameConstants.Gyms
+    public dungeonIndex: number; // Dungeon name index in array GameConstants.RegionDungeons.flat()
 
     constructor(value: number, dungeonIndex: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, option, GameConstants.AchievementType['Clear Dungeon']);

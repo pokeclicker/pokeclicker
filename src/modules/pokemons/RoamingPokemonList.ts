@@ -181,7 +181,7 @@ RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Pikachu (Clone)', ne
 // Let's Go Pikachu Eevee (Nov 16 - Nov 23)
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu', new SpecialEventRequirement('Let\'s GO!')));
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee', new SpecialEventRequirement('Let\'s GO!')));
-// Christmas (Dec 24 - Dec 30)
+// Christmas (Dec 18 - Dec 31)
 // Add to every roaming group that has at least one roamer
 RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
     regionGroups.forEach((_, subRegionGroup) => {
