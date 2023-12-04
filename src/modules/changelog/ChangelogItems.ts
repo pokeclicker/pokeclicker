@@ -10,6 +10,13 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.17
+    new ChangelogUpdate('v0.10.17', new Date(2023, 11, 4)),
+    new Changelog(changelogType.FIXED, 'Incorrect egg steps for several Pokémon'),
+    new Changelog(changelogType.FIXED, 'Friend Safari rotation'),
+    new Changelog(changelogType.FIXED, 'Some achievements appearing in the wrong category'),
+    new Changelog(changelogType.FIXED, 'Various minor bugs and typos'),
+
     // v0.10.16
     new ChangelogUpdate('v0.10.16', new Date(2023, 11, 2)),
     new Changelog(changelogType.NEW, 'Orre - Gale of Darkness'),
