@@ -40,7 +40,7 @@ class ShardTraderShop extends Shop {
     public isVisible(): boolean {
         if (super.isVisible()) {
             const deals = ShardDeal.getDeals(this.location)?.();
-            return !deals?.some(d => !d.item.itemType.isVisible()) ?? true;
+            return deals?.some(d => d.item.itemType.isVisible()) ?? true;
         }
         return false;
     }
