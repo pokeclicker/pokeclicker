@@ -35,11 +35,7 @@
     </div>
     <div id="pokemonListBody" class="card-body p-0 show table-responsive">
         <div data-bind="template: { name: 'PartySortSettingTemplate', data: Settings.getSetting('partySort')}"></div>
-
-        <table
-            id="pokemonList"
-            class="table table-striped table-hover table-sm m-0"
-        >
+        <table id="pokemonList" class="table table-striped table-hover table-sm m-0">
             <thead>
                 <tr>
                     <td></td>
@@ -54,7 +50,9 @@
                     </td>
                 </tr>
             </thead>
-            <tbody data-bind="foreach: lazyLoad($element, PartyController.getSortedList, { pageSize: 20 })">
+            <tbody data-bind="let: { lazyPokemonList: lazyLoad($element, PartyController.getSortedList, { pageSize: 20, reset: DisplayUtils.collapseState.pokemonListBodyObservable}) }">
+            <!-- ko if: DisplayUtils.collapseState.pokemonListBody !== 'hidden' -->
+                <!-- ko foreach: lazyPokemonList -->
                 <tr data-toggle="modal" href="#pokemonStatisticsModal" data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">
                     <td>
                         <img
@@ -86,6 +84,8 @@
                         </div>
                     </td>
                 </tr>
+                <!-- /ko -->
+            <!-- /ko -->
             </tbody>
         </table>
     </div>
