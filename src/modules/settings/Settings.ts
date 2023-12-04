@@ -42,13 +42,13 @@ export default class Settings {
         });
     }
 
-    static enumToSettingOptionArray<T extends Record<string, unknown>>(obj: T, filter: (v) => boolean = () => true, displayNames?: Record<keyof T, string>) {
+    static enumToSettingOptionArray<T extends Record<string, unknown>>(obj: T, filter: ((v) => boolean) = (() => true), displayNames?: Record<keyof T, string>) {
         return GameHelper.enumStrings(obj).filter(filter).map(
             (val) => new SettingOption(displayNames ? displayNames[val] : camelCaseToString(val), `${obj[val]}`),
         );
     }
 
-    static enumToNumberSettingOptionArray(obj: any, filter: (v) => boolean = () => true) {
+    static enumToNumberSettingOptionArray(obj: any, filter: ((v) => boolean) = (() => true)) {
         return GameHelper.enumStrings(obj).filter(filter).map((val) => new SettingOption(camelCaseToString(val), obj[val]));
     }
 

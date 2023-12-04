@@ -2626,6 +2626,12 @@ class Update implements Saveable {
                     helper.sortOption = 5;
                 }
             });
+
+            // Rename settings to match pokedex settings name convention
+            settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
+            delete settingsData.breedingTypeFilter1;
+            settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
+            delete settingsData.breedingTypeFilter2;
         },
     };
 

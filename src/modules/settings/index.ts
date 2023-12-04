@@ -27,8 +27,14 @@ import PokemonType from '../enums/PokemonType';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export default Settings;
+
+// Reusable SettingOptions that unlock when the player reaches each region
+const regionOptions = Settings.enumToNumberSettingOptionArray(Region, (r) => r !== 'final');
+regionOptions.push(regionOptions.shift()); // move Region.none to end
+regionOptions.filter(o => o.value >= 1).forEach(o => { o.requirement = new MaxRegionRequirement(o.value); });
 
 /*
  * THESE SETTINGS SHOULD ALL BE PUT IN SETTINGS MENU
@@ -208,7 +214,7 @@ Settings.add(new BooleanSetting('vitaminSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('vitaminHideMaxedPokemon', 'Hide Pokémon with max vitamin', false));
 Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon', false));
 Settings.add(new SearchSetting('vitaminSearchFilter', 'Search', ''));
-Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptions], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
 // Consumable Sorting
@@ -219,7 +225,7 @@ Settings.add(new Setting<number>('consumableSort', 'Sort', consumableSortSetting
 Settings.add(new BooleanSetting('consumableSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('consumableHideShinyPokemon', 'Hide shiny Pokémon', false));
 Settings.add(new SearchSetting('consumableSearchFilter', 'Search', ''));
-Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptions], -2));
 Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
 // Held Item Sorting
@@ -229,7 +235,7 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
 Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', ''));
-Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptions], -2));
 Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
 Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false));
@@ -239,7 +245,7 @@ export const breedingFilterNames = ['breedingNameFilter', 'breedingIDFilter', 'b
     'breedingShinyFilter', 'breedingPokerusFilter', 'breedingCategoryFilter', 'breedingUniqueTransformationFilter', 'breedingHideAltFilter'];
 
 Settings.add(new SearchSetting('breedingNameFilter', 'Search', ''));
-Settings.add(new Setting<number>('breedingIDFilter', 'SearchID', [], -1));
+Settings.add(new Setting<number>('breedingIDFilter', 'Search ID', [], -1));
 Settings.add(new Setting<number>('breedingRegionFilter', 'Region', [], (2 << Region.final - 1) - 1));
 Settings.add(new Setting<PokemonType | null>('breedingType1Filter', 'Type 1',
     [
@@ -262,7 +268,7 @@ Settings.add(new Setting<number>('breedingShinyFilter', 'Shiny Status',
         new SettingOption('Shiny', 1),
     ],
     -1));
-Settings.add(new Setting<number>('breedingPokerusFilter', 'Pokerus',
+Settings.add(new Setting<number>('breedingPokerusFilter', 'Pokérus',
     [
         new SettingOption('All', -1),
         ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
@@ -294,8 +300,9 @@ Settings.add(new Setting<string>('breedingDisplayTextSetting', 'breedingDisplayT
     ],
     'attack'));
 
+// Region.none should be the first setting here
 Settings.add(new Setting<Region>('breedingRegionalAttackDebuffSetting', 'breedingRegionalAttackDebuffSetting',
-    Settings.enumToNumberSettingOptionArray(Region).filter((opt) => opt.text !== 'Final'),
+    [...regionOptions.slice(0, -1), ...regionOptions.slice(-1)],
     Region.none));
 
 // Pokedex Filters
@@ -303,14 +310,8 @@ export const pokedexFilterNames = ['pokedexNameFilter', 'pokedexIDFilter', 'poke
     'pokedexPokerusFilter', 'pokedexCategoryFilter', 'pokedexUniqueTransformationFilter', 'pokedexHeldItemFilter', 'pokedexHideAltFilter'];
 
 Settings.add(new SearchSetting('pokedexNameFilter', 'Search', ''));
-Settings.add(new Setting<number>('pokedexIDFilter', 'SearchID', [], -1));
-Settings.add(new Setting<Region | null>('pokedexRegionFilter', 'Region',
-    [
-        new SettingOption('All', null),
-        ...Settings.enumToNumberSettingOptionArray(Region).filter((opt) => !['None', 'Final'].includes(opt.text)),
-        new SettingOption('None', Region.none),
-    ],
-    null));
+Settings.add(new Setting<number>('pokedexIDFilter', 'Search ID', [], -1));
+Settings.add(new Setting<Region | null>('pokedexRegionFilter', 'Region', [new SettingOption('All', null), ...regionOptions], null));
 Settings.add(new Setting<PokemonType | null>('pokedexType1Filter', 'Type 1',
     [
         new SettingOption('All', null),
@@ -337,7 +338,7 @@ Settings.add(new Setting<string>('pokedexCaughtFilter', 'Caught Status',
         new SettingOption('Caught Purified', 'caught-purified'),
     ],
     'all'));
-Settings.add(new Setting<number>('pokedexPokerusFilter', 'Pokerus',
+Settings.add(new Setting<number>('pokedexPokerusFilter', 'Pokérus',
     [
         new SettingOption('All', -1),
         ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
