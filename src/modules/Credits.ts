@@ -1327,7 +1327,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1430,
+            1431,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -1375,7 +1375,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            146,
+            147,
         ],
         name: 'Qwertypop04',
         link: 'https://github.com/Qwertypop04',
@@ -1383,7 +1383,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            130,
+            133,
         ],
         name: 'CypherX',
         link: 'https://github.com/CypherX',
@@ -1423,19 +1423,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            63,
+        ],
+        name: 'RegisCoaxans',
+        link: 'https://github.com/RegisCoaxans',
+        image: 'https://avatars.githubusercontent.com/u/68825215?v=4',
+    },
+    {
+        resources: [
             61,
         ],
         name: 'osherwott',
         link: 'https://github.com/osherwott',
         image: 'https://avatars.githubusercontent.com/u/114451054?v=4',
-    },
-    {
-        resources: [
-            59,
-        ],
-        name: 'RegisCoaxans',
-        link: 'https://github.com/RegisCoaxans',
-        image: 'https://avatars.githubusercontent.com/u/68825215?v=4',
     },
     {
         resources: [
@@ -1447,7 +1447,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            49,
+            50,
         ],
         name: 'EatPant2nd',
         link: 'https://github.com/EatPant2nd',
