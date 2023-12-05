@@ -2530,11 +2530,16 @@ class Update implements Saveable {
 
             // Fix Hopo berry visible in berrydex when not available
             saveData.farming.mutations[71] = false;
-
-            // Fix Hopo berry visible in berrydex when not available
-            saveData.farming.mutations[71] = false;
         },
-        '0.10.17':  ({ playerData, saveData, settingsData }) => {
+
+        '0.10.17': ({ saveData }) => {
+            // Fix Anomaly Mewtwo 5 if the quest is not completed.
+            if (saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state < 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+        },
+
+        '0.10.18':  ({ playerData, saveData, settingsData }) => {
 
             // Update sort settings to make room for new attack at lv 100 sort option
             ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
