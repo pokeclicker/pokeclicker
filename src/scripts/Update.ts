@@ -2531,6 +2531,12 @@ class Update implements Saveable {
             // Fix Hopo berry visible in berrydex when not available
             saveData.farming.mutations[71] = false;
         },
+        '0.10.17': ({ saveData }) => {
+            // Fix Anomaly Mewtwo 5 if the quest is not completed.
+            if (saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state < 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+        },
     };
 
     constructor() {
