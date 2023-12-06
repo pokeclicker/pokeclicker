@@ -164,18 +164,23 @@ class DungeonBattle extends Battle {
             PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
             // Shiny
             if (enemyPokemon.shiny) {
-                App.game.logbook.newLog(
-                    LogBookTypes.SHINY,
-                    App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)
-                        ? createLogContent.encounterShinyDupe({
+                if (App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)) {
+                    App.game.logbook.newLog(
+                        LogBookTypes.SHINY_DUPLICATE,
+                        createLogContent.encounterShinyDupe({
                             location: player.town().dungeon.name,
                             pokemon: this.enemyPokemon().name,
                         })
-                        : createLogContent.encounterShiny({
+                    );
+                } else {
+                    App.game.logbook.newLog(
+                        LogBookTypes.SHINY,
+                        createLogContent.encounterShiny({
                             location: player.town().dungeon.name,
                             pokemon: this.enemyPokemon().name,
                         })
-                );
+                    );
+                }
             } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
                 App.game.logbook.newLog(
                     LogBookTypes.NEW,
@@ -206,18 +211,23 @@ class DungeonBattle extends Battle {
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
         // Shiny
         if (enemyPokemon.shiny) {
-            App.game.logbook.newLog(
-                LogBookTypes.SHINY,
-                App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)
-                    ? createLogContent.encounterShinyDupe({
+            if (App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)) {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY_DUPLICATE,
+                    createLogContent.encounterShinyDupe({
                         location: player.town().dungeon.name,
                         pokemon: this.enemyPokemon().name,
                     })
-                    : createLogContent.encounterShiny({
+                );
+            } else {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY,
+                    createLogContent.encounterShiny({
                         location: player.town().dungeon.name,
                         pokemon: this.enemyPokemon().name,
                     })
-            );
+                );
+            }
         } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
             App.game.logbook.newLog(
                 LogBookTypes.NEW,
@@ -257,18 +267,23 @@ class DungeonBattle extends Battle {
             PokemonHelper.incrementPokemonStatistics(this.enemyPokemon().id, GameConstants.PokemonStatisticsType.Encountered, this.enemyPokemon().shiny, this.enemyPokemon().gender, this.enemyPokemon().shadow);
             // Shiny
             if (this.enemyPokemon().shiny) {
-                App.game.logbook.newLog(
-                    LogBookTypes.SHINY,
-                    App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)
-                        ? createLogContent.encounterShinyDupe({
+                if (App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)) {
+                    App.game.logbook.newLog(
+                        LogBookTypes.SHINY_DUPLICATE,
+                        createLogContent.encounterShinyDupe({
                             location: player.town().dungeon.name,
                             pokemon: this.enemyPokemon().name,
                         })
-                        : createLogContent.encounterShiny({
+                    );
+                } else {
+                    App.game.logbook.newLog(
+                        LogBookTypes.SHINY,
+                        createLogContent.encounterShiny({
                             location: player.town().dungeon.name,
                             pokemon: this.enemyPokemon().name,
                         })
-                );
+                    );
+                }
             } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
                 App.game.logbook.newLog(
                     LogBookTypes.NEW,

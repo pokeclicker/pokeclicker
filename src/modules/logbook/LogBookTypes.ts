@@ -12,6 +12,10 @@ export const LogBookTypes: Record<string, LogBookType> = {
         display: 'warning',
         label: 'SHINY',
     },
+    SHINY_DUPLICATE: {
+        display: 'warning',
+        label: 'SHINY_DUPLICATE',
+    },
     CAUGHT: {
         display: 'success',
         label: 'CAUGHT',

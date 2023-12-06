@@ -82,12 +82,17 @@ class Party implements Feature {
 
         if (pokemon.shiny) {
             // Add all shiny catches to the log book
-            App.game.logbook.newLog(
-                LogBookTypes.CAUGHT,
-                this.alreadyCaughtPokemon(pokemon.id, true)
-                    ? createLogContent.capturedShinyDupe({ pokemon: pokemon.name })
-                    : createLogContent.capturedShiny({ pokemon: pokemon.name })
-            );
+            if (this.alreadyCaughtPokemon(pokemon.id, true)) {
+                App.game.logbook.newLog(
+                    LogBookTypes.SHINY_DUPLICATE,
+                    createLogContent.capturedShinyDupe({ pokemon: pokemon.name })
+                );
+            } else {
+                App.game.logbook.newLog(
+                    LogBookTypes.CAUGHT,
+                    createLogContent.capturedShiny({ pokemon: pokemon.name })
+                );
+            }
             // Already caught (shiny)
             if (this.alreadyCaughtPokemon(pokemon.id, true)) {
                 return;
