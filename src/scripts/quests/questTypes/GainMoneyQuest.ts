@@ -29,7 +29,7 @@ class GainMoneyQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Gain ${this.amount.toLocaleString('en-US')} Pokédollars.`;
+        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} Pokédollars.`;
     }
 
     toJSON() {

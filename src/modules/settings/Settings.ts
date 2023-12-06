@@ -7,7 +7,10 @@ export default class Settings {
     static list: Setting<any>[] = [];
 
     static add(setting: Setting<any>) {
-        if (!this.getSetting(setting.name)) {
+        if (!setting.name) {
+            // eslint-disable-next-line no-console
+            console.warn(`Cannot add settings with no name (display name: '${setting.defaultDisplayName}')`);
+        } else if (!this.getSetting(setting.name)) {
             this.list.push(setting);
         }
     }

@@ -2225,6 +2225,9 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 delete p[14]; // megaStone
             });
+
+            // Hopo Berry
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 70);
         },
 
         '0.10.12': ({ playerData, saveData, settingsData }) => {
@@ -2458,13 +2461,80 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated[31] = 0;
 
         },
-
         '0.10.16': ({ playerData, saveData, settingsData }) => {
 
 
             // Fix None category color being incomplete
             if (saveData.categories.categories[0].color === '#333') {
                 saveData.categories.categories[0].color = '#333333';
+            }
+
+            // ClearBattleFrontier → ClearBattleFrontierQuest
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name == 'ClearBattleFrontier') {
+                    q.name = 'ClearBattleFrontierQuest';
+                }
+                return q;
+            }) || [];
+
+            // Add Genesect Quest Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 122);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 123);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 124);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 125);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
+
+            // Remove erroneous BreedingFilter search setting
+            delete settingsData[''];
+
+            // Remove Z Crystal gyms and badges (remove furthest down the index first as to not get confused by index numbers)
+            // Mina\'s Trial
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            // Vast Poni Canyon Trial
+            saveData.statistics.gymsDefeated.splice(87, 1);
+            // Acerola\'s Trial
+            saveData.statistics.gymsDefeated.splice(85, 1);
+            // Sophocles\' Trial
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            // Mallow\'s Trial
+            saveData.statistics.gymsDefeated.splice(82, 1);
+            // Kiawe\'s Trial
+            saveData.statistics.gymsDefeated.splice(81, 1);
+            // Lana\'s Trial
+            saveData.statistics.gymsDefeated.splice(80, 1);
+            // Ilima\'s Trial
+            saveData.statistics.gymsDefeated.splice(78, 1);
+            // FairiumZ
+            saveData.badgeCase.splice(103, 1);
+            // DragoniumZ
+            saveData.badgeCase.splice(102, 1);
+            // GhostiumZ
+            saveData.badgeCase.splice(100, 1);
+            // ElectriumZ
+            saveData.badgeCase.splice(99, 1);
+            // GrassiumZ
+            saveData.badgeCase.splice(97, 1);
+            // FiriumZ
+            saveData.badgeCase.splice(96, 1);
+            // WateriumZ
+            saveData.badgeCase.splice(95, 1);
+            // NormaliumZ
+            saveData.badgeCase.splice(93, 1);
+
+            // Santa Jynx TempBattles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+
+            // Fix Hopo berry visible in berrydex when not available
+            saveData.farming.mutations[71] = false;
+        },
+        '0.10.17': ({ saveData }) => {
+            // Fix Anomaly Mewtwo 5 if the quest is not completed.
+            if (saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state < 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
             }
 
             // Add Alola story battles
