@@ -1529,7 +1529,7 @@ export type PokemonNameType
     | 'Klawf'
     | 'Titan Klawf'
     | 'Capsakid'
-    | 'Scovillian'
+    | 'Scovillain'
     | 'Rellor'
     | 'Rabsca'
     | 'Flittle'
