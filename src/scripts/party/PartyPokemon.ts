@@ -342,11 +342,11 @@ class PartyPokemon implements Saveable {
     });
 
     getEggSteps = ko.pureComputed((): number => {
-        return this.calculateEggsteps(this.vitaminsUsed[GameConstants.VitaminType.Protein](), this.vitaminsUsed[GameConstants.VitaminType.Calcium](), this.vitaminsUsed[GameConstants.VitaminType.Carbos]() )
+        return this.calculateEggsteps(this.vitaminsUsed[GameConstants.VitaminType.Protein](), this.vitaminsUsed[GameConstants.VitaminType.Calcium](), this.vitaminsUsed[GameConstants.VitaminType.Carbos]() );
     });
 
     getBreedingAttackBonus = ko.pureComputed((): number => {
-        return this.calculateBreedingAttackBonus(this.vitaminsUsed[GameConstants.VitaminType.Protein](), this.vitaminsUsed[GameConstants.VitaminType.Calcium]())
+        return this.calculateBreedingAttackBonus(this.vitaminsUsed[GameConstants.VitaminType.Protein](), this.vitaminsUsed[GameConstants.VitaminType.Calcium]());
     });
 
     heldItemAttackBonus = ko.pureComputed((): number => {
@@ -358,7 +358,7 @@ class PartyPokemon implements Saveable {
     });
 
     breedingEfficiency = ko.pureComputed((): number => {
-        return this.calculateBreedingEffiency(this.vitaminsUsed[GameConstants.VitaminType.Protein](), this.vitaminsUsed[GameConstants.VitaminType.Calcium](),this.vitaminsUsed[GameConstants.VitaminType.Carbos](), Settings.getSetting('breedingEfficiencyAllModifiers').observableValue())
+        return this.calculateBreedingEffiency(this.vitaminsUsed[GameConstants.VitaminType.Protein](), this.vitaminsUsed[GameConstants.VitaminType.Calcium](),this.vitaminsUsed[GameConstants.VitaminType.Carbos](), Settings.getSetting('breedingEfficiencyAllModifiers').observableValue());
     });
 
     public isHatchable = ko.pureComputed(() => {
@@ -467,14 +467,14 @@ class PartyPokemon implements Saveable {
         let optimalCalcium = 0;
         let optimalCarbos = 0;
         let maxResult = -Infinity;
-        let maxVitamins = (region + 1) * 5;
+        const maxVitamins = (region + 1) * 5;
 
 
         for (let x = 0; x <= maxVitamins; x++) {
             for (let y = 0; y <= maxVitamins - x; y++) {
                 for (let z = 0; z <= maxVitamins - x - y; z++) {
                     const result = this.calculateBreedingEffiency(x,y * (((region + 1) > 1) ? 1 : 0),z * (((region + 1) > 3) ? 1 : 0));
-                
+
                     if (result > maxResult) {
                         maxResult = result;
                         optimalProtein = x;
@@ -489,19 +489,25 @@ class PartyPokemon implements Saveable {
         if (player.itemList[GameConstants.VitaminType[GameConstants.VitaminType.Protein]]() + this.vitaminsUsed[GameConstants.VitaminType.Protein]() >= optimalProtein
             && player.itemList[GameConstants.VitaminType[GameConstants.VitaminType.Calcium]]() + this.vitaminsUsed[GameConstants.VitaminType.Calcium]() >= optimalCalcium
             && player.itemList[GameConstants.VitaminType[GameConstants.VitaminType.Carbos]]() + this.vitaminsUsed[GameConstants.VitaminType.Carbos]() >= optimalCarbos) {
-            if (this.vitaminsUsed[GameConstants.VitaminType.Protein]())
+            if (this.vitaminsUsed[GameConstants.VitaminType.Protein]()) {
                 this.removeVitamin(GameConstants.VitaminType.Protein, Infinity);
-            if (this.vitaminsUsed[GameConstants.VitaminType.Calcium]())
+            }
+            if (this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) {
                 this.removeVitamin(GameConstants.VitaminType.Calcium, Infinity);
-            if (this.vitaminsUsed[GameConstants.VitaminType.Carbos]())
+            }
+            if (this.vitaminsUsed[GameConstants.VitaminType.Carbos]()) {
                 this.removeVitamin(GameConstants.VitaminType.Carbos, Infinity);
+            }
 
-            if (optimalProtein > 0)
+            if (optimalProtein > 0) {
                 this.useVitamin(GameConstants.VitaminType.Protein, optimalProtein);
-            if (optimalCalcium > 0)
+            }
+            if (optimalCalcium > 0) {
                 this.useVitamin(GameConstants.VitaminType.Calcium, optimalCalcium);
-            if (optimalCarbos > 0)
+            }
+            if (optimalCarbos > 0) {
                 this.useVitamin(GameConstants.VitaminType.Carbos, optimalCarbos);
+            }
 
             Notifier.notify({
                 message: `${this.displayName} has been assigned optimal vitamins.`,
@@ -537,7 +543,7 @@ class PartyPokemon implements Saveable {
         }
     };
 
-    public calculateBreedingEffiency(protein: number, calcium: number, carbos: number, breedingEfficiencyAllModifiers: boolean = false): number {
+    public calculateBreedingEffiency(protein: number, calcium: number, carbos: number, breedingEfficiencyAllModifiers = false): number {
         let breedingAttackBonus = this.calculateBreedingAttackBonus(protein, calcium);
         if (breedingEfficiencyAllModifiers) {
             breedingAttackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
