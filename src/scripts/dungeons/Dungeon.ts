@@ -11502,12 +11502,12 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
             [
                 new GymPokemon('Poipole', 78098410, 47),
             ],
-            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9, GameConstants.AchievementOption.less) }),
+            { weight: 0.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9, GameConstants.AchievementOption.less) }),
         new DungeonTrainer('Soliera',
             [
                 new GymPokemon('Poipole', 78098410, 47),
             ],
-            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9, GameConstants.AchievementOption.less) }),
+            { weight: 0.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9, GameConstants.AchievementOption.less) }),
         new DungeonTrainer('Aether Branch Chief',
             [
                 new GymPokemon('Claydol', 26032803, 44),
@@ -11535,7 +11535,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Help us Solgaleo!', 15619682, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')])),
                 new GymPokemon('Help us Lunala!', 15619682, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')])),
             ],
-            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 11) }, 'Lusamine', '(lusamine)'),
+            { weight: 2, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 11) }, 'Lusamine', '(lusamine)'),
     ],
     1080000, 17);
 

@@ -3985,7 +3985,7 @@ TemporaryBattleList['Skull 3'] = new TemporaryBattle(
     undefined, // custom quest message
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 6),
-        new QuestLineStepCompletedRequirement('Symbiotic Relations', 2),
+        new QuestLineStepCompletedRequirement('Symbiotic Relations', 1),
     ],
     undefined,
     {
@@ -4027,7 +4027,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 508485861, 27)],
     '<i>The creature escaped back into the ultra wormhole.</i>',
-    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 6)],
+    [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
     undefined,
     {
         hideTrainer: true,
