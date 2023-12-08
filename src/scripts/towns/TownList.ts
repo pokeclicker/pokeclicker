@@ -6750,7 +6750,7 @@ const TapuWorker = new NPC('Worker Ovid', [
     'After the battle, Crabrawler evolved! I didn\'t even know he could do that. He\'s so different now. But I still love him. He\'s my best friend, and he\'s even better at rock smashing now!',
 ], {image: 'assets/images/npcs/Worker (male).png'});
 const PoTownNanu = new NPC('Officer Nanu', [
-    'A trial-goer, huh? Figures. Look, I\'m not gonna fight someone who is taking on Team Skull. So...go. Just go.'
+    'A trial-goer, huh? Figures. Look, I\'m not gonna fight someone who is taking on Team Skull. So...go. Just go.',
 ], {
     image: 'assets/images/npcs/Nanu.png',
     requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 7, GameConstants.AchievementOption.less),
@@ -6759,7 +6759,7 @@ const PoTownHomeowner = new NPC('Office Worker Royce', [
     'My house! My car! MY LAWN! What did those Team Skull kids do!?',
 ], {
     image: 'assets/images/npcs/Office Worker (male).png',
-    requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 7)
+    requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 7),
 });
 const YungoosAetherHouse = new NPC('Yungoos', [
     'Grrrssssss',
@@ -6832,7 +6832,7 @@ const Lillie2 = new NPC('Return Nebby to Lillie', [
 });
 const Lillie3 = new NPC('Lillie', [
     'Nebby is... Its real home is far away from here. And I want to help it get home. Thank you for helping me. The two of us will be heading to the next island as well!',
-    'Oh, and here, $playername$. Some Revives. It\'s the least I can do after all the running around I\'ve made you do.'
+    'Oh, and here, $playername$. Some Revives. It\'s the least I can do after all the running around I\'ve made you do.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
@@ -6861,7 +6861,7 @@ const Lillie5 = new NPC('Talk to Lillie', [
 const Lillie6 = new NPC('Lillie', [
     'Nebby changed forms... and it\'s not moving...',
     '<img src="assets/images/pokemon/790.png">',
-    'I feel like there\'s so much I have to do now... to save Nebby... to save my mother... That\'s why I\'m going to try my hardest! This is my Z-Powered form! Come on! Let\'s show the world what we can really do!'
+    'I feel like there\'s so much I have to do now... to save Nebby... to save my mother... That\'s why I\'m going to try my hardest! This is my Z-Powered form! Come on! Let\'s show the world what we can really do!',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
@@ -6961,7 +6961,7 @@ const LillieMelemeleMeadow2 = new NPC('Lillie', [
 const LillieHeahea = new NPC('Lillie', [
     'Professor Burnet has been so kind, and she\'s helping me try to find a way to get Nebby back to its own home... She\'s been like...like a real mother to me.',
     'I\'ll be waiting here until you\'re ready to join us to the Ruins of Life. I\'ve heard that there is a group of terrible people called Team Skull who try to steal Pokémon. We need to be careful if we want to escape the notice of such a collection of villains... Isn\'t that right, $playername$?',
-    'And Nebby! I\'ll have you stay in your bag, mister!'
+    'And Nebby! I\'ll have you stay in your bag, mister!',
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Symbiotic Relations', 0), new QuestLineStepCompletedRequirement('Symbiotic Relations', 4, GameConstants.AchievementOption.less)]),
@@ -6990,20 +6990,20 @@ const LillieAetherHouse = new NPC('Lillie', [
 });
 // Other story characters
 const HauAether = new NPC('Hau', [
-    'So the foundation really was working together with Team Skull? Lillie, Gladion, and Lusamine all are a family?! This is, like, way too mind-blowing to think about right now. $playername$! Let\'s knock some skulls together for now!'
+    'So the foundation really was working together with Team Skull? Lillie, Gladion, and Lusamine all are a family?! This is, like, way too mind-blowing to think about right now. $playername$! Let\'s knock some skulls together for now!',
 ], {
     image: 'assets/images/npcs/Hau.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 8), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
 });
 const GladionAether = new NPC('Gladion', [
     'Mother! You mustn\'t open the Ultra Wormhole. You cannot let the beasts run wild!',
-    '$playername$! Stop the president!!! If we don\'t, Alola will be flooded with beasts!'
+    '$playername$! Stop the president!!! If we don\'t, Alola will be flooded with beasts!',
 ], {
     image: 'assets/images/npcs/Gladion (stance).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 10), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
 });
 const LillieAether = new NPC('Lillie', [
-    'Mother! Do not sacrifice Cosmog for that beast\'s sake! Please... Stop... If Nebby isn\'t— If you make it use up too much of its power... you don\'t understand what will happen! If you use too much of its power, it will die!'
+    'Mother! Do not sacrifice Cosmog for that beast\'s sake! Please... Stop... If Nebby isn\'t— If you make it use up too much of its power... you don\'t understand what will happen! If you use too much of its power, it will die!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 11), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
@@ -7495,7 +7495,7 @@ TownList['Hau\'oli City'] = new Town(
     'Hau\'oli City',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City']), TemporaryBattleList['Ilima']],
+    [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City']), TemporaryBattleList.Ilima],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
         npcs: [NecrozmaLooker],
@@ -7565,7 +7565,7 @@ TownList['Ruins of Life Entrance'] = new Town(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
     [new MoveToTown('Ruins of Life', undefined, false), GymList['Konikoni City']],
-    { 
+    {
         requirements: [new TemporaryBattleRequirement('Plumeria 1')],
         npcs: [LillieRuinsOfLife],
     }
@@ -7919,7 +7919,7 @@ TownList['Hokulani Observatory'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
-    [HokulaniObservatoryShop, TemporaryBattleList['Captain Sophocles'], TemporaryBattleList['Molayne']],
+    [HokulaniObservatoryShop, TemporaryBattleList['Captain Sophocles'], TemporaryBattleList.Molayne],
     {npcs: [SophoclesSilvally1]}
 );
 TownList['Thrifty Megamart'] = new DungeonTown(

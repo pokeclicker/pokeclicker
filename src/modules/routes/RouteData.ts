@@ -1929,7 +1929,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, Region.alola, 10),
-        new TemporaryBattleRequirement('Skull 4')
+        new TemporaryBattleRequirement('Skull 4'),
     ],
     10.1,
     AlolaSubRegions.UlaulaIsland,

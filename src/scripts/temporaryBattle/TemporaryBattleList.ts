@@ -3838,7 +3838,7 @@ TemporaryBattleList['Skull 1'] = new TemporaryBattle(
         imageName: 'Team Skull Grunts (male)',
     }
 );
-TemporaryBattleList['Ilima'] = new TemporaryBattle(
+TemporaryBattleList.Ilima = new TemporaryBattle(
     'Ilima',
     [
         new GymPokemon('Yungoos', 99760695, 10),
@@ -4053,7 +4053,7 @@ TemporaryBattleList['Hau 5'] = new TemporaryBattle(
     {
         firstTimeRewardFunction: () => {
             App.game.quests.getQuestLine('Child of the Stars').beginQuest(0, undefined, true);
-            
+
         },
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Malie City',
@@ -4079,7 +4079,7 @@ TemporaryBattleList['Skull 4'] = new TemporaryBattle(
         imageName: 'Team Skull Grunts (male)',
     }
 );
-TemporaryBattleList['Molayne'] = new TemporaryBattle(
+TemporaryBattleList.Molayne = new TemporaryBattle(
     'Molayne',
     [
         new GymPokemon('Skarmory', 170174638, 29),
@@ -4087,13 +4087,11 @@ TemporaryBattleList['Molayne'] = new TemporaryBattle(
         new GymPokemon('Alolan Dugtrio', 175257094, 30),
     ],
     'Here\'s a little something to remember our meeting by! I gathered these Z-Crystals when I was on my own island challenge back in my own day, adventuring with Kukui and my Pokémon in search of strength. Take it, and use it well.</br></br><img src="assets/images/items/zCrystal/Steelium Z.png">',
-    [new DevelopmentRequirement()],
+    [new DevelopmentRequirement()]
 );
 TemporaryBattleList['Skull 5'] = new TemporaryBattle(
     'Skull 5',
-    [
-        new GymPokemon('Drowzee', 533664170, 33),
-    ],
+    [new GymPokemon('Drowzee', 533664170, 33)],
     undefined, // custom quest message
     [new QuestLineStepCompletedRequirement('Child of the Stars', 3)],
     undefined,
@@ -4163,7 +4161,7 @@ TemporaryBattleList['Skull 6'] = new TemporaryBattle(
         displayName: 'Team Skull Grunts',
         returnTown: 'Seafolk Village',
         imageName: 'specialNPCs/Team Skull Grunts (group)',
-    },
+    }
 );
 TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
     'Recon Squad 3',
@@ -4175,7 +4173,7 @@ TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
         displayName: 'Ultra Recon Squad',
         returnTown: 'Vast Poni Canyon Entrance',
         imageName: 'specialNPCs/Ultra Recon Squad (all)',
-    },
+    }
 );
 TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
     'Lusamine 1',
@@ -4189,11 +4187,13 @@ TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
         new GymPokemon('Help us Lunala!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo', true), new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])])])),
     ],
     undefined,
-    [new QuestLineStepCompletedRequirement('Emissary of Light', 5),
-    new OneFromManyRequirement([
-        new ObtainedPokemonRequirement('Solgaleo'),
-        new ObtainedPokemonRequirement('Lunala'),
-    ])],
+    [
+        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
+        new OneFromManyRequirement([
+            new ObtainedPokemonRequirement('Solgaleo'),
+            new ObtainedPokemonRequirement('Lunala'),
+        ]),
+    ],
     undefined,
     {
         imageName: '../pokemon/-793.01',

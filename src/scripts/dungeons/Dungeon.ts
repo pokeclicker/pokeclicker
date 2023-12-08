@@ -11499,14 +11499,10 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
     15619682,
     [
         new DungeonTrainer('Dulse',
-            [
-                new GymPokemon('Poipole', 78098410, 47),
-            ],
+            [new GymPokemon('Poipole', 78098410, 47)],
             { weight: 0.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9, GameConstants.AchievementOption.less) }),
         new DungeonTrainer('Soliera',
-            [
-                new GymPokemon('Poipole', 78098410, 47),
-            ],
+            [new GymPokemon('Poipole', 78098410, 47)],
             { weight: 0.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9, GameConstants.AchievementOption.less) }),
         new DungeonTrainer('Aether Branch Chief',
             [
