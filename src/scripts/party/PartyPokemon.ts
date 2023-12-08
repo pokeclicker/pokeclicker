@@ -97,7 +97,7 @@ class PartyPokemon implements Saveable {
                     // Log and notify player
                     Notifier.notify({
                         message: `${this.name} has become Resistant to Pokérus.`,
-                        pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
+                        pokemonImage: PokemonHelper.getImage(this.id),
                         type: NotificationConstants.NotificationOption.info,
                         sound: NotificationConstants.NotificationSound.General.pokerus,
                         setting: NotificationConstants.NotificationSetting.General.pokerus,
