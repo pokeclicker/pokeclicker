@@ -4,7 +4,7 @@ import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
 import {
-    getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus,
+    getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus, getTemporaryBattlesIndex,
 } from '../GameConstants';
 
 export default class KeyItems implements Feature {
@@ -77,6 +77,7 @@ export default class KeyItems implements Feature {
                     ) || App.game.party.caughtPokemon[0];
                     patientZero.pokerus = Pokerus.Contagious;
                 }),
+            new KeyItem(KeyItemType['Z-Power_Ring'], 'A gift from Melemele\'s kahuna that enables the use of Z-Moves. Using a Z-Crystal with it boosts the power of all Pokémon of a shared type for a short while, after which you and Pokémon need to recharge.', () => App.game.statistics.temporaryBattleDefeated[getTemporaryBattlesIndex('Hau 2')]() > 0, undefined, undefined, 'Z-Power Ring'),
         ];
     }
 

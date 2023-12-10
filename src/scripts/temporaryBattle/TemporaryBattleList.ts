@@ -3817,7 +3817,7 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
         new GymPokemon('Rowlet', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
         new GymPokemon('Litten', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
-    'Phew... That was awesome! That was a really great battle! I had a blast fighting you!',
+    undefined, // key item modal
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1)],
     undefined,
     {
@@ -3868,7 +3868,7 @@ TemporaryBattleList['Recon Squad 1'] = new TemporaryBattle(
     'Recon Squad 1',
     [new GymPokemon('Furfrou', 334332002, 13)],
     undefined, // custom quest message
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 6)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7)],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
@@ -3885,7 +3885,7 @@ TemporaryBattleList['Hau 3'] = new TemporaryBattle(
         new GymPokemon('Pikachu', 104983480, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',
@@ -3968,11 +3968,12 @@ TemporaryBattleList['Gladion 1'] = new TemporaryBattle(
 );
 TemporaryBattleList['Recon Squad 2'] = new TemporaryBattle(
     'Recon Squad 2',
-    [new GymPokemon('Poipole', 412520122, 20)],
+    [new GymPokemon('Sudowoodo', 412520122, 20)],
     undefined, // custom quest message
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
     undefined,
     {
+        isTrainerBattle: false,
         displayName: 'Ultra Recon Squad',
         returnTown: 'Paniola Town',
         imageName: 'specialNPCs/Ultra Recon Squad (ultra sun)',
@@ -3985,7 +3986,7 @@ TemporaryBattleList['Skull 3'] = new TemporaryBattle(
     undefined, // custom quest message
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 6),
-        new QuestLineStepCompletedRequirement('Symbiotic Relations', 1),
+        new QuestLineStepCompletedRequirement('Symbiotic Relations', 2),
     ],
     undefined,
     {
@@ -4053,7 +4054,6 @@ TemporaryBattleList['Hau 5'] = new TemporaryBattle(
     {
         firstTimeRewardFunction: () => {
             App.game.quests.getQuestLine('Child of the Stars').beginQuest(0, undefined, true);
-
         },
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Malie City',
@@ -4086,8 +4086,12 @@ TemporaryBattleList.Molayne = new TemporaryBattle(
         new GymPokemon('Metang', 170174638, 29),
         new GymPokemon('Alolan Dugtrio', 175257094, 30),
     ],
-    'Here\'s a little something to remember our meeting by! I gathered these Z-Crystals when I was on my own island challenge back in my own day, adventuring with Kukui and my Pokémon in search of strength. Take it, and use it well.</br></br><img src="assets/images/items/zCrystal/Steelium Z.png">',
-    [new DevelopmentRequirement()]
+    'Here\'s a little something to remember our meeting by! I gathered these Z-Crystals when I was on my own island challenge back in my own day. Take it, and use it well.</br></br><img src="assets/images/items/zCrystal/Steelium Z.svg">',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
+    undefined,
+    {
+        firstTimeRewardFunction: zCrystalGet(PokemonType.Steel),
+    }
 );
 TemporaryBattleList['Skull 5'] = new TemporaryBattle(
     'Skull 5',
@@ -4099,6 +4103,27 @@ TemporaryBattleList['Skull 5'] = new TemporaryBattle(
         displayName: 'Team Skull Grunt',
         returnTown: 'Aether House',
         imageName: 'Team Skull Grunt (male)',
+    }
+);
+TemporaryBattleList['Psychium Z Trial'] = new TemporaryBattle(
+    'Psychium Z Trial',
+    [
+        new GymPokemon('Krokorok', 7829809, 32),
+        new GymPokemon('Gabite', 7940429, 32),
+        new GymPokemon('Trapinch', 7622397, 32),
+        new GymPokemon('Celesteela', 8341426, 32, new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)),
+        new GymPokemon('Alolan Dugtrio', 7484122, 32),
+        new GymPokemon('Trapinch', 7622397, 32),
+    ],
+    '<i>Lucky you! There was a Z-Crystal hidden here all along! You obtained a Psychium Z!<i>',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart')), new RouteKillRequirement(10, GameConstants.Region.alola, 23)],
+    undefined,
+    {
+        firstTimeRewardFunction: zCrystalGet(PokemonType.Psychic),
+        displayName: 'Trial Site of Haina Desert',
+        returnTown: 'Tapu Village',
+        isTrainerBattle: false,
+        imageName: 'Trial Site',
     }
 );
 TemporaryBattleList['Plumeria 2'] = new TemporaryBattle(
@@ -4167,7 +4192,7 @@ TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
     'Recon Squad 3',
     [new GymPokemon('Poipole', 629719547, 49)],
     'Perhaps it is time that we stop taking matters into our own hands and instead start relying on others. Must we start by putting our faith in you?',
-    [new QuestLineStepCompletedRequirement('Emissary of Light', 2)],
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 3)],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
@@ -4188,7 +4213,7 @@ TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
     ],
     undefined,
     [
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 6),
         new OneFromManyRequirement([
             new ObtainedPokemonRequirement('Solgaleo'),
             new ObtainedPokemonRequirement('Lunala'),
@@ -4212,7 +4237,7 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
     ],
     undefined,
     [
-        new QuestLineStepCompletedRequirement('Emissary of Light', 5),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 6),
         new ObtainedPokemonRequirement('Solgaleo', true),
         new ObtainedPokemonRequirement('Lunala', true),
     ],
@@ -4242,7 +4267,10 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
+            if (App.game.quests.getQuestLine('Mina\'s Trial').state() != QuestLineState.started ||
+                App.game.quests.getQuestLine('Mina\'s Trial').state() != QuestLineState.ended) {
+                App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
+            }
         },
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',

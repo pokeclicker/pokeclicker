@@ -1837,10 +1837,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [
-        new TemporaryBattleRequirement('Dexio'),
-        new TemporaryBattleRequirement('Sina'),
-    ],
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 0)],
     undefined,
     AlolaSubRegions.AkalaIsland,
 ));

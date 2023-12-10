@@ -4007,6 +4007,16 @@
         %>
 
         <%- include('templates/mapOverlay',
+            { name: ""
+            , x: 62, y: 30
+            , width: 5, height: 5
+            , databind: "click: () => TemporaryBattleList['Psychium Z Trial'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Psychium Z Trial'] && TemporaryBattleList['Psychium Z Trial'].isVisible()"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
             { name: "Team Skull Admin Plumeria"
             , x: 46, y: 43
             , width: 4, height: 4

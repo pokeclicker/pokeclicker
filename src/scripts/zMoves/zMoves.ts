@@ -54,7 +54,7 @@ class ZMoves implements Feature {
     }
 
     canAccess(): boolean {
-        return ZMoves.requirement.isCompleted() && GameConstants.zCrystalItemType.some(crystal => player.itemList[crystal]() > 0);
+        return ZMoves.requirement.isCompleted() && App.game.keyItems.hasKeyItem(KeyItemType['Z-Power_Ring']);
     }
 
     update(delta: number): void {}  // This method intentionally left blank
