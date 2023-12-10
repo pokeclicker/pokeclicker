@@ -3830,7 +3830,7 @@ TemporaryBattleList['Skull 1'] = new TemporaryBattle(
     'Skull 1',
     [new GymPokemon('Zubat', 193227888, 9)],
     undefined, // custom quest message
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2)],
     undefined,
     {
         displayName: 'Team Skull Grunts',
@@ -3845,7 +3845,7 @@ TemporaryBattleList.Ilima = new TemporaryBattle(
         new GymPokemon('Smeargle', 184903445, 11),
     ],
     'You- or should I say you and your Pokémon- make quite the interesting team! I do hope you\'ll come to Verdant Cavern and attempt my trial!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3)],
     undefined,
     {
         displayName: 'Captain Ilima',
@@ -3868,7 +3868,7 @@ TemporaryBattleList['Recon Squad 1'] = new TemporaryBattle(
     'Recon Squad 1',
     [new GymPokemon('Furfrou', 334332002, 13)],
     undefined, // custom quest message
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 6)],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
@@ -3885,7 +3885,7 @@ TemporaryBattleList['Hau 3'] = new TemporaryBattle(
         new GymPokemon('Pikachu', 104983480, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',

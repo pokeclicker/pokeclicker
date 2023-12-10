@@ -2463,11 +2463,7 @@ class QuestLineHelper {
         const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Ask the mysterious girl if she\'s okay.');
         melemeleAlolaQuestLine.addQuest(talkToLillie1);
 
-        // 2 - Talk to NPC: RotomDexKukui
-        const talkToRotomDexKukui = new TalkToNPCQuest(RotomDexKukui, 'Talk to RotomDex at Professor Kukui\'s Lab past Hau\'oli Outskirts and learn about the Island Challenge avaialble on the Bulletin Board.');
-        melemeleAlolaQuestLine.addQuest(talkToRotomDexKukui);
-
-        // 3 - Clear dungeon: Trainers' School
+        // 2 - Clear dungeon: Trainers' School
         const clearTrainersSchool = new DefeatDungeonQuest(1, 0, 'Trainers\' School').withDescription('Follow Lillie to the Trainers\' School dungeon and clear it.')
             .withOptionalArgs({
                 clearedMessage: 'You seemed to be in perfect sync with your Pokémon—weren\'t you? Um... Since we\'ve come this far together, why don\'t I show you some more of the city?',
@@ -2476,7 +2472,7 @@ class QuestLineHelper {
             });
         melemeleAlolaQuestLine.addQuest(clearTrainersSchool);
 
-        // 4 - Temp Battle: Skull 1
+        // 3 - Temp Battle: Skull 1
         const battleSkullGrunts1 = new DefeatTemporaryBattleQuest('Skull 1', 'Beat up the Team Skull grunts trying to block Hau\'oli City\'s Dock.')
             .withOptionalArgs({
                 clearedMessage: 'My thanks to you and your Pokémon. These grunts are always bothering me and my trial site. You... you\'re the trainer who cleared the Trainers\' School so effortlessly! Allow me to see if you\'re ready for my trial!',
@@ -2485,11 +2481,11 @@ class QuestLineHelper {
             });
         melemeleAlolaQuestLine.addQuest(battleSkullGrunts1);
 
-        // 5 - Temp Battle: Ilima
+        // 4 - Temp Battle: Ilima
         const battleIlima = new DefeatTemporaryBattleQuest('Ilima', 'Battle Ilima in Hau\'oli City.');
         melemeleAlolaQuestLine.addQuest(battleIlima);
 
-        // 6 - Clear dungeon: Melemele Meadow
+        // 5 - Clear dungeon: Melemele Meadow
         const clearMelemeleMeadow = new DefeatDungeonQuest(1, 0, 'Melemele Meadow').withDescription('Lillie needs your help. Continue past Route 3 and clear Melemele Meadow.')
             .withOptionalArgs({
                 clearedMessage: 'Pew!<br><br><i>Nebby flees.</i>',
@@ -2498,7 +2494,7 @@ class QuestLineHelper {
             });
         melemeleAlolaQuestLine.addQuest(clearMelemeleMeadow);
 
-        // 7 - Clear dungeon: Seaward Cave
+        // 6 - Clear dungeon: Seaward Cave
         const clearSeawardCave = new DefeatDungeonQuest(1, 0, 'Seaward Cave').withDescription('Nebby escaped into a hole! Clear the Seaward Cave dungeon.')
             .withOptionalArgs({
                 clearedMessage: 'Pew~<br><br><i>Nebby stays. It seems like it\'s following you now!</i>',
@@ -2507,7 +2503,7 @@ class QuestLineHelper {
             });
         melemeleAlolaQuestLine.addQuest(clearSeawardCave);
 
-        // 8 - Temp Battle: Recon Squad 1
+        // 7 - Temp Battle: Recon Squad 1
         const battleReconSquad1Reward = () => {
             MapHelper.moveToTown('Melemele Meadow');
         };
@@ -2520,11 +2516,11 @@ class QuestLineHelper {
             });
         melemeleAlolaQuestLine.addQuest(battleReconSquad1);
 
-        // 9 - Talk to NPC: Lillie2
+        // 8 - Talk to NPC: Lillie2
         const talkToLillie2 = new TalkToNPCQuest(Lillie2, 'Return Nebby to Lillie in Melemele Meadow.');
         melemeleAlolaQuestLine.addQuest(talkToLillie2);
 
-        // 10 - Talk to NPC: Lillie3
+        // 9 - Talk to NPC: Lillie3
         const LillieReviveReward = () => {
             const item = 'Revive';
             Underground.gainMineItem(UndergroundItems.getByName(item).id, 10);
@@ -2540,9 +2536,9 @@ class QuestLineHelper {
 
         const talkToLillie3 = new TalkToNPCQuest(Lillie3, 'Lillie still has something on her mind. Talk to her in Iki Town.').withCustomReward(LillieReviveReward);
         melemeleAlolaQuestLine.addQuest(talkToLillie3);
-
+      
         // end - Gym Battle: Hala
-        const clearHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala and complete Melemele\'s Grand Trial!');
+        const clearHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town complete Melemele\'s Grand Trial!');
         melemeleAlolaQuestLine.addQuest(clearHala);
 
         App.game.quests.questLines().push(melemeleAlolaQuestLine);
@@ -2657,7 +2653,7 @@ class QuestLineHelper {
         ulaulaAlolaQuestLine.addQuest(battleGladion2);
 
         // 8 - Gym battle: Nanu
-        const battleKahunaNanu = new DefeatGymQuest(1, 0, 'Malie City').withDescription('Kahuna Nanu is challenging you to a Grand Trial! Test your strength before you go to Aether by defeating him.');
+        const battleKahunaNanu = new DefeatGymQuest(1, 0, 'Malie City').withDescription('Kahuna Nanu is challenging you to a Grand Trial in Malie City! Test your strength before you go to Aether by defeating him.');
         ulaulaAlolaQuestLine.addQuest(battleKahunaNanu);
 
         // 9 - Clear dungeon: Aether Foundation
@@ -2754,7 +2750,7 @@ class QuestLineHelper {
         poniAlolaQuestLine.addQuest(battleSkullGrunts6);
 
         // 4 - Gym battle: Hapu
-        const battleKahunaHapu = new DefeatGymQuest(1, 0, 'Exeggutor Island').withDescription('Go to Vast Poni Canyon\'s Entrance and prove your skills against Poni\'s new kahuna, Hapu!');
+        const battleKahunaHapu = new DefeatGymQuest(1, 0, 'Exeggutor Island').withDescription('Go to Vast Poni Canyon\'s Entrance and prove your skills in a Grand Trial against Poni\'s new kahuna, Hapu!');
         poniAlolaQuestLine.addQuest(battleKahunaHapu);
 
         // 5 - Talk to NPC: Play a flute on the Altar of the Sunne and Moone. (Flute npc is locked to day or night to give the illusion that the gift npc is affected by this in cases where the step is completed right before dusk or dawn)
