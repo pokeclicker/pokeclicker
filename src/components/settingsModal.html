@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
-                <h5 class="modal-title">Settings</h5>
+                <h5 class="modal-title"><knockout data-bind="text: App.translation.get('settings', 'settings', { defaultValue: 'Settings' })" /></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -10,14 +10,14 @@
 
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-game" data-toggle="tab">Gameplay</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab">Sound</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab">Notifications</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-hotkeys" data-toggle="tab">Hotkeys</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-other" data-toggle="tab">Other</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab"><knockout data-bind="text: App.translation.get('menu.display', 'settings', { defaultValue: 'Display' })" /></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-game" data-toggle="tab"><knockout data-bind="text: App.translation.get('menu.gameplay', 'settings', { defaultValue: 'Gameplay' })" /></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab"><knockout data-bind="text: App.translation.get('menu.sound', 'settings', { defaultValue: 'Sound' })" /></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab"><knockout data-bind="text: App.translation.get('menu.notifications', 'settings', { defaultValue: 'Notifications' })" /></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-hotkeys" data-toggle="tab"><knockout data-bind="text: App.translation.get('menu.hotkeys', 'settings', { defaultValue: 'Hotkeys' })" /></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-other" data-toggle="tab"><knockout data-bind="text: App.translation.get('menu.other', 'settings', { defaultValue: 'Other' })" /></a></li>
                     <!-- ko if: DiscordRichPresence.clientVersion -->
-                        <li class="nav-item"><a class="nav-link" href="#settings-discord" data-toggle="tab">Discord</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#settings-discord" data-toggle="tab"><knockout data-bind="text: App.translation.get('menu.discord', 'settings', { defaultValue: 'Discord' })" /></a></li>
                     <!-- /ko -->
                 </ul>
 
@@ -48,7 +48,7 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayExtended')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
-                                <tr><th colspan="2">Map Colors</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('mapColors', 'settings', { defaultValue: 'Map Colors' })" /></th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--questAtLocation')}"></tr>
@@ -102,7 +102,7 @@
                     <div class="tab-pane" id="settings-sound">
                         <div data-bind="template: {name: 'RangeSettingTemplate', data: Settings.getSetting('sound.volume')}"></div>
                         <!-- ko foreach: Object.keys(NotificationConstants.NotificationSound) -->
-                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsSound' + $data }"></span>
+                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: App.translation.get(`sound.${$data}`, 'settings', { defaultValue: $data}), attr: { href: '#settingsSound' + $data }"></span>
                         <div class="collapse show" data-bind="attr: { id: 'settingsSound' + $data }">
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
@@ -117,7 +117,7 @@
 
                     <div class="tab-pane" id="settings-notifications">
                         <!-- ko foreach: Object.keys(NotificationConstants.NotificationSetting) -->
-                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsNotification' + $data }"></span>
+                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: App.translation.get(`notification.${$data}`, 'settings', { defaultValue: $data}), attr: { href: '#settingsNotification' + $data }"></span>
                         <div class="collapse show" data-bind="attr: { id: 'settingsNotification' + $data }">
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
@@ -133,7 +133,7 @@
                     <div class="tab-pane" id="settings-hotkeys">
                         <table class="table table-striped table-hover m-0">
                             <thead>
-                                <tr><th colspan="2">Modals</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.modals', 'settings', { defaultValue: 'Modals' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm')}"></tr>
@@ -145,14 +145,14 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dailyQuests')}"></tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Farm</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.farm', 'settings', { defaultValue: 'Farm' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm.toggleShovel')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm.togglePlotSafeLock')}"></tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Underground</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.underground', 'settings', { defaultValue: 'Underground' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.hammer')}"></tr>
@@ -172,7 +172,7 @@
                                 </tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Oak Items</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.oakItems', 'settings', { defaultValue: 'Oak Items' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -188,7 +188,7 @@
                                 </tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Poké Ball Selector</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.pokeballSelector', 'settings', { defaultValue: 'Poké Ball Selector' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -204,7 +204,7 @@
                                 </tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Dungeon</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.dungeon', 'settings', { defaultValue: 'Dungeon' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.up')}"></tr>
@@ -214,7 +214,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dungeon.interact')}"></tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Town</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.town', 'settings', { defaultValue: 'Town' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.town.start')}"></tr>
@@ -231,7 +231,7 @@
                                 </tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Shop</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.shop', 'settings', { defaultValue: 'Shop' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -251,7 +251,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.increase')}"></tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Ship</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.ship', 'settings', { defaultValue: 'Ship' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -267,7 +267,7 @@
                                 </tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Safari</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.safari', 'settings', { defaultValue: 'Safari' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.safari.ball')}"></tr>
@@ -276,7 +276,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.safari.run')}"></tr>
                             </tbody>
                             <thead>
-                                <tr><th colspan="2">Other</th></tr>
+                                <tr><th colspan="2"><knockout data-bind="text: App.translation.get('hotkeys.title.other', 'settings', { defaultValue: 'Other' })" /></th></tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -313,9 +313,9 @@
                             </tbody>
                         </table>
                         <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-primary" onclick="Settings.saveDefault();">Save As Default Settings</button>
-                            <button type="button" class="btn btn-warning" onclick="Settings.loadDefault();">Load From Default Settings</button>
-                            <button type="button" class="btn btn-danger" onclick="Settings.resetDefault();">Reset Default Settings</button>
+                            <button type="button" class="btn btn-primary" onclick="Settings.saveDefault();"><knockout data-bind="text: App.translation.get('other.saveDefault', 'settings', { defaultValue: 'Save As Default Settings' })" /></button>
+                            <button type="button" class="btn btn-warning" onclick="Settings.loadDefault();"><knockout data-bind="text: App.translation.get('other.loadDefault', 'settings', { defaultValue: 'Load From Default Settings' })" /></button>
+                            <button type="button" class="btn btn-danger" onclick="Settings.resetDefault();"><knockout data-bind="text: App.translation.get('other.resetDefault', 'settings', { defaultValue: 'Reset Default Settings' })" /></button>
                         </div>
                     </div>
 
@@ -379,7 +379,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><knockout data-bind="text: App.translation.get('menu.close', 'settings', { defaultValue: 'Close' })" /></button>
             </div>
         </div>
     </div>
