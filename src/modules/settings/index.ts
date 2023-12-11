@@ -28,7 +28,6 @@ import FilterSetting from './FilterSetting';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
-import SettingOptionTranslate from './SettingOptionTranslate';
 
 export default Settings;
 
@@ -40,41 +39,41 @@ export default Settings;
 Settings.add(
     new Setting<string>('theme', 'Theme',
         [
-            new SettingOptionTranslate('theme.cerulean', 'Cerulean', 'cerulean'),
-            new SettingOptionTranslate('theme.cosmo', 'Cosmo', 'cosmo'),
-            new SettingOptionTranslate('theme.cyborg', 'Cyborg', 'cyborg'),
-            new SettingOptionTranslate('theme.darkly', 'Darkly', 'darkly'),
-            new SettingOptionTranslate('theme.flatly', 'Flatly', 'flatly'),
-            new SettingOptionTranslate('theme.journal', 'Journal', 'journal'),
-            new SettingOptionTranslate('theme.litera', 'Litera', 'litera'),
-            new SettingOptionTranslate('theme.lumen', 'Lumen', 'lumen'),
-            new SettingOptionTranslate('theme.lux', 'Lux', 'lux'),
-            new SettingOptionTranslate('theme.materia', 'Materia', 'materia'),
-            new SettingOptionTranslate('theme.minty', 'Minty', 'minty'),
-            new SettingOptionTranslate('theme.pulse', 'Pulse', 'pulse'),
-            new SettingOptionTranslate('theme.sandstone', 'Sandstone', 'sandstone'),
-            new SettingOptionTranslate('theme.simplex', 'Simplex', 'simplex'),
-            new SettingOptionTranslate('theme.sketchy', 'Sketchy', 'sketchy'),
-            new SettingOptionTranslate('theme.slate', 'Slate', 'slate'),
-            new SettingOptionTranslate('theme.solar', 'Solar', 'solar'),
-            new SettingOptionTranslate('theme.spacelab', 'Spacelab', 'spacelab'),
-            new SettingOptionTranslate('theme.superhero', 'Superhero', 'superhero'),
-            new SettingOptionTranslate('theme.united', 'United', 'united'),
-            new SettingOptionTranslate('theme.yeti', 'Yeti (default)', 'yeti'),
+            new SettingOption('theme.cerulean', 'Cerulean', 'cerulean'),
+            new SettingOption('theme.cosmo', 'Cosmo', 'cosmo'),
+            new SettingOption('theme.cyborg', 'Cyborg', 'cyborg'),
+            new SettingOption('theme.darkly', 'Darkly', 'darkly'),
+            new SettingOption('theme.flatly', 'Flatly', 'flatly'),
+            new SettingOption('theme.journal', 'Journal', 'journal'),
+            new SettingOption('theme.litera', 'Litera', 'litera'),
+            new SettingOption('theme.lumen', 'Lumen', 'lumen'),
+            new SettingOption('theme.lux', 'Lux', 'lux'),
+            new SettingOption('theme.materia', 'Materia', 'materia'),
+            new SettingOption('theme.minty', 'Minty', 'minty'),
+            new SettingOption('theme.pulse', 'Pulse', 'pulse'),
+            new SettingOption('theme.sandstone', 'Sandstone', 'sandstone'),
+            new SettingOption('theme.simplex', 'Simplex', 'simplex'),
+            new SettingOption('theme.sketchy', 'Sketchy', 'sketchy'),
+            new SettingOption('theme.slate', 'Slate', 'slate'),
+            new SettingOption('theme.solar', 'Solar', 'solar'),
+            new SettingOption('theme.spacelab', 'Spacelab', 'spacelab'),
+            new SettingOption('theme.superhero', 'Superhero', 'superhero'),
+            new SettingOption('theme.united', 'United', 'united'),
+            new SettingOption('theme.yeti', 'Yeti (default)', 'yeti'),
         ],
         'yeti'),
 );
 Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display',
     [
-        new SettingOptionTranslate('breedingDisplay.percentage', 'Percentage', 'percentage'),
-        new SettingOptionTranslate('breedingDisplay.stepCount', 'Step count', 'stepCount'),
+        new SettingOption('breedingDisplay.percentage', 'Percentage', 'percentage'),
+        new SettingOption('breedingDisplay.stepCount', 'Step count', 'stepCount'),
     ],
     'stepCount'));
 Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons',
     [
-        new SettingOptionTranslate('shopButtons.original', '+10, +100', 'original'),
-        new SettingOptionTranslate('shopButtons.bigplus', '+100, +1000', 'bigplus'),
-        new SettingOptionTranslate('shopButtons.multiplication', 'x10, ÷10', 'multiplication'),
+        new SettingOption('shopButtons.original', '+10, +100', 'original'),
+        new SettingOption('shopButtons.bigplus', '+100, +1000', 'bigplus'),
+        new SettingOption('shopButtons.multiplication', 'x10, ÷10', 'multiplication'),
     ],
     'original'));
 Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
@@ -84,37 +83,37 @@ Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge r
 Settings.add(new BooleanSetting('disableRightClickMenu', 'Disable the right click menu', true));
 Settings.add(new Setting<string>('backgroundImage', 'Background image',
     [
-        new SettingOptionTranslate('backgroundImage.day', 'Day', 'background-day'),
-        new SettingOptionTranslate('backgroundImage.night', 'Night', 'background-night'),
-        new SettingOptionTranslate('backgroundImage.dynamic', 'Dynamic', 'background-dynamic'),
+        new SettingOption('backgroundImage.day', 'Day', 'background-day'),
+        new SettingOption('backgroundImage.night', 'Night', 'background-night'),
+        new SettingOption('backgroundImage.dynamic', 'Dynamic', 'background-dynamic'),
     ],
     'background-day'));
 Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation',
     [
-        new SettingOptionTranslate('eggAnimation.none', 'None', 'none'),
-        new SettingOptionTranslate('eggAnimation.almost', 'Almost & fully ready', 'almost'),
-        new SettingOptionTranslate('eggAnimation.full', 'Fully ready', 'full'),
+        new SettingOption('eggAnimation.none', 'None', 'none'),
+        new SettingOption('eggAnimation.almost', 'Almost & fully ready', 'almost'),
+        new SettingOption('eggAnimation.full', 'Fully ready', 'full'),
     ],
     'full'));
 Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
     [
-        new SettingOptionTranslate('hideHatchery.never', 'Never', 'never'),
-        new SettingOptionTranslate('hideHatchery.egg', 'Egg Slots Full', 'egg'),
-        new SettingOptionTranslate('hideHatchery.queue', 'Queue Slots Full', 'queue'),
+        new SettingOption('hideHatchery.never', 'Never', 'never'),
+        new SettingOption('hideHatchery.egg', 'Egg Slots Full', 'egg'),
+        new SettingOption('hideHatchery.queue', 'Queue Slots Full', 'queue'),
     ],
     'queue'));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
-        new SettingOptionTranslate('farmDisplay.nextStage', 'To Next Stage', 'nextStage'),
-        new SettingOptionTranslate('farmDisplay.ripeDeath', 'Ripe/Death', 'ripeDeath'),
+        new SettingOption('farmDisplay.nextStage', 'To Next Stage', 'nextStage'),
+        new SettingOption('farmDisplay.ripeDeath', 'Ripe/Death', 'ripeDeath'),
     ],
     'ripeDeath'));
 Settings.add(new BooleanSetting('farmBoostDisplay', 'Include base farm timer during altered berry growth times', false));
 Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     [
-        new SettingOptionTranslate('sizeUnits.inch', 'Inches', 'inch'),
-        new SettingOptionTranslate('sizeUnits.cm', 'Centimeters', 'cm'),
+        new SettingOption('sizeUnits.inch', 'Inches', 'inch'),
+        new SettingOption('sizeUnits.cm', 'Centimeters', 'cm'),
     ],
     'cm'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
@@ -124,9 +123,9 @@ Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm befor
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
 Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
     [
-        new SettingOptionTranslate('gameDisplayStyle.standard', 'Standard (3 columns)', 'standard3'),
-        new SettingOptionTranslate('gameDisplayStyle.full.3', 'Full width (3 columns)', 'fullWidth3'),
-        new SettingOptionTranslate('gameDisplayStyle.full.5', 'Full width (5 columns)', 'fullWidth5'),
+        new SettingOption('gameDisplayStyle.standard', 'Standard (3 columns)', 'standard3'),
+        new SettingOption('gameDisplayStyle.full.3', 'Full width (3 columns)', 'fullWidth3'),
+        new SettingOption('gameDisplayStyle.full.5', 'Full width (5 columns)', 'fullWidth5'),
     ],
     'standard3'));
 Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
@@ -149,18 +148,18 @@ Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web wor
 Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
 Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time)',
     [
-        new SettingOptionTranslate('saveReminder.never', 'Never', '0'),
-        new SettingOptionTranslate('saveReminder.1h', '1 Hour', (1 * HOUR).toString()),
-        new SettingOptionTranslate('saveReminder.3h', '3 Hours', (3 * HOUR).toString()),
-        new SettingOptionTranslate('saveReminder.6h', '6 Hours', (6 * HOUR).toString()),
-        new SettingOptionTranslate('saveReminder.12h', '12 Hours', (12 * HOUR).toString()),
-        new SettingOptionTranslate('saveReminder.24h', '24 Hours', (24 * HOUR).toString()),
-        new SettingOptionTranslate('saveReminder.2d', '2 Days', (2 * DAY).toString()),
-        new SettingOptionTranslate('saveReminder.3d', '3 Days', (3 * DAY).toString()),
-        new SettingOptionTranslate('saveReminder.4d', '4 Days', (4 * DAY).toString()),
-        new SettingOptionTranslate('saveReminder.5d', '5 Days', (5 * DAY).toString()),
-        new SettingOptionTranslate('saveReminder.6d', '6 Days', (6 * DAY).toString()),
-        new SettingOptionTranslate('saveReminder.7d', '7 Days', (7 * DAY).toString()),
+        new SettingOption('saveReminder.never', 'Never', '0'),
+        new SettingOption('saveReminder.1h', '1 Hour', (1 * HOUR).toString()),
+        new SettingOption('saveReminder.3h', '3 Hours', (3 * HOUR).toString()),
+        new SettingOption('saveReminder.6h', '6 Hours', (6 * HOUR).toString()),
+        new SettingOption('saveReminder.12h', '12 Hours', (12 * HOUR).toString()),
+        new SettingOption('saveReminder.24h', '24 Hours', (24 * HOUR).toString()),
+        new SettingOption('saveReminder.2d', '2 Days', (2 * DAY).toString()),
+        new SettingOption('saveReminder.3d', '3 Days', (3 * DAY).toString()),
+        new SettingOption('saveReminder.4d', '4 Days', (4 * DAY).toString()),
+        new SettingOption('saveReminder.5d', '5 Days', (5 * DAY).toString()),
+        new SettingOption('saveReminder.6d', '6 Days', (6 * DAY).toString()),
+        new SettingOption('saveReminder.7d', '7 Days', (7 * DAY).toString()),
     ],
     (12 * HOUR).toString()));
 Settings.add(new Setting('breedingQueueSizeSetting', 'Breeding Queue Size', [], '-1'));
