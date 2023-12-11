@@ -182,7 +182,8 @@ aria-labelledby="pokedexModalLabel">
                                     <!--Hide shiny images-->
                                     <div class="col-12">
                                         <div class="form-group my-2">
-                                            <span>Hide shiny images</span>
+                                            <!-- let: { partyHideShinyImages: Settings.getSetting('partyHideShinyImages') } -->
+                                            <span data-bind="text: Settings.getSetting('partyHideShinyImages').displayName">Hide party shiny images</span>
                                             <label class="form-check-label toggler-wrapper style-1 float-right">
                                                 <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-shiny"
                                                     value="false" data-bind="checked: Settings.getSetting('partyHideShinyImages').observableValue"
@@ -191,6 +192,7 @@ aria-labelledby="pokedexModalLabel">
                                                     <div class="toggler-knob"></div>
                                                 </div>
                                             </label>
+                                            <!--  -->
                                         </div>
                                     </div>
                                 </div>

@@ -163,17 +163,19 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="text-left align-middle text-nowrap">Hide Party Shiny Images</td>
+                  <!-- ko let: { partyHideShinyImages: Settings.getSetting('partyHideShinyImages') } -->
+                  <td class="text-left align-middle text-nowrap" data-bind="text: GameConstants.camelCaseToString(partyHideShinyImages.displayName)">Hide Party Shiny Images</td>
                   <td class="text-left tight">
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
-                        data-bind="checked: Settings.getSetting('partyHideShinyImages').observableValue"
+                        data-bind="checked: partyHideShinyImages.observableValue"
                         onchange="Settings.setSettingByName('partyHideShinyImages', this.checked)">
                       <div class="toggler-slider">
                         <div class="toggler-knob"></div>
                       </div>
                     </label>
                   </td>
+                  <!-- /ko -->
                 </tr>
                 <!-- /ko -->
                 <!-- ko if: App.game.party.getPokemon($data)?.shadow == GameConstants.ShadowStatus.Purified -->
