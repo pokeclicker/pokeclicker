@@ -74,7 +74,17 @@ class Quests implements Saveable {
      * @param name The quest line name
      */
     getQuestLine(name: string) {
-        return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
+        const questLine = this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
+        if (!questLine && GameHelper.isDevelopmentBuild()) {
+            Notifier.notify({
+                title: '[DEV] FATAL ERROR',
+                message: `Unknown quest line "${name}". Is this a typo?`,
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: 2 ** 31 - 1,
+            });
+            throw new Error(`Unknown quest line "${name}".`);
+        }
+        return questLine;
     }
 
     public beginQuest(index: number) {
