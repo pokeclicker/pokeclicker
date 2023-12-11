@@ -54,8 +54,12 @@ export default class Setting<T> {
             this._value = value;
             this._observable(value);
         } else {
+            let stringified = typeof value === 'string' ? `\"${value}\"` : value.toString();
+            if (stringified == '[object Object]') {
+                stringified = `Object ${value.constructor?.name}`;
+            }
             // eslint-disable-next-line no-console
-            console.warn(`${value.toString() == '[object Object]' ? value.constructor?.name : value} is not a valid value for setting ${this.name}`);
+            console.warn(`${stringified} is not a valid value for setting ${this.name}`);
         }
     }
 
