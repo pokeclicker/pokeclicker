@@ -78,7 +78,7 @@ aria-labelledby="pokedexModalLabel">
                                     <!--Region-->
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexRegionFilter: Settings.getSetting('pokedexRegionFilter') } -->
-                                        <label for="pokedex-filter-region">Region</label>
+                                        <label for="pokedex-filter-region" data-bind="text: pokedexRegionFilter.displayName">Region</label>
                                         <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
                                                 data-bind="options: pokedexRegionFilter.options.filter(r => r.value <= player.highestRegion()),
                                                         optionsValue: 'value',
@@ -91,7 +91,7 @@ aria-labelledby="pokedexModalLabel">
                                     <!-- Category -->
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexCategoryFilter: Settings.getSetting('pokedexCategoryFilter') } -->
-                                        <label for="pokedex-filter-category">Category</label>
+                                        <label for="pokedex-filter-category" data-bind="text: pokedexCategoryFilter.displayName">Category</label>
                                         <div class="dropdown show">
                                             <button id="pokedex-filter-category" type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                 data-bind="text: pokedexCategoryFilter.observableValue() == -1 ? 'All' : PokemonCategories.categories().find(c => c.id == pokedexCategoryFilter.observableValue()).name()">
@@ -118,7 +118,7 @@ aria-labelledby="pokedexModalLabel">
 
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexCaughtFilter: Settings.getSetting('pokedexCaughtFilter') } -->
-                                        <label for="pokedex-filter-caught-status">Caught Status</label>
+                                        <label for="pokedex-filter-caught-status" data-bind="text: pokedexCaughtFilter.displayName">Caught Status</label>
                                         <select id="pokedex-filter-caught-status" autocomplete="off" class="custom-select"
                                             data-bind="options: pokedexCaughtFilter.options,
                                                     optionsValue: 'value',
@@ -130,7 +130,7 @@ aria-labelledby="pokedexModalLabel">
 
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexPokerusFilter: Settings.getSetting('pokedexPokerusFilter') } -->
-                                        <label for="pokedex-filter-pokerus-status">Pokérus Status</label>
+                                        <label for="pokedex-filter-pokerus-status" data-bind="text: pokedexPokerusFilter.displayName">Pokérus Status</label>
                                         <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select"
                                             data-bind="options: pokedexPokerusFilter.options,
                                                     optionsValue: 'value',
@@ -144,7 +144,7 @@ aria-labelledby="pokedexModalLabel">
                                     <!-- ko if: player.highestRegion() >= GameConstants.Region.kalos -->
                                     <div class="form-group col-lg-12 col-12">
                                         <!-- ko let: { pokedexUniqueTransformationFilter: Settings.getSetting('pokedexUniqueTransformationFilter') } -->
-                                        <label for="pokedex-filter-unique-transformation">Unique Forms</label>
+                                        <label for="pokedex-filter-unique-transformation" data-bind="text: pokedexUniqueTransformationFilter.displayName">Unique Transformations</label>
                                         <select id="pokedex-filter-unique-transformation" autocomplete="off" class="custom-select"
                                             data-bind="options: pokedexUniqueTransformationFilter.options,
                                                 optionsValue: 'value',
@@ -159,10 +159,10 @@ aria-labelledby="pokedexModalLabel">
                                     <div class="col-12">
                                         <div class="form-group my-2">
                                             <!-- ko let: { pokedexHeldItemFilter: Settings.getSetting('pokedexHeldItemFilter') } -->
-                                            <span>Rare Hold Item</span>
+                                            <label for="pokedex-filter-held-item" data-bind="text: pokedexHeldItemFilter.displayName">Rare Held Item</label>
                                             <span class="mx-1"
                                                 data-bind="tooltip: {
-                                                    title: 'Filters Pokémon with a chance to drop an item',
+                                                    title: 'Shows Pokémon with a chance to drop an item',
                                                     trigger: 'hover',
                                                     boundary: 'window'
                                                 }" data-original-title="" title="">ⓘ</span>
@@ -181,7 +181,7 @@ aria-labelledby="pokedexModalLabel">
                                     <div class="col-12">
                                         <div class="form-group my-2">
                                             <!-- ko let: { pokedexHideAltFilter: Settings.getSetting('pokedexHideAltFilter') } -->
-                                            <span>Hide alternate forms</span>
+                                            <label for="pokedex-filter-hide-alternate" data-bind="text: pokedexHideAltFilter.displayName">Hide alternate forms</label>
                                             <label class="form-check-label toggler-wrapper style-1 float-right">
                                                 <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-alternate"
                                                     data-bind="checked: pokedexHideAltFilter.observableValue">

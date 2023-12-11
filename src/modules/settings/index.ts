@@ -246,7 +246,7 @@ export const breedingFilterNames = ['breedingNameFilter', 'breedingIDFilter', 'b
 
 Settings.add(new SearchSetting('breedingNameFilter', 'Search', ''));
 Settings.add(new Setting<number>('breedingIDFilter', 'Search ID', [], -1));
-Settings.add(new Setting<number>('breedingRegionFilter', 'Region', [], (2 << Region.final - 1) - 1));
+Settings.add(new Setting<number>('breedingRegionFilter', 'Region(s)', [], (2 << Region.final - 1) - 1));
 Settings.add(new Setting<PokemonType | null>('breedingType1Filter', 'Type 1',
     [
         new SettingOption('All', null),
@@ -268,7 +268,7 @@ Settings.add(new Setting<number>('breedingShinyFilter', 'Shiny Status',
         new SettingOption('Shiny', 1),
     ],
     -1));
-Settings.add(new Setting<number>('breedingPokerusFilter', 'Pokérus',
+Settings.add(new Setting<number>('breedingPokerusFilter', 'Pokérus Status',
     [
         new SettingOption('All', -1),
         ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
@@ -285,7 +285,7 @@ Settings.add(new Setting<string>('breedingUniqueTransformationFilter', 'Unique T
     'all'));
 Settings.add(new BooleanSetting('breedingHideAltFilter', 'Hide alternate forms', false));
 
-Settings.add(new Setting<string>('breedingDisplayTextSetting', 'breedingDisplayTextSetting',
+Settings.add(new Setting<string>('breedingDisplayTextSetting', 'Display Value',
     [
         new SettingOption('Attack', 'attack'),
         new SettingOption('Attack Bonus', 'attackBonus'),
@@ -301,7 +301,7 @@ Settings.add(new Setting<string>('breedingDisplayTextSetting', 'breedingDisplayT
     'attack'));
 
 // Region.none should be the first setting here
-Settings.add(new Setting<Region>('breedingRegionalAttackDebuffSetting', 'breedingRegionalAttackDebuffSetting',
+Settings.add(new Setting<Region>('breedingRegionalAttackDebuffSetting', 'Regional Debuff',
     [...regionOptions.slice(0, -1), ...regionOptions.slice(-1)],
     Region.none));
 
@@ -338,7 +338,7 @@ Settings.add(new Setting<string>('pokedexCaughtFilter', 'Caught Status',
         new SettingOption('Caught Purified', 'caught-purified'),
     ],
     'all'));
-Settings.add(new Setting<number>('pokedexPokerusFilter', 'Pokérus',
+Settings.add(new Setting<number>('pokedexPokerusFilter', 'Pokérus Status',
     [
         new SettingOption('All', -1),
         ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
