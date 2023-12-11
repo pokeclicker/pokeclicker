@@ -2553,8 +2553,9 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 249);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 250);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 251);
-            // Refresh Ultra Megalopolis battle for story modal
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 253);
+            // Reset Ultra Megalopolis temporary battle and Reset Eater of Light quest
+            saveData.statistics.temporaryBattleDefeated[253] = 0;
+            saveData.quests.questLines.find(ql => ql.name == 'Eater of Light')?.state === 0;
             // Start Alola story quests if player has beaten temp battles already
             // Hau 1
             if (saveData.statistics.temporaryBattleDefeated[224]) {
