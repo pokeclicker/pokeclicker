@@ -1511,7 +1511,7 @@ GymList['Exeggutor Island'] = new Gym(
     BadgeEnums.Poni_Stamp,
     128000,
     'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
-    [new OneFromManyRequirement([new MultiRequirement([new TemporaryBattleRequirement('Recon Squad 3'), new QuestLineStepCompletedRequirement('Emisarry of Light', 5, GameConstants.AchievementOption.less)]), new QuestLineCompletedRequirement('Emisarry of Light')])],
+    [new OneFromManyRequirement([new MultiRequirement([new TemporaryBattleRequirement('Recon Squad 3'), new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less)]), new QuestLineCompletedRequirement('Emissary of Light')])],
     undefined, undefined, { displayName: 'Hapu\'s Grand Trial' }
 );
 
