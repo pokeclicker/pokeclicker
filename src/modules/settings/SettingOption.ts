@@ -4,47 +4,23 @@ import {
 import { GameState } from '../GameConstants';
 import Requirement from '../requirements/Requirement';
 
+interface SettingOptionArgs {
+    requirement?: Requirement,
+    translateKey?: string
+}
+
 export default class SettingOption<T> {
-    
+
     // We can't set this up in the constructor because App.translation doesn't exist yet
     private cachedTranslatedName: KnockoutComputed<string>;
-    private _text: string;
-    private name: string;
-    private _defaultDisplayName: string;
-    public value: T;
     public requirement: Requirement;
+    private translateKey: string;
 
-    constructor(_text: string, value: T, requirement? : Requirement);
-    constructor(name: string, _defaultDisplayName: string, value: T, requirement?: Requirement);
-    constructor(..._arr: any[]) {
-        if (_arr.length === 2) {
-            this._text = _arr[0];
-            this.value = _arr[1];
-            this.nb(2);
-        } else if (_arr.length === 3) {
-            if (typeof _arr[3] === 'boolean') {
-                this._text = _arr[0];
-                this.value = _arr[1];
-                this.requirement = _arr[2];                
-            } else {
-                this.name = _arr[0];
-                this._defaultDisplayName = _arr[1];
-                this.value = _arr[2];
-            }
-            this.nb(3);
-        } else if (_arr.length === 4) {
-            this.name = _arr[0];
-            this._defaultDisplayName = _arr[1];
-            this.value = _arr[2];
-            this.requirement = _arr[3];
-            this.nb(4);
-        }
+    constructor(private _text: string, public value: T, { requirement, translateKey }: SettingOptionArgs = {}) {
+        this.requirement = requirement;
+        this.translateKey = translateKey;
     }
 
-    nb(count: number) {
-        console.warn(count);
-    }
-    
     isUnlocked() : boolean {
         if (!this.requirement) {
             return true;
@@ -57,12 +33,12 @@ export default class SettingOption<T> {
     }
 
     get text(): string {
-        if (this.name) {
+        if (this.translateKey) {
             if (!this.cachedTranslatedName) {
                 this.cachedTranslatedName = App.translation.get(
-                    this.name,
+                    this.translateKey,
                     'settings',
-                    { defaultValue: this._defaultDisplayName },
+                    { defaultValue: this._text },
                 );
             }
             return this.cachedTranslatedName();

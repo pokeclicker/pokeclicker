@@ -130,7 +130,7 @@ export const pokeballFilterOptions = {
         (type: EncounterType = EncounterType.route) => new Setting(
             'pokeballFilterEncounterType',
             'Encounter Type',
-            Object.values(EncounterType).map((v) => new SettingOption(v, v, encounterTypeRequirements[v])),
+            Object.values(EncounterType).map((v) => new SettingOption(v, v, { requirement: encounterTypeRequirements[v] })),
             type,
         ),
         (type) => `Is ${GameHelper.anOrA(type)} ${type} encounter`,
