@@ -1463,7 +1463,7 @@ GymList['Iki Town'] = new Gym(
     ],
     BadgeEnums.Melemele_Stamp,
     128000,
-    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon! With this victory... you have cleared all of the trials of Melemele Island, the first of Alola\'s islands! The Melemele stamp is proof of your accomplishments.',
+    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!</br><img width="100" src="assets/images/items/zCrystal/Fightinium Z.svg"/></br>With this victory... you have cleared all of the trials of Melemele Island, the first of Alola\'s islands! The Melemele stamp is proof of your accomplishments.',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10), new TemporaryBattleRequirement('Hau 3')])],
     undefined, undefined, { displayName: 'Hala\'s Grand Trial' }
 );
@@ -1477,7 +1477,7 @@ GymList['Konikoni City'] = new Gym(
     ],
     BadgeEnums.Akala_Stamp,
     128000,
-    'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours! I think your journey will hold many surprises. And I hope it holds many joys.',
+    'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!</br><img width="100" src="assets/images/items/zCrystal/Rockium Z.svg"/></br>I think your journey will hold many surprises. And I hope it holds many joys.',
     [new TemporaryBattleRequirement('Plumeria 1')],
     undefined, undefined, { displayName: 'Olivia\'s Grand Trial' }
 );
@@ -1491,7 +1491,7 @@ GymList['Malie City'] = new Gym(
     ],
     BadgeEnums.Ula_Ula_Stamp,
     128000,
-    'Hmph... heh. Let me fix your team up for you. Here. This is yours.</br>There. Congratulations or whatever. You\'ve officially finished your Ula\'ula trials. You\'ve got somewhere else to be, don\'t you? Try not to destroy the whole place.',
+    'Hmph... heh. Let me fix your team up for you. Here. This is yours.</br><img width="100" src="assets/images/items/zCrystal/Darkinium Z.svg"/></br>There. Congratulations or whatever. You\'ve officially finished your Ula\'ula trials. You\'ve got somewhere else to be, don\'t you? Try not to destroy the whole place.',
     [new TemporaryBattleRequirement('Gladion 2')],
     undefined, undefined, { displayName: 'Nanu\'s Grand Trial' }
 );
@@ -1510,7 +1510,7 @@ GymList['Exeggutor Island'] = new Gym(
     ],
     BadgeEnums.Poni_Stamp,
     128000,
-    'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
+    'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!</br><img width="100" src="assets/images/items/zCrystal/Groundium Z.svg"/></br>Then go on with you two! Head straight through here and find the altar!',
     [new OneFromManyRequirement([new MultiRequirement([new TemporaryBattleRequirement('Recon Squad 3'), new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less)]), new QuestLineCompletedRequirement('Emissary of Light')])],
     undefined, undefined, { displayName: 'Hapu\'s Grand Trial' }
 );

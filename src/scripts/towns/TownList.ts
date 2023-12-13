@@ -7202,7 +7202,7 @@ const GuzmaSilvally = new NPC('Guzma', [
     'Huh? What are you doing in here? A what? Silvally Memory? I think I have what you\'re looking for. Yeah, I have it, if you want to see it. Anyways, I was just passing by and decided to visit this place again.',
     'If you need this Memory, let\'s battle. I miss the times when you got in the way of my plans for Team Skull and I used to battle you. I\'m not gonna lose this time.',
 ], {
-    image: 'assets/images/npcs/Team Skull Boss (guzma).png',
+    image: 'assets/images/npcs/Guzma.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 18, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 20, GameConstants.AchievementOption.less)]),
 });
 const KahiliSilvally = new NPC('Kahili', [
@@ -7216,7 +7216,7 @@ const PlumeriaSilvally = new NPC('Plumeria', [
     'Let me guess, you\'re after this Silvally Memory I found around here, aren\'t you? I can tell by the way you carry yourself. You\'re not like the rest of the tourists and challengers who come here just for a sightseeing or a battle. You\'re on a mission, right?',
     'If you want it that bad, you gotta earn it. I won\'t just hand it over to you. I\'m starting from scratch as a Pokémon Trainer and doing it right this time, so you gotta show me what you\'re made of, in a battle. You and your Pokémon against me and mine! Are you up for the challenge, kid?',
 ], {
-    image: 'assets/images/npcs/Plumeria.png',
+    image: 'assets/images/npcs/Plumeria (league).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 22, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 24, GameConstants.AchievementOption.less)]),
 });
 const AcerolaSilvally = new NPC('Captain Acerola', [

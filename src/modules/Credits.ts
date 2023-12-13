@@ -630,6 +630,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Clemont',
             'Drasna',
+            'Guzma',
             'Korrina',
             'Malva',
             'Onympia',
@@ -785,6 +786,7 @@ export const SpriteCredits: Credit[] = [
             'Nemona',
             'Owner',
             'Palina',
+            'Plumeria (league)',
             'Poppy',
             'Prof. Birch',
             'Prof. Elm',

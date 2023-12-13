@@ -3970,7 +3970,7 @@ TemporaryBattleList['Recon Squad 2'] = new TemporaryBattle(
     'Recon Squad 2',
     [new GymPokemon('Sudowoodo', 412520122, 20)],
     undefined, // custom quest message
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))],
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 1),],
     undefined,
     {
         isTrainerBattle: false,
@@ -4086,7 +4086,7 @@ TemporaryBattleList.Molayne = new TemporaryBattle(
         new GymPokemon('Metang', 170174638, 29),
         new GymPokemon('Alolan Dugtrio', 175257094, 30),
     ],
-    'Here\'s a little something to remember our meeting by! I gathered these Z-Crystals when I was on my own island challenge back in my own day. Take it, and use it well.</br></br><img src="assets/images/items/zCrystal/Steelium Z.svg">',
+    'Here\'s a little something to remember our meeting by! I gathered these Z-Crystals when I was on my own island challenge back in my own day. Take it, and use it well.</br></br><img width="100" src="assets/images/items/zCrystal/Steelium Z.svg">',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
     undefined,
     {
@@ -4115,7 +4115,7 @@ TemporaryBattleList['Psychium Z Trial'] = new TemporaryBattle(
         new GymPokemon('Alolan Dugtrio', 7484122, 32),
         new GymPokemon('Trapinch', 7622397, 32),
     ],
-    '<i>Lucky you! There was a Z-Crystal hidden here all along! You obtained a Psychium Z!<i>',
+    '<i>Lucky you! There was a Z-Crystal hidden here all along! You obtained a Psychium Z!<i></br></br><img width="100" src="assets/images/items/zCrystal/Psychium Z.svg">',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart')), new RouteKillRequirement(10, GameConstants.Region.alola, 23)],
     undefined,
     {
@@ -4396,7 +4396,7 @@ TemporaryBattleList['Guzma Bug Memory'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Guzma',
-        imageName: 'Team Skull Boss (guzma)',
+        imageName: 'Guzma',
     }
 );
 TemporaryBattleList['Kahili Flying Memory'] = new TemporaryBattle(
@@ -4430,7 +4430,7 @@ TemporaryBattleList['Plumeria Poison Memory'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Plumeria',
-        imageName: 'Plumeria',
+        imageName: 'Plumeria (league)',
     }
 );
 TemporaryBattleList['Acerola Ghost Memory'] = new TemporaryBattle(
