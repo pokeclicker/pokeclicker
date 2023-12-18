@@ -78,6 +78,7 @@ class PurifyChamber implements Saveable {
                 title: 'Purify Chamber',
                 message: 'Maximum Flow has accumulated at the Purify Chamber!',
                 type: NotificationConstants.NotificationOption.primary,
+                sound: NotificationConstants.NotificationSound.General.max_flow,
                 timeout: 6e4,
             });
         }
