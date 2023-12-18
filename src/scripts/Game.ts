@@ -273,13 +273,13 @@ class Game {
         // requestAnimationFrame (consistent if page visible)
         let lastFrameTime = 0;
         let ticks = 0;
-        const tick = (currentFrameTime) => {
+        this.frameRequest = setInterval(() => {
             // Don't process while page hidden
             if (pageHidden) {
-                this.frameRequest = requestAnimationFrame(tick);
                 return;
             }
 
+            const currentFrameTime = Date.now();
             const delta = currentFrameTime - lastFrameTime;
             ticks += delta;
             lastFrameTime = currentFrameTime;
@@ -292,9 +292,7 @@ class Game {
                 }
                 this.gameTick();
             }
-            this.frameRequest = requestAnimationFrame(tick);
-        };
-        this.frameRequest = requestAnimationFrame(tick);
+        }, 1000 / 60);
 
         // Try start our webworker so we can process stuff while the page isn't focused
         try {
@@ -352,7 +350,7 @@ class Game {
     }
 
     stop() {
-        cancelAnimationFrame(this.frameRequest);
+        clearInterval(this.frameRequest);
         window.onbeforeunload = () => {};
     }
 
