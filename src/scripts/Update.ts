@@ -2537,6 +2537,12 @@ class Update implements Saveable {
                 saveData.statistics.temporaryBattleDefeated[223] = 0;
             }
         },
+        '0.10.18': ({ saveData }) => {
+            // Actually fix Anomaly Mewtwo 5 if the quest is not completed.
+            if ((saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state ?? 0) !== 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+        },
     };
 
     constructor() {
