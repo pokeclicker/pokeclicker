@@ -2546,6 +2546,13 @@ class Update implements Saveable {
             // Give the player Fairy Feathers in place of Pink Bows
             playerData._itemList.Fairy_Feather = playerData._itemList.Pink_Bow || 0;
             delete playerData._itemList.Pink_Bow;
+
+            // Update pokemon held item Pink Bow -> Fairy Feather
+            saveData.party.caughtPokemon.forEach(p => {
+                if (p[10] === 'Pink_Bow') {
+                    p[10] = 'Fairy_Feather';
+                }
+            });
         },
     };
 
