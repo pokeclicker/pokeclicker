@@ -40,7 +40,7 @@ class SafariBattle {
             targetOffset.top += 16;
 
             const ballSpeed = SafariBattle.Speed.ballThrowAnim * SafariBattle.getTierMultiplier();
-            const ptclhtml = '<div><img id="safariBall" src="assets/images/pokeball/Safariball.svg" height="30px"></div>';
+            const ptclhtml = SafariBattle.pokeball();
             SafariBattle.ballParticle?.remove();
             SafariBattle.ballParticle = SafariBattle.dropParticle(ptclhtml, $('#safariBattleModal .pageItemFooter').offset(), targetOffset, ballSpeed, 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
             $('#safariBall').css('animation-duration', `${ballSpeed}ms`).addClass('spin');
@@ -333,7 +333,18 @@ class SafariBattle {
 
         return MULTIPLIERS[tier];
     }
+
+    private static pokeball() {
+        switch (player.region) {
+            case GameConstants.Region.johto:
+                return '<div><img id="safariBall" src="assets/images/pokeball/Sportball.svg" height="30px"></div>';
+            default:
+                return '<div><img id="safariBall" src="assets/images/pokeball/Safariball.svg" height="30px"></div>';
+        }
+    }
 }
+
+
 
 namespace SafariBattle {
     export const Speed = {
