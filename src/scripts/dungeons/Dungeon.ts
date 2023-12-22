@@ -89,16 +89,6 @@ const DungeonGainGymBadge = (gym: Gym) => {
         gym.firstWinReward();
     }
 };
-// Gain a z crystal after first completion of a dungeon
-// Also used for Alola story quests and temp battles
-const zCrystalGet = (crystalType: PokemonType) => () => {
-    player.gainItem(GameConstants.zCrystalItemType[crystalType], 1);
-    Notifier.notify({
-        title: 'Z Crystal',
-        message: `<img width="60" src="assets/images/items/zCrystal/${GameConstants.zCrystalItemType[crystalType]}.svg"/> You got the ${GameConstants.zCrystalItemType[crystalType]}!`,
-        timeout: 3e4,
-    });
-};
 
 /**
  * Gym class.
@@ -10801,7 +10791,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 1, requirement: new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
     805000, 2);
 
@@ -10890,18 +10880,17 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
     },
     11897821,
     [
-        new DungeonBossPokemon('Spinda', 59489105, 14, { hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ten Carat Hill'))}),
-        new DungeonBossPokemon('Carbink', 59489105, 14, { hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ten Carat Hill'))}),
-        new DungeonBossPokemon('Rockruff', 59489105, 14, { hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ten Carat Hill'))}),
+        new DungeonBossPokemon('Spinda', 59489105, 14),
+        new DungeonBossPokemon('Carbink', 59489105, 14),
+        new DungeonBossPokemon('Rockruff', 59489105, 14),
         new DungeonTrainer('Trial Site',
             [
                 new GymPokemon('Rockruff', 11897821, 30),
-                new GymPokemon('Hakamo-o', 59489105, 36),
+                new GymPokemon('Hakamo-o', 59489105, 36, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))),
             ],
-            { hide: true, weight: 1, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ten Carat Hill'), GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),//{ hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
-    835000, 3,
-    zCrystalGet(PokemonType.Flying));
+    835000, 3);
 
 dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
     ['Pikachu', 'Pichu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne'],
@@ -11060,7 +11049,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
                     new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm]),
                 ])),
             ],
-            { hide: true, weight: 1, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 1, GameConstants.AchievementOption.less) }, 'of Brooklet Hill'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 1, GameConstants.AchievementOption.less) }, 'of Brooklet Hill'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
     875000, 5);
 
@@ -11124,7 +11113,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 1, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 4, GameConstants.AchievementOption.less) }, 'of Wela Volcano Park'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 4, GameConstants.AchievementOption.less) }, 'of Wela Volcano Park'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
     900000, 7);
 
@@ -11175,7 +11164,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
                 new GymPokemon('Kecleon', 13090332, 22),
                 new GymPokemon('Totem Lurantis', 65451660, 24),
             ],
-            { hide: true, weight: 1, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 5, GameConstants.AchievementOption.less) }, 'of Lush Jungle'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 5, GameConstants.AchievementOption.less) }, 'of Lush Jungle'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
     925000, 8);
 
@@ -11375,7 +11364,7 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 1, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2, GameConstants.AchievementOption.less) }, 'of Hokulani Observatory'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2, GameConstants.AchievementOption.less) }, 'of Hokulani Observatory'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
     1000000, 22);
 
@@ -11421,7 +11410,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
                 ])),
                 new GymPokemon('Totem Mimikyu', 73527110, 35),
             ],
-            { hide: true, weight: 1, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 5, GameConstants.AchievementOption.less) }, 'of Thrifty Megamart'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 5, GameConstants.AchievementOption.less) }, 'of Thrifty Megamart'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
         new DungeonBossPokemon('Vivillon (Poké Ball)',  96662023, 60, {
             hide: true,
             requirement: new MultiRequirement([
@@ -11564,7 +11553,7 @@ dungeonList['Po Town'] = new Dungeon('Po Town',
             [
                 new GymPokemon('Elgyem', 38351440, 40),
                 new GymPokemon('Metang', 38351440, 40),
-            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 7)}, 'Royce', '(male)'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 6)}, 'Royce', '(male)'),
     ],
     1075000, 17);
 
@@ -11590,7 +11579,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Parasect', 15619682, 40),
                 new GymPokemon('Drifblim', 15619682, 40),
                 new GymPokemon('Sudowoodo', 15619682, 40),
-            ], { weight: 1 }, undefined, '(male)'),
+            ], { weight: 0.75 }, undefined, '(male)'),
         new DungeonTrainer('Aether Foundation Employee',
             [new GymPokemon('Primeape', 15619682, 40)], { weight: 1 }, undefined, '(male)'),
         new DungeonTrainer('Aether Foundation Employee',
@@ -11606,7 +11595,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Houndoom', 15619682, 42),
                 new GymPokemon('Electabuzz', 15619682, 42),
                 new GymPokemon('Manectric', 15619682, 42),
-            ], { weight: 1 }, undefined, '(male)'),
+            ], { weight: 0.25 }, undefined, '(male)'),
         new DungeonTrainer('Aether Foundation Employee',
             [new GymPokemon('Alolan Muk', 15619682, 41)], { weight: 1 }, undefined, '(masked)'),
         new DungeonTrainer('Aether Foundation Employee',
@@ -11847,7 +11836,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
                 new GymPokemon('Noivern', 15992044, 48),
                 new GymPokemon('Totem Kommo-o', 79960220, 49),
             ],
-            { hide: true, weight: 1, requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less) }, 'of Vast Poni Canyon'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less) }, 'of Vast Poni Canyon'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
     1125000, 25);
 
@@ -11876,7 +11865,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
                 new GymPokemon('Pelipper', 16217412, 52),
                 new GymPokemon('Totem Ribombee', 81087060, 55),
             ],
-            { hide: true, weight: 1, requirement: new QuestLineCompletedRequirement('Mina\'s Trial', GameConstants.AchievementOption.less) }, 'of Mina\'s Houseboat'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Mina\'s Trial', GameConstants.AchievementOption.less) }, 'of Mina\'s Houseboat'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
     1150000, 25);
 
@@ -11976,24 +11965,23 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     },
     16312850,
     [
-        new DungeonBossPokemon('Golbat', 81064250, 50, { hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))}),
-        new DungeonBossPokemon('Absol', 81064250, 50, { hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))}),
-        new DungeonBossPokemon('Glalie', 81064250, 50, { hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))}),
-        new DungeonBossPokemon('Vanilluxe', 81064250, 50, { hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'))}),
+        new DungeonBossPokemon('Golbat', 81064250, 50),
+        new DungeonBossPokemon('Absol', 81064250, 50),
+        new DungeonBossPokemon('Glalie', 81064250, 50),
+        new DungeonBossPokemon('Vanilluxe', 81064250, 50),
         new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new MultiRequirement([
             new QuestLineCompletedRequirement('Ultra Beast Hunt'), // because we don't want to unhide all the other ultra beasts and it's a reference to SM
             new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Encounter at least 1 Necrozma.'),
         ])}),
         new DungeonTrainer('Trial Site',
             [
-                new GymPokemon('Alolan Vulpix', 16212850, 47),
+                new GymPokemon('Sneasel', 16212850, 47),
                 new GymPokemon('Alolan Sandshrew', 16212850, 47),
                 new GymPokemon('Alolan Sandslash', 81064250, 50),
             ],
-            { hide: true, weight: 1, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila'), GameConstants.AchievementOption.less) }, 'of Mount Lanakila'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Mina\'s Trial', GameConstants.AchievementOption.less) }, 'of Mount Lanakila'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
     ],
-    1175000, 26,
-    zCrystalGet(PokemonType.Ice));
+    1175000, 26);
 
 dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and Moone',
     ['Clefairy', 'Sunkern', 'Skitty', 'Lunatone', 'Solrock', 'Helioptile'],

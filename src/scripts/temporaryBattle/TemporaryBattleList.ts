@@ -3970,7 +3970,7 @@ TemporaryBattleList['Recon Squad 2'] = new TemporaryBattle(
     'Recon Squad 2',
     [new GymPokemon('Sudowoodo', 412520122, 20)],
     undefined, // custom quest message
-    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 1),],
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 1)],
     undefined,
     {
         isTrainerBattle: false,
@@ -4267,10 +4267,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            if (App.game.quests.getQuestLine('Mina\'s Trial').state() != QuestLineState.started ||
-                App.game.quests.getQuestLine('Mina\'s Trial').state() != QuestLineState.ended) {
-                App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
-            }
+            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
         },
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',
@@ -4374,7 +4371,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         new GymPokemon('Silvally (Grass)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.',
-    [new QuestLineCompletedRequirement('Mina\'s Trial')],
+    [new QuestLineStepCompletedRequirement('Mina\'s Trial', 7)],
     undefined,
     {
         displayName: 'Pokémon Trainer Gladion',

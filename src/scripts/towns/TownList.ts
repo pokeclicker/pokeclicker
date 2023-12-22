@@ -6759,7 +6759,7 @@ const PoTownHomeowner = new NPC('Office Worker Royce', [
     'My house! My car! MY LAWN! What did those Team Skull kids do!?',
 ], {
     image: 'assets/images/npcs/Office Worker (male).png',
-    requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 7),
+    requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 6),
 });
 const YungoosAetherHouse = new NPC('Yungoos', [
     'Grrrssssss',
@@ -6767,7 +6767,7 @@ const YungoosAetherHouse = new NPC('Yungoos', [
     image: 'assets/images/pokemon/734.png',
     requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 5, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Child of the Stars', 6)]),
 });
-const SeafolkCaptain = new NPC('Captain Mina', [
+const SeafolkCaptain = new NPC('Mina', [
     'We don\'t have a kahuna on Poni, so I don\'t have an actual trial or anything...',
     'Old man Nanu has been looking after our grand trials up until now. I\'m the captain and all, so I\'ve gotta come up with a trial.',
 ], {
@@ -6960,8 +6960,6 @@ const LillieHeahea = new NPC('Lillie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Symbiotic Relations', 0), new QuestLineStepCompletedRequirement('Symbiotic Relations', 7, GameConstants.AchievementOption.less)]),
 });
 const LillieRuinsOfLife = new NPC('Lillie', [
-    'Nebby! I know you tried to drag me along to the Ruins of Conflict on Melemele Island, too... Why are these ruins important to you? What do the guardians mean to you?',
-    '',
     'Nebby seems fond of the ruins for some reason, so I keep visiting them and hoping that maybe I will find some clue to help it get back to its home... But I don\'t have any idea how to do that...',
     '$playername$ if it\'s all right with you, I think Nebby and I would like to watch your Grand Trial.',
 ], {
@@ -6976,10 +6974,34 @@ const LillieMalie = new NPC('Lillie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 0), new  QuestLineStepCompletedRequirement('Child of the Stars', 3, GameConstants.AchievementOption.less)]),
 });
 const LillieAetherHouse = new NPC('Lillie', [
-    'Pokémon being abducted like that... Maybe even hurt... I just can\'t stand the idea! <Player>! Please...help them!',
+    'Pokémon being abducted like that... Maybe even hurt... I just can\'t stand the idea! $playername$! Please...help them!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 5), new QuestLineStepCompletedRequirement('Child of the Stars', 7, GameConstants.AchievementOption.less)]),
+});
+const LillieSeafolkVillage = new NPC('Lillie', [
+    'So Hapu lives here on Poni Island? Let\'s go, $playername$! She can help us find the kahuna! It will be good to see her and Mudsdale again!',
+    'Poni Island... It\'s a completely different kind of island, isn\'t it?',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Emissary of Light'), new QuestLineStepCompletedRequirement('Emissary of Light', 1, GameConstants.AchievementOption.less)]),
+});
+const LillieExeggutorIsland = new NPC('Lillie', [
+    'I\'d seen it in a movie... this man singing and dancing in the rain. I had to try it for myself. Mother was so shocked that she ran right out after me. And then...she smiled... and danced with me. But... then she changed. And I couldn\'t do anything...',
+    'But you know what $playername$? Every time in this journey, you\'ve shown me that it\'s possible... to do something.',
+    'I don\'t know if it will really summon the Legendary Pokémon, but we can at least try! Thank you for coming this far with me, $playername$!',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 1), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less)]),
+});
+const LillieAltar = new NPC('Lillie', [
+    'My mother is— She\'s selfish. She lavishes her love only on those she deems worthy, not caring whether it is wanted or not.',
+    'But I will save her. I still have something I need to tell her. I am alive. Cosmog is alive.',
+    'Nebby. Please. I need to see my mother!',
+    'All right, $playername$! Let\'s go!',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less)]),
 });
 // Other story characters
 const HauAether = new NPC('Hau', [
@@ -6993,13 +7015,13 @@ const GladionAether = new NPC('Gladion', [
     '$playername$! Stop the president!!! If we don\'t, Alola will be flooded with beasts!',
 ], {
     image: 'assets/images/npcs/Gladion (stance).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 10), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 9), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
 });
 const LillieAether = new NPC('Lillie', [
     'Mother! Do not sacrifice Cosmog for that beast\'s sake! Please... Stop... If Nebby isn\'t— If you make it use up too much of its power... you don\'t understand what will happen! If you use too much of its power, it will die!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 11), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 10), new  QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less)]),
 });
 const HapuMalie = new NPC('Hapu', [
     '$playername$. Been a while, friend. And who might this be?',
@@ -7022,7 +7044,7 @@ const HapuAltar = new NPC('Hapu', [
     'I\'ll await your arrival on Exeggutor Island, if training is something you desire before challenging this beast.',
 ], {
     image: 'assets/images/npcs/Hapu.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Eater of Light'), new  QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Emissary of Light'), new  QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
 });
 const PhycoAltar = new NPC('Captain Phyco', [
     'Necrozma...and us ourselves... we have both suffered so many long years in this darkness, living a life we did not wish for...',
@@ -7030,7 +7052,7 @@ const PhycoAltar = new NPC('Captain Phyco', [
     'Our ancestors were greedy, though. They sought to control all of Necrozma\'s light... They hurt Necrozma... They left it incomplete, and in such a state, it went mad with fury... And so our light was stolen by Necrozma. Now, the one that wields light to its will... It would steal all of Alola\'s light!',
 ], {
     image: 'assets/images/npcs/Phyco.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Eater of Light'), new  QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Emissary of Light'), new  QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
 });
 const PoipoleGift = new GiftNPC('Accept Poipole', [
     'You chose to confront Lusamine and Necrozma without the aid of the legendary Pokémon. It seems Poipole has become inspired by your actions. Do you wish to take it with you? ',
@@ -7543,16 +7565,6 @@ TownList['Royal Avenue'] = new Town(
         npcs: [RoyalAvenueSpectator, MolayneSilvally],
     }
 );
-TownList['Konikoni City'] = new Town(
-    'Konikoni City',
-    GameConstants.Region.alola,
-    GameConstants.AlolaSubRegions.AkalaIsland,
-    [KonikoniCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Konikoni City'])],
-    {
-        requirements: [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
-        npcs: [KonikoniKahuna, SilvallyOlivia],
-    }
-);
 TownList['Ruins of Life Entrance'] = new Town(
     'Ruins of Life Entrance',
     GameConstants.Region.alola,
@@ -7561,6 +7573,16 @@ TownList['Ruins of Life Entrance'] = new Town(
     {
         requirements: [new TemporaryBattleRequirement('Plumeria 1')],
         npcs: [LillieRuinsOfLife],
+    }
+);
+TownList['Konikoni City'] = new Town(
+    'Konikoni City',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.AkalaIsland,
+    [KonikoniCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Konikoni City'])],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
+        npcs: [KonikoniKahuna, SilvallyOlivia],
     }
 );
 TownList['Aether Paradise'] = new Town(
@@ -7616,7 +7638,7 @@ TownList['Seafolk Village'] = new Town(
     [SeafolkVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Seafolk Village']), new MoveToDungeon(dungeonList['Mina\'s Houseboat']), new DockTownContent(), TemporaryBattleList['Captain Mina']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
-        npcs: [SeafolkCaptain, SeafolkCaptainMina, SilvallyMina],
+        npcs: [SeafolkCaptain, SeafolkCaptainMina, SilvallyMina, LillieSeafolkVillage],
     }
 );
 TownList['Ruins of Hope Altar'] = new Town(
@@ -7649,7 +7671,7 @@ TownList['Exeggutor Island'] = new Town(
     GameConstants.AlolaSubRegions.PoniIsland,
     [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), new MoveToTown('Exeggutor Island Hill', undefined, false)],
     {
-        requirements: [new QuestLineCompletedRequirement('Emissary of Light')],
+        requirements: [new QuestLineCompletedRequirement('Emissary of Light')]
     }
 );
 TownList['Altar of the Sunne and Moone'] = new Town(
@@ -7659,7 +7681,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList['Lusamine 1'], TemporaryBattleList['Lusamine 2'], TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, Lillie7, HapuAltar, PhycoAltar, PoipoleGift],
+        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, LillieAltar, Lillie7, HapuAltar, PhycoAltar, PoipoleGift],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
@@ -7963,14 +7985,14 @@ TownList['Exeggutor Island Hill'] = new DungeonTown(
     GameConstants.AlolaSubRegions.PoniIsland,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 1)],
     [ExeggutorIslandHillShop, TemporaryBattleList['Exeggutor Tree']],
-    {npcs: [HapuSilvally1]}
+    {npcs: [LillieExeggutorIsland, HapuSilvally1]}
 );
 TownList['Vast Poni Canyon'] = new DungeonTown(
     'Vast Poni Canyon',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 4)],
-    [new MoveToTown('Vast Poni Canyon Entrance', new QuestLineCompletedRequirement('Emissary of Light'), false), TemporaryBattleList['Plumeria Poison Memory']],
+    [new MoveToTown('Vast Poni Canyon Entrance', undefined, false), TemporaryBattleList['Plumeria Poison Memory']],
     {npcs: [HapuCanyon, PlumeriaSilvally]}
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(

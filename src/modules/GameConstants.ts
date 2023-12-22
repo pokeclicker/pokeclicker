@@ -1942,6 +1942,7 @@ export const TemporaryBattles = [
     'Hau 5',
     'Skull 4',
     'Molayne',
+    'Psychium Z Trial',
     'Skull 5',
     'Plumeria 2',
     'Gladion 2',

@@ -2536,7 +2536,8 @@ class Update implements Saveable {
             if (saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state < 2) {
                 saveData.statistics.temporaryBattleDefeated[223] = 0;
             }
-
+        },
+        '0.10.18': ({ playerData, saveData }) => {
             // Add Alola story battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 225);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 227);
@@ -2548,14 +2549,18 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 242);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 243);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 244);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 247);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 245);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 248);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 249);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 250);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 251);
-            // Reset Ultra Megalopolis temporary battle and Reset Eater of Light quest
-            saveData.statistics.temporaryBattleDefeated[253] = 0;
-            saveData.quests.questLines.find(ql => ql.name == 'Eater of Light')?.state === 0;
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 252);
+            // Reset temporary battle Ultra Megalopolis; Reset quests Eater of Light and Mina's Trial
+            saveData.statistics.temporaryBattleDefeated[254] = 0;
+            const eaterID = saveData.quests.questLines.findIndex(ql => ql.name == 'Eater of Light');
+            saveData.quests.questLines.splice(eaterID, 1);
+            const minaID = saveData.quests.questLines.findIndex(ql => ql.name == 'Mina\'s Trial');
+            saveData.quests.questLines.splice(minaID, 1);
             // Start Alola story quests if player has beaten temp battles already
             // Hau 1
             if (saveData.statistics.temporaryBattleDefeated[224]) {

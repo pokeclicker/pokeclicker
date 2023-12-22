@@ -2449,7 +2449,7 @@ class QuestLineHelper {
     /* Alola QuestLines */
     // Melemele Island guide - Started upon deafting Hau 1
     public static createMelemeleAlolaQuestLine() {
-        const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'Time to kick off your Alolan vacation!');
+        const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'Time to kick off your Alolan vacation! See the sights around Melemele Island.');
         // 0 - Temp Battle: Melemele Spearow
         const battleMelemeleSpearow = new DefeatTemporaryBattleQuest('Melemele Spearow', 'Protect the mysterious girl\'s Pokémon! Battle the Spearow on Mahalo Trail.')
             .withOptionalArgs({
@@ -2541,10 +2541,14 @@ class QuestLineHelper {
         const talkToLillie3 = new TalkToNPCQuest(Lillie3, 'Lillie still has something on her mind. Talk to her in Iki Town.').withCustomReward(LillieReviveReward);
         melemeleAlolaQuestLine.addQuest(talkToLillie3);
 
-        // end - Gym Battle: Hala
+        // 11 - Gym Battle: Hala
         // reward defined at the end of this file
         const clearHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town complete Melemele\'s Grand Trial!').withCustomReward(zCrystalGet(PokemonType.Fighting));
         melemeleAlolaQuestLine.addQuest(clearHala);
+
+        // end - Extra Z Crystal "Trial"
+        // const defined at the end of this file
+        createZCrystalTrial(PokemonType.Flying, 'Ten Carat Hill', 'Kahili', 'Hello there. There\'s a wonderful breeze blowing out here today. The glistening Flyinium Z... It\'s yours now. Use it well.', melemeleAlolaQuestLine, true, 'There is one more Z Crystal on Melemele. Find the Trial Site in the dungeon hiding it.', 'Trial Site of Ten Carat Hill');
 
         App.game.quests.questLines().push(melemeleAlolaQuestLine);
     }
@@ -2620,7 +2624,7 @@ class QuestLineHelper {
         akalaAlolaQuestLine.addQuest(battleKahunaOlivia);
 
         // end - Temp battle: Ultra Wormhole
-        const clearUltraWormhole = new DefeatTemporaryBattleQuest('Ultra Wormhole', 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.');
+        const clearUltraWormhole = new DefeatTemporaryBattleQuest('Ultra Wormhole', 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.').withInitialValue(0);
         akalaAlolaQuestLine.addQuest(clearUltraWormhole);
 
         App.game.quests.questLines().push(akalaAlolaQuestLine);
@@ -2667,7 +2671,7 @@ class QuestLineHelper {
             MapHelper.moveToTown('Malie City');
         };
 
-        const battleGladion2 = new DefeatTemporaryBattleQuest('Gladion 2', 'Team Skull have stolen Nebby! Battle Gladion at Aether House.').withCustomReward(battleGladion2Reward);
+        const battleGladion2 = new DefeatTemporaryBattleQuest('Gladion 2', 'Team Skull have stolen Nebby! Battle Gladion at Aether House.').withInitialValue(0).withCustomReward(battleGladion2Reward);
         ulaulaAlolaQuestLine.addQuest(battleGladion2);
 
         // 8 - Gym battle: Nanu
@@ -2710,7 +2714,7 @@ class QuestLineHelper {
             });
         ulaulaAlolaQuestLine.addQuest(clearAetherFoundation4);
 
-        // end - Talk to NPC: Lillie and Gladion
+        // 13 - Talk to NPC: Lillie and Gladion
         const AlolaMasterballReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
@@ -2729,6 +2733,13 @@ class QuestLineHelper {
             talkToLillie6,
             talktoGladion1,
         ], 'Talk to Lillie and Gladion at Aether Paradise when you\'re ready to go to the next island.').withCustomReward(AlolaMasterballReward));
+
+        // 14 and 15 - Get Steelium and Psychium if not yet
+        const getPsychiumZ = new DefeatTemporaryBattleQuest('Psychium Z Trial', 'There are more Z Crystals on Ula\'ula. Find the Trial Site hidden in Haina Desert after clearing the Route.').withInitialValue(0);
+        ulaulaAlolaQuestLine.addQuest(getPsychiumZ);
+
+        const getSteeliumZ = new DefeatTemporaryBattleQuest('Molayne', 'Get the Steelium Z. Defeat Molayne in Hokulani Observatory.').withInitialValue(0);
+        ulaulaAlolaQuestLine.addQuest(getSteeliumZ);
 
         App.game.quests.questLines().push(ulaulaAlolaQuestLine);
     }
@@ -2750,7 +2761,7 @@ class QuestLineHelper {
         poniAlolaQuestLine.addQuest(talkeToHapuHope);
 
         // 2 - Clear dungeon: Exeggutor Island Hill
-        const clearExeggutorIslandHill = new DefeatDungeonQuest(1, 0, 'Exeggutor Island').withDescription('Hapu has given Lillie one of the flutes needed to summon the legendary Pokémon. Find the other flute by clearing Exeggutor Island Hill.')
+        const clearExeggutorIslandHill = new DefeatDungeonQuest(1, 0, 'Exeggutor Island Hill').withDescription('Hapu has given Lillie one of the flutes needed to summon the legendary Pokémon. Find the other flute by clearing Exeggutor Island Hill.')
             .withOptionalArgs({
                 clearedMessage: 'Now we have both the Sun Flute and the Moon Flute!</br><img src="assets/images/items/fluteItem/Sun_Flute.png"/><img src="assets/images/items/fluteItem/Moon_Flute.png"/>',
                 npcDisplayName: 'Lillie',
@@ -2762,14 +2773,23 @@ class QuestLineHelper {
         const battleSkullGrunts6 = new DefeatTemporaryBattleQuest('Skull 6', 'Team Skull are being annoying again. Settle the score with them near Vast Poni Canyon.')
             .withCustomReward(zCrystalGet(PokemonType.Poison))
             .withOptionalArgs({
-                clearedMessage: 'That\'s enough, grunts. No one wants to see a sore loser.</br></br>You. To be honest, I\'ve treated you really badly. Even if I apologize, I know it\'s probably too late for you to forgive me. This is my way of saying sorry, OK? Take it. It\'s Poisonium Z.</br><img src="assets/images/items/zCrystal/Poisonium Z.svg">',
+                clearedMessage: 'That\'s enough, grunts. No one wants to see a sore loser.</br></br>You. To be honest, I\'ve treated you really badly. Even if I apologize, I know it\'s probably too late for you to forgive me. This is my way of saying sorry, OK? Take it. It\'s Poisonium Z.</br><img width="100" src="assets/images/items/zCrystal/Poisonium Z.svg">',
                 npcDisplayName: 'Plumeria',
                 npcImageName: 'Plumeria (league)',
             });
         poniAlolaQuestLine.addQuest(battleSkullGrunts6);
 
         // 4 - Gym battle: Hapu
-        const battleKahunaHapu = new DefeatGymQuest(1, 0, 'Exeggutor Island').withDescription('Go to Vast Poni Canyon\'s Entrance and prove your skills in a Grand Trial against Poni\'s new kahuna, Hapu!').withCustomReward(zCrystalGet(PokemonType.Ground));
+        const groundiumZGet = () => {
+            player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ground], 1);
+            Notifier.notify({
+                title: 'Z Crystal',
+                message: `<img width="60" src="assets/images/items/zCrystal/${GameConstants.zCrystalItemType[PokemonType.Ground]}.svg"/> You got the ${GameConstants.zCrystalItemType[PokemonType.Ground]}!`,
+                timeout: 3e4,
+            });
+            MapHelper.moveToTown('Vast Poni Canyon Entrance');
+        };
+        const battleKahunaHapu = new DefeatGymQuest(1, 0, 'Exeggutor Island').withDescription('Go to Vast Poni Canyon\'s Entrance and prove your skills in a Grand Trial against Poni\'s new kahuna, Hapu!').withCustomReward(groundiumZGet);
         poniAlolaQuestLine.addQuest(battleKahunaHapu);
 
         // 5 - Clear dungeon: Vast Poni Canyon, Dragonium Z Trial
@@ -2787,7 +2807,7 @@ class QuestLineHelper {
         // 7 - Temp battle: Clear Lusamine1 or Lusamine2
         const clearBeastLusamine = new CustomQuest(1, 0, 'Help Lillie get through to her mother with the help of the legendary Pokémon! Clear Lusamine at the Altar of the Sunne and Moone.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 1')]() +
-        App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 2')]())
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 2')]())
             .withOptionalArgs({
                 clearedMessage: 'Lillie...</br>...</br>Heh...</br>When did you... start becoming so beautiful?',
                 npcDisplayName: 'Lusamine',
@@ -2812,14 +2832,14 @@ class QuestLineHelper {
         App.game.quests.questLines().push(poniAlolaQuestLine);
     }
 
-    // Old Alola quest. Name is too good to ignore so it's only one step. Makes for a good climax
-    public static createSkullAetherAlolaQuestLine() {
-        const skullAetherAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
+    // Single step quest for story climax
+    public static createUltraNecrozmaAlolaQuestLine() {
+        const ultraNecrozmaAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
         // const UltraMegalopolisReward = () => { // change to sun and moon flutes
         //     App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
         //     Notifier.notify({
-        //         title: skullAetherAlolaQuestLine.name,
+        //         title: ultraNecrozmaAlolaQuestLine.name,
         //         message: 'You got the Sun and Moon flutes! (but not really)',
         //         type: NotificationConstants.NotificationOption.success,
         //         timeout: 3e4,
@@ -2832,46 +2852,49 @@ class QuestLineHelper {
                 npcDisplayName: 'Ultra Recon Squad',
                 npcImageName: 'specialNPCs/Ultra Recon Squad (all)',
             });
-        skullAetherAlolaQuestLine.addQuest(clearUltraMegalopolis);
+        ultraNecrozmaAlolaQuestLine.addQuest(clearUltraMegalopolis);
 
-        App.game.quests.questLines().push(skullAetherAlolaQuestLine);
+        App.game.quests.questLines().push(ultraNecrozmaAlolaQuestLine);
     }
 
     // Started upon defeating Ultra Necrozma temp battle.
     public static createMinasTrialAlolaQuestLine() {
         const minasTrialAlolaQuestLine = new QuestLine('Mina\'s Trial', 'Mina has asked you to battle the Trial captains of the other islands to earn access to her Trial site.');
 
-        const clearCaptainMina = new DefeatTemporaryBattleQuest('Captain Mina', 'Defeat Captain Mina in Seafolk Village.').withCustomReward(() => ItemList.Pink_Petal_Mina.gain(1));
+        const clearCaptainMina = new DefeatTemporaryBattleQuest('Captain Mina', 'Defeat Captain Mina in Seafolk Village.').withInitialValue(0).withCustomReward(() => ItemList.Pink_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainMina);
 
-        const clearCaptainIlima = new DefeatTemporaryBattleQuest('Captain Ilima', 'Defeat Captain Ilima in Hau\'oli Cemetery.').withCustomReward(() => ItemList.Orange_Petal_Mina.gain(1));
+        const clearCaptainIlima = new DefeatTemporaryBattleQuest('Captain Ilima', 'Defeat Captain Ilima in Hau\'oli Cemetery.').withInitialValue(0).withCustomReward(() => ItemList.Orange_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainIlima);
 
-        const clearCaptainMallow = new DefeatTemporaryBattleQuest('Captain Mallow', 'Defeat Captain Mallow in Lush Jungle.').withCustomReward(() => ItemList.Green_Petal_Mina.gain(1));
+        const clearCaptainMallow = new DefeatTemporaryBattleQuest('Captain Mallow', 'Defeat Captain Mallow in Lush Jungle.').withInitialValue(0).withCustomReward(() => ItemList.Green_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainMallow);
 
-        const clearCaptainLana = new DefeatTemporaryBattleQuest('Captain Lana', 'Defeat Captain Lana in Lush Jungle.').withCustomReward(() => ItemList.Blue_Petal_Mina.gain(1));
+        const clearCaptainLana = new DefeatTemporaryBattleQuest('Captain Lana', 'Defeat Captain Lana in Lush Jungle.').withInitialValue(0).withCustomReward(() => ItemList.Blue_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainLana);
 
-        const clearCaptainKiawe = new DefeatTemporaryBattleQuest('Captain Kiawe', 'Defeat Captain Kiawe in Wela Volcano Park.').withCustomReward(() => ItemList.Red_Petal_Mina.gain(1));
+        const clearCaptainKiawe = new DefeatTemporaryBattleQuest('Captain Kiawe', 'Defeat Captain Kiawe in Wela Volcano Park.').withInitialValue(0).withCustomReward(() => ItemList.Red_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainKiawe);
 
-        const clearCaptainSophocles = new DefeatTemporaryBattleQuest('Captain Sophocles', 'Defeat Captain Sophocles in Hokulani Observatory.').withCustomReward(() => ItemList.Yellow_Petal_Mina.gain(1));
+        const clearCaptainSophocles = new DefeatTemporaryBattleQuest('Captain Sophocles', 'Defeat Captain Sophocles in Hokulani Observatory.').withInitialValue(0).withCustomReward(() => ItemList.Yellow_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainSophocles);
 
-        const clearKahunaNanu = new DefeatTemporaryBattleQuest('Kahuna Nanu', 'Captain Acerola is apparently busy with something at the top of Mount Lanakila. Defeat Kahuna Nanu in Aether House instead.').withCustomReward(() => ItemList.Purple_Petal_Mina.gain(1));
+        const clearKahunaNanu = new DefeatTemporaryBattleQuest('Kahuna Nanu', 'Captain Acerola is apparently busy with something at the top of Mount Lanakila. Defeat Kahuna Nanu in Aether House instead.').withInitialValue(0).withCustomReward(() => ItemList.Purple_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearKahunaNanu);
 
         createZCrystalTrial(PokemonType.Fairy, 'Mina\'s Houseboat', 'Mina', 'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!', minasTrialAlolaQuestLine);
+
+        createZCrystalTrial(PokemonType.Ice, 'Mount Lanakila', 'Trial Site', 'Congratulations! You\'ve claimed the Icium Z! Onwards to the Pokémon League now!', minasTrialAlolaQuestLine, true, 'Now that you have access to Mount Lanakila, find the Trial Site in the dungeon.', 'Trial Site of Mount Lanakila');
 
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
 
     // Z Crystal Quest
+    // will unlock Tapus and Totem mons
     public static createZCrystalQuestLine() {
         const zCrystalQuestLine = new QuestLine('Island Challenge', 'Track down all the Z Crystals and be graced by Tapus\' presence!', new DevelopmentRequirement(new TemporaryBattleRequirement('Hau 2')), GameConstants.BulletinBoards.Alola);
 
-        const autoModalStep = new CustomQuest(1, 0, 'Start your Island Challenge at Professor Kukui\'s Lab.', () => +!!App.game.statistics.routeKills[GameConstants.Region.alola]['1']())
+        const autoModalStep = new CustomQuest(1, 0, 'Start your Island Challenge at Professor Kukui\'s Lab.', () => +!!App.game.statistics.routeKills[GameConstants.Region.alola]['1']()).withInitialValue(0)
             .withCustomReward(() => ItemList.Island_Challenge_Amulet.gain(1))
             .withOptionalArgs({
                 clearedMessage: 'Alola $playername$! You ready to take on the island challenge? This amulet here is proof that you\'re up to the task, yeah! With this in hand you\'ll get to experience some ultra changes in Alola\'s trials, too! Woo!</br></br><img src="assets/images/items/quest/Island_Challenge_Amulet.png">',
@@ -4227,7 +4250,7 @@ class QuestLineHelper {
         this.createAkalaAlolaQuestLine();
         this.createUlaulaAlolaQuestLine();
         this.createPoniAlolaQuestLine();
-        this.createSkullAetherAlolaQuestLine();
+        this.createUltraNecrozmaAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createZCrystalQuestLine();
         this.createSilvallyTypesQuestLine();
@@ -4257,7 +4280,15 @@ class QuestLineHelper {
 }
 
 // Multi-quest constants
-// Alola z crystals. zCrystalGet is defined in Dungeons.ts
+// Alola z crystals, also used for temp battles
+const zCrystalGet = (crystalType: PokemonType) => () => {
+    player.gainItem(GameConstants.zCrystalItemType[crystalType], 1);
+    Notifier.notify({
+        title: 'Z Crystal',
+        message: `<img width="60" src="assets/images/items/zCrystal/${GameConstants.zCrystalItemType[crystalType]}.svg"/> You got the ${GameConstants.zCrystalItemType[crystalType]}!`,
+        timeout: 3e4,
+    });
+};
 const createZCrystalTrial = (crystalType: PokemonType, dungeon: string, captain: string, successMessage: string, questName: QuestLine, nonTrial?: boolean, nonTrialDescription?: string, nonTrialBoss?: string) => {
     const description = nonTrial ? nonTrialDescription : `Clear ${captain}\'s Trial at ${dungeon}.`;
     const dungeonBoss = nonTrial ? nonTrialBoss : `Trial Site of ${dungeon}`;
