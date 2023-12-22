@@ -6692,8 +6692,8 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
 ], {image: 'assets/images/npcs/Owner.png'});
 const ProfBurnetAlola2 = new NPC('Professor Burnet', [
-    'Ancient texts refer to Cosmog as the child of the stars. Its modern name was coined by a researcher in Aether Paradise, where I work!',
-    'I specialize in researching the Ultra Wormholes and Ultra Beasts first described in those old legends. The mysteries of the Ultra Wormhole...  I would be very happy if I could somehow unravel them!',
+    'Long ago, Cosmog was called the child of the stars. Its powers seem to have some connection with Ultra Wormholes.',
+    'The mysteries of the Ultra Wormhole and Ultra Beasts...  I would be very happy if I could somehow unravel them!',
     'You say I look familiar? Oh, you\'ve probably seen me with Kukui. He\'s my husband!',
 ], {
     image: 'assets/images/npcs/Professor Burnet (gen7).png',
@@ -6795,6 +6795,12 @@ const LanakilaColress = new NPC('Colress', [
     image: 'assets/images/npcs/Team Plasma (colress).png',
     requirement: new ObtainedPokemonRequirement('Necrozma'),
 });
+const ReconSquadAltar = new NPC('Ultra Recon Squad', [
+    'Care for a Poipole? It only costs a few thousand Quest Points!',
+], {
+    image: 'assets/images/npcs/specialNPCS/Ultra Recon Squad (all).png',
+    requirement: new QuestLineCompletedRequirement('Eater of Light'),
+})
 
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
@@ -6836,7 +6842,7 @@ const Lillie4 = new NPC('Meet with Lillie', [
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Symbiotic Relations'), new QuestLineStepCompletedRequirement('Symbiotic Relations', 0, GameConstants.AchievementOption.less)]),
 });
-const ProfBurnetAlola1 = new NPC('Professor Burnet', [
+const ProfBurnetAlola1 = new NPC('Talk to Professor Burnet', [
     'Nebby\'s Pokémon species, Cosmog, used to be known as the child of the stars. Its modern name was coined by a researcher in Aether Paradise!',
     'Oh, where are my manners! Hi there! Have some Dream Orbs! I\'m Burnet, a professor who researches Ultra Wormholes. They sometimes appear in the skies of Alola and give off similar signals to Cosmog\'s powers.',
     'Legends of Pokémon appearing from the Ultra Wormhole also exist and are called Ultra Beasts, but it\'s all legends and folktales. It\'s hard to know how much is true.',
@@ -7681,7 +7687,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList['Lusamine 1'], TemporaryBattleList['Lusamine 2'], TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, LillieAltar, Lillie7, HapuAltar, PhycoAltar, PoipoleGift],
+        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, LillieAltar, Lillie7, HapuAltar, PhycoAltar, ReconSquadAltar, PoipoleGift],
     }
 );
 TownList['Pokémon League Alola'] = new Town(

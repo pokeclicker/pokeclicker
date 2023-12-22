@@ -2190,8 +2190,8 @@
         <!--Akala Outskirts Extension---->
         <%- include('templates/mapRoute',
             { route: 21, region: 6
-            , width: 3, height: 6
-            , x: 60, y: 50, name: "A.O."
+            , width: 3, height: 4
+            , x: 60, y: 52, name: "A.O."
             , noText: true
             })
         %>
@@ -2397,8 +2397,8 @@
         <!--Ruins of Life Entrance-->
         <%- include('templates/mapOverlay',
             { name: "Ruins of Life Entrance"
-            , x: 59, y: 46
-            , width: 4, height: 4
+            , x: 59, y: 48
+            , width: 5, height: 4
             , databind: "click:function(){MapHelper.moveToTown('Ruins of Life Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Life Entrance') }"
             , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , connectedToTown: "Ruins of Life Entrance"
@@ -2629,12 +2629,14 @@
         <!--Ruins of Life-->
         <%- include('templates/mapOverlay',
             { name: "Ruins of Life"
-            , x: 59, y: 46
-            , width: 4, height: 4
+            , x: 59, y: 48
+            , width: 5, height: 4
             , databind: "click:function(){MapHelper.moveToTown('Ruins of Life')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Life') }"
             , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
+            , connectedToTown: "Ruins of Life"
             })
         %>
+        
 
         <!-- ------------------ -->
         <!-- PLACES OF INTEREST -->

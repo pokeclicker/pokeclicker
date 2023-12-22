@@ -2897,7 +2897,7 @@ class QuestLineHelper {
         const autoModalStep = new CustomQuest(1, 0, 'Start your Island Challenge at Professor Kukui\'s Lab.', () => +!!App.game.statistics.routeKills[GameConstants.Region.alola]['1']()).withInitialValue(0)
             .withCustomReward(() => ItemList.Island_Challenge_Amulet.gain(1))
             .withOptionalArgs({
-                clearedMessage: 'Alola $playername$! You ready to take on the island challenge? This amulet here is proof that you\'re up to the task, yeah! With this in hand you\'ll get to experience some ultra changes in Alola\'s trials, too! Woo!</br></br><img src="assets/images/items/quest/Island_Challenge_Amulet.png">',
+                clearedMessage: 'Woah there, tester! This quest is still under development! You should go out there and test the story in the meantime, yeah!',// 'Alola $playername$! You ready to take on the island challenge? This amulet here is proof that you\'re up to the task, yeah! With this in hand you\'ll get to experience some ultra changes in Alola\'s trials, too! Woo!</br></br><img src="assets/images/items/quest/Island_Challenge_Amulet.png">',
                 npcDisplayName: 'Kukui',
                 npcImageName: 'Professor Kukui',
             });
