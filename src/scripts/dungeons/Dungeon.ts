@@ -10791,7 +10791,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'),
     ],
     805000, 2);
 
@@ -10888,7 +10888,7 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
                 new GymPokemon('Rockruff', 11897821, 30),
                 new GymPokemon('Hakamo-o', 59489105, 36, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),//{ hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),
     ],
     835000, 3);
 
@@ -11049,7 +11049,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
                     new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 1, GameConstants.AchievementOption.less) }, 'of Brooklet Hill'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 1, GameConstants.AchievementOption.less) }, 'of Brooklet Hill'),
     ],
     875000, 5);
 
@@ -11113,7 +11113,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 4, GameConstants.AchievementOption.less) }, 'of Wela Volcano Park'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 4, GameConstants.AchievementOption.less) }, 'of Wela Volcano Park'),
     ],
     900000, 7);
 
@@ -11164,7 +11164,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
                 new GymPokemon('Kecleon', 13090332, 22),
                 new GymPokemon('Totem Lurantis', 65451660, 24),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 5, GameConstants.AchievementOption.less) }, 'of Lush Jungle'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 5, GameConstants.AchievementOption.less) }, 'of Lush Jungle'),
     ],
     925000, 8);
 
@@ -11364,7 +11364,7 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2, GameConstants.AchievementOption.less) }, 'of Hokulani Observatory'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2, GameConstants.AchievementOption.less) }, 'of Hokulani Observatory'),
     ],
     1000000, 22);
 
@@ -11410,7 +11410,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
                 ])),
                 new GymPokemon('Totem Mimikyu', 73527110, 35),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 5, GameConstants.AchievementOption.less) }, 'of Thrifty Megamart'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 5, GameConstants.AchievementOption.less) }, 'of Thrifty Megamart'),
         new DungeonBossPokemon('Vivillon (Poké Ball)',  96662023, 60, {
             hide: true,
             requirement: new MultiRequirement([
@@ -11836,7 +11836,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
                 new GymPokemon('Noivern', 15992044, 48),
                 new GymPokemon('Totem Kommo-o', 79960220, 49),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less) }, 'of Vast Poni Canyon'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less) }, 'of Vast Poni Canyon'),
     ],
     1125000, 25);
 
@@ -11865,7 +11865,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
                 new GymPokemon('Pelipper', 16217412, 52),
                 new GymPokemon('Totem Ribombee', 81087060, 55),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Mina\'s Trial', GameConstants.AchievementOption.less) }, 'of Mina\'s Houseboat'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Mina\'s Trial', 7, GameConstants.AchievementOption.less) }, 'of Mina\'s Houseboat'),
     ],
     1150000, 25);
 
@@ -11979,7 +11979,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
                 new GymPokemon('Alolan Sandshrew', 16212850, 47),
                 new GymPokemon('Alolan Sandslash', 81064250, 50),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Mina\'s Trial', GameConstants.AchievementOption.less) }, 'of Mount Lanakila'), //new QuestLineCompletedRequirement('Island Challenge', GameConstants.AchievementOption.less)
+            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Mina\'s Trial', GameConstants.AchievementOption.less) }, 'of Mount Lanakila'),
     ],
     1175000, 26);
 
