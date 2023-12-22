@@ -2522,6 +2522,38 @@ class Update implements Saveable {
             // NormaliumZ
             saveData.badgeCase.splice(93, 1);
 
+            // Santa Jynx TempBattles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+
+            // Fix Hopo berry visible in berrydex when not available
+            saveData.farming.mutations[71] = false;
+        },
+        '0.10.17': ({ saveData }) => {
+            // Fix Anomaly Mewtwo 5 if the quest is not completed.
+            if (saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state < 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+        },
+        '0.10.18': ({ playerData, saveData }) => {
+            // Actually fix Anomaly Mewtwo 5 if the quest is not completed.
+            if ((saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state ?? 0) !== 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+
+            // Give the player Fairy Feathers in place of Pink Bows
+            playerData._itemList.Fairy_Feather = playerData._itemList.Pink_Bow || 0;
+            delete playerData._itemList.Pink_Bow;
+
+            // Update pokemon held item Pink Bow -> Fairy Feather
+            saveData.party.caughtPokemon.forEach(p => {
+                if (p[10] === 'Pink_Bow') {
+                    p[10] = 'Fairy_Feather';
+                }
+            });
+
             // ID to itemName interface
             const converter = {
                 1 : 'Rare_bone', 2 : 'Star_piece', 3 : 'Revive', 4 : 'Max_revive', 5 : 'Iron_ball', 6 : 'Heart_scale', 7 : 'Light_clay', 8 : 'Odd_keystone', 9 : 'Hard_stone', 10 : 'Oval_stone', 11 : 'Everstone', 12 : 'Smooth_rock', 13 : 'Heat_rock', 14 : 'Icy_rock', 15 : 'Damp_rock',
@@ -2540,9 +2572,6 @@ class Update implements Saveable {
                 playerData._itemList[converter[it.id]] = (playerData._itemList[converter[it.id]] || 0) + it.amount;
                 sellLocks[it.itemName] = it.sellLocked;
             });
-
-            // Fix Hopo berry visible in berrydex when not available
-            saveData.farming.mutations[71] = false;
         },
     };
 

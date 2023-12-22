@@ -1,5 +1,6 @@
 import { GameState, Region, Environment, MegaStoneType } from '../../GameConstants';
 import { ItemNameType } from '../../items/ItemNameType';
+import { QuestLineNameType } from '../../quests/QuestLineNameType';
 import GameStateRequirement from '../../requirements/GameStateRequirement';
 import HoldingItemRequirement from '../../requirements/HoldingItemRequirement';
 import InDungeonRequirement from '../../requirements/InDungeonRequirement';
@@ -74,7 +75,7 @@ export const heldItemRestrict = <T extends EvoFn>(evo: T) => (
 };
 
 export const questlineRestrict = <T extends EvoFn>(evo: T) => (
-    questName: string,
+    questName: QuestLineNameType,
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),

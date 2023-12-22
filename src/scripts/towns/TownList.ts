@@ -856,6 +856,31 @@ const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 7), new QuestLineStepCompletedRequirement('An Unrivaled Power', 9, GameConstants.AchievementOption.less)]),
 });
 
+const BillGrandpaChristmas = new NPC('Bill\'s Grandpa', [
+    'Did you find all of the Santa Jynx?',
+    'I hope they don\'t come back!',
+], {
+    image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
+    requirement: new OneFromManyRequirement([
+        new MultiRequirement([
+            new ItemRequirement(11, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 1'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(27, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 2'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(49, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 3'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(150, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 4'),
+        ]),
+    ]),
+});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -916,10 +941,16 @@ TownList['Bill\'s House'] = new Town(
     'Bill\'s House',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [TemporaryBattleList['Bill\'s Grandpa']],
+    [
+        TemporaryBattleList['Bill\'s Grandpa'],
+        TemporaryBattleList['Santa Jynx 1'],
+        TemporaryBattleList['Santa Jynx 2'],
+        TemporaryBattleList['Santa Jynx 3'],
+        TemporaryBattleList['Santa Jynx 4'],
+    ],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 25)],
-        npcs: [BillsGrandpa1, BillsGrandpa2, BillsGrandpa3, BillsGrandpa4, BillsGrandpa5, BillsGrandpa6, BillsGrandpa7, BillsGrandpa8, BillsHouseEusine],
+        npcs: [BillsGrandpa1, BillsGrandpa2, BillsGrandpa3, BillsGrandpa4, BillsGrandpa5, BillsGrandpa6, BillsGrandpa7, BillsGrandpa8, BillsHouseEusine, BillGrandpaChristmas],
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -1806,7 +1837,7 @@ const HowardClifford3 = new NPC('Howard Clifford', [
 const ParkAttendant = new NPC('Park Attendant', [
     'Welcome to the National Park!',
     'Lots of people come through here to take a stroll, and some come from far away to participate in our Bug Catching Contest!',
-    'All kinds of Bug Pokémon can be found in the park, with different ones showing up every day! Each one can be caught for Contest Tokens, and more powerful Pokémon are worth more Tokens!',
+    'All kinds of Bug Pokémon can be found in the park! Each one can be caught for Contest Tokens, and more powerful Pokémon are worth more Tokens!',
 ], { image: 'assets/images/npcs/Pokémon Ranger (male).png' });
 const ParkResearcher = new NPC('Researcher', [
     'Welcome to the National Park!',
@@ -4361,7 +4392,7 @@ TownList['Sandgem Town'] = new Town(
     'Sandgem Town',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher']],
+    [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher'], new ShardTraderShop(GameConstants.ShardTraderLocations['Sandgem Town'], 'Santa\'s Secret Daycare', true, 'Plates')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
         npcs: [ProfRowan, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
@@ -5577,7 +5608,7 @@ const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Dandy)'],
     ItemList['Furfrou (Kabuki)'],
     ItemList['Furfrou (Pharaoh)'],
-    ItemList['Furfrou (Heart)'],
+    //ItemList['Furfrou (Heart)'],
 ], 'Friseur Furfrou');
 const CamphrierTownShop = new Shop([
     ItemList.Pokeball,
@@ -8260,7 +8291,7 @@ const Calyrex3 = new NPC ('Calyrex', [
 const Calyrex4 = new NPC ('Calyrex', [
     'Finally, my loyal steeds have returned to me. There are truly no words with which to fully express my gratitude to you. But I can try. Take these Reins of Unity.',
     '<img src="assets/images/keyitems/Reins_of_unity.png">',
-    'They can be used to combine myself and my steeds. However, it is incomplete. They must have have hair from the manes of my steeds intertwined to work. I expect they will occasionally leave such hair behind upon being defeated.',
+    'They can be used to combine myself and my steeds. However, they are incomplete. You must intertwine the hair from their manes for them to work. I expect they will occasionally leave such hair behind upon being defeated.',
     'And to that point... I have a suggestion. If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
 ], {
     image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
@@ -8374,7 +8405,7 @@ const Peonia1 = new NPC ('Peonia', [
 const Peonia2 = new NPC ('Peonia', [
     'You\'re back! So I take it you saw one? A Gigantamax Pikachu, huh? Yeah, I saw one of those too! I also saw 2 others: Meowth and Eevee. Maybe you\'ll see them when you go back in.',
     'Unfortunately, it seems these 3 are the only ones here at the moment. However, there\'s something you could do if you want to lure in more of them.',
-    'I imagine you\'ve noticed some haxagonal rock formations on your journey, right? Those are called Raid Dens. You can find them in the mainland\'s Wild area, the Isle of Armor, and here in the Crown Tundra.',
+    'I imagine you\'ve noticed some hexagonal rock formations on your journey, right? Those are called Raid Dens. You can find them in the mainland\'s Wild Area, the Isle of Armor, and here in the Crown Tundra.',
     'Every day some of them glow red and emit a purple beam. It seems there are 10 a day, consistently, for some unknown reason. Here, download this app, and they\'ll show up on your map!',
     'Anyway, in each of these Raid Dens, there\'s a Gigantamax Pokémon! You can\'t catch \'em though, they\'ll turn back to their regular form and run before you get the chance.',
     'However! They\'ll each drop a stone called a Wishing Piece. If you gather enough of those stones here, more Gigantamax Pokémon\'ll show up! Dunno which ones, probably just your luck.',

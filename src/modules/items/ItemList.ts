@@ -23,6 +23,7 @@ import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import QuestItem from './QuestItem';
 import Consumable from './Consumable';
+import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 // eslint-disable-next-line import/prefer-default-export
@@ -238,6 +239,9 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 
 // Consumables
 ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+
+// Miscellaneous
+ItemList.Christmas_present = new ChristmasPresent();
 
 // Underground Items
 // Sellable (Diamonds)
