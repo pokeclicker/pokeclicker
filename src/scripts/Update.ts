@@ -2537,11 +2537,22 @@ class Update implements Saveable {
                 saveData.statistics.temporaryBattleDefeated[223] = 0;
             }
         },
-        '0.10.18': ({ saveData }) => {
+        '0.10.18': ({ playerData, saveData }) => {
             // Actually fix Anomaly Mewtwo 5 if the quest is not completed.
             if ((saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state ?? 0) !== 2) {
                 saveData.statistics.temporaryBattleDefeated[223] = 0;
             }
+
+            // Give the player Fairy Feathers in place of Pink Bows
+            playerData._itemList.Fairy_Feather = playerData._itemList.Pink_Bow || 0;
+            delete playerData._itemList.Pink_Bow;
+
+            // Update pokemon held item Pink Bow -> Fairy Feather
+            saveData.party.caughtPokemon.forEach(p => {
+                if (p[10] === 'Pink_Bow') {
+                    p[10] = 'Fairy_Feather';
+                }
+            });
         },
     };
 
