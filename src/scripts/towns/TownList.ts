@@ -6800,7 +6800,7 @@ const ReconSquadAltar = new NPC('Ultra Recon Squad', [
 ], {
     image: 'assets/images/npcs/specialNPCS/Ultra Recon Squad (all).png',
     requirement: new QuestLineCompletedRequirement('Eater of Light'),
-})
+});
 
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
@@ -7677,7 +7677,7 @@ TownList['Exeggutor Island'] = new Town(
     GameConstants.AlolaSubRegions.PoniIsland,
     [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), new MoveToTown('Exeggutor Island Hill', undefined, false)],
     {
-        requirements: [new QuestLineCompletedRequirement('Emissary of Light')]
+        requirements: [new QuestLineCompletedRequirement('Emissary of Light')],
     }
 );
 TownList['Altar of the Sunne and Moone'] = new Town(
