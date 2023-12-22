@@ -344,8 +344,6 @@ class SafariBattle {
     }
 }
 
-
-
 namespace SafariBattle {
     export const Speed = {
         ballThrowAnim: 700,
