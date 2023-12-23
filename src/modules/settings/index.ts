@@ -196,7 +196,7 @@ Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 // Hatchery Sorting
 const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
-));
+)).filter((opt) => ![SortOptions.level, SortOptions.attack].includes(opt.value));
 Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
