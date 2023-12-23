@@ -40,89 +40,82 @@ class Party implements Feature {
 
     }
 
-    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = -1, shadow = GameConstants.ShadowStatus.None) {
+    gainPokemonByName(name: PokemonNameType, shiny?: boolean, suppressNotification?: boolean, gender?: GameConstants.BattlePokemonGender, shadow?: GameConstants.ShadowStatus) {
         const pokemon = pokemonMap[name];
         this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender, shadow);
     }
 
-    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1, shadow = GameConstants.ShadowStatus.None) {
-        // If no gender defined, calculate it
-        if (gender === -1) {
-            gender = PokemonFactory.generateGenderById(id);
-        }
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow), suppressNotification);
-    }
+    gainPokemonById(id: number,
+        shiny = false,
+        suppressNotification = false,
+        gender: GameConstants.BattlePokemonGender = PokemonFactory.generateGenderById(id),
+        shadow: GameConstants.ShadowStatus = GameConstants.ShadowStatus.None
+    ) {
+        const isShadow = shadow === GameConstants.ShadowStatus.Shadow;
+        PokemonHelper.incrementPokemonStatistics(id, GameConstants.PokemonStatisticsType.Captured, shiny, gender, shadow);
 
-    gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender, pokemon.shadow);
+        const newCatch = !this.alreadyCaughtPokemon(id);
+        const newShiny = shiny && !this.alreadyCaughtPokemon(id, true);
+        const newShadow = isShadow && !this.alreadyCaughtPokemon(id, false, true);
 
-        const alreadyCaughtRegular = this.alreadyCaughtPokemon(pokemon.id);
-
-        // Handle shadow
-        if (pokemon.shadow) {
-            const alreadyCaughtShadow = this.alreadyCaughtPokemon(pokemon.id, false, true);
-
-            // Only set the shadow status if we have the regular in our party it doesn't already have the shadow status
-            if (alreadyCaughtRegular && !alreadyCaughtShadow) {
-                this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
+        if (newCatch) {
+            // Create new party pokemon
+            this._caughtPokemon.push(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow));
+        } else {
+            // Update existing party pokemon
+            const pokemon = this.getPokemon(id);
+            if (newShiny) {
+                pokemon.shiny = true;
             }
-
-            // Only log and notify the first time we catch a shadow pokemon
-            if (!alreadyCaughtShadow) {
-                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: pokemon.name }));
-
-                Notifier.notify({
-                    message: `You have captured a shadow ${pokemon.displayName}!`,
-                    type: NotificationConstants.NotificationOption.warning,
-                    sound: NotificationConstants.NotificationSound.General.new_catch,
-                    setting: NotificationConstants.NotificationSetting.General.new_catch,
-                });
+            if (newShadow) {
+                pokemon.shadow = GameConstants.ShadowStatus.Shadow;
             }
         }
 
-        // Handle shiny
-        if (pokemon.shiny) {
-            const alreadyCaughtShiny = this.alreadyCaughtPokemon(pokemon.id, true);
+        // Properties of the PartyPokemon used for notifications -- shininess, shadow status, etc. comes from this catch
+        const { name, displayName } = this.getPokemon(id);
 
-            // Only set the shiny status if we have the regular in our party it doesn't already have the shiny status
-            if (alreadyCaughtRegular && !alreadyCaughtShiny) {
-                this.getPokemon(pokemon.id).shiny = true;
-            }
-
-            // If we already have the shiny, log it
-            // If we catch a new shiny, log it and notify
-            if (alreadyCaughtShiny) {
-                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShinyDupe({ pokemon: pokemon.name }));
-            } else {
-                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShiny({ pokemon: pokemon.name }));
-
-                Notifier.notify({
-                    message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
-                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
-                    type: NotificationConstants.NotificationOption.warning,
-                    sound: NotificationConstants.NotificationSound.General.new_catch,
-                    setting: NotificationConstants.NotificationSetting.General.new_catch,
-                });
-            }
+        // Notifications
+        if (newCatch) {
+            Notifier.notify({
+                message: `You have captured ${GameHelper.anOrA(name)} ${displayName}!`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender === GameConstants.BattlePokemonGender.Female),
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
+        }
+        if (newShiny) {
+            Notifier.notify({
+                message: `✨ You have captured a shiny ${displayName}! ✨`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender === GameConstants.BattlePokemonGender.Female),
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
+        }
+        if (newShadow) {
+            Notifier.notify({
+                message: `You have captured a shadow ${displayName}!`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
         }
 
-        // Handle the regular
-        if (!alreadyCaughtRegular) {
-            // We don't have this pokemon in our party yet, so add it
-            this._caughtPokemon.push(pokemon);
-
-            // Handle logging and notifying
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: pokemon.name }));
-
-            if (!suppressNotification) {
-                Notifier.notify({
-                    message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
-                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.General.new_catch,
-                    setting: NotificationConstants.NotificationSetting.General.new_catch,
-                });
-            }
+        // Logbook entries
+        if (newCatch) {
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: name })
+            );
+        }
+        if (newShiny) {
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShiny({ pokemon: name }));
+        } else if (shiny) {
+            // Duplicate shinies get logged too
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShinyDupe({ pokemon: name }));
+        }
+        if (newShadow) {
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: name }));
         }
     }
 
