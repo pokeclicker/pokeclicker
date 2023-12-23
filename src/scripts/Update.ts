@@ -2461,8 +2461,8 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated[31] = 0;
 
         },
-        '0.10.16': ({ playerData, saveData, settingsData }) => {
 
+        '0.10.16': ({ saveData, settingsData }) => {
 
             // Fix None category color being incomplete
             if (saveData.categories.categories[0].color === '#333') {
@@ -2531,13 +2531,15 @@ class Update implements Saveable {
             // Fix Hopo berry visible in berrydex when not available
             saveData.farming.mutations[71] = false;
         },
+
         '0.10.17': ({ saveData }) => {
             // Fix Anomaly Mewtwo 5 if the quest is not completed.
             if (saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state < 2) {
                 saveData.statistics.temporaryBattleDefeated[223] = 0;
             }
         },
-        '0.10.18': ({ playerData, saveData }) => {
+
+        '0.10.18': ({ playerData, saveData, settingsData }) => {
             // Actually fix Anomaly Mewtwo 5 if the quest is not completed.
             if ((saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state ?? 0) !== 2) {
                 saveData.statistics.temporaryBattleDefeated[223] = 0;
@@ -2551,6 +2553,28 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 if (p[10] === 'Pink_Bow') {
                     p[10] = 'Fairy_Feather';
+                }
+            });
+
+            // Update sort settings to make room for new attack at lv 100 sort option
+            ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
+                .forEach((sortSetting) => {
+                    if (settingsData[sortSetting] >= 5) {
+                        settingsData[sortSetting]++;
+                    }
+                });
+            // Sort by attack -> sort by attack at lv100
+            if (settingsData.hatcherySort == 2) {
+                settingsData.hatcherySort = 5;
+            }
+            // Update hatchery helper sorting
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption >= 5) {
+                    // Move index
+                    helper.sortOption++;
+                } else if (helper.sortOption == 2) {
+                    // Sort by attack -> sort by attack at lv100
+                    helper.sortOption = 5;
                 }
             });
         },
