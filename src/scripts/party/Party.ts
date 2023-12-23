@@ -57,11 +57,11 @@ class Party implements Feature {
         PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender, pokemon.shadow);
 
         const alreadyCaughtRegular = this.alreadyCaughtPokemon(pokemon.id);
-        const alreadyCaughtShiny = this.alreadyCaughtPokemon(pokemon.id, true);
-        const alreadyCaughtShadow = this.alreadyCaughtPokemon(pokemon.id, false, true);
 
         // Handle shadow
         if (pokemon.shadow) {
+            const alreadyCaughtShadow = this.alreadyCaughtPokemon(pokemon.id, false, true);
+
             // Only set the shadow status if we have the regular in our party it doesn't already have the shadow status
             if (alreadyCaughtRegular && !alreadyCaughtShadow) {
                 this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
@@ -82,6 +82,8 @@ class Party implements Feature {
 
         // Handle shiny
         if (pokemon.shiny) {
+            const alreadyCaughtShiny = this.alreadyCaughtPokemon(pokemon.id, true);
+
             // Only set the shiny status if we have the regular in our party it doesn't already have the shiny status
             if (alreadyCaughtRegular && !alreadyCaughtShiny) {
                 this.getPokemon(pokemon.id).shiny = true;
