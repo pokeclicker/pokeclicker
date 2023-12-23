@@ -2462,7 +2462,7 @@ class Update implements Saveable {
 
         },
 
-        '0.10.16': ({ playerData, saveData, settingsData }) => {
+        '0.10.16': ({ saveData, settingsData }) => {
 
             // Fix None category color being incomplete
             if (saveData.categories.categories[0].color === '#333') {
@@ -2539,7 +2539,22 @@ class Update implements Saveable {
             }
         },
 
-        '0.10.18':  ({ playerData, saveData, settingsData }) => {
+        '0.10.18': ({ playerData, saveData, settingsData }) => {
+            // Actually fix Anomaly Mewtwo 5 if the quest is not completed.
+            if ((saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state ?? 0) !== 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+
+            // Give the player Fairy Feathers in place of Pink Bows
+            playerData._itemList.Fairy_Feather = playerData._itemList.Pink_Bow || 0;
+            delete playerData._itemList.Pink_Bow;
+
+            // Update pokemon held item Pink Bow -> Fairy Feather
+            saveData.party.caughtPokemon.forEach(p => {
+                if (p[10] === 'Pink_Bow') {
+                    p[10] = 'Fairy_Feather';
+                }
+            });
 
             // Update sort settings to make room for new attack at lv 100 sort option
             ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
@@ -2562,7 +2577,6 @@ class Update implements Saveable {
                     helper.sortOption = 5;
                 }
             });
-
         },
     };
 

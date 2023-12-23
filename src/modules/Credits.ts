@@ -347,7 +347,6 @@ export const SpriteCredits: Credit[] = [
             'Pikachu (Easter)',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
-            'Pink Bow',
             'Pink Butterfree',
             'Pinkan Caterpie',
             'Pinkan Diglett',
