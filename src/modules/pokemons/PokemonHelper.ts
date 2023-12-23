@@ -71,26 +71,26 @@ export function typeIdToString(id: number) {
     return PokemonType[id];
 }
 
-export function getImage(pokemonId: number, shiny: boolean = undefined, gender: boolean = undefined, shadow: ShadowStatus = undefined): string {
+export function getImage(pokemonId: number, shiny: boolean = undefined, gender: BattlePokemonGender = undefined, shadow: ShadowStatus = undefined): string {
     let src = 'assets/images/';
+    let showFemale = false;
     let showShadow = false;
+    const dataPokemon = this.getPokemonById(pokemonId);
+    const partyPokemon = App.game.party.getPokemon(pokemonId);
     if (shiny === undefined) {
         // eslint-disable-next-line no-param-reassign
-        shiny = App.game.party.alreadyCaughtPokemon(pokemonId, true)
-            && !App.game.party.getPokemon(pokemonId)?.hideShinyImage();
+        shiny = partyPokemon?.shiny && !partyPokemon?.hideShinyImage();
     }
-    if (gender === undefined) {
-        // eslint-disable-next-line no-param-reassign
-        gender = App.game.party.getPokemon(pokemonId)?.defaultFemaleSprite() ?? false;
+    if (dataPokemon.gender.visualDifference) {
+        if (gender === undefined) {
+            showFemale = partyPokemon?.defaultFemaleSprite();
+        } else {
+            showFemale = gender === BattlePokemonGender.Female;
+        }
     }
     if (shadow === undefined) {
-        const partyPokemon = App.game.party.getPokemon(pokemonId);
-        if (partyPokemon) {
-            showShadow = partyPokemon.shadow === ShadowStatus.Shadow
-                || (partyPokemon.shadow === ShadowStatus.Purified && partyPokemon.showShadowImage);
-        } else {
-            showShadow = false;
-        }
+        showShadow = partyPokemon.shadow === ShadowStatus.Shadow
+            || (partyPokemon.shadow === ShadowStatus.Purified && partyPokemon.showShadowImage);
     } else {
         showShadow = shadow === ShadowStatus.Shadow;
     }
@@ -103,11 +103,8 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
     }
     let genderString = '';
     // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
-    const hasDiff = this.getPokemonById(pokemonId).gender.visualDifference;
-    if (hasDiff) {
-        if (gender) {
-            genderString = '-f';
-        }
+    if (showFemale) {
+        genderString = '-f';
     }
     src += `pokemon/${pokemonId}${genderString}.png`;
     return src;
@@ -160,7 +157,7 @@ export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
 }
 
 // To have encounter/caught/defeat/hatch statistics in a single place
-export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: number, shadow: ShadowStatus) {
+export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: BattlePokemonGender, shadow: ShadowStatus) {
     const pokemonStatistics = {
         Captured: App.game.statistics.pokemonCaptured[pokemonId],
         Defeated: App.game.statistics.pokemonDefeated[pokemonId],

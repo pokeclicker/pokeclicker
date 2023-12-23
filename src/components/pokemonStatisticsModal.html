@@ -17,7 +17,7 @@
       <div class="modal-body p-0 pb-1">
         <div class="row m-0 mt-1">
           <div class="col">
-            <img data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id, App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny(), App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id) && App.game.party.getPokemon(pokemonMap[$data].id).defaultFemaleSprite()) }" src=""/>
+            <img data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id, App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny()) }" src=""/>
             <div class="position-absolute" style="top: 0px; right: 15px;"
               data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus">
               <img width="40px" src=""
