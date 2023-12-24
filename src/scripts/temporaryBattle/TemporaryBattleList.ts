@@ -2336,12 +2336,12 @@ TemporaryBattleList['Red Genesect 2'] = new TemporaryBattle(
     'Red Genesect 2',
     [new GymPokemon('Genesect (High-Speed)', 182858488, 80, undefined, true)],
     undefined,
-    [new QuestLineStepCompletedRequirement('The Legend Awakened', 6)],
+    [new QuestLineStepCompletedRequirement('The Legend Awakened', 4)],
     undefined,
     {
         displayName: 'Red Genesect',
         hideTrainer: true,
-        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 6),
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 4),
     }
 );
 TemporaryBattleList.DreamResearcher = new TemporaryBattle(
@@ -6005,7 +6005,7 @@ TemporaryBattleList['Max Raid Cinderace'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Brawler\'s Cave',
+        returnTown: 'Brawlers\' Cave',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
