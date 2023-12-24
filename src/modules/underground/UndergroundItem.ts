@@ -1,6 +1,7 @@
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import Requirement from '../requirements/Requirement';
 import { StoneType } from '../GameConstants';
+import { ItemList } from '../items/ItemList';
 
 export default class UndergroundItem {
     public space: Array<Array<any>>;
@@ -10,7 +11,6 @@ export default class UndergroundItem {
     sellLocked: KnockoutObservable<boolean>;
 
     constructor(
-        public name: string,
         public id: number,
         public itemName: string,
         space: Array<Array<number>>,
@@ -51,6 +51,10 @@ export default class UndergroundItem {
 
     get displayName() {
         return this.name;
+    }
+
+    get name() {
+        return ItemList[this.itemName].displayName;
     }
 
     get image() {

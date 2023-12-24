@@ -1,6 +1,6 @@
 import type { Observable, Computed } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
-import { Currency, StoneType, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE } from '../GameConstants';
+import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import KeyItemType from '../enums/KeyItemType';
 import OakItemType from '../enums/OakItemType';
@@ -14,7 +14,6 @@ import AmountFactory from '../wallet/AmountFactory';
 import { Mine } from './Mine';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
-import UndergroundMegaStoneItem from './UndergroundMegaStoneItem';
 import UndergroundUpgrade, { Upgrades } from './UndergroundUpgrade';
 
 export class Underground implements Feature {
@@ -252,17 +251,6 @@ export class Underground implements Feature {
 
     public static gainMineItem(id: number, num = 1) {
         const item = UndergroundItems.getById(id);
-
-        if (item.valueType == UndergroundItemValueType.EvolutionItem) {
-            const evostone = ItemList[StoneType[item.type]];
-            evostone.gain(num);
-            return;
-        }
-
-        if (item.valueType == UndergroundItemValueType.MegaStone) {
-            player.gainMegaStone((item as UndergroundMegaStoneItem).megaStone);
-            return;
-        }
         ItemList[item.itemName].gain(num);
     }
 

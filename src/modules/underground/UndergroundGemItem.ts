@@ -5,7 +5,6 @@ import UndergroundItem from './UndergroundItem';
 
 export default class UndergroundGemItem extends UndergroundItem {
     constructor(
-        public name: string,
         public id: number,
         itemName: string,
         space: Array<Array<number>>,
@@ -14,6 +13,6 @@ export default class UndergroundGemItem extends UndergroundItem {
         public requirement?: Requirement,
         weight?: (() => number) | number,
     ) {
-        super(name, id, itemName, space, value, UndergroundItemValueType.Gem, requirement, weight);
+        super(id, itemName, space, value, UndergroundItemValueType.Gem, requirement, weight);
     }
 }

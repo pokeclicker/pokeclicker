@@ -5,7 +5,6 @@ import UndergroundItem from './UndergroundItem';
 
 export default class UndergroundEvolutionItem extends UndergroundItem {
     constructor(
-        name: string,
         id: number,
         itemName: string,
         space: Array<Array<number>>,
@@ -14,6 +13,6 @@ export default class UndergroundEvolutionItem extends UndergroundItem {
         requirement?: Requirement,
         weight?: (() => number) | number,
     ) {
-        super(name, id, itemName, space, value, UndergroundItemValueType.EvolutionItem, requirement, weight);
+        super(id, itemName, space, value, UndergroundItemValueType.EvolutionItem, requirement, weight);
     }
 }

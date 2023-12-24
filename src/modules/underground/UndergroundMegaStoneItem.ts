@@ -16,7 +16,7 @@ export default class UndergroundMegaStoneItem extends UndergroundItem {
         value = 0,
         weight?: number,
     ) {
-        super(MegaStoneType[megaStone], id, itemName, space, value,
+        super(id, itemName, space, value,
             UndergroundItemValueType.MegaStone,
             new MultiRequirement([new MaxRegionRequirement(Region.kalos), new ObtainedPokemonRequirement(pokemon)]),
             () => (player.hasMegaStone(megaStone) ? 0 : weight));
