@@ -280,8 +280,7 @@ export class Underground implements Feature {
     public static getCumulativeValues(): Record<string, { cumulativeValue: number, imgSrc: string }> {
         const cumulativeValues = {};
         UndergroundItems.list.forEach(item => {
-            if (
-                item.hasSellValue() && player.itemList[item.itemName]() > 0 && !item.sellLocked()) {
+            if (item.hasSellValue() && player.itemList[item.itemName]() > 0 && !item.sellLocked()) {
                 let valueType;
                 switch (item.valueType) {
                     case UndergroundItemValueType.Gem:
@@ -375,7 +374,7 @@ export class Underground implements Feature {
 
     public static sellAllMineItems() {
         UndergroundItems.list.forEach((item) => {
-            if (!item.sellLocked() && item.isSellable()) {
+            if (!item.sellLocked() && item.hasSellValue()) {
                 Underground.sellMineItem(item, Infinity);
             }
         });

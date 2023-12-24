@@ -2572,7 +2572,7 @@ class Update implements Saveable {
                     return console.error(`${it.name} is not a valid item to store.`);
                 }
                 playerData._itemList[converter[it.id]] = (playerData._itemList[converter[it.id]] || 0) + it.amount;
-                sellLocks[it.itemName] = it.sellLocked;
+                sellLocks[converter[it.id]] = it.sellLocked;
             });
 
             // Update sort settings to make room for new attack at lv 100 sort option

@@ -87,7 +87,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: Underground.sortedMineInventory().filter(it => player.itemList[it.itemName]())}">
+                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: Underground.sortedMineInventory().filter(it => player.itemList[it.itemName]() && ![UndergroundItemValueType.EvolutionItem, UndergroundItemValueType.MegaStone].includes(it.valueType))}">
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-success btn-block" onclick="App.game.underground.openUndergroundSellAllModal()">
@@ -350,7 +350,7 @@
 
 <div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
      style="cursor:default" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInventory: UndergroundItems.list.filter(item => item.isSellable() && player.itemList[item.itemName]()) }">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInventory: UndergroundItems.list.filter(item => item.hasSellValue() && player.itemList[item.itemName]()) }">
         <div class="modal-content">
             <div class="modal-header d-block">
                 <h4 class="mb-0">
