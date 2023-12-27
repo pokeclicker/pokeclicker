@@ -184,12 +184,13 @@ class PartyPokemon implements Saveable {
         const expGained = exp * this.getExpMultiplier();
         if (this.level < App.game.badgeCase.maxLevel()) {
             this.exp += expGained;
-        }
-        const oldLevel = this.level;
-        const newLevel = this.calculateLevelFromExp();
-        if (oldLevel !== newLevel) {
-            this.level = newLevel;
-            this.checkForLevelEvolution();
+
+            const oldLevel = this.level;
+            const newLevel = this.calculateLevelFromExp();
+            if (oldLevel !== newLevel) {
+                this.level = newLevel;
+                this.checkForLevelEvolution();
+            }
         }
         return expGained;
     }
