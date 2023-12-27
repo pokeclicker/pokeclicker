@@ -1837,7 +1837,7 @@ const HowardClifford3 = new NPC('Howard Clifford', [
 const ParkAttendant = new NPC('Park Attendant', [
     'Welcome to the National Park!',
     'Lots of people come through here to take a stroll, and some come from far away to participate in our Bug Catching Contest!',
-    'All kinds of Bug Pokémon can be found in the park, with different ones showing up every day! Each one can be caught for Contest Tokens, and more powerful Pokémon are worth more Tokens!',
+    'All kinds of Bug Pokémon can be found in the park! Each one can be caught for Contest Tokens, and more powerful Pokémon are worth more Tokens!',
 ], { image: 'assets/images/npcs/Pokémon Ranger (male).png' });
 const ParkResearcher = new NPC('Researcher', [
     'Welcome to the National Park!',

@@ -3810,7 +3810,7 @@ class QuestLineHelper {
         App.game.quests.questLines().push(easterQuestLine);
     }
 
-    public static isQuestLineCompleted(name: string) {
+    public static isQuestLineCompleted(name: QuestLineNameType) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
