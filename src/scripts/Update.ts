@@ -2577,6 +2577,9 @@ class Update implements Saveable {
                     helper.sortOption = 5;
                 }
             });
+
+            // Preserve bottom-to-top catch filter priority for existing players
+            settingsData['catchFilters.invertPriorityOrder'] = true;
         },
     };
 
