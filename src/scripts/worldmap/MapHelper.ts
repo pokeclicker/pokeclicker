@@ -74,39 +74,43 @@ class MapHelper {
         return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked();
     };
 
-    public static getCurrentEnvironments(): GameConstants.Environment[] {
-        // Environments aren't stored in the locations themselves, so we need to:
-        // 1. Get the player's current area and then...
-        const area = player.route() ||
-            player.town()?.name ||
-            undefined;
-
-        // 2. Refer to the record in GameConstants.Environments to get an array (list) of all the environments we've written it under
+    public static getEnvironments(area: number | string, region: GameConstants.Region): GameConstants.Environment[] {
+        // Environments aren't stored in the locations themselves, so we need to refer to the record in GameConstants.Environments to get an array (list) of all the environments we've written it under
         const envs = Object.keys(GameConstants.Environments).filter(
-            (env) => GameConstants.Environments[env][player.region]?.has(area)
-        ) as GameConstants.Environment[];
+            (env) => GameConstants.Environments[env][region]?.has(area)
+        ) as GameConstants.Environment[]; // keeping everything as GameConstants.Environment makes them easier to refer to with an IDE (like VSCode). Environments will show up in a dropdown when you type
 
         // Now that we have an array we can push (add) environments straight up
         // determine Hisui environments for Burmy and electric friends
-        if (player.region === GameConstants.Region.hisui) {
-            if (envs.includes('CrimsonMirelands')) {
-                envs.push('SandyCloak');
-            } else if (envs.includes('CoronetHighlands')) {
-                envs.push('MagneticField', 'SandyCloak');
-            } else if (envs.includes('CobaltCoastlands')) {
-                envs.push('TrashCloak');
-            } else if (envs.includes('AlabasterIcelands')) {
-                envs.push('TrashCloak');
+        if (region === GameConstants.Region.hisui) {
+            const hisuilands = ['AlabasterIcelands', 'CobaltCoastlands', 'CoronetHighlands', 'CrimsonMirelands', 'JubilifeVillage', 'ObsidianFieldlands'] as GameConstants.Environment[];
+            const blanklands = hisuilands.find(land => envs.includes(land)); // find which __land the area is part of
+            switch (blanklands as GameConstants.Environment) {
+                case 'ObsidianFieldlands':
+                case 'JubilifeVillage':
+                    envs.push('PlantCloak');
+                    break; // group cloaks together to keep the switch breaks tidy, only three needed
+                case 'CoronetHighlands':
+                    envs.push('MagneticField'); // no break after this because we want to add SandyCloak to CoronetHighlands too
+                case 'CrimsonMirelands':
+                    envs.push('SandyCloak');
+                    break;
+                case 'AlabasterIcelands':
+                case 'CobaltCoastlands':
+                    envs.push('TrashCloak');
+                    break;
             }
         // if not in Hisui, add general envs for Burmy
         } else if (envs.includes('Cave')) {
             envs.push('SandyCloak');
-        } else if (isNaN(area) && ['City', 'League', 'Tower'].some(word => area.includes(word))) {
+        } else if (typeof area === 'string' && ['City', 'League', 'Tower'].some(word => area.includes(word))) {
             envs.push('TrashCloak');
         }
 
         // if not in Cave or TrashCloak, Burmy evolves into (Plant). (this is mainly for realEvos challenge)
-        if (!envs.includes('SandyCloak') || !envs.includes('TrashCloak')) {
+        const burmyCloaks = ['PlantCloak', 'SandyCloak', 'TrashCloak'] as GameConstants.Environment[];
+        // if some element (cloak) of the "burmyCloaks" array is not (!) included in the "envs" array, add (push) the 'PlantCloak' environment
+        if (!burmyCloaks.some(cloak => envs.includes(cloak))) {
             envs.push('PlantCloak');
         }
 
@@ -124,6 +128,13 @@ class MapHelper {
         }
 
         return (envs);
+    }
+
+    public static getCurrentEnvironments(): GameConstants.Environment[] {
+        const area = player.route() ||
+            player.town()?.name ||
+            undefined;
+        return this.getEnvironments(area, player.region);
     }
 
     public static getBattleBackground(): GameConstants.BattleBackground {
