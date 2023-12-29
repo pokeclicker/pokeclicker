@@ -2,7 +2,7 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import Requirement from '../requirements/Requirement';
 import { StoneType } from '../GameConstants';
 import { ItemList } from '../items/ItemList';
-import { humanify } from '../GameConstants';
+import { humanifyString } from '../GameConstants';
 
 export default class UndergroundItem {
     public space: Array<Array<any>>;
@@ -56,7 +56,7 @@ export default class UndergroundItem {
 
     get name() {
         // modules.test needs a name but items from scripts are not initialized yet...
-        return ItemList[this.itemName]?.displayName || humanify(this.itemName);
+        return ItemList[this.itemName]?.displayName || humanifyString(this.itemName);
     }
 
     get image() {
