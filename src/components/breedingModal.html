@@ -211,7 +211,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <label>Sort</label>
                                                 <div class="input-group">
                                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                                                        data-bind="foreach: $data.options.filter(o => o.value !== SortOptions.level), attr: {name}, selectedOptions: [$data.observableValue()]">
+                                                        data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                                                         <option data-bind="text: $data.text, value: $data.value"></option>
                                                     </select>
                                                     <div class="input-group-append bg-primary text-light">
