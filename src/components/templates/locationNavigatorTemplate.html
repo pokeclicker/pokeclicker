@@ -1,0 +1,9 @@
+<script type="text/html" id="location-navigator-template">
+    <button type="button" class="list-group-item list-group-item-action d-flex p-1"
+        data-bind="click: () => $data.moveToLocation(), css: { 'text-muted': $data.isLocked() }">
+        <knockout class="flex-grow-1" data-bind="text: $data.name"></knockout>
+        <!-- ko if: $data.isLocked() -->
+        <img src="assets/images/breeding/lock.svg" height="18" />
+        <!-- /ko -->
+    </button>
+</script>
