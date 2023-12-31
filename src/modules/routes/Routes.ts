@@ -24,6 +24,10 @@ export default class Routes {
         return this.regionRoutes.filter((routeData) => routeData.region === region);
     }
 
+    public static getRoutesByRegionSubRegion(region: GameConstants.Region, subRegion: number): RegionRoute[] {
+        return this.regionRoutes.filter((routeData) => routeData.region === region && (routeData.subRegion ?? 0) === subRegion);
+    }
+
     public static getRegionByRoute(route: number): GameConstants.Region {
         return this.regionRoutes.find((routeData) => routeData.number === route).region;
     }

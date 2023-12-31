@@ -1,0 +1,26 @@
+<div id="locationNavigatorContainer" class="card sortable border-secondary mb-3">
+    <div class="card-header p-0" data-toggle="collapse" href="#locationNavigatorBody">
+        <span>Location Navigator</span>
+    </div>
+    <div id="locationNavigatorBody" class="card-body p-0 show">
+        <div class="row no-gutters">
+            <select class="custom-select" data-bind="value: LocationNavigator.selectedType,
+                options: GameHelper.enumSelectOption(LocationNavigatorOption), optionsValue: 'value', optionsText: 'name'"></select>
+        </div>
+        <div class="text-left small" style="max-height: 300px; overflow: auto;">
+            <div class="list-group list-group-flush" data-bind="template: { name: 'location-navigator-template',
+                foreach: LocationNavigator.activeLocationList() }"></div>
+        </div>
+        <div data-bind="ifnot: LocationNavigator.activeLocationList().length">
+            <p class="text-muted my-1">No locations</p>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="location-navigator-template">
+    <button type="button" class="list-group-item list-group-item-action d-flex p-1"
+        data-bind="click: () => $data.moveToLocation(), css: { 'text-muted': $data.isLocked() }">
+        <knockout class="flex-grow-1" data-bind="text: $data.name"></knockout>
+        <img src="assets/images/breeding/lock.svg" height="18" data-bind="visible: $data.isLocked()" />
+    </button>
+</script>
