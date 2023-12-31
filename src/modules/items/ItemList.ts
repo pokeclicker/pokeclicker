@@ -24,6 +24,8 @@ import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequireme
 import QuestItem from './QuestItem';
 import Consumable from './Consumable';
 import ChristmasPresent from './ChristmasPresent';
+import UndergroundItemValueType from '../enums/UndergroundItemValueType';
+import TreasureItem from './TreasureItem';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -240,3 +242,71 @@ ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefi
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
+
+// Underground Items
+// Sellable (Diamonds)
+ItemList.Rare_bone = new TreasureItem('Rare_bone', UndergroundItemValueType.Diamond, 3, 'Rare Bone');
+ItemList.Star_piece = new TreasureItem('Star_piece', UndergroundItemValueType.Diamond, 5, 'Star Piece');
+ItemList.Revive = new TreasureItem('Revive', UndergroundItemValueType.Diamond, 2, 'Revive');
+ItemList.Max_revive = new TreasureItem('Max_revive', UndergroundItemValueType.Diamond, 4, 'Max Revive');
+ItemList.Iron_ball = new TreasureItem('Iron_ball', UndergroundItemValueType.Diamond, 2, 'Iron Ball');
+ItemList.Heart_scale = new TreasureItem('Heart_scale', UndergroundItemValueType.Diamond, 10, 'Heart Scale');
+ItemList.Light_clay = new TreasureItem('Light_clay', UndergroundItemValueType.Diamond, 2, 'Light Clay');
+ItemList.Odd_keystone = new TreasureItem('Odd_keystone', UndergroundItemValueType.Diamond, 6, 'Odd Keystone');
+ItemList.Hard_stone = new TreasureItem('Hard_stone', UndergroundItemValueType.Diamond, 4, 'Hard Stone');
+ItemList.Oval_stone = new TreasureItem('Oval_stone', UndergroundItemValueType.Diamond, 3, 'Oval Stone');
+ItemList.Everstone = new TreasureItem('Everstone', UndergroundItemValueType.Diamond, 3, 'Everstone');
+ItemList.Smooth_rock = new TreasureItem('Smooth_rock', UndergroundItemValueType.Diamond, 2, 'Smooth Rock');
+ItemList.Heat_rock = new TreasureItem('Heat_rock', UndergroundItemValueType.Diamond, 2, 'Heat Rock');
+ItemList.Icy_rock = new TreasureItem('Icy_rock', UndergroundItemValueType.Diamond, 2, 'Icy Rock');
+ItemList.Damp_rock = new TreasureItem('Damp_rock', UndergroundItemValueType.Diamond, 2, 'Damp Rock');
+// Plates
+ItemList.Draco_plate = new TreasureItem('Draco_plate', UndergroundItemValueType.Gem, 0, 'Draco Plate');
+ItemList.Dread_plate = new TreasureItem('Dread_plate', UndergroundItemValueType.Gem, 0, 'Dread Plate');
+ItemList.Earth_plate = new TreasureItem('Earth_plate', UndergroundItemValueType.Gem, 0, 'Earth Plate');
+ItemList.Fist_plate = new TreasureItem('Fist_plate', UndergroundItemValueType.Gem, 0, 'Fist Plate');
+ItemList.Flame_plate = new TreasureItem('Flame_plate', UndergroundItemValueType.Gem, 0, 'Flame Plate');
+ItemList.Icicle_plate = new TreasureItem('Icicle_plate', UndergroundItemValueType.Gem, 0, 'Icicle Plate');
+ItemList.Insect_plate = new TreasureItem('Insect_plate', UndergroundItemValueType.Gem, 0, 'Insect Plate');
+ItemList.Iron_plate = new TreasureItem('Iron_plate', UndergroundItemValueType.Gem, 0, 'Iron Plate');
+ItemList.Meadow_plate = new TreasureItem('Meadow_plate', UndergroundItemValueType.Gem, 0, 'Meadow Plate');
+ItemList.Mind_plate = new TreasureItem('Mind_plate', UndergroundItemValueType.Gem, 0, 'Mind Plate');
+ItemList.Sky_plate = new TreasureItem('Sky_plate', UndergroundItemValueType.Gem, 0, 'Sky Plate');
+ItemList.Splash_plate = new TreasureItem('Splash_plate', UndergroundItemValueType.Gem, 0, 'Splash Plate');
+ItemList.Spooky_plate = new TreasureItem('Spooky_plate', UndergroundItemValueType.Gem, 0, 'Spooky Plate');
+ItemList.Stone_plate = new TreasureItem('Stone_plate', UndergroundItemValueType.Gem, 0, 'Stone Plate');
+ItemList.Toxic_plate = new TreasureItem('Toxic_plate', UndergroundItemValueType.Gem, 0, 'Toxic Plate');
+ItemList.Zap_plate = new TreasureItem('Zap_plate', UndergroundItemValueType.Gem, 0, 'Zap Plate');
+ItemList.Pixie_plate = new TreasureItem('Pixie_plate', UndergroundItemValueType.Gem, 0, 'Pixie Plate');
+// Fossils
+ItemList.Helix_fossil = new TreasureItem('Helix_fossil', UndergroundItemValueType.Fossil, 0, 'Helix Fossil');
+ItemList.Dome_fossil = new TreasureItem('Dome_fossil', UndergroundItemValueType.Fossil, 0, 'Dome Fossil');
+ItemList.Old_amber = new TreasureItem('Old_amber', UndergroundItemValueType.Fossil, 0, 'Old Amber');
+ItemList.Root_fossil = new TreasureItem('Root_fossil', UndergroundItemValueType.Fossil, 0, 'Root Fossil');
+ItemList.Claw_fossil = new TreasureItem('Claw_fossil', UndergroundItemValueType.Fossil, 0, 'Claw Fossil');
+ItemList.Armor_fossil = new TreasureItem('Armor_fossil', UndergroundItemValueType.Fossil, 0, 'Armor Fossil');
+ItemList.Skull_fossil = new TreasureItem('Skull_fossil', UndergroundItemValueType.Fossil, 0, 'Skull Fossil');
+ItemList.Cover_fossil = new TreasureItem('Cover_fossil', UndergroundItemValueType.Fossil, 0, 'Cover Fossil');
+ItemList.Plume_fossil = new TreasureItem('Plume_fossil', UndergroundItemValueType.Fossil, 0, 'Plume Fossil');
+ItemList.Jaw_fossil = new TreasureItem('Jaw_fossil', UndergroundItemValueType.Fossil, 0, 'Jaw Fossil');
+ItemList.Sail_fossil = new TreasureItem('Sail_fossil', UndergroundItemValueType.Fossil, 0, 'Sail Fossil');
+ItemList.Fossilized_bird = new TreasureItem('Fossilized_bird', UndergroundItemValueType.FossilPiece, 0, 'Fossilized Bird');
+ItemList.Fossilized_fish = new TreasureItem('Fossilized_fish', UndergroundItemValueType.FossilPiece, 0, 'Fossilized Fish');
+ItemList.Fossilized_drake = new TreasureItem('Fossilized_drake', UndergroundItemValueType.FossilPiece, 0, 'Fossilized Drake');
+ItemList.Fossilized_dino = new TreasureItem('Fossilized_dino', UndergroundItemValueType.FossilPiece, 0, 'Fossilized Dino');
+// Shards
+ItemList.Red_shard = new TreasureItem('Red_shard', UndergroundItemValueType.Shard, 0, 'Red Shard');
+ItemList.Yellow_shard = new TreasureItem('Yellow_shard', UndergroundItemValueType.Shard, 0, 'Yellow Shard');
+ItemList.Green_shard = new TreasureItem('Green_shard', UndergroundItemValueType.Shard, 0, 'Green Shard');
+ItemList.Blue_shard = new TreasureItem('Blue_shard', UndergroundItemValueType.Shard, 0, 'Blue Shard');
+ItemList.Grey_shard = new TreasureItem('Grey_shard', UndergroundItemValueType.Shard, 0, 'Grey Shard');
+ItemList.Purple_shard = new TreasureItem('Purple_shard', UndergroundItemValueType.Shard, 0, 'Purple Shard');
+ItemList.Ochre_shard = new TreasureItem('Ochre_shard', UndergroundItemValueType.Shard, 0, 'Ochre Shard');
+ItemList.Black_shard = new TreasureItem('Black_shard', UndergroundItemValueType.Shard, 0, 'Black Shard');
+ItemList.Crimson_shard = new TreasureItem('Crimson_shard', UndergroundItemValueType.Shard, 0, 'Crimson Shard');
+ItemList.Lime_shard = new TreasureItem('Lime_shard', UndergroundItemValueType.Shard, 0, 'Lime Shard');
+ItemList.White_shard = new TreasureItem('White_shard', UndergroundItemValueType.Shard, 0, 'White Shard');
+ItemList.Pink_shard = new TreasureItem('Pink_shard', UndergroundItemValueType.Shard, 0, 'Pink Shard');
+ItemList.Cyan_shard = new TreasureItem('Cyan_shard', UndergroundItemValueType.Shard, 0, 'Cyan Shard');
+ItemList.Rose_shard = new TreasureItem('Rose_shard', UndergroundItemValueType.Shard, 0, 'Rose Shard');
+ItemList.Brown_shard = new TreasureItem('Brown_shard', UndergroundItemValueType.Shard, 0, 'Brown Shard');

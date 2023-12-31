@@ -27,6 +27,7 @@ import type { AchievementSortOptions } from './achievements/AchievementSortOptio
 import type AchievementCategory from './achievements/AchievementCategory';
 import type KeyItems from './keyItems/KeyItems';
 import type PokeballFilters from './pokeballs/PokeballFilters';
+import { QuestLineNameType } from './quests/QuestLineNameType';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -54,7 +55,9 @@ type TmpGameType = {
     logbook: LogBook,
     redeemableCodes: any,
     statistics: Statistics,
-    quests: any,
+    quests: {
+        getQuestLine: (name: QuestLineNameType) => any
+    } & Record<any, any>,
     specialEvents: any,
     discord: any,
     achievementTracker: any,
