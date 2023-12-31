@@ -3856,7 +3856,7 @@ TemporaryBattleList['Skull 2'] = new TemporaryBattle(
     'Skull 2',
     [new GymPokemon('Drowzee', 325654668, 10)],
     'Seriously, home slice?! You\'re too strong for a kid, yo! I\'ve gotta go make someone else miserable to feel better! We\'re gonna go mess with Verdant Cavern!',
-    [new TemporaryBattleRequirement('Ilima')],
+    [new MultiRequirement([new TemporaryBattleRequirement('Ilima'), new RouteKillRequirement(10, GameConstants.Region.alola, 2)])],
     undefined,
     {
         displayName: 'Team Skull Grunts',
@@ -4087,7 +4087,7 @@ TemporaryBattleList.Molayne = new TemporaryBattle(
         new GymPokemon('Alolan Dugtrio', 175257094, 30),
     ],
     'Here\'s a little something to remember our meeting by! I gathered these Z-Crystals when I was on my own island challenge back in my own day. Take it, and use it well.</br></br><img width="100" src="assets/images/items/zCrystal/Steelium Z.svg">',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
+    [new QuestLineStepCompletedRequirement('Child of the Stars', 2)],
     undefined,
     {
         firstTimeRewardFunction: zCrystalGet(PokemonType.Steel),
@@ -4160,13 +4160,13 @@ TemporaryBattleList['Gladion 2'] = new TemporaryBattle(
 TemporaryBattleList['Exeggutor Tree'] = new TemporaryBattle(
     'Exeggutor Tree',
     [new GymPokemon('Alolan Exeggutor', 1100000, 40)],
-    undefined,
-    undefined,
+    'Phew... That was an Exeggutor, wasn\'t it? This island is full of them! I think that they should all clear out once we get past them.',
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 2, GameConstants.AchievementOption.less)],
     undefined,
     {
         displayName: 'A Tree?',
         isTrainerBattle: false,
-        hideTrainer: true,
+        imageName: 'Lillie (z powered)',
     }
 );
 TemporaryBattleList['Skull 6'] = new TemporaryBattle(
@@ -4271,6 +4271,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
         },
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',
+        displayName: 'Ultra Necrozma',
     }
 );
 TemporaryBattleList['Captain Mina'] = new TemporaryBattle(

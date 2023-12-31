@@ -77,7 +77,8 @@ export default class KeyItems implements Feature {
                     ) || App.game.party.caughtPokemon[0];
                     patientZero.pokerus = Pokerus.Contagious;
                 }),
-            new KeyItem(KeyItemType['Z-Power_Ring'], 'A gift from Melemele\'s kahuna that enables the use of Z-Moves. Using a Z-Crystal with it boosts the power of all Pokémon of a shared type for a short while, after which you and Pokémon need to recharge.', () => App.game.statistics.temporaryBattleDefeated[getTemporaryBattlesIndex('Hau 2')]() > 0, undefined, undefined, 'Z-Power Ring'),
+            new KeyItem(KeyItemType['Z-Power_Ring'], 'A gift from Melemele\'s kahuna that enables the use of Z-Crystals. Using a Z-Crystal boosts the power of all your Pokémon of a shared type for a short while, after which some time is needed to recharge.',
+                () => App.game.statistics.temporaryBattleDefeated[getTemporaryBattlesIndex('Hau 2')]() > 0, undefined, undefined, 'Z-Power Ring'),
         ];
     }
 

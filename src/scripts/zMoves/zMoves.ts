@@ -7,7 +7,7 @@ class ZMoves implements Feature {
     defaults: Record<string, any>;
     public counter = 0;
 
-    static requirement = new DevelopmentRequirement();
+    static requirement = App.game.keyItems.hasKeyItem(KeyItemType['Z-Power_Ring']);
     type: KnockoutObservable<PokemonType> = ko.observable(PokemonType.Normal);
     time: KnockoutObservable<number> = ko.observable(0);
     formattedTime: KnockoutObservable<string> = ko.computed(() => GameConstants.formatTime(this.time() / GameConstants.SECOND).split(':').slice(1).join(':'));
@@ -54,7 +54,7 @@ class ZMoves implements Feature {
     }
 
     canAccess(): boolean {
-        return ZMoves.requirement.isCompleted() && App.game.keyItems.hasKeyItem(KeyItemType['Z-Power_Ring']);
+        return ZMoves.requirement || GameConstants.zCrystalItemType.some(crystal => player.itemList[crystal]() > 0);
     }
 
     update(delta: number): void {}  // This method intentionally left blank

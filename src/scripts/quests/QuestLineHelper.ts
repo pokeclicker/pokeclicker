@@ -2473,7 +2473,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(clearTrainersSchool);
 
         // 3 - Temp Battle: Skull 1
-        const battleSkullGrunts1 = new DefeatTemporaryBattleQuest('Skull 1', 'Beat up the Team Skull grunts trying to block Hau\'oli City\'s Dock.')
+        const battleSkullGrunts1 = new DefeatTemporaryBattleQuest('Skull 1', 'Beat up the Team Skull grunts loitering on Hau\'oli City\'s Dock.')
             .withOptionalArgs({
                 clearedMessage: 'My thanks to you and your Pokémon. These grunts are always bothering me and my trial site. You... you\'re the trainer who cleared the Trainers\' School so effortlessly! Allow me to see if you\'re ready for my trial!',
                 npcDisplayName: 'Ilima',
@@ -2548,7 +2548,7 @@ class QuestLineHelper {
 
         // end - Extra Z Crystal "Trial"
         // const defined at the end of this file
-        createZCrystalTrial(PokemonType.Flying, 'Ten Carat Hill', 'Kahili', 'Hello there. There\'s a wonderful breeze blowing out here today. The glistening Flyinium Z... It\'s yours now. Use it well.', melemeleAlolaQuestLine, true, 'There is one more Z Crystal on Melemele. Find the Trial Site in the dungeon hiding it.', 'Trial Site of Ten Carat Hill');
+        createZCrystalTrial(PokemonType.Flying, 'Ten Carat Hill', 'Kahili', 'Hello there. There\'s a wonderful breeze blowing out here today. The glistening Flyinium Z... It\'s yours now. Use it well.', melemeleAlolaQuestLine, true, 'There is one more Z Crystal on Ten Carat Hill. Find the Trial Site and claim it!', 'Trial Site of Ten Carat Hill');
 
         App.game.quests.questLines().push(melemeleAlolaQuestLine);
     }
@@ -2708,9 +2708,9 @@ class QuestLineHelper {
         // 12 - Clear dungeon boss: Aether President Lusamine
         const clearAetherFoundation4 = new DefeatDungeonBossQuest('Aether Foundation', 'Aether President Lusamine', 0).withDescription('Lusamine is using Nebby to open an Ultra Wormhole. Defeat her in the Aether Foundation dungeon to put a stop to this.')
             .withOptionalArgs({
-                clearedMessage: 'All that I want is my precious beast! I don\'t care about any of the rest of you! I don\'t care if you are my child or not! If you\'re not beautiful enough to be worthy of my love, then I don\'t NEED you!</br></br><i>Lusamine left into the Ultra Wormhole.</i>',
-                npcDisplayName: 'Wormhole',
-                npcImageName: 'specialNPCs/Wormhole',
+                clearedMessage: 'All that I want is my precious beast! I don\'t care about any of the rest of you! I don\'t care if you are my child or not! If you\'re not beautiful enough to be worthy of my love, then I don\'t NEED you!</br></br><i>Lusamine left into the Ultra Wormhole.</i></br><img src="assets/images/npcs/specialNPCs/Wormhole.png"></img>',
+                npcDisplayName: 'Lusamine',
+                npcImageName: 'Aether President (lusamine)',
             });
         ulaulaAlolaQuestLine.addQuest(clearAetherFoundation4);
 
@@ -2846,7 +2846,7 @@ class QuestLineHelper {
         //     });
         // };
 
-        const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis', 'Stop the Eater of Light from absorbing all light in Alola. Clear Ultra Megalopolis at the Altar of the Sunne and Moone.')// TODO: add flutes reward .withCustomReward(UltraMegalopolisReward)
+        const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis', 'Stop the Eater of Light from absorbing all light in Alola. Defeat Ultra Necrozma at the Altar of the Sunne and Moone.')// TODO: add flutes reward .withCustomReward(UltraMegalopolisReward)
             .withOptionalArgs({
                 clearedMessage: 'Necrozma shone with such blinding light, as it used to, only to lose that light all over again... It seems to have fled somewhere now. We are grateful to you, human of Alola. May we all eventually be awash in light again.',
                 npcDisplayName: 'Ultra Recon Squad',
@@ -2884,7 +2884,10 @@ class QuestLineHelper {
 
         createZCrystalTrial(PokemonType.Fairy, 'Mina\'s Houseboat', 'Mina', 'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!', minasTrialAlolaQuestLine);
 
-        createZCrystalTrial(PokemonType.Ice, 'Mount Lanakila', 'Trial Site', 'Congratulations! You\'ve claimed the Icium Z! Onwards to the Pokémon League now!', minasTrialAlolaQuestLine, true, 'Now that you have access to Mount Lanakila, find the Trial Site in the dungeon.', 'Trial Site of Mount Lanakila');
+        const battleGladion3 = new DefeatTemporaryBattleQuest('Gladion 3', 'Battle Gladion on Ula\'ula one last time before ascending to the Pokémon League.').withInitialValue(0);
+        minasTrialAlolaQuestLine.addQuest(battleGladion3);
+
+        createZCrystalTrial(PokemonType.Ice, 'Mount Lanakila', 'Trial Site', 'Congratulations! You\'ve claimed the Icium Z! Onwards to the Pokémon League now!', minasTrialAlolaQuestLine, true, 'Find the Trial Site and its Z Crystal in the Mount Lanakila dungeon.', 'Trial Site of Mount Lanakila');
 
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
