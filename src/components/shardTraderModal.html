@@ -32,7 +32,7 @@
                                 <!-- ko if: $data.isVisible() -->
                                     <!-- ko foreach: shards -->
                                     <tr>
-                                        <td data-bind="text: player.getUndergroundItemAmount($data.shardType.id).toLocaleString('en-US')"></td>
+                                        <td data-bind="text: player.itemList[$data.shardType.itemName]().toLocaleString('en-US')"></td>
                                         <td class='vertical-middle'>
                                             <img class='mineInventoryItem' data-bind='attr: {src: $data.shardType.image }'>
                                         </td>
