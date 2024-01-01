@@ -1,7 +1,7 @@
 class LocationNavigator {
     public static selectedType = ko.observable(LocationNavigatorOption.Towns);
 
-    public static locationLists = {
+    public static locationLists: Record<LocationNavigatorOption, KnockoutComputed<LocationNavigatorItem[]>> = {
         [LocationNavigatorOption.Towns]: ko.pureComputed(() => {
             return Object.values(TownList)
                 .filter((town) => town.region == player.region
