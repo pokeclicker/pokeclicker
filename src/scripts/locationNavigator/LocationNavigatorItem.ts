@@ -1,13 +1,11 @@
-abstract class LocationNavigatorItem {
-    abstract get name(): string;
-    abstract isLocked(): boolean;
-    abstract moveToLocation(): void;
+interface LocationNavigatorItem {
+    get name(): string;
+    isLocked(): boolean;
+    moveToLocation(): void;
 }
 
-class TownLocationNavigatorItem extends LocationNavigatorItem {
-    constructor(public town: Town) {
-        super();
-    }
+class TownLocationNavigatorItem implements LocationNavigatorItem {
+    constructor(public town: Town) {}
 
     get name(): string {
         return this.town.name;
@@ -22,10 +20,8 @@ class TownLocationNavigatorItem extends LocationNavigatorItem {
     }
 }
 
-class RouteLocationNavigatorItem extends LocationNavigatorItem {
-    constructor(public route: RegionRoute) {
-        super();
-    }
+class RouteLocationNavigatorItem implements LocationNavigatorItem {
+    constructor(public route: RegionRoute) {}
 
     get name(): string {
         return this.route.routeName;
