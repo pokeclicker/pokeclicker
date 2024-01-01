@@ -2,6 +2,9 @@
     <button type="button" class="list-group-item list-group-item-action d-flex p-1"
         data-bind="click: () => $data.moveToLocation(), css: { 'text-muted': $data.isLocked() }, enable: MapHelper.mapVisible">
         <knockout class="flex-grow-1" data-bind="text: $data.name"></knockout>
+        <!-- ko if: $data.isAtLocation() -->
+        <img height="18" data-bind="attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }" />
+        <!-- /ko -->
         <!-- ko if: $data.isLocked() -->
         <img src="assets/images/breeding/lock.svg" height="18" />
         <!-- /ko -->

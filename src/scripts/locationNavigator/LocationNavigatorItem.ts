@@ -2,6 +2,7 @@ interface LocationNavigatorItem {
     get name(): string;
     isLocked(): boolean;
     moveToLocation(): void;
+    isAtLocation(): boolean;
 }
 
 class TownLocationNavigatorItem implements LocationNavigatorItem {
@@ -18,6 +19,10 @@ class TownLocationNavigatorItem implements LocationNavigatorItem {
     moveToLocation(): void {
         MapHelper.moveToTown(this.town.name);
     }
+
+    isAtLocation(): boolean {
+        return MapHelper.isTownCurrentLocation(this.town.name);
+    }
 }
 
 class RouteLocationNavigatorItem implements LocationNavigatorItem {
@@ -33,5 +38,9 @@ class RouteLocationNavigatorItem implements LocationNavigatorItem {
 
     moveToLocation(): void {
         MapHelper.moveToRoute(this.route.number, this.route.region);
+    }
+
+    isAtLocation(): boolean {
+        return MapHelper.isRouteCurrentLocation(this.route.number, this.route.region);
     }
 }
