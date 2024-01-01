@@ -7,6 +7,9 @@
             <select class="custom-select" data-bind="value: LocationNavigator.selectedType,
                 options: GameHelper.enumSelectOption(LocationNavigatorOption), optionsValue: 'value', optionsText: 'name'"></select>
         </div>
+        <div class="bg-danger py-1" data-bind="hidden: MapHelper.mapVisible">
+            <p class="small m-0">Map is not available in current location</p>
+        </div>
         <div class="text-left small" style="max-height: 300px; overflow: auto;">
             <div class="list-group list-group-flush" data-bind="template: { name: 'location-navigator-template',
                 foreach: LocationNavigator.activeLocationList() }"></div>
