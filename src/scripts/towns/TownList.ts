@@ -7957,7 +7957,7 @@ TownList['Thrifty Megamart'] = new DungeonTown(
     'Thrifty Megamart',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
-    [new TemporaryBattleRequirement('Skull 5')],
+    [new MultiRequirement([new TemporaryBattleRequirement('Skull 5'), new RouteKillRequirement(10, GameConstants.Region.alola, 14)])],
     [TemporaryBattleList['Acerola Ghost Memory']],
     {npcs: [AcerolaSilvally]}
 );
