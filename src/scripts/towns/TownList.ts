@@ -6679,6 +6679,12 @@ const IkiKahuna = new NPC('Kahuna Hala', [
     image: 'assets/images/npcs/Hala.png',
     requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more)]),
 });
+const VerdantCavernIlima = new NPC('Captain Ilima', [
+    'Greetings. Captain Ilima here. In every locale where a captain holds his or her trials, you will encounter a particularly strong boss, known as a Totem Pokémon. To clear a Trial, all you have to do is defeat these Pokémon!',
+    'Some Trial Sites are protected by different Pokémon depending on the time of day. The difficulty of each Trial isn\'t affected by these changes, but it makes for quite the interesting observance!',
+], {
+    image: 'assets/images/npcs/Ilima.png',
+})
 const LagunaKahuna = new NPC('Kahuna Hala', [
     'Dooot doo doo, just a kahuna on a stroll to the laguna. ♪',
 ], {
@@ -7848,7 +7854,9 @@ TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new MultiRequirement([new RouteKillRequirement(10, GameConstants.Region.alola, 2), new TemporaryBattleRequirement('Skull 2')])]
+    [new MultiRequirement([new RouteKillRequirement(10, GameConstants.Region.alola, 2), new TemporaryBattleRequirement('Skull 2')])],
+    undefined,
+    { npcs: [VerdantCavernIlima] }
 );
 TownList['Melemele Meadow'] = new DungeonTown(
     'Melemele Meadow',
