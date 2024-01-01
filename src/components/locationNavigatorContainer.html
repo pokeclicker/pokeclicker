@@ -3,14 +3,20 @@
         <span>Location Navigator</span>
     </div>
     <div id="locationNavigatorBody" class="card-body p-0 show" data-bind="if: Settings.getSetting('showLocationNavigatorModule').observableValue">
-        <div class="row no-gutters">
+        <div class="row no-gutters" id="locationNavigatorSelect">
             <select class="custom-select" data-bind="value: LocationNavigator.selectedType,
                 options: GameHelper.enumSelectOption(LocationNavigatorOption), optionsValue: 'value', optionsText: 'name'"></select>
+        </div>
+        <div id="locationNavigatorTabs">
+            <ul class="nav nav-pills flex-column flex-sm-row border-bottom border-secondary small" data-bind="foreach: GameHelper.enumNumbers(LocationNavigatorOption)">
+                <button class="text-sm-center nav-link rounded-0 px-2 py-1" style="flex: 1;" data-bind="text: LocationNavigatorOption[$data],
+                    click: () => LocationNavigator.selectedType($data), css: { active: LocationNavigator.selectedType() == $data }"></button>
+            </ul>
         </div>
         <div class="bg-danger py-1" data-bind="hidden: MapHelper.mapVisible">
             <p class="small m-0">Map is not available in current location</p>
         </div>
-        <div class="text-left small" style="max-height: 300px; overflow: auto;">
+        <div class="text-left small" id="locationNavigatorItems">
             <div class="list-group list-group-flush" data-bind="template: { name: 'location-navigator-template',
                 foreach: LocationNavigator.activeLocationList() }"></div>
         </div>
