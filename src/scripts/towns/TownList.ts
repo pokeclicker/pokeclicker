@@ -7582,7 +7582,7 @@ TownList['Ruins of Life Entrance'] = new Town(
     'Ruins of Life Entrance',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new MoveToTown('Ruins of Life', undefined, false), GymList['Konikoni City']],
+    [GymList['Konikoni City'], new MoveToTown('Ruins of Life', undefined, false)],
     {
         requirements: [new TemporaryBattleRequirement('Plumeria 1')],
         npcs: [LillieRuinsOfLife],
