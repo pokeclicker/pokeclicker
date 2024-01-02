@@ -21,6 +21,10 @@ class DungeonRunner {
 
     public static initializeDungeon(dungeon: Dungeon) {
         if (!dungeon.isUnlocked()) {
+            Notifier.notify({
+                message: `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
             return false;
         }
         DungeonRunner.dungeon = dungeon;
