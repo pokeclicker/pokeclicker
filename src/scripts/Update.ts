@@ -2556,6 +2556,25 @@ class Update implements Saveable {
                 }
             });
 
+            // ID to itemName interface
+            const converter = {
+                1 : 'Rare_bone', 2 : 'Star_piece', 3 : 'Revive', 4 : 'Max_revive', 5 : 'Iron_ball', 6 : 'Heart_scale', 7 : 'Light_clay', 8 : 'Odd_keystone', 9 : 'Hard_stone', 10 : 'Oval_stone', 11 : 'Everstone', 12 : 'Smooth_rock', 13 : 'Heat_rock', 14 : 'Icy_rock', 15 : 'Damp_rock',
+                100 : 'Draco_plate', 101 : 'Dread_plate', 102 : 'Earth_plate', 103 : 'Fist_plate', 104 : 'Flame_plate', 105 : 'Icicle_plate', 106 : 'Insect_plate', 107 : 'Iron_plate', 108 : 'Meadow_plate', 109 : 'Mind_plate', 110 : 'Sky_plate', 111 : 'Splash_plate', 112 : 'Spooky_plate', 113 : 'Stone_plate', 114 : 'Toxic_plate', 115 : 'Zap_plate', 116 : 'Pixie_plate',
+                200 : 'Helix_fossil', 201 : 'Dome_fossil', 202 : 'Old_amber', 203 : 'Root_fossil', 204 : 'Claw_fossil', 205 : 'Armor_fossil', 206 : 'Skull_fossil', 207 : 'Cover_fossil', 208 : 'Plume_fossil', 209 : 'Jaw_fossil', 210 : 'Sail_fossil', 211 : 'Fossilized_bird', 212 : 'Fossilized_fish', 213 : 'Fossilized_drake', 214 : 'Fossilized_dino',
+                300 : 'Fire_stone', 301 : 'Water_stone', 302 : 'Thunder_stone', 303 : 'Leaf_stone', 304 : 'Moon_stone', 305 : 'Sun_stone', 306 : 'Shiny_stone', 307 : 'Dusk_stone', 308 : 'Dawn_stone', 309 : 'Ice_stone',
+                400 : 'Red_shard', 401 : 'Yellow_shard', 402 : 'Green_shard', 403 : 'Blue_shard', 404 : 'Grey_shard', 405 : 'Purple_shard', 406 : 'Ochre_shard', 407 : 'Black_shard', 408 : 'Crimson_shard', 409 : 'Lime_shard', 410 : 'White_shard', 411 : 'Pink_shard', 412 : 'Cyan_shard', 413 : 'Rose_shard', 414 : 'Brown_shard',
+                500 : 'Aerodactylite', 501 : 'Mawilite', 502 : 'Sablenite',
+            };
+            // Port player.mineInventory to player.itemList
+            const sellLocks = (saveData.underground.sellLocks = {});
+            playerData.mineInventory.forEach(it => {
+                if (!converter[it.id]) {
+                    return console.error(`${it.name} is not a valid item to store.`);
+                }
+                playerData._itemList[converter[it.id]] = (playerData._itemList[converter[it.id]] || 0) + it.amount;
+                sellLocks[converter[it.id]] = it.sellLocked;
+            });
+
             // Update sort settings to make room for new attack at lv 100 sort option
             ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
                 .forEach((sortSetting) => {
