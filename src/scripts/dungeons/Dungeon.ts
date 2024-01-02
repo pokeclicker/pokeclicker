@@ -95,7 +95,7 @@ const DungeonGainGymBadge = (gym: Gym) => {
  */
  interface optionalDungeonParameters {
     dungeonRegionalDifficulty?: GameConstants.Region,
-    dungeonDungeonRequirement?: MultiRequirement | OneFromManyRequirement | Requirement,
+    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
@@ -133,7 +133,7 @@ class Dungeon {
         }
         // Player may not meet the requirements to start the dungeon
         const dungeonTown = TownList[this.name];
-        const dungeonRequirement = this.optionalParameters.dungeonDungeonRequirement;
+        const dungeonRequirement = this.optionalParameters.requirement;
         // Use dungeonRequirement if it exists, else default to dungeonTown status
         if (dungeonRequirement ? !dungeonRequirement.isCompleted() : !dungeonTown.isUnlocked()) {
             return false;
@@ -149,8 +149,8 @@ class Dungeon {
                 reqsList.push(req.hint());
             }
         });
-        if (this.optionalParameters.dungeonDungeonRequirement ? !this.optionalParameters.dungeonDungeonRequirement.isCompleted() : false) {
-            reqsList.push(this.optionalParameters.dungeonDungeonRequirement.hint());
+        if (this.optionalParameters.requirement ? !this.optionalParameters.requirement.isCompleted() : false) {
+            reqsList.push(this.optionalParameters.requirement.hint());
         }
         return reqsList;
     }
