@@ -153,7 +153,7 @@
     <!--Route 115 extension-->
     <%- include('templates/mapRoute',
         { route: 115, region: 2
-        , width: 2, height: 3
+        , width: 1, height: 3
         , x: 1, y: 10
         , noText: true
         })
@@ -458,6 +458,14 @@
         , x: 33, y: 41
         })
     %>
+    <%- include('templates/mapRoute',
+        { route: 134, region: 2
+        , width: 3, height: 1
+        , x: 39, y: 40
+        , isExtension: true
+        , noText: true
+        })
+    %>
 
     <!-- ----- -->
     <!-- TOWNS -->
@@ -534,8 +542,8 @@
     <!--Mt. Chimney-->
     <%- include('templates/mapTown',
         { name: "Mt. Chimney"
-        , x: 21, y: 11
-        , width: 8, height: 5
+        , x: 21, y: 10
+        , width: 8, height: 6
         })
     %>
     <!--Mt. Chimney extension-->
@@ -726,15 +734,36 @@
     <%- include('templates/mapDungeon',
         { name: "Granite Cave"
         , x: 4, y: 54
-        , width: 4, height: 4
+        , width: 4, height: 3
+        })
+    %>
+    <%- include('templates/mapDungeon',
+        { name: "Granite Cave"
+        , x: 3, y: 55
+        , width: 1, height: 4
+        , isExtension: true
+        })
+    %>
+    <%- include('templates/mapDungeon',
+        { name: "Granite Cave"
+        , x: 4, y: 57
+        , width: 2, height: 1
+        , isExtension: true
+        })
+    %>
+    <%- include('templates/mapDungeon',
+        { name: "Granite Cave"
+        , x: 4, y: 58
+        , width: 1, height: 1
+        , isExtension: true
         })
     %>
 
     <!--Fiery Path-->
     <%- include('templates/mapDungeon',
         { name: "Fiery Path"
-        , x: 21, y: 11
-        , width: 8, height: 5
+        , x: 21, y: 10
+        , width: 8, height: 6
         , moveToTown: "Mt. Chimney"
         , invisible: true
         })
@@ -743,8 +772,8 @@
     <!--Mt. Chimney Crater-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Chimney Crater"
-        , x: 21, y: 11
-        , width: 8, height: 5
+        , x: 21, y: 10
+        , width: 8, height: 6
         , moveToTown: "Mt. Chimney"
         , invisible: true
         })
@@ -753,8 +782,8 @@
     <!--Jagged Pass-->
     <%- include('templates/mapDungeon',
         { name: "Jagged Pass"
-        , x: 21, y: 11
-        , width: 8, height: 5
+        , x: 21, y: 10
+        , width: 8, height: 6
         , moveToTown: "Mt. Chimney"
         , invisible: true
         })
@@ -763,8 +792,8 @@
     <!--Magma Hideout-->
     <%- include('templates/mapDungeon',
         { name: "Magma Hideout"
-        , x: 21, y: 11
-        , width: 8, height: 5
+        , x: 21, y: 10
+        , width: 8, height: 6
         , moveToTown: "Mt. Chimney"
         , invisible: true
         })
@@ -776,11 +805,26 @@
         , x: 32, y: 27
         })
     %>
+    <%- include('templates/mapDungeon',
+        { name: "New Mauville"
+        , x: 33, y: 30
+        , width: 3, height: 1
+        , isExtension: true
+        })
+    %>
 
     <!--Meteor Falls-->
     <%- include('templates/mapDungeon',
         { name: "Meteor Falls"
-        , x: 3, y: 10
+        , x: 2, y: 7
+        , width: 5, height: 6
+        })
+    %>
+    <%- include('templates/mapDungeon',
+        { name: "Meteor Falls"
+        , x: 3, y: 6
+        , width: 4, height: 1
+        , isExtension: true
         })
     %>
 
@@ -795,15 +839,15 @@
     <!--Mt. Pyre-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Pyre"
-        , x: 58, y: 18
-        , width: 4, height: 4
+        , x: 58, y: 17
+        , width: 4, height: 5
         })
     %>
     <!--Mt. Pyre extension-->
     <%- include('templates/mapDungeon',
         { name: "Mt. Pyre"
-        , x: 62, y: 19
-        , width: 1, height: 3
+        , x: 62, y: 18
+        , width: 1, height: 4
         , isExtension: true
         })
     %>
@@ -817,8 +861,8 @@
     <!--Aqua Hideout extension-->
     <%- include('templates/mapDungeon',
         { name: "Aqua Hideout"
-        , x: 73, y: 11
-        , width: 1, height: 2
+        , x: 72, y: 11
+        , width: 2, height: 2
         , isExtension: true
         })
     %>
@@ -856,14 +900,21 @@
     <%- include('templates/mapDungeon',
         { name: "Victory Road Hoenn"
         , x: 92, y: 35
-        , width: 7, height: 4
+        , width: 8, height: 4
         })
     %>
     <!--Hoenn Victory Road extension-->
     <%- include('templates/mapDungeon',
         { name: "Victory Road Hoenn"
-        , x: 95, y: 34
-        , width: 3, height: 1
+        , x: 93, y: 34
+        , width: 6, height: 1
+        , isExtension: true
+        })
+    %>
+    <%- include('templates/mapDungeon',
+        { name: "Victory Road Hoenn"
+        , x: 92, y: 39
+        , width: 6, height: 1
         , isExtension: true
         })
     %>

@@ -16,4 +16,8 @@ export default class SafariCatchRequirement extends AchievementRequirement {
     public hint(): string {
         return `${this.requiredValue}${this.shiny ? ' Shiny' : ''} Pokémon needs to be captured in a Safari Zone.`;
     }
+
+    public toString(): string {
+        return `${super.toString()} ${this.shiny}`;
+    }
 }

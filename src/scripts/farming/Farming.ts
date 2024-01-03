@@ -581,7 +581,7 @@ class Farming implements Feature {
             BerryColor.Pink,
             25,
             BerryFirmness.Soft,
-            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20 inches.']
+            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20\u2033, or 50 cm.']
         );
 
         this.berryData[BerryType.Durin] = new Berry(
@@ -2260,9 +2260,9 @@ class Farming implements Feature {
 
     public auraDisplay(berry: BerryType, stage: number) {
         if (App.game.farming.berryData[berry].aura.auraType === AuraType.Repel) { // add other additive auras here with ||
-            return `+${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage] * 100)}%`;
+            return `+${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         } else {
-            return `×${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage])}`;
+            return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         }
     }
 

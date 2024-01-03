@@ -15,13 +15,19 @@ exports[`DailyDeal > generates the same deals as last build > 2023-01-01 1`] = `
     "item2": "Flame Plate",
   },
   {
-    "amount1": 2,
+    "amount1": 3,
+    "amount2": 3,
+    "item1": "Icicle Plate",
+    "item2": "Lime Shard",
+  },
+  {
+    "amount1": 3,
     "amount2": 1,
     "item1": "Icicle Plate",
     "item2": "Old Amber",
   },
   {
-    "amount1": 1,
+    "amount1": 3,
     "amount2": 2,
     "item1": "Sky Plate",
     "item2": "Moon Stone",
@@ -51,7 +57,7 @@ exports[`DailyDeal > generates the same deals as last build > 2023-01-01 1`] = `
     "item2": "Flame Plate",
   },
   {
-    "amount1": 1,
+    "amount1": 3,
     "amount2": 1,
     "item1": "Insect Plate",
     "item2": "Cyan Shard",
@@ -86,7 +92,7 @@ exports[`DailyDeal > generates the same deals as last build > 2023-05-01 1`] = `
     "item2": "Heart Scale",
   },
   {
-    "amount1": 1,
+    "amount1": 3,
     "amount2": 1,
     "item1": "Rare Bone",
     "item2": "Flame Plate",
@@ -157,13 +163,13 @@ exports[`DailyDeal > generates the same deals as last build > 2023-09-01 1`] = `
     "item2": "Fossilized Drake",
   },
   {
-    "amount1": 3,
+    "amount1": 2,
     "amount2": 1,
     "item1": "Insect Plate",
     "item2": "Fossilized Dino",
   },
   {
-    "amount1": 3,
+    "amount1": 1,
     "amount2": 1,
     "item1": "Fossilized Bird",
     "item2": "Sky Plate",
@@ -181,7 +187,7 @@ exports[`DailyDeal > generates the same deals as last build > 2023-09-01 1`] = `
     "item2": "Ice Stone",
   },
   {
-    "amount1": 1,
+    "amount1": 3,
     "amount2": 1,
     "item1": "Zap Plate",
     "item2": "Everstone",

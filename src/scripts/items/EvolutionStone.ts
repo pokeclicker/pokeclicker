@@ -108,3 +108,5 @@ ItemList.Auspicious_armor   = new EvolutionStone(GameConstants.StoneType.Auspici
 ItemList.Malicious_armor   = new EvolutionStone(GameConstants.StoneType.Malicious_armor, 5000, undefined , 'Malicious Armor');
 ItemList.Leaders_crest   = new EvolutionStone(GameConstants.StoneType.Leaders_crest, 5000, undefined , 'Leader\'s Crest');
 ItemList.Gimmighoul_coin   = new EvolutionStone(GameConstants.StoneType.Gimmighoul_coin, 5000, undefined , 'Gimmighoul Coin');
+ItemList.Syrupy_apple   = new EvolutionStone(GameConstants.StoneType.Syrupy_apple, 5000, undefined , 'Syrupy Apple');
+ItemList.Unremarkable_teacup   = new EvolutionStone(GameConstants.StoneType.Unremarkable_teacup, 5000, undefined , 'Unremarkable Teacup');

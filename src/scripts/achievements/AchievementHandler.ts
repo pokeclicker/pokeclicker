@@ -166,7 +166,7 @@ class AchievementHandler {
     }
 
     public static achievementBonusPercent(): string {
-        return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
+        return `${AchievementHandler.achievementBonus().toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
 
     public static findByName(name: string): Achievement {
@@ -315,7 +315,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs.', new HatchRequirement(10), 0.04);
         AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs.', new HatchRequirement(100), 0.15);
         AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs.', new HatchRequirement(1000), 0.3);
-        AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs.', new HatchRequirement(10000), 0.4);
+        AchievementHandler.addAchievement('Official Easter Bunny', 'Hatch 10,000 eggs.', new HatchRequirement(10000), 0.4);
         AchievementHandler.addAchievement('What Do You Do With All the Eggshells?', 'Hatch 100,000 eggs.', new HatchRequirement(100000), 0.5);
         AchievementHandler.addAchievement('Day Care Is My Home', 'Hatch 250,000 eggs.', new HatchRequirement(250000), 0.7);
 
@@ -394,14 +394,12 @@ class AchievementHandler {
         AchievementHandler.addAchievement('In the Shadow of Giants', 'Capture your first Shadow Pokémon', new ShadowPokemonRequirement(1), 1, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('That\'s some Shady Pokémon! Do You Want to Sell Them?', 'Capture 10 unique Shadow Pokémon', new ShadowPokemonRequirement(10), 2, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Now Go Purify Them!', 'Capture 51 unique Shadow Pokémon', new ShadowPokemonRequirement(51), 4, GameConstants.ExtraAchievementCategories.orre);
-        // Commented out until Orre XD content is released
-        //AchievementHandler.addAchievement('Beyond a Shadow of a Doubt', 'Capture all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131), 8, GameConstants.ExtraAchievementCategories.orre);
+        AchievementHandler.addAchievement('Beyond a Shadow of a Doubt', 'Capture all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131), 8, GameConstants.ExtraAchievementCategories.orre);
 
         AchievementHandler.addAchievement('Cleaning Crew', 'Purify your first Shadow Pokémon', new ShadowPokemonRequirement(1, GameConstants.ShadowStatus.Purified), 1.5, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Almost Clean Enough to Look Shiny', 'Purify 10 unique Shadow Pokémon', new ShadowPokemonRequirement(10, GameConstants.ShadowStatus.Purified), 3, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Priest in Training', 'Purify 51 unique Shadow Pokémon', new ShadowPokemonRequirement(51, GameConstants.ShadowStatus.Purified), 6, GameConstants.ExtraAchievementCategories.orre);
-        // Commented out until Orre XD content is released
-        //AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
+        AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
 
         AchievementHandler.addAchievement('Who Dropped These Here?', 'Pick up 10 Items in a Safari Zone', new SafariItemsRequirement(10), 0.1);
         AchievementHandler.addAchievement('Cheaper Than Buying It', 'Pick up 50 Items in a Safari Zone', new SafariItemsRequirement(50), 0.2);
@@ -544,11 +542,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('All These Flavors And You Choose To Be Cheesy', 'Catch all unique Shiny Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch all unique Shiny Alcremie flavors.', alcremieAmount, true), 1.5, GameConstants.Region.galar);
 
         // Gigantamax pokédex for Galar
-        // COMMENTED UNTIL GIGANTAMAX ARE OUT OF DEV.
-        // const gigaDexFilter = (p: PartyPokemon) => p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax')
-        // const gigaAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax')), 0);
-        // AchievementHandler.addAchievement('The Gigantadventure', 'Catch all Gigantamax Pokémon.', new CaughtUniquePokemonByFilterRequirement(gigaDexFilter, 'Catch all Gigantamax Pokémon.', gigaAmount), 2, GameConstants.Region.galar);
-        // AchievementHandler.addAchievement('A Dwarf Shining On The Shoulders Of Giants', 'Catch all Shiny Gigantamax Pokémon.', new CaughtUniquePokemonByFilterRequirement(gigaDexFilter, 'Catch all Shiny Gigantamax Pokémon.', gigaAmount, true), 3, GameConstants.Region.galar);
+        const gigaDexFilter = (p: PartyPokemon) => p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax');
+        const gigaAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax')), 0);
+        AchievementHandler.addAchievement('Way Too Many Bosses', 'Catch all Gigantamax Pokémon.', new CaughtUniquePokemonByFilterRequirement(gigaDexFilter, 'Catch all Gigantamax Pokémon.', gigaAmount), 2, GameConstants.Region.galar);
+        AchievementHandler.addAchievement('Really Big Sparkle', 'Catch all Shiny Gigantamax Pokémon.', new CaughtUniquePokemonByFilterRequirement(gigaDexFilter, 'Catch all Shiny Gigantamax Pokémon.', gigaAmount, true), 3, GameConstants.Region.galar);
 
         /*
          * MINIREGIONS
