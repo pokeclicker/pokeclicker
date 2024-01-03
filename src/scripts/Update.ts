@@ -2632,6 +2632,31 @@ class Update implements Saveable {
             delete settingsData.breedingTypeFilter1;
             settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
             delete settingsData.breedingTypeFilter2;
+
+            // Update breeding filters to use numeric values
+            ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingType1Filter', 'breedingType2Filter', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
+                .forEach((filter) => {
+                    if (settingsData[filter]?.length && !isNaN(Number.parseInt(settingsData[filter]))) {
+                        settingsData[filter] = Number.parseInt(settingsData[filter]);
+                    } else {
+                        delete settingsData[filter];
+                    }
+                });
+
+            // Represent 'any type' as null to match pokedex settings
+            if (settingsData.breedingType1Filter == -2) {
+                settingsData.breedingType1Filter = null;
+            }
+            if (settingsData.breedingType2Filter == -2) {
+                settingsData.breedingType2Filter = null;
+            }
+
+            // Rename settings to accurately describe purpose
+            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
+            delete settingsData.pokedexShinyFilter;
+            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
+            delete settingsData.breedingDisplayFilter;
+
         },
     };
 
