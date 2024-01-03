@@ -9,4 +9,8 @@ export default abstract class AchievementRequirement extends Requirement {
     ) {
         super(requiredValue, option);
     }
+
+    public toString(): string {
+        return `${this.constructor.name} ${this.option}`;
+    }
 }

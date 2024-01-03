@@ -118,6 +118,7 @@ RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Cresselia', new Cle
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Thundurus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
+RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Genesect (High-Speed)', new QuestLineCompletedRequirement('The Legend Awakened')));
 
 // Kalos
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Zapdos', new ClearDungeonRequirement(1, getDungeonIndex('Sea Spirit\'s Den'))));
@@ -126,9 +127,9 @@ RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Articuno', new Clear
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Hoopa', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)));
 
 // Alola
-RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
-RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
-RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
 // Magikarp Jump
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Purple Diamonds', new GymBadgeRequirement(BadgeEnums.Luxury_League)));
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Apricot Stripes', new GymBadgeRequirement(BadgeEnums.Heal_League)));
@@ -180,7 +181,7 @@ RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Pikachu (Clone)', ne
 // Let's Go Pikachu Eevee (Nov 16 - Nov 23)
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu', new SpecialEventRequirement('Let\'s GO!')));
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee', new SpecialEventRequirement('Let\'s GO!')));
-// Christmas (Dec 24 - Dec 30)
+// Christmas (Dec 18 - Dec 31)
 // Add to every roaming group that has at least one roamer
 RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
     regionGroups.forEach((_, subRegionGroup) => {
@@ -189,3 +190,4 @@ RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
         }
     });
 });
+RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Reindeer Stantler', new SpecialEventRequirement('Merry Christmas!')));
