@@ -344,6 +344,7 @@ export const SpriteCredits: Credit[] = [
             'Mr Stone',
             'New Island Overworld',
             'Peat Block',
+            'Peonia',
             'Pikachu (Clone)',
             'Pikachu (Easter)',
             'Pinkan Arbok',
