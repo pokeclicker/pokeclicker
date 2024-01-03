@@ -73,7 +73,7 @@ class Quests implements Saveable {
      * Gets a quest line by name
      * @param name The quest line name
      */
-    getQuestLine(name: string) {
+    getQuestLine(name: QuestLineNameType) {
         return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
     }
 
@@ -313,7 +313,7 @@ class Quests implements Saveable {
                 if (questLine.state == QuestLineState.inactive) {
                     return;
                 }
-                const ql = this.getQuestLine(questLine.name);
+                const ql = this.getQuestLine(questLine.name as QuestLineNameType);
                 if (ql) {
                     ql.state(questLine.state);
                     if (questLine.state == QuestLineState.started || questLine.state == QuestLineState.suspended) {

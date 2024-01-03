@@ -4,7 +4,6 @@ import { ItemList } from '../items/ItemList';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import Amount from '../wallet/Amount';
-import { Underground } from './Underground';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 
@@ -45,7 +44,7 @@ export class ShardDeal {
         } else if (deal.questPointCost > App.game.wallet.currencies[Currency.questPoint]()) {
             return false;
         } else {
-            return deal.shards.every((value) => player.getUndergroundItemAmount(value.shardType.id) >= value.amount);
+            return deal.shards.every((value) => player.itemList[value.shardType.itemName]() >= value.amount);
         }
     }
 
@@ -53,14 +52,14 @@ export class ShardDeal {
         const deal = ShardDeal.list[town]?.peek()[i];
         if (ShardDeal.canUse(town, i)) {
             const trades = deal.shards.map(shard => {
-                const amt = player.getUndergroundItemAmount(shard.shardType.id);
+                const amt = player.itemList[shard.shardType.itemName]();
                 const maxShardTrades = Math.floor(amt / shard.amount);
                 return maxShardTrades;
             });
             const qp = App.game.wallet.currencies[Currency.questPoint]();
             const maxCurrencyTrades = Math.floor(qp / deal.questPointCost);
             const maxTrades = Math.min(maxCurrencyTrades, trades.reduce((a, b) => Math.min(a, b), tradeTimes));
-            deal.shards.forEach((value) => Underground.gainMineItem(value.shardType.id, -value.amount * maxTrades));
+            deal.shards.forEach((value) => player.loseItem(value.shardType.itemName, value.amount * maxTrades));
 
             const amount = deal.item.amount * maxTrades;
             deal.item.itemType.gain(deal.item.amount * maxTrades);

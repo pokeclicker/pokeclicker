@@ -5933,7 +5933,7 @@ TemporaryBattleList['Max Raid Cinderace'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Brawler\'s Cave',
+        returnTown: 'Brawlers\' Cave',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
