@@ -235,16 +235,33 @@ class MapHelper {
     }
 
     public static openShipModal() {
-        const openModal = () => {
+        if (MapHelper.accessToShip()) {
             $('#ShipModal').modal('show');
-        };
-        if (player.highestRegion() > 0 && (TownList[GameConstants.DockTowns[player.region]].isUnlocked())) {
-            openModal();
         } else {
             Notifier.notify({
                 message: `You cannot access this dock yet!${player.region > GameConstants.Region.kanto ? '\n<i>Progress further to return to previous regions!</i>' : ''}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
+        }
+    }
+
+    public static accessToShip() {
+        return player.highestRegion() > 0 && TownList[GameConstants.DockTowns[player.region]].isUnlocked();
+    }
+
+    // For moving between already-unlocked regions
+    public static moveToRegion(region: GameConstants.Region) {
+        if (MapHelper.accessToShip()) {
+            if (region <= player.highestRegion() && region <= GameConstants.MAX_AVAILABLE_REGION && region !== GameConstants.Region.none) {
+                player.region = region;
+                player._subregion(0);
+                MapHelper.moveToTown(GameConstants.DockTowns[region]);
+            } else {
+                Notifier.notify({
+                    message: 'You don\'t have access to that location right now.',
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+            }
         }
     }
 
@@ -266,9 +283,9 @@ class MapHelper {
             // Gain queue slots based on highest region
             App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
             GameHelper.incrementObservable(player.highestRegion);
+            player.region = player.highestRegion();
             player.highestSubRegion(0);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
-            player.region = player.highestRegion();
             // Track when users move region and how long it took in seconds
             LogEvent('new region', 'new region',
                 GameConstants.Region[player.highestRegion()],
