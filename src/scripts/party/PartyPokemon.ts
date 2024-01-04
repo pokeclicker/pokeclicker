@@ -87,20 +87,24 @@ class PartyPokemon implements Saveable {
             const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
             return Math.floor(this._effortPoints() / GameConstants.EP_EV_RATIO / power);
         });
-        this.evs.subscribe((newValue) => {
+        const resistantSub = this.evs.subscribe((newValue) => {
             // Change Pokerus status to Resistant when reaching 50 EVs
-            if (this.pokerus && this.pokerus < GameConstants.Pokerus.Resistant && newValue >= 50) {
-                this.pokerus = GameConstants.Pokerus.Resistant;
+            if (this.pokerus && newValue >= 50) {
+                // Only notify if not yet Resistant, i.e. not when game loads already-Resistant party members
+                if (this.pokerus < GameConstants.Pokerus.Resistant) {
+                    this.pokerus = GameConstants.Pokerus.Resistant;
 
-                // Log and notify player
-                Notifier.notify({
-                    message: `${this.name} has become Resistant to Pokérus.`,
-                    pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
-                    type: NotificationConstants.NotificationOption.info,
-                    sound: NotificationConstants.NotificationSound.General.pokerus,
-                    setting: NotificationConstants.NotificationSetting.General.pokerus,
-                });
-                App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
+                    // Log and notify player
+                    Notifier.notify({
+                        message: `${this.name} has become Resistant to Pokérus.`,
+                        pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
+                        type: NotificationConstants.NotificationOption.info,
+                        sound: NotificationConstants.NotificationSound.General.pokerus,
+                        setting: NotificationConstants.NotificationSetting.General.pokerus,
+                    });
+                    App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
+                }
+                resistantSub.dispose();
             }
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
@@ -424,12 +428,20 @@ class PartyPokemon implements Saveable {
             return false;
         }
         // Only Base Pokémon without Mega Evolution
-        if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
+        if (uniqueTransformation == 'mega-unobtained' && !PokemonHelper.hasUncaughtMegaEvolution(pokemon.name)) {
             return false;
         }
         // Only Mega Pokémon
-        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+        if (uniqueTransformation == 'mega-evolution' && !PokemonHelper.isMegaEvolution(pokemon.name)) {
             return false;
+        }
+
+        // Check based on alternate form status (if native to a different region have to include for that region's progression)
+        if (BreedingFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
+            const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == region);
+            if (hasBaseFormInSameRegion) {
+                return false;
+            }
         }
 
         // Check if either of the types match

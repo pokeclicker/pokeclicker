@@ -102,23 +102,15 @@ enum BadgeEnums {
     'Elite_KalosChampion',
     // Alola
     // TODO: these are unordered and some may be missing
-    'NormaliumZ',
-    'FightiniumZ',
-    'WateriumZ',
-    'FiriumZ',
-    'GrassiumZ',
-    'RockiumZ',
-    'ElectriumZ',
-    'GhostiumZ',
-    'DarkiniumZ',
-    'DragoniumZ',
-    'FairiumZ',
-    'GroundiumZ',
+    'Melemele_Stamp',
+    'Akala_Stamp',
+    'Ula_Ula_Stamp',
+    'Poni_Stamp',
     'Elite_Olivia',
     'Elite_Acerola',
     'Elite_Molayne',
     'Elite_Kahili',
-    'Elite_AlolaChampion',
+    'Champion_Stamp',
     // Magikarp Jump
     'Friend_League',
     'Quick_League',
@@ -153,12 +145,12 @@ enum BadgeEnums {
     // Crown
     'Elite_CrownChampion',
     // Hisui
-    'Elite_NobleKleavor',
-    'Elite_NobleLilligant',
-    'Elite_NobleArcanine',
-    'Elite_NobleElectrode',
-    'Elite_NobleAvalugg',
-    'Elite_Volo',
+    'Noble_Kleavor',
+    'Noble_Lilligant',
+    'Noble_Arcanine',
+    'Noble_Electrode',
+    'Noble_Avalugg',
+    'Azure',
     //Paldea Victory Road
     'Bug_Gym',
     'Grass_Gym',
@@ -190,8 +182,8 @@ enum BadgeEnums {
     'Dragon_Titan',
     'Elite_Arven',
     // The Way Home
-    'Elite_Sada',
-    'Elite_Turo',
+    'Scarlet',
+    'Violet',
 }
 
 export default BadgeEnums;

@@ -103,7 +103,6 @@ ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 1187, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)', undefined);
-ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']     = new PokemonItem('Burmy (Plant)', 6750);
 ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
@@ -219,3 +218,12 @@ ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 500, Currency.con
 ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 1000, Currency.contestToken);
 ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 400, Currency.contestToken);
 ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 700, Currency.contestToken);
+ItemList['Sudowoodo (Golden)'] = new PokemonItem('Sudowoodo (Golden)', 2000, Currency.contestToken);
+ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)', 1000, Currency.contestToken);
+ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)', 1000, Currency.contestToken);
+ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)', 1000, Currency.contestToken);
+ItemList['Pikachu (Ph. D.)'] = new PokemonItem('Pikachu (Ph. D.)', 1000, Currency.contestToken);
+ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 1000, Currency.contestToken);
+// Event
+ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
+    { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
