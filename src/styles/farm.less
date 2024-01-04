@@ -143,11 +143,6 @@
   }
 }
 
-#berryDexPreviewTable {
-  width: 270px;
-  margin-right: -10px;
-}
-
 .berryDexButtons {
   span {
     position: absolute;
@@ -168,7 +163,7 @@
   .berryPreviewHeight {
     max-height: calc(100vh - 205px);
   }
-  
+
   .berryDexButtons {
     margin: 6px;
 
@@ -186,7 +181,7 @@
 
   .berryDexButtons {
     margin: 6px 0;
-  
+
     img {
       max-height: 90px;
      }
@@ -196,47 +191,44 @@
 @media (max-width: 767px) { // phone
   .berryPreviewHeight {
     max-height: calc(50vh - 35px);
-    margin: 1%;
   }
-  
+
   #berryDexPreviewList {
     max-height: calc(50vh - 205px);
     min-height: 100px;
   }
 
   .berryDexButtons {
-    margin: 10px 15px 0;   
+    margin: 10px 15px 0;
   }
 }
 
-#wanderRow {
-  #wanderPokemonList {
-    width: 100%;
+#wanderPokemonList {
+  width: 100%;
 
-    .list-inline-item {
-      position: relative;
-      margin-top: 7px;
+  .list-inline-item {
+    position: relative;
+    margin-top: 7px;
 
-      .lock {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-      }
-
-      .shiny {
-        position: absolute;
-        top: 10px;
-        right: -5px;
-      }
+    .lock {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
     }
 
-    .list-inline-item:nth-child(n+6) {
-      margin-top: 14px;
+    .shiny {
+      position: absolute;
+      top: 10px;
+      right: -5px;
     }
+  }
 
-    .no-pokerus {
-      margin-bottom: -10px;
-    }
+  .list-inline-item:nth-child(n+6) {
+    margin-top: 14px;
+  }
+
+  .no-pokerus {
+    margin-bottom: -10px;
   }
 }
