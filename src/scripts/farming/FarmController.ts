@@ -243,7 +243,7 @@ class FarmController {
 
     // For preview in Farm Modal's BerryDex Tab
     public static handleBerryDexClick(berryId: number) {
-        if ($('#berry-panel').val() === berryId && App.game.farming.unlockedBerries[berryId]()) {
+        if (App.game.statistics.selectedBerryID() === berryId && App.game.farming.unlockedBerries[berryId]()) {
             $('#berryDexModal').modal('show');
         }
 

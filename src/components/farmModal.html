@@ -229,7 +229,7 @@
                             <div class="sticky-top">
                                 <div class="modal-header bg-dark text-light" style='justify-content-left: space-around;'>
                                     <h5 class="p-0 modal-title text-light" data-bind="text: BerryType[$data]">Berry Statistics</h5>
-                                    <h5 id="berry-panel" class="p-0 modal-title text-muted" data-bind="text: `#${(Number($data) + 1).toString().padStart(2,0)}&nbsp;&nbsp;`, value: $data"></h5>
+                                    <h5 id="berry-panel" class="p-0 modal-title text-muted" data-bind="text: `#${(Number($data) + 1).toString().padStart(2,0)}&nbsp;&nbsp;`"></h5>
                                 </div>
                             </div>
                             <div class="mt-2">
@@ -330,10 +330,10 @@
                                                       </tr>
                                                 </table>
                                                 </td>
-                                            </tr>  
+                                            </tr>
                                             <!-- /ko -->
                                         </tbody>
-                                    </tr>    
+                                    </tr>
                                         <!-- /ko -->
                                         <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->
                                         <thead>
