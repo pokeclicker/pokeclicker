@@ -74,8 +74,8 @@
                   <td class="text-left tight">
                     <code>
                       <span data-bind="text: App.game.party.getPokemon($data).evs().toLocaleString('en-US')">-</span><span
-                        class="text-muted" data-bind="visible: App.game.party.getPokemon($data).calculateEVs() - App.game.party.getPokemon($data).evs() > 0.009,
-                        text: '.' + Math.floor(100 * App.game.party.getPokemon($data).calculateEVs() - 100 * App.game.party.getPokemon($data).evs())">-</span>
+                        class="text-muted" data-bind="visible: Math.floor(1000 * App.game.party.getPokemon($data).calculateEVs()) % 1000 > 0.00099,
+                        text: '.' + Math.floor(1000 * App.game.party.getPokemon($data).calculateEVs()) % 1000">-</span>
                     </code>
                   </td>
                 </tr>
