@@ -267,6 +267,7 @@ export const SpriteCredits: Credit[] = [
             'Bill\'s Grandpa without Eevee',
             'Black Augurite',
             'Black mane hair big icon',
+            'Blank Plate (item and underground)',
             'Blimp base',
             'Butler',
             'Camp map sprite',
