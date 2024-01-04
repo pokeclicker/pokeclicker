@@ -185,7 +185,7 @@
                 </div>
 
                 <div id="berryDexView" class="tab-pane fade">
-                    <div data-bind="visible: Settings.getSetting('berryDexMode').observableValue() === 'classic'">
+                    <div data-bind="if: Settings.getSetting('berryDexMode').observableValue() === 'classic'">
                         <ul class="row justify-content-center p-0" data-bind="foreach: FarmController.getUnlockedBerryList()"
                             style="max-width: 100%; padding:0; margin:0;">
                             <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
@@ -204,7 +204,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="row w-100" data-bind="visible: Settings.getSetting('berryDexMode').observableValue() === 'preview'">
+                    <div class="row w-100" data-bind="if: Settings.getSetting('berryDexMode').observableValue() === 'preview'">
                         <div id="berryDexPreviewList" class="berryPreviewHeight mt-2 col-12 col-md"  style="overflow-y: auto;">
                             <ul class="row justify-content-center p-0 pl-2" data-bind="foreach: FarmController.getUnlockedBerryList()"
                                 style="max-width: 100%; padding:0; margin:0;">
