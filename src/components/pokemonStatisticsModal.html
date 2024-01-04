@@ -71,8 +71,13 @@
                 <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
                 <tr>
                   <td class="text-left">EVs</td>
-                  <td class="text-left tight"><code
-                      data-bind="text: App.game.party.getPokemon($data).evs().toLocaleString('en-US')">-</code></td>
+                  <td class="text-left tight">
+                    <code>
+                      <span data-bind="text: App.game.party.getPokemon($data).evs().toLocaleString('en-US')">-</span><span
+                        class="text-muted" data-bind="visible: App.game.party.getPokemon($data).calculateEVs() - App.game.party.getPokemon($data).evs() > 0.009,
+                        text: '.' + Math.floor(100 * App.game.party.getPokemon($data).calculateEVs() - 100 * App.game.party.getPokemon($data).evs())">-</span>
+                    </code>
+                  </td>
                 </tr>
                 <tr>
                   <td class="text-left">EV bonus</td>
