@@ -85,7 +85,7 @@ UndergroundItems.addItem(new UndergroundGemItem(113, 'Stone_plate', [[1, 1, 1, 1
 UndergroundItems.addItem(new UndergroundGemItem(114, 'Toxic_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Poison));
 UndergroundItems.addItem(new UndergroundGemItem(115, 'Zap_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Electric));
 UndergroundItems.addItem(new UndergroundGemItem(116, 'Pixie_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Fairy));
-UndergroundItems.addItem(new UndergroundGemItem(117, 'Blank Plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Normal));
+UndergroundItems.addItem(new UndergroundGemItem(117, 'Blank_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Normal));
 
 // Fossils/Fossil Pieces
 UndergroundItems.addItem(new UndergroundItem(200, 'Helix_fossil', [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
