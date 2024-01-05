@@ -29493,11 +29493,11 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [StoneEvolution('Capsakid', 'Scovillian', StoneType.Fire_stone)],
+        'evolutions': [StoneEvolution('Capsakid', 'Scovillain', StoneType.Fire_stone)],
     },
     {
         'id': 952,
-        'name': 'Scovillian',
+        'name': 'Scovillain',
         'type': [PokemonType.Grass, PokemonType.Fire],
         'base': {
             'hitpoints': 65,
