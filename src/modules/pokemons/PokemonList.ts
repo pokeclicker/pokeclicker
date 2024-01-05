@@ -31155,7 +31155,9 @@ pokemonList.forEach((p) => {
         // Calculate evolutions egg steps to be higher than the base forms
         (p as PokemonListData).evolutions?.forEach((evo) => {
             const poke = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
-            if (!evo.ignoreECChange) {
+            if (evo.ignoreECChange) {
+                poke.eggCycles = Math.max(poke.eggCycles, p.eggCycles);
+            } else {
                 poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
             }
 
