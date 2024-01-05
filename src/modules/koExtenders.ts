@@ -27,8 +27,8 @@ ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
         },
     }).extend({ notify: 'always' });
 
-    // initialize with current value to make sure it is rounded appropriately
-    result(target());
+    // initialize with current value to make sure it is rounded appropriately, forcibly converting NaN to 0
+    result(Number.isNaN(Number(target())) ? 0 : target());
 
     // return the new computed observable
     return result;
