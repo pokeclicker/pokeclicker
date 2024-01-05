@@ -2598,7 +2598,7 @@ GymList['Pokémon Trainer Arven'] = new Gym(
     [
         new GymPokemon('Greedent', 203123316, 58),
         new GymPokemon('Cloyster', 203123316, 59),
-        new GymPokemon('Scovillian', 203123316, 60),
+        new GymPokemon('Scovillain', 203123316, 60),
         new GymPokemon('Toedscruel', 203123316, 61),
         new GymPokemon('Garganacl', 203123316, 62),
         new GymPokemon('Mabosstiff', 203123316, 63),
