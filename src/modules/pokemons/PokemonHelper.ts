@@ -79,7 +79,7 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
     if (partyPokemon) {
         if (shiny === undefined) {
             // eslint-disable-next-line no-param-reassign
-            shiny = partyPokemon.shiny && !partyPokemon.hideShinyImage() && !Settings.getSetting('partyHideShinyImages').observableValue();
+            shiny = partyPokemon.shiny && !partyPokemon.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue();
         }
         if (gender === undefined) {
             // eslint-disable-next-line no-param-reassign

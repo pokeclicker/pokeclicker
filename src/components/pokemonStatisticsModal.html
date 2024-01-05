@@ -151,7 +151,7 @@
                 <!-- /ko -->
                 <!-- ko if: App.game.party.getPokemon($data)?.shiny -->
                 <tr>
-                  <td class="text-left align-middle text-nowrap">Hide Shiny Image</td>
+                  <td class="text-left align-middle text-nowrap">Hide Shiny Sprite</td>
                   <td class="text-left tight">
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
@@ -163,13 +163,13 @@
                   </td>
                 </tr>
                 <tr>
-                  <!-- ko let: { partyHideShinyImages: Settings.getSetting('partyHideShinyImages') } -->
-                  <td class="text-left align-middle text-nowrap" data-bind="text: GameConstants.camelCaseToString(partyHideShinyImages.displayName)">Hide Party Shiny Images</td>
+                  <!-- ko let: { partyHideShinySprites: Settings.getSetting('partyHideShinySprites') } -->
+                  <td class="text-left align-middle text-nowrap" data-bind="text: GameConstants.camelCaseToString(partyHideShinySprites.displayName)">Hide Party Shiny Sprites</td>
                   <td class="text-left tight">
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
-                        data-bind="checked: partyHideShinyImages.observableValue"
-                        onchange="Settings.setSettingByName('partyHideShinyImages', this.checked)">
+                        data-bind="checked: partyHideShinySprites.observableValue"
+                        onchange="Settings.setSettingByName('partyHideShinySprites', this.checked)">
                       <div class="toggler-slider">
                         <div class="toggler-knob"></div>
                       </div>

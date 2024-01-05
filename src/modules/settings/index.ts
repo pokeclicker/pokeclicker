@@ -187,7 +187,7 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
  */
 
 // Party
-Settings.add(new BooleanSetting('partyHideShinyImages', 'Hide party shiny images', false));
+Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
 
 // Party Sorting
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
