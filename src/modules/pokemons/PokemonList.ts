@@ -25285,6 +25285,25 @@ export const pokemonList = createPokemonArray(
         'catchRate': 255,
     },
     {
+        'id': 840.01,
+        'name': 'Exposed Applin',
+        'type': [
+            PokemonType.Dragon,
+        ],
+        'base': {
+            'hitpoints': 40,
+            'attack': 40,
+            'specialAttack': 40,
+            'defense': 40,
+            'specialDefense': 40,
+            'speed': 40,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.erratic,
+        'exp': 52,
+        'catchRate': 255,
+    },
+    {
         'id': 841,
         'name': 'Flapple',
         'type': [
