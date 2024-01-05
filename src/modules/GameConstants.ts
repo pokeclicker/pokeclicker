@@ -111,6 +111,8 @@ export enum HisuiSubRegions {
 
 export enum PaldeaSubRegions {
     Paldea = 0,
+    Kitakami,
+    BlueberryAcademy
 }
 
 export enum FinalSubRegions {

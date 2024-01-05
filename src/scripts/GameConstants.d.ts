@@ -732,6 +732,8 @@ namespace GameConstants {
     }
     declare enum PaldeaSubRegions {
         Paldea,
+        Kitakami,
+        BlueberryAcademy,
     }
     declare enum FinalSubRegions {
         Final,
