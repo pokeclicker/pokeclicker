@@ -111,6 +111,7 @@ export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => {
     const data = evo(...rest);
+    data.ignoreECChange = true;
     return restrict(
         data,
         new MegaEvolveRequirement(data.basePokemon, megaStone),
