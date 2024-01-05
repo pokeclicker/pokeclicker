@@ -312,7 +312,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>
+                                                <td class="p-0">
                                                     <ul id="wanderPokemonList" class="list-inline" data-bind="foreach: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.includes(w) && !Berry.colorWander[App.game.farming.berryData[$data].color].includes(w))">
                                                         <li class="list-inline-item">
                                                             <!-- ko if: App.game.party.getPokemonByName($data)?.pokerus -->
