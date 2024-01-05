@@ -133,10 +133,30 @@ export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
     return !!P.pokemonMap[pokemonName].evolutions?.some((e) => e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
 }
 
+export function hasUncaughtMegaEvolution(pokemonName: PokemonNameType): boolean {
+    return !!P.pokemonMap[pokemonName].evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon) && e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
+}
+
 export function getMegaStones(pokemonName: PokemonNameType): MegaStoneItem[] {
     return GameHelper.enumStrings(MegaStoneType)
         .filter(s => (ItemList[s] as MegaStoneItem)?.basePokemon == pokemonName)
         .map(s => ItemList[s] as MegaStoneItem);
+}
+
+export function hasGigantamaxForm(pokemonName: PokemonNameType): boolean {
+    return P.pokemonMap[`Gigantamax ${pokemonName}`].id > 0 || P.pokemonMap[`Eternamax ${pokemonName}`].id > 0;
+}
+
+export function hasUncaughtGigantamaxForm(pokemonName: PokemonNameType): boolean {
+    let gmaxForm = P.pokemonMap[`Gigantamax ${pokemonName}`];
+    if (gmaxForm.id <= 0) {
+        gmaxForm = P.pokemonMap[`Eternamax ${pokemonName}`];
+    }
+    return gmaxForm.id > 0 && !App.game.party.alreadyCaughtPokemon(gmaxForm.id);
+}
+
+export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
+    return pokemonName.startsWith('Gigantamax') || pokemonName.startsWith('Eternamax');
 }
 
 // To have encounter/caught/defeat/hatch statistics in a single place

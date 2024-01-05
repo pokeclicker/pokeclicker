@@ -91,15 +91,6 @@ class Player {
 
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
 
-        // TODO(@Isha) move to underground classes.
-        const mineInventory = (savedPlayer.mineInventory || [])
-            // TODO: Convert this to object spread after we're on TS modules
-            .map((v) => Object.assign({}, v, {
-                amount: ko.observable(v.amount),
-                sellLocked: ko.observable(v.sellLocked),
-            }));
-        this.mineInventory = ko.observableArray(mineInventory);
-
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer();
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
@@ -112,9 +103,6 @@ class Player {
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
-
-    // TODO(@Isha) move to underground classes.
-    public mineInventory: KnockoutObservableArray<any>;
 
     public _lastSeen: number;
 
@@ -225,33 +213,6 @@ class Player {
         }
     }
 
-    // TODO(@Isha) move to underground classes.
-    public hasMineItems() {
-        for (let i = 0; i < this.mineInventory().length; i++) {
-            if (this.mineInventory()[i].amount() > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // TODO(@Isha) move to underground classes.
-    public mineInventoryIndex(id: number): number {
-        return player.mineInventory().findIndex(i => i.id == id);
-    }
-
-    // TODO(@Isha) move to underground classes.
-    public getUndergroundItemAmount(id: number) {
-        const mineItem = player.mineInventory().find(i => i.id == id);
-        if (mineItem) {
-            return mineItem.amount();
-        }
-        if (UndergroundItems.getById(id)?.valueType == UndergroundItemValueType.EvolutionItem) {
-            return player.itemList[GameConstants.StoneType[UndergroundItems.getById(id).type]]?.() ?? 0;
-        }
-        return 0;
-    }
-
     public toJSON() {
         const keep = [
             '_route',
@@ -260,8 +221,6 @@ class Player {
             '_townName',
             '_itemList',
             '_itemMultipliers',
-            // TODO(@Isha) remove.
-            'mineInventory',
             '_lastSeen',
             '_timeTraveller',
             '_origins',
