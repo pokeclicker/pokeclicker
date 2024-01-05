@@ -80,6 +80,7 @@
                   title: $data.description ? `<u>${$data.displayName}:</u><br/>${$data.description}` : '',
                   trigger: 'hover',
                   placement:'bottom',
+                  boundary: 'clippingParents',
                   html: true
                 }">
                <knockout data-bind="if: ($data instanceof PokemonItem)">
