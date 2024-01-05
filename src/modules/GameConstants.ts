@@ -917,6 +917,7 @@ export enum StoneType {
     'Gimmighoul_coin',
     'Syrupy_apple',
     'Unremarkable_teacup',
+    'Metal_alloy',
 }
 
 export enum FossilPieceType {
