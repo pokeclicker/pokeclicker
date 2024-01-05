@@ -204,10 +204,10 @@
                         </ul>
                     </div>
                     <div data-bind="if: Settings.getSetting('berryDexMode').observableValue() === 'preview'">
-                        <div class="d-flex flex-wrap">
-                            <div id="berryDexPreviewList" class="berryPreviewHeight col-12 col-lg-8 col-md-6 mt-2" style="overflow-y: auto;">
+                        <div id="berryDexPreviewContainer" class="d-flex flex-wrap">
+                            <div id="berryDexPreviewList" class="berryDexPreviewColumn col-12 col-lg-8 col-md-6 mt-2" style="overflow-y: auto;">
                                 <ul class="d-flex flex-wrap justify-content-center p-0 m-0" data-bind="foreach: FarmController.getUnlockedBerryList()">
-                                    <li class="col-5 col-lg-2 col-md-10 d-flex flex-column align-items-center mx-2 my-1 p-0 btn" data-bind="css: {
+                                    <li class="col-5 col-lg-2 col-md-10 d-flex flex-column align-items-center mx-2 my-1 p-0 berryDexButtons btn" data-bind="css: {
                                         'btn-primary': App.game.statistics.selectedBerryID() === $data,
                                         'btn-secondary': App.game.statistics.selectedBerryID() != $data,
                                         'disabled': !App.game.farming.unlockedBerries[$data]() && !FarmController.getHint($data,true)
@@ -226,7 +226,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div id="berryDexPreviewTable" class="berryPreviewHeight col-12 col-lg-4 col-md-6 mt-2" style="overflow-y: auto; overflow-x: hidden;">
+                            <div id="berryDexPreviewTable" class="berryDexPreviewColumn col-12 col-lg-4 col-md-6 mt-2" style="overflow-y: auto; overflow-x: hidden;">
                                 <!-- ko using: App.game.statistics.selectedBerryID() -->
                                 <div class="sticky-top">
                                     <div class="modal-header bg-dark text-light">

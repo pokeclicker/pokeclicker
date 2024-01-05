@@ -57,15 +57,6 @@
   }
 }
 
-/* Themes that can have longer BerryDex on phone */
-.cosmo, .cyborg, .lumen, .pulse, .sketchy, .sandstone, .simplex, .solar {
-  @media (max-width: 767px) {
-    .berryPreviewHeight {
-      max-height: calc(50vh);
-    }
-  }
-}
-
 /* Individual themes */
 .cerulean {
   /* Evolution items */
@@ -122,13 +113,11 @@
   }
 }
 
-.journal {
-  // center berry images on berrydex preview
-  @media (min-width: 992px) {
-    .berryDexButtons {
-      img {
-        padding-top: 4px;
-        padding-bottom: 3px;
+.litera {
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      @media (max-height: 650px) {
+        max-height: calc(40vh - 50px);
       }
     }
   }
@@ -173,40 +162,19 @@
   }
 
   /* Berrydex List */
-  #berryDexPreviewTable {
-    width: 360px;
-  }
-
-  @media (min-width: 992px) {
-    .berryDexButtons {
-      img {
-        padding: 12px 0;
-        scale: (270%);
-      }
-    }
-  }
-
   @media (max-width: 991px) {
-    .berryPreviewHeight {
+    .berryDexPreviewColumn {
       max-height: calc(100vh - 240px);
-    }
-
-    .berryDexButtons {
-      img {
-        transform: scale(50%);
-      }
-    }
-  
-      #berryDexPreviewList {
-      .btn {
-        padding: 0;
-      }
     }
   }
 
   @media (max-width: 767px) {
-    .berryPreviewHeight {
-      max-height: calc(50vh - 60px);
+    #berryDexPreviewList {
+      max-height: calc(50vh - 50px);
+
+      @media (max-height: 393px) {
+        max-height: calc(40vh - 55px);
+      }
     }
   }
 }
@@ -237,13 +205,6 @@
         color: black;
       }
     }
-}
-
-.sandstone{
-  /* Berrydex List */
-  #berryDexPreviewTable {
-    width: 300px;
-  }
 }
 
 .simplex {
@@ -334,6 +295,17 @@
     }
   }
 
+  // BerryDex
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      max-height: calc(50vh - 50px);
+
+      @media (max-height: 393px) {
+        max-height: calc(40vh - 50px);
+      }
+    }
+  }
+
   // Evolution items modal
   #showItemsModal {
     .item-selected {
@@ -362,6 +334,20 @@
     background: rgba(255, 255, 255, 20%);
   }
 
+  .berryDexButtons.btn-secondary {
+    background: rgba(0,0,0,0%);
+
+    span {
+      color: var(--secondary);
+    }
+  }
+
+  .berryDexButtons:hover {
+    span {
+      color: whitesmoke;
+    }
+  }
+
   // Evolution items modal
   #evo-item-list, #evo-pokemon-list {
     .item-selected, .pokemon-selected {
@@ -377,20 +363,6 @@
   // Main page
   .card.border-secondary, #pokemonList {
     color: #a0b6b8;
-  }
-
-  .berryDexButtons {
-    background: rgba(0,0,0,0%);
-
-    span {
-      color: var(--secondary);
-    }
-  }
-
-  .berryDexButtons:hover {
-    span {
-      color: whitesmoke;
-    }
   }
 }
 

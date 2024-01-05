@@ -143,63 +143,31 @@
   }
 }
 
-.berryDexButtons {
-  span {
-    position: absolute;
-    left: 0;
-    right: 0;
-  }
-
-  span.id::before {
-    content: '#';
-  }
-
-  img {
-    transform: scale(70%);
-  }
-}
-
 @media (min-width: 992px) { // computer
-  .berryPreviewHeight {
+  .berryDexPreviewColumn {
     max-height: calc(100vh - 205px);
-  }
-
-  .berryDexButtons {
-    margin: 6px;
-
-    img {
-      max-width: 120%;
-      margin-left: -10%;
-     }
   }
 }
 
 @media (max-width: 991px) { // tablet
-  .berryPreviewHeight {
+  .berryDexPreviewColumn {
     max-height: calc(100vh - 225px);
-  }
-
-  .berryDexButtons {
-    margin: 6px 0;
-
-    img {
-      max-height: 90px;
-     }
   }
 }
 
 @media (max-width: 767px) { // phone
-  .berryPreviewHeight {
-    max-height: calc(50vh - 35px);
+  #berryDexPreviewContainer {
+    flex-direction: column-reverse;
   }
 
   #berryDexPreviewList {
-    max-height: calc(50vh - 205px);
-    min-height: 100px;
+    max-height: calc(47vh - 5px);
+    @media (max-height: 550px) {
+      max-height: calc(40vh - 50px);
+    }
   }
-
-  .berryDexButtons {
-    margin: 10px 15px 0;
+  #berryDexPreviewTable {
+    max-height: calc(50vh - 205px);
   }
 }
 
