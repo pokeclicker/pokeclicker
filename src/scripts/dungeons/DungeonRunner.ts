@@ -82,6 +82,7 @@ class DungeonRunner {
             } else {
                 DungeonRunner.dungeonLost();
             }
+            return;
         }
         if (DungeonRunner.map.playerMoved()) {
             DungeonRunner.timeLeft(DungeonRunner.timeLeft() - GameConstants.DUNGEON_TICK);

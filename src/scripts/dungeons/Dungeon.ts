@@ -379,7 +379,7 @@ class Dungeon {
         let pokemonName: PokemonNameType;
         let hideEncounter = false;
 
-        const getEncounterInfo = (pokemonName, mimic) => {
+        const getEncounterInfo = (pokemonName, mimicData) => {
             const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
             const encounter = {
                 image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
@@ -388,10 +388,10 @@ class Dungeon {
                 shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
                 hide: hideEncounter,
                 uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                lock: false,
-                lockMessage: '',
-                mimic: mimic,
-                mimicTier: this.getMimicTier(pokemonName),
+                lock: !!mimicData?.lockedMessage,
+                lockMessage: mimicData?.lockedMessage ?? '',
+                mimic: !!mimicData,
+                mimicTier: mimicData?.tier,
             };
             return encounter;
         };
@@ -414,7 +414,7 @@ class Dungeon {
         // Handling Mimics
         this.getCaughtMimics().forEach(enemy => {
             pokemonName = <PokemonNameType>enemy;
-            encounterInfo.push(getEncounterInfo(pokemonName, true));
+            encounterInfo.push(getEncounterInfo(pokemonName, this.getMimicData(pokemonName)));
         });
 
         return encounterInfo;
@@ -467,8 +467,16 @@ class Dungeon {
         return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
     });
 
-    public getMimicTier(pokemonName: PokemonNameType): LootTier {
-        return (Object.keys(this.lootTable) as LootTier[]).find((tier) => this.lootTable[tier].find((loot) => loot.loot == pokemonName));
+    public getMimicData(pokemonName): {tier: LootTier, lockedMessage: string} {
+        let res;
+        (Object.keys(this.lootTable) as LootTier[]).forEach(tier => {
+            this.lootTable[tier].forEach(loot => {
+                if (loot.loot === pokemonName) {
+                    res = {tier: tier, lockedMessage: (loot.requirement?.isCompleted() ?? true) ? '' : loot.requirement.hint()};
+                }
+            });
+        });
+        return res;
     }
 }
 
@@ -1235,6 +1243,7 @@ dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
             {loot: 'Aspear'},
         ],
         rare: [{loot: 'Blue Shard'}],
+        epic : [{loot: 'Snorlax (Snowman)', ignoreDebuff : true, requirement : new SpecialEventRequirement('Merry Christmas!')}],
         legendary: [{loot: 'Revive'}],
         mythic: [{loot: 'Ultraball'}],
     },
@@ -1930,7 +1939,7 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
             {loot: 'Magost'},
             {loot: 'Watmel'},
         ],
-        legendary: [{loot: 'Pink_Bow'}],
+        legendary: [{loot: 'Fairy_Feather'}],
         mythic: [{loot: 'Heart Scale'}],
     },
     1503000,
@@ -2761,7 +2770,7 @@ dungeonList['Tohjo Falls'] = new Dungeon('Tohjo Falls',
         legendary: [
             {loot: 'Hard Stone'},
             {loot: 'SmallRestore'},
-            {loot: 'Pink_Bow'},
+            {loot: 'Fairy_Feather'},
             {loot: 'Rock_Incense'},
         ],
         mythic: [{loot: 'Max Revive'}],
@@ -7635,6 +7644,7 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
             {loot: 'Black Shard'},
         ],
         epic: [
+            {loot: 'Blank Plate'},
             {loot: 'Draco Plate'},
             {loot: 'Dread Plate'},
             {loot: 'Earth Plate'},
@@ -7755,7 +7765,7 @@ dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
             {loot: 'Yellow Shard'},
             {loot: 'White Shard'},
         ],
-        epic: [{loot: 'Icicle Plate'}],
+        epic: [{loot: 'Blank Plate'}],
         legendary: [
             {loot: 'LargeRestore'},
             {loot: 'Never_Melt_Ice'},
@@ -9775,6 +9785,7 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
             {loot: 'Red Shard'},
             {loot: 'White Shard'},
         ],
+        epic: [{loot: 'Blank Plate'}],
         legendary: [
             {loot: 'Hard Stone'},
             {loot: 'Revive'},
@@ -10478,7 +10489,7 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
         ],
         legendary: [
             {loot: 'LargeRestore'},
-            {loot: 'Pink_Bow'},
+            {loot: 'Fairy_Feather'},
         ],
         mythic: [{loot: 'Quick_Powder'}],
     },
@@ -11658,7 +11669,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
             {loot: 'Pink Shard'},
         ],
         epic: [{loot: 'Pixie Plate'}],
-        legendary: [{loot: 'Pink_Bow'}],
+        legendary: [{loot: 'Fairy_Feather'}],
         mythic: [{loot: 'Heart Scale'}],
     },
     16217412,
@@ -12271,7 +12282,7 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
             {loot: 'Pink Shard'},
         ],
         epic: [{loot: 'LargeRestore'}],
-        legendary: [{loot: 'Pink_Bow'}],
+        legendary: [{loot: 'Fairy_Feather'}],
     },
     23764848,
     [
@@ -12700,13 +12711,8 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
             {loot: 'Flame Plate'},
         ],
         legendary: [
-            {loot: 'Hard Stone'},
-            {loot: 'Heat Rock'},
-            {loot: 'Icy Rock'},
-            {loot: 'Everstone'},
-            {loot: 'Rare Bone'},
-            {loot: 'Star Piece'},
-            {loot: 'Max Revive'},
+            {loot: 'Fastball'},
+            {loot: 'Repeatball'},
         ],
     },
     33565196,
@@ -12769,8 +12775,16 @@ dungeonList['Max Lair'] = new Dungeon('Max Lair',
             {loot: 'Draco Plate'},
             {loot: 'Toxic Plate'},
         ],
-        legendary: [{loot: 'Max Revive'}],
-        mythic: [{loot: 'Heart Scale'}],
+        legendary: [
+            {loot: 'Duskball'},
+            {loot: 'Quickball'},
+            {loot: 'Fastball'},
+            {loot: 'Repeatball'},
+        ],
+        mythic: [
+            {loot: 'Carbos', weight: 2},
+            {loot: 'Rare_Candy'},
+        ],
     },
     33915762,
     [

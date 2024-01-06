@@ -5099,6 +5099,27 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 124.01,
+        'name': 'Santa Jynx',
+        'catchRate': 45,
+        'type': [PokemonType.Ice, PokemonType.Psychic],
+        'levelType': LevelType.mediumfast,
+        'exp': 159,
+        'eggCycles': 25,
+        'base': {
+            'hitpoints': 65,
+            'attack': 50,
+            'specialAttack': 115,
+            'defense': 35,
+            'specialDefense': 95,
+            'speed': 95,
+        },
+        'heldItem': { type: ItemType.item, id: 'Christmas_present' },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
         'id': 125,
         'name': 'Electabuzz',
         'catchRate': 45,
@@ -6359,6 +6380,26 @@ export const pokemonList = createPokemonArray(
     {
         'id': 143.02,
         'name': 'Santa Snorlax',
+        'catchRate': 25,
+        'type': [PokemonType.Normal, PokemonType.Fairy],
+        'levelType': LevelType.slow,
+        'exp': 189,
+        'eggCycles': 40,
+        'base': {
+            'hitpoints': 160,
+            'attack': 110,
+            'specialAttack': 65,
+            'defense': 65,
+            'specialDefense': 110,
+            'speed': 30,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 143.03,
+        'name': 'Snorlax (Snowman)',
         'catchRate': 25,
         'type': [PokemonType.Normal, PokemonType.Ice],
         'levelType': LevelType.slow,
@@ -9159,6 +9200,23 @@ export const pokemonList = createPokemonArray(
         'exp': 163,
         'eggCycles': 20,
         'evolutions': [LevelEvolution('Stantler', 'Wyrdeer', 31)],
+        'base': {
+            'hitpoints': 73,
+            'attack': 95,
+            'specialAttack': 85,
+            'defense': 62,
+            'specialDefense': 65,
+            'speed': 85,
+        },
+    },
+    {
+        'id': 234.01,
+        'name': 'Reindeer Stantler',
+        'catchRate': 45,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.slow,
+        'exp': 163,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 73,
             'attack': 95,
@@ -14257,17 +14315,15 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
-    },
-    {
+    },    {
         'id': 446.01,
         'name': 'Elf Munchlax',
-        'type': [PokemonType.Normal],
-        'eggCycles': 40,
+        'type': [PokemonType.Normal, PokemonType.Fairy],
+        'eggCycles': 32,
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell)],
-        'baby': true,
+        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
         'base': {
             'hitpoints': 135,
             'attack': 85,
@@ -25229,6 +25285,25 @@ export const pokemonList = createPokemonArray(
         'catchRate': 255,
     },
     {
+        'id': 840.01,
+        'name': 'Exposed Applin',
+        'type': [
+            PokemonType.Dragon,
+        ],
+        'base': {
+            'hitpoints': 40,
+            'attack': 40,
+            'specialAttack': 40,
+            'defense': 40,
+            'specialDefense': 40,
+            'speed': 40,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.erratic,
+        'exp': 52,
+        'catchRate': 255,
+    },
+    {
         'id': 841,
         'name': 'Flapple',
         'type': [
@@ -29437,11 +29512,11 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [StoneEvolution('Capsakid', 'Scovillian', StoneType.Fire_stone)],
+        'evolutions': [StoneEvolution('Capsakid', 'Scovillain', StoneType.Fire_stone)],
     },
     {
         'id': 952,
-        'name': 'Scovillian',
+        'name': 'Scovillain',
         'type': [PokemonType.Grass, PokemonType.Fire],
         'base': {
             'hitpoints': 65,
@@ -31085,12 +31160,12 @@ pokemonList.forEach((p) => {
     if ((p as PokemonListData).baby) {
         // Calculate prevolutions/baby pokemon
         // Egg steps should be lower than evolved form
+        const linemap = function (evoPokemon: PokemonNameType) {
+            pokemonBabyPrevolutionMap[evoPokemon] = p.name;
+            (pokemonList.find(_p => _p.name === evoPokemon) as PokemonListData).evolutions?.forEach(ee => linemap(ee.evolvedPokemon));
+        };
         (p as PokemonListData).evolutions?.forEach((evo) => {
-            pokemonBabyPrevolutionMap[evo.evolvedPokemon] = evo.basePokemon;
-            // Do another loop for adding last stage of evolution on "reproductive" pokemon
-            (pokemonList.find((_p) => _p.name === evo.evolvedPokemon) as PokemonListData).evolutions?.forEach((lastStage) => {
-                pokemonBabyPrevolutionMap[lastStage.evolvedPokemon] = lastStage.basePokemon;
-            });
+            linemap(evo.evolvedPokemon);
 
             const { eggCycles } = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
             p.eggCycles = Math.round(eggCycles * 0.8);
@@ -31099,7 +31174,11 @@ pokemonList.forEach((p) => {
         // Calculate evolutions egg steps to be higher than the base forms
         (p as PokemonListData).evolutions?.forEach((evo) => {
             const poke = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
-            poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * (evo.ignoreECChange ? 1 : 1.5)));
+            if (evo.ignoreECChange) {
+                poke.eggCycles = Math.max(poke.eggCycles, p.eggCycles);
+            } else {
+                poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
+            }
 
         });
     }
