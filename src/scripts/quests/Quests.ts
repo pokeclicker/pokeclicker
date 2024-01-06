@@ -296,12 +296,7 @@ class Quests implements Saveable {
                 if (questData.hasOwnProperty('name')) {
                     const quest = QuestHelper.createQuest(questData.name, questData.data);
                     quest.fromJSON(questData);
-                    try {
-                        // Check that this doesn't cause an error
-                        quest.description;
-                        // Add it back to the current quest list
-                        this.questList.push(quest);
-                    } catch (e) {}
+                    this.questList.push(quest);
                 } else {
                     this.questList.push(new CapturePokemonsQuest(10, 1));
                 }
