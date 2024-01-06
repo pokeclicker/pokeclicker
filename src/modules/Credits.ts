@@ -289,6 +289,7 @@ export const SpriteCredits: Credit[] = [
             'Dungeon Ladder',
             'Dungeon Chest Tiers',
             'Exeggcute (Single)',
+            'Exposed Applin',
             'Galar fossils items',
             'Galarian Articuno overworld image',
             'Galarian Moltres overworld image',
