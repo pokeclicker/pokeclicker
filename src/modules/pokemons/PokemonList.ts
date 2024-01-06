@@ -14304,7 +14304,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 50,
         'evolutions': [
             StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell),
-            DummyEvolution('Munchlax', 'Gigantamax Snorlax')
+            DummyEvolution('Munchlax', 'Gigantamax Snorlax'),
         ],
         'baby': true,
         'base': {
@@ -28063,7 +28063,7 @@ export const pokemonList = createPokemonArray(
             DummyEvolution('Kubfu', 'Urshifu (Single Strike)'),
             DummyEvolution('Kubfu', 'Urshifu (Rapid Strike)'),
             DummyEvolution('Kubfu', 'Gigantamax Urshifu (Single Strike)'),
-            DummyEvolution('Kubfu', 'Gigantamax Urshifu (Rapid Strike)')
+            DummyEvolution('Kubfu', 'Gigantamax Urshifu (Rapid Strike)'),
         ],
         'catchRate': 3,
         'eggCycles': 120,
