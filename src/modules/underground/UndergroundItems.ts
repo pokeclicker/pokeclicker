@@ -85,6 +85,7 @@ UndergroundItems.addItem(new UndergroundGemItem(113, 'Stone_plate', [[1, 1, 1, 1
 UndergroundItems.addItem(new UndergroundGemItem(114, 'Toxic_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Poison));
 UndergroundItems.addItem(new UndergroundGemItem(115, 'Zap_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Electric));
 UndergroundItems.addItem(new UndergroundGemItem(116, 'Pixie_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Fairy));
+UndergroundItems.addItem(new UndergroundGemItem(117, 'Blank_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Normal));
 
 // Fossils/Fossil Pieces
 UndergroundItems.addItem(new UndergroundItem(200, 'Helix_fossil', [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
@@ -120,6 +121,8 @@ UndergroundItems.addItem(new UndergroundEvolutionItem(306, 'Shiny_stone', [[0, 1
 UndergroundItems.addItem(new UndergroundEvolutionItem(307, 'Dusk_stone', [[1, 1, 1], [1, 1, 1], [1, 1, 0]], StoneType.Dusk_stone, 1, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundEvolutionItem(308, 'Dawn_stone', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Dawn_stone, 1, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundEvolutionItem(309, 'Ice_stone', [[1, 1, 1], [1, 1, 1]], StoneType.Ice_stone, 1, new MaxRegionRequirement(Region.alola)));
+UndergroundItems.addItem(new UndergroundEvolutionItem(310, 'Black_augurite', [[1, 0, 1], [1, 1, 1], [1, 1, 1]], StoneType.Black_augurite, 1, new MaxRegionRequirement(Region.hisui)));
+UndergroundItems.addItem(new UndergroundEvolutionItem(311, 'Peat_block', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Peat_block, 1, new MaxRegionRequirement(Region.hisui)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem(305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], StoneType.Sun_stone, 1, new StoneUnlockedRequirement(StoneType.Sun_stone)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem(306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Shiny_stone, 1, new StoneUnlockedRequirement(StoneType.Shiny_stone)));
 // UndergroundItems.addItem(new UndergroundEvolutionItem(307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], StoneType.Dusk_stone, 1, new StoneUnlockedRequirement(StoneType.Dusk_stone)));
@@ -142,7 +145,8 @@ UndergroundItems.addItem(new UndergroundItem(411, 'Pink_shard', [[1, 1, 1, 1], [
 UndergroundItems.addItem(new UndergroundItem(412, 'Cyan_shard', [[1, 1, 1, 1], [0, 1, 1, 1], [0, 0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.alola)));
 UndergroundItems.addItem(new UndergroundItem(413, 'Rose_shard', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
 UndergroundItems.addItem(new UndergroundItem(414, 'Brown_shard', [[1, 1, 0], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
-//UndergroundItems.addItem(new UndergroundItem(415, 'Beige Shard', [[0, 0, 1, 1], [0, 1, 1, 1], [0, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.hisui)));
+UndergroundItems.addItem(new UndergroundItem(415, 'Beige_shard', [[0, 0, 1, 1], [0, 1, 1, 1], [0, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.paldea)));
+UndergroundItems.addItem(new UndergroundItem(416, 'Slate_shard', [[0, 0, 0, 0], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.paldea)));
 
 // MegaStones
 UndergroundItems.addItem(new UndergroundMegaStoneItem(MegaStoneType.Aerodactylite, 500, 'Aerodactylite', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Aerodactyl', 0, 0.1));
