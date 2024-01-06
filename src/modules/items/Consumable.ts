@@ -13,5 +13,5 @@ export default class Consumable extends Item {
     ) {
         super(ConsumableType[type], basePrice, currency, options, displayName, description, 'consumable');
         this.type = type;
-    
+    }
 }
