@@ -33,7 +33,9 @@
                                                     visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                             <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px; margin: -10px; padding: 12px 0px;">
                                             <div class="d-inline-block" data-bind="text: ItemList[$data].displayName" style="margin-left: 20px; margin-top:8px;"></div>
-                                            <div class="float-right" style="margin-top: 8px" data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': ItemList[$data].getPokerusStatus() }}"></div>
+                                            <div class="float-right" style="margin-top: 8px" data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                    'pokerus': ItemList[$data].getPokerusStatus(),
+                                                    'evsProgress': ItemList[$data].getPokerusProgress() }}"></div>
                                             <!-- ko if: ItemList[$data] instanceof CaughtIndicatingItem -->
                                             <div class="float-right mr-1" style="margin-top: 8px;" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': ItemList[$data].getCaughtStatus()}}"></div>
                                             <!-- /ko -->

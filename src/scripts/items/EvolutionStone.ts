@@ -41,6 +41,20 @@ class EvolutionStone extends CaughtIndicatingItem {
             : undefined;
     });
 
+    getPokerusProgress = ko.pureComputed((): string => {
+        const statuses = this.pokemonWithEvolution().flatMap(
+            (pokemon) => PartyController.getStoneEvolutionsPokerusData(pokemon.id, this.type)
+        );
+
+        if (statuses.length > 0) {
+            const current = statuses.reduce((progress, { evs }) => progress += Math.min(50, evs) , 0);
+            const total = statuses.length * 50;
+            return total === current ? 'All Pokémon are resistant!' : `EVs until all Pokémon are resistant: ${current} / ${total}`;
+        } else {
+            return undefined;
+        }
+    });
+
     init() {
         // If a region has already been manually set
         if (this.unlockedRegion > GameConstants.Region.none) {
