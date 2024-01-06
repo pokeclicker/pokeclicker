@@ -587,13 +587,17 @@
                         </button>
 
                         <button type="button" class="btn btn-primary" data-bind="
-                            click: () => FarmController.toggleAllPlotsLocked(true),
+                            click: () => FarmController.toggleAllPlotLocksTo(true),
                             tooltip: { title: 'Lock all plots.', trigger: 'hover', animation: false }
                         ">All</button>
                         <button type="button" class="btn btn-primary" data-bind="
-                            click: () => FarmController.toggleAllPlotsLocked(false),
+                            click: () => FarmController.toggleAllPlotLocksTo(false),
                             tooltip: { title: 'Unlock all plots.', trigger: 'hover', animation: false }
                         ">None</button>
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: () => FarmController.toggleAllPlotLocks(),
+                            tooltip: { title: 'Flips which plots are locked.', trigger: 'hover', animation: false }
+                        ">Flip</button>
                     </div>
                 </div>
 
