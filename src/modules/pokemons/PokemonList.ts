@@ -25285,6 +25285,25 @@ export const pokemonList = createPokemonArray(
         'catchRate': 255,
     },
     {
+        'id': 840.01,
+        'name': 'Exposed Applin',
+        'type': [
+            PokemonType.Dragon,
+        ],
+        'base': {
+            'hitpoints': 40,
+            'attack': 40,
+            'specialAttack': 40,
+            'defense': 40,
+            'specialDefense': 40,
+            'speed': 40,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.erratic,
+        'exp': 52,
+        'catchRate': 255,
+    },
+    {
         'id': 841,
         'name': 'Flapple',
         'type': [
@@ -31141,12 +31160,12 @@ pokemonList.forEach((p) => {
     if ((p as PokemonListData).baby) {
         // Calculate prevolutions/baby pokemon
         // Egg steps should be lower than evolved form
+        const linemap = function (evoPokemon: PokemonNameType) {
+            pokemonBabyPrevolutionMap[evoPokemon] = p.name;
+            (pokemonList.find(_p => _p.name === evoPokemon) as PokemonListData).evolutions?.forEach(ee => linemap(ee.evolvedPokemon));
+        };
         (p as PokemonListData).evolutions?.forEach((evo) => {
-            pokemonBabyPrevolutionMap[evo.evolvedPokemon] = evo.basePokemon;
-            // Do another loop for adding last stage of evolution on "reproductive" pokemon
-            (pokemonList.find((_p) => _p.name === evo.evolvedPokemon) as PokemonListData).evolutions?.forEach((lastStage) => {
-                pokemonBabyPrevolutionMap[lastStage.evolvedPokemon] = lastStage.basePokemon;
-            });
+            linemap(evo.evolvedPokemon);
 
             const { eggCycles } = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
             p.eggCycles = Math.round(eggCycles * 0.8);
@@ -31155,7 +31174,9 @@ pokemonList.forEach((p) => {
         // Calculate evolutions egg steps to be higher than the base forms
         (p as PokemonListData).evolutions?.forEach((evo) => {
             const poke = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
-            if (!evo.ignoreECChange) {
+            if (evo.ignoreECChange) {
+                poke.eggCycles = Math.max(poke.eggCycles, p.eggCycles);
+            } else {
                 poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
             }
 
