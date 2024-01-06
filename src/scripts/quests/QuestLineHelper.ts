@@ -4289,7 +4289,7 @@ const zCrystalGet = (crystalType: PokemonType) => () => {
     Notifier.notify({
         title: 'Z Crystal',
         message: `<img width="60" src="assets/images/items/zCrystal/${GameConstants.zCrystalItemType[crystalType]}.svg"/> You got the ${GameConstants.zCrystalItemType[crystalType]}!`,
-        timeout: 30,
+        timeout: 1e4,
     });
 };
 const createZCrystalTrial = (crystalType: PokemonType, dungeon: string, captain: string, successMessage: string, questName: QuestLine, nonTrial?: boolean, nonTrialDescription?: string, nonTrialBoss?: string) => {
