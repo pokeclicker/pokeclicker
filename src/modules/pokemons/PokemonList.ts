@@ -24215,7 +24215,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [
             StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', StoneType.Solar_light),
             StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', StoneType.Lunar_light),
@@ -24240,7 +24240,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [StoneEvolution('Necrozma (Dusk Mane)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
@@ -24261,7 +24261,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [StoneEvolution('Necrozma (Dawn Wings)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
@@ -24282,7 +24282,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'base': {
             'hitpoints': 97,
             'attack': 167,
