@@ -241,5 +241,14 @@ class FarmController {
         return tooltip.join('<br>');
     });
 
+    // For preview in Farm Modal's BerryDex Tab
+    public static handleBerryDexClick(berryId: number) {
+        if (App.game.statistics.selectedBerryID() === berryId && App.game.farming.unlockedBerries[berryId]()) {
+            $('#berryDexModal').modal('show');
+        }
+
+        App.game.statistics.selectedBerryID(berryId);
+    }
+
 }
 
