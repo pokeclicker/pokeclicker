@@ -1320,6 +1320,7 @@ export type PokemonNameType
     | 'Coalossal'
     | 'Gigantamax Coalossal'
     | 'Applin'
+    | 'Exposed Applin'
     | 'Flapple'
     | 'Gigantamax Flapple'
     | 'Appletun'
