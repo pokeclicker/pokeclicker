@@ -4731,8 +4731,8 @@ TownList['Distortion World'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar')),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'), GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('A New World', 9),
+                new QuestLineStepCompletedRequirement('A New World', 10, GameConstants.AchievementOption.less),
             ]),
             new TemporaryBattleRequirement('Zero'),
         ]),
@@ -8852,7 +8852,6 @@ const JubilifeVillageShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Black_augurite,
-    ItemList.Peat_block,
 ]);
 
 // Hisui NPCs
