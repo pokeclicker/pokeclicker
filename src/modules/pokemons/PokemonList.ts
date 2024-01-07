@@ -25559,6 +25559,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
             LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
+            DummyEvolution('Toxel', 'Gigantamax Toxtricity'),
         ],
     },
     {
