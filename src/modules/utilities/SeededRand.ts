@@ -1,14 +1,16 @@
 import { MINUTE, HOUR } from '../GameConstants';
 
 export default class SeededRand {
-    public static state = 12345;
-    public static readonly MOD: number = 233280;
-    public static readonly OFFSET: number = 49297;
-    public static readonly MULTIPLIER: number = 9301;
+    public static state = 1234567890;
+    public static readonly MAX_UINT_32: number = 2 ** 32 - 1;
+    public static readonly MULTIPLIER: number = 987654321;
 
     public static next(): number {
-        this.state = (this.state * this.MULTIPLIER + this.OFFSET) % this.MOD;
-        return this.state / this.MOD;
+        this.state ^= this.state << 13;
+        this.state ^= this.state >> 17;
+        this.state ^= this.state << 5;
+        this.state = Math.abs(this.state * this.MULTIPLIER) % this.MAX_UINT_32;
+        return this.state / this.MAX_UINT_32;
     }
 
     public static seedWithDate(d: Date): void {
