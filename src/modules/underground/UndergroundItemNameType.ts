@@ -42,6 +42,7 @@ type UndergroundItemNameType
     | 'Toxic Plate'
     | 'Zap Plate'
     | 'Pixie Plate'
+    | 'Blank Plate'
     | 'Helix Fossil'
     | 'Dome Fossil'
     | 'Old Amber'
@@ -81,7 +82,8 @@ type UndergroundItemNameType
     | 'Pink Shard'
     | 'Cyan Shard'
     | 'Rose Shard'
-    | 'Brown Shard';
-    //| 'Beige Shard';
+    | 'Brown Shard'
+    | 'Beige Shard'
+    | 'Slate Shard';
 
 export default UndergroundItemNameType;

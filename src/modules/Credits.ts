@@ -117,6 +117,8 @@ export const SpriteCredits: Credit[] = [
         image: 'https://www.smogon.com/forums/media/zracknel-beta.svg.m.1',
         resources: [
             'Adaman',
+            'AI Sada',
+            'AI Turo',
             'Akari',
             'Allister',
             'Arezu',
@@ -244,7 +246,16 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
-        name: 'DraK4y',
+        name: 'DommyThicc',
+        link: 'https://discordapp.com/users/519860373890007050/',
+        resources: [
+            'Chobin',
+            'Cipher Admin Ardos',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
+        name: 'DraKay',
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-121.png',
         resources: [
@@ -257,13 +268,18 @@ export const SpriteCredits: Credit[] = [
             'Bill\'s Grandpa without Eevee',
             'Black Augurite',
             'Black mane hair big icon',
+            'Blank Plate (item and underground)',
             'Blimp base',
             'Butler',
             'Camp map sprite',
+            'Cipher Admin Lovrina',
+            'Cipher Commander Exol',
+            'Cipher Peon Yellosix',
             'Charitative chansey shuffle',
             'Client Island town image',
             'Clouds',
             'Clown Jessie & James',
+            'Cosplay Pikachu Shuffle Icons',
             'Cracked pot big icon',
             'Danny',
             'Day cycle images',
@@ -274,14 +290,17 @@ export const SpriteCredits: Credit[] = [
             'Dungeon Ladder',
             'Dungeon Chest Tiers',
             'Exeggcute (Single)',
+            'Exposed Applin',
             'Galar fossils items',
             'Galarian Articuno overworld image',
             'Galarian Moltres overworld image',
             'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
+            'Gimmighoul Coin',
             'Go-Rock Squad Commander',
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
+            'Sudowoodo (Golden) Shop Icon',
             'Grotle (Acorn)',
             'Grotle (Acorn) Shop Icon',
             'Grotle and Friends',
@@ -328,10 +347,11 @@ export const SpriteCredits: Credit[] = [
             'Naganadel (Overworld)',
             'New Island Overworld',
             'Peat Block',
+            'Peonia',
             'Pikachu (Clone)',
+            'Pikachu (Easter)',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
-            'Pink Bow',
             'Pink Butterfree',
             'Pinkan Caterpie',
             'Pinkan Diglett',
@@ -349,6 +369,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Weezing',
             'Professor Burnet',
             'Purify Icon',
+            'Robo Groudon',
             'Roddy Tackle',
             'Rudy',
             'Rusted Shield and Sword icons',
@@ -454,6 +475,7 @@ export const SpriteCredits: Credit[] = [
             'Silvally (Rock) Shuffle',
             'Silvally (Steel) Shuffle',
             'Silvally (Water) Shuffle',
+            'Snorlax (Snowman)',
             'Snover Berry and Trees',
             'Snover (Berry)',
             'Spooky Togepi (shiny)',
@@ -467,6 +489,9 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Aliana',
             'Team Magma and Aqua Admins',
             'Team Magma Grunts',
+            'Thug Zook',
+            'Togepi (Flowering Crown)',
+            'Torchic (Egg)',
             'Tourist Couple/Bellhop',
             'Tower of Darkness',
             'Tower of Waters',
@@ -538,6 +563,7 @@ export const SpriteCredits: Credit[] = [
         image: 'assets/images/profile/trainer-119.png',
         resources: [
             'Dugtrio (Punk)',
+            'Genesect (High-Speed) and Drive Forms',
             'Koga Trainer',
             'Miracle Chest',
             'Pinkan Geodude',
@@ -548,6 +574,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Oddish',
             'Pinkan Primeape',
             'Pinkan Venonat',
+            'Reindeer Stantler',
             'Spooky Ivysaur',
             'Spooky Venusaur',
         ],
@@ -643,9 +670,40 @@ export const SpriteCredits: Credit[] = [
         image: 'https://avatars.githubusercontent.com/u/14893450?v=4',
         resources: [
             'Egg Hunter',
-            'Surprise Togepi',
         ],
         // NOTES: Permission given via PRs
+    },
+    {
+        name: 'JorMxDos',
+        link: 'https://www.deviantart.com/jormxdos',
+        image: 'https://a.deviantart.net/avatars-big/j/o/jormxdos.png?8',
+        resources: [
+            'All Vectorized Badges images',
+            'Vectorized Z Crystals',
+        ],
+        // NOTES: Permission given in the bio comment section
+    },
+    {
+        name: 'Jostav',
+        link: 'https://discordapp.com/users/823666951565344828/',
+        resources: [
+            'Cipher Peon (yellow)',
+            'XD001',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
+        name: 'Kelp1490',
+        link: 'https://discordapp.com/users/463397969102766080/',
+        resources: [
+            'cipher Admin Eldes',
+            'Cipher Admin Gorigan',
+            'Cipher Admin Snattle',
+            'Cipher Peon Browsix',
+            'Cipher Peon Greesix',
+            'Cipher Peon Purpsix',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'Kensuyjin33',
@@ -688,44 +746,67 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Artist (Gen 8)',
             'Artist (male)',
+            'Arven',
             'Battle Café Master',
             'Beni',
             'Beni (Ninja)',
             'Bill',
+            'Blue-LGPE',
             'Blue-Masters',
+            'Brassius',
+            'Clavell',
             'Clover',
             'Cook (Gen 8)',
             'Cyllene',
+            'Dendra',
             'Fairy Tale Girl',
             'Gaeric',
+            'Geeta',
             'Gen 8 Reporter (Lucy Stevens)',
+            'Hassel',
             'Hex Maniac',
             'Hiker (Gen 8)',
             'Ingo',
+            'Iono',
             'Iscan',
+            'Jacq',
             'Kamado',
             'Kamado (Armor)',
+            'Katy',
+            'Kofu',
             'Kurt',
+            'Larry',
             'Laventon',
             'Looker',
             'Melli',
+            'Miriam',
             'Mr. Fuji',
+            'Nemona',
             'Owner',
             'Palina',
+            'Poppy',
             'Prof. Birch',
             'Prof. Elm',
             'Prof. Rowan',
             'Punk Girl',
             'Punk Guy',
             'Rail Staff',
+            'Rika',
             'Red-Masters',
+            'Ryme',
+            'Sada',
             'Scratch Cat Girl (Alola Mom)',
             'Sightseer (male)',
             'Sky Trainer (female)',
             'Sky Trainer (male)',
+            'Team Star Grunt (female)',
+            'Team Star Grunt (male)',
             'Triathlete',
             'Tourist (female)',
             'Tourist (male)',
+            'Tulip',
+            'Turo',
+            'Tyme',
             'Worker (female)',
         ],
         // Notes: Permission given on image page if credited.
@@ -744,7 +825,10 @@ export const SpriteCredits: Credit[] = [
             'Lunala (Overworld)',
             'Mega Houndoom (Overworld)',
             'Mega Manectric (Overworld)',
-            'Necromza (Overworld)',
+
+            'Mega Mewtwo X (Overworld)',
+            'Mega Mewtwo Y (Overworld)',
+
             'Primal Groudon (Overworld)',
             'Primal Kyogre (Overworld)',
             'Reshiram (Overworld)',
@@ -985,6 +1069,14 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'Robbinspook',
+        link: 'https://discordapp.com/users/359364624526868480/',
+        resources: [
+            'Grand Master Greevil',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'SageDeoxys, Wolfang62, LarryTurbo, tammyclaydon',
         link: 'https://www.pokecommunity.com/showthread.php?t=474312',
         resources: [
@@ -1014,6 +1106,7 @@ export const SpriteCredits: Credit[] = [
             'Alola Sprites',
             'Galar Sprites',
             'Kalos Sprites',
+            'Paldea Sprites',
         ],
         // NOTES: free for non-profit use.
     },
@@ -1028,9 +1121,12 @@ export const SpriteCredits: Credit[] = [
             'Cissy',
             'Cipher Key Lair',
             'Miror B. Peons', // placeholder
+            'Cipher Peon Blusix',
+            'Cipher Peon Resix',
             'Cipher Peon (skrub)',
             'Cipher Peon (mirakle b)',
             'Coastland route map sprites',
+            'Christmas Present',
             'Crystalline Cocoon',
             'Dead tree map sprite',
             'Detective Pikachu',
@@ -1038,7 +1134,9 @@ export const SpriteCredits: Credit[] = [
             'Dr Cozmo',
             'Draconid Elder',
             'Dyna Tree',
+            'Elf Munchlax Shuffle',
             'Friend Safari',
+            'Sudowoodo (Golden)',
             'Heart Diamond',
             'Iceland route map sprites',
             'Macro Cosmos (male) and (female)',
@@ -1056,6 +1154,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Blue Raindrops',
             'Magikarp Saucy Violet',
             'Magikarp Violet Raindrops',
+            'Max Raid Den map sprites (active and inactive)',
             'Meta Groudon',
             'Millis Steel',
             'Mireland route map sprites',
@@ -1081,6 +1180,7 @@ export const SpriteCredits: Credit[] = [
             'Realgam Tower',
             'Riot',
             'Salazzle overworld images',
+            'Santa Jynx',
             'Shadow Aipom',
             'Shadow Bayleef',
             'Shadow Delibird',
@@ -1109,7 +1209,6 @@ export const SpriteCredits: Credit[] = [
             'Gengar (Punk)',
             'Tangela (Pom-pom)',
             'Goldeen (Diva)',
-            'XD001',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },
@@ -1186,9 +1285,17 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.smogon.com/forums/threads/zacweavile-galery.3712625/',
         image: 'https://www.smogon.com/forums/media/data/avatars/o/522/522483.jpg?1650909371',
         resources: [
+            'Atticus',
             'Charm',
             'Coin',
             'Dexio (Gen 6)',
+            'Eri',
+            'Giacomo',
+            'Green',
+            'Grusha',
+            'Mela',
+            'Ortega',
+            'Penny',
         ],
         // Notes: Permission given if credited.
     },
@@ -1236,7 +1343,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1427,
+            1431,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -1252,7 +1359,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            462,
+            464,
         ],
         name: 'Aegyo',
         link: 'https://github.com/Aegyo',
@@ -1268,7 +1375,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            229,
+            246,
         ],
         name: 'Jaaslet',
         link: 'https://github.com/Jaaslet',
@@ -1284,11 +1391,27 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            125,
+            147,
         ],
         name: 'Qwertypop04',
         link: 'https://github.com/Qwertypop04',
         image: 'https://avatars.githubusercontent.com/u/63805905?v=4',
+    },
+    {
+        resources: [
+            133,
+        ],
+        name: 'CypherX',
+        link: 'https://github.com/CypherX',
+        image: 'https://avatars.githubusercontent.com/u/672420?v=4',
+    },
+    {
+        resources: [
+            115,
+        ],
+        name: 'Farboo171',
+        link: 'https://github.com/Farboo171',
+        image: 'https://avatars.githubusercontent.com/u/109317224?v=4',
     },
     {
         resources: [
@@ -1300,27 +1423,11 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            82,
-        ],
-        name: 'Farboo171',
-        link: 'https://github.com/Farboo171',
-        image: 'https://avatars.githubusercontent.com/u/109317224?v=4',
-    },
-    {
-        resources: [
             78,
         ],
         name: 'jk13pclick',
         link: 'https://github.com/jk13pclick',
         image: 'https://avatars.githubusercontent.com/u/83479938?v=4',
-    },
-    {
-        resources: [
-            76,
-        ],
-        name: 'CypherX',
-        link: 'https://github.com/CypherX',
-        image: 'https://avatars.githubusercontent.com/u/672420?v=4',
     },
     {
         resources: [
@@ -1332,6 +1439,22 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            63,
+        ],
+        name: 'RegisCoaxans',
+        link: 'https://github.com/RegisCoaxans',
+        image: 'https://avatars.githubusercontent.com/u/68825215?v=4',
+    },
+    {
+        resources: [
+            61,
+        ],
+        name: 'osherwott',
+        link: 'https://github.com/osherwott',
+        image: 'https://avatars.githubusercontent.com/u/114451054?v=4',
+    },
+    {
+        resources: [
             52,
         ],
         name: 'BaineGames',
@@ -1340,11 +1463,11 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            45,
+            50,
         ],
-        name: 'osherwott',
-        link: 'https://github.com/osherwott',
-        image: 'https://avatars.githubusercontent.com/u/114451054?v=4',
+        name: 'EatPant2nd',
+        link: 'https://github.com/EatPant2nd',
+        image: 'https://avatars.githubusercontent.com/u/106291026?v=4',
     },
     {
         resources: [
@@ -1356,15 +1479,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            36,
-        ],
-        name: 'RegisCoaxans',
-        link: 'https://github.com/RegisCoaxans',
-        image: 'https://avatars.githubusercontent.com/u/68825215?v=4',
-    },
-    {
-        resources: [
-            34,
+            39,
         ],
         name: 'Crobat4',
         link: 'https://github.com/Crobat4',
@@ -1372,7 +1487,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            34,
+            35,
         ],
         name: 'DraKay',
         link: 'https://github.com/DraKay',
@@ -1398,21 +1513,21 @@ export const CodeCredits: Credit[] = [
         resources: [
             28,
         ],
+        name: 'dependabot[bot]',
+        link: 'https://github.com/apps/dependabot',
+        image: 'https://avatars.githubusercontent.com/in/29110?v=4',
+    },
+    {
+        resources: [
+            28,
+        ],
         name: 'tkatchen',
         link: 'https://github.com/tkatchen',
         image: 'https://avatars.githubusercontent.com/u/26515965?v=4',
     },
     {
         resources: [
-            25,
-        ],
-        name: 'EatPant2nd',
-        link: 'https://github.com/EatPant2nd',
-        image: 'https://avatars.githubusercontent.com/u/106291026?v=4',
-    },
-    {
-        resources: [
-            25,
+            27,
         ],
         name: 'amative1',
         link: 'https://github.com/amative1',
@@ -1420,11 +1535,11 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            25,
+            26,
         ],
-        name: 'dependabot[bot]',
-        link: 'https://github.com/apps/dependabot',
-        image: 'https://avatars.githubusercontent.com/in/29110?v=4',
+        name: 'PixLSteam',
+        link: 'https://github.com/PixLSteam',
+        image: 'https://avatars.githubusercontent.com/u/21047644?v=4',
     },
     {
         resources: [
@@ -1454,9 +1569,17 @@ export const CodeCredits: Credit[] = [
         resources: [
             23,
         ],
-        name: 'PixLSteam',
-        link: 'https://github.com/PixLSteam',
-        image: 'https://avatars.githubusercontent.com/u/21047644?v=4',
+        name: 'imgbot[bot]',
+        link: 'https://github.com/apps/imgbot',
+        image: 'https://avatars.githubusercontent.com/in/4706?v=4',
+    },
+    {
+        resources: [
+            22,
+        ],
+        name: 'Someonealive-QN',
+        link: 'https://github.com/Someonealive-QN',
+        image: 'https://avatars.githubusercontent.com/u/97617298?v=4',
     },
     {
         resources: [
@@ -1465,6 +1588,14 @@ export const CodeCredits: Credit[] = [
         name: 'SpenserJ',
         link: 'https://github.com/SpenserJ',
         image: 'https://avatars.githubusercontent.com/u/90011?v=4',
+    },
+    {
+        resources: [
+            20,
+        ],
+        name: 'umbralOptimatum',
+        link: 'https://github.com/umbralOptimatum',
+        image: 'https://avatars.githubusercontent.com/u/12092270?v=4',
     },
     {
         resources: [
@@ -1492,11 +1623,11 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            16,
+            15,
         ],
-        name: 'imgbot[bot]',
-        link: 'https://github.com/apps/imgbot',
-        image: 'https://avatars.githubusercontent.com/in/4706?v=4',
+        name: 'DaveYognaught',
+        link: 'https://github.com/DaveYognaught',
+        image: 'https://avatars.githubusercontent.com/u/58609098?v=4',
     },
     {
         resources: [
@@ -1508,23 +1639,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            14,
-        ],
-        name: 'DaveYognaught',
-        link: 'https://github.com/DaveYognaught',
-        image: 'https://avatars.githubusercontent.com/u/58609098?v=4',
-    },
-    {
-        resources: [
             13,
-        ],
-        name: 'Someonealive-QN',
-        link: 'https://github.com/Someonealive-QN',
-        image: 'https://avatars.githubusercontent.com/u/97617298?v=4',
-    },
-    {
-        resources: [
-            12,
         ],
         name: 'Nydaleclya',
         link: 'https://github.com/Nydaleclya',
@@ -1569,6 +1684,14 @@ export const CodeCredits: Credit[] = [
         name: 'CooldudeOmega',
         link: 'https://github.com/CooldudeOmega',
         image: 'https://avatars.githubusercontent.com/u/101759306?v=4',
+    },
+    {
+        resources: [
+            8,
+        ],
+        name: 'DreamNya',
+        link: 'https://github.com/DreamNya',
+        image: 'https://avatars.githubusercontent.com/u/34838824?v=4',
     },
     {
         resources: [
@@ -1620,11 +1743,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            7,
+            6,
         ],
-        name: 'umbralOptimatum',
-        link: 'https://github.com/umbralOptimatum',
-        image: 'https://avatars.githubusercontent.com/u/12092270?v=4',
+        name: 'Razorflamekun',
+        link: 'https://github.com/Razorflamekun',
+        image: 'https://avatars.githubusercontent.com/u/53189811?v=4',
+    },
+    {
+        resources: [
+            6,
+        ],
+        name: 'RedzepR',
+        link: 'https://github.com/RedzepR',
+        image: 'https://avatars.githubusercontent.com/u/143606926?v=4',
     },
     {
         resources: [
@@ -1662,14 +1793,6 @@ export const CodeCredits: Credit[] = [
         resources: [
             4,
         ],
-        name: 'DreamNya',
-        link: 'https://github.com/DreamNya',
-        image: 'https://avatars.githubusercontent.com/u/34838824?v=4',
-    },
-    {
-        resources: [
-            4,
-        ],
         name: 'kushpatel0703',
         link: 'https://github.com/kushpatel0703',
         image: 'https://avatars.githubusercontent.com/u/44878521?v=4',
@@ -1689,6 +1812,14 @@ export const CodeCredits: Credit[] = [
         name: 'lenormandSeb',
         link: 'https://github.com/lenormandSeb',
         image: 'https://avatars.githubusercontent.com/u/58883370?v=4',
+    },
+    {
+        resources: [
+            3,
+        ],
+        name: 'AevitasDragonkin',
+        link: 'https://github.com/AevitasDragonkin',
+        image: 'https://avatars.githubusercontent.com/u/77356760?v=4',
     },
     {
         resources: [
@@ -1732,19 +1863,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            2,
+            3,
         ],
-        name: 'adapap',
-        link: 'https://github.com/adapap',
-        image: 'https://avatars.githubusercontent.com/u/19696846?v=4',
+        name: 'RealPendragon',
+        link: 'https://github.com/RealPendragon',
+        image: 'https://avatars.githubusercontent.com/u/26049815?v=4',
     },
     {
         resources: [
             2,
         ],
-        name: 'AevitasDragonkin',
-        link: 'https://github.com/AevitasDragonkin',
-        image: 'https://avatars.githubusercontent.com/u/77356760?v=4',
+        name: 'adapap',
+        link: 'https://github.com/adapap',
+        image: 'https://avatars.githubusercontent.com/u/19696846?v=4',
     },
     {
         resources: [
@@ -1790,9 +1921,9 @@ export const CodeCredits: Credit[] = [
         resources: [
             2,
         ],
-        name: 'Razorflamekun',
-        link: 'https://github.com/Razorflamekun',
-        image: 'https://avatars.githubusercontent.com/u/53189811?v=4',
+        name: 'Shinesprite41',
+        link: 'https://github.com/Shinesprite41',
+        image: 'https://avatars.githubusercontent.com/u/73353569?v=4',
     },
     {
         resources: [
@@ -1974,41 +2105,17 @@ export const CodeCredits: Credit[] = [
         resources: [
             1,
         ],
+        name: 'UnicornSnuggler',
+        link: 'https://github.com/UnicornSnuggler',
+        image: 'https://avatars.githubusercontent.com/u/10764837?v=4',
+    },
+    {
+        resources: [
+            1,
+        ],
         name: 'oohwooh',
         link: 'https://github.com/oohwooh',
         image: 'https://avatars.githubusercontent.com/u/11283815?v=4',
-    },
-    {
-        resources: [
-            1,
-        ],
-        name: 'LoickMunoz',
-        link: 'https://github.com/LoickMunoz',
-        image: 'https://avatars.githubusercontent.com/u/1812550?v=4',
-    },
-    {
-        resources: [
-            1,
-        ],
-        name: 'Mcheung7272',
-        link: 'https://github.com/Mcheung7272',
-        image: 'https://avatars.githubusercontent.com/u/70357013?v=4',
-    },
-    {
-        resources: [
-            1,
-        ],
-        name: 'MatthieuMesnager',
-        link: 'https://github.com/MatthieuMesnager',
-        image: 'https://avatars.githubusercontent.com/u/38081186?v=4',
-    },
-    {
-        resources: [
-            1,
-        ],
-        name: 'Rohydre',
-        link: 'https://github.com/Rohydre',
-        image: 'https://avatars.githubusercontent.com/u/9746574?v=4',
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));

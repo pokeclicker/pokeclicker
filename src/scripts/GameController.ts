@@ -4,10 +4,14 @@
 class GameController {
     static applyRouteBindings() {
         $('path, rect').hover(function () {
-            const id = $(this).attr('data-town');
-            if (id && id != 'mapTooltipWrapper') {
+            let tooltipText = $(this).attr('data-town');
+            const route = $(this).attr('data-route');
+            if (route) {
+                tooltipText = Routes.getName(Number(route), player.region);
+            }
+            if (tooltipText) {
                 const tooltip = $('#mapTooltip');
-                tooltip.text(id);
+                tooltip.text(tooltipText);
                 tooltip.css('visibility', 'visible');
             }
         }, () => {
@@ -341,7 +345,7 @@ class GameController {
             // Only run if no modals are open
             if (visibleModals === 0) {
                 // Route Battles
-                if (App.game.gameState === GameConstants.GameState.fighting) {
+                if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
                     const idx = cycle.findIndex(r => r == player.route());
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
@@ -399,7 +403,7 @@ class GameController {
                             NPCController.openDialog(filteredNPCs[numberKey - filteredContent.length]);
                         }
                         return e.preventDefault();
-                    } else if (player.town() instanceof DungeonTown) {
+                    } else if (player.town() instanceof DungeonTown && !GameController.keyHeld.Control) {
                         const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
                         const idx = cycle.findIndex(d => d.name == player.town().name);
                         switch (key) {
@@ -459,6 +463,12 @@ class GameController {
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift) {
                         Save.store(player);
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.downloadSave').value:
+                    if (GameController.keyHeld.Shift) {
+                        Save.download();
                         return e.preventDefault();
                     }
                     break;

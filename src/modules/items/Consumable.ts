@@ -11,11 +11,7 @@ export default class Consumable extends Item {
         displayName?: string,
         description?: string,
     ) {
-        super(ConsumableType[type], basePrice, currency, options, displayName, description);
+        super(ConsumableType[type], basePrice, currency, options, displayName, description, 'consumable');
         this.type = type;
-    }
-
-    get image() {
-        return `assets/images/items/consumable/${this.name}.png`;
     }
 }

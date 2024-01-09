@@ -10,7 +10,7 @@ class QuestLine {
     private pausableStates = [GameConstants.GameState.town, GameConstants.GameState.fighting];
 
     constructor(
-        public name: string,
+        public name: QuestLineNameType,
         public description: string,
         public requirement?: Requirement,
         public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None,
@@ -99,9 +99,9 @@ class QuestLine {
         }
     }
 
-    suspendQuest() {
-        if (!this.isPausable() || this.state() == QuestLineState.suspended) {
-            // Do nothing if already suspended or not a bulletin board quest
+    suspendQuest(skipPausableCheck = false) {
+        if ((!skipPausableCheck && !this.isPausable()) || this.state() == QuestLineState.suspended) {
+            // Do nothing if already suspended or not pausable.
             return;
         }
 

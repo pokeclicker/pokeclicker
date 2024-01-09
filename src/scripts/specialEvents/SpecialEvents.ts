@@ -105,8 +105,9 @@ class SpecialEvents implements Feature {
             }
         );
         // Easter
-        // QuestLineHelper.ts: Surprise Togepi quest; 'Togepi Egg Hunt'
-        this.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
+        // QuestLineHelper.ts: Introduction questline; 'Egg Hunt'
+        // Dungeons.ts: Togepi (Flowering Crown), Torchic (Egg) and Pikachu (Easter) jumping from dungeon to dungeon
+        this.newEvent('Easter', 'Encounter 3 special egg-related forms for a limited time with a dedicated Quest Line.',
             // Start
             new Date(new Date().getFullYear(), 3, 8, 1), () => {
             },
@@ -161,28 +162,10 @@ class SpecialEvents implements Feature {
         this.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
             // Start
             new Date(new Date().getFullYear(), 9, 30, 1), () => {
-                SeededRand.seed(new Date().getFullYear());
-                Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
-                    SeededRand.boolean() ? route.pokemon.land.push('Spooky Bulbasaur') : null;
-                    SeededRand.boolean() ? route.pokemon.land.push('Gastly') : null;
-                });
-                Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => {
-                    SeededRand.boolean() ? route.pokemon.land.push('Spooky Togepi') : null;
-                    SeededRand.boolean() ? route.pokemon.land.push('Misdreavus') : null;
-                });
-                Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => {
-                    SeededRand.boolean() ? route.pokemon.land.push('Pikachu (Gengar)') : null;
-                    SeededRand.boolean() ? route.pokemon.land.push('Shuppet') : null;
-                    SeededRand.boolean() ? route.pokemon.land.push('Duskull') : null;
-                });
             },
             // End
             new Date(new Date().getFullYear(), 10, 5, 23), () => {
-                Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Bulbasaur', 'Gastly'].includes(p)));
-                Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Togepi', 'Misdreavus'].includes(p)));
-                Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
-            },
-            true
+            }
         );
         /* Let's Go P/E release date
         RoamingPokemonList.ts:
@@ -200,15 +183,21 @@ class SpecialEvents implements Feature {
         /* Christmas
         RoamingPokemonList.ts:
             Santa Snorlax
+            Reindeer Stantler
         Dungeon.ts:
             Grinch Celebi in Ilex Forest
+            Snorlax (Snowman) in Seafoam Islands
+        RouteData.ts:
+            Santa Jynx
+        ShardDeal.ts:
+            Elf Munchlax
         */
-        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
+        this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and Reindeer Stantler in Johto, discover the mystical creatures of Ilex Forest, Seafoam Islands and Sandgem Town or party at Bill\'s House.',
             // Start
-            new Date(new Date().getFullYear(), 11, 24, 1), () => {
+            new Date(new Date().getFullYear(), 11, 18, 1), () => {
             },
             // End
-            new Date(new Date().getFullYear(), 11, 30, 23), () => {
+            new Date(new Date().getFullYear(), 11, 31, 23), () => {
             }
         );
     }
