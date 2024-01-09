@@ -825,10 +825,9 @@ export const SpriteCredits: Credit[] = [
             'Lunala (Overworld)',
             'Mega Houndoom (Overworld)',
             'Mega Manectric (Overworld)',
-
             'Mega Mewtwo X (Overworld)',
             'Mega Mewtwo Y (Overworld)',
-
+            'Necromza (Overworld)',
             'Primal Groudon (Overworld)',
             'Primal Kyogre (Overworld)',
             'Reshiram (Overworld)',
