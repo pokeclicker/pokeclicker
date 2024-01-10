@@ -2,6 +2,7 @@
 /// <reference path="./koExtenders.d.ts" />
 
 import Sortable from 'sortablejs';
+import type { Observable, Computed } from 'knockout';
 
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
 ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
@@ -48,6 +49,23 @@ ko.extenders.boolean = (target: ko.Subscribable) => {
 
     // return the new computed observable
     return result;
+};
+
+type Comparable<T> = Observable<T> | Computed<T>;
+
+// Don't treat shallowly-equal arrays as new values, i.e. don't notify subscribers
+// Usage: ko.observable([]).extend({ arrayEquals: 'any value here' });
+ko.extenders.arrayEquals = (target: Comparable<Array<any>>) => {
+    const defaultComparer = target.equalityComparer;
+    target.equalityComparer = function (a, b) {
+        if (Array.isArray(a) && Array.isArray(b)) {
+            // Compare arrays by element
+            return a.length === b.length && a.every((x, i) => x === b[i]);
+        }
+        // Default comparator always treats non-primitive values as changed
+        return defaultComparer(a, b);
+    };
+    return target;
 };
 
 ko.bindingHandlers.contentEditable = {
