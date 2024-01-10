@@ -5,6 +5,9 @@ import Sortable from 'sortablejs';
 
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
 ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
+    if (!ko.isWritableObservable(target)) {
+        throw new Error('Cannot apply \'numeric\' extender to a non-writable observable!');
+    }
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<number>({
         read: target, // always return the original observable's value
@@ -35,6 +38,9 @@ ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
 };
 
 ko.extenders.boolean = (target: ko.Subscribable) => {
+    if (!ko.isWritableObservable(target)) {
+        throw new Error('Cannot apply \'boolean\' extender to a non-writable observable!');
+    }
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<boolean>({
         read: target, // always return the original observable's value
