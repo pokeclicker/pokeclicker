@@ -132,15 +132,17 @@ class BattleFrontierRunner {
     }
 
     public static calculateFullBP(stage: number, previousHighestStage: number): number {
+        // We want to reward people improving their record, punish people leaving too soon.
+        const modifier = 2 * Math.min((stage / Math.min(1000, previousHighestStage)) ** 2, 4);
         if (previousHighestStage < 1000) {
-            return BattleFrontierRunner.calculateBP(stage);
+            return modifier * BattleFrontierRunner.calculateBP(stage);
         }
         const multiplier = 1000 / previousHighestStage;
         const bonusStage = BattleFrontierRunner.difficultyStage(Math.max(stage, 1000), previousHighestStage);
         const valueStage = BattleFrontierRunner.difficultyStage(Math.min(1000, stage), previousHighestStage);
         const bonusStageBP = BattleFrontierRunner.calculateBP(bonusStage) - BattleFrontierRunner.calculateBP(previousHighestStage);
         const valueStageBP = Math.round(BattleFrontierRunner.calculateBP(valueStage) * multiplier);
-        return bonusStageBP + valueStageBP;
+        return modifier * (bonusStageBP + valueStageBP);
     }
 
     public static calculateBP(stage: number): number {
