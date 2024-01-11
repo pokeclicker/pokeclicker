@@ -10,6 +10,9 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     ) {
         super(amount, reward);
         this.region = GameConstants.getGymRegion(this.gymTown);
+        if (this.region == GameConstants.Region.none) {
+            throw new Error(`Invalid gym town for quest: ${this.gymTown}`);
+        }
         this.focus = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.gymTown)];
     }
 
