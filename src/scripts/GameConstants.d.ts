@@ -383,6 +383,7 @@ namespace GameConstants {
         'Gimmighoul_coin',
         'Syrupy_apple',
         'Unremarkable_teacup',
+        'Metal_alloy',
     }
     declare enum FossilPieceType {
         'None',
@@ -731,6 +732,8 @@ namespace GameConstants {
     }
     declare enum PaldeaSubRegions {
         Paldea,
+        Kitakami,
+        BlueberryAcademy,
     }
     declare enum FinalSubRegions {
         Final,

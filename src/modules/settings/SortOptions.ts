@@ -4,14 +4,15 @@ export enum SortOptions {
     attack = 2,
     level = 3,
     shiny = 4,
-    baseAttack = 5,
-    attackBonus = 6,
-    breedingEfficiency = 7,
-    eggCycles = 8,
-    timesHatched = 9,
-    category = 10,
-    vitaminsUsed = 11,
-    evs = 12,
+    attackMaxLevel = 5,
+    baseAttack = 6,
+    attackBonus = 7,
+    breedingEfficiency = 8,
+    eggCycles = 9,
+    timesHatched = 10,
+    category = 11,
+    vitaminsUsed = 12,
+    evs = 13,
 }
 
 export type SortOptionConfig = {
@@ -50,6 +51,11 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.shiny]: {
         text: 'Shiny',
         getValue: (p) => p.shiny,
+    },
+
+    [SortOptions.attackMaxLevel]: {
+        text: 'Attack at Level 100',
+        getValue: (p) => p.calculateAttack(true),
     },
 
     [SortOptions.baseAttack]: {
