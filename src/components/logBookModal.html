@@ -33,7 +33,7 @@
                             </thead>
                             <tbody data-bind="foreach: App.game.logbook.filteredLogs()">
                               <tr>
-                                <td class="tight" data-bind="text: displayLabel, class: 'table-' + type.display"></td>
+                                <td class="tight align-middle" data-bind="text: displayLabel, class: 'table-' + type.display"></td>
                                 <td class="text-left" data-bind="text: description">-</td>
                                 <td class="text-left"><code data-bind="text: new Date(date).toLocaleString()">-</code></td>
                               </tr>
