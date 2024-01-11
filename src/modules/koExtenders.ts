@@ -2,9 +2,13 @@
 /// <reference path="./koExtenders.d.ts" />
 
 import Sortable from 'sortablejs';
+import type { Observable, Computed } from 'knockout';
+
+// Knockout types don't have a way to accurately require writable computeds yet
+type MaybeWritable = Observable | Computed;
 
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
-ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
+ko.extenders.numeric = (target: MaybeWritable, precision: number) => {
     if (!ko.isWritableObservable(target)) {
         throw new Error('Cannot apply \'numeric\' extender to a non-writable observable!');
     }
@@ -37,7 +41,7 @@ ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
     return result;
 };
 
-ko.extenders.boolean = (target: ko.Subscribable) => {
+ko.extenders.boolean = (target: MaybeWritable) => {
     if (!ko.isWritableObservable(target)) {
         throw new Error('Cannot apply \'boolean\' extender to a non-writable observable!');
     }
