@@ -349,7 +349,7 @@ class Dungeon {
     }
 
 
-    private getEncounterInfo(pokemonName: PokemonNameType, mimicData, hideEncounter=false, shadowTrainer: DungeonTrainer=undefined): EncounterInfo {
+    private getEncounterInfo(pokemonName: PokemonNameType, mimicData, hideEncounter = false, shadowTrainer: DungeonTrainer = undefined): EncounterInfo {
         const partyPokemon = App.game.party.getPokemonByName(pokemonName);
         const pokerus = partyPokemon?.pokerus;
         const caught = App.game.party.alreadyCaughtPokemonByName(pokemonName);
@@ -373,7 +373,7 @@ class Dungeon {
             purified,
         };
         return encounter;
-    };
+    }
 
     /**
      * Gets all non-boss Pokemon encounters in the dungeon
@@ -449,7 +449,7 @@ class Dungeon {
                         encounter.lockMessage = lockMessage;
                         encounterInfo.push(encounter);
                     }
-                })
+                });
                 if (!hasShadowPokemon) {
                     const encounter = {
                         image: boss.image,
