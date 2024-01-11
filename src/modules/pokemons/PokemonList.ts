@@ -14302,7 +14302,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell)],
+        'evolutions': [
+            StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell),
+            DummyEvolution('Munchlax', 'Gigantamax Snorlax'),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 135,
@@ -24215,7 +24218,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [
             StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', StoneType.Solar_light),
             StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', StoneType.Lunar_light),
@@ -24240,7 +24243,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [StoneEvolution('Necrozma (Dusk Mane)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
@@ -24261,7 +24264,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [StoneEvolution('Necrozma (Dawn Wings)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
@@ -24282,7 +24285,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'base': {
             'hitpoints': 97,
             'attack': 167,
@@ -25556,6 +25559,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
             LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
+            DummyEvolution('Toxel', 'Gigantamax Toxtricity'),
         ],
     },
     {
@@ -28057,6 +28061,12 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 72,
         },
+        'evolutions': [
+            DummyEvolution('Kubfu', 'Urshifu (Single Strike)'),
+            DummyEvolution('Kubfu', 'Urshifu (Rapid Strike)'),
+            DummyEvolution('Kubfu', 'Gigantamax Urshifu (Single Strike)'),
+            DummyEvolution('Kubfu', 'Gigantamax Urshifu (Rapid Strike)'),
+        ],
         'catchRate': 3,
         'eggCycles': 120,
         'levelType': LevelType.slow,
