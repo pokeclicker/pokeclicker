@@ -1,24 +1,28 @@
 import { Observable, ObservableArray, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
-function createObserver(loader: HTMLElement, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
+function createObserver(loader: HTMLElement, doneLoading: Observable<boolean>, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
     const page = ko.observable(1);
 
     let visible = false;
+    let currentlyLoading = false;
 
     const loadMore = () => {
-        if (visible) {
+        if (visible && !(currentlyLoading || doneLoading())) {
+            currentlyLoading = true;
             GameHelper.incrementObservable(page);
 
             // keep loading more in case we don't push the loader off screen
             // @ts-ignore
             requestIdleCallback(loadMore, { timeout: 100 });
+        } else {
+            currentlyLoading = false;
         }
     };
 
     const callback = (entries) => {
         visible = entries[0].isIntersecting;
-        if (entries[0].isIntersecting) {
+        if (visible) {
             loadMore();
         }
     };
@@ -48,8 +52,7 @@ function findScrollingParent(element: HTMLElement): HTMLElement {
 function createLoaderElem(): HTMLElement {
     const loader = document.createElement('img');
     loader.src = 'assets/images/pokeball/Pokeball.svg';
-    loader.className = 'loader-pokeball';
-
+    loader.className = 'loader-pokeball lazy-loader-pokeball';
     return loader;
 }
 
@@ -81,7 +84,9 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
     const loader = createLoaderElem();
     element.parentElement.append(loader);
 
-    const { page } = createObserver(loader, {
+    const doneLoading: Observable<boolean> = ko.observable(false);
+
+    const { page } = createObserver(loader, doneLoading, {
         root: findScrollingParent(element),
         rootMargin: opts.triggerMargin,
         threshold: opts.threshold,
@@ -92,8 +97,10 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
     const lazyList = ko.pureComputed(() => {
         const lastElem = page() * opts.pageSize;
         const array = list();
+        const isDone = lastElem >= array.length;
 
-        loader.style.display = lastElem >= array.length ? 'none' : 'initial';
+        loader.style.display = isDone ? 'none' : 'initial';
+        doneLoading(isDone);
 
         return array.slice(0, lastElem);
     });
