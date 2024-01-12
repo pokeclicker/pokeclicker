@@ -58,7 +58,7 @@ export const MaxIDPerRegion = [
     809, // 88 - Alola
     898, // 89 - Galar
     905, // 7 - Hisui
-    1017, // 112 - Paldea
+    1025, // 120 - Paldea
 ];
 
 // Subregions
@@ -110,6 +110,8 @@ export enum HisuiSubRegions {
 
 export enum PaldeaSubRegions {
     Paldea = 0,
+    Kitakami,
+    BlueberryAcademy,
 }
 
 export enum FinalSubRegions {
@@ -240,12 +242,14 @@ export const ROUTE_HELD_ITEM_MODIFIER = 1;
 export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
+export const HELD_CANDY_ITEM_CHANCE = 1024;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const GRISEOUS_ITEM_CHANCE = 50;
 export const DNA_ITEM_CHANCE = 45;
 export const LIGHT_ITEM_CHANCE = 75;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
+export const CHRISTMAS_ITEM_CHANCE = 10;
 
 // Gems
 export const GEM_UPGRADE_COST = 500;
@@ -315,6 +319,15 @@ export enum SafariTile {
 
 export const SAFARI_LEGAL_WALK_BLOCKS = [
     SafariTile.ground,
+    SafariTile.waterUL,
+    SafariTile.waterU,
+    SafariTile.waterUR,
+    SafariTile.waterL,
+    SafariTile.waterC,
+    SafariTile.waterR,
+    SafariTile.waterDL,
+    SafariTile.waterD,
+    SafariTile.waterDR,
     SafariTile.grass,
     SafariTile.sandUL,
     SafariTile.sandU,
@@ -905,6 +918,7 @@ export enum StoneType {
     'Gimmighoul_coin',
     'Syrupy_apple',
     'Unremarkable_teacup',
+    'Metal_alloy',
 }
 
 export enum FossilPieceType {
@@ -1701,6 +1715,10 @@ export const TemporaryBattles = [
     'Ash Ketchum New Island',
     'Bill\'s Grandpa',
     'Blue 6',
+    'Santa Jynx 1',
+    'Santa Jynx 2',
+    'Santa Jynx 3',
+    'Santa Jynx 4',
     'Silver 1',
     'Silver 2',
     'Sudowoodo',
@@ -2139,6 +2157,8 @@ export enum ShardTraderLocations {
     'Pacifidlog Town',
     'Sootopolis City',
     'Ever Grande City',
+    'Pokemon HQ Lab',
+    'Sandgem Town',
     'Oreburgh City',
     'Floaroma Town',
     'Eterna City',
