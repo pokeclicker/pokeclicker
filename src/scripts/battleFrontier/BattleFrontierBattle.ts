@@ -32,7 +32,7 @@ class BattleFrontierBattle extends Battle {
      */
     public static defeatPokemon() {
         // This needs to stay as none so the stage number isn't adjusted
-        App.game.breeding.progressEggsBattle(BattleFrontierRunner.computedDifficultyStage(), GameConstants.Region.none);
+        App.game.breeding.progressEggsBattle(BattleFrontierRunner.calculateEggSteps(), GameConstants.Region.none);
         this.enemyPokemon().defeat(true);
         // Next pokemon
         GameHelper.incrementObservable(this.pokemonIndex);
