@@ -226,7 +226,7 @@ class BreedingController {
             }
         }
         return BreedingController._cachedSortedFilteredList;
-    });
+    }).extend({ arrayEquals: true }); // Only notify subscribers when the array contents change, i.e. not on every "has sort order changed" check
 
     // Sorted list of pokemon that match hatchery filters
     private static hatcherySortedFilteredList: KnockoutComputed<PartyPokemon[]> = ko.pureComputed(() => {
@@ -240,16 +240,11 @@ class BreedingController {
             BreedingController.viewResetReady = true;
         }
         return hatcheryList;
-    }).extend({
-        skippableRateLimit: 500,                    // Lets us rerender immediately after filter changes
-        arrayEquals: {                                      // Only notify subscribers when the array contents change, i.e. not on every "has sort order changed" check
-            enabled: BreedingController.viewResetWaiting,   // but don't prevent notifications when waiting for a view reset
-            inverted: true,
-        },
-    });
+    }).extend({ skippableRateLimit: 500 });  // Lets us rerender immediately after filter changes
 
     // Filters for pokemon that match hatchery filters
     private static hatcheryFilteredList: KnockoutComputed<PartyPokemon[]> = ko.pureComputed(() => {
+        BreedingController.viewResetWaiting(); // Subscribe to force view resets even when the list doesn't
         return App.game.party.caughtPokemon.filter((pokemon) => pokemon.matchesHatcheryFilters());
     }).extend({ rateLimit: 100 }); // deferUpdates isn't good enough to prevent lag
 

@@ -3,7 +3,6 @@
 
 import Sortable from 'sortablejs';
 import type { Subscribable, Observable, Computed } from 'knockout';
-import type { ArrayEqualsOptions } from './koExtenders.d';
 
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
 ko.extenders.numeric = (target: Subscribable, precision: number) => {
@@ -54,12 +53,10 @@ ko.extenders.boolean = (target: Subscribable) => {
 
 // Don't treat shallowly-equal arrays as new values, i.e. don't notify subscribers
 // Usage: ko.observable([]).extend({ arrayEquals: true });
-ko.extenders.arrayEquals = (target: Observable<any[]> | Computed<any[]>, { enabled, inverted = false }: ArrayEqualsOptions = { enabled: true }) => {
+ko.extenders.arrayEquals = (target: Observable<any[]> | Computed<any[]>) => {
     const defaultComparer = target.equalityComparer;
-    const isEnabled = !ko.isObservable(enabled) ? (() => enabled) : 
-        (inverted ? (() => !enabled.peek()) : (() => enabled.peek()));
     target.equalityComparer = function (a, b) {
-        if (isEnabled() && Array.isArray(a) && Array.isArray(b)) {
+        if (Array.isArray(a) && Array.isArray(b)) {
             // Compare arrays by element
             return a.length === b.length && a.every((x, i) => x === b[i]);
         }
