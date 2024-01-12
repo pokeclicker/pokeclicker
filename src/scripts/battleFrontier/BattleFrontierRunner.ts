@@ -151,11 +151,25 @@ class BattleFrontierRunner {
 
     public static calculateEggSteps(): number {
         const stage = BattleFrontierRunner.stage();
-        const highest = BattleFrontierRunner.highest();
-        const shortModifier = Math.min(Math.max(1000, stage) / 1000, 2); // Makes beating previous highest grant more eggsteps
-        const farModifier = 1 + Math.log10(Math.max(1000, highest) / 1000); // Makes highest grant more eggsteps
-        // squared to cancel the sqrt
-        return ((1 + (Math.min(stage, 1000) / 200) ** 2.5) * farModifier) ** 2 * shortModifier;
+        const highest = Math.max(100, BattleFrontierRunner.highest());
+        let eggSteps = 1;
+        let progressPoint = Math.min(highest, 1000);
+        let maxEggSteps = 5 ** 2.5;
+        if(highest < 1000) {
+            maxEggSteps *= Math.sqrt(highest / 1000);
+        }
+        // Scaled according to the difficulty of the stage compared to pseudo-highest
+        eggSteps += (Math.min(stage, progressPoint) / progressPoint) ** 2.5 * maxEggSteps;
+        // Slightly increased with highest
+        if (highest > 1000) {
+            eggSteps *= 1 + Math.log10(highest / 1000);
+        }
+        // Increased with stage, to incentivise further progression
+        if (stage > progressPoint) {
+            eggSteps *= Math.sqrt(Math.min(2, stage / progressPoint));
+        }
+        // Squared to cancel later sqrt;
+        return eggSteps ** 2;
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
