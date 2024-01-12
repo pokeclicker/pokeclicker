@@ -98,21 +98,19 @@ export class DailyDeal {
 
     public static canUse(i: number): boolean {
         const deal = DailyDeal.list.peek()[i];
-        const amount = player.getUndergroundItemAmount(deal.item1.id);
+        const amount = player.itemList[deal.item1.itemName]();
         return amount >= deal.amount1;
     }
 
     public static use(i: number, tradeTimes = 1) {
         const deal = DailyDeal.list.peek()[i];
-        const item1Index = player.mineInventoryIndex(deal.item1.id);
         if (DailyDeal.canUse(i)) {
-            const amt = player.mineInventory()[item1Index].amount();
+            const amt = player.itemList[deal.item1.itemName]();
             const maxTrades = Math.floor(amt / deal.amount1);
             tradeTimes = Math.min(tradeTimes, maxTrades);
-            player.mineInventory()[item1Index].amount(amt - (deal.amount1 * tradeTimes));
+            player.loseItem(deal.item1.itemName, deal.amount1 * tradeTimes);
             Underground.gainMineItem(deal.item2.id, deal.amount2 * tradeTimes);
             GameHelper.incrementObservable(App.game.statistics.undergroundDailyDealTrades, tradeTimes);
-            Underground.sortMineItems(Underground.lastPropSort, false);
         }
     }
 }

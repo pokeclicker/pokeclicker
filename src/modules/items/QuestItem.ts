@@ -1,4 +1,5 @@
 import QuestLineState from '../quests/QuestLineState';
+import { QuestLineNameType } from '../quests/QuestLineNameType';
 import Item from './Item';
 import { ShopOptions } from './types';
 import { Currency } from '../GameConstants';
@@ -8,7 +9,7 @@ export default class QuestItem extends Item {
         name: string,
         displayName : string,
         description : string,
-        private questlineName : string,
+        private questlineName : QuestLineNameType,
         private endQuestlineName = questlineName,
         basePrice?: number,
         currency?: Currency,

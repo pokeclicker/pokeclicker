@@ -52,7 +52,7 @@ export default class Item {
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
         this.visible = visible;
 
-        this._displayName = displayName ?? name;
+        this._displayName = displayName;
         this._description = description;
         this.imageDirectory = imageDirectory;
     }
@@ -84,7 +84,7 @@ export default class Item {
         }
 
         let n = amt;
-        const displayName = pluralizeString(humanifyString(this.displayName), n);
+        const displayName = pluralizeString(this.displayName, n);
 
         if (n > this.maxAmount) {
             Notifier.notify({
@@ -192,7 +192,7 @@ export default class Item {
     }
 
     get displayName() {
-        return humanifyString(this._displayName);
+        return this._displayName ?? camelCaseToString(humanifyString(this.name));
     }
 
     get image() {
