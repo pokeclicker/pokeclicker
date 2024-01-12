@@ -2,10 +2,11 @@
 /// <reference path="./koExtenders.d.ts" />
 
 import Sortable from 'sortablejs';
-import type { Observable, Computed } from 'knockout';
+import type { Subscribable, Observable, Computed } from 'knockout';
+import type { ArrayEqualsOptions } from './koExtenders.d';
 
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
-ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
+ko.extenders.numeric = (target: Subscribable, precision: number) => {
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<number>({
         read: target, // always return the original observable's value
@@ -35,7 +36,7 @@ ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
     return result;
 };
 
-ko.extenders.boolean = (target: ko.Subscribable) => {
+ko.extenders.boolean = (target: Subscribable) => {
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<boolean>({
         read: target, // always return the original observable's value
@@ -51,14 +52,14 @@ ko.extenders.boolean = (target: ko.Subscribable) => {
     return result;
 };
 
-type Comparable<T> = Observable<T> | Computed<T>;
-
 // Don't treat shallowly-equal arrays as new values, i.e. don't notify subscribers
-// Usage: ko.observable([]).extend({ arrayEquals: 'any value here' });
-ko.extenders.arrayEquals = (target: Comparable<Array<any>>) => {
+// Usage: ko.observable([]).extend({ arrayEquals: true });
+ko.extenders.arrayEquals = (target: Observable<any[]> | Computed<any[]>, { enabled, inverted = false }: ArrayEqualsOptions = { enabled: true }) => {
     const defaultComparer = target.equalityComparer;
+    const isEnabled = !ko.isObservable(enabled) ? (() => enabled) : 
+        (inverted ? (() => !enabled.peek()) : (() => enabled.peek()));
     target.equalityComparer = function (a, b) {
-        if (Array.isArray(a) && Array.isArray(b)) {
+        if (isEnabled() && Array.isArray(a) && Array.isArray(b)) {
             // Compare arrays by element
             return a.length === b.length && a.every((x, i) => x === b[i]);
         }
@@ -66,6 +67,49 @@ ko.extenders.arrayEquals = (target: Comparable<Array<any>>) => {
         return defaultComparer(a, b);
     };
     return target;
+};
+
+// A modified version of the rateLimit extender that can be forced to evaluate early
+// Usage: const example = ko.pureComputed(() => { whatever }).extend({ skippableRateLimit: GameConstants.WEEK });
+//        example.evaluateEarly();
+ko.extenders.skippableRateLimit = (target: Subscribable, delay: number) => {
+    // Custom rate limiter function, see https://knockoutjs.com/documentation/rateLimit-observable.html#custom-rate-limit-methods
+    const skippableLimiter = (callback, timeout) => {
+        var timeoutInstance = null;
+        var skipNextLimit = false;
+        const startEvaluation = () => {
+            timeoutInstance = null;
+            skipNextLimit = false;
+            // Starts target evaluation
+            callback();
+        };
+        const evaluateEarly = () => {
+            if (timeoutInstance) {
+                // Already rate-limited, evaluate now
+                clearTimeout(timeoutInstance);
+                startEvaluation();
+            } else {
+                // Not yet rate-limited, be ready to skip the limit
+                // (This often happens when waiting for subscription notifications to propogate or for a dependency to reevaluate)
+                skipNextLimit = true;
+            }
+        };
+        const startRateLimit = () => {
+            // Do nothing if already rate-limited
+            if (!timeoutInstance) {
+                if (skipNextLimit) {
+                    // Skipping rate limit this time and going straight to evaluation
+                    startEvaluation();
+                } else {
+                    // Start rate limit delay
+                    timeoutInstance = setTimeout(startEvaluation, timeout);
+                }
+            }
+        };
+        (target as typeof target & Partial<SkippableRateLimit>).evaluateEarly = evaluateEarly;
+        return startRateLimit;
+    };
+    return target.extend({ rateLimit: { timeout: delay, method: skippableLimiter } }) as typeof target & SkippableRateLimit;
 };
 
 ko.bindingHandlers.contentEditable = {

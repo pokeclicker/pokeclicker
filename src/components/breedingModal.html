@@ -238,7 +238,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
-                                    <!-- ko using: lazyLoad($element.nextElementSibling, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryView }), as: 'lazyHatcheryList' -->
+                                    <!-- ko using: lazyLoad($element.nextElementSibling, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList' -->
                                     <ul class="row justify-content-center w-100 p-0 m-0" data-bind="if: App.game.party.hasMaxLevelPokemon() && modalUtils.observableState.breedingModal !== 'hidden'">
                                         <!-- ko foreach: lazyHatcheryList -->
                                         <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable() && (BreedingController.viewResetWaiting() || $data.matchesHatcheryFilters()), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">

@@ -100,14 +100,17 @@ class BreedingController {
         hatcherySettingObervables.forEach((setting) => {
             setting.subscribe(() => {
                 BreedingController.viewResetWaiting(true);
+                (BreedingController.hatcherySortedFilteredList as unknown as SkippableRateLimit).evaluateEarly();
             });
         });
 
-        // Part of resetting hatchery list on modal close
+        // Reset hatchery display upon modal close
         modalUtils.observableState.breedingModalObservable.subscribe((modalState) => {
+            // Resetting scrolling only works before modal is fully hidden
             if (modalState === 'hide') {
-                // Only works before modal is fully hidden
                 BreedingController.scrollToTop();
+            } else if (modalState === 'hidden') {
+                BreedingController.resetHatcheryView();
             }
         });
     }
@@ -206,50 +209,61 @@ class BreedingController {
     // Queue size limit setting
     public static queueSizeLimit = ko.observable(-1);
 
+    // Used to pause hatchery list until all the filteredList changes are available
+    // Otherwise changing the filters would render removing and adding entries at different times
+    public static viewResetWaiting = ko.observable(false);
+    private static viewResetReady = false;
+
     // Pausable access to the sorted list for the modal, with view logic
     private static _cachedSortedFilteredList = [];
     public static viewSortedFilteredList: KnockoutComputed<Array<PartyPokemon>> = ko.pureComputed(() => {
         // Pause updates while the modal is closed
-        if (modalUtils.observableState.breedingModal !== 'hidden') {
+        if (modalUtils.observableState.breedingModal === 'show') {
             BreedingController._cachedSortedFilteredList = BreedingController.hatcherySortedFilteredList();
             // Finish resetting the LazyLoader display after filters change
             if (BreedingController.viewResetReady) {
-                BreedingController.scrollToTop();
-                BreedingController.resetHatcheryView.notifySubscribers();
-                BreedingController.viewResetWaiting(false);
-                BreedingController.viewResetReady = false;
+                BreedingController.resetHatcheryView();
             }
         }
         return BreedingController._cachedSortedFilteredList;
     });
 
     // Sorted list of pokemon that match hatchery filters
-    private static hatcherySortedFilteredList: KnockoutComputed<Array<PartyPokemon>> = ko.pureComputed(() => {
+    private static hatcherySortedFilteredList: KnockoutComputed<PartyPokemon[]> = ko.pureComputed(() => {
         const hatcheryList = Array.from(BreedingController.hatcheryFilteredList());
         // Don't adjust attack based on region if debuff is disabled
         const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
         hatcheryList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
-        return hatcheryList;
-    }).extend({ rateLimit: 500 }).extend({ arrayEquals: true }); // Slightly longer than hatcheryFilteredList + only notify subscribers when order actually changes
-
-    // Filters for pokemon that match hatchery filters
-    private static hatcheryFilteredList: KnockoutComputed<Array<PartyPokemon>> = ko.pureComputed(() => {
-        const hatcheryList = App.game.party.caughtPokemon.filter((pokemon) => pokemon.matchesHatcheryFilters());
+        // If a filter or sort order just changed
         if (BreedingController.viewResetWaiting.peek()) {
-            BreedingController.viewResetReady = true; // Can re-render once the filtered list is updated
+            // Ready to rerender now that the list is up to date
+            BreedingController.viewResetReady = true;
         }
         return hatcheryList;
-    }).extend({ rateLimit: 475 });
+    }).extend({
+        skippableRateLimit: 500,                    // Lets us rerender immediately after filter changes
+        arrayEquals: {                                      // Only notify subscribers when the array contents change, i.e. not on every "has sort order changed" check
+            enabled: BreedingController.viewResetWaiting,   // but don't prevent notifications when waiting for a view reset
+            inverted: true,
+        },
+    });
 
-    // Used to reset the LazyLoader
-    public static resetHatcheryView = ko.computed(() => modalUtils.observableState.breedingModal === 'hidden');
+    // Filters for pokemon that match hatchery filters
+    private static hatcheryFilteredList: KnockoutComputed<PartyPokemon[]> = ko.pureComputed(() => {
+        return App.game.party.caughtPokemon.filter((pokemon) => pokemon.matchesHatcheryFilters());
+    }).extend({ rateLimit: 100 }); // deferUpdates isn't good enough to prevent lag
 
-    // Used to pause hatchery list until all the filteredList changes are available
-    // Otherwise changing the filters would render removing and adding entries at different times
-    public static viewResetWaiting = ko.observable(false);
-    public static viewResetReady = false;
+    // Used to reset the LazyLoaderdisplay
+    public static resetHatcheryFlag = ko.computed(() => modalUtils.observableState.breedingModal === 'hidden');
 
-    public static scrollToTop() {
+    private static resetHatcheryView() {
+        BreedingController.scrollToTop();
+        BreedingController.resetHatcheryFlag.notifySubscribers();
+        BreedingController.viewResetWaiting(false);
+        BreedingController.viewResetReady = false;
+    }
+
+    private static scrollToTop() {
         document.querySelector('#breeding-pokemon-list-container .scrolling-div-breeding-list').scrollTop = 0;
     }
 }
