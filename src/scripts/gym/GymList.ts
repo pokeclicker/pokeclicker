@@ -2548,7 +2548,8 @@ GymList['Stony Cliff Titan'] = new Gym(
     BadgeEnums.Rock_Titan,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { imageName: '../pokemon/950.01' }
 );
 GymList['Open Sky Titan'] = new Gym(
     'Open Sky Titan',
@@ -2557,7 +2558,8 @@ GymList['Open Sky Titan'] = new Gym(
     BadgeEnums.Flying_Titan,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { imageName: '../pokemon/962.01' }
 );
 GymList['Lurking Steel Titan'] = new Gym(
     'Lurking Steel Titan',
@@ -2566,7 +2568,8 @@ GymList['Lurking Steel Titan'] = new Gym(
     BadgeEnums.Steel_Titan,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { imageName: '../pokemon/968.01' }
 );
 GymList['Asado Desert'] = new Gym(
     'Quaking Earth Titan',

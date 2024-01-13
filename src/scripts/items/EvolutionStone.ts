@@ -41,6 +41,20 @@ class EvolutionStone extends CaughtIndicatingItem {
             : undefined;
     });
 
+    getPokerusProgress = ko.pureComputed((): string => {
+        const statuses = this.pokemonWithEvolution().flatMap(
+            (pokemon) => PartyController.getStoneEvolutionsPokerusData(pokemon.id, this.type)
+        );
+
+        if (statuses.length > 0) {
+            const current = statuses.reduce((progress, { evs }) => progress += Math.min(50, evs) , 0);
+            const total = statuses.length * 50;
+            return total === current ? 'All Pokémon are resistant!' : `EVs until all Pokémon are resistant: ${current} / ${total}`;
+        } else {
+            return undefined;
+        }
+    });
+
     init() {
         // If a region has already been manually set
         if (this.unlockedRegion > GameConstants.Region.none) {
@@ -110,3 +124,4 @@ ItemList.Leaders_crest   = new EvolutionStone(GameConstants.StoneType.Leaders_cr
 ItemList.Gimmighoul_coin   = new EvolutionStone(GameConstants.StoneType.Gimmighoul_coin, 5000, undefined , 'Gimmighoul Coin');
 ItemList.Syrupy_apple   = new EvolutionStone(GameConstants.StoneType.Syrupy_apple, 5000, undefined , 'Syrupy Apple');
 ItemList.Unremarkable_teacup   = new EvolutionStone(GameConstants.StoneType.Unremarkable_teacup, 5000, undefined , 'Unremarkable Teacup');
+ItemList.Metal_alloy   = new EvolutionStone(GameConstants.StoneType.Metal_alloy, 5000, undefined , 'Metal Alloy');
