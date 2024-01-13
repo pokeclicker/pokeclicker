@@ -1,7 +1,7 @@
 import { Observable, ObservableArray, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
-function createObserver(loader: HTMLElement, doneLoading: { status: boolean}, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
+function createObserver(loader: HTMLElement, doneLoading: { status: boolean }, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
     const page = ko.observable(1);
 
     let visible = false;
@@ -102,8 +102,11 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
         const array = list();
         const isDone = lastElem >= array.length;
 
-        isDone ? loader.style.display = 'none' : loader.style.removeProperty('display');
-        doneLoading.status = isDone;
+        if (isDone) {
+            loader.style.display = 'none';
+        } else {
+            loader.style.removeProperty('display');
+        }
 
         return array.slice(0, lastElem);
     });
