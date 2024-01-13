@@ -1,14 +1,14 @@
 import { Observable, ObservableArray, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
-function createObserver(loader: HTMLElement, doneLoading: Observable<boolean>, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
+function createObserver(loader: HTMLElement, doneLoading: { status: boolean}, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
     const page = ko.observable(1);
 
     let visible = false;
     let currentlyLoading = false;
 
     const loadMore = () => {
-        if (visible && !(currentlyLoading || doneLoading())) {
+        if (visible && !currentlyLoading && !doneLoading.status) {
             currentlyLoading = true;
             GameHelper.incrementObservable(page);
 
@@ -50,9 +50,12 @@ function findScrollingParent(element: HTMLElement): HTMLElement {
 }
 
 function createLoaderElem(): HTMLElement {
-    const loader = document.createElement('img');
-    loader.src = 'assets/images/pokeball/Pokeball.svg';
-    loader.className = 'loader-pokeball lazy-loader-pokeball';
+    const loader = document.createElement('div');
+    loader.className = 'lazy-loader-container';
+    const loaderImage = document.createElement('img');
+    loaderImage.src = 'assets/images/pokeball/Pokeball.svg';
+    loaderImage.className = 'loader-pokeball';
+    loader.append(loaderImage);
     return loader;
 }
 
@@ -84,7 +87,7 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
     const loader = createLoaderElem();
     element.parentElement.append(loader);
 
-    const doneLoading: Observable<boolean> = ko.observable(false);
+    const doneLoading = { status: false };
 
     const { page } = createObserver(loader, doneLoading, {
         root: findScrollingParent(element),
@@ -99,8 +102,8 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
         const array = list();
         const isDone = lastElem >= array.length;
 
-        loader.style.display = isDone ? 'none' : 'initial';
-        doneLoading(isDone);
+        isDone ? loader.style.display = 'none' : loader.style.removeProperty('display');
+        doneLoading.status = isDone;
 
         return array.slice(0, lastElem);
     });
