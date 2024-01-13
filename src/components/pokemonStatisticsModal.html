@@ -159,7 +159,7 @@
                       <div class="toggler-slider" data-bind="tooltip: {
                         html: true,
                         title: Settings.getSetting('partyHideShinySprites').observableValue() ?
-                            'This slider will have no effect while <strong><u>Hide party shiny sprites</u></strong> is enabled!' : '',
+                            `<strong><u>${Settings.getSetting('partyHideShinySprites').displayName}</u></strong> is currently overriding this setting.` : '',
                         trigger: 'hover',
                       }">
                         <div class="toggler-knob"></div>
