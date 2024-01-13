@@ -2398,6 +2398,7 @@ export const ModalCollapseList = [
     'pokeballSelectorBody',
     'pokemonListBody',
     'shortcutsBody',
+    'currencyBody',
 ];
 
 export enum ConsumableType {
