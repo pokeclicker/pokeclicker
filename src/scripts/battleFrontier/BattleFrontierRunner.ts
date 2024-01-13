@@ -152,10 +152,10 @@ class BattleFrontierRunner {
     public static calculateEggSteps(): number {
         const stage = BattleFrontierRunner.stage();
         const highest = Math.max(100, BattleFrontierRunner.highest());
+        const progressPoint = Math.min(highest, 1000);
         let eggSteps = 1;
-        let progressPoint = Math.min(highest, 1000);
         let maxEggSteps = 5 ** 2.5;
-        if(highest < 1000) {
+        if (highest < 1000) {
             maxEggSteps *= Math.sqrt(highest / 1000);
         }
         // Scaled according to the difficulty of the stage compared to pseudo-highest
