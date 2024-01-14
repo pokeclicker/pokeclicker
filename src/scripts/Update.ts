@@ -2596,6 +2596,13 @@ class Update implements Saveable {
                     helper.sortOption = 5;
                 }
             });
+
+            // Fix pokerus status for party members infected via shop eggs
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                if (pokemon[PartyPokemonSaveKeys.pokerus] === GameConstants.Pokerus.Infected && !pokemon[PartyPokemonSaveKeys.breeding]) {
+                    pokemon[PartyPokemonSaveKeys.pokerus] = GameConstants.Pokerus.Contagious;
+                }
+            });
         },
     };
 
