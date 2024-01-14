@@ -14,6 +14,8 @@ class Party implements Feature {
 
     hasMaxLevelPokemon: KnockoutComputed<boolean>;
 
+    hasShadowPokemon: KnockoutComputed<boolean>;
+
     _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
 
 
@@ -27,6 +29,10 @@ class Party implements Feature {
                 }
             }
             return false;
+        }).extend({rateLimit: 1000});
+
+        this.hasShadowPokemon = ko.pureComputed(() => {
+            return this.caughtPokemon.some(p => p.shadow === GameConstants.ShadowStatus.Shadow);
         }).extend({rateLimit: 1000});
 
         // This will be completely rebuilt each time a pokemon is caught.
