@@ -70,12 +70,12 @@ type Boss = DungeonBossPokemon | DungeonTrainer;
 interface EncounterInfo {
     image: string,
     shiny: boolean,
+    shadow: boolean,
     hide: boolean, // try to not hide pokemon required as per the Pokedex Challenge whose unlock method can be avoided through regular gameplay
     uncaught: boolean,
     lock: boolean,
     lockMessage: string,
     pokemonName: PokemonNameType,
-    shadowTrainerImage: string | undefined,
 }
 
 // Gain a gym badge after first completion of a dungeon
@@ -248,8 +248,8 @@ class Dungeon {
     }
 
     public allAvailableShadowPokemon(): PokemonNameType[] {
-        const encounterInfo = this.normalEncounterList.filter(e => e.shadowTrainerImage).map(e => e.pokemonName);
-        encounterInfo.push(...this.bossEncounterList.filter(e => e.shadowTrainerImage).map(e => e.pokemonName));
+        const encounterInfo = this.normalEncounterList.filter(e => e.shadow).map(e => e.pokemonName);
+        encounterInfo.push(...this.bossEncounterList.filter(e => e.shadow).map(e => e.pokemonName));
         return encounterInfo;
     }
 
@@ -349,7 +349,7 @@ class Dungeon {
     }
 
 
-    private getEncounterInfo(pokemonName: PokemonNameType, mimicData, hideEncounter = false, shadowTrainer: DungeonTrainer = undefined): EncounterInfo {
+    private getEncounterInfo(pokemonName: PokemonNameType, mimicData, hideEncounter = false, shadow = false): EncounterInfo {
         const partyPokemon = App.game.party.getPokemonByName(pokemonName);
         const pokerus = partyPokemon?.pokerus;
         const caught = App.game.party.alreadyCaughtPokemonByName(pokemonName);
@@ -358,8 +358,8 @@ class Dungeon {
         const purified = partyPokemon?.shadow >= GameConstants.ShadowStatus.Purified;
         const encounter = {
             pokemonName,
-            image: `assets/images/${shinyCaught ? 'shiny' : ''}${shadowTrainer && caught ? 'shadow' : ''}pokemon/${pokemonMap[pokemonName].id}.png`,
-            shadowTrainerImage: shadowTrainer?.image,
+            image: `assets/images/${shinyCaught ? 'shiny' : ''}${shadow && shadowCaught ? 'shadow' : ''}pokemon/${pokemonMap[pokemonName].id}.png`,
+            shadowBackground: shadow && !shadowCaught ? `assets/images/shadowpokemon/${pokemonMap[pokemonName].id}.png` : '',
             pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[pokerus]}.png` : '',
             EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${partyPokemon.evs().toLocaleString('en-US')}` : '',
             shiny: shinyCaught,
@@ -369,6 +369,7 @@ class Dungeon {
             lockMessage: mimicData?.lockedMessage ?? '',
             mimic: !!mimicData,
             mimicTier: mimicData?.tier,
+            shadow,
             shadowCaught,
             purified,
         };
@@ -395,17 +396,24 @@ class Dungeon {
                 } else {
                     pokemonName = <PokemonNameType>enemy;
                 }
-                encounterInfo.push(this.getEncounterInfo(pokemonName, false, hideEncounter));
+                encounterInfo.push(this.getEncounterInfo(pokemonName, null, hideEncounter));
             // Handling Trainers (only those with shadow Pokemon)
             } else if (enemy instanceof DungeonTrainer) {
                 if (enemy.options?.requirement?.isCompleted() === false) {
                     return;
                 }
-                enemy.getTeam().forEach(pokemon => {
-                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
-                        encounterInfo.push(this.getEncounterInfo(pokemon.name, false, false, enemy));
-                    }
-                });
+                const shadowPokemon = enemy.getTeam().filter(p => p.shadow == GameConstants.ShadowStatus.Shadow);
+                if (shadowPokemon.length) {
+                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, false, true));
+                    const trainerEncounter = {
+                        image: enemy.image,
+                        EVs: '',
+                        lockMessage: '',
+                        shadowTrainer: true,
+                    };
+                    encounterInfo.push(...shadowEncounters);
+                    encounterInfo.push(trainerEncounter);
+                }
             }
         });
 
@@ -433,35 +441,30 @@ class Dungeon {
             const lockMessage = boss.options?.requirement ? boss.options?.requirement.hint() : '';
             // Handling Pokemon
             if (boss instanceof DungeonBossPokemon) {
-                const encounter = this.getEncounterInfo(boss.name, false, hideEncounter);
+                const encounter = this.getEncounterInfo(boss.name, null, hideEncounter);
                 encounter.lock = lock;
                 encounter.lockMessage = lockMessage;
                 encounterInfo.push(encounter);
             // Handling Trainer
             } else {
                 // Check for Shadow Pokemon
-                let hasShadowPokemon = false;
-                boss.getTeam().forEach(pokemon => {
-                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
-                        hasShadowPokemon = true;
-                        const encounter = this.getEncounterInfo(pokemon.name, false, hideEncounter, boss);
-                        encounter.lock = lock;
-                        encounter.lockMessage = lockMessage;
-                        encounterInfo.push(encounter);
-                    }
-                });
-                if (!hasShadowPokemon) {
-                    const encounter = {
-                        image: boss.image,
-                        EVs: '',
-                        shiny:  false,
-                        hide: hideEncounter,
-                        uncaught: false,
-                        lock,
-                        lockMessage,
-                    };
-                    encounterInfo.push(encounter);
+                const shadowPokemon = boss.getTeam().filter(p => p.shadow == GameConstants.ShadowStatus.Shadow);
+                const shadowEncounter = shadowPokemon.length > 0;
+                if (shadowEncounter) {
+                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, false, true));
+                    encounterInfo.push(...shadowEncounters);
                 }
+                const encounter = {
+                    image: boss.image,
+                    EVs: '',
+                    shiny:  false,
+                    hide: hideEncounter,
+                    uncaught: false,
+                    lock,
+                    lockMessage,
+                    shadowTrainer: shadowEncounter,
+                };
+                encounterInfo.push(encounter);
             }
         });
 
