@@ -132,6 +132,12 @@ class PartyPokemon implements Saveable {
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
 
+    public clickAttackBonus = ko.pureComputed((): number => {
+        // Caught + Shiny + Resistant
+        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
+        return bonus;
+    });
+
     public canCatchPokerus(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
     }
