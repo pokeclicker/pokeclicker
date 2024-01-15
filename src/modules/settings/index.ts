@@ -123,7 +123,7 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     ],
     'cm'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
-Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
+Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
@@ -191,6 +191,9 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
+
+// Party
+Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
 
 // Party Sorting
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
@@ -260,6 +263,8 @@ Object.keys(PokedexFilters).forEach((key) => {
     const filter = PokedexFilters[key];
     Settings.add(new FilterSetting(filter));
 });
+
+
 
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
     [
