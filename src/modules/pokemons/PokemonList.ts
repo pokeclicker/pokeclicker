@@ -13687,7 +13687,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
-        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Sunny], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, true)],
+        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Harsh_Sunlight], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, true)],
         'base': {
             'hitpoints': 70,
             'attack': 60,
