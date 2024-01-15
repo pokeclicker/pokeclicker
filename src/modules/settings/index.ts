@@ -192,6 +192,9 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
 
+// Party
+Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
+
 // Party Sorting
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
@@ -260,6 +263,8 @@ Object.keys(PokedexFilters).forEach((key) => {
     const filter = PokedexFilters[key];
     Settings.add(new FilterSetting(filter));
 });
+
+
 
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
     [

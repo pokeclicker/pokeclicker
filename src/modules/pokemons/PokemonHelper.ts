@@ -15,6 +15,7 @@ import GameHelper from '../GameHelper';
 import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
+import Settings from '../settings/Settings';
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -73,28 +74,22 @@ export function typeIdToString(id: number) {
 
 export function getImage(pokemonId: number, shiny: boolean = undefined, gender: boolean = undefined, shadow: ShadowStatus = undefined): string {
     let src = 'assets/images/';
-    let showShadow = false;
-    if (shiny === undefined) {
-        // eslint-disable-next-line no-param-reassign
-        shiny = App.game.party.alreadyCaughtPokemon(pokemonId, true)
-            && !App.game.party.getPokemon(pokemonId)?.hideShinyImage();
-    }
-    if (gender === undefined) {
-        // eslint-disable-next-line no-param-reassign
-        gender = App.game.party.getPokemon(pokemonId)?.defaultFemaleSprite() ?? false;
-    }
-    if (shadow === undefined) {
-        const partyPokemon = App.game.party.getPokemon(pokemonId);
-        if (partyPokemon) {
+    let showShadow = shadow === ShadowStatus.Shadow;
+    const partyPokemon = App.game.party.getPokemon(pokemonId);
+    if (partyPokemon) {
+        if (shiny === undefined) {
+            // eslint-disable-next-line no-param-reassign
+            shiny = partyPokemon.shiny && !partyPokemon.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue();
+        }
+        if (gender === undefined) {
+            // eslint-disable-next-line no-param-reassign
+            gender = partyPokemon.defaultFemaleSprite();
+        }
+        if (shadow === undefined) {
             showShadow = partyPokemon.shadow === ShadowStatus.Shadow
                 || (partyPokemon.shadow === ShadowStatus.Purified && partyPokemon.showShadowImage);
-        } else {
-            showShadow = false;
         }
-    } else {
-        showShadow = shadow === ShadowStatus.Shadow;
     }
-
     if (shiny) {
         src += 'shiny';
     }
@@ -103,9 +98,9 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
     }
     let genderString = '';
     // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
-    const hasDiff = this.getPokemonById(pokemonId).gender.visualDifference;
-    if (hasDiff) {
-        if (gender) {
+    if (gender) {
+        const hasDiff = this.getPokemonById(pokemonId).gender.visualDifference;
+        if (hasDiff) {
             genderString = '-f';
         }
     }
