@@ -103,7 +103,15 @@ class FarmController {
         App.game.farming.togglePlotSafeLock(index);
     }
 
-    public static toggleAllPlotsLocked(lock: boolean) {
+    public static toggleAllPlotLocks() {
+        App.game.farming.plotList.forEach((plot, index) => {
+            if (plot.isUnlocked) {
+                App.game.farming.togglePlotSafeLock(index);
+            }
+        });
+    }
+
+    public static toggleAllPlotLocksTo(lock: boolean) {
         App.game.farming.plotList.forEach((plot, index) => {
             if (plot.isUnlocked && ((lock && !plot.isSafeLocked) || (!lock && plot.isSafeLocked))) {
                 App.game.farming.togglePlotSafeLock(index);
@@ -226,9 +234,9 @@ class FarmController {
                 return;
             }
             if (aura() !== 1 && idx !== AuraType.Repel) {
-                tooltip.push(`${AuraType[idx]}: ×${aura().toFixed(2)}`);
+                tooltip.push(`${AuraType[idx]}: ×${aura().toLocaleString('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 })}`);
             } else if (aura() !== 0 && idx === AuraType.Repel) {
-                tooltip.push(`${AuraType[idx]}: ${(aura() * 100).toFixed(2)}%`);
+                tooltip.push(`${AuraType[idx]}: ${aura().toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
             }
 
         });
@@ -240,6 +248,15 @@ class FarmController {
 
         return tooltip.join('<br>');
     });
+
+    // For preview in Farm Modal's BerryDex Tab
+    public static handleBerryDexClick(berryId: number) {
+        if (App.game.statistics.selectedBerryID() === berryId && App.game.farming.unlockedBerries[berryId]()) {
+            $('#berryDexModal').modal('show');
+        }
+
+        App.game.statistics.selectedBerryID(berryId);
+    }
 
 }
 

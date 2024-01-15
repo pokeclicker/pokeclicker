@@ -1,8 +1,6 @@
 import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
-    public static toggleStatisticShiny = ko.observable(true);
-    public static hideShinyImages = ko.observable(false);
 
     public static initialize() {
         Object.values(PokedexFilters).forEach((filter) => {
@@ -202,11 +200,11 @@ class PokedexHelper {
                 return false;
             }
             // Only Base Pokémon without Mega Evolution
-            if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as PokemonListData).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
+            if (uniqueTransformation == 'mega-unobtained' && !PokemonHelper.hasUncaughtMegaEvolution(pokemon.name)) {
                 return false;
             }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+            if (uniqueTransformation == 'mega-evolution' && !PokemonHelper.isMegaEvolution(pokemon.name)) {
                 return false;
             }
 
@@ -234,9 +232,3 @@ class PokedexHelper {
         return modalUtils.observableState.pokedexModalObservable;
     });
 }
-
-$(document).ready(() => {
-    $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
-        PokedexHelper.toggleStatisticShiny(true);
-    });
-});

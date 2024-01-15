@@ -110,6 +110,12 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     ],
     'ripeDeath'));
 Settings.add(new BooleanSetting('farmBoostDisplay', 'Include base farm timer during altered berry growth times', false));
+Settings.add(new Setting<string>('berryDexMode', 'Berrydex Display',
+    [
+        new SettingOption('Classic Mode', 'classic'),
+        new SettingOption('Preview Mode', 'preview'),
+    ],
+    'classic'));
 Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     [
         new SettingOption('Inches', 'inch'),
@@ -117,7 +123,7 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     ],
     'cm'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
-Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
+Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
@@ -186,6 +192,9 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
 
+// Party
+Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
+
 // Party Sorting
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
@@ -196,7 +205,7 @@ Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 // Hatchery Sorting
 const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
-));
+)).filter((opt) => ![SortOptions.level, SortOptions.attack].includes(opt.value));
 Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
@@ -254,6 +263,8 @@ Object.keys(PokedexFilters).forEach((key) => {
     const filter = PokedexFilters[key];
     Settings.add(new FilterSetting(filter));
 });
+
+
 
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
     [

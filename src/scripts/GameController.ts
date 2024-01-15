@@ -4,10 +4,14 @@
 class GameController {
     static applyRouteBindings() {
         $('path, rect').hover(function () {
-            const id = $(this).attr('data-town');
-            if (id && id != 'mapTooltipWrapper') {
+            let tooltipText = $(this).attr('data-town');
+            const route = $(this).attr('data-route');
+            if (route) {
+                tooltipText = Routes.getName(Number(route), player.region);
+            }
+            if (tooltipText) {
                 const tooltip = $('#mapTooltip');
-                tooltip.text(id);
+                tooltip.text(tooltipText);
                 tooltip.css('visibility', 'visible');
             }
         }, () => {

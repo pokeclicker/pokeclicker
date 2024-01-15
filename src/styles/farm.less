@@ -143,34 +143,66 @@
   }
 }
 
-#wanderRow {
-  #wanderPokemonList {
-    width: 100%;
+@media (min-width: 992px) { // computer
+  .berryDexPreviewColumn {
+    max-height: calc(100vh - 205px);
+  }
+}
 
-    .list-inline-item {
-      position: relative;
-      margin-top: 7px;
+@media (max-width: 991px) { // tablet
+  .berryDexPreviewColumn {
+    max-height: calc(100vh - 225px);
+  }
+}
 
-      .lock {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-      }
+@media (max-width: 767px) { // phone
+  #berryDexPreviewContainer {
+    flex-direction: column-reverse;
+  }
 
-      .shiny {
-        position: absolute;
-        top: 10px;
-        right: -5px;
-      }
+  #berryDexPreviewList {
+    max-height: calc(47vh - 5px);
+
+    @media (max-height: 550px) {
+      max-height: calc(40vh - 50px);
+    }
+  }
+
+  #berryDexPreviewTable {
+    max-height: calc(50vh - 205px);
+  }
+}
+
+#berryDexPreviewTable {
+  scrollbar-width: thin;
+}
+
+#wanderPokemonList {
+  width: 100%;
+
+  .list-inline-item {
+    position: relative;
+    margin-top: 7px;
+
+    .lock {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
     }
 
-    .list-inline-item:nth-child(n+6) {
-      margin-top: 14px;
+    .shiny {
+      position: absolute;
+      top: 10px;
+      right: -5px;
     }
+  }
 
-    .no-pokerus {
-      margin-bottom: -10px;
-    }
+  .list-inline-item:nth-child(n+6) {
+    margin-top: 14px;
+  }
+
+  .no-pokerus {
+    margin-bottom: -10px;
   }
 }

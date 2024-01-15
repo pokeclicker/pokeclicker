@@ -3,7 +3,8 @@ class SafariEncounter {
         public name: PokemonNameType,
         public weight: number,
         public environments: SafariEnvironments[] = [SafariEnvironments.Grass],
-        private requireCaught = false
+        private requireCaught = false,
+        public showUncaught = false // Whether the pokemon silhouette will be shown in the ranger NPC when uncaught
     ) {}
 
     public isAvailable(): boolean {
@@ -158,15 +159,16 @@ class SafariPokemonList {
     }
 
     public static generateKalosSafariList() {
-        SeededRand.seed(+player.trainerId);
-
         // Obtain the list of non-EVable pokemon and shuffle it
         // There may not be an evenly divisible number of pokemon so repeat list 5 times
-        const shuffledPokemon = new Array(GameConstants.FRIEND_SAFARI_POKEMON).fill(
-            SeededRand.shuffleArray(
-                pokemonList.filter((p) => PokemonHelper.isObtainableAndNotEvable(p.name)
-                    && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION).map((p) => p.name))
-        ).flat();
+        const friendSafariPokemon = pokemonList
+            .filter((p) => PokemonHelper.isObtainableAndNotEvable(p.name)
+                && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION)
+            .map((p) => p.name);
+
+        SeededRand.seed(+player.trainerId);
+        const shuffledPokemon = new Array(GameConstants.FRIEND_SAFARI_POKEMON)
+            .fill(SeededRand.shuffleArray(friendSafariPokemon)).flat();
 
         // Rotation is fixed, use the current date to determine where in the list to select the 5 pokemon
         const batchCount = Math.ceil(shuffledPokemon.length / GameConstants.FRIEND_SAFARI_POKEMON);
@@ -175,7 +177,7 @@ class SafariPokemonList {
         const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
 
         const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true);
+            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true, true);
         });
 
         pokemon.push(new SafariEncounter('Shuckle', 2));

@@ -197,6 +197,7 @@ import SafariRocksRequirement from './requirements/SafariRocksRequirement';
 import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
+import ChristmasPresent from './items/ChristmasPresent';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -404,4 +405,5 @@ Object.assign(<any>window, {
     SafariItemsRequirement,
     SafariCatchRequirement,
     ItemRequirement,
+    ChristmasPresent,
 });

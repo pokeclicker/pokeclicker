@@ -316,14 +316,10 @@ class QuestLineHelper {
         const buyExplorerKit = new CustomQuest(1, 0, 'Buy the Explorer Kit from Cinnabar Island Shop.', () => +App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit)).withInitialValue(0);
         undergroundQuestLine.addQuest(buyExplorerKit);
 
-        // Mine 5 layers in the Unerground
+        // Mine 5 layers in the Underground
         const oldAmberReward = () => {
             // Gain an Old Amber
-            const oldAmber = UndergroundItems.list.find(item => item.name == 'Old Amber');
-            if (!oldAmber) {
-                return console.error('Unable to find item Old Amber');
-            }
-            Underground.gainMineItem(oldAmber.id);
+            ItemList.Old_amber.gain(1);
             Notifier.notify({
                 title: undergroundQuestLine.name,
                 message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
@@ -720,14 +716,10 @@ class QuestLineHelper {
 
         // Capture 200 Psychic type Pokemon
         const mindPlateReward = () => {
-            const mindPlate = UndergroundItems.list.find(item => item.name == 'Mind Plate');
-            if (!mindPlate) {
-                return console.error('Unable to find item Mind Plate');
-            }
-            Underground.gainMineItem(mindPlate.id, 20);
+            ItemList.Mind_plate.gain(20);
             Notifier.notify({
                 title: deoxysQuestLine.name,
-                message: `You have gained 20 ${mindPlate.name}s!`,
+                message: 'You have gained 20 Mind Plates!',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
@@ -853,7 +845,7 @@ class QuestLineHelper {
         const collectPinkanMaterials = new MultipleQuestsQuest(
             [
                 new GainGemsQuest(1000, 0, PokemonType.Fairy),
-                new CustomQuest(10, 0, 'Gain 10 Pixie Plates', () => player.mineInventory().find(item => item.name == 'Pixie Plate')?.amount() ?? 0),
+                new CustomQuest(10, 0, 'Gain 10 Pixie Plates', () => player.itemList.Pixie_plate()),
             ], 'Collect Fairy Gems and Pixie Plates');
         pinkanThemeparkQuestLine.addQuest(collectPinkanMaterials);
 
@@ -1280,19 +1272,19 @@ class QuestLineHelper {
         const talktoMesprit = new TalkToNPCQuest(VerityMesprit, 'Ask Mesprit about the Distortion World in Lake Verity.');
         giratinaQuestLine.addQuest(talktoMesprit);
 
-        const obtain10PurpleShards = new CustomQuest(10, 0, 'Obtain 10 Purple Shards.', () => player.mineInventory().find(item => item.name == 'Purple Shard')?.amount() ?? 0);
+        const obtain10PurpleShards = new CustomQuest(10, 0, 'Obtain 10 Purple Shards.', () => player.itemList.Purple_shard());
         giratinaQuestLine.addQuest(obtain10PurpleShards);
 
         const talktoAzelf = new TalkToNPCQuest(ValorAzelf, 'Ask Azelf about the Distortion World in Lake Valor.');
         giratinaQuestLine.addQuest(talktoAzelf);
 
-        const obtain10OchreShards = new CustomQuest(10, 0, 'Obtain 10 Ochre Shards.', () => player.mineInventory().find(item => item.name == 'Ochre Shard')?.amount() ?? 0);
+        const obtain10OchreShards = new CustomQuest(10, 0, 'Obtain 10 Ochre Shards.', () => player.itemList.Ochre_shard());
         giratinaQuestLine.addQuest(obtain10OchreShards);
 
         const talktoUxie = new TalkToNPCQuest(AcuityUxie, 'Ask Uxie about the Distortion World in Lake Acuity.');
         giratinaQuestLine.addQuest(talktoUxie);
 
-        const obtain10CrimsonShards = new CustomQuest(10, 0, 'Obtain 10 Crimson Shards.', () => player.mineInventory().find(item => item.name == 'Crimson Shard')?.amount() ?? 0);
+        const obtain10CrimsonShards = new CustomQuest(10, 0, 'Obtain 10 Crimson Shards.', () => player.itemList.Crimson_shard());
         giratinaQuestLine.addQuest(obtain10CrimsonShards);
 
         const clearSendoffSpring = new DefeatDungeonQuest(1, 0, 'Sendoff Spring').withDescription('Clear Sendoff Spring to meet the Lake Trio.');
@@ -1304,7 +1296,7 @@ class QuestLineHelper {
         const chargeDistortionKey = new MultipleQuestsQuest(
             [
                 new GainGemsQuest(500, 0, PokemonType.Ghost),
-                new CustomQuest(1, 0, 'Gain 1 Spooky Plate.', () => player.mineInventory().find(item => item.name == 'Spooky Plate')?.amount() ?? 0),
+                new CustomQuest(1, 0, 'Gain 1 Spooky Plate.', () => player.itemList.Spooky_plate()),
             ], 'Charge the key to the Distortion World.');
         giratinaQuestLine.addQuest(chargeDistortionKey);
 
@@ -1469,14 +1461,14 @@ class QuestLineHelper {
         );
         genesectQuestLine.addQuest(fightDriveGenesect);
 
-        const watchGenesectFight = new TalkToNPCQuest(GenesectFight, 'Witness the battle between the Red Genesect and another powerful Pokémon in Castelia City.');
-        genesectQuestLine.addQuest(watchGenesectFight);
-
-        const digP2 = new MineLayersQuest(5, 0).withDescription('The Red Genesect has crashed into the P2 Lab, leaving a pile of rubble in its wake. Dig through the rubble to learn more.');
-        genesectQuestLine.addQuest(digP2);
-
         const battleRedGenesect2 = new DefeatTemporaryBattleQuest('Red Genesect 2', 'The Red Genesect is trying to escape the Castelia Sewers, stop it!');
         genesectQuestLine.addQuest(battleRedGenesect2);
+
+        const watchGenesectFight  = new TalkToNPCQuest(GenesectFight, 'Witness the battle between the Red Genesect and another powerful Pokémon in Castelia City.');
+        genesectQuestLine.addQuest(watchGenesectFight);
+
+        const digP2 = new MineLayersQuest(5, 0).withDescription('The Red Genesect has crashed into the P2 Lab and escaped underground. Start digging to learn more.');
+        genesectQuestLine.addQuest(digP2);
 
         const catchGenesect = new CaptureSpecificPokemonQuest('Genesect').withDescription('Catch Genesect in P2 Lab.');
         genesectQuestLine.addQuest(catchGenesect);
@@ -1555,7 +1547,7 @@ class QuestLineHelper {
             player.gainItem('Rare_Candy', 50);
             Notifier.notify({
                 title: orreXDQuestLine.name,
-                message: 'Mayor Trest has given a big box of Rare Candy.',
+                message: 'Mayor Trest has given you a big box of Rare Candy.',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
             });
@@ -1600,7 +1592,7 @@ class QuestLineHelper {
 
         const clearCipherKeyLair = new DefeatDungeonQuest(1, 0, 'Cipher Key Lair').withDescription('You found a key to the Cipher Key Lair. Find out what\'s inside!') // Step 25
             .withOptionalArgs({
-                clearedMessage: 'Bah! No Fair! Fine, you can take your precious Professor Krane. Get out of here!',
+                clearedMessage: 'Bah! No fair! Fine, you can take your precious Professor Krane. Get out of here!',
                 npcDisplayName: 'Gorigan',
                 npcImageName: 'Cipher Admin Gorigan',
             });
@@ -1622,7 +1614,7 @@ class QuestLineHelper {
         const fightCitadarkIsle = new DefeatDungeonQuest(10, 0, 'Citadark Isle').withDescription('Battle through Team Cipher on Citadark Isle');
         orreXDQuestLine.addQuest(fightCitadarkIsle);
 
-        const fightCitadarkIsleDome = new DefeatDungeonQuest(1, 0, 'Citadark Isle Dome').withDescription('Defeat Grand Master Greevil and XD001 in the Citradark Isle Dome.');
+        const fightCitadarkIsleDome = new DefeatDungeonQuest(1, 0, 'Citadark Isle Dome').withDescription('Defeat Grand Master Greevil and XD001 in the Citadark Isle Dome.');
         orreXDQuestLine.addQuest(fightCitadarkIsleDome);
 
         App.game.quests.questLines().push(orreXDQuestLine);
@@ -1656,9 +1648,9 @@ class QuestLineHelper {
 
         // Talk to Fossil Scientist after beating Team Flare Grunt
         const KalosFossilReward = () => {
-            const item = Rand.boolean() ? 'Sail Fossil' : 'Jaw Fossil';
+            const item = Rand.boolean() ? 'Sail_fossil' : 'Jaw_fossil';
 
-            Underground.gainMineItem(UndergroundItems.getByName(item).id, 1);
+            ItemList[item].gain(1);
             Notifier.notify({
                 title: flareKalosQuestLine.name,
                 message: `Fossil Scientist has given you a ${GameConstants.humanifyString(item)}!`,
@@ -1873,7 +1865,7 @@ class QuestLineHelper {
 
         const clearGranite = new DefeatDungeonQuest(10, 0, 'Granite Cave').withDescription('Clear Granite Cave 10 times.');
 
-        const findStars = new CustomQuest(1, 0, 'Find a Star Piece.', () => player.mineInventory().find(item => item.name == 'Star Piece')?.amount() ?? 0);
+        const findStars = new CustomQuest(1, 0, 'Find a Star Piece.', () => player.itemList.Star_piece());
 
         deltaEpisodeQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -2020,7 +2012,7 @@ class QuestLineHelper {
 
         const findMysticWater = new CustomQuest(1, 0, 'Find one Mystic Water.', () => player.itemList.Mystic_Water());
 
-        const findHeatRocks = new CustomQuest(3, 0, 'Find 3 Heat Rocks.', () => player.mineInventory().find(item => item.name == 'Heat Rock')?.amount() ?? 0);
+        const findHeatRocks = new CustomQuest(3, 0, 'Find 3 Heat Rocks.', () => player.itemList.Heat_rock());
 
         primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -3591,44 +3583,68 @@ class QuestLineHelper {
 
 
     public static createGigantamaxQuestLine() {
-        const gigantamaxQuestLine = new QuestLine('The Lair of Giants', 'TODO', new DevelopmentRequirement(new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)), GameConstants.BulletinBoards.Crown);
+        const gigantamaxQuestLine = new QuestLine('The Lair of Giants', 'Explore the Max Lair and discover the Gigantamax Pokémon.', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), GameConstants.BulletinBoards.Crown);
+
+        const talktoPeonia1 = new TalkToNPCQuest(Peonia1, 'Peony\'s daughter, Peonia, wants to talk to you in Freezington.');
+        gigantamaxQuestLine.addQuest(talktoPeonia1);
+
+        const clearMaxLair = new DefeatDungeonQuest(1, 0, 'Max Lair').withDescription('Clear Max Lair to encounter a Gigantamax Pokémon.');
+        gigantamaxQuestLine.addQuest(clearMaxLair);
+
+        const talktoPeonia2 = new TalkToNPCQuest(Peonia2, 'Report back to Peonia in Max Lair.');
+        gigantamaxQuestLine.addQuest(talktoPeonia2);
 
         gigantamaxQuestLine.addQuest(new CustomQuest(1, undefined, 'Obtain 1 Wishing Piece', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(2, undefined, 'Obtain 2 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(3, undefined, 'Obtain 3 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(4, undefined, 'Obtain 4 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(5, undefined, 'Obtain 5 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(6, undefined, 'Obtain 6 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(7, undefined, 'Obtain 7 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(8, undefined, 'Obtain 8 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(9, undefined, 'Obtain 9 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(10, undefined, 'Obtain 10 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(11, undefined, 'Obtain 11 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(12, undefined, 'Obtain 12 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(13, undefined, 'Obtain 13 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(14, undefined, 'Obtain 14 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(15, undefined, 'Obtain 15 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(16, undefined, 'Obtain 16 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(17, undefined, 'Obtain 17 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(18, undefined, 'Obtain 18 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(19, undefined, 'Obtain 19 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(20, undefined, 'Obtain 20 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(21, undefined, 'Obtain 21 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(22, undefined, 'Obtain 22 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(23, undefined, 'Obtain 23 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(24, undefined, 'Obtain 24 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(25, undefined, 'Obtain 25 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(26, undefined, 'Obtain 26 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(27, undefined, 'Obtain 27 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(28, undefined, 'Obtain 28 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
-        gigantamaxQuestLine.addQuest(new CustomQuest(29, undefined, 'Obtain 29 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
         gigantamaxQuestLine.addQuest(new CustomQuest(30, undefined, 'Obtain 30 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(36, undefined, 'Obtain 36 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(42, undefined, 'Obtain 42 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(49, undefined, 'Obtain 49 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(56, undefined, 'Obtain 56 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(64, undefined, 'Obtain 64 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(72, undefined, 'Obtain 72 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(81, undefined, 'Obtain 81 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(90, undefined, 'Obtain 90 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(100, undefined, 'Obtain 100 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(110, undefined, 'Obtain 110 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(121, undefined, 'Obtain 121 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(132, undefined, 'Obtain 132 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(144, undefined, 'Obtain 144 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(156, undefined, 'Obtain 156 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(169, undefined, 'Obtain 169 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(182, undefined, 'Obtain 182 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(196, undefined, 'Obtain 196 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(210, undefined, 'Obtain 210 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(225, undefined, 'Obtain 225 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+        gigantamaxQuestLine.addQuest(new CustomQuest(240, undefined, 'Obtain 240 Wishing Pieces', player.itemList.Wishing_Piece).withInitialValue(0));
+
+        const talktoPeonia3 = new TalkToNPCQuest(Peonia3, 'You\'ve finally obtained enough Wishing Pieces to attract every Gigantamax Pokémon to the Max Lair! Tell Peonia about your achievement in Max Lair.');
+        gigantamaxQuestLine.addQuest(talktoPeonia3);
+
+        const talktoGigantamaxLeon1 = new TalkToNPCQuest(GigantamaxLeon1, 'It seems something is going on in Hammerlocke! Talk to Leon in Energy Plant.');
+        gigantamaxQuestLine.addQuest(talktoGigantamaxLeon1);
+
+        const clearEternamaxEternatus = new DefeatTemporaryBattleQuest('Eternamax Eternatus', 'Eternamax Eternatus has appeared in the Energy Plant yet again! Bring it down once more.');
+        gigantamaxQuestLine.addQuest(clearEternamaxEternatus);
+
+        const talktoGigantamaxLeon2 = new TalkToNPCQuest(GigantamaxLeon2, 'You defeated Eternamax Eternatus once more. Talk to Leon in Energy Plant.');
+        gigantamaxQuestLine.addQuest(talktoGigantamaxLeon2);
+
+        const talktoPeonia4 = new TalkToNPCQuest(Peonia4, 'Go back to the Max Lair to tell Peonia what happened.');
+        gigantamaxQuestLine.addQuest(talktoPeonia4);
 
         App.game.quests.questLines().push(gigantamaxQuestLine);
     }
 
     public static createOriginalColorMagearnaQuestLine() {
-        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have recieved a Mystery Gift.',
+        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have received a Mystery Gift.',
             new MultiRequirement([
                 new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
                 new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
@@ -3780,13 +3796,13 @@ class QuestLineHelper {
         const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter').withDescription('That looked like a Togepi!... well, maybe not. Anyway, there is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
         easterQuestLine.addQuest(encounterTogepiInHoenn);
 
-        const talkToEggHunter = new TalkToNPCQuest(EasterEggHunter, 'The eggs ran away! Talk to the egg hunter.');
+        const talkToEggHunter = new TalkToNPCQuest(EasterEggHunter, 'The eggs ran away! Talk to the egg hunter in Petalburg Woods.');
         easterQuestLine.addQuest(talkToEggHunter);
 
         App.game.quests.questLines().push(easterQuestLine);
     }
 
-    public static isQuestLineCompleted(name: string) {
+    public static isQuestLineCompleted(name: QuestLineNameType) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
