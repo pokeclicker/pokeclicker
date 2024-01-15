@@ -134,7 +134,7 @@ class Egg implements Saveable {
         const shadow = GameConstants.ShadowStatus.None;
         if (partyPokemon) {
             // Increase attack
-            const shinyMultiplier = shiny ? GameConstants.BREEDING_SHINY_MULTIPLIER : 1;
+            const shinyMultiplier = shiny ? GameConstants.BREEDING_SHINY_ATTACK_MULTIPLIER : 1;
             partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)) * shinyMultiplier);
             partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]() * (efficiency / 100)) * shinyMultiplier);
 
