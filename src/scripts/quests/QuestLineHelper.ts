@@ -2055,7 +2055,7 @@ class QuestLineHelper {
                 talkToPrimalMaxie,
             ], 'Find out what the Team Leaders are up to at Mt. Pyre.'));
 
-        const fightPrimalGroudon = new DefeatTemporaryBattleQuest('Primal Groudon', 'Defeat Primal Groudon in Sunny Weather.');
+        const fightPrimalGroudon = new DefeatTemporaryBattleQuest('Primal Groudon', 'Defeat Primal Groudon in Harsh Sunlight Weather.');
         const fightPrimalKyogre = new DefeatTemporaryBattleQuest('Primal Kyogre', 'Defeat Primal Kyogre in Raining Weather.');
 
         primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
