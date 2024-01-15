@@ -286,4 +286,15 @@ class MapHelper {
         }
     }
 
+    public static mapVisible = ko.pureComputed(() => {
+        const states = [
+            GameConstants.GameState.fighting,
+            GameConstants.GameState.gym,
+            GameConstants.GameState.town,
+            GameConstants.GameState.shop,
+            GameConstants.GameState.temporaryBattle,
+            GameConstants.GameState.paused,
+        ];
+        return App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && states.includes(App.game.gameState);
+    });
 }

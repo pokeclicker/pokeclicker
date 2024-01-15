@@ -824,3 +824,26 @@ button.btn-circle {
     }
   }
 }
+
+// Location Navigator module
+#locationNavigatorContainer {
+    #locationNavigatorItems {
+        max-height: 300px;
+        overflow: auto;
+    }
+
+    #locationNavigatorBody {
+        container: location-navigator / inline-size;
+    }
+}
+
+// Location Navigator options displayed in tabs or dropdown based on module width
+@container location-navigator (max-width: 200px) {
+    #locationNavigatorSelect { display: block; }
+    #locationNavigatorTabs { display: none; }
+}
+
+@container location-navigator (min-width: 200px) {
+    #locationNavigatorSelect { display: none; }
+    #locationNavigatorTabs { display: block; }
+}

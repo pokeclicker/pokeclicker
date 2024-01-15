@@ -135,6 +135,7 @@ Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
     ],
     'standard3'));
 Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
+Settings.add(new BooleanSetting('showLocationNavigatorModule', 'Enable Location Navigator module', false));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
