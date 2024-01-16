@@ -18,11 +18,11 @@ class UseOakItemQuest extends Quest implements QuestInterface {
         const possibleItems = [
             OakItemType.Magic_Ball,
             OakItemType.Amulet_Coin,
-            // OakItemType.Poison_Barb,
+            // OakItemType.Rocky_Helmet,
             OakItemType.Exp_Share,
             // OakItemType.Sprayduck,
             // OakItemType.Shiny_Charm,
-            // OakItemType.Blaze_Cassette,
+            // OakItemType.Magma_Stone,
             // OakItemType.Cell_Battery,
             // OakItemType.Squirtbottle,
             // OakItemType.Sprinklotad,
@@ -41,6 +41,9 @@ class UseOakItemQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
+        if (this.customDescription) {
+            return this.customDescription;
+        }
         const desc = [];
         desc.push(`Equip the ${GameConstants.humanifyString(OakItemType[this.item])} and`);
         if (this.item == OakItemType.Magic_Ball) {

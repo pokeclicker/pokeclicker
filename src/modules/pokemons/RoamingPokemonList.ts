@@ -1,7 +1,7 @@
 import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
-    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, Region, getDungeonIndex,
+    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, Region, getDungeonIndex,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
@@ -22,13 +22,14 @@ export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
         [new RoamingGroup('Kanto', [KantoSubRegions.Kanto]), new RoamingGroup('Kanto - Sevii Islands', [KantoSubRegions.Sevii123, KantoSubRegions.Sevii4567])],
         [new RoamingGroup('Johto', [JohtoSubRegions.Johto])],
-        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn]), new RoamingGroup('Orre', [HoennSubRegions.Orre])],
+        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn]), new RoamingGroup('Hoenn - Orre', [HoennSubRegions.Orre])],
         [new RoamingGroup('Sinnoh', [SinnohSubRegions.Sinnoh])],
         [new RoamingGroup('Unova', [UnovaSubRegions.Unova])],
         [new RoamingGroup('Kalos', [KalosSubRegions.Kalos])],
         [new RoamingGroup('Alola', [AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland]), new RoamingGroup('Alola - Magikarp Jump', [AlolaSubRegions.MagikarpJump])],
         [new RoamingGroup('Galar - South', [GalarSubRegions.SouthGalar]), new RoamingGroup('Galar - North', [GalarSubRegions.NorthGalar]), new RoamingGroup('Galar - Isle of Armor', [GalarSubRegions.IsleofArmor]), new RoamingGroup('Galar - Crown Tundra', [GalarSubRegions.CrownTundra])],
         [new RoamingGroup('Hisui', [HisuiSubRegions.Hisui])],
+        [new RoamingGroup('Paldea', [PaldeaSubRegions.Paldea]), new RoamingGroup('Paldea - Kitakami', [PaldeaSubRegions.Kitakami]), new RoamingGroup('Paldea - Blueberry Academy', [PaldeaSubRegions.BlueberryAcademy])],
     ];
 
     public static list: Partial<Record<Region, Array<Array<RoamingPokemon>>>> = {};
@@ -106,6 +107,7 @@ RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new QuestLi
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
 // Orre
 RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Ho-Oh', new QuestLineCompletedRequirement('Shadows in the Desert')));
+RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Bonsly', new QuestLineCompletedRequirement('Gale of Darkness')));
 
 // Sinnoh
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Manaphy', new QuestLineCompletedRequirement('Recover the Precious Egg!')));
@@ -116,6 +118,7 @@ RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Cresselia', new Cle
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Thundurus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
+RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Genesect (High-Speed)', new QuestLineCompletedRequirement('The Legend Awakened')));
 
 // Kalos
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Zapdos', new ClearDungeonRequirement(1, getDungeonIndex('Sea Spirit\'s Den'))));
@@ -124,9 +127,9 @@ RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Articuno', new Clear
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Hoopa', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)));
 
 // Alola
-RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
-RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
-RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
 // Magikarp Jump
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Purple Diamonds', new GymBadgeRequirement(BadgeEnums.Luxury_League)));
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Apricot Stripes', new GymBadgeRequirement(BadgeEnums.Heal_League)));
@@ -150,6 +153,9 @@ RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Thundurus', new Ques
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Landorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Enamorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3)));
 
+// Paldea
+RoamingPokemonList.add(Region.paldea, 0, new RoamingPokemon('Gimmighoul (Roaming)'));
+
 // Events
 // Lunar New Year (Jan 24 - Feb 7)
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year')));
@@ -165,14 +171,15 @@ RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)', 
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Flying Pikachu', new SpecialEventRequirement('Flying Pikachu')));
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Red Spearow', new SpecialEventRequirement('Flying Pikachu')));
 // First movie anniversay (Jul 18 - Jul 24)
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Charmander (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Charmander (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Pikachu (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ObtainedPokemonRequirement('Pikachu (Clone)')])));
 // Halloween (Oct 30 - Nov 5)
 // Let's Go Pikachu Eevee (Nov 16 - Nov 23)
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu', new SpecialEventRequirement('Let\'s GO!')));
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee', new SpecialEventRequirement('Let\'s GO!')));
-// Christmas (Dec 24 - Dec 30)
+// Christmas (Dec 18 - Dec 31)
 // Add to every roaming group that has at least one roamer
 RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
     regionGroups.forEach((_, subRegionGroup) => {
@@ -181,3 +188,4 @@ RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
         }
     });
 });
+RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Reindeer Stantler', new SpecialEventRequirement('Merry Christmas!')));

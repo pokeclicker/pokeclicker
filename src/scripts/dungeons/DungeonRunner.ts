@@ -19,7 +19,7 @@ class DungeonRunner {
     public static fightingLootEnemy: boolean;
     public static continuousInteractionInput = false;
 
-    public static initializeDungeon(dungeon) {
+    public static initializeDungeon(dungeon: Dungeon) {
         if (!dungeon.isUnlocked()) {
             return false;
         }
@@ -53,7 +53,7 @@ class DungeonRunner {
             let tier = dungeon.getRandomLootTier(clears);
             let loot = dungeon.getRandomLoot(tier);
             if (!loot.ignoreDebuff && debuffed) {
-                tier = dungeon.getRandomLootTier(clears, debuffed);
+                tier = dungeon.getRandomLootTier(clears, debuffed, true);
                 loot = dungeon.getRandomLoot(tier, true);
             }
 
@@ -82,6 +82,7 @@ class DungeonRunner {
             } else {
                 DungeonRunner.dungeonLost();
             }
+            return;
         }
         if (DungeonRunner.map.playerMoved()) {
             DungeonRunner.timeLeft(DungeonRunner.timeLeft() - GameConstants.DUNGEON_TICK);

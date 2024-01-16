@@ -102,7 +102,7 @@ ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 1187, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
-ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
+ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)', undefined);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']     = new PokemonItem('Burmy (Plant)', 6750);
 ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
@@ -117,6 +117,7 @@ ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Cu
 ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 300000000, Currency.dungeonToken);
 ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
 ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)', undefined);
+ItemList['Furfrou (Heart)']    = new PokemonItem('Furfrou (Heart)', 15000, Currency.contestToken);
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
 // Silvally Forms
@@ -211,9 +212,18 @@ ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)', undefine
 ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)', undefined);
 ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)', undefined);
 // Contest
-ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 7500, Currency.contestToken);
-ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 10000, Currency.contestToken);
-ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 5000, Currency.contestToken);
-ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 7500, Currency.contestToken);
-ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 7500, Currency.contestToken);
-ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 7500, Currency.contestToken);
+ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 1500, Currency.contestToken);
+ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 3000, Currency.contestToken);
+ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 500, Currency.contestToken);
+ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 1000, Currency.contestToken);
+ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 400, Currency.contestToken);
+ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 700, Currency.contestToken);
+ItemList['Sudowoodo (Golden)'] = new PokemonItem('Sudowoodo (Golden)', 2000, Currency.contestToken);
+ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)', 1000, Currency.contestToken);
+ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)', 1000, Currency.contestToken);
+ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)', 1000, Currency.contestToken);
+ItemList['Pikachu (Ph. D.)'] = new PokemonItem('Pikachu (Ph. D.)', 1000, Currency.contestToken);
+ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 1000, Currency.contestToken);
+// Event
+ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
+    { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });

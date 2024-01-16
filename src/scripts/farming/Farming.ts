@@ -51,6 +51,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Shiny] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Shiny));
         this.externalAuras[AuraType.Roaming] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Roaming));
         this.externalAuras[AuraType.Ev] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Ev));
+        this.externalAuras[AuraType.Xp] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Xp));
         this.externalAuras[AuraType.Repel] = ko.pureComputed<number>(() => this.addPlotAuras(AuraType.Repel));
 
         const multiplierSource = 'Farm Aura';
@@ -58,6 +59,7 @@ class Farming implements Feature {
         this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg](), multiplierSource);
         this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming](), multiplierSource);
         this.multiplier.addBonus('ev', () => this.externalAuras[AuraType.Ev](), multiplierSource);
+        this.multiplier.addBonus('exp', () => this.externalAuras[AuraType.Xp](), multiplierSource);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -579,7 +581,7 @@ class Farming implements Feature {
             BerryColor.Pink,
             25,
             BerryFirmness.Soft,
-            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20 inches.']
+            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20\u2033, or 50 cm.']
         );
 
         this.berryData[BerryType.Durin] = new Berry(
@@ -619,7 +621,7 @@ class Farming implements Feature {
             0.1,
             2500,
             15,
-            [0, 0, 50, 0, 0],
+            [0, 0, 35, 0, 0],
             30,
             BerryColor.Pink,
             3.5,
@@ -627,7 +629,9 @@ class Farming implements Feature {
             [
                 'This Berry endemic to Pinkan Island has an incredibly sweet taste.',
                 'It has a vibrant pink pigment, and it is found in such abundance on Pinkan Island that all Pokémon found there are colored Pink!',
-            ]
+            ],
+            undefined,
+            ['Pinkan Scyther']
         );
         //#endregion
 
@@ -649,7 +653,7 @@ class Farming implements Feature {
                 'It has a tendency to overtake nearby plants.',
             ],
             undefined,
-            ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Scorbunny']
+            ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Scorbunny', 'Fuecoco']
         );
 
         this.berryData[BerryType.Passho] = new Berry(
@@ -669,7 +673,7 @@ class Farming implements Feature {
                 'This Berry promotes the fruiting of nearby Berry plants.',
             ],
             new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]),
-            ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Froakie', 'Popplio', 'Sobble']
+            ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Froakie', 'Popplio', 'Sobble', 'Quaxly']
         );
 
         this.berryData[BerryType.Wacan] = new Berry(
@@ -689,7 +693,7 @@ class Farming implements Feature {
                 'The same energy promotes the growth of nearby Berries.',
             ],
             new Aura(AuraType.Growth, [1.1, 1.2, 1.3]),
-            ['Pikachu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)']
+            ['Pikachu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)', 'Pawmi']
         );
 
         this.berryData[BerryType.Rindo] = new Berry(
@@ -709,7 +713,7 @@ class Farming implements Feature {
                 'It has a tendency to expand into nearby plots.',
             ],
             undefined,
-            ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey']
+            ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey', 'Sprigatito']
         );
 
         this.berryData[BerryType.Yache] = new Berry(
@@ -847,7 +851,7 @@ class Farming implements Feature {
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
             ],
             new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]),
-            ['Pinsir', 'Shuckle', 'Nincada', 'Sizzlipede']
+            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Sizzlipede']
         );
 
         this.berryData[BerryType.Charti] = new Berry(
@@ -907,7 +911,7 @@ class Farming implements Feature {
                 'This Berry requires a lot of energy to grow, but isn\'t fussy about what it consumes, it helps other plants by removing toxins from the soil.',
             ],
             new Aura(AuraType.Decay, [0.8, 0.6, 0.5]),
-            ['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Drampa', 'Applin']
+            ['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Drampa', 'Applin', 'Exposed Applin']
         );
 
         this.berryData[BerryType.Colbur] = new Berry(
@@ -986,6 +990,23 @@ class Farming implements Feature {
             new Aura(AuraType.Attract, [1.01, 1.02, 1.03]),
             ['Clefairy', 'Togepi', 'Ralts']
         );
+
+        this.berryData[BerryType.Snover] = new Berry(
+            BerryType.Snover,
+            [3600, 7200, 10800, 14400, 28800],
+            5,
+            0.01,
+            1250,
+            15,
+            [0, 0, 20, 0, 10],
+            35,
+            BerryColor.Green,
+            5,
+            BerryFirmness.Soft,
+            ['This berry grows around the waist of certain Snover.'],
+            undefined,
+            ['Snover (Berry)']
+        );
         //#endregion
 
         //#region Fifth Generation
@@ -1005,7 +1026,8 @@ class Farming implements Feature {
                 'This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.',
                 'The scent of this Berry plant repels wild Pokémon.',
             ],
-            new Aura(AuraType.Repel, [0.11, 0.22, 0.33])
+            new Aura(AuraType.Repel, [0.11, 0.22, 0.33]),
+            ['Hoopa']
         );
 
         this.berryData[BerryType.Custap] = new Berry(
@@ -1020,7 +1042,12 @@ class Farming implements Feature {
             BerryColor.Red,
             26.7,
             BerryFirmness.Super_Hard,
-            ['The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.']
+            [
+                'The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.',
+                'This inspires Pokémon to train harder.',
+            ],
+            new Aura(AuraType.Xp, [1.005, 1.01, 1.015]),
+            ['Burmy (No Coat)']
         );
 
         this.berryData[BerryType.Jaboca] = new Berry(
@@ -1502,7 +1529,7 @@ class Farming implements Feature {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
         }));
         // Chople
-        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Blaze_Cassette));
+        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Magma_Stone));
         // Kebia
         this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItemType.Rocky_Helmet));
         // Kebia Parasite
@@ -1575,6 +1602,11 @@ class Farming implements Feature {
                 BerryType.Magost,
                 BerryType.Watmel,
             ]));
+        // Snover
+        this.mutations.push(new FieldMutation(.00002, BerryType.Snover, [{ berry: BerryType.Babiri, amountRequired: 20 }], {
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Snover').id]() > 0,
+            hint: 'I\'ve heard of a Berry that can appear in a field of Babiri when Snover are around.',
+        }));
         //#endregion
 
         //#region Fifth Generation
@@ -2228,9 +2260,9 @@ class Farming implements Feature {
 
     public auraDisplay(berry: BerryType, stage: number) {
         if (App.game.farming.berryData[berry].aura.auraType === AuraType.Repel) { // add other additive auras here with ||
-            return `+${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage] * 100)}%`;
+            return `+${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         } else {
-            return `×${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage])}`;
+            return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         }
     }
 

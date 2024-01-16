@@ -285,6 +285,58 @@
             })
         %>
 
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Route 26-->
+        <%- include('templates/mapPOI',
+            { name: "Johto Route 26"
+            , width: 3, height: 15
+            , x: 7, y: 29
+            , databind: `attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Vermilion City.'});
+                }`
+            })
+        %>
+
+        <!--Route 27-->
+        <%- include('templates/mapPOI',
+            { name: "Johto Route 27"
+            , width: 7, height: 3
+            , x: 0, y: 41
+            , databind: `attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Vermilion City.'});
+                }`
+            })
+        %>
+
+        <!--Route 28-->
+        <%- include('templates/mapPOI',
+            { name: "Johto Route 28"
+            , width: 7, height: 3
+            , x: 0, y: 26
+            , databind: `attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Vermilion City.'});
+                }`
+            })
+        %>
+
+        <!--Route 28 Extension-->
+        <%- include('templates/mapPOI',
+            { name: "Johto Route 28"
+            , width: 2, height: 4
+            , x: 0, y: 30
+            , databind: `attr: { class: MapHelper.accessToRoute(2, GameConstants.Region.kanto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Vermilion City.'});
+                }`
+            })
+        %>
+
         <!-- ----- -->
         <!-- TOWNS -->
         <!-- ----- -->
@@ -759,6 +811,16 @@
         %>
 
         <%- include('templates/mapOverlay',
+            { name: "Anomaly Mewtwo"
+            , x: 56, y: 4
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Anomaly Mewtwo 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Anomaly Mewtwo 1'] && TemporaryBattleList['Anomaly Mewtwo 1'].isVisible()"
+            , image: "assets/images/map/mewtwox.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
             { name: "Suicune"
             , x: 80, y: 1
             , width: 3, height: 4
@@ -787,6 +849,28 @@
             , image: "assets/images/map/snorlaxoverworld.png"
             })
         %>
+
+        <!--New Island-->
+        <%- include('templates/mapOverlay',
+            { x: 80, y: 50
+            , width: 4, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('New Island')}, attr:{ class: MapHelper.calculateTownCssClass('New Island') }"
+            , visible:  "TownList['New Island'].isUnlocked()"
+            , image: "assets/images/map/new_island.png"
+            })
+        %>
+
+        <!--New Island extension-->
+        <%- include('templates/mapOverlay',
+            { x: 80, y: 50
+            , width: 4, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('New Island')}, attr:{ class: MapHelper.calculateTownCssClass('New Island') }"
+            , visible:  "TownList['New Island'].isUnlocked()"
+            , image: "assets/images/map/transparent.png"
+            , connectedToTown: "New Island"
+            })
+        %>
+
     %>
     </g>
 

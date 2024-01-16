@@ -33,7 +33,9 @@
                                                     visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                             <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px; margin: -10px; padding: 12px 0px;">
                                             <div class="d-inline-block" data-bind="text: ItemList[$data].displayName" style="margin-left: 20px; margin-top:8px;"></div>
-                                            <div class="float-right" style="margin-top: 8px" data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': ItemList[$data].getPokerusStatus() }}"></div>
+                                            <div class="float-right" style="margin-top: 8px" data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                    'pokerus': ItemList[$data].getPokerusStatus(),
+                                                    'evsProgress': ItemList[$data].getPokerusProgress() }}"></div>
                                             <!-- ko if: ItemList[$data] instanceof CaughtIndicatingItem -->
                                             <div class="float-right mr-1" style="margin-top: 8px;" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': ItemList[$data].getCaughtStatus()}}"></div>
                                             <!-- /ko -->
@@ -61,7 +63,7 @@
                                             <div class="d-inline-block" data-bind="text: displayName" style="margin-left: 20px; margin-top: 8px;">Name</div>
                                             <span class="mr-1" style="float: right; margin-top: 8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsPokerusData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
                                                 <span class="stoneEvolutionStatuses" data-bind="foreach: statuses">
-                                                    <span class="" data-bind="template: { name: 'pokerusStatusTemplate', data: { pokerus: $data.status } }"></span>
+                                                    <span class="" data-bind="template: { name: 'pokerusStatusTemplate', data: { pokerus: $data.status, evs: $data.evs } }"></span>
                                                 </span>
                                             </span>
                                             <span class="mr-1" style="float: right; margin-top: 8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
@@ -144,6 +146,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- ko if: GameHelper.enumStrings(GameConstants.ConsumableType).some(type => player.itemList[type]()) -->
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-consumables">
+                            <h5 class="m-0 text-light">Consumables</h5>
+                        </div>
+                        <div id="itemBag-consumables" class="collapse show">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.ConsumableType).filter(type => player.itemList[type]()).map(type => ItemList[type]) -->
+                                    <div class="col-6 col-lg-3 mb-2">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name },
+                                            click: () => { ConsumableController.currentlySelected($data.type); $('#consumableModal').modal('show'); }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
 
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-heldItems">
                             <h5 class="m-0 text-light">Held Items</h5>

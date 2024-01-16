@@ -1,12 +1,13 @@
 class SafariTownContent extends TownContent {
+    constructor(private buttonText?: string) {
+        super();
+    }
+
     public cssClass(): string {
         return 'btn btn-primary';
     }
     public text(): string {
-        return 'Enter Safari Zone';
-    }
-    public isVisible(): boolean {
-        return true;
+        return this.buttonText ?? 'Enter Safari Zone';
     }
     public onclick(): void {
         Safari.openModal();
@@ -18,6 +19,9 @@ class SafariTownContent extends TownContent {
         const pokemonStatusArray = [areaStatus.completed];
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         SafariPokemonList.list[player.region]().forEach(p => {
+            if (!p.isAvailable()) {
+                return;
+            }
             const caughtStatus = PartyController.getCaughtStatusByName(p.name);
             if (caughtStatus == CaughtStatus.NotCaught) {
                 pokemonStatusArray.push(areaStatus.uncaughtPokemon);

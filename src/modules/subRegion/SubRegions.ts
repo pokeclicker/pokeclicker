@@ -10,6 +10,7 @@ import {
     AlolaSubRegions,
     GalarSubRegions,
     HisuiSubRegions,
+    PaldeaSubRegions,
 } from '../GameConstants';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
@@ -67,7 +68,7 @@ SubRegions.addSubRegion(Region.unova, new SubRegion('Unova', UnovaSubRegions.Uno
 SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos', KalosSubRegions.Kalos));
 
 SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele Island', AlolaSubRegions.MelemeleIsland, undefined, 'Hau\'oli City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Akala Island', AlolaSubRegions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Akala Island', AlolaSubRegions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.Melemele_Stamp), 'Heahea City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula Island', AlolaSubRegions.UlaulaIsland, new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Poni Island', AlolaSubRegions.PoniIsland, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Magikarp Jump', AlolaSubRegions.MagikarpJump, new QuestLineStartedRequirement('Magikarp Jump'), 'Hoppy Town'));
@@ -78,3 +79,5 @@ SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubReg
 SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
 
 SubRegions.addSubRegion(Region.hisui, new SubRegion('Hisui', HisuiSubRegions.Hisui, undefined, 'Prelude Beach'));
+
+SubRegions.addSubRegion(Region.paldea, new SubRegion('Paldea', PaldeaSubRegions.Paldea));

@@ -50,15 +50,22 @@
   }
 }
 
+/* Fixes font-light being too bright / unreadable for table-warnings theme specific colour themes */
+.journal, .lux, .materia, .pulse, .sketchy, .spacelab, .united {
+  .table-warning.text-light {
+    color: black !important;
+  }
+}
+
 /* Individual themes */
 .cerulean {
-    /* Evolution items */
-    #evo-item-list, #evo-pokemon-list {
-        .item-selected, .pokemon-selected {
-            color: whitesmoke;
-            background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
-        }
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .item-selected, .pokemon-selected {
+      color: whitesmoke;
+      background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
     }
+  }
 }
 
 .cosmo {
@@ -106,6 +113,16 @@
   }
 }
 
+.litera {
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      @media (max-height: 650px) {
+        max-height: calc(40vh - 50px);
+      }
+    }
+  }
+}
+
 .lumen {
   /* Weather button in dock modal */
   .btn-weather-dock {
@@ -132,9 +149,32 @@
     }
   }
 
+  #berryDexModal {
+    .table-sm td, .table-sm th {
+      padding: 0.3rem;
+    }
+  }
+
   #pokemonStatisticsModal {
     .table-sm td, .table-sm th {
         padding: 0.3rem 0;
+    }
+  }
+
+  /* Berrydex List */
+  @media (max-width: 991px) {
+    .berryDexPreviewColumn {
+      max-height: calc(100vh - 240px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      max-height: calc(50vh - 50px);
+
+      @media (max-height: 393px) {
+        max-height: calc(40vh - 55px);
+      }
     }
   }
 }
@@ -163,6 +203,15 @@
     #evo-item-list, #evo-pokemon-list {
       .list-group-item-action:hover {
         color: black;
+      }
+    }
+}
+
+.sandstone {
+    /* Berrydex List */
+    @media (max-width: 991px) {
+      #berryDexPreviewFlavors {
+        font-size: small;
       }
     }
 }
@@ -204,13 +253,29 @@
     }
   }
 
+  //Still had double close for Battle Frontier
+  .close span {
+    visibility: hidden !important;
+  }
+
+  //Fixes margins causing white to float off modal
+  #battleContainer table .row {
+    margin: 0 !important
+  }
+
+  //Fixes save containers having a white table
+  .save-container table td {
+    background-color:unset !important;
+  }
+
   .modal-header {
     border-radius: 0;
   }
 
+   // Font was not visible on the footer of battle-views
   .pageItemFooter {
-    // Font was not visible on the footer of battle-views
-    color: rgba(0, 0, 0);
+    background-color: white; // Ensures background is white
+    color: black;
     font-weight: 700;
   }
 
@@ -236,6 +301,23 @@
   #toaster, #achievementsModal {
     .text-primary {
       color: whitesmoke !important;
+    }
+  }
+
+  // BerryDex
+  @media (max-width: 991px) { // tablet
+    .berryDexPreviewColumn {
+      max-height: calc(100vh - 240px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      max-height: calc(50vh - 50px);
+
+      @media (max-height: 393px) {
+        max-height: calc(40vh - 50px);
+      }
     }
   }
 
@@ -265,6 +347,20 @@
   // Farming
   .seed-list-item.active {
     background: rgba(255, 255, 255, 20%);
+  }
+
+  .berryDexButtons.btn-secondary {
+    background: rgba(0,0,0,0%);
+
+    span {
+      color: var(--secondary);
+    }
+  }
+
+  .berryDexButtons:hover {
+    span {
+      color: whitesmoke;
+    }
   }
 
   // Evolution items modal

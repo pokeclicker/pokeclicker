@@ -1,0 +1,74 @@
+<div id="currencyContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None">
+    <div class="card-header p-0" data-toggle="collapse" href="#currencyBody">
+        <span>Currency</span>
+    </div>
+    <div id="currencyBody" class="card-body px-2 py-1 show">
+        <div class="d-flex flex-wrap">
+            <div class="m-2 flex-grow-1" style="flex-basis: 0;">
+                <img src="assets/images/currency/money.svg" height="25px" data-bind="tooltip: {
+                    html: true,
+                    title: 'Pokédollars<br /><br />Gained by defeating Pokémon and trainers in battle.',
+                    trigger: 'hover',
+                    placement: 'top'
+                }">
+                <div id="animateCurrency-money" class="mt-1" data-bind="text: App.game.wallet.amountText(GameConstants.Currency.money)">0</div>
+            </div>
+            <div class="m-2 flex-grow-1" style="flex-basis: 0;">
+                <img src="assets/images/currency/dungeonToken.svg" height="25px" data-bind="tooltip: {
+                    html: true,
+                    title: 'Dungeon Tokens<br /><br />Gained by catching wild Pokémon.',
+                    trigger: 'hover',
+                    placement: 'top'
+                }">
+                <div id="animateCurrency-dungeonToken" class="mt-1" data-bind="text: App.game.wallet.amountText(GameConstants.Currency.dungeonToken)">0</div>
+            </div>
+            <div class="m-2 flex-grow-1" style="flex-basis: 0;">
+                <img src="assets/images/currency/questPoint.svg" height="25px" data-bind="tooltip: {
+                    html: true,
+                    title: 'Quest Points<br /><br />Gained by completing Quests.',
+                    trigger: 'hover',
+                    placement: 'top'
+                }">
+                <div id="animateCurrency-questPoint" class="mt-1" data-bind="text: App.game.wallet.amountText(GameConstants.Currency.questPoint)">0</div>
+            </div>
+            <!-- ko if: Settings.getSetting('currencyMainDisplayExtended').observableValue() -->
+            <div class="m-2 flex-grow-1" style="flex-basis: 0;">
+                <img src="assets/images/currency/farmPoint.svg" height="25px" data-bind="tooltip: {
+                    html: true,
+                    title: 'Farm Points<br /><br />Gained by harvesting berries on the Farm.',
+                    trigger: 'hover',
+                    placement: 'top'
+                }">
+                <div id="animateCurrency-farmPoint" class="mt-1" data-bind="text: App.game.wallet.amountText(GameConstants.Currency.farmPoint)">0</div>
+            </div>
+            <div class="m-2 flex-grow-1" style="flex-basis: 0;">
+                <img src="assets/images/currency/diamond.svg" height="25px" data-bind="tooltip: {
+                    html: true,
+                    title: 'Diamonds<br /><br />Gained by selling treasure found in the Underground.',
+                    trigger: 'hover',
+                    placement: 'top'
+                }">
+                <div id="animateCurrency-diamond" class="mt-1" data-bind="text: App.game.wallet.amountText(GameConstants.Currency.diamond)">0</div>
+            </div>
+            <div class="m-2 flex-grow-1" style="flex-basis: 0;">
+                <img src="assets/images/currency/battlePoint.svg" height="25px" data-bind="tooltip: {
+                    html: true,
+                    title: 'Battle Points<br /><br />Gained at the Battle Frontier.',
+                    trigger: 'hover',
+                    placement: 'top'
+                }">
+                <div id="animateCurrency-battlePoint" class="mt-1" data-bind="text: App.game.wallet.amountText(GameConstants.Currency.battlePoint)">0</div>
+            </div>
+            <div class="m-2 flex-grow-1" style="flex-basis: 0;" data-bind="visible: App.game.wallet.currencies[GameConstants.Currency.contestToken]() > 0">
+                <img src="assets/images/currency/contestToken.svg" height="25px" data-bind="tooltip: {
+                    html: true,
+                    title: 'Contest Tokens<br /><br />Gained by competing in Contests.',
+                    trigger: 'hover',
+                    placement: 'top'
+                }">
+                <div id="animateCurrency-contestToken" class="mt-1" data-bind="text: App.game.wallet.amountText(GameConstants.Currency.contestToken)">0</div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

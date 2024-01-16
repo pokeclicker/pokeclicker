@@ -1,6 +1,13 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+type QuestOptionalArgument = {
+    clearedMessage?: string;
+    npcDisplayName?: string,
+    npcImageName?: string,
+};
 
 abstract class Quest {
+    public static questObservable: KnockoutObservable<Quest> = ko.observable();
+
     index: number;
     amount: number
     customDescription?: string;
@@ -16,18 +23,24 @@ abstract class Quest {
     initial: KnockoutObservable<any>;
     notified: boolean;
     autoComplete: boolean;
+    mainQuest: Quest;
     autoCompleter: KnockoutSubscription;
     inQuestLine: boolean;
     _onLoad?: () => void;
     onLoadCalled: boolean;
+    suspended: boolean;
+    customReward?: () => void;
+    optionalArgs?: QuestOptionalArgument;
+    initialValue?: number;
 
     constructor(amount: number, pointsReward: number) {
-        this.amount = amount;
+        this.amount = isNaN(amount) ? 0 : amount;
         this.pointsReward = pointsReward;
         this.initial = ko.observable(null);
         this.claimed = ko.observable(false);
         this.notified = false;
         this.onLoadCalled = false;
+        this.suspended = false;
     }
 
     public static canComplete() {
@@ -56,7 +69,14 @@ abstract class Quest {
     claim() {
         if (this.isCompleted() && !this.claimed()) {
             App.game.quests.addXP(this.xpReward);
-            this.focusSub?.dispose?.();
+            if (this.customReward !== undefined) {
+                this.customReward();
+            }
+            if (this.optionalArgs?.clearedMessage !== undefined) {
+                Quest.questObservable(this);
+                $('#questStepClearedModal').modal('show');
+            }
+            this.deleteFocusSub();
             this.claimed(true);
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
@@ -108,7 +128,8 @@ abstract class Quest {
     }
 
     begin() {
-        this.initial(this.focus());
+        this.initial(this.initialValue ?? this.focus());
+        this.onLoad();
     }
 
     set focus(value: KnockoutObservable<any>) {
@@ -122,14 +143,21 @@ abstract class Quest {
 
     protected createProgressObservables() {
         // Dispose of our old subscriber if one exists
-        this.focusSub?.dispose?.();
+        this.focusSub?.dispose();
 
         // Subscribe to the new focus
         this.focusValue = this._focus();
         this.focusSub = this._focus.subscribe?.((newValue) => {
-            // If the focus goes down, adjust our initial value
-            if (newValue < this.focusValue) {
-                this.initial(this.initial() - (this.focusValue - newValue));
+            // If we aren't actively completing this quests, don't do anything
+            if (this.inProgress()) {
+                // If the focus goes down, adjust our initial value
+                if (newValue < this.focusValue) {
+                    this.initial(this.initial() - (this.focusValue - newValue));
+                }
+                // Prevent progress on suspended quests by adjusting the initial value
+                if (this.suspended && newValue > this.focusValue) {
+                    this.initial(this.initial() + (newValue - this.focusValue));
+                }
             }
             this.focusValue = newValue;
         });
@@ -152,7 +180,7 @@ abstract class Quest {
         });
 
         this.inProgress = ko.pureComputed(() => {
-            return this.initial() !== null && !this.claimed();
+            return this.initial() !== null && (!this.claimed() || this.mainQuest?.inProgress());
         });
 
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
@@ -182,7 +210,12 @@ abstract class Quest {
         }
     }
 
-    complete() {
+    complete(bypassAutoCompleter = false) {
+        if (bypassAutoCompleter) {
+            this.deleteAutoCompleter();
+            // Was consequently disposed on auto completion.
+            this.deleteFocusSub();
+        }
         this.initial(this.focus() - this.amount);
     }
 
@@ -191,9 +224,64 @@ abstract class Quest {
         this.autoCompleter = this.isCompleted.subscribe(() => {
             if (this.isCompleted()) {
                 this.claim();
-                this.autoCompleter.dispose();
+                this.deleteAutoCompleter();
             }
         });
+    }
+
+    deleteAutoCompleter() {
+        this.autoCompleter?.dispose();
+    }
+
+    deleteFocusSub(fromMainQuest = false): boolean {
+        if (fromMainQuest >= !!this.mainQuest) {
+            this.focusSub?.dispose();
+            return true;
+        }
+        return false;
+    }
+
+    withDescription(description: string): Quest {
+        this.customDescription = description;
+        return this;
+    }
+
+    withOnLoad(onLoad: () => void): Quest {
+        this._onLoad = onLoad;
+        return this;
+    }
+
+    withCustomReward(customReward: () => void): Quest {
+        this.customReward = typeof customReward === 'function' ? customReward : undefined;
+        return this;
+    }
+
+    withOptionalArgs(optionalArgs: QuestOptionalArgument): Quest {
+        this.optionalArgs = optionalArgs;
+        return this;
+    }
+
+    withInitialValue(initialValue: number): Quest {
+        this.initialValue = initialValue;
+        return this;
+    }
+
+    public asSubQuest(mainQuest: Quest) {
+        this.mainQuest = mainQuest;
+        this.autoComplete = true;
+    }
+
+    public getClearedMessage() {
+        return this.optionalArgs.clearedMessage;
+    }
+
+    public getNpcDisplayName() {
+        return this.optionalArgs.npcDisplayName;
+    }
+
+    public getNpcImage() {
+        const npcImageName = this.optionalArgs?.npcImageName;
+        return `assets/images/npcs/${npcImageName}.png`;
     }
 
     //#endregion

@@ -509,10 +509,10 @@ class Update implements Saveable {
 
             setTimeout(async () => {
                 // Check if player wants to activate the new challenge modes
-                if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                if (await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'Disable', cancel: 'Enable' })) {
                     App.game.challenges.list.regionalAttackDebuff.disable();
                 }
-                if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                if (await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'Disable' , cancel: 'Enable' })) {
                     App.game.challenges.list.requireCompletePokedex.disable();
                 }
             }, GameConstants.SECOND);
@@ -2225,6 +2225,9 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 delete p[14]; // megaStone
             });
+
+            // Hopo Berry
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 70);
         },
 
         '0.10.12': ({ playerData, saveData, settingsData }) => {
@@ -2287,6 +2290,320 @@ class Update implements Saveable {
             decodeStringsDeep(saveData);
             decodeStringsDeep(playerData);
             decodeStringsDeep(settingsData);
+
+            // Fix up Zero's Ambition questline restarting
+            if (saveData.party.caughtPokemon.find(p => p.id === 487)) { // If Giratina Altered caught
+                const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+                if (zeroQuestLine) {
+                    zeroQuestLine.state = 2;
+                }
+            } else if (saveData.statistics.temporaryBattleDefeated[83] >= 1) { // If zero temp battle defeated
+                const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+                if (zeroQuestLine) {
+                    zeroQuestLine.state = 1;
+                    zeroQuestLine.quest = 14;
+                    zeroQuestLine.initial = 0;
+                }
+            }
+
+            // Fix up Zero's Ambition questline starting early
+            const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+            if (zeroQuestLine && zeroQuestLine.state === 1) {
+                // Quest is started, check if the player has the rquirements for starting the quest
+                const caughtUxie = saveData.party.caughtPokemon.find(p => p.id === 480);
+                const caughtMesprit = saveData.party.caughtPokemon.find(p => p.id === 481);
+                const caughtAzelf = saveData.party.caughtPokemon.find(p => p.id === 482);
+                const hasSinnohChampionBadge = !!saveData.badgeCase[61];
+                // If any of these requirements are not met, reset the questline
+                if (!caughtUxie || !caughtMesprit || !caughtAzelf || !hasSinnohChampionBadge) {
+                    zeroQuestLine.state = 0;
+                    zeroQuestLine.quest = 0;
+                    zeroQuestLine.initial = 0;
+                }
+            }
+        },
+
+        '0.10.14': ({ playerData, saveData, settingsData }) => {
+
+            // Hoopa battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 167);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 168);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 169);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 170);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 171);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 172);
+
+            // Add XD dungeons
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 73);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 74);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 75);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 76);
+
+            // Update Mewtwo Strikes Back! event
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 12);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+
+            // Add XD Temp Battles
+
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 55);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 56);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 57);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 58);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 59);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 60);
+
+            // Add Mega Mewtwo battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 205);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 206);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 207);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 208);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 209);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 210);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 211);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 212);
+
+            // Max Raids
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 340);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 341);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 342);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 189);
+
+            // ZCrystals
+            const crystalOrder = [
+                'Normalium Z',
+                'Fightinium Z',
+                'Waterium Z',
+                'Firium Z',
+                'Grassium Z',
+                'Rockium Z',
+                'Electrium Z',
+                'Ghostium Z',
+                'Darkinium Z',
+                'Dragonium Z',
+                'Fairium Z',
+                'Groundium Z',
+            ];
+            const crystalFirstID = 88;
+            crystalOrder.forEach((crystalName, rid) => {
+                if (!!saveData.badgeCase[crystalFirstID + rid]) {
+                    playerData._itemList[crystalName] = 1;
+                }
+            });
+
+            // Fixing Silvally item amounts
+            Object.keys(playerData._itemList).filter(itemName => itemName.includes('Memory_Silvally')).forEach(itemName => playerData._itemList[itemName] = Math.min(1, playerData._itemList[itemName]));
+
+            //Replace Blaze Cassette with Magma Stone
+            saveData.oakItems.Magma_Stone = saveData.oakItems.Blaze_Cassette;
+            delete saveData.oakItems.Blaze_Cassette;
+
+            // Snover Berry
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 54);
+            saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 54);
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 50);
+            saveData.statistics.berriesHarvested = Update.moveIndex(saveData.statistics.berriesHarvested, 54);
+            saveData.statistics.berriesObtained = Update.moveIndex(saveData.statistics.berriesObtained, 54);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 54) {
+                    p.berry++;
+                }
+            });
+
+            // Add milestone for Vivillon (Poké Ball) if the quest is complete.
+            const vivillonQuestLine = saveData.quests.questLines.find((q) => q.name == 'The Great Vivillon Hunt!');
+            if (saveData.battleFrontier?.milestones && vivillonQuestLine?.state == 2) {
+                saveData.battleFrontier.milestones.push([666, 'Vivillon (Poké Ball)']);
+            }
+
+            // Add Paldea Gyms
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 120);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 121);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 122);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 123);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 124);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 125);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 126);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 127);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 128);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 129);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 130);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 131);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 132);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 133);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 134);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 135);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 136);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 137);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 138);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 139);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 140);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 141);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 142);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 143);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 144);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 145);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 146);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 147);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 148);
+
+            // Remove Orre Colosseum Dungeon
+            saveData.statistics.dungeonsCleared.splice(73, 1);
+
+            // Adding Orre XD badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 49);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 50);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 51);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 52);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 53);
+
+            // Reset Red temp battle
+            saveData.statistics.temporaryBattleDefeated[31] = 0;
+
+        },
+
+        '0.10.16': ({ saveData, settingsData }) => {
+
+            // Fix None category color being incomplete
+            if (saveData.categories.categories[0].color === '#333') {
+                saveData.categories.categories[0].color = '#333333';
+            }
+
+            // ClearBattleFrontier → ClearBattleFrontierQuest
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name == 'ClearBattleFrontier') {
+                    q.name = 'ClearBattleFrontierQuest';
+                }
+                return q;
+            }) || [];
+
+            // Add Genesect Quest Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 122);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 123);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 124);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 125);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
+
+            // Remove erroneous BreedingFilter search setting
+            delete settingsData[''];
+
+            // Remove Z Crystal gyms and badges (remove furthest down the index first as to not get confused by index numbers)
+            // Mina\'s Trial
+            saveData.statistics.gymsDefeated.splice(88, 1);
+            // Vast Poni Canyon Trial
+            saveData.statistics.gymsDefeated.splice(87, 1);
+            // Acerola\'s Trial
+            saveData.statistics.gymsDefeated.splice(85, 1);
+            // Sophocles\' Trial
+            saveData.statistics.gymsDefeated.splice(84, 1);
+            // Mallow\'s Trial
+            saveData.statistics.gymsDefeated.splice(82, 1);
+            // Kiawe\'s Trial
+            saveData.statistics.gymsDefeated.splice(81, 1);
+            // Lana\'s Trial
+            saveData.statistics.gymsDefeated.splice(80, 1);
+            // Ilima\'s Trial
+            saveData.statistics.gymsDefeated.splice(78, 1);
+            // FairiumZ
+            saveData.badgeCase.splice(103, 1);
+            // DragoniumZ
+            saveData.badgeCase.splice(102, 1);
+            // GhostiumZ
+            saveData.badgeCase.splice(100, 1);
+            // ElectriumZ
+            saveData.badgeCase.splice(99, 1);
+            // GrassiumZ
+            saveData.badgeCase.splice(97, 1);
+            // FiriumZ
+            saveData.badgeCase.splice(96, 1);
+            // WateriumZ
+            saveData.badgeCase.splice(95, 1);
+            // NormaliumZ
+            saveData.badgeCase.splice(93, 1);
+
+            // Santa Jynx TempBattles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+
+            // Fix Hopo berry visible in berrydex when not available
+            saveData.farming.mutations[71] = false;
+        },
+
+        '0.10.17': ({ saveData }) => {
+            // Fix Anomaly Mewtwo 5 if the quest is not completed.
+            if (saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state < 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+        },
+
+        '0.10.18': ({ playerData, saveData, settingsData }) => {
+            // Actually fix Anomaly Mewtwo 5 if the quest is not completed.
+            if ((saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state ?? 0) !== 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+
+            // Give the player Fairy Feathers in place of Pink Bows
+            playerData._itemList.Fairy_Feather = playerData._itemList.Pink_Bow || 0;
+            delete playerData._itemList.Pink_Bow;
+
+            // Update pokemon held item Pink Bow -> Fairy Feather
+            saveData.party.caughtPokemon.forEach(p => {
+                if (p[10] === 'Pink_Bow') {
+                    p[10] = 'Fairy_Feather';
+                }
+            });
+
+            // ID to itemName interface
+            const converter = {
+                1 : 'Rare_bone', 2 : 'Star_piece', 3 : 'Revive', 4 : 'Max_revive', 5 : 'Iron_ball', 6 : 'Heart_scale', 7 : 'Light_clay', 8 : 'Odd_keystone', 9 : 'Hard_stone', 10 : 'Oval_stone', 11 : 'Everstone', 12 : 'Smooth_rock', 13 : 'Heat_rock', 14 : 'Icy_rock', 15 : 'Damp_rock',
+                100 : 'Draco_plate', 101 : 'Dread_plate', 102 : 'Earth_plate', 103 : 'Fist_plate', 104 : 'Flame_plate', 105 : 'Icicle_plate', 106 : 'Insect_plate', 107 : 'Iron_plate', 108 : 'Meadow_plate', 109 : 'Mind_plate', 110 : 'Sky_plate', 111 : 'Splash_plate', 112 : 'Spooky_plate', 113 : 'Stone_plate', 114 : 'Toxic_plate', 115 : 'Zap_plate', 116 : 'Pixie_plate',
+                200 : 'Helix_fossil', 201 : 'Dome_fossil', 202 : 'Old_amber', 203 : 'Root_fossil', 204 : 'Claw_fossil', 205 : 'Armor_fossil', 206 : 'Skull_fossil', 207 : 'Cover_fossil', 208 : 'Plume_fossil', 209 : 'Jaw_fossil', 210 : 'Sail_fossil', 211 : 'Fossilized_bird', 212 : 'Fossilized_fish', 213 : 'Fossilized_drake', 214 : 'Fossilized_dino',
+                300 : 'Fire_stone', 301 : 'Water_stone', 302 : 'Thunder_stone', 303 : 'Leaf_stone', 304 : 'Moon_stone', 305 : 'Sun_stone', 306 : 'Shiny_stone', 307 : 'Dusk_stone', 308 : 'Dawn_stone', 309 : 'Ice_stone',
+                400 : 'Red_shard', 401 : 'Yellow_shard', 402 : 'Green_shard', 403 : 'Blue_shard', 404 : 'Grey_shard', 405 : 'Purple_shard', 406 : 'Ochre_shard', 407 : 'Black_shard', 408 : 'Crimson_shard', 409 : 'Lime_shard', 410 : 'White_shard', 411 : 'Pink_shard', 412 : 'Cyan_shard', 413 : 'Rose_shard', 414 : 'Brown_shard',
+                500 : 'Aerodactylite', 501 : 'Mawilite', 502 : 'Sablenite',
+            };
+            // Port player.mineInventory to player.itemList
+            const sellLocks = (saveData.underground.sellLocks = {});
+            playerData.mineInventory.forEach(it => {
+                if (!converter[it.id]) {
+                    return console.error(`${it.name} is not a valid item to store.`);
+                }
+                playerData._itemList[converter[it.id]] = (playerData._itemList[converter[it.id]] || 0) + it.amount;
+                sellLocks[converter[it.id]] = it.sellLocked;
+            });
+
+            // Update sort settings to make room for new attack at lv 100 sort option
+            ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
+                .forEach((sortSetting) => {
+                    if (settingsData[sortSetting] >= 5) {
+                        settingsData[sortSetting]++;
+                    }
+                });
+            // Sort by attack -> sort by attack at lv100
+            if (settingsData.hatcherySort == 2) {
+                settingsData.hatcherySort = 5;
+            }
+            // Update hatchery helper sorting
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption >= 5) {
+                    // Move index
+                    helper.sortOption++;
+                } else if (helper.sortOption == 2) {
+                    // Sort by attack -> sort by attack at lv100
+                    helper.sortOption = 5;
+                }
+            });
+
+            // Fix pokerus status for party members infected via shop eggs
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                // PartyPokemonSaveKeys.pokerus and .breeding
+                if (pokemon[8] === GameConstants.Pokerus.Infected && !pokemon[4]) {
+                    pokemon[8] = GameConstants.Pokerus.Contagious;
+                }
+            });
         },
     };
 

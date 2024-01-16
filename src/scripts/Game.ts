@@ -49,7 +49,9 @@ class Game {
         public battleCafe: BattleCafeSaveObject,
         public dreamOrbController: DreamOrbController,
         public purifyChamber: PurifyChamber,
-        public weatherApp: WeatherApp
+        public weatherApp: WeatherApp,
+        public zMoves: ZMoves,
+        public pokemonContest: PokemonContest
     ) {
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
@@ -82,6 +84,7 @@ class Game {
         EffectEngineRunner.initialize(this.multiplier, GameHelper.enumStrings(GameConstants.BattleItemType).map((name) => ItemList[name]));
         FluteEffectRunner.initialize(this.multiplier);
         ItemHandler.initilizeEvoStones();
+        PokedexHelper.initialize();
         this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();
@@ -117,6 +120,7 @@ class Game {
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
+        PokemonContestController.generateDailyContest(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
@@ -426,6 +430,8 @@ class Game {
                     player._timeTraveller = true;
                 }
 
+                GameHelper.updateDay();
+
                 SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
@@ -448,7 +454,12 @@ class Game {
                 // Refresh Friend Safari Pokemon List
                 SafariPokemonList.generateKalosSafariList();
 
-                DayOfWeekRequirement.date(now.getDay());
+                // Reset some temporary battles
+                Object.values(TemporaryBattleList).forEach(t => {
+                    if (t.optionalArgs?.resetDaily) {
+                        this.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(t.name)](0);
+                    }
+                });
             }
 
             // Check if it's a new hour
@@ -461,6 +472,7 @@ class Game {
                 }
             }
 
+            player._lastSeen = Date.now();
             this.save();
         }
 
@@ -490,6 +502,11 @@ class Game {
             FluteEffectRunner.tick();
         }
 
+        this.zMoves.counter += GameConstants.TICK_TIME;
+        if (this.zMoves.counter >= GameConstants.ZMOVE_TICK) {
+            this.zMoves.tick();
+        }
+
         // Game timers
         GameHelper.counter += GameConstants.TICK_TIME;
         if (GameHelper.counter >= GameConstants.MINUTE) {
@@ -510,7 +527,6 @@ class Game {
     }
 
     save() {
-        player._lastSeen = Date.now();
         Save.store(player);
     }
 
