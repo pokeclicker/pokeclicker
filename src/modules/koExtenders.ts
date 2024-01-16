@@ -103,7 +103,8 @@ ko.extenders.skippableRateLimit = (target: Subscribable, delay: number) => {
                 }
             }
         };
-        (target as typeof target & Partial<SkippableRateLimit>).evaluateEarly = evaluateEarly;
+        // @ts-ignore
+        target.evaluateEarly = evaluateEarly;
         return startRateLimit;
     };
     return target.extend({ rateLimit: { timeout: delay, method: skippableLimiter } }) as typeof target & SkippableRateLimit;
