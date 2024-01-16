@@ -168,6 +168,7 @@ class Party implements Feature {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         // Check if the pokemon is in their native region
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
@@ -183,14 +184,12 @@ class Party implements Feature {
             if (type1 == PokemonType.None) {
                 attack = pAttack * multiplier;
             } else {
-                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
             }
         }
 
         // Weather boost
         const weather = Weather.weatherConditions[overrideWeather ?? Weather.currentWeather()];
-        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
         weather.multipliers?.forEach(value => {
             if (value.type == dataPokemon.type1) {
                 attack *= value.multiplier;
@@ -202,7 +201,6 @@ class Party implements Feature {
 
         // Should we take flute boost into account
         if (includeTempBonuses) {
-            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
             FluteEffectRunner.activeGemTypes().forEach(value => {
                 if (value == dataPokemon.type1) {
                     attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
