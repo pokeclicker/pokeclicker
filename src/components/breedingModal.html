@@ -238,43 +238,43 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: modalUtils.observableState.breedingModal !== 'hidden' && !App.game.party.hasMaxLevelPokemon()">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
-                                    <!-- ko using: lazyLoad($element.nextElementSibling, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList' -->
-                                    <ul class="row justify-content-center w-100 p-0 m-0" data-bind="if: modalUtils.observableState.breedingModal !== 'hidden' && App.game.party.hasMaxLevelPokemon()">
-                                        <!-- ko foreach: lazyHatcheryList -->
-                                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable() && ($data.matchesHatcheryFilters() || BreedingController.viewResetWaiting()), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
-                                            <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
-                                            <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
-                                            <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
-                                            <div class="breedingListPokerus" data-bind="if: App.game.party.getPokemon($data.id)?.pokerus">
-                                                <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
-                                            </div>
-                                            <img src="" class="pokedex-pokemon-sprite" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
-                                            <span class="pokedex-bottom-text" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
-                                            <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
-                                            <span class="pokedex-top-text text-truncate px-1" data-bind="text: $data.displayName,
-                                                tooltip: {
-                                                    title: PokemonHelper.displayName($data.name),
-                                                    trigger: 'hover',
-                                                    placement: 'top',
-                                                    boundary: 'viewport'
-                                                }">name</span>
-
-                                            <!-- Category Button -->
-                                            <div class="pokemonCategory dropdown">
-                                                <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
-                                                <div class="border-secondary dropdown-menu">
-                                                    <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
-                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
-                                                    <!-- /ko -->
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
-                                                        <i>Edit categories</i>
-                                                    </a>
+                                    <!-- ko using: lazyLoad('lazyHatcheryList', $element, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList' -->
+                                        <!-- ko if: modalUtils.observableState.breedingModal !== 'hidden' && App.game.party.hasMaxLevelPokemon() -->
+                                        <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyHatcheryList">
+                                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable() && ($data.matchesHatcheryFilters() || BreedingController.viewResetWaiting()), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
+                                                <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
+                                                <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
+                                                <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
+                                                <div class="breedingListPokerus" data-bind="if: App.game.party.getPokemon($data.id)?.pokerus">
+                                                    <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                                 </div>
-                                            </div>
-                                        </li>
+                                                <img src="" class="pokedex-pokemon-sprite" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
+                                                <span class="pokedex-bottom-text" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
+                                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
+                                                <span class="pokedex-top-text text-truncate px-1" data-bind="text: $data.displayName,
+                                                    tooltip: {
+                                                        title: PokemonHelper.displayName($data.name),
+                                                        trigger: 'hover',
+                                                        placement: 'top',
+                                                        boundary: 'viewport'
+                                                    }">name</span>
+
+                                                <!-- Category Button -->
+                                                <div class="pokemonCategory dropdown">
+                                                    <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
+                                                    <div class="border-secondary dropdown-menu">
+                                                        <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
+                                                        <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
+                                                        <!-- /ko -->
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                            <i>Edit categories</i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                         <!-- /ko -->
-                                    </ul>
                                     <!-- /ko -->
                                 </div>
                             </div>

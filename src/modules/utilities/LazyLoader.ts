@@ -36,7 +36,7 @@ function createObserver(loader: HTMLElement, doneLoading: { status: boolean }, o
     };
 }
 
-function findScrollingParent(element: HTMLElement): HTMLElement {
+function findScrollingParent(element: HTMLElement, key: string): HTMLElement {
     let elem = element;
     while (elem.parentElement) {
         const { overflowY } = window.getComputedStyle(elem);
@@ -45,8 +45,7 @@ function findScrollingParent(element: HTMLElement): HTMLElement {
         }
         elem = elem.parentElement;
     }
-
-    return elem;
+    throw new Error(`Could not find scrolling parent for LazyLoader '${key}'`);
 }
 
 function createLoaderElem(): HTMLElement {
@@ -72,11 +71,12 @@ const defaultOptions: LazyLoadOptions = {
     pageSize: 40,
 };
 
-const memo = new WeakMap<HTMLElement, PureComputed<Array<unknown>>>();
+const memo: Record<string, PureComputed<Array<unknown>>> = {};
 
-export default function lazyLoad(element: HTMLElement, list: ObservableArray<unknown>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
-    if (memo.has(element)) {
-        return memo.get(element);
+export default function lazyLoad(key: string, boundNode: Node, list: ObservableArray<unknown>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
+    const targetElement = boundNode.parentElement as HTMLElement;
+    if (memo[key] && targetElement.querySelector(':scope > .lazy-loader-container')) {
+        return memo[key];
     }
 
     const opts = {
@@ -85,12 +85,12 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
     };
 
     const loader = createLoaderElem();
-    element.parentElement.append(loader);
+    targetElement.append(loader);
 
     const doneLoading = { status: false };
 
     const { page } = createObserver(loader, doneLoading, {
-        root: findScrollingParent(element),
+        root: findScrollingParent(targetElement, key),
         rootMargin: opts.triggerMargin,
         threshold: opts.threshold,
     });
@@ -111,6 +111,6 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
         return array.slice(0, lastElem);
     });
 
-    memo.set(element, lazyList);
+    memo[key] = lazyList;
     return lazyList;
 }
