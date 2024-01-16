@@ -1,4 +1,4 @@
-import { Observable, ObservableArray, PureComputed } from 'knockout';
+import { Subscribable, Observable, ObservableArray, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
 function createObserver(loader: HTMLElement, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
@@ -57,7 +57,7 @@ export type LazyLoadOptions = {
     triggerMargin: string; // must be px or %
     threshold: number;
     pageSize: number;
-    reset?: Observable | (() => any); // Whenever this changes, the page will reset to the first page
+    reset?: Subscribable | (() => any); // Whenever this changes, the page will reset to the first page
 };
 
 const defaultOptions: LazyLoadOptions = {
@@ -91,7 +91,7 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
         if (!ko.isObservable(opts.reset)) {
             opts.reset = ko.pureComputed(opts.reset);
         }
-        (opts.reset as Observable).subscribe(() => page(1));
+        (opts.reset as Subscribable).subscribe(() => page(1));
     }
 
     const lazyList = ko.pureComputed(() => {
