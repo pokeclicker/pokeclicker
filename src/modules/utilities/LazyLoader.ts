@@ -74,7 +74,10 @@ const defaultOptions: LazyLoadOptions = {
 const memo: Record<string, PureComputed<Array<unknown>>> = {};
 
 export default function lazyLoad(key: string, boundNode: Node, list: ObservableArray<unknown>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
-    const targetElement = boundNode.parentElement as HTMLElement;
+    // Get first parent that's not a table element, that's where we'll add the loader element
+    const targetElement = boundNode.parentElement.closest(':not(table, thead, tbody, tr, td, th)') as HTMLElement;
+
+    // Only return memoized loader if the 
     if (memo[key] && targetElement.querySelector(':scope > .lazy-loader-container')) {
         return memo[key];
     }
@@ -84,13 +87,16 @@ export default function lazyLoad(key: string, boundNode: Node, list: ObservableA
         ...options,
     };
 
+    // Do this before creating the loader just in case it's not scrollable
+    const scrollingParent = findScrollingParent(targetElement, key);
+
     const loader = createLoaderElem();
     targetElement.append(loader);
 
     const doneLoading = { status: false };
 
     const { page } = createObserver(loader, doneLoading, {
-        root: findScrollingParent(targetElement, key),
+        root: scrollingParent,
         rootMargin: opts.triggerMargin,
         threshold: opts.threshold,
     });
