@@ -24,21 +24,16 @@ class Party implements Feature {
         this._caughtPokemon = ko.observableArray([]);
 
         this.hasMaxLevelPokemon = ko.pureComputed(() => {
-            for (let i = 0; i < this.caughtPokemon.length; i++) {
-                if (this.caughtPokemon[i].level === 100) {
-                    return true;
-                }
-            }
-            return false;
+            return this.caughtPokemon.some(p => p.level === 100);
         }).extend({rateLimit: 1000});
 
-        this.hasShadowPokemon = ko.pureComputed(() => {
+        this.hasShadowPokemon = ko.computed(() => {
             return this.caughtPokemon.some(p => p.shadow === GameConstants.ShadowStatus.Shadow);
         }).extend({rateLimit: 1000});
 
         // This will be completely rebuilt each time a pokemon is caught.
         // Not ideal but still better than mutliple locations scanning through the list to find what they want
-        this._caughtPokemonLookup = ko.pureComputed(() => {
+        this._caughtPokemonLookup = ko.computed(() => {
             return this.caughtPokemon.reduce((map, p) => {
                 map.set(p.id, p);
                 return map;
