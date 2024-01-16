@@ -737,7 +737,7 @@ class QuestLineHelper {
         };
         const deoxysMilestone = BattleFrontierMilestones.milestoneRewards.find(m => (m as BattleFrontierMilestonePokemon).pokemonName === 'Deoxys');
         // Initial value of 0. Should not be required unless the save is corrupt.
-        const reachStage100 = new CustomQuest(1, 0, 'Defeat stage 100 in the Battle Frontier.', () => +deoxysMilestone.obtained()).withInitialValue(0).withCustomReward(reachStage100Reward);
+        const reachStage100 = new CustomQuest(1, 0, 'Enter the Battle Frontier and defeat stage 100.', () => +deoxysMilestone.obtained()).withInitialValue(0).withCustomReward(reachStage100Reward);
         deoxysQuestLine.addQuest(reachStage100);
 
         App.game.quests.questLines().push(deoxysQuestLine);
