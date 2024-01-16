@@ -248,12 +248,6 @@ body:hover {
   margin: -10px;
 }
 
-#pokemonListContainer {
-  #pokemonListBody {
-    overflow: auto;
-  }
-}
-
 // Firefox fix for background covering borders in tables
 td {
   background-clip: padding-box;
@@ -813,19 +807,8 @@ button.btn-circle {
 }
 
 // Resizable modules
-.resizable-module {
-    overflow: hidden;
-
-    &.resize-drag-handle {
-        resize: vertical;
-    }
-
-    .collapsing {
-        transition: none !important;
-        display: none;
-    }
-
-    .card-footer {
-        border-top: none;
-    }
+.resizable-container {
+    resize: vertical;
+    overflow: auto;
+    min-height: 50px;
 }
