@@ -6,8 +6,15 @@ class PokedexHelper {
         Object.values(PokedexFilters).forEach((filter) => {
             filter.value.subscribe(() => {
                 PokedexHelper.scrollToTop();
-                PokedexHelper.resetPokedexView.notifySubscribers();
+                PokedexHelper.resetPokedexFlag.notifySubscribers();
             });
+        });
+
+        DisplayUtils.modalState.pokedexModalObservable.subscribe((modalState) => {
+            // Resetting scrolling only works before modal is fully hidden
+            if (modalState === 'hide') {
+                PokedexHelper.scrollToTop();
+            }
         });
     }
 
@@ -228,14 +235,7 @@ class PokedexHelper {
     }
 
     // Flag for the LazyLoader
-    public static resetPokedexView = ko.pureComputed(() => {
-        const modalState = DisplayUtils.modalState.pokedexModal;
-        if (modalState === 'hide') {
-            // Only works before modal is fully hidden
-            PokedexHelper.scrollToTop();
-        }
-        return modalState === 'hidden';
-    });
+    public static resetPokedexFlag = ko.computed(() => DisplayUtils.modalState.pokedexModal === 'hidden');
 
     private static scrollToTop() {
         document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;
