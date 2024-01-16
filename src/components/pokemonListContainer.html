@@ -35,7 +35,7 @@
     </div>
     <div id="pokemonListBody" class="card-body p-0 show table-responsive">
         <div data-bind="template: { name: 'PartySortSettingTemplate', data: Settings.getSetting('partySort')}"></div>
-        <table id="pokemonList" class="table table-striped table-hover table-sm m-0">
+        <table id="pokemonList" class="table table-striped table-hover table-sm m-0" data-bind="style: { height: DisplayUtils.collapseState.pokemonListBody === 'hidden' ? '350px' : '' }">
             <thead>
                 <tr>
                     <td></td>
