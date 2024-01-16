@@ -158,6 +158,7 @@ export const PLATE_VALUE = 100;
 // Breeding
 export const EGG_CYCLE_MULTIPLIER = 40;
 export const BREEDING_ATTACK_BONUS = 25;
+export const BREEDING_SHINY_ATTACK_MULTIPLIER = 5;
 
 // Farming
 export const FARM_PLOT_WIDTH = 5;
@@ -2398,6 +2399,7 @@ export const ModalCollapseList = [
     'pokeballSelectorBody',
     'pokemonListBody',
     'shortcutsBody',
+    'currencyBody',
 ];
 
 export enum ConsumableType {
