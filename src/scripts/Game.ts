@@ -431,6 +431,8 @@ class Game {
                     player._timeTraveller = true;
                 }
 
+                GameHelper.updateDay();
+
                 SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
@@ -453,8 +455,6 @@ class Game {
                 // Refresh Friend Safari Pokemon List
                 SafariPokemonList.generateKalosSafariList();
 
-                DayOfWeekRequirement.date(now.getDay());
-
                 // Reset some temporary battles
                 Object.values(TemporaryBattleList).forEach(t => {
                     if (t.optionalArgs?.resetDaily) {
@@ -473,6 +473,7 @@ class Game {
                 }
             }
 
+            player._lastSeen = Date.now();
             this.save();
         }
 
@@ -527,7 +528,6 @@ class Game {
     }
 
     save() {
-        player._lastSeen = Date.now();
         Save.store(player);
     }
 

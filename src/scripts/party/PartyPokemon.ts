@@ -84,8 +84,7 @@ class PartyPokemon implements Saveable {
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
-            const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
-            return Math.floor(this._effortPoints() / GameConstants.EP_EV_RATIO / power);
+            return Math.floor(this.calculateEVs());
         });
         const resistantSub = this.evs.subscribe((newValue) => {
             // Change Pokerus status to Resistant when reaching 50 EVs
@@ -97,7 +96,7 @@ class PartyPokemon implements Saveable {
                     // Log and notify player
                     Notifier.notify({
                         message: `${this.name} has become Resistant to Pokérus.`,
-                        pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
+                        pokemonImage: PokemonHelper.getImage(this.id),
                         type: NotificationConstants.NotificationOption.info,
                         sound: NotificationConstants.NotificationSound.General.pokerus,
                         setting: NotificationConstants.NotificationSetting.General.pokerus,
@@ -107,7 +106,6 @@ class PartyPokemon implements Saveable {
                 resistantSub.dispose();
             }
         });
-        this._attack = ko.pureComputed(() => this.calculateAttack());
         this.heldItem = ko.observable(undefined);
         this.defaultFemaleSprite = ko.observable(false);
         this.hideShinyImage = ko.observable(false);
@@ -115,6 +113,7 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
+        this._attack = ko.computed(() => this.calculateAttack());
         this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
         this._canUseHeldItem.subscribe((canUse) => {
             if (!canUse && this.heldItem()) {
@@ -180,16 +179,22 @@ class PartyPokemon implements Saveable {
         return this.level;
     }
 
+    public calculateEVs(): number {
+        const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
+        return this._effortPoints() / GameConstants.EP_EV_RATIO / power;
+    }
+
     public gainExp(exp: number) : number {
         const expGained = exp * this.getExpMultiplier();
         if (this.level < App.game.badgeCase.maxLevel()) {
             this.exp += expGained;
-        }
-        const oldLevel = this.level;
-        const newLevel = this.calculateLevelFromExp();
-        if (oldLevel !== newLevel) {
-            this.level = newLevel;
-            this.checkForLevelEvolution();
+
+            const oldLevel = this.level;
+            const newLevel = this.calculateLevelFromExp();
+            if (oldLevel !== newLevel) {
+                this.level = newLevel;
+                this.checkForLevelEvolution();
+            }
         }
         return expGained;
     }

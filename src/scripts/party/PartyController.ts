@@ -52,7 +52,7 @@ class PartyController {
         }).sort((a, b) => a.id - b.id);
     }
 
-    static getStoneEvolutions<T>(id: number, getStatus: (evo: EvoData) => T, evoType?: GameConstants.StoneType): { status: T, locked: boolean, lockHint: string }[] {
+    static getStoneEvolutions<T>(id: number, getStatus: (evo: EvoData) => T, evoType?: GameConstants.StoneType): { status: T, evs:number, locked: boolean, lockHint: string }[] {
         const pokemon = App.game.party.getPokemon(id);
         return PartyController.getPokemonStoneEvos(pokemon, evoType)
             .map((evo) => ({
@@ -68,7 +68,7 @@ class PartyController {
         return this.getStoneEvolutions(id, getStatus, evoType);
     }
 
-    static getStoneEvolutionsPokerusData(id: number, evoType?: GameConstants.StoneType): { status: GameConstants.Pokerus, locked: boolean, lockHint: string }[] {
+    static getStoneEvolutionsPokerusData(id: number, evoType?: GameConstants.StoneType): { status: GameConstants.Pokerus, evs: number, locked: boolean, lockHint: string }[] {
         const getStatus = (evo: EvoData) => this.getPokerusStatusByName(evo.evolvedPokemon);
         return this.getStoneEvolutions(id, getStatus, evoType);
     }
