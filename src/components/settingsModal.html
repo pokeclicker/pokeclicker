@@ -64,6 +64,16 @@
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingResistant')}"></tr>
                                 <!-- /ko -->
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-primary" data-bind="click: () => {
+                                            Settings.list.filter(s => s.name.startsWith('moduleHeight.')).forEach((setting) => {
+                                                const resizeId = setting.name.split('.')[1];
+                                                document.querySelector(`[data-resize-id='${resizeId}']`).style.height = `${setting.defaultValue}px`;
+                                            })
+                                        }">Reset Resizable Modules</button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

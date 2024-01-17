@@ -429,4 +429,6 @@ ModalCollapseList.forEach((collapse) => {
     Settings.add(new BooleanSetting(`modalCollapse.${collapse}`, 'Modal Collapse', true));
 });
 
-
+// Resizable modules
+Settings.add(new Setting<number>('moduleHeight.pokeballSelector', '', [], 265));
+Settings.add(new Setting<number>('moduleHeight.pokemonList', '', [], 365));
