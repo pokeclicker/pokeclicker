@@ -56,78 +56,74 @@ class Party implements Feature {
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
         PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender, pokemon.shadow);
 
+        const alreadyCaughtRegular = this.alreadyCaughtPokemon(pokemon.id);
+
+        // Handle shadow
         if (pokemon.shadow) {
-            // Already caught (shadow)
-            if (!this.alreadyCaughtPokemon(pokemon.id, false, true)) {
+            const alreadyCaughtShadow = this.alreadyCaughtPokemon(pokemon.id, false, true);
+
+            // Only set the shadow status if we have the regular in our party it doesn't already have the shadow status
+            if (alreadyCaughtRegular && !alreadyCaughtShadow) {
+                this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
+            }
+
+            // Only log and notify the first time we catch a shadow pokemon
+            if (!alreadyCaughtShadow) {
                 App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: pokemon.name }));
 
-                // Notify if not already caught
                 Notifier.notify({
                     message: `You have captured a shadow ${pokemon.displayName}!`,
                     type: NotificationConstants.NotificationOption.warning,
                     sound: NotificationConstants.NotificationSound.General.new_catch,
                     setting: NotificationConstants.NotificationSetting.General.new_catch,
                 });
-
-                // Already caught (non shadow) we need to update the party pokemon directly
-                if (this.alreadyCaughtPokemon(pokemon.id, false, false)) {
-                    this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
-                    if (!pokemon.shiny && pokemon.shiny) { // Will almost never happen, so don't want to have a log message, that we need to keep track of
-                        this.getPokemon(pokemon.id).shiny = true;
-                    }
-                    return;
-                }
             }
         }
 
+        // Handle shiny
         if (pokemon.shiny) {
-            // Add all shiny catches to the log book
-            App.game.logbook.newLog(
-                LogBookTypes.CAUGHT,
-                this.alreadyCaughtPokemon(pokemon.id, true)
-                    ? createLogContent.capturedShinyDupe({ pokemon: pokemon.name })
-                    : createLogContent.capturedShiny({ pokemon: pokemon.name })
-            );
-            // Already caught (shiny)
-            if (this.alreadyCaughtPokemon(pokemon.id, true)) {
-                return;
-            }
-            // Notify if not already caught
-            Notifier.notify({
-                message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
-                pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
-                type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-            });
+            const alreadyCaughtShiny = this.alreadyCaughtPokemon(pokemon.id, true);
 
-            // Already caught (non shiny) we need to update the party pokemon directly
-            if (this.alreadyCaughtPokemon(pokemon.id, false)) {
+            // Only set the shiny status if we have the regular in our party it doesn't already have the shiny status
+            if (alreadyCaughtRegular && !alreadyCaughtShiny) {
                 this.getPokemon(pokemon.id).shiny = true;
-                return;
+            }
+
+            // If we already have the shiny, log it
+            // If we catch a new shiny, log it and notify
+            if (alreadyCaughtShiny) {
+                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShinyDupe({ pokemon: pokemon.name }));
+            } else {
+                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShiny({ pokemon: pokemon.name }));
+
+                Notifier.notify({
+                    message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
+                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
+                    type: NotificationConstants.NotificationOption.warning,
+                    sound: NotificationConstants.NotificationSound.General.new_catch,
+                    setting: NotificationConstants.NotificationSetting.General.new_catch,
+                });
             }
         }
 
-        // Already caught (non shiny)
-        if (this.alreadyCaughtPokemon(pokemon.id, false)) {
-            return;
-        }
+        // Handle the regular
+        if (!alreadyCaughtRegular) {
+            // We don't have this pokemon in our party yet, so add it
+            this._caughtPokemon.push(pokemon);
 
-        if (!suppressNotification) {
-            Notifier.notify({
-                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
-                pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
-                type: NotificationConstants.NotificationOption.success,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-            });
-        }
+            // Handle logging and notifying
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: pokemon.name }));
 
-        App.game.logbook.newLog(
-            LogBookTypes.CAUGHT,
-            createLogContent.captured({ pokemon: pokemon.name })
-        );
-        this._caughtPokemon.push(pokemon);
+            if (!suppressNotification) {
+                Notifier.notify({
+                    message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
+                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.General.new_catch,
+                    setting: NotificationConstants.NotificationSetting.General.new_catch,
+                });
+            }
+        }
     }
 
     public removePokemonByName(name: PokemonNameType) {
@@ -176,6 +172,7 @@ class Party implements Feature {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         // Check if the pokemon is in their native region
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
@@ -191,14 +188,12 @@ class Party implements Feature {
             if (type1 == PokemonType.None) {
                 attack = pAttack * multiplier;
             } else {
-                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
             }
         }
 
         // Weather boost
         const weather = Weather.weatherConditions[overrideWeather ?? Weather.currentWeather()];
-        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
         weather.multipliers?.forEach(value => {
             if (value.type == dataPokemon.type1) {
                 attack *= value.multiplier;
@@ -210,7 +205,6 @@ class Party implements Feature {
 
         // Should we take flute boost into account
         if (includeTempBonuses) {
-            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
             FluteEffectRunner.activeGemTypes().forEach(value => {
                 if (value == dataPokemon.type1) {
                     attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
