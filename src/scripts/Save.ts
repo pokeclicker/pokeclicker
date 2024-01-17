@@ -2,7 +2,8 @@
 
 class Save {
 
-    static counter = 0;
+    // Process new day events as soon as possible after loading a file.
+    static counter = GameConstants.SAVE_TICK - GameConstants.TICK_TIME;
     static key = '';
 
     public static store(player: Player) {

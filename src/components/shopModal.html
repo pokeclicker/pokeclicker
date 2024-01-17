@@ -80,6 +80,7 @@
                   title: $data.description ? `<u>${$data.displayName}:</u><br/>${$data.description}` : '',
                   trigger: 'hover',
                   placement:'bottom',
+                  boundary: 'viewport',
                   html: true
                 }">
                <knockout data-bind="if: ($data instanceof PokemonItem)">
@@ -87,6 +88,13 @@
                         data-bind="template: { name: 'pokerusStatusTemplate', data: {
                             'pokerus': $data.getPokerusStatus(), 'width': '32px',
                             'evs': App.game.party.getPokemonByName($data.type)?.evs() }}">
+                    </span>
+               </knockout>
+               <knockout data-bind="if: ($data instanceof EvolutionStone)">
+                    <span style="position: absolute; top: 12px; left: 20px;"
+                        data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                            'pokerus': ItemList[$data.name].getPokerusStatus(), 'width': '32px',
+                            'evsProgress': ItemList[$data.name].getPokerusProgress() }}">
                     </span>
                </knockout>
                <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
