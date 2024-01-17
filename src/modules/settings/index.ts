@@ -429,5 +429,5 @@ ModalCollapseList.forEach((collapse) => {
 });
 
 // Resizable modules
-Settings.add(new Setting<number>('moduleHeight.pokeballSelectorBody', '', [], 265));
-Settings.add(new Setting<number>('moduleHeight.pokemonListBody', '', [], 365));
+Settings.add(new Setting<number>('moduleHeight.pokeballSelector', '', [], 265));
+Settings.add(new Setting<number>('moduleHeight.pokemonList', '', [], 365));

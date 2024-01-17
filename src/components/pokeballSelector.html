@@ -14,8 +14,8 @@
             data-bind="tooltip: { title: 'Select which Poké Ball to use on Pokémon depending on their status', trigger: 'hover', placement:'left' }">
         ?
     </button>
-    <div id="pokeballSelectorBody" class="card-body p-0 show resizable-body">
-        <div class="table-responsive resizable-container d-flex flex-column">
+    <div id="pokeballSelectorBody" class="card-body p-0 show">
+        <div class="table-responsive d-flex flex-column" data-bind="resizable: { setting: 'pokeballSelector' }">
             <div class="flex-grow-1 flex-shrink-1" style="overflow: auto;">
                 <table class="table table-sm m-0">
                     <thead>

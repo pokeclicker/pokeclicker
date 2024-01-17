@@ -75,7 +75,6 @@ class App {
             ko.applyBindings(App.game);
 
             GameController.applyRouteBindings();
-            GameController.setupResizableModules();
             Preload.hideSplashScreen();
 
             App.game.start();

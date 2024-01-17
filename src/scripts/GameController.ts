@@ -534,26 +534,6 @@ class GameController {
             }
         });
     }
-
-    static setupResizableModules() {
-        const moduleResizeObserver = new ResizeObserver((entries) => {
-            entries.forEach((entry) => {
-                const height = entry.target.getBoundingClientRect().height;
-                if (height > 0) {
-                    const id = entry.target.closest('.resizable-body').id; // parent body element id
-                    Settings.setSettingByName(`moduleHeight.${id}`, height);
-                }
-            });
-        });
-
-        document.querySelectorAll<HTMLElement>('.resizable-body').forEach((bodyElem) => {
-            const containerElem = bodyElem.querySelector<HTMLElement>('.resizable-container');
-            if (containerElem) {
-                containerElem.style.height = `${Settings.getSetting(`moduleHeight.${bodyElem.id}`).value}px`;
-                moduleResizeObserver.observe(containerElem);
-            }
-        });
-    }
 }
 
 // when stacking modals allow scrolling after top modal hidden
