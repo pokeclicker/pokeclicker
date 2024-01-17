@@ -6228,7 +6228,7 @@ TemporaryBattleList['Eternamax Eternatus'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/890',
+        imageName: '../pokemon/890.01',
     }
 );
 
