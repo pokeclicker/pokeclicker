@@ -1,4 +1,4 @@
-import { Observable, ObservableArray, PureComputed } from 'knockout';
+import { Subscribable, Observable, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
 function createObserver(loader: HTMLElement, doneLoading: { status: boolean }, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
@@ -73,7 +73,7 @@ const defaultOptions: LazyLoadOptions = {
 
 const memo: Record<string, PureComputed<Array<unknown>>> = {};
 
-export default function lazyLoad(key: string, boundNode: Node, list: ObservableArray<unknown>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
+export default function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<unknown>>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
     // Get first parent that's not a table element, that's where we'll add the loader element
     const targetElement = boundNode.parentElement.closest(':not(table, thead, tbody, tr, td, th)') as HTMLElement;
 
