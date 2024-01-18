@@ -1,8 +1,6 @@
 import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
-    public static toggleStatisticShiny = ko.observable(true);
-    public static hideShinyImages = ko.observable(false);
 
     public static initialize() {
         Object.values(PokedexFilters).forEach((filter) => {
@@ -231,12 +229,6 @@ class PokedexHelper {
 
     // Flag for the LazyLoader
     public static resetPokedexView = ko.pureComputed(() => {
-        return modalUtils.observableState.pokedexModalObservable;
+        return modalUtils.observableState.pokedexModalObservable();
     });
 }
-
-$(document).ready(() => {
-    $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
-        PokedexHelper.toggleStatisticShiny(true);
-    });
-});

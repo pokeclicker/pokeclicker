@@ -192,6 +192,9 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
 
+// Party
+Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
+
 // Party Sorting
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
@@ -260,6 +263,8 @@ Object.keys(PokedexFilters).forEach((key) => {
     const filter = PokedexFilters[key];
     Settings.add(new FilterSetting(filter));
 });
+
+
 
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
     [
@@ -416,6 +421,7 @@ Object.keys(LogBookTypes).forEach((logBookType) => {
 });
 
 Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
+Settings.add(new BooleanSetting('catchFilters.invertPriorityOrder', 'Catch Filters priority inverted (bottom-to-top)', false));
 Settings.add(new BooleanSetting('breedingEfficiencyAllModifiers', 'Include attack modifiers (held item, EVs, shadow/purified) in Breeding Efficiency', true));
 
 // Modal Collapsible Panels
@@ -423,4 +429,6 @@ ModalCollapseList.forEach((collapse) => {
     Settings.add(new BooleanSetting(`modalCollapse.${collapse}`, 'Modal Collapse', true));
 });
 
-
+// Resizable modules
+Settings.add(new Setting<number>('moduleHeight.pokeballSelector', '', [], 265));
+Settings.add(new Setting<number>('moduleHeight.pokemonList', '', [], 365));
