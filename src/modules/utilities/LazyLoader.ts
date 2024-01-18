@@ -6,14 +6,18 @@ function createObserver(loader: HTMLElement, doneLoading: { status: boolean }, o
 
     let visible = false;
     let currentlyLoading = false;
+    let lastHeight = 0;
 
     const loadMore = () => {
-        if (visible && !currentlyLoading && !doneLoading.status) {
+        if (visible && !doneLoading.status) {
             currentlyLoading = true;
-            GameHelper.incrementObservable(page);
-
-            // keep loading more in case we don't push the loader off screen
-            // @ts-ignore
+            let currentHeight = (options.root as HTMLElement).scrollHeight;
+            if (lastHeight != currentHeight) {
+                // Wait to load subsequent pages until this page's data is actually added to the scrolling element
+                GameHelper.incrementObservable(page);
+                lastHeight = currentHeight;    
+            }
+            // Check again in case we don't push the loader off screen
             requestIdleCallback(loadMore, { timeout: 100 });
         } else {
             currentlyLoading = false;
@@ -22,7 +26,8 @@ function createObserver(loader: HTMLElement, doneLoading: { status: boolean }, o
 
     const callback = (entries) => {
         visible = entries[0].isIntersecting;
-        if (visible) {
+        if (visible && !currentlyLoading) {
+            lastHeight = 0;
             loadMore();
         }
     };
@@ -77,7 +82,7 @@ export default function lazyLoad(key: string, boundNode: Node, list: Subscribabl
     // Get first parent that's not a table element, that's where we'll add the loader element
     const targetElement = boundNode.parentElement.closest(':not(table, thead, tbody, tr, td, th)') as HTMLElement;
 
-    // Only return memoized loader if the 
+    // Only return a memoized lazyList if the associated loader element still exists
     if (memo[key] && targetElement.querySelector(':scope > .lazy-loader-container')) {
         return memo[key];
     }
