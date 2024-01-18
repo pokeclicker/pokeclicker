@@ -52,7 +52,7 @@
                             </td>
                         </tr>
                     </thead>
-                    <tbody data-bind="foreach: lazyLoad($element, PartyController.getSortedList, { pageSize: 20 })">
+                    <tbody data-bind="foreach: lazyLoad('lazyPokemonList', $element, PartyController.getSortedList, { pageSize: 20 })">
                         <tr data-toggle="modal" href="#pokemonStatisticsModal" data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">
                             <td>
                                 <img
