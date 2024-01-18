@@ -248,25 +248,6 @@ body:hover {
   margin: -10px;
 }
 
-#pokemonListContainer {
-  max-height: 300px;
-
-  #pokemonListBody {
-    max-height: 250px;
-    overflow: auto;
-  }
-}
-
-@media (min-width: 992px) {
-  #pokemonListContainer {
-    max-height: 400px;
-
-    #pokemonListBody {
-      max-height: 350px;
-    }
-  }
-}
-
 // Firefox fix for background covering borders in tables
 td {
   background-clip: padding-box;
@@ -823,6 +804,19 @@ button.btn-circle {
        padding: 0.3rem !important;
     }
   }
+}
+
+.category-dropdown,
+.multiselect-dropdown {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+// Resizable modules
+.resizable-container {
+    resize: vertical;
+    overflow: auto;
+    min-height: 50px;
 }
 
 .lazy-loader-container {
