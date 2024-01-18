@@ -76,10 +76,10 @@ class PurifyChamber implements Saveable {
             this.notified = true;
             Notifier.notify({
                 title: 'Purify Chamber',
-                message: 'Maximum Flow has accumulated at the Purify Chamber!',
+                message: 'Maximum Flow has accumulated at the Purify Chamber in Orre!',
                 type: NotificationConstants.NotificationOption.primary,
                 sound: NotificationConstants.NotificationSound.General.max_flow,
-                timeout: 6e4,
+                timeout: 15 * GameConstants.MINUTE,
             });
         }
     }
