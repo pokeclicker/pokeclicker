@@ -4731,8 +4731,8 @@ TownList['Distortion World'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar')),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'), GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('A New World', 9),
+                new QuestLineStepCompletedRequirement('A New World', 10, GameConstants.AchievementOption.less),
             ]),
             new TemporaryBattleRequirement('Zero'),
         ]),
@@ -6177,7 +6177,7 @@ const AnomalyMewtwo3 = new NPC('Anomaly Mewtwo', [
 
 const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
     '<i>Hah! Your strength is truly unyielding!</i>',
-    '<i>I would like to apolagise for accusing you of merely possessing the Mewtwo in your care. It is clear that you greatly care for it, as well as all your other Pokémon. Take this.</i>',
+    '<i>I would like to apologise for accusing you of merely possessing the Mewtwo in your care. It is clear that you greatly care for it, as well as all your other Pokémon. Take this.</i>',
     '</i></br><img src="assets/images/megaStone/Mewtwonite_Y.png"/></br><i>You obtained the Mewtwonite Y!</i>',
     '<i>You are truly deserving of this Mega Stone. Use it to give your Mewtwo a truly unrivaled power.</i>',
 ], {

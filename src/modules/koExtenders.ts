@@ -3,6 +3,7 @@
 
 import Sortable from 'sortablejs';
 import type { Observable, Computed } from 'knockout';
+import Settings from './settings';
 
 // Knockout types don't have a way to accurately require writable computeds yet
 type MaybeWritable = Observable | Computed;
@@ -187,5 +188,25 @@ ko.bindingHandlers.sortable = {
         };
 
         sortableControllers.set(element, Sortable.create(element, options));
+    },
+};
+
+const moduleResizeObserver = new ResizeObserver((entries) => {
+    entries.forEach((entry) => {
+        const height = entry.target.getBoundingClientRect().height;
+        if (height > 0) {
+            const resizeId = (entry.target as HTMLElement).dataset.resizeId;
+            Settings.setSettingByName(`moduleHeight.${resizeId}`, height);
+        }
+    });
+});
+
+ko.bindingHandlers.resizable = {
+    init: function (element, valueAccessor) {
+        const value = valueAccessor();
+        element.classList.add('resizable-container');
+        element.style.height = `${Settings.getSetting(`moduleHeight.${value.setting}`).value}px`;
+        element.dataset.resizeId = value.setting;
+        moduleResizeObserver.observe(element);
     },
 };

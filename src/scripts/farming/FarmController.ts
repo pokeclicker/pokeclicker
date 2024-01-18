@@ -103,7 +103,15 @@ class FarmController {
         App.game.farming.togglePlotSafeLock(index);
     }
 
-    public static toggleAllPlotsLocked(lock: boolean) {
+    public static toggleAllPlotLocks() {
+        App.game.farming.plotList.forEach((plot, index) => {
+            if (plot.isUnlocked) {
+                App.game.farming.togglePlotSafeLock(index);
+            }
+        });
+    }
+
+    public static toggleAllPlotLocksTo(lock: boolean) {
         App.game.farming.plotList.forEach((plot, index) => {
             if (plot.isUnlocked && ((lock && !plot.isSafeLocked) || (!lock && plot.isSafeLocked))) {
                 App.game.farming.togglePlotSafeLock(index);
@@ -240,6 +248,15 @@ class FarmController {
 
         return tooltip.join('<br>');
     });
+
+    // For preview in Farm Modal's BerryDex Tab
+    public static handleBerryDexClick(berryId: number) {
+        if (App.game.statistics.selectedBerryID() === berryId && App.game.farming.unlockedBerries[berryId]()) {
+            $('#berryDexModal').modal('show');
+        }
+
+        App.game.statistics.selectedBerryID(berryId);
+    }
 
 }
 

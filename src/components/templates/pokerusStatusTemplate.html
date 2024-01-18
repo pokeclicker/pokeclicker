@@ -3,7 +3,7 @@
         <!-- ko if: $data.pokerus -->
         <img width="" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`, width: $data.width },
             tooltip: {
-                title:  $data.evs !== undefined ? `EVs: ${$data.evs.toLocaleString('en-US')}` : '',
+                title:  ($data.evs !== undefined ? `EVs: ${$data.evs.toLocaleString('en-US')}` : '') + ($data.evsProgress ?? ''),
                 trigger: 'hover',
                 placement: 'top',
             }"/>
