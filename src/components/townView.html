@@ -35,7 +35,7 @@
                         <!-- ko if: player.town().dungeon.allAvailableShadowPokemon().length -->
                         <div class="ml-1" style="font-size: 0;" data-bind="let: { isMissingShadow: player.town().dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) }">
                             <img height="24" src="assets/images/status/shadow.svg" data-bind="
-                                css: { 'grayscale-100': isMissingShadow },
+                                css: { 'dungeon-pokemon-locked': isMissingShadow },
                                 tooltip: {
                                     title: isMissingShadow ? 'There are uncaught Shadow Pokémon in this dungeon.' : 'All Shadow Pokémon in this dungeon have been captured!',
                                     trigger: 'hover',
