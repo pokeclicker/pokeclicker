@@ -124,3 +124,4 @@ ItemList.Leaders_crest   = new EvolutionStone(GameConstants.StoneType.Leaders_cr
 ItemList.Gimmighoul_coin   = new EvolutionStone(GameConstants.StoneType.Gimmighoul_coin, 5000, undefined , 'Gimmighoul Coin');
 ItemList.Syrupy_apple   = new EvolutionStone(GameConstants.StoneType.Syrupy_apple, 5000, undefined , 'Syrupy Apple');
 ItemList.Unremarkable_teacup   = new EvolutionStone(GameConstants.StoneType.Unremarkable_teacup, 5000, undefined , 'Unremarkable Teacup');
+ItemList.Metal_alloy   = new EvolutionStone(GameConstants.StoneType.Metal_alloy, 5000, undefined , 'Metal Alloy');

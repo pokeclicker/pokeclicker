@@ -31,7 +31,7 @@
         </div>
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
             <knockout>
-                Stage <knockout data-bind="text: BattleFrontierRunner.stage">0</knockout> / <knockout data-bind="text: BattleFrontierRunner.highest">0</knockout>
+                Stage <knockout data-bind="text: BattleFrontierRunner.stage().toLocaleString('en-US')">0</knockout> / <knockout data-bind="text: BattleFrontierRunner.highest().toLocaleString('en-US')">0</knockout>
             </knockout>
             <table width="100%">
                 <tr>
