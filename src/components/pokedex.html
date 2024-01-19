@@ -219,7 +219,7 @@ aria-labelledby="pokedexModalLabel">
                                 <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
                             </div>
                             <!-- /ko -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexView })">
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad('lazyPokedexList', $element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexView })">
                                 <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                                         data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                         <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
@@ -238,9 +238,8 @@ aria-labelledby="pokedexModalLabel">
                                             <!-- /ko -->
                                             <img style="position: absolute; top: 24px; right: 0px;" class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Shadow"/>
                                             <img style="position: absolute; top: 24px; right: 0px;" class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Purified"/>
-
                                             <!-- /ko -->
-                                            <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id)}">
+                                            <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id)}">
                                             <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
                                             <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: () => {App.game.statistics.selectedPokemonID($data.id)},
                                                 tooltip: {
