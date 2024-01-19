@@ -830,3 +830,44 @@ button.btn-circle {
   padding-bottom: 10px;
   overflow: hidden;
 }
+
+// Currency module
+#middle-column {
+    .currency-wrapper {
+        .currency-line {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-evenly;
+        }
+
+        &.short-currencies {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+
+            > .currency-line {
+                display: contents;
+            }
+
+            .currency-display {
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+#left-column, #left-column-2, #right-column, #right-column-2 {
+    .currency-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        .currency-line {
+            display: contents;
+        }
+
+        .currency-display {
+            flex-direction: column;
+        }
+    }
+}
