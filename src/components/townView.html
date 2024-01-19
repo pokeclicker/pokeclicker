@@ -5,40 +5,55 @@
         <div class="col no-gutters">
             <button type="button" class="btn btn-outline-info" style="float: right;"
                 data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
-            <div class="pageItemTitle" data-bind="using: { isDungeon: player.town() instanceof DungeonTown && player.town().dungeon }">
-              <div style="font-size: 1.8rem;" data-bind="text: player.town().name, css: { 'mx-5': $data.isDungeon }">Town Name</div>
-              <knockout data-bind="if: $data.isDungeon">
-                <div class="d-flex flex-column position-absolute justify-content-center ml-1" style="left: 0; top: 0; height: 100%;">
-                    <!--If all Pokémon in the dungeon are caught-->
-                    <div data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))" style="font-size: 0;">
-                        <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball.svg" />
-                    </div>
 
-                    <!--If all Pokémon in the dungeon are caught shiny-->
-                    <div data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)" style="font-size: 0;">
-                        <img title="You have captured all Pokémon shiny in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball-shiny.svg"/>
-                    </div>
+            <div class="pageItemTitle d-flex justify-content-center" data-bind="let: { isDungeon: player.town() instanceof DungeonTown && player.town().dungeon }">
+                <div class="title-left" data-bind="if: isDungeon">
+                    <div class="d-flex align-items-center ml-1 mr-auto">
+                        <div class="d-flex flex-column">
+                            <!--If all Pokémon in the dungeon are caught-->
+                            <div data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))" style="font-size: 0;">
+                                <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball.svg" />
+                            </div>
 
-                    <!--Pokérus image-->
-                    <div data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())" style="font-size: 0;">
-                        <img src="" data-bind="
-                        attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town().dungeon.allAvailablePokemon())] + '.png'},
-                        tooltip: {
-                            title: RouteHelper.dungeonPokerusEVs(player.town().dungeon),
-                            placement: 'bottom',
-                            trigger: 'hover'
-                        }" />
+                            <!--If all Pokémon in the dungeon are caught shiny-->
+                            <div data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)" style="font-size: 0;">
+                                <img title="You have captured all Pokémon shiny in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                            </div>
+
+                            <!--Pokérus image-->
+                            <div data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())" style="font-size: 0;">
+                                <img src="" data-bind="
+                                attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town().dungeon.allAvailablePokemon())] + '.png'},
+                                tooltip: {
+                                    title: RouteHelper.dungeonPokerusEVs(player.town().dungeon),
+                                    placement: 'bottom',
+                                    trigger: 'hover'
+                                }" />
+                            </div>
+                        </div>
+
+                        <!-- ko if: player.town().dungeon.allAvailableShadowPokemon().length -->
+                        <div class="ml-1" style="font-size: 0;" data-bind="let: { isMissingShadow: player.town().dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) }">
+                            <img height="24" src="assets/images/status/shadow.svg" data-bind="
+                                css: { 'dungeon-pokemon-locked': isMissingShadow },
+                                tooltip: {
+                                    title: isMissingShadow ? 'There are uncaught Shadow Pokémon in this dungeon.' : 'All Shadow Pokémon in this dungeon have been captured!',
+                                    trigger: 'hover',
+                                    placement: 'bottom',
+                                }" />
+                        </div>
+                        <!-- /ko -->
                     </div>
                 </div>
 
-                <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
-                <div class="d-flex flex-column position-absolute justify-content-center small mr-1" style="right: 0; top: 0; height: 100%;"
-                    data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
-                    <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
-                    <div style="line-height: normal;">clears</div>
+                <div class="d-flex justify-content-center px-2" style="font-size: 1.8rem;" data-bind="text: player.town().name">Town Name</div>
+
+                <div class="title-right" data-bind="if: isDungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
+                    <div class="d-flex flex-column justify-content-center small mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
+                        <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
+                        <div style="line-height: normal;">clears</div>
+                    </div>
                 </div>
-                <!-- /ko -->
-              </knockout>
             </div>
         </div>
     </div>
@@ -137,12 +152,6 @@
                     placement: 'bottom',
                     trigger: 'hover'
                 }" />
-          </li>
-          <!-- /ko -->
-          <!-- ko if: player.town().dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) -->
-          <li class="list-inline-item">
-            <img class="boss" src="assets/images/status/shadow.svg"/>
-            <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src="assets/images/npcs/specialNPCs/Mysterious Trainer.png"/>
           </li>
           <!-- /ko -->
         </ul>

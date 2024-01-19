@@ -32,6 +32,11 @@
                                 Reset Filters
                             </button>
                         </div>
+                        <p class="mb-1 small">
+                            ** Filters closer to the
+                            <strong class="text-warning" data-bind="text: Settings.getSetting('catchFilters.invertPriorityOrder').observableValue() ? 'bottom' : 'top'">top</strong>
+                            have a higher priority! **
+                        </p>
                         <div id="pokeballFilterConfigs"
                             data-bind="sortable: {
                                 foreach: App.game.pokeballFilters.list,
