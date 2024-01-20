@@ -36,6 +36,7 @@ import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
+import ContestType from '../enums/ContestType';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -103,6 +104,7 @@ export type PokemonListData = {
         femaleRatio?: number;
         visualDifference?: boolean;
     }
+    condition?: ContestType[];
 };
 
 function createPokemonArray<T extends readonly PokemonListData[] & Array<{ name: V }>, V extends string>(...args: T) {
@@ -1715,6 +1717,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'condition': [ContestType.Cool],
     },
     {
         'id': 25.18,
@@ -1735,6 +1738,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'condition': [ContestType.Beautiful],
     },
     {
         'id': 25.19,
@@ -1755,6 +1759,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'condition': [ContestType.Cute],
     },
     {
         'id': 25.20,
@@ -1775,6 +1780,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'condition': [ContestType.Smart],
     },
     {
         'id': 25.21,
@@ -1795,6 +1801,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'condition': [ContestType.Tough],
     },
     {
         'id': 25.22,
@@ -31436,6 +31443,7 @@ export type PokemonList = typeof pokemonList;
 
 const pokemonNameIndex = {};
 const maxEggCycles = Math.max(...pokemonList.map((p) => p.eggCycles));
+const contestStats = ['attack', 'specialAttack', 'speed', 'specialDefense', 'defense']; // order is important
 
 // This needs to be initiallised before pokemonMap as some other things rely on it for data
 // Specifically Roamers not sure what else.
@@ -31484,6 +31492,22 @@ pokemonList.forEach((p) => {
     (p as PokemonListData).gender.femaleRatio = (p as PokemonListData).gender.femaleRatio === undefined ? 0.5 : (p as PokemonListData).gender.femaleRatio;
     // Add false as default gender visual difference
     (p as PokemonListData).gender.visualDifference = (p as PokemonListData).gender.visualDifference === undefined ? false : (p as PokemonListData).gender.visualDifference;
+
+    // Calculate Contest Types
+    // Determine based off highest stats
+    const max = Math.max(p.base.attack, p.base.specialAttack, p.base.speed, p.base.specialDefense, p.base.defense);
+    let con = [] as ContestType[];
+    contestStats.forEach((stat) => {
+        if (p.base[stat] === max) {
+            con.push(contestStats.indexOf(stat));
+        }
+    });
+    // Replace calculated array with a singular Balanced Contest Type if enough bases are covered for simpler effectiveness calculations
+    if (con.length > 3) {
+        con = [5];
+    }
+    // Fill pokemons condition with calculated Contest Types if nothing was given
+    (p as PokemonListData).condition = (p as PokemonListData).condition === undefined ? con : (p as PokemonListData).condition;
 });
 
 export type PokemonMapProxy

@@ -96,6 +96,7 @@ import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
+import ContestType from './enums/ContestType';
 import CustomRequirement from './requirements/CustomRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DevelopmentRequirement from './requirements/DevelopmentRequirement';
@@ -217,6 +218,7 @@ Object.assign(<any>window, {
     PokemonType,
     CaughtStatus,
     EvolutionType,
+    ContestType,
     FarmNotificationType,
     FlavorType,
     ItemType,

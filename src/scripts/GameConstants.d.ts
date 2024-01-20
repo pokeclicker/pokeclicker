@@ -306,6 +306,7 @@ namespace GameConstants {
     declare function clipNumber(num: number, min: number, max: number): number;
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
+    declare const ContestColor: string[];
     declare const ROUTE_KILLS_NEEDED: number;
     declare const ACHIEVEMENT_DEFEAT_ROUTE_VALUES: number[];
     declare const ACHIEVEMENT_DEFEAT_GYM_VALUES: number[];
