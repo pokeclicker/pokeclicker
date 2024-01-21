@@ -52,7 +52,7 @@ class PartyController {
         }).sort((a, b) => a.id - b.id);
     }
 
-    static getStoneEvolutions<T>(id: number, getStatus: (evo: EvoData) => T, evoType?: GameConstants.StoneType): { status: T, locked: boolean, lockHint: string }[] {
+    static getStoneEvolutions<T>(id: number, getStatus: (evo: EvoData) => T, evoType?: GameConstants.StoneType): { status: T, evs:number, locked: boolean, lockHint: string }[] {
         const pokemon = App.game.party.getPokemon(id);
         return PartyController.getPokemonStoneEvos(pokemon, evoType)
             .map((evo) => ({
@@ -68,7 +68,7 @@ class PartyController {
         return this.getStoneEvolutions(id, getStatus, evoType);
     }
 
-    static getStoneEvolutionsPokerusData(id: number, evoType?: GameConstants.StoneType): { status: GameConstants.Pokerus, locked: boolean, lockHint: string }[] {
+    static getStoneEvolutionsPokerusData(id: number, evoType?: GameConstants.StoneType): { status: GameConstants.Pokerus, evs: number, locked: boolean, lockHint: string }[] {
         const getStatus = (evo: EvoData) => this.getPokerusStatusByName(evo.evolvedPokemon);
         return this.getStoneEvolutions(id, getStatus, evoType);
     }
@@ -129,18 +129,6 @@ class PartyController {
     static getSortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
         return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
-    }).extend({ rateLimit: 500 });
-
-    private static hatcherySortedList = [];
-    static getHatcherySortedList = ko.pureComputed(() => {
-        // If the breeding modal is open, we should sort it.
-        if (modalUtils.observableState.breedingModal === 'show') {
-            // Don't adjust attack based on region if debuff is disabled
-            const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
-            PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
-            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
-        }
-        return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
 
     private static vitaminSortedList = [];

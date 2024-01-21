@@ -810,7 +810,7 @@ GymList['Cipher Admin Snattle'] = new Gym (
         new GymPokemon('Regice', 34094443, 100),
     ],
     BadgeEnums.Elite_ColosseumSnattle,
-    100000,
+    70000,
     'In the near future, when I become the Governor of Orre, I shall appoint you as my official secretary. Let that be a motivation for you to constantly better your skills!',
     [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumLovrina)],
     undefined, undefined, { displayName: 'Challenge Snattle' }
@@ -827,7 +827,7 @@ GymList['Cipher Admin Gorigan'] = new Gym (
         new GymPokemon('Gyarados', 37503887, 100),
     ],
     BadgeEnums.Elite_ColosseumGorigan,
-    100000,
+    85000,
     'You\'re some kind of special! You\'re worthy of sharing my camaraderie as a friend.',
     [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumSnattle)],
     undefined, undefined, { displayName: 'Challenge Gorigan' }
@@ -844,7 +844,7 @@ GymList['Cipher Admin Ardos'] = new Gym (
         new GymPokemon('Starmie', 41254276, 100),
     ],
     BadgeEnums.Elite_ColosseumArdos,
-    120000,
+    100000,
     'In all of Orre, I\'ve never seen a Pokémon Trainer of your caliber. You appear to be the biggest threat to Cipher. To make sure my underlings watch you with caution, I give you the title “Cipher\'s Biggest Enemy.”',
     [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumGorigan)],
     undefined, undefined, { displayName: 'Challenge Ardos' }
@@ -861,7 +861,7 @@ GymList['Cipher Admin Eldes'] = new Gym (
         new GymPokemon('Tauros', 45379704, 100),
     ],
     BadgeEnums.Elite_ColosseumEldes,
-    150000,
+    128000,
     'I\'m satisfied that I was able to battle to my heart\'s content. I would like to confer on you the title “Eldes\'s Top Rival.”',
     [new GymBadgeRequirement(BadgeEnums.Elite_ColosseumArdos)],
     undefined, undefined, { displayName: 'Challenge Eldes' }
@@ -2548,7 +2548,8 @@ GymList['Stony Cliff Titan'] = new Gym(
     BadgeEnums.Rock_Titan,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { imageName: '../pokemon/950.01' }
 );
 GymList['Open Sky Titan'] = new Gym(
     'Open Sky Titan',
@@ -2557,7 +2558,8 @@ GymList['Open Sky Titan'] = new Gym(
     BadgeEnums.Flying_Titan,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { imageName: '../pokemon/962.01' }
 );
 GymList['Lurking Steel Titan'] = new Gym(
     'Lurking Steel Titan',
@@ -2566,7 +2568,8 @@ GymList['Lurking Steel Titan'] = new Gym(
     BadgeEnums.Steel_Titan,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    undefined, undefined, { imageName: '../pokemon/968.01' }
 );
 GymList['Asado Desert'] = new Gym(
     'Quaking Earth Titan',
