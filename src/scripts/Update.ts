@@ -2488,36 +2488,6 @@ class Update implements Saveable {
             // Remove erroneous nameless settings
             delete settingsData[''];
 
-            // Update breeding filters to use numeric values
-            ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingTypeFilter1', 'breedingTypeFilter2', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
-                .forEach((filter) => {
-                    if (settingsData[filter]?.length) {
-                        settingsData[filter] = Number.parseInt(settingsData[filter]);
-                    } else {
-                        delete settingsData[filter];
-                    }
-                });
-
-            // Represent 'any type' as null to match pokedex settings
-            if (settingsData.breedingTypeFilter1 == -2) {
-                settingsData.breedingTypeFilter1 = null;
-            }
-            if (settingsData.breedingTypeFilter2 == -2) {
-                settingsData.breedingTypeFilter2 = null;
-            }
-
-            // Rename settings to accurately describe purpose
-            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
-            delete settingsData.pokedexShinyFilter;
-            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
-            delete settingsData.breedingDisplayFilter;
-
-            // Rename settings to match pokedex settings name convention
-            settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
-            delete settingsData.breedingTypeFilter1;
-            settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
-            delete settingsData.breedingTypeFilter2;
-
             // Remove Z Crystal gyms and badges (remove furthest down the index first as to not get confused by index numbers)
             // Mina\'s Trial
             saveData.statistics.gymsDefeated.splice(88, 1);
@@ -2646,6 +2616,12 @@ class Update implements Saveable {
             settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
             delete settingsData.breedingTypeFilter2;
 
+            // Rename settings to accurately describe purpose
+            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
+            delete settingsData.pokedexShinyFilter;
+            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
+            delete settingsData.breedingDisplayFilter;
+
             // Update breeding filters to use numeric values
             ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingType1Filter', 'breedingType2Filter', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
                 .forEach((filter) => {
@@ -2663,12 +2639,6 @@ class Update implements Saveable {
             if (settingsData.breedingType2Filter == -2) {
                 settingsData.breedingType2Filter = null;
             }
-
-            // Rename settings to accurately describe purpose
-            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
-            delete settingsData.pokedexShinyFilter;
-            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
-            delete settingsData.breedingDisplayFilter;
         },
     };
 
