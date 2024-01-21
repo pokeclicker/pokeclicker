@@ -2627,6 +2627,19 @@ class Update implements Saveable {
                 }
             });
 
+            // Fix pokerus status for party members infected via shop eggs
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                // PartyPokemonSaveKeys.pokerus and .breeding
+                if (pokemon[8] === GameConstants.Pokerus.Infected && !pokemon[4]) {
+                    pokemon[8] = GameConstants.Pokerus.Contagious;
+                }
+            });
+
+            // Preserve bottom-to-top catch filter priority for existing players
+            settingsData['catchFilters.invertPriorityOrder'] = true;
+        },
+
+        '0.10.19': ({ playerData, saveData, settingsData }) => {
             // Rename settings to match pokedex settings name convention
             settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
             delete settingsData.breedingTypeFilter1;
@@ -2656,7 +2669,6 @@ class Update implements Saveable {
             delete settingsData.pokedexShinyFilter;
             settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
             delete settingsData.breedingDisplayFilter;
-
         },
     };
 

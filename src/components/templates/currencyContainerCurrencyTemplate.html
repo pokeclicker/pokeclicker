@@ -1,0 +1,12 @@
+<script type="text/html" id="currency-display-template">
+    <div class="currency-display d-flex flex-wrap mx-1 my-2 justify-content-center">
+        <img src="" class="mx-1" height="25px" data-bind="attr: { src: `assets/images/currency/${Currency[$data.currency]}.svg` },
+            tooltip: {
+                html: true,
+                title: $data.tooltip,
+                trigger: 'hover',
+                placement: 'top'
+            }">
+        <div class="" data-bind="text: App.game.wallet.amountText($data.currency), attr: { id: `animateCurrency-${Currency[$data.currency]}` }">0</div>
+    </div>
+</script>

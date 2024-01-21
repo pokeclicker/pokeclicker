@@ -115,6 +115,12 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     ],
     'ripeDeath'));
 Settings.add(new BooleanSetting('farmBoostDisplay', 'Include base farm timer during altered berry growth times', false));
+Settings.add(new Setting<string>('berryDexMode', 'Berrydex Display',
+    [
+        new SettingOption('Classic Mode', 'classic'),
+        new SettingOption('Preview Mode', 'preview'),
+    ],
+    'classic'));
 Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     [
         new SettingOption('Inches', 'inch'),
@@ -122,7 +128,7 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     ],
     'cm'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
-Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
+Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
@@ -190,6 +196,9 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
+
+// Party
+Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
 
 // Party Sorting
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
@@ -490,6 +499,7 @@ Object.keys(LogBookTypes).forEach((logBookType) => {
 });
 
 Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
+Settings.add(new BooleanSetting('catchFilters.invertPriorityOrder', 'Catch Filters priority inverted (bottom-to-top)', false));
 Settings.add(new BooleanSetting('breedingEfficiencyAllModifiers', 'Include attack modifiers (held item, EVs, shadow/purified) in Breeding Efficiency', true));
 
 // Modal Collapsible Panels
@@ -497,4 +507,6 @@ ModalCollapseList.forEach((collapse) => {
     Settings.add(new BooleanSetting(`modalCollapse.${collapse}`, 'Modal Collapse', true));
 });
 
-
+// Resizable modules
+Settings.add(new Setting<number>('moduleHeight.pokeballSelector', '', [], 265));
+Settings.add(new Setting<number>('moduleHeight.pokemonList', '', [], 365));
