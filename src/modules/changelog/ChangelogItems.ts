@@ -14,7 +14,7 @@ const ChangelogItems = [
     new ChangelogUpdate('v0.10.18', new Date(2024, 0, 21)),
     new Changelog(changelogType.NEW, 'New Pokémon'),
     new Changelog(changelogType.NEW, 'Alternate Berrydex viewing mode (enabled in Display settings)'),
-    new Changelog(changelogType.NEW, 'Audio queue when Max Flow has been gathered'),
+    new Changelog(changelogType.NEW, 'Audio cue when Max Flow has been gathered'),
     new Changelog(changelogType.NEW, 'Farm button to invert locked plots'),
     new Changelog(changelogType.CHANGE, 'Hatchery, battle, and clicking performance optimizations'),
     new Changelog(changelogType.CHANGE, 'Pink Bow replaced with Fairy Feather'),
