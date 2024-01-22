@@ -5,10 +5,6 @@ export declare module 'knockout' {
         arrayEquals: true;
         skippableRateLimit: number;
     }
-
-    export interface BindingHandlers {
-        contentEditable;
-    }
 }
 
 declare global {
