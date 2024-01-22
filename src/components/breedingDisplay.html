@@ -83,9 +83,10 @@
             "></span>
         <button class="btn btn-sm btn-danger" style="position: absolute; right: 0; width: auto;"
                 data-bind="
-                    click: () => App.game.breeding.clearQueue(true),
-                    tooltip: { title: 'Remove all Pokémon from the queue.', trigger: 'hover' }
-                ">
+                click: ()=>
+            App.game.breeding.clearQueue(Settings.getSetting('breedingQueueClearConfirmation').observableValue()),
+            tooltip: { title: 'Remove all Pokémon from the queue.', trigger: 'hover' }
+            ">
             Clear
         </button>
     </div>
