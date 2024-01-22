@@ -117,6 +117,7 @@ export const SpriteCredits: Credit[] = [
         image: 'https://www.smogon.com/forums/media/zracknel-beta.svg.m.1',
         resources: [
             'Adaman',
+            'Agatha',
             'AI Sada',
             'AI Turo',
             'Akari',
@@ -160,6 +161,7 @@ export const SpriteCredits: Credit[] = [
         ],
         // NOTES: No notes about credit, but is made for public use. Unclear who made what, so credited together
     },
+    
     {
         name: 'CGMetalDragon',
         link: 'https://www.deviantart.com/cgmetaldragon',
@@ -205,7 +207,6 @@ export const SpriteCredits: Credit[] = [
         name: 'DaleArwin',
         link: 'https://www.deviantart.com/dalearwin',
         resources: [
-            'Aether Foundation Employee (masked)',
             'Brains & Brawn',
             'Dancer (female)',
             'Golfer',
@@ -628,6 +629,8 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/gnomowladny',
         image: 'https://a.deviantart.net/avatars-big/g/n/gnomowladny.gif',
         resources: [
+            'Aqua Admin (shelly)',
+            'AZ',
             'Clemont',
             'Drasna',
             'Korrina',
@@ -744,8 +747,10 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/kyle-dove',
         image: 'https://a.deviantart.net/avatars-big/k/y/kyle-dove.png',
         resources: [
+            'Actor',
+            'Aether Foundation Employee (masked)',
+            'Aqua Admin (matt)',
             'Artist (Gen 8)',
-            'Artist (male)',
             'Arven',
             'Battle Café Master',
             'Beni',
@@ -937,14 +942,6 @@ export const SpriteCredits: Credit[] = [
             'Furisode Girl Katherine',
         ],
         // Notes: Permission given on image page if credited.
-    },
-    {
-        name: 'PKMNTrainerSpriterC, akuma-tsubasa & Metapod23',
-        link: 'https://www.deviantart.com/pkmntrainerspriterc/art/Ash-Ketchum-Sprite-Set-435950341',
-        resources: [
-            'Ash Ketchum',
-        ],
-        // NOTES: Permission given on image page if credited.
     },
     {
         name: 'Pokémon Reborn\'s cass and Amethyst',
