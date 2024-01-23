@@ -83,12 +83,15 @@ const skippableRateLimitExtender = (target: Subscribable, delay: number): typeof
     const skippableLimiter = (callback, timeout) => {
         var timeoutInstance = null;
         var skipNextLimit = false;
+
         const startEvaluation = () => {
             timeoutInstance = null;
             skipNextLimit = false;
             // Starts target evaluation
             callback();
         };
+
+        // Method added to the target observable to force evaluation
         const evaluateEarly = () => {
             if (timeoutInstance) {
                 // Already rate-limited, evaluate now
@@ -100,6 +103,9 @@ const skippableRateLimitExtender = (target: Subscribable, delay: number): typeof
                 skipNextLimit = true;
             }
         };
+        Object.assign(target, { evaluateEarly });
+
+        // Called to start pre-evaluation delay when a dependency updates
         const startRateLimit = () => {
             // Do nothing if already rate-limited
             if (!timeoutInstance) {
@@ -112,9 +118,10 @@ const skippableRateLimitExtender = (target: Subscribable, delay: number): typeof
                 }
             }
         };
-        Object.assign(target, { evaluateEarly });
         return startRateLimit;
     };
+
+    // Add rate limit using our custom limiter
     return target.extend({ rateLimit: { timeout: delay, method: skippableLimiter } }) as typeof target & SkippableRateLimit;
 };
 
