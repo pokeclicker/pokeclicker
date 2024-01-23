@@ -100,7 +100,7 @@ class BreedingController {
         hatcherySettingObervables.forEach((setting) => {
             setting.subscribe(() => {
                 BreedingController.viewResetWaiting(true);
-                (BreedingController.hatcherySortedFilteredList as unknown as SkippableRateLimit).evaluateEarly();
+                BreedingController.hatcherySortedFilteredList.evaluateEarly();
             });
         });
 
@@ -229,7 +229,7 @@ class BreedingController {
     }).extend({ arrayEquals: true }); // Only notify subscribers when the array contents change, i.e. not on every "has sort order changed" check
 
     // Sorted list of pokemon that match hatchery filters
-    private static hatcherySortedFilteredList: KnockoutComputed<PartyPokemon[]> = ko.pureComputed(() => {
+    private static hatcherySortedFilteredList = ko.pureComputed(() => {
         const hatcheryList = Array.from(BreedingController.hatcheryFilteredList());
         // Don't adjust attack based on region if debuff is disabled
         const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
@@ -240,7 +240,7 @@ class BreedingController {
             BreedingController.viewResetReady = true;
         }
         return hatcheryList;
-    }).extend({ skippableRateLimit: 500 });  // Lets us rerender immediately after filter changes
+    }).extend({ skippableRateLimit: 500 }) as KnockoutComputed<PartyPokemon[]> & SkippableRateLimit;  // Lets us rerender immediately after filter changes
 
     // Filters for pokemon that match hatchery filters
     private static hatcheryFilteredList: KnockoutComputed<PartyPokemon[]> = ko.pureComputed(() => {
