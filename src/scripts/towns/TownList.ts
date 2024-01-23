@@ -2343,7 +2343,7 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Have you seen this? It\'s horrific. Absolutely despicable.',
     'Disposable Dowsing Machines! Who even came up with this?! People leave these everywhere. It\'s absolutely terrible for the environment. Some poor innocent Pokémon could choke on it!',
     'Please recycle your used Dowsing Machines.',
-], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
+], {image: 'assets/images/npcs/Pokémon Ranger (female).png'});
 
 const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
     'Step right up! Get your Chimecho while they last! Chimecho, a very rare Pokémon indeed, with a voice that\'s both beautiful and powerful. Look closer! I see it bringing a smile to your face, just gazing into those loving eyes! They say these are the most gentle, healing eyes in the Pokémon kingdom.',
@@ -4067,7 +4067,7 @@ const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
 
 const SinnohSafariRanger = new SafariPokemonNPC('Safari Ranger', [
     'There are some Pokémon here that can\'t be found anywhere else in Sinnoh!',
-], GameConstants.Region.sinnoh, 'assets/images/npcs/Pokemon Ranger (female).png');
+], GameConstants.Region.sinnoh, 'assets/images/npcs/Pokémon Ranger (female).png');
 
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
@@ -4315,7 +4315,7 @@ const HappinyWitness5 = new NPC('Pokémon Ranger', [
     'Ah, you\'re the one chasing after that Happiny? You look a bit puffed, are you okay?',
     'I tried to capture it, but it barrelled right through my Capture Disc\'s trail! It went for Hearthome City. It wasn\'t showing any signs of slowing down yet.',
 ], {
-    image: 'assets/images/npcs/Pokemon Ranger (female).png',
+    image: 'assets/images/npcs/Pokémon Ranger (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 16), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 18, GameConstants.AchievementOption.less)]),
 });
 
@@ -6138,7 +6138,7 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
 const KalosSafariRanger = new SafariPokemonNPC('Safari Ranger', [
     'We\'ve had sightings of several unique Pokémon today along with the usual familiar faces!',
     'These Pokémon will hide from trainers unless captured elsewhere first.',
-], GameConstants.Region.kalos, 'assets/images/npcs/Pokemon Ranger (female).png');
+], GameConstants.Region.kalos, 'assets/images/npcs/Pokémon Ranger (female).png');
 
 const FriendlyAttendant = new NPC('Friendly Attendant', [
     'Welcome to the Friend Safari!',
