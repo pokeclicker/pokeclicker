@@ -1,24 +1,31 @@
 import { Subscribable, Observable, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
-function createObserver(loader: HTMLElement, doneLoading: { status: boolean }, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
+function createObserver(loader: HTMLElement, options: IntersectionObserverInit, doneLoading: { status: boolean }, reset?: Observable): { page: Observable<number>, observer: IntersectionObserver } {
     const page = ko.observable(1);
 
     let visible = false;
     let currentlyLoading = false;
-    let lastHeight = 0;
+    let elapsedTime = 0;
+    let idleCallback = null;
+
+    reset?.subscribe(() => {
+        page(1);
+        currentlyLoading = false;
+        cancelIdleCallback(idleCallback);
+        idleCallback = null;
+    });
 
     const loadMore = () => {
         if (visible && !doneLoading.status) {
             currentlyLoading = true;
-            let currentHeight = (options.root as HTMLElement).scrollHeight;
-            if (lastHeight != currentHeight) {
-                // Wait to load subsequent pages until this page's data is actually added to the scrolling element
+            if (Date.now() > elapsedTime + 50) {
+                // Wait to load subsequent pages so the game has time to push the loader offscreen
                 GameHelper.incrementObservable(page);
-                lastHeight = currentHeight;    
+                elapsedTime = Date.now();
             }
             // Check again in case we don't push the loader off screen
-            requestIdleCallback(loadMore, { timeout: 100 });
+            idleCallback = requestIdleCallback(loadMore, { timeout: 100 });
         } else {
             currentlyLoading = false;
         }
@@ -27,7 +34,7 @@ function createObserver(loader: HTMLElement, doneLoading: { status: boolean }, o
     const callback = (entries) => {
         visible = entries[0].isIntersecting;
         if (visible && !currentlyLoading) {
-            lastHeight = 0;
+            elapsedTime = 0;
             loadMore();
         }
     };
@@ -100,13 +107,11 @@ export default function lazyLoad(key: string, boundNode: Node, list: Subscribabl
 
     const doneLoading = { status: false };
 
-    const { page } = createObserver(loader, doneLoading, {
+    const { page } = createObserver(loader, {
         root: scrollingParent,
         rootMargin: opts.triggerMargin,
         threshold: opts.threshold,
-    });
-
-    opts.reset?.subscribe(() => page(1));
+    }, doneLoading, opts.reset);
 
     const lazyList = ko.pureComputed(() => {
         const lastElem = page() * opts.pageSize;
