@@ -3,7 +3,7 @@
 import Sortable from 'sortablejs';
 import Settings from './settings/Settings';
 
-ko.bindingHandlers.contentEditable = {
+const contentEditableHandler = {
     init: (element: HTMLElement, valueAccessor) => {
         const value = valueAccessor();
 
@@ -45,7 +45,7 @@ function handleVisibleElement(element) {
     }
 }
 
-ko.bindingHandlers.playerSpriteMove = {
+const playerSpriteMoveHandler = {
     init: function (element) {
         const observer = new MutationObserver((mutationsList) => {
             for (const mutation of mutationsList) {
@@ -75,7 +75,7 @@ ko.bindingHandlers.playerSpriteMove = {
 //TODO END
 
 const sortableControllers = new WeakMap();
-ko.bindingHandlers.sortable = {
+const sortableHandler = {
     init: function (element, valueAccessor, allBindings, viewModel) {
         sortableControllers.set(element, null);
         const value = valueAccessor();
@@ -143,7 +143,7 @@ const moduleResizeObserver = new ResizeObserver((entries) => {
     });
 });
 
-ko.bindingHandlers.resizable = {
+const resizableHandler = {
     init: function (element, valueAccessor) {
         const value = valueAccessor();
         element.classList.add('resizable-container');
@@ -152,3 +152,10 @@ ko.bindingHandlers.resizable = {
         moduleResizeObserver.observe(element);
     },
 };
+
+Object.assign(ko.bindingHandlers, {
+    contentEditable: contentEditableHandler,
+    playerSpriteMove: playerSpriteMoveHandler,
+    sortable: sortableHandler,
+    resizable: resizableHandler,
+});

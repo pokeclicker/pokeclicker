@@ -1,4 +1,3 @@
-// /* eslint-disable no-param-reassign */
 /// <reference path="./koExtenders.d.ts" />
 
 import type { Subscribable, Observable, Computed } from 'knockout';
@@ -15,7 +14,7 @@ import type { Subscribable, Observable, Computed } from 'knockout';
 */
 
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
-ko.extenders.numeric = (target: Subscribable, precision: number) => {
+const numericExtender = (target: Subscribable, precision: number) => {
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<number>({
         read: target, // always return the original observable's value
@@ -45,7 +44,7 @@ ko.extenders.numeric = (target: Subscribable, precision: number) => {
     return result;
 };
 
-ko.extenders.boolean = (target: Subscribable) => {
+const booleanExtender = (target: Subscribable) => {
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<boolean>({
         read: target, // always return the original observable's value
@@ -63,7 +62,7 @@ ko.extenders.boolean = (target: Subscribable) => {
 
 // Don't treat shallowly-equal arrays as new values, i.e. don't notify subscribers
 // Usage: ko.observable([]).extend({ arrayEquals: true });
-ko.extenders.arrayEquals = (target: Observable<any[]> | Computed<any[]>) => {
+const arrayEqualsExtender = (target: Observable<any[]> | Computed<any[]>) => {
     const defaultComparer = target.equalityComparer;
     target.equalityComparer = function (a, b) {
         if (Array.isArray(a) && Array.isArray(b)) {
@@ -79,7 +78,7 @@ ko.extenders.arrayEquals = (target: Observable<any[]> | Computed<any[]>) => {
 // A modified version of the rateLimit extender that can be forced to evaluate early
 // Usage: const example = ko.pureComputed(() => { whatever }).extend({ skippableRateLimit: GameConstants.WEEK });
 //        example.evaluateEarly();
-ko.extenders.skippableRateLimit = (target: Subscribable, delay: number) => {
+const skippableRateLimitExtender = (target: Subscribable, delay: number): typeof target & SkippableRateLimit => {
     // Custom rate limiter function, see https://knockoutjs.com/documentation/rateLimit-observable.html#custom-rate-limit-methods
     const skippableLimiter = (callback, timeout) => {
         var timeoutInstance = null;
@@ -118,3 +117,10 @@ ko.extenders.skippableRateLimit = (target: Subscribable, delay: number) => {
     };
     return target.extend({ rateLimit: { timeout: delay, method: skippableLimiter } }) as typeof target & SkippableRateLimit;
 };
+
+Object.assign(ko.extenders, {
+    numeric: numericExtender,
+    boolean: booleanExtender,
+    arrayEquals: arrayEqualsExtender,
+    skippableRateLimit: skippableRateLimitExtender,
+});

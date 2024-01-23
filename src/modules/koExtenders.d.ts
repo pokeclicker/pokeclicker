@@ -1,3 +1,5 @@
+import { Subscribable } from 'knockout';
+
 export declare module 'knockout' {
     export interface ExtendersOptions {
         numeric: number;
@@ -8,7 +10,9 @@ export declare module 'knockout' {
 }
 
 declare global {
-    interface SkippableRateLimit {
+    interface SkippableRateLimit extends Subscribable<unknown> {
         evaluateEarly: () => void;
     }
 }
+
+export { };
