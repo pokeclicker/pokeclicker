@@ -131,6 +131,12 @@ class PartyPokemon implements Saveable {
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
 
+    public clickAttackBonus = ko.pureComputed((): number => {
+        // Caught + Shiny + Resistant
+        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
+        return bonus;
+    });
+
     public canCatchPokerus(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
     }
@@ -377,11 +383,14 @@ class PartyPokemon implements Saveable {
     });
 
     public isHatchable = ko.pureComputed(() => {
-        // Only breedable Pokemon
-        if (this.breeding || this.level < 100) {
-            return false;
-        }
+        return !(this.breeding || this.level < 100);
+    });
 
+    public isHatchableFiltered = ko.pureComputed(() => {
+        return this.isHatchable() && this.matchesHatcheryFilters();
+    });
+
+    public matchesHatcheryFilters = ko.pureComputed(() => {
         // Check if search matches englishName or displayName
         const displayName = PokemonHelper.displayName(this.name)();
         const filterName = BreedingFilters.name.value();
@@ -396,10 +405,8 @@ class PartyPokemon implements Saveable {
         }
 
         // Check based on category
-        if (BreedingFilters.category.value() >= 0) {
-            if (this.category !== BreedingFilters.category.value()) {
-                return false;
-            }
+        if (BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value()) {
+            return false;
         }
 
         // Check based on shiny status
@@ -499,8 +506,8 @@ class PartyPokemon implements Saveable {
         } else { // Notifier.confirm is async
             this.addOrRemoveHeldItem(heldItem);
         }
-
     }
+
     private addOrRemoveHeldItem(heldItem: HeldItem) {
         if (this.heldItem() && this.heldItem().name == heldItem.name) {
             this.heldItem(undefined);

@@ -1,4 +1,4 @@
-import { Observable as KnockoutObservable } from 'knockout';
+import type { Observable as KnockoutObservable } from 'knockout';
 import getRouteKillsProxy from './getRouteKillsProxy';
 import { Saveable } from '../common/Saveable';
 import '../../koExtenders';
