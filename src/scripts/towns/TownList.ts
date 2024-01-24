@@ -2935,7 +2935,7 @@ const PrimalMaxie = new NPC('Maxie', [
 });
 const MrStone2 = new NPC('Mr. Stone', [
     'Thank you, $playername$! Your heroics have saved Hoenn once again!',
-    'My researchers tell me that since their defeat, Groudon and Kyogre have been reverting to their primal forms in the Cave of Origin during Sunny and Rainy weather.',
+    'My researchers tell me that since their defeat, Groudon and Kyogre have been reverting to their primal forms in the Cave of Origin during Harsh Sunlight and Rainy weather.',
     'They are certainly very dangerous, but it doesn\'t seem like they are a threat to the region anymore.',
 ], {image: 'assets/images/npcs/Mr Stone.png',
     requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 15),
@@ -2944,7 +2944,7 @@ const MrStone2 = new NPC('Mr. Stone', [
 const ZinniaOrigin = new NPC('Zinnia', [
     'Wow, $playername$! You\'ve been busy!',
     'Now that things are calmer in Hoenn, I\'ve decided to keep an eye on Kyogre and Groudon and make sure they don\'t cause any more trouble.',
-    'Groudon reverts to its Primal form when it\'s sunny, and Kyogre reverts to its Primal form in the rain.',
+    'Groudon reverts to its Primal form when the sun is harsh, and Kyogre reverts to its Primal form in the rain.',
     'Archie and Maxie are still lurking somewhere in Hoenn, but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
@@ -5911,7 +5911,7 @@ const DendemilleDogLover = new NPC('Dubious Dog-loving Duke', [
     'Dog Pokémon are the best of all! I\'m particularly fond of Houndour - I\'ve caught about five hundred of them.',
     'There\'s no such thing as a cold night in my house, no sir! The most fierce chill of winter is completely defeated by their warm, cozy presence.',
     'But recently, now that I\'ve got so many Houndour, they have been acting rather curiously.',
-    'When the weather turns sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
+    'When the weather turns really sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
     'They come wandering back when the weather changes, though. I wonder if a strong Pokémon is calling them?',
     'You could build your own Houndour pack and find out, but if it\'s strong enough to call five hundred Pokémon, it probably wouldn\'t give anyone weaker than Diantha the time of day.',
 ], {image: 'assets/images/npcs/Gentleman.png',

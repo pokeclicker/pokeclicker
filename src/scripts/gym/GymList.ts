@@ -1943,7 +1943,7 @@ GymList.Circhester2 = new Gym(
         new GymPokemon('Frosmoth', 140246069, 40),
         new GymPokemon('Galarian Darmanitan', 140246069, 40),
         new GymPokemon('Eiscue (Ice Face)', 140246069, 41, new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
-        new GymPokemon('Eiscue (Noice Face)', 140246069, 41, new WeatherRequirement([WeatherType.Sunny])),
+        new GymPokemon('Eiscue (Noice Face)', 140246069, 41, new WeatherRequirement([WeatherType.Harsh_Sunlight])),
         new GymPokemon('Gigantamax Lapras', 151694727, 42),
     ],
     BadgeEnums.Galar_Ice,

@@ -69,6 +69,7 @@ Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display',
         new SettingOption('Step count', 'stepCount'),
     ],
     'stepCount'));
+Settings.add(new BooleanSetting('breedingQueueClearConfirmation', 'Confirm before clearing the hatchery queue', true));
 Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons',
     [
         new SettingOption('+10, +100', 'original'),
