@@ -51,8 +51,8 @@ export default class Weather {
         [WeatherType.Blizzard]:
             new WeatherCondition(WeatherType.Blizzard, '#98d8d8', 'A howling blizzard blows.', 5,
                 [{ type: PokemonType.Ice, multiplier: 1.2 }, { type: PokemonType.Steel, multiplier: 1.1 }, { type: PokemonType.Fire, multiplier: 0.9 }, { type: PokemonType.Grass, multiplier: 0.9 }]),
-        [WeatherType.Sunny]:
-            new WeatherCondition(WeatherType.Sunny, '#f5ac78', 'The sunlight is strong.', 10,
+        [WeatherType.Harsh_Sunlight]:
+            new WeatherCondition(WeatherType.Harsh_Sunlight, '#f5ac78', 'The sunlight is strong.', 10,
                 [{ type: PokemonType.Fire, multiplier: 1.2 }, { type: PokemonType.Grass, multiplier: 1.1 }, { type: PokemonType.Water, multiplier: 0.9 }]),
         [WeatherType.Sandstorm]:
             new WeatherCondition(WeatherType.Sandstorm, '#d1c07d', 'A sandstorm is raging.', 10,
@@ -61,7 +61,7 @@ export default class Weather {
             new WeatherCondition(WeatherType.Fog, '#d2c2ef', 'The fog is deep...', 10,
                 [
                     { type: PokemonType.Ghost, multiplier: 1.2 },
-                    { type: PokemonType.Psychic, multiplier: 1.1 }, 
+                    { type: PokemonType.Psychic, multiplier: 1.1 },
                     { type: PokemonType.Dark, multiplier: 1.1 },
                     { type: PokemonType.Electric, multiplier: 0.9 },
                 ]),
@@ -79,7 +79,7 @@ export default class Weather {
             WeatherType.Overcast,
             WeatherType.Rain,
             WeatherType.Thunderstorm,
-            WeatherType.Sunny,
+            WeatherType.Harsh_Sunlight,
         ],
         [Region.johto]: [
             WeatherType.Clear,
@@ -89,7 +89,7 @@ export default class Weather {
             WeatherType.Snow,
             WeatherType.Hail,
             WeatherType.Blizzard,
-            WeatherType.Sunny,
+            WeatherType.Harsh_Sunlight,
         ],
         [Region.hoenn]: [
             WeatherType.Clear,
@@ -99,7 +99,7 @@ export default class Weather {
             WeatherType.Snow,
             WeatherType.Hail,
             WeatherType.Blizzard,
-            WeatherType.Sunny,
+            WeatherType.Harsh_Sunlight,
             WeatherType.Sandstorm,
         ],
         [Region.sinnoh]: [
@@ -110,7 +110,7 @@ export default class Weather {
             WeatherType.Snow,
             WeatherType.Hail,
             WeatherType.Blizzard,
-            WeatherType.Sunny,
+            WeatherType.Harsh_Sunlight,
             WeatherType.Sandstorm,
             WeatherType.Fog,
         ],
@@ -142,8 +142,8 @@ export default class Weather {
 
     /**
      * Gets the weather for a region at a certain date
-     * @param date 
-     * @param region 
+     * @param date
+     * @param region
      * @returns WeatherType
      */
     public static getWeather(region: Region, date: Date = new Date()): WeatherType {
