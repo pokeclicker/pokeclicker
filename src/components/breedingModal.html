@@ -383,7 +383,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <td class="text-left align-middle">Sort:</td>
                                                 <td class="text-center align-middle">
                                                     <div class="input-group input-group-sm">
-                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => o.value !== SortOptions.level), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
+                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => ![SortOptions.level, SortOptions.attack].includes(o.value)), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
                                                         <div class="input-group-append bg-primary text-light">
                                                             <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                                 attr: {for: 'hatcheryHelperSortDirection' + $index() },
