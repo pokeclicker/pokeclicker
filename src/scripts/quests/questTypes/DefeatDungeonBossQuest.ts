@@ -2,6 +2,10 @@ class DefeatDungeonBossQuest extends Quest implements QuestInterface {
 
     constructor(public dungeon: string, public dungeonBoss : PokemonNameType | string, reward = 0) {
         super(1, reward);
+        const region = GameConstants.getDungeonRegion(this.dungeon);
+        if (region == GameConstants.Region.none) {
+            throw new Error(`Invalid dungeon for quest: ${this.dungeon}`);
+        }
         this.focus = ko.observable(0);
     }
 

@@ -113,6 +113,16 @@
   }
 }
 
+.litera {
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      @media (max-height: 650px) {
+        max-height: calc(40vh - 50px);
+      }
+    }
+  }
+}
+
 .lumen {
   /* Weather button in dock modal */
   .btn-weather-dock {
@@ -150,6 +160,23 @@
         padding: 0.3rem 0;
     }
   }
+
+  /* Berrydex List */
+  @media (max-width: 991px) {
+    .berryDexPreviewColumn {
+      max-height: calc(100vh - 240px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      max-height: calc(50vh - 50px);
+
+      @media (max-height: 393px) {
+        max-height: calc(40vh - 55px);
+      }
+    }
+  }
 }
 
 .materia {
@@ -176,6 +203,15 @@
     #evo-item-list, #evo-pokemon-list {
       .list-group-item-action:hover {
         color: black;
+      }
+    }
+}
+
+.sandstone {
+    /* Berrydex List */
+    @media (max-width: 991px) {
+      #berryDexPreviewFlavors {
+        font-size: small;
       }
     }
 }
@@ -268,6 +304,23 @@
     }
   }
 
+  // BerryDex
+  @media (max-width: 991px) { // tablet
+    .berryDexPreviewColumn {
+      max-height: calc(100vh - 240px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      max-height: calc(50vh - 50px);
+
+      @media (max-height: 393px) {
+        max-height: calc(40vh - 50px);
+      }
+    }
+  }
+
   // Evolution items modal
   #showItemsModal {
     .item-selected {
@@ -294,6 +347,20 @@
   // Farming
   .seed-list-item.active {
     background: rgba(255, 255, 255, 20%);
+  }
+
+  .berryDexButtons.btn-secondary {
+    background: rgba(0,0,0,0%);
+
+    span {
+      color: var(--secondary);
+    }
+  }
+
+  .berryDexButtons:hover {
+    span {
+      color: whitesmoke;
+    }
   }
 
   // Evolution items modal

@@ -147,10 +147,11 @@ describe('Test GameHelper', () => {
         expect(GameHelper.counter).toEqual(0);
     });
 
-    it('update time, tomorrow', () => {
-        GameHelper.tomorrow = GameHelper.currentTime();
-        GameHelper.updateTime();
-        expect(GameHelper.tomorrow).not.toEqual(GameHelper.currentTime());
+    it('update day, today', () => {
+        const tomorrow = GameHelper.tomorrow();
+        GameHelper.today(tomorrow);
+        GameHelper.updateDay();
+        expect(GameHelper.today()).not.toEqual(tomorrow);
     });
 
     it('format number amount string', () => {
