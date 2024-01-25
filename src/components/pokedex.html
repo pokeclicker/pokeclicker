@@ -219,7 +219,7 @@ aria-labelledby="pokedexModalLabel">
                                 <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
                             </div>
                             <!-- /ko -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad('lazyPokedexList', $element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexView })">
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad('lazyPokedexList', $element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexFlag }), childrenComplete: () => { lazyLoadCallback('lazyPokedexList'); }">
                                 <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                                         data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                         <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
