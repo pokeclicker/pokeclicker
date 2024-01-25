@@ -101,7 +101,7 @@
                                 <th class="text-center align-middle">Egg Steps</th>
                             </tr>
                         </thead>
-                        <tbody data-bind="foreach: lazyLoad('lazyVitaminExpandedList', $element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable })">
+                        <tbody data-bind="foreach: lazyLoad('lazyVitaminExpandedList', $element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyVitaminExpandedList'); }">
                             <tr data-bind="css: { 'text-muted': $data.breeding }">
                                 <td class="text-left align-middle">
                                     <knockout data-bind="text: $data.displayName"></knockout>

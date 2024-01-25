@@ -238,10 +238,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: modalUtils.observableState.breedingModal !== 'hidden' && !App.game.party.hasMaxLevelPokemon()">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
-                                    <!-- ko using: lazyLoad('lazyHatcheryList', $element, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList' -->
+                                    <knockout data-bind="using: lazyLoad('lazyHatcheryList', $element, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList'">
                                         <!-- ko if: modalUtils.observableState.breedingModal !== 'hidden' && App.game.party.hasMaxLevelPokemon() -->
-                                        <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyHatcheryList">
-                                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable() && ($data.matchesHatcheryFilters() || BreedingController.viewResetWaiting()), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
+                                        <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyHatcheryList, childrenComplete: () => { lazyLoadCallback('lazyHatcheryList'); }">
+                                            <!-- ko if: $data.isHatchable() && ($data.matchesHatcheryFilters() || BreedingController.viewResetWaiting()) -->
+                                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                                 <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
                                                 <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
                                                 <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
@@ -273,9 +274,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     </div>
                                                 </div>
                                             </li>
+                                            <!-- /ko -->
                                         </ul>
                                         <!-- /ko -->
-                                    <!-- /ko -->
+                                    </knockout>
                                 </div>
                             </div>
                         </div>

@@ -75,7 +75,7 @@
                           <th class="text-left bg-dark align-middle">Held item:</th>
                       </tr>
                   </thead>
-                  <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: modalUtils.observableState.heldItemModalObservable })">
+                  <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: modalUtils.observableState.heldItemModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyHeldItemList'); }">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
                       <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="
