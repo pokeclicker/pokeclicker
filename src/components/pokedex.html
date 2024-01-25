@@ -90,7 +90,7 @@ aria-labelledby="pokedexModalLabel">
                                                 data-bind="text: PokedexFilters.category.value() == -1 ? 'All' : PokemonCategories.categories().find(c => c.id == PokedexFilters.category.value()).name()">
                                                 Categories
                                             </button>
-                                            <div class="border-secondary dropdown-menu col-12">
+                                            <div class="border-secondary dropdown-menu col-12 category-dropdown">
                                                 <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', -1) }">
                                                     All
                                                 </div>
@@ -219,9 +219,9 @@ aria-labelledby="pokedexModalLabel">
                                 <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
                             </div>
                             <!-- /ko -->
-                            <!-- ko let: { lazyPokedexList: lazyLoad($element.nextElementSibling, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexFlag }) } -->
+                            <knockout data-bind="let: { lazyPokedexList: lazyLoad('lazyPokedexList', $element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexFlag }) }">
                                 <!-- ko if: DisplayUtils.modalState.pokedexModal !== 'hidden' -->
-                                <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyPokedexList">
+                                <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyPokedexList, childrenComplete: () => { lazyLoadCallback('lazyPokedexList'); }">
                                     <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                         <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
                                         <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
@@ -239,7 +239,7 @@ aria-labelledby="pokedexModalLabel">
                                             <img style="position: absolute; top: 24px; right: 0px;" class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Shadow"/>
                                             <img style="position: absolute; top: 24px; right: 0px;" class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Purified"/>
                                         <!-- /ko -->
-                                        <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id)}">
+                                        <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id)}">
                                         <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
                                             <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: () => {App.game.statistics.selectedPokemonID($data.id)},
                                                 tooltip: {
@@ -271,7 +271,7 @@ aria-labelledby="pokedexModalLabel">
                                             <!-- ko if: App.game.party.alreadyCaughtPokemonByName($data.name) -->
                                             <div class="pokemonCategory dropdown">
                                                 <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
-                                                <div class="border-secondary dropdown-menu">
+                                                <div class="border-secondary dropdown-menu category-dropdown">
                                                     <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
                                                     <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
                                                     <!-- /ko -->
@@ -286,7 +286,7 @@ aria-labelledby="pokedexModalLabel">
                                     </li>
                                 </ul>
                                 <!-- /ko -->
-                            <!-- /ko -->
+                            </knockout>
                         </div>
                     </div>
                 </div>
