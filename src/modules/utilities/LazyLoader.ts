@@ -96,12 +96,11 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     const targetElement = boundNode.parentElement.closest(':not(table, thead, tbody, tr, td, th)') as HTMLElement;
 
     if (memo[key]) {
-        // Only return a memoized lazyList if the associated loader element still exists
         if (targetElement.querySelector(':scope > .lazy-loader-container')) {
+            // Only return a memoized lazyList if the associated loader element still exists
             return memo[key].list;
-        }
-        // Dispose of old subscriptions before making new computeds
-        else {
+        } else {
+            // Dispose of old subscriptions before making new computeds
             memo[key].toDispose.forEach(sub => sub.dispose());
         }
     }
@@ -109,8 +108,8 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     memo[key] = {
         list: null,
         callback: null,
-        toDispose = [],
-    }
+        toDispose: [],
+    };
 
     const opts = {
         ...defaultOptions,
@@ -140,15 +139,17 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     memo[key].callback = bindingCallback;
 
     if (opts.reset) {
-        // Wrap reset function in a computed as needed
         let reset = opts.reset;
+
+        // Wrap reset function in a computed as needed
         if (reset instanceof Function && !ko.isObservable(reset)) {
             reset = ko.computed(reset);
-            memo[key].toDispose.push(reset);
+            // We made the computed in here, we should dispose of it later
+            memo[key].toDispose.push(reset as Computed);
         }
 
         // Reset the lazyList to its start size on any notification from the reset observable
-        const resetSub = reset.subscribe(() => page(1));
+        const resetSub = (reset as Subscribable).subscribe(() => page(1));
         memo[key].toDispose.push(resetSub);
     }
 

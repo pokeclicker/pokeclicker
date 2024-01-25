@@ -151,21 +151,6 @@ class PartyController {
         return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
     }).extend({ rateLimit: 500 });
 
-<<<<<<< HEAD
-    private static hatcherySortedList = [];
-    static getHatcherySortedList = ko.pureComputed(() => {
-        // If the breeding modal is open, we should sort it.
-        if (DisplayObservables.modalState.breedingModal === 'show') {
-            // Don't adjust attack based on region if debuff is disabled
-            const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
-            PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
-            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
-        }
-        return PartyController.hatcherySortedList;
-    }).extend({ rateLimit: 500 });
-
-=======
->>>>>>> develop
     private static vitaminSortedList = [];
     static getVitaminSortedList = ko.pureComputed(() => {
         // If the vitamin modal is open, we should sort it.

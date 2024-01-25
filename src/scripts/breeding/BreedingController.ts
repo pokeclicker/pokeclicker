@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
-/// <reference path="../../declarations/utilities/DisplayState.d.ts" />
+/// <reference path="../../declarations/utilities/DisplayObservables.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../party/PartyController.ts" />
 
