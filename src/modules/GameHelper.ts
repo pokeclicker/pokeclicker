@@ -10,7 +10,7 @@ export default class GameHelper {
     public static currentTime: KnockoutObservable<Date> = ko.observable(new Date());
     public static today: KnockoutObservable<Date> = ko.observable(GameHelper.getToday());
     public static tomorrow: KnockoutComputed<Date> = ko.pureComputed<Date>(() => {
-        const tomorrow = GameHelper.today();
+        const tomorrow = new Date(GameHelper.today());
         tomorrow.setDate(tomorrow.getDate() + 1);
         return tomorrow;
     });
