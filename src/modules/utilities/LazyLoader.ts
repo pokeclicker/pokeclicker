@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { Subscribable, Observable, ObservableArray, PureComputed } from 'knockout';
-=======
-import { Subscribable, Observable, PureComputed } from 'knockout';
->>>>>>> develop
+import { Subscription, Subscribable, Observable, Computed, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
 function createObserver(loader: HTMLElement, page: Observable<number>, fullyLoaded: { status: boolean },
@@ -93,15 +89,27 @@ const defaultOptions: LazyLoadOptions = {
     pageSize: 40,
 };
 
-const memo: Record<string, { list: PureComputed<Array<unknown>>, callback: () => void }> = {};
+const memo: Record<string, { list: PureComputed<Array<unknown>>, callback: () => void, toDispose: Array<Computed<any> | Subscription> }> = {};
 
 export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<unknown>>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
     // Get first parent that's not a table element, that's where we'll add the loader element
     const targetElement = boundNode.parentElement.closest(':not(table, thead, tbody, tr, td, th)') as HTMLElement;
 
-    // Only return a memoized lazyList if the associated loader element still exists
-    if (memo[key] && targetElement.querySelector(':scope > .lazy-loader-container')) {
-        return memo[key].list;
+    if (memo[key]) {
+        // Only return a memoized lazyList if the associated loader element still exists
+        if (targetElement.querySelector(':scope > .lazy-loader-container')) {
+            return memo[key].list;
+        }
+        // Dispose of old subscriptions before making new computeds
+        else {
+            memo[key].toDispose.forEach(sub => sub.dispose());
+        }
+    }
+
+    memo[key] = {
+        list: null,
+        callback: null,
+        toDispose = [],
     }
 
     const opts = {
@@ -129,17 +137,20 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
         threshold: opts.threshold,
     });
 
-<<<<<<< HEAD
-    if (opts.reset instanceof Function) {
-        if (!ko.isObservable(opts.reset)) {
-            opts.reset = ko.pureComputed(opts.reset);
+    memo[key].callback = bindingCallback;
+
+    if (opts.reset) {
+        // Wrap reset function in a computed as needed
+        let reset = opts.reset;
+        if (reset instanceof Function && !ko.isObservable(reset)) {
+            reset = ko.computed(reset);
+            memo[key].toDispose.push(reset);
         }
-        (opts.reset as Subscribable).subscribe(() => page(1));
+
+        // Reset the lazyList to its start size on any notification from the reset observable
+        const resetSub = reset.subscribe(() => page(1));
+        memo[key].toDispose.push(resetSub);
     }
-=======
-    // Reset the lazyList to its start size on any notification from the reset observable
-    opts.reset?.subscribe(() => page(1));
->>>>>>> develop
 
     // Computed slice of however much of the source list is currently loaded
     const lazyList = ko.pureComputed(() => {
@@ -159,11 +170,8 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
         return array.slice(0, lastElem);
     });
 
-    // Memoize the computed list and associated callback
-    memo[key] = {
-        list: lazyList,
-        callback: bindingCallback,
-    };
+    memo[key].list = lazyList;
+    memo[key].toDispose.push(lazyList);
 
     return lazyList;
 }
