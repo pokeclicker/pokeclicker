@@ -16,11 +16,11 @@ export default class PokeballFilters implements Feature {
     defaults = {};
 
     public presets: PokeballFilterParams[] = [
-        { name: 'Caught', options: { caught: true } },
-        { name: 'Contagious', options: { pokerus: Pokerus.Contagious } },
-        { name: 'Caught Shiny', options: { shiny: true, caughtShiny: true }, ball: Pokeball.Pokeball },
-        { name: 'New', options: { caught: false }, ball: Pokeball.Pokeball },
         { name: 'New Shiny', options: { shiny: true, caughtShiny: false }, ball: Pokeball.Pokeball },
+        { name: 'New', options: { caught: false }, ball: Pokeball.Pokeball },
+        { name: 'Caught Shiny', options: { shiny: true, caughtShiny: true }, ball: Pokeball.Pokeball },
+        { name: 'Contagious', options: { pokerus: Pokerus.Contagious } },
+        { name: 'Caught', options: { caught: true } },
     ];
 
     public list: ObservableArray<PokeballFilter> = ko.observableArray([]);
@@ -81,6 +81,8 @@ export default class PokeballFilters implements Feature {
                 this.testSettings.caught.observableValue(true);
             }
         }, undefined, undefined);
+
+        Settings.getSetting('catchFilters.invertPriorityOrder').observableValue.subscribe(() => this.list.reverse());
     }
 
     canAccess() { return true; }
@@ -92,7 +94,9 @@ export default class PokeballFilters implements Feature {
     }
 
     findMatch(data: PokeballFilterMatchData): PokeballFilter | undefined {
-        return findRight(this.displayList(), (filter) => filter.test(data));
+        return Settings.getSetting('catchFilters.invertPriorityOrder').value
+            ? findRight(this.displayList(), (filter) => filter.test(data))
+            : this.displayList().find((filter) => filter.test(data));
     }
 
     async deleteFilter(filter: PokeballFilter) {
@@ -142,6 +146,10 @@ export default class PokeballFilters implements Feature {
             new PokeballFilter(name, options, ball, enabled, inverted)
         ));
 
+        if (Settings.getSetting('catchFilters.invertPriorityOrder').value) {
+            defaultFilters.reverse();
+        }
+
         this.list(defaultFilters);
     }
 
@@ -158,7 +166,9 @@ export default class PokeballFilters implements Feature {
 
         const list: PokeballFilterParams[] = json.list?.length > 0
             ? json.list
-            : this.presets;
+            : Settings.getSetting('catchFilters.invertPriorityOrder').value
+                ? [...this.presets].reverse()
+                : this.presets;
 
         list.forEach(({ name, options, ball, inverted, enabled }) => {
             this.list.push(new PokeballFilter(

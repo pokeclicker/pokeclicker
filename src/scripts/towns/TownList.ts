@@ -2935,7 +2935,7 @@ const PrimalMaxie = new NPC('Maxie', [
 });
 const MrStone2 = new NPC('Mr. Stone', [
     'Thank you, $playername$! Your heroics have saved Hoenn once again!',
-    'My researchers tell me that since their defeat, Groudon and Kyogre have been reverting to their primal forms in the Cave of Origin during Sunny and Rainy weather.',
+    'My researchers tell me that since their defeat, Groudon and Kyogre have been reverting to their primal forms in the Cave of Origin during Harsh Sunlight and Rainy weather.',
     'They are certainly very dangerous, but it doesn\'t seem like they are a threat to the region anymore.',
 ], {image: 'assets/images/npcs/Mr Stone.png',
     requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 15),
@@ -2944,7 +2944,7 @@ const MrStone2 = new NPC('Mr. Stone', [
 const ZinniaOrigin = new NPC('Zinnia', [
     'Wow, $playername$! You\'ve been busy!',
     'Now that things are calmer in Hoenn, I\'ve decided to keep an eye on Kyogre and Groudon and make sure they don\'t cause any more trouble.',
-    'Groudon reverts to its Primal form when it\'s sunny, and Kyogre reverts to its Primal form in the rain.',
+    'Groudon reverts to its Primal form when the sun is harsh, and Kyogre reverts to its Primal form in the rain.',
     'Archie and Maxie are still lurking somewhere in Hoenn, but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
@@ -4731,8 +4731,8 @@ TownList['Distortion World'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar')),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'), GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('A New World', 9),
+                new QuestLineStepCompletedRequirement('A New World', 10, GameConstants.AchievementOption.less),
             ]),
             new TemporaryBattleRequirement('Zero'),
         ]),
@@ -5911,7 +5911,7 @@ const DendemilleDogLover = new NPC('Dubious Dog-loving Duke', [
     'Dog Pokémon are the best of all! I\'m particularly fond of Houndour - I\'ve caught about five hundred of them.',
     'There\'s no such thing as a cold night in my house, no sir! The most fierce chill of winter is completely defeated by their warm, cozy presence.',
     'But recently, now that I\'ve got so many Houndour, they have been acting rather curiously.',
-    'When the weather turns sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
+    'When the weather turns really sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
     'They come wandering back when the weather changes, though. I wonder if a strong Pokémon is calling them?',
     'You could build your own Houndour pack and find out, but if it\'s strong enough to call five hundred Pokémon, it probably wouldn\'t give anyone weaker than Diantha the time of day.',
 ], {image: 'assets/images/npcs/Gentleman.png',
@@ -6177,7 +6177,7 @@ const AnomalyMewtwo3 = new NPC('Anomaly Mewtwo', [
 
 const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
     '<i>Hah! Your strength is truly unyielding!</i>',
-    '<i>I would like to apolagise for accusing you of merely possessing the Mewtwo in your care. It is clear that you greatly care for it, as well as all your other Pokémon. Take this.</i>',
+    '<i>I would like to apologise for accusing you of merely possessing the Mewtwo in your care. It is clear that you greatly care for it, as well as all your other Pokémon. Take this.</i>',
     '</i></br><img src="assets/images/megaStone/Mewtwonite_Y.png"/></br><i>You obtained the Mewtwonite Y!</i>',
     '<i>You are truly deserving of this Mega Stone. Use it to give your Mewtwo a truly unrivaled power.</i>',
 ], {
@@ -8423,8 +8423,8 @@ const Peonia3 = new NPC ('Peonia', [
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 32), new QuestLineStepCompletedRequirement('The Lair of Giants', 34, GameConstants.AchievementOption.less )]),
 });
 const GigantamaxLeon1 = new NPC ('Leon', [
-    'Champion?! What are you.... Doesn\'t matter, I\'m glad you\'re here!',
-    'Eternamax Eternatus has showed up again! No time to talk, let\'s fight it together!',
+    'Champion?! What are you.... no matter, I\'m glad you\'re here!',
+    'Eternamax Eternatus has appeared again! There is no time to talk! Let\'s fight it together!',
 ], {
     image: 'assets/images/npcs/Leon.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 33), new QuestLineStepCompletedRequirement('The Lair of Giants', 35, GameConstants.AchievementOption.less )]),
@@ -8439,9 +8439,9 @@ const GigantamaxLeon2 = new NPC ('Leon', [
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 35), new QuestLineStepCompletedRequirement('The Lair of Giants', 37, GameConstants.AchievementOption.less )]),
 });
 const Peonia4 = new NPC ('Peonia', [
-    'It really was Eternatus again? Given the purple glow has vanished, I guess already you took care of it. Congrats!',
+    'Was it really was Eternatus again? Given that the purple glow has vanished, I guess you\'ve already taken care of it. Congrats!',
     'Actually, I just saw some purple and red Pokémon fly into the caves. Maybe that was Eternatus? I think this place might let it return to it\'s Eternamax form. Maybe you can catch it!',
-    'At any rate, I\'m real thankful for all your help. There\'s so many more people coming here now there\'s more Gigantamax Pokémon to find, it\'s been a lot of fun!',
+    'At any rate, I\'m real thankful for all your help. There\'s so many more people coming here now there\'s more Gigantamax Pokémon to find.  It\'s been a lot of fun!',
 ], {
     image: 'assets/images/npcs/Peonia.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 36), new QuestLineCompletedRequirement('The Lair of Giants', GameConstants.AchievementOption.less )]),
@@ -8852,7 +8852,6 @@ const JubilifeVillageShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Black_augurite,
-    ItemList.Peat_block,
 ]);
 
 // Hisui NPCs
