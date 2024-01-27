@@ -78,6 +78,12 @@
                     </span>
                   </td>
                 </tr>
+                <tr>
+                  <td class="text-left">Contest Appeal</td>
+                  <td class="text-left tight"><code
+                    data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).appeal : 0).toLocaleString('en-US')">-</code>
+                  </td>
+                </tr>
                 <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
                 <tr>
                   <td class="text-left">EVs</td>

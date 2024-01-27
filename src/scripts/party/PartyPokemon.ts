@@ -22,6 +22,7 @@ class PartyPokemon implements Saveable {
     public exp = 0;
     public evs: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
+    _appeal: KnockoutComputed<number>;
     private _canUseHeldItem: KnockoutComputed<boolean>;
 
     defaults = {
@@ -114,6 +115,7 @@ class PartyPokemon implements Saveable {
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
         this._attack = ko.computed(() => this.calculateAttack());
+        this._appeal = ko.computed(() => this.calculateAppeal());
         this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
         this._canUseHeldItem.subscribe((canUse) => {
             if (!canUse && this.heldItem()) {
@@ -129,6 +131,10 @@ class PartyPokemon implements Saveable {
         const heldItemMultiplier = this.heldItemAttackBonus();
         const shadowMultiplier = this.shadowAttackBonus();
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
+    }
+
+    public calculateAppeal(): number {
+        return Math.max(1, Math.floor((10))); // TODO: add bonuses
     }
 
     public canCatchPokerus(): boolean {
@@ -606,6 +612,10 @@ class PartyPokemon implements Saveable {
 
     set breeding(bool: boolean) {
         this._breeding(bool);
+    }
+
+    get appeal(): number {
+        return this._appeal();
     }
 
     get pokerus(): GameConstants.Pokerus {
