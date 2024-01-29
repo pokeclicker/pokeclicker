@@ -597,6 +597,8 @@ $(document).ready(() => {
         button.addEventListener('mouseout', keyUp, { passive: false });
         button.addEventListener('mouseup', keyUp, { passive: false });
         button.addEventListener('touchstart', keyDown, { passive: false });
+        button.addEventListener('touchend', keyUp, { passive: false });
+        button.addEventListener('touchcancel', keyUp, { passive: false });
     });
 
     $('#safariModal').on('hide.bs.modal', () => {
