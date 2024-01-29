@@ -1,3 +1,4 @@
+import ContestType from '../enums/ContestType';
 import PokemonType from '../enums/PokemonType';
 import { TypeEffectiveness, TypeEffectivenessValue, GEM_UPGRADE_STEP } from '../GameConstants';
 
@@ -78,6 +79,30 @@ export default class TypeHelper {
             [neu, not, neu, neu, neu, neu, vry, not, neu, neu, neu, neu, neu, neu, vry, vry, not, neu], // FAIRY
         ];
     })();
+    
+    public static contestTypeMatrix: Array<Array<number>> = (() => {
+        const imm = TypeEffectivenessValue.Immune;
+        const not = TypeEffectivenessValue.NotVery;
+        const neu = TypeEffectivenessValue.Neutral;
+        return [
+            //       B                   B
+            //       E                   A
+            //       A                   L
+            //       U                   A
+            //       T         S    T    C      <- Defending type
+            //  C    I    C    M    O    N    N
+            //  O    F    U    A    U    C    O   Attack type
+            //  O    U    T    R    G    E    N        |
+            //  L    L    E    T    H    D    E        v
+            [neu, not, imm, imm, not, not, imm], // COOL
+            [not, neu, not, imm, imm, not, imm], // BEAUTIFUL
+            [imm, not, neu, not, imm, not, imm], // CUTE
+            [imm, imm, not, neu, not, not, imm], // SMART
+            [not, imm, imm, not, neu, not, imm], // TOUGH
+            [neu, neu, neu, neu, neu, neu, imm], // BALANCED
+            [imm, imm, imm, imm, imm, imm, imm], // NONE
+        ];
+    })();
 
     public static getAttackModifier(a1: PokemonType, a2: PokemonType, d1: PokemonType, d2: PokemonType): number {
         if (a1 === PokemonType.None || d1 === PokemonType.None) {
@@ -121,5 +146,35 @@ export default class TypeHelper {
             default:
                 return TypeEffectiveness.Neutral;
         }
+    }
+
+    public static getAppealModifier(a1: ContestType, a2: ContestType, a3: ContestType, d1:ContestType, d2: ContestType, d3: ContestType): number {
+        if (a1 === ContestType.None || d1 === ContestType.None) {
+            return 0;
+        }
+
+        // Apply None type where there isn't an attacking type
+        // eslint-disable-next-line no-param-reassign
+        a2 = a2 !== ContestType.None ? a2 : a1;
+        // eslint-disable-next-line no-param-reassign
+        a3 = a3 !== ContestType.None ? a3 : a1;
+        // eslint-disable-next-line no-param-reassign
+        d2 = d2 !== ContestType.None ? d2 : d1;
+        // eslint-disable-next-line no-param-reassign
+        d3 = d3 !== ContestType.None ? d3 : d1;
+
+        let m1 = TypeHelper.contestTypeMatrix[a1][d1];
+        let m2 = TypeHelper.contestTypeMatrix[a2][d1];
+        let m3 = TypeHelper.contestTypeMatrix[a3][d1];
+        
+        let m4 = TypeHelper.contestTypeMatrix[a1][d2];
+        let m5 = TypeHelper.contestTypeMatrix[a2][d2];
+        let m6 = TypeHelper.contestTypeMatrix[a3][d2];
+
+        let m7 = TypeHelper.contestTypeMatrix[a1][d3];
+        let m8 = TypeHelper.contestTypeMatrix[a2][d3];
+        let m9 = TypeHelper.contestTypeMatrix[a3][d3];
+
+        return Math.max(Math.min(m1 + m2 + m3, 1), Math.min(m4 + m5 + m6, 1), Math.min(m7 + m8 + m9, 1));
     }
 }
