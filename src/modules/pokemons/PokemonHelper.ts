@@ -16,6 +16,7 @@ import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
+import ContestType from '../enums/ContestType';
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -46,6 +47,10 @@ export function getPokemonByName(name: PokemonNameType): DataPokemon {
     const type1 = basePokemon.type[0];
     const type2: PokemonType = basePokemon.type[1] ?? PokemonType.None;
 
+    const contestType1 = basePokemon.contestType[0];
+    const contestType2: ContestType = basePokemon.contestType[1] ?? ContestType.None;
+    const contestType3: ContestType = basePokemon.contestType[2] ?? ContestType.None;
+
     const eggCycles: number = basePokemon.eggCycles || 20;
     return new DataPokemon(
         basePokemon.id,
@@ -61,6 +66,9 @@ export function getPokemonByName(name: PokemonNameType): DataPokemon {
         eggCycles,
         basePokemon.heldItem,
         basePokemon.gender,
+        contestType1,
+        contestType2,
+        contestType3,
     );
 }
 
