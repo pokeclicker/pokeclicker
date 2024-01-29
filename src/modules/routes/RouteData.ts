@@ -150,7 +150,6 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, Region.kanto, 9),
-        new ClearDungeonRequirement(1, getDungeonIndex('Rock Tunnel')),
     ],
     undefined,
     KantoSubRegions.Kanto,
