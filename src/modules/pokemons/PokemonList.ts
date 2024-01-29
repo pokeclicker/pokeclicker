@@ -104,7 +104,7 @@ export type PokemonListData = {
         femaleRatio?: number;
         visualDifference?: boolean;
     }
-    condition?: ContestType[];
+    contestType?: ContestType[];
 };
 
 function createPokemonArray<T extends readonly PokemonListData[] & Array<{ name: V }>, V extends string>(...args: T) {
@@ -1717,7 +1717,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'condition': [ContestType.Cool],
+        'contestType': [ContestType.Cool],
     },
     {
         'id': 25.18,
@@ -1738,7 +1738,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'condition': [ContestType.Beautiful],
+        'contestType': [ContestType.Beautiful],
     },
     {
         'id': 25.19,
@@ -1759,7 +1759,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'condition': [ContestType.Cute],
+        'contestType': [ContestType.Cute],
     },
     {
         'id': 25.20,
@@ -1780,7 +1780,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'condition': [ContestType.Smart],
+        'contestType': [ContestType.Smart],
     },
     {
         'id': 25.21,
@@ -1801,7 +1801,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'condition': [ContestType.Tough],
+        'contestType': [ContestType.Tough],
     },
     {
         'id': 25.22,
@@ -31506,8 +31506,8 @@ pokemonList.forEach((p) => {
     if (con.length > 3) {
         con = [5];
     }
-    // Fill pokemons condition with calculated Contest Types if nothing was given
-    (p as PokemonListData).condition = (p as PokemonListData).condition === undefined ? con : (p as PokemonListData).condition;
+    // Fill pokemons contestType with calculated Contest Types if nothing was given
+    (p as PokemonListData).contestType = (p as PokemonListData).contestType === undefined ? con : (p as PokemonListData).contestType;
 });
 
 export type PokemonMapProxy

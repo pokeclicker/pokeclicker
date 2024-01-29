@@ -69,8 +69,8 @@
                 </tr>
                 <!-- /ko -->
                 <tr>
-                  <td class="text-left">Contest Condition</td>
-                  <td class="text-left tight" data-bind="foreach: pokemonMap[$data].condition">
+                  <td class="text-left">Contest Type</td>
+                  <td class="text-left tight" data-bind="foreach: pokemonMap[$data].contestType">
                     <span class="badge text-light px-1" data-bind="if: $data >= 0,
                                 style: { 'background-color': GameConstants.ContestColor[$data]}">
                       <small><strong
