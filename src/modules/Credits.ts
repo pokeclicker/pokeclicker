@@ -1233,7 +1233,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Ulithium_Dragon',
         link: 'https://www.pokecommunity.com/showthread.php?t=397580',
-        image: 'https://www.pokecommunity.com/customavatars/avatar531836_2.gif',
+        image: 'https://data.pokecommunity.com/avatars/o/531/531836.jpg',
         resources: [
             'Ultra Wormhole',
         ],
