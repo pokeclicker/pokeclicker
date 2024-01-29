@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.10.18"></script>
+    <script src="scripts/modules.min.js?v=0.10.19"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.10.18"></script>
+    <script src="scripts/script.min.js?v=0.10.19"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.10.18" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.10.19" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -1038,7 +1038,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                         </tr>
                     </thead>
                     <tbody id="pokeballFilters" data-bind="foreach: App.game.pokeballFilters.displayList">
-                        <tr data-bind="css: { 'pokeballFilterDisabled': !$data.enabled() }">
+                        <tr data-bind="css: { 'pokeballFilterDisabled': !$data.enabled() }, attr: { 'data-name': $data.name }">
                             <td><span data-bind="
                                 text: $data.name,
                                 tooltip: {
@@ -1315,7 +1315,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                             </td>
                         </tr>
                     </thead>
-                    <tbody data-bind="foreach: lazyLoad('lazyPokemonList', $element, PartyController.getSortedList, { pageSize: 20 })">
+                    <tbody data-bind="foreach: lazyLoad('lazyPokemonList', $element, PartyController.getSortedList, { pageSize: 20 }), childrenComplete: () => { lazyLoadCallback('lazyPokemonList'); }">
                         <tr data-toggle="modal" href="#pokemonStatisticsModal" data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">
                             <td>
                                 <img
@@ -2247,8 +2247,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.18',
-            href:'assets/images/kanto-kanto.png?v=0.10.18'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.19',
+            href:'assets/images/kanto-kanto.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -4810,8 +4810,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.18',
-            href:'assets/images/kanto-sevii123.png?v=0.10.18'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.19',
+            href:'assets/images/kanto-sevii123.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -5379,8 +5379,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.18',
-            href:'assets/images/kanto-sevii4567.png?v=0.10.18'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.19',
+            href:'assets/images/kanto-sevii4567.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -6976,8 +6976,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.10.18',
-        href:'assets/images/johto.png?v=0.10.18'
+        'xlink:href':'assets/images/johto.png?v=0.10.19',
+        href:'assets/images/johto.png?v=0.10.19'
     }"></image>
 
     <!-- ------ -->
@@ -9608,8 +9608,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.10.18',
-        href:'assets/images/hoenn.png?v=0.10.18'
+        'xlink:href':'assets/images/hoenn.png?v=0.10.19',
+        href:'assets/images/hoenn.png?v=0.10.19'
     }"></image>
 
     <!-- ------ -->
@@ -13099,8 +13099,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
      <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Orre').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/orre.png?v=0.10.18',
-            href:'assets/images/orre.png?v=0.10.18'
+            'xlink:href':'assets/images/orre.png?v=0.10.19',
+            href:'assets/images/orre.png?v=0.10.19'
         }"></image>
 
     <!-- ------ -->
@@ -14459,8 +14459,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.10.18',
-        href:'assets/images/sinnoh.png?v=0.10.18'
+        'xlink:href':'assets/images/sinnoh.png?v=0.10.19',
+        href:'assets/images/sinnoh.png?v=0.10.19'
     }"></image>
 
     <!-- ------ -->
@@ -17555,8 +17555,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.10.18',
-        href:'assets/images/unova.png?v=0.10.18'
+        'xlink:href':'assets/images/unova.png?v=0.10.19',
+        href:'assets/images/unova.png?v=0.10.19'
     }"></image>
 
     <!-- ------ -->
@@ -20734,8 +20734,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.10.18',
-        href:'assets/images/kalos.png?v=0.10.18'
+        'xlink:href':'assets/images/kalos.png?v=0.10.19',
+        href:'assets/images/kalos.png?v=0.10.19'
     }"></image>
 
     <!-- ------ -->
@@ -23355,8 +23355,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.10.18',
-            href:'assets/images/alola-melemele.png?v=0.10.18'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.10.19',
+            href:'assets/images/alola-melemele.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -26713,8 +26713,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.10.18',
-            href:'assets/images/alola-akala.png?v=0.10.18'
+            'xlink:href':'assets/images/alola-akala.png?v=0.10.19',
+            href:'assets/images/alola-akala.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -28965,8 +28965,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.18',
-            href:'assets/images/alola-ulaula.png?v=0.10.18'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.19',
+            href:'assets/images/alola-ulaula.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -31687,8 +31687,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.10.18',
-            href:'assets/images/alola-poni.png?v=0.10.18'
+            'xlink:href':'assets/images/alola-poni.png?v=0.10.19',
+            href:'assets/images/alola-poni.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -33782,8 +33782,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Magikarp Jump').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.18',
-            href:'assets/images/alola-magikarp-jump.png?v=0.10.18'
+            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.19',
+            href:'assets/images/alola-magikarp-jump.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -35881,8 +35881,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.10.18',
-            href:'assets/images/galar-south.png?v=0.10.18'
+            'xlink:href':'assets/images/galar-south.png?v=0.10.19',
+            href:'assets/images/galar-south.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -38363,8 +38363,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.10.18',
-            href:'assets/images/galar-north.png?v=0.10.18'
+            'xlink:href':'assets/images/galar-north.png?v=0.10.19',
+            href:'assets/images/galar-north.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -39450,8 +39450,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.18',
-            href:'assets/images/galar-isle-of-armor.png?v=0.10.18'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.19',
+            href:'assets/images/galar-isle-of-armor.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -42332,8 +42332,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.18',
-            href:'assets/images/galar-crown-tundra.png?v=0.10.18'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.19',
+            href:'assets/images/galar-crown-tundra.png?v=0.10.19'
         }"></image>
 
         <!-- ------ -->
@@ -44360,8 +44360,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.hisui'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hsiui.png?v=0.10.18',
-        href:'assets/images/hisui.png?v=0.10.18'
+        'xlink:href':'assets/images/hsiui.png?v=0.10.19',
+        href:'assets/images/hisui.png?v=0.10.19'
     }"></image>
 
     <!-- ------ -->
@@ -53121,8 +53121,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.paldea'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/paldea.png?v=0.10.18',
-        href:'assets/images/paldea.png?v=0.10.18'
+        'xlink:href':'assets/images/paldea.png?v=0.10.19',
+        href:'assets/images/paldea.png?v=0.10.19'
     }"></image>
 
     <!-- ------ -->
@@ -54467,11 +54467,9 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                 text: App.game.breeding.queueList().length + ' / ' + App.game.breeding.usableQueueSlots(),
                 tooltip: { title: BreedingController.queueSizeLimit() > -1 ? 'Queue is currently limited by your Queue Size setting.' : '', trigger: 'hover' }
             "></span>
-        <button class="btn btn-sm btn-danger" style="position: absolute; right: 0; width: auto;"
-                data-bind="
-                    click: () => App.game.breeding.clearQueue(true),
-                    tooltip: { title: 'Remove all Pokémon from the queue.', trigger: 'hover' }
-                ">
+        <button class="btn btn-sm btn-danger" style="position: absolute; right: 0; width: auto;" data-bind="
+            click: () => App.game.breeding.clearQueue(Settings.getSetting('breedingQueueClearConfirmation').observableValue()),
+            tooltip: { title: 'Remove all Pokémon from the queue.', trigger: 'hover' }">
             Clear
         </button>
     </div>
@@ -55295,6 +55293,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideQuestsOnFull')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('breedingQueueClearConfirmation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.initialEnabled')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.invertPriorityOrder')}"></tr>
@@ -56831,10 +56830,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: modalUtils.observableState.breedingModal !== 'hidden' && !App.game.party.hasMaxLevelPokemon()">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
-                                    <!-- ko using: lazyLoad('lazyHatcheryList', $element, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList' -->
+                                    <knockout data-bind="using: lazyLoad('lazyHatcheryList', $element, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList'">
                                         <!-- ko if: modalUtils.observableState.breedingModal !== 'hidden' && App.game.party.hasMaxLevelPokemon() -->
-                                        <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyHatcheryList">
-                                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable() && ($data.matchesHatcheryFilters() || BreedingController.viewResetWaiting()), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
+                                        <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyHatcheryList, childrenComplete: () => { lazyLoadCallback('lazyHatcheryList'); }">
+                                            <!-- ko if: $data.isHatchable() && ($data.matchesHatcheryFilters() || BreedingController.viewResetWaiting()) -->
+                                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                                 <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
                                                 <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
                                                 <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
@@ -56866,9 +56866,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     </div>
                                                 </div>
                                             </li>
+                                            <!-- /ko -->
                                         </ul>
                                         <!-- /ko -->
-                                    <!-- /ko -->
+                                    </knockout>
                                 </div>
                             </div>
                         </div>
@@ -56976,7 +56977,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <td class="text-left align-middle">Sort:</td>
                                                 <td class="text-center align-middle">
                                                     <div class="input-group input-group-sm">
-                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => o.value !== SortOptions.level), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
+                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => ![SortOptions.level, SortOptions.attack].includes(o.value)), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
                                                         <div class="input-group-append bg-primary text-light">
                                                             <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                                 attr: {for: 'hatcheryHelperSortDirection' + $index() },
@@ -57735,7 +57736,7 @@ aria-labelledby="pokedexModalLabel">
                                 <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
                             </div>
                             <!-- /ko -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad('lazyPokedexList', $element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexView })">
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad('lazyPokedexList', $element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexFlag }), childrenComplete: () => { lazyLoadCallback('lazyPokedexList'); }">
                                 <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                                         data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                         <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
@@ -58274,7 +58275,7 @@ aria-labelledby="pokedexModalLabel">
                                 <th class="text-center bg-dark align-middle">Breeding Efficiency</th>
                             </tr>
                         </thead>
-                        <tbody data-bind="foreach: lazyLoad('lazyVitaminList', $element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminModalObservable })">
+                        <tbody data-bind="foreach: lazyLoad('lazyVitaminList', $element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyVitaminList'); }">
                             <tr class="clickable" data-bind="
                                 click: () => VitaminController.add() ? $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()) : $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier());,
                                 event: { contextmenu: () => { $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false; } },
@@ -58363,7 +58364,7 @@ aria-labelledby="pokedexModalLabel">
                             </div>
                         </div>
                         <div class="col-12 col-lg-4 text-center text-lg-right p-0">
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <div class="btn-group btn-group-toggle">
                                 <!-- ko foreach: VitaminController.multiplier -->
                                 <label class="btn btn-secondary" data-bind="css: { active: VitaminController.multiplierIndex() == $index() }">
                                     <input type="radio" name="vitaminAmount"
@@ -58403,7 +58404,7 @@ aria-labelledby="pokedexModalLabel">
                                 <th class="text-center align-middle">Egg Steps</th>
                             </tr>
                         </thead>
-                        <tbody data-bind="foreach: lazyLoad('lazyVitaminExpandedList', $element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable })">
+                        <tbody data-bind="foreach: lazyLoad('lazyVitaminExpandedList', $element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyVitaminExpandedList'); }">
                             <tr data-bind="css: { 'text-muted': $data.breeding }">
                                 <td class="text-left align-middle">
                                     <knockout data-bind="text: $data.displayName"></knockout>
@@ -60008,7 +60009,7 @@ aria-labelledby="badgeCaseModalLabel">
                         <button class="btn btn-weather-dock" style="right: 0px; top: 0px; width: auto; padding: 0 4px;"
                             data-bind='style: { background: Weather.weatherConditions[weatherType].color },
                                 tooltip: {
-                                    title: WeatherType[weatherType],
+                                    title: GameConstants.humanifyString(WeatherType[weatherType]),
                                     placement: "bottom",
                                     trigger: "hover",
                                     boundary: "window",
@@ -60034,10 +60035,10 @@ aria-labelledby="badgeCaseModalLabel">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 411 411">
                         <g>
                           <path fill="whitesmoke" d="M382 137h-89c-11 0-19-8-19-19V29c0-16-13-29-29-29h-79c-16 0-29 13-29 29v89c0 11-8 19-19 19H29c-16 0-29 13-29 29v79c0 16 13 29 29 29h89c11 0 19 8 19 19v89c0 16 13 29 29 29h79c16 0 29-13 29-29v-89c0-11 8-19 19-19h89c16 0 29-13 29-29v-79c0-16-13-29-29-29zM93 244c0 2-2 3-4 2l-52-38c-2-1-2-4 0-5l52-38c2-1 4 0 4 3v76zm72-155l38-52c1-2 4-2 5 0l38 52c1 2 0 4-2 4h-76c-3 0-4-2-3-4zm81 233l-38 52c-1 2-4 2-5 0l-38-52c-1-2 0-4 3-4h76c2 0 3 2 2 4zm-40-69a47 47 0 110-94 47 47 0 010 94zm168-45l-52 38c-2 1-4 0-4-2v-76c0-3 2-4 4-3l52 38c2 1 2 4 0 5z"/>
-                          <path fill="transparent" d="M135 1h142v137H135z"   onmousedown="GameController.simulateKey('ArrowUp')" onmouseout="GameController.simulateKey('ArrowUp', 'up')" onmouseup="GameController.simulateKey('ArrowUp', 'up')" ontouchstart="GameController.simulateKey('ArrowUp')"/><!-- up -->
-                          <path fill="transparent" d="M1 137h142v137H1z"     onmousedown="GameController.simulateKey('ArrowLeft')" onmouseout="GameController.simulateKey('ArrowLeft', 'up')" onmouseup="GameController.simulateKey('ArrowLeft', 'up')" ontouchstart="GameController.simulateKey('ArrowLeft')"/><!-- left -->
-                          <path fill="transparent" d="M135 273h142v137H135z" onmousedown="GameController.simulateKey('ArrowDown')" onmouseout="GameController.simulateKey('ArrowDown', 'up')" onmouseup="GameController.simulateKey('ArrowDown', 'up')" ontouchstart="GameController.simulateKey('ArrowDown')"/><!-- down -->
-                          <path fill="transparent" d="M268 137h142v137H268z" onmousedown="GameController.simulateKey('ArrowRight')" onmouseout="GameController.simulateKey('ArrowRight', 'up')" onmouseup="GameController.simulateKey('ArrowRight', 'up')" ontouchstart="GameController.simulateKey('ArrowRight')"/><!-- right -->
+                          <path id="safari-dpad-up" fill="transparent" d="M135 1h142v137H135z" /><!-- up -->
+                          <path id="safari-dpad-left" fill="transparent" d="M1 137h142v137H1z" /><!-- left -->
+                          <path id="safari-dpad-down" fill="transparent" d="M135 273h142v137H135z" /><!-- down -->
+                          <path id="safari-dpad-right" fill="transparent" d="M268 137h142v137H268z" /><!-- right -->
                         </g>
                     </svg>
                 </div>
@@ -61007,7 +61008,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                           <th class="text-left bg-dark align-middle">Held item:</th>
                       </tr>
                   </thead>
-                  <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: modalUtils.observableState.heldItemModalObservable })">
+                  <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: modalUtils.observableState.heldItemModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyHeldItemList'); }">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
                       <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="
@@ -61269,7 +61270,7 @@ aria-labelledby="purifyChamberModalLabel">
         <button class='btn btn-sm' style="right: 0px; top: 0px; width: auto; height: 41px;"
         data-bind='style: { background: Weather.weatherConditions[weatherForecast.weatherType].color },
             tooltip: {
-                title: WeatherType[weatherForecast.weatherType],
+                title: GameConstants.humanifyString(WeatherType[weatherForecast.weatherType]),
                 placement: "bottom",
                 trigger: "hover",
                 boundary: "window",
@@ -61279,6 +61280,7 @@ aria-labelledby="purifyChamberModalLabel">
     </td>
     <!-- /ko -->
 </script>
+
 
 <!-- Consumable Modal -->
 <div class="modal noselect fade" id="consumableModal" tabindex="-1" role="dialog" aria-labelledby="consumableModal">
@@ -61351,7 +61353,7 @@ aria-labelledby="purifyChamberModalLabel">
                           <th class="text-left bg-dark align-middle">Attack</th>
                       </tr>
                   </thead>
-                  <tbody data-bind="foreach: lazyLoad('lazyConsumableList', $element, PartyController.getConsumableSortedList, { reset: modalUtils.observableState.consumableModalObservable })">
+                  <tbody data-bind="foreach: lazyLoad('lazyConsumableList', $element, PartyController.getConsumableSortedList, { reset: modalUtils.observableState.consumableModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyConsumableList'); }">
                     <tr class="clickable" data-bind="click: () => { $data.useConsumable(ConsumableController.currentlySelected(), ConsumableController.getMultiplier()); }">
                       <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.calculateAttack(true).toLocaleString('en-US')">Attack</td>
