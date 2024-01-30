@@ -2617,7 +2617,9 @@ class Update implements Saveable {
                     helper.sortOption = 5;
                 }
             });
+        },
 
+        '0.10.20': ({ playerData, saveData, settingsData }) => {
             // Rename settings to match pokedex settings name convention
             settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
             delete settingsData.breedingTypeFilter1;
