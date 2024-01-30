@@ -2697,6 +2697,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 120,
         },
+        'contestType': [ContestType.Cool, ContestType.Smart],
     },
     {
         'id': 52,
@@ -3341,6 +3342,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 55,
         },
+        'contestType': [ContestType.Beautiful, ContestType.Smart],
     },
     {
         'id': 71,
@@ -4096,6 +4098,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 110,
         },
+        'contestType': [ContestType.Cool, ContestType.Smart],
     },
     {
         'id': 95,
@@ -4152,6 +4155,7 @@ export const pokemonList = createPokemonArray(
             'speed': 70,
         },
         'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
+        'contestType': [ContestType.Cute, ContestType.Tough],
     },
     {
         'id': 96,
@@ -4804,6 +4808,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 60,
         },
+        'contestType': [ContestType.Cool, ContestType.Cute],
     },
     {
         'id': 115,
@@ -4943,6 +4948,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 63,
         },
+        'contestType': [ContestType.Beautiful, ContestType.Tough],
     },
     {
         'id': 119,
@@ -7506,6 +7512,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestType': [ContestType.Balanced],
     },
     {
         'id': 186,
