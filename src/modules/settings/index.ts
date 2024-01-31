@@ -169,6 +169,7 @@ Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in gam
         new SettingOption('7 Days', (7 * DAY).toString()),
     ],
     (12 * HOUR).toString()));
+Settings.add(new BooleanSetting('disableAutoSave', 'Disable Auto Save', false));
 Settings.add(new Setting('breedingQueueSizeSetting', 'Breeding Queue Size', [], '-1'));
 
 // Sound settings
