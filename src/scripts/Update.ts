@@ -2618,7 +2618,7 @@ class Update implements Saveable {
                 }
             });
         },
-      
+
         '0.10.20': ({ saveData }) => {
             // Reset BF checkpoint and award BP accordingly.
             const stageBeaten = saveData.battleFrontier.checkpoint - 1;
