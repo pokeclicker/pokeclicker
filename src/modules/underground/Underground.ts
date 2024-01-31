@@ -1,4 +1,5 @@
 import type { Observable, Computed } from 'knockout';
+import '../koExtenders';
 import { Feature } from '../DataStore/common/Feature';
 import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE } from '../GameConstants';
 import GameHelper from '../GameHelper';

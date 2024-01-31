@@ -134,8 +134,9 @@ class Egg implements Saveable {
         const shadow = GameConstants.ShadowStatus.None;
         if (partyPokemon) {
             // Increase attack
-            partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)));
-            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]() * (efficiency / 100)));
+            const shinyMultiplier = shiny ? GameConstants.BREEDING_SHINY_ATTACK_MULTIPLIER : 1;
+            partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)) * shinyMultiplier);
+            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]() * (efficiency / 100)) * shinyMultiplier);
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {
@@ -143,12 +144,11 @@ class Egg implements Saveable {
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
-                if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
-                    partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
-                }
-                if (partyPokemon.evs() >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
-                    partyPokemon.pokerus = GameConstants.Pokerus.Resistant;
-                }
+            }
+
+            // Update pokerus status
+            if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
+                partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
             }
         }
 
