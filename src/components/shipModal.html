@@ -22,7 +22,7 @@
                         <button class="btn btn-weather-dock" style="right: 0px; top: 0px; width: auto; padding: 0 4px;"
                             data-bind='style: { background: Weather.weatherConditions[weatherType].color },
                                 tooltip: {
-                                    title: WeatherType[weatherType],
+                                    title: GameConstants.humanifyString(WeatherType[weatherType]),
                                     placement: "bottom",
                                     trigger: "hover",
                                     boundary: "window",

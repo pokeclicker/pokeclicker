@@ -10,6 +10,44 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.19
+    new ChangelogUpdate('v0.10.19', new Date(2024, 0, 29)),
+    new Changelog(changelogType.NEW, 'Added setting to disable hatchery clear confirmation'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Holocaster unlock requirements'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Duplicate notifications when removing all Vitamins'),
+    new Changelog(changelogType.FIXED, 'Tutorial Pokéball selector'),
+    new Changelog(changelogType.FIXED, 'Egg steps are now capped at 4800'),
+    new Changelog(changelogType.FIXED, 'Some daily occurrences not resetting correctly'),
+    new Changelog(changelogType.FIXED, 'Hatchery sorting/filters not always working correctly'),
+    new Changelog(changelogType.FIXED, 'Lazy loading items'),
+    new Changelog(changelogType.FIXED, 'Reduced lag'),
+
+    // v0.10.18
+    new ChangelogUpdate('v0.10.18', new Date(2024, 0, 21)),
+    new Changelog(changelogType.NEW, 'New Pokémon'),
+    new Changelog(changelogType.NEW, 'Alternate Berrydex viewing mode (enabled in Display settings)'),
+    new Changelog(changelogType.NEW, 'Audio cue when Max Flow has been gathered'),
+    new Changelog(changelogType.NEW, 'Farm button to invert locked plots'),
+    new Changelog(changelogType.CHANGE, 'Hatchery, battle, and clicking performance optimizations'),
+    new Changelog(changelogType.CHANGE, 'Pink Bow replaced with Fairy Feather'),
+    new Changelog(changelogType.CHANGE, 'Mega Pokémon now have the same egg steps as their base form'),
+    new Changelog(changelogType.CHANGE, 'Hatching a shiny Pokémon now awards 5x the normal attack gained'),
+    new Changelog(changelogType.CHANGE, 'Pokéball filter priority order can now be changed (Gameplay settings)'),
+    new Changelog(changelogType.CHANGE, 'Currency display on main view moved to own module'),
+    new Changelog(changelogType.CHANGE, 'Map hover tooltip for routes'),
+    new Changelog(changelogType.CHANGE, 'Pokédex EVs display now includes decimals'),
+    new Changelog(changelogType.CHANGE, 'Pokéball Selector & Pokémon List modules can be vertically resized'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Poor randomization of certain daily occurrences'),
+    new Changelog(changelogType.FIXED, 'Galar Max Raid dens not appearing active on daily reset'),
+    new Changelog(changelogType.FIXED, 'Catching a shiny shadow Pokémon not awarding the shiny'),
+    new Changelog(changelogType.FIXED, 'Various other minor bug fixes'),
+
     // v0.10.17
     new ChangelogUpdate('v0.10.17', new Date(2023, 11, 4)),
     new Changelog(changelogType.FIXED, 'Incorrect egg steps for several Pokémon'),
