@@ -5,6 +5,7 @@ enum EncounterType {
     roamer = 'Roamer',
     trainer = 'Trainer',
     ultraBeast = 'Ultra Beast',
+    wanderer = 'wanderer',
 }
 
 export default EncounterType;

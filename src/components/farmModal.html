@@ -15,7 +15,7 @@
                 </ul>
             </div>
 
-            <div class="modal-body tab-content p-0">
+            <div class="modal-body tab-content p-0" style="overflow-x: hidden;">
 
                 <div id="berryFarmView" class="tab-pane fade in active show">
                     <div id="farmView" class="justify-content-center no-select row">
@@ -146,9 +146,9 @@
                                 <div class="w-100"></div>
                                 <!-- /ko -->
                                 <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
-                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
+                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass($data)">
                                         <div class="plotImage">
-                                            <img style="width: 100%" src="assets/images/farm/soil.png"
+                                            <img style="width: 100%;" src="assets/images/farm/soil.png"
                                                 data-bind="class: FarmController.calcMulchClass($data)">
                                             <!-- ko if: $data.isSafeLocked -->
                                             <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
@@ -167,6 +167,18 @@
                                                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFPCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
                                                 </div>
                                             </div>
+                                            <!-- /ko -->
+                                            <!-- ko if: $data.wanderer -->
+                                                <!-- ko ifnot: $data.wanderer.catching -->
+                                                    <div class="pokemonSprite walkDown wandererSprite"
+                                                        data-bind="style: { backgroundImage: FarmController.getWandererStyle($data)}, css: {'rightSide': $data.wanderer.rightSide}"
+                                                    ></div>
+                                                <!-- /ko -->
+                                                <!-- ko if: $data.wanderer.catching -->
+                                                    <img src="" class="pokeball-animated wandererCapture" style="z-index: 1;"
+                                                        data-bind="css: {'rightSide': $data.wanderer.rightSide}, attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.wanderer.pokeball()] + '.svg'}"    
+                                                    />
+                                                <!-- /ko -->
                                             <!-- /ko -->
                                             <div class="plotButton"
                                                 data-bind="ifnot: $data.isEmpty(),
@@ -509,6 +521,12 @@
                                             <td class="text-left">Should Harvest:</td>
                                             <td class="text-center tight align-middle">
                                                 <input class="clickable" type="checkbox" data-bind="checked: $data.shouldHarvest"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Handle Wanderers:</td>
+                                            <td class="text-center tight align-middle">
+                                                <input class="clickable" type="checkbox" data-bind="checked: $data.shouldCatch"/>
                                             </td>
                                         </tr>
                                         <tr>

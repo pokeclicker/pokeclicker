@@ -56,6 +56,10 @@
     cursor:url('../assets/images/farm/plotSafeLock.png'), auto;
 }
 
+.WandererHandling {
+  cursor:url('../assets/images/farm/wandererHandling.png'), auto;
+}
+
 .Boost_Mulch {
     filter: hue-rotate(200deg);
 }
@@ -204,5 +208,18 @@
 
   .no-pokerus {
     margin-bottom: -10px;
+  }
+}
+
+.wandererSprite, .wandererCapture {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  pointer-events: none;
+  top: -16px;
+  left: -16px;
+  
+  &.rightSide {
+    left: 36px;
   }
 }

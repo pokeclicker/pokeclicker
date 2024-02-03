@@ -1790,15 +1790,16 @@ class Farming implements Feature {
 
         // Wandering Pokemon
         this.wanderCounter += GameConstants.TICK_TIME;
-        let wanderPokemon: any;
+        let wanderPokemon: WandererPokemon;
+        const wanderList: WandererPokemon[] = [];
         if (this.wanderCounter >= GameConstants.WANDER_TICK) {
             for (let i = 0; i < App.game.farming.plotList.length; i++) {
                 const plot = App.game.farming.plotList[i];
+                // generate or get rid of a wanderer
                 wanderPokemon = plot.generateWanderPokemon();
-                if (wanderPokemon !== undefined) {
-                    // TODO: HLXII Handle other bonus (DT?)
+                if (wanderPokemon) {
+                    wanderList.push(wanderPokemon);
                     notifications.add(FarmNotificationType.Wander);
-                    break;
                 }
             }
             this.wanderCounter = 0;
@@ -1806,13 +1807,13 @@ class Farming implements Feature {
         }
 
         if (notifications.size) {
-            notifications.forEach((n) => this.handleNotification(n, wanderPokemon));
+            notifications.forEach((n) => this.handleNotification(n, wanderList));
         }
 
         this.farmHands.tick();
     }
 
-    handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
+    handleNotification(farmNotiType: FarmNotificationType, wanderList?: WandererPokemon[]): void {
         let message = '';
         let image = null;
         let type = NotificationConstants.NotificationOption.success;
@@ -1857,10 +1858,12 @@ class Farming implements Feature {
                 setting = NotificationConstants.NotificationSetting.Farming.mulch_ran_out;
                 break;
             case FarmNotificationType.Wander:
-                const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
-                message = `A wild ${pokemon} has wandered onto the farm!`;
-                image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(wander?.pokemon).id, wander?.shiny);
-                type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
+                // Only notify for one wanderer, randomly picked, shiny priorized; there will rarely be more than one
+                const shinyList = wanderList.filter(w => w.shiny);
+                const displayWanderer = shinyList.length ? Rand.fromArray(shinyList) : Rand.fromArray(wanderList);
+                message = `A wild ${displayWanderer.name} has wandered onto the farm!`;
+                image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny);
+                type = displayWanderer.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
                 setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
                 break;
