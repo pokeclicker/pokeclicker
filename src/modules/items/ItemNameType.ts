@@ -477,6 +477,5 @@ export type ItemNameType
 | 'Darkinium Z'
 | 'Steelium Z'
 | 'Fairium Z'
-| 'Great_Twisted_Spoon'
 | 'Agile_Scroll'
 | 'Strong_Scroll';
