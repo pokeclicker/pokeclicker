@@ -13,7 +13,7 @@
                     <li class="nav-item"><a class="nav-link" href="#dungeonGuidesModalHelpTab" data-toggle="tab">Help</a></li>
                 </ul>
                 <div class="tab-content">
-                    <!-- Stats Pane -->
+                    <!-- Hiring Tab -->
                     <div id="dungeonGuidesModalHireTab" class="tab-pane fade col-10 offset-1 active show">
                         <div class="row m-0 justify-content-center" data-bind="foreach: DungeonGuides.available()" style="max-width: 100%;">
                             <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
@@ -48,7 +48,7 @@
                                         <tfoot>
                                             <tr>
                                                 <td>
-                                                    <button class="btn btn-block" data-bind="click: () => DungeonGuides.selected($index()), css: { 'btn-success': DungeonGuides.selected() == $index(), 'btn-danger': DungeonGuides.selected() != $index() }, text: DungeonGuides.selected() == $index() ? 'Selected!' : 'Hire!'">Hire!</button>
+                                                    <button class="btn btn-block btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal">Hire!</button>
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -59,38 +59,11 @@
                         <div class="card text-left col-12 p-0 text-center">
                             <h5 class="card-header">Start Dungeon</h5>
                             <div class="card-body p-0">
-                                <table class="table table-striped table-hover m-0">
-                                    <tbody>
-                                        <tr>
-                                            <td >How many runs of the dungeon</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-0">
-                                                <input type="number" class="form-control" min="1" step="1" data-bind="value: DungeonGuides.clears"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Cost</td>
-                                        </tr>
-                                        <tr>
-                                            <td data-bind="foreach: DungeonGuides.calcCost()">
-                                                <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td>
-                                                <button class="btn btn-block btn-primary" data-dismiss="modal" data-bind="click: () => DungeonGuides.hire()">Start!</button>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Multipliers Pane -->
+                    <!-- Help Tab -->
                     <div id="dungeonGuidesModalHelpTab" class="tab-pane fade col-10 offset-1 text-center">
                         <h4><u>Help</u></h4>
                         <p>Dungeon guides will automatically guide you through the dungeon, opening any chest they come accross, go down ladders they find and start boss battles.</p>
@@ -99,6 +72,48 @@
                         <p>Each guide operates at their own speed, with some possessing a sense for specific dungeon tiles and others actively avoiding particular tiles whenever possible.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal noselect fade" id="dungeonGuidesSubModal" tabindex="-1" role="dialog" aria-labelledby="dungeonGuidesSubModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Explore Dungeon</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-left p-2">
+                <table class="table table-striped table-hover m-0">
+                    <tbody>
+                        <tr>
+                            <td>Dungeon Attempts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-0">
+                                <input type="number" class="form-control" min="1" step="1" data-bind="value: DungeonGuides.clears"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Cost</td>
+                        </tr>
+                        <tr>
+                            <td data-bind="foreach: DungeonGuides.calcCost()">
+                                <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <button class="btn btn-block btn-primary" data-dismiss="modal" data-bind="click: () => DungeonGuides.hire()">Start!</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>

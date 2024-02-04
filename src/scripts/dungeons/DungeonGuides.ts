@@ -37,7 +37,7 @@ class DungeonGuide {
       clearInterval(this.intervalRunner);
       if (DungeonGuides.clears() > 0) {
           // Add slight delay so map can keep up
-          setTimeout(() => DungeonRunner.initializeDungeon(player.town().dungeon), 1);
+          setTimeout(() => DungeonRunner.initializeDungeon(player.town().dungeon), 0);
       } else {
           this.fire();
           DungeonGuides.clears(1);
@@ -129,6 +129,8 @@ class DungeonGuides {
       }
       // Charge the player
       this.calcCost().forEach((cost) => App.game.wallet.loseAmount(cost));
+      // Hide modals
+      $('.modal.show').modal('hide');
       // Hire the guide
       guide.hire();
       // Start the dungeon
