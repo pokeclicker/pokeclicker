@@ -57,7 +57,8 @@ class App {
                 new PurifyChamber(),
                 new WeatherApp(),
                 new ZMoves(),
-                new PokemonContest()
+                new PokemonContest(),
+                new DungeonGuides()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');
