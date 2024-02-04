@@ -249,7 +249,7 @@ class FarmHand {
             while (prioPlots.length > 0 && workTimes > 0) {
                 const plot = prioPlots.shift();
                 if (this.plots().includes(plot.index)) {
-                    FarmController.handleWanderer(plot);
+                    App.game.farming.handleWanderer(plot);
                     workTimes--;
                     worked = true;
                 }
@@ -259,7 +259,7 @@ class FarmHand {
             while (plots.length > 0 && workTimes > 0) {
                 const plot = plots.shift();
                 if (this.plots().includes(plot.index)) {
-                    FarmController.handleWanderer(plot);
+                    App.game.farming.handleWanderer(plot);
                     workTimes--;
                     worked = true;
                 }

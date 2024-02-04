@@ -10,7 +10,7 @@ class WandererPokemon {
         public berry: BerryType,
         public catchRate: number,
         public shiny = false,
-        public distractTime = 0,
+        public distractTime = 0
     ) {
         this.catching = ko.observable(false);
         this.pokeball = ko.observable(GameConstants.Pokeball.None);

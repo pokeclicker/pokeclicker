@@ -138,7 +138,7 @@ class FarmController {
         // Handle Wanderers and Berries
         } else if (this.berryListVisible()) {
             if (plot.wanderer && !plot.wanderer.catching()) {
-                FarmController.handleWanderer(plot);
+                App.game.farming.handleWanderer(plot);
             } else if (plot.isEmpty()) {
                 App.game.farming.plant(index, this.selectedBerry());
             } else {
@@ -261,63 +261,6 @@ class FarmController {
         }
 
         App.game.statistics.selectedBerryID(berryId);
-    }
-
-    public static handleWanderer(plot: Plot) {
-        if (!plot.wanderer || plot.wanderer.catching()) {
-            return;
-        }
-        const wanderer = plot.wanderer;
-        const pokemonData = PokemonHelper.getPokemonByName(wanderer.name);
-
-        const farmPoints = Math.floor(plot.berryData.farmValue / (4 + plot.berryData.growthTime[PlotStage.Bloom] / 1800));
-        App.game.wallet.gainFarmPoints(farmPoints);
-
-        const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
-        if (pokeball !== GameConstants.Pokeball.None) {
-            wanderer.pokeball(pokeball);
-            wanderer.catching(true);
-            App.game.pokeballs.usePokeball(pokeball);
-            setTimeout(() => FarmController.attemptCatchWanderer(plot), App.game.pokeballs.calculateCatchTime(pokeball));
-        } else {
-            plot.wanderer = undefined;
-        }
-
-    }
-
-    public static attemptCatchWanderer(plot: Plot) {
-        const wanderer = plot.wanderer;
-        const catchChance = GameConstants.clipNumber(
-            wanderer.catchRate
-                + App.game.pokeballs.getCatchBonus(wanderer.pokeball(), true, pokemonMap[wanderer.name].id)
-                + App.game.oakItems.calculateBonus(OakItemType.Magic_Ball),
-            0,
-            100,
-        );
-        if (Rand.chance(catchChance / 100)) { // Successfully caught
-            App.game.oakItems.use(OakItemType.Magic_Ball);
-            App.game.party.gainPokemonByName(wanderer.name, wanderer.shiny);
-            const partyPokemon = App.game.party.getPokemonByName(wanderer.name);
-            const wandererEPGain = App.game.pokeballs.getEPBonus(wanderer.pokeball())
-                * GameConstants.BASE_EP_YIELD
-                * (Berry.isBaseWanderer(wanderer.name) ? 1 : GameConstants.WANDERER_EP_MODIFIER);
-            partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, wanderer.shiny, undefined, wandererEPGain);
-            const fakedRoute = FarmController.wandererToRoute(wanderer.name);
-            Battle.gainTokens(fakedRoute.number, fakedRoute.region, wanderer.pokeball());
-        } else if (wanderer.shiny) { // Failed to catch, Shiny
-            App.game.logbook.newLog(
-                LogBookTypes.ESCAPED,
-                App.game.party.alreadyCaughtPokemonByName(wanderer.name, true)
-                    ? createLogContent.escapedShinyDupe({ pokemon: wanderer.name })
-                    : createLogContent.escapedShiny({ pokemon: wanderer.name })
-            );
-        } else if (!App.game.party.alreadyCaughtPokemonByName(wanderer.name)) { // Failed to catch, Uncaught
-            App.game.logbook.newLog(
-                LogBookTypes.ESCAPED,
-                createLogContent.escapedWild({ pokemon: wanderer.name})
-            );
-        }
-        plot.wanderer = undefined;
     }
 
     public static wandererToRoute(pokemon: PokemonNameType): RegionRoute {

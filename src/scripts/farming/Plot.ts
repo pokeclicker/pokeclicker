@@ -275,6 +275,11 @@ class Plot implements Saveable {
                 tooltip.push(`${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`);
             }
 
+            // Wanderer
+            if (this.wanderer) {
+                tooltip.push(`A wild <strong>${this.wanderer.name}</strong> is wandering around`);
+            }
+
             return tooltip.join('<br/>');
         });
 
