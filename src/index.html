@@ -283,28 +283,40 @@
             </div>
 
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
-            <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
-                <div class="card-header p-0">
-                    <div style="position: absolute; left: 2px">
-                        <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
+                <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
+                    <div class="card-header p-0">
+                        <div style="position: absolute; left: 2px">
+                            <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
+                            <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
+                        </div>
+                        <div style="position: absolute; right: 4px">
+                            <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
+                            <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
+                        </div>
+                        <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                     </div>
-                    <div style="position: absolute; right: 4px">
-                        <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
+                    <div class="card-body p-0 text-center">
+                        <table class="dungeon-board">
+                            <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
+                                <tr data-bind="foreach: $data">
+                                    <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                 </div>
-                <div class="card-body p-0 text-center">
-                    <table class="dungeon-board">
-                      <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
-                        <tr data-bind="foreach: $data">
-                            <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </div>
-            </div>
+                <!-- ko if: DungeonGuides.hired() -->
+                    <div id="dungeonGuide" class="card sortable-disabled border-secondary mb-3 dungeon no-select" data-bind="with: DungeonGuides.hired()">
+                        <div class="card-header p-0">
+                            <span>[DUNGEON GUIDE] <knockout data-bind="text: $data.name"></knockout></span>
+                            <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                        </div>
+                        <div class="card-body p-0 text-center">
+                            <span>Attempts remaining: <knockout data-bind="text: DungeonGuides.clears()"></knockout></span>
+                            <button class="btn btn-danger btn-block" data-bind="click: () => $data.fire()">Fire!</button>
+                        </div>
+                    </div>
+                <!-- /ko -->
             <!-- /ko -->
 
             <!-- Battle Frontier Information Container  -->

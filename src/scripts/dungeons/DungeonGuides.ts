@@ -39,6 +39,7 @@ class DungeonGuide {
               console.error('Dungeon Guide failed to walk correctly:\n', e);
           }
       }, this.interval);
+      DungeonRunner.map.playerMoved(true);
       GameHelper.incrementObservable(DungeonGuides.clears, -1);
   }
 
@@ -52,7 +53,6 @@ class DungeonGuide {
       } else {
           // No more clears, fire the guide, reset clears to 1 for modal
           this.fire();
-          DungeonGuides.clears(1);
       }
 
   }
@@ -90,6 +90,10 @@ class DungeonGuide {
           timeout: 30 * GameConstants.SECOND,
           setting: NotificationConstants.NotificationSetting.Hatchery.hatchery_helper,
       });
+      // Stop running the dungeon if we still are
+      clearInterval(this.intervalRunner);
+      // Reset our clears
+      DungeonGuides.clears(1);
       DungeonGuides.hired(null);
   }
 }
@@ -151,16 +155,16 @@ class DungeonGuides {
 }
 
 // Note: Mostly Gender-neutral names used as the trainer sprite is (seeded) randomly generated, or check the sprite
-DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around a dungeon, but gives it their best try!', [[10, Currency.money]], 2000, () => {
+DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around a dungeon, but gives it their best try!', [[5, Currency.money]], 2000, () => {
     // We just want to move randomly
     const pos = DungeonRunner.map.playerPosition();
     const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
     const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
     DungeonRunner.map.moveToTile(randomTile.position);
-}, new HatchRequirement(100)));
+}));
 
 
-DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile next to them!', [[15, Currency.money],[1, Currency.dungeonToken]], 2000, () => {
+DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile next to them!', [[8, Currency.money],[1, Currency.dungeonToken]], 2000, () => {
     // Check if any tiles next to us contain a chest
     const pos = DungeonRunner.map.playerPosition();
     const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
@@ -174,4 +178,21 @@ DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure ch
         const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
         DungeonRunner.map.moveToTile(randomTile.position);
     }
-}, new HatchRequirement(100)));
+}));
+
+DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!', [[6, Currency.money],[2, Currency.dungeonToken]], 1500, () => {
+    // Check if any tiles next to us are unexplroed
+    const pos = DungeonRunner.map.playerPosition();
+    const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
+    const unexploredTiles = nearbyTiles.filter(t => !t.isVisited);
+    const unexploredTile = unexploredTiles[Math.floor(Math.random() * unexploredTiles.length)];
+
+    if (unexploredTile) {
+        // We found an unexplored, move to it
+        DungeonRunner.map.moveToTile(unexploredTile.position);
+    } else {
+        // We just want to move randomly
+        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        DungeonRunner.map.moveToTile(randomTile.position);
+    }
+}));
