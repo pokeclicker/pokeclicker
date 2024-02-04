@@ -285,5 +285,102 @@ class MapHelper {
             $('#pickStarterModal').modal('show');
         }
     }
+}
 
+class MapNavigation {
+    public static viewBox = {
+        x: 0, y: 0, w: 1600, h: 960,
+    };
+    public static svgSize = { w: 1600, h: 960 };
+    public static svgImage: HTMLElement;
+    public static svgContainer: HTMLElement;
+
+    public static enableZoom() {
+        this.svgImage = document.getElementById('map');
+        this.svgContainer = document.getElementById('mapBody');
+
+        this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+        let isPanning = false;
+        let startPoint = { x: 0, y: 0 };
+        let endPoint = { x: 0, y: 0 };
+        let scale = 1;
+
+        this.svgContainer.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            // If already max/max scale, return;
+            const canScale = e.deltaY > 0 ? scale > 1 : scale < 5;
+            if (!canScale) {
+                return;
+            }
+
+            // Mouse pos
+            const mx = e.offsetX;
+            const my = e.offsetY;
+            // New dimensions
+            const dw = this.viewBox.w * Math.sign(-e.deltaY) * 0.07;
+            const dh = this.viewBox.h * Math.sign(-e.deltaY) * 0.07;
+
+            const dx = (dw * mx) / this.svgContainer.clientWidth;
+            const dy = (dh * my) / this.svgContainer.clientHeight;
+            this.viewBox.w = Math.min(this.svgSize.w, this.viewBox.w - dw);
+            this.viewBox.h = Math.min(this.svgSize.h, this.viewBox.h - dh);
+            this.viewBox.x = Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, this.viewBox.x + dx));
+            this.viewBox.y = Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, this.viewBox.y + dy));
+            scale = this.svgSize.w / this.viewBox.w;
+            this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+        }, { passive: false });
+
+        this.svgContainer.onmousedown = (e) => {
+            isPanning = true;
+            startPoint = { x: e.x, y: e.y };
+        };
+
+        this.svgContainer.onmousemove = (e) => {
+            if (!isPanning) {
+                return;
+            }
+            endPoint = { x: e.x, y: e.y };
+            const dx = (startPoint.x - endPoint.x) / (scale / 3);
+            const dy = (startPoint.y - endPoint.y) / (scale / 3);
+            const movedViewBox = {
+                x: Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, this.viewBox.x + dx)),
+                y: Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, this.viewBox.y + dy)),
+            };
+            this.svgImage.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+        };
+
+        this.svgContainer.onmouseup = (e) => {
+            if (!isPanning) {
+                return;
+            }
+            endPoint = { x: e.x, y: e.y };
+            const dx = (startPoint.x - endPoint.x) / (scale / 3);
+            const dy = (startPoint.y - endPoint.y) / (scale / 3);
+            this.viewBox.x = Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, this.viewBox.x + dx));
+            this.viewBox.y = Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, this.viewBox.y + dy));
+            this.svgImage.setAttribute('viewBox', `${Math.max(0, this.viewBox.x)} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+            isPanning = false;
+        };
+
+        this.svgContainer.onmouseleave = (e) => {
+            this.svgContainer.onmouseup(e);
+        };
+
+        player._region.subscribe(() => {
+            this.resetZoom();
+        });
+
+        player._subregion.subscribe(() => {
+            this.resetZoom();
+        });
+    }
+
+    public static resetZoom() {
+        const svgImage = document.getElementById('map');
+        this.viewBox.w = this.svgSize.w;
+        this.viewBox.h = this.svgSize.h;
+        this.viewBox.x = 0;
+        this.viewBox.y = 0;
+        this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+    }
 }
