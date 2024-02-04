@@ -74,7 +74,7 @@ class DungeonRunner {
         App.game.gameState = GameConstants.GameState.dungeon;
 
         // If we have a dungeon guide, start them walking
-        App.game.dungeonGuides.startDungeon();
+        DungeonGuides.startDungeon();
     }
 
     public static tick() {
@@ -269,7 +269,6 @@ class DungeonRunner {
     }
 
     private static dungeonLost() {
-        App.game.dungeonGuides.endDungeon();
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
@@ -280,10 +279,10 @@ class DungeonRunner {
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
+        DungeonGuides.endDungeon();
     }
 
     public static dungeonWon() {
-        App.game.dungeonGuides.endDungeon();
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()) {
@@ -297,6 +296,7 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_complete,
             });
         }
+        DungeonGuides.endDungeon();
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {

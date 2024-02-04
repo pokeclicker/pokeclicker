@@ -51,8 +51,7 @@ class Game {
         public purifyChamber: PurifyChamber,
         public weatherApp: WeatherApp,
         public zMoves: ZMoves,
-        public pokemonContest: PokemonContest,
-        public dungeonGuides: DungeonGuides
+        public pokemonContest: PokemonContest
     ) {
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
