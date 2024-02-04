@@ -26,6 +26,15 @@ class DungeonGuide {
       this.intervalRunner = setInterval(() => {
           try {
               this.walk();
+
+              // Interact with the current tile
+              switch (DungeonRunner.map.currentTile().type()) {
+                  case GameConstants.DungeonTile.chest:
+                  case GameConstants.DungeonTile.boss:
+                  case GameConstants.DungeonTile.ladder:
+                      DungeonRunner.handleInteraction();
+                      break;
+              }
           } catch (e) {
               console.error('Dungeon Guide failed to walk correctly:\n', e);
           }
@@ -35,10 +44,13 @@ class DungeonGuide {
 
   end() {
       clearInterval(this.intervalRunner);
+      // Check if more clears already paid for
       if (DungeonGuides.clears() > 0) {
-          // Add slight delay so map can keep up
-          setTimeout(() => DungeonRunner.initializeDungeon(player.town().dungeon), 0);
+          // Need to reset the map
+          DungeonRunner.map.board([]);
+          DungeonRunner.initializeDungeon(player.town().dungeon);
       } else {
+          // No more clears, fire the guide, reset clears to 1 for modal
           this.fire();
           DungeonGuides.clears(1);
       }
@@ -139,61 +151,27 @@ class DungeonGuides {
 }
 
 // Note: Mostly Gender-neutral names used as the trainer sprite is (seeded) randomly generated, or check the sprite
-DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around, but will give it their best try!', [[10, Currency.money]], 1000, () => {
+DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around a dungeon, but gives it their best try!', [[10, Currency.money]], 2000, () => {
     // We just want to move randomly
-    const direction = Math.floor(Math.random() * 4);
-    switch (direction) {
-        case 0:
-            DungeonRunner.map.moveUp();
-            break;
-        case 1:
-            DungeonRunner.map.moveRight();
-            break;
-        case 2:
-            DungeonRunner.map.moveDown();
-            break;
-        case 3:
-        default:
-            DungeonRunner.map.moveLeft();
-            break;
-    }
-
-    // Interact with the tile
-    switch (DungeonRunner.map.currentTile().type()) {
-        case GameConstants.DungeonTile.chest:
-        case GameConstants.DungeonTile.boss:
-        case GameConstants.DungeonTile.ladder:
-            DungeonRunner.handleInteraction();
-            break;
-    }
+    const pos = DungeonRunner.map.playerPosition();
+    const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
+    const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+    DungeonRunner.map.moveToTile(randomTile.position);
 }, new HatchRequirement(100)));
 
 
-DungeonGuides.add(new DungeonGuide('Timmy', 'Doesn\'t really know their way around, but will give it their best try!', [[1, Currency.money],[10, Currency.dungeonToken]], 1000, () => {
-    // We just want to move randomly
-    const direction = Math.floor(Math.random() * 4);
-    switch (direction) {
-        case 0:
-            DungeonRunner.map.moveUp();
-            break;
-        case 1:
-            DungeonRunner.map.moveRight();
-            break;
-        case 2:
-            DungeonRunner.map.moveDown();
-            break;
-        case 3:
-        default:
-            DungeonRunner.map.moveLeft();
-            break;
-    }
+DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile next to them!', [[15, Currency.money],[1, Currency.dungeonToken]], 2000, () => {
+    // Check if any tiles next to us contain a chest
+    const pos = DungeonRunner.map.playerPosition();
+    const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
+    const nearbyChest = nearbyTiles.find(t => t.type() == GameConstants.DungeonTile.chest);
 
-    // Interact with the tile
-    switch (DungeonRunner.map.currentTile().type()) {
-        case GameConstants.DungeonTile.chest:
-        case GameConstants.DungeonTile.boss:
-        case GameConstants.DungeonTile.ladder:
-            DungeonRunner.handleInteraction();
-            break;
+    if (nearbyChest) {
+        // We found a chest, move to it
+        DungeonRunner.map.moveToTile(nearbyChest.position);
+    } else {
+        // We just want to move randomly
+        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        DungeonRunner.map.moveToTile(randomTile.position);
     }
 }, new HatchRequirement(100)));

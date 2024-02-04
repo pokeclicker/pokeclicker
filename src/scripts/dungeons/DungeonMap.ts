@@ -162,7 +162,15 @@ class DungeonMap {
             }
             map.push(floor);
         });
-        return map;
+        // Map positions to each tile
+        return map.map((floor, floorIndex) => {
+            return floor.map((row, rowIndex) => {
+                return row.map((tile, tileIndex) => {
+                    tile.position = new Point(tileIndex, rowIndex, floorIndex);
+                    return tile;
+                });
+            });
+        });
     }
 
     /**

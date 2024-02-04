@@ -265,6 +265,8 @@ class DungeonRunner {
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
+            DungeonGuides.clears(0);
+            DungeonGuides.endDungeon();
         }
     }
 

@@ -6,6 +6,7 @@ class DungeonTile<T extends GameConstants.DungeonTile = GameConstants.DungeonTil
     _hasPlayer: boolean;
     type: KnockoutObservable<GameConstants.DungeonTile>;
     cssClass: KnockoutObservable<string>;
+    position: Point;
 
     constructor(type: T, public metadata: T extends GameConstants.DungeonTile.chest ? ChestMetaData : unknown) {
         this._isVisible = false;
