@@ -15,11 +15,6 @@ class DungeonGuide {
   ) {
       SeededRand.seed(parseInt(this.name, 36));
       this.trainerSprite = SeededRand.intBetween(0, 118);
-
-      this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
-          ${/*TODO: Cost: ${this.cost.forEach((cost) => `<img src="assets/images/currency/${GameConstants.Currency[cost.currency]}.svg" width="20px">&nbsp;${(cost.amount).toLocaleString('en-US')}`)}<br/>*/ ''}
-          Efficiency: ${this.interval}ms<br/>`
-      );
   }
 
   start() {
