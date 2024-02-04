@@ -156,7 +156,7 @@ class DungeonGuides {
   }
 }
 
-// Note: Mostly Gender-neutral names used as the trainer sprite is (seeded) randomly generated, or check the sprite
+// Note: Trainer sprite is (seeded) randomly generated, or can be set manually, please make sure it kind of matches the name
 DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around a dungeon, but gives it their best try!',
     [[5, Currency.money]], [],
     2000,
