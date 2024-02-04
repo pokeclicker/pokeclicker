@@ -308,7 +308,7 @@ GymList['Cianwood City'] = new Gym(
     BadgeEnums.Storm,
     2500,
     'Wha? Huh? I lost? How about that! You\'re worthy of the Storm Badge!',
-    [new GymBadgeRequirement(BadgeEnums.Fog)]
+    [new QuestLineStepCompletedRequirement('The Sick Ampharos', 2)]
 );
 GymList['Olivine City'] = new Gym(
     'Jasmine',
