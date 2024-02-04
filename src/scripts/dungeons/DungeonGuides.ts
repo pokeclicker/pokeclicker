@@ -11,10 +11,11 @@ class DungeonGuide {
       public fixedCost: Array<Amount>,
       public interval: number, // how often they take a step in ms
       public walk: () => void,
-      public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
+      public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
+      trainerSprite?: number
   ) {
       SeededRand.seed(parseInt(this.name, 36));
-      this.trainerSprite = SeededRand.intBetween(0, 118);
+      this.trainerSprite = trainerSprite ?? SeededRand.intBetween(0, 118);
   }
 
   start() {
