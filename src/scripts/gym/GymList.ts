@@ -295,6 +295,7 @@ GymList['Ecruteak City'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
         App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
+        App.game.quests.getQuestLine('The Sick Ampharos').beginQuest(0, undefined, true);
     }
 );
 GymList['Cianwood City'] = new Gym(
@@ -320,7 +321,7 @@ GymList['Olivine City'] = new Gym(
     BadgeEnums.Mineral,
     3500,
     '...You are a better trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Badge.',
-    [new GymBadgeRequirement(BadgeEnums.Storm)]
+    [new QuestLineCompletedRequirement('The Sick Ampharos')]
 );
 GymList['Mahogany Town'] = new Gym(
     'Pryce',
