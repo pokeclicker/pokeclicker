@@ -8,6 +8,7 @@ class DungeonGuide {
       public name: string,
       public description: string,
       public cost: Array<[number, Currency]>,
+      public fixedCost: Array<Amount>,
       public interval: number, // how often they take a step in ms
       public walk: () => void,
       public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
@@ -63,10 +64,15 @@ class DungeonGuide {
 
   calcCost(clears, price): Amount[] {
       const costs = [];
+      const temp = clears ** 0.975;
+      const discount = temp / clears;
       this.cost.forEach(([multiplier, currency]) => {
-          const temp = clears ** 0.975;
-          const discount = temp / clears;
-          costs.push(new Amount(Math.round(price * discount) * clears * multiplier, currency));
+          costs.push(new Amount(Math.round(price * clears * discount) * multiplier, currency));
+      });
+      this.fixedCost.forEach((cost) => {
+          const newCost = {...cost};
+          newCost.amount = Math.round(cost.amount * clears * discount);
+          costs.push(new Amount(newCost.amount, newCost.currency));
       });
       return costs;
   }
@@ -155,44 +161,53 @@ class DungeonGuides {
 }
 
 // Note: Mostly Gender-neutral names used as the trainer sprite is (seeded) randomly generated, or check the sprite
-DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around a dungeon, but gives it their best try!', [[5, Currency.money]], 2000, () => {
-    // We just want to move randomly
-    const pos = DungeonRunner.map.playerPosition();
-    const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
-    const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
-    DungeonRunner.map.moveToTile(randomTile.position);
-}));
-
-
-DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile next to them!', [[8, Currency.money],[1, Currency.dungeonToken]], 2000, () => {
-    // Check if any tiles next to us contain a chest
-    const pos = DungeonRunner.map.playerPosition();
-    const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
-    const nearbyChest = nearbyTiles.find(t => t.type() == GameConstants.DungeonTile.chest);
-
-    if (nearbyChest) {
-        // We found a chest, move to it
-        DungeonRunner.map.moveToTile(nearbyChest.position);
-    } else {
+DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around a dungeon, but gives it their best try!',
+    [[5, Currency.money]], [],
+    2000,
+    () => {
         // We just want to move randomly
+        const pos = DungeonRunner.map.playerPosition();
+        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
         const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
         DungeonRunner.map.moveToTile(randomTile.position);
-    }
-}));
+    }));
 
-DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!', [[6, Currency.money],[2, Currency.dungeonToken]], 1500, () => {
-    // Check if any tiles next to us are unexplroed
-    const pos = DungeonRunner.map.playerPosition();
-    const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
-    const unexploredTiles = nearbyTiles.filter(t => !t.isVisited);
-    const unexploredTile = unexploredTiles[Math.floor(Math.random() * unexploredTiles.length)];
 
-    if (unexploredTile) {
-        // We found an unexplored, move to it
-        DungeonRunner.map.moveToTile(unexploredTile.position);
-    } else {
-        // We just want to move randomly
-        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
-        DungeonRunner.map.moveToTile(randomTile.position);
-    }
-}));
+DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile next to them!',
+    [[5, Currency.money],[1, Currency.dungeonToken]], [new Amount(1, Currency.diamond)],
+    2000,
+    () => {
+        // Check if any tiles next to us contain a chest
+        const pos = DungeonRunner.map.playerPosition();
+        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
+        const nearbyChest = nearbyTiles.find(t => t.type() == GameConstants.DungeonTile.chest);
+
+        if (nearbyChest) {
+            // We found a chest, move to it
+            DungeonRunner.map.moveToTile(nearbyChest.position);
+        } else {
+            // We just want to move randomly
+            const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+            DungeonRunner.map.moveToTile(randomTile.position);
+        }
+    }));
+
+DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
+    [[6, Currency.money],[2, Currency.dungeonToken]], [new Amount(1, Currency.diamond)],
+    1500,
+    () => {
+        // Check if any tiles next to us are unexplroed
+        const pos = DungeonRunner.map.playerPosition();
+        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
+        const unexploredTiles = nearbyTiles.filter(t => !t.isVisited);
+        const unexploredTile = unexploredTiles[Math.floor(Math.random() * unexploredTiles.length)];
+
+        if (unexploredTile) {
+            // We found an unexplored, move to it
+            DungeonRunner.map.moveToTile(unexploredTile.position);
+        } else {
+            // We just want to move randomly
+            const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+            DungeonRunner.map.moveToTile(randomTile.position);
+        }
+    }));
