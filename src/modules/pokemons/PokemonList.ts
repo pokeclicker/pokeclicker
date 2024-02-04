@@ -23,7 +23,7 @@ import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
 import PokemonType from '../enums/PokemonType';
 import {
-    Region, StoneType, Genders, MaxIDPerRegion, MegaStoneType,
+    Region, StoneType, Genders, MaxIDPerRegion, MegaStoneType, MAX_EGG_CYCLES,
 } from '../GameConstants';
 import BagItem from '../interfaces/BagItem';
 import {
@@ -1781,6 +1781,26 @@ export const pokemonList = createPokemonArray(
         'name': 'Pikachu (Libre)',
         'catchRate': 190,
         'type': [PokemonType.Electric, PokemonType.Fighting],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 25.22,
+        'name': 'Pikachu (Easter)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric, PokemonType.Fairy],
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
@@ -4820,6 +4840,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 115.02,
+        'name': 'Baby Kangaskhan',
+        'type': [PokemonType.Normal],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 207,
+        'catchRate': 45,
+        'baby': true,
+        'evolutions': [DummyEvolution('Baby Kangaskhan', 'Kangaskhan')],
+        'base': {
+            'hitpoints': 53,
+            'attack': 63,
+            'specialAttack': 30,
+            'defense': 50,
+            'specialDefense': 50,
+            'speed': 50,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
         'id': 116,
         'name': 'Horsea',
         'catchRate': 225,
@@ -5052,6 +5094,27 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 95,
         },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 124.01,
+        'name': 'Santa Jynx',
+        'catchRate': 45,
+        'type': [PokemonType.Ice, PokemonType.Psychic],
+        'levelType': LevelType.mediumfast,
+        'exp': 159,
+        'eggCycles': 25,
+        'base': {
+            'hitpoints': 65,
+            'attack': 50,
+            'specialAttack': 115,
+            'defense': 35,
+            'specialDefense': 95,
+            'speed': 95,
+        },
+        'heldItem': { type: ItemType.item, id: 'Christmas_present' },
         'gender': {
             'femaleRatio': 1,
         },
@@ -6318,7 +6381,27 @@ export const pokemonList = createPokemonArray(
         'id': 143.02,
         'name': 'Santa Snorlax',
         'catchRate': 25,
-        'type': [PokemonType.Normal],
+        'type': [PokemonType.Normal, PokemonType.Fairy],
+        'levelType': LevelType.slow,
+        'exp': 189,
+        'eggCycles': 40,
+        'base': {
+            'hitpoints': 160,
+            'attack': 110,
+            'specialAttack': 65,
+            'defense': 65,
+            'specialDefense': 110,
+            'speed': 30,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 143.03,
+        'name': 'Snorlax (Snowman)',
+        'catchRate': 25,
+        'type': [PokemonType.Normal, PokemonType.Ice],
         'levelType': LevelType.slow,
         'exp': 189,
         'eggCycles': 40,
@@ -7156,9 +7239,9 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 175.02,
-        'name': 'Surprise Togepi',
+        'name': 'Togepi (Flowering Crown)',
         'catchRate': 190,
-        'type': [PokemonType.Fairy],
+        'type': [PokemonType.Fairy, PokemonType.Grass],
         'levelType': LevelType.fast,
         'exp': 49,
         'eggCycles': 8, // lowered to match base form
@@ -7395,6 +7478,26 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'visualDifference': true,
+        },
+    },
+    {
+        'id': 185.01,
+        'name': 'Sudowoodo (Golden)',
+        'catchRate': 65,
+        'type': [PokemonType.Steel],
+        'levelType': LevelType.mediumfast,
+        'exp': 144,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 70,
+            'attack': 100,
+            'specialAttack': 30,
+            'defense': 115,
+            'specialDefense': 65,
+            'speed': 30,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -8731,7 +8834,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 175,
         'eggCycles': 20,
-        'evolutions': [NightTimedStoneEvolution('Ursaring', 'Ursaluna', StoneType.Peat_block)],
+        'evolutions': [
+            NightTimedStoneEvolution('Ursaring', 'Ursaluna', StoneType.Peat_block),
+            DummyEvolution('Ursaring', 'Bloodmoon Ursaluna'),
+        ],
         'base': {
             'hitpoints': 90,
             'attack': 130,
@@ -9094,6 +9200,23 @@ export const pokemonList = createPokemonArray(
         'exp': 163,
         'eggCycles': 20,
         'evolutions': [HeldItemLevelEvolution('Agile_Scroll', 'Stantler', 'Wyrdeer', 31)],
+        'base': {
+            'hitpoints': 73,
+            'attack': 95,
+            'specialAttack': 85,
+            'defense': 62,
+            'specialDefense': 65,
+            'speed': 85,
+        },
+    },
+    {
+        'id': 234.01,
+        'name': 'Reindeer Stantler',
+        'catchRate': 45,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.slow,
+        'exp': 163,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 73,
             'attack': 95,
@@ -9642,6 +9765,26 @@ export const pokemonList = createPokemonArray(
         'exp': 62,
         'catchRate': 45,
         'evolutions': [LevelEvolution('Torchic', 'Combusken', 16)],
+        'base': {
+            'hitpoints': 45,
+            'attack': 60,
+            'specialAttack': 70,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 45,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 255.01,
+        'name': 'Torchic (Egg)',
+        'type': [PokemonType.Fire, PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 62,
+        'catchRate': 45,
         'base': {
             'hitpoints': 45,
             'attack': 60,
@@ -13348,13 +13491,6 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
-        'evolutions': [
-            EnvironmentRestrictedLevelEvolution('Cave', 'Wormadam (Plant)', 'Wormadam (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Wormadam (Plant)', 'Wormadam (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Wormadam (Plant)', 'Wormadam (Trash)', 1, true),
-        ],
         'base': {
             'hitpoints': 60,
             'attack': 59,
@@ -13375,12 +13511,6 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
-        'evolutions': [
-            EnvironmentRestrictedLevelEvolution('Forest', 'Wormadam (Sand)', 'Wormadam (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Wormadam (Sand)', 'Wormadam (Trash)', 1, true),
-        ],
         'base': {
             'hitpoints': 60,
             'attack': 79,
@@ -13401,11 +13531,6 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 148,
         'catchRate': 45,
-        'evolutions': [
-            EnvironmentRestrictedLevelEvolution('Forest', 'Wormadam (Trash)', 'Wormadam (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Wormadam (Trash)', 'Wormadam (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Wormadam (Trash)', 'Wormadam (Sand)', 1, true),
-        ],
         'base': {
             'hitpoints': 60,
             'attack': 69,
@@ -13562,7 +13687,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
-        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Sunny], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, true)],
+        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Harsh_Sunlight], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, true)],
         'base': {
             'hitpoints': 70,
             'attack': 60,
@@ -14177,7 +14302,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell)],
+        'evolutions': [
+            StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell),
+            DummyEvolution('Munchlax', 'Gigantamax Snorlax'),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 135,
@@ -14190,17 +14318,15 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
-    },
-    {
+    },    {
         'id': 446.01,
         'name': 'Elf Munchlax',
-        'type': [PokemonType.Normal],
-        'eggCycles': 40,
+        'type': [PokemonType.Normal, PokemonType.Fairy],
+        'eggCycles': 32,
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell)],
-        'baby': true,
+        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
         'base': {
             'hitpoints': 135,
             'attack': 85,
@@ -19247,6 +19373,198 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
+        'evolutions': [
+            HeldItemLevelEvolution('Burn_Drive', 'Genesect', 'Genesect (Burn)', 70),
+            HeldItemLevelEvolution('Chill_Drive', 'Genesect', 'Genesect (Chill)', 70),
+            HeldItemLevelEvolution('Douse_Drive', 'Genesect', 'Genesect (Douse)', 70),
+            HeldItemLevelEvolution('Shock_Drive', 'Genesect', 'Genesect (Shock)', 70),
+        ],
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.01,
+        'name': 'Genesect (Burn)',
+        'type': [PokemonType.Bug, PokemonType.Fire],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.02,
+        'name': 'Genesect (Chill)',
+        'type': [PokemonType.Bug, PokemonType.Ice],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.03,
+        'name': 'Genesect (Douse)',
+        'type': [PokemonType.Bug, PokemonType.Water],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.04,
+        'name': 'Genesect (Shock)',
+        'type': [PokemonType.Bug, PokemonType.Electric],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.05,
+        'name': 'Genesect (High-Speed)',
+        'type': [PokemonType.Steel, PokemonType.Bug],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'evolutions': [
+            HeldItemLevelEvolution('Burn_Drive', 'Genesect (High-Speed)', 'Genesect (High-Speed Burn)', 70),
+            HeldItemLevelEvolution('Chill_Drive', 'Genesect (High-Speed)', 'Genesect (High-Speed Chill)', 70),
+            HeldItemLevelEvolution('Douse_Drive', 'Genesect (High-Speed)', 'Genesect (High-Speed Douse)', 70),
+            HeldItemLevelEvolution('Shock_Drive', 'Genesect (High-Speed)', 'Genesect (High-Speed Shock)', 70),
+        ],
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.06,
+        'name': 'Genesect (High-Speed Burn)',
+        'type': [PokemonType.Steel, PokemonType.Fire],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.07,
+        'name': 'Genesect (High-Speed Chill)',
+        'type': [PokemonType.Steel, PokemonType.Ice],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.08,
+        'name': 'Genesect (High-Speed Douse)',
+        'type': [PokemonType.Steel, PokemonType.Water],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 71,
+            'attack': 120,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 95,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 649.09,
+        'name': 'Genesect (High-Speed Shock)',
+        'type': [PokemonType.Steel, PokemonType.Electric],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
         'base': {
             'hitpoints': 71,
             'attack': 120,
@@ -23900,7 +24218,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [
             StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', StoneType.Solar_light),
             StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', StoneType.Lunar_light),
@@ -23925,7 +24243,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [StoneEvolution('Necrozma (Dusk Mane)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
@@ -23946,7 +24264,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [StoneEvolution('Necrozma (Dawn Wings)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
@@ -23967,7 +24285,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'base': {
             'hitpoints': 97,
             'attack': 167,
@@ -24961,9 +25279,29 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             StoneEvolution('Applin', 'Flapple', StoneType.Tart_apple),
             StoneEvolution('Applin', 'Appletun', StoneType.Sweet_apple),
+            StoneEvolution('Applin', 'Dipplin', StoneType.Syrupy_apple),
             DummyEvolution('Applin', 'Gigantamax Flapple'),
             DummyEvolution('Applin', 'Gigantamax Appletun'),
         ],
+        'levelType': LevelType.erratic,
+        'exp': 52,
+        'catchRate': 255,
+    },
+    {
+        'id': 840.01,
+        'name': 'Exposed Applin',
+        'type': [
+            PokemonType.Dragon,
+        ],
+        'base': {
+            'hitpoints': 40,
+            'attack': 40,
+            'specialAttack': 40,
+            'defense': 40,
+            'specialDefense': 40,
+            'speed': 40,
+        },
+        'eggCycles': 20,
         'levelType': LevelType.erratic,
         'exp': 52,
         'catchRate': 255,
@@ -25221,6 +25559,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
             LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
+            DummyEvolution('Toxel', 'Gigantamax Toxtricity'),
         ],
     },
     {
@@ -27494,6 +27833,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 187,
         'catchRate': 45,
+        'evolutions': [StoneEvolution('Duraludon', 'Archaludon', StoneType.Metal_alloy)],
     },
     {
         'id': 884.01,
@@ -27721,6 +28061,12 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 72,
         },
+        'evolutions': [
+            DummyEvolution('Kubfu', 'Urshifu (Single Strike)'),
+            DummyEvolution('Kubfu', 'Urshifu (Rapid Strike)'),
+            DummyEvolution('Kubfu', 'Gigantamax Urshifu (Single Strike)'),
+            DummyEvolution('Kubfu', 'Gigantamax Urshifu (Rapid Strike)'),
+        ],
         'catchRate': 3,
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -28079,6 +28425,23 @@ export const pokemonList = createPokemonArray(
             'defense': 105,
             'specialDefense': 80,
             'speed': 50,
+        },
+    },
+    {
+        'id': 901.01,
+        'name': 'Bloodmoon Ursaluna',
+        'catchRate': 20,
+        'type': [PokemonType.Ground, PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 275,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 113,
+            'attack': 70,
+            'specialAttack': 135,
+            'defense': 120,
+            'specialDefense': 65,
+            'speed': 52,
         },
     },
     {
@@ -28986,11 +29349,11 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 68,
         'catchRate': 150,
-        'evolutions': [LevelEvolution('Maschiff', 'Mabostiff', 30)],
+        'evolutions': [LevelEvolution('Maschiff', 'Mabosstiff', 30)],
     },
     {
         'id': 943,
-        'name': 'Mabostiff',
+        'name': 'Mabosstiff',
         'type': [PokemonType.Dark],
         'base': {
             'hitpoints': 80,
@@ -29160,11 +29523,11 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [StoneEvolution('Capsakid', 'Scovillian', StoneType.Fire_stone)],
+        'evolutions': [StoneEvolution('Capsakid', 'Scovillain', StoneType.Fire_stone)],
     },
     {
         'id': 952,
-        'name': 'Scovillian',
+        'name': 'Scovillain',
         'type': [PokemonType.Grass, PokemonType.Fire],
         'base': {
             'hitpoints': 65,
@@ -30477,6 +30840,482 @@ export const pokemonList = createPokemonArray(
             'type': Genders.Genderless,
         },
     },
+    {
+        'id': 1011,
+        'name': 'Dipplin',
+        'type': [PokemonType.Grass, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 80,
+            'attack': 80,
+            'specialAttack': 95,
+            'defense': 110,
+            'specialDefense': 80,
+            'speed': 40,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.erratic,
+        'exp': 170,
+        'catchRate': 45,
+        'evolutions': [DummyEvolution('Dipplin', 'Hydrapple')],
+    },
+    {
+        'id': 1012,
+        'name': 'Poltchageist',
+        'type': [PokemonType.Grass, PokemonType.Ghost],
+        'base': {
+            'hitpoints': 40,
+            'attack': 45,
+            'specialAttack': 74,
+            'defense': 45,
+            'specialDefense': 54,
+            'speed': 50,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 62,
+        'catchRate': 120,
+        'evolutions': [StoneEvolution('Poltchageist', 'Sinistcha', StoneType.Unremarkable_teacup)],
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1013,
+        'name': 'Sinistcha',
+        'type': [PokemonType.Grass, PokemonType.Ghost],
+        'base': {
+            'hitpoints': 71,
+            'attack': 60,
+            'specialAttack': 121,
+            'defense': 106,
+            'specialDefense': 80,
+            'speed': 70,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 178,
+        'catchRate': 60,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1014,
+        'name': 'Okidogi',
+        'type': [PokemonType.Poison, PokemonType.Fighting],
+        'base': {
+            'hitpoints': 88,
+            'attack': 128,
+            'specialAttack': 58,
+            'defense': 115,
+            'specialDefense': 86,
+            'speed': 80,
+        },
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 278,
+        'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Cornerstone_Mask' },
+        'gender': {
+            'femaleRatio': 0,
+        },
+    },
+    {
+        'id': 1015,
+        'name': 'Munkidori',
+        'type': [PokemonType.Poison, PokemonType.Psychic],
+        'base': {
+            'hitpoints': 88,
+            'attack': 75,
+            'specialAttack': 130,
+            'defense': 66,
+            'specialDefense': 90,
+            'speed': 106,
+        },
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 278,
+        'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Wellspring_Mask' },
+        'gender': {
+            'femaleRatio': 0,
+        },
+    },
+    {
+        'id': 1016,
+        'name': 'Fezandipiti',
+        'type': [PokemonType.Poison, PokemonType.Fairy],
+        'base': {
+            'hitpoints': 88,
+            'attack': 91,
+            'specialAttack': 70,
+            'defense': 82,
+            'specialDefense': 125,
+            'speed': 99,
+        },
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 278,
+        'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Hearthflame_Mask' },
+        'gender': {
+            'femaleRatio': 0,
+        },
+    },
+    {
+        'id': 1017,
+        'name': 'Ogerpon (Teal Mask)',
+        'type': [PokemonType.Grass],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 96,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'evolutions': [
+            HeldItemLevelEvolution('Wellspring_Mask', 'Ogerpon (Teal Mask)', 'Ogerpon (Wellspring Mask)', 70),
+            HeldItemLevelEvolution('Hearthflame_Mask', 'Ogerpon (Teal Mask)', 'Ogerpon (Hearthflame Mask)', 70),
+            HeldItemLevelEvolution('Cornerstone_Mask', 'Ogerpon (Teal Mask)', 'Ogerpon (Cornerstone Mask)', 70),
+            DummyEvolution('Ogerpon (Teal Mask)', 'Ogerpon (Terrastallized Teal Mask)'),
+        ],
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.01,
+        'name': 'Ogerpon (Wellspring Mask)',
+        'type': [PokemonType.Grass, PokemonType.Water],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 96,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'evolutions': [DummyEvolution('Ogerpon (Wellspring Mask)', 'Ogerpon (Terrastallized Wellspring Mask)')],
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.02,
+        'name': 'Ogerpon (Hearthflame Mask)',
+        'type': [PokemonType.Grass, PokemonType.Fire],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 96,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'evolutions': [DummyEvolution('Ogerpon (Hearthflame Mask)', 'Ogerpon (Terrastallized Hearthflame Mask)')],
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.03,
+        'name': 'Ogerpon (Cornerstone Mask)',
+        'type': [PokemonType.Grass, PokemonType.Rock],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 96,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'evolutions': [DummyEvolution('Ogerpon (Cornerstone Mask)', 'Ogerpon (Terrastallized Cornerstone Mask)')],
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.04,
+        'name': 'Ogerpon (Terrastallized Teal Mask)',
+        'type': [PokemonType.Grass],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 96,
+            'speed': 165,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.05,
+        'name': 'Ogerpon (Terrastallized Wellspring Mask)',
+        'type': [PokemonType.Grass, PokemonType.Water],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 144,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.06,
+        'name': 'Ogerpon (Terrastallized Hearthflame Mask)',
+        'type': [PokemonType.Grass, PokemonType.Fire],
+        'base': {
+            'hitpoints': 80,
+            'attack': 180,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 96,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.07,
+        'name': 'Ogerpon (Terrastallized Cornerstone Mask)',
+        'type': [PokemonType.Grass, PokemonType.Rock],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 126,
+            'specialDefense': 96,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1018,
+        'name': 'Archaludon',
+        'type': [PokemonType.Steel, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 90,
+            'attack': 105,
+            'specialAttack': 125,
+            'defense': 130,
+            'specialDefense': 65,
+            'speed': 85,
+        },
+        'eggCycles': 30,
+        'levelType': LevelType.mediumfast,
+        'exp': 404,
+        'catchRate': 10,
+    },
+    {
+        'id': 1019,
+        'name': 'Hydrapple',
+        'type': [PokemonType.Grass, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 106,
+            'attack': 80,
+            'specialAttack': 120,
+            'defense': 110,
+            'specialDefense': 80,
+            'speed': 44,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.erratic,
+        'exp': 404,
+        'catchRate': 10,
+    },
+    {
+        'id': 1020,
+        'name': 'Gouging Fire',
+        'type': [PokemonType.Fire, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 105,
+            'attack': 115,
+            'specialAttack': 65,
+            'defense': 121,
+            'specialDefense': 93,
+            'speed': 91,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 10,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1021,
+        'name': 'Raging Bolt',
+        'type': [PokemonType.Electric, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 125,
+            'attack': 73,
+            'specialAttack': 137,
+            'defense': 91,
+            'specialDefense': 89,
+            'speed': 75,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 10,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1022,
+        'name': 'Iron Boulder',
+        'type': [PokemonType.Rock, PokemonType.Psychic],
+        'base': {
+            'hitpoints': 90,
+            'attack': 120,
+            'specialAttack': 68,
+            'defense': 80,
+            'specialDefense': 108,
+            'speed': 124,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 10,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1023,
+        'name': 'Iron Crown',
+        'type': [PokemonType.Steel, PokemonType.Psychic],
+        'base': {
+            'hitpoints': 90,
+            'attack': 72,
+            'specialAttack': 122,
+            'defense': 100,
+            'specialDefense': 108,
+            'speed': 98,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 10,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1024,
+        'name': 'Terapagos',
+        'type': [PokemonType.Normal],
+        'base': {
+            'hitpoints': 90,
+            'attack': 65,
+            'specialAttack': 65,
+            'defense': 85,
+            'specialDefense': 85,
+            'speed': 60,
+        },
+        'eggCycles': 404,
+        'levelType': LevelType.slow,
+        'exp': 404,
+        'catchRate': 255,
+    },
+    {
+        'id': 1024.01,
+        'name': 'Terapagos (Terastal)',
+        'type': [PokemonType.Normal],
+        'base': {
+            'hitpoints': 95,
+            'attack': 95,
+            'specialAttack': 105,
+            'defense': 110,
+            'specialDefense': 110,
+            'speed': 85,
+        },
+        'eggCycles': 404,
+        'levelType': LevelType.slow,
+        'exp': 404,
+        'catchRate': 255,
+    },
+    {
+        'id': 1024.02,
+        'name': 'Terapagos (Stellar)',
+        'type': [PokemonType.Normal],
+        'base': {
+            'hitpoints': 160,
+            'attack': 105,
+            'specialAttack': 130,
+            'defense': 110,
+            'specialDefense': 110,
+            'speed': 85,
+        },
+        'eggCycles': 404,
+        'levelType': LevelType.slow,
+        'exp': 404,
+        'catchRate': 255,
+    },
+    {
+        'id': 1025,
+        'name': 'Pecharunt',
+        'type': [PokemonType.Poison, PokemonType.Ghost],
+        'base': {
+            'hitpoints': 88,
+            'attack': 88,
+            'specialAttack': 88,
+            'defense': 160,
+            'specialDefense': 88,
+            'speed': 88,
+        },
+        'eggCycles': 404,
+        'levelType': LevelType.slow,
+        'exp': 404,
+        'catchRate': 3,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
 
     // ???
     {
@@ -30596,7 +31435,6 @@ export const pokemonList = createPokemonArray(
 export type PokemonList = typeof pokemonList;
 
 const pokemonNameIndex = {};
-const maxEggCycles = Math.max(...pokemonList.map((p) => p.eggCycles));
 
 // This needs to be initiallised before pokemonMap as some other things rely on it for data
 // Specifically Roamers not sure what else.
@@ -30610,12 +31448,12 @@ pokemonList.forEach((p) => {
     if ((p as PokemonListData).baby) {
         // Calculate prevolutions/baby pokemon
         // Egg steps should be lower than evolved form
+        const linemap = function (evoPokemon: PokemonNameType) {
+            pokemonBabyPrevolutionMap[evoPokemon] = p.name;
+            (pokemonList.find(_p => _p.name === evoPokemon) as PokemonListData).evolutions?.forEach(ee => linemap(ee.evolvedPokemon));
+        };
         (p as PokemonListData).evolutions?.forEach((evo) => {
-            pokemonBabyPrevolutionMap[evo.evolvedPokemon] = evo.basePokemon;
-            // Do another loop for adding last stage of evolution on "reproductive" pokemon
-            (pokemonList.find((_p) => _p.name === evo.evolvedPokemon) as PokemonListData).evolutions?.forEach((lastStage) => {
-                pokemonBabyPrevolutionMap[lastStage.evolvedPokemon] = lastStage.basePokemon;
-            });
+            linemap(evo.evolvedPokemon);
 
             const { eggCycles } = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
             p.eggCycles = Math.round(eggCycles * 0.8);
@@ -30624,7 +31462,11 @@ pokemonList.forEach((p) => {
         // Calculate evolutions egg steps to be higher than the base forms
         (p as PokemonListData).evolutions?.forEach((evo) => {
             const poke = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
-            poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * (evo.ignoreECChange ? 1 : 1.5)));
+            if (evo.ignoreECChange) {
+                poke.eggCycles = Math.max(poke.eggCycles, p.eggCycles);
+            } else {
+                poke.eggCycles = Math.min(MAX_EGG_CYCLES, Math.round(p.eggCycles * 1.5));
+            }
 
         });
     }

@@ -120,6 +120,7 @@ import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
 import SeededDateSelectNRequirement from './requirements/SeededDateSelectNRequirement';
+import PokemonDefeatedSelectNRequirement from './requirements/PokemonDefeatedSelectNRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
@@ -150,7 +151,7 @@ import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import ClientRequirement from './requirements/ClientRequirement';
 import ContestWonRequirement from './requirements/ContestWonRequirement';
-import lazyLoad from './utilities/LazyLoader';
+import { lazyLoad, lazyLoadCallback } from './utilities/LazyLoader';
 import {
     beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
 } from './pokemons/evolutions/Base';
@@ -196,6 +197,7 @@ import SafariRocksRequirement from './requirements/SafariRocksRequirement';
 import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
+import ChristmasPresent from './items/ChristmasPresent';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -323,6 +325,7 @@ Object.assign(<any>window, {
     RouteKillRequirement,
     SeededDateRequirement,
     SeededDateSelectNRequirement,
+    PokemonDefeatedSelectNRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     ShadowPokemonRequirement,
@@ -357,6 +360,7 @@ Object.assign(<any>window, {
     ClientRequirement,
     ContestWonRequirement,
     lazyLoad,
+    lazyLoadCallback,
     LevelEvolution,
     StoneEvolution,
     EvoTrigger,
@@ -402,4 +406,5 @@ Object.assign(<any>window, {
     SafariItemsRequirement,
     SafariCatchRequirement,
     ItemRequirement,
+    ChristmasPresent,
 });

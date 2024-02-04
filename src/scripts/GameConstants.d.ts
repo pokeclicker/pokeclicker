@@ -59,6 +59,7 @@ namespace GameConstants {
     declare const PLATE_VALUE: number;
     declare const EGG_CYCLE_MULTIPLIER: number;
     declare const BREEDING_ATTACK_BONUS: number;
+    declare const BREEDING_SHINY_ATTACK_MULTIPLIER: number;
     declare const FARM_PLOT_WIDTH: number;
     declare const FARM_PLOT_HEIGHT: number;
     declare const BerryDistribution: number[];
@@ -119,6 +120,7 @@ namespace GameConstants {
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_BOSS_HELD_ITEM_MODIFIER: number;
     declare const HELD_ITEM_CHANCE: number;
+    declare const HELD_CANDY_ITEM_CHANCE: number;
     declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
     declare const GEM_UPGRADE_COST: number;
     declare const GEM_UPGRADE_STEP: number;
@@ -182,7 +184,9 @@ namespace GameConstants {
     declare const SAFARI_LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_WATER_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
+    declare const BUG_SAFARI_POKEMON: number;
     declare const FRIEND_SAFARI_POKEMON: number;
+    declare const BUG_SAFARI_SHINY_MODIFIER: number;
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
@@ -215,6 +219,7 @@ namespace GameConstants {
     declare const LIGHT_ITEM_CHANCE: number;
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
+    declare const CHRISTMAS_ITEM_CHANCE: number;
     declare enum GameState {
         loading,
         idle,
@@ -377,6 +382,9 @@ namespace GameConstants {
         'Malicious_armor',
         'Leaders_crest',
         'Gimmighoul_coin',
+        'Syrupy_apple',
+        'Unremarkable_teacup',
+        'Metal_alloy',
     }
     declare enum FossilPieceType {
         'None',
@@ -622,6 +630,8 @@ namespace GameConstants {
         'Pacifidlog Town',
         'Sootopolis City',
         'Ever Grande City',
+        'Pokemon HQ Lab',
+        'Sandgem Town',
         'Oreburgh City',
         'Floaroma Town',
         'Eterna City',
@@ -723,6 +733,8 @@ namespace GameConstants {
     }
     declare enum PaldeaSubRegions {
         Paldea,
+        Kitakami,
+        BlueberryAcademy,
     }
     declare enum FinalSubRegions {
         Final,

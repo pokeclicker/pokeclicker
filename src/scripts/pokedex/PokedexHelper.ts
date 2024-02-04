@@ -1,8 +1,22 @@
 import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
-    public static toggleStatisticShiny = ko.observable(true);
-    public static hideShinyImages = ko.observable(false);
+
+    public static initialize() {
+        Object.values(PokedexFilters).forEach((filter) => {
+            filter.value.subscribe(() => {
+                PokedexHelper.scrollToTop();
+                PokedexHelper.resetPokedexFlag.notifySubscribers();
+            });
+        });
+
+        modalUtils.observableState.pokedexModalObservable.subscribe((modalState) => {
+            // Resetting scrolling only works before modal is fully hidden
+            if (modalState === 'hide') {
+                PokedexHelper.scrollToTop();
+            }
+        });
+    }
 
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
@@ -193,11 +207,11 @@ class PokedexHelper {
                 return false;
             }
             // Only Base Pokémon without Mega Evolution
-            if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as PokemonListData).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
+            if (uniqueTransformation == 'mega-unobtained' && !PokemonHelper.hasUncaughtMegaEvolution(pokemon.name)) {
                 return false;
             }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+            if (uniqueTransformation == 'mega-evolution' && !PokemonHelper.isMegaEvolution(pokemon.name)) {
                 return false;
             }
 
@@ -219,10 +233,11 @@ class PokedexHelper {
     private static isPureType(pokemon: PokemonListData, type: (PokemonType | null)): boolean {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
-}
 
-$(document).ready(() => {
-    $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
-        PokedexHelper.toggleStatisticShiny(true);
-    });
-});
+    // Flag for the LazyLoader
+    public static resetPokedexFlag = ko.computed(() => modalUtils.observableState.pokedexModal === 'hidden');
+
+    private static scrollToTop() {
+        document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;
+    }
+}

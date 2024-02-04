@@ -6,7 +6,7 @@ class MultipleQuestsQuest extends Quest implements QuestInterface {
         super(questCompletedRequired ?? quests.length, reward);
 
         // Hide the quest ready to claim notifications
-        quests.forEach((q) => q.autoComplete = true);
+        quests.forEach((q) => q.asSubQuest(this));
         this.customDescription = description;
         this.focus = ko.pureComputed(() => {
             return quests.filter(q => q.isCompleted()).length;
@@ -26,5 +26,13 @@ class MultipleQuestsQuest extends Quest implements QuestInterface {
     deleteAutoCompleter() {
         this.quests.forEach(q => q.deleteAutoCompleter());
         super.deleteAutoCompleter();
+    }
+
+    deleteFocusSub(fromMainQuest = false): boolean {
+        if (super.deleteFocusSub(fromMainQuest)) {
+            this.quests.forEach(q => q.deleteFocusSub(true));
+            return true;
+        }
+        return false;
     }
 }

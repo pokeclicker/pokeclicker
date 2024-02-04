@@ -6,7 +6,7 @@ enum WeatherType {
     Snow,
     Hail,
     Blizzard,
-    Sunny,
+    Harsh_Sunlight,
     Sandstorm,
     Fog,
     Windy,
