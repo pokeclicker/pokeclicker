@@ -90,14 +90,42 @@ class DungeonMap {
         return this.board()[this.playerPosition().floor][this.playerPosition().y][this.playerPosition().x];
     }
 
-    public nearbyTiles(point: Point): DungeonTile[] {
+    public nearbyTiles(point: Point, avoidTiles = []): DungeonTile[] {
         const tiles = [];
         tiles.push(this.board()[point.floor][point.y - 1]?.[point.x]);
         tiles.push(this.board()[point.floor][point.y + 1]?.[point.x]);
         tiles.push(this.board()[point.floor][point.y]?.[point.x - 1]);
         tiles.push(this.board()[point.floor][point.y]?.[point.x + 1]);
-        return tiles.filter(t => t);
+        return tiles.filter(t => t && !avoidTiles.includes(t));
     }
+
+    public findShortestPath(start: Point, goal: Point, avoidTiles = []) {
+        const pathing = [start];
+        const fromPos = {};
+        fromPos[`${start.x},${start.y}`] = null;
+        while (pathing.length > 0) {
+            const current = pathing.shift();
+            if (current.x === goal.x && current.y === goal.y) {
+                break;
+            }
+            const neighbors = this.nearbyTiles(current, avoidTiles);
+            neighbors.forEach(neighbor => {
+                if (!fromPos[`${neighbor.position.x},${neighbor.position.y}`]) {
+                    pathing.push(neighbor.position);
+                    fromPos[`${neighbor.position.x},${neighbor.position.y}`] = current;
+                }
+            });
+        }
+
+        let current = goal;
+        const path = [];
+        while (current != undefined && (current.x !== start.x || current.y !== start.y)) {
+            path.unshift(current);
+            current = fromPos[`${current.x},${current.y}`];
+        }
+        return path;
+    }
+
 
     public hasAccessToTile(point: Point): boolean {
         // If player fighting/catching they cannot move right now

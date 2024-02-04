@@ -180,11 +180,12 @@ DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure ch
         if (nearbyChest) {
             // We found a chest, move to it
             DungeonRunner.map.moveToTile(nearbyChest.position);
-        } else {
-            // We just want to move randomly
-            const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
-            DungeonRunner.map.moveToTile(randomTile.position);
+            return;
         }
+
+        // We, didn't find what we were looking for, We just want to move randomly
+        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
 DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
@@ -198,11 +199,70 @@ DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
         const unexploredTile = unexploredTiles[Math.floor(Math.random() * unexploredTiles.length)];
 
         if (unexploredTile) {
-            // We found an unexplored, move to it
+            // We found an unexplored tile, move to it
             DungeonRunner.map.moveToTile(unexploredTile.position);
-        } else {
-            // We just want to move randomly
-            const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
-            DungeonRunner.map.moveToTile(randomTile.position);
+            return;
         }
+
+        // We, didn't find what we were looking for, We just want to move randomly
+        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        DungeonRunner.map.moveToTile(randomTile.position);
+    }));
+
+DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, loves to explore new areas!',
+    [[10, Currency.money],[4, Currency.dungeonToken]], [new Amount(20, Currency.diamond)],
+    1000,
+    () => {
+        // Find the path to the boss
+        const pos = DungeonRunner.map.playerPosition();
+
+        // Look for any unopened chest
+        const treasureTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => t.type() == GameConstants.DungeonTile.chest);
+        if (treasureTiles.length) {
+            const path = treasureTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position)).sort((a, b) => a.length - b.length)[0];
+            if (path?.length) {
+                // We found some treasure, move to it
+                DungeonRunner.map.moveToTile(path[0]);
+                return;
+            }
+        }
+
+        // Look for any unexplored areas
+        const unexploredTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => !t.isVisited);
+        if (unexploredTiles.length) {
+            const path = unexploredTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position)).sort((a, b) => a.length - b.length)[0];
+            if (path?.length) {
+                // We found some treasure, move to it
+                DungeonRunner.map.moveToTile(path[0]);
+                return;
+            }
+        }
+
+        // We, didn't find what we were looking for, We just want to move randomly
+        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
+        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        DungeonRunner.map.moveToTile(randomTile.position);
+    }));
+
+DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss!',
+    [[20, Currency.money],[10, Currency.dungeonToken]], [new Amount(100, Currency.diamond)],
+    1000,
+    () => {
+        // Find the path to the boss
+        const pos = DungeonRunner.map.playerPosition();
+        const bossPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.boss)?.position;
+        const ladderPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.ladder)?.position;
+
+        const path = DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition || pos);
+
+        if (path?.length) {
+            // We found the boss or a ladder, move to it
+            DungeonRunner.map.moveToTile(path[0]);
+            return;
+        }
+
+        // We, didn't find what we were looking for, We just want to move randomly
+        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
+        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        DungeonRunner.map.moveToTile(randomTile.position);
     }));
