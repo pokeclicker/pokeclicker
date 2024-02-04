@@ -157,10 +157,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pidgey', 'Ekans', 'Sandshrew', 'Vulpix', 'Meowth', 'Growlithe'],
     }),
-    [
-        new RouteKillRequirement(10, Region.kanto, 10),
-        new ClearDungeonRequirement(1, getDungeonIndex('Rock Tunnel')),
-    ],
+    [new ClearDungeonRequirement(1, getDungeonIndex('Rock Tunnel'))],
     10.1,
     KantoSubRegions.Kanto,
 ));
