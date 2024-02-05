@@ -1632,14 +1632,14 @@ export const HisuiDungeons = [
 ];
 
 export const PaldeaDungeons = [
-    'Inlet Grotto', // 212
+    'Inlet Grotto', // 213
     'Glaseado Mountain',
     'Grasswither Shrine',
     'Icerend Shrine',
     'Groundblight Shrine',
     'Firescourge Shrine',
     'Area Zero',
-    'Area Zero Depths', // 219
+    'Area Zero Depths', // 220
 ];
 
 export const RegionDungeons = [
