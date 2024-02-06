@@ -346,7 +346,7 @@ class FarmHands {
     }
 
     public tick() {
-        // run game tick for all hired farmhands
+        // run game tick for all farmhands
         FarmHands.list.forEach(f => f.tick());
     }
 
