@@ -21,7 +21,7 @@ class WandererPokemon {
             return false;
         }
         this.distractTime += GameConstants.WANDER_TICK;
-        if (this.distractTime >= 2 * GameConstants.MINUTE) {
+        if (this.distractTime >= 5 * GameConstants.MINUTE) {
             return true;
         }
         return false;
