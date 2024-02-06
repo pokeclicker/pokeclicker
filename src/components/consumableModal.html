@@ -68,7 +68,7 @@
                           <th class="text-left bg-dark align-middle">Attack</th>
                       </tr>
                   </thead>
-                  <tbody data-bind="foreach: lazyLoad('lazyConsumableList', $element, PartyController.getConsumableSortedList, { reset: modalUtils.observableState.consumableModalObservable })">
+                  <tbody data-bind="foreach: lazyLoad('lazyConsumableList', $element, PartyController.getConsumableSortedList, { reset: modalUtils.observableState.consumableModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyConsumableList'); }">
                     <tr class="clickable" data-bind="click: () => { $data.useConsumable(ConsumableController.currentlySelected(), ConsumableController.getMultiplier()); }">
                       <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.calculateAttack(true).toLocaleString('en-US')">Attack</td>

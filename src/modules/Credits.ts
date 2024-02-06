@@ -1233,7 +1233,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Ulithium_Dragon',
         link: 'https://www.pokecommunity.com/showthread.php?t=397580',
-        image: 'https://www.pokecommunity.com/customavatars/avatar531836_2.gif',
+        image: 'https://data.pokecommunity.com/avatars/o/531/531836.jpg',
         resources: [
             'Ultra Wormhole',
         ],
@@ -1342,7 +1342,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1436,
+            1439,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -1398,7 +1398,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            141,
+            143,
         ],
         name: 'CypherX',
         link: 'https://github.com/CypherX',
@@ -1430,7 +1430,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            71,
+            73,
         ],
         name: 'RegisCoaxans',
         link: 'https://github.com/RegisCoaxans',
@@ -1454,7 +1454,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            55,
+            57,
         ],
         name: 'EatPant2nd',
         link: 'https://github.com/EatPant2nd',
@@ -1478,7 +1478,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            39,
+            40,
         ],
         name: 'Crobat4',
         link: 'https://github.com/Crobat4',
@@ -1507,6 +1507,14 @@ export const CodeCredits: Credit[] = [
         name: 'apple096',
         link: 'https://github.com/apple096',
         image: 'https://avatars.githubusercontent.com/u/62083669?v=4',
+    },
+    {
+        resources: [
+            31,
+        ],
+        name: 'umbralOptimatum',
+        link: 'https://github.com/umbralOptimatum',
+        image: 'https://avatars.githubusercontent.com/u/12092270?v=4',
     },
     {
         resources: [
@@ -1539,14 +1547,6 @@ export const CodeCredits: Credit[] = [
         name: 'amative1',
         link: 'https://github.com/amative1',
         image: 'https://avatars.githubusercontent.com/u/14666630?v=4',
-    },
-    {
-        resources: [
-            26,
-        ],
-        name: 'umbralOptimatum',
-        link: 'https://github.com/umbralOptimatum',
-        image: 'https://avatars.githubusercontent.com/u/12092270?v=4',
     },
     {
         resources: [
@@ -1646,7 +1646,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            11,
+            12,
         ],
         name: 'RedzepR',
         link: 'https://github.com/RedzepR',
@@ -1768,6 +1768,14 @@ export const CodeCredits: Credit[] = [
         resources: [
             6,
         ],
+        name: 'wormania',
+        link: 'https://github.com/wormania',
+        image: 'https://avatars.githubusercontent.com/u/16630222?v=4',
+    },
+    {
+        resources: [
+            6,
+        ],
         name: 'arduousFrivolity',
         link: 'https://github.com/arduousFrivolity',
         image: 'https://avatars.githubusercontent.com/u/112739771?v=4',
@@ -1811,14 +1819,6 @@ export const CodeCredits: Credit[] = [
         name: 'pjeanjean',
         link: 'https://github.com/pjeanjean',
         image: 'https://avatars.githubusercontent.com/u/7363343?v=4',
-    },
-    {
-        resources: [
-            4,
-        ],
-        name: 'wormania',
-        link: 'https://github.com/wormania',
-        image: 'https://avatars.githubusercontent.com/u/16630222?v=4',
     },
     {
         resources: [
