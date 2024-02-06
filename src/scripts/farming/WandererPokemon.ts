@@ -2,7 +2,6 @@ class WandererPokemon {
     public farmPoint: number;
     public catching: KnockoutObservable<boolean>;
     public pokeball: KnockoutObservable<GameConstants.Pokeball>;
-    public rightSide: boolean;
     public frightened: boolean;
 
     constructor(
@@ -14,7 +13,6 @@ class WandererPokemon {
     ) {
         this.catching = ko.observable(false);
         this.pokeball = ko.observable(GameConstants.Pokeball.None);
-        this.rightSide = Rand.boolean();
     }
 
     // If distracted for long enough, flees

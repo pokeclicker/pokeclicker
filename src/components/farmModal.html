@@ -171,12 +171,12 @@
                                             <!-- ko if: $data.wanderer -->
                                                 <!-- ko ifnot: $data.wanderer.catching -->
                                                     <div class="pokemonSprite walkDown wandererSprite"
-                                                        data-bind="style: { backgroundImage: FarmController.getWandererStyle($data)}, css: {'rightSide': $data.wanderer.rightSide}"
+                                                        data-bind="style: { backgroundImage: FarmController.getWandererStyle($data)}"
                                                     ></div>
                                                 <!-- /ko -->
                                                 <!-- ko if: $data.wanderer.catching -->
                                                     <img src="" class="pokeball-animated wandererCapture" style="z-index: 1;"
-                                                        data-bind="css: {'rightSide': $data.wanderer.rightSide}, attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.wanderer.pokeball()] + '.svg'}"    
+                                                        data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.wanderer.pokeball()] + '.svg'}"    
                                                     />
                                                 <!-- /ko -->
                                             <!-- /ko -->
@@ -326,10 +326,7 @@
                                             <tr>
                                                 <td class="p-0">
                                                     <ul id="wanderPokemonList" class="list-inline" data-bind="foreach: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION)">
-                                                        <li class="list-inline-item">
-                                                            <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
-                                                        </li>
-
+                                                        <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                                                     </ul>
                                                 </td>
                                             </tr>

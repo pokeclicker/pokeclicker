@@ -2275,8 +2275,9 @@ class Farming implements Feature {
         }
         const wanderer = plot.wanderer;
         const pokemonData = PokemonHelper.getPokemonByName(wanderer.name);
+        const berry = App.game.farming.berryData[plot.wanderer.berry];
 
-        const farmPoints = Math.floor(plot.berryData.farmValue / (4 + plot.berryData.growthTime[PlotStage.Bloom] / 1800));
+        const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
         App.game.wallet.gainFarmPoints(farmPoints);
 
         const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
