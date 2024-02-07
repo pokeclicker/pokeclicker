@@ -163,33 +163,39 @@ DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way arou
     () => {
         // Get current position
         const pos = DungeonRunner.map.playerPosition();
-
-        // We just want to move randomly
         const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
-        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+
+        // We just want to move weighted randomly
+        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
+        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
 
-DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile next to them!',
+DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile near them!',
     [[5, Currency.money],[1, Currency.dungeonToken]], [new Amount(1, Currency.questPoint)],
     2000,
     () => {
         // Get current position
         const pos = DungeonRunner.map.playerPosition();
-
-        // Check if any tiles next to us contain a chest
         const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
-        const nearbyChest = nearbyTiles.find(t => t.type() == GameConstants.DungeonTile.chest);
 
-        if (nearbyChest) {
-            // We found a chest, move to it
-            DungeonRunner.map.moveToTile(nearbyChest.position);
-            return;
+        // Check if any tiles within 3 spaces contain a chest
+        const treasureTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => t.type() == GameConstants.DungeonTile.chest);
+        if (treasureTiles.length) {
+            const paths = treasureTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position)).filter(t => t.length <= 3);
+            if (paths?.length) {
+                const shortestPath = Math.min(...paths.map(p => p.length));
+                const path = Rand.fromArray(paths.filter(p => p.length == shortestPath));
+                // We found some treasure, move to it
+                DungeonRunner.map.moveToTile(path[0]);
+                return;
+            }
         }
 
-        // We, didn't find what we were looking for, We just want to move randomly
-        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        // We didn't find what we were looking for, We just want to move weighted randomly
+        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
+        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
@@ -199,20 +205,24 @@ DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
     () => {
         // Get current position
         const pos = DungeonRunner.map.playerPosition();
-
-        // Check if any tiles next to us are unexplored
         const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
-        const unexploredTiles = nearbyTiles.filter(t => !t.isVisited);
-        const unexploredTile = unexploredTiles[Math.floor(Math.random() * unexploredTiles.length)];
 
-        if (unexploredTile) {
-            // We found an unexplored tile, move to it
-            DungeonRunner.map.moveToTile(unexploredTile.position);
-            return;
+        // Check if any tiles within 3 spaces are unexplored
+        const unexploredTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => !t.isVisited);
+        if (unexploredTiles.length) {
+            const paths = unexploredTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position)).filter(t => t.length <= 3);
+            if (paths?.length) {
+                const shortestPath = Math.min(...paths.map(p => p.length));
+                const path = Rand.fromArray(paths.filter(p => p.length == shortestPath));
+                // We found an unexplored tile, move to it
+                DungeonRunner.map.moveToTile(path[0]);
+                return;
+            }
         }
 
-        // We, didn't find what we were looking for, We just want to move randomly
-        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        // We didn't find what we were looking for, We just want to move weighted randomly
+        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
+        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
