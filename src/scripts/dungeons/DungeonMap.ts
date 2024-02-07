@@ -90,16 +90,16 @@ class DungeonMap {
         return this.board()[this.playerPosition().floor][this.playerPosition().y][this.playerPosition().x];
     }
 
-    public nearbyTiles(point: Point, avoidTiles = []): DungeonTile[] {
-        const tiles = [];
+    public nearbyTiles(point: Point, avoidTiles: GameConstants.DungeonTile[] = []): DungeonTile[] {
+        const tiles: DungeonTile[] = [];
         tiles.push(this.board()[point.floor][point.y - 1]?.[point.x]);
         tiles.push(this.board()[point.floor][point.y + 1]?.[point.x]);
         tiles.push(this.board()[point.floor][point.y]?.[point.x - 1]);
         tiles.push(this.board()[point.floor][point.y]?.[point.x + 1]);
-        return tiles.filter(t => t && !avoidTiles.includes(t));
+        return tiles.filter(t => t && !avoidTiles.includes(t.type()));
     }
 
-    public findShortestPath(start: Point, goal: Point, avoidTiles = []) {
+    public findShortestPath(start: Point, goal: Point, avoidTiles: GameConstants.DungeonTile[] = []) {
         const pathing = [start];
         const fromPos = {};
         fromPos[`${start.x},${start.y}`] = null;
@@ -108,8 +108,10 @@ class DungeonMap {
             if (current.x === goal.x && current.y === goal.y) {
                 break;
             }
+
             const neighbors = this.nearbyTiles(current, avoidTiles);
-            neighbors.forEach(neighbor => {
+            const randNeighbors = Rand.shuffleArray(neighbors);
+            randNeighbors.forEach(neighbor => {
                 if (!fromPos[`${neighbor.position.x},${neighbor.position.y}`]) {
                     pathing.push(neighbor.position);
                     fromPos[`${neighbor.position.x},${neighbor.position.y}`] = current;

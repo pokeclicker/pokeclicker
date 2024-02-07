@@ -232,12 +232,15 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
     () => {
         // Get current position
         const pos = DungeonRunner.map.playerPosition();
+        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
 
         // Look for any unopened chest
         const treasureTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => t.type() == GameConstants.DungeonTile.chest);
         if (treasureTiles.length) {
-            const path = treasureTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position)).sort((a, b) => a.length - b.length)[0];
-            if (path?.length) {
+            const paths = treasureTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position));
+            if (paths?.length) {
+                const shortestPath = Math.min(...paths.map(p => p.length));
+                const path = Rand.fromArray(paths.filter(p => p.length == shortestPath));
                 // We found some treasure, move to it
                 DungeonRunner.map.moveToTile(path[0]);
                 return;
@@ -247,17 +250,19 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
         // Look for any unexplored areas
         const unexploredTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => !t.isVisited);
         if (unexploredTiles.length) {
-            const path = unexploredTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position)).sort((a, b) => a.length - b.length)[0];
-            if (path?.length) {
-                // We found some treasure, move to it
+            const paths = unexploredTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position));
+            if (paths?.length) {
+                const shortestPath = Math.min(...paths.map(p => p.length));
+                const path = Rand.fromArray(paths.filter(p => p.length == shortestPath));
+                // We found an unexplored tile, move to it
                 DungeonRunner.map.moveToTile(path[0]);
                 return;
             }
         }
 
-        // We, didn't find what we were looking for, We just want to move randomly
-        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
-        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        // We didn't find what we were looking for, We just want to move weighted randomly
+        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
+        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
@@ -267,11 +272,12 @@ DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss
     () => {
         // Get current position
         const pos = DungeonRunner.map.playerPosition();
+        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
 
         const bossPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.boss)?.position;
         const ladderPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.ladder)?.position;
 
-        const path = DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition || pos);
+        const path = bossPosition || ladderPosition ? DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition) : [];
 
         if (path?.length) {
             // We found the boss or a ladder, move to it
@@ -279,8 +285,8 @@ DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss
             return;
         }
 
-        // We, didn't find what we were looking for, We just want to move randomly
-        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
-        const randomTile = nearbyTiles[Math.floor(Math.random() * nearbyTiles.length)];
+        // We didn't find what we were looking for, We just want to move weighted randomly
+        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
+        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
