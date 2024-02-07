@@ -157,11 +157,23 @@ class DungeonGuides {
       // Start the dungeon
       DungeonRunner.initializeDungeon(player.town().dungeon);
   }
+
+  public static getRandomWeightedNearbyTile(nearbyTiles: DungeonTile[]): DungeonTile {
+      const weightedTiles = nearbyTiles.map(t => {
+          let weight = 0.5;
+          weight += !t.isVisited ? 1.5 : 0;
+          weight += [GameConstants.DungeonTile.enemy].includes(t.type()) ? 1 : 0;
+          weight += [GameConstants.DungeonTile.chest].includes(t.type()) ? 2 : 0;
+          weight += [GameConstants.DungeonTile.boss, GameConstants.DungeonTile.ladder].includes(t.type()) ? 4 : 0;
+          return weight;
+      });
+      return Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+  }
 }
 
 // Note: Trainer sprite is (seeded) randomly generated, or can be set manually, please make sure it kind of matches the name
 DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around a dungeon, but gives it their best try!',
-    [[5, Currency.money]], [],
+    [[4, Currency.money]], [],
     2000,
     () => {
         // Get current position
@@ -169,8 +181,7 @@ DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way arou
         const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
 
         // We just want to move weighted randomly
-        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
-        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+        const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
@@ -197,8 +208,7 @@ DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure ch
         }
 
         // We didn't find what we were looking for, We just want to move weighted randomly
-        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
-        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+        const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
@@ -224,8 +234,7 @@ DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
         }
 
         // We didn't find what we were looking for, We just want to move weighted randomly
-        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
-        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+        const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
@@ -264,8 +273,7 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
         }
 
         // We didn't find what we were looking for, We just want to move weighted randomly
-        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
-        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+        const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
@@ -294,8 +302,7 @@ DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoid
         }
 
         // We didn't find what we were looking for, We just want to move weighted randomly
-        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
-        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+        const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
@@ -319,7 +326,6 @@ DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss
         }
 
         // We didn't find what we were looking for, We just want to move weighted randomly
-        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
-        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+        const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
