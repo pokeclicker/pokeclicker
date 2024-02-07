@@ -28,8 +28,11 @@ class DungeonGuide {
               switch (DungeonRunner.map.currentTile().type()) {
                   case GameConstants.DungeonTile.chest:
                   case GameConstants.DungeonTile.boss:
+                      DungeonRunner.handleInteraction();
+                      break;
                   case GameConstants.DungeonTile.ladder:
                       DungeonRunner.handleInteraction();
+                      DungeonRunner.map.playerMoved(true);
                       break;
               }
           } catch (e) {
@@ -268,7 +271,7 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
 
 DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoids random encounters when possible.',
     [[20, Currency.money],[20, Currency.dungeonToken]], [new Amount(1, Currency.diamond)],
-    1000,
+    900,
     () => {
         // Get current position
         const pos = DungeonRunner.map.playerPosition();
@@ -298,7 +301,7 @@ DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoid
 
 DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss!',
     [[25, Currency.money],[25, Currency.dungeonToken]], [new Amount(2, Currency.diamond)],
-    1000,
+    800,
     () => {
         // Get current position
         const pos = DungeonRunner.map.playerPosition();
