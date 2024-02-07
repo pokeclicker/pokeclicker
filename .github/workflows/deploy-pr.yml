@@ -25,6 +25,7 @@ jobs:
       - name: Deploy to GH-Pages
         uses: rossjrw/pr-preview-action@v1
         id: preview_step
+        continue-on-error: true
         with:
           source-dir: 'build'
           preview-branch: 'master'
