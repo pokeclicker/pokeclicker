@@ -35,7 +35,7 @@
                                                 <td>Cost / Run</td>
                                             </tr>
                                             <tr>
-                                                <td data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost)">
+                                                <td data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
                                                     <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
                                                 </td>
                                             </tr>
@@ -147,7 +147,7 @@
                                         <td>Cost / Run</td>
                                     </tr>
                                     <tr>
-                                        <td data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost)">
+                                        <td data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
                                             <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
                                         </td>
                                     </tr>

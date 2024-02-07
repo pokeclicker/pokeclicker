@@ -61,12 +61,12 @@ class DungeonGuide {
       return this.unlockRequirement?.isCompleted() ?? true;
   }
 
-  calcCost(clears, price): Amount[] {
+  calcCost(clears, price, region): Amount[] {
       const costs = [];
-      const temp = clears ** 0.975;
-      const discount = temp / clears;
+      let discount = clears ** 0.975;
+      discount /= clears;
       this.cost.forEach(([multiplier, currency]) => {
-          costs.push(new Amount(Math.round(price * clears * discount) * multiplier, currency));
+          costs.push(new Amount(Math.round((price * clears * discount) ** (1 - region / 100)) * multiplier, currency));
       });
       this.fixedCost.forEach((cost) => {
           const newCost = {...cost};
@@ -125,7 +125,7 @@ class DungeonGuides {
   }
 
   public static calcCost(): Amount[] {
-      return this.available()[this.selected()].calcCost(this.clears(), player.town().dungeon.tokenCost);
+      return this.available()[this.selected()].calcCost(this.clears(), player.town().dungeon.tokenCost, player.region);
   }
 
   public static canAfford(): boolean {
