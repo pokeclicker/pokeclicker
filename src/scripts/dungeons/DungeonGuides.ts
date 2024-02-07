@@ -266,8 +266,38 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
         DungeonRunner.map.moveToTile(randomTile.position);
     }));
 
+DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoids random encounters when possible.',
+    [[20, Currency.money],[20, Currency.dungeonToken]], [new Amount(1, Currency.diamond)],
+    1000,
+    () => {
+        // Get current position
+        const pos = DungeonRunner.map.playerPosition();
+        const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
+
+        const bossPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.boss)?.position;
+        const ladderPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.ladder)?.position;
+
+        // Shortest path to the boss avoiding enemies
+        let path = bossPosition || ladderPosition ? DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition, [GameConstants.DungeonTile.enemy]) : [];
+        // If no path avoiding enemies, then any path will do
+        if (path?.length <= 1) {
+            path = bossPosition || ladderPosition ? DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition) : [];
+        }
+
+        if (path?.length) {
+            // We found the boss or a ladder, move to it
+            DungeonRunner.map.moveToTile(path[0]);
+            return;
+        }
+
+        // We didn't find what we were looking for, We just want to move weighted randomly
+        const weightedTiles = nearbyTiles.map(t => t.isVisited ? 1 : 2);
+        const randomTile = Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+        DungeonRunner.map.moveToTile(randomTile.position);
+    }));
+
 DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss!',
-    [[25, Currency.money],[25, Currency.dungeonToken]], [new Amount(1, Currency.diamond)],
+    [[25, Currency.money],[25, Currency.dungeonToken]], [new Amount(2, Currency.diamond)],
     1000,
     () => {
         // Get current position
