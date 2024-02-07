@@ -25,16 +25,13 @@ class MapHelper {
             return;
         }
         const routeData = Routes.getRoute(region, route);
-        let genNewEnemy = false;
-        if (route != Battle.route) {
-            genNewEnemy = true;
-        }
         if (this.accessToRoute(route, region)) {
             player.route(route);
-            player._subregion(routeData.subRegion != undefined ? routeData.subRegion : 0);
+            player._subregion(routeData.subRegion ?? 0);
             if (player.region != region) {
                 player.region = region;
             }
+            const genNewEnemy = route != Battle.route;
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
             }
@@ -71,7 +68,7 @@ class MapHelper {
     }
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked();
+        return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked() && this.accessToRegion(region);
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
@@ -198,7 +195,7 @@ class MapHelper {
         if (!town) {
             return false;
         }
-        return town.isUnlocked();
+        return town.isUnlocked() && MapHelper.accessToRegion(town.region);
     }
 
     public static moveToTown(townName: string) {
@@ -207,10 +204,11 @@ class MapHelper {
             player.route(0);
             Battle.route = 0;
             Battle.catching(false);
+            Battle.enemyPokemon(null);
             const town = TownList[townName];
             player.town(town);
+            player.region = town.region;
             player._subregion(town.subRegion);
-            Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
         } else {
@@ -249,19 +247,21 @@ class MapHelper {
         return player.highestRegion() > 0 && TownList[GameConstants.DockTowns[player.region]].isUnlocked();
     }
 
+    public static accessToRegion(region: GameConstants.Region) {
+        // Whether player can currently travel to locations in the given region
+        return region === player.region || (MapHelper.accessToShip() && region <= player.highestRegion() && region <= GameConstants.MAX_AVAILABLE_REGION && region !== GameConstants.Region.none);
+    }
+
     // For moving between already-unlocked regions
     public static moveToRegion(region: GameConstants.Region) {
-        if (MapHelper.accessToShip()) {
-            if (region <= player.highestRegion() && region <= GameConstants.MAX_AVAILABLE_REGION && region !== GameConstants.Region.none) {
-                player.region = region;
-                player._subregion(0);
-                MapHelper.moveToTown(GameConstants.DockTowns[region]);
-            } else {
-                Notifier.notify({
-                    message: 'You don\'t have access to that location right now.',
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-            }
+        if (MapHelper.accessToRegion(region)) {
+            player.region = region;
+            MapHelper.moveToTown(GameConstants.DockTowns[region]);
+        } else {
+            Notifier.notify({
+                message: 'You don\'t have access to that location right now.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
@@ -280,12 +280,14 @@ class MapHelper {
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
-            // Gain queue slots based on highest region
-            App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
+            // Move regions
             GameHelper.incrementObservable(player.highestRegion);
             player.region = player.highestRegion();
-            player.highestSubRegion(0);
-            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
+            const startingTown = GameConstants.StartingTowns[player.highestRegion()];
+            player.highestSubRegion(TownList[startingTown].subRegion ?? 0);
+            MapHelper.moveToTown(startingTown);
+            // Gain queue slots based on the completed region
+            App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion() - 1));
             // Track when users move region and how long it took in seconds
             LogEvent('new region', 'new region',
                 GameConstants.Region[player.highestRegion()],
