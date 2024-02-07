@@ -117,3 +117,65 @@
         </div>
     </div>
 </div>
+
+<div class="modal noselect fade" id="dungeonGuidesDungeonModal" tabindex="-1" role="dialog" aria-labelledby="dungeonGuidesDungeonModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Dungeon Guide</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <!-- ko if: player.town() instanceof DungeonTown && DungeonGuides.hired() -->
+                    <div class="card text-left col-12 p-0" data-bind="with: DungeonGuides.hired()">
+                        <h5 class="card-header">
+                            <knockout data-bind="text: $data.name">Name</knockout>
+                            <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                        </h5>
+                        <div class="card-body p-0">
+                            <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
+                                <tbody class="text-center">
+                                    <tr>
+                                        <td>Description</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="html: $data.description">Description</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cost / Run</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost)">
+                                            <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Movement Speed</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">Speed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attempts Remaining</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="text: DungeonGuides.clears()">Attempts</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-block btn-danger" data-bind="click: () => $data.fire()" data-dismiss="modal" aria-label="fire">Fire!</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
