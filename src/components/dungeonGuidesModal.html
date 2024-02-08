@@ -31,16 +31,23 @@
                                             Description
                                         </div>
                                         <div class="card-header p-1">
+                                            Cost / Run
+                                        </div>
+                                        <div class="card-body p-1 flex-grow-1" data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
+                                            <knockout class="w-100" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}">cost</knockout><br/>
+                                        </div>
+                                        <div class="card-header p-1">
                                             Movement Speed
                                         </div>
                                         <div class="card-body p-1 flex-grow-0" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">
                                             Speed
                                         </div>
                                         <div class="card-header p-1">
-                                            Cost / Run
+                                            Statistics
                                         </div>
-                                        <div class="card-body p-1 flex-grow-1" data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
-                                            <knockout class="w-100" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}">cost</knockout><br/>
+                                        <div class="card-body p-1 flex-grow-0">
+                                            <knockout data-bind="text: `Total Attempts: ${App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString()}`">Attempts</knockout><br/>
+                                            <knockout data-bind="text: `Total Clears: ${App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString()}`">Clears</knockout>
                                         </div>
                                     </div>
                                 </div>
@@ -130,13 +137,13 @@
                             <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
                                 <tbody class="text-center">
                                     <tr>
-                                        <td>Description</td>
+                                        <th>Description</th>
                                     </tr>
                                     <tr>
                                         <td data-bind="html: $data.description">Description</td>
                                     </tr>
                                     <tr>
-                                        <td>Cost / Run</td>
+                                        <th>Cost / Run</th>
                                     </tr>
                                     <tr>
                                         <td data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
@@ -144,13 +151,22 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Movement Speed</td>
+                                        <th>Movement Speed</th>
                                     </tr>
                                     <tr>
                                         <td data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">Speed</td>
                                     </tr>
                                     <tr>
-                                        <td>Attempts Remaining</td>
+                                        <th>Statistics</th>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="text: `Total Attempts: ${App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString()}`">Attempts</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="text: `Total Clears: ${App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString()}`">Clears</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Attempts Remaining</th>
                                     </tr>
                                     <tr>
                                         <td data-bind="text: DungeonGuides.clears()">Attempts</td>
