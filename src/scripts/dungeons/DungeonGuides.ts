@@ -97,6 +97,8 @@ class DungeonGuide {
       });
       // Stop running the dungeon if we still are
       clearInterval(this.intervalRunner);
+      // Hide modals
+      $('.modal.show').modal('hide');
       // Reset our clears
       DungeonGuides.clears(1);
       DungeonGuides.hired(null);
@@ -239,7 +241,7 @@ DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
     }));
 
 DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, loves to explore new areas!',
-    [[15, Currency.money],[10, Currency.dungeonToken]], [new Amount(1, Currency.diamond)],
+    [[15, Currency.money],[10, Currency.dungeonToken]], [new Amount(2, Currency.diamond)],
     1000,
     () => {
         // Get current position
@@ -278,7 +280,7 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
     }));
 
 DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoids random encounters when possible.',
-    [[20, Currency.money],[20, Currency.dungeonToken]], [new Amount(1, Currency.diamond)],
+    [[20, Currency.money],[20, Currency.dungeonToken]], [new Amount(5, Currency.diamond)],
     900,
     () => {
         // Get current position
@@ -307,7 +309,7 @@ DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoid
     }));
 
 DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss!',
-    [[25, Currency.money],[25, Currency.dungeonToken]], [new Amount(2, Currency.diamond)],
+    [[25, Currency.money],[25, Currency.dungeonToken]], [new Amount(10, Currency.diamond)],
     800,
     () => {
         // Get current position
