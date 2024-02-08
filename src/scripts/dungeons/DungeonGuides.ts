@@ -2,7 +2,6 @@ class DungeonGuide {
   public trainerSprite = 0;
   public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
   public tooltip: KnockoutComputed<string>;
-  public intervalRunner: NodeJS.Timeout;
   public ticks = 0;
 
   constructor(
@@ -20,7 +19,6 @@ class DungeonGuide {
   }
 
   start() {
-      clearInterval(this.intervalRunner);
       DungeonRunner.map.playerMoved(true);
       GameHelper.incrementObservable(DungeonGuides.clears, -1);
   }
@@ -50,7 +48,6 @@ class DungeonGuide {
   }
 
   end() {
-      clearInterval(this.intervalRunner);
       // Check if more clears already paid for
       if (DungeonGuides.clears() > 0) {
           // Need to reset the map
@@ -101,8 +98,6 @@ class DungeonGuide {
           timeout: 30 * GameConstants.SECOND,
           setting: NotificationConstants.NotificationSetting.Hatchery.hatchery_helper,
       });
-      // Stop running the dungeon if we still are
-      clearInterval(this.intervalRunner);
       // Hide modals
       $('.modal.show').modal('hide');
       // Reset our clears
