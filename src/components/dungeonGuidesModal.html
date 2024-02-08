@@ -16,8 +16,8 @@
                     <!-- Hiring Tab -->
                     <div id="dungeonGuidesModalHireTab" class="tab-pane fade active show">
                         <!-- ko if: player.town() instanceof DungeonTown -->
-                        <div class="row m-0 justify-content-center" data-bind="foreach: DungeonGuides.available()" style="max-width: 100%;">
-                            <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
+                        <div class="row m-0 justify-content-center d-flex" data-bind="foreach: DungeonGuides.available()" style="max-width: 100%;">
+                            <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0 align-items-stretch">
                                 <h5 class="card-header">
                                     <knockout data-bind="text: $data.name">Name</knockout>
                                     <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
@@ -46,14 +46,10 @@
                                                 <td data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">Speed</td>
                                             </tr>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td>
-                                                    <button class="btn btn-block btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($index())">Hire!</button>
-                                                </td>
-                                            </tr>
-                                        </tfoot>
                                     </table>
+                                </div>
+                                <div class="card-footer">
+                                    <butto class="btn btn-block btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($index())">Hire!</butto>
                                 </div>
                             </div>
                         </div>
