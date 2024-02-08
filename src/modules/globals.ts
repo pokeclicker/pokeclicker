@@ -28,6 +28,7 @@ import type AchievementCategory from './achievements/AchievementCategory';
 import type KeyItems from './keyItems/KeyItems';
 import type PokeballFilters from './pokeballs/PokeballFilters';
 import { QuestLineNameType } from './quests/QuestLineNameType';
+import type CssVariableSetting from './settings/CssVariableSetting';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -82,19 +83,24 @@ type TmpSaveType = {
 
 type TmpMapHelperType = {
     moveToRoute: (route: number, region: Region)=>void;
-    routeExist: (route: number, region: Region)=>boolean;
-    normalizeRoute: (route: number, region: Region)=>number;
     accessToRoute: (route: number, region: Region)=>boolean;
+    isRouteCurrentLocation: (route: number, region: Region)=>boolean;
+    validRoute: (route: number, region: Region)=>boolean;
+    normalizeRoute: (route: number, region: Region, skipIgnoredRoutes?: boolean)=>number;
+    moveToTown: (townName: string)=>void;
+    accessToTown: (townName: string)=>boolean;
+    isTownCurrentLocation: (townName: string)=>boolean;
+    moveToRegion: (region: Region)=>void;
+    accessToRegion: (region: Region)=>boolean;
+    accessToShip: ()=>boolean;
+    openShipModal: ()=>void;
+    ableToTravel: ()=>boolean;
+    travelToNextRegion: ()=>void;
+    getUsableFilters: ()=>CssVariableSetting[];
     getCurrentEnvironment: ()=>Environment;
     calculateBattleCssClass: ()=>string;
     calculateRouteCssClass: (route: number, region: Region)=>string;
     calculateTownCssClass: (townName: string)=>string;
-    accessToTown: (townName: string)=>boolean;
-    moveToTown: (townName: string)=>void;
-    validRoute: (route: number, region: Region)=>boolean;
-    openShipModal: ()=>void;
-    ableToTravel: ()=>boolean;
-    travelToNextRegion: ()=>void;
 };
 
 type TmpDungeonRunner = {

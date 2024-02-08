@@ -16,9 +16,7 @@ enum areaStatus {
 
 class MapHelper {
 
-    public static getUsableFilters(): CssVariableSetting[] {
-        return GameHelper.enumStrings(areaStatus).map(status => Settings.getSetting(`--${status}`)).filter(setting => setting.isUnlocked());
-    }
+    /* Route functions */
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (isNaN(route)) {
@@ -59,13 +57,160 @@ class MapHelper {
         }
     };
 
+    public static accessToRoute = function (route: number, region: GameConstants.Region) {
+        return !!(Routes.getRoute(region, route)?.isUnlocked() && this.accessToRegion(region));
+    };
+
+    public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
+        return player.route() == route && player.region == region;
+    }
+
+    public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
+        return !!Routes.getRoute(region, route);
+    }
+
     public static normalizeRoute(route: number, region: GameConstants.Region, skipIgnoredRoutes = true): number {
         return Routes.normalizedNumber(region, route, skipIgnoredRoutes);
     }
 
-    public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        return !!(Routes.getRoute(region, route)?.isUnlocked() && this.accessToRegion(region));
-    };
+    /* Town functions */
+
+    public static moveToTown(townName: string) {
+        const town = TownList[townName];
+        if (MapHelper.accessToTown(townName)) {
+            App.game.gameState = GameConstants.GameState.idle;
+            player.route(0);
+            Battle.route = 0;
+            Battle.catching(false);
+            Battle.enemyPokemon(null);
+            player.town(town);
+            player.region = town.region;
+            player._subregion(town.subRegion);
+            //this should happen last, so all the values all set beforehand
+            App.game.gameState = GameConstants.GameState.town;
+        } else {
+            if (!town) {
+                return Notifier.notify({
+                    message: `The town '${townName}'' does not exist.`,
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+            }
+
+            const reqsList = [];
+
+            town.requirements?.forEach(requirement => {
+                if (!requirement.isCompleted()) {
+                    reqsList.push(requirement.hint());
+                }
+            });
+
+            Notifier.notify({
+                message: `You don't have access to that location yet.\n<i>${reqsList.join('\n')}</i>`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
+    }
+
+    public static accessToTown(townName: string): boolean {
+        const town = TownList[townName];
+        if (!town) {
+            return false;
+        }
+        return town.isUnlocked() && MapHelper.accessToRegion(town.region);
+    }
+
+    public static isTownCurrentLocation(townName: string): boolean {
+        if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
+            return TemporaryBattleRunner.battleObservable().getTown().name == townName;
+        }
+        return !player.route() && player.town().name == townName;
+    }
+
+    /* Region functions */
+
+    /**
+     *  For moving between already-unlocked regions
+     */
+    public static moveToRegion(region: GameConstants.Region) {
+        if (MapHelper.accessToRegion(region)) {
+            player.region = region;
+            MapHelper.moveToTown(GameConstants.DockTowns[region]);
+        } else {
+            Notifier.notify({
+                message: 'You don\'t have access to that location right now.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
+    }
+
+    public static accessToRegion(region: GameConstants.Region) {
+        // Whether player can currently travel to locations in the given region
+        return region === player.region || (MapHelper.accessToShip() && region <= player.highestRegion() && region <= GameConstants.MAX_AVAILABLE_REGION && region !== GameConstants.Region.none);
+    }
+
+    public static accessToShip() {
+        return player.highestRegion() > 0 && TownList[GameConstants.DockTowns[player.region]].isUnlocked();
+    }
+
+    public static openShipModal() {
+        if (MapHelper.accessToShip()) {
+            $('#ShipModal').modal('show');
+        } else {
+            Notifier.notify({
+                message: `You cannot access this dock yet!${player.region > GameConstants.Region.kanto ? '\n<i>Progress further to return to previous regions!</i>' : ''}`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
+    }
+
+    public static ableToTravel() {
+        // If player already reached highest region, they can't move on
+        if (player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION) {
+            return false;
+        }
+
+        const challengeActive = App.game.challenges.list.requireCompletePokedex.active();
+        const nextStartingTownUnlocked = TownList[GameConstants.StartingTowns[player.highestRegion() + 1]]?.isUnlocked() ?? false;
+        const fullDex = AchievementHandler.findByName(`${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])} Master`).isCompleted();
+
+        return nextStartingTownUnlocked && (fullDex || !challengeActive);
+    }
+
+    /**
+     *  For traveling to the next region for the first time
+     */
+    public static travelToNextRegion() {
+        if (MapHelper.ableToTravel()) {
+            // Move regions
+            GameHelper.incrementObservable(player.highestRegion);
+            player.region = player.highestRegion();
+            const startingTown = GameConstants.StartingTowns[player.highestRegion()];
+            player.highestSubRegion(TownList[startingTown].subRegion ?? 0);
+            MapHelper.moveToTown(startingTown);
+            // Gain queue slots based on the completed region
+            App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion() - 1));
+            // Track when users move region and how long it took in seconds
+            LogEvent('new region', 'new region',
+                GameConstants.Region[player.highestRegion()],
+                App.game.statistics.secondsPlayed());
+            // Gather users attack when they moved regions
+            LogEvent('attack measurement', 'new region',
+                GameConstants.Region[player.highestRegion()],
+                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
+            // Update hatchery region filter to include new region if all previous regions selected
+            if (BreedingFilters.region.value() == (2 << player.highestRegion() - 1) - 1) {
+                BreedingFilters.region.value((2 << player.highestRegion()) - 1);
+                Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value());
+            }
+            $('#pickStarterModal').modal('show');
+        }
+    }
+
+    /* CSS functions */
+
+    public static getUsableFilters(): CssVariableSetting[] {
+        return GameHelper.enumStrings(areaStatus).map(status => Settings.getSetting(`--${status}`)).filter(setting => setting.isUnlocked());
+    }
 
     public static getCurrentEnvironment(): GameConstants.Environment {
         const area = player.route() ||
@@ -122,17 +267,6 @@ class MapHelper {
         return cls;
     }
 
-    public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
-        return player.route() == route && player.region == region;
-    }
-
-    public static isTownCurrentLocation(townName: string): boolean {
-        if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
-            return TemporaryBattleRunner.battleObservable().getTown().name == townName;
-        }
-        return !player.route() && player.town().name == townName;
-    }
-
     public static calculateTownCssClass(townName: string): string {
         // We don't want to spoil easter eggs with map colors
         if (TownList[townName]?.ignoreAreaStatus) {
@@ -184,127 +318,6 @@ class MapHelper {
             return areaStatus[importantState];
         }
         return areaStatus[areaStatus.completed];
-    }
-
-    public static accessToTown(townName: string): boolean {
-        const town = TownList[townName];
-        if (!town) {
-            return false;
-        }
-        return town.isUnlocked() && MapHelper.accessToRegion(town.region);
-    }
-
-    public static moveToTown(townName: string) {
-        const town = TownList[townName];
-        if (MapHelper.accessToTown(townName)) {
-            App.game.gameState = GameConstants.GameState.idle;
-            player.route(0);
-            Battle.route = 0;
-            Battle.catching(false);
-            Battle.enemyPokemon(null);
-            player.town(town);
-            player.region = town.region;
-            player._subregion(town.subRegion);
-            //this should happen last, so all the values all set beforehand
-            App.game.gameState = GameConstants.GameState.town;
-        } else {
-            if (!town) {
-                return Notifier.notify({
-                    message: `The town '${townName}'' does not exist.`,
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-            }
-
-            const reqsList = [];
-
-            town.requirements?.forEach(requirement => {
-                if (!requirement.isCompleted()) {
-                    reqsList.push(requirement.hint());
-                }
-            });
-
-            Notifier.notify({
-                message: `You don't have access to that location yet.\n<i>${reqsList.join('\n')}</i>`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
-        }
-    }
-
-    public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
-        return !!Routes.getRoute(region, route);
-    }
-
-    public static openShipModal() {
-        if (MapHelper.accessToShip()) {
-            $('#ShipModal').modal('show');
-        } else {
-            Notifier.notify({
-                message: `You cannot access this dock yet!${player.region > GameConstants.Region.kanto ? '\n<i>Progress further to return to previous regions!</i>' : ''}`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
-        }
-    }
-
-    public static accessToShip() {
-        return player.highestRegion() > 0 && TownList[GameConstants.DockTowns[player.region]].isUnlocked();
-    }
-
-    public static accessToRegion(region: GameConstants.Region) {
-        // Whether player can currently travel to locations in the given region
-        return region === player.region || (MapHelper.accessToShip() && region <= player.highestRegion() && region <= GameConstants.MAX_AVAILABLE_REGION && region !== GameConstants.Region.none);
-    }
-
-    // For moving between already-unlocked regions
-    public static moveToRegion(region: GameConstants.Region) {
-        if (MapHelper.accessToRegion(region)) {
-            player.region = region;
-            MapHelper.moveToTown(GameConstants.DockTowns[region]);
-        } else {
-            Notifier.notify({
-                message: 'You don\'t have access to that location right now.',
-                type: NotificationConstants.NotificationOption.warning,
-            });
-        }
-    }
-
-    public static ableToTravel() {
-        // If player already reached highest region, they can't move on
-        if (player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION) {
-            return false;
-        }
-
-        const challengeActive = App.game.challenges.list.requireCompletePokedex.active();
-        const nextStartingTownUnlocked = TownList[GameConstants.StartingTowns[player.highestRegion() + 1]]?.isUnlocked() ?? false;
-        const fullDex = AchievementHandler.findByName(`${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])} Master`).isCompleted();
-
-        return nextStartingTownUnlocked && (fullDex || !challengeActive);
-    }
-
-    public static travelToNextRegion() {
-        if (MapHelper.ableToTravel()) {
-            // Move regions
-            GameHelper.incrementObservable(player.highestRegion);
-            player.region = player.highestRegion();
-            const startingTown = GameConstants.StartingTowns[player.highestRegion()];
-            player.highestSubRegion(TownList[startingTown].subRegion ?? 0);
-            MapHelper.moveToTown(startingTown);
-            // Gain queue slots based on the completed region
-            App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion() - 1));
-            // Track when users move region and how long it took in seconds
-            LogEvent('new region', 'new region',
-                GameConstants.Region[player.highestRegion()],
-                App.game.statistics.secondsPlayed());
-            // Gather users attack when they moved regions
-            LogEvent('attack measurement', 'new region',
-                GameConstants.Region[player.highestRegion()],
-                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
-            // Update hatchery region filter to include new region if all previous regions selected
-            if (BreedingFilters.region.value() == (2 << player.highestRegion() - 1) - 1) {
-                BreedingFilters.region.value((2 << player.highestRegion()) - 1);
-                Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value());
-            }
-            $('#pickStarterModal').modal('show');
-        }
     }
 
 }
