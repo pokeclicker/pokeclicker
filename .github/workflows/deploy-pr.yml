@@ -1,7 +1,7 @@
 name: 🔂 PR Preview
 
 on:
-  pull_request:
+  pull_request_target:
     # when using teardown: 'true', add default event types + closed event type
     types: [opened, synchronize, reopened, closed]
 
