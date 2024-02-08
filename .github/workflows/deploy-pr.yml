@@ -1,0 +1,38 @@
+name: 🔂 PR Preview
+
+on:
+  pull_request_target:
+    # when using teardown: 'true', add default event types + closed event type
+    types: [opened, synchronize, reopened, closed]
+
+jobs:
+  preview:
+    environment: pokeclicker-development # link to the environment
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # allow to create/update PR comments
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      - run: npm ci
+      - run: npm run build
+      - run: rm -rf build/assets
+      - run: ln -s ../../assets build/assets
+      
+      - name: Deploy to GH-Pages
+        uses: rossjrw/pr-preview-action@v1
+        id: preview_step
+        continue-on-error: true
+        with:
+          source-dir: 'build'
+          preview-branch: 'master'
+          umbrella-dir: 'docs/preview'
+          custom-url: 'dev.pokeclicker.com'
+          deploy-repository: 'RedSparr0w/pokeclicker'
+          token: ${{ secrets.DEV_PAGE }}
+
+      - name: Preview URL
+        run: echo "url => ${{ steps.preview_step.outputs.deployment-url }}"
