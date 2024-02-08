@@ -3,6 +3,7 @@ class DungeonGuide {
   public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
   public tooltip: KnockoutComputed<string>;
   public ticks = 0;
+  public index = 0;
 
   constructor(
       public name: string,
@@ -21,6 +22,7 @@ class DungeonGuide {
   start() {
       DungeonRunner.map.playerMoved(true);
       GameHelper.incrementObservable(DungeonGuides.clears, -1);
+      GameHelper.incrementObservable(App.game.statistics.dungeonGuideAttempts[this.index]);
   }
 
   tick() {
@@ -85,7 +87,6 @@ class DungeonGuide {
           message: 'Thanks for hiring me,\nI won\'t let you down!',
           type: NotificationConstants.NotificationOption.success,
           timeout: 30 * GameConstants.SECOND,
-          setting: NotificationConstants.NotificationSetting.Hatchery.hatchery_helper,
       });
       DungeonGuides.hired(this);
   }
@@ -96,7 +97,6 @@ class DungeonGuide {
           message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
           type: NotificationConstants.NotificationOption.info,
           timeout: 30 * GameConstants.SECOND,
-          setting: NotificationConstants.NotificationSetting.Hatchery.hatchery_helper,
       });
       // Hide modals
       $('.modal.show').modal('hide');
@@ -109,8 +109,9 @@ class DungeonGuide {
 class DungeonGuides {
   public static list: DungeonGuide[] = [];
 
-  public static add(helper: DungeonGuide) {
-      this.list.push(helper);
+public static add(guide: DungeonGuide) {
+      guide.index = this.list.length;
+      this.list.push(guide);
   }
 
   public static available: KnockoutComputed<DungeonGuide[]> = ko.pureComputed(() => DungeonGuides.list.filter(f => f.isUnlocked()));
@@ -128,7 +129,7 @@ class DungeonGuides {
   }
 
   public static calcCost(): Amount[] {
-      return this.available()[this.selected()].calcCost(this.clears(), player.town().dungeon.tokenCost, player.region);
+      return this.list[this.selected()].calcCost(this.clears(), player.town().dungeon.tokenCost, player.region);
   }
 
   public static canAfford(): boolean {
@@ -140,7 +141,7 @@ class DungeonGuides {
   }
 
   public static hire(): void {
-      const guide = this.available()[this.selected()];
+      const guide = this.list[this.selected()];
       // Check player has enough currency
       if (!this.canAfford()) {
           Notifier.notify({

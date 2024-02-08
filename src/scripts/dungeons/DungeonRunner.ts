@@ -294,6 +294,9 @@ class DungeonRunner {
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()) {
                 DungeonRunner.dungeon.rewardFunction();
             }
+            if (DungeonGuides.hired()) {
+                GameHelper.incrementObservable(App.game.statistics.dungeonGuideClears[DungeonGuides.hired().index]);
+            }
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
             Notifier.notify({
