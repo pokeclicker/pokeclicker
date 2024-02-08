@@ -20,20 +20,12 @@
             <knockout class="position-relative d-inline-block">
                 <img data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id) }" src=""/>
                 <!-- ko if: pokemonMap[$data].id === 327 -->
-                    <!-- ko using: PokemonHelper.getSpindaMask(), as: 'spindaMaskSprite' -->
-                        <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
-                            <!-- ko using: PokemonHelper.generateSpindaSpots(positionName, +Settings.getSetting(`${positionName}X`).observableValue(), +Settings.getSetting(`${positionName}Y`).observableValue()), as: 'spot' -->
-                            <knockout data-bind="template: { 
-                                name: 'spindaSpotTemplate', 
-                                data: { 
-                                    'spotClass': `${positionName}Spot`, 
-                                    'spotPositions': spot,
-                                    'spindaMaskSprite': spindaMaskSprite
-                                } 
-                            }">Spinda Spot</knockout>
-                            <!-- /ko -->
-                        <!-- /ko -->
-                    <!-- /ko -->
+                    <knockout data-bind="template: { 
+                        name: 'spindaSpotTemplate', 
+                        data: { 
+                            'isBattle': false,
+                        } 
+                    }">Spinda Spot</knockout>
                 <!-- /ko -->
             </knockout>
             <div class="position-absolute" style="top: 0px; right: 15px;"

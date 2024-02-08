@@ -10,20 +10,12 @@
             <div class="modal-body p-0 pb-1">
                 <knockout class="position-relative d-inline-block">
                     <img data-bind="attr:{ src: PokemonHelper.getImage(327) }" src=""/>
-                    <!-- ko using: PokemonHelper.getSpindaMask(), as: 'spindaMaskSprite' -->
-                        <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
-                            <!-- ko using: PokemonHelper.generateSpindaSpots(positionName, +Settings.getSetting(`${positionName}X`).observableValue(), +Settings.getSetting(`${positionName}Y`).observableValue()), as: 'spot' -->
-                            <knockout data-bind="template: { 
-                                name: 'spindaSpotTemplate', 
-                                data: { 
-                                    'spotClass': `${positionName}Spot`, 
-                                    'spotPositions': spot,
-                                    'spindaMaskSprite': spindaMaskSprite
-                                } 
-                            }">Spinda Spot</knockout>
-                            <!-- /ko -->
-                        <!-- /ko -->
-                    <!-- /ko -->
+                    <knockout data-bind="template: { 
+                        name: 'spindaSpotTemplate', 
+                        data: { 
+                            'isBattle': false,
+                        } 
+                    }">Spinda Spot</knockout>
                 </knockout>
                 <div class="card">
                     <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">

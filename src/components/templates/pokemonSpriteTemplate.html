@@ -4,20 +4,13 @@
             data-bind="attr:{ src: PokemonHelper.getImage($data.pokemon.id, $data.pokemon.shiny, $data.pokemon.gender == GameConstants.BattlePokemonGender.Female) }"
             src=""/>
         <!-- ko if: $data.pokemon.id === 327 -->
-            <!-- ko using: PokemonHelper.getSpindaMask($data.pokemon.shiny), as: 'spindaMaskSprite' -->
-                <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
-                    <!-- ko using: PokemonHelper.generateSpindaSpots(positionName), as: 'spot' -->
-                    <knockout data-bind="template: { 
-                        name: 'spindaSpotTemplate', 
-                        data: { 
-                            'spotClass': `${positionName}Spot`, 
-                            'spotPositions': spot,
-                            'spindaMaskSprite': spindaMaskSprite
-                        } 
-                    }">Spinda Spot</knockout>
-                    <!-- /ko -->
-                <!-- /ko -->
-            <!-- /ko -->
+            <knockout data-bind="template: { 
+                name: 'spindaSpotTemplate', 
+                data: { 
+                    'shiny': $data.pokemon.shiny,
+                    'isBattle': true,
+                } 
+            }">Spinda Spot</knockout>
         <!-- /ko -->
     </knockout>
 </script>
