@@ -109,7 +109,7 @@ class DungeonGuide {
 class DungeonGuides {
   public static list: DungeonGuide[] = [];
 
-public static add(guide: DungeonGuide) {
+  public static add(guide: DungeonGuide) {
       guide.index = this.list.length;
       this.list.push(guide);
   }
