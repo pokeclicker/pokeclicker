@@ -3,6 +3,7 @@ class DungeonGuide {
   public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
   public tooltip: KnockoutComputed<string>;
   public intervalRunner: NodeJS.Timeout;
+  public ticks = 0;
 
   constructor(
       public name: string,
@@ -20,7 +21,14 @@ class DungeonGuide {
 
   start() {
       clearInterval(this.intervalRunner);
-      this.intervalRunner = setInterval(() => {
+      DungeonRunner.map.playerMoved(true);
+      GameHelper.incrementObservable(DungeonGuides.clears, -1);
+  }
+
+  tick() {
+      this.ticks += GameConstants.DUNGEON_TICK;
+      if (this.ticks >= this.interval) {
+          this.ticks = 0;
           try {
               this.walk();
 
@@ -38,9 +46,7 @@ class DungeonGuide {
           } catch (e) {
               console.error('Dungeon Guide failed to walk correctly:\n', e);
           }
-      }, this.interval);
-      DungeonRunner.map.playerMoved(true);
-      GameHelper.incrementObservable(DungeonGuides.clears, -1);
+      }
   }
 
   end() {

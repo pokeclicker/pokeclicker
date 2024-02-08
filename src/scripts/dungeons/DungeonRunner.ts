@@ -86,6 +86,10 @@ class DungeonRunner {
             }
             return;
         }
+
+        // Tick our dungeon guides
+        DungeonGuides.hired()?.tick();
+
         if (DungeonRunner.map.playerMoved()) {
             DungeonRunner.timeLeft(DungeonRunner.timeLeft() - GameConstants.DUNGEON_TICK);
             DungeonRunner.timeLeftPercentage(Math.floor(DungeonRunner.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
