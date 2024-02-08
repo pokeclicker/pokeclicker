@@ -37,7 +37,7 @@ class MapHelper {
             }
             App.game.gameState = GameConstants.GameState.fighting;
         } else {
-            if (!MapHelper.routeExist(route, region)) {
+            if (!routeData) {
                 return Notifier.notify({
                     message: `${Routes.getName(route, region)} does not exist in the ${GameConstants.Region[region]} region.`,
                     type: NotificationConstants.NotificationOption.danger,
@@ -59,16 +59,12 @@ class MapHelper {
         }
     };
 
-    public static routeExist(route: number, region: GameConstants.Region): boolean {
-        return !!Routes.getRoute(region, route);
-    }
-
     public static normalizeRoute(route: number, region: GameConstants.Region, skipIgnoredRoutes = true): number {
         return Routes.normalizedNumber(region, route, skipIgnoredRoutes);
     }
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked() && this.accessToRegion(region);
+        return !!(Routes.getRoute(region, route)?.isUnlocked() && this.accessToRegion(region));
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
@@ -199,20 +195,26 @@ class MapHelper {
     }
 
     public static moveToTown(townName: string) {
+        const town = TownList[townName];
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
             player.route(0);
             Battle.route = 0;
             Battle.catching(false);
             Battle.enemyPokemon(null);
-            const town = TownList[townName];
             player.town(town);
             player.region = town.region;
             player._subregion(town.subRegion);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
         } else {
-            const town = TownList[townName];
+            if (!town) {
+                return Notifier.notify({
+                    message: `The town '${townName}'' does not exist.`,
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+            }
+
             const reqsList = [];
 
             town.requirements?.forEach(requirement => {
