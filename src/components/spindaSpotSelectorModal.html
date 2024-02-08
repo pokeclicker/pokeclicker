@@ -1,0 +1,90 @@
+<div class="modal noselect fade" id="spindaSpotSelectorModal" tabindex="-1" role="dialog" aria-labelledby="spindaSpotSelectorModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title">Select Spinda Spots</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0 pb-1">
+                <knockout class="position-relative d-inline-block">
+                    <img data-bind="attr:{ src: PokemonHelper.getImage(327) }" src=""/>
+                    <!-- ko using: PokemonHelper.getSpindaMask(), as: 'spindaMaskSprite' -->
+                        <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
+                            <!-- ko using: PokemonHelper.generateSpindaSpots(positionName, +Settings.getSetting(`${positionName}X`).observableValue(), +Settings.getSetting(`${positionName}Y`).observableValue()), as: 'spot' -->
+                            <knockout data-bind="template: { 
+                                name: 'spindaSpotTemplate', 
+                                data: { 
+                                    'spotClass': `${positionName}Spot`, 
+                                    'spotPositions': spot,
+                                    'spindaMaskSprite': spindaMaskSprite
+                                } 
+                            }">Spinda Spot</knockout>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </knockout>
+                <div class="card">
+                    <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+                        <thead>
+                            <tr class="bg-secondary">
+                                <th>Spot Position</th>
+                                <th>X Axis</th>
+                                <th>Y Axis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
+                            <tr>
+                                <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(positionName)} Spot`">Spot</td>
+                                <!-- ko using: Settings.getSetting(`${positionName}X`), as: 'spotX' -->
+                                <td class="text-left align-middle">
+                                    <input type="range" class="custom-range"
+                                    data-bind="attr: { 
+                                        name: spotX.name, 
+                                        id: `setting-${spotX.name}`,
+                                        min: spotX.minValue, 
+                                        max: spotX.maxValue, 
+                                        step: spotX.step
+                                    },
+                                    value: $data.observableValue,
+                                    tooltip: {
+                                        title: $data.observableValue(),
+                                        trigger: 'hover',
+                                        boundary: 'window',
+                                        placement: 'top'
+                                    }"
+                                    oninput="(Settings.setSettingByName(this.name, this.value))">
+                                </td>
+                                <!-- /ko -->
+                                <!-- ko using: Settings.getSetting(`${positionName}Y`), as: 'spotY' -->
+                                <td class="text-left align-middle">
+                                    <input type="range" class="custom-range"
+                                    data-bind="attr: { 
+                                        name: spotY.name, 
+                                        id: `setting-${spotY.name}`,
+                                        min: spotY.minValue, 
+                                        max: spotY.maxValue, 
+                                        step: spotY.step
+                                    },
+                                    value: $data.observableValue,
+                                    tooltip: {
+                                        title: $data.observableValue(),
+                                        trigger: 'hover',
+                                        boundary: 'window',
+                                        placement: 'top'
+                                    }"
+                                    oninput="(Settings.setSettingByName(this.name, this.value))">
+                                </td>
+                                <!-- /ko -->
+                            </tr>
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  

@@ -1,0 +1,20 @@
+<script type="text/html" id="spindaSpotTemplate">
+    <div class="" data-bind="attr: { 
+        'class': `spots ${$data.spotClass}`, 
+        'style': 
+            `background-image: url(${$data.spindaMaskSprite}); 
+            -webkit-mask-position: ${$data.spotPositions.spotX}px ${$data.spotPositions.spotY}px;`
+    }"></div>
+</script>
+
+<!-- Example usage -->
+<!-- 
+    <knockout data-bind="template: { 
+        name: 'spindaSpotTemplate', 
+        data: { 
+            'spotClass': 'spot-top-left', 
+            'spotPositions': PokemonHelper.generateSpindaSpots(GameConstants.SpindaSpotsMinPosition.spotTopLeft),
+            'spindaMaskSprite': PokemonHelper.getSpindaMask($data.pokemon.shiny)
+        } 
+    }">Spinda Spot</knockout> 
+-->

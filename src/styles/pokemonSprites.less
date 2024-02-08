@@ -41,3 +41,39 @@ POKEMON ANIMATIONS
         100% { background-position: 133.333% 100.000%; }
     }
 }
+
+/* Spinda */
+.spots {
+    mask-repeat: no-repeat;
+    top: 0;
+    background-image: url('../assets/images/pokemon/327-mask.png');
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+.enemy-sprite .spots {
+    top: 40px;
+}
+
+  @media (max-width: 768px) {
+    .enemy-sprite .spots {
+      top: 20px;
+    }
+  }
+
+  .topLeftSpot {
+    mask-image: url('../assets/images/spinda-spots/spotTL.png');
+  }
+
+  .topRightSpot {
+    mask-image: url('../assets/images/spinda-spots/spotTR.png');
+  }
+
+  .bottomLeftSpot {
+    mask-image: url('../assets/images/spinda-spots/spotBL.png');
+  }
+
+  .bottomRightSpot {
+    mask-image: url('../assets/images/spinda-spots/spotBR.png');
+  }

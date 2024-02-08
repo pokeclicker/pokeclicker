@@ -16,6 +16,8 @@ import {
     hasGigantamaxForm,
     hasUncaughtGigantamaxForm,
     isGigantamaxForm,
+    generateSpindaSpots,
+    getSpindaMask,
 } from './PokemonHelper';
 
 // Tmp class for scripts/pokemons/PokemonHelper to extend
@@ -38,4 +40,6 @@ export default class TmpPokemonHelper {
     static hasGigantamaxForm = hasGigantamaxForm;
     static hasUncaughtGigantamaxForm = hasUncaughtGigantamaxForm;
     static isGigantamaxForm = isGigantamaxForm;
+    static generateSpindaSpots = generateSpindaSpots;
+    static getSpindaMask = getSpindaMask;
 }

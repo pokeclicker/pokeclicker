@@ -26,6 +26,7 @@ import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
+import SpindaSpots from './enums/SpindaSpots';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -226,6 +227,7 @@ Object.assign(<any>window, {
     QuestLineState,
     WeatherForecastStatus,
     SafariEnvironments,
+    SpindaSpots,
     BooleanSetting,
     RangeSetting,
     Setting,

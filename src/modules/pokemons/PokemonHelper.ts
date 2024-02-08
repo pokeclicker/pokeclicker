@@ -16,6 +16,7 @@ import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
+import SpindaSpots from '../enums/SpindaSpots';
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -105,6 +106,52 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
         }
     }
     src += `pokemon/${pokemonId}${genderString}.png`;
+    return src;
+}
+
+/**
+     * Generate Spinda spots in the sprite
+     * Spots info taken from:
+     * https://gatorshark.webs.com/SpindaDocumentation.htm
+     * https://github.com/magical/spinda/blob/master/spinda.py
+     * @param spindaSpot String enum
+     * @returns object
+     */
+export function generateSpindaSpots(spindaSpot: SpindaSpots, x = Math.random() * 16, y = Math.random() * 16) {
+    const originTop = 23;
+    const originLeft = 15;
+    const SpotsMinPosition = {
+        topLeft: { x: 0, y: 0 },
+        topRight: { x: 24, y: 2 },
+        bottomLeft: { x: 3, y: 18 },
+        bottomRight: { x: 15, y: 18 },
+    };
+    //const spotMaxX = SpotsMinPosition[spindaSpot].x + 16;
+    //const spotMaxY = SpotsMinPosition[spindaSpot].y + 16;
+    
+    const spotsPosition = {
+        spotX: originTop + Math.floor(x + SpotsMinPosition[spindaSpot].x),
+        spotY: originLeft + Math.floor(y + SpotsMinPosition[spindaSpot].y),
+    };
+    
+    return spotsPosition;
+}
+
+/**
+ * Determinates which Spinda mask should the game use (shiny or normal)
+ * @param shiny
+ * @returns string (image URL)
+ */
+export function getSpindaMask(shiny: boolean = undefined): string {
+    const spinda = App.game.party.getPokemon(327);
+    if (shiny === undefined) {
+        shiny = spinda.shiny && !spinda.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue();
+    }
+    let src = 'assets/images/';
+    if (shiny) {
+        src += 'shiny';
+    }
+    src += 'pokemon/327-mask.png';
     return src;
 }
 
