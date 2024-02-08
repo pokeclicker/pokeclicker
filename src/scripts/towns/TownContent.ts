@@ -92,7 +92,7 @@ class NextRegionTownContent extends TownContent {
     }
 
     public isVisible() {
-        return MapHelper.ableToTravel();
+        return MapHelper.canTravelToNextRegion();
     }
 
     public onclick(): void {

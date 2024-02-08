@@ -163,7 +163,7 @@ class MapHelper {
         }
     }
 
-    public static ableToTravel() {
+    public static canTravelToNextRegion() {
         // If player already reached highest region, they can't move on
         if (player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION) {
             return false;
@@ -180,7 +180,7 @@ class MapHelper {
      *  For traveling to the next region for the first time
      */
     public static travelToNextRegion() {
-        if (MapHelper.ableToTravel()) {
+        if (MapHelper.canTravelToNextRegion()) {
             // Move regions
             GameHelper.incrementObservable(player.highestRegion);
             player.region = player.highestRegion();

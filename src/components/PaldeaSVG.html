@@ -330,7 +330,7 @@
          , x: 94, y: 57
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Cabo Poco')}, attr:{ class: MapHelper.calculateTownCssClass('Cabo Poco') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
+         , visible:  "MapHelper.canTravelToNextRegion() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_empty.png"
          })
      %>
@@ -340,7 +340,7 @@
          , x: 94, y: 57
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Cabo Poco')}, attr:{ class: MapHelper.calculateTownCssClass('Cabo Poco') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
+         , visible:  "MapHelper.canTravelToNextRegion() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_pikachu.png"
          })
      %>
