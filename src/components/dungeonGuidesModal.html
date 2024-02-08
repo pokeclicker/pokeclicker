@@ -22,31 +22,27 @@
                                     <knockout data-bind="text: $data.name">Name</knockout>
                                     <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
                                 </h5>
-                                <div class="card-body p-0">
-                                    <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
-                                        <tbody class="text-center">
-                                            <tr>
-                                                <td>Description</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-bind="html: $data.description">Description</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cost / Run</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
-                                                    <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Movement Speed</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">Speed</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body p-0 text-center">
+                                    <div class="card h-100">
+                                        <div class="card-header p-1">
+                                            Description
+                                        </div>
+                                        <div class="card-body p-1 flex-grow-0" data-bind="html: $data.description">
+                                            Description
+                                        </div>
+                                        <div class="card-header p-1">
+                                            Movement Speed
+                                        </div>
+                                        <div class="card-body p-1 flex-grow-0" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">
+                                            Speed
+                                        </div>
+                                        <div class="card-header p-1">
+                                            Cost / Run
+                                        </div>
+                                        <div class="card-body p-1 flex-grow-1" data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
+                                            <knockout class="w-100" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}">cost</knockout><br/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <butto class="btn btn-block btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($index())">Hire!</butto>
