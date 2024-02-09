@@ -1,16 +1,17 @@
 <script type="text/html" id="spindaSpotTemplate">
-    <!-- ko using: { isBattle: $data.isBattle, isShiny: $data.shiny }, as: 'templateData' -->
+    <!-- ko using: { isBattle: $data.isBattle, isShiny: $data.shiny, size: $data.size }, as: 'templateData' -->
         <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
             <!-- ko using: { 
                 spotX: !templateData.isBattle ? +Settings.getSetting(`${positionName}X`).observableValue() : undefined, 
                 spotY: !templateData.isBattle ? +Settings.getSetting(`${positionName}Y`).observableValue() : undefined,
             }, as: 'spotSettings' -->
-                <!-- ko using: PokemonHelper.generateSpindaSpots(positionName, spotSettings.spotX, spotSettings.spotY), as: 'spotPositions' -->
+                <!-- ko using: PokemonHelper.generateSpindaSpots(positionName, spotSettings.spotX, spotSettings.spotY, templateData.size), as: 'spotPositions' -->
                     <div class="" data-bind="attr: { 
                         'class': `spots ${positionName}Spot`, 
                         'style': 
                             `background-image: url(${PokemonHelper.getSpindaMask(templateData.isShiny)}); 
-                            -webkit-mask-position: ${spotPositions.spotX}px ${spotPositions.spotY}px;`
+                            -webkit-mask-position: ${spotPositions.spotX}px ${spotPositions.spotY}px;
+                            mask-size: ${templateData.size || 96}px;`
                     }"></div>
                 <!-- /ko -->
             <!-- /ko -->

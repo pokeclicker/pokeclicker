@@ -117,7 +117,7 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
      * @param spindaSpot String enum
      * @returns object
      */
-export function generateSpindaSpots(spindaSpot: SpindaSpots, x = Math.random() * 16, y = Math.random() * 16) {
+export function generateSpindaSpots(spindaSpot: SpindaSpots, x = Math.random() * 16, y = Math.random() * 16, size = 96) {
     const originTop = 23;
     const originLeft = 15;
     const SpotsMinPosition = {
@@ -126,12 +126,13 @@ export function generateSpindaSpots(spindaSpot: SpindaSpots, x = Math.random() *
         bottomLeft: { x: 3, y: 18 },
         bottomRight: { x: 15, y: 18 },
     };
+    const percentage = 96 / size;
     //const spotMaxX = SpotsMinPosition[spindaSpot].x + 16;
     //const spotMaxY = SpotsMinPosition[spindaSpot].y + 16;
     
     const spotsPosition = {
-        spotX: originTop + Math.floor(x + SpotsMinPosition[spindaSpot].x),
-        spotY: originLeft + Math.floor(y + SpotsMinPosition[spindaSpot].y),
+        spotX: (originTop + Math.floor(x + SpotsMinPosition[spindaSpot].x)) / percentage,
+        spotY: (originLeft + Math.floor(y + SpotsMinPosition[spindaSpot].y)) / percentage,
     };
     
     return spotsPosition;
