@@ -969,7 +969,7 @@ TownList['Lavender Town'] = new Town(
     GameConstants.KantoSubRegions.Kanto,
     [LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Tunnel'))],
         npcs: [LavenderMrFuji, LavenderChanneler, LavenderShopper],
     }
 );
@@ -1261,7 +1261,7 @@ TownList['Rock Tunnel'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
     [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 9),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 10),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
