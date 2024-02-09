@@ -32,14 +32,14 @@
                       <img alt="lock" class="lock" src="assets/images/breeding/lock.svg">
                     </div>
                     <!-- /ko -->
-                    <!-- ko ifnot: $data.isEmpty() -->
-                    <div class="plotButton" data-bind="click: function(data, event){FarmController.plotClickMini($index(), event)},
-                        tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
-                        <img width="100%" height="100%" src=""
-                            style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
-                            data-bind="attr:{ src: FarmController.getImage($index())}">
+                    <div class="plotButton"
+                      data-bind="ifnot: $data.isEmpty(),
+                      click: function(data, event){FarmController.plotClickMini($index(), event)},
+                      tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
+                      <img width="100%" height="100%" src=""
+                          style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                          data-bind="attr:{ src: FarmController.getImage($index())}">
                     </div>
-                    <!-- /ko -->
                 </div>
             </div>
         </div>
