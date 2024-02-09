@@ -55,12 +55,24 @@
                     <tbody data-bind="foreach: lazyLoad('lazyPokemonList', $element, PartyController.getSortedList, { pageSize: 20 }), childrenComplete: () => { lazyLoadCallback('lazyPokemonList'); }">
                         <tr data-toggle="modal" href="#pokemonStatisticsModal" data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">
                             <td>
-                                <img
-                                    class="smallImage"
-                                    data-bind="attr: { src: PokemonHelper.getImage($data.id) }"
-                                    src=""
-                                    alt=""
-                                />
+                                <knockout class="position-relative d-inline-block">
+                                    <img
+                                        class="smallImage"
+                                        data-bind="attr: { src: PokemonHelper.getImage($data.id) }"
+                                        src=""
+                                        alt=""
+                                    />
+                                    <!-- ko if: $data.id === 327 -->
+                                        <knockout data-bind="template: { 
+                                            name: 'spindaSpotTemplate', 
+                                            data: { 
+                                                'isBattle': false,
+                                                'size': 56,
+                                                'className': 'smallImage',
+                                            } 
+                                        }">Spinda Spot</knockout>
+                                    <!-- /ko -->
+                                </knockout>
                             </td>
                             <td>
                                 <div>
