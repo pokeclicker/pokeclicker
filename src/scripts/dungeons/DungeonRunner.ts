@@ -24,14 +24,17 @@ class DungeonRunner {
         }
         DungeonRunner.dungeon = dungeon;
 
-        if (!DungeonRunner.hasEnoughTokens()) {
-            Notifier.notify({
-                message: 'You don\'t have enough Dungeon Tokens.',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
+        // Only charge the player if they aren't using a dungeon guide as they are charged when they start the dungeon
+        if (!DungeonGuides.hired()) {
+            if (!DungeonRunner.hasEnoughTokens()) {
+                Notifier.notify({
+                    message: 'You don\'t have enough Dungeon Tokens.',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+                return false;
+            }
+            App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
         }
-        App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
         // Reset any trainers/pokemon if there was one previously
         DungeonBattle.trainer(null);
         DungeonBattle.trainerPokemonIndex(0);

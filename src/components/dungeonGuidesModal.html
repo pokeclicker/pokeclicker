@@ -63,8 +63,8 @@
                     <div id="dungeonGuidesModalHelpTab" class="tab-pane fade col-10 offset-1 text-center">
                         <h4><u>Help</u></h4>
                         <p>Dungeon guides will automatically guide you through the dungeon, opening any chest they come accross, go down ladders they find and start boss battles.</p>
+                        <p>They do not guarantee a successful dungeon clear, and will charge regardless of the outcome.</p>
                         <p>You must pay an upfront cost for however many clears you want to run of the dungeon <span class="text-danger">(non refundable)</span>, they will however give you a discount the more runs you purchase in one go.</p>
-                        <p>Ensure you have sufficient Dungeon Tokens remaining to cover the cost of the dungeons themselves, as running out will bring your dungeon runs to an end early.</p>
                         <p>Each guide operates at their own speed, with some possessing a sense for specific dungeon tiles and others actively avoiding particular tiles whenever possible.</p>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="modal-body text-left p-2">
                 <!-- ko if: player.town() instanceof DungeonTown -->
-                <table class="table table-striped table-hover m-0">
+                <table class="table table-striped table-hover m-0 text-center">
                     <tbody>
                         <tr>
                             <td>Dungeon Attempts</td>
@@ -95,12 +95,21 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Total Cost</td>
+                            <td>Guide Cost</td>
                         </tr>
                         <tr>
                             <td data-bind="foreach: DungeonGuides.calcCost()">
                                 <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>Dungeon Cost</td>
+                        </tr>
+                        <tr data-bind="with: DungeonGuides.calcDungeonCost()">
+                            <td data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>ALL CHARGES NON REFUNDABLE</td>
                         </tr>
                     </tbody>
                     <tfoot>

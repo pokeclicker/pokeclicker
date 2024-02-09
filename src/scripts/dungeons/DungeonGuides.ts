@@ -132,12 +132,20 @@ class DungeonGuides {
       return this.list[this.selected()].calcCost(this.clears(), player.town().dungeon.tokenCost, player.region);
   }
 
-  public static canAfford(): boolean {
-      return this.calcCost().every((cost) => this.canAffordCurrency(cost));
+  public static calcDungeonCost(): Amount {
+      return new Amount(player.town().dungeon.tokenCost * this.clears(), Currency.dungeonToken);
   }
 
-  public static canAffordCurrency(cost: Amount): boolean {
-      return App.game.wallet.hasAmount(cost);
+  public static canAfford(): boolean {
+      const costs = {
+          [Currency.dungeonToken]: this.calcDungeonCost(),
+      };
+      this.calcCost().forEach((cost) => {
+          const tempAmount = costs[cost.currency] ?? new Amount(0, cost.currency);
+          tempAmount.amount += cost.amount;
+          costs[cost.currency] = tempAmount;
+      });
+      return Object.values(costs).every((cost) => App.game.wallet.hasAmount(cost));
   }
 
   public static hire(): void {
@@ -154,6 +162,7 @@ class DungeonGuides {
       }
       // Charge the player
       this.calcCost().forEach((cost) => App.game.wallet.loseAmount(cost));
+      App.game.wallet.loseAmount(this.calcDungeonCost());
       // Hide modals
       $('.modal.show').modal('hide');
       // Hire the guide
@@ -191,7 +200,7 @@ DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way arou
 
 
 DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile near them!',
-    [[5, Currency.money],[1, Currency.dungeonToken]], [new Amount(1, Currency.questPoint)],
+    [[4, Currency.money],[1, Currency.dungeonToken]], [],
     2000,
     () => {
         // Get current position
@@ -311,7 +320,7 @@ DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoid
     }));
 
 DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss!',
-    [[25, Currency.money],[25, Currency.dungeonToken]], [new Amount(10, Currency.diamond)],
+    [[20, Currency.money],[20, Currency.dungeonToken]], [new Amount(8, Currency.diamond)],
     800,
     () => {
         // Get current position
