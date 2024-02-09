@@ -1,4 +1,4 @@
-<div id="farmDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.farming.canAccess() && Settings.getSetting('showFarmModule').observableValue()">
+<div id="farmDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.farming.canAccess() && Settings.getSetting('showFarmModule').observableValue(), if: Settings.getSetting('showFarmModule').observableValue()">
     <div class="card-header p-0" data-toggle="collapse" href="#plotListCard">
         <span>Farm</span>
     </div>
@@ -22,7 +22,7 @@
             </button>
         </div>
     </div>
-    <div id="plotListCard" class="card-body p-0 px-1 show" data-bind="css: { ShiftPressed: GameController.keyHeld.Shift() }">
+    <div id="plotListCard" class="card-body p-0 px-2 show" data-bind="css: { ShiftPressed: GameController.keyHeld.Shift() }">
       <div class="row py-1" data-bind="foreach: App.game.farming.plotList">
         <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
         <div class="w-100"></div>
@@ -44,6 +44,7 @@
                       <img alt="lock" class="lock" src="assets/images/breeding/lock.svg">
                     </div>
                     <!-- /ko -->
+                    <!-- ko if: $data.isUnlocked -->
                     <div class="plotButton"
                       data-bind="ifnot: $data.isEmpty(),
                       click: function(data, event){FarmController.plotClickMini($index(), event)},
@@ -52,6 +53,7 @@
                           style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
                           data-bind="attr:{ src: FarmController.getImage($index())}">
                     </div>
+                    <!-- /ko -->
                 </div>
             </div>
         </div>
