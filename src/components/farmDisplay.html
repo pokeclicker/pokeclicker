@@ -5,8 +5,9 @@
     <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()">
         View
     </button>
-    <button class='btn btn-sm btn-primary' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()" data-bind="text: BerryType[FarmController.selectedBerry()]">
-        Berry
+    <button class='btn btn-sm btn-primary' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()">
+      <img src="" alt="selected berry image" height="28px" data-bind="attr:{ src: FarmController.getBerryImage(FarmController.selectedBerry()) }, css: {'berryLocked': !App.game.farming.unlockedBerries[FarmController.selectedBerry()]() }">
+      <knockout data-bind="text: App.game.farming.unlockedBerries[FarmController.selectedBerry()]() ? BerryType[FarmController.selectedBerry()] : '???'">Berry</knockout>
     </button>
     <div id="plotListCard" class="card-body p-0 show">
       <div class="row" data-bind="foreach: App.game.farming.plotList">
