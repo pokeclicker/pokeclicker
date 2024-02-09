@@ -425,14 +425,14 @@
 
                     <h4><u>Locking Plots</u></h4>
                     <p>You can lock specific plots by toggling on the lock with the lock button
-                    <br/>or using the hotkey (default: 'L').
-                    <br/>You can also press <i>Shift + Click</i> while having any tool/berry selected to safely lock a plot.</p>
+                    <br/>or using the hotkey <kbd data-bind="text: Settings.getSetting('hotkey.farm.togglePlotSafeLock').observableValue()"></kbd>.
+                    <br/>You can also press <kbd>Shift + Click</kbd> while having any tool/berry selected to safely lock a plot.</p>
 
                     <p>Locking a plot prevents you from planting, harvesting,<br/>or interacting with the plot in any way.</p>
 
                     <p><i>Locked plots ignore Harvest All, Plant All, or Mulch All buttons as well as Farm Hand activity.</i></p>
 
-                    <p>You can unlock a plot by using the toggle or pressing <i>Shift + Click</i> on the plot again.</p>
+                    <p>You can unlock a plot by using the toggle or pressing <kbd>Shift + Click</kbd> on the plot again.</p>
 
                     <h4><u>Trades</u></h4>
                     <p>Berries can be traded with Berry Masters in later regions for other useful items.</p>
@@ -449,6 +449,11 @@
                     <p>If they run out of energy, they won't do any work for that cycle, but will regenerate some energy instead. If there's no work to do currently, they will also regenerate some energy.</p>
                     <p>Efficiency refers to how many actions they can do per work cycle.</p>
                     <p><i>More Farm Hands can be unlocked through shops and unlocking unique berries</i></p>
+
+                    <h4><u>Farm Module</u></h4>
+                    <p>You can Harvest or Plant berries by clicking on the plots
+                    <br/>You can also use <kbd>Shift + Click</kbd> to safely lock/unlock a plot.</p>
+
                 </div>
 
                 <div id="farmHandsView" class="tab-pane fade">
