@@ -5,12 +5,13 @@
     <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()">
         View
     </button>
-    <button class='btn btn-sm btn-primary' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()">
-      <img src="" alt="selected berry image" height="28px" data-bind="attr:{ src: FarmController.getBerryImage(FarmController.selectedBerry()) }, css: {'berryLocked': !App.game.farming.unlockedBerries[FarmController.selectedBerry()]() }">
-      <knockout data-bind="text: App.game.farming.unlockedBerries[FarmController.selectedBerry()]() ? BerryType[FarmController.selectedBerry()] : '???'">Berry</knockout>
+    <button class='btn btn-sm btn-primary' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()"
+      data-bind="tooltip: {title: App.game.farming.unlockedBerries[FarmController.selectedBerry()]() ? BerryType[FarmController.selectedBerry()] : '???', trigger: 'hover', placement: 'right'}">
+      <img src="" alt="selected berry image" height="28px" data-bind="attr:{ src: FarmController.getBerryImage(FarmController.selectedBerry()) },
+        css: {'berryLocked': !App.game.farming.unlockedBerries[FarmController.selectedBerry()]() }">
     </button>
-    <div id="plotListCard" class="card-body p-0 show">
-      <div class="row" data-bind="foreach: App.game.farming.plotList">
+    <div id="plotListCard" class="card-body p-0 px-1 show">
+      <div class="row py-1" data-bind="foreach: App.game.farming.plotList">
         <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
         <div class="w-100"></div>
         <!-- /ko -->
