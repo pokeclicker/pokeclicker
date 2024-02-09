@@ -141,7 +141,7 @@
                         </div>
 
                         <div class="col-12 col-lg-8">
-                            <div id="plotList" class="row" data-bind="foreach: App.game.farming.plotList">
+                            <div id="plotList" class="row" data-bind="foreach: App.game.farming.plotList, css: { ShiftPressed: GameController.keyHeld.Shift() }">
                                 <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
                                 <div class="w-100"></div>
                                 <!-- /ko -->

@@ -10,7 +10,7 @@
       <img src="" alt="selected berry image" height="28px" data-bind="attr:{ src: FarmController.getBerryImage(FarmController.selectedBerry()) },
         css: {'berryLocked': !App.game.farming.unlockedBerries[FarmController.selectedBerry()]() }">
     </button>
-    <div id="plotListCard" class="card-body p-0 px-1 show">
+    <div id="plotListCard" class="card-body p-0 px-1 show" data-bind="css: { ShiftPressed: GameController.keyHeld.Shift() }">
       <div class="row py-1" data-bind="foreach: App.game.farming.plotList">
         <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
         <div class="w-100"></div>
