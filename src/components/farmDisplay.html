@@ -1,0 +1,70 @@
+<div id="farmDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.farming.canAccess">
+    <div class="card-header p-0" data-toggle="collapse" href="#plotListCard">
+        <span>Farm</span>
+    </div>
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()">
+        View
+    </button>
+    <button class='btn btn-sm btn-primary' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()" data-bind="text: BerryType[FarmController.selectedBerry()]">
+        Berry
+    </button>
+    <div id="plotListCard" class="card-body p-0 show">
+      <div class="row" data-bind="foreach: App.game.farming.plotList">
+        <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
+        <div class="w-100"></div>
+        <!-- /ko -->
+        <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
+            <div class="plot-content BerrySelected">
+                <div class="plotImage">
+                    <img style="width: 100%" src="assets/images/farm/soil.png"
+                        data-bind="class: FarmController.calcMulchClass($data)">
+                    <!-- ko if: $data.isSafeLocked -->
+                    <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
+                    <!-- /ko -->
+                    <!-- ko if: !$data.isUnlocked -->
+                    <div class="plotButton plotLockHover">
+                        <div>
+                            <span style="display: inline;">
+                                <img alt="Berry" style="height: 28px;"
+                                    data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.plotBerryCost($index()).type) },
+                                    css: {'berryLocked': !App.game.farming.unlockedBerries[App.game.farming.plotBerryCost($index()).type]() }"/>
+                                <span data-bind="text: GameConstants.formatNumber(App.game.farming.plotBerryCost($index()).amount)">0</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFPCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="plotButton"
+                        data-bind="ifnot: $data.isEmpty(),
+                        click: function(data, event){FarmController.plotClickMini($index(), event)},
+                        tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
+                        <img width="100%" height="100%" src=""
+                            style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                            data-bind="attr:{ src: FarmController.getImage($index())}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="card-footer p-0">
+      <button type="button" class="btn float-left"
+      data-bind="visible: FarmController.additionalInfoTooltip().length !== 0,
+      tooltip: {
+          title: FarmController.additionalInfoTooltip(),
+          trigger: 'hover',
+          placement:'top',
+          html: true,
+      }">ⓘ</button>
+    <knockout class="float-right pr-2 pt-1" data-bind="foreach: App.game.farming.farmHands.hired()">
+      <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
+      tooltip: {
+          title: $data.tooltip(),
+          trigger: 'hover',
+          placement:'top',
+          html: true,
+      }">
+    </div>
+</div>

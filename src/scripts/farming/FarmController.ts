@@ -95,6 +95,16 @@ class FarmController {
         }
     }
 
+    public static plotClickMini(index: number, event: MouseEvent) {
+        const plot: Plot = App.game.farming.plotList[index];
+
+        if (event.shiftKey) {
+            this.shiftTogglePlotSafeLock(plot, index);
+        } else {
+            this.handleClickActionsMini(plot, index);
+        }
+    }
+
     private static shiftTogglePlotSafeLock(plot: Plot, index: number) {
         if (!plot.isUnlocked) {
             return;
@@ -142,6 +152,20 @@ class FarmController {
         // Handle Mulches
         } else {
             App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
+        }
+    }
+
+    private static handleClickActionsMini(plot: Plot, index: number) {
+        // Unlocking Plot
+        if (!plot.isUnlocked) {
+            return;
+        }
+
+        // Handle Berries
+        if (plot.isEmpty()) {
+            App.game.farming.plant(index, this.selectedBerry());
+        } else {
+            App.game.farming.harvest(index);
         }
     }
 
