@@ -41,7 +41,7 @@ export default class Routes {
         return this.regionRoutes[normalizedRoute - 1].number;
     }
 
-    public static normalizedNumber(region: GameConstants.Region, route: number, skipIgnoredRoutes: boolean): number {
+    public static normalizeRoute(region: GameConstants.Region, route: number, skipIgnoredRoutes = true): number {
         if (region === GameConstants.Region.none) {
             return route;
         }
@@ -61,5 +61,9 @@ export default class Routes {
             }
         }
         return filteredRegionRoutes.findIndex((routeData) => routeData.region === region && routeData.number === route) + 1;
+    }
+
+    public static validRoute(route: number, region: GameConstants.Region): boolean {
+        return !!(this.getRoute(region, route));
     }
 }

@@ -49,7 +49,7 @@ class Player {
         this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this._region(), this._subregion()));
         this._route = ko.observable(savedPlayer._route);
         // Check that the route is valid, otherwise set it to the regions starting route (route 0 means they are in a town)
-        if (this._route() > 0 && !MapHelper.validRoute(this._route(), this._region())) {
+        if (this._route() > 0 && !Routes.validRoute(this._route(), this._region())) {
             this._route(GameConstants.StartingRoutes[this._region()]);
         }
         // Return player to last town or starter town if their town no longer exist for whatever reason

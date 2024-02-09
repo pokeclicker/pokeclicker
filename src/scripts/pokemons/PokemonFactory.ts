@@ -10,7 +10,7 @@ class PokemonFactory {
      * @returns {any}
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region, subRegion: SubRegion): BattlePokemon {
-        if (!MapHelper.validRoute(route, region)) {
+        if (!Routes.validRoute(route, region)) {
             return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route);
         }
         let name: PokemonNameType;
@@ -80,7 +80,7 @@ class PokemonFactory {
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
-        return Math.floor(20 * Math.pow(MapHelper.normalizeRoute(route, region),(1 / 2.25)));
+        return Math.floor(20 * Math.pow(Routes.normalizeRoute(region, route),(1 / 2.25)));
     }
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
@@ -88,13 +88,13 @@ class PokemonFactory {
         if (regionRoute?.routeHealth) {
             return regionRoute.routeHealth;
         }
-        route = MapHelper.normalizeRoute(route, region);
+        route = Routes.normalizeRoute(region, route);
         const health: number = Math.max(20, Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15) * (1 + region / 20))) || 20;
         return health;
     }
 
     public static routeMoney(route: number, region: GameConstants.Region, useRandomDeviation = true): number {
-        route = MapHelper.normalizeRoute(route, region);
+        route = Routes.normalizeRoute(region, route);
         //If it's not random, we take the mean value (truncated)
         const deviation = useRandomDeviation ? Rand.intBetween(-25, 25) : 12;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
@@ -103,7 +103,7 @@ class PokemonFactory {
     }
 
     public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
-        route = MapHelper.normalizeRoute(route, region);
+        route = Routes.normalizeRoute(region, route);
 
         const tokens = Math.max(1, 6 * Math.pow(route * 2 / (2.8 / (1 + region / 3)), 1.08));
 
@@ -246,7 +246,7 @@ class PokemonFactory {
     private static roamingEncounter(routeNum: number, region: GameConstants.Region, subRegion: SubRegion): boolean {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);
-        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
+        const routes = Routes.getRoutesByRegion(region).map(r => Routes.normalizeRoute(region, r.number));
 
         // Check if the dice rolls in their favor
         const encounter = PokemonFactory.roamingChance(Math.max(...routes), Math.min(...routes), route, region, subRegion);
@@ -266,7 +266,7 @@ class PokemonFactory {
 
     private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('roaming');
-        const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
+        const routeNum = Routes.normalizeRoute(region, curRoute?.number ?? 0);
         // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, RoamingPokemonList.findGroup(region, subRegion.id))()?.number == curRoute?.number;
         const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / ((increasedChance ? 3 : 1) * bonus);

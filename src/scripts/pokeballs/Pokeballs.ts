@@ -85,8 +85,8 @@ class Pokeballs implements Feature {
 
             new Pokeball(GameConstants.Pokeball.Nestball, () => {
                 const highestRegionRoutes = Routes.getRoutesByRegion(player.highestRegion());
-                const maxRoute = MapHelper.normalizeRoute(highestRegionRoutes[highestRegionRoutes.length - 1].number, player.highestRegion());
-                const currentRoute = MapHelper.normalizeRoute(player.route(),player.region);
+                const maxRoute = Routes.normalizeRoute(player.highestRegion(), highestRegionRoutes[highestRegionRoutes.length - 1].number);
+                const currentRoute = Routes.normalizeRoute(player.region, player.route());
 
                 // Increased rate for earlier routes, scales with regional progression
                 return Math.min(15,Math.max(1,player.highestRegion()) * Math.max(1,(maxRoute / currentRoute)));

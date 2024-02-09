@@ -139,7 +139,7 @@ class Game {
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
             let region: GameConstants.Region = player.region;
             let route: number = player.route() || GameConstants.StartingRoutes[region];
-            if (!MapHelper.validRoute(route, region)) {
+            if (!Routes.validRoute(route, region)) {
                 route = 1;
                 region = GameConstants.Region.kanto;
             }

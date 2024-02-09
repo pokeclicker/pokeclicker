@@ -65,14 +65,6 @@ class MapHelper {
         return player.route() == route && player.region == region;
     }
 
-    public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
-        return !!Routes.getRoute(region, route);
-    }
-
-    public static normalizeRoute(route: number, region: GameConstants.Region, skipIgnoredRoutes = true): number {
-        return Routes.normalizedNumber(region, route, skipIgnoredRoutes);
-    }
-
     /* Town functions */
 
     public static moveToTown(townName: string) {

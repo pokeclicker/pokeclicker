@@ -216,7 +216,7 @@ class Breeding implements Feature {
     }
 
     public progressEggsBattle(route: number, region: GameConstants.Region) {
-        route = MapHelper.normalizeRoute(route, region);
+        route = Routes.normalizeRoute(region, route);
         return this.progressEggs(+Math.sqrt(route).toFixed(2));
     }
 
