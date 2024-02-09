@@ -24,28 +24,22 @@
                     <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
                     <!-- /ko -->
                     <!-- ko if: !$data.isUnlocked -->
-                    <div class="plotButton plotLockHover">
-                        <div>
-                            <span style="display: inline;">
-                                <img alt="Berry" style="height: 28px;"
-                                    data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.plotBerryCost($index()).type) },
-                                    css: {'berryLocked': !App.game.farming.unlockedBerries[App.game.farming.plotBerryCost($index()).type]() }"/>
-                                <span data-bind="text: GameConstants.formatNumber(App.game.farming.plotBerryCost($index()).amount)">0</span>
-                            </span>
-                        </div>
-                        <div>
-                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFPCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
-                        </div>
+                    <div class="plotButton plotLockHover" data-bind="tooltip: {
+                      title: `Unlock this plot in the Farm`,
+                      placement: 'bottom',
+                      trigger: 'hover'
+                    }" onclick="FarmController.openFarmModal()">
+                      <img alt="lock" class="lock" src="assets/images/breeding/lock.svg">
                     </div>
                     <!-- /ko -->
-                    <div class="plotButton"
-                        data-bind="ifnot: $data.isEmpty(),
-                        click: function(data, event){FarmController.plotClickMini($index(), event)},
+                    <!-- ko ifnot: $data.isEmpty() -->
+                    <div class="plotButton" data-bind="click: function(data, event){FarmController.plotClickMini($index(), event)},
                         tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
                         <img width="100%" height="100%" src=""
                             style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
                             data-bind="attr:{ src: FarmController.getImage($index())}">
                     </div>
+                    <!-- /ko -->
                 </div>
             </div>
         </div>
