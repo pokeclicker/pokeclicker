@@ -718,27 +718,27 @@
         %>
 
         <%- include('templates/mapPOI',
-           { name: "S. S. Anne"
-           , x: 68, y: 8
-           , width: 8, height: 3
-           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
-          })
+            { name: "S. S. Anne"
+            , x: 68, y: 8
+            , width: 8, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
+            })
         %>
 
         <%- include('templates/mapPOI',
-           { name: "Farm"
-           , x: 52, y: 54
-           , width: 3, height: 3
-           , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
-           })
+            { name: "Farm"
+            , x: 52, y: 54
+            , width: 3, height: 3
+            , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+            })
         %>
 
         <%- include('templates/mapPOI',
-           { name: "Pokémon Day Care"
-           , x: 40, y: 4
-           , width: 4, height: 3.5
-           , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
-           })
+            { name: "Pokémon Day Care"
+            , x: 40, y: 4
+            , width: 4, height: 3.5
+            , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+            })
         %>
 
         <%- include('templates/mapOverlay',
@@ -769,177 +769,177 @@
             , visible:  "TemporaryBattleList['Hop 1'] && TemporaryBattleList['Hop 1'].isVisible()"
             , image: "assets/images/map/hop.png"
             })
-         %>
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Pokémon Trainer Hop"
-             , x: 59, y: 47.5
-             , width: 4, height: 4
-             , databind: "click: () => TemporaryBattleList['Hop 2'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Hop 2'] && TemporaryBattleList['Hop 2'].isVisible()"
-             , image: "assets/images/map/hop.png"
-             })
-          %>
-
-          <%- include('templates/mapOverlay',
-              { name: "Pokémon Trainer Hop"
-              , x: 36, y: 16
-              , width: 4, height: 4
-              , databind: "click: () => TemporaryBattleList['Hop 3'].protectedOnclick()"
-              , visible:  "TemporaryBattleList['Hop 3'] && TemporaryBattleList['Hop 3'].isVisible()"
-              , image: "assets/images/map/hop.png"
-              })
-           %>
-
-           <%- include('templates/mapOverlay',
-               { name: "Pokémon Trainer Hop"
-               , x: 52, y: 6
-               , width: 4, height: 4
-               , databind: "click: () => TemporaryBattleList['Hop 4'].protectedOnclick()"
-               , visible:  "TemporaryBattleList['Hop 4'] && TemporaryBattleList['Hop 4'].isVisible()"
-               , image: "assets/images/map/hop.png"
-               })
-            %>
-
-            <%- include('templates/mapOverlay',
-                { name: "Galarian Zapdos"
-                , x: 46, y: 24
-                , width: 4, height: 3
-                , databind: "click: () => TemporaryBattleList['Galarian Zapdos 1'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Galarian Zapdos 1'] && TemporaryBattleList['Galarian Zapdos 1'].isVisible()"
-                , image: "assets/images/map/galarianzapdos.png"
-                })
-             %>
-
-             <%- include('templates/mapOverlay',
-                 { name: "Galarian Zapdos"
-                 , x: 55, y: 2
-                 , width: 4, height: 3
-                 , databind: "click: () => TemporaryBattleList['Galarian Zapdos 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Zapdos 2'].isUnlocked() ? '' : 'locked' }"
-                 , visible:  "TemporaryBattleList['Galarian Zapdos 2'] && TemporaryBattleList['Galarian Zapdos 2'].isVisible()"
-                 , image: "assets/images/map/galarianzapdos.png"
-                 })
-              %>
-
-              <%- include('templates/mapOverlay',
-                  { name: "Galarian Zapdos"
-                  , x: 56.5, y: 36
-                  , width: 4, height: 3
-                  , databind: "click: () => TemporaryBattleList['Galarian Zapdos 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Zapdos 3'].isUnlocked() ? '' : 'locked' }"
-                  , visible:  "TemporaryBattleList['Galarian Zapdos 3'] && TemporaryBattleList['Galarian Zapdos 3'].isVisible()"
-                  , image: "assets/images/map/galarianzapdos.png"
-                  })
-               %>
-
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 51, y: 12
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Charizard'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Charizard'] && TemporaryBattleList['Max Raid Charizard'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hop"
+            , x: 59, y: 47.5
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hop 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hop 2'] && TemporaryBattleList['Hop 2'].isVisible()"
+            , image: "assets/images/map/hop.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 55, y: 15
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Machamp'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Machamp'] && TemporaryBattleList['Max Raid Machamp'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hop"
+            , x: 36, y: 16
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hop 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hop 3'] && TemporaryBattleList['Hop 3'].isVisible()"
+            , image: "assets/images/map/hop.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 36, y: 29
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Gengar'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Gengar'] && TemporaryBattleList['Max Raid Gengar'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hop"
+            , x: 52, y: 6
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hop 4'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hop 4'] && TemporaryBattleList['Hop 4'].isVisible()"
+            , image: "assets/images/map/hop.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 41, y: 29
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Kingler'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Kingler'] && TemporaryBattleList['Max Raid Kingler'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Zapdos"
+            , x: 46, y: 24
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Zapdos 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Galarian Zapdos 1'] && TemporaryBattleList['Galarian Zapdos 1'].isVisible()"
+            , image: "assets/images/map/galarianzapdos.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 49, y: 35
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Corviknight'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Corviknight'] && TemporaryBattleList['Max Raid Corviknight'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Zapdos"
+            , x: 55, y: 2
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Zapdos 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Zapdos 2'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Zapdos 2'] && TemporaryBattleList['Galarian Zapdos 2'].isVisible()"
+            , image: "assets/images/map/galarianzapdos.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 46, y: 4
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Orbeetle'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Orbeetle'] && TemporaryBattleList['Max Raid Orbeetle'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Zapdos"
+            , x: 56.5, y: 38.5
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Zapdos 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Zapdos 3'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Zapdos 3'] && TemporaryBattleList['Galarian Zapdos 3'].isVisible()"
+            , image: "assets/images/map/galarianzapdos.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 52, y: 35
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Drednaw'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Drednaw'] && TemporaryBattleList['Max Raid Drednaw'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 51, y: 12
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Charizard'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Charizard'] && TemporaryBattleList['Max Raid Charizard'].isVisible()"
+            , image: "assets/images/map/raidden.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 47, y: 26
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Coalossal'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Coalossal'] && TemporaryBattleList['Max Raid Coalossal'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 55, y: 15
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Machamp'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Machamp'] && TemporaryBattleList['Max Raid Machamp'].isVisible()"
+            , image: "assets/images/map/raidden.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 54, y: 23
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Centiskorch'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Centiskorch'] && TemporaryBattleList['Max Raid Centiskorch'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 36, y: 29
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Gengar'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Gengar'] && TemporaryBattleList['Max Raid Gengar'].isVisible()"
+            , image: "assets/images/map/raidden.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 52, y: 0
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Alcremie'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Alcremie'] && TemporaryBattleList['Max Raid Alcremie'].isVisible()"
-                , image: "assets/images/map/raidden.png"
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 41, y: 29
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Kingler'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Kingler'] && TemporaryBattleList['Max Raid Kingler'].isVisible()"
+            , image: "assets/images/map/raidden.png"
             })
-            %>
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Max Raid"
-                , x: 57, y: 36
-                , width: 3, height: 3
-                , databind: "click: () => TemporaryBattleList['Max Raid Duraludon'].protectedOnclick()"
-                , visible:  "TemporaryBattleList['Max Raid Duraludon'] && TemporaryBattleList['Max Raid Duraludon'].isVisible()"
-                , image: "assets/images/map/raidden.png"
-            })
-            %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 49, y: 35
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Corviknight'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Corviknight'] && TemporaryBattleList['Max Raid Corviknight'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 46, y: 4
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Orbeetle'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Orbeetle'] && TemporaryBattleList['Max Raid Orbeetle'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 52, y: 35
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Drednaw'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Drednaw'] && TemporaryBattleList['Max Raid Drednaw'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 47, y: 26
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Coalossal'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Coalossal'] && TemporaryBattleList['Max Raid Coalossal'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 54, y: 23
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Centiskorch'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Centiskorch'] && TemporaryBattleList['Max Raid Centiskorch'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 52, y: 0
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Alcremie'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Alcremie'] && TemporaryBattleList['Max Raid Alcremie'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 57, y: 36
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Duraludon'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Duraludon'] && TemporaryBattleList['Max Raid Duraludon'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -1295,19 +1295,19 @@
         %>
 
         <%- include('templates/mapPOI',
-           { name: "S. S. Anne"
-           , x: 80, y: 54
-           , width: 8, height: 3
-           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Spikemuth') }"
-          })
+            { name: "S. S. Anne"
+            , x: 80, y: 54
+            , width: 8, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Spikemuth') }"
+            })
         %>
 
         <%- include('templates/mapPOI',
-           { name: "Underground Entrance"
-           , x: 37, y: 51
-           , width: 3, height: 4
-           , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
-           })
+            { name: "Underground Entrance"
+            , x: 37, y: 51
+            , width: 3, height: 4
+            , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+            })
         %>
 
         <%- include('templates/mapOverlay',
@@ -1318,47 +1318,47 @@
             , visible:  "TemporaryBattleList['Hop 5'] && TemporaryBattleList['Hop 5'].isVisible()"
             , image: "assets/images/map/hop.png"
             })
-         %>
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Pokémon Trainer Bede"
-             , x: 25, y: 43
-             , width: 4, height: 4
-             , databind: "click: () => TemporaryBattleList['Bede 3'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Bede 3'] && TemporaryBattleList['Bede 3'].isVisible()"
-             , image: "assets/images/map/bede.png"
-             })
-          %>
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Bede"
+            , x: 25, y: 43
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Bede 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Bede 3'] && TemporaryBattleList['Bede 3'].isVisible()"
+            , image: "assets/images/map/bede.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Pokémon Trainer Hop"
-             , x: 56, y: 54
-             , width: 4, height: 4
-             , databind: "click: () => TemporaryBattleList['Hop 6'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Hop 6'] && TemporaryBattleList['Hop 6'].isVisible()"
-             , image: "assets/images/map/hop.png"
-             })
-          %>
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hop"
+            , x: 56, y: 54
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hop 6'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hop 6'] && TemporaryBattleList['Hop 6'].isVisible()"
+            , image: "assets/images/map/hop.png"
+            })
+        %>
 
-          <%- include('templates/mapOverlay',
-              { name: "Pokémon Trainer Hop"
-              , x: 66, y: 44
-              , width: 4, height: 4
-              , databind: "click: () => TemporaryBattleList['Hop 7'].protectedOnclick()"
-              , visible:  "TemporaryBattleList['Hop 7'] && TemporaryBattleList['Hop 7'].isVisible()"
-              , image: "assets/images/map/hop.png"
-              })
-           %>
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hop"
+            , x: 66, y: 44
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hop 7'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hop 7'] && TemporaryBattleList['Hop 7'].isVisible()"
+            , image: "assets/images/map/hop.png"
+            })
+        %>
 
-           <%- include('templates/mapOverlay',
-               { name: "Pokémon Trainer Marnie"
-               , x: 71, y: 56
-               , width: 4, height: 4
-               , databind: "click: () => TemporaryBattleList['Marnie 2'].protectedOnclick()"
-               , visible:  "TemporaryBattleList['Marnie 2'] && TemporaryBattleList['Marnie 2'].isVisible()"
-               , image: "assets/images/map/marnie.png"
-               })
-            %>
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Marnie"
+            , x: 71, y: 56
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Marnie 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Marnie 2'] && TemporaryBattleList['Marnie 2'].isVisible()"
+            , image: "assets/images/map/marnie.png"
+            })
+        %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -2467,11 +2467,11 @@
         %>
 
         <%- include('templates/mapPOI',
-           { name: "S. S. Anne"
-           , x: 62, y: 44
-           , width: 8, height: 3
-           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo') }"
-          })
+            { name: "S. S. Anne"
+            , x: 62, y: 44
+            , width: 8, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo') }"
+            })
         %>
 
         <%- include('templates/mapOverlay',
@@ -2482,167 +2482,167 @@
             , visible:  "TemporaryBattleList['Klara 1'] && TemporaryBattleList['Klara 1'].isVisible()"
             , image: "assets/images/map/klara.png"
             })
-         %>
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Pokémon Trainer Avery"
-             , x: 56, y: 44
-             , width: 4, height: 4
-             , databind: "click: () => TemporaryBattleList['Avery 1'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Avery 1'] && TemporaryBattleList['Avery 1'].isVisible()"
-             , image: "assets/images/map/avery.png"
-             })
-          %>
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Avery"
+            , x: 56, y: 44
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Avery 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Avery 1'] && TemporaryBattleList['Avery 1'].isVisible()"
+            , image: "assets/images/map/avery.png"
+            })
+        %>
 
-          <%- include('templates/mapOverlay',
-              { name: "Pokémon Trainer Klara"
-              , x: 57, y: 35
-              , width: 4, height: 4
-              , databind: "click: () => TemporaryBattleList['Klara 3'].protectedOnclick()"
-              , visible:  "TemporaryBattleList['Klara 3'] && TemporaryBattleList['Klara 3'].isVisible()"
-              , image: "assets/images/map/klara.png"
-              })
-           %>
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Klara"
+            , x: 57, y: 35
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Klara 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Klara 3'] && TemporaryBattleList['Klara 3'].isVisible()"
+            , image: "assets/images/map/klara.png"
+            })
+        %>
 
-           <%- include('templates/mapOverlay',
-               { name: "Pokémon Trainer Avery"
-               , x: 61, y: 35
-               , width: 4, height: 4
-               , databind: "click: () => TemporaryBattleList['Avery 3'].protectedOnclick()"
-               , visible:  "TemporaryBattleList['Avery 3'] && TemporaryBattleList['Avery 3'].isVisible()"
-               , image: "assets/images/map/avery.png"
-               })
-            %>
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Avery"
+            , x: 61, y: 35
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Avery 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Avery 3'] && TemporaryBattleList['Avery 3'].isVisible()"
+            , image: "assets/images/map/avery.png"
+            })
+        %>
 
-            <%- include('templates/mapOverlay',
-               { name: "Ash Ketchum"
-               , x: 56, y: 43
-               , width: 4, height: 4
-               , databind: "click: () => TemporaryBattleList['Ash Ketchum Galar'].protectedOnclick()"
-               , visible:  "TemporaryBattleList['Ash Ketchum Galar'] && TemporaryBattleList['Ash Ketchum Galar'].isVisible()"
-               , image: "assets/images/map/ashketchumoverworld.png"
-               })
-            %>
+        <%- include('templates/mapOverlay',
+            { name: "Ash Ketchum"
+            , x: 56, y: 43
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Ash Ketchum Galar'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Ash Ketchum Galar'] && TemporaryBattleList['Ash Ketchum Galar'].isVisible()"
+            , image: "assets/images/map/ashketchumoverworld.png"
+            })
+        %>
 
-            <%- include('templates/mapOverlay',
-                { name: "Galarian Moltres"
-                , x: 40, y: 43
-                , width: 4, height: 3
-                , databind: "click: () => TemporaryBattleList['Galarian Moltres 1'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 1'].isUnlocked() ? '' : 'locked' }"
-                , visible:  "TemporaryBattleList['Galarian Moltres 1'] && TemporaryBattleList['Galarian Moltres 1'].isVisible()"
-                , image: "assets/images/map/galarianmoltres.png"
-                })
-             %>
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Moltres"
+            , x: 40, y: 43
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Moltres 1'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 1'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Moltres 1'] && TemporaryBattleList['Galarian Moltres 1'].isVisible()"
+            , image: "assets/images/map/galarianmoltres.png"
+            })
+        %>
 
-             <%- include('templates/mapOverlay',
-                 { name: "Galarian Moltres"
-                 , x: 71.5, y: 38
-                 , width: 4, height: 3
-                 , databind: "click: () => TemporaryBattleList['Galarian Moltres 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 2'].isUnlocked() ? '' : 'locked' }"
-                 , visible:  "TemporaryBattleList['Galarian Moltres 2'] && TemporaryBattleList['Galarian Moltres 2'].isVisible()"
-                 , image: "assets/images/map/galarianmoltres.png"
-                 })
-              %>
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Moltres"
+            , x: 71.5, y: 38
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Moltres 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 2'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Moltres 2'] && TemporaryBattleList['Galarian Moltres 2'].isVisible()"
+            , image: "assets/images/map/galarianmoltres.png"
+            })
+        %>
 
-              <%- include('templates/mapOverlay',
-                  { name: "Galarian Moltres"
-                  , x: 52, y: 35
-                  , width: 4, height: 3
-                  , databind: "click: () => TemporaryBattleList['Galarian Moltres 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 3'].isUnlocked() ? '' : 'locked' }"
-                  , visible:  "TemporaryBattleList['Galarian Moltres 3'] && TemporaryBattleList['Galarian Moltres 3'].isVisible()"
-                  , image: "assets/images/map/galarianmoltres.png"
-                  })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Moltres"
+            , x: 52, y: 35
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Moltres 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 3'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Moltres 3'] && TemporaryBattleList['Galarian Moltres 3'].isVisible()"
+            , image: "assets/images/map/galarianmoltres.png"
+            })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 52, y: 45
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Venusaur'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Venusaur'] && TemporaryBattleList['Max Raid Venusaur'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 52, y: 45
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Venusaur'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Venusaur'] && TemporaryBattleList['Max Raid Venusaur'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 72, y: 39
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Blastoise'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Blastoise'] && TemporaryBattleList['Max Raid Blastoise'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 72, y: 39
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Blastoise'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Blastoise'] && TemporaryBattleList['Max Raid Blastoise'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 52, y: 36
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Butterfree'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Butterfree'] && TemporaryBattleList['Max Raid Butterfree'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 52, y: 36
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Butterfree'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Butterfree'] && TemporaryBattleList['Max Raid Butterfree'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 56, y: 18
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Garbodor'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Garbodor'] && TemporaryBattleList['Max Raid Garbodor'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 56, y: 18
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Garbodor'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Garbodor'] && TemporaryBattleList['Max Raid Garbodor'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 46, y: 24
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Rillaboom'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Rillaboom'] && TemporaryBattleList['Max Raid Rillaboom'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 46, y: 24
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Rillaboom'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Rillaboom'] && TemporaryBattleList['Max Raid Rillaboom'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 65, y: 20
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Cinderace'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Cinderace'] && TemporaryBattleList['Max Raid Cinderace'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 65, y: 20
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Cinderace'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Cinderace'] && TemporaryBattleList['Max Raid Cinderace'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 28, y: 12
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Inteleon'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Inteleon'] && TemporaryBattleList['Max Raid Inteleon'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 28, y: 12
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Inteleon'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Inteleon'] && TemporaryBattleList['Max Raid Inteleon'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 61, y: 6
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Sandaconda'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Sandaconda'] && TemporaryBattleList['Max Raid Sandaconda'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 61, y: 6
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Sandaconda'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Sandaconda'] && TemporaryBattleList['Max Raid Sandaconda'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
 
-               <%- include('templates/mapOverlay',
-                   { name: "Max Raid"
-                   , x: 43, y: 35
-                   , width: 3, height: 3
-                   , databind: "click: () => TemporaryBattleList['Max Raid Toxtricity'].protectedOnclick()"
-                   , visible:  "TemporaryBattleList['Max Raid Toxtricity'] && TemporaryBattleList['Max Raid Toxtricity'].isVisible()"
-                   , image: "assets/images/map/raidden.png"
-               })
-               %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 43, y: 35
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Toxtricity'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Toxtricity'] && TemporaryBattleList['Max Raid Toxtricity'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+        })
+        %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -3309,11 +3309,11 @@
         %>
 
         <%- include('templates/mapPOI',
-           { name: "S. S. Anne"
-           , x: 21, y: 12
-           , width: 8, height: 3
-           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
-          })
+            { name: "S. S. Anne"
+            , x: 21, y: 12
+            , width: 8, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
+            })
         %>
 
         <%- include('templates/mapOverlay',
@@ -3324,25 +3324,25 @@
             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
             , image: "assets/images/map/galarianmoltres.png"
             })
-         %>
-         <%- include('templates/mapOverlay',
-             { name: "Dyna Tree Birds"
-             , x: 50, y: 55
-             , width: 4, height: 3
-             , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
-             , image: "assets/images/map/galarianarticuno.png"
-             })
-          %>
-         <%- include('templates/mapOverlay',
-             { name: "Dyna Tree Birds"
-             , x: 48, y: 52
-             , width: 4, height: 3
-             , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
-             , image: "assets/images/map/galarianzapdos.png"
-             })
-          %>
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Dyna Tree Birds"
+            , x: 50, y: 55
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+            , image: "assets/images/map/galarianarticuno.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Dyna Tree Birds"
+            , x: 48, y: 52
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+            , image: "assets/images/map/galarianzapdos.png"
+            })
+        %>
 
         <%- include('templates/mapOverlay',
             { name: "Galarian Articuno"
@@ -3352,27 +3352,27 @@
             , visible:  "TemporaryBattleList['Galarian Articuno 1'] && TemporaryBattleList['Galarian Articuno 1'].isVisible()"
             , image: "assets/images/map/galarianarticuno.png"
             })
-         %>
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Galarian Articuno"
-             , x: 79, y: 20
-             , width: 4, height: 3
-             , databind: "click: () => TemporaryBattleList['Galarian Articuno 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 2'].isUnlocked() ? '' : 'locked' }"
-             , visible:  "TemporaryBattleList['Galarian Articuno 2'] && TemporaryBattleList['Galarian Articuno 2'].isVisible()"
-             , image: "assets/images/map/galarianarticuno.png"
-             })
-          %>
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Articuno"
+            , x: 79, y: 20
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Articuno 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 2'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Articuno 2'] && TemporaryBattleList['Galarian Articuno 2'].isVisible()"
+            , image: "assets/images/map/galarianarticuno.png"
+            })
+        %>
 
-          <%- include('templates/mapOverlay',
-              { name: "Galarian Articuno"
-              , x: 47, y: 3
-              , width: 4, height: 3
-              , databind: "click: () => TemporaryBattleList['Galarian Articuno 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 3'].isUnlocked() ? '' : 'locked' }"
-              , visible:  "TemporaryBattleList['Galarian Articuno 3'] && TemporaryBattleList['Galarian Articuno 3'].isVisible()"
-              , image: "assets/images/map/galarianarticuno.png"
-              })
-           %>
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Articuno"
+            , x: 47, y: 3
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Articuno 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 3'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Articuno 3'] && TemporaryBattleList['Galarian Articuno 3'].isVisible()"
+            , image: "assets/images/map/galarianarticuno.png"
+            })
+        %>
 
         <%- include('templates/mapOverlay',
             { name: "Regigigas"
@@ -3382,106 +3382,106 @@
             , visible:  "TemporaryBattleList['Regigigas'] && TemporaryBattleList['Regigigas'].isVisible()"
             , image: "assets/images/map/regigigas.png"
             })
-         %>
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 33, y: 30
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Pikachu'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Pikachu'] && TemporaryBattleList['Max Raid Pikachu'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 33, y: 30
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Pikachu'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Pikachu'] && TemporaryBattleList['Max Raid Pikachu'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 46, y: 14
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Meowth'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Meowth'] && TemporaryBattleList['Max Raid Meowth'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 46, y: 14
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Meowth'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Meowth'] && TemporaryBattleList['Max Raid Meowth'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 79, y: 19
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Lapras'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Lapras'] && TemporaryBattleList['Max Raid Lapras'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 79, y: 19
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Lapras'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Lapras'] && TemporaryBattleList['Max Raid Lapras'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 34, y: 15
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Eevee'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Eevee'] && TemporaryBattleList['Max Raid Eevee'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 34, y: 15
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Eevee'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Eevee'] && TemporaryBattleList['Max Raid Eevee'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 52, y: 53
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Snorlax'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Snorlax'] && TemporaryBattleList['Max Raid Snorlax'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 52, y: 53
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Snorlax'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Snorlax'] && TemporaryBattleList['Max Raid Snorlax'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 52, y: 31
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Flapple'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Flapple'] && TemporaryBattleList['Max Raid Flapple'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 52, y: 31
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Flapple'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Flapple'] && TemporaryBattleList['Max Raid Flapple'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 62, y: 39
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Appletun'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Appletun'] && TemporaryBattleList['Max Raid Appletun'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 62, y: 39
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Appletun'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Appletun'] && TemporaryBattleList['Max Raid Appletun'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 62, y: 29
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Hatterene'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Hatterene'] && TemporaryBattleList['Max Raid Hatterene'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 62, y: 29
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Hatterene'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Hatterene'] && TemporaryBattleList['Max Raid Hatterene'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 73, y: 27
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Grimmsnarl'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Grimmsnarl'] && TemporaryBattleList['Max Raid Grimmsnarl'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 73, y: 27
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Grimmsnarl'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Grimmsnarl'] && TemporaryBattleList['Max Raid Grimmsnarl'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
 
-         <%- include('templates/mapOverlay',
-             { name: "Max Raid"
-             , x: 43, y: 39
-             , width: 3, height: 3
-             , databind: "click: () => TemporaryBattleList['Max Raid Copperajah'].protectedOnclick()"
-             , visible:  "TemporaryBattleList['Max Raid Copperajah'] && TemporaryBattleList['Max Raid Copperajah'].isVisible()"
-             , image: "assets/images/map/raidden.png"
-         })
-         %>
+        <%- include('templates/mapOverlay',
+            { name: "Max Raid"
+            , x: 43, y: 39
+            , width: 3, height: 3
+            , databind: "click: () => TemporaryBattleList['Max Raid Copperajah'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Max Raid Copperajah'] && TemporaryBattleList['Max Raid Copperajah'].isVisible()"
+            , image: "assets/images/map/raidden.png"
+            })
+        %>
     </g>
 </g>

@@ -927,7 +927,7 @@
          , x: 39, y: 26
          , width: 5, height: 5
          , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
-         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Spear Pillar')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Distortion World')]() == 0"
+         , visible:  "App.game.quests.getQuestLine('A New World')?.curQuest() === 10"
          , image: "assets/images/map/distortion_world.png"
          , connectedToTown: "Distortion World"
          })

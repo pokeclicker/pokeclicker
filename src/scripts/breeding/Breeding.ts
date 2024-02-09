@@ -452,7 +452,7 @@ class Breeding implements Feature {
             return pokemonName;
         } else {
             // Recurse onto its devolution
-            return this.calculateBaseForm(devolution);
+            return devolution;
         }
     }
 

@@ -278,6 +278,7 @@ ItemList.Stone_plate = new TreasureItem('Stone_plate', UndergroundItemValueType.
 ItemList.Toxic_plate = new TreasureItem('Toxic_plate', UndergroundItemValueType.Gem, 0, 'Toxic Plate');
 ItemList.Zap_plate = new TreasureItem('Zap_plate', UndergroundItemValueType.Gem, 0, 'Zap Plate');
 ItemList.Pixie_plate = new TreasureItem('Pixie_plate', UndergroundItemValueType.Gem, 0, 'Pixie Plate');
+ItemList.Blank_plate = new TreasureItem('Blank_plate', UndergroundItemValueType.Gem, 0, 'Blank Plate');
 // Fossils
 ItemList.Helix_fossil = new TreasureItem('Helix_fossil', UndergroundItemValueType.Fossil, 0, 'Helix Fossil');
 ItemList.Dome_fossil = new TreasureItem('Dome_fossil', UndergroundItemValueType.Fossil, 0, 'Dome Fossil');
@@ -310,3 +311,5 @@ ItemList.Pink_shard = new TreasureItem('Pink_shard', UndergroundItemValueType.Sh
 ItemList.Cyan_shard = new TreasureItem('Cyan_shard', UndergroundItemValueType.Shard, 0, 'Cyan Shard');
 ItemList.Rose_shard = new TreasureItem('Rose_shard', UndergroundItemValueType.Shard, 0, 'Rose Shard');
 ItemList.Brown_shard = new TreasureItem('Brown_shard', UndergroundItemValueType.Shard, 0, 'Brown Shard');
+ItemList.Beige_shard = new TreasureItem('Beige_shard', UndergroundItemValueType.Shard, 0, 'Beige Shard');
+ItemList.Slate_shard = new TreasureItem('Slate_shard', UndergroundItemValueType.Shard, 0, 'Slate Shard');
