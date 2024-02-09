@@ -45,6 +45,7 @@ jobs:
           node-version: 18.x
       - run: |
           npm ci
+          echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
           npm run build
           rm -rf build/assets
           ln -s ../../assets build/assets
