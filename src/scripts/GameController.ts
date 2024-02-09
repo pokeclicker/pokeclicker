@@ -3,6 +3,7 @@
  */
 class GameController {
     static applyRouteBindings() {
+        console.log('Apply route bindings')
         $('path, rect').hover(function () {
             let tooltipText = $(this).attr('data-town');
             const route = $(this).attr('data-route');
