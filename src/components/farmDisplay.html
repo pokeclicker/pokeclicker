@@ -16,7 +16,7 @@
             <button class="dropdown-item d-flex small px-3" type="button"
                 data-bind="click: () => FarmController.selectedBerry($data), css: { 'active': FarmController.selectedBerry() === $data }">
                 <knockout class="flex-grow-1" data-bind="text: BerryType[$data]"></knockout>
-                <knockout class="text-muted" data-bind="text: App.game.farming.berryList[$data]() >= 1e6
+                <knockout data-bind="text: App.game.farming.berryList[$data]() >= 1e6
                     ? GameConstants.formatNumber(App.game.farming.berryList[$data]())
                     : App.game.farming.berryList[$data]().toLocaleString('en-US')"></knockout>
             </button>
