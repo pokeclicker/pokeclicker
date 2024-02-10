@@ -182,10 +182,6 @@ class FarmController {
         }
     }
 
-    public static toggleFarmModuleTool(tool: FarmModuleTool) {
-        this.selectedFarmModuleTool(tool);
-    }
-
     public static calculateCssClassMini() {
         switch (this.selectedFarmModuleTool()) {
             case FarmModuleTool.Mulch:

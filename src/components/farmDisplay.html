@@ -53,7 +53,7 @@
         <div class="col-3 px-1">
             <button class='btn btn-sm btn-primary px-1 py-0 w-100'
                 data-bind="tooltip: {title: `${ItemList['Berry_Shovel'].displayName} (${App.game.farming.shovelAmt().toLocaleString()})`, trigger: 'hover', placement: 'top'},
-                    click: () => FarmController.toggleFarmModuleTool(FarmModuleTool.Shovel),
+                    click: () => FarmController.selectedFarmModuleTool(FarmModuleTool.Shovel),
                     css: { active: FarmController.selectedFarmModuleTool() === FarmModuleTool.Shovel }">
                 <img src="" alt="Berry Shovel" height="28px" data-bind="attr:{ src: ItemList['Berry_Shovel'].image }">
             </button>
@@ -61,7 +61,7 @@
         <div class="col-3 px-1">
             <button class='btn btn-sm btn-primary px-1 py-0 w-100'
                 data-bind="tooltip: {title: `${ItemList['Mulch_Shovel'].displayName} (${App.game.farming.mulchShovelAmt().toLocaleString()})`, trigger: 'hover', placement: 'top'},
-                    click: () => FarmController.toggleFarmModuleTool(FarmModuleTool.MulchShovel),
+                    click: () => FarmController.selectedFarmModuleTool(FarmModuleTool.MulchShovel),
                     css: { active: FarmController.selectedFarmModuleTool() === FarmModuleTool.MulchShovel }">
                 <img src="" alt="Mulch Shovel" height="28px" data-bind="attr:{ src: ItemList['Mulch_Shovel'].image }">
             </button>
