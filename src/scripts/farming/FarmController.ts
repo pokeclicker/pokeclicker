@@ -184,22 +184,6 @@ class FarmController {
 
     public static toggleFarmModuleTool(tool: FarmModuleTool) {
         this.selectedFarmModuleTool(tool);
-
-        switch (tool) {
-            case FarmModuleTool.Berry:
-            case FarmModuleTool.Mulch:
-                FarmController.selectedShovel(false);
-                FarmController.selectedMulchShovel(false);
-                break;
-            case FarmModuleTool.Shovel:
-                FarmController.selectedShovel(true);
-                FarmController.selectedMulchShovel(false);
-                break;
-            case FarmModuleTool.MulchShovel:
-                FarmController.selectedMulchShovel(true);
-                FarmController.selectedShovel(false);
-                break;
-        }
     }
 
     public static calculateCssClassMini() {
