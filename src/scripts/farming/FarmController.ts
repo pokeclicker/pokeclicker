@@ -14,7 +14,7 @@ class FarmController {
     public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
     public static selectedMulchShovel: KnockoutObservable<boolean> = ko.observable(false);
     public static selectedPlotSafeLock: KnockoutObservable<boolean> = ko.observable(false);
-    public static selectedFarmModuleTool: KnockoutObservable<FarmModuleTool> = ko.observable(FarmModuleTool.Berry);
+    public static selectedFarmModuleTool: KnockoutObservable<FarmingTool> = ko.observable(FarmingTool.Berry);
 
     public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
@@ -163,20 +163,20 @@ class FarmController {
         }
 
         switch (this.selectedFarmModuleTool()) {
-            case FarmModuleTool.Berry:
+            case FarmingTool.Berry:
                 if (plot.isEmpty()) {
                     App.game.farming.plant(index, this.selectedBerry());
                 } else {
                     App.game.farming.harvest(index);
                 }
                 break;
-            case FarmModuleTool.Mulch:
+            case FarmingTool.Mulch:
                 App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
                 break;
-            case FarmModuleTool.Shovel:
+            case FarmingTool.Shovel:
                 App.game.farming.shovel(index);
                 break;
-            case FarmModuleTool.MulchShovel:
+            case FarmingTool.MulchShovel:
                 App.game.farming.shovelMulch(index);
                 break;
         }
@@ -184,13 +184,13 @@ class FarmController {
 
     public static calculateCssClassMini() {
         switch (this.selectedFarmModuleTool()) {
-            case FarmModuleTool.Mulch:
+            case FarmingTool.Mulch:
                 return 'MulchSelected';
-            case FarmModuleTool.Shovel:
+            case FarmingTool.Shovel:
                 return 'ShovelSelected';
-            case FarmModuleTool.MulchShovel:
+            case FarmingTool.MulchShovel:
                 return 'MulchShovelSelected';
-            case FarmModuleTool.Berry:
+            case FarmingTool.Berry:
             default:
                 return 'BerrySelected';
         }
