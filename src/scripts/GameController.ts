@@ -228,12 +228,10 @@ class GameController {
             if ($farmsModal.data('bs.modal')?._isShown) {
                 switch (key) {
                     case Settings.getSetting('hotkey.farm.toggleShovel').value:
-                        FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
-                        FarmController.selectedPlotSafeLock(false);
+                        [FarmingTool.Shovel, FarmingTool.MulchShovel].includes(FarmController.selectedFarmTool()) ? FarmController.selectedFarmTool(FarmController.berryListVisible() ? FarmingTool.Berry : FarmingTool.Mulch) : FarmController.selectedFarmTool(FarmController.berryListVisible() ? FarmingTool.Shovel : FarmingTool.MulchShovel);
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.farm.togglePlotSafeLock').value:
-                        FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);
-                        FarmController.selectedShovel(false);
+                        FarmController.selectedFarmTool() == FarmingTool.Lock ? FarmController.selectedFarmTool(FarmController.berryListVisible() ? FarmingTool.Berry : FarmingTool.Mulch) : FarmController.selectedFarmTool(FarmingTool.Lock);
                         return e.preventDefault();
                 }
             }
