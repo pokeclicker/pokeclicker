@@ -150,9 +150,6 @@
                                         <div class="plotImage">
                                             <img style="width: 100%" src="assets/images/farm/soil.png"
                                                 data-bind="class: FarmController.calcMulchClass($data)">
-                                            <!-- ko if: $data.isSafeLocked -->
-                                            <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
-                                            <!-- /ko -->
                                             <!-- ko if: !$data.isUnlocked -->
                                             <div class="plotButton plotLockHover">
                                                 <div>
@@ -176,6 +173,9 @@
                                                     style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
                                                     data-bind="attr:{ src: FarmController.getImage($index())}">
                                             </div>
+                                            <!-- ko if: $data.isSafeLocked -->
+                                            <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
+                                            <!-- /ko -->
                                         </div>
                                     </div>
                                 </div>
