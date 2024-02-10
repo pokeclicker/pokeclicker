@@ -87,12 +87,41 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('breedingQueueClearConfirmation')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmChangeHeldItem')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.initialEnabled')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.invertPriorityOrder')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('breedingEfficiencyAllModifiers')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="with: Settings.getSetting('disableAutoSave')">
+                                    <td class="p-2">
+                                        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`"></label>
+                                    </td>
+                                    <td class="p-2">
+                                        <input class="clickable" type="checkbox"
+                                            data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+                                            onchange="(() => {
+                                                if (!this.checked) {
+                                                    Settings.setSettingByName('disableAutoSave', false);
+                                                    return;
+                                                }
+
+                                                Notifier.confirm({
+                                                    title: 'Disable Auto Save?',
+                                                    message: 'Disabling auto save will require you to manually save the game before exiting or any progress will be lost!\r\n\r\nProceed at your own risk.',
+                                                    type: NotificationConstants.NotificationOption.danger,
+                                                    confirm: 'Yes'
+                                                }).then(confirmed => {
+                                                    if (confirmed) {
+                                                        Settings.setSettingByName('disableAutoSave', true);
+                                                    } else {
+                                                        this.checked = false;
+                                                    }
+                                                });
+                                            })()"/>
+                                    </td>
+                                </tr>
                                 <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
                                     <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
                                     <td class="p-0">

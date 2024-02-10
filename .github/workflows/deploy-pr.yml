@@ -4,6 +4,11 @@ on:
   pull_request_target:
     # when using teardown: 'true', add default event types + closed event type
     types: [opened, synchronize, reopened, closed]
+    paths:
+      - 'src/**/*.ts'
+      - 'src/**/*.html'
+      - 'src/**/*.less'
+      - 'src/**/*.ejs'
 
 jobs:
   preview:
@@ -19,6 +24,8 @@ jobs:
           require: write
           username: ${{ github.triggering_actor }}
 
+      # if the user does not have the required permission, we should return exit code 1 to stop the workflow
+      # or add a condition to skip the next steps instead (if we don't want this to deploy to preview PR for everyone)
       - name: Check User Permission
         if: steps.checkAccess.outputs.require-result == 'false'
         run: |
@@ -38,9 +45,12 @@ jobs:
           node-version: 18.x
       - run: |
           npm ci
+          echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
           npm run build
           rm -rf build/assets
           ln -s ../../assets build/assets
+          rm -rf build/libs
+          ln -s ../../libs build/libs
       
       - name: Deploy to GH-Pages
         uses: rossjrw/pr-preview-action@v1
