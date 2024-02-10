@@ -198,6 +198,7 @@ import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
+import FarmModuleTool from './enums/FarmModuleTool';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -407,4 +408,5 @@ Object.assign(<any>window, {
     SafariCatchRequirement,
     ItemRequirement,
     ChristmasPresent,
+    FarmModuleTool,
 });

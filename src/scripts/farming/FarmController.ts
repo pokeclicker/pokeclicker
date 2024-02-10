@@ -14,6 +14,7 @@ class FarmController {
     public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
     public static selectedMulchShovel: KnockoutObservable<boolean> = ko.observable(false);
     public static selectedPlotSafeLock: KnockoutObservable<boolean> = ko.observable(false);
+    public static selectedFarmModuleTool: KnockoutObservable<FarmModuleTool> = ko.observable(FarmModuleTool.Berry);
 
     public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
@@ -161,11 +162,57 @@ class FarmController {
             return;
         }
 
-        // Handle Berries
-        if (plot.isEmpty()) {
-            App.game.farming.plant(index, this.selectedBerry());
-        } else {
-            App.game.farming.harvest(index);
+        switch (this.selectedFarmModuleTool()) {
+            case FarmModuleTool.Berry:
+                if (plot.isEmpty()) {
+                    App.game.farming.plant(index, this.selectedBerry());
+                } else {
+                    App.game.farming.harvest(index);
+                }
+                break;
+            case FarmModuleTool.Mulch:
+                App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
+                break;
+            case FarmModuleTool.Shovel:
+                App.game.farming.shovel(index);
+                break;
+            case FarmModuleTool.MulchShovel:
+                App.game.farming.shovelMulch(index);
+                break;
+        }
+    }
+
+    public static toggleFarmModuleTool(tool: FarmModuleTool) {
+        this.selectedFarmModuleTool(tool);
+
+        switch (tool) {
+            case FarmModuleTool.Berry:
+            case FarmModuleTool.Mulch:
+                FarmController.selectedShovel(false);
+                FarmController.selectedMulchShovel(false);
+                break;
+            case FarmModuleTool.Shovel:
+                FarmController.selectedShovel(true);
+                FarmController.selectedMulchShovel(false);
+                break;
+            case FarmModuleTool.MulchShovel:
+                FarmController.selectedMulchShovel(true);
+                FarmController.selectedShovel(false);
+                break;
+        }
+    }
+
+    public static calculateCssClassMini() {
+        switch (this.selectedFarmModuleTool()) {
+            case FarmModuleTool.Mulch:
+                return 'MulchSelected';
+            case FarmModuleTool.Shovel:
+                return 'ShovelSelected';
+            case FarmModuleTool.MulchShovel:
+                return 'MulchShovelSelected';
+            case FarmModuleTool.Berry:
+            default:
+                return 'BerrySelected';
         }
     }
 
