@@ -182,6 +182,9 @@ class FarmController {
             case FarmingTool.MulchShovel:
                 App.game.farming.shovelMulch(index);
                 break;
+            case FarmingTool.Lock:
+                App.game.farming.togglePlotSafeLock(index);
+                break;
         }
     }
 
@@ -193,6 +196,8 @@ class FarmController {
                 return 'ShovelSelected';
             case FarmingTool.MulchShovel:
                 return 'MulchShovelSelected';
+            case FarmingTool.Lock:
+                return 'PlotSafeLockSelected';
             case FarmingTool.Berry:
             default:
                 return 'BerrySelected';
