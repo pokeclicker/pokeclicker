@@ -7668,7 +7668,6 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     [
         new DungeonBossPokemon('Slaking', 10000000, 100),
         new DungeonBossPokemon('Snorlax', 10000000, 100),
-        new DungeonBossPokemon('Shuckle', 10000000, 100),
         new DungeonBossPokemon('Blissey', 10000000, 100),
         new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
     ],
