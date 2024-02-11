@@ -279,8 +279,10 @@ class FarmController {
             return '';
         }
         const pokemon = pokemonMap[plot.wanderer.name];
-        const id = Math.floor(pokemon.id).toString().padStart(3, '0') + (plot.wanderer.shiny ? 's' : '');
-        return `${plot.wanderer.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' :  ''}url('assets/images/dynamic-background/pokemon/${id}.png')`;
+        const decimals = Math.floor(pokemon.id) !== pokemon.id ? pokemon.id.toString().replace(/^\d+\./, '.') : '';
+        const id = Math.floor(pokemon.id).toString().padStart(3, '0');
+        const forgedID = `${id}${decimals}${plot.wanderer.shiny ? 's' : ''}`;
+        return `${plot.wanderer.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' :  ''}url('assets/images/dynamic-background/pokemon/${forgedID}.png')`;
     }
 
 }

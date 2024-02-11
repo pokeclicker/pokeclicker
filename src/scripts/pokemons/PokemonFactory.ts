@@ -374,7 +374,7 @@ class PokemonFactory {
         const pokemon = Rand.fromArray(availablePokemon);
         const pokemonData = pokemonMap[pokemon];
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
-        const catchChance = PokemonFactory.catchRateHelper(pokemonData.catchRate, true);
+        const catchChance = PokemonFactory.catchRateHelper(pokemonData.catchRate + 25, true);
         const wanderer = new WandererPokemon(pokemon, berry.type, catchChance, shiny);
         return wanderer;
     }
