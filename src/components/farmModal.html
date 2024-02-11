@@ -6,7 +6,7 @@
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item" onclick="FarmController.farmingModalTabSelected('berryFarmView')"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
-                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('farmHandsView')" data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands (BETA)</a></li>
+                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('farmHandsView')" data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands</a></li>
                     <li class='nav-item' onclick="FarmController.farmingModalTabSelected('berryDexView')"><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
                     <li class='nav-item' onclick="FarmController.farmingModalTabSelected('helpView')"><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
                     <btn class="btn btn-primary">
@@ -441,10 +441,9 @@
                     <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
                     <p>Some Berry Auras will increase or decrease the chance of encountering Wandering Pokémon. If your total Repel Aura value reaches 1 or greater, no Wandering Pokémon will appear.</p>
 
-                    <h4><u>Farm Hands (BETA)</u></h4>
+                    <h4><u>Farm Hands</u></h4>
                     <p><i>(unlocked after obtaining 8 unique berries)</i></p>
                     <p>Farm Hands can help around the Farm; they will harvest and plant berries as needed and accrue Farm Points while doing so.</p>
-                    <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, so things will likely change in the future; feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
                     <p>Up to 3 Farm Hands can be hired at a time.</p>
                     <p>If they run out of energy, they won't do any work for that cycle, but will regenerate some energy instead. If there's no work to do currently, they will also regenerate some energy.</p>
                     <p>Efficiency refers to how many actions they can do per work cycle.</p>
