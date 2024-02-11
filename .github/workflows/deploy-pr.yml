@@ -62,6 +62,7 @@ jobs:
           custom-url: 'dev.pokeclicker.com'
           deploy-repository: 'RedSparr0w/pokeclicker'
           token: ${{ secrets.DEV_PAGE }}
+          pages-base-dir: 'docs/'
 
       - name: Preview URL
         run: echo "url => ${{ steps.preview_step.outputs.deployment-url }}"
