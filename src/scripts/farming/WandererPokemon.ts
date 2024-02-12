@@ -33,7 +33,7 @@ class WandererPokemon {
         GameHelper.incrementObservable(this.distractTime, 1);
     }
 
-    public static fromJSON(wanderer: Partial<WandererPokemon>): WandererPokemon {
+    public static fromJSON(wanderer: any): WandererPokemon {
         if (wanderer) {
             return new WandererPokemon(wanderer.name, wanderer.berry, wanderer.catchRate, wanderer.shiny, wanderer.distractTime);
         }
@@ -41,7 +41,7 @@ class WandererPokemon {
     }
 
     public toJSON(): Record<any, any> {
-        const json = { name: this.name, berry: this.berry, catchRate: this.catchRate, shiny: this.shiny, ticks: this.distractTime };
+        const json = { name: this.name, berry: this.berry, catchRate: this.catchRate, shiny: this.shiny, ticks: this.distractTime() };
         return json;
     }
 }

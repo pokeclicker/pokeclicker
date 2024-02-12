@@ -246,7 +246,7 @@ class FarmHand {
 
         if (this.shouldCatch()) {
             // First handle plots whose wanderer might flee soon
-            const prioPlots = App.game.farming.plotList.filter(p => p.wanderer && p.wanderer.distractTime > 0 && !p.wanderer.catching());
+            const prioPlots = App.game.farming.plotList.filter(p => p.wanderer && p.wanderer.distractTime() > 0 && !p.wanderer.catching());
             while (prioPlots.length > 0 && workTimes > 0) {
                 const plot = prioPlots.shift();
                 if (this.plots().includes(plot.index)) {
