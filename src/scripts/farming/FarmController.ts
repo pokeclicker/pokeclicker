@@ -61,8 +61,8 @@ class FarmController {
         return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}.png`;
     }
 
-    public static calculateCssClass() {
-        switch (this.selectedFarmTool()) {
+    public static calculateCssClassFromTool(tool: FarmingTool) {
+        switch (tool) {
             case FarmingTool.Lock:
                 return 'PlotSafeLockSelected';
             case FarmingTool.Mulch:
@@ -75,6 +75,10 @@ class FarmController {
             default:
                 return 'BerrySelected';
         }
+    }
+
+    public static calculateCssClass() {
+        return this.calculateCssClassFromTool(this.selectedFarmTool());
     }
 
     public static calcMulchClass(plot: Plot) {
@@ -189,19 +193,7 @@ class FarmController {
     }
 
     public static calculateCssClassMini() {
-        switch (this.selectedFarmModuleTool()) {
-            case FarmingTool.Mulch:
-                return 'MulchSelected';
-            case FarmingTool.Shovel:
-                return 'ShovelSelected';
-            case FarmingTool.MulchShovel:
-                return 'MulchShovelSelected';
-            case FarmingTool.Lock:
-                return 'PlotSafeLockSelected';
-            case FarmingTool.Berry:
-            default:
-                return 'BerrySelected';
-        }
+        return this.calculateCssClassFromTool(this.selectedFarmModuleTool());
     }
 
     public static mulchAll() {
