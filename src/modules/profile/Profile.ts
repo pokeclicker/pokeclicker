@@ -6,6 +6,10 @@ import { Saveable } from '../DataStore/common/Saveable';
 import * as GameConstants from '../GameConstants';
 import Notifier from '../notifications/Notifier';
 import Rand from '../utilities/Rand';
+import SpindaSpots from '../enums/SpindaSpots';
+import GameHelper from '../GameHelper';
+import Settings from '../settings';
+import TmpPokemonHelper from '../pokemons/TmpPokemonHelper';
 
 export default class Profile implements Saveable {
     public static MAX_TRAINER = 157;
@@ -92,6 +96,19 @@ export default class Profile implements Saveable {
         trainerTime.innerText = GameConstants.formatTimeFullLetters(seconds);
         const trainerPokemonImage: HTMLImageElement = node.querySelector('.trainer-pokemon-image');
         trainerPokemonImage.src = `assets/images/${pokemonShiny ? 'shiny' : ''}pokemon/${pokemon}${pokemonFemale ? '-f' : ''}.png`;
+
+        // Spinda
+        GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
+            const spotContainer: HTMLElement = node.querySelector(`.${spotPosition}Spot`);
+            const settingsPositions = { 
+                spotX: +Settings.getSetting(`${spotPosition}X`).observableValue(),
+                spotY: +Settings.getSetting(`${spotPosition}Y`).observableValue()
+            };
+            const positions = TmpPokemonHelper.generateSpindaSpots(spotPosition, settingsPositions.spotX, settingsPositions.spotY);
+            spotContainer.style.backgroundImage = `url(${TmpPokemonHelper.getSpindaMask(pokemonShiny)})`;
+            spotContainer.style.maskPosition = `${positions.spotX}px ${positions.spotY}px`;
+        });
+
         const trainerVersion: HTMLElement = node.querySelector('.trainer-version');
         trainerVersion.innerText = `v${version}`;
         const badgeContainer = node.querySelector('.challenge-badges');

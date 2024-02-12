@@ -117,7 +117,7 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
      * @param spindaSpot String enum
      * @returns object
      */
-export function generateSpindaSpots(spindaSpot: SpindaSpots, x = Math.random() * 16, y = Math.random() * 16, size = 96) {
+export function generateSpindaSpots(spindaSpot: SpindaSpots | string, x = Math.random() * 16, y = Math.random() * 16, size = 96) {
     const originTop = 23;
     const originLeft = 15;
     const SpotsMinPosition = {
@@ -144,8 +144,8 @@ export function generateSpindaSpots(spindaSpot: SpindaSpots, x = Math.random() *
  * @returns string (image URL)
  */
 export function getSpindaMask(shiny: boolean = undefined): string {
-    const spinda = App.game.party.getPokemon(327);
     if (shiny === undefined) {
+        const spinda = App.game.party.getPokemon(327);
         shiny = spinda.shiny && !spinda.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue();
     }
     let src = 'assets/images/';
