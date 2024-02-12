@@ -171,7 +171,7 @@
                                             <!-- ko if: $data.wanderer -->
                                                 <!-- ko ifnot: $data.wanderer.catching -->
                                                     <div class="pokemonSprite walkDown wandererSprite"
-                                                        data-bind="style: { backgroundImage: FarmController.getWandererStyle($data)}"
+                                                        data-bind="style: { backgroundImage: FarmController.getWandererStyle($data)}, css: {'deadlineFlash': $data.wanderer.distractTime() > 0}"
                                                     ></div>
                                                 <!-- /ko -->
                                                 <!-- ko if: $data.wanderer.catching -->

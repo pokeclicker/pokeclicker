@@ -2,17 +2,18 @@ class WandererPokemon {
     public farmPoint: number;
     public catching: KnockoutObservable<boolean>;
     public pokeball: KnockoutObservable<GameConstants.Pokeball>;
-    public frightened: boolean;
+    public distractTime: KnockoutObservable<number>;
 
     constructor(
         public name: PokemonNameType,
         public berry: BerryType,
         public catchRate: number,
         public shiny = false,
-        public distractTime = 0
+        distractTime = 0
     ) {
         this.catching = ko.observable(false);
         this.pokeball = ko.observable(GameConstants.Pokeball.None);
+        this.distractTime = ko.observable(distractTime);
     }
 
     // If distracted for long enough, flees
@@ -20,8 +21,8 @@ class WandererPokemon {
         if (!this.distractTime || this.catching()) {
             return false;
         }
-        this.distractTime += GameConstants.WANDER_TICK;
-        if (this.distractTime >= 5 * GameConstants.MINUTE) {
+        GameHelper.incrementObservable(this.distractTime, GameConstants.WANDER_TICK);
+        if (this.distractTime() >= 5 * GameConstants.MINUTE) {
             return true;
         }
         return false;
@@ -29,7 +30,7 @@ class WandererPokemon {
 
     // Happens when plot.dies() is used
     public distract() {
-        this.distractTime += 1;
+        GameHelper.incrementObservable(this.distractTime, 1);
     }
 
     public static fromJSON(wanderer: Partial<WandererPokemon>): WandererPokemon {
