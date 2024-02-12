@@ -18,7 +18,7 @@ class WandererPokemon {
 
     // If distracted for long enough, flees
     public tick(): boolean {
-        if (!this.distractTime || this.catching()) {
+        if (!this.distractTime() || this.catching()) {
             return false;
         }
         GameHelper.incrementObservable(this.distractTime, GameConstants.WANDER_TICK);
@@ -41,7 +41,7 @@ class WandererPokemon {
     }
 
     public toJSON(): Record<any, any> {
-        const json = { name: this.name, berry: this.berry, catchRate: this.catchRate, shiny: this.shiny, ticks: this.distractTime() };
+        const json = { name: this.name, berry: this.berry, catchRate: this.catchRate, shiny: this.shiny, distractTime: this.distractTime() };
         return json;
     }
 }
