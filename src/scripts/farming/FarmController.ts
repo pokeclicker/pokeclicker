@@ -142,7 +142,7 @@ class FarmController {
         switch (this.selectedFarmTool()) {
             case FarmingTool.Berry:
                 if (plot.canCatchWanderer()) {
-                    return App.game.farming.handleWanderer(plot);
+                    App.game.farming.handleWanderer(plot);
                 } else if (plot.isEmpty()) {
                     App.game.farming.plant(index, this.selectedBerry());
                 } else {
@@ -169,15 +169,13 @@ class FarmController {
         if (!plot.isUnlocked) {
             return;
         }
-        // Check if wanderer on the plot
-        if (plot.wanderer && !plot.wanderer.catching()) {
-            return App.game.farming.handleWanderer(plot);
-        }
 
         // Check which tool we have selected
         switch (this.selectedFarmModuleTool()) {
             case FarmingTool.Berry:
-                if (plot.isEmpty()) {
+                if (plot.canCatchWanderer()) {
+                    App.game.farming.handleWanderer(plot);
+                } else if (plot.isEmpty()) {
                     App.game.farming.plant(index, this.selectedBerry());
                 } else {
                     App.game.farming.harvest(index);
