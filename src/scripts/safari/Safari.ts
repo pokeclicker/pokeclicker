@@ -587,7 +587,20 @@ class Safari {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+$(document).ready(() => {
+    // Add listeners to Safari dpad buttons
+    ['Up', 'Left', 'Down', 'Right'].forEach((dir) => {
+        const button = document.getElementById(`safari-dpad-${dir.toLowerCase()}`);
+        const keyDown = () => GameController.simulateKey(`Arrow${dir}`);
+        const keyUp = () => GameController.simulateKey(`Arrow${dir}`, 'up');
+        button.addEventListener('mousedown', keyDown, { passive: false });
+        button.addEventListener('mouseout', keyUp, { passive: false });
+        button.addEventListener('mouseup', keyUp, { passive: false });
+        button.addEventListener('touchstart', keyDown, { passive: false });
+        button.addEventListener('touchend', keyUp, { passive: false });
+        button.addEventListener('touchcancel', keyUp, { passive: false });
+    });
+
     $('#safariModal').on('hide.bs.modal', () => {
         Safari.inBattle(false);
         SafariBattle.busy(false);
