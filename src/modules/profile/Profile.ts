@@ -98,16 +98,21 @@ export default class Profile implements Saveable {
         trainerPokemonImage.src = `assets/images/${pokemonShiny ? 'shiny' : ''}pokemon/${pokemon}${pokemonFemale ? '-f' : ''}.png`;
 
         // Spinda
-        GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
-            const spotContainer: HTMLElement = node.querySelector(`.${spotPosition}Spot`);
-            const settingsPositions = { 
-                spotX: +Settings.getSetting(`${spotPosition}X`).observableValue(),
-                spotY: +Settings.getSetting(`${spotPosition}Y`).observableValue()
-            };
-            const positions = TmpPokemonHelper.generateSpindaSpots(spotPosition, settingsPositions.spotX, settingsPositions.spotY);
-            spotContainer.style.backgroundImage = `url(${TmpPokemonHelper.getSpindaMask(pokemonShiny)})`;
-            spotContainer.style.maskPosition = `${positions.spotX}px ${positions.spotY}px`;
-        });
+        if (pokemon === 327) {
+            GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
+                const spotContainer: HTMLElement = node.querySelector(`.${spotPosition}Spot`);
+                const settingsPositions = { 
+                    spotX: +Settings.getSetting(`${spotPosition}X`).observableValue(),
+                    spotY: +Settings.getSetting(`${spotPosition}Y`).observableValue()
+                };
+                const positions = TmpPokemonHelper.generateSpindaSpots(spotPosition, settingsPositions.spotX, settingsPositions.spotY);
+                spotContainer.style.backgroundImage = `url(${TmpPokemonHelper.getSpindaMask(pokemonShiny)})`;
+                spotContainer.style.maskPosition = `${positions.spotX}px ${positions.spotY}px`;
+            });
+        } else {
+            const spotsElements: HTMLElement = node.querySelector('.spots');
+            spotsElements.style.display = 'none';
+        }
 
         const trainerVersion: HTMLElement = node.querySelector('.trainer-version');
         trainerVersion.innerText = `v${version}`;
