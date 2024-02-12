@@ -25,8 +25,8 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Ultraball, () => 10, 750, '+10% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Masterball, () => 100, 500, '100% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Fastball, () => 0, 500, 'Reduced catch time', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
-            new Pokeball(GameConstants.Pokeball.Quickball, (ignoreContext = false) => {
-                if (ignoreContext) {
+            new Pokeball(GameConstants.Pokeball.Quickball, (opts) => {
+                if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
                 }
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
@@ -39,8 +39,8 @@ class Pokeballs implements Feature {
                 }
                 return 0;
             }, 1000, 'Increased catch rate on routes with less Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
-            new Pokeball(GameConstants.Pokeball.Timerball, (ignoreContext = false) => {
-                if (ignoreContext) {
+            new Pokeball(GameConstants.Pokeball.Timerball, (opts) => {
+                if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
                 }
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
@@ -56,10 +56,10 @@ class Pokeballs implements Feature {
                 }
                 return 0;
             }, 1000, 'Increased catch rate on routes with more Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
-            new Pokeball(GameConstants.Pokeball.Duskball, (ignoreContext = false) => {
+            new Pokeball(GameConstants.Pokeball.Duskball, (opts) => {
                 const now = new Date();
                 // If player in a dungeon or it's night time
-                if ((App.game.gameState == GameConstants.GameState.dungeon && !ignoreContext) || [DayCyclePart.Dawn, DayCyclePart.Night].includes(DayCycle.currentDayCyclePart())) {
+                if ((App.game.gameState == GameConstants.GameState.dungeon && opts.encounterType !== EncounterType.wanderer) || [DayCyclePart.Dawn, DayCyclePart.Night].includes(DayCycle.currentDayCyclePart())) {
                     return 15;
                 }
                 return 0;
@@ -67,8 +67,8 @@ class Pokeballs implements Feature {
 
             new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Poké Ball, awards a random currency for catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
-            new Pokeball(GameConstants.Pokeball.Diveball, (ignoreContext = false) => {
-                if (ignoreContext) {
+            new Pokeball(GameConstants.Pokeball.Diveball, (opts) => {
+                if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
                 }
 
@@ -79,8 +79,8 @@ class Pokeballs implements Feature {
                 return 0;
             }, 1250, 'Increased catch rate in water environments', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
-            new Pokeball(GameConstants.Pokeball.Lureball, (ignoreContext = false) => {
-                if (ignoreContext) {
+            new Pokeball(GameConstants.Pokeball.Lureball, (opts) => {
+                if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
                 }
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
@@ -95,8 +95,8 @@ class Pokeballs implements Feature {
                 return 0;
             }, 1250, 'Increased catch rate on fished Pokémon', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
-            new Pokeball(GameConstants.Pokeball.Nestball, (ignoreContext = false) => {
-                if (ignoreContext) {
+            new Pokeball(GameConstants.Pokeball.Nestball, (opts) => {
+                if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
                 }
                 const highestRegionRoutes = Routes.getRoutesByRegion(player.highestRegion());
@@ -107,8 +107,8 @@ class Pokeballs implements Feature {
                 return Math.min(15,Math.max(1,player.highestRegion()) * Math.max(1,(maxRoute / currentRoute)));
             }, 1250, 'Increased catch rate on earlier routes', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
-            new Pokeball(GameConstants.Pokeball.Repeatball, (ignoreContext = false, id = Battle.enemyPokemon()?.id) => {
-                const amountCaught = App.game.statistics.pokemonCaptured[id]();
+            new Pokeball(GameConstants.Pokeball.Repeatball, (opts) => {
+                const amountCaught = App.game.statistics.pokemonCaptured[pokemonMap[opts.pokemon].id]();
 
                 return Math.min(15,Math.pow(amountCaught,2) / 5000);
             }, 1250, 'Increased catch rate and EV gain rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
@@ -216,8 +216,13 @@ class Pokeballs implements Feature {
         GameHelper.incrementObservable(App.game.statistics.pokeballsUsed[ball]);
     }
 
-    getCatchBonus(ball: GameConstants.Pokeball, ignoreContext?: boolean, overwriteId?: number): number {
-        return this.pokeballs[ball].catchBonus(ignoreContext, overwriteId);
+    getCatchBonus(ball: GameConstants.Pokeball, options?: CatchOptions): number {
+        const opts: CatchOptions = {
+            pokemon: Battle.enemyPokemon()?.name,
+            encounterType: Battle.enemyPokemon()?.encounterType,
+            ...options,
+        };
+        return this.pokeballs[ball].catchBonus(opts);
     }
 
     getBallQuantity(ball: GameConstants.Pokeball): number {
