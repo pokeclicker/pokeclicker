@@ -53,7 +53,7 @@ jobs:
           ln -s ../../libs build/libs
       
       - name: Deploy to GH-Pages
-        uses: rossjrw/pr-preview-action@v1
+        uses: redsparr0w/pr-preview-action@abf87f32089b3fc59e973307ed1fbc957dd42efc
         id: preview_step
         with:
           source-dir: 'build'
@@ -62,6 +62,7 @@ jobs:
           custom-url: 'dev.pokeclicker.com'
           deploy-repository: 'RedSparr0w/pokeclicker'
           token: ${{ secrets.DEV_PAGE }}
+          pages-base-dir: 'docs/'
 
       - name: Preview URL
         run: echo "url => ${{ steps.preview_step.outputs.deployment-url }}"
