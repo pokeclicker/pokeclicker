@@ -62,9 +62,6 @@ class FarmController {
     }
 
     public static calculateCssClassFromTool(plot: Plot, tool: FarmingTool) {
-        if (plot.wanderer && !plot.wanderer.catching()) {
-            return 'WandererHandling';
-        }
         switch (tool) {
             case FarmingTool.Lock:
                 return 'PlotSafeLockSelected';
@@ -76,7 +73,7 @@ class FarmController {
                 return 'MulchShovelSelected';
             case FarmingTool.Berry:
             default:
-                return 'BerrySelected';
+                return plot.canCatchWanderer() ? 'WandererHandling' : 'BerrySelected';
         }
     }
 
@@ -140,15 +137,13 @@ class FarmController {
         if (!plot.isUnlocked) {
             return App.game.farming.unlockPlot(index);
         }
-        // Check if wanderer on the plot
-        if (plot.wanderer && !plot.wanderer.catching()) {
-            return App.game.farming.handleWanderer(plot);
-        }
 
         // Check which tool we have selected
         switch (this.selectedFarmTool()) {
             case FarmingTool.Berry:
-                if (plot.isEmpty()) {
+                if (plot.canCatchWanderer()) {
+                    return App.game.farming.handleWanderer(plot);
+                } else if (plot.isEmpty()) {
                     App.game.farming.plant(index, this.selectedBerry());
                 } else {
                     App.game.farming.harvest(index);

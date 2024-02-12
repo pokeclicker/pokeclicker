@@ -612,6 +612,10 @@ class Plot implements Saveable {
         return Plot.findNearPlots(this.index).map(i => App.game.farming.plotList[i]);
     }
 
+    public canCatchWanderer(): boolean {
+        return this.wanderer && !this.wanderer.catching();
+    }
+
     /**
      * Finds the plot indices that are directly next to the plot (aka a plus sign)
      * @param index The plot index
