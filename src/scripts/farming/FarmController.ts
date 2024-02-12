@@ -78,7 +78,7 @@ class FarmController {
     }
 
     public static calculateCssClass() {
-        return this.calculateCssClass(this.selectedFarmTool());
+        return this.calculateCssClassFromTool(this.selectedFarmTool());
     }
 
     public static calcMulchClass(plot: Plot) {
@@ -193,7 +193,7 @@ class FarmController {
     }
 
     public static calculateCssClassMini() {
-        return calculateCssClassFromTool(this.selectedFarmModuleTool());
+        return this.calculateCssClassFromTool(this.selectedFarmModuleTool());
     }
 
     public static mulchAll() {
