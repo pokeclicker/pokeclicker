@@ -80,7 +80,7 @@ export type LazyLoadOptions = {
     triggerMargin: string; // must be px or %
     threshold: number;
     pageSize: number;
-    reset?: Subscribable | (() => any); // Whenever this changes, the page will reset to the first page
+    reset?: Subscribable<any> | (() => any); // Whenever this changes, the lazyList will reset to the first page (non-KO functions must evaluate a KO observable)
 };
 
 const defaultOptions: LazyLoadOptions = {
@@ -91,6 +91,22 @@ const defaultOptions: LazyLoadOptions = {
 
 const memo: Record<string, { list: PureComputed<Array<unknown>>, callback: () => void, toDispose: Array<Computed<any> | Subscription> }> = {};
 
+/**
+ * Provides a lazy-loading PureComputed slice of an observable array, for use in bindings like foreach, and inserts a loader element
+ * into the page to trigger loading more of the underlying array. Computed lists are cached when possible.
+ * 
+ * @param key - Unique identifier for each list, used for caching
+ * @param boundNode - HTML Node the list is bound to. Must be in a scrolling container, and the loader will be added to a non-table parent of this node.
+ * @param list - The observable array to lazily load
+ * @param options - Optional parameters
+ * @param options.pageSize Number of elements per lazy list page, default 40
+ * @param options.triggerMargin Trigger margin for IntersectionObserver, default 10%
+ * @param options.threshold Threshold for IntersectionObserver, default 0
+ * @param options.reset A function to trigger resets to the list. The function can be any Knockout subscribable or a function that evaluates a Knockout subscribable.
+ * The list will reset to the first page whenever the output changes, or if reset is subscribable and reset.notifySubscribers() is called.
+ * 
+ * @return A PureComputed array initially showing the first pageSize elements of the base list.
+ */
 export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<unknown>>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
     // Get first parent that's not a table element, that's where we'll add the loader element
     const targetElement = boundNode.parentElement.closest(':not(table, thead, tbody, tr, td, th)') as HTMLElement;
@@ -141,8 +157,12 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     if (opts.reset) {
         let reset = opts.reset;
 
-        // Wrap reset function in a computed as needed
-        if (reset instanceof Function && !ko.isObservable(reset)) {
+        if (!(reset instanceof Function)) {
+            throw new Error(`Invalid reset function used for '${key}' lazyLoad`);
+        }
+
+        // Wrap reset function in a computed if it's not a Knockout object already
+        if (!ko.isObservable(reset)) {
             reset = ko.computed(reset);
             // We made the computed in here, we should dispose of it later
             memo[key].toDispose.push(reset as Computed);
