@@ -1,5 +1,16 @@
 <div id="startMenu" class="dropdown clearfix" style="position:absolute; right:0; top:0; z-index: 100;">
-    <button class="btn btn-secondary mr-1"
+    <button class="btn btn-secondary mr-1 float-left" style="display: none;"
+        data-bind="visible: Settings.getSetting('disableAutoSave').observableValue,
+            click: () => { Save.store(player) },
+            tooltip: {
+                html: true,
+                title: `Save the game.<br/>Shortcut: ${Settings.getSetting('hotkey.forceSave').prefix}${Settings.getSetting('hotkey.forceSave').observableValue()}`,
+                trigger: 'hover',
+                placement: 'bottom'
+            }">
+        <img src="assets/images/floppy-disk.svg" height="20px" width="20px" style="margin-top: -3px;">
+    </button>
+    <button class="btn btn-secondary mr-1 float-left"
         data-bind="visible: Settings.getSetting('showMuteButton').observableValue(),
             click: () => { Settings.getSetting('sound.muted').toggle() },
             tooltip: { title: Settings.getSetting('sound.muted').observableValue() ? 'Click to unmute all sounds.' : 'Click to mute all sounds.', trigger: 'hover', placement: 'bottom' }">
