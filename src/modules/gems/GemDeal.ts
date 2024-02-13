@@ -1,12 +1,29 @@
-type GemCost = {
+import type {
+    Observable as KnockoutObservable,
+    ObservableArray as KnockoutObservableArray,
+} from 'knockout';
+import PokemonType from '../enums/PokemonType';
+import BadgeEnums from '../enums/Badges';
+import {
+    GemShops,
+} from '../GameConstants';
+import type Item from '../items/Item';
+import { ItemList } from '../items/ItemList';
+import GameHelper from '../GameHelper';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
+
+export type GemCost = {
     gemType: PokemonType,
     amount: number,
 }
 
-class GemDeal {
+declare class GemMasterShop { public shop: GemShops }; // TODO remove this when GemMasterShop is moved to modules
+
+export default class GemDeal {
     public gems: GemCost[];
     public item: { itemType: Item, amount: number};
-    public static list: Record<GameConstants.GemShops, KnockoutObservableArray<GemDeal>> = {};
+    public static list: Record<GemShops, KnockoutObservableArray<GemDeal>> = {};
     public isVisible(): boolean {
         return this.item.itemType.isVisible();
     }
@@ -17,13 +34,13 @@ class GemDeal {
     }
 
     public static generateDeals() {
-        GemDeal.list[GameConstants.GemShops.HoennFluteMaster] = ko.observableArray(this.generateHoennFluteDeals());
-        GemDeal.list[GameConstants.GemShops.HoennStoneSalesman] = ko.observableArray(this.generateHoennStoneDeals());
-        GemDeal.list[GameConstants.GemShops.UnovaFluteMaster] = ko.observableArray(this.generateUnovaFluteDeals());
-        GemDeal.list[GameConstants.GemShops.FurfrouGemTrader] = ko.observableArray(this.generateFurfrouDeal());
-        GemDeal.list[GameConstants.GemShops.KalosStoneSalesman] = ko.observableArray(this.generateKalosStoneDeals());
-        GemDeal.list[GameConstants.GemShops.SilvallyTrader] = ko.observableArray(this.generateAlolaSilvallyDeal());
-        GemDeal.list[GameConstants.GemShops.MagikarpJumpGemTrader] = ko.observableArray(this.generateMagikarpJumpDeal());
+        GemDeal.list[GemShops.HoennFluteMaster] = ko.observableArray(this.generateHoennFluteDeals());
+        GemDeal.list[GemShops.HoennStoneSalesman] = ko.observableArray(this.generateHoennStoneDeals());
+        GemDeal.list[GemShops.UnovaFluteMaster] = ko.observableArray(this.generateUnovaFluteDeals());
+        GemDeal.list[GemShops.FurfrouGemTrader] = ko.observableArray(this.generateFurfrouDeal());
+        GemDeal.list[GemShops.KalosStoneSalesman] = ko.observableArray(this.generateKalosStoneDeals());
+        GemDeal.list[GemShops.SilvallyTrader] = ko.observableArray(this.generateAlolaSilvallyDeal());
+        GemDeal.list[GemShops.MagikarpJumpGemTrader] = ko.observableArray(this.generateMagikarpJumpDeal());
     }
 
     private static generateHoennFluteDeals() {
@@ -371,14 +388,14 @@ class GemDeal {
         return list;
     }
 
-    public static getDeals(shop: Shop) {
+    public static getDeals(shop: GemMasterShop) {
         if (shop instanceof GemMasterShop) {
             return GemDeal.list[shop.shop]();
         }
         return [];
     }
 
-    public static canUse(shop: Shop, i: number): boolean {
+    public static canUse(shop: GemMasterShop, i: number): boolean {
         if (shop instanceof GemMasterShop) {
             const deal = GemDeal.list[shop.shop].peek()[i];
             if (ItemList[deal.item.itemType.name].isSoldOut()) {
@@ -390,7 +407,7 @@ class GemDeal {
         return false;
     }
 
-    public static use(shop: Shop, i: number, tradeTimes = 1) {
+    public static use(shop: GemMasterShop, i: number, tradeTimes = 1) {
         if (shop instanceof GemMasterShop) {
             const deal = GemDeal.list[shop.shop].peek()[i];
             if (!App.game.badgeCase.hasBadge(BadgeEnums.Heat)) {

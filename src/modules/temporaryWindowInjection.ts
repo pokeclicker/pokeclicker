@@ -143,6 +143,7 @@ import KeyItem from './keyItems/KeyItem';
 import KeyItems from './keyItems/KeyItems';
 import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
+import FluteEffectRunner from './gems/FluteEffectRunner';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
 import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
@@ -350,6 +351,7 @@ Object.assign(<any>window, {
     KeyItems,
     Achievement,
     Gems,
+    FluteEffectRunner,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
     QuestLineStartedRequirement,

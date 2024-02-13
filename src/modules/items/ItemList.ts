@@ -7,12 +7,13 @@ import BattleItem from './BattleItem';
 import BerryItem from './BerryItem';
 import BuyKeyItem from './buyKeyItem';
 import BuyOakItem from './buyOakItem';
+import FluteItem from './FluteItem';
 import EnergyRestore from './EnergyRestore';
 import Item from './Item';
 import MulchItem from './MulchItem';
 import PokeballItem from './PokeballItem';
 import {
-    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType, ConsumableType,
+    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType, ConsumableType, FluteItemType,
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
@@ -53,6 +54,13 @@ ItemList.Squirtbottle = new BuyOakItem(OakItemType.Squirtbottle, 5000, Currency.
 ItemList.Sprinklotad = new BuyOakItem(OakItemType.Sprinklotad, 10000, Currency.farmPoint);
 ItemList.Explosive_Charge = new BuyOakItem(OakItemType.Explosive_Charge, 5000, Currency.questPoint);
 ItemList.Treasure_Scanner = new BuyOakItem(OakItemType.Treasure_Scanner, 10000, Currency.questPoint);
+
+ItemList.Yellow_Flute = new FluteItem(FluteItemType.Yellow_Flute, 'Pokémon Attack', ['Grass', 'Flying', 'Electric'], 'pokemonAttack', 1.02);
+ItemList.Time_Flute   = new FluteItem(FluteItemType.Time_Flute, 'Gym and Dungeon Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
+ItemList.Black_Flute  = new FluteItem(FluteItemType.Black_Flute, 'Click Attack', ['Dark', 'Psychic', 'Fighting'], 'clickAttack', 1.02);
+ItemList.Red_Flute    = new FluteItem(FluteItemType.Red_Flute, 'Egg Steps', ['Fire', 'Rock', 'Dragon'], 'eggStep', 1.02);
+ItemList.White_Flute  = new FluteItem(FluteItemType.White_Flute, 'Shiny Chance', ['Normal', 'Fairy', 'Ice'], 'shiny', 1.02);
+ItemList.Blue_Flute   = new FluteItem(FluteItemType.Blue_Flute, 'EV Yield', ['Water', 'Bug', 'Ghost'], 'ev', 1.02);
 
 ItemList.Boost_Mulch   = new MulchItem(MulchType.Boost_Mulch, 50, 'Boost Mulch', 'Increases Berry growth rate.');
 ItemList.Rich_Mulch  = new MulchItem(MulchType.Rich_Mulch, 100, 'Rich Mulch', 'Increases Berry harvest rate and replant chances.');
