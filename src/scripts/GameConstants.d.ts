@@ -211,6 +211,7 @@ namespace GameConstants {
     declare const DUNGEON_BOSS_EP_MODIFIER: number;
     declare const ROAMER_EP_MODIFIER: number;
     declare const SHADOW_EP_MODIFIER: number;
+    declare const BASE_WANDERER_EP_MODIFIER: number;
     declare const WANDERER_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
