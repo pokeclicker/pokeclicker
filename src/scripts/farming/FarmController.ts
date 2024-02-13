@@ -91,20 +91,27 @@ class FarmController {
     public static plotClick(index: number, event: MouseEvent) {
         const plot: Plot = App.game.farming.plotList[index];
 
+        // If shift key held, lock/unlock plot
         if (event.shiftKey) {
             this.shiftTogglePlotSafeLock(plot, index);
         } else {
-            this.handleClickActions(plot, index);
+            this.handleClickActions(this.selectedFarmTool(), plot, index);
         }
     }
 
     public static plotClickMini(index: number, event: MouseEvent) {
         const plot: Plot = App.game.farming.plotList[index];
 
+        // Unlocking Plot (we don't want to do this in the farm module)
+        if (!plot.isUnlocked) {
+            return;
+        }
+
+        // If shift key held, lock/unlock plot
         if (event.shiftKey) {
             this.shiftTogglePlotSafeLock(plot, index);
         } else {
-            this.handleClickActionsMini(plot, index);
+            this.handleClickActions(this.selectedFarmModuleTool(), plot, index);
         }
     }
 
@@ -132,48 +139,15 @@ class FarmController {
         });
     }
 
-    private static handleClickActions(plot: Plot, index: number) {
+    private static handleClickActions(tool: FarmingTool, plot: Plot, index: number) {
         // Unlocking Plot
         if (!plot.isUnlocked) {
             return App.game.farming.unlockPlot(index);
         }
-
         // Check which tool we have selected
-        switch (this.selectedFarmTool()) {
+        switch (tool) {
             case FarmingTool.Berry:
                 if (plot.wanderer) {
-                    App.game.farming.handleWanderer(plot);
-                } else if (plot.isEmpty()) {
-                    App.game.farming.plant(index, this.selectedBerry());
-                } else {
-                    App.game.farming.harvest(index);
-                }
-                break;
-            case FarmingTool.Mulch:
-                App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
-                break;
-            case FarmingTool.Shovel:
-                App.game.farming.shovel(index);
-                break;
-            case FarmingTool.MulchShovel:
-                App.game.farming.shovelMulch(index);
-                break;
-            case FarmingTool.Lock:
-                App.game.farming.togglePlotSafeLock(index);
-                break;
-        }
-    }
-
-    private static handleClickActionsMini(plot: Plot, index: number) {
-        // Unlocking Plot (we don't do that on the mini farm)
-        if (!plot.isUnlocked) {
-            return;
-        }
-
-        // Check which tool we have selected
-        switch (this.selectedFarmModuleTool()) {
-            case FarmingTool.Berry:
-                if (plot.canCatchWanderer()) {
                     App.game.farming.handleWanderer(plot);
                 } else if (plot.isEmpty()) {
                     App.game.farming.plant(index, this.selectedBerry());
