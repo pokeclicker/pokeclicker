@@ -2275,7 +2275,7 @@ class Farming implements Feature {
     }
 
     public handleWanderer(plot: Plot) {
-        if (!plot.wanderer || plot.wanderer.catching()) {
+        if (!plot.canCatchWanderer()) {
             return;
         }
         const wanderer = plot.wanderer;
@@ -2289,9 +2289,10 @@ class Farming implements Feature {
         if (pokeball !== GameConstants.Pokeball.None) {
             wanderer.pokeball(pokeball);
             wanderer.catching(true);
-            setTimeout(() => this.attemptCatchWanderer(plot), App.game.pokeballs.calculateCatchTime(pokeball));
+            // Halved catch time in farm, it does not matter in the balance
+            setTimeout(() => this.attemptCatchWanderer(plot), App.game.pokeballs.calculateCatchTime(pokeball) / 2);
         } else {
-            plot.wanderer = undefined;
+            this.wandererIsFleeing(plot);
         }
 
     }
@@ -2314,6 +2315,8 @@ class Farming implements Feature {
             partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, wanderer.shiny, undefined, wandererEPGain);
             const fakedRoute = FarmController.wandererToRoute(wanderer.name);
             Battle.gainTokens(fakedRoute.number, fakedRoute.region, wanderer.pokeball());
+            plot.wanderer = undefined;
+            return;
         } else if (wanderer.shiny) { // Failed to catch, Shiny
             App.game.logbook.newLog(
                 LogBookTypes.ESCAPED,
@@ -2327,7 +2330,18 @@ class Farming implements Feature {
                 createLogContent.escapedWild({ pokemon: wanderer.name})
             );
         }
-        plot.wanderer = undefined;
+        plot.wanderer.catching(false);
+        this.wandererIsFleeing(plot);
+    }
+
+    public wandererIsFleeing(plot: Plot) {
+        if (!plot.wanderer) {
+            return;
+        }
+        plot.wanderer.fleeing(true);
+        setTimeout(() => {
+            plot.wanderer = undefined;
+        }, 1000);
     }
 
 }

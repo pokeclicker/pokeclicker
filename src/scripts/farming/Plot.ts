@@ -414,7 +414,7 @@ class Plot implements Saveable {
     }
 
     generateWanderPokemon(): WandererPokemon {
-        // No fully grown berry ? The wandering Pokémon ticks
+        // Ticking the wanderer
         if (this.wanderer) {
             if (this.wanderer.tick()) {
                 this.wanderer = undefined;
@@ -613,7 +613,7 @@ class Plot implements Saveable {
     }
 
     public canCatchWanderer(): boolean {
-        return this.wanderer && !this.wanderer.catching();
+        return this.wanderer && !this.wanderer.catching() && !this.wanderer.fleeing();
     }
 
     /**

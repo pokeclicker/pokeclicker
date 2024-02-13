@@ -3,6 +3,7 @@ class WandererPokemon {
     public catching: KnockoutObservable<boolean>;
     public pokeball: KnockoutObservable<GameConstants.Pokeball>;
     public distractTime: KnockoutObservable<number>;
+    public fleeing: KnockoutObservable<boolean>;
 
     constructor(
         public name: PokemonNameType,
@@ -14,11 +15,12 @@ class WandererPokemon {
         this.catching = ko.observable(false);
         this.pokeball = ko.observable(GameConstants.Pokeball.None);
         this.distractTime = ko.observable(distractTime);
+        this.fleeing = ko.observable(false);
     }
 
     // If distracted for long enough, flees
     public tick(): boolean {
-        if (!this.distractTime() || this.catching()) {
+        if (!this.distractTime() || this.catching() || this.fleeing()) {
             return false;
         }
         GameHelper.incrementObservable(this.distractTime, GameConstants.WANDER_TICK);

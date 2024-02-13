@@ -73,7 +73,7 @@ class FarmController {
                 return 'MulchShovelSelected';
             case FarmingTool.Berry:
             default:
-                return plot.canCatchWanderer() ? 'WandererHandling' : 'BerrySelected';
+                return plot.wanderer ? 'WandererHandling' : 'BerrySelected';
         }
     }
 
@@ -141,7 +141,7 @@ class FarmController {
         // Check which tool we have selected
         switch (this.selectedFarmTool()) {
             case FarmingTool.Berry:
-                if (plot.canCatchWanderer()) {
+                if (plot.wanderer) {
                     App.game.farming.handleWanderer(plot);
                 } else if (plot.isEmpty()) {
                     App.game.farming.plant(index, this.selectedBerry());
@@ -333,6 +333,19 @@ class FarmController {
         const id = Math.floor(pokemon.id).toString().padStart(3, '0');
         const forgedID = `${id}${decimals}${plot.wanderer.shiny ? 's' : ''}`;
         return `${plot.wanderer.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' :  ''}url('assets/images/dynamic-background/pokemon/${forgedID}.png')`;
+    }
+
+    public static getWandererCss(plot: Plot): string {
+        if (!plot.wanderer) {
+            return '';
+        }
+        if (plot.wanderer.fleeing()) {
+            return 'walkDownFlee';
+        } else if (plot.wanderer.distractTime() > 0) {
+            return 'walkDownFlash';
+        } else {
+            return 'walkDown';
+        }
     }
 
 }
