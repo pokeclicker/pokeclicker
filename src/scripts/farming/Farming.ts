@@ -2341,7 +2341,7 @@ class Farming implements Feature {
         plot.wanderer.fleeing(true);
         setTimeout(() => {
             plot.wanderer = undefined;
-        }, 1000);
+        }, 250);
     }
 
 }
