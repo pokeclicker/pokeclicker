@@ -2204,6 +2204,7 @@ TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Terrakion',
+        imageName: '../pokemon/639',
         hideTrainer: true,
         visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 5),
     }
@@ -2220,6 +2221,7 @@ TemporaryBattleList['Swords of Justice 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Swords of Justice',
+        imageName: '../pokemon/638',
         hideTrainer: true,
         visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 11),
     }
