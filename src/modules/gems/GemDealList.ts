@@ -330,7 +330,7 @@ const alolaMagikarpJumpDeal = [
     ),
 ];
 
-const dealList = ({
+const dealList = {
     [GemShops.HoennFluteMaster]: ko.observableArray(hoennFluteDeals),
     [GemShops.HoennStoneSalesman]: ko.observableArray(hoennStoneDeals),
     [GemShops.UnovaFluteMaster]: ko.observableArray(unovaFluteDeals),
@@ -338,6 +338,6 @@ const dealList = ({
     [GemShops.KalosStoneSalesman]: ko.observableArray(kalosStoneDeals),
     [GemShops.SilvallyTrader]: ko.observableArray(alolaSilvallyDeals),
     [GemShops.MagikarpJumpGemTrader]: ko.observableArray(alolaMagikarpJumpDeal),
-});
+};
 
 export default dealList;
