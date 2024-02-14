@@ -14,7 +14,7 @@ export default class FluteItem extends Item {
         description: string,
         public gemTypes: (keyof typeof PokemonType)[],
         public multiplierType: keyof typeof MultiplierType,
-        public multiplyBy: number
+        public multiplyBy: number,
     ) {
         super(name, Infinity, undefined, { maxAmount : 1 }, undefined, description, 'fluteItem');
     }

@@ -500,7 +500,8 @@ class PokemonHelper extends TmpPokemonHelper {
                     const shop = townShops[i];
                     let deals;
                     if (shop instanceof GemMasterShop) {
-                        deals = GemDeal.list[shop.shop]?.();
+                        console.log('GemDeal shop ' + GameConstants.GemShops[shop.shop]);
+                        deals = GemDeals.list[shop.shop]?.();
                     } else if (shop instanceof ShardTraderShop) {
                         deals = ShardDeal.list[shop.location]?.();
                     } else if (shop instanceof BerryMasterShop) {

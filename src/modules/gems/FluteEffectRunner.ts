@@ -14,7 +14,7 @@ import {
     humanifyString,
     formatSecondsToTime,
     formatTime,
-    MINUTE
+    MINUTE,
 } from '../GameConstants';
 import PokemonType from '../enums/PokemonType';
 import { LogBookTypes } from '../logbook/LogBookTypes';
@@ -33,7 +33,7 @@ export default class FluteEffectRunner {
                 multiplier.addBonus(item.multiplierType, () => this.getFluteMultiplier(itemName), item.displayName);
             }
             if (this.isActive(itemName)()) {
-                GameHelper.incrementObservable(this.numActiveFlutes,1);
+                GameHelper.incrementObservable(this.numActiveFlutes, 1);
             }
         });
         this.updateActiveGemTypes();
@@ -57,7 +57,7 @@ export default class FluteEffectRunner {
                     });
                     App.game.logbook.newLog(
                         LogBookTypes.OTHER,
-                        createLogContent.fluteRanOutOfGems({ flute: humanifyString(itemName) })
+                        createLogContent.fluteRanOutOfGems({ flute: humanifyString(itemName) }),
                     );
                 }
             }
@@ -103,7 +103,7 @@ export default class FluteEffectRunner {
         }
 
         player.effectList[itemName](Math.max(0, player.effectList[itemName]() + FluteEffectRunner.getLowestGem(itemName)));
-        GameHelper.incrementObservable(this.numActiveFlutes,1);
+        GameHelper.incrementObservable(this.numActiveFlutes, 1);
         this.updateFormattedTimeLeft(itemName);
         this.updateActiveGemTypes();
     }
