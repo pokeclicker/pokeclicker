@@ -90,7 +90,8 @@ class FarmHand {
 
         this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
             Energy: ${this.energy()}/${this.maxEnergy}<br/>
-            Work Cycle: ${GameConstants.formatTimeFullLetters((this.workTick - this.workTicks()) / 1000)}`
+            Work Cycle: ${GameConstants.formatTimeFullLetters((this.workTick - this.workTicks()) / GameConstants.SECOND)}<br/>
+            Next Payment: ${GameConstants.formatTimeFullLetters((this.costTick - this.costTicks()) / GameConstants.SECOND)}`
         );
     }
 

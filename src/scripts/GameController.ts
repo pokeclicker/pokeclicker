@@ -102,7 +102,9 @@ class GameController {
     }
 
     // Store keys for multi-key combinations
-    static keyHeld: Record<string, any> = {}
+    static keyHeld: Record<string, KnockoutObservable<boolean>> = {
+        Shift: ko.observable(false).extend({ boolean: null }),
+    }
     //Event listeners for hide, hidden and shown. hide is required to prevent 'softlocking' and bricking Bootstrap when closed externally
     static addKeyListeners() {
         // Oak Items
@@ -162,7 +164,11 @@ class GameController {
             const key = GameController.convertKey(e.key);
 
             // Set flags for any key currently pressed down (used to check if key held down currently)
-            GameController.keyHeld[key] = true;
+            if (GameController.keyHeld[key]) {
+                GameController.keyHeld[key](true);
+            } else {
+                GameController.keyHeld[key] = ko.observable(true).extend({ boolean: null });
+            }
 
             // Set our number key if defined (-1 for 0 indexed)
             const numberKey = (+key) - 1;
@@ -171,7 +177,7 @@ class GameController {
 
             //Global Multi-key combinations
             if (isNumberKey) {
-                if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]?.()) {
                     // Open pokeball selector modal using P + (1-4) for each condition
                     if (!($pokeballSelector.data('bs.modal')?._isShown) && !$pokeballSelector.data('disable-toggle')) {
                         $('.modal').modal('hide');
@@ -222,12 +228,10 @@ class GameController {
             if ($farmsModal.data('bs.modal')?._isShown) {
                 switch (key) {
                     case Settings.getSetting('hotkey.farm.toggleShovel').value:
-                        FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
-                        FarmController.selectedPlotSafeLock(false);
+                        [FarmingTool.Shovel, FarmingTool.MulchShovel].includes(FarmController.selectedFarmTool()) ? FarmController.selectedFarmTool(FarmController.berryListVisible() ? FarmingTool.Berry : FarmingTool.Mulch) : FarmController.selectedFarmTool(FarmController.berryListVisible() ? FarmingTool.Shovel : FarmingTool.MulchShovel);
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.farm.togglePlotSafeLock').value:
-                        FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);
-                        FarmController.selectedShovel(false);
+                        FarmController.selectedFarmTool() == FarmingTool.Lock ? FarmController.selectedFarmTool(FarmController.berryListVisible() ? FarmingTool.Berry : FarmingTool.Mulch) : FarmController.selectedFarmTool(FarmingTool.Lock);
                         return e.preventDefault();
                 }
             }
@@ -273,7 +277,7 @@ class GameController {
             if ($pokeballSelector.data('bs.modal')?._isShown) {
                 if (isNumberKey) {
                     // Switch selection type
-                    if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                    if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]?.()) {
                         $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
                         return e.preventDefault();
                     }
@@ -313,7 +317,7 @@ class GameController {
                         ShopHandler.resetAmount();
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.shop.increase').value:
-                        if (GameController.keyHeld.Shift) {
+                        if (GameController.keyHeld.Shift()) {
                             switch (Settings.getSetting('shopButtons').value) {
                                 case 'original':
                                     ShopHandler.increaseAmount(100);
@@ -345,7 +349,7 @@ class GameController {
             // Only run if no modals are open
             if (visibleModals === 0) {
                 // Route Battles
-                if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control) {
+                if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
                     const idx = cycle.findIndex(r => r == player.route());
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
@@ -403,7 +407,7 @@ class GameController {
                             NPCController.openDialog(filteredNPCs[numberKey - filteredContent.length]);
                         }
                         return e.preventDefault();
-                    } else if (player.town() instanceof DungeonTown && !GameController.keyHeld.Control) {
+                    } else if (player.town() instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
                         const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
                         const idx = cycle.findIndex(d => d.name == player.town().name);
                         switch (key) {
@@ -461,19 +465,19 @@ class GameController {
                     }
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
-                    if (GameController.keyHeld.Shift) {
+                    if (GameController.keyHeld.Shift()) {
                         Save.store(player);
                         return e.preventDefault();
                     }
                     break;
                 case Settings.getSetting('hotkey.downloadSave').value:
-                    if (GameController.keyHeld.Shift) {
+                    if (GameController.keyHeld.Shift()) {
                         Save.download();
                         return e.preventDefault();
                     }
                     break;
                 case Settings.getSetting('hotkey.mute').value:
-                    if (GameController.keyHeld.Shift) {
+                    if (GameController.keyHeld.Shift()) {
                         (Settings.getSetting('sound.muted') as BooleanSetting).toggle();
                         return e.preventDefault();
                     }
@@ -501,7 +505,7 @@ class GameController {
 
             const key = GameController.convertKey(e.key);
             // Our key is no longer being held down
-            delete GameController.keyHeld[key];
+            GameController.keyHeld[key]?.(false);
 
             if (App.game.gameState === GameConstants.GameState.safari) {
                 switch (key) {
