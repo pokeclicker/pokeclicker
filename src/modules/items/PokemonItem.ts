@@ -66,7 +66,7 @@ export default class PokemonItem extends CaughtIndicatingItem {
                 pokemonImage: PokemonHelper.getImage(pokemonID, shiny),
                 type: (shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success),
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: (newCatch ? NotificationConstants.NotificationSound.General.new_catch : null)),
+                sound: (newCatch ? NotificationConstants.NotificationSound.General.new_catch : null),
             });
         }
         if (shiny) {
