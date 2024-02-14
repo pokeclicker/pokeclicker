@@ -121,10 +121,10 @@ export function generateSpindaSpots(spindaSpot: SpindaSpots | string, x = Math.r
     const originTop = 23;
     const originLeft = 15;
     const SpotsMinPosition = {
-        topLeft: { x: 0, y: 0 },
-        topRight: { x: 24, y: 2 },
-        bottomLeft: { x: 3, y: 18 },
-        bottomRight: { x: 15, y: 18 },
+        topLeftSpot: { x: 0, y: 0 },
+        topRightSpot: { x: 24, y: 2 },
+        bottomLeftSpot: { x: 3, y: 18 },
+        bottomRightSpot: { x: 15, y: 18 },
     };
     const percentage = 96 / size;
     //const spotMaxX = SpotsMinPosition[spindaSpot].x + 16;
@@ -134,7 +134,6 @@ export function generateSpindaSpots(spindaSpot: SpindaSpots | string, x = Math.r
         spotX: (originTop + Math.floor(x + SpotsMinPosition[spindaSpot].x)) / percentage,
         spotY: (originLeft + Math.floor(y + SpotsMinPosition[spindaSpot].y)) / percentage,
     };
-    
     return spotsPosition;
 }
 

@@ -4,6 +4,7 @@ import type {
 } from 'knockout';
 import { Saveable } from '../DataStore/common/Saveable';
 import * as GameConstants from '../GameConstants';
+import * as SpindaHelper from '../pokemons/SpindaHelper';
 import Notifier from '../notifications/Notifier';
 import Rand from '../utilities/Rand';
 import SpindaSpots from '../enums/SpindaSpots';
@@ -100,12 +101,9 @@ export default class Profile implements Saveable {
         // Spinda
         if (pokemon === 327) {
             GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
-                const spotContainer: HTMLElement = node.querySelector(`.${spotPosition}Spot`);
-                const settingsPositions = { 
-                    spotX: +Settings.getSetting(`${spotPosition}X`).observableValue(),
-                    spotY: +Settings.getSetting(`${spotPosition}Y`).observableValue()
-                };
-                const positions = TmpPokemonHelper.generateSpindaSpots(spotPosition, settingsPositions.spotX, settingsPositions.spotY);
+                const spotContainer: HTMLElement = node.querySelector(`.${spotPosition}`);
+                const settingsPositions = SpindaHelper.getSettingsObject();
+                const positions = TmpPokemonHelper.generateSpindaSpots(spotPosition, settingsPositions[spotPosition].x, settingsPositions[spotPosition].y);
                 spotContainer.style.backgroundImage = `url(${TmpPokemonHelper.getSpindaMask(pokemonShiny)})`;
                 spotContainer.style.maskPosition = `${positions.spotX}px ${positions.spotY}px`;
             });

@@ -331,8 +331,9 @@ Settings.add(new BooleanSetting('sound.muted', 'Mute All Sounds', false));
 
 // Spinda spots
 GameHelper.enumStrings(SpindaSpots).forEach((key) => {
-    Settings.add(new RangeSetting(`${key}X`, `Spot ${key} X`, 0, 16, 1, 8));
-    Settings.add(new RangeSetting(`${key}Y`, `Spot ${key} Y`, 0, 16, 1, 8));
+    const settingName = camelCaseToString(key);
+    Settings.add(new RangeSetting(`spinda.${key}X`, `Spinda ${settingName} X`, 0, 16, 1, 8));
+    Settings.add(new RangeSetting(`spinda.${key}Y`, `Spinda ${settingName} Y`, 0, 16, 1, 8));
 });
 
 // Hotkeys

@@ -1,8 +1,8 @@
 enum SpindaSpots {
-    topLeft,
-    topRight,
-    bottomLeft,
-    bottomRight,
+    topLeftSpot,
+    topRightSpot,
+    bottomLeftSpot,
+    bottomRightSpot,
 }
 
 export default SpindaSpots;

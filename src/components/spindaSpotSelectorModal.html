@@ -13,7 +13,7 @@
                     <knockout data-bind="template: { 
                         name: 'spindaSpotTemplate', 
                         data: { 
-                            'isBattle': false,
+                            'spotObject': SpindaHelper.getSettingsObject(),
                         } 
                     }">Spinda Spot</knockout>
                 </knockout>
@@ -30,39 +30,37 @@
                             <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
                             <tr>
                                 <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(positionName)} Spot`">Spot</td>
-                                <!-- ko using: Settings.getSetting(`${positionName}X`), as: 'spotX' -->
+                                <!-- ko using: SpindaHelper.getSettingsObject(), as: 'spot' -->
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
-                                        name: spotX.name, 
-                                        id: `setting-${spotX.name}`,
-                                        min: spotX.minValue, 
-                                        max: spotX.maxValue, 
-                                        step: spotX.step
+                                        name: Settings.getSetting(`spinda.${positionName}X`).name, 
+                                        id: `setting-${Settings.getSetting(`spinda.${positionName}X`).name}`,
+                                        min: 0, 
+                                        max: 16, 
+                                        step: 1
                                     },
-                                    value: $data.observableValue,
+                                    value: spot[positionName].x,
                                     tooltip: {
-                                        title: $data.observableValue(),
+                                        title: spot[positionName].x,
                                         trigger: 'hover',
                                         boundary: 'window',
                                         placement: 'top'
                                     }"
                                     oninput="(Settings.setSettingByName(this.name, this.value))">
                                 </td>
-                                <!-- /ko -->
-                                <!-- ko using: Settings.getSetting(`${positionName}Y`), as: 'spotY' -->
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
-                                        name: spotY.name, 
-                                        id: `setting-${spotY.name}`,
-                                        min: spotY.minValue, 
-                                        max: spotY.maxValue, 
-                                        step: spotY.step
+                                        name: Settings.getSetting(`spinda.${positionName}Y`).name, 
+                                        id: `setting-${Settings.getSetting(`spinda.${positionName}Y`).name}`,
+                                        min: 0, 
+                                        max: 16, 
+                                        step: 1
                                     },
-                                    value: $data.observableValue,
+                                    value: spot[positionName].y,
                                     tooltip: {
-                                        title: $data.observableValue(),
+                                        title: spot[positionName].y,
                                         trigger: 'hover',
                                         boundary: 'window',
                                         placement: 'top'
