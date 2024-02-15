@@ -5080,85 +5080,85 @@ const UnovaFossilNpc = new NPC('Friendly Waitress', [
 // Swords of Justice Quest Npcs
 const OldManSwords = new NPC('Old Man', [
     'Hello kiddo. You must be $playername$, nice to meet you.',
-    'You might\'ve heard about the Swords of Justice. They seem to be really worried recently and that also worries me alot, but you seem to be a really nice lad so I\'ll tell you how to find their leader, Cobalion.',
+    'You might\'ve heard about the Swords of Justice. They seem to be really worried recently and that also worries me, but you seem to be a really nice lad so I\'ll tell you how to find their leader, Cobalion.',
     'They usually lurk around the deepest layers of Mistralton Cave so you might be able to find them by exploring around here.',
 ], {
     image: 'assets/images/npcs/Old Man.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Swords of Justice'), new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.less)]),
 });
 const Cobalion1 = new NPC('Cobalion', [
-    'Hello, may I ask who are you? Oh, you\'re a friend of the Old Man? That\'s great and he sent you here to find me I assume.',
-    'Well since he said for you to find me there must be a reason unless you\'re here to help me gather back the Swords of Justice. If you are then thank you, meet me at Moor of Icirrus when you find them, but you should look for Terrakion first, they usually stay in the depths of the Victory Road. Goodluck, trainer.',
+    'Greetings, may I ask who are you? Oh, you\'re a friend of the Old Man? That\'s great, and he sent you here to find me, I assume.',
+    'Well, since he said for you to find me, there must be a reason. Unless you\'re here to help me reform the Swords of Justice? If so, then thank you for your aid. Meet me in the Moor of Icirrus after you find them. You should look for Terrakion first, they usually stay in the depths of the Unova Victory Road. Good luck, Trainer.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.less)]),
 });
 const Terrakion1 = new NPC('Terrakion', [
-    'Uhm. How did you find me? Cobalion told me this place was well hidden! anyways, what do you want from me? Cobalion wants to gather back the Swords of Justice? Do you think i\'m dumb enough to fall for that right?',
-    'I\'d only trust you if you\'d beat me in a battle right here.',
+    'How did you find me? Cobalion told me this place was well hidden! Anyways, what do you want from me? Cobalion wants to reunite the Swords of Justice? Do you think i\'m dumb enough to fall for lies of a human?',
+    'I\'ll consider your worth only if you prove your strength and can beat me in battle!.',
 ], {
     image: 'assets/images/pokemon/639.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.less)]),
 });
 const Cobalion2 = new NPC('Cobalion', [
-    'Thank you, $playername$. You\'re being very helpful helping me reunite the Swords of Justice once again.',
-    'Now that you\'ve found and brought back Terrakion you should probably look for Virizion, they usually like to meditate to the sound of nature so looking through the Pinwheel Forest might be a good thing to do. Good luck and report back once you\'ve found them.',
+    'Thank you, $playername$. Your assistance with reuniting the Swords of Justice is greatly appreciated.',
+    'Now that you\'ve found and brought back Terrakion you should probably look for Virizion, they usually like to meditate to the sound of nature, so Pinwheel Forest might be a good place to search for them. Good luck, and report back once you've found them.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.less)]),
 });
 const Virizion1 = new NPC('Virizion', [
-    'Hello, who are you may I ask? You\'re being sent here by Cobalion because he wants to reunite the Swords of Justice? I\'m sorry dear but you\'re have to create a much more detailed lie to catch me, I\'m not easily fooled by humans.',
-    'The only way for me to trust a human is to know they can have the patience with the simplest activities, so if you can gather me 5,000 thousand Grass Gems I\'ll trust you. But if you don\'t then you\'ll not come back here.',
+    'Hello, who are you, may I ask? You say you were sent here by cobalion because he wants to reunite the Swords of Justice? I\'m sorry dear, you\'ll have to create a much more belieable lie to deceive me. I\'m not so easily fooled.',
+    'To earn my trust, you need to prove your patience to me. If you can gather 5,000 Grass Gems and bring them to me, then I\'ll trust your word. If you cannot handle such a task, do no return.',
 ], {
     image: 'assets/images/pokemon/640.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 9, GameConstants.AchievementOption.less)]),
 });
 const Virizion2 = new NPC('Virizion', [
-    'Oh, you\'re back with the 5,000 thousand Grass gems, since you brought them I think I can trust you. So, Cobalion wants me too meet them at Moor of Icirrus so we can dicuss what to do, sounds very just like the old Cobalion. I\'ll make my way to there right this moment, you should probably come too.',
+    'Oh, you\'re back? And you\'ve brought the 5,000 Grass Gems. I\'m impressed. Very well, you\'ve earned my trust. So, Cobalion wants me to meet them at the Moor of Icirrus to reunite the Swords of Justice? Sounds just like the old Cobalion I remember. I\'ll make my way there now, you should come too. I\'m sure your assistant is still desired.',
 ], {
     image: 'assets/images/pokemon/640.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 9, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.less)]),
 });
 const Cobalion3 = new NPC('Cobalion', [
-    'Oh, welcome back $playername$. I see you brought back Virizion, thank you for helping me reunite the Swords of Justice.',
-    'Now let\'s dicuss the plan. Wait, you want to help too? You do know this is gonna be a very dangerous mission, $playername$. I don\'t think I can protect you from all the dangers we might face off, the only way for us to know you\'re gonna be safe is to know if you can defeat all 3 of us. If you can then i\'ll let you help but if you can\'t then i\'m sorry but you\'re not going to be able to join the mission.',
+    'Welcome back, $playername$! I can see you\'ve brought back Virizion, thank you for your assistance towards reuniting the Swords of Justice.'
+    'Now, let\'s discuss the plan. Wait, you want to help too? You should know this will be a very dangerous  mission, $playername$. We may not be able to fully protect you from the dangers we may face. The only way we can be sure of your safety is if you can hold your own agaisnt all three of us in battle. If you suceed, we will happily accept your assistance, but should you fail, then i apologise, but we cannot allow you to join the mission. What say you? Shall we spar?',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 12, GameConstants.AchievementOption.less)]),
 });
 const Cobalion4 = new NPC('Cobalion', [
-    'Hello, $playername$. I assume you couldn\'t find much, but I was able to find that Kyurem was seen near Lacunosa Town so we should check it out right now before he decides to attack it. You should go infront i\'ll warn the others.',
+    'Greetings, $playername$. I assume you couldn\'t find much, but I was able to find that Kyurem has been seen near Lacunosa Town. We should check it out immediately, before it decides to attack. You go ahead, i\'ll warn the others.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 13, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.less)]),
 });
 const Cobalion5 = new NPC('Cobalion', [
-    'Hey, $playername$ it\'s not your fault they fled, but thinking now they should probably gone hiding in their hideout, let\'s look for it on the Giant Chasm right this instant.',
+    'Hey, $playername$. It\'s not your fault Kyurem fled, but thinking now they should probably gone into hiding. We should search the Giant Chasm for their lair at once.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 17, GameConstants.AchievementOption.less)]),
 });
 const Cobalion6 = new NPC('Cobalion', [
-    '$playername$... Do not worry about us... We\'ll be fine... Defeat Kyurem once and for all so we can live calmly..',
+    '$playername$... Don\'t worry about us... We\'ll be fine... Defeat Kyurem once and for all so we can live in peace.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 18, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.less)]),
 });
 const Cobalion7 = new NPC('Cobalion', [
-    'Thank you for all your help, $playername$. You were a really great ally and I hope we can meet again, also as thank you for helping us, I\'ll be waiting for you on Mistralton Cave if you\'d like me to join your team.',
+    'Thank you for all your help, $playername$. You really were a great ally, and I hope we can meet again. As thanks for helping us, I\'ll be waiting for you in Mistralton Cave if you\'d wish for me to join your team.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
 });
 const Terrakion2 = new NPC('Terrakion', [
-    'Hey, you were a really partner. It was really nice doing this mission with you and you seems like a strong trainer, so if you want i\'ll be waiting to join your team on the Victory Road.',
+    'Hey, you were a really great partner! It was really nice doing this mission with you, and you seem like a strong trainer, so if you want me to join your team, I\'ll be waiting in the Victory Road!',
 ], {
     image: 'assets/images/pokemon/639.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
 });
 const Virizion3 = new NPC('Virizion', [
-    'You were a great ally, $playername$. It\'d be a wise decision from my side to join your team but it\'s a decision you should take, if you\'d wish for me to join your team you can look for me in the depths of Pinwheel Forest.',
+    'You were a great ally, $playername$. I feel it\'d be a wise decision on my part if i joined your team, but that\'s a decision for you to make. If you decide you wish for me to join your team, you can look for me in the depths of Pinwheel Forest.',
 ], {
     image: 'assets/images/pokemon/640.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
