@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/pokemons/PokemonHelper.d.ts" />
+
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
 //Kanto Temporary Battles

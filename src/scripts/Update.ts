@@ -1,4 +1,5 @@
 /// <reference path="./GameConstants.d.ts" />
+/// <reference path="../declarations/pokemons/PokemonHelper.d.ts" />
 
 class Update implements Saveable {
     defaults: Record<string, any>;

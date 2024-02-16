@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/pokemons/PokemonHelper.d.ts" />
 
 class DamageCalculator {
     static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
