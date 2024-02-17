@@ -26,6 +26,7 @@ import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
+import FarmingTool from './enums/FarmingTool';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -151,7 +152,7 @@ import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import ClientRequirement from './requirements/ClientRequirement';
 import ContestWonRequirement from './requirements/ContestWonRequirement';
-import lazyLoad from './utilities/LazyLoader';
+import { lazyLoad, lazyLoadCallback } from './utilities/LazyLoader';
 import {
     beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
 } from './pokemons/evolutions/Base';
@@ -226,6 +227,7 @@ Object.assign(<any>window, {
     QuestLineState,
     WeatherForecastStatus,
     SafariEnvironments,
+    FarmingTool,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -360,6 +362,7 @@ Object.assign(<any>window, {
     ClientRequirement,
     ContestWonRequirement,
     lazyLoad,
+    lazyLoadCallback,
     LevelEvolution,
     StoneEvolution,
     EvoTrigger,

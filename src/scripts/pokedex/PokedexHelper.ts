@@ -1,15 +1,20 @@
 import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
-    public static toggleStatisticShiny = ko.observable(true);
-    public static hideShinyImages = ko.observable(false);
 
     public static initialize() {
         Object.values(PokedexFilters).forEach((filter) => {
             filter.value.subscribe(() => {
-                document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;
-                PokedexHelper.resetPokedexView.notifySubscribers();
+                PokedexHelper.scrollToTop();
+                PokedexHelper.resetPokedexFlag.notifySubscribers();
             });
+        });
+
+        modalUtils.observableState.pokedexModalObservable.subscribe((modalState) => {
+            // Resetting scrolling only works before modal is fully hidden
+            if (modalState === 'hide') {
+                PokedexHelper.scrollToTop();
+            }
         });
     }
 
@@ -230,13 +235,9 @@ class PokedexHelper {
     }
 
     // Flag for the LazyLoader
-    public static resetPokedexView = ko.pureComputed(() => {
-        return modalUtils.observableState.pokedexModalObservable;
-    });
-}
+    public static resetPokedexFlag = ko.computed(() => modalUtils.observableState.pokedexModal === 'hidden');
 
-$(document).ready(() => {
-    $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
-        PokedexHelper.toggleStatisticShiny(true);
-    });
-});
+    private static scrollToTop() {
+        document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;
+    }
+}
