@@ -103,6 +103,8 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
     ],
     'queue'));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
+Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
+Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
