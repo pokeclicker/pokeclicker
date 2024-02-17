@@ -2223,6 +2223,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
             {loot: 'Lucky_egg'},
         ],
         rare: [{loot: 'Green Shard'}],
+        epic : [{loot: 'Spiky-eared Pichu', ignoreDebuff : true, requirement : new QuestLineStepCompletedRequirement('Unfinished Business', 7)}],
         legendary: [
             {loot: 'Revive'},
             {loot: 'Insect Plate'},
