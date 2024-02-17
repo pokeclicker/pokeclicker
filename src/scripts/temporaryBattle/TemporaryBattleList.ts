@@ -2221,7 +2221,7 @@ TemporaryBattleList['Swords of Justice 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Swords of Justice',
-        imageName: '../pokemon/638',
+        imageName: 'specialNPCs/Swords',
         hideTrainer: true,
         visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 11),
     }
