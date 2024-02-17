@@ -2199,7 +2199,7 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
 TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
     'Terrakion 1',
     [new GymPokemon('Terrakion', 175698480, 50, undefined, false)],
-    'You\'re actually very strong. It\'s very possible that Cobalion trusted you to find us, well then. Where are we supposed to meet? Ok, i\'ll be making my way to there right now, you should come too so Cobalion can tell you where you\'ll be able to find Virizion.',
+    'You\'re actually very strong. It\'s very possible that Cobalion trusted you to find us. Well then, where are we supposed to meet? The Moor of Icirrus? Very well, I shall make my way there then. You should come too, Cobalion should knoe where you might find our companion, Virizion.',
     [new QuestLineStepCompletedRequirement('Swords of Justice', 4)],
     undefined,
     {
@@ -2216,7 +2216,7 @@ TemporaryBattleList['Swords of Justice 1'] = new TemporaryBattle(
         new GymPokemon('Terrakion', 60042160, 55, undefined, false),
         new GymPokemon('Virizion', 60042160, 55, undefined, false),
     ],
-    'It seems like you\'re really strong, $playername$. I\'ll let you help us since you were able to defeat us. Now onto discussing the plan. We\'ll start by searching for clues on where Kyurem might attack so you\'ll start by looking around the Giant Chasm. Good Luck, if you find anything we\'ll meet here again.',
+    'It seems you\'re pretty strong, $playername$. We\'ll let you help us since you were able to defeat us in a battle. Now, onto the plan. We\'ll start by searching for clues on where Kyurem might attack, so you\'ll start by looking around the Giant Chasm. Good Luck in your endeavour, report back with your findings.',
     [new QuestLineStepCompletedRequirement('Swords of Justice', 11)],
     undefined,
     {
@@ -2228,7 +2228,7 @@ TemporaryBattleList['Swords of Justice 1'] = new TemporaryBattle(
 );
 TemporaryBattleList['Kyurem 1'] = new TemporaryBattle(
     'Kyurem 1',
-    [new GymPokemon('Kyurem', 3060808, 60, undefined, false)],
+    [new GymPokemon('Kyurem', 183060808, 60, undefined, false)],
     undefined,
     [new QuestLineStepCompletedRequirement('Swords of Justice', 14)],
     undefined,
