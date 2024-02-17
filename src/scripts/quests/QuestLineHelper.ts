@@ -1501,7 +1501,7 @@ class QuestLineHelper {
         const TalkToCobalion6 = new TalkToNPCQuest(Cobalion6, 'Kyurem has injured the Swords of Justice, go check on Cobalion.');
         swordsofJusticeQuest.addQuest(TalkToCobalion6);
 
-        const defeatKyurem3 = new DefeatTemporaryBattleQuest('Kyurem 3', 'Defeat Kyurem and stop them from causing any more harm!');
+        const defeatKyurem3 = new DefeatTemporaryBattleQuest('Kyurem 3', 'Defeat Kyurem and stop it from causing any more harm!');
         swordsofJusticeQuest.addQuest(defeatKyurem3);
 
         const TalkToCobalion7 = new TalkToNPCQuest(Cobalion7, 'Talk to Cobalion.');
@@ -1513,11 +1513,11 @@ class QuestLineHelper {
         ));
 
         const CatchCobalion = new CaptureSpecificPokemonQuest('Cobalion').withDescription('Capture the Leader of the Swords of Justice, Cobalion, in Mistralton Cave.');
-        const CatchVirizion = new CaptureSpecificPokemonQuest('Virizion').withDescription('Capture the Cleverest of the Swords of Justice, Virizon, in Pinwheel Forest.');
+        const CatchVirizion = new CaptureSpecificPokemonQuest('Virizion').withDescription('Capture the Cleverest of the Swords of Justice, Virizion, in Pinwheel Forest.');
         const CatchTerrakion = new CaptureSpecificPokemonQuest('Terrakion').withDescription('Capture the Toughest of the Swords of Justice, Terrakion, in Victory Road.');
         swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
             [CatchCobalion, CatchVirizion, CatchTerrakion],
-            undefined
+            'The Swords of Justice all depart for their homes to await for your arrival. Go catch your new friends and add them to your team!',
         ));
 
         App.game.quests.questLines().push(swordsofJusticeQuest);
