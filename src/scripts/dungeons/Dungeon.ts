@@ -8815,6 +8815,10 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
             new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+            new OneFromManyRequirement([
+                new QuestLineCompletedRequirement('Swords of Justice'),
+                new QuestLineStartedRequirement('Swords of Justice', GameConstants.AchievementOption.less),
+            ]),
         ])}),
     ],
     266500, 22);
