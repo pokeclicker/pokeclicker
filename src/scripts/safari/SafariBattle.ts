@@ -262,7 +262,7 @@ class SafariBattle {
                 .then(() => SafariBattle.endBattle());
             return;
         } else if (SafariBattle.enemy.eating > 1) {
-            SafariBattle.text(`${SafariBattle.enemy.displayName} is eating..`);
+            SafariBattle.text(`${SafariBattle.enemy.displayName} is eating...`);
         } else if (SafariBattle.enemy.angry > 1) {
             SafariBattle.text(`${SafariBattle.enemy.displayName} is angry!`);
         } else {
