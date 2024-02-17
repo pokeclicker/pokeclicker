@@ -347,8 +347,8 @@ class FarmHands {
     }
 
     public tick() {
-        // run game tick for all hired farmhands
-        FarmHands.list.forEach(f => f.hired() && f.tick());
+        // run game tick for all farmhands
+        FarmHands.list.forEach(f => f.tick());
     }
 
     public toJSON(): Record<string, any>[] {

@@ -109,7 +109,9 @@ ItemList.Vivid_Scent = new ExpGainedBonusHeldItem('Vivid_Scent', 10000, GameCons
 ItemList.Muscle_Band = new AttackBonusHeldItem('Muscle_Band', 1000, GameConstants.Currency.battlePoint, undefined, 'Muscle Band', 1.05, GameConstants.Region.hoenn);
 // Pokemon specific items
 ItemList.Light_Ball = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',
-    (pokemon) => Math.floor(pokemon.id) == 25 );
+    (pokemon) => Math.floor(pokemon.id) == 25);
+ItemList.Lucky_Punch = new AttackBonusHeldItem('Lucky_Punch', 10000, GameConstants.Currency.money, undefined, 'Lucky Punch', 1.3, GameConstants.Region.galar, 'Happiny, Chansey or Blissey',
+    (pokemon) => Math.floor(pokemon.id) == 440 ||  Math.floor(pokemon.id) == 113 || Math.floor(pokemon.id) == 242);
 ItemList.Quick_Powder = new AttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.3, GameConstants.Region.kalos, 'Ditto',
     (pokemon) => Math.floor(pokemon.id) == 132);
 ItemList.Thick_Club = new AttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.3, GameConstants.Region.alola, 'Cubone or Marowak',
@@ -131,7 +133,7 @@ ItemList.Douse_Drive = new AttackBonusHeldItem('Douse_Drive', 10000, GameConstan
 ItemList.Shock_Drive = new AttackBonusHeldItem('Shock_Drive', 10000, GameConstants.Currency.money, undefined, 'Shock Drive', 1.5, GameConstants.Region.unova, 'Genesect',
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.04 || pokemon.id == 649.05 || pokemon.id == 649.09);
 ItemList.Leek = new AttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.3, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
-    (pokemon) => Math.floor(pokemon.id) == 83 ||  Math.floor(pokemon.id) == 865);
+    (pokemon) => Math.floor(pokemon.id) == 83 || Math.floor(pokemon.id) == 865);
 ItemList.Rusted_Sword = new AttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',
     (pokemon) => Math.floor(pokemon.id) == 888);
 ItemList.Rusted_Shield = new AttackBonusHeldItem('Rusted_Shield', 10000, GameConstants.Currency.money, undefined, 'Rusted Shield', 1.5, GameConstants.Region.galar, 'Zamazenta',
