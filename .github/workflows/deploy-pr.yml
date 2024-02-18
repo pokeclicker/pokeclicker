@@ -1,0 +1,68 @@
+name: 🔂 PR Preview
+
+on:
+  pull_request_target:
+    # when using teardown: 'true', add default event types + closed event type
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - 'src/**/*.ts'
+      - 'src/**/*.html'
+      - 'src/**/*.less'
+      - 'src/**/*.ejs'
+
+jobs:
+  preview:
+    environment: pokeclicker-development # link to the environment
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # allow to create/update PR comments
+    steps:
+      - name: Get User Permission
+        id: checkAccess
+        uses: actions-cool/check-user-permission@v2
+        with:
+          require: write
+          username: ${{ github.triggering_actor }}
+
+      # if the user does not have the required permission, we should return exit code 1 to stop the workflow
+      # or add a condition to skip the next steps instead (if we don't want this to deploy to preview PR for everyone)
+      - name: Check User Permission
+        if: steps.checkAccess.outputs.require-result == 'false'
+        run: |
+          echo "${{ github.triggering_actor }} does not have permissions on this repo."
+          echo "Current permission level is ${{ steps.checkAccess.outputs.user-permission }}"
+          echo "Job originally triggered by ${{ github.actor }}"
+          exit 0
+
+      - name: Checkout PR
+        uses: actions/checkout@v3
+        with:
+          ref: ${{  github.event.pull_request.head.sha }}
+
+      - name: Build PR
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+      - run: |
+          npm ci
+          echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
+          npm run build
+          rm -rf build/assets
+          ln -s ../../assets build/assets
+          rm -rf build/libs
+          ln -s ../../libs build/libs
+      
+      - name: Deploy to GH-Pages
+        uses: redsparr0w/pr-preview-action@e42785b6369079700cfd810f51d14da466ea5cce
+        id: preview_step
+        with:
+          source-dir: 'build'
+          preview-branch: 'master'
+          umbrella-dir: 'docs/preview'
+          custom-url: 'dev.pokeclicker.com'
+          deploy-repository: 'RedSparr0w/pokeclicker'
+          token: ${{ secrets.DEV_PAGE }}
+          pages-base-dir: 'docs/'
+
+      - name: Preview URL
+        run: echo "url => ${{ steps.preview_step.outputs.deployment-url }}"

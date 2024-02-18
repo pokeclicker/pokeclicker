@@ -43,7 +43,7 @@ class QuestLineHelper {
                     exitOnEsc: false,
                     showButtons: false,
                 });
-                const caughtSelector: HTMLElement = document.querySelector('.pokeball-small.clickable.pokeball-selected');
+                const caughtSelector: HTMLElement = document.querySelector('tr[data-name="Caught"] img.pokeball-small.clickable.pokeball-selected');
                 caughtSelector.addEventListener('click', () => {
                     Information.hide();
                     $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
@@ -581,17 +581,7 @@ class QuestLineHelper {
         const talktoIlexForestShrine1 = new TalkToNPCQuest(IlexForestShrine1, 'Investigate the shrine in Ilex Forest.');
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
 
-        const SpikyEaredPichuReward = () => {
-            App.game.party.gainPokemonByName('Spiky-eared Pichu');
-            Notifier.notify({
-                title: celebiJohtoQuestLine.name,
-                message: 'You captured the Spiky-eared Pichu!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const clearSpikyEaredPichu = new DefeatTemporaryBattleQuest('Spiky-eared Pichu', 'Defeat the strange Pichu.').withCustomReward(SpikyEaredPichuReward);
+        const clearSpikyEaredPichu = new DefeatTemporaryBattleQuest('Spiky-eared Pichu', 'Defeat the strange Pichu.');
         celebiJohtoQuestLine.addQuest(clearSpikyEaredPichu);
 
         const talktoProfOak4 = new TalkToNPCQuest(AzaleaCelebiOak2, 'Talk to Professor Oak in Azalea Town.');
@@ -2055,7 +2045,7 @@ class QuestLineHelper {
                 talkToPrimalMaxie,
             ], 'Find out what the Team Leaders are up to at Mt. Pyre.'));
 
-        const fightPrimalGroudon = new DefeatTemporaryBattleQuest('Primal Groudon', 'Defeat Primal Groudon in Sunny Weather.');
+        const fightPrimalGroudon = new DefeatTemporaryBattleQuest('Primal Groudon', 'Defeat Primal Groudon in Harsh Sunlight Weather.');
         const fightPrimalKyogre = new DefeatTemporaryBattleQuest('Primal Kyogre', 'Defeat Primal Kyogre in Raining Weather.');
 
         primalReversionQuestLine.addQuest(new MultipleQuestsQuest(

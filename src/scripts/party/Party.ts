@@ -14,28 +14,44 @@ class Party implements Feature {
 
     hasMaxLevelPokemon: KnockoutComputed<boolean>;
 
+    hasShadowPokemon: KnockoutComputed<boolean>;
+
     _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
 
+    calculateBaseClickAttack: KnockoutComputed<number>;
 
     constructor(private multiplier: Multiplier) {
         this._caughtPokemon = ko.observableArray([]);
 
         this.hasMaxLevelPokemon = ko.pureComputed(() => {
-            for (let i = 0; i < this.caughtPokemon.length; i++) {
-                if (this.caughtPokemon[i].level === 100) {
-                    return true;
-                }
-            }
-            return false;
+            return this.caughtPokemon.some(p => p.level === 100);
+        }).extend({rateLimit: 1000});
+
+        this.hasShadowPokemon = ko.computed(() => {
+            return this.caughtPokemon.some(p => p.shadow === GameConstants.ShadowStatus.Shadow);
         }).extend({rateLimit: 1000});
 
         // This will be completely rebuilt each time a pokemon is caught.
         // Not ideal but still better than mutliple locations scanning through the list to find what they want
-        this._caughtPokemonLookup = ko.pureComputed(() => {
+        this._caughtPokemonLookup = ko.computed(() => {
             return this.caughtPokemon.reduce((map, p) => {
                 map.set(p.id, p);
                 return map;
             }, new Map());
+        });
+
+        this.calculateBaseClickAttack = ko.computed(() => {
+            // Base power
+            // Shiny pokemon help with a 100% boost
+            // Resistant pokemon give a 100% boost
+            let caughtPokemon = this.caughtPokemon;
+            if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                // Only magikarps can attack in magikarp jump subregion
+                caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
+            }
+
+            const partyClickBonus = caughtPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
+            return Math.pow(partyClickBonus, 1.4);
         });
 
     }
@@ -279,21 +295,8 @@ class Party implements Feature {
     }
 
     calculateClickAttack(useItem = false): number {
-        // Base power
-        // Shiny pokemon help with a 100% boost
-        // Resistant pokemon give a 100% boost
-        let caughtPokemon = this.caughtPokemon;
-        if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
-            // Only magikarps can attack in magikarp jump subregion
-            caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
-        }
-        const caught = caughtPokemon.length;
-        const shiny = caughtPokemon.filter(p => p.shiny).length;
-        const resistant = caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
-        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4);
-
+        const clickAttack =  this.calculateBaseClickAttack();
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
-
         return Math.floor(clickAttack * bonus);
     }
 
