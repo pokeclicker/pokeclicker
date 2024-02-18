@@ -95,6 +95,7 @@ const DungeonGainGymBadge = (gym: Gym) => {
  */
  interface optionalDungeonParameters {
     dungeonRegionalDifficulty?: GameConstants.Region,
+    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
@@ -132,21 +133,26 @@ class Dungeon {
         }
         // Player may not meet the requirements to start the dungeon
         const dungeonTown = TownList[this.name];
-        if (!dungeonTown.isUnlocked()) {
-            const reqsList = [];
-            dungeonTown.requirements?.forEach(req => {
-                if (!req.isCompleted()) {
-                    reqsList.push(req.hint());
-                }
-            });
-
-            Notifier.notify({
-                message: `You don't have access to this dungeon yet.\n<i>${reqsList.join('\n')}</i>`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
+        const dungeonRequirement = this.optionalParameters.requirement;
+        // Use dungeonRequirement if it exists, else default to dungeonTown status
+        if (dungeonRequirement ? !dungeonRequirement.isCompleted() : !dungeonTown.isUnlocked()) {
             return false;
         }
         return true;
+    }
+
+    public getRequirementHints() {
+        const dungeonTown = TownList[this.name];
+        const reqsList = [];
+        dungeonTown.requirements?.forEach(req => {
+            if (!req.isCompleted()) {
+                reqsList.push(req.hint());
+            }
+        });
+        if (this.optionalParameters.requirement ? !this.optionalParameters.requirement.isCompleted() : false) {
+            reqsList.push(this.optionalParameters.requirement.hint());
+        }
+        return reqsList;
     }
 
     /**
