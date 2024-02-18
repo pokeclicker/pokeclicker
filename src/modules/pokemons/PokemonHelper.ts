@@ -1,4 +1,4 @@
-import { Computed } from 'knockout';
+import type { Computed } from 'knockout';
 import {
     MaxIDPerRegion,
     Region,
@@ -7,15 +7,21 @@ import {
     ShadowStatus,
     MegaStoneType,
 } from '../GameConstants';
-import { PokemonNameType } from './PokemonNameType';
+import type { PokemonNameType } from './PokemonNameType';
 import P from './mapProvider';
 import PokemonType from '../enums/PokemonType';
 import DataPokemon from './DataPokemon';
 import GameHelper from '../GameHelper';
 import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
-import MegaStoneItem from '../items/MegaStoneItem';
+import type MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
+import type { EvoData } from './evolutions/Base';
+
+// TODO remove when PokemonLocations is ported to modules
+declare class PokemonLocations {
+    public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion?: Region): Array<EvoData>;
+}
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -130,6 +136,10 @@ export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
 
 export function hasUncaughtMegaEvolution(pokemonName: PokemonNameType): boolean {
     return !!P.pokemonMap[pokemonName].evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon) && e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
+}
+
+export function isMegaEvolution(pokemonName: PokemonNameType): boolean {
+    return PokemonLocations.getPokemonPrevolution(pokemonName).some((e) => e.evolvedPokemon == pokemonName && e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
 }
 
 export function getMegaStones(pokemonName: PokemonNameType): MegaStoneItem[] {

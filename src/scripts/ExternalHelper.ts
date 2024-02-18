@@ -105,7 +105,7 @@ class ExternalHelper {
             return false;
         }
 
-        const locations = PokemonHelper.getPokemonLocations(name);
+        const locations = PokemonLocations.getPokemonLocations(name);
         if (!locations) {
             return false;
         }
