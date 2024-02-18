@@ -95,6 +95,7 @@ const DungeonGainGymBadge = (gym: Gym) => {
  */
  interface optionalDungeonParameters {
     dungeonRegionalDifficulty?: GameConstants.Region,
+    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
@@ -132,21 +133,26 @@ class Dungeon {
         }
         // Player may not meet the requirements to start the dungeon
         const dungeonTown = TownList[this.name];
-        if (!dungeonTown.isUnlocked()) {
-            const reqsList = [];
-            dungeonTown.requirements?.forEach(req => {
-                if (!req.isCompleted()) {
-                    reqsList.push(req.hint());
-                }
-            });
-
-            Notifier.notify({
-                message: `You don't have access to this dungeon yet.\n<i>${reqsList.join('\n')}</i>`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
+        const dungeonRequirement = this.optionalParameters.requirement;
+        // Use dungeonRequirement if it exists, else default to dungeonTown status
+        if (dungeonRequirement ? !dungeonRequirement.isCompleted() : !dungeonTown.isUnlocked()) {
             return false;
         }
         return true;
+    }
+
+    public getRequirementHints() {
+        const dungeonTown = TownList[this.name];
+        const reqsList = [];
+        dungeonTown.requirements?.forEach(req => {
+            if (!req.isCompleted()) {
+                reqsList.push(req.hint());
+            }
+        });
+        if (this.optionalParameters.requirement ? !this.optionalParameters.requirement.isCompleted() : false) {
+            reqsList.push(this.optionalParameters.requirement.hint());
+        }
+        return reqsList;
     }
 
     /**
@@ -2223,6 +2229,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
             {loot: 'Lucky_egg'},
         ],
         rare: [{loot: 'Green Shard'}],
+        epic : [{loot: 'Spiky-eared Pichu', ignoreDebuff : true, requirement : new QuestLineStepCompletedRequirement('Unfinished Business', 7)}],
         legendary: [
             {loot: 'Revive'},
             {loot: 'Insect Plate'},
@@ -7668,8 +7675,8 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     [
         new DungeonBossPokemon('Slaking', 10000000, 100),
         new DungeonBossPokemon('Snorlax', 10000000, 100),
-        new DungeonBossPokemon('Shuckle', 10000000, 100),
         new DungeonBossPokemon('Blissey', 10000000, 100),
+        new DungeonBossPokemon('Staraptor', 10000000, 100),
         new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
     ],
     106500, 230);
