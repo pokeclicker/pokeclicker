@@ -492,7 +492,7 @@ class PartyPokemon implements Saveable {
             }
         }
 
-        if (this.heldItem()) {
+        if (this.heldItem() && Settings.getSetting('confirmChangeHeldItem').value) {
             Notifier.confirm({
                 title: 'Remove held item',
                 message: 'Held items are one time use only.\nRemoved items will be lost.\nAre you sure you want to remove it?',
