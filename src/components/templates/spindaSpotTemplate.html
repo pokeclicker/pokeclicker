@@ -2,11 +2,13 @@
     <!-- ko using: { spotObject: $data.spotObject, isShiny: $data.shiny, size: $data.size, className: $data.className }, as: 'templateData' -->
         <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
             <!-- ko using: templateData.spotObject ? templateData.spotObject[positionName] : undefined, as: 'spot' -->
-                <!-- ko using: PokemonHelper.generateSpindaSpots(positionName, spot?.x, spot?.y, templateData.size), as: 'spotPositions' -->
+                <!-- ko using: SpindaHelper.generateSpindaSpots(positionName, spot?.x(), spot?.y(), templateData.size), as: 'spotPositions' -->
+                <!-- ko if: console.log(spot) -->
+                <!-- /ko -->
                     <div class="" data-bind="attr: { 
                         'class': `spots ${positionName} ${templateData.className || ''}`, 
                         'style': 
-                            `background-image: url(${PokemonHelper.getSpindaMask(templateData.isShiny)}); 
+                            `background-image: url(${SpindaHelper.getSpindaMask(templateData.isShiny)}); 
                             -webkit-mask-position: ${spotPositions.spotX}px ${spotPositions.spotY}px;
                             mask-size: ${templateData.size || 96}px;
                             width: ${templateData.size || 96}px;
@@ -23,7 +25,7 @@
     <knockout data-bind="template: { 
         name: 'spindaSpotTemplate', 
         data: { 
-            'shiny': true, // undefined to make PokemonHelper.getSpindaMask calculate the shinyness based on the shiny settings in Pokedex
+            'shiny': true, // undefined to make SpindaHelper.getSpindaMask calculate the shinyness based on the shiny settings in Pokedex
             'isBattle': true,
         } 
     }">Spinda Spot</knockout>

@@ -27,6 +27,12 @@ export default class Profile implements Saveable {
     public pokemonFemale: KnockoutObservable<boolean>;
     public background: KnockoutObservable<number>;
     public textColor: KnockoutObservable<string>;
+    public spindaSpots: {
+        topLeftSpot: { x: KnockoutObservable<number>, y: KnockoutObservable<number> },
+        topRightSpot: { x: KnockoutObservable<number>, y: KnockoutObservable<number> },
+        bottomLeftSpot: { x: KnockoutObservable<number>, y: KnockoutObservable<number> },
+        bottomRightSpot: { x: KnockoutObservable<number>, y: KnockoutObservable<number> },
+    };
 
     constructor(
         name = 'Trainer',
@@ -43,6 +49,12 @@ export default class Profile implements Saveable {
         this.pokemonFemale = ko.observable(false).extend({ boolean: null });
         this.background = ko.observable(background).extend({ numeric: 0 });
         this.textColor = ko.observable(textColor);
+        this.spindaSpots = {
+            topLeftSpot: { x: ko.observable(8), y: ko.observable(8) },
+            topRightSpot: { x: ko.observable(8), y: ko.observable(8) },
+            bottomLeftSpot: { x: ko.observable(8), y: ko.observable(8) },
+            bottomRightSpot: { x: ko.observable(8), y: ko.observable(8) },
+        };
     }
 
     static getTrainerCard(
@@ -59,6 +71,12 @@ export default class Profile implements Saveable {
         version = '0.0.0',
         challenges = {},
         id = '',
+        spindaSpots = {
+            topLeftSpot: { x: 8, y: 8 },
+            topRightSpot: { x: 8, y: 8 },
+            bottomLeftSpot: { x: 8, y: 8 },
+            bottomRightSpot: { x: 8, y: 8 },
+        },
         key?: string,
     ): Element {
         const template: HTMLTemplateElement = document.querySelector('#trainerCardTemplate');
@@ -102,9 +120,9 @@ export default class Profile implements Saveable {
         if (pokemon === 327) {
             GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
                 const spotContainer: HTMLElement = node.querySelector(`.${spotPosition}`);
-                const settingsPositions = SpindaHelper.getSettingsObject();
-                const positions = TmpPokemonHelper.generateSpindaSpots(spotPosition, settingsPositions[spotPosition].x, settingsPositions[spotPosition].y);
-                spotContainer.style.backgroundImage = `url(${TmpPokemonHelper.getSpindaMask(pokemonShiny)})`;
+                const settingsPositions = spindaSpots;
+                const positions = SpindaHelper.generateSpindaSpots(spotPosition, settingsPositions[spotPosition].x, settingsPositions[spotPosition].y);
+                spotContainer.style.backgroundImage = `url(${SpindaHelper.getSpindaMask(pokemonShiny)})`;
                 spotContainer.style.maskPosition = `${positions.spotX}px ${positions.spotY}px`;
             });
         } else {
@@ -150,6 +168,12 @@ export default class Profile implements Saveable {
             App.game.update.version,
             App.game.challenges.toJSON().list,
             player.trainerId,
+            {
+                topLeftSpot: { x: this.spindaSpots.topLeftSpot.x(), y: this.spindaSpots.topLeftSpot.y() },
+                topRightSpot: { x: this.spindaSpots.topRightSpot.x(), y: this.spindaSpots.topRightSpot.y() },
+                bottomLeftSpot: { x: this.spindaSpots.bottomLeftSpot.x(), y: this.spindaSpots.bottomLeftSpot.y() },
+                bottomRightSpot: { x: this.spindaSpots.bottomRightSpot.x(), y: this.spindaSpots.bottomRightSpot.y() },
+            }
         ));
 
         preview.subscribe((previewElement) => {
@@ -170,9 +194,27 @@ export default class Profile implements Saveable {
         if (json.pokemonFemale !== undefined) this.pokemonFemale(json.pokemonFemale);
         if (json.background !== undefined) this.background(json.background);
         if (json.textColor) this.textColor(json.textColor);
+        if (json.spindaSpots) {
+            GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
+                this.spindaSpots[spotPosition].x(json.spindaSpots[spotPosition].x);
+                this.spindaSpots[spotPosition].y(json.spindaSpots[spotPosition].y);
+            });
+        }
     }
 
     toJSON(): Record<string, any> {
+        const spindaSpots = {
+            topLeftSpot: { x: 8, y: 8 },
+            topRightSpot: { x: 8, y: 8 },
+            bottomLeftSpot: { x: 8, y: 8 },
+            bottomRightSpot: { x: 8, y: 8 },
+        };
+        GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
+            spindaSpots[spotPosition].x = this.spindaSpots[spotPosition].x();
+            spindaSpots[spotPosition].y = this.spindaSpots[spotPosition].y();
+        });
+        
+
         return {
             name: this.name(),
             trainer: this.trainer(),
@@ -181,6 +223,7 @@ export default class Profile implements Saveable {
             pokemonFemale: this.pokemonFemale(),
             background: this.background(),
             textColor: this.textColor(),
+            spindaSpots: spindaSpots, //CHECK OBSEVABLES // TEMPLATES
         };
     }
 }

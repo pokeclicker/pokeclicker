@@ -1,8 +1,8 @@
-<div class="modal noselect fade" id="spindaSpotSelectorModal" tabindex="-1" role="dialog" aria-labelledby="spindaSpotSelectorModal">
+<div class="modal noselect fade" id="spindaSpotSelectorStatisticsModal" tabindex="-1" role="dialog" aria-labelledby="spindaSpotSelectorStatisticsModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
-                <h5 class="modal-title">Select Spinda Spots</h5>
+                <h5 class="modal-title" data-bind="text: `Select Spinda's Spots (Statistics)`">Select Spinda Spots</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,43 +29,43 @@
                         <tbody>
                             <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
                             <tr>
-                                <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(positionName)} Spot`">Spot</td>
+                                <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(positionName)}`">Spot</td>
                                 <!-- ko using: SpindaHelper.getSettingsObject(), as: 'spot' -->
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
-                                        name: Settings.getSetting(`spinda.${positionName}X`).name, 
+                                        name: positionName, 
                                         id: `setting-${Settings.getSetting(`spinda.${positionName}X`).name}`,
                                         min: 0, 
                                         max: 16, 
                                         step: 1
                                     },
-                                    value: spot[positionName].x,
+                                    value: spot[positionName].x(),
                                     tooltip: {
-                                        title: spot[positionName].x,
+                                        title: spot[positionName].x(),
                                         trigger: 'hover',
                                         boundary: 'window',
                                         placement: 'top'
                                     }"
-                                    oninput="(Settings.setSettingByName(this.name, this.value))">
+                                    oninput="(Settings.setSettingByName(`spinda.${this.name}X`, this.value))">
                                 </td>
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
-                                        name: Settings.getSetting(`spinda.${positionName}Y`).name, 
+                                        name: positionName, 
                                         id: `setting-${Settings.getSetting(`spinda.${positionName}Y`).name}`,
                                         min: 0, 
                                         max: 16, 
                                         step: 1
                                     },
-                                    value: spot[positionName].y,
+                                    value: spot[positionName].y(),
                                     tooltip: {
-                                        title: spot[positionName].y,
+                                        title: spot[positionName].y(),
                                         trigger: 'hover',
                                         boundary: 'window',
                                         placement: 'top'
                                     }"
-                                    oninput="(Settings.setSettingByName(this.name, this.value))">
+                                    oninput="(Settings.setSettingByName(`spinda.${this.name}Y`, this.value))">
                                 </td>
                                 <!-- /ko -->
                             </tr>

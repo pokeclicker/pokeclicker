@@ -78,6 +78,14 @@ export default class SaveSelector {
                 saveData.update?.version ?? 'Unknown',
                 saveData.challenges?.list ?? {},
                 playerData.trainerId,
+                
+                saveData.profile?.spindaSpots ?? {
+                    topLeftSpot: { x: 8, y: 8 },
+                    topRightSpot: { x: 8, y: 8 },
+                    bottomLeftSpot: { x: 8, y: 8 },
+                    bottomRightSpot: { x: 8, y: 8 },
+                },
+                
                 key,
             );
         } catch (e) {
