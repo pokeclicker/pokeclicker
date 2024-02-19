@@ -409,7 +409,7 @@ class QuestLineHelper {
         const talkToHerbalist2 = new TalkToNPCQuest(CianwoodCityPharmacist2, 'Talk to the Pharmacist in Cianwood City.');
         sickAmpharosQuestLine.addQuest(talkToHerbalist2);
 
-        const giveMedicineToAmphy = new TalkToNPCQuest(OlivineLighthouseMedicineAmphy, 'Give Amphy their medicine.');
+        const giveMedicineToAmphy = new TalkToNPCQuest(OlivineLighthouseMedicineAmphy, 'Give Amphy their medicine in the Olivine Lighthouse.');
         sickAmpharosQuestLine.addQuest(giveMedicineToAmphy);
 
         const talkToJasmine2 = new TalkToNPCQuest(OlivineLighthouseJasmine2, 'Talk to Jasmine in the Olivine Lighthouse.');
