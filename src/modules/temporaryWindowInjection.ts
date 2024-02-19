@@ -26,6 +26,7 @@ import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
+import FarmingTool from './enums/FarmingTool';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -198,6 +199,7 @@ import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
+import DamageCalculator from './types/DamageCalculator';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -226,6 +228,7 @@ Object.assign(<any>window, {
     QuestLineState,
     WeatherForecastStatus,
     SafariEnvironments,
+    FarmingTool,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -407,4 +410,5 @@ Object.assign(<any>window, {
     SafariCatchRequirement,
     ItemRequirement,
     ChristmasPresent,
+    DamageCalculator,
 });
