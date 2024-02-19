@@ -182,6 +182,12 @@ export class Underground implements Feature {
                     GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
             ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Reduced_Evolution_Items, 'Reduced Evolution Items', 1,
+                AmountFactory.createArray(
+                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                GameHelper.createArray(0, 1, 1),
+            ),
         ];
     }
 

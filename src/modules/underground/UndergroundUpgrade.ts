@@ -15,6 +15,7 @@ export enum Upgrades {
     'NewYLayer',
     'Reduced_Shards',
     'Reduced_Plates',
+    'Reduced_Evolution_Items',
 }
 
 export default class UndergroundUpgrade extends Upgrade {
