@@ -6684,7 +6684,7 @@ const VerdantCavernIlima = new NPC('Captain Ilima', [
     'Some Trial Sites are protected by different Pokémon depending on the time of day. The difficulty of each Trial isn\'t affected by these changes, but it makes for quite the interesting observance!',
 ], {
     image: 'assets/images/npcs/Ilima.png',
-})
+});
 const LagunaKahuna = new NPC('Kahuna Hala', [
     'Dooot doo doo, just a kahuna on a stroll to the laguna. ♪',
 ], {
