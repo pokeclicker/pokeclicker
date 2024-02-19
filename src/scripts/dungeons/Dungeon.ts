@@ -11032,21 +11032,21 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
                         new DayCyclePartRequirement([1]),
                         new DayCyclePartRequirement([2]),
                     ]),
-                    new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sunny, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy]),
+                    new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy]),
                 ])),
                 new GymPokemon('Dewpider', 15172575, 18, new MultiRequirement([
                     new OneFromManyRequirement([
                         new DayCyclePartRequirement([1]),
                         new DayCyclePartRequirement([2]),
                     ]),
-                    new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sunny, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy]),
+                    new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy]),
                 ])),
                 new GymPokemon('Totem Araquanid', 30345150, 20, new MultiRequirement([
                     new OneFromManyRequirement([
                         new DayCyclePartRequirement([1]),
                         new DayCyclePartRequirement([2]),
                     ]),
-                    new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sunny, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy]),
+                    new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy]),
                 ])),
                 new GymPokemon('Alomomola', 18207090, 18, new OneFromManyRequirement([
                     new DayCyclePartRequirement([0]),
