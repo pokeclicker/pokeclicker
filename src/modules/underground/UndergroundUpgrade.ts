@@ -14,6 +14,7 @@ export enum Upgrades {
     'Survey_Efficiency',
     'NewYLayer',
     'Reduced_Shards',
+    'Reduced_Plates',
 }
 
 export default class UndergroundUpgrade extends Upgrade {
