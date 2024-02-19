@@ -59,6 +59,7 @@ namespace GameConstants {
     declare const PLATE_VALUE: number;
     declare const EGG_CYCLE_MULTIPLIER: number;
     declare const BREEDING_ATTACK_BONUS: number;
+    declare const BREEDING_SHINY_ATTACK_MULTIPLIER: number;
     declare const FARM_PLOT_WIDTH: number;
     declare const FARM_PLOT_HEIGHT: number;
     declare const BerryDistribution: number[];
@@ -383,6 +384,7 @@ namespace GameConstants {
         'Gimmighoul_coin',
         'Syrupy_apple',
         'Unremarkable_teacup',
+        'Metal_alloy',
     }
     declare enum FossilPieceType {
         'None',
@@ -731,6 +733,8 @@ namespace GameConstants {
     }
     declare enum PaldeaSubRegions {
         Paldea,
+        Kitakami,
+        BlueberryAcademy,
     }
     declare enum FinalSubRegions {
         Final,

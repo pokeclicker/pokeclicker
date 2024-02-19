@@ -2461,8 +2461,8 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated[31] = 0;
 
         },
-        '0.10.16': ({ playerData, saveData, settingsData }) => {
 
+        '0.10.16': ({ saveData, settingsData }) => {
 
             // Fix None category color being incomplete
             if (saveData.categories.categories[0].color === '#333') {
@@ -2531,13 +2531,92 @@ class Update implements Saveable {
             // Fix Hopo berry visible in berrydex when not available
             saveData.farming.mutations[71] = false;
         },
+
         '0.10.17': ({ saveData }) => {
             // Fix Anomaly Mewtwo 5 if the quest is not completed.
             if (saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state < 2) {
                 saveData.statistics.temporaryBattleDefeated[223] = 0;
             }
         },
-        '0.10.18': ({ playerData, saveData }) => {
+
+        '0.10.18': ({ playerData, saveData, settingsData }) => {
+            // Actually fix Anomaly Mewtwo 5 if the quest is not completed.
+            if ((saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power')?.state ?? 0) !== 2) {
+                saveData.statistics.temporaryBattleDefeated[223] = 0;
+            }
+
+            // Give the player Fairy Feathers in place of Pink Bows
+            playerData._itemList.Fairy_Feather = playerData._itemList.Pink_Bow || 0;
+            delete playerData._itemList.Pink_Bow;
+
+            // Update pokemon held item Pink Bow -> Fairy Feather
+            saveData.party.caughtPokemon.forEach(p => {
+                if (p[10] === 'Pink_Bow') {
+                    p[10] = 'Fairy_Feather';
+                }
+            });
+
+            // ID to itemName interface
+            const converter = {
+                1 : 'Rare_bone', 2 : 'Star_piece', 3 : 'Revive', 4 : 'Max_revive', 5 : 'Iron_ball', 6 : 'Heart_scale', 7 : 'Light_clay', 8 : 'Odd_keystone', 9 : 'Hard_stone', 10 : 'Oval_stone', 11 : 'Everstone', 12 : 'Smooth_rock', 13 : 'Heat_rock', 14 : 'Icy_rock', 15 : 'Damp_rock',
+                100 : 'Draco_plate', 101 : 'Dread_plate', 102 : 'Earth_plate', 103 : 'Fist_plate', 104 : 'Flame_plate', 105 : 'Icicle_plate', 106 : 'Insect_plate', 107 : 'Iron_plate', 108 : 'Meadow_plate', 109 : 'Mind_plate', 110 : 'Sky_plate', 111 : 'Splash_plate', 112 : 'Spooky_plate', 113 : 'Stone_plate', 114 : 'Toxic_plate', 115 : 'Zap_plate', 116 : 'Pixie_plate',
+                200 : 'Helix_fossil', 201 : 'Dome_fossil', 202 : 'Old_amber', 203 : 'Root_fossil', 204 : 'Claw_fossil', 205 : 'Armor_fossil', 206 : 'Skull_fossil', 207 : 'Cover_fossil', 208 : 'Plume_fossil', 209 : 'Jaw_fossil', 210 : 'Sail_fossil', 211 : 'Fossilized_bird', 212 : 'Fossilized_fish', 213 : 'Fossilized_drake', 214 : 'Fossilized_dino',
+                300 : 'Fire_stone', 301 : 'Water_stone', 302 : 'Thunder_stone', 303 : 'Leaf_stone', 304 : 'Moon_stone', 305 : 'Sun_stone', 306 : 'Shiny_stone', 307 : 'Dusk_stone', 308 : 'Dawn_stone', 309 : 'Ice_stone',
+                400 : 'Red_shard', 401 : 'Yellow_shard', 402 : 'Green_shard', 403 : 'Blue_shard', 404 : 'Grey_shard', 405 : 'Purple_shard', 406 : 'Ochre_shard', 407 : 'Black_shard', 408 : 'Crimson_shard', 409 : 'Lime_shard', 410 : 'White_shard', 411 : 'Pink_shard', 412 : 'Cyan_shard', 413 : 'Rose_shard', 414 : 'Brown_shard',
+                500 : 'Aerodactylite', 501 : 'Mawilite', 502 : 'Sablenite',
+            };
+            // Port player.mineInventory to player.itemList
+            const sellLocks = (saveData.underground.sellLocks = {});
+            playerData.mineInventory.forEach(it => {
+                if (!converter[it.id]) {
+                    return console.error(`${it.name} is not a valid item to store.`);
+                }
+                playerData._itemList[converter[it.id]] = (playerData._itemList[converter[it.id]] || 0) + it.amount;
+                sellLocks[converter[it.id]] = it.sellLocked;
+            });
+
+            // Update sort settings to make room for new attack at lv 100 sort option
+            ['hatcherySort', 'partySort', 'vitaminSort', 'heldItemSort', 'consumableSort']
+                .forEach((sortSetting) => {
+                    if (settingsData[sortSetting] >= 5) {
+                        settingsData[sortSetting]++;
+                    }
+                });
+            // Sort by attack -> sort by attack at lv100
+            if (settingsData.hatcherySort == 2) {
+                settingsData.hatcherySort = 5;
+            }
+            // Update hatchery helper sorting
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption >= 5) {
+                    // Move index
+                    helper.sortOption++;
+                } else if (helper.sortOption == 2) {
+                    // Sort by attack -> sort by attack at lv100
+                    helper.sortOption = 5;
+                }
+            });
+
+            // Fix pokerus status for party members infected via shop eggs
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                // PartyPokemonSaveKeys.pokerus and .breeding
+                if (pokemon[8] === GameConstants.Pokerus.Infected && !pokemon[4]) {
+                    pokemon[8] = GameConstants.Pokerus.Contagious;
+                }
+            });
+
+            // Preserve bottom-to-top catch filter priority for existing players
+            settingsData['catchFilters.invertPriorityOrder'] = true;
+        },
+
+        '0.10.19': ({ playerData, saveData, settingsData }) => {
+            // Update hatchery helper sorting (again)
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption == 2) {
+                    // Sort by attack -> sort by attack at lv100
+                    helper.sortOption = 5;
+                }
+            });
             // Add Alola story battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 225);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 227);
