@@ -198,7 +198,7 @@ export const MAX_DUNGEON_SIZE = 10;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
-export enum DungeonTile {
+export enum DungeonTileType {
     empty = 0,
     entrance = 1,
     enemy = 2,

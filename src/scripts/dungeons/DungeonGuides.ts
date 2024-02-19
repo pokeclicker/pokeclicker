@@ -34,11 +34,11 @@ class DungeonGuide {
 
               // Interact with the current tile
               switch (DungeonRunner.map.currentTile().type()) {
-                  case GameConstants.DungeonTile.chest:
-                  case GameConstants.DungeonTile.boss:
+                  case GameConstants.DungeonTileType.chest:
+                  case GameConstants.DungeonTileType.boss:
                       DungeonRunner.handleInteraction();
                       break;
-                  case GameConstants.DungeonTile.ladder:
+                  case GameConstants.DungeonTileType.ladder:
                       DungeonRunner.handleInteraction();
                       DungeonRunner.map.playerMoved(true);
                       break;
@@ -175,9 +175,9 @@ class DungeonGuides {
       const weightedTiles = nearbyTiles.map(t => {
           let weight = 0.5;
           weight += !t.isVisited ? 1.5 : 0;
-          weight += [GameConstants.DungeonTile.enemy].includes(t.type()) ? 1 : 0;
-          weight += [GameConstants.DungeonTile.chest].includes(t.type()) ? 2 : 0;
-          weight += [GameConstants.DungeonTile.boss, GameConstants.DungeonTile.ladder].includes(t.type()) ? 4 : 0;
+          weight += [GameConstants.DungeonTileType.enemy].includes(t.type()) ? 1 : 0;
+          weight += [GameConstants.DungeonTileType.chest].includes(t.type()) ? 2 : 0;
+          weight += [GameConstants.DungeonTileType.boss, GameConstants.DungeonTileType.ladder].includes(t.type()) ? 4 : 0;
           return weight;
       });
       return Rand.fromWeightedArray(nearbyTiles, weightedTiles);
@@ -208,7 +208,7 @@ DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure ch
         const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
 
         // Check if any tiles within 3 spaces contain a chest
-        const treasureTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => t.type() == GameConstants.DungeonTile.chest);
+        const treasureTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => t.type() == GameConstants.DungeonTileType.chest);
         if (treasureTiles.length) {
             const paths = treasureTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position)).filter(t => t.length <= 3);
             if (paths?.length) {
@@ -260,7 +260,7 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
         const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
 
         // Look for any unopened chest
-        const treasureTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => t.type() == GameConstants.DungeonTile.chest);
+        const treasureTiles = DungeonRunner.map.board()[pos.floor].flat().filter(t => t.type() == GameConstants.DungeonTileType.chest);
         if (treasureTiles.length) {
             const paths = treasureTiles.map(t => DungeonRunner.map.findShortestPath(pos, t.position));
             if (paths?.length) {
@@ -298,11 +298,11 @@ DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoid
         const pos = DungeonRunner.map.playerPosition();
         const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
 
-        const bossPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.boss)?.position;
-        const ladderPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.ladder)?.position;
+        const bossPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTileType.boss)?.position;
+        const ladderPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTileType.ladder)?.position;
 
         // Shortest path to the boss avoiding enemies
-        let path = bossPosition || ladderPosition ? DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition, [GameConstants.DungeonTile.enemy]) : [];
+        let path = bossPosition || ladderPosition ? DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition, [GameConstants.DungeonTileType.enemy]) : [];
         // If no path avoiding enemies, then any path will do
         if (path?.length <= 1) {
             path = bossPosition || ladderPosition ? DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition) : [];
@@ -327,8 +327,8 @@ DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss
         const pos = DungeonRunner.map.playerPosition();
         const nearbyTiles = DungeonRunner.map.nearbyTiles(pos);
 
-        const bossPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.boss)?.position;
-        const ladderPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTile.ladder)?.position;
+        const bossPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTileType.boss)?.position;
+        const ladderPosition = DungeonRunner.map.board()[pos.floor].flat().find(t => t.type() == GameConstants.DungeonTileType.ladder)?.position;
 
         const path = bossPosition || ladderPosition ? DungeonRunner.map.findShortestPath(pos, bossPosition || ladderPosition) : [];
 

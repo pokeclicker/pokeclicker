@@ -124,27 +124,27 @@ class DungeonRunner {
     public static handleInteraction(source: GameConstants.DungeonInteractionSource = GameConstants.DungeonInteractionSource.Click) {
         if (DungeonRunner.fighting() && !DungeonBattle.catching() && source === GameConstants.DungeonInteractionSource.Click) {
             DungeonBattle.clickAttack();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind) {
             DungeonRunner.dungeonLeave();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest) {
             DungeonRunner.openChest();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.boss && !DungeonRunner.fightingBoss()) {
             DungeonRunner.startBossFight();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.ladder) {
             DungeonRunner.nextFloor();
         }
     }
 
     public static openChest() {
         const tile = DungeonRunner.map.currentTile();
-        if (tile.type() !== GameConstants.DungeonTile.chest) {
+        if (tile.type() !== GameConstants.DungeonTileType.chest) {
             return;
         }
 
         GameHelper.incrementObservable(DungeonRunner.chestsOpened);
         DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor]++;
 
-        const { tier, loot } = (tile as DungeonTile<GameConstants.DungeonTile.chest>).metadata;
+        const { tier, loot } = tile.metadata;
 
         let amount = loot.amount || 1;
 
@@ -167,7 +167,7 @@ class DungeonRunner {
 
         DungeonRunner.gainLoot(loot.loot, amount, tierWeight);
 
-        DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
+        DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 3)) {
             DungeonRunner.map.showChestTiles();
@@ -237,7 +237,7 @@ class DungeonRunner {
     }
 
     public static startBossFight() {
-        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.boss || DungeonRunner.fightingBoss()) {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTileType.boss || DungeonRunner.fightingBoss()) {
             return;
         }
 
@@ -257,7 +257,7 @@ class DungeonRunner {
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
-        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTileType.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
             return;
         }
 
