@@ -6,7 +6,7 @@ type GemCost = {
 class GemDeal {
     public gems: GemCost[];
     public item: { itemType: Item, amount: number};
-    public static list: Record<GameConstants.GemShops, KnockoutObservableArray<GemDeal>> = {};
+    public static list: Partial<Record<GameConstants.GemShops, KnockoutObservableArray<GemDeal>>> = {};
     public isVisible(): boolean {
         return this.item.itemType.isVisible();
     }
