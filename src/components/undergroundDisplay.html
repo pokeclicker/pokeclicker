@@ -1,4 +1,4 @@
-<div id="undergroundDisplay" class="card sortable border-secondary mb-3">
+<div id="undergroundDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.underground.canAccess && Settings.getSetting('showUndergroundModule').observableValue(), if: Settings.getSetting('showUndergroundModule').observableValue()">
     <div class="card-header p-0" data-toggle="collapse" href="#undergroundCard">
         <span>Underground</span>
     </div>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-    <!--            <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">-->
+                <!-- ko if: Settings.getSetting('showUndergroundModuleMineControls').observableValue() -->
                 <!-- ko foreach: ['SmallRestore','MediumRestore','LargeRestore'] -->
                 <div class="row">
                     <button class="col btn btn-secondary" data-bind="
@@ -64,9 +64,11 @@
                 <div class="row">
                     <button class='col btn btn-warning' onClick='Mine.bomb()' data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
                 </div>
+                <!-- /ko -->
             </div>
         </div>
 
+        <!-- ko if: Settings.getSetting('showUndergroundModuleDailyTrades').observableValue() -->
         <div class="">
             <span class="font-weight-bold">Daily trades</span>
 
@@ -102,5 +104,6 @@
                 </table>
             </div>
         </div>
+        <!-- /ko -->
     </div>
 </div>
