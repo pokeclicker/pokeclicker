@@ -2,13 +2,12 @@ import PokemonType from '../enums/PokemonType';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import { MegaStoneType, Region, StoneType } from '../GameConstants';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
-import Settings from '../settings';
 import Rand from '../utilities/Rand';
 import UndergroundEvolutionItem from './UndergroundEvolutionItem';
 import UndergroundGemItem from './UndergroundGemItem';
 import UndergroundItem from './UndergroundItem';
 import UndergroundMegaStoneItem from './UndergroundMegaStoneItem';
-import UndergroundUpgrade from './UndergroundUpgrade';
+import UndergroundShardItem from './UndergroundShardItem';
 
 export default class UndergroundItems {
     public static list: Array<UndergroundItem> = [];
@@ -138,57 +137,23 @@ UndergroundItems.addItem(new UndergroundEvolutionItem(311, 'Peat_block', [[1, 1,
 // UndergroundItems.addItem(new UndergroundEvolutionItem(309, [[1, 1, 1], [1, 1, 1]], StoneType.Ice_stone, 1, new StoneUnlockedRequirement(StoneType.Ice_stone)));
 
 // Shards
-UndergroundItems.addItem(new UndergroundItem(400, 'Red_shard', [[1, 1, 1], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, undefined, ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(401, 'Yellow_shard', [[1, 0, 1, 0], [1, 1, 1, 0], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, undefined, ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(402, 'Green_shard', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 0, 1]], 0, UndergroundItemValueType.Shard, undefined, ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(403, 'Blue_shard', [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 0, UndergroundItemValueType.Shard, undefined, ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(404, 'Grey_shard', [[1, 1, 1], [1, 1, 1], [0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(405, 'Purple_shard', [[1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(406, 'Ochre_shard', [[1, 1, 0, 0], [1, 1, 1, 0], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.hoenn), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(407, 'Black_shard', [[1, 1, 1], [0, 1, 1], [0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(408, 'Crimson_shard', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(409, 'Lime_shard', [[0, 0, 0, 0], [0, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(410, 'White_shard', [[1, 1, 1, 1], [0, 1, 1, 1], [0, 1, 1, 0]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(411, 'Pink_shard', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.kalos), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(412, 'Cyan_shard', [[1, 1, 1, 1], [0, 1, 1, 1], [0, 0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.alola), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(413, 'Rose_shard', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(414, 'Brown_shard', [[1, 1, 0], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(415, 'Beige_shard', [[0, 0, 1, 1], [0, 1, 1, 1], [0, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.paldea), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
-UndergroundItems.addItem(new UndergroundItem(416, 'Slate_shard', [[0, 0, 0, 0], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.paldea), ()=>{
-    return App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards).isMaxLevel() && Settings.getSetting('underground.Reduced_Shards').observableValue() ? 0.1 : 1;
-}));
+UndergroundItems.addItem(new UndergroundShardItem(400, 'Red_shard', [[1, 1, 1], [1, 1, 0], [1, 1, 1]]));
+UndergroundItems.addItem(new UndergroundShardItem(401, 'Yellow_shard', [[1, 0, 1, 0], [1, 1, 1, 0], [1, 1, 1, 1]]));
+UndergroundItems.addItem(new UndergroundShardItem(402, 'Green_shard', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 0, 1]]));
+UndergroundItems.addItem(new UndergroundShardItem(403, 'Blue_shard', [[1, 1, 1], [1, 1, 1], [1, 1, 0]]));
+UndergroundItems.addItem(new UndergroundShardItem(404, 'Grey_shard', [[1, 1, 1], [1, 1, 1], [0, 1, 1]], new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundShardItem(405, 'Purple_shard', [[1, 1, 1, 1], [1, 1, 1, 1]], new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundShardItem(406, 'Ochre_shard', [[1, 1, 0, 0], [1, 1, 1, 0], [1, 1, 1, 1]], new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundShardItem(407, 'Black_shard', [[1, 1, 1], [0, 1, 1], [0, 1, 1]], new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundShardItem(408, 'Crimson_shard', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundShardItem(409, 'Lime_shard', [[0, 0, 0, 0], [0, 1, 1, 1], [1, 1, 1, 1]], new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundShardItem(410, 'White_shard', [[1, 1, 1, 1], [0, 1, 1, 1], [0, 1, 1, 0]], new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundShardItem(411, 'Pink_shard', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], new MaxRegionRequirement(Region.kalos)));
+UndergroundItems.addItem(new UndergroundShardItem(412, 'Cyan_shard', [[1, 1, 1, 1], [0, 1, 1, 1], [0, 0, 1, 1]], new MaxRegionRequirement(Region.alola)));
+UndergroundItems.addItem(new UndergroundShardItem(413, 'Rose_shard', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], new MaxRegionRequirement(Region.galar)));
+UndergroundItems.addItem(new UndergroundShardItem(414, 'Brown_shard', [[1, 1, 0], [1, 1, 0], [1, 1, 1]], new MaxRegionRequirement(Region.galar)));
+UndergroundItems.addItem(new UndergroundShardItem(415, 'Beige_shard', [[0, 0, 1, 1], [0, 1, 1, 1], [0, 1, 1, 1]], new MaxRegionRequirement(Region.paldea)));
+UndergroundItems.addItem(new UndergroundShardItem(416, 'Slate_shard', [[0, 0, 0, 0], [1, 1, 1, 1], [1, 1, 1, 1]], new MaxRegionRequirement(Region.paldea)));
 
 // MegaStones
 UndergroundItems.addItem(new UndergroundMegaStoneItem(MegaStoneType.Aerodactylite, 500, 'Aerodactylite', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Aerodactyl', 0, 0.1));
