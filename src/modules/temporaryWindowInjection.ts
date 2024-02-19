@@ -199,7 +199,7 @@ import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
-import * as DamageCalculator from './types/DamageCalculator';
+import DamageCalculator from './types/DamageCalculator';
 
 Object.assign(<any>window, {
     SaveSelector,
