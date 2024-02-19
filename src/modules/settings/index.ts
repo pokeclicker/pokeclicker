@@ -197,6 +197,9 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
 
+// Underground
+Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true));
+
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
 
