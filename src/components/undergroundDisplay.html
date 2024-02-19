@@ -1,0 +1,106 @@
+<div id="undergroundDisplay" class="card sortable border-secondary mb-3">
+    <div class="card-header p-0" data-toggle="collapse" href="#undergroundCard">
+        <span>Underground</span>
+    </div>
+    <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.openUndergroundModal()">
+        View
+    </button>
+    <div id="undergroundCard" class="card-body p-0 show">
+
+        <div>
+            <span class="font-weight-bold">Mine</span>
+
+            <div class='progress' style="height: 25px;">
+                <div class='progress-bar bg-warning' role='progressbar'
+                     aria-valuemin='0' aria-valuemax='100'
+                     data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
+                    <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
+                </div>
+            </div>
+
+            <div class='progress'>
+                <div class='progress-bar bg-info' role='progressbar'
+                     aria-valuemin='0' aria-valuemax='100'
+                     data-bind="style: { width: (100 * Mine.excavatedTileCount() / Mine.allTileCount()).toFixed(2) + '%' }">
+                    <span data-bind="text: (100 * Mine.excavatedTileCount() / Mine.allTileCount()).toFixed(2) + '% cleared'"></span>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col"
+                            data-bind="
+                                        text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found' ,
+                                        tooltip: {
+                                            title: () =>
+                                                Mine.surveyResult() || 'Conduct a Survey to get more details',
+                                                trigger: 'hover',
+                                                placement: 'top',
+                                                boundary: 'window',
+                                                html: true,
+                                        }"
+                    >
+                    </div>
+                </div>
+
+    <!--            <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">-->
+                <!-- ko foreach: ['SmallRestore','MediumRestore','LargeRestore'] -->
+                <div class="row">
+                    <button class="col btn btn-secondary" data-bind="
+                                    click: function(){ ItemList[$data].use();},
+                                    css: { disabled: player._itemList[$data]() <= 0},
+                                    tooltip: {
+                                        title: () => `+${App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])} energy`,
+                                        trigger: 'hover',
+                                        placement: 'top',
+                                        boundary: 'window',
+                                        html: true,
+                                    }">
+                        <img class="restore-item" data-bind="attr: { src: ItemList[$data].image }"> × <span data-bind="text: player._itemList[$data]().toLocaleString('en-US')">(?)</span>
+                    </button>
+                </div>
+                <!-- /ko -->
+
+                <div class="row">
+                    <button class='col btn btn-warning' onClick='Mine.bomb()' data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="">
+            <span class="font-weight-bold">Daily trades</span>
+
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-striped m-0 text-left">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    <!-- ko foreach: DailyDeal.list -->
+                    <tr data-bind="tooltip: {
+                                    title: () => `${$data.amount1} ${$data.item1.name} → ${$data.amount2} ${$data.item2.name}`,
+                                    trigger: 'hover',
+                                    placement: 'top',
+                                    boundary: 'window',
+                                    html: true,
+                                }">
+                        <td class="vertical-middle">
+                            <span data-bind="text: `${$data.amount1} ×`"></span>
+                        </td>
+                        <td class='vertical-middle'>
+                            <img class='mineInventoryItem' data-bind='attr: {src: $data.item1.image }'>
+                        </td>
+                        <td class='vertical-middle'>→</td>
+                        <td class="vertical-middle">
+                            <span data-bind="text: `${$data.amount2} ×`"></span>
+                        </td>
+                        <td class='vertical-middle'>
+                            <img class='mineInventoryItem' data-bind='attr: {src: $data.item2.image }'>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

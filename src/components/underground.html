@@ -42,6 +42,13 @@
                                 <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
+                        <div class='progress'>
+                            <div id='mineProgressBar' class='progress-bar bg-info' role='progressbar'
+                                 aria-valuemin='0' aria-valuemax='100'
+                                 data-bind="style: { width: (100 * Mine.excavatedTileCount() / Mine.allTileCount()).toFixed(2) + '%' }">
+                                <span data-bind="text: (100 * Mine.excavatedTileCount() / Mine.allTileCount()).toFixed(2) + '% cleared'"></span>
+                            </div>
+                        </div>
                     </div>
                     <div id="mineBody" class="container" style="margin:auto">
                     </div>

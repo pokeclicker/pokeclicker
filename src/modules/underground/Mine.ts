@@ -24,12 +24,16 @@ export class Mine {
     public static rewardNumbers: Array<number>;
     public static surveyResult = ko.observable(null);
     public static skipsRemaining = ko.observable(Mine.maxSkips);
+    public static excavatedTileCount: Observable<Number> = ko.observable(0);
+    public static allTileCount: Observable<Number> = ko.observable(1);
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: Observable<Tool> = ko.observable(0);
     private static loadingNewLayer = true;
     // Number of times to try and place an item in a new layer before giving up, just a failsafe
     private static maxPlacementAttempts = 1000;
+    // Maximum underground layer depth
+    private static maxLayerDepth = 5;
 
     public static loadMine() {
         const tmpGrid = [];
@@ -41,7 +45,7 @@ export class Mine {
             const row = [];
             const rewardRow = [];
             for (let j = 0; j < Underground.sizeX; j++) {
-                row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Rand.float(2) + Rand.float(3)) + 1))));
+                row.push(ko.observable(Math.min(Mine.maxLayerDepth, Math.max(1, Math.floor(Rand.float(2) + Rand.float(3)) + 1))));
                 rewardRow.push(0);
             }
             tmpGrid.push(row);
@@ -101,6 +105,9 @@ export class Mine {
                 this.breakTile(x, y, 1);
             }
         }
+
+        Mine.excavatedTileCount(Mine.grid.flatMap(value => value).reduce((a, b) => a + (Mine.maxLayerDepth - b()), 0));
+        Mine.allTileCount(App.game.underground.getSizeY() * Underground.sizeX * Mine.maxLayerDepth);
     }
 
     private static getRandomCoord(max: number, size: number): number {
@@ -200,7 +207,7 @@ export class Mine {
         for (let i = 0; i < tiles; i++) {
             const x = Rand.intBetween(0, this.getHeight() - 1);
             const y = Rand.intBetween(0, Underground.sizeX - 1);
-            this.breakTile(x, y, 5);
+            this.breakTile(x, y, Mine.maxLayerDepth);
         }
 
         App.game.underground.energy -= surveyCost;
@@ -352,6 +359,8 @@ export class Mine {
             $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y} rotations-${reward.rotations}" style="background-image: url('${image}');"></div>`);
             Mine.checkItemsRevealed();
         }
+
+        Mine.excavatedTileCount(Mine.grid.flatMap(value => value).reduce((a, b) => a + (Mine.maxLayerDepth - b()), 0));
     }
 
     private static normalizeX(x: number): number {
@@ -477,6 +486,9 @@ export class Mine {
         this.loadingNewLayer = false;
         this.surveyResult(mine.surveyResult ?? this.surveyResult());
         this.skipsRemaining(mine.skipsRemaining ?? this.maxSkips);
+
+        Mine.excavatedTileCount(Mine.grid.flatMap(value => value).reduce((a, b) => a + (Mine.maxLayerDepth - b()), 0));
+        Mine.allTileCount(App.game.underground.getSizeY() * Underground.sizeX * Mine.maxLayerDepth);
 
         Underground.showMine();
         // Check if completed in case the mine was saved after completion and before creating a new mine
