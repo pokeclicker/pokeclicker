@@ -8024,10 +8024,7 @@ TownList['Ruins of Abundance'] = new DungeonTown(
     'Ruins of Abundance',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 23),
-        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 23)]
 );
 TownList['Ruins of Hope'] = new DungeonTown(
     'Ruins of Hope',
