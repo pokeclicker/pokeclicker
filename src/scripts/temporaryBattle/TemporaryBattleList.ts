@@ -3910,6 +3910,7 @@ TemporaryBattleList.Dexio = new TemporaryBattle(
         firstTimeRewardFunction: () => {
             if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sina')]() >= 1) {
                 App.game.quests.getQuestLine('Symbiotic Relations').beginQuest(0, undefined, true);
+                // TODO: zygarde quest thing
             }
         },
         displayName: 'Pokémon Trainer Dexio',
@@ -3929,6 +3930,7 @@ TemporaryBattleList.Sina = new TemporaryBattle(
         firstTimeRewardFunction: () => {
             if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dexio')]() >= 1) {
                 App.game.quests.getQuestLine('Symbiotic Relations').beginQuest(0, undefined, true);
+                // TODO: zygarde quest thing
             }
         },
         displayName: 'Pokémon Trainer Sina',
