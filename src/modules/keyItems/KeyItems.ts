@@ -4,7 +4,7 @@ import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
 import {
-    getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus, getTemporaryBattlesIndex,
+    getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus,
 } from '../GameConstants';
 
 export default class KeyItems implements Feature {
@@ -78,7 +78,7 @@ export default class KeyItems implements Feature {
                     patientZero.pokerus = Pokerus.Contagious;
                 }),
             new KeyItem(KeyItemType['Z-Power_Ring'], 'A gift from Melemele\'s kahuna that enables the use of Z-Crystals. Using a Z-Crystal boosts the power of all your Pokémon of a shared type for a short while, after which some time is needed to recharge.',
-                () => App.game.statistics.temporaryBattleDefeated[getTemporaryBattlesIndex('Hau 2')]() > 0, undefined, undefined, 'Z-Power Ring'),
+                undefined, undefined, undefined, 'Z-Power Ring'),
         ];
     }
 

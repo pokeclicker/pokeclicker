@@ -116,3 +116,11 @@ class TemporaryBattleRunner {
             ?? battle?.optionalArgs.returnTown;
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    $('#temporaryBattleWonModal').on('hidden.bs.modal', () => {
+        if (TemporaryBattleBattle.battle.name === 'Hau 2') {
+            KeyItemController.showGainModal(KeyItemType['Z-Power_Ring']);
+        }
+    });
+});

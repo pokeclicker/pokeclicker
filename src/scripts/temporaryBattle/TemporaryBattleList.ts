@@ -3817,13 +3817,16 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
         new GymPokemon('Rowlet', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
         new GymPokemon('Litten', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
-    undefined, // key item modal
+    'Phew... That was awesome! That was a really great battle! I had a blast fighting you!',
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town',
         imageName: 'Rival Hau',
+        firstTimeRewardFunction: () => {
+            App.game.keyItems.gainKeyItem(KeyItemType['Z-Power_Ring'], true);
+        },
     }
 );
 TemporaryBattleList['Skull 1'] = new TemporaryBattle(
