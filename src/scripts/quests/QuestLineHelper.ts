@@ -2602,7 +2602,7 @@ class QuestLineHelper {
 
         // 8 - Gym battle: Olivia
         // reward defined at the end of this file
-        const battleKahunaOlivia = new DefeatGymQuest(1, 0, 'Konikoni City').withDescription('Reach Kahuna Olivia and Lillie outside the Ruins of Life and complete Akala\'s Grand Trial!').withCustomReward(zCrystalGet(PokemonType.Rock));
+        const battleKahunaOlivia = new DefeatGymQuest(1, 0, 'Konikoni City').withDescription('Reach Kahuna Olivia and Lillie at the Ruins of Life and complete Akala\'s Grand Trial!').withCustomReward(zCrystalGet(PokemonType.Rock));
         akalaAlolaQuestLine.addQuest(battleKahunaOlivia);
 
         // end - Temp battle: Ultra Wormhole
@@ -2739,7 +2739,7 @@ class QuestLineHelper {
         poniAlolaQuestLine.addQuest(alolaRoute25);
 
         // 1 - Talk to NPC: HapuHope
-        const talkeToHapuHope = new TalkToNPCQuest(HapuHope, 'Talk to Hapu at the Ruins of Hope Altar.');
+        const talkeToHapuHope = new TalkToNPCQuest(HapuHope, 'Talk to Hapu at the Ruins of Hope.');
         poniAlolaQuestLine.addQuest(talkeToHapuHope);
 
         // 2 - Clear dungeon: Exeggutor Island Hill

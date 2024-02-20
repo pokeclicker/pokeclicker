@@ -12077,7 +12077,7 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
         new DungeonBossPokemon('Gardevoir', 82177450, 55),
         new DungeonBossPokemon('Tapu Lele', 82543791, 60),
     ],
-    1200000, 27);
+    1200000, 27, undefined, { requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp) });
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     ['Floette (Orange)', 'Comfey', 'Cottonee', 'Petilil'],
@@ -12127,7 +12127,7 @@ dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
         new DungeonBossPokemon('Azumarill', 82177450, 55),
         new DungeonBossPokemon('Tapu Fini', 82543791, 60),
     ],
-    1200000, 27);
+    1200000, 27, undefined, { requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp) });
 
 dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     [

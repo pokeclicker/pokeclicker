@@ -7585,16 +7585,6 @@ TownList['Royal Avenue'] = new Town(
         npcs: [RoyalAvenueSpectator, MolayneSilvally],
     }
 );
-TownList['Ruins of Life Entrance'] = new Town(
-    'Ruins of Life Entrance',
-    GameConstants.Region.alola,
-    GameConstants.AlolaSubRegions.AkalaIsland,
-    [GymList['Konikoni City'], new MoveToTown('Ruins of Life', undefined, false)],
-    {
-        requirements: [new TemporaryBattleRequirement('Plumeria 1')],
-        npcs: [LillieRuinsOfLife],
-    }
-);
 TownList['Konikoni City'] = new Town(
     'Konikoni City',
     GameConstants.Region.alola,
@@ -7659,16 +7649,6 @@ TownList['Seafolk Village'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
         npcs: [SeafolkCaptain, SeafolkCaptainMina, SilvallyMina, LillieSeafolkVillage],
-    }
-);
-TownList['Ruins of Hope Altar'] = new Town(
-    'Ruins of Hope Altar',
-    GameConstants.Region.alola,
-    GameConstants.AlolaSubRegions.PoniIsland,
-    [new MoveToTown('Ruins of Hope', undefined, false)],
-    {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 26)],
-        npcs: [HapuHope],
     }
 );
 TownList['Exeggutor Island'] = new Town(
@@ -8040,11 +8020,11 @@ TownList['Ruins of Life'] = new DungeonTown(
     'Ruins of Life',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 21),
-        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
-    ],
-    [new MoveToTown('Ruins of Life Entrance', undefined, false)]
+    [new TemporaryBattleRequirement('Plumeria 1')],
+    [GymList['Konikoni City']],
+    {
+        npcs: [LillieRuinsOfLife],
+    }
 );
 TownList['Ruins of Abundance'] = new DungeonTown(
     'Ruins of Abundance',
@@ -8059,11 +8039,11 @@ TownList['Ruins of Hope'] = new DungeonTown(
     'Ruins of Hope',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 26),
-        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
-    ],
-    [new MoveToTown('Ruins of Hope Altar', undefined, false)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 26)],
+    undefined,
+    {
+        npcs: [HapuHope],
+    }
 );
 TownList['Poni Meadow'] = new DungeonTown(
     'Poni Meadow',
