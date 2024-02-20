@@ -581,7 +581,7 @@ class Farming implements Feature {
             BerryColor.Pink,
             25,
             BerryFirmness.Soft,
-            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20 inches.']
+            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20\u2033, or 50 cm.']
         );
 
         this.berryData[BerryType.Durin] = new Berry(
@@ -911,7 +911,7 @@ class Farming implements Feature {
                 'This Berry requires a lot of energy to grow, but isn\'t fussy about what it consumes, it helps other plants by removing toxins from the soil.',
             ],
             new Aura(AuraType.Decay, [0.8, 0.6, 0.5]),
-            ['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Drampa', 'Applin']
+            ['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Drampa', 'Applin', 'Exposed Applin']
         );
 
         this.berryData[BerryType.Colbur] = new Berry(

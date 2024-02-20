@@ -652,7 +652,7 @@ TemporaryBattleList['Kimono Girls'] = new TemporaryBattle(
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     'Spiky-eared Pichu',
     [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],
-    '<b><i>You caught the Spiky-eared Pichu!</i></b>',
+    '<b><i>The Spiky-eared Pichu ran into the forest!</i></b>',
     [new QuestLineStepCompletedRequirement('Unfinished Business', 6)],
     undefined,
     {
@@ -2885,7 +2885,7 @@ TemporaryBattleList['Primal Groudon'] = new TemporaryBattle(
     'Primal Groudon',
     [new GymPokemon('Primal Groudon', 293674710, 100)],
     '<i>Primal Groudon lets out a terrifying roar, then drops the Red Orb and returns to its normal form.</i></br><img src="assets/images/megaStone/Red_Orb.png"/>',
-    [new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 14), new WeatherRequirement([WeatherType.Sunny])])],
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 14), new WeatherRequirement([WeatherType.Harsh_Sunlight])])],
     undefined,
     {
         hideTrainer: true,
@@ -3623,7 +3623,7 @@ TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
     '<i>With the leader of the pack defeated, the Houndour horde scatters, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/Houndoominite.png"/></br><i>You obtained the Houndoominite!</i>',
     [
         new ObtainedPokemonRequirement('Houndoom'),
-        new WeatherRequirement([WeatherType.Sunny]),
+        new WeatherRequirement([WeatherType.Harsh_Sunlight]),
         new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500, 'Capture a total of 500 or more Houndour.'),
         new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
     ],
@@ -5933,7 +5933,7 @@ TemporaryBattleList['Max Raid Cinderace'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Max Raid',
-        returnTown: 'Brawler\'s Cave',
+        returnTown: 'Brawlers\' Cave',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
         resetDaily: true,
     }
@@ -6156,7 +6156,7 @@ TemporaryBattleList['Eternamax Eternatus'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/890',
+        imageName: '../pokemon/890.01',
     }
 );
 
