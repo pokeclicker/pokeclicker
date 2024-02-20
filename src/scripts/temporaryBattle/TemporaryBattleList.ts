@@ -4199,7 +4199,6 @@ TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ultra Recon Squad',
-        returnTown: 'Vast Poni Canyon Entrance',
         imageName: 'specialNPCs/Ultra Recon Squad (all)',
     }
 );

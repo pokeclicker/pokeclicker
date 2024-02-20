@@ -11840,7 +11840,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
             ],
             { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less) }, 'of Vast Poni Canyon'),
     ],
-    1125000, 25);
+    1125000, 25, undefined, {requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 4)});
 
 dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     ['Chansey', 'Wingull', 'Pelipper', 'Spritzee', 'Swirlix', 'Cutiefly', 'Comfey', 'Dhelmise'],

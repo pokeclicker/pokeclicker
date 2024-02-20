@@ -4803,67 +4803,6 @@
             })
         %>
 
-        <!--Vast Poni Canyon Entrance-->
-        <%- include('templates/mapOverlay',
-            { name: "Vast Poni Canyon"
-            , x: 47, y: 26
-            , width: 8, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4 && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
-            , connectedToTown: "Vast Poni Canyon Entrance"
-            })
-        %>
-        <!--Vast Poni Canyon Entrance extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Vast Poni Canyon"
-            , x: 48, y: 29
-            , width: 7, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-        <!--Vast Poni Canyon Entrance extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Vast Poni Canyon"
-            , x: 49, y: 30
-            , width: 6, height: 2
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-        <!--Vast Poni Canyon Entrance extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Vast Poni Canyon"
-            , x: 50, y: 32
-            , width: 4, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-        <!--Vast Poni Canyon Entrance extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Vast Poni Canyon"
-            , x: 46, y: 25
-            , width: 7, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-        <!--Vast Poni Canyon Entrance extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Vast Poni Canyon"
-            , x: 46, y: 24
-            , width: 6, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon Entrance')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon Entrance') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() <= 4  && App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-
         <!--Altar of the Sunne and Moone-->
         <%- include('templates/mapTown',
             { name: "Altar of the Sunne and Moone"
@@ -5075,62 +5014,49 @@
         %>
 
         <!--Vast Poni Canyon-->
-        <%- include('templates/mapOverlay',
+        <%- include('templates/mapDungeon',
             { name: "Vast Poni Canyon"
             , x: 47, y: 26
             , width: 8, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , connectedToTown: "Vast Poni Canyon"
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapOverlay',
+        <%- include('templates/mapDungeon',
             { name: "Vast Poni Canyon"
             , x: 48, y: 29
             , width: 7, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapOverlay',
+        <%- include('templates/mapDungeon',
             { name: "Vast Poni Canyon"
             , x: 49, y: 30
             , width: 6, height: 2
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapOverlay',
+        <%- include('templates/mapDungeon',
             { name: "Vast Poni Canyon"
             , x: 50, y: 32
             , width: 4, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapOverlay',
+        <%- include('templates/mapDungeon',
             { name: "Vast Poni Canyon"
             , x: 46, y: 25
             , width: 7, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>
         <!--Vast Poni Canyon extension-->
-        <%- include('templates/mapOverlay',
+        <%- include('templates/mapDungeon',
             { name: "Vast Poni Canyon"
             , x: 46, y: 24
             , width: 6, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Vast Poni Canyon')}, attr:{ class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').curQuest() > 4 | App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
             , isExtension: true
             })
         %>

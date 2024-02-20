@@ -2762,16 +2762,7 @@ class QuestLineHelper {
         poniAlolaQuestLine.addQuest(battleSkullGrunts6);
 
         // 4 - Gym battle: Hapu
-        const groundiumZGet = () => {
-            player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ground], 1);
-            Notifier.notify({
-                title: 'Z Crystal',
-                message: `<img width="60" src="assets/images/items/zCrystal/${GameConstants.zCrystalItemType[PokemonType.Ground]}.svg"/> You got the ${GameConstants.zCrystalItemType[PokemonType.Ground]}!`,
-                timeout: 30,
-            });
-            MapHelper.moveToTown('Vast Poni Canyon Entrance');
-        };
-        const battleKahunaHapu = new DefeatGymQuest(1, 0, 'Exeggutor Island').withDescription('Go to Vast Poni Canyon\'s Entrance and prove your skills in a Grand Trial against Poni\'s new kahuna, Hapu!').withCustomReward(groundiumZGet);
+        const battleKahunaHapu = new DefeatGymQuest(1, 0, 'Exeggutor Island').withDescription('Go to Vast Poni Canyon\'s Entrance and prove your skills in a Grand Trial against Poni\'s new kahuna, Hapu!').withCustomReward(zCrystalGet(PokemonType.Ground));
         poniAlolaQuestLine.addQuest(battleKahunaHapu);
 
         // 5 - Clear dungeon: Vast Poni Canyon, Dragonium Z Trial

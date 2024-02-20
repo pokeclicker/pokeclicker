@@ -7671,20 +7671,6 @@ TownList['Ruins of Hope Altar'] = new Town(
         npcs: [HapuHope],
     }
 );
-TownList['Vast Poni Canyon Entrance'] = new Town(
-    'Vast Poni Canyon Entrance',
-    GameConstants.Region.alola,
-    GameConstants.AlolaSubRegions.PoniIsland,
-    [
-        GymList['Exeggutor Island'],
-        TemporaryBattleList['Recon Squad 3'],
-        new MoveToTown('Vast Poni Canyon', new GymBadgeRequirement(BadgeEnums.Poni_Stamp), false),
-    ],
-    {
-        requirements: [new TemporaryBattleRequirement('Skull 6')],
-        npcs: [HapuCanyon],
-    }
-);
 TownList['Exeggutor Island'] = new Town(
     'Exeggutor Island',
     GameConstants.Region.alola,
@@ -8013,8 +7999,12 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     'Vast Poni Canyon',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [new QuestLineStepCompletedRequirement('Emissary of Light', 4)],
-    [new MoveToTown('Vast Poni Canyon Entrance', undefined, false), TemporaryBattleList['Plumeria Poison Memory']],
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 3)],
+    [
+        new AccessGym(GymList['Exeggutor Island'], new QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)),
+        TemporaryBattleList['Recon Squad 3'],
+        TemporaryBattleList['Plumeria Poison Memory']
+    ],
     {npcs: [HapuCanyon, PlumeriaSilvally]}
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
