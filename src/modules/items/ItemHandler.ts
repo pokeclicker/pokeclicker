@@ -6,8 +6,8 @@ import { PokemonNameType } from '../pokemons/PokemonNameType';
 import { StoneType } from '../GameConstants';
 
 export default class ItemHandler {
-    public static stoneSelected: Observable<string> = ko.observable('Fire_stone');
-    public static pokemonSelected: Observable<PokemonNameType> = ko.observable('Vulpix');
+    public static stoneSelected: Observable<string> = ko.observable(StoneType[0]);
+    public static pokemonSelected: Observable<PokemonNameType> = ko.observable('Gloom'); // TODO: import {} when PartyController module, ko.observable(getPokemonsWithEvolution(0)[0].name);
     public static amountSelected: Observable<number> = ko.observable(1);
     static amount: Observable<number> = ko.observable(1);
     // public static amountToUse = 1;
