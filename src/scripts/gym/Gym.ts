@@ -18,7 +18,6 @@ interface optionalGymArgs {
     imageName?: string,
     environment?: GameConstants.Environment,
     hideUntilUnlocked?: boolean,
-    visibleRequirement?: Requirement,
 }
 
 /**
@@ -39,8 +38,6 @@ class Gym extends TownContent {
     public isVisible(): boolean {
         if (this.optionalArgs?.hideUntilUnlocked) {
             return this.isUnlocked();
-        } else if (this.optionalArgs?.visibleRequirement) {
-            return this.optionalArgs.visibleRequirement?.isCompleted();
         } else {
             return super.isVisible();
         }
