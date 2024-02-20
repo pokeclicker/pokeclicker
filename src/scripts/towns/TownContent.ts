@@ -166,6 +166,52 @@ class MoveToTown extends TownContent {
     }
 }
 
+class AccessGym extends TownContent {
+    // only use for gyms that disappear from a town
+    constructor(private gym: Gym, private visibleRequirement: Requirement) {
+        super([]);
+    }
+
+    public cssClass() {
+        return this.gym.cssClass();
+    }
+    public text(): string {
+        return this.gym.buttonText;
+    }
+    public isVisible(): boolean {
+        return this.visibleRequirement?.isCompleted() ?? true;
+    }
+    public onclick(): void {
+        if (this.gym.isUnlocked()) {
+            GymRunner.startGym(this.gym);
+        } else {
+            const gym = this.gym;
+            const reqsList = [];
+
+            gym.requirements?.forEach(requirement => {
+                if (!requirement.isCompleted()) {
+                    reqsList.push(requirement.hint());
+                }
+            });
+
+            Notifier.notify({
+                message: `You don't have access to that location yet.\n<i>${reqsList.join('\n')}</i>`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
+    }
+    public isUnlocked(): boolean {
+        return this.gym.isUnlocked();
+    }
+
+    public areaStatus(): areaStatus {
+        return this.gym.areaStatus();
+    }
+    public clears() {
+        return this.gym.clears();
+    }
+}
+
 class WeatherAppTownContent extends TownContent {
     public cssClass() {
         return 'btn btn-secondary';
