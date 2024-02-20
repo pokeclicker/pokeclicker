@@ -28,9 +28,10 @@
 
 /* Themes with light start menu text */
 .cosmo, .cyborg, .darkly, .flatly, .journal, .litera, .minty, .sandstone, .sketchy, .slate, .solar, .spacelab, .superhero, .united {
-  // make mute/unmute images white to match "Start Menu" text color
+  // make mute, unmute, save images white to match "Start Menu" text color
   img[src="assets/images/volume-high.svg"],
-  img[src="assets/images/volume-xmark.svg"] {
+  img[src="assets/images/volume-xmark.svg"],
+  img[src="assets/images/floppy-disk.svg"] {
     filter: invert(1) brightness(100%);
   }
 }
@@ -66,6 +67,10 @@
       background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
     }
   }
+
+  .dropdown-item:hover {
+    color: #495057;
+  }
 }
 
 .cosmo {
@@ -82,6 +87,10 @@
     .list-group-item-action:hover {
       color: black;
     }
+  }
+
+  .dropdown-item:hover {
+    color: #fff;
   }
 }
 
@@ -113,10 +122,24 @@
   }
 }
 
+.litera {
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      @media (max-height: 650px) {
+        max-height: calc(40vh - 50px);
+      }
+    }
+  }
+}
+
 .lumen {
   /* Weather button in dock modal */
   .btn-weather-dock {
     border-color: rgba(0,0,0,25%);
+  }
+
+  .dropdown-item.active:hover {
+    color: #000;
   }
 }
 
@@ -150,6 +173,27 @@
         padding: 0.3rem 0;
     }
   }
+
+  /* Berrydex List */
+  @media (max-width: 991px) {
+    .berryDexPreviewColumn {
+      max-height: calc(100vh - 240px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      max-height: calc(50vh - 50px);
+
+      @media (max-height: 393px) {
+        max-height: calc(40vh - 55px);
+      }
+    }
+  }
+
+  .dropdown-item.active:hover {
+    color: #000;
+  }
 }
 
 .materia {
@@ -180,12 +224,29 @@
     }
 }
 
+.sandstone {
+    /* Berrydex List */
+    @media (max-width: 991px) {
+      #berryDexPreviewFlavors {
+        font-size: small;
+      }
+    }
+
+    .dropdown-item:hover {
+        color: #fff;
+    }
+}
+
 .simplex {
   /* Evolution items */
   #evo-item-list, #evo-pokemon-list {
     .item-selected, .pokemon-selected {
       background: #d9230f !important;
     }
+  }
+
+  .dropdown-item:hover {
+    color: #000;
   }
 }
 
@@ -268,6 +329,23 @@
     }
   }
 
+  // BerryDex
+  @media (max-width: 991px) { // tablet
+    .berryDexPreviewColumn {
+      max-height: calc(100vh - 240px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #berryDexPreviewList {
+      max-height: calc(50vh - 50px);
+
+      @media (max-height: 393px) {
+        max-height: calc(40vh - 50px);
+      }
+    }
+  }
+
   // Evolution items modal
   #showItemsModal {
     .item-selected {
@@ -294,6 +372,20 @@
   // Farming
   .seed-list-item.active {
     background: rgba(255, 255, 255, 20%);
+  }
+
+  .berryDexButtons.btn-secondary {
+    background: rgba(0,0,0,0%);
+
+    span {
+      color: var(--secondary);
+    }
+  }
+
+  .berryDexButtons:hover {
+    span {
+      color: whitesmoke;
+    }
   }
 
   // Evolution items modal
@@ -327,4 +419,11 @@
   .text-light {
     color: whitesmoke !important;
   }
+}
+
+.yeti {
+    .dropdown-item.active:hover,
+    .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu .dropdown-item:hover {
+        color: #222;
+    }
 }

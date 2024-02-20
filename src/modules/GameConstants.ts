@@ -59,7 +59,7 @@ export const MaxIDPerRegion = [
     809, // 88 - Alola
     898, // 89 - Galar
     905, // 7 - Hisui
-    1017, // 112 - Paldea
+    1025, // 120 - Paldea
 ];
 
 // Subregions
@@ -111,6 +111,8 @@ export enum HisuiSubRegions {
 
 export enum PaldeaSubRegions {
     Paldea = 0,
+    Kitakami,
+    BlueberryAcademy,
 }
 
 export enum FinalSubRegions {
@@ -155,7 +157,9 @@ export const PLATE_VALUE = 100;
 
 // Breeding
 export const EGG_CYCLE_MULTIPLIER = 40;
+export const MAX_EGG_CYCLES = 120;
 export const BREEDING_ATTACK_BONUS = 25;
+export const BREEDING_SHINY_ATTACK_MULTIPLIER = 5;
 
 // Farming
 export const FARM_PLOT_WIDTH = 5;
@@ -318,6 +322,15 @@ export enum SafariTile {
 
 export const SAFARI_LEGAL_WALK_BLOCKS = [
     SafariTile.ground,
+    SafariTile.waterUL,
+    SafariTile.waterU,
+    SafariTile.waterUR,
+    SafariTile.waterL,
+    SafariTile.waterC,
+    SafariTile.waterR,
+    SafariTile.waterDL,
+    SafariTile.waterD,
+    SafariTile.waterDR,
     SafariTile.grass,
     SafariTile.sandUL,
     SafariTile.sandU,
@@ -1042,6 +1055,7 @@ export enum StoneType {
     'Gimmighoul_coin',
     'Syrupy_apple',
     'Unremarkable_teacup',
+    'Metal_alloy',
 }
 
 export enum FossilPieceType {
@@ -2280,7 +2294,8 @@ export enum ShardTraderLocations {
     'Pacifidlog Town',
     'Sootopolis City',
     'Ever Grande City',
-    'Sandgem City',
+    'Pokemon HQ Lab',
+    'Sandgem Town',
     'Oreburgh City',
     'Floaroma Town',
     'Eterna City',
@@ -2519,6 +2534,7 @@ export const ModalCollapseList = [
     'pokeballSelectorBody',
     'pokemonListBody',
     'shortcutsBody',
+    'currencyBody',
 ];
 
 export enum ConsumableType {

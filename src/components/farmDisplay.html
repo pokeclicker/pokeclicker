@@ -1,0 +1,186 @@
+<div id="farmDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.farming.canAccess() && Settings.getSetting('showFarmModule').observableValue(), if: Settings.getSetting('showFarmModule').observableValue()">
+    <div class="card-header p-0" data-toggle="collapse" href="#plotListCard">
+        <span>Farm</span>
+    </div>
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()">
+        View
+    </button>
+    <!-- ko ifnot: Settings.getSetting('showFarmModuleControls').observableValue() -->
+    <div class="dropdown" style="position: absolute; left: 0px; top: 0px;">
+        <button class='btn btn-sm btn-primary dropdown-toggle dropdown-toggle-no-arrow' style="width: auto; height: 41px;" data-toggle="dropdown"
+            data-bind="tooltip: {title: App.game.farming.unlockedBerries[FarmController.selectedBerry()]() ? BerryType[FarmController.selectedBerry()] : '???', trigger: 'hover', placement: 'right'}">
+            <img src="" alt="selected berry image" height="28px" data-bind="attr:{ src: FarmController.getBerryImage(FarmController.selectedBerry()) },
+                css: {'berryLocked': !App.game.farming.unlockedBerries[FarmController.selectedBerry()]() }">
+        </button>
+        <div class="dropdown-menu" style="max-height: 275px; overflow-y: auto;"
+            data-bind="foreach: GameHelper.enumNumbers(BerryType).filter(b => App.game.farming.unlockedBerries[b]?.())">
+            <button class="dropdown-item d-flex small px-3" type="button"
+                data-bind="click: () => FarmController.selectedBerry($data), css: { 'active': FarmController.selectedBerry() === $data }">
+                <knockout class="flex-grow-1" data-bind="text: BerryType[$data]"></knockout>
+                <knockout data-bind="text: App.game.farming.berryList[$data]() >= 1e6
+                    ? GameConstants.formatNumber(App.game.farming.berryList[$data]())
+                    : App.game.farming.berryList[$data]().toLocaleString('en-US')"></knockout>
+            </button>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div id="plotListCard" class="card-body p-0 px-2 show" data-bind="css: { ShiftPressed: GameController.keyHeld.Shift() }">
+      <!-- ko if: Settings.getSetting('showFarmModuleControls').observableValue() -->
+      <div class="row py-0 mt-1">
+        <div class="col-3 px-1">
+            <div class="btn-group w-100">
+                <button type="button" class="btn btn-sm btn-primary px-1 py-0" data-bind="tooltip: {title: App.game.farming.unlockedBerries[FarmController.selectedBerry()]() ? BerryType[FarmController.selectedBerry()] : '???', trigger: 'hover', placement: 'top'},
+                    click: () => FarmController.selectedFarmModuleTool(FarmingTool.Berry),
+                    css: { active: FarmController.selectedFarmModuleTool() === FarmingTool.Berry }">
+                    <img src="" alt="selected berry image" height="28px" data-bind="attr:{ src: FarmController.getBerryImage(FarmController.selectedBerry()) },
+                        css: {'berryLocked': !App.game.farming.unlockedBerries[FarmController.selectedBerry()]() }">
+                </button>
+                <button type="button" class="btn btn-sm btn-primary p-0 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right" style="max-height: 275px; overflow-y: auto;"
+                    data-bind="foreach: GameHelper.enumNumbers(BerryType).filter(b => App.game.farming.unlockedBerries[b]?.())">
+                    <button class="dropdown-item d-flex small px-3 py-1" type="button"
+                        data-bind="click: () => { FarmController.selectedBerry($data); FarmController.selectedFarmModuleTool(FarmingTool.Berry) },
+                            css: { active: FarmController.selectedBerry() === $data }">
+                        <knockout class="flex-grow-1" data-bind="text: BerryType[$data]"></knockout>
+                        <knockout data-bind="text: App.game.farming.berryList[$data]() >= 1e6
+                            ? GameConstants.formatNumber(App.game.farming.berryList[$data]())
+                            : App.game.farming.berryList[$data]().toLocaleString('en-US')"></knockout>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 px-1">
+            <div class="btn-group w-100">
+                <button type="button" class="btn btn-sm btn-primary px-1 py-0" data-bind="tooltip: {title: ItemList[MulchType[FarmController.selectedMulch()]].displayName, trigger: 'hover', placement: 'top'},
+                    click: () => FarmController.selectedFarmModuleTool(FarmingTool.Mulch),
+                    css: { active: FarmController.selectedFarmModuleTool() === FarmingTool.Mulch }">
+                    <img src="" alt="selected mulch image" height="28px" data-bind="attr:{ src: ItemList[MulchType[FarmController.selectedMulch()]].image }">
+                </button>
+                <button type="button" class="btn btn-sm btn-primary p-0 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right" data-bind="foreach: GameHelper.enumNumbers(MulchType).filter(m => m > MulchType.None)">
+                    <button class="dropdown-item d-flex small px-3 py-1" type="button"
+                        data-bind="click: () => { FarmController.selectedMulch($data); FarmController.selectedFarmModuleTool(FarmingTool.Mulch) },
+                            css: { active: FarmController.selectedMulch() === $data }">
+                        <knockout class="flex-grow-1" data-bind="text: ItemList[MulchType[$data]].displayName"></knockout>
+                        <knockout data-bind="text: App.game.farming.mulchList[$data]() >= 1e6
+                            ? GameConstants.formatNumber(App.game.farming.mulchList[$data]())
+                            : App.game.farming.mulchList[$data]().toLocaleString('en-US')"></knockout>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 px-1">
+            <div class="btn-group w-100">
+                <button type="button" class="btn btn-sm btn-primary px-1 py-0"
+                    data-bind="tooltip: {title: `${ItemList.Berry_Shovel.displayName} (${App.game.farming.shovelAmt().toLocaleString()})`, trigger: 'hover', placement: 'top'},
+                        click: () => FarmController.selectedFarmModuleTool(FarmingTool.Shovel),
+                        css: { active: FarmController.selectedFarmModuleTool() === FarmingTool.Shovel },
+                        visible: FarmController.selectedFarmModuleTool() !== FarmingTool.MulchShovel">
+                    <img src="" alt="Berry Shovel" height="28px" data-bind="attr:{ src: ItemList['Berry_Shovel'].image }">
+                </button>
+                <button type="button" class="btn btn-sm btn-primary px-1 py-0"
+                    data-bind="tooltip: {title: `${ItemList.Mulch_Shovel.displayName} (${App.game.farming.mulchShovelAmt().toLocaleString()})`, trigger: 'hover', placement: 'top'},
+                        click: () => FarmController.selectedFarmModuleTool(FarmingTool.MulchShovel),
+                        css: { active: FarmController.selectedFarmModuleTool() === FarmingTool.MulchShovel },
+                        visible: FarmController.selectedFarmModuleTool() === FarmingTool.MulchShovel">
+                    <img src="" alt="Mulch Shovel" height="28px" data-bind="attr:{ src: ItemList['Mulch_Shovel'].image }">
+                </button>
+                <button type="button" class="btn btn-sm btn-primary p-0 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item d-flex small px-3 py-1" type="button"
+                        data-bind="click: () => { FarmController.selectedFarmModuleTool(FarmingTool.Shovel) },
+                            css: { active: FarmController.selectedFarmModuleTool() == FarmingTool.Shovel }">
+                        <knockout class="flex-grow-1">Shovel</knockout>
+                        <knockout data-bind="text: `(${App.game.farming.shovelAmt().toLocaleString()})`"></knockout>
+                    </button>
+                    <button class="dropdown-item d-flex small px-3 py-1" type="button"
+                        data-bind="click: () => { FarmController.selectedFarmModuleTool(FarmingTool.MulchShovel) },
+                            css: { active: FarmController.selectedFarmModuleTool() == FarmingTool.MulchShovel }">
+                        <knockout class="flex-grow-1">Mulch Shovel</knockout>
+                        <knockout data-bind="text: `(${App.game.farming.mulchShovelAmt().toLocaleString()})`"></knockout>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 px-1">
+            <div class="btn-group w-100">
+                <button type="button" class="btn btn-sm btn-primary px-1 py-0" style="height:30px" data-bind="
+                    click: () => FarmController.selectedFarmModuleTool(FarmingTool.Lock),
+                    tooltip: {title: 'Lock/Unlock a plot from interaction.', trigger: 'hover', placement: 'top'},
+                    css: { active: FarmController.selectedFarmModuleTool() == FarmingTool.Lock }">
+                    <img alt="Lock" src="assets/images/farm/plotSafeLock.svg" height="22px">
+                </button>
+                <button type="button" class="btn btn-sm btn-primary p-0 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item d-flex small px-3 py-1" type="button"
+                        data-bind="click: () => FarmController.toggleAllPlotLocksTo(true)">
+                        <knockout class="flex-grow-1">Lock All</knockout>
+                    </button>
+                    <button class="dropdown-item d-flex small px-3 py-1" type="button"
+                        data-bind="click: () => FarmController.toggleAllPlotLocksTo(false)">
+                        <knockout class="flex-grow-1">Unlock All</knockout>
+                    </button>
+                    <button class="dropdown-item d-flex small px-3 py-1" type="button"
+                        data-bind="click: () => FarmController.toggleAllPlotLocks()">
+                        <knockout class="flex-grow-1">Flip All</knockout>
+                    </button>
+                </div>
+            </div>
+        </div>
+      </div>
+      <!-- /ko -->
+      <div class="row py-1" data-bind="foreach: App.game.farming.plotList">
+        <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
+        <div class="w-100"></div>
+        <!-- /ko -->
+        <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
+            <div class="plot-content" data-bind="class: FarmController.calculateCssClassMini()">
+                <div class="plotImage">
+                    <img style="width: 100%" src="assets/images/farm/soil.png"
+                        data-bind="class: FarmController.calcMulchClass($data)">
+                    <!-- ko if: !$data.isUnlocked -->
+                    <div class="plotButton plotLockHover" data-bind="tooltip: {
+                      title: `Unlock this plot in the Farm`,
+                      placement: 'bottom',
+                      trigger: 'hover'
+                    }" onclick="FarmController.openFarmModal()">
+                      <img alt="lock" class="lock" src="assets/images/breeding/lock.svg">
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: $data.isUnlocked -->
+                    <div class="plotButton"
+                      data-bind="ifnot: $data.isEmpty(),
+                      click: function(data, event){FarmController.plotClickMini($index(), event)},
+                      tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
+                      <img width="100%" height="100%" src=""
+                          style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                          data-bind="attr:{ src: FarmController.getImage($index())}">
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: $data.isSafeLocked -->
+                    <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="card-footer p-0">
+      <button type="button" class="btn float-left"
+      data-bind="visible: FarmController.additionalInfoTooltip().length !== 0,
+      tooltip: {
+          title: FarmController.additionalInfoTooltip(),
+          trigger: 'hover',
+          placement:'top',
+          html: true,
+      }">ⓘ</button>
+    <knockout class="float-right pr-2 pt-1" data-bind="foreach: App.game.farming.farmHands.hired()">
+      <img class="pixelated mx-1" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
+      tooltip: {
+          title: $data.tooltip(),
+          trigger: 'hover',
+          placement:'top',
+          html: true,
+      }">
+    </div>
+</div>

@@ -96,7 +96,7 @@ class Pokeballs implements Feature {
                 const amountCaught = App.game.statistics.pokemonCaptured[Battle.enemyPokemon().id]();
 
                 return Math.min(15,Math.pow(amountCaught,2) / 5000);
-            }, 1250, 'Increased catch rate and EV gain rate with more catches', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            }, 1250, 'Increased catch rate for Pokémon captured more times, plus higher EV gains', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
                 return 10;

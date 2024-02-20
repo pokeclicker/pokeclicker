@@ -152,7 +152,7 @@
                 <img src="" data-bind="attr: { src: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].image,  }">
               </td>
               <td class="p-0 bg-secondary" colspan="4" rowspan="2">
-                <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1) * 100}% Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
+                <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent' })} Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
               </td>
             </tr>
             <tr></tr>
