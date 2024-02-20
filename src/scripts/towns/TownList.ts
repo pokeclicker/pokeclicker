@@ -7973,8 +7973,9 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('Emissary of Light', 3)],
     [
         new AccessGym(GymList['Exeggutor Island'], new QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)),
+        // TODO: GymList['Exeggutor Island'] but hide until unlocked
         TemporaryBattleList['Recon Squad 3'],
-        TemporaryBattleList['Plumeria Poison Memory']
+        TemporaryBattleList['Plumeria Poison Memory'],
     ],
     {npcs: [HapuCanyon, PlumeriaSilvally]}
 );
