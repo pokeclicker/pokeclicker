@@ -2596,6 +2596,27 @@ class Update implements Saveable {
                     helper.sortOption = 5;
                 }
             });
+
+            // Fix pokerus status for party members infected via shop eggs
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                // PartyPokemonSaveKeys.pokerus and .breeding
+                if (pokemon[8] === GameConstants.Pokerus.Infected && !pokemon[4]) {
+                    pokemon[8] = GameConstants.Pokerus.Contagious;
+                }
+            });
+
+            // Preserve bottom-to-top catch filter priority for existing players
+            settingsData['catchFilters.invertPriorityOrder'] = true;
+        },
+
+        '0.10.19': ({ playerData, saveData, settingsData }) => {
+            // Update hatchery helper sorting (again)
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption == 2) {
+                    // Sort by attack -> sort by attack at lv100
+                    helper.sortOption = 5;
+                }
+            });
         },
     };
 

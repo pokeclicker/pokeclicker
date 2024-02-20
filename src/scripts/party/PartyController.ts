@@ -91,11 +91,21 @@ class PartyController {
             }
         }
 
+        let arePokemonInHatchery = false;
         App.game.party.caughtPokemon.forEach((p) => {
-            if (p.vitaminsUsed[vitamin]() > 0) {
+            if (p.vitaminsUsed[vitamin]() > 0 && !p.breeding) {
                 p.removeVitamin(vitamin, amount);
             }
+            if (p.breeding && !arePokemonInHatchery) {
+                arePokemonInHatchery = true;
+            }
         });
+        if (arePokemonInHatchery) {
+            Notifier.notify({
+                message: `${GameConstants.VitaminType[vitamin]} couldn\'t be modified for Pokémon in Hatchery or Queue.`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
     }
 
     public static async removeAllVitaminsFromParty(shouldConfirm = true) {
@@ -111,13 +121,23 @@ class PartyController {
         }
 
         const vitamins = GameHelper.enumNumbers(GameConstants.VitaminType);
+        let arePokemonInHatchery = false;
         App.game.party.caughtPokemon.forEach((p) => {
             vitamins.forEach((v) => {
-                if (p.vitaminsUsed[v]() > 0) {
+                if (p.vitaminsUsed[v]() > 0 && !p.breeding) {
                     p.removeVitamin(v, Infinity);
+                }
+                if (p.breeding && !arePokemonInHatchery) {
+                    arePokemonInHatchery = true;
                 }
             });
         });
+        if (arePokemonInHatchery) {
+            Notifier.notify({
+                message: 'Vitamins couldn\'t be modified for Pokémon in Hatchery or Queue.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
     }
 
     public static getMaxLevelPokemonList(): Array<PartyPokemon> {
@@ -129,18 +149,6 @@ class PartyController {
     static getSortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
         return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
-    }).extend({ rateLimit: 500 });
-
-    private static hatcherySortedList = [];
-    static getHatcherySortedList = ko.pureComputed(() => {
-        // If the breeding modal is open, we should sort it.
-        if (modalUtils.observableState.breedingModal === 'show') {
-            // Don't adjust attack based on region if debuff is disabled
-            const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
-            PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
-            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
-        }
-        return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
 
     private static vitaminSortedList = [];
