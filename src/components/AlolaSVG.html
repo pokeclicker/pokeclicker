@@ -1276,14 +1276,14 @@
             })
         %>
         
-        <!--Mahalo Trail-->
+        <!--Ruins of Conflict-->
         <%- include('templates/mapOverlay',
-            { name: "Mahalo Trail"
+            { name: "Ruins of Conflict"
             , x: 34, y: 13
             , width: 7, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Mahalo Trail')}, attr:{ class: MapHelper.calculateTownCssClass('Mahalo Trail') }"
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Conflict')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Conflict') }"
             , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() == 0"
-            , connectedToTown: "Mahalo Trail"
+            , connectedToTown: "Ruins of Conflict"
             })
         %>
 

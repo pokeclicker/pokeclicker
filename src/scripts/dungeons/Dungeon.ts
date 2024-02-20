@@ -12053,7 +12053,7 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
         new DungeonBossPokemon('Dedenne', 82177450, 55),
         new DungeonBossPokemon('Tapu Koko', 82543791, 60),
     ],
-    1200000, 27);
+    1200000, 27, undefined, { requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp) });
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     ['Floette (White)', 'Comfey', 'Chimecho', 'Munna'],

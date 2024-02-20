@@ -2433,7 +2433,7 @@ class QuestLineHelper {
     public static createMelemeleAlolaQuestLine() {
         const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'Time to kick off your Alolan vacation! See the sights around Melemele Island.');
         // 0 - Temp Battle: Melemele Spearow
-        const battleMelemeleSpearow = new DefeatTemporaryBattleQuest('Melemele Spearow', 'Protect the mysterious girl\'s Pokémon! Battle the Spearow on Mahalo Trail.')
+        const battleMelemeleSpearow = new DefeatTemporaryBattleQuest('Melemele Spearow', 'Protect the mysterious girl\'s Pokémon! Battle the Spearow near the Ruins of Conflict.')
             .withOptionalArgs({
                 clearedMessage: '<i>The bridge collapses and you and the floating Pokémon start falling to your doom... But you are saved by a mysterious Pokémon!</i>',
                 npcDisplayName: 'Melemele Guardian',

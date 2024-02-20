@@ -7506,16 +7506,6 @@ TownList['Iki Town'] = new Town(
         npcs: [IkiKahuna, SilvallyHala, Lillie3],
     }
 );
-TownList['Mahalo Trail'] = new Town(
-    'Mahalo Trail',
-    GameConstants.Region.alola,
-    GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new MoveToTown('Ruins of Conflict', undefined, false), TemporaryBattleList['Melemele Spearow']],
-    {
-        requirements: [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
-        npcs: [Lillie1, LillieMahaloTrail1, LillieMahaloTrail2, LagunaKahuna],
-    }
-);
 TownList['Professor Kukui\'s Lab'] = new Town(
     'Professor Kukui\'s Lab',
     GameConstants.Region.alola,
@@ -7540,9 +7530,10 @@ TownList['Melemele Woods'] = new Town(
     'Melemele Woods',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new MoveToTown('Mahalo Trail', new GymBadgeRequirement(BadgeEnums.Champion_Stamp, GameConstants.AchievementOption.less)), new MoveToDungeon(dungeonList['Ruins of Conflict'], new GymBadgeRequirement(BadgeEnums.Champion_Stamp)), new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow'])],
+    [new MoveToDungeon(dungeonList['Ruins of Conflict']), new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow'])],
     {
         requirements: [new MultiRequirement([new RouteKillRequirement(10, GameConstants.Region.alola, 2), new TemporaryBattleRequirement('Skull 2')])],
+        npcs: [LagunaKahuna],
     }
 );
 TownList['Roadside Motel'] = new Town(
@@ -8013,8 +8004,11 @@ TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
-    [new MoveToTown('Mahalo Trail', undefined, false)]
+    [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
+    undefined,
+    {
+        npcs: [Lillie1, LillieMahaloTrail1, LillieMahaloTrail2],
+    }
 );
 TownList['Ruins of Life'] = new DungeonTown(
     'Ruins of Life',
