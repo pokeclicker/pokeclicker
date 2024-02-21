@@ -2617,6 +2617,9 @@ class Update implements Saveable {
                     helper.sortOption = 5;
                 }
             });
+        },
+
+        '0.10.20': ({ playerData, saveData, settingsData }) => {
             // Add Alola story battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 225);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 227);
