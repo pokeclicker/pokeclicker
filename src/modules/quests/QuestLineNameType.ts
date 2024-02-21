@@ -14,6 +14,7 @@ export type QuestLineNameType
     | 'Mining Expedition'
     | 'Bill\'s Errand'
     | 'Persons of Interest'
+    | 'The Sick Ampharos'
     | 'Team Rocket Again'
     | 'The Legendary Beasts'
     | 'Eusine\'s Chase'

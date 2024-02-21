@@ -2291,6 +2291,79 @@ dungeonList['Burned Tower'] = new Dungeon('Burned Tower',
     [new DungeonBossPokemon('Golbat', 360000, 35), new DungeonBossPokemon('Weezing', 320000, 35), new DungeonBossPokemon('Shuckle', 610000, 50)],
     4500, 37);
 
+dungeonList['Olivine Lighthouse'] = new Dungeon('Olivine Lighthouse',
+    [
+        new DungeonTrainer('Gentleman',
+            [new GymPokemon('Noctowl', 4550, 22)],
+            { weight: 1 }, 'Alfred'),
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Poliwag', 4550, 18),
+                new GymPokemon('Poliwhirl', 4550, 20),
+            ],
+            { weight: 1 }, 'Huey'),
+        new DungeonTrainer('Bird Keeper',
+            [
+                new GymPokemon('Pidgey', 4200, 17),
+                new GymPokemon('Pidgey', 4200, 15),
+                new GymPokemon('Pidgey', 4200, 19),
+                new GymPokemon('Pidgey', 4200, 15),
+                new GymPokemon('Pidgey', 4200, 15),
+            ],
+            { weight: 1 }, 'Theo'),
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Krabby', 4550, 18),
+                new GymPokemon('Krabby', 4550, 20),
+            ],
+            { weight: 1 }, 'Kent'),
+        new DungeonTrainer('Bird Keeper',
+            [
+                new GymPokemon('Spearow', 4550, 18),
+                new GymPokemon('Fearow', 4550, 20),
+                new GymPokemon('Spearow', 4550, 18),
+            ],
+            { weight: 1 }, 'Denis'),
+        new DungeonTrainer('Gentleman',
+            [
+                new GymPokemon('Growlithe', 4550, 18),
+                new GymPokemon('Growlithe', 4550, 18),
+            ],
+            { weight: 1 }, 'Preston'),
+        new DungeonTrainer('Lass',
+            [new GymPokemon('Marill', 4550, 21)],
+            { weight: 1 }, 'Connie'),
+        new DungeonTrainer('Sailor',
+            [new GymPokemon('Poliwhirl', 4550, 20)],
+            { weight: 1 }, 'Terell'),
+    ],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 2},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [{loot: 'Greatball'}],
+        legendary: [
+            {loot: 'Zap Plate'},
+            {loot: 'MediumRestore'},
+        ],
+        mythic: [
+            {loot: 'Ultraball'},
+            {loot: 'LargeRestore'},
+        ],
+    },
+    88500,
+    [
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Machop', 125000, 18),
+                new GymPokemon('Machop', 125000, 18),
+                new GymPokemon('Poliwhirl', 125000, 18),
+            ], { weight: 1 }, 'Roberto'),
+    ],
+    4500, 40);
+
 dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     ['Rattata', 'Gastly'],
     {

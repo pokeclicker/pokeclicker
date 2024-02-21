@@ -807,7 +807,7 @@ export const Environments: Record<string, EnvironmentData> = {
 
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
-        [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
+        [Region.johto]: new Set(['Olivine City', 'Olivine Lighthouse', 'Sprout Tower', 'Burned Tower']),
         [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Citadark Isle Dome']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
@@ -1397,6 +1397,7 @@ export const JohtoDungeons = [
     'Slowpoke Well',
     'Ilex Forest',
     'Burned Tower',
+    'Olivine Lighthouse',
     'Tin Tower',
     'Whirl Islands',
     'Mt. Mortar',
@@ -1406,11 +1407,11 @@ export const JohtoDungeons = [
     'Dark Cave',
     'Tohjo Falls',
     'Victory Road Johto',
-    'Mt. Silver', // 38
+    'Mt. Silver', // 39
 ];
 
 export const HoennDungeons = [
-    'Petalburg Woods', // 39
+    'Petalburg Woods', // 40
     'Rusturf Tunnel',
     'Granite Cave',
     'Fiery Path',
@@ -1447,7 +1448,7 @@ export const HoennDungeons = [
     'Gateon Port Battles',
     'Cipher Key Lair',
     'Citadark Isle',
-    'Citadark Isle Dome', // 76
+    'Citadark Isle Dome', // 77
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1476,7 +1477,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate', // 77
+    'Oreburgh Gate', // 78
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1499,11 +1500,11 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin', // 100
+    'Hall of Origin', // 101
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 101
+    'Floccesy Ranch', // 102
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1525,11 +1526,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 123
+    'P2 Laboratory', // 124
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 124
+    'Santalune Forest', // 125
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1542,12 +1543,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 136
+    'Victory Road Kalos', // 137
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 137
+    'Trainers\' School', // 138
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1576,11 +1577,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 166
+    'Resolution Cave', // 167
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 167
+    'Slumbering Weald Shrine', // 168
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1601,11 +1602,11 @@ export const GalarDungeons = [
     'Dyna Tree Hill',
     'Tunnel to the Top',
     'Crown Shrine',
-    'Max Lair', // 188
+    'Max Lair', // 189
 ];
 
 export const HisuiDungeons = [
-    'Floaro Gardens', // 189
+    'Floaro Gardens', // 190
     'Oreburrow Tunnel',
     'Heartwood',
     'Ancient Solaceon Ruins',
@@ -1627,18 +1628,18 @@ export const HisuiDungeons = [
     'Ancient Lake Valor',
     'Ancient Lake Acuity',
     'Temple of Sinnoh',
-    'Turnback Cave', // 211
+    'Turnback Cave', // 212
 ];
 
 export const PaldeaDungeons = [
-    'Inlet Grotto', // 211
+    'Inlet Grotto', // 213
     'Glaseado Mountain',
     'Grasswither Shrine',
     'Icerend Shrine',
     'Groundblight Shrine',
     'Firescourge Shrine',
     'Area Zero',
-    'Area Zero Depths', // 218
+    'Area Zero Depths', // 220
 ];
 
 export const RegionDungeons = [

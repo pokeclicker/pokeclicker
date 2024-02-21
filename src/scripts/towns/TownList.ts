@@ -1676,6 +1676,55 @@ const EcruteakBill = new NPC('Bill', [
     'I only brought enough QP for one Soothe Bell. It\'s so hard to choose...',
 ], {image: 'assets/images/npcs/Bill.png'});
 
+
+const OlivineLighthouseJasmine1 = new NPC('Jasmine', [
+    '...This Pokémon always kept the sea lit at night... But it suddenly got sick... It’s gasping for air...',
+    '...I understand that there is a wonderful Pharmacy in Cianwood... But that’s across the sea... And I can’t leave Amphy unattended...',
+    'May I ask you to get some medicine for me? Please?',
+], {
+    image: 'assets/images/npcs/Jasmine.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 0), new QuestLineStepCompletedRequirement('The Sick Ampharos', 4, GameConstants.AchievementOption.less)]),
+});
+
+const CianwoodCityPharmacist1 = new NPC('Pharmacist', [
+    'Huh? You need medicine? Your Pokémon appear to be fine. Is something worrying you?',
+    'The Lighthouse Pokémon is in trouble? I\'ll prepare some medicine right now but it will take some time!',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 1), new QuestLineStepCompletedRequirement('The Sick Ampharos', 3, GameConstants.AchievementOption.less)]),
+});
+
+const CianwoodCityPharmacist2 = new NPC('Pharmacist', [
+    'I got it! This ought to do the trick.',
+    '<i>You got a \'Secret Potion\'</i>',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 3), new QuestLineStepCompletedRequirement('The Sick Ampharos', 4, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseMedicineAmphy = new NPC('Give medicine to Amphy', [
+    'Palu! Palulu!',
+    '<i>Ampharos seems to feel better.</i>',
+], {
+    image: 'assets/images/pokemon/181.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 4), new QuestLineStepCompletedRequirement('The Sick Ampharos', 5, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseJasmine2 = new NPC('Jasmine', [
+    ' ...Oh, I’m so relieved... This is just so wonderful... Thank you so very, very much.',
+    '...I will return to the Gym...',
+], {
+    image: 'assets/images/npcs/Jasmine.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 5), new QuestLineStepCompletedRequirement('The Sick Ampharos', 6, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseAmphy = new NPC('Amphy', [
+    'Palu! Palulu!',
+], {
+    image: 'assets/images/pokemon/181.png',
+    requirement: new QuestLineCompletedRequirement('The Sick Ampharos'),
+});
+
 const EcruteakEusine = new NPC('Eusine', [
     'Legends say that when the Brass Tower burned down and became the Burned Tower, three unnamed Pokémon perished in the flames...',
     'Ho-Oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
@@ -1917,7 +1966,7 @@ TownList['Olivine City'] = new Town(
     'Olivine City',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [OlivineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Olivine City'])],
+    [OlivineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Olivine City']), new MoveToDungeon(dungeonList['Olivine Lighthouse'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
         npcs: [OlivineSSAquaCaptain],
@@ -1930,7 +1979,7 @@ TownList['Cianwood City'] = new Town(
     [CianwoodCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cianwood City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 41)],
-        npcs: [CianwoodPhotographyAide, CianwoodEusine],
+        npcs: [CianwoodPhotographyAide, CianwoodEusine, CianwoodCityPharmacist1, CianwoodCityPharmacist2],
     }
 );
 TownList['Mahogany Town'] = new Town(
@@ -2023,6 +2072,16 @@ TownList['Burned Tower'] = new DungeonTown(
     GameConstants.JohtoSubRegions.Johto,
     [new QuestLineStepCompletedRequirement('The Legendary Beasts', 0)],
     [TemporaryBattleList['Silver 3']]
+);
+TownList['Olivine Lighthouse'] = new DungeonTown(
+    'Olivine Lighthouse',
+    GameConstants.Region.johto,
+    GameConstants.JohtoSubRegions.Johto,
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
+    [],
+    {
+        npcs: [OlivineLighthouseJasmine1, OlivineLighthouseJasmine2, OlivineLighthouseMedicineAmphy, OlivineLighthouseAmphy],
+    }
 );
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
