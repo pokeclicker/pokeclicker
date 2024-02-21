@@ -5870,6 +5870,14 @@ const Lysandre3 = new NPC('Lysandre', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 12), new QuestLineStepCompletedRequirement('A Beautiful World', 14, GameConstants.AchievementOption.less)]),
 });
 
+const SantaluneSageChen = new NPC('Sage Chen', [
+    'Ever since growing old I\'m no longer the Pokémon Trainer that I used to be. Now I always like to keep my garden full of Kasib Berries.',
+    'One day, I forgot to harvest them, and within its withered husk, I found a small stone that enabled my Banette to perform a Mega Evolution."'
+], {
+    image: 'assets/images/npcs/Sage.png',
+    requirement: new ObtainedPokemonRequirement('Banette', true)
+})
+
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
@@ -6213,7 +6221,7 @@ TownList['Santalune City'] = new Town(
     [SantaluneCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
-        npcs: [MysteryFan, VivillonPhotobook],
+        npcs: [MysteryFan, VivillonPhotobook, SantaluneSageChen],
     }
 );
 TownList['Lumiose City'] = new Town(
