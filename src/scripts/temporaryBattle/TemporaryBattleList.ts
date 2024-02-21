@@ -4298,10 +4298,7 @@ TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
         new GymPokemon('Komala', 274011820, 51),
     ],
     'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been a while since I last visited Akala.',
-    [
-        new TemporaryBattleRequirement('Captain Mina'),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hau\'oli Cemetery')),
-    ],
+    [new TemporaryBattleRequirement('Captain Mina')],
     undefined,
     {imageName: 'Ilima'}
 );

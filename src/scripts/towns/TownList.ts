@@ -6876,7 +6876,7 @@ const Lillie6 = new NPC('Lillie', [
     'I feel like there\'s so much I have to do now... to save Nebby... to save my mother... That\'s why I\'m going to try my hardest! This is my Z-Powered form! Come on! Let\'s show the world what we can really do!',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineStepCompletedRequirement('Child of the Stars', 13, GameConstants.AchievementOption.less)]),
 });
 const Gladion1 = new NPC('Gladion', [
     'The Sun Flute and the Moon Flute. When sounded together, it\'s said that they can call the Legendary Pokémon... That is, if you believe in old myths, anyway. I found one of them downstairs and gave it to Lillie.',
@@ -6884,7 +6884,7 @@ const Gladion1 = new NPC('Gladion', [
     'Even if she is...like that, Lusamine is still our mother. We can\'t just leave her in the beast\'s world.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineCompletedRequirement('Child of the Stars', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineStepCompletedRequirement('Child of the Stars', 13, GameConstants.AchievementOption.less)]),
 });
 const HapuHope = new NPC('Hapu', [
     'My grandfather died suddenly some years back, and we were left without a kahuna on Poni. So I set out on my own sort of island challenge, traveling Alola and trying to grow stronger. Lillie. The kahuna you wished to meet is now here.',
@@ -7012,9 +7012,9 @@ const LillieExeggutorIsland = new NPC('Lillie', [
     'I don\'t know if it will really summon the Legendary Pokémon, but we can at least try! Thank you for coming this far with me, $playername$!',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 1), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 1), new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less)]),
 });
-const LillieAltar = new NPC('Lillie', [
+const LillieAltar1 = new NPC('Lillie', [
     'My mother is— She\'s selfish. She lavishes her love only on those she deems worthy, not caring whether it is wanted or not.',
     'But I will save her. I still have something I need to tell her. I am alive. Cosmog is alive.',
     'Nebby. Please. I need to see my mother!',
@@ -7022,6 +7022,14 @@ const LillieAltar = new NPC('Lillie', [
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less)]),
+});
+const LillieAltar2 = new NPC('Lillie', [
+    'Necrozma... It seemed like it was also suffering somehow... It seemed to hurt it, to be without its light...',
+    '$playername$... if you can... try to help Necrozma, like you did mother.',
+    '<i>Lillie is clutching the flutes tightly. It would be awkward to ask for them now...<i>',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Emissary of Light'), new  QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
 });
 // Other story characters
 const HauAether = new NPC('Hau', [
@@ -7658,7 +7666,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList['Lusamine 1'], TemporaryBattleList['Lusamine 2'], TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, LillieAltar, Lillie7, HapuAltar, PhycoAltar, ReconSquadAltar, PoipoleGift],
+        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, PoipoleGift],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
@@ -7972,7 +7980,7 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.AlolaSubRegions.PoniIsland,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 3)],
     [
-        new AccessGym(GymList['Exeggutor Island'], new QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)),
+        new AccessGym(GymList['Exeggutor Island'], new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
         // TODO: GymList['Exeggutor Island'] but hide until unlocked
         TemporaryBattleList['Recon Squad 3'],
         TemporaryBattleList['Plumeria Poison Memory'],
@@ -8006,7 +8014,7 @@ TownList['Ruins of Conflict'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
     [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
-    undefined,
+    [TemporaryBattleList['Melemele Spearow']],
     {
         npcs: [Lillie1, LillieMahaloTrail1, LillieMahaloTrail2],
     }

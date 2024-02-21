@@ -187,14 +187,6 @@ class AccessGym extends TownContent {
     public onclick(): void {
         GymRunner.startGym(this.gym);
     }
-
-    public areaStatus(): areaStatus {
-        if (this.requirement.isCompleted()) {
-            return areaStatus.incomplete;
-        } else {
-            return;
-        }
-    }
 }
 
 class WeatherAppTownContent extends TownContent {

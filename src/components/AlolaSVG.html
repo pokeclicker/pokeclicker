@@ -1275,17 +1275,6 @@
             , isExtension: true
             })
         %>
-        
-        <!--Ruins of Conflict-->
-        <%- include('templates/mapOverlay',
-            { name: "Ruins of Conflict"
-            , x: 34, y: 13
-            , width: 7, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Ruins of Conflict')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Conflict') }"
-            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() == 0"
-            , connectedToTown: "Ruins of Conflict"
-            })
-        %>
 
         <!--Melemele Woods-->
         <%- include('templates/mapOverlay',
@@ -1408,11 +1397,13 @@
         %>
 
         <!--Ruins of Conflict-->
-        <%- include('templates/mapDungeon',
+        <%- include('templates/mapOverlay',
             { name: "Ruins of Conflict"
-            , x: 28, y: 13
-            , width: 14, height: 3
-            , invisible: true
+            , x: 34, y: 13
+            , width: 7, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Ruins of Conflict')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Conflict') }"
+            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() == 0"
+            , connectedToTown: "Ruins of Conflict"
             })
         %>
 
@@ -2618,8 +2609,8 @@
         <!--Ruins of Life-->
         <%- include('templates/mapDungeon',
             { name: "Ruins of Life"
-            , x: 60, y: 47.5
-            , width: 3, height: 2.5
+            , x: 59, y: 48
+            , width: 5, height: 4
             })
         %>
 
