@@ -2625,7 +2625,8 @@ class Update implements Saveable {
 
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'The Sick Ampharos');
-              
+            }
+
             // Add Alola story battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 225);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 227);
