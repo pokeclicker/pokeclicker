@@ -1,12 +1,12 @@
 <script type="text/html" id="spindaSpotTemplate">
     <!-- ko using: { spotObject: $data.spotObject, isShiny: $data.shiny, size: $data.size, className: $data.className }, as: 'templateData' -->
-        <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
-            <!-- ko using: templateData.spotObject ? templateData.spotObject[SpindaSpots[positionName]] : undefined, as: 'spot' -->
-                <!-- ko using: SpindaHelper.generateSpindaSpots(positionName, spot?.x(), spot?.y(), templateData.size), as: 'spotPositions' -->
+        <!-- ko foreach: { data: GameHelper.enumNumbers(SpindaSpots), as: 'positionName' } -->
+            <!-- ko using: templateData.spotObject ? templateData.spotObject[positionName] : undefined, as: 'spot' -->
+                <!-- ko using: SpindaHelper.generateSpindaSpots(SpindaSpots[positionName], spot?.x(), spot?.y(), templateData.size), as: 'spotPositions' -->
                 <!-- ko if: console.log(spot) -->
                 <!-- /ko -->
                     <div class="" data-bind="attr: { 
-                        'class': `spots ${positionName} ${templateData.className || ''}`, 
+                        'class': `spots ${SpindaSpots[positionName]} ${templateData.className || ''}`, 
                         'style': 
                             `background-image: url(${SpindaHelper.getSpindaMask(templateData.isShiny)}); 
                             -webkit-mask-position: ${spotPositions.spotX}px ${spotPositions.spotY}px;

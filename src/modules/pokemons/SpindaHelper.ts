@@ -7,21 +7,14 @@ export const isProfile = ko.observable(false);
 export function getSettingsObject() {
     let settingsObject = {};
     
-    GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
-        settingsObject[SpindaSpots[spotPosition]] = { 
-            x: Settings.getSetting(`spinda.${spotPosition}X`).observableValue,
-            y: Settings.getSetting(`spinda.${spotPosition}Y`).observableValue,
+    GameHelper.enumNumbers(SpindaSpots).forEach((spotPosition) => {
+        settingsObject[spotPosition] = { 
+            x: Settings.getSetting(`spinda.${SpindaSpots[spotPosition]}X`).observableValue,
+            y: Settings.getSetting(`spinda.${SpindaSpots[spotPosition]}Y`).observableValue,
         }
     });
     
     return settingsObject;
-}
-
-export const profileDefaultValues = {
-    topLeftSpot: { x: ko.observable(8), y: ko.observable(8) },
-    topRightSpot: { x: ko.observable(8), y: ko.observable(8) },
-    bottomLeftSpot: { x: ko.observable(8), y: ko.observable(8) },
-    bottomRightSpot: { x: ko.observable(8), y: ko.observable(8) },
 }
 
 /**
