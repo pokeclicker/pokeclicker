@@ -44,9 +44,8 @@
                 </div>
 
                 <!-- ko if: Settings.getSetting('showUndergroundModuleMineControls').observableValue() -->
-                <!-- ko foreach: ['SmallRestore','MediumRestore','LargeRestore'] -->
-                <div class="row">
-                    <button class="col btn btn-secondary" data-bind="
+                <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                    <button class="col btn btn-secondary p-0" data-bind="
                                     click: function(){ ItemList[$data].use();},
                                     css: { disabled: player._itemList[$data]() <= 0},
                                     tooltip: {
@@ -56,10 +55,10 @@
                                         boundary: 'window',
                                         html: true,
                                     }">
-                        <img class="restore-item" data-bind="attr: { src: ItemList[$data].image }"> × <span data-bind="text: player._itemList[$data]().toLocaleString('en-US')">(?)</span>
+                        <img style="width: 32px;" data-bind="attr: { src: ItemList[$data].image }"><br/>
+                        <span style="line-height: 1;" data-bind="text: GameHelper.formatAmount(player._itemList[$data]())">(?)</span>
                     </button>
                 </div>
-                <!-- /ko -->
 
                 <div class="row">
                     <button class='col btn btn-warning' onClick='Mine.bomb()' data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
