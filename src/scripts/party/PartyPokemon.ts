@@ -405,7 +405,8 @@ class PartyPokemon implements Saveable {
         }
 
         // Check based on category
-        if (BreedingFilters.category.value() >= 0 && !this.category.includes(BreedingFilters.category.value())) {
+        if ((BreedingFilters.category.value() === 0 && this.category.length) // No category
+            || (BreedingFilters.category.value() > 0 && !this.category.includes(BreedingFilters.category.value()))) { // Selected category
             return false;
         }
 
