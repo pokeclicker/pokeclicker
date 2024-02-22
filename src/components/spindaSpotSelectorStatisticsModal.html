@@ -27,15 +27,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ko foreach: { data: GameHelper.enumStrings(SpindaSpots), as: 'positionName' } -->
+                            <!-- ko foreach: { data: GameHelper.enumNumbers(SpindaSpots), as: 'positionName' } -->
                             <tr>
-                                <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(positionName)}`">Spot</td>
+                                <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(SpindaSpots[positionName])}`">Spot</td>
                                 <!-- ko using: SpindaHelper.getSettingsObject(), as: 'spot' -->
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
-                                        name: positionName, 
-                                        id: `setting-${Settings.getSetting(`spinda.${positionName}X`).name}`,
+                                        name: SpindaSpots[positionName], 
+                                        id: `setting-${Settings.getSetting(`spinda.${SpindaSpots[positionName]}X`).name}`,
                                         min: 0, 
                                         max: 16, 
                                         step: 1
@@ -52,8 +52,8 @@
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
-                                        name: positionName, 
-                                        id: `setting-${Settings.getSetting(`spinda.${positionName}Y`).name}`,
+                                        name: SpindaSpots[positionName], 
+                                        id: `setting-${Settings.getSetting(`spinda.${SpindaSpots[positionName]}Y`).name}`,
                                         min: 0, 
                                         max: 16, 
                                         step: 1

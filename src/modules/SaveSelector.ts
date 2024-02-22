@@ -5,6 +5,7 @@ import Profile from './profile/Profile';
 import { SortSaves } from './Sortable';
 import Settings from './settings/index';
 import GameHelper from './GameHelper';
+import SpindaSpots from './enums/SpindaSpots';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -80,10 +81,10 @@ export default class SaveSelector {
                 playerData.trainerId,
                 
                 saveData.profile?.spindaSpots ?? {
-                    topLeftSpot: { x: 8, y: 8 },
-                    topRightSpot: { x: 8, y: 8 },
-                    bottomLeftSpot: { x: 8, y: 8 },
-                    bottomRightSpot: { x: 8, y: 8 },
+                    [SpindaSpots.topLeftSpot]: { x: 8, y: 8 },
+                    [SpindaSpots.topRightSpot]: { x: 8, y: 8 },
+                    [SpindaSpots.bottomLeftSpot]: { x: 8, y: 8 },
+                    [SpindaSpots.bottomRightSpot]: { x: 8, y: 8 },
                 },
                 
                 key,

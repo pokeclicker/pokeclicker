@@ -8,7 +8,7 @@ export function getSettingsObject() {
     let settingsObject = {};
     
     GameHelper.enumStrings(SpindaSpots).forEach((spotPosition) => {
-        settingsObject[spotPosition] = { 
+        settingsObject[SpindaSpots[spotPosition]] = { 
             x: Settings.getSetting(`spinda.${spotPosition}X`).observableValue,
             y: Settings.getSetting(`spinda.${spotPosition}Y`).observableValue,
         }
@@ -36,18 +36,19 @@ export function generateSpindaSpots(spindaSpot: SpindaSpots | string, x = Math.r
     const originTop = 23;
     const originLeft = 15;
     const SpotsMinPosition = {
-        topLeftSpot: { x: 0, y: 0 },
-        topRightSpot: { x: 24, y: 2 },
-        bottomLeftSpot: { x: 3, y: 18 },
-        bottomRightSpot: { x: 15, y: 18 },
+        [SpindaSpots.topLeftSpot]: { x: 0, y: 0 },
+        [SpindaSpots.topRightSpot]: { x: 24, y: 2 },
+        [SpindaSpots.bottomLeftSpot]: { x: 3, y: 18 },
+        [SpindaSpots.bottomRightSpot]: { x: 15, y: 18 },
     };
     const percentage = 96 / size;
+    //console.log(spindaSpot);
     //const spotMaxX = SpotsMinPosition[spindaSpot].x + 16;
     //const spotMaxY = SpotsMinPosition[spindaSpot].y + 16;
     
     const spotsPosition = {
-        spotX: (originTop + Math.floor(+x + SpotsMinPosition[spindaSpot].x)) / percentage,
-        spotY: (originLeft + Math.floor(+y + SpotsMinPosition[spindaSpot].y)) / percentage,
+        spotX: (originTop + Math.floor(+x + SpotsMinPosition[SpindaSpots[spindaSpot]].x)) / percentage,
+        spotY: (originLeft + Math.floor(+y + SpotsMinPosition[SpindaSpots[spindaSpot]].y)) / percentage,
     };
     return spotsPosition;
 }
