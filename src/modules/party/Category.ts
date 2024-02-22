@@ -25,15 +25,12 @@ export default class PokemonCategories implements Saveable {
     defaults: Record<string, any> = {};
 
     public static initialize() {
-        PokemonCategories.addCategory('None', '#333333', 0); // dark grey
         PokemonCategories.addCategory('Favorite', '#e74c3c', 1); // red
     }
 
     public static reset() {
         App.game.party.caughtPokemon.forEach((p) => {
-            if (p.category) {
-                p.category = 0;
-            }
+            p.category = [];
         });
         [...PokemonCategories.categories()].forEach(c => {
             PokemonCategories.removeCategory(c.id, true);
@@ -66,27 +63,29 @@ export default class PokemonCategories implements Saveable {
         if (index === -1) {
             return;
         }
-        const cat = PokemonCategories.categories()[index];
-        // Cannot remove None or Favorite categories
-        if (!force && cat.id < 2) {
-            return;
-        }
 
+        const cat = PokemonCategories.categories()[index];
         const pokeballFilter = App.game.pokeballFilters.list().find(f => f.options?.category?.observableValue() == cat.id);
+
         if (pokeballFilter) {
-            Notifier.notify({
-                title: 'Remove Category',
-                message: `This category is in use by the <strong>${pokeballFilter.name}</strong> Pokéball filter and cannot be removed.`,
-                type: NotificationConstants.NotificationOption.danger,
-                timeout: 1e4,
-            });
-            return;
+            if (force) {
+                // Forced remove (reset filters)
+                // When the category is used in a pokeball filter disable the filter and remove the category option.
+                pokeballFilter.enabled(false);
+                App.game.pokeballFilters.removeFilterOption(pokeballFilter, 'category');
+            } else {
+                Notifier.notify({
+                    title: 'Remove Category',
+                    message: `This category is in use by the <strong>${pokeballFilter.name}</strong> Pokéball filter and cannot be removed.`,
+                    type: NotificationConstants.NotificationOption.danger,
+                    timeout: 1e4,
+                });
+                return;
+            }
         }
 
         App.game.party.caughtPokemon.forEach((p) => {
-            if (+p.category === cat.id) {
-                p.category = 0;
-            }
+            p.removeCategory(cat.id);
         });
 
         // Remove category from hatchery helper filters if selected
@@ -131,18 +130,10 @@ export default class PokemonCategories implements Saveable {
             return;
         }
 
-        const categoryOrder = json.categories?.map(c => c.id);
-        json.categories?.forEach((category) => {
-            const cat = PokemonCategories.categories().find(c => c.id == category.id);
-            if (cat) {
-                cat.name(category.name);
-                cat.color(category.color);
-            } else {
-                PokemonCategories.addCategory(category.name, category.color, category.id);
-            }
+        PokemonCategories.categories([]);
+        json.categories.forEach((category) => {
+            PokemonCategories.addCategory(category.name, category.color, category.id);
         });
-
-        PokemonCategories.categories().sort((a, b) => categoryOrder.indexOf(a.id) - categoryOrder.indexOf(b.id));
     }
 }
 

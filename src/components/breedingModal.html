@@ -261,11 +261,33 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     }">name</span>
 
                                                 <!-- Category Button -->
-                                                <div class="pokemonCategory dropdown">
-                                                    <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
-                                                    <div class="border-secondary dropdown-menu category-dropdown">
+                                                <div class="pokemonCategory dropdown" data-bind="let: { categories: App.game.party.getPokemon($data.id).category }">
+                                                    <div data-toggle="dropdown" style="height: 15px;">
+                                                        <!-- ko ifnot: categories.length -->
+                                                        <button></button>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: categories.length -->
+                                                        <!-- Limit category display to 12 for UI purposes -->
+                                                        <div class="d-flex position-relative category-display" data-bind="foreach: App.game.party.getPokemon($data.id)._category.slice(0, 12)">
+                                                            <button data-bind="class: `category-${$data + 1}`"></button>
+                                                        </div>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                    <div class="border-secondary dropdown-menu multiselect-dropdown category-dropdown px-2">
                                                         <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
-                                                        <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
+                                                        <div class="form-check d-flex align-items-center">
+                                                            <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
+                                                                data-bind="
+                                                                    attr: { id: `${$parent.id}-category${pokemonCategory.id}` },
+                                                                    checked: App.game.party.getPokemon($parent.id)._category,
+                                                                    checkedValue: pokemonCategory.id">
+                                                            <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
+                                                                data-bind="
+                                                                    text: pokemonCategory.name,
+                                                                    attr: { for: `${$parent.id}-category${pokemonCategory.id}` },
+                                                                    style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }"
+                                                                onclick="event.stopPropagation();"></label>
+                                                        </div>
                                                         <!-- /ko -->
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">

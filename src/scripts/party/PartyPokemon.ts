@@ -31,7 +31,7 @@ class PartyPokemon implements Saveable {
         exp: 0,
         breeding: false,
         shiny: false,
-        category: 0,
+        category: [],
         levelEvolutionTriggered: false,
         pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
@@ -49,7 +49,7 @@ class PartyPokemon implements Saveable {
     _level: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
-    _category: KnockoutObservable<number>;
+    _category: KnockoutObservableArray<number>;
     _translatedName: KnockoutObservable<string>;
     _nickname: KnockoutObservable<string>;
     _displayName: KnockoutComputed<string>;
@@ -79,7 +79,7 @@ class PartyPokemon implements Saveable {
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this._category = ko.observable(0).extend({ numeric: 0 });
+        this._category = ko.observableArray([]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
@@ -405,7 +405,7 @@ class PartyPokemon implements Saveable {
         }
 
         // Check based on category
-        if (BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value()) {
+        if (BreedingFilters.category.value() >= 0 && !this.category.includes(BreedingFilters.category.value())) {
             return false;
         }
 
@@ -514,6 +514,19 @@ class PartyPokemon implements Saveable {
         } else {
             player.loseItem(heldItem.name, 1);
             this.heldItem(heldItem);
+        }
+    }
+
+    public addCategory(id: number) {
+        if (!this.category.includes(id)) {
+            this._category.push(id);
+        }
+    }
+
+    public removeCategory(id: number) {
+        const index = this.category.indexOf(id);
+        if (index > -1) {
+            this._category.splice(index, 1);
         }
     }
 
@@ -639,12 +652,12 @@ class PartyPokemon implements Saveable {
         this._shiny(bool);
     }
 
-    get category(): number {
+    get category(): Array<number> {
         return this._category();
     }
 
-    set category(index: number) {
-        this._category(index);
+    set category(value: Array<number>) {
+        this._category(value);
     }
 
     get nickname(): string {

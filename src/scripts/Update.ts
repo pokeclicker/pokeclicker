@@ -2618,6 +2618,22 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.20': ({ playerData, saveData, settingsData }) => {
+            // Multiple categories
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                pokemon[6] = !pokemon[6] ? [] : [pokemon[6]];
+            });
+            // Remove 'None' category
+            saveData.categories.categories = saveData.categories.categories.filter(c => c.id !== 0);
+            // Update any pokeball filters with the 'None' category selected
+            saveData.pokeballFilters.list.forEach(filter => {
+                if (filter.options.category === 0) {
+                    delete filter.options.category;
+                    filter.enabled = false;
+                }
+            });
+        },
     };
 
     constructor() {

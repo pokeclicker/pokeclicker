@@ -275,14 +275,15 @@ class PartyController {
     }
 
     public static moveCategoryPokemon(fromCategory: number, toCategory: number) {
-        // Category should exist, otherwise use the None category
+        // Category should exist
         if (!PokemonCategories.categories().some((c) => c.id === toCategory)) {
-            toCategory = 0;
+            return;
         }
 
         App.game.party.caughtPokemon.forEach((p) => {
-            if (p.category === fromCategory) {
-                p.category = toCategory;
+            if (p.category.includes(fromCategory)) {
+                p.removeCategory(fromCategory);
+                p.addCategory(toCategory);
             }
         });
     }
