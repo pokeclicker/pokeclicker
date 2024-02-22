@@ -20,12 +20,11 @@ export class Mine {
     public static grid: Array<Array<Observable<number>>>;
     public static rewardGrid: Array<Array<any>>;
     public static itemsFound: Observable<number> = ko.observable(0);
+    public static itemsPartiallyFound: Observable<number> = ko.observable(0);
     public static itemsBuried: Observable<number> = ko.observable(0);
     public static rewardNumbers: Array<number>;
     public static surveyResult = ko.observable(null);
     public static skipsRemaining = ko.observable(Mine.maxSkips);
-    public static excavatedTileCount: Observable<Number> = ko.observable(0);
-    public static allTileCount: Observable<Number> = ko.observable(1);
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: Observable<Tool> = ko.observable(0);
@@ -93,6 +92,7 @@ export class Mine {
 
         Mine.loadingNewLayer = false;
         Mine.itemsFound(0);
+        Mine.itemsPartiallyFound(0);
 
         Underground.showMine();
 
@@ -105,9 +105,6 @@ export class Mine {
                 this.breakTile(x, y, 1);
             }
         }
-
-        Mine.excavatedTileCount(Mine.grid.flatMap(value => value).reduce((a, b) => a + (Mine.maxLayerDepth - b()), 0));
-        Mine.allTileCount(App.game.underground.getSizeY() * Underground.sizeX * Mine.maxLayerDepth);
     }
 
     private static getRandomCoord(max: number, size: number): number {
@@ -358,9 +355,8 @@ export class Mine {
             const image = UndergroundItems.getById(reward.value).undergroundImage;
             $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y} rotations-${reward.rotations}" style="background-image: url('${image}');"></div>`);
             Mine.checkItemsRevealed();
+            Mine.checkItemsPartiallyRevealed();
         }
-
-        Mine.excavatedTileCount(Mine.grid.flatMap(value => value).reduce((a, b) => a + (Mine.maxLayerDepth - b()), 0));
     }
 
     private static normalizeX(x: number): number {
@@ -433,6 +429,14 @@ export class Mine {
         }
     }
 
+    public static checkItemsPartiallyRevealed() {
+        const amountRevealed = Mine.rewardNumbers
+            .map(value => Mine.checkItemPartiallyRevealed(value) ? 1 : 0)
+            .reduce((a, b) => a + b, 0);
+
+        Mine.itemsPartiallyFound(amountRevealed);
+    }
+
     public static checkItemRevealed(id: number) {
         for (let i = 0; i < Underground.sizeX; i++) {
             for (let j = 0; j < this.getHeight(); j++) {
@@ -447,6 +451,20 @@ export class Mine {
         }
         App.game.oakItems.use(OakItemType.Cell_Battery);
         return true;
+    }
+
+    public static checkItemPartiallyRevealed(id: number) {
+        for (let i = 0; i < Underground.sizeX; i++) {
+            for (let j = 0; j < this.getHeight(); j++) {
+                if (Mine.rewardGrid[j][i] != 0) {
+                    if (Mine.rewardGrid[j][i].value == id) {
+                        if (Mine.grid[j][i]() == 0)
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public static checkCompleted() {
@@ -481,14 +499,12 @@ export class Mine {
         this.grid = mine.grid.map(row => row.map(val => ko.observable(val)));
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
+        this.itemsPartiallyFound(mine.itemsPartiallyFound);
         this.itemsBuried(mine.itemsBuried);
         this.rewardNumbers = mine.rewardNumbers;
         this.loadingNewLayer = false;
         this.surveyResult(mine.surveyResult ?? this.surveyResult());
         this.skipsRemaining(mine.skipsRemaining ?? this.maxSkips);
-
-        Mine.excavatedTileCount(Mine.grid.flatMap(value => value).reduce((a, b) => a + (Mine.maxLayerDepth - b()), 0));
-        Mine.allTileCount(App.game.underground.getSizeY() * Underground.sizeX * Mine.maxLayerDepth);
 
         Underground.showMine();
         // Check if completed in case the mine was saved after completion and before creating a new mine
@@ -504,6 +520,7 @@ export class Mine {
             grid: this.grid.map(row => row.map(val => val())),
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound(),
+            itemsPartiallyFound: this.itemsPartiallyFound(),
             itemsBuried: this.itemsBuried(),
             rewardNumbers: this.rewardNumbers,
             surveyResult: this.surveyResult(),

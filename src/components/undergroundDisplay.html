@@ -18,19 +18,10 @@
                 </div>
             </div>
 
-            <div class='progress'>
-                <div class='progress-bar bg-info' role='progressbar'
-                     aria-valuemin='0' aria-valuemax='100'
-                     data-bind="style: { width: (100 * Mine.excavatedTileCount() / Mine.allTileCount()).toFixed(2) + '%' }">
-                    <span data-bind="text: (100 * Mine.excavatedTileCount() / Mine.allTileCount()).toFixed(2) + '% cleared'"></span>
-                </div>
-            </div>
-
             <div class="container">
-                <div class="row text-center">
-                    <div class="col"
-                            data-bind="
-                                        text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found' ,
+                <div class="row">
+                    <div class="col">
+                        <div data-bind="text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried(),
                                         tooltip: {
                                             title: () =>
                                                 Mine.surveyResult() || 'Conduct a Survey to get more details',
@@ -38,8 +29,8 @@
                                                 placement: 'top',
                                                 boundary: 'window',
                                                 html: true,
-                                        }"
-                    >
+                                        }"></div>
+                        <div data-bind="text: 'Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound())"></div>
                     </div>
                 </div>
 
