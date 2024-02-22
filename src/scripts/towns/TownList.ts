@@ -5875,7 +5875,7 @@ const SantaluneSageChen = new NPC('Sage Chen', [
     'One day, I forgot to harvest them, and within its withered husk, I found a small stone that enabled my Banette to perform a Mega Evolution."',
 ], {
     image: 'assets/images/npcs/Sage.png',
-    requirement: new ObtainedPokemonRequirement('Banette', true),
+    requirement: new ObtainedPokemonRequirement('Banette'),
 });
 
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
