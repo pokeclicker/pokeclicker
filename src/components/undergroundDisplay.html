@@ -5,11 +5,9 @@
     <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.openUndergroundModal()">
         View
     </button>
+
     <div id="undergroundCard" class="card-body p-0 show">
-
         <div>
-            <span class="font-weight-bold">Mine</span>
-
             <div class='progress' style="height: 25px;">
                 <div class='progress-bar bg-warning' role='progressbar'
                      aria-valuemin='0' aria-valuemax='100'
@@ -57,43 +55,43 @@
                 <!-- /ko -->
             </div>
         </div>
-
-        <!-- ko if: Settings.getSetting('showUndergroundModuleDailyTrades').observableValue() -->
-        <div class="">
-            <span class="font-weight-bold">Daily trades</span>
-
-            <div class="table-responsive">
-                <table class="table table-sm table-hover table-striped m-0 text-left">
-                    <thead>
-                    </thead>
-                    <tbody>
-                    <!-- ko foreach: DailyDeal.list -->
-                    <tr data-bind="tooltip: {
-                                    title: () => `${$data.amount1} ${$data.item1.name} → ${$data.amount2} ${$data.item2.name}`,
-                                    trigger: 'hover',
-                                    placement: 'top',
-                                    boundary: 'window',
-                                    html: true,
-                                }">
-                        <td class="vertical-middle">
-                            <span data-bind="text: `${$data.amount1} ×`"></span>
-                        </td>
-                        <td class='vertical-middle'>
-                            <img class='mineInventoryItem' data-bind='attr: {src: $data.item1.image }'>
-                        </td>
-                        <td class='vertical-middle'>→</td>
-                        <td class="vertical-middle">
-                            <span data-bind="text: `${$data.amount2} ×`"></span>
-                        </td>
-                        <td class='vertical-middle'>
-                            <img class='mineInventoryItem' data-bind='attr: {src: $data.item2.image }'>
-                        </td>
-                    </tr>
-                    <!-- /ko -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- /ko -->
     </div>
+
+    <!-- ko if: Settings.getSetting('showUndergroundModuleDailyTrades').observableValue() -->
+    <div  class="card-header p-0" data-toggle="collapse" href="#undergroundDailyTradesCard">
+        <span>Daily trades</span>
+    </div>
+
+    <div id="undergroundDailyTradesCard" class="table-responsive show">
+        <table class="table table-sm table-hover table-striped m-0 text-left">
+            <thead>
+            </thead>
+            <tbody>
+            <!-- ko foreach: DailyDeal.list -->
+            <tr data-bind="tooltip: {
+                            title: () => `${$data.amount1} ${$data.item1.name} → ${$data.amount2} ${$data.item2.name}`,
+                            trigger: 'hover',
+                            placement: 'top',
+                            boundary: 'window',
+                            html: true,
+                        }">
+                <td class="text-center vertical-middle">
+                    <span style="line-height: 1;" data-bind="text: `${$data.amount1} ×`"></span>
+                </td>
+                <td class='text-center vertical-middle'>
+                    <img class='mineInventoryItem' data-bind='attr: {src: $data.item1.image }'>
+                </td>
+                <td class='text-center vertical-middle'>→</td>
+                <td class="text-center vertical-middle">
+                    <span style="line-height: 1;" data-bind="text: `${$data.amount2} ×`"></span>
+                </td>
+                <td class='text-center vertical-middle'>
+                    <img class='mineInventoryItem' data-bind='attr: {src: $data.item2.image }'>
+                </td>
+            </tr>
+            <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+    <!-- /ko -->
 </div>
