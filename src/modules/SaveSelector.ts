@@ -5,7 +5,7 @@ import Profile from './profile/Profile';
 import { SortSaves } from './Sortable';
 import Settings from './settings/index';
 import GameHelper from './GameHelper';
-import SpindaSpots from './enums/SpindaSpots';
+import * as SpindaHelper from './pokemons/SpindaHelper';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -79,13 +79,7 @@ export default class SaveSelector {
                 saveData.update?.version ?? 'Unknown',
                 saveData.challenges?.list ?? {},
                 playerData.trainerId,
-                
-                saveData.profile?.spindaSpots ?? {
-                    [SpindaSpots.topLeftSpot]: { x: 8, y: 8 },
-                    [SpindaSpots.topRightSpot]: { x: 8, y: 8 },
-                    [SpindaSpots.bottomLeftSpot]: { x: 8, y: 8 },
-                    [SpindaSpots.bottomRightSpot]: { x: 8, y: 8 },
-                },
+                saveData.profile?.spindaSpots ?? SpindaHelper.defaultValues(),
                 
                 key,
             );

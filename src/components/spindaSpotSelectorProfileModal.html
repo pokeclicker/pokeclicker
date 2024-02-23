@@ -27,43 +27,43 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ko foreach: { data: GameHelper.enumNumbers(SpindaSpots), as: 'positionName' } -->
+                            <!-- ko foreach: { data: GameHelper.enumNumbers(SpindaSpots), as: 'position' } -->
                             <tr>
-                                <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(SpindaSpots[positionName])}`">Spot</td>
+                                <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(SpindaSpots[position])}`">Spot</td>
                                 <!-- ko using: App.game.profile.spindaSpots, as: 'spot' -->
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
-                                        name: positionName, 
+                                        name: SpindaSpots[position], 
                                         min: 0, 
                                         max: 16, 
                                         step: 1
                                     },
-                                    value: spot[positionName].x(),
+                                    value: spot[position].x(),
                                     tooltip: {
-                                        title: spot[positionName].x(),
+                                        title: spot[position].x(),
                                         trigger: 'hover',
                                         boundary: 'window',
                                         placement: 'top'
                                     }"
-                                    oninput="(App.game.profile.spindaSpots[this.name].x(this.value))">
+                                    oninput="(App.game.profile.spindaSpots[SpindaSpots[this.name]].x(this.value))">
                                 </td>
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
-                                        name: positionName, 
+                                        name: SpindaSpots[position], 
                                         min: 0, 
                                         max: 16, 
                                         step: 1
                                     },
-                                    value: spot[positionName].y(),
+                                    value: spot[position].y(),
                                     tooltip: {
-                                        title: spot[positionName].y(),
+                                        title: spot[position].y(),
                                         trigger: 'hover',
                                         boundary: 'window',
                                         placement: 'top'
                                     }"
-                                    oninput="(App.game.profile.spindaSpots[this.name].y(this.value))">
+                                    oninput="(App.game.profile.spindaSpots[SpindaSpots[this.name]].y(this.value))">
                                 </td>
                                 <!-- /ko -->
                             </tr>

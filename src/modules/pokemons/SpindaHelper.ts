@@ -2,30 +2,56 @@ import GameHelper from '../GameHelper';
 import SpindaSpots from '../enums/SpindaSpots';
 import Settings from '../settings';
 
-export const isProfile = ko.observable(false);
-
+/**
+ * Gets the values stored in the settings
+ * @returns Object
+ */
 export function getSettingsObject() {
     let settingsObject = {};
     
-    GameHelper.enumNumbers(SpindaSpots).forEach((spotPosition) => {
-        settingsObject[spotPosition] = { 
-            x: Settings.getSetting(`spinda.${SpindaSpots[spotPosition]}X`).observableValue,
-            y: Settings.getSetting(`spinda.${SpindaSpots[spotPosition]}Y`).observableValue,
+    GameHelper.enumNumbers(SpindaSpots).forEach((position) => {
+        settingsObject[position] = { 
+            x: Settings.getSetting(`spinda.${SpindaSpots[position]}X`).observableValue,
+            y: Settings.getSetting(`spinda.${SpindaSpots[position]}Y`).observableValue,
         }
     });
     
     return settingsObject;
 }
 
+export function axisObservableToNumber(spindaSpots): Partial<Record<SpindaSpots, Record<"x" | "y", KnockoutObservable<number>>>> {
+    const spotObject = {}
+    GameHelper.enumNumbers(SpindaSpots).forEach((position) => {
+        if (!spotObject[position]) {
+            spotObject[position] = { x: 8, y: 8 };
+        }
+        spotObject[position].x = spindaSpots[position].x();
+        spotObject[position].y = spindaSpots[position].y();
+    });
+    return spotObject;
+}
+
+export function defaultValues(isObservable = false) {
+    const spindaSpots = {};
+    GameHelper.enumNumbers(SpindaSpots).forEach((position) => {
+        spindaSpots[position] = { 
+            x: isObservable ? ko.observable(8) : 8,
+            y: isObservable ? ko.observable(8) : 8,
+        };
+    });
+    return spindaSpots;
+}
+
 /**
-     * Generate Spinda spots in the sprite
-     * Spots info taken from:
-     * https://gatorshark.webs.com/SpindaDocumentation.htm
-     * https://github.com/magical/spinda/blob/master/spinda.py
-     * @param spindaSpot String enum
-     * @returns object
-     */
-export function generateSpindaSpots(spindaSpot: SpindaSpots | string, x = Math.random() * 16, y = Math.random() * 16, size = 96) {
+ * Generate Spinda spots in the sprite based on a given X and Y
+ * If no X or Y given, a random number between 0 to 16 will be used
+ * Spots info taken from:
+ * https://gatorshark.webs.com/SpindaDocumentation.htm
+ * https://github.com/magical/spinda/blob/master/spinda.py
+ * @param spindaSpot
+ * @returns object
+ */
+export function generateSpindaSpots(spindaSpot: SpindaSpots, x = Math.random() * 16, y = Math.random() * 16, size = 96) {
     const originTop = 23;
     const originLeft = 15;
     const SpotsMinPosition = {
@@ -35,13 +61,9 @@ export function generateSpindaSpots(spindaSpot: SpindaSpots | string, x = Math.r
         [SpindaSpots.bottomRightSpot]: { x: 15, y: 18 },
     };
     const percentage = 96 / size;
-    //console.log(spindaSpot);
-    //const spotMaxX = SpotsMinPosition[spindaSpot].x + 16;
-    //const spotMaxY = SpotsMinPosition[spindaSpot].y + 16;
-    
     const spotsPosition = {
-        spotX: (originTop + Math.floor(+x + SpotsMinPosition[SpindaSpots[spindaSpot]].x)) / percentage,
-        spotY: (originLeft + Math.floor(+y + SpotsMinPosition[SpindaSpots[spindaSpot]].y)) / percentage,
+        spotX: (originTop + Math.floor(+x + SpotsMinPosition[spindaSpot].x)) / percentage,
+        spotY: (originLeft + Math.floor(+y + SpotsMinPosition[spindaSpot].y)) / percentage,
     };
     return spotsPosition;
 }
