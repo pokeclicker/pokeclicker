@@ -4736,7 +4736,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 50,
         },
-        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'heldItem': { type: ItemType.item, id: 'Lucky_Punch' },
         'gender': {
             'femaleRatio': 1,
         },
@@ -4758,7 +4758,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 50,
         },
-        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'heldItem': { type: ItemType.item, id: 'Lucky_Punch' },
         'gender': {
             'femaleRatio': 1,
         },
