@@ -1277,22 +1277,19 @@
         %>
 
         <!--Melemele Woods-->
-        <%- include('templates/mapOverlay',
+        <%- include('templates/mapTown',
             { name: "Melemele Woods"
-            , x: 28, y: 13
-            , width: 14, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Melemele Woods')}, attr:{ class: MapHelper.calculateTownCssClass('Melemele Woods') }"
-            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() >= 1"
-            , connectedToTown: "Melemele Woods"
+            , x: 30, y: 10
+            , width: 12, height: 3
             })
         %>
 
         <!--Melemele Woods Extension-->
         <%- include('templates/mapTown',
             { name: "Melemele Woods"
-            , x: 29, y: 10
-            , width: 13, height: 3
-            , isExtension: true
+            , x: 28, y: 13
+            , width: 6, height: 3
+            ,isExtension: true
             })
         %>
 
@@ -1328,6 +1325,18 @@
             { name: "Melemele Woods"
             , x: 31, y: 9
             , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Melemele Woods Extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Melemele Woods"
+            , x: 34, y: 13
+            , width: 8, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('Melemele Woods')}, attr:{ class: MapHelper.calculateTownCssClass('Melemele Woods') }"
+            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() >= 1"
+            , connectedToTown: "Melemele Woods"
             , isExtension: true
             })
         %>
@@ -1381,8 +1390,18 @@
         <!--Verdant Cavern-->
         <%- include('templates/mapDungeon',
             { name: "Verdant Cavern"
-            , x: 28, y: 13
-            , width: 14, height: 3
+            , x: 29, y: 10
+            , width: 7, height: 3
+            , invisible: true
+            })
+        %>
+
+        <!--Melemele Meadow extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Melemele Meadow"
+            , x: 35, y: 8
+            , width: 6, height: 1
+            , isExtension: true
             , invisible: true
             })
         %>
@@ -1390,8 +1409,18 @@
         <!--Melemele Meadow-->
         <%- include('templates/mapDungeon',
             { name: "Melemele Meadow"
-            , x: 28, y: 13
-            , width: 14, height: 3
+            , x: 35, y: 9
+            , width: 9, height: 1
+            , invisible: true
+            })
+        %>
+
+        <!--Melemele Meadow extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Melemele Meadow"
+            , x: 37, y: 10
+            , width: 8, height: 1
+            , isExtension: true
             , invisible: true
             })
         %>
@@ -1402,8 +1431,18 @@
             , x: 34, y: 13
             , width: 7, height: 3
             , databind: "click:function(){MapHelper.moveToTown('Ruins of Conflict')}, attr:{ class: MapHelper.calculateTownCssClass('Ruins of Conflict') }"
-            , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() == 0"
+            , visible: "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Skull 2')]() == 0"
             , connectedToTown: "Ruins of Conflict"
+            , isExtension: true
+            })
+        %>
+
+        <!--Ruins of Conflict-->
+        <%- include('templates/mapDungeon',
+            { name: "Ruins of Conflict"
+            , x: 34, y: 13
+            , width: 7, height: 3
+            , invisible: true
             })
         %>
 
