@@ -1514,7 +1514,6 @@ GymList['Exeggutor Island'] = new Gym(
     'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!</br><img width="100" src="assets/images/items/zCrystal/Groundium Z.svg"/></br>Then go on with you two! Head straight through here and find the altar!',
     [new QuestLineCompletedRequirement('Emissary of Light')],
     undefined, undefined, { displayName: 'Hapu\'s Grand Trial' }
-    // TODO: hide until unlocked for vast poni canyon
 );
 
 //Alola Elite 4

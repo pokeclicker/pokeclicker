@@ -8040,7 +8040,6 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('Emissary of Light', 3)],
     [
         new AccessGym(GymList['Exeggutor Island'], new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
-        // TODO: GymList['Exeggutor Island'] but hide until unlocked
         TemporaryBattleList['Recon Squad 3'],
         TemporaryBattleList['Plumeria Poison Memory'],
     ],
@@ -8083,7 +8082,7 @@ TownList['Ruins of Life'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
     [new TemporaryBattleRequirement('Plumeria 1')],
-    [GymList['Konikoni City']],
+    [new AccessGym(GymList['Konikoni City'], new QuestLineStepCompletedRequirement('Symbiotic Relations', 8, GameConstants.AchievementOption.less))],
     {
         npcs: [LillieRuinsOfLife],
     }
