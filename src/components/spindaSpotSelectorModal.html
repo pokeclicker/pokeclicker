@@ -1,19 +1,20 @@
-<div class="modal noselect fade" id="spindaSpotSelectorProfileModal" tabindex="-1" role="dialog" aria-labelledby="spindaSpotSelectorProfileModal">
+<div class="modal noselect fade" id="spindaSpotSelectorModal" tabindex="-1" role="dialog" aria-labelledby="spindaSpotSelectorModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
-                <h5 class="modal-title" data-bind="text: `Select Spinda's Spots (Profile)`">Select Spinda Spots</h5>
+                <h5 class="modal-title">Select Spinda's Spots</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body p-0 pb-1">
                 <knockout class="position-relative d-inline-block">
-                    <img data-bind="attr:{ src: PokemonHelper.getImage(327) }" src=""/>
+                    <img data-bind="attr:{ src: PokemonHelper.getImage(327, SpindaHelper.isProfile() ? App.game.profile.pokemonShiny() : undefined) }" src=""/>
                     <knockout data-bind="template: { 
                         name: 'spindaSpotTemplate', 
                         data: { 
-                            'spotObject': App.game.profile.spindaSpots,
+                            'spotObject': SpindaHelper.isProfile() ? App.game.profile.spindaSpots : SpindaHelper.getSettingsObject(),
+                            'shiny': SpindaHelper.isProfile() ? App.game.profile.pokemonShiny() : undefined,
                         } 
                     }">Spinda Spot</knockout>
                 </knockout>
@@ -30,7 +31,7 @@
                             <!-- ko foreach: { data: GameHelper.enumNumbers(SpindaSpots), as: 'position' } -->
                             <tr>
                                 <td class="text-left align-middle" data-bind="text: `${GameConstants.camelCaseToString(SpindaSpots[position])}`">Spot</td>
-                                <!-- ko using: App.game.profile.spindaSpots, as: 'spot' -->
+                                <!-- ko using: SpindaHelper.isProfile() ? App.game.profile.spindaSpots : SpindaHelper.getSettingsObject(), as: 'spot' -->
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
                                     data-bind="attr: { 
@@ -46,7 +47,7 @@
                                         boundary: 'window',
                                         placement: 'top'
                                     }"
-                                    oninput="(App.game.profile.spindaSpots[SpindaSpots[this.name]].x(this.value))">
+                                    oninput="(SpindaHelper.isProfile() ? App.game.profile.spindaSpots[SpindaSpots[this.name]].x(this.value) : Settings.setSettingByName(`spinda.${this.name}X`, this.value))">
                                 </td>
                                 <td class="text-left align-middle">
                                     <input type="range" class="custom-range"
@@ -63,7 +64,7 @@
                                         boundary: 'window',
                                         placement: 'top'
                                     }"
-                                    oninput="(App.game.profile.spindaSpots[SpindaSpots[this.name]].y(this.value))">
+                                    oninput="(SpindaHelper.isProfile() ? App.game.profile.spindaSpots[SpindaSpots[this.name]].y(this.value) : Settings.setSettingByName(`spinda.${this.name}Y`, this.value))">
                                 </td>
                                 <!-- /ko -->
                             </tr>

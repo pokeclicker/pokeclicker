@@ -2,6 +2,8 @@ import GameHelper from '../GameHelper';
 import SpindaSpots from '../enums/SpindaSpots';
 import Settings from '../settings';
 
+export const isProfile = ko.observable(false);
+
 /**
  * Gets the values stored in the settings
  * @returns Object
@@ -76,7 +78,9 @@ export function generateSpindaSpots(spindaSpot: SpindaSpots, x = Math.random() *
 export function getSpindaMask(shiny: boolean = undefined): string {
     if (shiny === undefined) {
         const spinda = App.game.party.getPokemon(327);
-        shiny = spinda.shiny && !spinda.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue();
+        if (spinda) {
+            shiny = spinda.shiny && !spinda.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue();
+        }
     }
     let src = 'assets/images/';
     if (shiny) {
