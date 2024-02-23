@@ -42,7 +42,7 @@ export default class Profile implements Saveable {
         this.pokemonFemale = ko.observable(false).extend({ boolean: null });
         this.background = ko.observable(background).extend({ numeric: 0 });
         this.textColor = ko.observable(textColor);
-        this.spindaSpots = SpindaHelper.defaultValues(true)
+        this.spindaSpots = SpindaHelper.defaultValues(true);
     }
 
     static getTrainerCard(

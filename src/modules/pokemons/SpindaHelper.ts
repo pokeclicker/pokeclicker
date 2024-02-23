@@ -15,14 +15,14 @@ export function getSettingsObject() {
         settingsObject[position] = { 
             x: Settings.getSetting(`spinda.${SpindaSpots[position]}X`).observableValue,
             y: Settings.getSetting(`spinda.${SpindaSpots[position]}Y`).observableValue,
-        }
+        };
     });
     
     return settingsObject;
 }
 
-export function axisObservableToNumber(spindaSpots): Partial<Record<SpindaSpots, Record<"x" | "y", KnockoutObservable<number>>>> {
-    const spotObject = {}
+export function axisObservableToNumber(spindaSpots): Partial<Record<SpindaSpots, Record<'x' | 'y', KnockoutObservable<number>>>> {
+    const spotObject = {};
     GameHelper.enumNumbers(SpindaSpots).forEach((position) => {
         if (!spotObject[position]) {
             spotObject[position] = { x: 8, y: 8 };
