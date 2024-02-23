@@ -355,7 +355,7 @@ export class Mine {
             const image = UndergroundItems.getById(reward.value).undergroundImage;
             $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y} rotations-${reward.rotations}" style="background-image: url('${image}');"></div>`);
             Mine.checkItemsRevealed();
-            Mine.checkItemsPartiallyRevealed();
+            Mine.calculatePartiallyRevealedItems();
         }
     }
 
@@ -429,7 +429,7 @@ export class Mine {
         }
     }
 
-    public static checkItemsPartiallyRevealed() {
+    public static calculatePartiallyRevealedItems() {
         const amountRevealed = Mine.rewardNumbers
             .map(value => Mine.checkItemPartiallyRevealed(value) ? 1 : 0)
             .reduce((a, b) => a + b, 0);
@@ -499,12 +499,13 @@ export class Mine {
         this.grid = mine.grid.map(row => row.map(val => ko.observable(val)));
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
-        this.itemsPartiallyFound(mine.itemsPartiallyFound);
         this.itemsBuried(mine.itemsBuried);
         this.rewardNumbers = mine.rewardNumbers;
         this.loadingNewLayer = false;
         this.surveyResult(mine.surveyResult ?? this.surveyResult());
         this.skipsRemaining(mine.skipsRemaining ?? this.maxSkips);
+
+        this.calculatePartiallyRevealedItems();
 
         Underground.showMine();
         // Check if completed in case the mine was saved after completion and before creating a new mine
@@ -520,7 +521,6 @@ export class Mine {
             grid: this.grid.map(row => row.map(val => val())),
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound(),
-            itemsPartiallyFound: this.itemsPartiallyFound(),
             itemsBuried: this.itemsBuried(),
             rewardNumbers: this.rewardNumbers,
             surveyResult: this.surveyResult(),
