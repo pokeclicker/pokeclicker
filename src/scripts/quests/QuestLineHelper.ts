@@ -2896,7 +2896,7 @@ class QuestLineHelper {
     // "Z Crystal" Quest
     // will unlock Tapus and Totem mons
     public static createIslandChallengeQuestLine() {
-        const islandChallengeQuestLine = new QuestLine('Island Challenge', 'Take on harsher Trials and be graced by Tapus\' presence!', new DevelopmentRequirement(new TemporaryBattleRequirement('Hau 2')), GameConstants.BulletinBoards.Alola);
+        const islandChallengeQuestLine = new QuestLine('Island Challenge', 'Embark on the Island Challenge and be graced by the Tapus\' presence!', new DevelopmentRequirement(new TemporaryBattleRequirement('Hau 2')), GameConstants.BulletinBoards.Alola);
 
         const autoModalStep = new CustomQuest(1, 0, 'Start your Island Challenge at Professor Kukui\'s Lab.', () => +!!App.game.statistics.routeKills[GameConstants.Region.alola]['1']()).withInitialValue(0)
             .withCustomReward(() => ItemList.Island_Challenge_Amulet.gain(1))
