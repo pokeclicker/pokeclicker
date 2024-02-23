@@ -184,14 +184,14 @@ export class Mine {
         return (indexX ? 1 : 0) + (indexY ? 2 : 0);
     }
 
-    public static survey() {
+    public static survey(resultTooltipID: string = undefined) {
         // Disable survey while loading new layer
         if (this.loadingNewLayer) {
             return;
         }
 
         if (Mine.surveyResult()) {
-            $('#mine-survey-result').tooltip('show');
+            $(resultTooltipID || '#mine-survey-result').tooltip('show');
             return;
         }
 
@@ -209,7 +209,7 @@ export class Mine {
 
         App.game.underground.energy -= surveyCost;
         const rewards = Mine.rewardSummary();
-        Mine.updatesurveyResult(rewards);
+        Mine.updatesurveyResult(rewards, resultTooltipID);
     }
 
     private static rewardSummary() {
@@ -243,7 +243,7 @@ export class Mine {
         }, { fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0, megaStones: 0 });
     }
 
-    private static updatesurveyResult(summary) {
+    private static updatesurveyResult(summary, resultTooltipID: string = undefined) {
         const text = [];
         if (summary.fossils) {
             text.push(`Fossils: ${summary.fossils}`);
@@ -268,7 +268,7 @@ export class Mine {
         }
 
         Mine.surveyResult(text.join('<br>'));
-        $('#mine-survey-result').tooltip('show');
+        $(resultTooltipID || '#mine-survey-result').tooltip('show');
     }
 
     public static click(i: number, j: number) {
