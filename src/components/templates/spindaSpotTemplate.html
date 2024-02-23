@@ -23,8 +23,10 @@
     <knockout data-bind="template: { 
         name: 'spindaSpotTemplate', 
         data: { 
+            'spotObject': SpindaHelper.getSettingsObject(),
             'shiny': true, // undefined to make SpindaHelper.getSpindaMask calculate the shinyness based on the shiny settings in Pokedex
-            'isBattle': true,
+            'size': 56,
+            'className': 'smallImage',
         } 
     }">Spinda Spot</knockout>
 -->
