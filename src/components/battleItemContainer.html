@@ -146,7 +146,7 @@
                                         click: function(){ItemHandler.useItem($data)}
                                       },
                                       tooltip: {
-                                        title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription(),
+                                        title: '<strong>' + ItemList[$data].displayName + '</strong>' + '<br/>' + ItemList[$data].getDescription(),
                                         trigger: 'hover',
                                         placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                                         html: true

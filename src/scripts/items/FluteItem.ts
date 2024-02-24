@@ -25,6 +25,7 @@ class FluteItem extends Item {
         let tooltipString = '';
         tooltipString += `<div><strong>${item.displayName}</strong></div>`;
         tooltipString += `<div>${item.getDescription()}</div>`;
+        tooltipString += '<br/>';
         tooltipString += '<div><strong>Consumes:</strong></div>';
         tooltipString += '<table class="w-100">';
         for (const gem of item.gemTypes) {
