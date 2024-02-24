@@ -47,22 +47,6 @@ class FluteItem extends Item {
     }
 
     checkCanUse(): boolean {
-        if (App.game.challenges.list.disableGems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Gems are Disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
-        if (App.game.challenges.list.disableBattleItems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Battle Items are Disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
         if (!FluteEffectRunner.isActive(GameConstants.FluteItemType[this.name])() && !player.itemList[this.name]()) {
             Notifier.notify({
                 message: `You don't have the ${this.displayName}...`,
