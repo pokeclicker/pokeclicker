@@ -75,9 +75,10 @@
           }">ⓘ
     </button>
     </div>
-    <button class='btn btn-sm btn-primary px-1' id="draggable_gem_list_btn" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" data-backdrop="false" data-toggle="modal"
-      data-bind="tooltip: { title: 'Show Gem list', trigger: 'hover' }, visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
-      <img src="assets/images/shortcut-icons/gems.png">
+    <button class='btn btn-sm btn-primary px-1' id="gem_list_btn" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" data-backdrop="false" data-toggle="modal"
+      data-bind="tooltip: { title: 'Show Gem list', trigger: 'hover' }, visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)"
+      onclick="App.game.gems.openGemModal()">
+      <img src="assets/images/keyitems/Gem_case.png">
     </button>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
       <!-- Flutes -->
