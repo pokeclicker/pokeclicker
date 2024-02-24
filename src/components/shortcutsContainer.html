@@ -12,7 +12,7 @@
               </button>
             </td>
           </tr>
-          <tr data-bind="visible: App.game.farming.canAccess">
+          <tr data-bind="visible: App.game.farming.canAccess() && !Settings.getSetting('showFarmModule').observableValue()">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
                   Farm
