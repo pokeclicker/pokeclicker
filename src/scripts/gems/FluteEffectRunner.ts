@@ -139,7 +139,7 @@ class FluteEffectRunner {
         const tooltip = [];
 
         // List all types boosted
-        if (this.activeGemTypes().length < 18){
+        if (this.activeGemTypes().length < 18) {
             this.activeGemTypes().forEach(idx => {
                 tooltip.push(`<i>${PokemonType[idx]}<i/>`);
             });
