@@ -247,9 +247,15 @@ class Dungeon {
         return encounterInfo;
     }
 
-    public allAvailableShadowPokemon(): PokemonNameType[] {
+    public allShadowPokemon(): PokemonNameType[] {
         const encounterInfo = this.normalEncounterList.filter(e => e.shadow).map(e => e.pokemonName);
         encounterInfo.push(...this.bossEncounterList.filter(e => e.shadow).map(e => e.pokemonName));
+        return encounterInfo;
+    }
+
+    public allAvailableShadowPokemon(): PokemonNameType[] {
+        const encounterInfo = this.normalEncounterList.filter(e => e.shadow && !e.hide).map(e => e.pokemonName);
+        encounterInfo.push(...this.bossEncounterList.filter(e => e.shadow && !e.hide).map(e => e.pokemonName));
         return encounterInfo;
     }
 
@@ -399,15 +405,14 @@ class Dungeon {
                 encounterInfo.push(this.getEncounterInfo(pokemonName, null, hideEncounter));
             // Handling Trainers (only those with shadow Pokemon)
             } else if (enemy instanceof DungeonTrainer) {
-                if (enemy.options?.requirement?.isCompleted() === false) {
-                    return;
-                }
+                const hideEncounter = (enemy.options?.requirement && !enemy.options.requirement.isCompleted());
                 const shadowPokemon = enemy.getTeam().filter(p => p.shadow == GameConstants.ShadowStatus.Shadow);
                 if (shadowPokemon.length) {
-                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, false, true));
+                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, hideEncounter, true));
                     const trainerEncounter = {
                         image: enemy.image,
                         EVs: '',
+                        hide: hideEncounter,
                         lockMessage: '',
                         shadowTrainer: true,
                     };
@@ -451,7 +456,7 @@ class Dungeon {
                 const shadowPokemon = boss.getTeam().filter(p => p.shadow == GameConstants.ShadowStatus.Shadow);
                 const shadowEncounter = shadowPokemon.length > 0;
                 if (shadowEncounter) {
-                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, false, true));
+                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, hideEncounter, true));
                     encounterInfo.push(...shadowEncounters);
                 }
                 const encounter = {
@@ -475,7 +480,7 @@ class Dungeon {
         return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
     });
 
-    public getMimicData(pokemonName): {tier: LootTier, lockedMessage: string} {
+    public getMimicData(pokemonName: PokemonNameType): {tier: LootTier, lockedMessage: string} {
         let res;
         (Object.keys(this.lootTable) as LootTier[]).forEach(tier => {
             this.lootTable[tier].forEach(loot => {
