@@ -8039,7 +8039,7 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.AlolaSubRegions.PoniIsland,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 3)],
     [
-        new AccessGym(GymList['Exeggutor Island'], new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new AccessGym(GymList['Exeggutor Island'], new MultiRequirement([new TemporaryBattleRequirement('Recon Squad 3'),new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)])),
         TemporaryBattleList['Recon Squad 3'],
         TemporaryBattleList['Plumeria Poison Memory'],
     ],
