@@ -87,12 +87,17 @@ aria-labelledby="pokedexModalLabel">
                                         <label for="pokedex-filter-category">Category</label>
                                         <div class="dropdown show">
                                             <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                data-bind="text: PokedexFilters.category.value() == -1 ? 'All' : PokemonCategories.categories().find(c => c.id == PokedexFilters.category.value()).name()">
+                                                data-bind="text: PokedexFilters.category.value() == -1 ? 'All'
+                                                    : PokedexFilters.category.value() == -2 ? 'Categorized'
+                                                    : PokemonCategories.categories().find(c => c.id == PokedexFilters.category.value()).name()">
                                                 Categories
                                             </button>
                                             <div class="border-secondary dropdown-menu col-12 category-dropdown">
                                                 <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', -1) }">
                                                     All
+                                                </div>
+                                                <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', -2) }">
+                                                    Categorized
                                                 </div>
                                                 <div class="dropdown-divider"></div>
                                                 <!-- ko foreach : PokemonCategories.categories -->

@@ -411,7 +411,12 @@ class PartyPokemon implements Saveable {
             return false;
         }
 
-        // Check based on category
+        // Categorized only
+        if (BreedingFilters.category.value() == -2 && this.isUncategorized()) {
+            return false;
+        }
+
+        // Selected category
         if (BreedingFilters.category.value() >= 0 && !this.category.includes(BreedingFilters.category.value())) {
             return false;
         }
