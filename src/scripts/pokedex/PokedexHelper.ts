@@ -196,6 +196,9 @@ class PokedexHelper {
             }
 
             if (PokedexFilters.category.value() != -1) {
+                if (!alreadyCaught) {
+                    return false;
+                }
                 const partyPokemon = App.game.party.getPokemon(pokemon.id);
                 // Categorized only
                 if (PokedexFilters.category.value() == -2 && partyPokemon.isUncategorized()) {
