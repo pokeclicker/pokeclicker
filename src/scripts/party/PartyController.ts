@@ -302,6 +302,11 @@ class PartyController {
                 bValue *= PartyController.calculateRegionalMultiplier(b, region);
             }
 
+            if (option === SortOptions.category) {
+                aValue = direction ? Math.max(...aValue) : Math.min(...aValue);
+                bValue = direction ? Math.max(...bValue) : Math.min(...bValue);
+            }
+
             if (config.invert) {
                 dir *= -1;
             }

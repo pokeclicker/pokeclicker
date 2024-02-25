@@ -87,17 +87,12 @@ aria-labelledby="pokedexModalLabel">
                                         <label for="pokedex-filter-category">Category</label>
                                         <div class="dropdown show">
                                             <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                data-bind="text: PokedexFilters.category.value() == -1 ? 'All'
-                                                    : PokedexFilters.category.value() == 0 ? 'None'
-                                                    : PokemonCategories.categories().find(c => c.id == PokedexFilters.category.value()).name()">
+                                                data-bind="text: PokedexFilters.category.value() == -1 ? 'All' : PokemonCategories.categories().find(c => c.id == PokedexFilters.category.value()).name()">
                                                 Categories
                                             </button>
                                             <div class="border-secondary dropdown-menu col-12 category-dropdown">
                                                 <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', -1) }">
                                                     All
-                                                </div>
-                                                <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', 0) }">
-                                                    None
                                                 </div>
                                                 <div class="dropdown-divider"></div>
                                                 <!-- ko foreach : PokemonCategories.categories -->
@@ -274,31 +269,40 @@ aria-labelledby="pokedexModalLabel">
 
                                                 <!-- Category Button -->
                                                 <!-- ko if: App.game.party.alreadyCaughtPokemonByName($data.name) -->
-                                                <div class="pokemonCategory dropdown" data-bind="let: { categories: App.game.party.getPokemon($data.id).category }">
+                                                <div class="pokemonCategory dropdown" data-bind="let: { pokemon: App.game.party.getPokemon($data.id) }">
                                                     <div data-toggle="dropdown" style="height: 15px;">
-                                                        <!-- ko ifnot: categories.length -->
-                                                        <button></button>
-                                                        <!-- /ko -->
-                                                        <!-- ko if: categories.length -->
                                                         <!-- Limit category display to 12 for UI purposes -->
-                                                        <div class="d-flex position-relative category-display" data-bind="foreach: App.game.party.getPokemon($data.id)._category.slice(0, 12)">
+                                                        <div class="d-flex position-relative category-display" data-bind="foreach: pokemon.category.slice(0, 12)">
                                                             <button data-bind="class: `category-${$data + 1}`"></button>
                                                         </div>
-                                                        <!-- /ko -->
                                                     </div>
                                                     <div class="border-secondary dropdown-menu multiselect-dropdown category-dropdown px-2">
-                                                        <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
+                                                        <div class="form-check d-flex align-items-center", data-bind="with: PokemonCategories.categories().find(c => c.id === 0), as: 'pokemonCategory'">
+                                                            <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
+                                                                data-bind="attr: { id: `${$parent.id}-category0` },
+                                                                    checked: pokemon.isUncategorized,
+                                                                    disable: pokemon.isUncategorized,
+                                                                    click: () => { pokemon.resetCategory(); return true; }">
+                                                            <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
+                                                                data-bind="
+                                                                    text: pokemonCategory.name,
+                                                                    attr: { for: `${$parent.id}-category0` },
+                                                                    style: { color: GameHelper.isColorLight(pokemonCategory.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight(pokemonCategory.color()) ? 'white' : 'black'}` }"
+                                                                onclick="event.stopPropagation();"></label>
+                                                        </div>
+                                                        <div class="dropdown-divider"></div>
+                                                        <!-- ko foreach: { data: PokemonCategories.playerCategories, as: 'pokemonCategory' } -->
                                                         <div class="form-check d-flex align-items-center">
                                                             <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
                                                                 data-bind="
                                                                     attr: { id: `${$parent.id}-category${pokemonCategory.id}` },
-                                                                    checked: App.game.party.getPokemon($parent.id)._category,
+                                                                    checked: pokemon._category,
                                                                     checkedValue: pokemonCategory.id">
                                                             <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
                                                                 data-bind="
                                                                     text: pokemonCategory.name,
                                                                     attr: { for: `${$parent.id}-category${pokemonCategory.id}` },
-                                                                    style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }"
+                                                                    style: { color: GameHelper.isColorLight(pokemonCategory.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight(pokemonCategory.color()) ? 'white' : 'black'}` }"
                                                                 onclick="event.stopPropagation();"></label>
                                                         </div>
                                                         <!-- /ko -->

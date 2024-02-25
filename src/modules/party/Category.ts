@@ -20,17 +20,19 @@ export type PokemonCategory = {
 
 export default class PokemonCategories implements Saveable {
     public static categories: KnockoutObservableArray<PokemonCategory> = ko.observableArray([]);
+    public static playerCategories = ko.pureComputed(() => PokemonCategories.categories().filter((cat) => cat.id > 0));
 
     saveKey = 'categories';
     defaults: Record<string, any> = {};
 
     public static initialize() {
+        PokemonCategories.addCategory('None', '#333333', 0); // dark grey
         PokemonCategories.addCategory('Favorite', '#e74c3c', 1); // red
     }
 
     public static reset() {
         App.game.party.caughtPokemon.forEach((p) => {
-            p.category = [];
+            p.resetCategory();
         });
         [...PokemonCategories.categories()].forEach(c => {
             PokemonCategories.removeCategory(c.id, true);
@@ -44,7 +46,14 @@ export default class PokemonCategories implements Saveable {
                 id = Math.max(id, c.id);
             });
             id++;
+        } else {
+            // Prevent adding an existing category
+            // Really only used when resetting to preserve the None category
+            if (PokemonCategories.categories().some(c => c.id === id)) {
+                return;
+            }
         }
+
         const cat: PokemonCategory = { name: ko.observable(name), color: ko.observable(color), id : id };
         PokemonCategories.categories.push(cat);
 
@@ -58,6 +67,11 @@ export default class PokemonCategories implements Saveable {
     }
 
     public static removeCategory(id: number, force = false): void {
+        // Cannot remove None category
+        if (id === 0) {
+            return;
+        }
+
         const index = PokemonCategories.categories().findIndex(c => c.id == id);
         // Is this case expected to happen ?
         if (index === -1) {
@@ -84,9 +98,8 @@ export default class PokemonCategories implements Saveable {
             }
         }
 
-        App.game.party.caughtPokemon.forEach((p) => {
-            p.removeCategory(cat.id);
-        });
+        // Remove category from pokemon
+        App.game.party.caughtPokemon.forEach((p) => p.removeCategory(cat.id));
 
         // Remove category from hatchery helper filters if selected
         App.game.breeding.hatcheryHelpers.available().forEach((helper) => {
@@ -130,10 +143,17 @@ export default class PokemonCategories implements Saveable {
             return;
         }
 
-        PokemonCategories.categories([]);
-        json.categories.forEach((category) => {
-            PokemonCategories.addCategory(category.name, category.color, category.id);
+        const categoryOrder = json.categories?.map(c => c.id);
+        json.categories?.forEach((category) => {
+            const cat = PokemonCategories.categories().find(c => c.id == category.id);
+            if (cat) {
+                cat.name(category.name);
+                cat.color(category.color);
+            } else {
+                PokemonCategories.addCategory(category.name, category.color, category.id);
+            }
         });
+        PokemonCategories.categories().sort((a, b) => categoryOrder.indexOf(a.id) - categoryOrder.indexOf(b.id));
     }
 }
 

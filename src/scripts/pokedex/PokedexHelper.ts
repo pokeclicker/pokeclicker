@@ -195,15 +195,9 @@ class PokedexHelper {
                 return false;
             }
 
-            // Only pokemon with selected category or no category
-            if (PokedexFilters.category.value() != -1) {
-                const categories = App.game.party.getPokemon(pokemon.id).category;
-                if (PokedexFilters.category.value() === 0 && categories.length) { // No category
-                    return false;
-                }
-                if (PokedexFilters.category.value() > 0 && !categories.includes(PokedexFilters.category.value())) { // Selected category
-                    return false;
-                }
+            // Only pokemon with selected category
+            if (PokedexFilters.category.value() != -1 && !App.game.party.getPokemon(pokemon.id)?.category.includes(PokedexFilters.category.value())) {
+                return false;
             }
 
             const uniqueTransformation = PokedexFilters.uniqueTransformation.value();

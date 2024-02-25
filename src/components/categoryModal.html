@@ -43,7 +43,8 @@
                                         <div data-bind="foreach: PokemonCategories.categories()">
                                             <!-- ko if: $data.id !== $parent.id -->
                                             <button class="dropdown-item small" type="button"
-                                                data-bind="text: $data.name, style: { 'background-color': $data.color() },
+                                                data-bind="text: $data.name,
+                                                    style: { 'background-color': $data.color(), color: GameHelper.isColorLight($data.color()) ? 'black' : 'white' },
                                                     click: () => PartyController.moveCategoryPokemon($parent.id, $data.id)"></button>
                                             <!-- /ko -->
                                         </div>
@@ -52,7 +53,7 @@
                             </td>
                             <td>
                                 <button type="button" class="close text-danger" title="Remove Category" style="opacity: 1;"
-                                    data-bind="click: () => { PokemonCategories.removeCategory($data.id) }">
+                                    data-bind="visible: $data.id > 0, click: () => { PokemonCategories.removeCategory($data.id) }">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </td>

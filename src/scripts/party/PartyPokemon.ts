@@ -31,7 +31,7 @@ class PartyPokemon implements Saveable {
         exp: 0,
         breeding: false,
         shiny: false,
-        category: [],
+        category: [0],
         levelEvolutionTriggered: false,
         pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
@@ -79,7 +79,7 @@ class PartyPokemon implements Saveable {
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this._category = ko.observableArray([]);
+        this._category = ko.observableArray([0]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
@@ -118,6 +118,13 @@ class PartyPokemon implements Saveable {
         this._canUseHeldItem.subscribe((canUse) => {
             if (!canUse && this.heldItem()) {
                 this.addOrRemoveHeldItem(this.heldItem());
+            }
+        });
+        this._category.subscribe((newValue) => {
+            if (!newValue.length) {
+                this._category.push(0); // add None category
+            } else if (newValue.length > 1) {
+                this.removeCategory(0); // remove None category
             }
         });
     }
@@ -405,8 +412,7 @@ class PartyPokemon implements Saveable {
         }
 
         // Check based on category
-        if ((BreedingFilters.category.value() === 0 && this.category.length) // No category
-            || (BreedingFilters.category.value() > 0 && !this.category.includes(BreedingFilters.category.value()))) { // Selected category
+        if (BreedingFilters.category.value() >= 0 && !this.category.includes(BreedingFilters.category.value())) {
             return false;
         }
 
@@ -531,6 +537,18 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public resetCategory(): void {
+        this.category = [...this.defaults.category];
+    }
+
+    public isUncategorized = ko.pureComputed(() => this.category[0] === 0);
+
+    public getCategorySortValues(): Array<number> {
+        return PokemonCategories.categories().map((c, i) => [c.id, i])
+            .filter(([id, _]) => this.category.includes(id))
+            .map(([_, index]) => index);
+    }
+
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
@@ -550,7 +568,7 @@ class PartyPokemon implements Saveable {
         this.exp = json[PartyPokemonSaveKeys.exp] ?? this.defaults.exp;
         this.breeding = json[PartyPokemonSaveKeys.breeding] ?? this.defaults.breeding;
         this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
-        this.category = json[PartyPokemonSaveKeys.category] ?? this.defaults.category;
+        this.category = json[PartyPokemonSaveKeys.category] ?? [...this.defaults.category];
         this.level = this.calculateLevelFromExp();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
@@ -571,7 +589,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.exp]: this.exp,
             [PartyPokemonSaveKeys.breeding]: this.breeding,
             [PartyPokemonSaveKeys.shiny]: this.shiny,
-            [PartyPokemonSaveKeys.category]: this.category,
+            [PartyPokemonSaveKeys.category]: this.isUncategorized() ? undefined : this.category,
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
