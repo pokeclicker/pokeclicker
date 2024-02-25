@@ -4218,6 +4218,7 @@ TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
     undefined,
     [
         new QuestLineStepCompletedRequirement('Emissary of Light', 6),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
         new OneFromManyRequirement([
             new ObtainedPokemonRequirement('Solgaleo'),
             new ObtainedPokemonRequirement('Lunala'),
@@ -4242,6 +4243,7 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
     undefined,
     [
         new QuestLineStepCompletedRequirement('Emissary of Light', 6),
+        new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
         new ObtainedPokemonRequirement('Solgaleo', true),
         new ObtainedPokemonRequirement('Lunala', true),
     ],
