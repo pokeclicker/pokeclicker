@@ -282,7 +282,9 @@ class PartyController {
 
         App.game.party.caughtPokemon.forEach((p) => {
             if (p.category.includes(fromCategory)) {
-                p.addCategory(toCategory);
+                if (toCategory > 0) {
+                    p.addCategory(toCategory);
+                }
                 p.removeCategory(fromCategory);
             }
         });
