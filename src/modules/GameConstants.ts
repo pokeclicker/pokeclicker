@@ -2019,7 +2019,6 @@ export const TemporaryBattles = [
     'Gym Leader Bede',
     'Rampaging Gigalith',
     'Rampaging Froslass',
-    'Gym Leader Marnie',
     'Rampaging Haxorus',
     'Sordward 2',
     'Shielbert 2',

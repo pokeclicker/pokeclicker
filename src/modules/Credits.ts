@@ -61,7 +61,6 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Overworld Klara',
             'Overworld Avery',
-            'Trevor',
         ],
         // Notes: Gives credit on image page if asked.
     },
@@ -85,7 +84,6 @@ export const SpriteCredits: Credit[] = [
             'Aether Foundation Employee (male)',
             'Aether President Lusamine',
             'Gladion',
-            'Hala',
             'Hapu',
             'Hau',
             'Ilima',
@@ -105,7 +103,6 @@ export const SpriteCredits: Credit[] = [
             'Sightseer (female)',
             'Sophocles',
             'Teacher (Gen 7)',
-            'Team Skull Boss (guzma)',
             'Wicke',
             'Youth Athlete (female)',
         ],
@@ -117,16 +114,20 @@ export const SpriteCredits: Credit[] = [
         image: 'https://www.smogon.com/forums/media/zracknel-beta.svg.m.1',
         resources: [
             'Adaman',
+            'Agatha',
             'AI Sada',
             'AI Turo',
             'Akari',
             'Allister',
+            'Aqua Leader',
             'Arezu',
             'Avery',
             'Bea',
             'Bede',
             'Calaba',
+            'Calem',
             'Cogita',
+            'Diantha',
             'Gym Leader Bede',
             'Gordie',
             'Hop',
@@ -147,6 +148,7 @@ export const SpriteCredits: Credit[] = [
             'Opal',
             'Peony',
             'Piers',
+            'Professor Burnet',
             'Professor Magnolia',
             'Professor Sonia',
             'Raihan',
@@ -160,6 +162,7 @@ export const SpriteCredits: Credit[] = [
         ],
         // NOTES: No notes about credit, but is made for public use. Unclear who made what, so credited together
     },
+
     {
         name: 'CGMetalDragon',
         link: 'https://www.deviantart.com/cgmetaldragon',
@@ -205,12 +208,6 @@ export const SpriteCredits: Credit[] = [
         name: 'DaleArwin',
         link: 'https://www.deviantart.com/dalearwin',
         resources: [
-            'Aether Foundation Employee (masked)',
-            'Brains & Brawn',
-            'Dancer (female)',
-            'Golfer',
-            'Surfer',
-            'Team Flare Grunts',
             'Wonder Chest',
         ],
         // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
@@ -333,7 +330,6 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Blue Raindrops Shop Icon',
             'Magikarp Saucy Violet Shop Icon',
             'Magikarp (Feebas)',
-            'Magma Admin Courtney',
             'Magma Stone',
             'Man of Mystery',
             'Merilyn',
@@ -347,7 +343,6 @@ export const SpriteCredits: Credit[] = [
             'Naganadel (Overworld)',
             'New Island Overworld',
             'Peat Block',
-            'Peonia',
             'Pikachu (Clone)',
             'Pikachu (Easter)',
             'Pinkan Arbok',
@@ -367,7 +362,6 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Scyther Shuffle',
             'Pinkan Weedle',
             'Pinkan Weezing',
-            'Professor Burnet',
             'Purify Icon',
             'Robo Groudon',
             'Roddy Tackle',
@@ -492,7 +486,7 @@ export const SpriteCredits: Credit[] = [
             'Thug Zook',
             'Togepi (Flowering Crown)',
             'Torchic (Egg)',
-            'Tourist Couple/Bellhop',
+            'Tourist Couple',
             'Tower of Darkness',
             'Tower of Waters',
             'Underground Aerodactylite',
@@ -508,7 +502,6 @@ export const SpriteCredits: Credit[] = [
             'Weepinbell (Fancy) shop image',
             'Vertical cave entrance map sprites',
             'Vivillon Photobook',
-            'Volo (Ginkgo)',
             'White mane hair icon',
             'Zarude (Dada) shop image',
             'Zero',
@@ -628,8 +621,11 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/gnomowladny',
         image: 'https://a.deviantart.net/avatars-big/g/n/gnomowladny.gif',
         resources: [
+            'Aqua Admin (shelly)',
+            'AZ',
             'Clemont',
             'Drasna',
+            'Hala',
             'Korrina',
             'Malva',
             'Onympia',
@@ -637,6 +633,7 @@ export const SpriteCredits: Credit[] = [
             'Siebold',
             'Team Flare Bryony',
             'Team Flare Xerosic',
+            'Team Skull Boss (guzma)',
             'Tierno',
             'Valerie',
             'Viola',
@@ -645,6 +642,17 @@ export const SpriteCredits: Credit[] = [
             'Zinnia',
         ],
         // NOTES: Feel free to use it if you like, but don\'t forget to give me credit~!
+    },
+    {
+        name: 'Grapo',
+        link: 'https://twitter.com/Grapo_Sprites',
+        image: 'https://pbs.twimg.com/profile_images/1741829829266153472/_7Ag0tcS_400x400.jpg',
+        resources: [
+            'Glacia',
+            'Peonia',
+            'Volo (Ginkgo)',
+        ],
+        // NOTES: Submitted to Pokemon Showdown, which are free to use with credit
     },
     {
         name: 'HighOnMushrooms',
@@ -656,13 +664,21 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, can no longer find an existing profile for the user
     },
     {
+        name: 'hyo-oppa',
+        link: 'https://www.deviantart.com/hyo-oppa',
+        resources: [
+            'Magma Leader',
+        ],
+        // NOTES: "Feel free to use them in your own projects, ROM hacks, or Fan game but PLEASE GIVE CREDIT"
+    },
+    {
         name: 'izzyvicious',
         link: 'https://www.deviantart.com/izzyvicious',
         image: 'https://a.deviantart.net/avatars-big/i/z/izzyvicious.png',
         resources: [
             'Overworld Marnie',
         ],
-        // Notes: Gives credit on image page if asked.
+        // Notes: "Gives credit on image page if asked".
     },
     {
         name: 'JapuDCret',
@@ -715,14 +731,6 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Allowed use with credit given.
     },
     {
-        name: 'Kilima',
-        link: 'https://archive.pokecharms.com/works/diantha-sprite.52739/',
-        resources: [
-            'Diantha',
-        ],
-        // NOTES: Permission given to Krush via Discord DM
-    },
-    {
         name: 'Kita',
         link: 'https://discordapp.com/users/312651496766308352/',
         resources: [
@@ -744,24 +752,33 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/kyle-dove',
         image: 'https://a.deviantart.net/avatars-big/k/y/kyle-dove.png',
         resources: [
+            'Actor',
+            'Aether Foundation Employee (masked)',
+            'Aqua Admin (matt)',
             'Artist (Gen 8)',
-            'Artist (male)',
             'Arven',
             'Battle Café Master',
+            'Bellhop',
             'Beni',
             'Beni (Ninja)',
             'Bill',
             'Blue-LGPE',
             'Blue-Masters',
             'Brassius',
+            'Celio',
             'Clavell',
             'Clover',
+            'Contest Champion (Johanna)',
             'Cook (Gen 8)',
             'Cyllene',
+            'Dancer (female)',
             'Dendra',
             'Fairy Tale Girl',
+            'Furisode Girl Katherine',
             'Gaeric',
             'Geeta',
+            'Golfer (male)',
+            'Grant',
             'Gen 8 Reporter (Lucy Stevens)',
             'Hassel',
             'Hex Maniac',
@@ -778,6 +795,8 @@ export const SpriteCredits: Credit[] = [
             'Larry',
             'Laventon',
             'Looker',
+            'Magma Admin',
+            'May',
             'Melli',
             'Miriam',
             'Mr. Fuji',
@@ -799,8 +818,13 @@ export const SpriteCredits: Credit[] = [
             'Sightseer (male)',
             'Sky Trainer (female)',
             'Sky Trainer (male)',
+            'Surfer',
+            'Professor Sycamore',
+            'Team Flare Grunt (female)',
+            'Team Flare Grunt (male)',
             'Team Star Grunt (female)',
             'Team Star Grunt (male)',
+            'Trevor',
             'Triathlete',
             'Tourist (female)',
             'Tourist (male)',
@@ -875,16 +899,6 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
-        name: 'mid117',
-        link: 'https://www.deviantart.com/mid117',
-        image: 'https://a.deviantart.net/avatars-big/m/i/mid117.jpg',
-        resources: [
-            'Team Skull Grunt (female)',
-            'Team Skull Grunt (male)',
-        ],
-        // NOTES: Found on DeviantArt About page: "All Sprites here are free to use as long you give credit to me"
-    },
-    {
         name: 'NiCeDiCe',
         link: 'https://twitter.com/NiCeDiCe90',
         resources: [
@@ -930,23 +944,6 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
-        name: 'pixie-rings',
-        link: 'https://www.deviantart.com/pixie-rings/art/Pokemon-Trainer-Sprite-Furisode-Girl-560892832',
-        image: 'https://a.deviantart.net/avatars-big/p/i/pixie-rings.jpg?14',
-        resources: [
-            'Furisode Girl Katherine',
-        ],
-        // Notes: Permission given on image page if credited.
-    },
-    {
-        name: 'PKMNTrainerSpriterC, akuma-tsubasa & Metapod23',
-        link: 'https://www.deviantart.com/pkmntrainerspriterc/art/Ash-Ketchum-Sprite-Set-435950341',
-        resources: [
-            'Ash Ketchum',
-        ],
-        // NOTES: Permission given on image page if credited.
-    },
-    {
         name: 'Pokémon Reborn\'s cass and Amethyst',
         link: 'https://www.rebornevo.com/pr/index.html/',
         resources: [
@@ -956,15 +953,6 @@ export const SpriteCredits: Credit[] = [
             'Underground Ice stone',
         ],
         // Notes: Permission given to SomeoneAlive via Discord DM
-    },
-    {
-        name: 'PhoenixOfLight92',
-        link: 'https://www.deviantart.com/phoenixoflight92',
-        image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
-        resources: [
-            'Shauna',
-        ],
-        // Notes: Permission given on image page if credited.
     },
     {
         name: 'Pokemon Showdown',
@@ -1090,15 +1078,6 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
-        name: 'Similation',
-        link: 'https://www.deviantart.com/similation',
-        image: 'https://a.deviantart.net/avatars-big/s/i/similation.jpg',
-        resources: [
-            'Professor Sycamore',
-        ],
-        // Notes: Permission given on image page if credited
-    },
-    {
         name: 'Smogon Sprite Project',
         link: 'https://www.smogon.com/forums/forums/smeargles-laptop.325/',
         resources: [
@@ -1175,7 +1154,6 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Rattata',
             'Pinkan Vileplume',
             'Professor Hastings',
-            'Professor Juniper',
             'Realgam Tower',
             'Riot',
             'Salazzle overworld images',
@@ -1216,17 +1194,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/tebited15',
         image: 'https://a.deviantart.net/avatars-big/t/e/tebited15.png',
         resources: [
-            'Grant',
             'Calem overworld',
-        ],
-        // Notes: Permission given on image page if credited.
-    },
-    {
-        name: 'TintjeMadelintje101',
-        link: 'https://www.deviantart.com/tintjemadelintje101',
-        image: 'https://a.deviantart.net/avatars-big/t/i/tintjemadelintje101.jpg',
-        resources: [
-            'Calem',
         ],
         // Notes: Permission given on image page if credited.
     },
@@ -1244,7 +1212,6 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/victorv111',
         image: 'https://a.deviantart.net/avatars-big/v/i/victorv111.png',
         resources: [
-            'Celio',
             'Mr. Pokémon',
             'Professor Ivy',
         ],
@@ -1292,9 +1259,14 @@ export const SpriteCredits: Credit[] = [
             'Giacomo',
             'Green',
             'Grusha',
+            'Gym Leader Marnie',
+            'Magma Admin (courtney)',
             'Mela',
             'Ortega',
             'Penny',
+            'Shauna',
+            'Team Skull Grunt (female)',
+            'Team Skull Grunt (male)',
         ],
         // Notes: Permission given if credited.
     },
