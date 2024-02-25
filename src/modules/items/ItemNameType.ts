@@ -313,6 +313,7 @@ export type ItemNameType
 | 'Vivid_Scent'
 | 'Muscle_Band'
 | 'Light_Ball'
+| 'Lucky_Punch'
 | 'Quick_Powder'
 | 'Thick_Club'
 | 'Soul_Dew'

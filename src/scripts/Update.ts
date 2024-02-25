@@ -2618,9 +2618,14 @@ class Update implements Saveable {
                 }
             });
         },
-
         '0.10.20': ({ playerData, saveData, settingsData }) => {
-            // Multiple categories
+            // Add Olivine Lighthouse dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29);
+
+            if (saveData.badgeCase[17]) {
+                Update.startQuestLine(saveData, 'The Sick Ampharos');
+            }
+
             saveData.party.caughtPokemon.forEach(pokemon => {
                 if (pokemon[6]) {
                     pokemon[6] = [pokemon[6]];
