@@ -2837,17 +2837,7 @@ class QuestLineHelper {
     public static createUltraNecrozmaAlolaQuestLine() {
         const ultraNecrozmaAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
-        // const UltraMegalopolisReward = () => { // change to sun and moon flutes
-        //     App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
-        //     Notifier.notify({
-        //         title: ultraNecrozmaAlolaQuestLine.name,
-        //         message: 'You got the Sun and Moon flutes! (but not really)',
-        //         type: NotificationConstants.NotificationOption.success,
-        //         timeout: 3e4,
-        //     });
-        // };
-
-        const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis', 'Stop the Eater of Light from absorbing all light in Alola. Defeat Ultra Necrozma at the Altar of the Sunne and Moone.')// TODO: add flutes reward .withCustomReward(UltraMegalopolisReward)
+        const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis', 'Stop the Eater of Light from absorbing all light in Alola. Defeat Ultra Necrozma at the Altar of the Sunne and Moone.')
             .withOptionalArgs({
                 clearedMessage: 'Necrozma shone with such blinding light, as it used to, only to lose that light all over again... It seems to have fled somewhere now. We are grateful to you, human of Alola. May we all eventually be awash in light again.',
                 npcDisplayName: 'Ultra Recon Squad',
