@@ -2575,7 +2575,7 @@ class QuestLineHelper {
         createZCrystalTrial(PokemonType.Water, 'Brooklet Hill', 'Lana', 'Very well done! You do know what this is, don\'t you? Please take this Waterium Z.', akalaAlolaQuestLine);
 
         // 2 - Temp battle: Recon Squad 2
-        const battleReconSquad2 = new DefeatTemporaryBattleQuest('Recon Squad 2', 'The Ultra Recon Squad is investigating a tree that reminds you of a region west of Kanto. Go check it out on Route 5.')
+        const battleReconSquad2 = new DefeatTemporaryBattleQuest('Recon Squad 2', 'The Ultra Recon Squad is investigating an oddly familiar tree. Go check it out on Route 5.')
             .withOptionalArgs({
                 clearedMessage: 'That must have been the Pokémon known as Sudowoodo. Our research is insufficient to define what it means to be a Pokémon Trainer... We\'ll never be able to stop the Blinding One like this...',
                 npcDisplayName: 'Dulse',
