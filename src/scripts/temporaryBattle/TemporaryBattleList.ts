@@ -4257,8 +4257,8 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
 TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
     [
-        new GymPokemon('Necrozma (Dusk Mane)', 304088130, 50),
-        new GymPokemon('Necrozma (Dawn Wings)', 364088130, 50),
+        new GymPokemon('Necrozma (Dusk Mane)', 316028496, 50),
+        new GymPokemon('Necrozma (Dawn Wings)', 318577113, 50),
     ],
     'Necrozma retreated into the Ultra Wormhole',
     [new QuestLineCompletedRequirement('Emissary of Light')],
