@@ -2556,7 +2556,7 @@ class QuestLineHelper {
         const battleKahunaHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town complete Melemele\'s Grand Trial!').withCustomReward(zCrystalGet(PokemonType.Fighting));
         melemeleAlolaQuestLine.addQuest(battleKahunaHala);
 
-        // end - Extra Z Crystal "Trial"
+        // end - Clear dungeon: Ten Carat Hill, Flyinium Z Trial
         // const defined at the end of this file
         createZCrystalTrial(PokemonType.Flying, 'Ten Carat Hill', 'Kahili', 'Hello there. There\'s a wonderful breeze blowing out here today. The glistening Flyinium Z... It\'s yours now. Use it well.', melemeleAlolaQuestLine, true, 'There is one more Z Crystal on Ten Carat Hill. Find the Trial Site and claim it!', 'Trial Site of Ten Carat Hill');
 
@@ -2744,10 +2744,11 @@ class QuestLineHelper {
             talktoGladion1,
         ], 'Talk to Lillie and Gladion at Aether Paradise when you\'re ready to go to the next island.').withCustomReward(AlolaMasterballReward));
 
-        // 14 and 15 - Get Steelium and Psychium if not yet
+        // 14 - Temp battle: Haina Desert, Psychium Z
         const getPsychiumZ = new DefeatTemporaryBattleQuest('Psychium Z Trial', 'There are more Z Crystals on Ula\'ula. Find the Trial Site hidden in Haina Desert after clearing the Route.').withInitialValue(0);
         ulaulaAlolaQuestLine.addQuest(getPsychiumZ);
 
+        // end - Temp battle: Molayne, Steelium Z
         const getSteeliumZ = new DefeatTemporaryBattleQuest('Molayne', 'Get the Steelium Z. Defeat Molayne in Hokulani Observatory.').withInitialValue(0);
         ulaulaAlolaQuestLine.addQuest(getSteeliumZ);
 
@@ -2816,7 +2817,7 @@ class QuestLineHelper {
             });
         poniAlolaQuestLine.addQuest(clearBeastLusamine);
 
-        // 8 - Talk to NPC: Lillie7
+        // end - Talk to NPC: Lillie7
         const EaterOfLightReward = () => {
             App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined);
             Notifier.notify({
@@ -2833,10 +2834,11 @@ class QuestLineHelper {
         App.game.quests.questLines().push(poniAlolaQuestLine);
     }
 
-    // Single step quest for story climax
+    // Alola Story conclusion - Started upon finishing Emissary of Light (Poni quest)
     public static createUltraNecrozmaAlolaQuestLine() {
         const ultraNecrozmaAlolaQuestLine = new QuestLine('Eater of Light', 'A dangerous Pokémon from another world threatens the Alola region.');
 
+        // 0 - Temp battle: Ultra Megalopolis
         const clearUltraMegalopolis = new DefeatTemporaryBattleQuest('Ultra Megalopolis', 'Stop the Eater of Light from absorbing all light in Alola. Defeat Ultra Necrozma at the Altar of the Sunne and Moone.')
             .withOptionalArgs({
                 clearedMessage: 'Necrozma shone with such blinding light, as it used to, only to lose that light all over again... It seems to have fled somewhere now. We are grateful to you, human of Alola. May we all eventually be awash in light again.',
@@ -2845,11 +2847,35 @@ class QuestLineHelper {
             });
         ultraNecrozmaAlolaQuestLine.addQuest(clearUltraMegalopolis);
 
+        // 1 - Clear dungeon: Mina\'s Houseboat, Mina's Trial
+        createZCrystalTrial(PokemonType.Fairy, 'Mina\'s Houseboat', 'Mina', 'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!', ultraNecrozmaAlolaQuestLine);
+
+        // 2 - Temp battle: Gladion 2
+        const battleGladion3 = new DefeatTemporaryBattleQuest('Gladion 3', 'Battle Gladion on Ula\'ula one last time before ascending to the Pokémon League.').withInitialValue(0);
+        ultraNecrozmaAlolaQuestLine.addQuest(battleGladion3);
+
+        // end - Clear dungeon: Mount Lanakila, Icium Z Trial
+        createZCrystalTrial(PokemonType.Ice, 'Mount Lanakila', 'Trial Site', 'Congratulations! You\'ve claimed the Icium Z! Onwards to the Pokémon League now!', ultraNecrozmaAlolaQuestLine, true, 'Find the Trial Site and its Z Crystal in the Mount Lanakila dungeon.', 'Trial Site of Mount Lanakila');
+
         App.game.quests.questLines().push(ultraNecrozmaAlolaQuestLine);
     }
 
-    // Started upon defeating Ultra Necrozma temp battle.
-    public static createMinasTrialAlolaQuestLine() {
+    // "Z Crystal" Quest
+    // will unlock Tapus and Totem mons
+    public static createIslandChallengeQuestLine() {
+        const islandChallengeQuestLine = new QuestLine('Island Challenge', 'Embark on the Island Challenge and be graced by the Tapus\' presence!', new DevelopmentRequirement(new TemporaryBattleRequirement('Hau 2')), GameConstants.BulletinBoards.Alola);
+
+        const autoModalStep = new CustomQuest(1, 0, 'Start your Island Challenge at Professor Kukui\'s Lab.', () => +!!App.game.statistics.routeKills[GameConstants.Region.alola]['1']()).withInitialValue(0)
+            .withCustomReward(() => ItemList.Island_Challenge_Amulet.gain(1))
+            .withOptionalArgs({
+                clearedMessage: 'Woah there, tester! This quest is still under development! You should go out there and test the story in the meantime, yeah!',// 'Alola $playername$! You ready to take on the island challenge? This amulet here is proof that you\'re up to the task, yeah! With this in hand you\'ll get to experience some ultra changes in Alola\'s trials, too! Woo!</br></br><img src="assets/images/items/quest/Island_Challenge_Amulet.png">',
+                npcDisplayName: 'Kukui',
+                npcImageName: 'Professor Kukui',
+            });
+        islandChallengeQuestLine.addQuest(autoModalStep);
+
+        /*
+        Mina's Trial will be part of this questline
         const minasTrialAlolaQuestLine = new QuestLine('Mina\'s Trial', 'Mina has asked you to battle the Trial captains of the other islands to earn access to her Trial site.');
 
         const clearCaptainMina = new DefeatTemporaryBattleQuest('Captain Mina', 'Defeat Captain Mina in Seafolk Village.').withInitialValue(0).withCustomReward(() => ItemList.Pink_Petal_Mina.gain(1));
@@ -2872,30 +2898,7 @@ class QuestLineHelper {
 
         const clearKahunaNanu = new DefeatTemporaryBattleQuest('Kahuna Nanu', 'Captain Acerola is apparently busy with something at the top of Mount Lanakila. Defeat Kahuna Nanu in Aether House instead.').withInitialValue(0).withCustomReward(() => ItemList.Purple_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearKahunaNanu);
-
-        createZCrystalTrial(PokemonType.Fairy, 'Mina\'s Houseboat', 'Mina', 'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!', minasTrialAlolaQuestLine);
-
-        const battleGladion3 = new DefeatTemporaryBattleQuest('Gladion 3', 'Battle Gladion on Ula\'ula one last time before ascending to the Pokémon League.').withInitialValue(0);
-        minasTrialAlolaQuestLine.addQuest(battleGladion3);
-
-        createZCrystalTrial(PokemonType.Ice, 'Mount Lanakila', 'Trial Site', 'Congratulations! You\'ve claimed the Icium Z! Onwards to the Pokémon League now!', minasTrialAlolaQuestLine, true, 'Find the Trial Site and its Z Crystal in the Mount Lanakila dungeon.', 'Trial Site of Mount Lanakila');
-
-        App.game.quests.questLines().push(minasTrialAlolaQuestLine);
-    }
-
-    // "Z Crystal" Quest
-    // will unlock Tapus and Totem mons
-    public static createIslandChallengeQuestLine() {
-        const islandChallengeQuestLine = new QuestLine('Island Challenge', 'Embark on the Island Challenge and be graced by the Tapus\' presence!', new DevelopmentRequirement(new TemporaryBattleRequirement('Hau 2')), GameConstants.BulletinBoards.Alola);
-
-        const autoModalStep = new CustomQuest(1, 0, 'Start your Island Challenge at Professor Kukui\'s Lab.', () => +!!App.game.statistics.routeKills[GameConstants.Region.alola]['1']()).withInitialValue(0)
-            .withCustomReward(() => ItemList.Island_Challenge_Amulet.gain(1))
-            .withOptionalArgs({
-                clearedMessage: 'Woah there, tester! This quest is still under development! You should go out there and test the story in the meantime, yeah!',// 'Alola $playername$! You ready to take on the island challenge? This amulet here is proof that you\'re up to the task, yeah! With this in hand you\'ll get to experience some ultra changes in Alola\'s trials, too! Woo!</br></br><img src="assets/images/items/quest/Island_Challenge_Amulet.png">',
-                npcDisplayName: 'Kukui',
-                npcImageName: 'Professor Kukui',
-            });
-        islandChallengeQuestLine.addQuest(autoModalStep);
+        */
 
         App.game.quests.questLines().push(islandChallengeQuestLine);
     }
@@ -4246,7 +4249,6 @@ class QuestLineHelper {
         this.createUlaulaAlolaQuestLine();
         this.createPoniAlolaQuestLine();
         this.createUltraNecrozmaAlolaQuestLine();
-        this.createMinasTrialAlolaQuestLine();
         this.createIslandChallengeQuestLine();
         this.createSilvallyTypesQuestLine();
         this.createUltraBeastQuestLine();

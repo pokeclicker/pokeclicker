@@ -4272,9 +4272,6 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Necrozma'), new QuestLineCompletedRequirement('Emissary of Light')],
     undefined,
     {
-        firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
-        },
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',
         displayName: 'Ultra Necrozma',
@@ -4375,7 +4372,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         new GymPokemon('Silvally (Grass)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.',
-    [new QuestLineStepCompletedRequirement('Mina\'s Trial', 7)],
+    [new QuestLineStepCompletedRequirement('Eater of Light', 1)],
     undefined,
     {
         displayName: 'Pokémon Trainer Gladion',

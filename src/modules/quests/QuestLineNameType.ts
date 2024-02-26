@@ -51,7 +51,6 @@ export type QuestLineNameType
     | 'Child of the Stars'
     | 'Emissary of Light'
     | 'Eater of Light'
-    | 'Mina\'s Trial'
     | 'Island Challenge'
     | 'Typing some Memories'
     | 'Ultra Beast Hunt'

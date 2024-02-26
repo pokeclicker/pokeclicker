@@ -11933,14 +11933,14 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
     16217412,
     [
         new DungeonBossPokemon('Ribombee', 81087060, 55),
-        new DungeonBossPokemon('Totem Ribombee', 82543791, 60, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Mina\'s Trial')])}), //new QuestLineCompletedRequirement('Island Challenge')
+        new DungeonBossPokemon('Totem Ribombee', 82543791, 60, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Eater of Light')])}), //new QuestLineCompletedRequirement('Island Challenge')
         new DungeonTrainer('Trial Site',
             [
                 new GymPokemon('Blissey', 24326118, 53),
                 new GymPokemon('Pelipper', 24326118, 52),
                 new GymPokemon('Totem Ribombee', 32434824, 55),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Mina\'s Trial', 7, GameConstants.AchievementOption.less) }, 'of Mina\'s Houseboat'),
+            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Eater of Light', 1, GameConstants.AchievementOption.less) }, 'of Mina\'s Houseboat'),
     ],
     1150000, 25);
 
@@ -12068,7 +12068,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Mina\'s Trial', GameConstants.AchievementOption.less) }, 'of Mount Lanakila'),
+            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less) }, 'of Mount Lanakila'),
     ],
     1175000, 26);
 
