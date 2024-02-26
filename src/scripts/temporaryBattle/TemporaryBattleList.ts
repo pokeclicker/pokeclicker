@@ -4033,7 +4033,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 508485861, 27)],
     undefined, // custom quest message
-    [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
     undefined,
     {
         hideTrainer: true,
