@@ -2368,7 +2368,7 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
 
 const HoennFossilNpc = new NPC('Laid-Back Angler', [
     'Every so often, I\'ll snag an old fossil from the seafloor. It weirds me out to think of all the Pokémon that used to crawl around the ocean so many years ago, but it also reminds me that life is fleeting and precious.',
-    'So far I\'ve found two that I relate to, a kind of flower-looking thing and a one that looks like a bug pincer.',
+    'So far I\'ve found two that I relate to, a kind of flower-looking thing and one that looks like a bug pincer.',
     'I wonder what you\'ll feel the next time you find one.',
 ], {image: 'assets/images/npcs/Fisherman.png'});
 
