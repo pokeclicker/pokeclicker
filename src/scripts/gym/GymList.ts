@@ -1579,7 +1579,6 @@ GymList['Elite Kahili'] = new Gym(
 );
 
 // Alola Champion
-// TODO: Balancing - Set HP
 GymList['Champion Hau'] = new Gym(
     'Hau',
     'Champion Hau',
