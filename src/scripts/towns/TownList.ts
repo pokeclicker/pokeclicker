@@ -7054,7 +7054,7 @@ const LillieAetherHouse = new NPC('Lillie', [
     'Pokémon being abducted like that... Maybe even hurt... I just can\'t stand the idea! $playername$! Please...help them!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 5), new QuestLineStepCompletedRequirement('Child of the Stars', 7, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 5), new QuestLineStepCompletedRequirement('Child of the Stars', 6, GameConstants.AchievementOption.less)]),
 });
 const LillieSeafolkVillage = new NPC('Lillie', [
     'So Hapu lives here on Poni Island? Let\'s go, $playername$! She can help us find the kahuna! It will be good to see her and Mudsdale again!',

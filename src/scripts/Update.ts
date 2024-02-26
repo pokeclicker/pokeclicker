@@ -2646,7 +2646,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 252);
             // Reset temporary battles important to story; Reset questline Eater of Light
             saveData.statistics.temporaryBattleDefeated[240] = 0;
-            saveData.statistics.temporaryBattleDefeated[244] = 0;
+            saveData.statistics.temporaryBattleDefeated[247] = 0;
             saveData.statistics.temporaryBattleDefeated[253] = 0;
             saveData.statistics.temporaryBattleDefeated[254] = 0;
             saveData.statistics.temporaryBattleDefeated[262] = 0;
