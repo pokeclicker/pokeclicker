@@ -2679,7 +2679,7 @@ class QuestLineHelper {
 
         // 6 - Clear dungeon boss: Po Town
         // const defined at the end of this file
-        createZCrystalTrial(PokemonType.Bug, 'Po Town', 'Guzma', '<i>There is a chest full of Bug-type Z-Crystals next to Guzma. You obtained a Buginium Z!<i>', ulaulaAlolaQuestLine, true, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', 'Team Skull Boss Guzma');
+        createZCrystalTrial(PokemonType.Bug, 'Po Town', 'Guzma', '<i>There is a chest full of Bug-type Z-Crystals next to Guzma. You obtained a Buginium Z!<i>', ulaulaAlolaQuestLine, true, 'Team Skull have stolen the Yungoos from Aether House. Raid their base. Clear the Po Town dungeon.', 'Team Skull Boss Guzma');
 
         // 7 - Temp Battle: Gladion 2
         const battleGladion2Reward = () => {
