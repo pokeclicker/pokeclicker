@@ -4285,7 +4285,7 @@ TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
         new GymPokemon('Ribombee', 274011820, 51),
     ],
     'Woah! I\'m shocked at your strength! But you\'ve only just begun my real trial. Now you have to go around to all the captains in Alola!',
-    [new TemporaryBattleRequirement('Ultra Megalopolis')],
+    [new DevelopmentRequirement(new QuestLineCompletedRequirement('Island Challenge'))],
     undefined,
     {imageName: 'Mina'}
 );
