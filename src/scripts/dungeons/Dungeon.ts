@@ -10942,9 +10942,9 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
         {pokemon: 'Psyduck', options: { weight: 1 }},
         {pokemon: 'Mawile', options: { weight: 1 }},
         {pokemon: 'Roggenrola', options: { weight: 1 }},
-        {pokemon: 'Necrozma', options: { weight: 1, hide: true, requirement: new MultiRequirement([
+        {pokemon: 'Necrozma', options: { weight: 0.25, hide: true, requirement: new MultiRequirement([
             new QuestLineCompletedRequirement('Ultra Beast Hunt'),
-            new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Must have never encountered Necrozma before.', GameConstants.AchievementOption.less),
+            new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Must have encountered Necrozma before.'),
         ])}},
     ],
     {
@@ -12044,10 +12044,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
-        new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new MultiRequirement([
-            new QuestLineCompletedRequirement('Ultra Beast Hunt'), // because we don't want to unhide all the other ultra beasts and it's a reference to SM
-            new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Necrozma').id], 1, 'Encounter at least 1 Necrozma.'),
-        ])}),
+        new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new QuestLineCompletedRequirement('Eater of Light') }),
         new DungeonTrainer('Trial Site',
             [
                 new GymPokemon('Sneasel', 20266062, 47),
@@ -12068,7 +12065,10 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less) }, 'of Mount Lanakila'),
+            { hide: true, weight: 5, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('Eater of Light', 3),
+                new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less),
+            ]) }, 'of Mount Lanakila'),
     ],
     1175000, 26);
 
