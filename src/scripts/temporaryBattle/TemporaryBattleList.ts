@@ -3836,7 +3836,7 @@ TemporaryBattleList['Skull 1'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2)],
     undefined,
     {
-        displayName: 'Team Skull Grunts',
+        displayName: 'Team Skull Grunts A and B',
         returnTown: 'Hau\'oli City',
         imageName: 'Team Skull Grunts (male)',
     }
@@ -3862,7 +3862,7 @@ TemporaryBattleList['Skull 2'] = new TemporaryBattle(
     [new MultiRequirement([new TemporaryBattleRequirement('Ilima'), new RouteKillRequirement(10, GameConstants.Region.alola, 2)])],
     undefined,
     {
-        displayName: 'Team Skull Grunts',
+        displayName: 'Team Skull Grunts A and B',
         returnTown: 'Hau\'oli City',
         imageName: 'Team Skull Grunts (male)',
     }
@@ -4032,7 +4032,7 @@ TemporaryBattleList['Plumeria 1'] = new TemporaryBattle(
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
     [new GymPokemon('???', 508485861, 27)],
-    '<i>The creature escaped back into the ultra wormhole.</i>',
+    undefined, // custom quest message
     [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
     undefined,
     {
@@ -4079,7 +4079,7 @@ TemporaryBattleList['Skull 4'] = new TemporaryBattle(
     ],
     undefined,
     {
-        displayName: 'Skull Grunts',
+        displayName: 'Team Skull Grunts',
         returnTown: 'Malie City',
         imageName: 'Team Skull Grunts (male)',
     }
@@ -4371,7 +4371,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         new GymPokemon('Silvally (Water)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
         new GymPokemon('Silvally (Grass)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
-    'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.',
+    'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.</br>Lillie\'s looking after our mother at the foundation. Hau\'s working hard to get stronger, too...</br>I know we aren\'t friends. But we aren\'t enemies anymore either. Keep winning. Maybe I\'ll see you again if you do.',
     [new QuestLineStepCompletedRequirement('Eater of Light', 1)],
     undefined,
     {

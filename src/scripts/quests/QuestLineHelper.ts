@@ -2634,7 +2634,12 @@ class QuestLineHelper {
         akalaAlolaQuestLine.addQuest(battleKahunaOlivia);
 
         // end - Temp battle: Ultra Wormhole
-        const clearUltraWormhole = new DefeatTemporaryBattleQuest('Ultra Wormhole', 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.').withInitialValue(0);
+        const clearUltraWormhole = new DefeatTemporaryBattleQuest('Ultra Wormhole', 'A strange creature has appeared in Aether Paradise. Make it go away. Clear the Ultra Wormhole.')
+            .withOptionalArgs({
+                clearedMessage: 'Why so shocked? Was it your first time seeing an Ultra Beast? Those mysterious creatures that live beyond the Ultra Wormholes, the holes that suddenly open in the sky and lead to Ultra Space... It would serve you well to remember this.',
+                npcDisplayName: 'Phyco',
+                npcImageName: 'Phyco',
+            });
         akalaAlolaQuestLine.addQuest(clearUltraWormhole);
 
         App.game.quests.questLines().push(akalaAlolaQuestLine);
@@ -2648,7 +2653,7 @@ class QuestLineHelper {
         ulaulaAlolaQuestLine.addQuest(talkeToLillie5);
 
         // 1 - Temp Battle: Skull 4
-        const battleSkull4 = new DefeatTemporaryBattleQuest('Skull 4', 'Team Skull are trying to steal a bus stop on Route 10! This misdeed won\'t go unpunished!');
+        const battleSkull4 = new DefeatTemporaryBattleQuest('Skull 4', 'Team Skull are trying to steal a bus stop sign on Route 10! This misdeed won\'t go unpunished!');
         ulaulaAlolaQuestLine.addQuest(battleSkull4);
 
         // 2 - Clear dungeon boss: Hokulani Observatory, Sophocles' Trial
@@ -2681,7 +2686,7 @@ class QuestLineHelper {
             MapHelper.moveToTown('Malie City');
         };
 
-        const battleGladion2 = new DefeatTemporaryBattleQuest('Gladion 2', 'Team Skull have stolen Nebby! Battle Gladion at Aether House.').withInitialValue(0).withCustomReward(battleGladion2Reward);
+        const battleGladion2 = new DefeatTemporaryBattleQuest('Gladion 2', 'Team Skull have stolen Nebby! Battle Gladion at Aether House.').withCustomReward(battleGladion2Reward);
         ulaulaAlolaQuestLine.addQuest(battleGladion2);
 
         // 8 - Gym battle: Nanu
@@ -2828,7 +2833,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToLillie7 = new TalkToNPCQuest(Lillie7, 'Everyone is finally safe. Talk to Lillie to claim your flutes.').withCustomReward(EaterOfLightReward);
+        const talkToLillie7 = new TalkToNPCQuest(Lillie7, 'Everyone is finally safe. Talk to Lillie.').withCustomReward(EaterOfLightReward);
         poniAlolaQuestLine.addQuest(talkToLillie7);
 
         App.game.quests.questLines().push(poniAlolaQuestLine);
@@ -2850,8 +2855,8 @@ class QuestLineHelper {
         // 1 - Clear dungeon boss: Mina\'s Houseboat, Mina's Trial
         createZCrystalTrial(PokemonType.Fairy, 'Mina\'s Houseboat', 'Mina', 'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!', ultraNecrozmaAlolaQuestLine);
 
-        // 2 - Temp battle: Gladion 2
-        const battleGladion3 = new DefeatTemporaryBattleQuest('Gladion 3', 'Battle Gladion on Ula\'ula one last time before ascending to the Pokémon League.').withInitialValue(0);
+        // 2 - Temp battle: Gladion 3
+        const battleGladion3 = new DefeatTemporaryBattleQuest('Gladion 3', 'Battle Gladion on Ula\'ula one last time before ascending to the Pokémon League.');
         ultraNecrozmaAlolaQuestLine.addQuest(battleGladion3);
 
         // 3 - Clear dungeon: Mount Lanakila
