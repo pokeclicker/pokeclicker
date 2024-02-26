@@ -159,6 +159,10 @@ class BreedingController {
         return SeededRand.fromArray(this.spotTypes);
     }
 
+    public static getEggPokemonName(egg: Egg): string | null {
+        return egg.type === EggType.Pokemon || egg.type === EggType.Fossil ? egg.partyPokemon()?.name || null : null;
+    }
+
     public static formatSearch(value: string) {
         if (/[^\d]/.test(value)) {
             BreedingFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
