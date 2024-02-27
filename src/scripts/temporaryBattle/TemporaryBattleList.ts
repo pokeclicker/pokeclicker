@@ -4257,6 +4257,7 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
 TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
     [
+        // base HP: 364088130
         new GymPokemon('Necrozma (Dusk Mane)', 302193147, 50),
         new GymPokemon('Necrozma (Dawn Wings)', 322217995, 50),
     ],

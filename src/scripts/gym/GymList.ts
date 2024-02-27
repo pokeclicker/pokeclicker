@@ -1517,6 +1517,9 @@ GymList['Exeggutor Island'] = new Gym(
 );
 
 //Alola Elite 4
+// modified from base HP:
+// regular mons: 91879987
+// ace pokemon: 92856372
 GymList['Elite Molayne'] = new Gym(
     'Molayne',
     'Elite Molayne',
@@ -1525,7 +1528,7 @@ GymList['Elite Molayne'] = new Gym(
         new GymPokemon('Bisharp', 83151388, 56),
         new GymPokemon('Magnezone', 78833028, 56),
         new GymPokemon('Metagross', 76260389, 56),
-        new GymPokemon('Alolan Dugtrio', 88480427, 57),
+        new GymPokemon('Alolan Dugtrio', 89420686, 57),
     ],
     BadgeEnums.Elite_Molayne,
     64000,
@@ -1540,7 +1543,7 @@ GymList['Elite Olivia'] = new Gym(
         new GymPokemon('Cradily', 93258186, 56),
         new GymPokemon('Gigalith', 157849817, 56),
         new GymPokemon('Probopass', 97209026, 56),
-        new GymPokemon('Lycanroc (Midnight)', 157849817, 57),
+        new GymPokemon('Lycanroc (Midnight)', 159527247, 57),
     ],
     BadgeEnums.Elite_Olivia,
     64000,
@@ -1555,7 +1558,7 @@ GymList['Elite Acerola'] = new Gym(
         new GymPokemon('Drifblim', 77179189, 56),
         new GymPokemon('Dhelmise', 77179189, 56),
         new GymPokemon('Froslass', 82691988, 56),
-        new GymPokemon('Palossand', 90318027, 57),
+        new GymPokemon('Palossand', 91277813, 57),
     ],
     BadgeEnums.Elite_Acerola,
     64000,
@@ -1570,7 +1573,7 @@ GymList['Elite Kahili'] = new Gym(
         new GymPokemon('Hawlucha', 102446185, 56),
         new GymPokemon('Oricorio (Baile)', 98127826, 56),
         new GymPokemon('Mandibuzz', 89123587, 56),
-        new GymPokemon('Toucannon', 91420587, 57),
+        new GymPokemon('Toucannon', 92392090, 57),
     ],
     BadgeEnums.Elite_Kahili,
     64000,
@@ -1579,6 +1582,10 @@ GymList['Elite Kahili'] = new Gym(
 );
 
 // Alola Champion
+// modified from base HP:
+// regular mons: 89636471
+// Raichu and Crabominable: 91545555
+// starter pokemon: 96725389
 GymList['Champion Hau'] = new Gym(
     'Hau',
     'Champion Hau',
