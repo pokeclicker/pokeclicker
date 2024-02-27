@@ -12046,7 +12046,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
-        new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new QuestLineCompletedRequirement('Eater of Light') }),
+        new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 3), new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]) }),
         new DungeonTrainer('Trial Site',
             [
                 new GymPokemon('Sneasel', 20266062, 47),

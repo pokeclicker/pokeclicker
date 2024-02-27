@@ -4257,8 +4257,8 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
 TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
     [
-        new GymPokemon('Necrozma (Dusk Mane)', 316028496, 50),
-        new GymPokemon('Necrozma (Dawn Wings)', 318577113, 50),
+        new GymPokemon('Necrozma (Dusk Mane)', 302193147, 50),
+        new GymPokemon('Necrozma (Dawn Wings)', 322217995, 50),
     ],
     'Necrozma retreated into the Ultra Wormhole',
     [new QuestLineCompletedRequirement('Emissary of Light')],
@@ -4514,7 +4514,7 @@ TemporaryBattleList.Anabel = new TemporaryBattle(
 TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
     'Captain Mina UB',
     [
-        new GymPokemon('Klefki', 239464883, 61),
+        new GymPokemon('Klefki', 178401337, 61),
         new GymPokemon('Granbull', 239464883, 61),
         new GymPokemon('Shiinotic', 239464883, 61),
         new GymPokemon('Wigglytuff', 239464883, 61),
