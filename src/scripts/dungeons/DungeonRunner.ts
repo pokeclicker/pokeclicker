@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
 class DungeonRunner {
@@ -337,3 +338,5 @@ class DungeonRunner {
         return config[index]?.flash;
     }
 }
+
+DungeonRunner satisfies TmpDungeonRunnerType;

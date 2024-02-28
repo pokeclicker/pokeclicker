@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
 /// <reference path="../declarations/GameHelper.d.ts" />
 /// <reference path="../declarations/party/Category.d.ts"/>
@@ -551,3 +552,5 @@ class Game {
         this._gameState(value);
     }
 }
+
+Game satisfies TmpGameType;

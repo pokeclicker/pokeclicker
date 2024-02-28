@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
 /// <reference path="../declarations/party/Category.d.ts"/>
 
@@ -101,3 +102,5 @@ class App {
         });
     }
 }
+
+App satisfies TmpAppType;

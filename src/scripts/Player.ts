@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../declarations/upgrades/Upgrade.d.ts" />
 
 /**
@@ -249,3 +250,5 @@ class Player {
         return Save.filter(plainJS, keep);
     }
 }
+
+Player satisfies TmpPlayerType;

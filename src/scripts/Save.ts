@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 ///<reference path="../declarations/Sortable.d.ts"/>
 
 class Save {
@@ -264,3 +265,5 @@ class Save {
         }
     }
 }
+
+Save satisfies TmpSaveType;

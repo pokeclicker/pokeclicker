@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 ///<reference path="GymPokemon.ts"/>
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
@@ -140,3 +141,5 @@ class Gym extends TownContent {
         return this.optionalArgs.displayName;
     }
 }
+
+Gym satisfies TmpGymType;
