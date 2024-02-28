@@ -1,5 +1,3 @@
-///<reference path="../GameConstants.d.ts"/>
-
 enum PokemonLocationType {
     Route,
     Roaming,

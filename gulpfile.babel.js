@@ -14,6 +14,7 @@ const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
 const filter = require('gulp-filter');
 const rename = require('gulp-rename');
+const footer = require('gulp-footer');
 const streamToPromise = require('gulp-stream-to-promise');
 const gulpWebpack = require('webpack-stream');
 const webpack = require('webpack');
@@ -166,20 +167,17 @@ gulp.task('scripts', () => {
     const osPathPrefix = '../src'.split(path.posix.sep).join(path.sep);
     const osPathModulePrefix = '../src/declarations'.split(path.posix.sep).join(path.sep);
 
+    const gameConstantsFilter = filter((vinylPath) => vinylPath.relative.includes('GameConstants.d.ts'), {restore: true});
+
     const generateDeclarations = base
-        .pipe(filter((vinylPath) => {
-            return (
-                vinylPath.relative.startsWith(osPathModulePrefix) &&
-                // Exclude GameConstants, as we generate those manually
-                !vinylPath.relative.includes('GameConstants.d.ts')
-            );
-        }))
+        .pipe(filter((vinylPath) => vinylPath.relative.startsWith(osPathModulePrefix)))
         .pipe(rename((vinylPath) => Object.assign(
             {},
             vinylPath,
             // Strip '../src/modules' from the start of declaration vinylPaths
             { dirname: vinylPath.dirname.replace(osPathModulePrefix, '.') }
         )))
+
         // Remove default exports
         .pipe(replace(/(^|\n)export default \w+;/g, ''))
         // Replace imports with references
@@ -190,6 +188,12 @@ gulp.task('scripts', () => {
         .pipe(replace(/(^|\n)export(?!.*from)( default)?/g, '\n'))
         // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
+        // Wrap GameConstants in a namespace for scripts compatibility
+        .pipe(gameConstantsFilter)
+        .pipe(replace(/(?=declare)/, 'declare namespace GameConstants {\n'))
+        .pipe(footer('}\n'))
+        .pipe(gameConstantsFilter.restore)
+        // Output
         .pipe(gulp.dest(dests.declarations));
 
     const compileModules = base
