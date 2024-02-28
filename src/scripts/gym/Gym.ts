@@ -23,7 +23,8 @@ interface optionalGymArgs {
 /**
  * Gym class.
  */
-class Gym extends TownContent {
+class Gym extends TownContent implements TmpGymType {
+    public town: string;
     buttonText: string;
     public tooltip = 'Battle Gym Leaders to earn badges';
     public cssClass() {
@@ -66,7 +67,7 @@ class Gym extends TownContent {
 
     constructor(
         public leaderName: string,
-        public town: string,
+        town: string,
         private pokemons: GymPokemon[],
         public badgeReward: BadgeEnums,
         public moneyReward: number,
@@ -81,6 +82,7 @@ class Gym extends TownContent {
         public optionalArgs: optionalGymArgs = {}
     ) {
         super(requirements);
+        this.town = town;
         this.flags.quest = quest;
         this.flags.achievement = achievement;
         this.flags.champion = champion;
@@ -141,5 +143,3 @@ class Gym extends TownContent {
         return this.optionalArgs.displayName;
     }
 }
-
-Gym satisfies TmpGymType;

@@ -15,7 +15,7 @@
  * All player variables need to be saved.
  */
 
-class Player {
+class Player implements TmpPlayerType {
 
     private _route: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
@@ -250,5 +250,3 @@ class Player {
         return Save.filter(plainJS, keep);
     }
 }
-
-Player satisfies TmpPlayerType;

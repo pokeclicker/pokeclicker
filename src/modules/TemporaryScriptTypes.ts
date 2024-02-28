@@ -130,12 +130,10 @@ export type TmpSaveType = {
 };
 
 export type TmpPlayerType = {
-    route: number;
+    route: KnockoutObservable<number>;
     region: GameConstants.Region;
     subregion: number;
-    townName: string;
     town: TmpTownType;
-    timeTraveller: boolean;
     regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
     subregionObject: KnockoutObservable<SubRegion>;
     trainerId: string;
@@ -146,7 +144,7 @@ export type TmpPlayerType = {
     highestRegion: KnockoutObservable<GameConstants.Region>;
     highestSubRegion: KnockoutObservable<number>;
     amountOfItem: (itemName: string) => number;
-    itemMultipliers: () => { [p: string]: number };
+    itemMultipliers: { [p: string]: number };
     gainItem: (itemName: string, amount: number) => void;
     loseItem: (itemName: string, amount: number) => void;
     lowerItemMultipliers: (multiplierDecreaser: TmpMultiplierDecreaserType, amount?: number) => void;
@@ -170,7 +168,6 @@ export type TmpBattleType = {
     defeatPokemon: () => void;
     generateNewEnemy: () => void;
     catchPokemon: (enemyPokemon: TmpBattlePokemonType, route: number, region: GameConstants.Region) => void;
-    gainTokens: (route: number, region: GameConstants.Region) => void;
     gainItem: () => void;
     pokemonAttackTooltip: KnockoutComputed<string>;
 };
