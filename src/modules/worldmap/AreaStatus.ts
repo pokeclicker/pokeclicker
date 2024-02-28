@@ -1,4 +1,4 @@
-enum areaStatus {
+enum AreaStatus {
     locked,
     incomplete,
     questAtLocation,
@@ -11,4 +11,4 @@ enum areaStatus {
     completed,
 }
 
-export default areaStatus;
+export default AreaStatus;

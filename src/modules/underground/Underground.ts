@@ -16,6 +16,7 @@ import { Mine } from './Mine';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundUpgrade, { Upgrades } from './UndergroundUpgrade';
+import MapHelper from '../worldmap/MapHelper';
 
 export class Underground implements Feature {
     name = 'Underground';

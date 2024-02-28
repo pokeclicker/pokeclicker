@@ -23,15 +23,15 @@ class GemMasterShop extends Shop {
             const pokemonDeals = deals.filter(d => d.item.itemType instanceof PokemonItem && d.isVisible()).map(d => d.item.itemType.type) as PokemonNameType[];
 
             if (!RouteHelper.listCompleted(pokemonDeals, false)) {
-                itemStatusArray.push(areaStatus.uncaughtPokemon);
+                itemStatusArray.push(AreaStatus.uncaughtPokemon);
             }
 
             if (!RouteHelper.listCompleted(pokemonDeals, true)) {
-                itemStatusArray.push(areaStatus.uncaughtShinyPokemon);
+                itemStatusArray.push(AreaStatus.uncaughtShinyPokemon);
             }
 
-            if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(pokemonDeals) < GameConstants.Pokerus.Resistant) {
-                itemStatusArray.push(areaStatus.missingResistant);
+            if (Settings.getSetting(`--${AreaStatus[AreaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(pokemonDeals) < GameConstants.Pokerus.Resistant) {
+                itemStatusArray.push(AreaStatus.missingResistant);
             }
         }
         return Math.min(...itemStatusArray);
