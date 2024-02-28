@@ -1,20 +1,16 @@
-/// <reference path="../../declarations/DataStore/StatisticStore/index.d.ts" />
-/// <reference path="../GameConstants.d.ts" />
+import areaStatus from './areaStatus';
+import * as GameConstants from '../GameConstants';
+import Routes from '../routes/Routes';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
+import Settings from '../settings/Settings';
+import type CssVariableSetting from '../settings/CssVariableSetting';
+import GameHelper from '../GameHelper';
+import LogEvent from '../LogEvent';
+import BreedingFilters from '../settings/BreedingFilters';
+import WeatherType from '../weather/WeatherType';
 
-enum areaStatus {
-    locked,
-    incomplete,
-    questAtLocation,
-    uncaughtPokemon,
-    uncaughtShadowPokemon,
-    uncaughtShinyPokemonAndMissingAchievement,
-    uncaughtShinyPokemon,
-    missingAchievement,
-    missingResistant,
-    completed,
-}
-
-class MapHelper {
+export default class MapHelper {
 
     /* Route functions */
 
@@ -218,7 +214,7 @@ class MapHelper {
         }
 
         const [env] = Object.entries(GameConstants.Environments).find(
-            ([, regions]) => regions[player.region]?.has(area)
+            ([, regions]) => regions[player.region]?.has(area),
         ) || [];
 
         return (env as GameConstants.Environment);

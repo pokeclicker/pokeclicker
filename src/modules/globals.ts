@@ -15,6 +15,7 @@ import type {
     ExtraAchievementCategories,
     GameState,
     Region,
+    SubRegions,
 } from './GameConstants';
 import type Wallet from './wallet/Wallet';
 import type PokemonCategories from './party/Category';
@@ -29,6 +30,9 @@ import type KeyItems from './keyItems/KeyItems';
 import type PokeballFilters from './pokeballs/PokeballFilters';
 import { QuestLineNameType } from './quests/QuestLineNameType';
 import type CssVariableSetting from './settings/CssVariableSetting';
+import type Requirement from './requirements/Requirement';
+import type { PokemonNameType } from './pokemons/PokemonNameType';
+import type areaStatus from './worldmap/areaStatus';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -81,30 +85,17 @@ type TmpSaveType = {
     key: string;
 };
 
-type TmpMapHelperType = {
-    moveToRoute: (route: number, region: Region)=>void;
-    accessToRoute: (route: number, region: Region)=>boolean;
-    isRouteCurrentLocation: (route: number, region: Region)=>boolean;
-    moveToTown: (townName: string)=>void;
-    accessToTown: (townName: string)=>boolean;
-    isTownCurrentLocation: (townName: string)=>boolean;
-    moveToRegion: (region: Region)=>void;
-    accessToRegion: (region: Region)=>boolean;
-    accessToShip: ()=>boolean;
-    openShipModal: ()=>void;
-    canTravelToNextRegion: ()=>boolean;
-    travelToNextRegion: ()=>void;
-    getUsableFilters: ()=>CssVariableSetting[];
-    getCurrentEnvironment: ()=>Environment;
-    calculateBattleCssClass: ()=>string;
-    calculateRouteCssClass: (route: number, region: Region)=>string;
-    calculateTownCssClass: (townName: string)=>string;
+type TmpDungeon = {
+    allAvailablePokemon: () => PokemonNameType[];
+    allAvailableShadowPokemon: () => PokemonNameType[];
+    isThereQuestAtLocation: () => boolean;
 };
 
 type TmpDungeonRunner = {
     dungeon: {
         name: string
     };
+    isAchievementsComplete: (TmpDungeon) => boolean;
 };
 
 type TmpGym = {
@@ -113,6 +104,7 @@ type TmpGym = {
 
 type TmpGymRunner = {
     gymObservable: () => TmpGym;
+    getEnvironmentArea: () => Environment;
 };
 
 type TmpAchievementHandler = {
@@ -147,13 +139,72 @@ type TmpAchievementHandler = {
     load: ()=>void
 };
 
+type TmpBattle = {
+    enemyPokemon: KnockoutObservable<unknown>;
+    catching: KnockoutObservable<boolean>;
+    route: number,
+    generateNewEnemy: () => void;
+};
+
+type TmpTemporaryBattle = {
+    getTown: () => TmpTown;
+};
+
+type TmpTemporaryBattleRunner = {
+    getEnvironmentArea: () => Environment;
+    battleObservable: KnockoutObservable<TmpTemporaryBattle>;
+};
+
+type TmpTownContent = {
+    isUnlocked: () => boolean;
+    areaStatus: () => areaStatus;
+};
+
+type TmpTown = {
+    name: string;
+    region: Region;
+    requirements: Requirement[];
+    dungeon?: TmpDungeon;
+    //npcs?: NPC[];
+    startingTown: boolean;
+    content: TmpTownContent[];
+    subRegion: SubRegions;
+    ignoreAreaStatus: boolean;
+    isUnlocked: () => boolean;
+};
+
+type TmpTownList = { 
+    [name: string]: TmpTown;
+};
+
+type TmpRouteHelper = {
+    getAvailablePokemonList(route: number, region: Region, includeHeadbutt?: boolean): PokemonNameType[];
+    routePokerusEVs(route: number, region: Region): string;
+    dungeonPokerusEVs(dungeon: TmpDungeon): string;
+    getEvs(possiblePokemon: PokemonNameType[]): number;
+    routeCompleted(route: number, region: Region, includeShiny: boolean, includeHeadbutt?: boolean): boolean;
+    listCompleted(possiblePokemon: PokemonNameType[], includeShiny: boolean);
+    minPokerus(possiblePokemon: PokemonNameType[]): number;
+    minPokerusCheck(possiblePokemon: PokemonNameType[]): boolean;
+    isAchievementsComplete(route: number, region: Region);
+    isThereQuestAtLocation(route: number, region: Region);
+};
+
+type TmpDungeonList = {
+    [name: string]: TmpDungeon;
+};
+
 // Where all the magic happens
 declare global {
     const App: TmpAppType;
     const player: any;
     const Save: TmpSaveType;
-    const MapHelper: TmpMapHelperType;
     const DungeonRunner: TmpDungeonRunner;
     const GymRunner: TmpGymRunner;
     const AchievementHandler: TmpAchievementHandler;
+    const Battle: TmpBattle;
+    const TownList: TmpTownList;
+    const RouteHelper: TmpRouteHelper;
+    const TemporaryBattleRunner: TmpTemporaryBattleRunner;
+    const dungeonList: TmpDungeonList;
 }
