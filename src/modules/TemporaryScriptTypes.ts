@@ -26,9 +26,54 @@ import type { Underground } from './underground/Underground';
 import type SubRegion from './subRegion/SubRegion';
 import type CssVariableSetting from './settings/CssVariableSetting';
 
-// These types are only temporary while we are converting things to modules
-// As things are converted, we should import their types here for use,
-// instead of these cheap imitations
+/*
+    These types are only temporary while we are converting things to modules. As things are converted, 
+    we should import their types here for use, instead of these cheap imitations.
+
+    When a file is converted to a module, the types for any /scripts dependencies should be added here
+    and declared in globals.ts as globally available. The /scripts file should then check against
+    the temporary type defined here.
+
+    For example, an instantiable class
+
+        class Example1 {
+            public instanceProperty: string;
+        }
+
+    becomes
+
+        // this file
+        export type TmpExample1Type = {
+            instanceProperty: string;
+        }
+
+        // the /scripts file
+        class Example1 implements TmpExample1Type {
+            public instanceProperty: string;
+        }
+
+    Static classes aren't as well supported by TypeScript yet:
+
+        class Example2 {
+            public static staticProperty: string;
+        }
+
+    becomes
+
+        // this file
+        export type TmpExample2Type = {
+            staticProperty: string;
+        }
+
+        // the /scripts file
+        class Example2 {
+            public static staticProperty: string;
+        }
+        Example2 satisfies TmpExample2Type;
+
+    If a class has both static and instance properties, it needs separate types for each. 
+
+*/
 
 // TODO types for classes not yet described
 export type TmpUpdateType = any;
