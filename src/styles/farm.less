@@ -53,6 +53,10 @@
 }
 
 .PlotSafeLockSelected {
+  cursor:url('../assets/images/farm/plotSafeLock.png'), auto;
+}
+
+.ShiftPressed .plot-content {
     cursor:url('../assets/images/farm/plotSafeLock.png'), auto;
 }
 
@@ -76,11 +80,18 @@
     filter: brightness(200%) hue-rotate(210deg);
 }
 
-#plotList {
+#plotList, #plotListCard .row {
   padding: 10px;
 
   .plot {
     padding: 2px;
+
+    .lock {
+      position: absolute;
+      width: 80%;
+      left: 10%;
+      bottom: 10%;
+    }
 
     &:hover {
       filter: brightness(95%);
@@ -126,6 +137,19 @@
     width: 100%;
     height: 100%;
     position: absolute;
+  }
+}
+
+/* Overrides for farm module */
+#farmDisplay #plotListCard .row {
+  .plotImage {
+      .plotSafeLockIcon {
+          bottom: 3px;
+          right: 3px;
+          height: 12px;
+          width: 12px;
+          filter: none;
+      }
   }
 }
 

@@ -7,6 +7,14 @@
                 trigger: 'hover',
                 placement: 'top'
             }">
-        <div class="" data-bind="text: App.game.wallet.amountText($data.currency), attr: { id: `animateCurrency-${Currency[$data.currency]}` }">0</div>
+        <div class="" data-bind="text: App.game.wallet.amountText($data.currency),
+            attr: { id: `animateCurrency-${Currency[$data.currency]}` },
+            tooltip: {
+                title: Settings.getSetting('currencyMainDisplayReduced').observableValue()
+                    ? App.game.wallet.currencies[$data.currency]().toLocaleString('en-US')
+                    : '',
+                trigger: 'hover',
+                placement: 'bottom'
+            }">0</div>
     </div>
 </script>
