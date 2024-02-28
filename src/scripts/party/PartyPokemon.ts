@@ -72,10 +72,9 @@ class PartyPokemon implements Saveable {
         public gender,
         shadow: GameConstants.ShadowStatus
     ) {
-        this.vitaminsUsed = GameHelper.enumNumbers(GameConstants.VitaminType).reduce((used, vitamin) => {
-            used[vitamin] = ko.observable(0).extend({ numeric: 0 });
-            return used;
-        }, {});
+        this.vitaminsUsed = Object.fromEntries(GameHelper.enumNumbers(GameConstants.VitaminType).map((vitamin) => {
+            return [vitamin, ko.observable(0).extend({ numeric: 0 })];
+        })) as Record<GameConstants.VitaminType, KnockoutObservable<number>>;
         this._breeding = ko.observable(false).extend({ boolean: null });
         this._shiny = ko.observable(shiny).extend({ boolean: null });
         this._level = ko.observable(1).extend({ numeric: 0 });
