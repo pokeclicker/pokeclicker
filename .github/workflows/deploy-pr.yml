@@ -4,6 +4,11 @@ on:
   pull_request_target:
     # when using teardown: 'true', add default event types + closed event type
     types: [opened, synchronize, reopened, closed]
+    paths:
+      - 'src/**/*.ts'
+      - 'src/**/*.html'
+      - 'src/**/*.less'
+      - 'src/**/*.ejs'
 
 jobs:
   preview:
@@ -19,6 +24,8 @@ jobs:
           require: write
           username: ${{ github.triggering_actor }}
 
+      # if the user does not have the required permission, we should return exit code 1 to stop the workflow
+      # or add a condition to skip the next steps instead (if we don't want this to deploy to preview PR for everyone)
       - name: Check User Permission
         if: steps.checkAccess.outputs.require-result == 'false'
         run: |
@@ -38,12 +45,15 @@ jobs:
           node-version: 18.x
       - run: |
           npm ci
+          echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
           npm run build
           rm -rf build/assets
           ln -s ../../assets build/assets
+          rm -rf build/libs
+          ln -s ../../libs build/libs
       
       - name: Deploy to GH-Pages
-        uses: rossjrw/pr-preview-action@v1
+        uses: redsparr0w/pr-preview-action@e42785b6369079700cfd810f51d14da466ea5cce
         id: preview_step
         with:
           source-dir: 'build'
@@ -52,6 +62,7 @@ jobs:
           custom-url: 'dev.pokeclicker.com'
           deploy-repository: 'RedSparr0w/pokeclicker'
           token: ${{ secrets.DEV_PAGE }}
+          pages-base-dir: 'docs/'
 
       - name: Preview URL
         run: echo "url => ${{ steps.preview_step.outputs.deployment-url }}"

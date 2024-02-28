@@ -969,7 +969,7 @@ TownList['Lavender Town'] = new Town(
     GameConstants.KantoSubRegions.Kanto,
     [LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Tunnel'))],
         npcs: [LavenderMrFuji, LavenderChanneler, LavenderShopper],
     }
 );
@@ -1261,7 +1261,7 @@ TownList['Rock Tunnel'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
     [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 9),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 10),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
@@ -1614,7 +1614,7 @@ const AzaleaCelebiOak1 = new NPC('Prof. Oak', [
 
 const AzaleaCelebiOak2 = new NPC('Prof. Oak', [
     'Celebi wasn\'t there? Strange, usually it loves to play with young people at the shrine.',
-    'Wait. That Pichu! It used to play with us at that shrine way back when! It looks like it hasn\'t aged a day!',
+    'Wait. You saw a Pichu with a spiked ear?! We used to play with it at that shrine way back when! Looks like it hasn\'t aged a day!',
     'It sounds like you encountered a Time Distortion. Celebi is sensitive to time, it must be distressed. I have heard rumors of something similar going on at Tohjo Falls. Maybe if you clear up that Time Distortion, Celebi will want to come out to play?',
 ], {
     image: 'assets/images/npcs/Professor Oak.png',
@@ -1663,11 +1663,67 @@ const IlexForestShrine2 = new NPC('Investigate the Shrine', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 11), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less)]),
 });
 
+const IlexForestPichuFan = new NPC('Pichu-Fan', [
+    'I\'m looking for a strange Pichu, have you seen it? According to rumors, its favorite hiding spots are chests...',
+], {
+    image: 'assets/images/npcs/Poké Kid.png',
+    requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 7),
+});
+
 const EcruteakBill = new NPC('Bill', [
     'I traveled here all the way from Goldenrod to buy a Soothe Bell for my Eevee.',
     'When I use a Soothe Bell on Eevee it can evolve into Espeon or Umbreon. It depends on the time. Espeon during the day, Umbreon at night.',
     'I only brought enough QP for one Soothe Bell. It\'s so hard to choose...',
 ], {image: 'assets/images/npcs/Bill.png'});
+
+
+const OlivineLighthouseJasmine1 = new NPC('Jasmine', [
+    '...This Pokémon always kept the sea lit at night... But it suddenly got sick... It’s gasping for air...',
+    '...I understand that there is a wonderful Pharmacy in Cianwood... But that’s across the sea... And I can’t leave Amphy unattended...',
+    'May I ask you to get some medicine for me? Please?',
+], {
+    image: 'assets/images/npcs/Jasmine.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 0), new QuestLineStepCompletedRequirement('The Sick Ampharos', 4, GameConstants.AchievementOption.less)]),
+});
+
+const CianwoodCityPharmacist1 = new NPC('Pharmacist', [
+    'Huh? You need medicine? Your Pokémon appear to be fine. Is something worrying you?',
+    'The Lighthouse Pokémon is in trouble? I\'ll prepare some medicine right now but it will take some time!',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 1), new QuestLineStepCompletedRequirement('The Sick Ampharos', 3, GameConstants.AchievementOption.less)]),
+});
+
+const CianwoodCityPharmacist2 = new NPC('Pharmacist', [
+    'I got it! This ought to do the trick.',
+    '<i>You got a \'Secret Potion\'</i>',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 3), new QuestLineStepCompletedRequirement('The Sick Ampharos', 4, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseMedicineAmphy = new NPC('Give medicine to Amphy', [
+    'Palu! Palulu!',
+    '<i>Ampharos seems to feel better.</i>',
+], {
+    image: 'assets/images/pokemon/181.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 4), new QuestLineStepCompletedRequirement('The Sick Ampharos', 5, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseJasmine2 = new NPC('Jasmine', [
+    ' ...Oh, I’m so relieved... This is just so wonderful... Thank you so very, very much.',
+    '...I will return to the Gym...',
+], {
+    image: 'assets/images/npcs/Jasmine.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 5), new QuestLineStepCompletedRequirement('The Sick Ampharos', 6, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseAmphy = new NPC('Amphy', [
+    'Palu! Palulu!',
+], {
+    image: 'assets/images/pokemon/181.png',
+    requirement: new QuestLineCompletedRequirement('The Sick Ampharos'),
+});
 
 const EcruteakEusine = new NPC('Eusine', [
     'Legends say that when the Brass Tower burned down and became the Burned Tower, three unnamed Pokémon perished in the flames...',
@@ -1910,7 +1966,7 @@ TownList['Olivine City'] = new Town(
     'Olivine City',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [OlivineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Olivine City'])],
+    [OlivineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Olivine City']), new MoveToDungeon(dungeonList['Olivine Lighthouse'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
         npcs: [OlivineSSAquaCaptain],
@@ -1923,7 +1979,7 @@ TownList['Cianwood City'] = new Town(
     [CianwoodCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cianwood City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 41)],
-        npcs: [CianwoodPhotographyAide, CianwoodEusine],
+        npcs: [CianwoodPhotographyAide, CianwoodEusine, CianwoodCityPharmacist1, CianwoodCityPharmacist2],
     }
 );
 TownList['Mahogany Town'] = new Town(
@@ -2007,7 +2063,7 @@ TownList['Ilex Forest'] = new DungeonTown(
     ],
     [TemporaryBattleList['Spiky-eared Pichu']],
     {
-        npcs: [IlexForestShrine1, IlexForestShrine2, Naoko],
+        npcs: [IlexForestShrine1, IlexForestShrine2, IlexForestPichuFan, Naoko],
     }
 );
 TownList['Burned Tower'] = new DungeonTown(
@@ -2016,6 +2072,16 @@ TownList['Burned Tower'] = new DungeonTown(
     GameConstants.JohtoSubRegions.Johto,
     [new QuestLineStepCompletedRequirement('The Legendary Beasts', 0)],
     [TemporaryBattleList['Silver 3']]
+);
+TownList['Olivine Lighthouse'] = new DungeonTown(
+    'Olivine Lighthouse',
+    GameConstants.Region.johto,
+    GameConstants.JohtoSubRegions.Johto,
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
+    [],
+    {
+        npcs: [OlivineLighthouseJasmine1, OlivineLighthouseJasmine2, OlivineLighthouseMedicineAmphy, OlivineLighthouseAmphy],
+    }
 );
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
