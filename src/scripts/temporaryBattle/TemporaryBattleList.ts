@@ -4365,12 +4365,14 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
 TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
     'Gladion 3',
     [
-        new GymPokemon('Crobat', 194154232, 53),
-        new GymPokemon('Zoroark', 194154232, 53),
-        new GymPokemon('Lucario', 194154232, 53),
-        new GymPokemon('Silvally (Fire)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
-        new GymPokemon('Silvally (Water)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
-        new GymPokemon('Silvally (Grass)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        // base HP regular mon: 194154232
+        // base HP ace: 213569655
+        new GymPokemon('Crobat', 192212689, 53),
+        new GymPokemon('Zoroark', 245216795, 53),
+        new GymPokemon('Lucario', 172408958, 53),
+        new GymPokemon('Silvally (Fire)', 294726123, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Silvally (Water)', 267602777, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Silvally (Grass)', 307540303, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.</br>Lillie\'s looking after our mother at the foundation. Hau\'s working hard to get stronger, too...</br>I know we aren\'t friends. But we aren\'t enemies anymore either. Keep winning. Maybe I\'ll see you again if you do.',
     [new QuestLineStepCompletedRequirement('Eater of Light', 1)],
