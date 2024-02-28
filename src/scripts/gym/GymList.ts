@@ -1453,14 +1453,15 @@ GymList['Champion Diantha'] = new Gym(
 );
 
 //Alola Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Iki Town'] = new Gym(
     'Hala',
     'Iki Town',
     [
-        new GymPokemon('Machop', 62058739, 15),
-        new GymPokemon('Makuhita', 62058739, 15),
-        new GymPokemon('Crabrawler', 63069612, 16),
+        // regular mon base HP: 62058739
+        // ace mon: 63069612
+        new GymPokemon('Machop', 93274284, 15),
+        new GymPokemon('Makuhita', 93274284, 15),
+        new GymPokemon('Crabrawler', 94793626, 16),
     ],
     BadgeEnums.Melemele_Stamp,
     128000,
@@ -1472,9 +1473,11 @@ GymList['Konikoni City'] = new Gym(
     'Olivia',
     'Konikoni City',
     [
-        new GymPokemon('Anorith', 81530244, 27),
-        new GymPokemon('Lileep', 81530244, 27),
-        new GymPokemon('Lycanroc (Midnight)', 83170680, 28),
+        // regular mon base HP: 81530244
+        // ace mon: 83170680
+        new GymPokemon('Anorith', 88052663, 27),
+        new GymPokemon('Lileep', 82753197, 27),
+        new GymPokemon('Lycanroc (Midnight)', 142887228, 28),
     ],
     BadgeEnums.Akala_Stamp,
     128000,
@@ -1486,9 +1489,11 @@ GymList['Malie City'] = new Gym(
     'Nanu',
     'Malie City',
     [
-        new GymPokemon('Sableye', 101710296, 43),
-        new GymPokemon('Krokorok', 101710296, 43),
-        new GymPokemon('Alolan Persian', 103271750, 44),
+        // regular mon base HP: 101710296
+        // ace mon: 103271750
+        new GymPokemon('Sableye', 74757067, 43),
+        new GymPokemon('Krokorok', 120526700, 43),
+        new GymPokemon('Alolan Persian', 130432220, 44),
     ],
     BadgeEnums.Ula_Ula_Stamp,
     128000,
@@ -1500,14 +1505,18 @@ GymList['Exeggutor Island'] = new Gym(
     'Hapu',
     'Exeggutor Island',
     [
-        new GymPokemon('Alolan Dugtrio', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
-        new GymPokemon('Gastrodon (East)', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
-        new GymPokemon('Flygon', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
-        new GymPokemon('Mudsdale', 86977838, 48, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
-        new GymPokemon('Golurk', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
-        new GymPokemon('Gastrodon (East)', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
-        new GymPokemon('Flygon', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
-        new GymPokemon('Mudsdale', 92529615, 54, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        // regular mon base HP: 85759429
+        // ace mon: 86977838
+        new GymPokemon('Alolan Dugtrio', 82586330, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Gastrodon (East)', 96908154, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Flygon', 87903414, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Mudsdale', 144818100, 48, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        // regular mon base HP: 91233435
+        // ace mon: 92529615
+        new GymPokemon('Golurk', 89682466, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Gastrodon (East)', 103093781, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Flygon', 93514270, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Mudsdale', 154061809, 54, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
     ],
     BadgeEnums.Poni_Stamp,
     128000,

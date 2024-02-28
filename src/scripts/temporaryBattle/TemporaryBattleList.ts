@@ -4503,11 +4503,13 @@ TemporaryBattleList['Ryuki Dragon Memory'] = new TemporaryBattle(
 TemporaryBattleList.Anabel = new TemporaryBattle(
     'Anabel',
     [
-        new GymPokemon('Alakazam', 229464883, 61),
-        new GymPokemon('Weavile', 229464883, 61),
-        new GymPokemon('Mismagius', 229464883, 61),
-        new GymPokemon('Salamence', 229464883, 61),
-        new GymPokemon('Snorlax', 234464883, 61),
+        // base HP regular mon: 229464883
+        // base HP ace: 234464883
+        new GymPokemon('Alakazam', 266867658, 61),
+        new GymPokemon('Weavile', 277652508, 61),
+        new GymPokemon('Mismagius', 203764816, 61),
+        new GymPokemon('Salamence', 214090735, 61),
+        new GymPokemon('Snorlax', 262600669, 61),
     ],
     'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
     [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0)]
@@ -4515,11 +4517,13 @@ TemporaryBattleList.Anabel = new TemporaryBattle(
 TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
     'Captain Mina UB',
     [
+        // base HP regular mon: 239464883
+        // base HP ace: 244464883
         new GymPokemon('Klefki', 178401337, 61),
-        new GymPokemon('Granbull', 239464883, 61),
-        new GymPokemon('Shiinotic', 239464883, 61),
-        new GymPokemon('Wigglytuff', 239464883, 61),
-        new GymPokemon('Ribombee', 244464883, 61),
+        new GymPokemon('Granbull', 237070234, 61),
+        new GymPokemon('Shiinotic', 244254180, 61),
+        new GymPokemon('Wigglytuff', 226294314, 61),
+        new GymPokemon('Ribombee', 251309899, 61),
     ],
     'Your strength is still shocking!',
     [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 7)],
@@ -4532,11 +4536,13 @@ TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
 TemporaryBattleList['Kahuna Nanu UB'] = new TemporaryBattle(
     'Kahuna Nanu UB',
     [
-        new GymPokemon('Sableye', 249464883, 63),
-        new GymPokemon('Krookodile', 249464883, 63),
-        new GymPokemon('Honchkrow', 249464883, 63),
-        new GymPokemon('Absol', 249464883, 63),
-        new GymPokemon('Alolan Persian', 254464883, 63),
+        // base HP regular mon: 249464883
+        // base HP ace: 254464883
+        new GymPokemon('Sableye', 183356689, 63),
+        new GymPokemon('Krookodile', 295615886, 63),
+        new GymPokemon('Honchkrow', 241980936, 63),
+        new GymPokemon('Absol', 315074147, 63),
+        new GymPokemon('Alolan Persian', 321389147, 63),
     ],
     'I had to be sure. Sure that you\'re ready for what\'s coming...',
     [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 13)],
