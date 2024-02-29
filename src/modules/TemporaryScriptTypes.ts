@@ -25,6 +25,8 @@ import type PokeballFilters from './pokeballs/PokeballFilters';
 import type { Underground } from './underground/Underground';
 import type SubRegion from './subRegion/SubRegion';
 import type CssVariableSetting from './settings/CssVariableSetting';
+import type { EvoData } from './pokemons/evolutions/Base';
+import type { PokemonNameType } from './pokemons/PokemonNameType';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted, 
@@ -280,4 +282,8 @@ export type TmpAchievementHandlerType = {
     getAchievementCategoryByExtraCategory: (category: GameConstants.ExtraAchievementCategories) => AchievementCategory;
     initialize: (multiplier: Multiplier, challenges: Challenges) => void;
     load: () => void;
+};
+
+export type TmpPokemonLocationsType = {
+    getPokemonPrevolution: (pokemonName: PokemonNameType, maxRegion?: GameConstants.Region) => EvoData[];
 };

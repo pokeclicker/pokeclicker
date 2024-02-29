@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
+
 enum PokemonLocationType {
     Route,
     Roaming,
@@ -781,3 +783,5 @@ class PokemonLocations {
         return !isEvable && Object.keys(locations).length > 0;
     };
 }
+
+PokemonLocations satisfies TmpPokemonLocationsType;
