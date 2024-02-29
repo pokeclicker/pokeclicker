@@ -4113,6 +4113,7 @@ TemporaryBattleList['Skull 5'] = new TemporaryBattle(
 TemporaryBattleList['Psychium Z Trial'] = new TemporaryBattle(
     'Psychium Z Trial',
     [
+        // same HP as route mons
         new GymPokemon('Krokorok', 7829809, 32),
         new GymPokemon('Gabite', 7940429, 32),
         new GymPokemon('Trapinch', 7622397, 32),
@@ -4164,7 +4165,7 @@ TemporaryBattleList['Gladion 2'] = new TemporaryBattle(
 );
 TemporaryBattleList['Exeggutor Tree'] = new TemporaryBattle(
     'Exeggutor Tree',
-    [new GymPokemon('Alolan Exeggutor', 1100000, 40)],
+    [new GymPokemon('Alolan Exeggutor', 1100000, 40)], // same HP as dungeon mons
     'Phew... That was an Exeggutor, wasn\'t it? This island is full of them! I think that they should all clear out once we get past them.',
     [new QuestLineStepCompletedRequirement('Emissary of Light', 2, GameConstants.AchievementOption.less)],
     undefined,
@@ -4207,13 +4208,15 @@ TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
 TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
     'Lusamine 1',
     [
-        new GymPokemon('Clefable', 109925182, 47),
-        new GymPokemon('Lilligant', 109925182, 47),
-        new GymPokemon('Mismagius', 109925182, 47),
-        new GymPokemon('Milotic', 109925182, 47),
-        new GymPokemon('Bewear', 109925182, 47),
-        new GymPokemon('Help us Solgaleo!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Lunala', true), new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])])])),
-        new GymPokemon('Help us Lunala!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo', true), new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])])])),
+        // base HP regular mon: 109925182
+        // base HP ace: 183208637
+        new GymPokemon('Clefable', 108825930, 47),
+        new GymPokemon('Lilligant', 158292262, 47),
+        new GymPokemon('Mismagius', 97613561, 47),
+        new GymPokemon('Milotic', 137736253, 47),
+        new GymPokemon('Bewear', 126413959, 47),
+        new GymPokemon('Help us Solgaleo!', 202995169, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Lunala', true), new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])])])),
+        new GymPokemon('Help us Lunala!', 202995169, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo', true), new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])])])),
     ],
     undefined,
     [
@@ -4233,12 +4236,14 @@ TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
 TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
     'Lusamine 2',
     [
-        new GymPokemon('Clefable', 109925182, 47),
-        new GymPokemon('Lilligant', 109925182, 47),
-        new GymPokemon('Mismagius', 109925182, 47),
-        new GymPokemon('Milotic', 109925182, 47),
-        new GymPokemon('Bewear', 109925182, 47),
-        new GymPokemon('You hateful little Trainer!', 183208637, 47),
+        // base HP regular mon: 109925182
+        // base HP ace: 183208637
+        new GymPokemon('Clefable', 108825930, 47),
+        new GymPokemon('Lilligant', 158292262, 47),
+        new GymPokemon('Mismagius', 97613561, 47),
+        new GymPokemon('Milotic', 137736253, 47),
+        new GymPokemon('Bewear', 126413959, 47),
+        new GymPokemon('You hateful little Trainer!', 202995169, 47),
     ],
     undefined,
     [
