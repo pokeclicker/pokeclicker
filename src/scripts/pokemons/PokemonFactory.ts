@@ -1,3 +1,4 @@
+///<reference path="../../declarations/globals.d.ts"/>
 ///<reference path="PokemonHelper.ts"/>
 ///<reference path="BattlePokemon.ts"/>
 
@@ -370,3 +371,5 @@ class PokemonFactory {
         return gender;
     }
 }
+
+PokemonFactory satisfies TmpPokemonFactoryType;
