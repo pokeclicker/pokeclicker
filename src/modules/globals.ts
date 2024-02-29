@@ -84,29 +84,29 @@ type TmpSaveType = {
     key: string;
 };
 
-type TmpDungeon = {
+type TmpDungeonType = {
     allAvailablePokemon: () => PokemonNameType[];
     allAvailableShadowPokemon: () => PokemonNameType[];
     isThereQuestAtLocation: () => boolean;
 };
 
-type TmpDungeonRunner = {
+type TmpDungeonRunnerType = {
     dungeon: {
         name: string
     };
-    isAchievementsComplete: (TmpDungeon) => boolean;
+    isAchievementsComplete: (TmpDungeonType) => boolean;
 };
 
-type TmpGym = {
+type TmpGymType = {
     town: string;
 };
 
-type TmpGymRunner = {
-    gymObservable: () => TmpGym;
+type TmpGymRunnerType = {
+    gymObservable: () => TmpGymType;
     getEnvironmentArea: () => Environment;
 };
 
-type TmpAchievementHandler = {
+type TmpAchievementHandlerType = {
     achievementList: Achievement[];
     navigateIndex: KnockoutObservable<number>;
     achievementListFiltered: KnockoutObservableArray<Achievement>;
@@ -138,48 +138,48 @@ type TmpAchievementHandler = {
     load: ()=>void
 };
 
-type TmpBattle = {
+type TmpBattleType = {
     enemyPokemon: KnockoutObservable<unknown>;
     catching: KnockoutObservable<boolean>;
     route: number,
     generateNewEnemy: () => void;
 };
 
-type TmpTemporaryBattle = {
-    getTown: () => TmpTown;
+type TmpTemporaryBattleType = {
+    getTown: () => TmpTownType;
 };
 
-type TmpTemporaryBattleRunner = {
+type TmpTemporaryBattleRunnerType = {
     getEnvironmentArea: () => Environment;
-    battleObservable: KnockoutObservable<TmpTemporaryBattle>;
+    battleObservable: KnockoutObservable<TmpTemporaryBattleType>;
 };
 
-type TmpTownContent = {
+type TmpTownContentType = {
     isUnlocked: () => boolean;
     areaStatus: () => AreaStatus;
 };
 
-type TmpTown = {
+type TmpTownType = {
     name: string;
     region: Region;
     requirements: Requirement[];
-    dungeon?: TmpDungeon;
+    dungeon?: TmpDungeonType;
     //npcs?: NPC[];
     startingTown: boolean;
-    content: TmpTownContent[];
+    content: TmpTownContentType[];
     subRegion: SubRegions;
     ignoreAreaStatus: boolean;
     isUnlocked: () => boolean;
 };
 
-type TmpTownList = { 
-    [name: string]: TmpTown;
+type TmpTownListType = { 
+    [name: string]: TmpTownType;
 };
 
-type TmpRouteHelper = {
+type TmpRouteHelperType = {
     getAvailablePokemonList(route: number, region: Region, includeHeadbutt?: boolean): PokemonNameType[];
     routePokerusEVs(route: number, region: Region): string;
-    dungeonPokerusEVs(dungeon: TmpDungeon): string;
+    dungeonPokerusEVs(dungeon: TmpDungeonType): string;
     getEvs(possiblePokemon: PokemonNameType[]): number;
     routeCompleted(route: number, region: Region, includeShiny: boolean, includeHeadbutt?: boolean): boolean;
     listCompleted(possiblePokemon: PokemonNameType[], includeShiny: boolean);
@@ -189,8 +189,8 @@ type TmpRouteHelper = {
     isThereQuestAtLocation(route: number, region: Region);
 };
 
-type TmpDungeonList = {
-    [name: string]: TmpDungeon;
+type TmpDungeonListType = {
+    [name: string]: TmpDungeonType;
 };
 
 // Where all the magic happens
@@ -198,12 +198,12 @@ declare global {
     const App: TmpAppType;
     const player: any;
     const Save: TmpSaveType;
-    const DungeonRunner: TmpDungeonRunner;
-    const GymRunner: TmpGymRunner;
-    const AchievementHandler: TmpAchievementHandler;
-    const Battle: TmpBattle;
-    const TownList: TmpTownList;
-    const RouteHelper: TmpRouteHelper;
-    const TemporaryBattleRunner: TmpTemporaryBattleRunner;
-    const dungeonList: TmpDungeonList;
+    const DungeonRunner: TmpDungeonRunnerType;
+    const GymRunner: TmpGymRunnerType;
+    const AchievementHandler: TmpAchievementHandlerType;
+    const Battle: TmpBattleType;
+    const TownList: TmpTownListType;
+    const RouteHelper: TmpRouteHelperType;
+    const TemporaryBattleRunner: TmpTemporaryBattleRunnerType;
+    const dungeonList: TmpDungeonListType;
 }
