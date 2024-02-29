@@ -26,6 +26,7 @@ import Consumable from './Consumable';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
+import { pokemonMap } from '../pokemons/PokemonList';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -239,6 +240,10 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 
 // Consumables
 ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+const MagikarpCheck = (pokemon: { [key: string]: any, id: number }): boolean => Math.floor(pokemon.id) === pokemonMap.Magikarp.id;
+ItemList.Lava_Cookie = new Consumable(ConsumableType.Lava_Cookie, Infinity, undefined, undefined, 'Lava Cookie', 'Strenghten your Magikarp', MagikarpCheck);
+ItemList.Magikarp_Biscuit = new Consumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, 'Magikarp Biscuit', 'Strenghten your Magikarp much', MagikarpCheck);
+ItemList.Big_Malasada = new Consumable(ConsumableType.Big_Malasada, Infinity, undefined, undefined, 'Big Malasada', 'Strenghten your Magikarp a lot', MagikarpCheck);
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
