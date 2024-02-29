@@ -1,4 +1,3 @@
-///<reference path="PokemonHelper.ts"/>
 ///<reference path="BattlePokemon.ts"/>
 
 class PokemonFactory {

@@ -163,11 +163,15 @@ gulp.task('scripts', () => {
     const base = gulp.src('src/modules/index.ts')
         .pipe(gulpWebpack(webpackConfig, webpack));
 
-    // Convert the posix path to a path that matches the current OS
-    const osPathPrefix = '../src'.split(path.posix.sep).join(path.sep);
-    const osPathModulePrefix = '../src/declarations'.split(path.posix.sep).join(path.sep);
+    const convertPathToOS = (p) => p.split(path.posix.sep).join(path.sep);
 
-    const gameConstantsFilter = filter((vinylPath) => vinylPath.relative.includes('GameConstants.d.ts'), {restore: true});
+    // Convert the posix path to a path that matches the current OS
+    const osPathPrefix = convertPathToOS('../src');
+    const osPathModulePrefix = convertPathToOS('../src/declarations');
+
+    // Declarations for modules globally available as module namespaces (the JS kind) need to be wrapped in namespaces (the TS kind)
+    const globalModules = ['GameConstants.d.ts', `pokemons/PokemonHelper.d.ts`].map(p => convertPathToOS(p));
+    const globalModulesFilter = filter((vinylPath) => globalModules.some(modPath => vinylPath.relative.includes(modPath)), {restore: true});
 
     const generateDeclarations = base
         .pipe(filter((vinylPath) => vinylPath.relative.startsWith(osPathModulePrefix)))
@@ -188,10 +192,13 @@ gulp.task('scripts', () => {
         // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
         // Wrap GameConstants in a namespace for scripts compatibility
-        .pipe(gameConstantsFilter)
-        .pipe(replace(/(?=declare)/, 'declare namespace GameConstants {\n'))
+        .pipe(globalModulesFilter)
+        .pipe(replace(/(?=declare)/, function handleReplace() {
+            const filename = this.file.basename.replace(/\..*$/, '');
+            return `declare namespace ${filename} {\n`;
+        }))
         .pipe(footer('}\n'))
-        .pipe(gameConstantsFilter.restore)
+        .pipe(globalModulesFilter.restore)
         // Output
         .pipe(gulp.dest(dests.declarations));
 
