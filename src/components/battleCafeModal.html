@@ -6,8 +6,8 @@
         </div>
         <div class="modal-body">
                 <h4>Select a Sweet</h4>
-                <div class="d-flex flex-wrap mt-3 mb-3" data-bind="foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet)">
-                    <div class="mx-1 mb-1" style="flex: 1;">
+                <div class="sweet-display my-3" data-bind="foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet)">
+                    <div class="mx-1 mb-1">
                         <div class="card clickable" data-bind="click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data])">
                             <div class="card-body bg-secondary rounded text-center p-1"
                                 data-bind="css: { 'bg-info': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data] }">
@@ -30,10 +30,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ko if: $index() == 2 -->
-                    <!-- Force split into 2 rows on smaller resolutions -->
-                    <div class="w-100 d-lg-none"></div>
-                    <!-- /ko -->
                 </div>
 
                 <!-- ko with: GameConstants.AlcremieSweet[BattleCafeController.selectedSweet()] -->
@@ -65,25 +61,23 @@
                                 </table>
                             </div>
                             <div class="col-12 col-lg-6">
-                                <div class="row" data-bind="foreach: Object.values(BattleCafeController.evolutions[GameConstants.AlcremieSweet[$data]])">
-                                    <div class="col-4">
-                                        <div class="card">
-                                            <div class="card-body bg-secondary rounded text-center p-1">
-                                                <div class="d-flex flex-column align-items-center">
-                                                    <div class="d-flex align-items-center justify-content-between w-100">
-                                                        <knockout class="pokeball-image" data-bind="template: { name: 'caughtStatusTemplate', data: {
-                                                            'status': PartyController.getCaughtStatusByName($data.name)
-                                                        }}"></knockout>
-                                                        <knockout class="pokerus-image" data-bind="template: { name: 'pokerusStatusTemplate', data: {
-                                                            'pokerus': PartyController.getPokerusStatusByName($data.name),
-                                                            'evs': App.game.party.getPokemonByName($data.name)?.evs()
-                                                        }}"></knockout>
-                                                    </div>
-                                                    <img src="" style="width: 64px; margin-top: -8px;" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data.name].id) },
-                                                        css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data.name) }">
-                                                    <h6 class="card-title small mb-0" style="margin-top: -8px;"
-                                                        data-bind="text: App.game.party.alreadyCaughtPokemonByName($data.name) ? $data.name.match(/.+\(\w+\s(.+)\)/)[1] : '???'"></h6>
+                                <div class="alcremie-display" data-bind="foreach: Object.values(BattleCafeController.evolutions[GameConstants.AlcremieSweet[$data]])">
+                                    <div class="card">
+                                        <div class="card-body bg-secondary rounded text-center p-1">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <div class="d-flex align-items-center justify-content-between w-100">
+                                                    <knockout class="pokeball-image" data-bind="template: { name: 'caughtStatusTemplate', data: {
+                                                        'status': PartyController.getCaughtStatusByName($data.name)
+                                                    }}"></knockout>
+                                                    <knockout class="pokerus-image" data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                        'pokerus': PartyController.getPokerusStatusByName($data.name),
+                                                        'evs': App.game.party.getPokemonByName($data.name)?.evs()
+                                                    }}"></knockout>
                                                 </div>
+                                                <img src="" style="width: 64px; margin-top: -8px;" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data.name].id) },
+                                                    css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data.name) }">
+                                                <h6 class="card-title small mb-0" style="margin-top: -8px;"
+                                                    data-bind="text: App.game.party.alreadyCaughtPokemonByName($data.name) ? $data.name.match(/.+\(\w+\s(.+)\)/)[1] : '???'"></h6>
                                             </div>
                                         </div>
                                     </div>
