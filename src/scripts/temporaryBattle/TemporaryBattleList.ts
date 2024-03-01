@@ -4208,15 +4208,13 @@ TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
 TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
     'Lusamine 1',
     [
-        // base HP regular mon: 109925182
-        // base HP ace: 183208637
-        new GymPokemon('Clefable', 108825930, 47),
-        new GymPokemon('Lilligant', 158292262, 47),
-        new GymPokemon('Mismagius', 97613561, 47),
-        new GymPokemon('Milotic', 137736253, 47),
-        new GymPokemon('Bewear', 126413959, 47),
-        new GymPokemon('Help us Solgaleo!', 202995169, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Lunala', true), new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])])])),
-        new GymPokemon('Help us Lunala!', 202995169, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo', true), new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])])])),
+        new GymPokemon('Clefable', 109925182, 47),
+        new GymPokemon('Lilligant', 109925182, 47),
+        new GymPokemon('Mismagius', 109925182, 47),
+        new GymPokemon('Milotic', 109925182, 47),
+        new GymPokemon('Bewear', 109925182, 47),
+        new GymPokemon('Help us Solgaleo!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Lunala', true), new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])])])),
+        new GymPokemon('Help us Lunala!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo', true), new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])])])),
     ],
     undefined,
     [
@@ -4236,14 +4234,12 @@ TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
 TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
     'Lusamine 2',
     [
-        // base HP regular mon: 109925182
-        // base HP ace: 183208637
-        new GymPokemon('Clefable', 108825930, 47),
-        new GymPokemon('Lilligant', 158292262, 47),
-        new GymPokemon('Mismagius', 97613561, 47),
-        new GymPokemon('Milotic', 137736253, 47),
-        new GymPokemon('Bewear', 126413959, 47),
-        new GymPokemon('You hateful little Trainer!', 202995169, 47),
+        new GymPokemon('Clefable', 109925182, 47),
+        new GymPokemon('Lilligant', 109925182, 47),
+        new GymPokemon('Mismagius', 109925182, 47),
+        new GymPokemon('Milotic', 109925182, 47),
+        new GymPokemon('Bewear', 109925182, 47),
+        new GymPokemon('You hateful little Trainer!', 183208637, 47),
     ],
     undefined,
     [
@@ -4262,7 +4258,7 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
 TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
     [
-        // base HP: 364088130
+        // base HP: 364088130, balance steel type Dusk Mane
         new GymPokemon('Necrozma (Dusk Mane)', 302193147, 50),
         new GymPokemon('Necrozma (Dawn Wings)', 322217995, 50),
     ],
@@ -4370,14 +4366,12 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
 TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
     'Gladion 3',
     [
-        // base HP regular mon: 194154232
-        // base HP ace: 213569655
-        new GymPokemon('Crobat', 192212689, 53),
-        new GymPokemon('Zoroark', 245216795, 53),
-        new GymPokemon('Lucario', 172408958, 53),
-        new GymPokemon('Silvally (Fire)', 294726123, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
-        new GymPokemon('Silvally (Water)', 267602777, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
-        new GymPokemon('Silvally (Grass)', 307540303, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Crobat', 194154232, 53),
+        new GymPokemon('Zoroark', 194154232, 53),
+        new GymPokemon('Lucario', 194154232, 53),
+        new GymPokemon('Silvally (Fire)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Silvally (Water)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Silvally (Grass)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.</br>Lillie\'s looking after our mother at the foundation. Hau\'s working hard to get stronger, too...</br>I know we aren\'t friends. But we aren\'t enemies anymore either. Keep winning. Maybe I\'ll see you again if you do.',
     [new QuestLineStepCompletedRequirement('Eater of Light', 1)],
@@ -4510,13 +4504,11 @@ TemporaryBattleList['Ryuki Dragon Memory'] = new TemporaryBattle(
 TemporaryBattleList.Anabel = new TemporaryBattle(
     'Anabel',
     [
-        // base HP regular mon: 229464883
-        // base HP ace: 234464883
-        new GymPokemon('Alakazam', 266867658, 61),
-        new GymPokemon('Weavile', 277652508, 61),
-        new GymPokemon('Mismagius', 203764816, 61),
-        new GymPokemon('Salamence', 214090735, 61),
-        new GymPokemon('Snorlax', 262600669, 61),
+        new GymPokemon('Alakazam', 229464883, 61),
+        new GymPokemon('Weavile', 229464883, 61),
+        new GymPokemon('Mismagius', 229464883, 61),
+        new GymPokemon('Salamence', 229464883, 61),
+        new GymPokemon('Snorlax', 234464883, 61),
     ],
     'Oh you\'re good! You might just have a shot, here are some Beast Balls. Go hunt down those strange Ultra Beasts! If you need more Beast Balls, you can buy them here.',
     [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 0)]
@@ -4524,13 +4516,11 @@ TemporaryBattleList.Anabel = new TemporaryBattle(
 TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
     'Captain Mina UB',
     [
-        // base HP regular mon: 239464883
-        // base HP ace: 244464883
-        new GymPokemon('Klefki', 178401337, 61),
-        new GymPokemon('Granbull', 237070234, 61),
-        new GymPokemon('Shiinotic', 244254180, 61),
-        new GymPokemon('Wigglytuff', 226294314, 61),
-        new GymPokemon('Ribombee', 251309899, 61),
+        new GymPokemon('Klefki', 178401337, 61), // modified base HP from 239464883, balance steel type
+        new GymPokemon('Granbull', 239464883, 61),
+        new GymPokemon('Shiinotic', 239464883, 61),
+        new GymPokemon('Wigglytuff', 239464883, 61),
+        new GymPokemon('Ribombee', 244464883, 61),
     ],
     'Your strength is still shocking!',
     [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 7)],
@@ -4543,13 +4533,11 @@ TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
 TemporaryBattleList['Kahuna Nanu UB'] = new TemporaryBattle(
     'Kahuna Nanu UB',
     [
-        // base HP regular mon: 249464883
-        // base HP ace: 254464883
-        new GymPokemon('Sableye', 183356689, 63),
-        new GymPokemon('Krookodile', 295615886, 63),
-        new GymPokemon('Honchkrow', 241980936, 63),
-        new GymPokemon('Absol', 315074147, 63),
-        new GymPokemon('Alolan Persian', 321389147, 63),
+        new GymPokemon('Sableye', 249464883, 63),
+        new GymPokemon('Krookodile', 249464883, 63),
+        new GymPokemon('Honchkrow', 249464883, 63),
+        new GymPokemon('Absol', 249464883, 63),
+        new GymPokemon('Alolan Persian', 254464883, 63),
     ],
     'I had to be sure. Sure that you\'re ready for what\'s coming...',
     [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 13)],
