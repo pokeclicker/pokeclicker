@@ -61,7 +61,7 @@
                                 </table>
                             </div>
                             <div class="col-12 col-lg-6">
-                                <div class="alcremie-display" data-bind="foreach: Object.values(BattleCafeController.evolutions[GameConstants.AlcremieSweet[$data]])">
+                                <div class="alcremie-display" data-bind="foreach: Object.values(BattleCafeController.evolutions[GameConstants.AlcremieSweet[$data]]).sort((a, b) => pokemonMap[a.name].id - pokemonMap[b.name].id)">
                                     <div class="card">
                                         <div class="card-body bg-secondary rounded text-center p-1">
                                             <div class="d-flex flex-column align-items-center">
