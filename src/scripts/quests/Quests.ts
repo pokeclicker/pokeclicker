@@ -93,6 +93,21 @@ class Quests implements Saveable {
         }
     }
 
+    public changeQuestTier(index: number, tier: QuestTier) {
+        console.log(`Changing quest tier for ${index} to ${tier}`);
+
+        const quest = this.questList()[index];
+
+        if (quest && !quest.inProgress() && !quest.isCompleted()) {
+            quest.tier(tier);
+        } else {
+            Notifier.notify({
+                message: 'You cannot change the tier of a quest in progress.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+        }
+    }
+
     public quitQuest(index: number, shouldConfirm = false) {
         // Check if we can quit this quest
         const quest  = this.questList()[index];

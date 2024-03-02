@@ -52,16 +52,20 @@
                             <tr>
                                 <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
                                 <td class="align-middle text-center py-0" style="text-align:left">
-                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
+                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  tieredPointsReward(), 'currency': GameConstants.Currency.questPoint}}"></span>
                                 </td>
                                 <td class="align-middle text-center py-0">
-                                    <button class='btn btn-primary btn-sm btn-block'
-                                        data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
-                                        click: function(){
-                                            App.game.quests.beginQuest($data.index);
-                                        }'>
-                                        Start
-                                    </button>
+                                    <div class="btn-group btn-block" data-bind="visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed()">
+                                        <button class='btn btn-primary btn-sm btn-block'
+                                            data-bind='click: function(){ App.game.quests.beginQuest($data.index);}'>
+                                            Start
+                                        </button>
+                                        <button type="button" data-bind="text: $data.tier" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        </button>
+                                        <div class="dropdown-menu" data-bind="foreach: ['Easy', 'Medium', 'Hard', 'Insane']">
+                                            <button class="dropdown-item" type="button" data-bind="click: function(){ App.game.quests.changeQuestTier($parent.index, $data) }, text: $data"></button>
+                                        </div>
+                                    </div>
                                     <button class='btn btn-success btn-sm btn-block' data-bind='visible: !$data.claimed() && $data.isCompleted(),
                                                                         click: () => { App.game.quests.claimQuest($data.index) }'>
                                         Claim

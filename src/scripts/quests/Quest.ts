@@ -5,6 +5,29 @@ type QuestOptionalArgument = {
     npcImageName?: string,
 };
 
+enum QuestTierEnum {
+    Easy,
+    Medium,
+    Hard,
+    Insane
+}
+
+type QuestTier = keyof typeof QuestTierEnum;
+
+const QuestTierAmountMultipliers: { [key in (QuestTier)]: number } = {
+    Easy: 1,
+    Medium: 10,
+    Hard: 50,
+    Insane: 100,
+};
+
+const QuestTierRewardMultipliers: { [key in (QuestTier)]: number } = {
+    Easy: 1,
+    Medium: 10,
+    Hard: 50,
+    Insane: 100,
+};
+
 abstract class Quest {
     public static questObservable: KnockoutObservable<Quest> = ko.observable();
 
@@ -33,7 +56,11 @@ abstract class Quest {
     optionalArgs?: QuestOptionalArgument;
     initialValue?: number;
 
-    constructor(amount: number, pointsReward: number) {
+    tier: KnockoutObservable<QuestTier>;
+    tieredAmount: KnockoutComputed<number>;
+    tieredPointsReward: KnockoutComputed<number>;
+
+    constructor(amount: number, pointsReward: number, tier: QuestTier = 'Easy') {
         this.amount = isNaN(amount) ? 0 : amount;
         this.pointsReward = pointsReward;
         this.initial = ko.observable(null);
@@ -41,6 +68,7 @@ abstract class Quest {
         this.notified = false;
         this.onLoadCalled = false;
         this.suspended = false;
+        this.tier = ko.observable(tier);
     }
 
     public static canComplete() {
@@ -78,11 +106,11 @@ abstract class Quest {
             }
             this.deleteFocusSub();
             this.claimed(true);
-            if (this.pointsReward) {
-                App.game.wallet.gainQuestPoints(this.pointsReward);
+            if (this.tieredPointsReward()) {
+                App.game.wallet.gainQuestPoints(this.tieredPointsReward());
                 Notifier.notify({
-                    message: `You have completed your quest!\nYou claimed <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
-                    strippedMessage: `You have completed your quest and claimed ${this.pointsReward.toLocaleString('en-US')} Quest Points!`,
+                    message: `You have completed your quest!\nYou claimed <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.tieredPointsReward().toLocaleString('en-US')}!`,
+                    strippedMessage: `You have completed your quest and claimed ${this.tieredPointsReward().toLocaleString('en-US')} Quest Points!`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.General.quest_completed,
                 });
@@ -90,7 +118,7 @@ abstract class Quest {
                     LogBookTypes.QUEST,
                     createLogContent.completedQuestWithPoints({
                         quest: this.description,
-                        points: this.pointsReward.toLocaleString('en-US'),
+                        points: this.tieredPointsReward().toLocaleString('en-US'),
                     })
                 );
             } else {
@@ -165,7 +193,7 @@ abstract class Quest {
         // Calculate our progress
         this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
-                return Math.min(1, ( this.focus() - this.initial()) / this.amount);
+                return Math.min(1, ( this.focus() - this.initial()) / this.tieredAmount());
             } else {
                 return 0;
             }
@@ -173,14 +201,22 @@ abstract class Quest {
 
         this.progressText = ko.pureComputed(() => {
             if (this.initial() !== null) {
-                return `${Math.min((this.focus() - this.initial()), this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
+                return `${Math.min((this.focus() - this.initial()), this.tieredAmount()).toLocaleString('en-US')} / ${this.tieredAmount().toLocaleString('en-US')}`;
             } else {
-                return `0 / ${this.amount.toLocaleString('en-US')}`;
+                return `0 / ${this.tieredAmount().toLocaleString('en-US')}`;
             }
         });
 
         this.inProgress = ko.pureComputed(() => {
             return this.initial() !== null && (!this.claimed() || this.mainQuest?.inProgress());
+        });
+
+        this.tieredAmount = ko.pureComputed(() => {
+            return this.amount * QuestTierAmountMultipliers[this.tier()];
+        });
+
+        this.tieredPointsReward = ko.pureComputed(() => {
+            return this.pointsReward * QuestTierRewardMultipliers[this.tier()];
         });
 
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
@@ -190,8 +226,8 @@ abstract class Quest {
             const completed = this.progress() == 1 || this.claimed();
             if (!this.autoComplete && completed && !this.notified) {
                 Notifier.notify({
-                    message: `You can complete your quest for <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
-                    strippedMessage: `You can complete your quest for ${this.pointsReward.toLocaleString('en-US')} Quest Points!`,
+                    message: `You can complete your quest for <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.tieredPointsReward().toLocaleString('en-US')}!`,
+                    strippedMessage: `You can complete your quest for ${this.tieredPointsReward().toLocaleString('en-US')} Quest Points!`,
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 5e3,
                     sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
@@ -216,7 +252,7 @@ abstract class Quest {
             // Was consequently disposed on auto completion.
             this.deleteFocusSub();
         }
-        this.initial(this.focus() - this.amount);
+        this.initial(this.focus() - this.tieredAmount());
     }
 
     createAutoCompleter() {
@@ -294,6 +330,7 @@ abstract class Quest {
             initial: this.initial(),
             claimed: this.claimed(),
             notified: this.notified,
+            tier: this.tier(),
         };
     }
 
@@ -303,10 +340,12 @@ abstract class Quest {
             this.claimed(false);
             this.initial(null);
             this.notified = false;
+            this.tier('Easy');
         }
         this.index = json.hasOwnProperty('index') ? json.index : 0;
         this.claimed(json.hasOwnProperty('claimed') ? json.claimed : false);
         this.initial(json.hasOwnProperty('initial') ? json.initial : null);
         this.notified = json.hasOwnProperty('notified') ? json.notified : false;
+        this.tier(json.hasOwnProperty('tier') ? json.tier : 'Easy');
     }
 }
