@@ -55,9 +55,16 @@
                                                 <img style="width: 30px;" data-bind="attr: { src: FarmController.getBerryImage($data.berry) }">
                                                 <span data-bind="text: `${BerryType[$data.berry]} × ${$data.amount.toLocaleString('en-US')}`"></span>
                                             </td>
-                                            <td class="align-middle border-top-0 p-0" data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US')"></td>
+                                            <td class="align-middle border-top-0 p-0" data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US'),
+                                                css: { 'text-danger': $data.amount > App.game.farming.berryList[$data.berry]() }"></td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>Maximum Spins</td>
+                                            <td data-bind="text: BattleCafeController.calcMaxSpins(BattleCafeController.selectedSweet()).toLocaleString('en-US')"></td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                             <div class="col-12 col-lg-6">
