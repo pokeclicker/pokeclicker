@@ -36,7 +36,10 @@ export default class Routes {
         if (alwaysIncludeRegionName && !routeName.includes(regionName)) {
             routeName += ` in ${regionName}`;
         } else if (includeSubRegionName && resultRoute) {
-            routeName += ` in ${SubRegions.getSubRegionById(region, resultRoute.subRegion ?? 0).name}`;
+            const subRegionName = SubRegions.getSubRegionById(region, resultRoute.subRegion ?? 0).name;
+            if (!routeName.includes(subRegionName)) {
+                routeName += ` in ${subRegionName}`;
+            }
         }
         return routeName;
     }
