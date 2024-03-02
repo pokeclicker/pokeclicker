@@ -96,7 +96,7 @@ abstract class Quest {
     }
 
     get xpReward(): number {
-        return (100 + (this.pointsReward * Math.ceil(this.amount) / 10)) * QuestTierXPMultipliers[this.tier()];
+        return (100 + Math.ceil(this.pointsReward * this.amount) / 10) * QuestTierXPMultipliers[this.tier()];
     }
 
     //#region Quest Status
