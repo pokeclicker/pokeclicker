@@ -4213,8 +4213,6 @@ TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
         new GymPokemon('Mismagius', 109925182, 47),
         new GymPokemon('Milotic', 109925182, 47),
         new GymPokemon('Bewear', 109925182, 47),
-        new GymPokemon('Help us Solgaleo!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Lunala', true), new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])])])),
-        new GymPokemon('Help us Lunala!', 183208637, 47, new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo', true), new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])])])),
     ],
     undefined,
     [

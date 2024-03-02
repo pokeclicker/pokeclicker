@@ -1626,8 +1626,6 @@ export type PokemonNameType
     | 'Pecharunt'
     | 'MissingNo.'
     | '???'
-    | 'Help us Solgaleo!'
-    | 'Help us Lunala!'
     | 'You hateful little Trainer!'
     | 'Segin Starmobile'
     | 'Schedar Starmobile'

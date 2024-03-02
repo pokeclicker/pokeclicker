@@ -31339,47 +31339,7 @@ export const pokemonList = createPokemonArray(
             'type': Genders.Genderless,
         },
     },
-    // Fusion Lusamine (Solgaleo and Lunala's back sprites use Nihilego's types and stats too because you are supposed to be attacking her trainer icon)
-    {
-        'id': -791.01,
-        'name': 'Help us Solgaleo!',
-        'type': [PokemonType.Rock, PokemonType.Poison],
-        'eggCycles': 120,
-        'levelType': LevelType.slow,
-        'exp': 257,
-        'catchRate': 45,
-        'base': {
-            'hitpoints': 109,
-            'attack': 53,
-            'specialAttack': 127,
-            'defense': 47,
-            'specialDefense': 131,
-            'speed': 103,
-        },
-        'gender': {
-            'type': Genders.Genderless,
-        },
-    },
-    {
-        'id': -792.01,
-        'name': 'Help us Lunala!',
-        'type': [PokemonType.Rock, PokemonType.Poison],
-        'eggCycles': 120,
-        'levelType': LevelType.slow,
-        'exp': 257,
-        'catchRate': 45,
-        'base': {
-            'hitpoints': 109,
-            'attack': 53,
-            'specialAttack': 127,
-            'defense': 47,
-            'specialDefense': 131,
-            'speed': 103,
-        },
-        'gender': {
-            'type': Genders.Genderless,
-        },
-    },
+    // Fusion Lusamine
     {
         'id': -793.01,
         'name': 'You hateful little Trainer!',
