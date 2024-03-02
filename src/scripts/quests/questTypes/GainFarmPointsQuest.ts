@@ -23,7 +23,7 @@ class GainFarmPointsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} Farm Points.`;
+        return this.customDescription ?? `Gain ${this.tieredAmount().toLocaleString('en-US')} Farm Points.`;
     }
 
     toJSON() {

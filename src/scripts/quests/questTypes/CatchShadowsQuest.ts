@@ -23,7 +23,7 @@ class CatchShadowsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Catch ${this.amount.toLocaleString('en-US')} Shadow Pokémon.`;
+        return this.customDescription ?? `Catch ${this.tieredAmount().toLocaleString('en-US')} Shadow Pokémon.`;
     }
 
     toJSON() {

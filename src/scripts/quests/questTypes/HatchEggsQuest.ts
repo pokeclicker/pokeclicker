@@ -24,7 +24,7 @@ class HatchEggsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Hatch ${this.amount.toLocaleString('en-US')} ${GameConstants.pluralizeString('Egg', this.amount)}.`;
+        return this.customDescription ?? `Hatch ${this.tieredAmount().toLocaleString('en-US')} ${GameConstants.pluralizeString('Egg', this.amount)}.`;
     }
 
     toJSON() {
