@@ -28,6 +28,13 @@ const QuestTierRewardMultipliers: { [key in (QuestTier)]: number } = {
     Insane: 1,
 };
 
+const QuestTierXPMultipliers: { [key in (QuestTier)]: number } = {
+    Easy: 1,
+    Medium: 2,
+    Hard: 5,
+    Insane: 10,
+};
+
 abstract class Quest {
     public static questObservable: KnockoutObservable<Quest> = ko.observable();
 
@@ -89,7 +96,7 @@ abstract class Quest {
     }
 
     get xpReward(): number {
-        return 100 + (this.pointsReward * Math.ceil(this.amount) / 10);
+        return (100 + (this.pointsReward * Math.ceil(this.amount) / 10)) * QuestTierXPMultipliers[this.tier()];
     }
 
     //#region Quest Status
