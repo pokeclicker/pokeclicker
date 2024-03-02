@@ -390,6 +390,34 @@ class QuestLineHelper {
 
     /* Johto QuestLines */
 
+    // Started upon defeating Ecruteak City's gym
+    public static createSickAmpharosQuestLine() {
+        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmines Ampharos seems to be sick!');
+
+        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City');
+        sickAmpharosQuestLine.addQuest(clearOlivineLighthouse);
+
+        const talkToJasmine1 = new TalkToNPCQuest(OlivineLighthouseJasmine1, 'Talk to Jasmine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(talkToJasmine1);
+
+        const talkToHerbalist1 = new TalkToNPCQuest(CianwoodCityPharmacist1, 'Talk to the Pharmacist in Cianwood City.');
+        sickAmpharosQuestLine.addQuest(talkToHerbalist1);
+
+        const clearCianwoodCityGym = new DefeatGymQuest(1, 0, 'Cianwood City').withDescription('The Pharmacist said he needs some time to finish Amphys medicine. Clear the Cianwood City Gym in the meantime.');
+        sickAmpharosQuestLine.addQuest(clearCianwoodCityGym);
+
+        const talkToHerbalist2 = new TalkToNPCQuest(CianwoodCityPharmacist2, 'Talk to the Pharmacist in Cianwood City.');
+        sickAmpharosQuestLine.addQuest(talkToHerbalist2);
+
+        const giveMedicineToAmphy = new TalkToNPCQuest(OlivineLighthouseMedicineAmphy, 'Give Amphy their medicine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(giveMedicineToAmphy);
+
+        const talkToJasmine2 = new TalkToNPCQuest(OlivineLighthouseJasmine2, 'Talk to Jasmine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(talkToJasmine2);
+
+        App.game.quests.questLines().push(sickAmpharosQuestLine);
+    }
+
     // Started upon defeating Ecruteak City's gym.
     public static createRocketJohtoQuestLine() {
         const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
@@ -3803,6 +3831,7 @@ class QuestLineHelper {
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
         this.createPersonsofInterestQuestLine();
+        this.createSickAmpharosQuestLine();
         this.createRocketJohtoQuestLine();
         this.createJohtoBeastsQuestLine();
         this.createJohtoSuicuneQuestLine();
