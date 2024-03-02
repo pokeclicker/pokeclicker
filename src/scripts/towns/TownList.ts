@@ -7139,15 +7139,6 @@ const PhycoAltar = new NPC('Captain Phyco', [
     image: 'assets/images/npcs/Phyco.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('Emissary of Light'), new  QuestLineStepCompletedRequirement('Eater of Light', 0, GameConstants.AchievementOption.less)]),
 });
-const PoipoleGift = new GiftNPC('Accept Poipole', [
-    'You chose to confront Lusamine and Necrozma without the aid of the legendary Pokémon. It seems Poipole has become inspired by your actions. Do you wish to take it with you? ',
-], () => {
-    App.game.party.gainPokemonByName('Poipole');
-}, 'assets/images/pokemon/803.png', {
-    saveKey: 'poipolegift',
-    image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 0), new TemporaryBattleRequirement('Lusamine 2')]),
-});
 // Rotom-Dex
 const RotomDexSun = new NPC('Rotom Dex', [
     'Zzzzt!!! How\'zzz it going, kiddo? Havin\' fun in the Alolan sun?',
@@ -7720,10 +7711,10 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     'Altar of the Sunne and Moone',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [TemporaryBattleList['Lusamine 1'], TemporaryBattleList['Lusamine 2'], TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
+    [TemporaryBattleList.Lusamine, TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, DuskFlute, SolgaleoGift, LunalaGift, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, PoipoleGift],
+        npcs: [SunFlute, MoonFlute, SolgaleoGift, LunalaGift, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar],
     }
 );
 TownList['Pokémon League Alola'] = new Town(

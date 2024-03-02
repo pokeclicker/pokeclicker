@@ -4205,32 +4205,8 @@ TemporaryBattleList['Recon Squad 3'] = new TemporaryBattle(
         imageName: 'specialNPCs/Ultra Recon Squad (all)',
     }
 );
-TemporaryBattleList['Lusamine 1'] = new TemporaryBattle(
-    'Lusamine 1',
-    [
-        new GymPokemon('Clefable', 109925182, 47),
-        new GymPokemon('Lilligant', 109925182, 47),
-        new GymPokemon('Mismagius', 109925182, 47),
-        new GymPokemon('Milotic', 109925182, 47),
-        new GymPokemon('Bewear', 109925182, 47),
-    ],
-    undefined,
-    [
-        new QuestLineStepCompletedRequirement('Emissary of Light', 6),
-        new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
-        new OneFromManyRequirement([
-            new ObtainedPokemonRequirement('Solgaleo'),
-            new ObtainedPokemonRequirement('Lunala'),
-        ]),
-    ],
-    undefined,
-    {
-        imageName: '../pokemon/-793.01',
-        displayName: 'Lusamine',
-    }
-);
-TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
-    'Lusamine 2',
+TemporaryBattleList.Lusamine = new TemporaryBattle(
+    'Lusamine',
     [
         new GymPokemon('Clefable', 109925182, 47),
         new GymPokemon('Lilligant', 109925182, 47),
@@ -4243,8 +4219,6 @@ TemporaryBattleList['Lusamine 2'] = new TemporaryBattle(
     [
         new QuestLineStepCompletedRequirement('Emissary of Light', 6),
         new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
-        new ObtainedPokemonRequirement('Solgaleo', true),
-        new ObtainedPokemonRequirement('Lunala', true),
     ],
     undefined,
     {

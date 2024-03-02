@@ -2811,10 +2811,8 @@ class QuestLineHelper {
             talkToLillieNight,
         ], 'Choose a flute and play it with Lillie at the Altar.', 0, 1));
 
-        // 7 - Temp battle: Clear Lusamine1 or Lusamine2
-        const clearBeastLusamine = new CustomQuest(1, 0, 'Help Lillie get through to her mother with the help of the legendary Pokémon! Clear Lusamine at the Altar of the Sunne and Moone.', () =>
-            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 1')]() +
-            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lusamine 2')]())
+        // 7 - Temp battle: Lusamine
+        const clearBeastLusamine = new DefeatTemporaryBattleQuest('Lusamine', 'Help Lillie get through to her mother! Defeat Lusamine at the Altar of the Sunne and Moone.')
             .withOptionalArgs({
                 clearedMessage: 'Lillie...</br>...</br>Heh...</br>When did you... start becoming so beautiful?',
                 npcDisplayName: 'Lusamine',

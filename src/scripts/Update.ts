@@ -2643,25 +2643,24 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 249);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 250);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 251);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 252);
             // Reset temporary battles important to story; Reset questline Eater of Light
             saveData.statistics.temporaryBattleDefeated[240] = 0;
             saveData.statistics.temporaryBattleDefeated[247] = 0;
+            saveData.statistics.temporaryBattleDefeated[252] = 0;
             saveData.statistics.temporaryBattleDefeated[253] = 0;
-            saveData.statistics.temporaryBattleDefeated[254] = 0;
-            saveData.statistics.temporaryBattleDefeated[262] = 0;
+            saveData.statistics.temporaryBattleDefeated[261] = 0;
             const eaterID = saveData.quests.questLines.findIndex(ql => ql.name == 'Eater of Light');
             saveData.quests.questLines.splice(eaterID, 1);
             // Reset/Remove questline Mina\'s Trial; Reset temporary battles in it
             const minaID = saveData.quests.questLines.findIndex(ql => ql.name == 'Mina\'s Trial');
             saveData.quests.questLines.splice(minaID, 1);
+            saveData.statistics.temporaryBattleDefeated[254] = 0;
             saveData.statistics.temporaryBattleDefeated[255] = 0;
             saveData.statistics.temporaryBattleDefeated[256] = 0;
             saveData.statistics.temporaryBattleDefeated[257] = 0;
             saveData.statistics.temporaryBattleDefeated[258] = 0;
             saveData.statistics.temporaryBattleDefeated[259] = 0;
             saveData.statistics.temporaryBattleDefeated[260] = 0;
-            saveData.statistics.temporaryBattleDefeated[261] = 0;
             // Start Alola story quests if player has beaten temp battles already
             // Hau 1
             if (saveData.statistics.temporaryBattleDefeated[224]) {
