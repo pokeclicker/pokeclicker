@@ -24,7 +24,7 @@ class GainTokensQuest extends Quest implements QuestInterface {
 
     private static calcReward(amount: number, baseAmount: number): number {
         const reward =  Math.ceil(amount / baseAmount * GameConstants.GAIN_TOKENS_BASE_REWARD);
-        return GainTokensQuest.randomizeReward(reward);
+        return GainTokensQuest.randomizeReward(reward) / amount;
     }
 
     get description(): string {

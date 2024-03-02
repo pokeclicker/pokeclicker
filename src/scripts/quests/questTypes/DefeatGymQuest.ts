@@ -22,7 +22,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(5, 20);
+        const amount = SeededRand.float(15) + 5;
         let maxRegion = player.highestRegion();
         // Check if first gym of highest region has been cleared. If not, pick one region lower than highest.
         if (!App.game.badgeCase.hasBadge(GymList[GameConstants.RegionGyms[player.highestRegion()][0]].badgeReward)) {
@@ -32,18 +32,18 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         // Only use cleared gyms.
         const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears());
         const gymTown = SeededRand.fromArray(possibleGyms);
-        const reward = this.calcReward(amount, gymTown);
+        const reward = this.calcReward(gymTown);
         return [amount, reward, gymTown];
     }
 
-    private static calcReward(amount: number, gymTown: string): number {
+    private static calcReward(gymTown: string): number {
         const gym = GymList[gymTown];
         const playerDamage = App.game.party.pokemonAttackObservable();
         let attacksToWin = 0;
         for (const pokemon of gym.getPokemonList()) {
             attacksToWin += Math.ceil( Math.min( 4, pokemon.maxHealth / Math.max(1, playerDamage) ) );
         }
-        const reward = Math.min(5000, Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount));
+        const reward = Math.min(5000, Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER));
         return super.randomizeReward(reward);
     }
 

@@ -25,7 +25,7 @@ class GainMoneyQuest extends Quest implements QuestInterface {
 
     private static calcReward(amount: number, baseAmount: number): number {
         const reward = Math.ceil(amount / baseAmount * GameConstants.GAIN_MONEY_BASE_REWARD);
-        return GainMoneyQuest.randomizeReward(reward);
+        return GainMoneyQuest.randomizeReward(reward) / amount;
     }
 
     get description(): string {

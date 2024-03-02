@@ -12,13 +12,13 @@ class MineLayersQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(1, 3);
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.intBetween(100, 300) / 100;
+        const reward = this.calcReward();
         return [amount, reward];
     }
 
-    private static calcReward(amount: number): number {
-        const reward = Math.ceil(amount * GameConstants.MINE_LAYERS_BASE_REWARD);
+    private static calcReward(): number {
+        const reward = Math.ceil(GameConstants.MINE_LAYERS_BASE_REWARD);
         return super.randomizeReward(reward);
     }
 

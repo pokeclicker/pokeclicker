@@ -12,13 +12,13 @@ class MineItemsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(3, 15);
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.intBetween(300, 1500) / 100;
+        const reward = this.calcReward();
         return [amount, reward];
     }
 
-    private static calcReward(amount: number): number {
-        const reward = Math.ceil(amount * GameConstants.MINE_ITEMS_BASE_REWARD);
+    private static calcReward(): number {
+        const reward = Math.ceil(GameConstants.MINE_ITEMS_BASE_REWARD);
         return super.randomizeReward(reward);
     }
 

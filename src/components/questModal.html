@@ -45,6 +45,7 @@
                             <tr>
                                 <td class="align-middle"><h5 class="mb-0">Description</h5></td>
                                 <td class="align-middle"><h5 class="mb-0">Reward</h5></td>
+                                <td class="align-middle"><h5 class="mb-0">Experience</h5></td>
                                 <td class="align-middle"><h5 class="mb-0">Status</h5></td>
                             </tr>
                             </thead>
@@ -54,6 +55,7 @@
                                 <td class="align-middle text-center py-0" style="text-align:left">
                                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  tieredPointsReward(), 'currency': GameConstants.Currency.questPoint}}"></span>
                                 </td>
+                                <td class="align-middle text-center py-0" style="text-align:left" data-bind="text: xpReward.toLocaleString('en-US')"></td>
                                 <td class="align-middle text-center py-0">
                                     <div class="btn-group btn-block" data-bind="visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed()">
                                         <button class='btn btn-primary btn-sm btn-block'

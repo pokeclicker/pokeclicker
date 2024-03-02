@@ -23,9 +23,9 @@ const QuestTierAmountMultipliers: { [key in (QuestTier)]: number } = {
 
 const QuestTierRewardMultipliers: { [key in (QuestTier)]: number } = {
     Easy: 1,
-    Medium: 10,
-    Hard: 50,
-    Insane: 100,
+    Medium: 1,
+    Hard: 1,
+    Insane: 1,
 };
 
 abstract class Quest {
@@ -89,7 +89,7 @@ abstract class Quest {
     }
 
     get xpReward(): number {
-        return 100 + (this.pointsReward / 10);
+        return 100 + (this.pointsReward * Math.ceil(this.amount) / 10);
     }
 
     //#region Quest Status
@@ -212,11 +212,11 @@ abstract class Quest {
         });
 
         this.tieredAmount = ko.pureComputed(() => {
-            return this.amount * QuestTierAmountMultipliers[this.tier()];
+            return Math.ceil(this.amount * QuestTierAmountMultipliers[this.tier()]);
         });
 
         this.tieredPointsReward = ko.pureComputed(() => {
-            return this.pointsReward * QuestTierRewardMultipliers[this.tier()];
+            return Math.ceil(this.pointsReward * this.tieredAmount() * QuestTierRewardMultipliers[this.tier()]);
         });
 
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed

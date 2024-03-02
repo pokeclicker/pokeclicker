@@ -12,13 +12,13 @@ class GainFarmPointsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(500, 5000);
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.float(4500) + 500;
+        const reward = this.calcReward();
         return [amount, reward];
     }
 
-    private static calcReward(amount: number): number {
-        const reward = Math.ceil(amount * GameConstants.GAIN_FARM_POINTS_BASE_REWARD);
+    private static calcReward(): number {
+        const reward = Math.ceil(GameConstants.GAIN_FARM_POINTS_BASE_REWARD);
         return super.randomizeReward(reward);
     }
 

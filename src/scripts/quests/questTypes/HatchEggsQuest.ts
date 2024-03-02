@@ -14,12 +14,12 @@ class HatchEggsQuest extends Quest implements QuestInterface {
     public static generateData(): any[] {
         const highestRegion = player.highestRegion();
         const amount = SeededRand.intBetween(1, (10 + (5 * highestRegion)));
-        const reward = this.calcReward(amount);
+        const reward = this.calcReward();
         return [amount, reward];
     }
 
-    private static calcReward(amount: number): number {
-        const reward = Math.ceil(amount * GameConstants.HATCH_EGGS_BASE_REWARD);
+    private static calcReward(): number {
+        const reward = Math.ceil(GameConstants.HATCH_EGGS_BASE_REWARD);
         return super.randomizeReward(reward);
     }
 

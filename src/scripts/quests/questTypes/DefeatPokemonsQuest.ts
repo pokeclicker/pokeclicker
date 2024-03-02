@@ -15,19 +15,19 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(100, 500);
+        const amount = SeededRand.float(400) + 100;
         const region = SeededRand.intBetween(0, player.highestRegion());
         // Only use unlocked routes
         const possibleRoutes = Routes.getRoutesByRegion(region).map(route => route.number).filter(route => MapHelper.accessToRoute(route, region));
         // If no routes unlocked in this region, just use the first route of the region
         const route = possibleRoutes.length ? SeededRand.fromArray(possibleRoutes) : GameConstants.StartingRoutes[region];
-        const reward = this.calcReward(amount, route, region);
+        const reward = this.calcReward(route, region);
         return [amount, reward, route, region];
     }
 
-    private static calcReward(killsNeeded: number, route: number, region: number): number {
+    private static calcReward(route: number, region: number): number {
         const attacksPerPokemon = Math.ceil(Math.min(4, PokemonFactory.routeHealth(route, region) / Math.max(1, App.game.party.pokemonAttackObservable())));
-        const reward = Math.ceil(GameConstants.DEFEAT_POKEMONS_BASE_REWARD * attacksPerPokemon * killsNeeded);
+        const reward = Math.ceil(GameConstants.DEFEAT_POKEMONS_BASE_REWARD * attacksPerPokemon);
         return super.randomizeReward(reward);
     }
 

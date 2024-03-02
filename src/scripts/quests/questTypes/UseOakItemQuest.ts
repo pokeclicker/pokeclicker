@@ -30,13 +30,13 @@ class UseOakItemQuest extends Quest implements QuestInterface {
             // OakItemType.Treasure_Scanner,
         ];
         const oakItem = SeededRand.fromArray(possibleItems);
-        const amount = SeededRand.intBetween(100, 500);
-        const reward = this.calcReward(amount, oakItem);
+        const amount = SeededRand.float(400) + 100;
+        const reward = this.calcReward(oakItem);
         return [amount, reward, oakItem];
     }
 
-    private static calcReward(amount: number, item: OakItemType) {
-        const reward = amount * GameConstants.USE_OAK_ITEM_BASE_REWARD;
+    private static calcReward(item: OakItemType) {
+        const reward = GameConstants.USE_OAK_ITEM_BASE_REWARD;
         return super.randomizeReward(reward);
     }
 

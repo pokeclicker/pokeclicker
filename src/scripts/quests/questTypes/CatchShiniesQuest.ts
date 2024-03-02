@@ -8,13 +8,17 @@ class CatchShiniesQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = 1;
-        const reward = this.calcReward(amount);
+        // The base amount will be set somewhere between 0.01 and 1
+        // The quest will then round the number up
+        // This way, easy quests with a multiplier of 1 will still always require 1
+        // Insane quests with a multiplier of 100, will be anywhere between 1 and 100
+        const amount = SeededRand.intBetween(1, 100) / 100;
+        const reward = this.calcReward();
         return [amount, reward];
     }
 
-    private static calcReward(amount: number): number {
-        const reward = Math.ceil(amount * GameConstants.SHINY_BASE_REWARD);
+    private static calcReward(): number {
+        const reward = Math.ceil(GameConstants.SHINY_BASE_REWARD);
         return super.randomizeReward(reward);
     }
 
