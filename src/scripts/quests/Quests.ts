@@ -25,6 +25,21 @@ class Quests implements Saveable {
         // Minimum of 1, Maximum of 4
         return Math.min(4, Math.max(1, Math.floor((this.level() + 5) / 5)));
     });
+    public availableQuestTiers: KnockoutComputed<QuestTier[]> = ko.pureComputed((): QuestTier[] => {
+        const available: QuestTier[] = ['Easy'];
+
+        if (this.level() >= 20) {
+            available.push('Medium');
+        }
+        if (this.level() >= 30) {
+            available.push('Hard');
+        }
+        if (this.level() >= 50) {
+            available.push('Insane');
+        }
+
+        return available;
+    })
 
     // Get current quests by status
     public completedQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {

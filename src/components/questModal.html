@@ -64,7 +64,7 @@
                                         </button>
                                         <button type="button" data-bind="text: $data.tier" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         </button>
-                                        <div class="dropdown-menu" data-bind="foreach: ['Easy', 'Medium', 'Hard', 'Insane']">
+                                        <div class="dropdown-menu" data-bind="foreach: App.game.quests.availableQuestTiers">
                                             <button class="dropdown-item" type="button" data-bind="click: function(){ App.game.quests.changeQuestTier($parent.index, $data) }, text: $data"></button>
                                         </div>
                                     </div>
