@@ -48,9 +48,9 @@ class Quests implements Saveable {
             return -1;
         } else if (Quests.getQuestSortStatus(quest1) > Quests.getQuestSortStatus(quest2)) {
             return 1;
-        } else if (quest1.pointsReward > quest2.pointsReward) {
+        } else if (quest1.pointsReward * Math.ceil(quest1.amount) > quest2.pointsReward * Math.ceil(quest2.amount)) {
             return -1;
-        } else if (quest1.pointsReward < quest2.pointsReward) {
+        } else if (quest1.pointsReward * Math.ceil(quest1.amount) < quest2.pointsReward * Math.ceil(quest2.amount)) {
             return 1;
         }
 
