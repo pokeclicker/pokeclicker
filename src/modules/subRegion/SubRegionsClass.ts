@@ -1,4 +1,5 @@
 import type SubRegion from './SubRegion';
+import type { Region } from '../GameConstants';
 
 /*
     Only import directly from this file when necessary to prevent circular dependency issues
