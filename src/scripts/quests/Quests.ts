@@ -109,8 +109,6 @@ class Quests implements Saveable {
     }
 
     public changeQuestTier(index: number, tier: QuestTier) {
-        console.log(`Changing quest tier for ${index} to ${tier}`);
-
         const quest = this.questList()[index];
 
         if (quest && !quest.inProgress() && !quest.isCompleted()) {
