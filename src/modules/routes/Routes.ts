@@ -1,6 +1,6 @@
 import * as GameConstants from '../GameConstants';
 import RegionRoute from './RegionRoute';
-import SubRegions from '../subRegion/SubRegions';
+import SubRegions from '../subRegion/SubRegionsClass';
 
 export default class Routes {
     public static regionRoutes: RegionRoute[] = [];
