@@ -19,13 +19,13 @@ class GainMoneyQuest extends Quest implements QuestInterface {
         const baseAmount = gymAmount * (1 + highestRegion) * 2;
         const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
         const amount = SeededRand.intBetween(baseAmount, maxAmount);
-        const reward = GainMoneyQuest.calcReward(amount, baseAmount);
+        const reward = GainMoneyQuest.calcReward(amount, baseAmount) / amount;
         return [amount, reward];
     }
 
     private static calcReward(amount: number, baseAmount: number): number {
         const reward = Math.ceil(amount / baseAmount * GameConstants.GAIN_MONEY_BASE_REWARD);
-        return GainMoneyQuest.randomizeReward(reward) / amount;
+        return GainMoneyQuest.randomizeReward(reward);
     }
 
     get description(): string {

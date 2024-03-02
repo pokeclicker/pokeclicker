@@ -24,16 +24,16 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         const possibleDungeons = GameConstants.RegionDungeons[region].filter(dungeon => TownList[dungeon].isUnlocked());
         // If no dungeons unlocked in this region, just use the first dungeon of the region
         const dungeon = possibleDungeons.length ? SeededRand.fromArray(possibleDungeons) : GameConstants.RegionDungeons[region][0];
-        const reward = this.calcReward(dungeon);
+        const reward = this.calcReward(amount, dungeon) / amount;
         return [amount, reward, dungeon];
     }
 
-    private static calcReward(dungeon: string): number {
+    private static calcReward(amount: number, dungeon: string): number {
         const playerDamage = App.game.party.calculateClickAttack() + (App.game.party.pokemonAttackObservable() / GameConstants.QUEST_CLICKS_PER_SECOND);
         const attacksToDefeatPokemon = Math.ceil(Math.min(4, dungeonList[dungeon].baseHealth / playerDamage));
         const averageTilesToBoss = 13;
         const attacksToCompleteDungeon = attacksToDefeatPokemon * averageTilesToBoss;
-        const completeDungeonsReward = attacksToCompleteDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER;
+        const completeDungeonsReward = attacksToCompleteDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount;
 
         let region: GameConstants.Region, route: number;
         for (region = player.highestRegion(); region >= 0; region--) {

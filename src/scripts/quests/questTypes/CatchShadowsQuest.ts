@@ -13,12 +13,12 @@ class CatchShadowsQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const amount = Math.ceil(Math.random() * 500) / 100;
-        const reward = this.calcReward();
+        const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
 
-    private static calcReward(): number {
-        const reward = Math.ceil(GameConstants.SHADOW_BASE_REWARD);
+    private static calcReward(amount: number): number {
+        const reward = Math.ceil(amount * GameConstants.SHADOW_BASE_REWARD);
         return super.randomizeReward(reward);
     }
 

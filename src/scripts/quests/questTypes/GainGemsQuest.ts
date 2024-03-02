@@ -39,12 +39,12 @@ class GainGemsQuest extends Quest implements QuestInterface {
         const amount = SeededRand.intBetween(200, 600);
         this.weights = this.typeWeights();
         const type = SeededRand.fromArray(this.weights.filter(w => w.weight < this.maxWeight).map(w => w.type));
-        const reward = this.calcReward(type);
+        const reward = this.calcReward(type, amount) / amount;
         return [amount, reward, type];
     }
 
-    private static calcReward(type: PokemonType): number {
-        const reward = GameConstants.DEFEAT_POKEMONS_BASE_REWARD * this.weights[type].weight * 0.5;
+    private static calcReward(type: PokemonType, amount: number): number {
+        const reward = amount * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * this.weights[type].weight * 0.5;
         return super.randomizeReward(reward);
     }
 

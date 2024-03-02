@@ -18,13 +18,13 @@ class GainTokensQuest extends Quest implements QuestInterface {
         const baseAmount = dungeonAmount;
         const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
         const amount = SeededRand.intBetween(baseAmount, maxAmount);
-        const reward = GainTokensQuest.calcReward(amount, baseAmount);
+        const reward = GainTokensQuest.calcReward(amount, baseAmount) / amount;
         return [amount, reward];
     }
 
     private static calcReward(amount: number, baseAmount: number): number {
         const reward =  Math.ceil(amount / baseAmount * GameConstants.GAIN_TOKENS_BASE_REWARD);
-        return GainTokensQuest.randomizeReward(reward) / amount;
+        return GainTokensQuest.randomizeReward(reward);
     }
 
     get description(): string {

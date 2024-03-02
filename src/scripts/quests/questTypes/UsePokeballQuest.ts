@@ -20,13 +20,13 @@ class UsePokeballQuest extends Quest implements QuestInterface {
         }
         const pokeball = SeededRand.fromArray(possiblePokeballs);
         const amount = SeededRand.float(400) + 100;
-        const reward = this.calcReward(pokeball);
+        const reward = this.calcReward(amount, pokeball) / amount;
         return [amount, reward, pokeball];
     }
 
-    private static calcReward(pokeball: GameConstants.Pokeball) {
+    private static calcReward(amount: number, pokeball: GameConstants.Pokeball) {
         // Reward for Greatballs is 4x Pokeballs, Ultraballs are 9x Pokeballs
-        const reward = Math.ceil((pokeball + 1) * (pokeball + 1) * GameConstants.DEFEAT_POKEMONS_BASE_REWARD);
+        const reward = Math.ceil(amount * (pokeball + 1) * (pokeball + 1) * GameConstants.DEFEAT_POKEMONS_BASE_REWARD);
         return super.randomizeReward(reward);
     }
 

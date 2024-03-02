@@ -32,18 +32,18 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         // Only use cleared gyms.
         const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears());
         const gymTown = SeededRand.fromArray(possibleGyms);
-        const reward = this.calcReward(gymTown);
+        const reward = this.calcReward(amount, gymTown) / amount;
         return [amount, reward, gymTown];
     }
 
-    private static calcReward(gymTown: string): number {
+    private static calcReward(amount: number, gymTown: string): number {
         const gym = GymList[gymTown];
         const playerDamage = App.game.party.pokemonAttackObservable();
         let attacksToWin = 0;
         for (const pokemon of gym.getPokemonList()) {
             attacksToWin += Math.ceil( Math.min( 4, pokemon.maxHealth / Math.max(1, playerDamage) ) );
         }
-        const reward = Math.min(5000, Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER));
+        const reward = Math.min(5000, Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount));
         return super.randomizeReward(reward);
     }
 

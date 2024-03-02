@@ -23,7 +23,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
         const minAmt = Math.min(10, Math.ceil(maxAmt / 2));
 
         const amount = SeededRand.float(maxAmt - minAmt) + minAmt;
-        const reward = this.calcReward(amount, berry.type);
+        const reward = this.calcReward(amount, berry.type) / amount;
         return [amount, reward, berry.type];
     }
 
@@ -33,7 +33,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
         const plantAmt = amount / harvestAmt;
         const fieldAmt = plantAmt / App.game.farming.plotList.length;
         const reward = Math.ceil(fieldAmt * Math.pow(harvestTime, .7) * 30);
-        return super.randomizeReward(reward) / amount;
+        return super.randomizeReward(reward);
     }
 
     get description(): string {
