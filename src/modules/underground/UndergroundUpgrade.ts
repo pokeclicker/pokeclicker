@@ -13,6 +13,9 @@ export enum Upgrades {
     'Survey_Cost',
     'Survey_Efficiency',
     'NewYLayer',
+    'Reduced_Shards',
+    'Reduced_Plates',
+    'Reduced_Evolution_Items',
 }
 
 export default class UndergroundUpgrade extends Upgrade {
