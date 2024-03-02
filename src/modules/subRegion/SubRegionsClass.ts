@@ -1,16 +1,3 @@
-import {
-    Region,
-    KantoSubRegions,
-    JohtoSubRegions,
-    HoennSubRegions,
-    SinnohSubRegions,
-    UnovaSubRegions,
-    KalosSubRegions,
-    AlolaSubRegions,
-    GalarSubRegions,
-    HisuiSubRegions,
-    PaldeaSubRegions,
-} from '../GameConstants';
 import type SubRegion from './SubRegion';
 
 /*
