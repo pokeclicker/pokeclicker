@@ -6976,27 +6976,6 @@ const Lillie7 = new NPC('Lillie', [
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 7), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
 });
-// Lillie gifts
-const SolgaleoGift = new GiftNPC('Capture Solgaleo', [
-    'Please! Take Solgaleo, and let\'s go after mother!',
-], () => {
-    App.game.party.gainPokemonByName('Solgaleo');
-}, 'assets/images/pokemon/791.png', {
-    saveKey: 'solgaleogift',
-    image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
-    new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1)]),
-});
-const LunalaGift = new GiftNPC('Capture Lunala', [
-    'Please! Take Lunala, and let\'s go after mother!',
-], () => {
-    App.game.party.gainPokemonByName('Lunala');
-}, 'assets/images/pokemon/792.png', {
-    saveKey: 'lunalagift',
-    image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
-    new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1)]),
-});
 // Optional Story NPCs
 // Lillies
 const LillieMahaloTrail1 = new NPC('Mysterious Girl', [
@@ -7712,7 +7691,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList.Lusamine, TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, SolgaleoGift, LunalaGift, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar],
+        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
