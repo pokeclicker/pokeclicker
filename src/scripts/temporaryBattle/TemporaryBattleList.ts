@@ -4484,7 +4484,7 @@ TemporaryBattleList.Anabel = new TemporaryBattle(
 TemporaryBattleList['Captain Mina UB'] = new TemporaryBattle(
     'Captain Mina UB',
     [
-        new GymPokemon('Klefki', 185032107, 61), // modified base HP from 239464883, balance steel type
+        new GymPokemon('Klefki', 205591231, 61), // modified base HP from 239464883, balance steel type
         new GymPokemon('Granbull', 239464883, 61),
         new GymPokemon('Shiinotic', 239464883, 61),
         new GymPokemon('Wigglytuff', 239464883, 61),
