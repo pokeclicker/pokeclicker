@@ -542,6 +542,18 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public toggleCategory(id: number) {
+        if (this.category.includes(id)) {
+            this.removeCategory(id);
+        } else {
+            if (id === 0) {
+                this.resetCategory();
+            } else {
+                this.addCategory(id);
+            }
+        }
+    }
+
     public resetCategory(): void {
         this.category = [...this.defaults.category];
     }

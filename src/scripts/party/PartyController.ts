@@ -290,6 +290,46 @@ class PartyController {
         });
     }
 
+    public static async addCategory(pokemonList: Array<PartyPokemon>, category: number, shouldConfirm = true) {
+        if (!pokemonList.length) {
+            return;
+        }
+
+        if (shouldConfirm) {
+            const categoryName = PokemonCategories.categories().find((c) => c.id === category).name();
+            if (!await Notifier.confirm({
+                title: 'Batch Add Category',
+                message: `Add the <strong>${categoryName}</strong> category to ${pokemonList.length.toLocaleString('en-US')} Pokémon?`,
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Yes',
+            })) {
+                return;
+            }
+        }
+
+        pokemonList.forEach((p) => p.addCategory(category));
+    }
+
+    public static async removeCategory(pokemonList: Array<PartyPokemon>, category: number, shouldConfirm = true) {
+        if (!pokemonList.length) {
+            return;
+        }
+
+        if (shouldConfirm) {
+            const categoryName = PokemonCategories.categories().find((c) => c.id === category).name();
+            if (!await Notifier.confirm({
+                title: 'Batch Remove Category',
+                message: `Remove the <strong>${categoryName}</strong> category from ${pokemonList.length.toLocaleString('en-US')} Pokémon?`,
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Yes',
+            })) {
+                return;
+            }
+        }
+
+        pokemonList.forEach((p) => p.removeCategory(category));
+    }
+
     public static compareBy(option: SortOptions, direction: boolean, region = -1): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;

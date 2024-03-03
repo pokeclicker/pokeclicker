@@ -250,4 +250,8 @@ class PokedexHelper {
     private static scrollToTop() {
         document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;
     }
+
+    public static filteredListPartyPokemon(): Array<PartyPokemon> {
+        return PokedexHelper.filteredList().map((p) => App.game.party.getPokemon(p.id)).filter((p) => p !== undefined);
+    }
 }
