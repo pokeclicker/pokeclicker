@@ -4226,9 +4226,9 @@ TemporaryBattleList.Lusamine = new TemporaryBattle(
 TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
     [
-        // base HP: 364088130, balance steel type Dusk Mane
-        new GymPokemon('Necrozma (Dusk Mane)', 302193147, 50),
-        new GymPokemon('Necrozma (Dawn Wings)', 322217995, 50),
+        // base HP: 728176260
+        new GymPokemon('Necrozma (Dusk Mane)', 604386294, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1, 'Must have played the Sun Flute during Emissary of Light quest line')),
+        new GymPokemon('Necrozma (Dawn Wings)', 644435990, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1, 'Must have played the Moon Flute during Emissary of Light quest line')),
     ],
     'Necrozma retreated into the Ultra Wormhole',
     [new QuestLineCompletedRequirement('Emissary of Light')],
@@ -4342,7 +4342,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         new GymPokemon('Silvally (Grass)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.</br>Lillie\'s looking after our mother at the foundation. Hau\'s working hard to get stronger, too...</br>I know we aren\'t friends. But we aren\'t enemies anymore either. Keep winning. Maybe I\'ll see you again if you do.',
-    [new QuestLineStepCompletedRequirement('Eater of Light', 1)],
+    [new QuestLineStepCompletedRequirement('Eater of Light', 2)],
     undefined,
     {
         displayName: 'Pokémon Trainer Gladion',

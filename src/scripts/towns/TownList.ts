@@ -6971,10 +6971,18 @@ const MoonFlute = new NPC('Play the Moon Flute', [
 const Lillie7 = new NPC('Lillie', [
     'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
     'And thank you too, $playername$! You\'ve helped gain so much confidence in myself. I am very grateful for that. I was able to achieve things I had never dreamed I could... Getting to meet you, traveling together with you... I\'m so glad I got to part of your journey!',
-    'Wait- what is this darkness in the sky? Oh my goodness! $playername$! In the sky! Another Ultra Wormhole!',
+    'Wait- what is this darkness in the sky? Oh my goodness! $playername$! In the sky! It\'s heading straight towards Nebby!',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 7), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
+});
+const Lillie8 = new NPC('Talk to Lillie', [
+    'I...I\'ve been wanting to thank you for saving Nebby that day. Back then I could barely think about anything. I was so desperate...',
+    'It...it hasn\'t all been easy... but I\'m really glad that I came to Alola!',
+    'I\'m going to go back to Aether Paradise for a bit with to help my mother recover. I need to see for myself that she\'ll be all right, but... $playername$! Do your best on your island challenge!',
+], {
+    image: 'assets/images/npcs/Lillie (z powered).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 0), new QuestLineStepCompletedRequirement('Eater of Light', 3, GameConstants.AchievementOption.less)]),
 });
 // Optional Story NPCs
 // Lillies
@@ -7058,9 +7066,8 @@ const LillieAltar1 = new NPC('Prepare with Lillie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less)]),
 });
 const LillieAltar2 = new NPC('Lillie', [
-    'I...will go to my mother. I need to see for myself that she\'ll be all right.',
     'Necrozma... It seemed like it was also suffering somehow... It seemed to hurt it, to be without its light...',
-    '$playername$... if you can... try to help Necrozma, like you did mother.',
+    '$playername$! Please help Nebby for me! But also... if you can... try to help Necrozma, like you did mother.',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('Emissary of Light'), new  QuestLineStepCompletedRequirement('Eater of Light', 0, GameConstants.AchievementOption.less)]),
@@ -7691,7 +7698,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList.Lusamine, TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar],
+        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8],
     }
 );
 TownList['Pokémon League Alola'] = new Town(

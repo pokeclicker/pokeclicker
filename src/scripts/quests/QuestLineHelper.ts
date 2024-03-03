@@ -2850,14 +2850,18 @@ class QuestLineHelper {
             });
         ultraNecrozmaAlolaQuestLine.addQuest(clearUltraMegalopolis);
 
-        // 1 - Clear dungeon boss: Mina\'s Houseboat, Mina's Trial
+        // 1 - Talk to NPC: Lillie8
+        const talkToLillie8 = new TalkToNPCQuest(Lillie8, 'Everyone is finally safe again. Talk to Lillie.');
+        ultraNecrozmaAlolaQuestLine.addQuest(talkToLillie8);
+
+        // 2 - Clear dungeon boss: Mina\'s Houseboat, Mina's Trial
         createZCrystalTrial(PokemonType.Fairy, 'Mina\'s Houseboat', 'Mina', 'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!', ultraNecrozmaAlolaQuestLine);
 
-        // 2 - Temp battle: Gladion 3
+        // 3 - Temp battle: Gladion 3
         const battleGladion3 = new DefeatTemporaryBattleQuest('Gladion 3', 'Battle Gladion on Ula\'ula one last time before ascending to the Pokémon League.');
         ultraNecrozmaAlolaQuestLine.addQuest(battleGladion3);
 
-        // 3 - Clear dungeon: Mount Lanakila
+        // 4 - Clear dungeon: Mount Lanakila
         const clearMountLanakila = new DefeatDungeonQuest(1, 0, 'Mount Lanakila').withDescription('One step closer to victory: Clear Mount Lanakila!')
             .withOptionalArgs({
                 clearedMessage: '<i>You see Necrozma unconscious in a crater, drained of light and in a dormant state. Best to let it rest for a while.</i>',
