@@ -6984,7 +6984,8 @@ const SolgaleoGift = new GiftNPC('Capture Solgaleo', [
 }, 'assets/images/pokemon/791.png', {
     saveKey: 'solgaleogift',
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less), new ObtainedPokemonRequirement('Solgaleo', true), new ObtainedPokemonRequirement('Lunala', true), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
+    new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1)]),
 });
 const LunalaGift = new GiftNPC('Capture Lunala', [
     'Please! Take Lunala, and let\'s go after mother!',
@@ -6993,7 +6994,8 @@ const LunalaGift = new GiftNPC('Capture Lunala', [
 }, 'assets/images/pokemon/792.png', {
     saveKey: 'lunalagift',
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less), new ObtainedPokemonRequirement('Solgaleo', true), new ObtainedPokemonRequirement('Lunala', true), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
+    new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1)]),
 });
 // Optional Story NPCs
 // Lillies
