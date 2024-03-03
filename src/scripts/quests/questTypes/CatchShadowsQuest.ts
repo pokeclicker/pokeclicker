@@ -1,7 +1,5 @@
 /// <reference path="../Quest.ts" />
 
-import SeededRand from '../../../modules/utilities/SeededRand';
-
 class CatchShadowsQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
