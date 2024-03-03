@@ -38,10 +38,10 @@ const numericExtender = (target: MaybeWritable, precision: number) => {
             } else if (newValue !== current) {
                 // if the rounded value is the same, but a different value was
                 // written, force a notification for the current field
-                target.notifySubscribers(valueToWrite);
+                result.notifySubscribers(current);
             }
         },
-    }).extend({ notify: 'always' });
+    });
 
     // initialize with current value to make sure it is rounded appropriately, forcibly converting NaN to 0
     const initialValue = Number(target());
@@ -62,6 +62,9 @@ const booleanExtender = (target: MaybeWritable) => {
             target(!!newValueRaw);
         },
     }).extend({ notify: 'always' });
+
+    // Make sure notifications also bubble up from the underlying observable
+    target.extend({ notify: 'always' });
 
     // initialize with current value to make sure it is rounded appropriately
     result(target());
