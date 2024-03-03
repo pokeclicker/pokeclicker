@@ -63,11 +63,11 @@ abstract class Quest {
     optionalArgs?: QuestOptionalArgument;
     initialValue?: number;
 
-    tier: KnockoutObservable<QuestTier>;
+    tier?: KnockoutObservable<QuestTier>;
     tieredAmount: KnockoutComputed<number>;
     tieredPointsReward: KnockoutComputed<number>;
 
-    constructor(amount: number, pointsReward: number, tier: QuestTier = 'Easy') {
+    constructor(amount: number, pointsReward: number, tier: QuestTier = undefined) {
         this.amount = isNaN(amount) ? 0 : amount;
         this.pointsReward = pointsReward;
         this.initial = ko.observable(null);
@@ -96,7 +96,11 @@ abstract class Quest {
     }
 
     get xpReward(): number {
-        return (100 + Math.ceil(this.pointsReward * this.amount) / 10) * QuestTierXPMultipliers[this.tier()];
+        if (this.tier()) {
+            return (100 + Math.ceil(this.pointsReward * this.amount) / 10) * QuestTierXPMultipliers[this.tier()];
+        } else {
+            return 100 + (this.pointsReward / 10);
+        }
     }
 
     //#region Quest Status
@@ -219,11 +223,11 @@ abstract class Quest {
         });
 
         this.tieredAmount = ko.pureComputed(() => {
-            return Math.ceil(this.amount * QuestTierAmountMultipliers[this.tier()]);
+            return this.tier() ? Math.ceil(this.amount * QuestTierAmountMultipliers[this.tier()]) : Math.ceil(this.amount);
         });
 
         this.tieredPointsReward = ko.pureComputed(() => {
-            return Math.ceil(this.pointsReward * this.tieredAmount() * QuestTierRewardMultipliers[this.tier()]);
+            return this.tier() ? Math.ceil(this.pointsReward * this.tieredAmount() * QuestTierRewardMultipliers[this.tier()]) : this.pointsReward;
         });
 
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
@@ -347,12 +351,12 @@ abstract class Quest {
             this.claimed(false);
             this.initial(null);
             this.notified = false;
-            this.tier('Easy');
+            this.tier(undefined);
         }
         this.index = json.hasOwnProperty('index') ? json.index : 0;
         this.claimed(json.hasOwnProperty('claimed') ? json.claimed : false);
         this.initial(json.hasOwnProperty('initial') ? json.initial : null);
         this.notified = json.hasOwnProperty('notified') ? json.notified : false;
-        this.tier(json.hasOwnProperty('tier') ? json.tier : 'Easy');
+        this.tier(json.hasOwnProperty('tier') ? json.tier : undefined);
     }
 }
