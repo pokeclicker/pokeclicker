@@ -6956,21 +6956,17 @@ const SunFlute = new NPC('Play the Sun Flute', [
     'Oh my goodness, Nebby! To think you would be the emissary of the sun, Solgaleo!',
     '<img src="assets/images/pokemon/791.png">',
 ], {
+    saveKey: 'SunFlute',
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new DayCyclePartRequirement([1])]),
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])]),
 });
 const MoonFlute = new NPC('Play the Moon Flute', [
     'Oh my goodness, Nebby! To think you would be the emissary of the moon, Lunala!',
     '<img src="assets/images/pokemon/792.png">',
 ], {
+    saveKey: 'MoonFlute',
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new DayCyclePartRequirement([3])]),
-});
-const DuskFlute = new NPC('Ask Lillie what to do', [
-    'Let\'s wait and play the flutes when it\'s not Dusk or Dawn.',
-], {
-    image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([2])])]),
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])]),
 });
 const Lillie7 = new NPC('Lillie', [
     'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',

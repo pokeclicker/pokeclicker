@@ -2802,14 +2802,14 @@ class QuestLineHelper {
         // 5 - Clear dungeon boss: Vast Poni Canyon, Dragonium Z Trial
         createZCrystalTrial(PokemonType.Dragon, 'Vast Poni Canyon', 'Trial Site', '<i>You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!<i>', poniAlolaQuestLine, true, 'Clear the ancient Trial Site of Vast Poni Canyon.', 'Trial Site of Vast Poni Canyon');
 
-        // 6 - Talk to NPC: Play a flute on the Altar of the Sunne and Moone. (Flute npc is locked to day or night to give the illusion that the gift npc is affected by this in cases where the step is completed right before dusk or dawn)
-        const talkToLillieDay = new TalkToNPCQuest(SunFlute, 'Play the Sun Flute during Day.');
-        const talkToLillieNight = new TalkToNPCQuest(MoonFlute, 'Play the Moon Flute during Night.');
+        // 6 - Talk to NPC: Play a flute on the Altar of the Sunne and Moone
+        const talkToLillieDay = new TalkToNPCQuest(SunFlute, 'Play the Sun Flute during Day or Dusk.');
+        const talkToLillieNight = new TalkToNPCQuest(MoonFlute, 'Play the Moon Flute during Night or Dawn.');
 
         poniAlolaQuestLine.addQuest(new MultipleQuestsQuest([
             talkToLillieDay,
             talkToLillieNight,
-        ], 'Choose a flute and play it with Lillie at the Altar.', 0, 1));
+        ], 'Choose a time of day to play a flute with Lillie at the Altar.', 0, 1));
 
         // 7 - Temp battle: Lusamine
         const clearBeastLusamine = new DefeatTemporaryBattleQuest('Lusamine', 'Help Lillie get through to her mother! Defeat Lusamine at the Altar of the Sunne and Moone.')
