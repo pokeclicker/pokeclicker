@@ -4227,8 +4227,8 @@ TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
     [
         // base HP: 728176260
-        new GymPokemon('Necrozma (Dusk Mane)', 604386294, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1, 'Must have played the Sun Flute during Emissary of Light quest line')),
-        new GymPokemon('Necrozma (Dawn Wings)', 644435990, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1, 'Must have played the Moon Flute during Emissary of Light quest line')),
+        new GymPokemon('Necrozma (Dusk Mane)', 677203921, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1, 'Must have played the Sun Flute during Emissary of Light quest line')),
+        new GymPokemon('Necrozma (Dawn Wings)', 706330972, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1, 'Must have played the Moon Flute during Emissary of Light quest line')),
     ],
     'Necrozma retreated into the Ultra Wormhole',
     [new QuestLineCompletedRequirement('Emissary of Light')],
