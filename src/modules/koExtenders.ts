@@ -1,5 +1,3 @@
-/// <reference path="./koExtenders.d.ts" />
-
 import type { Subscribable, Observable, Computed } from 'knockout';
 
 /*
@@ -88,6 +86,10 @@ const arrayEqualsExtender = (target: Observable<any[]> | Computed<any[]>) => {
     return target;
 };
 
+export interface SkippableRateLimit extends Subscribable<unknown> {
+        evaluateEarly: () => void;
+}
+
 // A modified version of the rateLimit extender that can be forced to evaluate early
 // Usage: const example = ko.pureComputed(() => { whatever }).extend({ skippableRateLimit: GameConstants.WEEK });
 //        example.evaluateEarly();
@@ -144,3 +146,13 @@ Object.assign(ko.extenders, {
     arrayEquals: arrayEqualsExtender,
     skippableRateLimit: skippableRateLimitExtender,
 });
+
+declare module 'knockout' {
+    export interface ExtendersOptions {
+        numeric: number;
+        boolean: true;
+        arrayEquals: true;
+        skippableRateLimit: number;
+    }
+}
+
