@@ -4216,15 +4216,11 @@ TemporaryBattleList.Lusamine = new TemporaryBattle(
         new GymPokemon('You hateful little Trainer!', 183208637, 47),
     ],
     undefined,
-    [
-        new QuestLineStepCompletedRequirement('Emissary of Light', 6),
-        new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less),
-    ],
+    [new QuestLineStepCompletedRequirement('Emissary of Light', 6)],
     undefined,
     {
         hideTrainer: true,
         imageName: '../pokemon/-793.01',
-        displayName: 'Lusamine',
     }
 );
 TemporaryBattleList.Necrozma = new TemporaryBattle(
