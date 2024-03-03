@@ -275,7 +275,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name);
+            App.game.gameState = GameConstants.GameState.town;
             DungeonGuides.clears(0);
             DungeonGuides.endDungeon();
         }
@@ -286,7 +286,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name);
+            App.game.gameState = GameConstants.GameState.town;
             Notifier.notify({
                 message: 'You could not complete the dungeon in time.',
                 type: NotificationConstants.NotificationOption.danger,
