@@ -4219,8 +4219,8 @@ TemporaryBattleList.Lusamine = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Emissary of Light', 6)],
     undefined,
     {
-        hideTrainer: true,
         imageName: '../pokemon/-793.01',
+        finalPokemonImage: 'specialNPCs/Transparent',
     }
 );
 TemporaryBattleList.Necrozma = new TemporaryBattle(

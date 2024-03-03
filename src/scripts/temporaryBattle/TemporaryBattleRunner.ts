@@ -109,6 +109,10 @@ class TemporaryBattleRunner {
         return (Math.ceil(TemporaryBattleRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 
+    public static finalPokemon() : boolean {
+        return TemporaryBattleBattle.pokemonsUndefeatedComputable() === 1;
+    }
+
     public static getEnvironmentArea() {
         const battle = TemporaryBattleRunner.battleObservable();
         return battle?.optionalArgs.environment
