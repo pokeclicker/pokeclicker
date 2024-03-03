@@ -1516,14 +1516,14 @@ GymList['Exeggutor Island'] = new Gym(
 );
 
 //Alola Elite 4
-// modified from base HP, keep them the same difficulty
+// modified from base HP, keep them roughly the same difficulty
 // regular mons base HP: 91879987
 // ace pokemon base HP: 92856372
 GymList['Elite Molayne'] = new Gym(
     'Molayne',
     'Elite Molayne',
     [
-        new GymPokemon('Klefki', 67050590, 56),
+        new GymPokemon('Klefki', 70994742, 56),
         new GymPokemon('Bisharp', 80151388, 56),
         new GymPokemon('Magnezone', 78833028, 56),
         new GymPokemon('Metagross', 76260389, 56),
