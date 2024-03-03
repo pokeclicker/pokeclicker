@@ -4034,7 +4034,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     [new GymPokemon('???', 508485861, 27)],
     undefined, // custom quest message
     [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
-    undefined,
+    [new QuestLineCompletedRequirement('Symbiotic Relations')], // to work better with 10.20 story quests if already beaten
     {
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',

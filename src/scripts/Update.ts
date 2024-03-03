@@ -2644,11 +2644,10 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 250);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 251);
             // Reset temporary battles important to story; Reset questline Eater of Light
-            saveData.statistics.temporaryBattleDefeated[240] = 0;
-            saveData.statistics.temporaryBattleDefeated[247] = 0;
-            saveData.statistics.temporaryBattleDefeated[252] = 0;
-            saveData.statistics.temporaryBattleDefeated[253] = 0;
-            saveData.statistics.temporaryBattleDefeated[261] = 0;
+            saveData.statistics.temporaryBattleDefeated[247] = 0; // Gladion 2
+            saveData.statistics.temporaryBattleDefeated[252] = 0; // Necrozma
+            saveData.statistics.temporaryBattleDefeated[253] = 0; // Ultra Megalopolis
+            saveData.statistics.temporaryBattleDefeated[261] = 0; // Gladion 3
             const eaterID = saveData.quests.questLines.findIndex(ql => ql.name == 'Eater of Light');
             saveData.quests.questLines.splice(eaterID, 1);
             // Reset/Remove questline Mina\'s Trial; Reset temporary battles in it
