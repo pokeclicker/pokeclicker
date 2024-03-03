@@ -87,7 +87,7 @@ const arrayEqualsExtender = (target: Observable<any[]> | Computed<any[]>) => {
 };
 
 export interface SkippableRateLimit extends Subscribable<unknown> {
-        evaluateEarly: () => void;
+    evaluateEarly: () => void;
 }
 
 // A modified version of the rateLimit extender that can be forced to evaluate early
