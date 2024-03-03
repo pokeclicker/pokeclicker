@@ -3,7 +3,7 @@
 class CapturePokemonsQuest extends Quest implements QuestInterface {
 
     constructor(capturesNeeded: number, reward: number) {
-        super(capturesNeeded, reward);
+        super(capturesNeeded, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.totalPokemonCaptured;
     }
 

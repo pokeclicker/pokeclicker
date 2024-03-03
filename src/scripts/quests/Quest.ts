@@ -82,6 +82,10 @@ abstract class Quest {
         return true;
     }
 
+    public static defaultQuestTier(): QuestTier {
+        return 'Easy';
+    }
+
     get description(): string {
         return this.customDescription ?? 'Generic Quest Description. This should be overriden.';
     }

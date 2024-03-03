@@ -8,7 +8,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         reward: number,
         public gymTown: string
     ) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.region = GameConstants.getGymRegion(this.gymTown);
         if (this.region == GameConstants.Region.none) {
             throw new Error(`Invalid gym town for quest: ${this.gymTown}`);

@@ -5,7 +5,7 @@ class UsePokeballQuest extends Quest implements QuestInterface {
     private pokeball: GameConstants.Pokeball;
 
     constructor(amount: number, reward: number, pokeball: GameConstants.Pokeball) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.pokeball = pokeball;
         this.focus = App.game.statistics.pokeballsUsed[this.pokeball];
     }

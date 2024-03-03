@@ -6,7 +6,7 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
     public static weights: Array<Record<string, number>> = [];
 
     constructor(capturesNeeded: number, reward: number, public type: PokemonType) {
-        super(capturesNeeded, reward);
+        super(capturesNeeded, reward, Quest.defaultQuestTier());
         this.focus = ko.pureComputed(() => pokemonMap.filter(p => p.type.includes(this.type)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0));
     }
 

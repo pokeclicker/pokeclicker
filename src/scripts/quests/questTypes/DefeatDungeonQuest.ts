@@ -8,7 +8,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         reward: number,
         public dungeon: string
     ) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.region = GameConstants.getDungeonRegion(this.dungeon);
         if (this.region == GameConstants.Region.none) {
             throw new Error(`Invalid dungeon for quest: ${this.dungeon}`);

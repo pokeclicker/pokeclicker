@@ -5,7 +5,7 @@ class UseOakItemQuest extends Quest implements QuestInterface {
     private item: OakItemType;
 
     constructor(amount: number, reward: number, item: OakItemType) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.item = item;
         this.focus = App.game.statistics.oakItemUses[this.item];
     }

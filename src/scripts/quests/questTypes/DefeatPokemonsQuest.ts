@@ -9,7 +9,7 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
         public region: GameConstants.Region,
         customDescription: string = undefined
     ) {
-        super(killsNeeded, reward);
+        super(killsNeeded, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.routeKills[this.region][this.route];
         this.customDescription = customDescription;
     }

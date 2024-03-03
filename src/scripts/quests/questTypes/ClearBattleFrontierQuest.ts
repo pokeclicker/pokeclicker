@@ -3,7 +3,7 @@
 class ClearBattleFrontierQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.battleFrontierTotalStagesCompleted;
     }
 

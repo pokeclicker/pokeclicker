@@ -41,7 +41,7 @@ export default class SeededRand {
     }
 
     public static floatBetween(min: number, max: number): number {
-        return (max - min + 1) * this.next() + min;
+        return (max - min) * this.next() + min;
     }
 
     // get a floored number from 0 to max (excluding max)
