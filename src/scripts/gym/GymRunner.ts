@@ -123,8 +123,7 @@ class GymRunner {
 
             // Award money for defeating gym
             App.game.wallet.gainMoney(gym.moneyReward);
-            // Send the player back to the town they were in
-            player.town(gym.parent);
+            // Send the player back to a town state
             App.game.gameState = GameConstants.GameState.town;
         }
     }
