@@ -40,6 +40,10 @@ export default class SeededRand {
         return Math.floor((max - min + 1) * this.next() + min);
     }
 
+    public static floatBetween(min: number, max: number): number {
+        return (max - min + 1) * this.next() + min;
+    }
+
     // get a floored number from 0 to max (excluding max)
     public static floor(max: number): number {
         return Math.floor(this.next() * max);

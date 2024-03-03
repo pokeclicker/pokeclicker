@@ -22,7 +22,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
         const maxAmt = Math.min(300, Math.ceil(432000 / berry.growthTime[3]));
         const minAmt = Math.min(10, Math.ceil(maxAmt / 2));
 
-        const amount = SeededRand.float(maxAmt - minAmt) + minAmt;
+        const amount = SeededRand.floatBetween(minAmt - 1, maxAmt);
         const reward = this.calcReward(amount, berry.type) / amount;
         return [amount, reward, berry.type];
     }

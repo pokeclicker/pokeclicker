@@ -12,7 +12,7 @@ class MineLayersQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(100, 300) / 100;
+        const amount = SeededRand.floatBetween(0, 3);
         const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }

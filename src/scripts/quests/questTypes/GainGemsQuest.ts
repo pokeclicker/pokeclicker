@@ -36,7 +36,7 @@ class GainGemsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(200, 600);
+        const amount = SeededRand.floatBetween(199, 600);
         this.weights = this.typeWeights();
         const type = SeededRand.fromArray(this.weights.filter(w => w.weight < this.maxWeight).map(w => w.type));
         const reward = this.calcReward(type, amount) / amount;

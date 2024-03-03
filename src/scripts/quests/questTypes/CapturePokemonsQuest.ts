@@ -8,7 +8,7 @@ class CapturePokemonsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.float(400) + 100;
+        const amount = SeededRand.floatBetween(99, 500);
         const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }

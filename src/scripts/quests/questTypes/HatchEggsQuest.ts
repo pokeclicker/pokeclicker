@@ -13,7 +13,7 @@ class HatchEggsQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const highestRegion = player.highestRegion();
-        const amount = SeededRand.intBetween(1, (10 + (5 * highestRegion)));
+        const amount = SeededRand.floatBetween(0, (10 + (5 * highestRegion)));
         const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }

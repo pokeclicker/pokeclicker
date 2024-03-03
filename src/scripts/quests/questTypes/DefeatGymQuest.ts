@@ -22,7 +22,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.float(15) + 5;
+        const amount = SeededRand.floatBetween(4, 20);
         let maxRegion = player.highestRegion();
         // Check if first gym of highest region has been cleared. If not, pick one region lower than highest.
         if (!App.game.badgeCase.hasBadge(GymList[GameConstants.RegionGyms[player.highestRegion()][0]].badgeReward)) {

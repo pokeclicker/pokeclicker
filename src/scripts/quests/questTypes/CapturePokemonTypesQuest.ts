@@ -29,7 +29,7 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.float(200) + 50;
+        const amount = SeededRand.floatBetween(49, 250);
         this.weights = this.typeWeights();
         const type = SeededRand.fromArray(this.weights.filter(w => w.weight < this.maxWeight).map(w => w.type));
         const reward = this.calcReward(amount, type) / amount;

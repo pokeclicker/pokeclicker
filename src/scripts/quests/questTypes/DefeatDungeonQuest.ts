@@ -18,7 +18,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         // Allow up to highest region
-        const amount = SeededRand.float(15) + 5;
+        const amount = SeededRand.floatBetween(4, 20);
         const region = SeededRand.intBetween(0, player.highestRegion());
         // Only use unlocked dungeons
         const possibleDungeons = GameConstants.RegionDungeons[region].filter(dungeon => TownList[dungeon].isUnlocked());

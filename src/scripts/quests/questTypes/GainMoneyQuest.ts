@@ -18,7 +18,7 @@ class GainMoneyQuest extends Quest implements QuestInterface {
         }, 0) || GymList[GameConstants.KantoGyms[0]].moneyReward;
         const baseAmount = gymAmount * (1 + highestRegion) * 2;
         const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
-        const amount = SeededRand.intBetween(baseAmount, maxAmount);
+        const amount = SeededRand.floatBetween(baseAmount, maxAmount);
         const reward = GainMoneyQuest.calcReward(amount, baseAmount) / amount;
         return [amount, reward];
     }

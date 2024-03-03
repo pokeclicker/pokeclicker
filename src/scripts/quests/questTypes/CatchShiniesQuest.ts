@@ -12,7 +12,7 @@ class CatchShiniesQuest extends Quest implements QuestInterface {
         // The quest will then round the number up
         // This way, easy quests with a multiplier of 1 will still always require 1
         // Insane quests with a multiplier of 100, will be anywhere between 1 and 100
-        const amount = SeededRand.intBetween(1, 100) / 100;
+        const amount = SeededRand.floatBetween(0, 1);
         const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }

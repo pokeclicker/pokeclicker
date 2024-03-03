@@ -17,7 +17,7 @@ class GainTokensQuest extends Quest implements QuestInterface {
         }, 0) || dungeonList[GameConstants.KantoDungeons[0]].tokenCost;
         const baseAmount = dungeonAmount;
         const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
-        const amount = SeededRand.intBetween(baseAmount, maxAmount);
+        const amount = SeededRand.floatBetween(baseAmount, maxAmount);
         const reward = GainTokensQuest.calcReward(amount, baseAmount) / amount;
         return [amount, reward];
     }

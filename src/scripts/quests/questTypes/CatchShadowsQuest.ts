@@ -1,5 +1,7 @@
 /// <reference path="../Quest.ts" />
 
+import SeededRand from '../../../modules/utilities/SeededRand';
+
 class CatchShadowsQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
@@ -12,7 +14,7 @@ class CatchShadowsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = Math.ceil(Math.random() * 500) / 100;
+        const amount = SeededRand.floatBetween(0, 5);
         const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }

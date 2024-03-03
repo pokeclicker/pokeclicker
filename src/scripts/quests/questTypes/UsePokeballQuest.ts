@@ -19,7 +19,7 @@ class UsePokeballQuest extends Quest implements QuestInterface {
             possiblePokeballs.push(GameConstants.Pokeball.Ultraball);
         }
         const pokeball = SeededRand.fromArray(possiblePokeballs);
-        const amount = SeededRand.float(400) + 100;
+        const amount = SeededRand.floatBetween(99, 500);
         const reward = this.calcReward(amount, pokeball) / amount;
         return [amount, reward, pokeball];
     }

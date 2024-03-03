@@ -12,7 +12,7 @@ class ClearBattleFrontierQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.float(150) + 50;
+        const amount = SeededRand.floatBetween(49, 200);
         const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }

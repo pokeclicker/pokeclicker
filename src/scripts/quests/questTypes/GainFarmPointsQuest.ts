@@ -12,7 +12,7 @@ class GainFarmPointsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.float(4500) + 500;
+        const amount = SeededRand.floatBetween(499, 5000);
         const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
