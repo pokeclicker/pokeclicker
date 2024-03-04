@@ -10875,7 +10875,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'),
     ],
     805000, 2);
 
@@ -10973,7 +10973,7 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
                 new GymPokemon('Rockruff', 23795642, 30, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))),
                 new GymPokemon('Hakamo-o', 35693463, 36, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),
+            { hide: true, weight: 10, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),
     ],
     835000, 3);
 
@@ -11139,7 +11139,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
                     new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 1, GameConstants.AchievementOption.less) }, 'of Brooklet Hill'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 1, GameConstants.AchievementOption.less) }, 'of Brooklet Hill'),
     ],
     875000, 5);
 
@@ -11196,7 +11196,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 4, GameConstants.AchievementOption.less) }, 'of Wela Volcano Park'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 4, GameConstants.AchievementOption.less) }, 'of Wela Volcano Park'),
     ],
     900000, 7);
 
@@ -11243,7 +11243,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
                 new GymPokemon('Kecleon', 8181457, 22),
                 new GymPokemon('Totem Lurantis', 32725830, 24),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 5, GameConstants.AchievementOption.less) }, 'of Lush Jungle'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Symbiotic Relations', 5, GameConstants.AchievementOption.less) }, 'of Lush Jungle'),
     ],
     925000, 8);
 
@@ -11441,7 +11441,7 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2, GameConstants.AchievementOption.less) }, 'of Hokulani Observatory'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 2, GameConstants.AchievementOption.less) }, 'of Hokulani Observatory'),
     ],
     1000000, 22);
 
@@ -11487,7 +11487,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
                 ])),
                 new GymPokemon('Totem Mimikyu', 36763555, 35),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 5, GameConstants.AchievementOption.less) }, 'of Thrifty Megamart'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 5, GameConstants.AchievementOption.less) }, 'of Thrifty Megamart'),
         new DungeonBossPokemon('Vivillon (Poké Ball)',  96662023, 60, {
             hide: true,
             requirement: new MultiRequirement([
@@ -11722,10 +11722,10 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
     [
         new DungeonTrainer('Dulse',
             [new GymPokemon('Poipole', 78098410, 47)],
-            { weight: 0.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less) }),
+            { weight: 0.25, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less) }),
         new DungeonTrainer('Soliera',
             [new GymPokemon('Poipole', 78098410, 47)],
-            { weight: 0.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less) }),
+            { weight: 0.25, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 12, GameConstants.AchievementOption.less) }),
         new DungeonTrainer('Aether Branch Chief',
             [
                 new GymPokemon('Claydol', 26032803, 44),
@@ -11742,7 +11742,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Pinsir', 19524602, 45),
                 new GymPokemon('You hateful little Trainer!', 19524602, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), true),
             ],
-            { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 10) }, 'Guzma', '(guzma)'),
+            { weight: 2.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 10) }, 'Guzma', '(guzma)'),
         new DungeonTrainer('Aether President',
             [
                 new GymPokemon('Clefable', 15619682, 47),
@@ -11751,7 +11751,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Milotic', 15619682, 47),
                 new GymPokemon('Bewear', 15619682, 47),
             ],
-            { weight: 2, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 11) }, 'Lusamine', '(lusamine)'),
+            { weight: 5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 11) }, 'Lusamine', '(lusamine)'),
     ],
     1080000, 17);
 
@@ -11911,7 +11911,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
                 new GymPokemon('Noivern', 23988066, 48),
                 new GymPokemon('Totem Kommo-o', 55972154, 49),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less) }, 'of Vast Poni Canyon'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 5, GameConstants.AchievementOption.less) }, 'of Vast Poni Canyon'),
     ],
     1125000, 25, undefined, {requirement: new QuestLineStepCompletedRequirement('Emissary of Light', 4)});
 
@@ -11940,7 +11940,7 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
                 new GymPokemon('Pelipper', 24326118, 52),
                 new GymPokemon('Totem Ribombee', 32434824, 55),
             ],
-            { hide: true, weight: 5, requirement: new QuestLineStepCompletedRequirement('Eater of Light', 2, GameConstants.AchievementOption.less) }, 'of Mina\'s Houseboat'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Eater of Light', 2, GameConstants.AchievementOption.less) }, 'of Mina\'s Houseboat'),
     ],
     1150000, 25);
 
@@ -12065,7 +12065,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 5, requirement: new MultiRequirement([
+            { hide: true, weight: 10, requirement: new MultiRequirement([
                 new QuestLineStepCompletedRequirement('Eater of Light', 4),
                 new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less),
             ]) }, 'of Mount Lanakila'),

@@ -2601,22 +2601,17 @@ class QuestLineHelper {
         createZCrystalTrial(PokemonType.Grass, 'Lush Jungle', 'Mallow', 'Wow, you\'re even stronger than I thought! Looks like you\'ve cleared all three of Akala\'s trials! Here! A gift for such an inspiring young Trainer!', akalaAlolaQuestLine);
 
         // 6 - Talk to NPC: ProfBurnetAlola
-        const BurnetDreamOrbReward = () => {
-            const orbsEarned = 10;
-            const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
-            for (let i = 0; i < orbsEarned; i++) {
-                GameHelper.incrementObservable(Rand.fromArray(orbsUnlocked).amount);
-            }
+        const BurnetRareCandyReward = () => {
+            player.gainItem('Rare_Candy', 10);
             Notifier.notify({
                 title: akalaAlolaQuestLine.name,
-                message: `Burnet has gifted you ${orbsEarned} Orbs!`,
+                message: 'Burnet has gifted you 10 Rare Candy.',
                 type: NotificationConstants.NotificationOption.success,
-                sound: NotificationConstants.NotificationSound.General.dream_orb,
-                timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
             });
         };
 
-        const talkToBurnet1 = new TalkToNPCQuest(ProfBurnetAlola1, 'Talk to Professor Burnet in Heahea City after you\'ve finished exploring Lush Jungle.').withCustomReward(BurnetDreamOrbReward);
+        const talkToBurnet1 = new TalkToNPCQuest(ProfBurnetAlola1, 'Talk to Professor Burnet in Heahea City after you\'ve finished exploring Lush Jungle.').withCustomReward(BurnetRareCandyReward);
         akalaAlolaQuestLine.addQuest(talkToBurnet1);
 
         // 7 - Clear dungeon: Diglett's tunnel
@@ -2721,7 +2716,7 @@ class QuestLineHelper {
         ulaulaAlolaQuestLine.addQuest(clearAetherFoundation3);
 
         // 12 - Clear dungeon boss: Aether President Lusamine
-        const clearAetherFoundation4 = new DefeatDungeonBossQuest('Aether Foundation', 'Aether President Lusamine', 0).withDescription('Lusamine is using Nebby to open an Ultra Wormhole. Defeat her in the Aether Foundation dungeon to put a stop to this.')
+        const clearAetherFoundation4 = new DefeatDungeonBossQuest('Aether Foundation', 'Aether President Lusamine', 0).withDescription('Lusamine is using Nebby to open an Ultra Wormhole! Defeat her in the Aether Foundation dungeon to put a stop to this.')
             .withOptionalArgs({
                 clearedMessage: 'All that I want is my precious beast! I don\'t care about any of the rest of you! I don\'t care if you are my child or not! If you\'re not beautiful enough to be worthy of my love, then I don\'t NEED you!</br></br><i>Lusamine left into the Ultra Wormhole.</i></br><img src="assets/images/npcs/specialNPCs/Wormhole.png"></img>',
                 npcDisplayName: 'Lusamine',
@@ -2777,7 +2772,7 @@ class QuestLineHelper {
         poniAlolaQuestLine.addQuest(talkeToHapuHope);
 
         // 2 - Clear dungeon: Exeggutor Island Hill
-        const clearExeggutorIslandHill = new DefeatDungeonQuest(1, 0, 'Exeggutor Island Hill').withDescription('Hapu has given Lillie one of the flutes needed to summon the legendary Pokémon. Find the other flute by clearing Exeggutor Island Hill.')
+        const clearExeggutorIslandHill = new DefeatDungeonQuest(1, 0, 'Exeggutor Island Hill').withDescription('Hapu has permitted you to visit sacred ground. Find the other flute by clearing Exeggutor Island Hill.')
             .withOptionalArgs({
                 clearedMessage: 'Now we have both the Sun Flute and the Moon Flute!</br><img src="assets/images/items/fluteItem/Sun_Flute.png"/><img src="assets/images/items/fluteItem/Moon_Flute.png"/>',
                 npcDisplayName: 'Lillie',

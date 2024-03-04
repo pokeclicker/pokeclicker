@@ -4035,10 +4035,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     undefined, // custom quest message
     [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
     [new QuestLineCompletedRequirement('Symbiotic Relations')], // to work better with 10.20 story quests if already beaten
-    {
-        hideTrainer: true,
-        imageName: 'specialNPCs/Wormhole',
-    }
+    {imageName: 'specialNPCs/Wormhole'}
 );
 TemporaryBattleList['Hau 5'] = new TemporaryBattle(
     'Hau 5',
@@ -4117,7 +4114,6 @@ TemporaryBattleList['Psychium Z Trial'] = new TemporaryBattle(
         new GymPokemon('Krokorok', 7829809, 32),
         new GymPokemon('Gabite', 7940429, 32),
         new GymPokemon('Trapinch', 7622397, 32),
-        new GymPokemon('Celesteela', 8341426, 32, new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)),
         new GymPokemon('Alolan Dugtrio', 7484122, 32),
         new GymPokemon('Trapinch', 7622397, 32),
     ],
@@ -4226,14 +4222,17 @@ TemporaryBattleList.Lusamine = new TemporaryBattle(
 TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma',
     [
-        // base HP: 728176260
-        new GymPokemon('Necrozma (Dusk Mane)', 677203921, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1, 'Must have played the Sun Flute during Emissary of Light quest line')),
-        new GymPokemon('Necrozma (Dawn Wings)', 706330972, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1, 'Must have played the Moon Flute during Emissary of Light quest line')),
+        // base HP: 364088130
+        new GymPokemon('Necrozma (Dusk Mane)', 338601960, 50),
+        new GymPokemon('Necrozma (Dawn Wings)', 353165486, 50),
     ],
-    'Necrozma retreated into the Ultra Wormhole',
+    'Lusamine\'s interference summoned not one, but two Necrozma! That egotistical woman! You have driven one away and our Pokémon is safe, but the other is still in possession of that girl\'s "Nebby" and has taken on its true form!',
     [new QuestLineCompletedRequirement('Emissary of Light')],
     undefined,
-    {imageName: 'specialNPCs/Wormhole'}
+    {
+        hideTrainer: true,
+        imageName: 'Phyco',
+    }
 );
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',

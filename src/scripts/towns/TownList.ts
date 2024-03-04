@@ -6888,7 +6888,7 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
 const Lillie1 = new NPC('Mysterious Girl', [
     'Oh... Oh, thank goodness! So...you\'re also one of the professor\'s acquaintances? It\'s nice to meet you...',
     'I am so grateful to you for helping us out of that dangerous spot. Come on. Into the bag, Nebby.',
-    'Oh...um...yes! You can call me Lillie. I know it\'s too much for me to ask it, but... Do you think you could see us back to town',
+    'Oh...um...yes! You can call me Lillie. I know it\'s too much for me to ask it, but... Do you think you could see us back to town?',
     'So you will be taking part in the festival battle? I\'ll be sure to watch you and Hau.',
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
@@ -6971,7 +6971,7 @@ const MoonFlute = new NPC('Play the Moon Flute', [
 const Lillie7 = new NPC('Lillie', [
     'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
     'And thank you too, $playername$! You\'ve helped gain so much confidence in myself. I am very grateful for that. I was able to achieve things I had never dreamed I could... Getting to meet you, traveling together with you... I\'m so glad I got to part of your journey!',
-    'Wait- what is this darkness in the sky? Oh my goodness! $playername$! In the sky! It\'s heading straight towards Nebby!',
+    'Wait- what is this darkness in the sky? Oh my goodness! $playername$! In the sky! Another Ultra Wormhole!',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 7), new  QuestLineCompletedRequirement('Emissary of Light', GameConstants.AchievementOption.less)]),
@@ -7063,10 +7063,10 @@ const LillieAltar1 = new NPC('Prepare with Lillie', [
     'All right, $playername$! Let\'s go!',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less)]),
 });
 const LillieAltar2 = new NPC('Lillie', [
-    'Necrozma... It seemed like it was also suffering somehow... It seemed to hurt it, to be without its light...',
+    'Necrozma... It seems like it is also suffering somehow... It seemes to hurt it, to be without its light...',
     '$playername$! Please help Nebby for me! But also... if you can... try to help Necrozma, like you did mother.',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
@@ -7110,7 +7110,7 @@ const HapuCanyon = new NPC('Hapu', [
 });
 const HapuAltar = new NPC('Hapu', [
     'I was concerned so I ascended. And what do I find but the Legendary Pokémon... and a strange hole in the sky.',
-    'I\'ll await your arrival on Exeggutor Island, if training is something you desire before challenging this beast.',
+    'I\'ll await your arrival on Exeggutor Island, if training is something you desire before challenging these beasts.',
 ], {
     image: 'assets/images/npcs/Hapu.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('Emissary of Light'), new  QuestLineStepCompletedRequirement('Eater of Light', 0, GameConstants.AchievementOption.less)]),
