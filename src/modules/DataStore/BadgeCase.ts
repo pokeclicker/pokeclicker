@@ -2,8 +2,6 @@ import { Observable, PureComputed } from 'knockout';
 import { Feature } from './common/Feature';
 import BadgeEnums from '../enums/Badges';
 import GameHelper from '../GameHelper';
-import { camelCaseToString } from '../GameConstants';
-import WeatherType from '../weather/WeatherType';
 
 const emptyBadgeList = new Array(GameHelper.enumLength(BadgeEnums)).fill(false);
 
