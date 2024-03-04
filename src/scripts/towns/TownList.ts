@@ -7622,7 +7622,7 @@ TownList['Konikoni City'] = new Town(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [KonikoniCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Konikoni City'])],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
         npcs: [KonikoniKahuna, SilvallyOlivia],
     }
 );

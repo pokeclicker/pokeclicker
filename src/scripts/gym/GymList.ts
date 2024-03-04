@@ -1478,7 +1478,7 @@ GymList['Konikoni City'] = new Gym(
     BadgeEnums.Akala_Stamp,
     128000,
     'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!</br><img width="100" src="assets/images/items/zCrystal/Rockium Z.svg"/></br>I think your journey will hold many surprises. And I hope it holds many joys.',
-    [new TemporaryBattleRequirement('Plumeria 1')],
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
     undefined, undefined, { displayName: 'Olivia\'s Grand Trial' }
 );
 GymList['Malie City'] = new Gym(
