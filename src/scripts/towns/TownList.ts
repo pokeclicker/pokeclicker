@@ -7126,7 +7126,7 @@ const HapuCanyon = new NPC('Hapu', [
 });
 const HapuAltar = new NPC('Hapu', [
     'I was concerned so I ascended. And what do I find but the Legendary Pokémon... and a strange hole in the sky.',
-    'I\'ll await your arrival on Exeggutor Island, if training is something you desire before challenging these beasts.',
+    'I\'ll await your arrival on Exeggutor Island, if training is something you desire before challenging this beast.',
 ], {
     image: 'assets/images/npcs/Hapu.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('Emissary of Light'), new  QuestLineStepCompletedRequirement('Eater of Light', 0, GameConstants.AchievementOption.less)]),
