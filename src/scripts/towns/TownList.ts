@@ -6984,6 +6984,22 @@ const Lillie8 = new NPC('Talk to Lillie', [
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 0), new QuestLineStepCompletedRequirement('Eater of Light', 3, GameConstants.AchievementOption.less)]),
 });
+const LillieSun = new NPC('Lillie', [
+    'At first I\'d taken Nebby with me, but I didn\'t have the courage to protect it myself. But I\'m not that person anymore!',
+    'Traveling around Alola with you, learning all the things you knew... And seeing Nebby evolve into Solgaleo under that radiant sun... I\'ll never forget those precious memories, $playername$!',
+    'You, Professor Kukui, Professor Burnet, Hau, Hapu, and everyone else... I\'m so glad I got to meet everyone!',
+], {
+    image: 'Lillie (z powered)',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 3), new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1, 'Must have played the Sun Flute during Emissary of Light quest line')]),
+});
+const LillieMoon = new NPC('Lillie', [
+    'At first I\'d taken Nebby with me, but I didn\'t have the courage to protect it myself. But I\'m not that person anymore!',
+    'Traveling around Alola with you, learning all the things you knew... And seeing Nebby evolve into Lunala under that brilliant moon... I\'ll never forget those precious memories, $playername$!',
+    'You, Professor Kukui, Professor Burnet, Hau, Hapu, and everyone else... I\'m so glad I got to meet everyone!',
+], {
+    image: 'Lillie (z powered)',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 3), new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1, 'Must have played the Moon Flute during Emissary of Light quest line')]),
+});
 // Optional Story NPCs
 // Lillies
 const LillieMahaloTrail1 = new NPC('Mysterious Girl', [
@@ -7639,7 +7655,7 @@ TownList['Aether Paradise'] = new Town(
     ],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
-        npcs: [AetherParadiseAlolaRoamerNPC, FabaSilvally, Lillie6, Gladion1],
+        npcs: [AetherParadiseAlolaRoamerNPC, FabaSilvally, Lillie6, Gladion1, LillieSun, LillieMoon],
     }
 );
 TownList['Malie City'] = new Town(
