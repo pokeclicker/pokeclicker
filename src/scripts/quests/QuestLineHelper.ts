@@ -2539,7 +2539,7 @@ class QuestLineHelper {
             player.gainItem('Revive', 10);
             Notifier.notify({
                 title: melemeleAlolaQuestLine.name,
-                message: `Lillie has given you 10 Revives!`,
+                message: 'Lillie has given you 10 Revives!',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
                 setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
