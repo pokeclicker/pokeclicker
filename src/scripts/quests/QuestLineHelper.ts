@@ -2536,8 +2536,7 @@ class QuestLineHelper {
 
         // 10 - Talk to NPC: Lillie3
         const LillieReviveReward = () => {
-            const item = 'Revive';
-            Underground.gainMineItem(UndergroundItems.getByName(item).id, 10);
+            player.gainItem('Revive', 10);
             Notifier.notify({
                 title: melemeleAlolaQuestLine.name,
                 message: `Lillie has given you 10 ${GameConstants.humanifyString(item)}s!`,
