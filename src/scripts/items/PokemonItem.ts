@@ -5,7 +5,7 @@ class PokemonItem extends CaughtIndicatingItem {
 
     constructor(
         pokemon: PokemonNameType,
-        basePrice: number,
+        basePrice: number = undefined,
         currency: GameConstants.Currency = GameConstants.Currency.questPoint,
         public ignoreEV = false,
         displayName: string = undefined,
@@ -79,18 +79,18 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 }
 
-ItemList['Pinkan Arbok']  = new PokemonItem('Pinkan Arbok', undefined);
-ItemList['Pinkan Oddish']  = new PokemonItem('Pinkan Oddish', undefined);
-ItemList['Pinkan Poliwhirl']  = new PokemonItem('Pinkan Poliwhirl', undefined);
-ItemList['Pinkan Geodude']  = new PokemonItem('Pinkan Geodude', undefined);
+ItemList['Pinkan Arbok']  = new PokemonItem('Pinkan Arbok');
+ItemList['Pinkan Oddish']  = new PokemonItem('Pinkan Oddish');
+ItemList['Pinkan Poliwhirl']  = new PokemonItem('Pinkan Poliwhirl');
+ItemList['Pinkan Geodude']  = new PokemonItem('Pinkan Geodude');
 ItemList['Pinkan Dodrio']  = new PokemonItem('Pinkan Dodrio', 50000);
 ItemList['Charity Chansey']   = new PokemonItem('Charity Chansey', 5000);
-ItemList['Exeggcute (Single)'] = new PokemonItem('Exeggcute (Single)', undefined);
+ItemList['Exeggcute (Single)'] = new PokemonItem('Exeggcute (Single)');
 ItemList.Lickitung            = new PokemonItem('Lickitung', 1000);
-ItemList['Pinkan Weezing']  = new PokemonItem('Pinkan Weezing', undefined);
-ItemList['Pinkan Scyther']  = new PokemonItem('Pinkan Scyther', undefined);
+ItemList['Pinkan Weezing']  = new PokemonItem('Pinkan Weezing');
+ItemList['Pinkan Scyther']  = new PokemonItem('Pinkan Scyther');
 ItemList['Mr. Mime']             = new PokemonItem('Mr. Mime', 1000);
-ItemList['Pinkan Electabuzz']  = new PokemonItem('Pinkan Electabuzz', undefined);
+ItemList['Pinkan Electabuzz']  = new PokemonItem('Pinkan Electabuzz');
 ItemList.Jynx                 = new PokemonItem('Jynx', 2000);
 ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money, true);
 ItemList['Magikarp Brown Stripes'] = new PokemonItem('Magikarp Brown Stripes', 100);
@@ -102,7 +102,7 @@ ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 1187, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
-ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)', undefined);
+ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)');
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']     = new PokemonItem('Burmy (Plant)', 6750);
 ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
@@ -116,7 +116,7 @@ ItemList['Furfrou (Dandy)']      = new PokemonItem('Furfrou (Dandy)', 250000);
 ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Currency.battlePoint);
 ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 300000000, Currency.dungeonToken);
 ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
-ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)', undefined);
+ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)');
 ItemList['Furfrou (Heart)']    = new PokemonItem('Furfrou (Heart)', 15000, Currency.contestToken);
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
@@ -196,21 +196,21 @@ ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);
 ItemList.Arctovish              = new PokemonItem('Arctovish', 100000);
 ItemList['Zarude (Dada)']       = new PokemonItem('Zarude (Dada)', 500000);
 // Dream orbs
-ItemList.Staryu  = new PokemonItem('Staryu', undefined);
-ItemList.Igglybuff  = new PokemonItem('Igglybuff', undefined);
-ItemList.Shuckle  = new PokemonItem('Shuckle', undefined);
-ItemList.Smoochum  = new PokemonItem('Smoochum', undefined);
-ItemList.Ralts  = new PokemonItem('Ralts', undefined);
-ItemList.Swablu  = new PokemonItem('Swablu', undefined);
-ItemList.Drifloon  = new PokemonItem('Drifloon', undefined);
-ItemList.Bronzor  = new PokemonItem('Bronzor', undefined);
-ItemList.Riolu  = new PokemonItem('Riolu', undefined);
-ItemList.Rotom  = new PokemonItem('Rotom', undefined);
-ItemList.Munna  = new PokemonItem('Munna', undefined);
-ItemList.Sigilyph  = new PokemonItem('Sigilyph', undefined);
-ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)', undefined);
-ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)', undefined);
-ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)', undefined);
+ItemList.Staryu  = new PokemonItem('Staryu');
+ItemList.Igglybuff  = new PokemonItem('Igglybuff');
+ItemList.Shuckle  = new PokemonItem('Shuckle');
+ItemList.Smoochum  = new PokemonItem('Smoochum');
+ItemList.Ralts  = new PokemonItem('Ralts');
+ItemList.Swablu  = new PokemonItem('Swablu');
+ItemList.Drifloon  = new PokemonItem('Drifloon');
+ItemList.Bronzor  = new PokemonItem('Bronzor');
+ItemList.Riolu  = new PokemonItem('Riolu');
+ItemList.Rotom  = new PokemonItem('Rotom');
+ItemList.Munna  = new PokemonItem('Munna');
+ItemList.Sigilyph  = new PokemonItem('Sigilyph');
+ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)');
+ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)');
+ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)');
 // Contest
 ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 1500, Currency.contestToken);
 ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 3000, Currency.contestToken);
