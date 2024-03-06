@@ -4092,7 +4092,7 @@ TemporaryBattleList.Molayne = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Child of the Stars', 2)],
     undefined,
     {
-        firstTimeRewardFunction: zCrystalGet(PokemonType.Steel),
+        firstTimeRewardFunction: QuestLineHelper.zCrystalGet(PokemonType.Steel),
     }
 );
 TemporaryBattleList['Skull 5'] = new TemporaryBattle(
@@ -4121,7 +4121,7 @@ TemporaryBattleList['Psychium Z Trial'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart')), new RouteKillRequirement(10, GameConstants.Region.alola, 23)],
     undefined,
     {
-        firstTimeRewardFunction: zCrystalGet(PokemonType.Psychic),
+        firstTimeRewardFunction: QuestLineHelper.zCrystalGet(PokemonType.Psychic),
         displayName: 'Trial Site of Haina Desert',
         returnTown: 'Tapu Village',
         isTrainerBattle: false,
