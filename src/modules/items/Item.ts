@@ -28,7 +28,7 @@ export default class Item {
 
     constructor(
         public name: string,
-        public basePrice: number,
+        public basePrice: number = Infinity,
         public currency: Currency = Currency.money,
         {
             saveName = '',
@@ -42,6 +42,11 @@ export default class Item {
         description?: string,
         imageDirectory?: string,
     ) {
+        // Base price needs to be positive, items that can't be purchased via currency should be priced at Infinity
+        if (this.basePrice <= 0) {
+            this.basePrice = Infinity;
+            console.warn(`Item '${name}' created with invalid nonpositive base price, defaulting to Infinity`);
+        }
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
         this.saveName = saveName || name || `${name}|${Currency[currency]}`;
