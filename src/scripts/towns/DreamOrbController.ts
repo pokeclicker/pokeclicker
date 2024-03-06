@@ -104,7 +104,7 @@ class DreamOrbController implements Saveable {
             });
             this.opening(false);
             this.amountOpened(amountToOpen);
-            this.itemsReceived(Object.keys(items).map((key) => ({ name: key, ...items[key] })));
+            this.itemsReceived(Object.keys(items).map((key) => ({ name: ItemList[key].displayName, ...items[key] })));
             if (amountToOpen > 1) {
                 $('#dreamOrbsOpenedModal').modal('show');
             }
