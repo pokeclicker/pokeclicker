@@ -2407,14 +2407,10 @@ export const ModalCollapseList = [
 
 export enum ConsumableType {
     Rare_Candy,
-    Casteliacone,
     Magikarp_Biscuit,
-    Shalour_Sable,
 }
 
-export const CASTELIACONE_MULTIPLIER = 2;
-export const MAGIKARP_BISCUIT_MULTIPLIER = 4;
-export const SHALOUR_SABLE_MULTIPLIER = 6;
+export const MAGIKARP_BISCUIT_MULTIPLIER = 6;
 
 export const zCrystalItemType = [
     'Normalium Z',

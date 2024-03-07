@@ -240,10 +240,7 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 
 // Consumables
 ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
-const MagikarpCheck = (pokemon: { [key: string]: any, id: number }): boolean => Math.floor(pokemon.id) === pokemonMap.Magikarp.id;
-ItemList.Casteliacone = new Consumable(ConsumableType.Casteliacone, Infinity, undefined, undefined, undefined, 'Strenghten your Magikarp', MagikarpCheck);
-ItemList.Magikarp_Biscuit = new Consumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, undefined, 'Strenghten your Magikarp much', MagikarpCheck);
-ItemList.Shalour_Sable = new Consumable(ConsumableType.Shalour_Sable, Infinity, undefined, undefined, undefined, 'Strenghten your Magikarp a lot', MagikarpCheck);
+ItemList.Magikarp_Biscuit = new Consumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, undefined, 'Strenghten your Magikarp much', (pokemon: { [key: string]: any, id: number }): boolean => Math.floor(pokemon.id) === pokemonMap.Magikarp.id);
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();

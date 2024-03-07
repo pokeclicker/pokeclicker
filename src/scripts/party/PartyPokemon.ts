@@ -318,9 +318,7 @@ class PartyPokemon implements Saveable {
         }
         switch (type) {
             case GameConstants.ConsumableType.Rare_Candy:
-            case GameConstants.ConsumableType.Casteliacone:
-            case GameConstants.ConsumableType.Magikarp_Biscuit:
-            case GameConstants.ConsumableType.Shalour_Sable: amount = Math.min(amount, player.itemList[itemName]());
+            case GameConstants.ConsumableType.Magikarp_Biscuit: amount = Math.min(amount, player.itemList[itemName]());
                 const curAttack = this.calculateAttack(true);
                 const bonus = GameConstants.BREEDING_ATTACK_BONUS * (GameConstants[`${GameConstants.ConsumableType[type].toUpperCase()}_MULTIPLIER`] ?? 1);
                 GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);

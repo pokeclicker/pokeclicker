@@ -883,13 +883,9 @@ namespace GameConstants {
     declare const ModalCollapseList: string[];
     declare enum ConsumableType {
         Rare_Candy,
-        Casteliacone,
         Magikarp_Biscuit,
-        Shalour_Sable,
     }
-    declare const CASTELIACONE_MULTIPLIER: number;
     declare const MAGIKARP_BISCUIT_MULTIPLIER: number;
-    declare const SHALOUR_SABLE_MULTIPLIER: number;
     declare const zCrystalItemType: string[];
     declare enum ZMoveStatus {
         inactive,
