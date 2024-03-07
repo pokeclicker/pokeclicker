@@ -1808,7 +1808,7 @@ class QuestLineHelper {
         flareKalosQuestLine.addQuest(clearKalosLeague);
 
         // Battle AZ and finish the quest
-        const battleAZ1 = new DefeatTemporaryBattleQuest('Storyline AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward(flareKalosQuestLine, 'Key_stone', 1,));
+        const battleAZ1 = new DefeatTemporaryBattleQuest('Storyline AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward(flareKalosQuestLine, 'Key_stone', 1));
         flareKalosQuestLine.addQuest(battleAZ1);
 
         App.game.quests.questLines().push(flareKalosQuestLine);

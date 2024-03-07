@@ -4349,7 +4349,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         imageName: 'Gladion',
     }
 );
-TemporaryBattleList['Lillie'] = new TemporaryBattle(
+TemporaryBattleList.Lillie = new TemporaryBattle(
     'Lillie',
     [
         new GymPokemon('Solgaleo', 728176260, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1, 'Must have played the Sun Flute during Emissary of Light quest line')),
