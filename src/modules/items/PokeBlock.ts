@@ -10,6 +10,6 @@ export default class PokeBlock extends Item {
     }
     
     get description(): string {
-        return this._description || 'Unobtainable item for future uses';
+        return this._description || `A ${this.type} Pokéblock.`;
     }
 }
