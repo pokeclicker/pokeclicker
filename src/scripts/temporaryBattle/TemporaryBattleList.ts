@@ -4349,6 +4349,21 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         imageName: 'Gladion',
     }
 );
+TemporaryBattleList['Lillie'] = new TemporaryBattle(
+    'Lillie',
+    [
+        new GymPokemon('Solgaleo', 728176260, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1, 'Must have played the Sun Flute during Emissary of Light quest line')),
+        new GymPokemon('Lunala', 728176260, 50, new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1, 'Must have played the Moon Flute during Emissary of Light quest line')),
+    ],
+    'Nebby, you want to keep on traveling together with $playername$, don\'t you? Of course I can tell how you feel! After all...we\'re family now, aren\'t we?</br>$playername$! Nebby doesn\'t want this journey with you to end. And I want you to grant it this wish! Share the world with Nebby!',
+    [new QuestLineStepCompletedRequirement('Eater of Light', 1)],
+    [new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Lunala')])],
+    {
+        isTrainerBattle: false,
+        displayName: 'Pokémon Trainer Lillie',
+        imageName: 'Lillie (z powered)',
+    }
+);
 TemporaryBattleList['Guzma Bug Memory'] = new TemporaryBattle(
     'Guzma Bug Memory',
     [

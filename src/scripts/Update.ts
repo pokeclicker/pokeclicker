@@ -2643,6 +2643,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 249);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 250);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 251);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 262);
             // Reset temporary battles important to story; Reset questline Eater of Light
             saveData.statistics.temporaryBattleDefeated[247] = 0; // Gladion 2
             saveData.statistics.temporaryBattleDefeated[252] = 0; // Necrozma

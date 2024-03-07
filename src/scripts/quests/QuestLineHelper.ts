@@ -2787,6 +2787,10 @@ class QuestLineHelper {
         const talkToLillie8 = new TalkToNPCQuest(Lillie8, 'Everyone is finally safe again. Talk to Lillie.');
         ultraNecrozmaAlolaQuestLine.addQuest(talkToLillie8);
 
+        // 2 - Temp battle: Lillie
+        const battleLillie = new DefeatTemporaryBattleQuest('Lillie', 'You are challenged by Pokémon Trainer Lillie! Welcome her to the world of trainers by battling her at the Altar of the Sunne and Moone.');
+        ultraNecrozmaAlolaQuestLine.addQuest(battleLillie);
+
         // 2 - Clear dungeon boss: Mina\'s Houseboat, Mina's Trial
         this.createZCrystalTrial(PokemonType.Fairy, 'Mina\'s Houseboat', 'Mina', 'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!', ultraNecrozmaAlolaQuestLine);
 
