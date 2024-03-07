@@ -4357,7 +4357,7 @@ TemporaryBattleList['Lillie'] = new TemporaryBattle(
     ],
     'Nebby, you want to keep on traveling together with $playername$, don\'t you? Of course I can tell how you feel! After all...we\'re family now, aren\'t we?</br>$playername$! Nebby doesn\'t want this journey with you to end. And I want you to grant it this wish! Share the world with Nebby!',
     [new QuestLineStepCompletedRequirement('Eater of Light', 1)],
-    [new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Lunala')])],
+    [new TemporaryBattleRequirement('Lillie'), new OneFromManyRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Lunala')])],
     {
         isTrainerBattle: false,
         displayName: 'Pokémon Trainer Lillie',

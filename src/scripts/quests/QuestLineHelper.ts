@@ -2671,16 +2671,19 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
+        };
+
+        const EmissaryOfLightReward = () => {
             App.game.quests.getQuestLine('Emissary of Light').beginQuest(0, undefined, true);
         };
 
         const talkToLillie6 = new TalkToNPCQuest(Lillie6, 'Talk to Lillie.');
-        const talktoGladion1 = new TalkToNPCQuest(Gladion1, 'Talk to Gladion.');
+        const talktoGladion1 = new TalkToNPCQuest(Gladion1, 'Talk to Gladion.').withCustomReward(AlolaMasterballReward);
 
         ulaulaAlolaQuestLine.addQuest(new MultipleQuestsQuest([
             talkToLillie6,
             talktoGladion1,
-        ], 'Talk to Lillie and Gladion at Aether Paradise when you\'re ready to go to the next island.').withCustomReward(AlolaMasterballReward));
+        ], 'Talk to Lillie and Gladion at Aether Paradise when you\'re ready to go to the next island.').withCustomReward(EmissaryOfLightReward));
 
         // 14 - Temp battle: Haina Desert, Psychium Z
         const getPsychiumZ = new DefeatTemporaryBattleQuest('Psychium Z Trial', 'There are more Z Crystals on Ula\'ula. Find the Trial Site hidden in Haina Desert after clearing the Route.').withInitialValue(0);
