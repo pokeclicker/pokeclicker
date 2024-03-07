@@ -39,6 +39,8 @@ namespace GameConstants {
     declare const TEMP_BATTLE_TICK: number;
     declare const SPECIAL_EVENT_TICK: number;
     declare const ZMOVE_TICK: number;
+    declare const CONTEST_TIME: number;
+    declare const CONTEST_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -231,7 +233,8 @@ namespace GameConstants {
         town,
         shop,
         battleFrontier,
-        temporaryBattle
+        temporaryBattle,
+        contest
     }
     declare enum Pokeball {
         'None',

@@ -28,6 +28,8 @@ export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 export const SPECIAL_EVENT_TICK = 1 * SECOND;
 export const ZMOVE_TICK = 1 * SECOND;
+export const CONTEST_TIME = 10 * SECOND;
+export const CONTEST_TICK = 0.1 * SECOND;
 
 // Update the requirement for "Final Region Town" in TownList, when adding new regions.
 // Else the professor NPC won't work.
@@ -444,6 +446,7 @@ export enum GameState {
     shop = 7,
     battleFrontier = 8,
     temporaryBattle = 9,
+    contest = 10,
 }
 
 export enum Pokeball {
