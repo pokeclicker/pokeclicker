@@ -36,7 +36,7 @@ import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
-import ContestType from '../enums/ContestType';
+import ContestType from '../enums/ContestType'; // TODO: manual types for alt forms (ex. pinkans = cute)
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
