@@ -4341,7 +4341,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         new GymPokemon('Silvally (Grass)', 213569655, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.</br>Lillie\'s looking after our mother at the foundation. Hau\'s working hard to get stronger, too...</br>I know we aren\'t friends. But we aren\'t enemies anymore either. Keep winning. Maybe I\'ll see you again if you do.',
-    [new QuestLineStepCompletedRequirement('Eater of Light', 2)],
+    [new QuestLineStepCompletedRequirement('Eater of Light', 3)],
     undefined,
     {
         displayName: 'Pokémon Trainer Gladion',

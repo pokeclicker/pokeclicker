@@ -2791,14 +2791,14 @@ class QuestLineHelper {
         const battleLillie = new DefeatTemporaryBattleQuest('Lillie', 'You are challenged by Pokémon Trainer Lillie! Welcome her to the world of trainers by battling her at the Altar of the Sunne and Moone.');
         ultraNecrozmaAlolaQuestLine.addQuest(battleLillie);
 
-        // 2 - Clear dungeon boss: Mina\'s Houseboat, Mina's Trial
+        // 3 - Clear dungeon boss: Mina\'s Houseboat, Mina's Trial
         this.createZCrystalTrial(PokemonType.Fairy, 'Mina\'s Houseboat', 'Mina', 'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!', ultraNecrozmaAlolaQuestLine);
 
-        // 3 - Temp battle: Gladion 3
+        // 4 - Temp battle: Gladion 3
         const battleGladion3 = new DefeatTemporaryBattleQuest('Gladion 3', 'Battle Gladion on Ula\'ula one last time before ascending to the Pokémon League.');
         ultraNecrozmaAlolaQuestLine.addQuest(battleGladion3);
 
-        // 4 - Clear dungeon: Mount Lanakila
+        // 5 - Clear dungeon: Mount Lanakila
         const clearMountLanakila = new DefeatDungeonQuest(1, 0, 'Mount Lanakila').withDescription('One step closer to victory: Clear Mount Lanakila!')
             .withOptionalArgs({
                 clearedMessage: '<i>You see Necrozma unconscious in a crater, drained of light and in a dormant state. Best to let it rest for a while.</i>',
