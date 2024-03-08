@@ -165,6 +165,7 @@
 
             <div class="modal-footer">
                 <div id='refreshQuests'>
+                    <span data-bind="text: App.game.quests.getCompletionProgress().toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })"></span>
                     <!-- ko if: App.game.quests.freeRefresh() -->
                     <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)">Free Refresh</button>
                     <!-- /ko -->

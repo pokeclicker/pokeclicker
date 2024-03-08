@@ -249,10 +249,19 @@ class Quests implements Saveable {
      * Formula for the Money cost for refreshing quests
      * @returns 0 when all quests are complete, ~1 million when none are
      */
+    public getCompletionProgress(): number {
+        return this.questList().reduce((a, b) => a + b.tieredCompletionContribution(), 0);
+    }
+
     public getRefreshCost(): Amount {
         // If we have a free refersh, just assume all the quest are completed
-        const notComplete = this.freeRefresh() ? 0 : this.incompleteQuests().length;
-        const cost = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)) / 1000) * 1000;
+        if (this.freeRefresh()) {
+            return new Amount(0, GameConstants.Currency.money);
+        }
+
+        const progress = Math.max(0, Math.min(1, 1 - this.getCompletionProgress()));
+
+        const cost = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(progress * 10, 4) + 1)) / 1000) * 1000;
         return new Amount(Math.max(0, Math.min(1e6, cost)), GameConstants.Currency.money);
     }
 

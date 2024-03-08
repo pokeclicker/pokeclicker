@@ -35,6 +35,13 @@ const QuestTierXPMultipliers: { [key in (QuestTier)]: number } = {
     Insane: 10,
 };
 
+const QuestTierCompletionContribution: { [key in (QuestTier)]: number } = {
+    Easy: 0.10,
+    Medium: 0.15,
+    Hard: 0.20,
+    Insane: 0.25,
+};
+
 abstract class Quest {
     public static questObservable: KnockoutObservable<Quest> = ko.observable();
 
@@ -66,6 +73,7 @@ abstract class Quest {
     tier?: KnockoutObservable<QuestTier>;
     tieredAmount: KnockoutComputed<number>;
     tieredPointsReward: KnockoutComputed<number>;
+    tieredCompletionContribution: KnockoutComputed<number>;
 
     constructor(amount: number, pointsReward: number, tier: QuestTier = undefined) {
         this.amount = isNaN(amount) ? 0 : amount;
@@ -232,6 +240,13 @@ abstract class Quest {
 
         this.tieredPointsReward = ko.pureComputed(() => {
             return this.tier() ? Math.ceil(this.pointsReward * this.tieredAmount() * QuestTierRewardMultipliers[this.tier()]) : this.pointsReward;
+        });
+
+        this.tieredCompletionContribution = ko.pureComputed(() => {
+            if (this.claimed()) {
+                return this.tier() ? QuestTierCompletionContribution[this.tier()] : 0.1;
+            }
+            return 0;
         });
 
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
