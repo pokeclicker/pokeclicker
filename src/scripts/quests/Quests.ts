@@ -34,7 +34,7 @@ class Quests implements Saveable {
         if (this.level() >= 30) {
             available.push('Hard');
         }
-        if (this.level() >= 50) {
+        if (this.level() >= 40) {
             available.push('Insane');
         }
 
