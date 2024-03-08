@@ -336,10 +336,12 @@ class MapNavigation {
         let isPanning = false;
         let startPoint = { x: 0, y: 0 };
         let endPoint = { x: 0, y: 0 };
+        let initialViewBox = { x: 0, y: 0 };
 
         this.svgContainer.onmousedown = (e) => {
             isPanning = true;
             startPoint = { x: e.x, y: e.y };
+            initialViewBox = { x: this.viewBox.x, y: this.viewBox.y };
         };
 
         this.svgContainer.onmousemove = (e) => {
@@ -349,12 +351,12 @@ class MapNavigation {
             endPoint = { x: e.x, y: e.y };
             // TODO: Fix this calculation
             // No idea why / 3, but it's close enough
-            const dx = (startPoint.x - endPoint.x) / (this.scale / 3);
-            const dy = (startPoint.y - endPoint.y) / (this.scale / 3);
+            const dx = (startPoint.x - endPoint.x) * (this.scale);
+            const dy = (startPoint.y - endPoint.y) * (this.scale);
             const movedViewBox = {
                 // Don't let it go outside the bounds (min, max, calculated position + movement)
-                x: Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, this.viewBox.x + dx)),
-                y: Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, this.viewBox.y + dy)),
+                x: Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, initialViewBox.x + dx)),
+                y: Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, initialViewBox.y + dy)),
             };
             this.svgImage.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
         };
