@@ -261,8 +261,10 @@ class Quests implements Saveable {
 
         const progress = Math.max(0, Math.min(1, 1 - this.getCompletionProgress()));
 
-        const cost = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(progress * 10, 4) + 1)) / 1000) * 1000;
-        return new Amount(Math.max(0, Math.min(1e6, cost)), GameConstants.Currency.money);
+        const costPercentage = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(progress * 10, 4) + 1)) / 1000) / 1000;
+        const fullCost = 1e6 * (2 ** player.highestRegion());
+
+        return new Amount(Math.max(0, costPercentage * fullCost), GameConstants.Currency.money);
     }
 
     public canStartNewQuest(): boolean {
