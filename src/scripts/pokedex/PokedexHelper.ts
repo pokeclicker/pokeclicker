@@ -136,7 +136,7 @@ class PokedexHelper {
             }
             // Hide uncaught base forms if alternate non-regional form is caught
             if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) &&
-                App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion)
+                App.game.party.caughtPokemon.some((p) => Math.floor(p.id) == pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion)
             ) {
                 return false;
             }
