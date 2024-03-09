@@ -88,7 +88,7 @@ class DreamOrbController implements Saveable {
         });
         setTimeout(() => {
             const itemWeights = selectedOrb.items.map((i) => i.weight);
-            const items = {};
+            const items: Record<string | number, { amount: number; item: BagItem }> = {};
             for (let i = 0; i < amountToOpen; i++) {
                 const orbLoot = Rand.fromWeightedArray(selectedOrb.items, itemWeights);
                 items[orbLoot.item.id] ?
@@ -104,7 +104,7 @@ class DreamOrbController implements Saveable {
             });
             this.opening(false);
             this.amountOpened(amountToOpen);
-            this.itemsReceived(Object.keys(items).map((key) => ({ name: ItemList[key].displayName, ...items[key] })));
+            this.itemsReceived(Object.values(items).map((item) => ({ name: BagHandler.displayName(item.item), ...item })));
             if (amountToOpen > 1) {
                 $('#dreamOrbsOpenedModal').modal('show');
             }
