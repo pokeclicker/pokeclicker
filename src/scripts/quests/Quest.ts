@@ -30,9 +30,9 @@ const QuestTierRewardMultipliers: { [key in (QuestTier)]: number } = {
 
 const QuestTierXPMultipliers: { [key in (QuestTier)]: number } = {
     Easy: 1,
-    Medium: 2,
-    Hard: 5,
-    Insane: 10,
+    Medium: 10,
+    Hard: 50,
+    Insane: 100,
 };
 
 const QuestTierCompletionContribution: { [key in (QuestTier)]: number } = {
