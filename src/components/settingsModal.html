@@ -548,7 +548,10 @@
             data-bind="checked: $data.desktopNotification.observableValue(), attr: { name: $data.desktopNotification.name, id: 'checkbox-desktop-' + $data.desktopNotification.name }",
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
-    <td class="p-2 align-middle tight">
+    <td class="p-2 align-middle tight" data-bind="tooltip: {
+        title: 'Notification duration, in seconds',
+        trigger: 'hover',
+    }">
         <!-- ko if: $data.notificationDuration -->
         <label data-bind="attr: { for: 'input-duration-' + $data.notificationDuration.name }">⏳</label>
         <input class="text-center clickable" style="width: 60px;" type="number"
