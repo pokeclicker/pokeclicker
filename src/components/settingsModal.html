@@ -519,12 +519,12 @@
 </script>
 
 <script type="text/html" id="NotificationSettingTemplate">
-    <td class="p-2">
+    <td class="p-2 align-middle">
         <label class="m-0" data-bind="attr: { for: 'checkbox-game-' + $data.name }, text: `${$data.displayName}:`">
             setting name
         </label>
     </td>
-    <td class="p-2 tight" data-bind="tooltip: {
+    <td class="p-2 align-middle tight" data-bind="tooltip: {
         title: 'In game notifications',
         trigger: 'hover',
     }">
@@ -539,7 +539,7 @@
         <input type="checkbox" checked disabled/>
         <!-- /ko -->
     </td>
-    <td class="p-2 tight" data-bind="tooltip: {
+    <td class="p-2 align-middle tight" data-bind="tooltip: {
         title: 'Desktop notifications, these can be seen even if the game is not in focus',
         trigger: 'hover',
     }">
@@ -547,6 +547,12 @@
         <input class="clickable" type="checkbox"
             data-bind="checked: $data.desktopNotification.observableValue(), attr: { name: $data.desktopNotification.name, id: 'checkbox-desktop-' + $data.desktopNotification.name }",
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
+    </td>
+    <td class="p-2 align-middle tight">
+        <label data-bind="attr: { for: 'input-duration-' + $data.notificationDuration.name }">⏳</label>
+        <input class="clickable col-xs-2" style="width: 60px;" type="number"
+               data-bind="value: $data.notificationDuration.value / 1000, attr: { name: $data.notificationDuration.name, id: 'input-duration-' + $data.notificationDuration.name }"
+               onchange="Settings.setSettingByName(this.name, this.value * 1000)"/>
     </td>
 </script>
 

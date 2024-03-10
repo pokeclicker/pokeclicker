@@ -190,6 +190,7 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
             Settings.add(setting.inGameNotification);
         }
         Settings.add(setting.desktopNotification);
+        Settings.add(setting.notificationDuration);
     });
 });
 
