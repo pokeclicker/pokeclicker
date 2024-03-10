@@ -79,7 +79,7 @@ class PurifyChamber implements Saveable {
                 message: 'Maximum Flow has accumulated at the Purify Chamber in Orre!',
                 type: NotificationConstants.NotificationOption.primary,
                 sound: NotificationConstants.NotificationSound.General.max_flow,
-                timeout: 15 * GameConstants.MINUTE,
+                setting: NotificationConstants.NotificationSetting.General.max_flow,
             });
         }
     }

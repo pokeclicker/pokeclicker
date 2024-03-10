@@ -53,6 +53,7 @@ const NotificationConstants = {
             new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, 3000, true),
             battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, 1800000, true), // 30 Minutes
             pokerus: new NotificationSetting('notification.pokerus', 'Pokémon has become Resistant to Pokérus', true, 3000),
+            max_flow: new NotificationSetting('notification.max_flow', 'Maximum Flow has accumulated at the Purify Chamber', true, 900000), // 15 Minutes
         },
         Hatchery: {
             ready_to_hatch: new NotificationSetting('notification.ready_to_hatch', 'Egg ready to hatch', true, 3000),
