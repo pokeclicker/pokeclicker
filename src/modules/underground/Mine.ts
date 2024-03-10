@@ -386,7 +386,7 @@ export class Mine {
                             message: `You found an extra ${humanifyString(itemName)} in the Mine!`,
                             type: NotificationConstants.NotificationOption.success,
                             title: 'Treasure Scanner',
-                            timeout: setting.notificationDuration ? setting.notificationDuration.value + 1000 : undefined,
+                            timeout: setting.notificationDuration ? setting.notificationDuration.value + 1000 : 4000,
                             setting: setting,
                         });
 
@@ -396,7 +396,7 @@ export class Mine {
                                 message: `Lucky! You found another ${humanifyString(itemName)}!`,
                                 type: NotificationConstants.NotificationOption.success,
                                 title: 'Treasure Scanner',
-                                timeout: setting.notificationDuration ? setting.notificationDuration.value + 3000 : undefined,
+                                timeout: setting.notificationDuration ? setting.notificationDuration.value + 3000 : 6000,
                                 setting: setting,
                             });
 
@@ -406,7 +406,7 @@ export class Mine {
                                     message: `Jackpot! You found another ${humanifyString(itemName)}!`,
                                     type: NotificationConstants.NotificationOption.success,
                                     title: 'Treasure Scanner',
-                                    timeout: setting.notificationDuration ? setting.notificationDuration.value + 5000 : undefined,
+                                    timeout: setting.notificationDuration ? setting.notificationDuration.value + 5000 : 8000,
                                     setting: setting,
                                 });
                             }
