@@ -47,7 +47,7 @@ export default class Notifier {
                 });
                 setTimeout(() => {
                     desktopNotification.close();
-                }, timeout || setting.notificationDuration.value || DEFAULT_TIMEOUT);
+                }, timeout || setting?.notificationDuration?.value || DEFAULT_TIMEOUT);
             }
 
             // Check if this type of notification is disabled
@@ -82,7 +82,7 @@ export default class Notifier {
             $(`#${toastID}`).on('shown.bs.toast', () => {
                 setTimeout(() => {
                     $(`#${toastID}`).toast('hide');
-                }, timeout || setting.notificationDuration.value || DEFAULT_TIMEOUT);
+                }, timeout || setting?.notificationDuration?.value || DEFAULT_TIMEOUT);
             });
 
             // Once hidden remove the element

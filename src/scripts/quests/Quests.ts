@@ -119,7 +119,6 @@ class Quests implements Saveable {
                 Notifier.notify({
                     message: '<i>All quests completed. Your quest list has been refreshed.</i>',
                     type: NotificationConstants.NotificationOption.info,
-                    timeout: 1e4,
                     setting: NotificationConstants.NotificationSetting.General.quest_completed,
                 });
             }

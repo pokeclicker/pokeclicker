@@ -124,7 +124,7 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
                                 <tr data-bind="with: Settings.getSetting('disableAutoSave')">
-                                    <td class="p-2">
+                                    <td class="p-2 text-left">
                                         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`"></label>
                                     </td>
                                     <td class="p-2">
@@ -152,7 +152,7 @@
                                     </td>
                                 </tr>
                                 <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
-                                    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
+                                    <td class="p-2 text-left" data-bind="text: `${$data.displayName}:`">setting name</td>
                                     <td class="p-0">
                                         <input type="text" class="form-control"
                                             data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
@@ -231,7 +231,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
                                 <tr>
-                                    <td class="p-2">
+                                    <td class="p-2 text-left">
                                         <knockout data-bind="text: App.translation.get('hotkey.underground.useRestore', 'settings', { defaultValue: 'Use Restore'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
@@ -247,7 +247,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="p-2">
+                                    <td class="p-2 text-left">
                                         <knockout data-bind="text: App.translation.get('hotkey.oakItems.toggle', 'settings', { defaultValue: 'Toggle Oak Item'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
@@ -263,7 +263,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="p-2">
+                                    <td class="p-2 text-left">
                                         <knockout data-bind="text: App.translation.get('hotkey.pokeballSelector.select', 'settings', { defaultValue: 'Select Poké Ball Type'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
@@ -290,7 +290,7 @@
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.town.start')}"></tr>
                                 <tr>
-                                    <td class="p-2">
+                                    <td class="p-2 text-left">
                                         <knockout data-bind="text: App.translation.get('hotkey.town.accessContent', 'settings', { defaultValue: 'Access the towns content'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
@@ -306,7 +306,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="p-2">
+                                    <td class="p-2 text-left">
                                         <knockout data-bind="text: App.translation.get('hotkey.shop.selectItem', 'settings', { defaultValue: 'Select item'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
@@ -326,7 +326,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="p-2">
+                                    <td class="p-2 text-left">
                                         <knockout data-bind="text: App.translation.get('hotkey.ship.selectRegion', 'settings', { defaultValue: 'Select region'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
@@ -351,7 +351,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="p-2">
+                                    <td class="p-2 text-left">
                                         <knockout data-bind="text: App.translation.get('hotkey.changeRoutes', 'settings', { defaultValue: 'Change Routes'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
@@ -374,7 +374,7 @@
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('saveReminder')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
 								<tr data-bind="with : Settings.getSetting('saveFilename')">
-									<td class="p-2" data-bind="text : `${$data.displayName}:`">setting name</td>
+									<td class="p-2 text-left" data-bind="text : `${$data.displayName}:`">setting name</td>
 									<td class="p-0">
 										<input type="text" class="form-control"
                                             data-bind="attr : {name : $data.name, id : `setting-${$data.name}`, placeholder : $data.defaultValue}, textInput : $data.observableValue, tooltip : {title: 'Special tags {name}, {version} and {date} are automatically filled', trigger: 'hover'}"
@@ -458,7 +458,7 @@
 
 
 <script type="text/html" id="MultipleChoiceSettingTemplate">
-    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
+    <td class="p-2 text-left" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0">
         <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.getValidOptions(), attr: {name}">
             <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
@@ -467,7 +467,7 @@
 </script>
 
 <script type="text/html" id="BooleanSettingTemplate">
-    <td class="p-2">
+    <td class="p-2 text-left">
         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
             setting name
         </label>
@@ -480,7 +480,7 @@
 </script>
 
 <script type="text/html" id="BooleanSettingSliderTemplate">
-    <td class="p-2">
+    <td class="p-2 text-left">
         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
             setting name
         </label>
@@ -498,7 +498,7 @@
 </script>
 
 <script type="text/html" id="SoundSettingTemplate">
-    <td class="p-2">
+    <td class="p-2 text-left">
         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.setting.name }, text: `${$data.setting.displayName}:`">
             setting name
         </label>
@@ -519,7 +519,7 @@
 </script>
 
 <script type="text/html" id="NotificationSettingTemplate">
-    <td class="p-2 align-middle">
+    <td class="p-2 text-left align-middle">
         <label class="m-0" data-bind="attr: { for: 'checkbox-game-' + $data.name }, text: `${$data.displayName}:`">
             setting name
         </label>
@@ -549,10 +549,12 @@
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
     <td class="p-2 align-middle tight">
+        <!-- ko if: $data.notificationDuration -->
         <label data-bind="attr: { for: 'input-duration-' + $data.notificationDuration.name }">⏳</label>
-        <input class="clickable col-xs-2" style="width: 60px;" type="number"
+        <input class="text-center clickable" style="width: 60px;" type="number"
                data-bind="value: $data.notificationDuration.value / 1000, attr: { name: $data.notificationDuration.name, id: 'input-duration-' + $data.notificationDuration.name }"
                onchange="Settings.setSettingByName(this.name, this.value * 1000)"/>
+        <!-- /ko -->
     </td>
 </script>
 
@@ -565,7 +567,7 @@
 </script>
 
 <script type="text/html" id="ColorChoiceSettingTemplate">
-    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
+    <td class="p-2 text-left" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0" data-bind="style: { background: $data.observableValue },
     tooltip: {
         title: 'Set to white for transparent',
@@ -576,7 +578,7 @@
 </script>
 
 <script type="text/html" id="KeyChoiceSettingTemplate">
-    <td class="p-2">
+    <td class="p-2 text-left">
         <knockout data-bind="text: `${$data.displayName}:`">setting name</knockout>
     </td>
     <td class="p-0" data-bind="tooltip: {

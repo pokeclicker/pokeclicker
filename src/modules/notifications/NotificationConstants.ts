@@ -44,22 +44,22 @@ const NotificationConstants = {
         General: {
             encountered_shiny: new NotificationSetting('notification.encountered_shiny', 'Encountered a shiny Pokémon', true, 3000),
             encountered_roaming: new NotificationSetting('notification.encountered_roaming', 'Encountered a roaming Pokémon', true, 3000),
-            quest_ready_to_complete: new NotificationSetting('notification.quest_ready_to_complete', 'Quest is ready to be completed', true, 3000),
-            quest_completed: new NotificationSetting('notification.quest_completed', 'Quest completed', true, 3000),
-            event_start_end: new NotificationSetting('notification.event_start_end', 'Event start/end information', true, 3000),
+            quest_ready_to_complete: new NotificationSetting('notification.quest_ready_to_complete', 'Quest is ready to be completed', true, 5000),
+            quest_completed: new NotificationSetting('notification.quest_completed', 'Quest completed', true, 10000),
+            event_start_end: new NotificationSetting('notification.event_start_end', 'Event start/end information', true),
             gym_won: new NotificationSetting('notification.gym_won', 'Gym leader defeated', true, 3000),
-            offline_earnings: new NotificationSetting('notification.offline_earnings', 'Offline earnings', true, 3000),
-            achievement_complete: new NotificationSetting('notification.achievement_complete', 'Achievement complete', true, 3000, true),
+            offline_earnings: new NotificationSetting('notification.offline_earnings', 'Offline earnings', true, 120000), // 2 Minutes
+            achievement_complete: new NotificationSetting('notification.achievement_complete', 'Achievement complete', true, 10000, true),
             new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, 3000, true),
-            battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, 3000, true),
+            battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, 1800000, true), // 30 Minutes
             pokerus: new NotificationSetting('notification.pokerus', 'Pokémon has become Resistant to Pokérus', true, 3000),
         },
         Hatchery: {
             ready_to_hatch: new NotificationSetting('notification.ready_to_hatch', 'Egg ready to hatch', true, 3000),
             hatched: new NotificationSetting('notification.hatched', 'Egg hatched', true, 3000),
             hatched_shiny: new NotificationSetting('notification.hatched_shiny', 'Egg hatched a shiny', true, 3000),
-            empty_queue: new NotificationSetting('empty_queue', 'Hatchery queue is empty', true, 3000),
-            hatchery_helper: new NotificationSetting('notification.hatchery_helper', 'Hatchery Helper Hired/Fired', true, 3000),
+            empty_queue: new NotificationSetting('empty_queue', 'Hatchery queue is empty', true, 10000),
+            hatchery_helper: new NotificationSetting('notification.hatchery_helper', 'Hatchery Helper Hired/Fired', true, 30000),
         },
         Dungeons: {
             dungeon_complete: new NotificationSetting('notification.dungeon_complete', 'Dungeon completed', true, 3000),
@@ -73,7 +73,7 @@ const NotificationConstants = {
             item_bought: new NotificationSetting('notification.item_bought', 'Item bought', true, 3000),
         },
         Underground: {
-            underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true, 3000),
+            underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true, 10000),
             underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining energy restored', true, 3000),
             underground_dig_deeper: new NotificationSetting('notifcation.underground_dig_deeper', 'You dig deeper...', true, 3000),
             underground_item_found: new NotificationSetting('notification.underground_item_found', 'Item found while mining', true, 3000),
@@ -88,7 +88,7 @@ const NotificationConstants = {
             berry_dropped: new NotificationSetting('notification.berry_dropped', 'Berry has been dropped', true, 3000),
             mulch_ran_out: new NotificationSetting('notification.mulch_ran_out', 'Mulch has run out', true, 3000),
             wandering_pokemon: new NotificationSetting('notification.wandering_pokemon', 'Wandering Pokémon encountered', true, 3000),
-            farm_hand: new NotificationSetting('notification.farm_hand', 'Farm Hand Hired/Fired', true, 3000),
+            farm_hand: new NotificationSetting('notification.farm_hand', 'Farm Hand Hired/Fired', true, 30000),
         },
     },
 };

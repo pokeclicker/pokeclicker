@@ -12,7 +12,7 @@ export default class NotificationSetting {
 
     private cachedTranslatedName: Computed<string>;
 
-    constructor(public name: string, public defaultDisplayName: string, defaultValueInGame: boolean, defaultDuration: number, lockInGame: boolean = false) {
+    constructor(public name: string, public defaultDisplayName: string, defaultValueInGame: boolean, defaultDuration?: number, lockInGame: boolean = false) {
         if (!lockInGame) {
             this.inGameNotification = new BooleanSetting(name, defaultDisplayName, defaultValueInGame ?? false);
         }
@@ -41,7 +41,9 @@ export default class NotificationSetting {
                 }
             }
         });
-        this.notificationDuration = new Setting<number>(`${name}.duration`, defaultDisplayName, [], defaultDuration);
+        if (!isNaN(defaultDuration)) {
+            this.notificationDuration = new Setting<number>(`${name}.duration`, defaultDisplayName, [], defaultDuration);
+        }
     }
 
     get displayName(): string {

@@ -193,7 +193,6 @@ abstract class Quest {
                     message: `You can complete your quest for <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
                     strippedMessage: `You can complete your quest for ${this.pointsReward.toLocaleString('en-US')} Quest Points!`,
                     type: NotificationConstants.NotificationOption.success,
-                    timeout: 5e3,
                     sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
                     setting: NotificationConstants.NotificationSetting.General.quest_ready_to_complete,
                 });
