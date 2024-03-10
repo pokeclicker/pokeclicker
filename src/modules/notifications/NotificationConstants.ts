@@ -69,6 +69,7 @@ const NotificationConstants = {
         Items: {
             route_item_found: new NotificationSetting('notification.route_item_found', 'Berry found during route battle', true, 3000),
             battle_item_timer: new NotificationSetting('notification.battle_item_timer', 'Battle item about to wear off', true, 3000),
+            flute_timer: new NotificationSetting('notification.flute_timer', 'Flute about to run out of gems', true, 60000),
             dropped_item: new NotificationSetting('notification.dropped_item', 'Enemy Pokémon dropped an item', true, 3000),
             item_bought: new NotificationSetting('notification.item_bought', 'Item bought', true, 3000),
         },
