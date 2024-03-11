@@ -129,6 +129,9 @@
                                 'data': {'totalBonus': App.game.underground.getSurvey_Efficiency(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Efficiency)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
                                 'data': {'totalBonus' : App.game.underground.getSizeY() - Underground.sizeY, 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer)}}"></tr>
+                            <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards)}}"></tr>
+                            <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Plates)}}"></tr>
+                            <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Evolution_Items)}}"></tr>
                         </tbody>
                     </table>
                 </div>
@@ -298,6 +301,24 @@
                     data-bind='css: { disabled: !upgrade.canBuy() },
                                 text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
                                 click: function(){upgrade.buy(); DailyDeal.generateDeals(App.game.underground.getDailyDealsMax(), new Date());}'>
+            </button>
+        </td>
+    </script>
+
+    <script type="text/html" id="undergroundUpgradeToggleTemplate">
+        <td class='vertical-middle' data-bind='text: upgrade.displayName'></td>
+        <td class='vertical-middle'></td>
+        <td class='vertical-middle'
+            data-bind="text: upgrade.isMaxLevel() ? '' : upgrade.calculateCost().amount.toLocaleString('en-US') + ' Diamonds'"></td>
+        <td class='vertical-middle'>
+            <button class='btn btn-block'
+                    data-bind='css: {
+                            disabled: !upgrade.isMaxLevel() && !upgrade.canAfford(),
+                            "btn-success": !upgrade.isMaxLevel() || Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
+                            "btn-danger": upgrade.isMaxLevel() && !Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
+                        },
+                        text: upgrade.isMaxLevel() ? Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue() ? "Enabled" : "Disabled" : "Unlock",
+                        click: () => upgrade.canBuy() ? upgrade.buy() : Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).toggle()'>
             </button>
         </td>
     </script>
