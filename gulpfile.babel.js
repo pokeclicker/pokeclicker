@@ -191,7 +191,7 @@ gulp.task('scripts', () => {
         .pipe(replace(/(^|\n)export(?!.*from)( default)?/g, '\n'))
         // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
-        // Wrap GameConstants in a namespace for scripts compatibility
+        // Wrap globally-exported module declarations in namespaces for scripts compatibility
         .pipe(globalModulesFilter)
         .pipe(replace(/(?=declare)/, function handleReplace() {
             const filename = this.file.basename.replace(/\..*$/, '');
