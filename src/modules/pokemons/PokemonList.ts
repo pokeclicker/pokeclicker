@@ -29423,7 +29423,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [DummyEvolution('Bramblin', 'Brambleghast')],
     },
     {
-        'id': 946,
+        'id': 947,
         'name': 'Brambleghast',
         'type': [PokemonType.Grass, PokemonType.Ghost],
         'base': {
