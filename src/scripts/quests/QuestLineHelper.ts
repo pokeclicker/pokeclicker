@@ -4,11 +4,11 @@ class QuestLineHelper {
 
     // Multi-quest statics
     // Item rewards
-    public static itemReward = (questline: QuestLine, item: ItemNameType, amount: number, npc?: string) => (function() {
+    public static itemReward = (item: ItemNameType, amount: number, npc?: string) => (function() {
         player.gainItem(item, amount);
         const subject = npc ? `${npc} has given you` : 'You found';
         Notifier.notify({
-            title: questline.name,
+            title: this.parentQuestLine?.name,
             message: `${subject} ${amount} ${GameConstants.humanifyString(item)}(s)!`,
             type: NotificationConstants.NotificationOption.success,
             sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
@@ -170,7 +170,7 @@ class QuestLineHelper {
         ],'Bill\'s Grandpa wants you to catch a Pokémon that is pink and like a balloon.'));
 
         // Talk to Bill's Grandpa after catching a Jigglypuff
-        const talkToBillsGrandpa2 = new TalkToNPCQuest(BillsGrandpa2, 'Show your Jigglypuff to Bill\'s Grandpa.').withCustomReward(this.itemReward(BillsGrandpaQuestLine, 'Moon_stone', 1, 'Bill\'s Grandpa'));
+        const talkToBillsGrandpa2 = new TalkToNPCQuest(BillsGrandpa2, 'Show your Jigglypuff to Bill\'s Grandpa.').withCustomReward(this.itemReward('Moon_stone', 1, 'Bill\'s Grandpa'));
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa2);
 
         const blueRound = new CaptureSpecificPokemonQuest('Oddish', 1).withDescription('Catch the desired Pokémon.');
@@ -184,7 +184,7 @@ class QuestLineHelper {
         ],'Bill\'s Grandpa wants you to catch a Pokémon that is round, blue, and has leaves growing on its head.'));
 
         // Talk to Bill's Grandpa after catching an Oddish
-        const talkToBillsGrandpa3 = new TalkToNPCQuest(BillsGrandpa3, 'Show your Oddish to Bill\'s Grandpa.').withCustomReward(this.itemReward(BillsGrandpaQuestLine, 'Leaf_stone', 1, 'Bill\'s Grandpa'));
+        const talkToBillsGrandpa3 = new TalkToNPCQuest(BillsGrandpa3, 'Show your Oddish to Bill\'s Grandpa.').withCustomReward(this.itemReward('Leaf_stone', 1, 'Bill\'s Grandpa'));
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa3);
 
         const redSphere = new CaptureSpecificPokemonQuest('Staryu', 1).withDescription('Catch the desired Pokémon.');
@@ -198,7 +198,7 @@ class QuestLineHelper {
         ],'Bill\'s Grandpa wants you to catch a Pokémon that it has a red sphere in its body and is shaped like a star.'));
 
         // Talk to Bill's Grandpa after catching a Staryu
-        const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu to Bill\'s Grandpa.').withCustomReward(this.itemReward(BillsGrandpaQuestLine, 'Water_stone', 1, 'Bill\'s Grandpa'));
+        const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu to Bill\'s Grandpa.').withCustomReward(this.itemReward('Water_stone', 1, 'Bill\'s Grandpa'));
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa4);
 
         const loyalRoar = new CaptureSpecificPokemonQuest('Growlithe', 1).withDescription('Catch the desired Pokémon.');
@@ -212,7 +212,7 @@ class QuestLineHelper {
         ],'Bill\'s Grandpa wants you to catch a Pokémon that is very loyal and supposedly roars pretty well.'));
 
         // Talk to Bill's Grandpa after catching a Growlithe
-        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe to Bill\'s Grandpa.').withCustomReward(this.itemReward(BillsGrandpaQuestLine, 'Fire_stone', 1, 'Bill\'s Grandpa'));
+        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe to Bill\'s Grandpa.').withCustomReward(this.itemReward('Fire_stone', 1, 'Bill\'s Grandpa'));
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa5);
 
         const yellowAndRed = new CaptureSpecificPokemonQuest('Pikachu', 1).withDescription('Catch the desired Pokémon.');
@@ -226,7 +226,7 @@ class QuestLineHelper {
         ],'Bill\'s Grandpa wants you to catch a Pokémon that has a yellow body and red cheeks.'));
 
         // Talk to Bill's Grandpa after catching a Pikachu
-        const talkToBillsGrandpa6 = new TalkToNPCQuest(BillsGrandpa6, 'Show your Pikachu to Bill\'s Grandpa.').withCustomReward(this.itemReward(BillsGrandpaQuestLine, 'Thunder_stone', 1, 'Bill\'s Grandpa'));
+        const talkToBillsGrandpa6 = new TalkToNPCQuest(BillsGrandpa6, 'Show your Pikachu to Bill\'s Grandpa.').withCustomReward(this.itemReward( 'Thunder_stone', 1, 'Bill\'s Grandpa'));
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa6);
 
         const fightBillsGrandpa = new DefeatTemporaryBattleQuest('Bill\'s Grandpa', 'Bill\'s Grandpa would like to have a battle with you!');
@@ -1550,7 +1550,7 @@ class QuestLineHelper {
         const talkToSnattle = new TalkToNPCQuest(Snattle, 'Talk to Cipher Admin Snattle at the Phenac Stadium.'); //Step 15
         orreXDQuestLine.addQuest(talkToSnattle);
 
-        const talkToMayorTrest = new TalkToNPCQuest(Trest, 'Talk to Mayor Trest at the Phenac City.').withCustomReward(this.itemReward(orreXDQuestLine, 'Rare_Candy', 50, 'Mayor Trest'));
+        const talkToMayorTrest = new TalkToNPCQuest(Trest, 'Talk to Mayor Trest at the Phenac City.').withCustomReward(this.itemReward('Rare_Candy', 50, 'Mayor Trest'));
         orreXDQuestLine.addQuest(talkToMayorTrest);
 
         const talkToVerich = new TalkToNPCQuest(Verich, 'Talk to the wealthy Mr. Verich at Gateon Port to learn more about the S. S. Libra.');
@@ -1808,7 +1808,7 @@ class QuestLineHelper {
         flareKalosQuestLine.addQuest(clearKalosLeague);
 
         // Battle AZ and finish the quest
-        const battleAZ1 = new DefeatTemporaryBattleQuest('Storyline AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward(flareKalosQuestLine, 'Key_stone', 1));
+        const battleAZ1 = new DefeatTemporaryBattleQuest('Storyline AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward('Key_stone', 1));
         flareKalosQuestLine.addQuest(battleAZ1);
 
         App.game.quests.questLines().push(flareKalosQuestLine);
@@ -2504,7 +2504,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(talkToLillie2);
 
         // 10 - Talk to NPC: Lillie3
-        const talkToLillie3 = new TalkToNPCQuest(Lillie3, 'Lillie still has something on her mind. Talk to her in Iki Town.').withCustomReward(this.itemReward(melemeleAlolaQuestLine, 'Revive', 10, 'Lillie'));
+        const talkToLillie3 = new TalkToNPCQuest(Lillie3, 'Lillie still has something on her mind. Talk to her in Iki Town.').withCustomReward(this.itemReward('Revive', 10, 'Lillie'));
         melemeleAlolaQuestLine.addQuest(talkToLillie3);
 
         // 11 - Gym Battle: Hala
@@ -2553,7 +2553,7 @@ class QuestLineHelper {
         this.createZCrystalTrial(PokemonType.Grass, 'Lush Jungle', 'Mallow', 'Wow, you\'re even stronger than I thought! Looks like you\'ve cleared all three of Akala\'s trials! Here! A gift for such an inspiring young Trainer!', akalaAlolaQuestLine);
 
         // 6 - Talk to NPC: ProfBurnetAlola
-        const talkToBurnet1 = new TalkToNPCQuest(ProfBurnetAlola1, 'Talk to Professor Burnet in Heahea City after you\'ve finished exploring Lush Jungle.').withCustomReward(this.itemReward(akalaAlolaQuestLine, 'Rare_Candy', 10, 'Professor Burnet'));
+        const talkToBurnet1 = new TalkToNPCQuest(ProfBurnetAlola1, 'Talk to Professor Burnet in Heahea City after you\'ve finished exploring Lush Jungle.').withCustomReward(this.itemReward('Rare_Candy', 10, 'Professor Burnet'));
         akalaAlolaQuestLine.addQuest(talkToBurnet1);
 
         // 7 - Clear dungeon: Diglett's tunnel
