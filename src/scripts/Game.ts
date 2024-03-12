@@ -122,6 +122,7 @@ class Game {
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
         PokemonContestController.generateDailyContest(now);
+        MapNavigation.enableZoom();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();

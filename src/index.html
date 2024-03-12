@@ -313,7 +313,7 @@
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
-                    <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
+                    <button class='btn btn-lg py-0 px-2' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px; font-size: 24px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
                     data-content=""
                     data-placement="bottom" data-bind="attr: {'data-content': `<div class='row map-legend'>
                             <div class='col-12'>
@@ -331,6 +331,8 @@
                                 <i>NOTE: These colors can be customized in the settings menu</i>
                             </div>
                         </div>`}">ⓘ</button>
+                    <button class='btn btn-lg py-0 px-2' style="position: absolute; left: 40px; top: 0px; width: auto; height: 41px; font-size: 24px;" data-toggle="tooltip" data-trigger="hover"
+                    data-content="Toggle Full-screen" data-placement="bottom" data-bind="click: () => document.getElementById('townMap').classList.toggle('full-screen')">&#x26F6;</button>
                     <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: DayCycle.color() },
                         tooltip: {
