@@ -6198,7 +6198,7 @@ const FriendlyAttendant = new NPC('Friendly Attendant', [
     'This place is a lot like the Kanto Safari Zone, except we get a much wider variety of Pokémon coming through here.',
     'Our park staff stocks the Safari with different hard-to-find Pokémon every day. Many of these Pokémon can\'t be caught anywhere else in the world!',
     'As new and rare types of Pokémon are discovered, park staff will add them to our rotation of potential stock!',
-]);
+], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
 
 const BugCatcherScizor = new NPC('Bug Catcher Elliot', [
     'I heard there was a stone hidden in the Friend Safari that makes Scizor stronger!',
