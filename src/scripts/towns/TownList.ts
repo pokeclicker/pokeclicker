@@ -792,10 +792,6 @@ const NewIslandAsh2 = new NPC('Ash Ketchum',
     }
 );
 
-const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
-    'All sorts of unique Pokémon can be found in the Safari Zone!',
-], GameConstants.Region.kanto, 'assets/images/npcs/Pokémon Breeder (male).png');
-
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
     'But... I don\'t have a high enough Safari Level to find it.',
@@ -1016,7 +1012,7 @@ TownList['Safari Zone'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket)), 1, 'Obtain the Safari Ticket')],
-        npcs: [KantoSafariRanger, BugCatcherPinsir],
+        npcs: [BugCatcherPinsir],
     }
 );
 TownList['Cinnabar Island'] = new Town(
@@ -4131,10 +4127,6 @@ const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
 
-const SinnohSafariRanger = new SafariPokemonNPC('Safari Ranger', [
-    'There are some Pokémon here that can\'t be found anywhere else in Sinnoh!',
-], GameConstants.Region.sinnoh, 'assets/images/npcs/Pokemon Ranger (female).png');
-
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
 ]);
@@ -4592,7 +4584,7 @@ TownList['Great Marsh'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
-        npcs: [SinnohSafariRanger],
+        npcs: [],
     }
 );
 TownList['Snowpoint City'] = new Town(
@@ -6201,11 +6193,6 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     ]),
 });
 
-const KalosSafariRanger = new SafariPokemonNPC('Safari Ranger', [
-    'We\'ve had sightings of several unique Pokémon today along with the usual familiar faces!',
-    'These Pokémon will hide from trainers unless captured elsewhere first.',
-], GameConstants.Region.kalos, 'assets/images/npcs/Pokemon Ranger (female).png');
-
 const FriendlyAttendant = new NPC('Friendly Attendant', [
     'Welcome to the Friend Safari!',
     'This place is a lot like the Kanto Safari Zone, except we get a much wider variety of Pokémon coming through here.',
@@ -6438,7 +6425,7 @@ TownList['Friend Safari'] = new Town(
     [new SafariTownContent('Enter Friend Safari')],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [KalosSafariRanger, FriendlyAttendant, BugCatcherScizor],
+        npcs: [FriendlyAttendant, BugCatcherScizor],
     }
 );
 
