@@ -234,7 +234,7 @@ class BattleCafeController {
         }
     }
 
-    public static evolutions: Record<GameConstants.AlcremieSweet, Partial<Record<GameConstants.AlcremieSpins, PokemonItem>>> = {
+    public static evolutions: Record<GameConstants.AlcremieSweet, Record<Exclude<GameConstants.AlcremieSpins, GameConstants.AlcremieSpins.Any3600>, PokemonItem>> = {
         [GameConstants.AlcremieSweet['Strawberry Sweet']]: {
             [GameConstants.AlcremieSpins.dayClockwiseBelow5]: new PokemonItem('Alcremie (Strawberry Vanilla)', 0),
             [GameConstants.AlcremieSpins.dayCounterclockwiseBelow5]: new PokemonItem('Alcremie (Strawberry Ruby Cream)', 0),
