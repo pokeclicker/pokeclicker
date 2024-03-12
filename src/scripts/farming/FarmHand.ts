@@ -157,8 +157,12 @@ class FarmHand {
     }
 
     tick(): void {
-        // If not hired and energy full, there's nothing to do
-        if (!this.hired() && this.energy() >= this.maxEnergy) {
+        // If not hired, nothing to do
+        if (!this.hired()) {
+            // energy isn't full, restore energy
+            if (this.energy() < this.maxEnergy) {
+                this.addEnergy();
+            }
             return;
         }
 
@@ -166,20 +170,14 @@ class FarmHand {
         GameHelper.incrementObservable(this.costTicks, GameConstants.TICK_TIME);
         if (this.costTicks() % this.costTick < GameConstants.TICK_TIME) {
             this.costTicks(0);
-            if (this.hired()) {
-                this.charge();
-            }
+            this.charge();
         }
 
         // Work/Restore energy when work ticks reached
         GameHelper.incrementObservable(this.workTicks, GameConstants.TICK_TIME);
         if (this.workTicks() % this.workTick < GameConstants.TICK_TIME) {
             this.workTicks(0);
-            if (this.hired()) {
-                this.work();
-            } else {
-                this.addEnergy();
-            }
+            this.work();
         }
     }
 
@@ -374,8 +372,8 @@ class FarmHands {
     }
 
     public tick() {
-        // run game tick for all hired farmhands
-        FarmHands.list.forEach(f => f.hired() && f.tick());
+        // run game tick for all farmhands
+        FarmHands.list.forEach(f => f.tick());
     }
 
     public toJSON(): Record<string, any>[] {
