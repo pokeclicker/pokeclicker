@@ -84,8 +84,7 @@ class PartyPokemon implements Saveable {
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
-            const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
-            return Math.floor(this._effortPoints() / GameConstants.EP_EV_RATIO / power);
+            return Math.floor(this.calculateEVs());
         });
         const resistantSub = this.evs.subscribe((newValue) => {
             // Change Pokerus status to Resistant when reaching 50 EVs
@@ -97,7 +96,7 @@ class PartyPokemon implements Saveable {
                     // Log and notify player
                     Notifier.notify({
                         message: `${this.name} has become Resistant to Pokérus.`,
-                        pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
+                        pokemonImage: PokemonHelper.getImage(this.id),
                         type: NotificationConstants.NotificationOption.info,
                         sound: NotificationConstants.NotificationSound.General.pokerus,
                         setting: NotificationConstants.NotificationSetting.General.pokerus,
@@ -131,6 +130,12 @@ class PartyPokemon implements Saveable {
         const shadowMultiplier = this.shadowAttackBonus();
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
+
+    public clickAttackBonus = ko.pureComputed((): number => {
+        // Caught + Shiny + Resistant
+        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
+        return bonus;
+    });
 
     public canCatchPokerus(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
@@ -178,6 +183,11 @@ class PartyPokemon implements Saveable {
             }
         }
         return this.level;
+    }
+
+    public calculateEVs(): number {
+        const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
+        return this._effortPoints() / GameConstants.EP_EV_RATIO / power;
     }
 
     public gainExp(exp: number) : number {
@@ -373,11 +383,14 @@ class PartyPokemon implements Saveable {
     });
 
     public isHatchable = ko.pureComputed(() => {
-        // Only breedable Pokemon
-        if (this.breeding || this.level < 100) {
-            return false;
-        }
+        return !(this.breeding || this.level < 100);
+    });
 
+    public isHatchableFiltered = ko.pureComputed(() => {
+        return this.isHatchable() && this.matchesHatcheryFilters();
+    });
+
+    public matchesHatcheryFilters = ko.pureComputed(() => {
         // Check if search matches englishName or displayName
         const displayName = PokemonHelper.displayName(this.name)();
         const filterName = BreedingFilters.name.value();
@@ -392,10 +405,8 @@ class PartyPokemon implements Saveable {
         }
 
         // Check based on category
-        if (BreedingFilters.category.value() >= 0) {
-            if (this.category !== BreedingFilters.category.value()) {
-                return false;
-            }
+        if (BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value()) {
+            return false;
         }
 
         // Check based on shiny status
@@ -481,7 +492,7 @@ class PartyPokemon implements Saveable {
             }
         }
 
-        if (this.heldItem()) {
+        if (this.heldItem() && Settings.getSetting('confirmChangeHeldItem').value) {
             Notifier.confirm({
                 title: 'Remove held item',
                 message: 'Held items are one time use only.\nRemoved items will be lost.\nAre you sure you want to remove it?',
@@ -495,8 +506,8 @@ class PartyPokemon implements Saveable {
         } else { // Notifier.confirm is async
             this.addOrRemoveHeldItem(heldItem);
         }
-
     }
+
     private addOrRemoveHeldItem(heldItem: HeldItem) {
         if (this.heldItem() && this.heldItem().name == heldItem.name) {
             this.heldItem(undefined);

@@ -221,10 +221,10 @@ class HatcheryHelpers {
                 const categories = helper.categories();
                 const useHatcheryFilters = helper.useHatcheryFilters();
                 const pokemon = App.game.party.caughtPokemon.reduce((best, pokemon) => {
-                    if (useHatcheryFilters && !pokemon.isHatchable()) {
+                    if (useHatcheryFilters && !pokemon.isHatchableFiltered()) {
                         return best;
                     }
-                    if (!useHatcheryFilters && (pokemon.breeding || pokemon.level < 100)) {
+                    if (!pokemon.isHatchable()) {
                         return best;
                     }
                     if (categories.length && categories.indexOf(pokemon.category) === -1) {

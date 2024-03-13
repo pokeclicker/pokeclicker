@@ -1,3 +1,4 @@
+import '../koExtenders';
 import PokemonType from '../enums/PokemonType';
 import { Pokerus, Region } from '../GameConstants';
 import SettingOption from './SettingOption';
