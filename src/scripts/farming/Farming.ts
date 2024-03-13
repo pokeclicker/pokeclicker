@@ -1734,14 +1734,6 @@ class Farming implements Feature {
             }));
 
         //#endregion
-
-        //#endregion
-
-        // REMOVE THIS BEFORE MERGING. THIS IS FOR TESTING PURPOSE.
-        this.berryData.forEach(b => {
-            const witherTime = b.growthTime[PlotStage.Berry] - b.growthTime[PlotStage.Bloom];
-            b.growthTime = [30, 60, 90, 120, 120 + witherTime];
-        });
     }
 
     getGrowthMultiplier(): number {
