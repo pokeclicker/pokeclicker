@@ -44,7 +44,9 @@ export class ShardDeal {
         } else if (deal.questPointCost > App.game.wallet.currencies[Currency.questPoint]()) {
             return false;
         } else {
-            return deal.shards.every((value) => player.itemList[value.shardType.itemName]() >= value.amount);
+            const playerAmount = player.itemList[deal.item.itemType.name]();
+            return deal.shards.every((value) => player.itemList[value.shardType.itemName]() >= value.amount)
+                && Number.isSafeInteger(playerAmount + deal.item.amount);
         }
     }
 
@@ -58,7 +60,9 @@ export class ShardDeal {
             });
             const qp = App.game.wallet.currencies[Currency.questPoint]();
             const maxCurrencyTrades = Math.floor(qp / deal.questPointCost);
-            const maxTrades = Math.min(maxCurrencyTrades, trades.reduce((a, b) => Math.min(a, b), tradeTimes));
+            const playerAmount = player.itemList[deal.item.itemType.name]();
+            const maxSafeTrades = Math.floor((Number.MAX_SAFE_INTEGER - playerAmount) / deal.item.amount);
+            const maxTrades = Math.min(maxCurrencyTrades, trades.reduce((a, b) => Math.min(a, b), tradeTimes), maxSafeTrades);
             deal.shards.forEach((value) => player.loseItem(value.shardType.itemName, value.amount * maxTrades));
 
             const amount = deal.item.amount * maxTrades;

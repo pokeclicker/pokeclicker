@@ -32,11 +32,11 @@
                                 <!-- ko if: $data.isVisible() -->
                                     <!-- ko foreach: shards -->
                                     <tr>
-                                        <td data-bind="text: player.itemList[$data.shardType.itemName]().toLocaleString('en-US')"></td>
-                                        <td class='vertical-middle'>
+                                        <td class="align-middle" data-bind="text: player.itemList[$data.shardType.itemName]().toLocaleString('en-US')"></td>
+                                        <td class="align-middle">
                                             <img class='mineInventoryItem' data-bind='attr: {src: $data.shardType.image }'>
                                         </td>
-                                        <td data-bind="text: amount.toLocaleString('en-US') + ' x ' + $data.shardType.name"></td>
+                                        <td class="align-middle" data-bind="text: amount.toLocaleString('en-US') + ' x ' + $data.shardType.name"></td>
                                         <!-- ko if: $index() === 0 -->
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost.toLocaleString('en-US')"></td>
                                         <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->

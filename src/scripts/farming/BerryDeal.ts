@@ -411,7 +411,9 @@ class BerryDeal {
         if (!deal) {
             return false;
         } else {
-            return deal.berries.every((value) => App.game.farming.berryList[value.berryType]() >= value.amount);
+            const playerAmount = player.itemList[deal.item.itemType.name]();
+            return deal.berries.every((value) => App.game.farming.berryList[value.berryType]() >= value.amount)
+                && Number.isSafeInteger(playerAmount + deal.item.amount);
         }
     }
 
@@ -423,7 +425,9 @@ class BerryDeal {
                 const maxTrades = Math.floor(amt / berry.amount);
                 return maxTrades;
             });
-            const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
+            const playerAmount = player.itemList[deal.item.itemType.name]();
+            const maxSafeTrades = Math.floor((Number.MAX_SAFE_INTEGER - playerAmount) / deal.item.amount);
+            const maxTrades = Math.min(trades.reduce((a,b) => Math.min(a,b), tradeTimes), maxSafeTrades);
             deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {
                 Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
