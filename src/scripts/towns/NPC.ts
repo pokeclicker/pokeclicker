@@ -2,6 +2,7 @@ type NPCOptionalArgument = {
     requirement?: Requirement | MultiRequirement | OneFromManyRequirement,
     image?: string,
     saveKey?: string,
+    afterOpenFunction?: (modal: HTMLElement) => void,
 };
 
 class NPC {
