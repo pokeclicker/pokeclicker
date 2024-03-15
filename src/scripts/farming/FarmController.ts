@@ -290,7 +290,7 @@ class FarmController {
     public static wandererToRoute(pokemon: PokemonNameType): RegionRoute {
         const maxRegion = player.highestRegion();
         const pokemonRegion = pokemonMap[pokemon].nativeRegion;
-        const routes = Routes.getRoutesByRegion(maxRegion, true);
+        const routes = Routes.getRoutesByRegion(maxRegion).filter(r => !r.ignoreRouteInCalculations);
         const minIndex = Math.floor((routes.length - 1) * pokemonRegion / (maxRegion + 2));
         const maxIndex = Math.floor((routes.length - 1) * (pokemonRegion + 2) / (maxRegion + 2));
         // Adds a bit of randomness so it is not always the same route

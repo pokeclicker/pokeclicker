@@ -1,5 +1,4 @@
 class WandererPokemon {
-    public farmPoint: number;
     public catching: KnockoutObservable<boolean>;
     public pokeball: KnockoutObservable<GameConstants.Pokeball>;
     public distractTime: KnockoutObservable<number>;
