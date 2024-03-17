@@ -1,5 +1,5 @@
 enum ContestRank {
-    None,
+    Practice,
     Normal,
     Super,
     Hyper,
