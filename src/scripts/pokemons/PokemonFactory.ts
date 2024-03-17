@@ -369,4 +369,14 @@ class PokemonFactory {
         }
         return gender;
     }
+
+    public static generateWandererData(berry: Berry): WandererPokemon {
+        const availablePokemon = berry.wander.filter(p => pokemonMap[p].nativeRegion <= player.highestRegion());
+        const pokemon = Rand.fromArray(availablePokemon);
+        const pokemonData = pokemonMap[pokemon];
+        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
+        const catchChance = PokemonFactory.catchRateHelper(pokemonData.catchRate + 25, true);
+        const wanderer = new WandererPokemon(pokemon, berry.type, catchChance, shiny);
+        return wanderer;
+    }
 }
