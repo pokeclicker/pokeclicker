@@ -97,6 +97,7 @@ import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
 import ContestType from './enums/ContestType';
+import ContestRank from './enums/ContestRank';
 import CustomRequirement from './requirements/CustomRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DevelopmentRequirement from './requirements/DevelopmentRequirement';
@@ -219,6 +220,7 @@ Object.assign(<any>window, {
     CaughtStatus,
     EvolutionType,
     ContestType,
+    ContestRank,
     FarmNotificationType,
     FlavorType,
     ItemType,
