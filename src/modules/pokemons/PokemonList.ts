@@ -5358,6 +5358,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5378,6 +5379,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5418,6 +5420,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5438,6 +5441,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5458,6 +5462,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5478,6 +5483,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5498,6 +5504,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5518,6 +5525,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5558,6 +5566,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5598,6 +5607,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5678,6 +5688,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5698,6 +5709,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5758,6 +5770,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5818,6 +5831,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5838,6 +5852,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },

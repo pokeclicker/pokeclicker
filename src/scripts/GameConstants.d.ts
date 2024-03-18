@@ -221,6 +221,7 @@ namespace GameConstants {
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
     declare const CHRISTMAS_ITEM_CHANCE: number;
+    declare const HELD_MAGIKARP_BISCUIT: number;
     declare enum GameState {
         loading,
         idle,
@@ -883,7 +884,9 @@ namespace GameConstants {
     declare const ModalCollapseList: string[];
     declare enum ConsumableType {
         Rare_Candy,
+        Magikarp_Biscuit,
     }
+    declare const MAGIKARP_BISCUIT_MULTIPLIER: number;
     declare const zCrystalItemType: string[];
     declare enum ZMoveStatus {
         inactive,
