@@ -27,9 +27,7 @@ export default class Setting<T> {
 
         // Redirects writes to the observable to this.set()
         this.observableValue = ko.pureComputed({
-            read: () => {
-                return this._observable();
-            },
+            read: this._observable,
             write: (value) => {
                 this.set(value);
             },
@@ -43,6 +41,10 @@ export default class Setting<T> {
 
     get value() {
         return this._value;
+    }
+
+    set value(value: T) {
+        this.set(value);
     }
 
     get options() {
