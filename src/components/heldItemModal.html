@@ -1,5 +1,5 @@
 <div class="modal noselect fade" id="heldItemModal" tabindex="-1" role="dialog" aria-labelledby="heldItemModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
@@ -77,9 +77,9 @@
                   </thead>
                   <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: modalUtils.observableState.heldItemModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyHeldItemList'); }">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
-                      <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                      <td class="text-center tight" data-bind="
-                        text: $data.heldItem() == undefined ? '' : $data.heldItem().displayName,
+                      <td class="text-left align-middle"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-left tight align-middle" data-bind="
+                        html: $data.heldItem() == undefined ? '' : `<img width='20' src='${$data.heldItem().image}' /> ${$data.heldItem().displayName}`,
                         tooltip: $data.heldItem() != undefined ? { title: $data.heldItem().description, placement: 'bottom', trigger: 'hover'} : undefined
                       "></td>
                     </tr>
