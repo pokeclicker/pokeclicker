@@ -87,7 +87,6 @@ class BattleFrontierRunner {
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.General.battle_frontier,
             sound: NotificationConstants.NotificationSound.General.battle_frontier,
-            timeout: 30 * GameConstants.MINUTE,
         });
         App.game.logbook.newLog(
             LogBookTypes.FRONTIER,

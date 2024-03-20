@@ -32,7 +32,6 @@ export default class Achievement {
                 title: `[Achievement] ${this.name}`,
                 message: this.description,
                 type: NotificationConstants.NotificationOption.warning,
-                timeout: 1e4,
                 sound: NotificationConstants.NotificationSound.General.achievement,
                 setting: NotificationConstants.NotificationSetting.General.achievement_complete,
             });

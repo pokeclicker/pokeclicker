@@ -2,15 +2,17 @@ import { Computed } from 'knockout';
 import NotificationOption from '../notifications/NotificationOption';
 import Notifier from '../notifications/Notifier';
 import BooleanSetting from './BooleanSetting';
+import Setting from './Setting';
 
 export default class NotificationSetting {
     warnOnBlocked: () => void;
     inGameNotification: BooleanSetting;
     desktopNotification: BooleanSetting;
+    notificationDuration: Setting<number>;
 
     private cachedTranslatedName: Computed<string>;
 
-    constructor(public name: string, public defaultDisplayName: string, defaultValueInGame: boolean, lockInGame: boolean = false) {
+    constructor(public name: string, public defaultDisplayName: string, defaultValueInGame: boolean, defaultDuration?: number, lockInGame: boolean = false) {
         if (!lockInGame) {
             this.inGameNotification = new BooleanSetting(name, defaultDisplayName, defaultValueInGame ?? false);
         }
@@ -39,6 +41,9 @@ export default class NotificationSetting {
                 }
             }
         });
+        if (!isNaN(defaultDuration)) {
+            this.notificationDuration = new Setting<number>(`${name}.duration`, defaultDisplayName, [], defaultDuration);
+        }
     }
 
     get displayName(): string {

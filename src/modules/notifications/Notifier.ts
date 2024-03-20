@@ -3,12 +3,15 @@ import Sound from '../utilities/Sound';
 import Rand from '../utilities/Rand';
 import type NotificationSetting from '../settings/NotificationSetting';
 
+const DEFAULT_TIMEOUT: number = 3000;
+
 export default class Notifier {
+
     public static notify({
         message,
         type = NotificationOption.primary,
         title = '',
-        timeout = 3000,
+        timeout = undefined,
         time = 'just now',
         sound,
         setting,
@@ -44,7 +47,7 @@ export default class Notifier {
                 });
                 setTimeout(() => {
                     desktopNotification.close();
-                }, timeout);
+                }, timeout || setting?.notificationDuration?.value || DEFAULT_TIMEOUT);
             }
 
             // Check if this type of notification is disabled
@@ -79,7 +82,7 @@ export default class Notifier {
             $(`#${toastID}`).on('shown.bs.toast', () => {
                 setTimeout(() => {
                     $(`#${toastID}`).toast('hide');
-                }, timeout);
+                }, timeout || setting?.notificationDuration?.value || DEFAULT_TIMEOUT);
             });
 
             // Once hidden remove the element

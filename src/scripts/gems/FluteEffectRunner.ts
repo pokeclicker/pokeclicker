@@ -30,8 +30,7 @@ class FluteEffectRunner {
                         message: `You ran out of gems for the ${GameConstants.humanifyString(itemName)}'s effect!`,
                         type: NotificationConstants.NotificationOption.danger,
                         sound: NotificationConstants.NotificationSound.General.battle_item_timer,
-                        setting: NotificationConstants.NotificationSetting.Items.battle_item_timer,
-                        timeout: 1 * GameConstants.MINUTE,
+                        setting: NotificationConstants.NotificationSetting.Items.flute_timer,
                     });
                     App.game.logbook.newLog(
                         LogBookTypes.OTHER,

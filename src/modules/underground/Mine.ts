@@ -376,10 +376,11 @@ export class Mine {
             if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
                 let amount = 1;
                 const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
+                const setting = NotificationConstants.NotificationSetting.Underground.underground_item_found;
                 Notifier.notify({
                     message: `You found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
                     type: NotificationConstants.NotificationOption.success,
-                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+                    setting: setting,
                 });
 
                 if (App.game.oakItems.isActive(OakItemType.Treasure_Scanner)) {
@@ -390,8 +391,8 @@ export class Mine {
                             message: `You found an extra ${humanifyString(itemName)} in the Mine!`,
                             type: NotificationConstants.NotificationOption.success,
                             title: 'Treasure Scanner',
-                            timeout: 4000,
-                            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+                            timeout: setting.notificationDuration ? setting.notificationDuration.value + 1000 : 4000,
+                            setting: setting,
                         });
 
                         if (Rand.chance(giveDouble)) {
@@ -400,8 +401,8 @@ export class Mine {
                                 message: `Lucky! You found another ${humanifyString(itemName)}!`,
                                 type: NotificationConstants.NotificationOption.success,
                                 title: 'Treasure Scanner',
-                                timeout: 6000,
-                                setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+                                timeout: setting.notificationDuration ? setting.notificationDuration.value + 3000 : 6000,
+                                setting: setting,
                             });
 
                             if (Rand.chance(giveDouble)) {
@@ -410,8 +411,8 @@ export class Mine {
                                     message: `Jackpot! You found another ${humanifyString(itemName)}!`,
                                     type: NotificationConstants.NotificationOption.success,
                                     title: 'Treasure Scanner',
-                                    timeout: 8000,
-                                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+                                    timeout: setting.notificationDuration ? setting.notificationDuration.value + 5000 : 8000,
+                                    setting: setting,
                                 });
                             }
                         }
