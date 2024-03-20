@@ -68,6 +68,14 @@
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('sizeUnits')}"></tr>
                             </tbody>
                             <thead>
+                                <tr><th colspan="2">Underground</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showUndergroundModule')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showUndergroundModuleMineControls')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showUndergroundModuleDailyTrades')}"></tr>
+                            </tbody>
+                            <thead>
                                 <tr><th colspan="2">Other</th></tr>
                             </thead>
                             <tbody>
