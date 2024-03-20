@@ -36,7 +36,7 @@ export default class Settings {
         return json;
     }
 
-    static fromJSON(dict = {}) {
+    static fromJSON(dict: Record<string, unknown> = {}) {
         Object.entries(dict).forEach(([name, value]) => {
             this.setSettingByName(name, value);
         });
