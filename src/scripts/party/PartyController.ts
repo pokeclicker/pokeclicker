@@ -211,7 +211,7 @@ class PartyController {
                     return false;
                 }
             }
-            
+
             if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
                 if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
                     return false;
