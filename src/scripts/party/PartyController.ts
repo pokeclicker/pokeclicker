@@ -201,9 +201,17 @@ class PartyController {
             if (!HeldItem.heldItemSelected()?.canUse(pokemon)) {
                 return false;
             }
-            if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
-                return false;
+
+            if (Settings.getSetting('heldItemDropdownPokemonOrItem').observableValue() === 'pokemon') { // Pokemon
+                if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+                    return false;
+                }
+            } else { // Item
+                if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(pokemon?.heldItem()?.displayName)) {
+                    return false;
+                }
             }
+            
             if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
                 if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
                     return false;

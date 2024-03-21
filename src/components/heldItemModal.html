@@ -15,6 +15,7 @@
                   <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
                     <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
                   </div>
+                  <!-- Sort field -->
                   <div class="input-group px-1 mt-1" data-bind="with: Settings.getSetting('heldItemSort')">
                       <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
@@ -30,11 +31,27 @@
                               onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
                       </div>
                   </div>
-                  <div class="form-group px-1 mt-1 mb-0">
+                  <!-- Search field -->
+                  <div class="form-group input-group px-1 mt-1 mb-0">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bind="text: Settings.getSetting('heldItemDropdownPokemonOrItem').getSelectedValueName()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            style="min-width: 100px;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;">
+                        </button>
+                        <div class="dropdown-menu" data-bind="foreach: Settings.getSetting('heldItemDropdownPokemonOrItem').options">
+                            <button class="dropdown-item" type="button" 
+                                data-bind="click: function(){
+                                    Settings.setSettingByName(Settings.getSetting('heldItemDropdownPokemonOrItem').name, $data.value)
+                                }, text: $data.text"></button>
+                        </div>
+                    </div>
                     <input id="heldItemSearch" autocomplete="off" class="form-control" placeholder="Search"
                         data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue" />
                   </div>
                   <div class="small px-1 pb-2 my-1" style="overflow-x: hidden;">
+                    <!-- Region and Type selects -->
                     <div class="form-row px-1">
                         <div class="form-group col-6 m-0 px-1 py-0">
                             <label class="mb-1" for="held-item-region-filter">Region</label>
@@ -53,6 +70,7 @@
                             </select>
                         </div>
                     </div>
+                    <!-- Hide/Show checkboxes -->
                     <div class="form-check align-middle mt-1">
                         <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
                             data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue()"

@@ -73,6 +73,10 @@ export default class Setting<T> {
         return this.options.filter((opt) => opt.isUnlocked());
     }
 
+    getSelectedValueName() {
+        return this.options.find((opt) => opt.value === this.observableValue()).text;
+    }
+
     get displayName(): string {
         if (!this.cachedTranslatedName) {
             this.cachedTranslatedName = App.translation.get(
