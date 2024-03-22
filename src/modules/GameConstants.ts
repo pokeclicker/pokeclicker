@@ -2134,6 +2134,11 @@ export const TemporaryBattles = [
     'Enamorus 3',
     'Arceus',
     'Paradise Protection Protocol',
+    'Terrakion 1',
+    'Swords of Justice 1',
+    'Kyurem 1',
+    'Kyurem 2',
+    'Kyurem 3',
 ];
 
 export enum ShardTraderLocations {
