@@ -7,6 +7,7 @@ import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
+import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
 import QuestLineCompletedRequirement from '../requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
 import RouteKillRequirement from '../requirements/RouteKillRequirement';
@@ -1788,7 +1789,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Spearow', 'Ekans', 'Alolan Meowth', 'Growlithe', 'Abra', 'Drowzee', 'Smeargle', 'Makuhita', 'Furfrou', 'Yungoos', 'Cutiefly'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Trainers\' School'))],
+    [new TemporaryBattleRequirement('Ilima')],
     undefined,
     AlolaSubRegions.MelemeleIsland,
 ));
@@ -1833,10 +1834,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [
-        new TemporaryBattleRequirement('Dexio'),
-        new TemporaryBattleRequirement('Sina'),
-    ],
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 0)],
     undefined,
     AlolaSubRegions.AkalaIsland,
 ));
@@ -1856,7 +1854,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Brooklet Hill'))],
+    [new TemporaryBattleRequirement('Recon Squad 2')],
     undefined,
     AlolaSubRegions.AkalaIsland,
 ));
@@ -1913,7 +1911,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Fearow', 'Ledian', 'Ariados', 'Skarmory', 'Pancham', 'Gumshoos', 'Pidgeot'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Malie Garden'))],
+    [new TemporaryBattleRequirement('Hau 5')],
     undefined,
     AlolaSubRegions.UlaulaIsland,
 ));
@@ -1923,7 +1921,10 @@ Routes.add(new RegionRoute(
         land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new RouteKillRequirement(10, Region.alola, 10)],
+    [
+        new RouteKillRequirement(10, Region.alola, 10),
+        new TemporaryBattleRequirement('Skull 4'),
+    ],
     10.1,
     AlolaSubRegions.UlaulaIsland,
 ));
@@ -1937,7 +1938,7 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Shiinotic'], new ObtainedPokemonRequirement('Shiinotic')),
         ],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Malie Garden'))],
+    [new TemporaryBattleRequirement('Hau 5')],
     undefined,
     AlolaSubRegions.UlaulaIsland,
 ));
@@ -2027,7 +2028,7 @@ Routes.add(new RegionRoute(
         land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Aether Foundation'))],
+    [new QuestLineStartedRequirement('Emissary of Light')],
     undefined,
     AlolaSubRegions.PoniIsland,
 ));

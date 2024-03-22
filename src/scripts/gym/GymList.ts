@@ -1453,7 +1453,6 @@ GymList['Champion Diantha'] = new Gym(
 );
 
 //Alola Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Iki Town'] = new Gym(
     'Hala',
     'Iki Town',
@@ -1464,76 +1463,71 @@ GymList['Iki Town'] = new Gym(
     ],
     BadgeEnums.Melemele_Stamp,
     128000,
-    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!',
-    [new TemporaryBattleRequirement('Hau 3')],
-    () => {
-        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fighting], 1);
-    },
-    undefined, { displayName: 'Hala\'s Grand Trial' }
+    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!</br><img width="100" src="assets/images/items/zCrystal/Fightinium Z.svg"/></br>With this victory... you have cleared all of the trials of Melemele Island, the first of Alola\'s islands! The Melemele stamp is proof of your accomplishments.',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10), new TemporaryBattleRequirement('Hau 3')])],
+    undefined, undefined, { displayName: 'Hala\'s Grand Trial' }
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
     'Konikoni City',
     [
-        new GymPokemon('Anorith', 66147743, 27),
-        new GymPokemon('Lileep', 66147743, 27),
-        new GymPokemon('Lycanroc (Midnight)', 67478674, 28),
+        new GymPokemon('Anorith', 81530244, 27),
+        new GymPokemon('Lileep', 81530244, 27),
+        new GymPokemon('Lycanroc (Midnight)', 83170680, 28),
     ],
     BadgeEnums.Akala_Stamp,
     128000,
-    'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!',
-    [new TemporaryBattleRequirement('Plumeria 1')],
-    () => {
-        App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined, true);
-        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Rock], 1);
-    },
-    undefined, { displayName: 'Olivia\'s Grand Trial' }
+    'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!</br><img width="100" src="assets/images/items/zCrystal/Rockium Z.svg"/></br>I think your journey will hold many surprises. And I hope it holds many joys.',
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
+    undefined, undefined, { displayName: 'Olivia\'s Grand Trial' }
 );
 GymList['Malie City'] = new Gym(
     'Nanu',
     'Malie City',
     [
-        new GymPokemon('Sableye', 70650480, 43),
-        new GymPokemon('Krokorok', 70650480, 43),
-        new GymPokemon('Alolan Persian', 71735104, 44),
+        new GymPokemon('Sableye', 101710296, 43),
+        new GymPokemon('Krokorok', 101710296, 43),
+        new GymPokemon('Alolan Persian', 103271750, 44),
     ],
     BadgeEnums.Ula_Ula_Stamp,
     128000,
-    'Hmph... heh. Let me fix your team up for you. Here. This is yours.',
+    'Hmph... heh. Let me fix your team up for you. Here. This is yours.</br><img width="100" src="assets/images/items/zCrystal/Darkinium Z.svg"/></br>There. Congratulations or whatever. You\'ve officially finished your Ula\'ula trials. You\'ve got somewhere else to be, don\'t you? Try not to destroy the whole place.',
     [new TemporaryBattleRequirement('Gladion 2')],
-    () => {
-        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dark], 1);
-    }, undefined, { displayName: 'Nanu\'s Grand Trial' }
+    undefined, undefined, { displayName: 'Nanu\'s Grand Trial' }
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
     'Exeggutor Island',
     [
-        new GymPokemon('Golurk', 76658268, 53),
-        new GymPokemon('Gastrodon (East)', 76658268, 53),
-        new GymPokemon('Flygon', 76658268, 53),
-        new GymPokemon('Mudsdale', 77747374, 54),
+        new GymPokemon('Alolan Dugtrio', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Gastrodon (East)', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Flygon', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Mudsdale', 86977838, 48, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Golurk', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Gastrodon (East)', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Flygon', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Mudsdale', 92529615, 54, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
     ],
     BadgeEnums.Poni_Stamp,
     128000,
-    'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
-    () => {
-        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ground], 1);
-    }, undefined, { displayName: 'Hapu\'s Grand Trial' }
+    'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!</br><img width="100" src="assets/images/items/zCrystal/Groundium Z.svg"/></br>Then go on with you two! Head straight through here and find the altar!',
+    [new QuestLineCompletedRequirement('Emissary of Light')],
+    undefined, undefined, { displayName: 'Hapu\'s Grand Trial' }
 );
 
 //Alola Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
+// modified from base HP, keep them roughly the same difficulty
+// regular mons base HP: 91879987
+// ace pokemon base HP: 92856372
 GymList['Elite Molayne'] = new Gym(
     'Molayne',
     'Elite Molayne',
     [
-        new GymPokemon('Klefki', 85547357, 56),
-        new GymPokemon('Bisharp', 85547357, 56),
-        new GymPokemon('Magnezone', 85547357, 56),
-        new GymPokemon('Metagross', 85547357, 56),
-        new GymPokemon('Alolan Dugtrio', 86456446, 57),
+        new GymPokemon('Klefki', 78883047, 56),
+        new GymPokemon('Bisharp', 84369882, 56),
+        new GymPokemon('Magnezone', 82982134, 56),
+        new GymPokemon('Metagross', 84733765, 56),
+        new GymPokemon('Alolan Dugtrio', 95774052, 57),
     ],
     BadgeEnums.Elite_Molayne,
     64000,
@@ -1544,11 +1538,11 @@ GymList['Elite Olivia'] = new Gym(
     'Olivia',
     'Elite Olivia',
     [
-        new GymPokemon('Armaldo', 85547357, 56),
-        new GymPokemon('Cradily', 85547357, 56),
-        new GymPokemon('Gigalith', 85547357, 56),
-        new GymPokemon('Probopass', 85547357, 56),
-        new GymPokemon('Lycanroc (Midnight)', 86456446, 57),
+        new GymPokemon('Armaldo', 81025320, 56),
+        new GymPokemon('Cradily', 74381821, 56),
+        new GymPokemon('Gigalith', 140708180, 56),
+        new GymPokemon('Probopass', 85174188, 56),
+        new GymPokemon('Lycanroc (Midnight)', 150439372, 57),
     ],
     BadgeEnums.Elite_Olivia,
     64000,
@@ -1559,11 +1553,11 @@ GymList['Elite Acerola'] = new Gym(
     'Acerola',
     'Elite Acerola',
     [
-        new GymPokemon('Banette', 85547357, 56),
-        new GymPokemon('Drifblim', 85547357, 56),
-        new GymPokemon('Dhelmise', 85547357, 56),
-        new GymPokemon('Froslass', 85547357, 56),
-        new GymPokemon('Palossand', 86456446, 57),
+        new GymPokemon('Banette', 94589428, 56),
+        new GymPokemon('Drifblim', 87179189, 56),
+        new GymPokemon('Dhelmise', 91179189, 56),
+        new GymPokemon('Froslass', 91691988, 56),
+        new GymPokemon('Palossand', 103277813, 57),
     ],
     BadgeEnums.Elite_Acerola,
     64000,
@@ -1574,11 +1568,11 @@ GymList['Elite Kahili'] = new Gym(
     'Kahili',
     'Elite Kahili',
     [
-        new GymPokemon('Braviary', 85547357, 56),
-        new GymPokemon('Hawlucha', 85547357, 56),
-        new GymPokemon('Oricorio (Baile)', 85547357, 56),
-        new GymPokemon('Mandibuzz', 85547357, 56),
-        new GymPokemon('Toucannon', 86456446, 57),
+        new GymPokemon('Braviary', 86420587, 56),
+        new GymPokemon('Hawlucha', 109446185, 56),
+        new GymPokemon('Oricorio (Baile)', 103127826, 56),
+        new GymPokemon('Mandibuzz', 89123587, 56),
+        new GymPokemon('Toucannon', 91392090, 57),
     ],
     BadgeEnums.Elite_Kahili,
     64000,
@@ -1587,7 +1581,6 @@ GymList['Elite Kahili'] = new Gym(
 );
 
 // Alola Champion
-// TODO: Balancing - Set HP
 GymList['Champion Hau'] = new Gym(
     'Hau',
     'Champion Hau',

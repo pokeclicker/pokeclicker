@@ -477,4 +477,5 @@ export type ItemNameType
 | 'Dragonium Z'
 | 'Darkinium Z'
 | 'Steelium Z'
-| 'Fairium Z';
+| 'Fairium Z'
+| 'Island_Challenge_Amulet';

@@ -62,6 +62,7 @@ class QuestLine {
         this.totalQuests++;
         quest.index = this.totalQuests;
         quest.inQuestLine = true;
+        quest.parentQuestLine = this;
         quest.createAutoCompleter();
         this.quests.push(quest);
     }

@@ -1626,6 +1626,7 @@ export type PokemonNameType
     | 'Pecharunt'
     | 'MissingNo.'
     | '???'
+    | 'You hateful little Trainer!'
     | 'Segin Starmobile'
     | 'Schedar Starmobile'
     | 'Navi Starmobile'
