@@ -101,7 +101,7 @@ export default class DynamicBackground {
 
         const pokeElement = document.createElement('div');
         pokeElement.style.bottom = flying ? `${Rand.intBetween(20, 90)}vh` : `${Rand.intBetween(5, 15)}vh`;
-        pokeElement.style.backgroundImage = `${shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${id.toString().padStart(3, 0)}${shiny ? 's' : ''}.png')`;
+        pokeElement.style.backgroundImage = `${shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${id.toString()}${shiny ? 's' : ''}.png')`;
         pokeElement.classList.add('pokemonSprite');
         pokeElement.classList.add(`speed-${moveSpeed}`);
         document.getElementById('dynamic-background').appendChild(pokeElement);

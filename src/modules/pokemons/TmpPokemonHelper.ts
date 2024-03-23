@@ -12,6 +12,7 @@ import {
     typeStringToId,
     hasMegaEvolution,
     hasUncaughtMegaEvolution,
+    isMegaEvolution,
     getMegaStones,
     hasGigantamaxForm,
     hasUncaughtGigantamaxForm,
@@ -34,6 +35,7 @@ export default class TmpPokemonHelper {
     static displayName = displayName;
     static hasMegaEvolution = hasMegaEvolution;
     static hasUncaughtMegaEvolution = hasUncaughtMegaEvolution;
+    static isMegaEvolution = isMegaEvolution;
     static getMegaStones = getMegaStones;
     static hasGigantamaxForm = hasGigantamaxForm;
     static hasUncaughtGigantamaxForm = hasUncaughtGigantamaxForm;

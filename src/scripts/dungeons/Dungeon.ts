@@ -95,6 +95,7 @@ const DungeonGainGymBadge = (gym: Gym) => {
  */
  interface optionalDungeonParameters {
     dungeonRegionalDifficulty?: GameConstants.Region,
+    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
@@ -132,21 +133,26 @@ class Dungeon {
         }
         // Player may not meet the requirements to start the dungeon
         const dungeonTown = TownList[this.name];
-        if (!dungeonTown.isUnlocked()) {
-            const reqsList = [];
-            dungeonTown.requirements?.forEach(req => {
-                if (!req.isCompleted()) {
-                    reqsList.push(req.hint());
-                }
-            });
-
-            Notifier.notify({
-                message: `You don't have access to this dungeon yet.\n<i>${reqsList.join('\n')}</i>`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
+        const dungeonRequirement = this.optionalParameters.requirement;
+        // Use dungeonRequirement if it exists, else default to dungeonTown status
+        if (dungeonRequirement ? !dungeonRequirement.isCompleted() : !dungeonTown.isUnlocked()) {
             return false;
         }
         return true;
+    }
+
+    public getRequirementHints() {
+        const dungeonTown = TownList[this.name];
+        const reqsList = [];
+        dungeonTown.requirements?.forEach(req => {
+            if (!req.isCompleted()) {
+                reqsList.push(req.hint());
+            }
+        });
+        if (this.optionalParameters.requirement ? !this.optionalParameters.requirement.isCompleted() : false) {
+            reqsList.push(this.optionalParameters.requirement.hint());
+        }
+        return reqsList;
     }
 
     /**
@@ -2223,6 +2229,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
             {loot: 'Lucky_egg'},
         ],
         rare: [{loot: 'Green Shard'}],
+        epic : [{loot: 'Spiky-eared Pichu', ignoreDebuff : true, requirement : new QuestLineStepCompletedRequirement('Unfinished Business', 7)}],
         legendary: [
             {loot: 'Revive'},
             {loot: 'Insect Plate'},
@@ -2283,6 +2290,79 @@ dungeonList['Burned Tower'] = new Dungeon('Burned Tower',
     88500,
     [new DungeonBossPokemon('Golbat', 360000, 35), new DungeonBossPokemon('Weezing', 320000, 35), new DungeonBossPokemon('Shuckle', 610000, 50)],
     4500, 37);
+
+dungeonList['Olivine Lighthouse'] = new Dungeon('Olivine Lighthouse',
+    [
+        new DungeonTrainer('Gentleman',
+            [new GymPokemon('Noctowl', 4550, 22)],
+            { weight: 1 }, 'Alfred'),
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Poliwag', 4550, 18),
+                new GymPokemon('Poliwhirl', 4550, 20),
+            ],
+            { weight: 1 }, 'Huey'),
+        new DungeonTrainer('Bird Keeper',
+            [
+                new GymPokemon('Pidgey', 4200, 17),
+                new GymPokemon('Pidgey', 4200, 15),
+                new GymPokemon('Pidgey', 4200, 19),
+                new GymPokemon('Pidgey', 4200, 15),
+                new GymPokemon('Pidgey', 4200, 15),
+            ],
+            { weight: 1 }, 'Theo'),
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Krabby', 4550, 18),
+                new GymPokemon('Krabby', 4550, 20),
+            ],
+            { weight: 1 }, 'Kent'),
+        new DungeonTrainer('Bird Keeper',
+            [
+                new GymPokemon('Spearow', 4550, 18),
+                new GymPokemon('Fearow', 4550, 20),
+                new GymPokemon('Spearow', 4550, 18),
+            ],
+            { weight: 1 }, 'Denis'),
+        new DungeonTrainer('Gentleman',
+            [
+                new GymPokemon('Growlithe', 4550, 18),
+                new GymPokemon('Growlithe', 4550, 18),
+            ],
+            { weight: 1 }, 'Preston'),
+        new DungeonTrainer('Lass',
+            [new GymPokemon('Marill', 4550, 21)],
+            { weight: 1 }, 'Connie'),
+        new DungeonTrainer('Sailor',
+            [new GymPokemon('Poliwhirl', 4550, 20)],
+            { weight: 1 }, 'Terell'),
+    ],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 2},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [{loot: 'Greatball'}],
+        legendary: [
+            {loot: 'Zap Plate'},
+            {loot: 'MediumRestore'},
+        ],
+        mythic: [
+            {loot: 'Ultraball'},
+            {loot: 'LargeRestore'},
+        ],
+    },
+    88500,
+    [
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Machop', 125000, 18),
+                new GymPokemon('Machop', 125000, 18),
+                new GymPokemon('Poliwhirl', 125000, 18),
+            ], { weight: 1 }, 'Roberto'),
+    ],
+    4500, 40);
 
 dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     ['Rattata', 'Gastly'],
@@ -3291,7 +3371,7 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
                 new GymPokemon('Mightyena', 4500000, 58),
             ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 9)}, 'Shelly', '(shelly)'),
         new DungeonBossPokemon('Castform', 1820000, 20, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
-        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Sunny])])}),
+        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])}),
         new DungeonBossPokemon('Castform (Rainy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])])}),
         new DungeonBossPokemon('Castform (Snowy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail])])}),
     ],
@@ -3585,7 +3665,7 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
         new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
         new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
         new DungeonBossPokemon('Primal Kyogre', 95743340, 80, {hide: true, requirement: new MultiRequirement([new QuestLineCompletedRequirement('Primal Reversion'), new WeatherRequirement([WeatherType.Rain])])}),
-        new DungeonBossPokemon('Primal Groudon', 95743340, 80, {hide: true, requirement: new MultiRequirement([new QuestLineCompletedRequirement('Primal Reversion'), new WeatherRequirement([WeatherType.Sunny])])}),
+        new DungeonBossPokemon('Primal Groudon', 95743340, 80, {hide: true, requirement: new MultiRequirement([new QuestLineCompletedRequirement('Primal Reversion'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])}),
     ],
     34000, 101);
 
@@ -6109,12 +6189,12 @@ dungeonList['Gateon Port Battles'] = new Dungeon('Gateon Port Battles',
             [new GymPokemon('Zangoose', 58000000, 28, undefined, undefined, GameConstants.ShadowStatus.Shadow)], { weight: 1 }, 'Zook'),
         new DungeonTrainer('Cipher Admin',
             [
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Dragonite', 58000000, 55, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Dragonite', 14000000, 55, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Miror B.', 'Miror B'),
     ],
     443500, 134,
@@ -7668,8 +7748,8 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     [
         new DungeonBossPokemon('Slaking', 10000000, 100),
         new DungeonBossPokemon('Snorlax', 10000000, 100),
-        new DungeonBossPokemon('Shuckle', 10000000, 100),
         new DungeonBossPokemon('Blissey', 10000000, 100),
+        new DungeonBossPokemon('Staraptor', 10000000, 100),
         new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
     ],
     106500, 230);
@@ -11067,11 +11147,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
             {loot: 'Meadow Plate'},
             {loot: 'Nestball'},
         ],
-        legendary: [
-            {loot: 'LargeRestore'},
-            {loot: 'Miracle_Seed'},
-        ],
-        mythic: [{loot: 'Max Revive'}],
+        legendary: [{loot: 'Miracle_Seed'}],
     },
     13090332,
     [
@@ -11113,7 +11189,6 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
             {loot: 'Duskball'},
         ],
         legendary: [{loot: 'Soft_Sand'}],
-        mythic: [{loot: 'Max Revive'}],
     },
     13215839,
     [new DungeonBossPokemon('Larvitar', 66079195, 23)],
