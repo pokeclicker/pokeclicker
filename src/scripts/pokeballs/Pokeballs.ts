@@ -101,9 +101,16 @@ class Pokeballs implements Feature {
                 }
                 const highestRegionRoutes = Routes.getRoutesByRegion(player.highestRegion());
                 const maxRoute = MapHelper.normalizeRoute(highestRegionRoutes[highestRegionRoutes.length - 1].number, player.highestRegion());
-                const currentRoute = MapHelper.normalizeRoute(player.route(),player.region);
+                let currentRoute;
+                if (App.game.gameState == GameConstants.GameState.dungeon) {
+                    // Use equivalent route difficulty for dungeons
+                    currentRoute = DungeonRunner.dungeon.difficultyRoute;
+                } else {
+                    currentRoute = player.route();
+                }
+                currentRoute = MapHelper.normalizeRoute(currentRoute,player.region);
 
-                // Increased rate for earlier routes, scales with regional progression
+                // Increased rate for earlier routes and dungeons, scales with regional progression
                 return Math.min(15,Math.max(1,player.highestRegion()) * Math.max(1,(maxRoute / currentRoute)));
             }, 1250, 'Increased catch rate on earlier routes', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
