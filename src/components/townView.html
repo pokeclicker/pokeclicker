@@ -121,7 +121,12 @@
                     trigger: 'hover'
                 }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-                css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+                css: { 'dungeon-pokemon-locked': $data.uncaught, 'shadow-trainer': $data.shadowTrainer }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+            <!-- ko if: $data.shadow -->
+            <img class="dungeon-pokemon-preview dungeon-pokemon-locked uncaught-shadow" src="" data-bind="attr:{ src: $data.shadowBackground },
+            css: { 'uncaught-pokemon': !$data.caught }, visible: !$data.shadowCaught," onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+            <img class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.purified"/>
+            <!-- /ko -->
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
                 hidden: !$data.lock,
@@ -135,7 +140,9 @@
           <!--Display all available bosses in this dungeon-->
           <!-- ko foreach: player.town().dungeon.bossEncounterList.filter(i => !i.hide) -->
           <li class="list-inline-item">
+            <!-- ko ifnot: $data.shadow -->
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
+            <!-- /ko -->
             <img class="dungeon-pokemon-pkrs" src="" data-bind="
                 attr:{ src: $data.pkrsImage },
                 tooltip: {
@@ -144,8 +151,13 @@
                     trigger: 'hover'
                 }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-                css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+                css: { 'dungeon-pokemon-locked': $data.uncaught, 'shadow-trainer': $data.shadowTrainer }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
+            <!-- ko if: $data.shadow -->
+            <img class="dungeon-pokemon-preview dungeon-pokemon-locked uncaught-shadow" src="" data-bind="attr:{ src: $data.shadowBackground },
+                css: { 'uncaught-pokemon': !$data.caught }, visible: !$data.shadowCaught," onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+            <img class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.purified"/>
+            <!-- /ko -->
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
                 tooltip: {
                     title: $data.lockMessage,
