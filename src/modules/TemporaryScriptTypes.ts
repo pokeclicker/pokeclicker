@@ -27,6 +27,7 @@ import type SubRegion from './subRegion/SubRegion';
 import type CssVariableSetting from './settings/CssVariableSetting';
 import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
+import type CaughtStatus from './enums/CaughtStatus';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted, 
@@ -286,4 +287,15 @@ export type TmpAchievementHandlerType = {
 
 export type TmpPokemonLocationsType = {
     getPokemonPrevolution: (pokemonName: PokemonNameType, maxRegion?: GameConstants.Region) => EvoData[];
+};
+
+
+export type TmpPokemonFactoryType = {
+    generateShiny(chance: number, skipBonus?: boolean): boolean;
+    generateGenderById(id: number): GameConstants.BattlePokemonGender;
+};
+
+export type TmpPartyControllerType = {
+    getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
+    getPokerusStatusByName: (name: PokemonNameType) => GameConstants.Pokerus;
 };

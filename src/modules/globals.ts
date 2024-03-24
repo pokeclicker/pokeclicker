@@ -10,4 +10,6 @@ declare global {
     const GymRunner: TempTypes.TmpGymRunnerType;
     const AchievementHandler: TempTypes.TmpAchievementHandlerType;
     const PokemonLocations: TempTypes.TmpPokemonLocationsType;
+    const PokemonFactory: TempTypes.TmpPokemonFactoryType;
+    const PartyController: TempTypes.TmpPartyControllerType;
 }
