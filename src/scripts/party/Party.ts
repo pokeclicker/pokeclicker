@@ -95,7 +95,7 @@ class Party implements Feature {
         if (newCatch) {
             Notifier.notify({
                 message: `You have captured ${GameHelper.anOrA(name)} ${displayName}!`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, gender === GameConstants.BattlePokemonGender.Female),
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender, shadow),
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -104,7 +104,7 @@ class Party implements Feature {
         if (newShiny) {
             Notifier.notify({
                 message: `✨ You have captured a shiny ${displayName}! ✨`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, gender === GameConstants.BattlePokemonGender.Female),
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender, shadow),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -113,6 +113,7 @@ class Party implements Feature {
         if (newShadow) {
             Notifier.notify({
                 message: `You have captured a shadow ${displayName}!`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender, shadow),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
