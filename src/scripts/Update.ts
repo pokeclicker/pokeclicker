@@ -2485,7 +2485,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
 
-            // Remove erroneous BreedingFilter search setting
+            // Remove erroneous nameless settings
             delete settingsData[''];
 
             // Remove Z Crystal gyms and badges (remove furthest down the index first as to not get confused by index numbers)
@@ -2618,12 +2618,43 @@ class Update implements Saveable {
                 }
             });
         },
+
         '0.10.20': ({ playerData, saveData, settingsData }) => {
             // Add Olivine Lighthouse dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29);
 
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'The Sick Ampharos');
+            }
+
+            // Rename settings to match pokedex settings name convention
+            settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
+            delete settingsData.breedingTypeFilter1;
+            settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
+            delete settingsData.breedingTypeFilter2;
+
+            // Rename settings to accurately describe purpose
+            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
+            delete settingsData.pokedexShinyFilter;
+            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
+            delete settingsData.breedingDisplayFilter;
+
+            // Update breeding filters to use numeric values
+            ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingType1Filter', 'breedingType2Filter', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
+                .forEach((filter) => {
+                    if (settingsData[filter]?.length && !isNaN(Number.parseInt(settingsData[filter]))) {
+                        settingsData[filter] = Number.parseInt(settingsData[filter]);
+                    } else {
+                        delete settingsData[filter];
+                    }
+                });
+
+            // Represent 'any type' as null to match pokedex settings
+            if (settingsData.breedingType1Filter == -2) {
+                settingsData.breedingType1Filter = null;
+            }
+            if (settingsData.breedingType2Filter == -2) {
+                settingsData.breedingType2Filter = null;
             }
         },
     };

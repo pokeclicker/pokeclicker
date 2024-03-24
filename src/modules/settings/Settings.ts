@@ -36,19 +36,19 @@ export default class Settings {
         return json;
     }
 
-    static fromJSON(dict) {
-        Object.entries(dict || {})?.forEach(([name, value]) => {
+    static fromJSON(dict: Record<string, unknown> = {}) {
+        Object.entries(dict).forEach(([name, value]) => {
             this.setSettingByName(name, value);
         });
     }
 
-    static enumToSettingOptionArray<T extends Record<string, unknown>>(obj: T, filter: (v) => boolean = () => true, displayNames?: Record<keyof T, string>) {
+    static enumToSettingOptionArray<T extends Record<string, unknown>>(obj: T, filter: ((v) => boolean) = (() => true), displayNames?: Record<keyof T, string>) {
         return GameHelper.enumStrings(obj).filter(filter).map(
             (val) => new SettingOption(displayNames ? displayNames[val] : camelCaseToString(val), `${obj[val]}`),
         );
     }
 
-    static enumToNumberSettingOptionArray(obj: any, filter: (v) => boolean = () => true) {
+    static enumToNumberSettingOptionArray(obj: any, filter: ((v) => boolean) = (() => true)) {
         return GameHelper.enumStrings(obj).filter(filter).map((val) => new SettingOption(camelCaseToString(val), obj[val]));
     }
 
@@ -61,11 +61,14 @@ export default class Settings {
     }
 
     static loadDefault() {
-        const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+        const loadedJSON = JSON.parse(localStorage.getItem('settings')) ?? {};
+        const validatedJSON = {};
         this.list.forEach((setting) => {
-            settings[setting.name] = settings[setting.name] ?? setting.defaultValue;
+            const currentVal = loadedJSON[setting.name];
+            validatedJSON[setting.name] = (currentVal != null && setting.validValue(currentVal)) ? currentVal : setting.defaultValue;
         });
-        this.fromJSON(settings);
+        localStorage.setItem('settings', JSON.stringify(validatedJSON));
+        this.fromJSON(validatedJSON);
     }
 
     static resetDefault() {

@@ -12,11 +12,11 @@ export default class CssVariableSetting extends Setting<string> {
             defValue,
             requirement,
         );
+    }
 
-        // Update the value
-        this.observableValue.subscribe((newValue) => {
-            this.value = newValue === '#ffffff' ? 'transparent' : newValue;
-            document.documentElement.style.setProperty(this.name, this.value);
-        });
+    set(value: string) {
+        const newValue = value === '#ffffff' ? 'transparent' : value;
+        super.set(newValue);
+        document.documentElement.style.setProperty(this.name, newValue);
     }
 }
