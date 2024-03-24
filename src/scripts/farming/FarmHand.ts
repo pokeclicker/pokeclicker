@@ -46,6 +46,7 @@ class FarmHand {
         hired: false,
         plots: [],
         name: undefined,
+        shouldCatch : false,
     };
     // Maximum Efficiency value
     public maxEfficiency = 50;
@@ -64,6 +65,7 @@ class FarmHand {
     public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
     public plots: KnockoutObservableArray<number> = ko.observableArray(new Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT).fill(0).map((v, i) => i));
     public tooltip: KnockoutComputed<string>;
+    public shouldCatch: KnockoutObservable<boolean> = ko.observable(false);
     // public level: number;
     // public experience: number;
 
@@ -240,6 +242,29 @@ class FarmHand {
             } while (emptyPlotIndex >= 0 && workTimes > 0 && App.game.farming.hasBerry(berry));
         }
 
+        if (this.shouldCatch()) {
+            // First handle plots whose wanderer might flee soon
+            const prioPlots = App.game.farming.plotList.filter(p => p.wanderer && p.wanderer.distractTime() > 0 && !p.wanderer.catching());
+            while (prioPlots.length > 0 && workTimes > 0) {
+                const plot = prioPlots.shift();
+                if (this.plots().includes(plot.index)) {
+                    App.game.farming.handleWanderer(plot);
+                    workTimes--;
+                    worked = true;
+                }
+            }
+            // Then handle any plot
+            const plots = App.game.farming.plotList.filter(p => p.wanderer && !p.wanderer.catching());
+            while (plots.length > 0 && workTimes > 0) {
+                const plot = plots.shift();
+                if (this.plots().includes(plot.index)) {
+                    App.game.farming.handleWanderer(plot);
+                    workTimes--;
+                    worked = true;
+                }
+            }
+        }
+
         if (!worked) {
             this.addEnergy();
         } else {
@@ -293,6 +318,7 @@ class FarmHand {
             plots: this.plots(),
             // It uses the name to look up the farmhand on load
             name: this.name,
+            shouldCatch: this.shouldCatch(),
         };
 
         // Don't save anything that is the default option
@@ -316,6 +342,7 @@ class FarmHand {
         this.energy(json.energy ?? this.defaults.energy);
         this.hired(json.hired ?? this.defaults.hired);
         this.plots(json.plots ?? this.defaults.plots);
+        this.shouldCatch(json.shouldCatch ?? this.defaults.shouldCatch);
     }
 }
 

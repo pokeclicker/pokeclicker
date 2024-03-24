@@ -18,7 +18,7 @@ class GemMasterShop extends Shop {
     public areaStatus() {
         const itemStatusArray = [super.areaStatus()];
 
-        const deals = GemDeal.getDeals(this);
+        const deals = GemDeals.getDeals(this.shop);
         if (deals) {
             const pokemonDeals = deals.filter(d => d.item.itemType instanceof PokemonItem && d.isVisible()).map(d => d.item.itemType.type) as PokemonNameType[];
 
