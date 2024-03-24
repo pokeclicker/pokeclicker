@@ -23,7 +23,6 @@ export default class Achievement {
         public bonusWeight: number,
         public category: AchievementCategory,
         public achievableFunction: () => boolean | null = null,
-        public stored : boolean = false,
     ) {}
 
     public check() {

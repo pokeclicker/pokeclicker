@@ -134,7 +134,7 @@
         <div class="w-100"></div>
         <!-- /ko -->
         <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
-            <div class="plot-content" data-bind="class: FarmController.calculateCssClassMini()">
+            <div class="plot-content" data-bind="class: FarmController.calculateCssClassMini($data)">
                 <div class="plotImage">
                     <img style="width: 100%" src="assets/images/farm/soil.png"
                         data-bind="class: FarmController.calcMulchClass($data)">
@@ -148,14 +148,26 @@
                     </div>
                     <!-- /ko -->
                     <!-- ko if: $data.isUnlocked -->
-                    <div class="plotButton"
-                      data-bind="ifnot: $data.isEmpty(),
-                      click: function(data, event){FarmController.plotClickMini($index(), event)},
-                      tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
-                      <img width="100%" height="100%" src=""
-                          style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
-                          data-bind="attr:{ src: FarmController.getImage($index())}">
-                    </div>
+                        <!-- ko if: $data.wanderer -->
+                            <!-- ko ifnot: $data.wanderer.catching -->
+                                <div class="pokemonSprite wandererSprite"
+                                    data-bind="style: { backgroundImage: FarmController.getWandererStyle($data)},
+                                    class: FarmController.getWandererCss($data)">
+                                </div>
+                            <!-- /ko -->
+                            <!-- ko if: $data.wanderer.catching -->
+                                <img src="" class="pokeball-animated wandererCapture" style="z-index: 1;"
+                                    data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.wanderer.pokeball()] + '.svg'}"/>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                        <div class="plotButton"
+                        data-bind="ifnot: $data.isEmpty(),
+                        click: function(data, event){FarmController.plotClickMini($index(), event)},
+                        tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
+                        <img width="100%" height="100%" src=""
+                            style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                            data-bind="attr:{ src: FarmController.getImage($index())}">
+                        </div>
                     <!-- /ko -->
                     <!-- ko if: $data.isSafeLocked -->
                     <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
