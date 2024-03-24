@@ -1,3 +1,4 @@
+///<reference path="../../declarations/globals.d.ts"/>
 ///<reference path="PokemonHelper.ts"/>
 ///<reference path="BattlePokemon.ts"/>
 
@@ -44,7 +45,7 @@ class PokemonFactory {
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender == GameConstants.BattlePokemonGender.Female),
+                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -57,7 +58,7 @@ class PokemonFactory {
         if (roaming) {
             Notifier.notify({
                 message: `You encountered a roaming ${name}!`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender == GameConstants.BattlePokemonGender.Female),
+                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.roaming,
                 setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
@@ -161,7 +162,7 @@ class PokemonFactory {
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender == GameConstants.BattlePokemonGender.Female),
+                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -206,7 +207,7 @@ class PokemonFactory {
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender == GameConstants.BattlePokemonGender.Female),
+                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -351,7 +352,7 @@ class PokemonFactory {
      * @param genderType Gender type (Genderless, male only, etc.), should be from GameConstants under Gender Types comment
      * @returns GameConstants.BattlePokemonGender
      */
-    public static generateGender(chance: number, genderType: number): number {
+    public static generateGender(chance: number, genderType: GameConstants.Genders): GameConstants.BattlePokemonGender {
         let gender;
         switch (genderType) {
             case GameConstants.Genders.Genderless:
@@ -380,3 +381,5 @@ class PokemonFactory {
         return wanderer;
     }
 }
+
+PokemonFactory satisfies TmpPokemonFactoryType;

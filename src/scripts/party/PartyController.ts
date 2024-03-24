@@ -1,3 +1,5 @@
+///<reference path="../../declarations/globals.d.ts"/>
+
 declare const modalUtils: { observableState: typeof observableState };
 
 class PartyController {
@@ -331,3 +333,5 @@ class PartyController {
 
 
 }
+
+PartyController satisfies TmpPartyControllerType;
