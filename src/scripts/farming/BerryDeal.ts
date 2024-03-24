@@ -12,6 +12,10 @@ class BerryDeal {
         this.item = {itemType: item, amount: itemAmount};
     }
 
+    public calculateMaxTrades(): number {
+        return Math.min(...this.berries.map(b => Math.floor(App.game.farming.berryList[b.berryType]() / b.amount)));
+    }
+
     public static getDeals(town: GameConstants.BerryTraderLocations) {
         return BerryDeal.list[town];
     }
