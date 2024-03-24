@@ -5,7 +5,7 @@ class UsePokeballQuest extends Quest implements QuestInterface {
     private pokeball: GameConstants.Pokeball;
 
     constructor(amount: number, reward: number, pokeball: GameConstants.Pokeball) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.pokeball = pokeball;
         this.focus = App.game.statistics.pokeballsUsed[this.pokeball];
     }
@@ -19,8 +19,8 @@ class UsePokeballQuest extends Quest implements QuestInterface {
             possiblePokeballs.push(GameConstants.Pokeball.Ultraball);
         }
         const pokeball = SeededRand.fromArray(possiblePokeballs);
-        const amount = SeededRand.intBetween(100, 500);
-        const reward = this.calcReward(amount, pokeball);
+        const amount = SeededRand.floatBetween(99, 500);
+        const reward = this.calcReward(amount, pokeball) / amount;
         return [amount, reward, pokeball];
     }
 
@@ -31,7 +31,7 @@ class UsePokeballQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Use ${this.amount.toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
+        return this.customDescription ?? `Use ${this.tieredAmount().toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
     }
 
     toJSON() {

@@ -3,7 +3,7 @@
 class MineItemsQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.undergroundItemsFound;
     }
 
@@ -12,8 +12,8 @@ class MineItemsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(3, 15);
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.floatBetween(2, 15);
+        const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
 
@@ -26,8 +26,8 @@ class MineItemsQuest extends Quest implements QuestInterface {
         if (this.customDescription) {
             return this.customDescription;
         }
-        const suffix = this.amount > 1 ? 's' : '';
-        return `Mine ${this.amount.toLocaleString('en-US')} item${suffix} in the Underground.`;
+        const suffix = this.tieredAmount() > 1 ? 's' : '';
+        return `Mine ${this.tieredAmount().toLocaleString('en-US')} item${suffix} in the Underground.`;
     }
 
     toJSON() {

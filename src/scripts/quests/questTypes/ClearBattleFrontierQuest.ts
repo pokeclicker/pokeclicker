@@ -3,7 +3,7 @@
 class ClearBattleFrontierQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.battleFrontierTotalStagesCompleted;
     }
 
@@ -12,8 +12,8 @@ class ClearBattleFrontierQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(50, 200);
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.floatBetween(49, 200);
+        const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
 
@@ -24,7 +24,7 @@ class ClearBattleFrontierQuest extends Quest implements QuestInterface {
 
     get description(): string {
         const suffix = this.amount > 1 ? 's' : '';
-        return `Clear ${this.amount.toLocaleString('en-US')} Stages in the Battle Frontier.`;
+        return `Clear ${this.tieredAmount().toLocaleString('en-US')} Stages in the Battle Frontier.`;
     }
 
     toJSON() {

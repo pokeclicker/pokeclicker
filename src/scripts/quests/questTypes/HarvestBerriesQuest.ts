@@ -5,7 +5,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
     private berryType: BerryType;
 
     constructor(amount: number, reward: number, berryType: BerryType) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.berryType = berryType;
         this.focus = App.game.statistics.berriesHarvested[this.berryType];
     }
@@ -22,8 +22,8 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
         const maxAmt = Math.min(300, Math.ceil(432000 / berry.growthTime[3]));
         const minAmt = Math.min(10, Math.ceil(maxAmt / 2));
 
-        const amount = SeededRand.intBetween(minAmt, maxAmt);
-        const reward = this.calcReward(amount, berry.type);
+        const amount = SeededRand.floatBetween(minAmt - 1, maxAmt);
+        const reward = this.calcReward(amount, berry.type) / amount;
         return [amount, reward, berry.type];
     }
 
@@ -37,7 +37,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Harvest ${this.amount.toLocaleString('en-US')} ${BerryType[this.berryType]} ${GameConstants.pluralizeString('Berry', this.amount)} at the farm.`;
+        return this.customDescription ?? `Harvest ${this.tieredAmount().toLocaleString('en-US')} ${BerryType[this.berryType]} ${GameConstants.pluralizeString('Berry', this.tieredAmount())} at the farm.`;
     }
 
     toJSON() {

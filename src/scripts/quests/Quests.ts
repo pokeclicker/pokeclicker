@@ -25,6 +25,21 @@ class Quests implements Saveable {
         // Minimum of 1, Maximum of 4
         return Math.min(4, Math.max(1, Math.floor((this.level() + 5) / 5)));
     });
+    public availableQuestTiers: KnockoutComputed<QuestTier[]> = ko.pureComputed((): QuestTier[] => {
+        const available: QuestTier[] = ['Easy'];
+
+        if (this.level() >= 20) {
+            available.push('Medium');
+        }
+        if (this.level() >= 30) {
+            available.push('Hard');
+        }
+        if (this.level() >= 40) {
+            available.push('Insane');
+        }
+
+        return available;
+    })
 
     // Get current quests by status
     public completedQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
@@ -48,9 +63,9 @@ class Quests implements Saveable {
             return -1;
         } else if (Quests.getQuestSortStatus(quest1) > Quests.getQuestSortStatus(quest2)) {
             return 1;
-        } else if (quest1.pointsReward > quest2.pointsReward) {
+        } else if (quest1.pointsReward * Math.ceil(quest1.amount) > quest2.pointsReward * Math.ceil(quest2.amount)) {
             return -1;
-        } else if (quest1.pointsReward < quest2.pointsReward) {
+        } else if (quest1.pointsReward * Math.ceil(quest1.amount) < quest2.pointsReward * Math.ceil(quest2.amount)) {
             return 1;
         }
 
@@ -88,6 +103,19 @@ class Quests implements Saveable {
         } else {
             Notifier.notify({
                 message: 'You cannot start more quests.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+        }
+    }
+
+    public changeQuestTier(index: number, tier: QuestTier) {
+        const quest = this.questList()[index];
+
+        if (quest && !quest.inProgress() && !quest.isCompleted()) {
+            quest.tier(tier);
+        } else {
+            Notifier.notify({
+                message: 'You cannot change the tier of a quest in progress.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -221,11 +249,22 @@ class Quests implements Saveable {
      * Formula for the Money cost for refreshing quests
      * @returns 0 when all quests are complete, ~1 million when none are
      */
+    public getCompletionProgress(): number {
+        return this.questList().reduce((a, b) => a + b.tieredCompletionContribution(), 0);
+    }
+
     public getRefreshCost(): Amount {
         // If we have a free refersh, just assume all the quest are completed
-        const notComplete = this.freeRefresh() ? 0 : this.incompleteQuests().length;
-        const cost = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)) / 1000) * 1000;
-        return new Amount(Math.max(0, Math.min(1e6, cost)), GameConstants.Currency.money);
+        if (this.freeRefresh()) {
+            return new Amount(0, GameConstants.Currency.money);
+        }
+
+        const progress = Math.max(0, Math.min(1, 1 - this.getCompletionProgress()));
+
+        const costPercentage = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(progress * 10, 4) + 1)) / 1000) / 1000;
+        const fullCost = 1e6 * (2 ** player.highestRegion());
+
+        return new Amount(Math.max(0, costPercentage * fullCost), GameConstants.Currency.money);
     }
 
     public canStartNewQuest(): boolean {

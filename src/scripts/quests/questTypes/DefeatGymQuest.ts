@@ -8,7 +8,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         reward: number,
         public gymTown: string
     ) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.region = GameConstants.getGymRegion(this.gymTown);
         if (this.region == GameConstants.Region.none) {
             throw new Error(`Invalid gym town for quest: ${this.gymTown}`);
@@ -22,7 +22,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(5, 20);
+        const amount = SeededRand.floatBetween(4, 20);
         let maxRegion = player.highestRegion();
         // Check if first gym of highest region has been cleared. If not, pick one region lower than highest.
         if (!App.game.badgeCase.hasBadge(GymList[GameConstants.RegionGyms[player.highestRegion()][0]].badgeReward)) {
@@ -32,7 +32,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         // Only use cleared gyms.
         const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears());
         const gymTown = SeededRand.fromArray(possibleGyms);
-        const reward = this.calcReward(amount, gymTown);
+        const reward = this.calcReward(amount, gymTown) / amount;
         return [amount, reward, gymTown];
     }
 
@@ -65,7 +65,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
             desc.push(`${leaderName}'s Gym at ${this.gymTown}`);
         }
         desc.push(`in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])}`);
-        desc.push(`${this.amount.toLocaleString('en-US')} times.`);
+        desc.push(`${this.tieredAmount().toLocaleString('en-US')} times.`);
         return desc.join(' ');
     }
 

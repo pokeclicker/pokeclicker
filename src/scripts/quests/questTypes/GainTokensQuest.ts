@@ -3,7 +3,7 @@
 class GainTokensQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.totalDungeonTokens;
     }
 
@@ -17,8 +17,8 @@ class GainTokensQuest extends Quest implements QuestInterface {
         }, 0) || dungeonList[GameConstants.KantoDungeons[0]].tokenCost;
         const baseAmount = dungeonAmount;
         const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
-        const amount = SeededRand.intBetween(baseAmount, maxAmount);
-        const reward = GainTokensQuest.calcReward(amount, baseAmount);
+        const amount = SeededRand.floatBetween(baseAmount, maxAmount);
+        const reward = GainTokensQuest.calcReward(amount, baseAmount) / amount;
         return [amount, reward];
     }
 
@@ -28,7 +28,7 @@ class GainTokensQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} Dungeon Tokens.`;
+        return this.customDescription ?? `Gain ${this.tieredAmount().toLocaleString('en-US')} Dungeon Tokens.`;
     }
 
     toJSON() {

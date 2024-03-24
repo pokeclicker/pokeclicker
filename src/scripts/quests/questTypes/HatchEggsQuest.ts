@@ -3,7 +3,7 @@
 class HatchEggsQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.totalPokemonHatched;
     }
 
@@ -13,8 +13,8 @@ class HatchEggsQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const highestRegion = player.highestRegion();
-        const amount = SeededRand.intBetween(1, (10 + (5 * highestRegion)));
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.floatBetween(0, (10 + (5 * highestRegion)));
+        const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
 
@@ -24,7 +24,7 @@ class HatchEggsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Hatch ${this.amount.toLocaleString('en-US')} ${GameConstants.pluralizeString('Egg', this.amount)}.`;
+        return this.customDescription ?? `Hatch ${this.tieredAmount().toLocaleString('en-US')} ${GameConstants.pluralizeString('Egg', this.amount)}.`;
     }
 
     toJSON() {

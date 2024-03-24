@@ -5,7 +5,7 @@ class UseOakItemQuest extends Quest implements QuestInterface {
     private item: OakItemType;
 
     constructor(amount: number, reward: number, item: OakItemType) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.item = item;
         this.focus = App.game.statistics.oakItemUses[this.item];
     }
@@ -30,8 +30,8 @@ class UseOakItemQuest extends Quest implements QuestInterface {
             // OakItemType.Treasure_Scanner,
         ];
         const oakItem = SeededRand.fromArray(possibleItems);
-        const amount = SeededRand.intBetween(100, 500);
-        const reward = this.calcReward(amount, oakItem);
+        const amount = SeededRand.floatBetween(99, 500);
+        const reward = this.calcReward(amount, oakItem) / amount;
         return [amount, reward, oakItem];
     }
 
@@ -47,13 +47,13 @@ class UseOakItemQuest extends Quest implements QuestInterface {
         const desc = [];
         desc.push(`Equip the ${GameConstants.humanifyString(OakItemType[this.item])} and`);
         if (this.item == OakItemType.Magic_Ball) {
-            desc.push(`capture ${this.amount.toLocaleString('en-US')} wild Pokémon.`);
+            desc.push(`capture ${this.tieredAmount().toLocaleString('en-US')} wild Pokémon.`);
         } else if (this.item == OakItemType.Amulet_Coin) {
-            desc.push(`earn Pokédollars ${this.amount.toLocaleString('en-US')} times.`);
+            desc.push(`earn Pokédollars ${this.tieredAmount().toLocaleString('en-US')} times.`);
         } else if (this.item == OakItemType.Exp_Share) {
-            desc.push(`defeat ${this.amount.toLocaleString('en-US')} Pokémon.`);
+            desc.push(`defeat ${this.tieredAmount().toLocaleString('en-US')} Pokémon.`);
         } else {
-            desc.push(`gain its benefit ${this.amount.toLocaleString('en-US')} times.`);
+            desc.push(`gain its benefit ${this.tieredAmount().toLocaleString('en-US')} times.`);
         }
         return desc.join(' ');
     }

@@ -3,7 +3,7 @@
 class CatchShadowsQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.totalShadowPokemonCaptured;
     }
 
@@ -12,8 +12,8 @@ class CatchShadowsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = Math.ceil(Math.random() * 5);
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.floatBetween(0, 5);
+        const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
 
@@ -23,7 +23,7 @@ class CatchShadowsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Catch ${this.amount.toLocaleString('en-US')} Shadow Pokémon.`;
+        return this.customDescription ?? `Catch ${this.tieredAmount().toLocaleString('en-US')} Shadow Pokémon.`;
     }
 
     toJSON() {

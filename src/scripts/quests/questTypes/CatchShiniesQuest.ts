@@ -3,13 +3,17 @@
 class CatchShiniesQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.totalShinyPokemonCaptured;
     }
 
     public static generateData(): any[] {
-        const amount = 1;
-        const reward = this.calcReward(amount);
+        // The base amount will be set somewhere between 0.01 and 1
+        // The quest will then round the number up
+        // This way, easy quests with a multiplier of 1 will still always require 1
+        // Insane quests with a multiplier of 100, will be anywhere between 1 and 100
+        const amount = SeededRand.floatBetween(0, 1);
+        const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
 
@@ -19,7 +23,7 @@ class CatchShiniesQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Catch ${this.amount.toLocaleString('en-US')} shiny Pokémon.`;
+        return this.customDescription ?? `Catch ${this.tieredAmount().toLocaleString('en-US')} shiny Pokémon.`;
     }
 
     toJSON() {

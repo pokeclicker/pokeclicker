@@ -6,7 +6,7 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
     public static weights: Array<Record<string, number>> = [];
 
     constructor(capturesNeeded: number, reward: number, public type: PokemonType) {
-        super(capturesNeeded, reward);
+        super(capturesNeeded, reward, Quest.defaultQuestTier());
         this.focus = ko.pureComputed(() => pokemonMap.filter(p => p.type.includes(this.type)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0));
     }
 
@@ -29,10 +29,10 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(50, 250);
+        const amount = SeededRand.floatBetween(49, 250);
         this.weights = this.typeWeights();
         const type = SeededRand.fromArray(this.weights.filter(w => w.weight < this.maxWeight).map(w => w.type));
-        const reward = this.calcReward(amount, type);
+        const reward = this.calcReward(amount, type) / amount;
         return [amount, reward, type];
     }
 
@@ -42,7 +42,7 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Capture or hatch ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]}-type Pokémon.`;
+        return this.customDescription ?? `Capture or hatch ${this.tieredAmount().toLocaleString('en-US')} ${PokemonType[this.type]}-type Pokémon.`;
     }
 
     toJSON() {

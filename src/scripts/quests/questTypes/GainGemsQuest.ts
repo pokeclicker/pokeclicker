@@ -8,7 +8,7 @@ class GainGemsQuest extends Quest implements QuestInterface {
     private type: PokemonType;
 
     constructor(amount: number, reward: number, type: PokemonType) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.type = type;
         this.focus = App.game.statistics.gemsGained[this.type];
     }
@@ -36,10 +36,10 @@ class GainGemsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(200, 600);
+        const amount = SeededRand.floatBetween(199, 600);
         this.weights = this.typeWeights();
         const type = SeededRand.fromArray(this.weights.filter(w => w.weight < this.maxWeight).map(w => w.type));
-        const reward = this.calcReward(type, amount);
+        const reward = this.calcReward(type, amount) / amount;
         return [amount, reward, type];
     }
 
@@ -49,7 +49,7 @@ class GainGemsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]} gems.`;
+        return this.customDescription ?? `Gain ${this.tieredAmount().toLocaleString('en-US')} ${PokemonType[this.type]} gems.`;
     }
 
     toJSON() {

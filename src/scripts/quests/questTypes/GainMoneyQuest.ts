@@ -3,7 +3,7 @@
 class GainMoneyQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.totalMoney;
     }
 
@@ -18,8 +18,8 @@ class GainMoneyQuest extends Quest implements QuestInterface {
         }, 0) || GymList[GameConstants.KantoGyms[0]].moneyReward;
         const baseAmount = gymAmount * (1 + highestRegion) * 2;
         const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
-        const amount = SeededRand.intBetween(baseAmount, maxAmount);
-        const reward = GainMoneyQuest.calcReward(amount, baseAmount);
+        const amount = SeededRand.floatBetween(baseAmount, maxAmount);
+        const reward = GainMoneyQuest.calcReward(amount, baseAmount) / amount;
         return [amount, reward];
     }
 
@@ -29,7 +29,7 @@ class GainMoneyQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} Pokédollars.`;
+        return this.customDescription ?? `Gain ${this.tieredAmount().toLocaleString('en-US')} Pokédollars.`;
     }
 
     toJSON() {

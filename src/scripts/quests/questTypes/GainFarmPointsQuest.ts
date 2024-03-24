@@ -3,7 +3,7 @@
 class GainFarmPointsQuest extends Quest implements QuestInterface {
 
     constructor(amount: number, reward: number) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.totalFarmPoints;
     }
 
@@ -12,8 +12,8 @@ class GainFarmPointsQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(500, 5000);
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.floatBetween(499, 5000);
+        const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
 
@@ -23,7 +23,7 @@ class GainFarmPointsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} Farm Points.`;
+        return this.customDescription ?? `Gain ${this.tieredAmount().toLocaleString('en-US')} Farm Points.`;
     }
 
     toJSON() {

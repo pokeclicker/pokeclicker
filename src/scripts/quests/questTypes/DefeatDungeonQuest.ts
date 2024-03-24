@@ -8,7 +8,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         reward: number,
         public dungeon: string
     ) {
-        super(amount, reward);
+        super(amount, reward, Quest.defaultQuestTier());
         this.region = GameConstants.getDungeonRegion(this.dungeon);
         if (this.region == GameConstants.Region.none) {
             throw new Error(`Invalid dungeon for quest: ${this.dungeon}`);
@@ -18,13 +18,13 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         // Allow up to highest region
-        const amount = SeededRand.intBetween(5, 20);
+        const amount = SeededRand.floatBetween(4, 20);
         const region = SeededRand.intBetween(0, player.highestRegion());
         // Only use unlocked dungeons
         const possibleDungeons = GameConstants.RegionDungeons[region].filter(dungeon => TownList[dungeon].isUnlocked());
         // If no dungeons unlocked in this region, just use the first dungeon of the region
         const dungeon = possibleDungeons.length ? SeededRand.fromArray(possibleDungeons) : GameConstants.RegionDungeons[region][0];
-        const reward = this.calcReward(amount, dungeon);
+        const reward = this.calcReward(amount, dungeon) / amount;
         return [amount, reward, dungeon];
     }
 
@@ -47,14 +47,14 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         }
         const tokens = PokemonFactory.routeDungeonTokens(route,region);
         const routeKillsPerDungeon = dungeonList[dungeon].tokenCost / tokens;
-        const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount;
+        const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD;
 
         const reward = Math.min(5000, Math.ceil(completeDungeonsReward + collectTokensReward));
         return super.randomizeReward(reward);
     }
 
     get description(): string {
-        return this.customDescription ?? `Defeat the ${this.dungeon} dungeon in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} ${this.amount.toLocaleString('en-US')} times.`;
+        return this.customDescription ?? `Defeat the ${this.dungeon} dungeon in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} ${this.tieredAmount().toLocaleString('en-US')} times.`;
     }
 
     toJSON() {

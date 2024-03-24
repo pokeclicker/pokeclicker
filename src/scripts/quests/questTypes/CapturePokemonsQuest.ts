@@ -3,13 +3,13 @@
 class CapturePokemonsQuest extends Quest implements QuestInterface {
 
     constructor(capturesNeeded: number, reward: number) {
-        super(capturesNeeded, reward);
+        super(capturesNeeded, reward, Quest.defaultQuestTier());
         this.focus = App.game.statistics.totalPokemonCaptured;
     }
 
     public static generateData(): any[] {
-        const amount = SeededRand.intBetween(100, 500);
-        const reward = this.calcReward(amount);
+        const amount = SeededRand.floatBetween(99, 500);
+        const reward = this.calcReward(amount) / amount;
         return [amount, reward];
     }
 
@@ -19,7 +19,7 @@ class CapturePokemonsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Capture or hatch ${this.amount.toLocaleString('en-US')} Pokémon.`;
+        return this.customDescription ?? `Capture or hatch ${this.tieredAmount().toLocaleString('en-US')} Pokémon.`;
     }
 
     toJSON() {
