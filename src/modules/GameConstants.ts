@@ -407,7 +407,6 @@ export const QUESTS_PER_SET = 10;
 // EVs
 export const BASE_EP_YIELD = 100;
 export const STONE_EP_YIELD = 1000;
-export const WANDERER_EP_YIELD = 500;
 export const SHOPMON_EP_YIELD = 1000;
 export const SAFARI_EP_YIELD = 1000;
 
@@ -417,6 +416,8 @@ export const DUNGEON_EP_MODIFIER = 3;
 export const DUNGEON_BOSS_EP_MODIFIER = 10;
 export const ROAMER_EP_MODIFIER = 50;
 export const SHADOW_EP_MODIFIER = 2;
+export const BASE_WANDERER_EP_MODIFIER = 2;
+export const WANDERER_EP_MODIFIER = 10;
 
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;

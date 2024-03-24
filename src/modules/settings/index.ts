@@ -124,6 +124,9 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
+Settings.add(new BooleanSetting('showUndergroundModuleMineControls', 'Show Underground module mine controls', true));
+Settings.add(new BooleanSetting('showUndergroundModuleDailyTrades', 'Show Underground module daily trades', false));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
@@ -196,6 +199,11 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
+
+// Underground
+Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true));
+Settings.add(new BooleanSetting('underground.Reduced_Plates', 'Reduced Plates', true));
+Settings.add(new BooleanSetting('underground.Reduced_Evolution_Items', 'Reduced Evolution Items', true));
 
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
