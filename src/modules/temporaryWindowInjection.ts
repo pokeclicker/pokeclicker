@@ -65,7 +65,7 @@ import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
-import * as modalUtils from './utilities/Modal';
+import * as DisplayObservables from './utilities/DisplayObservables';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
@@ -274,7 +274,7 @@ Object.assign(<any>window, {
     GenericProxy,
     SpriteCredits,
     CodeCredits,
-    modalUtils,
+    DisplayObservables,
     PokemonCategories,
     Information,
     TypeHelper,
