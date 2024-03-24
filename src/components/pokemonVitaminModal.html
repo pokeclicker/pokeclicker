@@ -98,7 +98,7 @@
                                 <td class="text-center tight" data-bind="text: $data.vitaminsUsed[VitaminController.currentlySelected()]().toLocaleString('en-US')">-</td>
                                 <td class="text-center tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
                                 <td class="text-center tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
-                                <td class="text-center tight" data-bind="text: $data.breedingEfficiency().toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>
+                                <td class="text-center tight" data-bind="text: $data.breedingEfficiency().toLocaleString('en-US', { maximumFractionDigits: 3 })">-</td>
                             </tr>
                         </tbody>
                     </table>
