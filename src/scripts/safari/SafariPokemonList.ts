@@ -162,7 +162,7 @@ class SafariPokemonList {
         // Obtain the list of non-EVable pokemon and shuffle it
         // There may not be an evenly divisible number of pokemon so repeat list 5 times
         const friendSafariPokemon = pokemonList
-            .filter((p) => PokemonHelper.isObtainableAndNotEvable(p.name)
+            .filter((p) => PokemonLocations.isObtainableAndNotEvable(p.name)
                 && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION)
             .map((p) => p.name);
 

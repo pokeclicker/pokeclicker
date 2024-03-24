@@ -77,32 +77,43 @@ class Party implements Feature {
         if (newCatch) {
             // Create new party pokemon
             this._caughtPokemon.push(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow));
-        } else {
-            // Update existing party pokemon
-            const pokemon = this.getPokemon(id);
-            if (newShiny) {
-                pokemon.shiny = true;
-            }
-            if (newShadow) {
-                pokemon.shadow = GameConstants.ShadowStatus.Shadow;
-            }
+        }
+
+        // Update existing party pokemon
+        const partyPokemon = this.getPokemon(id);
+        if (newShiny) {
+            partyPokemon.shiny = true;
+        }
+        if (newShadow) {
+            partyPokemon.shadow = GameConstants.ShadowStatus.Shadow;
         }
 
         // Properties of the PartyPokemon used for notifications -- shininess, shadow status, etc. comes from this catch
-        const { name, displayName } = this.getPokemon(id);
+        const { name, displayName } = partyPokemon;
 
-        // Combined notifications
-        // Always notify for new shinies and shadows, new catches can be suppressed to be notified elsewhere
-        if (newShiny || newShadow || (newCatch && !suppressNotification)) {
-            const pokeString = `${shiny ? 'shiny ' : ''}${isShadow ? 'shadow ' : ''}${displayName}`;
-            let notif = `You have captured ${GameHelper.anOrA(pokeString)} ${pokeString}!`;
-            if (newShiny) {
-                notif = `✨ ${notif} ✨`;
-            }
+        // Notifications
+        if (newCatch) {
             Notifier.notify({
-                message: notif,
-                pokemonImage: PokemonHelper.getImage(id, undefined, gender === GameConstants.BattlePokemonGender.Female),
-                type: (newShiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success),
+                message: `You have captured ${GameHelper.anOrA(name)} ${displayName}!`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender === GameConstants.BattlePokemonGender.Female),
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
+        }
+        if (newShiny) {
+            Notifier.notify({
+                message: `✨ You have captured a shiny ${displayName}! ✨`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender === GameConstants.BattlePokemonGender.Female),
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
+        }
+        if (newShadow) {
+            Notifier.notify({
+                message: `You have captured a shadow ${displayName}!`,
+                type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
@@ -113,11 +124,10 @@ class Party implements Feature {
             App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: name })
             );
         }
-        if (newShiny) {
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShiny({ pokemon: name }));
-        } else if (shiny) {
-            // Duplicate shinies get logged too
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShinyDupe({ pokemon: name }));
+        if (shiny) {
+            // Both new and duplicate shinies get logged
+            const shinyLogContent = newShiny ? createLogContent.capturedShiny : createLogContent.capturedShinyDupe;
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, shinyLogContent({ pokemon: name }));
         }
         if (newShadow) {
             App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: name }));
