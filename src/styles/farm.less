@@ -60,6 +60,10 @@
     cursor:url('../assets/images/farm/plotSafeLock.png'), auto;
 }
 
+.WandererHandling {
+  cursor:url('../assets/images/farm/wandererHandling.png'), auto;
+}
+
 .Boost_Mulch {
     filter: hue-rotate(200deg);
 }
@@ -150,6 +154,16 @@
           width: 12px;
           filter: none;
       }
+      
+
+      .wandererSprite, .wandererCapture {
+        height: 60%;
+        width: 60%;
+        position: absolute;
+        pointer-events: none;
+        top: -10%;
+        left: -10%;
+      }
   }
 }
 
@@ -225,8 +239,44 @@
   .list-inline-item:nth-child(n+6) {
     margin-top: 14px;
   }
+}
 
-  .no-pokerus {
-    margin-bottom: -10px;
+.wandererSprite, .wandererCapture {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  pointer-events: none;
+  top: -16px;
+  left: -16px;
+}
+
+.wandererSprite {
+  image-rendering: pixelated;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@keyframes flee {
+  from {
+    opacity: 1;
   }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.pokemonSprite.walkDownFlash {
+  background-position: 0.00000% 0.00000%;
+  opacity: 1;
+  animation: walkDown 0.6s steps(4) infinite, flash 1.5s linear infinite;
+}
+
+.pokemonSprite.walkDownFlee {
+  background-position: 0.00000% 0.00000%;
+  opacity: 1;
+  animation: walkDown 0.6s steps(4) infinite, flee 0.250s linear 1;
 }
