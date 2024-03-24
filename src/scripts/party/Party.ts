@@ -6,7 +6,7 @@ class Party implements Feature {
     name = 'Pokemon Party';
     saveKey = 'party';
 
-    _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
+    private _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
 
     defaults = {
         caughtPokemon: [],
@@ -16,7 +16,7 @@ class Party implements Feature {
 
     hasShadowPokemon: KnockoutComputed<boolean>;
 
-    _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
+    private _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
 
     calculateBaseClickAttack: KnockoutComputed<number>;
 
