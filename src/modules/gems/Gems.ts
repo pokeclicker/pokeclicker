@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import {
+import type {
     Observable as KnockoutObservable,
 } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
