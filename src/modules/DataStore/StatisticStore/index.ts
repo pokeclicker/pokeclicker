@@ -1,9 +1,9 @@
 import type { Observable as KnockoutObservable } from 'knockout';
-import getRouteKillsProxy from './getRouteKillsProxy';
-import { Saveable } from '../common/Saveable';
+import { ContestResults, ContestStyle } from '../../GameConstants';
 import '../../koExtenders';
 import type { PokemonList } from '../../pokemons/PokemonList';
-import { ContestResults, ContestStyle } from '../../GameConstants';
+import { Saveable } from '../common/Saveable';
+import getRouteKillsProxy from './getRouteKillsProxy';
 
 const failedSetValue = () => 0;
 
@@ -129,6 +129,9 @@ export default class Statistics implements Saveable {
     // Contests
     contestResults: Record<ContestResults, KnockoutObservable<number>>;
     contestStyleMaster: Record<ContestStyle, KnockoutObservable<number>>;
+    // DungeonGuides
+    dungeonGuideAttempts: Array<KnockoutObservable<number>>;
+    dungeonGuideClears: Array<KnockoutObservable<number>>;
 
     /*
      * objectObservables
@@ -256,6 +259,8 @@ export default class Statistics implements Saveable {
         'temporaryBattleDefeated',
         'contestResults',
         'contestStyleMaster',
+        'dungeonGuideAttempts',
+        'dungeonGuideClears',
     ];
     // These will allow negative values (special events etc)
     objectObservables = [

@@ -48,7 +48,7 @@ class DungeonBattle extends Battle {
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // Clearing Dungeon tile
-        DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
+        DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
         // Attempting to catch Pokemon
@@ -135,7 +135,7 @@ class DungeonBattle extends Battle {
             this.trainerPokemonIndex(0);
 
             // Clearing Dungeon tile
-            DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
+            DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
             DungeonRunner.map.currentTile().calculateCssClass();
 
             // Update boss
