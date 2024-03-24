@@ -200,7 +200,7 @@ class PokemonLocations {
                 }
             }
             // Shadow Pokemon
-            new Set(dungeon.allAvailableShadowPokemon()).forEach(pokemon => {
+            new Set(dungeon.allShadowPokemon()).forEach(pokemon => {
                 cacheLine[pokemon].push(dungeonName);
             });
         });
