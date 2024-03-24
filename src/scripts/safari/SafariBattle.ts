@@ -28,7 +28,7 @@ class SafariBattle {
         $('#safariBattleModal').modal({ backdrop: 'static', keyboard: false });
 
         // Shiny
-        const location = `${GameConstants.Region[Safari.activeRegion()].charAt(0).toUpperCase() + GameConstants.Region[Safari.activeRegion()].slice(1)} Safari`;
+        const location = `${GameConstants.camelCaseToString(GameConstants.Region[Safari.activeRegion()])} Safari`;
         if (enemy.shiny) {
             App.game.logbook.newLog(
                 LogBookTypes.SHINY,
