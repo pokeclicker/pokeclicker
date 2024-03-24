@@ -15,6 +15,7 @@ import type {
     ExtraAchievementCategories,
     GameState,
     Region,
+    SubRegions,
     Pokerus,
     BattlePokemonGender,
 } from './GameConstants';
@@ -32,7 +33,9 @@ import type PokeballFilters from './pokeballs/PokeballFilters';
 import type { QuestLineNameType } from './quests/QuestLineNameType';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
-import { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
+import type { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
+import type Requirement from './requirements/Requirement';
+import type AreaStatus from './worldmap/AreaStatus';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -87,38 +90,29 @@ type TmpSaveType = {
     key: string;
 };
 
-type TmpMapHelperType = {
-    moveToRoute: (route: number, region: Region)=>void;
-    routeExist: (route: number, region: Region)=>boolean;
-    normalizeRoute: (route: number, region: Region)=>number;
-    accessToRoute: (route: number, region: Region)=>boolean;
-    getCurrentEnvironment: ()=>Environment;
-    calculateBattleCssClass: ()=>string;
-    calculateRouteCssClass: (route: number, region: Region)=>string;
-    calculateTownCssClass: (townName: string)=>string;
-    accessToTown: (townName: string)=>boolean;
-    moveToTown: (townName: string)=>void;
-    validRoute: (route: number, region: Region)=>boolean;
-    openShipModal: ()=>void;
-    ableToTravel: ()=>boolean;
-    travelToNextRegion: ()=>void;
+type TmpDungeonType = {
+    allAvailablePokemon: () => PokemonNameType[];
+    allAvailableShadowPokemon: () => PokemonNameType[];
+    isThereQuestAtLocation: () => boolean;
 };
 
-type TmpDungeonRunner = {
+type TmpDungeonRunnerType = {
     dungeon: {
         name: string
     };
+    isAchievementsComplete: (TmpDungeonType) => boolean;
 };
 
-type TmpGym = {
+type TmpGymType = {
     town: string;
 };
 
-type TmpGymRunner = {
-    gymObservable: () => TmpGym;
+type TmpGymRunnerType = {
+    gymObservable: () => TmpGymType;
+    getEnvironmentArea: () => Environment;
 };
 
-type TmpAchievementHandler = {
+type TmpAchievementHandlerType = {
     achievementList: Achievement[];
     navigateIndex: KnockoutObservable<number>;
     achievementListFiltered: KnockoutObservableArray<Achievement>;
@@ -150,6 +144,60 @@ type TmpAchievementHandler = {
     load: ()=>void
 };
 
+type TmpBattleType = {
+    enemyPokemon: KnockoutObservable<unknown>;
+    catching: KnockoutObservable<boolean>;
+    route: number,
+    generateNewEnemy: () => void;
+};
+
+type TmpTemporaryBattleType = {
+    getTown: () => TmpTownType;
+};
+
+type TmpTemporaryBattleRunnerType = {
+    getEnvironmentArea: () => Environment;
+    battleObservable: KnockoutObservable<TmpTemporaryBattleType>;
+};
+
+type TmpTownContentType = {
+    isUnlocked: () => boolean;
+    areaStatus: () => AreaStatus;
+};
+
+type TmpTownType = {
+    name: string;
+    region: Region;
+    requirements: Requirement[];
+    dungeon?: TmpDungeonType;
+    //npcs?: NPC[];
+    startingTown: boolean;
+    content: TmpTownContentType[];
+    subRegion: SubRegions;
+    ignoreAreaStatus: boolean;
+    isUnlocked: () => boolean;
+};
+
+type TmpTownListType = { 
+    [name: string]: TmpTownType;
+};
+
+type TmpRouteHelperType = {
+    getAvailablePokemonList(route: number, region: Region, includeHeadbutt?: boolean): PokemonNameType[];
+    routePokerusEVs(route: number, region: Region): string;
+    dungeonPokerusEVs(dungeon: TmpDungeonType): string;
+    getEvs(possiblePokemon: PokemonNameType[]): number;
+    routeCompleted(route: number, region: Region, includeShiny: boolean, includeHeadbutt?: boolean): boolean;
+    listCompleted(possiblePokemon: PokemonNameType[], includeShiny: boolean);
+    minPokerus(possiblePokemon: PokemonNameType[]): number;
+    minPokerusCheck(possiblePokemon: PokemonNameType[]): boolean;
+    isAchievementsComplete(route: number, region: Region);
+    isThereQuestAtLocation(route: number, region: Region);
+};
+
+type TmpDungeonListType = {
+    [name: string]: TmpDungeonType;
+};
 
 export type TmpPokemonFactoryType = {
     generateShiny(chance: number, skipBonus?: boolean): boolean;
@@ -166,10 +214,14 @@ declare global {
     const App: TmpAppType;
     const player: any;
     const Save: TmpSaveType;
-    const MapHelper: TmpMapHelperType;
-    const DungeonRunner: TmpDungeonRunner;
-    const GymRunner: TmpGymRunner;
-    const AchievementHandler: TmpAchievementHandler;
+    const DungeonRunner: TmpDungeonRunnerType;
+    const GymRunner: TmpGymRunnerType;
+    const AchievementHandler: TmpAchievementHandlerType;
     const PokemonFactory: TmpPokemonFactoryType;
     const PartyController: TmpPartyControllerType;
+    const Battle: TmpBattleType;
+    const TownList: TmpTownListType;
+    const RouteHelper: TmpRouteHelperType;
+    const TemporaryBattleRunner: TmpTemporaryBattleRunnerType;
+    const dungeonList: TmpDungeonListType;
 }

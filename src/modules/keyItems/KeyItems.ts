@@ -6,6 +6,7 @@ import { Feature } from '../DataStore/common/Feature';
 import {
     getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus,
 } from '../GameConstants';
+import MapHelper from '../worldmap/MapHelper';
 
 export default class KeyItems implements Feature {
     name = 'Key Items';

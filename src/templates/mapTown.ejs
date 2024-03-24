@@ -37,7 +37,7 @@ Parameters:
         click:function(){MapHelper.moveToTown('<%= locals.name.replace(/'/g, '\\\'') %>')},
         attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') },
         <% if (locals.home) { %>
-            css: { flash: MapHelper.ableToTravel() }
+            css: { flash: MapHelper.canTravelToNextRegion() }
         <% } %>">
 </rect>
 <% if (!locals.isExtension) { %>

@@ -985,7 +985,7 @@
          , x: 19, y: 43
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
+         , visible:  "MapHelper.canTravelToNextRegion() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_empty.png"
          })
     %>
@@ -995,7 +995,7 @@
          , x: 19, y: 43
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
+         , visible:  "MapHelper.canTravelToNextRegion() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_pikachu.png"
          })
     %>

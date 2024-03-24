@@ -100,7 +100,8 @@ class Pokeballs implements Feature {
                     return 0;
                 }
                 const highestRegionRoutes = Routes.getRoutesByRegion(player.highestRegion());
-                const maxRoute = MapHelper.normalizeRoute(highestRegionRoutes[highestRegionRoutes.length - 1].number, player.highestRegion());
+                const maxRoute = Routes.normalizeRoute(player.highestRegion(), highestRegionRoutes[highestRegionRoutes.length - 1].number);
+
                 let currentRoute;
                 if (App.game.gameState == GameConstants.GameState.dungeon) {
                     // Use equivalent route difficulty for dungeons
@@ -108,7 +109,7 @@ class Pokeballs implements Feature {
                 } else {
                     currentRoute = player.route();
                 }
-                currentRoute = MapHelper.normalizeRoute(currentRoute,player.region);
+                currentRoute = Routes.normalizeRoute(player.region, currentRoute);
 
                 // Increased rate for earlier routes and dungeons, scales with regional progression
                 return Math.min(15,Math.max(1,player.highestRegion()) * Math.max(1,(maxRoute / currentRoute)));

@@ -1,5 +1,6 @@
 import { AchievementOption, Environment } from '../GameConstants';
 import GameHelper from '../GameHelper';
+import MapHelper from '../worldmap/MapHelper';
 import Requirement from './Requirement';
 
 export default class InEnvironmentRequirement extends Requirement {

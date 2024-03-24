@@ -203,6 +203,8 @@ import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
+import MapHelper from './worldmap/MapHelper';
+import AreaStatus from './worldmap/AreaStatus';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -417,4 +419,6 @@ Object.assign(<any>window, {
     ItemRequirement,
     ChristmasPresent,
     DamageCalculator,
+    MapHelper,
+    AreaStatus,
 });
