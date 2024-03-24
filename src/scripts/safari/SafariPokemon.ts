@@ -6,7 +6,7 @@ class SafariPokemon implements PokemonInterface {
     shiny: boolean;
     baseCatchFactor: number;
     baseEscapeFactor: number;
-    gender: number;
+    gender: GameConstants.BattlePokemonGender;
     shadow = GameConstants.ShadowStatus.None;
 
     // Used for overworld sprites
@@ -36,7 +36,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${this.displayName}! ✨`,
-                pokemonImage: PokemonHelper.getImage(this.id, this.shiny, this.gender == GameConstants.BattlePokemonGender.Female),
+                pokemonImage: PokemonHelper.getImage(this.id, this.shiny, this.gender),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
