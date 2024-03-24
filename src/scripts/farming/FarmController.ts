@@ -61,8 +61,8 @@ class FarmController {
         return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}.png`;
     }
 
-    public static calculateCssClass() {
-        switch (this.selectedFarmTool()) {
+    public static calculateCssClassFromTool(plot: Plot, tool: FarmingTool) {
+        switch (tool) {
             case FarmingTool.Lock:
                 return 'PlotSafeLockSelected';
             case FarmingTool.Mulch:
@@ -73,8 +73,12 @@ class FarmController {
                 return 'MulchShovelSelected';
             case FarmingTool.Berry:
             default:
-                return 'BerrySelected';
+                return plot.wanderer ? 'WandererHandling' : 'BerrySelected';
         }
+    }
+
+    public static calculateCssClass(plot: Plot) {
+        return this.calculateCssClassFromTool(plot, this.selectedFarmTool());
     }
 
     public static calcMulchClass(plot: Plot) {
@@ -87,20 +91,27 @@ class FarmController {
     public static plotClick(index: number, event: MouseEvent) {
         const plot: Plot = App.game.farming.plotList[index];
 
+        // If shift key held, lock/unlock plot
         if (event.shiftKey) {
             this.shiftTogglePlotSafeLock(plot, index);
         } else {
-            this.handleClickActions(plot, index);
+            this.handleClickActions(this.selectedFarmTool(), plot, index);
         }
     }
 
     public static plotClickMini(index: number, event: MouseEvent) {
         const plot: Plot = App.game.farming.plotList[index];
 
+        // Unlocking Plot (we don't want to do this in the farm module)
+        if (!plot.isUnlocked) {
+            return;
+        }
+
+        // If shift key held, lock/unlock plot
         if (event.shiftKey) {
             this.shiftTogglePlotSafeLock(plot, index);
         } else {
-            this.handleClickActionsMini(plot, index);
+            this.handleClickActions(this.selectedFarmModuleTool(), plot, index);
         }
     }
 
@@ -128,16 +139,17 @@ class FarmController {
         });
     }
 
-    private static handleClickActions(plot: Plot, index: number) {
+    private static handleClickActions(tool: FarmingTool, plot: Plot, index: number) {
         // Unlocking Plot
         if (!plot.isUnlocked) {
             return App.game.farming.unlockPlot(index);
         }
-
         // Check which tool we have selected
-        switch (this.selectedFarmTool()) {
+        switch (tool) {
             case FarmingTool.Berry:
-                if (plot.isEmpty()) {
+                if (plot.wanderer) {
+                    App.game.farming.handleWanderer(plot);
+                } else if (plot.isEmpty()) {
                     App.game.farming.plant(index, this.selectedBerry());
                 } else {
                     App.game.farming.harvest(index);
@@ -158,50 +170,8 @@ class FarmController {
         }
     }
 
-    private static handleClickActionsMini(plot: Plot, index: number) {
-        // Unlocking Plot (we don't do that on the mini farm)
-        if (!plot.isUnlocked) {
-            return;
-        }
-
-        // Check which tool we have selected
-        switch (this.selectedFarmModuleTool()) {
-            case FarmingTool.Berry:
-                if (plot.isEmpty()) {
-                    App.game.farming.plant(index, this.selectedBerry());
-                } else {
-                    App.game.farming.harvest(index);
-                }
-                break;
-            case FarmingTool.Mulch:
-                App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
-                break;
-            case FarmingTool.Shovel:
-                App.game.farming.shovel(index);
-                break;
-            case FarmingTool.MulchShovel:
-                App.game.farming.shovelMulch(index);
-                break;
-            case FarmingTool.Lock:
-                App.game.farming.togglePlotSafeLock(index);
-                break;
-        }
-    }
-
-    public static calculateCssClassMini() {
-        switch (this.selectedFarmModuleTool()) {
-            case FarmingTool.Mulch:
-                return 'MulchSelected';
-            case FarmingTool.Shovel:
-                return 'ShovelSelected';
-            case FarmingTool.MulchShovel:
-                return 'MulchShovelSelected';
-            case FarmingTool.Lock:
-                return 'PlotSafeLockSelected';
-            case FarmingTool.Berry:
-            default:
-                return 'BerrySelected';
-        }
+    public static calculateCssClassMini(plot: Plot) {
+        return this.calculateCssClassFromTool(plot, this.selectedFarmModuleTool());
     }
 
     public static mulchAll() {
@@ -315,6 +285,39 @@ class FarmController {
         }
 
         App.game.statistics.selectedBerryID(berryId);
+    }
+
+    public static wandererToRoute(pokemon: PokemonNameType): RegionRoute {
+        const maxRegion = player.highestRegion();
+        const pokemonRegion = pokemonMap[pokemon].nativeRegion;
+        const routes = Routes.getRoutesByRegion(maxRegion).filter(r => !r.ignoreRouteInCalculations);
+        const minIndex = Math.floor((routes.length - 1) * pokemonRegion / (maxRegion + 2));
+        const maxIndex = Math.floor((routes.length - 1) * (pokemonRegion + 2) / (maxRegion + 2));
+        // Adds a bit of randomness so it is not always the same route
+        const routeIndex = Rand.intBetween(minIndex, maxIndex);
+        return routes[routeIndex];
+    }
+
+    public static getWandererStyle(plot: Plot): string {
+        if (!plot.wanderer) {
+            return '';
+        }
+        const pokemon = pokemonMap[plot.wanderer.name];
+        const forgedID = `${pokemon.id}${plot.wanderer.shiny ? 's' : ''}`;
+        return `${plot.wanderer.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' :  ''}url('assets/images/dynamic-background/pokemon/${forgedID}.png')`;
+    }
+
+    public static getWandererCss(plot: Plot): string {
+        if (!plot.wanderer) {
+            return '';
+        }
+        if (plot.wanderer.fleeing()) {
+            return 'walkDownFlee';
+        } else if (plot.wanderer.distractTime() > 0) {
+            return 'walkDownFlash';
+        } else {
+            return 'walkDown';
+        }
     }
 
 }

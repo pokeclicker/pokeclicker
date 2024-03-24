@@ -174,31 +174,13 @@
                             <th class="bg-dark">Wandering Pokémon</th>
                           </tr>
                           <tr>
-                            <th data-bind="text: 'Attracted by all Berries'">Base Wanderers</th>
-                            <td style="position: absolute; right: 0;"
-                            data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus),
-                            tooltip: {
-                              title: 'These Pokémon do not gain EVs when attracted to the Farm.',
-                              trigger: 'hover',
-                              placement:'top',
-                              html: true,
-                            }">ⓘ</td>
+                            <th colspan="2" data-bind="text: 'Attracted by all Berries'">Base Wanderers</th>
                           </tr>
                           <tr id="wanderRow">
                             <td id="wanderPokemonList">
                               <ul class="list-inline">
-                              <!-- ko foreach: Berry.baseWander -->
-                              <li class="list-inline-item no-pokerus">
-                                <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: `assets/images/${(App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '')}pokemon/${pokemonList.find((p) => p.name == $data).id}.png` },
-                                css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName(pokemonList.find((p) => p.name == $data).name) }" onerror="this.src='assets/images/pokemon/0.png';"/>
-                                <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-                                <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: PokemonHelper.calcNativeRegion(pokemonList.find((p) => p.name == $data).id) <= player.highestRegion(),
-                                tooltip: {
-                                  title: `Reach ${GameConstants.camelCaseToString(GameConstants.Region[PokemonHelper.calcNativeRegion(pokemonList.find((p) => p.name == $data).id)])} to attract this Pokémon!`,
-                                    placement: 'top',
-                                    trigger: 'hover'
-                                }">
-                                </li>
+                              <!-- ko foreach: Berry.baseWander.filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                               <!-- /ko -->
                               </ul>
                             </td>
@@ -209,59 +191,21 @@
                           <tr id="wanderRow">
                             <td id="wanderPokemonList">
                               <ul class="list-inline">
-                              <!-- ko foreach: Berry.colorWander[App.game.farming.berryData[$data].color] -->
-                              <li class="list-inline-item">
-                                <!-- ko if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus -->
-                                <img class="dungeon-pokemon-pkrs" src="" data-bind="
-                                attr:{ src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus]}.png` },
-                                tooltip: {
-                                    title: `EVs: ${App.game.party.getPokemonByName(pokemonList.find((p) => p.name == $data).name).evs().toLocaleString('en-US')}`,
-                                    placement: 'bottom',
-                                    trigger: 'hover'
-                                }" />
-                                <!-- /ko -->
-                                <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: `assets/images/${(App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '')}pokemon/${pokemonList.find((p) => p.name == $data).id}.png` },
-                                css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName(pokemonList.find((p) => p.name == $data).name) }" onerror="this.src='assets/images/pokemon/0.png';"/>
-                                <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-                                <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: PokemonHelper.calcNativeRegion(pokemonList.find((p) => p.name == $data).id) <= player.highestRegion(),
-                                tooltip: {
-                                  title: `Reach ${GameConstants.camelCaseToString(GameConstants.Region[PokemonHelper.calcNativeRegion(pokemonList.find((p) => p.name == $data).id)])} to attract this Pokémon!`,
-                                    placement: 'top',
-                                    trigger: 'hover'
-                                }">
-                                </li>
+                              <!-- ko foreach: Berry.colorWander[App.game.farming.berryData[$data].color].filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                              <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                               <!-- /ko -->
                               </ul>
                             </td>
                           </tr>
-                          <!-- ko if: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)) != "" -->
+                          <!-- ko if: App.game.farming.berryData[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
                           <tr>
                             <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
                           </tr>
                           <tr id="wanderRow">
                             <td id="wanderPokemonList">
                               <ul class="list-inline">
-                              <!-- ko foreach: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)) -->
-                              <li class="list-inline-item">
-                                <!-- ko if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus -->
-                                <img class="dungeon-pokemon-pkrs" src="" data-bind="
-                                attr:{ src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus]}.png` },
-                                tooltip: {
-                                    title: `EVs: ${App.game.party.getPokemonByName(pokemonList.find((p) => p.name == $data).name).evs().toLocaleString('en-US')}`,
-                                    placement: 'bottom',
-                                    trigger: 'hover'
-                                }" />
-                                <!-- /ko -->
-                                <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: `assets/images/${(App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '')}pokemon/${pokemonList.find((p) => p.name == $data).id}.png` },
-                                css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName(pokemonList.find((p) => p.name == $data).name) }" onerror="this.src='assets/images/pokemon/0.png';"/>
-                                <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-                                <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: PokemonHelper.calcNativeRegion(pokemonList.find((p) => p.name == $data).id) <= player.highestRegion(),
-                                tooltip: {
-                                  title: `Reach ${GameConstants.camelCaseToString(GameConstants.Region[PokemonHelper.calcNativeRegion(pokemonList.find((p) => p.name == $data).id)])} to attract this Pokémon!`,
-                                    placement: 'top',
-                                    trigger: 'hover'
-                                }">
-                                </li>
+                              <!-- ko foreach: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                               <!-- /ko -->
                               </ul>
                             </td>

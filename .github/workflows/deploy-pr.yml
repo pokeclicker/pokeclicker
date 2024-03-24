@@ -53,7 +53,7 @@ jobs:
           ln -s ../../libs build/libs
       
       - name: Deploy to GH-Pages
-        uses: redsparr0w/pr-preview-action@abf87f32089b3fc59e973307ed1fbc957dd42efc
+        uses: redsparr0w/pr-preview-action@e42785b6369079700cfd810f51d14da466ea5cce
         id: preview_step
         with:
           source-dir: 'build'
