@@ -38,12 +38,12 @@
                   <td class="text-left">Type</td>
                   <td class="text-left tight">
                     <span class="badge text-light px-1" data-bind="visible: pokemonMap[$data].type[0] >= 0,
-                                style: { 'background-color': TypeColor[pokemonMap[$data].type[0]] }">
+                                style: { 'background-color': GameConstants.TypeColor[pokemonMap[$data].type[0]] }">
                       <small><strong
                           data-bind="text: PokemonType[pokemonMap[$data].type[0]].toUpperCase()"></strong></small>
                     </span>
                     <span class="badge text-light px-1" data-bind="if: pokemonMap[$data].type[1] >= 0,
-                                style: { 'background-color': TypeColor[pokemonMap[$data].type[1]] }">
+                                style: { 'background-color': GameConstants.TypeColor[pokemonMap[$data].type[1]] }">
                       <small><strong
                           data-bind="text: PokemonType[pokemonMap[$data].type[1]].toUpperCase()"></strong></small>
                     </span>

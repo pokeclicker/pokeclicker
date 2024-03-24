@@ -1,5 +1,3 @@
-/// <reference path="./GameConstants.d.ts" />
-
 class Update implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'update';

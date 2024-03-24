@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
 /// <reference path="../declarations/GameHelper.d.ts" />
 /// <reference path="../declarations/party/Category.d.ts"/>
@@ -7,52 +8,86 @@
 /**
  * Main game class.
  */
-class Game {
+class Game implements TmpGameType {
     frameRequest;
     public static achievementCounter = 0;
-
-    // Features
-
     private _gameState: KnockoutObservable<GameConstants.GameState>;
     private worker: Worker;
 
-    /**
-     * TODO(@Isha) pass all features through the constructor
-     */
-    constructor(
-        public update: Update,
-        public profile: Profile,
-        public breeding: Breeding,
-        public pokeballs: Pokeballs,
-        public pokeballFilters: PokeballFilters,
-        public wallet: Wallet,
-        public keyItems: KeyItems,
-        public badgeCase: BadgeCase,
-        public oakItems: OakItems,
-        public oakItemLoadouts: OakItemLoadouts,
-        public categories: PokemonCategories,
-        public party: Party,
-        public gems: Gems,
-        public underground: Underground,
-        public farming: Farming,
-        public logbook: LogBook,
-        public redeemableCodes: RedeemableCodes,
-        public statistics: Statistics,
-        public quests: Quests,
-        public specialEvents: SpecialEvents,
-        public discord: Discord,
-        public achievementTracker: AchievementTracker,
-        public challenges: Challenges,
-        public battleFrontier: BattleFrontier,
-        public multiplier: Multiplier,
-        public saveReminder: SaveReminder,
-        public battleCafe: BattleCafeSaveObject,
-        public dreamOrbController: DreamOrbController,
-        public purifyChamber: PurifyChamber,
-        public weatherApp: WeatherApp,
-        public zMoves: ZMoves,
-        public pokemonContest: PokemonContest
-    ) {
+    // Features
+    public update: Update;
+    public profile: Profile;
+    public breeding: Breeding;
+    public pokeballs: Pokeballs;
+    public pokeballFilters: PokeballFilters;
+    public wallet: Wallet;
+    public keyItems: KeyItems;
+    public badgeCase: BadgeCase;
+    public oakItems: OakItems;
+    public oakItemLoadouts: OakItemLoadouts;
+    public categories: PokemonCategories;
+    public party: Party;
+    public gems: Gems;
+    public underground: Underground;
+    public farming: Farming;
+    public logbook: LogBook;
+    public redeemableCodes: RedeemableCodes;
+    public statistics: Statistics;
+    public quests: Quests;
+    public specialEvents: SpecialEvents;
+    public discord: Discord;
+    public achievementTracker: AchievementTracker;
+    public challenges: Challenges;
+    public battleFrontier: BattleFrontier;
+    public multiplier: Multiplier;
+    public saveReminder: SaveReminder;
+    public battleCafe: BattleCafeSaveObject;
+    public dreamOrbController: DreamOrbController;
+    public purifyChamber: PurifyChamber;
+    public weatherApp: WeatherApp;
+    public zMoves: ZMoves;
+    public pokemonContest: PokemonContest;
+
+    constructor() {
+        // Needs to be loaded first so save data can be updated (specifically "player" data)
+        this.update = new Update();
+        this.multiplier = new Multiplier();
+
+        // Load player
+        player = Save.load();
+
+        // Load other Features
+        this.profile = new Profile();
+        this.breeding = new Breeding(this.multiplier);
+        this.pokeballs = new Pokeballs();
+        this.pokeballFilters = new PokeballFilters();
+        this.wallet = new Wallet(this.multiplier);
+        this.keyItems = new KeyItems();
+        this.badgeCase = new BadgeCase();
+        this.oakItems = new OakItems([20, 50, 100], this.multiplier);
+        this.oakItemLoadouts = new OakItemLoadouts();
+        this.categories = new PokemonCategories();
+        this.party = new Party(this.multiplier);
+        this.gems = new Gems();
+        this.underground = new Underground();
+        this.farming = new Farming(this.multiplier);
+        this.logbook = new LogBook();
+        this.redeemableCodes = new RedeemableCodes();
+        this.statistics = new Statistics();
+        this.quests = new Quests();
+        this.specialEvents = new SpecialEvents();
+        this.discord = new Discord();
+        this.achievementTracker = new AchievementTracker();
+        this.challenges = new Challenges();
+        this.battleFrontier = new BattleFrontier();
+        this.saveReminder = new SaveReminder();
+        this.battleCafe = new BattleCafeSaveObject();
+        this.dreamOrbController = new DreamOrbController();
+        this.purifyChamber = new PurifyChamber();
+        this.weatherApp = new WeatherApp();
+        this.zMoves = new ZMoves();
+        this.pokemonContest = new PokemonContest();
+
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
 
