@@ -71,17 +71,19 @@
                         </div>
                     </div>
                     <!-- Hide/Show checkboxes -->
-                    <div class="form-check align-middle mt-1">
-                        <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue()"
-                            onchange="Settings.setSettingByName('heldItemHideHoldingPokemon', this.checked)" />
-                        <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
-                    </div>
-                    <div class="form-check align-middle mt-1">
-                        <input type="checkbox" id="show-this-item-pokemon" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('heldItemShowHoldingThisItem').observableValue()"
-                            onchange="Settings.setSettingByName('heldItemShowHoldingThisItem', this.checked)" />
-                        <label for="show-this-item-pokemon" class="form-check-label">Show <u>only</u> Pokémon holding this item</label>
+                    <div class="form-row">
+                        <div class="form-check col-md-6 col-12 align-middle mt-1">
+                            <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
+                                data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue()"
+                                onchange="Settings.setSettingByName('heldItemHideHoldingPokemon', this.checked)" />
+                            <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
+                        </div>
+                        <div class="form-check col-md-6 col-12 align-middle mt-1">
+                            <input type="checkbox" id="show-this-item-pokemon" class="form-check-input"
+                                data-bind="checked: Settings.getSetting('heldItemHideHoldingThisItem').observableValue()"
+                                onchange="Settings.setSettingByName('heldItemHideHoldingThisItem', this.checked)" />
+                            <label for="show-this-item-pokemon" class="form-check-label">Hide Pokémon holding <u>this</u> item</label>
+                        </div>
                     </div>
                   </div>
                 </div>

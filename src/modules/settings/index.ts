@@ -256,7 +256,7 @@ Settings.add(new Setting<string>('heldItemSearchFilter', 'Search', [], ''));
 Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
-Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false));
+Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false));
 
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {

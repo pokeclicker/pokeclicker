@@ -224,7 +224,7 @@ class PartyController {
             if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && pokemon.heldItem()) {
                 return false;
             }
-            if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && pokemon.heldItem() !== HeldItem.heldItemSelected()) {
+            if (Settings.getSetting('heldItemHideHoldingThisItem').observableValue() && pokemon.heldItem() === HeldItem.heldItemSelected()) {
                 return false;
             }
 
