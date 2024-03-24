@@ -21,6 +21,23 @@ class FluteItem extends Item {
         return `+${(this.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} bonus to ${this.description}`;
     }
 
+    getFormattedTooltip(item): string {
+        let tooltipString = '';
+        tooltipString += `<div><strong>${item.displayName}</strong></div>`;
+        tooltipString += `<div>${item.getDescription()}</div>`;
+        tooltipString += '<br/>';
+        tooltipString += '<div><strong>Consumes:</strong></div>';
+        tooltipString += '<table class="w-100">';
+        for (const gem of item.gemTypes) {
+            tooltipString += '<tr>';
+            tooltipString += `<td class="text-left" px-1">${gem} gems</td>`;
+            tooltipString += `<td class="text-right" px-1">(${App.game.gems.gemWallet[PokemonType[gem]]().toLocaleString('en-US')})</td>`;
+            tooltipString += '</tr>';
+        }
+        tooltipString += '</table>';
+        return tooltipString;
+    }
+
     public getMultiplier() {
         return (this.multiplyBy - 1) * (AchievementHandler.achievementBonus() + 1) + 1;
     }
@@ -30,22 +47,6 @@ class FluteItem extends Item {
     }
 
     checkCanUse(): boolean {
-        if (App.game.challenges.list.disableGems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Gems are Disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
-        if (App.game.challenges.list.disableBattleItems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Battle Items are Disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
         if (!FluteEffectRunner.isActive(GameConstants.FluteItemType[this.name])() && !player.itemList[this.name]()) {
             Notifier.notify({
                 message: `You don't have the ${this.displayName}...`,
