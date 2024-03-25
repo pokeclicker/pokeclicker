@@ -137,6 +137,11 @@ class GymRunner {
         return gym.optionalArgs.environment;
     }
 
+    public static getBattleBackgroundImage() {
+        const gym = GymRunner.gymObservable();
+        return gym.optionalArgs.battleBackground;
+    }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
