@@ -19,4 +19,8 @@ export default class CssVariableSetting extends Setting<string> {
         super.set(newVal);
         document.documentElement.style.setProperty(this.name, newVal);
     }
+
+    validValue(value: string): boolean {
+        return CSS.supports('color', value) && super.validValue(value);
+    }
 }
