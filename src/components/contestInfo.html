@@ -1,0 +1,26 @@
+
+<!-- ko if: App.game.gameState === GameConstants.GameState.contest -->
+<div id="contestInformation" class="card sortable-disabled border-secondary mb-3 contest-hall no-select">
+    <div class="card-header p-0" data-toggle="collapse">
+        <span>Contest Hall</span>
+    </div>
+    <!-- ko ifnot: ContestRunner.running -->
+    <div class="card-body text-center">
+        <h5>something something Pokemon Contests!</h5>
+        <p>
+            Compete in a Contest!<br/>
+            insert other text here<br/>
+        </p>
+        <div data-bind="foreach: { data: ContestHall.contestRankObservable(), as: 'rank' }">
+            <div data-bind="foreach: { data: ContestHall.contestTypeObservable(), as: 'type' }">
+              <button data-bind="text: `${new Contest(rank, type).text()}`"></button>
+              <!-- TODO: click to start contests -->
+              <!-- TODO: add ribbon images -->
+              <!-- TODO: add stat for max streak/trainers defeated -->
+            </div>
+        </div>
+        <a class="btn btn-block btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
