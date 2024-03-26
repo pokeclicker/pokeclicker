@@ -1,15 +1,10 @@
 class ContestHall extends TownContent {
-    public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
-    public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([]);
     constructor(
         public rank: ContestRank[],
         public type: ContestType[] = [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough],
         private buttonText?: string
     ) {
         super();
-
-        ContestHall.contestTypeObservable(this.type);
-        ContestHall.contestRankObservable(this.rank);
     }
 
     public cssClass(): string {
@@ -21,6 +16,8 @@ class ContestHall extends TownContent {
     public onclick(): void {
         ContestBattle.enemyPokemon(null);
         ContestBattle.trainer(null);
+        ContestRunner.contestRankObservable(this.rank);
+        ContestRunner.contestTypeObservable(this.type);
         App.game.gameState = GameConstants.GameState.contest;
     }
     public leave(): void {

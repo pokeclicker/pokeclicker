@@ -10,6 +10,8 @@ class ContestRunner {
     public static appealPercentage: KnockoutObservable<number> = ko.observable(100);
 
     public static contestObservable: KnockoutObservable<Contest> = ko.observable();
+    public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
+    public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([]);
     public static running: KnockoutObservable<boolean> = ko.observable(false);
 
     public static startContest(
@@ -113,8 +115,6 @@ class ContestRunner {
 
             // GameHelper.incrementObservable(App.game.statistics.contestsWon[GameConstants.getContestIndex(contest.name)]); maybe?
 
-            // Send the player back to the town they were in
-            // App.game.gameState = GameConstants.GameState.town;
         }
     }
 

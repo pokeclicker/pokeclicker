@@ -10,9 +10,9 @@
             Compete in a Contest!<br/>
             insert other text here<br/>
         </p>
-        <div data-bind="foreach: { data: ContestHall.contestRankObservable(), as: 'rank' }">
+        <div data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
             <h5 data-bind="text: `${ContestRank[rank]}`"></h5>
-            <div data-bind="foreach: { data: ContestHall.contestTypeObservable(), as: 'type' }">
+            <div data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
               <button data-bind="text: `${ContestType[type]}`, click: () => {new Contest(rank, type).onclick()}"></button>
               <!-- TODO: click to start contests -->
               <!-- TODO: add ribbon images -->
