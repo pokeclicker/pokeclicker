@@ -689,6 +689,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Cipher Peon (yellow)',
             'XD001',
+            'Twin right frlg'
         ],
         // Notes: Made specifically for PokéClicker.
     },

@@ -10,9 +10,11 @@ class ContestRunner {
     public static appealPercentage: KnockoutObservable<number> = ko.observable(100);
 
     public static contestObservable: KnockoutObservable<Contest> = ko.observable();
+    public static running: KnockoutObservable<boolean> = ko.observable(false);
+
+    // Updated via ContestHall.ts
     public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
     public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([]);
-    public static running: KnockoutObservable<boolean> = ko.observable(false);
 
     public static startContest(
         contest: Contest
