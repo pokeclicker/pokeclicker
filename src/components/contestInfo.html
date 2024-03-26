@@ -1,4 +1,3 @@
-
 <!-- ko if: App.game.gameState === GameConstants.GameState.contest -->
 <div id="contestInformation" class="card sortable-disabled border-secondary mb-3 contest-hall no-select">
     <div class="card-header p-0" data-toggle="collapse">
@@ -12,8 +11,9 @@
             insert other text here<br/>
         </p>
         <div data-bind="foreach: { data: ContestHall.contestRankObservable(), as: 'rank' }">
+            <h5 data-bind="text: `${ContestRank[rank]}`"></h5>
             <div data-bind="foreach: { data: ContestHall.contestTypeObservable(), as: 'type' }">
-              <button data-bind="text: `${new Contest(rank, type).text()}`"></button>
+              <button data-bind="text: `${ContestType[type]}`, click: () => {new Contest(rank, type).onclick()}"></button>
               <!-- TODO: click to start contests -->
               <!-- TODO: add ribbon images -->
               <!-- TODO: add stat for max streak/trainers defeated -->

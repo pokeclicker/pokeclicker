@@ -1,12 +1,15 @@
 class ContestHall extends TownContent {
-    public contests: Contest[][];
+    public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
+    public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([]);
     constructor(
         public rank: ContestRank[],
         public type: ContestType[] = [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough],
         private buttonText?: string
     ) {
         super();
-        this.contests = rank.map(r => type.map(t => new Contest(r, t)));
+
+        ContestHall.contestTypeObservable(this.type);
+        ContestHall.contestRankObservable(this.rank);
     }
 
     public cssClass(): string {
@@ -17,6 +20,7 @@ class ContestHall extends TownContent {
     }
     public onclick(): void {
         ContestBattle.enemyPokemon(null);
+        ContestBattle.trainer(null);
         App.game.gameState = GameConstants.GameState.contest;
     }
     public leave(): void {

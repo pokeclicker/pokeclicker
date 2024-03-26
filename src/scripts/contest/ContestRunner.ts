@@ -17,7 +17,6 @@ class ContestRunner {
     ) {
         this.running(false);
         this.contestObservable(contest);
-        App.game.gameState = GameConstants.GameState.idle;
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
         this.timeLeft(GameConstants.CONTEST_TIME * this.timeBonus());
         this.timeLeftPercentage(100);
@@ -63,6 +62,8 @@ class ContestRunner {
         }
         if (this.timeLeft() < 0) {
             ContestBattle.contest.isRallied() ? this.contestWon() : this.contestLost();
+            ContestBattle.enemyPokemon(null);
+            ContestBattle.trainer(null);
         }
         this.timeLeft(this.timeLeft() - GameConstants.CONTEST_TICK);
         this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.CONTEST_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
@@ -92,7 +93,6 @@ class ContestRunner {
                 message: 'You did not have enough appeal to win the crowd over.',
                 type: NotificationConstants.NotificationOption.danger,
             });
-            App.game.gameState = GameConstants.GameState.town;
         }
     }
 
@@ -114,7 +114,7 @@ class ContestRunner {
             // GameHelper.incrementObservable(App.game.statistics.contestsWon[GameConstants.getContestIndex(contest.name)]); maybe?
 
             // Send the player back to the town they were in
-            App.game.gameState = GameConstants.GameState.town;
+            // App.game.gameState = GameConstants.GameState.town;
         }
     }
 
