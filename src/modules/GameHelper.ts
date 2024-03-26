@@ -162,6 +162,20 @@ export default class GameHelper {
         return s.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
     }
 
+    public static safelyBuildRegex(pattern: string, allowRaw = true, flags = 'i'): RegExp {
+        if (allowRaw && /^\/.+\/$/.test(pattern)) {
+            // pattern is a string representation of regex e.g. /pattern/, remove the slashes
+            const rawPattern = pattern.slice(1, -1);
+            try {
+                return new RegExp(rawPattern, flags);
+            } catch {
+                return new RegExp(GameHelper.escapeStringRegex(rawPattern), flags);
+            }
+        } else {
+            return new RegExp(GameHelper.escapeStringRegex(pattern), flags);
+        }
+    }
+
     public static twoDigitNumber(n: number): string {
         // For use in clocks / showing time
         // Turns 4 into 04, does nothing to 23, turns 173 into 73
