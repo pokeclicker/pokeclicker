@@ -1,4 +1,4 @@
-///<reference path="../trainers/Trainer.ts"/>
+/// <reference path="../trainers/Trainer.ts"/>
 /// <reference path="../gym/GymPokemon.ts"/>
 /// <reference path="../../declarations/enums/ContestRank.d.ts"/>
 
