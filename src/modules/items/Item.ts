@@ -2,7 +2,7 @@
 
 import { Observable } from 'knockout';
 import {
-    Currency, ITEM_PRICE_MULTIPLIER, Pokeball, humanifyString, camelCaseToString, pluralizeString,
+    Currency, ITEM_PRICE_MULTIPLIER, humanifyString, camelCaseToString, pluralizeString,
 } from '../GameConstants';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
@@ -28,7 +28,7 @@ export default class Item {
 
     constructor(
         public name: string,
-        public basePrice: number,
+        public basePrice: number = Infinity,
         public currency: Currency = Currency.money,
         {
             saveName = '',
@@ -42,13 +42,18 @@ export default class Item {
         description?: string,
         imageDirectory?: string,
     ) {
+        // Base price needs to be positive, items that can't be purchased via currency should be priced at Infinity
+        if (this.basePrice <= 0) {
+            this.basePrice = Infinity;
+            console.warn(`Item '${name}' created with invalid nonpositive base price, defaulting to Infinity`);
+        }
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
         this.saveName = saveName || name || `${name}|${Currency[currency]}`;
         this.maxAmount = maxAmount || Number.MAX_SAFE_INTEGER;
-        // Multiplier needs to be above 1
+        // Multiplier needs to be 1 at minimum
         this.multiplier = Math.max(1, multiplier || ITEM_PRICE_MULTIPLIER);
-        this.multiplierDecrease = multiplierDecrease;
+        this.multiplierDecrease = this.multiplier > 1 ? multiplierDecrease : false;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
         this.visible = visible;
 
@@ -58,7 +63,7 @@ export default class Item {
     }
 
     totalPrice(amount: number): number {
-        if (this.name === Pokeball[Pokeball.Pokeball]) {
+        if (this.multiplier === 1) {
             return Math.max(0, this.basePrice * amount);
         }
 
