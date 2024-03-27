@@ -100,8 +100,8 @@ export class Underground implements Feature {
     constructor() {
         this.upgradeList = [];
         this.tradeAmount.subscribe((value) => {
-            if (value < 1) {
-                this.tradeAmount(1);
+            if (value < 0) {
+                this.tradeAmount(0);
             }
         });
     }
