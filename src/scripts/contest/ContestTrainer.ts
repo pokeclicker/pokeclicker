@@ -49,7 +49,7 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Russell', 'Cooltrainer', [new GymPokemon('Zubat', 7, 10)], '(male)'), // Zutzu
         new ContestTrainer('Russell', 'Cooltrainer', [new GymPokemon('Crobat', 7, 10)], '(male)'), // Batro
         new ContestTrainer('Sydney', 'Lass', [new GymPokemon('Whismur', 8, 10)]), // Whiris
-        new ContestTrainer('Daniel', 'Juggler', [new GymPokemon('Red Spearow', 10, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Danial', 'Juggler', [new GymPokemon('Red Spearow', 10, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
     ],
     [ContestRank.Super]: [
         new ContestTrainer('Aliyah', 'Nurse', [new GymPokemon('Blissey', 8, 20)]), // Bliss
