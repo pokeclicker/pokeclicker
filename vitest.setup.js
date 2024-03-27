@@ -8,3 +8,8 @@ Object.assign(mockJQuery, {
 
 window.ko = ko;
 window.$ = mockJQuery;
+
+// would need a newer jsdom version to support this 
+window.CSS = {
+    supports: () => false
+}
