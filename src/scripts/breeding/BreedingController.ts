@@ -160,7 +160,7 @@ class BreedingController {
     }
 
     public static getEggPokemonName(egg: Egg): string | null {
-        return egg.type === EggType.Pokemon || egg.type === EggType.Fossil ? egg.partyPokemon()?.name || null : null;
+        return egg.type === EggType.Pokemon || egg.type === EggType.Fossil ? egg.partyPokemon()?.name : null;
     }
 
     public static formatSearch(value: string) {
