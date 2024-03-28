@@ -2625,6 +2625,13 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'The Sick Ampharos');
             }
+
+            // Multicategory pokemon
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                if (pokemon[6]) {
+                    pokemon[6] = [pokemon[6]];
+                }
+            });
         },
     };
 

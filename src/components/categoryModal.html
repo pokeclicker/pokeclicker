@@ -35,7 +35,7 @@
                             </td>
                             <td data-bind="contentEditable: $data.name"></td>
                             <td>
-                                <div class="btn-group">
+                                <div class="btn-group" data-bind="visible: PokemonCategories.categories().length > 1">
                                     <button type="button" class="btn btn-sm py-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" title="Move Pokémon from this category to another category."></button>
                                     <div class="dropdown-menu pt-0">
@@ -43,7 +43,8 @@
                                         <div data-bind="foreach: PokemonCategories.categories()">
                                             <!-- ko if: $data.id !== $parent.id -->
                                             <button class="dropdown-item small" type="button"
-                                                data-bind="text: $data.name, style: { 'background-color': $data.color() },
+                                                data-bind="text: $data.name,
+                                                    style: { 'background-color': $data.color(), color: GameHelper.isColorLight($data.color()) ? 'black' : 'white' },
                                                     click: () => PartyController.moveCategoryPokemon($parent.id, $data.id)"></button>
                                             <!-- /ko -->
                                         </div>
@@ -52,7 +53,7 @@
                             </td>
                             <td>
                                 <button type="button" class="close text-danger" title="Remove Category" style="opacity: 1;"
-                                    data-bind="visible: $data.id > 1, click: () => { PokemonCategories.removeCategory($data.id) }">
+                                    data-bind="visible: $data.id > 0, click: () => { PokemonCategories.removeCategory($data.id) }">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </td>

@@ -20,6 +20,7 @@ export type PokemonCategory = {
 
 export default class PokemonCategories implements Saveable {
     public static categories: KnockoutObservableArray<PokemonCategory> = ko.observableArray([]);
+    public static playerCategories = ko.pureComputed(() => PokemonCategories.categories().filter((cat) => cat.id > 0));
 
     saveKey = 'categories';
     defaults: Record<string, any> = {};
@@ -31,9 +32,7 @@ export default class PokemonCategories implements Saveable {
 
     public static reset() {
         App.game.party.caughtPokemon.forEach((p) => {
-            if (p.category) {
-                p.category = 0;
-            }
+            p.resetCategory();
         });
         [...PokemonCategories.categories()].forEach(c => {
             PokemonCategories.removeCategory(c.id, true);
@@ -47,7 +46,14 @@ export default class PokemonCategories implements Saveable {
                 id = Math.max(id, c.id);
             });
             id++;
+        } else {
+            // Prevent adding an existing category
+            // Really only used when resetting to preserve the None category
+            if (PokemonCategories.categories().some(c => c.id === id)) {
+                return;
+            }
         }
+
         const cat: PokemonCategory = { name: ko.observable(name), color: ko.observable(color), id : id };
         PokemonCategories.categories.push(cat);
 
@@ -61,33 +67,39 @@ export default class PokemonCategories implements Saveable {
     }
 
     public static removeCategory(id: number, force = false): void {
+        // Cannot remove None category
+        if (id === 0) {
+            return;
+        }
+
         const index = PokemonCategories.categories().findIndex(c => c.id == id);
         // Is this case expected to happen ?
         if (index === -1) {
             return;
         }
+
         const cat = PokemonCategories.categories()[index];
-        // Cannot remove None or Favorite categories
-        if (!force && cat.id < 2) {
-            return;
-        }
-
         const pokeballFilter = App.game.pokeballFilters.list().find(f => f.options?.category?.observableValue() == cat.id);
+
         if (pokeballFilter) {
-            Notifier.notify({
-                title: 'Remove Category',
-                message: `This category is in use by the <strong>${pokeballFilter.name}</strong> Pokéball filter and cannot be removed.`,
-                type: NotificationConstants.NotificationOption.danger,
-                timeout: 1e4,
-            });
-            return;
+            if (force) {
+                // Forced remove (reset filters)
+                // When the category is used in a pokeball filter disable the filter and remove the category option.
+                pokeballFilter.enabled(false);
+                App.game.pokeballFilters.removeFilterOption(pokeballFilter, 'category');
+            } else {
+                Notifier.notify({
+                    title: 'Remove Category',
+                    message: `This category is in use by the <strong>${pokeballFilter.name}</strong> Pokéball filter and cannot be removed.`,
+                    type: NotificationConstants.NotificationOption.danger,
+                    timeout: 1e4,
+                });
+                return;
+            }
         }
 
-        App.game.party.caughtPokemon.forEach((p) => {
-            if (+p.category === cat.id) {
-                p.category = 0;
-            }
-        });
+        // Remove category from pokemon
+        App.game.party.caughtPokemon.forEach((p) => p.removeCategory(cat.id));
 
         // Remove category from hatchery helper filters if selected
         App.game.breeding.hatcheryHelpers.available().forEach((helper) => {
@@ -141,7 +153,6 @@ export default class PokemonCategories implements Saveable {
                 PokemonCategories.addCategory(category.name, category.color, category.id);
             }
         });
-
         PokemonCategories.categories().sort((a, b) => categoryOrder.indexOf(a.id) - categoryOrder.indexOf(b.id));
     }
 }
