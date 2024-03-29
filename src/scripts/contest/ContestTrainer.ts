@@ -29,8 +29,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
             new GymPokemon('Manectric', 10, 10, new GymBadgeRequirement(BadgeEnums.Dynamo)),
         ]), // Rikelec
         new ContestTrainer('Colby', 'Ninja Boy', [new GymPokemon('Totodile', 12, 10)]), // Totdil
-        new ContestTrainer('Edith', 'Parasol Lady', [new GymPokemon('Zigzagoon', 4, 10)]), // Zigoon
-        new ContestTrainer('Edith', 'Parasol Lady', [new GymPokemon('Illumise', 4, 10)]), // Musille
+        new ContestTrainer('Edith', 'Parasol Lady', [
+            new GymPokemon('Zigzagoon', 4, 10), // Zigoon
+            new GymPokemon('Illumise', 4, 10), // Musille
+        ]),
         new ContestTrainer('Evan', 'Bug Catcher', [new GymPokemon('Dustox', 5, 10)], 'gen4'), // Duster
         new ContestTrainer('Grant', 'Youngster', [new GymPokemon('Shroomish', 3, 10)]), // Smish
         new ContestTrainer('Jimmy', 'Preschooler', [new GymPokemon('Poochyena', 6, 10)], '(male)'), // Poochy
@@ -43,11 +45,15 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Melanie', 'Twin', [new GymPokemon('Gulpin', 4, 10)], 'left frlg'), // Gulin
         new ContestTrainer('Milo', 'PokéManiac', [new GymPokemon('Larvitar', 5, 10)]), // Tarvitar
         new ContestTrainer('Morris', 'School Kid', [new GymPokemon('Makuhita', 10, 10)], '(male'), // Mahita
-        new ContestTrainer('Paige', 'Young Couple', [new GymPokemon('Wingull', 6, 10)], '(female)'), // Gulwee
-        new ContestTrainer('Paige', 'Young Couple', [new GymPokemon('Spheal', 6, 10)], '(female)'), // Sleal
+        new ContestTrainer('Paige', 'Young Couple', [
+            new GymPokemon('Wingull', 6, 10), // Gulwee
+            new GymPokemon('Spheal', 6, 10), // Sleal
+        ], '(female)'),
         new ContestTrainer('Raymond', 'Black Belt', [new GymPokemon('Nincada', 6, 10)]), // Ninda
-        new ContestTrainer('Russell', 'Cooltrainer', [new GymPokemon('Zubat', 7, 10)], '(male)'), // Zutzu
-        new ContestTrainer('Russell', 'Cooltrainer', [new GymPokemon('Crobat', 7, 10)], '(male)'), // Batro
+        new ContestTrainer('Russell', 'Cooltrainer', [
+            new GymPokemon('Zubat', 7, 10), // Zutzu
+            new GymPokemon('Crobat', 7, 10), // Batro
+        ], '(male)'),
         new ContestTrainer('Sydney', 'Lass', [new GymPokemon('Whismur', 8, 10)]), // Whiris
         new ContestTrainer('Danial', 'Juggler', [new GymPokemon('Red Spearow', 10, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
     ],
@@ -56,8 +62,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Ariana', 'Lady', [new GymPokemon('Kecleon', 8, 20)], 'gen3'), // Kecon
         new ContestTrainer('Ashton', 'Cooltrainer', [new GymPokemon('Goldeen', 8, 20)], '(male)'), // Golden
         new ContestTrainer('Audrey', 'Lass', [new GymPokemon('Swablu', 4, 20)]), // Swaby
-        new ContestTrainer('Avery', 'School Kid', [new GymPokemon('Linoone', 5, 20)], '(male)'), // Noone
-        new ContestTrainer('Avery', 'School Kid', [new GymPokemon('Spoink', 5, 20)], '(male)'), // Poinker
+        new ContestTrainer('Avery', 'School Kid', [
+            new GymPokemon('Linoone', 5, 20), // Noone
+            new GymPokemon('Spoink', 5, 20), // Poinker
+        ], '(male)'),
         new ContestTrainer('Bobby', 'Triathlete', [
             new GymPokemon('Doduo', 11, 20, new GymBadgeRequirement(BadgeEnums.Balance, GameConstants.AchievementOption.less)),
             new GymPokemon('Dodrio', 11, 20, new GymBadgeRequirement(BadgeEnums.Balance)),
@@ -78,8 +86,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Natalia', 'Pokéfan', [new GymPokemon('Elekid', 4, 20)], '(female)'), // Kidlek
         new ContestTrainer('Raul', 'Bird Keeper', [new GymPokemon('Farfetch\'d', 2, 20)]), // Fetchin
         new ContestTrainer('Sandra', 'Twin', [new GymPokemon('Barboach', 6, 20)], 'right frlg'), // Boboach
-        new ContestTrainer('Summer', 'Office Worker', [new GymPokemon('Medicham', 5, 20)], '(female)'), // Chamcham
-        new ContestTrainer('Summer', 'Office Worker', [new GymPokemon('Numel', 5, 20)], '(female)'), // Lenum
+        new ContestTrainer('Summer', 'Office Worker', [
+            new GymPokemon('Medicham', 5, 20), // Chamcham
+            new GymPokemon('Numel', 5, 20), // Lenum
+        ], '(female)'),
         new ContestTrainer('Tylor', 'Hex Maniac', [new GymPokemon('Misdreavus', 3, 20)]), // Dreavis
         new ContestTrainer('Willie', 'Ninja Boy', [new GymPokemon('Cacnea', 5, 20)]), // Nacac
         new ContestTrainer('Zeek', 'Psychic', [new GymPokemon('Drowzee', 11, 20)], '(male)'), // Drowzin
@@ -87,17 +97,23 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
     [ContestRank.Hyper]: [
         new ContestTrainer('Alisha', 'Young Couple', [new GymPokemon('Beautifly', 6, 30)], '(female)'), // Tifly
         new ContestTrainer('Bryce', 'Bug Catcher', [new GymPokemon('Pineco', 8, 30)]), // Pinoc
-        new ContestTrainer('Claudia', 'Picnicker', [new GymPokemon('Nuzleaf', 6, 30)]), // Nuzle
-        new ContestTrainer('Claudia', 'Picnicker', [new GymPokemon('Shiftry', 6, 30)]), // Shifty
+        new ContestTrainer('Claudia', 'Picnicker', [
+            new GymPokemon('Nuzleaf', 6, 30), // Nuzle
+            new GymPokemon('Shiftry', 6, 30), // Shifty
+        ]),
         new ContestTrainer('Coltin', 'Pokémon Breeder', [new GymPokemon('Cubone', 5, 30)], '(male)'), // Cubin
-        new ContestTrainer('Corbin', 'Collector', [new GymPokemon('Pelipper', 8, 30)], 'gen3'), //Pelipe
-        new ContestTrainer('Corbin', 'Collector', [new GymPokemon('Absol', 8, 30)], 'gen3'), //Abso
+        new ContestTrainer('Corbin', 'Collector', [
+            new GymPokemon('Pelipper', 8, 30), //Pelipe
+            new GymPokemon('Absol', 8, 30), // Abso
+        ], 'gen3'),
         new ContestTrainer('Darryl', 'Cooltrainer', [new GymPokemon('Seviper', 6, 30)], '(male)'), //Vipes
         new ContestTrainer('Devon', 'Pokéfan', [new GymPokemon('Miltank', 9, 30)], 'gen3 (male)'), // Milkan
         new ContestTrainer('Elias', 'Ninja Boy', [new GymPokemon('Ninjask', 10, 30)]), // Ninas
         new ContestTrainer('Ellie', 'Expert', [new GymPokemon('Hitmonlee', 7, 30)], '(female)'), // Hitmon
-        new ContestTrainer('Emilio', 'School Kid', [new GymPokemon('Machop', 2, 30)], '(male)'), // Chopam
-        new ContestTrainer('Emilio', 'School Kid', [new GymPokemon('Machoke', 5, 30)], '(male)'), // Chokem
+        new ContestTrainer('Emilio', 'School Kid', [
+            new GymPokemon('Machop', 2, 30), // Chopam
+            new GymPokemon('Machoke', 5, 30), // Chokem
+        ], '(male)'),
         new ContestTrainer('Felicia', 'Lass', [
             new GymPokemon('Castform', 13, 30, new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Sandstorm, WeatherType.Windy])),
             new GymPokemon('Castform (Sunny)', 13, 30, new WeatherRequirement([WeatherType.Sunny])),
@@ -119,8 +135,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Selena', 'Pokéfan', [new GymPokemon('Wailmer', 9, 30)], 'gen3 (female)'), // Merail
     ],
     [ContestRank.Master]: [
-        new ContestTrainer('Aubrey', 'Young Couple', [new GymPokemon('Vileplume', 8, 40)], '(female)'), // Plumile
-        new ContestTrainer('Aubrey', 'Young Couple', [new GymPokemon('Bellossom', 8, 40)], '(female)'), // Blossom
+        new ContestTrainer('Aubrey', 'Young Couple', [
+            new GymPokemon('Vileplume', 8, 40), // Plumile
+            new GymPokemon('Bellossom', 8, 40), // Blossom
+        ], '(female)'),
         new ContestTrainer('Camile', 'Hex Maniac', [new GymPokemon('Gengar', 8, 40)]), // Garen
         new ContestTrainer('Camille', 'Psychic', [
             new GymPokemon('Natu', 6, 40, new GymBadgeRequirement(BadgeEnums.Mind, GameConstants.AchievementOption.less)),
@@ -140,12 +158,16 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Lane', 'Black Belt', [new GymPokemon('Ursaring', 8, 40)]), // Ursing
         new ContestTrainer('Martin', 'Scientist', [new GymPokemon('Porygon', 10, 40)], '(male)'), // Gonpor
         new ContestTrainer('Mayra', 'Pokéfan', [new GymPokemon('Altaria', 5, 40)], 'gen3 (female)'), // Taria
-        new ContestTrainer('Nigel', 'Camper', [new GymPokemon('Sableye', 10, 40)]), // Eyesab
-        new ContestTrainer('Nigel', 'Camper', [new GymPokemon('Duskull', 10, 40)]), // Kullusk
+        new ContestTrainer('Nigel', 'Camper', [
+            new GymPokemon('Sableye', 10, 40), // Eyesab
+            new GymPokemon('Duskull', 10, 40), // Kullusk
+        ]),
         new ContestTrainer('Perla', 'Beauty', [new GymPokemon('Jynx', 4, 40)]), // Nyx
         new ContestTrainer('Ralph', 'Old Man', [new GymPokemon('Loudred', 7, 40)]), // Louderd
-        new ContestTrainer('Rosa', 'Idol', [new GymPokemon('Skitty', 10, 40)]), // Sitty
-        new ContestTrainer('Rosa', 'Idol', [new GymPokemon('Delcatty', 10, 40)]), // Catted
+        new ContestTrainer('Rosa', 'Idol', [
+            new GymPokemon('Skitty', 10, 40), // Sitty
+            new GymPokemon('Delcatty', 10, 40), // Catted
+        ]),
         new ContestTrainer('Sasha', 'Twin', [new GymPokemon('Electrode', 8, 40)], 'right frlg'), // Rodlect
         new ContestTrainer('Sergio', 'Dragon Tamer', [new GymPokemon('Dragonite', 6, 40)]), // Drite
         new ContestTrainer('Trey', 'Sailor', [new GymPokemon('Slowking', 6, 40)]), // Slowgo

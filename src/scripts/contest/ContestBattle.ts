@@ -17,13 +17,23 @@ class ContestBattle extends Battle {
             if (!this.enemyPokemon()?.isAlive()) {
                 return;
             }
-            this.enemyPokemon().damage(App.game.party.calculatePokemonAppeal(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3, true)); // TODO: filter mons, only of the type for current contest
-            this.contest.rally(App.game.party.calculatePokemonAppeal(this.contest.contestType));
+            this.enemyPokemon().damage(App.game.party.calculatePokemonAppeal(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3)); // TODO: filter mons, only of the type for current contest
 
             // TODO: primary judging mode, uses party mons
-            // this.enemyPokemon().rally(App.game.party.calculateOnePokemonAppeal(App.game.party.caughtPokemon.find((p) => p.name === this.enemyPokemon().name), 0, undefined, undefined, true)); // change enum with each contest
+            // this.enemyPokemon().rally(App.game.party.calculateOnePokemonAppeal(App.game.party.caughtPokemon.find((p) => p.name === this.enemyPokemon().name), this.contest.contestType));
 
             if (!this.enemyPokemon().isAlive()) {
+                // increase contest bar based off enemy's health and type
+                this.contest.rally(
+                    (this.enemyPokemon().maxHealth() +
+                        Math.floor(
+                            App.game.party.calculatePokemonAppeal(this.contest.contestType, ContestType.None, ContestType.None)
+                            * ((1 + this.pokemonIndex()) * 0.1)
+                        )
+                    )
+                    * TypeHelper.getAppealModifier(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3, this.contest.contestType, ContestType.None, ContestType.None)
+                );
+                // defeat pokemon after giving points
                 this.defeatPokemon();
             }
         }
