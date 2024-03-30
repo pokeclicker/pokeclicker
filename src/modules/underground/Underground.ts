@@ -1,4 +1,5 @@
 import type { Observable, Computed } from 'knockout';
+import '../koExtenders';
 import { Feature } from '../DataStore/common/Feature';
 import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE } from '../GameConstants';
 import GameHelper from '../GameHelper';
@@ -99,8 +100,8 @@ export class Underground implements Feature {
     constructor() {
         this.upgradeList = [];
         this.tradeAmount.subscribe((value) => {
-            if (value < 1) {
-                this.tradeAmount(1);
+            if (value < 0) {
+                this.tradeAmount(0);
             }
         });
     }
@@ -167,6 +168,24 @@ export class Underground implements Feature {
                 UndergroundUpgrade.Upgrades.NewYLayer, 'Larger underground, +1 Max Item', 1,
                 AmountFactory.createArray(
                     GameHelper.createArray(3000, 3000, 3000), Currency.diamond),
+                GameHelper.createArray(0, 1, 1),
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Reduced_Shards, 'Reduced Shards', 1,
+                AmountFactory.createArray(
+                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                GameHelper.createArray(0, 1, 1),
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Reduced_Plates, 'Reduced Plates', 1,
+                AmountFactory.createArray(
+                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                GameHelper.createArray(0, 1, 1),
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Reduced_Evolution_Items, 'Reduced Evolution Items', 1,
+                AmountFactory.createArray(
+                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
             ),
         ];

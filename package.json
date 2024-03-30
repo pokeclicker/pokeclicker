@@ -1,10 +1,11 @@
 {
   "name": "pokeclicker",
-  "version": "0.10.18",
+  "version": "0.10.20",
   "description": "PokéClicker repository",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development gulp",
+    "build": "cross-env NODE_ENV=development gulp build",
     "test": "npm run ts-test && npm run eslint && npm run stylelint && npm run vitest",
     "ts-test": "gulp scripts",
     "vitest": "vitest --run",

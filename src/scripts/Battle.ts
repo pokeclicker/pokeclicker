@@ -186,9 +186,9 @@ class Battle {
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.shadow, enemyPokemon.ep * epBonus);
     }
 
-    protected static gainTokens(route: number, region: GameConstants.Region) {
+    public static gainTokens(route: number, region: GameConstants.Region, pokeball = this.pokeball()) {
         let currencyKinds = [GameConstants.Currency.dungeonToken];
-        if (this.pokeball() === GameConstants.Pokeball.Luxuryball) {
+        if (pokeball === GameConstants.Pokeball.Luxuryball) {
             //currencyKinds = [
             //  GameConstants.Currency.dungeonToken,
             //  GameConstants.Currency.money,

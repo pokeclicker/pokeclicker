@@ -22,12 +22,13 @@ export function animateCurrency({ amount, currency }: Amount) {
 
     // Add some randomness to where it appears
     const left = (target.position().left + Rand.float(target.width() - 25)).toFixed(2);
+    const top = target.position().top;
     const aniElement = document.createElement('p');
     aniElement.className = `${amount > 0 ? '' : 'text-danger'} animated-currency`;
-    aniElement.style.cssText = `${amount > 0 ? 'bottom: -20px;' : 'bottom: -30px;'} left: ${left}px; font-size: ${10 + 0.5 * Math.log(Math.abs(amount))}px;`;
+    aniElement.style.cssText = `top: ${top}px; left: ${left}px; font-size: ${10 + 0.5 * Math.log(Math.abs(amount))}px;`;
     aniElement.innerText = `${amount > 0 ? '+' : ''}${amount.toLocaleString('en-US')}`;
 
-    const animationDirection = amount > 0 ? { bottom: 100 } : { bottom: -80 };
+    const animationDirection = amount > 0 ? { top: top - 100 } : { top: top + 50 };
     // Shorter animation for currency lost
     const animationTime = 200 * Math.log(Math.abs(amount)) + (amount > 0 ? 1000 : 600);
     // Append to parent container, animate and remove
