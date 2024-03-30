@@ -3,15 +3,13 @@
     <div class="card-header p-0" data-toggle="collapse">
         <span>Contest Hall</span>
     </div>
-    <!-- ko ifnot: ContestRunner.running -->
     <div class="card-body text-center">
-        <h5>something something Pokemon Contests!</h5>
         <p>
             Compete in a Contest!<br/>
-            insert other text here<br/>
+            <i>This feature is still in development</i><br/>
         </p>
         <div data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
-            <h5 data-bind="text: `${ContestRank[rank]}`"></h5>
+            <h5 data-bind="text: `${ContestRank[rank]} Rank`"></h5>
             <div data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
               <button data-bind="text: `${ContestType[type]}`, click: () => {new Contest(rank, type).onclick()}"></button>
               <!-- TODO: click to start contests -->
@@ -21,6 +19,5 @@
         </div>
         <a class="btn btn-block btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
     </div>
-    <!-- /ko -->
 </div>
 <!-- /ko -->
