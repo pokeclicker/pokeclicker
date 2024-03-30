@@ -175,6 +175,6 @@ export default class TypeHelper {
         let m8 = TypeHelper.contestTypeMatrix[a2][d3];
         let m9 = TypeHelper.contestTypeMatrix[a3][d3];
 
-        return Math.max(Math.min(m1 + m2 + m3, 1), Math.min(m4 + m5 + m6, 1), Math.min(m7 + m8 + m9, 1)) + 0.5;
+        return Math.max(Math.min(m1 + m2 + m3, 1), Math.min(m4 + m5 + m6, 1), Math.min(m7 + m8 + m9)) + 0.5;
     }
 }

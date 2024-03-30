@@ -26,7 +26,7 @@ class ContestHall extends TownContent {
     }
     public areaStatus(): areaStatus {
         // if (all ribbons are gotten) {
-            return areaStatus.completed;
+        return areaStatus.completed;
         // }
     }
 }

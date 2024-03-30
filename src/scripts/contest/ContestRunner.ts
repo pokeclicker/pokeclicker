@@ -102,10 +102,10 @@ class ContestRunner {
 
     public static contestWon() {
         if (this.running()) {
-            this.running(false);         
+            this.running(false);
             const contestTokenMultiplier = ContestBattle.totalTrainers();
             const rank = ContestBattle.contest.rank;
-            const tokenReward = Math.floor(4 + (rank * 2) + (0.1 * rank * contestTokenMultiplier));
+            const tokenReward = Math.floor(5 + (rank * 2) + (0.1 * rank * contestTokenMultiplier));
             // Award money for defeating gym
             App.game.wallet.gainContestTokens(tokenReward);
             Notifier.notify({

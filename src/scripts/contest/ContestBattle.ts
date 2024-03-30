@@ -17,23 +17,20 @@ class ContestBattle extends Battle {
             if (!this.enemyPokemon()?.isAlive()) {
                 return;
             }
-            this.enemyPokemon().damage(App.game.party.calculatePokemonAppeal(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3)); // TODO: filter mons, only of the type for current contest
+            // damage enemy using only pokemon of the contest's type
+            this.enemyPokemon().damage(App.game.party.calculatePokemonAppeal(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3, this.contest.pokemons));
 
             // TODO: primary judging mode, uses party mons
             // this.enemyPokemon().rally(App.game.party.calculateOnePokemonAppeal(App.game.party.caughtPokemon.find((p) => p.name === this.enemyPokemon().name), this.contest.contestType));
 
             if (!this.enemyPokemon().isAlive()) {
-                // increase contest bar based off enemy's health and type
+                // increase contest bar based off all party mons appeal + health of defeated pokemon
                 this.contest.rally(
-                    (this.enemyPokemon().maxHealth() +
-                        Math.floor(
-                            App.game.party.calculatePokemonAppeal(this.contest.contestType, ContestType.None, ContestType.None)
-                            * ((1 + this.pokemonIndex()) * 0.1)
-                        )
-                    )
-                    * TypeHelper.getAppealModifier(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3, this.contest.contestType, ContestType.None, ContestType.None)
+                    Math.floor(
+                        (this.enemyPokemon().maxHealth()
+                        + App.game.party.calculatePokemonAppeal(this.contest.contestType))
+                        * (1 + this.pokemonIndex() * 0.2))
                 );
-                // defeat pokemon after giving points
                 this.defeatPokemon();
             }
         }
@@ -49,7 +46,11 @@ class ContestBattle extends Battle {
      */
     public static defeatPokemon() {
         this.enemyPokemon().defeat(true);
-        this.totalTrainers(this.totalTrainers() + 1);
+
+        // give trainer bonus for Contest Tokens if contest bar is full
+        if (this.contest.isRallied()) {
+            this.totalTrainers(this.totalTrainers() + 1);
+        }
 
         // Make contest "route" regionless
         App.game.breeding.progressEggsBattle(this.contest.rank * 3 + 1, GameConstants.Region.none);
