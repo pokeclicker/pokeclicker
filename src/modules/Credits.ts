@@ -303,6 +303,7 @@ export const SpriteCredits: Credit[] = [
             'Go-Rock Squad Commander',
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
+            'Gooey Mulch',
             'Sudowoodo (Golden) Shop Icon',
             'Grotle (Acorn)',
             'Grotle (Acorn) Shop Icon',
