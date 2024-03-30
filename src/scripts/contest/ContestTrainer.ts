@@ -82,7 +82,7 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Karina', 'Pokemon Ranger', [new GymPokemon('Roselia', 30, 20)], '(female)'), // Relia
         new ContestTrainer('Katrina', 'Parasol Lady', [new GymPokemon('Lotad', 40, 20)]), // Tado
         new ContestTrainer('Luke', 'Collector', [new GymPokemon('Slowbro', 30, 20)]), // Browlo
-        new ContestTrainer('Miles', 'Pokemon Ranger', [new GymPokemon('Spinda', 20, 20)], '(male)'), // Spinin
+        new ContestTrainer('Miles', 'Pokémon Ranger', [new GymPokemon('Spinda', 20, 20)], '(male)'), // Spinin
         new ContestTrainer('Morgan', 'Black Belt', [new GymPokemon('Baltoy', 60, 20)]), // Toybal
         new ContestTrainer('Natalia', 'Pokéfan', [new GymPokemon('Elekid', 40, 20)], '(female)'), // Kidlek
         new ContestTrainer('Raul', 'Bird Keeper', [new GymPokemon('Farfetch\'d', 20, 20)]), // Fetchin
@@ -124,7 +124,7 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
             new GymPokemon('Castform (Snowy)', 130, 30, new WeatherRequirement([WeatherType.Hail, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Fog])),
         ]), // Caster
         new ContestTrainer('Francis', 'Black Belt', [new GymPokemon('Mightyena', 60, 30)]), // Yena
-        new ContestTrainer('Gracie', 'Pokemon Ranger', [new GymPokemon('Exeggutor', 70, 30)],' (female)'), //Eggsor
+        new ContestTrainer('Gracie', 'Pokemon Ranger', [new GymPokemon('Exeggutor', 70, 30)], '(female)'), //Eggsor
         new ContestTrainer('Jade', 'Pokéfan', [new GymPokemon('Swellow', 60, 30)], '(female)'), // Welow
         new ContestTrainer('Jamie', 'Cooltrainer', [new GymPokemon('Dunsparce', 70, 30)], '(female)'), //Diltot
         new ContestTrainer('Jorge', 'Gentleman', [new GymPokemon('Houndoom', 90, 30)]), // Doomond
