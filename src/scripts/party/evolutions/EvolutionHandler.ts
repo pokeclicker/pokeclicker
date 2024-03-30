@@ -58,8 +58,10 @@ class EvolutionHandler {
             App.game.party.removePokemonByName(data.basePokemon);
         }
 
-        // EVs
-        evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.ShadowStatus.None, GameConstants.STONE_EP_YIELD);
+        // EVs from item evolutions
+        if (data.trigger === EvoTrigger.STONE) {
+            evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.ShadowStatus.None, GameConstants.STONE_EP_YIELD);
+        }
         return shiny;
     }
 }
