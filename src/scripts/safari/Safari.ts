@@ -195,7 +195,7 @@ class Safari {
     public static safariReset() {
         Notifier.confirm({
             title: 'Safari Zone',
-            message: `You have an active Safari in ${GameConstants.Region[Safari.activeRegion()].charAt(0).toUpperCase() + GameConstants.Region[Safari.activeRegion()].slice(1)}.\nDo you want to quit that Safari and start a new one?`,
+            message: `You have an active Safari in ${GameConstants.camelCaseToString(GameConstants.Region[Safari.activeRegion()])}.\nDo you want to quit that Safari and start a new one?`,
             type: NotificationConstants.NotificationOption.warning,
             confirm: 'Quit',
         }).then(confirmed => {
