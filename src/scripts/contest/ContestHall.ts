@@ -4,7 +4,7 @@ class ContestHall extends TownContent {
         public type: ContestType[] = [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough],
         private buttonText?: string
     ) {
-        super();
+        super([new DevelopmentRequirement()]);
     }
 
     public cssClass(): string {
