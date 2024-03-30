@@ -11,7 +11,7 @@ class ContestHall extends TownContent {
         return 'btn btn-primary';
     }
     public text(): string {
-        return this.buttonText ?? 'Contest Hall';
+        return this.buttonText ?? `${ContestRank[this.rank[0]]} Rank Contests`;
     }
     public onclick(): void {
         ContestBattle.enemyPokemon(null);
