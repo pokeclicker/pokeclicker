@@ -30,6 +30,7 @@ export type ItemNameType
 | 'Sprinklotad'
 | 'Explosive_Charge'
 | 'Treasure_Scanner'
+| 'Pokeblock_case' // only for dev
 | 'Boost_Mulch'
 | 'Rich_Mulch'
 | 'Surprise_Mulch'

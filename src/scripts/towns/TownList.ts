@@ -2278,6 +2278,7 @@ const HoennContestShop = new Shop([
     ItemList['Onix (Rocker)'],
     ItemList['Dugtrio (Punk)'],
     ItemList['Gengar (Punk)'],
+    ItemList['Pokeblock_case'], // only for dev
     new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
