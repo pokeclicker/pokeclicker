@@ -52,6 +52,7 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.Eon_ticket, 'A limited edition ticket for a cruise to the Southern Island.', undefined, undefined, undefined, 'Eon Ticket'),
             new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events and let you start events early.', undefined, undefined, undefined, 'Event Calendar'),
             new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.', undefined, undefined, undefined, 'Gem Case'),
+            new KeyItem(KeyItemType.Pokeblock_case, 'A case for PokeBlocks. They come in an variety of different flavors!', undefined, undefined, undefined, 'Pokéblock Case'),
             new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.', undefined, undefined, undefined, 'DNA Splicers'),
             new KeyItem(KeyItemType.Reins_of_unity, 'Reins that people presented to the king. They enhance Calyrex’s power over bountiful harvests and unite Calyrex with its beloved steeds.', undefined, undefined, undefined, 'Reins of Unity'),
             new KeyItem(KeyItemType.Pokerus_virus,
