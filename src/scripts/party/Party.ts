@@ -222,9 +222,10 @@ class Party implements Feature {
         return attack;
     }
 
-    public calculatePokemonAppeal(type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, includeBreeding = false): number {
+    public calculatePokemonAppeal(type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, pokemons?: PartyPokemon[], includeBreeding = false): number {
         let appeal = 0;
-        for (const pokemon of this.caughtPokemon) {
+        const pks = pokemons ? pokemons : this.caughtPokemon;
+        for (const pokemon of pks) {
             appeal += this.calculateOnePokemonAppeal(pokemon, type1, type2, type3, includeBreeding);
         }
 

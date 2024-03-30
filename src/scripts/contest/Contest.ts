@@ -32,11 +32,11 @@ class Contest extends TownContent {
         public contestType: ContestType,
         // public ribbonReward: RibbonEnums,
         public moneyReward: number = 0,
-        maxAudienceAppeal: number = rank * 100,
-        // public pokemons: PartyPokemon[] = App.game.party.caughtPokemon.filter((p) => {
-        //     const pk = PokemonHelper.getPokemon(p.id);
-        //         return [pk.contestType1, pk.contestType2, pk.contestType3].find(c => c === contestType || c === ContestType.Balanced) !== -1;
-        // }),
+        maxAudienceAppeal: number = rank * 1000,
+        public pokemons: PartyPokemon[] = App.game.party.caughtPokemon.filter((p) => {
+            const pk = PokemonHelper.getPokemonById(p.id);
+            return [pk.contestType1, pk.contestType2, pk.contestType3].find(c => c === contestType || c === ContestType.Balanced) !== -1;
+        }),
         requirements: Requirement[] = [],
         public rewardFunction = () => {},
         public optionalArgs: optionalGymArgs = {},
