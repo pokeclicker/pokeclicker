@@ -119,7 +119,7 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         ], '(male)'),
         new ContestTrainer('Felicia', 'Lass', [
             new GymPokemon('Castform', 130, 30, new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Sandstorm, WeatherType.Windy])),
-            new GymPokemon('Castform (Sunny)', 130, 30, new WeatherRequirement([WeatherType.Sunny])),
+            new GymPokemon('Castform (Sunny)', 130, 30, new WeatherRequirement([WeatherType.Harsh_Sunlight])),
             new GymPokemon('Castform (Rainy)', 130, 30, new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
             new GymPokemon('Castform (Snowy)', 130, 30, new WeatherRequirement([WeatherType.Hail, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Fog])),
         ]), // Caster
