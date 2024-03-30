@@ -55,7 +55,8 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
             new GymPokemon('Crobat', 70, 10), // Batro
         ], '(male)'),
         new ContestTrainer('Sydney', 'Lass', [new GymPokemon('Whismur', 80, 10)]), // Whiris
-        new ContestTrainer('Danial', 'Juggler', [new GymPokemon('Red Spearow', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
     ],
     [ContestRank.Super]: [
         new ContestTrainer('Aliyah', 'Nurse', [new GymPokemon('Blissey', 80, 20)]), // Bliss
@@ -93,6 +94,8 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Tylor', 'Hex Maniac', [new GymPokemon('Misdreavus', 30, 20)]), // Dreavis
         new ContestTrainer('Willie', 'Ninja Boy', [new GymPokemon('Cacnea', 50, 20)]), // Nacac
         new ContestTrainer('Zeek', 'Psychic', [new GymPokemon('Drowzee', 110, 20)], '(male)'), // Drowzin
+        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
     ],
     [ContestRank.Hyper]: [
         new ContestTrainer('Alisha', 'Young Couple', [new GymPokemon('Beautifly', 60, 30)], '(female)'), // Tifly
@@ -133,6 +136,8 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Ronnie', 'Hiker', [new GymPokemon('Lairon', 70, 30)]), // Lairn
         new ContestTrainer('Saul', 'Camper', [new GymPokemon('Seaking', 100, 30)]), // Kingsea
         new ContestTrainer('Selena', 'Madame', [new GymPokemon('Wailmer', 90, 30)]), // Merail
+        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
     ],
     [ContestRank.Master]: [
         new ContestTrainer('Aubrey', 'Young Couple', [
@@ -171,6 +176,8 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Sasha', 'Twin', [new GymPokemon('Electrode', 80, 40)], 'right frlg'), // Rodlect
         new ContestTrainer('Sergio', 'Dragon Tamer', [new GymPokemon('Dragonite', 60, 40)]), // Drite
         new ContestTrainer('Trey', 'Sailor', [new GymPokemon('Slowking', 60, 40)]), // Slowgo
+        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
     ],
     [ContestRank['Super Normal']]: [],
     [ContestRank['Super Great']]: [],
