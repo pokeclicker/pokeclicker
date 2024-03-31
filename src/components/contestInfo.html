@@ -11,10 +11,12 @@
         <div data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
             <h5 data-bind="text: `${ContestRank[rank]} Rank`"></h5>
             <div data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
-              <button data-bind="text: `${ContestType[type]}`, click: () => {new Contest(rank, type).onclick()}"></button>
-              <!-- TODO: click to start contests -->
-              <!-- TODO: add ribbon images -->
-              <!-- TODO: add stat for max streak/trainers defeated -->
+                <button data-bind="click: () => {new Contest(rank, type).onclick()}">
+                    <h5 data-bind="text: `${ContestType[type]}`"></h5>
+                    <img data-bind="attr:{ src: Contest.getRibbonImage(rank, type)}">
+                    <!-- TODO: add stat for max streak/trainers defeated -->
+                    <!-- TODO: flex spacing -->
+                  </button>
             </div>
         </div>
         <a class="btn btn-block btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
