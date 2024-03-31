@@ -19,7 +19,7 @@ class TemporaryBattleRunner {
         this.timeLeft(GameConstants.TEMP_BATTLE_TIME * this.timeBonus());
         this.timeLeftPercentage(100);
 
-        player.route(0);
+        player.route = 0;
         Battle.route = 0;
         Battle.catching(!(battle.optionalArgs.isTrainerBattle ?? true));
         TemporaryBattleBattle.battle = battle;

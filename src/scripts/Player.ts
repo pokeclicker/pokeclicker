@@ -49,8 +49,8 @@ class Player {
         this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this._region(), this._subregion()));
         this._route = ko.observable(savedPlayer._route);
         // Check that the route is valid, otherwise set it to the regions starting route (route 0 means they are in a town)
-        if (this._route() > 0 && !MapHelper.validRoute(this._route(), this._region())) {
-            this._route(GameConstants.StartingRoutes[this._region()]);
+        if (this.route > 0 && !MapHelper.validRoute(this.route, this._region())) {
+            this.route = GameConstants.StartingRoutes[this._region()];
         }
         // Return player to last town or starter town if their town no longer exist for whatever reason
         this._townName = TownList[savedPlayer._townName] ? savedPlayer._townName : GameConstants.StartingTowns[this._region()];
@@ -69,7 +69,7 @@ class Player {
                     if (this._region() != i) {
                         this._region(i);
                         this._subregion(0);
-                        this.route(undefined);
+                        this.route = undefined;
                         this._townName = GameConstants.StartingTowns[i];
                         this._town = ko.observable(TownList[this._townName]);
                     }
@@ -130,12 +130,12 @@ class Player {
         return this._itemMultipliers;
     }
 
-    get route(): KnockoutObservable<number> {
-        return this._route;
+    get route(): number {
+        return this._route();
     }
 
-    set route(value: KnockoutObservable<number>) {
-        this._route = value;
+    set route(value: number) {
+        this._route(value);
     }
 
     get region(): GameConstants.Region {

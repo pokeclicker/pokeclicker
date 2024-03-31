@@ -351,7 +351,7 @@ class GameController {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
-                    const idx = cycle.findIndex(r => r == player.route());
+                    const idx = cycle.findIndex(r => r == player.route);
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                     switch (key) {
                         case '=':
