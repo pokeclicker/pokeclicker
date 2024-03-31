@@ -164,7 +164,7 @@ class Party implements Feature {
      * @returns {number} damage to be done.
      */
 
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, contestType1: ContestType = ContestType.None, contestType2: ContestType = ContestType.None, contestType3: ContestType = ContestType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeTempBonuses = true): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeTempBonuses = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
             if (region == GameConstants.Region.alola && player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump &&
@@ -172,7 +172,7 @@ class Party implements Feature {
                 // Only magikarps can attack in magikarp jump
                 continue;
             }
-            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, contestType1, contestType2, contestType3, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
+            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
@@ -180,8 +180,7 @@ class Party implements Feature {
         return Math.round(attack * bonus);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, contestType1: ContestType = ContestType.None, contestType2: ContestType = ContestType.None, contestType3: ContestType = ContestType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeTempBonuses = true): number {
-        let multiplier = 1, attack = 0; // TODO: appealBoost = 0
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeTempBonuses = true): number {
         const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
         const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
@@ -227,9 +226,6 @@ class Party implements Feature {
             });
             attack *= App.game.zMoves.getMultiplier(dataPokemon.type1, dataPokemon.type2);
         }
-
-        // Pokeblock boost
-        attack += this.calculateOnePokemonAppeal(pokemon, contestType1, contestType2, contestType3, includeBreeding) * 0; // TODO: * appealBoost
 
         return attack;
     }

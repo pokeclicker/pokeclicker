@@ -37,7 +37,7 @@ class Battle {
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
-        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2)); // TODO: appeal
+        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }

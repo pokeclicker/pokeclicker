@@ -59,7 +59,7 @@ class DiscordRichPresence {
         },
         {
             key: 'attack',
-            value: () => App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, ContestType.None, ContestType.None, ContestType.None, true, undefined, true, false, WeatherType.Clear, true, true),
+            value: () => App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, true, undefined, true, false, WeatherType.Clear, true, true),
             default: 0,
         },
         {

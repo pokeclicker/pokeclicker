@@ -12,7 +12,7 @@ class PokemonFactory {
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region, subRegion: SubRegion): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
-            return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route); // TODO: appeal
+            return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route);
         }
         let name: PokemonNameType;
 
@@ -77,7 +77,7 @@ class PokemonFactory {
             );
         }
         const ep = GameConstants.BASE_EP_YIELD * (roaming ? GameConstants.ROAMER_EP_MODIFIER : 1);
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, gender, GameConstants.ShadowStatus.None, encounterType, heldItem, ep); // TODO: appeal
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, gender, GameConstants.ShadowStatus.None, encounterType, heldItem, ep);
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
@@ -146,7 +146,7 @@ class PokemonFactory {
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer); // TODO: appeal
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
     }
 
     public static generateDungeonPokemon(name: PokemonNameType, chestsOpened: number, baseHealth: number, level: number, mimic = false): BattlePokemon {
@@ -175,7 +175,7 @@ class PokemonFactory {
 
         const ep = GameConstants.BASE_EP_YIELD * (mimic ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
         const et = mimic ? EncounterType.mimic : EncounterType.dungeon;
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, GameConstants.ShadowStatus.None, et, heldItem, ep); // TODO: appeal
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, GameConstants.ShadowStatus.None, et, heldItem, ep);
     }
 
     public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean): BattlePokemon {
@@ -190,7 +190,7 @@ class PokemonFactory {
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
         const ep = GameConstants.BASE_EP_YIELD * (isBoss ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
-        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, shadow, EncounterType.trainer, undefined, ep); // TODO: appeal
+        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, shadow, EncounterType.trainer, undefined, ep);
     }
 
     public static generateDungeonBoss(bossPokemon: DungeonBossPokemon, chestsOpened: number): BattlePokemon {
@@ -218,7 +218,7 @@ class PokemonFactory {
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_BOSS_EP_MODIFIER;
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, gender, GameConstants.ShadowStatus.None, EncounterType.dungeonBoss, heldItem, ep); // TODO: appeal
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, gender, GameConstants.ShadowStatus.None, EncounterType.dungeonBoss, heldItem, ep);
     }
 
     public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
@@ -235,7 +235,7 @@ class PokemonFactory {
         const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType); // TODO: appeal
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
     }
 
     public static generateContestTrainerPokemon(contest: Contest, trainerIndex: number, pokemonIndex: number): BattlePokemon {
@@ -247,7 +247,7 @@ class PokemonFactory {
         const money = 0;
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer, undefined, undefined, basePokemon.contestType1, basePokemon.contestType2, basePokemon.contestType3); // TODO: appeal
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer, undefined, undefined, basePokemon.contestType1, basePokemon.contestType2, basePokemon.contestType3);
     }
 
     private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {
