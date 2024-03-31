@@ -150,7 +150,9 @@ class PartyController {
 
     static getSortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
-        return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
+        const region = App.game.challenges.list.regionalAttackDebuff.active() && Settings.getSetting('displayPokemonListRegionalDebuff').observableValue()
+            ? player.region : -1;
+        return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue(), region));
     }).extend({ rateLimit: 500 });
 
     private static vitaminSortedList = [];
@@ -270,8 +272,12 @@ class PartyController {
 
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
-        if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
-            return App.game.party.getRegionAttackMultiplier();
+        // Check if regional debuff is active
+        if (App.game.challenges.list.regionalAttackDebuff.active()) {
+            // Check if regional debuff being applied for sorting
+            if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
+                return App.game.party.getRegionAttackMultiplier();
+            }
         }
         return 1.0;
     }

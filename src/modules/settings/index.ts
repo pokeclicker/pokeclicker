@@ -76,6 +76,7 @@ Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons',
         new SettingOption('×10, ÷10', 'multiplication'),
     ],
     'original'));
+Settings.add(new BooleanSetting('displayPokemonListRegionalDebuff', 'Display regional attack debuffs in the Pokémon list', false));
 Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity after each purchase', true));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new BooleanSetting('showCurrencyLostAnimation', 'Show currency lost animation', true));

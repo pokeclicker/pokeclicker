@@ -79,7 +79,11 @@
                                         }"/>
                                         <!-- /ko -->
                                     </div>
-                                    <div class="pokemonAttack" data-bind="text: attack.toLocaleString('en-US')"></div>
+                                    <div class="pokemonAttack" data-bind="text: ($data.attack * (App.game.challenges.list.regionalAttackDebuff.active()
+                                            && Settings.getSetting('displayPokemonListRegionalDebuff').observableValue()
+                                                ? PartyController.calculateRegionalMultiplier($data, player.region)
+                                                : 1
+                                        )).toLocaleString('en-US', {maximumFractionDigits: 0})"></div>
                                     <div class="pokemonLevel" data-bind="text: level"></div>
                                 </div>
                             </td>
