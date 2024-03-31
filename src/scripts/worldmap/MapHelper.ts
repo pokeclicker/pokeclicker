@@ -31,7 +31,7 @@ class MapHelper {
         }
         if (this.accessToRoute(route, region)) {
             player.route = route;
-            player._subregion(routeData.subRegion != undefined ? routeData.subRegion : 0);
+            player.subregion = routeData.subRegion ?? 0;
             if (player.region != region) {
                 player.region = region;
             }
