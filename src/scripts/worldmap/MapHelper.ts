@@ -80,7 +80,7 @@ class MapHelper {
                 ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
             (App.game.gameState == GameConstants.GameState.gym
                 ? GymRunner.getEnvironmentArea() : undefined) ||
-            player.town()?.name ||
+            player.town?.name ||
             undefined;
 
         if (area in GameConstants.Environments) {
@@ -137,7 +137,7 @@ class MapHelper {
         if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
             return TemporaryBattleRunner.battleObservable().getTown().name == townName;
         }
-        return !player.route && player.town().name == townName;
+        return !player.route && player.town.name == townName;
     }
 
     public static calculateTownCssClass(townName: string): string {
@@ -208,8 +208,8 @@ class MapHelper {
             Battle.route = 0;
             Battle.catching(false);
             const town = TownList[townName];
-            player.town(town);
-            player._subregion(town.subRegion);
+            player.town = town;
+            player.subregion = town.subRegion;
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;

@@ -391,25 +391,25 @@ class GameController {
                 // Within towns
                 if (App.game.gameState === GameConstants.GameState.town) {
                     if (key === Settings.getSetting('hotkey.town.start').value) {
-                        if (player.town() instanceof DungeonTown) {
-                            DungeonRunner.initializeDungeon(player.town().dungeon);
+                        if (player.town instanceof DungeonTown) {
+                            DungeonRunner.initializeDungeon(player.town.dungeon);
                         } else {
-                            player.town().content[0].protectedOnclick();
+                            player.town.content[0].protectedOnclick();
                         }
                         return e.preventDefault();
                     } else if (isNumberKey) {
                         // Check if a number higher than 0 and less than our towns content was pressed
-                        const filteredContent = player.town().content.filter(c => c.isVisible());
-                        const filteredNPCs = player.town().npcs?.filter(n => n.isVisible());
+                        const filteredContent = player.town.content.filter(c => c.isVisible());
+                        const filteredNPCs = player.town.npcs?.filter(n => n.isVisible());
                         if (numberKey < filteredContent.length) {
                             filteredContent[numberKey].protectedOnclick();
                         } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
                             NPCController.openDialog(filteredNPCs[numberKey - filteredContent.length]);
                         }
                         return e.preventDefault();
-                    } else if (player.town() instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
+                    } else if (player.town instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
                         const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
-                        const idx = cycle.findIndex(d => d.name == player.town().name);
+                        const idx = cycle.findIndex(d => d.name == player.town.name);
                         switch (key) {
                             case '=' :
                             case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);

@@ -71,7 +71,7 @@ class Player {
                         this._subregion(0);
                         this.route = undefined;
                         this._townName = GameConstants.StartingTowns[i];
-                        this._town = ko.observable(TownList[this._townName]);
+                        this.town = TownList[this._townName];
                     }
                     $('#pickStarterModal').modal('show');
                 }
@@ -163,19 +163,19 @@ class Player {
         }
         const subregion = SubRegions.getSubRegionById(this.region, value);
 
-        if (subregion.startRoute) {
+        if (subregion.startRoute && subregion.startRoute !== player.route) {
             MapHelper.moveToRoute(subregion.startRoute, player.region);
-        } else if (subregion.startTown) {
+        } else if (subregion.startTown && subregion.startTown !== player.town.name) {
             MapHelper.moveToTown(subregion.startTown);
         }
     }
 
-    get town(): KnockoutObservable<Town> {
-        return this._town;
+    get town(): Town {
+        return this._town();
     }
 
-    set town(value: KnockoutObservable<Town>) {
-        this._town = value;
+    set town(value: Town) {
+        this._town(value);
     }
 
     public gainItem(itemName: string, amount: number) {
