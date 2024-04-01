@@ -18,7 +18,7 @@ class ContestBattle extends Battle {
                 return;
             }
             // damage enemy using only pokemon of the contest's type
-            this.enemyPokemon().damage(App.game.party.calculatePokemonAppeal(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3, this.contest.pokemons));
+            this.enemyPokemon().damage(ContestHelper.calculatePokemonAppeal(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3, this.contest.pokemons));
 
             // TODO: primary judging mode, uses party mons
             // this.enemyPokemon().rally(App.game.party.calculateOnePokemonAppeal(App.game.party.caughtPokemon.find((p) => p.name === this.enemyPokemon().name), this.contest.contestType));
@@ -28,7 +28,7 @@ class ContestBattle extends Battle {
                 this.contest.rally(
                     Math.floor(
                         (this.enemyPokemon().maxHealth()
-                        + App.game.party.calculatePokemonAppeal(this.contest.contestType))
+                        + ContestHelper.calculatePokemonAppeal(this.contest.contestType))
                         * (1 + this.pokemonIndex() * 0.2))
                 );
                 this.defeatPokemon();

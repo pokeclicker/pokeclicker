@@ -231,29 +231,6 @@ class Party implements Feature {
         return attack;
     }
 
-    public calculatePokemonAppeal(type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, pokemons?: PartyPokemon[], includeBreeding = false): number {
-        let appeal = 0;
-        const pks = pokemons ? pokemons : this.caughtPokemon;
-        for (const pokemon of pks) {
-            appeal += this.calculateOnePokemonAppeal(pokemon, type1, type2, type3, includeBreeding);
-        }
-
-        return Math.round(appeal);
-    }
-
-    public calculateOnePokemonAppeal(pokemon: PartyPokemon, type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, includeBreeding = false): number {
-        let appeal = 0;
-        const pAppeal = pokemon.appeal;
-        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-
-        // Check if the Pokemon is currently breeding (no appeal)
-        if (includeBreeding || !pokemon.breeding) {
-            appeal = pAppeal * ContestTypeHelper.getAppealModifier(dataPokemon.contestType1, dataPokemon.contestType2, dataPokemon.contestType3, type1, type2, type3);
-        }
-
-        return appeal;
-    }
-
     public getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
         // between 0.2 -> 1 based on highest region
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
