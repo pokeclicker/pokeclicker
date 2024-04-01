@@ -57,6 +57,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Sydney', 'Lass', [new GymPokemon('Whismur', 80, 10)]), // Whiris
         new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
         new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
+        new ContestTrainer('Ultima', 'Ruin Maniac', [
+            new GymPokemon('Marill', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?')),
+            new GymPokemon('Pikachu', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
+        ], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
     ],
     [ContestRank.Super]: [
         new ContestTrainer('Aliyah', 'Nurse', [new GymPokemon('Blissey', 80, 20)]), // Bliss
@@ -96,6 +100,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Zeek', 'Psychic', [new GymPokemon('Drowzee', 110, 20)], '(male)'), // Drowzin
         new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
         new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
+        new ContestTrainer('Ultima', 'Ruin Maniac', [
+            new GymPokemon('Marill', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?')),
+            new GymPokemon('Pikachu', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
+        ], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
     ],
     [ContestRank.Hyper]: [
         new ContestTrainer('Alisha', 'Young Couple', [new GymPokemon('Beautifly', 60, 30)], '(female)'), // Tifly
@@ -138,6 +146,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Selena', 'Madame', [new GymPokemon('Wailmer', 90, 30)]), // Merail
         new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
         new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
+        new ContestTrainer('Ultima', 'Ruin Maniac', [
+            new GymPokemon('Marill', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?')),
+            new GymPokemon('Pikachu', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
+        ], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
     ],
     [ContestRank.Master]: [
         new ContestTrainer('Aubrey', 'Young Couple', [
@@ -178,6 +190,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Trey', 'Sailor', [new GymPokemon('Slowking', 60, 40)]), // Slowgo
         new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
         new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
+        new ContestTrainer('Ultima', 'Ruin Maniac', [
+            new GymPokemon('Marill', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?')),
+            new GymPokemon('Pikachu', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
+        ], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
     ],
     [ContestRank['Super Normal']]: [],
     [ContestRank['Super Great']]: [],
