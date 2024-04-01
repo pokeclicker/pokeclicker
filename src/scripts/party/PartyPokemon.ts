@@ -22,7 +22,7 @@ class PartyPokemon implements Saveable {
     public exp = 0;
     public evs: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
-    _appeal: KnockoutComputed<number>;
+    _contestAppeal: KnockoutComputed<number>;
     private _canUseHeldItem: KnockoutComputed<boolean>;
 
     defaults = {
@@ -115,7 +115,7 @@ class PartyPokemon implements Saveable {
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
         this._attack = ko.computed(() => this.calculateAttack());
-        this._appeal = ko.computed(() => this.calculateAppeal());
+        this._contestAppeal = ko.computed(() => this.calculateContestAppeal());
         this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
         this._canUseHeldItem.subscribe((canUse) => {
             if (!canUse && this.heldItem()) {
@@ -139,7 +139,7 @@ class PartyPokemon implements Saveable {
         return bonus;
     });
 
-    public calculateAppeal(): number {
+    public calculateContestAppeal(): number {
         return Math.max(1, Math.floor((10))); // TODO: add bonuses
     }
 
@@ -621,8 +621,8 @@ class PartyPokemon implements Saveable {
         this._breeding(bool);
     }
 
-    get appeal(): number {
-        return this._appeal();
+    get contestAppeal(): number {
+        return this._contestAppeal();
     }
 
     get pokerus(): GameConstants.Pokerus {
