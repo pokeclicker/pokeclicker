@@ -247,7 +247,7 @@ class Party implements Feature {
 
         // Check if the Pokemon is currently breeding (no appeal)
         if (includeBreeding || !pokemon.breeding) {
-            appeal = pAppeal * TypeHelper.getAppealModifier(dataPokemon.contestType1, dataPokemon.contestType2, dataPokemon.contestType3, type1, type2, type3);
+            appeal = pAppeal * ContestTypeHelper.getAppealModifier(dataPokemon.contestType1, dataPokemon.contestType2, dataPokemon.contestType3, type1, type2, type3);
         }
 
         return appeal;
