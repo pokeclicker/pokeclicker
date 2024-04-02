@@ -69,6 +69,7 @@ import * as modalUtils from './utilities/Modal';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
+import ContestTypeHelper from './types/ContestTypeHelper';
 import Upgrade from './upgrades/Upgrade';
 import ExpUpgrade from './upgrades/ExpUpgrade';
 import OakItemType from './enums/OakItemType';
@@ -282,6 +283,7 @@ Object.assign(<any>window, {
     PokemonCategories,
     Information,
     TypeHelper,
+    ContestTypeHelper,
     Upgrade,
     ExpUpgrade,
     OakItemType,
