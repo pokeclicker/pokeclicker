@@ -1,3 +1,6 @@
+///<reference path="../towns/TownContent.ts"/>
+///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
+
 class ContestHall extends TownContent {
     constructor(
         public rank: ContestRank[],
@@ -25,8 +28,6 @@ class ContestHall extends TownContent {
         App.game.gameState = GameConstants.GameState.town;
     }
     public areaStatus(): areaStatus {
-        // if (all ribbons are gotten) {
         return areaStatus.completed;
-        // }
     }
 }

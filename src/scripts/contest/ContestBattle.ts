@@ -25,7 +25,7 @@ class ContestBattle extends Battle {
 
             if (!this.enemyPokemon().isAlive()) {
                 // increase contest bar based off all party mons appeal + health of defeated pokemon
-                this.contest.rally(
+                ContestRunner.rally(
                     Math.floor(
                         (this.enemyPokemon().maxHealth()
                         + ContestHelper.calculatePokemonContestAppeal(this.contest.contestType))
@@ -48,7 +48,7 @@ class ContestBattle extends Battle {
         this.enemyPokemon().defeat(true);
 
         // give trainer bonus for Contest Tokens if contest bar is full
-        if (this.contest.isRallied()) {
+        if (ContestRunner.isRallied()) {
             this.totalTrainers(this.totalTrainers() + 1);
         }
 

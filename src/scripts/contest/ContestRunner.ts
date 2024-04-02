@@ -1,13 +1,13 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
-// /// <reference path="../../declarations/enums/Ribbons.d.ts" />
 
 class ContestRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.CONTEST_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
     public static timeBonus: KnockoutObservable<number> = ko.observable(1);
 
-    public static appeal: KnockoutObservable<number> = ko.observable(0);
-    public static appealPercentage: KnockoutObservable<number> = ko.observable(100);
+    public static maxAudienceAppeal: KnockoutObservable<number> = ko.observable(1);
+    public static audienceAppeal: KnockoutObservable<number> = ko.observable(0);
+    public static audienceAppealPercentage: KnockoutObservable<number> = ko.observable(0);
 
     public static contestObservable: KnockoutObservable<Contest> = ko.observable();
     public static running: KnockoutObservable<boolean> = ko.observable(false);
@@ -25,13 +25,11 @@ class ContestRunner {
         this.timeLeft(GameConstants.CONTEST_TIME * this.timeBonus());
         this.timeLeftPercentage(100);
 
-        this.appeal(0);
-        this.appealPercentage(100);
+        this.maxAudienceAppeal(contest.rank * 1000);
+        this.audienceAppeal(0);
+        this.audienceAppealPercentage(0);
 
         ContestBattle.contest = contest;
-        ContestBattle.contest.audienceAppeal = ko.observable(0);
-        ContestBattle.contest.audiencePercentageAppeal = ko.observable(0);
-
         contest.trainers = Rand.shuffleArray(contest.trainers);
         ContestBattle.trainerIndex(0);
         ContestBattle.pokemonIndex(0);
@@ -65,7 +63,7 @@ class ContestRunner {
             return;
         }
         if (this.timeLeft() < 0) {
-            ContestBattle.contest.isRallied() ? this.contestWon() : this.contestLost();
+            this.isRallied() ? this.contestWon() : this.contestLost();
             ContestBattle.enemyPokemon(null);
             ContestBattle.trainer(null);
         }
@@ -88,6 +86,19 @@ class ContestRunner {
                 this.timeBonus(currentFluteBonus);
             }
         }
+    }
+
+    public static isRallied(): boolean {
+        return this.audienceAppeal() >= this.maxAudienceAppeal();
+    }
+
+    /**
+     * Gain audience points
+     * @param rally
+     */
+    public static rally(rally: number): void {
+        this.audienceAppeal(Math.min(this.audienceAppeal() + rally, this.maxAudienceAppeal()));
+        this.audienceAppealPercentage(Math.floor(this.audienceAppeal() / this.maxAudienceAppeal() * 100));
     }
 
     public static contestLost() {
@@ -113,19 +124,10 @@ class ContestRunner {
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
-            // first time reward
-
-            // GameHelper.incrementObservable(App.game.statistics.contestsWon[GameConstants.getContestIndex(contest.name)]); maybe?
-
         }
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(this.timeLeft() / 100) / 10).toFixed(1);
     })
-
-    public static getEnvironmentArea() {
-        const contest = this.contestObservable();
-        return contest.optionalArgs.environment;
-    }
 }

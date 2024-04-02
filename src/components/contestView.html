@@ -40,9 +40,9 @@
         </div>
         <div class="progress hitpoints trainerhitpoints">
           <div class="progress-bar bg-success" role="progressbar"
-                  data-bind="attr:{ style: 'width:' + ContestBattle.contest.audiencePercentageAppeal() + '%' }"
+                  data-bind="attr:{ style: 'width:' + ContestRunner.audienceAppealPercentage() + '%' }"
                   aria-valuemin="0" aria-valuemax="100">
-              <span data-bind="text: ContestBattle.contest.audienceAppeal().toLocaleString('en-US') + ' / ' + ContestBattle.contest.maxAudienceAppeal().toLocaleString('en-US')" style="font-size: 12px;"></span>
+              <span data-bind="text: ContestRunner.audienceAppeal().toLocaleString('en-US') + ' / ' + ContestRunner.maxAudienceAppeal().toLocaleString('en-US')" style="font-size: 12px;"></span>
           </div>
       </div>
       <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
