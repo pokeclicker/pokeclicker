@@ -13,7 +13,7 @@
             <div data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
                 <button data-bind="click: () => {new Contest(rank, type).onclick()}">
                     <h5 data-bind="text: `${ContestType[type]}`"></h5>
-                    <img data-bind="attr:{ src: Contest.getRibbonImage(rank, type)}">
+                    <img data-bind="attr:{ src: ContestHall.getRibbonImage(rank, type)}">
                     <!-- TODO: add stat for max streak/trainers defeated -->
                     <!-- TODO: flex spacing -->
                   </button>
