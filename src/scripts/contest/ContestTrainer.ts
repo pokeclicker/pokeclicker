@@ -15,7 +15,6 @@ class ContestTrainer extends Trainer {
 
 }
 
-// TODO: correct trainer sprites, add nicknames, combine same trainers with reqs on different mons
 const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
     [ContestRank.Practice]: [],
     [ContestRank.Normal]: [

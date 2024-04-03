@@ -5,10 +5,6 @@ class Contest {
     public onclick(): void {
         ContestRunner.startContest(this);
     }
-    public leave(): void {
-        // Put the user back in the town
-        App.game.gameState = GameConstants.GameState.town;
-    }
 
     constructor(
         public rank: ContestRank,
@@ -18,8 +14,7 @@ class Contest {
             const pk = PokemonHelper.getPokemonById(p.id);
             return [pk.contestType1, pk.contestType2, pk.contestType3].find(c => c === contestType || c === ContestType.Balanced) !== -1;
         }),
-        public rewardFunction = () => {},
-        public optionalArgs: optionalGymArgs = {},
+        public rewardFunction = () => {}, // TODO: ribbons
         public trainers: ContestTrainer[] = ContestOpponents[rank]
     ) {
     }
