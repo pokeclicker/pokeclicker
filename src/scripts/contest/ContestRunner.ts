@@ -19,15 +19,15 @@ class ContestRunner {
     public static startContest(
         contest: Contest
     ) {
-        this.running(false);
-        this.contestObservable(contest);
+        ContestRunner.running(false);
+        ContestRunner.contestObservable(contest);
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
-        this.timeLeft(GameConstants.CONTEST_TIME * this.timeBonus());
-        this.timeLeftPercentage(100);
+        ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());
+        ContestRunner.timeLeftPercentage(100);
 
-        this.maxAudienceAppeal(contest.rank * 1000);
-        this.audienceAppeal(0);
-        this.audienceAppealPercentage(0);
+        ContestRunner.maxAudienceAppeal(contest.rank * 1000);
+        ContestRunner.audienceAppeal(0);
+        ContestRunner.audienceAppealPercentage(0);
 
         ContestBattle.contest = contest;
         contest.trainers = Rand.shuffleArray(contest.trainers);
@@ -36,11 +36,11 @@ class ContestRunner {
         ContestBattle.totalTrainers(0);
         ContestBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.contest;
-        this.running(true);
-        this.resetGif();
+        ContestRunner.running(true);
+        ContestRunner.resetGif();
 
         setTimeout(() => {
-            this.hideGif();
+            ContestRunner.hideGif();
         }, GameConstants.GYM_COUNTDOWN);
     }
 
@@ -59,37 +59,37 @@ class ContestRunner {
     }
 
     public static tick() {
-        if (!this.running()) {
+        if (!ContestRunner.running()) {
             return;
         }
-        if (this.timeLeft() < 0) {
-            this.isRallied() ? this.contestWon() : this.contestLost();
+        if (ContestRunner.timeLeft() < 0) {
+            ContestRunner.isRallied() ? ContestRunner.contestWon() : ContestRunner.contestLost();
             ContestBattle.enemyPokemon(null);
             ContestBattle.trainer(null);
         }
-        this.timeLeft(this.timeLeft() - GameConstants.CONTEST_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.CONTEST_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+        ContestRunner.timeLeft(ContestRunner.timeLeft() - GameConstants.CONTEST_TICK);
+        ContestRunner.timeLeftPercentage(Math.floor(ContestRunner.timeLeft() / (GameConstants.CONTEST_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
 
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
-        if (currentFluteBonus != this.timeBonus()) {
-            if (currentFluteBonus > this.timeBonus()) {
-                if (this.timeBonus() === 1) {
-                    this.timeBonus(currentFluteBonus);
-                    this.timeLeft(this.timeLeft() * this.timeBonus());
+        if (currentFluteBonus != ContestRunner.timeBonus()) {
+            if (currentFluteBonus > ContestRunner.timeBonus()) {
+                if (ContestRunner.timeBonus() === 1) {
+                    ContestRunner.timeBonus(currentFluteBonus);
+                    ContestRunner.timeLeft(ContestRunner.timeLeft() * ContestRunner.timeBonus());
                 } else {
-                    this.timeLeft(this.timeLeft() / this.timeBonus());
-                    this.timeBonus(currentFluteBonus);
-                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                    ContestRunner.timeLeft(ContestRunner.timeLeft() / ContestRunner.timeBonus());
+                    ContestRunner.timeBonus(currentFluteBonus);
+                    ContestRunner.timeLeft(ContestRunner.timeLeft() * ContestRunner.timeBonus());
                 }
             } else {
-                this.timeLeft(this.timeLeft() / this.timeBonus());
-                this.timeBonus(currentFluteBonus);
+                ContestRunner.timeLeft(ContestRunner.timeLeft() / ContestRunner.timeBonus());
+                ContestRunner.timeBonus(currentFluteBonus);
             }
         }
     }
 
     public static isRallied(): boolean {
-        return this.audienceAppeal() >= this.maxAudienceAppeal();
+        return ContestRunner.audienceAppeal() >= ContestRunner.maxAudienceAppeal();
     }
 
     /**
@@ -97,13 +97,13 @@ class ContestRunner {
      * @param rally
      */
     public static rally(rally: number): void {
-        this.audienceAppeal(Math.min(this.audienceAppeal() + rally, this.maxAudienceAppeal()));
-        this.audienceAppealPercentage(Math.floor(this.audienceAppeal() / this.maxAudienceAppeal() * 100));
+        ContestRunner.audienceAppeal(Math.min(ContestRunner.audienceAppeal() + rally, ContestRunner.maxAudienceAppeal()));
+        ContestRunner.audienceAppealPercentage(Math.floor(ContestRunner.audienceAppeal() / ContestRunner.maxAudienceAppeal() * 100));
     }
 
     public static contestLost() {
-        if (this.running()) {
-            this.running(false);
+        if (ContestRunner.running()) {
+            ContestRunner.running(false);
             Notifier.notify({
                 message: 'You did not have enough appeal to win the crowd over.',
                 type: NotificationConstants.NotificationOption.danger,
@@ -112,8 +112,8 @@ class ContestRunner {
     }
 
     public static contestWon() {
-        if (this.running()) {
-            this.running(false);
+        if (ContestRunner.running()) {
+            ContestRunner.running(false);
             const contestTokenMultiplier = ContestBattle.totalTrainers();
             const rank = ContestBattle.contest.rank;
             const tokenReward = Math.floor(5 + (rank * 2) + (0.1 * rank * contestTokenMultiplier));
@@ -128,6 +128,6 @@ class ContestRunner {
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
-        return (Math.ceil(this.timeLeft() / 100) / 10).toFixed(1);
+        return (Math.ceil(ContestRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 }

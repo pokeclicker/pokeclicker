@@ -3,7 +3,7 @@ class ContestHelper {
         let appeal = 0;
         const pks = pokemons ? pokemons : App.game.party.caughtPokemon;
         for (const pokemon of pks) {
-            appeal += this.calculateOnePokemonContestAppeal(pokemon, type1, type2, type3, includeBreeding);
+            appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, type1, type2, type3, includeBreeding);
         }
 
         return Math.round(appeal);

@@ -10,28 +10,28 @@ class ContestBattle extends Battle {
     public static pokemonAttack() {
         if (ContestRunner.running()) {
             const now = Date.now();
-            if (this.lastPokemonAttack > now - 900) {
+            if (ContestBattle.lastPokemonAttack > now - 900) {
                 return;
             }
-            this.lastPokemonAttack = now;
-            if (!this.enemyPokemon()?.isAlive()) {
+            ContestBattle.lastPokemonAttack = now;
+            if (!ContestBattle.enemyPokemon()?.isAlive()) {
                 return;
             }
             // damage enemy using only pokemon of the contest's type
-            this.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(this.enemyPokemon().contestType1, this.enemyPokemon().contestType2, this.enemyPokemon().contestType3, this.contest.pokemons));
+            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3, ContestBattle.contest.pokemons));
 
             // TODO: primary judging mode, uses party mons
-            // this.enemyPokemon().rally(App.game.party.calculateOnePokemonContestAppeal(App.game.party.caughtPokemon.find((p) => p.name === this.enemyPokemon().name), this.contest.contestType));
+            // ContestBattle.enemyPokemon().rally(App.game.party.calculateOnePokemonContestAppeal(App.game.party.caughtPokemon.find((p) => p.name === ContestBattle.enemyPokemon().name), ContestBattle.contest.contestType));
 
-            if (!this.enemyPokemon().isAlive()) {
+            if (!ContestBattle.enemyPokemon().isAlive()) {
                 // increase contest bar based off all party mons appeal + health of defeated pokemon
                 ContestRunner.rally(
                     Math.floor(
-                        (this.enemyPokemon().maxHealth()
-                        + ContestHelper.calculatePokemonContestAppeal(this.contest.contestType))
-                        * (1 + this.pokemonIndex() * 0.2))
+                        (ContestBattle.enemyPokemon().maxHealth()
+                        + ContestHelper.calculatePokemonContestAppeal(ContestBattle.contest.contestType))
+                        * (1 + ContestBattle.pokemonIndex() * 0.2))
                 );
-                this.defeatPokemon();
+                ContestBattle.defeatPokemon();
             }
         }
     }
@@ -45,35 +45,35 @@ class ContestBattle extends Battle {
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        this.enemyPokemon().defeat(true);
+        ContestBattle.enemyPokemon().defeat(true);
 
         // give trainer bonus for Contest Tokens if contest bar is full
         if (ContestRunner.isRallied()) {
-            this.totalTrainers(this.totalTrainers() + 1);
+            ContestBattle.totalTrainers(ContestBattle.totalTrainers() + 1);
         }
 
         // Make contest "route" regionless
-        App.game.breeding.progressEggsBattle(this.contest.rank * 3 + 1, GameConstants.Region.none);
+        App.game.breeding.progressEggsBattle(ContestBattle.contest.rank * 3 + 1, GameConstants.Region.none);
 
         // Check if all of the trainer's party has been used
-        if (this.pokemonIndex() + 1 >= this.contest.getTrainerList()[this.trainerIndex()].getTeam().length) {
+        if (ContestBattle.pokemonIndex() + 1 >= ContestBattle.contest.getTrainerList()[ContestBattle.trainerIndex()].getTeam().length) {
 
             // Reset pokemon index for next trainer
-            this.pokemonIndex(0);
+            ContestBattle.pokemonIndex(0);
 
             // Loop through trainers
-            if (this.trainerIndex() + 1 >= this.contest.getTrainerList().length) {
-                this.trainerIndex(0);
+            if (ContestBattle.trainerIndex() + 1 >= ContestBattle.contest.getTrainerList().length) {
+                ContestBattle.trainerIndex(0);
             } else {
-                this.trainerIndex(this.trainerIndex() + 1);
+                ContestBattle.trainerIndex(ContestBattle.trainerIndex() + 1);
             }
 
         } else {
             // Move to next pokemon
-            this.pokemonIndex(this.pokemonIndex() + 1);
+            ContestBattle.pokemonIndex(ContestBattle.pokemonIndex() + 1);
         }
 
-        this.generateNewEnemy();
+        ContestBattle.generateNewEnemy();
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
 
@@ -81,9 +81,9 @@ class ContestBattle extends Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        this.counter = 0;
-        this.trainer(this.contest.getTrainerList()[this.trainerIndex()]);
-        this.enemyPokemon(PokemonFactory.generateContestTrainerPokemon(this.contest, this.trainerIndex(), this.pokemonIndex()));
+        ContestBattle.counter = 0;
+        ContestBattle.trainer(ContestBattle.contest.getTrainerList()[ContestBattle.trainerIndex()]);
+        ContestBattle.enemyPokemon(PokemonFactory.generateContestTrainerPokemon(ContestBattle.contest, ContestBattle.trainerIndex(), ContestBattle.pokemonIndex()));
     }
 
     // Increase and keep track of the amount of trainers defeated
