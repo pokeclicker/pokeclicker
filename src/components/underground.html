@@ -202,7 +202,7 @@
                                     </td>
                                     <td class='vertical-middle'>
                                         <div class="btn-group btn-block">
-                                            <button class="btn btn-primary btn-block" data-bind="click: () => DailyDeal.use($index(), App.game.underground.tradeAmount()), css: { disabled: !DailyDeal.canUse($index()) }">
+                                            <button class="btn btn-primary btn-block" data-bind="click: () => DailyDeal.use($index(), App.game.underground.tradeAmount()), css: { disabled: !DailyDeal.canUse($index()) || App.game.underground.tradeAmount() == 0 }">
                                                 Trade
                                             </button>
                                             <button type="button" data-bind="css: { disabled: !DailyDeal.canUse($index()) }"
