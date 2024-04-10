@@ -26,6 +26,31 @@ class SafariBattle {
         SafariBattle.text('What will you do?');
         SafariBattle.escapeAttempts = 0;
         $('#safariBattleModal').modal({ backdrop: 'static', keyboard: false });
+
+        // Shiny
+        const location = `${GameConstants.camelCaseToString(GameConstants.Region[Safari.activeRegion()])} Safari`;
+        if (enemy.shiny) {
+            App.game.logbook.newLog(
+                LogBookTypes.SHINY,
+                App.game.party.alreadyCaughtPokemon(enemy.id, true)
+                    ? createLogContent.encounterShinyDupe({
+                        location: location,
+                        pokemon: enemy.name,
+                    })
+                    : createLogContent.encounterShiny({
+                        location: location,
+                        pokemon: enemy.name,
+                    })
+            );
+        } else if (!App.game.party.alreadyCaughtPokemon(enemy.id)) {
+            App.game.logbook.newLog(
+                LogBookTypes.NEW,
+                createLogContent.encounterWild({
+                    location: location,
+                    pokemon: enemy.name,
+                })
+            );
+        }
     }
 
     public static throwBall() {
