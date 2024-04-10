@@ -390,6 +390,34 @@ class QuestLineHelper {
 
     /* Johto QuestLines */
 
+    // Started upon defeating Ecruteak City's gym
+    public static createSickAmpharosQuestLine() {
+        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmines Ampharos seems to be sick!');
+
+        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City');
+        sickAmpharosQuestLine.addQuest(clearOlivineLighthouse);
+
+        const talkToJasmine1 = new TalkToNPCQuest(OlivineLighthouseJasmine1, 'Talk to Jasmine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(talkToJasmine1);
+
+        const talkToHerbalist1 = new TalkToNPCQuest(CianwoodCityPharmacist1, 'Talk to the Pharmacist in Cianwood City.');
+        sickAmpharosQuestLine.addQuest(talkToHerbalist1);
+
+        const clearCianwoodCityGym = new DefeatGymQuest(1, 0, 'Cianwood City').withDescription('The Pharmacist said he needs some time to finish Amphys medicine. Clear the Cianwood City Gym in the meantime.');
+        sickAmpharosQuestLine.addQuest(clearCianwoodCityGym);
+
+        const talkToHerbalist2 = new TalkToNPCQuest(CianwoodCityPharmacist2, 'Talk to the Pharmacist in Cianwood City.');
+        sickAmpharosQuestLine.addQuest(talkToHerbalist2);
+
+        const giveMedicineToAmphy = new TalkToNPCQuest(OlivineLighthouseMedicineAmphy, 'Give Amphy their medicine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(giveMedicineToAmphy);
+
+        const talkToJasmine2 = new TalkToNPCQuest(OlivineLighthouseJasmine2, 'Talk to Jasmine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(talkToJasmine2);
+
+        App.game.quests.questLines().push(sickAmpharosQuestLine);
+    }
+
     // Started upon defeating Ecruteak City's gym.
     public static createRocketJohtoQuestLine() {
         const rocketJohtoQuestLine = new QuestLine('Team Rocket Again', 'Team Rocket is up to no good again!');
@@ -581,17 +609,7 @@ class QuestLineHelper {
         const talktoIlexForestShrine1 = new TalkToNPCQuest(IlexForestShrine1, 'Investigate the shrine in Ilex Forest.');
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
 
-        const SpikyEaredPichuReward = () => {
-            App.game.party.gainPokemonByName('Spiky-eared Pichu');
-            Notifier.notify({
-                title: celebiJohtoQuestLine.name,
-                message: 'You captured the Spiky-eared Pichu!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const clearSpikyEaredPichu = new DefeatTemporaryBattleQuest('Spiky-eared Pichu', 'Defeat the strange Pichu.').withCustomReward(SpikyEaredPichuReward);
+        const clearSpikyEaredPichu = new DefeatTemporaryBattleQuest('Spiky-eared Pichu', 'Defeat the strange Pichu.');
         celebiJohtoQuestLine.addQuest(clearSpikyEaredPichu);
 
         const talktoProfOak4 = new TalkToNPCQuest(AzaleaCelebiOak2, 'Talk to Professor Oak in Azalea Town.');
@@ -735,7 +753,9 @@ class QuestLineHelper {
                 timeout: 3e4,
             });
         };
-        const reachStage100 = new CustomQuest(100, 0, 'Defeat stage 100 in the Battle Frontier.', App.game.statistics.battleFrontierHighestStageCompleted).withInitialValue(0).withCustomReward(reachStage100Reward);
+        const deoxysMilestone = BattleFrontierMilestones.milestoneRewards.find(m => (m as BattleFrontierMilestonePokemon).pokemonName === 'Deoxys');
+        // Initial value of 0. Should not be required unless the save is corrupt.
+        const reachStage100 = new CustomQuest(1, 0, 'Enter the Battle Frontier and defeat stage 100.', () => +deoxysMilestone.obtained()).withInitialValue(0).withCustomReward(reachStage100Reward);
         deoxysQuestLine.addQuest(reachStage100);
 
         App.game.quests.questLines().push(deoxysQuestLine);
@@ -3813,6 +3833,7 @@ class QuestLineHelper {
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
         this.createPersonsofInterestQuestLine();
+        this.createSickAmpharosQuestLine();
         this.createRocketJohtoQuestLine();
         this.createJohtoBeastsQuestLine();
         this.createJohtoSuicuneQuestLine();
