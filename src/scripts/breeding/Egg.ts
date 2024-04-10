@@ -97,21 +97,20 @@ class Egg implements Saveable {
         this.steps(this.steps() + amount);
         // Notify that the egg is ready to hatch
         if (this.canHatch() && !helper && !this.notified) {
+            let notifMessage;
             if (this.type == EggType.Pokemon) {
-                Notifier.notify({
-                    message: `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()} is ready to hatch!`,
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
-                    setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
-                });
+                notifMessage = `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()} is ready to hatch!`;
+            } else if (this.type == EggType.Fossil) {
+                notifMessage = `The ${GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(this.pokemon).name]} is ready to revive!`;
             } else {
-                Notifier.notify({
-                    message: 'An egg is ready to hatch!',
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
-                    setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
-                });
+                notifMessage = 'An egg is ready to hatch!';
             }
+            Notifier.notify({
+                message: notifMessage,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
+                setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
+            });
             this.notified = true;
         }
     }

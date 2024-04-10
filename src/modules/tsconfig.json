@@ -5,7 +5,6 @@
       "jquery",
       "knockout",
       "bootstrap",
-      "gtag.js"
     ],
     "lib": ["dom", "es2019"],
     "skipLibCheck": true,
