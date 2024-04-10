@@ -28,9 +28,10 @@
 
 /* Themes with light start menu text */
 .cosmo, .cyborg, .darkly, .flatly, .journal, .litera, .minty, .sandstone, .sketchy, .slate, .solar, .spacelab, .superhero, .united {
-  // make mute/unmute images white to match "Start Menu" text color
+  // make mute, unmute, save images white to match "Start Menu" text color
   img[src="assets/images/volume-high.svg"],
-  img[src="assets/images/volume-xmark.svg"] {
+  img[src="assets/images/volume-xmark.svg"],
+  img[src="assets/images/floppy-disk.svg"] {
     filter: invert(1) brightness(100%);
   }
 }
@@ -66,6 +67,10 @@
       background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
     }
   }
+
+  .dropdown-item:hover {
+    color: #495057;
+  }
 }
 
 .cosmo {
@@ -82,6 +87,10 @@
     .list-group-item-action:hover {
       color: black;
     }
+  }
+
+  .dropdown-item:hover {
+    color: #fff;
   }
 }
 
@@ -127,6 +136,10 @@
   /* Weather button in dock modal */
   .btn-weather-dock {
     border-color: rgba(0,0,0,25%);
+  }
+
+  .dropdown-item.active:hover {
+    color: #000;
   }
 }
 
@@ -177,6 +190,10 @@
       }
     }
   }
+
+  .dropdown-item.active:hover {
+    color: #000;
+  }
 }
 
 .materia {
@@ -214,6 +231,10 @@
         font-size: small;
       }
     }
+
+    .dropdown-item:hover {
+        color: #fff;
+    }
 }
 
 .simplex {
@@ -222,6 +243,10 @@
     .item-selected, .pokemon-selected {
       background: #d9230f !important;
     }
+  }
+
+  .dropdown-item:hover {
+    color: #000;
   }
 }
 
@@ -394,4 +419,11 @@
   .text-light {
     color: whitesmoke !important;
   }
+}
+
+.yeti {
+    .dropdown-item.active:hover,
+    .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu .dropdown-item:hover {
+        color: #222;
+    }
 }

@@ -2608,6 +2608,24 @@ class Update implements Saveable {
             // Preserve bottom-to-top catch filter priority for existing players
             settingsData['catchFilters.invertPriorityOrder'] = true;
         },
+
+        '0.10.19': ({ playerData, saveData, settingsData }) => {
+            // Update hatchery helper sorting (again)
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption == 2) {
+                    // Sort by attack -> sort by attack at lv100
+                    helper.sortOption = 5;
+                }
+            });
+        },
+        '0.10.20': ({ playerData, saveData, settingsData }) => {
+            // Add Olivine Lighthouse dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29);
+
+            if (saveData.badgeCase[17]) {
+                Update.startQuestLine(saveData, 'The Sick Ampharos');
+            }
+        },
     };
 
     constructor() {

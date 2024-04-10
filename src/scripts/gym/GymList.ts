@@ -295,6 +295,7 @@ GymList['Ecruteak City'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
         App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
+        App.game.quests.getQuestLine('The Sick Ampharos').beginQuest(0, undefined, true);
     }
 );
 GymList['Cianwood City'] = new Gym(
@@ -307,7 +308,7 @@ GymList['Cianwood City'] = new Gym(
     BadgeEnums.Storm,
     2500,
     'Wha? Huh? I lost? How about that! You\'re worthy of the Storm Badge!',
-    [new GymBadgeRequirement(BadgeEnums.Fog)]
+    [new QuestLineStepCompletedRequirement('The Sick Ampharos', 2)]
 );
 GymList['Olivine City'] = new Gym(
     'Jasmine',
@@ -320,7 +321,7 @@ GymList['Olivine City'] = new Gym(
     BadgeEnums.Mineral,
     3500,
     '...You are a better trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Badge.',
-    [new GymBadgeRequirement(BadgeEnums.Storm)]
+    [new QuestLineCompletedRequirement('The Sick Ampharos')]
 );
 GymList['Mahogany Town'] = new Gym(
     'Pryce',
@@ -1943,7 +1944,7 @@ GymList.Circhester2 = new Gym(
         new GymPokemon('Frosmoth', 140246069, 40),
         new GymPokemon('Galarian Darmanitan', 140246069, 40),
         new GymPokemon('Eiscue (Ice Face)', 140246069, 41, new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
-        new GymPokemon('Eiscue (Noice Face)', 140246069, 41, new WeatherRequirement([WeatherType.Sunny])),
+        new GymPokemon('Eiscue (Noice Face)', 140246069, 41, new WeatherRequirement([WeatherType.Harsh_Sunlight])),
         new GymPokemon('Gigantamax Lapras', 151694727, 42),
     ],
     BadgeEnums.Galar_Ice,

@@ -1,6 +1,7 @@
-import {
+import type {
     Observable as KnockoutObservable,
 } from 'knockout';
+import '../koExtenders';
 import { Saveable } from '../DataStore/common/Saveable';
 import * as GameConstants from '../GameConstants';
 import Notifier from '../notifications/Notifier';

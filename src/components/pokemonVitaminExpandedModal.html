@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-4 text-center text-lg-right p-0">
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <div class="btn-group btn-group-toggle">
                                 <!-- ko foreach: VitaminController.multiplier -->
                                 <label class="btn btn-secondary" data-bind="css: { active: VitaminController.multiplierIndex() == $index() }">
                                     <input type="radio" name="vitaminAmount"
@@ -102,7 +102,7 @@
                                 <th class="text-center align-middle">Optimize Vitamins</th>
                             </tr>
                         </thead>
-                        <tbody data-bind="foreach: lazyLoad('lazyVitaminExpandedList', $element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable })">
+                        <tbody data-bind="foreach: lazyLoad('lazyVitaminExpandedList', $element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable }), childrenComplete: () => { lazyLoadCallback('lazyVitaminExpandedList'); }">
                             <tr data-bind="css: { 'text-muted': $data.breeding }">
                                 <td class="text-left align-middle">
                                     <knockout data-bind="text: $data.displayName"></knockout>

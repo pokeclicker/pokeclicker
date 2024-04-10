@@ -1,3 +1,5 @@
+///<reference path="../../declarations/globals.d.ts"/>
+
 declare const modalUtils: { observableState: typeof observableState };
 
 class PartyController {
@@ -91,11 +93,21 @@ class PartyController {
             }
         }
 
+        let arePokemonInHatchery = false;
         App.game.party.caughtPokemon.forEach((p) => {
-            if (p.vitaminsUsed[vitamin]() > 0) {
+            if (p.vitaminsUsed[vitamin]() > 0 && !p.breeding) {
                 p.removeVitamin(vitamin, amount);
             }
+            if (p.breeding && !arePokemonInHatchery) {
+                arePokemonInHatchery = true;
+            }
         });
+        if (arePokemonInHatchery) {
+            Notifier.notify({
+                message: `${GameConstants.VitaminType[vitamin]} couldn\'t be modified for Pokémon in Hatchery or Queue.`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
     }
 
     public static async removeAllVitaminsFromParty(shouldConfirm = true) {
@@ -111,13 +123,23 @@ class PartyController {
         }
 
         const vitamins = GameHelper.enumNumbers(GameConstants.VitaminType);
+        let arePokemonInHatchery = false;
         App.game.party.caughtPokemon.forEach((p) => {
             vitamins.forEach((v) => {
-                if (p.vitaminsUsed[v]() > 0) {
+                if (p.vitaminsUsed[v]() > 0 && !p.breeding) {
                     p.removeVitamin(v, Infinity);
+                }
+                if (p.breeding && !arePokemonInHatchery) {
+                    arePokemonInHatchery = true;
                 }
             });
         });
+        if (arePokemonInHatchery) {
+            Notifier.notify({
+                message: 'Vitamins couldn\'t be modified for Pokémon in Hatchery or Queue.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
     }
 
     public static getMaxLevelPokemonList(): Array<PartyPokemon> {
@@ -303,3 +325,5 @@ class PartyController {
 
 
 }
+
+PartyController satisfies TmpPartyControllerType;
