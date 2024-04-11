@@ -180,7 +180,7 @@ class Egg implements Saveable {
         const pokemonName = PokemonHelper.getPokemonById(this.pokemon).name;
         const baseFormName = App.game.breeding.calculateBaseForm(pokemonName);
         const baseForm = PokemonHelper.getPokemonByName(baseFormName);
-        if (pokemonName != baseFormName && !App.game.party.alreadyCaughtPokemon(baseForm.id) && partyPokemon.heldItem()!==ItemList.Everstone) {
+        if (pokemonName != baseFormName && !App.game.party.alreadyCaughtPokemon(baseForm.id) && partyPokemon.heldItem() !== ItemList.Everstone) {
             Notifier.notify({
                 message: `You also found ${GameHelper.anOrA(baseFormName)} ${baseFormName} nearby!`,
                 pokemonImage: PokemonHelper.getImage(baseForm.id),
