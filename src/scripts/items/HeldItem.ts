@@ -210,15 +210,16 @@ ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', undefined, GameConst
 ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);
 
-function canHoldEverstone(pokemon) {
+ItemList.Everstone = new HeldItem('Everstone', 100, GameConstants.Currency.money, undefined, 'Everstone', 'Prevents evolution.', GameConstants.Region.kanto, (pokemon) => {
     if (pokemon.evolutions == null || pokemon.evolutions.length == 0) {
         return false;
     }
     for (const evo of pokemon.evolutions) {
-        if (evo.trigger !== EvoTrigger.NONE && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
+        if (evo.trigger !== EvoTrigger.NONE &&
+            PokemonHelper.calcNativeRegion(evo.evolvedPokemon) <= player.highestRegion() &&
+            !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
             return true;
         }
     }
     return false;
-}
-ItemList.Everstone = new HeldItem('Everstone', 100, GameConstants.Currency.money, undefined, 'Everstone', 'Prevents evolution.', GameConstants.Region.kanto, (pokemon) => canHoldEverstone(pokemon));
+});
