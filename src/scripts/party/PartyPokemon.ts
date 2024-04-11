@@ -221,7 +221,9 @@ class PartyPokemon implements Saveable {
     }
 
     public canHoldEverstone() {
-        if (this.evolutions == null || this.evolutions.length == 0) return false;
+        if (this.evolutions == null || this.evolutions.length == 0) {
+            return false;
+        }
         for (const evo of this.evolutions) {
             if (evo.trigger === EvoTrigger.LEVEL && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
                 return true;

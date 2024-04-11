@@ -41,7 +41,7 @@ class HeldItem extends Item {
             },
             other: {
                 title: 'Other',
-                items: sortedHeldItems.filter(i => (i.constructor.name === 'AttackBonusHeldItem'|| i.constructor.name === 'HeldItem')),
+                items: sortedHeldItems.filter(i => (i.constructor.name === 'AttackBonusHeldItem' || i.constructor.name === 'HeldItem')),
             },
         };
     }
