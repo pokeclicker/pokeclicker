@@ -221,11 +221,14 @@ class PartyPokemon implements Saveable {
     }
 
     public canHoldEverstone() {
+        if (this.id == 868) { //Milcery
+            return false;
+        }
         if (this.evolutions == null || this.evolutions.length == 0) {
             return false;
         }
         for (const evo of this.evolutions) {
-            if (evo.trigger === EvoTrigger.LEVEL && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
+            if (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
                 return true;
             }
         }
@@ -253,13 +256,14 @@ class PartyPokemon implements Saveable {
             (evo) => evo.trigger === EvoTrigger.STONE
                 && (evo as StoneEvoData).stone == stoneType
                 && EvolutionHandler.isSatisfied(evo)
+                && !this.holdEverstone()
         ).length > 0;
     }
 
     public useStone(stoneType: GameConstants.StoneType): boolean {
         const possibleEvolutions: EvoData[] = [];
         for (const evo of this.evolutions) {
-            if (evo.trigger === EvoTrigger.STONE && (evo as StoneEvoData).stone == stoneType && EvolutionHandler.isSatisfied(evo)) {
+            if (evo.trigger === EvoTrigger.STONE && (evo as StoneEvoData).stone == stoneType && EvolutionHandler.isSatisfied(evo) && !this.holdEverstone()) {
                 possibleEvolutions.push(evo);
             }
         }
