@@ -220,29 +220,13 @@ class PartyPokemon implements Saveable {
         return result;
     }
 
-    public canHoldEverstone() {
-        if (this.evolutions == null || this.evolutions.length == 0) {
-            return false;
-        }
-        for (const evo of this.evolutions) {
-            if (evo.trigger !== EvoTrigger.NONE && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public holdEverstone() {
-        return this.heldItem() === ItemList.Everstone_Held;
-    }
-
     public checkForLevelEvolution() {
         if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
         }
 
         for (const evo of this.evolutions) {
-            if (evo.trigger === EvoTrigger.LEVEL && EvolutionHandler.isSatisfied(evo) && !this.holdEverstone()) {
+            if (evo.trigger === EvoTrigger.LEVEL && EvolutionHandler.isSatisfied(evo)) {
                 EvolutionHandler.evolve(evo);
             }
         }
@@ -253,14 +237,13 @@ class PartyPokemon implements Saveable {
             (evo) => evo.trigger === EvoTrigger.STONE
                 && (evo as StoneEvoData).stone == stoneType
                 && EvolutionHandler.isSatisfied(evo)
-                && !this.holdEverstone()
         ).length > 0;
     }
 
     public useStone(stoneType: GameConstants.StoneType): boolean {
         const possibleEvolutions: EvoData[] = [];
         for (const evo of this.evolutions) {
-            if (evo.trigger === EvoTrigger.STONE && (evo as StoneEvoData).stone == stoneType && EvolutionHandler.isSatisfied(evo) && !this.holdEverstone()) {
+            if (evo.trigger === EvoTrigger.STONE && (evo as StoneEvoData).stone == stoneType && EvolutionHandler.isSatisfied(evo)) {
                 possibleEvolutions.push(evo);
             }
         }
