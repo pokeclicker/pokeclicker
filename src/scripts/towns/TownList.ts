@@ -406,7 +406,7 @@ const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
 ], {image: 'assets/images/npcs/Gentleman (Gen 4).png'});
 
 const VermilionShardApprentice = new NPC('Shard Apprentice', [
-    'Are you looking for some Shards? You can find them in many Dungeons! Except in Viridan Forest and Mt. Moon. I\'ve never found any Shards there for some reason.',
+    'Are you looking for some Shards? You can find them in many Dungeons! Except in Viridian Forest and Mt. Moon. I\'ve never found any Shards there for some reason.',
     'I happen to know that there are some Yellow and Blue Shards in Diglett\'s Cave. Just look inside the chests!',
     'Shards can have lots of different colors. Different Dungeons will have different colors, so keep an eye out! Most of them can\'t even be found in Kanto!',
 ]);
@@ -3184,7 +3184,7 @@ const Trest = new NPC('Mayor Trest', [
 const Verich = new NPC('Mr. Verich', [
     'Hohoho! You must be the $playername$ I\'m hearing so much about you from my.... employees.',
     'There\'s a lot of rumors buzzing around about the S. S. Libra, but if you ask me, it\'s long gone and may never be found.',
-    'You\'d have to be as crazy as Kamino to go looking for it.',
+    'You\'d have to be as crazy as Kaminko to go looking for it.',
 ], {image: 'assets/images/npcs/Grand Master Greevil.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 16), new QuestLineStepCompletedRequirement('Gale of Darkness', 18, GameConstants.AchievementOption.less)]),
 });
