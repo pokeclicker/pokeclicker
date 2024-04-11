@@ -139,8 +139,8 @@ class PartyPokemon implements Saveable {
     }
 
     public clickAttackBonus = ko.pureComputed((): number => {
-        // Caught + Shiny + Resistant
-        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
+        // Caught + Shiny + Resistant + Purified
+        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant) + +(this.shadow == GameConstants.ShadowStatus.Purified);
         return bonus;
     });
 
