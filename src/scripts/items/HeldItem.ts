@@ -218,7 +218,17 @@ ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.mon
         if (evo.trigger !== EvoTrigger.NONE &&
             PokemonHelper.calcNativeRegion(evo.evolvedPokemon) <= player.highestRegion() &&
             !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
-            return true;
+            if (PokemonHelper.isMegaEvolution(evo.evolvedPokemon)) {
+                const megastones = PokemonHelper.getMegaStones(pokemon.name);
+                for (const megastone of megastones) {
+                    if (player.hasMegaStone(megastone.megaStone)) {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                return true;
+            }
         }
     }
     return false;
