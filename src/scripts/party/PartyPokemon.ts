@@ -220,13 +220,27 @@ class PartyPokemon implements Saveable {
         return result;
     }
 
+    public canHoldEverstone() {
+        if (this.evolutions == null || this.evolutions.length == 0) return false;
+        for (const evo of this.evolutions) {
+            if (evo.trigger === EvoTrigger.LEVEL && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public holdEverstone() {
+        return this.heldItem() === ItemList.Everstone_Held;
+    }
+
     public checkForLevelEvolution() {
         if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
         }
 
         for (const evo of this.evolutions) {
-            if (evo.trigger === EvoTrigger.LEVEL && EvolutionHandler.isSatisfied(evo)) {
+            if (evo.trigger === EvoTrigger.LEVEL && EvolutionHandler.isSatisfied(evo) && !this.holdEverstone()) {
                 EvolutionHandler.evolve(evo);
             }
         }

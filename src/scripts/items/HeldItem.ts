@@ -41,7 +41,7 @@ class HeldItem extends Item {
             },
             other: {
                 title: 'Other',
-                items: sortedHeldItems.filter(i => i.constructor.name === 'AttackBonusHeldItem'),
+                items: sortedHeldItems.filter(i => (i.constructor.name === 'AttackBonusHeldItem'|| i.constructor.name === 'HeldItem')),
             },
         };
     }
@@ -209,3 +209,5 @@ ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', undefined, GameConst
 
 ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);
+
+ItemList.Everstone_Held = new HeldItem('Everstone_Held', 100, GameConstants.Currency.money, undefined, 'Everstone', 'Prevents evolution by leveling.', GameConstants.Region.kanto, (pokemon) => pokemon.canHoldEverstone());
