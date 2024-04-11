@@ -221,14 +221,11 @@ class PartyPokemon implements Saveable {
     }
 
     public canHoldEverstone() {
-        if (this.id == 868) { //Milcery
-            return false;
-        }
         if (this.evolutions == null || this.evolutions.length == 0) {
             return false;
         }
         for (const evo of this.evolutions) {
-            if (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
+            if (evo.trigger !== EvoTrigger.NONE && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(evo.evolvedPokemon).id)) {
                 return true;
             }
         }
