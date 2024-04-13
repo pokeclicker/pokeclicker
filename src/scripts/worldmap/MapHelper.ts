@@ -34,18 +34,18 @@ class MapHelper {
             'low',
         ];
     }
-   
+
     public static chooseState(states: number[]) {
-        let prios = MapHelper.getStatePriorities();
-        let highPrio = states.filter(s => prios[s] == 'high');
+        const prios = MapHelper.getStatePriorities();
+        const highPrio = states.filter(s => prios[s] == 'high');
         if (highPrio.length) {
             return Math.min(...highPrio);
         }
-        let normalPrio = states.filter(s => prios[s] == 'normal');
+        const normalPrio = states.filter(s => prios[s] == 'normal');
         if (normalPrio.length) {
             return Math.min(...normalPrio);
         }
-        let lowPrio = states.filter(s => prios[s] == 'low');
+        const lowPrio = states.filter(s => prios[s] == 'low');
         if (lowPrio.length) {
             return Math.min(...lowPrio);
         }

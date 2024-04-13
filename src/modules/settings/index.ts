@@ -150,65 +150,65 @@ Settings.add(new Setting('incompletePrio', 'Incomplete Area priority',
     [
         new SettingOption('High', 'high'),
         new SettingOption('Normal', 'normal'),
-        new SettingOption('Low', 'low')
+        new SettingOption('Low', 'low'),
     ],
-    "normal"));
+    'normal'));
 Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
 Settings.add(new Setting('questAtLocationPrio', 'Quest at Location priority',
     [
         new SettingOption('High', 'high'),
         new SettingOption('Normal', 'normal'),
-        new SettingOption('Low', 'low')
+        new SettingOption('Low', 'low'),
     ],
-    "normal"));
+    'normal'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
 Settings.add(new Setting('uncaughtPokemonPrio', 'Uncaught Pokemon priority',
     [
         new SettingOption('High', 'high'),
         new SettingOption('Normal', 'normal'),
-        new SettingOption('Low', 'low')
+        new SettingOption('Low', 'low'),
     ],
-    "normal"));
+    'normal'));
 Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokemon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
 Settings.add(new Setting('uncaughtShadowPokemonPrio', 'Uncaught Shadow Pokemon priority',
     [
         new SettingOption('High', 'high'),
         new SettingOption('Normal', 'normal'),
-        new SettingOption('Low', 'low')
+        new SettingOption('Low', 'low'),
     ],
-    "normal", new QuestLineStartedRequirement('Shadows in the Desert')));
+    'normal', new QuestLineStartedRequirement('Shadows in the Desert')));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new Setting('uncaughtShinyPokemonAndMissingAchievementPrio', 'Uncaught Shiny Pokemon and Missing Achievement Priority',
     [
         new SettingOption('High', 'high'),
         new SettingOption('Normal', 'normal'),
-        new SettingOption('Low', 'low')
+        new SettingOption('Low', 'low'),
     ],
-    "normal"));
+    'normal'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
 Settings.add(new Setting('uncaughtShinyPokemonPrio', 'Uncaught Shiny Pokemon priority',
     [
         new SettingOption('High', 'high'),
         new SettingOption('Normal', 'normal'),
-        new SettingOption('Low', 'low')
+        new SettingOption('Low', 'low'),
     ],
-    "normal"));
+    'normal'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
 Settings.add(new Setting('missingAchievementPrio', 'Missing Achievement priority',
     [
         new SettingOption('High', 'high'),
         new SettingOption('Normal', 'normal'),
-        new SettingOption('Low', 'low')
+        new SettingOption('Low', 'low'),
     ],
-    "normal"));
+    'normal'));
 Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ab1707', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
 Settings.add(new Setting('missingResistantPrio', 'Missing Resistant priority',
     [
         new SettingOption('High', 'high'),
         new SettingOption('Normal', 'normal'),
-        new SettingOption('Low', 'low')
+        new SettingOption('Low', 'low'),
     ],
-    "normal", new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
+    'normal', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
 Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
 
 // Other settings
