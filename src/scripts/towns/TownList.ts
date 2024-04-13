@@ -232,6 +232,7 @@ const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
+    ItemList.Gooey_Mulch,
 ], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park')]);
 
 // Kanto NPCs
@@ -4080,6 +4081,7 @@ const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
 
 const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Secret Berry Shop'],[
     ItemList.Freeze_Mulch,
+    ItemList.Gooey_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
 ], 'Secret Berry Shop');
@@ -5004,6 +5006,7 @@ const UnovaFluteMaster = new GemMasterShop(GameConstants.GemShops.UnovaFluteMast
 //Unova Berry Master
 const DriftveilBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Driftveil City'],[
     ItemList.Freeze_Mulch,
+    ItemList.Gooey_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
 ], 'Unova Berry Master');
