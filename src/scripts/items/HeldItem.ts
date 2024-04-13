@@ -212,17 +212,14 @@ ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameCon
 
 ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.money, undefined, 'Everstone', 'Stops the holder from evolving due to level or a stone being used. Also prevents new baby Pokémon from hatching.', GameConstants.Region.kanto,
     (pokemon) => {
-        if (!pokemon.evolutions?.length) {
-            return false;
-        }
-
         // level or stone evo
-        for (const evo of pokemon.evolutions) {
-            if (evo.trigger === EvoTrigger.LEVEL || evo.trigger === EvoTrigger.STONE) {
-                return true;
-            }
+        if (pokemon.evolutions?.length) {
+            for (const evo of pokemon.evolutions) {
+                if (evo.trigger === EvoTrigger.LEVEL || evo.trigger === EvoTrigger.STONE) {
+                    return true;
+                }
+            }	
         }
-
         // babies
         const baseFormName = App.game.breeding.calculateBaseForm(pokemon.name);
         return pokemon.name != baseFormName;
