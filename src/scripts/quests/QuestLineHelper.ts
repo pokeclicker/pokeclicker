@@ -1457,6 +1457,92 @@ class QuestLineHelper {
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
 
+    // Swords of Justice quest
+    public static createSwordsQuestLine() {
+        const swordsofJusticeQuest = new QuestLine('Swords of Justice', 'The Swords of Justice sense something bad is about to happen, will you be able to help them out?', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), GameConstants.BulletinBoards.Unova);
+
+        const talkToOldManSwords = new TalkToNPCQuest(OldManSwords, 'Talk to the Old Man in Mistralton Cave for clues on where the Swords of Justice are.');
+        swordsofJusticeQuest.addQuest(talkToOldManSwords);
+
+        const searchForCobalion1 = new DefeatDungeonQuest(5, 0, 'Mistralton Cave').withDescription('Search around Mistralton Cave to see if you can find Cobalion, as the Old Man said.');
+        swordsofJusticeQuest.addQuest(searchForCobalion1);
+
+        const talkToCobalion1 = new TalkToNPCQuest(Cobalion1, 'It looks like you\'ve found Cobalion! Talk to them.');
+        swordsofJusticeQuest.addQuest(talkToCobalion1);
+
+        const reuniteTerrakion = new DefeatDungeonQuest(5, 0, 'Victory Road Unova').withDescription('Start reuniting the Swords of Justice once again. You should probably start looking for Terrakion around Unova\'s Victory Road.');
+        swordsofJusticeQuest.addQuest(reuniteTerrakion);
+
+        const talkToTerrakion1 = new TalkToNPCQuest(Terrakion1, 'You\'ve found Terrakion! Talk to them about the reunion.');
+        swordsofJusticeQuest.addQuest(talkToTerrakion1);
+
+        const proveTerrakion = new DefeatTemporaryBattleQuest('Terrakion 1', 'Defeat Terrakion to prove you\'re worthy of their trust.');
+        swordsofJusticeQuest.addQuest(proveTerrakion);
+
+        const talkToCobalion2 = new TalkToNPCQuest(Cobalion2, 'Talk to Cobalion at the Moor of Icirrus to learn where to find Virizion.');
+        swordsofJusticeQuest.addQuest(talkToCobalion2);
+
+        const reuniteVirizion = new DefeatDungeonQuest(5, 0, 'Pinwheel Forest').withDescription('Now that you know where to find Virizion, search for them in Pinwheel Forest.');
+        swordsofJusticeQuest.addQuest(reuniteVirizion);
+
+        const talkToVirizion1 = new TalkToNPCQuest(Virizion1, 'Now that you\'ve found Virizion, tell them to meet the others at the Moor of Icirrus.');
+        swordsofJusticeQuest.addQuest(talkToVirizion1);
+
+        const proveVirizion = new GainGemsQuest(5000, 0, PokemonType.Grass).withDescription('Virizion is asking you to gather 5,000 Grass Gems to prove you\'re a trustworthy ally. Collect the gems and return to Pinwheel Forest to prove your worth.');
+        swordsofJusticeQuest.addQuest(proveVirizion);
+
+        const talkToVirizion2 = new TalkToNPCQuest(Virizion2, 'Now that you\'ve gathered all of the Grass Gems, talk to Virizion in Pinwheel Forest once again.');
+        swordsofJusticeQuest.addQuest(talkToVirizion2);
+
+        const talkToCobalion3 = new TalkToNPCQuest(Cobalion3, 'Meet up with the Swords of Justice at Moor of Icirrus and talk to Cobalion.');
+        swordsofJusticeQuest.addQuest(talkToCobalion3);
+
+        const defeatSwordsofJustice = new DefeatTemporaryBattleQuest('Swords of Justice 1', 'They need you to prove you\'re strong enough to deal with the possible dangers. Defeat the Swords of Justice!');
+        swordsofJusticeQuest.addQuest(defeatSwordsofJustice);
+
+        const searchForKyurem1 = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('Now that you\'ve proven you\'re strong enough to help, take Cobalion\'s advice and search for Kyurem in the Giant Chasm.');
+        swordsofJusticeQuest.addQuest(searchForKyurem1);
+
+        const talkToCobalion4 = new TalkToNPCQuest(Cobalion4, 'Report your findings to Cobalion at the Moor of Icirrus.');
+        swordsofJusticeQuest.addQuest(talkToCobalion4);
+
+        const defeatKyurem1 = new DefeatTemporaryBattleQuest('Kyurem 1', 'Looks like Cobalion has seen Kyurem near Lacunosa Town. Go there and defeat Kyurem before it hurts any citizens.');
+        swordsofJusticeQuest.addQuest(defeatKyurem1);
+
+        const talkToCobalion5 = new TalkToNPCQuest(Cobalion5, 'Seems like Kyurem has fled the town. You should talk to Cobalion while you\'re there.');
+        swordsofJusticeQuest.addQuest(talkToCobalion5);
+
+        const searchForKyurem2 = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('Kyurem is probably hiding in the Giant Chasm. Find its lair.');
+        swordsofJusticeQuest.addQuest(searchForKyurem2);
+
+        const defeatKyurem2 = new DefeatTemporaryBattleQuest('Kyurem 2', 'You\'ve finally found Kyurem! Defeat them with the help of the Swords of Justice.');
+        swordsofJusticeQuest.addQuest(defeatKyurem2);
+
+        const TalkToCobalion6 = new TalkToNPCQuest(Cobalion6, 'Kyurem has injured the Swords of Justice, go check on Cobalion.');
+        swordsofJusticeQuest.addQuest(TalkToCobalion6);
+
+        const defeatKyurem3 = new DefeatTemporaryBattleQuest('Kyurem 3', 'Defeat Kyurem and stop it from causing any more harm!');
+        swordsofJusticeQuest.addQuest(defeatKyurem3);
+
+        const TalkToCobalion7 = new TalkToNPCQuest(Cobalion7, 'Talk to Cobalion.');
+        const TalkToTerrakion2 = new TalkToNPCQuest(Terrakion2, 'Talk to Terrakion.');
+        const TalkToVirizion3 = new TalkToNPCQuest(Virizion3, 'Talk to Virizion.');
+        swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
+            [TalkToCobalion7, TalkToTerrakion2, TalkToVirizion3],
+            'You\'ve finally defeated Kyurem, sealing them within the Giant Chasm forever. Talk to the Swords of Justice in the Giant Chasm.'
+        ));
+
+        const CatchCobalion = new CaptureSpecificPokemonQuest('Cobalion').withDescription('Capture the Leader of the Swords of Justice, Cobalion, in Mistralton Cave.');
+        const CatchTerrakion = new CaptureSpecificPokemonQuest('Terrakion').withDescription('Capture the Toughest of the Swords of Justice, Terrakion, in Victory Road.');
+        const CatchVirizion = new CaptureSpecificPokemonQuest('Virizion').withDescription('Capture the Cleverest of the Swords of Justice, Virizion, in Pinwheel Forest.');
+        swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
+            [CatchCobalion, CatchTerrakion, CatchVirizion],
+            'The Swords of Justice all depart for their homes to wait for your arrival. Go catch your new friends and add them to your team!'
+        ));
+
+        App.game.quests.questLines().push(swordsofJusticeQuest);
+    }
+
     // Genesect quest - Available after clearing P2 lab
     public static createGenesectQuestLine() {
         const genesectQuestLine = new QuestLine('The Legend Awakened', 'Learn about the powerful Pokémon discovered under the P2 Laboratory.', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory')), GameConstants.BulletinBoards.Unova);
@@ -3772,10 +3858,10 @@ class QuestLineHelper {
     }
 
     public static createPaldeaStarfallQuestLine() {
-        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Casseiopia disband Team Star.');
+        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Cassiopeia disband Team Star.');
 
-        const clearCasseiopia = new DefeatGymQuest(1, 0, 'Penny of Team Star').withDescription('Penny has revealed herself to be Casseiopia. Defeat her at Naranjuva Academy.');
-        paldeaStarfallQuestLine.addQuest(clearCasseiopia);
+        const clearCassiopeia = new DefeatGymQuest(1, 0, 'Penny of Team Star').withDescription('Penny has revealed herself to be Cassiopeia. Defeat her at Naranjuva Academy.');
+        paldeaStarfallQuestLine.addQuest(clearCassiopeia);
 
         App.game.quests.questLines().push(paldeaStarfallQuestLine);
     }
@@ -3854,6 +3940,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createSwordsQuestLine();
         this.createGenesectQuestLine();
         this.createOrreXDQuestLine();
         this.createDeltaEpisodeQuestLine();

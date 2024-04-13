@@ -218,7 +218,7 @@ ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.mon
                 if (evo.trigger === EvoTrigger.LEVEL || evo.trigger === EvoTrigger.STONE) {
                     return true;
                 }
-            }	
+            }
         }
         // babies
         const baseFormName = App.game.breeding.calculateBaseForm(pokemon.name);
