@@ -1533,11 +1533,11 @@ class QuestLineHelper {
         ));
 
         const CatchCobalion = new CaptureSpecificPokemonQuest('Cobalion').withDescription('Capture the Leader of the Swords of Justice, Cobalion, in Mistralton Cave.');
-        const CatchVirizion = new CaptureSpecificPokemonQuest('Virizion').withDescription('Capture the Cleverest of the Swords of Justice, Virizion, in Pinwheel Forest.');
         const CatchTerrakion = new CaptureSpecificPokemonQuest('Terrakion').withDescription('Capture the Toughest of the Swords of Justice, Terrakion, in Victory Road.');
+        const CatchVirizion = new CaptureSpecificPokemonQuest('Virizion').withDescription('Capture the Cleverest of the Swords of Justice, Virizion, in Pinwheel Forest.');
         swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
-            [CatchCobalion, CatchVirizion, CatchTerrakion],
-            'The Swords of Justice all depart for their homes to await for your arrival. Go catch your new friends and add them to your team!'
+            [CatchCobalion, CatchTerrakion, CatchVirizion],
+            'The Swords of Justice all depart for their homes to wait for your arrival. Go catch your new friends and add them to your team!'
         ));
 
         App.game.quests.questLines().push(swordsofJusticeQuest);
