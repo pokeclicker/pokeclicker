@@ -1,0 +1,103 @@
+<div id="undergroundDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.underground.canAccess() && Settings.getSetting('showUndergroundModule').observableValue(), if: Settings.getSetting('showUndergroundModule').observableValue()">
+    <div class="card-header p-0" data-toggle="collapse" href="#undergroundCard">
+        <span>Underground</span>
+    </div>
+    <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.openUndergroundModal()">
+        View
+    </button>
+
+    <div id="undergroundCard" class="card-body p-0 show">
+        <div>
+            <div class='progress' style="height: 25px;">
+                <div class='progress-bar bg-warning' role='progressbar'
+                     aria-valuemin='0' aria-valuemax='100'
+                     data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
+                    <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div id="mine-display-survey-result" class="col" data-bind="tooltip: {
+                                                                                    title: () =>
+                                                                                        Mine.surveyResult() || 'Conduct a Survey to get more details',
+                                                                                        trigger: 'hover',
+                                                                                        placement: 'top',
+                                                                                        boundary: 'window',
+                                                                                        html: true,
+                                                                                }">
+                        <div data-bind="text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried()"></div>
+                        <div data-bind="text: 'Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound())"></div>
+                    </div>
+                </div>
+
+                <!-- ko if: Settings.getSetting('showUndergroundModuleMineControls').observableValue() -->
+                <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                    <button class="col btn btn-secondary p-0" data-bind="
+                                    click: function(){ ItemList[$data].use();},
+                                    css: { disabled: player._itemList[$data]() <= 0},
+                                    tooltip: {
+                                        title: () => `+${App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])} energy`,
+                                        trigger: 'hover',
+                                        placement: 'top',
+                                        boundary: 'window',
+                                        html: true,
+                                    }">
+                        <img style="width: 32px;" data-bind="attr: { src: ItemList[$data].image }"><br/>
+                        <span style="line-height: 1;" data-bind="text: GameHelper.formatAmount(player._itemList[$data]())">(?)</span>
+                    </button>
+                </div>
+
+                <div class="row">
+                    <button class='col btn btn-warning' onClick='Mine.bomb(); $(this).tooltip("hide")' data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.<br/>(${Underground.BOMB_ENERGY} energy)`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
+                    <button class='col btn btn-success'
+                            onClick='Mine.survey("#mine-display-survey-result"); $(this).tooltip("hide")'
+                            data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer. It also fully damages ${App.game.underground.getSurvey_Efficiency()} (cleared or uncleared) random tile${App.game.underground.getSurvey_Efficiency() > 1 ? 's' : ''}.<br/>(${App.game.underground.getSurvey_Cost()} energy)`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
+                        Survey
+                    </button>
+                    <button class='col btn btn-danger' onClick='Mine.skipLayer(true)'
+                            data-bind="disable: Mine.skipsRemaining() > 0 ? false : true, tooltip: {title: `Skips the current layer. Fully mine a layer to recover one Skip.<br/>(${Mine.skipsRemaining()} / ${Mine.maxSkips} attempts)`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Skip</button>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ko if: Settings.getSetting('showUndergroundModuleDailyTrades').observableValue() -->
+    <div  class="card-header p-0" data-toggle="collapse" href="#undergroundDailyTradesCard">
+        <span>Daily trades</span>
+    </div>
+
+    <div id="undergroundDailyTradesCard" class="table-responsive show">
+        <table class="table table-sm table-hover table-striped m-0 text-left">
+            <thead>
+            </thead>
+            <tbody>
+            <!-- ko foreach: DailyDeal.list -->
+            <tr data-bind="tooltip: {
+                            title: () => `${$data.amount1} ${$data.item1.name} → ${$data.amount2} ${$data.item2.name}`,
+                            trigger: 'hover',
+                            placement: 'top',
+                            boundary: 'window',
+                            html: true,
+                        }">
+                <td class="text-center vertical-middle">
+                    <span style="line-height: 1;" data-bind="text: `${$data.amount1} ×`"></span>
+                </td>
+                <td class='text-center vertical-middle'>
+                    <img class='mineInventoryItem' data-bind='attr: {src: $data.item1.image }'>
+                </td>
+                <td class='text-center vertical-middle'>→</td>
+                <td class="text-center vertical-middle">
+                    <span style="line-height: 1;" data-bind="text: `${$data.amount2} ×`"></span>
+                </td>
+                <td class='text-center vertical-middle'>
+                    <img class='mineInventoryItem' data-bind='attr: {src: $data.item2.image }'>
+                </td>
+            </tr>
+            <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+    <!-- /ko -->
+</div>

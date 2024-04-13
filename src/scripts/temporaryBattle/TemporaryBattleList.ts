@@ -652,7 +652,7 @@ TemporaryBattleList['Kimono Girls'] = new TemporaryBattle(
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     'Spiky-eared Pichu',
     [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],
-    '<b><i>You caught the Spiky-eared Pichu!</i></b>',
+    '<b><i>The Spiky-eared Pichu ran into the forest!</i></b>',
     [new QuestLineStepCompletedRequirement('Unfinished Business', 6)],
     undefined,
     {

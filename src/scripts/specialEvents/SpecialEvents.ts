@@ -9,7 +9,7 @@ class SpecialEvents implements Feature {
 
     public events: SpecialEvent[] = [];
 
-    public newEvent(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback, hideFromEventCalendar = false) {
+    public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback, hideFromEventCalendar = false) {
         // Check if the event exist before adding it again
         if (!this.events.find(event => event.title == title)) {
             this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar));
@@ -45,7 +45,7 @@ class SpecialEvents implements Feature {
 
     update(delta: number): void {}  // This method intentionally left blank
 
-    getEvent(eventName: string) {
+    getEvent(eventName: SpecialEventTitleType) {
         return this.events.find((e) => e.title == eventName);
     }
 
