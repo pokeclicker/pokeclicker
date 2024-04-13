@@ -1537,7 +1537,7 @@ class QuestLineHelper {
         const CatchTerrakion = new CaptureSpecificPokemonQuest('Terrakion').withDescription('Capture the Toughest of the Swords of Justice, Terrakion, in Victory Road.');
         swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
             [CatchCobalion, CatchVirizion, CatchTerrakion],
-            'The Swords of Justice all depart for their homes to await for your arrival. Go catch your new friends and add them to your team!',
+            'The Swords of Justice all depart for their homes to await for your arrival. Go catch your new friends and add them to your team!'
         ));
 
         App.game.quests.questLines().push(swordsofJusticeQuest);
