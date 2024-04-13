@@ -88,16 +88,24 @@
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('incompletePrio')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('questAtLocationPrio')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--questAtLocation')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('uncaughtPokemonPrio')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtPokemon')}"></tr>
                                 <!-- ko if: Settings.getSetting('--uncaughtShadowPokemon').isUnlocked() -->
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('uncaughtShadowPokemonPrio')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShadowPokemon')}"></tr>
                                 <!-- /ko -->
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('uncaughtShinyPokemonAndMissingAchievementPrio')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemonAndMissingAchievement')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('uncaughtShinyPokemonPrio')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemon')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('missingAchievementPrio')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingAchievement')}"></tr>
                                 <!-- ko if: Settings.getSetting('--missingResistant').isUnlocked() -->
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('missingResistantPrio')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingResistant')}"></tr>
                                 <!-- /ko -->
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
