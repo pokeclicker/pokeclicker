@@ -3772,10 +3772,10 @@ class QuestLineHelper {
     }
 
     public static createPaldeaStarfallQuestLine() {
-        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Casseiopia disband Team Star.');
+        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Cassiopeia disband Team Star.');
 
-        const clearCasseiopia = new DefeatGymQuest(1, 0, 'Penny of Team Star').withDescription('Penny has revealed herself to be Casseiopia. Defeat her at Naranjuva Academy.');
-        paldeaStarfallQuestLine.addQuest(clearCasseiopia);
+        const clearCassiopeia = new DefeatGymQuest(1, 0, 'Penny of Team Star').withDescription('Penny has revealed herself to be Cassiopeia. Defeat her at Naranjuva Academy.');
+        paldeaStarfallQuestLine.addQuest(clearCassiopeia);
 
         App.game.quests.questLines().push(paldeaStarfallQuestLine);
     }

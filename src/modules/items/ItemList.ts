@@ -268,7 +268,6 @@ ItemList.Light_clay = new TreasureItem('Light_clay', UndergroundItemValueType.Di
 ItemList.Odd_keystone = new TreasureItem('Odd_keystone', UndergroundItemValueType.Diamond, 6, 'Odd Keystone');
 ItemList.Hard_stone = new TreasureItem('Hard_stone', UndergroundItemValueType.Diamond, 4, 'Hard Stone');
 ItemList.Oval_stone = new TreasureItem('Oval_stone', UndergroundItemValueType.Diamond, 3, 'Oval Stone');
-ItemList.Everstone = new TreasureItem('Everstone', UndergroundItemValueType.Diamond, 3, 'Everstone');
 ItemList.Smooth_rock = new TreasureItem('Smooth_rock', UndergroundItemValueType.Diamond, 2, 'Smooth Rock');
 ItemList.Heat_rock = new TreasureItem('Heat_rock', UndergroundItemValueType.Diamond, 2, 'Heat Rock');
 ItemList.Icy_rock = new TreasureItem('Icy_rock', UndergroundItemValueType.Diamond, 2, 'Icy Rock');
