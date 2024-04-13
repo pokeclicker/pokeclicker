@@ -5164,7 +5164,7 @@ const Cobalion1 = new NPC('Cobalion', [
 });
 const Terrakion1 = new NPC('Terrakion', [
     'How did you find me? Cobalion told me this place was well hidden! Anyways, what do you want from me? Cobalion wants to reunite the Swords of Justice? Do you think I\'m dumb enough to fall for lies of a human?',
-    'I\'ll consider your worth only if you prove your strength and can beat me in battle!.',
+    'I\'ll consider your worth only if you prove your strength and can beat me in battle!',
 ], {
     image: 'assets/images/pokemon/639.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.less)]),
