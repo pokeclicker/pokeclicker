@@ -56,13 +56,13 @@ class ContestBattle extends Battle {
         App.game.breeding.progressEggsBattle(ContestRunner.rank() * 3 + 1, GameConstants.Region.none);
 
         // Check if all of the trainer's party has been used
-        if (ContestBattle.pokemonIndex() + 1 >= ContestBattle.contest.getTrainerList()[ContestBattle.trainerIndex()].getTeam().length) {
+        if (ContestBattle.pokemonIndex() + 1 >= ContestRunner.getTrainerList()[ContestBattle.trainerIndex()].getTeam().length) {
 
             // Reset pokemon index for next trainer
             ContestBattle.pokemonIndex(0);
 
             // Loop through trainers
-            if (ContestBattle.trainerIndex() + 1 >= ContestBattle.contest.getTrainerList().length) {
+            if (ContestBattle.trainerIndex() + 1 >= ContestRunner.getTrainerList().length) {
                 ContestBattle.trainerIndex(0);
             } else {
                 ContestBattle.trainerIndex(ContestBattle.trainerIndex() + 1);
@@ -82,8 +82,8 @@ class ContestBattle extends Battle {
      */
     public static generateNewEnemy() {
         ContestBattle.counter = 0;
-        ContestBattle.trainer(ContestBattle.contest.getTrainerList()[ContestBattle.trainerIndex()]);
-        ContestBattle.enemyPokemon(PokemonFactory.generateContestTrainerPokemon(ContestBattle.contest, ContestBattle.trainerIndex(), ContestBattle.pokemonIndex()));
+        ContestBattle.trainer(ContestRunner.getTrainerList()[ContestBattle.trainerIndex()]);
+        ContestBattle.enemyPokemon(PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainerIndex(), ContestBattle.pokemonIndex()));
     }
 
     // Increase and keep track of the amount of trainers defeated

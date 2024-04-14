@@ -238,8 +238,8 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
     }
 
-    public static generateContestTrainerPokemon(contest: Contest, trainerIndex: number, pokemonIndex: number): BattlePokemon {
-        const pokemon = contest.getTrainerList()[trainerIndex].getTeam()[pokemonIndex];
+    public static generateContestTrainerPokemon(trainerIndex: number, pokemonIndex: number): BattlePokemon {
+        const pokemon = ContestRunner.getTrainerList()[trainerIndex].getTeam()[pokemonIndex];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
         const exp: number = basePokemon.exp;
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);

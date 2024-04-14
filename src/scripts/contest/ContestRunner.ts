@@ -14,6 +14,7 @@ class ContestRunner {
 
     public static rank: KnockoutObservable<ContestRank> = ko.observable();
     public static type: KnockoutObservable<ContestType> = ko.observable();
+    public static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray([]);
 
     // Updated via ContestHall.ts
     public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
@@ -35,9 +36,9 @@ class ContestRunner {
         ContestRunner.audienceAppealPercentage(0);
 
         ContestBattle.contest = contest;
-        contest.trainers = Rand.shuffleArray(contest.trainers);
         ContestRunner.rank(contest.rank); //
         ContestRunner.type(contest.contestType); //
+        ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[contest.rank])); //
         ContestBattle.trainerIndex(0);
         ContestBattle.pokemonIndex(0);
         ContestBattle.totalTrainers(0);
@@ -106,6 +107,12 @@ class ContestRunner {
     public static rally(rally: number): void {
         ContestRunner.audienceAppeal(Math.min(ContestRunner.audienceAppeal() + rally, ContestRunner.maxAudienceAppeal()));
         ContestRunner.audienceAppealPercentage(Math.floor(ContestRunner.audienceAppeal() / ContestRunner.maxAudienceAppeal() * 100));
+    }
+
+    public static getTrainerList() {
+        return ContestRunner.trainers().filter(trainer => {
+            return (trainer.options?.requirement) ? trainer.options.requirement.isCompleted() : true;
+        });
     }
 
     public static contestLost() {
