@@ -28,7 +28,7 @@ class ContestBattle extends Battle {
                 ContestRunner.rally(
                     Math.floor(
                         (ContestBattle.enemyPokemon().maxHealth()
-                        + ContestHelper.calculatePokemonContestAppeal(ContestBattle.contest.contestType))
+                        + ContestHelper.calculatePokemonContestAppeal(ContestRunner.type()))
                         * (1 + ContestBattle.pokemonIndex() * 0.2))
                 );
                 ContestBattle.defeatPokemon();
@@ -53,7 +53,7 @@ class ContestBattle extends Battle {
         }
 
         // Make contest "route" regionless
-        App.game.breeding.progressEggsBattle(ContestBattle.contest.rank * 3 + 1, GameConstants.Region.none);
+        App.game.breeding.progressEggsBattle(ContestRunner.rank() * 3 + 1, GameConstants.Region.none);
 
         // Check if all of the trainer's party has been used
         if (ContestBattle.pokemonIndex() + 1 >= ContestBattle.contest.getTrainerList()[ContestBattle.trainerIndex()].getTeam().length) {

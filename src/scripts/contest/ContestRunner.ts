@@ -12,12 +12,17 @@ class ContestRunner {
     public static contestObservable: KnockoutObservable<Contest> = ko.observable();
     public static running: KnockoutObservable<boolean> = ko.observable(false);
 
+    public static rank: KnockoutObservable<ContestRank> = ko.observable();
+    public static type: KnockoutObservable<ContestType> = ko.observable();
+
     // Updated via ContestHall.ts
     public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
     public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([]);
 
     public static startContest(
         contest: Contest
+        // rank: ContestRank,
+        // type: ContestType
     ) {
         ContestRunner.running(false);
         ContestRunner.contestObservable(contest);
@@ -31,6 +36,8 @@ class ContestRunner {
 
         ContestBattle.contest = contest;
         contest.trainers = Rand.shuffleArray(contest.trainers);
+        ContestRunner.rank(contest.rank); //
+        ContestRunner.type(contest.contestType); //
         ContestBattle.trainerIndex(0);
         ContestBattle.pokemonIndex(0);
         ContestBattle.totalTrainers(0);
