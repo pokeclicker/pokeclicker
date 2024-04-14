@@ -18,7 +18,7 @@ class ContestBattle extends Battle {
                 return;
             }
             // damage enemy using only pokemon of the contest's type
-            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3, ContestBattle.contest.pokemons));
+            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3, ContestHelper.getPartyPokemonByContestType(ContestRunner.type())));
 
             // TODO: primary judging mode, uses party mons
             // ContestBattle.enemyPokemon().rally(App.game.party.calculateOnePokemonContestAppeal(App.game.party.caughtPokemon.find((p) => p.name === ContestBattle.enemyPokemon().name), ContestBattle.contest.contestType));

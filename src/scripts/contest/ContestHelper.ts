@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/enums/ContestType.d.ts"/>
 class ContestHelper {
     public static calculatePokemonContestAppeal(type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, pokemons?: PartyPokemon[], includeBreeding = false): number {
         let appeal = 0;
@@ -20,5 +21,12 @@ class ContestHelper {
         }
 
         return appeal;
+    }
+
+    public static getPartyPokemonByContestType(type: ContestType): PartyPokemon[] {
+        return App.game.party.caughtPokemon.filter((p) => {
+            const pk = PokemonHelper.getPokemonById(p.id);
+            return [pk.contestType1, pk.contestType2, pk.contestType3].some(c => c === type || c === ContestType.Balanced);
+        });
     }
 }
