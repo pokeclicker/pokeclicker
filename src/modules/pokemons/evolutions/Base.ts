@@ -1,4 +1,5 @@
-import { StoneType } from '../../GameConstants';
+import { AchievementOption, StoneType } from '../../GameConstants';
+import HoldingItemRequirement from '../../requirements/HoldingItemRequirement';
 import LazyRequirementWrapper from '../../requirements/LazyRequirementWrapper';
 import MaxRegionRequirement from '../../requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from '../../requirements/ObtainedPokemonRequirement';
@@ -64,9 +65,10 @@ export const LevelEvolution = (basePokemon: PokemonNameType, evolvedPokemon: Pok
     { ...Evo(basePokemon, evolvedPokemon, EvoTrigger.LEVEL, ignoreECChange) },
     new PokemonLevelRequirement(basePokemon, level),
     new ObtainedPokemonRequirement(evolvedPokemon, true),
+    new HoldingItemRequirement(basePokemon, 'Everstone', AchievementOption.less),
 );
 
-export const StoneEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, stone: StoneType, ignoreECChange = false): StoneEvoData => ({
-    ...Evo(basePokemon, evolvedPokemon, EvoTrigger.STONE, ignoreECChange),
-    stone,
-});
+export const StoneEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, stone: StoneType, ignoreECChange = false): StoneEvoData => restrict(
+    { ...Evo(basePokemon, evolvedPokemon, EvoTrigger.STONE, ignoreECChange), stone },
+    new HoldingItemRequirement(basePokemon, 'Everstone', AchievementOption.less),
+);

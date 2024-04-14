@@ -3,7 +3,7 @@
  */
 class GameController {
     static applyRouteBindings() {
-        $('path, rect').hover(function () {
+        $('#map path, #map rect').hover(function () {
             let tooltipText = $(this).attr('data-town');
             const route = $(this).attr('data-route');
             if (route) {
@@ -48,49 +48,6 @@ class GameController {
     static bindToolTips() {
         $('[data-toggle="popover"]').popover();
         $('[data-toggle="tooltip"]').tooltip();
-
-
-        (ko as any).bindingHandlers.tooltip = {
-            init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-                const local = ko.utils.unwrapObservable(valueAccessor()),
-                    options = {};
-
-                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
-                ko.utils.extend(options, local);
-
-                $(element).tooltip(options);
-
-                ko.utils.domNodeDisposal.addDisposeCallback(element, () => {
-                    $(element).tooltip('dispose');
-                });
-            },
-            'update': function (element, valueAccessor) {
-                const local = ko.utils.unwrapObservable(valueAccessor());
-                const options = {};
-
-                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
-                ko.utils.extend(options, local);
-
-                // Update the config of the tooltip
-                const tooltipData = $(element).data('bs.tooltip');
-                tooltipData.config.title = (options as any).title;
-
-                // If the tooltip is visible, update its text
-                const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
-                if (tooltipInner) {
-                    tooltipInner.innerHTML = tooltipData.config.title || '';
-                }
-                if (tooltipData && tooltipData.config) {
-                    if (tooltipData.config.title === '') {
-                        $(element).tooltip('hide');
-                    }
-                }
-            },
-            options: {
-                placement: 'bottom',
-                trigger: 'click',
-            },
-        };
     }
 
     static focusedOnEditableElement(): boolean {

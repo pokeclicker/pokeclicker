@@ -40,9 +40,6 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css?v=$VERSION" rel="stylesheet">
 
-    <!-- Google Analytics-->
-    @importif $GOOGLE_ANALYTICS_ID "googleAnalytics.html"
-
     <style>
         #game.loading {
             display: none !important;
@@ -88,7 +85,7 @@
 <!--$DEV_BANNER-->
 @importif $DEV_BANNER "developmentBanner.html"
 
-<!-- Spash Screen -->
+<!-- Splash Screen -->
 @import "saveSelector.html"
 @import "splash.html"
 
@@ -119,6 +116,7 @@
 @import "templates/pokemonGenderStatisticTemplate.html"
 @import "templates/multiSelectDropdownTemplate.html"
 @import "templates/currencyContainerCurrencyTemplate.html"
+@import "templates/wanderingPokemonDisplay.html"
 
 <div id="game" class="container loading" data-bind="css: {'container': Settings.getSetting('gameDisplayStyle').observableValue() === 'standard3', 'container-fluid': Settings.getSetting('gameDisplayStyle').observableValue() !== 'standard3'}">
     <div class="row justify-content-center">
