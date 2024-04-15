@@ -41,10 +41,6 @@ class SafariPokemon implements PokemonInterface {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
-
-            // Track shinies encountered, and rate of shinies
-            LogEvent('encountered shiny', 'shiny pokemon', 'safari encounter',
-                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         this.baseCatchFactor = data.catchRate * 1 / 6;
         this.baseEscapeFactor = 30;

@@ -32,7 +32,7 @@ class PartyPokemon implements Saveable {
         exp: 0,
         breeding: false,
         shiny: false,
-        category: 0,
+        category: [0],
         levelEvolutionTriggered: false,
         pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
@@ -50,7 +50,7 @@ class PartyPokemon implements Saveable {
     _level: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
-    _category: KnockoutObservable<number>;
+    _category: KnockoutObservableArray<number>;
     _translatedName: KnockoutObservable<string>;
     _nickname: KnockoutObservable<string>;
     _displayName: KnockoutComputed<string>;
@@ -80,7 +80,7 @@ class PartyPokemon implements Saveable {
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this._category = ko.observable(0).extend({ numeric: 0 });
+        this._category = ko.observableArray([0]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
@@ -122,6 +122,13 @@ class PartyPokemon implements Saveable {
                 this.addOrRemoveHeldItem(this.heldItem());
             }
         });
+        this._category.subscribe((newValue) => {
+            if (!newValue.length) {
+                this._category.push(0); // add None category
+            } else if (newValue.length > 1) {
+                this.removeCategory(0); // remove None category
+            }
+        });
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -134,8 +141,8 @@ class PartyPokemon implements Saveable {
     }
 
     public clickAttackBonus = ko.pureComputed((): number => {
-        // Caught + Shiny + Resistant
-        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant);
+        // Caught + Shiny + Resistant + Purified
+        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant) + +(this.shadow == GameConstants.ShadowStatus.Purified);
         return bonus;
     });
 
@@ -410,8 +417,13 @@ class PartyPokemon implements Saveable {
             return false;
         }
 
-        // Check based on category
-        if (BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value()) {
+        // Categorized only
+        if (BreedingFilters.category.value() == -2 && this.isUncategorized()) {
+            return false;
+        }
+
+        // Selected category
+        if (BreedingFilters.category.value() >= 0 && !this.category.includes(BreedingFilters.category.value())) {
             return false;
         }
 
@@ -523,6 +535,43 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public addCategory(id: number) {
+        if (!this.category.includes(id)) {
+            this._category.push(id);
+        }
+    }
+
+    public removeCategory(id: number) {
+        const index = this.category.indexOf(id);
+        if (index > -1) {
+            this._category.splice(index, 1);
+        }
+    }
+
+    public toggleCategory(id: number) {
+        if (this.category.includes(id)) {
+            this.removeCategory(id);
+        } else {
+            if (id === 0) {
+                this.resetCategory();
+            } else {
+                this.addCategory(id);
+            }
+        }
+    }
+
+    public resetCategory(): void {
+        this.category = [...this.defaults.category];
+    }
+
+    public isUncategorized = ko.pureComputed(() => this.category[0] === 0);
+
+    public getCategorySortValues(): Array<number> {
+        return PokemonCategories.categories().map((c, i) => [c.id, i])
+            .filter(([id, _]) => this.category.includes(id))
+            .map(([_, index]) => index);
+    }
+
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
@@ -542,7 +591,7 @@ class PartyPokemon implements Saveable {
         this.exp = json[PartyPokemonSaveKeys.exp] ?? this.defaults.exp;
         this.breeding = json[PartyPokemonSaveKeys.breeding] ?? this.defaults.breeding;
         this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
-        this.category = json[PartyPokemonSaveKeys.category] ?? this.defaults.category;
+        this.category = json[PartyPokemonSaveKeys.category] ?? [...this.defaults.category];
         this.level = this.calculateLevelFromExp();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
@@ -563,7 +612,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.exp]: this.exp,
             [PartyPokemonSaveKeys.breeding]: this.breeding,
             [PartyPokemonSaveKeys.shiny]: this.shiny,
-            [PartyPokemonSaveKeys.category]: this.category,
+            [PartyPokemonSaveKeys.category]: this.isUncategorized() ? undefined : this.category,
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
@@ -649,12 +698,12 @@ class PartyPokemon implements Saveable {
         this._shiny(bool);
     }
 
-    get category(): number {
+    get category(): Array<number> {
         return this._category();
     }
 
-    set category(index: number) {
-        this._category(index);
+    set category(value: Array<number>) {
+        this._category(value);
     }
 
     get nickname(): string {
