@@ -9,7 +9,6 @@ class ContestRunner {
     public static audienceAppeal: KnockoutObservable<number> = ko.observable(0);
     public static audienceAppealPercentage: KnockoutObservable<number> = ko.observable(0);
 
-    public static contestObservable: KnockoutObservable<Contest> = ko.observable();
     public static running: KnockoutObservable<boolean> = ko.observable(false);
 
     public static rank: KnockoutObservable<ContestRank> = ko.observable();
@@ -21,24 +20,22 @@ class ContestRunner {
     public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([]);
 
     public static startContest(
-        contest: Contest
-        // rank: ContestRank,
-        // type: ContestType
+        rank: ContestRank,
+        type: ContestType
     ) {
         ContestRunner.running(false);
-        ContestRunner.contestObservable(contest);
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
         ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());
         ContestRunner.timeLeftPercentage(100);
 
-        ContestRunner.maxAudienceAppeal(contest.rank * 1000);
+        ContestRunner.rank(rank);
+        ContestRunner.type(type);
+
+        ContestRunner.maxAudienceAppeal(ContestRunner.rank() * 1000);
         ContestRunner.audienceAppeal(0);
         ContestRunner.audienceAppealPercentage(0);
 
-        ContestBattle.contest = contest;
-        ContestRunner.rank(contest.rank); //
-        ContestRunner.type(contest.contestType); //
-        ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[contest.rank])); //
+        ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
         ContestBattle.trainerIndex(0);
         ContestBattle.pokemonIndex(0);
         ContestBattle.totalTrainers(0);
@@ -129,7 +126,7 @@ class ContestRunner {
         if (ContestRunner.running()) {
             ContestRunner.running(false);
             const contestTokenMultiplier = ContestBattle.totalTrainers();
-            const rank = ContestBattle.contest.rank;
+            const rank = ContestRunner.rank();
             const tokenReward = Math.floor(5 + (rank * 2) + (0.1 * rank * contestTokenMultiplier));
             // Award money for defeating gym
             App.game.wallet.gainContestTokens(tokenReward);

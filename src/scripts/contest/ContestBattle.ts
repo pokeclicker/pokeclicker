@@ -1,7 +1,6 @@
 ///<reference path="../Battle.ts"/>
 class ContestBattle extends Battle {
 
-    static contest: Contest;
     static trainer: KnockoutObservable<ContestTrainer> = ko.observable(null);
     static trainerIndex: KnockoutObservable<number> = ko.observable(0);
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
@@ -21,7 +20,7 @@ class ContestBattle extends Battle {
             ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3, ContestHelper.getPartyPokemonByContestType(ContestRunner.type())));
 
             // TODO: primary judging mode, uses party mons
-            // ContestBattle.enemyPokemon().rally(App.game.party.calculateOnePokemonContestAppeal(App.game.party.caughtPokemon.find((p) => p.name === ContestBattle.enemyPokemon().name), ContestBattle.contest.contestType));
+            // ContestBattle.enemyPokemon().rally(App.game.party.calculateOnePokemonContestAppeal(App.game.party.caughtPokemon.find((p) => p.name === ContestBattle.enemyPokemon().name), ContesRunner.type()));
 
             if (!ContestBattle.enemyPokemon().isAlive()) {
                 // increase contest bar based off all party mons appeal + health of defeated pokemon
