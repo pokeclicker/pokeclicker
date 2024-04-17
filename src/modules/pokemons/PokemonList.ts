@@ -23,7 +23,7 @@ import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
 import PokemonType from '../enums/PokemonType';
 import {
-    Region, StoneType, Genders, MaxIDPerRegion, MegaStoneType,
+    Region, StoneType, Genders, MaxIDPerRegion, MegaStoneType, MAX_EGG_CYCLES,
 } from '../GameConstants';
 import BagItem from '../interfaces/BagItem';
 import {
@@ -4736,7 +4736,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 50,
         },
-        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'heldItem': { type: ItemType.item, id: 'Lucky_Punch' },
         'gender': {
             'femaleRatio': 1,
         },
@@ -4758,7 +4758,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 50,
         },
-        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'heldItem': { type: ItemType.item, id: 'Lucky_Punch' },
         'gender': {
             'femaleRatio': 1,
         },
@@ -13687,7 +13687,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
-        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Sunny], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, true)],
+        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Harsh_Sunlight], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, true)],
         'base': {
             'hitpoints': 70,
             'attack': 60,
@@ -24218,7 +24218,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [
             StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', StoneType.Solar_light),
             StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', StoneType.Lunar_light),
@@ -24243,7 +24243,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [StoneEvolution('Necrozma (Dusk Mane)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
@@ -24264,7 +24264,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'evolutions': [StoneEvolution('Necrozma (Dawn Wings)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
@@ -24285,7 +24285,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 270,
-        'catchRate': 255,
+        'catchRate': 3,
         'base': {
             'hitpoints': 97,
             'attack': 167,
@@ -25559,6 +25559,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
             LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
+            DummyEvolution('Toxel', 'Gigantamax Toxtricity'),
         ],
     },
     {
@@ -27832,6 +27833,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 187,
         'catchRate': 45,
+        'evolutions': [StoneEvolution('Duraludon', 'Archaludon', StoneType.Metal_alloy)],
     },
     {
         'id': 884.01,
@@ -28428,6 +28430,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 901.01,
         'name': 'Bloodmoon Ursaluna',
+        'nativeRegion': Region.paldea,
         'catchRate': 20,
         'type': [PokemonType.Ground, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -29420,7 +29423,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [DummyEvolution('Bramblin', 'Brambleghast')],
     },
     {
-        'id': 946,
+        'id': 947,
         'name': 'Brambleghast',
         'type': [PokemonType.Grass, PokemonType.Ghost],
         'base': {
@@ -30854,6 +30857,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 170,
         'catchRate': 45,
+        'evolutions': [DummyEvolution('Dipplin', 'Hydrapple')],
     },
     {
         'id': 1012,
@@ -30912,6 +30916,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 278,
         'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Cornerstone_Mask' },
         'gender': {
             'femaleRatio': 0,
         },
@@ -30932,6 +30937,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 278,
         'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Wellspring_Mask' },
         'gender': {
             'femaleRatio': 0,
         },
@@ -30952,6 +30958,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 278,
         'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Hearthflame_Mask' },
         'gender': {
             'femaleRatio': 0,
         },
@@ -30969,6 +30976,12 @@ export const pokemonList = createPokemonArray(
             'speed': 110,
         },
         'eggCycles': 10,
+        'evolutions': [
+            HeldItemLevelEvolution('Wellspring_Mask', 'Ogerpon (Teal Mask)', 'Ogerpon (Wellspring Mask)', 70),
+            HeldItemLevelEvolution('Hearthflame_Mask', 'Ogerpon (Teal Mask)', 'Ogerpon (Hearthflame Mask)', 70),
+            HeldItemLevelEvolution('Cornerstone_Mask', 'Ogerpon (Teal Mask)', 'Ogerpon (Cornerstone Mask)', 70),
+            DummyEvolution('Ogerpon (Teal Mask)', 'Ogerpon (Terrastallized Teal Mask)'),
+        ],
         'levelType': LevelType.slow,
         'exp': 275,
         'catchRate': 5,
@@ -30992,6 +31005,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 275,
         'catchRate': 5,
+        'evolutions': [DummyEvolution('Ogerpon (Wellspring Mask)', 'Ogerpon (Terrastallized Wellspring Mask)')],
         'gender': {
             'femaleRatio': 1,
         },
@@ -31012,6 +31026,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 275,
         'catchRate': 5,
+        'evolutions': [DummyEvolution('Ogerpon (Hearthflame Mask)', 'Ogerpon (Terrastallized Hearthflame Mask)')],
         'gender': {
             'femaleRatio': 1,
         },
@@ -31032,8 +31047,274 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 275,
         'catchRate': 5,
+        'evolutions': [DummyEvolution('Ogerpon (Cornerstone Mask)', 'Ogerpon (Terrastallized Cornerstone Mask)')],
         'gender': {
             'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.04,
+        'name': 'Ogerpon (Terrastallized Teal Mask)',
+        'type': [PokemonType.Grass],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 96,
+            'speed': 165,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.05,
+        'name': 'Ogerpon (Terrastallized Wellspring Mask)',
+        'type': [PokemonType.Grass, PokemonType.Water],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 144,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.06,
+        'name': 'Ogerpon (Terrastallized Hearthflame Mask)',
+        'type': [PokemonType.Grass, PokemonType.Fire],
+        'base': {
+            'hitpoints': 80,
+            'attack': 180,
+            'specialAttack': 60,
+            'defense': 84,
+            'specialDefense': 96,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1017.07,
+        'name': 'Ogerpon (Terrastallized Cornerstone Mask)',
+        'type': [PokemonType.Grass, PokemonType.Rock],
+        'base': {
+            'hitpoints': 80,
+            'attack': 120,
+            'specialAttack': 60,
+            'defense': 126,
+            'specialDefense': 96,
+            'speed': 110,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.slow,
+        'exp': 275,
+        'catchRate': 5,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 1018,
+        'name': 'Archaludon',
+        'type': [PokemonType.Steel, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 90,
+            'attack': 105,
+            'specialAttack': 125,
+            'defense': 130,
+            'specialDefense': 65,
+            'speed': 85,
+        },
+        'eggCycles': 30,
+        'levelType': LevelType.mediumfast,
+        'exp': 404,
+        'catchRate': 10,
+    },
+    {
+        'id': 1019,
+        'name': 'Hydrapple',
+        'type': [PokemonType.Grass, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 106,
+            'attack': 80,
+            'specialAttack': 120,
+            'defense': 110,
+            'specialDefense': 80,
+            'speed': 44,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.erratic,
+        'exp': 404,
+        'catchRate': 10,
+    },
+    {
+        'id': 1020,
+        'name': 'Gouging Fire',
+        'type': [PokemonType.Fire, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 105,
+            'attack': 115,
+            'specialAttack': 65,
+            'defense': 121,
+            'specialDefense': 93,
+            'speed': 91,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 10,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1021,
+        'name': 'Raging Bolt',
+        'type': [PokemonType.Electric, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 125,
+            'attack': 73,
+            'specialAttack': 137,
+            'defense': 91,
+            'specialDefense': 89,
+            'speed': 75,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 10,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1022,
+        'name': 'Iron Boulder',
+        'type': [PokemonType.Rock, PokemonType.Psychic],
+        'base': {
+            'hitpoints': 90,
+            'attack': 120,
+            'specialAttack': 68,
+            'defense': 80,
+            'specialDefense': 108,
+            'speed': 124,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 10,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1023,
+        'name': 'Iron Crown',
+        'type': [PokemonType.Steel, PokemonType.Psychic],
+        'base': {
+            'hitpoints': 90,
+            'attack': 72,
+            'specialAttack': 122,
+            'defense': 100,
+            'specialDefense': 108,
+            'speed': 98,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 10,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1024,
+        'name': 'Terapagos',
+        'type': [PokemonType.Normal],
+        'base': {
+            'hitpoints': 90,
+            'attack': 65,
+            'specialAttack': 65,
+            'defense': 85,
+            'specialDefense': 85,
+            'speed': 60,
+        },
+        'eggCycles': 404,
+        'levelType': LevelType.slow,
+        'exp': 404,
+        'catchRate': 255,
+    },
+    {
+        'id': 1024.01,
+        'name': 'Terapagos (Terastal)',
+        'type': [PokemonType.Normal],
+        'base': {
+            'hitpoints': 95,
+            'attack': 95,
+            'specialAttack': 105,
+            'defense': 110,
+            'specialDefense': 110,
+            'speed': 85,
+        },
+        'eggCycles': 404,
+        'levelType': LevelType.slow,
+        'exp': 404,
+        'catchRate': 255,
+    },
+    {
+        'id': 1024.02,
+        'name': 'Terapagos (Stellar)',
+        'type': [PokemonType.Normal],
+        'base': {
+            'hitpoints': 160,
+            'attack': 105,
+            'specialAttack': 130,
+            'defense': 110,
+            'specialDefense': 110,
+            'speed': 85,
+        },
+        'eggCycles': 404,
+        'levelType': LevelType.slow,
+        'exp': 404,
+        'catchRate': 255,
+    },
+    {
+        'id': 1025,
+        'name': 'Pecharunt',
+        'type': [PokemonType.Poison, PokemonType.Ghost],
+        'base': {
+            'hitpoints': 88,
+            'attack': 88,
+            'specialAttack': 88,
+            'defense': 160,
+            'specialDefense': 88,
+            'speed': 88,
+        },
+        'eggCycles': 404,
+        'levelType': LevelType.slow,
+        'exp': 404,
+        'catchRate': 3,
+        'gender': {
+            'type': Genders.Genderless,
         },
     },
 
@@ -31155,7 +31436,6 @@ export const pokemonList = createPokemonArray(
 export type PokemonList = typeof pokemonList;
 
 const pokemonNameIndex = {};
-const maxEggCycles = Math.max(...pokemonList.map((p) => p.eggCycles));
 
 // This needs to be initiallised before pokemonMap as some other things rely on it for data
 // Specifically Roamers not sure what else.
@@ -31186,7 +31466,7 @@ pokemonList.forEach((p) => {
             if (evo.ignoreECChange) {
                 poke.eggCycles = Math.max(poke.eggCycles, p.eggCycles);
             } else {
-                poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
+                poke.eggCycles = Math.min(MAX_EGG_CYCLES, Math.round(p.eggCycles * 1.5));
             }
 
         });

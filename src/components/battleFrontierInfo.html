@@ -16,7 +16,7 @@
         </p>
         <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start(false)">Start</a>
         <!-- ko if: BattleFrontierRunner.hasCheckpoint() -->
-            <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start(true)">Start at latest checkpoint (Stage <knockout data-bind="text: BattleFrontierRunner.checkpoint">0</knockout>)</a>
+            <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start(true)">Start at latest checkpoint (Stage <knockout data-bind="text: BattleFrontierRunner.checkpoint().toLocaleString('en-US')">0</knockout>)</a>
         <!-- /ko -->
         <a class="btn btn-block btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
     </div>
@@ -35,7 +35,7 @@
             </thead>
             <tbody data-bind="foreach: BattleFrontierMilestones.availableMilestones().slice(0, 4)">
                 <tr>
-                    <th class="tight" data-bind="text: $data.stage"></td>
+                    <th class="tight" data-bind="text: $data.stage.toLocaleString('en-US')"></td>
                     <td class="text-left">
                         <img width="28px" data-bind="attr:{ src: $data.image }" />
                         <knockout data-bind="text: $data.displayName"></knockout>

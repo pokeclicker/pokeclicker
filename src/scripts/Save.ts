@@ -2,7 +2,8 @@
 
 class Save {
 
-    static counter = 0;
+    // Process new day events as soon as possible after loading a file.
+    static counter = GameConstants.SAVE_TICK - GameConstants.TICK_TIME;
     static key = '';
 
     public static store(player: Player) {
@@ -15,19 +16,12 @@ class Save {
     }
 
     public static getSaveObject() {
-        const saveObject = {achievements : []};
+        const saveObject: Record<any, any> = {};
 
         Object.keys(App.game).filter(key => App.game[key].saveKey).forEach(key => {
             saveObject[App.game[key].saveKey] = App.game[key].toJSON();
         });
-        AchievementHandler.achievementList.forEach(achievement => {
-            if (achievement.stored && achievement.unlocked()) {
-                saveObject.achievements.push(achievement.name);
-            }
-        });
-        if (!saveObject.achievements.length) {
-            delete saveObject.achievements;
-        }
+        saveObject.achievements = AchievementHandler.toJSON();
 
         return saveObject;
     }

@@ -9,7 +9,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab" onclick="$('#breeding-fireall').show()">Pokémon</a></li>
                             <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').show()">Eggs</a></li>
                             <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').show()">Fossils</a></li>
-                            <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
+                            <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers</a></li>
                             <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').show()">Help</a></li>
                             <li class="d-lg-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
                         </ul>
@@ -49,6 +49,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             </div>
             <div class="modal-body p-0">
                 <div class="tab-content p-3 h-100">
+                    <!-- ko let: { categoryModeEnabled: ko.observable(false), categoryModeSelected: ko.observable(0) } -->
                     <div class="tab-pane fade in active show" id="breeding-pokemon">
                         <div class="row">
                             <div class="col-12 d-lg-none d-block">
@@ -124,12 +125,17 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <label>Category</label>
                                                 <div class="dropdown show">
                                                     <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                        data-bind="text: BreedingFilters.category.value() == -1 ? 'All' : PokemonCategories.categories().find(c => c.id == BreedingFilters.category.value()).name()">
+                                                        data-bind="text: BreedingFilters.category.value() == -1 ? 'All'
+                                                            : BreedingFilters.category.value() == -2 ? 'Categorized'
+                                                            : PokemonCategories.categories().find(c => c.id == BreedingFilters.category.value()).name()">
                                                         Categories
                                                     </button>
-                                                    <div class="border-secondary dropdown-menu col-12">
+                                                    <div class="border-secondary dropdown-menu col-12 category-dropdown">
                                                         <div class="dropdown-item dropdown-text" data-bind="click : function(){ BreedingFilters.category.value(-1); Settings.setSettingByName('breedingCategoryFilter', -1) }">
                                                             All
+                                                        </div>
+                                                        <div class="dropdown-item dropdown-text" data-bind="click : function(){ BreedingFilters.category.value(-2); Settings.setSettingByName('breedingCategoryFilter', -2) }">
+                                                            Categorized
                                                         </div>
                                                         <div class="dropdown-divider"></div>
                                                         <!-- ko foreach : PokemonCategories.categories -->
@@ -226,6 +232,61 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="col-12">
+                                                <hr style="border-color:grey;">
+                                            </div>
+
+                                            <!-- Category Mode-->
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary btn-block" data-bind="
+                                                        click: () => categoryModeEnabled(!categoryModeEnabled()),
+                                                        text: categoryModeEnabled() ? 'Disable Category Mode' : 'Enable Category Mode',
+                                                        tooltip: {
+                                                            title: 'Use Category Mode to quickly assign and remove Pokémon from categories. Select a category then click the desired Pokémon to add or remove.',
+                                                            placement: 'top',
+                                                            trigger: 'hover'
+                                                        }">
+                                                        Enable Category Mode
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- ko if: categoryModeEnabled() -->
+                                            <div class="col-12">
+                                                <div class="form-group mb-1">
+                                                    <label>Selected Category</label>
+                                                    <div class="dropdown show">
+                                                        <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                            data-bind="text: PokemonCategories.categories().find(c => c.id == categoryModeSelected()).name()">
+                                                            Select A Category
+                                                        </button>
+                                                        <div class="border-secondary dropdown-menu col-12 category-dropdown" data-bind="foreach: PokemonCategories.categories">
+                                                            <div class="dropdown-item" data-bind="text : $data.name(),
+                                                                style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: $data.color() },
+                                                                click: () => categoryModeSelected($data.id)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <button type="button" class="btn btn-success btn-block" data-bind="tooltip: {
+                                                    title: 'Add all Pokémon matching the current filters to this category.',
+                                                    placement: 'bottom',
+                                                    trigger: 'hover'
+                                                },
+                                                click: () => PartyController.addCategory(BreedingController.hatcheryFilteredList().filter(p => p.isHatchable()), categoryModeSelected())">Add All</button>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <button type="button" class="btn btn-danger btn-block" data-bind="tooltip: {
+                                                    title: 'Remove all Pokémon matching the current filters from this category.',
+                                                    placement: 'bottom',
+                                                    trigger: 'hover'
+                                                },
+                                                click: () => PartyController.removeCategory(BreedingController.hatcheryFilteredList().filter(p => p.isHatchable()), categoryModeSelected())">Remove All</button>
+                                            </div>
+                                            <!-- /ko -->
                                         </div>
                                     </div>
                                 </div>
@@ -235,49 +296,95 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <div class="col-lg-9 col-12 pokemon-list" id="breeding-pokemon-list-container">
                                 <div class="scrolling-div-breeding-list">
                                     <!-- Check if the player has any level 100 Pokémon or if they have any eggs -->
-                                    <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
+                                    <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: modalUtils.observableState.breedingModal !== 'hidden' && !App.game.party.hasMaxLevelPokemon()">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
-                                    <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                                    <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { pageSize: 60, reset: modalUtils.observableState.breedingModalObservable })">
-                                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable(), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
-                                            <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
-                                            <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
-                                            <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
-                                            <div class="breedingListPokerus" data-bind="if: App.game.party.getPokemon($data.id)?.pokerus">
-                                                <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
-                                            </div>
-                                            <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
-                                            <span class="pokedex-bottom-text" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
-                                            <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
-                                            <span class="pokedex-top-text text-truncate px-1" data-bind="text: $data.displayName,
-                                                tooltip: {
-                                                    title: PokemonHelper.displayName($data.name),
-                                                    trigger: 'hover',
-                                                    placement: 'top',
-                                                    boundary: 'viewport'
-                                                }">name</span>
-
-                                            <!-- Category Button -->
-                                            <div class="pokemonCategory dropdown">
-                                                <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
-                                                <div class="border-secondary dropdown-menu">
-                                                    <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
-                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight($data.color()) ? 'white' : 'black'}` }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
-                                                    <!-- /ko -->
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
-                                                        <i>Edit categories</i>
-                                                    </a>
+                                    <knockout data-bind="using: lazyLoad('lazyHatcheryList', $element, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList'">
+                                        <!-- ko if: modalUtils.observableState.breedingModal !== 'hidden' && App.game.party.hasMaxLevelPokemon() -->
+                                        <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyHatcheryList, childrenComplete: () => { lazyLoadCallback('lazyHatcheryList'); }">
+                                            <!-- ko if: $data.isHatchable() && ($data.matchesHatcheryFilters() || BreedingController.viewResetWaiting()) -->
+                                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="
+                                                style:{background: PokedexHelper.getBackgroundColors($data.name)},
+                                                class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled',
+                                                css: { 'category-highlight': categoryModeEnabled() && $data.category.includes(categoryModeSelected()) }">
+                                                <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
+                                                <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
+                                                <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
+                                                <div class="breedingListPokerus" data-bind="if: App.game.party.getPokemon($data.id)?.pokerus">
+                                                    <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <!-- /ko -->
+                                                <img src="" class="pokedex-pokemon-sprite" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
+                                                <span class="pokedex-bottom-text" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
+                                                <a class="overlay" href="#breed" data-bind="click: function() {
+                                                    if (categoryModeEnabled()) {
+                                                        $data.toggleCategory(categoryModeSelected());
+                                                    } else {
+                                                        App.game.breeding.addPokemonToHatchery($data);
+                                                        App.game.breeding.checkCloseModal();
+                                                    }
+                                                }"></a>
+                                                <span class="pokedex-top-text text-truncate px-1" data-bind="text: $data.displayName,
+                                                    tooltip: {
+                                                        title: categoryModeEnabled() ? '' : PokemonHelper.displayName($data.name),
+                                                        trigger: 'hover',
+                                                        placement: 'top',
+                                                        boundary: 'viewport'
+                                                    }">name</span>
+
+                                                <!-- Category Button -->
+                                                <div class="pokemonCategory dropdown" data-bind="let: { pokemon: App.game.party.getPokemon($data.id) }">
+                                                    <div data-toggle="dropdown" style="height: 15px;">
+                                                        <!-- Limit category display to 12 for UI purposes -->
+                                                        <div class="d-flex position-relative category-display" data-bind="foreach: pokemon.category.slice(0, 12)">
+                                                            <button data-bind="class: `category-${$data + 1}`"></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="border-secondary dropdown-menu multiselect-dropdown category-dropdown px-2">
+                                                        <div class="form-check d-flex align-items-center", data-bind="with: PokemonCategories.categories().find(c => c.id === 0), as: 'pokemonCategory'">
+                                                            <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
+                                                                data-bind="attr: { id: `${$parent.id}-category0` },
+                                                                    checked: pokemon.isUncategorized,
+                                                                    disable: pokemon.isUncategorized,
+                                                                    click: () => { pokemon.resetCategory(); return true; }">
+                                                            <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
+                                                                data-bind="
+                                                                    text: pokemonCategory.name,
+                                                                    attr: { for: `${$parent.id}-category0` },
+                                                                    style: { color: GameHelper.isColorLight(pokemonCategory.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight(pokemonCategory.color()) ? 'white' : 'black'}` }"
+                                                                onclick="event.stopPropagation();"></label>
+                                                        </div>
+                                                        <div class="dropdown-divider"></div>
+                                                        <!-- ko foreach: { data: PokemonCategories.playerCategories, as: 'pokemonCategory' } -->
+                                                        <div class="form-check d-flex align-items-center">
+                                                            <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
+                                                                data-bind="
+                                                                    attr: { id: `${$parent.id}-category${pokemonCategory.id}` },
+                                                                    checked: pokemon._category,
+                                                                    checkedValue: pokemonCategory.id">
+                                                            <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
+                                                                data-bind="
+                                                                    text: pokemonCategory.name,
+                                                                    attr: { for: `${$parent.id}-category${pokemonCategory.id}` },
+                                                                    style: { color: GameHelper.isColorLight(pokemonCategory.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight(pokemonCategory.color()) ? 'white' : 'black'}` }"
+                                                                onclick="event.stopPropagation();"></label>
+                                                        </div>
+                                                        <!-- /ko -->
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                            <i>Edit categories</i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!-- /ko -->
+                                        </ul>
+                                        <!-- /ko -->
+                                    </knockout>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /ko -->
 
                     <div class="tab-pane fade" id="breeding-eggs">
                         <div class="scrolling-div-breeding-list">
@@ -381,7 +488,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <td class="text-left align-middle">Sort:</td>
                                                 <td class="text-center align-middle">
                                                     <div class="input-group input-group-sm">
-                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => o.value !== SortOptions.level), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
+                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => ![SortOptions.level, SortOptions.attack].includes(o.value)), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
                                                         <div class="input-group-append bg-primary text-light">
                                                             <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                                 attr: {for: 'hatcheryHelperSortDirection' + $index() },
@@ -409,8 +516,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                             },
                                                             buttonClass: 'custom-select-sm',
                                                             itemLabel: {
-                                                                class: 'text-white small',
-                                                                style: (item) => ({ 'background-color': item.color() })
+                                                                class: 'small',
+                                                                style: (item) => ({ 'background-color': item.color(), color: GameHelper.isColorLight(item.color()) ? 'black' : 'white' })
                                                             },
                                                             showSelectAll: true,
                                                             selectAllText: 'All Categories',
@@ -468,10 +575,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <h4><u>Queue</u></h4>
                         <p>You will gain access to a queue in the hatchery once you reach the Johto region, and more queue slots for each new region reached after that.</p>
 
-                        <h4><u>Hatchery Helpers (BETA)</u></h4>
+                        <h4><u>Hatchery Helpers</u></h4>
                         <p><i>(unlocked after hatching 100 total Pokémon)</i></p>
                         <p>Hatchery Helpers will help out by automatically breeding your Pokémon for you.</p>
-                        <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, so things will likely change in the future; feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
                         <p>The cost displayed is how much you will be charged per hatch.</p>
                         <p>They will only breed Pokémon based on your current Hatchery filters.</p>
                         <p>All of the Helpers have different step efficiencies and will hatch eggs faster or slower depending on their value.</p>

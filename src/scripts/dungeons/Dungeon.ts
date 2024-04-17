@@ -70,10 +70,12 @@ type Boss = DungeonBossPokemon | DungeonTrainer;
 interface EncounterInfo {
     image: string,
     shiny: boolean,
+    shadow: boolean,
     hide: boolean, // try to not hide pokemon required as per the Pokedex Challenge whose unlock method can be avoided through regular gameplay
     uncaught: boolean,
-    locked: boolean,
+    lock: boolean,
     lockMessage: string,
+    pokemonName: PokemonNameType,
 }
 
 // Gain a gym badge after first completion of a dungeon
@@ -95,6 +97,7 @@ const DungeonGainGymBadge = (gym: Gym) => {
  */
  interface optionalDungeonParameters {
     dungeonRegionalDifficulty?: GameConstants.Region,
+    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
@@ -132,21 +135,26 @@ class Dungeon {
         }
         // Player may not meet the requirements to start the dungeon
         const dungeonTown = TownList[this.name];
-        if (!dungeonTown.isUnlocked()) {
-            const reqsList = [];
-            dungeonTown.requirements?.forEach(req => {
-                if (!req.isCompleted()) {
-                    reqsList.push(req.hint());
-                }
-            });
-
-            Notifier.notify({
-                message: `You don't have access to this dungeon yet.\n<i>${reqsList.join('\n')}</i>`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
+        const dungeonRequirement = this.optionalParameters.requirement;
+        // Use dungeonRequirement if it exists, else default to dungeonTown status
+        if (dungeonRequirement ? !dungeonRequirement.isCompleted() : !dungeonTown.isUnlocked()) {
             return false;
         }
         return true;
+    }
+
+    public getRequirementHints() {
+        const dungeonTown = TownList[this.name];
+        const reqsList = [];
+        dungeonTown.requirements?.forEach(req => {
+            if (!req.isCompleted()) {
+                reqsList.push(req.hint());
+            }
+        });
+        if (this.optionalParameters.requirement ? !this.optionalParameters.requirement.isCompleted() : false) {
+            reqsList.push(this.optionalParameters.requirement.hint());
+        }
+        return reqsList;
     }
 
     /**
@@ -245,32 +253,15 @@ class Dungeon {
         return encounterInfo;
     }
 
+    public allShadowPokemon(): PokemonNameType[] {
+        const encounterInfo = this.normalEncounterList.filter(e => e.shadow).map(e => e.pokemonName);
+        encounterInfo.push(...this.bossEncounterList.filter(e => e.shadow).map(e => e.pokemonName));
+        return encounterInfo;
+    }
+
     public allAvailableShadowPokemon(): PokemonNameType[] {
-        const encounterInfo = [];
-        this.enemyList.forEach(enemy => {
-            if (enemy instanceof DungeonTrainer) {
-                if (enemy.options?.requirement?.isCompleted() === false) {
-                    return;
-                }
-                enemy.getTeam().forEach(pokemon => {
-                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
-                        encounterInfo.push(pokemon.name);
-                    }
-                });
-            }
-        });
-        this.bossList.forEach(boss => {
-            if (boss instanceof DungeonTrainer) {
-                if (boss.options?.requirement?.isCompleted() === false) {
-                    return;
-                }
-                boss.getTeam().forEach(pokemon => {
-                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
-                        encounterInfo.push(pokemon.name);
-                    }
-                });
-            }
-        });
+        const encounterInfo = this.normalEncounterList.filter(e => e.shadow && !e.hide).map(e => e.pokemonName);
+        encounterInfo.push(...this.bossEncounterList.filter(e => e.shadow && !e.hide).map(e => e.pokemonName));
         return encounterInfo;
     }
 
@@ -370,51 +361,77 @@ class Dungeon {
     }
 
 
+    private getEncounterInfo(pokemonName: PokemonNameType, mimicData, hideEncounter = false, shadow = false): EncounterInfo {
+        const partyPokemon = App.game.party.getPokemonByName(pokemonName);
+        const pokerus = partyPokemon?.pokerus;
+        const caught = App.game.party.alreadyCaughtPokemonByName(pokemonName);
+        const shinyCaught = App.game.party.alreadyCaughtPokemonByName(pokemonName, true);
+        const shadowCaught = partyPokemon?.shadow >= GameConstants.ShadowStatus.Shadow;
+        const purified = partyPokemon?.shadow >= GameConstants.ShadowStatus.Purified;
+        const encounter = {
+            pokemonName,
+            image: `assets/images/${shinyCaught ? 'shiny' : ''}${shadow && shadowCaught ? 'shadow' : ''}pokemon/${pokemonMap[pokemonName].id}.png`,
+            shadowBackground: shadow && !shadowCaught ? `assets/images/shadowpokemon/${pokemonMap[pokemonName].id}.png` : '',
+            pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[pokerus]}.png` : '',
+            EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${partyPokemon.evs().toLocaleString('en-US')}` : '',
+            shiny: shinyCaught,
+            hide: hideEncounter,
+            uncaught: !caught,
+            lock: !!mimicData?.lockedMessage,
+            lockMessage: mimicData?.lockedMessage ?? '',
+            mimic: !!mimicData,
+            mimicTier: mimicData?.tier,
+            shadow,
+            shadowCaught,
+            purified,
+        };
+        return encounter;
+    }
+
     /**
      * Gets all non-boss Pokemon encounters in the dungeon
      * Used for generating the dungeon encounter list view
      */
     get normalEncounterList(): EncounterInfo[] {
         const encounterInfo = [];
-        let pokemonName: PokemonNameType;
-        let hideEncounter = false;
-
-        const getEncounterInfo = (pokemonName, mimicData) => {
-            const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
-            const encounter = {
-                image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
-                pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName(pokemonName).pokerus]}.png` : '',
-                EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemonByName(pokemonName).evs().toLocaleString('en-US')}` : '',
-                shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
-                hide: hideEncounter,
-                uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                lock: !!mimicData?.lockedMessage,
-                lockMessage: mimicData?.lockedMessage ?? '',
-                mimic: !!mimicData,
-                mimicTier: mimicData?.tier,
-            };
-            return encounter;
-        };
 
         // Handling minions
         this.enemyList.forEach((enemy) => {
             // Handling Pokemon
             if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
+                let pokemonName: PokemonNameType;
+                let hideEncounter = false;
                 if (enemy.hasOwnProperty('pokemon')) {
-                    pokemonName = (<DetailedPokemon>enemy).pokemon;
-                    hideEncounter = (<DetailedPokemon>enemy).options?.hide ? ((<DetailedPokemon>enemy).options?.requirement ? !(<DetailedPokemon>enemy).options?.requirement.isCompleted() : (<DetailedPokemon>enemy).options?.hide) : false;
+                    const pokemon = <DetailedPokemon>enemy;
+                    pokemonName = pokemon.pokemon;
+                    hideEncounter = pokemon.options?.hide ? (pokemon.options?.requirement ? !pokemon.options?.requirement.isCompleted() : pokemon.options?.hide) : false;
                 } else {
                     pokemonName = <PokemonNameType>enemy;
                 }
-                encounterInfo.push(getEncounterInfo(pokemonName, false));
-            // Handling Trainers
-            } else { /* We don't display minion Trainers */ }
+                encounterInfo.push(this.getEncounterInfo(pokemonName, null, hideEncounter));
+            // Handling Trainers (only those with shadow Pokemon)
+            } else if (enemy instanceof DungeonTrainer) {
+                const hideEncounter = (enemy.options?.requirement && !enemy.options.requirement.isCompleted());
+                const shadowPokemon = enemy.getTeam().filter(p => p.shadow == GameConstants.ShadowStatus.Shadow);
+                if (shadowPokemon.length) {
+                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, hideEncounter, true));
+                    const trainerEncounter = {
+                        image: enemy.image,
+                        EVs: '',
+                        hide: hideEncounter,
+                        lockMessage: '',
+                        shadowTrainer: true,
+                    };
+                    encounterInfo.push(...shadowEncounters);
+                    encounterInfo.push(trainerEncounter);
+                }
+            }
         });
 
         // Handling Mimics
         this.getCaughtMimics().forEach(enemy => {
-            pokemonName = <PokemonNameType>enemy;
-            encounterInfo.push(getEncounterInfo(pokemonName, this.getMimicData(pokemonName)));
+            const pokemonName = enemy;
+            encounterInfo.push(this.getEncounterInfo(pokemonName, this.getMimicData(pokemonName)));
         });
 
         return encounterInfo;
@@ -430,31 +447,33 @@ class Dungeon {
 
         // Handling Bosses
         this.bossList.forEach((boss) => {
+            const hideEncounter = boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false;
+            const lock = boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false;
+            const lockMessage = boss.options?.requirement ? boss.options?.requirement.hint() : '';
             // Handling Pokemon
             if (boss instanceof DungeonBossPokemon) {
-                const pokemonName = boss.name;
-                const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
-                const encounter = {
-                    image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
-                    pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName(pokemonName).pokerus]}.png` : '',
-                    EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemonByName(pokemonName).evs().toLocaleString('en-US')}` : '',
-                    shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
-                    hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
-                    uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                    lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
-                    lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
-                };
+                const encounter = this.getEncounterInfo(boss.name, null, hideEncounter);
+                encounter.lock = lock;
+                encounter.lockMessage = lockMessage;
                 encounterInfo.push(encounter);
             // Handling Trainer
             } else {
+                // Check for Shadow Pokemon
+                const shadowPokemon = boss.getTeam().filter(p => p.shadow == GameConstants.ShadowStatus.Shadow);
+                const shadowEncounter = shadowPokemon.length > 0;
+                if (shadowEncounter) {
+                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, hideEncounter, true));
+                    encounterInfo.push(...shadowEncounters);
+                }
                 const encounter = {
                     image: boss.image,
                     EVs: '',
                     shiny:  false,
-                    hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
+                    hide: hideEncounter,
                     uncaught: false,
-                    lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
-                    lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
+                    lock,
+                    lockMessage,
+                    shadowTrainer: shadowEncounter,
                 };
                 encounterInfo.push(encounter);
             }
@@ -467,7 +486,7 @@ class Dungeon {
         return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
     });
 
-    public getMimicData(pokemonName): {tier: LootTier, lockedMessage: string} {
+    public getMimicData(pokemonName: PokemonNameType): {tier: LootTier, lockedMessage: string} {
         let res;
         (Object.keys(this.lootTable) as LootTier[]).forEach(tier => {
             this.lootTable[tier].forEach(loot => {
@@ -2223,6 +2242,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
             {loot: 'Lucky_egg'},
         ],
         rare: [{loot: 'Green Shard'}],
+        epic : [{loot: 'Spiky-eared Pichu', ignoreDebuff : true, requirement : new QuestLineStepCompletedRequirement('Unfinished Business', 7)}],
         legendary: [
             {loot: 'Revive'},
             {loot: 'Insect Plate'},
@@ -2283,6 +2303,79 @@ dungeonList['Burned Tower'] = new Dungeon('Burned Tower',
     88500,
     [new DungeonBossPokemon('Golbat', 360000, 35), new DungeonBossPokemon('Weezing', 320000, 35), new DungeonBossPokemon('Shuckle', 610000, 50)],
     4500, 37);
+
+dungeonList['Olivine Lighthouse'] = new Dungeon('Olivine Lighthouse',
+    [
+        new DungeonTrainer('Gentleman',
+            [new GymPokemon('Noctowl', 4550, 22)],
+            { weight: 1 }, 'Alfred'),
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Poliwag', 4550, 18),
+                new GymPokemon('Poliwhirl', 4550, 20),
+            ],
+            { weight: 1 }, 'Huey'),
+        new DungeonTrainer('Bird Keeper',
+            [
+                new GymPokemon('Pidgey', 4200, 17),
+                new GymPokemon('Pidgey', 4200, 15),
+                new GymPokemon('Pidgey', 4200, 19),
+                new GymPokemon('Pidgey', 4200, 15),
+                new GymPokemon('Pidgey', 4200, 15),
+            ],
+            { weight: 1 }, 'Theo'),
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Krabby', 4550, 18),
+                new GymPokemon('Krabby', 4550, 20),
+            ],
+            { weight: 1 }, 'Kent'),
+        new DungeonTrainer('Bird Keeper',
+            [
+                new GymPokemon('Spearow', 4550, 18),
+                new GymPokemon('Fearow', 4550, 20),
+                new GymPokemon('Spearow', 4550, 18),
+            ],
+            { weight: 1 }, 'Denis'),
+        new DungeonTrainer('Gentleman',
+            [
+                new GymPokemon('Growlithe', 4550, 18),
+                new GymPokemon('Growlithe', 4550, 18),
+            ],
+            { weight: 1 }, 'Preston'),
+        new DungeonTrainer('Lass',
+            [new GymPokemon('Marill', 4550, 21)],
+            { weight: 1 }, 'Connie'),
+        new DungeonTrainer('Sailor',
+            [new GymPokemon('Poliwhirl', 4550, 20)],
+            { weight: 1 }, 'Terell'),
+    ],
+    {
+        common: [
+            {loot: 'Lucky_incense', weight: 2},
+            {loot: 'Dowsing_machine'},
+        ],
+        rare: [{loot: 'Yellow Shard'}],
+        epic: [{loot: 'Greatball'}],
+        legendary: [
+            {loot: 'Zap Plate'},
+            {loot: 'MediumRestore'},
+        ],
+        mythic: [
+            {loot: 'Ultraball'},
+            {loot: 'LargeRestore'},
+        ],
+    },
+    88500,
+    [
+        new DungeonTrainer('Sailor',
+            [
+                new GymPokemon('Machop', 125000, 18),
+                new GymPokemon('Machop', 125000, 18),
+                new GymPokemon('Poliwhirl', 125000, 18),
+            ], { weight: 1 }, 'Roberto'),
+    ],
+    4500, 40);
 
 dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     ['Rattata', 'Gastly'],
@@ -3291,7 +3384,7 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
                 new GymPokemon('Mightyena', 4500000, 58),
             ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 9)}, 'Shelly', '(shelly)'),
         new DungeonBossPokemon('Castform', 1820000, 20, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
-        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Sunny])])}),
+        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])}),
         new DungeonBossPokemon('Castform (Rainy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])])}),
         new DungeonBossPokemon('Castform (Snowy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail])])}),
     ],
@@ -3585,7 +3678,7 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
         new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
         new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
         new DungeonBossPokemon('Primal Kyogre', 95743340, 80, {hide: true, requirement: new MultiRequirement([new QuestLineCompletedRequirement('Primal Reversion'), new WeatherRequirement([WeatherType.Rain])])}),
-        new DungeonBossPokemon('Primal Groudon', 95743340, 80, {hide: true, requirement: new MultiRequirement([new QuestLineCompletedRequirement('Primal Reversion'), new WeatherRequirement([WeatherType.Sunny])])}),
+        new DungeonBossPokemon('Primal Groudon', 95743340, 80, {hide: true, requirement: new MultiRequirement([new QuestLineCompletedRequirement('Primal Reversion'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])}),
     ],
     34000, 101);
 
@@ -6109,12 +6202,12 @@ dungeonList['Gateon Port Battles'] = new Dungeon('Gateon Port Battles',
             [new GymPokemon('Zangoose', 58000000, 28, undefined, undefined, GameConstants.ShadowStatus.Shadow)], { weight: 1 }, 'Zook'),
         new DungeonTrainer('Cipher Admin',
             [
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Ludicolo', 58000000, 57),
-                new GymPokemon('Dragonite', 58000000, 55, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Ludicolo', 14000000, 57),
+                new GymPokemon('Dragonite', 14000000, 55, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('Gale of Darkness')}, 'Miror B.', 'Miror B'),
     ],
     443500, 134,
@@ -7668,8 +7761,8 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     [
         new DungeonBossPokemon('Slaking', 10000000, 100),
         new DungeonBossPokemon('Snorlax', 10000000, 100),
-        new DungeonBossPokemon('Shuckle', 10000000, 100),
         new DungeonBossPokemon('Blissey', 10000000, 100),
+        new DungeonBossPokemon('Staraptor', 10000000, 100),
         new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
     ],
     106500, 230);
@@ -8350,7 +8443,9 @@ dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
     [
         new DungeonBossPokemon('Drilbur', 23000000, 100),
         new DungeonBossPokemon('Axew', 24000000, 100),
-        new DungeonBossPokemon('Cobalion', 25000000, 100),
+        new DungeonBossPokemon('Cobalion', 25000000, 100, {
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
+        }),
     ],
     196500, 6);
 
@@ -8813,6 +8908,10 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
             new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+            new OneFromManyRequirement([
+                new QuestLineCompletedRequirement('Swords of Justice'),
+                new QuestLineStartedRequirement('Swords of Justice', GameConstants.AchievementOption.less),
+            ]),
         ])}),
     ],
     266500, 22);
@@ -9081,7 +9180,9 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
     [
         new DungeonBossPokemon('Golurk', 44000000, 100),
         new DungeonBossPokemon('Audino', 45000000, 100),
-        new DungeonBossPokemon('Terrakion', 45000000, 100),
+        new DungeonBossPokemon('Terrakion', 45000000, 100, {
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
+        }),
     ],
     326500, 23);
 
@@ -9297,7 +9398,10 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     [
         new DungeonBossPokemon('Seismitoad', 48000000, 100),
         new DungeonBossPokemon('Whiscash', 48000000, 100),
-        new DungeonBossPokemon('Keldeo', 50000000, 100),
+        new DungeonBossPokemon('Keldeo', 50000000, 100, {
+            hide: false,
+            requirement: new QuestLineCompletedRequirement('Swords of Justice'),
+        }),
         new DungeonBossPokemon('Vivillon (Jungle)',  96662023, 60, {
             hide: true,
             requirement: new OneFromManyRequirement([
@@ -9525,7 +9629,9 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     [
         new DungeonBossPokemon('Scolipede', 48000000, 100),
         new DungeonBossPokemon('Seismitoad', 48000000, 100),
-        new DungeonBossPokemon('Virizion', 48000000, 100),
+        new DungeonBossPokemon('Virizion', 48000000, 100, {
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
+        }),
     ],
     356500, 3);
 
@@ -11067,11 +11173,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
             {loot: 'Meadow Plate'},
             {loot: 'Nestball'},
         ],
-        legendary: [
-            {loot: 'LargeRestore'},
-            {loot: 'Miracle_Seed'},
-        ],
-        mythic: [{loot: 'Max Revive'}],
+        legendary: [{loot: 'Miracle_Seed'}],
     },
     13090332,
     [
@@ -11113,7 +11215,6 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
             {loot: 'Duskball'},
         ],
         legendary: [{loot: 'Soft_Sand'}],
-        mythic: [{loot: 'Max Revive'}],
     },
     13215839,
     [new DungeonBossPokemon('Larvitar', 66079195, 23)],
