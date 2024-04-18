@@ -69,7 +69,6 @@ Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display',
         new SettingOption('Step count', 'stepCount'),
     ],
     'stepCount'));
-Settings.add(new BooleanSetting('breedingQueueClearConfirmation', 'Confirm before clearing the hatchery queue', true));
 Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons',
     [
         new SettingOption('+10, +100', 'original'),
@@ -104,6 +103,8 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
     ],
     'queue'));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
+Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
+Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
@@ -123,10 +124,15 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
+Settings.add(new BooleanSetting('showUndergroundModuleMineControls', 'Show Underground module mine controls', true));
+Settings.add(new BooleanSetting('showUndergroundModuleDailyTrades', 'Show Underground module daily trades', false));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
+Settings.add(new BooleanSetting('breedingQueueClearConfirmation', 'Confirm before clearing the hatchery queue', true));
+Settings.add(new BooleanSetting('confirmChangeHeldItem', 'Confirm before removing or replacing a Held Item', true));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
 Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
     [
@@ -169,6 +175,7 @@ Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in gam
         new SettingOption('7 Days', (7 * DAY).toString()),
     ],
     (12 * HOUR).toString()));
+Settings.add(new BooleanSetting('disableAutoSave', 'Disable Auto Save', false));
 Settings.add(new Setting('breedingQueueSizeSetting', 'Breeding Queue Size', [], '-1'));
 
 // Sound settings
@@ -192,6 +199,11 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
+
+// Underground
+Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true));
+Settings.add(new BooleanSetting('underground.Reduced_Plates', 'Reduced Plates', true));
+Settings.add(new BooleanSetting('underground.Reduced_Evolution_Items', 'Reduced Evolution Items', true));
 
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
