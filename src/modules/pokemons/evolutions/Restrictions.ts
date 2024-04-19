@@ -61,6 +61,7 @@ export const environmentRestrict = <T extends EvoFn>(evo: T) => (
 ) => restrict(
     evo(...rest),
     new InEnvironmentRequirement(environment),
+    new GameStateRequirement(GameState.battleFrontier, false),
 );
 
 export const heldItemRestrict = <T extends EvoFn>(evo: T) => (
