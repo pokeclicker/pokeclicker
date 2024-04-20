@@ -50,10 +50,6 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
-
-            // Track shinies encountered, and rate of shinies
-            LogEvent('encountered shiny', 'shiny pokemon', 'wild encounter',
-                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         if (roaming) {
             Notifier.notify({
@@ -167,10 +163,6 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
-
-            // Track shinies encountered, and rate of shinies
-            LogEvent('encountered shiny', 'shiny pokemon', 'dungeon encounter',
-                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
 
         const ep = GameConstants.BASE_EP_YIELD * (mimic ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
@@ -212,10 +204,6 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
-
-            // Track shinies encountered, and rate of shinies
-            LogEvent('encountered shiny', 'shiny pokemon', 'dungeon boss encounter',
-                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_BOSS_EP_MODIFIER;
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, gender, GameConstants.ShadowStatus.None, EncounterType.dungeonBoss, heldItem, ep);
@@ -371,9 +359,18 @@ class PokemonFactory {
         return gender;
     }
 
-    public static generateWandererData(berry: Berry): WandererPokemon {
-        const availablePokemon = berry.wander.filter(p => pokemonMap[p].nativeRegion <= player.highestRegion());
-        const pokemon = Rand.fromArray(availablePokemon);
+    public static generateWandererData(plot: Plot): WandererPokemon {
+        const berry = plot.berryData;
+        const mulch = plot.mulch;
+        const availablePokemon = [];
+        const weights = [];
+        berry.wander.forEach((p, i) => {
+            if (pokemonMap[p].nativeRegion <= player.highestRegion()) {
+                availablePokemon.push(p);
+                weights.push(mulch === MulchType.Gooey_Mulch && i >= Berry.baseWander.length ? 2 : 1);
+            }
+        });
+        const pokemon = Rand.fromWeightedArray(availablePokemon, weights);
         const pokemonData = pokemonMap[pokemon];
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
         const catchChance = PokemonFactory.catchRateHelper(pokemonData.catchRate + 25, true);

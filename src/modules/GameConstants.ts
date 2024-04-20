@@ -175,6 +175,7 @@ export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
 export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
 export const FREEZE_MULCH_MULTIPLIER = 0;
+export const GOOEY_MULCH_CATCH_BONUS = 10;
 
 export const WANDER_RATE = 0.0005;
 
@@ -2134,6 +2135,11 @@ export const TemporaryBattles = [
     'Enamorus 3',
     'Arceus',
     'Paradise Protection Protocol',
+    'Terrakion 1',
+    'Swords of Justice 1',
+    'Kyurem 1',
+    'Kyurem 2',
+    'Kyurem 3',
 ];
 
 export enum ShardTraderLocations {
