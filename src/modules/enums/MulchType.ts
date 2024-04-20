@@ -5,6 +5,7 @@ enum MulchType {
     Surprise_Mulch,
     Amaze_Mulch,
     Freeze_Mulch,
+    Gooey_Mulch,
 }
 
 export default MulchType;

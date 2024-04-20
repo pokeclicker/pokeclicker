@@ -36,8 +36,6 @@ try {
 config = Object.assign({
     CNAME: false,
     DEVELOPMENT: (() => process.env.NODE_ENV != 'production')(),
-    GOOGLE_ANALYTICS_INIT: false,
-    GOOGLE_ANALYTICS_ID: false,
     DEV_BANNER: false,
     DISCORD_LOGIN_PROXY: false,
     FEATURE_FLAGS: {
@@ -144,14 +142,11 @@ gulp.task('compile-html', (done) => {
     const stream = gulp.src('./src/index.html');
     // If we want the development banner displayed
     stream.pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER));
-    stream.pipe(htmlImportIf('$GOOGLE_ANALYTICS_ID', config.GOOGLE_ANALYTICS_ID));
 
     stream.pipe(plumber())
         .pipe(gulpImport('./src/components/'))
         .pipe(replace('$VERSION', version))
         .pipe(replace('$DEVELOPMENT', !!config.DEVELOPMENT))
-        .pipe(replace('$GOOGLE_ANALYTICS_INIT', !!config.GOOGLE_ANALYTICS_INIT))
-        .pipe(replace('$GOOGLE_ANALYTICS_ID', config.GOOGLE_ANALYTICS_ID))
         .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))

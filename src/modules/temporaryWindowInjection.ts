@@ -6,7 +6,6 @@ import Profile from './profile/Profile';
 import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
-import LogEvent from './LogEvent';
 // enums
 import AuraType from './enums/AuraType';
 import BadgeEnums from './enums/Badges';
@@ -209,7 +208,6 @@ Object.assign(<any>window, {
     Profile,
     GameConstants,
     GameHelper,
-    LogEvent,
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,

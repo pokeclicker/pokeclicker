@@ -269,14 +269,6 @@ class MapHelper {
             player.highestSubRegion(0);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
-            // Track when users move region and how long it took in seconds
-            LogEvent('new region', 'new region',
-                GameConstants.Region[player.highestRegion()],
-                App.game.statistics.secondsPlayed());
-            // Gather users attack when they moved regions
-            LogEvent('attack measurement', 'new region',
-                GameConstants.Region[player.highestRegion()],
-                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
             // Update hatchery region filter to include new region if all previous regions selected
             if (BreedingFilters.region.value() == (2 << player.highestRegion() - 1) - 1) {
                 BreedingFilters.region.value((2 << player.highestRegion()) - 1);

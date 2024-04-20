@@ -38,7 +38,6 @@ class App {
             document.body.className = 'no-select';
             ko.applyBindings(App.game);
 
-            GameController.applyRouteBindings();
             Preload.hideSplashScreen();
 
             App.game.start();
