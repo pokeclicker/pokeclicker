@@ -6,8 +6,7 @@ class BattleFrontierRunner {
     static stage: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
     public static checkpoint: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
     public static highest: KnockoutObservable<number> = ko.observable(1);
-    public static frontierObservable: KnockoutObservable<BattleFrontier> = ko.observable(new BattleFrontier());
-    public static environments = Object.keys(GameConstants.Environments).filter(key => key !== 'Default');
+    public static environment: KnockoutObservable<GameConstants.Environment> = ko.observable('Default');
 
     public static counter = 0;
 
@@ -62,6 +61,11 @@ class BattleFrontierRunner {
         BattleFrontierRunner.timeLeftPercentage(100);
 
         this.checkpoint(this.stage());
+
+        if (this.stage() % 25 == 0) {
+            const environments = Object.keys(GameConstants.Environments).filter((key) => key !== 'Default');
+            BattleFrontierRunner.environment(Rand.fromArray(environments) as GameConstants.Environment);
+        }
     }
 
     public static end() {
@@ -139,12 +143,4 @@ class BattleFrontierRunner {
     public static hasCheckpoint = ko.computed(() => {
         return BattleFrontierRunner.checkpoint() > 1;
     })
-
-    public static getEnvironmentArea() {
-        const frontier = BattleFrontierRunner.frontierObservable();
-        if (this.stage() % 25 == 0){
-            frontier.environment = this.environments[Rand.intBetween(0, this.environments.length - 2)] as GameConstants.Environment;
-        }
-        return frontier.environment;
-    }
 }

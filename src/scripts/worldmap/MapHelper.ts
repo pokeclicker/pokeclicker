@@ -81,7 +81,7 @@ class MapHelper {
             (App.game.gameState == GameConstants.GameState.gym
                 ? GymRunner.getEnvironmentArea() : undefined) ||
             (App.game.gameState == GameConstants.GameState.battleFrontier
-                ? BattleFrontierRunner.getEnvironmentArea() : undefined) ||
+                ? BattleFrontierRunner.environment() : undefined) ||
             player.town()?.name ||
             undefined;
 

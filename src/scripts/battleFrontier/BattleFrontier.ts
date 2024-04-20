@@ -1,7 +1,6 @@
 class BattleFrontier implements Feature {
     name = 'BattleFrontier';
     saveKey = 'battleFrontier';
-    environment : GameConstants.Environment = 'Default';
 
     milestones = BattleFrontierMilestones;
 
