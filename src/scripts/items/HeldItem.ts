@@ -41,7 +41,7 @@ class HeldItem extends Item {
             },
             other: {
                 title: 'Other',
-                items: sortedHeldItems.filter(i => i.constructor.name === 'AttackBonusHeldItem'),
+                items: sortedHeldItems.filter(i => i.constructor.name === 'AttackBonusHeldItem' || i.constructor.name === 'HeldItem'),
             },
         };
     }
@@ -209,3 +209,18 @@ ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', undefined, GameConst
 
 ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);
+
+ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.money, undefined, 'Everstone', 'Stops the holder from evolving due to level or a stone being used. Also prevents new baby Pokémon from hatching.', GameConstants.Region.kanto,
+    (pokemon) => {
+        // level or stone evo
+        if (pokemon.evolutions?.length) {
+            for (const evo of pokemon.evolutions) {
+                if (evo.trigger === EvoTrigger.LEVEL || evo.trigger === EvoTrigger.STONE) {
+                    return true;
+                }
+            }
+        }
+        // babies
+        const baseFormName = App.game.breeding.calculateBaseForm(pokemon.name);
+        return pokemon.name != baseFormName;
+    });
