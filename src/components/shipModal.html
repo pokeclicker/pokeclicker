@@ -9,27 +9,39 @@
             </div>
             <div class="modal-body bg-ocean">
                 <img class="my-5" src='assets/images/ship.png' style='width: 100%;'>
-                <div style='margin-top:20px' data-bind="foreach: GameHelper.enumNumbers(GameConstants.Region).filter(r => r !== GameConstants.Region.none && r <= GameConstants.MAX_AVAILABLE_REGION)">
-                    <div class="btn-group w-100 my-1" data-bind="visible: $data <= player.highestRegion()">
-                        <button style="position: relative;" class='btn btn-block btn-success ship-modal-region-button'
-                            data-dismiss='modal'
-                            data-bind='click: () => { MapHelper.moveToRegion($data); $("#ShipModal").modal("hide");  },
-                            attr: { disabled: player.region == $data || !MapHelper.accessToShip() }'>
-                            <img style="position:absolute; left: 10px;" data-bind="visible: player.region == $data, attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/> <knockout data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[$data])">Region</knockout>
-                        </button>
-                        <!-- ko using: Weather.regionalWeather[$data], as: 'weatherType' -->
-                        <button class="btn btn-weather-dock" style="right: 0px; top: 0px; width: auto; padding: 0 4px;"
-                            data-bind='style: { background: Weather.weatherConditions[weatherType].color },
-                                tooltip: {
-                                    title: GameConstants.humanifyString(WeatherType[weatherType]),
-                                    placement: "bottom",
-                                    trigger: "hover",
-                                    boundary: "window",
-                                }'>
-                            <img width=30px src="" data-bind="attr: { src: `assets/images/weather/${WeatherType[weatherType]}.png` }"/>
-                        </button>
+                <div style='margin-top:20px'>
+                    <!-- ko foreach: GameHelper.enumNumbers(GameConstants.Region).filter(r => r !== GameConstants.Region.none && r <= GameConstants.MAX_AVAILABLE_REGION) -->
+                        <!-- ko if: $data <= player.highestRegion() -->
+                        <div class="btn-group w-100 my-1">
+                            <button style="position: relative;" class='btn btn-block btn-success ship-modal-region-button'
+                                data-dismiss='modal'
+                                data-bind='click: () => { MapHelper.moveToRegion($data); $("#ShipModal").modal("hide");  },
+                                    attr: { disabled: player.region === $data || !MapHelper.accessToShip() }'>
+                                <img style="position:absolute; left: 10px;" data-bind="visible: player.region == GameConstants.Region[$data], attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/> <knockout data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[$data])">Region</knockout>
+                            </button>
+                            <!-- ko using: Weather.regionalWeather[$data], as: 'weatherType' -->
+                            <button class="btn btn-weather-dock" style="right: 0px; top: 0px; width: auto; padding: 0 4px;"
+                                data-bind='style: { background: Weather.weatherConditions[weatherType].color },
+                                    tooltip: {
+                                        title: GameConstants.humanifyString(WeatherType[weatherType]),
+                                        placement: "bottom",
+                                        trigger: "hover",
+                                        boundary: "window",
+                                    }'>
+                                <img width=30px src="" data-bind="attr: { src: `assets/images/weather/${WeatherType[weatherType]}.png` }"/>
+                            </button>
+                            <!-- /ko -->
+                        </div>
                         <!-- /ko -->
-                    </div>
+                        <!-- ko if: $data > player.highestRegion() -->
+                        <div class="btn-group w-100 my-1">
+                            <button style="position: relative;" class='btn btn-block btn-success ship-modal-region-button'
+                                    data-bind='attr: { disabled: true }'>
+                                <knockout>Unexplored region</knockout>
+                            </button>
+                        </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
                 </div>
             </div>
         </div>
