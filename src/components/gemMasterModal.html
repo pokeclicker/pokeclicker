@@ -59,6 +59,13 @@
                                                             'evs': App.game.party.getPokemonByName($parent.item.itemType.type)?.evs() }}">
                                                     </span>
                                                 </knockout>
+                                                <knockout data-bind="if: ($parent.item.itemType instanceof EvolutionStone)">
+                                                    <span style="position: relative; top: -1px;"
+                                                          data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                            'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px',
+                                                            'evsProgress': $parent.item.itemType.getPokerusProgress() }}">
+                                                    </span>
+                                               </knockout>
                                             </span>
                                         </td>
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
