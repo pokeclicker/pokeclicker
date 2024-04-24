@@ -169,6 +169,7 @@ import EnergyRestore from './items/EnergyRestore';
 import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokerusIndicatingItem from './items/PokerusIndicatingItem';
 import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
@@ -384,6 +385,7 @@ Object.assign(<any>window, {
     EffectEngineRunner,
     ItemHandler,
     CaughtIndicatingItem,
+    PokerusIndicatingItem,
     PokemonItem,
     EggItem,
     MegaStoneItem,

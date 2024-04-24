@@ -150,15 +150,15 @@ type TmpAchievementHandler = {
     load: ()=>void
 };
 
-
-export type TmpPokemonFactoryType = {
+type TmpPokemonFactoryType = {
     generateShiny(chance: number, skipBonus?: boolean): boolean;
     generateGenderById(id: number): BattlePokemonGender;
 };
 
-export type TmpPartyControllerType = {
+type TmpPartyControllerType = {
     getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
     getPokerusStatusByName: (name: PokemonNameType) => Pokerus;
+    getEvsByName: (name: PokemonNameType) => number;
 };
 
 // Where all the magic happens

@@ -1,4 +1,4 @@
-import CaughtIndicatingItem from './CaughtIndicatingItem';
+import PokerusIndicatingItem from './PokerusIndicatingItem';
 import { PokemonNameType } from  '../pokemons/PokemonNameType';
 import CaughtStatus from '../enums/CaughtStatus';
 import { Computed as KnockoutComputed } from 'knockout';
@@ -11,18 +11,7 @@ import Notifier from '../notifications/Notifier';
 import { createLogContent } from '../logbook/helpers';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 
-// TODO remove this when PokemonFactory is moved to modules
-declare class PokemonFactory {
-    static generateShiny(chance: number, skipBonus?: boolean): boolean;
-    static generateGenderById(id: number): BattlePokemonGender;
-}
-// TODO remove this when PartyController is moved to modules
-declare class PartyController {
-    static getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
-    static getPokerusStatusByName: (name: PokemonNameType) => Pokerus;
-}
-
-export default class PokemonItem extends CaughtIndicatingItem {
+export default class PokemonItem extends PokerusIndicatingItem {
     type: PokemonNameType;
     private _translatedOrDisplayName: KnockoutComputed<string>;
 
@@ -91,6 +80,11 @@ export default class PokemonItem extends CaughtIndicatingItem {
 
     getPokerusStatus(): Pokerus {
         return PartyController.getPokerusStatusByName(this.type);
+    }
+
+    getPokerusProgress(): string {
+        const evs = PartyController.getEvsByName(this.type);
+        return evs >= 50 ? 'Already resistant!' : `EVs: ${evs.toLocaleString('en-US')} / 50`;
     }
 
     get image() {
