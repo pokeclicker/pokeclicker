@@ -38,10 +38,14 @@ export default class PokemonCategories implements Saveable {
             PokemonCategories.removeCategory(c.id, true);
         });
         PokemonCategories.initialize();
+        const none = PokemonCategories.getCategoryById(0);
+        none.name('None');
+        none.color('#333333');
     }
 
     public static addCategory(name: string, color: string, id: number = -1): void {
         if (id === -1) {
+            // Get next unused ID
             PokemonCategories.categories().forEach(c => {
                 id = Math.max(id, c.id);
             });
@@ -131,6 +135,15 @@ export default class PokemonCategories implements Saveable {
         }
     }
 
+    static getCategoryById(id: number) {
+        return PokemonCategories.categories().find(c => c.id === id);
+    }
+
+    static getCategoryByName(id: number) {
+        return PokemonCategories.categories().find(c => c.name === name);
+    }
+
+
     toJSON(): Record<string, any> {
         const categories = [];
         PokemonCategories.categories().forEach((c) => {
@@ -152,7 +165,7 @@ export default class PokemonCategories implements Saveable {
 
         const categoryOrder = json.categories?.map(c => c.id);
         json.categories?.forEach((category) => {
-            const cat = PokemonCategories.categories().find(c => c.id == category.id);
+            const cat = PokemonCategories.getCategoryById(category.id);
             if (cat) {
                 cat.name(category.name);
                 cat.color(category.color);
