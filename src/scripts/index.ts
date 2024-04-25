@@ -2,7 +2,7 @@
  * TODO(@Isha) refactor this to no longer be global but App properties.
  * Will be done after the major player refactor.
  */
-let player;
+let player = undefined;
 
 /**
  * Start the application when all html elements are loaded.
@@ -34,3 +34,5 @@ $(document).on('show.bs.modal', '.modal', function () {
         $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
     }, 0);
 });
+
+
