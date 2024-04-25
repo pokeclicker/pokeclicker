@@ -79,18 +79,25 @@ export default class PokemonCategories implements Saveable {
         }
 
         const cat = PokemonCategories.categories()[index];
-        const pokeballFilter = App.game.pokeballFilters.list().find(f => f.options?.category?.observableValue() == cat.id);
+        const pokeballFilters = App.game.pokeballFilters.list().filter(f => f.options?.category?.observableValue() == cat.id);
 
-        if (pokeballFilter) {
+        if (pokeballFilters.length) {
             if (force) {
                 // Forced remove (reset filters)
                 // When the category is used in a pokeball filter disable the filter and remove the category option.
-                pokeballFilter.enabled(false);
-                App.game.pokeballFilters.removeFilterOption(pokeballFilter, 'category');
+                pokeballFilters.forEach((filter => {
+                    filter.enabled(false);
+                    App.game.pokeballFilters.removeFilterOption(filter, 'category');
+                });
             } else {
+                const filterNames = pokeballFilters.map(f => `<strong>${f.name}</strong>`);
+                if (filterNames.length > 1) {
+                    filterNames[filterNames.length - 1] = `and ${filterNames[filterNames.length - 1]}`;
+                }
+                const namesString = filterNames.join(filterNames.length > 2 ? ', ' : ' ');
                 Notifier.notify({
                     title: 'Remove Category',
-                    message: `This category is in use by the <strong>${pokeballFilter.name}</strong> Pokéball filter and cannot be removed.`,
+                    message: `This category is in use by the ${namesString} Pokéball filter${filterNames.length > 1 ? 's' : ''} and cannot be removed.`,
                     type: NotificationConstants.NotificationOption.danger,
                     timeout: 1e4,
                 });
