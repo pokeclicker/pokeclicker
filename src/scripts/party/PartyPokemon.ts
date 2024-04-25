@@ -530,12 +530,18 @@ class PartyPokemon implements Saveable {
     }
 
     public addCategory(id: number) {
-        if (!this.category.includes(id)) {
+        if (id === 0) {
+            this.resetCategory();
+        } else if (!this.category.includes(id)) {
             this._category.push(id);
         }
     }
 
     public removeCategory(id: number) {
+        if (id === 0 && this.category.length === 1) {
+            // Can't remove None category without another category active
+            return;
+        }
         const index = this.category.indexOf(id);
         if (index > -1) {
             this._category.splice(index, 1);
@@ -546,11 +552,7 @@ class PartyPokemon implements Saveable {
         if (this.category.includes(id)) {
             this.removeCategory(id);
         } else {
-            if (id === 0) {
-                this.resetCategory();
-            } else {
-                this.addCategory(id);
-            }
+            this.addCategory(id);
         }
     }
 
@@ -558,7 +560,7 @@ class PartyPokemon implements Saveable {
         this.category = [...this.defaults.category];
     }
 
-    public isUncategorized = ko.pureComputed(() => this.category[0] === 0);
+    public isUncategorized = ko.pureComputed(() => this.category[0] === 0 && this.category.length === 1);
 
     public getCategorySortValues(): Array<number> {
         return PokemonCategories.categories().map((c, i) => [c.id, i])
