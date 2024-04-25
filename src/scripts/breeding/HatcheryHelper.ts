@@ -166,6 +166,7 @@ class HatcheryHelper {
         this.hatched(json.hatched || 0);
         this.categories(json.categories || []);
         this.useHatcheryFilters(json.useHatcheryFilters ?? true);
+        this.updateBonus();
     }
 }
 
