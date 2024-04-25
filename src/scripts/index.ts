@@ -2,7 +2,7 @@
  * TODO(@Isha) refactor this to no longer be global but App properties.
  * Will be done after the major player refactor.
  */
-let player = undefined;
+let player;
 
 /**
  * Start the application when all html elements are loaded.
@@ -35,4 +35,5 @@ $(document).on('show.bs.modal', '.modal', function () {
     }, 0);
 });
 
-
+// eslint-disable-next-line
+let unusedVariable = undefined;
