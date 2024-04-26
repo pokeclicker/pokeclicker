@@ -71,6 +71,7 @@ namespace GameConstants {
     declare const AMAZE_MULCH_PRODUCE_MULTIPLIER: number;
     declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
     declare const FREEZE_MULCH_MULTIPLIER: number;
+    declare const GOOEY_MULCH_CATCH_BONUS: number;
     declare const WANDER_RATE: number;
     declare const BerryColor: string[];
     declare const BASE_DUNGEON_SIZE: number;
