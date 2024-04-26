@@ -253,6 +253,8 @@ aria-labelledby="pokedexModalLabel">
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         },
+                                        disable: categoryModeSelected() === 0,
+                                        
                                         click: () => PartyController.removeCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected())">Remove All</button>
                                     </div>
                                     <!-- /ko -->
