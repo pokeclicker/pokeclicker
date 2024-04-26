@@ -37,6 +37,7 @@ export default class PokemonCategories implements Saveable {
         [...PokemonCategories.categories()].forEach(c => {
             PokemonCategories.removeCategory(c.id, true);
         });
+        ko.tasks.runEarly();
         PokemonCategories.initialize();
         const none = PokemonCategories.getCategoryById(0);
         none.name('None');
@@ -89,7 +90,7 @@ export default class PokemonCategories implements Saveable {
             if (force) {
                 // Forced remove (reset filters)
                 // When the category is used in a pokeball filter disable the filter and remove the category option.
-                pokeballFilters.forEach((filter => {
+                pokeballFilters.forEach(filter => {
                     filter.enabled(false);
                     App.game.pokeballFilters.removeFilterOption(filter, 'category');
                 });
@@ -138,11 +139,6 @@ export default class PokemonCategories implements Saveable {
     static getCategoryById(id: number) {
         return PokemonCategories.categories().find(c => c.id === id);
     }
-
-    static getCategoryByName(id: number) {
-        return PokemonCategories.categories().find(c => c.name === name);
-    }
-
 
     toJSON(): Record<string, any> {
         const categories = [];

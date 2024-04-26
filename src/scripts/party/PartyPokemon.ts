@@ -539,7 +539,7 @@ class PartyPokemon implements Saveable {
 
     public removeCategory(id: number) {
         if (id === 0 && this.category.length === 1) {
-            // Can't remove None category without another category active
+            // Can't remove None category without another category present
             return;
         }
         const index = this.category.indexOf(id);
