@@ -93,7 +93,7 @@
                                 <!-- ko foreach: GameHelper.enumStrings(GameConstants.VitaminType) -->
                                 <th class="text-center align-middle">
                                     <span data-bind="text: $data"></span><br />
-                                    <span class="font-weight-normal small" data-bind="text: `[ ${player._itemList[$data]().toLocaleString('en-US')} ]`"></span>
+                                    <span class="font-weight-normal small" data-bind="text: `[ ${player.itemList[$data]().toLocaleString('en-US')} ]`"></span>
                                 </th>
                                 <!-- /ko -->
                                 <th class="text-center align-middle">Breeding Efficiency</th>
