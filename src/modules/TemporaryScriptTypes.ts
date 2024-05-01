@@ -178,7 +178,7 @@ export type TmpSaveType = {
 };
 
 export type TmpPlayerType = {
-    route: KnockoutObservable<number>;
+    route: number;
     region: GameConstants.Region;
     subregion: number;
     town: TmpTownType;
