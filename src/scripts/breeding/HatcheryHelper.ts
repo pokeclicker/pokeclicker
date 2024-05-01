@@ -227,7 +227,7 @@ class HatcheryHelpers {
                     if (!pokemon.isHatchable()) {
                         return best;
                     }
-                    if (categories.length && categories.indexOf(pokemon.category) === -1) {
+                    if (categories.length && !categories.some((cat) => pokemon.category.includes(cat))) {
                         return best;
                     }
                     if (best === null) {
