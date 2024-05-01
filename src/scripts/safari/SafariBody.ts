@@ -497,7 +497,7 @@ class ShapedLandBody extends SafariBody {
         } while (change);
     }
 
-    /** SAND is temporarily used as FLOOR, because FLOOR is temporarily used as WATER. This so we do not change too much code everywhere */
+    /** sand is temporarily used as ground, because ground is temporarily used as water. This so we do not change too much code everywhere */
     constructor() {
         super();
         this.type = 'land';
