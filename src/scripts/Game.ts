@@ -173,7 +173,7 @@ class Game implements TmpGameType {
         }
 
         // If the player isn't on a route, they're in a town/dungeon
-        this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
+        this.gameState = player.route ? GameConstants.GameState.fighting : GameConstants.GameState.town;
     }
 
     computeOfflineEarnings() {
@@ -183,7 +183,7 @@ class Game implements TmpGameType {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
             let region: GameConstants.Region = player.region;
-            let route: number = player.route() || GameConstants.StartingRoutes[region];
+            let route: number = player.route || GameConstants.StartingRoutes[region];
             if (!MapHelper.validRoute(route, region)) {
                 route = 1;
                 region = GameConstants.Region.kanto;
@@ -203,7 +203,7 @@ class Game implements TmpGameType {
             if (numberOfPokemonDefeated === 0) {
                 return;
             }
-            const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
+            const routeMoney: number = PokemonFactory.routeMoney(player.route, player.region, false);
             const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
             const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
             App.game.wallet.gainMoney(moneyToEarn, true);
@@ -291,7 +291,7 @@ class Game implements TmpGameType {
         });
         // Check for breeding pokemons not in queue
         const breeding = [...App.game.breeding.eggList.map((l) => l().pokemon), ...App.game.breeding.queueList()];
-        App.game.party._caughtPokemon().filter((p) => p.breeding).forEach((p) => {
+        App.game.party.caughtPokemon.filter((p) => p.breeding).forEach((p) => {
             if (!breeding.includes(p.id)) {
                 p.breeding = false;
             }

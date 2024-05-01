@@ -382,6 +382,15 @@ class Plot implements Saveable {
                 this.notifications.push(FarmNotificationType.Dropped);
             }
 
+            // Check for Banetteite drop if Kasib died
+            if (this.berry == BerryType.Kasib) {
+                if (App.game.party.alreadyCaughtPokemonByName('Banette') && !player.hasMegaStone(GameConstants.MegaStoneType.Banettite)) {
+                    if (Rand.chance(0.05)) {
+                        player.gainMegaStone(GameConstants.MegaStoneType.Banettite);
+                    }
+                }
+            }
+
             // Check if berry replants itself
             const replantChance = Math.min(1, this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier());
             if (Rand.chance(replantChance)) {
@@ -426,7 +435,7 @@ class Plot implements Saveable {
             return undefined;
         }
         // Chance to generate wandering Pokemon
-        if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]() * (1 - App.game.farming.externalAuras[AuraType.Repel]()))) {
+        if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]())) {
             // Get a random Pokemon from the list of possible encounters
             const wanderer = PokemonFactory.generateWandererData(this);
             this.wanderer = wanderer;
@@ -444,16 +453,6 @@ class Plot implements Saveable {
                     LogBookTypes.WANDER,
                     createLogContent.wildWander({ pokemon : wanderer.name })
                 );
-            }
-            // Check for Starf berry generation
-            if (wanderer.shiny) {
-                const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
-                // No Starf generation if no empty plots :(
-                if (emptyPlots.length) {
-                    const chosenPlot = emptyPlots[Rand.floor(emptyPlots.length)];
-                    chosenPlot.plant(BerryType.Starf);
-                    App.game.farming.unlockBerry(BerryType.Starf);
-                }
             }
 
             return wanderer;
