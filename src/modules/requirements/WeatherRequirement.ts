@@ -1,4 +1,4 @@
-import { AchievementOption } from '../GameConstants';
+import { AchievementOption, humanifyString } from '../GameConstants';
 import Weather from '../weather/Weather';
 import WeatherType from '../weather/WeatherType';
 import Requirement from './Requirement';
@@ -16,6 +16,6 @@ export default class WeatherRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `The weather needs to be ${this.weather.map((weather) => WeatherType[weather]).join(' or ')}`;
+        return `The weather needs to be ${this.weather.map((weather) => humanifyString(WeatherType[weather])).join(' or ')}`;
     }
 }

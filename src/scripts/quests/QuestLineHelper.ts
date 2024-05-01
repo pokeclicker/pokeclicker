@@ -43,7 +43,7 @@ class QuestLineHelper {
                     exitOnEsc: false,
                     showButtons: false,
                 });
-                const caughtSelector: HTMLElement = document.querySelector('.pokeball-small.clickable.pokeball-selected');
+                const caughtSelector: HTMLElement = document.querySelector('tr[data-name="Caught"] img.pokeball-small.clickable.pokeball-selected');
                 caughtSelector.addEventListener('click', () => {
                     Information.hide();
                     $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
@@ -316,14 +316,10 @@ class QuestLineHelper {
         const buyExplorerKit = new CustomQuest(1, 0, 'Buy the Explorer Kit from Cinnabar Island Shop.', () => +App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit)).withInitialValue(0);
         undergroundQuestLine.addQuest(buyExplorerKit);
 
-        // Mine 5 layers in the Unerground
+        // Mine 5 layers in the Underground
         const oldAmberReward = () => {
             // Gain an Old Amber
-            const oldAmber = UndergroundItems.list.find(item => item.name == 'Old Amber');
-            if (!oldAmber) {
-                return console.error('Unable to find item Old Amber');
-            }
-            Underground.gainMineItem(oldAmber.id);
+            ItemList.Old_amber.gain(1);
             Notifier.notify({
                 title: undergroundQuestLine.name,
                 message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
@@ -393,6 +389,34 @@ class QuestLineHelper {
     }
 
     /* Johto QuestLines */
+
+    // Started upon defeating Ecruteak City's gym
+    public static createSickAmpharosQuestLine() {
+        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmines Ampharos seems to be sick!');
+
+        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City');
+        sickAmpharosQuestLine.addQuest(clearOlivineLighthouse);
+
+        const talkToJasmine1 = new TalkToNPCQuest(OlivineLighthouseJasmine1, 'Talk to Jasmine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(talkToJasmine1);
+
+        const talkToHerbalist1 = new TalkToNPCQuest(CianwoodCityPharmacist1, 'Talk to the Pharmacist in Cianwood City.');
+        sickAmpharosQuestLine.addQuest(talkToHerbalist1);
+
+        const clearCianwoodCityGym = new DefeatGymQuest(1, 0, 'Cianwood City').withDescription('The Pharmacist said he needs some time to finish Amphys medicine. Clear the Cianwood City Gym in the meantime.');
+        sickAmpharosQuestLine.addQuest(clearCianwoodCityGym);
+
+        const talkToHerbalist2 = new TalkToNPCQuest(CianwoodCityPharmacist2, 'Talk to the Pharmacist in Cianwood City.');
+        sickAmpharosQuestLine.addQuest(talkToHerbalist2);
+
+        const giveMedicineToAmphy = new TalkToNPCQuest(OlivineLighthouseMedicineAmphy, 'Give Amphy their medicine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(giveMedicineToAmphy);
+
+        const talkToJasmine2 = new TalkToNPCQuest(OlivineLighthouseJasmine2, 'Talk to Jasmine in the Olivine Lighthouse.');
+        sickAmpharosQuestLine.addQuest(talkToJasmine2);
+
+        App.game.quests.questLines().push(sickAmpharosQuestLine);
+    }
 
     // Started upon defeating Ecruteak City's gym.
     public static createRocketJohtoQuestLine() {
@@ -585,17 +609,7 @@ class QuestLineHelper {
         const talktoIlexForestShrine1 = new TalkToNPCQuest(IlexForestShrine1, 'Investigate the shrine in Ilex Forest.');
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
 
-        const SpikyEaredPichuReward = () => {
-            App.game.party.gainPokemonByName('Spiky-eared Pichu');
-            Notifier.notify({
-                title: celebiJohtoQuestLine.name,
-                message: 'You captured the Spiky-eared Pichu!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const clearSpikyEaredPichu = new DefeatTemporaryBattleQuest('Spiky-eared Pichu', 'Defeat the strange Pichu.').withCustomReward(SpikyEaredPichuReward);
+        const clearSpikyEaredPichu = new DefeatTemporaryBattleQuest('Spiky-eared Pichu', 'Defeat the strange Pichu.');
         celebiJohtoQuestLine.addQuest(clearSpikyEaredPichu);
 
         const talktoProfOak4 = new TalkToNPCQuest(AzaleaCelebiOak2, 'Talk to Professor Oak in Azalea Town.');
@@ -720,14 +734,10 @@ class QuestLineHelper {
 
         // Capture 200 Psychic type Pokemon
         const mindPlateReward = () => {
-            const mindPlate = UndergroundItems.list.find(item => item.name == 'Mind Plate');
-            if (!mindPlate) {
-                return console.error('Unable to find item Mind Plate');
-            }
-            Underground.gainMineItem(mindPlate.id, 20);
+            ItemList.Mind_plate.gain(20);
             Notifier.notify({
                 title: deoxysQuestLine.name,
-                message: `You have gained 20 ${mindPlate.name}s!`,
+                message: 'You have gained 20 Mind Plates!',
                 type: NotificationConstants.NotificationOption.success,
             });
         };
@@ -743,7 +753,9 @@ class QuestLineHelper {
                 timeout: 3e4,
             });
         };
-        const reachStage100 = new CustomQuest(100, 0, 'Defeat stage 100 in the Battle Frontier.', App.game.statistics.battleFrontierHighestStageCompleted).withInitialValue(0).withCustomReward(reachStage100Reward);
+        const deoxysMilestone = BattleFrontierMilestones.milestoneRewards.find(m => (m as BattleFrontierMilestonePokemon).pokemonName === 'Deoxys');
+        // Initial value of 0. Should not be required unless the save is corrupt.
+        const reachStage100 = new CustomQuest(1, 0, 'Enter the Battle Frontier and defeat stage 100.', () => +deoxysMilestone.obtained()).withInitialValue(0).withCustomReward(reachStage100Reward);
         deoxysQuestLine.addQuest(reachStage100);
 
         App.game.quests.questLines().push(deoxysQuestLine);
@@ -853,7 +865,7 @@ class QuestLineHelper {
         const collectPinkanMaterials = new MultipleQuestsQuest(
             [
                 new GainGemsQuest(1000, 0, PokemonType.Fairy),
-                new CustomQuest(10, 0, 'Gain 10 Pixie Plates', () => player.mineInventory().find(item => item.name == 'Pixie Plate')?.amount() ?? 0),
+                new CustomQuest(10, 0, 'Gain 10 Pixie Plates', () => player.itemList.Pixie_plate()),
             ], 'Collect Fairy Gems and Pixie Plates');
         pinkanThemeparkQuestLine.addQuest(collectPinkanMaterials);
 
@@ -1280,19 +1292,19 @@ class QuestLineHelper {
         const talktoMesprit = new TalkToNPCQuest(VerityMesprit, 'Ask Mesprit about the Distortion World in Lake Verity.');
         giratinaQuestLine.addQuest(talktoMesprit);
 
-        const obtain10PurpleShards = new CustomQuest(10, 0, 'Obtain 10 Purple Shards.', () => player.mineInventory().find(item => item.name == 'Purple Shard')?.amount() ?? 0);
+        const obtain10PurpleShards = new CustomQuest(10, 0, 'Obtain 10 Purple Shards.', () => player.itemList.Purple_shard());
         giratinaQuestLine.addQuest(obtain10PurpleShards);
 
         const talktoAzelf = new TalkToNPCQuest(ValorAzelf, 'Ask Azelf about the Distortion World in Lake Valor.');
         giratinaQuestLine.addQuest(talktoAzelf);
 
-        const obtain10OchreShards = new CustomQuest(10, 0, 'Obtain 10 Ochre Shards.', () => player.mineInventory().find(item => item.name == 'Ochre Shard')?.amount() ?? 0);
+        const obtain10OchreShards = new CustomQuest(10, 0, 'Obtain 10 Ochre Shards.', () => player.itemList.Ochre_shard());
         giratinaQuestLine.addQuest(obtain10OchreShards);
 
         const talktoUxie = new TalkToNPCQuest(AcuityUxie, 'Ask Uxie about the Distortion World in Lake Acuity.');
         giratinaQuestLine.addQuest(talktoUxie);
 
-        const obtain10CrimsonShards = new CustomQuest(10, 0, 'Obtain 10 Crimson Shards.', () => player.mineInventory().find(item => item.name == 'Crimson Shard')?.amount() ?? 0);
+        const obtain10CrimsonShards = new CustomQuest(10, 0, 'Obtain 10 Crimson Shards.', () => player.itemList.Crimson_shard());
         giratinaQuestLine.addQuest(obtain10CrimsonShards);
 
         const clearSendoffSpring = new DefeatDungeonQuest(1, 0, 'Sendoff Spring').withDescription('Clear Sendoff Spring to meet the Lake Trio.');
@@ -1304,7 +1316,7 @@ class QuestLineHelper {
         const chargeDistortionKey = new MultipleQuestsQuest(
             [
                 new GainGemsQuest(500, 0, PokemonType.Ghost),
-                new CustomQuest(1, 0, 'Gain 1 Spooky Plate.', () => player.mineInventory().find(item => item.name == 'Spooky Plate')?.amount() ?? 0),
+                new CustomQuest(1, 0, 'Gain 1 Spooky Plate.', () => player.itemList.Spooky_plate()),
             ], 'Charge the key to the Distortion World.');
         giratinaQuestLine.addQuest(chargeDistortionKey);
 
@@ -1443,6 +1455,92 @@ class QuestLineHelper {
         plasmaUnovaQuestLine.addQuest(clearGhetsis2);
 
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
+    }
+
+    // Swords of Justice quest
+    public static createSwordsQuestLine() {
+        const swordsofJusticeQuest = new QuestLine('Swords of Justice', 'The Swords of Justice sense something bad is about to happen, will you be able to help them out?', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), GameConstants.BulletinBoards.Unova);
+
+        const talkToOldManSwords = new TalkToNPCQuest(OldManSwords, 'Talk to the Old Man in Mistralton Cave for clues on where the Swords of Justice are.');
+        swordsofJusticeQuest.addQuest(talkToOldManSwords);
+
+        const searchForCobalion1 = new DefeatDungeonQuest(5, 0, 'Mistralton Cave').withDescription('Search around Mistralton Cave to see if you can find Cobalion, as the Old Man said.');
+        swordsofJusticeQuest.addQuest(searchForCobalion1);
+
+        const talkToCobalion1 = new TalkToNPCQuest(Cobalion1, 'It looks like you\'ve found Cobalion! Talk to them.');
+        swordsofJusticeQuest.addQuest(talkToCobalion1);
+
+        const reuniteTerrakion = new DefeatDungeonQuest(5, 0, 'Victory Road Unova').withDescription('Start reuniting the Swords of Justice once again. You should probably start looking for Terrakion around Unova\'s Victory Road.');
+        swordsofJusticeQuest.addQuest(reuniteTerrakion);
+
+        const talkToTerrakion1 = new TalkToNPCQuest(Terrakion1, 'You\'ve found Terrakion! Talk to them about the reunion.');
+        swordsofJusticeQuest.addQuest(talkToTerrakion1);
+
+        const proveTerrakion = new DefeatTemporaryBattleQuest('Terrakion 1', 'Defeat Terrakion to prove you\'re worthy of their trust.');
+        swordsofJusticeQuest.addQuest(proveTerrakion);
+
+        const talkToCobalion2 = new TalkToNPCQuest(Cobalion2, 'Talk to Cobalion at the Moor of Icirrus to learn where to find Virizion.');
+        swordsofJusticeQuest.addQuest(talkToCobalion2);
+
+        const reuniteVirizion = new DefeatDungeonQuest(5, 0, 'Pinwheel Forest').withDescription('Now that you know where to find Virizion, search for them in Pinwheel Forest.');
+        swordsofJusticeQuest.addQuest(reuniteVirizion);
+
+        const talkToVirizion1 = new TalkToNPCQuest(Virizion1, 'Now that you\'ve found Virizion, tell them to meet the others at the Moor of Icirrus.');
+        swordsofJusticeQuest.addQuest(talkToVirizion1);
+
+        const proveVirizion = new GainGemsQuest(5000, 0, PokemonType.Grass).withDescription('Virizion is asking you to gather 5,000 Grass Gems to prove you\'re a trustworthy ally. Collect the gems and return to Pinwheel Forest to prove your worth.');
+        swordsofJusticeQuest.addQuest(proveVirizion);
+
+        const talkToVirizion2 = new TalkToNPCQuest(Virizion2, 'Now that you\'ve gathered all of the Grass Gems, talk to Virizion in Pinwheel Forest once again.');
+        swordsofJusticeQuest.addQuest(talkToVirizion2);
+
+        const talkToCobalion3 = new TalkToNPCQuest(Cobalion3, 'Meet up with the Swords of Justice at Moor of Icirrus and talk to Cobalion.');
+        swordsofJusticeQuest.addQuest(talkToCobalion3);
+
+        const defeatSwordsofJustice = new DefeatTemporaryBattleQuest('Swords of Justice 1', 'They need you to prove you\'re strong enough to deal with the possible dangers. Defeat the Swords of Justice!');
+        swordsofJusticeQuest.addQuest(defeatSwordsofJustice);
+
+        const searchForKyurem1 = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('Now that you\'ve proven you\'re strong enough to help, take Cobalion\'s advice and search for Kyurem in the Giant Chasm.');
+        swordsofJusticeQuest.addQuest(searchForKyurem1);
+
+        const talkToCobalion4 = new TalkToNPCQuest(Cobalion4, 'Report your findings to Cobalion at the Moor of Icirrus.');
+        swordsofJusticeQuest.addQuest(talkToCobalion4);
+
+        const defeatKyurem1 = new DefeatTemporaryBattleQuest('Kyurem 1', 'Looks like Cobalion has seen Kyurem near Lacunosa Town. Go there and defeat Kyurem before it hurts any citizens.');
+        swordsofJusticeQuest.addQuest(defeatKyurem1);
+
+        const talkToCobalion5 = new TalkToNPCQuest(Cobalion5, 'Seems like Kyurem has fled the town. You should talk to Cobalion while you\'re there.');
+        swordsofJusticeQuest.addQuest(talkToCobalion5);
+
+        const searchForKyurem2 = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('Kyurem is probably hiding in the Giant Chasm. Find its lair.');
+        swordsofJusticeQuest.addQuest(searchForKyurem2);
+
+        const defeatKyurem2 = new DefeatTemporaryBattleQuest('Kyurem 2', 'You\'ve finally found Kyurem! Defeat them with the help of the Swords of Justice.');
+        swordsofJusticeQuest.addQuest(defeatKyurem2);
+
+        const TalkToCobalion6 = new TalkToNPCQuest(Cobalion6, 'Kyurem has injured the Swords of Justice, go check on Cobalion.');
+        swordsofJusticeQuest.addQuest(TalkToCobalion6);
+
+        const defeatKyurem3 = new DefeatTemporaryBattleQuest('Kyurem 3', 'Defeat Kyurem and stop it from causing any more harm!');
+        swordsofJusticeQuest.addQuest(defeatKyurem3);
+
+        const TalkToCobalion7 = new TalkToNPCQuest(Cobalion7, 'Talk to Cobalion.');
+        const TalkToTerrakion2 = new TalkToNPCQuest(Terrakion2, 'Talk to Terrakion.');
+        const TalkToVirizion3 = new TalkToNPCQuest(Virizion3, 'Talk to Virizion.');
+        swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
+            [TalkToCobalion7, TalkToTerrakion2, TalkToVirizion3],
+            'You\'ve finally defeated Kyurem, sealing them within the Giant Chasm forever. Talk to the Swords of Justice in the Giant Chasm.'
+        ));
+
+        const CatchCobalion = new CaptureSpecificPokemonQuest('Cobalion').withDescription('Capture the Leader of the Swords of Justice, Cobalion, in Mistralton Cave.');
+        const CatchTerrakion = new CaptureSpecificPokemonQuest('Terrakion').withDescription('Capture the Toughest of the Swords of Justice, Terrakion, in Victory Road.');
+        const CatchVirizion = new CaptureSpecificPokemonQuest('Virizion').withDescription('Capture the Cleverest of the Swords of Justice, Virizion, in Pinwheel Forest.');
+        swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
+            [CatchCobalion, CatchTerrakion, CatchVirizion],
+            'The Swords of Justice all depart for their homes to wait for your arrival. Go catch your new friends and add them to your team!'
+        ));
+
+        App.game.quests.questLines().push(swordsofJusticeQuest);
     }
 
     // Genesect quest - Available after clearing P2 lab
@@ -1656,9 +1754,9 @@ class QuestLineHelper {
 
         // Talk to Fossil Scientist after beating Team Flare Grunt
         const KalosFossilReward = () => {
-            const item = Rand.boolean() ? 'Sail Fossil' : 'Jaw Fossil';
+            const item = Rand.boolean() ? 'Sail_fossil' : 'Jaw_fossil';
 
-            Underground.gainMineItem(UndergroundItems.getByName(item).id, 1);
+            ItemList[item].gain(1);
             Notifier.notify({
                 title: flareKalosQuestLine.name,
                 message: `Fossil Scientist has given you a ${GameConstants.humanifyString(item)}!`,
@@ -1873,7 +1971,7 @@ class QuestLineHelper {
 
         const clearGranite = new DefeatDungeonQuest(10, 0, 'Granite Cave').withDescription('Clear Granite Cave 10 times.');
 
-        const findStars = new CustomQuest(1, 0, 'Find a Star Piece.', () => player.mineInventory().find(item => item.name == 'Star Piece')?.amount() ?? 0);
+        const findStars = new CustomQuest(1, 0, 'Find a Star Piece.', () => player.itemList.Star_piece());
 
         deltaEpisodeQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -2020,7 +2118,7 @@ class QuestLineHelper {
 
         const findMysticWater = new CustomQuest(1, 0, 'Find one Mystic Water.', () => player.itemList.Mystic_Water());
 
-        const findHeatRocks = new CustomQuest(3, 0, 'Find 3 Heat Rocks.', () => player.mineInventory().find(item => item.name == 'Heat Rock')?.amount() ?? 0);
+        const findHeatRocks = new CustomQuest(3, 0, 'Find 3 Heat Rocks.', () => player.itemList.Heat_rock());
 
         primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -2063,7 +2161,7 @@ class QuestLineHelper {
                 talkToPrimalMaxie,
             ], 'Find out what the Team Leaders are up to at Mt. Pyre.'));
 
-        const fightPrimalGroudon = new DefeatTemporaryBattleQuest('Primal Groudon', 'Defeat Primal Groudon in Sunny Weather.');
+        const fightPrimalGroudon = new DefeatTemporaryBattleQuest('Primal Groudon', 'Defeat Primal Groudon in Harsh Sunlight Weather.');
         const fightPrimalKyogre = new DefeatTemporaryBattleQuest('Primal Kyogre', 'Defeat Primal Kyogre in Raining Weather.');
 
         primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
@@ -2219,41 +2317,6 @@ class QuestLineHelper {
 
         // Add quest to quest line
         App.game.quests.questLines().push(vivillonQuestLine);
-    }
-
-    // Available post-E4
-    public static createAshKetchumQuestLine() {
-        const ashKetchumQuestLine = new QuestLine('The New Kid', 'A new kid from your home town is making waves. Show him who the real prodigy of Pallet Town is.', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), GameConstants.BulletinBoards.Kalos);
-
-        const clearKantoAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Kanto', 'Defeat the kid near Pallet Town.');
-        ashKetchumQuestLine.addQuest(clearKantoAsh);
-
-        const clearJohtoAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Johto', 'He\'s not stopping. Find the kid in Johto.');
-        ashKetchumQuestLine.addQuest(clearJohtoAsh);
-
-        const clearHoennAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Hoenn', 'He just won\'t learn his lesson. Defeat the kid again in Hoenn.');
-        ashKetchumQuestLine.addQuest(clearHoennAsh);
-
-        const clearSinnohAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Sinnoh', 'Who does this kid think he is anyway? Pretending he\'s the main character. He\'s in Sinnoh now.');
-        ashKetchumQuestLine.addQuest(clearSinnohAsh);
-
-        const clearUnovaAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Unova', 'The kid is hiding in Unova!');
-        ashKetchumQuestLine.addQuest(clearUnovaAsh);
-
-        const AshKetchumReward = () => {
-            App.game.party.gainPokemonByName('Ash-Greninja');
-            Notifier.notify({
-                title: ashKetchumQuestLine.name,
-                message: 'You obtained Ash-Greninja!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const clearKalosAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Kalos', 'Maybe you were too hard on the kid... You should offer him an apology in Kalos.').withCustomReward(AshKetchumReward);
-        ashKetchumQuestLine.addQuest(clearKalosAsh);
-
-        App.game.quests.questLines().push(ashKetchumQuestLine);
     }
 
     // Available post-E4, must have captured Doublade
@@ -3760,10 +3823,10 @@ class QuestLineHelper {
     }
 
     public static createPaldeaStarfallQuestLine() {
-        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Casseiopia disband Team Star.');
+        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Cassiopeia disband Team Star.');
 
-        const clearCasseiopia = new DefeatGymQuest(1, 0, 'Penny of Team Star').withDescription('Penny has revealed herself to be Casseiopia. Defeat her at Naranjuva Academy.');
-        paldeaStarfallQuestLine.addQuest(clearCasseiopia);
+        const clearCassiopeia = new DefeatGymQuest(1, 0, 'Penny of Team Star').withDescription('Penny has revealed herself to be Cassiopeia. Defeat her at Naranjuva Academy.');
+        paldeaStarfallQuestLine.addQuest(clearCassiopeia);
 
         App.game.quests.questLines().push(paldeaStarfallQuestLine);
     }
@@ -3821,6 +3884,7 @@ class QuestLineHelper {
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
         this.createPersonsofInterestQuestLine();
+        this.createSickAmpharosQuestLine();
         this.createRocketJohtoQuestLine();
         this.createJohtoBeastsQuestLine();
         this.createJohtoSuicuneQuestLine();
@@ -3841,6 +3905,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createSwordsQuestLine();
         this.createGenesectQuestLine();
         this.createOrreXDQuestLine();
         this.createDeltaEpisodeQuestLine();
@@ -3850,7 +3915,6 @@ class QuestLineHelper {
         this.createFlareKalosQuestLine();
         this.createPrincessDiancieQuestLine();
         this.createClashOfAgesQuestLine();
-        this.createAshKetchumQuestLine();
         this.createUnrivaledPowerQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();

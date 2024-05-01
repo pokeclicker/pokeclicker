@@ -10,6 +10,9 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
     ) {
         super(amount, reward);
         this.region = GameConstants.getDungeonRegion(this.dungeon);
+        if (this.region == GameConstants.Region.none) {
+            throw new Error(`Invalid dungeon for quest: ${this.dungeon}`);
+        }
         this.focus = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.dungeon)];
     }
 

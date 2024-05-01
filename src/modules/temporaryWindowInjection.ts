@@ -6,7 +6,6 @@ import Profile from './profile/Profile';
 import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
-import LogEvent from './LogEvent';
 // enums
 import AuraType from './enums/AuraType';
 import BadgeEnums from './enums/Badges';
@@ -26,6 +25,7 @@ import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
+import FarmingTool from './enums/FarmingTool';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -142,6 +142,8 @@ import KeyItem from './keyItems/KeyItem';
 import KeyItems from './keyItems/KeyItems';
 import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
+import GemDeals from './gems/GemDeals';
+import FluteEffectRunner from './gems/FluteEffectRunner';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
 import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
@@ -151,7 +153,7 @@ import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import ClientRequirement from './requirements/ClientRequirement';
 import ContestWonRequirement from './requirements/ContestWonRequirement';
-import lazyLoad from './utilities/LazyLoader';
+import { lazyLoad, lazyLoadCallback } from './utilities/LazyLoader';
 import {
     beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
 } from './pokemons/evolutions/Base';
@@ -167,6 +169,7 @@ import EnergyRestore from './items/EnergyRestore';
 import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
@@ -198,13 +201,13 @@ import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
+import DamageCalculator from './types/DamageCalculator';
 
 Object.assign(<any>window, {
     SaveSelector,
     Profile,
     GameConstants,
     GameHelper,
-    LogEvent,
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
@@ -226,6 +229,7 @@ Object.assign(<any>window, {
     QuestLineState,
     WeatherForecastStatus,
     SafariEnvironments,
+    FarmingTool,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -348,6 +352,8 @@ Object.assign(<any>window, {
     KeyItems,
     Achievement,
     Gems,
+    GemDeals,
+    FluteEffectRunner,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
     QuestLineStartedRequirement,
@@ -360,6 +366,7 @@ Object.assign(<any>window, {
     ClientRequirement,
     ContestWonRequirement,
     lazyLoad,
+    lazyLoadCallback,
     LevelEvolution,
     StoneEvolution,
     EvoTrigger,
@@ -377,6 +384,7 @@ Object.assign(<any>window, {
     EffectEngineRunner,
     ItemHandler,
     CaughtIndicatingItem,
+    PokemonItem,
     EggItem,
     MegaStoneItem,
     PokeballItem,
@@ -406,4 +414,5 @@ Object.assign(<any>window, {
     SafariCatchRequirement,
     ItemRequirement,
     ChristmasPresent,
+    DamageCalculator,
 });

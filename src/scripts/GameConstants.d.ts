@@ -59,6 +59,7 @@ namespace GameConstants {
     declare const PLATE_VALUE: number;
     declare const EGG_CYCLE_MULTIPLIER: number;
     declare const BREEDING_ATTACK_BONUS: number;
+    declare const BREEDING_SHINY_ATTACK_MULTIPLIER: number;
     declare const FARM_PLOT_WIDTH: number;
     declare const FARM_PLOT_HEIGHT: number;
     declare const BerryDistribution: number[];
@@ -70,6 +71,7 @@ namespace GameConstants {
     declare const AMAZE_MULCH_PRODUCE_MULTIPLIER: number;
     declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
     declare const FREEZE_MULCH_MULTIPLIER: number;
+    declare const GOOEY_MULCH_CATCH_BONUS: number;
     declare const WANDER_RATE: number;
     declare const BerryColor: string[];
     declare const BASE_DUNGEON_SIZE: number;
@@ -202,7 +204,6 @@ namespace GameConstants {
     declare const QUESTS_PER_SET: number;
     declare const BASE_EP_YIELD: number;
     declare const STONE_EP_YIELD: number;
-    declare const WANDERER_EP_YIELD: number;
     declare const SHOPMON_EP_YIELD: number;
     declare const SAFARI_EP_YIELD: number;
     declare const SHINY_EP_MODIFIER: number;
@@ -211,6 +212,8 @@ namespace GameConstants {
     declare const DUNGEON_BOSS_EP_MODIFIER: number;
     declare const ROAMER_EP_MODIFIER: number;
     declare const SHADOW_EP_MODIFIER: number;
+    declare const BASE_WANDERER_EP_MODIFIER: number;
+    declare const WANDERER_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const GRISEOUS_ITEM_CHANCE: number;
@@ -383,6 +386,7 @@ namespace GameConstants {
         'Gimmighoul_coin',
         'Syrupy_apple',
         'Unremarkable_teacup',
+        'Metal_alloy',
     }
     declare enum FossilPieceType {
         'None',
@@ -731,6 +735,8 @@ namespace GameConstants {
     }
     declare enum PaldeaSubRegions {
         Paldea,
+        Kitakami,
+        BlueberryAcademy,
     }
     declare enum FinalSubRegions {
         Final,

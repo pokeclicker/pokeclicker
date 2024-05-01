@@ -97,21 +97,20 @@ class Egg implements Saveable {
         this.steps(this.steps() + amount);
         // Notify that the egg is ready to hatch
         if (this.canHatch() && !helper && !this.notified) {
+            let notifMessage;
             if (this.type == EggType.Pokemon) {
-                Notifier.notify({
-                    message: `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()} is ready to hatch!`,
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
-                    setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
-                });
+                notifMessage = `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()} is ready to hatch!`;
+            } else if (this.type == EggType.Fossil) {
+                notifMessage = `The ${GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(this.pokemon).name]} is ready to revive!`;
             } else {
-                Notifier.notify({
-                    message: 'An egg is ready to hatch!',
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
-                    setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
-                });
+                notifMessage = 'An egg is ready to hatch!';
             }
+            Notifier.notify({
+                message: notifMessage,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Hatchery.ready_to_hatch,
+                setting: NotificationConstants.NotificationSetting.Hatchery.ready_to_hatch,
+            });
             this.notified = true;
         }
     }
@@ -134,8 +133,9 @@ class Egg implements Saveable {
         const shadow = GameConstants.ShadowStatus.None;
         if (partyPokemon) {
             // Increase attack
-            partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)));
-            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]() * (efficiency / 100)));
+            const shinyMultiplier = shiny ? GameConstants.BREEDING_SHINY_ATTACK_MULTIPLIER : 1;
+            partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)) * shinyMultiplier);
+            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]() * (efficiency / 100)) * shinyMultiplier);
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {
@@ -143,12 +143,11 @@ class Egg implements Saveable {
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
-                if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
-                    partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
-                }
-                if (partyPokemon.evs() >= 50 && partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
-                    partyPokemon.pokerus = GameConstants.Pokerus.Resistant;
-                }
+            }
+
+            // Update pokerus status
+            if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
+                partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
             }
         }
 
@@ -178,18 +177,20 @@ class Egg implements Saveable {
         App.game.party.gainPokemonById(pokemonID, shiny, undefined, gender);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
-        const pokemonName = PokemonHelper.getPokemonById(this.pokemon).name;
-        const baseFormName = App.game.breeding.calculateBaseForm(pokemonName);
-        const baseForm = PokemonHelper.getPokemonByName(baseFormName);
-        if (pokemonName != baseFormName && !App.game.party.alreadyCaughtPokemon(baseForm.id)) {
-            Notifier.notify({
-                message: `You also found ${GameHelper.anOrA(baseFormName)} ${baseFormName} nearby!`,
-                pokemonImage: PokemonHelper.getImage(baseForm.id),
-                type: NotificationConstants.NotificationOption.success,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-            });
-            App.game.party.gainPokemonById(baseForm.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BREEDING));
+        if (partyPokemon?.heldItem() !== ItemList.Everstone) { // Everstone prevents baby forms
+            const pokemonName = PokemonHelper.getPokemonById(this.pokemon).name;
+            const baseFormName = App.game.breeding.calculateBaseForm(pokemonName);
+            const baseForm = PokemonHelper.getPokemonByName(baseFormName);
+            if (pokemonName != baseFormName && !App.game.party.alreadyCaughtPokemon(baseForm.id)) {
+                Notifier.notify({
+                    message: `You also found ${GameHelper.anOrA(baseFormName)} ${baseFormName} nearby!`,
+                    pokemonImage: PokemonHelper.getImage(baseForm.id),
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.General.new_catch,
+                    setting: NotificationConstants.NotificationSetting.General.new_catch,
+                });
+                App.game.party.gainPokemonById(baseForm.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BREEDING));
+            }
         }
 
         // Update statistics
