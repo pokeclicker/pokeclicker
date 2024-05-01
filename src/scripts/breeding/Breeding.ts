@@ -303,7 +303,7 @@ class Breeding implements Feature {
         const queueSize = this._queueList().length;
         if (queueSize > index) {
             const pokemonId = this._queueList.splice(index, 1)[0];
-            App.game.party._caughtPokemon().find(p => p.id == pokemonId).breeding = false;
+            App.game.party.getPokemon(pokemonId).breeding = false;
             return true;
         }
         return false;
