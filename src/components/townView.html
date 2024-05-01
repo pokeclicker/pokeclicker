@@ -1,39 +1,39 @@
 <knockout data-bind="if: App.game.gameState === GameConstants.GameState.town">
-<div id="townView" data-bind="style: { backgroundImage: `url('assets/images/towns/${player.town().name.replace(/'/, `\\'`)}.png')` }"
+<div id="townView" data-bind="style: { backgroundImage: `url('assets/images/towns/${player.town.name.replace(/'/, `\\'`)}.png')` }"
      class="justify-content-center no-gutters no-select">
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
             <button type="button" class="btn btn-outline-info" style="float: right;"
-                data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
+                data-bind="visible: player.town instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
 
-            <div class="pageItemTitle d-flex justify-content-center" data-bind="let: { isDungeon: player.town() instanceof DungeonTown && player.town().dungeon }">
+            <div class="pageItemTitle d-flex justify-content-center" data-bind="let: { isDungeon: player.town instanceof DungeonTown && player.town.dungeon }">
                 <div class="title-left" data-bind="if: isDungeon">
                     <div class="d-flex align-items-center ml-1 mr-auto">
                         <div class="d-flex flex-column">
                             <!--If all Pokémon in the dungeon are caught-->
-                            <div data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))" style="font-size: 0;">
+                            <div data-bind="if: (!DungeonRunner.dungeonCompleted(player.town.dungeon, true) && DungeonRunner.dungeonCompleted(player.town.dungeon, false))" style="font-size: 0;">
                                 <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball.svg" />
                             </div>
 
                             <!--If all Pokémon in the dungeon are caught shiny-->
-                            <div data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)" style="font-size: 0;">
+                            <div data-bind="if: DungeonRunner.dungeonCompleted(player.town.dungeon, true)" style="font-size: 0;">
                                 <img title="You have captured all Pokémon shiny in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball-shiny.svg"/>
                             </div>
 
                             <!--Pokérus image-->
-                            <div data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())" style="font-size: 0;">
+                            <div data-bind="if: RouteHelper.minPokerusCheck(player.town.dungeon.allAvailablePokemon())" style="font-size: 0;">
                                 <img src="" data-bind="
-                                attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town().dungeon.allAvailablePokemon())] + '.png'},
+                                attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town.dungeon.allAvailablePokemon())] + '.png'},
                                 tooltip: {
-                                    title: RouteHelper.dungeonPokerusEVs(player.town().dungeon),
+                                    title: RouteHelper.dungeonPokerusEVs(player.town.dungeon),
                                     placement: 'bottom',
                                     trigger: 'hover'
                                 }" />
                             </div>
                         </div>
 
-                        <!-- ko if: player.town().dungeon.allAvailableShadowPokemon().length -->
-                        <div class="ml-1" style="font-size: 0;" data-bind="let: { isMissingShadow: player.town().dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) }">
+                        <!-- ko if: player.town.dungeon.allAvailableShadowPokemon().length -->
+                        <div class="ml-1" style="font-size: 0;" data-bind="let: { isMissingShadow: player.town.dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) }">
                             <img height="24" src="assets/images/status/shadow.svg" data-bind="
                                 css: { 'dungeon-pokemon-locked': isMissingShadow },
                                 tooltip: {
@@ -46,10 +46,10 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-center px-2" style="font-size: 1.8rem;" data-bind="text: player.town().name">Town Name</div>
+                <div class="d-flex justify-content-center px-2" style="font-size: 1.8rem;" data-bind="text: player.town.name">Town Name</div>
 
                 <div class="title-right" data-bind="if: isDungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
-                    <div class="d-flex flex-column justify-content-center small mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
+                    <div class="d-flex flex-column justify-content-center small mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
                         <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
                         <div style="line-height: normal;">clears</div>
                     </div>
@@ -60,15 +60,15 @@
     <div class="row no-gutters">
        <div class="col-4 no-gutters">
            <div class="list-group">
-               <button class="btn btn-secondary p-0" onclick="DungeonRunner.initializeDungeon(player.town().dungeon)" data-bind="
-                   visible: player.town() instanceof DungeonTown,
-                   if: player.town().dungeon,
-                   attr: { class: player.town().dungeon && (App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0') + (player.town().dungeon.isUnlocked() ? '' : ' disabled') }">
+               <button class="btn btn-secondary p-0" onclick="DungeonRunner.initializeDungeon(player.town.dungeon)" data-bind="
+                   visible: player.town instanceof DungeonTown,
+                   if: player.town.dungeon,
+                   attr: { class: player.town.dungeon && (App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town.dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0') + (player.town.dungeon.isUnlocked() ? '' : ' disabled') }">
                     Start<br/>
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town.dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                </button>
 
-                <!-- ko foreach: player.town().content -->
+                <!-- ko foreach: player.town.content -->
                 <div class="btn-group btn-block" style="margin-top: 0px;">
                     <button data-bind="
                         class: $data.cssClass() + ($data.isUnlocked() ? '' : ' disabled'),
@@ -89,7 +89,7 @@
        </div>
        <div class="col-5"></div>
        <div class="col-3 no-gutters">
-           <div class="list-group" data-bind="foreach: player.town().npcs">
+           <div class="list-group" data-bind="foreach: player.town.npcs">
                <!-- ko if: $data.isVisible() -->
                 <button class="btn btn-info"
                         data-bind="text: $data.name, click: () => NPCController.openDialog($data)">
@@ -101,11 +101,11 @@
 
     </div>
     <div style="flex-grow: 1;"></div>
-    <knockout data-bind="if: (player.town().dungeon && player.town() instanceof DungeonTown)">
+    <knockout data-bind="if: (player.town.dungeon && player.town instanceof DungeonTown)">
       <div id="dungeonPokemonList" class="card pt-2 pb-3 px-1">
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline mb-0">
-          <!-- ko foreach: player.town().dungeon.normalEncounterList.filter(i => !i.hide) -->
+          <!-- ko foreach: player.town.dungeon.normalEncounterList.filter(i => !i.hide) -->
           <li class="list-inline-item">
             <!-- ko if: $data.mimic -->
             <img class="boss" data-bind="attr: { src: `assets/images/dungeons/chest-${$data.mimicTier}.png` }, tooltip: {
@@ -138,7 +138,7 @@
           </li>
           <!-- /ko -->
           <!--Display all available bosses in this dungeon-->
-          <!-- ko foreach: player.town().dungeon.bossEncounterList.filter(i => !i.hide) -->
+          <!-- ko foreach: player.town.dungeon.bossEncounterList.filter(i => !i.hide) -->
           <li class="list-inline-item">
             <!-- ko ifnot: $data.shadow -->
             <img class="boss" src="assets/images/dungeons/boss.svg"/>

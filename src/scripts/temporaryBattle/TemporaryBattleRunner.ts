@@ -19,7 +19,7 @@ class TemporaryBattleRunner {
         this.timeLeft(GameConstants.TEMP_BATTLE_TIME * this.timeBonus());
         this.timeLeftPercentage(100);
 
-        player.route(0);
+        player.route = 0;
         Battle.route = 0;
         Battle.catching(!(battle.optionalArgs.isTrainerBattle ?? true));
         TemporaryBattleBattle.battle = battle;
@@ -84,7 +84,7 @@ class TemporaryBattleRunner {
                 message: `It appears you are not strong enough to defeat ${TemporaryBattleBattle.battle.getDisplayName()}.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
-            player.town(TemporaryBattleBattle.battle.getTown());
+            player.town = TemporaryBattleBattle.battle.getTown();
             App.game.gameState = GameConstants.GameState.town;
         }
     }
@@ -100,7 +100,7 @@ class TemporaryBattleRunner {
             }
             battle.optionalArgs.rewardFunction?.();
             GameHelper.incrementObservable(App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]);
-            player.town(battle.getTown());
+            player.town = battle.getTown();
             App.game.gameState = GameConstants.GameState.town;
         }
     }
