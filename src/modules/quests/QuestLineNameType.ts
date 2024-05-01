@@ -45,7 +45,6 @@ export type QuestLineNameType
     | 'A Beautiful World'
     | 'Princess Diancie'
     | 'Clash of Ages'
-    | 'The New Kid'
     | 'An Unrivaled Power'
     | 'Eater of Light'
     | 'Mina\'s Trial'

@@ -18,8 +18,8 @@ export default class MapHelper {
         }
         const routeData = Routes.getRoute(region, route);
         if (this.accessToRoute(route, region)) {
-            player.route(route);
-            player._subregion(routeData.subRegion ?? 0);
+            player.route = route;
+            player.subregion = routeData.subRegion ?? 0;
             if (player.region != region) {
                 player.region = region;
             }
@@ -56,7 +56,7 @@ export default class MapHelper {
     };
 
     public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
-        return player.route() == route && player.region == region;
+        return player.route == route && player.region == region;
     }
 
     /* Town functions */
@@ -65,13 +65,13 @@ export default class MapHelper {
         const town = TownList[townName];
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
-            player.route(0);
+            player.route = 0;
             Battle.route = 0;
             Battle.catching(false);
             Battle.enemyPokemon(null);
-            player.town(town);
+            player.town = town;
             player.region = town.region;
-            player._subregion(town.subRegion);
+            player.subregion = town.subRegion;
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
         } else {
@@ -109,7 +109,7 @@ export default class MapHelper {
         if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
             return TemporaryBattleRunner.battleObservable().getTown().name == townName;
         }
-        return !player.route() && player.town().name == townName;
+        return !player.route && player.town.name == townName;
     }
 
     /* Region functions */
@@ -176,7 +176,7 @@ export default class MapHelper {
             // Gain queue slots based on the completed region
             App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion() - 1));
             // Update hatchery region filter to include new region if all previous regions selected
-            if (BreedingFilters.region.value() == (2 << player.highestRegion() - 1) - 1) {
+            if (BreedingFilters.region.value() == (2 << (player.highestRegion() - 1)) - 1) {
                 BreedingFilters.region.value((2 << player.highestRegion()) - 1);
                 Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value());
             }
@@ -191,12 +191,12 @@ export default class MapHelper {
     }
 
     public static getCurrentEnvironment(): GameConstants.Environment {
-        const area = player.route() ||
+        const area = player.route ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
                 ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
             (App.game.gameState == GameConstants.GameState.gym
                 ? GymRunner.getEnvironmentArea() : undefined) ||
-            player.town()?.name ||
+            player.town?.name ||
             undefined;
 
         if (area in GameConstants.Environments) {

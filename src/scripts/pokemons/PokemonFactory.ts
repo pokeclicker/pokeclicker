@@ -67,7 +67,7 @@ class PokemonFactory {
                         : createLogContent.roamerShiny
                     : createLogContent.roamer
                 )({
-                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    location: Routes.getRoute(player.region, player.route).routeName,
                     pokemon: name,
                 })
             );

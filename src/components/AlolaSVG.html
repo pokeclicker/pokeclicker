@@ -2684,6 +2684,16 @@
             , image: "assets/images/map/plumeria.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+           { name: "Ash Ketchum"
+           , x: 54, y: 27
+           , width: 4, height: 4
+           , databind: "click: () => TemporaryBattleList['Ash Ketchum Alola'].protectedOnclick()"
+           , visible:  "TemporaryBattleList['Ash Ketchum Alola'] && TemporaryBattleList['Ash Ketchum Alola'].isVisible()"
+           , image: "assets/images/map/ashketchumoverworld.png"
+           })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
@@ -4946,16 +4956,6 @@
            , width: 3, height: 8
            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Seafolk Village') }"
           })
-        %>
-
-        <%- include('templates/mapOverlay',
-           { name: "Ash Ketchum"
-           , x: 45, y: 10
-           , width: 4, height: 4
-           , databind: "click: () => TemporaryBattleList['Ash Ketchum Alola'].protectedOnclick()"
-           , visible:  "TemporaryBattleList['Ash Ketchum Alola'] && TemporaryBattleList['Ash Ketchum Alola'].isVisible()"
-           , image: "assets/images/map/ashketchumoverworld.png"
-           })
         %>
     </g>
 
