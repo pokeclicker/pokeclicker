@@ -35,6 +35,7 @@ export type QuestLineNameType
     | 'Recover the Precious Egg!'
     | 'Zero\'s Ambition'
     | 'Hollow Truth and Ideals'
+    | 'Swords of Justice'
     | 'The Legend Awakened'
     | 'Gale of Darkness'
     | 'The Delta Episode'
