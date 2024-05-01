@@ -39,7 +39,7 @@
                                             <!-- ko if: ItemList[$data] instanceof CaughtIndicatingItem -->
                                             <div class="float-right mr-1" style="margin-top: 8px;" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': ItemList[$data].getCaughtStatus()}}"></div>
                                             <!-- /ko -->
-                                            <div class="float-right mr-1" style="margin-top: 8px;" data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
+                                            <div class="float-right mr-1" style="margin-top: 8px;" data-bind="text: player.itemList[$data]().toLocaleString('en-US')"></div>
                                         </button>
                                     </div>
                                 </div>
@@ -267,7 +267,7 @@
         <img width="42px" data-bind="attr: { src: ItemList[$data].image }">
         <div class="flex-grow-1 small align-self-end ml-2" style="min-width: 0;">
             <div class="text-truncate" data-bind="text: ItemList[$data].displayName"></div>
-            <div data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
+            <div data-bind="text: player.itemList[$data]().toLocaleString('en-US')"></div>
         </div>
     </div>
 </script>
