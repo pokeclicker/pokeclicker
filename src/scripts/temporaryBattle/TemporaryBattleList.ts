@@ -652,7 +652,7 @@ TemporaryBattleList['Kimono Girls'] = new TemporaryBattle(
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     'Spiky-eared Pichu',
     [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],
-    '<b><i>You caught the Spiky-eared Pichu!</i></b>',
+    '<b><i>The Spiky-eared Pichu ran into the forest!</i></b>',
     [new QuestLineStepCompletedRequirement('Unfinished Business', 6)],
     undefined,
     {
@@ -2196,6 +2196,80 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.'}),
     }
 );
+TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
+    'Terrakion 1',
+    [new GymPokemon('Terrakion', 175698480, 50, undefined, false)],
+    'You\'re actually very strong. It\'s very possible that Cobalion trusted you to find us. Well then, where are we supposed to meet? The Moor of Icirrus? Very well, I shall make my way there then. You should come too, Cobalion should know where you might find our companion, Virizion.',
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 4)],
+    undefined,
+    {
+        displayName: 'Terrakion',
+        imageName: '../pokemon/639',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 5),
+    }
+);
+TemporaryBattleList['Swords of Justice 1'] = new TemporaryBattle(
+    'Swords of Justice 1',
+    [
+        new GymPokemon('Cobalion', 60042160, 55, undefined, false),
+        new GymPokemon('Terrakion', 60042160, 55, undefined, false),
+        new GymPokemon('Virizion', 60042160, 55, undefined, false),
+    ],
+    'It seems you\'re pretty strong, $playername$. We\'ll let you help us since you were able to defeat us in a battle. Now, onto the plan. We\'ll start by searching for clues on where Kyurem might attack, so you\'ll start by looking around the Giant Chasm. Good Luck in your endeavour, report back with your findings.',
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 11)],
+    undefined,
+    {
+        displayName: 'Swords of Justice',
+        imageName: 'specialNPCs/Swords',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 11),
+    }
+);
+TemporaryBattleList['Kyurem 1'] = new TemporaryBattle(
+    'Kyurem 1',
+    [new GymPokemon('Kyurem', 183060808, 60, undefined, false)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 14)],
+    undefined,
+    {
+        displayName: 'Kyurem',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 14),
+    }
+);
+TemporaryBattleList['Kyurem 2'] = new TemporaryBattle(
+    'Kyurem 2',
+    [
+        new GymPokemon('Kyurem', 62098860, 60, undefined, false),
+        new GymPokemon('Kyurem (Black)', 62098860, 60, undefined, false),
+        new GymPokemon('Kyurem (White)', 62098860, 60, undefined, false),
+    ],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 17)],
+    undefined,
+    {
+        displayName: 'Kyurem',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 17),
+    }
+);
+TemporaryBattleList['Kyurem 3'] = new TemporaryBattle(
+    'Kyurem 3',
+    [
+        new GymPokemon('Kyurem', 66667405, 60, undefined, false),
+        new GymPokemon('Kyurem (Black)', 66667405, 60, undefined, false),
+        new GymPokemon('Kyurem (White)', 66667405, 60, undefined, false),
+    ],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Swords of Justice', 19)],
+    undefined,
+    {
+        displayName: 'Kyurem',
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Swords of Justice', 19),
+    }
+);
 TemporaryBattleList['Red Genesect 1'] = new TemporaryBattle(
     'Red Genesect 1',
     [new GymPokemon('Genesect', 174858488, 80, undefined, true)],
@@ -3374,15 +3448,15 @@ TemporaryBattleList.AZ = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
     'Ash Ketchum Kanto',
     [
-        new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
-        new GymPokemon('Pidgeot', 83333000, 56),
-        new GymPokemon('Bulbasaur', 83333000, 56),
-        new GymPokemon('Charizard', 83333000, 60),
-        new GymPokemon('Squirtle', 83333000, 62),
-        new GymPokemon('Muk', 83333000, 62),
+        new GymPokemon('Pikachu (Partner Cap)', 123551, 58),
+        new GymPokemon('Pidgeot', 122352, 56),
+        new GymPokemon('Muk', 122352, 56),
+        new GymPokemon('Bulbasaur', 122352, 60),
+        new GymPokemon('Squirtle', 122352, 60),
+        new GymPokemon('Charizard', 124751, 62),
     ],
     'That was a fun battle!',
-    [new QuestLineStartedRequirement('The New Kid')],
+    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -3393,15 +3467,15 @@ TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     'Ash Ketchum Johto',
     [
-        new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
-        new GymPokemon('Heracross', 83333000, 56),
-        new GymPokemon('Noctowl', 83333000, 56, undefined, true),
-        new GymPokemon('Bayleef', 83333000, 60),
-        new GymPokemon('Cyndaquil', 83333000, 62),
-        new GymPokemon('Totodile', 83333000, 62),
+        new GymPokemon('Pikachu (Partner Cap)', 544557, 58),
+        new GymPokemon('Heracross', 540067, 56),
+        new GymPokemon('Noctowl', 540067, 56, undefined, true),
+        new GymPokemon('Bayleef', 540067, 60),
+        new GymPokemon('Cyndaquil', 540067, 62),
+        new GymPokemon('Totodile', 540067, 62),
     ],
     'Don\'t I know you from somewhere?',
-    [new QuestLineStepCompletedRequirement('The New Kid', 0), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
+    [new TemporaryBattleRequirement('Ash Ketchum Kanto'), new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), new RouteKillRequirement(10, GameConstants.Region.johto, 48)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -3412,15 +3486,15 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
     'Ash Ketchum Hoenn',
     [
-        new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
-        new GymPokemon('Swellow', 83333000, 56),
-        new GymPokemon('Grovyle', 83333000, 56),
-        new GymPokemon('Torkoal', 83333000, 62),
-        new GymPokemon('Corphish', 83333000, 60),
-        new GymPokemon('Glalie', 83333000, 62),
+        new GymPokemon('Pikachu (Partner Cap)', 2426336, 58),
+        new GymPokemon('Swellow', 2402780, 56),
+        new GymPokemon('Torkoal', 2402780, 56),
+        new GymPokemon('Glalie', 2402780, 60),
+        new GymPokemon('Corphish', 2402780, 62),
+        new GymPokemon('Grovyle', 2449893, 62),
     ],
     'That was a nice rematch. You sure are a strong Pokémon trainer! I\'ll beat you next time!',
-    [new QuestLineStepCompletedRequirement('The New Kid', 1)],
+    [new TemporaryBattleRequirement('Ash Ketchum Johto'), new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -3431,15 +3505,15 @@ TemporaryBattleList['Ash Ketchum Hoenn'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
     'Ash Ketchum Sinnoh',
     [
-        new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
-        new GymPokemon('Staraptor', 83333000, 56),
-        new GymPokemon('Torterra', 83333000, 56),
-        new GymPokemon('Infernape', 83333000, 60),
-        new GymPokemon('Buizel', 83333000, 62),
-        new GymPokemon('Gible', 83333000, 62),
+        new GymPokemon('Pikachu (Partner Cap)', 7170362, 58),
+        new GymPokemon('Staraptor', 7100747, 56),
+        new GymPokemon('Gible', 7100747, 60),
+        new GymPokemon('Torterra', 7100747, 56),
+        new GymPokemon('Buizel', 7100747, 62),
+        new GymPokemon('Infernape', 7239977, 62),
     ],
     'Wow, these battles are intense. It\'s getting hard to keep up with you... I think I need a break.',
-    [new QuestLineStepCompletedRequirement('The New Kid', 2), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
+    [new TemporaryBattleRequirement('Ash Ketchum Hoenn'), new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion), new RouteKillRequirement(10, GameConstants.Region.sinnoh, 226)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -3450,15 +3524,15 @@ TemporaryBattleList['Ash Ketchum Sinnoh'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
     'Ash Ketchum Unova',
     [
-        new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
-        new GymPokemon('Unfezant', 83333000, 56),
-        new GymPokemon('Snivy', 83333000, 62),
-        new GymPokemon('Pignite', 83333000, 60),
-        new GymPokemon('Oshawott', 83333000, 56),
-        new GymPokemon('Krookodile', 83333000, 62),
+        new GymPokemon('Pikachu (Partner Cap)', 26397028, 58),
+        new GymPokemon('Unfezant', 26140747, 56),
+        new GymPokemon('Snivy', 26140747, 62),
+        new GymPokemon('Pignite', 26140747, 60),
+        new GymPokemon('Oshawott', 26140747, 56),
+        new GymPokemon('Krookodile', 26653310, 62),
     ],
     'Hey, what gives? I was just trying to relax here!',
-    [new QuestLineStepCompletedRequirement('The New Kid', 3)],
+    [new TemporaryBattleRequirement('Ash Ketchum Sinnoh'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -3469,15 +3543,15 @@ TemporaryBattleList['Ash Ketchum Unova'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
     'Ash Ketchum Kalos',
     [
-        new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
-        new GymPokemon('Talonflame', 83333000, 56),
-        new GymPokemon('Hawlucha', 83333000, 56),
-        new GymPokemon('Goodra', 83333000, 60),
-        new GymPokemon('Noivern', 83333000, 62),
-        new GymPokemon('Ash-Greninja', 83333000, 62),
+        new GymPokemon('Pikachu (Partner Cap)', 85803654, 58),
+        new GymPokemon('Talonflame', 84970609, 56),
+        new GymPokemon('Hawlucha', 84970609, 56),
+        new GymPokemon('Goodra', 84970609, 60),
+        new GymPokemon('Noivern', 84970609, 62),
+        new GymPokemon('Ash-Greninja', 86636699, 62),
     ],
-    'I forgive you for chasing me around. I\'m going to take some time off with a long vacation on a tropical island! Will you take care of my Greninja for me? He has a special Bond while in Battle with his trainer.',
-    [new QuestLineStepCompletedRequirement('The New Kid', 4)],
+    'I forgive you for chasing me around. I\'m going to take some time off with a long vacation on a tropical island! Before I go, though, I\'m gonna release Greninja. I think it\'s best for him to have experiences with other trainers. If you want to see if that could be you, he\'ll be roaming the region.',
+    [new TemporaryBattleRequirement('Ash Ketchum Unova'), new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -3488,15 +3562,15 @@ TemporaryBattleList['Ash Ketchum Kalos'] = new TemporaryBattle(
 TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
     'Ash Ketchum Pinkan',
     [
-        new GymPokemon('Pinkan Pikachu', 83333000, 58),
-        new GymPokemon('Snorlax', 83333000, 56),
-        new GymPokemon('Lapras', 83333000, 56),
-        new GymPokemon('Kingler', 83333000, 60),
-        new GymPokemon('Tauros', 83333000, 62),
-        new GymPokemon('Charizard', 83333000, 62),
+        new GymPokemon('Pinkan Pikachu', 1930220, 58),
+        new GymPokemon('Snorlax', 1911480, 56),
+        new GymPokemon('Lapras', 1911480, 56),
+        new GymPokemon('Kingler', 1911480, 60),
+        new GymPokemon('Tauros', 1911480, 62),
+        new GymPokemon('Charizard', 1948960, 62),
     ],
-    'Hey, you found me on my vacation! Just make sure your Pikachu does not eat the berries here.',
-    [new QuestLineCompletedRequirement('The New Kid'), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinkan Mountain'))],
+    'Hey, you found me on my vacation! Did you see my Pikachu? Looks like it ate some of the berries here. Maybe you can find some other Pikachu like it hiding around here?',
+    [new TemporaryBattleRequirement('Ash Ketchum Hoenn'), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinkan Mountain'))],
     undefined,
     {
         displayName: 'Ash Ketchum',
@@ -4290,16 +4364,13 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         new GymPokemon('Naganadel', 182908638, 62),
         new GymPokemon('Melmetal', 182908638, 62),
     ],
-    'Thanks for battling with me again! I\'ve reignited my passion to battle after a nice, long break! I have no idea where I keep getting all these hats, but I have too many. Here, take this one for your Pikachu. It can help you grow together as partners!',
-    [new QuestLineCompletedRequirement('The New Kid'), new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
+    'Thanks for battling with me again! I\'ve reignited my passion to battle after a nice, long break! ....Did one of the Pikachu here steal my Pikachu\'s hat? Oh well. I have spares. It\'ll be somewhere around here if you want it.',
+    [new TemporaryBattleRequirement('Ash Ketchum Kalos'), new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
     undefined,
     {
         displayName: 'Ash Ketchum',
-        returnTown: 'A Tree Maybe',
+        returnTown: 'Pikachu Valley',
         imageName: 'Ash Ketchum',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Pikachu (Partner Cap)');
-        },
     }
 );
 

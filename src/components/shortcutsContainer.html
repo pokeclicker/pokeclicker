@@ -5,7 +5,7 @@
     <div id="shortcutsBody" class="card-body show p-0">
       <table class="table table-sm m-0">
         <tbody>
-          <tr data-bind="visible: App.game.underground.canAccess">
+          <tr data-bind="visible: App.game.underground.canAccess() && !Settings.getSetting('showUndergroundModule').observableValue()">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="App.game.underground.openUndergroundModal()">
                   Underground
