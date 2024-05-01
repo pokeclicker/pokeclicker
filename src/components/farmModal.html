@@ -15,7 +15,7 @@
                 </ul>
             </div>
 
-            <div class="modal-body tab-content p-0">
+            <div class="modal-body tab-content p-0" style="overflow-x: hidden;">
 
                 <div id="berryFarmView" class="tab-pane fade in active show">
                     <div id="farmView" class="justify-content-center no-select row">
@@ -156,9 +156,9 @@
                                 <div class="w-100"></div>
                                 <!-- /ko -->
                                 <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
-                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
+                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass($data)">
                                         <div class="plotImage">
-                                            <img style="width: 100%" src="assets/images/farm/soil.png"
+                                            <img style="width: 100%;" src="assets/images/farm/soil.png"
                                                 data-bind="class: FarmController.calcMulchClass($data)">
                                             <!-- ko if: !$data.isUnlocked -->
                                             <div class="plotButton plotLockHover">
@@ -174,6 +174,18 @@
                                                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFPCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
                                                 </div>
                                             </div>
+                                            <!-- /ko -->
+                                            <!-- ko if: $data.wanderer -->
+                                                <!-- ko ifnot: $data.wanderer.catching -->
+                                                    <div class="pokemonSprite wandererSprite"
+                                                        data-bind="style: { backgroundImage: FarmController.getWandererStyle($data)},
+                                                        class: FarmController.getWandererCss($data)">
+                                                    </div>
+                                                <!-- /ko -->
+                                                <!-- ko if: $data.wanderer.catching -->
+                                                    <img src="" class="pokeball-animated wandererCapture" style="z-index: 1;"
+                                                        data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.wanderer.pokeball()] + '.svg'}"/>
+                                                <!-- /ko -->
                                             <!-- /ko -->
                                             <div class="plotButton"
                                                 data-bind="ifnot: $data.isEmpty(),
@@ -313,7 +325,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- ko if: App.game.farming.berryData[$data].wander.some((w) => !Berry.baseWander.includes(w) && !Berry.colorWander[App.game.farming.berryData[$data].color].includes(w)) -->
+                                    <!-- ko if: App.game.farming.berryData[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
                                     <table class="table table-striped table-hover table-bordered table-sm m-0">
                                         <thead>
                                             <tr class="text-light">
@@ -323,30 +335,8 @@
                                         <tbody>
                                             <tr>
                                                 <td class="p-0">
-                                                    <ul id="wanderPokemonList" class="list-inline" data-bind="foreach: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.includes(w) && !Berry.colorWander[App.game.farming.berryData[$data].color].includes(w))">
-                                                        <li class="list-inline-item">
-                                                            <!-- ko if: App.game.party.getPokemonByName($data)?.pokerus -->
-                                                            <img class="dungeon-pokemon-pkrs" src="" data-bind="
-                                                                attr:{ src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName($data)?.pokerus]}.png` },
-                                                                tooltip: {
-                                                                    title: `EVs: ${App.game.party.getPokemonByName($data).evs().toLocaleString('en-US')}`,
-                                                                    placement: 'bottom',
-                                                                    trigger: 'hover'
-                                                                }" />
-                                                            <!-- /ko -->
-                                                            <img class="dungeon-pokemon-preview" src="" data-bind="
-                                                                attr:{ src: `assets/images/${(App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '')}pokemon/${pokemonMap[$data].id}.png` },
-                                                                css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data) }" onerror="this.src='assets/images/pokemon/0.png';" />
-                                                            <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-                                                            <!-- ko if: PokemonHelper.calcNativeRegion(pokemonMap[$data].id) > player.highestRegion() -->
-                                                            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="tooltip: {
-                                                                title: `Reach ${GameConstants.camelCaseToString(GameConstants.Region[PokemonHelper.calcNativeRegion(pokemonMap[$data].id)])} to attract this Pokémon!`,
-                                                                placement: 'top',
-                                                                trigger: 'hover'
-                                                            }">
-                                                            <!-- /ko -->
-                                                        </li>
-
+                                                    <ul id="wanderPokemonList" class="list-inline" data-bind="foreach: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION)">
+                                                        <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -448,12 +438,13 @@
                     <p>Berries can be traded with Berry Masters in later regions for other useful items.</p>
 
                     <h4><u>Wandering Pokémon</u></h4>
-                    <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
+                    <p>Ripe Berry plants may attract wild Pokémon that you can then capture. Some Pokémon can only be found using certain Berry species.</p>
                     <p>Some Berry Auras will increase or decrease the chance of encountering Wandering Pokémon. If your total Repel Aura value reaches 1 or greater, no Wandering Pokémon will appear.</p>
+                    <p>Pokémon are more likely to let you catch them when attracted to berries.</p>
 
                     <h4><u>Farm Hands</u></h4>
                     <p><i>(unlocked after obtaining 8 unique berries)</i></p>
-                    <p>Farm Hands can help around the Farm; they will harvest and plant berries as needed and accrue Farm Points while doing so.</p>
+                    <p>Farm Hands can help around the Farm; they will harvest and plant berries as needed or catch wild wanderers, and accrue Farm Points while doing so.</p>
                     <p>Up to 3 Farm Hands can be hired at a time.</p>
                     <p>If they run out of energy, they won't do any work for that cycle, but will regenerate some energy instead. If there's no work to do currently, they will also regenerate some energy.</p>
                     <p>Efficiency refers to how many actions they can do per work cycle.</p>
@@ -526,6 +517,16 @@
                                             <td class="text-left">Should Harvest:</td>
                                             <td class="text-center tight align-middle">
                                                 <input class="clickable" type="checkbox" data-bind="checked: $data.shouldHarvest"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Manage Wanderers: <span class="ml-1" style="position: absolute; float: right; line-height: 100%;" data-bind="tooltip: {
+                                                title: 'They will use your Poké Balls Filters and consume your Poké Balls !',
+                                                trigger: 'hover',
+                                                placement: 'left',
+                                            }">ⓘ</span></td>
+                                            <td class="text-center tight align-middle">
+                                                <input class="clickable" type="checkbox" data-bind="checked: $data.shouldCatch"/>
                                             </td>
                                         </tr>
                                         <tr>

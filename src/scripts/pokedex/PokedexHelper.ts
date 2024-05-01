@@ -136,7 +136,7 @@ class PokedexHelper {
             }
             // Hide uncaught base forms if alternate non-regional form is caught
             if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) &&
-                App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion)
+                App.game.party.caughtPokemon.some((p) => Math.floor(p.id) == pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion)
             ) {
                 return false;
             }
@@ -195,9 +195,19 @@ class PokedexHelper {
                 return false;
             }
 
-            // Only pokemon with selected category
-            if (PokedexFilters.category.value() != -1 && PokedexFilters.category.value() != App.game.party.getPokemon(pokemon.id)?.category) {
-                return false;
+            if (PokedexFilters.category.value() != -1) {
+                if (!alreadyCaught) {
+                    return false;
+                }
+                const partyPokemon = App.game.party.getPokemon(pokemon.id);
+                // Categorized only
+                if (PokedexFilters.category.value() == -2 && partyPokemon.isUncategorized()) {
+                    return false;
+                }
+                // Selected category
+                if (PokedexFilters.category.value() >= 0 && !partyPokemon.category.includes(PokedexFilters.category.value())) {
+                    return false;
+                }
             }
 
             const uniqueTransformation = PokedexFilters.uniqueTransformation.value();
@@ -239,5 +249,9 @@ class PokedexHelper {
 
     private static scrollToTop() {
         document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;
+    }
+
+    public static filteredListPartyPokemon(): Array<PartyPokemon> {
+        return PokedexHelper.filteredList().map((p) => App.game.party.getPokemon(p.id)).filter((p) => p !== undefined);
     }
 }

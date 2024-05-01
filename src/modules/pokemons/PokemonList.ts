@@ -28430,6 +28430,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 901.01,
         'name': 'Bloodmoon Ursaluna',
+        'nativeRegion': Region.paldea,
         'catchRate': 20,
         'type': [PokemonType.Ground, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -29422,7 +29423,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [DummyEvolution('Bramblin', 'Brambleghast')],
     },
     {
-        'id': 946,
+        'id': 947,
         'name': 'Brambleghast',
         'type': [PokemonType.Grass, PokemonType.Ghost],
         'base': {

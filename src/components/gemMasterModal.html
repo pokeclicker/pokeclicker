@@ -26,7 +26,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody data-bind='foreach: GemDeal.getDeals(ShopHandler.shopObservable())'>
+                            <tbody data-bind='foreach: GemDeals.getDeals(ShopHandler.shopObservable().shop)'>
                                 <!-- ko if: $data.isVisible() -->
                                     <!-- ko foreach: gems -->
                                     <tr>
@@ -63,7 +63,7 @@
                                         </td>
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
                                             <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                                <button class='btn btn-success btn-block' data-bind='click: function(){GemDeal.use(ShopHandler.shopObservable(), $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeal.canUse(ShopHandler.shopObservable(), $parentContext.$index()) }'>
+                                                <button class='btn btn-success btn-block' data-bind='click: function(){GemDeals.use(ShopHandler.shopObservable().shop, $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeals.canUse(ShopHandler.shopObservable().shop, $parentContext.$index()) }'>
                                                     <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
                                                 </button>
                                                 <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
