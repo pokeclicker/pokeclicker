@@ -1,5 +1,9 @@
 import * as TempTypes from './TemporaryScriptTypes';
 
+/*
+    Globals declared here also need to be defined in .eslintrc.js
+*/
+
 // Where all the magic happens
 declare global {
     const App: TempTypes.TmpAppType;
