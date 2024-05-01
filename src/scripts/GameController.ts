@@ -3,7 +3,7 @@
  */
 class GameController {
     static applyRouteBindings() {
-        $('path, rect').hover(function () {
+        $('#map path, #map rect').hover(function () {
             let tooltipText = $(this).attr('data-town');
             const route = $(this).attr('data-route');
             if (route) {
