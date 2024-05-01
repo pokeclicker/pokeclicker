@@ -4,5 +4,6 @@ export declare module 'knockout' {
         playerSpriteMove;
         sortable;
         resizable;
+        tooltip;
     }
 }
