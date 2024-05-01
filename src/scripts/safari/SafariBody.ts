@@ -393,9 +393,12 @@ class LandBody extends SafariBody {
 
 class ShapedLandBody extends SafariBody {
 
+    /** Replace illegal configurations and place edge tiles */
     fulfill() {
         let change = false;
         const UP = 1, UPRIGHT = 2, RIGHT = 4, DOWNRIGHT = 8, DOWN = 16, DOWNLEFT = 32, LEFT = 64, UPLEFT = 128;
+        // We prevent tiles whose significant edges are more than two or not adjacent
+        // Otherwise, we would need something like 50 different sprites...
         do {
             change = false;
             this.grid.forEach((row, y) => {
@@ -458,6 +461,7 @@ class ShapedLandBody extends SafariBody {
                             break;
                         case DOWNLEFT: tile = GameConstants.SafariTile.waterDLCorner;
                             break;
+                        // Illegal water tile
                         default: change = true;
                             tile = GameConstants.SafariTile.sandC;
                     }
@@ -493,13 +497,16 @@ class ShapedLandBody extends SafariBody {
         } while (change);
     }
 
+    /** SAND is temporarily used as FLOOR, because FLOOR is temporarily used as WATER. This so we do not change too much code everywhere */
     constructor() {
         super();
         this.type = 'land';
-        const tileArray = [GameConstants.SafariTile.sandC];
-        while (tileArray.length < 9 && Rand.chance(1.5)) {
+        const tileArray = [];
+        // The chance is weird, but it makes well-sized islands
+        while (tileArray.length < 9 && Rand.chance(1 + tileArray.length / 5)) {
             tileArray.push(GameConstants.SafariTile.sandC);
         }
+        // Fill the rest with "water" tiles
         while (tileArray.length < 9) {
             tileArray.push(GameConstants.SafariTile.ground);
         }
@@ -509,7 +516,7 @@ class ShapedLandBody extends SafariBody {
             this.grid.push(tileArray.splice(0, 3));
         }
         this.fulfill();
-        // Fulfill is directional so this will look more random
+        // Fulfill is directional so flippings will make it look more random
         if (Rand.boolean()) {
             this.grid.reverse();
         }
@@ -524,11 +531,11 @@ class ShapedLandBody extends SafariBody {
         });
         this.fulfill();
         this.trim();
-        const landSize = this.grid.flat().reduce((acc, t) => acc + +(t === GameConstants.SafariTile.sandC), 0) / 25;
-        console.log(landSize / 200);
+        // https://static.wixstatic.com/media/997b44_90b0ef0cb8ef477c9d750565def78d0b~mv2.gif
+        const landSize = this.grid.flat().reduce((acc, t) => acc + +(t === GameConstants.SafariTile.sandC), 0);
         this.grid.forEach((r, y) => {
             r.forEach((t, x) => {
-                if (t === GameConstants.SafariTile.sandC && Rand.chance(landSize)) {
+                if (t === GameConstants.SafariTile.sandC && Rand.chance(Math.sqrt(landSize - 3) / 6)) {
                     this.grid[y][x] = GameConstants.SafariTile.grass;
                 }
             });
