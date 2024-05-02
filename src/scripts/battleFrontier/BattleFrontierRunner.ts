@@ -73,8 +73,8 @@ class BattleFrontierRunner {
         const stageBeaten = BattleFrontierRunner.stage() - 1;
         const stageBeatenDifficulty = BattleFrontierRunner.difficultyStage(stageBeaten, BattleFrontierRunner.highest());
         // Give Battle Points and Money based on how far the user got
-        let battlePointsEarned = this.calculateFullBP(stageBeaten, BattleFrontierRunner.highest());
-        let moneyEarned = battlePointsEarned * 100;
+        let moneyEarned = Math.round(this.calculateFullBP(stageBeaten, BattleFrontierRunner.highest()) * 100);
+        let battlePointsEarned = Math.round(moneyEarned / 100);
 
         // Award battle points and dollars and retrieve their computed values
         battlePointsEarned = App.game.wallet.gainBattlePoints(battlePointsEarned).amount;
@@ -126,50 +126,23 @@ class BattleFrontierRunner {
         if (previousHighestStage < 1000) {
             return stage;
         }
-        const bonusStage = Math.max(stage - 1000, 0);
-        const valueStage = Math.min(1000, stage) / 1000 * previousHighestStage;
-        return Math.floor(valueStage + bonusStage);
+        const speed = previousHighestStage / 1000;
+        return Math.floor(stage * speed);
     }
 
     public static calculateFullBP(stage: number, previousHighestStage: number): number {
-        // We want to reward people improving their record, punish people leaving too soon.
-        const modifier = 2 * Math.min((stage / Math.min(1000, previousHighestStage)) ** 2, 4);
-        if (previousHighestStage < 1000) {
-            return modifier * BattleFrontierRunner.calculateBP(stage);
+        // We want to reward people for their record, punish people for losing too early.
+        const modifier = Math.min((stage / Math.min(1000, previousHighestStage)) ** 2, 2);
+        stage = this.computedDifficultyStage();
+        let speed = 1
+        if (previousHighestStage > 1000) {
+            speed = previousHighestStage / 1000;
         }
-        const multiplier = 1000 / previousHighestStage;
-        const bonusStage = BattleFrontierRunner.difficultyStage(Math.max(stage, 1000), previousHighestStage);
-        const valueStage = BattleFrontierRunner.difficultyStage(Math.min(1000, stage), previousHighestStage);
-        const bonusStageBP = BattleFrontierRunner.calculateBP(bonusStage) - BattleFrontierRunner.calculateBP(previousHighestStage);
-        const valueStageBP = Math.round(BattleFrontierRunner.calculateBP(valueStage) * multiplier);
-        return modifier * (bonusStageBP + valueStageBP);
+        return Math.max(1, modifier * BattleFrontierRunner.calculateBP(stage) / speed);
     }
 
     public static calculateBP(stage: number): number {
-        return Math.max(stage, Math.round(stage ** 2 / 100));
-    }
-
-    public static calculateEggSteps(): number {
-        const stage = BattleFrontierRunner.stage();
-        const highest = Math.max(100, BattleFrontierRunner.highest());
-        const progressPoint = Math.min(highest, 1000);
-        let eggSteps = 1;
-        let maxEggSteps = 5 ** 2.5;
-        if (highest < 1000) {
-            maxEggSteps *= Math.sqrt(highest / 1000);
-        }
-        // Scaled according to the difficulty of the stage compared to pseudo-highest
-        eggSteps += (Math.min(stage, progressPoint) / progressPoint) ** 2.5 * maxEggSteps;
-        // Slightly increased with highest
-        if (highest > 1000) {
-            eggSteps *= 1 + Math.log10(highest / 1000);
-        }
-        // Increased with stage, to incentivise further progression
-        if (stage > progressPoint) {
-            eggSteps *= Math.sqrt(Math.min(2, stage / progressPoint));
-        }
-        // Squared to cancel later sqrt;
-        return eggSteps ** 2;
+        return 2 * Math.max(stage, stage ** 2 / 100);
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
