@@ -42,6 +42,7 @@ class BattleFrontierRunner {
         this.highest(App.game.statistics.battleFrontierHighestStageCompleted());
         BattleFrontierBattle.pokemonIndex(0);
         BattleFrontierBattle.generateNewEnemy();
+        BattleFrontierRunner.environment('Default');
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
         BattleFrontierRunner.timeLeftPercentage(100);
         App.game.gameState = GameConstants.GameState.battleFrontier;
@@ -63,7 +64,8 @@ class BattleFrontierRunner {
         this.checkpoint(this.stage());
 
         if (this.stage() % 25 == 0) {
-            const environments = Object.keys(GameConstants.Environments).filter((key) => key !== 'Default');
+            const currentEnvironment = BattleFrontierRunner.environment();
+            const environments = Object.keys(GameConstants.Environments).filter((key) => key !== currentEnvironment);
             BattleFrontierRunner.environment(Rand.fromArray(environments) as GameConstants.Environment);
         }
     }
