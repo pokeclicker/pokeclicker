@@ -23,6 +23,10 @@ class Berry {
         'Blipbug', 'Gossifleur',
     ];
 
+    public static isBaseWanderer(pokemon: PokemonNameType): boolean {
+        return this.baseWander.includes(pokemon);
+    }
+
     public static colorWander: Record<BerryColor, PokemonNameType[]> = {
         [BerryColor.Red]: ['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'],
         [BerryColor.Purple]: ['Illumise', 'Oricorio (Sensu)'],
