@@ -1,192 +1,192 @@
 class DungeonGuide {
-  public trainerSprite = 0;
-  public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
-  public tooltip: KnockoutComputed<string>;
-  public ticks = 0;
-  public index = 0;
+    public trainerSprite = 0;
+    public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
+    public tooltip: KnockoutComputed<string>;
+    public ticks = 0;
+    public index = 0;
 
-  constructor(
-      public name: string,
-      public description: string,
-      public cost: Array<[number, Currency]>,
-      public fixedCost: Array<Amount>,
-      public interval: number, // how often they take a step in ms
-      public walk: () => void,
-      public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
-      trainerSprite?: number
-  ) {
-      SeededRand.seed(parseInt(this.name, 36));
-      this.trainerSprite = trainerSprite ?? SeededRand.intBetween(0, 118);
-  }
+    constructor(
+        public name: string,
+        public description: string,
+        public cost: Array<[number, GameConstants.Currency]>,
+        public fixedCost: Array<Amount>,
+        public interval: number, // how often they take a step in ms
+        public walk: () => void,
+        public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
+        trainerSprite?: number
+    ) {
+        SeededRand.seed(parseInt(this.name, 36));
+        this.trainerSprite = trainerSprite ?? SeededRand.intBetween(0, 118);
+    }
 
-  start() {
-      DungeonRunner.map.playerMoved(true);
-      GameHelper.incrementObservable(DungeonGuides.clears, -1);
-      GameHelper.incrementObservable(App.game.statistics.dungeonGuideAttempts[this.index]);
-  }
+    start() {
+        DungeonRunner.map.playerMoved(true);
+        GameHelper.incrementObservable(DungeonGuides.clears, -1);
+        GameHelper.incrementObservable(App.game.statistics.dungeonGuideAttempts[this.index]);
+    }
 
-  tick() {
-      this.ticks += GameConstants.DUNGEON_TICK;
-      if (this.ticks >= this.interval) {
-          this.ticks = 0;
-          try {
-              this.walk();
+    tick() {
+        this.ticks += GameConstants.DUNGEON_TICK;
+        if (this.ticks >= this.interval) {
+            this.ticks = 0;
+            try {
+                this.walk();
 
-              // Interact with the current tile
-              switch (DungeonRunner.map.currentTile().type()) {
-                  case GameConstants.DungeonTileType.chest:
-                  case GameConstants.DungeonTileType.boss:
-                      DungeonRunner.handleInteraction();
-                      break;
-                  case GameConstants.DungeonTileType.ladder:
-                      DungeonRunner.handleInteraction();
-                      DungeonRunner.map.playerMoved(true);
-                      break;
-              }
-          } catch (e) {
-              console.error('Dungeon Guide failed to walk correctly:\n', e);
-          }
-      }
-  }
+                // Interact with the current tile
+                switch (DungeonRunner.map.currentTile().type()) {
+                    case GameConstants.DungeonTileType.chest:
+                    case GameConstants.DungeonTileType.boss:
+                        DungeonRunner.handleInteraction();
+                        break;
+                    case GameConstants.DungeonTileType.ladder:
+                        DungeonRunner.handleInteraction();
+                        DungeonRunner.map.playerMoved(true);
+                        break;
+                }
+            } catch (e) {
+                console.error('Dungeon Guide failed to walk correctly:\n', e);
+            }
+        }
+    }
 
-  end() {
-      // Check if more clears already paid for
-      if (DungeonGuides.clears() > 0) {
-          // Need to reset the map
-          DungeonRunner.map.board([]);
-          DungeonRunner.initializeDungeon(player.town().dungeon);
-      } else {
-          // No more clears, fire the guide, reset clears to 1 for modal
-          this.fire();
-      }
+    end() {
+        // Check if more clears already paid for
+        if (DungeonGuides.clears() > 0) {
+            // Need to reset the map
+            DungeonRunner.map.board([]);
+            DungeonRunner.initializeDungeon(player.town().dungeon);
+        } else {
+            // No more clears, fire the guide, reset clears to 1 for modal
+            this.fire();
+        }
 
-  }
+    }
 
-  isUnlocked(): boolean {
-      return this.unlockRequirement?.isCompleted() ?? true;
-  }
+    isUnlocked(): boolean {
+        return this.unlockRequirement?.isCompleted() ?? true;
+    }
 
-  calcCost(clears, price, region): Amount[] {
-      const costs = [];
-      let discount = clears ** 0.975;
-      discount /= clears;
-      this.cost.forEach(([multiplier, currency]) => {
-          costs.push(new Amount(Math.round((price * clears * discount) ** (1 - region / 100)) * multiplier, currency));
-      });
-      this.fixedCost.forEach((cost) => {
-          const newCost = {...cost};
-          newCost.amount = Math.round(cost.amount * clears * discount);
-          costs.push(new Amount(newCost.amount, newCost.currency));
-      });
-      return costs;
-  }
+    calcCost(clears, price, region): Amount[] {
+        const costs = [];
+        let discount = clears ** 0.975;
+        discount /= clears;
+        this.cost.forEach(([multiplier, currency]) => {
+            costs.push(new Amount(Math.round((price * clears * discount) ** (1 - region / 100)) * multiplier, currency));
+        });
+        this.fixedCost.forEach((cost) => {
+            const newCost = {...cost};
+            newCost.amount = Math.round(cost.amount * clears * discount);
+            costs.push(new Amount(newCost.amount, newCost.currency));
+        });
+        return costs;
+    }
 
-  hire(): void {
-      Notifier.notify({
-          title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-          message: 'Thanks for hiring me,\nI won\'t let you down!',
-          type: NotificationConstants.NotificationOption.success,
-          timeout: 30 * GameConstants.SECOND,
-      });
-      DungeonGuides.hired(this);
-  }
+    hire(): void {
+        Notifier.notify({
+            title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
+            message: 'Thanks for hiring me,\nI won\'t let you down!',
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 30 * GameConstants.SECOND,
+        });
+        DungeonGuides.hired(this);
+    }
 
-  fire(): void {
-      Notifier.notify({
-          title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-          message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
-          type: NotificationConstants.NotificationOption.info,
-          timeout: 30 * GameConstants.SECOND,
-      });
-      // Hide modals
-      $('.modal.show').modal('hide');
-      // Reset our clears
-      DungeonGuides.clears(1);
-      DungeonGuides.hired(null);
-  }
+    fire(): void {
+        Notifier.notify({
+            title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
+            message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
+            type: NotificationConstants.NotificationOption.info,
+            timeout: 30 * GameConstants.SECOND,
+        });
+        // Hide modals
+        $('.modal.show').modal('hide');
+        // Reset our clears
+        DungeonGuides.clears(1);
+        DungeonGuides.hired(null);
+    }
 }
 
 class DungeonGuides {
-  public static list: DungeonGuide[] = [];
+    public static list: DungeonGuide[] = [];
 
-  public static add(guide: DungeonGuide) {
-      guide.index = this.list.length;
-      this.list.push(guide);
-  }
+    public static add(guide: DungeonGuide) {
+        guide.index = this.list.length;
+        this.list.push(guide);
+    }
 
-  public static available: KnockoutComputed<DungeonGuide[]> = ko.pureComputed(() => DungeonGuides.list.filter(f => f.isUnlocked()));
-  public static selected: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
-  public static hired: KnockoutObservable<DungeonGuide> = ko.observable(null);
-  public static clears: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
+    public static available: KnockoutComputed<DungeonGuide[]> = ko.pureComputed(() => DungeonGuides.list.filter(f => f.isUnlocked()));
+    public static selected: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
+    public static hired: KnockoutObservable<DungeonGuide> = ko.observable(null);
+    public static clears: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
 
-  public static startDungeon(): void {
-      // Add steps and attack based on efficiency
-      this.hired()?.start();
-  }
+    public static startDungeon(): void {
+        // Add steps and attack based on efficiency
+        this.hired()?.start();
+    }
 
-  public static endDungeon(): void {
-      this.hired()?.end();
-  }
+    public static endDungeon(): void {
+        this.hired()?.end();
+    }
 
-  public static calcCost(): Amount[] {
-      return this.list[this.selected()].calcCost(this.clears(), player.town().dungeon.tokenCost, player.region);
-  }
+    public static calcCost(): Amount[] {
+        return this.list[this.selected()].calcCost(this.clears(), player.town().dungeon.tokenCost, player.region);
+    }
 
-  public static calcDungeonCost(): Amount {
-      return new Amount(player.town().dungeon.tokenCost * this.clears(), Currency.dungeonToken);
-  }
+    public static calcDungeonCost(): Amount {
+        return new Amount(player.town().dungeon.tokenCost * this.clears(), GameConstants.Currency.dungeonToken);
+    }
 
-  public static canAfford(): boolean {
-      const costs = {
-          [Currency.dungeonToken]: this.calcDungeonCost(),
-      };
-      this.calcCost().forEach((cost) => {
-          const tempAmount = costs[cost.currency] ?? new Amount(0, cost.currency);
-          tempAmount.amount += cost.amount;
-          costs[cost.currency] = tempAmount;
-      });
-      return Object.values(costs).every((cost) => App.game.wallet.hasAmount(cost));
-  }
+    public static canAfford(): boolean {
+        const costs = {
+            [GameConstants.Currency.dungeonToken]: this.calcDungeonCost(),
+        };
+        this.calcCost().forEach((cost) => {
+            const tempAmount = costs[cost.currency] ?? new Amount(0, cost.currency);
+            tempAmount.amount += cost.amount;
+            costs[cost.currency] = tempAmount;
+        });
+        return Object.values(costs).every((cost) => App.game.wallet.hasAmount(cost));
+    }
 
-  public static hire(): void {
-      const guide = this.list[this.selected()];
-      // Check player has enough currency
-      if (!this.canAfford()) {
-          Notifier.notify({
-              title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${guide.trainerSprite}.png" height="24px" class="pixelated"/> ${guide.name}`,
-              message: 'You can\'t currently afford to hire me...',
-              type: NotificationConstants.NotificationOption.warning,
-              timeout: 30 * GameConstants.SECOND,
-          });
-          return;
-      }
-      // Charge the player
-      this.calcCost().forEach((cost) => App.game.wallet.loseAmount(cost));
-      App.game.wallet.loseAmount(this.calcDungeonCost());
-      // Hide modals
-      $('.modal.show').modal('hide');
-      // Hire the guide
-      guide.hire();
-      // Start the dungeon
-      DungeonRunner.initializeDungeon(player.town().dungeon);
-  }
+    public static hire(): void {
+        const guide = this.list[this.selected()];
+        // Check player has enough currency
+        if (!this.canAfford()) {
+            Notifier.notify({
+                title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${guide.trainerSprite}.png" height="24px" class="pixelated"/> ${guide.name}`,
+                message: 'You can\'t currently afford to hire me...',
+                type: NotificationConstants.NotificationOption.warning,
+                timeout: 30 * GameConstants.SECOND,
+            });
+            return;
+        }
+        // Charge the player
+        this.calcCost().forEach((cost) => App.game.wallet.loseAmount(cost));
+        App.game.wallet.loseAmount(this.calcDungeonCost());
+        // Hide modals
+        $('.modal.show').modal('hide');
+        // Hire the guide
+        guide.hire();
+        // Start the dungeon
+        DungeonRunner.initializeDungeon(player.town().dungeon);
+    }
 
-  public static getRandomWeightedNearbyTile(nearbyTiles: DungeonTile[]): DungeonTile {
-      const weightedTiles = nearbyTiles.map(t => {
-          let weight = 0.5;
-          weight += !t.isVisited ? 1.5 : 0;
-          weight += [GameConstants.DungeonTileType.enemy].includes(t.type()) ? 1 : 0;
-          weight += [GameConstants.DungeonTileType.chest].includes(t.type()) ? 2 : 0;
-          weight += [GameConstants.DungeonTileType.boss, GameConstants.DungeonTileType.ladder].includes(t.type()) ? 4 : 0;
-          return weight;
-      });
-      return Rand.fromWeightedArray(nearbyTiles, weightedTiles);
-  }
+    public static getRandomWeightedNearbyTile(nearbyTiles: DungeonTile[]): DungeonTile {
+        const weightedTiles = nearbyTiles.map(t => {
+            let weight = 0.5;
+            weight += !t.isVisited ? 1.5 : 0;
+            weight += [GameConstants.DungeonTileType.enemy].includes(t.type()) ? 1 : 0;
+            weight += [GameConstants.DungeonTileType.chest].includes(t.type()) ? 2 : 0;
+            weight += [GameConstants.DungeonTileType.boss, GameConstants.DungeonTileType.ladder].includes(t.type()) ? 4 : 0;
+            return weight;
+        });
+        return Rand.fromWeightedArray(nearbyTiles, weightedTiles);
+    }
 }
 
 // Note: Trainer sprite is (seeded) randomly generated, or can be set manually, please make sure it kind of matches the name
 DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way around a dungeon, but gives it their best try!',
-    [[4, Currency.money]], [],
+    [[4, GameConstants.Currency.money]], [],
     2000,
     () => {
         // Get current position
@@ -200,7 +200,7 @@ DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way arou
 
 
 DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile near them!',
-    [[4, Currency.money],[1, Currency.dungeonToken]], [],
+    [[4, GameConstants.Currency.money],[1, GameConstants.Currency.dungeonToken]], [],
     2000,
     () => {
         // Get current position
@@ -226,7 +226,7 @@ DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure ch
     }));
 
 DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
-    [[4, Currency.money],[4, Currency.dungeonToken]], [new Amount(5, Currency.questPoint)],
+    [[4, GameConstants.Currency.money],[4, GameConstants.Currency.dungeonToken]], [new Amount(5, GameConstants.Currency.questPoint)],
     1500,
     () => {
         // Get current position
@@ -252,7 +252,7 @@ DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
     }));
 
 DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, loves to explore new areas!',
-    [[15, Currency.money],[10, Currency.dungeonToken]], [new Amount(2, Currency.diamond)],
+    [[15, GameConstants.Currency.money],[10, GameConstants.Currency.dungeonToken]], [new Amount(2, GameConstants.Currency.diamond)],
     1000,
     () => {
         // Get current position
@@ -291,7 +291,7 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
     }));
 
 DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoids random encounters when possible.',
-    [[20, Currency.money],[20, Currency.dungeonToken]], [new Amount(5, Currency.diamond)],
+    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(5, GameConstants.Currency.diamond)],
     900,
     () => {
         // Get current position
@@ -320,7 +320,7 @@ DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoid
     }));
 
 DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss!',
-    [[20, Currency.money],[20, Currency.dungeonToken]], [new Amount(8, Currency.diamond)],
+    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(8, GameConstants.Currency.diamond)],
     800,
     () => {
         // Get current position
