@@ -5,18 +5,18 @@
     <div id="currencyBody" class="card-body p-1 show">
         <div class="currency-wrapper" data-bind="css: { 'short-currencies': Settings.getSetting('currencyMainDisplayReduced').observableValue() }">
             <div class="currency-line">
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: Currency.money, tooltip: 'Pokédollars<br /><br />Gained by defeating Pokémon and trainers in battle.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: Currency.dungeonToken, tooltip: 'Dungeon Tokens<br /><br />Gained by catching wild Pokémon.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: Currency.questPoint, tooltip: 'Quest Points<br /><br />Gained by completing Quests.' } }"></div>
+                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.money, tooltip: 'Pokédollars<br /><br />Gained by defeating Pokémon and trainers in battle.' } }"></div>
+                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.dungeonToken, tooltip: 'Dungeon Tokens<br /><br />Gained by catching wild Pokémon.' } }"></div>
+                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.questPoint, tooltip: 'Quest Points<br /><br />Gained by completing Quests.' } }"></div>
             </div>
 
             <!-- ko if: Settings.getSetting('currencyMainDisplayExtended').observableValue() -->
             <div class="currency-line">
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: Currency.farmPoint, tooltip: 'Farm Points<br /><br />Gained by harvesting berries on the Farm.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: Currency.diamond, tooltip: 'Diamonds<br /><br />Gained by selling treasure found in the Underground.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: Currency.battlePoint, tooltip: 'Battle Points<br /><br />Gained at the Battle Frontier.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: Currency.contestToken, tooltip: 'Contest Tokens<br /><br />Gained by competing in Contests.' } },
-                    visible: App.game.wallet.currencies[Currency.contestToken]() > 0"></div>
+                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.farmPoint, tooltip: 'Farm Points<br /><br />Gained by harvesting berries on the Farm.' } }"></div>
+                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.diamond, tooltip: 'Diamonds<br /><br />Gained by selling treasure found in the Underground.' } }"></div>
+                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.battlePoint, tooltip: 'Battle Points<br /><br />Gained at the Battle Frontier.' } }"></div>
+                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.contestToken, tooltip: 'Contest Tokens<br /><br />Gained by competing in Contests.' } },
+                    visible: App.game.wallet.currencies[GameConstants.Currency.contestToken]() > 0"></div>
             </div>
             <!-- /ko -->
         </div>
