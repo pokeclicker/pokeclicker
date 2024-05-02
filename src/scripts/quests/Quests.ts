@@ -123,12 +123,6 @@ class Quests implements Saveable {
                     setting: NotificationConstants.NotificationSetting.General.quest_completed,
                 });
             }
-
-            // Track quest completion and total quest completed
-            LogEvent('completed quest',
-                'quests',
-                `level (${this.level()})`,
-                App.game.statistics.questsCompleted());
         } else {
             console.trace('cannot claim quest..');
             Notifier.notify({
@@ -158,8 +152,6 @@ class Quests implements Saveable {
                 LogBookTypes.QUEST,
                 createLogContent.questLevelUp({ level: this.level().toLocaleString() })
             );
-            // Track when users gains a quest level and how long it took in seconds
-            LogEvent('gain quest level', 'quests', `level (${this.level()})`, App.game.statistics.secondsPlayed());
         }
     }
 
@@ -191,12 +183,6 @@ class Quests implements Saveable {
                 }
                 App.game.wallet.loseAmount(this.getRefreshCost());
             }
-
-            // Track when users refreshes the quest list and how much it cost
-            LogEvent('refresh quest list',
-                'quests',
-                `level (${this.level()})`,
-                free ? 0 : this.getRefreshCost().amount);
 
             this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
