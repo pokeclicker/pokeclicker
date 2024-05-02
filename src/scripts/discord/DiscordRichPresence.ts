@@ -79,22 +79,22 @@ class DiscordRichPresence {
         },
         {
             key: 'current_route',
-            value: () => player.route() ? Routes.getName(player.route(), player.region) : player.town() ? player.town().name : 'Unknown Area',
+            value: () => player.route ? Routes.getName(player.route, player.region) : player.town ? player.town.name : 'Unknown Area',
             default: 'Unknown Area',
         },
         {
             key: 'current_area',
-            value: () => player.route() ? Routes.getName(player.route(), player.region) : player.town() ? player.town().name : 'Unknown Area',
+            value: () => player.route ? Routes.getName(player.route, player.region) : player.town ? player.town.name : 'Unknown Area',
             default: 'Unknown Area',
         },
         {
             key: 'current_route_stats',
-            value: () => player.route() ? App.game.statistics.routeKills[player.region][player.route()]() : player.town().dungeon ? App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]() : player.town().gym ? App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().name)]() : 0,
+            value: () => player.route ? App.game.statistics.routeKills[player.region][player.route]() : player.town.dungeon ? App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]() : player.town.gym ? App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town.name)]() : 0,
             default: 0,
         },
         {
             key: 'current_area_stats',
-            value: () => player.route() ? App.game.statistics.routeKills[player.region][player.route()]() : player.town().dungeon ? App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]() : player.town().gym ? App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town().name)]() : 0,
+            value: () => player.route ? App.game.statistics.routeKills[player.region][player.route]() : player.town.dungeon ? App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]() : player.town.gym ? App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town.name)]() : 0,
             default: 0,
         },
         {
@@ -234,10 +234,10 @@ class DiscordRichPresence {
         let nextArea;
         if (player == undefined) {
             nextArea = 'Loading Game';
-        } else if (player.route()) {
-            nextArea = Routes.getName(player.route(), player.region);
-        } else if (player.town()) {
-            nextArea = player.town().name;
+        } else if (player.route) {
+            nextArea = Routes.getName(player.route, player.region);
+        } else if (player.town) {
+            nextArea = player.town.name;
         } else {
             nextArea = 'Unknown Area';
         }

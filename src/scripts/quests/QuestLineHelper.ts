@@ -2319,41 +2319,6 @@ class QuestLineHelper {
         App.game.quests.questLines().push(vivillonQuestLine);
     }
 
-    // Available post-E4
-    public static createAshKetchumQuestLine() {
-        const ashKetchumQuestLine = new QuestLine('The New Kid', 'A new kid from your home town is making waves. Show him who the real prodigy of Pallet Town is.', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), GameConstants.BulletinBoards.Kalos);
-
-        const clearKantoAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Kanto', 'Defeat the kid near Pallet Town.');
-        ashKetchumQuestLine.addQuest(clearKantoAsh);
-
-        const clearJohtoAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Johto', 'He\'s not stopping. Find the kid in Johto.');
-        ashKetchumQuestLine.addQuest(clearJohtoAsh);
-
-        const clearHoennAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Hoenn', 'He just won\'t learn his lesson. Defeat the kid again in Hoenn.');
-        ashKetchumQuestLine.addQuest(clearHoennAsh);
-
-        const clearSinnohAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Sinnoh', 'Who does this kid think he is anyway? Pretending he\'s the main character. He\'s in Sinnoh now.');
-        ashKetchumQuestLine.addQuest(clearSinnohAsh);
-
-        const clearUnovaAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Unova', 'The kid is hiding in Unova!');
-        ashKetchumQuestLine.addQuest(clearUnovaAsh);
-
-        const AshKetchumReward = () => {
-            App.game.party.gainPokemonByName('Ash-Greninja');
-            Notifier.notify({
-                title: ashKetchumQuestLine.name,
-                message: 'You obtained Ash-Greninja!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const clearKalosAsh = new DefeatTemporaryBattleQuest('Ash Ketchum Kalos', 'Maybe you were too hard on the kid... You should offer him an apology in Kalos.').withCustomReward(AshKetchumReward);
-        ashKetchumQuestLine.addQuest(clearKalosAsh);
-
-        App.game.quests.questLines().push(ashKetchumQuestLine);
-    }
-
     // Available post-E4, must have captured Doublade
     public static createPrincessDiancieQuestLine() {
         const princessDiancieQuestLine = new QuestLine('Princess Diancie', 'Princess Diancie has been spotted in Kalos! She\'s searching for something.', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_Malva), new GymBadgeRequirement(BadgeEnums.Elite_Siebold), new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom), new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]) , GameConstants.BulletinBoards.Kalos);
@@ -3950,7 +3915,6 @@ class QuestLineHelper {
         this.createFlareKalosQuestLine();
         this.createPrincessDiancieQuestLine();
         this.createClashOfAgesQuestLine();
-        this.createAshKetchumQuestLine();
         this.createUnrivaledPowerQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();

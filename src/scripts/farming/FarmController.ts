@@ -262,10 +262,8 @@ class FarmController {
             if (typeof aura === 'undefined') {
                 return;
             }
-            if (aura() !== 1 && idx !== AuraType.Repel) {
+            if (aura() !== 1) {
                 tooltip.push(`${AuraType[idx]}: ×${aura().toLocaleString('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 })}`);
-            } else if (aura() !== 0 && idx === AuraType.Repel) {
-                tooltip.push(`${AuraType[idx]}: ${aura().toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
             }
 
         });
