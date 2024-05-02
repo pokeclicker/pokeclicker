@@ -14,6 +14,16 @@ import type { Subscribable, Observable, Computed } from 'knockout';
 // Knockout types don't have a way to accurately require writable computeds yet
 type MaybeWritable = Observable | Computed;
 
+function sanitizeNumericValues(val: number): number {
+    if (val > Number.MAX_SAFE_INTEGER) {
+        return Number.MAX_SAFE_INTEGER;
+    } else if (val < Number.MIN_SAFE_INTEGER) {
+        return Number.MIN_SAFE_INTEGER;
+    } else {
+        return val;
+    }
+}
+
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
 const numericExtender = (target: MaybeWritable, precision: number) => {
     if (!ko.isWritableObservable(target)) {
@@ -23,8 +33,9 @@ const numericExtender = (target: MaybeWritable, precision: number) => {
     const result = ko.pureComputed<number>({
         read: target, // always return the original observable's value
         write: (newValueRaw: string | number) => {
-            const newValue = Number(newValueRaw);
+            let newValue = Number(newValueRaw);
             if (Number.isNaN(newValue)) { return; }
+            newValue = sanitizeNumericValues(newValue);
 
             const current = target();
             const roundingMultiplier = 10 ** precision;
@@ -41,9 +52,14 @@ const numericExtender = (target: MaybeWritable, precision: number) => {
         },
     });
 
-    // initialize with current value to make sure it is rounded appropriately, forcibly converting NaN to 0
+    // initialize with current value to make sure it is rounded appropriately
     const initialValue = Number(target());
-    result(Number.isNaN(initialValue) ? 0 : initialValue);
+    if (Number.isNaN(initialValue)) {
+        // forcibly convert NaN to 0
+        result(0);
+    } else {
+        result(sanitizeNumericValues(initialValue));
+    }
 
     // return the new computed observable
     return result;
