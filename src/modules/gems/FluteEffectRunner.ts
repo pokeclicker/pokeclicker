@@ -156,4 +156,24 @@ export default class FluteEffectRunner {
             return !!player.effectList[itemName]();
         });
     }
+
+    public static additionalInfoTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        const tooltip = [];
+
+        // List all types boosted
+        if (this.activeGemTypes().length < 18) {
+            this.activeGemTypes().forEach(idx => {
+                tooltip.push(`<i>${PokemonType[idx]}<i/>`);
+            });
+        } else {
+            tooltip.push('<i>All Types<i/>');
+        }
+
+        // Adding header when active
+        if (tooltip.length) {
+            tooltip.unshift('+0.5% boost to:');
+        }
+
+        return tooltip.join('<br>');
+    });
 }
