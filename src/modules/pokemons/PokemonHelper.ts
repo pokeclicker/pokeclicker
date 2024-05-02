@@ -78,25 +78,25 @@ export function typeIdToString(id: number) {
     return PokemonType[id];
 }
 
-export function getImage(pokemonId: number, shiny: boolean = undefined, gender: boolean = undefined, shadow: ShadowStatus = undefined): string {
+export function getImage(pokemonId: number, shiny: boolean = undefined, gender: BattlePokemonGender = undefined, shadow: ShadowStatus = undefined): string {
     let src = 'assets/images/';
+    let showShiny = shiny;
+    let showFemale = gender === BattlePokemonGender.Female;
     let showShadow = shadow === ShadowStatus.Shadow;
     const partyPokemon = App.game.party.getPokemon(pokemonId);
     if (partyPokemon) {
         if (shiny === undefined) {
-            // eslint-disable-next-line no-param-reassign
-            shiny = partyPokemon.shiny && !partyPokemon.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue();
+            showShiny = partyPokemon.shiny && !partyPokemon.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue();
         }
         if (gender === undefined) {
-            // eslint-disable-next-line no-param-reassign
-            gender = partyPokemon.defaultFemaleSprite();
+            showFemale = partyPokemon.defaultFemaleSprite();
         }
         if (shadow === undefined) {
             showShadow = partyPokemon.shadow === ShadowStatus.Shadow
                 || (partyPokemon.shadow === ShadowStatus.Purified && partyPokemon.showShadowImage);
         }
     }
-    if (shiny) {
+    if (showShiny) {
         src += 'shiny';
     }
     if (showShadow) {
@@ -104,11 +104,8 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
     }
     let genderString = '';
     // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
-    if (gender) {
-        const hasDiff = this.getPokemonById(pokemonId).gender.visualDifference;
-        if (hasDiff) {
-            genderString = '-f';
-        }
+    if (showFemale && this.getPokemonById(pokemonId).gender.visualDifference) {
+        genderString = '-f';
     }
     src += `pokemon/${pokemonId}${genderString}.png`;
     return src;
@@ -165,7 +162,7 @@ export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
 }
 
 // To have encounter/caught/defeat/hatch statistics in a single place
-export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: number, shadow: ShadowStatus) {
+export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: BattlePokemonGender, shadow: ShadowStatus) {
     const pokemonStatistics = {
         Captured: App.game.statistics.pokemonCaptured[pokemonId],
         Defeated: App.game.statistics.pokemonDefeated[pokemonId],

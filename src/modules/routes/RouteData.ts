@@ -2627,6 +2627,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Salandit', 'Torkoal', 'Litwick'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Sudowoodo', 'Onix'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Clefairy', 'Wobbuffet', 'Duskull', 'Espurr', 'Elgyem', 'Clefable'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Thunderstorm])])),
       ],
     }),
     [
@@ -2676,6 +2677,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Litwick'], new WeatherRequirement([WeatherType.Harsh_Sunlight, WeatherType.Fog])),
           new SpecialRoutePokemon(['Bonsly', 'Rhyhorn', 'Rufflet', 'Sudowoodo', 'Claydol'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Munna', 'Milcery', 'Mimikyu', 'Musharna'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Clear, WeatherType.Rain, WeatherType.Thunderstorm])])),
       ],
     }),
     [new RouteKillRequirement(10, Region.galar, 16)],
@@ -2709,6 +2711,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Drilbur'], new WeatherRequirement([WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Bonsly', 'Dwebble', 'Rhyhorn', 'Shuckle'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Hatenna', 'Munna', 'Nickit', 'Thievul', 'Dottler', 'Togetic'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Thunderstorm])])),        
       ],
     }),
     [new RouteKillRequirement(10, Region.galar, 17)],
@@ -2784,6 +2787,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Torkoal', 'Baltoy', 'Dugtrio'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Shuckle', 'Mudbray'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Gothita', 'Solosis', 'Clefairy', 'Duskull', 'Aegislash (Shield)'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Thunderstorm])])),
       ],
     }),
     [
@@ -2867,6 +2871,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Vulpix', 'Growlithe', 'Baltoy', 'Maractus'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Dugtrio', 'Drilbur', 'Dwebble', 'Trapinch', 'Axew'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Morelull', 'Gastly', 'Impidimp', 'Hatenna'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Thunderstorm])])),
       ],
     }),
     [
@@ -2894,6 +2899,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Galvantula', 'Inkay'],
         headbutt: ['Greedent'],
+        special: [new SpecialRoutePokemon(['Toxel'], new ObtainedPokemonRequirement('Toxel'))],
     }),
     [new TemporaryBattleRequirement('Hop 6')],
     undefined,
