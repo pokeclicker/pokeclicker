@@ -30,9 +30,9 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Riolu'}, 0.125),
             new DreamOrbLoot({type: ItemType.item, id: 'Munna'}, 0.125),
             new DreamOrbLoot({type: ItemType.item, id: 'Tornadus (Therian)'}, 0.075),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Sun Stone'}, 0.15),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Water Stone'}, 0.15),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Revive'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Sun_stone'}, 0.15),
+            new DreamOrbLoot({type: ItemType.item, id: 'Water_stone'}, 0.15),
+            new DreamOrbLoot({type: ItemType.item, id: 'Revive'}, 0.125),
 
         ]),
         new DreamOrb('Green', new ObtainedPokemonRequirement('Tornadus (Therian)'), [
@@ -40,17 +40,17 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Bronzor'}, 0.15),
             new DreamOrbLoot({type: ItemType.item, id: 'Sigilyph'}, 0.125),
             new DreamOrbLoot({type: ItemType.item, id: 'Thundurus (Therian)'}, 0.075),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Red Shard'}, 0.125),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Blue Shard'}, 0.125),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Yellow Shard'}, 0.125),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Green Shard'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Red_shard'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Blue_shard'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Yellow_shard'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Green_shard'}, 0.125),
         ]),
         new DreamOrb('Orange', new ObtainedPokemonRequirement('Thundurus (Therian)'), [
             new DreamOrbLoot({type: ItemType.item, id: 'Staryu'}, 0.1),
             new DreamOrbLoot({type: ItemType.item, id: 'Ralts'}, 0.1),
             new DreamOrbLoot({type: ItemType.item, id: 'Rotom'}, 0.1),
             new DreamOrbLoot({type: ItemType.item, id: 'Landorus (Therian)'}, 0.075),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Fire Stone'}, 0.2),
+            new DreamOrbLoot({type: ItemType.item, id: 'Fire_stone'}, 0.2),
             new DreamOrbLoot({type: ItemType.item, id: 'Protein'}, 0.091),
             new DreamOrbLoot({type: ItemType.item, id: 'Calcium'}, 0.092),
             new DreamOrbLoot({type: ItemType.item, id: 'Carbos'}, 0.092),
@@ -60,11 +60,11 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Igglybuff'}, 0.2),
             new DreamOrbLoot({type: ItemType.item, id: 'Smoochum'}, 0.2),
             new DreamOrbLoot({type: ItemType.item, id: 'Enamorus (Therian)'}, 0.05),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Moon Stone'}, 0.1),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Leaf Stone'}, 0.1),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Thunder Stone'}, 0.1),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Heart Scale'}, 0.125),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Max Revive'}, 0.1),
+            new DreamOrbLoot({type: ItemType.item, id: 'Moon_stone'}, 0.1),
+            new DreamOrbLoot({type: ItemType.item, id: 'Leaf_stone'}, 0.1),
+            new DreamOrbLoot({type: ItemType.item, id: 'Thunder_stone'}, 0.1),
+            new DreamOrbLoot({type: ItemType.item, id: 'Heart_scale'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Max_revive'}, 0.1),
         ]),
     ]
 
@@ -88,7 +88,7 @@ class DreamOrbController implements Saveable {
         });
         setTimeout(() => {
             const itemWeights = selectedOrb.items.map((i) => i.weight);
-            const items = {};
+            const items: Record<string | number, { amount: number; item: BagItem }> = {};
             for (let i = 0; i < amountToOpen; i++) {
                 const orbLoot = Rand.fromWeightedArray(selectedOrb.items, itemWeights);
                 items[orbLoot.item.id] ?
@@ -104,7 +104,7 @@ class DreamOrbController implements Saveable {
             });
             this.opening(false);
             this.amountOpened(amountToOpen);
-            this.itemsReceived(Object.keys(items).map((key) => ({ name: key, ...items[key] })));
+            this.itemsReceived(Object.values(items).map((item) => ({ name: BagHandler.displayName(item.item), ...item })));
             if (amountToOpen > 1) {
                 $('#dreamOrbsOpenedModal').modal('show');
             }
