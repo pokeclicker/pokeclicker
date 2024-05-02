@@ -38,7 +38,7 @@ export default class FluteItem extends Item {
         for (const gem of item.gemTypes) {
             tooltipString += '<tr>';
             tooltipString += `<td class="text-left" px-1">${gem} gems</td>`;
-            tooltipString += `<td class="text-right" px-1">(${App.game.gems.gemWallet[PokemonType[gem]]().toLocaleString('en-US')})</td>`;
+            tooltipString += `<td class="text-right" px-1">(${App.game.gems.gemWallet[this.gemTypes[gem]]().toLocaleString('en-US')})</td>`;
             tooltipString += '</tr>';
         }
         tooltipString += '</table>';
