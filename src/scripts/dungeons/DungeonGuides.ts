@@ -223,7 +223,7 @@ DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure ch
         // We didn't find what we were looking for, We just want to move weighted randomly
         const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
-    }));
+    }, new MaxRegionRequirement(GameConstants.Region.johto)));
 
 DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
     [[4, GameConstants.Currency.money],[4, GameConstants.Currency.dungeonToken]], [new Amount(5, GameConstants.Currency.questPoint)],
@@ -249,7 +249,7 @@ DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
         // We didn't find what we were looking for, We just want to move weighted randomly
         const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
-    }));
+    }, new MaxRegionRequirement(GameConstants.Region.hoenn)));
 
 DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, loves to explore new areas!',
     [[15, GameConstants.Currency.money],[10, GameConstants.Currency.dungeonToken]], [new Amount(2, GameConstants.Currency.diamond)],
@@ -288,10 +288,10 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
         // We didn't find what we were looking for, We just want to move weighted randomly
         const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
-    }));
+    }, new MaxRegionRequirement(GameConstants.Region.kalos)));
 
 DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoids random encounters when possible.',
-    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(5, GameConstants.Currency.diamond)],
+    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(4, GameConstants.Currency.diamond)],
     900,
     () => {
         // Get current position
@@ -317,10 +317,10 @@ DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoid
         // We didn't find what we were looking for, We just want to move weighted randomly
         const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
-    }));
+    }, new MaxRegionRequirement(GameConstants.Region.alola)));
 
 DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss!',
-    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(8, GameConstants.Currency.diamond)],
+    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(6, GameConstants.Currency.diamond)],
     800,
     () => {
         // Get current position
@@ -341,4 +341,4 @@ DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss
         // We didn't find what we were looking for, We just want to move weighted randomly
         const randomTile = DungeonGuides.getRandomWeightedNearbyTile(nearbyTiles);
         DungeonRunner.map.moveToTile(randomTile.position);
-    }));
+    }, new MaxRegionRequirement(GameConstants.Region.galar)));
