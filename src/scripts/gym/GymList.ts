@@ -295,6 +295,7 @@ GymList['Ecruteak City'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
         App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
+        App.game.quests.getQuestLine('The Sick Ampharos').beginQuest(0, undefined, true);
     }
 );
 GymList['Cianwood City'] = new Gym(
@@ -307,7 +308,7 @@ GymList['Cianwood City'] = new Gym(
     BadgeEnums.Storm,
     2500,
     'Wha? Huh? I lost? How about that! You\'re worthy of the Storm Badge!',
-    [new GymBadgeRequirement(BadgeEnums.Fog)]
+    [new QuestLineStepCompletedRequirement('The Sick Ampharos', 2)]
 );
 GymList['Olivine City'] = new Gym(
     'Jasmine',
@@ -320,7 +321,7 @@ GymList['Olivine City'] = new Gym(
     BadgeEnums.Mineral,
     3500,
     '...You are a better trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Badge.',
-    [new GymBadgeRequirement(BadgeEnums.Storm)]
+    [new QuestLineCompletedRequirement('The Sick Ampharos')]
 );
 GymList['Mahogany Town'] = new Gym(
     'Pryce',
@@ -2427,7 +2428,8 @@ GymList['Champion Nemona'] = new Gym(
     BadgeEnums.Elite_Nemona,
     250000,
     '',
-    [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)],
+    undefined, undefined, { hideUntilUnlocked: true }
 );
 GymList['Segin Squad\'s Base'] = new Gym(
     'Giacomo',
@@ -2522,7 +2524,7 @@ GymList['Director Clavell'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
-    undefined, undefined, { displayName: 'Director Clavell' }
+    undefined, undefined, { displayName: 'Director Clavell', hideUntilUnlocked: true }
 );
 GymList['Penny of Team Star'] = new Gym(
     'Penny',
@@ -2539,7 +2541,7 @@ GymList['Penny of Team Star'] = new Gym(
     250000,
     '',
     [new GymBadgeRequirement(BadgeEnums.Elite_Clavell)],
-    undefined, undefined, { displayName: 'Penny of Team Star' }
+    undefined, undefined, { displayName: 'Penny of Team Star', hideUntilUnlocked: true }
 );
 GymList['Stony Cliff Titan'] = new Gym(
     'Stony Cliff Titan',
@@ -2610,7 +2612,7 @@ GymList['Pokémon Trainer Arven'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
-    undefined, undefined, { displayName: 'Arven' }
+    undefined, undefined, { displayName: 'Arven', hideUntilUnlocked: true }
 );
 GymList['AI Sada'] = new Gym(
     'AI Sada',

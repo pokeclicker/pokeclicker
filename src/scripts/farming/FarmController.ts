@@ -11,9 +11,8 @@ class FarmController {
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
-    public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
-    public static selectedMulchShovel: KnockoutObservable<boolean> = ko.observable(false);
-    public static selectedPlotSafeLock: KnockoutObservable<boolean> = ko.observable(false);
+    public static selectedFarmTool: KnockoutObservable<FarmingTool> = ko.observable(FarmingTool.Berry);
+    public static selectedFarmModuleTool: KnockoutObservable<FarmingTool> = ko.observable(FarmingTool.Berry);
 
     public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
@@ -62,20 +61,24 @@ class FarmController {
         return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}.png`;
     }
 
-    public static calculateCssClass() {
-        if (this.selectedPlotSafeLock()) {
-            return 'PlotSafeLockSelected';
+    public static calculateCssClassFromTool(plot: Plot, tool: FarmingTool) {
+        switch (tool) {
+            case FarmingTool.Lock:
+                return 'PlotSafeLockSelected';
+            case FarmingTool.Mulch:
+                return 'MulchSelected';
+            case FarmingTool.Shovel:
+                return 'ShovelSelected';
+            case FarmingTool.MulchShovel:
+                return 'MulchShovelSelected';
+            case FarmingTool.Berry:
+            default:
+                return plot.wanderer ? 'WandererHandling' : 'BerrySelected';
         }
-        if (this.selectedShovel()) {
-            return 'ShovelSelected';
-        }
-        if (this.selectedMulchShovel()) {
-            return 'MulchShovelSelected';
-        }
-        if (this.berryListVisible()) {
-            return 'BerrySelected';
-        }
-        return 'MulchSelected';
+    }
+
+    public static calculateCssClass(plot: Plot) {
+        return this.calculateCssClassFromTool(plot, this.selectedFarmTool());
     }
 
     public static calcMulchClass(plot: Plot) {
@@ -88,10 +91,27 @@ class FarmController {
     public static plotClick(index: number, event: MouseEvent) {
         const plot: Plot = App.game.farming.plotList[index];
 
+        // If shift key held, lock/unlock plot
         if (event.shiftKey) {
             this.shiftTogglePlotSafeLock(plot, index);
         } else {
-            this.handleClickActions(plot, index);
+            this.handleClickActions(this.selectedFarmTool(), plot, index);
+        }
+    }
+
+    public static plotClickMini(index: number, event: MouseEvent) {
+        const plot: Plot = App.game.farming.plotList[index];
+
+        // Unlocking Plot (we don't want to do this in the farm module)
+        if (!plot.isUnlocked) {
+            return;
+        }
+
+        // If shift key held, lock/unlock plot
+        if (event.shiftKey) {
+            this.shiftTogglePlotSafeLock(plot, index);
+        } else {
+            this.handleClickActions(this.selectedFarmModuleTool(), plot, index);
         }
     }
 
@@ -119,30 +139,39 @@ class FarmController {
         });
     }
 
-    private static handleClickActions(plot: Plot, index: number) {
+    private static handleClickActions(tool: FarmingTool, plot: Plot, index: number) {
         // Unlocking Plot
         if (!plot.isUnlocked) {
-            App.game.farming.unlockPlot(index);
-        // Handle Safe Locking Plot
-        } else if (this.selectedPlotSafeLock()) {
-            App.game.farming.togglePlotSafeLock(index);
-        // Handle Shovel
-        } else if (this.selectedShovel()) {
-            App.game.farming.shovel(index);
-        //Handle Mulch Shovel
-        } else if (this.selectedMulchShovel()) {
-            App.game.farming.shovelMulch(index);
-        // Handle Berries
-        } else if (this.berryListVisible()) {
-            if (plot.isEmpty()) {
-                App.game.farming.plant(index, this.selectedBerry());
-            } else {
-                App.game.farming.harvest(index);
-            }
-        // Handle Mulches
-        } else {
-            App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
+            return App.game.farming.unlockPlot(index);
         }
+        // Check which tool we have selected
+        switch (tool) {
+            case FarmingTool.Berry:
+                if (plot.wanderer) {
+                    App.game.farming.handleWanderer(plot);
+                } else if (plot.isEmpty()) {
+                    App.game.farming.plant(index, this.selectedBerry());
+                } else {
+                    App.game.farming.harvest(index);
+                }
+                break;
+            case FarmingTool.Mulch:
+                App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
+                break;
+            case FarmingTool.Shovel:
+                App.game.farming.shovel(index);
+                break;
+            case FarmingTool.MulchShovel:
+                App.game.farming.shovelMulch(index);
+                break;
+            case FarmingTool.Lock:
+                App.game.farming.togglePlotSafeLock(index);
+                break;
+        }
+    }
+
+    public static calculateCssClassMini(plot: Plot) {
+        return this.calculateCssClassFromTool(plot, this.selectedFarmModuleTool());
     }
 
     public static mulchAll() {
@@ -233,10 +262,8 @@ class FarmController {
             if (typeof aura === 'undefined') {
                 return;
             }
-            if (aura() !== 1 && idx !== AuraType.Repel) {
+            if (aura() !== 1) {
                 tooltip.push(`${AuraType[idx]}: ×${aura().toLocaleString('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 })}`);
-            } else if (aura() !== 0 && idx === AuraType.Repel) {
-                tooltip.push(`${AuraType[idx]}: ${aura().toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
             }
 
         });
@@ -256,6 +283,39 @@ class FarmController {
         }
 
         App.game.statistics.selectedBerryID(berryId);
+    }
+
+    public static wandererToRoute(pokemon: PokemonNameType): RegionRoute {
+        const maxRegion = player.highestRegion();
+        const pokemonRegion = pokemonMap[pokemon].nativeRegion;
+        const routes = Routes.getRoutesByRegion(maxRegion).filter(r => !r.ignoreRouteInCalculations);
+        const minIndex = Math.floor((routes.length - 1) * pokemonRegion / (maxRegion + 2));
+        const maxIndex = Math.floor((routes.length - 1) * (pokemonRegion + 2) / (maxRegion + 2));
+        // Adds a bit of randomness so it is not always the same route
+        const routeIndex = Rand.intBetween(minIndex, maxIndex);
+        return routes[routeIndex];
+    }
+
+    public static getWandererStyle(plot: Plot): string {
+        if (!plot.wanderer) {
+            return '';
+        }
+        const pokemon = pokemonMap[plot.wanderer.name];
+        const forgedID = `${pokemon.id}${plot.wanderer.shiny ? 's' : ''}`;
+        return `${plot.wanderer.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' :  ''}url('assets/images/dynamic-background/pokemon/${forgedID}.png')`;
+    }
+
+    public static getWandererCss(plot: Plot): string {
+        if (!plot.wanderer) {
+            return '';
+        }
+        if (plot.wanderer.fleeing()) {
+            return 'walkDownFlee';
+        } else if (plot.wanderer.distractTime() > 0) {
+            return 'walkDownFlash';
+        } else {
+            return 'walkDown';
+        }
     }
 
 }
