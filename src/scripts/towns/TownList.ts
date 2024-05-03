@@ -2530,7 +2530,13 @@ const EasterEggHunter = new NPC('Egg Hunter', [
     'But be careful! If you defeat them, they will run away again!',
 ], {
     image: 'assets/images/npcs/Egg Hunter.png',
-    requirement: new MultiRequirement([new SpecialEventRequirement('Easter'), new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.more)]),
+    requirement: new MultiRequirement([
+        new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.more),
+        new OneFromManyRequirement([
+            new QuestLineCompletedRequirement('Egg Hunt', GameConstants.AchievementOption.less),
+            new SpecialEventRequirement('Easter'),
+        ]),
+    ]),
 });
 
 const SCEntrance = new NPC('Strange Markings', [
