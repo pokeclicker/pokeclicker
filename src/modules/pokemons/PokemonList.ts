@@ -2947,6 +2947,7 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.25,
+        },
     },
     {
         'id': 59,
@@ -2987,6 +2988,7 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.25,
+        },
     },
     {
         'id': 59.02,
@@ -3007,6 +3009,7 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.25,
+        },
     },
     {
         'id': 60,
