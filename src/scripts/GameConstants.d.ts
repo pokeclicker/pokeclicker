@@ -109,7 +109,7 @@ namespace GameConstants {
         'Pokerus',
         'Shadow Pokemon',
     }
-    declare enum DungeonTile {
+    declare enum DungeonTileType {
         empty = 0,
         entrance = 1,
         enemy = 2,
