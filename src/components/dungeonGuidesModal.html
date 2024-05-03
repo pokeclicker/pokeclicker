@@ -15,7 +15,7 @@
                 <div class="tab-content">
                     <!-- Hiring Tab -->
                     <div id="dungeonGuidesModalHireTab" class="tab-pane fade active show">
-                        <!-- ko if: player.town() instanceof DungeonTown -->
+                        <!-- ko if: player.town instanceof DungeonTown -->
                         <div class="row m-0 justify-content-center d-flex" data-bind="foreach: DungeonGuides.available()" style="max-width: 100%;">
                             <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0 align-items-stretch">
                                 <h5 class="card-header">
@@ -33,7 +33,7 @@
                                         <div class="card-header p-1">
                                             Cost / Run
                                         </div>
-                                        <div class="card-body p-1 flex-grow-1" data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
+                                        <div class="card-body p-1 flex-grow-1" data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
                                             <knockout class="w-100" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}">cost</knockout><br/>
                                         </div>
                                         <div class="card-header p-1">
@@ -84,7 +84,7 @@
                 </button>
             </div>
             <div class="modal-body text-left p-2">
-                <!-- ko if: player.town() instanceof DungeonTown -->
+                <!-- ko if: player.town instanceof DungeonTown -->
                 <table class="table table-striped table-hover m-0 text-center">
                     <tbody>
                         <tr>
@@ -137,7 +137,7 @@
                 </button>
             </div>
             <div class="modal-body p-0">
-                <!-- ko if: player.town() instanceof DungeonTown && DungeonGuides.hired() -->
+                <!-- ko if: player.town instanceof DungeonTown && DungeonGuides.hired() -->
                     <div class="card text-left col-12 p-0" data-bind="with: DungeonGuides.hired()">
                         <h5 class="card-header">
                             <knockout data-bind="text: $data.name">Name</knockout>
@@ -156,7 +156,7 @@
                                         <th>Cost / Run</th>
                                     </tr>
                                     <tr>
-                                        <td data-bind="foreach: $data.calcCost(1, player.town().dungeon.tokenCost, player.region)">
+                                        <td data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
                                             <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
                                         </td>
                                     </tr>

@@ -54,7 +54,7 @@ class DungeonGuide {
         if (DungeonGuides.clears() > 0) {
             // Need to reset the map
             DungeonRunner.map.board([]);
-            DungeonRunner.initializeDungeon(player.town().dungeon);
+            DungeonRunner.initializeDungeon(player.town.dungeon);
         } else {
             // No more clears, fire the guide, reset clears to 1 for modal
             this.fire();
@@ -129,11 +129,11 @@ class DungeonGuides {
     }
 
     public static calcCost(): Amount[] {
-        return this.list[this.selected()].calcCost(this.clears(), player.town().dungeon.tokenCost, player.region);
+        return this.list[this.selected()].calcCost(this.clears(), player.town.dungeon.tokenCost, player.region);
     }
 
     public static calcDungeonCost(): Amount {
-        return new Amount(player.town().dungeon.tokenCost * this.clears(), GameConstants.Currency.dungeonToken);
+        return new Amount(player.town.dungeon.tokenCost * this.clears(), GameConstants.Currency.dungeonToken);
     }
 
     public static canAfford(): boolean {
@@ -168,7 +168,7 @@ class DungeonGuides {
         // Hire the guide
         guide.hire();
         // Start the dungeon
-        DungeonRunner.initializeDungeon(player.town().dungeon);
+        DungeonRunner.initializeDungeon(player.town.dungeon);
     }
 
     public static getRandomWeightedNearbyTile(nearbyTiles: DungeonTile[]): DungeonTile {
