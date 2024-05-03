@@ -56,6 +56,7 @@ export type ItemNameType
     | 'Nestball'
     | 'Repeatball'
     | 'Beastball'
+    | 'Moonball'
     | 'Berry_Shovel'
     | 'Mulch_Shovel'
     | 'PokeBlock_Black'
