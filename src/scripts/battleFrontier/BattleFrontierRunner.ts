@@ -74,7 +74,16 @@ class BattleFrontierRunner {
         // Give Battle Points and Money based on how far the user got
         const battleMultiplier = Math.max(stageBeaten / 100, 1);
         let battlePointsEarned = Math.round(stageBeaten * battleMultiplier);
-        let moneyEarned = stageBeaten * 100 * battleMultiplier;
+
+        // we want to know what would be the route we can one-shot based on the stage beaten
+        // assuming we ignore variability due to types and weather : if we can beat a certain stage, it means we can one shot a route with Pokémon that has 10 times less HP than each Pokémon in the stage
+        // So this *not* super elegant piece of code here will calculate the normalized route number that would match those HP by inverting the PokemonFactory.health() method for the Stage health divided by 10
+        const approximatedNormalizedOneShotRoute = Math.ceil(Math.pow(Math.pow(PokemonFactory.routeHealth(stageBeaten, GameConstants.Region.none) / 10, 1.0 / 1.15) * 12 / 100, 1.0 / 2.2));
+
+        // it's impossible to know how much time was spent to be able to reach this stage,
+        // but we want to give a reward that would be in the same order of magnitude than what farming on a route would be.
+        // So we can approximate by multiplying the payout for "one" Pokémon by the number of stages times 1,5 (1,5 seconds is the minimum time spent on a stage)
+        let moneyEarned  = Math.floor(PokemonFactory.routeMoney(approximatedNormalizedOneShotRoute, GameConstants.Region.none, false) * stageBeaten * 1.5);
 
         // Award battle points and dollars and retrieve their computed values
         battlePointsEarned = App.game.wallet.gainBattlePoints(battlePointsEarned).amount;
