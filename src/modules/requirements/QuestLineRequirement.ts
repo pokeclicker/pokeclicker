@@ -1,11 +1,13 @@
 import { AchievementOption } from '../GameConstants';
 import QuestLineState from '../quests/QuestLineState';
+import { QuestLineNameType } from '../quests/QuestLineNameType';
+
 import Requirement from './Requirement';
 
 export default class QuestLineRequirement extends Requirement {
-    private questLineName: string;
+    private questLineName: QuestLineNameType;
 
-    constructor(questLineName: string, option: AchievementOption = AchievementOption.more) {
+    constructor(questLineName: QuestLineNameType, option: AchievementOption = AchievementOption.more) {
         super(1, option);
         this.questLineName = questLineName;
     }

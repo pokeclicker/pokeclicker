@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1448 1448">
+  <g fill="none" stroke-width="2">
+    <path stroke="gray" d="m175 726 548 249a3 3-45 0 0 2 0l547-249q2-1 2-3a2 2 0 0 0-2-1L725 473a3 3 45 0 0-2 0L175 722a3 3 0 0 0 0 4" vector-effect="non-scaling-stroke"/>
+    <path stroke="gray" d="m183 724 540 246h2l540-246-540-246h-2L183 724" vector-effect="non-scaling-stroke"/>
+    <path stroke="#8d8d8d" d="M552 724q0 48 24 88l7 7c15 11 35-2 31-20q0-3-4-9-17-31-18-66" vector-effect="non-scaling-stroke"/>
+    <path stroke="silver" d="M592 724c2-74 58-130 132-131" vector-effect="non-scaling-stroke"/>
+    <path stroke="#8d8d8d" d="M724 593c22 1 43 5 62 16l13 6c18 3 32-17 20-32q-3-4-10-8-39-22-85-22" vector-effect="non-scaling-stroke"/>
+    <path stroke="silver" d="M724 553c-95 0-172 75-172 171" vector-effect="non-scaling-stroke"/>
+    <path stroke="#4d4d4d" d="M724 553v40M592 724h-40" vector-effect="non-scaling-stroke"/>
+    <path stroke="#8d8d8d" d="M620 724c0 58 47 103 104 104" vector-effect="non-scaling-stroke"/>
+    <path stroke="gray" d="M724 828c57-1 104-46 104-104" vector-effect="non-scaling-stroke"/>
+    <path stroke="#8d8d8d" d="M828 724c0-58-47-103-104-104" vector-effect="non-scaling-stroke"/>
+    <path stroke="silver" d="M724 620c-58 1-103 46-104 104" vector-effect="non-scaling-stroke"/>
+    <path stroke="#4d4d4d" d="M724 620v41" vector-effect="non-scaling-stroke"/>
+    <path stroke="silver" d="M724 661c-36 1-62 27-64 63" vector-effect="non-scaling-stroke"/>
+    <path stroke="#4d4d4d" d="M660 724h-40" vector-effect="non-scaling-stroke"/>
+    <path stroke="gray" d="M787 724c0 36-28 62-63 63" vector-effect="non-scaling-stroke"/>
+    <path stroke="#8d8d8d" d="M724 787c-36 0-62-28-64-63" vector-effect="non-scaling-stroke"/>
+    <path stroke="#0d0d0d" d="M828 724h-41" vector-effect="non-scaling-stroke"/>
+    <path stroke="#8d8d8d" d="M787 724c0-36-28-62-63-63" vector-effect="non-scaling-stroke"/>
+    <path stroke="#0d0d0d" d="M724 787v41" vector-effect="non-scaling-stroke"/>
+    <path stroke="gray" d="M856 723q0 36-18 67c-24 40-67 65-114 65" vector-effect="non-scaling-stroke"/>
+    <path stroke="#8d8d8d" d="M724 855c-26 0-47-7-69-19q-4-3-8-3c-17-2-29 17-19 31q3 4 11 9 39 22 85 22" vector-effect="non-scaling-stroke"/>
+    <path stroke="gray" d="M724 895c95 0 172-76 172-171" vector-effect="non-scaling-stroke"/>
+    <path stroke="#8d8d8d" d="M896 724q0-45-22-84l-6-9c-14-14-38-2-35 18l7 14q15 28 16 60" vector-effect="non-scaling-stroke"/>
+    <path stroke="#0d0d0d" d="M896 724q-20 1-40-1M724 895q-1 0 0 0v-40" vector-effect="non-scaling-stroke"/>
+  </g>
+  <path fill="#fff" d="M720 979c-183-83-366-165-548-249l-2-3c-2-5 0-8 5-10l547-249h6l545 249c8 3 8 11 0 15L729 979c-4 2-5 2-9 0ZM175 726l548 249a3 3-45 0 0 2 0l547-249q2-1 2-3a2 2 0 0 0-2-1L725 473a3 3 45 0 0-2 0L175 722a3 3 0 0 0 0 4Z"/>
+  <path d="M723 975 175 726a3 3 0 0 1 0-4l548-249a3 3 45 0 1 2 0l547 249a2 2 0 0 1 2 1q0 2-2 3L725 975a3 3-45 0 1-2 0ZM183 724l540 246h2l540-246-540-246h-2L183 724Z"/>
+  <path fill="#fff" d="M723 970 183 724l540-246h2l540 246-540 246h-2ZM552 724q0 48 24 88l7 7c15 11 35-2 31-20q0-3-4-9-17-31-18-66a132 132 0 0 1 194-115l13 6c18 3 32-17 20-32q-3-4-10-8-39-22-85-22c-95 0-172 75-172 171Zm68 0a104 104 0 0 0 208 0 104 104 0 0 0-208 0Zm236-1q0 36-18 67a132 132 0 0 1-183 46q-4-3-8-3c-17-2-29 17-19 31q3 4 11 9 39 22 85 22c95 0 172-76 172-171q0-45-22-84l-6-9c-14-14-38-2-35 18l7 14q15 28 16 60Z"/>
+  <path fill="gray" d="M724 553v40c-74 1-130 57-132 131h-40c0-96 77-171 172-171Z"/>
+  <path fill="#1a1a1a" d="M724 593v-40q46 0 85 22 7 4 10 8c12 15-2 35-20 32l-13-6c-19-11-40-15-62-16Z"/>
+  <path fill="gray" d="M724 620v41c-36 1-62 27-64 63h-40c1-58 46-103 104-104Z"/>
+  <path fill="#1a1a1a" d="M724 620c57 1 104 46 104 104h-41c0-36-28-62-63-63v-41Zm172 104q-20 1-40-1-1-32-16-60l-7-14c-3-20 21-32 35-18l6 9q22 39 22 84Z"/>
+  <path fill="#fff" d="M724 661c35 1 63 27 63 63a63 63 0 1 1-63-63Z"/>
+  <path d="M856 723q20 2 40 1c0 95-77 171-172 171q-1 0 0 0v-40c47 0 90-25 114-65q18-31 18-67Z"/>
+  <path fill="#1a1a1a" d="M592 724q1 35 18 66 4 6 4 9c4 18-16 31-31 20l-7-7q-24-40-24-88h40Zm68 0c2 35 28 63 64 63v41c-57-1-104-46-104-104h40Z"/>
+  <path d="M828 724c0 58-47 103-104 104v-41c35-1 63-27 63-63h41Z"/>
+  <path fill="#1a1a1a" d="M724 855v40q-1 0 0 0-46 0-85-22-8-5-11-9c-10-14 2-33 19-31q4 0 8 3c22 12 43 19 69 19Z"/>
+</svg>

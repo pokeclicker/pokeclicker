@@ -232,6 +232,7 @@ const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
+    ItemList.Gooey_Mulch,
 ], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park')]);
 
 // Kanto NPCs
@@ -406,7 +407,7 @@ const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
 ], {image: 'assets/images/npcs/Gentleman (Gen 4).png'});
 
 const VermilionShardApprentice = new NPC('Shard Apprentice', [
-    'Are you looking for some Shards? You can find them in many Dungeons! Except in Viridan Forest and Mt. Moon. I\'ve never found any Shards there for some reason.',
+    'Are you looking for some Shards? You can find them in many Dungeons! Except in Viridian Forest and Mt. Moon. I\'ve never found any Shards there for some reason.',
     'I happen to know that there are some Yellow and Blue Shards in Diglett\'s Cave. Just look inside the chests!',
     'Shards can have lots of different colors. Different Dungeons will have different colors, so keep an eye out! Most of them can\'t even be found in Kanto!',
 ]);
@@ -444,10 +445,10 @@ const EggHuntErika = new NPC('Erika', [
     'Hello... Isn\'t the spring weather so relaxing? I adore how lovely the blooming flowers look during this time of year...',
     'Oh! I\'m sorry, I almost dozed off. I was reminiscing about my stroll in Viridian Forest earlier today. I came across the loveliest patch of flowers over there and...',
     '...',
-    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a colorful, round Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
+    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a basket full of Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
 ], {
     image: 'assets/images/npcs/Erika.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Togepi Egg Hunt'), new QuestLineCompletedRequirement('Togepi Egg Hunt', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Egg Hunt'), new QuestLineCompletedRequirement('Egg Hunt', GameConstants.AchievementOption.less)]),
 });
 
 const SaffronBattleItemRival = new NPC('Battle Item Master', [
@@ -856,6 +857,31 @@ const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 7), new QuestLineStepCompletedRequirement('An Unrivaled Power', 9, GameConstants.AchievementOption.less)]),
 });
 
+const BillGrandpaChristmas = new NPC('Bill\'s Grandpa', [
+    'Did you find all of the Santa Jynx?',
+    'I hope they don\'t come back!',
+], {
+    image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
+    requirement: new OneFromManyRequirement([
+        new MultiRequirement([
+            new ItemRequirement(11, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 1'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(27, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 2'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(49, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 3'),
+        ]),
+        new MultiRequirement([
+            new ItemRequirement(150, 'Christmas_present'),
+            new TemporaryBattleRequirement('Santa Jynx 4'),
+        ]),
+    ]),
+});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -916,10 +942,16 @@ TownList['Bill\'s House'] = new Town(
     'Bill\'s House',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [TemporaryBattleList['Bill\'s Grandpa']],
+    [
+        TemporaryBattleList['Bill\'s Grandpa'],
+        TemporaryBattleList['Santa Jynx 1'],
+        TemporaryBattleList['Santa Jynx 2'],
+        TemporaryBattleList['Santa Jynx 3'],
+        TemporaryBattleList['Santa Jynx 4'],
+    ],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 25)],
-        npcs: [BillsGrandpa1, BillsGrandpa2, BillsGrandpa3, BillsGrandpa4, BillsGrandpa5, BillsGrandpa6, BillsGrandpa7, BillsGrandpa8, BillsHouseEusine],
+        npcs: [BillsGrandpa1, BillsGrandpa2, BillsGrandpa3, BillsGrandpa4, BillsGrandpa5, BillsGrandpa6, BillsGrandpa7, BillsGrandpa8, BillsHouseEusine, BillGrandpaChristmas],
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -938,7 +970,7 @@ TownList['Lavender Town'] = new Town(
     GameConstants.KantoSubRegions.Kanto,
     [LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Tunnel'))],
         npcs: [LavenderMrFuji, LavenderChanneler, LavenderShopper],
     }
 );
@@ -1230,7 +1262,7 @@ TownList['Rock Tunnel'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
     [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 9),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 10),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
@@ -1494,7 +1526,10 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.ChartiBerry,
 ], 'Johto Berry Master');
 
-
+//Johto Contest Shop
+const JohtoContestShop = new Shop([
+    ItemList['Sudowoodo (Golden)'],
+], 'Contest Shop');
 // Johto NPCs
 
 const CherrygroveMrPokemon = new NPC('Mr. Pokémon', [
@@ -1580,7 +1615,7 @@ const AzaleaCelebiOak1 = new NPC('Prof. Oak', [
 
 const AzaleaCelebiOak2 = new NPC('Prof. Oak', [
     'Celebi wasn\'t there? Strange, usually it loves to play with young people at the shrine.',
-    'Wait. That Pichu! It used to play with us at that shrine way back when! It looks like it hasn\'t aged a day!',
+    'Wait. You saw a Pichu with a spiked ear?! We used to play with it at that shrine way back when! Looks like it hasn\'t aged a day!',
     'It sounds like you encountered a Time Distortion. Celebi is sensitive to time, it must be distressed. I have heard rumors of something similar going on at Tohjo Falls. Maybe if you clear up that Time Distortion, Celebi will want to come out to play?',
 ], {
     image: 'assets/images/npcs/Professor Oak.png',
@@ -1629,11 +1664,67 @@ const IlexForestShrine2 = new NPC('Investigate the Shrine', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 11), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less)]),
 });
 
+const IlexForestPichuFan = new NPC('Pichu-Fan', [
+    'I\'m looking for a strange Pichu, have you seen it? According to rumors, its favorite hiding spots are chests...',
+], {
+    image: 'assets/images/npcs/Poké Kid.png',
+    requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 7),
+});
+
 const EcruteakBill = new NPC('Bill', [
     'I traveled here all the way from Goldenrod to buy a Soothe Bell for my Eevee.',
     'When I use a Soothe Bell on Eevee it can evolve into Espeon or Umbreon. It depends on the time. Espeon during the day, Umbreon at night.',
     'I only brought enough QP for one Soothe Bell. It\'s so hard to choose...',
 ], {image: 'assets/images/npcs/Bill.png'});
+
+
+const OlivineLighthouseJasmine1 = new NPC('Jasmine', [
+    '...This Pokémon always kept the sea lit at night... But it suddenly got sick... It’s gasping for air...',
+    '...I understand that there is a wonderful Pharmacy in Cianwood... But that’s across the sea... And I can’t leave Amphy unattended...',
+    'May I ask you to get some medicine for me? Please?',
+], {
+    image: 'assets/images/npcs/Jasmine.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 0), new QuestLineStepCompletedRequirement('The Sick Ampharos', 4, GameConstants.AchievementOption.less)]),
+});
+
+const CianwoodCityPharmacist1 = new NPC('Pharmacist', [
+    'Huh? You need medicine? Your Pokémon appear to be fine. Is something worrying you?',
+    'The Lighthouse Pokémon is in trouble? I\'ll prepare some medicine right now but it will take some time!',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 1), new QuestLineStepCompletedRequirement('The Sick Ampharos', 3, GameConstants.AchievementOption.less)]),
+});
+
+const CianwoodCityPharmacist2 = new NPC('Pharmacist', [
+    'I got it! This ought to do the trick.',
+    '<i>You got a \'Secret Potion\'</i>',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 3), new QuestLineStepCompletedRequirement('The Sick Ampharos', 4, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseMedicineAmphy = new NPC('Give medicine to Amphy', [
+    'Palu! Palulu!',
+    '<i>Ampharos seems to feel better.</i>',
+], {
+    image: 'assets/images/pokemon/181.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 4), new QuestLineStepCompletedRequirement('The Sick Ampharos', 5, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseJasmine2 = new NPC('Jasmine', [
+    ' ...Oh, I’m so relieved... This is just so wonderful... Thank you so very, very much.',
+    '...I will return to the Gym...',
+], {
+    image: 'assets/images/npcs/Jasmine.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Sick Ampharos', 5), new QuestLineStepCompletedRequirement('The Sick Ampharos', 6, GameConstants.AchievementOption.less)]),
+});
+
+const OlivineLighthouseAmphy = new NPC('Amphy', [
+    'Palu! Palulu!',
+], {
+    image: 'assets/images/pokemon/181.png',
+    requirement: new QuestLineCompletedRequirement('The Sick Ampharos'),
+});
 
 const EcruteakEusine = new NPC('Eusine', [
     'Legends say that when the Brass Tower burned down and became the Burned Tower, three unnamed Pokémon perished in the flames...',
@@ -1800,7 +1891,16 @@ const HowardClifford3 = new NPC('Howard Clifford', [
     image: 'assets/images/npcs/Howard Clifford.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 13), new QuestLineStepCompletedRequirement('Detective Pikachu', 15, GameConstants.AchievementOption.less)]),
 });
-
+const ParkAttendant = new NPC('Park Attendant', [
+    'Welcome to the National Park!',
+    'Lots of people come through here to take a stroll, and some come from far away to participate in our Bug Catching Contest!',
+    'All kinds of Bug Pokémon can be found in the park! Each one can be caught for Contest Tokens, and more powerful Pokémon are worth more Tokens!',
+], { image: 'assets/images/npcs/Pokémon Ranger (male).png' });
+const ParkResearcher = new NPC('Researcher', [
+    'Welcome to the National Park!',
+    'Thanks to recent breakthroughs in the field of alloying and electroplating, we have discovered a way to coat some Pokémon in metal!',
+    'An experimental specimen can be bought here: A Sudowoodo that is no longer weak against Water attacks!',
+], { image: 'assets/images/npcs/Scientist (male).png' });
 
 //Johto Towns
 TownList['New Bark Town'] = new Town(
@@ -1867,7 +1967,7 @@ TownList['Olivine City'] = new Town(
     'Olivine City',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [OlivineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Olivine City'])],
+    [OlivineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Olivine City']), new MoveToDungeon(dungeonList['Olivine Lighthouse'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
         npcs: [OlivineSSAquaCaptain],
@@ -1880,7 +1980,7 @@ TownList['Cianwood City'] = new Town(
     [CianwoodCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cianwood City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 41)],
-        npcs: [CianwoodPhotographyAide, CianwoodEusine],
+        npcs: [CianwoodPhotographyAide, CianwoodEusine, CianwoodCityPharmacist1, CianwoodCityPharmacist2],
     }
 );
 TownList['Mahogany Town'] = new Town(
@@ -1916,6 +2016,16 @@ TownList['Indigo Plateau Johto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 26),
             new TemporaryBattleRequirement('Silver 5'),
         ],
+    }
+);
+TownList['National Park'] = new Town(
+    'National Park',
+    GameConstants.Region.johto,
+    GameConstants.JohtoSubRegions.Johto,
+    [new SafariTownContent('Bug Catching Contest'), JohtoContestShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 35)],
+        npcs: [ParkAttendant, ParkResearcher],
     }
 );
 
@@ -1954,7 +2064,7 @@ TownList['Ilex Forest'] = new DungeonTown(
     ],
     [TemporaryBattleList['Spiky-eared Pichu']],
     {
-        npcs: [IlexForestShrine1, IlexForestShrine2, Naoko],
+        npcs: [IlexForestShrine1, IlexForestShrine2, IlexForestPichuFan, Naoko],
     }
 );
 TownList['Burned Tower'] = new DungeonTown(
@@ -1963,6 +2073,16 @@ TownList['Burned Tower'] = new DungeonTown(
     GameConstants.JohtoSubRegions.Johto,
     [new QuestLineStepCompletedRequirement('The Legendary Beasts', 0)],
     [TemporaryBattleList['Silver 3']]
+);
+TownList['Olivine Lighthouse'] = new DungeonTown(
+    'Olivine Lighthouse',
+    GameConstants.Region.johto,
+    GameConstants.JohtoSubRegions.Johto,
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
+    [],
+    {
+        npcs: [OlivineLighthouseJasmine1, OlivineLighthouseJasmine2, OlivineLighthouseMedicineAmphy, OlivineLighthouseAmphy],
+    }
 );
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
@@ -2035,7 +2155,7 @@ TownList['Mt. Silver'] = new DungeonTown(
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
     [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
-    [TemporaryBattleList.Red],
+    [],
     {
         npcs: [RedOldManJohtoNPC],
     }
@@ -2404,6 +2524,15 @@ const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
 ], {image: 'assets/images/npcs/Cooltrainer (male).png',
 });
 
+const EasterEggHunter = new NPC('Egg Hunter', [
+    'My eggs! They ran away!',
+    'Can you help me get them back? They have most likely fleed to a dungeon in Kanto, Hoenn or Johto.',
+    'But be careful! If you defeat them, they will run away again!',
+], {
+    image: 'assets/images/npcs/Egg Hunter.png',
+    requirement: new MultiRequirement([new SpecialEventRequirement('Easter'), new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.more)]),
+});
+
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
 ], {image: 'assets/images/npcs/other/Regi Entrance.png',
@@ -2557,7 +2686,7 @@ const DeltaMay1 = new NPC('May', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 1), new QuestLineStepCompletedRequirement('The Delta Episode', 3, GameConstants.AchievementOption.less)]),
 });
 
-const NewsBirch = new NPC('Discuss the news with Dr. Birch', [
+const NewsBirch = new NPC('Discuss the news with Professor Birch', [
     'Hello again, $playername$! It\'s been a while since you last visited!',
     'There\'s been a lot of hubbub and excitement in the region since the Mossdeep Space Center announced that a meteor was headed our way. This has lead to a lot of new faces in Hoenn.',
     'Some of them have been carrying small but powerful items known as Key Stones. These have the power to let Pokémon Mega Evolve! You may have experienced something like that in Kalos, but it\'s new to us here.',
@@ -2873,7 +3002,7 @@ const PrimalMaxie = new NPC('Maxie', [
 });
 const MrStone2 = new NPC('Mr. Stone', [
     'Thank you, $playername$! Your heroics have saved Hoenn once again!',
-    'My researchers tell me that since their defeat, Groudon and Kyogre have been reverting to their primal forms in the Cave of Origin during Sunny and Rainy weather.',
+    'My researchers tell me that since their defeat, Groudon and Kyogre have been reverting to their primal forms in the Cave of Origin during Harsh Sunlight and Rainy weather.',
     'They are certainly very dangerous, but it doesn\'t seem like they are a threat to the region anymore.',
 ], {image: 'assets/images/npcs/Mr Stone.png',
     requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 15),
@@ -2882,8 +3011,8 @@ const MrStone2 = new NPC('Mr. Stone', [
 const ZinniaOrigin = new NPC('Zinnia', [
     'Wow, $playername$! You\'ve been busy!',
     'Now that things are calmer in Hoenn, I\'ve decided to keep an eye on Kyogre and Groudon and make sure they don\'t cause any more trouble.',
-    'Groudon reverts to its Primal form in when it\'s sunny, and Kyogre reverts to its Primal form in the rain.',
-    'Archie and Maxie are still lurking somewhere in Hoenn,but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
+    'Groudon reverts to its Primal form when the sun is harsh, and Kyogre reverts to its Primal form in the rain.',
+    'Archie and Maxie are still lurking somewhere in Hoenn, but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
 });
@@ -3054,9 +3183,9 @@ const Trest = new NPC('Mayor Trest', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 15), new QuestLineStepCompletedRequirement('Gale of Darkness', 17, GameConstants.AchievementOption.less)]),
 });
 const Verich = new NPC('Mr. Verich', [
-    'Hohoho! You must be $playername$ I\'m hearing so much about from my.... employees.',
+    'Hohoho! You must be the $playername$ I\'m hearing so much about you from my.... employees.',
     'There\'s a lot of rumors buzzing around about the S. S. Libra, but if you ask me, it\'s long gone and may never be found.',
-    'You\'d have to be as crazy as Kamino to go looking for it.',
+    'You\'d have to be as crazy as Kaminko to go looking for it.',
 ], {image: 'assets/images/npcs/Grand Master Greevil.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 16), new QuestLineStepCompletedRequirement('Gale of Darkness', 18, GameConstants.AchievementOption.less)]),
 });
@@ -3410,7 +3539,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
-        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 0))],
+        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
         npcs: [ProfKrane],
     }
 );
@@ -3421,7 +3550,7 @@ TownList['Kaminko\'s Manor'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
     {
-        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 2))],
+        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
         npcs: [DrKaminko, Chobin1, Chobin2],
     }
 );
@@ -3432,7 +3561,7 @@ TownList['S. S. Libra'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList['Cipher Peon Smarton']],
     {
-        requirements: [new DevelopmentRequirement(new QuestLineStepCompletedRequirement('Gale of Darkness', 19))],
+        requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
         npcs: [SearchLibra],
     }
 );
@@ -3442,7 +3571,7 @@ TownList['Orre Colosseum'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [GymList['Cipher Admin Lovrina'], GymList['Cipher Admin Snattle'], GymList['Cipher Admin Gorigan'], GymList['Cipher Admin Ardos'], GymList['Cipher Admin Eldes']],
     {
-        requirements: [new DevelopmentRequirement(new QuestLineCompletedRequirement('Gale of Darkness'))],
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
         npcs: [OrreColosseumSpectator],
     }
 );
@@ -3451,7 +3580,9 @@ TownList['Petalburg Woods'] = new DungeonTown(
     'Petalburg Woods',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 104)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 104)],
+    [],
+    { npcs: [EasterEggHunter] }
 );
 TownList['Rusturf Tunnel'] = new DungeonTown(
     'Rusturf Tunnel',
@@ -3789,41 +3920,25 @@ TownList['Gateon Port Battles'] = new DungeonTown(
     'Gateon Port Battles',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 1),
-    ]
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 1)]
 );
 TownList['Cipher Key Lair'] = new DungeonTown(
     'Cipher Key Lair',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 24),
-    ],
-    [],
-    {
-        npcs: [],
-    }
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 24)]
 );
 TownList['Citadark Isle'] = new DungeonTown(
     'Citadark Isle',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 26),
-    ]
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 26)]
 );
 TownList['Citadark Isle Dome'] = new DungeonTown(
     'Citadark Isle Dome',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-        new QuestLineStepCompletedRequirement('Gale of Darkness', 27),
-    ]
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 27)]
 );
 
 //Sinnoh Shops
@@ -3886,7 +4001,6 @@ const PastoriaShop = new Shop([
     ItemList.Water_egg,
     ItemList.Water_stone,
     ItemList.Prism_scale,
-    ItemList.Skorupi,
 ]);
 const CelesticTownShop = new Shop([
     ItemList.Pokeball,
@@ -3967,6 +4081,7 @@ const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
 
 const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Secret Berry Shop'],[
     ItemList.Freeze_Mulch,
+    ItemList.Gooey_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
 ], 'Secret Berry Shop');
@@ -4017,6 +4132,10 @@ const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
     'Hello young one, have you come here to learn of Sinnoh’s mysteries?',
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
+
+const SinnohSafariRanger = new SafariPokemonNPC('Safari Ranger', [
+    'There are some Pokémon here that can\'t be found anywhere else in Sinnoh!',
+], GameConstants.Region.sinnoh, 'assets/images/npcs/Pokemon Ranger (female).png');
 
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
@@ -4341,7 +4460,7 @@ TownList['Sandgem Town'] = new Town(
     'Sandgem Town',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher']],
+    [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher'], new ShardTraderShop(GameConstants.ShardTraderLocations['Sandgem Town'], 'Santa\'s Secret Daycare', true, 'Plates')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
         npcs: [ProfRowan, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
@@ -4466,6 +4585,16 @@ TownList['Canalave City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
         npcs: [CanalaveRiley, CanalaveYoungBoy, CanalaveSinnohMyth, ManaphyHastings3, ManaphyHastings4],
+    }
+);
+TownList['Great Marsh'] = new Town(
+    'Great Marsh',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Sinnoh,
+    [new SafariTownContent()],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
+        npcs: [SinnohSafariRanger],
     }
 );
 TownList['Snowpoint City'] = new Town(
@@ -4670,8 +4799,8 @@ TownList['Distortion World'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar')),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'), GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('A New World', 9),
+                new QuestLineStepCompletedRequirement('A New World', 10, GameConstants.AchievementOption.less),
             ]),
             new TemporaryBattleRequirement('Zero'),
         ]),
@@ -4876,7 +5005,12 @@ const UnovaFluteMaster = new GemMasterShop(GameConstants.GemShops.UnovaFluteMast
 
 //Unova Berry Master
 const DriftveilBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Driftveil City'],[
+    ItemList.Boost_Mulch,
+    ItemList.Rich_Mulch,
+    ItemList.Surprise_Mulch,
+    ItemList.Amaze_Mulch,
     ItemList.Freeze_Mulch,
+    ItemList.Gooey_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
 ], 'Unova Berry Master');
@@ -5016,6 +5150,125 @@ const UnovaFossilNpc = new NPC('Friendly Waitress', [
     '... Do you think they\'re hiring?',
 ], {image: 'assets/images/npcs/Waitress.png'});
 
+// Swords of Justice Quest Npcs
+const OldManSwords = new NPC('Old Man', [
+    'Hello kiddo. You must be $playername$, nice to meet you.',
+    'You might\'ve heard about the Swords of Justice. They seem to be really worried recently and that also worries me, but you seem to be a really nice lad so I\'ll tell you how to find their leader, Cobalion.',
+    'They usually lurk around the deepest layers of Mistralton Cave so you might be able to find them by exploring around here.',
+], {
+    image: 'assets/images/npcs/Old Man.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Swords of Justice'), new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.less)]),
+});
+const Cobalion1 = new NPC('Cobalion', [
+    'Greetings, may I ask who are you? Oh, you\'re a friend of the Old Man? That\'s great, and he sent you here to find me, I assume.',
+    'Well, since he said for you to find me, there must be a reason. Unless you\'re here to help me reform the Swords of Justice? If so, then thank you for your aid. Meet me in the Moor of Icirrus after you find them. You should look for Terrakion first, they usually stay in the depths of the Unova Victory Road. Good luck, Trainer.',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.less)]),
+});
+const Terrakion1 = new NPC('Terrakion', [
+    'How did you find me? Cobalion told me this place was well hidden! Anyways, what do you want from me? Cobalion wants to reunite the Swords of Justice? Do you think I\'m dumb enough to fall for lies of a human?',
+    'I\'ll consider your worth only if you prove your strength and can beat me in battle!',
+], {
+    image: 'assets/images/pokemon/639.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.less)]),
+});
+const Cobalion2 = new NPC('Cobalion', [
+    'Thank you, $playername$. Your assistance with reuniting the Swords of Justice is greatly appreciated.',
+    'Now that you\'ve found and brought back Terrakion you should probably look for Virizion. They usually like to meditate to the sound of nature, so Pinwheel Forest might be a good place to search for them. Good luck, and report back once you\'ve found them.',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.less)]),
+});
+const Virizion1 = new NPC('Virizion', [
+    'Hello, who are you, may I ask? You say you were sent here by Cobalion because he wants to reunite the Swords of Justice? I\'m sorry dear, you\'ll have to create a much more believable lie to deceive me. I\'m not so easily fooled.',
+    'To earn my trust, you need to prove your patience to me. If you can gather 5,000 Grass Gems and bring them to me, then I\'ll trust your word. If you cannot handle such a task, do not return.',
+], {
+    image: 'assets/images/pokemon/640.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 9, GameConstants.AchievementOption.less)]),
+});
+const Virizion2 = new NPC('Virizion', [
+    'Oh, you\'re back? And you\'ve brought the 5,000 Grass Gems. I\'m impressed. Very well, you\'ve earned my trust. So, Cobalion wants me to meet them at the Moor of Icirrus to reunite the Swords of Justice? Sounds just like the old Cobalion I remember. I\'ll make my way there now, you should come too. I\'m sure your assistance is still desired.',
+], {
+    image: 'assets/images/pokemon/640.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 9, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.less)]),
+});
+const Cobalion3 = new NPC('Cobalion', [
+    'Welcome back, $playername$! I can see you\'ve brought back Virizion, thank you for your assistance towards reuniting the Swords of Justice.',
+    'Now, let\'s discuss the plan. Wait, you want to help too? You should know this will be a very dangerous mission, $playername$. We may not be able to fully protect you from the dangers we may face. The only way we can be sure of your safety is if you can hold your own against all three of us in battle. If you succeed, we will happily accept your assistance, but should you fail, then I apologise, but we cannot allow you to join the mission. What say you? Shall we spar?',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 12, GameConstants.AchievementOption.less)]),
+});
+const Cobalion4 = new NPC('Cobalion', [
+    'Greetings, $playername$. I assume you couldn\'t find much, but I was able to find that Kyurem has been seen near Lacunosa Town. We should check it out immediately, before it decides to attack. You go ahead, I\'ll warn the others.',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 13, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.less)]),
+});
+const Cobalion5 = new NPC('Cobalion', [
+    'Hey, $playername$. It\'s not your fault Kyurem fled, but I\'m thinking they should probably gone into hiding. We should search the Giant Chasm for their lair at once.',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 17, GameConstants.AchievementOption.less)]),
+});
+const Cobalion6 = new NPC('Cobalion', [
+    '$playername$... Don\'t worry about us... We\'ll be fine... Defeat Kyurem once and for all so we can live in peace.',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 18, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.less)]),
+});
+const Cobalion7 = new NPC('Cobalion', [
+    'Thank you for all your help, $playername$. You really were a great ally, and I hope we can meet again. As thanks for helping us, I\'ll be waiting for you in Mistralton Cave if you\'d wish for me to join your team.',
+], {
+    image: 'assets/images/pokemon/638.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
+});
+const Terrakion2 = new NPC('Terrakion', [
+    'Hey, you were a really great partner! It was really nice doing this mission with you, and you seem like a strong trainer, so if you want me to join your team, I\'ll be waiting in the Victory Road!',
+], {
+    image: 'assets/images/pokemon/639.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
+});
+const Virizion3 = new NPC('Virizion', [
+    'You were a great ally, $playername$. I feel it\'d be a wise decision on my part if I joined your team, but that\'s a decision for you to make. If you decide you wish for me to join your team, you can look for me in the depths of Pinwheel Forest.',
+], {
+    image: 'assets/images/pokemon/640.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
+});
+
+// Genesect Quest Npcs
+const InvestigateP2 = new NPC('Investigate the P2 Laboratory', [
+    '<i>A bright red Pokémon flies past you at a high speed, heading west.</i>',
+], {
+    image: 'assets/images/shinypokemon/649.05.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legend Awakened'), new QuestLineStepCompletedRequirement('The Legend Awakened', 1, GameConstants.AchievementOption.less)]),
+});
+
+const AncientBugHunter1 = new NPC('Ancient Bug Hunter', [
+    'Did you see it come through? The Paleozoic Pokémon, Genesect?',
+    'They haven\'t been seen in Unova for millions of years! If one is here now, it\'s sure to be a little confused about what the world is like.',
+    'I worry it might attack the city out of fear.',
+], {
+    image: 'assets/images/npcs/Super Nerd.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Legend Awakened', 2), new QuestLineStepCompletedRequirement('The Legend Awakened', 4, GameConstants.AchievementOption.less)]),
+});
+
+const GenesectFight = new NPC('Witness the battle', [
+    '<i>The Red Genesect and a powerful Pokémon you don\'t recognize exchange energy blasts. The Red Genesect flees the battle, heading east.</i>',
+], {
+    image: 'assets/images/npcs/other/GenesectFight.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Legend Awakened', 4), new QuestLineStepCompletedRequirement('The Legend Awakened', 6, GameConstants.AchievementOption.less)]),
+});
+
+const AncientBugHunter2 = new NPC('Ancient Bug Hunter', [
+    'Wow! A real, live Genesect!',
+    'I hear that when you equip them with powerful Drive devices, they change forms!',
+    'They also have a high-speed form, which I hear has been sighted across Unova.',
+], {
+    image: 'assets/images/npcs/Super Nerd.png',
+    requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
+});
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -5055,7 +5308,7 @@ TownList['Castelia City'] = new Town(
     [CasteliaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Castelia City']), new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0)],
-        npcs: [CasteliaMusician],
+        npcs: [CasteliaMusician, GenesectFight],
     }
 );
 TownList['A Perfectly Ordinary Frigate'] = new Town(
@@ -5148,12 +5401,13 @@ TownList['Lacunosa Town'] = new Town(
     'Lacunosa Town',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [LacunosaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lacunosa Town']), TemporaryBattleList['Team Plasma Grunt 6'], TemporaryBattleList['Zinzolin 1']],
+    [LacunosaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lacunosa Town']), TemporaryBattleList['Team Plasma Grunt 6'], TemporaryBattleList['Zinzolin 1'], TemporaryBattleList['Kyurem 1']],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 13),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
         ],
+        npcs: [Cobalion5],
     }
 );
 TownList['Opelucid City'] = new Town(
@@ -5321,7 +5575,11 @@ TownList['Castelia Sewers'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0),
-    ]
+    ],
+    [TemporaryBattleList['Red Genesect 1'], TemporaryBattleList['Red Genesect 2']],
+    {
+        npcs: [AncientBugHunter1, AncientBugHunter2],
+    }
 );
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
@@ -5358,7 +5616,11 @@ TownList['Mistralton Cave'] = new DungeonTown(
     [
         new TemporaryBattleRequirement('Colress 2'),
         new RouteKillRequirement(10, GameConstants.Region.unova, 6),
-    ]
+    ],
+    [],
+    {
+        npcs: [OldManSwords, Cobalion1],
+    }
 );
 TownList['Celestial Tower'] = new DungeonTown(
     'Celestial Tower',
@@ -5410,7 +5672,10 @@ TownList['Giant Chasm'] = new DungeonTown(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
         new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15),
     ],
-    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']]
+    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3']],
+    {
+        npcs: [Cobalion6, Cobalion7, Virizion3, Terrakion2],
+    }
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
@@ -5433,7 +5698,11 @@ TownList['Victory Road Unova'] = new DungeonTown(
     'Victory Road Unova',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 23)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 23)],
+    [TemporaryBattleList['Terrakion 1']],
+    {
+        npcs: [Terrakion1],
+    }
 );
 TownList['Twist Mountain'] = new DungeonTown(
     'Twist Mountain',
@@ -5462,16 +5731,22 @@ TownList['Moor of Icirrus'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 8),
-        new ObtainedPokemonRequirement('Cobalion'),
-        new ObtainedPokemonRequirement('Terrakion'),
-        new ObtainedPokemonRequirement('Virizion'),
-    ]
+        new QuestLineStepCompletedRequirement('Swords of Justice', 2, GameConstants.AchievementOption.more),
+    ],
+    [TemporaryBattleList['Swords of Justice 1']],
+    {
+        npcs: [Cobalion2, Cobalion3, Cobalion4],
+    }
 );
 TownList['Pinwheel Forest'] = new DungeonTown(
     'Pinwheel Forest',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    [],
+    {
+        npcs: [Virizion1, Virizion2],
+    }
 );
 TownList.Dreamyard = new DungeonTown(
     'Dreamyard',
@@ -5486,7 +5761,7 @@ TownList['P2 Laboratory'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
     [],
     {
-        npcs: [P2LaboratoryColress],
+        npcs: [P2LaboratoryColress, InvestigateP2],
     }
 );
 
@@ -5512,7 +5787,7 @@ const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Dandy)'],
     ItemList['Furfrou (Kabuki)'],
     ItemList['Furfrou (Pharaoh)'],
-    ItemList['Furfrou (Heart)'],
+    //ItemList['Furfrou (Heart)'],
 ], 'Friseur Furfrou');
 const CamphrierTownShop = new Shop([
     ItemList.Pokeball,
@@ -5774,6 +6049,14 @@ const Lysandre3 = new NPC('Lysandre', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 12), new QuestLineStepCompletedRequirement('A Beautiful World', 14, GameConstants.AchievementOption.less)]),
 });
 
+const SantaluneSageChen = new NPC('Sage Chen', [
+    'Ever since growing old I\'m no longer the Pokémon Trainer that I used to be. Now I always like to keep my garden full of Kasib Berries.',
+    'One day, I forgot to harvest them, and within its withered husk, I found a small stone that enabled my Banette to perform a Mega Evolution."',
+], {
+    image: 'assets/images/npcs/Sage.png',
+    requirement: new ObtainedPokemonRequirement('Banette'),
+});
+
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
@@ -5815,7 +6098,7 @@ const DendemilleDogLover = new NPC('Dubious Dog-loving Duke', [
     'Dog Pokémon are the best of all! I\'m particularly fond of Houndour - I\'ve caught about five hundred of them.',
     'There\'s no such thing as a cold night in my house, no sir! The most fierce chill of winter is completely defeated by their warm, cozy presence.',
     'But recently, now that I\'ve got so many Houndour, they have been acting rather curiously.',
-    'When the weather turns sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
+    'When the weather turns really sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
     'They come wandering back when the weather changes, though. I wonder if a strong Pokémon is calling them?',
     'You could build your own Houndour pack and find out, but if it\'s strong enough to call five hundred Pokémon, it probably wouldn\'t give anyone weaker than Diantha the time of day.',
 ], {image: 'assets/images/npcs/Gentleman.png',
@@ -6081,7 +6364,7 @@ const AnomalyMewtwo3 = new NPC('Anomaly Mewtwo', [
 
 const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
     '<i>Hah! Your strength is truly unyielding!</i>',
-    '<i>I would like to apolagise for accusing you of merely possessing the Mewtwo in your care. It is clear that you greatly care for it, as well as all your other Pokémon. Take this.</i>',
+    '<i>I would like to apologise for accusing you of merely possessing the Mewtwo in your care. It is clear that you greatly care for it, as well as all your other Pokémon. Take this.</i>',
     '</i></br><img src="assets/images/megaStone/Mewtwonite_Y.png"/></br><i>You obtained the Mewtwonite Y!</i>',
     '<i>You are truly deserving of this Mega Stone. Use it to give your Mewtwo a truly unrivaled power.</i>',
 ], {
@@ -6117,7 +6400,7 @@ TownList['Santalune City'] = new Town(
     [SantaluneCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
-        npcs: [MysteryFan, VivillonPhotobook],
+        npcs: [MysteryFan, VivillonPhotobook, SantaluneSageChen],
     }
 );
 TownList['Lumiose City'] = new Town(
@@ -6273,7 +6556,7 @@ TownList['Friend Safari'] = new Town(
     'Friend Safari',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new SafariTownContent()],
+    [new SafariTownContent('Enter Friend Safari')],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         npcs: [KalosSafariRanger, FriendlyAttendant, BugCatcherScizor],
@@ -6600,7 +6883,7 @@ const PikachuValleyAlolaCap = new NPC('Pikachu', [
     '<i>The Pikachu is waving at you supportively! Its goodwill carries you forward on your journey to Alola Championship!</i>',
 ], {
     image: 'assets/images/pokemon/25.06.png',
-    requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion, GameConstants.AchievementOption.less),
+    requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp, GameConstants.AchievementOption.less),
 });
 const PikachuValleyPikachuWorldCap = new NPC('Pikachu', [
     'Pii-kachu!',
@@ -7115,7 +7398,7 @@ TownList['Heahea City'] = new Town(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [TemporaryBattleList.Dexio, TemporaryBattleList.Sina, HeaheaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Heahea City']), new DockTownContent()],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
         npcs: [HeaheaCafeOwner],
     }
 );
@@ -7161,7 +7444,7 @@ TownList['Aether Paradise'] = new Town(
         TemporaryBattleList['Faba Psychic Memory'],
     ],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Akala_Stamp)],
         npcs: [AetherParadiseAlolaRoamerNPC, FabaSilvally],
     }
 );
@@ -7387,7 +7670,7 @@ TownList['Ten Carat Hill'] = new DungeonTown(
     'Ten Carat Hill',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
     [TemporaryBattleList['Kahili Flying Memory']],
     {
         npcs:[KahiliSilvally],
@@ -7489,7 +7772,7 @@ TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
+    [new GymBadgeRequirement(BadgeEnums.Ula_Ula_Stamp)],
     [
         new GemMasterShop(GameConstants.GemShops.SilvallyTrader, 'Memory Replicator', [new QuestLineStepCompletedRequirement('Typing some Memories', 3)], true),
         TemporaryBattleList['Aether Branch Chief Faba'],
@@ -7540,13 +7823,13 @@ TownList['Lake of the Sunne and Moone'] = new DungeonTown(
     'Lake of the Sunne and Moone',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]
 );
 TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]
 );
 TownList['Ruins of Life'] = new DungeonTown(
     'Ruins of Life',
@@ -7554,7 +7837,7 @@ TownList['Ruins of Life'] = new DungeonTown(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 21),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Ruins of Abundance'] = new DungeonTown(
@@ -7563,7 +7846,7 @@ TownList['Ruins of Abundance'] = new DungeonTown(
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 23),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Ruins of Hope'] = new DungeonTown(
@@ -7572,7 +7855,7 @@ TownList['Ruins of Hope'] = new DungeonTown(
     GameConstants.AlolaSubRegions.PoniIsland,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 26),
-        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
     ]
 );
 TownList['Poni Meadow'] = new DungeonTown(
@@ -8195,7 +8478,7 @@ const Calyrex3 = new NPC ('Calyrex', [
 const Calyrex4 = new NPC ('Calyrex', [
     'Finally, my loyal steeds have returned to me. There are truly no words with which to fully express my gratitude to you. But I can try. Take these Reins of Unity.',
     '<img src="assets/images/keyitems/Reins_of_unity.png">',
-    'They can be used to combine myself and my steeds. However, it is incomplete. They must have have hair from the manes of my steeds intertwined to work. I expect they will occasionally leave such hair behind upon being defeated.',
+    'They can be used to combine myself and my steeds. However, they are incomplete. You must intertwine the hair from their manes for them to work. I expect they will occasionally leave such hair behind upon being defeated.',
     'And to that point... I have a suggestion. If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
 ], {
     image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
@@ -8296,6 +8579,65 @@ const PeonyComplete = new NPC ('Peony', [
     image: 'assets/images/npcs/Peony.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Crown of Galar'), new QuestLineCompletedRequirement('The Birds of the Dyna Tree'), new QuestLineCompletedRequirement('The Ancient Golems')]),
 });
+
+const Peonia1 = new NPC ('Peonia', [
+    'Hang on-I recognize you! You\'re that kid who was able to beat my dad earlier, right? That\'s impressive, he\'s no pushover!',
+    'Actually, a strong trainer like you, I think might be interested in a nearby place I was just about to go to.',
+    'It\'s a cave system just to the north of here, called the Max Lair. It\'s the only known place where you can catch wild Gigantamax Pokémon!',
+    'If you\'re interested, you should go take a look!',
+], {
+    image: 'assets/images/npcs/Peonia.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Lair of Giants'), new QuestLineStepCompletedRequirement('The Lair of Giants', 1, GameConstants.AchievementOption.less )]),
+});
+const Peonia2 = new NPC ('Peonia', [
+    'You\'re back! So I take it you saw one? A Gigantamax Pikachu, huh? Yeah, I saw one of those too! I also saw 2 others: Meowth and Eevee. Maybe you\'ll see them when you go back in.',
+    'Unfortunately, it seems these 3 are the only ones here at the moment. However, there\'s something you could do if you want to lure in more of them.',
+    'I imagine you\'ve noticed some hexagonal rock formations on your journey, right? Those are called Raid Dens. You can find them in the mainland\'s Wild Area, the Isle of Armor, and here in the Crown Tundra.',
+    'Every day some of them glow red and emit a purple beam. It seems there are 10 a day, consistently, for some unknown reason. Here, download this app, and they\'ll show up on your map!',
+    'Anyway, in each of these Raid Dens, there\'s a Gigantamax Pokémon! You can\'t catch \'em though, they\'ll turn back to their regular form and run before you get the chance.',
+    'However! They\'ll each drop a stone called a Wishing Piece. If you gather enough of those stones here, more Gigantamax Pokémon\'ll show up! Dunno which ones, probably just your luck.',
+    'Including the 3 already here, there are 33 Gigantamax Pokémon. I imagine you\'ll need more than 200 Wishing Pieces to get all of \'em to show up.',
+], {
+    image: 'assets/images/npcs/Peonia.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 1), new QuestLineStepCompletedRequirement('The Lair of Giants', 32, GameConstants.AchievementOption.less )]),
+});
+const Peonia3 = new NPC ('Peonia', [
+    'They\'re all here! That took quite a while, but it was well worth it!',
+    'Hey, what\'s that purple glow? It looks to be around... Hammerlocke?',
+    'Hang on, this looks a lot like when uncle Rose started the Darkest Day! You were the one who stopped that whole thing, right? You should probably get going!',
+], {
+    image: 'assets/images/npcs/Peonia.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 32), new QuestLineStepCompletedRequirement('The Lair of Giants', 34, GameConstants.AchievementOption.less )]),
+});
+const GigantamaxLeon1 = new NPC ('Leon', [
+    'Champion?! What are you.... no matter, I\'m glad you\'re here!',
+    'Eternamax Eternatus has appeared again! There is no time to talk! Let\'s fight it together!',
+], {
+    image: 'assets/images/npcs/Leon.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 33), new QuestLineStepCompletedRequirement('The Lair of Giants', 35, GameConstants.AchievementOption.less )]),
+});
+const GigantamaxLeon2 = new NPC ('Leon', [
+    'Wow. You\'re just as amazing as ever. You\'re truly worthy of your title.',
+    'I think Eternatus absorbed the leftover power it used to transform the first time to do so again. There\'s none left now, though, so that should be the last time. It flew south...',
+    'I have a feeling it\'ll come back here, but it shouldn\'t be a problem if it can\'t return to its Eternamax form here, right?',
+    'Anyway, thanks for your help! Feel free to come over to Wyndon Stadium anytime if you fancy a match!',
+], {
+    image: 'assets/images/npcs/Leon.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 35), new QuestLineStepCompletedRequirement('The Lair of Giants', 37, GameConstants.AchievementOption.less )]),
+});
+const Peonia4 = new NPC ('Peonia', [
+    'Was it really was Eternatus again? Given that the purple glow has vanished, I guess you\'ve already taken care of it. Congrats!',
+    'Actually, I just saw some purple and red Pokémon fly into the caves. Maybe that was Eternatus? I think this place might let it return to it\'s Eternamax form. Maybe you can catch it!',
+    'At any rate, I\'m real thankful for all your help. There\'s so many more people coming here now there\'s more Gigantamax Pokémon to find.  It\'s been a lot of fun!',
+], {
+    image: 'assets/images/npcs/Peonia.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Lair of Giants', 36), new QuestLineCompletedRequirement('The Lair of Giants', GameConstants.AchievementOption.less )]),
+});
+const MaxLairScientist = new NPC ('Scientist', [
+    'I\'m sure you\'ll have noticed that there\'s quite a few Gigantamax Pokémon. As more get here, it\'s going to get progressively harder to find the one you want.',
+    'I have some good news for you though! It seems that those you\'ve already caught will show up less often. That should make it easier to catch \'em all!',
+], { image: 'assets/images/npcs/Scientist (female).png' });
+
 const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
     'Ahhh, how incredible. Look how far you have come, dear trainer. Congratulations on another complete Pokédex.',
@@ -8318,7 +8660,7 @@ TownList.Postwick = new Town(
     GameConstants.GalarSubRegions.SouthGalar,
     [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
         npcs: [PostwickMum, MagearnaMysteryGift],
     }
 );
@@ -8499,7 +8841,7 @@ TownList.Freezington = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Crown), GymList['Elite Trainer Peony'], TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
-        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, BirdPeony4, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, CrownTundraRoamerNPC],
+        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, BirdPeony4, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, Peonia1, CrownTundraRoamerNPC],
     }
 );
 
@@ -8550,9 +8892,9 @@ TownList['Energy Plant'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
-    [TemporaryBattleList.Eternatus, TemporaryBattleList['Sordward 2'], TemporaryBattleList['Shielbert 2'], TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
+    [TemporaryBattleList.Eternatus, TemporaryBattleList['Sordward 2'], TemporaryBattleList['Shielbert 2'], TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day'], TemporaryBattleList['Eternamax Eternatus']],
     {
-        npcs: [EnergyPlantRose, EternatusCatch, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
+        npcs: [EnergyPlantRose, EternatusCatch, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop, GigantamaxLeon1, GigantamaxLeon2],
     }
 );
 TownList['Dusty Bowl'] = new DungeonTown(
@@ -8684,7 +9026,11 @@ TownList['Max Lair'] = new DungeonTown(
     'Max Lair',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new DevelopmentRequirement(new QuestLineStartedRequirement('The Lair of Giants'))]
+    [new QuestLineStepCompletedRequirement('The Lair of Giants', 0)],
+    [],
+    {
+        npcs: [Peonia2, Peonia3, Peonia4, MaxLairScientist],
+    }
 );
 
 //Hisui shops
@@ -8693,7 +9039,6 @@ const JubilifeVillageShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Black_augurite,
-    ItemList.Peat_block,
 ]);
 
 // Hisui NPCs

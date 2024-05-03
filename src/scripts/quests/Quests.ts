@@ -73,7 +73,7 @@ class Quests implements Saveable {
      * Gets a quest line by name
      * @param name The quest line name
      */
-    getQuestLine(name: string) {
+    getQuestLine(name: QuestLineNameType) {
         return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
     }
 
@@ -123,12 +123,6 @@ class Quests implements Saveable {
                     setting: NotificationConstants.NotificationSetting.General.quest_completed,
                 });
             }
-
-            // Track quest completion and total quest completed
-            LogEvent('completed quest',
-                'quests',
-                `level (${this.level()})`,
-                App.game.statistics.questsCompleted());
         } else {
             console.trace('cannot claim quest..');
             Notifier.notify({
@@ -158,8 +152,6 @@ class Quests implements Saveable {
                 LogBookTypes.QUEST,
                 createLogContent.questLevelUp({ level: this.level().toLocaleString() })
             );
-            // Track when users gains a quest level and how long it took in seconds
-            LogEvent('gain quest level', 'quests', `level (${this.level()})`, App.game.statistics.secondsPlayed());
         }
     }
 
@@ -191,12 +183,6 @@ class Quests implements Saveable {
                 }
                 App.game.wallet.loseAmount(this.getRefreshCost());
             }
-
-            // Track when users refreshes the quest list and how much it cost
-            LogEvent('refresh quest list',
-                'quests',
-                `level (${this.level()})`,
-                free ? 0 : this.getRefreshCost().amount);
 
             this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
@@ -281,7 +267,7 @@ class Quests implements Saveable {
     public questProgressTooltip() {
         const level = this.level();
         const xp = this.xp();
-        return {title : `${xp - this.levelToXP(level)} / ${this.levelToXP(level + 1) - this.levelToXP(level)}`, trigger : 'hover' };
+        return {title : `${(xp - this.levelToXP(level)).toLocaleString('en-US')} / ${(this.levelToXP(level + 1) - this.levelToXP(level)).toLocaleString('en-US')}`, trigger : 'hover' };
     }
 
     public isDailyQuestsUnlocked() {
@@ -313,7 +299,7 @@ class Quests implements Saveable {
                 if (questLine.state == QuestLineState.inactive) {
                     return;
                 }
-                const ql = this.getQuestLine(questLine.name);
+                const ql = this.getQuestLine(questLine.name as QuestLineNameType);
                 if (ql) {
                     ql.state(questLine.state);
                     if (questLine.state == QuestLineState.started || questLine.state == QuestLineState.suspended) {

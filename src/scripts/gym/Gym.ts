@@ -17,6 +17,8 @@ interface optionalGymArgs {
     displayName?: string,
     imageName?: string,
     environment?: GameConstants.Environment,
+    hideUntilUnlocked?: boolean,
+    visibleRequirement?: Requirement,
 }
 
 /**
@@ -33,6 +35,15 @@ class Gym extends TownContent {
     }
     public text(): string {
         return this.buttonText;
+    }
+    public isVisible(): boolean {
+        if (this.optionalArgs?.hideUntilUnlocked) {
+            return this.isUnlocked();
+        } else if (this.optionalArgs?.visibleRequirement) {
+            return this.optionalArgs.visibleRequirement?.isCompleted();
+        } else {
+            return super.isVisible();
+        }
     }
     public onclick(): void {
         GymRunner.startGym(this);
