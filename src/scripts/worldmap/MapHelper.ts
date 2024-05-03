@@ -277,5 +277,117 @@ class MapHelper {
             $('#pickStarterModal').modal('show');
         }
     }
+}
 
+class MapNavigation {
+    public static viewBox = {
+        x: 0, y: 0, w: 1600, h: 960,
+    };
+    public static scale = 1;
+    public static svgSize = { w: 1600, h: 960 };
+    public static svgImage: HTMLElement;
+    public static svgContainer: HTMLElement;
+
+    public static enableZoom() {
+        this.svgImage = document.getElementById('map');
+        this.svgContainer = document.getElementById('mapBody');
+
+        this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+
+        // Zooming
+        this.svgContainer.addEventListener('wheel', (e) => {
+            // Don't scroll the page
+            e.preventDefault();
+            // If already min/max scale, return;
+            const canScale = e.deltaY > 0 ? this.scale > 1 : this.scale < 5;
+            if (!canScale) {
+                return;
+            }
+
+            // Mouse pos, we want to zoom towards the mouse
+            const mx = e.offsetX;
+            const my = e.offsetY;
+            // New dimensions
+            const dw = this.viewBox.w * Math.sign(-e.deltaY) * 0.07;
+            const dh = this.viewBox.h * Math.sign(-e.deltaY) * 0.07;
+
+            const dx = (dw * mx) / this.svgContainer.clientWidth;
+            const dy = (dh * my) / this.svgContainer.clientHeight;
+
+            // Update out positioning and size
+            this.viewBox.w = Math.min(this.svgSize.w, this.viewBox.w - dw);
+            this.viewBox.h = Math.min(this.svgSize.h, this.viewBox.h - dh);
+            this.viewBox.x = Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, this.viewBox.x + dx));
+            this.viewBox.y = Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, this.viewBox.y + dy));
+            this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+            // Remember our current scale
+            this.scale = this.svgSize.w / this.viewBox.w;
+        }, { passive: false });
+
+        // Panning
+        let isPanning = false;
+        let startPoint = { x: 0, y: 0 };
+        let endPoint = { x: 0, y: 0 };
+        let initialViewBox = { x: 0, y: 0 };
+
+        this.svgContainer.onmousedown = (e) => {
+            isPanning = true;
+            startPoint = { x: e.x, y: e.y };
+            initialViewBox = { x: this.viewBox.x, y: this.viewBox.y };
+        };
+
+        this.svgContainer.onmousemove = (e) => {
+            if (!isPanning) {
+                return;
+            }
+            endPoint = { x: e.x, y: e.y };
+            // TODO: Fix this calculation
+            // No idea why / 3, but it's close enough
+            const dx = (startPoint.x - endPoint.x) * (this.scale);
+            const dy = (startPoint.y - endPoint.y) * (this.scale);
+            const movedViewBox = {
+                // Don't let it go outside the bounds (min, max, calculated position + movement)
+                x: Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, initialViewBox.x + dx)),
+                y: Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, initialViewBox.y + dy)),
+            };
+            this.svgImage.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+        };
+
+        this.svgContainer.onmouseup = (e) => {
+            if (!isPanning) {
+                return;
+            }
+            isPanning = false;
+            endPoint = { x: e.x, y: e.y };
+            // TODO: Fix this calculation
+            // No idea why / 3, but it's close enough
+            const dx = (startPoint.x - endPoint.x) / (this.scale / 3);
+            const dy = (startPoint.y - endPoint.y) / (this.scale / 3);
+            // Don't let it go outside the bounds (min, max, calculated position + movement)
+            this.viewBox.x = Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, this.viewBox.x + dx));
+            this.viewBox.y = Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, this.viewBox.y + dy));
+            this.svgImage.setAttribute('viewBox', `${Math.max(0, this.viewBox.x)} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+        };
+        this.svgContainer.onmouseleave = (e) => {
+            this.svgContainer.onmouseup(e);
+        };
+
+        // when our region or subregion changes, the map changes, reset the zoom/pan
+        player._region.subscribe(() => {
+            this.resetZoom();
+        });
+
+        player._subregion.subscribe(() => {
+            this.resetZoom();
+        });
+    }
+
+    public static resetZoom() {
+        this.viewBox.w = this.svgSize.w;
+        this.viewBox.h = this.svgSize.h;
+        this.viewBox.x = 0;
+        this.viewBox.y = 0;
+        this.scale = 1;
+        this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+    }
 }
