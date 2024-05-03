@@ -558,7 +558,6 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
                 requirement: new MultiRequirement([
                     new QuestLineStartedRequirement('Egg Hunt'),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 0, GameConstants.AchievementOption.less),
-                    new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion),
                 ]),
             }),
         new DungeonBossPokemon('Pikachu (Easter)', 2700000, 23, {
@@ -2271,7 +2270,6 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
                 requirement: new MultiRequirement([
                     new QuestLineStepCompletedRequirement('Egg Hunt', 0),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 1, GameConstants.AchievementOption.less),
-                    new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
                 ]),
             }),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
@@ -2994,7 +2992,6 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
                 requirement: new MultiRequirement([
                     new QuestLineStepCompletedRequirement('Egg Hunt', 1),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.less),
-                    new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
                 ]),
             }),
         new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
