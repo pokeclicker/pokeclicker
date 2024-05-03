@@ -10,7 +10,6 @@ Replace everything in this file (except for this comment) with what was copied
 */
 
 export type ItemNameType
-
     = 'xAttack'
     | 'xClick'
     | 'Lucky_egg'
