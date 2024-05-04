@@ -234,6 +234,12 @@ class BattleCafeController {
         }
     }
 
+    public static calcMaxSpins(sweet: GameConstants.AlcremieSweet): number {
+        const maxSpins = BattleCafeController.getPrice(sweet)
+            .map((cost) => Math.floor(App.game.farming.berryList[cost.berry]() / cost.amount));
+        return Math.min(...maxSpins);
+    }
+
     public static evolutions: Record<GameConstants.AlcremieSweet, Record<GameConstants.AlcremieSpins, PokemonItem>> = {
         [GameConstants.AlcremieSweet['Strawberry Sweet']]: {
             [GameConstants.AlcremieSpins.dayClockwiseBelow5]: new PokemonItem('Alcremie (Strawberry Vanilla)'),

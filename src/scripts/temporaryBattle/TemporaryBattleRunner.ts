@@ -109,6 +109,10 @@ class TemporaryBattleRunner {
         return (Math.ceil(TemporaryBattleRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 
+    public static finalPokemon() : boolean {
+        return TemporaryBattleBattle.pokemonsUndefeatedComputable() === 1;
+    }
+
     public static getEnvironmentArea() {
         const battle = TemporaryBattleRunner.battleObservable();
         return battle?.optionalArgs.environment
@@ -116,3 +120,11 @@ class TemporaryBattleRunner {
             ?? battle?.optionalArgs.returnTown;
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    $('#temporaryBattleWonModal').on('hidden.bs.modal', () => {
+        if (TemporaryBattleBattle.battle.name === 'Hau 2') {
+            KeyItemController.showGainModal(KeyItemType['Z-Power_Ring']);
+        }
+    });
+});

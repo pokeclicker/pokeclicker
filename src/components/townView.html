@@ -86,9 +86,14 @@
                         "></button>
                     <!-- ko if: $data instanceof Gym -->
                     <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="
-                        tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive Pokédollars for clearing the gym</i>`, trigger: 'hover', placement:'right' },
+                        tooltip: {
+                            html: true,
+                            title: $data.autoRestartTooltip,
+                            trigger: 'hover',
+                            placement:'right'
+                        },
                         click: () => GymRunner.startGym($data, true),
-                        visible: $data.isUnlocked() && App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100">↻</button>
+                        visible: $data.isUnlocked() && App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 10">↻</button>
                     <!-- /ko -->
                 </div>
                 <!-- /ko -->

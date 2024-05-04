@@ -33,6 +33,7 @@ import LevelType from '../party/LevelType';
 import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
+// import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
@@ -8666,7 +8667,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 88,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Hisuian Qwilfish', 'Overqwil', 25)],
+        'evolutions': [HeldItemLevelEvolution('Strong_Scroll', 'Hisuian Qwilfish', 'Overqwil', 25)],
         'base': {
             'hitpoints': 65,
             'attack': 95,
@@ -9220,7 +9221,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 163,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Stantler', 'Wyrdeer', 31)],
+        'evolutions': [HeldItemLevelEvolution('Agile_Scroll', 'Stantler', 'Wyrdeer', 31)],
         'base': {
             'hitpoints': 73,
             'attack': 95,
@@ -31380,6 +31381,27 @@ export const pokemonList = createPokemonArray(
         'id': -793,
         'name': '???',
         'nativeRegion': Region.alola,
+        'type': [PokemonType.Rock, PokemonType.Poison],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 257,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 109,
+            'attack': 53,
+            'specialAttack': 127,
+            'defense': 47,
+            'specialDefense': 131,
+            'speed': 103,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    // Fusion Lusamine
+    {
+        'id': -793.01,
+        'name': 'You hateful little Trainer!',
         'type': [PokemonType.Rock, PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.slow,
