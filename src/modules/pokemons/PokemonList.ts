@@ -31341,6 +31341,27 @@ export const pokemonList = createPokemonArray(
             'type': Genders.Genderless,
         },
     },
+    // Fusion Lusamine
+    {
+        'id': -793.01,
+        'name': 'You hateful little Trainer!',
+        'type': [PokemonType.Rock, PokemonType.Poison],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 257,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 109,
+            'attack': 53,
+            'specialAttack': 127,
+            'defense': 47,
+            'specialDefense': 131,
+            'speed': 103,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
     // Starmobiles (Revavroom)
     {
         'id': -966.01,
