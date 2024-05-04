@@ -33,6 +33,7 @@ import LevelType from '../party/LevelType';
 import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
+// import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
@@ -8645,7 +8646,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 88,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Hisuian Qwilfish', 'Overqwil', 25)],
+        'evolutions': [HeldItemLevelEvolution('Strong_Scroll', 'Hisuian Qwilfish', 'Overqwil', 25)],
         'base': {
             'hitpoints': 65,
             'attack': 95,
@@ -9199,7 +9200,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 163,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Stantler', 'Wyrdeer', 31)],
+        'evolutions': [HeldItemLevelEvolution('Agile_Scroll', 'Stantler', 'Wyrdeer', 31)],
         'base': {
             'hitpoints': 73,
             'attack': 95,
@@ -28430,6 +28431,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 901.01,
         'name': 'Bloodmoon Ursaluna',
+        'nativeRegion': Region.paldea,
         'catchRate': 20,
         'type': [PokemonType.Ground, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -29422,7 +29424,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [DummyEvolution('Bramblin', 'Brambleghast')],
     },
     {
-        'id': 946,
+        'id': 947,
         'name': 'Brambleghast',
         'type': [PokemonType.Grass, PokemonType.Ghost],
         'base': {

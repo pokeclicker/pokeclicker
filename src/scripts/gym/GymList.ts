@@ -2421,7 +2421,8 @@ GymList['Champion Nemona'] = new Gym(
     BadgeEnums.Elite_Nemona,
     250000,
     '',
-    [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)],
+    undefined, undefined, { hideUntilUnlocked: true }
 );
 GymList['Segin Squad\'s Base'] = new Gym(
     'Giacomo',
@@ -2516,7 +2517,7 @@ GymList['Director Clavell'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
-    undefined, undefined, { displayName: 'Director Clavell' }
+    undefined, undefined, { displayName: 'Director Clavell', hideUntilUnlocked: true }
 );
 GymList['Penny of Team Star'] = new Gym(
     'Penny',
@@ -2533,7 +2534,7 @@ GymList['Penny of Team Star'] = new Gym(
     250000,
     '',
     [new GymBadgeRequirement(BadgeEnums.Elite_Clavell)],
-    undefined, undefined, { displayName: 'Penny of Team Star' }
+    undefined, undefined, { displayName: 'Penny of Team Star', hideUntilUnlocked: true }
 );
 GymList['Stony Cliff Titan'] = new Gym(
     'Stony Cliff Titan',
@@ -2604,7 +2605,7 @@ GymList['Pokémon Trainer Arven'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
-    undefined, undefined, { displayName: 'Arven' }
+    undefined, undefined, { displayName: 'Arven', hideUntilUnlocked: true }
 );
 GymList['AI Sada'] = new Gym(
     'AI Sada',

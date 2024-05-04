@@ -70,10 +70,12 @@ type Boss = DungeonBossPokemon | DungeonTrainer;
 interface EncounterInfo {
     image: string,
     shiny: boolean,
+    shadow: boolean,
     hide: boolean, // try to not hide pokemon required as per the Pokedex Challenge whose unlock method can be avoided through regular gameplay
     uncaught: boolean,
-    locked: boolean,
+    lock: boolean,
     lockMessage: string,
+    pokemonName: PokemonNameType,
 }
 
 // Gain a gym badge after first completion of a dungeon
@@ -251,32 +253,15 @@ class Dungeon {
         return encounterInfo;
     }
 
+    public allShadowPokemon(): PokemonNameType[] {
+        const encounterInfo = this.normalEncounterList.filter(e => e.shadow).map(e => e.pokemonName);
+        encounterInfo.push(...this.bossEncounterList.filter(e => e.shadow).map(e => e.pokemonName));
+        return encounterInfo;
+    }
+
     public allAvailableShadowPokemon(): PokemonNameType[] {
-        const encounterInfo = [];
-        this.enemyList.forEach(enemy => {
-            if (enemy instanceof DungeonTrainer) {
-                if (enemy.options?.requirement?.isCompleted() === false) {
-                    return;
-                }
-                enemy.getTeam().forEach(pokemon => {
-                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
-                        encounterInfo.push(pokemon.name);
-                    }
-                });
-            }
-        });
-        this.bossList.forEach(boss => {
-            if (boss instanceof DungeonTrainer) {
-                if (boss.options?.requirement?.isCompleted() === false) {
-                    return;
-                }
-                boss.getTeam().forEach(pokemon => {
-                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
-                        encounterInfo.push(pokemon.name);
-                    }
-                });
-            }
-        });
+        const encounterInfo = this.normalEncounterList.filter(e => e.shadow && !e.hide).map(e => e.pokemonName);
+        encounterInfo.push(...this.bossEncounterList.filter(e => e.shadow && !e.hide).map(e => e.pokemonName));
         return encounterInfo;
     }
 
@@ -376,51 +361,77 @@ class Dungeon {
     }
 
 
+    private getEncounterInfo(pokemonName: PokemonNameType, mimicData, hideEncounter = false, shadow = false): EncounterInfo {
+        const partyPokemon = App.game.party.getPokemonByName(pokemonName);
+        const pokerus = partyPokemon?.pokerus;
+        const caught = App.game.party.alreadyCaughtPokemonByName(pokemonName);
+        const shinyCaught = App.game.party.alreadyCaughtPokemonByName(pokemonName, true);
+        const shadowCaught = partyPokemon?.shadow >= GameConstants.ShadowStatus.Shadow;
+        const purified = partyPokemon?.shadow >= GameConstants.ShadowStatus.Purified;
+        const encounter = {
+            pokemonName,
+            image: `assets/images/${shinyCaught ? 'shiny' : ''}${shadow && shadowCaught ? 'shadow' : ''}pokemon/${pokemonMap[pokemonName].id}.png`,
+            shadowBackground: shadow && !shadowCaught ? `assets/images/shadowpokemon/${pokemonMap[pokemonName].id}.png` : '',
+            pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[pokerus]}.png` : '',
+            EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${partyPokemon.evs().toLocaleString('en-US')}` : '',
+            shiny: shinyCaught,
+            hide: hideEncounter,
+            uncaught: !caught,
+            lock: !!mimicData?.lockedMessage,
+            lockMessage: mimicData?.lockedMessage ?? '',
+            mimic: !!mimicData,
+            mimicTier: mimicData?.tier,
+            shadow,
+            shadowCaught,
+            purified,
+        };
+        return encounter;
+    }
+
     /**
      * Gets all non-boss Pokemon encounters in the dungeon
      * Used for generating the dungeon encounter list view
      */
     get normalEncounterList(): EncounterInfo[] {
         const encounterInfo = [];
-        let pokemonName: PokemonNameType;
-        let hideEncounter = false;
-
-        const getEncounterInfo = (pokemonName, mimicData) => {
-            const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
-            const encounter = {
-                image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
-                pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName(pokemonName).pokerus]}.png` : '',
-                EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemonByName(pokemonName).evs().toLocaleString('en-US')}` : '',
-                shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
-                hide: hideEncounter,
-                uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                lock: !!mimicData?.lockedMessage,
-                lockMessage: mimicData?.lockedMessage ?? '',
-                mimic: !!mimicData,
-                mimicTier: mimicData?.tier,
-            };
-            return encounter;
-        };
 
         // Handling minions
         this.enemyList.forEach((enemy) => {
             // Handling Pokemon
             if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
+                let pokemonName: PokemonNameType;
+                let hideEncounter = false;
                 if (enemy.hasOwnProperty('pokemon')) {
-                    pokemonName = (<DetailedPokemon>enemy).pokemon;
-                    hideEncounter = (<DetailedPokemon>enemy).options?.hide ? ((<DetailedPokemon>enemy).options?.requirement ? !(<DetailedPokemon>enemy).options?.requirement.isCompleted() : (<DetailedPokemon>enemy).options?.hide) : false;
+                    const pokemon = <DetailedPokemon>enemy;
+                    pokemonName = pokemon.pokemon;
+                    hideEncounter = pokemon.options?.hide ? (pokemon.options?.requirement ? !pokemon.options?.requirement.isCompleted() : pokemon.options?.hide) : false;
                 } else {
                     pokemonName = <PokemonNameType>enemy;
                 }
-                encounterInfo.push(getEncounterInfo(pokemonName, false));
-            // Handling Trainers
-            } else { /* We don't display minion Trainers */ }
+                encounterInfo.push(this.getEncounterInfo(pokemonName, null, hideEncounter));
+            // Handling Trainers (only those with shadow Pokemon)
+            } else if (enemy instanceof DungeonTrainer) {
+                const hideEncounter = (enemy.options?.requirement && !enemy.options.requirement.isCompleted());
+                const shadowPokemon = enemy.getTeam().filter(p => p.shadow == GameConstants.ShadowStatus.Shadow);
+                if (shadowPokemon.length) {
+                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, hideEncounter, true));
+                    const trainerEncounter = {
+                        image: enemy.image,
+                        EVs: '',
+                        hide: hideEncounter,
+                        lockMessage: '',
+                        shadowTrainer: true,
+                    };
+                    encounterInfo.push(...shadowEncounters);
+                    encounterInfo.push(trainerEncounter);
+                }
+            }
         });
 
         // Handling Mimics
         this.getCaughtMimics().forEach(enemy => {
-            pokemonName = <PokemonNameType>enemy;
-            encounterInfo.push(getEncounterInfo(pokemonName, this.getMimicData(pokemonName)));
+            const pokemonName = enemy;
+            encounterInfo.push(this.getEncounterInfo(pokemonName, this.getMimicData(pokemonName)));
         });
 
         return encounterInfo;
@@ -436,31 +447,33 @@ class Dungeon {
 
         // Handling Bosses
         this.bossList.forEach((boss) => {
+            const hideEncounter = boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false;
+            const lock = boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false;
+            const lockMessage = boss.options?.requirement ? boss.options?.requirement.hint() : '';
             // Handling Pokemon
             if (boss instanceof DungeonBossPokemon) {
-                const pokemonName = boss.name;
-                const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
-                const encounter = {
-                    image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
-                    pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName(pokemonName).pokerus]}.png` : '',
-                    EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemonByName(pokemonName).evs().toLocaleString('en-US')}` : '',
-                    shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
-                    hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
-                    uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                    lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
-                    lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
-                };
+                const encounter = this.getEncounterInfo(boss.name, null, hideEncounter);
+                encounter.lock = lock;
+                encounter.lockMessage = lockMessage;
                 encounterInfo.push(encounter);
             // Handling Trainer
             } else {
+                // Check for Shadow Pokemon
+                const shadowPokemon = boss.getTeam().filter(p => p.shadow == GameConstants.ShadowStatus.Shadow);
+                const shadowEncounter = shadowPokemon.length > 0;
+                if (shadowEncounter) {
+                    const shadowEncounters = shadowPokemon.map(p => this.getEncounterInfo(p.name, null, hideEncounter, true));
+                    encounterInfo.push(...shadowEncounters);
+                }
                 const encounter = {
                     image: boss.image,
                     EVs: '',
                     shiny:  false,
-                    hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
+                    hide: hideEncounter,
                     uncaught: false,
-                    lock: boss.options?.requirement ? !boss.options?.requirement.isCompleted() : false,
-                    lockMessage: boss.options?.requirement ? boss.options?.requirement.hint() : '',
+                    lock,
+                    lockMessage,
+                    shadowTrainer: shadowEncounter,
                 };
                 encounterInfo.push(encounter);
             }
@@ -473,7 +486,7 @@ class Dungeon {
         return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
     });
 
-    public getMimicData(pokemonName): {tier: LootTier, lockedMessage: string} {
+    public getMimicData(pokemonName: PokemonNameType): {tier: LootTier, lockedMessage: string} {
         let res;
         (Object.keys(this.lootTable) as LootTier[]).forEach(tier => {
             this.lootTable[tier].forEach(loot => {
@@ -545,7 +558,6 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
                 requirement: new MultiRequirement([
                     new QuestLineStartedRequirement('Egg Hunt'),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 0, GameConstants.AchievementOption.less),
-                    new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion),
                 ]),
             }),
         new DungeonBossPokemon('Pikachu (Easter)', 2700000, 23, {
@@ -1940,7 +1952,7 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
             {loot: 'Pink Shard', requirement: new MaxRegionRequirement(GameConstants.Region.kalos)},
         ],
         epic: [
-            {loot: 'Mind Plate'},
+            {loot: 'Pinkan Pikachu', ignoreDebuff : true, requirement: new TemporaryBattleRequirement('Ash Ketchum Pinkan'), weight: 2},
             {loot: 'Qualot'},
             {loot: 'Magost'},
             {loot: 'Watmel'},
@@ -2258,7 +2270,6 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
                 requirement: new MultiRequirement([
                     new QuestLineStepCompletedRequirement('Egg Hunt', 0),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 1, GameConstants.AchievementOption.less),
-                    new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
                 ]),
             }),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
@@ -2409,9 +2420,9 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
             {loot: 'Token_collector'},
         ],
         rare: [{loot: 'Blue Shard'}],
+        epic: [{loot: 'Moonball'}],
         legendary: [
             {loot: 'Revive'},
-            {loot: 'Ultraball'},
             {loot: 'Mind Plate'},
             {loot: 'Sky Plate'},
             {loot: 'Mystic_Water'},
@@ -2981,7 +2992,6 @@ dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
                 requirement: new MultiRequirement([
                     new QuestLineStepCompletedRequirement('Egg Hunt', 1),
                     new QuestLineStepCompletedRequirement('Egg Hunt', 2, GameConstants.AchievementOption.less),
-                    new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
                 ]),
             }),
         new DungeonBossPokemon('Torchic (Egg)', 2700000, 23, {
@@ -3122,9 +3132,9 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
         ],
         epic: [
             {loot: 'Stone Plate'},
-            {loot: 'Iron Plate'},
             {loot: 'Sky Plate'},
             {loot: 'Draco Plate'},
+            {loot: 'Moonball'},
         ],
         mythic: [{loot: 'Star Piece'}],
     },
@@ -3981,13 +3991,13 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
         ],
         epic: [
             {loot: 'Duskball'},
+            {loot: 'Moonball'},
             {loot: 'Star Piece'},
         ],
         legendary: [
-            {loot: 'Stone Plate', weight: 2},
-            {loot: 'Mind Plate', weight: 2},
-            {loot: 'Iron Plate', weight: 2},
-            {loot: 'Moon Stone'},
+            {loot: 'Stone Plate'},
+            {loot: 'Mind Plate'},
+            {loot: 'Iron Plate'},
         ],
         mythic: [{loot: 'Carbos', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Near Space'))}],
     },
@@ -7762,7 +7772,10 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
             {loot: 'Nanab'},
         ],
         rare: [{loot: 'White Shard'}],
-        epic: [{loot: 'Mind Plate'}],
+        epic: [
+            {loot: 'Mind Plate'},
+            {loot: 'Moonball'},
+        ],
     },
     2603000,
     [
@@ -7779,7 +7792,10 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
             {loot: 'Nanab'},
         ],
         rare: [{loot: 'Black Shard'}],
-        epic: [{loot: 'Dread Plate'}],
+        epic: [
+            {loot: 'Dread Plate'},
+            {loot: 'Moonball'},
+        ],
         legendary: [{loot: 'Black_Glasses'}],
     },
     2603000,
@@ -8430,7 +8446,9 @@ dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
     [
         new DungeonBossPokemon('Drilbur', 23000000, 100),
         new DungeonBossPokemon('Axew', 24000000, 100),
-        new DungeonBossPokemon('Cobalion', 25000000, 100),
+        new DungeonBossPokemon('Cobalion', 25000000, 100, {
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
+        }),
     ],
     196500, 6);
 
@@ -8893,6 +8911,10 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
             new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+            new OneFromManyRequirement([
+                new QuestLineCompletedRequirement('Swords of Justice'),
+                new QuestLineStartedRequirement('Swords of Justice', GameConstants.AchievementOption.less),
+            ]),
         ])}),
     ],
     266500, 22);
@@ -9161,7 +9183,9 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
     [
         new DungeonBossPokemon('Golurk', 44000000, 100),
         new DungeonBossPokemon('Audino', 45000000, 100),
-        new DungeonBossPokemon('Terrakion', 45000000, 100),
+        new DungeonBossPokemon('Terrakion', 45000000, 100, {
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
+        }),
     ],
     326500, 23);
 
@@ -9377,7 +9401,10 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     [
         new DungeonBossPokemon('Seismitoad', 48000000, 100),
         new DungeonBossPokemon('Whiscash', 48000000, 100),
-        new DungeonBossPokemon('Keldeo', 50000000, 100),
+        new DungeonBossPokemon('Keldeo', 50000000, 100, {
+            hide: false,
+            requirement: new QuestLineCompletedRequirement('Swords of Justice'),
+        }),
         new DungeonBossPokemon('Vivillon (Jungle)',  96662023, 60, {
             hide: true,
             requirement: new OneFromManyRequirement([
@@ -9605,7 +9632,9 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     [
         new DungeonBossPokemon('Scolipede', 48000000, 100),
         new DungeonBossPokemon('Seismitoad', 48000000, 100),
-        new DungeonBossPokemon('Virizion', 48000000, 100),
+        new DungeonBossPokemon('Virizion', 48000000, 100, {
+            requirement: new QuestLineStepCompletedRequirement('Swords of Justice', 21),
+        }),
     ],
     356500, 3);
 
@@ -9666,6 +9695,7 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
         epic: [
             {loot: 'Mind Plate', weight: 2},
             {loot: 'Draco Plate'},
+            {loot: 'Moonball'},
         ],
         legendary: [
             {loot: 'Revive', weight: 2},
@@ -9865,7 +9895,10 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
             {loot: 'Red Shard'},
             {loot: 'White Shard'},
         ],
-        epic: [{loot: 'Blank Plate'}],
+        epic: [
+            {loot: 'Moonball'},
+            {loot: 'Blank Plate'},
+        ],
         legendary: [
             {loot: 'Hard Stone'},
             {loot: 'Revive'},
@@ -10105,7 +10138,6 @@ dungeonList['Poké Ball Factory'] = new Dungeon('Poké Ball Factory',
         epic: [
             {loot: 'Duskball'},
             {loot: 'Quickball'},
-            {loot: 'Fastball'},
             {loot: 'Timerball'},
             {loot: 'Luxuryball'},
             {loot: 'Lureball'},
@@ -10988,7 +11020,10 @@ dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
         ],
-        epic: [{loot: 'Zap Plate'}],
+        epic: [
+            {loot: 'Zap Plate', weight: 2},
+            {loot: 'Pikachu (Partner Cap)', ignoreDebuff : true, requirement: new TemporaryBattleRequirement('Ash Ketchum Alola')},
+        ],
         legendary: [{loot: 'Magnet'}],
     },
     11952804,
@@ -12035,7 +12070,10 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
             {loot: 'Pink Shard'},
             {loot: 'Cyan Shard'},
         ],
-        epic: [{loot: 'Icicle Plate'}],
+        epic: [
+            {loot: 'Icicle Plate'},
+            {loot: 'Moonball'},
+        ],
         legendary: [{loot: 'Max Revive'}],
     },
     16312850,
@@ -12089,6 +12127,7 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
             {loot: 'Mind Plate', weight: 2},
             {loot: 'Iron Plate'},
             {loot: 'Spooky Plate'},
+            {loot: 'Moonball'},
         ],
     },
     16435490,
@@ -12567,7 +12606,10 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
             {loot: 'White Shard'},
             {loot: 'Pink Shard'},
         ],
-        epic: [{loot: 'LargeRestore'}],
+        epic: [
+            {loot: 'LargeRestore'},
+            {loot: 'Moonball'},
+        ],
         legendary: [{loot: 'Fairy_Feather'}],
     },
     23764848,
@@ -12994,6 +13036,7 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
         epic: [
             {loot: 'Duskball'},
             {loot: 'Quickball'},
+            {loot: 'Moonball'},
             {loot: 'Flame Plate'},
         ],
         legendary: [
@@ -13028,7 +13071,7 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         legendary: [{loot: 'Max Revive'}],
         mythic: [
             {loot: 'Heart Scale', weight: 2},
-            {loot: 'Galarian Darmanitan (Zen)'},
+            {loot: 'Galarian Darmanitan (Zen)', ignoreDebuff : true},
         ],
     },
     33915762,

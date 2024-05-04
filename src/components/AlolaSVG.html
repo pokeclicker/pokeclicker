@@ -1,4 +1,4 @@
-<g data-bind='visible: player.region == GameConstants.Region.alola'>
+<g data-bind='if: player.region == GameConstants.Region.alola, childrenComplete: () => GameController.applyRouteBindings()'>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -2765,6 +2765,16 @@
             , visible:  "TemporaryBattleList['Plumeria 1'] && TemporaryBattleList['Plumeria 1'].isVisible()"
             , image: "assets/images/map/plumeria.png"
             })
+        %>
+
+        <%- include('templates/mapOverlay',
+           { name: "Ash Ketchum"
+           , x: 54, y: 27
+           , width: 4, height: 4
+           , databind: "click: () => TemporaryBattleList['Ash Ketchum Alola'].protectedOnclick()"
+           , visible:  "TemporaryBattleList['Ash Ketchum Alola'] && TemporaryBattleList['Ash Ketchum Alola'].isVisible()"
+           , image: "assets/images/map/ashketchumoverworld.png"
+           })
         %>
     </g>
 
