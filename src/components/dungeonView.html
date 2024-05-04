@@ -75,7 +75,7 @@
             </div>
         </div>
         <!-- /ko -->
-        <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
+        <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest -->
         <div data-bind="with: DungeonRunner.map.currentTile()">
             <div class="dungeon-chest" style="height: 95px">
                 <img data-bind='attr: { src: `assets/images/dungeons/chest-${$data.metadata.tier}.png` }'/>
@@ -86,17 +86,17 @@
             </button>
         </div>
         <!-- /ko -->
-        <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
+        <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.boss && !DungeonRunner.fightingBoss()) -->
         <div>
             <button class="btn btn-danger dungeon-button">Start Bossfight</button>
         </div>
         <!-- /ko -->
-        <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) -->
+        <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.ladder) -->
         <div>
             <button class="btn btn-warning dungeon-button">Go to next floor</button>
         </div>
         <!-- /ko -->
-        <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance && DungeonRunner.map.playerMoved() -->
+        <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && DungeonRunner.map.playerMoved() -->
         <div>
             <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
         </div>
