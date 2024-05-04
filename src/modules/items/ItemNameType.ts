@@ -161,6 +161,7 @@ export type ItemNameType
     | 'Push_Steelix_Magikarp_Jump'
     | 'Prison_Bottle'
     | 'Great_Twisted_Spoon'
+    | 'Island_Challenge_Amulet'
     | 'Fighting_Memory_Silvally'
     | 'Rock_Memory_Silvally'
     | 'Dark_Memory_Silvally'
@@ -485,5 +486,4 @@ export type ItemNameType
     | 'Dragonium Z'
     | 'Darkinium Z'
     | 'Steelium Z'
-    | 'Fairium Z'
-    | 'Island_Challenge_Amulet';
+    | 'Fairium Z';
