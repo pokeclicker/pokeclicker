@@ -2651,16 +2651,22 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 250);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 251);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 262);
-            // Reset temporary battles important to story; Reset questline Eater of Light
+            // Reset temporary battles important to story
             saveData.statistics.temporaryBattleDefeated[247] = 0; // Gladion 2
             saveData.statistics.temporaryBattleDefeated[252] = 0; // Necrozma
             saveData.statistics.temporaryBattleDefeated[253] = 0; // Ultra Megalopolis
             saveData.statistics.temporaryBattleDefeated[261] = 0; // Gladion 3
+            // Reset questline Eater of Light if it exists in the save
             const eaterID = saveData.quests.questLines.findIndex(ql => ql.name == 'Eater of Light');
-            saveData.quests.questLines.splice(eaterID, 1);
-            // Reset/Remove questline Mina\'s Trial; Reset temporary battles in it
+            if (eaterID > -1) {
+                saveData.quests.questLines.splice(eaterID, 1);
+            }
+            // Reset/Remove questline Mina\'s Trial if in the save
             const minaID = saveData.quests.questLines.findIndex(ql => ql.name == 'Mina\'s Trial');
-            saveData.quests.questLines.splice(minaID, 1);
+            if (minaID > -1) {
+                saveData.quests.questLines.splice(minaID, 1);
+            }
+            // Reset Mina\'s Trial temporary battles
             saveData.statistics.temporaryBattleDefeated[254] = 0;
             saveData.statistics.temporaryBattleDefeated[255] = 0;
             saveData.statistics.temporaryBattleDefeated[256] = 0;
