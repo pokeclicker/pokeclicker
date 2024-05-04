@@ -11969,7 +11969,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 159,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Bannetite, 'Banette', 'Mega Banette')],
+        'evolutions': [MegaEvolution(MegaStoneType.Banettite, 'Banette', 'Mega Banette')],
         'base': {
             'hitpoints': 64,
             'attack': 115,
