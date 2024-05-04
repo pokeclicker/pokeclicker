@@ -1369,6 +1369,15 @@ export function getGymRegion(gym: string): Region {
     return RegionGyms.findIndex((gyms) => gyms.find((g) => g === gym));
 }
 
+export const GymAutoRepeatRewardTiers = [
+    // [reward modifier, clears threshold]
+    [1, 1000],
+    [0.75, 750],
+    [0.5, 500],
+    [0.25, 250],
+    [0, 0],
+];
+
 export const KantoDungeons = [
     'Viridian Forest', // 0
     'Mt. Moon',
