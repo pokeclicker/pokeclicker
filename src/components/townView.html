@@ -60,13 +60,20 @@
     <div class="row no-gutters">
        <div class="col-4 no-gutters">
            <div class="list-group">
-               <button class="btn btn-secondary p-0" onclick="DungeonRunner.initializeDungeon(player.town.dungeon)" data-bind="
-                   visible: player.town instanceof DungeonTown,
-                   if: player.town.dungeon,
-                   attr: { class: player.town.dungeon && (App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town.dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0') + (player.town.dungeon.isUnlocked() ? '' : ' disabled') }">
-                    Start<br/>
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town.dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
-               </button>
+                <!-- ko if: player.town instanceof DungeonTown -->
+                <div class="btn-group btn-block" style="margin-top: 0px;">
+                    <button class="btn btn-secondary p-0" onclick="DungeonRunner.initializeDungeon(player.town.dungeon)" data-bind="
+                        visible: player.town instanceof DungeonTown,
+                        if: player.town.dungeon,
+                        attr: { class: player.town.dungeon && (App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town.dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0') + (player.town.dungeon.isUnlocked() ? '' : ' disabled') }">
+                        Start<br/>
+                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town.dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
+                    </button>
+                    <button class="btn btn-info p-0 btn-dungeon-guide" href="#dungeonGuidesModal" data-toggle="modal" data-bind="
+                        tooltip: { html: true, title: `Hire a Dungeon Guide!`, trigger: 'hover', placement:'right' },
+                        visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.dungeon.name)]() >= 10">↻</button>
+                </div>
+                <!-- /ko -->
 
                 <!-- ko foreach: player.town.content -->
                 <div class="btn-group btn-block" style="margin-top: 0px;">
@@ -79,9 +86,14 @@
                         "></button>
                     <!-- ko if: $data instanceof Gym -->
                     <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="
-                        tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive Pokédollars for clearing the gym</i>`, trigger: 'hover', placement:'right' },
+                        tooltip: {
+                            html: true,
+                            title: $data.autoRestartTooltip,
+                            trigger: 'hover',
+                            placement:'right'
+                        },
                         click: () => GymRunner.startGym($data, true),
-                        visible: $data.isUnlocked() && App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100">↻</button>
+                        visible: $data.isUnlocked() && App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 10">↻</button>
                     <!-- /ko -->
                 </div>
                 <!-- /ko -->
