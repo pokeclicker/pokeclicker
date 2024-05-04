@@ -131,14 +131,12 @@ class BattleFrontierRunner {
     }
 
     public static calculateFullBP(stage: number, previousHighestStage: number): number {
-        // We want to reward people for their record, punish people for losing too early.
-        const modifier = Math.min((stage / Math.min(1000, previousHighestStage)) ** 2, 2);
         stage = this.computedDifficultyStage();
-        let speed = 1
+        let speed = 1;
         if (previousHighestStage > 1000) {
             speed = previousHighestStage / 1000;
         }
-        return Math.max(1, modifier * BattleFrontierRunner.calculateBP(stage) / speed);
+        return Math.max(1, BattleFrontierRunner.calculateBP(stage) / speed);
     }
 
     public static calculateBP(stage: number): number {

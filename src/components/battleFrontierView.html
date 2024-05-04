@@ -32,6 +32,7 @@
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
             <knockout>
                 Stage <knockout data-bind="text: BattleFrontierRunner.computedDifficultyStage().toLocaleString('en-US')">0</knockout> / <knockout data-bind="text: BattleFrontierRunner.highest().toLocaleString('en-US')">0</knockout>
+                <img src="assets/images/fastforward.svg" width="16" data-bind="visible: BattleFrontierRunner.highest() > 1000, tooltip: {title: `×${BattleFrontierRunner.highest() / 1000} speed`, trigger: 'hover'}"/>
             </knockout>
             <table width="100%">
                 <tr>
