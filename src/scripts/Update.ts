@@ -2618,6 +2618,7 @@ class Update implements Saveable {
                 }
             });
         },
+
         '0.10.20': ({ playerData, saveData, settingsData }) => {
             // Add Olivine Lighthouse dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29);
@@ -2632,6 +2633,65 @@ class Update implements Saveable {
                     pokemon[6] = [pokemon[6]];
                 }
             });
+
+            // Add Alola story battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 225);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 227);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 228);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 229);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 230);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 236);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 237);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 242);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 243);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 244);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 245);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 248);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 249);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 250);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 251);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 262);
+            // Reset temporary battles important to story
+            saveData.statistics.temporaryBattleDefeated[247] = 0; // Gladion 2
+            saveData.statistics.temporaryBattleDefeated[252] = 0; // Necrozma
+            saveData.statistics.temporaryBattleDefeated[253] = 0; // Ultra Megalopolis
+            saveData.statistics.temporaryBattleDefeated[261] = 0; // Gladion 3
+            // Reset questline Eater of Light if it exists in the save
+            const eaterID = saveData.quests.questLines.findIndex(ql => ql.name == 'Eater of Light');
+            if (eaterID > -1) {
+                saveData.quests.questLines.splice(eaterID, 1);
+            }
+            // Reset/Remove questline Mina\'s Trial if in the save
+            const minaID = saveData.quests.questLines.findIndex(ql => ql.name == 'Mina\'s Trial');
+            if (minaID > -1) {
+                saveData.quests.questLines.splice(minaID, 1);
+            }
+            // Reset Mina\'s Trial temporary battles
+            saveData.statistics.temporaryBattleDefeated[254] = 0;
+            saveData.statistics.temporaryBattleDefeated[255] = 0;
+            saveData.statistics.temporaryBattleDefeated[256] = 0;
+            saveData.statistics.temporaryBattleDefeated[257] = 0;
+            saveData.statistics.temporaryBattleDefeated[258] = 0;
+            saveData.statistics.temporaryBattleDefeated[259] = 0;
+            saveData.statistics.temporaryBattleDefeated[260] = 0;
+            // Start Alola story quests if player has beaten temp battles already
+            // Hau 1
+            if (saveData.statistics.temporaryBattleDefeated[224]) {
+                Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
+            }
+            // Give Z-Power_Ring key item if Hau 2 defeated
+            if (saveData.statistics.temporaryBattleDefeated[226]) {
+                saveData.keyItems['Z-Power_Ring'] = true;
+                KeyItemController.showGainModal(KeyItemType['Z-Power_Ring']);
+            }
+            // Sina and Dexio
+            if (saveData.statistics.temporaryBattleDefeated[232] && saveData.statistics.temporaryBattleDefeated[233]) {
+                Update.startQuestLine(saveData, 'Symbiotic Relations');
+            }
+            // Hau 5
+            if (saveData.statistics.temporaryBattleDefeated[241]) {
+                Update.startQuestLine(saveData, 'Child of the Stars');
+            }
         },
     };
 
