@@ -384,6 +384,6 @@ class MapNavigation {
         this.viewBox.x = 0;
         this.viewBox.y = 0;
         this.scale = 1;
-        this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+        this.updateViewbox();
     }
 }
