@@ -288,11 +288,15 @@ class MapNavigation {
     public static svgImage: HTMLElement;
     public static svgContainer: HTMLElement;
 
+    public static updateViewbox() {
+        this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+    }
+
     public static enableZoom() {
         this.svgImage = document.getElementById('map');
         this.svgContainer = document.getElementById('mapBody');
 
-        this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+        this.updateViewbox();
 
         // Zooming
         this.svgContainer.addEventListener('wheel', (e) => {
@@ -319,7 +323,7 @@ class MapNavigation {
             this.viewBox.h = Math.min(this.svgSize.h, this.viewBox.h - dh);
             this.viewBox.x = Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, this.viewBox.x + dx));
             this.viewBox.y = Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, this.viewBox.y + dy));
-            this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+            this.updateViewbox();
             // Remember our current scale
             this.scale = this.svgSize.w / this.viewBox.w;
         }, { passive: false });
@@ -327,30 +331,31 @@ class MapNavigation {
         // Panning
         let isPanning = false;
         let startPoint = { x: 0, y: 0 };
-        let endPoint = { x: 0, y: 0 };
         let initialViewBox = { x: 0, y: 0 };
+        let zoom = this.svgContainer.clientWidth / this.svgSize.w
 
         this.svgContainer.onmousedown = (e) => {
             isPanning = true;
             startPoint = { x: e.x, y: e.y };
             initialViewBox = { x: this.viewBox.x, y: this.viewBox.y };
+            zoom = this.svgContainer.clientWidth / this.svgSize.w
         };
 
         this.svgContainer.onmousemove = (e) => {
             if (!isPanning) {
                 return;
             }
-            endPoint = { x: e.x, y: e.y };
-            // TODO: Fix this calculation
-            // No idea why / 3, but it's close enough
-            const dx = (startPoint.x - endPoint.x) * (this.scale);
-            const dy = (startPoint.y - endPoint.y) * (this.scale);
+            const endPoint = { x: e.x, y: e.y };
+            const dx = (startPoint.x - endPoint.x) / (zoom * this.scale);
+            const dy = (startPoint.y - endPoint.y) / (zoom * this.scale);
             const movedViewBox = {
                 // Don't let it go outside the bounds (min, max, calculated position + movement)
                 x: Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, initialViewBox.x + dx)),
                 y: Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, initialViewBox.y + dy)),
             };
-            this.svgImage.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
+            this.viewBox.x = movedViewBox.x;
+            this.viewBox.y = movedViewBox.y;
+            this.updateViewbox();
         };
 
         this.svgContainer.onmouseup = (e) => {
@@ -358,15 +363,6 @@ class MapNavigation {
                 return;
             }
             isPanning = false;
-            endPoint = { x: e.x, y: e.y };
-            // TODO: Fix this calculation
-            // No idea why / 3, but it's close enough
-            const dx = (startPoint.x - endPoint.x) / (this.scale / 3);
-            const dy = (startPoint.y - endPoint.y) / (this.scale / 3);
-            // Don't let it go outside the bounds (min, max, calculated position + movement)
-            this.viewBox.x = Math.max(0, Math.min(this.svgSize.w - this.viewBox.w, this.viewBox.x + dx));
-            this.viewBox.y = Math.max(0, Math.min(this.svgSize.h - this.viewBox.h, this.viewBox.y + dy));
-            this.svgImage.setAttribute('viewBox', `${Math.max(0, this.viewBox.x)} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
         };
         this.svgContainer.onmouseleave = (e) => {
             this.svgContainer.onmouseup(e);
