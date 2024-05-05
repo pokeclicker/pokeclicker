@@ -11989,11 +11989,11 @@ export const pokemonList = createPokemonArray(
         'catchRate': 45,
         'base': {
             'hitpoints': 64,
-            'attack': 115,
-            'specialAttack': 83,
-            'defense': 65,
-            'specialDefense': 63,
-            'speed': 65,
+            'attack': 165,
+            'specialAttack': 93,
+            'defense': 75,
+            'specialDefense': 83,
+            'speed': 75,
         },
     },
     {
