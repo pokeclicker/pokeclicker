@@ -37,12 +37,15 @@ class BattleFrontierRunner {
             }
         }
 
+        if (!useCheckpoint) {
+            BattleFrontierRunner.environment('Default');
+        }
+
         this.started(true);
         this.stage(useCheckpoint ? this.checkpoint() : 1);
         this.highest(App.game.statistics.battleFrontierHighestStageCompleted());
         BattleFrontierBattle.pokemonIndex(0);
         BattleFrontierBattle.generateNewEnemy();
-        BattleFrontierRunner.environment('Default');
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
         BattleFrontierRunner.timeLeftPercentage(100);
         App.game.gameState = GameConstants.GameState.battleFrontier;
