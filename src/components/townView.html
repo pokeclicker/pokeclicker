@@ -182,7 +182,7 @@
         </ul>
       </div>
     </knockout>
-    <knockout data-bind="if: player.town().content.find(c => c instanceof SafariTownContent)">
+    <knockout data-bind="if: player.town.content.find(c => c instanceof SafariTownContent)">
         <div id="dungeonPokemonList" class="card pt-2 pb-3 px-1">
           <!--Display all available Pokémon in this Safari-->
           <ul class="list-inline mb-0">
