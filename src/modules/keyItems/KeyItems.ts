@@ -41,7 +41,7 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.Super_rod, 'The best fishing rod for catching wild water Pokémon.',
                 () => App.game.statistics.routeKills[Region.kanto][12]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Super Rod'),
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to see and track Achievements. Completing Achievements gives useful bonuses.',
-                () => App.game.party.caughtPokemon.length >= 110, undefined, undefined, 'Holo Caster'),
+                () => App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémon Attack. Some baby Pokémon can only be found through breeding, too!',
                 () => App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
             new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
@@ -77,6 +77,8 @@ export default class KeyItems implements Feature {
                     ) || App.game.party.caughtPokemon[0];
                     patientZero.pokerus = Pokerus.Contagious;
                 }),
+            new KeyItem(KeyItemType['Z-Power_Ring'], 'A gift from Melemele\'s kahuna that enables the use of Z-Crystals. What they do is still under development.', // Using a Z-Crystal boosts the power of all your Pokémon of a shared type for a short while, after which some time is needed to recharge.',
+                undefined, undefined, undefined, 'Z-Power Ring'),
         ];
     }
 

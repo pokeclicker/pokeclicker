@@ -10,7 +10,7 @@ export default class GameHelper {
     public static currentTime: KnockoutObservable<Date> = ko.observable(new Date());
     public static today: KnockoutObservable<Date> = ko.observable(GameHelper.getToday());
     public static tomorrow: KnockoutComputed<Date> = ko.pureComputed<Date>(() => {
-        const tomorrow = GameHelper.today();
+        const tomorrow = new Date(GameHelper.today());
         tomorrow.setDate(tomorrow.getDate() + 1);
         return tomorrow;
     });
@@ -160,6 +160,20 @@ export default class GameHelper {
 
     public static escapeStringRegex(s: string): string {
         return s.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
+    public static safelyBuildRegex(pattern: string, allowRaw = true, flags = 'i'): RegExp {
+        if (allowRaw && /^\/.+\/$/.test(pattern)) {
+            // pattern is a string representation of regex e.g. /pattern/, remove the slashes
+            const rawPattern = pattern.slice(1, -1);
+            try {
+                return new RegExp(rawPattern, flags);
+            } catch {
+                return new RegExp(GameHelper.escapeStringRegex(rawPattern), flags);
+            }
+        } else {
+            return new RegExp(GameHelper.escapeStringRegex(pattern), flags);
+        }
     }
 
     public static twoDigitNumber(n: number): string {

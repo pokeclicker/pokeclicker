@@ -85,6 +85,7 @@ export const SpriteCredits: Credit[] = [
             'Aether Foundation Employee (male)',
             'Aether President Lusamine',
             'Gladion',
+            'Gladion (stance)',
             'Hala',
             'Hapu',
             'Hau',
@@ -92,6 +93,7 @@ export const SpriteCredits: Credit[] = [
             'Kahili',
             'Kiawe',
             'Lana',
+            'Lusamine (nihilego)',
             'Mallow',
             'Masked Royal',
             'Mina',
@@ -99,8 +101,10 @@ export const SpriteCredits: Credit[] = [
             'Nanu',
             'Olivia',
             'Plumeria',
+            'Professor Burnet (gen7)',
             'Professor Kukui',
             'Rising Star (male)',
+            'Rival Hau',
             'Ryuki',
             'Sightseer (female)',
             'Sophocles',
@@ -270,6 +274,7 @@ export const SpriteCredits: Credit[] = [
             'Black mane hair big icon',
             'Blank Plate (item and underground)',
             'Blimp base',
+            'Burmy (No Coat) Overworld',
             'Butler',
             'Camp map sprite',
             'Cipher Admin Lovrina',
@@ -283,6 +288,7 @@ export const SpriteCredits: Credit[] = [
             'Cracked pot big icon',
             'Danny',
             'Day cycle images',
+            'Detective Pikachu Overworld',
             'Dr. Splash',
             'Dracovish shop image',
             'Dracozolt shop image',
@@ -290,7 +296,8 @@ export const SpriteCredits: Credit[] = [
             'Dungeon Ladder',
             'Dungeon Chest Tiers',
             'Exeggcute (Single)',
-            'Exposed Applin',
+            'Exposed Applin + Overworld',
+            'Flabébé Overworld (All but Red)',
             'Galar fossils items',
             'Galarian Articuno overworld image',
             'Galarian Moltres overworld image',
@@ -300,6 +307,7 @@ export const SpriteCredits: Credit[] = [
             'Go-Rock Squad Commander',
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
+            'Gooey Mulch',
             'Sudowoodo (Golden) Shop Icon',
             'Grotle (Acorn)',
             'Grotle (Acorn) Shop Icon',
@@ -343,9 +351,11 @@ export const SpriteCredits: Credit[] = [
             'Miror B.',
             'Mismagius (Illusion)',
             'Mismagius (Illusion) Shop Icon',
+            'Morpeko (Hungry) Overworld',
             'Mr Stone',
             'Naganadel (Overworld)',
             'New Island Overworld',
+            'Oricorio Overworld (All)',
             'Peat Block',
             'Peonia',
             'Pikachu (Clone)',
@@ -364,7 +374,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Pikachu',
             'Pinkan Poliwhirl',
             'Pinkan Rhyhorn (shiny)',
-            'Pinkan Scyther Shuffle',
+            'Pinkan Scyther Shuffle + Overworld',
             'Pinkan Weedle',
             'Pinkan Weezing',
             'Professor Burnet',
@@ -457,7 +467,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Zapdos',
             'Shady Salesman',
             'Ship Front View',
-            'Shuckle (Corked)',
+            'Shuckle (Corked) + Overworld',
             'Silvally (Bug) Shuffle',
             'Silvally (Dark) Shuffle',
             'Silvally (Dragon) Shuffle',
@@ -477,7 +487,7 @@ export const SpriteCredits: Credit[] = [
             'Silvally (Water) Shuffle',
             'Snorlax (Snowman)',
             'Snover Berry and Trees',
-            'Snover (Berry)',
+            'Snover (Berry) + Overworld',
             'Spooky Togepi (shiny)',
             'Spooky Togetic',
             'Spooky Togekiss',
@@ -630,6 +640,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Clemont',
             'Drasna',
+            'Guzma',
             'Korrina',
             'Malva',
             'Onympia',
@@ -778,12 +789,14 @@ export const SpriteCredits: Credit[] = [
             'Larry',
             'Laventon',
             'Looker',
+            'Lillie (z powererd)',
             'Melli',
             'Miriam',
             'Mr. Fuji',
             'Nemona',
             'Owner',
             'Palina',
+            'Plumeria (league)',
             'Poppy',
             'Prof. Birch',
             'Prof. Elm',
@@ -920,11 +933,15 @@ export const SpriteCredits: Credit[] = [
             'Chaser (male and female)',
             'Es Cade',
             'Hunter (male and female)',
+            'Lillie',
+            'Lusamine (nihilego) shiny',
             'Rider (male and female)',
             'Roller Boy',
+            'Rotom-Dex',
             'Rui',
             'Street Performer',
             'Team Snagem',
+            'Trial Site',
             'Willie',
         ],
         // Notes: Made specifically for PokéClicker.
@@ -1066,6 +1083,15 @@ export const SpriteCredits: Credit[] = [
             'Underground Fossilized Bird',
             'Underground Fossilized Fish',
         ],
+    },
+    {
+        name: 'RekiemLock',
+        link: 'https://www.deviantart.com/rekiemlock',
+        image: 'https://a.deviantart.net/avatars-big/r/e/rekiemlock.jpg',
+        resources: [
+            'Team Skull overworld sprite',
+        ],
+        // Notes: Permission given if credited
     },
     {
         name: 'Robbinspook',
@@ -1233,7 +1259,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Ulithium_Dragon',
         link: 'https://www.pokecommunity.com/showthread.php?t=397580',
-        image: 'https://www.pokecommunity.com/customavatars/avatar531836_2.gif',
+        image: 'https://data.pokecommunity.com/avatars/o/531/531836.jpg',
         resources: [
             'Ultra Wormhole',
         ],
@@ -1288,6 +1314,7 @@ export const SpriteCredits: Credit[] = [
             'Charm',
             'Coin',
             'Dexio (Gen 6)',
+            'Dulse',
             'Eri',
             'Giacomo',
             'Green',
@@ -1295,6 +1322,9 @@ export const SpriteCredits: Credit[] = [
             'Mela',
             'Ortega',
             'Penny',
+            'Phyco',
+            'Soliera',
+            'Zossie',
         ],
         // Notes: Permission given if credited.
     },
@@ -1342,7 +1372,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1436,
+            1439,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -1398,7 +1428,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            141,
+            143,
         ],
         name: 'CypherX',
         link: 'https://github.com/CypherX',
@@ -1430,7 +1460,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            71,
+            73,
         ],
         name: 'RegisCoaxans',
         link: 'https://github.com/RegisCoaxans',
@@ -1454,7 +1484,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            55,
+            57,
         ],
         name: 'EatPant2nd',
         link: 'https://github.com/EatPant2nd',
@@ -1478,7 +1508,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            39,
+            40,
         ],
         name: 'Crobat4',
         link: 'https://github.com/Crobat4',
@@ -1507,6 +1537,14 @@ export const CodeCredits: Credit[] = [
         name: 'apple096',
         link: 'https://github.com/apple096',
         image: 'https://avatars.githubusercontent.com/u/62083669?v=4',
+    },
+    {
+        resources: [
+            31,
+        ],
+        name: 'umbralOptimatum',
+        link: 'https://github.com/umbralOptimatum',
+        image: 'https://avatars.githubusercontent.com/u/12092270?v=4',
     },
     {
         resources: [
@@ -1539,14 +1577,6 @@ export const CodeCredits: Credit[] = [
         name: 'amative1',
         link: 'https://github.com/amative1',
         image: 'https://avatars.githubusercontent.com/u/14666630?v=4',
-    },
-    {
-        resources: [
-            26,
-        ],
-        name: 'umbralOptimatum',
-        link: 'https://github.com/umbralOptimatum',
-        image: 'https://avatars.githubusercontent.com/u/12092270?v=4',
     },
     {
         resources: [
@@ -1646,7 +1676,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            11,
+            12,
         ],
         name: 'RedzepR',
         link: 'https://github.com/RedzepR',
@@ -1768,6 +1798,14 @@ export const CodeCredits: Credit[] = [
         resources: [
             6,
         ],
+        name: 'wormania',
+        link: 'https://github.com/wormania',
+        image: 'https://avatars.githubusercontent.com/u/16630222?v=4',
+    },
+    {
+        resources: [
+            6,
+        ],
         name: 'arduousFrivolity',
         link: 'https://github.com/arduousFrivolity',
         image: 'https://avatars.githubusercontent.com/u/112739771?v=4',
@@ -1811,14 +1849,6 @@ export const CodeCredits: Credit[] = [
         name: 'pjeanjean',
         link: 'https://github.com/pjeanjean',
         image: 'https://avatars.githubusercontent.com/u/7363343?v=4',
-    },
-    {
-        resources: [
-            4,
-        ],
-        name: 'wormania',
-        link: 'https://github.com/wormania',
-        image: 'https://avatars.githubusercontent.com/u/16630222?v=4',
     },
     {
         resources: [

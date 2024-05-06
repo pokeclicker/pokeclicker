@@ -1,5 +1,5 @@
 class BattleFrontierMilestonePokemon extends BattleFrontierMilestone {
-    constructor (stage: number, private pokemonName: string, requirement?: Requirement, image = `assets/images/items/pokemonItem/${pokemonName}.png`) {
+    constructor (stage: number, public pokemonName: string, requirement?: Requirement, image = `assets/images/items/pokemonItem/${pokemonName}.png`) {
         super(
             stage,
             () => {
