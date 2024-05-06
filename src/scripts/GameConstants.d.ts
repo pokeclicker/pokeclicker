@@ -926,7 +926,6 @@ namespace GameConstants {
         Rare_Candy,
         Magikarp_Biscuit,
     }
-    declare const MAGIKARP_BISCUIT_MULTIPLIER: number;
     declare const zCrystalItemType: string[];
     declare enum ZMoveStatus {
         inactive,

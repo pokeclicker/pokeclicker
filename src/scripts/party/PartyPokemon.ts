@@ -324,11 +324,13 @@ class PartyPokemon implements Saveable {
                 type : NotificationConstants.NotificationOption.danger,
             });
         }
+
         switch (type) {
             case GameConstants.ConsumableType.Rare_Candy:
-            case GameConstants.ConsumableType.Magikarp_Biscuit: amount = Math.min(amount, player.itemList[itemName]());
+            case GameConstants.ConsumableType.Magikarp_Biscuit:
+                amount = Math.min(amount, player.itemList[itemName]());
                 const curAttack = this.calculateAttack(true);
-                const bonus = GameConstants.BREEDING_ATTACK_BONUS * (GameConstants[`${GameConstants.ConsumableType[type].toUpperCase()}_MULTIPLIER`] ?? 1);
+                const bonus = GameConstants.BREEDING_ATTACK_BONUS * ((ItemList[itemName] as AttackGainConsumable).bonusMultiplier ?? 1);
                 GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
                 Notifier.notify({
                     message : `${this.displayName} gained ${this.calculateAttack(true) - curAttack} attack points`,

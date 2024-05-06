@@ -2484,8 +2484,6 @@ export enum ConsumableType {
     Magikarp_Biscuit,
 }
 
-export const MAGIKARP_BISCUIT_MULTIPLIER = 6;
-
 export const zCrystalItemType = [
     'Normalium Z',
     'Firium Z',

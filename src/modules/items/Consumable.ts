@@ -4,7 +4,7 @@ import { ShopOptions } from './types';
 
 export default class Consumable extends Item {
     type: ConsumableType;
-    _canUse: (pokemon: Record<any, any>) => boolean;
+    _canUse: (pokemon: any) => boolean;
 
     constructor(
         type: ConsumableType,
