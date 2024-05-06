@@ -85,8 +85,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.category]: {
         text: 'Category',
-        getValue: (p) => p.category,
-        invert: true,
+        getValue: (p) => p.getCategorySortValues(),
     },
 
     [SortOptions.vitaminsUsed]: {

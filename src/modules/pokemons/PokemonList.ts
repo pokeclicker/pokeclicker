@@ -33,6 +33,7 @@ import LevelType from '../party/LevelType';
 import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
+// import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
@@ -2945,6 +2946,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 55,
         },
+        'gender': {
+            'femaleRatio': 0.25,
+        },
     },
     {
         'id': 59,
@@ -2983,6 +2987,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 90,
         },
+        'gender': {
+            'femaleRatio': 0.25,
+        },
     },
     {
         'id': 59.02,
@@ -3000,6 +3007,9 @@ export const pokemonList = createPokemonArray(
             'defense': 80,
             'specialDefense': 80,
             'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0.25,
         },
     },
     {
@@ -4278,6 +4288,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 100,
         },
+        'gender': {
+            'type': Genders.Genderless,
+        },
     },
     {
         'id': 101,
@@ -4316,6 +4329,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 150,
         },
+        'gender': {
+            'type': Genders.Genderless,
+        },
     },
     {
         'id': 101.02,
@@ -4333,6 +4349,9 @@ export const pokemonList = createPokemonArray(
             'defense': 70,
             'specialDefense': 80,
             'speed': 150,
+        },
+        'gender': {
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6846,6 +6865,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 95,
         },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
     },
     {
         'id': 158,
@@ -8645,7 +8667,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 88,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Hisuian Qwilfish', 'Overqwil', 25)],
+        'evolutions': [HeldItemLevelEvolution('Strong_Scroll', 'Hisuian Qwilfish', 'Overqwil', 25)],
         'base': {
             'hitpoints': 65,
             'attack': 95,
@@ -9199,7 +9221,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 163,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Stantler', 'Wyrdeer', 31)],
+        'evolutions': [HeldItemLevelEvolution('Agile_Scroll', 'Stantler', 'Wyrdeer', 31)],
         'base': {
             'hitpoints': 73,
             'attack': 95,
@@ -11947,7 +11969,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 159,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Bannetite, 'Banette', 'Mega Banette')],
+        'evolutions': [MegaEvolution(MegaStoneType.Banettite, 'Banette', 'Mega Banette')],
         'base': {
             'hitpoints': 64,
             'attack': 115,
@@ -11967,11 +11989,11 @@ export const pokemonList = createPokemonArray(
         'catchRate': 45,
         'base': {
             'hitpoints': 64,
-            'attack': 115,
-            'specialAttack': 83,
-            'defense': 65,
-            'specialDefense': 63,
-            'speed': 65,
+            'attack': 165,
+            'specialAttack': 93,
+            'defense': 75,
+            'specialDefense': 83,
+            'speed': 75,
         },
     },
     {
@@ -15299,6 +15321,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Adamant_Orb' },
         'base': {
             'hitpoints': 100,
             'attack': 100,
@@ -15338,6 +15361,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Lustrous_Orb' },
         'base': {
             'hitpoints': 90,
             'attack': 100,
@@ -15425,6 +15449,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'heldItem': { type: ItemType.item, id: 'Griseous_Orb' },
     },
     {
         'id': 488,
@@ -16135,6 +16160,9 @@ export const pokemonList = createPokemonArray(
             'defense': 80,
             'specialDefense': 65,
             'speed': 85,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
         },
     },
     {
@@ -17027,6 +17055,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 105,
         },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 549.02,
@@ -17044,6 +17075,9 @@ export const pokemonList = createPokemonArray(
             'defense': 75,
             'specialDefense': 75,
             'speed': 105,
+        },
+        'gender': {
+            'femaleRatio': 1,
         },
     },
     {
@@ -17606,6 +17640,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 70,
         },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
     },
     {
         'id': 571,
@@ -17643,6 +17680,9 @@ export const pokemonList = createPokemonArray(
             'defense': 60,
             'specialDefense': 60,
             'speed': 110,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
         },
     },
     {
@@ -18832,6 +18872,9 @@ export const pokemonList = createPokemonArray(
             'defense': 70,
             'specialDefense': 70,
             'speed': 65,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -22030,6 +22073,9 @@ export const pokemonList = createPokemonArray(
             'defense': 80,
             'specialDefense': 95,
             'speed': 60,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
         },
     },
     {
@@ -28461,6 +28507,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 78,
         },
+        'gender': {
+            'femaleRatio': 0,
+        },
     },
     {
         'id': 902.01,
@@ -28477,6 +28526,9 @@ export const pokemonList = createPokemonArray(
             'defense': 65,
             'specialDefense': 75,
             'speed': 78,
+        },
+        'gender': {
+            'femaleRatio': 1,
         },
     },
     {
@@ -28529,6 +28581,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 106,
         },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 905.01,
@@ -28545,6 +28600,9 @@ export const pokemonList = createPokemonArray(
             'defense': 110,
             'specialDefense': 100,
             'speed': 46,
+        },
+        'gender': {
+            'femaleRatio': 1,
         },
     },
     // Missingno.
@@ -31323,6 +31381,27 @@ export const pokemonList = createPokemonArray(
         'id': -793,
         'name': '???',
         'nativeRegion': Region.alola,
+        'type': [PokemonType.Rock, PokemonType.Poison],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 257,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 109,
+            'attack': 53,
+            'specialAttack': 127,
+            'defense': 47,
+            'specialDefense': 131,
+            'speed': 103,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    // Fusion Lusamine
+    {
+        'id': -793.01,
+        'name': 'You hateful little Trainer!',
         'type': [PokemonType.Rock, PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.slow,

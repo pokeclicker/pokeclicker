@@ -3,7 +3,7 @@
  */
 class GameController {
     static applyRouteBindings() {
-        $('path, rect').hover(function () {
+        $('#map path, #map rect').hover(function () {
             let tooltipText = $(this).attr('data-town');
             const route = $(this).attr('data-route');
             if (route) {
@@ -48,49 +48,6 @@ class GameController {
     static bindToolTips() {
         $('[data-toggle="popover"]').popover();
         $('[data-toggle="tooltip"]').tooltip();
-
-
-        (ko as any).bindingHandlers.tooltip = {
-            init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-                const local = ko.utils.unwrapObservable(valueAccessor()),
-                    options = {};
-
-                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
-                ko.utils.extend(options, local);
-
-                $(element).tooltip(options);
-
-                ko.utils.domNodeDisposal.addDisposeCallback(element, () => {
-                    $(element).tooltip('dispose');
-                });
-            },
-            'update': function (element, valueAccessor) {
-                const local = ko.utils.unwrapObservable(valueAccessor());
-                const options = {};
-
-                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
-                ko.utils.extend(options, local);
-
-                // Update the config of the tooltip
-                const tooltipData = $(element).data('bs.tooltip');
-                tooltipData.config.title = (options as any).title;
-
-                // If the tooltip is visible, update its text
-                const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
-                if (tooltipInner) {
-                    tooltipInner.innerHTML = tooltipData.config.title || '';
-                }
-                if (tooltipData && tooltipData.config) {
-                    if (tooltipData.config.title === '') {
-                        $(element).tooltip('hide');
-                    }
-                }
-            },
-            options: {
-                placement: 'bottom',
-                trigger: 'click',
-            },
-        };
     }
 
     static focusedOnEditableElement(): boolean {
@@ -351,7 +308,7 @@ class GameController {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
-                    const idx = cycle.findIndex(r => r == player.route());
+                    const idx = cycle.findIndex(r => r == player.route);
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                     switch (key) {
                         case '=':
@@ -391,25 +348,25 @@ class GameController {
                 // Within towns
                 if (App.game.gameState === GameConstants.GameState.town) {
                     if (key === Settings.getSetting('hotkey.town.start').value) {
-                        if (player.town() instanceof DungeonTown) {
-                            DungeonRunner.initializeDungeon(player.town().dungeon);
+                        if (player.town instanceof DungeonTown) {
+                            DungeonRunner.initializeDungeon(player.town.dungeon);
                         } else {
-                            player.town().content[0].protectedOnclick();
+                            player.town.content[0].protectedOnclick();
                         }
                         return e.preventDefault();
                     } else if (isNumberKey) {
                         // Check if a number higher than 0 and less than our towns content was pressed
-                        const filteredContent = player.town().content.filter(c => c.isVisible());
-                        const filteredNPCs = player.town().npcs?.filter(n => n.isVisible());
+                        const filteredContent = player.town.content.filter(c => c.isVisible());
+                        const filteredNPCs = player.town.npcs?.filter(n => n.isVisible());
                         if (numberKey < filteredContent.length) {
                             filteredContent[numberKey].protectedOnclick();
                         } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
                             NPCController.openDialog(filteredNPCs[numberKey - filteredContent.length]);
                         }
                         return e.preventDefault();
-                    } else if (player.town() instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
+                    } else if (player.town instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
                         const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
-                        const idx = cycle.findIndex(d => d.name == player.town().name);
+                        const idx = cycle.findIndex(d => d.name == player.town.name);
                         switch (key) {
                             case '=' :
                             case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
