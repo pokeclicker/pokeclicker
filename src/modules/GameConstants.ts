@@ -256,6 +256,7 @@ export const LIGHT_ITEM_CHANCE = 75;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
 export const CHRISTMAS_ITEM_CHANCE = 10;
+export const HELD_MAGIKARP_BISCUIT = 256;
 
 // Gems
 export const GEM_UPGRADE_COST = 500;
@@ -2480,6 +2481,7 @@ export const ModalCollapseList = [
 
 export enum ConsumableType {
     Rare_Candy,
+    Magikarp_Biscuit,
 }
 
 export const zCrystalItemType = [
