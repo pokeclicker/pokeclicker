@@ -29,46 +29,62 @@
                         <button type="button" class="btn btn-sm btn-primary" data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]" onclick="VitaminController.incrementMultiplier()" oncontextmenu="VitaminController.decrementMultiplier(); return false" title="Multiplier" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
               <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover"></button>
                     </div>
-                    <div class="input-group" data-bind="with: Settings.getSetting('vitaminSort')">
-                        <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])" data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
-                            <option data-bind="text: $data.text, value: $data.value"></option>
+                    <div class="input-group">
+                        <!-- ko let: { vitaminSort: Settings.getSetting('vitaminSort') } -->
+                        <select id="vitamin-sort" autocomplete="off" class="custom-select"
+                            data-bind="options: vitaminSort.options,
+                                optionsValue: 'value',
+                                optionsText: 'text',
+                                value: vitaminSort.observableValue">
                         </select>
+                        <!-- /ko -->
+                        <!-- ko let: { vitaminSortDirection: Settings.getSetting('vitaminSortDirection') } -->
                         <div class="input-group-append bg-primary text-light">
-                            <label for="vitaminSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
-                            text: Settings.getSetting('vitaminSortDirection').observableValue() ? '⥄' : '⥂',
-                            tooltip: { title: Settings.getSetting('vitaminSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
-                            ">⥂</label>
-                            <input id="vitaminSortDirection" style="vertical-align: middle" class="hidden" type="checkbox" data-bind="checked: Settings.getSetting('vitaminSortDirection').observableValue()" onchange="Settings.setSettingByName('vitaminSortDirection', this.checked)" />
+                            <label for="vitamin-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                            text: vitaminSortDirection.observableValue() ? '⥄' : '⥂',
+                            tooltip: {
+                                title: vitaminSortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                trigger: 'hover',
+                                placement:'top',
+                            }">⥂</label>
+                            <input id="vitamin-sort-direction" style="vertical-align: middle" class="hidden" type="checkbox" data-bind="checked: vitaminSortDirection.observableValue" />
                         </div>
+                        <!-- /ko -->
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideMaxedPokemon').observableValue()" onchange="Settings.setSettingByName('vitaminHideMaxedPokemon', this.checked)" />
-                        <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max vitamins</label>
+                        <input type="checkbox" id="vitamin-hide-maxed-pokemon" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideMaxedPokemon').observableValue" />
+                        <label for="vitamin-hide-maxed-pokemon" class="form-check-label">Hide Pokémon with max vitamins</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" id="hide-shiny-pokemons" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideShinyPokemon').observableValue()" onchange="Settings.setSettingByName('vitaminHideShinyPokemon', this.checked)" />
-                        <label for="hide-shiny-pokemons" class="form-check-label">Hide shiny Pokémon</label>
+                        <input type="checkbox" id="vitamin-hide-shiny-pokemon" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideShinyPokemon').observableValue" />
+                        <label for="vitamin-hide-shiny-pokemon" class="form-check-label">Hide shiny Pokémon</label>
                     </div>
-                    <div class="form-row m-0" id="protein-filter">
+                    <div class="form-row m-0" id="vitamin-filters">
                         <div class="form-group col-md-6 col-6 p-0">
-                            <label for="protein-search">Search</label>
-                            <input id="protein-search" autocomplete="off" class="form-control" placeholder="Search here" data-bind="textInput: Settings.getSetting('vitaminSearchFilter').observableValue" />
+                            <label for="vitamin-search">Search</label>
+                            <input id="vitamin-search" autocomplete="off" class="form-control" placeholder="Search here" data-bind="textInput: Settings.getSetting('vitaminSearchFilter').observableValue" />
                         </div>
                         <div class="form-group col-md-3 col-3 p-0">
-                            <label for="protein-region-filter">Region</label>
-                            <select id="protein-region-filter" name="vitaminRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
-                                <!-- ko foreach: Settings.getSetting('vitaminRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('vitaminRegionFilter').value === $data.value }, text: $data.text">Region</option>
-                                <!-- /ko -->
+                            <!-- ko let: { vitaminRegionFilter: Settings.getSetting('vitaminRegionFilter') } -->
+                            <label for="vitamin-region-filter">Region</label>
+                            <select id="vitamin-region-filter" autocomplete="off" class="custom-select"
+                                data-bind="options: vitaminRegionFilter.getValidOptions(),
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: vitaminRegionFilter.observableValue">
                             </select>
+                            <!-- /ko -->
                         </div>
                         <div class="form-group col-md-3 col-3 p-0">
-                            <label for="protein-type-filter">Type</label>
-                            <select id="protein-type-filter" name="vitaminTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
-                                <!-- ko foreach: Settings.getSetting('vitaminTypeFilter').options -->
-                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('vitaminTypeFilter').value === $data.value }, text: $data.text">Type</option>
-                                <!-- /ko -->
+                            <!-- ko let: { vitaminTypeFilter: Settings.getSetting('vitaminTypeFilter') } -->
+                            <label for="vitamin-type-filter">Type</label>
+                            <select id="vitamin-type-filter" autocomplete="off" class="custom-select"
+                                data-bind="options: vitaminTypeFilter.options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: vitaminTypeFilter.observableValue">
                             </select>
+                            <!-- /ko -->
                         </div>
                     </div>
                 </div>
