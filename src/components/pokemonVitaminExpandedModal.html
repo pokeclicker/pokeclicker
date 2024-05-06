@@ -121,7 +121,7 @@
                                             class: ($parent.vitaminUsesRemaining() && player.itemList[GameConstants.VitaminType[$data]]() && !$parent.breeding ? 'text-success' : 'text-muted')">+</button>
                                 </td>
                                 <!-- /ko -->
-                                <td class="text-center align-middle tight" data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue($data).toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>
+                                <td class="text-center align-middle tight" data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue($data).toLocaleString('en-US', { maximumFractionDigits: 3 })">-</td>
                                 <td class="text-center align-middle tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
                                 <td class="text-center align-middle tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
                             </tr>
