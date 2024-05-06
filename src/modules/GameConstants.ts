@@ -1,4 +1,6 @@
 import DayCyclePart from './dayCycle/DayCyclePart';
+import MoonCyclePhase from './moonCycle/MoonCyclePhase';
+import { PokemonNameType } from './pokemons/PokemonNameType';
 
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
@@ -175,6 +177,7 @@ export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
 export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
 export const FREEZE_MULCH_MULTIPLIER = 0;
+export const GOOEY_MULCH_CATCH_BONUS = 10;
 
 export const WANDER_RATE = 0.0005;
 
@@ -198,7 +201,7 @@ export const MAX_DUNGEON_SIZE = 10;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
-export enum DungeonTile {
+export enum DungeonTileType {
     empty = 0,
     entrance = 1,
     enemy = 2,
@@ -464,6 +467,7 @@ export enum Pokeball {
     'Nestball',
     'Repeatball',
     'Beastball',
+    'Moonball',
 }
 
 export enum Currency {
@@ -1365,6 +1369,15 @@ export function getGymRegion(gym: string): Region {
     return RegionGyms.findIndex((gyms) => gyms.find((g) => g === gym));
 }
 
+export const GymAutoRepeatRewardTiers = [
+    // [reward modifier, clears threshold]
+    [1, 1000],
+    [0.75, 750],
+    [0.5, 500],
+    [0.25, 250],
+    [0, 0],
+];
+
 export const KantoDungeons = [
     'Viridian Forest', // 0
     'Mt. Moon',
@@ -1930,18 +1943,33 @@ export const TemporaryBattles = [
     'Anomaly Mewtwo 4',
     'Anomaly Mewtwo 5',
     'Hau 1',
+    'Melemele Spearow',
     'Hau 2',
+    'Skull 1',
+    'Ilima',
+    'Skull 2',
+    'Recon Squad 1',
     'Hau 3',
     'Dexio',
     'Sina',
     'Hau 4',
     'Gladion 1',
+    'Recon Squad 2',
+    'Skull 3',
     'Battle Royal',
     'Plumeria 1',
     'Ultra Wormhole',
     'Hau 5',
+    'Skull 4',
+    'Molayne',
+    'Psychium Z Trial',
+    'Skull 5',
     'Plumeria 2',
     'Gladion 2',
+    'Exeggutor Tree',
+    'Skull 6',
+    'Recon Squad 3',
+    'Lusamine',
     'Necrozma',
     'Ultra Megalopolis',
     'Captain Mina',
@@ -1952,6 +1980,7 @@ export const TemporaryBattles = [
     'Captain Sophocles',
     'Kahuna Nanu',
     'Gladion 3',
+    'Lillie',
     'Guzma Bug Memory',
     'Kahili Flying Memory',
     'Plumeria Poison Memory',
@@ -2086,6 +2115,11 @@ export const TemporaryBattles = [
     'Max Raid Copperajah',
     'Max Raid Duraludon',
     'Eternamax Eternatus',
+    'Terrakion 1',
+    'Swords of Justice 1',
+    'Kyurem 1',
+    'Kyurem 2',
+    'Kyurem 3',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
@@ -2316,6 +2350,45 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dusk]: 17,
     [DayCyclePart.Night]: 18,
 };
+
+export const MoonCycleValues: Record<MoonCyclePhase, number> = {
+    [MoonCyclePhase.NewMoon]: 0,
+    [MoonCyclePhase.WaxingCrescent]: 1,
+    [MoonCyclePhase.FirstQuarter]: 2,
+    [MoonCyclePhase.WaxingGibbous]: 3,
+    [MoonCyclePhase.FullMoon]: 4,
+    [MoonCyclePhase.WaningGibbous]: 5,
+    [MoonCyclePhase.ThirdQuarter]: 6,
+    [MoonCyclePhase.WaningCrescent]: 7,
+};
+
+export const MoonEvoPokemon = new Set<PokemonNameType>([
+    'Nidoran(F)', // 29
+    'Nidorina', // 30
+    'Nidoqueen', // 31
+    'Nidoran(M)', // 32
+    'Nidorino', // 33
+    'Nidoking', // 34
+    'Clefairy', // 35
+    'Clefable', // 36
+    'Jigglypuff', // 39
+    'Wigglytuff', // 40
+    'Cleffa', // 173
+    'Igglybuff', // 174
+    //'Teddiursa', // 216
+    //'Ursaring', // 217
+    'Skitty', // 300
+    'Delcatty', // 301
+    //'Lunatone', // 337
+    // 'Cresselia', // 488
+    //'Darkrai', // 491
+    'Munna', // 517
+    'Musharna', // 518
+    //'Lunala', // 792
+    //'Lunala (Full Moon)', // 792.01
+    //'Necrozma (Dawn Wings)', // 800.02
+    //'Ursaluna', // 901
+]);
 
 export enum ShadowStatus {
     None,

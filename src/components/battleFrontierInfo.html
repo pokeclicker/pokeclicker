@@ -9,6 +9,7 @@
         <h5>Welcome to the Battle Frontier!</h5>
         <p>
             Here you will be battling through many stages to earn Battle Points.<br/>
+            There is no regional attack debuff or weather effects.<br/>
             You can leave early and return to your checkpoint later on.<br/>
             You'll get special items if you reach special milestone stages.<br/>
             When you are ready, click Start!<br/>
@@ -23,6 +24,7 @@
     <!-- /ko -->
     <!-- ko if: BattleFrontierRunner.started -->
     <div id="battleFrontierRewards" class="card-body text-center p-0 show">
+        <!-- ko let: { availableMilestones: BattleFrontierMilestones.availableMilestones().slice(0, 4) } -->
         <table class="table table-hover table-striped table-bordered table-sm m-0">
             <thead>
                 <tr>
@@ -33,7 +35,8 @@
                     <th class="text-left">Reward</th>
                 </tr>
             </thead>
-            <tbody data-bind="foreach: BattleFrontierMilestones.availableMilestones().slice(0, 4)">
+            <tbody>
+                <!-- ko foreach: availableMilestones -->
                 <tr>
                     <th class="tight" data-bind="text: $data.stage.toLocaleString('en-US')"></td>
                     <td class="text-left">
@@ -41,8 +44,18 @@
                         <knockout data-bind="text: $data.displayName"></knockout>
                     </td>
                 </tr>
+                <!-- /ko -->
+                <!-- ko ifnot: availableMilestones.length -->
+                <tr>
+                    <th class="tight">–</td>
+                    <td class="text-left">
+                        You've received every available reward. Congratulations!
+                    </td>
+                </tr>
+                <!-- /ko -->
             </tbody>
         </table>
+        <!-- /ko -->
         <a class="btn btn-block btn-danger text-light" onclick="BattleFrontierRunner.battleQuit()">Quit Battle</a>
     </div>
     <!-- /ko -->
