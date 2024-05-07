@@ -27,10 +27,11 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import QuestItem from './QuestItem';
-import Consumable from './Consumable';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
+import { pokemonMap } from '../pokemons/PokemonList';
+import AttackGainConsumable from './AttackGainConsumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -253,7 +254,8 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 }, undefined, 'Reduces steps required when hatching');
 
 // Consumables
-ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+ItemList.Rare_Candy = new AttackGainConsumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, undefined, 'Strengthen your Magikarp', 6, (pokemon) => Math.floor(pokemon.id) === pokemonMap.Magikarp.id);
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
