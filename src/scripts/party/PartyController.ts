@@ -238,6 +238,10 @@ class PartyController {
 
     static getConsumableFilteredList(): Array<PartyPokemon> {
         return [...App.game.party.caughtPokemon].filter((pokemon) => {
+            const consumable = ItemList[ConsumableController.currentlySelectedName()] as Consumable;
+            if (!consumable.canUse(pokemon)) {
+                return false;
+            }
             if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
                 return false;
             }
