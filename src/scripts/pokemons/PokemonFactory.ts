@@ -305,11 +305,15 @@ class PokemonFactory {
             case 'White_mane_hair':
                 chance = GameConstants.MANE_ITEM_CHANCE;
                 break;
+            case 'Magikarp_Biscuit':
+                chance = GameConstants.HELD_MAGIKARP_BISCUIT;
+                break;
             case 'Rare_Candy':
                 chance = GameConstants.HELD_CANDY_ITEM_CHANCE;
                 break;
             case 'Christmas_present':
                 chance = GameConstants.CHRISTMAS_ITEM_CHANCE;
+                break;
         }
 
         chance /= modifier;
