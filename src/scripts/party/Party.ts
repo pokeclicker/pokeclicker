@@ -6,7 +6,7 @@ class Party implements Feature {
     name = 'Pokemon Party';
     saveKey = 'party';
 
-    _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
+    private _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
 
     defaults = {
         caughtPokemon: [],
@@ -16,7 +16,7 @@ class Party implements Feature {
 
     hasShadowPokemon: KnockoutComputed<boolean>;
 
-    _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
+    private _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
 
     calculateBaseClickAttack: KnockoutComputed<number>;
 
@@ -56,16 +56,12 @@ class Party implements Feature {
 
     }
 
-    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = -1, shadow = GameConstants.ShadowStatus.None) {
+    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = undefined, shadow = GameConstants.ShadowStatus.None) {
         const pokemon = pokemonMap[name];
         this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender, shadow);
     }
 
-    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1, shadow = GameConstants.ShadowStatus.None) {
-        // If no gender defined, calculate it
-        if (gender === -1) {
-            gender = PokemonFactory.generateGenderById(id);
-        }
+    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender: GameConstants.BattlePokemonGender = PokemonFactory.generateGenderById(id), shadow = GameConstants.ShadowStatus.None) {
         this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow), suppressNotification);
     }
 

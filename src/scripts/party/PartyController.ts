@@ -1,3 +1,5 @@
+///<reference path="../../declarations/globals.d.ts"/>
+
 declare const modalUtils: { observableState: typeof observableState };
 
 class PartyController {
@@ -236,6 +238,10 @@ class PartyController {
 
     static getConsumableFilteredList(): Array<PartyPokemon> {
         return [...App.game.party.caughtPokemon].filter((pokemon) => {
+            const consumable = ItemList[ConsumableController.currentlySelectedName()] as Consumable;
+            if (!consumable.canUse(pokemon)) {
+                return false;
+            }
             if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
                 return false;
             }
@@ -275,16 +281,59 @@ class PartyController {
     }
 
     public static moveCategoryPokemon(fromCategory: number, toCategory: number) {
-        // Category should exist, otherwise use the None category
+        // Category should exist
         if (!PokemonCategories.categories().some((c) => c.id === toCategory)) {
-            toCategory = 0;
+            return;
         }
 
         App.game.party.caughtPokemon.forEach((p) => {
-            if (p.category === fromCategory) {
-                p.category = toCategory;
+            if (p.category.includes(fromCategory)) {
+                if (toCategory > 0) {
+                    p.addCategory(toCategory);
+                }
+                p.removeCategory(fromCategory);
             }
         });
+    }
+
+    public static async addCategory(pokemonList: Array<PartyPokemon>, category: number, shouldConfirm = true) {
+        if (!pokemonList.length) {
+            return;
+        }
+
+        if (shouldConfirm) {
+            const categoryName = PokemonCategories.categories().find((c) => c.id === category).name();
+            if (!await Notifier.confirm({
+                title: 'Batch Add Category',
+                message: `Add the <strong>${categoryName}</strong> category to ${pokemonList.length.toLocaleString('en-US')} Pokémon?`,
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Yes',
+            })) {
+                return;
+            }
+        }
+
+        pokemonList.forEach((p) => p.addCategory(category));
+    }
+
+    public static async removeCategory(pokemonList: Array<PartyPokemon>, category: number, shouldConfirm = true) {
+        if (!pokemonList.length) {
+            return;
+        }
+
+        if (shouldConfirm) {
+            const categoryName = PokemonCategories.categories().find((c) => c.id === category).name();
+            if (!await Notifier.confirm({
+                title: 'Batch Remove Category',
+                message: `Remove the <strong>${categoryName}</strong> category from ${pokemonList.length.toLocaleString('en-US')} Pokémon?`,
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Yes',
+            })) {
+                return;
+            }
+        }
+
+        pokemonList.forEach((p) => p.removeCategory(category));
     }
 
     public static compareBy(option: SortOptions, direction: boolean, region = -1): (a: PartyPokemon, b: PartyPokemon) => number {
@@ -299,6 +348,11 @@ class PartyController {
             if (region > -1 && [SortOptions.attack, SortOptions.breedingEfficiency, SortOptions.attackBonus].includes(option)) {
                 aValue *= PartyController.calculateRegionalMultiplier(a, region);
                 bValue *= PartyController.calculateRegionalMultiplier(b, region);
+            }
+
+            if (option === SortOptions.category) {
+                aValue = direction ? Math.max(...aValue) : Math.min(...aValue);
+                bValue = direction ? Math.max(...bValue) : Math.min(...bValue);
             }
 
             if (config.invert) {
@@ -323,3 +377,5 @@ class PartyController {
 
 
 }
+
+PartyController satisfies TmpPartyControllerType;
