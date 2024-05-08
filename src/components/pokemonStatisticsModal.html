@@ -100,7 +100,7 @@
                 <tr>
                   <td class="text-left">Breeding Efficiency</td>
                   <td class="text-left tight"><code
-                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumSignificantDigits: 2 })"></code>
+                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumFractionDigits: 3 })"></code>
                   </td>
                 </tr>
                 <!-- /ko -->
