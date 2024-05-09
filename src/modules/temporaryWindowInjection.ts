@@ -206,7 +206,7 @@ import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import MapHelper from './worldmap/MapHelper';
-import AreaStatus from './worldmap/AreaStatus';
+import MapAreaStatus from './worldmap/MapAreaStatus';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -424,5 +424,5 @@ Object.assign(<any>window, {
     ChristmasPresent,
     DamageCalculator,
     MapHelper,
-    AreaStatus,
+    MapAreaStatus,
 });

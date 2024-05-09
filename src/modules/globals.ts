@@ -35,7 +35,7 @@ import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
 import type { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
 import type Requirement from './requirements/Requirement';
-import type AreaStatus from './worldmap/AreaStatus';
+import type MapAreaStatus from './worldmap/MapAreaStatus';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -162,7 +162,7 @@ type TmpTemporaryBattleRunnerType = {
 
 type TmpTownContentType = {
     isUnlocked: () => boolean;
-    areaStatus: () => AreaStatus;
+    areaStatus: () => MapAreaStatus;
 };
 
 type TmpTownType = {

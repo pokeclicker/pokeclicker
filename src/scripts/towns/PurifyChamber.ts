@@ -16,9 +16,9 @@ class PurifyChamberTownContent extends TownContent {
         return PurifyChamber.requirements.isCompleted();
     }
 
-    public areaStatus(): AreaStatus {
+    public areaStatus(): MapAreaStatus {
         const canPurify = App.game.purifyChamber.currentFlow() >= App.game.purifyChamber.flowNeeded() && App.game.party.caughtPokemon.some(p => p.shadow == GameConstants.ShadowStatus.Shadow);
-        return Math.min(canPurify ? AreaStatus.uncaughtPokemon : AreaStatus.completed, super.areaStatus());
+        return Math.min(canPurify ? MapAreaStatus.uncaughtPokemon : MapAreaStatus.completed, super.areaStatus());
     }
 
 }

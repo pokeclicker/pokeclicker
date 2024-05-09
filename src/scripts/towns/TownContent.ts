@@ -10,8 +10,8 @@ abstract class TownContent {
         this.parent = parent;
     }
 
-    public areaStatus() : AreaStatus {
-        return this.isUnlocked() ? AreaStatus.completed : AreaStatus.locked;
+    public areaStatus() : MapAreaStatus {
+        return this.isUnlocked() ? MapAreaStatus.completed : MapAreaStatus.locked;
     }
 
     public isUnlocked(): boolean {
@@ -125,8 +125,8 @@ class MoveToDungeon extends TownContent {
     public isUnlocked(): boolean {
         return TownList[this.dungeon.name].isUnlocked();
     }
-    public areaStatus(): AreaStatus {
-        return AreaStatus[MapHelper.calculateTownCssClass(this.dungeon.name)];
+    public areaStatus(): MapAreaStatus {
+        return MapAreaStatus[MapHelper.calculateTownCssClass(this.dungeon.name)];
     }
     public clears() {
         if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {
@@ -157,11 +157,11 @@ class MoveToTown extends TownContent {
         return TownList[this.townName].isUnlocked();
     }
 
-    public areaStatus(): AreaStatus {
+    public areaStatus(): MapAreaStatus {
         if (this.includeAreaStatus) {
-            return AreaStatus[MapHelper.calculateTownCssClass(this.townName)];
+            return MapAreaStatus[MapHelper.calculateTownCssClass(this.townName)];
         } else {
-            return AreaStatus.completed;
+            return MapAreaStatus.completed;
         }
     }
 }

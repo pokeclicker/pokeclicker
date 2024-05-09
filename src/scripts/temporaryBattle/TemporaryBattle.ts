@@ -31,11 +31,11 @@ class TemporaryBattle extends TownContent {
     }
     public areaStatus() {
         if (!this.isUnlocked()) {
-            return AreaStatus.locked;
+            return MapAreaStatus.locked;
         } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
-            return AreaStatus.incomplete;
+            return MapAreaStatus.incomplete;
         } else {
-            return AreaStatus.completed;
+            return MapAreaStatus.completed;
         }
     }
     public getDisplayName() {

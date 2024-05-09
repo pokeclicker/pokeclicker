@@ -29,15 +29,15 @@ class Shop extends TownContent {
 
     public areaStatus() {
         const itemStatusArray = [super.areaStatus()];
-        const pokerusUnlocked = Settings.getSetting(`--${AreaStatus[AreaStatus.missingResistant]}`).isUnlocked();
+        const pokerusUnlocked = Settings.getSetting(`--${MapAreaStatus[MapAreaStatus.missingResistant]}`).isUnlocked();
         this.items.forEach(i => {
             if (i instanceof PokemonItem) {
                 if (i.getCaughtStatus() == CaughtStatus.NotCaught) {
-                    itemStatusArray.push(AreaStatus.uncaughtPokemon);
+                    itemStatusArray.push(MapAreaStatus.uncaughtPokemon);
                 } else if (i.getCaughtStatus() == CaughtStatus.Caught) {
-                    itemStatusArray.push(AreaStatus.uncaughtShinyPokemon);
+                    itemStatusArray.push(MapAreaStatus.uncaughtShinyPokemon);
                 } else if (pokerusUnlocked && i.getPokerusStatus() < GameConstants.Pokerus.Resistant) {
-                    itemStatusArray.push(AreaStatus.missingResistant);
+                    itemStatusArray.push(MapAreaStatus.missingResistant);
                 }
             }
         });

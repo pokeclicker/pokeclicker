@@ -1,4 +1,4 @@
-import AreaStatus from './AreaStatus';
+import MapAreaStatus from './MapAreaStatus';
 import * as GameConstants from '../GameConstants';
 import Routes from '../routes/Routes';
 import SubRegions from '../subRegion/SubRegions';
@@ -252,7 +252,7 @@ export default class MapHelper {
     /* CSS functions */
 
     public static getUsableFilters(): CssVariableSetting[] {
-        return GameHelper.enumStrings(AreaStatus).map(status => Settings.getSetting(`--${status}`)).filter(setting => setting.isUnlocked());
+        return GameHelper.enumStrings(MapAreaStatus).map(status => Settings.getSetting(`--${status}`)).filter(setting => setting.isUnlocked());
     }
 
     public static getCurrentEnvironment(): GameConstants.Environment {
@@ -285,23 +285,23 @@ export default class MapHelper {
         let cls = '';
 
         if (!MapHelper.accessToRoute(route, region)) {
-            cls = AreaStatus[AreaStatus.locked];
+            cls = MapAreaStatus[MapAreaStatus.locked];
         } else  if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
-            cls = AreaStatus[AreaStatus.incomplete];
+            cls = MapAreaStatus[MapAreaStatus.incomplete];
         } else  if (RouteHelper.isThereQuestAtLocation(route, region)) {
-            cls = AreaStatus[AreaStatus.questAtLocation];
+            cls = MapAreaStatus[MapAreaStatus.questAtLocation];
         } else if (!RouteHelper.routeCompleted(route, region, false)) {
-            cls = AreaStatus[AreaStatus.uncaughtPokemon];
+            cls = MapAreaStatus[MapAreaStatus.uncaughtPokemon];
         } else if (!RouteHelper.routeCompleted(route, region, true) && !RouteHelper.isAchievementsComplete(route, region)) {
-            cls = AreaStatus[AreaStatus.uncaughtShinyPokemonAndMissingAchievement];
+            cls = MapAreaStatus[MapAreaStatus.uncaughtShinyPokemonAndMissingAchievement];
         } else if (!RouteHelper.routeCompleted(route, region, true)) {
-            cls = AreaStatus[AreaStatus.uncaughtShinyPokemon];
+            cls = MapAreaStatus[MapAreaStatus.uncaughtShinyPokemon];
         } else if (!RouteHelper.isAchievementsComplete(route, region)) {
-            cls = AreaStatus[AreaStatus.missingAchievement];
-        } else if (Settings.getSetting(`--${AreaStatus[AreaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < GameConstants.Pokerus.Resistant) {
-            cls = AreaStatus[AreaStatus.missingResistant];
+            cls = MapAreaStatus[MapAreaStatus.missingAchievement];
+        } else if (Settings.getSetting(`--${MapAreaStatus[MapAreaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < GameConstants.Pokerus.Resistant) {
+            cls = MapAreaStatus[MapAreaStatus.missingResistant];
         } else {
-            cls = AreaStatus[AreaStatus.completed];
+            cls = MapAreaStatus[MapAreaStatus.completed];
         }
 
         // Water routes
@@ -319,7 +319,7 @@ export default class MapHelper {
         }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
-            return AreaStatus[AreaStatus.locked];
+            return MapAreaStatus[MapAreaStatus.locked];
         }
         const states = [];
         // Is this location a dungeon
@@ -328,41 +328,41 @@ export default class MapHelper {
             const shadowPokemon = dungeonList[townName].allAvailableShadowPokemon();
 
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
-                states.push(AreaStatus.incomplete);
+                states.push(MapAreaStatus.incomplete);
             } else if (dungeonList[townName].isThereQuestAtLocation()) {
-                states.push(AreaStatus.questAtLocation);
+                states.push(MapAreaStatus.questAtLocation);
             } else if (!RouteHelper.listCompleted(possiblePokemon, false)) {
-                states.push(AreaStatus.uncaughtPokemon);
-            } else if (Settings.getSetting(`--${AreaStatus[AreaStatus.uncaughtShadowPokemon]}`).isUnlocked()
+                states.push(MapAreaStatus.uncaughtPokemon);
+            } else if (Settings.getSetting(`--${MapAreaStatus[MapAreaStatus.uncaughtShadowPokemon]}`).isUnlocked()
                 && shadowPokemon.some(pokemon => App.game.party.getPokemonByName(pokemon)?.shadow < GameConstants.ShadowStatus.Shadow)) {
-                states.push(AreaStatus.uncaughtShadowPokemon);
+                states.push(MapAreaStatus.uncaughtShadowPokemon);
             } else if (!RouteHelper.listCompleted(possiblePokemon, true)) {
                 if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                    states.push(AreaStatus.uncaughtShinyPokemonAndMissingAchievement);
+                    states.push(MapAreaStatus.uncaughtShinyPokemonAndMissingAchievement);
                 } else {
-                    states.push(AreaStatus.uncaughtShinyPokemon);
+                    states.push(MapAreaStatus.uncaughtShinyPokemon);
                 }
             } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                states.push(AreaStatus.missingAchievement);
-            } else if (Settings.getSetting(`--${AreaStatus[AreaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(possiblePokemon) < GameConstants.Pokerus.Resistant) {
-                states.push(AreaStatus.missingResistant);
+                states.push(MapAreaStatus.missingAchievement);
+            } else if (Settings.getSetting(`--${MapAreaStatus[MapAreaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(possiblePokemon) < GameConstants.Pokerus.Resistant) {
+                states.push(MapAreaStatus.missingResistant);
             }
         }
         const town = TownList[townName];
         town.content.forEach(c => {
             // If the town itself is not locked, it should never show locked
-            if (c.areaStatus() != AreaStatus.locked) {
+            if (c.areaStatus() != MapAreaStatus.locked) {
                 states.push(c.areaStatus());
             }
         });
         if (states.length) {
             const importantState = Math.min(...states);
-            if (importantState >= AreaStatus.uncaughtShinyPokemon && states.includes(AreaStatus.uncaughtShinyPokemon) && states.includes(AreaStatus.missingAchievement)) {
-                return AreaStatus[AreaStatus.uncaughtShinyPokemonAndMissingAchievement];
+            if (importantState >= MapAreaStatus.uncaughtShinyPokemon && states.includes(MapAreaStatus.uncaughtShinyPokemon) && states.includes(MapAreaStatus.missingAchievement)) {
+                return MapAreaStatus[MapAreaStatus.uncaughtShinyPokemonAndMissingAchievement];
             }
-            return AreaStatus[importantState];
+            return MapAreaStatus[importantState];
         }
-        return AreaStatus[AreaStatus.completed];
+        return MapAreaStatus[MapAreaStatus.completed];
     }
 
 }

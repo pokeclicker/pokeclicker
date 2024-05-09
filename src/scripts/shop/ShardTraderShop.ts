@@ -23,15 +23,15 @@ class ShardTraderShop extends Shop {
             const pokemonDeals = deals.filter(d => d.item.itemType instanceof PokemonItem && d.item.itemType.isVisible()).map(d => d.item.itemType.type) as PokemonNameType[];
 
             if (!RouteHelper.listCompleted(pokemonDeals, false)) {
-                itemStatusArray.push(AreaStatus.uncaughtPokemon);
+                itemStatusArray.push(MapAreaStatus.uncaughtPokemon);
             }
 
             if (!RouteHelper.listCompleted(pokemonDeals, true)) {
-                itemStatusArray.push(AreaStatus.uncaughtShinyPokemon);
+                itemStatusArray.push(MapAreaStatus.uncaughtShinyPokemon);
             }
 
-            if (Settings.getSetting(`--${AreaStatus[AreaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(pokemonDeals) < GameConstants.Pokerus.Resistant) {
-                itemStatusArray.push(AreaStatus.missingResistant);
+            if (Settings.getSetting(`--${MapAreaStatus[MapAreaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(pokemonDeals) < GameConstants.Pokerus.Resistant) {
+                itemStatusArray.push(MapAreaStatus.missingResistant);
             }
         }
         return Math.min(...itemStatusArray);

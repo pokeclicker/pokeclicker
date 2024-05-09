@@ -12,23 +12,23 @@ class SafariTownContent extends TownContent {
     public onclick(): void {
         Safari.openModal();
     }
-    public areaStatus(): AreaStatus {
+    public areaStatus(): MapAreaStatus {
         if (!SafariPokemonList.list[player.region]) {
-            return AreaStatus.completed;
+            return MapAreaStatus.completed;
         }
-        const pokemonStatusArray = [AreaStatus.completed];
-        const pokerusUnlocked = Settings.getSetting(`--${AreaStatus[AreaStatus.missingResistant]}`).isUnlocked();
+        const pokemonStatusArray = [MapAreaStatus.completed];
+        const pokerusUnlocked = Settings.getSetting(`--${MapAreaStatus[MapAreaStatus.missingResistant]}`).isUnlocked();
         SafariPokemonList.list[player.region]().forEach(p => {
             if (!p.isAvailable()) {
                 return;
             }
             const caughtStatus = PartyController.getCaughtStatusByName(p.name);
             if (caughtStatus == CaughtStatus.NotCaught) {
-                pokemonStatusArray.push(AreaStatus.uncaughtPokemon);
+                pokemonStatusArray.push(MapAreaStatus.uncaughtPokemon);
             } else if (caughtStatus == CaughtStatus.Caught) {
-                pokemonStatusArray.push(AreaStatus.uncaughtShinyPokemon);
+                pokemonStatusArray.push(MapAreaStatus.uncaughtShinyPokemon);
             } else if (pokerusUnlocked && PartyController.getPokerusStatusByName(p.name) < GameConstants.Pokerus.Resistant) {
-                pokemonStatusArray.push(AreaStatus.missingResistant);
+                pokemonStatusArray.push(MapAreaStatus.missingResistant);
             }
         });
         return Math.min(...pokemonStatusArray);
