@@ -1464,7 +1464,7 @@ GymList['Iki Town'] = new Gym(
     BadgeEnums.Melemele_Stamp,
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!</br><img width="100" src="assets/images/items/zCrystal/Fightinium Z.svg"/></br>With this victory... you have cleared all of the trials of Melemele Island, the first of Alola\'s islands! The Melemele stamp is proof of your accomplishments.',
-    [new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10), new TemporaryBattleRequirement('Hau 3')])],
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 10), new TemporaryBattleRequirement('Hau 3')])],
     undefined, undefined, { displayName: 'Hala\'s Grand Trial' }
 );
 GymList['Konikoni City'] = new Gym(
