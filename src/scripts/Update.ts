@@ -2677,7 +2677,7 @@ class Update implements Saveable {
             // Start Alola story quests if player has beaten temp battles already
             // Hau 1
             if (saveData.statistics.temporaryBattleDefeated[224]) {
-                Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
+                Update.startQuestLine(saveData, 'Welcome to Paradise, Cousin!');
             }
             /* Uncomment and move once Z-Moves are ready
             // Give Z-Power_Ring key item if Hau 2 defeated

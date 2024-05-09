@@ -6869,7 +6869,7 @@ const LagunaKahuna = new NPC('Kahuna Hala', [
     'Dooot doo doo, just a kahuna on a stroll to the laguna. ♪',
 ], {
     image: 'assets/images/npcs/Hala.png',
-    requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!'),
+    requirement: new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!'),
 });
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
@@ -7006,21 +7006,21 @@ const Lillie1 = new NPC('Mysterious Girl', [
     'So you will be taking part in the festival battle? I\'ll be sure to watch you and Hau.',
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 1, GameConstants.AchievementOption.less)]),
 });
 const Lillie2 = new NPC('Return Nebby to Lillie', [
     'Nebby! Oh thank goodness you\'re safe. Thank you $playername$, let me heal your Poké- No? Um, very well then.',
     'It seems Hau is outside on Route 3. Are you two having another battle?',
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 8), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 9, GameConstants.AchievementOption.less)]),
 });
 const Lillie3 = new NPC('Lillie', [
     'Nebby is... Its real home is far away from here. And I want to help it get home. Thank you for helping me. The two of us will be heading to the next island as well!',
     'Oh, and here, $playername$. Some Revives. It\'s the least I can do after all the running around I\'ve made you do.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 9), new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!', GameConstants.AchievementOption.less)]),
 });
 const Lillie4 = new NPC('Meet with Lillie', [
     'I think Nebby might be interested in visiting the Ruins of Life. Apparently they house the sacred guardian of Akala Island. I wondered if you\'d like to come with us when we go to visit the ruins. I\'ll be here if you decide you want to come.',
@@ -7119,14 +7119,14 @@ const LillieMahaloTrail1 = new NPC('Mysterious Girl', [
     'H-help... Save Nebby!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Welcome to paradise, cousin!'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Welcome to Paradise, Cousin!'), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 0, GameConstants.AchievementOption.less)]),
 });
 const LillieMahaloTrail2 = new NPC('Lillie', [
     'Please... Don\'t tell anyone about this... About seeing Nebby... It\'s...it\'s a secret, OK?',
     'I work as Professor Kukui\'s assistant. He\'s told me to show you around the island, so come along now.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 2, GameConstants.AchievementOption.less)]),
 });
 const LillieMelemeleMeadow1 = new NPC('Lillie', [
     'Nebby! Nebby, come back!',
@@ -7134,13 +7134,13 @@ const LillieMelemeleMeadow1 = new NPC('Lillie', [
     'Nebby ran off into the meadow here... What if a wild Pokémon attacks it? It doesn\'t have any moves it can use to battle!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 5), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 8, GameConstants.AchievementOption.less)]),
 });
 const LillieMelemeleMeadow2 = new NPC('Lillie', [
     'Hello, $playername$. Are you done with your battle against Hau on Route 3? We should all head back to Iki Town, now.',
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 9), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 10, GameConstants.AchievementOption.less)]),
 });
 const LillieHeahea = new NPC('Lillie', [
     'Professor Burnet has been so kind, and she\'s helping me try to find a way to get Nebby back to its own home... She\'s been like...like a real mother to me.',
@@ -8173,7 +8173,7 @@ TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
+    [new QuestLineStartedRequirement('Welcome to Paradise, Cousin!')],
     [TemporaryBattleList['Melemele Spearow']],
     {
         npcs: [Lillie1, LillieMahaloTrail1, LillieMahaloTrail2],
