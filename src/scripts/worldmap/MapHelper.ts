@@ -287,6 +287,7 @@ class MapNavigation {
     public static svgSize = { w: 1600, h: 960 };
     public static svgImage: HTMLElement;
     public static svgContainer: HTMLElement;
+    public static preventPlayerTravel = ko.observable(false);
 
     public static updateViewbox() {
         this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
@@ -332,13 +333,13 @@ class MapNavigation {
         let isPanning = false;
         let startPoint = { x: 0, y: 0 };
         let initialViewBox = { x: 0, y: 0 };
-        let zoom = this.svgContainer.clientWidth / this.svgSize.w
+        let zoom = this.svgContainer.clientWidth / this.svgSize.w;
 
         this.svgContainer.onmousedown = (e) => {
             isPanning = true;
             startPoint = { x: e.x, y: e.y };
             initialViewBox = { x: this.viewBox.x, y: this.viewBox.y };
-            zoom = this.svgContainer.clientWidth / this.svgSize.w
+            zoom = this.svgContainer.clientWidth / this.svgSize.w;
         };
 
         this.svgContainer.onmousemove = (e) => {
@@ -356,6 +357,10 @@ class MapNavigation {
             this.viewBox.x = movedViewBox.x;
             this.viewBox.y = movedViewBox.y;
             this.updateViewbox();
+
+            if (!this.preventPlayerTravel() && dx ** 2 + dy ** 2 > 16 ** 2) {
+                this.preventPlayerTravel(true);
+            }
         };
 
         this.svgContainer.onmouseup = (e) => {
@@ -364,8 +369,12 @@ class MapNavigation {
             }
             isPanning = false;
         };
+        this.svgContainer.onclick = (e) => {
+            this.preventPlayerTravel(false);
+        };
         this.svgContainer.onmouseleave = (e) => {
             this.svgContainer.onmouseup(e);
+            this.svgContainer.onclick(e);
         };
 
         // when our region or subregion changes, the map changes, reset the zoom/pan

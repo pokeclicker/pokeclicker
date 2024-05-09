@@ -388,6 +388,9 @@
                             @import "HisuiSVG.html"
                             @import "PaldeaSVG.html"
 
+                            <!-- ko if: MapNavigation.preventPlayerTravel()-->
+                                <rect x="0" y="0" height="1600" width="900" />
+                            <!-- /ko -->
                             <g id="playerSprite">
                                 <!-- This group is cleared actively via koExtenders.ts added to fix #3358 -->
                                 <!-- TODO: Replace current PlayerSprite rendering logic so a singular SVG is used / updated like so:-->
