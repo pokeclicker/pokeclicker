@@ -3895,9 +3895,10 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town',
         imageName: 'Rival Hau',
+        /* Uncomment once Z-Moves are ready
         firstTimeRewardFunction: () => {
             App.game.keyItems.gainKeyItem(KeyItemType['Z-Power_Ring'], true);
-        },
+        },*/
     }
 );
 TemporaryBattleList['Skull 1'] = new TemporaryBattle(

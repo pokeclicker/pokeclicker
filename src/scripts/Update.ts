@@ -2679,11 +2679,12 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[224]) {
                 Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
             }
+            /* Uncomment and move once Z-Moves are ready
             // Give Z-Power_Ring key item if Hau 2 defeated
             if (saveData.statistics.temporaryBattleDefeated[226]) {
                 saveData.keyItems['Z-Power_Ring'] = true;
                 KeyItemController.showGainModal(KeyItemType['Z-Power_Ring']);
-            }
+            }*/
             // Sina and Dexio
             if (saveData.statistics.temporaryBattleDefeated[232] && saveData.statistics.temporaryBattleDefeated[233]) {
                 Update.startQuestLine(saveData, 'Symbiotic Relations');
