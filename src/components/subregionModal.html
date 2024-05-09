@@ -15,7 +15,7 @@
                     <button style="position: relative;" class='btn btn-block btn-success'
                         data-dismiss='modal'
                         data-bind='visible: $data.unlocked(),
-                        click: () => { player.subregion = $data.id; $("#SubregionModal").modal("hide"); },
+                        click: () => { MapHelper.moveToSubRegion(player.region, $data.id); $("#SubregionModal").modal("hide"); },
                         attr: { disabled: player.subregion == $data.id }'>
                         <img style="position:absolute; left: 10px;" data-bind="visible: player.subregion == $data.id, attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/> <knockout data-bind="text: $data.name">Region</knockout>
                     </button>

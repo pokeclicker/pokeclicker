@@ -149,3 +149,5 @@ class BattleFrontierRunner {
         return BattleFrontierRunner.checkpoint() > 1;
     })
 }
+
+BattleFrontierRunner satisfies TmpBattleFrontierRunnerType;

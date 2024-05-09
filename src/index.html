@@ -376,12 +376,12 @@
                         <div id="subregion-travel-buttons" class="btn-group mr-2" role="group" style="width: 100%;" data-bind="
                             visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1,
                             css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }">
-                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => MapHelper.moveToNextUnlockedSubRegion()">&lt;</button>
                             <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
                                 click: () => SubRegions.openModal(),
                                 text: 'Subregional Travel (' + player.subregionObject()?.name + ')'"
                                 >Subregional Travel</button>
-                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
+                            <button class="btn btn-sm btn-secondary" data-bind="click: () => MapHelper.moveToPrevUnlockedSubRegion()">&gt;</button>
                         </div>
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">

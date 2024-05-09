@@ -1,6 +1,7 @@
 import AreaStatus from './AreaStatus';
 import * as GameConstants from '../GameConstants';
 import Routes from '../routes/Routes';
+import SubRegions from '../subRegion/SubRegions'
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import Settings from '../settings/Settings';
@@ -17,12 +18,16 @@ export default class MapHelper {
             return;
         }
         const routeData = Routes.getRoute(region, route);
-        if (this.accessToRoute(route, region)) {
-            player.route = route;
-            player.subregion = routeData.subRegion ?? 0;
-            if (player.region != region) {
-                player.region = region;
+        if (MapHelper.accessToRoute(route, region)) {
+            App.game.gameState = GameConstants.GameState.idle;
+            if (player.region !== region) {
+                MapHelper.moveToRegion(region, false);
             }
+            const subRegion = routeData.subRegion ?? 0;
+            if (player.subregion !== subRegion) {
+                MapHelper.moveToSubRegion(region, subRegion, false);
+            }
+            player.route = route;
             const genNewEnemy = route != Battle.route;
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
@@ -52,7 +57,11 @@ export default class MapHelper {
     };
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        return !!(Routes.getRoute(region, route)?.isUnlocked() && this.accessToRegion(region));
+        const routeData = Routes.getRoute(region, route);
+        if (!routeData) {
+            return false;
+        }
+        return routeData.isUnlocked() && MapHelper.accessToRegion(region) && MapHelper.accessToSubRegion(region, routeData.subRegion ?? 0);
     };
 
     public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
@@ -65,12 +74,16 @@ export default class MapHelper {
         const town = TownList[townName];
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
+            if (player.region !== town.region) {
+                MapHelper.moveToRegion(town.region, false);
+            }
+            if (player.subregion !== town.subRegion) {
+                MapHelper.moveToSubRegion(town.region, town.subRegion, false);
+            }
             player.route = 0;
             Battle.route = 0;
             Battle.catching(false);
             Battle.enemyPokemon(null);
-            player.region = town.region;
-            player.subregion = town.subRegion;
             player.town = town;
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
@@ -102,7 +115,7 @@ export default class MapHelper {
         if (!town) {
             return false;
         }
-        return town.isUnlocked() && MapHelper.accessToRegion(town.region);
+        return town.isUnlocked() && MapHelper.accessToRegion(town.region) && MapHelper.accessToSubRegion(town.region, town.subRegion);
     }
 
     public static isTownCurrentLocation(townName: string): boolean {
@@ -117,13 +130,15 @@ export default class MapHelper {
     /**
      *  For moving between already-unlocked regions
      */
-    public static moveToRegion(region: GameConstants.Region) {
+    public static moveToRegion(region: GameConstants.Region, moveToDefaultLocation = true) {
         if (MapHelper.accessToRegion(region)) {
             player.region = region;
-            MapHelper.moveToTown(GameConstants.DockTowns[region]);
+            if (moveToDefaultLocation) {
+                MapHelper.moveToTown(GameConstants.DockTowns[region]);
+            }
         } else {
             Notifier.notify({
-                message: 'You don\'t have access to that location right now.',
+                message: 'You don\'t have access to that region right now.',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -149,6 +164,56 @@ export default class MapHelper {
         }
     }
 
+    /* SubRegion functions */
+
+    public static moveToSubRegion(region: GameConstants.Region, subRegion: number, moveToDefaultLocation = true) {
+        if (MapHelper.accessToSubRegion(region, subRegion)) {
+            if (player.region !== region) {
+                MapHelper.moveToRegion(region, false);
+            }
+            player.subregion = subRegion;
+            if (moveToDefaultLocation) {
+                const subRegionData = SubRegions.getSubRegionById(region, subRegion);
+                if (subRegionData.startRoute) {
+                    MapHelper.moveToRoute(subRegionData.startRoute, region);
+                } else if (subRegionData.startTown) {
+                    MapHelper.moveToTown(subRegionData.startTown);
+                }
+            }
+        } else {
+            Notifier.notify({
+                message: 'You don\'t have access to that subregion right now.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
+    }
+
+    public static accessToSubRegion(region: GameConstants.Region, subRegion: number) {
+        return MapHelper.accessToRegion(region) && SubRegions.isSubRegionUnlocked(region, subRegion);
+    }
+
+    public static moveToNextUnlockedSubRegion() {
+        const unlockedSubRegions = SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id);
+        const idx = unlockedSubRegions.indexOf(player.subregion)
+        if (idx === -1) {
+            MapHelper.moveToSubRegion(player.region, unlockedSubRegions[0]);
+        }
+        const nextUnlockedSubRegion = unlockedSubRegions[(idx + 1) % unlockedSubRegions.length];
+        MapHelper.moveToSubRegion(player.region, nextUnlockedSubRegion);
+    }
+
+    public static moveToPrevUnlockedSubRegion() {
+        const unlockedSubRegions = SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id);
+        const idx = unlockedSubRegions.indexOf(player.subregion)
+        if (idx === -1) {
+            MapHelper.moveToSubRegion(player.region, unlockedSubRegions[0]);
+        }
+        const prevUnlockedSubRegion = unlockedSubRegions[(idx - 1 + unlockedSubRegions.length) % unlockedSubRegions.length];
+        MapHelper.moveToSubRegion(player.region, prevUnlockedSubRegion);
+    }
+
+    /* Progression functions */
+
     public static canTravelToNextRegion() {
         // If player already reached highest region, they can't move on
         if (player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION) {
@@ -169,7 +234,7 @@ export default class MapHelper {
         if (MapHelper.canTravelToNextRegion()) {
             // Move regions
             GameHelper.incrementObservable(player.highestRegion);
-            player.region = player.highestRegion();
+            MapHelper.moveToRegion(player.highestRegion(), false);
             const startingTown = GameConstants.StartingTowns[player.highestRegion()];
             player.highestSubRegion(TownList[startingTown].subRegion ?? 0);
             MapHelper.moveToTown(startingTown);
@@ -213,7 +278,7 @@ export default class MapHelper {
     }
 
     public static calculateBattleCssClass(): string {
-        return GameConstants.EnvironmentCssClass[this.getCurrentEnvironment()];
+        return GameConstants.EnvironmentCssClass[MapHelper.getCurrentEnvironment()];
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {

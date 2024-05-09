@@ -209,6 +209,10 @@ export type TmpPartyControllerType = {
     getPokerusStatusByName: (name: PokemonNameType) => Pokerus;
 };
 
+export type TmpBattleFrontierRunnerType = {
+    environment: KnockoutObservable<Environment>;
+}
+
 // Where all the magic happens
 declare global {
     const App: TmpAppType;
@@ -224,4 +228,5 @@ declare global {
     const RouteHelper: TmpRouteHelperType;
     const TemporaryBattleRunner: TmpTemporaryBattleRunnerType;
     const dungeonList: TmpDungeonListType;
+    const BattleFrontierRunner: TmpBattleFrontierRunnerType;
 }
