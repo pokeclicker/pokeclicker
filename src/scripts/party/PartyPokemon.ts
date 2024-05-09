@@ -141,7 +141,8 @@ class PartyPokemon implements Saveable {
     public clickAttackBonus = ko.pureComputed((): number => {
         // Caught + Shiny + Resistant + Purified
         const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant) + +(this.shadow == GameConstants.ShadowStatus.Purified);
-        return bonus;
+        const heldItemMultiplier = this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
+        return bonus * heldItemMultiplier;
     });
 
     public canCatchPokerus(): boolean {
@@ -323,10 +324,14 @@ class PartyPokemon implements Saveable {
                 type : NotificationConstants.NotificationOption.danger,
             });
         }
+
         switch (type) {
-            case GameConstants.ConsumableType.Rare_Candy : amount = Math.min(amount, player.itemList[itemName]());
+            case GameConstants.ConsumableType.Rare_Candy:
+            case GameConstants.ConsumableType.Magikarp_Biscuit:
+                amount = Math.min(amount, player.itemList[itemName]());
                 const curAttack = this.calculateAttack(true);
-                GameHelper.incrementObservable(this._attackBonusPercent, 25 * amount);
+                const bonus = GameConstants.BREEDING_ATTACK_BONUS * ((ItemList[itemName] as AttackGainConsumable).bonusMultiplier ?? 1);
+                GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
                 Notifier.notify({
                     message : `${this.displayName} gained ${this.calculateAttack(true) - curAttack} attack points`,
                     type : NotificationConstants.NotificationOption.success,

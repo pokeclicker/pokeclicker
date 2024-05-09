@@ -69,9 +69,9 @@ export default class MapHelper {
             Battle.route = 0;
             Battle.catching(false);
             Battle.enemyPokemon(null);
-            player.town = town;
             player.region = town.region;
             player.subregion = town.subRegion;
+            player.town = town;
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
         } else {
@@ -196,6 +196,8 @@ export default class MapHelper {
                 ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
             (App.game.gameState == GameConstants.GameState.gym
                 ? GymRunner.getEnvironmentArea() : undefined) ||
+            (App.game.gameState == GameConstants.GameState.battleFrontier
+                ? BattleFrontierRunner.environment() : undefined) ||
             player.town?.name ||
             undefined;
 

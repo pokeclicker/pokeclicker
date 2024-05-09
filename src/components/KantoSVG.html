@@ -137,8 +137,8 @@
         <!--Route 11 extension-->
         <%- include('templates/mapRoute',
             { route: 11, region: 0
-            , width: 3, height: 1.5
-            , x: 83, y: 33.5
+            , width: 3, height: 2
+            , x: 83, y: 33
             , noText: true
             })
         %>
@@ -658,7 +658,7 @@
 
         <%- include('templates/mapPOI',
             { name: "Underground Entrance"
-            , x: 83, y: 30
+            , x: 72, y: 39
             , width: 3, height: 4
             , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
             })
@@ -666,7 +666,7 @@
 
         <%- include('templates/mapPOI',
             { name: "Farm"
-            , x: 72, y: 40
+            , x: 83, y: 30
             , width: 3, height: 3
             , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
             })
