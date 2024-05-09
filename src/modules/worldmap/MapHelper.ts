@@ -1,7 +1,7 @@
 import AreaStatus from './AreaStatus';
 import * as GameConstants from '../GameConstants';
 import Routes from '../routes/Routes';
-import SubRegions from '../subRegion/SubRegions'
+import SubRegions from '../subRegion/SubRegions';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import Settings from '../settings/Settings';
@@ -194,7 +194,7 @@ export default class MapHelper {
 
     public static moveToNextUnlockedSubRegion() {
         const unlockedSubRegions = SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id);
-        const idx = unlockedSubRegions.indexOf(player.subregion)
+        const idx = unlockedSubRegions.indexOf(player.subregion);
         if (idx === -1) {
             MapHelper.moveToSubRegion(player.region, unlockedSubRegions[0]);
         }
@@ -204,7 +204,7 @@ export default class MapHelper {
 
     public static moveToPrevUnlockedSubRegion() {
         const unlockedSubRegions = SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id);
-        const idx = unlockedSubRegions.indexOf(player.subregion)
+        const idx = unlockedSubRegions.indexOf(player.subregion);
         if (idx === -1) {
             MapHelper.moveToSubRegion(player.region, unlockedSubRegions[0]);
         }

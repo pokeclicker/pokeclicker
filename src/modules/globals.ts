@@ -211,7 +211,7 @@ export type TmpPartyControllerType = {
 
 export type TmpBattleFrontierRunnerType = {
     environment: KnockoutObservable<Environment>;
-}
+};
 
 // Where all the magic happens
 declare global {
