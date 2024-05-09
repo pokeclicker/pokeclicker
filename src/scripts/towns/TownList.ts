@@ -6984,7 +6984,7 @@ const LanakilaColress = new NPC('Colress', [
 const ReconSquadAltar = new NPC('Ultra Recon Squad', [
     'Care for a Poipole? It only costs a few thousand Quest Points!',
 ], {
-    image: 'assets/images/npcs/specialNPCS/Ultra Recon Squad (all).png',
+    image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
     requirement: new QuestLineStepCompletedRequirement('Eater of Light', 0),
 });
 
