@@ -254,7 +254,8 @@
                                     </td>
                                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                                         <span style="display: inline;">Click Attack:
-                                            <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                                            <span data-bind="text: Battle.calculateClickAttack().toLocaleString('en-US')"></span>
+                                            <img src="" width= "24" data-bind="visible: Battle.calculateClickType() !== PokemonType.None, attr: { src: App.game.zMoves.crystalImage(Battle.calculateClickType())}"/>
                                         </span>
                                     </td>
                                   </tr>

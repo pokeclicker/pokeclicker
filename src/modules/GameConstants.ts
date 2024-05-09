@@ -2502,15 +2502,7 @@ export const zCrystalItemType = [
     'Steelium Z',
     'Fairium Z',
 ];
-export enum ZMoveStatus {
-    inactive,
-    counteractive,
-    active,
-}
-export const ZMOVE_ACTIVE_MULTIPLIER = 1.5;
-export const ZMOVE_COUNTERACTIVE_MULTIPLIER = 0.75;
-export const ZMOVE_ACTIVE_TIME = 1 * MINUTE;
-export const ZMOVE_COUNTERACTIVE_TIME = 4 * MINUTE;
+export const ZMOVE_COST = 1000;
 
 export enum ContestResults {
     Normal,

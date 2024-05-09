@@ -225,7 +225,6 @@ class Party implements Feature {
                     attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
                 }
             });
-            attack *= App.game.zMoves.getMultiplier(dataPokemon.type1, dataPokemon.type2);
         }
 
         return attack;
@@ -290,9 +289,9 @@ class Party implements Feature {
         return false;
     }
 
-    calculateClickAttack(useItem = false): number {
+    calculateClickAttack(type1: PokemonType, type2: PokemonType, useItem = false): number {
         const clickAttack =  this.calculateBaseClickAttack();
-        const bonus = this.multiplier.getBonus('clickAttack', useItem);
+        const bonus = this.multiplier.getBonus('clickAttack', useItem) * App.game.zMoves.getTypeMultiplier(type1, type2);
         return Math.floor(clickAttack * bonus);
     }
 
