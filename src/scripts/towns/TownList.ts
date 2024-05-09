@@ -4186,6 +4186,11 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
     'They must be lying, how can that be true?!',
 ]);
 
+const MindyFriend = new NPC('Mindy\'s Friend', [
+    'I recently traded with my friend Mindy expecting to get a Gengar. Instead, her Haunter came with this useless rock! I can\'t believe she would do this to me!',
+    'Here, you can have MINDY\'S-GIFT for all I care! I pity whoever decides to trade with her in the future.',
+]);
+
 const AcuityUxie = new NPC('Uxie', [
     '<i>My siblings had informed me of your arrival.</i>',
     '<i>Looks like you have already gathered more than half of the necessary materials. The only materials left to make the key are 10 Crimson Shards, which can be found in various Sinnoh Dungeons.</i>',
@@ -4602,7 +4607,7 @@ TownList['Snowpoint City'] = new Town(
     [SnowpointCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Snowpoint City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217)],
-        npcs: [SnowpointYoungGirl],
+        npcs: [SnowpointYoungGirl, MindyFriend],
     }
 );
 TownList['Secret Berry Shop'] = new Town(
