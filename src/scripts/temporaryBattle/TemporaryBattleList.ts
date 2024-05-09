@@ -3576,9 +3576,6 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         displayName: 'Ash Ketchum',
         returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Pinkan Pikachu');
-        },
     }
 );
 TemporaryBattleList['Calem 6'] = new TemporaryBattle(
