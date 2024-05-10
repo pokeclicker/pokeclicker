@@ -103,6 +103,9 @@
 <!-- Show keyitems modal-->
 @import "itemModal.html"
 
+<!-- Dungeon guides modal-->
+@import "dungeonGuidesModal.html"
+
 <!--Templates -->
 @import "templates/currencyTemplate.html"
 @import "templates/caughtStatusTemplate.html"
@@ -278,28 +281,38 @@
             </div>
 
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
-            <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
-                <div class="card-header p-0">
-                    <div style="position: absolute; left: 2px">
-                        <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
+                <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
+                    <div class="card-header p-0">
+                        <div style="position: absolute; left: 2px">
+                            <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
+                            <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
+                        </div>
+                        
+                        <div style="position: absolute; right: 4px">
+                            <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
+                            <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
+                        </div>
+                        <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
+                        <!-- ko if: DungeonGuides.hired() -->
+                        <a href="#dungeonGuidesDungeonModal" data-toggle="modal" data-bind="tooltip: {
+                            title: `Attempts remaining: ${DungeonGuides.clears()}`,
+                            placement: 'top',
+                            trigger: 'hover'
+                        }">
+                            <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${DungeonGuides.hired().trainerSprite}.png` }">
+                        </a>
+                        <!-- /ko -->
                     </div>
-                    <div style="position: absolute; right: 4px">
-                        <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
-                        <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
+                    <div class="card-body p-0 text-center">
+                        <table class="dungeon-board">
+                            <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
+                                <tr data-bind="foreach: $data">
+                                    <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                 </div>
-                <div class="card-body p-0 text-center">
-                    <table class="dungeon-board">
-                      <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
-                        <tr data-bind="foreach: $data">
-                            <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </div>
-            </div>
             <!-- /ko -->
 
             <!-- Battle Frontier Information Container  -->
@@ -329,7 +342,7 @@
                                 <i>NOTE: These colors can be customized in the settings menu</i>
                             </div>
                         </div>`}">ⓘ</button>
-                    <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
+                    <button class='btn btn-sm' style="position: absolute; right: 96px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: DayCycle.color() },
                         tooltip: {
                             title: DayCycle.tooltip(),
@@ -339,7 +352,7 @@
                         }'>
                         <img width=30px src="" data-bind="attr: { src: DayCycle.image() }"/>
                     </button>
-                    <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+                    <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
                         tooltip: {
                             title: Weather.tooltip(),
@@ -348,6 +361,16 @@
                             trigger: "hover"
                         }'>
                         <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
+                    </button>
+                    <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+                    data-bind='style: { background: MoonCycle.color() },
+                        tooltip: {
+                            title: MoonCycle.tooltip(),
+                            html: true,
+                            placement: "bottom",
+                            trigger: "hover"
+                        }'>
+                        <img width=30px src="" data-bind="attr: { src: MoonCycle.image() }"/>
                     </button>
                     <div id="mapBody" class="card-body p-0 show">
                         <div id="subregion-travel-buttons" class="btn-group mr-2" role="group" style="width: 100%;" data-bind="

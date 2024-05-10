@@ -15,7 +15,6 @@ import {
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import RouteKillRequirement from '../requirements/RouteKillRequirement';
-import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
 import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
@@ -70,7 +69,7 @@ SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos', KalosSubRegions.Kal
 SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele Island', AlolaSubRegions.MelemeleIsland, undefined, 'Hau\'oli City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Akala Island', AlolaSubRegions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.Melemele_Stamp), 'Heahea City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula Island', AlolaSubRegions.UlaulaIsland, new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Poni Island', AlolaSubRegions.PoniIsland, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Poni Island', AlolaSubRegions.PoniIsland, new QuestLineStartedRequirement('Emissary of Light'), 'Seafolk Village'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Magikarp Jump', AlolaSubRegions.MagikarpJump, new QuestLineStartedRequirement('Magikarp Jump'), 'Hoppy Town'));
 
 SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegions.SouthGalar, undefined, 'Hulbury'));

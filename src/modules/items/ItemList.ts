@@ -27,10 +27,11 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import QuestItem from './QuestItem';
-import Consumable from './Consumable';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
+import { pokemonMap } from '../pokemons/PokemonList';
+import AttackGainConsumable from './AttackGainConsumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -88,6 +89,7 @@ ItemList.Lureball = new PokeballItem(Pokeball.Lureball, Infinity, Currency.battl
 ItemList.Nestball = new PokeballItem(Pokeball.Nestball, Infinity, Currency.battlePoint, undefined, 'Nest Ball');
 ItemList.Repeatball = new PokeballItem(Pokeball.Repeatball, Infinity, Currency.battlePoint, undefined, 'Repeat Ball');
 ItemList.Beastball = new PokeballItem(Pokeball.Beastball, 500, Currency.questPoint, undefined, 'Beast Ball');
+ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmPoint, undefined, 'Moon Ball');
 
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
@@ -189,13 +191,13 @@ ItemList.Crystalline_Cocoon_Jirachi = new QuestItem('Crystalline_Cocoon_Jirachi'
 ItemList.Meteorite_Shard_Delta = new QuestItem('Meteorite_Shard_Delta', 'Meteorite Shard', 'A Shard of a Meteorite', 'The Delta Episode');
 ItemList.Mysterious_Vial_Detective_Pikachu = new QuestItem('Mysterious_Vial_Detective_Pikachu', 'Mysterious Vial', 'An Aipom dropped this while running away, I wonder what it is?', 'Detective Pikachu');
 ItemList.Heart_Diamond_Diancie = new QuestItem('Heart_Diamond_Diancie', 'Heart Diamond', 'The energy core of the Diamond domain', 'Princess Diancie');
-ItemList.Red_Petal_Mina = new QuestItem('Red_Petal_Mina', 'Red Petal', 'One of the Petals you need for Mina\'s trial given by Captain Kiawe', 'Mina\'s Trial');
-ItemList.Orange_Petal_Mina = new QuestItem('Orange_Petal_Mina', 'Orange Petal', 'One of the Petals you need for Mina\'s trial given by Captain Ilima', 'Mina\'s Trial');
-ItemList.Yellow_Petal_Mina = new QuestItem('Yellow_Petal_Mina', 'Yellow Petal', 'One of the Petals you need for Mina\'s trial given by Captain Sophocles', 'Mina\'s Trial');
-ItemList.Green_Petal_Mina = new QuestItem('Green_Petal_Mina', 'Green Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mallow', 'Mina\'s Trial');
-ItemList.Blue_Petal_Mina = new QuestItem('Blue_Petal_Mina', 'Blue Petal', 'One of the Petals you need for Mina\'s trial given by Captain Lana', 'Mina\'s Trial');
-ItemList.Purple_Petal_Mina = new QuestItem('Purple_Petal_Mina', 'Purple Petal', 'One of the Petals you need for Mina\'s trial given by Kahuna Nanu', 'Mina\'s Trial');
-ItemList.Pink_Petal_Mina = new QuestItem('Pink_Petal_Mina', 'Pink Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mina', 'Mina\'s Trial');
+ItemList.Red_Petal_Mina = new QuestItem('Red_Petal_Mina', 'Red Petal', 'One of the Petals you need for Mina\'s trial given by Captain Kiawe', 'Island Challenge');
+ItemList.Orange_Petal_Mina = new QuestItem('Orange_Petal_Mina', 'Orange Petal', 'One of the Petals you need for Mina\'s trial given by Captain Ilima', 'Island Challenge');
+ItemList.Yellow_Petal_Mina = new QuestItem('Yellow_Petal_Mina', 'Yellow Petal', 'One of the Petals you need for Mina\'s trial given by Captain Sophocles', 'Island Challenge');
+ItemList.Green_Petal_Mina = new QuestItem('Green_Petal_Mina', 'Green Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mallow', 'Island Challenge');
+ItemList.Blue_Petal_Mina = new QuestItem('Blue_Petal_Mina', 'Blue Petal', 'One of the Petals you need for Mina\'s trial given by Captain Lana', 'Island Challenge');
+ItemList.Purple_Petal_Mina = new QuestItem('Purple_Petal_Mina', 'Purple Petal', 'One of the Petals you need for Mina\'s trial given by Kahuna Nanu', 'Island Challenge');
+ItemList.Pink_Petal_Mina = new QuestItem('Pink_Petal_Mina', 'Pink Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mina', 'Island Challenge');
 ItemList.Sand_Bag_Magikarp_Jump = new QuestItem('Sand_Bag_Magikarp_Jump', 'Sand Bag', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Jump_Counter_Magikarp_Jump = new QuestItem('Jump_Counter_Magikarp_Jump', 'Jump Counter', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Timber_Magikarp_Jump = new QuestItem('Timber_Magikarp_Jump', 'Timber', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
@@ -209,6 +211,7 @@ ItemList.Push_Golem_Magikarp_Jump = new QuestItem('Push_Golem_Magikarp_Jump', 'P
 ItemList.Push_Steelix_Magikarp_Jump = new QuestItem('Push_Steelix_Magikarp_Jump', 'Push Steelix', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Prison_Bottle = new QuestItem('Prison_Bottle', 'Prison Bottle', 'A magical bottle used to bind Hoopa', 'Clash of Ages');
 ItemList.Great_Twisted_Spoon = new QuestItem('Great_Twisted_Spoon', 'Great Twisted Spoon', 'A larger version of the Twisted Spoon made specifically for Mewtwo', 'An Unrivaled Power');
+ItemList.Island_Challenge_Amulet = new QuestItem('Island_Challenge_Amulet', 'Island Challenge Amulet', 'A symbol that denotes your pilgramige on the Island Challenge of Alola. Stronger Trials await you with this in your bag!', 'Island Challenge');
 ItemList.Fighting_Memory_Silvally = new QuestItem('Fighting_Memory_Silvally', 'Fighting Memory', 'One of Silvally\'s memories, obtained from Kahuna Hala in Iki Town', 'Typing some Memories');
 ItemList.Rock_Memory_Silvally = new QuestItem('Rock_Memory_Silvally', 'Rock Memory', 'One of Silvally\'s memories, obtained from Kahuna Olivia in Konikoni City', 'Typing some Memories');
 ItemList.Dark_Memory_Silvally = new QuestItem('Dark_Memory_Silvally', 'Dark Memory', 'One of Silvally\'s memories, obtained from Kahuna Nanu in Malie City', 'Typing some Memories');
@@ -217,7 +220,7 @@ ItemList.Water_Memory_Silvally = new QuestItem('Water_Memory_Silvally', 'Water M
 ItemList.Grass_Memory_Silvally = new QuestItem('Grass_Memory_Silvally', 'Grass Memory', 'One of Silvally\'s memories, obtained from Captain Mallow in Lush Jungle', 'Typing some Memories', 'Typing some Memories', 125000, Currency.questPoint);
 ItemList.Fire_Memory_Silvally = new QuestItem('Fire_Memory_Silvally', 'Fire Memory', 'One of Silvally\'s memories, obtained from Captain Kiawe in Wela Volcano Park', 'Typing some Memories', 'Typing some Memories', 75000, Currency.battlePoint);
 ItemList.Electric_Memory_Silvally = new QuestItem('Electric_Memory_Silvally', 'Electric Memory', 'One of Silvally\'s memories, obtained from Captain Sophocles in Hokulani Observatory', 'Typing some Memories', 'Typing some Memories', 500000000, Currency.money);
-ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 'Typing some Memories', 5000, Currency.diamond);
+ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 'Typing some Memories', 1000, Currency.diamond);
 ItemList.Ground_Memory_Silvally = new QuestItem('Ground_Memory_Silvally', 'Ground Memory', 'One of Silvally\'s memories, obtained from Kahuna Hapu on Exeggutor Island Hill', 'Typing some Memories', 'Typing some Memories', 200000, Currency.farmPoint);
 ItemList.Bug_Memory_Silvally = new QuestItem('Bug_Memory_Silvally', 'Bug Memory', 'One of Silvally\'s memories, obtained from Guzma in Po Town', 'Typing some Memories');
 ItemList.Flying_Memory_Silvally = new QuestItem('Flying_Memory_Silvally', 'Flying Memory', 'One of Silvally\'s memories, obtained from Kahili on Ten Carat Hill', 'Typing some Memories');
@@ -251,7 +254,8 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 }, undefined, 'Reduces steps required when hatching');
 
 // Consumables
-ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+ItemList.Rare_Candy = new AttackGainConsumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, undefined, 'Strengthen your Magikarp', 6, (pokemon) => Math.floor(pokemon.id) === pokemonMap.Magikarp.id);
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
@@ -344,14 +348,14 @@ ItemList['Pinkan Electabuzz']  = new PokemonItem('Pinkan Electabuzz');
 ItemList.Jynx                 = new PokemonItem('Jynx', 2000);
 ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money, true);
 ItemList['Magikarp Brown Stripes'] = new PokemonItem('Magikarp Brown Stripes', 100);
-ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 10000, Currency.diamond);
+ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 2000, Currency.diamond);
 ItemList['Magikarp Saucy Violet'] = new PokemonItem('Magikarp Saucy Violet', 7500000000, Currency.money);
 ItemList['Probably Feebas']   = new PokemonItem('Magikarp (Feebas)', 5999, Currency.battlePoint, false, 'Probably Feebas');
 ItemList.Eevee                = new PokemonItem('Eevee', 4000);
 ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 // Hoenn
-ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 1187, Currency.diamond, false, 'Probably Chimecho');
+ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 358, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 // Sinnoh
 ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)');
@@ -364,7 +368,7 @@ ItemList.Zorua                = new PokemonItem('Zorua', 50625);
 ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 200000);
 // Kalos
 ItemList['Furfrou (Debutante)']  = new PokemonItem('Furfrou (Debutante)', 5000000000, Currency.money);
-ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 15000, Currency.diamond);
+ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 3000, Currency.diamond);
 ItemList['Furfrou (Matron)']     = new PokemonItem('Furfrou (Matron)', 1500000, Currency.farmPoint);
 ItemList['Furfrou (Dandy)']      = new PokemonItem('Furfrou (Dandy)', 250000);
 ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Currency.battlePoint);
