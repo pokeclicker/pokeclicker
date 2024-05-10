@@ -49,7 +49,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             </div>
             <div class="modal-body p-0">
                 <div class="tab-content p-3 h-100">
-                    <!-- ko let: { categoryModeEnabled: ko.observable(false), categoryModeSelected: ko.observable(0) } -->
+                    <!-- ko let: { categoryModeEnabled: PokemonCategories.categoryAssignEnabled, categoryModeSelected: PokemonCategories.categoryAssignSelected } -->
                     <div class="tab-pane fade in active show" id="breeding-pokemon">
                         <div class="row">
                             <div class="col-12 d-lg-none d-block">
@@ -284,6 +284,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     placement: 'bottom',
                                                     trigger: 'hover'
                                                 },
+                                                disable: categoryModeSelected() === 0,
                                                 click: () => PartyController.removeCategory(BreedingController.hatcheryFilteredList().filter(p => p.isHatchable()), categoryModeSelected())">Remove All</button>
                                             </div>
                                             <!-- /ko -->
