@@ -6,7 +6,7 @@ class Party implements Feature {
     name = 'Pokemon Party';
     saveKey = 'party';
 
-    _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
+    private _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
 
     defaults = {
         caughtPokemon: [],
@@ -14,42 +14,54 @@ class Party implements Feature {
 
     hasMaxLevelPokemon: KnockoutComputed<boolean>;
 
-    _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
+    hasShadowPokemon: KnockoutComputed<boolean>;
 
+    private _caughtPokemonLookup: KnockoutComputed<Map<number, PartyPokemon>>;
+
+    calculateBaseClickAttack: KnockoutComputed<number>;
 
     constructor(private multiplier: Multiplier) {
         this._caughtPokemon = ko.observableArray([]);
 
         this.hasMaxLevelPokemon = ko.pureComputed(() => {
-            for (let i = 0; i < this.caughtPokemon.length; i++) {
-                if (this.caughtPokemon[i].level === 100) {
-                    return true;
-                }
-            }
-            return false;
+            return this.caughtPokemon.some(p => p.level === 100);
+        }).extend({rateLimit: 1000});
+
+        this.hasShadowPokemon = ko.computed(() => {
+            return this.caughtPokemon.some(p => p.shadow === GameConstants.ShadowStatus.Shadow);
         }).extend({rateLimit: 1000});
 
         // This will be completely rebuilt each time a pokemon is caught.
         // Not ideal but still better than mutliple locations scanning through the list to find what they want
-        this._caughtPokemonLookup = ko.pureComputed(() => {
+        this._caughtPokemonLookup = ko.computed(() => {
             return this.caughtPokemon.reduce((map, p) => {
                 map.set(p.id, p);
                 return map;
             }, new Map());
         });
 
+        this.calculateBaseClickAttack = ko.computed(() => {
+            // Base power
+            // Shiny pokemon help with a 100% boost
+            // Resistant pokemon give a 100% boost
+            let caughtPokemon = this.caughtPokemon;
+            if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                // Only magikarps can attack in magikarp jump subregion
+                caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
+            }
+
+            const partyClickBonus = caughtPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
+            return Math.pow(partyClickBonus, 1.4);
+        });
+
     }
 
-    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = -1, shadow = GameConstants.ShadowStatus.None) {
+    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = undefined, shadow = GameConstants.ShadowStatus.None) {
         const pokemon = pokemonMap[name];
         this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender, shadow);
     }
 
-    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1, shadow = GameConstants.ShadowStatus.None) {
-        // If no gender defined, calculate it
-        if (gender === -1) {
-            gender = PokemonFactory.generateGenderById(id);
-        }
+    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender: GameConstants.BattlePokemonGender = PokemonFactory.generateGenderById(id), shadow = GameConstants.ShadowStatus.None) {
         this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow), suppressNotification);
     }
 
@@ -172,6 +184,7 @@ class Party implements Feature {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         // Check if the pokemon is in their native region
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
@@ -187,14 +200,12 @@ class Party implements Feature {
             if (type1 == PokemonType.None) {
                 attack = pAttack * multiplier;
             } else {
-                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
             }
         }
 
         // Weather boost
         const weather = Weather.weatherConditions[overrideWeather ?? Weather.currentWeather()];
-        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
         weather.multipliers?.forEach(value => {
             if (value.type == dataPokemon.type1) {
                 attack *= value.multiplier;
@@ -206,7 +217,6 @@ class Party implements Feature {
 
         // Should we take flute boost into account
         if (includeTempBonuses) {
-            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
             FluteEffectRunner.activeGemTypes().forEach(value => {
                 if (value == dataPokemon.type1) {
                     attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
@@ -281,21 +291,8 @@ class Party implements Feature {
     }
 
     calculateClickAttack(useItem = false): number {
-        // Base power
-        // Shiny pokemon help with a 100% boost
-        // Resistant pokemon give a 100% boost
-        let caughtPokemon = this.caughtPokemon;
-        if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
-            // Only magikarps can attack in magikarp jump subregion
-            caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
-        }
-        const caught = caughtPokemon.length;
-        const shiny = caughtPokemon.filter(p => p.shiny).length;
-        const resistant = caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
-        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4);
-
+        const clickAttack =  this.calculateBaseClickAttack();
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
-
         return Math.floor(clickAttack * bonus);
     }
 

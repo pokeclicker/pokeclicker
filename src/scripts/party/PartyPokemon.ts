@@ -31,7 +31,7 @@ class PartyPokemon implements Saveable {
         exp: 0,
         breeding: false,
         shiny: false,
-        category: 0,
+        category: [0],
         levelEvolutionTriggered: false,
         pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
@@ -49,7 +49,7 @@ class PartyPokemon implements Saveable {
     _level: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
-    _category: KnockoutObservable<number>;
+    _category: KnockoutObservableArray<number>;
     _translatedName: KnockoutObservable<string>;
     _nickname: KnockoutObservable<string>;
     _displayName: KnockoutComputed<string>;
@@ -79,13 +79,12 @@ class PartyPokemon implements Saveable {
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this._category = ko.observable(0).extend({ numeric: 0 });
+        this._category = ko.observableArray([0]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
-            const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
-            return Math.floor(this._effortPoints() / GameConstants.EP_EV_RATIO / power);
+            return Math.floor(this.calculateEVs());
         });
         const resistantSub = this.evs.subscribe((newValue) => {
             // Change Pokerus status to Resistant when reaching 50 EVs
@@ -97,7 +96,7 @@ class PartyPokemon implements Saveable {
                     // Log and notify player
                     Notifier.notify({
                         message: `${this.name} has become Resistant to Pokérus.`,
-                        pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
+                        pokemonImage: PokemonHelper.getImage(this.id),
                         type: NotificationConstants.NotificationOption.info,
                         sound: NotificationConstants.NotificationSound.General.pokerus,
                         setting: NotificationConstants.NotificationSetting.General.pokerus,
@@ -107,7 +106,6 @@ class PartyPokemon implements Saveable {
                 resistantSub.dispose();
             }
         });
-        this._attack = ko.pureComputed(() => this.calculateAttack());
         this.heldItem = ko.observable(undefined);
         this.defaultFemaleSprite = ko.observable(false);
         this.hideShinyImage = ko.observable(false);
@@ -115,10 +113,18 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
+        this._attack = ko.computed(() => this.calculateAttack());
         this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
         this._canUseHeldItem.subscribe((canUse) => {
             if (!canUse && this.heldItem()) {
                 this.addOrRemoveHeldItem(this.heldItem());
+            }
+        });
+        this._category.subscribe((newValue) => {
+            if (!newValue.length) {
+                this._category.push(0); // add None category
+            } else if (newValue.length > 1) {
+                this.removeCategory(0); // remove None category
             }
         });
     }
@@ -131,6 +137,13 @@ class PartyPokemon implements Saveable {
         const shadowMultiplier = this.shadowAttackBonus();
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
+
+    public clickAttackBonus = ko.pureComputed((): number => {
+        // Caught + Shiny + Resistant + Purified
+        const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant) + +(this.shadow == GameConstants.ShadowStatus.Purified);
+        const heldItemMultiplier = this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
+        return bonus * heldItemMultiplier;
+    });
 
     public canCatchPokerus(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
@@ -180,16 +193,22 @@ class PartyPokemon implements Saveable {
         return this.level;
     }
 
+    public calculateEVs(): number {
+        const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
+        return this._effortPoints() / GameConstants.EP_EV_RATIO / power;
+    }
+
     public gainExp(exp: number) : number {
         const expGained = exp * this.getExpMultiplier();
         if (this.level < App.game.badgeCase.maxLevel()) {
             this.exp += expGained;
-        }
-        const oldLevel = this.level;
-        const newLevel = this.calculateLevelFromExp();
-        if (oldLevel !== newLevel) {
-            this.level = newLevel;
-            this.checkForLevelEvolution();
+
+            const oldLevel = this.level;
+            const newLevel = this.calculateLevelFromExp();
+            if (oldLevel !== newLevel) {
+                this.level = newLevel;
+                this.checkForLevelEvolution();
+            }
         }
         return expGained;
     }
@@ -305,10 +324,14 @@ class PartyPokemon implements Saveable {
                 type : NotificationConstants.NotificationOption.danger,
             });
         }
+
         switch (type) {
-            case GameConstants.ConsumableType.Rare_Candy : amount = Math.min(amount, player.itemList[itemName]());
+            case GameConstants.ConsumableType.Rare_Candy:
+            case GameConstants.ConsumableType.Magikarp_Biscuit:
+                amount = Math.min(amount, player.itemList[itemName]());
                 const curAttack = this.calculateAttack(true);
-                GameHelper.incrementObservable(this._attackBonusPercent, 25 * amount);
+                const bonus = GameConstants.BREEDING_ATTACK_BONUS * ((ItemList[itemName] as AttackGainConsumable).bonusMultiplier ?? 1);
+                GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
                 Notifier.notify({
                     message : `${this.displayName} gained ${this.calculateAttack(true) - curAttack} attack points`,
                     type : NotificationConstants.NotificationOption.success,
@@ -372,11 +395,14 @@ class PartyPokemon implements Saveable {
     });
 
     public isHatchable = ko.pureComputed(() => {
-        // Only breedable Pokemon
-        if (this.breeding || this.level < 100) {
-            return false;
-        }
+        return !(this.breeding || this.level < 100);
+    });
 
+    public isHatchableFiltered = ko.pureComputed(() => {
+        return this.isHatchable() && this.matchesHatcheryFilters();
+    });
+
+    public matchesHatcheryFilters = ko.pureComputed(() => {
         // Check if search matches englishName or displayName
         const displayName = PokemonHelper.displayName(this.name)();
         const filterName = BreedingFilters.name.value();
@@ -390,11 +416,14 @@ class PartyPokemon implements Saveable {
             return false;
         }
 
-        // Check based on category
-        if (BreedingFilters.category.value() >= 0) {
-            if (this.category !== BreedingFilters.category.value()) {
-                return false;
-            }
+        // Categorized only
+        if (BreedingFilters.category.value() == -2 && this.isUncategorized()) {
+            return false;
+        }
+
+        // Selected category
+        if (BreedingFilters.category.value() >= 0 && !this.category.includes(BreedingFilters.category.value())) {
+            return false;
         }
 
         // Check based on shiny status
@@ -480,7 +509,7 @@ class PartyPokemon implements Saveable {
             }
         }
 
-        if (this.heldItem()) {
+        if (this.heldItem() && Settings.getSetting('confirmChangeHeldItem').value) {
             Notifier.confirm({
                 title: 'Remove held item',
                 message: 'Held items are one time use only.\nRemoved items will be lost.\nAre you sure you want to remove it?',
@@ -494,8 +523,8 @@ class PartyPokemon implements Saveable {
         } else { // Notifier.confirm is async
             this.addOrRemoveHeldItem(heldItem);
         }
-
     }
+
     private addOrRemoveHeldItem(heldItem: HeldItem) {
         if (this.heldItem() && this.heldItem().name == heldItem.name) {
             this.heldItem(undefined);
@@ -503,6 +532,43 @@ class PartyPokemon implements Saveable {
             player.loseItem(heldItem.name, 1);
             this.heldItem(heldItem);
         }
+    }
+
+    public addCategory(id: number) {
+        if (!this.category.includes(id)) {
+            this._category.push(id);
+        }
+    }
+
+    public removeCategory(id: number) {
+        const index = this.category.indexOf(id);
+        if (index > -1) {
+            this._category.splice(index, 1);
+        }
+    }
+
+    public toggleCategory(id: number) {
+        if (this.category.includes(id)) {
+            this.removeCategory(id);
+        } else {
+            if (id === 0) {
+                this.resetCategory();
+            } else {
+                this.addCategory(id);
+            }
+        }
+    }
+
+    public resetCategory(): void {
+        this.category = [...this.defaults.category];
+    }
+
+    public isUncategorized = ko.pureComputed(() => this.category[0] === 0);
+
+    public getCategorySortValues(): Array<number> {
+        return PokemonCategories.categories().map((c, i) => [c.id, i])
+            .filter(([id, _]) => this.category.includes(id))
+            .map(([_, index]) => index);
     }
 
     public fromJSON(json: Record<string, any>): void {
@@ -524,7 +590,7 @@ class PartyPokemon implements Saveable {
         this.exp = json[PartyPokemonSaveKeys.exp] ?? this.defaults.exp;
         this.breeding = json[PartyPokemonSaveKeys.breeding] ?? this.defaults.breeding;
         this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
-        this.category = json[PartyPokemonSaveKeys.category] ?? this.defaults.category;
+        this.category = json[PartyPokemonSaveKeys.category] ?? [...this.defaults.category];
         this.level = this.calculateLevelFromExp();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
@@ -545,7 +611,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.exp]: this.exp,
             [PartyPokemonSaveKeys.breeding]: this.breeding,
             [PartyPokemonSaveKeys.shiny]: this.shiny,
-            [PartyPokemonSaveKeys.category]: this.category,
+            [PartyPokemonSaveKeys.category]: this.isUncategorized() ? undefined : this.category,
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
@@ -627,12 +693,12 @@ class PartyPokemon implements Saveable {
         this._shiny(bool);
     }
 
-    get category(): number {
+    get category(): Array<number> {
         return this._category();
     }
 
-    set category(index: number) {
-        this._category(index);
+    set category(value: Array<number>) {
+        this._category(value);
     }
 
     get nickname(): string {

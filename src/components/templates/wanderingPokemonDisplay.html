@@ -1,0 +1,23 @@
+<script type="text/html" id="wanderingPokémonDisplay">
+    <!-- ko if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus -->
+    <img class="dungeon-pokemon-pkrs" src="" data-bind="
+    attr:{ src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName($data)?.pokerus]}.png` },
+    tooltip: {
+        title: `EVs: ${App.game.party.getPokemonByName($data).evs().toLocaleString('en-US')}`,
+        placement: 'bottom',
+        trigger: 'hover'
+    }" />
+    <!-- /ko -->
+    <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id, App.game.party.getPokemonByName($data)?.shiny ?? false, undefined, GameConstants.ShadowStatus.None) },
+    css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data) }" onerror="this.src='assets/images/pokemon/0.png';"/>
+    <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
+    <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: pokemonMap[$data].nativeRegion <= player.highestRegion(),
+    tooltip: {
+      title: `Reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonMap[$data].nativeRegion])} to attract this Pokémon!`,
+        placement: 'top',
+        trigger: 'hover'
+    }">
+</script>
+
+<!-- Example usage -->
+<!-- <span data-bind="template: { name: 'wanderingPokémonDisplay', data: 'Pikachu'}"></span> -->

@@ -12,6 +12,10 @@ class BerryDeal {
         this.item = {itemType: item, amount: itemAmount};
     }
 
+    public calculateMaxTrades(): number {
+        return Math.min(...this.berries.map(b => Math.floor(App.game.farming.berryList[b.berryType]() / b.amount)));
+    }
+
     public static getDeals(town: GameConstants.BerryTraderLocations) {
         return BerryDeal.list[town];
     }
@@ -50,6 +54,18 @@ class BerryDeal {
                     SeededRand.intBetween(5, 15),
                 ],
                 ItemList.Fastball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                ],
+                [
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                ],
+                ItemList.Moonball,
                 1
             ),
             new BerryDeal(

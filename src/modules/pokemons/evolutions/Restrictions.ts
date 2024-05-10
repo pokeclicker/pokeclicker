@@ -9,11 +9,13 @@ import InGymRequirement from '../../requirements/InGymRequirement';
 import InRegionRequirement from '../../requirements/InRegionRequirement';
 import QuestLineRequirement from '../../requirements/QuestLineRequirement';
 import DayCyclePartRequirement from '../../requirements/DayCyclePartRequirement';
+import MoonCyclePhaseRequirement from '../../requirements/MoonCyclePhaseRequirement';
 import WeatherRequirement from '../../requirements/WeatherRequirement';
 import WeatherType from '../../weather/WeatherType';
 import MegaEvolveRequirement from '../../requirements/MegaEvolveRequirement';
 import { EvoData, restrict } from './Base';
 import DayCyclePart from '../../dayCycle/DayCyclePart';
+import MoonCyclePhase from '../../moonCycle/MoonCyclePhase';
 
 export type EvoFn = (...args: unknown[]) => EvoData;
 
@@ -61,6 +63,7 @@ export const environmentRestrict = <T extends EvoFn>(evo: T) => (
 ) => restrict(
     evo(...rest),
     new InEnvironmentRequirement(environment),
+    new GameStateRequirement(GameState.battleFrontier, false),
 );
 
 export const heldItemRestrict = <T extends EvoFn>(evo: T) => (
@@ -106,11 +109,20 @@ export const nightRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => dayCyclePartRestrict(evo)([DayCyclePart.Night, DayCyclePart.Dawn], ...rest);
 
+export const moonCyclePhaseRestrict = <T extends EvoFn>(evo: T) => (
+    moonCyclePhases: MoonCyclePhase[],
+    ...rest: Parameters<T>
+) => restrict(
+    evo(...rest),
+    new MoonCyclePhaseRequirement(moonCyclePhases),
+);
+
 export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
     megaStone: MegaStoneType,
     ...rest: Parameters<T>
 ) => {
     const data = evo(...rest);
+    data.ignoreECChange = true;
     return restrict(
         data,
         new MegaEvolveRequirement(data.basePokemon, megaStone),

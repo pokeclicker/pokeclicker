@@ -1,0 +1,199 @@
+<div class="modal noselect fade" id="dungeonGuidesModal" tabindex="-1" role="dialog" aria-labelledby="dungeonGuidesModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Hire a Dungeon Guide (BETA)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-left p-2">
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a class="nav-link active" href="#dungeonGuidesModalHireTab" data-toggle="tab">Hire</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dungeonGuidesModalHelpTab" data-toggle="tab">Help</a></li>
+                </ul>
+                <div class="tab-content">
+                    <!-- Hiring Tab -->
+                    <div id="dungeonGuidesModalHireTab" class="tab-pane fade active show">
+                        <!-- ko if: player.town instanceof DungeonTown -->
+                        <div class="row m-0 justify-content-center d-flex" data-bind="foreach: DungeonGuides.available()" style="max-width: 100%;">
+                            <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0 align-items-stretch">
+                                <h5 class="card-header">
+                                    <knockout data-bind="text: $data.name">Name</knockout>
+                                    <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                </h5>
+                                <div class="card-body p-0 text-center">
+                                    <div class="card h-100">
+                                        <div class="card-header p-1">
+                                            Description
+                                        </div>
+                                        <div class="card-body p-1 flex-grow-0" data-bind="html: $data.description">
+                                            Description
+                                        </div>
+                                        <div class="card-header p-1">
+                                            Cost / Run
+                                        </div>
+                                        <div class="card-body p-1 flex-grow-1" data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
+                                            <knockout class="w-100" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}">cost</knockout><br/>
+                                        </div>
+                                        <div class="card-header p-1">
+                                            Movement Speed
+                                        </div>
+                                        <div class="card-body p-1 flex-grow-0" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">
+                                            Speed
+                                        </div>
+                                        <div class="card-header p-1">
+                                            Statistics
+                                        </div>
+                                        <div class="card-body p-1 flex-grow-0">
+                                            <knockout data-bind="text: `Total Attempts: ${App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString()}`">Attempts</knockout><br/>
+                                            <knockout data-bind="text: `Total Clears: ${App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString()}`">Clears</knockout>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <butto class="btn btn-block btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($data.index)">Hire!</butto>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+
+                    <!-- Help Tab -->
+                    <div id="dungeonGuidesModalHelpTab" class="tab-pane fade col-10 offset-1 text-center">
+                        <h4><u>Help</u></h4>
+                        <p>Dungeon guides will automatically guide you through the dungeon, opening any chest they come accross, go down ladders they find and start boss battles.</p>
+                        <p>You must pay an upfront cost for however many attempts you want to run of the dungeon <span class="text-danger">(non refundable)</span>, they will however give you a discount the more runs you purchase in one go.</p>
+                        <p>They do not guarantee a successful dungeon clear, and will charge regardless of the outcome.</p>
+                        <p>Each guide operates at their own speed, with some possessing a sense for specific dungeon tiles and others actively avoiding particular tiles whenever possible.</p>
+                        <p class="text-warning"><i>NOTE: This is a <strong>beta</strong> feature, so things are likely to change in future updates;<br/>feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal noselect fade" id="dungeonGuidesSubModal" tabindex="-1" role="dialog" aria-labelledby="dungeonGuidesSubModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Explore Dungeon</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-left p-2">
+                <!-- ko if: player.town instanceof DungeonTown -->
+                <table class="table table-striped table-hover m-0 text-center">
+                    <tbody>
+                        <tr>
+                            <td>Dungeon Attempts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-0">
+                                <input type="number" class="form-control" min="1" step="1" data-bind="value: DungeonGuides.clears"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Guide Cost</td>
+                        </tr>
+                        <tr>
+                            <td data-bind="foreach: DungeonGuides.calcCost()">
+                                <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dungeon Cost</td>
+                        </tr>
+                        <tr data-bind="with: DungeonGuides.calcDungeonCost()">
+                            <td data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>ALL CHARGES NON REFUNDABLE</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <button class="btn btn-block btn-primary" data-dismiss="modal" data-bind="click: () => DungeonGuides.hire()">Start!</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal noselect fade" id="dungeonGuidesDungeonModal" tabindex="-1" role="dialog" aria-labelledby="dungeonGuidesDungeonModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Dungeon Guide</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <!-- ko if: player.town instanceof DungeonTown && DungeonGuides.hired() -->
+                    <div class="card text-left col-12 p-0" data-bind="with: DungeonGuides.hired()">
+                        <h5 class="card-header">
+                            <knockout data-bind="text: $data.name">Name</knockout>
+                            <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                        </h5>
+                        <div class="card-body p-0">
+                            <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
+                                <tbody class="text-center">
+                                    <tr>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="html: $data.description">Description</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cost / Run</th>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
+                                            <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Movement Speed</th>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">Speed</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Statistics</th>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="text: `Total Attempts: ${App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString()}`">Attempts</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="text: `Total Clears: ${App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString()}`">Clears</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Attempts Remaining</th>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="text: DungeonGuides.clears()">Attempts</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-block btn-danger" data-bind="click: () => $data.fire()" data-dismiss="modal" aria-label="fire">Fire!</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
