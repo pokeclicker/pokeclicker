@@ -10886,8 +10886,8 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     [
         new DungeonBossPokemon('Alolan Raticate', 57978365, 12),
         new DungeonBossPokemon('Gumshoos', 57978365, 12),
-        new DungeonBossPokemon('Totem Raticate', 82543791, 70, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Welcome to paradise, cousin!')])}), //new QuestLineCompletedRequirement('Island Challenge')
-        new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Welcome to paradise, cousin!')])}), //new QuestLineCompletedRequirement('Island Challenge')
+        new DungeonBossPokemon('Totem Raticate', 82543791, 70, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!')])}), //new QuestLineCompletedRequirement('Island Challenge')
+        new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!')])}), //new QuestLineCompletedRequirement('Island Challenge')
         new DungeonTrainer('Trial Site',
             [
                 new GymPokemon('Yungoos', 23191346, 10, new OneFromManyRequirement([
@@ -10907,7 +10907,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'),
     ],
     805000, 2);
 
@@ -11005,7 +11005,7 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
                 new GymPokemon('Rockruff', 23795642, 30, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))),
                 new GymPokemon('Hakamo-o', 35693463, 36, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))),
             ],
-            { hide: true, weight: 10, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),
+            { hide: true, weight: 10, requirement: new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),
     ],
     835000, 3);
 
