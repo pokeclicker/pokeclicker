@@ -44,7 +44,8 @@ class EvolutionHandler {
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
         if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
             const basePartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(data.basePokemon).id);
-            // We calculate the whole bonus attack from all sources but held item and not purified shadow status. This amount should be transfered as is
+            // Calculate and transfer the flat attack bonus rather than bonus percent.
+            // Include all damage sources except held item and the Shadow debuff. Purified bonus is included.
             const bonusAttack = (basePartyPokemon.baseAttack * (1 + basePartyPokemon.attackBonusPercent / 100) + basePartyPokemon.attackBonusAmount)
                 * Math.max(1, basePartyPokemon.shadowAttackBonus()) - basePartyPokemon.baseAttack;
             evolvedPartyPokemon.exp = basePartyPokemon.exp;
