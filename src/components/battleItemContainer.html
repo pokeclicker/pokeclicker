@@ -61,8 +61,8 @@
     </div>
   </div>
 
-  <div style="position: relative;">
-    <div class="card-header p-0" style="position: relative;" data-toggle="collapse" href="#fluteItemContainerBody" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+  <div class="position-relative" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+    <div class="card-header p-0 position-relative" data-toggle="collapse" href="#fluteItemContainerBody">
       <span>Flutes</span>
       <button type="button" class="btn"
         style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
@@ -77,7 +77,6 @@
     </div>
       <button type="button" class="btn btn-sm btn-primary"
           style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-          data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)"
           onclick="App.game.gems.openGemModal()"
           title="Controls"
           data-toggle="popover"
@@ -89,7 +88,7 @@
     </button>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
       <!-- Flutes -->
-      <table class="table table-bordered m-0" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+      <table class="table table-bordered m-0">
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
             <tr data-bind="foreach: $data">
@@ -149,57 +148,60 @@
       </table>
     </div>
   </div>
-  <div class="card-header p-0" data-toggle="collapse" href="#zCrystalItemContainerBody" data-bind="visible: App.game.zMoves.canAccess()">
-    <span>Z-Crystals</span>
-  </div>
-  <div id="zCrystalItemContainerBody" class="card-body p-0 show">
-    <p data-bind="visible: App.game.challenges.list.disableBattleItems.active() && App.game.zMoves.canAccess()" class="bg-danger my-0">
-      Z-Moves are disabled.
-    </p>
-    <table class="table table-bordered m-0" data-bind="visible: App.game.zMoves.canAccess()">
-      <tbody>
-        <tbody data-bind="visible : !App.game.zMoves.isActive(), foreach : GameHelper.chunk(6, GameConstants.zCrystalItemType)">
-          <tr data-bind="foreach : $data">
-            <td class="p-0" data-bind="attr: {
-                                        disabled: !ItemHandler.hasItem($data) || App.game.zMoves.isActive()
-                                      },
-                                      style: {
-                                        'opacity': ItemHandler.hasItem($data) && !App.game.zMoves.isActive() ? '1' : '0.1'
-                                      },
-                                      css: {
-                                        'bg-primary' : App.game.zMoves.isActive() && App.game.zMoves.type() === ItemList[$data].type,
-                                        'bg-secondary': !App.game.zMoves.isActive() || App.game.zMoves.type() !== ItemList[$data].type
-                                      },
-                                      event: {
-                                        click: function(){ItemHandler.useItem($data)}
-                                      },
-                                      tooltip: {
-                                        title: '<strong>' + ItemList[$data].displayName + '</strong>' + '<br/>' + ItemList[$data].getDescription(),
-                                        trigger: 'hover',
-                                        placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
-                                        html: true
-                                      }">
-              <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
-            </td>
-          </tr>
-        </tbody>
-        <tbody data-bind="visible: App.game.zMoves.isActive()">
-          <tr>
-            <td class="p-0 bg-primary" colspan="2" rowspan="3" data-bind="tooltip: { title: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].displayName + '<br/>' + ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].getDescription(), trigger: 'hover', placement: 'bottom', html: true }">
-              <img src="" data-bind="attr: { src: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].image,  }">
-            </td>
-            <td class="p-0 bg-secondary" colspan="4" rowspan="2">
-              <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent' })} Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
-            </td>
-          </tr>
-          <tr></tr>
-          <tr>
-            <td class="p-0" colspan="4" rowspan="1">
-              <code data-bind="text: `${App.game.zMoves.formattedTime()} left`">00:00 left</code>
-            </td>
-          </tr>
-        </tbody>
-      </tbody>
-    </table>
+
+  <div data-bind="hidden: !App.game.zMoves.canAccess() || (Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active())">
+    <div class="card-header p-0" data-toggle="collapse" href="#zCrystalItemContainerBody">
+        <span>Z-Crystals</span>
+      </div>
+      <div id="zCrystalItemContainerBody" class="card-body p-0 show">
+        <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
+          Z-Moves are disabled.
+        </p>
+        <table class="table table-bordered m-0" data-bind="visible: App.game.zMoves.canAccess()">
+          <tbody>
+            <tbody data-bind="visible : !App.game.zMoves.isActive(), foreach : GameHelper.chunk(6, GameConstants.zCrystalItemType)">
+              <tr data-bind="foreach : $data">
+                <td class="p-0" data-bind="attr: {
+                                            disabled: !ItemHandler.hasItem($data) || App.game.zMoves.isActive()
+                                          },
+                                          style: {
+                                            'opacity': ItemHandler.hasItem($data) && !App.game.zMoves.isActive() ? '1' : '0.1'
+                                          },
+                                          css: {
+                                            'bg-primary' : App.game.zMoves.isActive() && App.game.zMoves.type() === ItemList[$data].type,
+                                            'bg-secondary': !App.game.zMoves.isActive() || App.game.zMoves.type() !== ItemList[$data].type
+                                          },
+                                          event: {
+                                            click: function(){ItemHandler.useItem($data)}
+                                          },
+                                          tooltip: {
+                                            title: '<strong>' + ItemList[$data].displayName + '</strong>' + '<br/>' + ItemList[$data].getDescription(),
+                                            trigger: 'hover',
+                                            placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
+                                            html: true
+                                          }">
+                  <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
+                </td>
+              </tr>
+            </tbody>
+            <tbody data-bind="visible: App.game.zMoves.isActive()">
+              <tr>
+                <td class="p-0 bg-primary" colspan="2" rowspan="3" data-bind="tooltip: { title: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].displayName + '<br/>' + ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].getDescription(), trigger: 'hover', placement: 'bottom', html: true }">
+                  <img src="" data-bind="attr: { src: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].image,  }">
+                </td>
+                <td class="p-0 bg-secondary" colspan="4" rowspan="2">
+                  <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent' })} Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="p-0" colspan="4" rowspan="1">
+                  <code data-bind="text: `${App.game.zMoves.formattedTime()} left`">00:00 left</code>
+                </td>
+              </tr>
+            </tbody>
+          </tbody>
+        </table>
+      </div>
   </div>
 </div>
