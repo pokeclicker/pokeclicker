@@ -47,7 +47,6 @@ class EvolutionHandler {
             // We calculate the whole bonus attack from all sources but held item and not purified shadow status. This amount should be transfered as is
             const bonusAttack = (basePartyPokemon.baseAttack * (1 + basePartyPokemon.attackBonusPercent / 100) + basePartyPokemon.attackBonusAmount)
                 * Math.max(1, basePartyPokemon.shadowAttackBonus()) - basePartyPokemon.baseAttack;
-            console.log(bonusAttack);
             evolvedPartyPokemon.exp = basePartyPokemon.exp;
             evolvedPartyPokemon.level = basePartyPokemon.level;
             evolvedPartyPokemon.effortPoints = basePartyPokemon.effortPoints;
