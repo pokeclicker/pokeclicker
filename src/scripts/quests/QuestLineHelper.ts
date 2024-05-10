@@ -2785,7 +2785,7 @@ class QuestLineHelper {
         poniAlolaQuestLine.addQuest(battleSkullGrunts6);
 
         // 4 - Gym battle: Hapu
-        const battleKahunaHapu = new DefeatGymQuest(1, 0, 'Exeggutor Island').withDescription('Enter Vast Poni Canyon and prove your skills in a Grand Trial against Poni\'s new kahuna, Hapu!').withCustomReward(this.zCrystalGet(PokemonType.Ground));
+        const battleKahunaHapu = new DefeatGymQuest(1, 0, 'Exeggutor Island').withDescription('Proceed to Vast Poni Canyon and prove your skills in a Grand Trial against Poni\'s new kahuna, Hapu!').withCustomReward(this.zCrystalGet(PokemonType.Ground));
         poniAlolaQuestLine.addQuest(battleKahunaHapu);
 
         // 5 - Clear dungeon boss: Vast Poni Canyon, Dragonium Z Trial
