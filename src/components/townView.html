@@ -113,7 +113,7 @@
 
     </div>
     <div style="flex-grow: 1;"></div>
-    <knockout data-bind="if: (player.town.dungeon && player.town instanceof DungeonTown)">
+    <knockout data-bind="if: (player.town.dungeon && player.town instanceof DungeonTown && player.town.dungeon.isUnlocked())">
       <div id="dungeonPokemonList" class="card pt-2 pb-3 px-1">
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline mb-0">
