@@ -103,9 +103,6 @@ class Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        if (player.route === 0) {
-            throw new Error('Cannot generate a new route encounter when the player is not on a route!');
-        }
         this.counter = 0;
         this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route, player.region, player.subregionObject()));
         const enemyPokemon = this.enemyPokemon();
