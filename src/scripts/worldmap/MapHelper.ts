@@ -30,11 +30,11 @@ class MapHelper {
             genNewEnemy = true;
         }
         if (this.accessToRoute(route, region)) {
-            player.route = route;
-            player.subregion = routeData.subRegion ?? 0;
             if (player.region != region) {
                 player.region = region;
             }
+            player.subregion = routeData.subRegion ?? 0;
+            player.route = route;
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
             }
