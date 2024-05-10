@@ -1504,7 +1504,7 @@ class QuestLineHelper {
         const searchForKyurem2 = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('Kyurem is probably hiding in the Giant Chasm. Find its lair.');
         swordsofJusticeQuest.addQuest(searchForKyurem2);
 
-        const defeatKyurem2 = new DefeatTemporaryBattleQuest('Kyurem 2', 'You\'ve finally found Kyurem! Defeat them with the help of the Swords of Justice.');
+        const defeatKyurem2 = new DefeatTemporaryBattleQuest('Kyurem 2', 'You\'ve finally found Kyurem! Defeat it with the help of the Swords of Justice.');
         swordsofJusticeQuest.addQuest(defeatKyurem2);
 
         const TalkToCobalion6 = new TalkToNPCQuest(Cobalion6, 'Kyurem has injured the Swords of Justice, go check on Cobalion.');
@@ -1518,7 +1518,7 @@ class QuestLineHelper {
         const TalkToVirizion3 = new TalkToNPCQuest(Virizion3, 'Talk to Virizion.');
         swordsofJusticeQuest.addQuest(new MultipleQuestsQuest(
             [TalkToCobalion7, TalkToTerrakion2, TalkToVirizion3],
-            'You\'ve finally defeated Kyurem, sealing them within the Giant Chasm forever. Talk to the Swords of Justice in the Giant Chasm.'
+            'You\'ve finally defeated Kyurem, sealing it within the Giant Chasm forever. Talk to the Swords of Justice in the Giant Chasm.'
         ));
 
         const CatchCobalion = new CaptureSpecificPokemonQuest('Cobalion').withDescription('Capture the Leader of the Swords of Justice, Cobalion, in Mistralton Cave.');
