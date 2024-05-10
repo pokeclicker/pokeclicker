@@ -21,6 +21,9 @@ export type PokemonCategory = {
 export default class PokemonCategories implements Saveable {
     public static categories: KnockoutObservableArray<PokemonCategory> = ko.observableArray([]);
     public static playerCategories = ko.pureComputed(() => PokemonCategories.categories().filter((cat) => cat.id > 0));
+    // Pokedex & Hatchery category assign mode
+    public static categoryAssignEnabled = ko.observable(false);
+    public static categoryAssignSelected = ko.observable(0);
 
     saveKey = 'categories';
     defaults: Record<string, any> = {};
@@ -31,6 +34,7 @@ export default class PokemonCategories implements Saveable {
     }
 
     public static reset() {
+        PokemonCategories.categoryAssignSelected(0);
         App.game.party.caughtPokemon.forEach((p) => {
             p.resetCategory();
         });
