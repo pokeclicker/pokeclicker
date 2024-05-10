@@ -55,17 +55,17 @@ class Battle {
             return;
         }
         GameHelper.incrementObservable(App.game.statistics.clickAttacks);
-        this.enemyPokemon().damage(Battle.calculateClickAttack());
+        this.enemyPokemon().damage(Battle.calculateClickAttack(true));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
     }
 
-    public static calculateClickAttack(): number {
+    public static calculateClickAttack(useItem = false): number {
         if (this.enemyPokemon()) {
-            return App.game.party.calculateClickAttack(this.enemyPokemon().type1, this.enemyPokemon().type2, true);
+            return App.game.party.calculateClickAttack(this.enemyPokemon().type1, this.enemyPokemon().type2, useItem);
         }
-        return App.game.party.calculateClickAttack(PokemonType.None, PokemonType.None, true);
+        return App.game.party.calculateClickAttack(PokemonType.None, PokemonType.None, useItem);
     }
 
     public static calculateClickType(): PokemonType {

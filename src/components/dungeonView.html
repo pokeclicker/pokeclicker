@@ -137,7 +137,7 @@
                 <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                     <span style="display: inline;">Click Attack:
                         <span data-bind="text: DungeonBattle.calculateClickAttack().toLocaleString('en-US')"></span>
-                        <img src="" width= "24" data-bind="visible: Battle.calculateClickType() !== PokemonType.None, attr: { src: App.game.zMoves.crystalImage(Battle.calculateClickType())}"/>
+                        <img src="" width= "20" data-bind="visible: DungeonBattle.calculateClickType() !== PokemonType.None, attr: { src: App.game.zMoves.crystalImage(Battle.calculateClickType())}"/>
                     </span>
                 </td>
               </tr>
