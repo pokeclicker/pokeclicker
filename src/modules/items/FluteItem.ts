@@ -28,20 +28,11 @@ export default class FluteItem extends Item {
         return `+${(this.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} bonus to ${this.description}`;
     }
 
-    getFormattedTooltip(item): string {
+    getFormattedTooltip(): string {
         let tooltipString = '';
-        tooltipString += `<div><strong>${item.displayName}</strong></div>`;
-        tooltipString += `<div>${item.getDescription()}</div>`;
-        tooltipString += '<br/>';
-        tooltipString += '<div><strong>Consumes:</strong></div>';
-        tooltipString += '<table class="w-100">';
-        for (const gem of item.gemTypes) {
-            tooltipString += '<tr>';
-            tooltipString += `<td class="text-left" px-1">${gem} gems</td>`;
-            tooltipString += `<td class="text-right" px-1">(${App.game.gems.gemWallet[this.gemTypes[gem]]().toLocaleString('en-US')})</td>`;
-            tooltipString += '</tr>';
-        }
-        tooltipString += '</table>';
+        tooltipString += `<div><strong>${this.displayName}</strong></div>`;
+        tooltipString += `<div>${this.getDescription()}</div>`;
+        tooltipString += `<div>Consuming ${FluteEffectRunner.numActiveFlutes()} Gem(s)/Second</div>`;
         return tooltipString;
     }
 

@@ -75,9 +75,16 @@
           }">ⓘ
     </button>
     </div>
-    <button class='btn btn-sm btn-primary px-1' id="gem_list_btn" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" data-backdrop="false" data-toggle="modal"
-      data-bind="tooltip: { title: 'Show Gem list', trigger: 'hover' }, visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)"
-      onclick="App.game.gems.openGemModal()">
+      <button type="button" class="btn btn-sm btn-primary"
+          style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+          data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)"
+          onclick="App.game.gems.openGemModal()"
+          title="Controls"
+          data-toggle="popover"
+          data-html="true"
+          data-content="Click to see your total gems<br/>Click on flutes to toggle effects"
+          data-placement="right"
+          data-trigger="hover">
       <img src="assets/images/keyitems/Gem_case.png">
     </button>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
@@ -86,45 +93,56 @@
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
             <tr data-bind="foreach: $data">
-                <td class="p-0" data-bind="attr: {
-                                disabled: !player.itemList[$data]()
-                            },
-                            css: {
-                                'bg-primary': FluteEffectRunner.getEffect($data) > 30,
-                                'bg-warning': FluteEffectRunner.getEffect($data) <= 30 && FluteEffectRunner.getEffect($data) > 0,
-                                'bg-secondary': !FluteEffectRunner.isActive($data)(),
-                            },
-                            style: {
-                                'opacity': player.itemList[$data]() || FluteEffectRunner.isActive($data)() ? '1' : '0.1'
-                            },
-                            event: {
-                                click: function(){ItemHandler.useItem($data)}
-                            },
-                            tooltip: {
-                              title: ItemList[$data].getFormattedTooltip(ItemList[$data]),
-                              trigger: 'hover',
-                              placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
-                              sanitize: false,
-                              html: true
-                            }">
-                <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
-
-            </td>
+              <td class="amount p-0" data-bind="text: GameHelper.formatAmount(FluteEffectRunner.getLowestGem(ItemList[$data].name)),
+                tooltip:{
+                  title:FluteEffectRunner.fluteGemTooltip(ItemList[$data]),
+                  trigger:'hover',
+                  placement:'top',
+                  animation:false,
+                  sanitize: false,
+                  html:true
+                }">
+              </td>
             </tr>
             <tr data-bind="foreach: $data">
-                <td class="text-light p-0">
-              <!-- ko if: FluteEffectRunner.getEffect($data) > 0 -->
-                <code data-bind="
-                text: player.effectTimer[$data](),
+              <td class="p-0" data-bind="attr: {
+                              disabled: !player.itemList[$data]()
+                          },
+                          css: {
+                              'bg-primary': FluteEffectRunner.getEffect($data) > 30,
+                              'bg-warning': FluteEffectRunner.getEffect($data) <= 30 && FluteEffectRunner.getEffect($data) > 0,
+                              'bg-secondary': !FluteEffectRunner.isActive($data)(),
+                          },
+                          style: {
+                              'opacity': player.itemList[$data]() || FluteEffectRunner.isActive($data)() ? '1' : '0.1'
+                          },
+                          event: {
+                              click: function(){ItemHandler.useItem($data)}
+                          },
+                          tooltip: {
+                            title: ItemList[$data].getFormattedTooltip(ItemList[$data]),
+                            trigger: 'hover',
+                            placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
+                            sanitize: false,
+                            html: true
+                          }">
+                <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
+              </td>
+            </tr>
+            <tr data-bind="foreach: $data">
+              <td class="text-light p-0" data-bind="
                 tooltip: {
                   title: FluteEffectRunner.fluteTooltip($data),
                   trigger:'hover',
                   placement:'bottom',
                   html:true
-                }">
+              }">
+              <!-- ko if: FluteEffectRunner.getEffect($data) > 0 -->
+                <code data-bind="
+                text: player.effectTimer[$data]()">
                 </code>
               <!-- /ko -->
-                </td>
+              </td>
             </tr>
           </tbody>
         </tbody>
