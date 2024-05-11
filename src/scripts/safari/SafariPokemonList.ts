@@ -205,7 +205,7 @@ class SafariPokemonList {
         // Filler
         const pokemon : SafariEncounter[] = [
             // Grass
-            new SafariEncounter('Pidgeot', 4.7),
+            new SafariEncounter('Pidgeotto', 4.7),
             // Water
             new SafariEncounter('Magikarp', 6.6, [SafariEnvironments.Water]),
         ];

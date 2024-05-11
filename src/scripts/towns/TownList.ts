@@ -7587,11 +7587,6 @@ const MayorKarp = new NPC('Mayor Karp', [
     requirement: new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]),
 });
 
-const KarpFisherman = new SafariPokemonNPC('Fisherman', [
-    'This is the best place to fish. You came to pick a Magikarp, right ?',
-    'You can train yours here anyway...',
-], GameConstants.Region.alola, 'assets/images/npcs/Fisherman.png');
-
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
 ], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png', new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]));
@@ -7882,7 +7877,7 @@ TownList['Hoppy Town Fishing Pond'] = new Town(
     [new SafariTownContent('Fishing Bond')],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
-        npcs: [KarpFisherman],
+        npcs: [],
     }
 );
 TownList['Friend League'] = new Town(
