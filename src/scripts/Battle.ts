@@ -27,13 +27,6 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
-        // TODO: figure out a better way of handling this
-        // Limit pokemon attack speed, Only allow 1 attack per 900ms
-        const now = Date.now();
-        if (this.lastPokemonAttack > now - 900) {
-            return;
-        }
-        this.lastPokemonAttack = now;
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
@@ -73,9 +66,9 @@ class Battle {
      */
     public static defeatPokemon() {
         const enemyPokemon = this.enemyPokemon();
-        Battle.route = player.route();
+        Battle.route = player.route;
         const region = player.region;
-        const catchRoute = player.route(); // Has to be set, the Battle.route is "zeroed" on region change
+        const catchRoute = player.route; // Has to be set, the Battle.route is "zeroed" on region change
         enemyPokemon.defeat();
 
         GameHelper.incrementObservable(App.game.statistics.routeKills[player.region][Battle.route]);
@@ -111,7 +104,7 @@ class Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region, player.subregionObject()));
+        this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route, player.region, player.subregionObject()));
         const enemyPokemon = this.enemyPokemon();
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
         // Shiny
@@ -120,11 +113,11 @@ class Battle {
                 LogBookTypes.SHINY,
                 App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true)
                     ? createLogContent.encounterShinyDupe({
-                        location: Routes.getRoute(player.region, player.route()).routeName,
+                        location: Routes.getRoute(player.region, player.route).routeName,
                         pokemon: enemyPokemon.name,
                     })
                     : createLogContent.encounterShiny({
-                        location: Routes.getRoute(player.region, player.route()).routeName,
+                        location: Routes.getRoute(player.region, player.route).routeName,
                         pokemon: enemyPokemon.name,
                     })
             );
@@ -132,7 +125,7 @@ class Battle {
             App.game.logbook.newLog(
                 LogBookTypes.NEW,
                 createLogContent.encounterWild({
-                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    location: Routes.getRoute(player.region, player.route).routeName,
                     pokemon: enemyPokemon.name,
                 })
             );

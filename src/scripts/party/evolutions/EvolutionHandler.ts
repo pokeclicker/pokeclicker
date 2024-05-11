@@ -44,13 +44,16 @@ class EvolutionHandler {
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
         if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
             const basePartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(data.basePokemon).id);
+            // Calculate and transfer the flat attack bonus rather than bonus percent.
+            // Include all damage sources except held item and the Shadow debuff. Purified bonus is included.
+            const bonusAttack = (basePartyPokemon.baseAttack * (1 + basePartyPokemon.attackBonusPercent / 100) + basePartyPokemon.attackBonusAmount)
+                * Math.max(1, basePartyPokemon.shadowAttackBonus()) - basePartyPokemon.baseAttack;
             evolvedPartyPokemon.exp = basePartyPokemon.exp;
             evolvedPartyPokemon.level = basePartyPokemon.level;
             evolvedPartyPokemon.effortPoints = basePartyPokemon.effortPoints;
             evolvedPartyPokemon.pokerus = basePartyPokemon.pokerus;
             evolvedPartyPokemon.shiny = evolvedPartyPokemon.shiny || basePartyPokemon.shiny;
-            evolvedPartyPokemon.attackBonusAmount = basePartyPokemon.attackBonusAmount;
-            evolvedPartyPokemon.attackBonusPercent = basePartyPokemon.attackBonusPercent;
+            evolvedPartyPokemon.attackBonusAmount = bonusAttack;
             evolvedPartyPokemon.vitaminsUsed = basePartyPokemon.vitaminsUsed;
             if (basePartyPokemon.heldItem()?.canUse(evolvedPartyPokemon)) {
                 evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
@@ -59,7 +62,9 @@ class EvolutionHandler {
         }
 
         // EVs
-        evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.ShadowStatus.None, GameConstants.STONE_EP_YIELD);
+        if (!newPokemon) {
+            evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.ShadowStatus.None, GameConstants.STONE_EP_YIELD);
+        }
         return shiny;
     }
 }

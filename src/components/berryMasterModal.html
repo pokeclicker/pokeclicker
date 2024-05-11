@@ -17,7 +17,7 @@
                     <span data-bind="template: { name: 'shopBodyTemplate' }"></span>
                 </div>
                 <div id="berryMasterTrade" class="tab-pane fade">
-                    <div class="table-responsive" id="dailyDealsBody">
+                    <div class="table-responsive" id="dailyDealsBody" style="min-height: 250px;">
                         <table class="table table-sm table-striped m-0 text-left">
                             <thead>
                                 <tr>
@@ -30,12 +30,18 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody data-bind='foreach: BerryDeal.getDeals(ShopHandler.shopObservable().location)'>
+
+                            <!-- ko foreach: BerryDeal.getDeals(ShopHandler.shopObservable().location) -->
+                            <tbody data-bind="let: { tradeAmount: ko.observable(1) }">
                                 <!-- ko foreach: berries -->
                                 <tr>
                                     <td class="align-middle" data-bind="text: App.game.farming.berryList[$data.berryType]().toLocaleString('en-US')"></td>
                                     <td class="align-middle"><img height="28px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[$data.berryType]() }"></img></td>
-                                    <td class="align-middle" data-bind="text: amount.toLocaleString('en-US') + ' x ' + (App.game.farming.unlockedBerries[$data.berryType]() ? BerryType[$data.berryType] : '???')"></td>
+                                    <td class="align-middle">
+                                        <span data-bind="text: amount.toLocaleString('en-US') + ' '"></span>
+                                        <span data-bind="text: '(' + (amount * tradeAmount()).toLocaleString('en-US') + ')', css: { 'text-danger': amount * tradeAmount() > App.game.farming.berryList[$data.berryType]() }"></span>
+                                        <span data-bind="text: ' x ' + (App.game.farming.unlockedBerries[$data.berryType]() ? BerryType[$data.berryType] : '???')"></span>
+                                    </td>
                                     <!-- ko if: $index() === 0 -->
                                     <td class="align-middle" data-bind="attr: { rowspan: $parent.berries.length }">→</td>
                                     <td class="align-middle" data-bind="attr: { rowspan: $parent.berries.length }">
@@ -49,7 +55,7 @@
                                               }">
                                     </td>
                                     <td class="align-middle" data-bind='attr: { rowspan: $parent.berries.length }'>
-                                        <span data-bind='text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></span>
+                                        <span data-bind='text: ($parent.item.amount).toLocaleString("en-US") + " (" + ($parent.item.amount * tradeAmount()).toLocaleString("en-US") + ") × " + $parent.item.itemType.displayName'></span>
                                         <span style="float: right; margin-right: 5px">
                                             <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
                                                 <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}"></span>
@@ -64,13 +70,13 @@
                                         </span>
                                     </td>
                                     <td class="align-middle" data-bind="attr: { rowspan: $parent.berries.length }">
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
+                                        <div class="btn-group btn-block">
+                                            <button class='btn btn-success btn-block' data-bind='attr:{ disabled: (tradeAmount() > $parent.calculateMaxTrades() || !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index())) }, click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: (tradeAmount() > $parent.calculateMaxTrades() || !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index())) }'>
                                                 Trade
                                             </button>
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" data-bind="text: tradeAmount().toLocaleString('en-US') + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
-                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, $parent.calculateMaxTrades()]">
                                                 <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data.toLocaleString('en-US')"></button>
                                             </div>
                                         </div>
@@ -79,6 +85,7 @@
                                 </tr>
                                 <!-- /ko -->
                             </tbody>
+                            <!-- /ko -->
                         </table>
                     </div>
                 </div>

@@ -30,11 +30,11 @@ class MapHelper {
             genNewEnemy = true;
         }
         if (this.accessToRoute(route, region)) {
-            player.route(route);
-            player._subregion(routeData.subRegion != undefined ? routeData.subRegion : 0);
             if (player.region != region) {
                 player.region = region;
             }
+            player.subregion = routeData.subRegion ?? 0;
+            player.route = route;
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
             }
@@ -75,12 +75,14 @@ class MapHelper {
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
-        const area = player.route() ||
+        const area = player.route ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
                 ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
             (App.game.gameState == GameConstants.GameState.gym
                 ? GymRunner.getEnvironmentArea() : undefined) ||
-            player.town()?.name ||
+            (App.game.gameState == GameConstants.GameState.battleFrontier
+                ? BattleFrontierRunner.environment() : undefined) ||
+            player.town?.name ||
             undefined;
 
         if (area in GameConstants.Environments) {
@@ -130,14 +132,14 @@ class MapHelper {
     }
 
     public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
-        return player.route() == route && player.region == region;
+        return player.route == route && player.region == region;
     }
 
     public static isTownCurrentLocation(townName: string): boolean {
         if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
             return TemporaryBattleRunner.battleObservable().getTown().name == townName;
         }
-        return !player.route() && player.town().name == townName;
+        return !player.route && player.town.name == townName;
     }
 
     public static calculateTownCssClass(townName: string): string {
@@ -204,12 +206,13 @@ class MapHelper {
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
-            player.route(0);
+            player.route = 0;
             Battle.route = 0;
             Battle.catching(false);
             const town = TownList[townName];
-            player.town(town);
-            player._subregion(town.subRegion);
+            player.region = town.region;
+            player.subregion = town.subRegion;
+            player.town = town;
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
