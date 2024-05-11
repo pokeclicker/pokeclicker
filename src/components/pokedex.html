@@ -28,7 +28,7 @@ aria-labelledby="pokedexModalLabel">
                 <button type="button" class="btn btn-danger position-absolute" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
             </div>
 
-            <!-- ko let: { categoryModeEnabled: ko.observable(false), categoryModeSelected: ko.observable(0) } -->
+            <!-- ko let: { categoryModeEnabled: PokemonCategories.categoryAssignEnabled, categoryModeSelected: PokemonCategories.categoryAssignSelected } -->
             <div class="modal-body pt-0 overflow-hidden" style="background-color: inherit;">
                 <div class="row">
                     <div class="col-12 d-lg-none d-block">
@@ -253,6 +253,7 @@ aria-labelledby="pokedexModalLabel">
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         },
+                                        disable: categoryModeSelected() === 0,
                                         click: () => PartyController.removeCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected())">Remove All</button>
                                     </div>
                                     <!-- /ko -->
