@@ -8,7 +8,8 @@ type TemporaryBattleOptionalArgument = {
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
     environment?: GameConstants.Environment,
-    resetDaily?: boolean
+    resetDaily?: boolean,
+    finalPokemonImage?: string // trainer image when on final pokemon
 };
 
 class TemporaryBattle extends TownContent {
@@ -41,16 +42,13 @@ class TemporaryBattle extends TownContent {
         return this.optionalArgs.displayName ?? this.name;
     }
 
-    public getImageName() {
-        return this.optionalArgs.imageName ?? this.name;
-    }
-
     public getTown() {
         return this.parent ?? TownList[this.optionalArgs.returnTown] ?? TownList[GameConstants.DockTowns[player.region]];
     }
     public getImage() {
         const imageName = this.optionalArgs?.imageName ?? this.name;
-        return `assets/images/npcs/${imageName}.png`;
+        const finalMonImageName = this.optionalArgs?.finalPokemonImage ?? imageName;
+        return TemporaryBattleRunner.finalPokemon() ? `assets/images/npcs/${finalMonImageName}.png` : `assets/images/npcs/${imageName}.png`;
     }
 
     constructor(

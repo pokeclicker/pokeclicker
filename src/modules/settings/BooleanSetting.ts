@@ -14,6 +14,11 @@ export default class BooleanSetting extends Setting<boolean> {
         );
     }
 
+    set(value: boolean) {
+        // Enforce boolean values
+        super.set(!!value);
+    }
+
     toggle(): void {
         this.set(!this.value);
     }
