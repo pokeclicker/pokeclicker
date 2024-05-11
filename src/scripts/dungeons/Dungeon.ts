@@ -127,10 +127,6 @@ class Dungeon {
     public isUnlocked(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
         if (!App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket)) {
-            Notifier.notify({
-                message: 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>',
-                type: NotificationConstants.NotificationOption.danger,
-            });
             return false;
         }
         // Player may not meet the requirements to start the dungeon
