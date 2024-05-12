@@ -24,9 +24,6 @@ class BattlePokemon implements EnemyPokemonInterface {
      * @param gender Pokémon gender
      * @param [heldItem] item to possibly gain for defeating this Pokémon
      * @param shadow is shadow or purified
-     * @param contestType1 First contest type of the Pokémon
-     * @param contestType2 Second contest type of the Pokémon
-     * @param contsetType3 Third contest type of the Pokémon
      */
 
     constructor(
@@ -45,10 +42,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         public shadow: GameConstants.ShadowStatus,
         public encounterType: EncounterType,
         public heldItem?: BagItem,
-        public ep: number = GameConstants.BASE_EP_YIELD,
-        public contestType1: ContestType = ContestType.None,
-        public contestType2: ContestType = ContestType.None,
-        public contestType3: ContestType = ContestType.None
+        public ep: number = GameConstants.BASE_EP_YIELD
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);

@@ -226,7 +226,7 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
     }
 
-    public static generateContestTrainerPokemon(trainerIndex: number, pokemonIndex: number): BattlePokemon {
+    public static generateContestTrainerPokemon(trainerIndex: number, pokemonIndex: number): ContestBattlePokemon {
         const pokemon = ContestRunner.getTrainerList()[trainerIndex].getTeam()[pokemonIndex];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
         const exp: number = basePokemon.exp;
@@ -235,7 +235,7 @@ class PokemonFactory {
         const money = 0;
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer, undefined, undefined, basePokemon.contestType1, basePokemon.contestType2, basePokemon.contestType3);
+        return new ContestBattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer, undefined, undefined, basePokemon.contestType1, basePokemon.contestType2, basePokemon.contestType3);
     }
 
     private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {

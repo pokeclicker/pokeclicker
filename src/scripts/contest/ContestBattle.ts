@@ -1,5 +1,6 @@
 ///<reference path="../Battle.ts"/>
 class ContestBattle extends Battle {
+    static enemyPokemon: KnockoutObservable<ContestBattlePokemon> = ko.observable(null);
 
     static trainer: KnockoutObservable<ContestTrainer> = ko.observable(null);
     static trainerIndex: KnockoutObservable<number> = ko.observable(0);
