@@ -25,6 +25,7 @@
             </div>
           </div>
         </div>
+        <!-- ko let: { partyPokemon: App.game.party.getPokemon($data) } -->
         <div class="row m-0 mt-2">
           <div class="col-12 col-lg-6">
             <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
@@ -57,30 +58,30 @@
                 <tr>
                   <td class="text-left">Current Attack</td>
                   <td class="text-left tight"><code
-                      data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code>
+                      data-bind="text: (partyPokemon?.attack ?? 0).toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
-                <!-- ko if : App.game.party.getPokemon($data) && App.game.party.getPokemon($data).level != 100 -->
+                <!-- ko if: partyPokemon && partyPokemon.level !== 100 -->
                 <tr>
                   <td class="text-left">Attack at level 100</td>
                   <td class="text-left tight"><code
-                      data-bind="text: App.game.party.getPokemon($data).calculateAttack(true).toLocaleString('en-US')">-</code>
+                      data-bind="text: partyPokemon.calculateAttack(true).toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <!-- /ko -->
-                <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
+                <!-- ko if: partyPokemon?.pokerus -->
                 <tr>
                   <td class="text-left">EVs</td>
                   <td class="text-left tight">
                     <code>
-                      <span data-bind="text: App.game.party.getPokemon($data).calculateEVs().toLocaleString('en-US')">-</span>
+                      <span data-bind="text: partyPokemon.calculateEVs().toLocaleString('en-US')">-</span>
                     </code>
                   </td>
                 </tr>
                 <tr>
                   <td class="text-left">EV bonus</td>
                   <td class="text-left tight"><code
-                      data-bind="text: '×' + App.game.party.getPokemon($data).calculateEVAttackBonus().toLocaleString('en-US')">-</code>
+                      data-bind="text: '×' + partyPokemon.calculateEVAttackBonus().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <!-- /ko -->
@@ -93,14 +94,14 @@
                 <tr>
                   <td class="text-left">Hatch Steps</td>
                   <td class="text-left tight"><code
-                      data-bind="text: App.game.party.getPokemon($data)?.getEggSteps().toLocaleString('en-US') || 'Unknown'">-</code>
+                      data-bind="text: partyPokemon?.getEggSteps().toLocaleString('en-US') || 'Unknown'">-</code>
                   </td>
                 </tr>
-                <!-- ko if: App.game.party.alreadyCaughtPokemon($data) -->
+                <!-- ko if: partyPokemon -->
                 <tr>
                   <td class="text-left">Breeding Efficiency</td>
                   <td class="text-left tight"><code
-                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumFractionDigits: 3 })"></code>
+                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(partyPokemon).toLocaleString('en-US', { maximumFractionDigits: 3 })"></code>
                   </td>
                 </tr>
                 <!-- /ko -->
@@ -126,16 +127,52 @@
                     <!-- /ko -->
                   </td>
                 </tr>
-                <!-- ko if: App.game.party.alreadyCaughtPokemon($data) -->
+                <!-- ko if: partyPokemon -->
                 <tr>
                   <td class="text-left align-middle">Held Item</td>
-                  <td class="text-left tight text-wrap"><code
-                      data-bind="text: App.game.party.getPokemon($data).heldItem()?.displayName || '-'"></code></td>
+                  <td class="text-left tight text-wrap">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <code data-bind="text: partyPokemon.heldItem()?.displayName || '-'"></code>
+                        </div>
+                        <div class="dropdown dropright ml-1">
+                            <button class="btn btn-primary dropdown-toggle px-1 py-0" data-toggle="dropdown"></button>
+                            <div class="dropdown-menu border-primary" style="overflow: auto; width: 270px; max-height: 500px;">
+                                <!-- ko if: partyPokemon.heldItem() -->
+                                <div class="dropdown-item d-flex align-items-center small clickable px-1"
+                                    data-bind="click: () => partyPokemon.giveHeldItem(partyPokemon.heldItem())">
+                                    <img src="" data-bind="attr: { src: partyPokemon.heldItem().image }" width="32" height="32" />
+                                    <strong class="flex-grow-1 ml-2 text-danger">
+                                        Remove <span data-bind="text: partyPokemon.heldItem().displayName"></strong>
+                                    </strong>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <!-- /ko -->
+                                <!-- ko foreach: Object.values(ItemList)
+                                    .filter((item) => item instanceof HeldItem && item.isUnlocked() && item.canUse(partyPokemon) && partyPokemon.heldItem() !== item)
+                                    .sort((a, b) => a.displayName.localeCompare(b.displayName))
+                                -->
+                                <div class="dropdown-item d-flex align-items-center small clickable px-1"
+                                    data-bind="click: () => partyPokemon.giveHeldItem($data)">
+                                    <img src="" data-bind="attr: { src: $data.image }" width="32" height="32" />
+                                    <div class="flex-grow-1 ml-2">
+                                        <div>
+                                            <strong data-bind="text: $data.displayName"></strong>
+                                            <small data-bind="text: `[${player.itemList[$data.name]().toLocaleString('en-US')}]`"></small>
+                                        </div>
+                                        <div class="small" data-bind="text: $data.description"></div>
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td colspan="2" class="text-left tight">
                     <input type="text" class="form-control" placeholder="Nickname"
-                      data-bind="value: App.game.party.getPokemon($data).nickname" />
+                      data-bind="value: partyPokemon.nickname" />
                   </td>
                 </tr>
                 <!-- ko if: pokemonMap[$data].gender.visualDifference -->
@@ -144,7 +181,7 @@
                   <td class="text-left tight">
                     <label class="form-check-label toggler-wrapper style-1 gender-toggle float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
-                        data-bind="checked: App.game.party.getPokemon($data).defaultFemaleSprite">
+                        data-bind="checked: partyPokemon.defaultFemaleSprite">
                       <div class="toggler-slider">
                         <div class="toggler-knob"></div>
                       </div>
@@ -152,13 +189,13 @@
                   </td>
                 </tr>
                 <!-- /ko -->
-                <!-- ko if: App.game.party.getPokemon($data)?.shiny -->
+                <!-- ko if: partyPokemon?.shiny -->
                 <tr>
                   <td class="text-left align-middle text-nowrap">Hide Shiny Sprite</td>
                   <td class="text-left tight">
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
-                        data-bind="checked: App.game.party.getPokemon($data).hideShinyImage">
+                        data-bind="checked: partyPokemon.hideShinyImage">
                       <div class="toggler-slider" data-bind="tooltip: {
                         html: true,
                         title: Settings.getSetting('partyHideShinySprites').observableValue() ?
@@ -171,13 +208,13 @@
                   </td>
                 </tr>
                 <!-- /ko -->
-                <!-- ko if: App.game.party.getPokemon($data)?.shadow == GameConstants.ShadowStatus.Purified -->
+                <!-- ko if: partyPokemon?.shadow == GameConstants.ShadowStatus.Purified -->
                 <tr>
                   <td class="text-left align-middle text-nowrap">Show Shadow</td>
                   <td class="text-left tight">
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
-                        data-bind="checked: App.game.party.getPokemon($data).showShadowImage">
+                        data-bind="checked: partyPokemon.showShadowImage">
                       <div class="toggler-slider">
                         <div class="toggler-knob"></div>
                       </div>
@@ -335,7 +372,7 @@
               </tbody>
             </table>
 
-            <!-- ko if: !App.game.challenges.list.disableVitamins.active() && App.game.party.alreadyCaughtPokemon($data) -->
+            <!-- ko if: !App.game.challenges.list.disableVitamins.active() && partyPokemon -->
             <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
               <thead>
                 <tr class="bg-secondary">
@@ -346,14 +383,14 @@
                 <tr>
                   <td class="text-left">Vitamins Used</td>
                   <td class="text-left tight"><code
-                      data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).totalVitaminsUsed() : 0).toLocaleString('en-US')">-</code>
+                      data-bind="text: partyPokemon.totalVitaminsUsed().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                 <tr>
                   <td class="text-left" data-bind="text: `${GameConstants.VitaminType[$data]}`">X Used</td>
                   <td class="text-left tight"><code
-                      data-bind="text: (App.game.party.getPokemon($parent) ? App.game.party.getPokemon($parent).vitaminsUsed[$data]() : 0).toLocaleString('en-US')">-</code>
+                      data-bind="text: partyPokemon?.vitaminsUsed[$data]().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <!-- /ko -->
@@ -362,6 +399,7 @@
             <!-- /ko -->
           </div>
         </div>
+        <!-- /ko -->
       </div>
     </div>
   </div>
