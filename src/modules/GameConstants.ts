@@ -2477,6 +2477,9 @@ export const ModalCollapseList = [
     'pokemonListBody',
     'shortcutsBody',
     'currencyBody',
+    'undergroundCard',
+    'plotListCard',
+    'zCrystalItemContainerBody',
 ];
 
 export enum ConsumableType {
