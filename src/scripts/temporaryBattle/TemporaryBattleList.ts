@@ -3576,9 +3576,6 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         displayName: 'Ash Ketchum',
         returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Pinkan Pikachu');
-        },
     }
 );
 TemporaryBattleList['Calem 6'] = new TemporaryBattle(
@@ -3865,7 +3862,7 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Welcome to paradise, cousin!').beginQuest(0, undefined, true);
+            App.game.quests.getQuestLine('Welcome to Paradise, Cousin!').beginQuest(0, undefined, true);
         },
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town Outskirts',
@@ -3876,7 +3873,7 @@ TemporaryBattleList['Melemele Spearow'] = new TemporaryBattle(
     'Melemele Spearow',
     [new GymPokemon('Spearow', 117328860, 4)],
     undefined,
-    [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
+    [new QuestLineStartedRequirement('Welcome to Paradise, Cousin!')],
     undefined,
     {
         displayName: 'Agitated Spearow',
@@ -3892,22 +3889,23 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
         new GymPokemon('Litten', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'Phew... That was awesome! That was a really great battle! I had a blast fighting you!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1)],
+    [new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 1)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town',
         imageName: 'Rival Hau',
+        /* Uncomment once Z-Moves are ready
         firstTimeRewardFunction: () => {
             App.game.keyItems.gainKeyItem(KeyItemType['Z-Power_Ring'], true);
-        },
+        },*/
     }
 );
 TemporaryBattleList['Skull 1'] = new TemporaryBattle(
     'Skull 1',
     [new GymPokemon('Zubat', 193227888, 9)],
     undefined, // custom quest message
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2)],
+    [new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 2)],
     undefined,
     {
         displayName: 'Team Skull Grunts A and B',
@@ -3922,7 +3920,7 @@ TemporaryBattleList.Ilima = new TemporaryBattle(
         new GymPokemon('Smeargle', 184903445, 11),
     ],
     'You- or should I say you and your Pokémon- make quite the interesting team! I do hope you\'ll come to Verdant Cavern and attempt my trial!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3)],
+    [new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 3)],
     undefined,
     {
         displayName: 'Captain Ilima',
@@ -3945,7 +3943,7 @@ TemporaryBattleList['Recon Squad 1'] = new TemporaryBattle(
     'Recon Squad 1',
     [new GymPokemon('Furfrou', 334332002, 13)],
     undefined, // custom quest message
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7)],
+    [new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 7)],
     undefined,
     {
         displayName: 'Ultra Recon Squad',
@@ -3962,7 +3960,7 @@ TemporaryBattleList['Hau 3'] = new TemporaryBattle(
         new GymPokemon('Pikachu', 104983480, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9)],
+    [new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 9)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',

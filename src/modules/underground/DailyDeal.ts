@@ -16,9 +16,9 @@ export class DailyDeal {
 
     constructor() {
         this.item1 = DailyDeal.randomItem();
-        this.amount1 = DailyDeal.randomAmount();
+        this.amount1 = 1;
         this.item2 = DailyDeal.randomItem();
-        this.amount2 = DailyDeal.randomAmount();
+        this.amount2 = 1;
     }
 
     public static generateDeals(maxDeals: number, date: Date) {
@@ -41,10 +41,6 @@ export class DailyDeal {
     private static randomItem(): UndergroundItem {
         // Exclude mega stones from daily deals
         return SeededRand.fromArray(UndergroundItems.list.filter(item => item.valueType !== UndergroundItemValueType.MegaStone));
-    }
-
-    private static randomAmount(): number {
-        return SeededRand.intBetween(1, 3);
     }
 
     private isValid(dealList: Array<DailyDeal>): boolean {

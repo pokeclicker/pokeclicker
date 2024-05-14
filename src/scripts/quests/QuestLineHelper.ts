@@ -2482,7 +2482,7 @@ class QuestLineHelper {
     /* Alola QuestLines */
     // Melemele Island guide - Started upon deafting Hau 1
     public static createMelemeleAlolaQuestLine() {
-        const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'Time to kick off your Alolan vacation! See the sights around Melemele Island.');
+        const melemeleAlolaQuestLine = new QuestLine('Welcome to Paradise, Cousin!', 'Time to kick off your Alolan vacation! See the sights around Melemele Island.');
         // 0 - Temp Battle: Melemele Spearow
         const battleMelemeleSpearow = new DefeatTemporaryBattleQuest('Melemele Spearow', 'Protect the mysterious girl\'s Pokémon! Battle the Spearow near the Ruins of Conflict.')
             .withOptionalArgs({
