@@ -5,7 +5,6 @@ import {
     ObservableArray as KnockoutObservableArray,
 } from 'knockout';
 import { Saveable } from '../DataStore/common/Saveable';
-import BreedingFilters from '../settings/BreedingFilters';
 import PokedexFilters from '../settings/PokedexFilters';
 import Settings from '../settings/Settings';
 import Notifier from '../notifications/Notifier';
@@ -134,9 +133,8 @@ export default class PokemonCategories implements Saveable {
             PokedexFilters.category.value(-1);
             Settings.setSettingByName('pokedexCategoryFilter', PokedexFilters.category.value());
         }
-        if (BreedingFilters.category.value() === cat.id) {
-            BreedingFilters.category.value(-1);
-            Settings.setSettingByName('breedingCategoryFilter', BreedingFilters.category.value());
+        if (Settings.getSetting('breedingCategoryFilter').value === cat.id) {
+            Settings.setSettingByName('breedingCategoryFilter', -1);
         }
     }
 

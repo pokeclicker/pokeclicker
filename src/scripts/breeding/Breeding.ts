@@ -1,4 +1,3 @@
-/// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
@@ -32,17 +31,10 @@ class Breeding implements Feature {
         this._eggList.forEach((egg) => {
             egg.extend({deferred: true});
         });
-        BreedingFilters.category.value(Settings.getSetting('breedingCategoryFilter').value);
-        BreedingFilters.region.value(Settings.getSetting('breedingRegionFilter').value);
-        BreedingFilters.type1.value(Settings.getSetting('breedingTypeFilter1').value);
-        BreedingFilters.type2.value(Settings.getSetting('breedingTypeFilter2').value);
-        BreedingFilters.shinyStatus.value(Settings.getSetting('breedingShinyFilter').value);
-        BreedingFilters.pokerus.value(Settings.getSetting('breedingPokerusFilter').value);
-        BreedingFilters.uniqueTransformation.value(Settings.getSetting('breedingUniqueTransformationFilter').value);
-        BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
-        BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
-        BreedingController.queueSizeLimit(+Settings.getSetting('breedingQueueSizeSetting').value);
-        BreedingFilters.uniqueTransformation.value.subscribe((v) => Settings.setSettingByName('breedingUniqueTransformationFilter', v));
+
+        Settings.getSetting('breedingQueueSizeSetting').observableValue.subscribe(() => {
+            this.updateQueueSizeLimit();
+        });
     }
 
     initialize(): void {
@@ -538,12 +530,12 @@ class Breeding implements Feature {
     }
 
     public usableQueueSlots = ko.pureComputed(() => {
-        const queueSizeSetting = BreedingController.queueSizeLimit();
+        const queueSizeSetting = Settings.getSetting('breedingQueueSizeSetting').observableValue();
         return queueSizeSetting > -1 ? Math.min(queueSizeSetting, this.queueSlots()) : this.queueSlots();
     });
 
-    public updateQueueSizeLimit(size: number) {
-        BreedingController.queueSizeLimit(size);
+    public updateQueueSizeLimit() {
+        const size = Settings.getSetting('breedingQueueSizeSetting').value;
         if (size == 0) {
             this.clearQueue();
         } else if (size > 0) {

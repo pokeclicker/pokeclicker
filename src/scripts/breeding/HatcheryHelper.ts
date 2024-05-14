@@ -215,8 +215,8 @@ class HatcheryHelpers {
             // Check if egg slot empty
             if (egg.isNone()) {
                 // Check if there's a pokemon we can chuck into an egg
-                const compare = PartyController.compareBy(helper.sortOption(), helper.sortDirection(),
-                    App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : GameConstants.Region.none);
+                const regionalAttackDebuff = App.game.challenges.list.regionalAttackDebuff.active() ? Settings.getSetting('breedingRegionalAttackDebuffSetting').value : GameConstants.Region.none;
+                const compare = PartyController.compareBy(helper.sortOption(), helper.sortDirection(), regionalAttackDebuff);
 
                 const categories = helper.categories();
                 const useHatcheryFilters = helper.useHatcheryFilters();

@@ -2693,6 +2693,35 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[241]) {
                 Update.startQuestLine(saveData, 'Child of the Stars');
             }
+
+            // Rename settings to match pokedex filter name convention
+            settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
+            delete settingsData.breedingTypeFilter1;
+            settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
+            delete settingsData.breedingTypeFilter2;
+
+            // Rename settings to accurately describe purpose
+            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
+            delete settingsData.breedingDisplayFilter;
+
+            // Update breeding filters to use numeric values
+            ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingType1Filter', 'breedingType2Filter', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
+                .forEach((filter) => {
+                    const convertedValue = Number.parseInt(settingsData[filter]);
+                    if (!Number.isNaN(convertedValue)) {
+                        settingsData[filter] = convertedValue;
+                    } else {
+                        delete settingsData[filter];
+                    }
+                });
+
+            // Represent 'any type' as null to match pokedex filters
+            if (settingsData.breedingType1Filter == -2) {
+                settingsData.breedingType1Filter = null;
+            }
+            if (settingsData.breedingType2Filter == -2) {
+                settingsData.breedingType2Filter = null;
+            }
         },
     };
 

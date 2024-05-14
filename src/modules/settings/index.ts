@@ -3,6 +3,7 @@ import Setting from './Setting';
 import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
 import CssVariableSetting from './CssVariableSetting';
+import SearchSetting from './SearchSetting';
 import RangeSetting from './RangeSetting';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
@@ -17,10 +18,10 @@ import {
     camelCaseToString,
     ModalCollapseList,
     getDungeonIndex,
+    Pokerus,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
-import BreedingFilters from './BreedingFilters';
 import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
@@ -28,8 +29,19 @@ import FilterSetting from './FilterSetting';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export default Settings;
+
+/* SettingOptions that can be reused by multiple settings */
+
+// Region SettingOptions that unlock when the player reaches each region
+const regionOptionsNoneFirst = Settings.enumToNumberSettingOptionArray(Region, (r) => r !== 'final')
+    .map(o => { 
+        o.requirement = o.value > Region.kanto ? new MaxRegionRequirement(o.value) : undefined;
+        return o; 
+    });
+const regionOptionsNoneLast = [...regionOptionsNoneFirst.filter(o => o.value !== Region.none), regionOptionsNoneFirst.find(o => o.value === Region.none)];
 
 /*
  * THESE SETTINGS SHOULD ALL BE PUT IN SETTINGS MENU
@@ -176,7 +188,7 @@ Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in gam
     ],
     (12 * HOUR).toString()));
 Settings.add(new BooleanSetting('disableAutoSave', 'Disable Auto Save', false));
-Settings.add(new Setting('breedingQueueSizeSetting', 'Breeding Queue Size', [], '-1'));
+Settings.add(new Setting<number>('breedingQueueSizeSetting', 'Breeding Queue Size', [], -1));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
@@ -257,29 +269,53 @@ Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOptio
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
 Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false));
 
-// Breeding Filters
-Object.keys(BreedingFilters).forEach((key) => {
-    // One-off because search isn't stored in settings
-    if (key === 'search') {
-        return;
-    }
-    const filter = BreedingFilters[key];
-    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
-});
+// Hatchery Filters
+export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',
+    'breedingShinyFilter', 'breedingPokerusFilter', 'breedingCategoryFilter', 'breedingUniqueTransformationFilter', 'breedingHideAltFilter'];
 
-// Pokedex Filters
-Object.keys(PokedexFilters).forEach((key) => {
-    // dont store name filter
-    if (key === 'name') {
-        return;
-    }
-    const filter = PokedexFilters[key];
-    Settings.add(new FilterSetting(filter));
-});
+Settings.add(new SearchSetting('breedingNameFilter', 'Search', ''));
+Settings.add(new Setting<number>('breedingIDFilter', 'Search ID', [], -1));
+Settings.add(new Setting<number>('breedingRegionFilter', 'Region(s)', [], (2 << Region.final - 1) - 1));
+Settings.add(new Setting<PokemonType | null>('breedingType1Filter', 'Type 1',
+    [
+        new SettingOption('All', null),
+        ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
+        new SettingOption('None', PokemonType.None),
+    ],
+    null));
+Settings.add(new Setting<PokemonType | null>('breedingType2Filter', 'Type 2',
+    [
+        new SettingOption('All', null),
+        ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
+        new SettingOption('None', PokemonType.None),
+    ],
+    null));
+Settings.add(new Setting<number>('breedingShinyFilter', 'Shiny Status',
+    [
+        new SettingOption('All', -1),
+        new SettingOption('Not Shiny', 0),
+        new SettingOption('Shiny', 1),
+    ],
+    -1));
+Settings.add(new Setting<number>('breedingPokerusFilter', 'Pokérus Status',
+    [
+        new SettingOption('All', -1),
+        ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
+    ],
+    -1));
+Settings.add(new Setting<number>('breedingCategoryFilter', 'Category', [], -1));
+Settings.add(new Setting<string>('breedingUniqueTransformationFilter', 'Unique Transformations',
+    [
+        new SettingOption('Show All Pokémon', 'all'),
+        new SettingOption('Mega Evolution/Primal Reversion Available', 'mega-available'),
+        new SettingOption('Unobtained Mega Evolution/Primal Reversion', 'mega-unobtained'),
+        new SettingOption('Obtained Mega Evolution/Primal Reversion', 'mega-evolution'),
+    ],
+    'all'));
+Settings.add(new BooleanSetting('breedingHideAltFilter', 'Hide alternate forms', false));
 
-
-
-Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
+// Hatchery display settings 
+Settings.add(new Setting<string>('breedingDisplayTextSetting', 'Display Value',
     [
         new SettingOption('Attack', 'attack'),
         new SettingOption('Attack Bonus', 'attackBonus'),
@@ -293,12 +329,19 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('EVs', 'evs'),
     ],
     'attack'));
+Settings.add(new Setting<Region>('breedingRegionalAttackDebuffSetting', 'Regional Debuff',
+    regionOptionsNoneFirst,
+    Region.none));
 
-Settings.add(new Setting<string>('breedingRegionalAttackDebuffSetting', 'breedingRegionalAttackDebuffSetting',
-    [
-        ...Settings.enumToSettingOptionArray(Region),
-    ],
-    '-1'));
+// Pokedex Filters
+Object.keys(PokedexFilters).forEach((key) => {
+    // dont store name filter
+    if (key === 'name') {
+        return;
+    }
+    const filter = PokedexFilters[key];
+    Settings.add(new FilterSetting(filter));
+});
 
 // Achievement sorting
 const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (
