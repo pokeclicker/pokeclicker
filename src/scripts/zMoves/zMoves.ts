@@ -4,12 +4,16 @@
 class ZMoves implements Feature {
     name = 'Z Moves';
     saveKey = 'zMoves';
-    defaults = { types: [] };
+    defaults = {
+        types: Array<PokemonType>(GameConstants.ZMOVE_MAX_ENERGY),
+        charges: Array<PokemonType>(GameHelper.enumLength(PokemonType) - 1).fill(0),
+    };
     public counter = 0;
 
     public _types: KnockoutObservableArray<PokemonType> = ko.observableArray([]);
-    public totalCost: KnockoutComputed<Amount> = ko.computed(() => {
-        return new Amount(GameConstants.ZMOVE_COST * this.types.length ** 2, GameConstants.Currency.money);
+    public charges: Array<KnockoutObservable<number>> = this.defaults.charges.map(v => ko.observable(v));
+    public totalCost: KnockoutComputed<number> = ko.computed(() => {
+        return this.types.length;
     });
 
 
@@ -17,14 +21,20 @@ class ZMoves implements Feature {
     }
 
     getTypeMultiplier(type1 = PokemonType.None, type2 = PokemonType.None): number {
-        if (type1 == PokemonType.None || !this.types.length) {
+        if (type1 == PokemonType.None || !this.totalCost()) {
             return 1;
         }
-        return Math.max(...this.types.map(t => TypeHelper.getAttackModifier(t, PokemonType.None, type1, type2)));
+        return 1 + Math.max(...this.types.map(t => TypeHelper.getAttackModifier(t, PokemonType.None, type1, type2))) / 10;
+    }
+
+    charge(type1: PokemonType, type2: PokemonType) {
+        this.charges[type1](Math.min(this.charges[type1]() + GameConstants.ZMOVE_ENERGY_PER_POKEMON, GameConstants.ZMOVE_MAX_ENERGY));
+        const actualType2 = type2 == PokemonType.None ? type1 : type2;
+        this.charges[actualType2](Math.min(this.charges[actualType2]() + GameConstants.ZMOVE_ENERGY_PER_POKEMON, GameConstants.ZMOVE_MAX_ENERGY));
     }
 
     pickTypeAgainst(pokemon: PokemonNameType) {
-        if (!this.types.length) {
+        if (!this.totalCost()) {
             return PokemonType.None;
         }
         const {id, type1, type2} = PokemonHelper.getPokemonByName(pokemon);
@@ -54,12 +64,55 @@ class ZMoves implements Feature {
         return ItemList[GameConstants.zCrystalItemType[type]].image;
     }
 
+    crystalDescription(crystal: ZCrystalItem) {
+        const type = crystal.type;
+        return `${crystal.displayName}<br/>${crystal.description}${ItemHandler.hasItem(crystal.name) ? `<br/><br/>Energy: ${this.charges[type]()}${this.isActive(type) ? `<br/>Time Remaining: ${this.activeTime(type)}` : ''}` : ''}`;
+    }
+
     isActive(type: PokemonType): boolean {
         return this.types.findIndex((t) => type == t) > -1;
     }
 
+    activeTime(type: PokemonType): string {
+        if (this.isActive(type)) {
+            const cost = this.totalCost();
+            return GameConstants.formatTime(Math.floor(this.charges[type]() / cost));
+        }
+        return GameConstants.formatTime(0);
+    }
+
     deactivateAll() {
         this._types([]);
+    }
+
+    shortestActiveTime() {
+        const cost = this.totalCost();
+        const type = this.findActiveWithLowestCharge();
+        if (type === PokemonType.None) {
+            return '';
+        }
+        const time = this.charges[type]() / cost;
+        return GameConstants.formatTime(Math.floor(time));
+    }
+
+    findActiveWithLowestCharge(): PokemonType {
+        let type = PokemonType.None;
+        let energy = Infinity;
+        this.types.forEach(t => {
+            if (this.charges[t]() < energy) {
+                type = t;
+                energy = this.charges[t]();
+            }
+        });
+        return type;
+    }
+
+    canUse(type: PokemonType) {
+        if (this.isActive(type)) {
+            return true;
+        }
+        const cost = this.totalCost() + 1;
+        return this.charges[type]() >= cost;
     }
 
     toggle(type: PokemonType) {
@@ -75,11 +128,15 @@ class ZMoves implements Feature {
             return;
         }
         this._types(json.types);
+        json.charges.forEach((v, i) => {
+            this.charges[i](v);
+        });
     }
 
     toJSON() {
         return {
             types: ko.unwrap(this._types),
+            charges: this.charges.map(o => ko.unwrap(o)),
         };
     }
 
@@ -90,18 +147,18 @@ class ZMoves implements Feature {
     update(delta: number): void {}  // This method intentionally left blank
 
     tick(): void {
-        if (this.types.length > 0) {
-            if (!App.game.wallet.hasAmount(this.totalCost())) {
+        const cost = this.totalCost();
+        this.types.forEach(t => {
+            GameHelper.incrementObservable(this.charges[t], -cost);
+            if (this.charges[t]() < cost) {
+                this.toggle(t);
                 Notifier.notify({
-                    title: 'Z-Moves',
-                    message: 'You can no longer afford Z-Crystals being activated',
+                    title: 'Z-Crystal',
+                    message: `The ${GameConstants.zCrystalItemType[t]} ran out of energy and deactivated`,
                     type: NotificationConstants.NotificationOption.danger,
                 });
-                this.deactivateAll();
-            } else {
-                App.game.wallet.loseAmount(this.totalCost());
             }
-        }
+        });
         this.counter = 0;
     }
 

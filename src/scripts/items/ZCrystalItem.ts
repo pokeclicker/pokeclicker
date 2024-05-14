@@ -5,7 +5,7 @@ class ZCrystalItem extends Item {
     constructor(
         public type: PokemonType
     ) {
-        const description = `Enable ${PokemonType[type]}-type click attack. The activation costs ${GameConstants.ZMOVE_COST} Pokédollars each second.`;
+        const description = `Enable ${PokemonType[type]}-type click attack. Defeat ${PokemonType[type]}-type Pokémon to charge it.`;
         super(GameConstants.zCrystalItemType[type], Infinity, undefined, { maxAmount : 1 }, undefined, description, 'zCrystal');
     }
 
@@ -39,6 +39,13 @@ class ZCrystalItem extends Item {
         if (!ItemHandler.hasItem(this.name)) {
             Notifier.notify({
                 message: `You don't have the ${this.displayName}...`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        if (!App.game.zMoves.canUse(this.type)) {
+            Notifier.notify({
+                message: `Charge the ${this.displayName} again before using it`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;

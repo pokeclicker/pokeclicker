@@ -85,6 +85,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         App.game.party.gainExp(this.exp, this.level, trainer);
         App.game.gems.gainGems(this.gemReward, this.type1);
         App.game.gems.gainGems(this.gemReward, this.type2);
+        App.game.zMoves.charge(this.type1, this.type2);
     }
 
     get displayName(): string {

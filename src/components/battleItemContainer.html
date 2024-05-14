@@ -136,12 +136,30 @@
                                         click: function(){ItemHandler.useItem($data)}
                                       },
                                       tooltip: {
-                                        title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription(),
+                                        title: App.game.zMoves.crystalDescription(ItemList[$data]),
                                         trigger: 'hover',
                                         placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                                         html: true
                                       }">
               <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
+            </td>
+          </tr>
+        </tbody>
+        <tbody data-bind="visible: App;game.zMoves.totalCost() > 0">
+          <tr>
+            <td colspan="4" class="p-0">
+              <code>
+                Lowest Time Remaining:
+              </code>
+            </td>
+            <td colspan="2" class="p-0">
+              <code data-bind="text: App.game.zMoves.shortestActiveTime(), tooltip: {
+                title: `${GameConstants.zCrystalItemType[App.game.zMoves.findActiveWithLowestCharge()]} will deactivate in ${App.game.zMoves.shortestActiveTime()}`,
+                trigger: 'hover',
+                placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
+              }">
+                00:00:00
+              </code>
             </td>
           </tr>
         </tbody>

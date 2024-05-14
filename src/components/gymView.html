@@ -69,7 +69,10 @@
                 </td>
                 <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                     <span style="display: inline;">Click Attack:
-                        <span data-bind="text: GymBattle.calculateClickAttack().toLocaleString('en-US')"></span>
+                        <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US'), tooltip: {
+                            title : GymBattle.clickAttackTooltip(),
+                            trigger: 'hover',
+                        }"></span>
                         <img src="" width= "20" data-bind="visible: GymBattle.calculateClickType() !== PokemonType.None, attr: { src: App.game.zMoves.crystalImage(Battle.calculateClickType())}"/>
                     </span>
                 </td>

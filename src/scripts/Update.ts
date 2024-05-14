@@ -2694,7 +2694,7 @@ class Update implements Saveable {
             }
 
             // ZMove rework
-            saveData.zMoves = { types: [] };
+            delete saveData.zMoves;
         },
     };
 

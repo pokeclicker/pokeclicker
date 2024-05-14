@@ -289,7 +289,7 @@ class Party implements Feature {
         return false;
     }
 
-    calculateClickAttack(type1: PokemonType, type2: PokemonType, useItem = false): number {
+    calculateClickAttack(type1 = PokemonType.None, type2 = PokemonType.None, useItem = false): number {
         const clickAttack =  this.calculateBaseClickAttack();
         const bonus = this.multiplier.getBonus('clickAttack', useItem) * App.game.zMoves.getTypeMultiplier(type1, type2);
         return Math.floor(clickAttack * bonus);

@@ -925,7 +925,8 @@ namespace GameConstants {
         Rare_Candy,
     }
     declare const zCrystalItemType: string[];
-    declare const ZMOVE_COST: number;
+    declare const ZMOVE_MAX_ENERGY: number;
+    declare const ZMOVE_ENERGY_PER_POKEMON: number;
     declare enum ContestResults {
         Normal,
         Super,

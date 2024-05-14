@@ -2502,7 +2502,8 @@ export const zCrystalItemType = [
     'Steelium Z',
     'Fairium Z',
 ];
-export const ZMOVE_COST = 1000;
+export const ZMOVE_MAX_ENERGY = 1e5;
+export const ZMOVE_ENERGY_PER_POKEMON = 10;
 
 export enum ContestResults {
     Normal,
