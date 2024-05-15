@@ -6,7 +6,7 @@ class ZMoves implements Feature {
     saveKey = 'zMoves';
     defaults = {
         types: Array<PokemonType>(GameConstants.ZMOVE_MAX_ENERGY),
-        charges: Array<PokemonType>(GameHelper.enumLength(PokemonType) - 1).fill(0),
+        charges: Array<PokemonType>(GameHelper.enumLength(PokemonType) - 1).fill(GameConstants.ZMOVE_MAX_ENERGY),
     };
     public counter = 0;
 
