@@ -29,4 +29,8 @@ class ContestHelper {
             return [pk.contestType1, pk.contestType2, pk.contestType3].some(c => c === type || c === ContestType.Balanced);
         });
     }
+
+    public static pokemonContestAppealObservable: KnockoutComputed<number> = ko.pureComputed(() => {
+        return ContestHelper.calculatePokemonContestAppeal();
+    }).extend({rateLimit: 1000});
 }

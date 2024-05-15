@@ -1,0 +1,15 @@
+<script type="text/html" id="pokemonContestAppealTemplate">
+  <span style="display: inline;">
+      Pokémon Appeal:
+      <span data-bind="
+         text: ContestHelper.pokemonContestAppealObservable().toLocaleString('en-US'),
+         tooltip: {
+            title: ContestBattle.pokemonContestAppealTooltip,
+            trigger: 'hover',
+         }
+         "></span>
+  </span>
+</script>
+
+<!-- Example usage -->
+<!-- <knockout data-bind="template: { name: 'pokemonContestAppealTemplate', data: { 'pokemon': ContestBattle.enemyPokemon() } }">Pokémon sprite</knockout> -->

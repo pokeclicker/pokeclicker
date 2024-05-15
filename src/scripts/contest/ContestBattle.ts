@@ -91,4 +91,13 @@ class ContestBattle extends Battle {
     public static trainersDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
         return ContestBattle.trainerBonus();
     });
+
+    public static pokemonContestAppealTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        if (ContestBattle.enemyPokemon()) {
+            const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3);
+            return `${pokemonAppeal.toLocaleString('en-US')} against ${ContestBattle.enemyPokemon().displayName}`;
+        } else {
+            return '';
+        }
+    }).extend({rateLimit: 1000});
 }
