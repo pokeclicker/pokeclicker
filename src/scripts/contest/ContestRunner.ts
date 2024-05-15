@@ -31,14 +31,14 @@ class ContestRunner {
         ContestRunner.rank(rank);
         ContestRunner.type(type);
 
-        ContestRunner.maxAudienceAppeal(ContestRunner.rank() * 1000);
+        ContestRunner.maxAudienceAppeal(ContestRunner.rank() * 10000);
         ContestRunner.audienceAppeal(0);
         ContestRunner.audienceAppealPercentage(0);
 
         ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
         ContestBattle.trainerIndex(0);
         ContestBattle.pokemonIndex(0);
-        ContestBattle.totalTrainers(0);
+        ContestBattle.trainerBonus(0);
         ContestBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.contest;
         ContestRunner.running(true);
@@ -125,7 +125,7 @@ class ContestRunner {
     public static contestWon() {
         if (ContestRunner.running()) {
             ContestRunner.running(false);
-            const contestTokenMultiplier = ContestBattle.totalTrainers();
+            const contestTokenMultiplier = ContestBattle.trainerBonus();
             const rank = ContestRunner.rank();
             const tokenReward = Math.floor(5 + (rank * 2) + (0.1 * rank * contestTokenMultiplier));
             // Award money for defeating gym
@@ -135,6 +135,7 @@ class ContestRunner {
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
+            // TODO: reward ribbons to party pokemon based on rank, type, and how high their appeal is
         }
     }
 

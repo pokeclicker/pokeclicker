@@ -5,7 +5,7 @@ class ContestBattle extends Battle {
     static trainer: KnockoutObservable<ContestTrainer> = ko.observable(null);
     static trainerIndex: KnockoutObservable<number> = ko.observable(0);
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
-    static totalTrainers: KnockoutObservable<number> = ko.observable(0);
+    static trainerBonus: KnockoutObservable<number> = ko.observable(0);
 
     public static pokemonAttack() {
         if (ContestRunner.running()) {
@@ -17,19 +17,20 @@ class ContestBattle extends Battle {
             if (!ContestBattle.enemyPokemon()?.isAlive()) {
                 return;
             }
-            // damage enemy using only pokemon of the contest's type
-            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3, ContestHelper.getPartyPokemonByContestType(ContestRunner.type())));
-
-            // TODO: primary judging mode, uses party mons
-            // ContestBattle.enemyPokemon().rally(App.game.party.calculateOnePokemonContestAppeal(App.game.party.caughtPokemon.find((p) => p.name === ContestBattle.enemyPokemon().name), ContesRunner.type()));
+            // damage enemy and rally audience every tick
+            // TODO: filter mons by ribbon for higher ranks
+            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3));
+            // use party pokemon of the contest's type or the Balanced type to increase the audience bar
+            ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.type(), undefined, undefined, ContestHelper.getPartyPokemonByContestType(ContestRunner.type())));
 
             if (!ContestBattle.enemyPokemon().isAlive()) {
-                // increase contest bar based off all party mons appeal + health of defeated pokemon
+                // increase audience bar based off health, type, and index of defeated pokemon
                 ContestRunner.rally(
                     Math.floor(
                         (ContestBattle.enemyPokemon().maxHealth()
-                        + ContestHelper.calculatePokemonContestAppeal(ContestRunner.type()))
+                        * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3, ContestRunner.type(), ContestType.None, ContestType.None)
                         * (1 + ContestBattle.pokemonIndex() * 0.2))
+                    )
                 );
                 ContestBattle.defeatPokemon();
             }
@@ -47,9 +48,9 @@ class ContestBattle extends Battle {
     public static defeatPokemon() {
         ContestBattle.enemyPokemon().defeat(true);
 
-        // give trainer bonus for Contest Tokens if contest bar is full
+        // give trainer bonus for Contest Tokens if audience bar is full
         if (ContestRunner.isRallied()) {
-            ContestBattle.totalTrainers(ContestBattle.totalTrainers() + 1);
+            ContestBattle.trainerBonus(ContestBattle.trainerBonus() + 1);
         }
 
         // Make contest "route" regionless
@@ -88,6 +89,6 @@ class ContestBattle extends Battle {
 
     // Increase and keep track of the amount of trainers defeated
     public static trainersDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
-        return ContestBattle.totalTrainers();
+        return ContestBattle.trainerBonus();
     });
 }
