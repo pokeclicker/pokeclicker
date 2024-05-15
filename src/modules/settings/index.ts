@@ -33,7 +33,9 @@ import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export default Settings;
 
-// Reusable region SettingOptions that unlock when the player reaches each region
+/* SettingOptions that can be reused by multiple settings */
+
+// Region SettingOptions that unlock when the player reaches each region
 const regionOptionsNoneFirst = Settings.enumToNumberSettingOptionArray(Region, (r) => r !== 'final')
     .map(o => { 
         o.requirement = o.value > Region.kanto ? new MaxRegionRequirement(o.value) : undefined;
