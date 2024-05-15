@@ -11,18 +11,17 @@ export default class ContestTypeHelper {
             //       E                   A
             //       A                   L
             //       U                   A
-            //       T         S    T    C      <- Defending type
-            //  C    I    C    M    O    N    N
-            //  O    F    U    A    U    C    O   Attack type
-            //  O    U    T    R    G    E    N        |
-            //  L    L    E    T    H    D    E        v
-            [neu, not, imm, imm, not, imm, imm], // COOL
-            [not, neu, not, imm, imm, imm, imm], // BEAUTIFUL
-            [imm, not, neu, not, imm, imm, imm], // CUTE
-            [imm, imm, not, neu, not, imm, imm], // SMART
-            [not, imm, imm, not, neu, imm, imm], // TOUGH
-            [not, not, not, not, not, not, imm], // BALANCED
-            [imm, imm, imm, imm, imm, imm, imm], // NONE
+            //       T         S    T    C <- Defending type
+            //  C    I    C    M    O    N
+            //  O    F    U    A    U    C   Attack type
+            //  O    U    T    R    G    E        |
+            //  L    L    E    T    H    D        v
+            [neu, not, imm, imm, not, imm], // COOL
+            [not, neu, not, imm, imm, imm], // BEAUTIFUL
+            [imm, not, neu, not, imm, imm], // CUTE
+            [imm, imm, not, neu, not, imm], // SMART
+            [not, imm, imm, not, neu, imm], // TOUGH
+            [not, not, not, not, not, not], // BALANCED
         ];
     })();
 

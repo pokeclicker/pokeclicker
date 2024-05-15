@@ -709,7 +709,7 @@ export const ContestColor = [
     '#FA92B2', // Cute
     '#A7DB8D', // Smart
     '#FAE078', // Tough
-    '#EBB7C6', // Overall Contest
+    '#EBB7C6', // Balanced
 ];
 
 export const ROUTE_KILLS_NEEDED = 10;
