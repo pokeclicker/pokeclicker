@@ -15,25 +15,15 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
         Routes.regionRoutes.filter(r => r.isUnlocked()).forEach(r => {
             Object.values(r.pokemon).flat().forEach(p => {
                 const pokemon = pokemonMap[p];
-                if (!pokemon || pokemon.id <= 0) {
+                
+                if (!pokemon || pokemon.id <= 0 || !App.game.party.alreadyCaughtPokemon(pokemon.id)) {
                     return;
                 }
                 pokemon.type.forEach(t => types[t]++);
             });
         });
-        const max = Math.max(...types);
 
-        const allCaughtMons = App.game.party.caughtPokemon;
-        const allCaughtDataMons = [];
-        for (let i = 0; i < allCaughtMons.length; i++) {
-            allCaughtDataMons.push(PokemonHelper.getPokemonByName(allCaughtMons[i].name));
-        }
-
-        for (let i = 0; i < types.length; i++) {
-            types[i] = (allCaughtDataMons.some(p => p.type1 == i || p.type2 == i)) ? types[i] : 0;
-        }
-
-
+        const max = Math.max(...types);     
         // Calculate the weight
         return types.map(v => ((-v + max) / max) * (this.maxWeight - this.minWeight))
             // map the type and rounded values
