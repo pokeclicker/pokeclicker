@@ -1,66 +1,126 @@
-<div class="modal fade noselect" id="battleCafeModal" tabindex="-1" role="dialog"
-aria-labelledby="battleCafeModalLabel">
-<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-header">
-           <h5 class="modal-title">Battle Café</h5>
-       </div>
-       <div class="modal-body">
-            <div>
+<div class="modal fade noselect" id="battleCafeModal" tabindex="-1" role="dialog" aria-labelledby="battleCafeModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Battle Café</h5>
+        </div>
+        <div class="modal-body">
                 <h4>Select a Sweet</h4>
-                <div class="row col-15 justify-content-center">
-                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet) -->
-                    <div class="clickable col-4" data-bind="
-                        click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data]),
-                        css: { 'bg-info': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data] },
-                        style: { 'opacity' : BattleCafeController.canBuySweet(GameConstants.AlcremieSweet[$data])() ? '1' : '0.5' }
-                    ">
-                        <h5>
-                            <span data-bind="text: $data"></span>
-                            <img style="max-width: 40px;" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
-                            <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[$data])()}}"></knockout>
-                        </h5>
-                        <div>
-                            <!-- ko foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data]) -->
-                            <div>
-                                <img style="width: 30px;" data-bind="
-                                    attr: { src: FarmController.getBerryImage($data.berry) },
-                                    tooltip: { title: BerryType[$data.berry], trigger: 'hover', placement: 'left' }
-                                "/>
-                                <span data-bind="text: $data.amount.toLocaleString('en-US')"></span> (<span data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US')"></span>)
+                <div class="sweet-display my-3" data-bind="foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet)">
+                    <div class="mx-1 mb-1">
+                        <div class="card clickable" data-bind="click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data])">
+                            <div class="card-body bg-secondary rounded text-center p-1"
+                                data-bind="css: { 'bg-info': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data] }">
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="d-flex align-items-center justify-content-between w-100">
+                                        <knockout class="pokeball-image" data-bind="template: { name: 'caughtStatusTemplate', data: {
+                                            'status': BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[$data])()
+                                        }}"></knockout>
+                                        <knockout class="pokerus-image" data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                            'pokerus': BattleCafeController.getPokerusStatus(GameConstants.AlcremieSweet[$data])(),
+                                        }}"></knockout>
+                                    </div>
+                                    <img style="width: 40px; margin-top: -3px;" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
+                                    <h6 class="card-title mb-1" data-bind="text: $data.replace(' Sweet', '')"></h6>
+                                    <div class="d-flex" data-bind="foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data])">
+                                        <img style="width: 24px;" data-bind="attr: { src: FarmController.getBerryImage($data.berry) },
+                                            tooltip: { title: `${BerryType[$data.berry]} × ${$data.amount.toLocaleString('en-US')}`, trigger: 'hover', placement: 'bottom' }">
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /ko -->
                         </div>
                     </div>
-                    <!-- /ko -->
                 </div>
+
+                <!-- ko with: GameConstants.AlcremieSweet[BattleCafeController.selectedSweet()] -->
+                <div class="card mb-3">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <img height="36" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
+                        <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: $data"></span>
+                        <img height="36" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 pb-3">
+                                <table class="table table-sm mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0 w-50">Cost Per Spin</th>
+                                            <th class="border-top-0 w-50">Owned</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data])">
+                                        <tr>
+                                            <td class="border-top-0 p-0">
+                                                <img style="width: 30px;" data-bind="attr: { src: FarmController.getBerryImage($data.berry) }">
+                                                <span data-bind="text: `${BerryType[$data.berry]} × ${$data.amount.toLocaleString('en-US')}`"></span>
+                                            </td>
+                                            <td class="align-middle border-top-0 p-0" data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US'),
+                                                css: { 'text-danger': $data.amount > App.game.farming.berryList[$data.berry]() }"></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>Maximum Spins</td>
+                                            <td data-bind="text: BattleCafeController.calcMaxSpins(BattleCafeController.selectedSweet()).toLocaleString('en-US')"></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="alcremie-display" data-bind="foreach: Object.values(BattleCafeController.evolutions[GameConstants.AlcremieSweet[$data]]).sort((a, b) => pokemonMap[a.name].id - pokemonMap[b.name].id)">
+                                    <div class="card">
+                                        <div class="card-body bg-secondary rounded text-center p-1">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <div class="d-flex align-items-center justify-content-between w-100">
+                                                    <knockout class="pokeball-image" data-bind="template: { name: 'caughtStatusTemplate', data: {
+                                                        'status': PartyController.getCaughtStatusByName($data.name)
+                                                    }}"></knockout>
+                                                    <knockout class="pokerus-image" data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                        'pokerus': PartyController.getPokerusStatusByName($data.name),
+                                                        'evs': App.game.party.getPokemonByName($data.name)?.evs()
+                                                    }}"></knockout>
+                                                </div>
+                                                <img src="" style="width: 64px; margin-top: -8px;" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data.name].id) },
+                                                    css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data.name) }">
+                                                <h6 class="card-title small mb-0" style="margin-top: -8px;"
+                                                    data-bind="text: App.game.party.alreadyCaughtPokemonByName($data.name) ? $data.name.match(/.+\(\w+\s(.+)\)/)[1] : '???'"></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header py-2 font-weight-bold">Spin!</div>
+                    <div class="card-body col-lg-6 align-self-center p-2">
+                        <div>Remaining Spin Attempts: <span data-bind="text: BattleCafeController.spinsLeft()"></span></div>
+                        <img style="width: 60px;" src="assets/images/profile/trainer-1.png" data-bind="
+                            attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` },
+                            class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''" />
+                        <div class="input-group justify-content-center align-items-center mt-3">
+                            <label class="m-0 pr-1" for="battleCafeDuration">Spin Duration (seconds):</label>
+                            <input style="max-width: 100px;" class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
+                        </div>
+                        <div class="d-flex mt-3">
+                            <div class="col-6 px-1">
+                                <button class="btn btn-primary btn-block" onclick="BattleCafeController.spin(true);">Clockwise</button>
+                            </div>
+                            <div class="col-6 px-1">
+                                <button class="btn btn-primary btn-block" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
+                            </div>
+                        </div>
+                        <div class="text-muted small mt-2">Spin Attempts Reset At Midnight</div>
+                    </div>
+                </div>
+                <!-- /ko -->
             </div>
-            <hr/>
-            <h4>Spin!</h4>
-            <div class="pb-2">
-                <span>Remaining Spin Attempts: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
-            </div>
-            <div>
-                <img style="width: 60px;" data-bind="
-                attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` },
-                class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''
-                " src="assets/images/profile/trainer-1.png">
-            </div>
-            <div class="input-group justify-content-center align-items-center pt-3">
-                <label class="m-0 pr-1" for="battleCafeDuration">Spin Duration (seconds):</label><input style="max-width: 100px;" class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
-            </div>
-            <div class="pt-2">
-                <button style="width: 200px;" class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
-                <button style="width: 200px;" class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
-            </div>
-            <div class="pb-2">
-                <span>Spin Attempts Reset at Midnight</span>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
-
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       </div>
-   </div>
-</div>
+    </div>
 </div>

@@ -112,10 +112,15 @@ class GymRunner {
 
             // Auto restart gym battle
             if (GymRunner.autoRestart()) {
-                const cost = (GymRunner.gymObservable().moneyReward || 10) * 2;
+                const clears = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]();
+                const cost = clears >= 100 ? 0 : (GymRunner.gymObservable().moneyReward || 10) * 2;
                 const amt = new Amount(cost, GameConstants.Currency.money);
+                const reward = GymRunner.gymObservable().autoRestartReward();
                 // If the player can afford it, restart the gym
-                if (App.game.wallet.loseAmount(amt)) {
+                if (cost === 0 || App.game.wallet.loseAmount(amt)) {
+                    if (reward > 0) {
+                        App.game.wallet.gainMoney(reward);
+                    }
                     GymRunner.startGym(GymRunner.gymObservable(), GymRunner.autoRestart(), false);
                     return;
                 }
@@ -123,8 +128,7 @@ class GymRunner {
 
             // Award money for defeating gym
             App.game.wallet.gainMoney(gym.moneyReward);
-            // Send the player back to the town they were in
-            player.town(gym.parent);
+            // Send the player back to a town state
             App.game.gameState = GameConstants.GameState.town;
         }
     }

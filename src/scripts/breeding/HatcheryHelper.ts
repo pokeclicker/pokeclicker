@@ -221,13 +221,13 @@ class HatcheryHelpers {
                 const categories = helper.categories();
                 const useHatcheryFilters = helper.useHatcheryFilters();
                 const pokemon = App.game.party.caughtPokemon.reduce((best, pokemon) => {
-                    if (useHatcheryFilters && !pokemon.isHatchable()) {
+                    if (useHatcheryFilters && !pokemon.isHatchableFiltered()) {
                         return best;
                     }
-                    if (!useHatcheryFilters && (pokemon.breeding || pokemon.level < 100)) {
+                    if (!pokemon.isHatchable()) {
                         return best;
                     }
-                    if (categories.length && categories.indexOf(pokemon.category) === -1) {
+                    if (categories.length && !categories.some((cat) => pokemon.category.includes(cat))) {
                         return best;
                     }
                     if (best === null) {
@@ -274,6 +274,6 @@ HatcheryHelpers.add(new HatcheryHelper('Dakota', new Amount(10000, GameConstants
 HatcheryHelpers.add(new HatcheryHelper('Cameron', new Amount(75, GameConstants.Currency.farmPoint), 75, 75, new ItemOwnedRequirement('HatcheryHelperCameron')));
 HatcheryHelpers.add(new HatcheryHelper('Justice', new Amount(10, GameConstants.Currency.questPoint), 100, 50, new QuestRequirement(200)));
 HatcheryHelpers.add(new HatcheryHelper('Carey', new Amount(20, GameConstants.Currency.questPoint), 50, 125, new ItemOwnedRequirement('HatcheryHelperCarey')));
-HatcheryHelpers.add(new HatcheryHelper('Aiden', new Amount(5, GameConstants.Currency.diamond), 100, 100, new UndergroundLayersMinedRequirement(100)));
-HatcheryHelpers.add(new HatcheryHelper('Kris', new Amount(10, GameConstants.Currency.diamond), 150, 100, new ItemOwnedRequirement('HatcheryHelperKris')));
+HatcheryHelpers.add(new HatcheryHelper('Aiden', new Amount(1, GameConstants.Currency.diamond), 100, 100, new UndergroundLayersMinedRequirement(100)));
+HatcheryHelpers.add(new HatcheryHelper('Kris', new Amount(2, GameConstants.Currency.diamond), 150, 100, new ItemOwnedRequirement('HatcheryHelperKris')));
 HatcheryHelpers.add(new HatcheryHelper('Noel', new Amount(25, GameConstants.Currency.battlePoint), 100, 200, new ItemOwnedRequirement('HatcheryHelperNoel')));

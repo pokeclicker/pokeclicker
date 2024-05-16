@@ -15,6 +15,8 @@ import type {
     ExtraAchievementCategories,
     GameState,
     Region,
+    Pokerus,
+    BattlePokemonGender,
 } from './GameConstants';
 import type Wallet from './wallet/Wallet';
 import type PokemonCategories from './party/Category';
@@ -27,6 +29,10 @@ import type { AchievementSortOptions } from './achievements/AchievementSortOptio
 import type AchievementCategory from './achievements/AchievementCategory';
 import type KeyItems from './keyItems/KeyItems';
 import type PokeballFilters from './pokeballs/PokeballFilters';
+import type { QuestLineNameType } from './quests/QuestLineNameType';
+import type { PokemonNameType } from './pokemons/PokemonNameType';
+import type CaughtStatus from './enums/CaughtStatus';
+import { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -54,8 +60,12 @@ type TmpGameType = {
     logbook: LogBook,
     redeemableCodes: any,
     statistics: Statistics,
-    quests: any,
-    specialEvents: any,
+    quests: {
+        getQuestLine: (name: QuestLineNameType) => any
+    } & Record<any, any>,
+    specialEvents: {
+        getEvent: (eventName: SpecialEventTitleType) => any
+    } & Record <any, any>,
     discord: any,
     achievementTracker: any,
     challenges: Challenges,
@@ -140,6 +150,17 @@ type TmpAchievementHandler = {
     load: ()=>void
 };
 
+
+export type TmpPokemonFactoryType = {
+    generateShiny(chance: number, skipBonus?: boolean): boolean;
+    generateGenderById(id: number): BattlePokemonGender;
+};
+
+export type TmpPartyControllerType = {
+    getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
+    getPokerusStatusByName: (name: PokemonNameType) => Pokerus;
+};
+
 // Where all the magic happens
 declare global {
     const App: TmpAppType;
@@ -149,4 +170,6 @@ declare global {
     const DungeonRunner: TmpDungeonRunner;
     const GymRunner: TmpGymRunner;
     const AchievementHandler: TmpAchievementHandler;
+    const PokemonFactory: TmpPokemonFactoryType;
+    const PartyController: TmpPartyControllerType;
 }

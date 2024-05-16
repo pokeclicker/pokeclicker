@@ -1,15 +1,19 @@
 class BerryDeal {
     public berries: { berryType: BerryType, amount: number}[];
-    public item: { itemType: Item | UndergroundItem, amount: number};
+    public item: { itemType: Item, amount: number};
 
     public static list: Record<GameConstants.BerryTraderLocations, KnockoutObservableArray<BerryDeal>> = {};
 
-    constructor(berry: BerryType[], berryAmount: number[], item: Item | UndergroundItem, itemAmount: number) {
+    constructor(berry: BerryType[], berryAmount: number[], item: Item, itemAmount: number) {
         this.berries = [];
         berry.forEach((berry, idx) => {
             this.berries.push({berryType: berry, amount: berryAmount[idx]});
         });
         this.item = {itemType: item, amount: itemAmount};
+    }
+
+    public calculateMaxTrades(): number {
+        return Math.min(...this.berries.map(b => Math.floor(App.game.farming.berryList[b.berryType]() / b.amount)));
     }
 
     public static getDeals(town: GameConstants.BerryTraderLocations) {
@@ -30,8 +34,8 @@ class BerryDeal {
         return ItemList[evoItem];
     }
 
-    private static randomUndergroundItem(): UndergroundItem {
-        return SeededRand.fromArray(UndergroundItems.list.filter(item => item.valueType !== UndergroundItemValueType.MegaStone));
+    private static randomUndergroundItem(): Item {
+        return ItemList[SeededRand.fromArray(UndergroundItems.list.filter(item => item.valueType !== UndergroundItemValueType.MegaStone)).itemName];
     }
 
     private static randomPokeballDeal(): BerryDeal {
@@ -50,6 +54,18 @@ class BerryDeal {
                     SeededRand.intBetween(5, 15),
                 ],
                 ItemList.Fastball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                ],
+                [
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                ],
+                ItemList.Moonball,
                 1
             ),
             new BerryDeal(

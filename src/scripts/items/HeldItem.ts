@@ -19,9 +19,31 @@ class HeldItem extends Item {
     }
 
     public static getSortedHeldItems() {
-        return Object.values(ItemList).filter(i => i instanceof HeldItem).sort((a: HeldItem, b: HeldItem) => {
+        const sortedHeldItems = Object.values(ItemList).filter(i => i instanceof HeldItem).sort((a: HeldItem, b: HeldItem) => {
             return a.regionUnlocked - b.regionUnlocked;
         });
+        return {
+            attack: {
+                title: 'Pokémon Restricted',
+                items: sortedHeldItems.filter(i => i instanceof PokemonRestrictedAttackBonusHeldItem),
+            },
+            typeRestricted: {
+                title: 'Type Restricted',
+                items: sortedHeldItems.filter(i => i instanceof TypeRestrictedAttackBonusHeldItem),
+            },
+            ev: {
+                title: 'EV Gain',
+                items: sortedHeldItems.filter(i => i instanceof EVsGainedBonusHeldItem),
+            },
+            exp: {
+                title: 'EXP Gain',
+                items: sortedHeldItems.filter(i => i instanceof ExpGainedBonusHeldItem),
+            },
+            other: {
+                title: 'Other',
+                items: sortedHeldItems.filter(i => i.constructor.name === 'AttackBonusHeldItem' || i.constructor.name === 'HeldItem'),
+            },
+        };
     }
 
     public isUnlocked() {
@@ -40,13 +62,28 @@ class AttackBonusHeldItem extends HeldItem {
         regionUnlocked: GameConstants.Region,
         pokemonDescription = 'the Pokémon',
         canUse = (pokemon: PartyPokemon) => true,
-        private applyBonus = () => true,
+        protected applyBonus = () => true,
         additionDescription = '') {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that raises the attack of ${pokemonDescription} by ${((_attackBonus - 1) * 100).toFixed(0)}%${additionDescription}.`, regionUnlocked, canUse);
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that ${_attackBonus > 1 ? 'raises' : 'lowers'} the attack of ${pokemonDescription} by ${(Math.abs(_attackBonus - 1)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })}${additionDescription}.`, regionUnlocked, canUse);
     }
 
     get attackBonus(): number {
         return this.applyBonus() ? this._attackBonus : 1;
+    }
+}
+
+class PokemonRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
+    constructor(
+        name: string,
+        basePrice: number,
+        currency: GameConstants.Currency,
+        shopOptions : ShopOptions,
+        displayName: string,
+        _attackBonus: number,
+        regionUnlocked: GameConstants.Region,
+        pokemonDescription: string,
+        canUse: (pokemon: PartyPokemon) => boolean) {
+        super(name, basePrice, currency, shopOptions, displayName, _attackBonus, regionUnlocked, pokemonDescription, canUse);
     }
 }
 
@@ -68,6 +105,28 @@ class TypeRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
     }
 }
 
+class HybridAttackBonusHeldItem extends AttackBonusHeldItem {
+    constructor(
+        name: string,
+        basePrice: number,
+        currency: GameConstants.Currency,
+        shopOptions : ShopOptions,
+        displayName: string,
+        attackBonus: number,
+        private _clickAttackBonus: number,
+        regionUnlocked: GameConstants.Region,
+        canUse = (pokemon: PartyPokemon) => true,
+        applyBonus = () => true
+    ) {
+        super(name, basePrice, currency, shopOptions, displayName, attackBonus, regionUnlocked, undefined, canUse, applyBonus,
+            ` and ${_clickAttackBonus > 1 ? 'raises' : 'lowers'} its click attack contribution by ${(Math.abs(_clickAttackBonus - 1) * 100).toFixed(0)}%`);
+    }
+
+    get clickAttackBonus(): number {
+        return this.applyBonus() ? this._clickAttackBonus : 1;
+    }
+}
+
 class EVsGainedBonusHeldItem extends HeldItem {
     constructor(
         name: string,
@@ -77,7 +136,7 @@ class EVsGainedBonusHeldItem extends HeldItem {
         displayName: string,
         public gainedBonus: number,
         regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases EV gains for the holding Pokémon by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, (pokemon: PartyPokemon) => {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases EV gains for the holding Pokémon by ${(gainedBonus - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })}.`, regionUnlocked, (pokemon: PartyPokemon) => {
             return pokemon.pokerus > GameConstants.Pokerus.Uninfected;
         });
     }
@@ -94,7 +153,7 @@ class ExpGainedBonusHeldItem extends HeldItem {
         regionUnlocked: GameConstants.Region,
         pokemonDescription = 'the holding Pokémon',
         canUse = (pokemon: PartyPokemon) => true) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns ${pokemonDescription} ${((gainedBonus - 1) * 100).toFixed(0)}% bonus Experience Points.`, regionUnlocked, canUse);
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns ${pokemonDescription} ${(gainedBonus - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })} bonus Experience Points.`, regionUnlocked, canUse);
     }
 }
 
@@ -108,36 +167,44 @@ ItemList.Vivid_Scent = new ExpGainedBonusHeldItem('Vivid_Scent', 10000, GameCons
     (p) => p.shadow >= GameConstants.ShadowStatus.Shadow  );
 ItemList.Muscle_Band = new AttackBonusHeldItem('Muscle_Band', 1000, GameConstants.Currency.battlePoint, undefined, 'Muscle Band', 1.05, GameConstants.Region.hoenn);
 // Pokemon specific items
-ItemList.Light_Ball = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',
-    (pokemon) => Math.floor(pokemon.id) == 25 );
-ItemList.Quick_Powder = new AttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.3, GameConstants.Region.kalos, 'Ditto',
+ItemList.Light_Ball = new PokemonRestrictedAttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',
+    (pokemon) => Math.floor(pokemon.id) == 25);
+ItemList.Lucky_Punch = new PokemonRestrictedAttackBonusHeldItem('Lucky_Punch', 10000, GameConstants.Currency.money, undefined, 'Lucky Punch', 1.3, GameConstants.Region.galar, 'Happiny, Chansey or Blissey',
+    (pokemon) => Math.floor(pokemon.id) == 440 ||  Math.floor(pokemon.id) == 113 || Math.floor(pokemon.id) == 242);
+ItemList.Quick_Powder = new PokemonRestrictedAttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.3, GameConstants.Region.kalos, 'Ditto',
     (pokemon) => Math.floor(pokemon.id) == 132);
-ItemList.Thick_Club = new AttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.3, GameConstants.Region.alola, 'Cubone or Marowak',
+ItemList.Thick_Club = new PokemonRestrictedAttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.3, GameConstants.Region.alola, 'Cubone or Marowak',
     (pokemon) => Math.floor(pokemon.id) == 104 ||  Math.floor(pokemon.id) == 105);
-ItemList.Soul_Dew = new AttackBonusHeldItem('Soul_Dew', 10000, GameConstants.Currency.money, undefined, 'Soul Dew', 1.5, GameConstants.Region.hoenn, 'Latias or Latios',
+ItemList.Soul_Dew = new PokemonRestrictedAttackBonusHeldItem('Soul_Dew', 10000, GameConstants.Currency.money, undefined, 'Soul Dew', 1.5, GameConstants.Region.hoenn, 'Latias or Latios',
     (pokemon) => Math.floor(pokemon.id) == 380 ||  Math.floor(pokemon.id) == 381);
-ItemList.Adamant_Orb = new AttackBonusHeldItem('Adamant_Orb', 10000, GameConstants.Currency.money, undefined, 'Adamant Orb', 1.5, GameConstants.Region.sinnoh, 'Dialga',
+ItemList.Adamant_Orb = new PokemonRestrictedAttackBonusHeldItem('Adamant_Orb', 10000, GameConstants.Currency.money, undefined, 'Adamant Orb', 1.5, GameConstants.Region.sinnoh, 'Dialga',
     (pokemon) => Math.floor(pokemon.id) == 483);
-ItemList.Lustrous_Orb = new AttackBonusHeldItem('Lustrous_Orb', 10000, GameConstants.Currency.money, undefined, 'Lustrous Orb', 1.5, GameConstants.Region.sinnoh, 'Palkia',
+ItemList.Lustrous_Orb = new PokemonRestrictedAttackBonusHeldItem('Lustrous_Orb', 10000, GameConstants.Currency.money, undefined, 'Lustrous Orb', 1.5, GameConstants.Region.sinnoh, 'Palkia',
     (pokemon) => Math.floor(pokemon.id) == 484);
-ItemList.Griseous_Orb = new AttackBonusHeldItem('Griseous_Orb', 10000, GameConstants.Currency.money, undefined, 'Griseous Orb', 1.5, GameConstants.Region.sinnoh, 'Giratina',
+ItemList.Griseous_Orb = new PokemonRestrictedAttackBonusHeldItem('Griseous_Orb', 10000, GameConstants.Currency.money, undefined, 'Griseous Orb', 1.5, GameConstants.Region.sinnoh, 'Giratina',
     (pokemon) => Math.floor(pokemon.id) == 487);
-ItemList.Burn_Drive = new AttackBonusHeldItem('Burn_Drive', 10000, GameConstants.Currency.money, undefined, 'Burn Drive', 1.5, GameConstants.Region.unova, 'Genesect',
+ItemList.Burn_Drive = new PokemonRestrictedAttackBonusHeldItem('Burn_Drive', 10000, GameConstants.Currency.money, undefined, 'Burn Drive', 1.5, GameConstants.Region.unova, 'Genesect',
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.01 || pokemon.id == 649.05 || pokemon.id == 649.06);
-ItemList.Chill_Drive = new AttackBonusHeldItem('Chill_Drive', 10000, GameConstants.Currency.money, undefined, 'Chill Drive', 1.5, GameConstants.Region.unova, 'Genesect',
+ItemList.Chill_Drive = new PokemonRestrictedAttackBonusHeldItem('Chill_Drive', 10000, GameConstants.Currency.money, undefined, 'Chill Drive', 1.5, GameConstants.Region.unova, 'Genesect',
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.02 || pokemon.id == 649.05 || pokemon.id == 649.07);
-ItemList.Douse_Drive = new AttackBonusHeldItem('Douse_Drive', 10000, GameConstants.Currency.money, undefined, 'Douse Drive', 1.5, GameConstants.Region.unova, 'Genesect',
+ItemList.Douse_Drive = new PokemonRestrictedAttackBonusHeldItem('Douse_Drive', 10000, GameConstants.Currency.money, undefined, 'Douse Drive', 1.5, GameConstants.Region.unova, 'Genesect',
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.03 || pokemon.id == 649.05 || pokemon.id == 649.08);
-ItemList.Shock_Drive = new AttackBonusHeldItem('Shock_Drive', 10000, GameConstants.Currency.money, undefined, 'Shock Drive', 1.5, GameConstants.Region.unova, 'Genesect',
+ItemList.Shock_Drive = new PokemonRestrictedAttackBonusHeldItem('Shock_Drive', 10000, GameConstants.Currency.money, undefined, 'Shock Drive', 1.5, GameConstants.Region.unova, 'Genesect',
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.04 || pokemon.id == 649.05 || pokemon.id == 649.09);
-ItemList.Leek = new AttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.3, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
-    (pokemon) => Math.floor(pokemon.id) == 83 ||  Math.floor(pokemon.id) == 865);
-ItemList.Rusted_Sword = new AttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',
+ItemList.Leek = new PokemonRestrictedAttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.3, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
+    (pokemon) => Math.floor(pokemon.id) == 83 || Math.floor(pokemon.id) == 865);
+ItemList.Rusted_Sword = new PokemonRestrictedAttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',
     (pokemon) => Math.floor(pokemon.id) == 888);
-ItemList.Rusted_Shield = new AttackBonusHeldItem('Rusted_Shield', 10000, GameConstants.Currency.money, undefined, 'Rusted Shield', 1.5, GameConstants.Region.galar, 'Zamazenta',
+ItemList.Rusted_Shield = new PokemonRestrictedAttackBonusHeldItem('Rusted_Shield', 10000, GameConstants.Currency.money, undefined, 'Rusted Shield', 1.5, GameConstants.Region.galar, 'Zamazenta',
     (pokemon) => Math.floor(pokemon.id) == 889);
-ItemList.Booster_Energy = new AttackBonusHeldItem('Booster_Energy', 10000, GameConstants.Currency.money, undefined, 'Booster Energy', 1.33, GameConstants.Region.paldea, /*16 Pokémon. Probably too many to list.*/'Paradox Pokémon',
-    (pokemon) => [984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 1005, 1006, 1009, 1010].includes(Math.floor(pokemon.id)));
+ItemList.Wellspring_Mask = new PokemonRestrictedAttackBonusHeldItem('Wellspring_Mask', 10000, GameConstants.Currency.money, undefined, 'Wellspring Mask', 1.5, GameConstants.Region.paldea, 'Ogerpon',
+    (pokemon) => pokemon.id == 1017 || pokemon.id == 1017.01 || pokemon.id == 1017.04 || pokemon.id == 1017.05);
+ItemList.Hearthflame_Mask = new PokemonRestrictedAttackBonusHeldItem('Hearthflame_Mask', 10000, GameConstants.Currency.money, undefined, 'Hearthflame Mask', 1.5, GameConstants.Region.paldea, 'Ogerpon',
+    (pokemon) => pokemon.id == 1017 || pokemon.id == 1017.02 || pokemon.id == 1017.04 || pokemon.id == 1017.06);
+ItemList.Cornerstone_Mask = new PokemonRestrictedAttackBonusHeldItem('Cornerstone_Mask', 10000, GameConstants.Currency.money, undefined, 'Cornerstone Mask', 1.5, GameConstants.Region.paldea, 'Ogerpon',
+    (pokemon) => pokemon.id == 1017 || pokemon.id == 1017.03 || pokemon.id == 1017.04 || pokemon.id == 1017.07);
+ItemList.Booster_Energy = new PokemonRestrictedAttackBonusHeldItem('Booster_Energy', 10000, GameConstants.Currency.money, undefined, 'Booster Energy', 1.33, GameConstants.Region.paldea, /*16 Pokémon. Probably too many to list.*/'Paradox Pokémon',
+    (pokemon) => [984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 1005, 1006, 1009, 1010, 1020, 1021, 1022, 1023].includes(Math.floor(pokemon.id)));
 ItemList.Black_Belt = new TypeRestrictedAttackBonusHeldItem('Black_Belt', 10000, GameConstants.Currency.money, undefined, 'Black Belt', 1.2, PokemonType.Fighting, GameConstants.Region.johto);
 ItemList.Black_Glasses = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.2, PokemonType.Dark, GameConstants.Region.johto);
 ItemList.Charcoal = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.2, PokemonType.Fire, GameConstants.Region.johto);
@@ -148,7 +215,7 @@ ItemList.Metal_Powder = new TypeRestrictedAttackBonusHeldItem('Metal_Powder', 10
 ItemList.Miracle_Seed = new TypeRestrictedAttackBonusHeldItem('Miracle_Seed', 10000, GameConstants.Currency.money, undefined, 'Miracle Seed', 1.2, PokemonType.Grass, GameConstants.Region.johto);
 ItemList.Mystic_Water = new TypeRestrictedAttackBonusHeldItem('Mystic_Water', 10000, GameConstants.Currency.money, undefined, 'Mystic Water', 1.2, PokemonType.Water, GameConstants.Region.johto);
 ItemList.Never_Melt_Ice = new TypeRestrictedAttackBonusHeldItem('Never_Melt_Ice', 10000, GameConstants.Currency.money, undefined, 'Never-Melt Ice', 1.2, PokemonType.Ice, GameConstants.Region.johto);
-ItemList.Pink_Bow = new TypeRestrictedAttackBonusHeldItem('Pink_Bow', 10000, GameConstants.Currency.money, undefined, 'Pink Bow', 1.2, PokemonType.Fairy, GameConstants.Region.johto);
+ItemList.Fairy_Feather = new TypeRestrictedAttackBonusHeldItem('Fairy_Feather', 10000, GameConstants.Currency.money, undefined, 'Fairy Feather', 1.2, PokemonType.Fairy, GameConstants.Region.johto);
 ItemList.Poison_Barb = new TypeRestrictedAttackBonusHeldItem('Poison_Barb', 10000, GameConstants.Currency.money, undefined, 'Poison Barb', 1.2, PokemonType.Poison, GameConstants.Region.johto);
 // TODO: Hard Stone is in the underground. We can keep it there, and give it two uses.
 ItemList.Rock_Incense = new TypeRestrictedAttackBonusHeldItem('Rock_Incense', 10000, GameConstants.Currency.money, undefined, 'Rock Incense', 1.2, PokemonType.Rock, GameConstants.Region.johto);
@@ -158,9 +225,26 @@ ItemList.Silver_Powder = new TypeRestrictedAttackBonusHeldItem('Silver_Powder', 
 ItemList.Soft_Sand = new TypeRestrictedAttackBonusHeldItem('Soft_Sand', 10000, GameConstants.Currency.money, undefined, 'Soft Sand', 1.2, PokemonType.Ground, GameConstants.Region.johto);
 ItemList.Spell_Tag = new TypeRestrictedAttackBonusHeldItem('Spell_Tag', 10000, GameConstants.Currency.money, undefined, 'Spell Tag', 1.2, PokemonType.Ghost, GameConstants.Region.johto);
 ItemList.Twisted_Spoon = new TypeRestrictedAttackBonusHeldItem('Twisted_Spoon', 10000, GameConstants.Currency.money, undefined, 'Twisted Spoon', 1.2, PokemonType.Psychic, GameConstants.Region.johto);
+ItemList.Agile_Scroll = new HybridAttackBonusHeldItem('Agile_Scroll', 10000, GameConstants.Currency.money, undefined, 'Agile Scroll', 0.5, 2.0, GameConstants.Region.hisui);
+ItemList.Strong_Scroll = new HybridAttackBonusHeldItem('Strong_Scroll', 10000, GameConstants.Currency.money, undefined, 'Strong Scroll', 2.0, 0.5, GameConstants.Region.hisui);
 
 ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', undefined, GameConstants.Currency.money, undefined, 'Power Herb', 1.5, GameConstants.Region.alola, undefined, (pokemon) => true,
     () => App.game.gameState == GameConstants.GameState.dungeon && DungeonRunner.fightingBoss(), ' against Dungeon Bosses');
 
 ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);
+
+ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.money, undefined, 'Everstone', 'Stops the holder from evolving due to level or a stone being used. Also prevents new baby Pokémon from hatching.', GameConstants.Region.kanto,
+    (pokemon) => {
+        // level or stone evo
+        if (pokemon.evolutions?.length) {
+            for (const evo of pokemon.evolutions) {
+                if (evo.trigger === EvoTrigger.LEVEL || evo.trigger === EvoTrigger.STONE) {
+                    return true;
+                }
+            }
+        }
+        // babies
+        const baseFormName = App.game.breeding.calculateBaseForm(pokemon.name);
+        return pokemon.name != baseFormName;
+    });

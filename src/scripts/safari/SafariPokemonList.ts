@@ -1,13 +1,17 @@
 class SafariEncounter {
+    public requirement: Requirement;
     constructor(
         public name: PokemonNameType,
         public weight: number,
         public environments: SafariEnvironments[] = [SafariEnvironments.Grass],
-        private requireCaught = false
-    ) {}
+        requirement?: true | Requirement, // True is used to simplify Friend Safari Pokémon generation
+        public hide = true // Hide from the list
+    ) {
+        this.requirement = requirement === true ? new ObtainedPokemonRequirement(this.name) : requirement;
+    }
 
     public isAvailable(): boolean {
-        return !this.requireCaught ? true : App.game.party.alreadyCaughtPokemonByName(this.name);
+        return this.requirement?.isCompleted() ?? true;
     }
 }
 
@@ -53,8 +57,8 @@ class SafariPokemonList {
             new SafariEncounter('Poliwag', 15, [SafariEnvironments.Water]),
             new SafariEncounter('Goldeen', 15, [SafariEnvironments.Water]),
             new SafariEncounter('Seaking', 5, [SafariEnvironments.Water]),
-            new SafariEncounter('Dratini', 10, [SafariEnvironments.Water], true),
-            new SafariEncounter('Dragonair', 4, [SafariEnvironments.Water], true),
+            new SafariEncounter('Dratini', 10, [SafariEnvironments.Water], true, false),
+            new SafariEncounter('Dragonair', 4, [SafariEnvironments.Water], true, false),
         ];
 
         SafariPokemonList.list[GameConstants.Region.kanto](pokemon);
@@ -158,15 +162,16 @@ class SafariPokemonList {
     }
 
     public static generateKalosSafariList() {
-        SeededRand.seed(+player.trainerId);
-
         // Obtain the list of non-EVable pokemon and shuffle it
         // There may not be an evenly divisible number of pokemon so repeat list 5 times
-        const shuffledPokemon = new Array(GameConstants.FRIEND_SAFARI_POKEMON).fill(
-            SeededRand.shuffleArray(
-                pokemonList.filter((p) => PokemonHelper.isObtainableAndNotEvable(p.name)
-                    && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION).map((p) => p.name))
-        ).flat();
+        const friendSafariPokemon = pokemonList
+            .filter((p) => PokemonLocations.isObtainableAndNotEvable(p.name)
+                && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION)
+            .map((p) => p.name);
+
+        SeededRand.seed(+player.trainerId);
+        const shuffledPokemon = new Array(GameConstants.FRIEND_SAFARI_POKEMON)
+            .fill(SeededRand.shuffleArray(friendSafariPokemon)).flat();
 
         // Rotation is fixed, use the current date to determine where in the list to select the 5 pokemon
         const batchCount = Math.ceil(shuffledPokemon.length / GameConstants.FRIEND_SAFARI_POKEMON);
@@ -175,7 +180,7 @@ class SafariPokemonList {
         const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
 
         const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true);
+            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true, false);
         });
 
         pokemon.push(new SafariEncounter('Shuckle', 2));
@@ -209,5 +214,35 @@ class SafariPokemonList {
             safariEnvironments.push(SafariEnvironments.Grass);
         }
         return safariEnvironments;
+    }
+
+    public static getDisplayList(region = player.region): EncounterInfo[] {
+        const encounters = [];
+
+        if (!SafariPokemonList.list[region]) {
+            return encounters;
+        }
+
+        const list = SafariPokemonList.list[region]();
+        list.forEach(e => {
+            if (e.hide && !e.isAvailable()) {
+                return;
+            }
+            const pokemon = PokemonHelper.getPokemonByName(e.name);
+            const partyPokemon = App.game.party.getPokemonByName(e.name);
+            const eData = {
+                image: PokemonHelper.getImage(pokemon.id, undefined, undefined, GameConstants.ShadowStatus.None),
+                pkrsImage: partyPokemon?.pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[partyPokemon.pokerus]}.png` : '',
+                EVs: partyPokemon?.pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${partyPokemon.evs().toLocaleString('en-US')}` : '',
+                shiny:  partyPokemon?.shiny || false,
+                hide: false, // We already filter out hidden Pokémon
+                uncaught: !partyPokemon,
+                lock: !e.isAvailable(),
+                lockMessage: e.isAvailable() ? '' : e.requirement.hint(),
+            };
+            encounters.push(eData);
+        });
+
+        return encounters;
     }
 }

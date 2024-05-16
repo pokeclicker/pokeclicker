@@ -10,7 +10,7 @@ class QuestLine {
     private pausableStates = [GameConstants.GameState.town, GameConstants.GameState.fighting];
 
     constructor(
-        public name: string,
+        public name: QuestLineNameType,
         public description: string,
         public requirement?: Requirement,
         public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None,
@@ -62,6 +62,7 @@ class QuestLine {
         this.totalQuests++;
         quest.index = this.totalQuests;
         quest.inQuestLine = true;
+        quest.parentQuestLine = this;
         quest.createAutoCompleter();
         this.quests.push(quest);
     }
