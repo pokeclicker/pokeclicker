@@ -15,7 +15,7 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
         Routes.regionRoutes.filter(r => r.isUnlocked()).forEach(r => {
             Object.values(r.pokemon).flat().forEach(p => {
                 const pokemon = pokemonMap[p];
-                
+
                 if (!pokemon || pokemon.id <= 0 || !App.game.party.alreadyCaughtPokemon(pokemon.id)) {
                     return;
                 }
