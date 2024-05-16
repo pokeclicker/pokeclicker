@@ -162,7 +162,9 @@ class AchievementHandler {
     public static achievementBonus(): number {
         let sum = 0;
         AchievementHandler.getAchievementCategories().forEach(category => {
-            const total = AchievementHandler.achievementList.filter(a => a.category == category && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0) / category.totalWeight * category.achievementBonus / 100;
+            const total = AchievementHandler.achievementList.filter(a => {
+                return a.category == category && a.isCompleted();
+            }).reduce((sum, a) => sum + a.bonusWeight, 0) / category.totalWeight * category.achievementBonus / 100;
             if (!isNaN(total)) {
                 sum += total;
             }
@@ -456,13 +458,13 @@ class AchievementHandler {
 
                 if (GymList[gym]?.flags?.achievement) {
                     AchievementHandler.addAchievement(
-                        `${elite ? gymRegion : ''} ${gymTitle} Regular`,
+                        `${elite ? `${gymRegion} ` : ''}${gymTitle} Regular`,
                         `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 10 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, category);
                     AchievementHandler.addAchievement(
-                        `${elite ? gymRegion : ''} ${gymTitle} Ruler`,
+                        `${elite ? `${gymRegion} ` : ''}${gymTitle} Ruler`,
                         `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 100 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[1], GameConstants.getGymIndex(gym)), 2, category);
                     AchievementHandler.addAchievement(
-                        `${elite ? gymRegion : ''} ${gymTitle} Owner`,
+                        `${elite ? `${gymRegion} ` : ''}${gymTitle} Owner`,
                         `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 1,000 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[2], GameConstants.getGymIndex(gym)), 3, category);
                 }
             });
