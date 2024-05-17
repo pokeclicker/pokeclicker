@@ -75,6 +75,7 @@ export type ItemNameType
     | 'PokeBlock_Beige'
     | 'PokeBlock_Gray'
     | 'PokeBlock_White'
+    | 'Beta_Pokeblock'
     | 'Abomasite'
     | 'Absolite'
     | 'Aerodactylite'

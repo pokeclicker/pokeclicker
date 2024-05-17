@@ -992,6 +992,13 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited.
     },
     {
+        name: 'PokeMMO',
+        link: 'https://pokemmo.com/en/',
+        resources: [
+            'Red Pokeblock',
+        ],
+    },
+    {
         name: 'Pokemon Showdown',
         link: 'https://play.pokemonshowdown.com/sprites/trainers/',
         resources: [

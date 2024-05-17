@@ -15,6 +15,7 @@ enum PartyPokemonSaveKeys {
     nickname,
     shadow,
     showShadowImage,
+    contestAppealBonusAmount,
 }
 
 class PartyPokemon implements Saveable {
@@ -41,6 +42,7 @@ class PartyPokemon implements Saveable {
         nickname: '',
         shadow: GameConstants.ShadowStatus.None,
         showShadowImage: false,
+        contestAppealBonusAmount: 0,
     };
 
     // Saveable observables
@@ -62,6 +64,7 @@ class PartyPokemon implements Saveable {
     hideShinyImage: KnockoutObservable<boolean>;
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
     _showShadowImage: KnockoutObservable<boolean>;
+    _contestAppealBonusAmount: KnockoutObservable<number>;
 
     constructor(
         public id: number,
@@ -80,6 +83,7 @@ class PartyPokemon implements Saveable {
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
+        this._contestAppealBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observableArray([0]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
@@ -148,7 +152,7 @@ class PartyPokemon implements Saveable {
     });
 
     public calculateContestAppeal(): number {
-        return Math.max(1, Math.floor((10))); // TODO: add bonuses
+        return Math.max(0, Math.floor(this.contestAppealBonusAmount));
     }
 
     public canCatchPokerus(): boolean {
@@ -340,6 +344,15 @@ class PartyPokemon implements Saveable {
                 GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
                 Notifier.notify({
                     message : `${this.displayName} gained ${this.calculateAttack(true) - curAttack} attack points`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
+                break;
+            case GameConstants.ConsumableType.Beta_Pokeblock:
+                amount = Math.min(amount, player.itemList[itemName]());
+                GameHelper.incrementObservable(this._contestAppealBonusAmount, amount);
+                Notifier.notify({
+                    message : `${this.displayName} gained ${amount} appeal points`,
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
@@ -608,6 +621,7 @@ class PartyPokemon implements Saveable {
         this._nickname(json[PartyPokemonSaveKeys.nickname] || this.defaults.nickname);
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
+        this.contestAppealBonusAmount = json[PartyPokemonSaveKeys.contestAppealBonusAmount] ?? this.defaults.contestAppealBonusAmount;
     }
 
     public toJSON() {
@@ -628,6 +642,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.nickname]: this.nickname || undefined,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
+            [PartyPokemonSaveKeys.contestAppealBonusAmount]: this.contestAppealBonusAmount,
         };
 
         // Don't save anything that is the default option
@@ -681,6 +696,13 @@ class PartyPokemon implements Saveable {
         return this._contestAppeal();
     }
 
+    get contestAppealBonusAmount(): number {
+        return this._contestAppealBonusAmount();
+    }
+
+    set contestAppealBonusAmount(contestAppealBonusAmount: number) {
+        this._contestAppealBonusAmount(contestAppealBonusAmount);
+    }
     get pokerus(): GameConstants.Pokerus {
         return this._pokerus();
     }

@@ -929,6 +929,7 @@ namespace GameConstants {
     declare enum ConsumableType {
         Rare_Candy,
         Magikarp_Biscuit,
+        Beta_Pokeblock,
     }
     declare const zCrystalItemType: string[];
     declare enum ZMoveStatus {

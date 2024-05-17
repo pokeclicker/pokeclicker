@@ -2494,6 +2494,7 @@ export const ModalCollapseList = [
 export enum ConsumableType {
     Rare_Candy,
     Magikarp_Biscuit,
+    Beta_Pokeblock,
 }
 
 export const zCrystalItemType = [
