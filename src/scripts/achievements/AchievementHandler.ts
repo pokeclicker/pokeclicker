@@ -116,6 +116,13 @@ class AchievementHandler {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             AchievementHandler.achievementList[i].unlocked(AchievementHandler.achievementList[i].isCompleted());
         }
+
+        // Some achievements' requirements can be circularly dependent on themselves through achievementBonus
+        // i.e. attack achievements potentially using flute attack bonus, which is calculated from achievementBonus
+        // If this happens, achievementBonus() throws an error the first time it's calculated so get that out of the way
+        try {
+            AchievementHandler.achievementBonus();
+        } catch {}
     }
 
     public static checkAchievements() {
@@ -127,8 +134,15 @@ class AchievementHandler {
     }
 
     public static toJSON(): string[] {
+        // Saves only achievements which have already been completed but currently don't have their requirements met
         const storage = AchievementHandler.achievementList.filter(a => a.unlocked() && !a.property.isCompleted()).map(a => a.name);
-        return storage.length ? storage : undefined;
+        return storage;
+    }
+
+    public static fromJSON(unlockedAchievements: string[]) {
+        unlockedAchievements.forEach(achName => {
+            AchievementHandler.findByName(achName)?.unlocked(true);
+        });
     }
 
     public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, category: GameConstants.Region | GameConstants.ExtraAchievementCategories = GameConstants.ExtraAchievementCategories.global, achievableFunction: () => boolean | null = null) {

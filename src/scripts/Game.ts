@@ -70,12 +70,8 @@ class Game {
                 console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
             }
         });
-        saveObject.achievements?.forEach(achName => {
-            const ach = AchievementHandler.findByName(achName);
-            if (ach) {
-                ach.unlocked(true);
-            }
-        });
+
+        AchievementHandler.fromJSON(saveObject.achievements);
     }
 
     initialize() {
