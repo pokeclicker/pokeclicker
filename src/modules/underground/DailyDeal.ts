@@ -18,7 +18,7 @@ export class DailyDeal {
         this.item1 = DailyDeal.randomItem();
         this.amount1 = 1;
         this.item2 = DailyDeal.randomItem();
-        this.amount2 = 1;
+        this.amount2 = this.item2.valueType === UndergroundItemValueType.Shard ? SeededRand.intBetween(1, 3) : 1;
     }
 
     public static generateDeals(maxDeals: number, date: Date) {
