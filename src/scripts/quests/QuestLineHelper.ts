@@ -195,7 +195,7 @@ class QuestLineHelper {
         BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
             redSphere,
             punchWater,
-        ],'Bill\'s Grandpa wants you to catch a Pokémon that it has a red sphere in its body and is shaped like a star.'));
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that has a red sphere in its body and is shaped like a star.'));
 
         // Talk to Bill's Grandpa after catching a Staryu
         const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu to Bill\'s Grandpa.').withCustomReward(this.itemReward('Water_stone', 1, 'Bill\'s Grandpa'));
@@ -2482,7 +2482,7 @@ class QuestLineHelper {
     /* Alola QuestLines */
     // Melemele Island guide - Started upon deafting Hau 1
     public static createMelemeleAlolaQuestLine() {
-        const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'Time to kick off your Alolan vacation! See the sights around Melemele Island.');
+        const melemeleAlolaQuestLine = new QuestLine('Welcome to Paradise, Cousin!', 'Time to kick off your Alolan vacation! See the sights around Melemele Island.');
         // 0 - Temp Battle: Melemele Spearow
         const battleMelemeleSpearow = new DefeatTemporaryBattleQuest('Melemele Spearow', 'Protect the mysterious girl\'s Pokémon! Battle the Spearow near the Ruins of Conflict.')
             .withOptionalArgs({

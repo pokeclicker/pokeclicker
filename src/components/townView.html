@@ -182,5 +182,34 @@
         </ul>
       </div>
     </knockout>
+    <knockout data-bind="if: player.town.content.find(c => c instanceof SafariTownContent)">
+        <div id="dungeonPokemonList" class="card pt-2 pb-3 px-1">
+          <!--Display all available Pokémon in this Safari-->
+          <ul class="list-inline mb-0">
+            <!-- ko foreach: SafariPokemonList.getDisplayList() -->
+            <li class="list-inline-item">
+              <img class="dungeon-pokemon-pkrs" src="" data-bind="
+                  attr:{ src: $data.pkrsImage },
+                  tooltip: {
+                      title: $data.EVs,
+                      placement: 'bottom',
+                      trigger: 'hover'
+                  }" />
+              <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
+                  css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+              <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
+              <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                  hidden: !$data.lock,
+                  tooltip: {
+                      title: $data.lockMessage,
+                      placement: 'top',
+                      trigger: 'hover',
+                      boundary: 'window'
+                  }" />
+            </li>
+            <!-- /ko -->
+          </ul>
+        </div>
+      </knockout>
 </div>
 </knockout>

@@ -16,7 +16,7 @@
                             <div class="btn-group w-100 my-1">
                                 <button style="position: relative;" class='btn btn-block btn-success ship-modal-region-button'
                                     data-dismiss='modal'
-                                    data-bind='click: () => { MapHelper.moveToTown(GameConstants.DockTowns[GameConstants.Region[$data]]); player.region = GameConstants.Region[$data]; player.subregion = 0; $("#ShipModal").modal("hide");  },
+                                    data-bind='click: () => { player.region = GameConstants.Region[$data]; player.subregion = 0; MapHelper.moveToTown(GameConstants.DockTowns[GameConstants.Region[$data]]); $("#ShipModal").modal("hide"); },
                                     attr: { disabled: player.region == GameConstants.Region[$data] }'>
                                     <img style="position:absolute; left: 10px;" data-bind="visible: player.region == GameConstants.Region[$data], attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/> <knockout data-bind="text: GameConstants.camelCaseToString($data)">Region</knockout>
                                 </button>
