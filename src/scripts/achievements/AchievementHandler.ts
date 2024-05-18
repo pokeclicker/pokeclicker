@@ -116,13 +116,6 @@ class AchievementHandler {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             AchievementHandler.achievementList[i].unlocked(AchievementHandler.achievementList[i].isCompleted());
         }
-
-        // Some achievements' requirements can be circularly dependent on themselves through achievementBonus
-        // i.e. attack achievements potentially using flute attack bonus, which is calculated from achievementBonus
-        // If this happens, achievementBonus() throws an error the first time it's calculated so get that out of the way
-        try {
-            AchievementHandler.achievementBonus();
-        } catch {}
     }
 
     public static checkAchievements() {
