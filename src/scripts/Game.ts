@@ -78,7 +78,7 @@ class Game {
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier, GameHelper.enumStrings(GameConstants.BattleItemType).map((name) => ItemList[name]));
-        ItemHandler.initilizeEvoStones();
+        ItemHandler.initializeItems();
         BreedingController.initialize();
         PokedexHelper.initialize();
         this.profile.initialize();
