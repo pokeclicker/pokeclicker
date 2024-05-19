@@ -25,7 +25,7 @@ export default class Achievement {
     ) {}
 
     public check() {
-        if (this.isCompleted()) {
+        if (this.isCompleted() && !this.unlocked()) {
             Notifier.notify({
                 title: `[Achievement] ${this.name}`,
                 message: this.description,

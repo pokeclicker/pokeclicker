@@ -195,7 +195,7 @@ class QuestLineHelper {
         BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
             redSphere,
             punchWater,
-        ],'Bill\'s Grandpa wants you to catch a Pokémon that it has a red sphere in its body and is shaped like a star.'));
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that has a red sphere in its body and is shaped like a star.'));
 
         // Talk to Bill's Grandpa after catching a Staryu
         const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu to Bill\'s Grandpa.').withCustomReward(this.itemReward('Water_stone', 1, 'Bill\'s Grandpa'));

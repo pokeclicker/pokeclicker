@@ -3370,7 +3370,8 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
+    [DepartmentStoreShop],
+    //[new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
