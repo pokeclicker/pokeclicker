@@ -36,6 +36,7 @@ Parameters:
     data-bind="
         click:function(){MapHelper.moveToTown('<%= locals.name.replace(/'/g, '\\\'') %>')},
         attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') },
+        event: { mouseenter: () => GameController.showMapTooltip('<%= locals.name.replace(/'/g, '\\\'') %>'), mouseleave: GameController.hideMapTooltip },
         <% if (locals.home) { %>
             css: { flash: MapHelper.ableToTravel() }
         <% } %>">

@@ -3,9 +3,6 @@
      class="justify-content-center no-gutters no-select">
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
-            <button type="button" class="btn btn-outline-info" style="float: right;"
-                data-bind="visible: player.town instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
-
             <div class="pageItemTitle d-flex justify-content-center" data-bind="let: { isDungeon: player.town instanceof DungeonTown && player.town.dungeon }">
                 <div class="title-left" data-bind="if: isDungeon">
                     <div class="d-flex align-items-center ml-1 mr-auto">
@@ -73,6 +70,9 @@
                         tooltip: { html: true, title: `Hire a Dungeon Guide!`, trigger: 'hover', placement:'right' },
                         visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.dungeon.name)]() >= 10">↻</button>
                 </div>
+                <button type="button" class="btn btn-info p-0" data-bind="
+                    visible: player.town instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'),
+                    tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'right' }">?</button>
                 <!-- /ko -->
 
                 <!-- ko foreach: player.town.content -->
@@ -113,7 +113,7 @@
 
     </div>
     <div style="flex-grow: 1;"></div>
-    <knockout data-bind="if: (player.town.dungeon && player.town instanceof DungeonTown)">
+    <knockout data-bind="if: (player.town.dungeon && player.town instanceof DungeonTown && player.town.dungeon.isUnlocked())">
       <div id="dungeonPokemonList" class="card pt-2 pb-3 px-1">
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline mb-0">
