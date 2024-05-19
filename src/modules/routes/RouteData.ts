@@ -1995,7 +1995,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new TemporaryBattleRequirement('Plumeria 2')],
+    [new RouteKillRequirement(10, Region.alola, 13)],
     undefined,
     AlolaSubRegions.UlaulaIsland,
 ));
@@ -2005,7 +2005,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Scraggy', 'Gumshoos'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new RouteKillRequirement(10, Region.alola, 15)],
+    [new TemporaryBattleRequirement('Plumeria 2')],
     undefined,
     AlolaSubRegions.UlaulaIsland,
 ));
