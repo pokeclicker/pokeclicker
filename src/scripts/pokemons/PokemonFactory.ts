@@ -175,7 +175,7 @@ class PokemonFactory {
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
         const exp: number = basePokemon.exp;
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const shiny: boolean = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         // Reward 2% or 5% (boss) of dungeon DT cost when the trainer mons are defeated
         const money = 0;
