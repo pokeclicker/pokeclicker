@@ -153,7 +153,7 @@ class MapHelper {
         }
         const states = [];
         // Is this location a dungeon
-        if (dungeonList[townName]) {
+        if (dungeonList[townName] && dungeonList[townName].isUnlocked()) {
             const possiblePokemon = dungeonList[townName].allAvailablePokemon();
             const shadowPokemon = dungeonList[townName].allAvailableShadowPokemon();
 

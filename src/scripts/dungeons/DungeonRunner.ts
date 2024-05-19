@@ -20,11 +20,19 @@ class DungeonRunner {
 
     public static initializeDungeon(dungeon: Dungeon) {
         if (!dungeon.isUnlocked()) {
-            Notifier.notify({
-                message: `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
-            return false;
+            if (dungeon.name === 'Viridian Forest') {
+                Notifier.notify({
+                    message: 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+                return false;
+            } else {
+                Notifier.notify({
+                    message: `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return false;
+            }
         }
         DungeonRunner.dungeon = dungeon;
 
