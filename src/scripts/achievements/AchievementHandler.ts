@@ -127,8 +127,15 @@ class AchievementHandler {
     }
 
     public static toJSON(): string[] {
+        // Saves only achievements which have already been completed but currently don't have their requirements met
         const storage = AchievementHandler.achievementList.filter(a => a.unlocked() && !a.property.isCompleted()).map(a => a.name);
-        return storage.length ? storage : undefined;
+        return storage;
+    }
+
+    public static fromJSON(unlockedAchievements: string[]) {
+        unlockedAchievements.forEach(achName => {
+            AchievementHandler.findByName(achName)?.unlocked(true);
+        });
     }
 
     public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, category: GameConstants.Region | GameConstants.ExtraAchievementCategories = GameConstants.ExtraAchievementCategories.global, achievableFunction: () => boolean | null = null) {
