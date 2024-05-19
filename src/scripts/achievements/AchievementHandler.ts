@@ -133,7 +133,7 @@ class AchievementHandler {
     }
 
     public static fromJSON(unlockedAchievements: string[]) {
-        unlockedAchievements.forEach(achName => {
+        unlockedAchievements?.forEach(achName => {
             AchievementHandler.findByName(achName)?.unlocked(true);
         });
     }
