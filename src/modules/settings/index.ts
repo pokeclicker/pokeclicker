@@ -3,6 +3,7 @@ import Setting from './Setting';
 import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
 import CssVariableSetting from './CssVariableSetting';
+import SearchSetting from './SearchSetting';
 import RangeSetting from './RangeSetting';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
@@ -28,8 +29,19 @@ import FilterSetting from './FilterSetting';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export default Settings;
+
+/* SettingOptions that can be reused by multiple settings */
+
+// Region SettingOptions that unlock when the player reaches each region
+const regionOptionsNoneFirst = Settings.enumToNumberSettingOptionArray(Region, (r) => r !== 'final')
+    .map(o => { 
+        o.requirement = o.value > Region.kanto ? new MaxRegionRequirement(o.value) : undefined;
+        return o; 
+    });
+const regionOptionsNoneLast = [...regionOptionsNoneFirst.filter(o => o.value !== Region.none), regionOptionsNoneFirst.find(o => o.value === Region.none)];
 
 /*
  * THESE SETTINGS SHOULD ALL BE PUT IN SETTINGS MENU
@@ -230,8 +242,8 @@ Settings.add(new Setting<number>('vitaminSort', 'Sort', vitaminSortSettings, Sor
 Settings.add(new BooleanSetting('vitaminSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('vitaminHideMaxedPokemon', 'Hide Pokémon with max vitamin', false));
 Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon', false));
-Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
-Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new SearchSetting('vitaminSearchFilter', 'Search', ''));
+Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
 // Consumable Sorting
@@ -241,8 +253,8 @@ const consumableSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('consumableSort', 'Sort', consumableSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('consumableSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('consumableHideShinyPokemon', 'Hide shiny Pokémon', false));
-Settings.add(new Setting<string>('consumableSearchFilter', 'Search', [], ''));
-Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new SearchSetting('consumableSearchFilter', 'Search', ''));
+Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2));
 Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
 // Held Item Sorting
@@ -251,8 +263,8 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
-Settings.add(new Setting<string>('heldItemSearchFilter', 'Search', [], ''));
-Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', ''));
+Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2));
 Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
 Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false));
