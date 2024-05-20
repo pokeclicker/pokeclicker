@@ -5,7 +5,7 @@ import UndergroundItem from './UndergroundItem';
 import UndergroundUpgrade from './UndergroundUpgrade';
 
 
-export default class UndergroundEvolutionItem extends UndergroundItem {
+export default class UndergroundFossilPieceItem extends UndergroundItem {
     constructor(
         id: number,
         itemName: string,
