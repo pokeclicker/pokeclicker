@@ -15,20 +15,20 @@ const hoennFluteDeals = [
     ),
     new GemDeal(
 	    [
-	        { gemType: PokemonType.Ground, amount: 5000 },
-	        { gemType: PokemonType.Poison, amount: 5000 },
-	        { gemType: PokemonType.Steel, amount: 5000 },
-	    ],
-	    ItemList.Time_Flute,
-	    1,
-    ),
-    new GemDeal(
-	    [
 	        { gemType: PokemonType.Dark, amount: 5000 },
 	        { gemType: PokemonType.Psychic, amount: 5000 },
 	        { gemType: PokemonType.Fighting, amount: 5000 },
 	    ],
 	    ItemList.Black_Flute,
+	    1,
+    ),
+    new GemDeal(
+	    [
+	        { gemType: PokemonType.Ground, amount: 5000 },
+	        { gemType: PokemonType.Poison, amount: 5000 },
+	        { gemType: PokemonType.Steel, amount: 5000 },
+	    ],
+	    ItemList.Time_Flute,
 	    1,
     ),
 ];

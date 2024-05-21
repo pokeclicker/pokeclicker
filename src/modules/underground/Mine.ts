@@ -376,45 +376,22 @@ export class Mine {
             if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
                 let amount = 1;
                 const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
-                Notifier.notify({
-                    message: `You found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
-                    type: NotificationConstants.NotificationOption.success,
-                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
-                });
+                const type = NotificationConstants.NotificationOption.success;
+                const setting = NotificationConstants.NotificationSetting.Underground.underground_item_found;
+                Notifier.notify({ message: `You found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`, type, setting });
 
                 if (App.game.oakItems.isActive(OakItemType.Treasure_Scanner)) {
                     const giveDouble = App.game.oakItems.calculateBonus(OakItemType.Treasure_Scanner) / 100;
-                    if (Rand.chance(giveDouble)) {
+                    const title = 'Treasure Scanner';
+                    let message = `You found an extra ${humanifyString(itemName)} in the Mine!`;
+                    while (Rand.chance(giveDouble)) {
                         amount++;
-                        Notifier.notify({
-                            message: `You found an extra ${humanifyString(itemName)} in the Mine!`,
-                            type: NotificationConstants.NotificationOption.success,
-                            title: 'Treasure Scanner',
-                            timeout: 4000,
-                            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
-                        });
-
-                        if (Rand.chance(giveDouble)) {
-                            amount++;
-                            Notifier.notify({
-                                message: `Lucky! You found another ${humanifyString(itemName)}!`,
-                                type: NotificationConstants.NotificationOption.success,
-                                title: 'Treasure Scanner',
-                                timeout: 6000,
-                                setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
-                            });
-
-                            if (Rand.chance(giveDouble)) {
-                                amount++;
-                                Notifier.notify({
-                                    message: `Jackpot! You found another ${humanifyString(itemName)}!`,
-                                    type: NotificationConstants.NotificationOption.success,
-                                    title: 'Treasure Scanner',
-                                    timeout: 8000,
-                                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
-                                });
-                            }
+                        if (amount > 2) {
+                            const jackpotMultiplier = amount > 4 ? ` ×${amount - 3}` : ''; // Start at ×2
+                            message = `${amount == 3 ? 'Lucky' : 'Jackpot'}${jackpotMultiplier}! You found another ${humanifyString(itemName)}!`;
                         }
+                        const timeout = Math.min(amount, 4) * 2000 + Math.max(amount - 4, 0) * 100;
+                        Notifier.notify({ message, type, title, timeout });
                     }
                 }
 

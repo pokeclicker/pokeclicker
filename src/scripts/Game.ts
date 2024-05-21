@@ -70,20 +70,15 @@ class Game {
                 console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
             }
         });
-        saveObject.achievements?.forEach(achName => {
-            const ach = AchievementHandler.findByName(achName);
-            if (ach) {
-                ach.unlocked(true);
-            }
-        });
+
+        AchievementHandler.fromJSON(saveObject.achievements);
     }
 
     initialize() {
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier, GameHelper.enumStrings(GameConstants.BattleItemType).map((name) => ItemList[name]));
-        FluteEffectRunner.initialize(this.multiplier);
-        ItemHandler.initilizeEvoStones();
+        ItemHandler.initializeItems();
         BreedingController.initialize();
         PokedexHelper.initialize();
         this.profile.initialize();
@@ -97,7 +92,11 @@ class Game {
         this.pokeballFilters.initialize();
         this.load();
 
-        // Update if the achievements are already completed
+        // Unlock achievements that have already been completed, avoids renotifying
+        AchievementHandler.preCheckAchievements();
+        // Flute bonuses depend on achievements so should be initialized afterwards
+        // but the bonuses can affect some achievements so we need to recheck them once flutes are online
+        FluteEffectRunner.initialize(this.multiplier);
         AchievementHandler.preCheckAchievements();
 
         // TODO refactor to proper initialization methods
@@ -138,7 +137,7 @@ class Game {
         }
 
         // If the player isn't on a route, they're in a town/dungeon
-        this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
+        this.gameState = player.route ? GameConstants.GameState.fighting : GameConstants.GameState.town;
     }
 
     computeOfflineEarnings() {
@@ -148,7 +147,7 @@ class Game {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
             let region: GameConstants.Region = player.region;
-            let route: number = player.route() || GameConstants.StartingRoutes[region];
+            let route: number = player.route || GameConstants.StartingRoutes[region];
             if (!MapHelper.validRoute(route, region)) {
                 route = 1;
                 region = GameConstants.Region.kanto;
@@ -168,7 +167,7 @@ class Game {
             if (numberOfPokemonDefeated === 0) {
                 return;
             }
-            const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
+            const routeMoney: number = PokemonFactory.routeMoney(player.route, player.region, false);
             const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
             const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
             App.game.wallet.gainMoney(moneyToEarn, true);
@@ -256,7 +255,7 @@ class Game {
         });
         // Check for breeding pokemons not in queue
         const breeding = [...App.game.breeding.eggList.map((l) => l().pokemon), ...App.game.breeding.queueList()];
-        App.game.party._caughtPokemon().filter((p) => p.breeding).forEach((p) => {
+        App.game.party.caughtPokemon.filter((p) => p.breeding).forEach((p) => {
             if (!breeding.includes(p.id)) {
                 p.breeding = false;
             }

@@ -35,7 +35,7 @@
                 <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
                     <button class="col btn btn-secondary p-0" data-bind="
                                     click: function(){ ItemList[$data].use();},
-                                    css: { disabled: player._itemList[$data]() <= 0},
+                                    css: { disabled: player.itemList[$data]() <= 0},
                                     tooltip: {
                                         title: () => `+${App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])} energy`,
                                         trigger: 'hover',
@@ -44,7 +44,7 @@
                                         html: true,
                                     }">
                         <img style="width: 32px;" data-bind="attr: { src: ItemList[$data].image }"><br/>
-                        <span style="line-height: 1;" data-bind="text: GameHelper.formatAmount(player._itemList[$data]())">(?)</span>
+                        <span style="line-height: 1;" data-bind="text: GameHelper.formatAmount(player.itemList[$data]())">(?)</span>
                     </button>
                 </div>
 

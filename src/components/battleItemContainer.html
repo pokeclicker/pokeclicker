@@ -1,4 +1,5 @@
-<div id="battleItemContainer" class="card sortable border-secondary mb-3" data-bind="visible: !(Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active())">
+<div id="battleItemContainer" class="card sortable border-secondary mb-3" data-bind="hidden: Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active() && !App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+  <div data-bind="hidden: Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active()">
     <div class="card-header p-0" data-toggle="collapse" href="#battleItemContainerBody">
       <span>Battle Items</span>
     </div>
@@ -23,10 +24,10 @@
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem'))">
             <tr data-bind="foreach: $data">
-                 <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data]().toLocaleString('en-US'),trigger:'hover',placement:'top',animation:false}"></td>
+                <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data]().toLocaleString('en-US'),trigger:'hover',placement:'top',animation:false}"></td>
             </tr>
             <tr data-bind="foreach: $data">
-                 <td class="p-0" data-bind="attr: {
+                <td class="p-0" data-bind="attr: {
                                 disabled: !player.itemList[$data]()
                             },
                             css: {
@@ -38,7 +39,7 @@
                                 click: function(){ItemHandler.useItem($data, EffectEngineRunner.amountToUse())}
                             },
                             tooltip: {
-                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description,
+                              title: '<strong>' + ItemList[$data].displayName + '</strong>' + '<br/>' + ItemList[$data].description,
                               trigger: 'hover',
                               placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
@@ -58,111 +59,149 @@
         </tbody>
       </table>
     </div>
-    <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+  </div>
+
+  <div class="position-relative" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+    <div class="card-header p-0 position-relative" data-toggle="collapse" href="#fluteItemContainerBody">
       <span>Flutes</span>
+      <button type="button" class="btn"
+        style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
+        data-bind="visible: FluteEffectRunner.additionalInfoTooltip().length !== 0,
+        tooltip: {
+            title: FluteEffectRunner.additionalInfoTooltip(),
+            trigger: 'hover',
+            placement:'left',
+            html: true,
+          }">ⓘ
+    </button>
     </div>
+      <button type="button" class="btn btn-sm btn-primary"
+          style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+          onclick="App.game.gems.openGemModal()"
+          title="Controls"
+          data-toggle="popover"
+          data-html="true"
+          data-content="Click to see your total gems<br/>Click on flutes to toggle effects"
+          data-placement="right"
+          data-trigger="hover">
+      <img src="assets/images/keyitems/Gem_case.png">
+    </button>
     <div id="fluteItemContainerBody" class="card-body p-0 show">
-      <p data-bind="visible: (App.game.challenges.list.disableBattleItems.active() || App.game.challenges.list.disableGems.active()) && App.game.badgeCase.hasBadge(BadgeEnums.Heat)" class="bg-danger my-0">
-          Flutes are disabled.
-      </p>
       <!-- Flutes -->
-      <table class="table table-bordered m-0" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+      <table class="table table-bordered m-0">
         <tbody>
           <tbody data-bind="foreach: GameHelper.chunk(6, Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'FluteItem'))">
             <tr data-bind="foreach: $data">
+              <td class="amount p-0" data-bind="text: GameHelper.formatAmount(FluteEffectRunner.getLowestGem(ItemList[$data].name)),
+                tooltip:{
+                  title:FluteEffectRunner.fluteGemTooltip(ItemList[$data]),
+                  trigger:'hover',
+                  placement:'top',
+                  animation:false,
+                  sanitize: false,
+                  html:true
+                }">
+              </td>
+            </tr>
+            <tr data-bind="foreach: $data">
               <td class="p-0" data-bind="attr: {
-                                disabled: !player.itemList[$data]()
-                            },
-                            css: {
-                                'bg-primary': FluteEffectRunner.getEffect($data) > 30,
-                                'bg-warning': FluteEffectRunner.getEffect($data) <= 30 && FluteEffectRunner.getEffect($data) > 0,
-                                'bg-secondary': !FluteEffectRunner.isActive($data)(),
-                            },
-                            style: {
-                                'opacity': player.itemList[$data]() || FluteEffectRunner.isActive($data)() ? '1' : '0.1'
-                            },
-                            event: {
-                                click: function(){ItemHandler.useItem($data)}
-                            },
-                            tooltip: {
-                              title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription() + '<br/>' + 'Consumes: ' + ItemList[$data].gemTypes[0] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[0]]]().toLocaleString('en-US') + '), ' + ItemList[$data].gemTypes[1] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[1]]]().toLocaleString('en-US') + '), and ' + ItemList[$data].gemTypes[2] + ' (' + App.game.gems.gemWallet[PokemonType[ItemList[$data].gemTypes[2]]]().toLocaleString('en-US') + ') Gems',
-                              trigger: 'hover',
-                              placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
-                              html: true
-                            }">
+                              disabled: !player.itemList[$data]()
+                          },
+                          css: {
+                              'bg-primary': FluteEffectRunner.getEffect($data) > 30,
+                              'bg-warning': FluteEffectRunner.getEffect($data) <= 30 && FluteEffectRunner.getEffect($data) > 0,
+                              'bg-secondary': !FluteEffectRunner.isActive($data)(),
+                          },
+                          style: {
+                              'opacity': player.itemList[$data]() || FluteEffectRunner.isActive($data)() ? '1' : '0.1'
+                          },
+                          event: {
+                              click: function(){ItemHandler.useItem($data)}
+                          },
+                          tooltip: {
+                            title: ItemList[$data].getFormattedTooltip(ItemList[$data]),
+                            trigger: 'hover',
+                            placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
+                            sanitize: false,
+                            html: true
+                          }">
                 <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
               </td>
             </tr>
             <tr data-bind="foreach: $data">
-                <td class="text-light p-0">
-              <!-- ko if: FluteEffectRunner.getEffect($data) > 0 -->
-                <code data-bind="
-                text: player.effectTimer[$data](),
+              <td class="text-light p-0" data-bind="
                 tooltip: {
                   title: FluteEffectRunner.fluteTooltip($data),
                   trigger:'hover',
                   placement:'bottom',
                   html:true
-                }">
+              }">
+              <!-- ko if: FluteEffectRunner.getEffect($data) > 0 -->
+                <code data-bind="
+                text: player.effectTimer[$data]()">
                 </code>
               <!-- /ko -->
+              </td>
+            </tr>
+          </tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div data-bind="hidden: !App.game.zMoves.canAccess() || (Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active())">
+    <div class="card-header p-0" data-toggle="collapse" href="#zCrystalItemContainerBody">
+        <span>Z-Crystals</span>
+      </div>
+      <div id="zCrystalItemContainerBody" class="card-body p-0 show">
+        <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
+          Z-Moves are disabled.
+        </p>
+        <table class="table table-bordered m-0" data-bind="visible: App.game.zMoves.canAccess()">
+          <tbody>
+            <tbody data-bind="visible : !App.game.zMoves.isActive(), foreach : GameHelper.chunk(6, GameConstants.zCrystalItemType)">
+              <tr data-bind="foreach : $data">
+                <td class="p-0" data-bind="attr: {
+                                            disabled: !ItemHandler.hasItem($data) || App.game.zMoves.isActive()
+                                          },
+                                          style: {
+                                            'opacity': ItemHandler.hasItem($data) && !App.game.zMoves.isActive() ? '1' : '0.1'
+                                          },
+                                          css: {
+                                            'bg-primary' : App.game.zMoves.isActive() && App.game.zMoves.type() === ItemList[$data].type,
+                                            'bg-secondary': !App.game.zMoves.isActive() || App.game.zMoves.type() !== ItemList[$data].type
+                                          },
+                                          event: {
+                                            click: function(){ItemHandler.useItem($data)}
+                                          },
+                                          tooltip: {
+                                            title: '<strong>' + ItemList[$data].displayName + '</strong>' + '<br/>' + ItemList[$data].getDescription(),
+                                            trigger: 'hover',
+                                            placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
+                                            html: true
+                                          }">
+                  <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
                 </td>
-            </tr>
+              </tr>
+            </tbody>
+            <tbody data-bind="visible: App.game.zMoves.isActive()">
+              <tr>
+                <td class="p-0 bg-primary" colspan="2" rowspan="3" data-bind="tooltip: { title: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].displayName + '<br/>' + ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].getDescription(), trigger: 'hover', placement: 'bottom', html: true }">
+                  <img src="" data-bind="attr: { src: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].image,  }">
+                </td>
+                <td class="p-0 bg-secondary" colspan="4" rowspan="2">
+                  <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent' })} Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="p-0" colspan="4" rowspan="1">
+                  <code data-bind="text: `${App.game.zMoves.formattedTime()} left`">00:00 left</code>
+                </td>
+              </tr>
+            </tbody>
           </tbody>
-        </tbody>
-      </table>
-    </div>
-    <div class="card-header p-0" data-toggle="collapse" href="#zCrystalItemContainerBody" data-bind="visible: App.game.zMoves.canAccess()">
-      <span>Z-Crystals</span>
-    </div>
-    <div id="zCrystalItemContainerBody" class="card-body p-0 show">
-      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active() && App.game.zMoves.canAccess()" class="bg-danger my-0">
-        Z-Moves are disabled.
-      </p>
-      <table class="table table-bordered m-0" data-bind="visible: App.game.zMoves.canAccess()">
-        <tbody>
-          <tbody data-bind="visible : !App.game.zMoves.isActive(), foreach : GameHelper.chunk(6, GameConstants.zCrystalItemType)">
-            <tr data-bind="foreach : $data">
-              <td class="p-0" data-bind="attr: {
-                                          disabled: !ItemHandler.hasItem($data) || App.game.zMoves.isActive()
-                                        },
-                                        style: {
-                                          'opacity': ItemHandler.hasItem($data) && !App.game.zMoves.isActive() ? '1' : '0.1'
-                                        },
-                                        css: {
-                                          'bg-primary' : App.game.zMoves.isActive() && App.game.zMoves.type() === ItemList[$data].type,
-                                          'bg-secondary': !App.game.zMoves.isActive() || App.game.zMoves.type() !== ItemList[$data].type
-                                        },
-                                        event: {
-                                          click: function(){ItemHandler.useItem($data)}
-                                        },
-                                        tooltip: {
-                                          title: ItemList[$data].displayName + '<br/>' + ItemList[$data].getDescription(),
-                                          trigger: 'hover',
-                                          placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
-                                          html: true
-                                        }">
-                <img src="" class="clickable" data-bind="attr: { src: ItemList[$data].image }" width="26px">
-              </td>
-            </tr>
-          </tbody>
-          <tbody data-bind="visible: App.game.zMoves.isActive()">
-            <tr>
-              <td class="p-0 bg-primary" colspan="2" rowspan="3" data-bind="tooltip: { title: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].displayName + '<br/>' + ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].getDescription(), trigger: 'hover', placement: 'bottom', html: true }">
-                <img src="" data-bind="attr: { src: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].image,  }">
-              </td>
-              <td class="p-0 bg-secondary" colspan="4" rowspan="2">
-                <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent' })} Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
-              </td>
-            </tr>
-            <tr></tr>
-            <tr>
-              <td class="p-0" colspan="4" rowspan="1">
-                <code data-bind="text: `${App.game.zMoves.formattedTime()} left`">00:00 left</code>
-              </td>
-            </tr>
-          </tbody>
-        </tbody>
-      </table>
-    </div>
+        </table>
+      </div>
+  </div>
 </div>
