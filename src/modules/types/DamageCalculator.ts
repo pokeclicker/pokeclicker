@@ -9,6 +9,7 @@ export default class DamageCalculator {
     public static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     public static type2 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     public static region = ko.observable(Region.none);
+    public static subregion = ko.observable();
     public static weather = ko.observable(WeatherType.Clear);
     public static includeBreeding = ko.observable(false);
     public static baseAttackOnly = ko.observable(false);

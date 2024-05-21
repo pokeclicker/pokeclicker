@@ -54,6 +54,15 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                         </div>
                         <!-- /ko -->
                         <div class="form-group col-lg-3 col-6">
+                            <label>Subregion</label>
+                            <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.subregion">
+                                <!-- ko foreach: SubRegions.getSubRegions(DamageCalculator.region) -->
+                                <option data-bind="attr: { value: $data.id }, text: $data.name">Subregion</option>
+                                <!-- /ko -->
+                                <option value="-1">None</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-6">
                             <label>Weather</label>
                             <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.weather">
                                 <!-- ko foreach: GameHelper.enumStrings(WeatherType) -->

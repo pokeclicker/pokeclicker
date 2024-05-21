@@ -180,7 +180,7 @@ class Party implements Feature {
         return Math.round(attack * bonus);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeTempBonuses = true): number {
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeTempBonuses = true, subregion: GameConstants.SubRegions = player.subregion): number {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
@@ -228,6 +228,10 @@ class Party implements Feature {
             attack *= App.game.zMoves.getMultiplier(dataPokemon.type1, dataPokemon.type2);
         }
 
+        //Check if we're in MKJ - if so fishes only
+        if (region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump && Math.floor(dataPokemon.id) != 129) {
+            attack *= 0;
+        }
         return attack;
     }
 
