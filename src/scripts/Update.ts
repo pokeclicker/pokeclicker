@@ -2693,6 +2693,38 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[241]) {
                 Update.startQuestLine(saveData, 'Child of the Stars');
             }
+
+            // Reimburse and reset the underground upgrades
+            const upgradeCostMap = {
+                "Bomb_Efficiency": GameHelper.createArray(50, 250, 50),
+                "Daily_Deals_Max": GameHelper.createArray(150, 300, 150),
+                "Energy_Gain": GameHelper.createArray(100, 1700, 100),
+                "Energy_Max": GameHelper.createArray(50, 500, 50),
+                "Energy_Regen_Time": GameHelper.createArray(20, 400, 20),
+                "Items_Max": GameHelper.createArray(200, 800, 200),
+                "Items_Min": GameHelper.createArray(500, 5000, 1500),
+                "NewYLayer": GameHelper.createArray(3000, 3000, 3000),
+                "Survey_Cost": GameHelper.createArray(50, 250, 50),
+                "Survey_Efficiency": GameHelper.createArray(100, 400, 100),
+            };
+
+            const totalReimburse = Object.entries(saveData.underground.upgrades).map(([key, value]) => {
+                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0)
+            }).reduce((acc, cur) => acc + cur, 0);
+            saveData.underground.upgrades = {};
+            saveData.wallet.currencies[GameConstants.Currency.diamond] += totalReimburse;
+
+            if (totalReimburse > 0) {
+                Notifier.notify({
+                    title: "Underground changes",
+                    type: NotificationConstants.NotificationOption.danger,
+                    timeout: GameConstants.DAY,
+                    message: `Due to underground upgrade cost rescaling, your upgrades have been reset.
+                    We have returned ${totalReimburse.toLocaleString('en-US')} <img src="./assets/images/currency/diamond.svg" height="24px"/> to your wallet.
+                    <button class="btn btn-block btn-secondary" onclick="App.game.underground.openUndergroundModal()" data-dismiss="toast">Open Underground</button>`,
+                });
+            }
+
         },
     };
 
