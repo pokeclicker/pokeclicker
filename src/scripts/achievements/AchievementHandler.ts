@@ -334,7 +334,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Day Care Is My Home', 'Hatch 250,000 eggs.', new HatchRequirement(250000), 0.7);
 
         AchievementHandler.addAchievement('Some Nice Help for the Day Care', 'Unlock 5 Hatchery Helpers.', new HatcheryHelperRequirement(5, 0), 0.1);
-        AchievementHandler.addAchievement('Why Do They Have To Work in Shifts?', 'Unlock all 11 Hatchery Helpers.', new HatcheryHelperRequirement(11, 0), 0.3);
+        AchievementHandler.addAchievement('Why Do They Have To Work in Shifts?', 'Unlock 11 Hatchery Helpers.', new HatcheryHelperRequirement(11, 0), 0.3);
         AchievementHandler.addAchievement('My Loyal Helpers', 'Get 3 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(3, 10), 0.4);
         AchievementHandler.addAchievement('Let\'s Try Some Other Helpers Too?', 'Get 5 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(5, 10), 0.5);
         AchievementHandler.addAchievement('Sam Just Wants To Help', 'Get 10 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(10, 10), 1);
