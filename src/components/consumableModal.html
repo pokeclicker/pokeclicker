@@ -15,49 +15,63 @@
                     <button class="btn btn-block btn-secondary btn-static" data-bind="text: ItemList[ConsumableController.currentlySelectedName()].displayName + ': ' + player.amountOfItem(ConsumableController.currentlySelectedName())"></button>
                     <button class="btn btn-primary btn-sm" data-bind="text : ConsumableController.multiplier[ConsumableController.multiplierIndex()], click : () => ConsumableController.incrementMultiplier(), attr : { oncontextmenu : 'ConsumableController.decrementMultiplier(); return false;' }"></button>
                   </div>
-                  <div class="input-group px-1 mt-1" data-bind="with: Settings.getSetting('consumableSort')">
-                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                          data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
-                          <option data-bind="text: $data.text, value: $data.value"></option>
+                  <div class="input-group px-1 mt-1">
+                      <!-- ko let: { consumableSort: Settings.getSetting('consumableSort') } -->
+                      <select id="consumable-sort" autocomplete="off" class="custom-select"
+                          data-bind="options: consumableSort.options,
+                              optionsValue: 'value',
+                              optionsText: 'text',
+                              value: consumableSort.observableValue">
                       </select>
+                      <!-- /ko -->
+                      <!-- ko let: { consumableSortDirection: Settings.getSetting('consumableSortDirection') } -->
                       <div class="input-group-append bg-primary text-light">
-                          <label for="consumableSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
-                            text: Settings.getSetting('consumableSortDirection').observableValue() ? '⥄' : '⥂',
-                            tooltip: { title: Settings.getSetting('consumableSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement: 'bottom' }
-                          ">⥂</label>
-                          <input id="consumableSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                              data-bind="checked: Settings.getSetting('consumableSortDirection').observableValue()"
-                              onchange="Settings.setSettingByName('consumableSortDirection', this.checked)"/>
+                          <label for="consumable-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                              text: consumableSortDirection.observableValue() ? '⥄' : '⥂',
+                              tooltip: {
+                                  title: consumableSortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                  trigger: 'hover',
+                                  placement: 'bottom',
+                              }">⥂</label>
+                          <input id="consumable-sort-direction" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: consumableSortDirection.observableValue" />
                       </div>
+                      <!-- /ko -->
                   </div>
                   <div class="form-group px-1 mt-1 mb-0">
-                    <input id="consumableSearch" autocomplete="off" class="form-control" placeholder="Search"
+                    <input id="consumable-search" autocomplete="off" class="form-control" placeholder="Search"
                         data-bind="textInput: Settings.getSetting('consumableSearchFilter').observableValue" />
                   </div>
                   <div class="small px-1 pb-2 my-1" style="overflow-x: hidden;">
                     <div class="form-row px-1">
                         <div class="form-group col-6 m-0 px-1 py-0">
+                            <!-- ko let: { consumableRegionFilter: Settings.getSetting('consumableRegionFilter') } -->
                             <label class="mb-1" for="consumable-region-filter">Region</label>
-                            <select id="consumable-region-filter" name="consumableRegionFilter" autocomplete="off" class="custom-select custom-select-sm" onchange="Settings.setSettingByName(this.name, +this.value)">
-                                <!-- ko foreach: Settings.getSetting('consumableRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('consumableRegionFilter').value === $data.value }, text: $data.text">Region</option>
-                                <!-- /ko -->
+                            <select id="consumable-region-filter" autocomplete="off" class="custom-select custom-select-sm" 
+                                data-bind="options: consumableRegionFilter.getValidOptions(),
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: consumableRegionFilter.observableValue">
                             </select>
+                            <!-- /ko -->
                         </div>
                         <div class="form-group col-6 m-0 px-1 py-0">
-                            <label class="mb-1" for="consumable-type-filter">Type</label>
-                            <select id="consumable-type-filter" name="consumableTypeFilter" autocomplete="off" class="custom-select custom-select-sm" onchange="Settings.setSettingByName(this.name, +this.value)">
-                                <!-- ko foreach: Settings.getSetting('consumableTypeFilter').options -->
-                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('consumableTypeFilter').value === $data.value }, text: $data.text">Type</option>
-                                <!-- /ko -->
+                            <!-- ko let: { consumableTypeFilter: Settings.getSetting('consumableTypeFilter') } -->
+                            <label class="mb-1" for="held-item-type-filter">Type</label>
+                            <select id="held-item-type-filter" name="consumableTypeFilter" autocomplete="off" class="custom-select custom-select-sm" 
+                                data-bind="options: consumableTypeFilter.options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: consumableTypeFilter.observableValue">
                             </select>
+                            <!-- /ko -->
                         </div>
                     </div>
                     <div class="form-check align-middle mt-1">
                         <input type="checkbox" id="consumable-shiny-filter" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('consumableHideShinyPokemon').observableValue()"
-                            onchange="Settings.setSettingByName('consumableHideShinyPokemon', this.checked)" />
-                        <label for="consumable-shiny-filter" class="form-check-label" data-bind="text : Settings.getSetting('consumableHideShinyPokemon').displayName"></label>
+                            data-bind="checked: Settings.getSetting('consumableHideShinyPokemon').observableValue" />
+                        <label for="consumable-shiny-filter" class="form-check-label" 
+                            data-bind="text: Settings.getSetting('consumableHideShinyPokemon').displayName"></label>
                     </div>
                   </div>
                 </div>
