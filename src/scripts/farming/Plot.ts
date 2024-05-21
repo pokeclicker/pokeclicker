@@ -382,6 +382,15 @@ class Plot implements Saveable {
                 this.notifications.push(FarmNotificationType.Dropped);
             }
 
+            // Check for Banetteite drop if Kasib died
+            if (this.berry == BerryType.Kasib) {
+                if (App.game.party.alreadyCaughtPokemonByName('Banette') && !player.hasMegaStone(GameConstants.MegaStoneType.Banettite)) {
+                    if (Rand.chance(0.05)) {
+                        player.gainMegaStone(GameConstants.MegaStoneType.Banettite);
+                    }
+                }
+            }
+
             // Check if berry replants itself
             const replantChance = Math.min(1, this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier());
             if (Rand.chance(replantChance)) {

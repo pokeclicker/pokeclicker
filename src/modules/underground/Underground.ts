@@ -1,7 +1,7 @@
 import type { Observable, Computed } from 'knockout';
 import '../koExtenders';
 import { Feature } from '../DataStore/common/Feature';
-import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE } from '../GameConstants';
+import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE, Region } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import KeyItemType from '../enums/KeyItemType';
 import OakItemType from '../enums/OakItemType';
@@ -16,6 +16,7 @@ import { Mine } from './Mine';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundUpgrade, { Upgrades } from './UndergroundUpgrade';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export class Underground implements Feature {
     name = 'Underground';
@@ -187,6 +188,12 @@ export class Underground implements Feature {
                 AmountFactory.createArray(
                     GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Reduced_Fossil_Pieces, 'Reduced Fossil Pieces', 1,
+                AmountFactory.createArray(
+                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                GameHelper.createArray(0, 1, 1), true, new MaxRegionRequirement(Region.galar),
             ),
         ];
     }
