@@ -21,6 +21,9 @@ export type PokemonCategory = {
 export default class PokemonCategories implements Saveable {
     public static categories: KnockoutObservableArray<PokemonCategory> = ko.observableArray([]);
     public static playerCategories = ko.pureComputed(() => PokemonCategories.categories().filter((cat) => cat.id > 0));
+    // Pokedex & Hatchery category assign mode
+    public static categoryAssignEnabled = ko.observable(false);
+    public static categoryAssignSelected = ko.observable(0);
 
     saveKey = 'categories';
     defaults: Record<string, any> = {};
@@ -31,17 +34,23 @@ export default class PokemonCategories implements Saveable {
     }
 
     public static reset() {
+        PokemonCategories.categoryAssignSelected(0);
         App.game.party.caughtPokemon.forEach((p) => {
             p.resetCategory();
         });
         [...PokemonCategories.categories()].forEach(c => {
             PokemonCategories.removeCategory(c.id, true);
         });
+        ko.tasks.runEarly();
         PokemonCategories.initialize();
+        const none = PokemonCategories.getCategoryById(0);
+        none.name('None');
+        none.color('#333333');
     }
 
     public static addCategory(name: string, color: string, id: number = -1): void {
         if (id === -1) {
+            // Get next unused ID
             PokemonCategories.categories().forEach(c => {
                 id = Math.max(id, c.id);
             });
@@ -79,18 +88,25 @@ export default class PokemonCategories implements Saveable {
         }
 
         const cat = PokemonCategories.categories()[index];
-        const pokeballFilter = App.game.pokeballFilters.list().find(f => f.options?.category?.observableValue() == cat.id);
+        const pokeballFilters = App.game.pokeballFilters.list().filter(f => f.options?.category?.observableValue() == cat.id);
 
-        if (pokeballFilter) {
+        if (pokeballFilters.length) {
             if (force) {
                 // Forced remove (reset filters)
                 // When the category is used in a pokeball filter disable the filter and remove the category option.
-                pokeballFilter.enabled(false);
-                App.game.pokeballFilters.removeFilterOption(pokeballFilter, 'category');
+                pokeballFilters.forEach(filter => {
+                    filter.enabled(false);
+                    App.game.pokeballFilters.removeFilterOption(filter, 'category');
+                });
             } else {
+                const filterNames = pokeballFilters.map(f => `<strong>${f.name}</strong>`);
+                if (filterNames.length > 1) {
+                    filterNames[filterNames.length - 1] = `and ${filterNames[filterNames.length - 1]}`;
+                }
+                const namesString = filterNames.join(filterNames.length > 2 ? ', ' : ' ');
                 Notifier.notify({
                     title: 'Remove Category',
-                    message: `This category is in use by the <strong>${pokeballFilter.name}</strong> Pokéball filter and cannot be removed.`,
+                    message: `This category is in use by the ${namesString} Pokéball filter${filterNames.length > 1 ? 's' : ''} and cannot be removed.`,
                     type: NotificationConstants.NotificationOption.danger,
                     timeout: 1e4,
                 });
@@ -124,6 +140,10 @@ export default class PokemonCategories implements Saveable {
         }
     }
 
+    static getCategoryById(id: number) {
+        return PokemonCategories.categories().find(c => c.id === id);
+    }
+
     toJSON(): Record<string, any> {
         const categories = [];
         PokemonCategories.categories().forEach((c) => {
@@ -145,7 +165,7 @@ export default class PokemonCategories implements Saveable {
 
         const categoryOrder = json.categories?.map(c => c.id);
         json.categories?.forEach((category) => {
-            const cat = PokemonCategories.categories().find(c => c.id == category.id);
+            const cat = PokemonCategories.getCategoryById(category.id);
             if (cat) {
                 cat.name(category.name);
                 cat.color(category.color);

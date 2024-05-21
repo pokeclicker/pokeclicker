@@ -1,4 +1,6 @@
 import DayCyclePart from './dayCycle/DayCyclePart';
+import MoonCyclePhase from './moonCycle/MoonCyclePhase';
+import { PokemonNameType } from './pokemons/PokemonNameType';
 
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
@@ -199,7 +201,7 @@ export const MAX_DUNGEON_SIZE = 10;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
-export enum DungeonTile {
+export enum DungeonTileType {
     empty = 0,
     entrance = 1,
     enemy = 2,
@@ -254,6 +256,7 @@ export const LIGHT_ITEM_CHANCE = 75;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
 export const CHRISTMAS_ITEM_CHANCE = 10;
+export const HELD_MAGIKARP_BISCUIT = 256;
 
 // Gems
 export const GEM_UPGRADE_COST = 500;
@@ -465,6 +468,7 @@ export enum Pokeball {
     'Nestball',
     'Repeatball',
     'Beastball',
+    'Moonball',
 }
 
 export enum Currency {
@@ -945,8 +949,8 @@ export enum BattleItemType {
 
 export enum FluteItemType {
     'Yellow_Flute' = 'Yellow_Flute',
-    'Time_Flute' = 'Time_Flute',
     'Black_Flute' = 'Black_Flute',
+    'Time_Flute' = 'Time_Flute',
     'Red_Flute' = 'Red_Flute',
     'White_Flute' = 'White_Flute',
     'Blue_Flute' = 'Blue_Flute',
@@ -1365,6 +1369,15 @@ export function getGymIndex(gym: string): number {
 export function getGymRegion(gym: string): Region {
     return RegionGyms.findIndex((gyms) => gyms.find((g) => g === gym));
 }
+
+export const GymAutoRepeatRewardTiers = [
+    // [reward modifier, clears threshold]
+    [1, 1000],
+    [0.75, 750],
+    [0.5, 500],
+    [0.25, 250],
+    [0, 0],
+];
 
 export const KantoDungeons = [
     'Viridian Forest', // 0
@@ -1931,18 +1944,33 @@ export const TemporaryBattles = [
     'Anomaly Mewtwo 4',
     'Anomaly Mewtwo 5',
     'Hau 1',
+    'Melemele Spearow',
     'Hau 2',
+    'Skull 1',
+    'Ilima',
+    'Skull 2',
+    'Recon Squad 1',
     'Hau 3',
     'Dexio',
     'Sina',
     'Hau 4',
     'Gladion 1',
+    'Recon Squad 2',
+    'Skull 3',
     'Battle Royal',
     'Plumeria 1',
     'Ultra Wormhole',
     'Hau 5',
+    'Skull 4',
+    'Molayne',
+    'Psychium Z Trial',
+    'Skull 5',
     'Plumeria 2',
     'Gladion 2',
+    'Exeggutor Tree',
+    'Skull 6',
+    'Recon Squad 3',
+    'Lusamine',
     'Necrozma',
     'Ultra Megalopolis',
     'Captain Mina',
@@ -1953,6 +1981,7 @@ export const TemporaryBattles = [
     'Captain Sophocles',
     'Kahuna Nanu',
     'Gladion 3',
+    'Lillie',
     'Guzma Bug Memory',
     'Kahili Flying Memory',
     'Plumeria Poison Memory',
@@ -2087,6 +2116,11 @@ export const TemporaryBattles = [
     'Max Raid Copperajah',
     'Max Raid Duraludon',
     'Eternamax Eternatus',
+    'Terrakion 1',
+    'Swords of Justice 1',
+    'Kyurem 1',
+    'Kyurem 2',
+    'Kyurem 3',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
@@ -2135,11 +2169,6 @@ export const TemporaryBattles = [
     'Enamorus 3',
     'Arceus',
     'Paradise Protection Protocol',
-    'Terrakion 1',
-    'Swords of Justice 1',
-    'Kyurem 1',
-    'Kyurem 2',
-    'Kyurem 3',
 ];
 
 export enum ShardTraderLocations {
@@ -2323,6 +2352,45 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Night]: 18,
 };
 
+export const MoonCycleValues: Record<MoonCyclePhase, number> = {
+    [MoonCyclePhase.NewMoon]: 0,
+    [MoonCyclePhase.WaxingCrescent]: 1,
+    [MoonCyclePhase.FirstQuarter]: 2,
+    [MoonCyclePhase.WaxingGibbous]: 3,
+    [MoonCyclePhase.FullMoon]: 4,
+    [MoonCyclePhase.WaningGibbous]: 5,
+    [MoonCyclePhase.ThirdQuarter]: 6,
+    [MoonCyclePhase.WaningCrescent]: 7,
+};
+
+export const MoonEvoPokemon = new Set<PokemonNameType>([
+    'Nidoran(F)', // 29
+    'Nidorina', // 30
+    'Nidoqueen', // 31
+    'Nidoran(M)', // 32
+    'Nidorino', // 33
+    'Nidoking', // 34
+    'Clefairy', // 35
+    'Clefable', // 36
+    'Jigglypuff', // 39
+    'Wigglytuff', // 40
+    'Cleffa', // 173
+    'Igglybuff', // 174
+    //'Teddiursa', // 216
+    //'Ursaring', // 217
+    'Skitty', // 300
+    'Delcatty', // 301
+    //'Lunatone', // 337
+    // 'Cresselia', // 488
+    //'Darkrai', // 491
+    'Munna', // 517
+    'Musharna', // 518
+    //'Lunala', // 792
+    //'Lunala (Full Moon)', // 792.01
+    //'Necrozma (Dawn Wings)', // 800.02
+    //'Ursaluna', // 901
+]);
+
 export enum ShadowStatus {
     None,
     Shadow,
@@ -2409,10 +2477,14 @@ export const ModalCollapseList = [
     'pokemonListBody',
     'shortcutsBody',
     'currencyBody',
+    'undergroundCard',
+    'plotListCard',
+    'zCrystalItemContainerBody',
 ];
 
 export enum ConsumableType {
     Rare_Candy,
+    Magikarp_Biscuit,
 }
 
 export const zCrystalItemType = [

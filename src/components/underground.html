@@ -132,6 +132,7 @@
                             <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Plates)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Evolution_Items)}}"></tr>
+                            <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Fossil_Pieces)}}"></tr>
                         </tbody>
                     </table>
                 </div>
@@ -312,13 +313,23 @@
             data-bind="text: upgrade.isMaxLevel() ? '' : upgrade.calculateCost().amount.toLocaleString('en-US') + ' Diamonds'"></td>
         <td class='vertical-middle'>
             <button class='btn btn-block'
-                    data-bind='css: {
-                            disabled: !upgrade.isMaxLevel() && !upgrade.canAfford(),
-                            "btn-success": !upgrade.isMaxLevel() || Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
-                            "btn-danger": upgrade.isMaxLevel() && !Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
-                        },
-                        text: upgrade.isMaxLevel() ? Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue() ? "Enabled" : "Disabled" : "Unlock",
-                        click: () => upgrade.canBuy() ? upgrade.buy() : Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).toggle()'>
+                data-bind='css: {
+                        disabled: (!upgrade.isMaxLevel() && !upgrade.canAfford()) || !upgrade.isUnlocked(),
+                        "btn-success": !upgrade.isMaxLevel() || Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
+                        "btn-danger": upgrade.isMaxLevel() && !Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
+                    },
+                    text: upgrade.isMaxLevel()
+                        ? Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue()
+                            ? "Enabled" : "Disabled"
+                        : !upgrade.isUnlocked() ? "🔒" : "Unlock",
+                    tooltip: {
+                        title: upgrade.isUnlocked() ? "" : upgrade.requirement.hint(),
+                        trigger: "hover",
+                        placement: "left",
+                    },
+                    click: () => !upgrade.isMaxLevel() && upgrade.isUnlocked()
+                        ? upgrade.buy()
+                        : Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).toggle()'>
             </button>
         </td>
     </script>

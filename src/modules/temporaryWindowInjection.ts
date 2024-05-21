@@ -40,6 +40,9 @@ import WeatherForecast from './weather/WeatherForecast';
 import DayCycle from './dayCycle/DayCycle';
 import DayCyclePart from './dayCycle/DayCyclePart';
 import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
+import MoonCycle from './moonCycle/MoonCycle';
+import MoonCyclePhase from './moonCycle/MoonCyclePhase';
+import MoonCyclePhaseRequirement from './requirements/MoonCyclePhaseRequirement';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
@@ -242,6 +245,9 @@ Object.assign(<any>window, {
     DayCycle,
     DayCyclePart,
     DayCyclePartRequirement,
+    MoonCycle,
+    MoonCyclePhase,
+    MoonCyclePhaseRequirement,
     SeededRand,
     SeededDateRand,
     Rand,

@@ -123,6 +123,16 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
                 return 10;
             }, 1000, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
+
+            new Pokeball(GameConstants.Pokeball.Moonball, () => {
+                const moonCycleMod = MoonCycle.currentMoonCyclePhase();
+                const moonCycleBonus = (4 - Math.abs((moonCycleMod % 8) - 4)) * 5;
+
+                if (GameConstants.MoonEvoPokemon.has(Battle.enemyPokemon().name)) {
+                    return Math.min(20, moonCycleBonus + 10);
+                }
+                return moonCycleBonus;
+            }, 1250, 'Increased catch rate by the light of the moon', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
         ];
         this.selectedTitle = ko.observable('');
         this.selectedSelection = ko.observable();
