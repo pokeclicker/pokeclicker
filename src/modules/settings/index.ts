@@ -37,9 +37,9 @@ export default Settings;
 
 // Region SettingOptions that unlock when the player reaches each region
 const regionOptionsNoneFirst = Settings.enumToNumberSettingOptionArray(Region, (r) => r !== 'final')
-    .map(o => { 
+    .map(o => {
         o.requirement = o.value > Region.kanto ? new MaxRegionRequirement(o.value) : undefined;
-        return o; 
+        return o;
     });
 const regionOptionsNoneLast = [...regionOptionsNoneFirst.filter(o => o.value !== Region.none), regionOptionsNoneFirst.find(o => o.value === Region.none)];
 
@@ -216,6 +216,7 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true));
 Settings.add(new BooleanSetting('underground.Reduced_Plates', 'Reduced Plates', true));
 Settings.add(new BooleanSetting('underground.Reduced_Evolution_Items', 'Reduced Evolution Items', true));
+Settings.add(new BooleanSetting('underground.Reduced_Fossil_Pieces', 'Reduced Fossil Pieces', true));
 
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
