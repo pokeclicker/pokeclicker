@@ -2,7 +2,8 @@ import type SubRegion from './SubRegion';
 import type { Region } from '../GameConstants';
 
 /*
-    Only import directly from this file when necessary to prevent circular dependency issues
+    Import this class from SubRegions.ts whenever possible! 
+    Only import directly from this file to prevent circular dependency issues from subregion requirements
 */
 
 export default class SubRegions {

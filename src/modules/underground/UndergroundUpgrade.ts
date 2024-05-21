@@ -1,4 +1,5 @@
 import KeyItemType from '../enums/KeyItemType';
+import Requirement from '../requirements/Requirement';
 import Upgrade from '../upgrades/Upgrade';
 import Amount from '../wallet/Amount';
 
@@ -13,6 +14,10 @@ export enum Upgrades {
     'Survey_Cost',
     'Survey_Efficiency',
     'NewYLayer',
+    'Reduced_Shards',
+    'Reduced_Plates',
+    'Reduced_Evolution_Items',
+    'Reduced_Fossil_Pieces',
 }
 
 export default class UndergroundUpgrade extends Upgrade {
@@ -22,14 +27,18 @@ export default class UndergroundUpgrade extends Upgrade {
     constructor(
         name: Upgrades, displayName: string, maxLevel: number,
         costList: Amount[], bonusList: number[], increasing = true,
+        private requirement?: Requirement,
     ) {
         super(name, displayName, maxLevel, costList, bonusList, increasing);
     }
 
 
     canBuy(): boolean {
-        return super.canBuy() && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
+        return super.canBuy() && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit) && this.isUnlocked();
     }
 
+    isUnlocked(): boolean {
+        return this.requirement?.isCompleted() ?? true;
+    }
 }
 

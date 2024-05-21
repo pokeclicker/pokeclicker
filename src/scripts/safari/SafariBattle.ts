@@ -26,6 +26,31 @@ class SafariBattle {
         SafariBattle.text('What will you do?');
         SafariBattle.escapeAttempts = 0;
         $('#safariBattleModal').modal({ backdrop: 'static', keyboard: false });
+
+        // Shiny
+        const location = `${GameConstants.camelCaseToString(GameConstants.Region[Safari.activeRegion()])} Safari`;
+        if (enemy.shiny) {
+            App.game.logbook.newLog(
+                LogBookTypes.SHINY,
+                App.game.party.alreadyCaughtPokemon(enemy.id, true)
+                    ? createLogContent.encounterShinyDupe({
+                        location: location,
+                        pokemon: enemy.name,
+                    })
+                    : createLogContent.encounterShiny({
+                        location: location,
+                        pokemon: enemy.name,
+                    })
+            );
+        } else if (!App.game.party.alreadyCaughtPokemon(enemy.id)) {
+            App.game.logbook.newLog(
+                LogBookTypes.NEW,
+                createLogContent.encounterWild({
+                    location: location,
+                    pokemon: enemy.name,
+                })
+            );
+        }
     }
 
     public static throwBall() {
@@ -40,7 +65,7 @@ class SafariBattle {
             targetOffset.top += 16;
 
             const ballSpeed = SafariBattle.Speed.ballThrowAnim * SafariBattle.getTierMultiplier();
-            const ptclhtml = '<div><img id="safariBall" src="assets/images/pokeball/Safariball.svg" height="30px"></div>';
+            const ptclhtml = SafariBattle.pokeball();
             SafariBattle.ballParticle?.remove();
             SafariBattle.ballParticle = SafariBattle.dropParticle(ptclhtml, $('#safariBattleModal .pageItemFooter').offset(), targetOffset, ballSpeed, 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
             $('#safariBall').css('animation-duration', `${ballSpeed}ms`).addClass('spin');
@@ -245,9 +270,21 @@ class SafariBattle {
         }
     }
 
-    public static run() {
+    public static async run() {
         if (Safari.inBattle() && !SafariBattle.busy()) {
             SafariBattle.busy(true);
+            if (SafariBattle.enemy.shiny) {
+                if (!await Notifier.confirm({
+                    title: 'Shiny Encounter',
+                    message: 'Are you sure you want to run away from this battle?',
+                    type: NotificationConstants.NotificationOption.danger,
+                    confirm: 'Yes',
+                    cancel: 'No',
+                })) {
+                    SafariBattle.busy(false);
+                    return;
+                }
+            }
             SafariBattle.text('You flee.');
             SafariBattle.delay(SafariBattle.Speed.turnLength)
                 .then(() => SafariBattle.endBattle());
@@ -332,6 +369,15 @@ class SafariBattle {
         }
 
         return MULTIPLIERS[tier];
+    }
+
+    private static pokeball() {
+        switch (player.region) {
+            case GameConstants.Region.johto:
+                return '<div><img id="safariBall" src="assets/images/pokeball/Sportball.svg" height="30px"></div>';
+            default:
+                return '<div><img id="safariBall" src="assets/images/pokeball/Safariball.svg" height="30px"></div>';
+        }
     }
 }
 
