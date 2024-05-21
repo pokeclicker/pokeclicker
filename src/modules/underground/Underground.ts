@@ -166,7 +166,7 @@ export class Underground implements Feature {
                 GameHelper.createArray(0, 4, 1),
             ),
             new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.NewYLayer, 'Larger Underground, +1 Item', 1,
+                UndergroundUpgrade.Upgrades.Items_All, '+1 Item', 1,
                 AmountFactory.createArray(
                     GameHelper.createArray(3000, 3000, 3000), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
@@ -206,7 +206,7 @@ export class Underground implements Feature {
     }
 
     getMaxItems() {
-        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
+        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus();
     }
 
     getEnergyGain() {
@@ -234,11 +234,11 @@ export class Underground implements Feature {
     }
 
     getSizeY() {
-        return Underground.sizeY + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
+        return Underground.sizeY;
     }
 
     getMinItems() {
-        return Underground.BASE_ITEMS_MIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Min).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
+        return Underground.BASE_ITEMS_MIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Min).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus();
     }
 
     getUpgrade(upgrade: Upgrades) {

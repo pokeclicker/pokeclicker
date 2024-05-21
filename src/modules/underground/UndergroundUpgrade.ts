@@ -13,7 +13,7 @@ export enum Upgrades {
     'Bomb_Efficiency',
     'Survey_Cost',
     'Survey_Efficiency',
-    'NewYLayer',
+    'Items_All',
     'Reduced_Shards',
     'Reduced_Plates',
     'Reduced_Evolution_Items',
