@@ -111,81 +111,81 @@ export class Underground implements Feature {
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Energy_Max, 'Max Energy', 10,
                 AmountFactory.createArray(
-                    GameHelper.createArray(50, 500, 50), Currency.diamond),
+                    GameHelper.createArray(50, 50, 0), Currency.diamond),
                 GameHelper.createArray(0, 100, 10),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Items_Max, 'Max Items', 4,
                 AmountFactory.createArray(
-                    GameHelper.createArray(200, 800, 200), Currency.diamond),
+                    GameHelper.createArray(75, 300, 75), Currency.diamond),
                 GameHelper.createArray(0, 4, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Items_Min, 'Min Items', 4,
                 AmountFactory.createArray(
-                    GameHelper.createArray(500, 5000, 1500), Currency.diamond),
+                    GameHelper.createArray(125, 500, 125), Currency.diamond),
                 GameHelper.createArray(0, 4, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Energy_Gain, 'Energy Restored', 17,
                 AmountFactory.createArray(
-                    GameHelper.createArray(100, 1700, 100), Currency.diamond),
+                    GameHelper.createArray(50, 50, 0), Currency.diamond),
                 GameHelper.createArray(0, 17, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Energy_Regen_Time, 'Energy Regen Time', 20,
                 AmountFactory.createArray(
-                    GameHelper.createArray(20, 400, 20), Currency.diamond),
+                    GameHelper.createArray(20, 20, 0), Currency.diamond),
                 GameHelper.createArray(0, 20, 1),
                 false,
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Daily_Deals_Max, 'Daily Deals', 2,
                 AmountFactory.createArray(
-                    GameHelper.createArray(150, 300, 150), Currency.diamond),
+                    GameHelper.createArray(150, 150, 0), Currency.diamond),
                 GameHelper.createArray(0, 2, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Bomb_Efficiency, 'Bomb Efficiency', 5,
                 AmountFactory.createArray(
-                    GameHelper.createArray(50, 250, 50), Currency.diamond),
+                    GameHelper.createArray(50, 50, 0), Currency.diamond),
                 GameHelper.createArray(0, 10, 2),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Survey_Cost, 'Survey Cost', 5,
                 AmountFactory.createArray(
-                    GameHelper.createArray(50, 250, 50), Currency.diamond),
+                    GameHelper.createArray(10, 10, 0), Currency.diamond),
                 GameHelper.createArray(0, 5, 1),
                 false,
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Items_All, '+1 Item', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(3000, 3000, 3000), Currency.diamond),
+                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Shards, 'Reduced Shards', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(150, 150, 150), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Plates, 'Reduced Plates', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(200, 200, 200), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Evolution_Items, 'Reduced Evolution Items', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(100, 100, 100), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Fossil_Pieces, 'Reduced Fossil Pieces', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(40, 40, 40), Currency.diamond),
                 GameHelper.createArray(0, 1, 1), true, new MaxRegionRequirement(Region.galar),
             ),
         ];
