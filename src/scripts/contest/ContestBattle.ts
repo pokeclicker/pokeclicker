@@ -5,7 +5,7 @@ class ContestBattle extends Battle {
     static trainer: KnockoutObservable<ContestTrainer> = ko.observable(null);
     static trainerIndex: KnockoutObservable<number> = ko.observable(0);
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
-    static trainerBonus: KnockoutObservable<number> = ko.observable(0);
+    static trainerStreak: KnockoutObservable<number> = ko.observable(0);
 
     public static pokemonAttack() {
         if (ContestRunner.running()) {
@@ -48,11 +48,6 @@ class ContestBattle extends Battle {
     public static defeatPokemon() {
         ContestBattle.enemyPokemon().defeat(true);
 
-        // give trainer bonus for Contest Tokens if audience bar is full
-        if (ContestRunner.isRallied()) {
-            ContestBattle.trainerBonus(ContestBattle.trainerBonus() + 1);
-        }
-
         // Make contest "route" regionless
         App.game.breeding.progressEggsBattle(ContestRunner.rank() * 3 + 1, GameConstants.Region.none);
 
@@ -66,7 +61,10 @@ class ContestBattle extends Battle {
             if (ContestBattle.trainerIndex() + 1 >= ContestRunner.getTrainerList().length) {
                 ContestBattle.trainerIndex(0);
             } else {
+                // move to next trainer
                 ContestBattle.trainerIndex(ContestBattle.trainerIndex() + 1);
+                // increase trainer streak
+                ContestBattle.trainerStreak(ContestBattle.trainerStreak() + 1);
             }
 
         } else {
@@ -89,7 +87,7 @@ class ContestBattle extends Battle {
 
     // Increase and keep track of the amount of trainers defeated
     public static trainersDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
-        return ContestBattle.trainerBonus();
+        return ContestBattle.trainerStreak();
     });
 
     public static pokemonContestAppealTooltip: KnockoutComputed<string> = ko.pureComputed(() => {

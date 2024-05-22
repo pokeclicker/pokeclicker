@@ -38,7 +38,7 @@ class ContestRunner {
         ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
         ContestBattle.trainerIndex(0);
         ContestBattle.pokemonIndex(0);
-        ContestBattle.trainerBonus(0);
+        ContestBattle.trainerStreak(0);
         ContestBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.contest;
         ContestRunner.running(true);
@@ -125,7 +125,7 @@ class ContestRunner {
     public static contestWon() {
         if (ContestRunner.running()) {
             ContestRunner.running(false);
-            const contestTokenMultiplier = ContestBattle.trainerBonus();
+            const contestTokenMultiplier = ContestBattle.trainerStreak();
             const rank = ContestRunner.rank();
             const tokenReward = Math.floor(5 + (rank * 2) + (0.1 * rank * contestTokenMultiplier));
             // Award money for defeating gym
