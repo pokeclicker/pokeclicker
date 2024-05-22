@@ -18,10 +18,9 @@ class ContestBattle extends Battle {
                 return;
             }
             // damage enemy and rally audience every tick
-            // TODO: filter mons by ribbon for higher ranks
             ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3));
-            // use party pokemon of the contest's type or the Balanced type to increase the audience bar
-            ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.type(), undefined, undefined, ContestHelper.getPartyPokemonByContestType(ContestRunner.type())));
+            // increase the audience bar
+            ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.type()));
 
             if (!ContestBattle.enemyPokemon().isAlive()) {
                 // increase audience bar based off health, type, and index of defeated pokemon
@@ -39,7 +38,7 @@ class ContestBattle extends Battle {
 
     public static clickAttack() {
         if (ContestRunner.running()) {
-            super.clickAttack();
+            return;
         }
     }
     /**
@@ -83,6 +82,9 @@ class ContestBattle extends Battle {
         ContestBattle.counter = 0;
         ContestBattle.trainer(ContestRunner.getTrainerList()[ContestBattle.trainerIndex()]);
         ContestBattle.enemyPokemon(PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainerIndex(), ContestBattle.pokemonIndex()));
+
+        ContestBattle.enemyPokemon().health(ContestBattle.enemyPokemon().health() * 8 * ContestRunner.rank() * (1 + 0.2 * ContestBattle.trainerStreak()));
+        ContestBattle.enemyPokemon().maxHealth(ContestBattle.enemyPokemon().maxHealth() * 8 * ContestRunner.rank() * (1 + 0.2 * ContestBattle.trainerStreak()));
     }
 
     // Increase and keep track of the amount of trainers defeated

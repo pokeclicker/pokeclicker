@@ -97,11 +97,11 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Tylor', 'Hex Maniac', [new GymPokemon('Misdreavus', 30, 20)]), // Dreavis
         new ContestTrainer('Willie', 'Ninja Boy', [new GymPokemon('Cacnea', 50, 20)]), // Nacac
         new ContestTrainer('Zeek', 'Psychic', [new GymPokemon('Drowzee', 110, 20)], '(male)'), // Drowzin
-        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
-        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
+        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 100, 20)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 100, 20)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
         new ContestTrainer('Ultima', 'Ruin Maniac', [
-            new GymPokemon('Marill', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?')),
-            new GymPokemon('Pikachu', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
+            new GymPokemon('Marill', 100000000, 20, new QuestLineCompletedRequirement('How blu mouse?')),
+            new GymPokemon('Pikachu', 100000000, 20, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
         ], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
     ],
     [ContestRank.Hyper]: [
@@ -143,11 +143,11 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Ronnie', 'Hiker', [new GymPokemon('Lairon', 70, 30)]), // Lairn
         new ContestTrainer('Saul', 'Camper', [new GymPokemon('Seaking', 100, 30)]), // Kingsea
         new ContestTrainer('Selena', 'Madame', [new GymPokemon('Wailmer', 90, 30)]), // Merail
-        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
-        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
+        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 120, 30)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 120, 30)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
         new ContestTrainer('Ultima', 'Ruin Maniac', [
-            new GymPokemon('Marill', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?')),
-            new GymPokemon('Pikachu', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
+            new GymPokemon('Marill', 100000000, 30, new QuestLineCompletedRequirement('How blu mouse?')),
+            new GymPokemon('Pikachu', 100000000, 30, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
         ], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
     ],
     [ContestRank.Master]: [
@@ -187,11 +187,11 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Sasha', 'Twin', [new GymPokemon('Electrode', 80, 40)], 'right frlg'), // Rodlect
         new ContestTrainer('Sergio', 'Dragon Tamer', [new GymPokemon('Dragonite', 60, 40)]), // Drite
         new ContestTrainer('Trey', 'Sailor', [new GymPokemon('Slowking', 60, 40)]), // Slowgo
-        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
-        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 120, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
+        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 120, 40)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 120, 40)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
         new ContestTrainer('Ultima', 'Ruin Maniac', [
-            new GymPokemon('Marill', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?')),
-            new GymPokemon('Pikachu', 100000000, 10, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
+            new GymPokemon('Marill', 100000000, 40, new QuestLineCompletedRequirement('How blu mouse?')),
+            new GymPokemon('Pikachu', 100000000, 40, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
         ], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
     ],
     [ContestRank['Super Normal']]: [],
