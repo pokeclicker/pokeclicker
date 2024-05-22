@@ -31,7 +31,7 @@ class ContestRunner {
         ContestRunner.rank(rank);
         ContestRunner.type(type);
 
-        ContestRunner.maxAudienceAppeal(ContestRunner.rank() * 10000);
+        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal(ContestRunner.rank()) * 80 * Math.pow(ContestRunner.rank(), 2));
         ContestRunner.audienceAppeal(0);
         ContestRunner.audienceAppealPercentage(0);
 

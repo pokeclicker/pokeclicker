@@ -30,6 +30,33 @@ class ContestHelper {
         });
     }
 
+    public static rankAppeal(rank: ContestRank) {
+        switch (rank) {
+            case ContestRank.Practice:
+                return 0;
+            case ContestRank.Normal:
+                return 80;
+            case ContestRank.Super:
+                return 230;
+            case ContestRank.Hyper:
+                return 380;
+            case ContestRank.Master:
+                return 600;
+            case ContestRank['Super Normal']:
+                return 680;
+            case ContestRank['Super Great']:
+                return 830;
+            case ContestRank['Super Ultra']:
+                return 980;
+            case ContestRank['Super Master']:
+                return 1200;
+            case ContestRank.Spectacular:
+                return 1420;
+            case ContestRank['Brilliant Shining']:
+                return 1640;
+        }
+    }
+
     public static pokemonContestAppealObservable: KnockoutComputed<string> = ko.pureComputed(() => {
         if (ContestRunner.running()) {
             const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.type());
