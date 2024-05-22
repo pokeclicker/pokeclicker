@@ -30,7 +30,12 @@ class ContestHelper {
         });
     }
 
-    public static pokemonContestAppealObservable: KnockoutComputed<number> = ko.pureComputed(() => {
-        return ContestHelper.calculatePokemonContestAppeal();
+    public static pokemonContestAppealObservable: KnockoutComputed<string> = ko.pureComputed(() => {
+        if (ContestRunner.running()) {
+            const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.type());
+            return `${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Appeal: ${pokemonAppeal.toLocaleString('en-US')}`;
+        } else {
+            return `Pokémon Appeal: ${ContestHelper.calculatePokemonContestAppeal()}`;
+        }
     }).extend({rateLimit: 1000});
 }
