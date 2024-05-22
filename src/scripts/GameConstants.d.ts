@@ -411,8 +411,8 @@ namespace GameConstants {
     }
     declare enum FluteItemType {
         'Yellow_Flute' = '',
-        'Time_Flute' = '',
         'Black_Flute' = '',
+        'Time_Flute' = '',
         'Red_Flute' = '',
         'White_Flute' = '',
         'Blue_Flute' = '',

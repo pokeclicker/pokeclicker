@@ -22,5 +22,6 @@ Parameters:
     height="<%= (locals.height || 3) * 16 %>"
     width="<%= (locals.width || 3) * 16 %>"
     data-bind="<%= locals.databind %>,
-		playerSpriteMove">
+		playerSpriteMove,
+        event: { mouseenter: () => GameController.showMapTooltip('<%= locals.name.replace(/'/g, '\\\'') %>'), mouseleave: GameController.hideMapTooltip }">
 </rect>

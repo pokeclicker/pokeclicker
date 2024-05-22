@@ -961,8 +961,8 @@ export enum BattleItemType {
 
 export enum FluteItemType {
     'Yellow_Flute' = 'Yellow_Flute',
-    'Time_Flute' = 'Time_Flute',
     'Black_Flute' = 'Black_Flute',
+    'Time_Flute' = 'Time_Flute',
     'Red_Flute' = 'Red_Flute',
     'White_Flute' = 'White_Flute',
     'Blue_Flute' = 'Blue_Flute',
@@ -2489,6 +2489,9 @@ export const ModalCollapseList = [
     'pokemonListBody',
     'shortcutsBody',
     'currencyBody',
+    'undergroundCard',
+    'plotListCard',
+    'zCrystalItemContainerBody',
 ];
 
 export enum ConsumableType {

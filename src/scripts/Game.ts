@@ -70,20 +70,15 @@ class Game {
                 console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
             }
         });
-        saveObject.achievements?.forEach(achName => {
-            const ach = AchievementHandler.findByName(achName);
-            if (ach) {
-                ach.unlocked(true);
-            }
-        });
+
+        AchievementHandler.fromJSON(saveObject.achievements);
     }
 
     initialize() {
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier, GameHelper.enumStrings(GameConstants.BattleItemType).map((name) => ItemList[name]));
-        FluteEffectRunner.initialize(this.multiplier);
-        ItemHandler.initilizeEvoStones();
+        ItemHandler.initializeItems();
         BreedingController.initialize();
         PokedexHelper.initialize();
         this.profile.initialize();
@@ -97,7 +92,11 @@ class Game {
         this.pokeballFilters.initialize();
         this.load();
 
-        // Update if the achievements are already completed
+        // Unlock achievements that have already been completed, avoids renotifying
+        AchievementHandler.preCheckAchievements();
+        // Flute bonuses depend on achievements so should be initialized afterwards
+        // but the bonuses can affect some achievements so we need to recheck them once flutes are online
+        FluteEffectRunner.initialize(this.multiplier);
         AchievementHandler.preCheckAchievements();
 
         // TODO refactor to proper initialization methods

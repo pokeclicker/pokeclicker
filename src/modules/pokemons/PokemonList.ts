@@ -31498,6 +31498,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': -793.01,
         'name': 'You hateful little Trainer!',
+        'nativeRegion': Region.alola,
         'type': [PokemonType.Rock, PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.slow,
