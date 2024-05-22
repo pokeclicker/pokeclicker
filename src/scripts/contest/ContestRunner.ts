@@ -15,6 +15,9 @@ class ContestRunner {
     public static type: KnockoutObservable<ContestType> = ko.observable();
     public static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray([]);
 
+    public static encoreStatus: KnockoutObservable<boolean> = ko.observable(false);
+    public static encoreRounds: KnockoutObservable<number> = ko.observable(0);
+
     // Updated via ContestHall.ts
     public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
     public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([]);
@@ -31,9 +34,12 @@ class ContestRunner {
         ContestRunner.rank(rank);
         ContestRunner.type(type);
 
-        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal(ContestRunner.rank()) * 80 * Math.pow(ContestRunner.rank(), 2));
+        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal(ContestRunner.rank()) * 80 * ContestRunner.rank());
         ContestRunner.audienceAppeal(0);
         ContestRunner.audienceAppealPercentage(0);
+
+        ContestRunner.encoreStatus(false);
+        ContestRunner.encoreRounds(0);
 
         ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
         ContestBattle.trainerIndex(0);
@@ -67,10 +73,12 @@ class ContestRunner {
         if (!ContestRunner.running()) {
             return;
         }
+        // activate encore if doing well enough
+        if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied()) {
+            ContestRunner.encoreStatus(true);
+        }
         if (ContestRunner.timeLeft() < 0) {
             ContestRunner.isRallied() ? ContestRunner.contestWon() : ContestRunner.contestLost();
-            ContestBattle.enemyPokemon(null);
-            ContestBattle.trainer(null);
         }
         ContestRunner.timeLeft(ContestRunner.timeLeft() - GameConstants.CONTEST_TICK);
         ContestRunner.timeLeftPercentage(Math.floor(ContestRunner.timeLeft() / (GameConstants.CONTEST_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
@@ -115,29 +123,71 @@ class ContestRunner {
     public static contestLost() {
         if (ContestRunner.running()) {
             ContestRunner.running(false);
-            Notifier.notify({
-                message: 'You did not have enough appeal to win the crowd over.',
-                type: NotificationConstants.NotificationOption.danger,
-            });
+            if (ContestRunner.encoreRounds() != 0) {
+                // Award some tokens
+                const contestTokenMultiplier = ContestBattle.trainerStreak();
+                const rank = ContestRunner.rank();
+                const tokenReward = Math.floor((rank * 2) + (0.1 * contestTokenMultiplier));
+                App.game.wallet.gainContestTokens(tokenReward);
+                Notifier.notify({
+                    message: `Good job! You got a bonus of ${tokenReward} Contest Tokens!`,
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.General.gym_won,
+                });
+            } else {
+                Notifier.notify({
+                    message: 'You did not have enough appeal to win the crowd over.',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+            }
+            // always end the contest if lost
+            ContestBattle.enemyPokemon(null);
+            ContestBattle.trainer(null);
         }
     }
 
     public static contestWon() {
         if (ContestRunner.running()) {
-            ContestRunner.running(false);
+            // Award tokens after each round
             const contestTokenMultiplier = ContestBattle.trainerStreak();
             const rank = ContestRunner.rank();
             const tokenReward = Math.floor(5 + (rank * 2) + (0.1 * rank * contestTokenMultiplier));
-            // Award money for defeating gym
             App.game.wallet.gainContestTokens(tokenReward);
             Notifier.notify({
-                message: `Congratulations, you won ${tokenReward} Contest Tokens!`,
+                message: `${ContestHelper.encoreWord(ContestRunner.encoreRounds())} You won ${tokenReward} Contest Tokens!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
+
+            if (ContestRunner.encoreStatus() === true && ContestRunner.encoreRounds() < ContestRunner.rank()) {
+                Notifier.notify({
+                    message: 'The crowd cheers for an encore!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.General.gym_won,
+                });
+                // increase encore round
+                ContestRunner.encoreRounds(ContestRunner.encoreRounds() + 1);
+                // reset audience, time, and encore status
+                ContestRunner.audienceAppeal(0);
+                ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());
+                ContestRunner.encoreStatus(false);
+                // increase audience bar (needs updated encore round from above)
+                ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal(ContestRunner.rank()) * 80 * ContestRunner.rank() * 2 * ContestRunner.encoreRounds());
+            } else {
+                // if no bonus round, end the contest
+                ContestRunner.running(false);
+                ContestBattle.enemyPokemon(null);
+                ContestBattle.trainer(null);
+            }
+
             // TODO: reward ribbons to party pokemon based on rank, type, and how high their appeal is
         }
     }
+
+    // Increase and keep track of the amount of trainers defeated
+    public static encoreRoundsComputable: KnockoutComputed<number> = ko.pureComputed(() => {
+        return ContestRunner.encoreRounds();
+    });
 
     public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(ContestRunner.timeLeft() / 100) / 10).toFixed(1);

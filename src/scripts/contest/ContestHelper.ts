@@ -57,6 +57,33 @@ class ContestHelper {
         }
     }
 
+    public static encoreWord(rank: ContestRank) {
+        switch (rank) {
+            case ContestRank.Practice:
+                return 'Congratulations!';
+            case ContestRank.Normal:
+                return 'Nice!';
+            case ContestRank.Super:
+                return 'Super!';
+            case ContestRank.Hyper:
+                return 'Amazing!';
+            case ContestRank.Master:
+                return 'Masterful!';
+            case ContestRank['Super Normal']:
+                return 'Super nice!';
+            case ContestRank['Super Great']:
+                return 'Super great!';
+            case ContestRank['Super Ultra']:
+                return 'Super incredible!';
+            case ContestRank['Super Master']:
+                return 'Superbly masterful!';
+            case ContestRank.Spectacular:
+                return 'Spectacularly stunning!';
+            case ContestRank['Brilliant Shining']:
+                return 'Absolutely dazzling! You\'re a brilliant shining star!';
+        }
+    }
+
     public static pokemonContestAppealObservable: KnockoutComputed<string> = ko.pureComputed(() => {
         if (ContestRunner.running()) {
             const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.type());

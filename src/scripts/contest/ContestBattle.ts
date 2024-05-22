@@ -27,6 +27,7 @@ class ContestBattle extends Battle {
                 ContestRunner.rally(
                     Math.floor(
                         (ContestBattle.enemyPokemon().maxHealth()
+                        * 0.2
                         * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3, ContestRunner.type(), ContestType.None, ContestType.None)
                         * (1 + ContestBattle.pokemonIndex() * 0.2))
                     )
@@ -83,8 +84,10 @@ class ContestBattle extends Battle {
         ContestBattle.trainer(ContestRunner.getTrainerList()[ContestBattle.trainerIndex()]);
         ContestBattle.enemyPokemon(PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainerIndex(), ContestBattle.pokemonIndex()));
 
-        ContestBattle.enemyPokemon().health(ContestBattle.enemyPokemon().health() * 8 * ContestRunner.rank() * (1 + 0.2 * ContestBattle.trainerStreak()));
-        ContestBattle.enemyPokemon().maxHealth(ContestBattle.enemyPokemon().maxHealth() * 8 * ContestRunner.rank() * (1 + 0.2 * ContestBattle.trainerStreak()));
+        // increase the opposing pokemon's hp slightly with each trainer defeated
+        const multiplier = 80 * ContestRunner.rank() * (1 + 0.2 * ContestBattle.trainerStreak());
+        ContestBattle.enemyPokemon().health(ContestBattle.enemyPokemon().health() * multiplier);
+        ContestBattle.enemyPokemon().maxHealth(ContestBattle.enemyPokemon().maxHealth() * multiplier);
     }
 
     // Increase and keep track of the amount of trainers defeated
