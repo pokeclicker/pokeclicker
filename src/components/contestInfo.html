@@ -14,6 +14,7 @@
                 <button data-bind="click: () => {ContestRunner.startContest(rank, type)}">
                     <h5 data-bind="text: `${ContestType[type]}`"></h5>
                     <img data-bind="attr:{ src: ContestHall.getRibbonImage(rank, type)}">
+                    <p data-bind="text: `Appeal: ${ContestHelper.calculatePokemonContestAppeal(type).toLocaleString('en-US')}`"></p>
                     <!-- TODO: flex spacing -->
                   </button>
             </div>
