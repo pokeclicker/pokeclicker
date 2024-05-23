@@ -304,6 +304,9 @@ class GameController {
                 if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
                     const idx = cycle.findIndex(r => r == player.route);
+                    if (idx === -1) {
+                        return e.preventDefault();
+                    }
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                     switch (key) {
                         case '=':
@@ -362,6 +365,9 @@ class GameController {
                     } else if (player.town instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
                         const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
                         const idx = cycle.findIndex(d => d.name == player.town.name);
+                        if (idx === -1) {
+                            return e.preventDefault();
+                        }
                         switch (key) {
                             case '=' :
                             case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
