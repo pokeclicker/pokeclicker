@@ -127,10 +127,6 @@ class Dungeon {
     public isUnlocked(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
         if (!App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket)) {
-            Notifier.notify({
-                message: 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>',
-                type: NotificationConstants.NotificationOption.danger,
-            });
             return false;
         }
         // Player may not meet the requirements to start the dungeon
@@ -10886,8 +10882,8 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     [
         new DungeonBossPokemon('Alolan Raticate', 57978365, 12),
         new DungeonBossPokemon('Gumshoos', 57978365, 12),
-        new DungeonBossPokemon('Totem Raticate', 82543791, 70, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Welcome to paradise, cousin!')])}), //new QuestLineCompletedRequirement('Island Challenge')
-        new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Welcome to paradise, cousin!')])}), //new QuestLineCompletedRequirement('Island Challenge')
+        new DungeonBossPokemon('Totem Raticate', 82543791, 70, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!')])}), //new QuestLineCompletedRequirement('Island Challenge')
+        new DungeonBossPokemon('Totem Gumshoos', 82543791, 70, {hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Champion_Stamp), new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!')])}), //new QuestLineCompletedRequirement('Island Challenge')
         new DungeonTrainer('Trial Site',
             [
                 new GymPokemon('Yungoos', 23191346, 10, new OneFromManyRequirement([
@@ -10907,7 +10903,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
                     new DayCyclePartRequirement([3]),
                 ])),
             ],
-            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'),
+            { hide: true, weight: 10, requirement: new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 5, GameConstants.AchievementOption.less) }, 'of Verdant Cavern'),
     ],
     805000, 2);
 
@@ -11005,7 +11001,7 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
                 new GymPokemon('Rockruff', 23795642, 30, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))),
                 new GymPokemon('Hakamo-o', 35693463, 36, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))),
             ],
-            { hide: true, weight: 10, requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),
+            { hide: true, weight: 10, requirement: new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!', GameConstants.AchievementOption.less) }, 'of Ten Carat Hill'),
     ],
     835000, 3);
 
@@ -11766,7 +11762,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Claydol', 26032803, 44),
                 new GymPokemon('Bruxish', 26032803, 44),
                 new GymPokemon('Hypno', 26032803, 44),
-                new GymPokemon('You hateful little Trainer!', 26032803, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), false),
+                new GymPokemon('You hateful little Trainer!', 26032803, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), true),
             ],
             { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9) }, 'Faba', '(faba)'),
         new DungeonTrainer('Team Skull Boss',
@@ -11775,7 +11771,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Vikavolt', 19524602, 45),
                 new GymPokemon('Masquerain', 19524602, 45),
                 new GymPokemon('Pinsir', 19524602, 45),
-                new GymPokemon('You hateful little Trainer!', 19524602, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), true),
+                new GymPokemon('You hateful little Trainer!', 19524602, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), false),
             ],
             { weight: 2.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 10) }, 'Guzma', '(guzma)'),
         new DungeonTrainer('Aether President',

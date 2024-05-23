@@ -27,10 +27,11 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import QuestItem from './QuestItem';
-import Consumable from './Consumable';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
+import { pokemonMap } from '../pokemons/PokemonList';
+import AttackGainConsumable from './AttackGainConsumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -38,7 +39,7 @@ ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '+50% Bonus to
 ItemList.xClick          = new BattleItem(BattleItemType.xClick, '+50% Bonus to click attack for 30 seconds', 400, undefined, 'X Click', 'clickAttack', 1.5);
 ItemList.Lucky_egg       = new BattleItem(BattleItemType.Lucky_egg, '+50% Bonus to experience gained for 30 seconds', 800, undefined, 'Lucky Egg', 'exp', 1.5);
 ItemList.Token_collector = new BattleItem(BattleItemType.Token_collector, '+50% Bonus to Dungeon Tokens gained for 30 seconds', 1000, undefined, 'Token Collector', 'dungeonToken', 1.5);
-ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increased chance of gaining extra items for 30 seconds', 1500, undefined, 'Dowsing Machine');
+ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increases chance for Pokémon to drop rare hold items; chance to multiply loot from dungeon chests, for 30 seconds.', 1500, undefined, 'Dowsing Machine');
 ItemList.Lucky_incense   = new BattleItem(BattleItemType.Lucky_incense, '+50% Bonus to Pokédollars gained for 30 seconds', 2000, undefined, 'Lucky Incense', 'money', 1.5);
 
 ItemList.ChopleBerry     = new BerryItem(BerryType.Chople, 10000, Currency.farmPoint, BerryType.Spelon);
@@ -60,8 +61,8 @@ ItemList.Explosive_Charge = new BuyOakItem(OakItemType.Explosive_Charge, 5000, C
 ItemList.Treasure_Scanner = new BuyOakItem(OakItemType.Treasure_Scanner, 10000, Currency.questPoint);
 
 ItemList.Yellow_Flute = new FluteItem(FluteItemType.Yellow_Flute, 'Pokémon Attack', ['Grass', 'Flying', 'Electric'], 'pokemonAttack', 1.02);
-ItemList.Time_Flute   = new FluteItem(FluteItemType.Time_Flute, 'Gym and Dungeon Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
 ItemList.Black_Flute  = new FluteItem(FluteItemType.Black_Flute, 'Click Attack', ['Dark', 'Psychic', 'Fighting'], 'clickAttack', 1.02);
+ItemList.Time_Flute   = new FluteItem(FluteItemType.Time_Flute, 'Gym and Dungeon Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
 ItemList.Red_Flute    = new FluteItem(FluteItemType.Red_Flute, 'Egg Steps', ['Fire', 'Rock', 'Dragon'], 'eggStep', 1.02);
 ItemList.White_Flute  = new FluteItem(FluteItemType.White_Flute, 'Shiny Chance', ['Normal', 'Fairy', 'Ice'], 'shiny', 1.02);
 ItemList.Blue_Flute   = new FluteItem(FluteItemType.Blue_Flute, 'EV Yield', ['Water', 'Bug', 'Ghost'], 'ev', 1.02);
@@ -219,7 +220,7 @@ ItemList.Water_Memory_Silvally = new QuestItem('Water_Memory_Silvally', 'Water M
 ItemList.Grass_Memory_Silvally = new QuestItem('Grass_Memory_Silvally', 'Grass Memory', 'One of Silvally\'s memories, obtained from Captain Mallow in Lush Jungle', 'Typing some Memories', 'Typing some Memories', 125000, Currency.questPoint);
 ItemList.Fire_Memory_Silvally = new QuestItem('Fire_Memory_Silvally', 'Fire Memory', 'One of Silvally\'s memories, obtained from Captain Kiawe in Wela Volcano Park', 'Typing some Memories', 'Typing some Memories', 75000, Currency.battlePoint);
 ItemList.Electric_Memory_Silvally = new QuestItem('Electric_Memory_Silvally', 'Electric Memory', 'One of Silvally\'s memories, obtained from Captain Sophocles in Hokulani Observatory', 'Typing some Memories', 'Typing some Memories', 500000000, Currency.money);
-ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 'Typing some Memories', 5000, Currency.diamond);
+ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 'Typing some Memories', 1000, Currency.diamond);
 ItemList.Ground_Memory_Silvally = new QuestItem('Ground_Memory_Silvally', 'Ground Memory', 'One of Silvally\'s memories, obtained from Kahuna Hapu on Exeggutor Island Hill', 'Typing some Memories', 'Typing some Memories', 200000, Currency.farmPoint);
 ItemList.Bug_Memory_Silvally = new QuestItem('Bug_Memory_Silvally', 'Bug Memory', 'One of Silvally\'s memories, obtained from Guzma in Po Town', 'Typing some Memories');
 ItemList.Flying_Memory_Silvally = new QuestItem('Flying_Memory_Silvally', 'Flying Memory', 'One of Silvally\'s memories, obtained from Kahili on Ten Carat Hill', 'Typing some Memories');
@@ -253,7 +254,8 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 }, undefined, 'Reduces steps required when hatching');
 
 // Consumables
-ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+ItemList.Rare_Candy = new AttackGainConsumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, undefined, 'Strengthen your Magikarp', 6, (pokemon) => Math.floor(pokemon.id) === pokemonMap.Magikarp.id);
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
@@ -346,14 +348,14 @@ ItemList['Pinkan Electabuzz']  = new PokemonItem('Pinkan Electabuzz');
 ItemList.Jynx                 = new PokemonItem('Jynx', 2000);
 ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money, true);
 ItemList['Magikarp Brown Stripes'] = new PokemonItem('Magikarp Brown Stripes', 100);
-ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 10000, Currency.diamond);
+ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 2000, Currency.diamond);
 ItemList['Magikarp Saucy Violet'] = new PokemonItem('Magikarp Saucy Violet', 7500000000, Currency.money);
 ItemList['Probably Feebas']   = new PokemonItem('Magikarp (Feebas)', 5999, Currency.battlePoint, false, 'Probably Feebas');
 ItemList.Eevee                = new PokemonItem('Eevee', 4000);
 ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 // Hoenn
-ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 1187, Currency.diamond, false, 'Probably Chimecho');
+ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 358, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 // Sinnoh
 ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)');
@@ -366,7 +368,7 @@ ItemList.Zorua                = new PokemonItem('Zorua', 50625);
 ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 200000);
 // Kalos
 ItemList['Furfrou (Debutante)']  = new PokemonItem('Furfrou (Debutante)', 5000000000, Currency.money);
-ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 15000, Currency.diamond);
+ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 3000, Currency.diamond);
 ItemList['Furfrou (Matron)']     = new PokemonItem('Furfrou (Matron)', 1500000, Currency.farmPoint);
 ItemList['Furfrou (Dandy)']      = new PokemonItem('Furfrou (Dandy)', 250000);
 ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Currency.battlePoint);

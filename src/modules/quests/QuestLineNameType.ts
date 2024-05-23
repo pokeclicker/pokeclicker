@@ -46,7 +46,7 @@ export type QuestLineNameType
     | 'Princess Diancie'
     | 'Clash of Ages'
     | 'An Unrivaled Power'
-    | 'Welcome to paradise, cousin!'
+    | 'Welcome to Paradise, Cousin!'
     | 'Symbiotic Relations'
     | 'Child of the Stars'
     | 'Emissary of Light'

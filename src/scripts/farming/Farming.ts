@@ -2131,7 +2131,7 @@ class Farming implements Feature {
     }
 
     canAccess(): boolean {
-        return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Wailmer_pail);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Wailmer_pail);
     }
 
     unlockBerry(berry: BerryType) {

@@ -47,7 +47,7 @@ const pokeLeagueShop = () => new Shop([
     new PokeballItem(GameConstants.Pokeball.Masterball, 75000   , GameConstants.Currency.dungeonToken, { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.dungeonToken]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 50      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 10      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
     ItemList.Protein,
     // TODO VITAMINS: Move these to different shops?
     ItemList.Calcium,
@@ -793,10 +793,6 @@ const NewIslandAsh2 = new NPC('Ash Ketchum',
     }
 );
 
-const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
-    'All sorts of unique Pokémon can be found in the Safari Zone!',
-], GameConstants.Region.kanto, 'assets/images/npcs/Pokémon Breeder (male).png');
-
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
     'But... I don\'t have a high enough Safari Level to find it.',
@@ -1017,7 +1013,7 @@ TownList['Safari Zone'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket)), 1, 'Obtain the Safari Ticket')],
-        npcs: [KantoSafariRanger, BugCatcherPinsir],
+        npcs: [BugCatcherPinsir],
     }
 );
 TownList['Cinnabar Island'] = new Town(
@@ -3374,7 +3370,8 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
+    [DepartmentStoreShop],
+    //[new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -4139,10 +4136,6 @@ const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
     'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
 ]);
 
-const SinnohSafariRanger = new SafariPokemonNPC('Safari Ranger', [
-    'There are some Pokémon here that can\'t be found anywhere else in Sinnoh!',
-], GameConstants.Region.sinnoh, 'assets/images/npcs/Pokemon Ranger (female).png');
-
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
 ]);
@@ -4192,6 +4185,11 @@ const ValorAzelf = new NPC('Azelf', [
 const SnowpointYoungGirl = new NPC('Young Girl', [
     'Someone told me that training an Eevee in Lake Acuity will make it evolve.',
     'They must be lying, how can that be true?!',
+]);
+
+const MindyFriend = new NPC('Mindy\'s Friend', [
+    'I recently traded with my friend Mindy expecting to get a Gengar. Instead, her Haunter came with this useless rock! I can\'t believe she would do this to me!',
+    'Here, you can have MINDY\'S-GIFT for all I care! I pity whoever decides to trade with her in the future.',
 ]);
 
 const AcuityUxie = new NPC('Uxie', [
@@ -4600,7 +4598,7 @@ TownList['Great Marsh'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
-        npcs: [SinnohSafariRanger],
+        npcs: [],
     }
 );
 TownList['Snowpoint City'] = new Town(
@@ -4610,7 +4608,7 @@ TownList['Snowpoint City'] = new Town(
     [SnowpointCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Snowpoint City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217)],
-        npcs: [SnowpointYoungGirl],
+        npcs: [SnowpointYoungGirl, MindyFriend],
     }
 );
 TownList['Secret Berry Shop'] = new Town(
@@ -5159,15 +5157,15 @@ const UnovaFossilNpc = new NPC('Friendly Waitress', [
 // Swords of Justice Quest Npcs
 const OldManSwords = new NPC('Old Man', [
     'Hello kiddo. You must be $playername$, nice to meet you.',
-    'You might\'ve heard about the Swords of Justice. They seem to be really worried recently and that also worries me, but you seem to be a really nice lad so I\'ll tell you how to find their leader, Cobalion.',
-    'They usually lurk around the deepest layers of Mistralton Cave so you might be able to find them by exploring around here.',
+    'You might\'ve heard about the Swords of Justice. They seem to be really worried recently and that also worries me, but you seem to be a really nice fellow so I\'ll tell you how to find their leader, Cobalion.',
+    'It usually lurks around the deepest layers of Mistralton Cave so you might be able to find it by exploring around here.',
 ], {
     image: 'assets/images/npcs/Old Man.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Swords of Justice'), new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.less)]),
 });
 const Cobalion1 = new NPC('Cobalion', [
     'Greetings, may I ask who are you? Oh, you\'re a friend of the Old Man? That\'s great, and he sent you here to find me, I assume.',
-    'Well, since he said for you to find me, there must be a reason. Unless you\'re here to help me reform the Swords of Justice? If so, then thank you for your aid. Meet me in the Moor of Icirrus after you find them. You should look for Terrakion first, they usually stay in the depths of the Unova Victory Road. Good luck, Trainer.',
+    'Well, since he told you to find me, there must be a reason. Unless you\'re here to help me re-form the Swords of Justice? If so, then thank you for your aid. Meet me in the Moor of Icirrus after you find them. You should look for Terrakion first, somewhere in the depths of the Unova Victory Road. Good luck, Trainer.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.less)]),
@@ -5181,27 +5179,27 @@ const Terrakion1 = new NPC('Terrakion', [
 });
 const Cobalion2 = new NPC('Cobalion', [
     'Thank you, $playername$. Your assistance with reuniting the Swords of Justice is greatly appreciated.',
-    'Now that you\'ve found and brought back Terrakion you should probably look for Virizion. They usually like to meditate to the sound of nature, so Pinwheel Forest might be a good place to search for them. Good luck, and report back once you\'ve found them.',
+    'Now that you\'ve found and brought back Terrakion you should probably look for Virizion. Virizion usually likes to meditate to the sound of nature, so Pinwheel Forest might be a good place to search in. Good luck, and report back once you\'ve found each other.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.less)]),
 });
 const Virizion1 = new NPC('Virizion', [
-    'Hello, who are you, may I ask? You say you were sent here by Cobalion because he wants to reunite the Swords of Justice? I\'m sorry dear, you\'ll have to create a much more believable lie to deceive me. I\'m not so easily fooled.',
+    'Hello, who are you, may I ask? You say you were sent here by Cobalion to reunite the Swords of Justice? I\'m sorry dear, you\'ll have to create a much more believable lie to deceive me. I\'m not so easily fooled.',
     'To earn my trust, you need to prove your patience to me. If you can gather 5,000 Grass Gems and bring them to me, then I\'ll trust your word. If you cannot handle such a task, do not return.',
 ], {
     image: 'assets/images/pokemon/640.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 9, GameConstants.AchievementOption.less)]),
 });
 const Virizion2 = new NPC('Virizion', [
-    'Oh, you\'re back? And you\'ve brought the 5,000 Grass Gems. I\'m impressed. Very well, you\'ve earned my trust. So, Cobalion wants me to meet them at the Moor of Icirrus to reunite the Swords of Justice? Sounds just like the old Cobalion I remember. I\'ll make my way there now, you should come too. I\'m sure your assistance is still desired.',
+    'Oh, you\'re back? And you\'ve brought the 5,000 Grass Gems. I\'m impressed. Very well, you\'ve earned my trust. So, Cobalion wants us to meet at the Moor of Icirrus to reunite the Swords of Justice? Sounds just like the old Cobalion I remember. I\'ll make my way there now, you should come too. I\'m sure your assistance is still desired.',
 ], {
     image: 'assets/images/pokemon/640.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 9, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.less)]),
 });
 const Cobalion3 = new NPC('Cobalion', [
     'Welcome back, $playername$! I can see you\'ve brought back Virizion, thank you for your assistance towards reuniting the Swords of Justice.',
-    'Now, let\'s discuss the plan. Wait, you want to help too? You should know this will be a very dangerous mission, $playername$. We may not be able to fully protect you from the dangers we may face. The only way we can be sure of your safety is if you can hold your own against all three of us in battle. If you succeed, we will happily accept your assistance, but should you fail, then I apologise, but we cannot allow you to join the mission. What say you? Shall we spar?',
+    'Now, let\'s discuss the plan. Wait, you want to help too? You should know this will be a very dangerous mission, $playername$. We may not be able to fully protect you from the dangers we may face. The only way we can be sure of your safety is if you can hold your own against all three of us in battle. If you succeed, we will happily accept your assistance, but should you fail, then I apologise, but we cannot allow you to join the mission. What say you? Shall we spar?',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 10, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 12, GameConstants.AchievementOption.less)]),
@@ -5213,7 +5211,7 @@ const Cobalion4 = new NPC('Cobalion', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 13, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.less)]),
 });
 const Cobalion5 = new NPC('Cobalion', [
-    'Hey, $playername$. It\'s not your fault Kyurem fled, but I\'m thinking they should probably gone into hiding. We should search the Giant Chasm for their lair at once.',
+    'Hey, $playername$. It\'s not your fault Kyurem fled, but I\'m thinking it has probably gone into hiding. We should search the Giant Chasm for its lair at once.',
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 17, GameConstants.AchievementOption.less)]),
@@ -5231,7 +5229,7 @@ const Cobalion7 = new NPC('Cobalion', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
 });
 const Terrakion2 = new NPC('Terrakion', [
-    'Hey, you were a really great partner! It was really nice doing this mission with you, and you seem like a strong trainer, so if you want me to join your team, I\'ll be waiting in the Victory Road!',
+    'Hey, you were a really great partner! It was really nice doing this mission with you, and you seem like a strong trainer, so if you want me to join your team, I\'ll be waiting at Victory Road!',
 ], {
     image: 'assets/images/pokemon/639.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 20, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Swords of Justice', GameConstants.AchievementOption.less)]),
@@ -5680,7 +5678,7 @@ TownList['Giant Chasm'] = new DungeonTown(
     ],
     [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3']],
     {
-        npcs: [Cobalion6, Cobalion7, Virizion3, Terrakion2],
+        npcs: [Cobalion6, Cobalion7, Terrakion2, Virizion3],
     }
 );
 TownList['Cave of Being'] = new DungeonTown(
@@ -6328,17 +6326,12 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     ]),
 });
 
-const KalosSafariRanger = new SafariPokemonNPC('Safari Ranger', [
-    'We\'ve had sightings of several unique Pokémon today along with the usual familiar faces!',
-    'These Pokémon will hide from trainers unless captured elsewhere first.',
-], GameConstants.Region.kalos, 'assets/images/npcs/Pokemon Ranger (female).png');
-
 const FriendlyAttendant = new NPC('Friendly Attendant', [
     'Welcome to the Friend Safari!',
     'This place is a lot like the Kanto Safari Zone, except we get a much wider variety of Pokémon coming through here.',
     'Our park staff stocks the Safari with different hard-to-find Pokémon every day. Many of these Pokémon can\'t be caught anywhere else in the world!',
     'As new and rare types of Pokémon are discovered, park staff will add them to our rotation of potential stock!',
-]);
+], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
 
 const BugCatcherScizor = new NPC('Bug Catcher Elliot', [
     'I heard there was a stone hidden in the Friend Safari that makes Scizor stronger!',
@@ -6565,7 +6558,7 @@ TownList['Friend Safari'] = new Town(
     [new SafariTownContent('Enter Friend Safari')],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [KalosSafariRanger, FriendlyAttendant, BugCatcherScizor],
+        npcs: [FriendlyAttendant, BugCatcherScizor],
     }
 );
 
@@ -6866,7 +6859,7 @@ const TrainerSchoolTeacher = new NPC('Teacher Emily', [
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
-    'After completing all of an island\'s trials, you will battle that island\'s Kahuna in a Grand trial.',
+    'After completing all of an island\'s trials, you will battle that island\'s kahuna in a Grand trial.',
     'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern, below the Melemele Woods. Come back here after clearing that challenge for your Grand trial battle.',
 ], {
     image: 'assets/images/npcs/Hala.png',
@@ -6882,13 +6875,13 @@ const LagunaKahuna = new NPC('Kahuna Hala', [
     'Dooot doo doo, just a kahuna on a stroll to the laguna. ♪',
 ], {
     image: 'assets/images/npcs/Hala.png',
-    requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!'),
+    requirement: new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!'),
 });
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
     'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
-    'Or go to Konikoni City down south. You might even meet our Kahuna there!',
+    'Or go to Konikoni City down south. You might even meet our kahuna there!',
 ], {image: 'assets/images/npcs/Owner.png'});
 const ProfBurnetAlola2 = new NPC('Professor Burnet', [
     'Long ago, Cosmog was called the child of the stars. Its powers seem to have some connection with Ultra Wormholes.',
@@ -6974,7 +6967,7 @@ const SeafolkCaptain = new NPC('Mina', [
     requirement: new QuestLineStepCompletedRequirement('Eater of Light', 0, GameConstants.AchievementOption.less),
 });
 const SeafolkCaptainMina = new NPC('Captain Mina', [
-    'My trial is in this town. Right there, inside my very own houseboat. Normally you\'d have to clear my trial to find our Kahuna on Exeggutor Island, but I guess you took care of some things, huh?',
+    'My trial is in this town. Right there, inside my very own houseboat. Normally you\'d have to clear my trial to find our kahuna on Exeggutor Island, but I guess you took care of some things, huh?',
     'Well, in that case, I\'d better add a little something more. This is the final trial of your island challenge, after all. I hope you\'re ready for your toughest opponents yet!',
 ], {
     image: 'assets/images/npcs/Mina.png',
@@ -6997,7 +6990,7 @@ const LanakilaColress = new NPC('Colress', [
 const ReconSquadAltar = new NPC('Ultra Recon Squad', [
     'Care for a Poipole? It only costs a few thousand Quest Points!',
 ], {
-    image: 'assets/images/npcs/specialNPCS/Ultra Recon Squad (all).png',
+    image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
     requirement: new QuestLineStepCompletedRequirement('Eater of Light', 0),
 });
 
@@ -7019,21 +7012,21 @@ const Lillie1 = new NPC('Mysterious Girl', [
     'So you will be taking part in the festival battle? I\'ll be sure to watch you and Hau.',
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 1, GameConstants.AchievementOption.less)]),
 });
 const Lillie2 = new NPC('Return Nebby to Lillie', [
     'Nebby! Oh thank goodness you\'re safe. Thank you $playername$, let me heal your Poké- No? Um, very well then.',
     'It seems Hau is outside on Route 3. Are you two having another battle?',
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 8), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 9, GameConstants.AchievementOption.less)]),
 });
 const Lillie3 = new NPC('Lillie', [
     'Nebby is... Its real home is far away from here. And I want to help it get home. Thank you for helping me. The two of us will be heading to the next island as well!',
     'Oh, and here, $playername$. Some Revives. It\'s the least I can do after all the running around I\'ve made you do.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 9), new QuestLineCompletedRequirement('Welcome to Paradise, Cousin!', GameConstants.AchievementOption.less)]),
 });
 const Lillie4 = new NPC('Meet with Lillie', [
     'I think Nebby might be interested in visiting the Ruins of Life. Apparently they house the sacred guardian of Akala Island. I wondered if you\'d like to come with us when we go to visit the ruins. I\'ll be here if you decide you want to come.',
@@ -7044,7 +7037,7 @@ const Lillie4 = new NPC('Meet with Lillie', [
 });
 const ProfBurnetAlola1 = new NPC('Talk to Professor Burnet', [
     'Nebby\'s Pokémon species, Cosmog, used to be known as the child of the stars. Its modern name was coined by a researcher in Aether Paradise!',
-    'Oh, where are my manners! Hi there! Have some Dream Orbs! I\'m Burnet, a professor who researches Ultra Wormholes. They sometimes appear in the skies of Alola and give off similar signals to Cosmog\'s powers.',
+    'Oh, where are my manners! Hi there! Have some Rare Candies! I\'m Burnet, a professor who researches Ultra Wormholes. They sometimes appear in the skies of Alola and give off similar signals to Cosmog\'s powers.',
     'Legends of Pokémon appearing from the Ultra Wormhole also exist and are called Ultra Beasts, but it\'s all legends and folktales. It\'s hard to know how much is true.',
 ], {
     image: 'assets/images/npcs/Professor Burnet (gen7).png',
@@ -7097,7 +7090,7 @@ const MoonFlute = new NPC('Play the Moon Flute', [
 });
 const Lillie7 = new NPC('Lillie', [
     'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
-    'And thank you too, $playername$! You\'ve helped gain so much confidence in myself. I am very grateful for that. I was able to achieve things I had never dreamed I could... Getting to meet you, traveling together with you... I\'m so glad I got to part of your journey!',
+    'And thank you too, $playername$! You\'ve helped me gain so much confidence in myself. I am very grateful for that. I was able to achieve things I had never dreamed I could... Getting to meet you, traveling together with you... I\'m so glad I got to be part of your journey!',
     'Wait- what is this darkness in the sky? Oh my goodness! $playername$! In the sky! Another Ultra Wormhole!',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
@@ -7105,7 +7098,7 @@ const Lillie7 = new NPC('Lillie', [
 });
 const Lillie8 = new NPC('Talk to Lillie', [
     'I...I\'ve been wanting to thank you for saving Nebby that day. Back then I was so desperate... It hasn\'t all been easy... but I\'m really glad that I came to Alola! I\'ve decided I\'m going to become a real Trainer and meet all kinds of wonderful Pokémon!',
-    'I\'m going to go back to Aether Paradise for a bit with to help my mother recover. I need to see for myself that she\'ll be all right, but before that... $playername$! Won\'t you have a battle with me?',
+    'I\'m going to go back to Aether Paradise for a bit to help my mother recover. I need to see for myself that she\'ll be all right, but before that... $playername$! Won\'t you have a battle with me?',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 0), new QuestLineStepCompletedRequirement('Eater of Light', 2, GameConstants.AchievementOption.less)]),
@@ -7132,14 +7125,14 @@ const LillieMahaloTrail1 = new NPC('Mysterious Girl', [
     'H-help... Save Nebby!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Welcome to paradise, cousin!'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Welcome to Paradise, Cousin!'), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 0, GameConstants.AchievementOption.less)]),
 });
 const LillieMahaloTrail2 = new NPC('Lillie', [
     'Please... Don\'t tell anyone about this... About seeing Nebby... It\'s...it\'s a secret, OK?',
     'I work as Professor Kukui\'s assistant. He\'s told me to show you around the island, so come along now.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 2, GameConstants.AchievementOption.less)]),
 });
 const LillieMelemeleMeadow1 = new NPC('Lillie', [
     'Nebby! Nebby, come back!',
@@ -7147,13 +7140,13 @@ const LillieMelemeleMeadow1 = new NPC('Lillie', [
     'Nebby ran off into the meadow here... What if a wild Pokémon attacks it? It doesn\'t have any moves it can use to battle!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 5), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 8, GameConstants.AchievementOption.less)]),
 });
 const LillieMelemeleMeadow2 = new NPC('Lillie', [
     'Hello, $playername$. Are you done with your battle against Hau on Route 3? We should all head back to Iki Town, now.',
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 9), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 9), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 10, GameConstants.AchievementOption.less)]),
 });
 const LillieHeahea = new NPC('Lillie', [
     'Professor Burnet has been so kind, and she\'s helping me try to find a way to get Nebby back to its own home... She\'s been like...like a real mother to me.',
@@ -7208,7 +7201,7 @@ const LillieAltar1 = new NPC('Prepare with Lillie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 6), new QuestLineStepCompletedRequirement('Emissary of Light', 7, GameConstants.AchievementOption.less)]),
 });
 const LillieAltar2 = new NPC('Lillie', [
-    'Necrozma... It seems like it is also suffering somehow... It seemes to hurt it, to be without its light...',
+    'Necrozma... It seems like it is also suffering somehow... It seems to hurt it, to be without its light...',
     '$playername$! Please help Nebby for me! But also... if you can... try to help Necrozma, like you did mother.',
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
@@ -8186,7 +8179,7 @@ TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
+    [new QuestLineStartedRequirement('Welcome to Paradise, Cousin!')],
     [TemporaryBattleList['Melemele Spearow']],
     {
         npcs: [Lillie1, LillieMahaloTrail1, LillieMahaloTrail2],
