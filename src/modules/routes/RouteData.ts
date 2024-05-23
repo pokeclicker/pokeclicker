@@ -1787,7 +1787,11 @@ Routes.add(new RegionRoute(
     'Alola Route 2', Region.alola, 2,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Spearow', 'Ekans', 'Alolan Meowth', 'Growlithe', 'Abra', 'Drowzee', 'Smeargle', 'Makuhita', 'Furfrou', 'Yungoos', 'Cutiefly'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Bulbasaur'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday)),
+            new SpecialRoutePokemon(['Chikorita'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday)),
+        ],
     }),
     [new TemporaryBattleRequirement('Ilima')],
     undefined,
@@ -1797,7 +1801,11 @@ Routes.add(new RegionRoute(
     'Alola Route 3', Region.alola, 3,
     new RoutePokemon({
         land: ['Spearow', 'Mankey', 'Bagon', 'Rufflet', 'Vullaby', 'Hawlucha', 'Cutiefly'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Charmander'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Sunday)),
+            new SpecialRoutePokemon(['Cyndaquil'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Sunday)),
+        ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Verdant Cavern'))],
     undefined,
@@ -1818,7 +1826,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Yungoos'],
         water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Shelgon', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Horsea'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Wednesday)),
+        ],
 
     }),
     [
@@ -1832,7 +1843,11 @@ Routes.add(new RegionRoute(
     'Alola Route 4', Region.alola, 4,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Beedrill'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Thursday)),
+            new SpecialRoutePokemon(['Venipede'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Thursday)),
+        ],
     }),
     [new QuestLineStepCompletedRequirement('Symbiotic Relations', 0)],
     undefined,
@@ -1842,7 +1857,11 @@ Routes.add(new RegionRoute(
     'Alola Route 5', Region.alola, 5,
     new RoutePokemon({
         land: ['Caterpie', 'Metapod', 'Butterfree', 'Bonsly', 'Lillipup', 'Pikipek', 'Trumbeak', 'Grubbin', 'Fomantis'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Bellsprout'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday)),
+            new SpecialRoutePokemon(['Grovyle'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday)),
+        ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Paniola Ranch'))],
     undefined,
@@ -1852,7 +1871,11 @@ Routes.add(new RegionRoute(
     'Alola Route 6', Region.alola, 6,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Ralts'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Sunday)),
+            new SpecialRoutePokemon(['Gothita'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Sunday)),
+        ],
     }),
     [new TemporaryBattleRequirement('Recon Squad 2')],
     undefined,
@@ -1862,7 +1885,10 @@ Routes.add(new RegionRoute(
     'Alola Route 7', Region.alola, 7,
     new RoutePokemon({
         water: ['Tentacool', 'Staryu', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)', 'Pyukumuku'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Spheal'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Monday)),
+        ],
     }),
     [new TemporaryBattleRequirement('Battle Royal')],
     undefined,
@@ -1878,6 +1904,8 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Salandit'], new ObtainedPokemonRequirement('Salandit')),
             new SpecialRoutePokemon(['Wimpod'], new ObtainedPokemonRequirement('Wimpod')),
+            new SpecialRoutePokemon(['Combusken'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Tuesday)),
+            new SpecialRoutePokemon(['Luxio'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Tuesday)),
         ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Wela Volcano Park'))],
@@ -1899,7 +1927,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Raticate', 'Natu', 'Wingull', 'Nosepass', 'Gumshoos', 'Stufful'],
         water: ['Magikarp', 'Chinchou', 'Wishiwashi (Solo)'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Honedge'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Wednesday)),
+        ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Memorial Hill'))],
     9.1,
@@ -1908,8 +1939,12 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 10', Region.alola, 10,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Fearow', 'Ledian', 'Ariados', 'Skarmory', 'Pancham', 'Gumshoos', 'Pidgeot'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        land: ['Alolan Raticate', 'Fearow', 'Ledian', 'Ariados', 'Skarmory', 'Pancham', 'Gumshoos'],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Pidgeot'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Thursday)),
+            new SpecialRoutePokemon(['Staravia'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Thursday)),
+        ],
     }),
     [new TemporaryBattleRequirement('Hau 5')],
     undefined,
@@ -1919,7 +1954,10 @@ Routes.add(new RegionRoute(
     'Mount Hokulani', Region.alola, 22,
     new RoutePokemon({
         land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Axew'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Sunday)),
+        ],
     }),
     [
         new RouteKillRequirement(10, Region.alola, 10),
@@ -1936,6 +1974,8 @@ Routes.add(new RegionRoute(
         [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Shiinotic'], new ObtainedPokemonRequirement('Shiinotic')),
+            new SpecialRoutePokemon(['Vigoroth'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday)),
+            new SpecialRoutePokemon(['Monferno'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday)),
         ],
     }),
     [new TemporaryBattleRequirement('Hau 5')],
@@ -2003,7 +2043,11 @@ Routes.add(new RegionRoute(
     'Alola Route 16', Region.alola, 16,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Scraggy', 'Gumshoos'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Prinplup'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Tuesday)),
+            new SpecialRoutePokemon(['Duosion'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Tuesday)),
+        ],
     }),
     [new TemporaryBattleRequirement('Plumeria 2')],
     undefined,
@@ -2026,7 +2070,11 @@ Routes.add(new RegionRoute(
     'Poni Wilds', Region.alola, 24,
     new RoutePokemon({
         land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Samurott'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday)),
+            new SpecialRoutePokemon(['Greninja'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Friday)),
+        ],
     }),
     [new QuestLineStartedRequirement('Emissary of Light')],
     undefined,
@@ -2036,7 +2084,11 @@ Routes.add(new RegionRoute(
     'Ancient Poni Path', Region.alola, 25,
     new RoutePokemon({
         land: ['Granbull', 'Pelipper', 'Gastrodon (East)', 'Furfrou', 'Inkay'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Emboar'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Saturday)),
+            new SpecialRoutePokemon(['Delphox'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Saturday)),
+        ],
     }),
     [new RouteKillRequirement(10, Region.alola, 24)],
     undefined,
@@ -2063,6 +2115,7 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Blacephalon'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 15)),
             new SpecialRoutePokemon(['Stakataka'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 15)),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Eelektross'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Sunday)),
         ],
     }),
     [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
@@ -2073,7 +2126,11 @@ Routes.add(new RegionRoute(
     'Poni Plains', Region.alola, 28,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Fearow', 'Hypno', 'Tauros', 'Miltank', 'Pelipper', 'Hariyama', 'Ambipom', 'Cottonee', 'Petilil', 'Trumbeak', 'Toucannon', 'Gumshoos', 'Mudsdale', 'Pyroar'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Aggron'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Monday)),
+            new SpecialRoutePokemon(['Conkeldurr'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Monday)),
+        ],
 
     }),
     [new RouteKillRequirement(10, Region.alola, 27)],
@@ -2095,7 +2152,11 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pelipper', 'Lickitung', 'Golduck', 'Granbull', 'Inkay', 'Bewear'],
         water: ['Magikarp', 'Dratini', 'Dragonair', 'Barboach'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Togekiss'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Tuesday)),
+            new SpecialRoutePokemon(['Rotom'], new DayOfWeekRequirement(GameConstants.DayOfWeek.Tuesday)),
+        ],
 
     }),
     [new RouteKillRequirement(10, Region.alola, 29)],
@@ -2712,7 +2773,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Drilbur'], new WeatherRequirement([WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Bonsly', 'Dwebble', 'Rhyhorn', 'Shuckle'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Hatenna', 'Munna', 'Nickit', 'Thievul', 'Dottler', 'Togetic'], new WeatherRequirement([WeatherType.Fog])),
-          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Thunderstorm])])),        
+          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Thunderstorm])])),
       ],
     }),
     [new RouteKillRequirement(10, Region.galar, 17)],
