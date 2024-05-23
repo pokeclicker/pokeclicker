@@ -30,8 +30,9 @@ Parameters:
         y="<%= locals.y * 16 %>"
         height="<%= (locals.height || 3) * 16 %>"
         width="<%= (locals.width || 4) * 16 %>"
-        data-bind="click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown.replace(/'/g, '\\\'') : locals.name.replace(/'/g, '\\\'') %>')},
-            attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') }">
+        data-bind="click:function(){MapHelper.moveToTown('<%= (locals.moveToTown || locals.name).replace(/'/g, '\\\'') %>')},
+            attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') },
+            event: { mouseenter: () => GameController.showMapTooltip('<%= locals.name.replace(/'/g, '\\\'') %>'), mouseleave: GameController.hideMapTooltip }">
     </rect>
 <% } %>
 <% if (!locals.isExtension) { %>

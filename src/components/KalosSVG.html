@@ -1,4 +1,4 @@
-<g data-bind='if: player.region == GameConstants.Region.kalos, childrenComplete: () => GameController.applyRouteBindings()'>
+<g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
         'xlink:href':'assets/images/kalos.png?v=$VERSION',
         href:'assets/images/kalos.png?v=$VERSION'

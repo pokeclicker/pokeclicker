@@ -94,6 +94,7 @@ type TmpDungeonType = {
     allAvailablePokemon: () => PokemonNameType[];
     allAvailableShadowPokemon: () => PokemonNameType[];
     isThereQuestAtLocation: () => boolean;
+    isUnlocked: () => boolean;
 };
 
 type TmpDungeonRunnerType = {
