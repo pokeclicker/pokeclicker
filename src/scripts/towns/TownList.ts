@@ -7875,7 +7875,7 @@ TownList['Hoppy Town Fishing Pond'] = new Town(
     'Hoppy Town Fishing Pond',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [new SafariTownContent('Fishing Bond')],
+    [new SafariTownContent('Fishing Pond')],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
         npcs: [],
