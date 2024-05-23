@@ -2216,7 +2216,7 @@ TemporaryBattleList['Swords of Justice 1'] = new TemporaryBattle(
         new GymPokemon('Terrakion', 60042160, 55, undefined, false),
         new GymPokemon('Virizion', 60042160, 55, undefined, false),
     ],
-    'It seems you\'re pretty strong, $playername$. We\'ll let you help us since you were able to defeat us in a battle. Now, onto the plan. We\'ll start by searching for clues on where Kyurem might attack, so you\'ll start by looking around the Giant Chasm. Good Luck in your endeavour, report back with your findings.',
+    'It seems you\'re pretty strong, $playername$. We\'ll let you help us since you were able to defeat us in a battle. Now, onto the plan. We\'ll start by searching for clues on where Kyurem might attack, so you\'ll start by looking around the Giant Chasm. Good luck in your endeavour, report back with your findings.',
     [new QuestLineStepCompletedRequirement('Swords of Justice', 11)],
     undefined,
     {
