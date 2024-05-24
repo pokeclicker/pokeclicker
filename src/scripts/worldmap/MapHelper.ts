@@ -322,7 +322,7 @@ class MapHelper {
 
     public static accessToSubRegion(region: GameConstants.Region, subRegion: number) {
         const subRegionData = SubRegions.getSubRegionById(region, subRegion);
-        return MapHelper.accessToRegion(region) && subRegionData.isUnlocked() && (TownList[subRegionData.startTown]?.isUnlocked() ?? true);
+        return MapHelper.accessToRegion(region) && subRegionData.unlocked() && (TownList[subRegionData.startTown]?.isUnlocked() ?? true);
     }
 
     public static moveToNextUnlockedSubRegion() {
