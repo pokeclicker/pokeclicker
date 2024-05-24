@@ -102,7 +102,7 @@ class MapHelper {
     }
 
     public static calculateBattleCssClass(): string {
-        return GameConstants.EnvironmentCssClass[this.getCurrentEnvironment()];
+        return GameConstants.EnvironmentCssClass[MapHelper.getCurrentEnvironment()];
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
@@ -357,7 +357,7 @@ class MapHelper {
         const nextStartingTownUnlocked = TownList[GameConstants.StartingTowns[player.highestRegion() + 1]]?.isUnlocked() ?? false;
         const fullDex = AchievementHandler.findByName(`${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])} Master`).isCompleted();
 
-        return this.accessToShip() && nextStartingTownUnlocked && (fullDex || !challengeActive);
+        return MapHelper.accessToShip() && nextStartingTownUnlocked && (fullDex || !challengeActive);
     }
 
 
