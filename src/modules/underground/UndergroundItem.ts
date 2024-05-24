@@ -15,7 +15,7 @@ export default class UndergroundItem {
         public id: number,
         public itemName: string,
         space: Array<Array<number>>,
-        public value = 1,
+        public baseValue = 1,
         public valueType = UndergroundItemValueType.Diamond,
         public requirement?: Requirement,
         weight?: (() => number) | number,
@@ -37,7 +37,7 @@ export default class UndergroundItem {
     public isUnlocked(): boolean {
         return this.requirement ? this.requirement.isCompleted() : true;
     }
-    
+
     public isSellable(): boolean {
         return [UndergroundItemValueType.Fossil, UndergroundItemValueType.Diamond, UndergroundItemValueType.Gem].includes(this.valueType);
     }
@@ -74,6 +74,10 @@ export default class UndergroundItem {
 
     get undergroundImage() {
         return `assets/images/underground/${this.name}.png`;
+    }
+
+    get value() {
+        return this.baseValue * (player.highestRegion() + 1);
     }
 
     public getWeight(): number {

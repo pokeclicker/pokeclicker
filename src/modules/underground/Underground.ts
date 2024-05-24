@@ -387,7 +387,7 @@ export class Underground implements Feature {
                 break;
             case UndergroundItemValueType.Gem:
                 const type = item.type;
-                App.game.gems.gainGems(PLATE_VALUE * amount, type);
+                App.game.gems.gainGems(item.value * amount, type);
                 break;
             // Nothing else can be sold
             default:
