@@ -4,6 +4,7 @@ import Requirement from '../requirements/Requirement';
 import Settings from '../settings';
 import UndergroundItem from './UndergroundItem';
 import UndergroundUpgrade from './UndergroundUpgrade';
+import { PLATE_VALUE } from '../GameConstants';
 
 export default class UndergroundGemItem extends UndergroundItem {
     constructor(
@@ -11,7 +12,7 @@ export default class UndergroundGemItem extends UndergroundItem {
         itemName: string,
         space: Array<Array<number>>,
         public type: PokemonType,
-        public baseValue = 100,
+        public baseValue = PLATE_VALUE,
         public requirement?: Requirement,
     ) {
         super(id, itemName, space, baseValue, UndergroundItemValueType.Gem, requirement, () => {

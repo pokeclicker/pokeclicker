@@ -1,7 +1,7 @@
 import type { Observable, Computed } from 'knockout';
 import '../koExtenders';
 import { Feature } from '../DataStore/common/Feature';
-import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE, Region } from '../GameConstants';
+import { Currency, EnergyRestoreSize, EnergyRestoreEffect, Region } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import KeyItemType from '../enums/KeyItemType';
 import OakItemType from '../enums/OakItemType';
