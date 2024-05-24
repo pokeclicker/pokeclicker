@@ -282,7 +282,7 @@ class MapHelper {
     }
 
     public static accessToShip() {
-        return player.highestRegion() > 0 && TownList[GameConstants.DockTowns[player.region()]].isUnlocked();
+        return player.highestRegion() > 0 && TownList[GameConstants.DockTowns[player.region]].isUnlocked();
     }
 
     public static openShipModal() {
