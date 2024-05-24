@@ -1529,7 +1529,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Yanma', 'Yanmega', 'Watchog', 'Herdier', 'Purrloin', 'Tranquill'],
         special:
-        [new SpecialRoutePokemon(['Zebstrika'], new ObtainedPokemonRequirement('Zebstrika'))],
+        [
+            new SpecialRoutePokemon(['Zebstrika'], new ObtainedPokemonRequirement('Zebstrika')),
+            new SpecialRoutePokemon(['Blitzle'], new ObtainedPokemonRequirement('Blitzle')),
+        ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Pinwheel Forest'))],
     23.1,
