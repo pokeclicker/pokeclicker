@@ -255,7 +255,7 @@ class MapHelper {
     /* Region functions */
 
     /**
-     *  For moving between already-unlocked regions
+     *  For moving between already-unlocked regions.
      */
     public static moveToRegion(region: GameConstants.Region, moveToDefaultLocation = true) {
         if (MapHelper.accessToRegion(region)) {
