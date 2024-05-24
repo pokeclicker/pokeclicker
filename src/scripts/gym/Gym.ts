@@ -135,6 +135,11 @@ class Gym extends TownContent {
         this.rewardFunction();
     }
 
+    public autoRestartReward(): number {
+        const [modifier] = GameConstants.GymAutoRepeatRewardTiers.find(([,threshold]) => this.clears() >= threshold);
+        return this.moneyReward * modifier;
+    }
+
     get imagePath(): string {
         return `assets/images/npcs/${this.imageName ?? this.leaderName}.png`;
     }
@@ -149,5 +154,26 @@ class Gym extends TownContent {
 
     get displayName() {
         return this.optionalArgs.displayName;
+    }
+
+    get autoRestartTooltip(): string {
+        let tooltip = 'Auto Restart Gym<br/>';
+        const clears = this.clears() ?? 0;
+        const cost = clears >= 100 ? 0 : this.moneyReward * 2;
+        if (cost === 0) {
+            tooltip += 'Cost: Free!<br/>';
+        } else {
+            tooltip += `Cost: <img src="assets/images/currency/money.svg" height="18px"/> ${cost.toLocaleString('en-US')} per battle<br/>`;
+        }
+        tooltip += '<br/><span class="text-success">10 Clears - Unlock auto-gym</span><br/>';
+        tooltip += `<span class="${(clears >= 100 ? 'text-success' : 'text-muted')}">100 Clears - Free auto-gym</span>`;
+        GameConstants.GymAutoRepeatRewardTiers.slice(0, -1).reverse().forEach(([modifier, threshold]) => {
+            tooltip += `<br/><span class="${(clears >= threshold ? 'text-success' : 'text-muted')}">${threshold.toLocaleString()}
+                Clears - ${modifier.toLocaleString('en-US', {style: 'percent'})} reward</span>`;
+        });
+        if (clears < 250) {
+            tooltip += '<br/><br/><i class="text-warning">You will not receive Pokédollars for clearing the gym.</i>';
+        }
+        return tooltip;
     }
 }
