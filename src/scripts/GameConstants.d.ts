@@ -130,6 +130,7 @@ namespace GameConstants {
     declare const DUNGEON_BOSS_GEMS: number;
     declare const GYM_GEMS: number;
     declare const SAFARI_BATTLE_CHANCE: number;
+    declare const SAFARI_MJ_BATTLE_CHANCE: number;
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
     declare enum SafariTile {
         ground,
@@ -181,6 +182,10 @@ namespace GameConstants {
         treeRootsC,
         treeRootsR,
         sign,
+        waterULCorner,
+        waterDLCorner,
+        waterDRCorner,
+        waterURCorner,
     }
     declare const SAFARI_LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_WATER_BLOCKS: number[];
