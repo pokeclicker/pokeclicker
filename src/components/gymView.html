@@ -72,6 +72,7 @@
                         <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US'), tooltip: {
                             title : GymBattle.clickAttackTooltip(),
                             trigger: 'hover',
+                            html: true,
                         }"></span>
                         <img src="" width= "20" data-bind="visible: GymBattle.calculateClickType() !== PokemonType.None, attr: { src: App.game.zMoves.crystalImage(Battle.calculateClickType())}"/>
                     </span>

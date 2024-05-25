@@ -233,7 +233,7 @@ class Battle {
     public static clickAttackTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
         if (Battle.enemyPokemon()) {
             const clickAttack = App.game.party.calculateClickAttack(Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
-            return `${clickAttack.toLocaleString('en-US')} against ${Battle.enemyPokemon().displayName}`;
+            return `${clickAttack.toLocaleString('en-US')} against ${pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`;
         }
         return '';
     });
