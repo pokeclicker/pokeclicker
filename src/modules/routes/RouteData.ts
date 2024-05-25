@@ -85,6 +85,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Oddish', 'Abra', 'Bellsprout'],
         water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        special: [new SpecialRoutePokemon(['Sunkern'], new MultiRequirement([new ObtainedPokemonRequirement('Sunkern'), new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]))],
     }),
     [new TemporaryBattleRequirement('Blue 2')],
     4.1,
@@ -167,6 +168,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 7', Region.kanto, 7,
     new RoutePokemon({
         land: ['Pidgey', 'Vulpix', 'Oddish', 'Meowth', 'Growlithe', 'Bellsprout'],
+        special: [new SpecialRoutePokemon(['Houndour'], new MultiRequirement([new ObtainedPokemonRequirement('Houndour'), new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]))],
     }),
     [new RouteKillRequirement(10, Region.kanto, 8)],
     10.2,
@@ -230,6 +232,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 16', Region.kanto, 16,
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Doduo'],
+        special: [new SpecialRoutePokemon(['Slugma'], new MultiRequirement([new ObtainedPokemonRequirement('Slugma'), new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]))],
     }),
     [
         new OneFromManyRequirement([
@@ -244,6 +247,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 17', Region.kanto, 17,
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo'],
+        special: [new SpecialRoutePokemon(['Slugma'], new MultiRequirement([new ObtainedPokemonRequirement('Slugma'), new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]))],
     }),
     [
         new OneFromManyRequirement([
@@ -258,6 +262,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 18', Region.kanto, 18,
     new RoutePokemon({
         land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo'],
+        special: [new SpecialRoutePokemon(['Slugma'], new MultiRequirement([new ObtainedPokemonRequirement('Slugma'), new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]))],
     }),
     [
         new OneFromManyRequirement([
