@@ -28,8 +28,10 @@ class SafariPokemonList {
         this.generateKantoSafariList();
         this.generateJohtoSafariList();
         this.generateSinnohSafariList();
-        this.generateKalosSafariList();
         this.generateAlolaSafariList();
+
+        // Always generate Kalos Safari last
+        this.generateKalosSafariList();
     }
 
     private static generateKantoSafariList() {
@@ -205,9 +207,22 @@ class SafariPokemonList {
         // Filler
         const pokemon : SafariEncounter[] = [
             // Grass
-            new SafariEncounter('Pidgeotto', 4.7),
+            new SafariEncounter('Pidgeotto', 4.4),
             // Water
-            new SafariEncounter('Magikarp', 6.6, [SafariEnvironments.Water]),
+            new SafariEncounter('Magikarp', 1, [SafariEnvironments.Water]),
+            // Grass again, placed here to trick people into thinking it is water :^)
+            new SafariEncounter('Ditto (Transforming)', 0.6),
+            // Water
+            new SafariEncounter('Magikarp Skelly', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Quick_League), false),
+            new SafariEncounter('Magikarp Calico (White, Orange)', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpen'), false),
+            new SafariEncounter('Magikarp Pink Dapples', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Fast_League), false),
+            new SafariEncounter('Magikarp Grey Diamonds', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpress 3'), false),
+            new SafariEncounter('Magikarp Purple Bubbles', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Heal_League), false),
+            new SafariEncounter('Magikarp Purple Patches', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpella 3'), false),
+            new SafariEncounter('Magikarp Brown Tiger', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Ultra_League), false),
+            new SafariEncounter('Magikarp Orange Forehead', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.E4_League), false),
+            new SafariEncounter('Magikarp Black Mask', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Tykarp 2'), false),
+            new SafariEncounter('Magikarp Saucy Blue', 2, [SafariEnvironments.Water], new QuestLineCompletedRequirement('Dr. Splash\'s Research Project'), false),
         ];
 
         SafariPokemonList.list[GameConstants.Region.alola](pokemon);
