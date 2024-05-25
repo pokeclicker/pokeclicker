@@ -98,6 +98,10 @@ class SafariItemController {
             {item: {id: 'Exeggcute (Single)', type: ItemType.item}, weight: 0.25, requirement: new MultiRequirement([new SafariLevelRequirement(5), new ObtainedPokemonRequirement('Exeggcute')])},
             {item: {id: 'Scizorite', type: ItemType.item}, weight: 1, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.kalos), new ObtainedPokemonRequirement('Scizor'), new SafariLevelRequirement(15)])},
         ],
+        [GameConstants.Region.alola]: [
+            // Filler
+            {item: {id: 'Diveball', type: ItemType.item}, weight: 2},
+        ],
     }
 
     public static getRandomItem() {

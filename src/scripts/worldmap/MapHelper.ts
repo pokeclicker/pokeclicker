@@ -30,11 +30,11 @@ class MapHelper {
             genNewEnemy = true;
         }
         if (this.accessToRoute(route, region)) {
-            player.route = route;
-            player.subregion = routeData.subRegion ?? 0;
             if (player.region != region) {
                 player.region = region;
             }
+            player.subregion = routeData.subRegion ?? 0;
+            player.route = route;
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
             }
@@ -153,7 +153,7 @@ class MapHelper {
         }
         const states = [];
         // Is this location a dungeon
-        if (dungeonList[townName]) {
+        if (dungeonList[townName] && dungeonList[townName].isUnlocked()) {
             const possiblePokemon = dungeonList[townName].allAvailablePokemon();
             const shadowPokemon = dungeonList[townName].allAvailableShadowPokemon();
 
@@ -210,8 +210,9 @@ class MapHelper {
             Battle.route = 0;
             Battle.catching(false);
             const town = TownList[townName];
-            player.town = town;
+            player.region = town.region;
             player.subregion = town.subRegion;
+            player.town = town;
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;

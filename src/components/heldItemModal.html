@@ -15,54 +15,66 @@
                   <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
                     <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
                   </div>
-                  <div class="input-group px-1 mt-1" data-bind="with: Settings.getSetting('heldItemSort')">
-                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                          data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
-                          <option data-bind="text: $data.text, value: $data.value"></option>
+                  <div class="input-group px-1 mt-1">
+                      <!-- ko let: { heldItemSort: Settings.getSetting('heldItemSort') } -->
+                      <select id="held-item-sort" autocomplete="off" class="custom-select"
+                          data-bind="options: heldItemSort.options,
+                              optionsValue: 'value',
+                              optionsText: 'text',
+                              value: heldItemSort.observableValue">
                       </select>
+                      <!-- /ko -->
+                      <!-- ko let: { heldItemSortDirection: Settings.getSetting('heldItemSortDirection') } -->
                       <div class="input-group-append bg-primary text-light">
-                          <label for="heldItemSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
-                            text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂',
-                            tooltip: { title: Settings.getSetting('heldItemSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement: 'bottom' }
-                          ">⥂</label>
-                          <input id="heldItemSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                              data-bind="checked: Settings.getSetting('heldItemSortDirection').observableValue()"
-                              onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
+                          <label for="held-item-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                              text: heldItemSortDirection.observableValue() ? '⥄' : '⥂',
+                              tooltip: {
+                                  title: heldItemSortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                  trigger: 'hover',
+                                  placement: 'bottom',
+                              }">⥂</label>
+                          <input id="held-item-sort-direction" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: heldItemSortDirection.observableValue" />
                       </div>
+                      <!-- /ko -->
                   </div>
                   <div class="form-group px-1 mt-1 mb-0">
-                    <input id="heldItemSearch" autocomplete="off" class="form-control" placeholder="Search"
+                    <input id="held-item-search" autocomplete="off" class="form-control" placeholder="Search"
                         data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue" />
                   </div>
                   <div class="small px-1 pb-2 my-1" style="overflow-x: hidden;">
                     <div class="form-row px-1">
                         <div class="form-group col-6 m-0 px-1 py-0">
+                            <!-- ko let: { heldItemRegionFilter: Settings.getSetting('heldItemRegionFilter') } -->
                             <label class="mb-1" for="held-item-region-filter">Region</label>
-                            <select id="held-item-region-filter" name="heldItemRegionFilter" autocomplete="off" class="custom-select custom-select-sm" onchange="Settings.setSettingByName(this.name, +this.value)">
-                                <!-- ko foreach: Settings.getSetting('heldItemRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('heldItemRegionFilter').value === $data.value }, text: $data.text">Region</option>
-                                <!-- /ko -->
+                            <select id="held-item-region-filter" autocomplete="off" class="custom-select custom-select-sm" 
+                                data-bind="options: heldItemRegionFilter.getValidOptions(),
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: heldItemRegionFilter.observableValue">
                             </select>
+                            <!-- /ko -->
                         </div>
                         <div class="form-group col-6 m-0 px-1 py-0">
+                            <!-- ko let: { heldItemTypeFilter: Settings.getSetting('heldItemTypeFilter') } -->
                             <label class="mb-1" for="held-item-type-filter">Type</label>
-                            <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm" onchange="Settings.setSettingByName(this.name, +this.value)">
-                                <!-- ko foreach: Settings.getSetting('heldItemTypeFilter').options -->
-                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('heldItemTypeFilter').value === $data.value }, text: $data.text">Type</option>
-                                <!-- /ko -->
+                            <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm" 
+                                data-bind="options: heldItemTypeFilter.options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: heldItemTypeFilter.observableValue">
                             </select>
+                            <!-- /ko -->
                         </div>
                     </div>
                     <div class="form-check align-middle mt-1">
                         <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue()"
-                            onchange="Settings.setSettingByName('heldItemHideHoldingPokemon', this.checked)" />
+                            data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue" />
                         <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
                     </div>
                     <div class="form-check align-middle mt-1">
                         <input type="checkbox" id="show-this-item-pokemon" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('heldItemShowHoldingThisItem').observableValue()"
-                            onchange="Settings.setSettingByName('heldItemShowHoldingThisItem', this.checked)" />
+                            data-bind="checked: Settings.getSetting('heldItemShowHoldingThisItem').observableValue" />
                         <label for="show-this-item-pokemon" class="form-check-label">Show <u>only</u> Pokémon holding this item</label>
                     </div>
                   </div>

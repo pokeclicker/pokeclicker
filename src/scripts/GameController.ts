@@ -2,23 +2,18 @@
  * Class which controls the UI of the game.
  */
 class GameController {
-    static applyRouteBindings() {
-        $('#map path, #map rect').hover(function () {
-            let tooltipText = $(this).attr('data-town');
-            const route = $(this).attr('data-route');
-            if (route) {
-                tooltipText = Routes.getName(Number(route), player.region);
-            }
-            if (tooltipText) {
-                const tooltip = $('#mapTooltip');
-                tooltip.text(tooltipText);
-                tooltip.css('visibility', 'visible');
-            }
-        }, () => {
+    static showMapTooltip(tooltipText: string) {
+        if (tooltipText) {
             const tooltip = $('#mapTooltip');
-            tooltip.text('');
-            tooltip.css('visibility', 'hidden');
-        });
+            tooltip.text(tooltipText);
+            tooltip.css('visibility', 'visible');
+        }
+    }
+
+    static hideMapTooltip() {
+        const tooltip = $('#mapTooltip');
+        tooltip.text('');
+        tooltip.css('visibility', 'hidden');
     }
 
     static convertKey(key: string) {

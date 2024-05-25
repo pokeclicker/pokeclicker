@@ -1,4 +1,4 @@
-<g data-bind='if: player.region == GameConstants.Region.alola, childrenComplete: () => GameController.applyRouteBindings()'>
+<g data-bind='visible: player.region == GameConstants.Region.alola'>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -2618,7 +2618,8 @@
 
         <!--Aether Foundation Extension-->
         <%- include('templates/mapOverlay',
-            { x: 9, y: 38
+            { name: "Aether Foundation"
+            , x: 9, y: 38
             , width: 8, height: 5.5
             , databind: "style: {'pointer-events': 'none'}"
             , visible:  "App.game.quests.getQuestLine('Defeat Rainbow Rocket').state() == QuestLineState.started"
@@ -5333,7 +5334,7 @@
         <%- include('templates/mapTown',
             { name: "Hoppy Town"
             , x: 48, y: 26
-            , width: 9, height: 8
+            , width: 9, height: 4
             })
         %>
         <!--Hoppy Town extension-->
@@ -5446,6 +5447,13 @@
             , x: 51, y: 23
             , width: 2, height: 1
             , isExtension: true
+            })
+        %>
+        <!--Hoppy Town Fishing Pond-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town Fishing Pond"
+            , x: 48, y: 30
+            , width: 9, height: 4
             })
         %>
 
