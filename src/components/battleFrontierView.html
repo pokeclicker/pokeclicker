@@ -58,7 +58,7 @@
                                         false,
                                         false, 
                                         WeatherType.Clear,
-                                    ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
+                                    ).toLocaleString('en-US')} against ${pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`
                                     : '',
                                 trigger: 'hover'}">
                             </span>
