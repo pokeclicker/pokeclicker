@@ -5472,7 +5472,7 @@ TownList['Black and White Park'] = new Town(
     'Black and White Park',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [new DreamOrbTownContent(), BlackAndWhiteParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Black and White Park']), TemporaryBattleList.DreamResearcher],
+    [new DreamOrbTownContent(), BlackAndWhiteParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Black and White Park']), TemporaryBattleList['Dream Researcher']],
     {
         requirements: [new OneFromManyRequirement([
             new MultiRequirement([
