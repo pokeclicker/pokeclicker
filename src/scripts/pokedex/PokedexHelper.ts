@@ -56,17 +56,17 @@ class PokedexHelper {
     })
 
 
-     public static formatSearch(value: string) {
-         if (/[^\d]/.test(value)) {
+    public static formatSearch(value: string) {
+        if (/[^\d]/.test(value)) {
             // non-integer, use as name filter
             Settings.setSettingByName('pokedexNameFilter', value);
             Settings.setSettingByName('pokedexIDFilter', -1);
-         } else {
+        } else {
             // integer, use as ID filter
             Settings.setSettingByName('pokedexIDFilter', (value != '' ? +value : -1));
             Settings.setSettingByName('pokedexNameFilter', '');
-         }
-     }
+        }
+    }
 
     public static getSearchString() {
         const name = Settings.getSetting('pokedexNameFilter').value;
