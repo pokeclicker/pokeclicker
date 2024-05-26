@@ -180,8 +180,8 @@
                         data-bind="checked: App.game.party.getPokemon($data).showShadowImage">
                       <div class="toggler-slider" data-bind="tooltip: {
                         html: true,
-                        title: Settings.getSetting('partyShowShadowSprites').observableValue() ?
-                            `<strong><u>${Settings.getSetting('partyShowShadowSprites').displayName}</u></strong> is currently overriding this setting.` : '',
+                        title: Settings.getSetting('partyShowPurifiedShadowSprites').observableValue() ?
+                            `<strong><u>${Settings.getSetting('partyShowPurifiedShadowSprites').displayName}</u></strong> is currently overriding this setting.` : '',
                         trigger: 'hover',
                       }">
                         <div class="toggler-knob"></div>
