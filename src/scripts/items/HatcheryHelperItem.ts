@@ -35,3 +35,4 @@ ItemList.HatcheryHelperCameron = new HatcheryHelperItem('Cameron', 100000, GameC
 ItemList.HatcheryHelperCarey  = new HatcheryHelperItem('Carey', 10000, GameConstants.Currency.questPoint);
 ItemList.HatcheryHelperKris   = new HatcheryHelperItem('Kris', 400, GameConstants.Currency.diamond);
 ItemList.HatcheryHelperNoel   = new HatcheryHelperItem('Noel', 20000, GameConstants.Currency.battlePoint);
+ItemList.HatcheryHelperLeslie   = new HatcheryHelperItem('Leslie', 10000, GameConstants.Currency.money);
