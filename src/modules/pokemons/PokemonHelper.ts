@@ -93,7 +93,7 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
         }
         if (shadow === undefined) {
             showShadow = partyPokemon.shadow === ShadowStatus.Shadow
-                || (partyPokemon.shadow === ShadowStatus.Purified && partyPokemon.showShadowImage);
+                || (partyPokemon.shadow === ShadowStatus.Purified && (partyPokemon.showShadowImage || Settings.getSetting('partyShowPurifiedShadowSprites').observableValue()));
         }
     }
     if (showShiny) {
