@@ -104,6 +104,7 @@
                             <tr>
                                 <th>Upgrade</th>
                                 <th>Amount</th>
+                                <th>Level</th>
                                 <th>Cost</th>
                                 <th></th>
                             </tr>
@@ -294,7 +295,9 @@
     <script type="text/html" id="undergroundUpgradeTemplate">
         <td class='vertical-middle' data-bind='text: upgrade.displayName + ": " + totalBonus'></td>
         <td class='vertical-middle'
-            data-bind='text: upgrade.isMaxLevel() ? "" : "(" + (upgrade.increasing ? "+" : "-") + upgrade.upgradeBonus() + ")"'></td>
+            data-bind='text: upgrade.isMaxLevel() ? "" : (upgrade.increasing ? "+" : "-") + upgrade.upgradeBonus()'></td>
+        <td class='vertical-middle'
+            data-bind='text: upgrade.isMaxLevel() ? "" : upgrade.level + "/" + upgrade.maxLevel'></td>
         <td class='vertical-middle'
             data-bind="text: upgrade.isMaxLevel() ? '' : upgrade.calculateCost().amount.toLocaleString('en-US') + ' Diamonds'"></td>
         <td class='vertical-middle'>
@@ -308,6 +311,7 @@
 
     <script type="text/html" id="undergroundUpgradeToggleTemplate">
         <td class='vertical-middle' data-bind='text: upgrade.displayName'></td>
+        <td class='vertical-middle'></td>
         <td class='vertical-middle'></td>
         <td class='vertical-middle'
             data-bind="text: upgrade.isMaxLevel() ? '' : upgrade.calculateCost().amount.toLocaleString('en-US') + ' Diamonds'"></td>
