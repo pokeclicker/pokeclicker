@@ -148,7 +148,7 @@ export const pokeballFilterOptions = {
         (
             optionValue: number,
             testValues: number[],
-        ) => testValues.includes(optionValue),
+        ) => testValues?.includes(optionValue),
     ),
 };
 

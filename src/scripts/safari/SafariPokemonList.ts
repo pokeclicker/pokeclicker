@@ -21,6 +21,7 @@ class SafariPokemonList {
         [GameConstants.Region.johto]: ko.observableArray(),
         [GameConstants.Region.sinnoh]: ko.observableArray(),
         [GameConstants.Region.kalos]: ko.observableArray(),
+        [GameConstants.Region.alola]: ko.observableArray(),
     };
 
     public static generateSafariLists() {
@@ -28,6 +29,7 @@ class SafariPokemonList {
         this.generateJohtoSafariList();
         this.generateSinnohSafariList();
         this.generateKalosSafariList();
+        this.generateAlolaSafariList();
     }
 
     private static generateKantoSafariList() {
@@ -196,6 +198,19 @@ class SafariPokemonList {
         pokemon.push(new SafariEncounter('Lapras', 2, [SafariEnvironments.Water]));
 
         SafariPokemonList.list[GameConstants.Region.kalos](pokemon);
+    }
+
+    private static generateAlolaSafariList() {
+        // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
+        // Filler
+        const pokemon : SafariEncounter[] = [
+            // Grass
+            new SafariEncounter('Pidgeotto', 4.7),
+            // Water
+            new SafariEncounter('Magikarp', 6.6, [SafariEnvironments.Water]),
+        ];
+
+        SafariPokemonList.list[GameConstants.Region.alola](pokemon);
     }
 
     // Get SafariEnvironment according to the Pokemon types

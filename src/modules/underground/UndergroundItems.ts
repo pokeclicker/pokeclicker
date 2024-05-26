@@ -4,6 +4,7 @@ import { MegaStoneType, Region, StoneType } from '../GameConstants';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import Rand from '../utilities/Rand';
 import UndergroundEvolutionItem from './UndergroundEvolutionItem';
+import UndergroundFossilPieceItem from './UndergroundFossilPieceItem';
 import UndergroundGemItem from './UndergroundGemItem';
 import UndergroundItem from './UndergroundItem';
 import UndergroundMegaStoneItem from './UndergroundMegaStoneItem';
@@ -111,10 +112,10 @@ UndergroundItems.addItem(new UndergroundItem(209, 'Jaw_fossil', [[0, 0, 1, 1, 1]
     () => (App.game.party.alreadyCaughtPokemonByName('Tyrunt') || player.itemList.Jaw_fossil() > 0 ? 0.1 : 1.5)));
 UndergroundItems.addItem(new UndergroundItem(210, 'Sail_fossil', [[1, 1, 1, 0, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.kalos),
     () => (App.game.party.alreadyCaughtPokemonByName('Amaura') || player.itemList.Sail_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(211, 'Fossilized_bird', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.FossilPiece, new MaxRegionRequirement(Region.galar)));
-UndergroundItems.addItem(new UndergroundItem(212, 'Fossilized_fish', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.FossilPiece, new MaxRegionRequirement(Region.galar)));
-UndergroundItems.addItem(new UndergroundItem(213, 'Fossilized_drake', [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, UndergroundItemValueType.FossilPiece, new MaxRegionRequirement(Region.galar)));
-UndergroundItems.addItem(new UndergroundItem(214, 'Fossilized_dino', [[1, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.FossilPiece, new MaxRegionRequirement(Region.galar)));
+UndergroundItems.addItem(new UndergroundFossilPieceItem(211, 'Fossilized_bird', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, new MaxRegionRequirement(Region.galar)));
+UndergroundItems.addItem(new UndergroundFossilPieceItem(212, 'Fossilized_fish', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, new MaxRegionRequirement(Region.galar)));
+UndergroundItems.addItem(new UndergroundFossilPieceItem(213, 'Fossilized_drake', [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, new MaxRegionRequirement(Region.galar)));
+UndergroundItems.addItem(new UndergroundFossilPieceItem(214, 'Fossilized_dino', [[1, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, new MaxRegionRequirement(Region.galar)));
 
 // Evolution Stones
 UndergroundItems.addItem(new UndergroundEvolutionItem(300, 'Fire_stone', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Fire_stone));
