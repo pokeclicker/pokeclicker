@@ -306,7 +306,7 @@
             data-bind="text: `${upgrade.level}/${upgrade.maxLevel}`"></td>
         <td class="vertical-middle text-nowrap">
             <!-- ko ifnot: upgrade.isMaxLevel() -->
-            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': upgrade.calculateCost().amount, 'currency': upgrade.calculateCost().currency, width: '18px' }}"></span>
+            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': upgrade.calculateCost().amount, 'currency': upgrade.calculateCost().currency, width: '18px', height: '18px' }}"></span>
             <!-- /ko -->
         </td>
         <td class="vertical-middle">
@@ -330,7 +330,7 @@
         <td class="vertical-middle"></td>
         <td class="vertical-middle text-nowrap">
             <!-- ko ifnot: upgrade.isMaxLevel() -->
-            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': upgrade.calculateCost().amount, 'currency': upgrade.calculateCost().currency, width: '18px' }}"></span>
+            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': upgrade.calculateCost().amount, 'currency': upgrade.calculateCost().currency, width: '18px', height: '18px' }}"></span>
             <!-- /ko -->
         </td>
         <td class="vertical-middle">
