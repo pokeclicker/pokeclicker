@@ -1,3 +1,5 @@
+type OverworldSpriteType = 'base' | 'self' | PokemonNameType;
+
 class SafariEncounter {
     public requirement: Requirement;
     constructor(
@@ -5,7 +7,8 @@ class SafariEncounter {
         public weight: number,
         public environments: SafariEnvironments[] = [SafariEnvironments.Grass],
         requirement?: true | Requirement, // True is used to simplify Friend Safari Pokémon generation
-        public hide = true // Hide from the list
+        public hide = true, // Hide from the list
+        public sprite : OverworldSpriteType = 'base'
     ) {
         this.requirement = requirement === true ? new ObtainedPokemonRequirement(this.name) : requirement;
     }
