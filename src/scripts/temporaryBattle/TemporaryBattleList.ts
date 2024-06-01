@@ -2346,7 +2346,7 @@ TemporaryBattleList['Red Genesect 2'] = new TemporaryBattle(
         visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 4),
     }
 );
-TemporaryBattleList.DreamResearcher = new TemporaryBattle(
+TemporaryBattleList['Dream Researcher'] = new TemporaryBattle(
     'Dream Researcher',
     [new GymPokemon('Mega Audino', 125000000, 32)],
     'Wow! You have proven that you have total power over the realm of dreams! The location of this Audinite was revealed to me in a dream, you deserve to have it!</br><img src="assets/images/megaStone/Audinite.png"/>',
