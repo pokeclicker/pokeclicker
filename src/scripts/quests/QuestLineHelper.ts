@@ -3428,19 +3428,20 @@ class QuestLineHelper {
         const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5,000 Pokémon', App.game.statistics.totalPokemonDefeated);
         drSplashQuestLine.addQuest(tackleMachine);
 
-        const SaucyBlueReward = () => {
-            App.game.party.gainPokemonByName('Magikarp Saucy Blue');
+        const talkToDrSplash5 = new TalkToNPCQuest(DrSplash5, 'Wrap up your research project by talking to Dr. Splash in Hoppy Town.');
+        drSplashQuestLine.addQuest(talkToDrSplash5);
+
+        // Every step will reward a Biscuit.
+        const karpStepReward = () => {
             Notifier.notify({
-                title: drSplashQuestLine.name,
-                message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
+                message: 'You were awarded a Magikarp Biscuit!',
                 type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                image: ItemList.Magikarp_Biscuit.image,
             });
+            player.gainItem('Magikarp_Biscuit', 1);
         };
 
-        const talkToDrSplash5 = new TalkToNPCQuest(DrSplash5, 'Wrap up your research project by talking to Dr. Splash in Hoppy Town.').withCustomReward(SaucyBlueReward);
-        drSplashQuestLine.addQuest(talkToDrSplash5);
+        drSplashQuestLine.quests().forEach(q => q.withCustomReward(karpStepReward));
 
         App.game.quests.questLines().push(drSplashQuestLine);
 

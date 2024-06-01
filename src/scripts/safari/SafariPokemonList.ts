@@ -209,10 +209,7 @@ class SafariPokemonList {
             // Grass
             new SafariEncounter('Pidgeotto', 4.4),
             // Water
-            new SafariEncounter('Magikarp', 1, [SafariEnvironments.Water]),
-            // Grass again, placed here to trick people into thinking it is water :^)
-            new SafariEncounter('Ditto (Transforming)', 0.6),
-            // Water
+            new SafariEncounter('Magikarp', 0.4, [SafariEnvironments.Water]),
             new SafariEncounter('Magikarp Skelly', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Quick_League), false),
             new SafariEncounter('Magikarp Calico (White, Orange)', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpen'), false),
             new SafariEncounter('Magikarp Pink Dapples', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Fast_League), false),
@@ -223,6 +220,10 @@ class SafariPokemonList {
             new SafariEncounter('Magikarp Orange Forehead', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.E4_League), false),
             new SafariEncounter('Magikarp Black Mask', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Tykarp 2'), false),
             new SafariEncounter('Magikarp Saucy Blue', 2, [SafariEnvironments.Water], new QuestLineCompletedRequirement('Dr. Splash\'s Research Project'), false),
+            // Both, meme encounter
+            new SafariEncounter('Ditto (Transforming)', 0.6, [SafariEnvironments.Water, SafariEnvironments.Grass],
+            new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => Math.floor(p.id) === pokemonMap.Magikarp.id, 'Catch more Magikarp species.', 6),
+            false),
         ];
 
         SafariPokemonList.list[GameConstants.Region.alola](pokemon);
