@@ -312,7 +312,6 @@ class PokemonLocations {
         }
         const cacheLine = this.initCacheLine(cache, Object);
         Object.entries(SafariPokemonList.list).forEach(([region]) => {
-            console.log(region);
             if (region == GameConstants.Region.kalos.toString()) {
                 // Friendly safari might cause infinite recursion
                 return;

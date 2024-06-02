@@ -210,9 +210,9 @@ class SafariPokemonList {
         // Filler
         const pokemon : SafariEncounter[] = [
             // Grass
-            new SafariEncounter('Pidgeotto', 4.4),
+            new SafariEncounter('Pidgeotto', 2.7),
             // Water
-            new SafariEncounter('Magikarp', 0.4, [SafariEnvironments.Water]),
+            new SafariEncounter('Magikarp', 0.7, [SafariEnvironments.Water]),
             new SafariEncounter('Magikarp Skelly', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Quick_League), false, 'self'),
             new SafariEncounter('Magikarp Calico (White, Orange)', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpen'), false, 'self'),
             new SafariEncounter('Magikarp Pink Dapples', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Fast_League), false, 'self'),
@@ -224,7 +224,7 @@ class SafariPokemonList {
             new SafariEncounter('Magikarp Black Mask', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Tykarp 2'), false, 'self'),
             new SafariEncounter('Magikarp Saucy Blue', 2, [SafariEnvironments.Water], new QuestLineCompletedRequirement('Dr. Splash\'s Research Project'), false, 'self'),
             // Both, meme encounter
-            new SafariEncounter('Ditto (Transforming)', 0.6, [SafariEnvironments.Water, SafariEnvironments.Grass],
+            new SafariEncounter('Ditto (Transforming)', 0.3, [SafariEnvironments.Water, SafariEnvironments.Grass],
                 new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => Math.floor(p.id) === pokemonMap.Magikarp.id, 'Catch more Magikarp species.', 6),
                 false,
                 'Magikarp',
