@@ -4805,12 +4805,11 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
         imageName: 'Jump Champ Green',
         firstTimeRewardFunction: () => {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Calico (Orange, White)!',
+                message: 'You were awarded a Magikarp Biscuit!',
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                image: ItemList.Magikarp_Biscuit.image,
             });
-            App.game.party.gainPokemonByName('Magikarp Calico (Orange, White)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            player.gainItem('Magikarp_Biscuit', 1);
         },
     }
 );
@@ -4826,12 +4825,11 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
         imageName: 'Jump Champ Red',
         firstTimeRewardFunction: () => {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Calico (Orange, White, Black)!',
+                message: 'You were awarded a Magikarp Biscuit!',
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                image: ItemList.Magikarp_Biscuit.image,
             });
-            App.game.party.gainPokemonByName('Magikarp Calico (Orange, White, Black)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            player.gainItem('Magikarp_Biscuit', 1);
         },
     }
 );
@@ -4848,12 +4846,11 @@ TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 33),
         firstTimeRewardFunction: () => {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Calico (White, Orange)!',
+                message: 'You were awarded a Magikarp Biscuit!',
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                image: ItemList.Magikarp_Biscuit.image,
             });
-            App.game.party.gainPokemonByName('Magikarp Calico (White, Orange)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            player.gainItem('Magikarp_Biscuit', 1);
         },
     }
 );
@@ -4867,6 +4864,14 @@ TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
     {
         displayName: 'Tykarp',
         imageName: 'Jump Champ Blue',
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -4880,6 +4885,14 @@ TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
         displayName: 'Karpress',
         imageName: 'Jump Champ Red',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 34),
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -4892,6 +4905,14 @@ TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
     {
         displayName: 'Karami',
         imageName: 'Jump Champ Green',
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -4905,6 +4926,14 @@ TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
         displayName: 'Karson',
         imageName: 'Jump Champ Blue',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 35),
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -4917,6 +4946,14 @@ TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
     {
         displayName: 'Karpress',
         imageName: 'Jump Champ Red',
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -4930,6 +4967,14 @@ TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
         displayName: 'Karpen',
         imageName: 'Jump Champ Green',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 36),
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -4945,12 +4990,11 @@ TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 36),
         firstTimeRewardFunction: () => {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Calico (Orange, Gold)!',
+                message: 'You were awarded a Magikarp Biscuit!',
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                image: ItemList.Magikarp_Biscuit.image,
             });
-            App.game.party.gainPokemonByName('Magikarp Calico (Orange, Gold)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            player.gainItem('Magikarp_Biscuit', 1);
         },
     }
 );
@@ -4964,6 +5008,14 @@ TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
     {
         displayName: 'Skyhopper',
         imageName: 'Jump Champ Red',
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -4977,6 +5029,14 @@ TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
         displayName: 'Karpen',
         imageName: 'Jump Champ Blue',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 37),
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -4990,6 +5050,14 @@ TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
         displayName: 'Karpella',
         imageName: 'Jump Champ Green',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 37),
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -5002,6 +5070,14 @@ TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
     {
         displayName: 'Karbuck',
         imageName: 'Jump Champ Red',
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -5015,6 +5091,14 @@ TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
         displayName: 'Kareign',
         imageName: 'Jump Champ Blue',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 38),
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -5028,6 +5112,14 @@ TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
         displayName: 'Koylee',
         imageName: 'Jump Champ Green',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 38),
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -5042,12 +5134,11 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
         imageName: 'Jump Champ Blue',
         firstTimeRewardFunction: () => {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Grey Diamonds!',
+                message: 'You were awarded a Magikarp Biscuit!',
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                image: ItemList.Magikarp_Biscuit.image,
             });
-            App.game.party.gainPokemonByName('Magikarp Grey Diamonds', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            player.gainItem('Magikarp_Biscuit', 1);
         },
     }
 );
@@ -5062,6 +5153,14 @@ TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
         displayName: 'Karpen',
         imageName: 'Jump Champ Red',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 39),
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -5077,12 +5176,11 @@ TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 39),
         firstTimeRewardFunction: () => {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Purple Patches!',
+                message: 'You were awarded a Magikarp Biscuit!',
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                image: ItemList.Magikarp_Biscuit.image,
             });
-            App.game.party.gainPokemonByName('Magikarp Purple Patches', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            player.gainItem('Magikarp_Biscuit', 1);
         },
     }
 );
@@ -5096,6 +5194,14 @@ TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
     {
         displayName: 'Skyhopper',
         imageName: 'Jump Champ Blue',
+        firstTimeRewardFunction: () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        },
     }
 );
 
@@ -5111,12 +5217,11 @@ TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 40),
         firstTimeRewardFunction: () => {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Black Mask!',
+                message: 'You were awarded a Magikarp Biscuit!',
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
+                image: ItemList.Magikarp_Biscuit.image,
             });
-            App.game.party.gainPokemonByName('Magikarp Black Mask', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            player.gainItem('Magikarp_Biscuit', 1);
         },
     }
 );
