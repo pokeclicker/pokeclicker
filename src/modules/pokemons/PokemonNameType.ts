@@ -322,6 +322,7 @@ export type PokemonNameType
     | 'Lapras'
     | 'Gigantamax Lapras'
     | 'Ditto'
+    | 'Ditto (Transforming)'
     | 'Eevee'
     | 'Gigantamax Eevee'
     | 'Let\'s Go Eevee'
@@ -503,8 +504,8 @@ export type PokemonNameType
     | 'XD001'
     | 'Ho-Oh'
     | 'Celebi'
-    | 'Grinch Celebi'
     | 'Flowering Celebi'
+    | 'Grinch Celebi'
     | 'Treecko'
     | 'Grovyle'
     | 'Sceptile'
@@ -1478,6 +1479,7 @@ export type PokemonNameType
     | 'Overqwil'
     | 'Enamorus'
     | 'Enamorus (Therian)'
+    | 'MissingNo.'
     | 'Sprigatito'
     | 'Floragato'
     | 'Meowscarada'
@@ -1624,7 +1626,6 @@ export type PokemonNameType
     | 'Terapagos (Terastal)'
     | 'Terapagos (Stellar)'
     | 'Pecharunt'
-    | 'MissingNo.'
     | '???'
     | 'You hateful little Trainer!'
     | 'Segin Starmobile'
@@ -1632,3 +1633,4 @@ export type PokemonNameType
     | 'Navi Starmobile'
     | 'Ruchbah Starmobile'
     | 'Caph Starmobile';
+    
