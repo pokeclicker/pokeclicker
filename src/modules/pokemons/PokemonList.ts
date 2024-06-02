@@ -6105,7 +6105,7 @@ export const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': Genders.Genderless,
+            'visualDifference': true,
         },
     },
     {
