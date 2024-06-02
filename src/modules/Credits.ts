@@ -320,7 +320,7 @@ export const SpriteCredits: Credit[] = [
             'Legend Plate',
             'Linking cord cartoon style',
             'Luana',
-            ' Skelly',
+            'Magikarp Skelly',
             'Magikarp Calico (Orange, White)',
             'Magikarp Calico (Orange, White, Black)',
             'Magikarp Calico (White, Orange)',
