@@ -376,6 +376,7 @@ ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 30000000
 ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
 ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)');
 ItemList['Furfrou (Heart)']    = new PokemonItem('Furfrou (Heart)', 15000, Currency.contestToken);
+ItemList['Probably Not Pikachu']   = new PokemonItem('Inkay (Pikachu)', 100000000, Currency.dungeonToken, false, 'Probably Not Pikachu');
 // Alola
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
