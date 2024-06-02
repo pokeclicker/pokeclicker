@@ -227,7 +227,7 @@ class SafariPokemonList {
             new SafariEncounter('Ditto (Transforming)', 0.3, [SafariEnvironments.Water, SafariEnvironments.Grass],
                 new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => Math.floor(p.id) === pokemonMap.Magikarp.id, 'Catch more Magikarp species.', 6),
                 false,
-                'Magikarp',
+                'Magikarp'
             ),
         ];
 

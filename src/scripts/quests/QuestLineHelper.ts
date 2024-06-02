@@ -3449,7 +3449,7 @@ class QuestLineHelper {
                 timeout: 3e4,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-        }
+        };
 
         const talkToDrSplash5 = new TalkToNPCQuest(DrSplash5, 'Wrap up your research project by talking to Dr. Splash in Hoppy Town.').withCustomReward(SaucyBlueReward);
         drSplashQuestLine.addQuest(talkToDrSplash5);

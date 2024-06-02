@@ -1633,3 +1633,4 @@ export type PokemonNameType
     | 'Navi Starmobile'
     | 'Ruchbah Starmobile'
     | 'Caph Starmobile';
+    

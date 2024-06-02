@@ -1820,7 +1820,7 @@ GymList['Master League'] = new Gym(
             image: ItemList.Magikarp_Biscuit.image,
         });
         player.gainItem('Magikarp_Biscuit', 1);
-    },
+    }
 );
 
 //Galar Leaders
