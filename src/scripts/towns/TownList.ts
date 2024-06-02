@@ -5818,7 +5818,7 @@ const CyllageCityShop = new Shop([
 ]);
 const DisguisedShop = new Shop([
     ItemList['Probably Not Pikachu'],
-]);
+], 'Badly Disguised Shop', [new TemporaryBattleRequirement('Twerps')]);
 const GeosengeTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -6006,8 +6006,11 @@ const TeamFlareGrunt1 = new NPC('Team Flare Grunt', [
 const NotAsh = new NPC('Not Ash', [
     'Hey uh.... twerp. Would you happen to have any Dungeon Tokens? We\'ve, uh, run out.',
     'I\'ll give you that Pikachu costume my Inkay was wearing for some?',
-    '...Give me a break. I know that you knew that the Pikachu was a costume. You could see right through us, as if you could just see it\'s name over it\s head or something.' 
-], {image: 'assets/images/npcs/Not Ash.png'});
+    '...Give me a break. I know that you knew that the Pikachu was a costume. You could see right through us, as if you could just see it\'s name over it\s head or something.'
+], {
+    image: 'assets/images/npcs/Not Ash.png',
+    requirement: new TemporaryBattleRequirement('Twerps'),
+});
 
 const SharlourKorrina = new NPC('Korrina', [
     'What an explosive battle! I could tell that you didn\'t hold anything back!',
