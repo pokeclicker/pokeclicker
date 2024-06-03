@@ -18,10 +18,10 @@
                     <!-- ko foreach: Array(Gems.nTypes) -->
                         <tbody>
                             <tr>
-                                <td colspan="4" class="clickable text-left table-dark text-light h5" data-toggle="collapse"
+                                <td colspan="4" class="clickable text-left h5" data-toggle="collapse"
                                     data-bind="attr: { 'href': '#collapse-gem-' + $index() }, click: function() { App.game.gems.gemCollapsed[$index()] = !App.game.gems.gemCollapsed[$index()]; }">
                                     <div class="d-flex align-items-center">
-                                        <div class="flex-grow-1" data-bind="text: PokemonType[$index()]"></div>
+                                        <div class="flex-grow-1 font-weight-bold" data-bind="text: PokemonType[$index()]"></div>
                                         <img width="32px" data-bind='attr: { src: Gems.image($index()) }'/>
                                         <knockout data-bind="text: App.game.gems.gemWallet[$index()]().toLocaleString('en-US')"></knockout>
                                     </div>
