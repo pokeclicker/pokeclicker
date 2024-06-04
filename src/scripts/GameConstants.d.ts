@@ -472,21 +472,21 @@ namespace GameConstants {
      }
 
     declare enum PokeBlockColor {
-        Black,
+        // Black,
         Red,
         Blue,
         Pink,
         Green,
         Yellow,
-        Gold,
-        Purple,
-        Indigo,
-        Brown,
-        Light_Blue,
-        Olive,
-        Beige,
-        Gray,
-        White
+        // Gold,
+        // Purple,
+        // Indigo,
+        // Brown,
+        // Light_Blue,
+        // Olive,
+        // Beige,
+        // Gray,
+        // White
     }
     declare enum VitaminType {
         Protein,

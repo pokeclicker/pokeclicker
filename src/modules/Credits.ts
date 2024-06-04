@@ -995,7 +995,11 @@ export const SpriteCredits: Credit[] = [
         name: 'PokeMMO',
         link: 'https://pokemmo.com/en/',
         resources: [
-            'Red Pokeblock',
+            'PokeBlock_Blue',
+            'PokeBlock_Green',
+            'PokeBlock_Pink',
+            'PokeBlock_Red',
+            'PokeBlock_Yellow',
         ],
     },
     {

@@ -184,6 +184,8 @@ import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
 import ConsumableController from './items/ConsumableController';
+import PokeBlock from './items/PokeBlock';
+import PokeBlockController from './items/PokeBlockController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -405,6 +407,8 @@ Object.assign(<any>window, {
     VitaminController,
     Consumable,
     ConsumableController,
+    PokeBlock,
+    PokeBlockController,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,

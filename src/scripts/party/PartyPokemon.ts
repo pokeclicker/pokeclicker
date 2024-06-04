@@ -367,6 +367,39 @@ class PartyPokemon implements Saveable {
         });
     }
 
+    public usePokeblock(type: GameConstants.PokeBlockColor, amount: number): void {
+        const itemName = `PokeBlock_${GameConstants.PokeBlockColor[type]}`;
+        if (!player.itemList[itemName]()) {
+            return Notifier.notify({
+                message : `You do not have any more ${ItemList[itemName].displayName}`,
+                type : NotificationConstants.NotificationOption.danger,
+            });
+        }
+
+        switch (type) {
+            case GameConstants.PokeBlockColor.Red:
+            case GameConstants.PokeBlockColor.Blue:
+            case GameConstants.PokeBlockColor.Pink:
+            case GameConstants.PokeBlockColor.Green:
+            case GameConstants.PokeBlockColor.Yellow:
+                amount = Math.min(amount, player.itemList[itemName]());
+                GameHelper.incrementObservable(this._contestAppealBonusAmount, amount);
+                Notifier.notify({
+                    message : `${this.displayName} gained ${amount} appeal point(s)`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
+                break;
+            default :
+        }
+        GameHelper.incrementObservable(player.itemList[itemName], -amount);
+        Notifier.notify({
+            message : `You used ${amount} ${ItemList[itemName].displayName}(s)`,
+            type : NotificationConstants.NotificationOption.success,
+            image : ItemList[itemName].image,
+        });
+    }
+
     totalVitaminsUsed = ko.pureComputed((): number => {
         return Object.values(this.vitaminsUsed).reduce((sum, obs) => sum + obs(), 0);
     });
