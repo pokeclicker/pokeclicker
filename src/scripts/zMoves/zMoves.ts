@@ -142,7 +142,7 @@ class ZMoves implements Feature {
 
     canAccess(): boolean {
         // DO NOT MERGE THAT ! IT IS THIS WAY FOR TEST PURPOSE !
-        return true ;//App.game.keyItems.hasKeyItem(KeyItemType['Z-Power_Ring']);
+        return true; //App.game.keyItems.hasKeyItem(KeyItemType['Z-Power_Ring']);
     }
 
     update(delta: number): void {}  // This method intentionally left blank
