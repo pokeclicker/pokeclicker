@@ -348,15 +348,6 @@ class PartyPokemon implements Saveable {
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
                 break;
-            case GameConstants.ConsumableType.Beta_Pokeblock:
-                amount = Math.min(amount, player.itemList[itemName]());
-                GameHelper.incrementObservable(this._contestAppealBonusAmount, amount);
-                Notifier.notify({
-                    message : `${this.displayName} gained ${amount} appeal points`,
-                    type : NotificationConstants.NotificationOption.success,
-                    pokemonImage : PokemonHelper.getImage(this.id),
-                });
-                break;
             default :
         }
         GameHelper.incrementObservable(player.itemList[itemName], -amount);

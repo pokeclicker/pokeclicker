@@ -2342,7 +2342,6 @@ const HoennContestShop = new Shop([
     ItemList['Dugtrio (Punk)'],
     ItemList['Gengar (Punk)'],
     ItemList.Pokeblock_case, // only for dev
-    ItemList.Beta_Pokeblock,
     ItemList.PokeBlock_Red,
     ItemList.PokeBlock_Blue,
     ItemList.PokeBlock_Pink,

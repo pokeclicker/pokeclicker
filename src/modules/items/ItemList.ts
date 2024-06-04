@@ -258,7 +258,6 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 // Consumables
 ItemList.Rare_Candy = new AttackGainConsumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
 ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, undefined, 'Strengthen your Magikarp', 6, (pokemon) => Math.floor(pokemon.id) === pokemonMap.Magikarp.id);
-ItemList.Beta_Pokeblock = new AttackGainConsumable(ConsumableType.Beta_Pokeblock, 100, Currency.money, undefined, 'Pokeblock', 'Boosts Appeal (Beta item)');
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
