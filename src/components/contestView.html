@@ -61,7 +61,7 @@
                 <knockout data-bind="template: { name: 'pokemonContestAppealTemplate', data: { 'pokemon': ContestBattle.enemyPokemon() } }"></knockout>
             </td>
             <td width="50%">
-              <knockout data-bind="text: `Bonus Round: ${ContestRunner.encoreRoundsComputable()}`"></knockout>
+              <knockout data-bind="text: `Bonus Round: ${ContestRunner.encoreRoundsComputable()}/${ContestRunner.rank()}`"></knockout>
             </td>
           </tr>
       </table>
