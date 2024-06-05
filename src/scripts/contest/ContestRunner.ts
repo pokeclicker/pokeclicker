@@ -34,7 +34,7 @@ class ContestRunner {
         ContestRunner.rank(rank);
         ContestRunner.type(type);
 
-        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank());
+        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank());
         ContestRunner.audienceAppeal(0);
         ContestRunner.audienceAppealPercentage(0);
 
@@ -177,7 +177,7 @@ class ContestRunner {
                 ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());
                 ContestRunner.encoreStatus(false);
                 // increase audience bar (needs updated encore round from above)
-                ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * 2 * ContestRunner.encoreRounds());
+                ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * ContestRunner.encoreRounds());
             } else {
                 // if no bonus round, end the contest
                 ContestRunner.running(false);
