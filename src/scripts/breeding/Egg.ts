@@ -101,7 +101,7 @@ class Egg implements Saveable {
             if (this.type == EggType.Pokemon) {
                 notifMessage = `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()} is ready to hatch!`;
             } else if (this.type == EggType.Fossil) {
-                notifMessage = `The ${GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(this.pokemon).name]} is ready to revive!`;
+                notifMessage = `The ${ItemList[GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(this.pokemon).name]].displayName} is ready to revive!`;
             } else {
                 notifMessage = 'An egg is ready to hatch!';
             }

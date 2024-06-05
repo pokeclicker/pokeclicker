@@ -372,9 +372,6 @@ export class Underground implements Feature {
             });
             return;
         }
-        if (item.valueType == UndergroundItemValueType.Fossil) {
-            amount = 1;
-        }
         const curAmt = player.itemList[item.itemName]();
         if (curAmt > 0) {
             const sellAmt = Math.min(curAmt, amount);
@@ -400,12 +397,6 @@ export class Underground implements Feature {
         switch (item.valueType) {
             case UndergroundItemValueType.Diamond:
                 App.game.wallet.gainDiamonds(item.value * amount);
-                break;
-            case UndergroundItemValueType.Fossil:
-                if (!App.game.breeding.hasFreeEggSlot()) {
-                    return false;
-                }
-                success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
                 break;
             case UndergroundItemValueType.Gem:
                 const type = item.type;

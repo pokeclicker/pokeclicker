@@ -389,13 +389,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                     <div class="tab-pane fade" id="breeding-eggs">
                         <div class="scrolling-div-breeding-list">
-                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length">
+                        <!-- ko let: { eggItems: GameHelper.enumStrings(GameConstants.EggItemType).filter(e=>player.itemList[e]()) } -->
+                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !eggItems.length">
                                 You don't have any eggs to breed.
                             </button>
-                            <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]())">
+                            <!-- ko if: eggItems.length -->
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: eggItems">
                                 <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
-                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.camelCaseToString(GameConstants.humanifyString($data))">egg</span>
+                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ItemList[$data].displayName">egg</span>
                                     <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
                                     <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player.itemList[$data]().toLocaleString('en-US')">amount</span>
                                     <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); App.game.breeding.checkCloseModal(); }"></a>
@@ -404,26 +405,29 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </li>
                             </ul>
                             <!-- /ko -->
+                        <!-- /ko -->
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="breeding-fossils">
                         <div class="scrolling-div-breeding-list">
-                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0).length">
+                        <!-- ko let: { fossilItems: GameHelper.enumStrings(GameConstants.FossilType).filter(f=>player.itemList[f]()) } -->
+                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !fossilItems.length">
                                 You don't have any fossils to breed.
                             </button>
-                            <!-- ko if: UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0).length -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0)">
+                            <!-- ko if: fossilItems.length -->
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: fossilItems">
                                 <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
-                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
-                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player.itemList[$data.itemName]().toLocaleString('en-US')">amount</span>
-                                    <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data); App.game.breeding.checkCloseModal(); }"></a>
+                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ItemList[$data].displayName">fossil</span>
+                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${ItemList[$data].displayName}.png` }">
+                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player.itemList[$data]().toLocaleString('en-US')">amount</span>
+                                    <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); App.game.breeding.checkCloseModal(); }"></a>
                                     <knockout style="position: absolute; right: 2px; top: -14px;"
-                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data.name]) } }"/>
+                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data]) } }"/>
                                 </li>
                             </ul>
                             <!-- /ko -->
+                        <!-- /ko -->
                         </div>
                     </div>
 

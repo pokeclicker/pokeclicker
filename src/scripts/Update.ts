@@ -2693,6 +2693,22 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[241]) {
                 Update.startQuestLine(saveData, 'Child of the Stars');
             }
+
+            // Update hatchery EggTypes
+            saveData.breeding.eggList?.forEach(egg => {
+                const oldType = egg.type;
+                if (egg.type === 6) {
+                    egg.type = 0; // EggType.Pokemon
+                } else if (egg.type === 8) {
+                    egg.type = 2; // EggType.Fossil
+                } else if ([0, 1, 2, 3, 4, 5, 7].includes(egg.type)) {
+                    egg.type = 1; // EggType.EggItem now covers every EggItemType
+                } else {
+                    egg.type = -1; // EggType.None
+                }
+            });
+            // Remove unused pokemon egg item
+            delete playerData._itemList.Pokemon_egg;
         },
     };
 

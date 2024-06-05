@@ -943,12 +943,25 @@ export enum StoneType {
     'Metal_alloy',
 }
 
+export enum FossilType {
+    'Helix_fossil',
+    'Dome_fossil',
+    'Old_amber',
+    'Root_fossil',
+    'Claw_fossil',
+    'Armor_fossil',
+    'Skull_fossil',
+    'Cover_fossil',
+    'Plume_fossil',
+    'Jaw_fossil',
+    'Sail_fossil',
+}
+
 export enum FossilPieceType {
-    'None' = -1,
-    'Fossilized Bird',
-    'Fossilized Fish',
-    'Fossilized Drake',
-    'Fossilized Dino',
+    'Fossilized_bird',
+    'Fossilized_fish',
+    'Fossilized_drake',
+    'Fossilized_dino',
 }
 
 export enum BattleItemType {
@@ -1087,7 +1100,6 @@ export enum EggItemType {
     'Fighting_egg',
     'Electric_egg',
     'Dragon_egg',
-    'Pokemon_egg',
     'Mystery_egg',
 }
 
@@ -1126,32 +1138,32 @@ export const EnergyRestoreEffect = {
 };
 
 export const FossilToPokemon = {
-    'Helix Fossil': 'Omanyte',
-    'Dome Fossil': 'Kabuto',
-    'Old Amber': 'Aerodactyl',
-    'Root Fossil': 'Lileep',
-    'Claw Fossil': 'Anorith',
-    'Armor Fossil': 'Shieldon',
-    'Skull Fossil': 'Cranidos',
-    'Cover Fossil': 'Tirtouga',
-    'Plume Fossil': 'Archen',
-    'Jaw Fossil': 'Tyrunt',
-    'Sail Fossil': 'Amaura',
-};
+    'Helix_fossil': 'Omanyte',
+    'Dome_fossil': 'Kabuto',
+    'Old_amber': 'Aerodactyl',
+    'Root_fossil': 'Lileep',
+    'Claw_fossil': 'Anorith',
+    'Armor_fossil': 'Shieldon',
+    'Skull_fossil': 'Cranidos',
+    'Cover_fossil': 'Tirtouga',
+    'Plume_fossil': 'Archen',
+    'Jaw_fossil': 'Tyrunt',
+    'Sail_fossil': 'Amaura',
+} as const satisfies Record<keyof typeof FossilType, PokemonNameType>;
 
 // Used for image name
-export const PokemonToFossil = {
-    Omanyte: 'Helix Fossil',
-    Kabuto: 'Dome Fossil',
-    Aerodactyl: 'Old Amber',
-    Lileep: 'Root Fossil',
-    Anorith: 'Claw Fossil',
-    Shieldon: 'Armor Fossil',
-    Cranidos: 'Skull Fossil',
-    Tirtouga: 'Cover Fossil',
-    Archen: 'Plume Fossil',
-    Tyrunt: 'Jaw Fossil',
-    Amaura: 'Sail Fossil',
+export const PokemonToFossil: Record<(typeof FossilToPokemon)[keyof typeof FossilToPokemon], keyof typeof FossilToPokemon> = {
+    Omanyte: 'Helix_fossil',
+    Kabuto: 'Dome_fossil',
+    Aerodactyl: 'Old_amber',
+    Lileep: 'Root_fossil',
+    Anorith: 'Claw_fossil',
+    Shieldon: 'Armor_fossil',
+    Cranidos: 'Skull_fossil',
+    Tirtouga: 'Cover_fossil',
+    Archen: 'Plume_fossil',
+    Tyrunt: 'Jaw_fossil',
+    Amaura: 'Sail_fossil',
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)

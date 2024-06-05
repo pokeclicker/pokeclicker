@@ -134,6 +134,7 @@ class BreedingController {
             eggType = String(PokemonType[dataPokemon.type1]).toLowerCase();
         } else if (eggType == 'fossil') {
             eggType = GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(egg.pokemon).name];
+            eggType = GameConstants.camelCaseToString(GameConstants.humanifyString(eggType));
         }
         return `assets/images/breeding/${eggType}.png`;
     }

@@ -395,12 +395,24 @@ namespace GameConstants {
         'Unremarkable_teacup',
         'Metal_alloy',
     }
+    declare enum FossilType {
+    'Helix_fossil',
+    'Dome_fossil',
+    'Old_amber',
+    'Root_fossil',
+    'Claw_fossil',
+    'Armor_fossil',
+    'Skull_fossil',
+    'Cover_fossil',
+    'Plume_fossil',
+    'Jaw_fossil',
+    'Sail_fossil',
+    }
     declare enum FossilPieceType {
-        'None',
-        'Fossilized Bird',
-        'Fossilized Fish',
-        'Fossilized Drake',
-        'Fossilized Dino',
+        'Fossilized_bird',
+        'Fossilized_fish',
+        'Fossilized_drake',
+        'Fossilized_dino',
     }
     declare enum BattleItemType {
         'xAttack' = '',
@@ -506,7 +518,6 @@ namespace GameConstants {
         'Fighting_egg',
         'Electric_egg',
         'Dragon_egg',
-        'Pokemon_egg',
         'Mystery_egg'
     }
     export enum BulletinBoards {
@@ -534,17 +545,17 @@ namespace GameConstants {
         LargeRestore: number;
     };
     declare const FossilToPokemon: {
-        'Helix Fossil': string;
-        'Dome Fossil': string;
-        'Old Amber': string;
-        'Root Fossil': string;
-        'Claw Fossil': string;
-        'Armor Fossil': string;
-        'Skull Fossil': string;
-        'Cover Fossil': string;
-        'Plume Fossil': string;
-        'Jaw Fossil': string;
-        'Sail Fossil': string;
+        'Helix_fossil': string;
+        'Dome_fossil': string;
+        'Old_amber': string;
+        'Root_fossil': string;
+        'Claw_fossil': string;
+        'Armor_fossil': string;
+        'Skull_fossil': string;
+        'Cover_fossil': string;
+        'Plume_fossil': string;
+        'Jaw_fossil': string;
+        'Sail_fossil': string;
     };
     declare const PokemonToFossil: {
         Omanyte: string;
