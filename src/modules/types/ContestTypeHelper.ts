@@ -11,17 +11,18 @@ export default class ContestTypeHelper {
             //       E                   A
             //       A                   L
             //       U                   A
-            //       T         S    T    C <- Defending type
-            //  C    I    C    M    O    N
-            //  O    F    U    A    U    C   Attack type
-            //  O    U    T    R    G    E        |
-            //  L    L    E    T    H    D        v
-            [neu, not, imm, imm, not, imm], // COOL
-            [not, neu, not, imm, imm, imm], // BEAUTIFUL
-            [imm, not, neu, not, imm, imm], // CUTE
-            [imm, imm, not, neu, not, imm], // SMART
-            [not, imm, imm, not, neu, imm], // TOUGH
-            [not, not, not, not, not, not], // BALANCED
+            //       T         S    T    C      <- Defending type
+            //  C    I    C    M    O    N    N
+            //  O    F    U    A    U    C    O   Attack type
+            //  O    U    T    R    G    E    N        |
+            //  L    L    E    T    H    D    E        v
+            [neu, not, imm, imm, not, imm, imm], // COOL
+            [not, neu, not, imm, imm, imm, imm], // BEAUTIFUL
+            [imm, not, neu, not, imm, imm, imm], // CUTE
+            [imm, imm, not, neu, not, imm, imm], // SMART
+            [not, imm, imm, not, neu, imm, imm], // TOUGH
+            [not, not, not, not, not, not, imm], // BALANCED
+            [imm, imm, imm, imm, imm, imm, imm], // NONE
         ];
     })();
 
@@ -32,13 +33,13 @@ export default class ContestTypeHelper {
 
         // Apply None type where there isn't an attacking type
         // eslint-disable-next-line no-param-reassign
-        a2 = a2 !== ContestType.None ? a2 : a1;
+        a2 = a2 !== ContestType.None ? a2 : 6;
         // eslint-disable-next-line no-param-reassign
-        a3 = a3 !== ContestType.None ? a3 : a1;
+        a3 = a3 !== ContestType.None ? a3 : 6;
         // eslint-disable-next-line no-param-reassign
-        d2 = d2 !== ContestType.None ? d2 : d1;
+        d2 = d2 !== ContestType.None ? d2 : 6;
         // eslint-disable-next-line no-param-reassign
-        d3 = d3 !== ContestType.None ? d3 : d1;
+        d3 = d3 !== ContestType.None ? d3 : 6;
 
         let m1 = ContestTypeHelper.contestTypeMatrix[a1][d1];
         let m2 = ContestTypeHelper.contestTypeMatrix[a2][d1];
