@@ -15,7 +15,7 @@ class HeldItem extends Item {
         description: string,
         regionUnlocked: GameConstants.Region,
         public canUse: (pokemon: PartyPokemon) => boolean,
-        pixelated: boolean = false,
+        pixelated = false
     ) {
         super(name, basePrice, currency, shopOptions, displayName, description, 'heldItems');
         this.regionUnlocked = regionUnlocked;
