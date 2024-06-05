@@ -17,6 +17,7 @@ import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundUpgrade, { Upgrades } from './UndergroundUpgrade';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import Settings from '../settings/Settings';
 
 export class Underground implements Feature {
     name = 'Underground';
@@ -97,6 +98,10 @@ export class Underground implements Feature {
     });
 
     public tradeAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
+
+    public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
+        return App.game.underground.canAccess() && !Settings.getSetting('showUndergroundModule').observableValue();
+    });
 
     constructor() {
         this.upgradeList = [];
