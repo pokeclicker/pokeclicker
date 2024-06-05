@@ -74,7 +74,12 @@ class ContestRunner {
             return;
         }
         // activate encore if doing well enough
-        if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied()) {
+        if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true) {
+            Notifier.notify({
+                message: 'The crowd is cheering!',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.General.gym_won,
+            });
             ContestRunner.encoreStatus(true);
         }
         if (ContestRunner.timeLeft() < 0) {
