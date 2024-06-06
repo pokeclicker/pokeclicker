@@ -4,7 +4,7 @@ const changed = require('gulp-changed');
 const minifyHtml = require('gulp-minify-html');
 const concat = require('gulp-concat');
 const autoprefix = require('gulp-autoprefixer');
-const minifyCSS = require('gulp-minify-css');
+const cleanCSS = require('gulp-clean-css');
 const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
 const less = require('gulp-less');
@@ -219,7 +219,7 @@ gulp.task('styles', () => gulp.src(srcs.styles)
     .pipe(less())
     .pipe(concat('styles.min.css'))
     .pipe(autoprefix('last 2 versions'))
-    .pipe(minifyCSS())
+    .pipe(cleanCSS())
     .pipe(gulp.dest(dests.styles))
     .pipe(browserSync.reload({stream: true})));
 
