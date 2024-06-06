@@ -296,11 +296,11 @@ class Breeding implements Feature {
             if (type === EggType.EggItem) {
                 egg = this.createItemEgg(item.type);
             } else if (type === EggType.Fossil) {
-                egg = this.createFossilEgg(itemName)
+                egg = this.createFossilEgg(itemName);
             }
             return this.gainEgg(egg);
         }
-        let message = 'You don\'t have any free egg slots';
+        const message = 'You don\'t have any free egg slots';
         /*
         if (this.queueSlots()) {
             message += '<br/>Your queue is full';

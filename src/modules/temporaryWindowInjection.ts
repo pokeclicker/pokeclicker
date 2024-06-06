@@ -174,7 +174,7 @@ import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
-import FossilItem from './items/FossilItem'
+import FossilItem from './items/FossilItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
 import QuestItem from './items/QuestItem';

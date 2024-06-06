@@ -1,7 +1,6 @@
 import EggType from '../breeding/EggType';
 import CaughtStatus from '../enums/CaughtStatus';
 import { Currency, EggItemType } from '../GameConstants';
-import { pokemonMap } from '../pokemons/PokemonList';
 import CaughtIndicatingItem from './CaughtIndicatingItem';
 import HatchableItem from '../interfaces/HatchableItem';
 
