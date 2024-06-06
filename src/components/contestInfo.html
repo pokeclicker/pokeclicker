@@ -9,15 +9,21 @@
             Max out the audience bar to win. Defeat more trainers for a higher reward. Higher ranks offer more Contest Tokens.</br>
             <i>This feature is still in development</i><br/>
         </p>
-        <div data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
-            <h5 data-bind="text: `${ContestRank[rank]} Rank`"></h5>
-            <div data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
-                <button data-bind="click: () => {ContestRunner.startContest(rank, type)}">
-                    <h5 data-bind="text: `${ContestType[type]}`"></h5>
-                    <img data-bind="attr:{ src: ContestHall.getRibbonImage(rank, type)}">
-                    <p data-bind="text: `Appeal: ${ContestHelper.calculatePokemonContestAppeal(type).toLocaleString('en-US')}`"></p>
-                    <!-- TODO: flex spacing -->
-                  </button>
+        <div class="modal-body">
+            <div class="justify-content-center" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
+                <h4 class="card-header mb-1 p-1" data-toggle="collapse" data-bind="attr : {href : '#rankCard_' + $index()}, text: `${ContestRank[rank]} Rank`"></h4>
+                <div class="card-body mb-1 p-0 show row justify-content-center"  data-bind="attr : {id : 'rankCard_' + $index()}, foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
+                    <div class="col-4 d-flex flex-column">
+                    <button class="shopItem clickable btn btn-block btn-secondary"
+                        data-bind="click: () => {ContestRunner.startContest(rank, type)},
+                        css: { active: ContestRunner.running() && ContestRunner.type() == type && ContestRunner.rank() == rank },
+                        ">
+                        <h5 data-bind="text: `${ContestType[type]}`"></h5>
+                        <img data-bind="attr:{ src: ContestHall.getRibbonImage(rank, type)}">
+                        <p data-bind="html: 'Appeal' + '<br/>' + `${ContestHelper.calculatePokemonContestAppeal(type).toLocaleString('en-US')}`"></p>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <a class="btn btn-block btn-danger text-light" onclick="ContestHall.leave()">Leave</a>
