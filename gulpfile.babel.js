@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const gulp = require('gulp');
 const changed = require('gulp-changed');
-const minifyHtml = require('gulp-minify-html');
 const concat = require('gulp-concat');
 const autoprefix = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
