@@ -3377,7 +3377,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Master]), DepartmentStoreShop, HoennContestShop],
+    [new ContestHall([ContestRank.Master]), new ContestHall([9], [0, 1, 2, 3, 4, 5]), DepartmentStoreShop, HoennContestShop],
     //[new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
@@ -4533,7 +4533,7 @@ TownList['Hearthome City'] = new Town(
     'Hearthome City',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
+    [new ContestHall([5, 6, 7, 8], undefined, 'Sinnoh Contests'), new ContestHall([10], [5]), HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
         npcs: [HearthomeContestFan, LucyStevens1, HappinyWitness6],
