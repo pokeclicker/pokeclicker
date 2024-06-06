@@ -56,6 +56,8 @@ class ContestBattle extends Battle {
 
             // Reset pokemon index for next trainer
             ContestBattle.pokemonIndex(0);
+            // increase trainer streak
+            ContestBattle.trainerStreak(ContestBattle.trainerStreak() + 1);
 
             // Loop through trainers
             if (ContestBattle.trainerIndex() + 1 >= ContestRunner.getTrainerList().length) {
@@ -63,8 +65,6 @@ class ContestBattle extends Battle {
             } else {
                 // move to next trainer
                 ContestBattle.trainerIndex(ContestBattle.trainerIndex() + 1);
-                // increase trainer streak
-                ContestBattle.trainerStreak(ContestBattle.trainerStreak() + 1);
             }
 
         } else {
