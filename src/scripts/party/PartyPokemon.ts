@@ -362,7 +362,7 @@ class PartyPokemon implements Saveable {
         const itemName = `PokeBlock_${GameConstants.PokeBlockColor[type]}`;
         if (!player.itemList[itemName]()) {
             return Notifier.notify({
-                message : `You do not have any more ${ItemList[itemName].displayName}`,
+                message : `You do not have any more ${ItemList[itemName].displayName}s`,
                 type : NotificationConstants.NotificationOption.danger,
             });
         }

@@ -1,5 +1,5 @@
 <div class="modal noselect fade" id="pokeblockModal" tabindex="-1" role="dialog" aria-labelledby="pokeblockModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" style="min-width: fit-content;" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body p-0" style="background-color: inherit;">
-                <img style="image-rendering: pixelated;" data-bind="attr: { src: PokeBlockController.getImage() }" width="40%" />
+                <img style="image-rendering: pixelated;" data-bind="attr: { src: PokeBlockController.getImage() }" width="20%" />
                 <br/>
                 <div class="sticky-top" style="background-color: inherit;">
                   <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
@@ -79,12 +79,20 @@
                   <thead>
                       <tr class="text-light">
                           <th class="text-left bg-dark align-middle">Pokémon</th>
+                          <th class="text-left bg-dark align-middle">Contest Type</th>
                           <th class="text-left bg-dark align-middle">Appeal</th>
                       </tr>
                   </thead>
                   <tbody data-bind="foreach: lazyLoad('lazyPokeblockList', $element, PartyController.getPokeblockSortedList, { reset: modalUtils.observableState.pokeblockModalObservable }), childrenComplete: () => { lazyLoadCallback('lazypokeblockList'); }">
                     <tr class="clickable" data-bind="click: () => { $data.usePokeblock(PokeBlockController.currentlySelected(), PokeBlockController.getMultiplier()); }">
                       <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                        <td class="text-left tight" data-bind="foreach: pokemonMap[$data.name].contestType">
+                          <span class="badge text-light px-1" data-bind="if: $data >= 0,
+                                      style: { 'background-color': GameConstants.ContestColor[$data]}">
+                            <small><strong
+                              data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
+                          </span>
+                        </td>
                       <td class="text-center tight" data-bind="text: $data.calculateContestAppeal(true).toLocaleString('en-US')">Appeal</td>
                     </tr>
                   </tbody>
