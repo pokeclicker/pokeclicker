@@ -3428,6 +3428,18 @@ class QuestLineHelper {
         const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5,000 Pokémon', App.game.statistics.totalPokemonDefeated);
         drSplashQuestLine.addQuest(tackleMachine);
 
+        // Every step will reward a Biscuit escept last.
+        const karpStepReward = () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        };
+
+        drSplashQuestLine.quests().forEach(q => q.withCustomReward(karpStepReward));
+
         const SaucyBlueReward = () => {
             App.game.party.gainPokemonByName('Magikarp Saucy Blue');
             Notifier.notify({
