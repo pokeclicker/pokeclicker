@@ -74,7 +74,7 @@ class ContestRunner {
             return;
         }
         // activate encore if doing well enough
-        if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true) {
+        if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true && ContestRunner.encoreRounds() < ContestRunner.rank()) {
             Notifier.notify({
                 message: 'The crowd is cheering!',
                 type: NotificationConstants.NotificationOption.success,
@@ -164,9 +164,9 @@ class ContestRunner {
                 setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
 
-            if (ContestRunner.encoreStatus() === true && ContestRunner.encoreRounds() < ContestRunner.rank()) {
+            if (ContestRunner.encoreStatus() === true) {
                 Notifier.notify({
-                    message: 'The crowd cheers for an encore!',
+                    message: 'The crowd cheers for an encore! Bonus round incoming!',
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.General.gym_won,
                 });
@@ -174,10 +174,11 @@ class ContestRunner {
                 ContestRunner.encoreRounds(ContestRunner.encoreRounds() + 1);
                 // reset audience, time, and encore status
                 ContestRunner.audienceAppeal(0);
+                ContestRunner.audienceAppealPercentage(0);
                 ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());
                 ContestRunner.encoreStatus(false);
                 // increase audience bar (needs updated encore round from above)
-                ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * ContestRunner.encoreRounds());
+                ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * (ContestRunner.encoreRounds() + 1));
             } else {
                 // if no bonus round, end the contest
                 ContestRunner.running(false);
@@ -193,6 +194,14 @@ class ContestRunner {
     public static encoreRoundsComputable: KnockoutComputed<number> = ko.pureComputed(() => {
         return ContestRunner.encoreRounds();
     });
+
+    public static audienceStatus: KnockoutComputed<string> = ko.pureComputed(() => {
+        if (!ContestRunner.encoreStatus()) {
+            return `${ContestRunner.audienceAppeal().toLocaleString('en-US') + ' / ' + ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`;
+        } else {
+            return '<i>Encore!</i>';
+        }
+    })
 
     public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(ContestRunner.timeLeft() / 100) / 10).toFixed(1);
