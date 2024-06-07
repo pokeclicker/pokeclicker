@@ -83,7 +83,6 @@ const srcs = {
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
         'node_modules/sortablejs/Sortable.min.js',
-        'src/libs/*.js',
     ],
 };
 
@@ -138,14 +137,13 @@ gulp.task('browserSync', () => {
 gulp.task('compile-html', (done) => {
     const htmlDest = './build';
     const stream = gulp.src('./src/index.html');
-    // If we want the development banner displayed
-    stream.pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER));
 
     stream.pipe(plumber())
         .pipe(gulpImport('./src/components/'))
         .pipe(replace('$VERSION', version))
         .pipe(replace('$DEVELOPMENT', !!config.DEVELOPMENT))
         .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
+        .pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER)) // If we want the development banner displayed
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
