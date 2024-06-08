@@ -25389,6 +25389,7 @@ export const pokemonList = createPokemonArray(
         'id': 840.01,
         'name': 'Exposed Applin',
         'type': [
+            PokemonType.Bug,
             PokemonType.Dragon,
         ],
         'base': {

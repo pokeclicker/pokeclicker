@@ -342,6 +342,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Blue Raindrops Shop Icon',
             'Magikarp Saucy Violet Shop Icon',
             'Magikarp (Feebas)',
+            'Magikarp alt OverWorld sprites',
             'Magma Admin Courtney',
             'Magma Stone',
             'Man of Mystery',
@@ -574,6 +575,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/736029608587296819',
         image: 'assets/images/profile/trainer-119.png',
         resources: [
+            'Ditto (Transforming)',
             'Dugtrio (Punk)',
             'Genesect (High-Speed) and Drive Forms',
             'Koga Trainer',
