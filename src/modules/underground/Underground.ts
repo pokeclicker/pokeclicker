@@ -174,7 +174,7 @@ export class Underground implements Feature {
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Shards, 'Reduced Shards', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(750, 750, 750), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
             ),
             new UndergroundUpgrade(
@@ -186,13 +186,13 @@ export class Underground implements Feature {
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Evolution_Items, 'Reduced Evolution Items', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(500, 500, 500), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Fossil_Pieces, 'Reduced Fossil Pieces', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(200, 200, 200), Currency.diamond),
                 GameHelper.createArray(0, 1, 1), true, new MaxRegionRequirement(Region.galar),
             ),
         ];
