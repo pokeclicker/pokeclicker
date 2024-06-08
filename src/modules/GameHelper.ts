@@ -1,4 +1,4 @@
-import {
+import type {
     Observable as KnockoutObservable,
     Computed as KnockoutComputed,
 } from 'knockout';

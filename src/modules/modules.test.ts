@@ -1,5 +1,6 @@
 // Override system date
-vi.useFakeTimers().setSystemTime(new Date(1675298702433));
+const testDate = new Date(1675298702433);
+vi.useFakeTimers().setSystemTime(testDate);
 // Override Math.random() to always return the same value
 vi.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
 
@@ -118,6 +119,9 @@ import * as ko from 'knockout';
 import { AchievementOption } from './GameConstants';
 
 describe('Test GameHelper', () => {
+    it('current time', () => {
+        expect(GameHelper.currentTime().toString()).toBe(testDate.toString())
+    });
     it('time until tomorrow', () => {
         expect(GameHelper.formattedTimeUntilTomorrow()).toBe('23:14');
         expect(GameHelper.formattedLetterTimeUntilTomorrow()).toBe('23h14m');
