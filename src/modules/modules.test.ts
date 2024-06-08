@@ -1,8 +1,11 @@
-// Override system date
-const testDate = new Date(1675298702433);
-vi.useFakeTimers().setSystemTime(testDate);
-// Override Math.random() to always return the same value
-vi.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
+const { testDate } = vi.hoisted(() => {
+    // Override system date
+    const date = new Date(1675298702433);
+    vi.useFakeTimers().setSystemTime(date);
+    // Override Math.random() to always return the same value
+    vi.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
+    return { testDate: date };
+});
 
 import { SpriteCredits, CodeCredits } from './Credits';
 
