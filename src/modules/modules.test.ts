@@ -120,7 +120,7 @@ import { AchievementOption } from './GameConstants';
 
 describe('Test GameHelper', () => {
     it('current time', () => {
-        expect(GameHelper.currentTime().toString()).toBe(testDate.toString())
+        expect(GameHelper.currentTime().toString()).toBe(testDate.toString());
     });
     it('time until tomorrow', () => {
         expect(GameHelper.formattedTimeUntilTomorrow()).toBe('23:14');
