@@ -2700,8 +2700,10 @@ class Update implements Saveable {
                 const surveyEfficiencyCost = GameHelper.createArray(100, 400, 100);
                 const investedDiamonds = surveyEfficiencyCost.slice(0, surveyEfficiencyLevel).reduce((acc, cur) => acc + cur, 0);
                 saveData.wallet.currencies[GameConstants.Currency.diamond] += investedDiamonds;
-                delete saveData.underground.upgrades.Survey_Efficiency;
             }
+
+            // The NewYLayer upgrades has been refactored to Items_All, copy the level
+            saveData.underground.upgrades.Items_All = saveData.underground.upgrades.NewYLayer;
         },
     };
 
