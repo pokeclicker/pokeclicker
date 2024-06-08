@@ -12,7 +12,6 @@ export enum Upgrades {
     'Daily_Deals_Max',
     'Bomb_Efficiency',
     'Survey_Cost',
-    'Survey_Efficiency',
     'NewYLayer',
     'Reduced_Shards',
     'Reduced_Plates',

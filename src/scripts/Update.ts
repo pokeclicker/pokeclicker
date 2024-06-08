@@ -2693,6 +2693,15 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[241]) {
                 Update.startQuestLine(saveData, 'Child of the Stars');
             }
+
+            // Reimburse Survey Efficiency upgrade
+            const surveyEfficiencyLevel = saveData.underground.upgrades.Survey_Efficiency;
+            if (surveyEfficiencyLevel) {
+                const surveyEfficiencyCost = GameHelper.createArray(100, 400, 100);
+                const investedDiamonds = surveyEfficiencyCost.slice(0, surveyEfficiencyLevel).reduce((acc, cur) => acc + cur, 0);
+                saveData.wallet.currencies[GameConstants.Currency.diamond] += investedDiamonds;
+                delete saveData.underground.upgrades.Survey_Efficiency;
+            }
         },
     };
 

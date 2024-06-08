@@ -42,7 +42,6 @@ export class Underground implements Feature {
     public static BASE_ENERGY_REGEN_TIME = 60;
     public static BASE_DAILY_DEALS_MAX = 3;
     public static BASE_BOMB_EFFICIENCY = 10;
-    public static BASE_SURVEY_CHARGE_EFFICIENCY = 1;
 
     public static sizeX = 25;
     public static sizeY = 12;
@@ -160,12 +159,6 @@ export class Underground implements Feature {
                 false,
             ),
             new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Survey_Efficiency, 'Survey Efficiency', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(100, 400, 100), Currency.diamond),
-                GameHelper.createArray(0, 4, 1),
-            ),
-            new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.NewYLayer, 'Larger Underground, +1 Item', 1,
                 AmountFactory.createArray(
                     GameHelper.createArray(3000, 3000, 3000), Currency.diamond),
@@ -227,10 +220,6 @@ export class Underground implements Feature {
 
     getSurvey_Cost() {
         return Underground.SURVEY_ENERGY - this.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Cost).calculateBonus();
-    }
-
-    getSurvey_Efficiency() {
-        return Underground.BASE_SURVEY_CHARGE_EFFICIENCY + this.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Efficiency).calculateBonus();
     }
 
     getSizeY() {
