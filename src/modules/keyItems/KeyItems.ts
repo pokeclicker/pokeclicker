@@ -46,7 +46,7 @@ export default class KeyItems implements Feature {
                 () => App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
             new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
-                () => MapHelper.accessToRoute(14, Region.kanto), undefined, undefined, 'Wailmer Pail'),
+                () => MapHelper.accessToRoute(11, Region.kanto), undefined, undefined, 'Wailmer Pail'),
 
             new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground.', undefined, undefined, undefined, 'Explorer Kit'),
             new KeyItem(KeyItemType.Eon_ticket, 'A limited edition ticket for a cruise to the Southern Island.', undefined, undefined, undefined, 'Eon Ticket'),
@@ -77,6 +77,8 @@ export default class KeyItems implements Feature {
                     ) || App.game.party.caughtPokemon[0];
                     patientZero.pokerus = Pokerus.Contagious;
                 }),
+            new KeyItem(KeyItemType['Z-Power_Ring'], 'A gift from Melemele\'s kahuna that enables the use of Z-Crystals. What they do is still under development.', // Using a Z-Crystal boosts the power of all your Pokémon of a shared type for a short while, after which some time is needed to recharge.',
+                undefined, undefined, undefined, 'Z-Power Ring'),
         ];
     }
 

@@ -17,7 +17,7 @@ export default class PokemonItem extends PokerusIndicatingItem {
 
     constructor(
         pokemon: PokemonNameType,
-        basePrice: number,
+        basePrice: number = undefined,
         currency: Currency = Currency.questPoint,
         public ignoreEV = false,
         displayName: string = undefined,

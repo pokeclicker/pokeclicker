@@ -150,6 +150,20 @@ type TmpAchievementHandler = {
     load: ()=>void
 };
 
+type TmpTemporaryBattleListType = {
+    [battleName: string]: TmpTemporaryBattleType;
+};
+
+type TmpTemporaryBattleType = {
+    name: string;
+    parent?: TmpTownType;
+    getTown: () => TmpTownType;
+};
+
+type TmpTownType = {
+    name: string;
+};
+
 type TmpPokemonFactoryType = {
     generateShiny(chance: number, skipBonus?: boolean): boolean;
     generateGenderById(id: number): BattlePokemonGender;
@@ -172,4 +186,5 @@ declare global {
     const AchievementHandler: TmpAchievementHandler;
     const PokemonFactory: TmpPokemonFactoryType;
     const PartyController: TmpPartyControllerType;
+    const TemporaryBattleList: TmpTemporaryBattleListType;
 }

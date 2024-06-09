@@ -100,7 +100,7 @@
                 <tr>
                   <td class="text-left">Breeding Efficiency</td>
                   <td class="text-left tight"><code
-                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumSignificantDigits: 2 })"></code>
+                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumFractionDigits: 3 })"></code>
                   </td>
                 </tr>
                 <!-- /ko -->
@@ -178,7 +178,12 @@
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
                         data-bind="checked: App.game.party.getPokemon($data).showShadowImage">
-                      <div class="toggler-slider">
+                      <div class="toggler-slider" data-bind="tooltip: {
+                        html: true,
+                        title: Settings.getSetting('partyShowPurifiedShadowSprites').observableValue() ?
+                            `<strong><u>${Settings.getSetting('partyShowPurifiedShadowSprites').displayName}</u></strong> is currently overriding this setting.` : '',
+                        trigger: 'hover',
+                      }">
                         <div class="toggler-knob"></div>
                       </div>
                     </label>

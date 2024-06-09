@@ -27,10 +27,11 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import QuestItem from './QuestItem';
-import Consumable from './Consumable';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
+import { pokemonMap } from '../pokemons/PokemonList';
+import AttackGainConsumable from './AttackGainConsumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -38,7 +39,7 @@ ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '+50% Bonus to
 ItemList.xClick          = new BattleItem(BattleItemType.xClick, '+50% Bonus to click attack for 30 seconds', 400, undefined, 'X Click', 'clickAttack', 1.5);
 ItemList.Lucky_egg       = new BattleItem(BattleItemType.Lucky_egg, '+50% Bonus to experience gained for 30 seconds', 800, undefined, 'Lucky Egg', 'exp', 1.5);
 ItemList.Token_collector = new BattleItem(BattleItemType.Token_collector, '+50% Bonus to Dungeon Tokens gained for 30 seconds', 1000, undefined, 'Token Collector', 'dungeonToken', 1.5);
-ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increased chance of gaining extra items for 30 seconds', 1500, undefined, 'Dowsing Machine');
+ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increases chance for Pokémon to drop rare hold items; chance to multiply loot from dungeon chests, for 30 seconds.', 1500, undefined, 'Dowsing Machine');
 ItemList.Lucky_incense   = new BattleItem(BattleItemType.Lucky_incense, '+50% Bonus to Pokédollars gained for 30 seconds', 2000, undefined, 'Lucky Incense', 'money', 1.5);
 
 ItemList.ChopleBerry     = new BerryItem(BerryType.Chople, 10000, Currency.farmPoint, BerryType.Spelon);
@@ -60,8 +61,8 @@ ItemList.Explosive_Charge = new BuyOakItem(OakItemType.Explosive_Charge, 5000, C
 ItemList.Treasure_Scanner = new BuyOakItem(OakItemType.Treasure_Scanner, 10000, Currency.questPoint);
 
 ItemList.Yellow_Flute = new FluteItem(FluteItemType.Yellow_Flute, 'Pokémon Attack', ['Grass', 'Flying', 'Electric'], 'pokemonAttack', 1.02);
-ItemList.Time_Flute   = new FluteItem(FluteItemType.Time_Flute, 'Gym and Dungeon Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
 ItemList.Black_Flute  = new FluteItem(FluteItemType.Black_Flute, 'Click Attack', ['Dark', 'Psychic', 'Fighting'], 'clickAttack', 1.02);
+ItemList.Time_Flute   = new FluteItem(FluteItemType.Time_Flute, 'Gym and Dungeon Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
 ItemList.Red_Flute    = new FluteItem(FluteItemType.Red_Flute, 'Egg Steps', ['Fire', 'Rock', 'Dragon'], 'eggStep', 1.02);
 ItemList.White_Flute  = new FluteItem(FluteItemType.White_Flute, 'Shiny Chance', ['Normal', 'Fairy', 'Ice'], 'shiny', 1.02);
 ItemList.Blue_Flute   = new FluteItem(FluteItemType.Blue_Flute, 'EV Yield', ['Water', 'Bug', 'Ghost'], 'ev', 1.02);
@@ -73,7 +74,7 @@ ItemList.Amaze_Mulch = new MulchItem(MulchType.Amaze_Mulch, 200, 'Amaze Mulch', 
 ItemList.Freeze_Mulch = new MulchItem(MulchType.Freeze_Mulch, 350, 'Freeze Mulch', 'Stops Berry growth and auras. Mutations will still occur while berries are frozen.');
 ItemList.Gooey_Mulch = new MulchItem(MulchType.Gooey_Mulch, 100, 'Gooey Mulch', 'Helps attract rarer species. Gooed Pokémon are less likely to flee.');
 
-ItemList.Pokeball   = new PokeballItem(Pokeball.Pokeball, 100, undefined, undefined, 'Poké Ball');
+ItemList.Pokeball   = new PokeballItem(Pokeball.Pokeball, 100, undefined, { multiplier: 1 }, 'Poké Ball');
 ItemList.Greatball  = new PokeballItem(Pokeball.Greatball, 500, undefined, undefined, 'Great Ball');
 ItemList.Ultraball  = new PokeballItem(Pokeball.Ultraball, 2000, undefined, undefined, 'Ultra Ball');
 ItemList.Masterball = new PokeballItem(Pokeball.Masterball, 2500, Currency.questPoint, undefined, 'Master Ball');
@@ -88,6 +89,7 @@ ItemList.Lureball = new PokeballItem(Pokeball.Lureball, Infinity, Currency.battl
 ItemList.Nestball = new PokeballItem(Pokeball.Nestball, Infinity, Currency.battlePoint, undefined, 'Nest Ball');
 ItemList.Repeatball = new PokeballItem(Pokeball.Repeatball, Infinity, Currency.battlePoint, undefined, 'Repeat Ball');
 ItemList.Beastball = new PokeballItem(Pokeball.Beastball, 500, Currency.questPoint, undefined, 'Beast Ball');
+ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmPoint, undefined, 'Moon Ball');
 
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
@@ -117,7 +119,7 @@ ItemList.Alakazite          = new MegaStoneItem(MegaStoneType.Alakazite, 'Alakaz
 //ItemList.Altarianite        = new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
 ItemList.Ampharosite        = new MegaStoneItem(MegaStoneType.Ampharosite, 'Ampharos', 10000);
 ItemList.Audinite           = new MegaStoneItem(MegaStoneType.Audinite, 'Audino', 10000);
-//ItemList.Banettite          = new MegaStoneItem(MegaStoneType.Banettite, 'Banette', 10000);
+ItemList.Banettite          = new MegaStoneItem(MegaStoneType.Banettite, 'Banette', 10000);
 ItemList.Beedrillite        = new MegaStoneItem(MegaStoneType.Beedrillite, 'Beedrill', 10000);
 ItemList.Blastoisinite      = new MegaStoneItem(MegaStoneType.Blastoisinite, 'Blastoise', 10000, Currency.questPoint,
     { visible: new ObtainedPokemonRequirement('Blastoise') }, 'Blastoisinite', 'A Mega Stone for Blastoise.');
@@ -189,13 +191,13 @@ ItemList.Crystalline_Cocoon_Jirachi = new QuestItem('Crystalline_Cocoon_Jirachi'
 ItemList.Meteorite_Shard_Delta = new QuestItem('Meteorite_Shard_Delta', 'Meteorite Shard', 'A Shard of a Meteorite', 'The Delta Episode');
 ItemList.Mysterious_Vial_Detective_Pikachu = new QuestItem('Mysterious_Vial_Detective_Pikachu', 'Mysterious Vial', 'An Aipom dropped this while running away, I wonder what it is?', 'Detective Pikachu');
 ItemList.Heart_Diamond_Diancie = new QuestItem('Heart_Diamond_Diancie', 'Heart Diamond', 'The energy core of the Diamond domain', 'Princess Diancie');
-ItemList.Red_Petal_Mina = new QuestItem('Red_Petal_Mina', 'Red Petal', 'One of the Petals you need for Mina\'s trial given by Captain Kiawe', 'Mina\'s Trial');
-ItemList.Orange_Petal_Mina = new QuestItem('Orange_Petal_Mina', 'Orange Petal', 'One of the Petals you need for Mina\'s trial given by Captain Ilima', 'Mina\'s Trial');
-ItemList.Yellow_Petal_Mina = new QuestItem('Yellow_Petal_Mina', 'Yellow Petal', 'One of the Petals you need for Mina\'s trial given by Captain Sophocles', 'Mina\'s Trial');
-ItemList.Green_Petal_Mina = new QuestItem('Green_Petal_Mina', 'Green Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mallow', 'Mina\'s Trial');
-ItemList.Blue_Petal_Mina = new QuestItem('Blue_Petal_Mina', 'Blue Petal', 'One of the Petals you need for Mina\'s trial given by Captain Lana', 'Mina\'s Trial');
-ItemList.Purple_Petal_Mina = new QuestItem('Purple_Petal_Mina', 'Purple Petal', 'One of the Petals you need for Mina\'s trial given by Kahuna Nanu', 'Mina\'s Trial');
-ItemList.Pink_Petal_Mina = new QuestItem('Pink_Petal_Mina', 'Pink Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mina', 'Mina\'s Trial');
+ItemList.Red_Petal_Mina = new QuestItem('Red_Petal_Mina', 'Red Petal', 'One of the Petals you need for Mina\'s trial given by Captain Kiawe', 'Island Challenge');
+ItemList.Orange_Petal_Mina = new QuestItem('Orange_Petal_Mina', 'Orange Petal', 'One of the Petals you need for Mina\'s trial given by Captain Ilima', 'Island Challenge');
+ItemList.Yellow_Petal_Mina = new QuestItem('Yellow_Petal_Mina', 'Yellow Petal', 'One of the Petals you need for Mina\'s trial given by Captain Sophocles', 'Island Challenge');
+ItemList.Green_Petal_Mina = new QuestItem('Green_Petal_Mina', 'Green Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mallow', 'Island Challenge');
+ItemList.Blue_Petal_Mina = new QuestItem('Blue_Petal_Mina', 'Blue Petal', 'One of the Petals you need for Mina\'s trial given by Captain Lana', 'Island Challenge');
+ItemList.Purple_Petal_Mina = new QuestItem('Purple_Petal_Mina', 'Purple Petal', 'One of the Petals you need for Mina\'s trial given by Kahuna Nanu', 'Island Challenge');
+ItemList.Pink_Petal_Mina = new QuestItem('Pink_Petal_Mina', 'Pink Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mina', 'Island Challenge');
 ItemList.Sand_Bag_Magikarp_Jump = new QuestItem('Sand_Bag_Magikarp_Jump', 'Sand Bag', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Jump_Counter_Magikarp_Jump = new QuestItem('Jump_Counter_Magikarp_Jump', 'Jump Counter', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Timber_Magikarp_Jump = new QuestItem('Timber_Magikarp_Jump', 'Timber', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
@@ -209,6 +211,7 @@ ItemList.Push_Golem_Magikarp_Jump = new QuestItem('Push_Golem_Magikarp_Jump', 'P
 ItemList.Push_Steelix_Magikarp_Jump = new QuestItem('Push_Steelix_Magikarp_Jump', 'Push Steelix', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Prison_Bottle = new QuestItem('Prison_Bottle', 'Prison Bottle', 'A magical bottle used to bind Hoopa', 'Clash of Ages');
 ItemList.Great_Twisted_Spoon = new QuestItem('Great_Twisted_Spoon', 'Great Twisted Spoon', 'A larger version of the Twisted Spoon made specifically for Mewtwo', 'An Unrivaled Power');
+ItemList.Island_Challenge_Amulet = new QuestItem('Island_Challenge_Amulet', 'Island Challenge Amulet', 'A symbol that denotes your pilgramige on the Island Challenge of Alola. Stronger Trials await you with this in your bag!', 'Island Challenge');
 ItemList.Fighting_Memory_Silvally = new QuestItem('Fighting_Memory_Silvally', 'Fighting Memory', 'One of Silvally\'s memories, obtained from Kahuna Hala in Iki Town', 'Typing some Memories');
 ItemList.Rock_Memory_Silvally = new QuestItem('Rock_Memory_Silvally', 'Rock Memory', 'One of Silvally\'s memories, obtained from Kahuna Olivia in Konikoni City', 'Typing some Memories');
 ItemList.Dark_Memory_Silvally = new QuestItem('Dark_Memory_Silvally', 'Dark Memory', 'One of Silvally\'s memories, obtained from Kahuna Nanu in Malie City', 'Typing some Memories');
@@ -217,7 +220,7 @@ ItemList.Water_Memory_Silvally = new QuestItem('Water_Memory_Silvally', 'Water M
 ItemList.Grass_Memory_Silvally = new QuestItem('Grass_Memory_Silvally', 'Grass Memory', 'One of Silvally\'s memories, obtained from Captain Mallow in Lush Jungle', 'Typing some Memories', 'Typing some Memories', 125000, Currency.questPoint);
 ItemList.Fire_Memory_Silvally = new QuestItem('Fire_Memory_Silvally', 'Fire Memory', 'One of Silvally\'s memories, obtained from Captain Kiawe in Wela Volcano Park', 'Typing some Memories', 'Typing some Memories', 75000, Currency.battlePoint);
 ItemList.Electric_Memory_Silvally = new QuestItem('Electric_Memory_Silvally', 'Electric Memory', 'One of Silvally\'s memories, obtained from Captain Sophocles in Hokulani Observatory', 'Typing some Memories', 'Typing some Memories', 500000000, Currency.money);
-ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 'Typing some Memories', 5000, Currency.diamond);
+ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 'Typing some Memories', 1000, Currency.diamond);
 ItemList.Ground_Memory_Silvally = new QuestItem('Ground_Memory_Silvally', 'Ground Memory', 'One of Silvally\'s memories, obtained from Kahuna Hapu on Exeggutor Island Hill', 'Typing some Memories', 'Typing some Memories', 200000, Currency.farmPoint);
 ItemList.Bug_Memory_Silvally = new QuestItem('Bug_Memory_Silvally', 'Bug Memory', 'One of Silvally\'s memories, obtained from Guzma in Po Town', 'Typing some Memories');
 ItemList.Flying_Memory_Silvally = new QuestItem('Flying_Memory_Silvally', 'Flying Memory', 'One of Silvally\'s memories, obtained from Kahili on Ten Carat Hill', 'Typing some Memories');
@@ -251,110 +254,111 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 }, undefined, 'Reduces steps required when hatching');
 
 // Consumables
-ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+ItemList.Rare_Candy = new AttackGainConsumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
+ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, undefined, 'Strengthen your Magikarp', 6, (pokemon) => Math.floor(pokemon.id) === pokemonMap.Magikarp.id);
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
 
 // Underground Items
 // Sellable (Diamonds)
-ItemList.Rare_bone = new TreasureItem('Rare_bone', UndergroundItemValueType.Diamond, 3, 'Rare Bone');
-ItemList.Star_piece = new TreasureItem('Star_piece', UndergroundItemValueType.Diamond, 5, 'Star Piece');
-ItemList.Revive = new TreasureItem('Revive', UndergroundItemValueType.Diamond, 2, 'Revive');
-ItemList.Max_revive = new TreasureItem('Max_revive', UndergroundItemValueType.Diamond, 4, 'Max Revive');
-ItemList.Iron_ball = new TreasureItem('Iron_ball', UndergroundItemValueType.Diamond, 2, 'Iron Ball');
-ItemList.Heart_scale = new TreasureItem('Heart_scale', UndergroundItemValueType.Diamond, 10, 'Heart Scale');
-ItemList.Light_clay = new TreasureItem('Light_clay', UndergroundItemValueType.Diamond, 2, 'Light Clay');
-ItemList.Odd_keystone = new TreasureItem('Odd_keystone', UndergroundItemValueType.Diamond, 6, 'Odd Keystone');
-ItemList.Hard_stone = new TreasureItem('Hard_stone', UndergroundItemValueType.Diamond, 4, 'Hard Stone');
-ItemList.Oval_stone = new TreasureItem('Oval_stone', UndergroundItemValueType.Diamond, 3, 'Oval Stone');
-ItemList.Smooth_rock = new TreasureItem('Smooth_rock', UndergroundItemValueType.Diamond, 2, 'Smooth Rock');
-ItemList.Heat_rock = new TreasureItem('Heat_rock', UndergroundItemValueType.Diamond, 2, 'Heat Rock');
-ItemList.Icy_rock = new TreasureItem('Icy_rock', UndergroundItemValueType.Diamond, 2, 'Icy Rock');
-ItemList.Damp_rock = new TreasureItem('Damp_rock', UndergroundItemValueType.Diamond, 2, 'Damp Rock');
+ItemList.Rare_bone = new TreasureItem('Rare_bone', UndergroundItemValueType.Diamond, 'Rare Bone');
+ItemList.Star_piece = new TreasureItem('Star_piece', UndergroundItemValueType.Diamond, 'Star Piece');
+ItemList.Revive = new TreasureItem('Revive', UndergroundItemValueType.Diamond, 'Revive');
+ItemList.Max_revive = new TreasureItem('Max_revive', UndergroundItemValueType.Diamond, 'Max Revive');
+ItemList.Iron_ball = new TreasureItem('Iron_ball', UndergroundItemValueType.Diamond, 'Iron Ball');
+ItemList.Heart_scale = new TreasureItem('Heart_scale', UndergroundItemValueType.Diamond, 'Heart Scale');
+ItemList.Light_clay = new TreasureItem('Light_clay', UndergroundItemValueType.Diamond, 'Light Clay');
+ItemList.Odd_keystone = new TreasureItem('Odd_keystone', UndergroundItemValueType.Diamond, 'Odd Keystone');
+ItemList.Hard_stone = new TreasureItem('Hard_stone', UndergroundItemValueType.Diamond, 'Hard Stone');
+ItemList.Oval_stone = new TreasureItem('Oval_stone', UndergroundItemValueType.Diamond, 'Oval Stone');
+ItemList.Smooth_rock = new TreasureItem('Smooth_rock', UndergroundItemValueType.Diamond, 'Smooth Rock');
+ItemList.Heat_rock = new TreasureItem('Heat_rock', UndergroundItemValueType.Diamond, 'Heat Rock');
+ItemList.Icy_rock = new TreasureItem('Icy_rock', UndergroundItemValueType.Diamond, 'Icy Rock');
+ItemList.Damp_rock = new TreasureItem('Damp_rock', UndergroundItemValueType.Diamond, 'Damp Rock');
 // Plates
-ItemList.Draco_plate = new TreasureItem('Draco_plate', UndergroundItemValueType.Gem, 0, 'Draco Plate');
-ItemList.Dread_plate = new TreasureItem('Dread_plate', UndergroundItemValueType.Gem, 0, 'Dread Plate');
-ItemList.Earth_plate = new TreasureItem('Earth_plate', UndergroundItemValueType.Gem, 0, 'Earth Plate');
-ItemList.Fist_plate = new TreasureItem('Fist_plate', UndergroundItemValueType.Gem, 0, 'Fist Plate');
-ItemList.Flame_plate = new TreasureItem('Flame_plate', UndergroundItemValueType.Gem, 0, 'Flame Plate');
-ItemList.Icicle_plate = new TreasureItem('Icicle_plate', UndergroundItemValueType.Gem, 0, 'Icicle Plate');
-ItemList.Insect_plate = new TreasureItem('Insect_plate', UndergroundItemValueType.Gem, 0, 'Insect Plate');
-ItemList.Iron_plate = new TreasureItem('Iron_plate', UndergroundItemValueType.Gem, 0, 'Iron Plate');
-ItemList.Meadow_plate = new TreasureItem('Meadow_plate', UndergroundItemValueType.Gem, 0, 'Meadow Plate');
-ItemList.Mind_plate = new TreasureItem('Mind_plate', UndergroundItemValueType.Gem, 0, 'Mind Plate');
-ItemList.Sky_plate = new TreasureItem('Sky_plate', UndergroundItemValueType.Gem, 0, 'Sky Plate');
-ItemList.Splash_plate = new TreasureItem('Splash_plate', UndergroundItemValueType.Gem, 0, 'Splash Plate');
-ItemList.Spooky_plate = new TreasureItem('Spooky_plate', UndergroundItemValueType.Gem, 0, 'Spooky Plate');
-ItemList.Stone_plate = new TreasureItem('Stone_plate', UndergroundItemValueType.Gem, 0, 'Stone Plate');
-ItemList.Toxic_plate = new TreasureItem('Toxic_plate', UndergroundItemValueType.Gem, 0, 'Toxic Plate');
-ItemList.Zap_plate = new TreasureItem('Zap_plate', UndergroundItemValueType.Gem, 0, 'Zap Plate');
-ItemList.Pixie_plate = new TreasureItem('Pixie_plate', UndergroundItemValueType.Gem, 0, 'Pixie Plate');
-ItemList.Blank_plate = new TreasureItem('Blank_plate', UndergroundItemValueType.Gem, 0, 'Blank Plate');
+ItemList.Draco_plate = new TreasureItem('Draco_plate', UndergroundItemValueType.Gem, 'Draco Plate');
+ItemList.Dread_plate = new TreasureItem('Dread_plate', UndergroundItemValueType.Gem, 'Dread Plate');
+ItemList.Earth_plate = new TreasureItem('Earth_plate', UndergroundItemValueType.Gem, 'Earth Plate');
+ItemList.Fist_plate = new TreasureItem('Fist_plate', UndergroundItemValueType.Gem, 'Fist Plate');
+ItemList.Flame_plate = new TreasureItem('Flame_plate', UndergroundItemValueType.Gem, 'Flame Plate');
+ItemList.Icicle_plate = new TreasureItem('Icicle_plate', UndergroundItemValueType.Gem, 'Icicle Plate');
+ItemList.Insect_plate = new TreasureItem('Insect_plate', UndergroundItemValueType.Gem, 'Insect Plate');
+ItemList.Iron_plate = new TreasureItem('Iron_plate', UndergroundItemValueType.Gem, 'Iron Plate');
+ItemList.Meadow_plate = new TreasureItem('Meadow_plate', UndergroundItemValueType.Gem, 'Meadow Plate');
+ItemList.Mind_plate = new TreasureItem('Mind_plate', UndergroundItemValueType.Gem, 'Mind Plate');
+ItemList.Sky_plate = new TreasureItem('Sky_plate', UndergroundItemValueType.Gem, 'Sky Plate');
+ItemList.Splash_plate = new TreasureItem('Splash_plate', UndergroundItemValueType.Gem, 'Splash Plate');
+ItemList.Spooky_plate = new TreasureItem('Spooky_plate', UndergroundItemValueType.Gem, 'Spooky Plate');
+ItemList.Stone_plate = new TreasureItem('Stone_plate', UndergroundItemValueType.Gem, 'Stone Plate');
+ItemList.Toxic_plate = new TreasureItem('Toxic_plate', UndergroundItemValueType.Gem, 'Toxic Plate');
+ItemList.Zap_plate = new TreasureItem('Zap_plate', UndergroundItemValueType.Gem, 'Zap Plate');
+ItemList.Pixie_plate = new TreasureItem('Pixie_plate', UndergroundItemValueType.Gem, 'Pixie Plate');
+ItemList.Blank_plate = new TreasureItem('Blank_plate', UndergroundItemValueType.Gem, 'Blank Plate');
 // Fossils
-ItemList.Helix_fossil = new TreasureItem('Helix_fossil', UndergroundItemValueType.Fossil, 0, 'Helix Fossil');
-ItemList.Dome_fossil = new TreasureItem('Dome_fossil', UndergroundItemValueType.Fossil, 0, 'Dome Fossil');
-ItemList.Old_amber = new TreasureItem('Old_amber', UndergroundItemValueType.Fossil, 0, 'Old Amber');
-ItemList.Root_fossil = new TreasureItem('Root_fossil', UndergroundItemValueType.Fossil, 0, 'Root Fossil');
-ItemList.Claw_fossil = new TreasureItem('Claw_fossil', UndergroundItemValueType.Fossil, 0, 'Claw Fossil');
-ItemList.Armor_fossil = new TreasureItem('Armor_fossil', UndergroundItemValueType.Fossil, 0, 'Armor Fossil');
-ItemList.Skull_fossil = new TreasureItem('Skull_fossil', UndergroundItemValueType.Fossil, 0, 'Skull Fossil');
-ItemList.Cover_fossil = new TreasureItem('Cover_fossil', UndergroundItemValueType.Fossil, 0, 'Cover Fossil');
-ItemList.Plume_fossil = new TreasureItem('Plume_fossil', UndergroundItemValueType.Fossil, 0, 'Plume Fossil');
-ItemList.Jaw_fossil = new TreasureItem('Jaw_fossil', UndergroundItemValueType.Fossil, 0, 'Jaw Fossil');
-ItemList.Sail_fossil = new TreasureItem('Sail_fossil', UndergroundItemValueType.Fossil, 0, 'Sail Fossil');
-ItemList.Fossilized_bird = new TreasureItem('Fossilized_bird', UndergroundItemValueType.FossilPiece, 0, 'Fossilized Bird');
-ItemList.Fossilized_fish = new TreasureItem('Fossilized_fish', UndergroundItemValueType.FossilPiece, 0, 'Fossilized Fish');
-ItemList.Fossilized_drake = new TreasureItem('Fossilized_drake', UndergroundItemValueType.FossilPiece, 0, 'Fossilized Drake');
-ItemList.Fossilized_dino = new TreasureItem('Fossilized_dino', UndergroundItemValueType.FossilPiece, 0, 'Fossilized Dino');
+ItemList.Helix_fossil = new TreasureItem('Helix_fossil', UndergroundItemValueType.Fossil, 'Helix Fossil');
+ItemList.Dome_fossil = new TreasureItem('Dome_fossil', UndergroundItemValueType.Fossil, 'Dome Fossil');
+ItemList.Old_amber = new TreasureItem('Old_amber', UndergroundItemValueType.Fossil, 'Old Amber');
+ItemList.Root_fossil = new TreasureItem('Root_fossil', UndergroundItemValueType.Fossil, 'Root Fossil');
+ItemList.Claw_fossil = new TreasureItem('Claw_fossil', UndergroundItemValueType.Fossil, 'Claw Fossil');
+ItemList.Armor_fossil = new TreasureItem('Armor_fossil', UndergroundItemValueType.Fossil, 'Armor Fossil');
+ItemList.Skull_fossil = new TreasureItem('Skull_fossil', UndergroundItemValueType.Fossil, 'Skull Fossil');
+ItemList.Cover_fossil = new TreasureItem('Cover_fossil', UndergroundItemValueType.Fossil, 'Cover Fossil');
+ItemList.Plume_fossil = new TreasureItem('Plume_fossil', UndergroundItemValueType.Fossil, 'Plume Fossil');
+ItemList.Jaw_fossil = new TreasureItem('Jaw_fossil', UndergroundItemValueType.Fossil, 'Jaw Fossil');
+ItemList.Sail_fossil = new TreasureItem('Sail_fossil', UndergroundItemValueType.Fossil, 'Sail Fossil');
+ItemList.Fossilized_bird = new TreasureItem('Fossilized_bird', UndergroundItemValueType.FossilPiece, 'Fossilized Bird');
+ItemList.Fossilized_fish = new TreasureItem('Fossilized_fish', UndergroundItemValueType.FossilPiece, 'Fossilized Fish');
+ItemList.Fossilized_drake = new TreasureItem('Fossilized_drake', UndergroundItemValueType.FossilPiece, 'Fossilized Drake');
+ItemList.Fossilized_dino = new TreasureItem('Fossilized_dino', UndergroundItemValueType.FossilPiece, 'Fossilized Dino');
 // Shards
-ItemList.Red_shard = new TreasureItem('Red_shard', UndergroundItemValueType.Shard, 0, 'Red Shard');
-ItemList.Yellow_shard = new TreasureItem('Yellow_shard', UndergroundItemValueType.Shard, 0, 'Yellow Shard');
-ItemList.Green_shard = new TreasureItem('Green_shard', UndergroundItemValueType.Shard, 0, 'Green Shard');
-ItemList.Blue_shard = new TreasureItem('Blue_shard', UndergroundItemValueType.Shard, 0, 'Blue Shard');
-ItemList.Grey_shard = new TreasureItem('Grey_shard', UndergroundItemValueType.Shard, 0, 'Grey Shard');
-ItemList.Purple_shard = new TreasureItem('Purple_shard', UndergroundItemValueType.Shard, 0, 'Purple Shard');
-ItemList.Ochre_shard = new TreasureItem('Ochre_shard', UndergroundItemValueType.Shard, 0, 'Ochre Shard');
-ItemList.Black_shard = new TreasureItem('Black_shard', UndergroundItemValueType.Shard, 0, 'Black Shard');
-ItemList.Crimson_shard = new TreasureItem('Crimson_shard', UndergroundItemValueType.Shard, 0, 'Crimson Shard');
-ItemList.Lime_shard = new TreasureItem('Lime_shard', UndergroundItemValueType.Shard, 0, 'Lime Shard');
-ItemList.White_shard = new TreasureItem('White_shard', UndergroundItemValueType.Shard, 0, 'White Shard');
-ItemList.Pink_shard = new TreasureItem('Pink_shard', UndergroundItemValueType.Shard, 0, 'Pink Shard');
-ItemList.Cyan_shard = new TreasureItem('Cyan_shard', UndergroundItemValueType.Shard, 0, 'Cyan Shard');
-ItemList.Rose_shard = new TreasureItem('Rose_shard', UndergroundItemValueType.Shard, 0, 'Rose Shard');
-ItemList.Brown_shard = new TreasureItem('Brown_shard', UndergroundItemValueType.Shard, 0, 'Brown Shard');
-ItemList.Beige_shard = new TreasureItem('Beige_shard', UndergroundItemValueType.Shard, 0, 'Beige Shard');
-ItemList.Slate_shard = new TreasureItem('Slate_shard', UndergroundItemValueType.Shard, 0, 'Slate Shard');
+ItemList.Red_shard = new TreasureItem('Red_shard', UndergroundItemValueType.Shard, 'Red Shard');
+ItemList.Yellow_shard = new TreasureItem('Yellow_shard', UndergroundItemValueType.Shard, 'Yellow Shard');
+ItemList.Green_shard = new TreasureItem('Green_shard', UndergroundItemValueType.Shard, 'Green Shard');
+ItemList.Blue_shard = new TreasureItem('Blue_shard', UndergroundItemValueType.Shard, 'Blue Shard');
+ItemList.Grey_shard = new TreasureItem('Grey_shard', UndergroundItemValueType.Shard, 'Grey Shard');
+ItemList.Purple_shard = new TreasureItem('Purple_shard', UndergroundItemValueType.Shard, 'Purple Shard');
+ItemList.Ochre_shard = new TreasureItem('Ochre_shard', UndergroundItemValueType.Shard, 'Ochre Shard');
+ItemList.Black_shard = new TreasureItem('Black_shard', UndergroundItemValueType.Shard, 'Black Shard');
+ItemList.Crimson_shard = new TreasureItem('Crimson_shard', UndergroundItemValueType.Shard, 'Crimson Shard');
+ItemList.Lime_shard = new TreasureItem('Lime_shard', UndergroundItemValueType.Shard, 'Lime Shard');
+ItemList.White_shard = new TreasureItem('White_shard', UndergroundItemValueType.Shard, 'White Shard');
+ItemList.Pink_shard = new TreasureItem('Pink_shard', UndergroundItemValueType.Shard, 'Pink Shard');
+ItemList.Cyan_shard = new TreasureItem('Cyan_shard', UndergroundItemValueType.Shard, 'Cyan Shard');
+ItemList.Rose_shard = new TreasureItem('Rose_shard', UndergroundItemValueType.Shard, 'Rose Shard');
+ItemList.Brown_shard = new TreasureItem('Brown_shard', UndergroundItemValueType.Shard, 'Brown Shard');
+ItemList.Beige_shard = new TreasureItem('Beige_shard', UndergroundItemValueType.Shard, 'Beige Shard');
+ItemList.Slate_shard = new TreasureItem('Slate_shard', UndergroundItemValueType.Shard, 'Slate Shard');
 
 
 // Pokemon shop items
 // Kanto
-ItemList['Pinkan Arbok']  = new PokemonItem('Pinkan Arbok', undefined);
-ItemList['Pinkan Oddish']  = new PokemonItem('Pinkan Oddish', undefined);
-ItemList['Pinkan Poliwhirl']  = new PokemonItem('Pinkan Poliwhirl', undefined);
-ItemList['Pinkan Geodude']  = new PokemonItem('Pinkan Geodude', undefined);
+ItemList['Pinkan Arbok']  = new PokemonItem('Pinkan Arbok');
+ItemList['Pinkan Oddish']  = new PokemonItem('Pinkan Oddish');
+ItemList['Pinkan Poliwhirl']  = new PokemonItem('Pinkan Poliwhirl');
+ItemList['Pinkan Geodude']  = new PokemonItem('Pinkan Geodude');
 ItemList['Pinkan Dodrio']  = new PokemonItem('Pinkan Dodrio', 50000);
 ItemList['Charity Chansey']   = new PokemonItem('Charity Chansey', 5000);
-ItemList['Exeggcute (Single)'] = new PokemonItem('Exeggcute (Single)', undefined);
+ItemList['Exeggcute (Single)'] = new PokemonItem('Exeggcute (Single)');
 ItemList.Lickitung            = new PokemonItem('Lickitung', 1000);
-ItemList['Pinkan Weezing']  = new PokemonItem('Pinkan Weezing', undefined);
-ItemList['Pinkan Scyther']  = new PokemonItem('Pinkan Scyther', undefined);
+ItemList['Pinkan Weezing']  = new PokemonItem('Pinkan Weezing');
+ItemList['Pinkan Scyther']  = new PokemonItem('Pinkan Scyther');
 ItemList['Mr. Mime']             = new PokemonItem('Mr. Mime', 1000);
-ItemList['Pinkan Electabuzz']  = new PokemonItem('Pinkan Electabuzz', undefined);
+ItemList['Pinkan Electabuzz']  = new PokemonItem('Pinkan Electabuzz');
 ItemList.Jynx                 = new PokemonItem('Jynx', 2000);
 ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money, true);
 ItemList['Magikarp Brown Stripes'] = new PokemonItem('Magikarp Brown Stripes', 100);
-ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 10000, Currency.diamond);
+ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 2000, Currency.diamond);
 ItemList['Magikarp Saucy Violet'] = new PokemonItem('Magikarp Saucy Violet', 7500000000, Currency.money);
 ItemList['Probably Feebas']   = new PokemonItem('Magikarp (Feebas)', 5999, Currency.battlePoint, false, 'Probably Feebas');
 ItemList.Eevee                = new PokemonItem('Eevee', 4000);
 ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 // Hoenn
-ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 1187, Currency.diamond, false, 'Probably Chimecho');
+ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 358, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 // Sinnoh
-ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)', undefined);
+ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)');
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']     = new PokemonItem('Burmy (Plant)', 6750);
 ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
@@ -364,14 +368,15 @@ ItemList.Zorua                = new PokemonItem('Zorua', 50625);
 ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 200000);
 // Kalos
 ItemList['Furfrou (Debutante)']  = new PokemonItem('Furfrou (Debutante)', 5000000000, Currency.money);
-ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 15000, Currency.diamond);
+ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 3000, Currency.diamond);
 ItemList['Furfrou (Matron)']     = new PokemonItem('Furfrou (Matron)', 1500000, Currency.farmPoint);
 ItemList['Furfrou (Dandy)']      = new PokemonItem('Furfrou (Dandy)', 250000);
 ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Currency.battlePoint);
 ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 300000000, Currency.dungeonToken);
 ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
-ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)', undefined);
+ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)');
 ItemList['Furfrou (Heart)']    = new PokemonItem('Furfrou (Heart)', 15000, Currency.contestToken);
+ItemList['Probably Not Pikachu']   = new PokemonItem('Inkay (Pikachu)', 100000000, Currency.dungeonToken, false, 'Probably Not Pikachu');
 // Alola
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
@@ -451,21 +456,21 @@ ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);
 ItemList.Arctovish              = new PokemonItem('Arctovish', 100000);
 ItemList['Zarude (Dada)']       = new PokemonItem('Zarude (Dada)', 500000);
 // Dream orbs
-ItemList.Staryu  = new PokemonItem('Staryu', undefined);
-ItemList.Igglybuff  = new PokemonItem('Igglybuff', undefined);
-ItemList.Shuckle  = new PokemonItem('Shuckle', undefined);
-ItemList.Smoochum  = new PokemonItem('Smoochum', undefined);
-ItemList.Ralts  = new PokemonItem('Ralts', undefined);
-ItemList.Swablu  = new PokemonItem('Swablu', undefined);
-ItemList.Drifloon  = new PokemonItem('Drifloon', undefined);
-ItemList.Bronzor  = new PokemonItem('Bronzor', undefined);
-ItemList.Riolu  = new PokemonItem('Riolu', undefined);
-ItemList.Rotom  = new PokemonItem('Rotom', undefined);
-ItemList.Munna  = new PokemonItem('Munna', undefined);
-ItemList.Sigilyph  = new PokemonItem('Sigilyph', undefined);
-ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)', undefined);
-ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)', undefined);
-ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)', undefined);
+ItemList.Staryu  = new PokemonItem('Staryu');
+ItemList.Igglybuff  = new PokemonItem('Igglybuff');
+ItemList.Shuckle  = new PokemonItem('Shuckle');
+ItemList.Smoochum  = new PokemonItem('Smoochum');
+ItemList.Ralts  = new PokemonItem('Ralts');
+ItemList.Swablu  = new PokemonItem('Swablu');
+ItemList.Drifloon  = new PokemonItem('Drifloon');
+ItemList.Bronzor  = new PokemonItem('Bronzor');
+ItemList.Riolu  = new PokemonItem('Riolu');
+ItemList.Rotom  = new PokemonItem('Rotom');
+ItemList.Munna  = new PokemonItem('Munna');
+ItemList.Sigilyph  = new PokemonItem('Sigilyph');
+ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)');
+ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)');
+ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)');
 // Contest
 ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 1500, Currency.contestToken);
 ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 3000, Currency.contestToken);

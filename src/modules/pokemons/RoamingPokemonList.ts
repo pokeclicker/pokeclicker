@@ -1,7 +1,8 @@
 import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
-    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, Region, getDungeonIndex,
+    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, Region,
+    getDungeonIndex, Starter,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
@@ -10,6 +11,8 @@ import MultiRequirement from '../requirements/MultiRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import QuestLineCompletedRequirement from '../requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
+import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
+import StarterRequirement from '../requirements/StarterRequirement';
 import RegionRoute from '../routes/RegionRoute';
 import Routes from '../routes/Routes';
 import SeededRand from '../utilities/SeededRand';
@@ -121,10 +124,11 @@ RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', ne
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Genesect (High-Speed)', new QuestLineCompletedRequirement('The Legend Awakened')));
 
 // Kalos
-RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Zapdos', new ClearDungeonRequirement(1, getDungeonIndex('Sea Spirit\'s Den'))));
-RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Moltres', new ClearDungeonRequirement(1, getDungeonIndex('Sea Spirit\'s Den'))));
-RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Articuno', new ClearDungeonRequirement(1, getDungeonIndex('Sea Spirit\'s Den'))));
+RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Zapdos', new MultiRequirement([new ClearDungeonRequirement(1, getDungeonIndex('Sea Spirit\'s Den')), new StarterRequirement(Region.kalos, Starter.Fire)])));
+RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Moltres', new MultiRequirement([new ClearDungeonRequirement(1, getDungeonIndex('Sea Spirit\'s Den')), new StarterRequirement(Region.kalos, Starter.Water)])));
+RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Articuno', new MultiRequirement([new ClearDungeonRequirement(1, getDungeonIndex('Sea Spirit\'s Den')), new StarterRequirement(Region.kalos, Starter.Grass)])));
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Hoopa', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)));
+RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Ash-Greninja', new TemporaryBattleRequirement('Ash Ketchum Kalos')));
 
 // Alola
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));

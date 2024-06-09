@@ -29,8 +29,8 @@ class Pokeballs implements Feature {
                 if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
                 }
-                if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
-                    const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route()]?.() || 0;
+                if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
+                    const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route]?.() || 0;
                     // between 15 (0 kills) → 0 (4012 kills)
                     return Math.min(15, Math.max(0, Math.pow(16, 1 - Math.pow(Math.max(0, kills - 10), 0.6) / 145) - 1));
                 }
@@ -43,8 +43,8 @@ class Pokeballs implements Feature {
                 if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
                 }
-                if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
-                    const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route()]?.() || 0;
+                if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
+                    const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route]?.() || 0;
                     // between 0 (0 kills) → 15 (9920 kills)
                     return Math.min(15, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
                 }
@@ -83,9 +83,9 @@ class Pokeballs implements Feature {
                 if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
                 }
-                if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
-                    const hasLandPokemon = Routes.getRoute(player.region,player.route()).pokemon.land.length > 0;
-                    const isWaterPokemon = Routes.getRoute(player.region,player.route()).pokemon.water.includes(Battle.enemyPokemon().name);
+                if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
+                    const hasLandPokemon = Routes.getRoute(player.region,player.route).pokemon.land.length > 0;
+                    const isWaterPokemon = Routes.getRoute(player.region,player.route).pokemon.water.includes(Battle.enemyPokemon().name);
 
                     // If route has Land Pokémon and the current pokémon is a Water Pokémon
                     if (hasLandPokemon && isWaterPokemon) {
@@ -106,7 +106,7 @@ class Pokeballs implements Feature {
                     // Use equivalent route difficulty for dungeons
                     currentRoute = DungeonRunner.dungeon.difficultyRoute;
                 } else {
-                    currentRoute = player.route();
+                    currentRoute = player.route;
                 }
                 currentRoute = MapHelper.normalizeRoute(currentRoute,player.region);
 
@@ -123,6 +123,16 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
                 return 10;
             }, 1000, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
+
+            new Pokeball(GameConstants.Pokeball.Moonball, () => {
+                const moonCycleMod = MoonCycle.currentMoonCyclePhase();
+                const moonCycleBonus = (4 - Math.abs((moonCycleMod % 8) - 4)) * 5;
+
+                if (GameConstants.MoonEvoPokemon.has(Battle.enemyPokemon().name)) {
+                    return Math.min(20, moonCycleBonus + 10);
+                }
+                return moonCycleBonus;
+            }, 1250, 'Increased catch rate by the light of the moon', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
         ];
         this.selectedTitle = ko.observable('');
         this.selectedSelection = ko.observable();
