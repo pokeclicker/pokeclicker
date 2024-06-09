@@ -42,7 +42,6 @@ export class Underground implements Feature {
     public static BASE_ENERGY_REGEN_TIME = 60;
     public static BASE_DAILY_DEALS_MAX = 3;
     public static BASE_BOMB_EFFICIENCY = 10;
-    public static BASE_SURVEY_CHARGE_EFFICIENCY = 1;
 
     public static sizeX = 25;
     public static sizeY = 12;
@@ -174,25 +173,17 @@ export class Underground implements Feature {
                 'Decrease the cost of surveying a layer',
             ),
             new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Survey_Efficiency, 'Survey Efficiency', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(100, 400, 100), Currency.diamond),
-                GameHelper.createArray(0, 4, 1),
-                true,
-                'Increases the number of tiles cleared by surveying',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.NewYLayer, 'Larger Underground, +1 Item', 1,
+                UndergroundUpgrade.Upgrades.Items_All, '+1 Item', 1,
                 AmountFactory.createArray(
                     GameHelper.createArray(3000, 3000, 3000), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
                 true,
-                'Adds an additional row and extra item to each layer',
+                'Adds an extra item to each layer',
             ),
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Shards, 'Reduced Shards', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(750, 750, 750), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
                 true,
                 'Greatly reduces the number of shards (toggleable)',
@@ -208,7 +199,7 @@ export class Underground implements Feature {
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Evolution_Items, 'Reduced Evolution Items', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(500, 500, 500), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
                 true,
                 'Greatly reduces the number of evolution items (toggleable)',
@@ -216,7 +207,7 @@ export class Underground implements Feature {
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Fossil_Pieces, 'Reduced Fossil Pieces', 1,
                 AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
+                    GameHelper.createArray(200, 200, 200), Currency.diamond),
                 GameHelper.createArray(0, 1, 1),
                 true,
                 'Greatly reduces the number of Galar fossil pieces (toggleable)',
@@ -233,7 +224,7 @@ export class Underground implements Feature {
     }
 
     getMaxItems() {
-        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
+        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus();
     }
 
     getEnergyGain() {
@@ -256,16 +247,12 @@ export class Underground implements Feature {
         return Underground.SURVEY_ENERGY - this.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Cost).calculateBonus();
     }
 
-    getSurvey_Efficiency() {
-        return Underground.BASE_SURVEY_CHARGE_EFFICIENCY + this.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Efficiency).calculateBonus();
-    }
-
     getSizeY() {
-        return Underground.sizeY + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
+        return Underground.sizeY;
     }
 
     getMinItems() {
-        return Underground.BASE_ITEMS_MIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Min).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
+        return Underground.BASE_ITEMS_MIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Min).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus();
     }
 
     getUpgrade(upgrade: Upgrades) {
