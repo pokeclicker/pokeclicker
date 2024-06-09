@@ -66,7 +66,7 @@
                         data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-success'
                                 onClick='Mine.survey(); $(this).tooltip("hide")'
-                                data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer. It also fully damages ${App.game.underground.getSurvey_Efficiency()} (cleared or uncleared) random tile${App.game.underground.getSurvey_Efficiency() > 1 ? 's' : ''}.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
+                                data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
                             Survey (<knockout data-bind="text: App.game.underground.getSurvey_Cost()"></knockout> energy)
                         </button>
                         <!-- FIX NUMBER-->
@@ -127,9 +127,7 @@
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
                                 'data': {'totalBonus': App.game.underground.getSurvey_Cost(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Cost)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getSurvey_Efficiency(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Efficiency)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus' : App.game.underground.getSizeY() - Underground.sizeY, 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer)}}"></tr>
+                                'data': {'totalBonus' : App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Items_All)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Plates)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Evolution_Items)}}"></tr>

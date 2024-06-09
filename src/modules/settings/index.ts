@@ -220,6 +220,7 @@ Settings.add(new BooleanSetting('underground.Reduced_Fossil_Pieces', 'Reduced Fo
 
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
+Settings.add(new BooleanSetting('partyShowPurifiedShadowSprites', 'Show party shadow sprites', false));
 
 // Party Sorting
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
