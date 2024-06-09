@@ -2694,6 +2694,17 @@ class Update implements Saveable {
                 Update.startQuestLine(saveData, 'Child of the Stars');
             }
 
+            // Reimburse Survey Efficiency upgrade
+            const surveyEfficiencyLevel = saveData.underground.upgrades.Survey_Efficiency;
+            if (surveyEfficiencyLevel) {
+                const surveyEfficiencyCost = GameHelper.createArray(100, 400, 100);
+                const investedDiamonds = surveyEfficiencyCost.slice(0, surveyEfficiencyLevel).reduce((acc, cur) => acc + cur, 0);
+                saveData.wallet.currencies[GameConstants.Currency.diamond] += investedDiamonds;
+            }
+
+            // The NewYLayer upgrades has been refactored to Items_All, copy the level
+            saveData.underground.upgrades.Items_All = saveData.underground.upgrades.NewYLayer;
+
             // Rename settings to accurately describe purpose
             settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
             delete settingsData.pokedexShinyFilter;

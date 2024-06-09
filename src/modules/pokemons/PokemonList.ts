@@ -6089,6 +6089,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 132.01,
+        'name': 'Ditto (Transforming)',
+        'catchRate': 35,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 101,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 48,
+            'attack': 48,
+            'specialAttack': 48,
+            'defense': 48,
+            'specialDefense': 48,
+            'speed': 48,
+        },
+        'gender': {
+            'visualDifference': true,
+        },
+    },
+    {
         'id': 133,
         'name': 'Eevee',
         'catchRate': 45,
@@ -21138,6 +21158,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 686.01,
+        'name': 'Inkay (Pikachu)',
+        'type': [PokemonType.Psychic, PokemonType.Electric],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 58,
+        'catchRate': 190,
+        'base': {
+            'hitpoints': 53,
+            'attack': 54,
+            'specialAttack': 37,
+            'defense': 53,
+            'specialDefense': 46,
+            'speed': 45,
+        },
+    },
+    {
         'id': 687,
         'name': 'Malamar',
         'type': [PokemonType.Dark, PokemonType.Psychic],
@@ -25352,6 +25389,7 @@ export const pokemonList = createPokemonArray(
         'id': 840.01,
         'name': 'Exposed Applin',
         'type': [
+            PokemonType.Bug,
             PokemonType.Dragon,
         ],
         'base': {
