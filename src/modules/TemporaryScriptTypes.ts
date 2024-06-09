@@ -10,7 +10,7 @@ import type Profile from './profile/Profile';
 import type Statistics from './DataStore/StatisticStore';
 import type Challenges from './challenges/Challenges';
 import type Multiplier from './multiplier/Multiplier';
-import * as GameConstants from './GameConstants';
+import type * as GameConstants from './GameConstants';
 import type Wallet from './wallet/Wallet';
 import type PokemonCategories from './party/Category';
 import type OakItems from './oakItems/OakItems';
@@ -28,6 +28,7 @@ import type CssVariableSetting from './settings/CssVariableSetting';
 import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
+import type { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted, 
@@ -87,7 +88,6 @@ export type TmpGemsType = any;
 export type TmpFarmingType = any;
 export type TmpRedeemableCodesType = any;
 export type TmpQuestsType = any;
-export type TmpSpecialEventsType = any;
 export type TmpDiscordType = any;
 export type TmpAchievementTrackerType = any;
 export type TmpBattleFrontierType = any;
@@ -99,7 +99,6 @@ export type TmpZMovesType = any;
 export type TmpPokemonContestType = any;
 export type TmpBattlePokemonType = any;
 export type TmpMultiplierDecreaserType = any;
-export type TmpTownType = any;
 
 export type TmpGameType = {
     gameState: GameConstants.GameState;
@@ -289,7 +288,6 @@ export type TmpPokemonLocationsType = {
     getPokemonPrevolution: (pokemonName: PokemonNameType, maxRegion?: GameConstants.Region) => EvoData[];
 };
 
-
 export type TmpPokemonFactoryType = {
     generateShiny(chance: number, skipBonus?: boolean): boolean;
     generateGenderById(id: number): GameConstants.BattlePokemonGender;
@@ -298,4 +296,22 @@ export type TmpPokemonFactoryType = {
 export type TmpPartyControllerType = {
     getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
     getPokerusStatusByName: (name: PokemonNameType) => GameConstants.Pokerus;
+};
+
+export type TmpSpecialEventsType = {
+    getEvent: (eventName: SpecialEventTitleType) => any
+} & Record <any, any>;
+
+export type TmpTemporaryBattleListType = {
+    [battleName: string]: TmpTemporaryBattleType;
+};
+
+export type TmpTemporaryBattleType = {
+    name: string;
+    parent?: TmpTownType;
+    getTown: () => TmpTownType;
+};
+
+export type TmpTownType = {
+    name: string;
 };

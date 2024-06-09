@@ -5472,7 +5472,7 @@ TownList['Black and White Park'] = new Town(
     'Black and White Park',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [new DreamOrbTownContent(), BlackAndWhiteParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Black and White Park']), TemporaryBattleList.DreamResearcher],
+    [new DreamOrbTownContent(), BlackAndWhiteParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Black and White Park']), TemporaryBattleList['Dream Researcher']],
     {
         requirements: [new OneFromManyRequirement([
             new MultiRequirement([
@@ -5816,6 +5816,9 @@ const CyllageCityShop = new Shop([
     ItemList.Upgrade,
     ItemList.Prism_scale,
 ]);
+const DisguisedShop = new Shop([
+    ItemList['Probably Not Pikachu'],
+], 'Badly Disguised Shop', [new TemporaryBattleRequirement('Twerps')]);
 const GeosengeTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -5998,6 +6001,15 @@ const TeamFlareGrunt1 = new NPC('Team Flare Grunt', [
 ], {
     image: 'assets/images/npcs/Team Flare Grunt (male).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 6), new QuestLineStepCompletedRequirement('A Beautiful World', 8, GameConstants.AchievementOption.less)]),
+});
+
+const NotAsh = new NPC('Not Ash', [
+    'Hey uh.... twerp. Would you happen to have any Dungeon Tokens? We\'ve, uh, run out.',
+    'I\'ll give you that Pikachu costume my Inkay was wearing for some?',
+    '...Give me a break. I know that you knew that the Pikachu was a costume. You could see right through us, as if you could just see it\'s name over it\s head or something.',
+], {
+    image: 'assets/images/npcs/Not Ash.png',
+    requirement: new TemporaryBattleRequirement('Twerps'),
 });
 
 const SharlourKorrina = new NPC('Korrina', [
@@ -6448,6 +6460,19 @@ TownList['Cyllage City'] = new Town(
     [CyllageCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cyllage City']), TemporaryBattleList['Marquis Grant']],
     {
         requirements: [new QuestLineStepCompletedRequirement('A Beautiful World', 5)],
+    }
+);
+TownList['Disguised Shop'] = new Town(
+    'Disguised Shop',
+    GameConstants.Region.kalos,
+    GameConstants.KalosSubRegions.Kalos,
+    [DisguisedShop, TemporaryBattleList.Twerps],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 10),
+        ],
+        npcs: [NotAsh],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Geosenge Town'] = new Town(
@@ -7587,6 +7612,7 @@ const MayorKarp = new NPC('Mayor Karp', [
     image: 'assets/images/npcs/MayorKarp.png',
     requirement: new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]),
 });
+
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
 ], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png', new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]));
@@ -7653,7 +7679,7 @@ const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
 
 const FishPolice = new NPC('The Fish Police', [
     'Stop right there! This is the sacred land of Magikarp Jump. I can tell there is something suspicious about you... Yeah, I see! You have no Magikarp! How did you even make it this far without the best Pokémon, anyway?',
-    'In any case, everyone in town is too afraid of you so come back here when you get a Magikarp of your own. Then, the residents may be willing to talk to you.',
+    'In any case, everyone in town will run away from you until you get yourself a Magikarp. So, go catch one, or fish one at the Pond. Then, the residents may be willing to talk to you.',
 ],  {
     image:'assets/images/npcs/Officer Jenny.png',
     requirement: new MultiRequirement([new ObtainedPokemonRequirement('Magikarp', true), new ObtainedPokemonRequirement('Magikarp (Feebas)', true)]),
@@ -7868,6 +7894,16 @@ TownList['Hoppy Town'] = new Town(
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
         npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5, FishPolice],
+    }
+);
+TownList['Hoppy Town Fishing Pond'] = new Town(
+    'Hoppy Town Fishing Pond',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [new SafariTownContent('Fishing Pond')],
+    {
+        requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
+        npcs: [],
     }
 );
 TownList['Friend League'] = new Town(

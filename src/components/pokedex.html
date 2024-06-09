@@ -202,6 +202,27 @@ aria-labelledby="pokedexModalLabel">
                                         </div>
                                     </div>
 
+                                    <!--Show shadow images-->
+                                    <div class="col-12">
+                                        <div class="form-group my-2">
+                                            <!-- ko let: { partyShowShadowSprites: Settings.getSetting('partyShowPurifiedShadowSprites') } -->
+                                            <span data-bind="text: partyShowShadowSprites.displayName">Show party shadow sprites</span>
+                                            <label class="form-check-label toggler-wrapper style-1 float-right">
+                                                <input class="form-check-input" type="checkbox" id="pokedex-show-shadow-sprites-checkbox"
+                                                    value="false" data-bind="checked: partyShowShadowSprites.observableValue"
+                                                    onchange="Settings.setSettingByName('partyShowPurifiedShadowSprites', this.checked)">
+                                                <div class="toggler-slider" data-bind="tooltip: {
+                                                    html: true,
+                                                    title: `Display all purified Pokémon with their shadow sprites.`,
+                                                    trigger: 'hover',
+                                                }">
+                                                    <div class="toggler-knob"></div>
+                                                </div>
+                                            </label>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+
                                     <div class="col-12">
                                         <hr style="border-color:grey;">
                                     </div>
