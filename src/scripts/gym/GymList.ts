@@ -609,7 +609,7 @@ GymList['Elite Drake'] = new Gym(
     [
         new GymPokemon('Shelgon', 1064000, 52),
         new GymPokemon('Altaria', 1072000, 54),
-        new GymPokemon('Flygon', 1076000, 53),
+        new GymPokemon('Kingdra', 1076000, 53),
         new GymPokemon('Flygon', 1076000, 53),
         new GymPokemon('Salamence', 1157000, 55),
     ],
