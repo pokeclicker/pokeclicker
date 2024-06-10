@@ -200,13 +200,6 @@ export class Mine {
             return;
         }
 
-        const tiles = App.game.underground.getSurvey_Efficiency();
-        for (let i = 0; i < tiles; i++) {
-            const x = Rand.intBetween(0, this.getHeight() - 1);
-            const y = Rand.intBetween(0, Underground.sizeX - 1);
-            this.breakTile(x, y, Mine.maxLayerDepth);
-        }
-
         App.game.underground.energy -= surveyCost;
         const rewards = Mine.rewardSummary();
         Mine.updatesurveyResult(rewards, resultTooltipID);
