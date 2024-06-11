@@ -1100,6 +1100,7 @@ export type PokemonNameType
     | 'Swirlix'
     | 'Slurpuff'
     | 'Inkay'
+    | 'Inkay (Pikachu)'
     | 'Malamar'
     | 'Binacle'
     | 'Barbaracle'

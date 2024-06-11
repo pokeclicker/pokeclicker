@@ -3604,6 +3604,21 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList.Twerps = new TemporaryBattle(
+    'Twerps',
+    [
+        new GymPokemon('Meowth', 40271251, 49),
+        new GymPokemon('Pumpkaboo (Super Size)', 40271251, 49),
+        new GymPokemon('Inkay (Pikachu)', 40271251, 51),
+    ],
+    'What do you mean "how is Pikachu floating?", all Pikachu can float! Because, uh... electromagnetism!',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
+    undefined,
+    {
+        displayName: 'Twerps?',
+    }
+);
+
 TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
     'Marquis Grant',
     [

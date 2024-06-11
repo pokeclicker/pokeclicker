@@ -5816,6 +5816,9 @@ const CyllageCityShop = new Shop([
     ItemList.Upgrade,
     ItemList.Prism_scale,
 ]);
+const DisguisedShop = new Shop([
+    ItemList['Probably Not Pikachu'],
+], 'Badly Disguised Shop', [new TemporaryBattleRequirement('Twerps')]);
 const GeosengeTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -5998,6 +6001,15 @@ const TeamFlareGrunt1 = new NPC('Team Flare Grunt', [
 ], {
     image: 'assets/images/npcs/Team Flare Grunt (male).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 6), new QuestLineStepCompletedRequirement('A Beautiful World', 8, GameConstants.AchievementOption.less)]),
+});
+
+const NotAsh = new NPC('Not Ash', [
+    'Hey uh.... twerp. Would you happen to have any Dungeon Tokens? We\'ve, uh, run out.',
+    'I\'ll give you that Pikachu costume my Inkay was wearing for some?',
+    '...Give me a break. I know that you knew that the Pikachu was a costume. You could see right through us, as if you could just see it\'s name over it\s head or something.',
+], {
+    image: 'assets/images/npcs/Not Ash.png',
+    requirement: new TemporaryBattleRequirement('Twerps'),
 });
 
 const SharlourKorrina = new NPC('Korrina', [
@@ -6448,6 +6460,19 @@ TownList['Cyllage City'] = new Town(
     [CyllageCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cyllage City']), TemporaryBattleList['Marquis Grant']],
     {
         requirements: [new QuestLineStepCompletedRequirement('A Beautiful World', 5)],
+    }
+);
+TownList['Disguised Shop'] = new Town(
+    'Disguised Shop',
+    GameConstants.Region.kalos,
+    GameConstants.KalosSubRegions.Kalos,
+    [DisguisedShop, TemporaryBattleList.Twerps],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 10),
+        ],
+        npcs: [NotAsh],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Geosenge Town'] = new Town(
