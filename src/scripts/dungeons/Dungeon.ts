@@ -7777,7 +7777,7 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     [
         new DungeonBossPokemon('Lunatone', 11000000, 100),
         new DungeonBossPokemon('Clefable', 11000000, 100),
-        new DungeonBossPokemon('Cresselia', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([0, 1, 7])}),
+        new DungeonBossPokemon('Cresselia', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.NewMoon, MoonCyclePhase.WaxingCrescent, MoonCyclePhase.WaningCrescent])}),
     ],
     96500, 230);
 
@@ -7799,7 +7799,7 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     [
         new DungeonBossPokemon('Lunatone', 9900000, 100),
         new DungeonBossPokemon('Absol', 9900000, 100),
-        new DungeonBossPokemon('Darkrai', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([4, 3, 5, 2, 6])}),
+        new DungeonBossPokemon('Darkrai', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.FullMoon, MoonCyclePhase.WaxingGibbous, MoonCyclePhase.WaningGibbous, MoonCyclePhase.FirstQuarter, MoonCyclePhase.ThirdQuarter])}),
     ],
     96500, 230);
 
