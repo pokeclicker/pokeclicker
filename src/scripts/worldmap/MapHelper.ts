@@ -76,7 +76,7 @@ class MapHelper {
         if (!routeData) {
             return false;
         }
-        return routeData.isUnlocked() && MapHelper.accessToRegion(region) && MapHelper.accessToSubRegion(region, routeData.subRegion ?? 0);
+        return routeData.isUnlocked() && MapHelper.accessToSubRegion(region, routeData.subRegion ?? 0);
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
@@ -108,11 +108,11 @@ class MapHelper {
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
         let cls = '';
 
-        if (!MapHelper.accessToRoute(route, region)) {
+        if (!Routes.getRoute(region, route)?.isUnlocked()) {
             cls = areaStatus[areaStatus.locked];
-        } else  if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+        } else if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
             cls = areaStatus[areaStatus.incomplete];
-        } else  if (RouteHelper.isThereQuestAtLocation(route, region)) {
+        } else if (RouteHelper.isThereQuestAtLocation(route, region)) {
             cls = areaStatus[areaStatus.questAtLocation];
         } else if (!RouteHelper.routeCompleted(route, region, false)) {
             cls = areaStatus[areaStatus.uncaughtPokemon];
@@ -153,7 +153,7 @@ class MapHelper {
             return '';
         }
         // Check if this location is locked
-        if (!MapHelper.accessToTown(townName)) {
+        if (!TownList[townName]?.isUnlocked()) {
             return areaStatus[areaStatus.locked];
         }
         const states = [];
@@ -205,7 +205,7 @@ class MapHelper {
         if (!town) {
             return false;
         }
-        return town.isUnlocked() && MapHelper.accessToRegion(town.region) && MapHelper.accessToSubRegion(town.region, town.subRegion);
+        return town.isUnlocked() && MapHelper.accessToSubRegion(town.region, town.subRegion);
     }
 
     public static moveToTown(townName: string) {
