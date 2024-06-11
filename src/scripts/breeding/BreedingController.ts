@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
-/// <reference path="../../declarations/utilities/Modal.d.ts" />
+/// <reference path="../../declarations/utilities/DisplayObservables.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../party/PartyController.ts" />
 
@@ -105,7 +105,7 @@ class BreedingController {
         });
 
         // Reset hatchery display upon modal close
-        modalUtils.observableState.breedingModalObservable.subscribe((modalState) => {
+        DisplayObservables.modalState.breedingModalObservable.subscribe((modalState) => {
             // Resetting scrolling only works before modal is fully hidden
             if (modalState === 'hide') {
                 BreedingController.scrollToTop();
@@ -223,7 +223,7 @@ class BreedingController {
     private static _cachedSortedFilteredList = [];
     public static viewSortedFilteredList: KnockoutComputed<Array<PartyPokemon>> = ko.pureComputed(() => {
         // Pause updates while the modal is closed
-        if (modalUtils.observableState.breedingModal === 'show') {
+        if (DisplayObservables.modalState.breedingModal === 'show') {
             BreedingController._cachedSortedFilteredList = BreedingController.hatcherySortedFilteredList();
             // Finish resetting the LazyLoader display after filters change
             if (BreedingController.viewResetReady) {
@@ -255,7 +255,7 @@ class BreedingController {
     }).extend({ rateLimit: 100 }); // deferUpdates isn't good enough to prevent lag
 
     // Used to reset the LazyLoaderdisplay
-    public static resetHatcheryFlag = ko.computed(() => modalUtils.observableState.breedingModal === 'hidden');
+    public static resetHatcheryFlag = ko.computed(() => DisplayObservables.modalState.breedingModal === 'hidden');
 
     private static resetFilteredListNotifier = ko.observable(null);
 
