@@ -7,6 +7,7 @@ class App {
     static game: Game;
     static readonly isUsingClient = typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0;
     static translation = new Translate(Settings.getSetting('translation.language'));
+    static readonly isGameLoaded = ko.observable(false);
 
     static start() {
         // Hide tooltips that stay on game load
@@ -77,6 +78,9 @@ class App {
             Preload.hideSplashScreen();
 
             App.game.start();
+
+            App.isGameLoaded(true);
+            Object.freeze(App.isGameLoaded);
 
             // Check if Mobile and deliver a warning around mobile compatability / performance issues
             const isMobile: boolean = /Mobile/.test(navigator.userAgent);
