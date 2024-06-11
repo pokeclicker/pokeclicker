@@ -45,13 +45,13 @@ Parameters:
     data-bind="visible: <%= locals.visible %>, <%= locals.databind %>,
         event: { mouseenter: () => GameController.showMapTooltip('<%= locals.name.replace(/'/g, '\\\'') %>'), mouseleave: GameController.hideMapTooltip }">
 </rect>
+<% if (locals.connectedToTown) { %>
 <image width="48" height="48"
     x="<%= locals.x * 16 + (locals.width * 16) / 2 - 24 %>"
     y="<%= locals.y * 16 + (locals.height * 16) / 2 - 24 %>"
     class="iconLocation hide"
-    data-bind="<% if (locals.connectedToTown) { %>
-        visible: MapHelper.isTownCurrentLocation('<%= locals.connectedToTown.replace(/'/g, '\\\'') %>') && <%= locals.visible %>,
-    <% } %>
+    data-bind="visible: MapHelper.isTownCurrentLocation('<%= locals.connectedToTown.replace(/'/g, '\\\'') %>') && <%= locals.visible %>,
         attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
         playerSpriteMove">
+<% } %>
 </image>
