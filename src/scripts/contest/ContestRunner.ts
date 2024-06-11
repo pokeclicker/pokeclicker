@@ -76,7 +76,7 @@ class ContestRunner {
         // activate encore if doing well enough
         if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true && ContestRunner.encoreRounds() < ContestRunner.rank()) {
             Notifier.notify({
-                message: 'The crowd is cheering!',
+                message: 'The crowd is cheering! Bonus round incoming!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
@@ -166,7 +166,7 @@ class ContestRunner {
 
             if (ContestRunner.encoreStatus() === true) {
                 Notifier.notify({
-                    message: 'The crowd cheers for an encore! Bonus round incoming!',
+                    message: 'The crowd cheers for an encore!',
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.General.gym_won,
                 });
@@ -197,7 +197,7 @@ class ContestRunner {
 
     public static audienceStatus: KnockoutComputed<string> = ko.pureComputed(() => {
         if (!ContestRunner.encoreStatus()) {
-            return `${ContestRunner.audienceAppeal().toLocaleString('en-US') + ' / ' + ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`;
+            return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;
         } else {
             return '<i>Encore!</i>';
         }
