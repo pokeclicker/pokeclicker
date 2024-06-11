@@ -47,7 +47,7 @@ class AchievementHandler {
     public static achievementSortedList = ko.pureComputed(() => {
         const achievementSortValue = Settings.getSetting('achievementSort').observableValue();
 
-        if (modalUtils.observableState.achievementsModal !== 'show') {
+        if (DisplayObservables.modalState.achievementsModal !== 'show') {
             return AchievementHandler.cachedSortedList || AchievementHandler.achievementListFiltered();
         }
 

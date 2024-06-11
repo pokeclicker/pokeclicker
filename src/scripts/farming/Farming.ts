@@ -1728,7 +1728,7 @@ class Farming implements Feature {
         // Starf
         this.mutations.push(new BlankMutation(0, BerryType.Starf,
             {
-                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders near open soil.',
+                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders and is caught near open soil.',
                 unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 

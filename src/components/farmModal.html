@@ -325,23 +325,27 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- ko if: App.game.farming.berryData[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
-                                    <table class="table table-striped table-hover table-bordered table-sm m-0">
-                                        <thead>
-                                            <tr class="text-light">
-                                                <th class="bg-dark">Wandering Pokémon</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="p-0">
-                                                    <ul id="wanderPokemonList" class="list-inline" data-bind="foreach: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION)">
-                                                        <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <!-- ko let: { 
+                                        berrySpecificWanderers: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) 
+                                    } -->
+                                        <!-- ko if: berrySpecificWanderers.length -->
+                                        <table class="table table-striped table-hover table-bordered table-sm m-0">
+                                            <thead>
+                                                <tr class="text-light">
+                                                    <th class="bg-dark">Wandering Pokémon</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="p-0">
+                                                        <ul class="list-inline wanderPokemonList" data-bind="foreach: berrySpecificWanderers">
+                                                            <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- /ko -->
                                     <!-- /ko -->
                                     <!-- /ko -->
 
