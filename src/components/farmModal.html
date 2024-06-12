@@ -125,7 +125,7 @@
                                         FarmController.selectedFarmTool(FarmingTool.Shovel);
                                     },
                                     css: { 'active': FarmController.selectedFarmTool() == FarmingTool.Shovel },
-                                    tooltip: {title: `${ItemList['Berry_Shovel'].description}${App.game.farming.savedPlant() ? `<br/>Or replant the removed ${BerryType[App.game.farming.savedPlant().type]} before it dies.` : ''}`, trigger: 'hover', animation: false, html: true}">
+                                    tooltip: {title: `${ItemList['Berry_Shovel'].description}${App.game.farming.savedPlant() ? `<br/>Or replant the removed ${BerryType[App.game.farming.savedPlant().type]} before it decays.` : ''}`, trigger: 'hover', animation: false, html: true}">
                                     <img src="" height="24px"
                                         data-bind="attr: { src: ItemList['Berry_Shovel'].image }">
                                     <span>Shovel</span>
