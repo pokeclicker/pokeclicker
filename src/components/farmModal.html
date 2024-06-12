@@ -125,10 +125,13 @@
                                         FarmController.selectedFarmTool(FarmingTool.Shovel);
                                     },
                                     css: { 'active': FarmController.selectedFarmTool() == FarmingTool.Shovel },
-                                    tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
+                                    tooltip: {title: `${ItemList['Berry_Shovel'].description}${App.game.farming.savedPlant() ? `<br/>Or replant the removed ${BerryType[App.game.farming.savedPlant().type]} before it dies.` : ''}`, trigger: 'hover', animation: false, html: true}">
                                     <img src="" height="24px"
-                                        data-bind="attr:{ src: ItemList['Berry_Shovel'].image }">
+                                        data-bind="attr: { src: ItemList['Berry_Shovel'].image }">
                                     <span>Shovel</span>
+                                    <!-- ko if: App.game.farming.savedPlant -->
+                                    <img class="float-right ml-1" src="" height="24px" data-bind="attr: { src: App.game.farming.savedPlant().img }"/>
+                                    <!-- /ko -->
                                     <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
                                 </li>
                                 <!-- /ko -->
@@ -140,7 +143,7 @@
                                         FarmController.selectedFarmTool(FarmingTool.MulchShovel);
                                     },
                             css: { 'active': FarmController.selectedFarmTool() == FarmingTool.MulchShovel },
-                            tooltip: {title: 'Clear a Mulch from a plot.', trigger: 'hover', animation: false}">
+                            tooltip: {title: ItemList['Mulch_Shovel'].description, trigger: 'hover', animation: false}">
                                     <img src="" height="21px"
                                          data-bind="attr:{ src: ItemList['Mulch_Shovel'].image }">
                                     <span>MulchShovel</span>
