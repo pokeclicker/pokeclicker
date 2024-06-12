@@ -6914,7 +6914,7 @@ const HeaheaGentleman = new NPC('Gentleman', [
     'According to the legend this fragment is known as the Crystallized Shadow and if you reunite Marshadow with it, Marshadow will unlock a hidden potential.',
 ], {
     image: 'assets/images/npcs/Gentleman.png',
-    requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp)
+    requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
 });
 const ProfBurnetAlola2 = new NPC('Professor Burnet', [
     'Long ago, Cosmog was called the child of the stars. Its powers seem to have some connection with Ultra Wormholes.',
