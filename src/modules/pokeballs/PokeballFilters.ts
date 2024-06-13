@@ -52,6 +52,8 @@ export default class PokeballFilters implements Feature {
         delete data.type1;
         delete data.type2;
 
+        data.category = [data.category];
+
         return data;
     });
 

@@ -28,7 +28,7 @@ export default class PokemonItem extends CaughtIndicatingItem {
 
     constructor(
         pokemon: PokemonNameType,
-        basePrice: number,
+        basePrice: number = undefined,
         currency: Currency = Currency.questPoint,
         public ignoreEV = false,
         displayName: string = undefined,
