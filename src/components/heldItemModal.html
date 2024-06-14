@@ -40,20 +40,16 @@
                       <!-- /ko -->
                   </div>
                   <!-- Search field -->
-                  <div class="form-group input-group px-1 mt-1 mb-0">
+                  <div class="input-group px-1 mt-1 mb-0">
                     <div class="input-group-prepend">
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bind="text: Settings.getSetting('heldItemDropdownPokemonOrItem').getSelectedValueName()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            style="min-width: 100px;
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;">
-                        </button>
-                        <div class="dropdown-menu" data-bind="foreach: Settings.getSetting('heldItemDropdownPokemonOrItem').options">
-                            <button class="dropdown-item" type="button" 
-                                data-bind="click: function(){
-                                    Settings.setSettingByName(Settings.getSetting('heldItemDropdownPokemonOrItem').name, $data.value)
-                                }, text: $data.text"></button>
-                        </div>
+                        <!-- ko let: { heldItemDropdownPokemonOrItem: Settings.getSetting('heldItemDropdownPokemonOrItem') } -->
+                        <select id="held-item-sort" autocomplete="off" class="custom-select"
+                            data-bind="options: heldItemDropdownPokemonOrItem.options,
+                                optionsValue: 'value',
+                                optionsText: 'text',
+                                value: heldItemDropdownPokemonOrItem.observableValue">
+                        </select>
+                        <!-- /ko -->
                     </div>
                     <input id="held-item-search" autocomplete="off" class="form-control" placeholder="Search"
                         data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue" />
