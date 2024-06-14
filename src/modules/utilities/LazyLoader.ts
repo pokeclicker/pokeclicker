@@ -1,4 +1,4 @@
-import { Subscribable, Observable, PureComputed } from 'knockout';
+import { Subscription, Subscribable, Observable, Computed, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
 function createObserver(loader: HTMLElement, page: Observable<number>, fullyLoaded: { status: boolean },
@@ -20,6 +20,10 @@ function createObserver(loader: HTMLElement, page: Observable<number>, fullyLoad
     // Called by Knockout's childrenComplete binding
     // Signals that the foreach binding is done updating the lazyList in the DOM and we can load another page if the loader is still onscreen
     const bindingCallback = () => {
+        if (!App.isGameLoaded()) {
+            // lazyList shouldn't load additional pages before the game starts
+            return;
+        }
         if (visible) {
             // Don't load immediately on childrenComplete so the observer has time to realize if it's been pushed offscreen
             // Otherwise the list will load two pages of data at once
@@ -46,7 +50,13 @@ function createObserver(loader: HTMLElement, page: Observable<number>, fullyLoad
     };
 
     const observer = new IntersectionObserver(observerCallback, options);
-    observer.observe(loader);
+
+    // Wait to observe the loader icon until the game is done loading
+    // Otherwise the observer might wind up in an incorrect state
+    const loadSub = ko.when(() => App.isGameLoaded(), () => {
+        observer.observe(loader);
+        loadSub.dispose();
+    });
 
     return {
         bindingCallback,
@@ -80,7 +90,7 @@ export type LazyLoadOptions = {
     triggerMargin: string; // must be px or %
     threshold: number;
     pageSize: number;
-    reset?: Observable; // Whenever this changes, the page will reset to the first page
+    reset?: Subscribable<any> | (() => any); // Whenever this changes, the lazyList will reset to the first page (non-KO functions must evaluate a KO observable)
 };
 
 const defaultOptions: LazyLoadOptions = {
@@ -89,16 +99,43 @@ const defaultOptions: LazyLoadOptions = {
     pageSize: 40,
 };
 
-const memo: Record<string, { list: PureComputed<Array<unknown>>, callback: () => void }> = {};
+const memo: Record<string, { list: PureComputed<Array<unknown>>, callback: () => void, toDispose: Array<Computed<any> | Subscription> }> = {};
 
+/**
+ * Provides a lazy-loading PureComputed slice of an observable array, for use in bindings like foreach, and inserts a loader element
+ * into the page to trigger loading more of the underlying array. Computed lists are cached when possible.
+ * 
+ * @param key - Unique identifier for each list, used for caching
+ * @param boundNode - HTML Node the list is bound to. Must be in a scrolling container, and the loader will be added to a non-table parent of this node.
+ * @param list - The observable array to lazily load
+ * @param options - Optional parameters
+ * @param options.pageSize Number of elements per lazy list page, default 40
+ * @param options.triggerMargin Trigger margin for IntersectionObserver, default 10%
+ * @param options.threshold Threshold for IntersectionObserver, default 0
+ * @param options.reset A function to trigger resets to the list. The function can be any Knockout subscribable or a function that evaluates a Knockout subscribable.
+ * The list will reset to the first page whenever the output changes, or if reset is subscribable and reset.notifySubscribers() is called.
+ * 
+ * @return A PureComputed array initially showing the first pageSize elements of the base list.
+ */
 export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<unknown>>, options?: Partial<LazyLoadOptions>): PureComputed<Array<unknown>> {
     // Get first parent that's not a table element, that's where we'll add the loader element
     const targetElement = boundNode.parentElement.closest(':not(table, thead, tbody, tr, td, th)') as HTMLElement;
 
-    // Only return a memoized lazyList if the associated loader element still exists
-    if (memo[key] && targetElement.querySelector(':scope > .lazy-loader-container')) {
-        return memo[key].list;
+    if (memo[key]) {
+        if (targetElement.querySelector(':scope > .lazy-loader-container')) {
+            // Only return a memoized lazyList if the associated loader element still exists
+            return memo[key].list;
+        } else {
+            // Dispose of old subscriptions before making new computeds
+            memo[key].toDispose.forEach(sub => sub.dispose());
+        }
     }
+
+    memo[key] = {
+        list: null,
+        callback: null,
+        toDispose: [],
+    };
 
     const opts = {
         ...defaultOptions,
@@ -125,8 +162,26 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
         threshold: opts.threshold,
     });
 
-    // Reset the lazyList to its start size on any notification from the reset observable
-    opts.reset?.subscribe(() => page(1));
+    memo[key].callback = bindingCallback;
+
+    if (opts.reset) {
+        let reset = opts.reset;
+
+        if (!(reset instanceof Function)) {
+            throw new Error(`Invalid reset function used for '${key}' lazyLoad`);
+        }
+
+        // Wrap reset function in a computed if it's not a Knockout object already
+        if (!ko.isObservable(reset)) {
+            reset = ko.computed(reset);
+            // We made the computed in here, we should dispose of it later
+            memo[key].toDispose.push(reset as Computed);
+        }
+
+        // Reset the lazyList to its start size on any notification from the reset observable
+        const resetSub = (reset as Subscribable).subscribe(() => page(1));
+        memo[key].toDispose.push(resetSub);
+    }
 
     // Computed slice of however much of the source list is currently loaded
     const lazyList = ko.pureComputed(() => {
@@ -146,11 +201,8 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
         return array.slice(0, lastElem);
     });
 
-    // Memoize the computed list and associated callback
-    memo[key] = {
-        list: lazyList,
-        callback: bindingCallback,
-    };
+    memo[key].list = lazyList;
+    memo[key].toDispose.push(lazyList);
 
     return lazyList;
 }
