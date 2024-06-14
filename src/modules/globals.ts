@@ -158,7 +158,7 @@ type TmpTemporaryBattleListType = {
 type TmpTemporaryBattleType = {
     name: string;
     parent?: TmpTownType;
-    getTown: () => TmpTownType;
+    getTown: () => TmpTownType | undefined;
 };
 
 type TmpTownType = {
