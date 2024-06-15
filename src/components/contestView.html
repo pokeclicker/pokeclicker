@@ -2,8 +2,9 @@
     <div class="col no-gutters clickable" data-bind="if: ContestBattle.enemyPokemon, click: function() {ContestBattle.clickAttack()}" style="height: 280px; display: block;">
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout>
+                <knockout data-bind="text: ContestBattle.trainer().name.replace(/\d/g,'') + '\'s'"></knockout>
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': ContestBattle.enemyPokemon() } }">Pokémon name</knockout>
-                <!-- TODO: <knockout data-bind="text: ContestBattle.enemyPokemon().nickname()"></knockout> -->
+                <!-- TODO: Trainer name and Pokemon nickname instead -->
             </knockout>
 
             <div class="progress timer">
@@ -31,7 +32,7 @@
         <div>
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
-        <div class="progress hitpoints trainerhitpoints" style="bottom: 100px;">
+        <div class="progress contestpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + ContestBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
@@ -42,23 +43,26 @@
           <div class="progress-bar bg-success" role="progressbar"
                   data-bind="attr:{ style: 'width:' + ContestRunner.audienceAppealPercentage() + '%' }, css: {'progress-bar-striped progress-bar-animated': ContestRunner.encoreStatus() } "
                   aria-valuemin="0" aria-valuemax="100">
-              <span data-bind="text: ContestRunner.audienceStatus()" style="font-size: 12px;"></span>
+              <span data-bind="html: ContestRunner.audienceStatus()" style="font-size: 12px;"></span>
           </div>
       </div>
       <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
-        <!-- TODO: organize these better -->
         <table width="100%">
           <tr>
-            <td with="50%">
-              <knockout data-bind="text: ContestBattle.trainer().name.replace(/\d/g,'')"></knockout>
+            <td width="50%">
+              <knockout data-bind="html: ContestBattle.pokemonContestAppealTooltip"></knockout>
             </td>
             <td width="50%">
-              <knockout data-bind="text: `Trainer Streak: ${ContestBattle.trainersDefeatedComputable()}`"></knockout>
+              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.trainerBonusComputable())"></knockout>
             </td>
           </tr>
           <tr>
-            <td width="50%">
-                <knockout data-bind="template: { name: 'pokemonContestAppealTemplate', data: { 'pokemon': ContestBattle.enemyPokemon() } }"></knockout>
+            <td width="50%" data-bind="foreach: pokemonMap[ContestBattle.enemyPokemon().name].contestType">
+              <span class="badge text-light px-1" data-bind="if: $data >= 0,
+                          style: { 'background-color': GameConstants.ContestColor[$data]}">
+                <small><strong
+                  data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
+              </span>
             </td>
             <td width="50%">
               <knockout data-bind="text: `Bonus Round: ${ContestRunner.encoreRoundsComputable()}/${ContestRunner.rank()}`"></knockout>

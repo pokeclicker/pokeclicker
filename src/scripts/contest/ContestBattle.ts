@@ -91,14 +91,15 @@ class ContestBattle extends Battle {
     }
 
     // Increase and keep track of the amount of trainers defeated
-    public static trainersDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
-        return ContestBattle.trainerStreak();
+    public static trainerBonusComputable: KnockoutComputed<string> = ko.pureComputed(() => {
+        const rank = ContestRunner.isRallied() ? ContestRunner.rank() : 1;
+        return `Trainer Streak: ${ContestBattle.trainerStreak()} (+${Math.floor(0.1 * ContestBattle.trainerStreak() * rank)} <img src="./assets/images/currency/contestToken.svg" height="16px"/>)`;
     });
 
     public static pokemonContestAppealTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
         if (ContestBattle.enemyPokemon()) {
             const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3);
-            return `${pokemonAppeal.toLocaleString('en-US')} against ${ContestBattle.enemyPokemon().displayName}`;
+            return `${pokemonAppeal.toLocaleString('en-US')} against`;
         } else {
             return '';
         }
