@@ -199,6 +199,7 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     if (opts.pause) {
         let pause = maybeMakeComputed(opts.pause, key);
         // Pause loading by hiding the loader image whenever the observable is true
+        toggleLoader(!pause());
         const pauseSub = pause.subscribe((pauseState) => toggleLoader(!pauseState));
         memo[key].toDispose.push(pauseSub);
     }
