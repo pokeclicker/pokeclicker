@@ -5,6 +5,7 @@ export default class ChangelogUpdate extends Changelog {
         public version: string,
         date: Date,
         desc: string = '',
+        public link?: string,
     ) {
         super(changelogType.UPDATE, `<code>${version}${desc ? ` - ${desc}` : ''} -  ${date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</code>`);
     }
