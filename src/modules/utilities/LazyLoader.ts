@@ -76,6 +76,23 @@ function findScrollingParent(element: HTMLElement, key: string): HTMLElement {
     throw new Error(`Could not find scrolling parent for LazyLoader '${key}'`);
 }
 
+const memo: Record<string, { list: PureComputed<Array<unknown>>, callback: () => void, toDispose: Array<Computed<any> | Subscription> }> = {};
+
+type SubscribableOrFunction<T = any> = Subscribable<T> | (() => T);
+
+function maybeMakeComputed<T>(maybeSubscribable: SubscribableOrFunction<T>, key: string): Subscribable<T> {
+    if (!(maybeSubscribable instanceof Function)) {
+        throw new Error(`Invalid reset function used for '${key}' lazyLoad`);
+    }
+    // Wrap reset function in a computed if it's not a Knockout object already
+    if (!ko.isSubscribable(maybeSubscribable)) {
+        maybeSubscribable = ko.computed(maybeSubscribable);
+        // We made the computed in here, we should dispose of it later
+        memo[key].toDispose.push(maybeSubscribable as Computed<T>);
+    }
+    return maybeSubscribable as Subscribable<T>;
+}
+
 function createLoaderElem(): HTMLElement {
     const loader = document.createElement('div');
     loader.className = 'lazy-loader-container';
@@ -90,7 +107,8 @@ export type LazyLoadOptions = {
     triggerMargin: string; // must be px or %
     threshold: number;
     pageSize: number;
-    reset?: Subscribable<any> | (() => any); // Whenever this changes, the lazyList will reset to the first page (non-KO functions must evaluate a KO observable)
+    reset?: SubscribableOrFunction<any>; // Whenever this changes, the lazyList will reset to the first page (non-KO functions must evaluate a KO observable)
+    pause?: SubscribableOrFunction<boolean>; // While this is true, the lazyList will not load more pages (non-KO functions must evaluate a KO observable)
 };
 
 const defaultOptions: LazyLoadOptions = {
@@ -98,8 +116,6 @@ const defaultOptions: LazyLoadOptions = {
     threshold: 0,
     pageSize: 40,
 };
-
-const memo: Record<string, { list: PureComputed<Array<unknown>>, callback: () => void, toDispose: Array<Computed<any> | Subscription> }> = {};
 
 /**
  * Provides a lazy-loading PureComputed slice of an observable array, for use in bindings like foreach, and inserts a loader element
@@ -148,6 +164,15 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     const loader = createLoaderElem();
     targetElement.append(loader);
 
+    // Function to toggle loader visibility
+    const toggleLoader = (visible) => {
+        if (visible) {
+            loader.style.removeProperty('display');
+        } else {
+            loader.style.display = 'none';
+        }
+    };
+
     // How many sections of the source list are currently loaded 
     const page = ko.observable(1);
 
@@ -165,22 +190,17 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     memo[key].callback = bindingCallback;
 
     if (opts.reset) {
-        let reset = opts.reset;
-
-        if (!(reset instanceof Function)) {
-            throw new Error(`Invalid reset function used for '${key}' lazyLoad`);
-        }
-
-        // Wrap reset function in a computed if it's not a Knockout object already
-        if (!ko.isObservable(reset)) {
-            reset = ko.computed(reset);
-            // We made the computed in here, we should dispose of it later
-            memo[key].toDispose.push(reset as Computed);
-        }
-
+        let reset = maybeMakeComputed(opts.reset, key);
         // Reset the lazyList to its start size on any notification from the reset observable
-        const resetSub = (reset as Subscribable).subscribe(() => page(1));
+        const resetSub = reset.subscribe(() => page(1));
         memo[key].toDispose.push(resetSub);
+    }
+
+    if (opts.pause) {
+        let pause = maybeMakeComputed(opts.pause, key);
+        // Pause loading by hiding the loader image whenever the observable is true
+        const pauseSub = pause.subscribe((pauseState) => toggleLoader(!pauseState));
+        memo[key].toDispose.push(pauseSub);
     }
 
     // Computed slice of however much of the source list is currently loaded
@@ -192,11 +212,7 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
         fullyLoaded.status = isDone;
 
         // Hide loader image if there's nothing left to load
-        if (isDone) {
-            loader.style.display = 'none';
-        } else {
-            loader.style.removeProperty('display');
-        }
+        toggleLoader(!isDone);
 
         return array.slice(0, lastElem);
     });
