@@ -49,8 +49,15 @@ function createObserver(loader: HTMLElement, page: Observable<number>, fullyLoad
         }
     };
 
+
     const observer = new IntersectionObserver(observerCallback, options);
-    observer.observe(loader);
+
+    // Wait to observe the loader icon until the game is done loading
+    // Otherwise the observer might wind up in an incorrect state
+    const loadSub = ko.when(() => App.isGameLoaded(), () => {
+        observer.observe(loader);
+        loadSub.dispose();
+    });
 
     return {
         bindingCallback,
@@ -94,7 +101,6 @@ function createLoaderElem(): HTMLElement {
     loaderImage.src = 'assets/images/pokeball/Pokeball.svg';
     loaderImage.className = 'loader-pokeball';
     loader.append(loaderImage);
-    loader.style.display = 'none'; // remove once game is loaded
     return loader;
 }
 
@@ -161,7 +167,7 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
 
     // Function to toggle loader visibility
     const toggleLoader = (visible) => {
-        if (visible && App.isGameLoaded()) {
+        if (visible) {
             // Only show the loader once the game has loaded  
             loader.style.removeProperty('display');
         } else {
@@ -199,12 +205,6 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     });
 
     memo[key].callback = bindingCallback;
-
-    // Once the game loads, make the loader visible so it can trigger loading
-    const loadSub = ko.when(() => App.isGameLoaded(), () => {
-        toggleLoader(pauseSubscribable?.() ?? true);
-        loadSub.dispose();
-    });
 
     // Computed lazyList returning the currently-loaded slice of the source list
     const lazyList = ko.pureComputed(() => {
