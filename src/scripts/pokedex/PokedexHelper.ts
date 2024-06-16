@@ -75,6 +75,8 @@ class PokedexHelper {
             return Math.max(highestSeen, highestEncountered, highestDefeated, highestCaught);
         }).peek();
 
+        const shadowPokemon = PokemonHelper.getAllShadowPokemon.peek();
+
         return pokemonList.filter((pokemon) => {
             // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
@@ -164,7 +166,7 @@ class PokedexHelper {
             }
 
             // Only caught not shadow
-            if (caughtShiny == 'caught-not-shadow' && (!alreadyCaught || alreadyCaughtShadow)) {
+            if (caughtShiny == 'caught-not-shadow' && (!alreadyCaught || alreadyCaughtShadow || !shadowPokemon.has(pokemon.name))) {
                 return false;
             }
 
