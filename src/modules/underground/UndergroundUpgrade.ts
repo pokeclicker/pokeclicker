@@ -26,7 +26,7 @@ export default class UndergroundUpgrade extends Upgrade {
     constructor(
         name: Upgrades, displayName: string, maxLevel: number,
         costList: Amount[], bonusList: number[], increasing = true,
-        private requirement?: Requirement,
+        public description?: string, private requirement?: Requirement,
     ) {
         super(name, displayName, maxLevel, costList, bonusList, increasing);
     }
