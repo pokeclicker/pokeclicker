@@ -9,7 +9,7 @@
     <div id='eggList' class="card-body p-0 show">
       <div class="row m-0" data-bind="foreach: App.game.breeding.eggList">
         <div class="col-3 col-md-6 p-0 eggSlot">
-          <div class="content">
+          <div class="content" data-bind="if: DisplayObservables.collapseState.eggList !== 'hidden'">
             <div data-bind="if: $index() === App.game.breeding.eggSlots">
                 <p>
                   <br/>

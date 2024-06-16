@@ -1,28 +1,35 @@
-<div id="shortcutsContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.highestRegion">
+<div id="shortcutsContainer" class="card sortable border-secondary mb-3"
+    data-bind="visible: Underground.shortcutVisible() || FarmController.shortcutVisible() || ShopHandler.shortcutVisible()">
     <div class="card-header p-0" data-toggle="collapse" href="#shortcutsBody">
         <span style="text-align:center">Shortcuts</span>
     </div>
     <div id="shortcutsBody" class="card-body show p-0">
       <table class="table table-sm m-0">
         <tbody>
-          <tr data-bind="visible: App.game.underground.canAccess() && !Settings.getSetting('showUndergroundModule').observableValue()">
+          <tr data-bind="visible: Underground.shortcutVisible">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="App.game.underground.openUndergroundModal()">
                   Underground
+                  <knockout data-bind="text: `[${Settings.getSetting('hotkey.underground').observableValue()}]`,
+                    visible: Settings.getSetting('hotkey.underground').observableValue() != 'None'"></knockout>
               </button>
             </td>
           </tr>
-          <tr data-bind="visible: App.game.farming.canAccess() && !Settings.getSetting('showFarmModule').observableValue()">
+          <tr data-bind="visible: FarmController.shortcutVisible">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
                   Farm
+                  <knockout data-bind="text: `[${Settings.getSetting('hotkey.farm').observableValue()}]`,
+                    visible: Settings.getSetting('hotkey.farm').observableValue() != 'None'"></knockout>
               </button>
             </td>
           </tr>
-          <tr data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]">
+          <tr data-bind="visible: ShopHandler.shortcutVisible">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);" href="#shopModal" data-toggle="modal">
                   Poké Mart
+                  <knockout data-bind="text: `[${Settings.getSetting('hotkey.shop').observableValue()}]`,
+                    visible: Settings.getSetting('hotkey.shop').observableValue() != 'None'"></knockout>
               </button>
             </td>
           </tr>
