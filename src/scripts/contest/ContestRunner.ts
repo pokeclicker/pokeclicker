@@ -208,7 +208,7 @@ class ContestRunner {
         if (!ContestRunner.encoreStatus() && !ContestRunner.finaleStatus()) {
             return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;
         } else {
-            return ContestRunner.encoreStatus() ? '<i>Encore!</i>' : `<i>Grand Finale!</i>`;
+            return ContestRunner.encoreStatus() ? '<i>Encore!</i>' : '<i>Grand Finale!</i>';
         }
     })
 
