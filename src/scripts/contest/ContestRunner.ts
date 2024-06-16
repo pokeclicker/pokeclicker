@@ -17,6 +17,7 @@ class ContestRunner {
 
     public static encoreStatus: KnockoutObservable<boolean> = ko.observable(false);
     public static encoreRounds: KnockoutObservable<number> = ko.observable(0);
+    public static finaleStatus: KnockoutObservable<boolean> = ko.observable(false);
 
     // Updated via ContestHall.ts
     public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
@@ -40,6 +41,7 @@ class ContestRunner {
 
         ContestRunner.encoreStatus(false);
         ContestRunner.encoreRounds(0);
+        ContestRunner.finaleStatus(false);
 
         ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
         ContestBattle.trainerIndex(0);
@@ -74,13 +76,22 @@ class ContestRunner {
             return;
         }
         // activate encore if doing well enough
-        if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true && ContestRunner.encoreRounds() < ContestRunner.rank()) {
-            Notifier.notify({
-                message: 'The crowd is cheering! Bonus round incoming!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.gym_won,
-            });
-            ContestRunner.encoreStatus(true);
+        if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true && ContestRunner.finaleStatus() != true) {
+            if (ContestRunner.encoreRounds() < ContestRunner.rank()) {
+                Notifier.notify({
+                    message: 'The crowd is cheering! Bonus round incoming!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
+                });
+                ContestRunner.encoreStatus(true);
+            } else {
+                Notifier.notify({
+                    message: 'What a grand finale! Auto-restart incoming!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
+                });
+                ContestRunner.finaleStatus(true);
+            }
         }
         if (ContestRunner.timeLeft() < 0) {
             ContestRunner.isRallied() ? ContestRunner.contestWon() : ContestRunner.contestLost();
@@ -137,7 +148,7 @@ class ContestRunner {
                 Notifier.notify({
                     message: `Good job! You got a bonus of ${tokenReward} Contest Tokens!`,
                     type: NotificationConstants.NotificationOption.success,
-                    setting: NotificationConstants.NotificationSetting.General.gym_won,
+                    setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
                 });
             } else {
                 Notifier.notify({
@@ -161,15 +172,10 @@ class ContestRunner {
             Notifier.notify({
                 message: `${ContestHelper.encoreWord(ContestRunner.encoreRounds())} You won ${tokenReward} Contest Tokens!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.gym_won,
+                setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
             });
 
-            if (ContestRunner.encoreStatus() === true) {
-                Notifier.notify({
-                    message: 'The crowd cheers for an encore!',
-                    type: NotificationConstants.NotificationOption.success,
-                    setting: NotificationConstants.NotificationSetting.General.gym_won,
-                });
+            if (ContestRunner.encoreStatus()) {
                 // increase encore round
                 ContestRunner.encoreRounds(ContestRunner.encoreRounds() + 1);
                 // reset audience, time, and encore status
@@ -179,8 +185,11 @@ class ContestRunner {
                 ContestRunner.encoreStatus(false);
                 // increase audience bar (needs updated encore round from above)
                 ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * (ContestRunner.encoreRounds() + 1));
+            } else if (ContestRunner.finaleStatus()) {
+                // if max encore rounds, auto restart contest
+                ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type());
             } else {
-                // if no bonus round, end the contest
+                // if neither, end the contest
                 ContestRunner.running(false);
                 ContestBattle.enemyPokemon(null);
                 ContestBattle.trainer(null);
@@ -196,10 +205,10 @@ class ContestRunner {
     });
 
     public static audienceStatus: KnockoutComputed<string> = ko.pureComputed(() => {
-        if (!ContestRunner.encoreStatus()) {
+        if (!ContestRunner.encoreStatus() && !ContestRunner.finaleStatus()) {
             return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;
         } else {
-            return '<i>Encore!</i>';
+            return ContestRunner.encoreStatus() ? '<i>Encore!</i>' : `<i>Grand Finale!</i>`;
         }
     })
 

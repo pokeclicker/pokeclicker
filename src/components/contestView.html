@@ -41,11 +41,17 @@
         </div>
         <div class="progress hitpoints trainerhitpoints">
           <div class="progress-bar bg-success" role="progressbar"
-                  data-bind="attr:{ style: 'width:' + ContestRunner.audienceAppealPercentage() + '%' }, css: {'progress-bar-striped progress-bar-animated': ContestRunner.encoreStatus() } "
+                  data-bind="attr:{ style: 'width:' + ContestRunner.audienceAppealPercentage() + '%' }, css: {'progress-bar-striped progress-bar-animated': ContestRunner.encoreStatus() || ContestRunner.finaleStatus()} "
                   aria-valuemin="0" aria-valuemax="100">
               <span data-bind="html: ContestRunner.audienceStatus()" style="font-size: 12px;"></span>
           </div>
       </div>
+      <button class="btn btn-sm btn-danger stop-auto"
+        onclick="ContestRunner.running(false);
+        ContestBattle.enemyPokemon(null);
+        ContestBattle.trainer(null);">
+        Stop Contest
+      </button>
       <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
         <table width="100%">
           <tr>
