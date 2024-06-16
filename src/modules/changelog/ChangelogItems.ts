@@ -35,7 +35,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Added Mimic & Wanderer encounter types to pokéball filters'),
     new Changelog(changelogType.CHANGE, 'Purified Pokémon now give a bonus to click attack'),
     new Changelog(changelogType.CHANGE, 'Battle Frontier now uses Clear weather at all times'),
-    new Changelog(changelogType.CHANGE, 'Flutes can now be used with the No Battle Items challenge'),
+    new Changelog(changelogType.CHANGE, 'Flutes can now be used regardless of active challenges'),
     new Changelog(changelogType.CHANGE, 'Removed 3x activation limit on Treasure Scanner Oak Item'),
     new Changelog(changelogType.CHANGE, 'Right click (or long press on mobile) to enable/disable Pokéball filters from the main view'),
     new Changelog(changelogType.CHANGE, 'Orre dungeons have an updated encounter display'),
