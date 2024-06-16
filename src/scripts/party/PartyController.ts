@@ -265,7 +265,7 @@ class PartyController {
     private static pokeblockSortedList = [];
     static getPokeblockSortedList = ko.pureComputed(() => {
         // If the pokeblock modal is open, we should sort it.
-        if (modalUtils.observableState.pokeblockModal === 'show') {
+        if (DisplayObservables.modalState.pokeblockModal === 'show') {
             PartyController.pokeblockSortedList = PartyController.getPokeblockFilteredList();
             return PartyController.pokeblockSortedList.sort(PartyController.compareBy(Settings.getSetting('pokeblockSort').observableValue(), Settings.getSetting('pokeblockSortDirection').observableValue()));
         }
