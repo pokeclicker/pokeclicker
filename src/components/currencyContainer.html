@@ -2,8 +2,8 @@
     <div class="card-header p-0" data-toggle="collapse" href="#currencyBody">
         <span>Currency</span>
     </div>
-    <div id="currencyBody" class="card-body p-1 show">
-        <div class="currency-wrapper" data-bind="css: { 'short-currencies': Settings.getSetting('currencyMainDisplayReduced').observableValue() }">
+    <div id="currencyBody" class="card-body p-0 show">
+        <div class="currency-wrapper p-1" data-bind="css: { 'short-currencies': Settings.getSetting('currencyMainDisplayReduced').observableValue() }">
             <div class="currency-line">
                 <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.money, tooltip: 'Pokédollars<br /><br />Gained by defeating Pokémon and trainers in battle.' } }"></div>
                 <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.dungeonToken, tooltip: 'Dungeon Tokens<br /><br />Gained by catching wild Pokémon.' } }"></div>
