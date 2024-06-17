@@ -3052,7 +3052,7 @@ Routes.add(new RegionRoute(
     GalarSubRegions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
-    'Winter Hill Station', Region.galar, 31,
+    'White Hill Station', Region.galar, 31,
     new RoutePokemon({
         land: ['Snom', 'Rhydon', 'Galarian Darumaka', 'Galarian Mr. Mime', 'Vanillish', 'Klang', 'Glalie', 'Snover', 'Vanilluxe', 'Cubchoo'],
     }),
@@ -3079,7 +3079,7 @@ Routes.add(new RegionRoute(
 ISLE OF ARMOR
 */
 Routes.add(new RegionRoute(
-    'Fields of Honour', Region.galar, 33,
+    'Fields of Honor', Region.galar, 33,
     new RoutePokemon({
         land: ['Galarian Slowpoke', 'Buneary', 'Jigglypuff', 'Abra', 'Klefki', 'Blipbug', 'Happiny'],
         water: ['Magikarp', 'Remoraid', 'Octillery', 'Tentacool', 'Wingull', 'Mantyke', 'Starmie'],
