@@ -18,6 +18,7 @@ import {
     MegaEvolution,
     DayTimedMegaEvolution,
     NightTimedMegaEvolution,
+    AttackEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -21886,6 +21887,27 @@ export const pokemonList = createPokemonArray(
     {
         'id': 716,
         'name': 'Xerneas',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 306,
+        'evolutions': [AttackEvolution('Xerneas', 'Xerneas (Active)', 1)],
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 126,
+            'attack': 131,
+            'specialAttack': 131,
+            'defense': 95,
+            'specialDefense': 98,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 716.01,
+        'name': 'Xerneas (Active)',
         'type': [PokemonType.Fairy],
         'eggCycles': 120,
         'levelType': LevelType.slow,

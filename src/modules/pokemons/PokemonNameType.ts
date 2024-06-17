@@ -1141,6 +1141,7 @@ export type PokemonNameType
     | 'Noibat'
     | 'Noivern'
     | 'Xerneas'
+    | 'Xerneas (Active)'
     | 'Yveltal'
     | 'Zygarde'
     | 'Diancie'
@@ -1634,4 +1635,3 @@ export type PokemonNameType
     | 'Navi Starmobile'
     | 'Ruchbah Starmobile'
     | 'Caph Starmobile';
-    

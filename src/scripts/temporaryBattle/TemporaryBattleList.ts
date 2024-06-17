@@ -3289,7 +3289,7 @@ TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
 );
 TemporaryBattleList.Xerneas = new TemporaryBattle(
     'Xerneas',
-    [new GymPokemon('Xerneas', 281500000, 50)],
+    [new GymPokemon('Xerneas (Active)', 281500000, 50)],
     'You calmed down Xerneas and it ran away to the back of the lab.',
     [new QuestLineStepCompletedRequirement('A Beautiful World', 30)],
     undefined,
@@ -4749,7 +4749,7 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Pyroar', 225000000, 60),
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Mega Gyarados', 225000000, 60),
-        new GymPokemon('Xerneas', 240000000, 60),
+        new GymPokemon('Xerneas (Active)', 240000000, 60),
         new GymPokemon('Yveltal', 240000000, 60),
     ],
     'I can feel the fire of your convictions burning deep within your heart!',

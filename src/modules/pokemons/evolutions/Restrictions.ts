@@ -1,4 +1,4 @@
-import { GameState, Region, Environment, MegaStoneType } from '../../GameConstants';
+import { GameState, Region, Environment, MegaStoneType, AchievementOption } from '../../GameConstants';
 import { ItemNameType } from '../../items/ItemNameType';
 import { QuestLineNameType } from '../../quests/QuestLineNameType';
 import GameStateRequirement from '../../requirements/GameStateRequirement';
@@ -16,6 +16,7 @@ import MegaEvolveRequirement from '../../requirements/MegaEvolveRequirement';
 import { EvoData, restrict } from './Base';
 import DayCyclePart from '../../dayCycle/DayCyclePart';
 import MoonCyclePhase from '../../moonCycle/MoonCyclePhase';
+import AttackEvolveRequirement from '../../requirements/AttackEvolveRequirement';
 
 export type EvoFn = (...args: unknown[]) => EvoData;
 
@@ -127,4 +128,15 @@ export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
         data,
         new MegaEvolveRequirement(data.basePokemon, megaStone),
     );
+};
+
+export const attackRestrict = <T extends EvoFn>(evo: T) => (
+    ...rest: Parameters<T>
+) => {
+    const data = evo(...rest);
+    return restrict(
+        data,
+        new AttackEvolveRequirement(data.basePokemon),
+    );
+
 };
