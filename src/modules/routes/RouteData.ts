@@ -3938,7 +3938,7 @@ Routes.add(new RegionRoute(
     [new DevelopmentRequirement()],
 ));
 Routes.add(new RegionRoute(
-    'Bather\'s Lagoon', Region.hisui, 26,
+    'Bathers\' Lagoon', Region.hisui, 26,
     new RoutePokemon({
         land: ['Starly', 'Staravia', 'Togepi', 'Drifloon', 'Drifblim', 'Buizel', 'Floatzel', 'Psyduck', 'Golduck', 'Murkrow', 'Beautifly', 'Dustox'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
