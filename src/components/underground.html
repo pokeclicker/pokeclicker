@@ -102,8 +102,9 @@
                     <table class="table table-sm table-hover table-striped m-0">
                         <thead>
                             <tr>
-                                <th>Upgrade</th>
+                                <th class="text-left">Upgrade</th>
                                 <th>Amount</th>
+                                <th>Change</th>
                                 <th>Level</th>
                                 <th>Cost</th>
                                 <th></th>
@@ -291,49 +292,62 @@
     </div>
 
     <script type="text/html" id="undergroundUpgradeTemplate">
-        <td class='vertical-middle' data-bind='text: upgrade.displayName + ": " + totalBonus'></td>
-        <td class='vertical-middle'
-            data-bind='text: upgrade.isMaxLevel() ? "" : (upgrade.increasing ? "+" : "-") + upgrade.upgradeBonus()'></td>
-        <td class='vertical-middle'
-            data-bind='text: upgrade.isMaxLevel() ? "" : upgrade.level + "/" + upgrade.maxLevel'></td>
-        <td class='vertical-middle'
-            data-bind="text: upgrade.isMaxLevel() ? '' : upgrade.calculateCost().amount.toLocaleString('en-US') + ' Diamonds'"></td>
-        <td class='vertical-middle'>
-            <button class='btn btn-success btn-block'
-                    data-bind='css: { disabled: !upgrade.canBuy() },
-                                text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
-                                click: function(){upgrade.buy(); DailyDeal.generateDeals(App.game.underground.getDailyDealsMax(), new Date());}'>
+        <!-- ko if: upgrade.isUnlocked() -->
+        <td class="vertical-middle text-left">
+            <div class="font-weight-bold" data-bind="text: upgrade.displayName"></div>
+            <span class="small d-none d-sm-block" data-bind="text: upgrade.description"></span>
+        </td>
+        <td class="vertical-middle" data-bind="text: totalBonus"></td>
+        <td class="vertical-middle"
+            data-bind="text: upgrade.isMaxLevel() ? '' : (upgrade.increasing ? '+' : '-') + upgrade.upgradeBonus()"></td>
+        <td class="vertical-middle"
+            data-bind="text: `${upgrade.level}/${upgrade.maxLevel}`"></td>
+        <td class="vertical-middle text-nowrap">
+            <!-- ko ifnot: upgrade.isMaxLevel() -->
+            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': upgrade.calculateCost().amount, 'currency': upgrade.calculateCost().currency, width: '18px', height: '18px' }}"></span>
+            <!-- /ko -->
+        </td>
+        <td class="vertical-middle">
+            <button class="btn btn-success btn-block"
+                    data-bind="css: { disabled: !upgrade.canBuy() },
+                                text: upgrade.isMaxLevel() ? 'Max' : 'Upgrade',
+                                click: function(){upgrade.buy(); DailyDeal.generateDeals(App.game.underground.getDailyDealsMax(), new Date());}">
             </button>
         </td>
+        <!-- /ko -->
     </script>
 
     <script type="text/html" id="undergroundUpgradeToggleTemplate">
-        <td class='vertical-middle' data-bind='text: upgrade.displayName'></td>
-        <td class='vertical-middle'></td>
-        <td class='vertical-middle'></td>
-        <td class='vertical-middle'
-            data-bind="text: upgrade.isMaxLevel() ? '' : upgrade.calculateCost().amount.toLocaleString('en-US') + ' Diamonds'"></td>
-        <td class='vertical-middle'>
-            <button class='btn btn-block'
-                data-bind='css: {
+        <!-- ko if: upgrade.isUnlocked() -->
+        <td class="vertical-middle text-left">
+            <div class="font-weight-bold" data-bind="text: upgrade.displayName"></div>
+            <span class="small d-none d-sm-block" data-bind="text: upgrade.description"></span>
+        </td>
+        <td class="vertical-middle"></td>
+        <td class="vertical-middle"></td>
+        <td class="vertical-middle"></td>
+        <td class="vertical-middle text-nowrap">
+            <!-- ko ifnot: upgrade.isMaxLevel() -->
+            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': upgrade.calculateCost().amount, 'currency': upgrade.calculateCost().currency, width: '18px', height: '18px' }}"></span>
+            <!-- /ko -->
+        </td>
+        <td class="vertical-middle">
+            <button class="btn btn-block"
+                data-bind="css: {
                         disabled: (!upgrade.isMaxLevel() && !upgrade.canAfford()) || !upgrade.isUnlocked(),
-                        "btn-success": !upgrade.isMaxLevel() || Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
-                        "btn-danger": upgrade.isMaxLevel() && !Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
+                        'btn-success': !upgrade.isMaxLevel() || Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
+                        'btn-danger': upgrade.isMaxLevel() && !Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
                     },
                     text: upgrade.isMaxLevel()
                         ? Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue()
-                            ? "Enabled" : "Disabled"
-                        : !upgrade.isUnlocked() ? "🔒" : "Unlock",
-                    tooltip: {
-                        title: upgrade.isUnlocked() ? "" : upgrade.requirement.hint(),
-                        trigger: "hover",
-                        placement: "left",
-                    },
+                            ? 'Enabled' : 'Disabled'
+                        : 'Unlock',
                     click: () => !upgrade.isMaxLevel() && upgrade.isUnlocked()
                         ? upgrade.buy()
-                        : Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).toggle()'>
+                        : Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).toggle()">
             </button>
         </td>
+        <!-- /ko -->
     </script>
 
     <script type="text/html" id="treasureListTemplate">
