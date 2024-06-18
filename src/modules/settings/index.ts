@@ -307,10 +307,10 @@ Settings.add(new Setting<number>('breedingPokerusFilter', 'Pokérus Status',
     ],
     -1));
 Settings.add(new Setting<number>('breedingCategoryFilter', 'Category', () => [
-            new SettingOption('All', -1),
-            new SettingOption('Categorized', -2),
-            ...PokemonCategories.categories().map(c => new SettingOption(`Category ${c.id}`, c.id))
-        ], -1));
+    new SettingOption('All', -1),
+    new SettingOption('Categorized', -2),
+    ...PokemonCategories.categories().map(c => new SettingOption(`Category ${c.id}`, c.id)),
+], -1));
 Settings.add(new Setting<string>('breedingUniqueTransformationFilter', 'Unique Transformations',
     [
         new SettingOption('Show All Pokémon', 'all'),
