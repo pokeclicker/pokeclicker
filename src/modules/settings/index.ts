@@ -342,10 +342,10 @@ Settings.add(new Setting<number>('pokedexPokerusFilter', 'Pokérus Status',
     ],
     -1));
 Settings.add(new Setting<number>('pokedexCategoryFilter', 'Category', () => [
-            new SettingOption('All', -1),
-            new SettingOption('Categorized', -2),
-            ...PokemonCategories.categories().map(c => new SettingOption(`Category ${c.id}`, c.id))
-        ], -1));
+    new SettingOption('All', -1),
+    new SettingOption('Categorized', -2),
+    ...PokemonCategories.categories().map(c => new SettingOption(`Category ${c.id}`, c.id)),
+], -1));
 Settings.add(new Setting<string>('pokedexUniqueTransformationFilter', 'Unique Transformations',
     [
         new SettingOption('Show All Pokémon', 'all'),
