@@ -29,6 +29,7 @@ import { LogBookTypes } from '../logbook/LogBookTypes';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import PokemonCategories from '../party/Category';
 
 export default Settings;
 
@@ -340,7 +341,11 @@ Settings.add(new Setting<number>('pokedexPokerusFilter', 'Pokérus Status',
         ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
     ],
     -1));
-Settings.add(new Setting<number>('pokedexCategoryFilter', 'Category', [], -1));
+Settings.add(new Setting<number>('pokedexCategoryFilter', 'Category', () => [
+            new SettingOption('All', -1),
+            new SettingOption('Categorized', -2),
+            ...PokemonCategories.categories().map(c => new SettingOption(`Category ${c.id}`, c.id))
+        ], -1));
 Settings.add(new Setting<string>('pokedexUniqueTransformationFilter', 'Unique Transformations',
     [
         new SettingOption('Show All Pokémon', 'all'),
