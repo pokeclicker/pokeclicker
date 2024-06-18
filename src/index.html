@@ -241,7 +241,8 @@
                                                     <!-- /ko -->
                                                     <!-- ko if: minPokerus > GameConstants.Pokerus.Infected -->
                                                     <div data-bind="text: RouteHelper.getPokerusProgress($data),
-                                                        class: 'pokerusProgress' + GameConstants.Pokerus[minPokerus]"></div>
+                                                        class: 'pokerusProgress' + GameConstants.Pokerus[minPokerus],
+                                                        attr: {title: RouteHelper.routePokerusEVs(player.route, player.region)}"></div>
                                                     <!-- /ko -->
                                                 <!-- /ko -->
                                             </knockout>
