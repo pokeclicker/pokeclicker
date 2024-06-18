@@ -303,6 +303,7 @@ class PokemonFactory {
                 break;
             case 'Black_mane_hair':
             case 'White_mane_hair':
+            case 'Crystallized_shadow':
                 chance = GameConstants.MANE_ITEM_CHANCE;
                 break;
             case 'Magikarp_Biscuit':

@@ -41,18 +41,17 @@
                     <div class="tab-pane" id="statisticsModalMultipliersPane">
                         <table class='table table-sm table-hover m-0'>
                             <!-- ko foreach: Object.entries(App.game.multiplier.multipliers) -->
-                                <thead>
+                                <tbody>
                                     <tr>
-                                        <th colspan="2" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-multiplier-' + $index() }">
-                                            <h3>
-                                                <knockout data-bind="text: GameConstants.camelCaseToString($data[0])"></knockout>
-                                                <div class="float-right">
-                                                    <knockout data-bind="text: `${App.game.multiplier.getBonus($data[0]).toFixed(2)}x`"></knockout>
-                                                </div>
-                                            </h3>
-                                        </th>
+                                        <td colspan="2" class="clickable text-left h5"
+                                            data-toggle="collapse" data-bind="attr: { 'href': '#collapse-multiplier-' + $index() }">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1" data-bind="text: GameConstants.camelCaseToString($data[0])"></div>
+                                                <knockout data-bind="text: `${App.game.multiplier.getBonus($data[0]).toFixed(2)}x`"></knockout>
+                                            </div>
+                                        </td>
                                     </tr>
-                                </thead>
+                                </tbody>
                                 <tbody data-bind="class: 'collapse', attr: { id: 'collapse-multiplier-' + $index()}">
                                     <!-- ko foreach: $data[1] -->
                                         <tr data-bind="if: $data.bonusFunction() !== 1">
