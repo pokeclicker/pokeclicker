@@ -1278,19 +1278,19 @@ class QuestLineHelper {
         const talktoZero2 = new TalkToNPCQuest(FightAreaZero2, 'Report to Zero what was in the book.');
         giratinaQuestLine.addQuest(talktoZero2);
 
-        const talktoMesprit = new TalkToNPCQuest(VerityMesprit, 'Ask Mesprit about the Distortion World in Lake Verity.');
+        const talktoMesprit = new TalkToNPCQuest(VerityMesprit, 'At Lake Verity, ask Mesprit about the Distortion World.');
         giratinaQuestLine.addQuest(talktoMesprit);
 
         const obtain10PurpleShards = new CustomQuest(10, 0, 'Obtain 10 Purple Shards.', () => player.itemList.Purple_shard());
         giratinaQuestLine.addQuest(obtain10PurpleShards);
 
-        const talktoAzelf = new TalkToNPCQuest(ValorAzelf, 'Ask Azelf about the Distortion World in Lake Valor.');
+        const talktoAzelf = new TalkToNPCQuest(ValorAzelf, 'At Lake Valor, ask Azelf about the Distortion World.');
         giratinaQuestLine.addQuest(talktoAzelf);
 
         const obtain10OchreShards = new CustomQuest(10, 0, 'Obtain 10 Ochre Shards.', () => player.itemList.Ochre_shard());
         giratinaQuestLine.addQuest(obtain10OchreShards);
 
-        const talktoUxie = new TalkToNPCQuest(AcuityUxie, 'Ask Uxie about the Distortion World in Lake Acuity.');
+        const talktoUxie = new TalkToNPCQuest(AcuityUxie, 'At Lake Acuity, ask Uxie about the Distortion World.');
         giratinaQuestLine.addQuest(talktoUxie);
 
         const obtain10CrimsonShards = new CustomQuest(10, 0, 'Obtain 10 Crimson Shards.', () => player.itemList.Crimson_shard());
