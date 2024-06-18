@@ -2705,9 +2705,14 @@ class Update implements Saveable {
             // The NewYLayer upgrades has been refactored to Items_All, copy the level
             saveData.underground.upgrades.Items_All = saveData.underground.upgrades.NewYLayer;
 
+        },
+
+        '0.10.21': ({ playerData, saveData, settingsData }) => {
+
             // Rename settings to accurately describe purpose
             settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
             delete settingsData.pokedexShinyFilter;
+
         },
     };
 

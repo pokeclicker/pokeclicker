@@ -687,7 +687,7 @@ const PinkanOfficerJenny3 = new NPC ('Officer Jenny', [
     image: 'assets/images/npcs/Officer Jenny.png',
     requirement: new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park'),
 });
-const ThemeparkTeamRocket1 = new NPC('Jessie and James', [
+const ThemeparkTeamRocket1 = new NPC('Jessie & James', [
     'Oh hello there trainer! What do you mean we\'re not supposed to be here? We toootally got permission from Officer Jenny!',
     'Isn\'t your whole "thing" being helpful? We want to build a theme park to help fund the Pinkan Reserve, but this meddlesome twerp named Ash keeps getting in the way. He\'s even electrocuted us with his damn Pikachu!',
     'We need a bunch of Pinkan Berries to help feed the Pokémon at our theme park, but the twerp keeps zapping us when we try to go collect them.',
@@ -713,7 +713,7 @@ const ThemeparkTeamRocket3 = new NPC('Jessie & James', [
     image: 'assets/images/npcs/Pinkan Jessie & James.png',
 });
 
-const ThemeparkTeamRocket4 = new NPC('Jessie and James', [
+const ThemeparkTeamRocket4 = new NPC('Jessie & James', [
     'Hahahaha! Now our plan can really start! Prepare for trouble, and make it double, because you just built us a profit machine!',
     'We\'re going to make these Pinkan Pokémon perform silly routines and make us a ton of money, no days off for these suckers!',
     'What\'s that? You\'re gonna stop us!? Heh, yeah right! Bring it on twerp!',
@@ -771,7 +771,7 @@ const RedSpearow = new NPC('Red Spearow', [
     '<i>The Red Spearow seems to appreciate your visit.</i>',
 ], {image: 'assets/images/pokemon/21.01.png'});
 
-const NewIslandJessieAndJames = new RoamerNPC('Jessie and James',
+const NewIslandJessieAndJames = new RoamerNPC('Jessie & James',
     ['Mewtwo\'s Clones have escaped and are Roaming freely across Kanto. Will you help us track them down? It\'s for a good cause, we swear.'],
     GameConstants.Region.kanto, 0, 'assets/images/npcs/Jessie and James.png',
     new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island'))
@@ -6907,7 +6907,15 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our kahuna there!',
-], {image: 'assets/images/npcs/Owner.png'});
+], { image: 'assets/images/npcs/Owner.png' });
+const HeaheaGentleman = new NPC('Gentleman', [
+    'There\'s an ancient legend here on Akala Island that tells of Marshadow.',
+    'It is said that when Marshadow is defeated, it sometimes leaves behind a rare crystallized fragment of its shadow.',
+    'According to the legend this fragment is known as the Crystallized Shadow and if you reunite Marshadow with it, Marshadow will unlock a hidden potential.',
+], {
+    image: 'assets/images/npcs/Gentleman.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
+});
 const ProfBurnetAlola2 = new NPC('Professor Burnet', [
     'Long ago, Cosmog was called the child of the stars. Its powers seem to have some connection with Ultra Wormholes.',
     'The mysteries of the Ultra Wormhole and Ultra Beasts...  I would be very happy if I could somehow unravel them!',
@@ -7754,7 +7762,7 @@ TownList['Heahea City'] = new Town(
     [TemporaryBattleList.Dexio, TemporaryBattleList.Sina, HeaheaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Heahea City']), new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Melemele_Stamp)],
-        npcs: [HeaheaCafeOwner, Lillie4, LillieHeahea, ProfBurnetAlola1, ProfBurnetAlola2],
+        npcs: [HeaheaCafeOwner, HeaheaGentleman, Lillie4, LillieHeahea, ProfBurnetAlola1, ProfBurnetAlola2],
     }
 );
 TownList['Paniola Town'] = new Town(

@@ -10,7 +10,7 @@ class PokedexHelper {
             });
         });
 
-        modalUtils.observableState.pokedexModalObservable.subscribe((modalState) => {
+        DisplayObservables.modalState.pokedexModalObservable.subscribe((modalState) => {
             // Resetting scrolling only works before modal is fully hidden
             if (modalState === 'hide') {
                 PokedexHelper.scrollToTop();
@@ -47,7 +47,7 @@ class PokedexHelper {
 
     private static cachedFilteredList: typeof pokemonList;
     public static filteredList = ko.pureComputed<typeof pokemonList>(() => {
-        if (PokedexHelper.cachedFilteredList && modalUtils.observableState.pokedexModal !== 'show') {
+        if (PokedexHelper.cachedFilteredList && DisplayObservables.modalState.pokedexModal !== 'show') {
             return PokedexHelper.cachedFilteredList;
         }
 
@@ -83,6 +83,8 @@ class PokedexHelper {
             const highestCaught = App.game.statistics.pokemonCaptured.highestID;
             return Math.max(highestSeen, highestEncountered, highestDefeated, highestCaught);
         }).peek();
+
+        const shadowPokemon = PokemonHelper.getAllShadowPokemon.peek();
 
         return pokemonList.filter((pokemon) => {
             // Checks based on caught/shiny status
@@ -175,7 +177,7 @@ class PokedexHelper {
             }
 
             // Only caught not shadow
-            if (caughtStatus == 'caught-not-shadow' && (!alreadyCaught || alreadyCaughtShadow)) {
+            if (caughtStatus == 'caught-not-shadow' && (!alreadyCaught || alreadyCaughtShadow || !shadowPokemon.has(pokemon.name))) {
                 return false;
             }
 
@@ -201,7 +203,7 @@ class PokedexHelper {
                 return false;
             }
 
-            // Only pokemon uninfected by pokerus
+            // Only pokemon with this pokerus status
             const pokerusFilter = Settings.getSetting('pokedexPokerusFilter').observableValue();
             if (pokerusFilter != -1 && pokerusFilter !== App.game.party.getPokemon(pokemon.id)?.pokerus) {
                 return false;
@@ -259,7 +261,7 @@ class PokedexHelper {
     }
 
     // Flag for the LazyLoader
-    public static resetPokedexFlag = ko.computed(() => modalUtils.observableState.pokedexModal === 'hidden');
+    public static resetPokedexFlag = ko.computed(() => DisplayObservables.modalState.pokedexModal === 'hidden');
 
     private static scrollToTop() {
         document.querySelector('#pokedex-pokemon-list-container .scrolling-div-pokedex').scrollTop = 0;

@@ -123,6 +123,8 @@
   }
 
   .plotImage {
+      aspect-ratio : 1 / 1;
+      width: 100%;
       position: relative;
 
       .plotSafeLockIcon {
@@ -219,7 +221,8 @@
   scrollbar-width: thin;
 }
 
-#wanderPokemonList {
+
+#berryDexModal .wanderPokemonList, #berryDexPreviewTable .wanderPokemonList {
   width: 100%;
 
   .list-inline-item {
@@ -231,6 +234,7 @@
       width: 100%;
       left: 0;
       bottom: 0;
+      z-index: 10;
     }
 
     .shiny {
