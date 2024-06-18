@@ -11,7 +11,7 @@ import ChangelogUpdate from './ChangelogUpdate';
 const ChangelogItems = [
     // note that month is 0 indexed
     // v0.10.20
-    new ChangelogUpdate('v0.10.20', new Date(2024, 5, 16)),
+    new ChangelogUpdate('v0.10.20', new Date(2024, 5, 19)),
     new Changelog(changelogType.NEW, 'New Pokémon'),
     new Changelog(changelogType.NEW, 'New Quest Lines'),
     new Changelog(changelogType.NEW, 'New Achievements'),
