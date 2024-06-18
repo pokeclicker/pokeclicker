@@ -180,7 +180,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d'],
         water: ['Poliwag', 'Slowpoke', 'Slowbro', 'Goldeen', 'Magikarp'],
     }),
-    [new RouteKillRequirement(10, Region.kanto, 10)],
+    [new ClearDungeonRequirement(1, getDungeonIndex('Rock Tunnel'))],
     undefined,
     KantoSubRegions.Kanto,
 
