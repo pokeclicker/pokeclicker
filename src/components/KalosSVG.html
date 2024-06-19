@@ -453,6 +453,17 @@
         })
     %>
 
+    <!--Disguised Shop-->
+    <%- include('templates/mapOverlay',
+        { name: "Disguised Shop"
+        , x: 5, y: 29
+        , width: 1, height: 1
+        , databind: "click:function(){MapHelper.moveToTown('Disguised Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Disguised Shop') }"
+        , visible:  "App.game.statistics.routeKills['kalos'][10]() >= 10"
+        , image: "assets/images/map/transparent.png"
+        })
+    %>
+
     <!--Geosenge Town-->
     <%- include('templates/mapTown',
         { name: "Geosenge Town"

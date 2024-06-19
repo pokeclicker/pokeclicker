@@ -11,7 +11,7 @@
     <!-- /ko -->
     <button type="button" class="btn btn-info"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
-            data-bind="tooltip: { title: 'Select which Poké Ball to use on Pokémon depending on their status', trigger: 'hover', placement:'left' }">
+            data-bind="tooltip: { title: 'Select which Poké Ball to use on Pokémon depending on their status. Right click (or long press on mobile) can be used to toggle filter enabled/disabled.', trigger: 'hover', placement:'left' }">
         ?
     </button>
     <div id="pokeballSelectorBody" class="card-body p-0 show">
@@ -26,7 +26,7 @@
                         </tr>
                     </thead>
                     <tbody id="pokeballFilters" data-bind="foreach: App.game.pokeballFilters.displayList">
-                        <tr data-bind="css: { 'pokeballFilterDisabled': !$data.enabled() }, attr: { 'data-name': $data.name }">
+                        <tr data-bind="css: { 'pokeballFilterDisabled': !$data.enabled() }, attr: { 'data-name': $data.name }, event: { contextmenu: () => $data.enabled(!$data.enabled()) }">
                             <td><span data-bind="
                                 text: $data.name,
                                 tooltip: {
