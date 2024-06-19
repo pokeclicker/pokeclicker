@@ -36,7 +36,7 @@
             <div style="margin-top: 20px;" class="clickable" data-bind="
                 click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) },
                 tooltip: {
-                    title: BreedingController.getEggPokemonName($data) || '???',
+                    title: PokemonHelper.displayName(BreedingController.getEggPokemonName($data))() || '???',
                     trigger: 'hover',
                     placement: 'bottom',
                     class: 'no-click',
