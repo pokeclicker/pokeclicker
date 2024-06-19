@@ -81,7 +81,7 @@ aria-labelledby="pokedexModalLabel">
                                         <!-- ko let: { pokedexRegionFilter: Settings.getSetting('pokedexRegionFilter') } -->
                                         <label for="pokedex-filter-region" data-bind="text: pokedexRegionFilter.displayName">Region</label>
                                         <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
-                                                data-bind="options: pokedexRegionFilter.options.filter(r => r.value <= player.highestRegion()),
+                                                data-bind="options: pokedexRegionFilter.getValidOptions(),
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
                                                         value: pokedexRegionFilter.observableValue">
@@ -126,7 +126,7 @@ aria-labelledby="pokedexModalLabel">
                                         <!-- ko let: { pokedexCaughtFilter: Settings.getSetting('pokedexCaughtFilter') } -->
                                         <label for="pokedex-filter-caught-status" data-bind="text: pokedexCaughtFilter.displayName">Caught Status</label>
                                         <select id="pokedex-filter-caught-status" autocomplete="off" class="custom-select"
-                                            data-bind="options: pokedexCaughtFilter.options,
+                                            data-bind="options: pokedexCaughtFilter.getValidOptions(),
                                                     optionsValue: 'value',
                                                     optionsText: 'text',
                                                     value: pokedexCaughtFilter.observableValue">

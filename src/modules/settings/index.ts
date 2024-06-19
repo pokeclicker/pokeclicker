@@ -332,7 +332,7 @@ Settings.add(new Setting<string>('pokedexCaughtFilter', 'Caught Status',
         new SettingOption('Caught Shiny', 'caught-shiny'),
         new SettingOption('Caught Not Shadow', 'caught-not-shadow', new QuestLineStartedRequirement('Shadows in the Desert')),
         new SettingOption('Caught Shadow', 'caught-shadow', new QuestLineStartedRequirement('Shadows in the Desert')),
-        new SettingOption('Caught Purified', 'caught-purified'),
+        new SettingOption('Caught Purified', 'caught-purified', new QuestLineStartedRequirement('Shadows in the Desert')),
     ],
     'all'));
 Settings.add(new Setting<number>('pokedexPokerusFilter', 'Pokérus Status',
