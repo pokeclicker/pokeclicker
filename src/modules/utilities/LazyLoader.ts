@@ -20,7 +20,7 @@ function createObserver(loader: HTMLElement, page: Observable<number>, fullyLoad
     // Called by Knockout's childrenComplete binding
     // Signals that the foreach binding is done updating the lazyList in the DOM and we can load another page if the loader is still onscreen
     const bindingCallback = () => {
-        if (!App.isGameLoaded()) {
+        if (!App.isGameStarted()) {
             // lazyList shouldn't load additional pages before the game starts
             return;
         }
@@ -53,7 +53,7 @@ function createObserver(loader: HTMLElement, page: Observable<number>, fullyLoad
 
     // Wait to observe the loader icon until the game is done loading
     // Otherwise the observer might wind up in an incorrect state
-    const loadSub = ko.when(() => App.isGameLoaded(), () => {
+    const loadSub = ko.when(() => App.isGameStarted(), () => {
         observer.observe(loader);
         loadSub.dispose();
     });

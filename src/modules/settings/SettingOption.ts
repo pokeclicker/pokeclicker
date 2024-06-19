@@ -8,7 +8,7 @@ export default class SettingOption<T> {
         if (!this.requirement) {
             return true;
         }
-        if (!App.game || App.game.gameState === GameState.loading) {
+        if (!App.isGameInitialized()) {
             // Requirements will error, assume the value is fine
             return true;
         }
