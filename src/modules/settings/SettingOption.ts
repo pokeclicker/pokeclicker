@@ -1,5 +1,4 @@
-import { GameState } from '../GameConstants';
-import Requirement from '../requirements/Requirement';
+import type Requirement from '../requirements/Requirement';
 
 export default class SettingOption<T> {
     constructor(public text: string, public value: T, public requirement? : Requirement) { }
