@@ -28,8 +28,7 @@
                                     <!-- ko let: {minPokerus: RouteHelper.minPokerus($data)} -->
                                         <!-- ko ifnot: minPokerus > GameConstants.Pokerus.Infected -->
                                         <img src="" data-bind="
-                                            attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town.dungeon.allAvailablePokemon())] + '.png'},
-                                            " />
+                                            attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[minPokerus] + '.png'}" />
                                         <!-- /ko -->
                                         <!-- ko if: minPokerus > GameConstants.Pokerus.Infected -->
                                         <div data-bind="text: RouteHelper.getPokerusProgress($data),

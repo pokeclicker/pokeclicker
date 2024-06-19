@@ -120,11 +120,21 @@
                   </knockout>
 
                   <!--Pokérus image-->
-                  <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon())">
-                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png',
-                            title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon)}"
-                    src=""/>
-                  </knockout>
+                  <knockout data-bind="using: DungeonRunner.dungeon.allAvailablePokemon()"">
+                      <knockout data-bind="if: RouteHelper.minPokerusCheck($data)">
+                          <!-- ko let: {minPokerus: RouteHelper.minPokerus($data)} -->
+                              <!-- ko ifnot: minPokerus > GameConstants.Pokerus.Infected -->
+                              <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[minPokerus] + '.png',
+                                  title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon)}" src=""/>
+                              <!-- /ko -->
+                              <!-- ko if: minPokerus > GameConstants.Pokerus.Infected -->
+                              <div data-bind="text: RouteHelper.getPokerusProgress($data),
+                                  class: 'pokerusProgress' + GameConstants.Pokerus[minPokerus],
+                                  attr: {title: RouteHelper.routePokerusEVs(player.route, player.region)}"></div>
+                              <!-- /ko -->
+                          <!-- /ko -->
+                      </knockout>
+                   </knockout>
                 </td>
                 <td width="50%">
                   <knockout data-bind="text: `${App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toLocaleString('en-US')} Clears`"></knockout>
