@@ -40,6 +40,9 @@ import WeatherForecast from './weather/WeatherForecast';
 import DayCycle from './dayCycle/DayCycle';
 import DayCyclePart from './dayCycle/DayCyclePart';
 import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
+import MoonCycle from './moonCycle/MoonCycle';
+import MoonCyclePhase from './moonCycle/MoonCyclePhase';
+import MoonCyclePhaseRequirement from './requirements/MoonCyclePhaseRequirement';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
@@ -64,7 +67,7 @@ import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
-import * as modalUtils from './utilities/Modal';
+import * as DisplayObservables from './utilities/DisplayObservables';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
@@ -242,6 +245,9 @@ Object.assign(<any>window, {
     DayCycle,
     DayCyclePart,
     DayCyclePartRequirement,
+    MoonCycle,
+    MoonCyclePhase,
+    MoonCyclePhaseRequirement,
     SeededRand,
     SeededDateRand,
     Rand,
@@ -272,7 +278,7 @@ Object.assign(<any>window, {
     GenericProxy,
     SpriteCredits,
     CodeCredits,
-    modalUtils,
+    DisplayObservables,
     PokemonCategories,
     Information,
     TypeHelper,

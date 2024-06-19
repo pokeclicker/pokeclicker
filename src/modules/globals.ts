@@ -80,6 +80,7 @@ type TmpAppType = {
     game: TmpGameType,
     isUsingClient: boolean,
     translation: Translate,
+    isGameLoaded: KnockoutObservable<boolean>,
     start: ()=>void
 };
 
@@ -150,6 +151,19 @@ type TmpAchievementHandler = {
     load: ()=>void
 };
 
+type TmpTemporaryBattleListType = {
+    [battleName: string]: TmpTemporaryBattleType;
+};
+
+type TmpTemporaryBattleType = {
+    name: string;
+    parent?: TmpTownType;
+    getTown: () => TmpTownType;
+};
+
+type TmpTownType = {
+    name: string;
+};
 
 export type TmpPokemonFactoryType = {
     generateShiny(chance: number, skipBonus?: boolean): boolean;
@@ -172,4 +186,5 @@ declare global {
     const AchievementHandler: TmpAchievementHandler;
     const PokemonFactory: TmpPokemonFactoryType;
     const PartyController: TmpPartyControllerType;
+    const TemporaryBattleList: TmpTemporaryBattleListType;
 }
