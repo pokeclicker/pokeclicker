@@ -234,12 +234,12 @@
                                         <!--Pokérus image-->
                                         <knockout data-bind="using: RouteHelper.getAvailablePokemonList(player.route, player.region, true)">
                                             <knockout data-bind="if: RouteHelper.minPokerusCheck($data)">
-                                                <!-- ko let: {minPokerus: RouteHelper.minPokerus($data)} -->
-                                                    <!-- ko ifnot: minPokerus > GameConstants.Pokerus.Infected -->
+                                                <!-- ko let: {minPokerus: RouteHelper.minPokerus($data), usePokerusProgress: Settings.getSetting('usePokerusProgress').observableValue()} -->
+                                                    <!-- ko ifnot: usePokerusProgress && minPokerus > GameConstants.Pokerus.Infected -->
                                                     <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[minPokerus] + '.png',
                                                         title: RouteHelper.routePokerusEVs(player.route, player.region)}" src=""/>
                                                     <!-- /ko -->
-                                                    <!-- ko if: minPokerus > GameConstants.Pokerus.Infected -->
+                                                    <!-- ko if: usePokerusProgress && minPokerus > GameConstants.Pokerus.Infected -->
                                                     <div data-bind="text: RouteHelper.getPokerusProgress($data),
                                                         class: 'pokerusProgress' + GameConstants.Pokerus[minPokerus],
                                                         attr: {title: RouteHelper.routePokerusEVs(player.route, player.region)}"></div>
