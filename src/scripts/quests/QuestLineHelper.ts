@@ -381,9 +381,9 @@ class QuestLineHelper {
 
     // Started upon defeating Ecruteak City's gym
     public static createSickAmpharosQuestLine() {
-        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmines Ampharos seems to be sick!');
+        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmine\'s Ampharos seems to be sick!');
 
-        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City');
+        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City.');
         sickAmpharosQuestLine.addQuest(clearOlivineLighthouse);
 
         const talkToJasmine1 = new TalkToNPCQuest(OlivineLighthouseJasmine1, 'Talk to Jasmine in the Olivine Lighthouse.');
@@ -1278,19 +1278,19 @@ class QuestLineHelper {
         const talktoZero2 = new TalkToNPCQuest(FightAreaZero2, 'Report to Zero what was in the book.');
         giratinaQuestLine.addQuest(talktoZero2);
 
-        const talktoMesprit = new TalkToNPCQuest(VerityMesprit, 'Ask Mesprit about the Distortion World in Lake Verity.');
+        const talktoMesprit = new TalkToNPCQuest(VerityMesprit, 'At Lake Verity, ask Mesprit about the Distortion World.');
         giratinaQuestLine.addQuest(talktoMesprit);
 
         const obtain10PurpleShards = new CustomQuest(10, 0, 'Obtain 10 Purple Shards.', () => player.itemList.Purple_shard());
         giratinaQuestLine.addQuest(obtain10PurpleShards);
 
-        const talktoAzelf = new TalkToNPCQuest(ValorAzelf, 'Ask Azelf about the Distortion World in Lake Valor.');
+        const talktoAzelf = new TalkToNPCQuest(ValorAzelf, 'At Lake Valor, ask Azelf about the Distortion World.');
         giratinaQuestLine.addQuest(talktoAzelf);
 
         const obtain10OchreShards = new CustomQuest(10, 0, 'Obtain 10 Ochre Shards.', () => player.itemList.Ochre_shard());
         giratinaQuestLine.addQuest(obtain10OchreShards);
 
-        const talktoUxie = new TalkToNPCQuest(AcuityUxie, 'Ask Uxie about the Distortion World in Lake Acuity.');
+        const talktoUxie = new TalkToNPCQuest(AcuityUxie, 'At Lake Acuity, ask Uxie about the Distortion World.');
         giratinaQuestLine.addQuest(talktoUxie);
 
         const obtain10CrimsonShards = new CustomQuest(10, 0, 'Obtain 10 Crimson Shards.', () => player.itemList.Crimson_shard());
@@ -2562,7 +2562,7 @@ class QuestLineHelper {
 
         // 11 - Gym Battle: Hala
         // reward defined at the end of this file
-        const battleKahunaHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town complete Melemele\'s Grand Trial!').withCustomReward(this.zCrystalGet(PokemonType.Fighting));
+        const battleKahunaHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town to complete Melemele\'s Grand Trial!').withCustomReward(this.zCrystalGet(PokemonType.Fighting));
         melemeleAlolaQuestLine.addQuest(battleKahunaHala);
 
         // end - Clear dungeon boss: Ten Carat Hill, Flyinium Z Trial
