@@ -2562,7 +2562,7 @@ class QuestLineHelper {
 
         // 11 - Gym Battle: Hala
         // reward defined at the end of this file
-        const battleKahunaHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town complete Melemele\'s Grand Trial!').withCustomReward(this.zCrystalGet(PokemonType.Fighting));
+        const battleKahunaHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town to complete Melemele\'s Grand Trial!').withCustomReward(this.zCrystalGet(PokemonType.Fighting));
         melemeleAlolaQuestLine.addQuest(battleKahunaHala);
 
         // end - Clear dungeon boss: Ten Carat Hill, Flyinium Z Trial

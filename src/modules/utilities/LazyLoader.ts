@@ -49,6 +49,7 @@ function createObserver(loader: HTMLElement, page: Observable<number>, fullyLoad
         }
     };
 
+
     const observer = new IntersectionObserver(observerCallback, options);
 
     // Wait to observe the loader icon until the game is done loading
@@ -76,6 +77,23 @@ function findScrollingParent(element: HTMLElement, key: string): HTMLElement {
     throw new Error(`Could not find scrolling parent for LazyLoader '${key}'`);
 }
 
+const memo: Record<string, { lazyList: PureComputed<Array<unknown>>, callback: () => void, toDispose: Array<Computed<any> | Subscription> }> = {};
+
+type SubscribableOrFunction<T = any> = Subscribable<T> | (() => T);
+
+function maybeMakeComputed<T>(maybeSubscribable: SubscribableOrFunction<T>, key: string): Subscribable<T> {
+    if (!(maybeSubscribable instanceof Function)) {
+        throw new Error(`Invalid reset function used for '${key}' lazyLoad`);
+    }
+    // Wrap reset function in a computed if it's not a Knockout object already
+    if (!ko.isSubscribable(maybeSubscribable)) {
+        maybeSubscribable = ko.computed(maybeSubscribable);
+        // We made the computed in here, we should dispose of it later
+        memo[key].toDispose.push(maybeSubscribable as Computed<T>);
+    }
+    return maybeSubscribable as Subscribable<T>;
+}
+
 function createLoaderElem(): HTMLElement {
     const loader = document.createElement('div');
     loader.className = 'lazy-loader-container';
@@ -90,7 +108,8 @@ export type LazyLoadOptions = {
     triggerMargin: string; // must be px or %
     threshold: number;
     pageSize: number;
-    reset?: Subscribable<any> | (() => any); // Whenever this changes, the lazyList will reset to the first page (non-KO functions must evaluate a KO observable)
+    reset?: SubscribableOrFunction<any>; // Whenever this changes, the lazyList will reset to the first page (non-KO functions must evaluate a KO observable)
+    pause?: SubscribableOrFunction<boolean>; // While this is true, the lazyList will not load more pages (non-KO functions must evaluate a KO observable)
 };
 
 const defaultOptions: LazyLoadOptions = {
@@ -98,8 +117,6 @@ const defaultOptions: LazyLoadOptions = {
     threshold: 0,
     pageSize: 40,
 };
-
-const memo: Record<string, { list: PureComputed<Array<unknown>>, callback: () => void, toDispose: Array<Computed<any> | Subscription> }> = {};
 
 /**
  * Provides a lazy-loading PureComputed slice of an observable array, for use in bindings like foreach, and inserts a loader element
@@ -124,7 +141,7 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     if (memo[key]) {
         if (targetElement.querySelector(':scope > .lazy-loader-container')) {
             // Only return a memoized lazyList if the associated loader element still exists
-            return memo[key].list;
+            return memo[key].lazyList;
         } else {
             // Dispose of old subscriptions before making new computeds
             memo[key].toDispose.forEach(sub => sub.dispose());
@@ -132,7 +149,7 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     }
 
     memo[key] = {
-        list: null,
+        lazyList: null,
         callback: null,
         toDispose: [],
     };
@@ -148,8 +165,33 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
     const loader = createLoaderElem();
     targetElement.append(loader);
 
+    // Function to toggle loader visibility
+    const toggleLoader = (visible) => {
+        if (visible) {
+            // Only show the loader once the game has loaded  
+            loader.style.removeProperty('display');
+        } else {
+            loader.style.display = 'none';
+        }
+    };
+
     // How many sections of the source list are currently loaded 
     const page = ko.observable(1);
+
+    // Given an optional reset function, reset the lazyList to its initial size upon any notification
+    const resetSubscribable = opts.reset ? maybeMakeComputed(opts.reset, key) : null;
+    if (resetSubscribable) {
+        const resetSub = resetSubscribable.subscribe(() => page(1));
+        memo[key].toDispose.push(resetSub);
+    }
+
+    // Given an optional pause function, pause loading whenever the observable is true by hiding the loader image
+    const pauseSubscribable = opts.pause ? maybeMakeComputed(opts.pause, key) : null;
+    if (pauseSubscribable) {
+        toggleLoader(!pauseSubscribable());
+        const pauseSub = pauseSubscribable.subscribe((pauseState) => toggleLoader(!pauseState));
+        memo[key].toDispose.push(pauseSub);
+    }
 
     // Track "is the entire source list loaded" in a way that's accessible to createObserver()
     const fullyLoaded = { status: false };
@@ -164,26 +206,7 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
 
     memo[key].callback = bindingCallback;
 
-    if (opts.reset) {
-        let reset = opts.reset;
-
-        if (!(reset instanceof Function)) {
-            throw new Error(`Invalid reset function used for '${key}' lazyLoad`);
-        }
-
-        // Wrap reset function in a computed if it's not a Knockout object already
-        if (!ko.isObservable(reset)) {
-            reset = ko.computed(reset);
-            // We made the computed in here, we should dispose of it later
-            memo[key].toDispose.push(reset as Computed);
-        }
-
-        // Reset the lazyList to its start size on any notification from the reset observable
-        const resetSub = (reset as Subscribable).subscribe(() => page(1));
-        memo[key].toDispose.push(resetSub);
-    }
-
-    // Computed slice of however much of the source list is currently loaded
+    // Computed lazyList returning the currently-loaded slice of the source list
     const lazyList = ko.pureComputed(() => {
         const lastElem = page() * opts.pageSize;
         const array = list();
@@ -192,16 +215,12 @@ export function lazyLoad(key: string, boundNode: Node, list: Subscribable<Array<
         fullyLoaded.status = isDone;
 
         // Hide loader image if there's nothing left to load
-        if (isDone) {
-            loader.style.display = 'none';
-        } else {
-            loader.style.removeProperty('display');
-        }
+        toggleLoader(!isDone);
 
         return array.slice(0, lastElem);
     });
 
-    memo[key].list = lazyList;
+    memo[key].lazyList = lazyList;
     memo[key].toDispose.push(lazyList);
 
     return lazyList;
