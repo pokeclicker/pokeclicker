@@ -170,7 +170,7 @@
                                             onchange="(() => {
                                                 const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
                                                 this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
-                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
+                                            })(), Settings.setSettingByName(this.name, +this.value)
                                         ">
                                     </td>
                                 </tr>
