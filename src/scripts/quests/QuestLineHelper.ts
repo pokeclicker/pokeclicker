@@ -381,9 +381,9 @@ class QuestLineHelper {
 
     // Started upon defeating Ecruteak City's gym
     public static createSickAmpharosQuestLine() {
-        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmines Ampharos seems to be sick!');
+        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmine\'s Ampharos seems to be sick!');
 
-        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City');
+        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City.');
         sickAmpharosQuestLine.addQuest(clearOlivineLighthouse);
 
         const talkToJasmine1 = new TalkToNPCQuest(OlivineLighthouseJasmine1, 'Talk to Jasmine in the Olivine Lighthouse.');
