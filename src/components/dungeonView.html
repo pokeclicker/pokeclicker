@@ -98,7 +98,7 @@
         <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && DungeonRunner.map.playerMoved() -->
         <div>
-            <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
+            <button class="btn btn-warning dungeon-button" data-bind="click: () => DungeonRunner.dungeonLeave()">Leave Dungeon</button>
         </div>
         <!-- /ko -->
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
