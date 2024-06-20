@@ -277,7 +277,7 @@ class Plot implements Saveable {
 
             // Wanderer
             if (this.wanderer) {
-                tooltip.push(`A wild <strong>${this.wanderer.name}</strong> is wandering around`);
+                tooltip.push(`A wild <strong>${PokemonHelper.displayName(this.wanderer.name)()}</strong> is wandering around`);
             }
 
             return tooltip.join('<br/>');
