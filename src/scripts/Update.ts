@@ -2708,7 +2708,6 @@ class Update implements Saveable {
         },
 
         '0.10.21': ({ playerData, saveData, settingsData }) => {
-
             // Rename settings to match pokedex filter name convention
             settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
             delete settingsData.breedingTypeFilter1;
@@ -2716,6 +2715,8 @@ class Update implements Saveable {
             delete settingsData.breedingTypeFilter2;
 
             // Rename settings to accurately describe purpose
+            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
+            delete settingsData.pokedexShinyFilter;
             settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
             delete settingsData.breedingDisplayFilter;
 
@@ -2730,14 +2731,13 @@ class Update implements Saveable {
                     }
                 });
 
-            // Represent 'any type' as null to match pokedex filters
+            // Update breeding type filters to use null for 'any type', matching the pokedex filters
             if (settingsData.breedingType1Filter == -2) {
                 settingsData.breedingType1Filter = null;
             }
             if (settingsData.breedingType2Filter == -2) {
                 settingsData.breedingType2Filter = null;
             }
-
         },
     };
 

@@ -297,13 +297,15 @@ class PokemonFactory {
             case 'Pure_light':
                 chance = GameConstants.LIGHT_ITEM_CHANCE;
                 break;
+            case 'Crystallized_shadow':
+                chance = GameConstants.SHADOW_ITEM_CHANCE;
+                break;
             case 'Rusted_Sword':
             case 'Rusted_Shield':
                 chance = GameConstants.RUST_ITEM_CHANCE;
                 break;
             case 'Black_mane_hair':
             case 'White_mane_hair':
-            case 'Crystallized_shadow':
                 chance = GameConstants.MANE_ITEM_CHANCE;
                 break;
             case 'Magikarp_Biscuit':

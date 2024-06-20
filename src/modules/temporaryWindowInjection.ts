@@ -45,7 +45,7 @@ import MoonCyclePhaseRequirement from './requirements/MoonCyclePhaseRequirement'
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
-import Settings, { breedingFilterSettingKeys } from './settings/index';
+import Settings, { breedingFilterSettingKeys, pokedexFilterSettingKeys } from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
 import AchievementCategory from './achievements/AchievementCategory';
@@ -162,7 +162,6 @@ import {
 import * as OtherEvos from './pokemons/evolutions/Methods';
 import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
 import TmpPokemonHelper from './pokemons/TmpPokemonHelper';
-import PokedexFilters from './settings/PokedexFilters';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
@@ -252,6 +251,7 @@ Object.assign(<any>window, {
     Rand,
     Settings,
     breedingFilterSettingKeys,
+    pokedexFilterSettingKeys,
     NotificationConstants,
     Notifier,
     SortOptionConfigs,
@@ -381,7 +381,6 @@ Object.assign(<any>window, {
     pokemonMap,
     pokemonBabyPrevolutionMap,
     TmpPokemonHelper,
-    PokedexFilters,
     ItemList,
     Item,
     MultiplierDecreaser,
