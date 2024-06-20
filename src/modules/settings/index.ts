@@ -11,6 +11,7 @@ import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import {
     Region,
+    MAX_AVAILABLE_REGION,
     AchievementType,
     HOUR,
     DAY,
@@ -276,7 +277,7 @@ export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilte
 
 Settings.add(new SearchSetting('breedingNameFilter', 'Search', ''));
 Settings.add(new Setting<number>('breedingIDFilter', 'Search ID', [], -1));
-Settings.add(new Setting<number>('breedingRegionFilter', 'Region(s)', [], (2 << Region.final - 1) - 1));
+Settings.add(new Setting<number>('breedingRegionFilter', 'Region(s)', [], (2 << MAX_AVAILABLE_REGION) - 1));
 Settings.add(new Setting<PokemonType | null>('breedingType1Filter', 'Type 1',
     [
         new SettingOption('All', null),
