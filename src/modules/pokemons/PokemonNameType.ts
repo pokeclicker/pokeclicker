@@ -322,7 +322,7 @@ export type PokemonNameType
     | 'Lapras'
     | 'Gigantamax Lapras'
     | 'Ditto'
-    | 'Ditto (Transforming)'
+    | 'Ditto (Magikarp)'
     | 'Eevee'
     | 'Gigantamax Eevee'
     | 'Let\'s Go Eevee'
