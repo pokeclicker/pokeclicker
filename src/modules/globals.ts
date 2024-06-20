@@ -36,6 +36,7 @@ import type CaughtStatus from './enums/CaughtStatus';
 import type { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
 import type Requirement from './requirements/Requirement';
 import type MapAreaStatus from './worldmap/MapAreaStatus';
+import type { EvoData } from './pokemons/evolutions/Base';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -83,6 +84,7 @@ type TmpAppType = {
     game: TmpGameType,
     isUsingClient: boolean,
     translation: Translate,
+    isGameLoaded: KnockoutObservable<boolean>,
     start: ()=>void
 };
 
@@ -93,6 +95,7 @@ type TmpSaveType = {
 type TmpDungeonType = {
     allAvailablePokemon: () => PokemonNameType[];
     allAvailableShadowPokemon: () => PokemonNameType[];
+    allShadowPokemon: () => PokemonNameType[];
     isThereQuestAtLocation: () => boolean;
     isUnlocked: () => boolean;
 };
@@ -152,18 +155,19 @@ type TmpBattleType = {
     generateNewEnemy: () => void;
 };
 
+type TmpTemporaryBattleListType = {
+    [battleName: string]: TmpTemporaryBattleType;
+};
+
 type TmpTemporaryBattleType = {
+    name: string;
+    parent?: TmpTownType;
     getTown: () => TmpTownType;
 };
 
 type TmpTemporaryBattleRunnerType = {
     getEnvironmentArea: () => Environment;
     battleObservable: KnockoutObservable<TmpTemporaryBattleType>;
-};
-
-type TmpTownContentType = {
-    isUnlocked: () => boolean;
-    areaStatus: () => MapAreaStatus;
 };
 
 type TmpTownType = {
@@ -178,6 +182,13 @@ type TmpTownType = {
     ignoreAreaStatus: boolean;
     isUnlocked: () => boolean;
 };
+
+
+type TmpTownContentType = {
+    isUnlocked: () => boolean;
+    areaStatus: () => MapAreaStatus;
+};
+
 
 type TmpTownListType = { 
     [name: string]: TmpTownType;
@@ -214,6 +225,10 @@ export type TmpBattleFrontierRunnerType = {
     environment: KnockoutObservable<Environment>;
 };
 
+type TmpPokemonLocationsType = {
+    getPokemonPrevolution: (pokemonName: PokemonNameType, maxRegion?: Region) => Array<EvoData>;
+};
+
 // Where all the magic happens
 declare global {
     const App: TmpAppType;
@@ -230,4 +245,6 @@ declare global {
     const TemporaryBattleRunner: TmpTemporaryBattleRunnerType;
     const dungeonList: TmpDungeonListType;
     const BattleFrontierRunner: TmpBattleFrontierRunnerType;
+    const TemporaryBattleList: TmpTemporaryBattleListType;
+    const PokemonLocations: TmpPokemonLocationsType;
 }

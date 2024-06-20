@@ -1728,7 +1728,7 @@ class Farming implements Feature {
         // Starf
         this.mutations.push(new BlankMutation(0, BerryType.Starf,
             {
-                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders near open soil.',
+                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders and is caught near open soil.',
                 unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
@@ -2258,7 +2258,7 @@ class Farming implements Feature {
     };
 
     public auraDisplay(berry: BerryType, stage: number) {
-        return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 3 })}`;
     }
 
     public handleWanderer(plot: Plot) {

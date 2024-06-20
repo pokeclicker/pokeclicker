@@ -46,7 +46,7 @@ import MoonCyclePhaseRequirement from './requirements/MoonCyclePhaseRequirement'
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
-import Settings from './settings/index';
+import Settings, { pokedexFilterSettingKeys } from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
 import AchievementCategory from './achievements/AchievementCategory';
@@ -67,7 +67,7 @@ import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
-import * as modalUtils from './utilities/Modal';
+import * as DisplayObservables from './utilities/DisplayObservables';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
@@ -163,7 +163,6 @@ import {
 import * as OtherEvos from './pokemons/evolutions/Methods';
 import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
 import TmpPokemonHelper from './pokemons/TmpPokemonHelper';
-import PokedexFilters from './settings/PokedexFilters';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
@@ -254,6 +253,7 @@ Object.assign(<any>window, {
     SeededDateRand,
     Rand,
     Settings,
+    pokedexFilterSettingKeys,
     NotificationConstants,
     Notifier,
     BreedingFilters,
@@ -280,7 +280,7 @@ Object.assign(<any>window, {
     GenericProxy,
     SpriteCredits,
     CodeCredits,
-    modalUtils,
+    DisplayObservables,
     PokemonCategories,
     Information,
     TypeHelper,
@@ -384,7 +384,6 @@ Object.assign(<any>window, {
     pokemonMap,
     pokemonBabyPrevolutionMap,
     TmpPokemonHelper,
-    PokedexFilters,
     ItemList,
     Item,
     MultiplierDecreaser,

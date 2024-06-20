@@ -4,6 +4,7 @@
       <span data-bind="
          text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
          tooltip: {
+            html: true,
             title: Battle.pokemonAttackTooltip,
             trigger: 'hover',
          }

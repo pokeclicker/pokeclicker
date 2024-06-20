@@ -39,7 +39,7 @@ class BulletinBoard extends TownContent {
             if (q.state() == QuestLineState.ended) {
                 return false;
             }
-            if (q.requirement ? !q.requirement.isCompleted() : false) {
+            if (q.requirement ? (!q.requirement.isCompleted() && q.state() !== QuestLineState.suspended) : false) {
                 return false;
             }
             if (q.bulletinBoard !== GameConstants.BulletinBoards.All && q.bulletinBoard !== this.board) {
