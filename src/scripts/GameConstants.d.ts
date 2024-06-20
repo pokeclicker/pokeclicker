@@ -224,6 +224,7 @@ namespace GameConstants {
     declare const GRISEOUS_ITEM_CHANCE: number;
     declare const DNA_ITEM_CHANCE: number;
     declare const LIGHT_ITEM_CHANCE: number;
+    declare const SHADOW_ITEM_CHANCE: number;
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
     declare const CHRISTMAS_ITEM_CHANCE: number;
