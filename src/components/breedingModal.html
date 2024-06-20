@@ -67,80 +67,80 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <div class="container-fluid py-3">
                                         <div class="form-row text-left">
                                             <div class="form-group col-lg-12 col-12">
-                                                <label>Search</label>
-                                                <input autocomplete="off" class="form-control" oninput="BreedingController.formatSearch(this.value)" placeholder="Search here"/>
+                                                <label for="breeding-filter-nameID">Name or ID</label>
+                                                <input id="breeding-filter-nameID" autocomplete="off" class="form-control" placeholder="Search here"
+                                                    oninput="BreedingController.formatSearch(this.value)" data-bind="value: BreedingController.getSearchString()" />
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
+                                                <!-- ko let: { breedingType1Filter: Settings.getSetting('breedingType1Filter') } -->
                                                 <label>Types</label>
-                                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
-                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter1').value === $data.value }, text: $data.text">Type</option>
-                                                    <!-- /ko -->
+                                                <select id="breeding-filter-type1" class="custom-select"
+                                                        data-bind="options: breedingType1Filter.options,
+                                                                optionsValue: 'value',
+                                                                optionsText: 'text',
+                                                                value: breedingType1Filter.observableValue">
                                                 </select>
+                                                <!-- /ko -->
                                             </div>
                                             <div class="form-group col-lg-6 col-6">
+                                                <!-- ko let: { breedingType2Filter: Settings.getSetting('breedingType2Filter') } -->
                                                 <label> </label>
-                                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
-                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter2').value === $data.value }, text: $data.text">Type</option>
-                                                    <!-- /ko -->
+                                                <select id="breeding-filter-type2" class="custom-select"
+                                                        data-bind="options: breedingType2Filter.options,
+                                                                optionsValue: 'value',
+                                                                optionsText: 'text',
+                                                                value: breedingType2Filter.observableValue">
                                                 </select>
+                                                <!-- /ko -->
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
-                                                <label>Regions</label><br/>
+                                                <!-- ko let: { breedingRegionFilter: Settings.getSetting('breedingRegionFilter') } -->
+                                                <label for="breeding-filter-region" data-bind="text: breedingRegionFilter.displayName">Region(s)</label><br/>
                                                 <div class="dropdown show">
-                                                    <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
-                                                        BreedingFilters.region.value() == (2 << player.highestRegion()) - 1 ?
-                                                            'All' :
-                                                            (BreedingFilters.region.value() > 0 && BreedingFilters.region.value() ?
-                                                                GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
-                                                                    .toString(2).split('')
-                                                                    .reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') :
-                                                                'None')
-                                                        ">
+                                                    <button id="breeding-filter-region" type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: BreedingController.getRegionFilterString()">
                                                         Regions
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12">
-                                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value((2 << player.highestRegion()) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
+                                                        <div class="dropdown-item" data-bind="click: function() { breedingRegionFilter.set((2 << player.highestRegion()) - 1) }">
                                                             All
                                                         </div>
                                                         <div class="dropdown-divider"></div>
-                                                        <!-- ko foreach : Object.keys(GameConstants.Region).filter(function(r){ return r <= player.highestRegion() && r >= 0; }) -->
-                                                        <div class="dropdown-item" data-bind="class : Settings.getSetting('breedingRegionFilter').observableValue() & (1 << $data) ? 'bg-success' : '',
-                                                            text : GameConstants.camelCaseToString(GameConstants.Region[$data]),
-                                                            click : function(){ BreedingFilters.region.value(1 << $data); Settings.setSettingByName('breedingRegionFilter', 1 << $data) },
-                                                            attr : { 'oncontextmenu' : 'BreedingFilters.region.value(BreedingFilters.region.value() ^ ' + (1 << $data) + ');' +
-                                                                'Settings.setSettingByName(\'breedingRegionFilter\', BreedingFilters.region.value()); return false'
-                                                            }">
+                                                        <!-- ko foreach : GameHelper.enumNumbers(GameConstants.Region).filter((r) => (r <= player.highestRegion() && r > GameConstants.Region.none)) -->
+                                                        <div class="dropdown-item" data-bind="class: breedingRegionFilter.observableValue() & (1 << $data) ? 'bg-success' : '',
+                                                            text: GameConstants.camelCaseToString(GameConstants.Region[$data]),
+                                                            click: function(){ breedingRegionFilter.set(1 << $data) },
+                                                            attr: { 'oncontextmenu' : `Settings.setSettingByName('breedingRegionFilter', Settings.getSetting('breedingRegionFilter').value ^ (1 << ${$data})); return false;` }">
                                                         </div>
                                                         <!-- /ko-->
                                                     </div>
                                                 </div>
+                                                <!-- /ko -->
                                             </div>
 
                                             <!-- Category -->
                                             <div class="form-group col-lg-6 col-6">
-                                                <label>Category</label>
+                                                <!-- ko let: { breedingCategoryFilter: Settings.getSetting('breedingCategoryFilter') } -->
+                                                <label for="breeding-filter-category" data-bind="text: breedingCategoryFilter.displayName">Category</label>
                                                 <div class="dropdown show">
-                                                    <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                        data-bind="text: BreedingFilters.category.value() == -1 ? 'All'
-                                                            : BreedingFilters.category.value() == -2 ? 'Categorized'
-                                                            : PokemonCategories.categories().find(c => c.id == BreedingFilters.category.value()).name()">
+                                                    <button id="breeding-filter-category" type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                        data-bind="text: breedingCategoryFilter.observableValue() == -1 ? 'All'
+                                                            : breedingCategoryFilter.observableValue() == -2 ? 'Categorized'
+                                                            : PokemonCategories.categories().find(c => c.id == breedingCategoryFilter.observableValue()).name()">
                                                         Categories
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12 category-dropdown">
-                                                        <div class="dropdown-item dropdown-text" data-bind="click : function(){ BreedingFilters.category.value(-1); Settings.setSettingByName('breedingCategoryFilter', -1) }">
+                                                        <div class="dropdown-item dropdown-text" data-bind="click: function() { breedingCategoryFilter.set(-1) }">
                                                             All
                                                         </div>
-                                                        <div class="dropdown-item dropdown-text" data-bind="click : function(){ BreedingFilters.category.value(-2); Settings.setSettingByName('breedingCategoryFilter', -2) }">
+                                                        <div class="dropdown-item dropdown-text" data-bind="click : function(){ breedingCategoryFilter.set(-2) }">
                                                             Categorized
                                                         </div>
                                                         <div class="dropdown-divider"></div>
                                                         <!-- ko foreach : PokemonCategories.categories -->
                                                         <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color(), color: GameHelper.isColorLight($data.color()) ? 'black' : 'white' },
-                                                            click : function(){ BreedingFilters.category.value($data.id); Settings.setSettingByName('breedingCategoryFilter', $data.id) }">
+                                                            click : function() { breedingCategoryFilter.set($data.id) }">
                                                         </div>
                                                         <!-- /ko-->
                                                         <div class="dropdown-divider"></div>
@@ -149,46 +149,57 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         </a>
                                                     </div>
                                                 </div>
+                                                <!-- /ko -->
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
-                                                <label>Shiny Status</label>
-                                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.shinyStatus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <option value="-1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '-1' }">All</option>
-                                                    <option value="0" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '0' }">Not Shiny</option>
-                                                    <option value="1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '1' }">Shiny</option>
+                                                <!-- ko let: { breedingShinyFilter: Settings.getSetting('breedingShinyFilter') } -->
+                                                <label for="breeding-filter-shiny-status" data-bind="text: breedingShinyFilter.displayName">Shiny Status</label>
+                                                <select id="breeding-filter-shiny-status" autocomplete="off" class="custom-select"
+                                                    data-bind="options: breedingShinyFilter.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: breedingShinyFilter.observableValue">
                                                 </select>
+                                                <!-- /ko -->
                                             </div>
                                             <div class="form-group col-lg-6 col-6">
-                                                <label>Pokérus Status</label>
-                                                <select name="breedingPokerusFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.pokerus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
-                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingPokerusFilter').value === $data.value }, text: $data.text"></option>
-                                                    <!-- /ko -->
+                                                <!-- ko let: { breedingPokerusFilter: Settings.getSetting('breedingPokerusFilter') } -->
+                                                <label for="breeding-filter-pokerus-status" data-bind="text: breedingPokerusFilter.displayName">Pokérus Status</label>
+                                                <select id="breeding-filter-pokerus-status" autocomplete="off" class="custom-select" 
+                                                    data-bind="options: breedingPokerusFilter.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: breedingPokerusFilter.observableValue">
                                                 </select>
+                                                <!-- /ko -->
                                             </div>
                                             <!-- Mega Evolution -->
                                             <!-- ko if: player.highestRegion() >= GameConstants.Region.kalos -->
                                             <div class="form-group col-lg-12 col-12">
-                                                <label for="breedingUniqueTransformationFilter">Unique Forms</label>
-                                                <select id="breedingUniqueTransformationFilter" autocomplete="off" class="custom-select"
-                                                    data-bind="options: BreedingFilters.uniqueTransformation.options,
+                                                <!-- ko let: { breedingUniqueTransformationFilter: Settings.getSetting('breedingUniqueTransformationFilter') } -->
+                                                <label for="breeding-filter-unique-transformation" data-bind="text: breedingUniqueTransformationFilter.displayName">Unique Transformations</label>
+                                                <select id="breeding-filter-unique-transformation" autocomplete="off" class="custom-select"
+                                                    data-bind="options: breedingUniqueTransformationFilter.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: BreedingFilters.uniqueTransformation.value">
+                                                        value: breedingUniqueTransformationFilter.observableValue">
                                                 </select>
+                                                <!-- /ko -->
                                             </div>
                                             <!-- /ko -->
                                             <!--Hide alternate forms-->
                                             <div class="form-group col-lg-12 col-12 mb-0">
-                                                <label for="breedingHideAlternateFilter">Hide alternate forms</label>
+                                                <!-- ko let: { breedingHideAltFilter: Settings.getSetting('breedingHideAltFilter') } -->
+                                                <label for="breeding-filter-hide-alternate" data-bind="text: breedingHideAltFilter.displayName">Hide alternate forms</label>
                                                 <label class="form-check-label toggler-wrapper style-1 float-right">
                                                     <input class="form-check-input" type="checkbox" id="breedingHideAlternateFilter"
-                                                        data-bind="checked: BreedingFilters.hideAlternate.value">
+                                                        data-bind="checked: breedingHideAltFilter.observableValue">
                                                     <div class="toggler-slider">
                                                         <div class="toggler-knob"></div>
                                                     </div>
                                                 </label>
+                                                <!-- /ko -->
                                             </div>
 
                                             <div class="col-12">
@@ -196,41 +207,56 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
-                                                <label>Display Value</label>
-                                                <select name="breedingDisplayFilter" autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <!-- ko foreach: Settings.getSetting('breedingDisplayFilter').options -->
-                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingDisplayFilter').value === $data.value }, text: $data.text">Type</option>
-                                                    <!-- /ko -->
+                                                <!-- ko let: { breedingDisplayTextSetting: Settings.getSetting('breedingDisplayTextSetting') } -->
+                                                <label for="breeding-setting-display-text" data-bind="text: breedingDisplayTextSetting.displayName">Display Value</label>
+                                                <select id="breeding-setting-display-text" autocomplete="off" class="custom-select" 
+                                                    data-bind="options: breedingDisplayTextSetting.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: breedingDisplayTextSetting.observableValue">
                                                 </select>
+                                                <!-- /ko -->
                                             </div>
                                             <!-- ko if: App.game.challenges.list.regionalAttackDebuff.active() -->
                                             <div class="form-group col-lg-6 col-6">
-                                                <label>Regional Debuff</label>
-                                                <select name="breedingRegionalAttackDebuffSetting" autocomplete="off" class="custom-select" onchange="BreedingController.regionalAttackDebuff(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <!-- ko foreach: Settings.getSetting('breedingRegionalAttackDebuffSetting').options.filter(r => r.value <= player.highestRegion()) -->
-                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionalAttackDebuffSetting').value === $data.value }, text: $data.text">Type</option>
-                                                    <!-- /ko -->
+                                                <!-- ko let: { breedingRegionalAttackDebuffSetting: Settings.getSetting('breedingRegionalAttackDebuffSetting') } -->
+                                                <label for="breeding-setting-regional-attack-debuff" data-bind="text: breedingRegionalAttackDebuffSetting.displayName">Regional Debuff</label>
+                                                <select id="breeding-setting-regional-attack-debuff" autocomplete="off" class="custom-select" 
+                                                    data-bind="options: breedingRegionalAttackDebuffSetting.getValidOptions(),
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: breedingRegionalAttackDebuffSetting.observableValue">
                                                 </select>
+                                                <!-- /ko -->
                                             </div>
                                             <!-- /ko -->
-                                            <div class="form-group col-lg-12 col-12" style="max-width: 100%; flex-grow: 1" data-bind="with: Settings.getSetting('hatcherySort')">
-                                                <label>Sort</label>
+                                            <div class="form-group col-lg-12 col-12" style="max-width: 100%; flex-grow: 1">
+                                                <!-- ko let: { hatcherySort: Settings.getSetting('hatcherySort') } -->
+                                                <label for="hatchery-setting-sort" data-bind="text: hatcherySort.displayName">Sort</label>
                                                 <div class="input-group">
-                                                    <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                                                        data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
-                                                        <option data-bind="text: $data.text, value: $data.value"></option>
+                                                    <select id="hatchery-setting-sort" autocomplete="off" class="custom-select"
+                                                        data-bind="options: hatcherySort.options,
+                                                            optionsValue: 'value',
+                                                            optionsText: 'text',
+                                                            value: hatcherySort.observableValue">
                                                     </select>
                                                     <div class="input-group-append bg-primary text-light">
-                                                        <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
-                                                        text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂',
-                                                        tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
-
-                                                        ">⥂</label>
-                                                        <input id="hatcherySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                                                            data-bind="checked: Settings.getSetting('hatcherySortDirection').observableValue()"
-                                                            onchange="Settings.setSettingByName('hatcherySortDirection', this.checked)"/>
+                                                        <!-- ko let: { hatcherySortDirection: Settings.getSetting('hatcherySortDirection') } -->
+                                                        <label for="hatchery-setting-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
+                                                            data-bind="text: hatcherySortDirection.observableValue() ? '⥄' : '⥂',
+                                                                tooltip: { 
+                                                                    title: hatcherySortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                                                    trigger: 'hover',
+                                                                    placement:'top' 
+                                                                }">
+                                                            ⥂
+                                                        </label>
+                                                        <input id="hatchery-setting-sort-direction" style="vertical-align: middle" class="hidden" type='checkbox'
+                                                            data-bind="checked: hatcherySortDirection.observableValue"/>
+                                                        <!-- /ko -->
                                                     </div>
                                                 </div>
+                                                <!-- /ko -->
                                             </div>
 
                                             <div class="col-12">
