@@ -96,9 +96,9 @@
             <button class="btn btn-warning dungeon-button">Go to next floor</button>
         </div>
         <!-- /ko -->
-        <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && DungeonRunner.map.playerMoved() -->
+        <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && DungeonRunner.map.playerMoved() && !DungeonGuides.hired() -->
         <div>
-            <button class="btn btn-warning dungeon-button" data-bind="click: () => DungeonRunner.dungeonLeave()">Leave Dungeon</button>
+            <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
         </div>
         <!-- /ko -->
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
