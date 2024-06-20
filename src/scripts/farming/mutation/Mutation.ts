@@ -96,7 +96,7 @@ abstract class Mutation {
         let mutated = false;
 
         plots.forEach((idx) => {
-            const willMutate =  Rand.chance(this.mutationChance(idx) * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier());
+            const willMutate = Rand.chance(this.getTotalMutationChance(idx));
             if (!willMutate) {
                 return;
             }
@@ -106,6 +106,12 @@ abstract class Mutation {
         });
 
         return mutated;
+    }
+
+    getTotalMutationChance(plotIndex: number): number {
+        return this.mutationChance(plotIndex)
+            * App.game.farming.getMutationMultiplier()
+            * App.game.farming.plotList[plotIndex].getMutationMultiplier();
     }
 
     get hintSeen() {

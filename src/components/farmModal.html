@@ -198,6 +198,17 @@
                                             <!-- ko if: $data.isSafeLocked -->
                                             <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
                                             <!-- /ko -->
+
+                                            <!-- ko with: App.game.farming.possiblePlotMutations()[$index()] -->
+                                            <span class="position-absolute border border-2 border-dark rounded-circle bg-success"
+                                                style="bottom: 3px; left: 3px; padding: 0.4rem; cursor: default;"
+                                                data-bind="tooltip: {
+                                                    title: `Possible Mutations<br /><br />${$data.join('<br />')}`,
+                                                    html: true,
+                                                    trigger: 'hover',
+                                                    placement: 'bottom'
+                                            }"></span>
+                                            <!-- /ko -->
                                         </div>
                                     </div>
                                 </div>
@@ -325,8 +336,8 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- ko let: { 
-                                        berrySpecificWanderers: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) 
+                                    <!-- ko let: {
+                                        berrySpecificWanderers: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION)
                                     } -->
                                         <!-- ko if: berrySpecificWanderers.length -->
                                         <table class="table table-striped table-hover table-bordered table-sm m-0">

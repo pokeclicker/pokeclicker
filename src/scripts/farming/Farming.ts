@@ -35,6 +35,7 @@ class Farming implements Feature {
     mulchShovelAmt: KnockoutObservable<number>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
+    possiblePlotMutations: KnockoutComputed<Array<Array<string | undefined>>>;
 
     constructor(private multiplier: Multiplier) {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
@@ -67,6 +68,23 @@ class Farming implements Feature {
                 }
             }
             return 0;
+        });
+
+        this.possiblePlotMutations = ko.pureComputed(() => {
+            const plotMutations = [...Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT)];
+
+            App.game.farming.mutations.forEach((mutation) => {
+                const mutationPlots = mutation.getMutationPlots();
+                mutationPlots.forEach((plot) => {
+                    if (mutation.getTotalMutationChance(plot) > 0) {
+                        const berry = App.game.farming.unlockedBerries[mutation.mutatedBerry]() ? BerryType[mutation.mutatedBerry] : '???';
+                        plotMutations[plot] = plotMutations[plot] || [];
+                        plotMutations[plot].push(berry);
+                    }
+                });
+            });
+
+            return plotMutations;
         });
     }
 
@@ -2347,5 +2365,4 @@ class Farming implements Feature {
             plot.wanderer = undefined;
         }, 250);
     }
-
 }
