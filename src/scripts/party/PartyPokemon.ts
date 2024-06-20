@@ -445,7 +445,7 @@ class PartyPokemon implements Saveable {
             // With the region filter active, regionless pokemon should be shown only if no regions are selected
             const nativeRegionInFilter = nativeRegion !== GameConstants.Region.none ?
                 (1 << nativeRegion) & regionFilterMask :
-                regionFilterMask === GameConstants.Region.none;
+                regionFilterMask === 0;
             if (!nativeRegionInFilter) {
                 return false;
             }
