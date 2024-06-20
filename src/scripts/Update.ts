@@ -2713,7 +2713,6 @@ class Update implements Saveable {
             delete settingsData.breedingTypeFilter1;
             settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
             delete settingsData.breedingTypeFilter2;
-
             // Rename settings to accurately describe purpose
             settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
             delete settingsData.pokedexShinyFilter;
@@ -2730,7 +2729,8 @@ class Update implements Saveable {
                         delete settingsData[filter];
                     }
                 });
-
+            // Update breedingHideAltFilter to use actual booleans
+            settingsData.breedingHideAltFilter = settingsData.breedingHideAltFilter === 'true';
             // Update breeding type filters to use null for 'any type', matching the pokedex filters
             if (settingsData.breedingType1Filter == -2) {
                 settingsData.breedingType1Filter = null;
