@@ -129,13 +129,14 @@
         </div>
       </div>
       <!-- /ko -->
+      
       <div class="row py-1" data-bind="foreach: App.game.farming.plotList">
         <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
         <div class="w-100"></div>
         <!-- /ko -->
         <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
             <div class="plot-content" data-bind="class: FarmController.calculateCssClassMini($data)">
-                <div class="plotImage">
+                <div class="plotImage"data-bind="if: DisplayObservables.collapseState.plotListCard !== 'hidden'">
                     <img style="width: 100%" src="assets/images/farm/soil.png"
                         data-bind="class: FarmController.calcMulchClass($data)">
                     <!-- ko if: !$data.isUnlocked -->
@@ -176,6 +177,7 @@
             </div>
         </div>
     </div>
+    
     </div>
     <div class="card-footer p-0">
       <button type="button" class="btn float-left"

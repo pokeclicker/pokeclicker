@@ -297,11 +297,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <div class="col-lg-9 col-12 pokemon-list" id="breeding-pokemon-list-container">
                                 <div class="scrolling-div-breeding-list">
                                     <!-- Check if the player has any level 100 Pokémon or if they have any eggs -->
-                                    <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: modalUtils.observableState.breedingModal !== 'hidden' && !App.game.party.hasMaxLevelPokemon()">
+                                    <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: DisplayObservables.modalState.breedingModal !== 'hidden' && !App.game.party.hasMaxLevelPokemon()">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
                                     <knockout data-bind="using: lazyLoad('lazyHatcheryList', $element, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList'">
-                                        <!-- ko if: modalUtils.observableState.breedingModal !== 'hidden' && App.game.party.hasMaxLevelPokemon() -->
+                                        <!-- ko if: DisplayObservables.modalState.breedingModal !== 'hidden' && App.game.party.hasMaxLevelPokemon() -->
                                         <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyHatcheryList, childrenComplete: () => { lazyLoadCallback('lazyHatcheryList'); }">
                                             <!-- ko if: $data.isHatchable() && ($data.matchesHatcheryFilters() || BreedingController.viewResetWaiting()) -->
                                             <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="
