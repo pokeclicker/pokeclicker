@@ -39,7 +39,7 @@ class TemporaryBattle extends TownContent {
         }
     }
     public getDisplayName() {
-        return this.optionalArgs.displayName ?? this.name;
+        return this.optionalArgs.displayName ?? this.name.replace(/( route)? \d+$/, '');
     }
 
     public getTown() {

@@ -160,6 +160,7 @@ type TmpTemporaryBattleType = {
     name: string;
     parent?: TmpTownType;
     getTown: () => TmpTownType;
+    getDisplayName: () => string;
 };
 
 type TmpTownType = {

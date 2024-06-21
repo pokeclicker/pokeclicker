@@ -381,9 +381,9 @@ class QuestLineHelper {
 
     // Started upon defeating Ecruteak City's gym
     public static createSickAmpharosQuestLine() {
-        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmines Ampharos seems to be sick!');
+        const sickAmpharosQuestLine = new QuestLine('The Sick Ampharos', 'Jasmine\'s Ampharos seems to be sick!');
 
-        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City');
+        const clearOlivineLighthouse = new DefeatDungeonQuest(1, 0, 'Olivine Lighthouse').withDescription('Clear the Olivine Lighthouse dungeon in Olivine City.');
         sickAmpharosQuestLine.addQuest(clearOlivineLighthouse);
 
         const talkToJasmine1 = new TalkToNPCQuest(OlivineLighthouseJasmine1, 'Talk to Jasmine in the Olivine Lighthouse.');
@@ -2562,7 +2562,7 @@ class QuestLineHelper {
 
         // 11 - Gym Battle: Hala
         // reward defined at the end of this file
-        const battleKahunaHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town complete Melemele\'s Grand Trial!').withCustomReward(this.zCrystalGet(PokemonType.Fighting));
+        const battleKahunaHala = new DefeatGymQuest(1, 0, 'Iki Town').withDescription('Defeat Hala in Iki Town to complete Melemele\'s Grand Trial!').withCustomReward(this.zCrystalGet(PokemonType.Fighting));
         melemeleAlolaQuestLine.addQuest(battleKahunaHala);
 
         // end - Clear dungeon boss: Ten Carat Hill, Flyinium Z Trial
