@@ -7,8 +7,6 @@ class App {
     static game: Game;
     static readonly isUsingClient = typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0;
     static translation = new Translate(Settings.getSetting('translation.language'));
-    static readonly isGameInitialized = ko.observable(false);
-    static readonly isGameStarted = ko.observable(false);
 
     static start() {
         // Hide tooltips that stay on game load
@@ -71,20 +69,20 @@ class App {
             GameController.addKeyListeners();
 
             App.game.initialize();
+            GameLoadState.updateLoadState(GameLoadState.states.initialized);
 
-            App.isGameInitialized(true);
-            Object.freeze(App.isGameInitialized);
+            // Fix any settings that conflict with the now-loaded game data
+            Settings.checkAndFix();
 
             // Fixes custom theme css if Default theme was different from save theme (must be done before bindings)
             document.body.className = 'no-select';
             ko.applyBindings(App.game);
+            GameLoadState.updateLoadState(GameLoadState.states.appliedBindings);
 
             Preload.hideSplashScreen();
 
             App.game.start();
-
-            App.isGameStarted(true);
-            Object.freeze(App.isGameStarted);
+            GameLoadState.updateLoadState(GameLoadState.states.running);
 
             // Check if Mobile and deliver a warning around mobile compatability / performance issues
             const isMobile: boolean = /Mobile/.test(navigator.userAgent);

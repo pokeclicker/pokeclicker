@@ -80,8 +80,6 @@ type TmpAppType = {
     game: TmpGameType,
     isUsingClient: boolean,
     translation: Translate,
-    isGameInitialized: KnockoutObservable<boolean>,
-    isGameStarted: KnockoutObservable<boolean>,
     start: ()=>void
 };
 
