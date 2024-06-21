@@ -1,6 +1,20 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 
+class SavedPlant {
+    decayTime: KnockoutObservable<number>;
+    stage: PlotStage;
+
+    constructor(public type: BerryType, public age: number, public img: string) {
+        this.decayTime = ko.observable(15);
+    }
+
+    decay(seconds: number): boolean {
+        GameHelper.incrementObservable(this.decayTime, -seconds);
+        return this.decayTime() <= 0;
+    }
+}
+
 class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
@@ -33,6 +47,7 @@ class Farming implements Feature {
     unlockedPlotCount: KnockoutObservable<number>;
     shovelAmt: KnockoutObservable<number>;
     mulchShovelAmt: KnockoutObservable<number>;
+    savedPlant: KnockoutObservable<SavedPlant>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
 
@@ -44,6 +59,7 @@ class Farming implements Feature {
         this.unlockedPlotCount = ko.observable(0);
         this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
+        this.savedPlant = ko.observable(null);
 
         this.externalAuras = [];
         this.externalAuras[AuraType.Attract] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Attract));
@@ -1758,6 +1774,12 @@ class Farming implements Feature {
 
         const notifications = new Set<FarmNotificationType>();
 
+        if (this.savedPlant()) {
+            if (this.savedPlant().decay(delta)) {
+                this.savedPlant(null);
+            }
+        }
+
         let change = false;
 
         // Updating Berries
@@ -2003,17 +2025,22 @@ class Farming implements Feature {
         if (plot.isSafeLocked) {
             return;
         }
-        if (plot.isEmpty()) {
-            return;
-        }
-        if (plot.stage() == PlotStage.Berry) {
-            this.harvest(index);
-            return;
-        }
         if (this.shovelAmt() <= 0) {
             return;
         }
-        plot.die(true);
+
+        if (!plot.isEmpty()) {
+            const save = new SavedPlant(plot.berry, plot.age, FarmController.getImage(plot.index));
+            this.savedPlant(save);
+            plot.die(true);
+        } else if (this.savedPlant()) {
+            const save = this.savedPlant();
+            plot.plant(save.type);
+            plot.age = save.age;
+            this.savedPlant(null);
+        } else {
+            return;
+        }
         GameHelper.incrementObservable(this.shovelAmt, -1);
         GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
     }
