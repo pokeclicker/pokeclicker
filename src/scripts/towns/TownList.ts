@@ -911,8 +911,8 @@ TownList['Pewter City'] = new Town(
         npcs: [PewterBattleItemRival, PewterScientist],
     }
 );
-TownList['Route 3 Pokémon Center'] = new Town(
-    'Route 3 Pokémon Center',
+TownList['Route 4 Pokémon Center'] = new Town(
+    'Route 4 Pokémon Center',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
     [Route3Shop],
