@@ -149,7 +149,7 @@ class PartyController {
     }
 
     static getSortedList = ko.pureComputed(() => {
-        const list = [...App.game.party.caughtPokemon];
+        const list = [...App.game.party.caughtPokemon].filter(p => !p.box);
         return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
     }).extend({ rateLimit: 500 });
 

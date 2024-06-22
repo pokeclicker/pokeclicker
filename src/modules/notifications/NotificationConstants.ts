@@ -51,6 +51,7 @@ const NotificationConstants = {
             offline_earnings: new NotificationSetting('notification.offline_earnings', 'Offline earnings', true),
             achievement_complete: new NotificationSetting('notification.achievement_complete', 'Achievement complete', true, true),
             new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, true),
+            box: new NotificationSetting('notification.box', 'Box/Unbox Pokémon', true, true),
             battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, true),
             pokerus: new NotificationSetting('notification.pokerus', 'Pokémon has become Resistant to Pokérus', true),
         },

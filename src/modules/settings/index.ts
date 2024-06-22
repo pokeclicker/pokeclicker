@@ -393,6 +393,14 @@ Settings.add(new Setting<string>('pokedexUniqueTransformationFilter', 'Unique Tr
     'all'));
 Settings.add(new BooleanSetting('pokedexHeldItemFilter', 'Rare Held Item', false));
 Settings.add(new BooleanSetting('pokedexHideAltFilter', 'Hide alternate forms', false));
+Settings.add(new Setting<string>('pokedexBoxFilter', 'Boxes',
+    [
+        new SettingOption('Show All Pokémon', 'all'),
+        new SettingOption('In Party Only', 'party'),
+        new SettingOption('In Boxes Only', 'box'),
+    ],
+    'all'));
+
 
 // Achievement sorting
 const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (

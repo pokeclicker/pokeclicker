@@ -142,6 +142,21 @@ class Party implements Feature {
         this._caughtPokemon.remove(p => p.name == name);
     }
 
+    public boxPokemon(id: number, box: boolean) {
+        if (this.alreadyCaughtPokemon(id)) {
+            let pokemon = this.getPokemon(id);
+            if (pokemon.box != box) {
+                pokemon.box = box;
+                Notifier.notify({
+                    message: `You have ${box ? 'put' : 'remove'} ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName} ${box ? 'in' : 'from'}  a box!`,
+                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
+                    type: box ? NotificationConstants.NotificationOption.danger : NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.General.box,
+                });
+            }
+        }
+    }
+
     public gainExp(exp = 0, level = 1, trainer = false) {
         const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;

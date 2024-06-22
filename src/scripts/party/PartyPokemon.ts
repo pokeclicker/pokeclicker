@@ -15,6 +15,7 @@ enum PartyPokemonSaveKeys {
     nickname,
     shadow,
     showShadowImage,
+    box,
 }
 
 class PartyPokemon implements Saveable {
@@ -40,6 +41,7 @@ class PartyPokemon implements Saveable {
         nickname: '',
         shadow: GameConstants.ShadowStatus.None,
         showShadowImage: false,
+        box: false,
     };
 
     // Saveable observables
@@ -61,6 +63,7 @@ class PartyPokemon implements Saveable {
     hideShinyImage: KnockoutObservable<boolean>;
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
     _showShadowImage: KnockoutObservable<boolean>;
+    _box: KnockoutObservable<boolean>;
 
     constructor(
         public id: number,
@@ -113,6 +116,7 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
+        this._box = ko.observable(false);
         this._attack = ko.computed(() => this.calculateAttack());
         this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
         this._canUseHeldItem.subscribe((canUse) => {
@@ -612,6 +616,7 @@ class PartyPokemon implements Saveable {
         this._nickname(json[PartyPokemonSaveKeys.nickname] || this.defaults.nickname);
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
+        this._box(json[PartyPokemonSaveKeys.box] ?? this.defaults.box);
     }
 
     public toJSON() {
@@ -632,6 +637,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.nickname]: this.nickname || undefined,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
+            [PartyPokemonSaveKeys.box]: this._box(),
         };
 
         // Don't save anything that is the default option
@@ -739,5 +745,13 @@ class PartyPokemon implements Saveable {
 
     set showShadowImage(value: boolean) {
         this._showShadowImage(value);
+    }
+
+    get box(): boolean {
+        return this._box();
+    }
+
+    set box(value: boolean) {
+        this._box(value);
     }
 }
