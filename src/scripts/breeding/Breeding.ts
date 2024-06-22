@@ -413,7 +413,7 @@ class Breeding implements Feature {
         let fossilEgg: Egg;
         if (pokemonNativeRegion > player.highestRegion()) {
             Notifier.notify({
-                message: 'You must progress further before you can uncover this fossil Pokémon!',
+                message: `You must reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonNativeRegion])} before you can uncover this fossil Pokémon!`,
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 5e3,
             });
