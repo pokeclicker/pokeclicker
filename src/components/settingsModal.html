@@ -159,6 +159,22 @@
                                             })()"/>
                                     </td>
                                 </tr>
+                                <tr data-bind="with: Settings.getSetting('box')">
+                                    <td class="p-2">
+                                        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`"></label>
+                                    </td>
+                                    <td class="p-2">
+                                        <input class="clickable" type="checkbox"
+                                            data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+                                            onchange="(() => {
+                                                Settings.setSettingByName('box', this.checked);
+                                                if (!this.checked) {
+                                                    App.game.party.unboxAll();
+                                                    return;
+                                                }
+                                            })()"/>
+                                    </td>
+                                </tr>
                                 <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
                                     <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
                                     <td class="p-0">

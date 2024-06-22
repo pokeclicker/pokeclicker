@@ -142,6 +142,10 @@ class Party implements Feature {
         this._caughtPokemon.remove(p => p.name == name);
     }
 
+    public unboxAll() {
+        this.caughtPokemon.forEach(p => p.box = false);
+    }
+
     public boxPokemon(id: number, box: boolean) {
         if (this.alreadyCaughtPokemon(id)) {
             let pokemon = this.getPokemon(id);
