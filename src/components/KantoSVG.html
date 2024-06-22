@@ -711,10 +711,10 @@
         %>
 
         <%- include('templates/mapOverlay',
-            { name: "Route 3 Pokémon Center"
+            { name: "Route 4 Pokémon Center"
             , x: 40, y: 10
             , width: 1, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Route 3 Pokémon Center')}, attr:{ class: MapHelper.calculateTownCssClass('Route 3 Pokémon Center') }"
+            , databind: "click:function(){MapHelper.moveToTown('Route 4 Pokémon Center')}, attr:{ class: MapHelper.calculateTownCssClass('Route 4 Pokémon Center') }"
             , visible:  "App.game.statistics.routeKills['kanto'][3]() >= 10"
             , image: "assets/images/map/transparent.png"
             })
