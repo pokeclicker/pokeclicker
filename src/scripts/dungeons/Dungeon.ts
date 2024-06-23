@@ -12618,7 +12618,10 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
             {loot: 'LargeRestore'},
             {loot: 'Moonball'},
         ],
-        legendary: [{loot: 'Fairy_Feather'}],
+        legendary: [
+            {loot: 'Fairy_Feather'},
+            {loot: 'Flowering Celebi', ignoreDebuff: true, requirement: new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13)},
+        ],
     },
     23764848,
     [

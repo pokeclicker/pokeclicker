@@ -3794,8 +3794,8 @@ class QuestLineHelper {
         const talktoJungleAsh3 = new TalkToNPCQuest(JungleAsh3, 'Talk to Ash Ketchum in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleAsh3);
 
-        const catchFloweringCelebi = new CaptureSpecificPokemonQuest('Flowering Celebi').withDescription('Play with Flowering Celebi.');
-        jungleSecretsQuestLine.addQuest(catchFloweringCelebi);
+        const defeatFloweringCelebi = new DefeatTemporaryBattleQuest('Flowering Celebi', 'Play with Flowering Celebi.');
+        jungleSecretsQuestLine.addQuest(defeatFloweringCelebi);
 
         const talktoJungleKoko6 = new TalkToNPCQuest(JungleKoko6, 'Talk to Koko in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleKoko6);
