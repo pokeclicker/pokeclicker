@@ -6090,7 +6090,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 132.01,
-        'name': 'Ditto (Transforming)',
+        'name': 'Ditto (Magikarp)',
         'catchRate': 35,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
