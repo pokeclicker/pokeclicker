@@ -8811,7 +8811,7 @@ const JungleKoko5 = new NPC ('Koko', [
 const JungleAsh3 = new NPC ('Ash Ketchum', [
     'Amazing, you even beat Dada! It\'s really clear that he is really amazed by your strength!',
     'Hang on, did you guys see something? Oh, over there, it\'s Celebi! It must have come now things are peaceful here. It looks like it wants to play!',
-    'Actually, it looks interested in you in particular. You should challenge it to a fight!,
+    'Actually, it looks interested in you in particular. You should challenge it to a fight!',
 ], {
     image: 'assets/images/npcs/Ash Ketchum.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13, GameConstants.AchievementOption.less )]),
