@@ -187,6 +187,7 @@ Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in gam
         new SettingOption('7 Days', (7 * DAY).toString()),
     ],
     (12 * HOUR).toString()));
+Settings.add(new BooleanSetting('disableBlinking', 'Disable blinking animation after completing a Region', false));
 Settings.add(new BooleanSetting('disableAutoSave', 'Disable Auto Save', false));
 Settings.add(new Setting<number>('breedingQueueSizeSetting', 'Breeding Queue Size', [], -1));
 

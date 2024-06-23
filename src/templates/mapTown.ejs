@@ -38,7 +38,7 @@ Parameters:
         attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') },
         event: { mouseenter: () => GameController.showMapTooltip('<%= locals.name.replace(/'/g, '\\\'') %>'), mouseleave: GameController.hideMapTooltip },
         <% if (locals.home) { %>
-            css: { flash: MapHelper.ableToTravel() }
+            css: { flash: MapHelper.ableToTravel() && !Settings.getSetting('disableBlinking').observableValue() }
         <% } %>">
 </rect>
 <% if (!locals.isExtension) { %>
