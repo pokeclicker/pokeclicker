@@ -2493,7 +2493,7 @@ const CocoonHatch = new NPC('Examine the Crystalline Cocoon', [
 const Butler2 = new NPC('Butler', [
     'I, the Great Butler, thank you for saving me from the wrath of Meta Groudon.',
     'My wish was to resurrect Groudon for Team Magma, but it proved too difficult, and you have showed me that it would be irresponsible to put that much power in the hands of evil doers.',
-    'I can try the experiment again using what was learned from the previous failure, but I will need your help. If we are successful, I will give control of the resulting Meta Groudon to you.',
+    'I can try the experiment again using what was learned from the previous failure, but I will need your help. If we are successful, I will give you the opportunity to catch the resulting Meta Groudon to you.',
     'To rebuild my machine, I will need a hundred power-generating Pokémon to run the machine, shiny pokemon to stabilize the energy matrix, and to conduct a new dig for fossilized Groudon materials. After that, I will need to calibrate the machine using DNA from Groudon itself.',
 ], {image: 'assets/images/npcs/Butler.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Meta Discovery'), new QuestLineStepCompletedRequirement('A Meta Discovery', 1, GameConstants.AchievementOption.less)]),
@@ -2501,9 +2501,9 @@ const Butler2 = new NPC('Butler', [
 
 const Butler3 = new NPC('Butler', [
     'I, the Great Butler, thank you for all of your help in fulfilling my greatest wish!',
-    'Please treat this Meta Groudon responsibly, and go forth to do great things!',
+    'Meta Groudon has been revived! It is safely contained in this crater. Catch it whenever you are ready!',
 ], {image: 'assets/images/npcs/Butler.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Meta Discovery', 2), new QuestLineStepCompletedRequirement('A Meta Discovery', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Meta Discovery', 2), new QuestLineCompletedRequirement('A Meta Discovery', GameConstants.AchievementOption.less)]),
 });
 
 const ProfBirch = new ProfNPC('Prof. Birch',

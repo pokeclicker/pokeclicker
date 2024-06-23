@@ -988,18 +988,11 @@ class QuestLineHelper {
         const calibrateMachine = new CaptureSpecificPokemonQuest('Groudon', 5, true).withDescription('Calibrate the machine by catching or hatching 5 Groudon');
         metaGroudonQuestLine.addQuest(calibrateMachine);
 
-        const MetaGroudonReward = () => {
-            App.game.party.gainPokemonByName('Meta Groudon');
-            Notifier.notify({
-                title: metaGroudonQuestLine.name,
-                message: 'Butler turns control of Meta Groudon over to you!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const talkToButler3 = new TalkToNPCQuest(Butler3, 'Deliver the materials to Butler in the Jagged Pass and start the resurrection machine.').withCustomReward(MetaGroudonReward);
+        const talkToButler3 = new TalkToNPCQuest(Butler3, 'Deliver the materials to Butler in Mt. Chimney Crater and start the resurrection machine.');
         metaGroudonQuestLine.addQuest(talkToButler3);
+
+        const catchMetaGroudon = new CaptureSpecificPokemonQuest('Meta Groudon').withDescription('Butler has revived Meta Groudon at Mt. Chimney Crater. Catch Meta Groudon.');
+        metaGroudonQuestLine.addQuest(catchMetaGroudon);
 
         App.game.quests.questLines().push(metaGroudonQuestLine);
     }
