@@ -383,17 +383,23 @@ class PokemonLocations {
         return cacheLine[pokemonName];
     }
 
-    public static getPokemonWandering(pokemonName: PokemonNameType): Array<string> {
-        const cache = this.getCache<string[]>(this.getPokemonWandering.name);
-        if (cache[pokemonName]) {
-            return cache[pokemonName];
+    public static getPokemonWandering(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        const cache = this.getRegionalCache<string[]>(this.getPokemonWandering.name);
+        if (cache[maxRegion]) {
+            return cache[maxRegion][pokemonName];
         }
-        const cacheLine = this.initCacheLine(cache, Array<string>);
+        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<string>);
         Berry.baseWander.forEach(pokemon => {
+            if (maxRegion != GameConstants.Region.none && pokemonMap[pokemon].nativeRegion > maxRegion) {
+                return;
+            }
             cacheLine[pokemon] = ['Always'];
         });
         App.game.farming.berryData.forEach((berry) => {
             berry.wander.forEach(pokemon => {
+                if (maxRegion != GameConstants.Region.none && pokemonMap[pokemon].nativeRegion > maxRegion) {
+                    return;
+                }
                 if (cacheLine[pokemon][0] !== 'Always') {
                     cacheLine[pokemon].push(BerryType[berry.type]);
                 }
@@ -701,7 +707,7 @@ class PokemonLocations {
         }
 
         // Wandering
-        const wandering = PokemonLocations.getPokemonWandering(pokemonName);
+        const wandering = PokemonLocations.getPokemonWandering(pokemonName, maxRegion);
         if (wandering.length) {
             encounterTypes[PokemonLocationType.Wandering] = wandering;
         }
