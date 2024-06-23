@@ -2742,6 +2742,9 @@ class Update implements Saveable {
             if (playerData._townName == 'Route 3 Pokémon Center') {
                 playerData._townName = 'Route 4 Pokémon Center';
             }
+
+            // Fix all weird amounts of Pokéballs
+            saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
         },
     };
 
