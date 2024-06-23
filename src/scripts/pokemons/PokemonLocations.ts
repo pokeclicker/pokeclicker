@@ -285,7 +285,7 @@ class PokemonLocations {
         }
         const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<string>);
         Object.entries(pokemonBabyPrevolutionMap).forEach(([parent, baby]) => {
-            if (maxRegion != GameConstants.Region.none && pokemonMap[parent].nativeRegion > maxRegion) {
+            if (maxRegion != GameConstants.Region.none && (pokemonMap[parent].nativeRegion > maxRegion || pokemonMap[pokemonName].nativeRegion > maxRegion)) {
                 return false;
             }
             cacheLine[baby].push(parent);
@@ -338,7 +338,7 @@ class PokemonLocations {
             if (e.trigger === EvoTrigger.NONE) {
                 return false;
             }
-            if (maxRegion != GameConstants.Region.none && p.nativeRegion > maxRegion) {
+            if (maxRegion != GameConstants.Region.none && (p.nativeRegion > maxRegion || pokemonMap[e.evolvedPokemon].nativeRegion > maxRegion)) {
                 return false;
             }
             cacheLine[e.evolvedPokemon].push(e);
@@ -347,7 +347,10 @@ class PokemonLocations {
     }
 
     public static getPokemonLevelPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): EvoData {
-        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.trigger === EvoTrigger.LEVEL && e.evolvedPokemon == pokemonName));
+        if (maxRegion != GameConstants.Region.none && pokemonMap[pokemonName].nativeRegion > maxRegion) {
+            return;
+        }
+        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.some(e => e.trigger === EvoTrigger.LEVEL && e.evolvedPokemon == pokemonName));
         if (maxRegion != GameConstants.Region.none && pokemonMap[evolutionPokemon.name].nativeRegion > maxRegion) {
             return;
         }
@@ -355,7 +358,10 @@ class PokemonLocations {
     }
 
     public static getPokemonStonePrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): EvoData {
-        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.trigger === EvoTrigger.STONE && e.evolvedPokemon == pokemonName));
+        if (maxRegion != GameConstants.Region.none && pokemonMap[pokemonName].nativeRegion > maxRegion) {
+            return;
+        }
+        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.some(e => e.trigger === EvoTrigger.STONE && e.evolvedPokemon == pokemonName));
         if (maxRegion != GameConstants.Region.none && pokemonMap[evolutionPokemon.name].nativeRegion > maxRegion) {
             return;
         }
