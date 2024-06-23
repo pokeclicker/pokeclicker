@@ -2738,6 +2738,10 @@ class Update implements Saveable {
             if (settingsData.breedingType2Filter == -2) {
                 settingsData.breedingType2Filter = null;
             }
+            // Pokémon Center renamed
+            if (playerData._townName == 'Route 3 Pokémon Center') {
+                playerData._townName = 'Route 4 Pokémon Center';
+            }
         },
     };
 
