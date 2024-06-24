@@ -15,13 +15,13 @@ const ChangelogItems = [
     new Changelog(changelogType.NEW, 'New Pokémon'),
     new Changelog(changelogType.NEW, 'Setting to disable the flashing animation before traveling to a new region'),
     new Changelog(changelogType.CHANGE, 'Renamed Ditto (Transforming) to Ditto (Magikarp)'),
-    new Changelog(changelogType.CHANGE, 'Treasure Scanner notifications now respect the underground item found notification setting'),
     new Changelog(changelogType.CHANGE, 'Added Pokémon name translations to several additional locations'),
     new Changelog(changelogType.CHANGE, 'Removed Z-Power Ring from Key Items list as it is not yet obtainable'),
     new Changelog(changelogType.CHANGE, 'Miscellaneous text changes'),
     new Changelog(changelogType.FIXED, 'Crash while loading when certain conditions were met'),
     new Changelog(changelogType.FIXED, 'Pokéballs going negative while catching farm wanderers'),
     new Changelog(changelogType.FIXED, 'Lucky Punch held item not available until Galar'),
+    new Changelog(changelogType.FIXED, 'Treasure Scanner notifications not respecting the underground item found notification setting'),
 
     // v0.10.20
     new ChangelogUpdate('v0.10.20', new Date(2024, 5, 19)),
