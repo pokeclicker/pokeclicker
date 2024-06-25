@@ -199,7 +199,7 @@ class Pokeballs implements Feature {
             return GameConstants.Pokeball.None;
         }
 
-        if (this.pokeballs[pref]?.quantity()) {
+        if (this.pokeballs[pref]?.quantity() > 0) {
             return pref;
         } else if (pref <= GameConstants.Pokeball.Masterball) {
             // Check which Pokeballs we have in stock that are of equal or lesser than selection (upto Masterball)
@@ -212,7 +212,7 @@ class Pokeballs implements Feature {
             return use;
         } else {
             // Use a normal Pokeball or None if we don't have Pokeballs in stock
-            return this.pokeballs[GameConstants.Pokeball.Pokeball].quantity() ? GameConstants.Pokeball.Pokeball : GameConstants.Pokeball.None;
+            return this.pokeballs[GameConstants.Pokeball.Pokeball].quantity() > 0 ? GameConstants.Pokeball.Pokeball : GameConstants.Pokeball.None;
         }
     }
 
