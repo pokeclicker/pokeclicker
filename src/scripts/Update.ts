@@ -2743,6 +2743,16 @@ class Update implements Saveable {
 
             // Fix all weird amounts of Pokéballs
             saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
+
+            // Reset settings that the player shouldn't have access to yet but might have been
+            // set as default from a different file
+            if (playerData.highestRegion < 5) { // Kalos
+                settingsData.pokedexUniqueTransformationFilter = 'all';
+                settingsData.breedingUniqueTransformationFilter = 'all';
+            }
+            if (!saveData.challenges.list.regionalAttackDebuff) {
+                settingsData.breedingRegionalAttackDebuffSetting = '-1';
+            }
         },
     };
 

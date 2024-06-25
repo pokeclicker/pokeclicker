@@ -147,7 +147,7 @@ aria-labelledby="pokedexModalLabel">
                                     </div>
 
                                     <!-- Mega Evolution -->
-                                    <!-- ko if: player.highestRegion() >= GameConstants.Region.kalos -->
+                                    <!-- ko if: Settings.getSetting('pokedexUniqueTransformationFilter').isUnlocked() -->
                                     <div class="form-group col-lg-12 col-12">
                                         <!-- ko let: { pokedexUniqueTransformationFilter: Settings.getSetting('pokedexUniqueTransformationFilter') } -->
                                         <label for="pokedex-filter-unique-transformation" data-bind="text: pokedexUniqueTransformationFilter.displayName">Unique Transformations</label>

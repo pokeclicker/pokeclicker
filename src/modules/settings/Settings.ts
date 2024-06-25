@@ -28,9 +28,9 @@ export default class Settings {
         return this.list.find((setting) => setting.name === name) || null;
     }
 
-    static toJSON() {
+    static toJSON(saveAsDefaultsOnly = false) {
         const json = {};
-        this.list.forEach((setting) => {
+        this.list.filter((setting) => !saveAsDefaultsOnly || setting.saveAsDefault).forEach((setting) => {
             json[setting.name] = setting.value;
         });
         return json;
@@ -66,7 +66,7 @@ export default class Settings {
     }
 
     static saveDefault() {
-        localStorage.setItem('settings', JSON.stringify(Settings.toJSON()));
+        localStorage.setItem('settings', JSON.stringify(Settings.toJSON(true)));
     }
 
     static loadDefault() {

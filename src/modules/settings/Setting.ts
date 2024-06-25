@@ -21,7 +21,8 @@ export default class Setting<T> {
         private _defaultDisplayName: string,
         private _options: SettingOption<T>[] | (() => SettingOption<T>[]),
         public defaultValue: T,
-        public requirement : Requirement = undefined,
+        public requirement: Requirement = undefined,
+        public saveAsDefault: boolean = true,
     ) {
         this._observable = ko.observable(this.defaultValue);
         this.set(defaultValue);
