@@ -2486,6 +2486,7 @@ export const ModalCollapseList = [
     'achievementTrackerBody',
     'battleItemContainerBody',
     'dailyQuestDisplayBody',
+    'questLineDisplayBody',
     'eggList',
     'fluteItemContainerBody',
     'oakItemsBody',
