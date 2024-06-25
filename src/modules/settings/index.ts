@@ -318,7 +318,7 @@ Settings.add(new Setting<string>('breedingUniqueTransformationFilter', 'Unique T
         new SettingOption('Unobtained Mega Evolution/Primal Reversion', 'mega-unobtained'),
         new SettingOption('Obtained Mega Evolution/Primal Reversion', 'mega-evolution'),
     ],
-    'all', undefined, false));
+    'all', new MaxRegionRequirement(Region.kalos), false));
 Settings.add(new BooleanSetting('breedingHideAltFilter', 'Hide alternate forms', false));
 
 // Hatchery display settings
@@ -391,7 +391,7 @@ Settings.add(new Setting<string>('pokedexUniqueTransformationFilter', 'Unique Tr
         new SettingOption('Unobtained Mega Evolution/Primal Reversion', 'mega-unobtained'),
         new SettingOption('Obtained Mega Evolution/Primal Reversion', 'mega-evolution'),
     ],
-    'all', undefined, false));
+    'all', new MaxRegionRequirement(Region.kalos), false));
 Settings.add(new BooleanSetting('pokedexHeldItemFilter', 'Rare Held Item', false, undefined, false));
 Settings.add(new BooleanSetting('pokedexHideAltFilter', 'Hide alternate forms', false, undefined, false));
 
