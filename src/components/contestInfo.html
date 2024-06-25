@@ -26,8 +26,8 @@
                         attr:{'aria-label': `${ContestRank[rank]} Rank ${ContestType[type]} Contest. Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(type).toLocaleString('en-US')}.`}
                         ">
                         <p class="m-0" style="font-weight: bolder;" data-bind="text: `${ContestType[type]}`"></p>
-                        <img data-bind="attr:{ src: ContestHall.getRibbonImage(rank, type)}">
                         <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(type))}`"></p>
+                        <img data-bind="attr:{ src: ContestHall.getRibbonImage(rank, type)}" style="width: 80px;">
                     </button>
                 </div>
             </div>

@@ -36,6 +36,6 @@ class ContestHall extends TownContent {
     public static getRibbonImage(rank: ContestRank, type: ContestType) {
         const RibbonRank = ContestRank[rank];
         const RibbonType = ContestType[type];
-        return RibbonType === 'Balanced' ? `assets/images/ribbons/${RibbonRank} Star.png` : `assets/images/ribbons/${RibbonRank} ${RibbonType}.png`;
+        return RibbonType === 'Balanced' ? `assets/images/ribbons/${RibbonRank} Star.svg` : `assets/images/ribbons/${RibbonRank} ${RibbonType}.svg`;
     }
 }

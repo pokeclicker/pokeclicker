@@ -695,6 +695,7 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/j/o/jormxdos.png?8',
         resources: [
             'All Vectorized Badges images',
+            'Vectorized Ribbons',
             'Vectorized Z Crystals',
         ],
         // NOTES: Permission given in the bio comment section
