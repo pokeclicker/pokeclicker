@@ -2357,6 +2357,8 @@ const HoennContestShop = new Shop([
 const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMaster);
 const HoennStoneSalesman = new GemMasterShop(GameConstants.GemShops.HoennStoneSalesman, 'Stone Salesman', [new TemporaryBattleRequirement('Hoenn Stone Salesman')], true);
 
+const SpectacularContestHall = new ContestHall([ContestRank.Spectacular], [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Balanced]);
+
 //Hoenn NPCs
 
 const LittlerootAide = new NPC('Professor Birch\'s Aide', [
@@ -3377,7 +3379,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Master]), new ContestHall([9], [0, 1, 2, 3, 4, 5]), DepartmentStoreShop, HoennContestShop],
+    [new ContestHall([ContestRank.Master]), SpectacularContestHall, DepartmentStoreShop, HoennContestShop],
     //[new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
@@ -4096,6 +4098,9 @@ const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Mulch_Shovel,
 ], 'Secret Berry Shop');
 
+// TODO: add to Hearthome when done
+const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master']], undefined, 'Sinnoh Contests');
+const BrilliantShiningContestHall = new ContestHall([ContestRank['Brilliant Shining']], [ContestType.Balanced]);
 
 //Sinnoh NPCs
 
@@ -4533,7 +4538,8 @@ TownList['Hearthome City'] = new Town(
     'Hearthome City',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new ContestHall([5, 6, 7, 8], undefined, 'Sinnoh Contests'), new ContestHall([10], [5]), HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
+    [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
+    // TODO: SuperContests, BrilliantShiningContestHall
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
         npcs: [HearthomeContestFan, LucyStevens1, HappinyWitness6],
