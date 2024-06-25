@@ -1,8 +1,8 @@
 /// <reference path="../../declarations/enums/ContestType.d.ts"/>
 class ContestHelper {
-    public static calculatePokemonContestAppeal(type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, pokemons?: PartyPokemon[], includeBreeding = false): number {
+    public static calculatePokemonContestAppeal(conRank: ContestRank = ContestRank.Normal, conType: ContestType = ContestType.None, type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, pokemons?: PartyPokemon[], includeBreeding = false): number {
         let appeal = 0;
-        const pks = pokemons ? pokemons : App.game.party.caughtPokemon;
+        const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
         for (const pokemon of pks) {
             appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, type1, type2, type3, includeBreeding);
         }
@@ -28,6 +28,49 @@ class ContestHelper {
             const pk = PokemonHelper.getPokemonById(p.id);
             return [pk.contestType1, pk.contestType2, pk.contestType3].some(c => c === type || c === ContestType.Balanced);
         });
+    }
+
+    public static getPartyPokemonByContestTypeRank(type: ContestType, rank: ContestRank): readonly PartyPokemon[] {
+        switch (rank) {
+            // Hoenn
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                return App.game.party.caughtPokemon;
+            // Sinnoh - TODO
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+                return App.game.party.caughtPokemon;
+            // Kalos (in Hoenn)
+            case ContestRank.Spectacular:
+                if (type != ContestType.Balanced) {
+                    return ContestHelper.getPartyPokemonByContestType(type);
+                } else {
+                    return App.game.party.caughtPokemon;
+                }
+            // Galar (in Sinnoh) - TODO
+            case ContestRank['Brilliant Shining']:
+                return App.game.party.caughtPokemon;
+        }
+    }
+
+    public static contestButtonTooltip(rank: ContestRank, type: ContestType): string {
+        let tooltipString = '';
+        tooltipString += `<div><strong>Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(rank, type, type).toLocaleString('en-US')}</strong></div>`;
+        if (rank == ContestRank.Spectacular) {
+            tooltipString += '<div>Eligible Types:</div>';
+            if (type != ContestType.Balanced) {
+                tooltipString += `<div>${ContestType[type]}</div>`;
+                tooltipString += `<div>${ContestType[5]}</div>`;
+            } else {
+                tooltipString += `<div>All</div>`;
+            }
+        }
+        return tooltipString;
     }
 
     public static rankAppeal: Record<ContestRank, number> = {

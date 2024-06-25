@@ -18,9 +18,9 @@ class ContestBattle extends Battle {
                 return;
             }
             // damage enemy and rally audience every tick
-            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3));
+            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3));
             // increase the audience bar
-            ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.type()));
+            ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestRunner.type()));
 
             if (!ContestBattle.enemyPokemon().isAlive()) {
                 // increase audience bar based off health, type, and index of defeated pokemon
@@ -98,7 +98,7 @@ class ContestBattle extends Battle {
 
     public static pokemonContestAppealTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
         if (ContestBattle.enemyPokemon()) {
-            const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3);
+            const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3);
             return `${pokemonAppeal.toLocaleString('en-US')} against`;
         } else {
             return '';

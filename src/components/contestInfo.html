@@ -20,14 +20,14 @@
                             contestButton5: Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5' },
                         tooltip: {
                             html: true,
-                            title: `Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(type).toLocaleString('en-US')}`,
+                            title: ContestHelper.contestButtonTooltip(rank, type),
                             trigger: 'hover',
                         },
-                        attr:{'aria-label': `${ContestRank[rank]} Rank ${ContestType[type]} Contest. Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(type).toLocaleString('en-US')}.`}
+                        attr:{'aria-label': `${ContestRank[rank]} Rank ${ContestType[type]} Contest. ${ContestHelper.contestButtonTooltip(rank, type)}.`}
                         ">
                         <p class="m-0" style="font-weight: bolder;" data-bind="text: `${ContestType[type]}`"></p>
-                        <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(type))}`"></p>
                         <img data-bind="attr:{ src: ContestHall.getRibbonImage(rank, type)}" style="width: 80px;">
+                        <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(rank, type, type))}`"></p>
                     </button>
                 </div>
             </div>
