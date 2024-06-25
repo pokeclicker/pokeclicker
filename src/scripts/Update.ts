@@ -2803,7 +2803,7 @@ class Update implements Saveable {
         const settingsData = this.getSettingsData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
+        const backupSaveData = JSON.stringify({ player: playerData, save: saveData, settings: settingsData });
 
         const button = document.createElement('a');
         try {
