@@ -144,7 +144,7 @@ class MapHelper {
             (App.game.gameState == GameConstants.GameState.gym
                 ? GymRunner.getBattleBackgroundImage() : undefined) ||
             (App.game.gameState == GameConstants.GameState.battleFrontier
-                ? BattleFrontierRunner.environment() : undefined) ||
+                ? BattleFrontierRunner.battleBackground() : undefined) ||
             player.town?.name ||
             undefined;
 
