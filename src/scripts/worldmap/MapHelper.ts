@@ -30,11 +30,11 @@ class MapHelper {
             genNewEnemy = true;
         }
         if (this.accessToRoute(route, region)) {
-            player.route(route);
-            player._subregion(routeData.subRegion != undefined ? routeData.subRegion : 0);
             if (player.region != region) {
                 player.region = region;
             }
+            player.subregion = routeData.subRegion ?? 0;
+            player.route = route;
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
             }
@@ -131,19 +131,21 @@ class MapHelper {
     }
 
     public static getCurrentEnvironments(): GameConstants.Environment[] {
-        const area = player.route() ||
-            player.town()?.name ||
+        const area = player.route ||
+            player.town?.name ||
             undefined;
         return this.getEnvironments(area, player.region);
     }
 
     public static getBattleBackground(): GameConstants.BattleBackground {
-        const area = player.route() ||
+        const area = player.route ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
                 ? TemporaryBattleRunner.getBattleBackgroundImage() : undefined) ||
             (App.game.gameState == GameConstants.GameState.gym
                 ? GymRunner.getBattleBackgroundImage() : undefined) ||
-            player.town()?.name ||
+            (App.game.gameState == GameConstants.GameState.battleFrontier
+                ? BattleFrontierRunner.environment() : undefined) ||
+            player.town?.name ||
             undefined;
 
         if (area in GameConstants.BattleBackgrounds) {
@@ -193,14 +195,14 @@ class MapHelper {
     }
 
     public static isRouteCurrentLocation(route: number, region: GameConstants.Region): boolean {
-        return player.route() == route && player.region == region;
+        return player.route == route && player.region == region;
     }
 
     public static isTownCurrentLocation(townName: string): boolean {
         if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
             return TemporaryBattleRunner.battleObservable().getTown().name == townName;
         }
-        return !player.route() && player.town().name == townName;
+        return !player.route && player.town.name == townName;
     }
 
     public static calculateTownCssClass(townName: string): string {
@@ -214,7 +216,7 @@ class MapHelper {
         }
         const states = [];
         // Is this location a dungeon
-        if (dungeonList[townName]) {
+        if (dungeonList[townName] && dungeonList[townName].isUnlocked()) {
             const possiblePokemon = dungeonList[townName].allAvailablePokemon();
             const shadowPokemon = dungeonList[townName].allAvailableShadowPokemon();
 
@@ -267,12 +269,13 @@ class MapHelper {
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
-            player.route(0);
+            player.route = 0;
             Battle.route = 0;
             Battle.catching(false);
             const town = TownList[townName];
-            player.town(town);
-            player._subregion(town.subRegion);
+            player.region = town.region;
+            player.subregion = town.subRegion;
+            player.town = town;
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
@@ -332,18 +335,12 @@ class MapHelper {
             player.highestSubRegion(0);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
-            // Track when users move region and how long it took in seconds
-            LogEvent('new region', 'new region',
-                GameConstants.Region[player.highestRegion()],
-                App.game.statistics.secondsPlayed());
-            // Gather users attack when they moved regions
-            LogEvent('attack measurement', 'new region',
-                GameConstants.Region[player.highestRegion()],
-                App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
             // Update hatchery region filter to include new region if all previous regions selected
-            if (BreedingFilters.region.value() == (2 << player.highestRegion() - 1) - 1) {
-                BreedingFilters.region.value((2 << player.highestRegion()) - 1);
-                Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value());
+            const previousRegionFullMask = (2 << (player.highestRegion() - 1)) - 1;
+            const regionFilterMask = Settings.getSetting('breedingRegionFilter').value & previousRegionFullMask;
+            if (regionFilterMask == previousRegionFullMask) {
+                const newRegionFullMask = (2 << player.highestRegion()) - 1;
+                Settings.setSettingByName('breedingRegionFilter', newRegionFullMask);
             }
             $('#pickStarterModal').modal('show');
         }

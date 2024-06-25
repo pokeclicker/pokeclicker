@@ -15,7 +15,7 @@
                 </ul>
             </div>
 
-            <div class="modal-body tab-content p-0">
+            <div class="modal-body tab-content p-0" style="overflow-x: hidden;">
 
                 <div id="berryFarmView" class="tab-pane fade in active show">
                     <div id="farmView" class="justify-content-center no-select row">
@@ -156,9 +156,9 @@
                                 <div class="w-100"></div>
                                 <!-- /ko -->
                                 <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
-                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
+                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass($data)">
                                         <div class="plotImage">
-                                            <img style="width: 100%" src="assets/images/farm/soil.png"
+                                            <img style="width: 100%;" src="assets/images/farm/soil.png"
                                                 data-bind="class: FarmController.calcMulchClass($data)">
                                             <!-- ko if: !$data.isUnlocked -->
                                             <div class="plotButton plotLockHover">
@@ -174,6 +174,18 @@
                                                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFPCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
                                                 </div>
                                             </div>
+                                            <!-- /ko -->
+                                            <!-- ko if: $data.wanderer -->
+                                                <!-- ko ifnot: $data.wanderer.catching -->
+                                                    <div class="pokemonSprite wandererSprite"
+                                                        data-bind="style: { backgroundImage: FarmController.getWandererStyle($data)},
+                                                        class: FarmController.getWandererCss($data)">
+                                                    </div>
+                                                <!-- /ko -->
+                                                <!-- ko if: $data.wanderer.catching -->
+                                                    <img src="" class="pokeball-animated wandererCapture" style="z-index: 1;"
+                                                        data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.wanderer.pokeball()] + '.svg'}"/>
+                                                <!-- /ko -->
                                             <!-- /ko -->
                                             <div class="plotButton"
                                                 data-bind="ifnot: $data.isEmpty(),
@@ -313,45 +325,27 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- ko if: App.game.farming.berryData[$data].wander.some((w) => !Berry.baseWander.includes(w) && !Berry.colorWander[App.game.farming.berryData[$data].color].includes(w)) -->
-                                    <table class="table table-striped table-hover table-bordered table-sm m-0">
-                                        <thead>
-                                            <tr class="text-light">
-                                                <th class="bg-dark">Wandering Pokémon</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="p-0">
-                                                    <ul id="wanderPokemonList" class="list-inline" data-bind="foreach: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.includes(w) && !Berry.colorWander[App.game.farming.berryData[$data].color].includes(w))">
-                                                        <li class="list-inline-item">
-                                                            <!-- ko if: App.game.party.getPokemonByName($data)?.pokerus -->
-                                                            <img class="dungeon-pokemon-pkrs" src="" data-bind="
-                                                                attr:{ src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName($data)?.pokerus]}.png` },
-                                                                tooltip: {
-                                                                    title: `EVs: ${App.game.party.getPokemonByName($data).evs().toLocaleString('en-US')}`,
-                                                                    placement: 'bottom',
-                                                                    trigger: 'hover'
-                                                                }" />
-                                                            <!-- /ko -->
-                                                            <img class="dungeon-pokemon-preview" src="" data-bind="
-                                                                attr:{ src: `assets/images/${(App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '')}pokemon/${pokemonMap[$data].id}.png` },
-                                                                css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data) }" onerror="this.src='assets/images/pokemon/0.png';" />
-                                                            <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-                                                            <!-- ko if: PokemonHelper.calcNativeRegion(pokemonMap[$data].id) > player.highestRegion() -->
-                                                            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="tooltip: {
-                                                                title: `Reach ${GameConstants.camelCaseToString(GameConstants.Region[PokemonHelper.calcNativeRegion(pokemonMap[$data].id)])} to attract this Pokémon!`,
-                                                                placement: 'top',
-                                                                trigger: 'hover'
-                                                            }">
-                                                            <!-- /ko -->
-                                                        </li>
-
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <!-- ko let: { 
+                                        berrySpecificWanderers: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) 
+                                    } -->
+                                        <!-- ko if: berrySpecificWanderers.length -->
+                                        <table class="table table-striped table-hover table-bordered table-sm m-0">
+                                            <thead>
+                                                <tr class="text-light">
+                                                    <th class="bg-dark">Wandering Pokémon</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="p-0">
+                                                        <ul class="list-inline wanderPokemonList" data-bind="foreach: berrySpecificWanderers">
+                                                            <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- /ko -->
                                     <!-- /ko -->
                                     <!-- /ko -->
 
@@ -395,12 +389,12 @@
 
                     <h4><u>Mutations</u></h4>
                     <p>Berries have the chance to cause mutations and create new Berry species in empty plots based on certain conditions.
-                    <br/><i>(the Berry Master in Kanto will give you daily hints to what these conditions may be)</i></p>
+                    <br/><i>(The Berry Master in Kanto will give you daily hints to what these conditions may be.)</i></p>
 
                     <p>There are two types of mutations:</p>
 
-                    <p><b>Common mutations:</b> They requires specific berries to happen. <i>This mutations only happens at Ripe stage.</i>
-                    <br/><b>Evolution mutations:</b> They usually require a berry changing into other and are related with flavour profiles or use of objects. <i>This mutations can start to happen at Taller stage.</i></p>
+                    <p><b>Common mutations:</b> They require specific Berries to happen. <i>These mutations only happen at Ripe stage.</i>
+                    <br/><b>Evolution mutations:</b> They usually require a Berry changing into other and are related with flavour profiles or use of objects. <i>These mutations can start to happen at Taller stage.</i></p>
 
                     <h4><u>Mulches</u></h4>
                     <p>Mulches can be bought in later regions from Berry Masters,
@@ -424,19 +418,23 @@
                         </tr>
                         <tr>
                             <td>Freeze Mulch</td>
-                            <td>Stops Berry growth and auras. Mutations will still occur while berries are frozen.</td>
+                            <td>Stops Berry growth and auras. Mutations will still occur while Berries are frozen.</td>
+                        </tr>
+                        <tr>
+                            <td>Gooey Mulch</td>
+                            <td>Boosts Wanderer catch rate by 10% and increases the chance of non-base Wanderers appearing. Available from Unova.</td>
                         </tr>
                     </table>
 
-                    <h4><u>Shovel</u></h4>
-                    <p>If you want to remove a Berry plant before it is fully grown,
-                    <br/>you can use a Shovel to uproot it.
-                    <br/><i>(shovels can be purchased in later regions from Berry Masters)</i></p>
+                    <h4><u>Shovels</u></h4>
+                    <p>If you want to remove a Berry plant before it is fully grown, you can use a Shovel to uproot it. This will consume the Shovel. Using it on a ripe Berry, however, will function the same as a normal harvest, and the Shovel will not be consumed!</p>
+                    <p>If you want to remove a mulch, you can use Mulch Shovels. Using one will remove the full mulch effect, regardless of the time remaining.</p>
+                    <p><i>(Both types of shovels can be purchased in later regions from Berry Masters.)</i></p>
 
                     <h4><u>Locking Plots</u></h4>
                     <p>You can lock specific plots by toggling on the lock with the lock button
                     <br/>or using the hotkey <kbd data-bind="text: Settings.getSetting('hotkey.farm.togglePlotSafeLock').observableValue()"></kbd>.
-                    <br/>You can also press <kbd>Shift + Click</kbd> while having any tool/berry selected to safely lock a plot.</p>
+                    <br/>You can also press <kbd>Shift + Click</kbd> while having any tool/Berry selected to safely lock a plot.</p>
 
                     <p>Locking a plot prevents you from planting, harvesting,<br/>or interacting with the plot in any way.</p>
 
@@ -448,21 +446,24 @@
                     <p>Berries can be traded with Berry Masters in later regions for other useful items.</p>
 
                     <h4><u>Wandering Pokémon</u></h4>
-                    <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
-                    <p>Some Berry Auras will increase or decrease the chance of encountering Wandering Pokémon. If your total Repel Aura value reaches 1 or greater, no Wandering Pokémon will appear.</p>
+                    <p>Ripe Berry plants may attract wild Pokémon that you can then capture. Some Pokémon can only be found using certain Berry species.</p>
+                    <p>Some Berry Auras will increase or decrease the chance of encountering Wandering Pokémon.</p>
+                    <p>When a Pokémon wanders onto your farm they will appear on a plot next to the Berry and will remain there until interacted with or will flee a couple minutes after the Berry is harvested or withers.</p>
+                    <p>Your Poké Ball Filters will be used when attempting to capture a Wanderer. Farm Hands can also be used for this by enabling their Manage Wanderers setting.</p>
+                    <p>Interacting with a Wanderer will earn you Farm Points whether you catch it or not. Successfully capturing one will net you Dungeon Tokens.</p>
 
                     <h4><u>Farm Hands</u></h4>
-                    <p><i>(unlocked after obtaining 8 unique berries)</i></p>
-                    <p>Farm Hands can help around the Farm; they will harvest and plant berries as needed and accrue Farm Points while doing so.</p>
+                    <p><i>(Unlocked after obtaining 8 unique Berries.)</i></p>
+                    <p>Farm Hands can help around the Farm; they will harvest and plant Berries as needed or catch wild wanderers, and accrue Farm Points while doing so.</p>
                     <p>Up to 3 Farm Hands can be hired at a time.</p>
-                    <p>If they run out of energy, they won't do any work for that cycle, but will regenerate some energy instead. If there's no work to do currently, they will also regenerate some energy.</p>
+                    <p>If they run out of energy, they won't do any work for that cycle, but will regenerate some energy instead. If there's no work to do currently, they will also regenerate some energy. Firing them will allow them to recover energy at the same rate as if they were still hired.</p>
                     <p>Efficiency refers to how many actions they can do per work cycle.</p>
-                    <p><i>More Farm Hands can be unlocked through shops and unlocking unique berries</i></p>
+                    <p><i>More Farm Hands can be unlocked through shops and unlocking unique Berries.</i></p>
 
                     <h4><u>Farm Module</u></h4>
                     <p>
-                        Monitor and interact with the farm in a limited capacity without opening the full modal. Harvest or plant berries, apply mulch, use shovels, and lock/unlock plots with the extended controls.<br />
-                        Hide the extended controls for less clutter while still being able to plant and harvest berries or disable the module completely in the settings.<br />
+                        Monitor and interact with the farm in a limited capacity without opening the full modal. Harvest or plant Berries, apply mulch, use shovels, and lock/unlock plots with the extended controls.<br />
+                        Hide the extended controls for less clutter while still being able to plant and harvest Berries or disable the module completely in the settings.<br />
                         You can also use <kbd>Shift + Click</kbd> to safely lock/unlock a plot.<br />
                         The Farm shortcut will be hidden when the Farm module is enabled.
                     </p>
@@ -526,6 +527,16 @@
                                             <td class="text-left">Should Harvest:</td>
                                             <td class="text-center tight align-middle">
                                                 <input class="clickable" type="checkbox" data-bind="checked: $data.shouldHarvest"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Manage Wanderers: <span class="ml-1" style="position: absolute; float: right; line-height: 100%;" data-bind="tooltip: {
+                                                title: 'They will use your Poké Balls Filters and consume your Poké Balls !',
+                                                trigger: 'hover',
+                                                placement: 'left',
+                                            }">ⓘ</span></td>
+                                            <td class="text-center tight align-middle">
+                                                <input class="clickable" type="checkbox" data-bind="checked: $data.shouldCatch"/>
                                             </td>
                                         </tr>
                                         <tr>
