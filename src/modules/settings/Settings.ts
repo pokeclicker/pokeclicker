@@ -42,6 +42,15 @@ export default class Settings {
         });
     }
 
+    static checkAndFix() {
+        this.list.forEach((setting) => {
+            if (!setting.validValue(setting.value)) {
+                console.warn(`Resetting ${setting.name} to default from invalid value ${setting.value}`);
+                setting.set(setting.defaultValue);
+            }
+        });
+    }
+
     static enumToSettingOptionArray<T extends Record<string, unknown>>(obj: T, filter: (v) => boolean = () => true, displayNames?: Record<keyof T, string>) {
         return GameHelper.enumStrings(obj).filter(filter).map(
             (val) => new SettingOption(displayNames ? displayNames[val] : camelCaseToString(val), `${obj[val]}`),

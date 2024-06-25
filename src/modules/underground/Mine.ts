@@ -200,13 +200,6 @@ export class Mine {
             return;
         }
 
-        const tiles = App.game.underground.getSurvey_Efficiency();
-        for (let i = 0; i < tiles; i++) {
-            const x = Rand.intBetween(0, this.getHeight() - 1);
-            const y = Rand.intBetween(0, Underground.sizeX - 1);
-            this.breakTile(x, y, Mine.maxLayerDepth);
-        }
-
         App.game.underground.energy -= surveyCost;
         const rewards = Mine.rewardSummary();
         Mine.updatesurveyResult(rewards, resultTooltipID);
@@ -391,7 +384,7 @@ export class Mine {
                             message = `${amount == 3 ? 'Lucky' : 'Jackpot'}${jackpotMultiplier}! You found another ${humanifyString(itemName)}!`;
                         }
                         const timeout = Math.min(amount, 4) * 2000 + Math.max(amount - 4, 0) * 100;
-                        Notifier.notify({ message, type, title, timeout });
+                        Notifier.notify({ message, type, title, setting, timeout });
                     }
                 }
 

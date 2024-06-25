@@ -1,7 +1,6 @@
-/// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
 /// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
-/// <reference path="../../declarations/utilities/Modal.d.ts" />
+/// <reference path="../../declarations/utilities/DisplayObservables.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../party/PartyController.ts" />
 
@@ -95,17 +94,17 @@ class BreedingController {
 
     public static initialize() {
         // Track view settings for hatchery list rerendering
-        const hatcherySettingObervables = [...Object.values(BreedingFilters).map(f => f.value), Settings.getSetting('hatcherySort').observableValue, Settings.getSetting('hatcherySortDirection').observableValue];
+        const hatcheryListSettings = [...breedingFilterSettingKeys, 'hatcherySort', 'hatcherySortDirection'];
 
-        hatcherySettingObervables.forEach((setting) => {
-            setting.subscribe(() => {
+        hatcheryListSettings.forEach((setting) => {
+            Settings.getSetting(setting).observableValue.subscribe(() => {
                 BreedingController.viewResetWaiting(true);
                 BreedingController.hatcherySortedFilteredList.evaluateEarly();
             });
         });
 
         // Reset hatchery display upon modal close
-        modalUtils.observableState.breedingModalObservable.subscribe((modalState) => {
+        DisplayObservables.modalState.breedingModalObservable.subscribe((modalState) => {
             // Resetting scrolling only works before modal is fully hidden
             if (modalState === 'hide') {
                 BreedingController.scrollToTop();
@@ -165,11 +164,36 @@ class BreedingController {
 
     public static formatSearch(value: string) {
         if (/[^\d]/.test(value)) {
-            BreedingFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
-            BreedingFilters.id.value(-1);
+            // non-integer, use as name filter
+            Settings.setSettingByName('breedingNameFilter', value);
+            Settings.setSettingByName('breedingIDFilter', -1);
         } else {
-            BreedingFilters.id.value(value != '' ? +value : -1);
-            BreedingFilters.name.value(new RegExp('', 'i'));
+            // integer, use as ID filter
+            Settings.setSettingByName('breedingIDFilter', (value != '' ? +value : -1));
+            Settings.setSettingByName('breedingNameFilter', '');
+        }
+    }
+
+    public static getSearchString() {
+        const name = Settings.getSetting('breedingNameFilter').value;
+        const id = Settings.getSetting('breedingIDFilter').value;
+        return id == -1 ? name : id;
+    }
+
+    public static getRegionFilterString() {
+        const unlockedRegionsMask = (2 << player.highestRegion()) - 1;
+        const showRegions = Settings.getSetting('breedingRegionFilter').observableValue() & unlockedRegionsMask;
+        if (showRegions == unlockedRegionsMask) {
+            return 'All';
+        } else if (showRegions > 0) {
+            const highestBit = Math.floor(Math.log2(showRegions));
+            let txt = GameConstants.camelCaseToString(GameConstants.Region[highestBit]);
+            if (showRegions > (1 << highestBit)) {
+                txt += ' & more';
+            }
+            return txt;
+        } else {
+            return 'None';
         }
     }
 
@@ -179,12 +203,9 @@ class BreedingController {
     }
 
     // Value displayed at bottom of image
-    public static displayValue = ko.observable('attack');
-
     public static getDisplayValue(pokemon: PartyPokemon): string {
         const pokemonData = pokemonMap[pokemon.name];
-        switch (this.displayValue()) {
-            case 'attack': return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
+        switch (Settings.getSetting('breedingDisplayTextSetting').observableValue()) {
             case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${pokemon.getEggSteps().toLocaleString('en-US')}`;
@@ -194,17 +215,18 @@ class BreedingController {
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
             case 'evs': return `EVs: ${pokemon.evs().toLocaleString('en-US')}`;
+            case 'attack':
+            default:
+                return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
         }
     }
-
-    // Applied regional debuff
-    public static regionalAttackDebuff = ko.observable(-1);
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon): number {
         // Check if regional debuff is active
         if (App.game.challenges.list.regionalAttackDebuff.active()) {
             // Check if regional debuff being applied for sorting
-            if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
+            const regionalAttackDebuff = Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue();
+            if (regionalAttackDebuff > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== regionalAttackDebuff) {
                 return App.game.party.getRegionAttackMultiplier();
             }
         }
@@ -223,7 +245,7 @@ class BreedingController {
     private static _cachedSortedFilteredList = [];
     public static viewSortedFilteredList: KnockoutComputed<Array<PartyPokemon>> = ko.pureComputed(() => {
         // Pause updates while the modal is closed
-        if (modalUtils.observableState.breedingModal === 'show') {
+        if (DisplayObservables.modalState.breedingModal === 'show') {
             BreedingController._cachedSortedFilteredList = BreedingController.hatcherySortedFilteredList();
             // Finish resetting the LazyLoader display after filters change
             if (BreedingController.viewResetReady) {
@@ -237,7 +259,7 @@ class BreedingController {
     private static hatcherySortedFilteredList = ko.pureComputed(() => {
         const hatcheryList = Array.from(BreedingController.hatcheryFilteredList());
         // Don't adjust attack based on region if debuff is disabled
-        const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
+        const region = App.game.challenges.list.regionalAttackDebuff.active() ? Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue() : -1;
         hatcheryList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
         // If a filter or sort order just changed
         if (BreedingController.viewResetWaiting.peek()) {
@@ -255,7 +277,7 @@ class BreedingController {
     }).extend({ rateLimit: 100 }); // deferUpdates isn't good enough to prevent lag
 
     // Used to reset the LazyLoaderdisplay
-    public static resetHatcheryFlag = ko.computed(() => modalUtils.observableState.breedingModal === 'hidden');
+    public static resetHatcheryFlag = ko.computed(() => DisplayObservables.modalState.breedingModal === 'hidden');
 
     private static resetFilteredListNotifier = ko.observable(null);
 
