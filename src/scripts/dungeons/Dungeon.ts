@@ -3196,13 +3196,14 @@ dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
                 new GymPokemon('Mightyena', 450000, 24),
                 new GymPokemon('Zubat', 450000, 24),
                 new GymPokemon('Camerupt', 470000, 25),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Maxie'),
+            ], { weight: 2, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Maxie'),
         new DungeonTrainer('Magma Leader',
             [
                 new GymPokemon('Mightyena', 4500000, 54),
                 new GymPokemon('Zubat', 4500000, 54),
                 new GymPokemon('Mega Camerupt', 4700000, 55),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
+            ], { weight: 2, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
+        new DungeonBossPokemon('Meta Groudon', 1820000, 20, {hide: true, requirement: new QuestLineStepCompletedRequirement('A Meta Discovery', 3)}),
         new DungeonBossPokemon('Vivillon (Sun)',  96662023, 60, {
             hide: true,
             requirement: new OneFromManyRequirement([
@@ -12617,7 +12618,10 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
             {loot: 'LargeRestore'},
             {loot: 'Moonball'},
         ],
-        legendary: [{loot: 'Fairy_Feather'}],
+        legendary: [
+            {loot: 'Fairy_Feather'},
+            {loot: 'Flowering Celebi', ignoreDebuff: true, requirement: new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13)},
+        ],
     },
     23764848,
     [

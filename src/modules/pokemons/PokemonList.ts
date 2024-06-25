@@ -6113,7 +6113,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 132.01,
-        'name': 'Ditto (Transforming)',
+        'name': 'Ditto (Magikarp)',
         'catchRate': 35,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -24528,6 +24528,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
+        'evolutions': [StoneEvolution('Marshadow', 'Marshadow (Zenith)', StoneType.Crystallized_shadow)],
         'base': {
             'hitpoints': 90,
             'attack': 125,
@@ -24539,6 +24540,28 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'heldItem': { type: ItemType.item, id: 'Crystallized_shadow' },
+    },
+    {
+        'id': 802.01,
+        'name': 'Marshadow (Zenith)',
+        'type': [PokemonType.Fighting, PokemonType.Ghost],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 90,
+            'attack': 125,
+            'specialAttack': 90,
+            'defense': 80,
+            'specialDefense': 90,
+            'speed': 125,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+        'heldItem': { type: ItemType.item, id: 'Crystallized_shadow' },
     },
     {
         'id': 803,
