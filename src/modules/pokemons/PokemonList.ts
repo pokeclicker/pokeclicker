@@ -1622,6 +1622,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestType': [ContestType.Beautiful, ContestType.Cute],
     },
     {
         'id': 25.13,
@@ -1642,6 +1643,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestType': [ContestType.Cute, ContestType.Smart],
     },
     {
         'id': 25.14,
@@ -1724,7 +1726,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'contestType': [ContestType.Cool],
+        'contestType': [ContestType.Cool, ContestType.Balanced],
     },
     {
         'id': 25.18,
@@ -1745,7 +1747,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'contestType': [ContestType.Beautiful],
+        'contestType': [ContestType.Beautiful, ContestType.Balanced],
     },
     {
         'id': 25.19,
@@ -1766,7 +1768,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'contestType': [ContestType.Cute],
+        'contestType': [ContestType.Cute, ContestType.Balanced],
     },
     {
         'id': 25.20,
@@ -1787,7 +1789,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'contestType': [ContestType.Smart],
+        'contestType': [ContestType.Smart, ContestType.Balanced],
     },
     {
         'id': 25.21,
@@ -1808,7 +1810,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'contestType': [ContestType.Tough],
+        'contestType': [ContestType.Tough, ContestType.Balanced],
     },
     {
         'id': 25.22,
@@ -6207,6 +6209,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestType': [ContestType.Cute, ContestType.Smart],
     },
     {
         'id': 134,
