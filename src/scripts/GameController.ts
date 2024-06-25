@@ -303,17 +303,18 @@ class GameController {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
-                    const idx = cycle.findIndex(r => r == player.route);
-                    if (idx === -1) {
+                    if (cycle.length > 1) {
+                        const idx = cycle.findIndex(r => r == player.route);
+                        // Allow '=' to fallthrough to '+' since they share a key on many keyboards
+                        switch (key) {
+                            case '=':
+                            case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
+                                return e.preventDefault();
+                            case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
+                                return e.preventDefault();
+                        }
+                    } else {
                         return e.preventDefault();
-                    }
-                    // Allow '=' to fallthrough to '+' since they share a key on many keyboards
-                    switch (key) {
-                        case '=':
-                        case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
-                            return e.preventDefault();
-                        case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
-                            return e.preventDefault();
                     }
                 }
 
@@ -364,16 +365,17 @@ class GameController {
                         return e.preventDefault();
                     } else if (player.town instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
                         const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
-                        const idx = cycle.findIndex(d => d.name == player.town.name);
-                        if (idx === -1) {
+                        if (cycle.length > 1) {
+                            const idx = cycle.findIndex(d => d.name == player.town.name);
+                            switch (key) {
+                                case '=' :
+                                case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
+                                    return e.preventDefault();
+                                case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
+                                    return e.preventDefault();
+                            }
+                        } else {
                             return e.preventDefault();
-                        }
-                        switch (key) {
-                            case '=' :
-                            case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
-                                return e.preventDefault();
-                            case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
-                                return e.preventDefault();
                         }
                     }
                 }

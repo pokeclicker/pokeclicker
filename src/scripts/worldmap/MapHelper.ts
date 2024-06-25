@@ -377,9 +377,11 @@ class MapHelper {
             // Gain queue slots based on the completed region
             App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion() - 1));
             // Update hatchery region filter to include new region if all previous regions selected
-            if (BreedingFilters.region.value() == (2 << (player.highestRegion() - 1)) - 1) {
-                BreedingFilters.region.value((2 << player.highestRegion()) - 1);
-                Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value());
+            const previousRegionFullMask = (2 << (player.highestRegion() - 1)) - 1;
+            const regionFilterMask = Settings.getSetting('breedingRegionFilter').value & previousRegionFullMask;
+            if (regionFilterMask == previousRegionFullMask) {
+                const newRegionFullMask = (2 << player.highestRegion()) - 1;
+                Settings.setSettingByName('breedingRegionFilter', newRegionFullMask);
             }
             $('#pickStarterModal').modal('show');
         }

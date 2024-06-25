@@ -31,7 +31,6 @@ import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
-import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import WeatherApp from './weather/WeatherApp';
@@ -46,7 +45,7 @@ import MoonCyclePhaseRequirement from './requirements/MoonCyclePhaseRequirement'
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
-import Settings, { pokedexFilterSettingKeys } from './settings/index';
+import Settings, { breedingFilterSettingKeys, pokedexFilterSettingKeys } from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
 import AchievementCategory from './achievements/AchievementCategory';
@@ -204,6 +203,7 @@ import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
+import GameLoadState from './utilities/GameLoadState';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -251,10 +251,10 @@ Object.assign(<any>window, {
     SeededDateRand,
     Rand,
     Settings,
+    breedingFilterSettingKeys,
     pokedexFilterSettingKeys,
     NotificationConstants,
     Notifier,
-    BreedingFilters,
     SortOptionConfigs,
     SortOptions,
     AchievementSortOptionConfigs,
@@ -420,4 +420,5 @@ Object.assign(<any>window, {
     ItemRequirement,
     ChristmasPresent,
     DamageCalculator,
+    GameLoadState,
 });

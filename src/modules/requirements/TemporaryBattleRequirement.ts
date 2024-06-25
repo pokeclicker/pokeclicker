@@ -13,6 +13,6 @@ export default class TemporaryBattleRequirement extends Requirement {
     public hint(): string {
         const tempBattle = TemporaryBattleList[this.battleName];
         const locationHint = ` ${tempBattle.parent ? 'in' : 'near'} ${tempBattle.getTown().name.replace(/\.$/, '')}`;
-        return `Requires beating ${this.battleName.replace(/(?: route)?\s\d+$/, '')}${locationHint}.`;
+        return `Requires beating ${tempBattle.getDisplayName()}${locationHint}.`;
     }
 }
