@@ -1179,7 +1179,7 @@ class Farming implements Feature {
             BerryFirmness.Very_Hard,
             [
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
-                'This power resets and pauses the wither timer of other Berries indefinitely.',
+                'This power revitalizes and prevents other berries from withering.',
             ],
             undefined,
             ['Mew']
