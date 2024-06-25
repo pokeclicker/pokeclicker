@@ -2629,9 +2629,7 @@ class Update implements Saveable {
 
             // Multicategory pokemon
             saveData.party.caughtPokemon.forEach(pokemon => {
-                if (pokemon[6]) {
-                    pokemon[6] = [pokemon[6]];
-                }
+                pokemon[6] = [pokemon[6] ?? 0];
             });
 
             // Add Alola story battles
