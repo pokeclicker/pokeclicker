@@ -67,7 +67,7 @@ class ContestHelper {
                 tooltipString += `<div>${ContestType[type]}</div>`;
                 tooltipString += `<div>${ContestType[5]}</div>`;
             } else {
-                tooltipString += `<div>All</div>`;
+                tooltipString += '<div>All</div>';
             }
         }
         return tooltipString;
