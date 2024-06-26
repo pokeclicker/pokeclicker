@@ -80,7 +80,6 @@ type TmpAppType = {
     game: TmpGameType,
     isUsingClient: boolean,
     translation: Translate,
-    isGameLoaded: KnockoutObservable<boolean>,
     start: ()=>void
 };
 
@@ -159,6 +158,7 @@ type TmpTemporaryBattleType = {
     name: string;
     parent?: TmpTownType;
     getTown: () => TmpTownType | undefined;
+    getDisplayName: () => string;
 };
 
 type TmpTownType = {

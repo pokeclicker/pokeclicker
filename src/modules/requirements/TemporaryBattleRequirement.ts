@@ -17,7 +17,7 @@ export default class TemporaryBattleRequirement extends Requirement {
             locationHint = ` ${tempBattle.parent ? 'in' : 'near'} ${tempBattle.getTown().name}`;
             locationHint.replace(/\.$/, ''); // remove trailing period since the hint text adds one
         }
-        const hint = `Requires beating ${this.battleName.replace(/(?: route)?\s\d+$/, '')}${locationHint}.`;
+        const hint = `Requires beating ${tempBattle.getDisplayName()}${locationHint}.`;
         return hint;
     }
 }
