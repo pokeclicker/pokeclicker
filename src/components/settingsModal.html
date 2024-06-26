@@ -79,6 +79,7 @@
                                 <tr><th colspan="2">Other</th></tr>
                             </thead>
                             <tbody>
+                                <tr data-bind="visible: App.game.challenges.list.regionalAttackDebuff.active() && player.highestRegion() > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('displayPokemonListRegionalDebuff')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
