@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/achievements/Achievement.d.ts" />
 
@@ -606,3 +607,5 @@ class AchievementHandler {
         }, 1);
     }
 }
+
+AchievementHandler satisfies TmpAchievementHandlerType;

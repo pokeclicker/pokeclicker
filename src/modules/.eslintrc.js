@@ -25,6 +25,9 @@ module.exports = {
         DungeonRunner: 'readonly',
         GymRunner: 'readonly',
         AchievementHandler: 'readonly',
+        PokemonLocations: 'readonly',
+        PokemonFactory: 'readonly',
+        PartyController: 'readonly',
     },
     rules: {
         indent: 'off',
