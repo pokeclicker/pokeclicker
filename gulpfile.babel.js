@@ -188,7 +188,8 @@ gulp.task('scripts', () => {
         .pipe(replace('declare {};', ''))
         // Wrap globally-exported module declarations in namespaces for scripts compatibility
         .pipe(globalModulesFilter)
-        .pipe(replace(/(?=declare)/, function handleReplace() {
+        .pipe(replace(/(?<=^|\n)(?=\s*declare)/, function handleReplace() {
+            // insert before the first declaration of the file
             const filename = this.file.basename.replace(/\..*$/, '');
             return `declare namespace ${filename} {\n`;
         }))
