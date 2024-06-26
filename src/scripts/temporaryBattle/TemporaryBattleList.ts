@@ -3813,6 +3813,7 @@ TemporaryBattleList['Anomaly Mewtwo 1'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.01',
         hideTrainer: true,
+        returnTown: 'Cerulean Cave',
     }
 );
 TemporaryBattleList['Anomaly Mewtwo 2'] = new TemporaryBattle(
@@ -3825,6 +3826,7 @@ TemporaryBattleList['Anomaly Mewtwo 2'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.01',
         hideTrainer: true,
+        returnTown: 'Mt. Silver',
     }
 );
 TemporaryBattleList['Anomaly Mewtwo 3'] = new TemporaryBattle(
@@ -3837,6 +3839,7 @@ TemporaryBattleList['Anomaly Mewtwo 3'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.02',
         hideTrainer: true,
+        returnTown: 'Lilycove City',
     }
 );
 TemporaryBattleList['Anomaly Mewtwo 4'] = new TemporaryBattle(
@@ -3849,6 +3852,7 @@ TemporaryBattleList['Anomaly Mewtwo 4'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.02',
         hideTrainer: true,
+        returnTown: 'Spear Pillar',
     }
 );
 TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
@@ -3861,6 +3865,7 @@ TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.02',
         hideTrainer: true,
+        returnTown: 'Castelia City',
     }
 );
 
