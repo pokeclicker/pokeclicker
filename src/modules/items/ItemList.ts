@@ -362,7 +362,7 @@ ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)');
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']     = new PokemonItem('Burmy (Plant)', 6750);
 ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
-ItemList.Spiritomb            = new PokemonItem('Spiritomb', 6750);
+ItemList.Spiritomb            = new PokemonItem('Spiritomb', 432, Currency.diamond);
 // Unova
 ItemList.Zorua                = new PokemonItem('Zorua', 50625);
 ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 200000);

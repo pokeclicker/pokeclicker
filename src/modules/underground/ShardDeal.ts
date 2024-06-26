@@ -17,6 +17,7 @@ export class ShardDeal {
     public shards: ShardCost[];
     public item: { itemType: Item, amount: number };
     public questPointCost: number;
+    public currencyType: Currency;
     public static list: Partial<Record<ShardTraderLocations, KnockoutObservableArray<ShardDeal>>> = {};
 
     constructor(shardCosts: ShardCost[], item: Item, itemAmount: number) {
@@ -24,6 +25,7 @@ export class ShardDeal {
         this.shards.forEach((s) => { s.shardType = UndergroundItems.getByName(s.shardTypeString); });
         this.item = { itemType: item, amount: itemAmount };
         this.questPointCost = this.item.itemType.basePrice / 4 || 1;
+        this.currencyType = this.item.itemType.currency ?? Currency.questPoint;
     }
 
     public isVisible(): boolean {
@@ -41,7 +43,7 @@ export class ShardDeal {
         }
         if (ItemList[deal.item.itemType.name].isSoldOut()) {
             return false;
-        } else if (deal.questPointCost > App.game.wallet.currencies[Currency.questPoint]()) {
+        } else if (deal.questPointCost > App.game.wallet.currencies[deal.currencyType]()) {
             return false;
         } else {
             return deal.shards.every((value) => player.itemList[value.shardType.itemName]() >= value.amount);
@@ -56,14 +58,14 @@ export class ShardDeal {
                 const maxShardTrades = Math.floor(amt / shard.amount);
                 return maxShardTrades;
             });
-            const qp = App.game.wallet.currencies[Currency.questPoint]();
+            const qp = App.game.wallet.currencies[deal.currencyType]();
             const maxCurrencyTrades = Math.floor(qp / deal.questPointCost);
             const maxTrades = Math.min(maxCurrencyTrades, trades.reduce((a, b) => Math.min(a, b), tradeTimes));
             deal.shards.forEach((value) => player.loseItem(value.shardType.itemName, value.amount * maxTrades));
 
             const amount = deal.item.amount * maxTrades;
             deal.item.itemType.gain(deal.item.amount * maxTrades);
-            App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, Currency.questPoint));
+            App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, deal.currencyType));
             Notifier.notify({
                 message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${pluralizeString(humanifyString(deal.item.itemType.displayName), amount)}.`,
                 type: NotificationConstants.NotificationOption.success,
@@ -731,6 +733,12 @@ export class ShardDeal {
         );
         ShardDeal.list[ShardTraderLocations['Solaceon Town']] = ko.observableArray(
             [
+                new ShardDeal(
+                    [
+                        { shardTypeString: 'Odd Keystone', amount: 1 },
+                    ],
+                    ItemList.Spiritomb,
+                    1),
                 new ShardDeal(
                     [
                         { shardTypeString: 'Yellow Shard', amount: 20 },
