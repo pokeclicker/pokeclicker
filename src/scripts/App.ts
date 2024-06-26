@@ -69,14 +69,20 @@ class App {
             GameController.addKeyListeners();
 
             App.game.initialize();
+            GameLoadState.updateLoadState(GameLoadState.states.initialized);
+
+            // Fix any settings that conflict with the now-loaded game data
+            Settings.checkAndFix();
 
             // Fixes custom theme css if Default theme was different from save theme (must be done before bindings)
             document.body.className = 'no-select';
             ko.applyBindings(App.game);
+            GameLoadState.updateLoadState(GameLoadState.states.appliedBindings);
 
             Preload.hideSplashScreen();
 
             App.game.start();
+            GameLoadState.updateLoadState(GameLoadState.states.running);
 
             // Check if Mobile and deliver a warning around mobile compatability / performance issues
             const isMobile: boolean = /Mobile/.test(navigator.userAgent);

@@ -322,7 +322,7 @@ export type PokemonNameType
     | 'Lapras'
     | 'Gigantamax Lapras'
     | 'Ditto'
-    | 'Ditto (Transforming)'
+    | 'Ditto (Magikarp)'
     | 'Eevee'
     | 'Gigantamax Eevee'
     | 'Let\'s Go Eevee'
@@ -1100,6 +1100,7 @@ export type PokemonNameType
     | 'Swirlix'
     | 'Slurpuff'
     | 'Inkay'
+    | 'Inkay (Pikachu)'
     | 'Malamar'
     | 'Binacle'
     | 'Barbaracle'
@@ -1275,6 +1276,7 @@ export type PokemonNameType
     | 'Magearna'
     | 'Magearna (Original Color)'
     | 'Marshadow'
+    | 'Marshadow (Zenith)'
     | 'Poipole'
     | 'Naganadel'
     | 'Stakataka'
@@ -1633,4 +1635,3 @@ export type PokemonNameType
     | 'Navi Starmobile'
     | 'Ruchbah Starmobile'
     | 'Caph Starmobile';
-    

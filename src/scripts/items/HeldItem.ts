@@ -169,7 +169,7 @@ ItemList.Muscle_Band = new AttackBonusHeldItem('Muscle_Band', 1000, GameConstant
 // Pokemon specific items
 ItemList.Light_Ball = new PokemonRestrictedAttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',
     (pokemon) => Math.floor(pokemon.id) == 25);
-ItemList.Lucky_Punch = new PokemonRestrictedAttackBonusHeldItem('Lucky_Punch', 10000, GameConstants.Currency.money, undefined, 'Lucky Punch', 1.3, GameConstants.Region.galar, 'Happiny, Chansey or Blissey',
+ItemList.Lucky_Punch = new PokemonRestrictedAttackBonusHeldItem('Lucky_Punch', 10000, GameConstants.Currency.money, undefined, 'Lucky Punch', 1.3, GameConstants.Region.sinnoh, 'Happiny, Chansey or Blissey',
     (pokemon) => Math.floor(pokemon.id) == 440 ||  Math.floor(pokemon.id) == 113 || Math.floor(pokemon.id) == 242);
 ItemList.Quick_Powder = new PokemonRestrictedAttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.3, GameConstants.Region.kalos, 'Ditto',
     (pokemon) => Math.floor(pokemon.id) == 132);

@@ -2199,7 +2199,7 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
 TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
     'Terrakion 1',
     [new GymPokemon('Terrakion', 175698480, 50, undefined, false)],
-    'You\'re actually very strong. It\'s very possible that Cobalion trusted you to find us. Well then, where are we supposed to meet? The Moor of Icirrus? Very well, I shall make my way there then. You should come too, Cobalion should know where you might find our companion, Virizion.',
+    'You\'re actually very strong. It\'s very possible that Cobalion trusted you to find us. Well then, where are we supposed to meet? The Moor of Icirrus? Very well, I shall make my way there, then. You should come, too. Cobalion should know where you might find our companion, Virizion.',
     [new QuestLineStepCompletedRequirement('Swords of Justice', 4)],
     undefined,
     {
@@ -3601,6 +3601,21 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
         firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Absolite),
         rewardFunction: () =>
             Notifier.notify({message: 'Congratulations on beating Calem at his best! Come back to fight him again at any time.'}),
+    }
+);
+
+TemporaryBattleList.Twerps = new TemporaryBattle(
+    'Twerps',
+    [
+        new GymPokemon('Meowth', 40271251, 49),
+        new GymPokemon('Pumpkaboo (Super Size)', 40271251, 49),
+        new GymPokemon('Inkay (Pikachu)', 40271251, 51),
+    ],
+    'What do you mean "how is Pikachu floating?", all Pikachu can float! Because, uh... electromagnetism!',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
+    undefined,
+    {
+        displayName: 'Twerps?',
     }
 );
 
@@ -5918,9 +5933,8 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     [new GymPokemon('Flowering Celebi', 2960030616, 100)],
     'Cel Cel! Celebi!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 12)],
-    [new ObtainedPokemonRequirement('Flowering Celebi')],
+    undefined,
     {
-        isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/251.01',
     }
