@@ -20,6 +20,7 @@ import { PokemonNameType } from './PokemonNameType';
 import RoamingPokemon from './RoamingPokemon';
 import RoamingGroup from './RoamingGroup';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
+import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
 
 export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
@@ -93,9 +94,9 @@ export default class RoamingPokemonList {
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Mew'));
 
 // Kanto - Sevii Islands
-RoamingPokemonList.add(Region.kanto, 1, new RoamingPokemon('Raikou', new QuestLineCompletedRequirement('Celio\'s Errand')));
-RoamingPokemonList.add(Region.kanto, 1, new RoamingPokemon('Entei', new QuestLineCompletedRequirement('Celio\'s Errand')));
-RoamingPokemonList.add(Region.kanto, 1, new RoamingPokemon('Suicune', new MultiRequirement([new QuestLineCompletedRequirement('Celio\'s Errand'), new ObtainedPokemonRequirement('Suicune')])));
+RoamingPokemonList.add(Region.kanto, 1, new RoamingPokemon('Raikou', new MultiRequirement([new QuestLineCompletedRequirement('Celio\'s Errand'), new StarterRequirement(Region.kanto, Starter.Water)])));
+RoamingPokemonList.add(Region.kanto, 1, new RoamingPokemon('Entei', new MultiRequirement([new QuestLineCompletedRequirement('Celio\'s Errand'), new OneFromManyRequirement([new StarterRequirement(Region.kanto, Starter.Grass), new StarterRequirement(Region.kanto, Starter.Special)])])));
+RoamingPokemonList.add(Region.kanto, 1, new RoamingPokemon('Suicune', new MultiRequirement([new QuestLineCompletedRequirement('Celio\'s Errand'), new ObtainedPokemonRequirement('Suicune'), new StarterRequirement(Region.kanto, Starter.Fire)])));
 RoamingPokemonList.add(Region.kanto, 1, new RoamingPokemon('Pink Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
 RoamingPokemonList.add(Region.kanto, 1, new RoamingPokemon('Ash\'s Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
 
