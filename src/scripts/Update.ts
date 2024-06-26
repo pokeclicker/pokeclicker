@@ -2627,9 +2627,7 @@ class Update implements Saveable {
 
             // Multicategory pokemon
             saveData.party.caughtPokemon.forEach(pokemon => {
-                if (pokemon[6]) {
-                    pokemon[6] = [pokemon[6]];
-                }
+                pokemon[6] = [pokemon[6] ?? 0];
             });
 
             // Add Alola story battles
@@ -2702,6 +2700,47 @@ class Update implements Saveable {
 
             // The NewYLayer upgrades has been refactored to Items_All, copy the level
             saveData.underground.upgrades.Items_All = saveData.underground.upgrades.NewYLayer;
+
+        },
+
+        '0.10.21': ({ playerData, saveData, settingsData }) => {
+            // Rename settings to match pokedex filter name convention
+            settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
+            delete settingsData.breedingTypeFilter1;
+            settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
+            delete settingsData.breedingTypeFilter2;
+            // Rename settings to accurately describe purpose
+            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
+            delete settingsData.pokedexShinyFilter;
+            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
+            delete settingsData.breedingDisplayFilter;
+
+            // Update breeding filters to use numeric values
+            ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingType1Filter', 'breedingType2Filter', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
+                .forEach((filter) => {
+                    const convertedValue = Number.parseInt(settingsData[filter]);
+                    if (!Number.isNaN(convertedValue)) {
+                        settingsData[filter] = convertedValue;
+                    } else {
+                        delete settingsData[filter];
+                    }
+                });
+            // Update breedingHideAltFilter to use actual booleans
+            settingsData.breedingHideAltFilter = settingsData.breedingHideAltFilter === 'true';
+            // Update breeding type filters to use null for 'any type', matching the pokedex filters
+            if (settingsData.breedingType1Filter == -2) {
+                settingsData.breedingType1Filter = null;
+            }
+            if (settingsData.breedingType2Filter == -2) {
+                settingsData.breedingType2Filter = null;
+            }
+            // Pokémon Center renamed
+            if (playerData._townName == 'Route 3 Pokémon Center') {
+                playerData._townName = 'Route 4 Pokémon Center';
+            }
+
+            // Fix all weird amounts of Pokéballs
+            saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
         },
     };
 
@@ -2762,7 +2801,7 @@ class Update implements Saveable {
         const settingsData = this.getSettingsData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
+        const backupSaveData = JSON.stringify({ player: playerData, save: saveData, settings: settingsData });
 
         const button = document.createElement('a');
         try {

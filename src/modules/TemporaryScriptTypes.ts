@@ -310,6 +310,7 @@ export type TmpTemporaryBattleType = {
     name: string;
     parent?: TmpTownType;
     getTown: () => TmpTownType;
+    getDisplayName: () => string;
 };
 
 export type TmpTownType = {
