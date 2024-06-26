@@ -80,7 +80,7 @@ class QuestLine {
         if (notifyStart) {
             Notifier.notify({
                 title: 'New Quest Line Started!',
-                message: `${quest.description}\n<i>"${this.name}" added to the Quest List!</i>`,
+                message: `${this.description}\n<i>"${this.name}" added to the Quest List!</i>`,
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 5 * GameConstants.MINUTE,
             });
