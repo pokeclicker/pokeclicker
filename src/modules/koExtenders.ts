@@ -1,5 +1,3 @@
-/// <reference path="./koExtenders.d.ts" />
-
 import type { Subscribable, Observable, Computed } from 'knockout';
 
 /*
@@ -13,14 +11,31 @@ import type { Subscribable, Observable, Computed } from 'knockout';
     When using these extenders in a module, import this file to ensure proper dependency tracking.
 */
 
+// Knockout types don't have a way to accurately require writable computeds yet
+type MaybeWritable = Observable | Computed;
+
+function sanitizeNumericValues(val: number): number {
+    if (val > Number.MAX_SAFE_INTEGER) {
+        return Number.MAX_SAFE_INTEGER;
+    } else if (val < Number.MIN_SAFE_INTEGER) {
+        return Number.MIN_SAFE_INTEGER;
+    } else {
+        return val;
+    }
+}
+
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
-const numericExtender = (target: Subscribable, precision: number) => {
+const numericExtender = (target: MaybeWritable, precision: number) => {
+    if (!ko.isWritableObservable(target)) {
+        throw new Error('Cannot apply \'numeric\' extender to a non-writable observable!');
+    }
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<number>({
         read: target, // always return the original observable's value
         write: (newValueRaw: string | number) => {
-            const newValue = Number(newValueRaw);
+            let newValue = Number(newValueRaw);
             if (Number.isNaN(newValue)) { return; }
+            newValue = sanitizeNumericValues(newValue);
 
             const current = target();
             const roundingMultiplier = 10 ** precision;
@@ -32,19 +47,28 @@ const numericExtender = (target: Subscribable, precision: number) => {
             } else if (newValue !== current) {
                 // if the rounded value is the same, but a different value was
                 // written, force a notification for the current field
-                target.notifySubscribers(valueToWrite);
+                result.notifySubscribers(current);
             }
         },
-    }).extend({ notify: 'always' });
+    });
 
     // initialize with current value to make sure it is rounded appropriately
-    result(target());
+    const initialValue = Number(target());
+    if (Number.isNaN(initialValue)) {
+        // forcibly convert NaN to 0
+        result(0);
+    } else {
+        result(sanitizeNumericValues(initialValue));
+    }
 
     // return the new computed observable
     return result;
 };
 
-const booleanExtender = (target: Subscribable) => {
+const booleanExtender = (target: MaybeWritable) => {
+    if (!ko.isWritableObservable(target)) {
+        throw new Error('Cannot apply \'boolean\' extender to a non-writable observable!');
+    }
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<boolean>({
         read: target, // always return the original observable's value
@@ -52,6 +76,9 @@ const booleanExtender = (target: Subscribable) => {
             target(!!newValueRaw);
         },
     }).extend({ notify: 'always' });
+
+    // Make sure notifications also bubble up from the underlying observable
+    target.extend({ notify: 'always' });
 
     // initialize with current value to make sure it is rounded appropriately
     result(target());
@@ -74,6 +101,10 @@ const arrayEqualsExtender = (target: Observable<any[]> | Computed<any[]>) => {
     };
     return target;
 };
+
+export interface SkippableRateLimit extends Subscribable<unknown> {
+    evaluateEarly: () => void;
+}
 
 // A modified version of the rateLimit extender that can be forced to evaluate early
 // Usage: const example = ko.pureComputed(() => { whatever }).extend({ skippableRateLimit: GameConstants.WEEK });
@@ -131,3 +162,13 @@ Object.assign(ko.extenders, {
     arrayEquals: arrayEqualsExtender,
     skippableRateLimit: skippableRateLimitExtender,
 });
+
+declare module 'knockout' {
+    export interface ExtendersOptions {
+        numeric: number;
+        boolean: true;
+        arrayEquals: true;
+        skippableRateLimit: number;
+    }
+}
+
