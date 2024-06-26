@@ -302,18 +302,21 @@ class GameController {
             if (visibleModals === 0) {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
-                    const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
-                    if (cycle.length > 1) {
+                    let moveDirection = null;
+                    // Allow '=' to fallthrough to '+' since they share a key on many keyboards
+                    switch (key) {
+                        case '=':
+                        case '+':
+                            moveDirection = 1;
+                        case '-':
+                            moveDirection = -1;
+                    }
+                    if (moveDirection != null) {
+                        const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
                         const idx = cycle.findIndex(r => r == player.route);
-                        // Allow '=' to fallthrough to '+' since they share a key on many keyboards
-                        switch (key) {
-                            case '=':
-                            case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
-                                return e.preventDefault();
-                            case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
-                                return e.preventDefault();
+                        if (cycle.length > 1 && idx > -1) {
+                            MapHelper.moveToRoute(cycle[(idx + cycle.length + moveDirection) % cycle.length], player.region);
                         }
-                    } else {
                         return e.preventDefault();
                     }
                 }
@@ -364,17 +367,21 @@ class GameController {
                         }
                         return e.preventDefault();
                     } else if (player.town instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
-                        const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
-                        if (cycle.length > 1) {
+                        let moveDirection = null;
+                        // Allow '=' to fallthrough to '+' since they share a key on many keyboards
+                        switch (key) {
+                            case '=':
+                            case '+':
+                                moveDirection = 1;
+                            case '-':
+                                moveDirection = -1;
+                        }
+                        if (moveDirection != null) {
+                            const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
                             const idx = cycle.findIndex(d => d.name == player.town.name);
-                            switch (key) {
-                                case '=' :
-                                case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
-                                    return e.preventDefault();
-                                case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
-                                    return e.preventDefault();
+                            if (cycle.length > 1 && idx > -1) {
+                                MapHelper.moveToTown(cycle[(idx + cycle.length + moveDirection) % cycle.length].name);
                             }
-                        } else {
                             return e.preventDefault();
                         }
                     }
