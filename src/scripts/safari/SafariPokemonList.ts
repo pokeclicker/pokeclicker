@@ -1,14 +1,20 @@
+type OverworldSpriteType = 'base' | 'self' | PokemonNameType;
+
 class SafariEncounter {
+    public requirement: Requirement;
     constructor(
         public name: PokemonNameType,
         public weight: number,
         public environments: SafariEnvironments[] = [SafariEnvironments.Grass],
-        private requireCaught = false,
-        public showUncaught = false // Whether the pokemon silhouette will be shown in the ranger NPC when uncaught
-    ) {}
+        requirement?: true | Requirement, // True is used to simplify Friend Safari Pokémon generation
+        public hide = true, // Hide from the list
+        public sprite : OverworldSpriteType = 'base'
+    ) {
+        this.requirement = requirement === true ? new ObtainedPokemonRequirement(this.name) : requirement;
+    }
 
     public isAvailable(): boolean {
-        return !this.requireCaught ? true : App.game.party.alreadyCaughtPokemonByName(this.name);
+        return this.requirement?.isCompleted() ?? true;
     }
 }
 
@@ -18,12 +24,16 @@ class SafariPokemonList {
         [GameConstants.Region.johto]: ko.observableArray(),
         [GameConstants.Region.sinnoh]: ko.observableArray(),
         [GameConstants.Region.kalos]: ko.observableArray(),
+        [GameConstants.Region.alola]: ko.observableArray(),
     };
 
     public static generateSafariLists() {
         this.generateKantoSafariList();
         this.generateJohtoSafariList();
         this.generateSinnohSafariList();
+        this.generateAlolaSafariList();
+
+        // Always generate Kalos Safari last
         this.generateKalosSafariList();
     }
 
@@ -54,8 +64,8 @@ class SafariPokemonList {
             new SafariEncounter('Poliwag', 15, [SafariEnvironments.Water]),
             new SafariEncounter('Goldeen', 15, [SafariEnvironments.Water]),
             new SafariEncounter('Seaking', 5, [SafariEnvironments.Water]),
-            new SafariEncounter('Dratini', 10, [SafariEnvironments.Water], true),
-            new SafariEncounter('Dragonair', 4, [SafariEnvironments.Water], true),
+            new SafariEncounter('Dratini', 10, [SafariEnvironments.Water], true, false),
+            new SafariEncounter('Dragonair', 4, [SafariEnvironments.Water], true, false),
         ];
 
         SafariPokemonList.list[GameConstants.Region.kanto](pokemon);
@@ -177,7 +187,7 @@ class SafariPokemonList {
         const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
 
         const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true, true);
+            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true, false);
         });
 
         pokemon.push(new SafariEncounter('Shuckle', 2));
@@ -193,6 +203,35 @@ class SafariPokemonList {
         pokemon.push(new SafariEncounter('Lapras', 2, [SafariEnvironments.Water]));
 
         SafariPokemonList.list[GameConstants.Region.kalos](pokemon);
+    }
+
+    private static generateAlolaSafariList() {
+        // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
+        // Filler
+        const pokemon : SafariEncounter[] = [
+            // Grass
+            new SafariEncounter('Pidgeotto', 2.7),
+            // Water
+            new SafariEncounter('Magikarp', 0.7, [SafariEnvironments.Water]),
+            new SafariEncounter('Magikarp Skelly', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Quick_League), false, 'self'),
+            new SafariEncounter('Magikarp Calico (White, Orange)', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpen'), false, 'self'),
+            new SafariEncounter('Magikarp Pink Dapples', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Fast_League), false, 'self'),
+            new SafariEncounter('Magikarp Grey Diamonds', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpress 3'), false, 'self'),
+            new SafariEncounter('Magikarp Purple Bubbles', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Heal_League), false, 'self'),
+            new SafariEncounter('Magikarp Purple Patches', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpella 3'), false, 'self'),
+            new SafariEncounter('Magikarp Brown Tiger', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Ultra_League), false, 'self'),
+            new SafariEncounter('Magikarp Orange Forehead', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.E4_League), false, 'self'),
+            new SafariEncounter('Magikarp Black Mask', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Tykarp 2'), false, 'self'),
+            new SafariEncounter('Magikarp Saucy Blue', 2, [SafariEnvironments.Water], new QuestLineCompletedRequirement('Dr. Splash\'s Research Project'), false, 'self'),
+            // Both, meme encounter
+            new SafariEncounter('Ditto (Magikarp)', 0.3, [SafariEnvironments.Water, SafariEnvironments.Grass],
+                new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => Math.floor(p.id) === pokemonMap.Magikarp.id, 'Catch more Magikarp species.', 6),
+                false,
+                'Magikarp'
+            ),
+        ];
+
+        SafariPokemonList.list[GameConstants.Region.alola](pokemon);
     }
 
     // Get SafariEnvironment according to the Pokemon types
@@ -211,5 +250,35 @@ class SafariPokemonList {
             safariEnvironments.push(SafariEnvironments.Grass);
         }
         return safariEnvironments;
+    }
+
+    public static getDisplayList(region = player.region): EncounterInfo[] {
+        const encounters = [];
+
+        if (!SafariPokemonList.list[region]) {
+            return encounters;
+        }
+
+        const list = SafariPokemonList.list[region]();
+        list.forEach(e => {
+            if (e.hide && !e.isAvailable()) {
+                return;
+            }
+            const pokemon = PokemonHelper.getPokemonByName(e.name);
+            const partyPokemon = App.game.party.getPokemonByName(e.name);
+            const eData = {
+                image: PokemonHelper.getImage(pokemon.id, undefined, undefined, GameConstants.ShadowStatus.None),
+                pkrsImage: partyPokemon?.pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[partyPokemon.pokerus]}.png` : '',
+                EVs: partyPokemon?.pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${partyPokemon.evs().toLocaleString('en-US')}` : '',
+                shiny:  partyPokemon?.shiny || false,
+                hide: false, // We already filter out hidden Pokémon
+                uncaught: !partyPokemon,
+                lock: !e.isAvailable(),
+                lockMessage: e.isAvailable() ? '' : e.requirement.hint(),
+            };
+            encounters.push(eData);
+        });
+
+        return encounters;
     }
 }

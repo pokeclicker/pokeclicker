@@ -2618,6 +2618,7 @@ class Update implements Saveable {
                 }
             });
         },
+
         '0.10.20': ({ playerData, saveData, settingsData }) => {
             // Add Olivine Lighthouse dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 29);
@@ -2628,10 +2629,120 @@ class Update implements Saveable {
 
             // Multicategory pokemon
             saveData.party.caughtPokemon.forEach(pokemon => {
-                if (pokemon[6]) {
-                    pokemon[6] = [pokemon[6]];
-                }
+                pokemon[6] = [pokemon[6] ?? 0];
             });
+
+            // Add Alola story battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 225);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 227);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 228);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 229);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 230);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 236);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 237);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 242);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 243);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 244);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 245);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 248);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 249);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 250);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 251);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 262);
+            // Reset temporary battles important to story
+            saveData.statistics.temporaryBattleDefeated[247] = 0; // Gladion 2
+            saveData.statistics.temporaryBattleDefeated[252] = 0; // Necrozma
+            saveData.statistics.temporaryBattleDefeated[253] = 0; // Ultra Megalopolis
+            saveData.statistics.temporaryBattleDefeated[261] = 0; // Gladion 3
+            // Reset questline Eater of Light if it exists in the save
+            const eaterID = saveData.quests.questLines.findIndex(ql => ql.name == 'Eater of Light');
+            if (eaterID > -1) {
+                saveData.quests.questLines.splice(eaterID, 1);
+            }
+            // Reset/Remove questline Mina\'s Trial if in the save
+            const minaID = saveData.quests.questLines.findIndex(ql => ql.name == 'Mina\'s Trial');
+            if (minaID > -1) {
+                saveData.quests.questLines.splice(minaID, 1);
+            }
+            // Reset Mina\'s Trial temporary battles
+            saveData.statistics.temporaryBattleDefeated[254] = 0;
+            saveData.statistics.temporaryBattleDefeated[255] = 0;
+            saveData.statistics.temporaryBattleDefeated[256] = 0;
+            saveData.statistics.temporaryBattleDefeated[257] = 0;
+            saveData.statistics.temporaryBattleDefeated[258] = 0;
+            saveData.statistics.temporaryBattleDefeated[259] = 0;
+            saveData.statistics.temporaryBattleDefeated[260] = 0;
+            // Start Alola story quests if player has beaten temp battles already
+            // Hau 1
+            if (saveData.statistics.temporaryBattleDefeated[224]) {
+                Update.startQuestLine(saveData, 'Welcome to Paradise, Cousin!');
+            }
+            /* Uncomment and move once Z-Moves are ready
+            // Give Z-Power_Ring key item if Hau 2 defeated
+            if (saveData.statistics.temporaryBattleDefeated[226]) {
+                saveData.keyItems['Z-Power_Ring'] = true;
+                KeyItemController.showGainModal(KeyItemType['Z-Power_Ring']);
+            }*/
+            // Sina and Dexio
+            if (saveData.statistics.temporaryBattleDefeated[232] && saveData.statistics.temporaryBattleDefeated[233]) {
+                Update.startQuestLine(saveData, 'Symbiotic Relations');
+            }
+            // Hau 5
+            if (saveData.statistics.temporaryBattleDefeated[241]) {
+                Update.startQuestLine(saveData, 'Child of the Stars');
+            }
+
+            // Reimburse Survey Efficiency upgrade
+            const surveyEfficiencyLevel = saveData.underground.upgrades.Survey_Efficiency;
+            if (surveyEfficiencyLevel) {
+                const surveyEfficiencyCost = GameHelper.createArray(100, 400, 100);
+                const investedDiamonds = surveyEfficiencyCost.slice(0, surveyEfficiencyLevel).reduce((acc, cur) => acc + cur, 0);
+                saveData.wallet.currencies[GameConstants.Currency.diamond] += investedDiamonds;
+            }
+
+            // The NewYLayer upgrades has been refactored to Items_All, copy the level
+            saveData.underground.upgrades.Items_All = saveData.underground.upgrades.NewYLayer;
+
+        },
+
+        '0.10.21': ({ playerData, saveData, settingsData }) => {
+            // Rename settings to match pokedex filter name convention
+            settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
+            delete settingsData.breedingTypeFilter1;
+            settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
+            delete settingsData.breedingTypeFilter2;
+            // Rename settings to accurately describe purpose
+            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
+            delete settingsData.pokedexShinyFilter;
+            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
+            delete settingsData.breedingDisplayFilter;
+
+            // Update breeding filters to use numeric values
+            ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingType1Filter', 'breedingType2Filter', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
+                .forEach((filter) => {
+                    const convertedValue = Number.parseInt(settingsData[filter]);
+                    if (!Number.isNaN(convertedValue)) {
+                        settingsData[filter] = convertedValue;
+                    } else {
+                        delete settingsData[filter];
+                    }
+                });
+            // Update breedingHideAltFilter to use actual booleans
+            settingsData.breedingHideAltFilter = settingsData.breedingHideAltFilter === 'true';
+            // Update breeding type filters to use null for 'any type', matching the pokedex filters
+            if (settingsData.breedingType1Filter == -2) {
+                settingsData.breedingType1Filter = null;
+            }
+            if (settingsData.breedingType2Filter == -2) {
+                settingsData.breedingType2Filter = null;
+            }
+            // Pokémon Center renamed
+            if (playerData._townName == 'Route 3 Pokémon Center') {
+                playerData._townName = 'Route 4 Pokémon Center';
+            }
+
+            // Fix all weird amounts of Pokéballs
+            saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
         },
     };
 
@@ -2692,7 +2803,7 @@ class Update implements Saveable {
         const settingsData = this.getSettingsData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
+        const backupSaveData = JSON.stringify({ player: playerData, save: saveData, settings: settingsData });
 
         const button = document.createElement('a');
         try {

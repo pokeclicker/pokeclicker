@@ -1,4 +1,4 @@
-<g data-bind='if: player.region == GameConstants.Region.kalos, childrenComplete: () => GameController.applyRouteBindings()'>
+<g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
         'xlink:href':'assets/images/kalos.png?v=$VERSION',
         href:'assets/images/kalos.png?v=$VERSION'
@@ -450,6 +450,17 @@
     <%- include('templates/mapTown',
         { name: "Cyllage City"
         , x: 20, y: 31
+        })
+    %>
+
+    <!--Disguised Shop-->
+    <%- include('templates/mapOverlay',
+        { name: "Disguised Shop"
+        , x: 5, y: 29
+        , width: 1, height: 1
+        , databind: "click:function(){MapHelper.moveToTown('Disguised Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Disguised Shop') }"
+        , visible:  "App.game.statistics.routeKills['kalos'][10]() >= 10"
+        , image: "assets/images/map/transparent.png"
         })
     %>
 

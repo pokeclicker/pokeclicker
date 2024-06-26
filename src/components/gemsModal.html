@@ -2,9 +2,9 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
        <div class="modal-content">
             <div class="modal-header">
-                <h5>Gems</h5>
+                <h5 class="mb-0">Gems</h5>
                 <button type="button" class="btn btn-info"
-                        style="position: absolute; right: 0px; top: 0px; width: auto; height: 63px; padding: 10px;"
+                        style="position: absolute; right: 0px; top: 0px; width: auto; height: 55px; padding: 10px;"
                         data-bind="tooltip: { title: 'Use gems to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get gems based on its type.', trigger: 'hover', placement:'left' }">
                     ?
                 </button>
@@ -14,21 +14,20 @@
                 <p data-bind="visible: App.game.challenges.list.disableGems.active()" class="bg-danger my-0 sticky-top">
                     Gem bonuses are disabled.
                 </p>
-                <table class='table table-sm table-hover m-0'>
+                <table class='table table-sm m-0'>
                     <!-- ko foreach: Array(Gems.nTypes) -->
-                        <thead>
+                        <tbody>
                             <tr>
-                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-gem-' + $index() }, click: function() { App.game.gems.gemCollapsed[$index()] = !App.game.gems.gemCollapsed[$index()]; }">
-                                    <h3>
-                                        <knockout data-bind="text: PokemonType[$index()]"></knockout>
-                                        <div class="float-right">
-                                            <img width=32px data-bind='attr: { src: Gems.image($index()) }'/>
-                                            <knockout data-bind="text: App.game.gems.gemWallet[$index()]().toLocaleString('en-US')"></knockout>
-                                        </div>
-                                    </h3>
-                                </th>
+                                <td colspan="4" class="clickable text-left h5" data-toggle="collapse"
+                                    data-bind="attr: { 'href': '#collapse-gem-' + $index() }, click: function() { App.game.gems.gemCollapsed[$index()] = !App.game.gems.gemCollapsed[$index()]; }">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 font-weight-bold" data-bind="text: PokemonType[$index()]"></div>
+                                        <img width="32px" data-bind='attr: { src: Gems.image($index()) }'/>
+                                        <knockout data-bind="text: App.game.gems.gemWallet[$index()]().toLocaleString('en-US')"></knockout>
+                                    </div>
+                                </td>
                             </tr>
-                        </thead>
+                        </tbody>
                         <tbody data-bind="class: 'collapse' + (App.game.gems.gemCollapsed[$index()] ? '' : ' show'), attr: { id: 'collapse-gem-' + $index()}">
                             <!-- ko foreach: Array(Gems.nEffects) -->
                                 <tr data-bind='if: App.game.gems.isValidUpgrade($parentContext.$index(), $index())'>

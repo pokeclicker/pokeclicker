@@ -2,23 +2,18 @@
  * Class which controls the UI of the game.
  */
 class GameController {
-    static applyRouteBindings() {
-        $('#map path, #map rect').hover(function () {
-            let tooltipText = $(this).attr('data-town');
-            const route = $(this).attr('data-route');
-            if (route) {
-                tooltipText = Routes.getName(Number(route), player.region);
-            }
-            if (tooltipText) {
-                const tooltip = $('#mapTooltip');
-                tooltip.text(tooltipText);
-                tooltip.css('visibility', 'visible');
-            }
-        }, () => {
+    static showMapTooltip(tooltipText: string) {
+        if (tooltipText) {
             const tooltip = $('#mapTooltip');
-            tooltip.text('');
-            tooltip.css('visibility', 'hidden');
-        });
+            tooltip.text(tooltipText);
+            tooltip.css('visibility', 'visible');
+        }
+    }
+
+    static hideMapTooltip() {
+        const tooltip = $('#mapTooltip');
+        tooltip.text('');
+        tooltip.css('visibility', 'hidden');
     }
 
     static convertKey(key: string) {
@@ -308,14 +303,16 @@ class GameController {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
-                    const idx = cycle.findIndex(r => r == player.route());
-                    // Allow '=' to fallthrough to '+' since they share a key on many keyboards
-                    switch (key) {
-                        case '=':
-                        case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
-                            return e.preventDefault();
-                        case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
-                            return e.preventDefault();
+                    if (cycle.length > 1) {
+                        const idx = cycle.findIndex(r => r == player.route);
+                        // Allow '=' to fallthrough to '+' since they share a key on many keyboards
+                        switch (key) {
+                            case '=':
+                            case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
+                                return e.preventDefault();
+                            case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
+                                return e.preventDefault();
+                        }
                     }
                 }
 
@@ -348,25 +345,25 @@ class GameController {
                 // Within towns
                 if (App.game.gameState === GameConstants.GameState.town) {
                     if (key === Settings.getSetting('hotkey.town.start').value) {
-                        if (player.town() instanceof DungeonTown) {
-                            DungeonRunner.initializeDungeon(player.town().dungeon);
+                        if (player.town instanceof DungeonTown) {
+                            DungeonRunner.initializeDungeon(player.town.dungeon);
                         } else {
-                            player.town().content[0].protectedOnclick();
+                            player.town.content[0].protectedOnclick();
                         }
                         return e.preventDefault();
                     } else if (isNumberKey) {
                         // Check if a number higher than 0 and less than our towns content was pressed
-                        const filteredContent = player.town().content.filter(c => c.isVisible());
-                        const filteredNPCs = player.town().npcs?.filter(n => n.isVisible());
+                        const filteredContent = player.town.content.filter(c => c.isVisible());
+                        const filteredNPCs = player.town.npcs?.filter(n => n.isVisible());
                         if (numberKey < filteredContent.length) {
                             filteredContent[numberKey].protectedOnclick();
                         } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
                             NPCController.openDialog(filteredNPCs[numberKey - filteredContent.length]);
                         }
                         return e.preventDefault();
-                    } else if (player.town() instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
+                    } else if (player.town instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
                         const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
-                        const idx = cycle.findIndex(d => d.name == player.town().name);
+                        const idx = cycle.findIndex(d => d.name == player.town.name);
                         switch (key) {
                             case '=' :
                             case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);

@@ -42,7 +42,7 @@ class FarmController {
             $('#farmModal').modal('show');
         } else {
             Notifier.notify({
-                message: `You need the ${GameConstants.humanifyString(KeyItemType[KeyItemType.Wailmer_pail])} to access this location.\n<i>Clear Route 13 or 15 first.</i>`,
+                message: `You need the ${GameConstants.humanifyString(KeyItemType[KeyItemType.Wailmer_pail])} to access this location.\n<i>Clear Route 6 first.</i>`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -262,10 +262,8 @@ class FarmController {
             if (typeof aura === 'undefined') {
                 return;
             }
-            if (aura() !== 1 && idx !== AuraType.Repel) {
+            if (aura() !== 1) {
                 tooltip.push(`${AuraType[idx]}: ×${aura().toLocaleString('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 })}`);
-            } else if (aura() !== 0 && idx === AuraType.Repel) {
-                tooltip.push(`${AuraType[idx]}: ${aura().toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
             }
 
         });
@@ -320,5 +318,7 @@ class FarmController {
         }
     }
 
+    public static shortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
+        return App.game.farming.canAccess() && !Settings.getSetting('showFarmModule').observableValue();
+    });
 }
-

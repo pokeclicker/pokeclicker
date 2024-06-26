@@ -132,6 +132,7 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('breedingEfficiencyAllModifiers')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableBlinking')}"></tr>
                                 <tr data-bind="with: Settings.getSetting('disableAutoSave')">
                                     <td class="p-2">
                                         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`"></label>
@@ -171,7 +172,7 @@
                                             onchange="(() => {
                                                 const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
                                                 this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
-                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
+                                            })(), Settings.setSettingByName(this.name, +this.value)
                                         ">
                                     </td>
                                 </tr>

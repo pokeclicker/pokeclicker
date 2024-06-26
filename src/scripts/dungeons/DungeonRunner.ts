@@ -1,7 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
 class DungeonRunner {
-
     public static dungeon: Dungeon;
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.DUNGEON_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
@@ -21,22 +20,33 @@ class DungeonRunner {
 
     public static initializeDungeon(dungeon: Dungeon) {
         if (!dungeon.isUnlocked()) {
-            Notifier.notify({
-                message: `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`,
-                type: NotificationConstants.NotificationOption.warning,
-            });
-            return false;
+            if (dungeon.name === 'Viridian Forest') {
+                Notifier.notify({
+                    message: 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+                return false;
+            } else {
+                Notifier.notify({
+                    message: `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return false;
+            }
         }
         DungeonRunner.dungeon = dungeon;
 
-        if (!DungeonRunner.hasEnoughTokens()) {
-            Notifier.notify({
-                message: 'You don\'t have enough Dungeon Tokens.',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
+        // Only charge the player if they aren't using a dungeon guide as they are charged when they start the dungeon
+        if (!DungeonGuides.hired()) {
+            if (!DungeonRunner.hasEnoughTokens()) {
+                Notifier.notify({
+                    message: 'You don\'t have enough Dungeon Tokens.',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+                return false;
+            }
+            App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
         }
-        App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
         // Reset any trainers/pokemon if there was one previously
         DungeonBattle.trainer(null);
         DungeonBattle.trainerPokemonIndex(0);
@@ -77,6 +87,9 @@ class DungeonRunner {
         DungeonRunner.defeatedBoss(null);
         DungeonRunner.dungeonFinished(false);
         App.game.gameState = GameConstants.GameState.dungeon;
+
+        // If we have a dungeon guide, start them walking
+        DungeonGuides.startDungeon();
     }
 
     public static tick() {
@@ -88,6 +101,10 @@ class DungeonRunner {
             }
             return;
         }
+
+        // Tick our dungeon guides
+        DungeonGuides.hired()?.tick();
+
         if (DungeonRunner.map.playerMoved()) {
             DungeonRunner.timeLeft(DungeonRunner.timeLeft() - GameConstants.DUNGEON_TICK);
             DungeonRunner.timeLeftPercentage(Math.floor(DungeonRunner.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
@@ -119,27 +136,27 @@ class DungeonRunner {
     public static handleInteraction(source: GameConstants.DungeonInteractionSource = GameConstants.DungeonInteractionSource.Click) {
         if (DungeonRunner.fighting() && !DungeonBattle.catching() && source === GameConstants.DungeonInteractionSource.Click) {
             DungeonBattle.clickAttack();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind) {
             DungeonRunner.dungeonLeave();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest) {
             DungeonRunner.openChest();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.boss && !DungeonRunner.fightingBoss()) {
             DungeonRunner.startBossFight();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.ladder) {
             DungeonRunner.nextFloor();
         }
     }
 
     public static openChest() {
         const tile = DungeonRunner.map.currentTile();
-        if (tile.type() !== GameConstants.DungeonTile.chest) {
+        if (tile.type() !== GameConstants.DungeonTileType.chest) {
             return;
         }
 
         GameHelper.incrementObservable(DungeonRunner.chestsOpened);
         DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor]++;
 
-        const { tier, loot } = (tile as DungeonTile<GameConstants.DungeonTile.chest>).metadata;
+        const { tier, loot } = tile.metadata;
 
         let amount = loot.amount || 1;
 
@@ -162,7 +179,7 @@ class DungeonRunner {
 
         DungeonRunner.gainLoot(loot.loot, amount, tierWeight);
 
-        DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
+        DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 3)) {
             DungeonRunner.map.showChestTiles();
@@ -232,7 +249,7 @@ class DungeonRunner {
     }
 
     public static startBossFight() {
-        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.boss || DungeonRunner.fightingBoss()) {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTileType.boss || DungeonRunner.fightingBoss()) {
             return;
         }
 
@@ -252,7 +269,7 @@ class DungeonRunner {
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
-        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTileType.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
             return;
         }
 
@@ -267,6 +284,8 @@ class DungeonRunner {
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
             App.game.gameState = GameConstants.GameState.town;
+            DungeonGuides.clears(0);
+            DungeonGuides.endDungeon();
         }
     }
 
@@ -281,6 +300,7 @@ class DungeonRunner {
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
+        DungeonGuides.endDungeon();
     }
 
     public static dungeonWon() {
@@ -288,6 +308,9 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()) {
                 DungeonRunner.dungeon.rewardFunction();
+            }
+            if (DungeonGuides.hired()) {
+                GameHelper.incrementObservable(App.game.statistics.dungeonGuideClears[DungeonGuides.hired().index]);
             }
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name);
@@ -297,6 +320,7 @@ class DungeonRunner {
                 setting: NotificationConstants.NotificationSetting.Dungeons.dungeon_complete,
             });
         }
+        DungeonGuides.endDungeon();
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
