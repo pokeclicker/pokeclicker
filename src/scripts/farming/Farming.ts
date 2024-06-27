@@ -928,6 +928,7 @@ class Farming implements Feature {
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
                 'It has a tendency to overtake nearby plants.',
+                'It also prevents Kasib from mutating.',
             ],
             undefined,
             ['Houndour', 'Absol', 'Stunky', 'Zorua', 'Impidimp']
@@ -1178,7 +1179,7 @@ class Farming implements Feature {
             BerryFirmness.Very_Hard,
             [
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
-                'This power keeps other Berries alive for longer.',
+                'This power revitalizes and prevents other berries from withering.',
             ],
             undefined,
             ['Mew']
@@ -1728,7 +1729,7 @@ class Farming implements Feature {
         // Starf
         this.mutations.push(new BlankMutation(0, BerryType.Starf,
             {
-                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders near open soil.',
+                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders and is caught near open soil.',
                 unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
@@ -2258,7 +2259,7 @@ class Farming implements Feature {
     };
 
     public auraDisplay(berry: BerryType, stage: number) {
-        return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 3 })}`;
     }
 
     public handleWanderer(plot: Plot) {
@@ -2276,6 +2277,7 @@ class Farming implements Feature {
         if (pokeball !== GameConstants.Pokeball.None) {
             wanderer.pokeball(pokeball);
             wanderer.catching(true);
+            App.game.pokeballs.usePokeball(pokeball);
             // Halved catch time in farm, it does not matter in the balance
             setTimeout(() => this.attemptCatchWanderer(plot), App.game.pokeballs.calculateCatchTime(pokeball) / 2);
         } else {
@@ -2286,7 +2288,6 @@ class Farming implements Feature {
 
     public attemptCatchWanderer(plot: Plot) {
         const wanderer = plot.wanderer;
-        App.game.pokeballs.usePokeball(wanderer.pokeball());
         const catchChance = GameConstants.clipNumber(
             wanderer.catchRate
                 + App.game.pokeballs.getCatchBonus(wanderer.pokeball(), { pokemon: wanderer.name, encounterType: EncounterType.wanderer })

@@ -253,6 +253,7 @@ export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const GRISEOUS_ITEM_CHANCE = 50;
 export const DNA_ITEM_CHANCE = 45;
 export const LIGHT_ITEM_CHANCE = 75;
+export const SHADOW_ITEM_CHANCE = 8;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
 export const CHRISTMAS_ITEM_CHANCE = 10;
@@ -270,6 +271,7 @@ export const GYM_GEMS = 5;
 
 // Safari Zone
 export const SAFARI_BATTLE_CHANCE = 5;
+export const SAFARI_MJ_BATTLE_CHANCE = SAFARI_BATTLE_CHANCE * 2;
 export const SAFARI_BASE_POKEBALL_COUNT = 30;
 
 export enum SafariTile {
@@ -322,6 +324,10 @@ export enum SafariTile {
     treeRootsC = 47,
     treeRootsR = 48,
     sign = 51,
+    waterULCorner = 52,
+    waterDLCorner = 53,
+    waterDRCorner = 54,
+    waterURCorner = 55,
 }
 
 export const SAFARI_LEGAL_WALK_BLOCKS = [
@@ -352,6 +358,10 @@ export const SAFARI_LEGAL_WALK_BLOCKS = [
     SafariTile.treeTopL,
     SafariTile.treeTopC,
     SafariTile.treeTopR,
+    SafariTile.waterULCorner,
+    SafariTile.waterDLCorner,
+    SafariTile.waterDRCorner,
+    SafariTile.waterURCorner,
 ];
 
 export const SAFARI_WATER_BLOCKS = [
@@ -364,6 +374,10 @@ export const SAFARI_WATER_BLOCKS = [
     SafariTile.waterDL,
     SafariTile.waterD,
     SafariTile.waterDR,
+    SafariTile.waterULCorner,
+    SafariTile.waterDLCorner,
+    SafariTile.waterDRCorner,
+    SafariTile.waterURCorner,
 ];
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
@@ -730,7 +744,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
-        [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
+        [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 'Hoppy Town', 'Hoppy Town Fishing Pond', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
     },
 
@@ -912,6 +926,7 @@ export enum StoneType {
     'Solar_light',
     'Lunar_light',
     'Pure_light',
+    'Crystallized_shadow',
     'Sweet_apple',
     'Tart_apple',
     'Cracked_pot',
@@ -2121,6 +2136,7 @@ export const TemporaryBattles = [
     'Kyurem 1',
     'Kyurem 2',
     'Kyurem 3',
+    'Twerps',
     'Volo 1',
     'Akari 1',
     'Warden Mai',

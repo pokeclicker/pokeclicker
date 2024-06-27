@@ -52,7 +52,7 @@
                     <button class='col btn btn-warning' onClick='Mine.bomb(); $(this).tooltip("hide")' data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.<br/>(${Underground.BOMB_ENERGY} energy)`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
                     <button class='col btn btn-success'
                             onClick='Mine.survey("#mine-display-survey-result"); $(this).tooltip("hide")'
-                            data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer. It also fully damages ${App.game.underground.getSurvey_Efficiency()} (cleared or uncleared) random tile${App.game.underground.getSurvey_Efficiency() > 1 ? 's' : ''}.<br/>(${App.game.underground.getSurvey_Cost()} energy)`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
+                            data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer.<br/>(${App.game.underground.getSurvey_Cost()} energy)`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
                         Survey
                     </button>
                     <button class='col btn btn-danger' onClick='Mine.skipLayer(true)'

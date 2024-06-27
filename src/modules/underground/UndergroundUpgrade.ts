@@ -12,8 +12,7 @@ export enum Upgrades {
     'Daily_Deals_Max',
     'Bomb_Efficiency',
     'Survey_Cost',
-    'Survey_Efficiency',
-    'NewYLayer',
+    'Items_All',
     'Reduced_Shards',
     'Reduced_Plates',
     'Reduced_Evolution_Items',
@@ -27,7 +26,7 @@ export default class UndergroundUpgrade extends Upgrade {
     constructor(
         name: Upgrades, displayName: string, maxLevel: number,
         costList: Amount[], bonusList: number[], increasing = true,
-        private requirement?: Requirement,
+        public description?: string, private requirement?: Requirement,
     ) {
         super(name, displayName, maxLevel, costList, bonusList, increasing);
     }
