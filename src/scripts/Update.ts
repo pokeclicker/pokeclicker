@@ -2743,6 +2743,9 @@ class Update implements Saveable {
 
             // Fix all weird amounts of Pokéballs
             saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
+
+            // Reset Key Stone multiplier
+            delete playerData._itemMultipliers.Key_stone;
         },
     };
 
