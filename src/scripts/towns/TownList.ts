@@ -5999,7 +5999,7 @@ const CyllageStoneCollector = new NPC('Vivid Stone Collector', [
     'Unfortunately my skills as a collector far surpass my skills as a Pokémon trainer. But anyone who can become the Champion of Kalos surely can convince Grant that these stones will be in good hands.',
 ], {
     image: 'assets/images/npcs/Collector.png',
-    new MultiRequirement([
+    requirement: new MultiRequirement([
         new ObtainedPokemonRequirement('Aggron'),
         new ObtainedPokemonRequirement('Tyranitar'),
     ]),
