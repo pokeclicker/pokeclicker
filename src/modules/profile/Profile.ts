@@ -113,6 +113,9 @@ export default class Profile implements Saveable {
             });
         const trainerId: HTMLElement = node.querySelector('.trainer-id');
         trainerId.innerText = id.length ? `#${id}` : '';
+        if (key === undefined) {
+            node.querySelector('.context-menu-button').remove();
+        }
         return container;
     }
 
