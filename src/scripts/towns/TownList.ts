@@ -7546,7 +7546,7 @@ const RoadsideMotelAnabel2 = new NPC('Anabel', [
 });
 const RoadsideMotelAnabel3 = new NPC('Anabel', [
     'Congratulations once again. Looker told me he wants to take us to a great restaurant to celebrate. I don\'t know how he knows any restaurants around here, we\'ve only just arrived.',
-    'It doesn\'t matter though. There is no rest for us. Captain Mina is here with news, but she insist on battling you before she\'ll tell us anything.',
+    'It doesn\'t matter though. There is no rest for us. Captain Mina is here with news, but she insists on battling you before she\'ll tell us anything.',
 ], {
     image: 'assets/images/npcs/Anabel.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 6, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8, GameConstants.AchievementOption.less)]),
@@ -7571,7 +7571,7 @@ const RoadsideMotelNanu1 = new NPC('Kahuna Nanu', [
 });
 const RoadsideMotelNanu2 = new NPC('Kahuna Nanu', [
     '...',
-    'Good job on rounding up those creatures kid.',
+    'Good job on rounding up those creatures, kid.',
     'Now, how about one more battle? I insist.',
 ], {
     image: 'assets/images/npcs/Nanu.png',
