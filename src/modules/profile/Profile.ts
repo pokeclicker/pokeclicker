@@ -68,7 +68,10 @@ export default class Profile implements Saveable {
         card.classList.add(`trainer-bg-${background}`);
         card.style.color = textColor;
         card.dataset.key = key;
-        card.addEventListener('click', () => {
+        card.addEventListener('click', (e) => {
+            if ((e.target as HTMLElement).classList.contains('context-menu-button')) {
+                return;
+            }
             // If no key provided, this is a preview
             if (key === undefined) {
                 Notifier.notify({ message: 'What a lovely profile!' });
