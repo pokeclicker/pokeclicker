@@ -36,11 +36,8 @@ class DungeonGuide {
                 switch (DungeonRunner.map.currentTile().type()) {
                     case GameConstants.DungeonTileType.chest:
                     case GameConstants.DungeonTileType.boss:
-                        DungeonRunner.handleInteraction();
-                        break;
                     case GameConstants.DungeonTileType.ladder:
                         DungeonRunner.handleInteraction();
-                        DungeonRunner.map.playerMoved(true);
                         break;
                 }
             } catch (e) {
