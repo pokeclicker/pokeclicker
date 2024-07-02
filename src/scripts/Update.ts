@@ -2743,6 +2743,13 @@ class Update implements Saveable {
 
             // Fix all weird amounts of Pokéballs
             saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
+
+            // Fix pokemon multi-category bug from 0.10.20 update for very old files
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                if (!Array.isArray(pokemon[6])) {
+                    pokemon[6] = [pokemon[6] ?? 0];
+                }
+            });
         },
     };
 
