@@ -2080,7 +2080,7 @@ class Farming implements Feature {
         });
     }
 
-    private canMulch(index: number, mulch: MulchType) {
+    public canMulch(index: number, mulch: MulchType) {
         const plot = this.plotList[index];
         if (!plot.isUnlocked || !this.hasMulch(mulch) || plot.isSafeLocked) {
             return false;

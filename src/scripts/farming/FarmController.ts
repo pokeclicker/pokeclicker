@@ -156,10 +156,11 @@ class FarmController {
                 }
                 break;
             case FarmingTool.Mulch:
-                if (plot.wanderer) {
+                const mulch = this.selectedMulch();
+                if (plot.wanderer && !(mulch === MulchType.Gooey_Mulch && plot.mulch !== MulchType.Gooey_Mulch && App.game.farming.canMulch(index, mulch))) {
                     App.game.farming.handleWanderer(plot);
                 } else {
-                    App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
+                    App.game.farming.addMulch(index, mulch, this.getAmount());
                 }
                 break;
             case FarmingTool.Shovel:
