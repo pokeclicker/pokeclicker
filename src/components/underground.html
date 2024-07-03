@@ -366,7 +366,6 @@
             <td class='vertical-middle'>
                 <!-- ko if: $data.isSellable() -->
                 <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
-                    <!-- ko ifnot: $data.valueType == UndergroundItemValueType.Fossil -->
                     <label
                     class="input-group-prepend btn btn-success active clickable m-0"
                         data-bind="text: $data.sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
@@ -376,19 +375,16 @@
                         type="checkbox"
                         data-bind="checked: $data.sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + $data.id }, event: { change: function(){$data.toggleSellLock()} }"
                     />
-                    <!-- /ko -->
                     <button class='btn btn-success btn-block'
-                            data-bind="css: { disabled: $data.sellLocked() || ($data.valueType === UndergroundItemValueType.Fossil && !App.game.breeding.hasFreeEggSlot()) },
-                                    text: $data.valueType === UndergroundItemValueType.Fossil ? 'Breed' : 'Sell',
+                            data-bind="css: { disabled: $data.sellLocked() },
                                     click: function(){Underground.sellMineItem($data, sellAmount() || 1)}">
+                            Sell
                     </button>
-                    <!-- ko if: $data.valueType !== UndergroundItemValueType.Fossil -->
                     <button type="button" data-bind="text: sellAmount() + '&nbsp;', css: { disabled:  $data.sellLocked() }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                         <button class="dropdown-item" type="button" data-bind="click: function(){sellAmount($data)}, text: $data.toLocaleString('en-US')"></button>
                     </div>
-                    <!-- /ko -->
                 </div>
                 <!-- /ko -->
             </td>
