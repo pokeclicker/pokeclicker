@@ -158,6 +158,7 @@ class FarmController {
             case FarmingTool.Mulch:
                 const mulch = this.selectedMulch();
                 if (plot.wanderer && !(mulch === MulchType.Gooey_Mulch && plot.mulch !== MulchType.Gooey_Mulch && App.game.farming.canMulch(index, mulch))) {
+                    // Wanderer takes priority over mulch, unless trying to apply gooey mulch to a plot without it before catching
                     App.game.farming.handleWanderer(plot);
                 } else {
                     App.game.farming.addMulch(index, mulch, this.getAmount());
