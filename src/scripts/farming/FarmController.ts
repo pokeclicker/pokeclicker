@@ -156,7 +156,11 @@ class FarmController {
                 }
                 break;
             case FarmingTool.Mulch:
-                App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
+                if (plot.wanderer) {
+                    App.game.farming.handleWanderer(plot);
+                } else {
+                    App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
+                }
                 break;
             case FarmingTool.Shovel:
                 App.game.farming.shovel(index);
