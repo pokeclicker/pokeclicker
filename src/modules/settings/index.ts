@@ -443,7 +443,6 @@ Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lo
 
 Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 'H'));
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
-Settings.add(new HotkeySetting('hotkey.underground.survey', 'Survey', 'S'));
 Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Bomb', 'B'));
 
 Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'W', { prefix: '↑ or ' }));

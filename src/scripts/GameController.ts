@@ -195,9 +195,6 @@ class GameController {
                     case Settings.getSetting('hotkey.underground.chisel').value:
                         Mine.toolSelected(Mine.Tool.Chisel);
                         return e.preventDefault();
-                    case Settings.getSetting('hotkey.underground.survey').value:
-                        Mine.survey();
-                        return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.bomb').value:
                         Mine.bomb();
                         return e.preventDefault();

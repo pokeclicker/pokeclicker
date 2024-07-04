@@ -22,7 +22,6 @@ export class Mine {
     public static itemsPartiallyFound: Observable<number> = ko.observable(0);
     public static itemsBuried: Observable<number> = ko.observable(0);
     public static rewardNumbers: Array<number>;
-    public static surveyResult = ko.observable(null);
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: Observable<Tool> = ko.observable(0);
@@ -37,7 +36,6 @@ export class Mine {
         const tmpRewardGrid = [];
         Mine.rewardNumbers = [];
         Mine.itemsBuried(0);
-        Mine.surveyResult(null);
         for (let i = 0; i < App.game.underground.getSizeY(); i++) {
             const row = [];
             const rewardRow = [];
@@ -182,21 +180,6 @@ export class Mine {
         return (indexX ? 1 : 0) + (indexY ? 2 : 0);
     }
 
-    public static survey(resultTooltipID: string = undefined) {
-        // Disable survey while loading new layer
-        if (this.loadingNewLayer) {
-            return;
-        }
-
-        if (Mine.surveyResult()) {
-            $(resultTooltipID || '#mine-survey-result').tooltip('show');
-            return;
-        }
-
-        const rewards = Mine.rewardSummary();
-        Mine.updatesurveyResult(rewards, resultTooltipID);
-    }
-
     private static rewardSummary() {
         return Mine.rewardNumbers.reduce((res, id) => {
             const reward = UndergroundItems.list.find(x => x.id == id);
@@ -226,34 +209,6 @@ export class Mine {
             }
             return res;
         }, { fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0, megaStones: 0 });
-    }
-
-    private static updatesurveyResult(summary, resultTooltipID: string = undefined) {
-        const text = [];
-        if (summary.fossils) {
-            text.push(`Fossils: ${summary.fossils}`);
-        }
-        if (summary.fossilpieces) {
-            text.push(`Fossil Pieces: ${summary.fossilpieces}`);
-        }
-        if (summary.evoItems) {
-            text.push(`Evolution Items: ${summary.evoItems}`);
-        }
-        if (summary.plates) {
-            text.push(`Gem Plates: ${summary.plates}`);
-        }
-        if (summary.shards) {
-            text.push(`Shards: ${summary.shards}`);
-        }
-        if (summary.megaStones) {
-            text.push(`Mega Stones: ${summary.megaStones}`);
-        }
-        if (summary.totalValue) {
-            text.push(`Diamond Value: ${summary.totalValue}`);
-        }
-
-        Mine.surveyResult(text.join('<br>'));
-        $(resultTooltipID || '#mine-survey-result').tooltip('show');
     }
 
     public static click(i: number, j: number) {
@@ -440,7 +395,6 @@ export class Mine {
         this.itemsBuried(mine.itemsBuried);
         this.rewardNumbers = mine.rewardNumbers;
         this.loadingNewLayer = false;
-        this.surveyResult(mine.surveyResult ?? this.surveyResult());
 
         this.calculatePartiallyRevealedItems();
 
@@ -460,7 +414,6 @@ export class Mine {
             itemsFound: this.itemsFound(),
             itemsBuried: this.itemsBuried(),
             rewardNumbers: this.rewardNumbers,
-            surveyResult: this.surveyResult(),
         };
         return mineSave;
     }

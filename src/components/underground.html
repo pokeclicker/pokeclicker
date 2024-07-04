@@ -25,31 +25,13 @@
                     <div id="mineBody" class="container" style="margin:auto">
                     </div>
                     <div class='row no-gutters'>
-                        <div class="col-12"
-                            id="mine-survey-result"
-                            data-bind="
-                                text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ', Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound()),
-                                tooltip: {
-                                    title: () =>
-                                        Mine.surveyResult() || 'Conduct a Survey to get more details',
-                                        trigger: 'hover',
-                                        placement: 'top',
-                                        boundary: 'window',
-                                        html: true,
-                                }"
-                            >
+                        <div class="col-12" data-bind="text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ', Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound())">
                         </div>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
                         data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'
                         data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">Chisel</button>
-                        <button class='col-12 col-md-4 btn btn-success'
-                                onClick='Mine.survey(); $(this).tooltip("hide")'
-                                data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
-                            Survey
-                        </button>
-                        <!-- FIX NUMBER-->
-                        <button class='col-12 col-md-6 btn btn-warning' onClick='Mine.bomb()'
+                        <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.bomb()'
                         data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
                     </div>
                 </div>
@@ -83,10 +65,6 @@
                     <br/>Chisel will mine 2 layers on a single tile.
                     <br/>Hammer will mine 1 layer on all nine tiles of a 3x3 square.
                     <br/>Bomb will mine 2 layers of 10 random tiles.</p>
-
-                    <p>You can conduct a Survey.
-                    <br/>This will give you information about the items to be found in this layer.
-                    <br/>It also damages 1 random tile fully.</p>
 
                     <h4><u>Treasures</u></h4>
                     <p>Sell your treasures for gems or diamonds!</p>
