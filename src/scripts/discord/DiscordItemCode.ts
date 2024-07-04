@@ -5,12 +5,12 @@ class DiscordItemCode extends DiscordCode {
             player.gainItem(itemName, amount);
             // Notify that the code was activated successfully
             Notifier.notify({
-                message: `You obtained ${item.name}!`,
+                message: `You obtained ${item.displayName}!`,
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
             });
             return true;
         };
-        super(item.name, item.image, item.basePrice, description, claimFunction);
+        super(item.displayName, item.image, item.basePrice, description, claimFunction);
     }
 }
