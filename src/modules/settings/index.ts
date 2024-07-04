@@ -213,12 +213,6 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
 
-// Underground
-Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Plates', 'Reduced Plates', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Evolution_Items', 'Reduced Evolution Items', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Fossil_Pieces', 'Reduced Fossil Pieces', true, undefined, false));
-
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
 Settings.add(new BooleanSetting('partyShowPurifiedShadowSprites', 'Show party shadow sprites', false));

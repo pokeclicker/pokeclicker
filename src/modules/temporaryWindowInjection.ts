@@ -191,7 +191,6 @@ import { DailyDeal } from './underground/DailyDeal';
 import { Mine } from './underground/Mine';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
-import UndergroundUpgrade from './underground/UndergroundUpgrade';
 import SpecialEventRandomRequirement from './requirements/SpecialEventRandomRequirement';
 import SpecialEventRequirement from './requirements/SpecialEventRequirement';
 import EncounterType from './enums/EncounterType';
@@ -408,7 +407,6 @@ Object.assign(<any>window, {
     pokeballFilterOptions,
     Mine,
     Underground,
-    UndergroundUpgrade,
     ShardDeal,
     DailyDeal,
     EncounterType,

@@ -1,8 +1,7 @@
 import type { Observable, Computed } from 'knockout';
 import '../koExtenders';
 import { Feature } from '../DataStore/common/Feature';
-import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE, Region } from '../GameConstants';
-import GameHelper from '../GameHelper';
+import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE } from '../GameConstants';
 import KeyItemType from '../enums/KeyItemType';
 import OakItemType from '../enums/OakItemType';
 import PokemonType from '../enums/PokemonType';
@@ -10,20 +9,15 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import { ItemList } from '../items/ItemList';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
-import Upgrade from '../upgrades/Upgrade';
-import AmountFactory from '../wallet/AmountFactory';
 import { Mine } from './Mine';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
-import UndergroundUpgrade, { Upgrades } from './UndergroundUpgrade';
-import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import Settings from '../settings/Settings';
 
 export class Underground implements Feature {
     name = 'Underground';
     saveKey = 'underground';
 
-    upgradeList: Array<Upgrade>;
     defaults: Record<string, any>;
     private _energy: Observable<number> = ko.observable(Underground.BASE_ENERGY_MAX);
 
@@ -103,7 +97,6 @@ export class Underground implements Feature {
     });
 
     constructor() {
-        this.upgradeList = [];
         this.tradeAmount.subscribe((value) => {
             if (value < 0) {
                 this.tradeAmount(0);
@@ -112,144 +105,38 @@ export class Underground implements Feature {
     }
 
     initialize() {
-        this.upgradeList = [
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Max, 'Max Energy', 10,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 500, 50), Currency.diamond),
-                GameHelper.createArray(0, 100, 10),
-                true,
-                'Increases the maximum Energy limit',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Items_Max, 'Max Items', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(200, 800, 200), Currency.diamond),
-                GameHelper.createArray(0, 4, 1),
-                true,
-                'Increases the maximum amount of items that can spawn per layer',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Items_Min, 'Min Items', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(500, 5000, 1500), Currency.diamond),
-                GameHelper.createArray(0, 4, 1),
-                true,
-                'Increases the minimum amount of items that can spawn per layer',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Gain, 'Energy Restored', 17,
-                AmountFactory.createArray(
-                    GameHelper.createArray(100, 1700, 100), Currency.diamond),
-                GameHelper.createArray(0, 17, 1),
-                true,
-                'Amount of energy restored at each regen interval',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Regen_Time, 'Energy Regen Time', 20,
-                AmountFactory.createArray(
-                    GameHelper.createArray(20, 400, 20), Currency.diamond),
-                GameHelper.createArray(0, 20, 1),
-                false,
-                'Decrease the time it takes to restore energy',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Daily_Deals_Max, 'Daily Deals', 2,
-                AmountFactory.createArray(
-                    GameHelper.createArray(150, 300, 150), Currency.diamond),
-                GameHelper.createArray(0, 2, 1),
-                true,
-                'Unlock more daily deal slots',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Bomb_Efficiency, 'Bomb Efficiency', 5,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 250, 50), Currency.diamond),
-                GameHelper.createArray(0, 10, 2),
-                true,
-                'Increase the effectiveness of the bomb',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Survey_Cost, 'Survey Cost', 5,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 250, 50), Currency.diamond),
-                GameHelper.createArray(0, 5, 1),
-                false,
-                'Decrease the cost of surveying a layer',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Items_All, '+1 Item', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(3000, 3000, 3000), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Adds an extra item to each layer',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Reduced_Shards, 'Reduced Shards', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(750, 750, 750), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Greatly reduces the number of shards (toggleable)',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Reduced_Plates, 'Reduced Plates', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Greatly reduces the number of plates (toggleable)',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Reduced_Evolution_Items, 'Reduced Evolution Items', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(500, 500, 500), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Greatly reduces the number of evolution items (toggleable)',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Reduced_Fossil_Pieces, 'Reduced Fossil Pieces', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(200, 200, 200), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Greatly reduces the number of Galar fossil pieces (toggleable)',
-                new MaxRegionRequirement(Region.galar),
-            ),
-        ];
+
     }
 
     update() {
     }
 
     getMaxEnergy() {
-        return Underground.BASE_ENERGY_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Max).calculateBonus();
+        return Underground.BASE_ENERGY_MAX;
     }
 
     getMaxItems() {
-        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus();
+        return Underground.BASE_ITEMS_MAX;
     }
 
     getEnergyGain() {
-        return Math.round(Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus());
+        return Math.round(Underground.BASE_ENERGY_GAIN);
     }
 
     getEnergyRegenTime() {
-        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus());
+        return Math.round(Underground.BASE_ENERGY_REGEN_TIME);
     }
 
     getDailyDealsMax() {
-        return Underground.BASE_DAILY_DEALS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max).calculateBonus();
+        return Underground.BASE_DAILY_DEALS_MAX;
     }
 
     getBombEfficiency() {
-        return Underground.BASE_BOMB_EFFICIENCY + this.getUpgrade(UndergroundUpgrade.Upgrades.Bomb_Efficiency).calculateBonus();
+        return Underground.BASE_BOMB_EFFICIENCY;
     }
 
     getSurvey_Cost() {
-        return Underground.SURVEY_ENERGY - this.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Cost).calculateBonus();
+        return Underground.SURVEY_ENERGY;
     }
 
     getSizeY() {
@@ -257,15 +144,7 @@ export class Underground implements Feature {
     }
 
     getMinItems() {
-        return Underground.BASE_ITEMS_MIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Min).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus();
-    }
-
-    getUpgrade(upgrade: Upgrades) {
-        for (let i = 0; i < this.upgradeList.length; i++) {
-            if (this.upgradeList[i].name == upgrade) {
-                return this.upgradeList[i];
-            }
-        }
+        return Underground.BASE_ITEMS_MIN;
     }
 
     public static showMine() {
@@ -489,12 +368,6 @@ export class Underground implements Feature {
             return;
         }
 
-        const upgrades = json.upgrades;
-        for (const item in UndergroundUpgrade.Upgrades) {
-            if (isNaN(Number(item))) {
-                this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level = upgrades[item] || 0;
-            }
-        }
         this.energy = json.energy || 0;
 
         const mine = json.mine;
@@ -508,13 +381,6 @@ export class Underground implements Feature {
 
     toJSON(): Record<string, any> {
         const undergroundSave: Record<string, any> = {};
-        const upgradesSave = {};
-        for (const item in UndergroundUpgrade.Upgrades) {
-            if (isNaN(Number(item))) {
-                upgradesSave[item] = this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level;
-            }
-        }
-        undergroundSave.upgrades = upgradesSave;
         undergroundSave.energy = this.energy;
         undergroundSave.mine = Mine.save();
         undergroundSave.sellLocks = UndergroundItems.list.reduce((sellLocks, item) => {
