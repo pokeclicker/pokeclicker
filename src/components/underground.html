@@ -51,8 +51,6 @@
                         <!-- FIX NUMBER-->
                         <button class='col-12 col-md-6 btn btn-warning' onClick='Mine.bomb()'
                         data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
-                        <button class='col-12 col-md-6 btn btn-danger' onClick='Mine.skipLayer(true)'
-                        data-bind="disable: Mine.skipsRemaining() > 0 ? false : true, tooltip: {title: `Skips the current layer. Fully mine a layer to recover one Skip.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
                     </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">
@@ -89,9 +87,6 @@
                     <p>You can conduct a Survey.
                     <br/>This will give you information about the items to be found in this layer.
                     <br/>It also damages 1 random tile fully.</p>
-
-                    <p>If you don't think this level is worth mining, you can Skip it.
-                    <br/>Every time you mine out all items in a level, you will recover one Skip.</p>
 
                     <h4><u>Treasures</u></h4>
                     <p>Sell your treasures for gems or diamonds!</p>

@@ -16,7 +16,6 @@ export enum Tool {
 }
 export class Mine {
     public static Tool = Tool;
-    public static maxSkips = 5;
     public static grid: Array<Array<Observable<number>>>;
     public static rewardGrid: Array<Array<any>>;
     public static itemsFound: Observable<number> = ko.observable(0);
@@ -24,7 +23,6 @@ export class Mine {
     public static itemsBuried: Observable<number> = ko.observable(0);
     public static rewardNumbers: Array<number>;
     public static surveyResult = ko.observable(null);
-    public static skipsRemaining = ko.observable(Mine.maxSkips);
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: Observable<Tool> = ko.observable(0);
@@ -309,23 +307,6 @@ export class Mine {
         }
     }
 
-    private static async skipLayer(shouldConfirm = true): Promise<void> {
-        if (!this.skipsRemaining()) {
-            return;
-        }
-
-        if (!shouldConfirm || await Notifier.confirm({
-            title: 'Underground',
-            message: 'Skip this mine layer?',
-            type: NotificationConstants.NotificationOption.warning,
-            confirm: 'Skip',
-        })) {
-            setTimeout(Mine.completed, 1500);
-            Mine.loadingNewLayer = true;
-            GameHelper.incrementObservable(this.skipsRemaining, -1);
-        }
-    }
-
     private static breakTile(_x: number, _y: number, layers = 1) {
         const x = Mine.normalizeY(_x);
         const y = Mine.normalizeX(_y);
@@ -437,10 +418,6 @@ export class Mine {
             Mine.loadingNewLayer = true;
             setTimeout(Mine.completed, 1500);
             GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
-
-            if (this.skipsRemaining() < this.maxSkips) {
-                GameHelper.incrementObservable(this.skipsRemaining);
-            }
         }
     }
 
@@ -464,7 +441,6 @@ export class Mine {
         this.rewardNumbers = mine.rewardNumbers;
         this.loadingNewLayer = false;
         this.surveyResult(mine.surveyResult ?? this.surveyResult());
-        this.skipsRemaining(mine.skipsRemaining ?? this.maxSkips);
 
         this.calculatePartiallyRevealedItems();
 
@@ -485,7 +461,6 @@ export class Mine {
             itemsBuried: this.itemsBuried(),
             rewardNumbers: this.rewardNumbers,
             surveyResult: this.surveyResult(),
-            skipsRemaining: this.skipsRemaining(),
         };
         return mineSave;
     }
