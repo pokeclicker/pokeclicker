@@ -2,10 +2,10 @@ class DiscordItemCode extends DiscordCode {
     constructor(itemName: ItemNameType, description, amount = 1) {
         const item = ItemList[itemName];
         const claimFunction = () => {
-            player.gainItem(itemName, amount);
+            item.gain(amount);
             // Notify that the code was activated successfully
             Notifier.notify({
-                message: `You obtained ${item.displayName}!`,
+                message: `You obtained ${amount > 1 ? `${amount}×` : ''}${item.displayName}!`,
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
             });
