@@ -22,6 +22,10 @@
             </div>
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
+                    <div>
+                        <div>Lvl. <knockout data-bind='text: Underground.undergroundLevel()'></knockout></div>
+                        <div>Exp <knockout data-bind='text: Underground.undergroundExp()'></knockout> / <knockout data-bind='text: Underground.convertLevelToExperience(Underground.undergroundLevel() + 1)'></knockout></div>
+                    </div>
                     <div id="mineBody" class="container" style="margin:auto">
                     </div>
                     <div class='row no-gutters'>

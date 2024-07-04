@@ -1,4 +1,4 @@
-import type { Observable, Computed } from 'knockout';
+import type { Observable, Computed, PureComputed } from 'knockout';
 import '../koExtenders';
 import { Feature } from '../DataStore/common/Feature';
 import { Currency, PLATE_VALUE } from '../GameConstants';
@@ -12,12 +12,20 @@ import { Mine } from './Mine';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import Settings from '../settings/Settings';
+import GameHelper from '../GameHelper';
 
 export class Underground implements Feature {
     name = 'Underground';
     saveKey = 'underground';
 
-    defaults: Record<string, any>;
+    defaults: Record<string, any> = {
+        undergroundExp: 0,
+    };
+
+    static undergroundExp: Observable<number> = ko.observable(0);
+    static undergroundLevel: PureComputed<number> = ko.pureComputed(() => {
+        return this.convertExperienceToLevel(this.undergroundExp());
+    });
 
     public static itemSelected;
     public static counter = 0;
@@ -302,6 +310,39 @@ export class Underground implements Feature {
         this.tradeAmount(this.tradeAmount() * amount);
     }
 
+    public addUndergroundExp(amount: number) {
+        if (isNaN(amount)) {
+            return;
+        }
+
+        const currentLevel = Underground.undergroundLevel();
+        GameHelper.incrementObservable(Underground.undergroundExp, amount);
+
+        if (Underground.undergroundLevel() > currentLevel) {
+            Notifier.notify({
+                message: `Your Underground level has increased to ${Underground.undergroundLevel()}!`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+            });
+        }
+    }
+
+    public static convertLevelToExperience(level: number): number {
+        let total = 0;
+        for (let i = 0; i < level; ++i) {
+            total = Math.floor(total + i + 300 * Math.pow(2, i / 7));
+        }
+        return Math.floor(total / 4);
+    }
+
+    public static convertExperienceToLevel(experience: number): number {
+        let level = 0;
+        while (experience >= this.convertLevelToExperience(level + 1)) {
+            ++level;
+        }
+        return level;
+    }
+
     fromJSON(json: Record<string, any>): void {
         if (!json) {
             console.warn('Underground not loaded.');
@@ -315,10 +356,13 @@ export class Underground implements Feature {
             Mine.loadMine();
         }
         UndergroundItems.list.forEach(it => it.sellLocked(json.sellLocks[it.itemName] || false));
+
+        Underground.undergroundExp(json.undergroundExp || this.defaults.undergroundExp);
     }
 
     toJSON(): Record<string, any> {
         const undergroundSave: Record<string, any> = {};
+        undergroundSave.undergroundExp = Underground.undergroundExp();
         undergroundSave.mine = Mine.save();
         undergroundSave.sellLocks = UndergroundItems.list.reduce((sellLocks, item) => {
             if (item.sellLocked()) {
