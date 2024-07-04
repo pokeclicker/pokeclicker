@@ -107,7 +107,6 @@ class Game {
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
-        Underground.energyTick(this.underground.getEnergyRegenTime());
         AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
 
         const now = new Date();
@@ -488,13 +487,6 @@ class Game {
         // Underground
         Underground.counter += GameConstants.TICK_TIME;
         if (Underground.counter >= GameConstants.UNDERGROUND_TICK) {
-            Underground.energyTick(Math.max(0, Underground.energyTick() - 1));
-            if (Underground.energyTick() == 0) {
-                // Check completed in case mine is locked out
-                Mine.checkCompleted();
-                this.underground.gainEnergy();
-                Underground.energyTick(this.underground.getEnergyRegenTime());
-            }
             Underground.counter = 0;
         }
 

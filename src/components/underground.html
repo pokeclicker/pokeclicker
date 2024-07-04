@@ -22,24 +22,6 @@
             </div>
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
-                    <div class="row no-gutters" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
-                        <button class="col-4 btn btn-secondary" data-bind="
-                                click: function(){ ItemList[$data].use();},
-                                css: { disabled: player.itemList[$data]() <= 0}">
-                            <span data-bind="text: '(' + player.itemList[$data]().toLocaleString('en-US') + ')'">(?)</span>
-                            <img class="restore-item" data-bind="attr: { src: ItemList[$data].image }">
-                            <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
-                        </button>
-                    </div>
-                    <div class='row no-gutters' style="text-align:center;">
-                        <div class='progress'>
-                            <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
-                                 aria-valuemin='0' aria-valuemax='100'
-                                 data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
-                                <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
-                            </div>
-                        </div>
-                    </div>
                     <div id="mineBody" class="container" style="margin:auto">
                     </div>
                     <div class='row no-gutters'>
@@ -58,17 +40,17 @@
                             >
                         </div>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
-                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
+                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'
-                        data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
+                        data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">Chisel</button>
                         <button class='col-12 col-md-4 btn btn-success'
                                 onClick='Mine.survey(); $(this).tooltip("hide")'
                                 data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
-                            Survey (<knockout data-bind="text: App.game.underground.getSurvey_Cost()"></knockout> energy)
+                            Survey
                         </button>
                         <!-- FIX NUMBER-->
                         <button class='col-12 col-md-6 btn btn-warning' onClick='Mine.bomb()'
-                        data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
+                        data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
                         <button class='col-12 col-md-6 btn btn-danger' onClick='Mine.skipLayer(true)'
                         data-bind="disable: Mine.skipsRemaining() > 0 ? false : true, tooltip: {title: `Skips the current layer. Fully mine a layer to recover one Skip.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
                     </div>
@@ -104,7 +86,7 @@
                     <br/>Hammer will mine 1 layer on all nine tiles of a 3x3 square.
                     <br/>Bomb will mine 2 layers of 10 random tiles.</p>
 
-                    <p>You can spend some mining energy to conduct a Survey.
+                    <p>You can conduct a Survey.
                     <br/>This will give you information about the items to be found in this layer.
                     <br/>It also damages 1 random tile fully.</p>
 

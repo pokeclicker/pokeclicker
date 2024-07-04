@@ -1,9 +1,8 @@
 import type { Observable, Computed } from 'knockout';
 import '../koExtenders';
 import { Feature } from '../DataStore/common/Feature';
-import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE } from '../GameConstants';
+import { Currency, PLATE_VALUE } from '../GameConstants';
 import KeyItemType from '../enums/KeyItemType';
-import OakItemType from '../enums/OakItemType';
 import PokemonType from '../enums/PokemonType';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import { ItemList } from '../items/ItemList';
@@ -19,10 +18,8 @@ export class Underground implements Feature {
     saveKey = 'underground';
 
     defaults: Record<string, any>;
-    private _energy: Observable<number> = ko.observable(Underground.BASE_ENERGY_MAX);
 
     public static itemSelected;
-    public static energyTick: Observable<number> = ko.observable(60);
     public static counter = 0;
 
     public static sortDirection = -1;
@@ -30,21 +27,13 @@ export class Underground implements Feature {
     public static sortOption: Observable<string> = ko.observable('None');
     public static sortFactor: Observable<number> = ko.observable(-1);
 
-    public static BASE_ENERGY_MAX = 50;
     public static BASE_ITEMS_MAX = 3;
     public static BASE_ITEMS_MIN = 1;
-    public static BASE_ENERGY_GAIN = 3;
-    public static BASE_ENERGY_REGEN_TIME = 60;
     public static BASE_DAILY_DEALS_MAX = 3;
     public static BASE_BOMB_EFFICIENCY = 10;
 
     public static sizeX = 25;
     public static sizeY = 12;
-
-    public static CHISEL_ENERGY = 1;
-    public static HAMMER_ENERGY = 3;
-    public static BOMB_ENERGY = 10;
-    public static SURVEY_ENERGY = 15;
 
     // Sort UndergroundItems.list whenever the sort method or quantities change
     public static sortedMineInventory: Computed<Array<UndergroundItem>> = ko.computed(function () {
@@ -111,20 +100,8 @@ export class Underground implements Feature {
     update() {
     }
 
-    getMaxEnergy() {
-        return Underground.BASE_ENERGY_MAX;
-    }
-
     getMaxItems() {
         return Underground.BASE_ITEMS_MAX;
-    }
-
-    getEnergyGain() {
-        return Math.round(Underground.BASE_ENERGY_GAIN);
-    }
-
-    getEnergyRegenTime() {
-        return Math.round(Underground.BASE_ENERGY_REGEN_TIME);
     }
 
     getDailyDealsMax() {
@@ -133,10 +110,6 @@ export class Underground implements Feature {
 
     getBombEfficiency() {
         return Underground.BASE_BOMB_EFFICIENCY;
-    }
-
-    getSurvey_Cost() {
-        return Underground.SURVEY_ENERGY;
     }
 
     getSizeY() {
@@ -220,34 +193,6 @@ export class Underground implements Feature {
         });
 
         return cumulativeValues;
-    }
-
-    gainEnergy() {
-        if (this.energy < this.getMaxEnergy()) {
-            const oakMultiplier = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
-            this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
-            if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify({
-                    message: 'Your mining energy has reached maximum capacity!',
-                    type: NotificationConstants.NotificationOption.success,
-                    timeout: 1e4,
-                    sound: NotificationConstants.NotificationSound.General.underground_energy_full,
-                    setting: NotificationConstants.NotificationSetting.Underground.underground_energy_full,
-                });
-            }
-        }
-    }
-
-    gainEnergyThroughItem(item: EnergyRestoreSize) {
-        // Restore a percentage of maximum energy
-        const effect: number = EnergyRestoreEffect[EnergyRestoreSize[item]];
-        const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
-        this.energy = this.energy + gain;
-        Notifier.notify({
-            message: `You restored ${gain} mining energy!`,
-            type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Underground.underground_energy_restore,
-        });
     }
 
     public static updateTreasureSorting(newSortOption: string) {
@@ -349,11 +294,6 @@ export class Underground implements Feature {
         return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
     }
 
-    calculateItemEffect(item: EnergyRestoreSize) {
-        const effect: number = EnergyRestoreEffect[EnergyRestoreSize[item]];
-        return effect * this.getMaxEnergy();
-    }
-
     public increaseTradeAmount(amount: number) {
         this.tradeAmount(this.tradeAmount() + amount);
     }
@@ -368,8 +308,6 @@ export class Underground implements Feature {
             return;
         }
 
-        this.energy = json.energy || 0;
-
         const mine = json.mine;
         if (mine) {
             Mine.loadSavedMine(mine);
@@ -381,7 +319,6 @@ export class Underground implements Feature {
 
     toJSON(): Record<string, any> {
         const undergroundSave: Record<string, any> = {};
-        undergroundSave.energy = this.energy;
         undergroundSave.mine = Mine.save();
         undergroundSave.sellLocks = UndergroundItems.list.reduce((sellLocks, item) => {
             if (item.sellLocked()) {
@@ -391,16 +328,6 @@ export class Underground implements Feature {
         }, {});
         return undergroundSave;
     }
-
-    //  getters/setters
-    get energy(): number {
-        return this._energy();
-    }
-
-    set energy(value) {
-        this._energy(value);
-    }
-
 }
 
 $(document).ready(() => {

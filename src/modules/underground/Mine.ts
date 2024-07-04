@@ -195,12 +195,6 @@ export class Mine {
             return;
         }
 
-        const surveyCost = App.game.underground.getSurvey_Cost();
-        if (App.game.underground.energy < surveyCost) {
-            return;
-        }
-
-        App.game.underground.energy -= surveyCost;
         const rewards = Mine.rewardSummary();
         Mine.updatesurveyResult(rewards, resultTooltipID);
     }
@@ -273,7 +267,7 @@ export class Mine {
     }
 
     private static hammer(x: number, y: number) {
-        if (App.game.underground.energy >= Underground.HAMMER_ENERGY) {
+        if (true) {
             if (x < 0 || y < 0) {
                 return;
             }
@@ -287,16 +281,14 @@ export class Mine {
                 }
             }
             if (hasMined) {
-                App.game.underground.energy -= Underground.HAMMER_ENERGY;
             }
         }
     }
 
     private static chisel(x: number, y: number) {
         if (Mine.grid[x][y]() > 0) {
-            if (App.game.underground.energy >= Underground.CHISEL_ENERGY) {
+            if (true) {
                 this.breakTile(x, y, 2);
-                App.game.underground.energy -= Underground.CHISEL_ENERGY;
             }
         }
     }
@@ -308,13 +300,12 @@ export class Mine {
         }
 
         let tiles = App.game.underground.getBombEfficiency();
-        if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
+        if (true) {
             while (tiles-- > 0) {
                 const x = Rand.intBetween(0, this.getHeight() - 1);
                 const y = Rand.intBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 2);
             }
-            App.game.underground.energy -= Underground.BOMB_ENERGY;
         }
     }
 

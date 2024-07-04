@@ -8,14 +8,6 @@
 
     <div id="undergroundCard" class="card-body p-0 show">
         <div>
-            <div class='progress' style="height: 25px;">
-                <div class='progress-bar bg-warning' role='progressbar'
-                     aria-valuemin='0' aria-valuemax='100'
-                     data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
-                    <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
-                </div>
-            </div>
-
             <div class="container">
                 <div class="row">
                     <div id="mine-display-survey-result" class="col" data-bind="tooltip: {
@@ -32,27 +24,11 @@
                 </div>
 
                 <!-- ko if: Settings.getSetting('showUndergroundModuleMineControls').observableValue() -->
-                <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
-                    <button class="col btn btn-secondary p-0" data-bind="
-                                    click: function(){ ItemList[$data].use();},
-                                    css: { disabled: player.itemList[$data]() <= 0},
-                                    tooltip: {
-                                        title: () => `+${App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])} energy`,
-                                        trigger: 'hover',
-                                        placement: 'top',
-                                        boundary: 'window',
-                                        html: true,
-                                    }">
-                        <img style="width: 32px;" data-bind="attr: { src: ItemList[$data].image }"><br/>
-                        <span style="line-height: 1;" data-bind="text: GameHelper.formatAmount(player.itemList[$data]())">(?)</span>
-                    </button>
-                </div>
-
                 <div class="row">
-                    <button class='col btn btn-warning' onClick='Mine.bomb(); $(this).tooltip("hide")' data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.<br/>(${Underground.BOMB_ENERGY} energy)`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
+                    <button class='col btn btn-warning' onClick='Mine.bomb(); $(this).tooltip("hide")' data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
                     <button class='col btn btn-success'
                             onClick='Mine.survey("#mine-display-survey-result"); $(this).tooltip("hide")'
-                            data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer.<br/>(${App.game.underground.getSurvey_Cost()} energy)`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
+                            data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer.`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
                         Survey
                     </button>
                     <button class='col btn btn-danger' onClick='Mine.skipLayer(true)'
