@@ -27,10 +27,10 @@
                     <div class='row no-gutters'>
                         <div class="col-12" data-bind="text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ', Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound())">
                         </div>
-                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
-                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'
                         data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">Chisel</button>
+                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
+                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer</button>
                         <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.bomb()'
                         data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
                     </div>
