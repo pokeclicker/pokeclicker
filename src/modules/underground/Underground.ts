@@ -118,8 +118,12 @@ export class Underground implements Feature {
     update(delta: number) {
     }
 
+    getMinItems() {
+        return Underground.BASE_ITEMS_MIN + Math.min(Math.floor((Underground.undergroundLevel() + 3) / 6), 5);
+    }
+
     getMaxItems() {
-        return Underground.BASE_ITEMS_MAX;
+        return Underground.BASE_ITEMS_MAX + Math.min(Math.floor(Underground.undergroundLevel() / 6), 5);
     }
 
     getDailyDealsMax() {
@@ -132,10 +136,6 @@ export class Underground implements Feature {
 
     getSizeY() {
         return Underground.sizeY;
-    }
-
-    getMinItems() {
-        return Underground.BASE_ITEMS_MIN;
     }
 
     public static showMine() {
