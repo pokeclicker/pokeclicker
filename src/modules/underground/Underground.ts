@@ -29,7 +29,6 @@ export class Underground implements Feature {
     });
 
     public static itemSelected;
-    public static counter = 0;
 
     public static sortDirection = -1;
     public static lastPropSort = 'none';

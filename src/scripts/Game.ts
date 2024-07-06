@@ -487,10 +487,6 @@ class Game {
         }
 
         // Underground
-        Underground.counter += GameConstants.TICK_TIME;
-        if (Underground.counter >= GameConstants.UNDERGROUND_TICK) {
-            Underground.counter = 0;
-        }
         this.underground.update(GameConstants.TICK_TIME / GameConstants.SECOND);
         this.undergroundTools.update(GameConstants.TICK_TIME / GameConstants.SECOND);
 
