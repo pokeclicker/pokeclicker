@@ -9,6 +9,7 @@ import Rand from '../utilities/Rand';
 import { Underground } from './Underground';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
+import UndergroundToolType from './tools/UndergroundToolType';
 
 export enum Tool {
     'Chisel' = 0,
@@ -220,46 +221,56 @@ export class Mine {
     }
 
     private static hammer(x: number, y: number) {
-        if (true) {
-            if (x < 0 || y < 0) {
-                return;
-            }
-            let hasMined = false;
-            for (let i = -1; i < 2; i++) {
-                for (let j = -1; j < 2; j++) {
-                    if (Mine.grid[Mine.normalizeY(x + i)][Mine.normalizeX(y + j)]() > 0) {
-                        hasMined = true;
-                    }
-                    this.breakTile(x + i, y + j, 1);
+        if (!App.game.undergroundTools.canUseTool(UndergroundToolType.Hammer)) {
+            return;
+        }
+
+        if (x < 0 || y < 0) {
+            return;
+        }
+        let hasMined = false;
+        for (let i = -1; i < 2; i++) {
+            for (let j = -1; j < 2; j++) {
+                if (Mine.grid[Mine.normalizeY(x + i)][Mine.normalizeX(y + j)]() > 0) {
+                    hasMined = true;
                 }
+                this.breakTile(x + i, y + j, 1);
             }
-            if (hasMined) {
-            }
+        }
+        if (hasMined) {
+            App.game.undergroundTools.useTool(UndergroundToolType.Hammer);
         }
     }
 
     private static chisel(x: number, y: number) {
+        if (!App.game.undergroundTools.canUseTool(UndergroundToolType.Chisel)) {
+            return;
+        }
+
         if (Mine.grid[x][y]() > 0) {
-            if (true) {
-                this.breakTile(x, y, 2);
-            }
+            this.breakTile(x, y, 2);
+            App.game.undergroundTools.useTool(UndergroundToolType.Chisel);
         }
     }
 
     public static bomb() {
+        if (!App.game.undergroundTools.canUseTool(UndergroundToolType.Bomb)) {
+            return;
+        }
+
         // Disable bomb while loading new layer
         if (this.loadingNewLayer) {
             return;
         }
 
         let tiles = App.game.underground.getBombEfficiency();
-        if (true) {
-            while (tiles-- > 0) {
-                const x = Rand.intBetween(0, this.getHeight() - 1);
-                const y = Rand.intBetween(0, Underground.sizeX - 1);
-                this.breakTile(x, y, 2);
-            }
+        while (tiles-- > 0) {
+            const x = Rand.intBetween(0, this.getHeight() - 1);
+            const y = Rand.intBetween(0, Underground.sizeX - 1);
+            this.breakTile(x, y, 2);
         }
+
+        App.game.undergroundTools.useTool(UndergroundToolType.Bomb);
     }
 
     private static breakTile(_x: number, _y: number, layers = 1) {

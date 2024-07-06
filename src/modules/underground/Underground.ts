@@ -13,6 +13,7 @@ import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import Settings from '../settings/Settings';
 import GameHelper from '../GameHelper';
+import OakItemType from '../enums/OakItemType';
 
 export class Underground implements Feature {
     name = 'Underground';
@@ -101,11 +102,21 @@ export class Underground implements Feature {
         });
     }
 
+    static get globalCooldown(): number {
+        const cellBatteryBonus = App.game.oakItems.isActive(OakItemType.Cell_Battery) ?
+            App.game.oakItems.calculateBonus(OakItemType.Cell_Battery)
+            :
+            1;
+
+        return Math.max(5 - 0.25 * Underground.undergroundLevel(), 0.1) / cellBatteryBonus;
+    }
+
     initialize() {
 
     }
 
-    update() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    update(delta: number) {
     }
 
     getMaxItems() {
@@ -310,7 +321,7 @@ export class Underground implements Feature {
         this.tradeAmount(this.tradeAmount() * amount);
     }
 
-    public addUndergroundExp(amount: number) {
+    public static addUndergroundExp(amount: number) {
         if (isNaN(amount)) {
             return;
         }
