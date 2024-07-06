@@ -53,12 +53,17 @@ export default class UndergroundTools implements Feature {
         if (json == null) {
             return;
         }
+
+        this.tools.forEach(tool => {
+            tool.fromJSON(json[tool.id]);
+        });
     }
 
     toJSON(): Record<string, any> {
         const save = {};
+        this.tools.forEach(tool => {
+            save[tool.id] = tool.toJSON();
+        });
         return save;
     }
-
-
 }

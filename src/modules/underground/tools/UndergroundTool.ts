@@ -22,16 +22,19 @@ export default class UndergroundTool {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public tick(deltaTime: number) {
+        this.handleFreeUsesTick(deltaTime);
         this.cooldownForDisplay(this.cooldown);
+    }
 
-        if (this.cooldown <= 0) {
-            GameHelper.incrementObservable(this._counter, deltaTime);
-            if (this._counter() >= this.baseCooldown) {
-                if (this.freeUses < this.maximumStoredUsages) {
-                    GameHelper.incrementObservable(this._freeUses);
-                }
-                GameHelper.incrementObservable(this._counter, -this.baseCooldown);
-            }
+    private handleFreeUsesTick(deltaTime: number) {
+        if (this.cooldown > 0) return;
+        if (this.freeUses >= this.maximumStoredUsages) return;
+
+        GameHelper.incrementObservable(this._counter, deltaTime);
+
+        if (this._counter() >= this.baseCooldown) {
+            GameHelper.incrementObservable(this._freeUses);
+            GameHelper.incrementObservable(this._counter, -this.baseCooldown);
         }
     }
 
@@ -65,5 +68,19 @@ export default class UndergroundTool {
 
     get counter(): number {
         return this._counter();
+    }
+
+    public fromJSON(save) {
+        this.cooldown = save.cooldown || 0;
+        this._freeUses(save?.freeUses || 0);
+        this._counter(save?.counter || 0);
+    }
+
+    public toJSON() {
+        return {
+            cooldown: this.cooldown,
+            freeUses: this._freeUses(),
+            counter: this._counter(),
+        };
     }
 }
