@@ -34,27 +34,27 @@
                             <button onclick='Underground.addUndergroundExp(-1000)'>-1000 XP</button>
                         </div>
                     </div>
-                    <div id="mineBody" class="container" style="margin:auto">
+                    <div id="mineBody" class="container" style="margin:auto" data-bind="css: `${UndergroundToolType[Mine.selectedTool()]}Selected`">
                     </div>
                     <div class='row no-gutters'>
                         <div class="col-12" data-bind="text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ', Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound())">
                         </div>
 
-                        <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'
+                        <button class='col-12 col-md-4 btn btn-info' onClick='Mine.selectedTool(UndergroundToolType.Chisel)'
                         data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">
                             <div>Chisel</div>
                             <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).freeUses"></knockout></div>
                             <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                             <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).baseCooldown"></knockout></div>
                         </button>
-                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
+                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.selectedTool(UndergroundToolType.Hammer)'
                         data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">
                             <div>Hammer</div>
                             <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).freeUses"></knockout></div>
                             <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                             <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).baseCooldown"></knockout></div>
                         </button>
-                        <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.bomb()'
+                        <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.selectedTool(UndergroundToolType.Bomb)'
                         data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
                             <div>Bomb</div>
                             <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).freeUses"></knockout></div>

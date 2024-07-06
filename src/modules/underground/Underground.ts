@@ -162,7 +162,7 @@ export class Underground implements Feature {
     }
 
     public static calculateCssClass(i: number, j: number): string {
-        return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
+        return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare`;
     }
 
     public static gainMineItem(id: number, num = 1) {

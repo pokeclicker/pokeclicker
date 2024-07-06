@@ -11,12 +11,7 @@ import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundToolType from './tools/UndergroundToolType';
 
-export enum Tool {
-    'Chisel' = 0,
-    'Hammer' = 1,
-}
 export class Mine {
-    public static Tool = Tool;
     public static grid: Array<Array<Observable<number>>>;
     public static rewardGrid: Array<Array<any>>;
     public static itemsFound: Observable<number> = ko.observable(0);
@@ -24,8 +19,7 @@ export class Mine {
     public static itemsBuried: Observable<number> = ko.observable(0);
     public static rewardNumbers: Array<number>;
 
-    // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
-    public static toolSelected: Observable<Tool> = ko.observable(0);
+    public static selectedTool: Observable<UndergroundToolType> = ko.observable(UndergroundToolType.Chisel);
     private static loadingNewLayer = true;
     // Number of times to try and place an item in a new layer before giving up, just a failsafe
     private static maxPlacementAttempts = 1000;
@@ -213,10 +207,18 @@ export class Mine {
     }
 
     public static click(i: number, j: number) {
-        if (Mine.toolSelected() == Mine.Tool.Hammer) {
-            Mine.hammer(i, j);
-        } else {
-            Mine.chisel(i, j);
+        switch (Mine.selectedTool()) {
+            case UndergroundToolType.Chisel:
+                Mine.chisel(i, j);
+                break;
+            case UndergroundToolType.Hammer:
+                Mine.hammer(i, j);
+                break;
+            case UndergroundToolType.Bomb:
+                Mine.bomb();
+                break;
+            default:
+                break;
         }
     }
 

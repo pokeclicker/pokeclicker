@@ -652,6 +652,14 @@
     background-size: contain;
 }
 
+.ChiselSelected {
+    cursor: url('../assets/images/underground/Chisel.png') 5 25, auto;
+
+    &:active {
+        cursor: url('../assets/images/underground/Chisel.png') 5 20, auto;
+    }
+}
+
 .HammerSelected {
     cursor:url('../assets/images/underground/Hammer.png') 5 15, auto;
 
@@ -660,30 +668,11 @@
     }
 }
 
-.ChiselSelected {
-    cursor: url('../assets/images/underground/Chisel.png') 5 25, auto;
+.BombSelected {
+    cursor:url('../assets/images/underground/Bomb.png') 5 15, auto;
 
     &:active {
-        cursor: url('../assets/images/underground/Chisel.png') 5 20, auto;
-    }
-
-    &.mineSquare::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 100;
-        pointer-events: none;
-    }
-
-    &.rock1:hover::after,
-    &.rock2:hover::after,
-    &.rock3:hover::after,
-    &.rock4:hover::after,
-    &.rock5:hover::after {
-        width: 100%;
-        height: 100%;
-        border: 1px solid red;
+        cursor:url('../assets/images/underground/Bomb.png') 5 10, auto;
     }
 }
 
@@ -694,25 +683,56 @@
 }
 
 #mineBody {
+    position: relative;
     overflow: hidden;
 
-    .row {
-        .HammerSelected {
-            &.mineSquare::after {
-                content: "";
-                position: absolute;
-                top: -100%;
-                left: -100%;
-                z-index: 100;
-                pointer-events: none;
-            }
+    &.ChiselSelected {
+        .mineSquare::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
 
-            &.mineSquare:hover::after
-            {
-                width: 300%;
-                height: 300%;
-                border: 1px solid red;
-            }
+        .mineSquare:hover::after
+        {
+            width: 100%;
+            height: 100%;
+            border: 1px solid red;
+        }
+    }
+
+    &.HammerSelected {
+        .mineSquare::after {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .mineSquare:hover::after
+        {
+            width: 300%;
+            height: 300%;
+            border: 1px solid blue;
+        }
+    }
+
+    &.BombSelected {
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        &:hover::after {
+            border: 1px solid orange;
         }
     }
 }
