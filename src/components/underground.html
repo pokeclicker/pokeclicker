@@ -25,6 +25,14 @@
                     <div>
                         <div>Lvl. <knockout data-bind='text: Underground.undergroundLevel()'></knockout></div>
                         <div>Exp <knockout data-bind='text: Underground.undergroundExp()'></knockout> / <knockout data-bind='text: Underground.convertLevelToExperience(Underground.undergroundLevel() + 1)'></knockout></div>
+                        <div>
+                            <button onclick='Underground.addUndergroundExp(10)'>+10 XP</button>
+                            <button onclick='Underground.addUndergroundExp(100)'>+100 XP</button>
+                            <button onclick='Underground.addUndergroundExp(1000)'>+1000 XP</button>
+                            <button onclick='Underground.addUndergroundExp(-10)'>-10 XP</button>
+                            <button onclick='Underground.addUndergroundExp(-100)'>-100 XP</button>
+                            <button onclick='Underground.addUndergroundExp(-1000)'>-1000 XP</button>
+                        </div>
                     </div>
                     <div id="mineBody" class="container" style="margin:auto">
                     </div>
