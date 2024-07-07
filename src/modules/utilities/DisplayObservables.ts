@@ -71,18 +71,17 @@ $(document).ready(() => {
         const moduleContainer = document.getElementById(collapseID).closest('.pokeclicker-optional-module');
         const isDirectChild = document.getElementById(collapseID).parentElement === moduleContainer;
         const moduleObserver = new MutationObserver((records) => {
+            let added = false;
+            let removed = false;
             records.forEach(r => {
-                r.removedNodes.forEach(n => {
-                    if (n instanceof Element && (n.id === collapseID || (!isDirectChild && n.querySelector(`#${collapseID}`)))) {
-                        stateObservable(BootstrapState.hidden);
-                    }
-                });
-                r.addedNodes.forEach(n => {
-                    if (n instanceof Element && (n.id === collapseID || (!isDirectChild && n.querySelector(`#${collapseID}`)))) {
-                        subscribeToElemState(collapseID, 'collapse', stateObservable);
-                    }
-                });
+                added ||= Array.from(r.addedNodes).some(n => n instanceof Element && (n.id === collapseID || (!isDirectChild && n.querySelector(`#${collapseID}`))));
+                removed ||= Array.from(r.removedNodes).some(n => n instanceof Element && (n.id === collapseID || (!isDirectChild && n.querySelector(`#${collapseID}`))));
             });
+            if (added && document.getElementById(collapseID)) {
+                subscribeToElemState(collapseID, 'collapse', stateObservable);
+            } else if (removed) {
+                stateObservable(BootstrapState.hidden);
+            }
         });
         moduleObserver.observe(moduleContainer, {
             subtree: !isDirectChild,
