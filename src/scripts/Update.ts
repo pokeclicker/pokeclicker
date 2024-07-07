@@ -2743,6 +2743,23 @@ class Update implements Saveable {
 
             // Fix all weird amounts of Pokéballs
             saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
+
+            // Fix pokemon multi-category bug from 0.10.20 update for very old files
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                if (!Array.isArray(pokemon[6])) {
+                    pokemon[6] = [pokemon[6] ?? 0];
+                }
+            });
+
+            // Reset settings that the player shouldn't have access to yet but might have been
+            // set as default from a different file
+            if (playerData.highestRegion < 5) { // Kalos
+                settingsData.pokedexUniqueTransformationFilter = 'all';
+                settingsData.breedingUniqueTransformationFilter = 'all';
+            }
+            if (!saveData.challenges.list.regionalAttackDebuff) {
+                settingsData.breedingRegionalAttackDebuffSetting = '-1';
+            }
         },
     };
 

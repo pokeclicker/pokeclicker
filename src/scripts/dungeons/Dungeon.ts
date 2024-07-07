@@ -5841,7 +5841,7 @@ dungeonList['Deep Colosseum'] = new Dungeon('Deep Colosseum',
                 new GymPokemon('Kingdra', 1750000, 70),
                 new GymPokemon('Shedinja', 1750000, 68),
                 new GymPokemon('Shuckle', 1750000, 45, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 1 }, 'Angol', '(angol)'),
+            ], { weight: 1 }, 'Agnol', '(angol)'),
     ],
     88800, 134);
 
