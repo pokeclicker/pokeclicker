@@ -13,6 +13,8 @@ const ChangelogItems = [
     // v0.10.21
     new ChangelogUpdate('v0.10.21', new Date(2024, 6, 7)),
     new Changelog(changelogType.NEW, 'New Pokémon'),
+    new Changelog(changelogType.NEW, 'Ability to view route Pokémon encounters'),
+    new Changelog(changelogType.NEW, 'Ability to view loot available in a dungeon'),
     new Changelog(changelogType.NEW, 'Setting to disable the flashing animation before traveling to a new region'),
     new Changelog(changelogType.CHANGE, 'Renamed Ditto (Transforming) to Ditto (Magikarp)'),
     new Changelog(changelogType.CHANGE, 'Added Pokémon name translations to several additional locations'),
