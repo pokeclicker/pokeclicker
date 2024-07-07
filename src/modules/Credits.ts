@@ -15,7 +15,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/akuma-tsubasa',
         image: 'https://a.deviantart.net/avatars-big/a/k/akuma-tsubasa.png?13',
         resources: [
-            'Angol',
+            'Agnol',
             'Cail',
             'Cipher Peon (male and female)',
             'Cipher Peon XD (male and female)',
@@ -575,7 +575,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/736029608587296819',
         image: 'assets/images/profile/trainer-119.png',
         resources: [
-            'Ditto (Transforming)',
+            'Ditto (Magikarp)',
             'Dugtrio (Punk)',
             'Genesect (High-Speed) and Drive Forms',
             'Koga Trainer',
