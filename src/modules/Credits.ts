@@ -15,7 +15,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/akuma-tsubasa',
         image: 'https://a.deviantart.net/avatars-big/a/k/akuma-tsubasa.png?13',
         resources: [
-            'Angol',
+            'Agnol',
             'Cail',
             'Cipher Peon (male and female)',
             'Cipher Peon XD (male and female)',
