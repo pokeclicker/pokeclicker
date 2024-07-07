@@ -173,6 +173,7 @@ class AchievementHandler {
             category.totalWeight = AchievementHandler.achievementList.filter(a => a.category == category && a.achievable()).reduce((sum, a) => sum + a.bonusWeight, 0);
         });
         AchievementHandler.calculateBonus();
+        AchievementHandler.updateAchievementBonus();
     }
 
     public static achievementBonus(): number {
