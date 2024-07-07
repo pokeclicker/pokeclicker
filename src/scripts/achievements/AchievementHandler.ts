@@ -6,6 +6,7 @@ class AchievementHandler {
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
+    public static _cachedAchievementBonus: KnockoutObservable<number> = ko.observable(1);
 
     public static setNavigateIndex(index: number): void {
         if (index < 0 || index >= AchievementHandler.numberOfTabs()) {
@@ -116,13 +117,18 @@ class AchievementHandler {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             AchievementHandler.achievementList[i].unlocked(AchievementHandler.achievementList[i].isCompleted());
         }
+        AchievementHandler.updateAchievementBonus();
     }
 
     public static checkAchievements() {
+        let unlocked = false;
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             if (!AchievementHandler.achievementList[i].unlocked()) {
-                AchievementHandler.achievementList[i].check();
+                unlocked = unlocked || AchievementHandler.achievementList[i].check();
             }
+        }
+        if (unlocked) {
+            AchievementHandler.updateAchievementBonus();
         }
     }
 
@@ -167,6 +173,10 @@ class AchievementHandler {
     }
 
     public static achievementBonus(): number {
+        return AchievementHandler._cachedAchievementBonus();
+    }
+
+    public static updateAchievementBonus() {
         let sum = 0;
         AchievementHandler.getAchievementCategories().forEach(category => {
             const total = AchievementHandler.achievementList.filter(a => {
@@ -176,7 +186,7 @@ class AchievementHandler {
                 sum += total;
             }
         });
-        return sum;
+        AchievementHandler._cachedAchievementBonus(sum);
     }
 
     public static achievementBonusPercent(): string {
