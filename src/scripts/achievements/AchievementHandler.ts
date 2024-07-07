@@ -121,13 +121,16 @@ class AchievementHandler {
     }
 
     public static checkAchievements() {
-        let unlocked = false;
+        let updateBonus = false;
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             if (!AchievementHandler.achievementList[i].unlocked()) {
-                unlocked = unlocked || AchievementHandler.achievementList[i].check();
+                const unlocked = AchievementHandler.achievementList[i].check();
+                if (unlocked) {
+                    updateBonus = true;
+                }
             }
         }
-        if (unlocked) {
+        if (updateBonus) {
             AchievementHandler.updateAchievementBonus();
         }
     }
