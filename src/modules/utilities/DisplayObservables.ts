@@ -9,7 +9,7 @@ enum BootstrapState {
 function subscribeToElemState(elemID: string, type: string, obs: Observable<BootstrapState>) {
     const $elem = $(`#${elemID}`);
     if (!$elem.length) {
-        console.error(`DisplayObservables: ${type} ${elemID} not found, cannot create state observable`);
+        console.error(`DisplayObservables: ${type} ${elemID} not found, cannot subscribe state observable`);
     } else {
         obs(BootstrapState[$elem.hasClass('show') ? 'show' : 'hidden']);
         Object.values(BootstrapState).forEach((st) => {
