@@ -166,7 +166,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingPokerusFilter: Settings.getSetting('breedingPokerusFilter') } -->
                                                 <label for="breeding-filter-pokerus-status" data-bind="text: breedingPokerusFilter.displayName">Pokérus Status</label>
-                                                <select id="breeding-filter-pokerus-status" autocomplete="off" class="custom-select" 
+                                                <select id="breeding-filter-pokerus-status" autocomplete="off" class="custom-select"
                                                     data-bind="options: breedingPokerusFilter.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
@@ -209,7 +209,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingDisplayTextSetting: Settings.getSetting('breedingDisplayTextSetting') } -->
                                                 <label for="breeding-setting-display-text" data-bind="text: breedingDisplayTextSetting.displayName">Display Value</label>
-                                                <select id="breeding-setting-display-text" autocomplete="off" class="custom-select" 
+                                                <select id="breeding-setting-display-text" autocomplete="off" class="custom-select"
                                                     data-bind="options: breedingDisplayTextSetting.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
@@ -221,7 +221,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingRegionalAttackDebuffSetting: Settings.getSetting('breedingRegionalAttackDebuffSetting') } -->
                                                 <label for="breeding-setting-regional-attack-debuff" data-bind="text: breedingRegionalAttackDebuffSetting.displayName">Regional Debuff</label>
-                                                <select id="breeding-setting-regional-attack-debuff" autocomplete="off" class="custom-select" 
+                                                <select id="breeding-setting-regional-attack-debuff" autocomplete="off" class="custom-select"
                                                     data-bind="options: breedingRegionalAttackDebuffSetting.getValidOptions(),
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
@@ -244,10 +244,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         <!-- ko let: { hatcherySortDirection: Settings.getSetting('hatcherySortDirection') } -->
                                                         <label for="hatchery-setting-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
                                                             data-bind="text: hatcherySortDirection.observableValue() ? '⥄' : '⥂',
-                                                                tooltip: { 
+                                                                tooltip: {
                                                                     title: hatcherySortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
                                                                     trigger: 'hover',
-                                                                    placement:'top' 
+                                                                    placement:'top'
                                                                 }">
                                                             ⥂
                                                         </label>
@@ -366,7 +366,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                             <button data-bind="class: `category-${$data + 1}`"></button>
                                                         </div>
                                                     </div>
-                                                    <div class="border-secondary dropdown-menu multiselect-dropdown category-dropdown px-2">
+                                                    <div class="border-secondary dropdown-menu multiselect-dropdown category-dropdown px-1">
                                                         <div class="form-check d-flex align-items-center", data-bind="with: PokemonCategories.categories().find(c => c.id === 0), as: 'pokemonCategory'">
                                                             <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
                                                                 data-bind="attr: { id: `${$parent.id}-category0` },
