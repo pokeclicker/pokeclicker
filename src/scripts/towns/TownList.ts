@@ -8435,7 +8435,7 @@ const HammerlockeHiker = new NPC('Hiker Donald', [
 ], {image: 'assets/images/npcs/Hiker (Gen 8).png'});
 
 const WyndonBattleCafeRichard = new NPC('Richard', [
-    'This might sound cheesy, but I love Milcery so much! I wasn\'t sure which Alcremie form I liked the most, so I just grabbed a sweet at random and started to spin and spin for what seemed like an hour.',
+    'This might sound cheesy, but I love Milcery so much! I wasn\'t sure which Alcremie form I liked the most, so I just grabbed a Sweet at random and started to spin and spin for what seemed like an hour.',
     'I saw my partner liked it a lot! Maybe you should try the same one day!',
 ]);
 
