@@ -1,0 +1,42 @@
+<div class="modal fade noselect" id="routeInfoModal" tabindex="-1" role="dialog" aria-labelledby="routeInfoModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h4 class="modal-title" data-bind="text: RouteInfo.getFullName()">name</h4>
+                <button type="button" class="btn btn-danger position-absolute" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
+            </div>
+            <div class="modal-body pt-0 overflow-hidden" style="background-color: inherit;">
+                <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: RouteInfo.pokemonList()">
+                    <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
+                        <span class="id pokedex-top-text" data-bind="text: (($data.id > 0 && App.game.party.alreadyCaughtPokemon($data.id)) ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
+                        <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
+                            <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
+                        </div>
+                        <!-- ko if: App.game.party.alreadyCaughtPokemonByName(name) -->
+                        <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
+                            <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`},
+                            tooltip: {
+                                title: App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemon($data.id)?.evs().toLocaleString('en-US')}` : '',
+                                placement: 'bottom',
+                                trigger: 'hover'
+                            }"/>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: $data.roamer -->
+                        <div data-bind="if: $data.roamer" style="position: absolute;left: 2px;bottom: 5px;">
+                            <img width="24px" src="" data-bind="attr: { src: 'assets/images/encountersInfo/roaming.png' },
+                            tooltip: { 
+                                title: 'Roaming Pokémon',
+                                placement: 'bottom',
+                                trigger: 'hover'
+                            }"/>
+                        </div>
+                        <!-- /ko -->
+                        <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !App.game.party.alreadyCaughtPokemon($data.id) }, attr:{ src: PokemonHelper.getImage($data.id)}">
+                        <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: (($data.id > 0 && App.game.party.alreadyCaughtPokemon($data.id)) ? PokemonHelper.displayName($data.name) : '???')">name</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
