@@ -21,46 +21,72 @@
                 </ul>
             </div>
             <div class="modal-body tab-content p-0">
-                <div id="dig" class="tab-pane fade in active show" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
+                <div id="dig" class="tab-pane fade in active show" data-bind="">
+                    <div>Mine state: <knockout data-bind="text: Mine.mineState"></knockout></div>
+                    <div>Discovering mine time: <knockout data-bind="text: App.game.underground.discoverMineCounter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                     <div>
                         <div>Lvl. <knockout data-bind='text: Underground.undergroundLevel()'></knockout></div>
                         <div>Exp <knockout data-bind='text: Underground.undergroundExp()'></knockout> / <knockout data-bind='text: Underground.convertLevelToExperience(Underground.undergroundLevel() + 1)'></knockout></div>
                         <div>
                             <button onclick='Underground.addUndergroundExp(10)'>+10 XP</button>
                             <button onclick='Underground.addUndergroundExp(100)'>+100 XP</button>
-                            <button onclick='Underground.addUndergroundExp(1000)'>+1000 XP</button>
+                            <button onclick='Underground.addUndergroundExp(1000)'>+1,000 XP</button>
+                            <button onclick='Underground.addUndergroundExp(10000)'>+10,000 XP</button>
                             <button onclick='Underground.addUndergroundExp(-10)'>-10 XP</button>
                             <button onclick='Underground.addUndergroundExp(-100)'>-100 XP</button>
-                            <button onclick='Underground.addUndergroundExp(-1000)'>-1000 XP</button>
+                            <button onclick='Underground.addUndergroundExp(-1000)'>-1,000 XP</button>
+                            <button onclick='Underground.addUndergroundExp(-10000)'>-10,000 XP</button>
                         </div>
                     </div>
-                    <div id="mineBody" class="container" style="margin:auto" data-bind="css: `${UndergroundToolType[Mine.selectedTool()]}Selected`">
-                    </div>
-                    <div class='row no-gutters'>
-                        <div class="col-12" data-bind="text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ', Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound())">
+                    <div data-bind="visible: Mine.mineState === 3, class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
+                        <div id="mineBody" class="container" style="margin:auto" data-bind="css: `${UndergroundToolType[Mine.selectedTool()]}Selected`">
                         </div>
+                        <div class='row no-gutters'>
+                            <div class="col-12" data-bind="text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ', Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound())">
+                            </div>
 
-                        <button class='col-12 col-md-4 btn btn-info' onClick='Mine.selectedTool(UndergroundToolType.Chisel)'
-                        data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">
-                            <div>Chisel</div>
-                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).freeUses"></knockout></div>
-                            <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                            <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).baseCooldown"></knockout></div>
-                        </button>
-                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.selectedTool(UndergroundToolType.Hammer)'
-                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">
-                            <div>Hammer</div>
-                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).freeUses"></knockout></div>
-                            <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                            <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).baseCooldown"></knockout></div>
-                        </button>
-                        <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.selectedTool(UndergroundToolType.Bomb)'
-                        data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
-                            <div>Bomb</div>
-                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).freeUses"></knockout></div>
-                            <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                            <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).baseCooldown"></knockout></div>
-                        </button>
+                            <div class="col-12 row no-gutters">
+                                <div class="col mx-1 card clickable" data-bind="click: () => Mine.selectedTool(UndergroundToolType.Chisel)">
+                                    <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': Mine.selectedTool() === UndergroundToolType.Chisel }">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="../assets/images/underground/Chisel.png" alt="">
+                                            <div>Chisel</div>
+                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).freeUses"></knockout></div>
+                                            <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                            <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).baseCooldown"></knockout></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col mx-1 card clickable" data-bind="click: () => Mine.selectedTool(UndergroundToolType.Hammer)">
+                                    <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': Mine.selectedTool() === UndergroundToolType.Hammer }">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="../assets/images/underground/Hammer.png" alt="">
+                                            <div>Hammer</div>
+                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).freeUses"></knockout></div>
+                                            <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                            <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).baseCooldown"></knockout></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col mx-1 card clickable" data-bind="click: () => Mine.selectedTool(UndergroundToolType.Bomb)">
+                                    <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': Mine.selectedTool() === UndergroundToolType.Bomb }">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="../assets/images/underground/Bomb.png" alt="">
+                                            <div>Bomb</div>
+                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).freeUses"></knockout></div>
+                                            <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                            <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).baseCooldown"></knockout></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-bind="visible: Mine.mineState !== 3">
+                        <button onclick="Mine.loadMine()">Search for mine</button>
                     </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">

@@ -11,7 +11,18 @@ import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundToolType from './tools/UndergroundToolType';
 
+export enum MineStateType {
+    None,
+    Loading,
+    Undiscovered,
+    Active,
+    Completed,
+    Abandoned,
+}
+
 export class Mine {
+    private static _mineState: Observable<MineStateType> = ko.observable(MineStateType.None);
+
     public static grid: Array<Array<Observable<number>>>;
     public static rewardGrid: Array<Array<any>>;
     public static itemsFound: Observable<number> = ko.observable(0);
@@ -20,13 +31,28 @@ export class Mine {
     public static rewardNumbers: Array<number>;
 
     public static selectedTool: Observable<UndergroundToolType> = ko.observable(UndergroundToolType.Chisel);
-    private static loadingNewLayer = true;
     // Number of times to try and place an item in a new layer before giving up, just a failsafe
     private static maxPlacementAttempts = 1000;
     // Maximum underground layer depth
     private static maxLayerDepth = 5;
 
+    static get mineState(): MineStateType {
+        return this._mineState();
+    }
+
+    public static discoverMine(): void {
+        this._mineState(MineStateType.Active);
+    }
+
+    public static abandoneMine(): void {
+        this._mineState(MineStateType.Abandoned);
+    }
+
     public static loadMine() {
+        this._mineState(MineStateType.Loading);
+
+        ko.cleanNode(document.getElementById('mineBody'));
+
         const tmpGrid = [];
         const tmpRewardGrid = [];
         Mine.rewardNumbers = [];
@@ -81,7 +107,7 @@ export class Mine {
             }
         }
 
-        Mine.loadingNewLayer = false;
+        Mine._mineState(MineStateType.Undiscovered);
         Mine.itemsFound(0);
         Mine.itemsPartiallyFound(0);
 
@@ -96,6 +122,8 @@ export class Mine {
                 this.breakTile(x, y, 1);
             }
         }
+
+        ko.applyBindings(null, document.getElementById('mineBody'));
     }
 
     private static getRandomCoord(max: number, size: number): number {
@@ -222,10 +250,27 @@ export class Mine {
         }
     }
 
+    private static chisel(x: number, y: number) {
+        if (!App.game.undergroundTools.canUseTool(UndergroundToolType.Chisel)) {
+            return;
+        }
+
+        // Disable tool if the mine is not in the Active state
+        if (this.mineState !== MineStateType.Active) return;
+
+        if (Mine.grid[x][y]() > 0) {
+            this.breakTile(x, y, 2);
+            App.game.undergroundTools.useTool(UndergroundToolType.Chisel);
+        }
+    }
+
     private static hammer(x: number, y: number) {
         if (!App.game.undergroundTools.canUseTool(UndergroundToolType.Hammer)) {
             return;
         }
+
+        // Disable tool if the mine is not in the Active state
+        if (this.mineState !== MineStateType.Active) return;
 
         if (x < 0 || y < 0) {
             return;
@@ -244,26 +289,13 @@ export class Mine {
         }
     }
 
-    private static chisel(x: number, y: number) {
-        if (!App.game.undergroundTools.canUseTool(UndergroundToolType.Chisel)) {
-            return;
-        }
-
-        if (Mine.grid[x][y]() > 0) {
-            this.breakTile(x, y, 2);
-            App.game.undergroundTools.useTool(UndergroundToolType.Chisel);
-        }
-    }
-
     public static bomb() {
         if (!App.game.undergroundTools.canUseTool(UndergroundToolType.Bomb)) {
             return;
         }
 
-        // Disable bomb while loading new layer
-        if (this.loadingNewLayer) {
-            return;
-        }
+        // Disable tool if the mine is not in the Active state
+        if (this.mineState !== MineStateType.Active) return;
 
         let tiles = App.game.underground.getBombEfficiency();
         while (tiles-- > 0) {
@@ -377,56 +409,48 @@ export class Mine {
         return false;
     }
 
-    public static checkCompleted() {
-        if (Mine.itemsFound() >= Mine.itemsBuried()) {
-            // Don't resolve queued up calls to checkCompleted() until completed() is finished and sets loadingNewLayer to false
-            if (Mine.loadingNewLayer == true) {
-                return;
-            }
-            Mine.loadingNewLayer = true;
-            setTimeout(Mine.completed, 1500);
-            GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
-        }
-    }
+    public static checkCompleted(): boolean {
+        if (this.mineState !== MineStateType.Active) return false;
+        if (Mine.itemsFound() < Mine.itemsBuried()) return false;
 
-    private static completed() {
+        GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
+
+        App.game.oakItems.use(OakItemType.Explosive_Charge);
+
+        ko.cleanNode(document.getElementById('mineBody'));
+
         Notifier.notify({
             message: 'You dig deeper...',
             type: NotificationConstants.NotificationOption.info,
             setting: NotificationConstants.NotificationSetting.Underground.underground_dig_deeper,
         });
-        ko.cleanNode(document.getElementById('mineBody'));
-        App.game.oakItems.use(OakItemType.Explosive_Charge);
-        Mine.loadMine();
-        ko.applyBindings(null, document.getElementById('mineBody'));
+
+        this._mineState(MineStateType.Completed);
+
+        return true;
     }
 
     public static loadSavedMine(mine) {
-        this.grid = mine.grid.map(row => row.map(val => ko.observable(val)));
+        this.grid = mine.grid?.map(row => row.map(val => ko.observable(val)));
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
         this.itemsBuried(mine.itemsBuried);
         this.rewardNumbers = mine.rewardNumbers;
-        this.loadingNewLayer = false;
+        this._mineState(mine.mineState || MineStateType.None);
 
         this.calculatePartiallyRevealedItems();
 
         Underground.showMine();
-        // Check if completed in case the mine was saved after completion and before creating a new mine
-        // TODO: Remove setTimeout after TypeScript module migration is complete. Needed so that `App.game` is available
-        setTimeout(() => Mine.checkCompleted(), 0);
     }
 
     public static save(): Record<string, any> {
-        if (this.grid == null) {
-            Mine.loadMine();
-        }
         const mineSave = {
-            grid: this.grid.map(row => row.map(val => val())),
+            grid: this.grid?.map(row => row.map(val => val())),
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound(),
             itemsBuried: this.itemsBuried(),
             rewardNumbers: this.rewardNumbers,
+            mineState: this.mineState,
         };
         return mineSave;
     }

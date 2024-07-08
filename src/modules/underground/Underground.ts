@@ -1,14 +1,14 @@
-import type { Observable, Computed, PureComputed } from 'knockout';
+import type {Computed, Observable, PureComputed} from 'knockout';
 import '../koExtenders';
-import { Feature } from '../DataStore/common/Feature';
-import { Currency, PLATE_VALUE } from '../GameConstants';
+import {Feature} from '../DataStore/common/Feature';
+import {Currency, PLATE_VALUE} from '../GameConstants';
 import KeyItemType from '../enums/KeyItemType';
 import PokemonType from '../enums/PokemonType';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import { ItemList } from '../items/ItemList';
+import {ItemList} from '../items/ItemList';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
-import { Mine } from './Mine';
+import {Mine, MineStateType} from './Mine';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import Settings from '../settings/Settings';
@@ -42,6 +42,8 @@ export class Underground implements Feature {
 
     public static sizeX = 25;
     public static sizeY = 12;
+
+    private _discoverMineCounter: Observable<number> = ko.observable(0);
 
     // Sort UndergroundItems.list whenever the sort method or quantities change
     public static sortedMineInventory: Computed<Array<UndergroundItem>> = ko.computed(function () {
@@ -116,6 +118,22 @@ export class Underground implements Feature {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     update(delta: number) {
+        this.handleDiscoverMineTick(delta);
+    }
+
+    private handleDiscoverMineTick(delta: number): void {
+        if (Mine.mineState === MineStateType.Undiscovered) {
+            GameHelper.incrementObservable(this._discoverMineCounter, delta);
+
+            if (this._discoverMineCounter() >= 60 - 1.2 * Underground.undergroundLevel()) {
+                Mine.discoverMine();
+                this._discoverMineCounter(0);
+            }
+        }
+    }
+
+    get discoverMineCounter(): number {
+        return this._discoverMineCounter();
     }
 
     getMinItems() {
@@ -365,6 +383,7 @@ export class Underground implements Feature {
         } else {
             Mine.loadMine();
         }
+        this._discoverMineCounter(json.discoverMineCounter || 0);
         UndergroundItems.list.forEach(it => it.sellLocked(json.sellLocks[it.itemName] || false));
 
         Underground.undergroundExp(json.undergroundExp || this.defaults.undergroundExp);
@@ -374,6 +393,7 @@ export class Underground implements Feature {
         const undergroundSave: Record<string, any> = {};
         undergroundSave.undergroundExp = Underground.undergroundExp();
         undergroundSave.mine = Mine.save();
+        undergroundSave.discoverMineCounter = this._discoverMineCounter();
         undergroundSave.sellLocks = UndergroundItems.list.reduce((sellLocks, item) => {
             if (item.sellLocked()) {
                 sellLocks[item.itemName] = true;
