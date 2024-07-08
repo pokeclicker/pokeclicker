@@ -24,23 +24,34 @@ export default class SaveSelector {
 
         $('[data-toggle="tooltip"]').tooltip();
 
+        const showContextMenu = (top: number, left: number, key: string) => {
+            $('#saveSelectorContextMenu').html(`
+                <a class="dropdown-item bg-success" href="#" onclick="Save.key = '${key}'; SaveSelector.Download('${key}')">Download (backup)</a>
+                <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">Load</a>
+                <a class="dropdown-item bg-warning" href="#"><label class="clickable my-0" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
+                <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">Delete</a>
+            `).css({
+                display: 'block',
+                position: 'absolute',
+                top,
+                left,
+            }).addClass('show');
+        };
+
         $(container).on('contextmenu', '.trainer-card.clickable', (e) => {
-            const top = e.pageY;
-            const left = e.pageX;
             const { key } = e.currentTarget.dataset;
             if (key) {
-                $('#saveSelectorContextMenu').html(`
-                    <a class="dropdown-item bg-success" href="#" onclick="Save.key = '${key}'; SaveSelector.Download('${key}')">Download (backup)</a>
-                    <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">Load</a>
-                    <a class="dropdown-item bg-warning" href="#"><label class="clickable my-0" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
-                    <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">Delete</a>
-                `).css({
-                    display: 'block',
-                    position: 'absolute',
-                    top,
-                    left,
-                }).addClass('show');
+                showContextMenu(e.pageY, e.pageX, key);
                 return false; // blocks default Webbrowser right click menu
+            }
+            return true;
+        });
+
+        $(container).on('click', '.context-menu-button', (e) => {
+            const { key } = e.currentTarget.closest('.trainer-card.clickable').dataset;
+            if (key) {
+                showContextMenu(e.pageY, e.pageX, key);
+                return false;
             }
             return true;
         });
