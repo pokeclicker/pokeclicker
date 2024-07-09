@@ -10,6 +10,24 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.21
+    new ChangelogUpdate('v0.10.21', new Date(2024, 6, 9)),
+    new Changelog(changelogType.NEW, 'New Pokémon'),
+    new Changelog(changelogType.NEW, 'Ability to view route Pokémon encounters'),
+    new Changelog(changelogType.NEW, 'Ability to view loot available in a dungeon'),
+    new Changelog(changelogType.NEW, 'Setting to disable the flashing animation before traveling to a new region'),
+    new Changelog(changelogType.CHANGE, 'Renamed Ditto (Transforming) to Ditto (Magikarp)'),
+    new Changelog(changelogType.CHANGE, 'Added Pokémon name translations to several additional locations'),
+    new Changelog(changelogType.CHANGE, 'Removed Z-Power Ring from Key Items list as it is not yet obtainable'),
+    new Changelog(changelogType.CHANGE, 'Effect of Petaya berry will be shown with altered berry growth times'),
+    new Changelog(changelogType.CHANGE, 'Miscellaneous text changes'),
+    new Changelog(changelogType.FIXED, 'Crash while loading when certain conditions were met'),
+    new Changelog(changelogType.FIXED, 'Pokéballs going negative while catching farm wanderers'),
+    new Changelog(changelogType.FIXED, 'Lucky Punch held item not available until Galar'),
+    new Changelog(changelogType.FIXED, 'Farm module sometimes not rendering after being disabled and re-enabled'),
+    new Changelog(changelogType.FIXED, 'Treasure Scanner notifications not respecting the underground item found notification setting'),
+    new Changelog(changelogType.FIXED, 'Accidentally leaving a dungeon and firing a Dungeon Guide while clicking'),
+
     // v0.10.20
     new ChangelogUpdate('v0.10.20', new Date(2024, 5, 19)),
     new Changelog(changelogType.NEW, 'New Pokémon'),

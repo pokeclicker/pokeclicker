@@ -325,8 +325,8 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- ko let: { 
-                                        berrySpecificWanderers: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) 
+                                    <!-- ko let: {
+                                        berrySpecificWanderers: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION)
                                     } -->
                                         <!-- ko if: berrySpecificWanderers.length -->
                                         <table class="table table-striped table-hover table-bordered table-sm m-0">
@@ -397,8 +397,8 @@
                     <br/><b>Evolution mutations:</b> They usually require a Berry changing into other and are related with flavour profiles or use of objects. <i>These mutations can start to happen at Taller stage.</i></p>
 
                     <h4><u>Mulches</u></h4>
-                    <p>Mulches can be bought in later regions from Berry Masters,
-                    <br/>They can be used on plots for different effects:</p>
+                    <p>Mulches can be bought in later regions from Berry Masters. They last 5 minutes each and can be stacked. However, you cannot combine multiple types of mulch on the same plot!</p>
+                    <p>They can be used on plots for different effects:</p>
                     <table class="table table-bordered table-striped">
                         <tr>
                             <td>Boost Mulch</td>

@@ -203,13 +203,17 @@ class Plot implements Saveable {
 
                 tooltip.push(`<u>${BerryType[this.berry]}</u>`);
 
+                const timeBoostType = Settings.getSetting('farmBoostDisplay').observableValue();
                 // Petaya Effect
                 if (App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya && this.stage() == PlotStage.Berry) {
                     tooltip.push('∞ until death');
+                    if (timeBoostType) {
+                        tooltip.push(`(altered from ${this.formattedBaseStageTimeLeft()})`);
+                    }
                 // Normal Time
                 } else {
                     const timeType = Settings.getSetting('farmDisplay').observableValue();
-                    const timeBoostType = Settings.getSetting('farmBoostDisplay').observableValue();
+
                     const growthMultiplierNumber = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
                     const altered = growthMultiplierNumber !== 1;
 
@@ -252,7 +256,10 @@ class Plot implements Saveable {
                         }
                     }
 
-                    tooltip.push(`${timetip}${altered && timeBoostType ? ` (altered from ${formattedBaseTime})` : ''}`);
+                    tooltip.push(timetip);
+                    if (altered && timeBoostType) {
+                        tooltip.push(`(altered from ${formattedBaseTime})`);
+                    }
                 }
             }
 
