@@ -30,6 +30,7 @@ class PurifyChamber implements Saveable {
     public currentFlow: KnockoutObservable<number>;
     public flowNeeded: KnockoutComputed<number>;
     private notified = false;
+    private flowNotification: {close: () => void}
 
     constructor() {
         this.selectedPokemon = ko.observable(undefined);
@@ -63,6 +64,7 @@ class PurifyChamber implements Saveable {
         this.selectedPokemon().shadow = GameConstants.ShadowStatus.Purified;
         this.currentFlow(0);
         this.notified = false;
+        this.flowNotification.close();
     }
 
     public gainFlow(exp: number) {
@@ -74,7 +76,7 @@ class PurifyChamber implements Saveable {
 
         if (!this.notified && this.currentFlow() >= this.flowNeeded()) {
             this.notified = true;
-            Notifier.notify({
+            this.flowNotification = Notifier.notify({
                 title: 'Purify Chamber',
                 message: 'Maximum Flow has accumulated at the Purify Chamber in Orre!',
                 type: NotificationConstants.NotificationOption.primary,

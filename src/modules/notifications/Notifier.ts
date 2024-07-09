@@ -26,12 +26,20 @@ export default class Notifier {
         image?: string;
         pokemonImage?: string;
         strippedMessage?: string;
-    }): void {
+    }): { close: () => void, closed: boolean } {
+        let returnData = { close: () => null, closed: false }; // an object is needed to pass by reference, since can't return from inside .ready
         $(document).ready(() => {
             // If we have sounds enabled for this, play it now
             if (sound) {
                 sound.play();
             }
+
+            let closers = [];
+            let closeAll = () => {
+                closers.map(f => f());
+                returnData.closed = true;
+            };
+            returnData.close = closeAll;
 
             if (setting && setting.desktopNotification.value && Notification.permission === 'granted') {
                 const tempEl = document.createElement('div');
@@ -42,9 +50,12 @@ export default class Notifier {
                     icon: image,
                     silent: true,
                 });
-                setTimeout(() => {
-                    desktopNotification.close();
-                }, timeout);
+                let desktopClosed = false;
+                let desktopCloser = () => {
+                    if (!desktopClosed) desktopNotification.close();
+                    desktopClosed = true;
+                };
+                closers.push(desktopCloser);
             }
 
             // Check if this type of notification is disabled
@@ -77,16 +88,22 @@ export default class Notifier {
 
             // Once the notification is shown, hide it after specified timeout
             $(`#${toastID}`).on('shown.bs.toast', () => {
-                setTimeout(() => {
-                    $(`#${toastID}`).toast('hide');
-                }, timeout);
+                let htmlClosed = false;
+                let htmlCloser = () => {
+                    if (!htmlClosed) $(`#${toastID}`).toast('hide');
+                    htmlClosed = true;
+                };
+                closers.push(htmlCloser);
             });
 
             // Once hidden remove the element
             $(`#${toastID}`).on('hidden.bs.toast', () => {
                 document.getElementById(toastID).remove();
             });
+
+            setTimeout(closeAll, timeout);
         });
+        return returnData;
     }
 
     public static prompt({
