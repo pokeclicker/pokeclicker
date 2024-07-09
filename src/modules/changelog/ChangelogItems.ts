@@ -24,6 +24,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Crash while loading when certain conditions were met'),
     new Changelog(changelogType.FIXED, 'Pokéballs going negative while catching farm wanderers'),
     new Changelog(changelogType.FIXED, 'Lucky Punch held item not available until Galar'),
+    new Changelog(changelogType.FIXED, 'Farm module sometimes not rendering after being disabled and re-enabled'),
     new Changelog(changelogType.FIXED, 'Treasure Scanner notifications not respecting the underground item found notification setting'),
     new Changelog(changelogType.FIXED, 'Accidentally leaving a dungeon and firing a Dungeon Guide while clicking'),
 
