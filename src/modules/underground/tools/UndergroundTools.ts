@@ -45,6 +45,9 @@ export default class UndergroundTools implements Feature {
 
         // Put all tools on global cooldown
         this.tools.forEach(tool => {
+            // Only put the other tools on cooldown
+            if (tool.id === toolType) return;
+
             tool.cooldown = Underground.globalCooldown;
         });
     }

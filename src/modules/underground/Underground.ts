@@ -109,7 +109,7 @@ export class Underground implements Feature {
             :
             1;
 
-        return Math.max(5 - 0.2 * Underground.undergroundLevel(), 0.1) / cellBatteryBonus;
+        return Math.max(15 - 0.5 * Underground.undergroundLevel(), 0.1) / cellBatteryBonus;
     }
 
     initialize() {
