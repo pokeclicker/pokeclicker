@@ -20,7 +20,6 @@
   "hideQuestsOnFull": "Masquer le menu des quêtes lorsque les emplacements sont pleins",
   "farmDisplay": "Afficher le minuteur dans la Ferme",
   "farmBoostDisplay": "Afficher le boost dans la Ferme",
-  "sizeUnits": "Unités de taille",
   "sizeUnits": "Unité de mesure des Baies",
   "currencyMainDisplayReduced": "Raccourcir les montants des devises affichés à l'écran principal",
   "currencyMainDisplayExtended": "Afficher les Diamants, Points de Récolte et Points de Combat à l'écran",
@@ -117,20 +116,20 @@
   "heldItemSearchFilter": "Rechercher",
   "breedingCategoryFilter": "Catégorie",
   "breedingShinyFilter": "Chromatique",
-  "breedingTypeFilter1": "Type 1",
-  "breedingTypeFilter2": "Type 2",
+  "breedingType1Filter": "Type 1",
+  "breedingType2Filter": "Type 2",
   "breedingRegionFilter": "Région",
   "breedingPokerusFilter": "Pokérus",
   "breedingUniqueTransformationFilter": "Transformation unique",
   "pokedexRegionFilter": "Région",
   "pokedexType1Filter": "Type 1",
   "pokedexType2Filter": "Type 2",
-  "pokedexShinyFilter": "Attrapé/Chromatique",
+  "pokedexCaughtFilter": "Attrapé/Chromatique",
   "pokedexPokerusFilter": "Pokérus",
   "pokedexUniqueTransformationFilter": "Transformation unique",
   "pokedexHeldItemFilter": "Objets tenus",
   "pokedexHideAltFilter": "Masquer les formes alternatives",
-  "breedingDisplayFilter": "Filtre d'affichage",
+  "breedingDisplayTextSetting": "Filtre d'affichage",
   "breedingRegionalAttackDebuffSetting": "Malus Régional",
   "achievementSort": "Tri",
   "achievementSortDirection": "",
@@ -180,7 +179,7 @@
   "discord-rp.timer-reset": "",
   "discord-rp.large-image": "",
   "discord-rp.small-image": "",
-"logBook": {
+  "logBook": {
     "NEW": "Nouveau",
     "SHINY": "Chromatique",
     "CAUGHT": "Capturé",
@@ -192,5 +191,5 @@
     "FRONTIER": "Frontière",
     "WANDER": "Errance",
     "OTHER": "Autre"
-}
+  }
 }
