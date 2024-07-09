@@ -6089,6 +6089,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 132.01,
+        'name': 'Ditto (Magikarp)',
+        'catchRate': 35,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 101,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 48,
+            'attack': 48,
+            'specialAttack': 48,
+            'defense': 48,
+            'specialDefense': 48,
+            'speed': 48,
+        },
+        'gender': {
+            'visualDifference': true,
+        },
+    },
+    {
         'id': 133,
         'name': 'Eevee',
         'catchRate': 45,
@@ -21138,6 +21158,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 686.01,
+        'name': 'Inkay (Pikachu)',
+        'type': [PokemonType.Psychic, PokemonType.Electric],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 58,
+        'catchRate': 190,
+        'base': {
+            'hitpoints': 53,
+            'attack': 54,
+            'specialAttack': 37,
+            'defense': 53,
+            'specialDefense': 46,
+            'speed': 45,
+        },
+    },
+    {
         'id': 687,
         'name': 'Malamar',
         'type': [PokemonType.Dark, PokemonType.Psychic],
@@ -24407,6 +24444,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
+        'evolutions': [StoneEvolution('Marshadow', 'Marshadow (Zenith)', StoneType.Crystallized_shadow)],
         'base': {
             'hitpoints': 90,
             'attack': 125,
@@ -24418,6 +24456,28 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'heldItem': { type: ItemType.item, id: 'Crystallized_shadow' },
+    },
+    {
+        'id': 802.01,
+        'name': 'Marshadow (Zenith)',
+        'type': [PokemonType.Fighting, PokemonType.Ghost],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 90,
+            'attack': 125,
+            'specialAttack': 90,
+            'defense': 80,
+            'specialDefense': 90,
+            'speed': 125,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+        'heldItem': { type: ItemType.item, id: 'Crystallized_shadow' },
     },
     {
         'id': 803,
@@ -25352,6 +25412,7 @@ export const pokemonList = createPokemonArray(
         'id': 840.01,
         'name': 'Exposed Applin',
         'type': [
+            PokemonType.Bug,
             PokemonType.Dragon,
         ],
         'base': {
