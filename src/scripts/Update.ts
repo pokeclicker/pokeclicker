@@ -2761,6 +2761,14 @@ class Update implements Saveable {
                 settingsData.breedingRegionalAttackDebuffSetting = '-1';
             }
         },
+        '0.10.22': ({ settingsData }) => {
+            if (settingsData.showFarmModule === false) {
+                settingsData.showFarmModule = 'never';
+            } else {
+                settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
+            }
+            delete settingsData.showFarmModuleControls;
+        },
     };
 
     constructor() {
