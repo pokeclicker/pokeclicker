@@ -44,6 +44,8 @@ class Player {
             });
             this._timeTraveller = true;
         }
+        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
+        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
         this._region = ko.observable(savedPlayer._region);
         this._subregion = ko.observable(savedPlayer._subregion || 0);
         this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this.region, this.subregion));
@@ -93,8 +95,6 @@ class Player {
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer();
-        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
-        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
@@ -148,9 +148,9 @@ class Player {
 
     set subregion(value: number) {
         if (value < 0) {
-            value = Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id));
+            value = Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id));
         }
-        if (value > Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
+        if (value > Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
             value = 0;
         }
         const changedSubregions = value !== this.subregion;
@@ -162,9 +162,9 @@ class Player {
 
         if (changedSubregions) {
             const subregion = SubRegions.getSubRegionById(this.region, value);
-            if (subregion.startRoute && subregion.startRoute !== player.route) {
-                MapHelper.moveToRoute(subregion.startRoute, player.region);
-            } else if (subregion.startTown && subregion.startTown !== player.town.name) {
+            if (subregion.startRoute && subregion.startRoute !== this.route) {
+                MapHelper.moveToRoute(subregion.startRoute, this.region);
+            } else if (subregion.startTown && subregion.startTown !== this.town.name) {
                 MapHelper.moveToTown(subregion.startTown);
             }
         }
