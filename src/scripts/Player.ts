@@ -201,7 +201,7 @@ class Player {
     public gainMegaStone(megaStone: GameConstants.MegaStoneType, notify = true) {
         const name = GameConstants.MegaStoneType[megaStone];
         if (!this.itemList[name]()) {
-            player.gainItem(name, 1);
+            this.gainItem(name, 1);
         }
 
         if (notify) {
