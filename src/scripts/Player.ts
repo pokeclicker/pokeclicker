@@ -152,7 +152,7 @@ class Player {
     }
 
     set subregion(value: number) {
-        const maxUnlockedSubregion = Math.max(...SubRegions.getUnlockedSubRegions(player.region).map(sr => sr.id));
+        const maxUnlockedSubregion = Math.max(...SubRegions.getUnlockedSubRegions(this.region).map(sr => sr.id));
         if (value < 0) {
             value = 0;
         }
