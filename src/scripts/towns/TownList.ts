@@ -7414,7 +7414,7 @@ const SophoclesSilvally1 = new NPC('Captain Sophocles', [
 });
 const VeteranSilvally1 = new NPC('Veteran Aristo', [
     'Hey, $playername$. Looking for a battle? Hm, ok. Can I say something to you anyway? It will be quick. I want to propose to my girlfriend, but I can\'t afford the ring she really wants. It\'s so expensive, and I feel guilty not being able to give her what she deserves. I don\'t know what to do! Maybe I could pick up some extra work to hire more Miners for some Diamonds.',
-    'Anyway what did you want to ask me? Hmm, if I\'ve seen a Silvally Memory anywhere near? Sure, it\'s in my pocket right here. It even is coloured like a diamond! I wish I could trade it for some... hm? You\'re asking if we could do a trade? Sure, I\'ll sell it to you for 5k Diamonds, so I can buy my lovely fiancée-to-be an engagement ring. I\'ll always be here in the same place at all times, we can trade anytime you want.',
+    'Anyway what did you want to ask me? Hmm, if I\'ve seen a Silvally Memory anywhere near? Sure, it\'s in my pocket right here. It even is coloured like a diamond! I wish I could trade it for some... hm? You\'re asking if we could do a trade? Sure, I\'ll sell it to you for 1k Diamonds, so I can buy my lovely fiancée-to-be an engagement ring. I\'ll always be here in the same place at all times, we can trade anytime you want.',
 ], {
     image: 'assets/images/npcs/Veteran (male).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 12, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 14, GameConstants.AchievementOption.less)]),
@@ -7546,7 +7546,7 @@ const RoadsideMotelAnabel2 = new NPC('Anabel', [
 });
 const RoadsideMotelAnabel3 = new NPC('Anabel', [
     'Congratulations once again. Looker told me he wants to take us to a great restaurant to celebrate. I don\'t know how he knows any restaurants around here, we\'ve only just arrived.',
-    'It doesn\'t matter though. There is no rest for us. Captain Mina is here with news, but she insist on battling you before she\'ll tell us anything.',
+    'It doesn\'t matter though. There is no rest for us. Captain Mina is here with news, but she insists on battling you before she\'ll tell us anything.',
 ], {
     image: 'assets/images/npcs/Anabel.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 6, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 8, GameConstants.AchievementOption.less)]),
@@ -7571,7 +7571,7 @@ const RoadsideMotelNanu1 = new NPC('Kahuna Nanu', [
 });
 const RoadsideMotelNanu2 = new NPC('Kahuna Nanu', [
     '...',
-    'Good job on rounding up those creatures kid.',
+    'Good job on rounding up those creatures, kid.',
     'Now, how about one more battle? I insist.',
 ], {
     image: 'assets/images/npcs/Nanu.png',
@@ -8434,6 +8434,11 @@ const HammerlockeHiker = new NPC('Hiker Donald', [
     'My mate told me a story of a Pikachu getting lodged in the gluttonous bird’s gullet while it was gorging in a thunderstorm! But that sounds ridiculous! How would it not be bothered by the big rat in its throat? It would drive me mad.',
 ], {image: 'assets/images/npcs/Hiker (Gen 8).png'});
 
+const WyndonBattleCafeRichard = new NPC('Richard', [
+    'This might sound cheesy, but I love Milcery so much! I wasn\'t sure which Alcremie form I liked the most, so I just grabbed a Sweet at random and started to spin and spin for what seemed like an hour.',
+    'I saw my partner liked it a lot! Maybe you should try the same one day!',
+]);
+
 const AncientMural1 = new NPC('Ancient Mural', [
     '<i>It’s Stow-on-Side’s famous mural.</i>',
     '<i>It’s said to be a very deep work of art...</i>',
@@ -9178,6 +9183,7 @@ TownList.Wyndon = new Town(
     [WyndonShop, new MoveToDungeon(dungeonList['Rose Tower']), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
+        npcs: [WyndonBattleCafeRichard],
     }
 );
 TownList['Wyndon Stadium'] = new Town(
