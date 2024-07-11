@@ -2628,6 +2628,7 @@ export const ModalCollapseList = [
     'shortcutsBody',
     'currencyBody',
     'undergroundCard',
+    'undergroundDailyTradesCard',
     'plotListCard',
     'zCrystalItemContainerBody',
 ];
