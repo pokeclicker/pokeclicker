@@ -7,9 +7,7 @@ import Notifier from '../notifications/Notifier';
 import Amount from '../wallet/Amount';
 
 export default class Upgrade implements Saveable {
-    defaults = {
-        level: 0,
-    };
+    defaults = {};
     saveKey: string;
 
     levelKO: KnockoutObservable<number> = ko.observable();
@@ -25,9 +23,10 @@ export default class Upgrade implements Saveable {
         // Describes whether this upgrade increases or decreases a number.
         // (e.g. power is increasing, time is decreasing).
         public increasing = true,
+        public startLevel: number = 0,
     ) {
         this.saveKey = name;
-        this.level = this.defaults.level;
+        this.level = startLevel;
     }
 
     calculateCost(): Amount {
@@ -83,7 +82,7 @@ export default class Upgrade implements Saveable {
         if (json == null) {
             return;
         }
-        this.level = json.level ?? this.defaults.level;
+        this.level = json.level ?? this.startLevel;
     }
 
     toJSON(): Record<string, any> {

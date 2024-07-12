@@ -18,6 +18,7 @@ import UndergroundItems from './UndergroundItems';
 import UndergroundUpgrade, { Upgrades } from './UndergroundUpgrade';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import Settings from '../settings/Settings';
+import Amount from '../wallet/Amount';
 
 export class Underground implements Feature {
     name = 'Underground';
@@ -217,6 +218,15 @@ export class Underground implements Feature {
                 true,
                 'Greatly reduces the number of Galar fossil pieces (toggleable)',
                 new MaxRegionRequirement(Region.galar),
+            ),
+            // Available & enabled by default
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Reduced_Fossils, 'Reduced Fossils', 1,
+                [new Amount(0, Currency.diamond)],
+                [],
+                true,
+                'Greatly reduces the number of previously found fossils (toggleable)',
+                undefined, 1,
             ),
         ];
     }
@@ -492,7 +502,8 @@ export class Underground implements Feature {
         const upgrades = json.upgrades;
         for (const item in UndergroundUpgrade.Upgrades) {
             if (isNaN(Number(item))) {
-                this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level = upgrades[item] || 0;
+                const upgrade = this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]);
+                upgrade.level = upgrades[item] || upgrade.startLevel;
             }
         }
         this.energy = json.energy || 0;
