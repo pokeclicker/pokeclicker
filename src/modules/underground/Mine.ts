@@ -10,6 +10,14 @@ import { Underground } from './Underground';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundToolType from './tools/UndergroundToolType';
+import {
+    DiamondMineConfig, EvolutionItemMineConfig, FossilMineConfig,
+    GemPlateMineConfig,
+    MegaStoneMineConfig,
+    MineConfig,
+    MineType,
+    ShardMineConfig,
+} from './mine/MineConfig';
 
 export enum MineStateType {
     None,
@@ -44,11 +52,13 @@ export class Mine {
         this._mineState(MineStateType.Active);
     }
 
-    public static abandoneMine(): void {
+    public static abandonMine(): void {
         this._mineState(MineStateType.Abandoned);
     }
 
-    public static loadMine() {
+    public static loadMine(mineType?: MineType) {
+        const mineConfig = this.getMineConfig(mineType);
+
         this._mineState(MineStateType.Loading);
 
         ko.cleanNode(document.getElementById('mineBody'));
@@ -80,7 +90,7 @@ export class Mine {
         }
 
         // Get our available items
-        let items = UndergroundItems.getUnlockedItems();
+        let items = mineConfig.getAvailableItems();
         items = Rand.shuffleWeightedArray(items, items.map((i) => i.getWeight())).reverse();
         // Add numItems items to the layer
         for (let i = 0; i < numItems && items.length; i++) {
@@ -124,6 +134,22 @@ export class Mine {
         }
 
         ko.applyBindings(null, document.getElementById('mineBody'));
+    }
+
+    private static getMineConfig(mineType: MineType = undefined) {
+        if (Rand.chance(25) && MegaStoneMineConfig.getAvailableItems().length > 0) {
+            return MegaStoneMineConfig;
+        }
+
+        const otherMines: MineConfig[] = [
+            DiamondMineConfig,
+            GemPlateMineConfig,
+            ShardMineConfig,
+            FossilMineConfig,
+            EvolutionItemMineConfig,
+        ];
+
+        return otherMines.find(config => config.type === mineType) || Rand.fromArray(otherMines);
     }
 
     private static getRandomCoord(max: number, size: number): number {

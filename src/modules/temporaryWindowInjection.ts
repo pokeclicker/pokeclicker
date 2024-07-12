@@ -189,6 +189,7 @@ import TextMerger from './utilities/TextMerger';
 import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
 import { DailyDeal } from './underground/DailyDeal';
 import { Mine } from './underground/Mine';
+import { MineType } from './underground/mine/MineConfig';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import UndergroundTools from './underground/tools/UndergroundTools';
@@ -408,6 +409,7 @@ Object.assign(<any>window, {
     TextMerger,
     pokeballFilterOptions,
     Mine,
+    MineType,
     Underground,
     UndergroundTools,
     UndergroundToolType,
