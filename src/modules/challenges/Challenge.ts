@@ -1,8 +1,7 @@
-import {
-    Observable as KnockoutObservable,
-} from 'knockout';
+import { Observable as KnockoutObservable } from 'knockout';
 import * as GameConstants from '../GameConstants';
 import Notifier from '../notifications/Notifier';
+import NotificationOption from '../notifications/NotificationOption';
 
 export default class Challenge {
     public active: KnockoutObservable<boolean>;
@@ -30,6 +29,8 @@ export default class Challenge {
         if (await Notifier.confirm({
             title: `Disable "${this.type}" challenge`,
             message: 'Are you sure you want to disable this challenge?\n\nOnce disabled, you will not be able to enable it again later!',
+            confirm: '<span style="white-space: nowrap;">Permanently disable</span>',
+            type: NotificationOption.danger,
         })) {
             this.active(false);
         }
