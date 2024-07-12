@@ -4,6 +4,7 @@ import { MegaStoneType, Region, StoneType } from '../GameConstants';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import Rand from '../utilities/Rand';
 import UndergroundEvolutionItem from './UndergroundEvolutionItem';
+import UndergroundFossilItem from './UndergroundFossilItem';
 import UndergroundFossilPieceItem from './UndergroundFossilPieceItem';
 import UndergroundGemItem from './UndergroundGemItem';
 import UndergroundItem from './UndergroundItem';
@@ -90,28 +91,17 @@ UndergroundItems.addItem(new UndergroundGemItem(116, 'Pixie_plate', [[1, 1, 1, 1
 UndergroundItems.addItem(new UndergroundGemItem(117, 'Blank_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Normal));
 
 // Fossils/Fossil Pieces
-UndergroundItems.addItem(new UndergroundItem(200, 'Helix_fossil', [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
-    () => (App.game.party.alreadyCaughtPokemonByName('Omanyte') || player.itemList.Helix_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(201, 'Dome_fossil', [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
-    () => (App.game.party.alreadyCaughtPokemonByName('Kabuto') || player.itemList.Dome_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(202, 'Old_amber', [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
-    () => (App.game.party.alreadyCaughtPokemonByName('Aerodactyl') || player.itemList.Old_amber() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(203, 'Root_fossil', [[0, 0, 1, 1, 1], [0, 0, 1, 1, 1], [1, 0, 0, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.hoenn),
-    () => (App.game.party.alreadyCaughtPokemonByName('Lileep') || player.itemList.Root_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(204, 'Claw_fossil', [[1, 1, 1, 0, 0], [1, 1, 1, 1, 0], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.hoenn),
-    () => (App.game.party.alreadyCaughtPokemonByName('Anorith') || player.itemList.Claw_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(205, 'Armor_fossil', [[0, 1, 1, 1, 0], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.sinnoh),
-    () => (App.game.party.alreadyCaughtPokemonByName('Shieldon') || player.itemList.Armor_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(206, 'Skull_fossil', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [0, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.sinnoh),
-    () => (App.game.party.alreadyCaughtPokemonByName('Cranidos') || player.itemList.Skull_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(207, 'Cover_fossil', [[1, 1, 1, 1, 0], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 1]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.unova),
-    () => (App.game.party.alreadyCaughtPokemonByName('Tirtouga') || player.itemList.Cover_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(208, 'Plume_fossil', [[0, 0, 1, 1, 1], [0, 1, 1, 1, 1], [1, 1, 1, 1, 0], [1, 1, 1, 1, 0], [1, 1, 0, 0, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.unova),
-    () => (App.game.party.alreadyCaughtPokemonByName('Archen') || player.itemList.Plume_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(209, 'Jaw_fossil', [[0, 0, 1, 1, 1], [0, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.kalos),
-    () => (App.game.party.alreadyCaughtPokemonByName('Tyrunt') || player.itemList.Jaw_fossil() > 0 ? 0.1 : 1.5)));
-UndergroundItems.addItem(new UndergroundItem(210, 'Sail_fossil', [[1, 1, 1, 0, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.kalos),
-    () => (App.game.party.alreadyCaughtPokemonByName('Amaura') || player.itemList.Sail_fossil() > 0 ? 0.1 : 1.5)));
+UndergroundItems.addItem(new UndergroundFossilItem(200, 'Helix_fossil', [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, null));
+UndergroundItems.addItem(new UndergroundFossilItem(201, 'Dome_fossil', [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, null));
+UndergroundItems.addItem(new UndergroundFossilItem(202, 'Old_amber', [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, null));
+UndergroundItems.addItem(new UndergroundFossilItem(203, 'Root_fossil', [[0, 0, 1, 1, 1], [0, 0, 1, 1, 1], [1, 0, 0, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundFossilItem(204, 'Claw_fossil', [[1, 1, 1, 0, 0], [1, 1, 1, 1, 0], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1]], 0, new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundFossilItem(205, 'Armor_fossil', [[0, 1, 1, 1, 0], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundFossilItem(206, 'Skull_fossil', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [0, 1, 1, 0]], 0, new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundFossilItem(207, 'Cover_fossil', [[1, 1, 1, 1, 0], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 1]], 0, new MaxRegionRequirement(Region.unova)));
+UndergroundItems.addItem(new UndergroundFossilItem(208, 'Plume_fossil', [[0, 0, 1, 1, 1], [0, 1, 1, 1, 1], [1, 1, 1, 1, 0], [1, 1, 1, 1, 0], [1, 1, 0, 0, 0]], 0, new MaxRegionRequirement(Region.unova)));
+UndergroundItems.addItem(new UndergroundFossilItem(209, 'Jaw_fossil', [[0, 0, 1, 1, 1], [0, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 0]], 0, new MaxRegionRequirement(Region.kalos)));
+UndergroundItems.addItem(new UndergroundFossilItem(210, 'Sail_fossil', [[1, 1, 1, 0, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, new MaxRegionRequirement(Region.kalos)));
 UndergroundItems.addItem(new UndergroundFossilPieceItem(211, 'Fossilized_bird', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, new MaxRegionRequirement(Region.galar)));
 UndergroundItems.addItem(new UndergroundFossilPieceItem(212, 'Fossilized_fish', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, new MaxRegionRequirement(Region.galar)));
 UndergroundItems.addItem(new UndergroundFossilPieceItem(213, 'Fossilized_drake', [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, new MaxRegionRequirement(Region.galar)));
