@@ -223,7 +223,7 @@ export class Underground implements Feature {
             new UndergroundUpgrade(
                 UndergroundUpgrade.Upgrades.Reduced_Fossils, 'Reduced Fossils', 1,
                 [new Amount(0, Currency.diamond)],
-                [],
+                GameHelper.createArray(0, 1, 1),
                 true,
                 'Greatly reduces the number of previously found fossils (toggleable)',
                 undefined, 1,
