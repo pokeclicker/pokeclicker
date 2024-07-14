@@ -14,6 +14,7 @@ export enum MineType {
 export interface MineConfig {
     type: MineType;
     getAvailableItems: () => UndergroundItem[];
+    fixedItemCount?: number;
 }
 
 export const DiamondMineConfig: MineConfig = {
@@ -44,4 +45,5 @@ export const EvolutionItemMineConfig: MineConfig = {
 export const MegaStoneMineConfig: MineConfig = {
     type: MineType.MegaStone,
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.MegaStone),
+    fixedItemCount: 1,
 };

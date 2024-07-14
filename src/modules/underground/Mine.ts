@@ -77,7 +77,7 @@ export class Mine {
                 layerDepth: ko.observable(Math.min(Mine.maxLayerDepth, Math.max(1, Math.floor(Rand.float(2) + Rand.float(3)) + 1))),
             };
         });
-        const numberOfItemsToGenerate = Rand.intBetween(
+        const numberOfItemsToGenerate = mineConfig.fixedItemCount ?? Rand.intBetween(
             Math.min(App.game.underground.getMinItems(), App.game.underground.getMaxItems()),
             App.game.underground.getMaxItems(),
         );

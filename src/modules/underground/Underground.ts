@@ -161,7 +161,9 @@ export class Underground implements Feature {
         for (let yCoordinate = 0; yCoordinate < Mine.rowCount; yCoordinate++) {
             // html += '<div class="row">';
             for (let xCoordinate = 0; xCoordinate < Mine.columnCount; xCoordinate++) {
-                html += `<div data-row='${yCoordinate}' data-column='${xCoordinate}' data-bind="css: Underground.calculateCssClass(${xCoordinate}, ${yCoordinate}), style: Underground.calculateStyle(${xCoordinate}, ${yCoordinate})"></div>`;
+                // Needs to be a sub-element because ::after z-index gets reset when used with transform: rotate()
+                // https://stackoverflow.com/questions/20851452/z-index-is-canceled-by-setting-transformrotate
+                html += `<div data-row='${yCoordinate}' data-column='${xCoordinate}' class="mineSquare" data-bind="css: Underground.calculateCssClass(${xCoordinate}, ${yCoordinate})"><div data-bind="style: Underground.calculateStyle(${xCoordinate}, ${yCoordinate})"></div></div>`;
             }
             // html += '</div>';
         }
@@ -172,9 +174,9 @@ export class Underground implements Feature {
         const { layerDepth } = Mine.grid[yCoordinate * Mine.columnCount + xCoordinate];
 
         if (layerDepth() > 0) {
-            return `rock${layerDepth()} mineSquare`;
+            return `rock${layerDepth()}`;
         } else {
-            return 'mineSquare';
+            return '';
         }
     }
 
@@ -194,13 +196,14 @@ export class Underground implements Feature {
                 backgroundPositionSpace = Mine.rotateRewardSpace90Clockwise(backgroundPositionSpace);
             }
 
-
             return {
                 'background-image': `url('${undergroundImage}')`,
                 'background-position': backgroundPositionSpace[reward.localYCoordinate][reward.localXCoordinate],
                 'background-size': `${space[0].length * 100}% ${space.length * 100}%`,
                 'transform': `rotate(${reward.rotations * 90}deg)`,
-                'opacity': reward.rewarded() ? 0.25 : 1,
+                'filter': `opacity(${reward.rewarded() ? 0.25 : 1})`,
+                'position': 'absolute',
+                'inset': 0,
             };
         } else {
             return {
