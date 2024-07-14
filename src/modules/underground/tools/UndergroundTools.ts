@@ -52,17 +52,16 @@ export default class UndergroundTools implements Feature {
         return this.tools.find(tool => tool.id === toolType);
     }
 
-    public useTool(toolType: UndergroundToolType, x: number, y: number, playerTriggered: boolean = true): void {
+    public useTool(toolType: UndergroundToolType, x: number, y: number, forced: boolean = false): void {
         const tool = this.getTool(toolType);
 
-        if (!tool || !tool.canUseTool() || Mine.mineState !== MineStateType.Active) {
-            return;
-        }
+        if (!tool || Mine.mineState !== MineStateType.Active) return;
 
-        // Trigger the action
-        tool.action(x, y);
+        if (forced) {
+            tool.action(x, y);
+        } else if (tool.canUseTool()) {
+            tool.action(x, y);
 
-        if (playerTriggered) {
             // Use a stored use, or trigger the cooldown
             if (tool.storedUses > 0) tool.useStoredUse();
             else tool.cooldown = tool.baseCooldown - tool.cooldownReductionPerLevel * Underground.undergroundLevel();
