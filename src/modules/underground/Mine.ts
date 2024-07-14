@@ -265,6 +265,9 @@ export class Mine {
     }
 
     private static attemptBreakTile(xCoordinate: number, yCoordinate: number, layers: number = 1) {
+        if (xCoordinate < 0 || xCoordinate >= Mine.columnCount) return false;
+        if (yCoordinate < 0 || yCoordinate >= Mine.rowCount) return false;
+
         const index = yCoordinate * this.columnCount + xCoordinate;
         const layerDepthAtCoordinate = this.grid[index].layerDepth();
 
