@@ -364,8 +364,8 @@ export class Mine {
         if (this.mineState !== MineStateType.Active) return false;
         if (Mine.itemsFound() < Mine.itemsBuried()) return false;
 
+        Underground.addUndergroundExp(100);
         GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
-
         App.game.oakItems.use(OakItemType.Explosive_Charge);
 
         ko.cleanNode(document.getElementById('mineBody'));
