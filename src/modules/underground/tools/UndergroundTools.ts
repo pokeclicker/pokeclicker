@@ -2,7 +2,7 @@ import UndergroundTool from './UndergroundTool';
 import UndergroundToolType from './UndergroundToolType';
 import { Underground } from '../Underground';
 import { Feature } from '../../DataStore/common/Feature';
-import { Mine } from '../Mine';
+import { Mine, MineStateType } from '../Mine';
 import Rand from '../../utilities/Rand';
 
 export default class UndergroundTools implements Feature {
@@ -30,7 +30,7 @@ export default class UndergroundTools implements Feature {
                 let hasMined = false;
                 for (let deltaX = -1; deltaX <= 1; deltaX++) {
                     for (let deltaY = -1; deltaY <= 1; deltaY++) {
-                        hasMined ||= Mine.attemptBreakTile(x + deltaX, y + deltaY, 1);
+                        hasMined = Mine.attemptBreakTile(x + deltaX, y + deltaY, 1) || hasMined;
                     }
                 }
                 return hasMined;
@@ -48,25 +48,34 @@ export default class UndergroundTools implements Feature {
         this.tools.forEach(tool => tool.tick(delta));
     }
 
-    public getTool(toolType: UndergroundToolType) {
+    private getTool(toolType: UndergroundToolType): UndergroundTool {
         return this.tools.find(tool => tool.id === toolType);
     }
 
-    public canUseTool(toolType: UndergroundToolType): boolean {
-        return this.tools.find(tool => tool.id === toolType)?.canUseTool() || false;
-    }
+    public useTool(toolType: UndergroundToolType, x: number, y: number, playerTriggered: boolean = true): void {
+        const tool = this.getTool(toolType);
 
-    public useTool(toolType: UndergroundToolType): void {
-        // Put the current tool on cooldown
-        this.tools.find(tool => tool.id === toolType).use();
+        if (!tool || !tool.canUseTool() || Mine.mineState !== MineStateType.Active) {
+            return;
+        }
 
-        // Put all tools on global cooldown
-        this.tools.forEach(tool => {
-            // Only put the other tools on cooldown
-            if (tool.id === toolType) return;
+        // Trigger the action
+        tool.action(x, y);
 
-            tool.cooldown = Underground.globalCooldown;
-        });
+        if (playerTriggered) {
+            // Use a stored use, or trigger the cooldown
+            if (tool.storedUses > 0) tool.useStoredUse();
+            else tool.cooldown = tool.baseCooldown - tool.cooldownReductionPerLevel * Underground.undergroundLevel();
+
+            // Put all other tools on cooldown
+            this.tools.forEach(t => {
+                if (t.id !== toolType) {
+                    t.cooldown = Underground.globalCooldown;
+                }
+            });
+
+            Underground.addUndergroundExp(tool.experiencePerUse);
+        }
     }
 
     fromJSON(json: Record<string, any>) {

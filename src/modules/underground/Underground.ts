@@ -434,7 +434,7 @@ export class Underground implements Feature {
 
 $(document).ready(() => {
     $('body').on('click', '.mineSquare', function () {
-        Mine.click(parseInt(this.dataset.row, 10), parseInt(this.dataset.column, 10));
+        App.game.undergroundTools.useTool(Mine.selectedTool(), parseInt(this.dataset.column, 10), parseInt(this.dataset.row, 10));
     });
 });
 

@@ -54,7 +54,7 @@
                                         <div class="d-flex flex-column align-items-center">
                                             <img src="../assets/images/underground/Chisel.png" alt="">
                                             <div>Chisel</div>
-                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).freeUses"></knockout></div>
+                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).storedUses"></knockout></div>
                                             <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                             <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).baseCooldown"></knockout></div>
                                         </div>
@@ -66,7 +66,7 @@
                                         <div class="d-flex flex-column align-items-center">
                                             <img src="../assets/images/underground/Hammer.png" alt="">
                                             <div>Hammer</div>
-                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).freeUses"></knockout></div>
+                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).storedUses"></knockout></div>
                                             <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                             <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).baseCooldown"></knockout></div>
                                         </div>
@@ -78,7 +78,7 @@
                                         <div class="d-flex flex-column align-items-center">
                                             <img src="../assets/images/underground/Bomb.png" alt="">
                                             <div>Bomb</div>
-                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).freeUses"></knockout></div>
+                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).storedUses"></knockout></div>
                                             <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                             <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).baseCooldown"></knockout></div>
                                         </div>

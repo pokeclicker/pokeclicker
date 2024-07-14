@@ -1,11 +1,10 @@
 import { Observable } from 'knockout';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from './UndergroundToolType';
-import { Underground } from '../Underground';
 
 export default class UndergroundTool {
     private _nextAllowedUse = ko.observable(Date.now());
-    private _freeUses: Observable<number> = ko.observable(0);
+    private _storedUses: Observable<number> = ko.observable(0);
 
     public cooldownForDisplay = ko.observable(0);
 
@@ -17,24 +16,24 @@ export default class UndergroundTool {
         public cooldownReductionPerLevel: number,
         public maximumStoredUsages: number,
         public experiencePerUse: number,
-        private _action: (x: number, y: number) => void,
+        public action: (x: number, y: number) => void,
     ) {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public tick(deltaTime: number) {
-        this.handleFreeUsesTick(deltaTime);
+        this.handleStoredUsesTick(deltaTime);
         this.cooldownForDisplay(this.cooldown);
     }
 
-    private handleFreeUsesTick(deltaTime: number) {
+    private handleStoredUsesTick(deltaTime: number) {
         if (this.cooldown > 0) return;
-        if (this.freeUses >= this.maximumStoredUsages) return;
+        if (this.storedUses >= this.maximumStoredUsages) return;
 
         GameHelper.incrementObservable(this._counter, deltaTime);
 
         if (this._counter() >= this.baseCooldown) {
-            GameHelper.incrementObservable(this._freeUses);
+            GameHelper.incrementObservable(this._storedUses);
             GameHelper.incrementObservable(this._counter, -this.baseCooldown);
         }
     }
@@ -43,20 +42,12 @@ export default class UndergroundTool {
         return this.cooldown <= 0;
     }
 
-    public use(): void {
-        if (!this.canUseTool()) return;
-
-        if (this.freeUses > 0) {
-            GameHelper.incrementObservable(this._freeUses, -1);
-        } else if (this.freeUses === 0) {
-            this.cooldown = this.baseCooldown - this.cooldownReductionPerLevel * Underground.undergroundLevel();
-        }
-
-        Underground.addUndergroundExp(this.experiencePerUse);
+    get storedUses(): number {
+        return Math.floor(this._storedUses());
     }
 
-    get freeUses(): number {
-        return Math.floor(this._freeUses());
+    public useStoredUse(): void {
+        GameHelper.incrementObservable(this._storedUses, -1);
     }
 
     get cooldown(): number {
@@ -73,14 +64,14 @@ export default class UndergroundTool {
 
     public fromJSON(save) {
         this.cooldown = save.cooldown || 0;
-        this._freeUses(save?.freeUses || 0);
+        this._storedUses(save?.storedUses || 0);
         this._counter(save?.counter || 0);
     }
 
     public toJSON() {
         return {
             cooldown: this.cooldown,
-            freeUses: this._freeUses(),
+            storedUses: this._storedUses(),
             counter: this._counter(),
         };
     }
