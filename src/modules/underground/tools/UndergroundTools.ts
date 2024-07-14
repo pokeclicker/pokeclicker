@@ -2,6 +2,8 @@ import UndergroundTool from './UndergroundTool';
 import UndergroundToolType from './UndergroundToolType';
 import { Underground } from '../Underground';
 import { Feature } from '../../DataStore/common/Feature';
+import { Mine } from '../Mine';
+import Rand from '../../utilities/Rand';
 
 export default class UndergroundTools implements Feature {
     name = 'Underground Tools';
@@ -21,9 +23,24 @@ export default class UndergroundTools implements Feature {
 
     initialize() {
         this.tools = [
-            new UndergroundTool(UndergroundToolType.Chisel, 20, 2, 50, 1),
-            new UndergroundTool(UndergroundToolType.Hammer, 60, 4, 15, 2),
-            new UndergroundTool(UndergroundToolType.Bomb, 180, 9, 5, 3),
+            new UndergroundTool(UndergroundToolType.Chisel, 20, 2, 50, 1, (x, y) => {
+                return Mine.attemptBreakTile(x, y, 2);
+            }),
+            new UndergroundTool(UndergroundToolType.Hammer, 60, 4, 15, 2, (x, y) => {
+                let hasMined = false;
+                for (let deltaX = -1; deltaX <= 1; deltaX++) {
+                    for (let deltaY = -1; deltaY <= 1; deltaY++) {
+                        hasMined ||= Mine.attemptBreakTile(x + deltaX, y + deltaY, 1);
+                    }
+                }
+                return hasMined;
+            }),
+            new UndergroundTool(UndergroundToolType.Bomb, 180, 9, 5, 3, () => {
+                for (let i = 0; i < App.game.underground.getBombEfficiency(); i++) {
+                    Mine.attemptBreakTile(Rand.floor(Mine.columnCount), Rand.floor(Mine.rowCount), 2);
+                }
+                return true;
+            }),
         ];
     }
 
