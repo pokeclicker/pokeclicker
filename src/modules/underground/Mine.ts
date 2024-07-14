@@ -8,13 +8,17 @@ import { Underground } from './Underground';
 import UndergroundItem from './UndergroundItem';
 import UndergroundToolType from './tools/UndergroundToolType';
 import {
-    DiamondMineConfig, EvolutionItemMineConfig, FossilMineConfig,
+    DiamondMineConfig,
+    EvolutionItemMineConfig,
+    FossilMineConfig,
     GemPlateMineConfig,
     MegaStoneMineConfig,
     MineConfig,
     MineType,
     ShardMineConfig,
 } from './mine/MineConfig';
+import UndergroundItems from './UndergroundItems';
+import { humanifyString } from '../GameConstants';
 
 export enum MineStateType {
     None,
@@ -35,6 +39,7 @@ type MineTile = {
         localXCoordinate: number;
         localYCoordinate: number;
         rotations: number;
+        rewarded: Observable<boolean>;
     }
 };
 
@@ -99,7 +104,7 @@ export class Mine {
             }
         }
 
-        this.itemsBuried(new Set(this.grid.filter(tile => tile.reward).map(tile => tile.reward.index)).size);
+        this.updateObservables();
 
         this._mineState(MineStateType.Undiscovered);
         Underground.showMine();
@@ -153,6 +158,7 @@ export class Mine {
                         localXCoordinate: localXCoordinate,
                         localYCoordinate: localYCoordinate,
                         rotations: rotations,
+                        rewarded: ko.observable(false),
                     };
                 }
             }
@@ -266,87 +272,92 @@ export class Mine {
             const newLayerDepth = Math.max(layerDepthAtCoordinate - layers, 0);
             this.grid[index].layerDepth(newLayerDepth);
 
-            Mine.checkItemsRevealed();
-            Mine.calculatePartiallyRevealedItems();
+            Mine.checkItemsRevealed_v2(xCoordinate, yCoordinate);
+            Mine.checkCompleted();
 
             return true;
         }
         return false;
     }
 
-    public static checkItemsRevealed() {
-        // for (let i = 0; i < Mine.rewardNumbers.length; i++) {
-        //     if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
-        //         let amount = 1;
-        //         const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
-        //         const type = NotificationConstants.NotificationOption.success;
-        //         const setting = NotificationConstants.NotificationSetting.Underground.underground_item_found;
-        //         Notifier.notify({ message: `You found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`, type, setting });
-        //
-        //         if (App.game.oakItems.isActive(OakItemType.Treasure_Scanner)) {
-        //             const giveDouble = App.game.oakItems.calculateBonus(OakItemType.Treasure_Scanner) / 100;
-        //             const title = 'Treasure Scanner';
-        //             let message = `You found an extra ${humanifyString(itemName)} in the Mine!`;
-        //             while (Rand.chance(giveDouble)) {
-        //                 amount++;
-        //                 if (amount > 2) {
-        //                     const jackpotMultiplier = amount > 4 ? ` ×${amount - 3}` : ''; // Start at ×2
-        //                     message = `${amount == 3 ? 'Lucky' : 'Jackpot'}${jackpotMultiplier}! You found another ${humanifyString(itemName)}!`;
-        //                 }
-        //                 const timeout = Math.min(amount, 4) * 2000 + Math.max(amount - 4, 0) * 100;
-        //                 Notifier.notify({ message, type, title, setting, timeout });
-        //             }
-        //         }
-        //
-        //         App.game.oakItems.use(OakItemType.Treasure_Scanner);
-        //         Underground.gainMineItem(Mine.rewardNumbers[i], amount);
-        //         GameHelper.incrementObservable(Mine.itemsFound);
-        //         GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
-        //         Mine.rewardNumbers.splice(i, 1);
-        //         i--;
-        //         Mine.checkCompleted();
-        //     }
-        // }
+    private static checkItemsRevealed_v2(xCoordinate: number, yCoordinate: number) {
+        const index = yCoordinate * this.columnCount + xCoordinate;
+        const { layerDepth, reward } = this.grid[index];
+
+        // No need to check if anything is revealed here since we haven't mined through all the layers yet
+        // Also no need to check if we know there is no reward hidden here
+        if (!reward || layerDepth() > 0)
+            return;
+
+        const { index: rewardIndex, undergroundItemID } = reward;
+
+        this.attemptDigUpItem(rewardIndex, undergroundItemID);
+
+        this.updateObservables();
     }
 
-    public static calculatePartiallyRevealedItems() {
-        // const amountRevealed = Mine.rewardNumbers
-        //     .map(value => Mine.checkItemPartiallyRevealed(value) ? 1 : 0)
-        //     .reduce((a, b) => a + b, 0);
-        //
-        // Mine.itemsPartiallyFound(amountRevealed);
+    private static updateObservables() {
+        this.itemsBuried(new Set(this.grid.filter(tile => tile.reward).map(tile => tile.reward.index)).size);
+        this.itemsFound(new Set(this.grid.filter(tile => tile.reward && tile.reward.rewarded()).map(tile => tile.reward.index)).size);
+        this.itemsPartiallyFound(new Set(this.grid.filter(tile => tile.reward && tile.layerDepth() === 0).map(tile => tile.reward.index)).size);
     }
 
-    public static checkItemRevealed(id: number) {
-        // for (let i = 0; i < Underground.sizeX; i++) {
-        //     for (let j = 0; j < this.getHeight(); j++) {
-        //         if (Mine.rewardGrid[j][i] != 0) {
-        //             if (Mine.rewardGrid[j][i].value == id) {
-        //                 if (Mine.rewardGrid[j][i].revealed === 0) {
-        //                     return false;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-        // App.game.oakItems.use(OakItemType.Cell_Battery);
-        // return true;
+    private static attemptDigUpItem(rewardIndex: number, undergroundItemID: number): boolean {
+        const undergroundItemTiles = this.grid.filter(tile => tile.reward?.index === rewardIndex);
+        const canDigUp = undergroundItemTiles.every(tile => tile.layerDepth() === 0 && !tile.reward?.rewarded());
 
-        return false;
+        if (!canDigUp) {
+            return false;
+        }
+
+        undergroundItemTiles.forEach(tile => tile.reward.rewarded(true));
+
+        const amount = this.calculateRewardAmountFromMining();
+        const { itemName } = UndergroundItems.getById(undergroundItemID);
+
+        App.game.oakItems.use(OakItemType.Treasure_Scanner);
+        Underground.gainMineItem(undergroundItemID, amount);
+        GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
+        Underground.addUndergroundExp(25);
+
+        Notifier.notify({
+            message: `You found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+            timeout: 3000,
+        });
+
+        for (let i = 1; i < amount; i++) {
+            let message = `You've found an extra ${humanifyString(itemName)} in the Mine!`;
+            if (i === 2) message = `Lucky! You've found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i === 3) message = `Jackpot! You've found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i > 3) message = `Jackpot ×${i - 2}! You've found an extra ${humanifyString(itemName)} in the Mine!`;
+
+            Notifier.notify({
+                title: 'Treasure Scanner',
+                message: message,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+                timeout: 3000 + i * 2000,
+            });
+        }
+
+        return true;
     }
 
-    public static checkItemPartiallyRevealed(id: number) {
-        // for (let i = 0; i < Underground.sizeX; i++) {
-        //     for (let j = 0; j < this.getHeight(); j++) {
-        //         if (Mine.rewardGrid[j][i] != 0) {
-        //             if (Mine.rewardGrid[j][i].value == id) {
-        //                 if (Mine.grid[j][i]() == 0)
-        //                     return true;
-        //             }
-        //         }
-        //     }
-        // }
-        return false;
+    private static calculateRewardAmountFromMining(): number {
+        if (!App.game.oakItems.isActive(OakItemType.Treasure_Scanner)) {
+            return 1;
+        }
+
+        // Treasure scanner bonus is listed as integers, so we need to divide by 100
+        const treasureScannerChance = App.game.oakItems.calculateBonus(OakItemType.Treasure_Scanner) / 100;
+
+        let amount = 1;
+        while (Rand.chance(treasureScannerChance)) {
+            ++amount;
+        }
+        return amount;
     }
 
     public static checkCompleted(): boolean {
@@ -371,36 +382,36 @@ export class Mine {
     }
 
     public static loadSavedMine(mine) {
-        this.grid = mine.grid?.map(obj => {
-            return {
-                ...obj,
-                layerDepth: ko.observable<number>(obj.layerDepth),
-            };
-        });
-        this.itemsFound(mine.itemsFound);
-        this.itemsBuried(mine.itemsBuried);
+        this.grid = mine.grid?.map(obj => ({
+            ...obj,
+            layerDepth: ko.observable<number>(obj.layerDepth),
+            reward: obj.reward ? {
+                ...obj.reward,
+                rewarded: ko.observable<boolean>(obj.reward.rewarded),
+            } : undefined,
+        }));
         this._mineState(mine.mineState || MineStateType.None);
         this.rowCount = mine.rowCount;
         this.columnCount = mine.columnCount;
 
-        this.calculatePartiallyRevealedItems();
+        this.updateObservables();
 
         Underground.showMine();
     }
 
     public static save(): Record<string, any> {
         const mineSave = {
-            grid: this.grid?.map(tile => {
-                return {
-                    ...tile,
-                    layerDepth: tile.layerDepth(),
-                };
-            }),
-            itemsFound: this.itemsFound(),
-            itemsBuried: this.itemsBuried(),
+            grid: this.grid?.map(tile => ({
+                ...tile,
+                layerDepth: tile.layerDepth(),
+                reward: tile.reward ? {
+                    ...tile.reward,
+                    rewarded: tile.reward.rewarded(),
+                } : undefined,
+            })),
+            mineState: this.mineState,
             rowCount: this.rowCount,
             columnCount: this.columnCount,
-            mineState: this.mineState,
         };
         return mineSave;
     }
