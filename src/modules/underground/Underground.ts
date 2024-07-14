@@ -163,7 +163,7 @@ export class Underground implements Feature {
             for (let xCoordinate = 0; xCoordinate < Mine.columnCount; xCoordinate++) {
                 // Needs to be a sub-element because ::after z-index gets reset when used with transform: rotate()
                 // https://stackoverflow.com/questions/20851452/z-index-is-canceled-by-setting-transformrotate
-                html += `<div data-row='${yCoordinate}' data-column='${xCoordinate}' class="mineSquare" data-bind="css: Underground.calculateCssClass(${xCoordinate}, ${yCoordinate})"><div data-bind="style: Underground.calculateStyle(${xCoordinate}, ${yCoordinate})"></div></div>`;
+                html += `<div data-row='${yCoordinate}' data-column='${xCoordinate}' class="mineSquare" data-bind=""><div data-bind="css: Underground.calculateCssClass(${xCoordinate}, ${yCoordinate}), style: Underground.calculateStyle(${xCoordinate}, ${yCoordinate})"></div></div>`;
             }
             // html += '</div>';
         }
@@ -201,9 +201,7 @@ export class Underground implements Feature {
                 'background-position': backgroundPositionSpace[reward.localYCoordinate][reward.localXCoordinate],
                 'background-size': `${space[0].length * 100}% ${space.length * 100}%`,
                 'transform': `rotate(${reward.rotations * 90}deg)`,
-                'filter': `opacity(${reward.rewarded() ? 0.25 : 1})`,
-                'position': 'absolute',
-                'inset': 0,
+                'filter': `opacity(${reward.rewarded() ? '25%' : '100%'})`,
             };
         } else {
             return {
