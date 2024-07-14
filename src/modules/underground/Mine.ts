@@ -225,9 +225,9 @@ export class Mine {
         if (!reward || layerDepth() > 0)
             return;
 
-        const { index: rewardIndex, undergroundItemID } = reward;
+        const { index: rewardIndex } = reward;
 
-        this.attemptDigUpItem(rewardIndex, undergroundItemID);
+        this.attemptDigUpItem(rewardIndex);
 
         this.updateObservables();
     }
@@ -238,7 +238,7 @@ export class Mine {
         this.itemsPartiallyFound(new Set(this.grid.filter(tile => tile.reward && tile.layerDepth() === 0).map(tile => tile.reward.index)).size);
     }
 
-    private static attemptDigUpItem(rewardIndex: number, undergroundItemID: number): boolean {
+    private static attemptDigUpItem(rewardIndex: number, forced: boolean = false): boolean {
         const undergroundItemTiles = this.grid.filter(tile => tile.reward?.index === rewardIndex);
         const canDigUp = undergroundItemTiles.every(tile => tile.layerDepth() === 0 && !tile.reward?.rewarded());
 
@@ -248,6 +248,7 @@ export class Mine {
 
         undergroundItemTiles.forEach(tile => tile.reward.rewarded(true));
 
+        const undergroundItemID = undergroundItemTiles[0].reward.undergroundItemID;
         const amount = this.calculateRewardAmountFromMining();
         const { itemName } = UndergroundItems.getById(undergroundItemID);
 
