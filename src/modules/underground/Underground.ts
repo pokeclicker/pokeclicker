@@ -158,28 +158,54 @@ export class Underground implements Feature {
 
     public static showMine() {
         let html = '';
-        for (let i = 0; i < Mine.grid.length; i++) {
-            html += '<div class="row">';
-            for (let j = 0; j < Mine.grid[0].length; j++) {
-                html += Underground.mineSquare(Mine.grid[i][j](), i, j);
+        for (let yCoordinate = 0; yCoordinate < Mine.rowCount; yCoordinate++) {
+            // html += '<div class="row">';
+            for (let xCoordinate = 0; xCoordinate < Mine.columnCount; xCoordinate++) {
+                html += `<div data-row='${yCoordinate}' data-column='${xCoordinate}' data-bind="css: Underground.calculateCssClass(${xCoordinate}, ${yCoordinate}), style: Underground.calculateStyle(${xCoordinate}, ${yCoordinate})"></div>`;
             }
-            html += '</div>';
+            // html += '</div>';
         }
         $('#mineBody').html(html);
     }
 
-    private static mineSquare(amount: number, i: number, j: number): string {
-        if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() == 0) {
-            Mine.rewardGrid[i][j].revealed = 1;
-            const image = UndergroundItems.getById(Mine.rewardGrid[i][j].value).undergroundImage;
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y} rotations-${Mine.rewardGrid[i][j].rotations}" style="background-image: url('${image}');"></div></div>`;
+    public static calculateCssClass(xCoordinate: number, yCoordinate: number): string {
+        const { layerDepth } = Mine.grid[yCoordinate * Mine.columnCount + xCoordinate];
+
+        if (layerDepth() > 0) {
+            return `rock${layerDepth()} mineSquare`;
         } else {
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'></div>`;
+            return 'mineSquare';
         }
     }
 
-    public static calculateCssClass(i: number, j: number): string {
-        return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare`;
+    public static calculateStyle(xCoordinate: number, yCoordinate: number): {} {
+        const { layerDepth, reward } = Mine.grid[yCoordinate * Mine.columnCount + xCoordinate];
+
+        if (layerDepth() === 0 && reward) {
+            const { space, undergroundImage } = UndergroundItems.getById(reward.undergroundItemID);
+
+            let backgroundPositionSpace: Array<Array<string>> = Array.from({ length: space.length }, (_, i) => Array.from({ length: space[0].length }, (_, j) => {
+                const xPercentage = (j / (space[0].length - 1)).toLocaleString(undefined, { style: 'percent', maximumFractionDigits: 2 });
+                const yPercentage = (i / (space.length - 1)).toLocaleString(undefined, { style: 'percent', maximumFractionDigits: 2 });
+                return `${xPercentage} ${yPercentage}`;
+            }));
+
+            for (let rotation = 0; rotation < reward.rotations; rotation++) {
+                backgroundPositionSpace = Mine.rotateRewardSpace90Clockwise(backgroundPositionSpace);
+            }
+
+
+            return {
+                'background-image': `url('${undergroundImage}')`,
+                'background-position': backgroundPositionSpace[reward.localYCoordinate][reward.localXCoordinate],
+                'background-size': `${space[0].length * 100}% ${space.length * 100}%`,
+                'transform': `rotate(${reward.rotations * 90}deg)`,
+            };
+        } else {
+            return {
+
+            };
+        }
     }
 
     public static gainMineItem(id: number, num = 1) {
@@ -381,7 +407,7 @@ export class Underground implements Feature {
         if (mine) {
             Mine.loadSavedMine(mine);
         } else {
-            Mine.loadMine();
+            // Mine.loadMine();
         }
         this._discoverMineCounter(json.discoverMineCounter || 0);
         UndergroundItems.list.forEach(it => it.sellLocked(json.sellLocks[it.itemName] || false));
@@ -406,7 +432,7 @@ export class Underground implements Feature {
 
 $(document).ready(() => {
     $('body').on('click', '.mineSquare', function () {
-        Mine.click(parseInt(this.dataset.i, 10), parseInt(this.dataset.j, 10));
+        Mine.click(parseInt(this.dataset.row, 10), parseInt(this.dataset.column, 10));
     });
 });
 
