@@ -248,6 +248,10 @@ export class Mine {
             return false;
         }
 
+        if (forced) {
+            // TODO : Helpers will auto-sell the item
+        }
+
         undergroundItemTiles.forEach(tile => tile.reward.rewarded(true));
 
         const undergroundItemID = undergroundItemTiles[0].reward.undergroundItemID;
