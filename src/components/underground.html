@@ -38,9 +38,11 @@
                             <button onclick='Underground.addUndergroundExp(-10000)'>-10,000 XP</button>
                         </div>
                     </div>
-                    <div data-bind="visible: Mine.mineState === 3, class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
+                    <div>
                         <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
-                             data-bind="css: `${UndergroundToolType[Mine.selectedTool()]}Selected`, style: {
+                             data-bind="css: {'disabled': Mine.itemsFound() === Mine.itemsBuried()},
+                             class: `${UndergroundToolType[Mine.selectedTool()]}Selected`,
+                             style: {
                                 backgroundSize: `calc(100% / ${Mine.columnCount})`,
                              }">
                         </div>
@@ -89,12 +91,12 @@
                     </div>
 
                     <div data-bind="">
-                        <button onclick="Mine.generateMine()">Search for mine</button>
-                        <button onclick="Mine.generateMine(MineType.Diamond)">Search for Diamonds</button>
-                        <button onclick="Mine.generateMine(MineType.GemPlate)">Search for Gems</button>
-                        <button onclick="Mine.generateMine(MineType.Shard)">Search for Shards</button>
-                        <button onclick="Mine.generateMine(MineType.Fossil)">Search for Fossils</button>
-                        <button onclick="Mine.generateMine(MineType.EvolutionItem)">Search for Evolution Items</button>
+                        <button onclick="Underground.generateMine();">Search for mine</button>
+                        <button onclick="Underground.generateMine(MineType.Diamond)">Search for Diamonds</button>
+                        <button onclick="Underground.generateMine(MineType.GemPlate)">Search for Gems</button>
+                        <button onclick="Underground.generateMine(MineType.Shard)">Search for Shards</button>
+                        <button onclick="Underground.generateMine(MineType.Fossil)">Search for Fossils</button>
+                        <button onclick="Underground.generateMine(MineType.EvolutionItem)">Search for Evolution Items</button>
                     </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">

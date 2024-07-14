@@ -14,6 +14,7 @@ import UndergroundItems from './UndergroundItems';
 import Settings from '../settings/Settings';
 import GameHelper from '../GameHelper';
 import OakItemType from '../enums/OakItemType';
+import { MineType } from './mine/MineConfig';
 
 export class Underground implements Feature {
     name = 'Underground';
@@ -125,7 +126,7 @@ export class Underground implements Feature {
         if (Mine.mineState === MineStateType.Undiscovered) {
             GameHelper.incrementObservable(this._discoverMineCounter, delta);
 
-            if (this._discoverMineCounter() >= 60 - 1.2 * Underground.undergroundLevel()) {
+            if (this._discoverMineCounter() >= Mine.discoverMineTimeout) {
                 Mine.discoverMine();
                 this._discoverMineCounter(0);
             }
@@ -154,6 +155,13 @@ export class Underground implements Feature {
 
     getSizeY() {
         return Underground.sizeY;
+    }
+
+    public static generateMine(mineType?: MineType) {
+        const currentMineState = Mine.mineState;
+        const discoverMineTimeout = mineType || (currentMineState !== MineStateType.None && currentMineState !== MineStateType.Completed) ? 60 - 1.2 * this.undergroundLevel() : 0;
+
+        Mine.generateMine(mineType, discoverMineTimeout);
     }
 
     public static showMine() {

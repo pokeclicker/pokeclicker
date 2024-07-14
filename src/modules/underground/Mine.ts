@@ -53,6 +53,7 @@ export class Mine {
     public static itemsFound: Observable<number> = ko.observable(0);
     public static itemsPartiallyFound: Observable<number> = ko.observable(0);
     public static itemsBuried: Observable<number> = ko.observable(0);
+    public static discoverMineTimeout: number;
 
     public static selectedTool: Observable<UndergroundToolType> = ko.observable(UndergroundToolType.Chisel);
     // Number of times to try and place an item in a new layer before giving up, just a failsafe
@@ -64,8 +65,9 @@ export class Mine {
         return this._mineState();
     }
 
-    public static generateMine(mineType?: MineType) {
+    public static generateMine(mineType?: MineType, timeout: number = 0) {
         const mineConfig: MineConfig = this.getMineConfig(mineType);
+        this.discoverMineTimeout = timeout;
 
         this._mineState(MineStateType.Loading);
         ko.cleanNode(document.getElementById('mineBody'));
@@ -305,8 +307,6 @@ export class Mine {
         GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
         App.game.oakItems.use(OakItemType.Explosive_Charge);
 
-        ko.cleanNode(document.getElementById('mineBody'));
-
         Notifier.notify({
             message: 'You dig deeper...',
             type: NotificationConstants.NotificationOption.info,
@@ -330,6 +330,7 @@ export class Mine {
         this._mineState(mine.mineState || MineStateType.None);
         this.rowCount = mine.rowCount;
         this.columnCount = mine.columnCount;
+        this.discoverMineTimeout = mine.discoverMineTimeout;
 
         this.updateObservables();
 
@@ -349,6 +350,7 @@ export class Mine {
             mineState: this.mineState,
             rowCount: this.rowCount,
             columnCount: this.columnCount,
+            discoverMineTimeout: this.discoverMineTimeout,
         };
         return mineSave;
     }
