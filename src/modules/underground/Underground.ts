@@ -44,7 +44,7 @@ export class Underground implements Feature {
     public static sizeX = 25;
     public static sizeY = 12;
 
-    private _discoverMineCounter: Observable<number> = ko.observable(0);
+    private static _discoverMineCounter: Observable<number> = ko.observable(0);
 
     // Sort UndergroundItems.list whenever the sort method or quantities change
     public static sortedMineInventory: Computed<Array<UndergroundItem>> = ko.computed(function () {
@@ -124,17 +124,17 @@ export class Underground implements Feature {
 
     private handleDiscoverMineTick(delta: number): void {
         if (Mine.mineState === MineStateType.Undiscovered) {
-            GameHelper.incrementObservable(this._discoverMineCounter, delta);
+            GameHelper.incrementObservable(Underground._discoverMineCounter, delta);
 
-            if (this._discoverMineCounter() >= Mine.discoverMineTimeout) {
+            if (Underground._discoverMineCounter() >= Mine.discoverMineTimeout) {
                 Mine.discoverMine();
-                this._discoverMineCounter(0);
+                Underground._discoverMineCounter(0);
             }
         }
     }
 
     get discoverMineCounter(): number {
-        return this._discoverMineCounter();
+        return Underground._discoverMineCounter();
     }
 
     getMinItems() {
@@ -158,8 +158,9 @@ export class Underground implements Feature {
     }
 
     public static generateMine(mineType?: MineType) {
+        this._discoverMineCounter(0);
         const currentMineState = Mine.mineState;
-        const discoverMineTimeout = mineType || (currentMineState !== MineStateType.None && currentMineState !== MineStateType.Completed) ? 60 - 1.2 * this.undergroundLevel() : 0;
+        const discoverMineTimeout = mineType != null || (currentMineState !== MineStateType.None && currentMineState !== MineStateType.Completed) ? 60 - 1.2 * this.undergroundLevel() : 0;
 
         Mine.generateMine(mineType, discoverMineTimeout);
     }
@@ -419,7 +420,7 @@ export class Underground implements Feature {
         } else {
             // Mine.loadMine();
         }
-        this._discoverMineCounter(json.discoverMineCounter || 0);
+        Underground._discoverMineCounter(json.discoverMineCounter || 0);
         UndergroundItems.list.forEach(it => it.sellLocked(json.sellLocks[it.itemName] || false));
 
         Underground.undergroundExp(json.undergroundExp || this.defaults.undergroundExp);
@@ -429,7 +430,7 @@ export class Underground implements Feature {
         const undergroundSave: Record<string, any> = {};
         undergroundSave.undergroundExp = Underground.undergroundExp();
         undergroundSave.mine = Mine.save();
-        undergroundSave.discoverMineCounter = this._discoverMineCounter();
+        undergroundSave.discoverMineCounter = Underground._discoverMineCounter();
         undergroundSave.sellLocks = UndergroundItems.list.reduce((sellLocks, item) => {
             if (item.sellLocked()) {
                 sellLocks[item.itemName] = true;

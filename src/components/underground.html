@@ -40,7 +40,7 @@
                     </div>
                     <div>
                         <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
-                             data-bind="css: {'disabled': Mine.itemsFound() === Mine.itemsBuried()},
+                             data-bind="css: { 'disabled': Mine.mineState !== 3 },
                              class: `${UndergroundToolType[Mine.selectedTool()]}Selected`,
                              style: {
                                 backgroundSize: `calc(100% / ${Mine.columnCount})`,
