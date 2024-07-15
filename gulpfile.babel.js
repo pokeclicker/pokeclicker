@@ -8,7 +8,6 @@ const minifyCSS = require('gulp-minify-css');
 const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
 const less = require('gulp-less');
-const gulpImport = require('gulp-html-import');
 const ejs = require('gulp-ejs');
 const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
@@ -20,6 +19,7 @@ const webpack = require('webpack');
 const del = require('del');
 const fs = require('fs');
 const path = require('path');
+const { Transform } = require('node:stream');
 const version = process.env.npm_package_version || '0.0.0';
 
 const webpackConfig = require('./webpack.config');
@@ -58,6 +58,39 @@ const htmlImportIf = (html_str, is_true) => {
         return replace(replaceRegex, '');
     }
 };
+
+/* Adapted from https://github.com/jrainlau/gulp-html-import */
+const importHTML = (componentsUrl) => {
+    return new Transform({
+        objectMode: true,
+        highWaterMark: 16,
+        transform(file, enc, cb) {
+            if (file.isNull()) {
+                return cb(null, file);
+            }
+
+            if (file.isStream()) {
+                return cb(new Error(`Our html importer doesn't support streams`));
+            }
+
+            const fileReg = /@import\s"([^"\n]*)"/gi;
+
+            let data = file.contents.toString()
+            let dataReplace = data.replace(fileReg, (match, componentName) => {
+                console.log(match + ' --> ' + componentName);
+                return fs.readFileSync(componentsUrl + componentName, {
+                    encoding: 'utf8',
+                });
+            });
+
+            file.contents = Buffer.from(dataReplace);
+            file.extname = '.html';
+            console.log('Import finished.');
+            cb(null, file);
+        },
+    });
+}
+/* end adapted */
 
 /**
  * Push build to gh-pages
@@ -143,7 +176,7 @@ gulp.task('compile-html', (done) => {
     stream.pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER));
 
     stream.pipe(plumber())
-        .pipe(gulpImport('./src/components/'))
+        .pipe(importHTML('./src/components/'))
         .pipe(replace('$VERSION', version))
         .pipe(replace('$DEVELOPMENT', !!config.DEVELOPMENT))
         .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
