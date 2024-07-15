@@ -32,7 +32,7 @@
                             }"/>
                         </div>
                         <!-- /ko -->
-                        <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !App.game.party.alreadyCaughtPokemon($data.id) }, attr:{ src: PokemonHelper.getImage($data.id, undefined, undefined, false)}">
+                        <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !App.game.party.alreadyCaughtPokemon($data.id) }, attr:{ src: PokemonHelper.getImage($data.id, undefined, undefined, ShadowStatus.None)}">
                         <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: (($data.id > 0 && App.game.party.alreadyCaughtPokemon($data.id)) ? PokemonHelper.displayName($data.name) : '???')">name</span>
                     </li>
                 </ul>
