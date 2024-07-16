@@ -19,7 +19,7 @@ import { PureComputed } from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import {PLATE_VALUE} from '../GameConstants';
+import { PLATE_VALUE } from '../GameConstants';
 
 export class UndergroundController {
     public static shortcutVisible: PureComputed<boolean> = ko.pureComputed(() => {
