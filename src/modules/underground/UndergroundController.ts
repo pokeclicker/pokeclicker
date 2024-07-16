@@ -18,6 +18,8 @@ import Settings from '../settings';
 import { PureComputed } from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
+import UndergroundItemValueType from '../enums/UndergroundItemValueType';
+import {PLATE_VALUE} from '../GameConstants';
 
 export class UndergroundController {
     public static shortcutVisible: PureComputed<boolean> = ko.pureComputed(() => {
@@ -117,7 +119,48 @@ export class UndergroundController {
     }
 
     public static sellMineItem(item: UndergroundItem, amount: number = 1) {
+        if (item.sellLocked()) {
+            Notifier.notify({
+                message: 'Item is locked for selling, you first have to unlock it.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+        if (item.valueType == UndergroundItemValueType.Fossil) {
+            amount = 1;
+        }
+        const curAmt = player.itemList[item.itemName]();
+        if (curAmt > 0) {
+            const sellAmt = Math.min(curAmt, amount);
+            const success = UndergroundController.gainProfit(item, sellAmt);
+            if (success) {
+                player.loseItem(item.itemName, sellAmt);
+            }
+            return;
+        }
+    }
 
+    private static gainProfit(item: UndergroundItem, amount: number): boolean {
+        let success = true;
+        switch (item.valueType) {
+            case UndergroundItemValueType.Diamond:
+                App.game.wallet.gainDiamonds(item.value * amount);
+                break;
+            case UndergroundItemValueType.Fossil:
+                if (!App.game.breeding.hasFreeEggSlot()) {
+                    return false;
+                }
+                success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
+                break;
+            case UndergroundItemValueType.Gem:
+                const type = item.type;
+                App.game.gems.gainGems(PLATE_VALUE * amount, type);
+                break;
+            // Nothing else can be sold
+            default:
+                return false;
+        }
+        return success;
     }
 
     public static openUndergroundModal() {
