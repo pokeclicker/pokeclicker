@@ -80,7 +80,7 @@ const importHTML = (componentsUrl) => {
                 return recursiveImport(importContents, importPathsNew);
             } catch (e) {
                 if (e.code === 'ENOENT') {
-                    throw new Error(`Error: Can't find imported file ${matchPath}`);
+                    throw new Error(`HTML importer can't find imported file ${matchPath}`);
                 } else {
                     throw e;
                 }
