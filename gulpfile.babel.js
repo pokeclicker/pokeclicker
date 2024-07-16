@@ -61,6 +61,33 @@ const htmlImportIf = (html_str, is_true) => {
 
 /* Adapted from https://github.com/jrainlau/gulp-html-import */
 const importHTML = (componentsUrl) => {
+    const fileReg = /@import\s"([^"\n]*)"/gi;
+
+    const recursiveImport = (data, importPaths) => {
+        const curPath = importPaths.at(-1);
+        const curDirectory = curPath.startsWith(path.normalize(componentsUrl)) ? path.parse(curPath).dir : componentsUrl;
+        return data.replace(fileReg, (match, componentName) => {
+            const matchPath = path.join(curDirectory, componentName);
+            const importPathsNew = [...importPaths, matchPath];
+            console.log(match + ' --> ' + matchPath);
+            if (importPaths.includes(matchPath)) {
+                throw new Error(`Recursive HTML importer encountered an import loop:\n${importPathsNew.join(' --> ')}`);
+            }
+            try {
+                const importContents = fs.readFileSync(matchPath, {
+                    encoding: 'utf8',
+                });
+                return recursiveImport(importContents, importPathsNew);
+            } catch (e) {
+                if (e.code === 'ENOENT') {
+                    throw new Error(`Error: Can't find imported file ${matchPath}`);
+                } else {
+                    throw e;
+                }
+            }
+        });        
+    };
+
     return new Transform({
         objectMode: true,
         highWaterMark: 16,
@@ -70,18 +97,11 @@ const importHTML = (componentsUrl) => {
             }
 
             if (file.isStream()) {
-                return cb(new Error(`Our html importer doesn't support streams`));
+                return cb(new Error(`Our HTML importer doesn't support streams`));
             }
 
-            const fileReg = /@import\s"([^"\n]*)"/gi;
-
-            let data = file.contents.toString()
-            let dataReplace = data.replace(fileReg, (match, componentName) => {
-                console.log(match + ' --> ' + componentName);
-                return fs.readFileSync(componentsUrl + componentName, {
-                    encoding: 'utf8',
-                });
-            });
+            let data = file.contents.toString();
+            let dataReplace = recursiveImport(data, [path.relative('./', file.path)]);
 
             file.contents = Buffer.from(dataReplace);
             file.extname = '.html';
