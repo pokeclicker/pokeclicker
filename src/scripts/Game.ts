@@ -113,7 +113,6 @@ class Game {
 
         const now = new Date();
         SeededDateRand.seedWithDate(now);
-        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
         GemDeals.generateDeals();
@@ -446,7 +445,6 @@ class Game {
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
-                DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 BerryDeal.generateDeals(now);
                 if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
                     Notifier.notify({

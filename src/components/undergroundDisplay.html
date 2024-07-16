@@ -2,7 +2,7 @@
     <div class="card-header p-0" data-toggle="collapse" href="#undergroundCard">
         <span>Underground</span>
     </div>
-    <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.openUndergroundModal()">
+    <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="UndergroundController.openUndergroundModal()">
         View
     </button>
 
@@ -11,16 +11,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div data-bind="text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried()"></div>
-                        <div data-bind="text: 'Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound())"></div>
+                        <div data-bind="text: 'Treasures found: ' + App.game.underground.mine?.itemsFound + ' / ' + App.game.underground.mine?.itemsBuried"></div>
+                        <div data-bind="text: 'Partially discovered: ' + App.game.underground.mine?.itemsPartiallyFound"></div>
                     </div>
                 </div>
-
-                <!-- ko if: Settings.getSetting('showUndergroundModuleMineControls').observableValue() -->
-                <div class="row">
-                    <button class='col btn btn-warning' onClick='Mine.bomb(); $(this).tooltip("hide")' data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, html: true, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb</button>
-                </div>
-                <!-- /ko -->
             </div>
         </div>
     </div>

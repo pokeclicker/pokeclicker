@@ -187,11 +187,11 @@ import PokeballFilter from './pokeballs/PokeballFilter';
 import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
 import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
-import { DailyDeal } from './underground/DailyDeal';
-import { Mine } from './underground/Mine';
+import { Mine } from './underground/mine/Mine';
 import { MineType } from './underground/mine/MineConfig';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
+import { UndergroundController } from './underground/UndergroundController';
 import UndergroundTools from './underground/tools/UndergroundTools';
 import UndergroundToolType from './underground/tools/UndergroundToolType';
 import SpecialEventRandomRequirement from './requirements/SpecialEventRandomRequirement';
@@ -411,10 +411,10 @@ Object.assign(<any>window, {
     Mine,
     MineType,
     Underground,
+    UndergroundController,
     UndergroundTools,
     UndergroundToolType,
     ShardDeal,
-    DailyDeal,
     EncounterType,
     SafariBaitRequirement,
     SafariStepsRequirement,

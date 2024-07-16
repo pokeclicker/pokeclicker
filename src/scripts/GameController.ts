@@ -190,13 +190,13 @@ class GameController {
             if ($undergroundModal.data('bs.modal')?._isShown) {
                 switch (key) {
                     case Settings.getSetting('hotkey.underground.hammer').value:
-                        Mine.selectedTool(UndergroundToolType.Hammer);
+                        App.game.undergroundTools.selectedToolType = UndergroundToolType.Hammer;
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.chisel').value:
-                        Mine.selectedTool(UndergroundToolType.Chisel);
+                        App.game.undergroundTools.selectedToolType = UndergroundToolType.Chisel;
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.bomb').value:
-                        Mine.selectedTool(UndergroundToolType.Bomb);
+                        App.game.undergroundTools.selectedToolType = UndergroundToolType.Bomb;
                         return e.preventDefault();
                 }
                 if (isNumberKey) {
