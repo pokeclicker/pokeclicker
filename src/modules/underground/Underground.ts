@@ -7,6 +7,7 @@ import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import { Mine } from './mine/Mine';
 import { MineType } from './mine/MineConfig';
+import {UndergroundHelpers} from './helper/UndergroundHelper';
 
 export class Underground implements Feature {
     name = 'Underground';
@@ -22,6 +23,7 @@ export class Underground implements Feature {
     });
 
     private _mine: Observable<Mine | null> = ko.observable(null);
+    public helpers = new UndergroundHelpers();
 
     canAccess(): boolean {
         return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
@@ -79,11 +81,13 @@ export class Underground implements Feature {
         return {
             undergroundExp: this._undergroundExp(),
             mine: this._mine()?.save(),
+            helpers: this.helpers.toJSON(),
         };
     }
 
     fromJSON(json: Record<string, any>): void {
         this._undergroundExp(json.undergroundExp || this.defaults.undergroundExp);
         this._mine(json.mine ? Mine.load(json.mine) : null);
+        this.helpers.fromJSON(json.helpers);
     }
 }

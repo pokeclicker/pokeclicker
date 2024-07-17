@@ -77,6 +77,7 @@ const NotificationConstants = {
             underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining energy restored', true),
             underground_dig_deeper: new NotificationSetting('notifcation.underground_dig_deeper', 'You dig deeper...', true),
             underground_item_found: new NotificationSetting('notification.underground_item_found', 'Item found while mining', true),
+            helper: new NotificationSetting('notification.underground_helper', 'Underground Helper Hired/Fired', true),
         },
         Farming: {
             berry_discovered: new NotificationSetting('notification.berry_discovered', 'New Berry discovered', true),
