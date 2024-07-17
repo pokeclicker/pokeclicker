@@ -8,6 +8,9 @@
                     <li class='nav-item'>
                         <a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a>
                     </li>
+                    <li class="nav-item">
+                        <a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a>
+                    </li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
                     <btn class="btn btn-primary">
                         <span id="diamondCounter" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.diamond]().toLocaleString('en-US')">x</span>
@@ -100,6 +103,25 @@
                     </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">
+                </div>
+                <div id="undergroundHelpers" class="tab-pane fade">
+                    <div class="row m-0 justify-content-center" data-bind="foreach: App.game.underground.helpers.available()" style="max-width: 100%;">
+                        <div class="card text-left col-md-3 col-sm-6 col-xs-12 p-0">
+                            <h5 class="card-header">
+                                <knockout data-bind="text: $data.name">Name</knockout>
+                            </h5>
+                            <div class="card-body p-2">
+                                <div>Experience: <knockout data-bind="text: $data.experience.toLocaleString('en-US')"></knockout></div>
+                                <div>Level: <knockout data-bind="text: $data.level.toLocaleString('en-US')"></knockout></div>
+                                <div>Auto-sell value: <knockout data-bind="text: $data.autoSellValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                <div>Smart tool chance: <knockout data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                <div>Work cycle time: <knockout data-bind="text: $data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout>s</div>
+                            </div>
+                            <div class="card-footer p-0">
+                                <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired && !App.game.underground.helpers.canHire() }, css: { 'btn-success': !$data.hired, 'btn-danger': $data.hired }, click: () => !$data.hired ? $data.hire() : $data.fire(), text: !$data.hired ? 'Hire!' : 'Fire!'">Hire!</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="help" class="tab-pane fade pl-5 pr-5">
                     <h4><u>Dig</u></h4>

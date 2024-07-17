@@ -5,18 +5,20 @@ import MultiRequirement from '../../requirements/MultiRequirement';
 import OneFromManyRequirement from '../../requirements/OneFromManyRequirement';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
-import { SECOND } from '../../GameConstants';
+import { EnergyRestoreSize, SECOND } from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 
 export class UndergroundHelper {
-    private _experience: Observable<number>;
-    private _hired: Observable<boolean>;
-    private _timeSinceWork: Observable<number>;
+    private _experience: Observable<number> = ko.observable<number>(0);
+    private _hired: Observable<boolean> = ko.observable<boolean>(false);
+    private _timeSinceWork: Observable<number> = ko.observable<number>(0);
 
-    private _level: PureComputed<number>;
-    private _autoSellValue: PureComputed<number>;
-    private _smartToolUsageChance: PureComputed<number>;
-    private _workCycleTime: PureComputed<number>;
+    private _level: PureComputed<number> = ko.pureComputed(() => this._experience());
+    private _autoSellValue: PureComputed<number> = ko.pureComputed(() => Math.min(0.4 + 0.01 * this._level(), 0.9));
+    private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(0.5 + 0.025 * this._level(), 1));
+    private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.min(60 - this._level(), 10));
+
+    private _selectedEnergyRestore: Observable<EnergyRestoreSize | null> = ko.observable(null);
 
     constructor(
         private _id: string,
@@ -24,12 +26,6 @@ export class UndergroundHelper {
         private _favoriteMine: MineType,
         private _unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
     ) {
-        this._experience = ko.observable<number>(0);
-        this._level = ko.pureComputed(() => this._experience());
-
-        this._autoSellValue = ko.pureComputed(() => Math.min(0.4 + 0.01 * this._level(), 0.9));
-        this._smartToolUsageChance = ko.pureComputed(() => Math.min(0.5 + 0.025 * this._level(), 1));
-        this._workCycleTime = ko.pureComputed(() => Math.min(60 + 1 * this._level(), 10));
     }
 
     public isUnlocked(): boolean {
@@ -39,11 +35,11 @@ export class UndergroundHelper {
     public tick(delta: number) {
         GameHelper.incrementObservable(this._timeSinceWork, delta);
 
-        const workCycleTime = 10; // TODO : Calculate the time needed
-
-        if (this._timeSinceWork() > workCycleTime) {
+        if (this._timeSinceWork() > this.workCycleTime) {
             this._timeSinceWork(0);
             this._workAction();
+
+            this.tryUseEnergyPotion();
         }
     }
 
@@ -51,12 +47,32 @@ export class UndergroundHelper {
         // TODO : Implement logic to use tools and do work
     }
 
-    public useEnergyPotion() {
-        // TODO : Add time to _timeSinceWork based on a percentage of the total time it takes
+    public tryUseEnergyPotion() {
+        if (this.selectedEnergyRestore == null)
+            return;
+
+        const potionName = EnergyRestoreSize[this.selectedEnergyRestore];
+        if (player.itemList[potionName]() <= 0)
+            return;
+
+        switch (this.selectedEnergyRestore) {
+            case EnergyRestoreSize.SmallRestore:
+                GameHelper.incrementObservable(this._timeSinceWork, 0.25 * this.workCycleTime);
+                break;
+            case EnergyRestoreSize.MediumRestore:
+                GameHelper.incrementObservable(this._timeSinceWork, 0.5 * this.workCycleTime);
+                break;
+            case EnergyRestoreSize.LargeRestore:
+                GameHelper.incrementObservable(this._timeSinceWork, 0.75 * this.workCycleTime);
+                break;
+        }
+
+        player.loseItem(potionName, 1);
     }
 
     public hire() {
         this._hired(true);
+        this._timeSinceWork(0);
         Notifier.notify({
             title: `[UNDERGROUND HELPER] ${this._name}`,
             message: 'Thanks for hiring me,\nI won\'t let you down!',
@@ -68,6 +84,7 @@ export class UndergroundHelper {
 
     public fire() {
         this._hired(false);
+        this._timeSinceWork(0);
         Notifier.notify({
             title: `[UNDERGROUND HELPER] ${this._name}`,
             message: 'Happy to work for you! Let me know when you\'re hiring again!',
@@ -77,8 +94,12 @@ export class UndergroundHelper {
         });
     }
 
-    public id(): string {
+    get id(): string {
         return this._id;
+    }
+
+    get name(): string {
+        return this._name;
     }
 
     get hired(): boolean {
@@ -105,11 +126,21 @@ export class UndergroundHelper {
         return this._workCycleTime();
     }
 
+    get selectedEnergyRestore(): EnergyRestoreSize {
+        return this._selectedEnergyRestore();
+    }
+
+    set selectedEnergyRestore(value: EnergyRestoreSize) {
+        this._selectedEnergyRestore(value);
+    }
+
     public toJSON(): Record<string, any> {
         return {
+            id: this.id,
             experience: this._experience(),
             hired: this._hired(),
             timeSinceWork: this._timeSinceWork(),
+            selectedEnergyRestore: this._selectedEnergyRestore(),
         };
     }
 
@@ -117,6 +148,7 @@ export class UndergroundHelper {
         this._experience = ko.observable(json?.experience || 0);
         this._hired = ko.observable(json?.hired || false);
         this._timeSinceWork = ko.observable(json?.timeSinceWork || 0);
+        this._selectedEnergyRestore = ko.observable(json?.selectedEnergyRestore || null);
     }
 }
 
@@ -127,7 +159,7 @@ export class UndergroundHelpers {
     public hired: PureComputed<UndergroundHelper[]>;
     public canHire: PureComputed<boolean>;
 
-    public static MAX_HIRES: number = 3;
+    public static MAX_HIRES: number = 1;
 
     constructor() {
         this.available = ko.pureComputed(() => UndergroundHelpers.list.filter(helper => helper.isUnlocked()));
@@ -145,7 +177,7 @@ export class UndergroundHelpers {
         }
 
         UndergroundHelpers.list.forEach(helper => {
-            const data = json?.find(h => h.id === h.id);
+            const data = json?.find(h => h.id === helper.id);
             if (data) {
                 helper.fromJSON(data);
             }
@@ -158,7 +190,7 @@ export class UndergroundHelpers {
 }
 
 UndergroundHelpers.add(new UndergroundHelper('diamond', 'Helper (Diamond)', MineType.Diamond, null));
-UndergroundHelpers.add(new UndergroundHelper('gemplates', 'Helper (Gem Plates)', MineType.GemPlate, null));
+UndergroundHelpers.add(new UndergroundHelper('gemplates', 'Helper (Plates)', MineType.GemPlate, null));
 UndergroundHelpers.add(new UndergroundHelper('shards', 'Helper (Shards)', MineType.Shard, null));
 UndergroundHelpers.add(new UndergroundHelper('fossils', 'Helper (Fossils)', MineType.Fossil, null));
 UndergroundHelpers.add(new UndergroundHelper('evolutionitems', 'Helper (Evolution Items)', MineType.EvolutionItem, null));

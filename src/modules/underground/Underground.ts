@@ -34,6 +34,7 @@ export class Underground implements Feature {
 
     update(delta: number): void {
         this.mine?.tick(delta);
+        this.helpers?.hired().forEach(helper => helper.tick(delta));
     }
 
     public generateMine(mineType?: MineType) {
