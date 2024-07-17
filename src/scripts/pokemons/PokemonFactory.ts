@@ -170,10 +170,10 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, GameConstants.ShadowStatus.None, et, heldItem, ep);
     }
 
-    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean): BattlePokemon {
+    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean, trainerPokemon = 1): BattlePokemon {
         const name = pokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(name);
-        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
+        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)) / (isBoss ? 1 : trainerPokemon ** 0.75));
         const exp: number = basePokemon.exp;
         const shiny: boolean = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
