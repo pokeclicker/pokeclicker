@@ -11005,7 +11005,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 144,
         'catchRate': 90,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Medichamite, 'Medicham', 'Mega Medicham')],
+        'evolutions': [MegaEvolution(MegaStoneType.Medichamite, 'Medicham', 'Mega Medicham')],
         'base': {
             'hitpoints': 60,
             'attack': 60,
