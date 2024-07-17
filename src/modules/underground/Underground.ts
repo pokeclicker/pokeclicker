@@ -87,10 +87,3 @@ export class Underground implements Feature {
         this._mine(json.mine ? Mine.load(json.mine) : null);
     }
 }
-
-$(document).ready(() => {
-    $('body').on('click', '.mineSquare', function () {
-        const coordinates = App.game.underground.mine.getCoordinateForGridIndex(parseInt(this.dataset.index));
-        App.game.undergroundTools.useTool(App.game.undergroundTools.selectedToolType, coordinates.x, coordinates.y);
-    });
-});
