@@ -129,6 +129,10 @@ export class UndergroundHelper {
         return this._smartToolUsageChance();
     }
 
+    get timeSinceWork(): number {
+        return this._timeSinceWork();
+    }
+
     get workCycleTime(): number {
         return this._workCycleTime();
     }
