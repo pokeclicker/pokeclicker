@@ -19,7 +19,18 @@ import { PureComputed } from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import { PLATE_VALUE } from '../GameConstants';
+import { humanifyString, PLATE_VALUE } from '../GameConstants';
+import {
+    DISCOVER_MINE_TIMEOUT_BASE,
+    DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL,
+    GLOBAL_COOLDOWN_BASE,
+    GLOBAL_COOLDOWN_MINIMUM,
+    GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL,
+    MEGA_STONE_MINE_CHANCE,
+} from './UndergroundConfig';
+import { UndergroundHelper } from './helper/UndergroundHelper';
+import NotificationOption from '../notifications/NotificationOption';
+import GameHelper from '../GameHelper';
 
 export class UndergroundController {
     public static shortcutVisible: PureComputed<boolean> = ko.pureComputed(() => {
@@ -57,7 +68,7 @@ export class UndergroundController {
     }
 
     public static getMineConfig(mineType: MineType = undefined): MineConfig {
-        if (Rand.chance(25) && MegaStoneMineConfig.getAvailableItems().length > 0) {
+        if (Rand.chance(MEGA_STONE_MINE_CHANCE) && MegaStoneMineConfig.getAvailableItems().length > 0) {
             return MegaStoneMineConfig;
         }
 
@@ -72,29 +83,13 @@ export class UndergroundController {
         return otherMines.find(config => config.type === mineType) || Rand.fromArray(otherMines);
     }
 
-    public static convertLevelToExperience(level: number): number {
-        let total = 0;
-        for (let i = 0; i < level; ++i) {
-            total = Math.floor(total + i + 300 * Math.pow(2, i / 7));
-        }
-        return Math.floor(total / 4);
-    }
-
-    public static convertExperienceToLevel(experience: number): number {
-        let level = 0;
-        while (experience >= this.convertLevelToExperience(level + 1)) {
-            ++level;
-        }
-        return level;
-    }
-
     public static calculateGlobalCooldown(): number {
         const cellBatteryBonus = App.game.oakItems.isActive(OakItemType.Cell_Battery) ?
             App.game.oakItems.calculateBonus(OakItemType.Cell_Battery)
             :
             1;
 
-        return Math.max(15 - 0.5 * App.game.underground.undergroundLevel, 0.1) / cellBatteryBonus;
+        return Math.max(GLOBAL_COOLDOWN_BASE - GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL * App.game.underground.undergroundLevel, GLOBAL_COOLDOWN_MINIMUM) / cellBatteryBonus;
     }
 
     public static calculateToolCooldown(tool: UndergroundTool): number {
@@ -102,12 +97,8 @@ export class UndergroundController {
     }
 
     public static calculateDiscoverMineTimeout(mineType?: MineType): number {
-        if (mineType != null) {
-            return 60 - 1.2 * App.game.underground.undergroundLevel;
-        }
-
-        if (App.game.underground.mine && (App.game.underground.mine.itemsFound < App.game.underground.mine.itemsBuried)) {
-            return 60 - 1.2 * App.game.underground.undergroundLevel;
+        if (mineType != null || (App.game.underground.mine && !App.game.underground.mine.completed)) {
+            return Math.max(DISCOVER_MINE_TIMEOUT_BASE - DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL * App.game.underground.undergroundLevel, 0);
         }
 
         return 0;
@@ -198,5 +189,52 @@ export class UndergroundController {
             };
         }
         return {};
+    }
+
+    public static addGlobalUndergroundExp(experience: number) {
+        App.game.underground.addUndergroundExp(experience);
+        App.game.underground.helpers.hired().forEach(value => value.addExp(experience));
+    }
+
+    public static addPlayerUndergroundExp(experience: number) {
+        App.game.underground.addUndergroundExp(experience);
+    }
+
+    public static addHiredHelperUndergroundExp(experience: number) {
+        App.game.underground.helpers.hired().forEach(value => value.addExp(experience));
+    }
+
+    public static notifyMineCompleted(helper?: UndergroundHelper) {
+        Notifier.notify({
+            message: helper ? `${helper.name} digs deeper...` : 'You dig deeper...',
+            type: NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_dig_deeper,
+        });
+    }
+
+    public static notifyItemFound(item: UndergroundItem, amount: number, helper?: UndergroundHelper) {
+        const { itemName } = item;
+
+        Notifier.notify({
+            message: `${helper ? `${helper.name} has` : "You've"} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+            timeout: 3000,
+        });
+
+        for (let i = 1; i < amount; i++) {
+            let message = `${helper ? `${helper.name} has` : "You've"} found an extra ${humanifyString(itemName)} in the Mine!`;
+            if (i === 2) message = `Lucky! ${helper ? `${helper.name} has` : "You've"} found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i === 3) message = `Jackpot! ${helper ? `${helper.name} has` : "You've"} found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i > 3) message = `Jackpot ×${i - 2}! ${helper ? `${helper.name} has` : "You've"} found an extra ${humanifyString(itemName)} in the Mine!`;
+
+            Notifier.notify({
+                title: 'Treasure Scanner',
+                message: message,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+                timeout: 3000 + i * 2000,
+            });
+        }
     }
 }

@@ -7,7 +7,15 @@ import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import { Mine } from './mine/Mine';
 import { MineType } from './mine/MineConfig';
-import {UndergroundHelpers} from './helper/UndergroundHelper';
+import { UndergroundHelpers } from './helper/UndergroundHelper';
+import {
+    BASE_EXTRA_LAYER_DEPTH, BASE_MAXIMUM_ITEMS,
+    BASE_MINE_HEIGHT,
+    BASE_MINE_WIDTH,
+    BASE_MINIMUM_ITEMS,
+    BASE_MINIMUM_LAYER_DEPTH,
+} from './UndergroundConfig';
+
 
 export class Underground implements Feature {
     name = 'Underground';
@@ -18,9 +26,7 @@ export class Underground implements Feature {
     };
 
     private _undergroundExp: Observable<number> = ko.observable(0);
-    private _undergroundLevel: PureComputed<number> = ko.pureComputed(() => {
-        return UndergroundController.convertExperienceToLevel(this._undergroundExp());
-    });
+    private _undergroundLevel: PureComputed<number> = ko.pureComputed(() => Underground.convertExperienceToLevel(this._undergroundExp()));
 
     private _mine: Observable<Mine | null> = ko.observable(null);
     public helpers = new UndergroundHelpers();
@@ -38,13 +44,16 @@ export class Underground implements Feature {
     }
 
     public generateMine(mineType?: MineType) {
+        const minItemsToGenerate = Underground.calculateMinimumItemsToGenerate(this.undergroundLevel);
+        const maxItemsToGenerate = Underground.calculateMaximumItemsToGenerate(this.undergroundLevel);
+
         const mine = new Mine({
-            width: 25,
-            height: 12,
-            minimumDepth: 1,
-            maximumExtraLayers: 0,
-            minimumItemsToGenerate: 1,
-            extraItemsToGenerate: 2,
+            width: BASE_MINE_WIDTH,
+            height: BASE_MINE_HEIGHT,
+            minimumDepth: BASE_MINIMUM_LAYER_DEPTH,
+            maximumExtraLayers: BASE_EXTRA_LAYER_DEPTH,
+            minimumItemsToGenerate: minItemsToGenerate,
+            extraItemsToGenerate: Math.max(maxItemsToGenerate - minItemsToGenerate, 0),
             timeToDiscover: UndergroundController.calculateDiscoverMineTimeout(mineType),
             config: UndergroundController.getMineConfig(mineType),
         });
@@ -90,5 +99,29 @@ export class Underground implements Feature {
         this._undergroundExp(json.undergroundExp || this.defaults.undergroundExp);
         this._mine(json.mine ? Mine.load(json.mine) : null);
         this.helpers.fromJSON(json.helpers);
+    }
+
+    public static calculateMinimumItemsToGenerate(level: number = 0): number {
+        return BASE_MINIMUM_ITEMS + Math.min(Math.floor((level + 3) / 6), 5);
+    }
+
+    public static calculateMaximumItemsToGenerate(level: number = 0): number {
+        return BASE_MAXIMUM_ITEMS + Math.min(Math.floor(level / 6), 5);
+    }
+
+    public static convertLevelToExperience(level: number): number {
+        let total = 0;
+        for (let i = 0; i < level; ++i) {
+            total = Math.floor(total + i + 300 * Math.pow(2, i / 7));
+        }
+        return Math.floor(total / 4);
+    }
+
+    public static convertExperienceToLevel(experience: number): number {
+        let level = 0;
+        while (experience >= this.convertLevelToExperience(level + 1)) {
+            ++level;
+        }
+        return level;
     }
 }

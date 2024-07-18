@@ -13,17 +13,31 @@ import UndergroundItem from '../UndergroundItem';
 import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
 import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
+import {
+    AUTO_SELL_BASE,
+    AUTO_SELL_INCREASE_PER_LEVEL,
+    AUTO_SELL_MAXIMUM,
+    FAVORITE_MINE_CHANCE_BASE,
+    FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL,
+    FAVORITE_MINE_CHANCE_MAXIMUM, MAX_HIRES,
+    SMART_TOOL_CHANCE_BASE,
+    SMART_TOOL_CHANCE_INCREASE_PER_LEVEL,
+    SMART_TOOL_CHANCE_MAXIMUM, UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
+    WORKCYCLE_TIMEOUT_BASE,
+    WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL, WORKCYCLE_TIMEOUT_MINIMUM,
+} from '../UndergroundConfig';
 
 export class UndergroundHelper {
     private _experience: Observable<number> = ko.observable<number>(0);
     private _hired: Observable<boolean> = ko.observable<boolean>(false);
     private _timeSinceWork: Observable<number> = ko.observable<number>(0);
 
-    private _level: PureComputed<number> = ko.pureComputed(() => this._experience());
-    private _autoSellValue: PureComputed<number> = ko.pureComputed(() => Math.min(0.4 + 0.01 * this._level(), 0.9));
-    private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(0.5 + 0.025 * this._level(), 1));
-    private _favoriteMineChance: PureComputed<number> = ko.pureComputed(() => Math.min(0.5 + 0.01 * this._level(), 1));
-    private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(60 - this._level(), 10));
+    private _level: PureComputed<number> = ko.pureComputed(() => UndergroundHelper.convertExperienceToLevel(this._experience()));
+    private _autoSellValue: PureComputed<number> = ko.pureComputed(() => Math.min(AUTO_SELL_BASE + AUTO_SELL_INCREASE_PER_LEVEL * this._level(), AUTO_SELL_MAXIMUM));
+    private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(SMART_TOOL_CHANCE_BASE + SMART_TOOL_CHANCE_INCREASE_PER_LEVEL * this._level(), SMART_TOOL_CHANCE_MAXIMUM));
+    private _favoriteMineChance: PureComputed<number> = ko.pureComputed(() =>
+        Math.min(FAVORITE_MINE_CHANCE_BASE + FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL * this._level(), FAVORITE_MINE_CHANCE_MAXIMUM));
+    private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(WORKCYCLE_TIMEOUT_BASE - WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL * this._level(), WORKCYCLE_TIMEOUT_MINIMUM));
 
     private _selectedEnergyRestore: Observable<EnergyRestoreSize | null> = ko.observable(null);
 
@@ -78,9 +92,9 @@ export class UndergroundHelper {
             GameHelper.incrementObservable(this._experience, tool.experiencePerUse);
         }
 
-        const itemsDugUp: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptDigUpItem(coordinate));
+        const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
 
-        itemsDugUp.forEach(value => {
+        itemsFound.forEach(value => {
             if (value) {
                 const { item, amount } = value;
 
@@ -89,10 +103,22 @@ export class UndergroundHelper {
                 } else {
                     UndergroundController.gainMineItem(item.id, amount);
                 }
+
+                UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+                UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+
+                UndergroundController.notifyItemFound(item, amount, this);
             }
         });
 
-        if (App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried) {
+        if (App.game.underground.mine.attemptCompleteLayer()) {
+            UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
+            UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
+
+            UndergroundController.notifyMineCompleted(this);
+        }
+
+        if (App.game.underground.mine.completed) {
             App.game.underground.generateMine(Rand.chance(this.favoriteMineChance) ? this._favoriteMine : undefined);
         }
     }
@@ -152,6 +178,10 @@ export class UndergroundHelper {
             timeout: 30 * SECOND,
             setting: NotificationConstants.NotificationSetting.Underground.helper,
         });
+    }
+
+    public addExp(experience: number) {
+        GameHelper.incrementObservable(this._experience, experience);
     }
 
     get id(): string {
@@ -218,6 +248,22 @@ export class UndergroundHelper {
         this._timeSinceWork = ko.observable(json?.timeSinceWork || 0);
         this._selectedEnergyRestore = ko.observable(json?.selectedEnergyRestore || null);
     }
+
+    public static convertLevelToExperience(level: number): number {
+        let total = 0;
+        for (let i = 0; i < level; ++i) {
+            total = Math.floor(total + i + 300 * Math.pow(2, i / 7));
+        }
+        return Math.floor(total / 4);
+    }
+
+    public static convertExperienceToLevel(experience: number): number {
+        let level = 0;
+        while (experience >= this.convertLevelToExperience(level + 1)) {
+            ++level;
+        }
+        return level;
+    }
 }
 
 export class UndergroundHelpers {
@@ -227,12 +273,10 @@ export class UndergroundHelpers {
     public hired: PureComputed<UndergroundHelper[]>;
     public canHire: PureComputed<boolean>;
 
-    public static MAX_HIRES: number = 1;
-
     constructor() {
         this.available = ko.pureComputed(() => UndergroundHelpers.list.filter(helper => helper.isUnlocked()));
         this.hired = ko.pureComputed(() => UndergroundHelpers.list.filter(helper => helper.hired));
-        this.canHire = ko.pureComputed(() => this.hired().length < UndergroundHelpers.MAX_HIRES);
+        this.canHire = ko.pureComputed(() => this.hired().length < MAX_HIRES);
     }
 
     public toJSON(): Record<string, any>[] {
@@ -257,8 +301,8 @@ export class UndergroundHelpers {
     }
 }
 
-UndergroundHelpers.add(new UndergroundHelper('diamond', 'Helper (Diamond)', MineType.Diamond, null));
+UndergroundHelpers.add(new UndergroundHelper('diamond', 'Steve and Alex', MineType.Diamond, null));
 UndergroundHelpers.add(new UndergroundHelper('gemplates', 'Helper (Plates)', MineType.GemPlate, null));
-UndergroundHelpers.add(new UndergroundHelper('shards', 'Helper (Shards)', MineType.Shard, null));
+UndergroundHelpers.add(new UndergroundHelper('shards', 'Sharlene', MineType.Shard, null));
 UndergroundHelpers.add(new UndergroundHelper('fossils', 'Helper (Fossils)', MineType.Fossil, null));
-UndergroundHelpers.add(new UndergroundHelper('evolutionitems', 'Helper (Evolution Items)', MineType.EvolutionItem, null));
+UndergroundHelpers.add(new UndergroundHelper('evolutionitems', 'Darwin', MineType.EvolutionItem, null));

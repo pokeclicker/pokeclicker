@@ -4,6 +4,7 @@ import { Feature } from '../../DataStore/common/Feature';
 import { Observable } from 'knockout';
 import { UndergroundController } from '../UndergroundController';
 import { Coordinate } from '../mine/Mine';
+import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../UndergroundConfig';
 
 export default class UndergroundTools implements Feature {
     name = 'Underground Tools';
@@ -64,7 +65,7 @@ export default class UndergroundTools implements Feature {
         return this.tools.find(tool => tool.id === toolType);
     }
 
-    public useTool(toolType: UndergroundToolType, x: number, y: number, forced: boolean = false): void {
+    public useTool(toolType: UndergroundToolType, x: number, y: number): void {
         const tool = this.getTool(toolType);
 
         if (!tool ||
@@ -74,10 +75,20 @@ export default class UndergroundTools implements Feature {
             return;
         }
 
-        if (forced) {
-            tool.action(x, y);
-        } else if (tool.canUseTool()) {
-            tool.action(x, y);
+        if (tool.canUseTool()) {
+            const coordinatesMined = tool.action(x, y);
+            const itemsFound = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
+            itemsFound.forEach(value => {
+                if (value) {
+                    const { item, amount } = value;
+
+                    UndergroundController.gainMineItem(item.id, amount);
+                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+
+                    UndergroundController.notifyItemFound(item, amount);
+                }
+            });
 
             // Use a stored use, or trigger the cooldown
             if (tool.storedUses > 0) tool.useStoredUse();
@@ -90,7 +101,17 @@ export default class UndergroundTools implements Feature {
                 }
             });
 
-            App.game.underground.addUndergroundExp(tool.experiencePerUse);
+            UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
+            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
+
+            if (itemsFound.length > 0) {
+                if (App.game.underground.mine.attemptCompleteLayer()) {
+                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
+                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
+
+                    UndergroundController.notifyMineCompleted();
+                }
+            }
         }
     }
 

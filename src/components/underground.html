@@ -23,22 +23,22 @@
                     <div>Discovering mine time: <knockout data-bind="text: App.game.underground.mine?.timeUntilDiscovery.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                     <div>
                         <div>Lvl. <knockout data-bind='text: App.game.underground.undergroundLevel'></knockout></div>
-                        <div>Exp <knockout data-bind='text: App.game.underground.undergroundExp'></knockout> / <knockout data-bind='text: UndergroundController.convertLevelToExperience(App.game.underground.undergroundLevel + 1)'></knockout></div>
+                        <div>Exp <knockout data-bind='text: App.game.underground.undergroundExp'></knockout> / <knockout data-bind='text: Underground.convertLevelToExperience(App.game.underground.undergroundLevel + 1)'></knockout></div>
                         <div>
-                            <button onclick='App.game.underground.addUndergroundExp(10)'>+10 XP</button>
-                            <button onclick='App.game.underground.addUndergroundExp(100)'>+100 XP</button>
-                            <button onclick='App.game.underground.addUndergroundExp(1000)'>+1,000 XP</button>
-                            <button onclick='App.game.underground.addUndergroundExp(10000)'>+10,000 XP</button>
-                            <button onclick='App.game.underground.addUndergroundExp(-10)'>-10 XP</button>
-                            <button onclick='App.game.underground.addUndergroundExp(-100)'>-100 XP</button>
-                            <button onclick='App.game.underground.addUndergroundExp(-1000)'>-1,000 XP</button>
-                            <button onclick='App.game.underground.addUndergroundExp(-10000)'>-10,000 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(10)'>+10 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(100)'>+100 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(1000)'>+1,000 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(10000)'>+10,000 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10)'>-10 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(-100)'>-100 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(-1000)'>-1,000 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10000)'>-10,000 XP</button>
                         </div>
                     </div>
                     <div>
                         <!-- ko if: App.game.underground.mine -->
                         <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
-                             data-bind="css: { 'disabled': App.game.underground.mine?.timeUntilDiscovery > 0 },
+                             data-bind="css: { 'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed },
                              class: `${UndergroundToolType[App.game.undergroundTools.selectedToolType]}Selected`,
                              style: {
                                 backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,

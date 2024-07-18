@@ -4,6 +4,8 @@ import Rand from '../../utilities/Rand';
 import UndergroundItem from '../UndergroundItem';
 import { UndergroundController } from '../UndergroundController';
 import UndergroundItems from '../UndergroundItems';
+import OakItemType from '../../enums/OakItemType';
+import GameHelper from '../../GameHelper';
 
 export type Coordinate = {
     x: number;
@@ -148,6 +150,8 @@ export class Mine {
     private _itemsBuried: Observable<number> = ko.observable(0);
     private _itemsFound: Observable<number> = ko.observable(0);
     private _itemsPartiallyFound: Observable<number> = ko.observable(0);
+
+    private _completed: Observable<boolean> = ko.observable(false);
 
     constructor(mineProperties: MineProperties) {
         this._mineProperties = mineProperties;
@@ -317,7 +321,7 @@ export class Mine {
         return false;
     }
 
-    public attemptDigUpItem(coordinate: Coordinate): { item: UndergroundItem, amount: number } {
+    public attemptFindItem(coordinate: Coordinate): { item: UndergroundItem, amount: number } {
         const digTile: Tile = this.getTileForCoordinate(coordinate);
 
         if (!digTile || !digTile.reward || digTile.layerDepth > 0 || digTile.reward.rewarded) {
@@ -336,10 +340,28 @@ export class Mine {
 
         this._updateItemsFoundObservable();
 
+        const amount = UndergroundController.calculateRewardAmountFromMining();
+
+        App.game.oakItems.use(OakItemType.Treasure_Scanner);
+        GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
+
         return {
             item: UndergroundItems.getById(digTile.reward.undergroundItemID),
-            amount: UndergroundController.calculateRewardAmountFromMining(),
+            amount: amount,
         };
+    }
+
+    public attemptCompleteLayer(): boolean {
+        if (!this.completed && this.itemsBuried > 0 && this.itemsFound === this.itemsBuried) {
+            this._completed(true);
+
+            GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
+            App.game.oakItems.use(OakItemType.Explosive_Charge);
+
+            return true;
+        }
+
+        return false;
     }
 
     get grid(): Tile[] {
@@ -362,6 +384,10 @@ export class Mine {
         return this._itemsPartiallyFound();
     }
 
+    get completed(): boolean {
+        return this._completed();
+    }
+
     private _updateItemsBuriedObservable() {
         this._itemsBuried(new Set(this._grid.filter(tile => tile.reward).map(tile => tile.reward.rewardID)).size);
     }
@@ -379,6 +405,7 @@ export class Mine {
             properties: this._mineProperties,
             grid: this._grid.map(value => value.save()),
             timeUntilDiscovery: this._timeUntilDiscovery(),
+            completed: this._completed(),
         };
     }
 
@@ -386,6 +413,7 @@ export class Mine {
         const mine = new Mine(json.properties);
         mine._grid = json.grid?.map(value => Tile.load(value));
         mine._timeUntilDiscovery(json.timeUntilDiscovery || json.properties.timeToDiscover);
+        mine._completed(json.completed || false);
 
         mine._updateItemsBuriedObservable();
         mine._updateItemsFoundObservable();

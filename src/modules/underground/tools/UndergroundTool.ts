@@ -1,7 +1,7 @@
 import { Observable } from 'knockout';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from './UndergroundToolType';
-import {Coordinate} from '../mine/Mine';
+import { Coordinate } from '../mine/Mine';
 
 export default class UndergroundTool {
     private _nextAllowedUse = ko.observable(Date.now());
