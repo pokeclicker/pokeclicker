@@ -41,7 +41,7 @@ export class Underground implements Feature {
         const mine = new Mine({
             width: 25,
             height: 12,
-            minimumDepth: 0,
+            minimumDepth: 1,
             maximumExtraLayers: 0,
             minimumItemsToGenerate: 1,
             extraItemsToGenerate: 2,

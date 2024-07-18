@@ -5,7 +5,7 @@ import UndergroundItem from '../UndergroundItem';
 import { UndergroundController } from '../UndergroundController';
 import UndergroundItems from '../UndergroundItems';
 
-type Coordinate = {
+export type Coordinate = {
     x: number;
     y: number;
 };
@@ -324,7 +324,7 @@ export class Mine {
             return null;
         }
 
-        const undergroundItemTiles: Tile[] = this._grid.filter(tile => tile.reward.rewardID === digTile.reward.rewardID);
+        const undergroundItemTiles: Tile[] = this._grid.filter(tile => tile.reward && tile.reward.rewardID === digTile.reward.rewardID);
 
         if (!undergroundItemTiles.every(tile => tile.layerDepth === 0)) {
             return null;

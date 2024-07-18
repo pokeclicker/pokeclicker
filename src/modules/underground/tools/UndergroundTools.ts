@@ -3,6 +3,7 @@ import UndergroundToolType from './UndergroundToolType';
 import { Feature } from '../../DataStore/common/Feature';
 import { Observable } from 'knockout';
 import { UndergroundController } from '../UndergroundController';
+import { Coordinate } from '../mine/Mine';
 
 export default class UndergroundTools implements Feature {
     name = 'Underground Tools';
@@ -24,22 +25,33 @@ export default class UndergroundTools implements Feature {
     initialize() {
         this.tools = [
             new UndergroundTool(UndergroundToolType.Chisel, 20, 2, 50, 1, (x, y) => {
-                return App.game.underground.mine?.attemptBreakTile({ x, y }, 2);
+                const coordinatesActuallyMined: Array<Coordinate> = [];
+                if (App.game.underground.mine?.attemptBreakTile({ x, y }, 2)) {
+                    coordinatesActuallyMined.push({ x, y });
+                }
+
+                return coordinatesActuallyMined;
             }),
             new UndergroundTool(UndergroundToolType.Hammer, 60, 4, 15, 2, (x, y) => {
-                let hasMined = false;
+                const coordinatesActuallyMined: Array<Coordinate> = [];
                 for (let deltaX = -1; deltaX <= 1; deltaX++) {
                     for (let deltaY = -1; deltaY <= 1; deltaY++) {
-                        hasMined = App.game.underground.mine?.attemptBreakTile({ x: x + deltaX, y: y + deltaY }, 1) || hasMined;
+                        if (App.game.underground.mine?.attemptBreakTile({ x: x + deltaX, y: y + deltaY }, 1)) {
+                            coordinatesActuallyMined.push({ x: x + deltaX, y: y + deltaY });
+                        }
                     }
                 }
-                return hasMined;
+                return coordinatesActuallyMined;
             }),
             new UndergroundTool(UndergroundToolType.Bomb, 180, 9, 5, 3, () => {
+                const coordinatesActuallyMined: Array<Coordinate> = [];
                 for (let i = 0; i < 20; i++) {
-                    App.game.underground.mine?.attemptBreakTile(App.game.underground.mine.getRandomCoordinate(), 2);
+                    const randomCoordinate = App.game.underground.mine.getRandomCoordinate();
+                    if (App.game.underground.mine?.attemptBreakTile(randomCoordinate, 2)) {
+                        coordinatesActuallyMined.push({ x: randomCoordinate.x, y: randomCoordinate.y });
+                    }
                 }
-                return true;
+                return coordinatesActuallyMined;
             }),
         ];
     }
@@ -48,7 +60,7 @@ export default class UndergroundTools implements Feature {
         this.tools.forEach(tool => tool.tick(delta));
     }
 
-    private getTool(toolType: UndergroundToolType): UndergroundTool {
+    public getTool(toolType: UndergroundToolType): UndergroundTool {
         return this.tools.find(tool => tool.id === toolType);
     }
 

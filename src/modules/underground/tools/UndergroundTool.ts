@@ -1,6 +1,7 @@
 import { Observable } from 'knockout';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from './UndergroundToolType';
+import {Coordinate} from '../mine/Mine';
 
 export default class UndergroundTool {
     private _nextAllowedUse = ko.observable(Date.now());
@@ -16,7 +17,7 @@ export default class UndergroundTool {
         public cooldownReductionPerLevel: number,
         public maximumStoredUsages: number,
         public experiencePerUse: number,
-        public action: (x: number, y: number) => void,
+        public action: (x: number, y: number) => Array<Coordinate>,
     ) {
     }
 

@@ -38,7 +38,7 @@
                     <div>
                         <!-- ko if: App.game.underground.mine -->
                         <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
-                             data-bind="css: { 'disabled': false },
+                             data-bind="css: { 'disabled': App.game.underground.mine?.timeUntilDiscovery > 0 },
                              class: `${UndergroundToolType[App.game.undergroundTools.selectedToolType]}Selected`,
                              style: {
                                 backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
@@ -115,6 +115,7 @@
                                 <div>Level: <knockout data-bind="text: $data.level.toLocaleString('en-US')"></knockout></div>
                                 <div>Auto-sell value: <knockout data-bind="text: $data.autoSellValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                 <div>Smart tool chance: <knockout data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                <div>Favorite chance: <knockout data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                 <div>Work cycle time: <knockout data-bind="text: $data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout>s</div>
                                 <div>
                                     Potion:

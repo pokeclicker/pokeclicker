@@ -7,6 +7,12 @@ import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
 import { EnergyRestoreSize, SECOND } from '../../GameConstants';
 import GameHelper from '../../GameHelper';
+import UndergroundToolType from '../tools/UndergroundToolType';
+import { Coordinate } from '../mine/Mine';
+import UndergroundItem from '../UndergroundItem';
+import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
+import { UndergroundController } from '../UndergroundController';
+import Rand from '../../utilities/Rand';
 
 export class UndergroundHelper {
     private _experience: Observable<number> = ko.observable<number>(0);
@@ -16,6 +22,7 @@ export class UndergroundHelper {
     private _level: PureComputed<number> = ko.pureComputed(() => this._experience());
     private _autoSellValue: PureComputed<number> = ko.pureComputed(() => Math.min(0.4 + 0.01 * this._level(), 0.9));
     private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(0.5 + 0.025 * this._level(), 1));
+    private _favoriteMineChance: PureComputed<number> = ko.pureComputed(() => Math.min(0.5 + 0.01 * this._level(), 1));
     private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(60 - this._level(), 10));
 
     private _selectedEnergyRestore: Observable<EnergyRestoreSize | null> = ko.observable(null);
@@ -40,6 +47,10 @@ export class UndergroundHelper {
     }
 
     public tick(delta: number) {
+        if (App.game.underground.mine?.timeUntilDiscovery > 0) {
+            return;
+        }
+
         GameHelper.incrementObservable(this._timeSinceWork, delta);
 
         if (this._timeSinceWork() > this.workCycleTime) {
@@ -52,6 +63,48 @@ export class UndergroundHelper {
 
     private _workAction() {
         // TODO : Implement logic to use tools and do work
+        let coordinatesMined: Array<Coordinate> = [];
+
+        if (App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried) {
+            // Use the Bomb action, can use this one anywhere we want
+            const tool = App.game.undergroundTools.getTool(UndergroundToolType.Bomb);
+            coordinatesMined = tool.action(0, 0);
+            GameHelper.incrementObservable(this._experience, tool.experiencePerUse);
+        } else {
+            // Use the chisel action
+            const tool = App.game.undergroundTools.getTool(UndergroundToolType.Chisel);
+            const { x, y } = this.getSmartCoordinate();
+            coordinatesMined = tool.action(x, y);
+            GameHelper.incrementObservable(this._experience, tool.experiencePerUse);
+        }
+
+        const itemsDugUp: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptDigUpItem(coordinate));
+
+        itemsDugUp.forEach(value => {
+            if (value) {
+                const { item, amount } = value;
+
+                if (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem) {
+                    UndergroundController.gainProfit(item, amount, this.autoSellValue);
+                } else {
+                    UndergroundController.gainMineItem(item.id, amount);
+                }
+            }
+        });
+
+        if (App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried) {
+            App.game.underground.generateMine(Rand.chance(this.favoriteMineChance) ? this._favoriteMine : undefined);
+        }
+    }
+
+    private getSmartCoordinate() {
+        const unminedRewardCoordinates = App.game.underground.mine.grid.reduce<number[]>((previousValue, currentValue, currentIndex) => {
+            if (currentValue.reward && currentValue.layerDepth > 0)
+                previousValue.push(currentIndex);
+            return previousValue;
+        }, []);
+
+        return App.game.underground.mine.getCoordinateForGridIndex(Rand.fromArray(unminedRewardCoordinates));
     }
 
     public tryUseEnergyPotion() {
@@ -127,6 +180,10 @@ export class UndergroundHelper {
 
     get smartToolUsageChance(): number {
         return this._smartToolUsageChance();
+    }
+
+    get favoriteMineChance(): number {
+        return this._favoriteMineChance();
     }
 
     get timeSinceWork(): number {
