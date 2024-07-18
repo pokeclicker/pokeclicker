@@ -16,9 +16,16 @@ export class UndergroundHelper {
     private _level: PureComputed<number> = ko.pureComputed(() => this._experience());
     private _autoSellValue: PureComputed<number> = ko.pureComputed(() => Math.min(0.4 + 0.01 * this._level(), 0.9));
     private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(0.5 + 0.025 * this._level(), 1));
-    private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.min(60 - this._level(), 10));
+    private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(60 - this._level(), 10));
 
     private _selectedEnergyRestore: Observable<EnergyRestoreSize | null> = ko.observable(null);
+
+    public static RESTORE_OPTIONS = [
+        { value: null, name: 'None' },
+        { value: EnergyRestoreSize.SmallRestore, name: 'Small Restore' },
+        { value: EnergyRestoreSize.MediumRestore, name: 'Medium Restore' },
+        { value: EnergyRestoreSize.LargeRestore, name: 'Large Restore' },
+    ];
 
     constructor(
         private _id: string,
@@ -126,11 +133,11 @@ export class UndergroundHelper {
         return this._workCycleTime();
     }
 
-    get selectedEnergyRestore(): EnergyRestoreSize {
+    get selectedEnergyRestore(): EnergyRestoreSize | null {
         return this._selectedEnergyRestore();
     }
 
-    set selectedEnergyRestore(value: EnergyRestoreSize) {
+    set selectedEnergyRestore(value: EnergyRestoreSize | null) {
         this._selectedEnergyRestore(value);
     }
 

@@ -116,6 +116,17 @@
                                 <div>Auto-sell value: <knockout data-bind="text: $data.autoSellValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                 <div>Smart tool chance: <knockout data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                 <div>Work cycle time: <knockout data-bind="text: $data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout>s</div>
+                                <div>
+                                    Potion:
+                                    <div class="input-group input-group-sm">
+                                        <select autocomplete="off" class="custom-select" data-bind="options: [
+                                            { value: null, name: 'None' },
+                                            { value: 0, name: 'Small Restore' },
+                                            { value: 1, name: 'Medium Restore' },
+                                            { value: 2, name: 'Large Restore' },
+                                        ], optionsValue: 'value', optionsText: 'name', value: $data.selectedEnergyRestore"></select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer p-0">
                                 <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired && !App.game.underground.helpers.canHire() }, css: { 'btn-success': !$data.hired, 'btn-danger': $data.hired }, click: () => !$data.hired ? $data.hire() : $data.fire(), text: !$data.hired ? 'Hire!' : 'Fire!'">Hire!</button>
