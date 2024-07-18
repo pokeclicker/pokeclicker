@@ -216,17 +216,17 @@ export class UndergroundController {
         const { itemName } = item;
 
         Notifier.notify({
-            message: `${helper ? `${helper.name} has` : "You've"} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
+            message: `${helper ? `${helper.name}` : 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
             timeout: 3000,
         });
 
         for (let i = 1; i < amount; i++) {
-            let message = `${helper ? `${helper.name} has` : "You've"} found an extra ${humanifyString(itemName)} in the Mine!`;
-            if (i === 2) message = `Lucky! ${helper ? `${helper.name} has` : "You've"} found an extra ${humanifyString(itemName)} in the Mine!`;
-            else if (i === 3) message = `Jackpot! ${helper ? `${helper.name} has` : "You've"} found an extra ${humanifyString(itemName)} in the Mine!`;
-            else if (i > 3) message = `Jackpot ×${i - 2}! ${helper ? `${helper.name} has` : "You've"} found an extra ${humanifyString(itemName)} in the Mine!`;
+            let message = `${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            if (i === 2) message = `Lucky! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i === 3) message = `Jackpot! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i > 3) message = `Jackpot ×${i - 2}! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
 
             Notifier.notify({
                 title: 'Treasure Scanner',
