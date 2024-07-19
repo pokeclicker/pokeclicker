@@ -651,7 +651,7 @@ Routes.add(new RegionRoute(
         water: ['Goldeen', 'Seaking', 'Magikarp'],
         headbutt: ['Aipom', 'Heracross'],
         special: [new SpecialRoutePokemon(['Meowth (Phanpy)'], new MultiRequirement([
-            new StatisticRequirement(['pokemonEncountered', getPokemonByName('Phanpy').id], 1, 'Hatch Phanpy first.'),
+            new StatisticRequirement(['pokemonHatched', getPokemonByName('Phanpy').id], 1, 'Hatch Phanpy first.'),
             new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
         ]))],
     }),
