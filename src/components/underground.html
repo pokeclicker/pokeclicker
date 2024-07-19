@@ -20,21 +20,35 @@
             </div>
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show" data-bind="">
-                    <div>Discovering mine time: <knockout data-bind="text: App.game.underground.mine?.timeUntilDiscovery.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                    <div>
-                        <div>Lvl. <knockout data-bind='text: App.game.underground.undergroundLevel'></knockout></div>
-                        <div>Exp <knockout data-bind='text: App.game.underground.undergroundExp'></knockout> / <knockout data-bind='text: Underground.convertLevelToExperience(App.game.underground.undergroundLevel + 1)'></knockout></div>
-                        <div>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(10)'>+10 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(100)'>+100 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(1000)'>+1,000 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(10000)'>+10,000 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10)'>-10 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(-100)'>-100 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(-1000)'>-1,000 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10000)'>-10,000 XP</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <!-- ko if: App.game.underground.mine.timeUntilDiscovery > 0 -->
+                                <div>Time until discovery</div>
+                                <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
+                                <!-- /ko -->
+
+                                <!-- ko ifnot: App.game.underground.mine.timeUntilDiscovery > 0 -->
+                                <div>Time since discovery</div>
+                                <div data-bind="text: GameConstants.formatTime(-1 * App.game.underground.mine.timeUntilDiscovery)"></div>
+                                <!-- /ko -->
+                            </div>
+
+                            <div class="col-6" data-bind="tooltip: {
+                                    title: `${(App.game.underground.undergroundExp - Underground.convertLevelToExperience(App.game.underground.undergroundLevel)).toLocaleString('en-US')} / ${(Underground.convertLevelToExperience(App.game.underground.undergroundLevel + 1) - Underground.convertLevelToExperience(App.game.underground.undergroundLevel)).toLocaleString('en-US')}`,
+                                    trigger: 'hover'
+                                }">
+                                <div>Lvl. <knockout data-bind="text: App.game.underground.undergroundLevel"></knockout></div>
+                                <div class="progress" style='height: 5px'>
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                         data-bind="attr:{ style: 'width:' + App.game.underground.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <div>
                         <!-- ko if: App.game.underground.mine -->
                         <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
@@ -92,6 +106,20 @@
                         </div>
                         <!-- /ko -->
                     </div>
+
+                    <div>
+                        <div>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(10)'>+10 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(100)'>+100 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(1000)'>+1,000 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(10000)'>+10,000 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10)'>-10 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(-100)'>-100 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(-1000)'>-1,000 XP</button>
+                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10000)'>-10,000 XP</button>
+                        </div>
+                    </div>
+
 
                     <div data-bind="">
                         <button onclick="App.game.underground.generateMine();">Search for mine</button>

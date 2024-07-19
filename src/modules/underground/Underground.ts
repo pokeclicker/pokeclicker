@@ -27,6 +27,7 @@ export class Underground implements Feature {
 
     private _undergroundExp: Observable<number> = ko.observable(0);
     private _undergroundLevel: PureComputed<number> = ko.pureComputed(() => Underground.convertExperienceToLevel(this._undergroundExp()));
+    private _progressToNextLevel: PureComputed<number> = ko.pureComputed(() => (this._undergroundExp() - Underground.convertLevelToExperience(this._undergroundLevel())) / (Underground.convertLevelToExperience(this._undergroundLevel() + 1) - Underground.convertLevelToExperience(this._undergroundLevel())));
 
     private _mine: Observable<Mine | null> = ko.observable(null);
     public helpers = new UndergroundHelpers();
@@ -85,6 +86,10 @@ export class Underground implements Feature {
 
     get undergroundLevel(): number {
         return this._undergroundLevel();
+    }
+
+    get progressToNextLevel(): number {
+        return this._progressToNextLevel();
     }
 
     toJSON(): Record<string, any> {

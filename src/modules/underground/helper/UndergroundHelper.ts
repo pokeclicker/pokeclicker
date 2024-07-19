@@ -83,13 +83,15 @@ export class UndergroundHelper {
             // Use the Bomb action, can use this one anywhere we want
             const tool = App.game.undergroundTools.getTool(UndergroundToolType.Bomb);
             coordinatesMined = tool.action(0, 0);
-            GameHelper.incrementObservable(this._experience, tool.experiencePerUse);
+            UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
+            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
         } else {
             // Use the chisel action
             const tool = App.game.undergroundTools.getTool(UndergroundToolType.Chisel);
             const { x, y } = this.getSmartCoordinate();
             coordinatesMined = tool.action(x, y);
-            GameHelper.incrementObservable(this._experience, tool.experiencePerUse);
+            UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
+            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
         }
 
         const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
