@@ -14,7 +14,6 @@ const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
 const filter = require('gulp-filter');
 const rename = require('gulp-rename');
-const footer = require('gulp-footer');
 const streamToPromise = require('gulp-stream-to-promise');
 const gulpWebpack = require('webpack-stream');
 const webpack = require('webpack');
@@ -189,11 +188,13 @@ gulp.task('scripts', () => {
         // Wrap globally-exported module declarations in namespaces for scripts compatibility
         .pipe(globalModulesFilter)
         .pipe(replace(/(?<=^|\n)(?=\s*declare)/, function handleReplace() {
-            // insert before the first declaration of the file
+            // Insert before the first declaration of the file
+            // Assumes the entire rest of the file will be declarations for this namespace
             const filename = this.file.basename.replace(/\..*$/, '');
             return `declare namespace ${filename} {\n`;
         }))
-        .pipe(footer('}\n'))
+        // Close namespace declarations
+        .pipe(replace(/$(?![\r\n])/, '}\n'))
         .pipe(globalModulesFilter.restore)
         // Output
         .pipe(gulp.dest(dests.declarations));
