@@ -12,10 +12,7 @@
                         <a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a>
                     </li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
-                    <btn class="btn btn-primary">
-                        <span id="diamondCounter" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.diamond]().toLocaleString('en-US')">x</span>
-                        <img src='assets/images/underground/diamond.svg' width="20px'">
-                    </btn>
+                    <li class="d-lg-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
                 </ul>
             </div>
             <div class="modal-body tab-content p-0">
@@ -206,11 +203,9 @@
                                     Potion:
                                     <div class="input-group input-group-sm">
                                         <select autocomplete="off" class="custom-select" data-bind="options: [
-                                            { value: null, name: 'None' },
-                                            { value: 0, name: 'Small Restore' },
-                                            { value: 1, name: 'Medium Restore' },
-                                            { value: 2, name: 'Large Restore' },
-                                        ], optionsValue: 'value', optionsText: 'name', value: $data.selectedEnergyRestore"></select>
+                                            { name: 'None', value: -1 },
+                                            ...GameHelper.enumSelectOption(GameConstants.EnergyRestoreSize),
+                                        ], optionsValue: 'value', optionsText: (item) => item.value < 0 ? `${GameConstants.camelCaseToString(item.name)}` : `${GameConstants.camelCaseToString(item.name)} (${player.itemList[item.name]().toLocaleString('en-US')})`, value: $data.selectedEnergyRestore"></select>
                                     </div>
                                 </div>
                             </div>
@@ -220,6 +215,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="help" class="tab-pane fade pl-5 pr-5">
                     <h4><u>Dig</u></h4>
                     <p>In the Underground you can mine for hidden treasures.</p>
@@ -239,19 +235,27 @@
             </div>
 
             <div class="modal-footer">
-                <div class="flex-grow-1" data-bind="foreach: App.game.underground.helpers.hired()">
-                    <div>
-                        <div data-bind="text: $data.name"></div>
-                        <div class="progress" style='height: 5px'>
-                            <div class="progress-bar bg-info" role="progressbar"
-                                 data-bind="attr:{ style: 'width:' + ($data.timeSinceWork / $data.workCycleTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                                 aria-valuemin="0" aria-valuemax="100">
+                <div class="container">
+                    <div class="row">
+                        <!-- ko foreach: App.game.underground.helpers.hired() -->
+                        <div class="col">
+                            <div>
+                                <span data-bind="text: $data.name"></span>
+                                <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
+                                <span data-bind="text: ` using ${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></span>
+                                <!-- /ko -->
                             </div>
+                            <div class="progress" style='height: 5px'>
+                                <div class="progress-bar bg-info" role="progressbar"
+                                     data-bind="attr:{ style: 'width:' + ($data.timeSinceWork / $data.workCycleTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                            <div data-bind="text: `${$data.timeSinceWork.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}/${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></div>
                         </div>
-                        <div data-bind="text: `${$data.timeSinceWork.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}/${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></div>
+                        <!-- /ko -->
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

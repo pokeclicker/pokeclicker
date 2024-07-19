@@ -43,7 +43,7 @@ export class UndergroundHelper {
         Math.min(FAVORITE_MINE_CHANCE_BASE + FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL * this._level(), FAVORITE_MINE_CHANCE_MAXIMUM));
     private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(WORKCYCLE_TIMEOUT_BASE - WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL * this._level(), WORKCYCLE_TIMEOUT_MINIMUM));
 
-    private _selectedEnergyRestore: Observable<EnergyRestoreSize | null> = ko.observable(null);
+    private _selectedEnergyRestore: Observable<EnergyRestoreSize> = ko.observable(-1);
 
     public static RESTORE_OPTIONS = [
         { value: null, name: 'None' },
@@ -141,7 +141,7 @@ export class UndergroundHelper {
     }
 
     public tryUseEnergyPotion() {
-        if (this.selectedEnergyRestore == null)
+        if (this.selectedEnergyRestore < 0)
             return;
 
         const potionName = EnergyRestoreSize[this.selectedEnergyRestore];
@@ -253,7 +253,7 @@ export class UndergroundHelper {
         this._experience = ko.observable(json?.experience || 0);
         this._hired = ko.observable(json?.hired || false);
         this._timeSinceWork = ko.observable(json?.timeSinceWork || 0);
-        this._selectedEnergyRestore = ko.observable(json?.selectedEnergyRestore || null);
+        this._selectedEnergyRestore = ko.observable(json?.selectedEnergyRestore ?? -1);
     }
 
     public static convertLevelToExperience(level: number): number {
