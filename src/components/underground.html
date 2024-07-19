@@ -184,30 +184,72 @@
 <!--                        </div>-->
 <!--                    </div>-->
                 </div>
+
                 <div id="treasures" class="tab-pane fade">
                 </div>
+
                 <div id="undergroundHelpers" class="tab-pane fade">
-                    <div class="row m-0 justify-content-center" data-bind="foreach: App.game.underground.helpers.available()" style="max-width: 100%;">
+                    <div class="row m-0 justify-content-start" data-bind="foreach: App.game.underground.helpers.available()" style="max-width: 100%;">
                         <div class="card text-left col-md-3 col-sm-6 col-xs-12 p-0">
                             <h5 class="card-header">
                                 <knockout data-bind="text: $data.name">Name</knockout>
                             </h5>
-                            <div class="card-body p-2">
-                                <div>Experience: <knockout data-bind="text: $data.experience.toLocaleString('en-US')"></knockout></div>
-                                <div>Level: <knockout data-bind="text: $data.level.toLocaleString('en-US')"></knockout></div>
-                                <div>Auto-sell value: <knockout data-bind="text: $data.autoSellValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                                <div>Smart tool chance: <knockout data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                                <div>Favorite chance: <knockout data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                                <div>Work cycle time: <knockout data-bind="text: $data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout>s</div>
-                                <div>
-                                    Potion:
-                                    <div class="input-group input-group-sm">
-                                        <select autocomplete="off" class="custom-select" data-bind="options: [
-                                            { name: 'None', value: -1 },
-                                            ...GameHelper.enumSelectOption(GameConstants.EnergyRestoreSize),
-                                        ], optionsValue: 'value', optionsText: (item) => item.value < 0 ? `${GameConstants.camelCaseToString(item.name)}` : `${GameConstants.camelCaseToString(item.name)} (${player.itemList[item.name]().toLocaleString('en-US')})`, value: $data.selectedEnergyRestore"></select>
-                                    </div>
-                                </div>
+                            <div class="card-body p-0">
+                                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Information</h5></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-left">Level</td>
+                                        <td class="text-right tight" data-bind="text: $data.level.toLocaleString('en-US')"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Experience</td>
+                                        <td class="text-right tight" data-bind="text: $data.experience.toLocaleString('en-US')"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Auto-sell</td>
+                                        <td class="text-right tight" data-bind="text: $data.autoSellValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Smart tool</td>
+                                        <td class="text-right tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Favorite mine</td>
+                                        <td class="text-right tight" data-bind="text: $data.favoriteMine"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Discover chance</td>
+                                        <td class="text-right tight" data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Work cycle</td>
+                                        <td class="text-right tight" data-bind="text: `${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></td>
+                                    </tr>
+                                    </tbody>
+
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Energy Restore</h5></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="input-group input-group-sm">
+                                                <select autocomplete="off" class="custom-select" data-bind="options: [
+                                                    { name: 'None', value: -1 },
+                                                    ...GameHelper.enumSelectOption(GameConstants.EnergyRestoreSize),
+                                                ], optionsValue: 'value', optionsText: (item) => item.value < 0 ? `${GameConstants.camelCaseToString(item.name)}` : `${GameConstants.camelCaseToString(item.name)} (${player.itemList[item.name]().toLocaleString('en-US')})`, value: $data.selectedEnergyRestore"></select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="card-footer p-0">
                                 <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired && !App.game.underground.helpers.canHire() }, css: { 'btn-success': !$data.hired, 'btn-danger': $data.hired }, click: () => !$data.hired ? $data.hire() : $data.fire(), text: !$data.hired ? 'Hire!' : 'Fire!'">Hire!</button>

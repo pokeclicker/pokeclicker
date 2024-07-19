@@ -219,6 +219,10 @@ export class UndergroundHelper {
         return this._smartToolUsageChance();
     }
 
+    get favoriteMine(): MineType {
+        return this._favoriteMine;
+    }
+
     get favoriteMineChance(): number {
         return this._favoriteMineChance();
     }
