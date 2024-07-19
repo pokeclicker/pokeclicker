@@ -8,7 +8,7 @@ export enum MineType {
     Shard,
     Fossil,
     EvolutionItem,
-    MegaStone,
+    Special,
 }
 
 export interface MineConfig {
@@ -42,8 +42,8 @@ export const EvolutionItemMineConfig: MineConfig = {
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.EvolutionItem),
 };
 
-export const MegaStoneMineConfig: MineConfig = {
-    type: MineType.MegaStone,
+export const SpecialMineConfig: MineConfig = {
+    type: MineType.Special,
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.MegaStone),
     fixedItemCount: 1,
 };

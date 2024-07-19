@@ -5,7 +5,7 @@ import {
     EvolutionItemMineConfig,
     FossilMineConfig,
     GemPlateMineConfig,
-    MegaStoneMineConfig,
+    SpecialMineConfig,
     MineConfig,
     MineType,
     ShardMineConfig,
@@ -26,7 +26,7 @@ import {
     GLOBAL_COOLDOWN_BASE,
     GLOBAL_COOLDOWN_MINIMUM,
     GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL,
-    MEGA_STONE_MINE_CHANCE,
+    SPECIAL_MINE_CHANCE,
 } from './UndergroundConfig';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
@@ -68,8 +68,8 @@ export class UndergroundController {
     }
 
     public static getMineConfig(mineType: MineType = undefined): MineConfig {
-        if (Rand.chance(MEGA_STONE_MINE_CHANCE) && MegaStoneMineConfig.getAvailableItems().length > 0) {
-            return MegaStoneMineConfig;
+        if (Rand.chance(SPECIAL_MINE_CHANCE) && SpecialMineConfig.getAvailableItems().length > 0) {
+            return SpecialMineConfig;
         }
 
         const otherMines: MineConfig[] = [
