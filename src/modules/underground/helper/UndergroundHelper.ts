@@ -302,7 +302,7 @@ export class UndergroundHelpers {
 }
 
 UndergroundHelpers.add(new UndergroundHelper('diamond', 'Steve and Alex', MineType.Diamond, null));
-UndergroundHelpers.add(new UndergroundHelper('gemplates', 'Helper (Plates)', MineType.GemPlate, null));
+UndergroundHelpers.add(new UndergroundHelper('gemplates', 'Gemma', MineType.GemPlate, null));
 UndergroundHelpers.add(new UndergroundHelper('shards', 'Sharlene', MineType.Shard, null));
-UndergroundHelpers.add(new UndergroundHelper('fossils', 'Helper (Fossils)', MineType.Fossil, null));
+UndergroundHelpers.add(new UndergroundHelper('fossils', 'Jones', MineType.Fossil, null));
 UndergroundHelpers.add(new UndergroundHelper('evolutionitems', 'Darwin', MineType.EvolutionItem, null));
