@@ -11,7 +11,7 @@ GymList['Pewter City'] = new Gym(
     ],
     BadgeEnums.Boulder,
     250,
-    'I took you for granted, and so I lost. As proof of your victory, I confer on you this... the official Pokémon League BoulderBadge.',
+    'I took you for granted, and so I lost. As proof of your victory, I confer on you this... the official Pokémon League Boulder Badge.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 2)]
 );
 GymList['Cerulean City'] = new Gym(
@@ -23,7 +23,7 @@ GymList['Cerulean City'] = new Gym(
     ],
     BadgeEnums.Cascade,
     500,
-    'Wow! You\'re too much, all right! You can have the CascadeBadge to show that you beat me.',
+    'Wow! You\'re too much, alright! You can have the Cascade Badge to show that you beat me.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
     () => {
         App.game.quests.getQuestLine('Team Rocket').beginQuest(0, undefined, true);
@@ -39,7 +39,7 @@ GymList['Vermilion City'] = new Gym(
     ],
     BadgeEnums.Thunder,
     1000,
-    'Now that\'s a shocker! You\'re the real deal, kid! Fine, then, take the ThunderBadge!',
+    'Now that\'s a shocker! You\'re the real deal, kid! Fine, then, take the Thunder Badge!',
     [
         new TemporaryBattleRequirement('Blue 3'),
         new GymBadgeRequirement(BadgeEnums.Cascade),
@@ -55,7 +55,7 @@ GymList['Celadon City'] = new Gym(
     ],
     BadgeEnums.Rainbow,
     1500,
-    'Oh! I concede defeat. You are remarkably strong. I must confer on you the RainbowBadge.',
+    'Oh! I concede defeat. You are remarkably strong. I must confer on you the Rainbow Badge.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)]
 );
 GymList['Saffron City'] = new Gym(
@@ -69,7 +69,7 @@ GymList['Saffron City'] = new Gym(
     ],
     BadgeEnums.Marsh,
     2500,
-    'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the MarshBadge.',
+    'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the Marsh Badge.',
     [new QuestLineStepCompletedRequirement('Team Rocket', 3)]
 );
 GymList['Fuchsia City'] = new Gym(
@@ -106,7 +106,7 @@ GymList['Cinnabar Island'] = new Gym(
     ],
     BadgeEnums.Volcano,
     5000,
-    'I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge.',
+    'I have burned down to nothing! Not even ashes remain! You have earned the Volcano Badge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))],
     () => {
         App.game.quests.getQuestLine('Bill\'s Errand').beginQuest(0, undefined, true);
@@ -458,7 +458,7 @@ GymList['Dewford Town'] = new Gym(
     ],
     BadgeEnums.Knuckle,
     2000,
-    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
+    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Knuckle Badge!',
     [new TemporaryBattleRequirement('May 2')]
 );
 GymList['Mauville City'] = new Gym(
@@ -521,7 +521,7 @@ GymList['Fortree City'] = new Gym(
     ],
     BadgeEnums.Feather,
     6000,
-    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.',
+    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Feather Badge.',
     [new TemporaryBattleRequirement('Kecleon 1')]
 );
 GymList['Mossdeep City'] = new Gym(
@@ -535,7 +535,7 @@ GymList['Mossdeep City'] = new Gym(
     ],
     BadgeEnums.Mind,
     8000,
-    'What? Our combination... was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.',
+    'What? Our combination... was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Mind Badge.',
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)]
 );
 GymList['Sootopolis City'] = new Gym(
@@ -678,7 +678,7 @@ GymList['Trovita Island'] = new Gym(
     ],
     BadgeEnums.Spike_Shell,
     740,
-    'Nice job, guys. Here are your Spike Shell badges, guys.',
+    'Nice job. Here are your Spike Shell badges, guys.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 41)]
 );
 GymList['Kumquat Island'] = new Gym(
@@ -907,7 +907,7 @@ GymList['Hearthome City'] = new Gym(
     ],
     BadgeEnums.Relic,
     740,
-    'I am dumbfounded! So very, very strong! You, your Pokémon, so strong! Your power is admirable! I shall honor it with this Gym Badge!"',
+    'I am dumbfounded! So very, very strong! You, your Pokémon, so strong! Your power is admirable! I shall honor it with this Relic Badge!"',
     [new GymBadgeRequirement(BadgeEnums.Forest)]
 );
 GymList['Veilstone City'] = new Gym(
@@ -920,7 +920,7 @@ GymList['Veilstone City'] = new Gym(
     ],
     BadgeEnums.Cobble,
     1200,
-    '...OK. You win. That was a tough loss. I learned a lot from it. Please, accept this Gym Badge.',
+    '...OK. You win. That was a tough loss. I learned a lot from it. Please, accept this Cobble Badge.',
     [new GymBadgeRequirement(BadgeEnums.Relic)]
 );
 GymList['Pastoria City'] = new Gym(
