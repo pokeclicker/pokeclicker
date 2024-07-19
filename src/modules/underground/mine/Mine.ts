@@ -159,7 +159,9 @@ export class Mine {
     }
 
     public tick(deltaTime: number) {
-        this._timeUntilDiscovery(this.timeUntilDiscovery - deltaTime);
+        if (!this.completed) {
+            this._timeUntilDiscovery(this.timeUntilDiscovery - deltaTime);
+        }
     }
 
     public generate() {

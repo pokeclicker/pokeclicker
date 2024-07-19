@@ -107,28 +107,85 @@
                         <!-- /ko -->
                     </div>
 
-                    <div>
-                        <div>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(10)'>+10 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(100)'>+100 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(1000)'>+1,000 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(10000)'>+10,000 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10)'>-10 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(-100)'>-100 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(-1000)'>-1,000 XP</button>
-                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10000)'>-10,000 XP</button>
+                    <div class="container">
+                        <h4>Search new mine</h4>
+                        <div class="search-mine-display">
+                            <div class="mx-1 mb-1">
+                                <div class="card clickable" data-bind="click: () => App.game.underground.generateMine();">
+                                    <div class="card-body bg-secondary rounded text-center p1">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <div style="width: 32px; height: 32px;">?</div>
+                                            <div data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout())"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mx-1 mb-1">
+                                <div class="card clickable" data-bind="click: () => App.game.underground.generateMine(MineType.Diamond);">
+                                    <div class="card-body bg-secondary rounded text-center p1">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img style="width: 32px; height: 32px;" src="../assets/images/items/underground/Heart%20Scale.png" alt="">
+                                            <div data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout(MineType.Diamond))"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mx-1 mb-1">
+                                <div class="card clickable" data-bind="click: () => App.game.underground.generateMine(MineType.GemPlate);">
+                                    <div class="card-body bg-secondary rounded text-center p1">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img style="width: 32px; height: 32px;" src="../assets/images/items/underground/Blank%20Plate.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mx-1 mb-1">
+                                <div class="card clickable" data-bind="click: () => App.game.underground.generateMine(MineType.Shard);">
+                                    <div class="card-body bg-secondary rounded text-center p1">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img style="width: 32px; height: 32px;" src="../assets/images/items/underground/White%20Shard.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mx-1 mb-1">
+                                <div class="card clickable" data-bind="click: () => App.game.underground.generateMine(MineType.Fossil);">
+                                    <div class="card-body bg-secondary rounded text-center p1">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img style="width: 32px; height: 32px;" src="../assets/images/breeding/Helix%20Fossil.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mx-1 mb-1">
+                                <div class="card clickable" data-bind="click: () => App.game.underground.generateMine(MineType.EvolutionItem);">
+                                    <div class="card-body bg-secondary rounded text-center p1">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img style="width: 32px; height: 32px;" src="../assets/images/items/evolution/Fire_stone.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-
-                    <div data-bind="">
-                        <button onclick="App.game.underground.generateMine();">Search for mine</button>
-                        <button onclick="App.game.underground.generateMine(MineType.Diamond)">Search for Diamonds</button>
-                        <button onclick="App.game.underground.generateMine(MineType.GemPlate)">Search for Gems</button>
-                        <button onclick="App.game.underground.generateMine(MineType.Shard)">Search for Shards</button>
-                        <button onclick="App.game.underground.generateMine(MineType.Fossil)">Search for Fossils</button>
-                        <button onclick="App.game.underground.generateMine(MineType.EvolutionItem)">Search for Evolution Items</button>
-                    </div>
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <button onclick='UndergroundController.addPlayerUndergroundExp(10)'>+10 XP</button>-->
+<!--                            <button onclick='UndergroundController.addPlayerUndergroundExp(100)'>+100 XP</button>-->
+<!--                            <button onclick='UndergroundController.addPlayerUndergroundExp(1000)'>+1,000 XP</button>-->
+<!--                            <button onclick='UndergroundController.addPlayerUndergroundExp(10000)'>+10,000 XP</button>-->
+<!--                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10)'>-10 XP</button>-->
+<!--                            <button onclick='UndergroundController.addPlayerUndergroundExp(-100)'>-100 XP</button>-->
+<!--                            <button onclick='UndergroundController.addPlayerUndergroundExp(-1000)'>-1,000 XP</button>-->
+<!--                            <button onclick='UndergroundController.addPlayerUndergroundExp(-10000)'>-10,000 XP</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
                 <div id="treasures" class="tab-pane fade">
                 </div>
