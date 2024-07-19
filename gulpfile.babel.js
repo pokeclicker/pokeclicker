@@ -178,11 +178,11 @@ gulp.task('scripts', () => {
         // Remove default exports
         .pipe(replace(/(^|\n)export default \w+;/g, ''))
         // Replace imports with references
-        .pipe(replace(/(^|\n)import (.* from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>'))
+        .pipe(replace(/(^|\n)import ([\w {},*]*? from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>'))
         // Convert exports to declarations so that ./src/scripts can use them
-        .pipe(replace(/(^|\n)export (?!declare)(?!.*from)(default )?/, '$1declare '))
+        .pipe(replace(/(^|\n)export (?!declare|type|[\w {},*]*? from)(default )?/g, '$1declare '))
         // Remove any remaining 'export'
-        .pipe(replace(/(^|\n)export(?!.*from)( default)?/g, '\n'))
+        .pipe(replace(/(^|\n)export (?![\w {},*]*? from)(default )?/g, '$1'))
         // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
         // Wrap globally-exported module declarations in namespaces for scripts compatibility
@@ -193,8 +193,7 @@ gulp.task('scripts', () => {
             const filename = this.file.basename.replace(/\..*$/, '');
             return `declare namespace ${filename} {\n`;
         }))
-        // Close namespace declarations
-        .pipe(replace(/$(?![\r\n])/, '}\n'))
+        .pipe(replace(/$(?![\r\n])/, '}\n')) // close namespace declarations
         .pipe(globalModulesFilter.restore)
         // Output
         .pipe(gulp.dest(dests.declarations));
