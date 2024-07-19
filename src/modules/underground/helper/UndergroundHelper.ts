@@ -1,17 +1,17 @@
-import { Observable, PureComputed } from 'knockout';
-import { MineType } from '../mine/MineConfig';
+import {Observable, PureComputed} from 'knockout';
+import {MineType} from '../mine/MineConfig';
 import Requirement from '../../requirements/Requirement';
 import MultiRequirement from '../../requirements/MultiRequirement';
 import OneFromManyRequirement from '../../requirements/OneFromManyRequirement';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
-import { EnergyRestoreSize, SECOND } from '../../GameConstants';
+import {EnergyRestoreSize, SECOND} from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from '../tools/UndergroundToolType';
-import { Coordinate } from '../mine/Mine';
+import {Coordinate} from '../mine/Mine';
 import UndergroundItem from '../UndergroundItem';
 import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
-import { UndergroundController } from '../UndergroundController';
+import {UndergroundController} from '../UndergroundController';
 import Rand from '../../utilities/Rand';
 import {
     AUTO_SELL_BASE,
@@ -19,12 +19,16 @@ import {
     AUTO_SELL_MAXIMUM,
     FAVORITE_MINE_CHANCE_BASE,
     FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL,
-    FAVORITE_MINE_CHANCE_MAXIMUM, MAX_HIRES,
+    FAVORITE_MINE_CHANCE_MAXIMUM,
+    MAX_HIRES,
     SMART_TOOL_CHANCE_BASE,
     SMART_TOOL_CHANCE_INCREASE_PER_LEVEL,
-    SMART_TOOL_CHANCE_MAXIMUM, UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
+    SMART_TOOL_CHANCE_MAXIMUM,
+    UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
+    UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
     WORKCYCLE_TIMEOUT_BASE,
-    WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL, WORKCYCLE_TIMEOUT_MINIMUM,
+    WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL,
+    WORKCYCLE_TIMEOUT_MINIMUM,
 } from '../UndergroundConfig';
 
 export class UndergroundHelper {
@@ -77,22 +81,23 @@ export class UndergroundHelper {
 
     private _workAction() {
         // TODO : Implement logic to use tools and do work
-        let coordinatesMined: Array<Coordinate> = [];
+        let tool;
+        const { x, y } = this.getSmartCoordinate();
 
-        if (App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried) {
-            // Use the Bomb action, can use this one anywhere we want
-            const tool = App.game.undergroundTools.getTool(UndergroundToolType.Bomb);
-            coordinatesMined = tool.action(0, 0);
-            UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
-            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
+
+        if (Rand.chance(this.smartToolUsageChance)) {
+            if (App.game.underground.mine.itemsPartiallyFound < App.game.underground.mine.itemsBuried) {
+                tool = App.game.undergroundTools.getTool(UndergroundToolType.Bomb);
+            } else {
+                tool = App.game.undergroundTools.getTool(UndergroundToolType.Chisel);
+            }
         } else {
-            // Use the chisel action
-            const tool = App.game.undergroundTools.getTool(UndergroundToolType.Chisel);
-            const { x, y } = this.getSmartCoordinate();
-            coordinatesMined = tool.action(x, y);
-            UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
-            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
+            tool = App.game.undergroundTools.getRandomTool();
         }
+
+        const coordinatesMined: Array<Coordinate> = tool.action(x, y);
+        UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
+        UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
 
         const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
 

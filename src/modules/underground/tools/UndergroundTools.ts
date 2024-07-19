@@ -5,6 +5,7 @@ import { Observable } from 'knockout';
 import { UndergroundController } from '../UndergroundController';
 import { Coordinate } from '../mine/Mine';
 import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../UndergroundConfig';
+import Rand from '../../utilities/Rand';
 
 export default class UndergroundTools implements Feature {
     name = 'Underground Tools';
@@ -63,6 +64,10 @@ export default class UndergroundTools implements Feature {
 
     public getTool(toolType: UndergroundToolType): UndergroundTool {
         return this.tools.find(tool => tool.id === toolType);
+    }
+
+    public getRandomTool(): UndergroundTool {
+        return Rand.fromArray(this.tools);
     }
 
     public useTool(toolType: UndergroundToolType, x: number, y: number): void {
