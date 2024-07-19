@@ -2767,6 +2767,27 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 52.04,
+        'name': 'Meowth (Phanpy)',
+        'catchRate': 255,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 58,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 40,
+            'attack': 45,
+            'specialAttack': 40,
+            'defense': 35,
+            'specialDefense': 40,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
+    },
+    {
         'id': 53,
         'name': 'Persian',
         'catchRate': 90,

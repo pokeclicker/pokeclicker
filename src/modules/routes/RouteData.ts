@@ -24,6 +24,9 @@ import SpecialEventRandomRequirement from '../requirements/SpecialEventRandomReq
 import SeededRand from '../utilities/SeededRand';
 import ItemRequirement from '../requirements/ItemRequirement';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
+import StatisticRequirement from '../requirements/StatisticRequirement';
+import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
+import { getPokemonByName } from '../pokemons/PokemonHelper';
 
 /*
 KANTO
@@ -647,6 +650,10 @@ Routes.add(new RegionRoute(
         land: ['Spearow', 'Zubat', 'Mankey', 'Mareep', 'Flaaffy'],
         water: ['Goldeen', 'Seaking', 'Magikarp'],
         headbutt: ['Aipom', 'Heracross'],
+        special: [new SpecialRoutePokemon(['Meowth (Phanpy)'], new MultiRequirement([
+            new StatisticRequirement(['pokemonEncountered', getPokemonByName('Phanpy').id], 1, 'Hatch Phanpy first.'),
+            new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
+        ]))],
     }),
     [
         new OneFromManyRequirement([
