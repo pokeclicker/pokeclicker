@@ -1,17 +1,17 @@
-import {Observable, PureComputed} from 'knockout';
-import {MineType} from '../mine/MineConfig';
+import { Observable, PureComputed } from 'knockout';
+import { MineType } from '../mine/MineConfig';
 import Requirement from '../../requirements/Requirement';
 import MultiRequirement from '../../requirements/MultiRequirement';
 import OneFromManyRequirement from '../../requirements/OneFromManyRequirement';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
-import {EnergyRestoreSize, SECOND} from '../../GameConstants';
+import { EnergyRestoreSize, SECOND } from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from '../tools/UndergroundToolType';
-import {Coordinate} from '../mine/Mine';
+import { Coordinate } from '../mine/Mine';
 import UndergroundItem from '../UndergroundItem';
 import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
-import {UndergroundController} from '../UndergroundController';
+import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
 import {
     AUTO_SELL_BASE,
