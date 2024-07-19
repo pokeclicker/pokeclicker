@@ -133,7 +133,7 @@ class BattleCafeController {
         }
         if (+$('#battleCafeDuration').val() > 20 && +$('#battleCafeDuration').val() != 3600) {
             Notifier.notify({
-                message: 'Can\'t spin for more than 20 seconds',
+                message: 'Can\'t spin for more than 20 seconds, unless...',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
