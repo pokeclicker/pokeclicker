@@ -38,7 +38,7 @@ class RouteInfo {
                 return a.id - b.id;
             });
         }
-        return {pokemons: pokemonArray, roamers: roamerArray};
+        return roamerArray.length != 0 ? {pokemons: pokemonArray, roamers: roamerArray} : {pokemons: pokemonArray};
     }
 
     public static hasInformation(pokemon) {
@@ -47,17 +47,17 @@ class RouteInfo {
 
     public static getInformations(pokemon) {
         if (pokemon.type == 'roamer') {
-            if (RouteInfo.isRequirement(pokemon.requirement, SpecialEventRequirement)) {
+            if (RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
                 return {tooltip: 'Event Roaming Pokémon', image: 'event_roaming.png'};
             } else {
                 return {tooltip: 'Roaming Pokémon', image: 'roaming.png'};
             }
         } else if (pokemon.type == 'special') {
-            if (RouteInfo.isRequirement(pokemon.requirement, SpecialEventRequirement)) {
+            if (RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
                 return {tooltip: 'Event Pokémon', image: 'event.png'};
-            } else if (RouteInfo.isRequirement(pokemon.requirement, WeatherRequirement)) {
+            } else if (RouteInfo.hasRequirement(pokemon.requirement, WeatherRequirement)) {
                 return {tooltip: 'Weather Pokémon', image: 'weather.png'};
-            } else if (RouteInfo.isRequirement(pokemon.requirement, DayOfWeekRequirement)) {
+            } else if (RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement)) {
                 return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
             } else {
                 return {tooltip: 'Special Pokémon', image: 'special.png'};
@@ -68,14 +68,14 @@ class RouteInfo {
         return {tooltip: '', image: ''};
     }
 
-    private static isRequirement(requirement, type) {
+    private static hasRequirement(requirement, type) {
         //I traverse all the Requirement tree recursively to check if one of the requirements is the one I want
         if (requirement instanceof type) {
             return true;
         }
         if (requirement?.requirements) {
             for (const req of requirement.requirements) {
-                if (RouteInfo.isRequirement(req, type)) {
+                if (RouteInfo.hasRequirement(req, type)) {
                     return true;
                 }
             }
