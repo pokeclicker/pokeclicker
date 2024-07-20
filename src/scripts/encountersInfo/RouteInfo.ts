@@ -41,34 +41,60 @@ class RouteInfo {
         return (pokemon.type == 'roamer')  || (pokemon.type == 'special') || (pokemon.type == 'water' && pokemon.super_rod);
     }
 
-    public static getInformation(pokemon) {
+    public static getInformations(pokemon) {
         if (pokemon.type == 'roamer') {
-            if (RouteInfo.isEvent(pokemon.requirement)) {
-                return "Event Roaming Pokémon";
+            if (RouteInfo.isSpecialEventRequirement(pokemon.requirement)) {
+                return {tooltip: "Event Roaming Pokémon", image: "event_roaming.png"};
             }
             else {
-                return "Roaming Pokémon";
+                return {tooltip: "Roaming Pokémon", image: "roaming.png"};
             }
         }
         else if (pokemon.type == 'special') {
-            if (RouteInfo.isEvent(pokemon.requirement)) {
-                return "Event Pokémon";
+            if (RouteInfo.isSpecialEventRequirement(pokemon.requirement)) {
+                return {tooltip: "Event Pokémon", image: "event.png"};
+            }
+            else if (RouteInfo.isWeatherRequirement(pokemon.requirement)) {
+                return {tooltip: "Weather Pokémon", image: "weather.png"};
+            }
+            else if (RouteInfo.isDayOfWeekRequirement(pokemon.requirement)) {
+                return {tooltip: "Day of Week Pokémon", image: "day_of_week.png"};
             }
             else {
-                return "Special Pokémon";
+                return {tooltip: "Special Pokémon", image: "special.png"};
             }
         } 
         else if (pokemon.type == 'water' && pokemon.super_rod) {
-            return "Super Rod Pokémon";
+            return {tooltip: "Super Rod Pokémon", image: "super_rod.png"};
         }
-        return "";
+        return {tooltip: "", image: ""};
     }
 
-    private static isEvent(requirement) {
+    private static isSpecialEventRequirement(requirement) {
         if (requirement instanceof SpecialEventRequirement) return true;
         if (requirement instanceof MultiRequirement) {
             for (let req of requirement.requirements) {
-                if (RouteInfo.isEvent(req)) return true;
+                if (RouteInfo.isSpecialEventRequirement(req)) return true;
+            }
+        }
+        return false;
+    }
+
+    private static isWeatherRequirement(requirement) {
+        if (requirement instanceof WeatherRequirement) return true;
+        if (requirement instanceof MultiRequirement) {
+            for (let req of requirement.requirements) {
+                if (RouteInfo.isWeatherRequirement(req)) return true;
+            }
+        }
+        return false;
+    }
+
+    private static isDayOfWeekRequirement(requirement) {
+        if (requirement instanceof DayOfWeekRequirement) return true;
+        if (requirement instanceof MultiRequirement) {
+            for (let req of requirement.requirements) {
+                if (RouteInfo.isDayOfWeekRequirement(req)) return true;
             }
         }
         return false;
