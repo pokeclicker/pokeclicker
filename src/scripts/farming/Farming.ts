@@ -1858,7 +1858,7 @@ class Farming implements Feature {
                 // Only notify for one wanderer, randomly picked, shiny priorized; there will rarely be more than one
                 const shinyList = wanderList.filter(w => w.shiny);
                 const displayWanderer = shinyList.length ? Rand.fromArray(shinyList) : Rand.fromArray(wanderList);
-                message = `A wild ${displayWanderer.name} has wandered onto the farm!`;
+                message = `A wild ${PokemonHelper.displayName(displayWanderer.name)()} has wandered onto the farm!`;
                 image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny);
                 type = displayWanderer.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
