@@ -1,5 +1,5 @@
 <div class="modal fade noselect" id="dungeonInfoModal" tabindex="-1" role="dialog" aria-labelledby="dungeonInfoLabel">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h4 class="modal-title" data-bind="text: DungeonInfo.getFullName()">name</h4>
@@ -19,7 +19,7 @@
                                 <!-- ko using: PokemonHelper.getPokemonByName(item.loot).name != 'MissingNo.' && !App.game.party.getPokemonByName(item.loot), as: 'isPokemonAndNotCaught' -->
                                     <!-- ko using: isPokemonAndNotCaught ? '???' : DungeonInfo.getLootName(item.loot), as: 'lootName' -->
                                         <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
-                                            <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) }, 
+                                            <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) },
                                                 style: { 'filter': isPokemonAndNotCaught ? 'brightness(0)' : '' }">
                                             <div class="flex-grow-1 small ml-2" style="min-width: 0;">
                                                 <div class="text-truncate" data-bind="text: lootName"></div>
