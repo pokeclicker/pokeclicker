@@ -62,7 +62,7 @@ export default class PokemonItem extends CaughtIndicatingItem {
         if (shiny || !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
             const newCatch = !(shiny && App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true));
             Notifier.notify({
-                message: `${(shiny) ? `✨ You obtained a shiny ${pokemonName}! ✨` : `You obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`}`,
+                message: `${(shiny) ? `✨ You obtained a shiny ${PokemonHelper.displayName(pokemonName)()}! ✨` : `You obtained ${GameHelper.anOrA(PokemonHelper.displayName(pokemonName)())} ${PokemonHelper.displayName(pokemonName)()}!`}`,
                 pokemonImage: PokemonHelper.getImage(pokemonID, shiny),
                 type: (shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success),
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
