@@ -1814,7 +1814,7 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
 
 const MahoGanyOfficerJenny = new NPC('Officer Jenny', [
     'You made it to Mahogany without troubles? Did you see anything suspicious?',
-    'Some adventurers reported criminal activities on route 42. Team Rocket allegedly attempted to steal their newborn Phanpy...',
+    'Some adventurers reported criminal activities on route 42. Team Rocket are allegedly attempting to steal newborn Phanpy...',
 ], { image: 'assets/images/npcs/Officer Jenny.png' });
 
 const MahoganyEusine = new NPC('Eusine', [
