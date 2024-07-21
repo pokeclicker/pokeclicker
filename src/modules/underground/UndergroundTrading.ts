@@ -11,7 +11,7 @@ export class UndergroundTrading {
     private static  _tradeAmount: Observable<number> = ko.observable(0);
 
     private static  _computedAvailableItemsToTradeList: PureComputed<UndergroundItem[]> = ko.pureComputed<UndergroundItem[]>(() => {
-        return UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.MegaStone].includes(item.valueType));
+        return UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.Diamond, UndergroundItemValueType.MegaStone].includes(item.valueType));
     });
 
     private static  _computedTradeToItemList: PureComputed<UndergroundItem[]> = ko.pureComputed<UndergroundItem[]>(() => {
