@@ -6,6 +6,7 @@ import { UndergroundController } from '../UndergroundController';
 import { Coordinate } from '../mine/Mine';
 import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../UndergroundConfig';
 import Rand from '../../utilities/Rand';
+import OakItemType from '../../enums/OakItemType';
 
 export default class UndergroundTools implements Feature {
     name = 'Underground Tools';
@@ -30,20 +31,22 @@ export default class UndergroundTools implements Feature {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 if (App.game.underground.mine?.attemptBreakTile({ x, y }, 2)) {
                     coordinatesActuallyMined.push({ x, y });
+                    return coordinatesActuallyMined;
                 }
-
-                return coordinatesActuallyMined;
+                return null;
             }),
             new UndergroundTool(UndergroundToolType.Hammer, 60, 4, 15, 2, (x, y) => {
+                let hasMined = false;
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 for (let deltaX = -1; deltaX <= 1; deltaX++) {
                     for (let deltaY = -1; deltaY <= 1; deltaY++) {
                         if (App.game.underground.mine?.attemptBreakTile({ x: x + deltaX, y: y + deltaY }, 1)) {
                             coordinatesActuallyMined.push({ x: x + deltaX, y: y + deltaY });
+                            hasMined = true;
                         }
                     }
                 }
-                return coordinatesActuallyMined;
+                return hasMined ? coordinatesActuallyMined : null;
             }),
             new UndergroundTool(UndergroundToolType.Bomb, 180, 9, 5, 3, () => {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
@@ -81,7 +84,14 @@ export default class UndergroundTools implements Feature {
         }
 
         if (tool.canUseTool()) {
-            const coordinatesMined = tool.action(x, y);
+            const coordinatesMined: Array<Coordinate> | null = tool.action(x, y);
+
+            if (coordinatesMined === null) {
+                return;
+            }
+
+            App.game.oakItems.use(OakItemType.Cell_Battery);
+
             const itemsFound = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
             itemsFound.forEach(value => {
                 if (value) {

@@ -17,7 +17,7 @@ export default class UndergroundTool {
         public cooldownReductionPerLevel: number,
         public maximumStoredUsages: number,
         public experiencePerUse: number,
-        public action: (x: number, y: number) => Array<Coordinate>,
+        public action: (x: number, y: number) => Array<Coordinate> | null,
     ) {
     }
 

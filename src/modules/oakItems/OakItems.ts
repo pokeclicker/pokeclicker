@@ -47,7 +47,7 @@ export default class OakItems implements Feature {
                 true, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 70, 150),
             new OakItem(OakItemType.Magma_Stone, 'Magma Stone', 'Hatch eggs faster',
                 false, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 80, 10),
-            new OakItem(OakItemType.Cell_Battery, 'Cell Battery', 'More passive mining energy regen',
+            new OakItem(OakItemType.Cell_Battery, 'Cell Battery', 'Reduce global tool cooldown',
                 false, [1.5, 1.6, 1.7, 1.8, 1.9, 2], 1, 90, 20),
             new BoughtOakItem(OakItemType.Squirtbottle, 'Squirtbottle', 'Increases the chance of berry mutations', 'Johto Berry Master',
                 true, [1.25, 1.5, 1.75, 2, 2.25, 2.5], 1, 10, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),

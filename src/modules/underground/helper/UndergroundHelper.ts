@@ -95,7 +95,12 @@ export class UndergroundHelper {
             tool = App.game.undergroundTools.getRandomTool();
         }
 
-        const coordinatesMined: Array<Coordinate> = tool.action(x, y);
+        const coordinatesMined: Array<Coordinate> | null = tool.action(x, y);
+
+        if (coordinatesMined === null) {
+            return;
+        }
+
         UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
         UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
 
