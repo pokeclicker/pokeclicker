@@ -96,7 +96,8 @@ export default class UndergroundTools implements Feature {
     }
 
     public getRandomTool(): UndergroundTool {
-        return Rand.fromArray(this.tools);
+        // Don't include survey into the random tools
+        return Rand.fromArray(this.tools.filter(value => value.id !== UndergroundToolType.Survey));
     }
 
     public useTool(toolType: UndergroundToolType, x: number, y: number): void {
