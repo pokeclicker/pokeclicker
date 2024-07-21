@@ -1,4 +1,4 @@
-import {Observable, PureComputed} from 'knockout';
+import { Observable, PureComputed } from 'knockout';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';

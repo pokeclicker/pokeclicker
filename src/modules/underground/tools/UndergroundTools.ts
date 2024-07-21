@@ -1,10 +1,10 @@
 import UndergroundTool from './UndergroundTool';
 import UndergroundToolType from './UndergroundToolType';
-import {Feature} from '../../DataStore/common/Feature';
-import {Observable} from 'knockout';
-import {UndergroundController} from '../UndergroundController';
-import {Coordinate} from '../mine/Mine';
-import {UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM} from '../UndergroundConfig';
+import { Feature } from '../../DataStore/common/Feature';
+import { Observable } from 'knockout';
+import { UndergroundController } from '../UndergroundController';
+import { Coordinate } from '../mine/Mine';
+import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../UndergroundConfig';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
 
@@ -83,7 +83,7 @@ export default class UndergroundTools implements Feature {
 
                 App.game.underground.mine.survey({ x: xSurveyCoordinate, y: ySurveyCoordinate }, range);
                 return null;
-            })
+            }),
         ];
     }
 
