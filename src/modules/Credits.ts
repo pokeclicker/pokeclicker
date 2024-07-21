@@ -510,6 +510,7 @@ export const SpriteCredits: Credit[] = [
             'Tower of Darkness',
             'Tower of Waters',
             'Underground Bomb Icon',
+            'Underground Survey Icon',
             'Underground Aerodactylite',
             'Underground Mawilite',
             'Underground Sablenite',
