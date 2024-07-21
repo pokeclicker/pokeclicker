@@ -97,31 +97,29 @@ export class UndergroundHelper {
 
         const coordinatesMined: Array<Coordinate> | null = tool.action(x, y);
 
-        if (coordinatesMined === null) {
-            return;
-        }
+        if (coordinatesMined !== null) {
+            UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
+            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
 
-        UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
-        UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
+            const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
 
-        const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
+            itemsFound.forEach(value => {
+                if (value) {
+                    const { item, amount } = value;
 
-        itemsFound.forEach(value => {
-            if (value) {
-                const { item, amount } = value;
+                    if (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem) {
+                        UndergroundController.gainProfit(item, amount, this.autoSellValue);
+                    } else {
+                        UndergroundController.gainMineItem(item.id, amount);
+                    }
 
-                if (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem) {
-                    UndergroundController.gainProfit(item, amount, this.autoSellValue);
-                } else {
-                    UndergroundController.gainMineItem(item.id, amount);
+                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+
+                    UndergroundController.notifyItemFound(item, amount, this);
                 }
-
-                UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
-                UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
-
-                UndergroundController.notifyItemFound(item, amount, this);
-            }
-        });
+            });
+        }
 
         if (App.game.underground.mine.attemptCompleteLayer()) {
             UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
