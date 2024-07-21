@@ -100,9 +100,11 @@ class Reward {
 class Tile {
     private _layerDepth: Observable<number>;
     private _reward?: Reward;
+    private _survey: Observable<number>;
 
     constructor(layerDepth: number) {
         this._layerDepth = ko.observable<number>(layerDepth);
+        this._survey = ko.observable<number>(-1);
     }
 
     get layerDepth(): number {
@@ -121,13 +123,23 @@ class Tile {
         this._reward = value;
     }
 
+    get survey(): number | undefined {
+        return this._survey?.();
+    }
+
+    set survey(range: number) {
+        this._survey(range);
+    }
+
     public save = () => ({
         layerDepth: this._layerDepth(),
         reward: this._reward?.save(),
+        survey: this._survey(),
     });
 
     public static load = (json): Tile => {
         const tile = new Tile(json.layerDepth);
+        tile.survey = json.survey;
 
         if (json.reward) {
             tile.reward = Reward.load(json.reward);
@@ -307,6 +319,16 @@ export class Mine {
         return this._grid[index];
     }
 
+    public survey(coordinate: Coordinate, range: number) {
+        const tile = this.getTileForCoordinate(coordinate);
+
+        if (!tile) {
+            return;
+        }
+
+        tile.survey = range;
+    }
+
     public attemptBreakTile(coordinate: Coordinate, layers: number = 1): boolean {
         const tile = this.getTileForCoordinate(coordinate);
 
@@ -388,6 +410,14 @@ export class Mine {
 
     get completed(): boolean {
         return this._completed();
+    }
+
+    get width(): number {
+        return this._mineProperties.width;
+    }
+
+    get height(): number {
+        return this._mineProperties.height;
     }
 
     private _updateItemsBuriedObservable() {

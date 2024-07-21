@@ -44,6 +44,59 @@
     background-size: 100%;
 }
 
+.survey::after {
+    content: "";
+}
+
+.survey {
+    position: absolute;
+    z-index: 50;
+    pointer-events: none;
+    border: 1px solid white;
+    background: rgba(255, 255, 255, 10%);
+
+    &.survey-1 {
+        top: -0%;
+        left: -0%;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    &.survey-3 {
+        top: -100%;
+        left: -100%;
+
+        width: 300%;
+        height: 300%;
+    }
+
+    &.survey-5 {
+        top: -200%;
+        left: -200%;
+
+        width: 500%;
+        height: 500%;
+    }
+
+    &.survey-7 {
+        top: -300%;
+        left: -300%;
+
+        width: 700%;
+        height: 700%;
+    }
+
+    &.survey-9 {
+        top: -400%;
+        left: -400%;
+
+        width: 900%;
+        height: 900%;
+    }
+}
+
+
 .restore-item {
     width: 32px;
     margin: -5px;
@@ -53,7 +106,7 @@
     aspect-ratio: 1 / 1;
     position: relative;
 
-    div {
+    .rock {
         position: absolute;
         inset: 0;
     }

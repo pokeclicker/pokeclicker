@@ -19,6 +19,9 @@ export const SPECIAL_MINE_CHANCE = 1 / 25;
 export const UNDERGROUND_EXPERIENCE_DIG_UP_ITEM = 25;
 export const UNDERGROUND_EXPERIENCE_CLEAR_LAYER = 100;
 
+export const SURVEY_RANGE_BASE = 9;
+export const SURVEY_RANGE_REDUCTION_LEVELS = 15;
+
 // HELPERS
 export const MAX_HIRES = 1;
 

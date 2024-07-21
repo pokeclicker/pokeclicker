@@ -61,6 +61,29 @@ export default class UndergroundTools implements Feature {
                 }
                 return coordinatesActuallyMined;
             }),
+            new UndergroundTool(UndergroundToolType.Survey, 300, 0, 0, 0, () => {
+                // Get a list of unmined reward coordinates
+                const unminedRewardCoordinates = App.game.underground.mine.grid.reduce<number[]>((previousValue, currentValue, currentIndex) => {
+                    if (currentValue.reward && currentValue.layerDepth > 0)
+                        previousValue.push(currentIndex);
+                    return previousValue;
+                }, []);
+
+                // Determine the range of the survey box
+                const range = UndergroundController.calculateSurveyRange();
+                const halfShift = Math.floor(range / 2);
+
+                // Make a random shift
+                const xShift = Rand.intBetween(-halfShift, halfShift);
+                const yShift = Rand.intBetween(-halfShift, halfShift);
+
+                const { x, y } = App.game.underground.mine.getCoordinateForGridIndex(Rand.fromArray(unminedRewardCoordinates));
+                const xSurveyCoordinate = Math.max(Math.min(x + xShift, App.game.underground.mine.width - 1), 0);
+                const ySurveyCoordinate = Math.max(Math.min(y + yShift, App.game.underground.mine.height - 1), 0);
+
+                App.game.underground.mine.survey({ x: xSurveyCoordinate, y: ySurveyCoordinate }, range);
+                return null;
+            })
         ];
     }
 
@@ -89,24 +112,34 @@ export default class UndergroundTools implements Feature {
         if (tool.canUseTool()) {
             const coordinatesMined: Array<Coordinate> | null = tool.action(x, y);
 
-            if (coordinatesMined === null) {
-                return;
-            }
+            if (coordinatesMined?.length > 0) {
+                App.game.oakItems.use(OakItemType.Cell_Battery);
 
-            App.game.oakItems.use(OakItemType.Cell_Battery);
+                const itemsFound = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
+                itemsFound.forEach(value => {
+                    if (value) {
+                        const { item, amount } = value;
 
-            const itemsFound = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
-            itemsFound.forEach(value => {
-                if (value) {
-                    const { item, amount } = value;
+                        UndergroundController.gainMineItem(item.id, amount);
+                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+                        UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
 
-                    UndergroundController.gainMineItem(item.id, amount);
-                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
-                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+                        UndergroundController.notifyItemFound(item, amount);
+                    }
+                });
 
-                    UndergroundController.notifyItemFound(item, amount);
+                UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
+                UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
+
+                if (itemsFound.length > 0) {
+                    if (App.game.underground.mine.attemptCompleteLayer()) {
+                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
+                        UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
+
+                        UndergroundController.notifyMineCompleted();
+                    }
                 }
-            });
+            }
 
             // Use a stored use, or trigger the cooldown
             if (tool.storedUses > 0) tool.useStoredUse();
@@ -118,18 +151,6 @@ export default class UndergroundTools implements Feature {
                     t.cooldown = UndergroundController.calculateGlobalCooldown();
                 }
             });
-
-            UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
-            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
-
-            if (itemsFound.length > 0) {
-                if (App.game.underground.mine.attemptCompleteLayer()) {
-                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
-                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
-
-                    UndergroundController.notifyMineCompleted();
-                }
-            }
         }
     }
 

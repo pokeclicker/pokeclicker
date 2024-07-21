@@ -53,7 +53,11 @@
                              },
                              foreach: App.game.underground.mine.grid">
                             <div class="mineSquare" data-bind="click: () => { UndergroundController.clickModalMineSquare($index()); }">
-                                <div class="" data-bind="class: `rock${$data.layerDepth}`, style: UndergroundController.calculateMineTileStyle($index())"></div>
+                                <div class="rock" data-bind="class: `rock${$data.layerDepth}`, style: UndergroundController.calculateMineTileStyle($index())"></div>
+
+                                <!-- ko if: $data.survey > 0 -->
+                                <div class="survey" data-bind="class: `survey-${$data.survey}`"></div>
+                                <!-- /ko -->
                             </div>
                         </div>
                         <div class='row no-gutters'>
@@ -93,6 +97,18 @@
                                             <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).storedUses"></knockout></div>
                                             <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                             <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).baseCooldown"></knockout></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col mx-1 card clickable" data-bind="click: () => App.game.undergroundTools.selectedToolType = UndergroundToolType.Survey">
+                                    <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': App.game.undergroundTools.selectedToolType === UndergroundToolType.Survey }">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="../assets/images/underground/Bomb.png" alt="">
+                                            <div>Survey</div>
+                                            <div>Free uses: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Survey).storedUses"></knockout></div>
+                                            <div>Cooldown: <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Survey).cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                            <div><knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Survey).counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Survey).baseCooldown"></knockout></div>
                                         </div>
                                     </div>
                                 </div>

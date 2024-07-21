@@ -26,7 +26,7 @@ import {
     GLOBAL_COOLDOWN_BASE,
     GLOBAL_COOLDOWN_MINIMUM,
     GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL,
-    SPECIAL_MINE_CHANCE,
+    SPECIAL_MINE_CHANCE, SURVEY_RANGE_BASE, SURVEY_RANGE_REDUCTION_LEVELS,
 } from './UndergroundConfig';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
@@ -98,6 +98,10 @@ export class UndergroundController {
         }
 
         return 0;
+    }
+
+    public static calculateSurveyRange(): number {
+        return Math.max(SURVEY_RANGE_BASE - 2 * Math.floor(App.game.underground.undergroundLevel / SURVEY_RANGE_REDUCTION_LEVELS), 1);
     }
 
     public static gainMineItem(id: number, amount: number = 1) {
