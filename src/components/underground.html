@@ -5,12 +5,9 @@
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
-                    <li class='nav-item'>
-                        <a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a>
-                    </li>
-                    <li class="nav-item">
-                        <a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a>
-                    </li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
+                    <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#trading">Trading</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
                     <li class="d-lg-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
                 </ul>
@@ -186,6 +183,27 @@
                 </div>
 
                 <div id="treasures" class="tab-pane fade">
+                </div>
+
+                <div id="trading" class="tab-pane fade">
+<!--                    <div data-bind="foreach: UndergroundTrading.availableItemsToTrade">-->
+<!--                        <div data-bind="text: $data.itemName"></div>-->
+<!--                    </div>-->
+
+                    <div class="input-group input-group-sm">
+                        <select autocomplete="off" class="custom-select" data-bind="options: [
+                            { name: 'None', value: null },
+                            ...UndergroundTrading.availableItemsToTrade.map(i => ({ name: i.name, value: i })),
+                        ], optionsValue: 'value', optionsText: 'name', value: UndergroundTrading.selectedTradeFromItem"></select>
+                    </div>
+
+
+                    <div class="input-group input-group-sm">
+                        <select autocomplete="off" class="custom-select" data-bind="options: [
+                            { name: 'None', value: null },
+                            ...UndergroundTrading.tradeToItemList.map(i => ({ name: i.name, value: i })),
+                        ], optionsValue: 'value', optionsText: 'name', value: UndergroundTrading.selectedTradeToItem"></select>
+                    </div>
                 </div>
 
                 <div id="undergroundHelpers" class="tab-pane fade">

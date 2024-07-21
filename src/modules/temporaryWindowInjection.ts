@@ -192,6 +192,7 @@ import { MineType } from './underground/mine/MineConfig';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import { UndergroundController } from './underground/UndergroundController';
+import { UndergroundTrading } from './underground/UndergroundTrading';
 import UndergroundTools from './underground/tools/UndergroundTools';
 import UndergroundToolType from './underground/tools/UndergroundToolType';
 import SpecialEventRandomRequirement from './requirements/SpecialEventRandomRequirement';
@@ -412,6 +413,7 @@ Object.assign(<any>window, {
     MineType,
     Underground,
     UndergroundController,
+    UndergroundTrading,
     UndergroundTools,
     UndergroundToolType,
     ShardDeal,
