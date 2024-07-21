@@ -17,14 +17,20 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-6">
-                                <!-- ko if: App.game.underground.mine.timeUntilDiscovery > 0 -->
-                                <div>Time until discovery</div>
-                                <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
+                                <!-- ko if: App.game.underground.mine -->
+                                    <!-- ko if: App.game.underground.mine.timeUntilDiscovery > 0 -->
+                                    <div>Time until discovery</div>
+                                    <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
+                                    <!-- /ko -->
+
+                                    <!-- ko ifnot: App.game.underground.mine.timeUntilDiscovery > 0 -->
+                                    <div>Time since discovery</div>
+                                    <div data-bind="text: GameConstants.formatTime(-1 * App.game.underground.mine.timeUntilDiscovery)"></div>
+                                    <!-- /ko -->
                                 <!-- /ko -->
 
-                                <!-- ko ifnot: App.game.underground.mine.timeUntilDiscovery > 0 -->
-                                <div>Time since discovery</div>
-                                <div data-bind="text: GameConstants.formatTime(-1 * App.game.underground.mine.timeUntilDiscovery)"></div>
+                                <!-- ko ifnot: App.game.underground.mine -->
+                                <div>No active mine</div>
                                 <!-- /ko -->
                             </div>
 
