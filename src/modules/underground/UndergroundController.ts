@@ -84,11 +84,7 @@ export class UndergroundController {
     }
 
     public static calculateGlobalCooldown(): number {
-        const cellBatteryBonus = App.game.oakItems.isActive(OakItemType.Cell_Battery) ?
-            App.game.oakItems.calculateBonus(OakItemType.Cell_Battery)
-            :
-            1;
-
+        const cellBatteryBonus = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
         return Math.max(GLOBAL_COOLDOWN_BASE - GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL * App.game.underground.undergroundLevel, GLOBAL_COOLDOWN_MINIMUM) / cellBatteryBonus;
     }
 
