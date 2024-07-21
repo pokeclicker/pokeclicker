@@ -1,10 +1,10 @@
 import UndergroundTool from './UndergroundTool';
 import UndergroundToolType from './UndergroundToolType';
-import { Feature } from '../../DataStore/common/Feature';
-import { Observable } from 'knockout';
-import { UndergroundController } from '../UndergroundController';
-import { Coordinate } from '../mine/Mine';
-import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../UndergroundConfig';
+import {Feature} from '../../DataStore/common/Feature';
+import {Observable} from 'knockout';
+import {UndergroundController} from '../UndergroundController';
+import {Coordinate} from '../mine/Mine';
+import {UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM} from '../UndergroundConfig';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
 
@@ -50,7 +50,10 @@ export default class UndergroundTools implements Feature {
             }),
             new UndergroundTool(UndergroundToolType.Bomb, 180, 9, 5, 3, () => {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
-                for (let i = 0; i < 20; i++) {
+                const baseBombTiles: number = 10;
+                const extraBombTiles: number = App.game.oakItems.isActive(OakItemType.Explosive_Charge) ? App.game.oakItems.calculateBonus(OakItemType.Explosive_Charge) : 0;
+
+                for (let i = 0; i < baseBombTiles + extraBombTiles; i++) {
                     const randomCoordinate = App.game.underground.mine.getRandomCoordinate();
                     if (App.game.underground.mine?.attemptBreakTile(randomCoordinate, 2)) {
                         coordinatesActuallyMined.push({ x: randomCoordinate.x, y: randomCoordinate.y });
