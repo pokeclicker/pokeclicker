@@ -129,7 +129,7 @@ export class UndergroundHelper {
         }
 
         if (App.game.underground.mine.completed) {
-            App.game.underground.generateMine(Rand.chance(this.favoriteMineChance) ? this._favoriteMine : undefined);
+            App.game.underground.generateMine(Rand.chance(this.favoriteMineChance) ? this._favoriteMine : MineType.Random, this);
         }
     }
 
@@ -228,6 +228,10 @@ export class UndergroundHelper {
 
     get favoriteMineChance(): number {
         return this._favoriteMineChance();
+    }
+
+    get canGenerateSpecial(): boolean {
+        return false;
     }
 
     get timeSinceWork(): number {

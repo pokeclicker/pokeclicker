@@ -15,9 +15,21 @@
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show" data-bind="">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-6">
+                        <div class="row p-2">
+                            <div class="col-6 d-flex">
                                 <button class="btn btn-info">Find new mine</button>
+                                <button class="btn btn-danger p-2" style="min-width: 36px;" data-bind="
+                                    text: `↻ ${App.game.underground.autoSearchMine ? 'On' : 'Off'}`,
+                                    css: {
+                                        'btn-danger': !App.game.underground.autoSearchMine,
+                                        'btn-success': App.game.underground.autoSearchMine
+                                    },
+                                    tooltip: {
+                                        title: `Auto search your last mine selection: ${App.game.underground.autoSearchMine ? 'On' : 'Off'}`,
+                                        trigger: 'hover',
+                                        placement:'right'
+                                    },
+                                    click: () => App.game.underground.toggleAutoSearchMine()"></button>
                             </div>
 
                             <div class="col-6" data-bind="tooltip: {
@@ -130,7 +142,7 @@
                         <h4>Search new mine</h4>
                         <div class="search-mine-display">
                             <div class="mx-1 mb-1">
-                                <div class="card clickable" data-bind="click: () => App.game.underground.generateMine();">
+                                <div class="card clickable" data-bind="click: () => App.game.underground.generateMine(MineType.Random);">
                                     <div class="card-body bg-secondary rounded text-center p1">
                                         <div class="d-flex flex-column align-items-center">
                                             <div style="width: 32px; height: 32px;">?</div>

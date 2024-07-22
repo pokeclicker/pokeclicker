@@ -8,7 +8,7 @@ import {
     SpecialMineConfig,
     MineConfig,
     MineType,
-    ShardMineConfig,
+    ShardMineConfig, RandomMineConfig,
 } from './mine/MineConfig';
 import UndergroundTool from './tools/UndergroundTool';
 import UndergroundItem from './UndergroundItem';
@@ -67,8 +67,8 @@ export class UndergroundController {
         return amount;
     }
 
-    public static getMineConfig(mineType: MineType = undefined): MineConfig {
-        if (Rand.chance(SPECIAL_MINE_CHANCE) && SpecialMineConfig.getAvailableItems().length > 0) {
+    public static getMineConfig(mineType: MineType, helper: UndergroundHelper = undefined): MineConfig {
+        if (Rand.chance(SPECIAL_MINE_CHANCE) && helper?.canGenerateSpecial && SpecialMineConfig.getAvailableItems().length > 0) {
             return SpecialMineConfig;
         }
 
@@ -80,7 +80,7 @@ export class UndergroundController {
             EvolutionItemMineConfig,
         ];
 
-        return otherMines.find(config => config.type === mineType) || Rand.fromArray(otherMines);
+        return otherMines.find(config => config.type === mineType) || RandomMineConfig;
     }
 
     public static calculateGlobalCooldown(): number {

@@ -7,7 +7,7 @@ import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import { Mine } from './mine/Mine';
 import { MineType } from './mine/MineConfig';
-import { UndergroundHelpers } from './helper/UndergroundHelper';
+import { UndergroundHelper, UndergroundHelpers } from './helper/UndergroundHelper';
 import {
     BASE_EXTRA_LAYER_DEPTH, BASE_MAXIMUM_ITEMS,
     BASE_MINE_HEIGHT,
@@ -31,6 +31,8 @@ export class Underground implements Feature {
         (this._undergroundExp() - Underground.convertLevelToExperience(this._undergroundLevel())) /
         (Underground.convertLevelToExperience(this._undergroundLevel() + 1) - Underground.convertLevelToExperience(this._undergroundLevel())));
 
+    private _autoSearchMine: Observable<boolean> = ko.observable(false);
+
     private _mine: Observable<Mine | null> = ko.observable(null);
     public helpers = new UndergroundHelpers();
 
@@ -46,7 +48,7 @@ export class Underground implements Feature {
         this.helpers?.hired().forEach(helper => helper.tick(delta));
     }
 
-    public generateMine(mineType?: MineType) {
+    public generateMine(mineType: MineType, helper: UndergroundHelper = undefined) {
         const minItemsToGenerate = Underground.calculateMinimumItemsToGenerate(this.undergroundLevel);
         const maxItemsToGenerate = Underground.calculateMaximumItemsToGenerate(this.undergroundLevel);
 
@@ -58,7 +60,7 @@ export class Underground implements Feature {
             minimumItemsToGenerate: minItemsToGenerate,
             extraItemsToGenerate: Math.max(maxItemsToGenerate - minItemsToGenerate, 0),
             timeToDiscover: UndergroundController.calculateDiscoverMineTimeout(mineType),
-            config: UndergroundController.getMineConfig(mineType),
+            config: UndergroundController.getMineConfig(mineType, helper),
         });
         mine.generate();
 
@@ -92,6 +94,14 @@ export class Underground implements Feature {
 
     get progressToNextLevel(): number {
         return this._progressToNextLevel();
+    }
+
+    public toggleAutoSearchMine() {
+        this._autoSearchMine(!this._autoSearchMine());
+    }
+
+    get autoSearchMine(): boolean {
+        return this._autoSearchMine();
     }
 
     toJSON(): Record<string, any> {

@@ -7,6 +7,7 @@ import { Coordinate } from '../mine/Mine';
 import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../UndergroundConfig';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
+import { MineType } from '../mine/MineConfig';
 
 export default class UndergroundTools implements Feature {
     name = 'Underground Tools';
@@ -138,6 +139,10 @@ export default class UndergroundTools implements Feature {
                         UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
 
                         UndergroundController.notifyMineCompleted();
+
+                        if (App.game.underground.autoSearchMine) {
+                            App.game.underground.generateMine(MineType.Random);
+                        }
                     }
                 }
             }

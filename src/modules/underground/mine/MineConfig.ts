@@ -3,6 +3,7 @@ import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
 import UndergroundItem from '../UndergroundItem';
 
 export enum MineType {
+    Random,
     Diamond,
     GemPlate,
     Shard,
@@ -16,6 +17,11 @@ export interface MineConfig {
     getAvailableItems: () => UndergroundItem[];
     fixedItemCount?: number;
 }
+
+export const RandomMineConfig: MineConfig = {
+    type: MineType.Random,
+    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.MegaStone].includes(item.valueType)),
+};
 
 export const DiamondMineConfig: MineConfig = {
     type: MineType.Diamond,
