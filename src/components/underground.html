@@ -17,21 +17,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-6">
-                                <!-- ko if: App.game.underground.mine -->
-                                    <!-- ko if: App.game.underground.mine.timeUntilDiscovery > 0 -->
-                                    <div>Time until discovery</div>
-                                    <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
-                                    <!-- /ko -->
-
-                                    <!-- ko ifnot: App.game.underground.mine.timeUntilDiscovery > 0 -->
-                                    <div>Time since discovery</div>
-                                    <div data-bind="text: GameConstants.formatTime(-1 * App.game.underground.mine.timeUntilDiscovery)"></div>
-                                    <!-- /ko -->
-                                <!-- /ko -->
-
-                                <!-- ko ifnot: App.game.underground.mine -->
-                                <div>No active mine</div>
-                                <!-- /ko -->
+                                <button class="btn btn-info">Find new mine</button>
                             </div>
 
                             <div class="col-6" data-bind="tooltip: {
@@ -51,21 +37,38 @@
 
                     <div>
                         <!-- ko if: App.game.underground.mine -->
-                        <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
-                             data-bind="css: { 'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed },
-                             class: `${UndergroundToolType[App.game.undergroundTools.selectedToolType]}Selected`,
-                             style: {
-                                backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
-                             },
-                             foreach: App.game.underground.mine.grid">
-                            <div class="mineSquare" data-bind="click: () => { UndergroundController.clickModalMineSquare($index()); }">
-                                <div class="rock" data-bind="class: `rock${$data.layerDepth}`, style: UndergroundController.calculateMineTileStyle($index())"></div>
+                        <div style="position: relative;">
+                            <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
+                                 data-bind="css: { 'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed },
+                                 class: `${UndergroundToolType[App.game.undergroundTools.selectedToolType]}Selected`,
+                                 style: {
+                                    backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
+                                 }">
+                                <!-- ko foreach: App.game.underground.mine.grid -->
+                                <div class="mineSquare" data-bind="click: () => { UndergroundController.clickModalMineSquare($index()); }">
+                                    <div class="rock" data-bind="class: `rock${$data.layerDepth}`, style: UndergroundController.calculateMineTileStyle($index())"></div>
 
-                                <!-- ko if: $data.survey > 0 -->
-                                <div class="survey" data-bind="class: `survey-${$data.survey}`"></div>
+                                    <!-- ko if: $data.survey > 0 -->
+                                    <div class="survey" data-bind="class: `survey-${$data.survey}`"></div>
+                                    <!-- /ko -->
+                                </div>
                                 <!-- /ko -->
                             </div>
+
+                            <!-- ko if: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
+                            <div style="position: absolute; inset: 20%; display: grid; align-content: center;">
+                                <div>Searching for mine</div>
+                                <div class="progress" style='height: 5px'>
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                         data-bind="attr:{ style: 'width:' + App.game.underground.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
+                                <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
+                            </div>
+                            <!-- /ko -->
                         </div>
+
                         <div class='row no-gutters'>
                             <div class="col-12" data-bind="text: 'Treasures found: ' + App.game.underground.mine?.itemsFound + ' / ' + App.game.underground.mine?.itemsBuried + ', Partially discovered: ' + App.game.underground.mine?.itemsPartiallyFound">
                             </div>
