@@ -141,7 +141,7 @@ export default class UndergroundTools implements Feature {
                         UndergroundController.notifyMineCompleted();
 
                         if (App.game.underground.autoSearchMine) {
-                            App.game.underground.generateMine(MineType.Random);
+                            App.game.underground.generateMine(App.game.underground.autoSearchMineType);
                         }
                     }
                 }

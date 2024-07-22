@@ -1,15 +1,16 @@
-import { Feature } from '../DataStore/common/Feature';
+import {Feature} from '../DataStore/common/Feature';
 import KeyItemType from '../enums/KeyItemType';
-import { Observable, PureComputed } from 'knockout';
-import { UndergroundController } from './UndergroundController';
+import {Observable, PureComputed} from 'knockout';
+import {UndergroundController} from './UndergroundController';
 import GameHelper from '../GameHelper';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
-import { Mine } from './mine/Mine';
-import { MineType } from './mine/MineConfig';
-import { UndergroundHelper, UndergroundHelpers } from './helper/UndergroundHelper';
+import {Mine} from './mine/Mine';
+import {MineType} from './mine/MineConfig';
+import {UndergroundHelper, UndergroundHelpers} from './helper/UndergroundHelper';
 import {
-    BASE_EXTRA_LAYER_DEPTH, BASE_MAXIMUM_ITEMS,
+    BASE_EXTRA_LAYER_DEPTH,
+    BASE_MAXIMUM_ITEMS,
     BASE_MINE_HEIGHT,
     BASE_MINE_WIDTH,
     BASE_MINIMUM_ITEMS,
@@ -31,6 +32,7 @@ export class Underground implements Feature {
         (this._undergroundExp() - Underground.convertLevelToExperience(this._undergroundLevel())) /
         (Underground.convertLevelToExperience(this._undergroundLevel() + 1) - Underground.convertLevelToExperience(this._undergroundLevel())));
 
+    private _autoSearchMineType: Observable<MineType> = ko.observable(MineType.Random);
     private _autoSearchMine: Observable<boolean> = ko.observable(false);
 
     private _mine: Observable<Mine | null> = ko.observable(null);
@@ -49,6 +51,10 @@ export class Underground implements Feature {
     }
 
     public generateMine(mineType: MineType, helper: UndergroundHelper = undefined) {
+        if (!helper) {
+            this._autoSearchMineType(mineType);
+        }
+
         const minItemsToGenerate = Underground.calculateMinimumItemsToGenerate(this.undergroundLevel);
         const maxItemsToGenerate = Underground.calculateMaximumItemsToGenerate(this.undergroundLevel);
 
@@ -96,6 +102,10 @@ export class Underground implements Feature {
         return this._progressToNextLevel();
     }
 
+    get autoSearchMineType(): MineType {
+        return this._autoSearchMineType();
+    }
+
     public toggleAutoSearchMine() {
         this._autoSearchMine(!this._autoSearchMine());
     }
@@ -109,6 +119,8 @@ export class Underground implements Feature {
             undergroundExp: this._undergroundExp(),
             mine: this._mine()?.save(),
             helpers: this.helpers.toJSON(),
+            autoSearchMineType: this._autoSearchMineType(),
+            autoSearchMine: this._autoSearchMine(),
         };
     }
 
@@ -116,6 +128,8 @@ export class Underground implements Feature {
         this._undergroundExp(json.undergroundExp || this.defaults.undergroundExp);
         this._mine(json.mine ? Mine.load(json.mine) : null);
         this.helpers.fromJSON(json.helpers);
+        this._autoSearchMineType(json.autoSearchMineType || MineType.Random);
+        this._autoSearchMine(json.autoSearchMine || false);
     }
 
     public static calculateMinimumItemsToGenerate(level: number = 0): number {
