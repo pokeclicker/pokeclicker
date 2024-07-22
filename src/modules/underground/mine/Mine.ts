@@ -420,6 +420,10 @@ export class Mine {
         return this._mineProperties.height;
     }
 
+    get initialTimeToDiscover(): number {
+        return this._mineProperties.timeToDiscover;
+    }
+
     private _updateItemsBuriedObservable() {
         this._itemsBuried(new Set(this._grid.filter(tile => tile.reward).map(tile => tile.reward.rewardID)).size);
     }
