@@ -362,6 +362,8 @@ export const SpriteCredits: Credit[] = [
             'Peonia',
             'Pikachu (Clone)',
             'Pikachu (Easter)',
+            'Pikachu (Paleontologist)',
+            'Pikachu (Paleontologist) (item and underground)',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
             'Pink Butterfree',
