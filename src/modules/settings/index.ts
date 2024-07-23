@@ -136,6 +136,7 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
 Settings.add(new BooleanSetting('showUndergroundModuleMineControls', 'Show Underground module mine controls', true));
 Settings.add(new BooleanSetting('showUndergroundModuleDailyTrades', 'Show Underground module daily trades', false));

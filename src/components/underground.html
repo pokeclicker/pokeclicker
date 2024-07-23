@@ -18,18 +18,21 @@
                         <div class="row p-2">
                             <div class="col-6 d-flex">
                                 <button class="btn btn-info" data-bind="click: () => $('#findNewMineModal').modal('show');">Find new mine</button>
+
+                                <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
                                 <button class="btn btn-danger p-2" style="min-width: 36px;" data-bind="
-                                    text: `↻ ${App.game.underground.autoSearchMine ? 'On' : 'Off'}`,
+                                    text: `↻ ${autoRestartUndergroundMine.observableValue() ? 'On' : 'Off'}`,
                                     css: {
-                                        'btn-danger': !App.game.underground.autoSearchMine,
-                                        'btn-success': App.game.underground.autoSearchMine
+                                        'btn-danger': !autoRestartUndergroundMine.observableValue(),
+                                        'btn-success': autoRestartUndergroundMine.observableValue()
                                     },
                                     tooltip: {
-                                        title: `Auto search your last mine selection: ${App.game.underground.autoSearchMine ? 'On' : 'Off'}`,
+                                        title: `${autoRestartUndergroundMine.displayName}: ${autoRestartUndergroundMine.observableValue() ? 'On' : 'Off'}`,
                                         trigger: 'hover',
                                         placement:'right'
                                     },
-                                    click: () => App.game.underground.toggleAutoSearchMine()"></button>
+                                    click: () => autoRestartUndergroundMine.observableValue(!autoRestartUndergroundMine.observableValue())"></button>
+                                <!-- /ko -->
                             </div>
 
                             <div class="col-6" data-bind="tooltip: {
@@ -303,7 +306,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <h4>Select a mine</h4>
-                <div class="search-mine-display my-3">
+                <div class="search-mine-display mb-2">
                     <!-- ko foreach: [MineType.Random, MineType.Diamond, MineType.GemPlate, MineType.Shard, MineType.Fossil, MineType.EvolutionItem] -->
                     <div class="mx-1 mb-1">
                         <div class="card clickable" data-bind="click: () => { App.game.underground.autoSearchMineType = $data; }">
@@ -317,7 +320,7 @@
                     <!-- /ko -->
                 </div>
 
-                <div class="card mb-3">
+                <div class="card mb-2">
                     <div class="card-header d-flex align-items-center p-0">
                         <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).displayName"></span>
                     </div>
@@ -336,15 +339,24 @@
                     </div>
 
                     <div class="card-footer">
-                        <div>
-                            <!-- TODO : Add auto restart setting here, coupled with the settings menu -->
-                            <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);" data-dismiss="modal">Search for mine</button>
-                        </div>
+                        <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);" data-dismiss="modal">Search for mine</button>
                     </div>
                 </div>
-
-
+                
+                <div>
+                    <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
+                    <label for="auto-restart-underground-mine" data-bind="text: autoRestartUndergroundMine.displayName"></label>
+                    <label class="form-check-label toggler-wrapper style-1 float-right">
+                        <input class="form-check-input" type="checkbox" id="auto-restart-underground-mine"
+                               data-bind="checked: autoRestartUndergroundMine.observableValue">
+                        <div class="toggler-slider">
+                            <div class="toggler-knob"></div>
+                        </div>
+                    </label>
+                    <!-- /ko -->
+                </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>

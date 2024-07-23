@@ -33,7 +33,6 @@ export class Underground implements Feature {
         (Underground.convertLevelToExperience(this._undergroundLevel() + 1) - Underground.convertLevelToExperience(this._undergroundLevel())));
 
     private _autoSearchMineType: Observable<MineType> = ko.observable(MineType.Random);
-    private _autoSearchMine: Observable<boolean> = ko.observable(false);
 
     private _mine: Observable<Mine | null> = ko.observable(null);
     public helpers = new UndergroundHelpers();
@@ -106,21 +105,12 @@ export class Underground implements Feature {
         this._autoSearchMineType(type);
     }
 
-    public toggleAutoSearchMine() {
-        this._autoSearchMine(!this._autoSearchMine());
-    }
-
-    get autoSearchMine(): boolean {
-        return this._autoSearchMine();
-    }
-
     toJSON(): Record<string, any> {
         return {
             undergroundExp: this._undergroundExp(),
             mine: this._mine()?.save(),
             helpers: this.helpers.toJSON(),
             autoSearchMineType: this._autoSearchMineType(),
-            autoSearchMine: this._autoSearchMine(),
         };
     }
 
@@ -129,7 +119,6 @@ export class Underground implements Feature {
         this._mine(json.mine ? Mine.load(json.mine) : null);
         this.helpers.fromJSON(json.helpers);
         this._autoSearchMineType(json.autoSearchMineType || MineType.Random);
-        this._autoSearchMine(json.autoSearchMine || false);
     }
 
     public static calculateMinimumItemsToGenerate(level: number = 0): number {
