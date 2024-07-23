@@ -203,8 +203,7 @@ export class Mine {
             let attemptCount = 0;
 
             while (!placementAttemptSucceeded && attemptCount < Mine.MAXIMUM_PLACEMENT_ATTEMPTS) {
-                // const rotations = Rand.floor(4);
-                const rotations = 2;
+                const rotations = Rand.floor(4);
                 const localSpace = UndergroundController.rotateMatrix90Clockwise(undergroundItem.space, rotations);
                 const randomCoordinate = this.getRandomCoordinate();
 
