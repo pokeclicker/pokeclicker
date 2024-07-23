@@ -1,20 +1,16 @@
 import OakItemType from '../enums/OakItemType';
 import Rand from '../utilities/Rand';
-import {
-    MineConfig,
-    MineConfigs,
-    MineType,
-} from './mine/MineConfig';
+import {MineConfig, MineConfigs, MineType,} from './mine/MineConfig';
 import UndergroundTool from './tools/UndergroundTool';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
-import { ItemList } from '../items/ItemList';
+import {ItemList} from '../items/ItemList';
 import Settings from '../settings';
-import { PureComputed } from 'knockout';
+import {PureComputed} from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import { humanifyString, PLATE_VALUE } from '../GameConstants';
+import {humanifyString, PLATE_VALUE} from '../GameConstants';
 import {
     DISCOVER_MINE_TIMEOUT_BASE,
     DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL,
@@ -25,7 +21,7 @@ import {
     SURVEY_RANGE_BASE,
     SURVEY_RANGE_REDUCTION_LEVELS,
 } from './UndergroundConfig';
-import { UndergroundHelper } from './helper/UndergroundHelper';
+import {UndergroundHelper} from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
 
@@ -85,8 +81,8 @@ export class UndergroundController {
         return tool.baseCooldown - tool.cooldownReductionPerLevel * App.game.underground.undergroundLevel;
     }
 
-    public static calculateDiscoverMineTimeout(mineType?: MineType): number {
-        if (mineType != null || (App.game.underground.mine && !App.game.underground.mine.completed)) {
+    public static calculateDiscoverMineTimeout(mineType: MineType): number {
+        if (mineType != MineType.Random || (App.game.underground.mine && !App.game.underground.mine.completed)) {
             return Math.max(DISCOVER_MINE_TIMEOUT_BASE - DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL * App.game.underground.undergroundLevel, 0);
         }
 
