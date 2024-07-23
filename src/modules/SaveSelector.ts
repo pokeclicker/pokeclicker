@@ -65,7 +65,7 @@ export default class SaveSelector {
 
         this.LoadSaveOnKeydown = this.LoadSaveOnKeydown.bind(this);
 
-        $(document).on('keydown', this.LoadSaveOnKeydown)
+        $(document).on('keydown', this.LoadSaveOnKeydown);
     }
 
     static LoadSaveOnKeydown(e) {
@@ -76,7 +76,7 @@ export default class SaveSelector {
         const key = e.key;
         if (!isNaN(parseInt(key))) {
             const chosenSave = parseInt(key) - 1;
-            const allSaves = $(".trainer-card");
+            const allSaves = $('.trainer-card');
             if (allSaves.length > chosenSave && chosenSave >= 0) {
                 $(document).off('keydown', this.LoadSaveOnKeydown);
                 allSaves[chosenSave].click();
