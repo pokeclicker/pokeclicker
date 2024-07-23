@@ -1,14 +1,9 @@
 import OakItemType from '../enums/OakItemType';
 import Rand from '../utilities/Rand';
 import {
-    DiamondMineConfig,
-    EvolutionItemMineConfig,
-    FossilMineConfig,
-    GemPlateMineConfig,
-    SpecialMineConfig,
     MineConfig,
+    MineConfigs,
     MineType,
-    ShardMineConfig, RandomMineConfig,
 } from './mine/MineConfig';
 import UndergroundTool from './tools/UndergroundTool';
 import UndergroundItem from './UndergroundItem';
@@ -26,7 +21,9 @@ import {
     GLOBAL_COOLDOWN_BASE,
     GLOBAL_COOLDOWN_MINIMUM,
     GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL,
-    SPECIAL_MINE_CHANCE, SURVEY_RANGE_BASE, SURVEY_RANGE_REDUCTION_LEVELS,
+    SPECIAL_MINE_CHANCE,
+    SURVEY_RANGE_BASE,
+    SURVEY_RANGE_REDUCTION_LEVELS,
 } from './UndergroundConfig';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
@@ -67,20 +64,16 @@ export class UndergroundController {
         return amount;
     }
 
-    public static getMineConfig(mineType: MineType, helper: UndergroundHelper = undefined): MineConfig {
-        if (Rand.chance(SPECIAL_MINE_CHANCE) && (!helper || helper.canGenerateSpecial) && SpecialMineConfig.getAvailableItems().length > 0) {
-            return SpecialMineConfig;
+    public static generateMineConfig(mineType: MineType, helper: UndergroundHelper = undefined): MineConfig {
+        if (Rand.chance(SPECIAL_MINE_CHANCE) && (!helper || helper.canGenerateSpecial) && MineConfigs.find(MineType.Special).getAvailableItems().length > 0) {
+            return MineConfigs.find(MineType.Special);
         }
 
-        const otherMines: MineConfig[] = [
-            DiamondMineConfig,
-            GemPlateMineConfig,
-            ShardMineConfig,
-            FossilMineConfig,
-            EvolutionItemMineConfig,
-        ];
+        return MineConfigs.find(mineType) || MineConfigs.find(MineType.Random);
+    }
 
-        return otherMines.find(config => config.type === mineType) || RandomMineConfig;
+    public static getMineConfig(mineType: MineType) {
+        return MineConfigs.find(mineType);
     }
 
     public static calculateGlobalCooldown(): number {

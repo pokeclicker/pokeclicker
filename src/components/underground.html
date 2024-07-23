@@ -17,7 +17,7 @@
                     <div class="container">
                         <div class="row p-2">
                             <div class="col-6 d-flex">
-                                <button class="btn btn-info">Find new mine</button>
+                                <button class="btn btn-info" data-bind="click: () => $('#findNewMineModal').modal('show');">Find new mine</button>
                                 <button class="btn btn-danger p-2" style="min-width: 36px;" data-bind="
                                     text: `↻ ${App.game.underground.autoSearchMine ? 'On' : 'Off'}`,
                                     css: {
@@ -376,4 +376,65 @@
     <script type="text/html" id="cumulativeValueListTemplate">
         <tr></tr>
     </script>
+</div>
+
+<div aria-labelledby="findNewMineModalLabel" class="modal fade no-select mt-5" id="findNewMineModal" role="dialog" style="cursor: default;" tabindex="-1">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Find a new mine</h3>
+            </div>
+            <div class="modal-body">
+<!--                <div class="mx-1 mb-1">-->
+<!--                    &lt;!&ndash; ko foreach: [MineType.Random, MineType.Diamond, MineType.GemPlate, MineType.Shard, MineType.Fossil, MineType.EvolutionItem] &ndash;&gt;-->
+<!--                    <div class="card clickable" data-bind="click: () => App.game.underground.generateMine($data);">-->
+<!--                        <div class="card-body bg-secondary rounded text-center p1">-->
+<!--                            <div class="d-flex flex-column align-items-center">-->
+<!--                                <div data-bind="text: UndergroundController.getMineConfig($data).displayName"></div>-->
+<!--                                <div data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout($data))"></div>-->
+<!--                                <div data-bind="foreach: UndergroundController.getMineConfig($data).getAvailableItems()">-->
+<!--                                    <img width="16px" height="16px" data-bind="attr: { src: $data.image }" />-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; /ko &ndash;&gt;-->
+<!--                </div>-->
+
+                <h4>Select a mine</h4>
+                <div>
+                    <!-- ko foreach: [MineType.Random, MineType.Diamond, MineType.GemPlate, MineType.Shard, MineType.Fossil, MineType.EvolutionItem] -->
+                    <div class="mx-1 mb-1">
+                        <div class="card clickable" data-bind="click: () => { App.game.underground.autoSearchMineType = $data; }">
+                            <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': App.game.underground.autoSearchMineType === $data }">
+                                <div class="d-flex flex-column-align-items-center">
+                                    <h6 data-bind="text: UndergroundController.getMineConfig($data).displayName"></h6>
+                                    <div data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout($data))"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+
+                <!-- ko if: App.game.underground.autoSearchMineType -->
+                <h4>Potential treasures</h4>
+                <div>
+                    <!-- ko foreach: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).getAvailableItems() -->
+                    <img width="16px" height="16px" data-bind="attr: { src: $data.image }" />
+                    <!-- /ko -->
+                </div>
+
+                <div>
+                    <!-- TODO : Add auto restart setting here, coupled with the settings menu -->
+                    <button class="btn btn-info" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);">Search</button>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
 </div>

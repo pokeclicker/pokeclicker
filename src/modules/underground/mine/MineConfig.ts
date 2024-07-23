@@ -14,42 +14,42 @@ export enum MineType {
 
 export interface MineConfig {
     type: MineType;
+    displayName: string;
     getAvailableItems: () => UndergroundItem[];
     fixedItemCount?: number;
 }
 
-export const RandomMineConfig: MineConfig = {
-    type: MineType.Random,
+export class MineConfigs {
+    private static _list: Array<MineConfig> = [];
+
+    public static add(config: MineConfig) {
+        this._list.push(config);
+    }
+
+    public static find(type: MineType): MineConfig {
+        return this._list.find(config => config.type === type) || this._list[0];
+    }
+}
+
+MineConfigs.add({ type: MineType.Random, displayName: 'Random',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.MegaStone, UndergroundItemValueType.Other].includes(item.valueType)),
-};
-
-export const DiamondMineConfig: MineConfig = {
-    type: MineType.Diamond,
+});
+MineConfigs.add({ type: MineType.Diamond, displayName: 'Diamond',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Diamond),
-};
-
-export const GemPlateMineConfig: MineConfig = {
-    type: MineType.GemPlate,
+});
+MineConfigs.add({ type: MineType.GemPlate, displayName: 'Gem plate',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Gem),
-};
-
-export const ShardMineConfig: MineConfig = {
-    type: MineType.Shard,
+});
+MineConfigs.add({ type: MineType.Shard, displayName: 'Shard',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Shard),
-};
-
-export const FossilMineConfig: MineConfig = {
-    type: MineType.Fossil,
+});
+MineConfigs.add({ type: MineType.Fossil, displayName: 'Fossil',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Fossil || item.valueType === UndergroundItemValueType.FossilPiece),
-};
-
-export const EvolutionItemMineConfig: MineConfig = {
-    type: MineType.EvolutionItem,
+});
+MineConfigs.add({ type: MineType.EvolutionItem, displayName: 'Evolution item',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.EvolutionItem),
-};
-
-export const SpecialMineConfig: MineConfig = {
-    type: MineType.Special,
+});
+MineConfigs.add({ type: MineType.Special, displayName: 'Special',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => [UndergroundItemValueType.MegaStone, UndergroundItemValueType.Other].includes(item.valueType)),
     fixedItemCount: 1,
-};
+});

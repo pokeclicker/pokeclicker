@@ -51,10 +51,6 @@ export class Underground implements Feature {
     }
 
     public generateMine(mineType: MineType, helper: UndergroundHelper = undefined) {
-        if (!helper) {
-            this._autoSearchMineType(mineType);
-        }
-
         const minItemsToGenerate = Underground.calculateMinimumItemsToGenerate(this.undergroundLevel);
         const maxItemsToGenerate = Underground.calculateMaximumItemsToGenerate(this.undergroundLevel);
 
@@ -66,7 +62,7 @@ export class Underground implements Feature {
             minimumItemsToGenerate: minItemsToGenerate,
             extraItemsToGenerate: Math.max(maxItemsToGenerate - minItemsToGenerate, 0),
             timeToDiscover: UndergroundController.calculateDiscoverMineTimeout(mineType),
-            config: UndergroundController.getMineConfig(mineType, helper),
+            config: UndergroundController.generateMineConfig(mineType, helper),
         });
         mine.generate();
 
@@ -104,6 +100,10 @@ export class Underground implements Feature {
 
     get autoSearchMineType(): MineType {
         return this._autoSearchMineType();
+    }
+
+    set autoSearchMineType(type: MineType) {
+        this._autoSearchMineType(type);
     }
 
     public toggleAutoSearchMine() {
