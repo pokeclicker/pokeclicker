@@ -17,7 +17,7 @@ import type MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
 import type { EvoData } from './evolutions/Base';
-import { getPack } from '../packs/PackHelper';
+import { getPack, isInPack } from '../packs/PackHelper';
 
 // TODO remove when PokemonLocations is ported to modules
 declare class PokemonLocations {
@@ -86,14 +86,14 @@ export function typeIdToString(id: number) {
 }
 
 export function getImage(pokemonId: number, shiny: boolean = undefined, gender: BattlePokemonGender = undefined, shadow: ShadowStatus = undefined): string {
-    let namePack = Settings.getSetting('pack').observableValue();;
+    let namePack = Settings.getSetting('pack').observableValue();
     let packsrc = 'packs/';
     let usePack = namePack != 'none';
     let pack = null;
     if (usePack) {
         pack = getPack(namePack);
         packsrc += pack.path + pack.name;
-        usePack = pack.pokemons.includes(pokemonId);
+        usePack = isInPack(pack, pokemonId);
     }
     let path = 'assets/images/';
     let showShiny = shiny;
@@ -133,8 +133,7 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
         }
     }
     let extension = 'png';
-    if (usePack)
-    {
+    if (usePack) {
         path += packsrc;
         if (pack.animated) {
             extension = 'gif';
