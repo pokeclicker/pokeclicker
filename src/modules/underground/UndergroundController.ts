@@ -1,16 +1,16 @@
 import OakItemType from '../enums/OakItemType';
 import Rand from '../utilities/Rand';
-import {MineConfig, MineConfigs, MineType,} from './mine/MineConfig';
+import { MineConfig, MineConfigs, MineType } from './mine/MineConfig';
 import UndergroundTool from './tools/UndergroundTool';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
-import {ItemList} from '../items/ItemList';
+import { ItemList } from '../items/ItemList';
 import Settings from '../settings';
-import {PureComputed} from 'knockout';
+import { PureComputed } from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import {humanifyString, PLATE_VALUE} from '../GameConstants';
+import { humanifyString, PLATE_VALUE } from '../GameConstants';
 import {
     DISCOVER_MINE_TIMEOUT_BASE,
     DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL,
@@ -19,9 +19,9 @@ import {
     GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL,
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
-    SURVEY_RANGE_REDUCTION_LEVELS,
+    SURVEY_RANGE_REDUCTION_LEVELS, TOOL_COOLDOWN_MINIMUM,
 } from './UndergroundConfig';
-import {UndergroundHelper} from './helper/UndergroundHelper';
+import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
 
@@ -78,7 +78,8 @@ export class UndergroundController {
     }
 
     public static calculateToolCooldown(tool: UndergroundTool): number {
-        return tool.baseCooldown - tool.cooldownReductionPerLevel * App.game.underground.undergroundLevel;
+        const cellBatteryBonus = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
+        return Math.max(tool.baseCooldown - tool.cooldownReductionPerLevel * App.game.underground.undergroundLevel, TOOL_COOLDOWN_MINIMUM) / cellBatteryBonus;
     }
 
     public static calculateDiscoverMineTimeout(mineType: MineType): number {
