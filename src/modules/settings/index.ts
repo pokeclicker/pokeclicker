@@ -154,6 +154,38 @@ Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
     ],
     'standard3'));
 Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
+Settings.add(
+    new Setting<string>('pack', 'Pack',
+        [
+            new SettingOption('None', 'none'),
+            //1g
+            new SettingOption('Green (Game Boy)', 'green-gb'),
+            new SettingOption('Green (Super Game Boy)', 'green-sgb'),
+            new SettingOption('Red/Blue (Game Boy)', 'red-blue-gb'),
+            new SettingOption('Red/Blue (Super Game Boy)', 'red-blue-sgb'),
+            new SettingOption('Yellow (Game Boy)', 'yellow-gb'),
+            new SettingOption('Yellow (Super Game Boy)', 'yellow-sgb'),
+            new SettingOption('Yellow (Game Boy Color)', 'yellow-gbc'),
+            //2g
+            new SettingOption('Silver', 'silver'),
+            new SettingOption('Gold', 'gold'),
+            new SettingOption('Crystal', 'crystal'),
+            //3g
+            new SettingOption('Ruby/Sapphire', 'ruby-sapphire'),
+            new SettingOption('Fire Red/Leaf Green', 'firered-leafgreen'),
+            new SettingOption('Emerald', 'emerald'),
+            new SettingOption('Emerald (Animated)', 'emerald-animated'),
+            //4g
+            new SettingOption('Diamond/Pearl', 'diamond-pearl'),
+            new SettingOption('Platinum', 'platinum'),
+            new SettingOption('Heart Gold/Soul Silver', 'heartgold-soulsilver'),
+            //5g
+            new SettingOption('Black/White', 'black-white'),
+            //custom
+            new SettingOption('Rowlet Dex', 'rowlet-dex'),
+        ],
+        'none'),
+);
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));

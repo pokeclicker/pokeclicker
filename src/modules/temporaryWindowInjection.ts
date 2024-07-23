@@ -204,6 +204,7 @@ import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
+import { packList } from './packs/PackList';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -421,4 +422,5 @@ Object.assign(<any>window, {
     ChristmasPresent,
     DamageCalculator,
     GameLoadState,
+    packList,
 });

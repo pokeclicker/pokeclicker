@@ -161,6 +161,19 @@ aria-labelledby="pokedexModalLabel">
                                     </div>
                                     <!-- /ko -->
 
+                                    <!-- Packs -->
+                                    <div class="form-group col-lg-12 col-12">
+                                        <!-- ko let: { pack: Settings.getSetting('pack') } -->
+                                        <label for="pack-select" data-bind="text: pack.displayName">Packs</label>
+                                        <select id="pack-select" autocomplete="off" class="custom-select"
+                                            data-bind="options: pack.options,
+                                                optionsValue: 'value',
+                                                optionsText: 'text',
+                                                value: pack.observableValue">
+                                        </select>
+                                        <!-- /ko -->
+                                    </div>
+
                                     <!--Rare Hold Item-->
                                     <div class="col-12">
                                         <div class="form-group my-2">
@@ -240,6 +253,7 @@ aria-labelledby="pokedexModalLabel">
                                             <!-- /ko -->
                                         </div>
                                     </div>
+
 
                                     <div class="col-12">
                                         <hr style="border-color:grey;">
@@ -379,7 +393,7 @@ aria-labelledby="pokedexModalLabel">
                                                 }">name</span>
 
                                             <!-- Category Button -->
-                                            <!-- ko if: App.game.party.alreadyCaughtPokemonByName($data.name) -->
+                                            <!-- ko if: false && App.game.party.alreadyCaughtPokemonByName($data.name) -->
                                             <div class="pokemonCategory dropdown" data-bind="let: { pokemon: App.game.party.getPokemon($data.id) }">
                                                 <div data-toggle="dropdown" style="height: 15px;">
                                                     <!-- Limit category display to 12 for UI purposes -->

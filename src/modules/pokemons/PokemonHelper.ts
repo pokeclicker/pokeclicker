@@ -17,6 +17,7 @@ import type MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
 import type { EvoData } from './evolutions/Base';
+import { getPack } from '../packs/PackHelper';
 
 // TODO remove when PokemonLocations is ported to modules
 declare class PokemonLocations {
@@ -85,7 +86,16 @@ export function typeIdToString(id: number) {
 }
 
 export function getImage(pokemonId: number, shiny: boolean = undefined, gender: BattlePokemonGender = undefined, shadow: ShadowStatus = undefined): string {
-    let src = 'assets/images/';
+    let namePack = Settings.getSetting('pack').observableValue();;
+    let packsrc = 'packs/';
+    let usePack = namePack != 'none';
+    let pack = null;
+    if (usePack) {
+        pack = getPack(namePack);
+        packsrc += pack.path + pack.name;
+        usePack = pack.pokemons.includes(pokemonId);
+    }
+    let path = 'assets/images/';
     let showShiny = shiny;
     let showFemale = gender === BattlePokemonGender.Female;
     let showShadow = shadow === ShadowStatus.Shadow;
@@ -102,19 +112,36 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
                 || (partyPokemon.shadow === ShadowStatus.Purified && (partyPokemon.showShadowImage || Settings.getSetting('partyShowPurifiedShadowSprites').observableValue()));
         }
     }
+    let src = '';
     if (showShiny) {
+        if (usePack && !pack.shiny) {
+            usePack = false;
+        }
         src += 'shiny';
     }
     if (showShadow) {
+        if (usePack && !pack.shadow) {
+            usePack = false;
+        }
         src += 'shadow';
     }
     let genderString = '';
     // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
     if (showFemale && this.getPokemonById(pokemonId).gender.visualDifference) {
-        genderString = '-f';
+        if (!usePack || pack.female) { //if pack haven't female form, use the male/genderless form
+            genderString = '-f';
+        }
     }
-    src += `pokemon/${pokemonId}${genderString}.png`;
-    return src;
+    let extension = 'png';
+    if (usePack)
+    {
+        path += packsrc;
+        if (pack.animated) {
+            extension = 'gif';
+        }
+    }
+    src += `pokemon/${pokemonId}${genderString}.${extension}`;
+    return `${path}/${src}`;
 }
 
 export function getPokeballImage(pokemonName: PokemonNameType): string {
