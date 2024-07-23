@@ -62,8 +62,35 @@ export default class SaveSelector {
 
         // Sort our saves
         SortSaves();
+
+        this.LoadSaveOnKeydown = this.LoadSaveOnKeydown.bind(this);
+
+        $(document).on('keydown', this.LoadSaveOnKeydown)
     }
 
+    static LoadSaveOnKeydown(e) {
+        if (this.focusedOnEditableElement()) {
+            return;
+        }
+
+        const key = e.key;
+        if (!isNaN(parseInt(key))) {
+            const chosenSave = parseInt(key) - 1;
+            const allSaves = $(".trainer-card");
+            if (allSaves.length > chosenSave && chosenSave >= 0) {
+                $(document).off('keydown', this.LoadSaveOnKeydown);
+                allSaves[chosenSave].click();
+            }
+        }
+    }
+    static focusedOnEditableElement(): boolean {
+        const activeEl = document.activeElement as HTMLElement;
+        const localName: string = activeEl.localName.toLowerCase();
+        const editables = ['textarea', 'input', 'select'];
+
+        return (editables.includes(localName) || activeEl.isContentEditable);
+    }
+        
     static getTrainerCard(key: string): Element {
         try {
             const rawData = localStorage.getItem(`save${key}`);
