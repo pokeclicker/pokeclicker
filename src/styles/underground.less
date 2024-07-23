@@ -52,8 +52,8 @@
     position: absolute;
     z-index: 50;
     pointer-events: none;
-    border: 1px solid white;
-    background: rgba(255, 255, 255, 10%);
+    border: 1px solid #FFC300;
+    background: rgba(255, 195, 0, 20%);
 
     &.survey-1 {
         top: -0%;
@@ -131,6 +131,14 @@
     }
 }
 
+.SurveySelected {
+    cursor:url('../assets/images/underground/Survey.png') 5 15, auto;
+
+    &:active {
+        cursor:url('../assets/images/underground/Survey.png') 5 10, auto;
+    }
+}
+
 #mineBody.disabled {
     pointer-events: none;
     cursor: default;
@@ -157,8 +165,8 @@
         {
             width: 100%;
             height: 100%;
-            border: 1px solid red;
-            background: rgba(255, 0, 0, 20%);
+            border: 1px solid #5468EC;
+            background: rgba(84, 104, 236, 20%);
         }
     }
 
@@ -176,8 +184,8 @@
         {
             width: 300%;
             height: 300%;
-            border: 1px solid blue;
-            background: rgba(0, 0, 255, 20%);
+            border: 1px solid #F86058;
+            background: rgba(248, 96, 88, 20%);
         }
     }
 
@@ -191,7 +199,23 @@
         }
 
         &:hover::after {
-            border: 1px solid green;
+            border: 1px solid #85DD9D;
+            background: rgba(133, 221, 157, 10%);
+        }
+    }
+
+    &.SurveySelected {
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        &:hover::after {
+            border: 1px solid #FFC300;
+            background: rgba(255, 195, 0, 10%);
         }
     }
 }
