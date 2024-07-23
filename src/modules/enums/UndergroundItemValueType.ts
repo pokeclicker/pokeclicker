@@ -6,6 +6,7 @@ enum UndergroundItemValueType {
     FossilPiece,
     EvolutionItem,
     MegaStone,
+    Other,
 }
 
 export default UndergroundItemValueType;

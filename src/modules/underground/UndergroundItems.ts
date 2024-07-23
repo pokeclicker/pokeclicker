@@ -160,3 +160,6 @@ UndergroundItems.addItem(new UndergroundShardItem(416, 'Slate_shard', [[0, 0, 0,
 UndergroundItems.addItem(new UndergroundMegaStoneItem(MegaStoneType.Aerodactylite, 500, 'Aerodactylite', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Aerodactyl', 0, 0.1));
 UndergroundItems.addItem(new UndergroundMegaStoneItem(MegaStoneType.Mawilite, 501, 'Mawilite', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Mawile', 0, 0.1));
 UndergroundItems.addItem(new UndergroundMegaStoneItem(MegaStoneType.Sablenite, 502, 'Sablenite', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Sableye', 0, 0.1));
+
+// Other
+UndergroundItems.addItem(new UndergroundItem(600, 'Pikachu_paleontologist', [[0, 0, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1], [0, 0, 1, 1, 1, 0], [0, 0, 0, 1, 1, 0], [0, 0, 0, 1, 1, 1]], 1, UndergroundItemValueType.Other));
