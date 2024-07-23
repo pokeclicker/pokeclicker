@@ -7,7 +7,6 @@ import { Coordinate } from '../mine/Mine';
 import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../UndergroundConfig';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
-import { MineType } from '../mine/MineConfig';
 
 export default class UndergroundTools implements Feature {
     name = 'Underground Tools';
@@ -28,7 +27,7 @@ export default class UndergroundTools implements Feature {
 
     initialize() {
         this.tools = [
-            new UndergroundTool(UndergroundToolType.Chisel, 20, 2, 50, 1, (x, y) => {
+            new UndergroundTool(UndergroundToolType.Chisel, 'Chisel', 20, 2, 50, 1, (x, y) => {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 if (App.game.underground.mine?.attemptBreakTile({ x, y }, 2)) {
                     coordinatesActuallyMined.push({ x, y });
@@ -36,7 +35,7 @@ export default class UndergroundTools implements Feature {
                 }
                 return null;
             }),
-            new UndergroundTool(UndergroundToolType.Hammer, 60, 4, 15, 2, (x, y) => {
+            new UndergroundTool(UndergroundToolType.Hammer, 'Hammer', 60, 4, 15, 2, (x, y) => {
                 let hasMined = false;
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 for (let deltaX = -1; deltaX <= 1; deltaX++) {
@@ -49,7 +48,7 @@ export default class UndergroundTools implements Feature {
                 }
                 return hasMined ? coordinatesActuallyMined : null;
             }),
-            new UndergroundTool(UndergroundToolType.Bomb, 180, 9, 5, 3, () => {
+            new UndergroundTool(UndergroundToolType.Bomb, 'Bomb', 180, 9, 5, 3, () => {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 const baseBombTiles: number = 10;
                 const extraBombTiles: number = App.game.oakItems.isActive(OakItemType.Explosive_Charge) ? App.game.oakItems.calculateBonus(OakItemType.Explosive_Charge) : 0;
@@ -62,7 +61,7 @@ export default class UndergroundTools implements Feature {
                 }
                 return coordinatesActuallyMined;
             }),
-            new UndergroundTool(UndergroundToolType.Survey, 300, 0, 0, 0, () => {
+            new UndergroundTool(UndergroundToolType.Survey, 'Survey', 300, 0, 0, 0, () => {
                 // Get a list of unmined reward coordinates
                 const unminedRewardCoordinates = App.game.underground.mine.grid.reduce<number[]>((previousValue, currentValue, currentIndex) => {
                     if (currentValue.reward && currentValue.layerDepth > 0)

@@ -1,13 +1,13 @@
-import {Feature} from '../DataStore/common/Feature';
+import { Feature } from '../DataStore/common/Feature';
 import KeyItemType from '../enums/KeyItemType';
-import {Observable, PureComputed} from 'knockout';
-import {UndergroundController} from './UndergroundController';
+import { Observable, PureComputed } from 'knockout';
+import { UndergroundController } from './UndergroundController';
 import GameHelper from '../GameHelper';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
-import {Mine} from './mine/Mine';
-import {MineType} from './mine/MineConfig';
-import {UndergroundHelper, UndergroundHelpers} from './helper/UndergroundHelper';
+import { Mine } from './mine/Mine';
+import { MineType } from './mine/MineConfig';
+import { UndergroundHelper, UndergroundHelpers } from './helper/UndergroundHelper';
 import {
     BASE_EXTRA_LAYER_DEPTH,
     BASE_MAXIMUM_ITEMS,

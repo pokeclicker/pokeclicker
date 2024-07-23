@@ -2,6 +2,8 @@ import { Observable } from 'knockout';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from './UndergroundToolType';
 import { Coordinate } from '../mine/Mine';
+import Notifier from '../../notifications/Notifier';
+import NotificationConstants from '../../notifications/NotificationConstants';
 
 export default class UndergroundTool {
     private _nextAllowedUse = ko.observable(Date.now());
@@ -13,6 +15,7 @@ export default class UndergroundTool {
 
     constructor(
         public id: UndergroundToolType,
+        public displayName: string,
         public baseCooldown: number,
         public cooldownReductionPerLevel: number,
         public maximumStoredUsages: number,
@@ -36,6 +39,25 @@ export default class UndergroundTool {
         if (this._counter() >= this.baseCooldown) {
             GameHelper.incrementObservable(this._storedUses);
             GameHelper.incrementObservable(this._counter, -this.baseCooldown);
+
+            if (this.storedUses === this.maximumStoredUsages) {
+                Notifier.notify({
+                    title: 'Underground tools',
+                    message: `${this.displayName} reached maximum free use storage: ${this.storedUses}!`,
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                    sound: NotificationConstants.NotificationSound.General.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.Underground.underground_energy_full,
+                });
+            } else {
+                Notifier.notify({
+                    title: 'Underground tools',
+                    message: `${this.displayName} has gained an extra free use: ${this.storedUses}/${this.maximumStoredUsages}!`,
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                    setting: NotificationConstants.NotificationSetting.Underground.underground_energy_restore,
+                });
+            }
         }
     }
 
