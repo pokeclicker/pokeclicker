@@ -13,9 +13,20 @@ import Item from './Item';
 import MulchItem from './MulchItem';
 import PokeballItem from './PokeballItem';
 import {
-    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType, ConsumableType, FluteItemType, AchievementOption,
+    AchievementOption,
+    BattleItemType,
+    ConsumableType,
+    Currency,
+    EggItemType,
+    EnergyRestoreSize,
+    FluteItemType,
+    MegaStoneType,
+    Pokeball,
+    PokeBlockColor,
+    Region,
+    VitaminType,
 } from '../GameConstants';
-import { ShovelItem, MulchShovelItem } from './ShovelItem';
+import {MulchShovelItem, ShovelItem} from './ShovelItem';
 import PokeBlock from './PokeBlock';
 import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
@@ -30,7 +41,7 @@ import QuestItem from './QuestItem';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
-import { pokemonMap } from '../pokemons/PokemonList';
+import {pokemonMap} from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
@@ -329,6 +340,8 @@ ItemList.Rose_shard = new TreasureItem('Rose_shard', UndergroundItemValueType.Sh
 ItemList.Brown_shard = new TreasureItem('Brown_shard', UndergroundItemValueType.Shard, 'Brown Shard');
 ItemList.Beige_shard = new TreasureItem('Beige_shard', UndergroundItemValueType.Shard, 'Beige Shard');
 ItemList.Slate_shard = new TreasureItem('Slate_shard', UndergroundItemValueType.Shard, 'Slate Shard');
+// Other
+ItemList.Pikachu_palaeontologist = new TreasureItem('Pikachu_palaeontologist', UndergroundItemValueType.Other, 'Pikachu Palaeontologist');
 
 
 // Pokemon shop items

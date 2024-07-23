@@ -1819,7 +1819,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 25.23,
-        'name': 'Pikachu (Paleontologist)',
+        'name': 'Pikachu (Palaeontologist)',
         'catchRate': 190,
         'type': [PokemonType.Electric, PokemonType.Rock],
         'levelType': LevelType.mediumfast,

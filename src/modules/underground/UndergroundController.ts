@@ -68,7 +68,7 @@ export class UndergroundController {
     }
 
     public static getMineConfig(mineType: MineType, helper: UndergroundHelper = undefined): MineConfig {
-        if (Rand.chance(SPECIAL_MINE_CHANCE) && helper?.canGenerateSpecial && SpecialMineConfig.getAvailableItems().length > 0) {
+        if (Rand.chance(SPECIAL_MINE_CHANCE) && (!helper || helper.canGenerateSpecial) && SpecialMineConfig.getAvailableItems().length > 0) {
             return SpecialMineConfig;
         }
 

@@ -103,7 +103,7 @@ export type PokemonNameType
     | 'Pikachu (Ph. D.)'
     | 'Pikachu (Libre)'
     | 'Pikachu (Easter)'
-    | 'Pikachu (Paleontologist)'
+    | 'Pikachu (Palaeontologist)'
     | 'Raichu'
     | 'Alolan Raichu'
     | 'Detective Raichu'
