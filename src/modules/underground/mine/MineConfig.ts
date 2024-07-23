@@ -20,7 +20,7 @@ export interface MineConfig {
 
 export const RandomMineConfig: MineConfig = {
     type: MineType.Random,
-    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.MegaStone].includes(item.valueType)),
+    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.MegaStone, UndergroundItemValueType.Other].includes(item.valueType)),
 };
 
 export const DiamondMineConfig: MineConfig = {
@@ -50,6 +50,6 @@ export const EvolutionItemMineConfig: MineConfig = {
 
 export const SpecialMineConfig: MineConfig = {
     type: MineType.Special,
-    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.MegaStone),
+    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => [UndergroundItemValueType.MegaStone, UndergroundItemValueType.Other].includes(item.valueType)),
     fixedItemCount: 1,
 };
