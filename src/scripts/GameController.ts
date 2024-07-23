@@ -198,6 +198,9 @@ class GameController {
                     case Settings.getSetting('hotkey.underground.bomb').value:
                         App.game.undergroundTools.selectedToolType = UndergroundToolType.Bomb;
                         return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.survey').value:
+                        App.game.undergroundTools.selectedToolType = UndergroundToolType.Survey;
+                        return e.preventDefault();
                 }
                 if (isNumberKey) {
                     if (numberKey === 0) {
