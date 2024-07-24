@@ -367,6 +367,8 @@ ItemList['Probably Feebas']   = new PokemonItem('Magikarp (Feebas)', 5999, Curre
 ItemList.Eevee                = new PokemonItem('Eevee', 4000);
 ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
+ItemList['Pikachu (Palaeontologist)'] = new PokemonItem('Pikachu (Palaeontologist)');
+
 // Hoenn
 ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 358, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
