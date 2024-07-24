@@ -6,7 +6,7 @@ import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings';
-import {Observable, PureComputed} from 'knockout';
+import { PureComputed } from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';

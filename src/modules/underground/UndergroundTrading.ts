@@ -2,7 +2,7 @@ import { Observable, PureComputed } from 'knockout';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import {UndergroundController} from './UndergroundController';
+import { UndergroundController } from './UndergroundController';
 
 export const TRADE_DOWN_AMOUNT = 3;
 
