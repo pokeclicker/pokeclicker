@@ -810,7 +810,7 @@ class Farming implements Feature {
             BerryFirmness.Very_Hard,
             ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.'],
             undefined,
-            ['Farfetch\'d', 'Murkrow', 'Tropius', 'Chatot']
+            ['Gyarados', 'Murkrow', 'Tropius', 'Chatot']
         );
 
         this.berryData[BerryType.Payapa] = new Berry(
