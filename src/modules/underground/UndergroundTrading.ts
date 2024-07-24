@@ -21,9 +21,15 @@ export class UndergroundTrading {
 
         // TODO : Make Fossils only tradeable when you already have either 1 fossil or the pokemon, need to dig it up once first
 
-        // TODO : Make MegaStones and Pikachu untradeable
+        return this._computedAvailableItemsToTradeList().filter(item => {
+            if (this._selectedTradeFromItem().id === item.id)
+                return false;
 
-        return UndergroundItems.getUnlockedItems().filter(item => this._selectedTradeFromItem().valueType === item.valueType);
+            if (this._selectedTradeFromItem().valueType !== item.valueType)
+                return false;
+
+            return true;
+        });
     });
 
     public static trade(): boolean {

@@ -6,7 +6,6 @@
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
-                    <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#trading">Trading</a></li>
                     <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
                     <li class="d-lg-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
@@ -142,28 +141,33 @@
                     </div>
                 </div>
 
-                <div id="treasures" class="tab-pane fade">
-                </div>
+                <div id="treasures" class="tab-pane fade p-2">
+                    <!-- ko foreach: [UndergroundItemValueType.Diamond, UndergroundItemValueType.Gem, UndergroundItemValueType.Shard, UndergroundItemValueType.Fossil, UndergroundItemValueType.EvolutionItem, UndergroundItemValueType.Other] -->
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: $data"></span>
+                        </div>
 
-                <div id="trading" class="tab-pane fade">
-<!--                    <div data-bind="foreach: UndergroundTrading.availableItemsToTrade">-->
-<!--                        <div data-bind="text: $data.itemName"></div>-->
-<!--                    </div>-->
-
-                    <div class="input-group input-group-sm">
-                        <select autocomplete="off" class="custom-select" data-bind="options: [
-                            { name: 'None', value: null },
-                            ...UndergroundTrading.availableItemsToTrade.map(i => ({ name: i.name, value: i })),
-                        ], optionsValue: 'value', optionsText: 'name', value: UndergroundTrading.selectedTradeFromItem"></select>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === $data) -->
+                                <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                    <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                         data-bind="
+                                            css: { 'bg-info': UndergroundTrading.selectedTradeFromItem === $data },
+                                            template: { name: 'otherItemTemplate', data: $data.itemName },
+                                            click: () => {
+                                                UndergroundTrading.selectedTradeFromItem = $data;
+                                                $('#treasureDetailModal').modal('show');
+                                            }
+                                         ">
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
                     </div>
-
-
-                    <div class="input-group input-group-sm">
-                        <select autocomplete="off" class="custom-select" data-bind="options: [
-                            { name: 'None', value: null },
-                            ...UndergroundTrading.tradeToItemList.map(i => ({ name: i.name, value: i })),
-                        ], optionsValue: 'value', optionsText: 'name', value: UndergroundTrading.selectedTradeToItem"></select>
-                    </div>
+                    <!-- /ko -->
                 </div>
 
                 <div id="undergroundHelpers" class="tab-pane fade">
@@ -286,7 +290,7 @@
     </script>
 </div>
 
-<div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
+<div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect" id="mineSellAllTreasuresModal" role="dialog"
      style="cursor:default" tabindex="-1">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInventory: UndergroundItems.list.filter(item => item.hasSellValue() && player.itemList[item.itemName]()) }">
         <div class="modal-content">
@@ -301,8 +305,8 @@
     </script>
 </div>
 
-<div aria-labelledby="findNewMineModalLabel" class="modal fade no-select mt-5" id="findNewMineModal" role="dialog" style="cursor: default;" tabindex="-1">
-    <div class="modal-dialog" role="document">
+<div aria-labelledby="findNewMineModalLabel" class="modal fade no-select" id="findNewMineModal" role="dialog" style="cursor: default;" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <h4>Select a mine</h4>
@@ -342,7 +346,7 @@
                         <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);" data-dismiss="modal">Search for mine</button>
                     </div>
                 </div>
-                
+
                 <div>
                     <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
                     <label for="auto-restart-underground-mine" data-bind="text: autoRestartUndergroundMine.displayName"></label>
@@ -362,5 +366,67 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<div aria-labelledby="findNewMineModalLabel" class="modal fade no-select" id="treasureDetailModal" role="dialog" style="cursor: default;" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-bind="text: UndergroundTrading.selectedTradeFromItem?.name"></h3>
+            </div>
+
+            <div class="modal-body">
+                <!-- ko if: UndergroundTrading.tradeToItemList?.length > 0 -->
+                <div class="card mb-2">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <span class="flex-grow-1 text-center font-weight-bold">Trade</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- ko foreach: UndergroundTrading.tradeToItemList -->
+                            <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                     data-bind="
+                                        css: { 'bg-info': UndergroundTrading.selectedTradeToItem === $data },
+                                        template: { name: 'otherItemTemplate', data: $data.itemName },
+                                        click: () => { UndergroundTrading.selectedTradeToItem = $data; }
+                                     ">
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+
+                        <div class="row">
+
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn-primary" data-bind="
+                            enable: UndergroundTrading.selectedTradeFromItem && UndergroundTrading.selectedTradeToItem,
+                            click: () => UndergroundTrading.trade()
+                        ">Trade</button>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if: UndergroundTrading.selectedTradeFromItem?.hasSellValue() -->
+                <div class="card mb-2">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <span class="flex-grow-1 text-center font-weight-bold">Sell</span>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" data-bind="click: () => {  }">Sell</button>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
