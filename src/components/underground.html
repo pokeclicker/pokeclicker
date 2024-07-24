@@ -158,6 +158,7 @@
                                             template: { name: 'otherItemTemplate', data: $data.itemName },
                                             click: () => {
                                                 UndergroundTrading.selectedTradeFromItem = $data;
+                                                UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
                                                 $('#treasureDetailModal').modal('show');
                                             }
                                          ">
@@ -398,16 +399,86 @@
                             <!-- /ko -->
                         </div>
 
-                        <div class="row">
+                        <hr>
 
+                        <div class="row">
+                            <div class="col-12 col-lg-3 font-weight-bold" data-bind="css: { 'text-danger': UndergroundTrading.tradeFromAmount > player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]() }">
+                                <label data-bind="text: UndergroundTrading.tradeFromAmount.toLocaleString('en-US')"></label>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label data-bind="text: UndergroundTrading.selectedTradeFromItem.name"></label>
+                                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                                →
+                                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeToItem?.image || null }'>
+                                <label data-bind="text: UndergroundTrading.selectedTradeToItem?.name || '???'"></label>
+                            </div>
+                            <div class="col-12 col-lg-3 font-weight-bold">
+                                <label data-bind="text: UndergroundTrading.tradeAmount.toLocaleString('en-US')"></label>
+                            </div>
                         </div>
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-primary" data-bind="
-                            enable: UndergroundTrading.selectedTradeFromItem && UndergroundTrading.selectedTradeToItem,
-                            click: () => UndergroundTrading.trade()
-                        ">Trade</button>
+                        <div class="row">
+                            <div class="col-12 col-lg-9 mb-2 mb-lg-0">
+                                <div class="input-group">
+                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1">Reset</button>
+
+                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
+
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 10">
+                                        +10
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 100">
+                                        +100
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount *= 10">
+                                        &times;10
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount /= 10">
+                                        &div;10
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 100">
+                                        +100
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 1000">
+                                        +1,000
+                                    </button>
+                                    <!-- /ko -->
+
+                                    <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu text-center p-0">
+                                        <p class="small py-2 m-0">Set Trade Amount</p>
+                                        <div class="dropdown-divider m-0"></div>
+                                        <!-- ko foreach: [10, 100, 1000] -->
+                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                            text: `${$data.toLocaleString('en-US')}`,
+                                            click: () => { UndergroundTrading.tradeAmount = $data }
+                                        "></button>
+                                        <!-- /ko -->
+                                        <div class="dropdown-divider m-0"></div>
+                                        <!-- ko foreach: [0.1, 0.25, 0.5, 0.75, 1] -->
+                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                            text: `${$data.toLocaleString('en-US', { style: 'percent' })}`,
+                                            click: () => { UndergroundTrading.tradeFromAmount = player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]() * $data }
+                                        "></button>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-3">
+                                <button class="btn btn-block btn-primary" data-bind="
+                                    enable: UndergroundTrading.canTrade,
+                                    click: () => UndergroundTrading.trade()
+                                ">Trade</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /ko -->

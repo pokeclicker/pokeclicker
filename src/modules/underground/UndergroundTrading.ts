@@ -8,7 +8,7 @@ export const TRADE_DOWN_AMOUNT = 3;
 export class UndergroundTrading {
     private static _selectedTradeFromItem: Observable<UndergroundItem | null> = ko.observable(null);
     private static  _selectedTradeToItem: Observable<UndergroundItem | null> = ko.observable(null);
-    private static  _tradeAmount: Observable<number> = ko.observable(0);
+    private static  _tradeAmount: Observable<number> = ko.observable(1);
 
     private static  _computedAvailableItemsToTradeList: PureComputed<UndergroundItem[]> = ko.pureComputed<UndergroundItem[]>(() => {
         return UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.Diamond, UndergroundItemValueType.MegaStone].includes(item.valueType));
@@ -37,7 +37,7 @@ export class UndergroundTrading {
             return false;
         }
 
-        const tradeFromAmount = this.tradeAmount * 3;
+        const tradeFromAmount = this.tradeAmount * TRADE_DOWN_AMOUNT;
         const tradeToAmount = this.tradeAmount;
 
         if (player.itemList[this.selectedTradeFromItem.itemName]() < tradeFromAmount) {
@@ -48,6 +48,10 @@ export class UndergroundTrading {
         player.gainItem(this.selectedTradeToItem.itemName, tradeToAmount);
 
         return true;
+    }
+
+    static get canTrade(): boolean {
+        return this.selectedTradeFromItem && this.tradeToItemList.includes(this.selectedTradeToItem) && this.tradeFromAmount <= player.itemList[this.selectedTradeFromItem.itemName]();
     }
 
     static get selectedTradeFromItem(): UndergroundItem | null {
@@ -64,6 +68,14 @@ export class UndergroundTrading {
 
     static set selectedTradeToItem(item: UndergroundItem | null) {
         this._selectedTradeToItem(item);
+    }
+
+    static get tradeFromAmount(): number {
+        return this._tradeAmount() * TRADE_DOWN_AMOUNT;
+    }
+
+    static set tradeFromAmount(value: number) {
+        this._tradeAmount(Math.floor(value / TRADE_DOWN_AMOUNT));
     }
 
     static get tradeAmount(): number {
