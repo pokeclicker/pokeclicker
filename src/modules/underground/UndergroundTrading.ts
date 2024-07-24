@@ -2,13 +2,15 @@ import { Observable, PureComputed } from 'knockout';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
+import {UndergroundController} from './UndergroundController';
 
 export const TRADE_DOWN_AMOUNT = 3;
 
 export class UndergroundTrading {
     private static _selectedTradeFromItem: Observable<UndergroundItem | null> = ko.observable(null);
-    private static  _selectedTradeToItem: Observable<UndergroundItem | null> = ko.observable(null);
-    private static  _tradeAmount: Observable<number> = ko.observable(1);
+    private static _selectedTradeToItem: Observable<UndergroundItem | null> = ko.observable(null);
+    private static _tradeAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
+    private static _sellAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
 
     private static  _computedAvailableItemsToTradeList: PureComputed<UndergroundItem[]> = ko.pureComputed<UndergroundItem[]>(() => {
         return UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.Diamond, UndergroundItemValueType.MegaStone].includes(item.valueType));
@@ -92,5 +94,23 @@ export class UndergroundTrading {
 
     static get tradeToItemList(): Array<UndergroundItem> {
         return this._computedTradeToItemList();
+    }
+
+    // Selling
+
+    static get sellAmount(): number {
+        return this._sellAmount();
+    }
+
+    static set sellAmount(amount: number) {
+        this._sellAmount(amount);
+    }
+
+    static get canSell(): boolean {
+        return this.selectedTradeFromItem && this.selectedTradeFromItem.hasSellValue() && this.sellAmount <= player.itemList[this.selectedTradeFromItem.itemName]();
+    }
+
+    public static sell() {
+        UndergroundController.sellMineItem(this.selectedTradeFromItem, this.sellAmount);
     }
 }
