@@ -145,7 +145,7 @@
                     <!-- ko foreach: [UndergroundItemValueType.Diamond, UndergroundItemValueType.Gem, UndergroundItemValueType.Shard, UndergroundItemValueType.Fossil, UndergroundItemValueType.EvolutionItem, UndergroundItemValueType.Other] -->
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: $data"></span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: GameConstants.camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[$data])"></span>
                         </div>
 
                         <div class="card-body">
