@@ -380,7 +380,8 @@ class Farming implements Feature {
                 'This Berry\'s gradual process of storing nutrients beneficial to Pokémon health causes it to mature slowly.',
                 'This Berry multiplies the effect of Berry plants around it.',
             ],
-            new Aura(AuraType.Boost, [1.01, 1.02, 1.03])
+            new Aura(AuraType.Boost, [1.01, 1.02, 1.03]),
+            ['Mew']
         );
         //#endregion
 
@@ -1181,8 +1182,6 @@ class Farming implements Feature {
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
                 'This power revitalizes and prevents other berries from withering.',
             ],
-            undefined,
-            ['Mew']
         );
 
         this.berryData[BerryType.Apicot] = new Berry(
