@@ -341,7 +341,7 @@ ItemList.Brown_shard = new TreasureItem('Brown_shard', UndergroundItemValueType.
 ItemList.Beige_shard = new TreasureItem('Beige_shard', UndergroundItemValueType.Shard, 'Beige Shard');
 ItemList.Slate_shard = new TreasureItem('Slate_shard', UndergroundItemValueType.Shard, 'Slate Shard');
 // Other
-ItemList.Pikachu_palaeontologist = new TreasureItem('Pikachu_palaeontologist', UndergroundItemValueType.Other, 'Pikachu Palaeontologist');
+ItemList.Pikachu_palaeontologist = new TreasureItem('Pikachu_palaeontologist', UndergroundItemValueType.Special, 'Pikachu Palaeontologist');
 
 
 // Pokemon shop items

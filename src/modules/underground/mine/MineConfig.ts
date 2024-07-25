@@ -32,7 +32,7 @@ export class MineConfigs {
 }
 
 MineConfigs.add({ type: MineType.Random, displayName: 'Random',
-    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.MegaStone, UndergroundItemValueType.Other].includes(item.valueType)),
+    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.MegaStone, UndergroundItemValueType.Special].includes(item.valueType)),
 });
 MineConfigs.add({ type: MineType.Diamond, displayName: 'Diamond',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Diamond),
@@ -50,6 +50,6 @@ MineConfigs.add({ type: MineType.EvolutionItem, displayName: 'Evolution item',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.EvolutionItem),
 });
 MineConfigs.add({ type: MineType.Special, displayName: 'Special',
-    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => [UndergroundItemValueType.MegaStone, UndergroundItemValueType.Other].includes(item.valueType)),
+    getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => [UndergroundItemValueType.MegaStone, UndergroundItemValueType.Special].includes(item.valueType)),
     fixedItemCount: 1,
 });
