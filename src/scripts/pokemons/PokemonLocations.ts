@@ -338,7 +338,7 @@ class PokemonLocations {
             if (e.trigger === EvoTrigger.NONE) {
                 return false;
             }
-            if (maxRegion != GameConstants.Region.none && p.nativeRegion > maxRegion) {
+            if (maxRegion != GameConstants.Region.none && (p.nativeRegion > maxRegion || pokemonMap[e.evolvedPokemon].nativeRegion > maxRegion)) {
                 return false;
             }
             cacheLine[e.evolvedPokemon].push(e);
