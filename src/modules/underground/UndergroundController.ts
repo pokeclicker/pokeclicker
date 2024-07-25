@@ -78,7 +78,8 @@ export class UndergroundController {
     }
 
     public static calculateToolCooldown(tool: UndergroundTool): number {
-        const cellBatteryBonus = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
+        // const cellBatteryBonus = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
+        const cellBatteryBonus = 1;
         return Math.max(tool.baseCooldown - tool.cooldownReductionPerLevel * App.game.underground.undergroundLevel, TOOL_COOLDOWN_MINIMUM) / cellBatteryBonus;
     }
 

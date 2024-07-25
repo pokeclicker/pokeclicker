@@ -6,6 +6,7 @@ import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
 
 export default class UndergroundTool {
+    private _cooldownTime = ko.observable(0);
     private _nextAllowedUse = ko.observable(Date.now());
     private _storedUses: Observable<number> = ko.observable(0);
 
@@ -27,7 +28,7 @@ export default class UndergroundTool {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public tick(deltaTime: number) {
         this.handleStoredUsesTick(deltaTime);
-        this.cooldownForDisplay(this.cooldown);
+        this.cooldownForDisplay(this.cooldown < 0.1 ? 0 : this.cooldown);
     }
 
     private handleStoredUsesTick(deltaTime: number) {
@@ -38,7 +39,7 @@ export default class UndergroundTool {
 
         if (this._counter() >= this.baseCooldown) {
             GameHelper.incrementObservable(this._storedUses);
-            GameHelper.incrementObservable(this._counter, -this.baseCooldown);
+            this._counter(0);
 
             if (this.storedUses === this.maximumStoredUsages) {
                 Notifier.notify({
@@ -78,7 +79,15 @@ export default class UndergroundTool {
     }
 
     set cooldown(seconds: number) {
-        this._nextAllowedUse(Math.max( this._nextAllowedUse(), Date.now() + seconds * 1000));
+        const newNextAllowedUse = Date.now() + seconds * 1000;
+        if (newNextAllowedUse > this._nextAllowedUse()) {
+            this._cooldownTime(seconds);
+            this._nextAllowedUse(newNextAllowedUse);
+        }
+    }
+
+    get cooldownTime(): number {
+        return this._cooldownTime();
     }
 
     get counter(): number {
@@ -87,6 +96,7 @@ export default class UndergroundTool {
 
     public fromJSON(save) {
         this.cooldown = save.cooldown || 0;
+        this._cooldownTime(save.cooldownTime);
         this._storedUses(save?.storedUses || 0);
         this._counter(save?.counter || 0);
     }
@@ -94,6 +104,7 @@ export default class UndergroundTool {
     public toJSON() {
         return {
             cooldown: this.cooldown,
+            cooldownTime: this.cooldownTime,
             storedUses: this._storedUses(),
             counter: this._counter(),
         };
