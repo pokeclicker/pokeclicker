@@ -224,3 +224,23 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
+
+.tool-ui {
+    --tool-color: #white;
+
+    &.Chisel-tool-ui {
+        --tool-color: #5468EC;
+    }
+
+    &.Hammer-tool-ui {
+        --tool-color: #F86058;
+    }
+
+    &.Bomb-tool-ui {
+        --tool-color: #85DD9D;
+    }
+
+    &.Survey-tool-ui {
+        --tool-color: #FFC300;
+    }
+}
