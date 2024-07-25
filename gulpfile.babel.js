@@ -157,18 +157,18 @@ gulp.task('scripts', () => {
     const base = gulp.src('src/modules/index.ts')
         .pipe(gulpWebpack(webpackConfig, webpack));
 
+    const convertPathToOS = (p) => p.split(path.posix.sep).join(path.sep);
+
     // Convert the posix path to a path that matches the current OS
-    const osPathPrefix = '../src'.split(path.posix.sep).join(path.sep);
-    const osPathModulePrefix = '../src/declarations'.split(path.posix.sep).join(path.sep);
+    const osPathPrefix = convertPathToOS('../src');
+    const osPathModulePrefix = convertPathToOS('../src/declarations');
+
+    // Declarations for modules globally available as module namespaces (the JS kind) need to be wrapped in namespaces (the TS kind)
+    const globalModules = ['GameConstants.d.ts', `pokemons/PokemonHelper.d.ts`].map(p => convertPathToOS(p));
+    const globalModulesFilter = filter((vinylPath) => globalModules.some(modPath => vinylPath.relative.includes(modPath)), {restore: true});
 
     const generateDeclarations = base
-        .pipe(filter((vinylPath) => {
-            return (
-                vinylPath.relative.startsWith(osPathModulePrefix) &&
-                // Exclude GameConstants, as we generate those manually
-                !vinylPath.relative.includes('GameConstants.d.ts')
-            );
-        }))
+        .pipe(filter((vinylPath) => vinylPath.relative.startsWith(osPathModulePrefix)))
         .pipe(rename((vinylPath) => Object.assign(
             {},
             vinylPath,
@@ -178,13 +178,24 @@ gulp.task('scripts', () => {
         // Remove default exports
         .pipe(replace(/(^|\n)export default \w+;/g, ''))
         // Replace imports with references
-        .pipe(replace(/(^|\n)import (.* from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>'))
+        .pipe(replace(/(^|\n)import ([\w {},*]*? from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>'))
         // Convert exports to declarations so that ./src/scripts can use them
-        .pipe(replace(/(^|\n)export (?!declare)(?!.*from)(default )?/, '$1declare '))
+        .pipe(replace(/(^|\n)export (?!declare|type|[\w {},*]*? from)(default )?/g, '$1declare '))
         // Remove any remaining 'export'
-        .pipe(replace(/(^|\n)export(?!.*from)( default)?/g, '\n'))
+        .pipe(replace(/(^|\n)export (?![\w {},*]*? from)(default )?/g, '$1'))
         // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
+        // Wrap globally-exported module declarations in namespaces for scripts compatibility
+        .pipe(globalModulesFilter)
+        .pipe(replace(/(?<=^|\n)(?=\s*declare)/, function handleReplace() {
+            // Insert before the first declaration of the file
+            // Assumes the entire rest of the file will be declarations for this namespace
+            const filename = this.file.basename.replace(/\..*$/, '');
+            return `declare namespace ${filename} {\n`;
+        }))
+        .pipe(replace(/$(?![\r\n])/, '}\n')) // close namespace declarations at end of file
+        .pipe(globalModulesFilter.restore)
+        // Output
         .pipe(gulp.dest(dests.declarations));
 
     const compileModules = base

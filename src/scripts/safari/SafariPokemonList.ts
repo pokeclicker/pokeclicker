@@ -19,7 +19,7 @@ class SafariEncounter {
 }
 
 class SafariPokemonList {
-    public static list: Record<GameConstants.Region, KnockoutObservable<Array<SafariEncounter>>> = {
+    public static list: Partial<Record<GameConstants.Region, KnockoutObservable<Array<SafariEncounter>>>> = {
         [GameConstants.Region.kanto]: ko.observableArray(),
         [GameConstants.Region.johto]: ko.observableArray(),
         [GameConstants.Region.sinnoh]: ko.observableArray(),

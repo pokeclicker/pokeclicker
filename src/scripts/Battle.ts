@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 ///<reference path="pokemons/PokemonFactory.ts"/>
 /// <reference path="../declarations/GameHelper.d.ts" />
 
@@ -224,3 +225,5 @@ class Battle {
     }).extend({rateLimit: 1000});
 
 }
+
+Battle satisfies TmpBattleType;
