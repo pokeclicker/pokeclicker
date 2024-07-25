@@ -193,7 +193,7 @@ gulp.task('scripts', () => {
             const filename = this.file.basename.replace(/\..*$/, '');
             return `declare namespace ${filename} {\n`;
         }))
-        .pipe(replace(/$(?![\r\n])/, '}\n')) // close namespace declarations
+        .pipe(replace(/$(?![\r\n])/, '}\n')) // close namespace declarations at end of file
         .pipe(globalModulesFilter.restore)
         // Output
         .pipe(gulp.dest(dests.declarations));
