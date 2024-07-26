@@ -99,17 +99,17 @@
                                             <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(transparent ${(1 - (tool.cooldownForDisplay() / tool.cooldownTime)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, var(--tool-color) 0)` }">
                                                 <div class="bg-secondary" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 5px;">
                                                     <div style="width: 27px; height: 27px; display: flex; align-items: center; justify-content: center;">
-                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
+                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: { opacity: tool.cooldownForDisplay() > 0 ? 0.3 : 1 }">
                                                     </div>
-                                                    <div class="small" data-bind="text: tool.cooldownForDisplay().toLocaleString('en-US', { minimumSignificantDigits: 2, maximumFractionDigits: 1, roundingPriority: 'lessPrecision' })"></div>
+                                                    <div class="small" data-bind="text: tool.cooldownForDisplay().toLocaleString('en-US', { minimumSignificantDigits: 2, maximumFractionDigits: 1, roundingPriority: 'lessPrecision' }), style: { opacity: tool.cooldownForDisplay() === 0 ? 0.3 : 1 }"></div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="text-center text-light bg-dark p-1"><h6 class="m-0">Bonus Charge</h6></div>
+                                        <div class="text-center text-light bg-dark p-1"><h6 class="m-0 small">Bonus Charge</h6></div>
                                         <!-- ko if: tool.maximumStoredUsages > 0 -->
                                         <div><knockout data-bind="text: tool.storedUses"></knockout> / <knockout data-bind="text: tool.maximumStoredUsages"></knockout></div>
-                                        <div class="small"><knockout data-bind="text: tool.counter.toLocaleString('en-US', { minimumSignificantDigits: 2, maximumFractionDigits: 1, roundingPriority: 'lessPrecision' })"></knockout> / <knockout data-bind="text: tool.baseCooldown"></knockout></div>
+                                        <div class="small"><knockout data-bind="text: (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                         <div class="progress" style='height: 10px; min-height: 10px;'>
                                             <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
                                                  data-bind="style: { 'width': (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
