@@ -106,9 +106,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="text-center text-light bg-dark p-1"><h6 class="m-0">Durability</h6></div>
+                                        <div class="text-center text-light bg-dark p-1"><h6 class="m-0">Bonus Charge</h6></div>
                                         <!-- ko if: tool.maximumStoredUsages > 0 -->
-                                        <div><knockout data-bind="text: (tool.storedUses / tool.maximumStoredUsages).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                        <div><knockout data-bind="text: tool.storedUses"></knockout> / <knockout data-bind="text: tool.maximumStoredUsages"></knockout></div>
                                         <div class="small"><knockout data-bind="text: tool.counter.toLocaleString('en-US', { minimumSignificantDigits: 2, maximumFractionDigits: 1, roundingPriority: 'lessPrecision' })"></knockout> / <knockout data-bind="text: tool.baseCooldown"></knockout></div>
                                         <div class="progress" style='height: 10px; min-height: 10px;'>
                                             <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
