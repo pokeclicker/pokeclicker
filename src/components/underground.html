@@ -90,57 +90,40 @@
                             <div class="col-12 row no-gutters">
                                 <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
                                 <!-- ko let: { tool: App.game.undergroundTools.getTool($data) } -->
-                                <div class="tool-ui col mx-1 card clickable" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`, css: { 'border-info': App.game.undergroundTools.selectedToolType === $data }, click: () => App.game.undergroundTools.selectedToolType = $data">
-                                    <div class="card-header" data-bind="css: { 'bg-info': App.game.undergroundTools.selectedToolType === $data }">
-                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
+                                <div class="tool-ui col card clickable" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`, css: { 'border-info': App.game.undergroundTools.selectedToolType === $data }, click: () => App.game.undergroundTools.selectedToolType = $data">
+                                    <div class="card-header p-1" data-bind="css: { 'bg-info': App.game.undergroundTools.selectedToolType === $data }">
+                                        <div data-bind="text: tool.displayName"></div>
                                     </div>
-                                    <div class="card-body rounded text-center p-1">
-                                        <div class="d-flex flex-column align-items-center">
-                                            <div data-bind="text: tool.displayName"></div>
-                                            <div class="progress" style='height: 5px'>
-                                                <div class="progress-bar" role="progressbar"
-                                                     data-bind="style: { 'width': (tool.cooldownForDisplay() / tool.cooldownTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }), 'background': 'var(--tool-color)' }"
-                                                     aria-valuemin="0" aria-valuemax="100">
+                                    <div class="card-body d-flex flex-column p-0 rounded text-center">
+                                        <div class="p-1 d-flex justify-content-center">
+                                            <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(transparent ${(1 - (tool.cooldownForDisplay() / tool.cooldownTime)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, var(--tool-color) 0)` }">
+                                                <div class="bg-secondary" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 5px;">
+                                                    <div style="width: 27px; height: 27px; display: flex; align-items: center; justify-content: center;">
+                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
+                                                    </div>
+                                                    <div class="small" data-bind="text: tool.cooldownForDisplay().toLocaleString('en-US', { minimumSignificantDigits: 2, maximumFractionDigits: 1, roundingPriority: 'lessPrecision' })"></div>
                                                 </div>
                                             </div>
-                                            <div class="small">Cooldown: <knockout data-bind="text: tool.cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-
-                                            <div>Free uses: <knockout data-bind="text: tool.storedUses"></knockout></div>
-                                            <div class="progress" style='height: 5px'>
-                                                <div class="progress-bar bg-info" role="progressbar"
-                                                     data-bind="attr:{ style: 'width:' + (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                                                     aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                            <div class="small"><knockout data-bind="text: tool.counter.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout> / <knockout data-bind="text: tool.baseCooldown"></knockout></div>
                                         </div>
-                                    </div>
-                                </div>
-                                <!-- /ko -->
-                                <!-- /ko -->
-                            </div>
-                        </div>
 
-                        <div class='row no-gutters'>
-                            <div class="col-12" data-bind="text: 'Treasures found: ' + App.game.underground.mine?.itemsFound + ' / ' + App.game.underground.mine?.itemsBuried + ', Partially discovered: ' + App.game.underground.mine?.itemsPartiallyFound">
-                            </div>
-
-                            <div class="col-12 row no-gutters">
-                                <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
-                                <!-- ko let: { tool: App.game.undergroundTools.getTool($data) } -->
-                                <div class="tool-ui clickable p-1 border position-relative" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`, css: { 'border-info': App.game.undergroundTools.selectedToolType === $data }, click: () => App.game.undergroundTools.selectedToolType = $data">
-                                    <div style="position: relative; width: 75px; height: 75px; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(transparent ${(1 - (tool.cooldownForDisplay() / tool.cooldownTime)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, var(--tool-color) 0)` }">
-                                        <div class="bg-secondary" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 5px;">
-                                            <div style="width: 27px; height: 27px; display: flex; align-items: center; justify-content: center;">
-                                                <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
+                                        <div class="text-center text-light bg-dark p-1"><h6 class="m-0">Durability</h6></div>
+                                        <!-- ko if: tool.maximumStoredUsages > 0 -->
+                                        <div><knockout data-bind="text: (tool.storedUses / tool.maximumStoredUsages).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                        <div class="small"><knockout data-bind="text: tool.counter.toLocaleString('en-US', { minimumSignificantDigits: 2, maximumFractionDigits: 1, roundingPriority: 'lessPrecision' })"></knockout> / <knockout data-bind="text: tool.baseCooldown"></knockout></div>
+                                        <div class="progress" style='height: 10px; min-height: 10px;'>
+                                            <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
+                                                 data-bind="style: { 'width': (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                                 aria-valuemin="0" aria-valuemax="100">
                                             </div>
-                                            <div class="small" data-bind="text: tool.cooldownForDisplay().toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"></div>
                                         </div>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: tool.maximumStoredUsages > 0 -->
+                                        <div class="d-flex justify-content-center align-items-center" style="flex: 1;">N/A</div>
+                                        <!-- /ko -->
                                     </div>
 
-<!--                                    <div class="position-absolute" data-bind="text: tool.storedUses">-->
-
-<!--                                    </div>-->
+                                    <div class="card-footer p-0">
+                                    </div>
                                 </div>
                                 <!-- /ko -->
                                 <!-- /ko -->
