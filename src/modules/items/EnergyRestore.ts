@@ -4,6 +4,7 @@ import Notifier from '../notifications/Notifier';
 import Item from './Item';
 
 export default class EnergyRestore extends Item {
+    private lastNotification: { close: () => void, closed: boolean } = { close: () => null, closed: true };
     type: EnergyRestoreSize;
 
     constructor(type: EnergyRestoreSize, basePrice: number, currency: Currency = Currency.money, displayName?: string) {
@@ -16,7 +17,8 @@ export default class EnergyRestore extends Item {
             return false;
         }
         if (App.game.underground.energy === App.game.underground.getMaxEnergy()) {
-            Notifier.notify({
+            if (!this.lastNotification.closed) return false;
+            this.lastNotification = Notifier.notify({
                 message: 'Your mining energy is already full!',
                 type: NotificationConstants.NotificationOption.danger,
             });
