@@ -905,7 +905,7 @@
         , x: 10, y: 48
         , width: 6, height: 3
         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-        , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
+        , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special && App.game.challenges.list.requireCompletePokedex.active()"
         , image: "assets/images/map/blimp_empty.png"
         })
     %>
@@ -917,6 +917,15 @@
         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
         , image: "assets/images/map/blimp_pikachu.png"
+        })
+    %>
+    <%- include('templates/mapOverlay',
+        { name: "Team Rocket's Blimp"
+        , x: 11, y: 48
+        , width: 4, height: 8
+        , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
+        , visible:  "(MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special) && !App.game.challenges.list.requireCompletePokedex.active()"
+        , image: "assets/images/map/blimp_meowth.png"
         })
     %>
 

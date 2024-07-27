@@ -985,7 +985,7 @@
          , x: 19, y: 43
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special && App.game.challenges.list.requireCompletePokedex.active()"
          , image: "assets/images/map/blimp_empty.png"
          })
     %>
@@ -998,6 +998,15 @@
          , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_pikachu.png"
          })
+    %>
+    <%- include('templates/mapOverlay',
+        { name: "Team Rocket's Blimp"
+        , x: 19, y: 43
+        , width: 4, height: 8
+        , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
+        , visible:  "(MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special) && !App.game.challenges.list.requireCompletePokedex.active()"
+        , image: "assets/images/map/blimp_meowth.png"
+        })
     %>
 
         <%- include('templates/mapOverlay',
