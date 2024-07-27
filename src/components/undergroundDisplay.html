@@ -18,4 +18,37 @@
             </div>
         </div>
     </div>
+
+    <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayHelpers">
+        <span>Helper</span>
+        <!-- ko if: App.game.underground.helpers.hired().length > 0 -->
+        <button class="btn btn-sm btn-danger" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.helpers.hired().forEach(helper => helper.fire())">
+            Fire
+        </button>
+        <!-- /ko -->
+    </div>
+
+    <div id="undergroundDisplayHelpers" class="table-responsive show">
+        <div class="container">
+            <!-- ko foreach: App.game.underground.helpers.hired() -->
+            <div class="row">
+                <div class="col p-2">
+                    <div data-bind="text: $data.name"></div>
+                    <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
+                    <div data-bind="text: `${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></div>
+                    <!-- /ko -->
+                    <div class="progress" style='height: 5px'>
+                        <div class="progress-bar bg-info" role="progressbar"
+                             data-bind="attr:{ style: 'width:' + ($data.timeSinceWork / $data.workCycleTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: App.game.underground.helpers.hired().length > 0 -->
+            <div class="">No helpers hired. You're on your own!</div>
+            <!-- /ko -->
+        </div>
+    </div>
 </div>
