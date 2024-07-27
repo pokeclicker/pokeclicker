@@ -65,37 +65,6 @@
                 <!-- /ko -->
             </div>
         </div>
-
-
-<!--        <div class="container">-->
-<!--            &lt;!&ndash; ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] &ndash;&gt;-->
-<!--            &lt;!&ndash; ko let: { tool: App.game.undergroundTools.getTool($data) } &ndash;&gt;-->
-<!--            <div class="row">-->
-<!--                <div class="col d-flex flex-nowrap" style="gap: 0.25rem">-->
-<!--                    <div class="d-flex align-items-end" style="flex: 1 1 0"><img width="20px" height="20px" style="object-fit: contain" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: { opacity: tool.cooldownForDisplay() > 0 ? 0.3 : 1 }"></div>-->
-<!--                    <div class="" style="flex: 1 1 50%">-->
-<!--                        <div class="small" data-bind="text: tool.cooldownForDisplay().toLocaleString('en-US', { minimumSignificantDigits: 2, maximumFractionDigits: 1, roundingPriority: 'lessPrecision' }), style: { opacity: tool.cooldownForDisplay() === 0 ? 0.3 : 1 }"></div>-->
-<!--                        <div class="progress" style='height: 10px; min-height: 10px;'>-->
-<!--                            <div class="progress-bar" role="progressbar" style="background: var(&#45;&#45;tool-color)"-->
-<!--                                 data-bind="style: { 'width': (tool.cooldownForDisplay() / tool.cooldownTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"-->
-<!--                                 aria-valuemin="0" aria-valuemax="100">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="" style="flex: 1 1 50%">-->
-<!--                        <div class="small"><knockout data-bind="text: tool.storedUses"></knockout> / <knockout data-bind="text: tool.maximumStoredUsages"></knockout></div>-->
-<!--                        <div class="progress" style='height: 10px; min-height: 10px;'>-->
-<!--                            <div class="progress-bar" role="progressbar" style="background: var(&#45;&#45;tool-color)"-->
-<!--                                 data-bind="style: { 'width': (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"-->
-<!--                                 aria-valuemin="0" aria-valuemax="100">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; /ko &ndash;&gt;-->
-<!--            &lt;!&ndash; /ko &ndash;&gt;-->
-<!--        </div>-->
     </div>
 
     <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayHelpers">
