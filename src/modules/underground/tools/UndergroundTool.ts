@@ -96,7 +96,7 @@ export default class UndergroundTool {
 
     public fromJSON(save) {
         this.cooldown = save.cooldown || 0;
-        this._cooldownTime(save.cooldownTime);
+        this._cooldownTime(save.cooldownTime || 0);
         this._storedUses(save?.storedUses || 0);
         this._counter(save?.counter || 0);
     }
