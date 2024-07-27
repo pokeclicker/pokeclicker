@@ -8,21 +8,40 @@
 
     <div id="undergroundCard" class="card-body p-0 show">
         <div class="container">
-            <div class="row p-2 d-flex justify-content-center flex-wrap" style="column-gap: 1rem; row-gap: 0.25rem">
-                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">Found • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout></div>
-                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout></div>
-                <div class="">Buried • <knockout data-bind="text: App.game.underground.mine?.itemsBuried"></knockout></div>
+            <div class="row p-1 d-flex justify-content-center flex-wrap" style="column-gap: 1rem; row-gap: 0.25rem">
+                <!-- ko if: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
+                <div class="flex-grow-1">
+                    <div>Searching for mine</div>
+                    <div class="progress" style='height: 5px; min-height: 5px'>
+                        <div class="progress-bar bg-info" role="progressbar"
+                             data-bind="attr:{ style: 'width:' + (1 - App.game.underground.mine.timeUntilDiscovery / App.game.underground.mine.initialTimeToDiscover).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko ifnot: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
+                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">Found • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout></div>
+                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout></div>
+                <div class="small">Buried • <knockout data-bind="text: App.game.underground.mine?.itemsBuried"></knockout></div>
+                <!-- /ko -->
             </div>
         </div>
 
         <div class="container">
-            <div class="row d-flex justify-content-center flex-wrap" style="gap: 0.5rem;">
+            <div class="row d-flex justify-content-center flex-wrap" style="gap: 2px;">
                 <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
                 <!-- ko let: { tool: App.game.undergroundTools.getTool($data) } -->
                 <div class="tool-ui" style="flex: 1; min-width: 50px;" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`">
-                    <div class="p-1 d-flex justify-content-center">
-                        <div style="position: relative; width: 100%; max-width: 50px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(transparent ${(1 - (tool.cooldownForDisplay() / tool.cooldownTime)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, var(--tool-color) 0)` }">
-                            <div class="bg-secondary" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 5px;">
+                    <div class="p-0 d-flex justify-content-center" data-bind="css: { 'clickable': [UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data) && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() }, click: () => {
+                        if ([UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data) && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
+                            App.game.undergroundTools.useTool($data, 0, 0);
+                        }
+                    }">
+                        <div style="position: relative; width: 100%; max-width: 50px; aspect-ratio: 1; padding: 2px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(transparent ${(1 - (tool.cooldownForDisplay() / tool.cooldownTime)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, var(--tool-color) 0)` }">
+                            <div class="bg-secondary" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
                                 <div style="display: flex; align-items: center; justify-content: center;">
                                     <img style="width: 20px; height: 20px; object-fit: contain;" alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: { opacity: tool.cooldownForDisplay() > 0 ? 0.3 : 1 }">
                                 </div>
@@ -34,7 +53,7 @@
                     <!-- ko if: tool.maximumStoredUsages > 0 -->
                     <div class="small"><knockout data-bind="text: tool.storedUses"></knockout> / <knockout data-bind="text: tool.maximumStoredUsages"></knockout></div>
                     <div class="small"><knockout data-bind="text: (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                    <div class="progress" style='height: 10px; min-height: 10px;'>
+                    <div class="progress" style='height: 5px; min-height: 5px;'>
                         <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
                              data-bind="style: { 'width': (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
                              aria-valuemin="0" aria-valuemax="100">
