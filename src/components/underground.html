@@ -215,7 +215,7 @@
                                     </tr>
                                     <tr>
                                         <td class="text-left">Favorite mine</td>
-                                        <td class="text-right tight" data-bind="text: $data.favoriteMine"></td>
+                                        <td class="text-right tight" data-bind="text: UndergroundController.getMineConfig($data.favoriteMine).displayName"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Discover chance</td>
