@@ -185,7 +185,7 @@
 
                 <div id="undergroundHelpers" class="tab-pane fade">
                     <div class="row m-0 justify-content-start" data-bind="foreach: App.game.underground.helpers.available()" style="max-width: 100%;">
-                        <div class="card text-left col-md-3 col-sm-6 col-xs-12 p-0">
+                        <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
                             <h5 class="card-header">
                                 <knockout data-bind="text: $data.name">Name</knockout>
                             </h5>
@@ -202,8 +202,15 @@
                                         <td class="text-right tight" data-bind="text: $data.level.toLocaleString('en-US')"></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Experience</td>
-                                        <td class="text-right tight" data-bind="text: $data.experience.toLocaleString('en-US')"></td>
+                                        <td colspan="2">
+                                            <div class="progress" style='height: 5px'>
+                                                <div class="progress-bar bg-info" role="progressbar"
+                                                     data-bind="style: { 'width': $data.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                                     aria-valuemin="0" aria-valuemax="100">
+                                                    <span data-bind="text: `${($data.experience - UndergroundHelper.convertLevelToExperience($data.level)).toLocaleString('en-US')} / ${(UndergroundHelper.convertLevelToExperience($data.level + 1) - UndergroundHelper.convertLevelToExperience($data.level)).toLocaleString('en-US')}`"></span>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Auto-sell</td>

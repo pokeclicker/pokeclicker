@@ -193,6 +193,7 @@ import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import { UndergroundController } from './underground/UndergroundController';
 import { UndergroundTrading } from './underground/UndergroundTrading';
+import { UndergroundHelper } from './underground/helper/UndergroundHelper';
 import UndergroundTools from './underground/tools/UndergroundTools';
 import UndergroundToolType from './underground/tools/UndergroundToolType';
 import SpecialEventRandomRequirement from './requirements/SpecialEventRandomRequirement';
@@ -414,6 +415,7 @@ Object.assign(<any>window, {
     Underground,
     UndergroundController,
     UndergroundTrading,
+    UndergroundHelper,
     UndergroundTools,
     UndergroundToolType,
     ShardDeal,

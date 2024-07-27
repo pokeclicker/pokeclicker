@@ -37,6 +37,9 @@ export class UndergroundHelper {
     private _timeSinceWork: Observable<number> = ko.observable<number>(0);
 
     private _level: PureComputed<number> = ko.pureComputed(() => UndergroundHelper.convertExperienceToLevel(this._experience()));
+    private _progressToNextLevel: PureComputed<number> = ko.pureComputed(() =>
+        (this._experience() - UndergroundHelper.convertLevelToExperience(this._level())) /
+        (UndergroundHelper.convertLevelToExperience(this._level() + 1) - UndergroundHelper.convertLevelToExperience(this._level())));
     private _autoSellValue: PureComputed<number> = ko.pureComputed(() => Math.min(AUTO_SELL_BASE + AUTO_SELL_INCREASE_PER_LEVEL * this._level(), AUTO_SELL_MAXIMUM));
     private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(SMART_TOOL_CHANCE_BASE + SMART_TOOL_CHANCE_INCREASE_PER_LEVEL * this._level(), SMART_TOOL_CHANCE_MAXIMUM));
     private _favoriteMineChance: PureComputed<number> = ko.pureComputed(() =>
@@ -212,6 +215,10 @@ export class UndergroundHelper {
 
     get level(): number {
         return this._level();
+    }
+
+    get progressToNextLevel(): number {
+        return this._progressToNextLevel();
     }
 
     get autoSellValue(): number {
