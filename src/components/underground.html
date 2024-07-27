@@ -8,15 +8,15 @@
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
                     <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
-                    <li class="d-lg-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
+                    <li class="d-block"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
                 </ul>
             </div>
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show" data-bind="">
                     <div class="container">
                         <div class="row p-2">
-                            <div class="col-6 d-flex">
-                                <button class="btn btn-info" data-bind="click: () => $('#findNewMineModal').modal('show');">Find new mine</button>
+                            <div class="col-6 p-0 d-flex">
+                                <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
 
                                 <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
                                 <button class="btn btn-danger p-2" style="min-width: 36px;" data-bind="
@@ -34,7 +34,7 @@
                                 <!-- /ko -->
                             </div>
 
-                            <div class="col-6" data-bind="tooltip: {
+                            <div class="col-6 p-0" data-bind="tooltip: {
                                     title: `${(App.game.underground.undergroundExp - Underground.convertLevelToExperience(App.game.underground.undergroundLevel)).toLocaleString('en-US')} / ${(Underground.convertLevelToExperience(App.game.underground.undergroundLevel + 1) - Underground.convertLevelToExperience(App.game.underground.undergroundLevel)).toLocaleString('en-US')}`,
                                     trigger: 'hover'
                                 }">
@@ -251,11 +251,11 @@
                 </div>
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer p-0">
                 <div class="container">
-                    <div class="row">
+                    <div class="row p-0">
                         <!-- ko foreach: App.game.underground.helpers.hired() -->
-                        <div class="col">
+                        <div class="col p-0">
                             <div>
                                 <span data-bind="text: $data.name"></span>
                                 <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
@@ -268,7 +268,7 @@
                                      aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
-                            <div data-bind="text: `${$data.timeSinceWork.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}/${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></div>
+                            <div data-bind="text: `${$data.timeSinceWork.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} / ${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></div>
                         </div>
                         <!-- /ko -->
                     </div>
