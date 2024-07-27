@@ -55,7 +55,7 @@ class Plot implements Saveable {
         this._isSafeLocked = ko.observable(false);
         this._berry = ko.observable(berry).extend({ numeric: 0 });
         this._lastPlanted = ko.observable(berry).extend({ numeric: 0 });
-        this._age = ko.observable(age).extend({ numeric: 3 });
+        this._age = ko.observable(age);
         this._mulch = ko.observable(mulch).extend({ numeric: 0 });
         this._mulchTimeLeft = ko.observable(mulchTimeLeft).extend({ numeric: 3 });
         this._wanderer = ko.observable(undefined);
