@@ -50,6 +50,15 @@
                     </div>
 
                     <div>
+                        <div class="card">
+                            <div class="card-header p-2 font-weight-bold">Treasures</div>
+                            <div class="card-body p-2 d-flex justify-content-center" style="gap: 1.5rem">
+                                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">Found • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout></div>
+                                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout></div>
+                                <div class="">Buried • <knockout data-bind="text: App.game.underground.mine?.itemsBuried"></knockout></div>
+                            </div>
+                        </div>
+
                         <!-- ko if: App.game.underground.mine -->
                         <div style="position: relative;">
                             <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
@@ -84,9 +93,6 @@
                         </div>
 
                         <div class='row no-gutters'>
-                            <div class="col-12" data-bind="text: 'Treasures found: ' + App.game.underground.mine?.itemsFound + ' / ' + App.game.underground.mine?.itemsBuried + ', Partially discovered: ' + App.game.underground.mine?.itemsPartiallyFound">
-                            </div>
-
                             <div class="col-12 row no-gutters">
                                 <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
                                 <!-- ko let: { tool: App.game.undergroundTools.getTool($data) } -->
