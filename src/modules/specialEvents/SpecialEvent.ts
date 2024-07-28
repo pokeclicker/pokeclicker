@@ -88,7 +88,7 @@ export default class SpecialEvent {
             return;
         }
         const daysLeft = Math.floor(this.timeTillStart() / 1000 / 60 / 60 / 24);
-        const price = 500 * daysLeft;
+        const price = 500 * (daysLeft + 1);
         if (price > App.game.wallet.currencies[Currency.questPoint]()) {
             Notifier.notify({
                 title: 'Cannot afford',
@@ -99,7 +99,7 @@ export default class SpecialEvent {
         }
         Notifier.confirm({
             title: 'Do you want to start this event early?',
-            message: `Starting '${this.title}' early will cost you ${price.toLocaleString('en-US')} QP for 24 hours of event time.`,
+            message: `Starting '${this.title}' early will cost you ${price.toLocaleString('en-US')} Quest Points for 24 hours of event time.`,
         }).then((result: boolean) => {
             if (result) {
                 App.game.wallet.loseAmount({ amount: price, currency: Currency.questPoint });

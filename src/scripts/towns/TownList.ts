@@ -1670,7 +1670,7 @@ const IlexForestPichuFan = new NPC('Pichu-Fan', [
 const EcruteakBill = new NPC('Bill', [
     'I traveled here all the way from Goldenrod to buy a Soothe Bell for my Eevee.',
     'When I use a Soothe Bell on Eevee it can evolve into Espeon or Umbreon. It depends on the time. Espeon during the day, Umbreon at night.',
-    'I only brought enough QP for one Soothe Bell. It\'s so hard to choose...',
+    'I only brought enough Quest Points for one Soothe Bell. It\'s so hard to choose...',
 ], {image: 'assets/images/npcs/Bill.png'});
 
 
