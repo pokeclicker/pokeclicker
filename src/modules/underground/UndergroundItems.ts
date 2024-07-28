@@ -151,4 +151,4 @@ UndergroundItems.addItem(new UndergroundMegaStoneItem(MegaStoneType.Mawilite, 50
 UndergroundItems.addItem(new UndergroundMegaStoneItem(MegaStoneType.Sablenite, 502, 'Sablenite', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Sableye', 0));
 
 // Other
-UndergroundItems.addItem(new UndergroundItem(600, 'Pikachu_palaeontologist', [[0, 0, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1], [0, 0, 1, 1, 1, 0], [0, 0, 0, 1, 1, 0], [0, 0, 0, 1, 1, 1]], 1, UndergroundItemValueType.Special));
+UndergroundItems.addItem(new UndergroundItem(600, 'Palaeontologist_token', [[0, 0, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1], [0, 0, 1, 1, 1, 0], [0, 0, 0, 1, 1, 0], [0, 0, 0, 1, 1, 1]], 1, UndergroundItemValueType.Special));
