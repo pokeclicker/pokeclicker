@@ -5,7 +5,13 @@ import MultiRequirement from '../../requirements/MultiRequirement';
 import OneFromManyRequirement from '../../requirements/OneFromManyRequirement';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
-import { EnergyRestoreSize, SECOND } from '../../GameConstants';
+import { AUTO_SELL_BASE, AUTO_SELL_INCREASE_PER_LEVEL, AUTO_SELL_MAXIMUM, EnergyRestoreSize,
+    FAVORITE_MINE_CHANCE_BASE,
+    FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL,
+    FAVORITE_MINE_CHANCE_MAXIMUM,
+    MAX_HIRES, SECOND, SMART_TOOL_CHANCE_BASE, SMART_TOOL_CHANCE_INCREASE_PER_LEVEL, SMART_TOOL_CHANCE_MAXIMUM,
+    UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
+    UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, WORKCYCLE_TIMEOUT_BASE, WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL, WORKCYCLE_TIMEOUT_MINIMUM } from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from '../tools/UndergroundToolType';
 import { Coordinate } from '../mine/Mine';
@@ -13,23 +19,6 @@ import UndergroundItem from '../UndergroundItem';
 import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
 import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
-import {
-    AUTO_SELL_BASE,
-    AUTO_SELL_INCREASE_PER_LEVEL,
-    AUTO_SELL_MAXIMUM,
-    FAVORITE_MINE_CHANCE_BASE,
-    FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL,
-    FAVORITE_MINE_CHANCE_MAXIMUM,
-    MAX_HIRES,
-    SMART_TOOL_CHANCE_BASE,
-    SMART_TOOL_CHANCE_INCREASE_PER_LEVEL,
-    SMART_TOOL_CHANCE_MAXIMUM,
-    UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
-    UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
-    WORKCYCLE_TIMEOUT_BASE,
-    WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL,
-    WORKCYCLE_TIMEOUT_MINIMUM,
-} from '../UndergroundConfig';
 
 export class UndergroundHelper {
     private _experience: Observable<number> = ko.observable<number>(0);

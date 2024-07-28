@@ -8,15 +8,8 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import { Mine } from './mine/Mine';
 import { MineType } from './mine/MineConfig';
 import { UndergroundHelper, UndergroundHelpers } from './helper/UndergroundHelper';
-import {
-    BASE_EXTRA_LAYER_DEPTH,
-    BASE_MAXIMUM_ITEMS,
-    BASE_MINE_HEIGHT,
-    BASE_MINE_WIDTH,
-    BASE_MINIMUM_ITEMS,
-    BASE_MINIMUM_LAYER_DEPTH,
-} from './UndergroundConfig';
-
+import { BASE_EXTRA_LAYER_DEPTH,
+    BASE_MAXIMUM_ITEMS, BASE_MINE_HEIGHT, BASE_MINE_WIDTH, BASE_MINIMUM_ITEMS, BASE_MINIMUM_LAYER_DEPTH } from '../GameConstants';
 
 export class Underground implements Feature {
     name = 'Underground';

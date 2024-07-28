@@ -260,7 +260,49 @@
                     </div>
                 </div>
 
-                <div id="help" class="tab-pane fade pl-5 pr-5">
+                <div id="help" class="tab-pane fade p-2 text-left">
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Mines</span>
+                        </div>
+
+                        <div class="card-body">
+                            <p>
+                                There are 6 mines you can choose from:
+                            </p>
+                            <ul>
+                                <li>Random: Here you can find all items</li>
+                                <li>Diamond mine: Only items that are sellable for diamonds can be found here</li>
+                                <li>Gem Plate mine: Only gem plates can be found here</li>
+                                <li>Shard mine: Only shards can be found here</li>
+                                <li>Fossil mine: Only Fossils and Fossil pieces can be found here</li>
+                                <li>Evolution items mine: Only evolution items can be found here</li>
+                            </ul>
+                            <p>
+                                When you (not your helper) searches for a new mine, there is a <knockout data-bind="text: GameConstants.SPECIAL_MINE_CHANCE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 1 })"></knockout> chance of finding a special mine.
+                                You will only find 1 item in here. Treasures include the megastones when eligible to find them.
+                                And even a special pokemon.
+                            </p>
+                            <p>
+                                Searching for a new mine while you have not found all items yet, or searching for a specific mine will take some time.
+                                The formula is as follows:
+                            </p>
+                            <p>
+                                <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_BASE"></knockout> seconds - (<knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL"></knockout> seconds x LEVEL) = <knockout data-bind="text: UndergroundController.calculateDiscoverMineTimeout().toLocaleString('en-US', { maximumFractionDigits: 1 })"></knockout> seconds.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Tools</span>
+                        </div>
+
+                        <div class="card-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, obcaecati.
+                        </div>
+                    </div>
+
                     <h4><u>Dig</u></h4>
                     <p>In the Underground you can mine for hidden treasures.</p>
 

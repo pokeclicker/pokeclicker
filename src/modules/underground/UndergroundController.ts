@@ -10,17 +10,10 @@ import { PureComputed } from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import { humanifyString, PLATE_VALUE } from '../GameConstants';
-import {
-    DISCOVER_MINE_TIMEOUT_BASE,
-    DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL,
-    GLOBAL_COOLDOWN_BASE,
-    GLOBAL_COOLDOWN_MINIMUM,
-    GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL,
-    SPECIAL_MINE_CHANCE,
-    SURVEY_RANGE_BASE,
-    SURVEY_RANGE_REDUCTION_LEVELS, TOOL_COOLDOWN_MINIMUM,
-} from './UndergroundConfig';
+import { DISCOVER_MINE_TIMEOUT_BASE,
+    DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL, GLOBAL_COOLDOWN_BASE,
+    GLOBAL_COOLDOWN_MINIMUM, GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL, humanifyString, PLATE_VALUE, SPECIAL_MINE_CHANCE,
+    SURVEY_RANGE_BASE, SURVEY_RANGE_REDUCTION_LEVELS, TOOL_COOLDOWN_MINIMUM } from '../GameConstants';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
