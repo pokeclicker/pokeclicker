@@ -285,17 +285,7 @@ class Breeding implements Feature {
         }
         // If they have a free eggslot, create an egg for this item now
         if (this.hasFreeEggSlot()) {
-            let egg;
-            if (type === EggType.EggItem) {
-                egg = this.createItemEgg(item.type);
-            } else if (type === EggType.Fossil) {
-                egg = this.createFossilEgg(itemName);
-            }
-            const success = this.gainEgg(egg);
-            if (success) {
-                player.loseItem(itemName, 1);
-            }
-            return success;
+            return this.gainItemEgg(itemName, type);
         }
         const message = 'You don\'t have any free egg slots';
         /*
@@ -371,6 +361,20 @@ class Breeding implements Feature {
         return success;
     }
 
+    private gainItemEgg(itemName: ItemNameType, type: EggType.EggItem | EggType.Fossil) {
+        let egg;
+        if (type === EggType.EggItem) {
+            egg = this.createItemEgg(GameConstants.EggItemType[itemName]);
+        } else if (type === EggType.Fossil) {
+            egg = this.createFossilEgg(GameConstants.FossilType[itemName]);
+        }
+        const success = this.gainEgg(egg);
+        if (success) {
+            player.loseItem(itemName, 1);
+        }
+        return success;
+    }
+
     public hatchPokemonEgg(index: number, nextEgg = true): void {
         const egg: Egg = this._eggList[index]();
         const hatched = egg.hatch();
@@ -415,7 +419,7 @@ class Breeding implements Feature {
         return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonId);
     }
 
-    public createItemEgg(type: GameConstants.EggItemType): Egg {
+    private createItemEgg(type: GameConstants.EggItemType): Egg {
         const hatchIndex = type === GameConstants.EggItemType.Mystery_egg ? Rand.fromEnum(GameConstants.EggItemType) : type;
         const hatchList = this.hatchList[hatchIndex];
         const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter(list => list.length);
@@ -430,10 +434,11 @@ class Breeding implements Feature {
         return this.createEgg(pokemonId, EggType.EggItem);
     }
 
-    public createFossilEgg(fossil: ItemNameType): Egg {
-        const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossil];
+    public createFossilEgg(fossil: GameConstants.FossilType): Egg {
+        const fossilName = GameConstants.FossilType[fossil];
+        const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossilName];
         if (!pokemonName) {
-            throw new Error(`Cannot create fossil egg for invalid fossil '${fossil}`);
+            throw new Error(`Cannot create fossil egg for invalid fossil '${fossilName}`);
         }
         const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
         let fossilEgg: Egg;
