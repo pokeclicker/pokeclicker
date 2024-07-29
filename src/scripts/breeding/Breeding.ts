@@ -275,9 +275,11 @@ class Breeding implements Feature {
 
     public addItemToHatchery(itemName: ItemNameType, type: EggType.EggItem | EggType.Fossil) {
         const item = ItemList[itemName];
-        // Only allow hatchable items
-        if (!(type === EggType.EggItem && item instanceof EggItem ||
+        if (player.itemList[itemName]() <= 0) {
+            return false;
+        } else if (!(type === EggType.EggItem && item instanceof EggItem ||
             type === EggType.Fossil && item instanceof FossilItem)) {
+            // Only allow hatchable items
             console.error(`Item '${itemName}' cannot be added to the hatchery!`);
             return false;
         }
@@ -289,7 +291,11 @@ class Breeding implements Feature {
             } else if (type === EggType.Fossil) {
                 egg = this.createFossilEgg(itemName);
             }
-            return this.gainEgg(egg);
+            const success = this.gainEgg(egg);
+            if (success) {
+                player.loseItem(itemName, 1);
+            }
+            return success;
         }
         const message = 'You don\'t have any free egg slots';
         /*

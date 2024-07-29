@@ -14,16 +14,7 @@ export default class FossilItem extends TreasureItem implements HatchableItem {
     }
 
     addToHatchery(): boolean {
-        if (player.itemList[this.name]() <= 0) {
-            return false;
-        }
-        
-        const success = App.game.breeding.addItemToHatchery(this.name, EggType.Fossil);
-
-        if (success) {
-            player.loseItem(this.name, 1);
-        }
-        return success;
+        return App.game.breeding.addItemToHatchery(this.name, EggType.Fossil);
     }
 
 }

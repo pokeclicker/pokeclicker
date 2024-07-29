@@ -17,16 +17,7 @@ export default class EggItem extends CaughtIndicatingItem implements HatchableIt
     }
 
     addToHatchery(): boolean {
-        if (player.itemList[this.name]() <= 0) {
-            return false;
-        }
-        
-        const success = App.game.breeding.addItemToHatchery(this.name, EggType.EggItem);
-
-        if (success) {
-            player.loseItem(this.name, 1);
-        }
-        return success;
+        return App.game.breeding.addItemToHatchery(this.name, EggType.EggItem);
     }
 
     getCaughtStatus(): CaughtStatus {
