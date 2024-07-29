@@ -49,7 +49,28 @@
                                                 src: $parent.item.itemType.image
                                             }">
                                         </td>
-                                        <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                        <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }'>
+                                            <span data-bind='text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></span>
+                                            <span style="float: right; margin-right: 5px">
+                                                <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
+                                                    <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}"></span>
+                                                </knockout>
+                                                <knockout data-bind="if: ($parent.item.itemType instanceof PokemonItem)">
+                                                    <span style="position: relative; top: -1px;"
+                                                          data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                            'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px',
+                                                            'evs': App.game.party.getPokemonByName($parent.item.itemType.type)?.evs() }}">
+                                                    </span>
+                                                </knockout>
+                                                <knockout data-bind="if: ($parent.item.itemType instanceof EvolutionStone)">
+                                                    <span style="position: relative; top: -1px;"
+                                                          data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                            'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px',
+                                                            'evsProgress': $parent.item.itemType.getPokerusProgress() }}">
+                                                    </span>
+                                               </knockout>
+                                            </span>
+                                        </td>
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length, hidden: ShopHandler.shopObservable().hidePlayerInventory }, text: player.itemList[$parent.item.itemType.name]().toLocaleString('en-US')"></td>
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
                                             <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
