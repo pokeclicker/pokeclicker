@@ -127,15 +127,17 @@ class BreedingController {
     }
 
     public static getEggImage(egg: Egg): string {
-        let eggType = EggType[egg.type].toLowerCase();
-        if (eggType == 'pokemon') {
+        const eggType = egg.type;
+        let eggImage;
+        if (eggType === EggType.Pokemon || eggType === EggType.EggItem) {
+            // In reality this is done through eggSVGTemplate.html instead
             const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(egg.pokemon);
-            eggType = String(PokemonType[dataPokemon.type1]).toLowerCase();
-        } else if (eggType == 'fossil') {
-            eggType = GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(egg.pokemon).name];
-            eggType = GameConstants.camelCaseToString(GameConstants.humanifyString(eggType));
+            eggImage = PokemonType[dataPokemon.type1].toLowerCase();
+        } else if (eggType === EggType.Fossil) {
+            const fossilName = GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(egg.pokemon).name];
+            eggImage = GameConstants.camelCaseToString(GameConstants.humanifyString(fossilName));
         }
-        return `assets/images/breeding/${eggType}.png`;
+        return `assets/images/breeding/${eggImage}.png`;
     }
 
     public static getEggCssClass(egg: Egg): string {
