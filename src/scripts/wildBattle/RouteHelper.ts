@@ -111,6 +111,11 @@ class RouteHelper {
         return this.minPokerus(possiblePokemon) > 0;
     }
 
+    public static getPokerusProgress(possiblePokemon: PokemonNameType[]): string {
+        const resistants = possiblePokemon.filter((p) => (App.game.party.getPokemonByName(p)?.pokerus == GameConstants.Pokerus.Resistant));
+        return `${resistants.length} / ${possiblePokemon.length}`;
+    }
+
     public static isAchievementsComplete(route: number, region: GameConstants.Region) {
         return AchievementHandler.achievementList.every(achievement => {
             return !(achievement.property instanceof RouteKillRequirement && achievement.property.region === region && achievement.property.route === route && !achievement.isCompleted());

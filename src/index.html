@@ -241,10 +241,20 @@
                                         </knockout>
 
                                         <!--Pokérus image-->
-                                        <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route, player.region, true))">
-                                            <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route, player.region, true))] + '.png',
-                                                title: RouteHelper.routePokerusEVs(player.route, player.region)}"
-                                          src=""/>
+                                        <knockout data-bind="using: RouteHelper.getAvailablePokemonList(player.route, player.region, true)">
+                                            <knockout data-bind="if: RouteHelper.minPokerusCheck($data)">
+                                                <!-- ko let: {minPokerus: RouteHelper.minPokerus($data), usePokerusProgress: Settings.getSetting('usePokerusProgress').observableValue()} -->
+                                                    <!-- ko ifnot: usePokerusProgress && minPokerus > GameConstants.Pokerus.Infected -->
+                                                    <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[minPokerus] + '.png',
+                                                        title: RouteHelper.routePokerusEVs(player.route, player.region)}" src=""/>
+                                                    <!-- /ko -->
+                                                    <!-- ko if: usePokerusProgress && minPokerus > GameConstants.Pokerus.Infected -->
+                                                    <div data-bind="text: RouteHelper.getPokerusProgress($data),
+                                                        class: 'pokerusProgress' + GameConstants.Pokerus[minPokerus],
+                                                        attr: {title: RouteHelper.routePokerusEVs(player.route, player.region)}"></div>
+                                                    <!-- /ko -->
+                                                <!-- /ko -->
+                                            </knockout>
                                         </knockout>
                                       </span>
                                     </td>
@@ -296,7 +306,7 @@
                             <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
                             <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
                         </div>
-                        
+
                         <div style="position: absolute; right: 4px">
                             <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
                             <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
