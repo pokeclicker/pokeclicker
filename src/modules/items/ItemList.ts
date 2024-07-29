@@ -30,6 +30,7 @@ import QuestItem from './QuestItem';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
+import FossilItem from './FossilItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
 // eslint-disable-next-line import/prefer-default-export
@@ -176,7 +177,6 @@ ItemList.Grass_egg = new EggItem(EggItemType.Grass_egg, 1000, undefined, 'Grass 
 ItemList.Fighting_egg = new EggItem(EggItemType.Fighting_egg, 1000, undefined, 'Fighting Egg');
 ItemList.Electric_egg = new EggItem(EggItemType.Electric_egg, 1000, undefined, 'Electric Egg');
 ItemList.Dragon_egg = new EggItem(EggItemType.Dragon_egg, 1000, undefined, 'Dragon Egg');
-ItemList.Pokemon_egg = new EggItem(EggItemType.Pokemon_egg, 1000, undefined, 'Pokémon Egg');
 ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mystery Egg');
 
 // Quest Items
@@ -296,17 +296,17 @@ ItemList.Zap_plate = new TreasureItem('Zap_plate', UndergroundItemValueType.Gem,
 ItemList.Pixie_plate = new TreasureItem('Pixie_plate', UndergroundItemValueType.Gem, 'Pixie Plate');
 ItemList.Blank_plate = new TreasureItem('Blank_plate', UndergroundItemValueType.Gem, 'Blank Plate');
 // Fossils
-ItemList.Helix_fossil = new TreasureItem('Helix_fossil', UndergroundItemValueType.Fossil, 'Helix Fossil');
-ItemList.Dome_fossil = new TreasureItem('Dome_fossil', UndergroundItemValueType.Fossil, 'Dome Fossil');
-ItemList.Old_amber = new TreasureItem('Old_amber', UndergroundItemValueType.Fossil, 'Old Amber');
-ItemList.Root_fossil = new TreasureItem('Root_fossil', UndergroundItemValueType.Fossil, 'Root Fossil');
-ItemList.Claw_fossil = new TreasureItem('Claw_fossil', UndergroundItemValueType.Fossil, 'Claw Fossil');
-ItemList.Armor_fossil = new TreasureItem('Armor_fossil', UndergroundItemValueType.Fossil, 'Armor Fossil');
-ItemList.Skull_fossil = new TreasureItem('Skull_fossil', UndergroundItemValueType.Fossil, 'Skull Fossil');
-ItemList.Cover_fossil = new TreasureItem('Cover_fossil', UndergroundItemValueType.Fossil, 'Cover Fossil');
-ItemList.Plume_fossil = new TreasureItem('Plume_fossil', UndergroundItemValueType.Fossil, 'Plume Fossil');
-ItemList.Jaw_fossil = new TreasureItem('Jaw_fossil', UndergroundItemValueType.Fossil, 'Jaw Fossil');
-ItemList.Sail_fossil = new TreasureItem('Sail_fossil', UndergroundItemValueType.Fossil, 'Sail Fossil');
+ItemList.Helix_fossil = new FossilItem('Helix_fossil', 'Helix Fossil');
+ItemList.Dome_fossil = new FossilItem('Dome_fossil', 'Dome Fossil');
+ItemList.Old_amber = new FossilItem('Old_amber', 'Old Amber');
+ItemList.Root_fossil = new FossilItem('Root_fossil', 'Root Fossil');
+ItemList.Claw_fossil = new FossilItem('Claw_fossil', 'Claw Fossil');
+ItemList.Armor_fossil = new FossilItem('Armor_fossil', 'Armor Fossil');
+ItemList.Skull_fossil = new FossilItem('Skull_fossil', 'Skull Fossil');
+ItemList.Cover_fossil = new FossilItem('Cover_fossil', 'Cover Fossil');
+ItemList.Plume_fossil = new FossilItem('Plume_fossil', 'Plume Fossil');
+ItemList.Jaw_fossil = new FossilItem('Jaw_fossil', 'Jaw Fossil');
+ItemList.Sail_fossil = new FossilItem('Sail_fossil', 'Sail Fossil');
 ItemList.Fossilized_bird = new TreasureItem('Fossilized_bird', UndergroundItemValueType.FossilPiece, 'Fossilized Bird');
 ItemList.Fossilized_fish = new TreasureItem('Fossilized_fish', UndergroundItemValueType.FossilPiece, 'Fossilized Fish');
 ItemList.Fossilized_drake = new TreasureItem('Fossilized_drake', UndergroundItemValueType.FossilPiece, 'Fossilized Drake');
