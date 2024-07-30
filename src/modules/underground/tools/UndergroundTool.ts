@@ -4,6 +4,7 @@ import UndergroundToolType from './UndergroundToolType';
 import { Coordinate } from '../mine/Mine';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
+import OakItemType from '../../enums/OakItemType';
 
 export default class UndergroundTool {
     private _cooldownTime = ko.observable(0);
@@ -35,7 +36,8 @@ export default class UndergroundTool {
         if (this.cooldown > 0) return;
         if (this.bonusCharges >= this.maximumBonusCharges) return;
 
-        GameHelper.incrementObservable(this._counter, deltaTime);
+        const cellBatteryBonus = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
+        GameHelper.incrementObservable(this._counter, deltaTime * cellBatteryBonus);
 
         if (this._counter() >= this.baseCooldown) {
             GameHelper.incrementObservable(this._bonusCharges);
