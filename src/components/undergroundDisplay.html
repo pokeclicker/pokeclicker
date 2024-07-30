@@ -50,8 +50,8 @@
                         </div>
                     </div>
 
-                    <!-- ko if: tool.maximumStoredUsages > 0 -->
-                    <div class="small"><knockout data-bind="text: tool.storedUses"></knockout> / <knockout data-bind="text: tool.maximumStoredUsages"></knockout></div>
+                    <!-- ko if: tool.maximumBonusCharges > 0 -->
+                    <div class="small"><knockout data-bind="text: tool.bonusCharges"></knockout> / <knockout data-bind="text: tool.maximumBonusCharges"></knockout></div>
                     <div class="small"><knockout data-bind="text: (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                     <div class="progress" style='height: 5px; min-height: 5px;'>
                         <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"

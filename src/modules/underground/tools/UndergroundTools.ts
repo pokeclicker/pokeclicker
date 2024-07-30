@@ -148,7 +148,7 @@ export default class UndergroundTools implements Feature {
             }
 
             // Use a stored use, or trigger the cooldown
-            if (tool.storedUses > 0) tool.useStoredUse();
+            if (tool.bonusCharges > 0) tool.useBonusCharge();
             else tool.cooldown = UndergroundController.calculateToolCooldown(tool);
 
             // Put all other tools on cooldown

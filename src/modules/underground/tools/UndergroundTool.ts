@@ -8,7 +8,7 @@ import NotificationConstants from '../../notifications/NotificationConstants';
 export default class UndergroundTool {
     private _cooldownTime = ko.observable(0);
     private _nextAllowedUse = ko.observable(Date.now());
-    private _storedUses: Observable<number> = ko.observable(0);
+    private _bonusCharges: Observable<number> = ko.observable(0);
 
     public cooldownForDisplay = ko.observable(0);
 
@@ -19,7 +19,7 @@ export default class UndergroundTool {
         public displayName: string,
         public baseCooldown: number,
         public cooldownReductionPerLevel: number,
-        public maximumStoredUsages: number,
+        public maximumBonusCharges: number,
         public experiencePerUse: number,
         public action: (x: number, y: number) => Array<Coordinate> | null,
     ) {
@@ -27,24 +27,24 @@ export default class UndergroundTool {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public tick(deltaTime: number) {
-        this.handleStoredUsesTick(deltaTime);
+        this.handleBonusChargesTick(deltaTime);
         this.cooldownForDisplay(this.cooldown < 0.1 ? 0 : this.cooldown);
     }
 
-    private handleStoredUsesTick(deltaTime: number) {
+    private handleBonusChargesTick(deltaTime: number) {
         if (this.cooldown > 0) return;
-        if (this.storedUses >= this.maximumStoredUsages) return;
+        if (this.bonusCharges >= this.maximumBonusCharges) return;
 
         GameHelper.incrementObservable(this._counter, deltaTime);
 
         if (this._counter() >= this.baseCooldown) {
-            GameHelper.incrementObservable(this._storedUses);
+            GameHelper.incrementObservable(this._bonusCharges);
             this._counter(0);
 
-            if (this.storedUses === this.maximumStoredUsages) {
+            if (this.bonusCharges === this.maximumBonusCharges) {
                 Notifier.notify({
                     title: 'Underground tools',
-                    message: `${this.displayName} reached maximum free use storage: ${this.storedUses}!`,
+                    message: `${this.displayName} reached maximum bonus charges: ${this.bonusCharges}!`,
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                     sound: NotificationConstants.NotificationSound.General.underground_energy_full,
@@ -53,7 +53,7 @@ export default class UndergroundTool {
             } else {
                 Notifier.notify({
                     title: 'Underground tools',
-                    message: `${this.displayName} has gained an extra free use: ${this.storedUses}/${this.maximumStoredUsages}!`,
+                    message: `${this.displayName} has gained an extra bonus charge: ${this.bonusCharges}/${this.maximumBonusCharges}!`,
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                     setting: NotificationConstants.NotificationSetting.Underground.underground_energy_restore,
@@ -66,12 +66,12 @@ export default class UndergroundTool {
         return this.cooldown <= 0;
     }
 
-    get storedUses(): number {
-        return Math.floor(this._storedUses());
+    get bonusCharges(): number {
+        return this._bonusCharges();
     }
 
-    public useStoredUse(): void {
-        GameHelper.incrementObservable(this._storedUses, -1);
+    public useBonusCharge(): void {
+        GameHelper.incrementObservable(this._bonusCharges, -1);
     }
 
     get cooldown(): number {
@@ -97,7 +97,7 @@ export default class UndergroundTool {
     public fromJSON(save) {
         this.cooldown = save.cooldown || 0;
         this._cooldownTime(save.cooldownTime || 0);
-        this._storedUses(save?.storedUses || 0);
+        this._bonusCharges(save?.bonusCharges || 0);
         this._counter(save?.counter || 0);
     }
 
@@ -105,7 +105,7 @@ export default class UndergroundTool {
         return {
             cooldown: this.cooldown,
             cooldownTime: this.cooldownTime,
-            storedUses: this._storedUses(),
+            bonusCharges: this._bonusCharges(),
             counter: this._counter(),
         };
     }

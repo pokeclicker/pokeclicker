@@ -127,8 +127,8 @@
                                         </div>
 
                                         <div class="text-center text-light bg-dark p-1"><h6 class="m-0 small">Bonus Charge</h6></div>
-                                        <!-- ko if: tool.maximumStoredUsages > 0 -->
-                                        <div><knockout data-bind="text: tool.storedUses"></knockout> / <knockout data-bind="text: tool.maximumStoredUsages"></knockout></div>
+                                        <!-- ko if: tool.maximumBonusCharges > 0 -->
+                                        <div><knockout data-bind="text: tool.bonusCharges"></knockout> / <knockout data-bind="text: tool.maximumBonusCharges"></knockout></div>
                                         <div class="small"><knockout data-bind="text: (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                         <div class="progress" style='height: 10px; min-height: 10px;'>
                                             <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
@@ -137,7 +137,7 @@
                                             </div>
                                         </div>
                                         <!-- /ko -->
-                                        <!-- ko ifnot: tool.maximumStoredUsages > 0 -->
+                                        <!-- ko ifnot: tool.maximumBonusCharges > 0 -->
                                         <div class="d-flex justify-content-center align-items-center" style="flex: 1;">N/A</div>
                                         <!-- /ko -->
                                     </div>
