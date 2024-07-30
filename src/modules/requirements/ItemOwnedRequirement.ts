@@ -8,12 +8,12 @@ export default class ItemOwnedRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(player.itemList[this.itemName](), this.requiredValue);
+        return player.itemList[this.itemName]();
     }
 
     public hint(): string {
-        const hintText = this.option === AchievementOption.equal ? this.requiredValue :
+        const amountHint = this.option === AchievementOption.equal ? this.requiredValue :
             (this.option === AchievementOption.more ? `${this.requiredValue} or more` : `less than ${this.requiredValue}`);
-        return `You must own ${hintText} of ${ItemList[this.itemName].displayName}.`;
+        return `You must own ${amountHint} of ${ItemList[this.itemName].displayName}.`;
     }
 }

@@ -201,6 +201,7 @@ import SafariRocksRequirement from './requirements/SafariRocksRequirement';
 import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemOwnedRequirement from './requirements/ItemOwnedRequirement';
+import UniqueItemOwnedRequirement from './requirements/UniqueItemOwnedRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
@@ -418,6 +419,7 @@ Object.assign(<any>window, {
     SafariItemsRequirement,
     SafariCatchRequirement,
     ItemOwnedRequirement,
+    UniqueItemOwnedRequirement,
     ChristmasPresent,
     DamageCalculator,
     GameLoadState,
