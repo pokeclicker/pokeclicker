@@ -52,8 +52,8 @@
 
                     <!-- ko if: tool.maximumBonusCharges > 0 -->
                     <div class="small"><knockout data-bind="text: tool.bonusCharges"></knockout> / <knockout data-bind="text: tool.maximumBonusCharges"></knockout></div>
-                    <div class="small"><knockout data-bind="text: (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                    <div class="progress" style='height: 5px; min-height: 5px;'>
+                    <div class="small" data-bind="style: { opacity: tool.bonusCharges >= tool.maximumBonusCharges ? 0.3 : 1 }"><knockout data-bind="text: (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                    <div class="progress" style='height: 5px; min-height: 5px;' data-bind="style: { opacity: tool.bonusCharges >= tool.maximumBonusCharges ? 0.3 : 1 }">
                         <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
                              data-bind="style: { 'width': (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
                              aria-valuemin="0" aria-valuemax="100">
