@@ -499,7 +499,7 @@ export const LuxuryBallCurrencyRate: Record<Currency, number> = {
     [Currency.money]: 300000,
     [Currency.questPoint]: 900,
     [Currency.dungeonToken]: 15000,
-    [Currency.diamond]: 15,
+    [Currency.diamond]: 1500,
     [Currency.farmPoint]: 900,
     [Currency.battlePoint]: 150,
     [Currency.contestToken]: 900,
