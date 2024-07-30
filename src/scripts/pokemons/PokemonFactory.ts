@@ -275,7 +275,6 @@ class PokemonFactory {
         }
 
         if (!(item.requirement?.isCompleted() ?? true)) {
-            console.log(item.requirement ? 'Locked' : 'NoReq');
             return null;
         }
 
