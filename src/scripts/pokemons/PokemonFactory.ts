@@ -274,6 +274,11 @@ class PokemonFactory {
             return null;
         }
 
+        if (!(item.requirement?.isCompleted() ?? true)) {
+            console.log(item.requirement ? 'Locked' : 'NoReq');
+            return null;
+        }
+
         let chance = GameConstants.HELD_ITEM_CHANCE;
 
         // Apply drop chance by item type
