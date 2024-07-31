@@ -14,6 +14,6 @@ export default class ItemOwnedRequirement extends Requirement {
     public hint(): string {
         const amountHint = this.option === AchievementOption.equal ? this.requiredValue :
             (this.option === AchievementOption.more ? `${this.requiredValue} or more` : `less than ${this.requiredValue}`);
-        return `You must own ${amountHint} of ${ItemList[this.itemName].displayName}.`;
+        return `You must own ${amountHint} ${ItemList[this.itemName].displayName}.`;
     }
 }
