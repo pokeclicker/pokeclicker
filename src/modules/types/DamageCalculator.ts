@@ -9,6 +9,7 @@ export default class DamageCalculator {
     public static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     public static type2 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     public static region = ko.observable(Region.none);
+    public static subregion = ko.observable();
     public static weather = ko.observable(WeatherType.Clear);
     public static includeBreeding = ko.observable(false);
     public static baseAttackOnly = ko.observable(false);
@@ -31,6 +32,8 @@ export default class DamageCalculator {
             DamageCalculator.baseAttackOnly(),
             DamageCalculator.weather(),
             DamageCalculator.ignoreLevel(),
+            true, 
+            DamageCalculator.subregion(),
         );
     }
 
@@ -45,7 +48,7 @@ export default class DamageCalculator {
             }
 
             const attack = App.game.party.calculateOnePokemonAttack(pokemon, DamageCalculator.type1(), DamageCalculator.type2(), DamageCalculator.region(), ignoreRegionMultiplier,
-                DamageCalculator.includeBreeding(), DamageCalculator.baseAttackOnly(), DamageCalculator.weather(), DamageCalculator.ignoreLevel());
+                DamageCalculator.includeBreeding(), DamageCalculator.baseAttackOnly(), DamageCalculator.weather(), DamageCalculator.ignoreLevel(), true, DamageCalculator.subregion());
 
             typedamage[dataPokemon.type1] += attack / 2;
             const otherType = dataPokemon.type2 !== PokemonType.None ? dataPokemon.type2 : dataPokemon.type1;
@@ -74,6 +77,8 @@ export default class DamageCalculator {
                 DamageCalculator.baseAttackOnly(),
                 DamageCalculator.weather(),
                 DamageCalculator.ignoreLevel(),
+            	true, 
+                DamageCalculator.subregion(),
             ),
             displayName: pokemon.displayName,
         };
