@@ -130,7 +130,7 @@ export class UndergroundController {
         let success = true;
         switch (item.valueType) {
             case UndergroundItemValueType.Diamond:
-                App.game.wallet.gainDiamonds(Math.ceil(item.value * amount * percentage));
+                App.game.wallet.gainDiamonds(Math.floor(item.value * amount * percentage));
                 break;
             case UndergroundItemValueType.Fossil:
                 if (!App.game.breeding.hasFreeEggSlot()) {
@@ -140,7 +140,7 @@ export class UndergroundController {
                 break;
             case UndergroundItemValueType.Gem:
                 const type = item.type;
-                App.game.gems.gainGems(Math.ceil(PLATE_VALUE * amount * percentage), type);
+                App.game.gems.gainGems(Math.floor(PLATE_VALUE * amount * percentage), type);
                 break;
             // Nothing else can be sold
             default:
