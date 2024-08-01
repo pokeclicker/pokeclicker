@@ -90,8 +90,7 @@ export class UndergroundHelper {
         const coordinatesMined: Array<Coordinate> | null = tool.action(x, y);
 
         if (coordinatesMined !== null) {
-            UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
-            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
+            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse, true);
 
             const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
 
@@ -105,8 +104,7 @@ export class UndergroundHelper {
                         UndergroundController.gainMineItem(item.id, amount);
                     }
 
-                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
-                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
 
                     UndergroundController.notifyItemFound(item, amount, this);
                 }
@@ -114,8 +112,7 @@ export class UndergroundHelper {
         }
 
         if (App.game.underground.mine.attemptCompleteLayer()) {
-            UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
-            UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
+            UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
 
             UndergroundController.notifyMineCompleted(this);
         }

@@ -11,10 +11,19 @@ import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import {
-    DISCOVER_MINE_TIMEOUT_BASE, DISCOVER_MINE_TIMEOUT_LEVEL_START,
-    DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL, GLOBAL_COOLDOWN_BASE,
-    GLOBAL_COOLDOWN_MINIMUM, GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL, humanifyString, PLATE_VALUE, SPECIAL_MINE_CHANCE,
-    SURVEY_RANGE_BASE, SURVEY_RANGE_REDUCTION_LEVELS, TOOL_COOLDOWN_MINIMUM
+    DISCOVER_MINE_TIMEOUT_BASE,
+    DISCOVER_MINE_TIMEOUT_LEVEL_START,
+    DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL,
+    GLOBAL_COOLDOWN_BASE,
+    GLOBAL_COOLDOWN_MINIMUM,
+    GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL, HELPER_EXPERIENCE_PLAYER_FRACTION,
+    humanifyString,
+    PLATE_VALUE,
+    PLAYER_EXPERIENCE_HELPER_FRACTION,
+    SPECIAL_MINE_CHANCE,
+    SURVEY_RANGE_BASE,
+    SURVEY_RANGE_REDUCTION_LEVELS,
+    TOOL_COOLDOWN_MINIMUM
 } from '../GameConstants';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
@@ -178,16 +187,24 @@ export class UndergroundController {
     }
 
     public static addGlobalUndergroundExp(experience: number) {
-        App.game.underground.addUndergroundExp(experience);
-        App.game.underground.helpers.hired().forEach(value => value.addExp(experience));
+        this.addPlayerUndergroundExp(experience, false);
+        this.addHiredHelperUndergroundExp(experience, false);
     }
 
-    public static addPlayerUndergroundExp(experience: number) {
+    public static addPlayerUndergroundExp(experience: number, share: boolean = false) {
         App.game.underground.addUndergroundExp(experience);
+
+        if (share) {
+            this.addHiredHelperUndergroundExp(+(experience * PLAYER_EXPERIENCE_HELPER_FRACTION).toFixed(1), false);
+        }
     }
 
-    public static addHiredHelperUndergroundExp(experience: number) {
+    public static addHiredHelperUndergroundExp(experience: number, share: boolean = false) {
         App.game.underground.helpers.hired().forEach(value => value.addExp(experience));
+
+        if (share) {
+            this.addPlayerUndergroundExp(+(experience * HELPER_EXPERIENCE_PLAYER_FRACTION).toFixed(1), false);
+        }
     }
 
     public static notifyMineCompleted(helper?: UndergroundHelper) {

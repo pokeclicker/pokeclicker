@@ -1158,6 +1158,8 @@ export const WORKCYCLE_TIMEOUT_BASE = 60;
 export const WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL = 1;
 export const WORKCYCLE_TIMEOUT_MINIMUM = 10;
 
+export const PLAYER_EXPERIENCE_HELPER_FRACTION = 0.25;
+export const HELPER_EXPERIENCE_PLAYER_FRACTION = 0.25;
 
 export enum EnergyRestoreSize {
     SmallRestore,

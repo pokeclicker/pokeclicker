@@ -123,20 +123,17 @@ export default class UndergroundTools implements Feature {
                         const { item, amount } = value;
 
                         UndergroundController.gainMineItem(item.id, amount);
-                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
-                        UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM);
+                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
 
                         UndergroundController.notifyItemFound(item, amount);
                     }
                 });
 
-                UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse);
-                UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse);
+                UndergroundController.addPlayerUndergroundExp(tool.experiencePerUse, true);
 
                 if (itemsFound.length > 0) {
                     if (App.game.underground.mine.attemptCompleteLayer()) {
-                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
-                        UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER);
+                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
 
                         UndergroundController.notifyMineCompleted();
 
