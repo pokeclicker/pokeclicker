@@ -272,7 +272,7 @@
                                 Understanding their unique properties and the discovery times involved is crucial for efficient mining.
                             </p>
 
-                            <h3>Mine Types</h3>
+                            <h4>Mine Types</h4>
                             <ul>
                                 <li>
                                     <strong>Random Mine:</strong> Contains all possible items (except the items from a Special mine)
@@ -294,17 +294,24 @@
                                 </li>
                             </ul>
 
-                            <h3>Special Mine</h3>
+                            <h4>Special Mine</h4>
                             <p>
                                 When you (not your helper) are searching for a mine, there is a 4% chance for the mine to be a Special mine.
                                 This mine only contains 1 item, which can be any of the mega stones (if eligible) or other special items.
                             </p>
 
-                            <h3>Discovery Time Calculation</h3>
+                            <h4>Discovery Time Calculation</h4>
                             <p>When searching for a new specific mine or if you have not found all items in your current mine, the discovery time is calculated as follows:</p>
                             <p>
                                 <code>Discovery Time = <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> - <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> x (LEVEL - <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>)</code>
                             </p>
+
+                            <h4>Amount of Treasure</h4>
+                            <p>The amount of treasure a player can find is random, between the minimum (inclusive) and maximum (inclusive), and increases as their Underground Level increases:</p>
+                            <ul>
+                                <li><strong>Minimum:</strong> Starts at 1, increases by 1 at levels: 3, 9, 15, 21 and 27, up to a maximum of 6.</li>
+                                <li><strong>Maximum:</strong> Starts at 3, increases by 1 at levels: 6, 12, 18, 24 and 30, up to a maximum of 8.</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -314,15 +321,15 @@
                         </div>
 
                         <div class="card-body">
-                            <p>Welcome to the Underground! Here’s a guide on how to make the most of your tools for mining and exploration. Understanding the mechanics of each tool and how they work together is key to your success. Let's dive in!</p>
+                            <p>The Underground offers <knockout data-bind="text: App.game.undergroundTools.tools.length"></knockout> powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
 
-                            <h3>Cooldown systems</h3>
+                            <h4>Cooldown systems</h4>
                             <ul>
                                 <li><strong>Tool-Specific Cooldown:</strong> Each tool has its own cooldown period that must be waited out after use if no bonus charges are available.</li>
                                 <li><strong>Global Cooldown:</strong> Using any tool will trigger a brief cooldown period during which no other tool can be used.</li>
                             </ul>
 
-                            <h3>Bonus Charges</h3>
+                            <h4>Bonus Charges</h4>
                             <ul>
                                 <li>
                                     When you use a tool, it will first check if you have any bonus charges left.
@@ -334,29 +341,23 @@
                                 <li>Bonus charges restore at a rate of 1 charge per X seconds, where X is equal to the tool’s base cooldown.</li>
                             </ul>
 
-                            <h3>Successful Use</h3>
+                            <h4>Successful Use</h4>
                             <p>A tool only counts as used if its action is successful, meaning it accomplishes its intended task (e.g., mining layers or indicating tiles).</p>
 
-                            <h3>Tools Overview</h3>
+                            <h4>Tools Overview</h4>
                             <p>There are <knockout data-bind="text: App.game.undergroundTools.tools.length"></knockout> different tools available, each with unique functions and properties:</p>
-                            <ol>
-                                <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Chisel) } -->
-                                <li data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines 2 layers on the selected spot.' } }">
-                                </li>
-                                <!-- /ko -->
-                                <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Hammer) } -->
-                                <li data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines 1 layer on all 9 tiles in a 3x3 grid.' } }">
-                                </li>
-                                <!-- /ko -->
-                                <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Bomb) } -->
-                                <li data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines a maximum of 2 layers on each of 10 random tiles (both mined and cleared). The number of tiles increases when equipped with the Explosive Charge Oak Item.' } }">
-                                </li>
-                                <!-- /ko -->
-                                <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Survey) } -->
-                                <li data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains an item. The grid shrinks by two tiles on each side every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }">
-                                </li>
-                                <!-- /ko -->
-                            </ol>
+                            <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Chisel) } -->
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines 2 layers on the selected spot.' } }"></div>
+                            <!-- /ko -->
+                            <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Hammer) } -->
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines 1 layer on all 9 tiles in a 3x3 grid.' } }"></div>
+                            <!-- /ko -->
+                            <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Bomb) } -->
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines a maximum of 2 layers on each of 10 random tiles (both mined and cleared). The number of tiles increases when equipped with the Explosive Charge Oak Item.' } }"></div>
+                            <!-- /ko -->
+                            <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Survey) } -->
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains an item. The grid shrinks by two tiles on each side every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }"></div>
+                            <!-- /ko -->
                         </div>
                     </div>
 
@@ -368,7 +369,7 @@
                         <div class="card-body">
                             <p>Helpers are characters you can hire to assist with mining tasks. They perform actions at certain timing intervals and become more efficient as they level up.</p>
 
-                            <h3>Helper Mechanics</h3>
+                            <h4>Helper Mechanics</h4>
                             <ul>
                                 <li><strong>Favorite Mine:</strong> Each helper has a favorite mine they are more likely to find.
                                     <ul>
@@ -391,7 +392,10 @@
                                 </li>
                                 <li><strong>Auto-Sell:</strong> When a helper digs up an item that can be sold, they automatically sell it and share the profit with the player.
                                     <ul>
-                                        <li>Player's share starts at <knockout data-bind="text: GameConstants.AUTO_SELL_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and increases by <knockout data-bind="text: GameConstants.AUTO_SELL_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to <knockout data-bind="text: GameConstants.AUTO_SELL_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
+                                        <li>
+                                            Player's share starts at <knockout data-bind="text: GameConstants.AUTO_SELL_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and increases by <knockout data-bind="text: GameConstants.AUTO_SELL_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to <knockout data-bind="text: GameConstants.AUTO_SELL_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.
+                                            Player's share is always rounded down.
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
@@ -409,19 +413,15 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
                             <span class="flex-grow-1 text-center font-weight-bold">Experience and Leveling</span>
                         </div>
 
                         <div class="card-body">
-                            <p>
-                                Using tools and helpers not only helps you gather treasures but also grants experience that helps in leveling up.<br>
-                                For every action you take you will gain some experience. <knockout data-bind="text: GameConstants.PLAYER_EXPERIENCE_HELPER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of this experience is also given to your active helper.<br>
-                                For every action your helper takes, they will gain some experience. <knockout data-bind="text: GameConstants.HELPER_EXPERIENCE_PLAYER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of this experience is also given to you.<br>
-                            </p>
+                            <p>Using tools and helpers not only helps you gather treasures but also grants experience that helps in leveling up.</p>
 
-                            <h3>Experience</h3>
+                            <h4>Experience</h4>
                             <ul>
                                 <li><strong>Tools:</strong> Each tool grants a certain amount of experience each time it is used successfully.
                                     <ul>
@@ -438,7 +438,50 @@
                                     </ul>
                                 </li>
                             </ul>
+
+                            <h4>Shared Experience</h4>
+                            <ul>
+                                <li><strong>Player Actions:</strong> When the player performs an action that gains experience, the active helper will also gain <knockout data-bind="text: GameConstants.PLAYER_EXPERIENCE_HELPER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
+                                <li><strong>Helper Actions:</strong> When the helper performs an action that gains them experience, the player will also gain <knockout data-bind="text: GameConstants.HELPER_EXPERIENCE_PLAYER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
+                            </ul>
                         </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Trading</span>
+                        </div>
+
+                        <p>Trading allows you to exchange items within the same category. Here’s how it works:</p>
+                        <ul>
+                            <li><strong>Same Category Trading:</strong> Trades can only be made within the same category of items.</li>
+                            <li><strong>3 to 1 Trade:</strong> Trading always follows a 3 to 1 ratio (e.g., trade 3 items to receive 1 new item).</li>
+                            <li><strong>Exception:</strong> Diamond items cannot be traded.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Oak Items</span>
+                        </div>
+
+                        <h4>Explosive Charge</h4>
+                        <ul>
+                            <li><strong>Progress:</strong> Gains progress to level up when finding all items in a mine</li>
+                            <li><strong>Effect:</strong> Increases the number of tiles the Bomb tool will mine</li>
+                        </ul>
+
+                        <h4>Cell Battery</h4>
+                        <ul>
+                            <li><strong>Progress:</strong> Gains progress to level up when the player uses a tool</li>
+                            <li><strong>Effect:</strong> Decreases the global cooldown timer</li>
+                        </ul>
+
+                        <h4>Treasure Scanner</h4>
+                        <ul>
+                            <li><strong>Progress:</strong> Gains progress to level up when finding an item in a mine</li>
+                            <li><strong>Effect:</strong> Has a chance to duplicate a found item. Keeps attempting to duplicate until it fails a chance</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -778,10 +821,10 @@
 </div>
 
 <script type="text/html" id="helpToolTemplate">
-    <h5>
-        <knockout data-bind="text: $data.tool.displayName"></knockout>
+    <h6 class="d-flex align-items-center" style="gap: 0.5rem;">
         <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
-    </h5>
+        <knockout data-bind="text: $data.tool.displayName"></knockout>
+    </h6>
     <ul>
         <li><strong>Action:</strong> <knockout data-bind="text: $data.action"></knockout></li>
         <li>
