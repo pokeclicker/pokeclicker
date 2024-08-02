@@ -16,7 +16,8 @@ interface gymFlags {
 interface optionalGymArgs {
     displayName?: string,
     imageName?: string,
-    environment?: GameConstants.Environment,
+    environment?: GameConstants.Environment[],
+    battleBackground?: GameConstants.BattleBackground,
     hideUntilUnlocked?: boolean,
     visibleRequirement?: Requirement,
 }
