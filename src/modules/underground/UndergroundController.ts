@@ -23,7 +23,7 @@ import {
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
     SURVEY_RANGE_REDUCTION_LEVELS,
-    TOOL_COOLDOWN_MINIMUM
+    TOOL_COOLDOWN_MINIMUM,
 } from '../GameConstants';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
