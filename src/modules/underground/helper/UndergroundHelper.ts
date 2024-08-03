@@ -14,7 +14,6 @@ import { AUTO_SELL_BASE, AUTO_SELL_INCREASE_PER_LEVEL, AUTO_SELL_MAXIMUM, Energy
     UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, WORKCYCLE_TIMEOUT_BASE, WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL, WORKCYCLE_TIMEOUT_MINIMUM } from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from '../tools/UndergroundToolType';
-import { Coordinate } from '../mine/Mine';
 import UndergroundItem from '../UndergroundItem';
 import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
 import { UndergroundController } from '../UndergroundController';
