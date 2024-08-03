@@ -117,6 +117,7 @@ class Game {
         Weather.generateWeather(now);
         GemDeals.generateDeals();
         ShardDeal.generateDeals();
+        GenericDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();

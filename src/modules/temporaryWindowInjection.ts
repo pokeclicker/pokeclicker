@@ -208,6 +208,7 @@ import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
+import GenericDeal from './deal/GenericDeal';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -419,6 +420,7 @@ Object.assign(<any>window, {
     UndergroundTools,
     UndergroundToolType,
     ShardDeal,
+    GenericDeal,
     EncounterType,
     SafariBaitRequirement,
     SafariStepsRequirement,
