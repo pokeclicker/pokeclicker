@@ -165,16 +165,9 @@ export default class GenericDeal {
             new GenericDeal(
                 [
                     { type: 'Item', item: ItemList.Palaeontologist_token, amount: 1 },
-                    { type: 'Gem', gemType: PokemonType.Electric, amount: 100 },
-                    { type: 'Gem', gemType: PokemonType.Rock, amount: 100 },
-                    { type: 'Amount', currency: new Amount(100, Currency.questPoint), amount: 1 },
-                    { type: 'Amount', currency: new Amount(100, Currency.diamond), amount: 1 },
-                    { type: 'Shard', shardItem: ItemList.Red_shard, amount: 25 },
-                    { type: 'Berry', berryType: BerryType.Apicot, amount: 13 },
                 ],
                 [
                     { type: 'Item', item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true },
-                    { type: 'Amount', currency: new Amount(2000, Currency.battlePoint), amount: 1 },
                 ],
             ),
         ]);
