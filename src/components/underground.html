@@ -221,6 +221,12 @@
                                         <td class="text-right tight" data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>
                                     <tr>
+                                        <td class="text-left">Should discover</td>
+                                        <td class="text-center tight align-middle">
+                                            <input class="clickable" type="checkbox" data-bind="checked: $data.shouldDiscover"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="text-left">Smart tool use</td>
                                         <td class="text-right tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>

@@ -21,7 +21,7 @@ export default class UndergroundTool {
         public cooldownReductionPerLevel: number,
         public maximumBonusCharges: number,
         public experiencePerUse: number,
-        public action: (x: number, y: number) => Array<Coordinate> | null,
+        public action: (x: number, y: number) => { coordinatesMined: Array<Coordinate>, success: boolean },
     ) {
     }
 

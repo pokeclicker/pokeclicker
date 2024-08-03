@@ -32,22 +32,25 @@ export default class UndergroundTools implements Feature {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 if (App.game.underground.mine?.attemptBreakTile({ x, y }, 2)) {
                     coordinatesActuallyMined.push({ x, y });
-                    return coordinatesActuallyMined;
                 }
-                return null;
+                return {
+                    coordinatesMined: coordinatesActuallyMined,
+                    success: coordinatesActuallyMined.length > 0,
+                };
             }),
             new UndergroundTool(UndergroundToolType.Hammer, 'Hammer', 60, 4, 15, 2, (x, y) => {
-                let hasMined = false;
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 for (let deltaX = -1; deltaX <= 1; deltaX++) {
                     for (let deltaY = -1; deltaY <= 1; deltaY++) {
                         if (App.game.underground.mine?.attemptBreakTile({ x: x + deltaX, y: y + deltaY }, 1)) {
                             coordinatesActuallyMined.push({ x: x + deltaX, y: y + deltaY });
-                            hasMined = true;
                         }
                     }
                 }
-                return hasMined ? coordinatesActuallyMined : null;
+                return {
+                    coordinatesMined: coordinatesActuallyMined,
+                    success: coordinatesActuallyMined.length > 0,
+                };
             }),
             new UndergroundTool(UndergroundToolType.Bomb, 'Bomb', 180, 9, 5, 3, () => {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
@@ -60,7 +63,10 @@ export default class UndergroundTools implements Feature {
                         coordinatesActuallyMined.push({ x: randomCoordinate.x, y: randomCoordinate.y });
                     }
                 }
-                return coordinatesActuallyMined;
+                return {
+                    coordinatesMined: coordinatesActuallyMined,
+                    success: true,
+                };
             }),
             new UndergroundTool(UndergroundToolType.Survey, 'Survey', 300, 0, 0, 0, () => {
                 // Get a list of unmined reward coordinates
@@ -83,7 +89,10 @@ export default class UndergroundTools implements Feature {
                 const ySurveyCoordinate = Math.max(Math.min(y + yShift, App.game.underground.mine.height - 1), 0);
 
                 App.game.underground.mine.survey({ x: xSurveyCoordinate, y: ySurveyCoordinate }, range);
-                return null;
+                return {
+                    coordinatesMined: [],
+                    success: true,
+                };
             }),
         ];
     }
@@ -112,7 +121,7 @@ export default class UndergroundTools implements Feature {
         }
 
         if (tool.canUseTool()) {
-            const coordinatesMined: Array<Coordinate> | null = tool.action(x, y);
+            const { coordinatesMined, success } = tool.action(x, y);
 
             if (coordinatesMined?.length > 0) {
                 App.game.oakItems.use(OakItemType.Cell_Battery);
@@ -144,16 +153,18 @@ export default class UndergroundTools implements Feature {
                 }
             }
 
-            // Use a stored use, or trigger the cooldown
-            if (tool.bonusCharges > 0) tool.useBonusCharge();
-            else tool.cooldown = UndergroundController.calculateToolCooldown(tool);
+            if (success) {
+                // Use a stored use, or trigger the cooldown
+                if (tool.bonusCharges > 0) tool.useBonusCharge();
+                else tool.cooldown = UndergroundController.calculateToolCooldown(tool);
 
-            // Put all other tools on cooldown
-            this.tools.forEach(t => {
-                if (t.id !== toolType) {
-                    t.cooldown = UndergroundController.calculateGlobalCooldown();
-                }
-            });
+                // Put all other tools on cooldown
+                this.tools.forEach(t => {
+                    if (t.id !== toolType) {
+                        t.cooldown = UndergroundController.calculateGlobalCooldown();
+                    }
+                });
+            }
         }
     }
 

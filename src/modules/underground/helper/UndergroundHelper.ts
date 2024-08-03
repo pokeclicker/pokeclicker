@@ -19,6 +19,7 @@ import UndergroundItem from '../UndergroundItem';
 import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
 import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
+import UndergroundTool from '../tools/UndergroundTool';
 
 export class UndergroundHelper {
     private _experience: Observable<number> = ko.observable<number>(0);
@@ -33,6 +34,7 @@ export class UndergroundHelper {
     private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(SMART_TOOL_CHANCE_BASE + SMART_TOOL_CHANCE_INCREASE_PER_LEVEL * this._level(), SMART_TOOL_CHANCE_MAXIMUM));
     private _favoriteMineChance: PureComputed<number> = ko.pureComputed(() =>
         Math.min(FAVORITE_MINE_CHANCE_BASE + FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL * this._level(), FAVORITE_MINE_CHANCE_MAXIMUM));
+    private _shouldDiscover: Observable<boolean> = ko.observable<boolean>(true);
     private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(WORKCYCLE_TIMEOUT_BASE - WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL * this._level(), WORKCYCLE_TIMEOUT_MINIMUM));
 
     private _selectedEnergyRestore: Observable<EnergyRestoreSize> = ko.observable(-1);
@@ -73,7 +75,7 @@ export class UndergroundHelper {
 
     private _workAction() {
         // TODO : Implement logic to use tools and do work
-        let tool;
+        let tool: UndergroundTool;
         const { x, y } = this.getSmartCoordinate();
 
 
@@ -87,9 +89,9 @@ export class UndergroundHelper {
             tool = App.game.undergroundTools.getRandomTool();
         }
 
-        const coordinatesMined: Array<Coordinate> | null = tool.action(x, y);
+        const { coordinatesMined, success } = tool.action(x, y);
 
-        if (coordinatesMined !== null) {
+        if (success) {
             UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse, true);
 
             const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
@@ -117,7 +119,7 @@ export class UndergroundHelper {
             UndergroundController.notifyMineCompleted(this);
         }
 
-        if (App.game.underground.mine.completed) {
+        if (App.game.underground.mine.completed && this.shouldDiscover) {
             App.game.underground.generateMine(Rand.chance(this.favoriteMineChance) ? this._favoriteMine : MineType.Random, this);
         }
     }
@@ -223,6 +225,14 @@ export class UndergroundHelper {
         return this._favoriteMineChance();
     }
 
+    get shouldDiscover(): boolean {
+        return this._shouldDiscover();
+    }
+
+    set shouldDiscover(value: boolean) {
+        this._shouldDiscover(value);
+    }
+
     get canGenerateSpecial(): boolean {
         return false;
     }
@@ -250,6 +260,7 @@ export class UndergroundHelper {
             hired: this._hired(),
             timeSinceWork: this._timeSinceWork(),
             selectedEnergyRestore: this._selectedEnergyRestore(),
+            shouldDiscover: this._shouldDiscover(),
         };
     }
 
@@ -258,6 +269,7 @@ export class UndergroundHelper {
         this._hired = ko.observable(json?.hired || false);
         this._timeSinceWork = ko.observable(json?.timeSinceWork || 0);
         this._selectedEnergyRestore = ko.observable(json?.selectedEnergyRestore ?? -1);
+        this._shouldDiscover = ko.observable(json?.shouldDiscover ?? true);
     }
 
     public static convertLevelToExperience(level: number): number {
