@@ -4,7 +4,6 @@ import BerryType from '../enums/BerryType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
 import GameHelper from '../GameHelper';
-import { Currency } from '../GameConstants';
 
 export type GenericTraderShopIdentifier = 'Palaeontologist';
 
