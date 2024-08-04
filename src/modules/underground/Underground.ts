@@ -123,11 +123,7 @@ export class Underground implements Feature {
     }
 
     public static convertLevelToExperience(level: number): number {
-        let total = 0;
-        for (let i = 0; i < level; ++i) {
-            total = Math.floor(total + i + 300 * Math.pow(2, i / 7));
-        }
-        return Math.floor(total / 4);
+        return Math.ceil(2000 * (1.15 ** level - 1));
     }
 
     public static convertExperienceToLevel(experience: number): number {
