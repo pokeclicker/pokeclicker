@@ -76,7 +76,10 @@
                         <!-- ko if: App.game.underground.mine -->
                         <div style="position: relative;">
                             <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
-                                 data-bind="css: { 'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed },
+                                 data-bind="css: {
+                                    'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
+                                    'tool-cooldown': App.game.undergroundTools.getTool(App.game.undergroundTools.selectedToolType).cooldownForDisplay() > 0
+                                 },
                                  class: `${UndergroundToolType[App.game.undergroundTools.selectedToolType]}Selected`,
                                  style: {
                                     backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
