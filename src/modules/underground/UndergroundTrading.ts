@@ -21,11 +21,17 @@ export class UndergroundTrading {
             return [];
         }
 
-        // TODO : Make Fossils only tradeable when you already have either 1 fossil or the pokemon, need to dig it up once first
+        const tradeMap = new Map<UndergroundItemValueType, UndergroundItemValueType[]>;
+        tradeMap.set(UndergroundItemValueType.Fossil, [UndergroundItemValueType.Fossil, UndergroundItemValueType.FossilPiece]);
+        tradeMap.set(UndergroundItemValueType.FossilPiece, [UndergroundItemValueType.Fossil, UndergroundItemValueType.FossilPiece]);
 
         return this._computedAvailableItemsToTradeList().filter(item => {
             if (this._selectedTradeFromItem().id === item.id)
                 return false;
+
+            if (tradeMap.get(this._selectedTradeFromItem().valueType)?.includes(item.valueType)) {
+                return true;
+            }
 
             if (this._selectedTradeFromItem().valueType !== item.valueType)
                 return false;
