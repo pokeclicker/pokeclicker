@@ -58,7 +58,7 @@ export class UndergroundHelper {
     }
 
     public tick(delta: number) {
-        if (App.game.underground.mine?.timeUntilDiscovery > 0) {
+        if (App.game.underground.mine?.timeUntilDiscovery > 0 || App.game.underground.mine.completed) {
             return;
         }
 
@@ -76,7 +76,6 @@ export class UndergroundHelper {
         // TODO : Implement logic to use tools and do work
         let tool: UndergroundTool;
         const { x, y } = this.getSmartCoordinate();
-
 
         if (Rand.chance(this.smartToolUsageChance)) {
             if (App.game.underground.mine.itemsPartiallyFound < App.game.underground.mine.itemsBuried) {
