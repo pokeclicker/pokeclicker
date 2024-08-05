@@ -112,6 +112,10 @@ export class Underground implements Feature {
         this._mine(json.mine ? Mine.load(json.mine) : null);
         this.helpers.fromJSON(json.helpers);
         this._autoSearchMineType(json.autoSearchMineType || MineType.Random);
+
+        if (this.mine == null) {
+            this.generateMine(MineType.Random);
+        }
     }
 
     public static calculateMinimumItemsToGenerate(level: number = 0): number {
