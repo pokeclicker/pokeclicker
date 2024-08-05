@@ -162,7 +162,7 @@ export class UndergroundController {
 
     public static clickModalMineSquare(index: number) {
         const coordinates = App.game.underground.mine.getCoordinateForGridIndex(index);
-        App.game.undergroundTools.useTool(App.game.undergroundTools.selectedToolType, coordinates.x, coordinates.y);
+        App.game.underground.tools.useTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y);
     }
 
     public static calculateMineTileStyle(index: number) {

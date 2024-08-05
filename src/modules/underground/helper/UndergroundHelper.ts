@@ -79,12 +79,12 @@ export class UndergroundHelper {
 
         if (Rand.chance(this.smartToolUsageChance)) {
             if (App.game.underground.mine.itemsPartiallyFound < App.game.underground.mine.itemsBuried) {
-                tool = App.game.undergroundTools.getTool(UndergroundToolType.Bomb);
+                tool = App.game.underground.tools.getTool(UndergroundToolType.Bomb);
             } else {
-                tool = App.game.undergroundTools.getTool(UndergroundToolType.Chisel);
+                tool = App.game.underground.tools.getTool(UndergroundToolType.Chisel);
             }
         } else {
-            tool = App.game.undergroundTools.getRandomTool();
+            tool = App.game.underground.tools.getRandomTool();
         }
 
         const { coordinatesMined, success } = tool.action(x, y);

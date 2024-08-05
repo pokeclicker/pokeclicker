@@ -40,7 +40,6 @@ class App {
                 new Party(multiplier),
                 new Gems(),
                 new Underground(),
-                new UndergroundTools(),
                 new Farming(multiplier),
                 new LogBook(),
                 new RedeemableCodes(),

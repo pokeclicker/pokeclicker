@@ -34,7 +34,6 @@ import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
 import { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
 import { Underground } from './underground/Underground';
-import UndergroundTools from './underground/tools/UndergroundTools';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -58,7 +57,6 @@ type TmpGameType = {
     party: any,
     gems: any,
     underground: Underground,
-    undergroundTools: UndergroundTools
     farming: any,
     logbook: LogBook,
     redeemableCodes: any,

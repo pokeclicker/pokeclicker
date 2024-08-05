@@ -34,7 +34,6 @@ class Game {
         public party: Party,
         public gems: Gems,
         public underground: Underground,
-        public undergroundTools: UndergroundTools,
         public farming: Farming,
         public logbook: LogBook,
         public redeemableCodes: RedeemableCodes,
@@ -88,7 +87,6 @@ class Game {
         this.keyItems.initialize();
         this.oakItems.initialize();
         this.underground.initialize();
-        this.undergroundTools.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
         this.pokeballFilters.initialize();
@@ -485,8 +483,9 @@ class Game {
         }
 
         // Underground
-        this.underground.update(GameConstants.TICK_TIME / GameConstants.SECOND);
-        this.undergroundTools.update(GameConstants.TICK_TIME / GameConstants.SECOND);
+        if (this.underground.canAccess()) {
+            this.underground.update(GameConstants.TICK_TIME / GameConstants.SECOND);
+        }
 
         // Farm
         this.farming.update(GameConstants.TICK_TIME / GameConstants.SECOND);

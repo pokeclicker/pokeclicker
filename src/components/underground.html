@@ -78,9 +78,9 @@
                             <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
                                  data-bind="css: {
                                     'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
-                                    'tool-cooldown': App.game.undergroundTools.getTool(App.game.undergroundTools.selectedToolType).cooldownForDisplay() > 0
+                                    'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).cooldownForDisplay() > 0
                                  },
-                                 class: `${UndergroundToolType[App.game.undergroundTools.selectedToolType]}Selected`,
+                                 class: `${UndergroundToolType[App.game.underground.tools.selectedToolType]}Selected`,
                                  style: {
                                     backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
                                  }">
@@ -112,9 +112,9 @@
                         <div class='row no-gutters'>
                             <div class="col-12 row no-gutters">
                                 <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
-                                <!-- ko let: { tool: App.game.undergroundTools.getTool($data) } -->
-                                <div class="tool-ui col card clickable" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`, css: { 'border-info': App.game.undergroundTools.selectedToolType === $data }, click: () => App.game.undergroundTools.selectedToolType = $data">
-                                    <div class="card-header p-1" data-bind="css: { 'bg-info': App.game.undergroundTools.selectedToolType === $data }">
+                                <!-- ko let: { tool: App.game.underground.tools.getTool($data) } -->
+                                <div class="tool-ui col card clickable" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`, css: { 'border-info': App.game.underground.tools.selectedToolType === $data }, click: () => App.game.underground.tools.selectedToolType = $data">
+                                    <div class="card-header p-1" data-bind="css: { 'bg-info': App.game.underground.tools.selectedToolType === $data }">
                                         <div data-bind="text: tool.displayName"></div>
                                     </div>
                                     <div class="card-body d-flex flex-column p-0 rounded text-center">
@@ -339,7 +339,7 @@
                         </div>
 
                         <div class="card-body">
-                            <p>The Underground offers <knockout data-bind="text: App.game.undergroundTools.tools.length"></knockout> powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
+                            <p>The Underground offers <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
 
                             <h4>Cooldown systems</h4>
                             <ul>
@@ -363,17 +363,17 @@
                             <p>A tool only counts as used if its action is successful, meaning it accomplishes its intended task (e.g., mining layers or indicating tiles).</p>
 
                             <h4>Tools Overview</h4>
-                            <p>There are <knockout data-bind="text: App.game.undergroundTools.tools.length"></knockout> different tools available, each with unique functions and properties:</p>
-                            <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Chisel) } -->
+                            <p>There are <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> different tools available, each with unique functions and properties:</p>
+                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Chisel) } -->
                             <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines 2 layers on the selected spot.' } }"></div>
                             <!-- /ko -->
-                            <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Hammer) } -->
+                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Hammer) } -->
                             <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines 1 layer on all 9 tiles in a 3x3 grid.' } }"></div>
                             <!-- /ko -->
-                            <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Bomb) } -->
+                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Bomb) } -->
                             <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines a maximum of 2 layers on each of 10 random tiles (both mined and cleared). The number of tiles increases when equipped with the Explosive Charge Oak Item.' } }"></div>
                             <!-- /ko -->
-                            <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Survey) } -->
+                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Survey) } -->
                             <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains an item. The grid shrinks by two tiles in each direction every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }"></div>
                             <!-- /ko -->
                         </div>
@@ -443,9 +443,9 @@
                             <ul>
                                 <li><strong>Tools:</strong> Each tool grants a certain amount of experience each time it is used successfully.
                                     <ul>
-                                        <li><strong>Chisel:</strong> <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Chisel).experiencePerUse"></knockout> experience</li>
-                                        <li><strong>Hammer:</strong> <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Hammer).experiencePerUse"></knockout> experience</li>
-                                        <li><strong>Bomb:</strong> <knockout data-bind="text: App.game.undergroundTools.getTool(UndergroundToolType.Bomb).experiencePerUse"></knockout> experience</li>
+                                        <li><strong>Chisel:</strong> <knockout data-bind="text: App.game.underground.tools.getTool(UndergroundToolType.Chisel).experiencePerUse"></knockout> experience</li>
+                                        <li><strong>Hammer:</strong> <knockout data-bind="text: App.game.underground.tools.getTool(UndergroundToolType.Hammer).experiencePerUse"></knockout> experience</li>
+                                        <li><strong>Bomb:</strong> <knockout data-bind="text: App.game.underground.tools.getTool(UndergroundToolType.Bomb).experiencePerUse"></knockout> experience</li>
                                     </ul>
                                 </li>
                                 <li>

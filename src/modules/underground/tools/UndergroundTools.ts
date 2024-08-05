@@ -1,6 +1,5 @@
 import UndergroundTool from './UndergroundTool';
 import UndergroundToolType from './UndergroundToolType';
-import { Feature } from '../../DataStore/common/Feature';
 import { Observable } from 'knockout';
 import { UndergroundController } from '../UndergroundController';
 import { Coordinate } from '../mine/Mine';
@@ -9,21 +8,12 @@ import OakItemType from '../../enums/OakItemType';
 import Settings from '../../settings';
 import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../../GameConstants';
 
-export default class UndergroundTools implements Feature {
-    name = 'Underground Tools';
-    saveKey = 'undergroundTools';
-
+export default class UndergroundTools {
     tools: UndergroundTool[] = [];
     private _selectedToolType: Observable<UndergroundToolType> = ko.observable<UndergroundToolType>(UndergroundToolType.Chisel);
 
-    defaults: Record<string, any>;
-
     constructor() {
         this.tools = [];
-    }
-
-    canAccess(): boolean {
-        return true;
     }
 
     initialize() {

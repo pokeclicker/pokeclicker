@@ -10,6 +10,7 @@ import { MineType } from './mine/MineConfig';
 import { UndergroundHelper, UndergroundHelpers } from './helper/UndergroundHelper';
 import { BASE_EXTRA_LAYER_DEPTH,
     BASE_MAXIMUM_ITEMS, BASE_MINE_HEIGHT, BASE_MINE_WIDTH, BASE_MINIMUM_ITEMS, BASE_MINIMUM_LAYER_DEPTH } from '../GameConstants';
+import UndergroundTools from './tools/UndergroundTools';
 
 export class Underground implements Feature {
     name = 'Underground';
@@ -29,17 +30,20 @@ export class Underground implements Feature {
 
     private _mine: Observable<Mine | null> = ko.observable(null);
     public helpers = new UndergroundHelpers();
+    public tools = new UndergroundTools();
 
     canAccess(): boolean {
         return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
     }
 
     initialize(): void {
+        this.tools.initialize();
     }
 
     update(delta: number): void {
         this.mine?.tick(delta);
         this.helpers?.hired().forEach(helper => helper.tick(delta));
+        this.tools.update(delta);
     }
 
     public generateMine(mineType: MineType, helper: UndergroundHelper = undefined) {
@@ -103,6 +107,7 @@ export class Underground implements Feature {
             undergroundExp: this._undergroundExp(),
             mine: this._mine()?.save(),
             helpers: this.helpers.toJSON(),
+            tools: this.tools.toJSON(),
             autoSearchMineType: this._autoSearchMineType(),
         };
     }
@@ -111,6 +116,7 @@ export class Underground implements Feature {
         this._undergroundExp(json.undergroundExp || this.defaults.undergroundExp);
         this._mine(json.mine ? Mine.load(json.mine) : null);
         this.helpers.fromJSON(json.helpers);
+        this.tools.fromJSON(json.tools);
         this._autoSearchMineType(json.autoSearchMineType || MineType.Random);
 
         if (this.mine == null) {
