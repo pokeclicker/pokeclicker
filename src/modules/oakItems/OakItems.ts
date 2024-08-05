@@ -53,8 +53,8 @@ export default class OakItems implements Feature {
                 true, [1.25, 1.5, 1.75, 2, 2.25, 2.5], 1, 10, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),
             new BoughtOakItem(OakItemType.Sprinklotad, 'Sprinklotad', 'Increases the chance of berry replants', 'Hoenn Berry Master',
                 true, [1.15, 1.3, 1.45, 1.6, 1.75, 1.9], 1, 2, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),
-            new BoughtOakItem(OakItemType.Explosive_Charge, 'Explosive Charge', 'Increases the efficiency of the Bomb tool', 'Cinnabar Island Shop',
-                true, [1, 2, 3, 6, 8, 10], 1, 50, undefined, undefined, AmountFactory.createArray([50000, 100000, 400000, 1000000, 2000000], Currency.money)),
+            new BoughtOakItem(OakItemType.Explosive_Charge, 'Explosive Charge', 'Increases the number of tiles the Bomb tool can target', 'Cinnabar Island Shop',
+                true, [1, 2, 3, 6, 8, 10], 1, 50, undefined, undefined, AmountFactory.createArray([50000, 100000, 400000, 1000000, 2000000], Currency.money), ''),
             new BoughtOakItem(OakItemType.Treasure_Scanner, 'Treasure Scanner', 'Chance to multiply mining rewards', 'Cinnabar Island Shop',
                 true, [4, 8, 12, 16, 20, 24], 1, 25, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], Currency.money), '%'),
         ];
