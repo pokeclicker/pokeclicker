@@ -37,6 +37,7 @@ import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -3764,6 +3765,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 60,
         },
+        'heldItem': { type: ItemType.item, id: 'Leek', requirement: new MaxRegionRequirement(Region.galar) },
     },
     {
         'id': 83.01,
