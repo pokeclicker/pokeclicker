@@ -279,6 +279,7 @@
                             <p>
                                 There are six different types of mines you can search for in the Underground.
                                 Understanding their unique properties and the discovery times involved is crucial for efficient mining.
+                                The Underground lexicon can be found at the bottom of this page.
                             </p>
 
                             <h4>Mine Types</h4>
@@ -310,7 +311,18 @@
                             </p>
 
                             <h4>Discovery Time Calculation</h4>
-                            <p>When searching for a new specific mine or if you have not found all items in your current mine, the discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>.</p>
+                            <p>There is a discovery time when:</p>
+                            <ul>
+                                <li>
+                                    Random Mine Type
+                                    <ul>
+                                        <li>Current mine complete - Discovery time: No</li>
+                                        <li>Current mine incomplete - Discovery time: Yes</li>
+                                    </ul>
+                                </li>
+                                <li>Other Mine Type - Discovery time: Yes</li>
+                            </ul>
+                            <p>The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>.</p>
 
                             <h4>Amount of Treasure</h4>
                             <p>The amount of treasure a player can find is random, between the minimum (inclusive) and maximum (inclusive), and increases as their Underground Level increases:</p>
@@ -468,7 +480,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
                             <span class="flex-grow-1 text-center font-weight-bold">Oak Items</span>
                         </div>
@@ -490,6 +502,20 @@
                             <ul>
                                 <li><strong>Progress:</strong> Gains progress to level up when finding an item in a mine</li>
                                 <li><strong>Effect:</strong> Has a chance to duplicate a found item. Keeps attempting to duplicate until it fails a chance</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Lexicon</span>
+                        </div>
+
+                        <div class="card-body">
+                            <ul>
+                                <li><strong>Seen Item:</strong> At least 1 part of the item is visible to the player</li>
+                                <li><strong>Found Item:</strong> All parts of the item are visible to the player, the item has been claimed</li>
+                                <li><strong>Completed Mine:</strong> All buried items have been found</li>
                             </ul>
                         </div>
                     </div>
