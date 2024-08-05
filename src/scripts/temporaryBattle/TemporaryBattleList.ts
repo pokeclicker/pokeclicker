@@ -294,7 +294,7 @@ TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemRequirement(11, 'Christmas_present', GameConstants.AchievementOption.less),
+        new ItemOwnedRequirement('Christmas_present', 11, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
@@ -322,8 +322,8 @@ TemporaryBattleList['Santa Jynx 2'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemRequirement(27, 'Christmas_present', GameConstants.AchievementOption.less),
-        new ItemRequirement(11, 'Christmas_present'),
+        new ItemOwnedRequirement('Christmas_present', 27, GameConstants.AchievementOption.less),
+        new ItemOwnedRequirement('Christmas_present', 11),
         new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
@@ -352,8 +352,8 @@ TemporaryBattleList['Santa Jynx 3'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemRequirement(49, 'Christmas_present', GameConstants.AchievementOption.less),
-        new ItemRequirement(27, 'Christmas_present'),
+        new ItemOwnedRequirement('Christmas_present', 49, GameConstants.AchievementOption.less),
+        new ItemOwnedRequirement('Christmas_present', 27),
         new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
@@ -381,7 +381,7 @@ TemporaryBattleList['Santa Jynx 4'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemRequirement(49, 'Christmas_present'),
+        new ItemOwnedRequirement('Christmas_present', 49),
         new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
