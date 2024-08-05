@@ -362,7 +362,7 @@
                             <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines a maximum of 2 layers on each of 10 random tiles (both mined and cleared). The number of tiles increases when equipped with the Explosive Charge Oak Item.' } }"></div>
                             <!-- /ko -->
                             <!-- ko let: { tool: App.game.undergroundTools.getTool(UndergroundToolType.Survey) } -->
-                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains an item. The grid shrinks by two tiles on each side every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }"></div>
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains an item. The grid shrinks by two tiles in each direction every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }"></div>
                             <!-- /ko -->
                         </div>
                     </div>
