@@ -6,7 +6,7 @@ import { Coordinate } from '../mine/Mine';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
 import Settings from '../../settings';
-import { UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../../GameConstants';
+import { clipNumber, UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../../GameConstants';
 
 export default class UndergroundTools {
     tools: UndergroundTool[] = [];
@@ -75,8 +75,8 @@ export default class UndergroundTools {
                 const yShift = Rand.intBetween(-halfShift, halfShift);
 
                 const { x, y } = App.game.underground.mine.getCoordinateForGridIndex(Rand.fromArray(unminedRewardCoordinates));
-                const xSurveyCoordinate = Math.max(Math.min(x + xShift, App.game.underground.mine.width - 1), 0);
-                const ySurveyCoordinate = Math.max(Math.min(y + yShift, App.game.underground.mine.height - 1), 0);
+                const xSurveyCoordinate = clipNumber(x + xShift, halfShift, App.game.underground.mine.width - 1 - halfShift);
+                const ySurveyCoordinate = clipNumber(y + yShift, halfShift, App.game.underground.mine.height - 1 - halfShift);
 
                 App.game.underground.mine.survey({ x: xSurveyCoordinate, y: ySurveyCoordinate }, range);
                 return {
