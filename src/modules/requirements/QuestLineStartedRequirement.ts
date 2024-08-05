@@ -24,6 +24,6 @@ export default class QuestLineStartedRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Questline ${this.questLineName} needs to be started.`;
+        return `Questline ${this.questLineName} needs to ${this.option !== AchievementOption.less ? 'be started' : 'not be started yet'}.`;
     }
 }
