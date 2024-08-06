@@ -1612,8 +1612,7 @@ class Farming implements Feature {
             ]));
         // Snover
         this.mutations.push(new FieldMutation(.00002, BerryType.Snover, [{ berry: BerryType.Babiri, amountRequired: 20 }], {
-            unlockReq: () => App.game?.statistics?.routeKills[GameConstants.Region.sinnoh][217]() >= GameConstants.ROUTE_KILLS_NEEDED,
-            chanceModifier: (chance: number) => chance * (App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Snover').id]() > 0 ? 2 : 1),
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Snover').id]() > 0,
             hint: 'I\'ve heard of a Berry that can appear in a field of Babiri when Snover are around.',
         }));
         //#endregion
