@@ -41,7 +41,7 @@
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost.toLocaleString('en-US')"></td>
                                         <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
-                                            <img src='assets/images/currency/questPoint.svg' width="20px'">
+                                            <img src='assets/images/currency/questPoint.svg' width="20px" data-bind="attr: { src: `assets/images/currency/${GameConstants.Currency[$parent.currencyType]}.svg`}">
                                         </td>
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">→</td>
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
@@ -74,7 +74,7 @@
             </div>
             <div class="modal-footer">
                 <span>Total Quest Points: <span data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">-</span></span>
-                   <img src='assets/images/currency/questPoint.svg' width="20px'">
+                   <img src='assets/images/currency/questPoint.svg' width="20px">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>

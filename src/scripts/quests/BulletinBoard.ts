@@ -50,7 +50,7 @@ class BulletinBoard extends TownContent {
     }
 
     constructor(public board: GameConstants.BulletinBoards) {
-        super();
+        super([new QuestLineCompletedRequirement('Tutorial Quests')]);
     }
 
 }

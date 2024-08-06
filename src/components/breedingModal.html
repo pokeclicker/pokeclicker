@@ -175,7 +175,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <!-- /ko -->
                                             </div>
                                             <!-- Mega Evolution -->
-                                            <!-- ko if: player.highestRegion() >= GameConstants.Region.kalos -->
+                                            <!-- ko if: Settings.getSetting('breedingUniqueTransformationFilter').isUnlocked() -->
                                             <div class="form-group col-lg-12 col-12">
                                                 <!-- ko let: { breedingUniqueTransformationFilter: Settings.getSetting('breedingUniqueTransformationFilter') } -->
                                                 <label for="breeding-filter-unique-transformation" data-bind="text: breedingUniqueTransformationFilter.displayName">Unique Transformations</label>

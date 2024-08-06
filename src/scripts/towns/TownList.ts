@@ -3629,7 +3629,7 @@ TownList['Mt. Chimney Crater'] = new DungeonTown(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))],
     [TemporaryBattleList['Butler 1']],
     {
-        npcs: [CocoonHatch],
+        npcs: [CocoonHatch, Butler3],
     }
 );
 TownList['Jagged Pass'] = new DungeonTown(
@@ -3639,7 +3639,7 @@ TownList['Jagged Pass'] = new DungeonTown(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))],
     [TemporaryBattleList['Butler 2']],
     {
-        npcs: [Butler2, Butler3],
+        npcs: [Butler2],
     }
 );
 TownList['New Mauville'] = new DungeonTown(
@@ -3993,7 +3993,6 @@ const SolaceonTownShop = new Shop([
     ItemList.Shiny_stone,
     ItemList.Dusk_stone,
     ItemList.Dawn_stone,
-    ItemList.Spiritomb,
 ]);
 const PastoriaShop = new Shop([
     ItemList.Pokeball,
@@ -7141,7 +7140,7 @@ const LillieSun = new NPC('Lillie', [
     'Traveling around Alola with you, learning all the things you knew... And seeing Nebby evolve into Solgaleo under that radiant sun... I\'ll never forget those precious memories, $playername$!',
     'You, Professor Kukui, Professor Burnet, Hau, Hapu, and everyone else... I\'m so glad I got to meet everyone!',
 ], {
-    image: 'Lillie (z powered)',
+    image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 4), new StatisticRequirement(['npcTalkedTo', GameHelper.hash('SunFlute')], 1, 'Must have played the Sun Flute during Emissary of Light quest line')]),
 });
 const LillieMoon = new NPC('Lillie', [
@@ -7149,7 +7148,7 @@ const LillieMoon = new NPC('Lillie', [
     'Traveling around Alola with you, learning all the things you knew... And seeing Nebby evolve into Lunala under that brilliant moon... I\'ll never forget those precious memories, $playername$!',
     'You, Professor Kukui, Professor Burnet, Hau, Hapu, and everyone else... I\'m so glad I got to meet everyone!',
 ], {
-    image: 'Lillie (z powered)',
+    image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 4), new StatisticRequirement(['npcTalkedTo', GameHelper.hash('MoonFlute')], 1, 'Must have played the Moon Flute during Emissary of Light quest line')]),
 });
 // Optional Story NPCs
@@ -8434,6 +8433,11 @@ const HammerlockeHiker = new NPC('Hiker Donald', [
     'My mate told me a story of a Pikachu getting lodged in the gluttonous bird’s gullet while it was gorging in a thunderstorm! But that sounds ridiculous! How would it not be bothered by the big rat in its throat? It would drive me mad.',
 ], {image: 'assets/images/npcs/Hiker (Gen 8).png'});
 
+const WyndonBattleCafeRichard = new NPC('Richard', [
+    'This might sound cheesy, but I love Milcery so much! I wasn\'t sure which Alcremie form I liked the most, so I just grabbed a Sweet at random and started to spin and spin for what seemed like an hour.',
+    'I saw my partner liked it a lot! Maybe you should try the same one day!',
+]);
+
 const AncientMural1 = new NPC('Ancient Mural', [
     '<i>It’s Stow-on-Side’s famous mural.</i>',
     '<i>It’s said to be a very deep work of art...</i>',
@@ -9178,6 +9182,7 @@ TownList.Wyndon = new Town(
     [WyndonShop, new MoveToDungeon(dungeonList['Rose Tower']), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
+        npcs: [WyndonBattleCafeRichard],
     }
 );
 TownList['Wyndon Stadium'] = new Town(
