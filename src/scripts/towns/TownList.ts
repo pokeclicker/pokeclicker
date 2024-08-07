@@ -1812,6 +1812,11 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
     'Keep ‘em outside where they belong! I’ve heard those machines can attract Pokémon with Held Items more often, and even more so in Dungeons!',
 ]);
 
+const MahoGanyOfficerJenny = new NPC('Officer Jenny', [
+    'You made it to Mahogany without troubles? Did you see anything suspicious?',
+    'Some adventurers reported criminal activities on route 42. Team Rocket are allegedly attempting to steal newborn Phanpy...',
+], { image: 'assets/images/npcs/Officer Jenny.png' });
+
 const MahoganyEusine = new NPC('Eusine', [
     'Suicune... How brave it is! How refreshing it is! How beautiful it is! And how quickly it moves! It seems to be heading east.',
     'You seem to be around where Suicune would appear. Well, that\'s OK. My desire to search for Suicune is far beyond yours... My grandpa was...quite into myths. I\'ve heard so many stories about Suicune from him.',
@@ -1989,7 +1994,7 @@ TownList['Mahogany Town'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar')),
         ])],
-        npcs: [MahoganySouvenirShopAttendant, MahoganyEusine],
+        npcs: [MahoganySouvenirShopAttendant, MahoganyEusine, MahoGanyOfficerJenny],
     }
 );
 TownList['Blackthorn City'] = new Town(
