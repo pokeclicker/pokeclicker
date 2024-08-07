@@ -84,7 +84,7 @@ export class UndergroundHelper {
                 let tilesWithRewardCounter = 0;
                 for (let xShift = -1; xShift <= 1; ++xShift) {
                     for (let yShift = -1; yShift <= 1; ++yShift) {
-                        const indexToCheck = App.game.underground.mine.getGridIndexForCoordinate({x: x + xShift, y: y + yShift});
+                        const indexToCheck = App.game.underground.mine.getGridIndexForCoordinate({ x: x + xShift, y: y + yShift });
                         if (indexToCheck < 0)
                             continue;
 
