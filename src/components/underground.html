@@ -85,7 +85,7 @@
                                     backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
                                  }">
                                 <!-- ko foreach: App.game.underground.mine.grid -->
-                                <div class="mineSquare" data-bind="event: { mousedown: UndergroundController.clickModalMineSquare($index()) }">
+                                <div class="mineSquare" data-bind="event: { mousedown: () => UndergroundController.clickModalMineSquare($index()) }">
                                     <div class="rock" data-bind="class: `rock${$data.layerDepth}`, style: UndergroundController.calculateMineTileStyle($index())"></div>
 
                                     <!-- ko if: $data.survey > 0 -->
