@@ -65,7 +65,7 @@ export class UndergroundHelper {
         GameHelper.incrementObservable(this._timeSinceWork, delta);
 
         if (this._timeSinceWork() > this.workCycleTime) {
-            this._timeSinceWork(0);
+            GameHelper.incrementObservable(this._timeSinceWork, -1 * this.workCycleTime);
             this._workAction();
 
             this.tryUseEnergyPotion();
@@ -81,7 +81,24 @@ export class UndergroundHelper {
             if (App.game.underground.mine.itemsPartiallyFound < App.game.underground.mine.itemsBuried) {
                 tool = App.game.underground.tools.getTool(UndergroundToolType.Bomb);
             } else {
-                tool = App.game.underground.tools.getTool(UndergroundToolType.Chisel);
+                let tilesWithRewardCounter = 0;
+                for (let xShift = -1; xShift <= 1; ++xShift) {
+                    for (let yShift = -1; yShift <= 1; ++yShift) {
+                        const indexToCheck = App.game.underground.mine.getGridIndexForCoordinate({x: x + xShift, y: y + yShift});
+                        if (indexToCheck < 0)
+                            continue;
+
+                        if (App.game.underground.mine.grid[indexToCheck].layerDepth > 0 && App.game.underground.mine.grid[indexToCheck].reward)
+                            ++tilesWithRewardCounter;
+                    }
+                }
+
+                if (tilesWithRewardCounter < 2) {
+                    tool = App.game.underground.tools.getTool(UndergroundToolType.Chisel);
+                } else {
+                    tool = App.game.underground.tools.getTool(UndergroundToolType.Hammer);
+                }
+
             }
         } else {
             tool = App.game.underground.tools.getRandomTool();
