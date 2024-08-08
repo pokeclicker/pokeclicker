@@ -3434,6 +3434,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 20,
         },
+        'heldItem': { type: ItemType.underground, id: 'Everstone' },
     },
     {
         'id': 74.02,
@@ -3490,6 +3491,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 35,
         },
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 76,
@@ -3526,6 +3528,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 45,
         },
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 77,
