@@ -83,7 +83,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             );
         }
         App.game.party.gainExp(this.exp, this.level, trainer);
-        App.game.gems.gainGems(this.gemReward, this.type1);
+        App.game.gems.gainGems(this.gemReward * (this.type2 == PokemonType.None ? 2 : 1), this.type1);
         App.game.gems.gainGems(this.gemReward, this.type2);
     }
 
