@@ -2761,6 +2761,11 @@ class Update implements Saveable {
                 settingsData.breedingRegionalAttackDebuffSetting = '-1';
             }
         },
+
+        '0.10.22': ({ playerData, saveData, settingsData }) => {
+            // Remove the old underground save data
+            saveData.underground = null;
+        },
     };
 
     constructor() {

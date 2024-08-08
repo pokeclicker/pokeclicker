@@ -187,11 +187,14 @@ import PokeballFilter from './pokeballs/PokeballFilter';
 import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
 import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
-import { DailyDeal } from './underground/DailyDeal';
-import { Mine } from './underground/Mine';
+import { Mine } from './underground/mine/Mine';
+import { MineType } from './underground/mine/MineConfig';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
-import UndergroundUpgrade from './underground/UndergroundUpgrade';
+import { UndergroundController } from './underground/UndergroundController';
+import { UndergroundTrading } from './underground/UndergroundTrading';
+import { UndergroundHelper } from './underground/helper/UndergroundHelper';
+import UndergroundToolType from './underground/tools/UndergroundToolType';
 import SpecialEventRandomRequirement from './requirements/SpecialEventRandomRequirement';
 import SpecialEventRequirement from './requirements/SpecialEventRequirement';
 import EncounterType from './enums/EncounterType';
@@ -204,6 +207,7 @@ import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
+import GenericDeal from './deal/GenericDeal';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -407,10 +411,14 @@ Object.assign(<any>window, {
     TextMerger,
     pokeballFilterOptions,
     Mine,
+    MineType,
     Underground,
-    UndergroundUpgrade,
+    UndergroundController,
+    UndergroundTrading,
+    UndergroundHelper,
+    UndergroundToolType,
     ShardDeal,
-    DailyDeal,
+    GenericDeal,
     EncounterType,
     SafariBaitRequirement,
     SafariStepsRequirement,

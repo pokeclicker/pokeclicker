@@ -15,7 +15,7 @@ const NotificationConstants = {
             roaming: new Sound('roaming', 'Roaming Pokémon encountered'),
             achievement: new Sound('achievement', 'New achievement earned'),
             battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
-            underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
+            underground_energy_full: new Sound('underground_energy_full', 'Mining tool reached maximum free use storage'),
             battle_frontier: new Sound('battle_frontier', 'Battle Frontier'),
             dream_orb: new Sound('dream_orb', 'Opening Dream Orb'),
             pokerus: new Sound('pokerus_resistant', 'Pokémon has become Resistant to Pokérus'),
@@ -73,10 +73,11 @@ const NotificationConstants = {
             item_bought: new NotificationSetting('notification.item_bought', 'Item bought', true),
         },
         Underground: {
-            underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
-            underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining energy restored', true),
+            underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining tool reached maximum free use storage', true),
+            underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining tool restored 1 free use', true),
             underground_dig_deeper: new NotificationSetting('notifcation.underground_dig_deeper', 'You dig deeper...', true),
             underground_item_found: new NotificationSetting('notification.underground_item_found', 'Item found while mining', true),
+            helper: new NotificationSetting('notification.underground_helper', 'Underground Helper Hired/Fired', true),
         },
         Farming: {
             berry_discovered: new NotificationSetting('notification.berry_discovered', 'New Berry discovered', true),

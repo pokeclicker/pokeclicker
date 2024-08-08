@@ -296,7 +296,7 @@
                             <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
                             <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
                         </div>
-                        
+
                         <div style="position: absolute; right: 4px">
                             <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
                             <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
@@ -574,6 +574,9 @@
 
 <!-- Shard Master Modal-->
 @import "shardTraderModal.html"
+
+<!-- Generic Trader Modal-->
+@import "genericTraderModal.html"
 
 <!-- Subregion Modal-->
 @import "subregionModal.html"
