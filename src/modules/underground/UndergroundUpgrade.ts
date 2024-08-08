@@ -17,6 +17,7 @@ export enum Upgrades {
     'Reduced_Plates',
     'Reduced_Evolution_Items',
     'Reduced_Fossil_Pieces',
+    'Reduced_Fossils',
 }
 
 export default class UndergroundUpgrade extends Upgrade {
@@ -27,8 +28,9 @@ export default class UndergroundUpgrade extends Upgrade {
         name: Upgrades, displayName: string, maxLevel: number,
         costList: Amount[], bonusList: number[], increasing = true,
         public description?: string, private requirement?: Requirement,
+        startLevel: number = 0,
     ) {
-        super(name, displayName, maxLevel, costList, bonusList, increasing);
+        super(name, displayName, maxLevel, costList, bonusList, increasing, startLevel);
     }
 
 

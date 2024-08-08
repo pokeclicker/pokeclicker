@@ -214,6 +214,7 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
  */
 
 // Underground
+Settings.add(new BooleanSetting('underground.Reduced_Fossils', 'Reduced Fossils', true, undefined, false));
 Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true, undefined, false));
 Settings.add(new BooleanSetting('underground.Reduced_Plates', 'Reduced Plates', true, undefined, false));
 Settings.add(new BooleanSetting('underground.Reduced_Evolution_Items', 'Reduced Evolution Items', true, undefined, false));
