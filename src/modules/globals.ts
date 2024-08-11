@@ -71,6 +71,7 @@ type TmpGameType = {
     challenges: Challenges,
     multiplier: Multiplier,
     saveReminder: SaveReminder,
+    blending: any,
 
     // There are functions we could mention too,
     // but they aren't mentioned in any modules (yet?)
