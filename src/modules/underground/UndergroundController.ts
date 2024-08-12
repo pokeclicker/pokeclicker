@@ -26,6 +26,8 @@ import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
 
 export class UndergroundController {
+    private static lastMineClick: number = Date.now();
+
     public static shortcutVisible: PureComputed<boolean> = ko.pureComputed(() => {
         return App.game.underground.canAccess() && !Settings.getSetting('showUndergroundModule').observableValue();
     });
@@ -146,6 +148,13 @@ export class UndergroundController {
     }
 
     public static clickModalMineSquare(index: number) {
+        const now = Date.now();
+
+        if (this.lastMineClick > now - 50) {
+            return;
+        }
+        this.lastMineClick = now;
+
         const coordinates = App.game.underground.mine.getCoordinateForGridIndex(index);
         App.game.underground.tools.useTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y);
     }
