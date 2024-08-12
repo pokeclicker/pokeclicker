@@ -300,7 +300,7 @@ export type TmpPartyControllerType = {
 
 export type TmpSpecialEventsType = {
     getEvent: (eventName: SpecialEventTitleType) => any
-} & Record <any, any>;
+};
 
 export type TmpTemporaryBattleListType = {
     [battleName: string]: TmpTemporaryBattleType;

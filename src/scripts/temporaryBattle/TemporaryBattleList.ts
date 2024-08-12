@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
+
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
 //Kanto Temporary Battles
@@ -7187,3 +7189,5 @@ TemporaryBattleList['Paradise Protection Protocol'] = new TemporaryBattle(
         new GymBadgeRequirement(BadgeEnums.Violet),
     ]
 );
+
+TemporaryBattleList satisfies TmpTemporaryBattleListType;
