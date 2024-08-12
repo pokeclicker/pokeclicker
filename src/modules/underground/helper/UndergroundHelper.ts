@@ -33,7 +33,7 @@ export class UndergroundHelper {
     private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(SMART_TOOL_CHANCE_BASE + SMART_TOOL_CHANCE_INCREASE_PER_LEVEL * this._level(), SMART_TOOL_CHANCE_MAXIMUM));
     private _favoriteMineChance: PureComputed<number> = ko.pureComputed(() =>
         Math.min(FAVORITE_MINE_CHANCE_BASE + FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL * this._level(), FAVORITE_MINE_CHANCE_MAXIMUM));
-    private _shouldDiscover: Observable<boolean> = ko.observable<boolean>(true);
+    private _shouldDiscoverFavorite: Observable<boolean> = ko.observable<boolean>(false);
     private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(WORKCYCLE_TIMEOUT_BASE - WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL * this._level(), WORKCYCLE_TIMEOUT_MINIMUM));
 
     private _selectedEnergyRestore: Observable<EnergyRestoreSize> = ko.observable(-1);
@@ -134,8 +134,12 @@ export class UndergroundHelper {
             UndergroundController.notifyMineCompleted(this);
         }
 
-        if (App.game.underground.mine.completed && this.shouldDiscover) {
-            App.game.underground.generateMine(Rand.chance(this.favoriteMineChance) ? this._favoriteMine : MineType.Random, this);
+        if (App.game.underground.mine.completed) {
+            if (this.shouldDiscoverFavorite) {
+                App.game.underground.generateMine(Rand.chance(this.favoriteMineChance) ? this._favoriteMine : MineType.Random, this);
+            } else {
+                App.game.underground.generateMine(MineType.Random, this);
+            }
         }
     }
 
@@ -240,12 +244,12 @@ export class UndergroundHelper {
         return this._favoriteMineChance();
     }
 
-    get shouldDiscover(): boolean {
-        return this._shouldDiscover();
+    get shouldDiscoverFavorite(): boolean {
+        return this._shouldDiscoverFavorite();
     }
 
-    set shouldDiscover(value: boolean) {
-        this._shouldDiscover(value);
+    set shouldDiscoverFavorite(value: boolean) {
+        this._shouldDiscoverFavorite(value);
     }
 
     get canGenerateSpecial(): boolean {
@@ -275,7 +279,7 @@ export class UndergroundHelper {
             hired: this._hired(),
             timeSinceWork: this._timeSinceWork(),
             selectedEnergyRestore: this._selectedEnergyRestore(),
-            shouldDiscover: this._shouldDiscover(),
+            shouldDiscoverFavorite: this._shouldDiscoverFavorite(),
         };
     }
 
@@ -284,7 +288,7 @@ export class UndergroundHelper {
         this._hired = ko.observable(json?.hired || false);
         this._timeSinceWork = ko.observable(json?.timeSinceWork || 0);
         this._selectedEnergyRestore = ko.observable(json?.selectedEnergyRestore ?? -1);
-        this._shouldDiscover = ko.observable(json?.shouldDiscover ?? true);
+        this._shouldDiscoverFavorite = ko.observable(json?.shouldDiscoverFavorite ?? false);
     }
 
     public static convertLevelToExperience(level: number): number {
