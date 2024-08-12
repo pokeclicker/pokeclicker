@@ -58,6 +58,9 @@ export default class UndergroundTool {
     }
 
     public reduceDurabilityByUse() {
+        if (this.restoreRate <= 0)
+            return;
+
         GameHelper.incrementObservable(this._durability, -this.durabilityPerUse);
     }
 

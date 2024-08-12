@@ -133,6 +133,7 @@
                                         </div>
 
                                         <div class="text-center text-light bg-dark p-1"><h6 class="m-0 small">Repair</h6></div>
+                                        <!-- ko if: tool.restoreRate > 0 -->
                                         <div class="progress" style='height: 10px; min-height: 10px;'>
                                             <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
                                                  data-bind="style: { 'width': (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
@@ -140,6 +141,16 @@
                                             </div>
                                         </div>
                                         <div class="small"><knockout data-bind="text: (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: tool.restoreRate > 0 -->
+                                        <div class="progress" style='height: 10px; min-height: 10px;'>
+                                            <div class="progress-bar progress-bar-animated" role="progressbar" style="background: linear-gradient(45deg,var(--tool-color) 25%,transparent 25%,transparent 50%,var(--tool-color) 50%,var(--tool-color) 75%,transparent 75%,transparent); background-size: 1rem 1rem;"
+                                                 data-bind="style: { 'width': '100%' }"
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                        <div class="small">∞</div>
+                                        <!-- /ko -->
                                     </div>
 
                                     <div class="card-footer p-0">

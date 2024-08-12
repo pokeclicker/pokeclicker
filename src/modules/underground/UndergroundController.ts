@@ -1,7 +1,6 @@
 import OakItemType from '../enums/OakItemType';
 import Rand from '../utilities/Rand';
 import { MineConfig, MineConfigs, MineType } from './mine/MineConfig';
-import UndergroundTool from './tools/UndergroundTool';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import { ItemList } from '../items/ItemList';
