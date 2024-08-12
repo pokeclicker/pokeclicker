@@ -6,7 +6,7 @@ import NotificationConstants from '../../notifications/NotificationConstants';
 import { Observable, PureComputed } from 'knockout';
 
 export default class UndergroundTool {
-    private _durability: Observable<number> = ko.observable(0).extend({ numeric: 2 });
+    private _durability: Observable<number> = ko.observable(1).extend({ numeric: 2 });
     private _restoreRateCounter: Observable<number> = ko.observable(0);
 
     public canUseTool: PureComputed<boolean> = ko.pureComputed(() => this.durability >= this.durabilityPerUse);
@@ -77,7 +77,7 @@ export default class UndergroundTool {
     }
 
     public fromJSON(save) {
-        this._durability(save?.durability || 0);
+        this._durability(save?.durability ?? 1);
         this._restoreRateCounter(save?.restoreRateCounter || 0);
     }
 
