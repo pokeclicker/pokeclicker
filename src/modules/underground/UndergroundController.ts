@@ -14,16 +14,13 @@ import {
     DISCOVER_MINE_TIMEOUT_BASE,
     DISCOVER_MINE_TIMEOUT_LEVEL_START,
     DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL,
-    GLOBAL_COOLDOWN_BASE,
-    GLOBAL_COOLDOWN_MINIMUM,
-    GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL, HELPER_EXPERIENCE_PLAYER_FRACTION,
+    HELPER_EXPERIENCE_PLAYER_FRACTION,
     humanifyString,
     PLATE_VALUE,
     PLAYER_EXPERIENCE_HELPER_FRACTION,
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
     SURVEY_RANGE_REDUCTION_LEVELS,
-    TOOL_COOLDOWN_MINIMUM,
 } from '../GameConstants';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
@@ -74,17 +71,6 @@ export class UndergroundController {
 
     public static getMineConfig(mineType: MineType) {
         return MineConfigs.find(mineType);
-    }
-
-    public static calculateGlobalCooldown(): number {
-        const cellBatteryBonus = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
-        return Math.max(GLOBAL_COOLDOWN_BASE - GLOBAL_COOLDOWN_REDUCTION_PER_LEVEL * App.game.underground.undergroundLevel, GLOBAL_COOLDOWN_MINIMUM) / cellBatteryBonus;
-    }
-
-    public static calculateToolCooldown(tool: UndergroundTool): number {
-        // const cellBatteryBonus = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
-        const cellBatteryBonus = 1;
-        return Math.max(tool.baseCooldown - tool.cooldownReductionPerLevel * App.game.underground.undergroundLevel, TOOL_COOLDOWN_MINIMUM) / cellBatteryBonus;
     }
 
     public static calculateDiscoverMineTimeout(mineType: MineType): number {

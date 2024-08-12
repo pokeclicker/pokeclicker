@@ -78,7 +78,7 @@
                             <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
                                  data-bind="css: {
                                     'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
-                                    'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).cooldownForDisplay() > 0
+                                    'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durability < App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durabilityPerUse
                                  },
                                  class: `${UndergroundToolType[App.game.underground.tools.selectedToolType]}Selected`,
                                  style: {
@@ -119,32 +119,27 @@
                                     <div class="card-header p-1" data-bind="css: { 'bg-info': App.game.underground.tools.selectedToolType === $data }">
                                         <div data-bind="text: tool.displayName"></div>
                                     </div>
+
                                     <div class="card-body d-flex flex-column p-0 rounded text-center">
                                         <div class="p-1 d-flex justify-content-center">
-                                            <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(transparent ${(1 - (tool.cooldownForDisplay() / tool.cooldownTime)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, var(--tool-color) 0)` }">
-                                                <div class="bg-secondary" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 5px;">
-                                                    <div style="width: 27px; height: 27px; display: flex; align-items: center; justify-content: center;">
-                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: { opacity: tool.cooldownForDisplay() > 0 ? 0.3 : 1 }">
+                                            <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: !tool.canUseTool() ? 0.3 : 1 }">
+                                                <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 5px;">
+                                                    <div class="d-flex align-items-center justify-content-center" style="width: 27px; height: 27px;">
+                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
                                                     </div>
-                                                    <div class="small" data-bind="text: tool.cooldownForDisplay().toLocaleString('en-US', { minimumSignificantDigits: 2, maximumFractionDigits: 1, roundingPriority: 'lessPrecision' }), style: { opacity: tool.cooldownForDisplay() === 0 ? 0.3 : 1 }"></div>
+                                                    <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="text-center text-light bg-dark p-1"><h6 class="m-0 small">Bonus Charge</h6></div>
-                                        <!-- ko if: tool.maximumBonusCharges > 0 -->
-                                        <div><knockout data-bind="text: tool.bonusCharges"></knockout> / <knockout data-bind="text: tool.maximumBonusCharges"></knockout></div>
-                                        <div class="small" data-bind="style: { opacity: tool.bonusCharges >= tool.maximumBonusCharges ? 0.3 : 1 }"><knockout data-bind="text: (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                                        <div class="progress" style='height: 10px; min-height: 10px;' data-bind="style: { opacity: tool.bonusCharges >= tool.maximumBonusCharges ? 0.3 : 1 }">
+                                        <div class="text-center text-light bg-dark p-1"><h6 class="m-0 small">Repair</h6></div>
+                                        <div class="progress" style='height: 10px; min-height: 10px;'>
                                             <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
-                                                 data-bind="style: { 'width': (tool.counter / tool.baseCooldown).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                                 data-bind="style: { 'width': (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
                                                  aria-valuemin="0" aria-valuemax="100">
                                             </div>
                                         </div>
-                                        <!-- /ko -->
-                                        <!-- ko ifnot: tool.maximumBonusCharges > 0 -->
-                                        <div class="d-flex justify-content-center align-items-center" style="flex: 1;">N/A</div>
-                                        <!-- /ko -->
+                                        <div class="small"><knockout data-bind="text: (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                     </div>
 
                                     <div class="card-footer p-0">
@@ -343,23 +338,13 @@
                         <div class="card-body">
                             <p>The Underground offers <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
 
-                            <h4>Cooldown systems</h4>
-                            <ul>
-                                <li><strong>Tool-Specific Cooldown:</strong> Each tool has its own cooldown period that must be waited out after use if no bonus charges are available.</li>
-                                <li><strong>Global Cooldown:</strong> Using any tool will trigger a brief cooldown period during which no other tool can be used.</li>
-                            </ul>
-
-                            <h4>Bonus Charges</h4>
-                            <ul>
-                                <li>
-                                    When you use a tool, it will first check if you have any bonus charges left.
-                                    <ul>
-                                        <li>If you do, one charge will be consumed.</li>
-                                        <li>If you don’t, the tool-specific cooldown will be triggered, followed by the global cooldown.</li>
-                                    </ul>
-                                </li>
-                                <li>Bonus charges restore at a rate of 1 charge per X seconds, where X is equal to the tool’s base cooldown.</li>
-                            </ul>
+                            <h4>Durability</h4>
+                            <p>
+                                Using a tool is only possible when your tool is durable enough. When you use your tool successfully it will take some damage, which will be repaired over time.
+                                The tool will repair X% over Y seconds. Each tool has its own repair rate and repairs a certain percentage of the tool's durability.
+                                The repair rate is reduced by Z seconds based on your Underground Level.
+                                When a tool reaches a repair rate of 0 seconds, it's durability will stay at 100%.
+                            </p>
 
                             <h4>Successful Use</h4>
                             <p>A tool only counts as used if its action is successful, meaning it accomplishes its intended task (e.g., mining layers or indicating tiles).</p>
@@ -444,13 +429,6 @@
 
                             <h4>Experience</h4>
                             <ul>
-                                <li><strong>Tools:</strong> Each tool grants a certain amount of experience each time it is used successfully.
-                                    <ul>
-                                        <li><strong>Chisel:</strong> <knockout data-bind="text: App.game.underground.tools.getTool(UndergroundToolType.Chisel).experiencePerUse"></knockout> experience</li>
-                                        <li><strong>Hammer:</strong> <knockout data-bind="text: App.game.underground.tools.getTool(UndergroundToolType.Hammer).experiencePerUse"></knockout> experience</li>
-                                        <li><strong>Bomb:</strong> <knockout data-bind="text: App.game.underground.tools.getTool(UndergroundToolType.Bomb).experiencePerUse"></knockout> experience</li>
-                                    </ul>
-                                </li>
                                 <li>
                                     <strong>Items:</strong>
                                     <ul>
@@ -849,10 +827,10 @@
         <li>
             <strong>Properties:</strong>
             <ul>
-                <li><strong>Base Cooldown:</strong> <knockout data-bind="text: $data.tool.baseCooldown"></knockout> seconds</li>
-                <li><strong>Cooldown Reduction per Level:</strong> <knockout data-bind="text: $data.tool.cooldownReductionPerLevel"></knockout> seconds</li>
-                <li><strong>Maximum Bonus Charges:</strong> <knockout data-bind="text: $data.tool.maximumBonusCharges"></knockout> charges</li>
-                <li><strong>Experience per Use:</strong> <knockout data-bind="text: $data.tool.experiencePerUse"></knockout> experience</li>
+                <li><strong>Base Repair Rate:</strong> <knockout data-bind="text: $data.tool.restoreRateInSeconds"></knockout> seconds</li>
+                <li><strong>Repair Rate Reduction per Level:</strong> <knockout data-bind="text: $data.tool.restoreRateReductionPerLevel"></knockout> seconds</li>
+                <li><strong>Repair per Tick:</strong> <knockout data-bind="text: $data.tool.durabilityRestoreRate.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></li>
+                <li><strong>Damage per Use:</strong> <knockout data-bind="text: $data.tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></li>
             </ul>
         </li>
     </ul>

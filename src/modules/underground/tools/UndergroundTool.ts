@@ -1,25 +1,23 @@
-import { Observable } from 'knockout';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from './UndergroundToolType';
 import { Coordinate } from '../mine/Mine';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
+import { Observable, PureComputed } from 'knockout';
 
 export default class UndergroundTool {
-    private _cooldownTime = ko.observable(0);
-    private _nextAllowedUse = ko.observable(Date.now());
-    private _bonusCharges: Observable<number> = ko.observable(0);
+    private _durability: Observable<number> = ko.observable(0).extend({ numeric: 2 });
+    private _restoreRateCounter: Observable<number> = ko.observable(0);
 
-    public cooldownForDisplay = ko.observable(0);
-
-    private _counter = ko.observable(0);
+    public canUseTool: PureComputed<boolean> = ko.pureComputed(() => this.durability >= this.durabilityPerUse);
 
     constructor(
         public id: UndergroundToolType,
         public displayName: string,
-        public baseCooldown: number,
-        public cooldownReductionPerLevel: number,
-        public maximumBonusCharges: number,
+        public restoreRateInSeconds: number,
+        public restoreRateReductionPerLevel: number,
+        public durabilityRestoreRate: number,
+        public durabilityPerUse: number,
         public experiencePerUse: number,
         public action: (x: number, y: number) => { coordinatesMined: Array<Coordinate>, success: boolean },
     ) {
@@ -27,86 +25,63 @@ export default class UndergroundTool {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public tick(deltaTime: number) {
-        this.handleBonusChargesTick(deltaTime);
-        this.cooldownForDisplay(this.cooldown < 0.1 ? 0 : this.cooldown);
+        this.handleDurabilityTick(deltaTime);
     }
 
-    private handleBonusChargesTick(deltaTime: number) {
-        if (this.cooldown > 0) return;
-        if (this.bonusCharges >= this.maximumBonusCharges) return;
+    private handleDurabilityTick(deltaTime: number) {
+        if (this.durability >= 1) return;
 
-        GameHelper.incrementObservable(this._counter, deltaTime);
+        if (this.restoreRate <= 0) {
+            this._durability(Math.max(this.durability, 1));
+            return;
+        }
 
-        if (this._counter() >= this.baseCooldown) {
-            GameHelper.incrementObservable(this._bonusCharges);
-            this._counter(0);
+        GameHelper.incrementObservable(this._restoreRateCounter, deltaTime);
 
-            if (this.bonusCharges === this.maximumBonusCharges) {
-                Notifier.notify({
-                    title: 'Underground tools',
-                    message: `${this.displayName} reached maximum bonus charges: ${this.bonusCharges}!`,
-                    type: NotificationConstants.NotificationOption.success,
-                    timeout: 1e4,
-                    sound: NotificationConstants.NotificationSound.General.underground_energy_full,
-                    setting: NotificationConstants.NotificationSetting.Underground.underground_energy_full,
-                });
-            } else {
-                Notifier.notify({
-                    title: 'Underground tools',
-                    message: `${this.displayName} has gained an extra bonus charge: ${this.bonusCharges}/${this.maximumBonusCharges}!`,
-                    type: NotificationConstants.NotificationOption.success,
-                    timeout: 1e4,
-                    setting: NotificationConstants.NotificationSetting.Underground.underground_energy_restore,
-                });
-            }
+        if (this.restoreRateCounter < this.restoreRate) {
+            return;
+        }
+
+        this._durability(Math.min(this.durability + this.durabilityRestoreRate, 1));
+        this._restoreRateCounter(this.restoreRateCounter % this.restoreRate);
+
+        if (this.durability === 1) {
+            Notifier.notify({
+                title: 'Underground tools',
+                message: `${this.displayName} reached 100% durability!`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+                sound: NotificationConstants.NotificationSound.General.underground_energy_full,
+                setting: NotificationConstants.NotificationSetting.Underground.underground_energy_full,
+            });
         }
     }
 
-    canUseTool(): boolean {
-        return this.cooldown <= 0;
+    public reduceDurabilityByUse() {
+        GameHelper.incrementObservable(this._durability, -this.durabilityPerUse);
     }
 
-    get bonusCharges(): number {
-        return this._bonusCharges();
+    get durability(): number {
+        return this._durability();
     }
 
-    public useBonusCharge(): void {
-        GameHelper.incrementObservable(this._bonusCharges, -1);
+    get restoreRate(): number {
+        return Math.max(this.restoreRateInSeconds - this.restoreRateReductionPerLevel * App.game.underground.undergroundLevel, 0);
     }
 
-    get cooldown(): number {
-        return Math.max(this._nextAllowedUse() - Date.now(), 0) / 1000;
-    }
-
-    set cooldown(seconds: number) {
-        const newNextAllowedUse = Date.now() + seconds * 1000;
-        if (newNextAllowedUse > this._nextAllowedUse()) {
-            this._cooldownTime(seconds);
-            this._nextAllowedUse(newNextAllowedUse);
-        }
-    }
-
-    get cooldownTime(): number {
-        return this._cooldownTime();
-    }
-
-    get counter(): number {
-        return this._counter();
+    get restoreRateCounter(): number {
+        return this._restoreRateCounter();
     }
 
     public fromJSON(save) {
-        this.cooldown = save.cooldown || 0;
-        this._cooldownTime(save.cooldownTime || 0);
-        this._bonusCharges(save?.bonusCharges || 0);
-        this._counter(save?.counter || 0);
+        this._durability(save?.durability || 0);
+        this._restoreRateCounter(save?.restoreRateCounter || 0);
     }
 
     public toJSON() {
         return {
-            cooldown: this.cooldown,
-            cooldownTime: this.cooldownTime,
-            bonusCharges: this._bonusCharges(),
-            counter: this._counter(),
+            durability: this._durability(),
+            restoreRateCounter: this._restoreRateCounter(),
         };
     }
 }

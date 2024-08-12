@@ -18,7 +18,7 @@ export default class UndergroundTools {
 
     initialize() {
         this.tools = [
-            new UndergroundTool(UndergroundToolType.Chisel, 'Chisel', 20, 2, 50, 1, (x, y) => {
+            new UndergroundTool(UndergroundToolType.Chisel, 'Chisel', 20, 1, 0.02, 0.02, 0, (x, y) => {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 if (App.game.underground.mine?.attemptBreakTile({ x, y }, 2)) {
                     coordinatesActuallyMined.push({ x, y });
@@ -28,7 +28,7 @@ export default class UndergroundTools {
                     success: coordinatesActuallyMined.length > 0,
                 };
             }),
-            new UndergroundTool(UndergroundToolType.Hammer, 'Hammer', 60, 4, 15, 2, (x, y) => {
+            new UndergroundTool(UndergroundToolType.Hammer, 'Hammer', 20, 1, 0.02, 0.06, 0, (x, y) => {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 for (let deltaX = -1; deltaX <= 1; deltaX++) {
                     for (let deltaY = -1; deltaY <= 1; deltaY++) {
@@ -42,7 +42,7 @@ export default class UndergroundTools {
                     success: coordinatesActuallyMined.length > 0,
                 };
             }),
-            new UndergroundTool(UndergroundToolType.Bomb, 'Bomb', 180, 9, 5, 3, () => {
+            new UndergroundTool(UndergroundToolType.Bomb, 'Bomb', 20, 1, 0.02, 0.18, 0, () => {
                 const coordinatesActuallyMined: Array<Coordinate> = [];
                 const baseBombTiles: number = 10;
                 const extraBombTiles: number = App.game.oakItems.isActive(OakItemType.Explosive_Charge) ? App.game.oakItems.calculateBonus(OakItemType.Explosive_Charge) : 0;
@@ -58,7 +58,7 @@ export default class UndergroundTools {
                     success: true,
                 };
             }),
-            new UndergroundTool(UndergroundToolType.Survey, 'Survey', 300, 0, 0, 0, () => {
+            new UndergroundTool(UndergroundToolType.Survey, 'Survey', 300, 0, 1, 1, 0, () => {
                 // Get a list of unmined reward coordinates
                 const unminedRewardCoordinates = App.game.underground.mine.grid.reduce<number[]>((previousValue, currentValue, currentIndex) => {
                     if (currentValue.reward && currentValue.layerDepth > 0)
@@ -144,16 +144,7 @@ export default class UndergroundTools {
             }
 
             if (success) {
-                // Use a stored use, or trigger the cooldown
-                if (tool.bonusCharges > 0) tool.useBonusCharge();
-                else tool.cooldown = UndergroundController.calculateToolCooldown(tool);
-
-                // Put all other tools on cooldown
-                this.tools.forEach(t => {
-                    if (t.id !== toolType) {
-                        t.cooldown = UndergroundController.calculateGlobalCooldown();
-                    }
-                });
+                tool.reduceDurabilityByUse();
             }
         }
     }
