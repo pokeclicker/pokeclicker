@@ -850,7 +850,7 @@ class Farming implements Feature {
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
             ],
             new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]),
-            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Sizzlipede']
+            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Mothim', 'Sizzlipede']
         );
 
         this.berryData[BerryType.Charti] = new Berry(
@@ -928,6 +928,7 @@ class Farming implements Feature {
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
                 'It has a tendency to overtake nearby plants.',
+                'It also prevents Kasib from mutating.',
             ],
             undefined,
             ['Houndour', 'Absol', 'Stunky', 'Zorua', 'Impidimp']
@@ -1178,7 +1179,7 @@ class Farming implements Feature {
             BerryFirmness.Very_Hard,
             [
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
-                'This power keeps other Berries alive for longer.',
+                'This power revitalizes and prevents other berries from withering.',
             ],
             undefined,
             ['Mew']
