@@ -283,4 +283,42 @@ class MapHelper {
         }
     }
 
+     public static getBlimpData(professorName: string = ""): Blimp {
+        const baseProps = {
+            name: professorName + "'s Blimp",
+            width: 6 * 16,
+            height: 3 * 16,
+            image: "",
+        };
+
+        if (MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special && App.game.challenges.list.requireCompletePokedex.active()) {
+            return new Blimp(
+                baseProps.name,
+                baseProps.width,
+                baseProps.height,
+                "assets/images/map/blimp_empty.png"
+            );
+        }
+
+        if (MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special) {
+            return new Blimp(
+                baseProps.name,
+                baseProps.width,
+                baseProps.height,
+                "assets/images/map/blimp_pikachu.png"
+            );
+        }
+
+        if (MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special && !App.game.challenges.list.requireCompletePokedex.active()) {
+            return new Blimp(
+                "Team Rocket's Blimp",
+                4 * 16,
+                8 * 16,
+                "assets/images/map/blimp_meowth.png"
+            );
+        }
+
+        return baseProps as Blimp;
+    } 
+
 }

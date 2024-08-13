@@ -3430,32 +3430,10 @@
         })
      %>
 
-     <%- include('templates/mapOverlay',
-         { name: "Professor Laventon's Blimp"
-         , x: 2, y: 37
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Prelude Beach')}, attr:{ class: MapHelper.calculateTownCssClass('Prelude Beach') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special && App.game.challenges.list.requireCompletePokedex.active()"
-         , image: "assets/images/map/blimp_empty.png"
-         })
-     %>
-
-     <%- include('templates/mapOverlay',
-         { name: "Professor Laventon's Blimp"
-         , x: 2, y: 37
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Prelude Beach')}, attr:{ class: MapHelper.calculateTownCssClass('Prelude Beach') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_pikachu.png"
-         })
-     %>
-    <%- include('templates/mapOverlay',
-        { name: "Team Rocket's Blimp"
-        , x: 2, y: 34
-        , width: 4, height: 8
-        , databind: "click:function(){MapHelper.moveToTown('Prelude Beach')}, attr:{ class: MapHelper.calculateTownCssClass('Prelude Beach') }"
-        , visible:  "(MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special) && !App.game.challenges.list.requireCompletePokedex.active()"
-        , image: "assets/images/map/blimp_meowth.png"
+      <%- include('templates/mapBlimp',
+        { name: "Professor Laventon"
+        , x: 2, y: 37
+        , town: "Prelude Beach"
         })
     %>
 
