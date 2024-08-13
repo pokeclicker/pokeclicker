@@ -31790,7 +31790,7 @@ pokemonList.forEach((p) => {
             con.push(ContestType.Beautiful, ContestType.Tough);
         }
         if (cremie.includes('Ruby Swirl')) {
-            con.push(ContestType.Cute, ContestType.Tough);
+            con.push(ContestType.Cool, ContestType.Cute);
         }
         if (cremie.includes('Caramel')) {
             con.push(ContestType.Cool, ContestType.Smart);
