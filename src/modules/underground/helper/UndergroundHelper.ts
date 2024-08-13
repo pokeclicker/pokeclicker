@@ -107,8 +107,6 @@ export class UndergroundHelper {
         const { coordinatesMined, success } = tool.action(x, y);
 
         if (success) {
-            UndergroundController.addHiredHelperUndergroundExp(tool.experiencePerUse, true);
-
             const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
 
             itemsFound.forEach(value => {

@@ -18,7 +18,6 @@ export default class UndergroundTool {
         public restoreRateReductionPerLevel: number,
         public durabilityRestoreRate: number,
         public durabilityPerUse: number,
-        public experiencePerUse: number,
         public action: (x: number, y: number) => { coordinatesMined: Array<Coordinate>, success: boolean },
     ) {
     }
