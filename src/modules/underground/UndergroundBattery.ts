@@ -4,10 +4,10 @@ import GameHelper from '../GameHelper';
 import {
     UNDERGROUND_BATTERY_COOLDOWN_SECONDS,
     UNDERGROUND_BATTERY_MAX_CHARGES, UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
-    UNDERGROUND_EXPERIENCE_DIG_UP_ITEM
+    UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
 } from '../GameConstants';
 import Rand from '../utilities/Rand';
-import {UndergroundController} from './UndergroundController';
+import { UndergroundController } from './UndergroundController';
 import Settings from '../settings';
 
 type Pattern = Array<Array<{ coordinate: Coordinate, depth: number }>>;
@@ -645,5 +645,5 @@ UndergroundBattery.addPattern([
         { coordinate:{ x:15, y:11 }, depth:1 },
         { coordinate:{ x:16, y:11 }, depth:1 },
         { coordinate:{ x:17, y:11 }, depth:1 },
-    ]
+    ],
 ]);
