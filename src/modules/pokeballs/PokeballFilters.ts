@@ -36,10 +36,10 @@ export default class PokeballFilters implements Feature {
         // Create two Pokemon Type settings
         delete settings.pokemonType;
         settings.type1 = pokeballFilterOptions.pokemonType.createSetting(
-            PokemonType.Normal, 'pokeballFilterPokemonType1', 'Pokémon Type 1',
+            PokemonType.Normal, 'pokemonType1', 'Pokémon Type 1',
         );
         settings.type2 = pokeballFilterOptions.pokemonType.createSetting(
-            PokemonType.Normal, 'pokeballFilterPokemonType2', 'Pokémon Type 2',
+            PokemonType.Normal, 'pokemonType2', 'Pokémon Type 2',
         );
 
         return settings;

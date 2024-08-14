@@ -64,7 +64,7 @@
                                     <div class="pokeballFilterHeader">
                                         <div class="pokeballFilterEnableToggle" data-bind="
                                             tooltip: {
-                                                title: $data.enabled() ? 'Enabled' : 'Disabled',
+                                                title: App.translation.get(`switch.${$data.enabled() ? 'enabled' : 'disabled'}`, 'app').peek(),
                                                 trigger: 'hover',
                                                 animation: false,
                                                 placement: 'bottom',
@@ -142,7 +142,7 @@
                                                         </button>
                                                     </td>
                                                     <td class="p-2"
-                                                        data-bind="text: pokeballFilterOptions[$data].defaultSetting.displayName">
+                                                        data-bind="text: App.translation.get(`pokeball.filters.${$data}`, 'modules')">
                                                     </td>
                                                     <td></td>
                                                 </tr>
@@ -276,9 +276,10 @@
 </script>
 <script type="text/html" id="pokeballFilterSlider">
     <td class="p-2">
-        <label class="m-0" data-bind="attr: { for: `checkbox-${setting.name}-${key}` }, text: `${setting.displayName}:`">
-            setting name
-        </label>
+        <label class="m-0" data-bind="
+            attr: { for: `checkbox-${setting.name}-${key}` },
+            text: App.translation.get(`pokeball.filters.${setting.name}`, 'modules'),
+        "></label>
     </td>
     <td class="p-2">
         <label class="form-check-label toggler-wrapper style-1 m-auto">
@@ -292,12 +293,14 @@
 </script>
 
 <script type="text/html" id="pokeballFilterMultipleChoice">
-    <td class="p-2" data-bind="text: `${setting.displayName}:`">setting name</td>
+    <td class="p-2" data-bind="text: App.translation.get(`pokeball.filters.${setting.name}`, 'modules')"></td>
     <td class="p-0">
         <select class="form-control" data-bind="
             options: setting.getValidOptions(),
             optionsValue: 'value',
-            optionsText: 'text',
+            optionsText: (option) => setting.name === 'category'
+                ? option.text
+                : App.translation.get(`${setting.name.replace(/\d/g, '')}.${option.text.replace(/\s/g, '')}`, 'constants'),
             value: setting.observableValue
         "></select>
     </td>
