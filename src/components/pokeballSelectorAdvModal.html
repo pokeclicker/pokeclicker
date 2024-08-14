@@ -79,7 +79,10 @@
                                         "></div>
                                         <button class="btn-circle btn-info"
                                                 data-bind="tooltip: {
-                                                    title: $data.description,
+                                                    title: () => PokeballFilter.tooltipDescription(
+                                                        $data,
+                                                        (key, namespace) => App.translation.get(key, namespace)(),
+                                                    ),
                                                     trigger: 'hover',
                                                     animation: false,
                                                     placement: 'right',

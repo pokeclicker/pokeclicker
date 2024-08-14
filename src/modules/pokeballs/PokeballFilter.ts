@@ -121,4 +121,65 @@ export default class PokeballFilter {
             enabled: this.enabled(),
         };
     }
+
+    static tooltipDescription = (
+        data: PokeballFilter,
+        translator: (key: string, namespace: string) => string,
+    ): string => {
+        let description = '';
+
+        if (!data.enabled()) {
+            description += translator('pokeball.tooltip.filters.disabled', 'modules');
+            description += '<br/><br/>';
+        }
+
+        const options = Object.entries(data.options);
+        if (!options.length) {
+            description += translator('pokeball.tooltip.filters.all', 'modules');
+            return description;
+        }
+
+        description += translator(
+            data.inverted()
+                ? 'pokeball.tooltip.filters.affectWithoutTraits'
+                : 'pokeball.tooltip.filters.affectWithTraits',
+            'modules',
+        );
+
+        description += '<ul class="pokeballFilterOptionDescriptions">';
+        description += options
+            .map(([opt, setting]) => {
+                const value = setting.observableValue();
+
+                const result = translator(
+                    `pokeball.filters.${setting.name}.description${value === false ? '.negative' : ''}`,
+                    'modules',
+                );
+                if (typeof value === 'boolean') {
+                    return result;
+                }
+
+                let valueText = undefined;
+                for (let index = 0; index < setting.options.length; ++index) {
+                    if (setting.options[index].value === value) {
+                        valueText = setting.options[index].text;
+                        break;
+                    }
+                }
+                if (!valueText) {
+                    return result;
+                }
+
+                if (opt !== 'category') {
+                    valueText = translator(`${opt}.${valueText.replace(/\s/g, '')}`, 'constants');
+                }
+
+                return  `${result} ${valueText}`;
+            })
+            .map((option) => `<li>${option}</li>`)
+            .join('');
+        description += '</ul>';
+
+        return description;
+    };
 }

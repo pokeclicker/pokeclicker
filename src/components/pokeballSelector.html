@@ -34,7 +34,10 @@
                             <td><span data-bind="
                                 text: $data.name,
                                 tooltip: {
-                                    title: $data.description,
+                                    title: () => PokeballFilter.tooltipDescription(
+                                        $data,
+                                        (key, namespace) => App.translation.get(key, namespace)(),
+                                    ),
                                     trigger: 'hover',
                                     boundary: 'window',
                                     animation: false,

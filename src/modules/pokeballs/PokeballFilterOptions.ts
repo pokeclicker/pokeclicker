@@ -40,7 +40,7 @@ const encounterTypeRequirements: Partial<Record<EncounterType, Requirement>> = {
 export const pokeballFilterOptions = {
     shiny: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
-            'pokeballFilterShiny',
+            'shiny',
             'Shiny',
             bool,
         ),
@@ -51,7 +51,7 @@ export const pokeballFilterOptions = {
 
     shadow: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
-            'pokeballFilterShadow',
+            'shadow',
             'Shadow',
             bool,
         ),
@@ -63,7 +63,7 @@ export const pokeballFilterOptions = {
 
     caught: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
-            'pokeballFilterCaught',
+            'caught',
             'Caught',
             bool,
         ),
@@ -74,7 +74,7 @@ export const pokeballFilterOptions = {
 
     caughtShiny: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
-            'pokeballFilterCaughtShiny',
+            'caughtShiny',
             'Caught Shiny',
             bool,
         ),
@@ -85,7 +85,7 @@ export const pokeballFilterOptions = {
 
     caughtShadow: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
-            'pokeballFilterCaughtShadow',
+            'caughtShadow',
             'Caught Shadow',
             bool,
         ),
@@ -97,7 +97,7 @@ export const pokeballFilterOptions = {
 
     pokerus: new PokeballFilterOption<Pokerus>(
         (pokerus = Pokerus.Uninfected) => new Setting(
-            'pokeballFilterPokerus',
+            'pokerus',
             'Pokérus State',
             GameHelper.enumStrings(Pokerus).map((k) => new SettingOption(k, Pokerus[k])),
             pokerus,
@@ -112,7 +112,7 @@ export const pokeballFilterOptions = {
     ),
 
     pokemonType: new PokeballFilterOption<PokemonType, [PokemonType, PokemonType]>(
-        (type = PokemonType.Normal, name = 'pokeballFilterPokemonType', defaultName = 'Pokémon Type') => new Setting(
+        (type = PokemonType.Normal, name = 'pokemonType', defaultName = 'Pokémon Type') => new Setting(
             name,
             defaultName,
             GameHelper.enumStrings(PokemonType).map((k) => new SettingOption(k, PokemonType[k])),
@@ -128,7 +128,7 @@ export const pokeballFilterOptions = {
 
     encounterType: new PokeballFilterOption<EncounterType>(
         (type: EncounterType = EncounterType.route) => new Setting(
-            'pokeballFilterEncounterType',
+            'encounterType',
             'Encounter Type',
             Object.values(EncounterType).map((v) => new SettingOption(v, v, encounterTypeRequirements[v])),
             type,
@@ -138,7 +138,7 @@ export const pokeballFilterOptions = {
 
     category: new PokeballFilterOption<number, number[]>(
         (category = 0) => new Setting(
-            'pokeballFilterCategory',
+            'category',
             'Category',
             () => PokemonCategories.categories().map((c) => new SettingOption(c.name(), c.id)),
             category,
