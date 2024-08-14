@@ -3,7 +3,9 @@
   <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="pokeballSelectorModalLabel">Poké Ball Selection</h5>
+        <h5 class="modal-title"
+            id="pokeballSelectorModalLabel"
+            data-bind="text: App.translation.get('pokeball.modal.selection.title', 'modules')"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -14,14 +16,22 @@
           <table class="table table-sm m-0">
             <thead>
               <tr>
-                <th class="text-center" width="20%">Ball</th>
-                <th>Description</th>
-                <th class="text-center">Qty</th>
+                <th data-bind="text: App.translation.get('pokeball.modal.selection.column.ball', 'modules')" class="text-center" width="20%"></th>
+                <th data-bind="text: App.translation.get('pokeball.modal.selection.column.description', 'modules')"></th>
+                <th data-bind="text: App.translation.get('pokeball.modal.selection.column.quantity', 'modules')" class="text-center"></th>
               </tr>
             </thead>
             <tbody>
               <tr class="clickable"
-                data-bind="template: { name: 'pokeballSelectionTemplate', data: { 'image': 'None', 'type': -1, 'description': 'Do not catch' }},
+                data-bind="
+                    template: {
+                        name: 'pokeballSelectionTemplate',
+                        data: {
+                            'image': 'None',
+                            'type': -1,
+                            'description': App.translation.get('pokeball.None.description', 'constants'),
+                        }
+                    },
                     click: function(){App.game.pokeballs.selectedSelection()?.(GameConstants.Pokeball.None)}"></tr>
               <!-- ko foreach: App.game.pokeballs.pokeballs -->
               <tr class="clickable"
@@ -38,7 +48,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"
+            data-dismiss="modal"
+            data-bind="text: App.translation.get('modal.action.close', 'app')"></button>
       </div>
     </div>
   </div>

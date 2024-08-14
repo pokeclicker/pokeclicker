@@ -5,18 +5,21 @@
             <div class="modal-header p-0" style='justify-content: space-around;'>
                 <ul class="nav nav-tabs nav-fill w-100">
                     <li class="nav-item">
-                        <a data-toggle='tab' class='nav-link active' href="#pokeballFilterConfigTab">
-                            Configure Filters
+                        <a class="nav-link active" href="#pokeballFilterConfigTab"
+                            data-toggle="tab"
+                            data-bind="text: App.translation.get('pokeball.modal.filters.configure.title', 'modules')">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle='tab' class='nav-link' href="#pokeballFilterTestTab">
-                            Test Filters
+                        <a class="nav-link" href="#pokeballFilterTestTab"
+                            data-toggle="tab"
+                            data-bind="text: App.translation.get('pokeball.modal.filters.test.title', 'modules')">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" class="nav-link" href="#pokeballFilterHelpTab">
-                            Help
+                        <a class="nav-link" href="#pokeballFilterHelpTab"
+                            data-toggle="tab"
+                            data-bind="text: App.translation.get('pokeball.modal.filters.help.title', 'modules')">
                         </a>
                     </li>
                 </ul>
@@ -25,17 +28,22 @@
                 <div class="tab-content">
                     <div id="pokeballFilterConfigTab" class="tab-pane active p-3">
                         <div>
-                            <button class="btn btn-primary my-2 mr-2" onclick="App.game.pokeballFilters.createFilter()">
-                                Create New Filter
+                            <button class="btn btn-primary my-2 mr-2" onclick="App.game.pokeballFilters.createFilter()"
+                                data-bind="text: App.translation.get('pokeball.modal.filters.configure.action.create', 'modules')">
                             </button>
-                            <button class="btn btn-primary my-2" onclick="App.game.pokeballFilters.reset()">
-                                Reset Filters
+                            <button class="btn btn-primary my-2" onclick="App.game.pokeballFilters.reset()"
+                                data-bind="text: App.translation.get('pokeball.modal.filters.configure.action.reset', 'modules')">
                             </button>
                         </div>
                         <p class="mb-1 small">
-                            ** Filters closer to the
-                            <strong class="text-warning" data-bind="text: Settings.getSetting('catchFilters.invertPriorityOrder').observableValue() ? 'bottom' : 'top'">top</strong>
-                            have a higher priority! **
+                            **
+                            <span data-bind="text: App.translation.get('pokeball.modal.filters.configure.hint.first', 'modules')">Filters closer to the</span>
+                            <strong class="text-warning" data-bind="text: Settings.getSetting('catchFilters.invertPriorityOrder').observableValue()
+                                ? App.translation.get('pokeball.modal.filters.configure.hint.bottom', 'modules')
+                                : App.translation.get('pokeball.modal.filters.configure.hint.top', 'modules')"
+                            ></strong>
+                            <span data-bind="text: App.translation.get('pokeball.modal.filters.configure.hint.second', 'modules')">have a higher priority!</span>
+                            **
                         </p>
                         <div id="pokeballFilterConfigs"
                             data-bind="sortable: {
@@ -99,8 +107,11 @@
                                     </div>
                                     <button class="pokeballFilterExpandBtn btn btn-secondary btn-block"
                                             data-toggle="collapse"
-                                            data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }"
-                                    >Toggle Settings</button>
+                                            data-bind="
+                                                attr: { href: `#pokeball-filter-options-${$index()}` },
+                                                text: App.translation.get('pokeball.modal.filters.configure.action.toggleSettings', 'modules')
+                                            "
+                                    ></button>
                                     <div class="collapse pokeballFilterBody"
                                         data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
                                         <table class="pokeballFilterOptions">
@@ -161,10 +172,10 @@
                     </div>
                     <div id="pokeballFilterTestTab" class="tab-pane p-3">
                         <div>
-                            <p>This tab is useful for making sure what your filters match, and which ones take precedence. See the Help tab for more details.</p>
+                            <p data-bind="text: App.translation.get('pokeball.modal.filters.test.description', 'modules')"></p>
                         </div>
                         <div id="pokeballFilterTestInput">
-                            <p>Configure these options to describe a Pokémon you want to test:</p>
+                            <p data-bind="text: App.translation.get('pokeball.modal.filters.test.legend', 'modules')"></p>
                             <table>
                                 <tbody data-bind="foreach: Object.entries(App.game.pokeballFilters.testSettings)
                                                                 .filter(([k]) => pokeballFilterOptions[k]?.canUse() ?? true)
@@ -180,8 +191,8 @@
                                                                     App.game.pokeballFilters.testSettingsData()
                                                                 )">
                             <p id="pokeballFilterTestMatch">
-                                <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'></span>
-                                <span data-bind='visible: !$data'>None of your enabled filters match this scenario</span>
+                                <span data-bind="visible: $data, text: `${App.translation.get('pokeball.modal.filters.test.result', 'modules').peek()} ${$data?.name}`"></span>
+                                <span data-bind="visible: !$data, text: App.translation.get('pokeball.modal.filters.test.noResult', 'modules')"></span>
                                 <!-- ko if: $data -->
                                 <img class="pokeball-selected pokeball-small" data-bind="
                                     attr: {
@@ -212,62 +223,37 @@
                         </div>
                     </div>
                     <div id="pokeballFilterHelpTab" class="tab-pane p-3">
-                        <h2>Configure Filters</h2>
+                        <h2 data-bind="text: App.translation.get('pokeball.modal.filters.configure.title', 'modules')"></h2>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph1', 'modules')"></p>
                         <p>
-                            Use this tab to add, edit, re-order, and remove Pokéball filters.
+                            <span data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph2.line1', 'modules')"></span>
+                            <button class="btn-circle btn-danger float-none">&minus;</button>
+                            <span data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph2.line2', 'modules')"></span>
+                            <button class="btn-circle btn-success float-none">&plus;</button>
+                            <span data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph2.line3', 'modules')"></span>
                         </p>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph3', 'modules')"></p>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph4', 'modules')"></p>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph5', 'modules')"></p>
                         <p>
-                            Click the "Toggle Settings" button for a filter to configure how it works.
-                            Options listed first are all the values that are checked when catching - you can click their <button class="btn-circle btn-danger float-none">&minus;</button> to remove these.
-                            The darker options below that are not checked.
-                            You can click their <button class="btn-circle btn-success float-none">&plus;</button> button to include it in the filter, and choose a value it must match.
+                            <span data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph6.line1', 'modules')"></span>
+                            <button class="btn-circle btn-info float-none">&#8505;</button>
+                            <span data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph6.line2', 'modules')"></span>
                         </p>
-                        <p>
-                            Filters can be re-ordered by dragging them from the bar on the left side of each filter.
-                            You can click the x on the right of each filter to remove them - this will open a confirmation box to prevent accidentally deleting one.
-                        </p>
-                        <p>
-                            Some filter options and default filters are hidden at the start of the game, and will unlock as they become relevant.
-                        </p>
-                        <p>
-                            The "Enabled" toggle allows you to turn a filter off.
-                            Disabled filters will be grayed out in the filter list on the main game screen, and also in the Test Filters tab.
-                            The "Inverted" toggle, when turned on, will make that filter <i>ignore</i> any Pokémon that match its conditions, and catch all the rest.
-                        </p>
-                        <p>
-                            You can hover (or tap) the <button class="btn-circle btn-info float-none">&#8505;</button> icon for a description of what the filter will catch.
-                        </p>
-                        <p>
-                            Right click (or long press on mobile) can be used to enable/disable filters from the main screen without opening this menu.
-                        </p>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.configure.paragraph7', 'modules')"></p>
 
-                        <h2>Test Filters</h2>
-                        <p>
-                            In some scenario, multiple of your filters may meet all of their conditions,
-                            but only one can be used to choose a ball for catching.
-                        </p>
-                        <p>
-                            This tab will allow you to see exactly which will be chosen,
-                            for some scenario you configure with the settings in the tab.
-                        </p>
-                        <p>
-                            For instance, if you wanted to know what is used for a shiny Rattata,
-                            when you already have a normal Rattata,
-                            you would turn on the "Shiny" and "Caught" toggles,
-                            but leave the others off.
-                        </p>
-                        <p>
-                            With the default catch filters,
-                            you will see that both "Caught" and "New Shiny" meet their conditions,
-                            but the "New Shiny" filter is the one used for catching.
-                            The filter furthest down in your list that matches all conditions is the one used.
-                            The highlighted filters are ones that matched the scenario.
-                        </p>
+                        <h2 data-bind="text: App.translation.get('pokeball.modal.filters.test.title', 'modules')"></h2>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.test.paragraph1', 'modules')"></p>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.test.paragraph2', 'modules')"></p>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.test.paragraph3', 'modules')"></p>
+                        <p data-bind="text: App.translation.get('pokeball.modal.filters.help.test.paragraph4', 'modules')"></p>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"
+                    data-dismiss="modal"
+                    data-bind="text: App.translation.get('modal.action.close', 'app')"></button>
             </div>
         </div>
     </div>
