@@ -50,6 +50,7 @@ export default class Translate {
                 debug: GameHelper.isDevelopmentBuild(),
                 ns: [
                     'app',
+                    'constants',
                     'logbook',
                     'modules',
                     'pokemon',

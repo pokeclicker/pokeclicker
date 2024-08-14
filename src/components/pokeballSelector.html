@@ -47,7 +47,7 @@
                                         attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.ball()] + '.svg'},
                                         css: { 'pokeball-selected': $data.enabled() },
                                         tooltip: {
-                                            title: $data.ball() === GameConstants.Pokeball.None ? 'None' : ItemList[GameConstants.Pokeball[$data.ball()]].displayName,
+                                            title: App.translation.get(`pokeball.${GameConstants.Pokeball[$data.ball()]}.name`, 'constants'),
                                             trigger: 'hover', animation: false,
                                             placement: 'right'
                                         },

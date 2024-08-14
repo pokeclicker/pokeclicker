@@ -59,10 +59,18 @@
 <script type="text/html" id="pokeballSelectionTemplate">
   <td class="text-center">
     <img class="pokeball-small"
-      data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.type] + '.svg'}, css: {'pokeball-selected': App.game.pokeballs.selectedSelection()?.() === $data.type}, tooltip: {title: $data.type === -1 ? 'None' : ItemList[GameConstants.Pokeball[$data.type]].displayName, trigger: 'hover', animation: false, placement: 'bottom'}"/>
+        data-bind="
+            attr: { src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.type] + '.svg' },
+            css: { 'pokeball-selected': App.game.pokeballs.selectedSelection()?.() === $data.type },
+            tooltip: {
+                title: App.translation.get(`pokeball.${GameConstants.Pokeball[$data.type]}.name`, 'constants'),
+                trigger: 'hover',
+                animation: false,
+                placement: 'bottom'
+            }"/>
   </td>
   <td class="align-middle">
-    <span data-bind="text: $data.description"></span>
+    <span data-bind="text: App.translation.get(`pokeball.${GameConstants.Pokeball[$data.type]}.description`, 'constants')"></span>
   </td>
   <td class="text-center align-middle">
     <span data-bind="text: $data.quantity && $data.quantity() ? GameConstants.formatNumber($data.quantity()) : '-', tooltip: $data.quantity && {title: $data.quantity().toLocaleString('en-US'), trigger: 'hover', animation: false, placement: 'left'}"></span>
