@@ -338,6 +338,7 @@ export class Mine {
                 this._updateItemsPartiallyFoundObservable();
             }
 
+            App.game.underground.battery.charge();
             return true;
         }
 

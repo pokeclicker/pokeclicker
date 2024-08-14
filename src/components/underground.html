@@ -160,6 +160,20 @@
                                 <!-- /ko -->
                             </div>
                         </div>
+
+                        <div>
+                            <p>Battery</p>
+
+                            <div class="progress" style='height: 10px; min-height: 10px;'>
+                                <div class="progress-bar" role="progressbar"
+                                     data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    <span data-bind="text: `${App.game.underground.battery.charges} / ${App.game.underground.battery.maxCharges}`"></span>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary" data-bind="click: () => App.game.underground.battery.discharge(), attr: { disabled: App.game.underground.battery.charges < App.game.underground.battery.maxCharges }">Discharge</button>
+                        </div>
                         <!-- /ko -->
                     </div>
                 </div>
