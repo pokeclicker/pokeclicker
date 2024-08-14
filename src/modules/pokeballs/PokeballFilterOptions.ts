@@ -16,7 +16,6 @@ class PokeballFilterOption<T, M = T> {
 
     constructor(
         public createSetting: (defaultVal?: T, name?: string, defaultName?: string) => Setting<T>,
-        public describe: (value: T) => string,
         public requirement?: Requirement,
         public matchTest: (optionValue: T, testValue: M) => boolean = (
             optionValue: T, testValue: M,
@@ -44,9 +43,6 @@ export const pokeballFilterOptions = {
             'Shiny',
             bool,
         ),
-        (isShiny) => `Are ${
-            isShiny ? '' : 'not '
-        }Shiny`,
     ),
 
     shadow: new PokeballFilterOption<boolean>(
@@ -55,9 +51,6 @@ export const pokeballFilterOptions = {
             'Shadow',
             bool,
         ),
-        (isShadow) => `Are ${
-            isShadow ? '' : 'not '
-        }Shadow`,
         tempShadowRequirement,
     ),
 
@@ -67,9 +60,6 @@ export const pokeballFilterOptions = {
             'Caught',
             bool,
         ),
-        (isCaught) => `${
-            isCaught ? 'Already' : 'Not yet'
-        } caught`,
     ),
 
     caughtShiny: new PokeballFilterOption<boolean>(
@@ -78,9 +68,6 @@ export const pokeballFilterOptions = {
             'Caught Shiny',
             bool,
         ),
-        (isCaughtShiny) => `Shiny form ${
-            isCaughtShiny ? 'already ' : 'not yet '
-        }caught`,
     ),
 
     caughtShadow: new PokeballFilterOption<boolean>(
@@ -89,9 +76,6 @@ export const pokeballFilterOptions = {
             'Caught Shadow',
             bool,
         ),
-        (isCaughtShadow) => `Shadow form ${
-            isCaughtShadow ? 'already ' : 'not yet '
-        }caught`,
         tempShadowRequirement,
     ),
 
@@ -102,9 +86,6 @@ export const pokeballFilterOptions = {
             GameHelper.enumStrings(Pokerus).map((k) => new SettingOption(k, Pokerus[k])),
             pokerus,
         ),
-        (pokerusState) => `Are in the ${
-            Pokerus[pokerusState]
-        } Pokérus state`,
         new CustomRequirement(
             ko.pureComputed(() => App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)),
             true, 'Pokérus virus is required',
@@ -118,7 +99,6 @@ export const pokeballFilterOptions = {
             GameHelper.enumStrings(PokemonType).map((k) => new SettingOption(k, PokemonType[k])),
             type,
         ),
-        (pokemonType) => `Is ${PokemonType[pokemonType]} type`,
         undefined,
         (
             optionValue: PokemonType,
@@ -133,7 +113,6 @@ export const pokeballFilterOptions = {
             Object.values(EncounterType).map((v) => new SettingOption(v, v, encounterTypeRequirements[v])),
             type,
         ),
-        (type) => `Is ${GameHelper.anOrA(type)} ${type} encounter`,
     ),
 
     category: new PokeballFilterOption<number, number[]>(
@@ -143,7 +122,6 @@ export const pokeballFilterOptions = {
             () => PokemonCategories.categories().map((c) => new SettingOption(c.name(), c.id)),
             category,
         ),
-        (category) => `In the ${PokemonCategories.categories().find(c => c.id == category)?.name()} category`,
         undefined,
         (
             optionValue: number,
