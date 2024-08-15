@@ -18,8 +18,14 @@ export class UndergroundBattery {
 
     private static _patterns: Array<Pattern> = [];
 
-    public static addPattern(pattern: Pattern) {
+    private _dischargingPattern: Pattern | null = null;
+
+    public static addPattern(id: string, tier: number, pattern: Pattern) {
+        const totalDepthCleared: number = pattern.flatMap(value => value.flatMap(value1 => value1.depth)).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
         this._patterns.push(pattern);
+
+        // eslint-disable-next-line no-console
+        console.log(`Adding '${id}', a tier ${tier} discharge, clearing ${totalDepthCleared} max total depth`);
     }
 
     public initialize() {
@@ -54,40 +60,51 @@ export class UndergroundBattery {
             return;
         }
 
-        const pattern = Rand.fromArray(UndergroundBattery._patterns);
-        const tilesMined = new Set<Coordinate>();
+        this._dischargingPattern = JSON.parse(JSON.stringify(Rand.fromArray(UndergroundBattery._patterns)));
+        this._charges(0);
+        this.handleDischargingPattern();
+    }
 
-        pattern.forEach(frame => frame.forEach(patternEntry => {
-            if (App.game.underground.mine.attemptBreakTile(patternEntry.coordinate, patternEntry.depth)) {
-                tilesMined.add(patternEntry.coordinate);
-            }
-        }));
+    private async handleDischargingPattern() {
+        while (this._dischargingPattern?.length > 0) {
+            const patternFrame = this._dischargingPattern.shift();
 
-        const itemsFound = Array.from(tilesMined).map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
-        itemsFound.forEach(value => {
-            if (value) {
-                const { item, amount } = value;
+            const tilesMined = new Set<Coordinate>();
 
-                UndergroundController.gainMineItem(item.id, amount);
-                UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
+            patternFrame.forEach(patternEntry => {
+                if (App.game.underground.mine.attemptBreakTile(patternEntry.coordinate, patternEntry.depth)) {
+                    tilesMined.add(patternEntry.coordinate);
+                }
+            });
 
-                UndergroundController.notifyItemFound(item, amount);
-            }
-        });
+            const itemsFound = Array.from(tilesMined).map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
+            itemsFound.forEach(value => {
+                if (value) {
+                    const { item, amount } = value;
 
-        if (itemsFound.length > 0) {
-            if (App.game.underground.mine.attemptCompleteLayer()) {
-                UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
+                    UndergroundController.gainMineItem(item.id, amount);
+                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
 
-                UndergroundController.notifyMineCompleted();
+                    UndergroundController.notifyItemFound(item, amount);
+                }
+            });
 
-                if (Settings.getSetting('autoRestartUndergroundMine').observableValue()) {
-                    App.game.underground.generateMine(App.game.underground.autoSearchMineType);
+            if (itemsFound.length > 0) {
+                if (App.game.underground.mine.attemptCompleteLayer()) {
+                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
+
+                    UndergroundController.notifyMineCompleted();
+
+                    if (Settings.getSetting('autoRestartUndergroundMine').observableValue()) {
+                        App.game.underground.generateMine(App.game.underground.autoSearchMineType);
+                    }
                 }
             }
-        }
 
-        this._charges(0);
+            await new Promise(resolve => {
+                setTimeout(resolve, 50);
+            });
+        }
     }
 
     get charges() {
@@ -111,7 +128,156 @@ export class UndergroundBattery {
     }
 }
 
-UndergroundBattery.addPattern([
+UndergroundBattery.addPattern('eruption', 1, [
+    [
+        { coordinate:{ x:1, y:1 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:1, y:0 }, depth: 2 },
+        { coordinate:{ x:0, y:1 }, depth: 2 },
+        { coordinate:{ x:1, y:1 }, depth: 2 },
+        { coordinate:{ x:2, y:1 }, depth: 2 },
+        { coordinate:{ x:1, y:2 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:0, y:0 }, depth: 1 },
+        { coordinate:{ x:1, y:0 }, depth: 1 },
+        { coordinate:{ x:2, y:0 }, depth: 1 },
+        { coordinate:{ x:0, y:1 }, depth: 1 },
+        { coordinate:{ x:1, y:1 }, depth: 1 },
+        { coordinate:{ x:2, y:1 }, depth: 1 },
+        { coordinate:{ x:3, y:1 }, depth: 1 },
+        { coordinate:{ x:0, y:2 }, depth: 1 },
+        { coordinate:{ x:1, y:2 }, depth: 1 },
+        { coordinate:{ x:2, y:2 }, depth: 1 },
+        { coordinate:{ x:1, y:3 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:7, y:10 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:7, y:9 }, depth: 2 },
+        { coordinate:{ x:6, y:10 }, depth: 2 },
+        { coordinate:{ x:7, y:10 }, depth: 2 },
+        { coordinate:{ x:8, y:10 }, depth: 2 },
+        { coordinate:{ x:7, y:11 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:7, y:8 }, depth: 1 },
+        { coordinate:{ x:6, y:9 }, depth: 1 },
+        { coordinate:{ x:7, y:9 }, depth: 1 },
+        { coordinate:{ x:8, y:9 }, depth: 1 },
+        { coordinate:{ x:5, y:10 }, depth: 1 },
+        { coordinate:{ x:6, y:10 }, depth: 1 },
+        { coordinate:{ x:7, y:10 }, depth: 1 },
+        { coordinate:{ x:8, y:10 }, depth: 1 },
+        { coordinate:{ x:9, y:10 }, depth: 1 },
+        { coordinate:{ x:6, y:11 }, depth: 1 },
+        { coordinate:{ x:7, y:11 }, depth: 1 },
+        { coordinate:{ x:8, y:11 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:21, y:3 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:21, y:2 }, depth: 2 },
+        { coordinate:{ x:20, y:3 }, depth: 2 },
+        { coordinate:{ x:21, y:3 }, depth: 2 },
+        { coordinate:{ x:22, y:3 }, depth: 2 },
+        { coordinate:{ x:21, y:4 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:21, y:1 }, depth: 1 },
+        { coordinate:{ x:20, y:2 }, depth: 1 },
+        { coordinate:{ x:21, y:2 }, depth: 1 },
+        { coordinate:{ x:22, y:2 }, depth: 1 },
+        { coordinate:{ x:19, y:3 }, depth: 1 },
+        { coordinate:{ x:20, y:3 }, depth: 1 },
+        { coordinate:{ x:21, y:3 }, depth: 1 },
+        { coordinate:{ x:22, y:3 }, depth: 1 },
+        { coordinate:{ x:23, y:3 }, depth: 1 },
+        { coordinate:{ x:20, y:4 }, depth: 1 },
+        { coordinate:{ x:21, y:4 }, depth: 1 },
+        { coordinate:{ x:22, y:4 }, depth: 1 },
+        { coordinate:{ x:21, y:5 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:15, y:7 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:15, y:6 }, depth: 2 },
+        { coordinate:{ x:14, y:7 }, depth: 2 },
+        { coordinate:{ x:15, y:7 }, depth: 2 },
+        { coordinate:{ x:16, y:7 }, depth: 2 },
+        { coordinate:{ x:15, y:8 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:15, y:5 }, depth: 1 },
+        { coordinate:{ x:14, y:6 }, depth: 1 },
+        { coordinate:{ x:15, y:6 }, depth: 1 },
+        { coordinate:{ x:16, y:6 }, depth: 1 },
+        { coordinate:{ x:13, y:7 }, depth: 1 },
+        { coordinate:{ x:14, y:7 }, depth: 1 },
+        { coordinate:{ x:15, y:7 }, depth: 1 },
+        { coordinate:{ x:16, y:7 }, depth: 1 },
+        { coordinate:{ x:17, y:7 }, depth: 1 },
+        { coordinate:{ x:14, y:8 }, depth: 1 },
+        { coordinate:{ x:15, y:8 }, depth: 1 },
+        { coordinate:{ x:16, y:8 }, depth: 1 },
+        { coordinate:{ x:15, y:9 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:9, y:2 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:9, y:1 }, depth: 2 },
+        { coordinate:{ x:8, y:2 }, depth: 2 },
+        { coordinate:{ x:9, y:2 }, depth: 2 },
+        { coordinate:{ x:10, y:2 }, depth: 2 },
+        { coordinate:{ x:9, y:3 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:9, y:0 }, depth: 1 },
+        { coordinate:{ x:8, y:1 }, depth: 1 },
+        { coordinate:{ x:9, y:1 }, depth: 1 },
+        { coordinate:{ x:10, y:1 }, depth: 1 },
+        { coordinate:{ x:7, y:2 }, depth: 1 },
+        { coordinate:{ x:8, y:2 }, depth: 1 },
+        { coordinate:{ x:9, y:2 }, depth: 1 },
+        { coordinate:{ x:10, y:2 }, depth: 1 },
+        { coordinate:{ x:11, y:2 }, depth: 1 },
+        { coordinate:{ x:8, y:3 }, depth: 1 },
+        { coordinate:{ x:9, y:3 }, depth: 1 },
+        { coordinate:{ x:10, y:3 }, depth: 1 },
+        { coordinate:{ x:9, y:4 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:22, y:10 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:22, y:9 }, depth: 2 },
+        { coordinate:{ x:21, y:10 }, depth: 2 },
+        { coordinate:{ x:22, y:10 }, depth: 2 },
+        { coordinate:{ x:23, y:10 }, depth: 2 },
+        { coordinate:{ x:22, y:11 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:22, y:8 }, depth: 1 },
+        { coordinate:{ x:21, y:9 }, depth: 1 },
+        { coordinate:{ x:22, y:9 }, depth: 1 },
+        { coordinate:{ x:23, y:9 }, depth: 1 },
+        { coordinate:{ x:20, y:10 }, depth: 1 },
+        { coordinate:{ x:21, y:10 }, depth: 1 },
+        { coordinate:{ x:22, y:10 }, depth: 1 },
+        { coordinate:{ x:23, y:10 }, depth: 1 },
+        { coordinate:{ x:24, y:10 }, depth: 1 },
+        { coordinate:{ x:21, y:11 }, depth: 1 },
+        { coordinate:{ x:22, y:11 }, depth: 1 },
+        { coordinate:{ x:23, y:11 }, depth: 1 },
+    ],
+]);
+
+UndergroundBattery.addPattern('explosion', 5, [
     [
         { coordinate:{ x:11, y:3 }, depth:1 },
         { coordinate:{ x:12, y:3 }, depth:1 },
@@ -137,7 +303,8 @@ UndergroundBattery.addPattern([
         { coordinate:{ x:13, y:7 }, depth:1 },
         { coordinate:{ x:11, y:8 }, depth:1 },
         { coordinate:{ x:12, y:8 }, depth:1 },
-    ], [
+    ],
+    [
         { coordinate:{ x:10, y:1 }, depth:1 },
         { coordinate:{ x:11, y:1 }, depth:1 },
         { coordinate:{ x:12, y:1 }, depth:1 },
@@ -214,7 +381,8 @@ UndergroundBattery.addPattern([
         { coordinate:{ x:11, y:10 }, depth:1 },
         { coordinate:{ x:12, y:10 }, depth:1 },
         { coordinate:{ x:13, y:10 }, depth:1 },
-    ], [
+    ],
+    [
         { coordinate:{ x:10, y:0 }, depth:1 },
         { coordinate:{ x:11, y:0 }, depth:1 },
         { coordinate:{ x:12, y:0 }, depth:1 },
@@ -327,7 +495,8 @@ UndergroundBattery.addPattern([
         { coordinate:{ x:11, y:11 }, depth:1 },
         { coordinate:{ x:12, y:11 }, depth:1 },
         { coordinate:{ x:13, y:11 }, depth:1 },
-    ], [
+    ],
+    [
         { coordinate:{ x:8, y:0 }, depth:1 },
         { coordinate:{ x:9, y:0 }, depth:1 },
         { coordinate:{ x:10, y:0 }, depth:1 },
@@ -468,7 +637,8 @@ UndergroundBattery.addPattern([
         { coordinate:{ x:13, y:11 }, depth:1 },
         { coordinate:{ x:14, y:11 }, depth:1 },
         { coordinate:{ x:15, y:11 }, depth:1 },
-    ], [
+    ],
+    [
         { coordinate:{ x:6, y:0 }, depth:1 },
         { coordinate:{ x:7, y:0 }, depth:1 },
         { coordinate:{ x:8, y:0 }, depth:1 },
