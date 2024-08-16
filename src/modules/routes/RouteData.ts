@@ -1438,6 +1438,11 @@ Routes.add(new RegionRoute(
     'Unova Route 12', Region.unova, 12,
     new RoutePokemon({
         land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Vespiquen', 'Tranquill', 'Sewaddle'],
+        special:
+        [
+            new SpecialRoutePokemon(['Cherrim (Overcast)'], new ObtainedPokemonRequirement('Cherrim (Overcast)')),
+	    new SpecialRoutePokemon(['Cherrim (Sunshine)'], new MultiRequirement([new ObtainedPokemonRequirement('Cherrim (Sunshine)'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])),,
+        ],
     }),
     [
         new RouteKillRequirement(10, Region.unova, 13),
