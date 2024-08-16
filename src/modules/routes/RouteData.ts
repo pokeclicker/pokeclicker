@@ -3357,7 +3357,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Rotom (Wash)', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Rotom (Heat)', 'Fletchinder'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Rotom'], new WeatherRequirement([WeatherType.Sandstorm, WeatherType.Fog])),
-          new SpecialRoutePokemon(['Rotom (Discord)'], new WeatherRequirement([WeatherType.Sandstorm, WeatherType.Fog])),
+          new SpecialRoutePokemon(['Rotom (Discord)'], new MultiRequirement([new ObtainedPokemonRequirement('Rotom (Discord)'), new WeatherRequirement([WeatherType.Fog])])),
           new SpecialRoutePokemon(['Blissey', 'Drifloon', 'Wailord'], new WeatherRequirement([WeatherType.Fog])),
       ],
         headbutt: ['Skwovet', 'Applin'],
