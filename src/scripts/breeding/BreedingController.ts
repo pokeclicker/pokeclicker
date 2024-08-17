@@ -64,11 +64,12 @@ class BreedingController {
     }
 
     public static getEggSpots(pokemonName: PokemonNameType) {
-        if (EggSpots.customPattern[pokemonName]) {
-            return EggSpots.customPattern[pokemonName];
+        const pokemon = pokemonMap[pokemonName];
+
+        if (EggSpots.customPattern[pokemon.name]) {
+            return EggSpots.customPattern[pokemon.name];
         }
 
-        const pokemon = pokemonMap[pokemonName];
         const seed = pokemon.id * pokemon.type.reduce((a,b) => a * (b + 1), 1);
         SeededRand.seed(seed);
         SeededRand.seed(SeededRand.intBetween(0, 1000));
