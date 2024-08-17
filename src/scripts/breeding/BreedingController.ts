@@ -93,7 +93,18 @@ class BreedingController {
     ]
 
     public static customPattern: Partial<Record<number, string>> = {
-        490:
+        // If you don't have the software, use https://www.svgviewer.dev/ and https://yqnn.github.io/svg-path-editor/ to edit and preview your custom patterns
+        489: // Phione
+            `<g>
+                <path fill="deepskyblue" d="M111.5 76.2a48.2 47.7 0 11-96.3 0c0-26.3 21.5-74.7 48.1-74.7s48.2 48.4 48.2 74.7z"/>
+                <path fill="lightskyblue" d="M 63 115 C 42 115 24 99 23 77 c 0 -14 5.6 -33 14 -47 C 43 20 50 10 64 10 c 12.5 0 21 13 26 20 A 109 109 0 0 1 103 76 c -1 25 -18 39 -40 39 z M 63.3 3 C 48 3 36.3 20 30.6 30 a 105 105 0 0 0 -14 47 a 46.7 46.7 0 0 0 93.4 0 c 0 -13.5 -5.5 -32 -14 -47 C 90.5 20 78.8 3 63.4 3 z"/>
+                <circle filter="url(#b)" fill="lightsalmon" fill-opacity=".7" cx="63.35" cy="75" r="30"/>
+                <circle fill="crimson" cx="63.35" cy="75" r="23"/>
+                <circle fill="gold" cx="63.35" cy="41" r="9"/>
+                <circle fill="gold" cx="46.35" cy="46" r="9"/>
+                <circle fill="gold" cx="80.35" cy="46" r="9"/>
+            </g>`,
+        490: // Manaphy
             `<g>
                 <path fill="deepskyblue" d="M111.5 76.2a48.2 47.7 0 11-96.3 0c0-26.3 21.5-74.7 48.1-74.7s48.2 48.4 48.2 74.7z"/>
                 <path fill="lightskyblue" d="M 63 115 C 42 115 24 99 23 77 c 0 -14 5.6 -33 14 -47 C 43 20 50 10 64 10 c 12.5 0 21 13 26 20 A 109 109 0 0 1 103 76 c -1 25 -18 39 -40 39 z M 63.3 3 C 48 3 36.3 20 30.6 30 a 105 105 0 0 0 -14 47 a 46.7 46.7 0 0 0 93.4 0 c 0 -13.5 -5.5 -32 -14 -47 C 90.5 20 78.8 3 63.4 3 z"/>
@@ -110,8 +121,6 @@ class BreedingController {
             </g>`,
     };
 
-    // https://www.svgviewer.dev/
-    // https://yqnn.github.io/svg-path-editor/
     public static initialize() {
         // Track view settings for hatchery list rerendering
         const hatcheryListSettings = [...breedingFilterSettingKeys, 'hatcherySort', 'hatcherySortDirection'];
