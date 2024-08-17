@@ -1181,7 +1181,7 @@ class Farming implements Feature {
             [
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
                 'This power revitalizes and prevents other berries from withering.',
-            ],
+            ]
         );
 
         this.berryData[BerryType.Apicot] = new Berry(
