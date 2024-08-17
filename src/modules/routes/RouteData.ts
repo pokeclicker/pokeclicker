@@ -1441,7 +1441,7 @@ Routes.add(new RegionRoute(
         special:
         [
             new SpecialRoutePokemon(['Cherrim (Overcast)'], new ObtainedPokemonRequirement('Cherrim (Overcast)')),
-	    new SpecialRoutePokemon(['Cherrim (Sunshine)'], new MultiRequirement([new ObtainedPokemonRequirement('Cherrim (Sunshine)'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])),,
+	    new SpecialRoutePokemon(['Cherrim (Sunshine)'], new MultiRequirement([new ObtainedPokemonRequirement('Cherrim (Sunshine)'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])),
         ],
     }),
     [
