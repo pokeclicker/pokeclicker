@@ -94,9 +94,12 @@ class EggSpots {
                 <path fill="lightskyblue" d="M 63 115 C 42 115 24 99 23 77 c 0 -14 5.6 -33 14 -47 C 43 20 50 10 64 10 c 12.5 0 21 13 26 20 A 109 109 0 0 1 103 76 c -1 25 -18 39 -40 39 z M 63.3 3 C 48 3 36.3 20 30.6 30 a 105 105 0 0 0 -14 47 a 46.7 46.7 0 0 0 93.4 0 c 0 -13.5 -5.5 -32 -14 -47 C 90.5 20 78.8 3 63.4 3 z"/>
                 <circle filter="url(#b)" fill="lightsalmon" fill-opacity=".7" cx="63.35" cy="75" r="30"/>
                 <circle fill="crimson" cx="63.35" cy="75" r="23"/>
-                <circle fill="gold" cx="63.35" cy="41" r="9"/>
-                <circle fill="gold" cx="46.35" cy="46" r="9"/>
-                <circle fill="gold" cx="80.35" cy="46" r="9"/>
+                <circle fill="gold" cx="63.35" cy="44" r="9"/>
+                <circle fill="gold" cx="46.35" cy="49" r="9"/>
+                <circle fill="gold" cx="80.35" cy="49" r="9"/>
+                <circle fill="orange" cx="63.35" fill-opacity=".2" cy="44" r="9"/>
+                <circle fill="orange" cx="46.35" fill-opacity=".2" cy="49" r="9"/>
+                <circle fill="orange" cx="80.35" fill-opacity=".2" cy="49" r="9"/>
             </g>`,
         'Manaphy':
             `<g>
