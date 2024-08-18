@@ -63,7 +63,7 @@ export default class Item {
     }
 
     totalPrice(amount: number): number {
-        const targetAmount = Math.min(amount, maxAmount);
+        const targetAmount = Math.min(amount, this.maxAmount);
 
         if (this.multiplier === 1) {
             return Math.max(0, this.basePrice * targetAmount);
