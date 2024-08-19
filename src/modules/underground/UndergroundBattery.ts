@@ -1,5 +1,5 @@
 import { Coordinate } from './mine/Mine';
-import { Observable } from 'knockout';
+import {Observable, PureComputed} from 'knockout';
 import GameHelper from '../GameHelper';
 import {
     humanifyString,
@@ -43,6 +43,8 @@ export class UndergroundBatteryPattern {
 
     private _requirement?: Requirement;
 
+    public canAccess: PureComputed<boolean> = ko.pureComputed(() => this._requirement?.isCompleted() ?? true);
+
     constructor(id: string, tier: number, pattern: Pattern, requirement: Requirement = undefined) {
         this._id = id;
         this._tier = tier;
@@ -54,8 +56,8 @@ export class UndergroundBatteryPattern {
         this._requirement = new MultiRequirement([new OakItemLevelRequirement(OakItemType.Cell_Battery, tier), ...(requirement ? [requirement] : [])]);
     }
 
-    public canAccess(): boolean {
-        return this._requirement?.isCompleted() || true;
+    get hint(): string {
+        return this._requirement?.hint() || null;
     }
 
     get id(): string {
@@ -64,6 +66,10 @@ export class UndergroundBatteryPattern {
 
     get name(): string {
         return humanifyString(this._id);
+    }
+
+    get tier(): number {
+        return this._tier;
     }
 
     get pattern(): Pattern {
@@ -93,7 +99,6 @@ export class UndergroundBattery {
     }
 
     public update(delta: number) {
-        // App.game.oakItems.isActive(OakItemType.Cell_Battery) ? App.game.oakItems.calculateBonus(OakItemType.Cell_Battery)
         if (!App.game.oakItems.isActive(OakItemType.Cell_Battery)) {
             return;
         }
@@ -203,6 +208,10 @@ export class UndergroundBattery {
 
     get maxCharges() {
         return UNDERGROUND_BATTERY_MAX_CHARGES;
+    }
+
+    get patterns() {
+        return UndergroundBattery._patterns;
     }
 
     public fromJSON(save) {

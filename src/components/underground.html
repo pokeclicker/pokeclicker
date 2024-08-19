@@ -163,7 +163,10 @@
 
                         <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
                         <div class="card">
-                            <div class="card-header p-2 font-weight-bold">Battery</div>
+                            <div class="card-header p-2 font-weight-bold position-relative">
+                                Battery
+                                <button class="btn btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 100%;" data-bind="click: () => $('#undergroundBatteryModal').modal('show');">?</button>
+                            </div>
                             <div class="card-body p-2">
                                 <div class="progress mb-2" style='height: 15px; min-height: 15px;'>
                                     <div class="progress-bar" role="progressbar"
@@ -851,6 +854,55 @@
                     </div>
                 </div>
                 <!-- /ko -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div aria-labelledby="undergroundBatteryModalLabel" class="modal fade no-select" id="undergroundBatteryModal" role="dialog" style="cursor: default;" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card mb-2">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <span class="flex-grow-1 text-center font-weight-bold">Underground Battery Patterns</span>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table table-hover table-striped table-sm m-0">
+                            <thead>
+                            <tr>
+                                <th>Tier</th>
+                                <th colspan="2">Name</th>
+                                <th>Requirements</th>
+                                <th>Chance</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- ko foreach: App.game.underground.battery.patterns -->
+                            <tr>
+                                <td class="vertical-middle" data-bind="text: $data.tier"></td>
+                                <td class="vertical-middle">
+                                    <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                            tooltip: {
+                                                title: $data.hint || '',
+                                                placement: 'bottom',
+                                                trigger: 'hover'
+                                            }, visible: !$data.canAccess()" />
+                                </td>
+                                <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
+                                <td class="vertical-middle" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
+                                <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
+                            </tr>
+                            <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
