@@ -161,19 +161,22 @@
                             </div>
                         </div>
 
-                        <div>
-                            <p>Battery</p>
-
-                            <div class="progress" style='height: 10px; min-height: 10px;'>
-                                <div class="progress-bar" role="progressbar"
-                                     data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                                     aria-valuemin="0" aria-valuemax="100">
-                                    <span data-bind="text: `${App.game.underground.battery.charges} / ${App.game.underground.battery.maxCharges}`"></span>
+                        <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
+                        <div class="card">
+                            <div class="card-header p-2 font-weight-bold">Battery</div>
+                            <div class="card-body p-2">
+                                <div class="progress mb-2" style='height: 15px; min-height: 15px;'>
+                                    <div class="progress-bar" role="progressbar"
+                                         data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        <span data-bind="text: `${App.game.underground.battery.charges} / ${App.game.underground.battery.maxCharges}`"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <button class="btn btn-primary" data-bind="click: () => App.game.underground.battery.discharge(), attr: { disabled: App.game.underground.battery.charges < App.game.underground.battery.maxCharges }">Discharge</button>
+                                <button class="btn btn-primary" data-bind="click: () => App.game.underground.battery.discharge(), attr: { disabled: App.game.underground.battery.charges < App.game.underground.battery.maxCharges }">Discharge</button>
+                            </div>
                         </div>
+                        <!-- /ko -->
                         <!-- /ko -->
                     </div>
                 </div>
@@ -393,6 +396,21 @@
 
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Battery</span>
+                        </div>
+
+                        <div class="card-body">
+                            <p>
+                                The Battery is something that charges up as you mine tiles. It will only gain charges and can only discharge when you have your Cell Battery Oak Item equiped.
+                                Each successful mine attempt will add 1 charge, up to a maximum of 600 charges. You can only gain 1 charge per second.
+                                As you level up your Cell Battery, you will gain access to higher tiers of patterns, which will clear more tiles.
+                                When you discharge, it will leave a pattern of cleared tiles behind.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
                             <span class="flex-grow-1 text-center font-weight-bold">Helpers</span>
                         </div>
 
@@ -500,8 +518,8 @@
 
                             <h4>Cell Battery</h4>
                             <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when the player uses a tool</li>
-                                <li><strong>Effect:</strong> Decreases the global cooldown timer</li>
+                                <li><strong>Progress:</strong> Gains progress to level up when the player uses discharge</li>
+                                <li><strong>Effect:</strong> Triggers a discharge which will clear tiles in a certain pattern, new patterns become available by levelling up Cell Battery</li>
                             </ul>
 
                             <h4>Treasure Scanner</h4>

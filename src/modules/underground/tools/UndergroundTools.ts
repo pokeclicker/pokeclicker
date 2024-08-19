@@ -114,8 +114,6 @@ export default class UndergroundTools {
             const { coordinatesMined, success } = tool.action(x, y);
 
             if (coordinatesMined?.length > 0) {
-                App.game.oakItems.use(OakItemType.Cell_Battery);
-
                 const itemsFound = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
                 itemsFound.forEach(value => {
                     if (value) {

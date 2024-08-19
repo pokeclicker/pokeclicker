@@ -2765,6 +2765,10 @@ class Update implements Saveable {
         '0.10.22': ({ playerData, saveData, settingsData }) => {
             // Remove the old underground save data
             saveData.underground = null;
+
+            // Reset the Cell Battery
+            saveData.oakItems[OakItemType[OakItemType.Cell_Battery]].level = 0;
+            saveData.oakItems[OakItemType[OakItemType.Cell_Battery]].exp = 0;
         },
     };
 
