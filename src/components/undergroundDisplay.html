@@ -108,4 +108,26 @@
             <!-- /ko -->
         </div>
     </div>
+
+    <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
+    <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayBattery">
+        <span>Battery</span>
+    </div>
+
+    <div id="undergroundDisplayBattery" class="table-responsive show">
+        <div class="container">
+            <div class="row">
+                <div class="col p-2">
+                    <div class="progress" style='height: 15px; min-height: 15px;'>
+                        <div class="progress-bar" role="progressbar"
+                             data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                             aria-valuemin="0" aria-valuemax="100">
+                            <span data-bind="text: `${App.game.underground.battery.charges} / ${App.game.underground.battery.maxCharges}`"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
 </div>
