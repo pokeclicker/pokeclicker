@@ -404,10 +404,18 @@
 
                         <div class="card-body">
                             <p>
-                                The Battery is something that charges up as you mine tiles. It will only gain charges and can only discharge when you have your Cell Battery Oak Item equiped.
-                                Each successful mine attempt will add 1 charge, up to a maximum of 600 charges. You can only gain 1 charge per second.
-                                As you level up your Cell Battery, you will gain access to higher tiers of patterns, which will clear more tiles.
-                                When you discharge, it will leave a pattern of cleared tiles behind.
+                                The Battery is a system that charges up as you or your helper mines tiles. In order to charge up you need to have your Cell Battery Oak Item equipped.
+                            </p>
+                            <p>
+                                Each successful mining attempt will add 1 charge, up to a maximum of <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_MAX_CHARGES"></knockout> charges.
+                                You can only gain 1 charge per <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_COOLDOWN_SECONDS"></knockout> second.
+                            </p>
+                            <p>
+                                When your battery is fully charged up, you can discharge it. This discharge will leave a pattern of cleared tiles behind.
+                                With higher level patterns, which damage more tiles, becoming available as you level up your Cell Battery.
+                            </p>
+                            <p>
+                                All patterns and their requirements are available in the help section of the Battery on the Dig tab.
                             </p>
                         </div>
                     </div>
@@ -611,7 +619,7 @@
 
                     <div class="card-footer">
                         <div class="small">
-                            Discovery time: <knockout data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType))"></knockout>
+                            Discovery time: <label data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType)), css: { 'text-warning': UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType) > 0 }"></label>
                         </div>
 
                         <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);" data-dismiss="modal">Search for mine</button>
