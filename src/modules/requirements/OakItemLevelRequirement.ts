@@ -15,6 +15,6 @@ export default class OakItemLevelRequirement extends Requirement {
     }
 
     hint(): string {
-        return `Needs ${GameConstants.humanifyString(OakItemType[this._oakItemType])} level ${this.requiredValue}`;
+        return `${GameConstants.humanifyString(OakItemType[this._oakItemType])} level ${this.requiredValue}`;
     }
 }
