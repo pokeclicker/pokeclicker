@@ -1,8 +1,9 @@
 import { Coordinate } from './mine/Mine';
-import {Observable, PureComputed} from 'knockout';
+import { Observable, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 import {
     humanifyString,
+    Pokeball,
     UNDERGROUND_BATTERY_COOLDOWN_SECONDS,
     UNDERGROUND_BATTERY_MAX_CHARGES,
     UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
@@ -30,6 +31,7 @@ import { batteryPatternSurf } from './battery/surf';
 import { batteryPatternExplosion } from './battery/explosion';
 import { batteryPatternFleurCannon } from './battery/fleurCannon';
 import { batteryPatternHyperBeam } from './battery/hyperBeam';
+import PokeballRequirement from '../requirements/PokeballRequirement';
 
 export type Pattern = Array<Array<{ coordinate: Coordinate, depth: number }>>;
 
@@ -48,10 +50,10 @@ export class UndergroundBatteryPattern {
     constructor(id: string, tier: number, pattern: Pattern, requirement: Requirement = undefined) {
         this._id = id;
         this._tier = tier;
-        this._weight = 2 ** tier;
+        this._weight = 1.7 ** tier;
 
         this._pattern = pattern;
-        this._tilesCleared = pattern.flatMap(frame => frame?.map(value => value.depth)).reduce((prev, cur) => prev + cur, 0);
+        this._tilesCleared = pattern.flatMap(frame => frame?.map(value => value.depth) || 0).reduce((prev, cur) => prev + cur, 0);
 
         this._requirement = new MultiRequirement([new OakItemLevelRequirement(OakItemType.Cell_Battery, tier), ...(requirement ? [requirement] : [])]);
     }
@@ -242,7 +244,7 @@ UndergroundBattery.addPattern(new UndergroundBatteryPattern('Overdrive', 2, batt
 UndergroundBattery.addPattern(new UndergroundBatteryPattern('10,000,000 Volt Thunderbolt', 3, batteryPatternTenMillionVoltThunderbolt));
 UndergroundBattery.addPattern(new UndergroundBatteryPattern('Draco Meteor', 3, batteryPatternDracoMeteor));
 UndergroundBattery.addPattern(new UndergroundBatteryPattern('Heart Stamp', 3, batteryPatternHeartStamp));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Pokéball', 4, batteryPatternPokeball));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Pokéball', 4, batteryPatternPokeball, new PokeballRequirement(46100, Pokeball.Pokeball)));
 UndergroundBattery.addPattern(new UndergroundBatteryPattern('Surf', 4, batteryPatternSurf));
 UndergroundBattery.addPattern(new UndergroundBatteryPattern('Explosion', 5, batteryPatternExplosion));
 UndergroundBattery.addPattern(new UndergroundBatteryPattern('Fleur Cannon', 5, batteryPatternFleurCannon));
