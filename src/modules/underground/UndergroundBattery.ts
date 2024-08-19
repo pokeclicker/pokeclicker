@@ -199,7 +199,7 @@ export class UndergroundBattery {
             ++this._activeDischargeFrame;
 
             await new Promise(resolve => {
-                setTimeout(resolve, 10);
+                setTimeout(resolve, 15);
             });
         }
     }
