@@ -5,8 +5,7 @@ import { UndergroundController } from '../UndergroundController';
 import { Coordinate } from '../mine/Mine';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
-import Settings from '../../settings';
-import { clipNumber, UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM } from '../../GameConstants';
+import { clipNumber } from '../../GameConstants';
 
 export default class UndergroundTools {
     tools: UndergroundTool[] = [];
@@ -113,33 +112,8 @@ export default class UndergroundTools {
         if (tool.canUseTool()) {
             const { coordinatesMined, success } = tool.action(x, y);
 
-            if (coordinatesMined?.length > 0) {
-                const itemsFound = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
-                itemsFound.forEach(value => {
-                    if (value) {
-                        const { item, amount } = value;
-
-                        UndergroundController.gainMineItem(item.id, amount);
-                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
-
-                        UndergroundController.notifyItemFound(item, amount);
-                    }
-                });
-
-                if (itemsFound.length > 0) {
-                    if (App.game.underground.mine.attemptCompleteLayer()) {
-                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
-
-                        UndergroundController.notifyMineCompleted();
-
-                        if (Settings.getSetting('autoRestartUndergroundMine').observableValue()) {
-                            App.game.underground.generateMine(App.game.underground.autoSearchMineType);
-                        }
-                    }
-                }
-            }
-
             if (success) {
+                UndergroundController.handleCoordinatesMined(coordinatesMined);
                 tool.reduceDurabilityByUse();
             }
         }

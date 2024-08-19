@@ -10,12 +10,9 @@ import { AUTO_SELL_BASE, AUTO_SELL_INCREASE_PER_LEVEL, AUTO_SELL_MAXIMUM, Energy
     FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL,
     FAVORITE_MINE_CHANCE_MAXIMUM,
     MAX_HIRES, SECOND, SMART_TOOL_CHANCE_BASE, SMART_TOOL_CHANCE_INCREASE_PER_LEVEL, SMART_TOOL_CHANCE_MAXIMUM,
-    UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
-    UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, WORKCYCLE_TIMEOUT_BASE, WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL, WORKCYCLE_TIMEOUT_MINIMUM } from '../../GameConstants';
+    WORKCYCLE_TIMEOUT_BASE, WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL, WORKCYCLE_TIMEOUT_MINIMUM } from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from '../tools/UndergroundToolType';
-import UndergroundItem from '../UndergroundItem';
-import UndergroundItemValueType from '../../enums/UndergroundItemValueType';
 import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
 import UndergroundTool from '../tools/UndergroundTool';
@@ -107,37 +104,7 @@ export class UndergroundHelper {
         const { coordinatesMined, success } = tool.action(x, y);
 
         if (success) {
-            const itemsFound: { item: UndergroundItem; amount: number }[] = coordinatesMined.map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
-
-            itemsFound.forEach(value => {
-                if (value) {
-                    const { item, amount } = value;
-
-                    if (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem) {
-                        UndergroundController.gainProfit(item, amount, this.autoSellValue);
-                    } else {
-                        UndergroundController.gainMineItem(item.id, amount);
-                    }
-
-                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
-
-                    UndergroundController.notifyItemFound(item, amount, this);
-                }
-            });
-        }
-
-        if (App.game.underground.mine.attemptCompleteLayer()) {
-            UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
-
-            UndergroundController.notifyMineCompleted(this);
-        }
-
-        if (App.game.underground.mine.completed) {
-            if (this.shouldDiscoverFavorite) {
-                App.game.underground.generateMine(Rand.chance(this.favoriteMineChance) ? this._favoriteMine : MineType.Random, this);
-            } else {
-                App.game.underground.generateMine(MineType.Random, this);
-            }
+            UndergroundController.handleCoordinatesMined(coordinatesMined, this);
         }
     }
 

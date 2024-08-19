@@ -6,12 +6,9 @@ import {
     Pokeball,
     UNDERGROUND_BATTERY_COOLDOWN_SECONDS,
     UNDERGROUND_BATTERY_MAX_CHARGES,
-    UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
-    UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
 } from '../GameConstants';
 import Rand from '../utilities/Rand';
 import { UndergroundController } from './UndergroundController';
-import Settings from '../settings';
 import OakItemType from '../enums/OakItemType';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
@@ -171,29 +168,7 @@ export class UndergroundBattery {
                     }
                 });
 
-                const itemsFound = Array.from(tilesMined).map(coordinate => App.game.underground.mine.attemptFindItem(coordinate));
-                itemsFound.forEach(value => {
-                    if (value) {
-                        const { item, amount } = value;
-
-                        UndergroundController.gainMineItem(item.id, amount);
-                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
-
-                        UndergroundController.notifyItemFound(item, amount);
-                    }
-                });
-
-                if (itemsFound.length > 0) {
-                    if (App.game.underground.mine.attemptCompleteLayer()) {
-                        UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
-
-                        UndergroundController.notifyMineCompleted();
-
-                        if (Settings.getSetting('autoRestartUndergroundMine').observableValue()) {
-                            App.game.underground.generateMine(App.game.underground.autoSearchMineType);
-                        }
-                    }
-                }
+                UndergroundController.handleCoordinatesMined(Array.from(tilesMined));
             }
 
             ++this._activeDischargeFrame;

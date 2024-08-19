@@ -19,11 +19,12 @@ import {
     PLAYER_EXPERIENCE_HELPER_FRACTION,
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
-    SURVEY_RANGE_REDUCTION_LEVELS,
+    SURVEY_RANGE_REDUCTION_LEVELS, UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
 } from '../GameConstants';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
+import { Coordinate } from './mine/Mine';
 
 export class UndergroundController {
     private static lastMineClick: number = Date.now();
@@ -157,6 +158,58 @@ export class UndergroundController {
 
         const coordinates = App.game.underground.mine.getCoordinateForGridIndex(index);
         App.game.underground.tools.useTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y);
+    }
+
+    public static handleCoordinatesMined(coordinates: Coordinate[], helper: UndergroundHelper = undefined) {
+        if (coordinates.length === 0) {
+            return;
+        }
+
+        const itemsFound = coordinates
+            .map(coordinate => App.game.underground.mine.attemptFindItem(coordinate))
+            .filter(item => item);
+
+        // Handle gaining items
+        itemsFound.forEach(value => {
+            const { item, amount } = value;
+            UndergroundController.notifyItemFound(item, amount, helper);
+
+            if (helper) {
+                if (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem) {
+                    UndergroundController.gainProfit(item, amount, helper.autoSellValue);
+                } else {
+                    UndergroundController.gainMineItem(item.id, amount);
+                }
+
+                UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
+            } else {
+                UndergroundController.gainMineItem(item.id, amount);
+                UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
+            }
+        });
+
+        // Handle new mine
+        if (itemsFound.length > 0) {
+            if (App.game.underground.mine.attemptCompleteLayer()) {
+                UndergroundController.notifyMineCompleted(helper);
+
+                if (helper) {
+                    UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
+
+                    if (helper.shouldDiscoverFavorite) {
+                        App.game.underground.generateMine(Rand.chance(helper.favoriteMineChance) ? helper.favoriteMine : MineType.Random, helper);
+                    } else {
+                        App.game.underground.generateMine(MineType.Random, helper);
+                    }
+                } else {
+                    UndergroundController.addPlayerUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
+
+                    if (Settings.getSetting('autoRestartUndergroundMine').observableValue()) {
+                        App.game.underground.generateMine(App.game.underground.autoSearchMineType);
+                    }
+                }
+            }
+        }
     }
 
     public static calculateMineTileStyle(index: number) {
