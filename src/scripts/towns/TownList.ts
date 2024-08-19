@@ -1790,7 +1790,7 @@ const KimonoGirlsEcruteak = new NPC('Kimono Girls', [
 });
 
 const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
-    'Aye! At this here dock you can travel to far away regions! But only ones you’ve travelled to before; I’ve heard the Professor has his own vessel to take ye’ to new lands!',
+    'Aye! At this here dock you can travel to faraway regions! But only ones you’ve travelled to before; I’ve heard the Professor has his own vessel to take ye’ to new lands!',
 ], { image: 'assets/images/npcs/Sailor.png' });
 
 const CianwoodPhotographyAide = new NPC('Photography Aide', [
@@ -4200,7 +4200,7 @@ const AcuityUxie = new NPC('Uxie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 8, GameConstants.AchievementOption.less)])});
 
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
-    'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
+    'Oh! I don’t get visitors often. My husband is a sailor who visits faraway lands… he always tells me these fantastic things.',
     'One time he came back and his Wailmer looked funny. We took it to the Pokécenter and they said it had caught some weird virus called Pokérus!',
     'They said that it is a virus that can spread in the Pokémon Day Care. They said that Pokémon can only spread or catch the virus if they aren’t ready to hatch yet, and that they need to share a type with one another.',
     'If you have a Pokémon with Pokérus, try catching more of that type of Pokémon. When he got back from his next trip, oddly enough Wailmer seemed stronger than ever!',
@@ -8533,7 +8533,7 @@ const WyndonHop = new NPC('Hop', [
 
 const SlumberingHop1 = new NPC('Hop', [
     'Would you take a look at that! Now that\'s something you don\'t see every day... This place definitely feels like the stuff of legend. See that! The sword and the shield! The legends really were true!',
-    'That settles it! We\'re taking the sword and shield. Though...wow, would you look at the state of these things? They seems like they might fall to pieces if you so much as look at \'em funny.',
+    'That settles it! We\'re taking the sword and shield. Though...wow, would you look at the state of these things? They seem like they might fall to pieces if you so much as look at \'em funny.',
     'I don\'t know if these rusty old things will really be able to stop the Darkest Day, but... Well, I guess it can\'t hurt to have them along! Let\'s hope they bring us some good luck!',
     'Maybe the Pokémon themselves really are still asleep somewhere. So it seems we\'re on our own if we want to go help Lee. This is all the help we\'ve got!',
 ], {
@@ -8768,7 +8768,7 @@ const Mustard10 = new NPC ('Mustard', [
 const JungleAsh1 = new NPC ('Ash Ketchum', [
     'Hey! I didn\'t expect to see you again here. Fancy a ba-. Actually, no, I\'d like to ask a favour of you; a friend of mine living in Glimwood Tangle called me asking for some help.',
     'I would go myself, but I promised one of the students here a battle and I don\'t want to bail on them. Would you be able to go for me?',
-    'Great! My friends name is Koko, tell him I sent you. This battle shouldn\'t take me too long, so come ask for my help if you need it!',
+    'Great! My friend\'s name is Koko, tell him I sent you. This battle shouldn\'t take me too long, so come ask for my help if you need it!',
 ], {
     image: 'assets/images/npcs/Ash Ketchum.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Secrets of the Jungle'), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 1, GameConstants.AchievementOption.less )]),
@@ -8821,7 +8821,7 @@ const JungleAsh3 = new NPC ('Ash Ketchum', [
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13, GameConstants.AchievementOption.less )]),
 });
 const JungleKoko6 = new NPC ('Koko', [
-    'Wow, you actually beat Celebi! It looked like it had fun! It\'s ran off for now, but maybe if you find it again, it\ll let you catch it.',
+    'Wow, you actually beat Celebi! It looked like it had fun! It\'s ran off for now, but maybe if you find it again, it\'ll let you catch it.',
     'Oh, also, Dada said he would be interested in travelling with you. Although, he also said he needed to deal with the shortage of Quest Points the tribe is dealing with right now.',
     'If you help him with that, I\'m sure he\'ll join you!',
 ],
@@ -9028,7 +9028,7 @@ const GigantamaxLeon2 = new NPC ('Leon', [
 });
 const Peonia4 = new NPC ('Peonia', [
     'Was it really was Eternatus again? Given that the purple glow has vanished, I guess you\'ve already taken care of it. Congrats!',
-    'Actually, I just saw some purple and red Pokémon fly into the caves. Maybe that was Eternatus? I think this place might let it return to it\'s Eternamax form. Maybe you can catch it!',
+    'Actually, I just saw some purple and red Pokémon fly into the caves. Maybe that was Eternatus? I think this place might let it return to its Eternamax form. Maybe you can catch it!',
     'At any rate, I\'m real thankful for all your help. There\'s so many more people coming here now there\'s more Gigantamax Pokémon to find.  It\'s been a lot of fun!',
 ], {
     image: 'assets/images/npcs/Peonia.png',
