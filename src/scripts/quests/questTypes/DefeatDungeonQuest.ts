@@ -16,14 +16,23 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.dungeon)];
     }
 
+    // Only add Defeat Dungeon Quest if the player has access to Viridian Forest.
+    public static canComplete() {
+        return TownList['Viridian Forest'].isUnlocked();
+    }
+
     public static generateData(): any[] {
         // Allow up to highest region
         const amount = SeededRand.intBetween(5, 20);
-        const region = SeededRand.intBetween(0, player.highestRegion());
+        let maxRegion = player.highestRegion();
+        // Check if any dungeon is unlocked in the highest region.
+        if (GameConstants.RegionDungeons[maxRegion].filter(dungeon => TownList[dungeon].isUnlocked()).length == 0) {
+            maxRegion -= 1;
+        }
+        const region = SeededRand.intBetween(0, maxRegion);
         // Only use unlocked dungeons
         const possibleDungeons = GameConstants.RegionDungeons[region].filter(dungeon => TownList[dungeon].isUnlocked());
-        // If no dungeons unlocked in this region, just use the first dungeon of the region
-        const dungeon = possibleDungeons.length ? SeededRand.fromArray(possibleDungeons) : GameConstants.RegionDungeons[region][0];
+        const dungeon = SeededRand.fromArray(possibleDungeons);
         const reward = this.calcReward(amount, dungeon);
         return [amount, reward, dungeon];
     }
