@@ -16,7 +16,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.gymTown)];
     }
 
-    // Only add Defeat Gym Quest if the player has defeated the first gym of every the region or can travel to previous regions(Hisui dock is before first gym).
+    // Only add Defeat Gym Quest if the player has defeated the first gym of their region or can travel to previous regions(Hisui dock is before first gym).
     public static canComplete() {
         return TownList[GameConstants.DockTowns[player.region]].isUnlocked() ||
             App.game.badgeCase.hasBadge(GymList[GameConstants.RegionGyms[player.highestRegion()][0]].badgeReward);
