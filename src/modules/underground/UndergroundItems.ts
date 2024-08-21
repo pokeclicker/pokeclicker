@@ -53,21 +53,21 @@ export default class UndergroundItems {
 }
 
 // Diamond Items
-UndergroundItems.addItem(new UndergroundItem(1, 'Rare_bone', [[1, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 1], [1, 0, 0, 0, 0, 1]], 175));
-UndergroundItems.addItem(new UndergroundItem(2, 'Star_piece', [[0, 1, 0], [1, 1, 1], [0, 1, 0]], 250));
-UndergroundItems.addItem(new UndergroundItem(3, 'Revive', [[0, 1, 0], [1, 1, 1], [0, 1, 0]], 125));
-UndergroundItems.addItem(new UndergroundItem(4, 'Max_revive', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 225));
-UndergroundItems.addItem(new UndergroundItem(5, 'Iron_ball', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 100));
-UndergroundItems.addItem(new UndergroundItem(6, 'Heart_scale', [[1, 0], [1, 1]], 500));
-UndergroundItems.addItem(new UndergroundItem(7, 'Light_clay', [[1, 0, 1, 0], [1, 1, 1, 0], [1, 1, 1, 1], [0, 1, 0, 1]], 100));
-UndergroundItems.addItem(new UndergroundItem(8, 'Odd_keystone', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 325));
-UndergroundItems.addItem(new UndergroundItem(9, 'Hard_stone', [[1, 1], [1, 1]], 200));
-UndergroundItems.addItem(new UndergroundItem(10, 'Oval_stone', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 160));
-UndergroundItems.addItem(new UndergroundItem(11, 'Everstone', [[1, 1, 1, 1], [1, 1, 1, 1]], 150));
-UndergroundItems.addItem(new UndergroundItem(12, 'Smooth_rock', [[0, 0, 1, 0], [1, 1, 1, 0], [0, 1, 1, 1], [0, 1, 0, 0]], 100));
-UndergroundItems.addItem(new UndergroundItem(13, 'Heat_rock', [[1, 0, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1]], 100));
-UndergroundItems.addItem(new UndergroundItem(14, 'Icy_rock', [[0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 0, 0, 1]], 100));
-UndergroundItems.addItem(new UndergroundItem(15, 'Damp_rock', [[1, 1, 1], [1, 1, 1], [1, 0, 1]], 100));
+UndergroundItems.addItem(new UndergroundItem(1, 'Rare_bone', [[1, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 1], [1, 0, 0, 0, 0, 1]], 100));
+UndergroundItems.addItem(new UndergroundItem(2, 'Star_piece', [[0, 1, 0], [1, 1, 1], [0, 1, 0]], 175));
+UndergroundItems.addItem(new UndergroundItem(3, 'Revive', [[0, 1, 0], [1, 1, 1], [0, 1, 0]], 70));
+UndergroundItems.addItem(new UndergroundItem(4, 'Max_revive', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 140));
+UndergroundItems.addItem(new UndergroundItem(5, 'Iron_ball', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 70));
+UndergroundItems.addItem(new UndergroundItem(6, 'Heart_scale', [[1, 0], [1, 1]], 350));
+UndergroundItems.addItem(new UndergroundItem(7, 'Light_clay', [[1, 0, 1, 0], [1, 1, 1, 0], [1, 1, 1, 1], [0, 1, 0, 1]], 70));
+UndergroundItems.addItem(new UndergroundItem(8, 'Odd_keystone', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 200));
+UndergroundItems.addItem(new UndergroundItem(9, 'Hard_stone', [[1, 1], [1, 1]], 140));
+UndergroundItems.addItem(new UndergroundItem(10, 'Oval_stone', [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 100));
+UndergroundItems.addItem(new UndergroundItem(11, 'Everstone', [[1, 1, 1, 1], [1, 1, 1, 1]], 100));
+UndergroundItems.addItem(new UndergroundItem(12, 'Smooth_rock', [[0, 0, 1, 0], [1, 1, 1, 0], [0, 1, 1, 1], [0, 1, 0, 0]], 70));
+UndergroundItems.addItem(new UndergroundItem(13, 'Heat_rock', [[1, 0, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1]], 70));
+UndergroundItems.addItem(new UndergroundItem(14, 'Icy_rock', [[0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 0, 0, 1]], 70));
+UndergroundItems.addItem(new UndergroundItem(15, 'Damp_rock', [[1, 1, 1], [1, 1, 1], [1, 0, 1]], 70));
 
 // Gem Plates
 UndergroundItems.addItem(new UndergroundGemItem(100, 'Draco_plate', [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Dragon));
