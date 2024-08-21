@@ -217,6 +217,11 @@ export enum AchievementOption {
     more,
 }
 
+export enum MultiRequirementOption {
+    every,
+    any,
+}
+
 export enum AchievementType {
     'None' = -1,
     'Pokedollars' = 0,
