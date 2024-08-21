@@ -85,11 +85,6 @@ namespace GameConstants {
         more,
     }
 
-    declare enum MultiRequirementOption {
-        every,
-        any,
-    }
-
     declare enum AchievementType {
         'None',
         'Pokedollars',
