@@ -367,11 +367,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Starting a Farming Empire', 'Unlock 6 Farm Hands.', new FarmHandRequirement(6), 0.3);
         AchievementHandler.addAchievement('Will I Ever Need All This Help?', 'Unlock all 9 Farm Hands.', new FarmHandRequirement(9), 0.4);
 
-        AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds.', new DiamondRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds.', new DiamondRequirement(1000), 0.15);
-        AchievementHandler.addAchievement('If You Like It, Then You Should\'ve Put a Ring on It', 'Obtain 10,000 Diamonds.', new DiamondRequirement(10000), 0.25);
-        AchievementHandler.addAchievement('Just Keep Trading!', 'Obtain 25,000 Diamonds.', new DiamondRequirement(25000), 0.4);
-        AchievementHandler.addAchievement('Got All Upgrades Yet?', 'Obtain 100,000 Diamonds.', new DiamondRequirement(100000), 0.6);
+        AchievementHandler.addAchievement('Bling', 'Obtain 1,000 Diamonds.', new DiamondRequirement(1000), 0.05);
+        AchievementHandler.addAchievement('Bling x10!', 'Obtain 10,000 Diamonds.', new DiamondRequirement(10000), 0.15);
+        AchievementHandler.addAchievement('If You Like It, Then You Should\'ve Put a Ring on It', 'Obtain 100,000 Diamonds.', new DiamondRequirement(100000), 0.25);
+        AchievementHandler.addAchievement('Just Keep Trading!', 'Obtain 250,000 Diamonds.', new DiamondRequirement(250000), 0.4);
+        AchievementHandler.addAchievement('Get some daylight!', 'Obtain 1,000,000 Diamonds.', new DiamondRequirement(1000000), 0.6);
 
         AchievementHandler.addAchievement('Is My Thumb Green Yet?', 'Dig up an item in the Underground for the first time.', new UndergroundItemsFoundRequirement(1), 0.01);
         AchievementHandler.addAchievement('My Shovel Is Starting To Crack', 'Dig up 10 items in the Underground.', new UndergroundItemsFoundRequirement(10), 0.02);
