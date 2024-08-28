@@ -249,11 +249,11 @@ export class UndergroundHelper {
     }
 
     public fromJSON(json: any) {
-        this._experience = ko.observable(json?.experience || 0);
-        this._hired = ko.observable(json?.hired || false);
-        this._timeSinceWork = ko.observable(json?.timeSinceWork || 0);
-        this._selectedEnergyRestore = ko.observable(json?.selectedEnergyRestore ?? -1);
-        this._shouldDiscoverFavorite = ko.observable(json?.shouldDiscoverFavorite ?? false);
+        this._experience(json?.experience || 0);
+        this._hired(json?.hired || false);
+        this._timeSinceWork(json?.timeSinceWork || 0);
+        this._selectedEnergyRestore(json?.selectedEnergyRestore ?? -1);
+        this._shouldDiscoverFavorite(json?.shouldDiscoverFavorite ?? false);
     }
 
     public static convertLevelToExperience(level: number): number {

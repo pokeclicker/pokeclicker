@@ -6,6 +6,7 @@ import { Coordinate } from '../mine/Mine';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
 import { clipNumber } from '../../GameConstants';
+import GameHelper from '../../GameHelper';
 
 export default class UndergroundTools {
     tools: UndergroundTool[] = [];
@@ -113,6 +114,7 @@ export default class UndergroundTools {
             const { coordinatesMined, success } = tool.action(x, y);
 
             if (success) {
+                GameHelper.incrementObservable(App.game.statistics.undergroundToolsUsed[tool.id]);
                 UndergroundController.handleCoordinatesMined(coordinatesMined);
                 tool.reduceDurabilityByUse();
             }
