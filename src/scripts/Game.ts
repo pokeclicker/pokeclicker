@@ -505,6 +505,7 @@ class Game {
 
         // Berry Blender
         this.blending.update(GameConstants.TICK_TIME / GameConstants.SECOND);
+        this.blending.animate();
 
         // Effect Engine (battle items and flutes)
         EffectEngineRunner.counter += GameConstants.TICK_TIME;
