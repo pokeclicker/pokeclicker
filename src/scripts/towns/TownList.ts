@@ -8200,7 +8200,7 @@ TownList['Mina\'s Houseboat'] = new DungeonTown(
     'Mina\'s Houseboat',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [new QuestLineStepCompletedRequirement('Eater of Light', 0)]
+    [new QuestLineStepCompletedRequirement('Eater of Light', 2)]
 );
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
