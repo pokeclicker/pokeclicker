@@ -115,6 +115,7 @@
                                 <th class="text-center align-middle">Breeding Efficiency</th>
                                 <th class="text-center align-middle">Attack Bonus</th>
                                 <th class="text-center align-middle">Egg Steps</th>
+                                <th class="text-center align-middle">Optimize Vitamins</th>
                             </tr>
                         </thead>
                         <tbody data-bind="foreach: lazyLoad('lazyVitaminExpandedList', $element, PartyController.getVitaminSortedList, { reset: () => (DisplayObservables.modalState.pokemonVitaminExpandedModal === 'hidden') }), childrenComplete: () => { lazyLoadCallback('lazyVitaminExpandedList'); }">
@@ -140,6 +141,12 @@
                                 <td class="text-center align-middle tight" data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue($data).toLocaleString('en-US', { maximumFractionDigits: 3 })">-</td>
                                 <td class="text-center align-middle tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
                                 <td class="text-center align-middle tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
+                                <td class="text-center align-middle tight">
+                                <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;" data-bind="click: () => {$data.optimizeVitamins()}">
+                                    Optimize
+                                </button>
+
+                                </td>
                             </tr>
                         </tbody>
                     </table>
