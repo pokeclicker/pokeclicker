@@ -11,8 +11,8 @@ export default class PokeBlock extends Item {
     type: PokeBlockColor;
     flavors: BlockFlavor[];
 
-    constructor(color: PokeBlockColor, basePrice: number, flavors: number[] = [0, 0, 0, 0, 0], currency: Currency = Currency.money) {
-        super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, currency);
+    constructor(color: PokeBlockColor, basePrice: number, flavors: number[] = [0, 0, 0, 0, 0], description?: string) {
+        super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, undefined, {}, undefined, description);
         this.type = color;
         this.flavors = [];
         for (let i = 0; i < 5; i++) {
