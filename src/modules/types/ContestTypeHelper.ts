@@ -53,15 +53,12 @@ export default class ContestTypeHelper {
         let m8 = ContestTypeHelper.contestTypeMatrix[a2][d3];
         let m9 = ContestTypeHelper.contestTypeMatrix[a3][d3];
 
-        // Find the numbers for each type, cap at 1. We calculate with imm, not, and neu to prevent weird numbers like 1.5
+        // Find the numbers for each type, cap at 1
         let type1 = Math.min(m1 + m2 + m3, 1);
         let type2 = Math.min(m4 + m5 + m6, 1);
         let type3 = Math.min(m7 + m8 + m9, 1);
 
-        // Find the most effective type and turn it into neu and vry effectiveness
-        let d = Math.max(type1, type2, type3) * 2;
-
-        // Turn imm into not effectiveness
-        return Math.max(d, 0.5);
+        // Find the most effective type and use it
+        return Math.max(type1, type2, type3);
     }
 }
