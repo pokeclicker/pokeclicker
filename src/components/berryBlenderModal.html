@@ -12,6 +12,30 @@
                 </ul>
             </div>
 
+            <div data-bind="if: BlendingController.blendingModalTabSelected() === 'blendingRecipeView'">
+            <div class="modal-header text-center">                        
+                    <table style="width: 100%; table-layout:fixed; font-size: larger;">
+                        <tr class="text-light">
+                        <th class="bg-dark" colspan="5">Flavor Bank</th>
+                        </tr>
+                        <tr>
+                            <td>Spicy</td>
+                            <td>Dry</td>
+                            <td>Sweet</td>
+                            <td>Bitter</td>
+                            <td>Sour</td>
+                        </tr>
+                        <tr>
+                            <td data-bind="text: App.game.blending.flavorBank[0]().toLocaleString('en-US')">Spicy</td>
+                            <td data-bind="text: App.game.blending.flavorBank[1]().toLocaleString('en-US')">Dry</td>
+                            <td data-bind="text: App.game.blending.flavorBank[2]().toLocaleString('en-US')">Sweet</td>
+                            <td data-bind="text: App.game.blending.flavorBank[3]().toLocaleString('en-US')">Bitter</td>
+                            <td data-bind="text: App.game.blending.flavorBank[4]().toLocaleString('en-US')">Sour</td>
+                    </tr>
+                    </table>
+            </div>
+            </div>
+
             <div class="modal-body tab-content p-0" style="overflow-x: hidden;">
 
                 <div id="blendingView" class="tab-pane fade in active show">
@@ -154,6 +178,67 @@
                 </div>
 
                 <div id="blendingRecipeView" class="tab-pane fade">
+
+                    <div class="modal-body">
+                        <div>
+                            <div class="row justify-content-center" data-bind="foreach: BlendingController.getPokeblockList()">
+                                <div class="col-6 col-sm-4 col-lg-3">
+                                <button class="shopItem clickable btn btn-block btn-secondary"
+                                    data-bind="click: function() {BlendingController.selectedPokeBlock($data);},
+                                    css: { active: BlendingController.selectedPokeBlock($data) == $data },
+                                    tooltip: {
+                                        title: $data.description ? `<u>${$data.displayName}:</u><br/>${$data.description}` : '',
+                                        trigger: 'hover',
+                                        placement:'bottom',
+                                        boundary: 'viewport',
+                                        html: true
+                                        }">
+                                    <img src="" height="48px" style="image-rendering: pixelated;" data-bind="attr:{ src: $data.image }">
+                                    <p data-bind="text: $data.displayName">Item Name</p>
+                                        <div style="display: flex; flex-direction:column; align-items: center; justify-content: center;">
+                                            <table style="width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="align-middle" colspan="5" style="text-decoration: underline; font-weight: normal;">Flavor Cost</th>
+                                                        </tr>
+                                                        <tr class="text-dark" style="font-weight: bold;">
+                                                            <!-- ko foreach: $data.flavors.filter(f => f.value > 0) -->
+                                                                <td data-bind="text: FlavorType[$data.type]">Flavor</td>
+                                                            <!-- /ko -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <!-- ko foreach: $data.flavors.filter(f => f.value > 0) -->
+                                                                <td data-bind="text: $data.value">Value</td>
+                                                            <!-- /ko -->
+                                                        </tr>
+                                                        <tr>
+                                                            <td data-bind="text: Amount: player.itemList[$data.name]().toLocaleString('en-US')"></td>
+                                                        </tr>
+                                                    </tbody>
+                                            </table>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row justify-content-center">
+                            <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
+                                <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
+                                        value="1" min="1" required name="amountOfItems"
+                                        oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                                        onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
+                                    <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}" onclick="App.game.blending.buyPokeblock(BlendingController.selectedPokeBlock(), ShopHandler.amount())">
+                                        Buy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div id="blendingBuddiesView" class="tab-pane fade">

@@ -4,4 +4,8 @@ class BlendingController {
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedPokeBlock: KnockoutObservable<Item> = ko.observable(ItemList.Pokeblock_Red);
+
+    public static getPokeblockList() {
+        return Object.values(ItemList).filter((i) => i instanceof PokeBlock);
+    }
 }

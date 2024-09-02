@@ -98,6 +98,40 @@ class Blending implements Feature {
         return b.flavors.forEach((flavor) => this.addFlavorAmount(new FlavorAmount(flavor.value, flavor.type)));
     }
 
+    public hasAmount(flavorAmount: FlavorAmount) {
+        return this.flavorBank[flavorAmount.flavor]() >= flavorAmount.amount;
+    }
+
+    public loseAmount(flavorAmount: FlavorAmount): boolean {
+        if (Number.isNaN(flavorAmount.amount) || flavorAmount.amount <= 0) {
+            return;
+        }
+
+        if (!this.hasAmount(flavorAmount)) {
+            return false;
+        }
+
+        GameHelper.incrementObservable(this.flavorBank[flavorAmount.flavor], -flavorAmount.amount);
+        return true;
+    }
+
+    public loseFlavor(block: PokeBlock, amount: number) {
+        return block.flavors.forEach((flavor) => this.loseAmount(new FlavorAmount(flavor.value * amount, flavor.type)));
+    }
+
+    public amountText(flavor: FlavorType) {
+        return this.flavorBank[flavor]().toLocaleString('en-US');
+    }
+
+    public buyPokeblock(block: PokeBlock, amount: number) {
+        let blockFlavors = [block.flavors[0], block.flavors[1], block.flavors[2], block.flavors[3], block.flavors[4]];
+
+        if (blockFlavors.filter(f => f.value > 0).every(f => this.loseAmount(new FlavorAmount(f.value * amount, f.type)))) {
+            GameHelper.incrementObservable(player.itemList[block.name], amount);
+            return;
+        }
+    }
+
     canAccess(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Wailmer_pail); // TODO: Pokeblock kit
     }

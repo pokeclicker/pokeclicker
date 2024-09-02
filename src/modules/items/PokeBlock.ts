@@ -1,15 +1,30 @@
+import FlavorType from '../enums/FlavorType';
 import { PokeBlockColor, Currency } from '../GameConstants';
 import Item from './Item';
 
+interface BlockFlavor {
+    type: FlavorType,
+    value: number,
+}
+
 export default class PokeBlock extends Item {
     type: PokeBlockColor;
+    flavors: BlockFlavor[];
 
-    constructor(color: PokeBlockColor, basePrice: number, currency: Currency = Currency.money) {
+    constructor(color: PokeBlockColor, basePrice: number, flavors: number[] = [0, 0, 0, 0, 0], currency: Currency = Currency.money) {
         super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, currency);
         this.type = color;
+        this.flavors = [];
+        for (let i = 0; i < 5; i++) {
+            this.flavors.push({type: i, value: flavors[i]});
+        }
     }
     
     get description(): string {
         return this._description || 'Unobtainable item for future uses';
+    }
+
+    get image() {
+        return `assets/images/items/pokeblock/${this.name}.png`;
     }
 }
