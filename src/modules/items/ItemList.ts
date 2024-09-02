@@ -99,12 +99,12 @@ ItemList.PokeBlock_Blue         = new PokeBlock(PokeBlockColor.Blue, Infinity, [
 ItemList.PokeBlock_Pink         = new PokeBlock(PokeBlockColor.Pink, Infinity, [0, 0, 40, 0, 0], 'Boosts the Appeal of Cute Pokémon');
 ItemList.PokeBlock_Green        = new PokeBlock(PokeBlockColor.Green, Infinity, [0, 0, 0, 40, 0], 'Boosts the Appeal of Smart Pokémon');
 ItemList.PokeBlock_Yellow       = new PokeBlock(PokeBlockColor.Yellow, Infinity, [0, 0, 0, 0, 40], 'Boosts the Appeal of Tough Pokémon');
-ItemList.PokeBlock_Red_Plus     = new PokeBlock(PokeBlockColor.Red_Plus, Infinity, [3200, 0, 0, 0, 0], 'Changes a Pokémon\'s Contes Type to Cool');
-ItemList.PokeBlock_Blue_Plus    = new PokeBlock(PokeBlockColor.Blue_Plus, Infinity, [0, 3200, 0, 0, 0], 'Changes a Pokémon\'s Contes Type to Beautiful');
-ItemList.PokeBlock_Pink_Plus    = new PokeBlock(PokeBlockColor.Pink_Plus, Infinity, [0, 0, 3200, 0, 0], 'Changes a Pokémon\'s Contes Type to Cute');
-ItemList.PokeBlock_Green_Plus   = new PokeBlock(PokeBlockColor.Green_Plus, Infinity, [0, 0, 0, 3200, 0], 'Changes a Pokémon\'s Contes Type to Smart');
-ItemList.PokeBlock_Yellow_Plus  = new PokeBlock(PokeBlockColor.Yellow_Plus, Infinity, [0, 0, 0, 0, 3200], 'Changes a Pokémon\'s Contes Type to Tough');
-ItemList.PokeBlock_Rainbow      = new PokeBlock(PokeBlockColor.Rainbow, Infinity, [2400, 2400, 2400, 2400, 2400], 'Changes a Pokémon\'s Contes Type to Balanced');
+ItemList.PokeBlock_Red_Plus     = new PokeBlock(PokeBlockColor.Red_Plus, Infinity, [3200, 0, 0, 0, 0], 'Changes a Pokémon\'s Contest Type to Cool');
+ItemList.PokeBlock_Blue_Plus    = new PokeBlock(PokeBlockColor.Blue_Plus, Infinity, [0, 3200, 0, 0, 0], 'Changes a Pokémon\'s Contest Type to Beautiful');
+ItemList.PokeBlock_Pink_Plus    = new PokeBlock(PokeBlockColor.Pink_Plus, Infinity, [0, 0, 3200, 0, 0], 'Changes a Pokémon\'s Contest Type to Cute');
+ItemList.PokeBlock_Green_Plus   = new PokeBlock(PokeBlockColor.Green_Plus, Infinity, [0, 0, 0, 3200, 0], 'Changes a Pokémon\'s Contest Type to Smart');
+ItemList.PokeBlock_Yellow_Plus  = new PokeBlock(PokeBlockColor.Yellow_Plus, Infinity, [0, 0, 0, 0, 3200], 'Changes a Pokémon\'s Contest Type to Tough');
+ItemList.PokeBlock_Rainbow      = new PokeBlock(PokeBlockColor.Rainbow, Infinity, [2400, 2400, 2400, 2400, 2400], 'Changes a Pokémon\'s Contest Type to Balanced');
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);
