@@ -77,6 +77,22 @@ class Blending implements Feature {
         return flavorAmount;
     }
 
+    public incomingFlavors(index: number) {
+        let spicy = 0;
+        let dry = 0;
+        let sweet = 0;
+        let bitter = 0;
+        let sour = 0;
+        this.machines[index].blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
+            spicy += App.game.farming.berryData[slot.berry].flavors[0].value;
+            dry += App.game.farming.berryData[slot.berry].flavors[1].value;
+            sweet += App.game.farming.berryData[slot.berry].flavors[2].value;
+            bitter += App.game.farming.berryData[slot.berry].flavors[3].value;
+            sour += App.game.farming.berryData[slot.berry].flavors[4].value;
+        });
+        return [spicy, dry, sweet, bitter, sour];
+    }
+
     public gainFlavor(berry: BerryType) {
         const b = App.game.farming.berryData[berry];
         return b.flavors.forEach((flavor) => this.addFlavorAmount(new FlavorAmount(flavor.value, flavor.type)));
