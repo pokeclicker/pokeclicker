@@ -6945,6 +6945,11 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
             new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
+        new DungeonBossPokemon('Rotom (Discord)', 4300000, 100, {hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Rotom'),
+            new ObtainedPokemonRequirement('Rotom (Discord)'),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
     ],
     54250, 205);
 
@@ -10221,6 +10226,7 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
             {loot: 'Rotom (Fan)'},
             {loot: 'Rotom (Frost)'},
             {loot: 'Rotom (Mow)'},
+            {loot: 'Rotom (Discord)', requirement: new ObtainedPokemonRequirement('Rotom (Discord)')},
             {loot: 'Spell_Tag'},
         ],
         mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Lost Hotel'))}],
