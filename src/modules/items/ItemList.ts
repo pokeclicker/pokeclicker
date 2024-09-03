@@ -96,7 +96,6 @@ ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmP
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
 
-// ItemList.PokeBlock_Black  = new PokeBlock(PokeBlockColor.Black, Infinity);
 ItemList.PokeBlock_Red    = new PokeBlock(PokeBlockColor.Red, 1, undefined, ContestType.Cool,
     (pokemon) => pokemonMap[pokemon.name].contestType.includes(ContestType.Cool) || pokemonMap[pokemon.name].contestType.includes(ContestType.Balanced));
 ItemList.PokeBlock_Blue   = new PokeBlock(PokeBlockColor.Blue, 1, undefined, ContestType.Beautiful,
@@ -107,15 +106,18 @@ ItemList.PokeBlock_Green  = new PokeBlock(PokeBlockColor.Green, 1, undefined, Co
     (pokemon) => pokemonMap[pokemon.name].contestType.includes(ContestType.Smart) || pokemonMap[pokemon.name].contestType.includes(ContestType.Balanced));
 ItemList.PokeBlock_Yellow = new PokeBlock(PokeBlockColor.Yellow, 1, undefined, ContestType.Tough,
     (pokemon) => pokemonMap[pokemon.name].contestType.includes(ContestType.Tough) || pokemonMap[pokemon.name].contestType.includes(ContestType.Balanced));
-// ItemList.PokeBlock_Gold   = new PokeBlock(PokeBlockColor.Gold, Infinity);
-// ItemList.PokeBlock_Purple = new PokeBlock(PokeBlockColor.Purple, Infinity);
-// ItemList.PokeBlock_Indigo = new PokeBlock(PokeBlockColor.Indigo, Infinity);
-// ItemList.PokeBlock_Brown = new PokeBlock(PokeBlockColor.Brown, Infinity);
-// ItemList.PokeBlock_Light_Blue = new PokeBlock(PokeBlockColor.Light_Blue, Infinity);
-// ItemList.PokeBlock_Olive = new PokeBlock(PokeBlockColor.Olive, Infinity);
-// ItemList.PokeBlock_Beige = new PokeBlock(PokeBlockColor.Beige, Infinity);
-// ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
-// ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
+ItemList.PokeBlock_Red_Plus     = new PokeBlock(PokeBlockColor.Red_Plus, 1, undefined, ContestType.Cool,
+    (pokemon) => !pokemonMap[pokemon.name].contestType.includes(ContestType.Cool), 'Changes a Pokémon\'s Contest Type to Cool');
+ItemList.PokeBlock_Blue_Plus    = new PokeBlock(PokeBlockColor.Blue_Plus, 1, undefined, ContestType.Beautiful,
+    (pokemon) => !pokemonMap[pokemon.name].contestType.includes(ContestType.Beautiful), 'Changes a Pokémon\'s Contest Type to Beautiful');
+ItemList.PokeBlock_Pink_Plus    = new PokeBlock(PokeBlockColor.Pink_Plus, 1, undefined, ContestType.Cute,
+    (pokemon) => !pokemonMap[pokemon.name].contestType.includes(ContestType.Cute), 'Changes a Pokémon\'s Contest Type to Cute');
+ItemList.PokeBlock_Green_Plus   = new PokeBlock(PokeBlockColor.Green_Plus, 1, undefined, ContestType.Smart,
+    (pokemon) => !pokemonMap[pokemon.name].contestType.includes(ContestType.Smart), 'Changes a Pokémon\'s Contest Type to Smart');
+ItemList.PokeBlock_Yellow_Plus  = new PokeBlock(PokeBlockColor.Yellow_Plus, 1, undefined, ContestType.Tough,
+    (pokemon) => !pokemonMap[pokemon.name].contestType.includes(ContestType.Tough), 'Changes a Pokémon\'s Contest Type to Tough');
+ItemList.PokeBlock_Rainbow      = new PokeBlock(PokeBlockColor.Rainbow, 1, undefined, ContestType.Balanced,
+    (pokemon) => !pokemonMap[pokemon.name].contestType.includes(ContestType.Balanced), 'Changes a Pokémon\'s Contest Type to Balanced');
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);

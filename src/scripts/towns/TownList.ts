@@ -2335,22 +2335,28 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
 
 //Hoenn Contest Shop
 const HoennContestShop = new Shop([
-    ItemList['Tangela (Pom-pom)'],
-    ItemList['Goldeen (Diva)'],
-    ItemList['Weepinbell (Fancy)'],
-    ItemList['Onix (Rocker)'],
-    ItemList['Dugtrio (Punk)'],
-    ItemList['Gengar (Punk)'],
+    // ItemList['Tangela (Pom-pom)'],
+    // ItemList['Goldeen (Diva)'],
+    // ItemList['Weepinbell (Fancy)'],
+    // ItemList['Onix (Rocker)'],
+    // ItemList['Dugtrio (Punk)'],
+    // ItemList['Gengar (Punk)'],
     ItemList.Pokeblock_case, // only for dev
     ItemList.PokeBlock_Red,
     ItemList.PokeBlock_Blue,
     ItemList.PokeBlock_Pink,
     ItemList.PokeBlock_Green,
     ItemList.PokeBlock_Yellow,
-    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+    ItemList.PokeBlock_Red_Plus,
+    ItemList.PokeBlock_Blue_Plus,
+    ItemList.PokeBlock_Pink_Plus,
+    ItemList.PokeBlock_Green_Plus,
+    ItemList.PokeBlock_Yellow_Plus,
+    ItemList.PokeBlock_Rainbow,
+    // new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    // new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    // new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    // new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
 ], 'Contest Shop', [PokemonContestController.requirements]);
 
 //Hoenn Flute Master
