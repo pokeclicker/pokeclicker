@@ -13,11 +13,13 @@ class ContestHelper {
     public static calculateOnePokemonContestAppeal(pokemon: PartyPokemon, type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, includeBreeding = false): number {
         let appeal = 0;
         const pAppeal = pokemon.contestAppeal;
-        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+        const pType1 = pokemon.currentContestType[0] ?? ContestType.None;
+        const pType2 = pokemon.currentContestType[1] ?? ContestType.None;
+        const pType3 = pokemon.currentContestType[2] ?? ContestType.None;
 
         // Check if the Pokemon is currently breeding (no appeal)
         if (includeBreeding || !pokemon.breeding) {
-            appeal = pAppeal * ContestTypeHelper.getAppealModifier(dataPokemon.contestType1, dataPokemon.contestType2, dataPokemon.contestType3, type1, type2, type3);
+            appeal = pAppeal * ContestTypeHelper.getAppealModifier(pType1, pType2, pType3, type1, type2, type3);
         }
 
         return appeal;
@@ -25,8 +27,8 @@ class ContestHelper {
 
     public static getPartyPokemonByContestType(type: ContestType): PartyPokemon[] {
         return App.game.party.caughtPokemon.filter((p) => {
-            const pk = PokemonHelper.getPokemonById(p.id);
-            return [pk.contestType1, pk.contestType2, pk.contestType3].some(c => c === type || c === ContestType.Balanced);
+            const pk = p.currentContestType;
+            return pk.some(c => c === type || c === ContestType.Balanced);
         });
     }
 

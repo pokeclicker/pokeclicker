@@ -137,12 +137,13 @@ class Egg implements Saveable {
             partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)) * shinyMultiplier);
             partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]() * (efficiency / 100)) * shinyMultiplier);
 
-            // If breeding (not store egg), reset level, reset evolution check
+            // If breeding (not store egg), reset level, reset evolution check, reset contest type
             if (partyPokemon.breeding) {
                 partyPokemon.exp = 0;
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
+                partyPokemon.currentContestType = pokemonMap[pokemonID].contestType;
             }
 
             // Update pokerus status
