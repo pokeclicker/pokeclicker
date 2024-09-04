@@ -3,18 +3,18 @@
        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="mb-0">Gems</h5>
+
+                <!-- ko if: App.game.challenges.list.disableGems.active() -->
+                <h5 class="mb-0 px-2 rounded bg-danger">
+                    Gem bonuses are disabled.
+                </h5>
+                <!-- /ko -->
             </div>
 
             <div class="modal-body">
-                <!-- ko if: App.game.challenges.list.disableGems.active() -->
-                <p class="bg-danger">
-                    Gem bonuses are disabled.
-                </p>
-                <!-- /ko -->
-
-                <!-- ko ifnot: App.game.challenges.list.disableGems.active() -->
                 <p>
-                    Use gems to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get gems based on its type.
+                    Use gems to upgrade the type effectiveness of your Pokémon.
+                    When you defeat a Pokémon, you get gems based on its type.
                     Each upgrade increases your effectiveness by <knockout data-bind="text: GameConstants.GEM_UPGRADE_STEP.toLocaleString('en-US', { style: 'percent', signDisplay: 'exceptZero' })"></knockout>.
                 </p>
 
@@ -94,32 +94,33 @@
                                         <!-- /ko -->
                                     </div>
 
+                                    <!-- ko ifnot: App.game.challenges.list.disableGems.active() -->
                                     <div class="card-footer p-0">
-                                    <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                        <!-- ko if: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
-                                        <div class="btn btn-block no-click">MAXED</div>
+                                        <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
+                                            <!-- ko if: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
+                                            <div class="btn btn-block no-click">MAXED</div>
+                                            <!-- /ko -->
+
+                                            <!-- ko ifnot: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
+                                            <button class="btn btn-block btn-primary" data-bind="
+                                                enable: App.game.gems.canBuyGemUpgrade(gemIndex(), $index()),
+                                                click: () => { App.game.gems.buyGemUpgrade(gemIndex(), $index()); }">
+                                                Buy (<knockout data-bind="text: App.game.gems.getGemUpgradeCost(gemIndex(), $index()).toLocaleString('en-US')"></knockout><img width="18px" height="18px" data-bind='attr: { src: Gems.image(gemIndex()) }'/>)
+                                                <!-- text: `Buy ()` -->
+                                            </button>
+                                            <!-- /ko -->
                                         <!-- /ko -->
 
-                                        <!-- ko ifnot: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
-                                        <button class="btn btn-block btn-primary" data-bind="
-                                            enable: App.game.gems.canBuyGemUpgrade(gemIndex(), $index()),
-                                            click: () => { App.game.gems.buyGemUpgrade(gemIndex(), $index()); }">
-                                            Buy (<knockout data-bind="text: App.game.gems.getGemUpgradeCost(gemIndex(), $index()).toLocaleString('en-US')"></knockout><img width="18px" height="18px" data-bind='attr: { src: Gems.image(gemIndex()) }'/>)
-                                            <!-- text: `Buy ()` -->
-                                        </button>
+                                        <!-- ko ifnot: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
+                                            <div class="btn btn-block no-click">N / A</div>
                                         <!-- /ko -->
-                                    <!-- /ko -->
-
-                                    <!-- ko ifnot: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                        <div class="btn btn-block no-click">N / A</div>
-                                    <!-- /ko -->
                                     </div>
+                                    <!-- /ko -->
                                 </div>
                             <!-- /ko -->
                         </div>
                     </div>
                 </div>
-                <!-- /ko -->
                 <!-- /ko -->
                 <!-- /ko -->
             </div>
