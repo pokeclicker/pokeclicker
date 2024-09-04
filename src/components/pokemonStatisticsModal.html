@@ -68,7 +68,6 @@
                   </td>
                 </tr>
                 <!-- /ko -->
-                <!-- ko if:  App.game.keyItems.hasKeyItem(KeyItemType.Pokeblock_case) -->
                 <tr>
                   <td class="text-left">Contest Type</td>
                   <td class="text-left tight" data-bind="foreach: App.game.party.getPokemon($data).currentContestType">
@@ -85,7 +84,6 @@
                     data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).contestAppeal : 0).toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
-                <!-- /ko -->
                 <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
                 <tr>
                   <td class="text-left">EVs</td>
