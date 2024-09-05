@@ -41,9 +41,10 @@
 
                                 <div class="d-flex" style="gap: 0.25rem">
                                     <!-- ko foreach: Array(Gems.nEffects) -->
-                                    <div class="flex-grow-1" style="background-color: orange; height: 2px;" data-bind="style: {
-                                        backgroundColor: App.game.gems.isValidUpgrade($parentContext.$index(), $index()) ? (App.game.gems.hasMaxUpgrade($parentContext.$index(), $index()) ? 'green' : 'orange') : 'transparent'
-                                    }"></div>
+                                    <div class="flex-grow-1" style="height: 2px;" data-bind="
+                                        class: App.game.gems.isValidUpgrade($parentContext.$index(), $index()) ? (App.game.gems.hasMaxUpgrade($parentContext.$index(), $index()) ? 'bg-success' : 'bg-warning') : 'bg-success',
+                                        style: { opacity: App.game.gems.isValidUpgrade($parentContext.$index(), $index()) ? 1 : 0.25 }
+                                    "></div>
                                     <!-- /ko -->
                                 </div>
                             </div>
