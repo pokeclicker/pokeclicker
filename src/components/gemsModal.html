@@ -95,6 +95,16 @@
                                         <!-- /ko -->
                                     </div>
 
+                                    <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
+                                    <div class="p-0">
+                                        <div class="d-flex" style="gap: 1px">
+                                            <!-- ko foreach: [...Array(10).keys()] -->
+                                            <div class="flex-grow-1" style="height: 5px" data-bind="style: { 'background-color': TypeColor[gemIndex()], filter: `brightness(${App.game.gems.getGemUpgrade(gemIndex(), $parentContext.$index()) > $index() ? 1 : 0.5})` }"></div>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+
                                     <!-- ko ifnot: App.game.challenges.list.disableGems.active() -->
                                     <div class="card-footer p-0">
                                         <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
