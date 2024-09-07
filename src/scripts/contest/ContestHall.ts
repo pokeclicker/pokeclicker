@@ -32,10 +32,4 @@ class ContestHall extends TownContent {
     public areaStatus(): areaStatus {
         return areaStatus.completed;
     }
-
-    public static getRibbonImage(rank: ContestRank, type: ContestType) {
-        const RibbonRank = ContestRank[rank];
-        const RibbonType = ContestType[type];
-        return RibbonType === 'Balanced' ? `assets/images/ribbons/${RibbonRank} Star.svg` : `assets/images/ribbons/${RibbonRank} ${RibbonType}.svg`;
-    }
 }

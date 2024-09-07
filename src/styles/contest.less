@@ -1,3 +1,10 @@
+@ribbonColors:
+  "Cool" #bb0a34,
+  "Beautiful" #1995c9,
+  "Cute" #e2afd9,
+  "Smart" #7fd244,
+  "Tough" #f2c43d;
+  
 .contestButton3 {
   width: 16%;
   min-width: 80px;
@@ -31,4 +38,17 @@
   bottom: 10px;
   width: 50%;
   left: 25%;
+}
+
+@import "for";
+
+/* stylelint-disable-next-line no-duplicate-selectors */
+.ribbon {
+  .for(@ribbonColors); .-each(@value) {
+    @type: extract(@value, 1);
+    @color: extract(@value, 2);
+    &[contest-type='@{type}'] .ribbon-color {
+      fill: @color;
+    }
+  }
 }

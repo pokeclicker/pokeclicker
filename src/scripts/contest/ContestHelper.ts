@@ -115,4 +115,12 @@ class ContestHelper {
                 return 'Absolutely dazzling! You\'re a brilliant shining star!';
         }
     }
+
+    public static getRibbonImage(rank: ContestRank, type: ContestType) {
+        const RibbonRank = ContestRank[rank];
+        const RibbonType = ContestType[type];
+        return RibbonType === 'Balanced' ?
+            `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
+            `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
+    }
 }

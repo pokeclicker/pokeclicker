@@ -26,7 +26,9 @@
                         attr:{'aria-label': `${ContestRank[rank]} Rank ${ContestType[type]} Contest. ${ContestHelper.contestButtonTooltip(rank, type)}.`}
                         ">
                         <p class="m-0" style="font-weight: bolder;" data-bind="text: `${ContestType[type]}`"></p>
-                        <img data-bind="attr:{ src: ContestHall.getRibbonImage(rank, type)}" style="width: 80px;">
+                        <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" width="80px" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano" data-bind="attr: {'contest-type': ContestType[type]}">
+                            <g data-bind="html: ContestHelper.getRibbonImage(rank, type)"></g>
+                        </svg>
                         <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(rank, type, type))}`"></p>
                     </button>
                 </div>
