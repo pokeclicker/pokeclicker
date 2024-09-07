@@ -392,9 +392,39 @@ class PartyPokemon implements Saveable {
             case GameConstants.PokeBlockColor.Yellow_Plus:
             case GameConstants.PokeBlockColor.Rainbow:
                 amount = 1;
-                this.currentContestType = [(ItemList[itemName] as PokeBlock).contestType];
+                let blockType = (ItemList[itemName] as PokeBlock).contestType;
+                let conTypes = this.currentContestType;
+
+                if (this.currentContestType.includes(blockType)) {
+                    Notifier.notify({
+                        message : `${this.displayName} is already ${ContestType[blockType]}!`,
+                        type : NotificationConstants.NotificationOption.warning,
+                        pokemonImage : PokemonHelper.getImage(this.id),
+                    });
+                    break;
+                }
+
+                // If the mon has 3 types and one of them is Balanced, remove it. Otherwise, all types are different and combine into Balanced
+                if (conTypes.length > 2) {
+                    if (this.currentContestType.includes(ContestType.Balanced)) {
+                        conTypes = conTypes.filter((type) => type != ContestType.Balanced);
+                    } else {
+                        conTypes = [];
+                        blockType = ContestType.Balanced;
+                    }
+                }
+
+                conTypes.push(blockType);
+
+                // Put them in order
+                const contestTypesOrder: ContestType[] = [0, 1, 2, 3, 4, 5];
+                conTypes = contestTypesOrder.filter((conType) => conTypes.includes(conType));
+
+                // Apply new contest types
+                this.currentContestType = conTypes;
+
                 Notifier.notify({
-                    message : `${this.displayName} became ${ContestType[(ItemList[itemName] as PokeBlock).contestType]}!`,
+                    message : `${this.displayName} became ${ContestType[blockType]}!`,
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
