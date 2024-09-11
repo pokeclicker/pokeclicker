@@ -203,6 +203,7 @@ import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
+import GameLoadState from './utilities/GameLoadState';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -419,4 +420,5 @@ Object.assign(<any>window, {
     ItemRequirement,
     ChristmasPresent,
     DamageCalculator,
+    GameLoadState,
 });

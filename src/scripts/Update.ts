@@ -2629,9 +2629,7 @@ class Update implements Saveable {
 
             // Multicategory pokemon
             saveData.party.caughtPokemon.forEach(pokemon => {
-                if (pokemon[6]) {
-                    pokemon[6] = [pokemon[6]];
-                }
+                pokemon[6] = [pokemon[6] ?? 0];
             });
 
             // Add Alola story battles
@@ -2738,6 +2736,30 @@ class Update implements Saveable {
             if (settingsData.breedingType2Filter == -2) {
                 settingsData.breedingType2Filter = null;
             }
+            // Pokémon Center renamed
+            if (playerData._townName == 'Route 3 Pokémon Center') {
+                playerData._townName = 'Route 4 Pokémon Center';
+            }
+
+            // Fix all weird amounts of Pokéballs
+            saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
+
+            // Fix pokemon multi-category bug from 0.10.20 update for very old files
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                if (!Array.isArray(pokemon[6])) {
+                    pokemon[6] = [pokemon[6] ?? 0];
+                }
+            });
+
+            // Reset settings that the player shouldn't have access to yet but might have been
+            // set as default from a different file
+            if (playerData.highestRegion < 5) { // Kalos
+                settingsData.pokedexUniqueTransformationFilter = 'all';
+                settingsData.breedingUniqueTransformationFilter = 'all';
+            }
+            if (!saveData.challenges.list.regionalAttackDebuff) {
+                settingsData.breedingRegionalAttackDebuffSetting = '-1';
+            }
         },
     };
 
@@ -2798,7 +2820,7 @@ class Update implements Saveable {
         const settingsData = this.getSettingsData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
+        const backupSaveData = JSON.stringify({ player: playerData, save: saveData, settings: settingsData });
 
         const button = document.createElement('a');
         try {

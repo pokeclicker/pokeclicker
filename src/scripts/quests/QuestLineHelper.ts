@@ -988,18 +988,11 @@ class QuestLineHelper {
         const calibrateMachine = new CaptureSpecificPokemonQuest('Groudon', 5, true).withDescription('Calibrate the machine by catching or hatching 5 Groudon');
         metaGroudonQuestLine.addQuest(calibrateMachine);
 
-        const MetaGroudonReward = () => {
-            App.game.party.gainPokemonByName('Meta Groudon');
-            Notifier.notify({
-                title: metaGroudonQuestLine.name,
-                message: 'Butler turns control of Meta Groudon over to you!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const talkToButler3 = new TalkToNPCQuest(Butler3, 'Deliver the materials to Butler in the Jagged Pass and start the resurrection machine.').withCustomReward(MetaGroudonReward);
+        const talkToButler3 = new TalkToNPCQuest(Butler3, 'Deliver the materials to Butler in Mt. Chimney Crater and start the resurrection machine.');
         metaGroudonQuestLine.addQuest(talkToButler3);
+
+        const catchMetaGroudon = new CaptureSpecificPokemonQuest('Meta Groudon').withDescription('Butler has revived Meta Groudon at Mt. Chimney Crater. Catch Meta Groudon.');
+        metaGroudonQuestLine.addQuest(catchMetaGroudon);
 
         App.game.quests.questLines().push(metaGroudonQuestLine);
     }
@@ -3801,8 +3794,8 @@ class QuestLineHelper {
         const talktoJungleAsh3 = new TalkToNPCQuest(JungleAsh3, 'Talk to Ash Ketchum in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleAsh3);
 
-        const catchFloweringCelebi = new CaptureSpecificPokemonQuest('Flowering Celebi').withDescription('Play with Flowering Celebi.');
-        jungleSecretsQuestLine.addQuest(catchFloweringCelebi);
+        const defeatFloweringCelebi = new DefeatTemporaryBattleQuest('Flowering Celebi', 'Play with Flowering Celebi.');
+        jungleSecretsQuestLine.addQuest(defeatFloweringCelebi);
 
         const talktoJungleKoko6 = new TalkToNPCQuest(JungleKoko6, 'Talk to Koko in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleKoko6);
