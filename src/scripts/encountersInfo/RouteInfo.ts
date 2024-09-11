@@ -12,7 +12,7 @@ class RouteInfo {
             });
             if (App.game.keyItems.hasKeyItem(KeyItemType.Super_rod) || pokemonList.land.length == 0) {
                 [...new Set(pokemonList.water)].forEach(pokemonName => {
-                    pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'water', super_rod: pokemonList.land.length != 0});
+                    pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'water', fishing: pokemonList.land.length != 0});
                 });
             }
             [...new Set(pokemonList.headbutt)].forEach(pokemonName => {
@@ -42,7 +42,14 @@ class RouteInfo {
     }
 
     public static hasInformation(pokemon) {
-        return (pokemon.type == 'roamer')  || (pokemon.type == 'special') || (pokemon.type == 'water' && pokemon.super_rod);
+        if (pokemon.type == 'roamer') {
+            return true;
+        } else if (pokemon.type == 'special') {
+            return RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement) || RouteInfo.hasRequirement(pokemon.requirement, WeatherRequirement) || RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement);
+        } else if (pokemon.type == 'water' && pokemon.fishing) {
+            return true;
+        }
+        return false;
     }
 
     public static getInformations(pokemon) {
@@ -59,11 +66,9 @@ class RouteInfo {
                 return {tooltip: 'Weather Pokémon', image: 'weather.png'};
             } else if (RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement)) {
                 return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
-            } else {
-                return {tooltip: 'Special Pokémon', image: 'special.png'};
             }
-        } else if (pokemon.type == 'water' && pokemon.super_rod) {
-            return {tooltip: 'Super Rod Pokémon', image: 'super_rod.png'};
+        } else if (pokemon.type == 'water' && pokemon.fishing) {
+            return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};
         }
         return {tooltip: '', image: ''};
     }
