@@ -153,6 +153,7 @@ export type PokemonNameType
     | 'Gigantamax Meowth'
     | 'Alolan Meowth'
     | 'Galarian Meowth'
+    | 'Meowth (Phanpy)'
     | 'Persian'
     | 'Alolan Persian'
     | 'Psyduck'
