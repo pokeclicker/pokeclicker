@@ -203,13 +203,17 @@ class Plot implements Saveable {
 
                 tooltip.push(`<u>${BerryType[this.berry]}</u>`);
 
+                const timeBoostType = Settings.getSetting('farmBoostDisplay').observableValue();
                 // Petaya Effect
                 if (App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya && this.stage() == PlotStage.Berry) {
                     tooltip.push('∞ until death');
+                    if (timeBoostType) {
+                        tooltip.push(`(altered from ${this.formattedBaseStageTimeLeft()})`);
+                    }
                 // Normal Time
                 } else {
                     const timeType = Settings.getSetting('farmDisplay').observableValue();
-                    const timeBoostType = Settings.getSetting('farmBoostDisplay').observableValue();
+
                     const growthMultiplierNumber = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
                     const altered = growthMultiplierNumber !== 1;
 
@@ -252,7 +256,10 @@ class Plot implements Saveable {
                         }
                     }
 
-                    tooltip.push(`${timetip}${altered && timeBoostType ? ` (altered from ${formattedBaseTime})` : ''}`);
+                    tooltip.push(timetip);
+                    if (altered && timeBoostType) {
+                        tooltip.push(`(altered from ${formattedBaseTime})`);
+                    }
                 }
             }
 
@@ -384,7 +391,7 @@ class Plot implements Saveable {
 
             // Check for Banetteite drop if Kasib died
             if (this.berry == BerryType.Kasib) {
-                if (App.game.party.alreadyCaughtPokemonByName('Banette') && !player.hasMegaStone(GameConstants.MegaStoneType.Banettite)) {
+                if (player.highestRegion() >= GameConstants.Region.kalos && App.game.party.alreadyCaughtPokemonByName('Banette') && !player.hasMegaStone(GameConstants.MegaStoneType.Banettite)) {
                     if (Rand.chance(0.05)) {
                         player.gainMegaStone(GameConstants.MegaStoneType.Banettite);
                     }
