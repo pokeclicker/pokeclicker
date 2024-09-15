@@ -1892,8 +1892,7 @@ dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
     {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 // All Unown except "EFHP"
-SeededRand.seed(4567);
-const TanobyUnownList = SeededRand.shuffleArray('ABCDGIJKLMNOQRSTUVWXYZ!?'.split(''));
+const TanobyUnownList = 'ABCDGIJKLMNOQRSTUVWXYZ!?'.split('');
 
 dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
     [
@@ -1925,9 +1924,13 @@ dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
     },
     720600,
     [
-        ...TanobyUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+        ...TanobyUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(TanobyUnownList) == char),
+            requirement: new OneFromManyRequirement([
+                new SeededDateSelectNRequirement(index, TanobyUnownList.length, 1),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
+            ]),
         })),
     ],
     43000, 39,
@@ -2044,8 +2047,7 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     2500, 31);
 
 // All Unown except "E?!"
-SeededRand.seed(1337);
-const AlphUnownList = SeededRand.shuffleArray('ABCDFGHIJKLMNOPQRSTUVWXYZ'.split(''));
+const AlphUnownList = 'ABCDFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
@@ -2084,9 +2086,13 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     },
     60600,
     [
-        ...AlphUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
+        ...AlphUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
+            requirement: new OneFromManyRequirement([
+                new SeededDateSelectNRequirement(index, AlphUnownList.length, 1),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ruins of Alph'))]),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ruins of Alph'))]),
+            ]),
         })),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
             requirement: new MultiRequirement([
@@ -3110,6 +3116,7 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
         {pokemon: 'Goldeen', options: { weight: 0.8 }},
         {pokemon: 'Magikarp', options: { weight: 0.8 }},
         {pokemon: 'Barboach', options: { weight: 0.8 }},
+        {pokemon: 'Bagon', options: { weight: 0.8, hide:true, requirement: new ObtainedPokemonRequirement('Bagon') }},
         new DungeonTrainer('Old Couple',
             [
                 new GymPokemon('Medicham', 18000, 39),
@@ -6958,6 +6965,7 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
         {pokemon: 'Zubat', options: { weight: 6.7 }},
         {pokemon: 'Geodude', options: { weight: 6.7 }},
         {pokemon: 'Onix', options: { weight: 6.7 }},
+        {pokemon: 'Gible', options: { weight: 6.7, hide:true, requirement: new ObtainedPokemonRequirement('Gible') }},
         new DungeonTrainer('Mountain Men',
             [
                 new GymPokemon('Geodude', 903000, 20),
@@ -7035,8 +7043,7 @@ dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
     60500, 207);
 
 // All Unown except "FHP?!"
-SeededRand.seed(420);
-const SolaceonUnownList = SeededRand.shuffleArray('ABCDEGIJKLMNOQRSTUVWXYZ'.split(''));
+const SolaceonUnownList = 'ABCDEGIJKLMNOQRSTUVWXYZ'.split('');
 
 dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     [
@@ -7065,9 +7072,13 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     },
     960000,
     [
-        ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+        ...SolaceonUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(SolaceonUnownList) == char),
+            requirement: new OneFromManyRequirement([
+                new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 1),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Solaceon Ruins'))]),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Solaceon Ruins'))]),
+            ]),
         })),
     ],
     62500, 209);
@@ -7581,6 +7592,7 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
         {pokemon: 'Rhyhorn', options: { weight: 9.3 }},
         {pokemon: 'Magneton', options: { weight: 9.3 }},
         {pokemon: 'Floatzel', options: { weight: 9.3 }},
+        {pokemon: 'Gabite', options: { weight: 9.3, hide:true, requirement: new ObtainedPokemonRequirement('Gabite') }},
         new DungeonTrainer('Psychic',
             [
                 new GymPokemon('Haunter', 1503000, 43),
@@ -9024,6 +9036,8 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
         {pokemon: 'Druddigon', options: { weight: 5.57 }},
         {pokemon: 'Sawk', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Sawk')}},
         {pokemon: 'Throh', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Throh')}},
+        {pokemon: 'Deino', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Deino')}},
+        {pokemon: 'Zweilous', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Zweilous')}},
         new DungeonTrainer('Ace Trainer',
             [
                 new GymPokemon('Golurk', 326500, 55),
@@ -13284,8 +13298,7 @@ dungeonList.Heartwood = new Dungeon('Heartwood',
     96500, 10);
 
 // All Unown
-SeededRand.seed(123);
-const AncientSolaceonUnownList = SeededRand.shuffleArray('ABCDEFGHIJKLMNOPQRSTUVWXYZ?!'.split(''));
+const AncientSolaceonUnownList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ?!'.split('');
 
 dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
     ['Paras', 'Carnivine', 'Croagunk', 'Yanma', 'Stunky', 'Kirlia'],
@@ -13307,9 +13320,13 @@ dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
     },
     960000,
     [
-        ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+        ...AncientSolaceonUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AncientSolaceonUnownList) == char),
+            requirement: new OneFromManyRequirement([
+                new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 1),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ancient Solaceon Ruins'))]),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ancient Solaceon Ruins'))]),
+            ]),
         })),
     ],
     96500, 13);
