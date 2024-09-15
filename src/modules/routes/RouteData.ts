@@ -24,6 +24,9 @@ import SpecialEventRandomRequirement from '../requirements/SpecialEventRandomReq
 import SeededRand from '../utilities/SeededRand';
 import ItemRequirement from '../requirements/ItemRequirement';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
+import StatisticRequirement from '../requirements/StatisticRequirement';
+import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
+import { getPokemonByName } from '../pokemons/PokemonHelper';
 
 /*
 KANTO
@@ -647,6 +650,10 @@ Routes.add(new RegionRoute(
         land: ['Spearow', 'Zubat', 'Mankey', 'Mareep', 'Flaaffy'],
         water: ['Goldeen', 'Seaking', 'Magikarp'],
         headbutt: ['Aipom', 'Heracross'],
+        special: [new SpecialRoutePokemon(['Meowth (Phanpy)'], new MultiRequirement([
+            new StatisticRequirement(['pokemonHatched', getPokemonByName('Phanpy').id], 1, 'Hatch Phanpy first.'),
+            new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
+        ]))],
     }),
     [
         new OneFromManyRequirement([
@@ -1438,6 +1445,11 @@ Routes.add(new RegionRoute(
     'Unova Route 12', Region.unova, 12,
     new RoutePokemon({
         land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Vespiquen', 'Tranquill', 'Sewaddle'],
+        special:
+        [
+            new SpecialRoutePokemon(['Cherrim (Overcast)'], new MultiRequirement([new ObtainedPokemonRequirement('Cherrim (Overcast)'), new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])])),
+            new SpecialRoutePokemon(['Cherrim (Sunshine)'], new MultiRequirement([new ObtainedPokemonRequirement('Cherrim (Sunshine)'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])),
+        ],
     }),
     [
         new RouteKillRequirement(10, Region.unova, 13),
@@ -1958,7 +1970,7 @@ Routes.add(new RegionRoute(
         land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
         special: [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
-            new SpecialRoutePokemon(['Axew'], new DayOfWeekRequirement(DayOfWeek.Sunday)),
+            new SpecialRoutePokemon(['Axew'], new DayOfWeekRequirement(DayOfWeek.Saturday)),
         ],
     }),
     [
@@ -3357,6 +3369,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Rotom (Wash)', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Rotom (Heat)', 'Fletchinder'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Rotom'], new WeatherRequirement([WeatherType.Sandstorm, WeatherType.Fog])),
+          new SpecialRoutePokemon(['Rotom (Discord)'], new MultiRequirement([new ObtainedPokemonRequirement('Rotom (Discord)'), new WeatherRequirement([WeatherType.Fog])])),
           new SpecialRoutePokemon(['Blissey', 'Drifloon', 'Wailord'], new WeatherRequirement([WeatherType.Fog])),
       ],
         headbutt: ['Skwovet', 'Applin'],

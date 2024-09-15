@@ -346,6 +346,7 @@ export const SpriteCredits: Credit[] = [
             'Magma Admin Courtney',
             'Magma Stone',
             'Man of Mystery',
+            'Meowth (Phanpy)',
             'Merilyn',
             'Meta Groudon Overworld',
             'Meteorite',
