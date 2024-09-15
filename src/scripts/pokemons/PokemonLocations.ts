@@ -384,7 +384,7 @@ class PokemonLocations {
     }
 
     public static getPokemonWandering(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        if (maxRegion !== GameConstants.Region.none && maxRegion > pokemonMap[pokemonName].nativeRegion) {
+        if (maxRegion !== GameConstants.Region.none && maxRegion < pokemonMap[pokemonName].nativeRegion) {
             return [];
         }
         const cache = this.getCache<string[]>(this.getPokemonWandering.name);
