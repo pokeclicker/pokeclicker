@@ -27,6 +27,6 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Progress further in questline ${this.questLineName}.`;
+        return this.option !== AchievementOption.less ? `Progress further in questline ${this.questLineName}.` : `Questline ${this.questLineName} has progressed past this point.`;
     }
 }
