@@ -3105,7 +3105,7 @@ TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
 TemporaryBattleList['Hoopa 1'] = new TemporaryBattle(
     'Hoopa 1',
     [new GymPokemon('Lugia', 446974112, 80)],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 7)],
     undefined,
     {
@@ -3122,7 +3122,7 @@ TemporaryBattleList['Hoopa 2'] = new TemporaryBattle(
         new GymPokemon('Latias', 163890507, 80),
         new GymPokemon('Latios', 163890507, 80),
     ],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 8)],
     undefined,
     {
@@ -3141,7 +3141,7 @@ TemporaryBattleList['Hoopa 3'] = new TemporaryBattle(
         new GymPokemon('Dialga', 107273786, 80),
         new GymPokemon('Palkia', 107273786, 80),
     ],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 9)],
     undefined,
     {
@@ -3158,7 +3158,7 @@ TemporaryBattleList['Hoopa 4'] = new TemporaryBattle(
         new GymPokemon('Mega Latias', 193688781, 80),
         new GymPokemon('Mega Latios', 193688781, 80),
     ],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 10)],
     undefined,
     {
@@ -3174,7 +3174,7 @@ TemporaryBattleList['Hoopa 5'] = new TemporaryBattle(
         new GymPokemon('Kyurem (Black)', 312881878, 80),
         new GymPokemon('Kyurem (White)', 312881878, 80),
     ],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 11)],
     undefined,
     {
