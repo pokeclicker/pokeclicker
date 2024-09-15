@@ -6117,6 +6117,14 @@ const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
     requirement: new TemporaryBattleRequirement('Hex Maniac Aster'),
 });
 
+const LaverreMedichamite = new NPC('Black Belt', [
+    'My partner Medicham and I are always training to become the strongest in the world.',
+    'Our favorite way to train is by doing quests. Someday my Medicham even found a Mega Stone while claiming some.',
+    'I can\'t quite remember what Quest Level we were at, but it was probably 15 or higher.',
+], {image: 'assets/images/npcs/Black Belt.png',
+    requirement: new ObtainedPokemonRequirement('Medicham'),
+});
+
 const PokéBallFactoryDirector = new NPC('Poké Ball Factory Director', [
     'You saved us! Thank you so much! You\'re an astounding Pokémon Trainer.',
     'Very well, then. I want to show my appreciation. I\'ll give you a Master Ball.',
@@ -6529,7 +6537,7 @@ TownList['Laverre City'] = new Town(
     [LaverreCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Laverre City']), TemporaryBattleList['Hex Maniac Aster']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 14)],
-        npcs: [LaverreFurisodeGirlKatherine, LaverreGengariteAster1, LaverreGengariteAster2],
+        npcs: [LaverreFurisodeGirlKatherine, LaverreGengariteAster1, LaverreGengariteAster2, LaverreMedichamite],
     }
 );
 TownList['Dendemille Town'] = new Town(
