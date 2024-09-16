@@ -3568,8 +3568,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Vanillite', 'Froslass'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Absol'], new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Magmar', 'Heatmor', 'Durant', 'Magby'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
-          new SpecialRoutePokemon(['Hattrem', 'Galarian Ponyta', 'Mimikyu', 'Hatenna', 'Galarian Rapidash'], new WeatherRequirement([WeatherType.Fog])),      
-          
+          new SpecialRoutePokemon(['Hattrem', 'Galarian Ponyta', 'Mimikyu', 'Hatenna', 'Galarian Rapidash'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
     [new RouteKillRequirement(10, Region.galar, 48)],
