@@ -3334,7 +3334,7 @@ Routes.add(new RegionRoute(
     'Workout Sea', Region.galar, 41,
     new RoutePokemon({
         land: ['Blipbug', 'Ditto', 'Exeggcute', 'Happiny'],
-        water: ['Magikarp', 'Remoraid', 'Octillery', 'Sharpedo', 'Mantyke', 'Wingull', 'Tentacool', 'Clauncher', 'Skrelp', 'Gyarados', 'Clawitzer', 'Dragalge'],
+        water: ['Magikarp', 'Remoraid', 'Octillery', 'Sharpedo', 'Mantyke', 'Wingull', 'Tentacool', 'Clauncher', 'Skrelp', 'Gyarados', 'Clawitzer', 'Dragalge', 'Wailord'],
         special:
       [
           new SpecialRoutePokemon(['Rotom (Mow)'], new WeatherRequirement([WeatherType.Clear])),
