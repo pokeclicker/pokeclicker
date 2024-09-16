@@ -391,7 +391,7 @@ class Plot implements Saveable {
 
             // Check for Banetteite drop if Kasib died
             if (this.berry == BerryType.Kasib) {
-                if (App.game.party.alreadyCaughtPokemonByName('Banette') && !player.hasMegaStone(GameConstants.MegaStoneType.Banettite)) {
+                if (player.highestRegion() >= GameConstants.Region.kalos && App.game.party.alreadyCaughtPokemonByName('Banette') && !player.hasMegaStone(GameConstants.MegaStoneType.Banettite)) {
                     if (Rand.chance(0.05)) {
                         player.gainMegaStone(GameConstants.MegaStoneType.Banettite);
                     }
