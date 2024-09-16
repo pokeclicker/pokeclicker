@@ -2350,7 +2350,7 @@ TemporaryBattleList['Dream Researcher'] = new TemporaryBattle(
     'Dream Researcher',
     [new GymPokemon('Mega Audino', 125000000, 32)],
     'Wow! You have proven that you have total power over the realm of dreams! The location of this Audinite was revealed to me in a dream, you deserve to have it!</br><img src="assets/images/megaStone/Audinite.png"/>',
-    [new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Audino')],
+    [new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Audino'), new MaxRegionRequirement(GameConstants.Region.kalos)],
     undefined,
     {
         imageName: 'Scientist (female)',
@@ -5546,7 +5546,7 @@ TemporaryBattleList['Rampaging Gyarados'] = new TemporaryBattle(
     'Rampaging Gyarados',
     [new GymPokemon('Gyarados', 2401180786, 60)],
     '<i>The Rampaging Gyarados fainted.</i>',
-    [new TemporaryBattleRequirement('Rampaging Tsareena')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 4)],
     undefined,
     {
         hideTrainer: true,
@@ -5557,7 +5557,7 @@ TemporaryBattleList['Rampaging Torkoal'] = new TemporaryBattle(
     'Rampaging Torkoal',
     [new GymPokemon('Torkoal', 2401180786, 60)],
     '<i>The Rampaging Torkoal fainted.</i>',
-    [new TemporaryBattleRequirement('Rampaging Gyarados')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 5)],
     undefined,
     {
         hideTrainer: true,
@@ -5581,7 +5581,7 @@ TemporaryBattleList['Rampaging Conkeldurr'] = new TemporaryBattle(
     'Rampaging Conkeldurr',
     [new GymPokemon('Conkeldurr', 2749793992, 60)],
     '<i>The Rampaging Conkeldurr fainted.</i>',
-    [new TemporaryBattleRequirement('Sordward & Shielbert')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 8)],
     undefined,
     {
         hideTrainer: true,
@@ -5592,7 +5592,7 @@ TemporaryBattleList['Rampaging Dusknoir'] = new TemporaryBattle(
     'Rampaging Dusknoir',
     [new GymPokemon('Dusknoir', 2749793992, 60)],
     '<i>The Rampaging Dusknoir fainted.</i>',
-    [new TemporaryBattleRequirement('Sordward & Shielbert')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 8)],
     undefined,
     {
         hideTrainer: true,
@@ -5608,10 +5608,7 @@ TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
         new GymPokemon('Hatterene', 698309136, 63),
     ],
     'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger. I\'ll reach the pinnacle of what Fairy types can do.',
-    [
-        new TemporaryBattleRequirement('Rampaging Conkeldurr'),
-        new TemporaryBattleRequirement('Rampaging Dusknoir'),
-    ],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 9)],
     undefined,
     {imageName: 'Gym Leader Bede'}
 );
@@ -5619,7 +5616,7 @@ TemporaryBattleList['Rampaging Gigalith'] = new TemporaryBattle(
     'Rampaging Gigalith',
     [new GymPokemon('Gigalith', 2749793992, 60)],
     '<i>The Rampaging Gigalith fainted.</i>',
-    [new TemporaryBattleRequirement('Gym Leader Bede')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5630,7 +5627,7 @@ TemporaryBattleList['Rampaging Froslass'] = new TemporaryBattle(
     'Rampaging Froslass',
     [new GymPokemon('Froslass', 2749793992, 60)],
     '<i>The Rampaging Froslass fainted.</i>',
-    [new TemporaryBattleRequirement('Gym Leader Bede')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5647,16 +5644,13 @@ TemporaryBattleList['Gym Leader Marnie'] = new TemporaryBattle(
         new GymPokemon('Grimmsnarl', 563532116, 60),
     ],
     'Yeah I lost, but I\'m gonna learn from your battle style and everythin\'!',
-    [
-        new TemporaryBattleRequirement('Rampaging Gigalith'),
-        new TemporaryBattleRequirement('Rampaging Froslass'),
-    ]
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 11)]
 );
 TemporaryBattleList['Rampaging Haxorus'] = new TemporaryBattle(
     'Rampaging Haxorus',
     [new GymPokemon('Haxorus', 2841435245, 60)],
     '<i>The Rampaging Haxorus fainted.</i>',
-    [new TemporaryBattleRequirement('Gym Leader Marnie')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 12)],
     undefined,
     {
         hideTrainer: true,

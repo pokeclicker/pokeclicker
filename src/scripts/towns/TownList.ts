@@ -1812,6 +1812,11 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
     'Keep ‘em outside where they belong! I’ve heard those machines can attract Pokémon with Held Items more often, and even more so in Dungeons!',
 ]);
 
+const MahoGanyOfficerJenny = new NPC('Officer Jenny', [
+    'You made it to Mahogany without troubles? Did you see anything suspicious?',
+    'Some adventurers reported criminal activities on route 42. Team Rocket are allegedly attempting to steal newborn Phanpy...',
+], { image: 'assets/images/npcs/Officer Jenny.png' });
+
 const MahoganyEusine = new NPC('Eusine', [
     'Suicune... How brave it is! How refreshing it is! How beautiful it is! And how quickly it moves! It seems to be heading east.',
     'You seem to be around where Suicune would appear. Well, that\'s OK. My desire to search for Suicune is far beyond yours... My grandpa was...quite into myths. I\'ve heard so many stories about Suicune from him.',
@@ -1989,7 +1994,7 @@ TownList['Mahogany Town'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar')),
         ])],
-        npcs: [MahoganySouvenirShopAttendant, MahoganyEusine],
+        npcs: [MahoganySouvenirShopAttendant, MahoganyEusine, MahoGanyOfficerJenny],
     }
 );
 TownList['Blackthorn City'] = new Town(
@@ -5992,6 +5997,18 @@ const FossilScientist = new NPC('Fossil Scientist', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 4), new QuestLineStepCompletedRequirement('A Beautiful World', 6, GameConstants.AchievementOption.less)]),
 });
 
+const CyllageStoneCollector = new NPC('Vivid Stone Collector', [
+    'You see these beautiful gemstones in Grant\'s gym? There is no mistake, these are genuine Mega Stones!',
+    'Oh, what I would pay to add them to my collection! But money is of no help here. I bet Grant would be willing to part with them if I challenge him enough times and prove my skills to him.',
+    'Unfortunately my skills as a collector far surpass my skills as a Pokémon trainer. But anyone who can become the Champion of Kalos surely can convince Grant that these stones will be in good hands.',
+], {
+    image: 'assets/images/npcs/Collector.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Aggron'),
+        new ObtainedPokemonRequirement('Tyranitar'),
+    ]),
+});
+
 const TeamFlareGrunt1 = new NPC('Team Flare Grunt', [
     'Stop right there! I remember you! You\'re the one who foiled our fossil-finding plans!',
     'And now you\'re here, standing around these stones. Do you have any idea what they even are?',
@@ -6098,6 +6115,14 @@ const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
     'Hopefully I\'ll have a Gengar soon...',
 ], {image: 'assets/images/npcs/Hex Maniac.png',
     requirement: new TemporaryBattleRequirement('Hex Maniac Aster'),
+});
+
+const LaverreMedichamite = new NPC('Black Belt', [
+    'My partner Medicham and I are always training to become the strongest in the world.',
+    'Our favorite way to train is by doing quests. Someday my Medicham even found a Mega Stone while claiming some.',
+    'I can\'t quite remember what Quest Level we were at, but it was probably 15 or higher.',
+], {image: 'assets/images/npcs/Black Belt.png',
+    requirement: new ObtainedPokemonRequirement('Medicham'),
 });
 
 const PokéBallFactoryDirector = new NPC('Poké Ball Factory Director', [
@@ -6459,6 +6484,7 @@ TownList['Cyllage City'] = new Town(
     [CyllageCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cyllage City']), TemporaryBattleList['Marquis Grant']],
     {
         requirements: [new QuestLineStepCompletedRequirement('A Beautiful World', 5)],
+        npcs: [CyllageStoneCollector],
     }
 );
 TownList['Disguised Shop'] = new Town(
@@ -6511,7 +6537,7 @@ TownList['Laverre City'] = new Town(
     [LaverreCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Laverre City']), TemporaryBattleList['Hex Maniac Aster']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 14)],
-        npcs: [LaverreFurisodeGirlKatherine, LaverreGengariteAster1, LaverreGengariteAster2],
+        npcs: [LaverreFurisodeGirlKatherine, LaverreGengariteAster1, LaverreGengariteAster2, LaverreMedichamite],
     }
 );
 TownList['Dendemille Town'] = new Town(
@@ -8200,7 +8226,7 @@ TownList['Mina\'s Houseboat'] = new DungeonTown(
     'Mina\'s Houseboat',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [new QuestLineStepCompletedRequirement('Eater of Light', 0)]
+    [new QuestLineStepCompletedRequirement('Eater of Light', 2)]
 );
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
