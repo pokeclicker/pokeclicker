@@ -180,6 +180,7 @@ export const FREEZE_MULCH_MULTIPLIER = 0;
 export const GOOEY_MULCH_CATCH_BONUS = 10;
 
 export const WANDER_RATE = 0.0005;
+export const WANDER_SHINY_FP_MODIFIER = 5;
 
 export const BerryColor = [
     '#EE8130', // Red
@@ -253,6 +254,7 @@ export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const GRISEOUS_ITEM_CHANCE = 50;
 export const DNA_ITEM_CHANCE = 45;
 export const LIGHT_ITEM_CHANCE = 75;
+export const SHADOW_ITEM_CHANCE = 8;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
 export const CHRISTMAS_ITEM_CHANCE = 10;
@@ -925,6 +927,7 @@ export enum StoneType {
     'Solar_light',
     'Lunar_light',
     'Pure_light',
+    'Crystallized_shadow',
     'Sweet_apple',
     'Tart_apple',
     'Cracked_pot',
@@ -2492,6 +2495,7 @@ export const ModalCollapseList = [
     'shortcutsBody',
     'currencyBody',
     'undergroundCard',
+    'undergroundDailyTradesCard',
     'plotListCard',
     'zCrystalItemContainerBody',
 ];

@@ -152,6 +152,7 @@ export type PokemonNameType
     | 'Gigantamax Meowth'
     | 'Alolan Meowth'
     | 'Galarian Meowth'
+    | 'Meowth (Phanpy)'
     | 'Persian'
     | 'Alolan Persian'
     | 'Psyduck'
@@ -322,7 +323,7 @@ export type PokemonNameType
     | 'Lapras'
     | 'Gigantamax Lapras'
     | 'Ditto'
-    | 'Ditto (Transforming)'
+    | 'Ditto (Magikarp)'
     | 'Eevee'
     | 'Gigantamax Eevee'
     | 'Let\'s Go Eevee'
@@ -1276,6 +1277,7 @@ export type PokemonNameType
     | 'Magearna'
     | 'Magearna (Original Color)'
     | 'Marshadow'
+    | 'Marshadow (Zenith)'
     | 'Poipole'
     | 'Naganadel'
     | 'Stakataka'
@@ -1634,4 +1636,3 @@ export type PokemonNameType
     | 'Navi Starmobile'
     | 'Ruchbah Starmobile'
     | 'Caph Starmobile';
-    

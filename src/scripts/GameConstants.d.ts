@@ -73,6 +73,7 @@ namespace GameConstants {
     declare const FREEZE_MULCH_MULTIPLIER: number;
     declare const GOOEY_MULCH_CATCH_BONUS: number;
     declare const WANDER_RATE: number;
+    declare const WANDER_SHINY_FP_MODIFIER: number;
     declare const BerryColor: string[];
     declare const BASE_DUNGEON_SIZE: number;
     declare const MIN_DUNGEON_SIZE: number;
@@ -224,6 +225,7 @@ namespace GameConstants {
     declare const GRISEOUS_ITEM_CHANCE: number;
     declare const DNA_ITEM_CHANCE: number;
     declare const LIGHT_ITEM_CHANCE: number;
+    declare const SHADOW_ITEM_CHANCE: number;
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
     declare const CHRISTMAS_ITEM_CHANCE: number;
@@ -378,6 +380,7 @@ namespace GameConstants {
         'Solar_light',
         'Lunar_light',
         'Pure_light',
+        'Crystallized_shadow',
         'Sweet_apple',
         'Tart_apple',
         'Cracked_pot',
