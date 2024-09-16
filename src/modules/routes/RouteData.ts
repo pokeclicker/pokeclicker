@@ -3494,7 +3494,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Frostpoint Field', Region.galar, 47,
     new RoutePokemon({
-        land: [ 'Audino', 'Mime Jr.'],
+        land: ['Audino', 'Mime Jr.'],
         special:
       [
           new SpecialRoutePokemon(['Nidoran(M)', 'Nidoran(F)'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
