@@ -37,6 +37,7 @@ import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -2767,6 +2768,27 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 52.04,
+        'name': 'Meowth (Phanpy)',
+        'catchRate': 255,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 58,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 40,
+            'attack': 45,
+            'specialAttack': 40,
+            'defense': 35,
+            'specialDefense': 40,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
+    },
+    {
         'id': 53,
         'name': 'Persian',
         'catchRate': 90,
@@ -3764,6 +3786,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 60,
         },
+        'heldItem': { type: ItemType.item, id: 'Leek', requirement: new MaxRegionRequirement(Region.galar) },
     },
     {
         'id': 83.01,
@@ -11005,7 +11028,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 144,
         'catchRate': 90,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Medichamite, 'Medicham', 'Mega Medicham')],
+        'evolutions': [MegaEvolution(MegaStoneType.Medichamite, 'Medicham', 'Mega Medicham')],
         'base': {
             'hitpoints': 60,
             'attack': 60,
