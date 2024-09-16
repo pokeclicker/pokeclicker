@@ -106,6 +106,10 @@
 <!-- Dungeon guides modal-->
 @import "dungeonGuidesModal.html"
 
+<!-- Encounters Info modal-->
+@import "routeInfoModal.html"
+@import "dungeonInfoModal.html"
+
 <!--Templates -->
 @import "templates/currencyTemplate.html"
 @import "templates/caughtStatusTemplate.html"
@@ -181,6 +185,11 @@
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
                                 <knockout>
+                                    <knockout class="right">
+                                        <div class="px-1 clickable" data-bind="tooltip: { title: 'Check the Pokémon available here', trigger: 'hover' }, click: function() { $('#routeInfoModal').modal('show') }" data-original-title="" title="">
+                                            <img src="assets/images/encountersInfo/encountersInfo.png">
+                                        </div>
+                                    </knockout>
                                     <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon name</knockout>
                                     <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
                                     <knockout style="position: relative; top: -1px;"

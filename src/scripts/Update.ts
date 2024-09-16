@@ -2746,6 +2746,23 @@ class Update implements Saveable {
 
             // Reset Key Stone multiplier
             delete playerData._itemMultipliers.Key_stone;
+
+            // Fix pokemon multi-category bug from 0.10.20 update for very old files
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                if (!Array.isArray(pokemon[6])) {
+                    pokemon[6] = [pokemon[6] ?? 0];
+                }
+            });
+
+            // Reset settings that the player shouldn't have access to yet but might have been
+            // set as default from a different file
+            if (playerData.highestRegion < 5) { // Kalos
+                settingsData.pokedexUniqueTransformationFilter = 'all';
+                settingsData.breedingUniqueTransformationFilter = 'all';
+            }
+            if (!saveData.challenges.list.regionalAttackDebuff) {
+                settingsData.breedingRegionalAttackDebuffSetting = '-1';
+            }
         },
     };
 
