@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../declarations/upgrades/Upgrade.d.ts" />
 
 /**
@@ -14,7 +15,7 @@
  * All player variables need to be saved.
  */
 
-class Player {
+class Player implements TmpPlayerType {
 
     private _route: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
