@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/enums/Badges.d.ts" />
 
@@ -159,3 +160,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+GymRunner satisfies TmpGymRunnerType;
