@@ -175,6 +175,35 @@
                                         ">
                                     </td>
                                 </tr>
+                                <tr data-bind="with: Settings.getSetting('box')">
+                                    <td class="p-2">
+                                        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`"></label>
+                                    </td>
+                                    <td class="p-2">
+                                        <input class="clickable" type="checkbox"
+                                            data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+                                            onchange="(() => {
+                                                if (!this.checked) {
+                                                    Settings.setSettingByName('box', false);
+                                                    App.game.party.unboxAll();
+                                                    return;
+                                                }
+
+                                                Notifier.confirm({
+                                                    title: 'Enable Box System?',
+                                                    message: 'This system is for the advanced players!',
+                                                    type: NotificationConstants.NotificationOption.danger,
+                                                    confirm: 'Yes'
+                                                }).then(confirmed => {
+                                                    if (confirmed) {
+                                                        Settings.setSettingByName('box', true);
+                                                    } else {
+                                                        this.checked = false;
+                                                    }
+                                                });
+                                            })()"/>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

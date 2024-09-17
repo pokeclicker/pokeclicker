@@ -15,6 +15,7 @@ enum PartyPokemonSaveKeys {
     nickname,
     shadow,
     showShadowImage,
+    box,
 }
 
 class PartyPokemon implements Saveable {
@@ -40,6 +41,7 @@ class PartyPokemon implements Saveable {
         nickname: '',
         shadow: GameConstants.ShadowStatus.None,
         showShadowImage: false,
+        box: false,
     };
 
     // Saveable observables
@@ -61,6 +63,7 @@ class PartyPokemon implements Saveable {
     hideShinyImage: KnockoutObservable<boolean>;
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
     _showShadowImage: KnockoutObservable<boolean>;
+    _box: KnockoutObservable<boolean>;
 
     constructor(
         public id: number,
@@ -114,6 +117,7 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
+        this._box = ko.observable(false);
         this._attack = ko.computed(() => this.calculateAttack());
         this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
         this._canUseHeldItem.subscribe((canUse) => {
@@ -131,6 +135,9 @@ class PartyPokemon implements Saveable {
     }
 
     public calculateAttack(ignoreLevel = false): number {
+        if (this.box) {
+            return 0;
+        }
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         const evsMultiplier = this.calculateEVAttackBonus();
@@ -140,6 +147,9 @@ class PartyPokemon implements Saveable {
     }
 
     public clickAttackBonus = ko.pureComputed((): number => {
+        if (this.box) {
+            return 0;
+        }
         // Caught + Shiny + Resistant + Purified
         const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant) + +(this.shadow == GameConstants.ShadowStatus.Purified);
         const heldItemMultiplier = this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
@@ -200,6 +210,9 @@ class PartyPokemon implements Saveable {
     }
 
     public gainExp(exp: number) : number {
+        if (this.box) {
+            return 0;
+        }
         const expGained = exp * this.getExpMultiplier();
         if (this.level < App.game.badgeCase.maxLevel()) {
             this.exp += expGained;
@@ -273,6 +286,14 @@ class PartyPokemon implements Saveable {
             return;
         }
 
+        if (this.box) {
+            Notifier.notify({
+                message: 'Vitamins cannot be modified for Pokémon in the boxes.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
         const usesRemaining = this.vitaminUsesRemaining();
 
         // If no more vitamins can be used on this Pokemon
@@ -302,6 +323,14 @@ class PartyPokemon implements Saveable {
             return;
         }
 
+        if (this.box) {
+            Notifier.notify({
+                message: 'Vitamins cannot be modified for Pokémon in the boxes.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
         const vitaminName = GameConstants.VitaminType[vitamin];
         amount = Math.min(amount, this.vitaminsUsed[vitamin]());
 
@@ -323,6 +352,12 @@ class PartyPokemon implements Saveable {
             return Notifier.notify({
                 message : `You do not have any more ${ItemList[itemName].displayName}`,
                 type : NotificationConstants.NotificationOption.danger,
+            });
+        }
+        if (this.box) {
+            return Notifier.notify({
+                message: `${ItemList[itemName].displayName} cannot be used on Pokémon in the boxes.`,
+                type: NotificationConstants.NotificationOption.warning,
             });
         }
 
@@ -396,7 +431,7 @@ class PartyPokemon implements Saveable {
     });
 
     public isHatchable = ko.pureComputed(() => {
-        return !(this.breeding || this.level < 100);
+        return !(this.breeding || this.level < 100 || this.box);
     });
 
     public isHatchableFiltered = ko.pureComputed(() => {
@@ -518,6 +553,13 @@ class PartyPokemon implements Saveable {
                 });
                 return;
             }
+            if (this.box) {
+                Notifier.notify({
+                    message: `This Pokemon is in boxes and cannot use ${heldItem.displayName}.`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
         }
 
         if (this.heldItem() && Settings.getSetting('confirmChangeHeldItem').value) {
@@ -613,6 +655,7 @@ class PartyPokemon implements Saveable {
         this._nickname(json[PartyPokemonSaveKeys.nickname] || this.defaults.nickname);
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
+        this._box(json[PartyPokemonSaveKeys.box] ?? this.defaults.box);
     }
 
     public toJSON() {
@@ -633,6 +676,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.nickname]: this.nickname || undefined,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
+            [PartyPokemonSaveKeys.box]: this._box(),
         };
 
         // Don't save anything that is the default option
@@ -695,6 +739,9 @@ class PartyPokemon implements Saveable {
     }
 
     set effortPoints(amount: number) {
+        if (this.box) {
+            return;
+        }
         this._effortPoints(amount);
     }
 
@@ -740,5 +787,13 @@ class PartyPokemon implements Saveable {
 
     set showShadowImage(value: boolean) {
         this._showShadowImage(value);
+    }
+
+    get box(): boolean {
+        return this._box();
+    }
+
+    set box(value: boolean) {
+        this._box(value);
     }
 }
