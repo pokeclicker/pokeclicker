@@ -243,7 +243,10 @@ class Safari {
     }
 
     public static openModal() {
-        if (Safari.inProgress() && Safari.activeRegion() !== player.region) {
+        if (DisplayObservables.modalState.safariModal !== 'hidden') {
+            // Do nothing if the modal is already open or mid-animation
+            return;
+        } else if (Safari.inProgress() && Safari.activeRegion() !== player.region) {
             Safari.safariReset();
         } else {
             App.game.gameState = GameConstants.GameState.safari;

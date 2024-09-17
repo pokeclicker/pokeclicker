@@ -9,7 +9,8 @@ type TemporaryBattleOptionalArgument = {
     imageName?: string,
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
-    environment?: GameConstants.Environment,
+    environment?: GameConstants.Environment[],
+    battleBackground?: GameConstants.BattleBackground,
     resetDaily?: boolean,
     finalPokemonImage?: string // trainer image when on final pokemon
 };
