@@ -15606,6 +15606,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 127,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
         'gender': {
             'type': Genders.Genderless,
         },
