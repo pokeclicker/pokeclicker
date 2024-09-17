@@ -391,9 +391,9 @@ Settings.add(new Setting<string>('pokedexUniqueTransformationFilter', 'Unique Tr
         new SettingOption('Unobtained Mega Evolution/Primal Reversion', 'mega-unobtained'),
         new SettingOption('Obtained Mega Evolution/Primal Reversion', 'mega-evolution'),
     ],
-    'all'));
-Settings.add(new BooleanSetting('pokedexHeldItemFilter', 'Rare Held Item', false));
-Settings.add(new BooleanSetting('pokedexHideAltFilter', 'Hide alternate forms', false));
+    'all', new MaxRegionRequirement(Region.kalos), false));
+Settings.add(new BooleanSetting('pokedexHeldItemFilter', 'Rare Held Item', false, undefined, false));
+Settings.add(new BooleanSetting('pokedexHideAltFilter', 'Hide alternate forms', false, undefined, false));
 Settings.add(new Setting<string>('pokedexBoxFilter', 'Boxes',
     [
         new SettingOption('Show All Pokémon', 'all'),
