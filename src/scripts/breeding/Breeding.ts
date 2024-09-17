@@ -20,7 +20,82 @@ class Breeding implements Feature {
     private _queueList: KnockoutObservableArray<number>;
     public queueSlots: KnockoutObservable<number>;
 
-    public readonly hatchList: Record<GameConstants.EggItemType, PokemonNameType[][]> = {};
+    public readonly hatchList: Record<GameConstants.EggItemType, PokemonNameType[][]> = {
+        [GameConstants.EggItemType.Fire_egg]: [
+            ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
+            ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
+            ['Torchic', 'Numel'],
+            ['Chimchar'],
+            ['Tepig', 'Pansear', 'Darumaka'],
+            ['Fennekin', 'Litleo'],
+            ['Litten', 'Salandit'],
+            ['Scorbunny', 'Sizzlipede'],
+            ['Fuecoco', 'Charcadet'],
+        ],
+        [GameConstants.EggItemType.Water_egg]: [
+            ['Squirtle', 'Lapras', 'Staryu', 'Slowpoke'],
+            ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
+            ['Mudkip', 'Feebas', 'Clamperl'],
+            ['Piplup', 'Finneon', 'Buizel'],
+            ['Oshawott', 'Panpour', 'Tympole'],
+            ['Froakie', 'Clauncher', 'Skrelp'],
+            ['Popplio', 'Wimpod', 'Mareanie'],
+            ['Sobble', 'Chewtle', 'Arrokuda'],
+            ['Quaxly'],
+        ],
+        [GameConstants.EggItemType.Grass_egg]: [
+            ['Bulbasaur', 'Oddish', 'Tangela', 'Paras'],
+            ['Chikorita', 'Hoppip', 'Sunkern'],
+            ['Treecko', 'Tropius', 'Roselia'],
+            ['Turtwig', 'Snover', 'Budew'],
+            ['Snivy', 'Pansage', 'Maractus'],
+            ['Chespin', 'Skiddo', 'Phantump'],
+            ['Rowlet', 'Morelull', 'Fomantis'],
+            ['Grookey', 'Gossifleur','Applin'],
+            ['Sprigatito'],
+        ],
+        [GameConstants.EggItemType.Fighting_egg]: [
+            ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
+            ['Tyrogue', 'Heracross'],
+            ['Makuhita', 'Meditite'],
+            ['Riolu', 'Croagunk'],
+            ['Throh', 'Sawk', 'Scraggy'],
+            ['Pancham', 'Hawlucha'],
+            ['Crabrawler', 'Stufful'],
+            ['Falinks', 'Clobbopus', 'Galarian Farfetch\'d'],
+        ],
+        [GameConstants.EggItemType.Electric_egg]: [
+            ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
+            ['Chinchou', 'Mareep', 'Elekid'],
+            ['Plusle', 'Minun', 'Electrike'],
+            ['Pachirisu', 'Shinx'],
+            ['Blitzle', 'Stunfisk', 'Joltik'],
+            ['Helioptile', 'Dedenne'],
+            ['Togedemaru'],
+            ['Toxel', 'Pincurchin', 'Morpeko'],
+        ],
+        [GameConstants.EggItemType.Dragon_egg]: [
+            ['Dratini', 'Dragonair', 'Dragonite'],
+            [],
+            ['Bagon', 'Shelgon', 'Salamence'],
+            ['Gible', 'Gabite', 'Garchomp'],
+            ['Deino', 'Zweilous', 'Hydreigon'],
+            ['Goomy', 'Sliggoo', 'Goodra'],
+            ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
+            ['Dreepy', 'Drakloak', 'Dragapult', 'Duraludon'],
+            ['Frigibax', 'Arctibax', 'Baxcalibur'],
+        ],
+        [GameConstants.EggItemType.Mystery_egg]: [
+            ['Gastly', 'Jigglypuff', 'Geodude', 'Doduo'],
+            ['Yanma', 'Stantler'],
+            ['Trapinch', 'Sableye', 'Spoink'],
+            ['Stunky', 'Bronzor'],
+            ['Vanillite', 'Drilbur'],
+            ['Carbink', 'Honedge'],
+            ['Mudbray', 'Rockruff'],
+            ['Rolycoly', 'Milcery'],
+        ],
+    };
 
     constructor(private multiplier: Multiplier) {
         this._eggList = this.defaults.eggList;
@@ -34,80 +109,6 @@ class Breeding implements Feature {
     }
 
     initialize(): void {
-        this.hatchList[GameConstants.EggItemType.Fire_egg] = [
-            ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
-            ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
-            ['Torchic', 'Numel'],
-            ['Chimchar'],
-            ['Tepig', 'Pansear', 'Darumaka'],
-            ['Fennekin', 'Litleo'],
-            ['Litten', 'Salandit'],
-            ['Scorbunny', 'Sizzlipede'],
-            ['Fuecoco', 'Charcadet'],
-        ];
-        this.hatchList[GameConstants.EggItemType.Water_egg] = [
-            ['Squirtle', 'Lapras', 'Staryu', 'Slowpoke'],
-            ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
-            ['Mudkip', 'Feebas', 'Clamperl'],
-            ['Piplup', 'Finneon', 'Buizel'],
-            ['Oshawott', 'Panpour', 'Tympole'],
-            ['Froakie', 'Clauncher', 'Skrelp'],
-            ['Popplio', 'Wimpod', 'Mareanie'],
-            ['Sobble', 'Chewtle', 'Arrokuda'],
-            ['Quaxly'],
-        ];
-        this.hatchList[GameConstants.EggItemType.Grass_egg] = [
-            ['Bulbasaur', 'Oddish', 'Tangela', 'Paras'],
-            ['Chikorita', 'Hoppip', 'Sunkern'],
-            ['Treecko', 'Tropius', 'Roselia'],
-            ['Turtwig', 'Snover', 'Budew'],
-            ['Snivy', 'Pansage', 'Maractus'],
-            ['Chespin', 'Skiddo', 'Phantump'],
-            ['Rowlet', 'Morelull', 'Fomantis'],
-            ['Grookey', 'Gossifleur','Applin'],
-            ['Sprigatito'],
-        ];
-        this.hatchList[GameConstants.EggItemType.Fighting_egg] = [
-            ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
-            ['Tyrogue', 'Heracross'],
-            ['Makuhita', 'Meditite'],
-            ['Riolu', 'Croagunk'],
-            ['Throh', 'Sawk', 'Scraggy'],
-            ['Pancham', 'Hawlucha'],
-            ['Crabrawler', 'Stufful'],
-            ['Falinks', 'Clobbopus', 'Galarian Farfetch\'d'],
-        ];
-        this.hatchList[GameConstants.EggItemType.Electric_egg] = [
-            ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
-            ['Chinchou', 'Mareep', 'Elekid'],
-            ['Plusle', 'Minun', 'Electrike'],
-            ['Pachirisu', 'Shinx'],
-            ['Blitzle', 'Stunfisk', 'Joltik'],
-            ['Helioptile', 'Dedenne'],
-            ['Togedemaru'],
-            ['Toxel', 'Pincurchin', 'Morpeko'],
-        ];
-        this.hatchList[GameConstants.EggItemType.Dragon_egg] = [
-            ['Dratini', 'Dragonair', 'Dragonite'],
-            [],
-            ['Bagon', 'Shelgon', 'Salamence'],
-            ['Gible', 'Gabite', 'Garchomp'],
-            ['Deino', 'Zweilous', 'Hydreigon'],
-            ['Goomy', 'Sliggoo', 'Goodra'],
-            ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
-            ['Dreepy', 'Drakloak', 'Dragapult', 'Duraludon'],
-            ['Frigibax', 'Arctibax', 'Baxcalibur'],
-        ];
-        this.hatchList[GameConstants.EggItemType.Mystery_egg] = [
-            ['Gastly', 'Jigglypuff', 'Geodude', 'Doduo'],
-            ['Yanma', 'Stantler'],
-            ['Trapinch', 'Sableye', 'Spoink'],
-            ['Stunky', 'Bronzor'],
-            ['Vanillite', 'Drilbur'],
-            ['Carbink', 'Honedge'],
-            ['Mudbray', 'Rockruff'],
-            ['Rolycoly', 'Milcery'],
-        ];
         BreedingController.initialize();
     }
 
@@ -421,14 +422,13 @@ class Breeding implements Feature {
 
     private createItemEgg(type: GameConstants.EggItemType): Egg {
         const hatchIndex = type === GameConstants.EggItemType.Mystery_egg ? Rand.fromEnum(GameConstants.EggItemType) : type;
-        const hatchList = this.hatchList[hatchIndex];
+        const hatchList = this.hatchList[hatchIndex] as PokemonNameType[][];
         const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter(list => list.length);
 
         // highest region has 1/ratio chance, next highest has 1/(ratio ^ 2), etc.
         // Leftover is given to Kanto, making Kanto and Johto equal chance
         const ratio = 2;
         const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
-
         const pokemonName = Rand.fromArray(possibleHatches);
         const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
         return this.createEgg(pokemonId, EggType.EggItem);
