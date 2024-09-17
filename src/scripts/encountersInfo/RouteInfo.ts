@@ -40,8 +40,8 @@ class RouteInfo {
                 ?.sort((a, b) => a.id - b.id);
 
         return {
-            pokemons: {category: "Encounters", data: (pokemonArray ?? [])},
-            roamers: {category: "Roamers", data: (roamerArray ?? []),
-        }};
+            pokemons: {category: 'Encounters', data: (pokemonArray ?? [])},
+            roamers: {category: 'Roamers', data: (roamerArray ?? []),
+            }};
     }
 }
