@@ -161,7 +161,7 @@ import {
 } from './pokemons/evolutions/Base';
 import * as OtherEvos from './pokemons/evolutions/Methods';
 import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
-import TmpPokemonHelper from './pokemons/TmpPokemonHelper';
+import * as PokemonHelper from './pokemons/PokemonHelper';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
@@ -382,7 +382,7 @@ Object.assign(<any>window, {
     pokemonList,
     pokemonMap,
     pokemonBabyPrevolutionMap,
-    TmpPokemonHelper,
+    PokemonHelper,
     ItemList,
     Item,
     MultiplierDecreaser,
