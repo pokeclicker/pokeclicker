@@ -3641,7 +3641,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Swablu', 'Phantump'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Araquanid', 'Dewpider'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Galvantula', 'Electabuzz', 'Elekid', 'Electivire'], new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Vanillite'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard])),  
+          new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Vanillite'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Absol'], new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Magmar', 'Druddigon', 'Heatmor', 'Durant', 'Magby'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Hattrem', 'Mimikyu', 'Hatenna'], new WeatherRequirement([WeatherType.Fog])),
