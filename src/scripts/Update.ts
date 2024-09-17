@@ -2761,6 +2761,11 @@ class Update implements Saveable {
                 settingsData.breedingRegionalAttackDebuffSetting = '-1';
             }
         },
+
+        '0.10.22': ({playerData}) => {
+            // Reset Key Stone multiplier
+            delete playerData._itemMultipliers.Key_stone;
+        },
     };
 
     constructor() {
