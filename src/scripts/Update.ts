@@ -1,5 +1,3 @@
-/// <reference path="./GameConstants.d.ts" />
-
 class Update implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'update';
@@ -2762,6 +2760,9 @@ class Update implements Saveable {
         },
 
         '0.10.22': ({ playerData, saveData, settingsData }) => {
+            // Reset Key Stone multiplier
+            delete playerData._itemMultipliers.Key_stone;
+
             // Update hatchery EggTypes
             saveData.breeding.eggList?.forEach(egg => {
                 const oldType = egg.type;
