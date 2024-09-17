@@ -15,9 +15,9 @@ export default class HoldingItemRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Your pokemon must ${
-            this.option == AchievementOption.less ? 'not' : ''
-        } be holding ${
+        return `Your pokemon must${
+            this.option == AchievementOption.less ? ' not ' : ' '
+        }be holding ${
             GameHelper.anOrA(this.itemName)
         } ${
             humanifyString(this.itemName)

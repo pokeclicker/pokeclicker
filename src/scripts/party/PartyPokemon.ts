@@ -134,6 +134,9 @@ class PartyPokemon implements Saveable {
     }
 
     public calculateAttack(ignoreLevel = false): number {
+        if (this.box) {
+            return 0;
+        }
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         const evsMultiplier = this.calculateEVAttackBonus();
@@ -143,6 +146,9 @@ class PartyPokemon implements Saveable {
     }
 
     public clickAttackBonus = ko.pureComputed((): number => {
+        if (this.box) {
+            return 0;
+        }
         // Caught + Shiny + Resistant + Purified
         const bonus = 1 + +this.shiny + +(this.pokerus >= GameConstants.Pokerus.Resistant) + +(this.shadow == GameConstants.ShadowStatus.Purified);
         const heldItemMultiplier = this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
@@ -203,6 +209,9 @@ class PartyPokemon implements Saveable {
     }
 
     public gainExp(exp: number) : number {
+        if (this.box) {
+            return 0;
+        }
         const expGained = exp * this.getExpMultiplier();
         if (this.level < App.game.badgeCase.maxLevel()) {
             this.exp += expGained;
@@ -276,6 +285,14 @@ class PartyPokemon implements Saveable {
             return;
         }
 
+        if (this.box) {
+            Notifier.notify({
+                message: 'Vitamins cannot be modified for Pokémon in the boxes.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
         const usesRemaining = this.vitaminUsesRemaining();
 
         // If no more vitamins can be used on this Pokemon
@@ -305,6 +322,14 @@ class PartyPokemon implements Saveable {
             return;
         }
 
+        if (this.box) {
+            Notifier.notify({
+                message: 'Vitamins cannot be modified for Pokémon in the boxes.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
         const vitaminName = GameConstants.VitaminType[vitamin];
         amount = Math.min(amount, this.vitaminsUsed[vitamin]());
 
@@ -319,7 +344,7 @@ class PartyPokemon implements Saveable {
         GameHelper.incrementObservable(this.vitaminsUsed[vitamin], -amount);
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
     }
-
+    
     public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
         const itemName = GameConstants.ConsumableType[type];
         if (!player.itemList[itemName]()) {
@@ -328,7 +353,12 @@ class PartyPokemon implements Saveable {
                 type : NotificationConstants.NotificationOption.danger,
             });
         }
-
+        if (this.box) {
+            return Notifier.notify({
+                message: `${ItemList[itemName].displayName} cannot be used on Pokémon in the boxes.`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
         switch (type) {
             case GameConstants.ConsumableType.Rare_Candy:
             case GameConstants.ConsumableType.Magikarp_Biscuit:
@@ -399,7 +429,7 @@ class PartyPokemon implements Saveable {
     });
 
     public isHatchable = ko.pureComputed(() => {
-        return !(this.breeding || this.level < 100);
+        return !(this.breeding || this.level < 100 || this.box);
     });
 
     public isHatchableFiltered = ko.pureComputed(() => {
@@ -517,6 +547,13 @@ class PartyPokemon implements Saveable {
             if (player.amountOfItem(heldItem.name) < 1) {
                 Notifier.notify({
                     message: `You don't have any ${heldItem.displayName} left.`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
+            if (this.box) {
+                Notifier.notify({
+                    message: `This Pokemon is in boxes and cannot use ${heldItem.displayName}.`,
                     type: NotificationConstants.NotificationOption.warning,
                 });
                 return;
@@ -700,6 +737,9 @@ class PartyPokemon implements Saveable {
     }
 
     set effortPoints(amount: number) {
+        if (this.box) {
+            return;
+        }
         this._effortPoints(amount);
     }
 
