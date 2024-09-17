@@ -33,7 +33,6 @@ class DungeonInfo {
                     }
                 })
                 .sort((a, b) => a.id - b.id);
-
         const bossArray =
             player.town.dungeon?.bossList
                 ?.filter((enemy) => {
@@ -45,7 +44,6 @@ class DungeonInfo {
                 })
                 .map((enemy) => ({id: PokemonHelper.getPokemonByName((<DungeonBossPokemon>enemy).name).id, name: (<DungeonBossPokemon>enemy).name, type: 'boss', requirement: (<DungeonBossPokemon>enemy).options?.requirement}))
                 .sort((a, b) => a.id - b.id);
-
         const mimicsArray =
             player.town.dungeon?.mimicList
                 ?.filter(enemy => App.game.party.alreadyCaughtPokemonByName(enemy))
@@ -53,7 +51,6 @@ class DungeonInfo {
                     return {id: PokemonHelper.getPokemonByName(enemy).id, name: enemy, type: 'mimic', requirement: NullRequirement};
                 })
                 .sort((a, b) => a.id - b.id);
-
         return {
             pokemon: {category: 'Encounters', data: (pokemonArray ?? [])},
             boss: {category: 'Boss', data: (bossArray ?? [])},
@@ -67,31 +64,26 @@ class DungeonInfo {
                 ?.map((item) => {
                     return {item: item.loot, type: 'common', requirement: item.requirement};
                 });
-
         const rareArray =
             player.town.dungeon?.lootTable.rare
                 ?.map((item) => {
                     return {item: item.loot, type: 'rare', requirement: item.requirement};
                 });
-
         const epicArray =
             player.town.dungeon?.lootTable.epic
                 ?.map((item) => {
                     return {item: item.loot, type: 'epic', requirement: item.requirement};
                 });
-
         const legendaryArray =
             player.town.dungeon?.lootTable.legendary
                 ?.map((item) => {
                     return {item: item.loot, type: 'legendary', requirement: item.requirement};
                 });
-
         const mythicArray =
             player.town.dungeon?.lootTable.mythic
                 ?.map((item) => {
                     return {item: item.loot, type: 'mythic', requirement: item.requirement};
                 });
-
         return {
             common: {category: 'Common', data: (commonArray ?? [])},
             rare: {category: 'Rare', data: (rareArray ?? [])},

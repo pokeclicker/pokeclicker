@@ -21,7 +21,7 @@ class SafariInfo {
                     return {id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'grass', requirement: encounter.requirement};
                 })
                 .sort((a, b) => a.id - b.id);
-        const waterArray = 
+        const waterArray =
             SafariPokemonList.list[player.region]?.()
                 .filter((encounter) => {
                     return encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Water) != undefined;
@@ -55,7 +55,6 @@ class SafariInfo {
                 .map((item) => {
                     return {item: item.item.id, type: 'item', requirement: item.requirement};
                 });
-
         const pokemonsArray =
             SafariItemController.list[player.region]
                 ?.filter((item) => {
@@ -64,7 +63,6 @@ class SafariInfo {
                 .map((item) => {
                     return {item: item.item.id, type: 'pokemon', requirement: item.requirement};
                 });
-
         return {
             items: {category: 'Items', data: (itemsArray ?? [])},
             pokemons: {category: 'Pokémons', data: (pokemonsArray ?? [])},
