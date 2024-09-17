@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 ///<reference path="GymPokemon.ts"/>
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
@@ -16,7 +17,8 @@ interface gymFlags {
 interface optionalGymArgs {
     displayName?: string,
     imageName?: string,
-    environment?: GameConstants.Environment,
+    environment?: GameConstants.Environment[],
+    battleBackground?: GameConstants.BattleBackground,
     hideUntilUnlocked?: boolean,
     visibleRequirement?: Requirement,
 }
@@ -24,7 +26,8 @@ interface optionalGymArgs {
 /**
  * Gym class.
  */
-class Gym extends TownContent {
+class Gym extends TownContent implements TmpGymType {
+    public town: string;
     buttonText: string;
     public tooltip = 'Battle Gym Leaders to earn badges';
     public cssClass() {
@@ -73,7 +76,7 @@ class Gym extends TownContent {
 
     constructor(
         public leaderName: string,
-        public town: string,
+        town: string,
         private pokemons: GymPokemon[],
         public badgeReward: BadgeEnums,
         public moneyReward: number,
@@ -88,6 +91,7 @@ class Gym extends TownContent {
         public optionalArgs: optionalGymArgs = {}
     ) {
         super(requirements);
+        this.town = town;
         this.flags.quest = quest;
         this.flags.achievement = achievement;
         this.flags.champion = champion;
