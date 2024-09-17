@@ -736,10 +736,144 @@ export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
     500,
 ];
 
+// Use Environments for game mechanics (ex. evolutions, dive ball)
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
 export const Environments: Record<string, EnvironmentData> = {
+    // Evolutions
+    MagneticField: { // For Magnezone, Probopass, and Vikavolt
+        [Region.kanto]: new Set([]),
+        [Region.johto]: new Set([]),
+        [Region.hoenn]: new Set(['New Mauville']),
+        [Region.sinnoh]: new Set(['Mt. Coronet', 'Mt. Coronet South', 'Mt. Coronet North', 'Spear Pillar', 'Hall of Origin']),
+        [Region.unova]: new Set(['Chargestone Cave']),
+        [Region.kalos]: new Set([13, 'Kalos Power Plant']),
+        [Region.alola]: new Set([12, 'Vast Poni Canyon']), // Route 12 until Blush Mountain is added
+        [Region.galar]: new Set([]), // Thunder Stone
+        [Region.hisui]: new Set([]), // Coronet Highlands; see getCurrentEnvironments() in MapHelper.ts for adding evolution environments to Hisui
+    },
+
+    MossRock: { // Leafeon
+        [Region.kanto]: new Set([]),
+        [Region.johto]: new Set([]),
+        [Region.hoenn]: new Set(['Petalburg Woods']),
+        [Region.sinnoh]: new Set(['Eterna Forest']),
+        [Region.unova]: new Set(['Pinwheel Forest']),
+        [Region.kalos]: new Set([20, 'Pokémon Village']),
+        [Region.alola]: new Set(['Lush Jungle']),
+        [Region.galar]: new Set([]), // Leaf Stone
+        [Region.hisui]: new Set(['Heartwood']),
+    },
+
+    IceRock: { // Glaceon
+        [Region.kanto]: new Set([]),
+        [Region.johto]: new Set([]),
+        [Region.hoenn]: new Set(['Shoal Cave']),
+        [Region.sinnoh]: new Set([217, 'Lake Acuity']),
+        [Region.unova]: new Set(['Twist Mountain']),
+        [Region.kalos]: new Set(['Frost Cavern']),
+        [Region.alola]: new Set(['Mount Lanakila']),
+        [Region.galar]: new Set([]), // Ice Stone
+        [Region.hisui]: new Set(['Icepeak Cavern']),
+    },
+
+    // TODO: Change Dusty Bowl from a dungeon into a route
+    // DustyBowl: { // Runerigus
+    //     [Region.galar]: new Set([]),
+    // },
+
+    PlantCloak: { // Burmy Plant Cloak - Default tall grass. Added in getCurrentEnvironments if area not in Sandy or Trash Cloak. Only put areas here if they exist under other Cloak environments
+        [Region.kanto]: new Set([]),
+        [Region.johto]: new Set([]),
+        [Region.hoenn]: new Set([110]),
+        [Region.sinnoh]: new Set([206, 210, 212, 213, 214, 222]),
+        [Region.unova]: new Set([16, 18, 'Dreamyard']),
+        [Region.kalos]: new Set([18, 19]),
+        [Region.alola]: new Set([3]),
+        [Region.galar]: new Set([]), // no canon basis for Burmy in Galar
+        [Region.hisui]: new Set([]), // Village and Fieldlands; see getCurrentEnvironments() in MapHelper.ts for adding evolution environments to Hisui
+    },
+
+    SandyCloak: { // Burmy Sandy Cloak - Caves and Beaches. Caves are their own environment and get included in getCurrentEnvironments() method
+        [Region.kanto]: new Set([]),
+        [Region.johto]: new Set([45, 47, 48]),
+        [Region.hoenn]: new Set([111, 'Jagged Pass', 'Mt. Chimney Crater', 'Mt. Pyre', 'Near Space']),
+        [Region.sinnoh]: new Set([205, 206, 207, 208, 210, 211, 213, 214, 222, 225, 226, 227, 228, 'Spear Pillar', 'Hall of Origin', 'Distortion World']),
+        [Region.unova]: new Set([4, 13, 15, 18, 23, 25]),
+        [Region.kalos]: new Set([8, 9, 13, 17, 18, 19]),
+        [Region.alola]: new Set([3, 12, 22, 23, 29]),
+        [Region.galar]: new Set([]), // no canon basis for Burmy in Galar
+        [Region.hisui]: new Set([]), // Mirelands and Highlands; see getCurrentEnvironments() in MapHelper.ts for adding evolution environments to Hisui
+    },
+
+    TrashCloak: { // Burmy Trash Cloak - Cities and Indoors. Cities, Leagues, and Towers get included in getCurrentEnvironments() method
+        [Region.kanto]: new Set([17, 'Rocket Game Corner', 'Silph Co.', 'Power Plant', 'Pokémon Mansion', 'Indigo Plateau']),
+        [Region.johto]: new Set(['Team Rocket\'s Hideout', 'Indigo Plateau Johto']),
+        [Region.hoenn]: new Set([110, 'New Mauville', 'Sea Mauville', 'Weather Institute', 'Aqua Hideout', 'Mt. Pyre', 'Sky Pillar', 'Mossdeep Space Center', 'Near Space']),
+        [Region.sinnoh]: new Set([206, 212, 222, 'Valley Windworks', 'Old Chateau', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
+        [Region.unova]: new Set([5, 9, 11, 16, 'Liberty Garden', 'Castelia Sewers', 'A Totally Unsuspicious Frigate', 'Plasma Frigate', 'Giant Chasm', 'Cave of Being', 'Dreamyard', 'P2 Laboratory']),
+        [Region.kalos]: new Set(['Kalos Power Plant', 'Poké Ball Factory', 'Lost Hotel', 'Team Flare Secret HQ']),
+        [Region.alola]: new Set(['Trainers\' School', 'Hokulani Observatory', 'Thrifty Megamart', 'Aether Foundation', 'Mina\'s Houseboat']),
+        [Region.galar]: new Set([]), // no canon basis for Burmy in Galar
+        [Region.hisui]: new Set([]), // Coastlands and Icelands; see getCurrentEnvironments() in MapHelper.ts for adding evolution environments to Hisui
+    },
+
+    Water: { // Diveball and, for Kanto, Surf RouteCss
+        [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Cerulean City', 'Tanoby Ruins']),
+        [Region.johto]: new Set([40, 41, 'Slowpoke Well']),
+        [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Gateon Port Battles']),
+        [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Lake Acuity', 'Sendoff Spring']),
+        [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
+        [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
+        [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
+        [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
+        [Region.hisui]: new Set([]),
+    },
+
+    Cave: { // used for Sandy Cloak now, but maybe more in the future
+        [Region.kanto]: new Set(['Mt. Moon', 'Diglett\'s Cave', 'Rock Tunnel', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave', 'Ruby Path', 'Icefall Cave', 'Sunburst Island', 'Lost Cave', 'Altering Cave']),
+        [Region.johto]: new Set(['Ruins of Alph', 'Union Cave', 'Slowpoke Well', 'Burned Tower', 'Whirl Islands', 'Mt. Mortar', 'Ice Path', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto', 'Mt. Silver']),
+        [Region.hoenn]: new Set(['Rusturf Tunnel', 'Granite Cave', 'Fiery Path', 'Meteor Falls', 'Magma Hideout', 'Shoal Cave', 'Seafloor Cavern', 'Cave of Origin', 'Sealed Chamber', 'Victory Road Hoenn', 'Pyrite Cave', 'Relic Cave']),
+        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet South', 'Solaceon Ruins', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh', 'Snowpoint Temple', 'Stark Mountain']),
+        [Region.unova]: new Set(['Relic Passage', 'Relic Castle', 'Chargestone Cave', 'Mistralton Cave', 'Reversal Mountain', 'Seaside Cave', 'Giant Chasm', 'Victory Road Unova', 'Twist Mountain']),
+        [Region.kalos]: new Set(['Connecting Cave', 'Glittering Cave', 'Reflection Cave', 'Sea Spirit\'s Den', 'Frost Cavern', 'Terminus Cave', 'Victory Road Kalos']),
+        [Region.alola]: new Set(['Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon', 'Mount Lanakila', 'Resolution Cave']),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Courageous Cavern', 'Brawlers\' Cave', 'Warm-Up Tunnel', 'Roaring-Sea Caves', 'Rock Peak Ruins', 'Iron Ruins', 'Iceberg Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 'Max Lair']),
+        [Region.hisui]: new Set(['Oreburrow Tunnel', 'Ancient Solaceon Ruins', 'Seaside Hollow', 'Turnback Cave', 'Ancient Wayward Cave', 'Ancient Quarry', 'Primeval Grotto', 'Ice Column Chamber', 'Icepeak Cavern', 'Ancient Snowpoint Temple']),
+    },
+
+    // Hisui Areas
+    JubilifeVillage: {
+        [Region.hisui]: new Set(['Prelude Beach', 'Jubilife Village', 'Galaxy Hall']),
+    },
+
+    ObsidianFieldlands: {
+        [Region.hisui]: new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'Floaro Gardens', 'Oreburrow Tunnel', 'Heartwood', 'Ancient Lake Verity', 'Fieldlands Camp', 'Heights Camp', 'Grandtree Arena']),
+    },
+
+    CrimsonMirelands: {
+        [Region.hisui]: new Set([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 'Ancient Solaceon Ruins', 'Shrouded Ruins', 'Mirelands Camp', 'Bogbound Camp', 'Sludge Mound', 'Ancient Lake Valor', 'Diamond Settlement', 'Brava Arena']),
+    },
+
+    CobaltCoastlands: {
+        [Region.hisui]: new Set([23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 'Veilstone Cape', 'Firespit Island', 'Seaside Hollow', 'Turnback Cave', 'Beachside Camp', 'Coastlands Camp', 'Iscan\'s Cabin', 'Molten Arena']),
+    },
+
+    CoronetHighlands: {
+        [Region.hisui]: new Set([38, 39, 40, 41, 42, 43, 44, 45, 46, 'Ancient Wayward Cave', 'Ancient Quarry', 'Primeval Grotto', 'Clamberclaw Cliffs', 'Celestica Ruins', 'Sacred Plaza', 'Temple of Sinnoh', 'Highlands Camp', 'Mountain Camp', 'Summit Camp', 'Moonview Arena', 'Stone Portal']),
+    },
+
+    AlabasterIcelands: {
+        [Region.hisui]: new Set([47, 48, 49, 50, 51, 52, 53, 54, 'Avalugg\'s Legacy', 'Ice Column Chamber', 'Icepeak Cavern', 'Ancient Snowpoint Temple', 'Ancient Lake Acuity', 'Snowfields Camp', 'Icepeak Camp', 'Pearl Settlement', 'Icepeak Arena']),
+    },
+};
+
+export type Environment = keyof typeof Environments;
+
+// Use BattleBackgrounds to choose background image (ex. a forest for Viridian Forest)
+export type BattleBackgroundData = Partial<Record<Region, Set<string | number>>>;
+export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
     Water: {
-        [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Cerulean City']),
+        [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Cerulean City', 'Tanoby Ruins']),
         [Region.johto]: new Set([40, 41, 'Slowpoke Well']),
         [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Gateon Port Battles']),
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
@@ -772,7 +906,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     Forest: {
-        [Region.kanto]: new Set([25, 30, 'Fuchsia City', 'Viridian Forest', 'Berry Forest', 'Pattern Bush', 'Valencia Island', 'Pinkan Forest']),
+        [Region.kanto]: new Set([25, 30, 'Fuchsia City', 'Viridian Forest', 'Berry Forest', 'Pattern Bush', 40, 41]),
         [Region.johto]: new Set([36, 38, 43, 'Azalea Town', 'Ilex Forest']),
         [Region.hoenn]: new Set([119, 'Petalburg Woods']),
         [Region.sinnoh]: new Set([201, 204, 'Eterna City', 'Eterna Forest', 'Fullmoon Island', 'Newmoon Island']),
@@ -783,7 +917,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     Cave: {
-        [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave', 'Tanoby Ruins']),
+        [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave']),
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn', 'Pyrite Cave', 'Relic Cave', 'The Under', 'Citadark Isle']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
@@ -832,7 +966,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Citadark Isle Dome']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
-        [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
+        [Region.kalos]: new Set(['Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
     },
@@ -852,9 +986,9 @@ export const Environments: Record<string, EnvironmentData> = {
     Default: {},
 };
 
-export type Environment = keyof typeof Environments;
+export type BattleBackground = keyof typeof BattleBackgrounds;
 
-export const EnvironmentCssClass: Record<Environment, string> = {
+export const BattleBackgroundImage: Record<BattleBackground, string> = {
     Water: 'water',
     Ice: 'ice',
     Fire: 'fire',

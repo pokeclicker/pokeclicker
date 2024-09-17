@@ -323,20 +323,38 @@ namespace GameConstants {
     declare const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES: number[];
     declare type EnvironmentData = Partial<Record<number, Set<string | number>>>
     declare const Environments: {
+        MagneticField: EnvironmentData,
+        MossRock: EnvironmentData,
+        IceRock: EnvironmentData,
+        PlantCloak: EnvironmentData,
+        SandyCloak: EnvironmentData,
+        TrashCloak: EnvironmentData,
         Water: EnvironmentData,
-        Ice: EnvironmentData,
-        Fire: EnvironmentData,
-        Forest: EnvironmentData,
         Cave: EnvironmentData,
-        GemCave: EnvironmentData,
-        Desert: EnvironmentData,
-        PowerPlant: EnvironmentData,
-        Mansion: EnvironmentData,
-        Graveyard: EnvironmentData,
-        Default: EnvironmentData,
+        JubilifeVillage: EnvironmentData,
+        ObsidianFieldlands: EnvironmentData,
+        CrimsonMirelands: EnvironmentData,
+        CobaltCoastlands: EnvironmentData,
+        CoronetHighlands: EnvironmentData,
+        AlabasterIcelands: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
-    declare const EnvironmentCssClass:Record<Environment, string>;
+    declare type BattleBackgroundData = Partial<Record<number, Set<string | number>>>
+    declare const BattleBackgrounds: {
+        Water: BattleBackgroundData,
+        Ice: BattleBackgroundData,
+        Fire: BattleBackgroundData,
+        Forest: BattleBackgroundData,
+        Cave: BattleBackgroundData,
+        GemCave: BattleBackgroundData,
+        Desert: BattleBackgroundData,
+        PowerPlant: BattleBackgroundData,
+        Mansion: BattleBackgroundData,
+        Graveyard: BattleBackgroundData,
+        Default: BattleBackgroundData,
+    };
+    declare type BattleBackground = keyof typeof BattleBackgrounds;
+    declare const BattleBackgroundImage:Record<BattleBackground, string>;
     declare enum Starter {
         None = -1,
         Grass = 0,
