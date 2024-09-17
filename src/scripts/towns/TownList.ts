@@ -3219,6 +3219,21 @@ const DrKaminko = new NPC('Dr. Kaminko', [
 const OrreColosseumSpectator = new NPC('Colosseum Spectator', [
     'Only the toughest trainers in Orre are allowed to fight here! I\'m just watching until I get stronger.']
 );
+
+// For Leafeon and Glaceon. Show up in Hoenn too
+const MossRock = new NPC('Moss Rock', [
+    'The rock is covered in moss. It feels pleasantly cool.',
+], {
+    image: 'assets/images/npcs/other/Moss Rock.png',
+    requirement: new MaxRegionRequirement(GameConstants.Region.sinnoh),
+});
+
+const IceRock = new NPC('Ice Rock', [
+    'The rock is encrusted in ice. It is freezing to touch.',
+], {image: 'assets/images/npcs/other/Ice Rock.png',
+    requirement: new MaxRegionRequirement(GameConstants.Region.sinnoh),
+});
+
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -3590,7 +3605,7 @@ TownList['Petalburg Woods'] = new DungeonTown(
     GameConstants.HoennSubRegions.Hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 104)],
     [],
-    { npcs: [EasterEggHunter] }
+    { npcs: [MossRock, EasterEggHunter] }
 );
 TownList['Rusturf Tunnel'] = new DungeonTown(
     'Rusturf Tunnel',
@@ -3700,7 +3715,7 @@ TownList['Shoal Cave'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)],
     [TemporaryBattleList['Shoal Fisherman'], TemporaryBattleList['Icy Boulder']],
     {
-        npcs: [ShoalFisherman1, ShoalFisherman2, IcyBoulder],
+        npcs: [IceRock, ShoalFisherman1, ShoalFisherman2, IcyBoulder],
     }
 );
 TownList['Cave of Origin'] = new DungeonTown(
@@ -4187,7 +4202,7 @@ const ValorAzelf = new NPC('Azelf', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6, GameConstants.AchievementOption.less)])});
 
 const SnowpointYoungGirl = new NPC('Young Girl', [
-    'Someone told me that training an Eevee in Lake Acuity will make it evolve.',
+    'Someone told me that training an Eevee on Route 217 will make it evolve.',
     'They must be lying, how can that be true?!',
 ]);
 
@@ -4706,7 +4721,7 @@ TownList['Eterna Forest'] = new DungeonTown(
     ],
     [TemporaryBattleList['Manaphy Go-Rock MGrunt 1'], TemporaryBattleList['Manaphy Go-Rock MGrunt 2'], TemporaryBattleList['Manaphy Go-Rock MGrunt 3'], TemporaryBattleList['Manaphy Go-Rock MGrunt 4'], TemporaryBattleList['Manaphy Go-Rock FGrunt 1'], TemporaryBattleList['Manaphy Go-Rock FGrunt 2']],
     {
-        npcs: [ManaphyGoRock, ManaphyGoRockCommander, ManaphyBoulders],
+        npcs: [MossRock, ManaphyGoRock, ManaphyGoRockCommander, ManaphyBoulders],
     }
 );
 TownList['Old Chateau'] = new DungeonTown(
@@ -4785,7 +4800,7 @@ TownList['Lake Acuity'] = new DungeonTown(
     [new GymBadgeRequirement(BadgeEnums.Icicle)],
     [],
     {
-        npcs: [AcuityUxie],
+        npcs: [IceRock, AcuityUxie],
     }
 );
 TownList['Team Galactic HQ'] = new DungeonTown(
@@ -5722,7 +5737,11 @@ TownList['Twist Mountain'] = new DungeonTown(
             new RouteKillRequirement(10, GameConstants.Region.unova, 7),
         ]),
         new RouteKillRequirement(10, GameConstants.Region.unova, 8),
-    ])]
+    ])],
+    undefined,
+    {
+        npcs: [IceRock],
+    }
 );
 TownList['Dragonspiral Tower'] = new DungeonTown(
     'Dragonspiral Tower',
@@ -5753,7 +5772,7 @@ TownList['Pinwheel Forest'] = new DungeonTown(
     [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
     [],
     {
-        npcs: [Virizion1, Virizion2],
+        npcs: [MossRock, Virizion1, Virizion2],
     }
 );
 TownList.Dreamyard = new DungeonTown(
@@ -6679,7 +6698,11 @@ TownList['Frost Cavern'] = new DungeonTown(
     'Frost Cavern',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 16)]
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 16)],
+    undefined,
+    {
+        npcs: [IceRock],
+    }
 );
 TownList['Team Flare Secret HQ'] = new DungeonTown(
     'Team Flare Secret HQ',
@@ -6704,7 +6727,7 @@ TownList['Pokémon Village'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 20)],
     [],
     {
-        npcs: [AnomalyMewtwo2, AnomalyMewtwo3, AnomalyMewtwo4],
+        npcs: [MossRock, AnomalyMewtwo2, AnomalyMewtwo3, AnomalyMewtwo4],
     }
 );
 TownList['Victory Road Kalos'] = new DungeonTown(
@@ -8133,7 +8156,7 @@ TownList['Lush Jungle'] = new DungeonTown(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 8)],
     [LushJungleShop, TemporaryBattleList['Captain Mallow'], TemporaryBattleList['Captain Lana']],
-    {npcs: [MallowSilvally1]}
+    {npcs: [MossRock, MallowSilvally1]}
 );
 TownList['Diglett\'s Tunnel'] = new DungeonTown(
     'Diglett\'s Tunnel',
@@ -8235,7 +8258,7 @@ TownList['Mount Lanakila'] = new DungeonTown(
     [new TemporaryBattleRequirement('Gladion 3')],
     [MountLanakilaShop],
     {
-        npcs: [LanakilaColress, VeteranSilvally1],
+        npcs: [IceRock, LanakilaColress, VeteranSilvally1],
     }
 );
 TownList['Lake of the Sunne and Moone'] = new DungeonTown(
@@ -9752,7 +9775,11 @@ TownList.Heartwood = new DungeonTown(
     'Heartwood',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        npcs: [MossRock],
+    }
 );
 TownList['Ancient Solaceon Ruins'] = new DungeonTown(
     'Ancient Solaceon Ruins',
@@ -9836,7 +9863,11 @@ TownList['Icepeak Cavern'] = new DungeonTown(
     'Icepeak Cavern',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        npcs: [IceRock],
+    }
 );
 TownList['Ancient Snowpoint Temple'] = new DungeonTown(
     'Ancient Snowpoint Temple',

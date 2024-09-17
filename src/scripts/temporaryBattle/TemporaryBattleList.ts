@@ -20,7 +20,7 @@ TemporaryBattleList['Blue 1'] = new TemporaryBattle(
         displayName: 'Rival Blue',
         returnTown: 'Viridian City',
         imageName: 'Blue1',
-        environment: 'Default',
+        battleBackground: 'Default',
     }
 );
 TemporaryBattleList['Blue 2'] = new TemporaryBattle(
