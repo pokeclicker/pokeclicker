@@ -38,17 +38,6 @@ class RouteInfo {
         return roamerArray.length ? {pokemons: pokemonArray, roamers: roamerArray} : {pokemons: pokemonArray};
     }
 
-    public static hasInformation(pokemon) {
-        if (pokemon.type == 'roamer') {
-            return true;
-        } else if (pokemon.type == 'special') {
-            return RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement) || RouteInfo.hasRequirement(pokemon.requirement, WeatherRequirement) || RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement);
-        } else if (pokemon.type == 'water' && pokemon.fishing) {
-            return true;
-        }
-        return false;
-    }
-
     public static getInformations(pokemon) {
         if (pokemon.type == 'roamer') {
             if (RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
