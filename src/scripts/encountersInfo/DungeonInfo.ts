@@ -25,14 +25,14 @@ class DungeonInfo {
                         return false;
                     }
                 })
-                ?.map((enemy) => {
+                .map((enemy) => {
                     if (typeof enemy === 'string') {
                         return {id: PokemonHelper.getPokemonByName((<PokemonNameType>enemy)).id, name: enemy, type: 'normal', requirement: NullRequirement};
                     } else if (enemy.hasOwnProperty('pokemon')) {
                         return {id: PokemonHelper.getPokemonByName((<DetailedPokemon>enemy).pokemon).id, name: (<DetailedPokemon>enemy).pokemon, type: 'normal', requirement: (<DetailedPokemon>enemy).options?.requirement};
                     }
                 })
-                ?.sort((a, b) => a.id - b.id);
+                .sort((a, b) => a.id - b.id);
 
         const bossArray =
             player.town.dungeon?.bossList
@@ -43,16 +43,16 @@ class DungeonInfo {
                         return false;
                     }
                 })
-                ?.map((enemy) => ({id: PokemonHelper.getPokemonByName((<DungeonBossPokemon>enemy).name).id, name: (<DungeonBossPokemon>enemy).name, type: 'boss', requirement: (<DungeonBossPokemon>enemy).options?.requirement}))
-                ?.sort((a, b) => a.id - b.id);
+                .map((enemy) => ({id: PokemonHelper.getPokemonByName((<DungeonBossPokemon>enemy).name).id, name: (<DungeonBossPokemon>enemy).name, type: 'boss', requirement: (<DungeonBossPokemon>enemy).options?.requirement}))
+                .sort((a, b) => a.id - b.id);
 
         const mimicsArray =
             player.town.dungeon?.mimicList
                 ?.filter(enemy => App.game.party.alreadyCaughtPokemonByName(enemy))
-                ?.map((enemy) => {
+                .map((enemy) => {
                     return {id: PokemonHelper.getPokemonByName(enemy).id, name: enemy, type: 'mimic', requirement: NullRequirement};
                 })
-                ?.sort((a, b) => a.id - b.id);
+                .sort((a, b) => a.id - b.id);
 
         return {
             pokemon: {category: 'Encounters', data: (pokemonArray ?? [])},

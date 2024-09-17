@@ -13,35 +13,32 @@ class SafariInfo {
 
     private static getPokemonList() {
         const grassArray =
-            SafariPokemonList.list[player.region]()
-                ?.filter((encounter) => {
+            SafariPokemonList.list[player.region]?.()
+                .filter((encounter) => {
                     return encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Grass) != undefined;
                 })
-                ?.map((encounter) => {
+                .map((encounter) => {
                     return {id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'grass', requirement: encounter.requirement};
                 })
-                ?.sort((a, b) => a.id - b.id);
-
-        const waterArray =
-            SafariPokemonList.list[player.region]()
-                ?.filter((encounter) => {
+                .sort((a, b) => a.id - b.id);
+        const waterArray = 
+            SafariPokemonList.list[player.region]?.()
+                .filter((encounter) => {
                     return encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Water) != undefined;
                 })
-                ?.map((encounter) => {
+                .map((encounter) => {
                     return {id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'water', requirement: encounter.requirement};
                 })
-                ?.sort((a, b) => a.id - b.id);
-
+                .sort((a, b) => a.id - b.id);
         const itemsArray =
             SafariItemController.list[player.region]
                 ?.filter((item) => {
                     return PokemonHelper.getPokemonByName(item.item.id).name != 'MissingNo.' && item.requirement.isCompleted();
                 })
-                ?.map((item) => {
+                .map((item) => {
                     return {id: PokemonHelper.getPokemonByName(item.item.id).id, name: item.item.id, type: 'item', requirement: item.requirement};
                 })
-                ?.sort((a, b) => a.id - b.id);
-
+                .sort((a, b) => a.id - b.id);
         return {
             pokemon: {category: 'Grass', data: (grassArray ?? [])},
             water: {category: 'Water', data: (waterArray ?? [])},
@@ -55,7 +52,7 @@ class SafariInfo {
                 ?.filter((item) => {
                     return PokemonHelper.getPokemonByName(item.item.id).name == 'MissingNo.';
                 })
-                ?.map((item) => {
+                .map((item) => {
                     return {item: item.item.id, type: 'item', requirement: item.requirement};
                 });
 
@@ -64,7 +61,7 @@ class SafariInfo {
                 ?.filter((item) => {
                     return PokemonHelper.getPokemonByName(item.item.id).name != 'MissingNo.';
                 })
-                ?.map((item) => {
+                .map((item) => {
                     return {item: item.item.id, type: 'pokemon', requirement: item.requirement};
                 });
 
