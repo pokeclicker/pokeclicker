@@ -8,7 +8,7 @@
             <div class="modal-body pt-0" style="background-color: inherit;">
                 <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: RouteInfo.pokemonList()">
                     <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
-                        <span class="id pokedex-top-text" data-bind="text: (($data.id > 0 && App.game.party.alreadyCaughtPokemon($data.id)) ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
+                        <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
                         <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
                             <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
                         </div>
@@ -32,8 +32,13 @@
                             }"/>
                         </div>
                         <!-- /ko -->
-                        <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !App.game.party.alreadyCaughtPokemon($data.id) }, attr:{ src: PokemonHelper.getImage($data.id, undefined, undefined, GameConstants.ShadowStatus.None)}">
-                        <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: (($data.id > 0 && App.game.party.alreadyCaughtPokemon($data.id)) ? PokemonHelper.displayName($data.name) : '???')">name</span>
+                        <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id, undefined, undefined, GameConstants.ShadowStatus.None)}">
+                        <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokedexHelper.pokemonSeen($data.id)() ? PokemonHelper.displayName($data.name) : '???',
+                                                tooltip: {
+                                                    title: PokemonHelper.displayName($data.name),
+                                                    trigger: 'hover',
+                                                    placement: 'bottom'
+                                                }">name</span>
                     </li>
                 </ul>
             </div>
