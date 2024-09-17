@@ -148,7 +148,7 @@ class Party implements Feature {
 
     public boxPokemon(id: number, box: boolean) {
         if (this.alreadyCaughtPokemon(id)) {
-            let pokemon = this.getPokemon(id);
+            const pokemon = this.getPokemon(id);
             if (pokemon.box != box) {
                 pokemon.box = box;
                 Notifier.notify({

@@ -1,4 +1,4 @@
-import { AchievementOption, humanifyString } from '../GameConstants';
+import { AchievementOption } from '../GameConstants';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Requirement from './Requirement';
 
@@ -12,6 +12,6 @@ export default class BoxRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `The Pokémon must${this.option == AchievementOption.less?' not ':' '}be in a box.`;
+        return `The Pokémon must${this.option == AchievementOption.less ? ' not ' : ' '}be in a box.`;
     }
 }

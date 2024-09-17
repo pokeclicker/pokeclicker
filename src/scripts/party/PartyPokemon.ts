@@ -345,7 +345,7 @@ class PartyPokemon implements Saveable {
         GameHelper.incrementObservable(this.vitaminsUsed[vitamin], -amount);
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
     }
-    
+
     public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
         const itemName = GameConstants.ConsumableType[type];
         if (!player.itemList[itemName]()) {
