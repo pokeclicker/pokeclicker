@@ -3706,7 +3706,6 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Cryogonal', 'Beartic', 'Glalie', 'Vanilluxe', 'Froslass'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Galarian Darumaka'], new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Absol', 'Galarian Darmanitan'], new WeatherRequirement([WeatherType.Blizzard, WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Vanilluxe'], new WeatherRequirement([WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Snow])),
           new SpecialRoutePokemon(['Magmar', 'Magby', 'Magmortar'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Morgrem', 'Mimikyu', 'Clefairy', 'Clefable', 'Grimmsnarl'], new WeatherRequirement([WeatherType.Fog])),
           new SpecialRoutePokemon(['Amaura'], new MultiRequirement([new ObtainedPokemonRequirement('Amaura'), new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Fog])])),
