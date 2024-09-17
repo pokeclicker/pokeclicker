@@ -28,10 +28,10 @@
                             </div>
                             <!-- /ko -->
                             <!-- ko if: RouteInfo.hasInformation($data) -->
-                            <div data-bind="if: RouteInfo.hasInformation($data)" style="position: absolute;left: 2px;bottom: 5px;">
-                                <img width="24px" src="" data-bind="attr: { src: `assets/images/encountersInfo/route/${RouteInfo.getInformations($data).image}` },
+                            <div data-bind="with: RouteInfo.getInformations($data)" style="position: absolute;left: 2px;bottom: 5px;">
+                                <img width="24px" src="" data-bind="attr: { src: `assets/images/encountersInfo/route/${$data.image}` },
                                 tooltip: {
-                                    title: RouteInfo.getInformations($data).tooltip,
+                                    title: $data.tooltip,
                                     placement: 'bottom',
                                     trigger: 'hover'
                                 }"/>

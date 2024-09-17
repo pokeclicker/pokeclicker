@@ -10,35 +10,32 @@ class RouteInfo {
             [...new Set(pokemonList.land)].forEach(pokemonName => {
                 pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'land'});
             });
+
             if (App.game.keyItems.hasKeyItem(KeyItemType.Super_rod) || pokemonList.land.length == 0) {
                 [...new Set(pokemonList.water)].forEach(pokemonName => {
                     pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'water', fishing: pokemonList.land.length != 0});
                 });
             }
+
             [...new Set(pokemonList.headbutt)].forEach(pokemonName => {
                 pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'headbutt'});
             });
 
-            [...new Set(pokemonList.special.filter(p => p.isAvailable()))].forEach(special => {
+            pokemonList.special.filter(p => p.isAvailable()).forEach(special => {
                 [...new Set(special.pokemon)].forEach(pokemonName => {
                     pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'special', requirement: special.req});
                 });
             });
-            pokemonArray.sort((a, b) => {
-                return a.id - b.id;
-            });
+
+            pokemonArray.sort((a, b) => a.id - b.id);
         }
-        const roamerList = RoamingPokemonList.getSubRegionalGroupRoamers(player.region, RoamingPokemonList.findGroup(player.region, player.subregion));
-        const roamerArray = [];
-        if (roamerList) {
-            [...new Set(roamerList)].forEach(roamer => {
-                roamerArray.push({id: roamer.pokemon.id, name: roamer.pokemonName, type: 'roamer', requirement: roamer.unlockRequirement});
-            });
-            roamerArray.sort((a, b) => {
-                return a.id - b.id;
-            });
-        }
-        return roamerArray.length != 0 ? {pokemons: pokemonArray, roamers: roamerArray} : {pokemons: pokemonArray};
+
+        const roamerArray =
+            RoamingPokemonList.getSubRegionalGroupRoamers(player.region, RoamingPokemonList.findGroup(player.region, player.subregion))
+                .map((roamer) => ({id: roamer.pokemon.id, name: roamer.pokemonName, type: 'roamer', requirement: roamer.unlockRequirement}))
+                .sort((a, b) => a.id - b.id);
+
+        return roamerArray.length ? {pokemons: pokemonArray, roamers: roamerArray} : {pokemons: pokemonArray};
     }
 
     public static hasInformation(pokemon) {
@@ -70,7 +67,7 @@ class RouteInfo {
         } else if (pokemon.type == 'water' && pokemon.fishing) {
             return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};
         }
-        return {tooltip: '', image: ''};
+        return null;
     }
 
     private static hasRequirement(requirement, type) {
