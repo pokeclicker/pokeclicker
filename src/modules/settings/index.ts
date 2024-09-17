@@ -531,7 +531,7 @@ Object.keys(LogBookTypes).forEach((logBookType) => {
 
 Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
 Settings.add(new BooleanSetting('catchFilters.invertPriorityOrder', 'Catch Filters priority inverted (bottom-to-top)', false));
-Settings.add(new BooleanSetting('breedingEfficiencyAllModifiers', 'Include attack modifiers (held item, EVs, shadow/purified) in Breeding Efficiency', true));
+Settings.add(new BooleanSetting('breedingEfficiencyAllModifiers', 'Include Attack modifiers (Held Item, EVs, Shadow/Purified) in Attack Bonus and Breeding Efficiency', true));
 
 // Modal Collapsible Panels
 ModalCollapseList.forEach((collapse) => {
