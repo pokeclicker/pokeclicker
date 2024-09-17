@@ -860,19 +860,19 @@ const BillGrandpaChristmas = new NPC('Bill\'s Grandpa', [
     image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
     requirement: new OneFromManyRequirement([
         new MultiRequirement([
-            new ItemRequirement(11, 'Christmas_present'),
+            new ItemOwnedRequirement('Christmas_present', 11),
             new TemporaryBattleRequirement('Santa Jynx 1'),
         ]),
         new MultiRequirement([
-            new ItemRequirement(27, 'Christmas_present'),
+            new ItemOwnedRequirement('Christmas_present', 27),
             new TemporaryBattleRequirement('Santa Jynx 2'),
         ]),
         new MultiRequirement([
-            new ItemRequirement(49, 'Christmas_present'),
+            new ItemOwnedRequirement('Christmas_present', 49),
             new TemporaryBattleRequirement('Santa Jynx 3'),
         ]),
         new MultiRequirement([
-            new ItemRequirement(150, 'Christmas_present'),
+            new ItemOwnedRequirement('Christmas_present', 150),
             new TemporaryBattleRequirement('Santa Jynx 4'),
         ]),
     ]),
@@ -6853,7 +6853,7 @@ const BrookletHillShop = new Shop(
     ],
     'Lana\'s Trade',
     [
-        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 5, GameConstants.AchievementOption.more), new ItemRequirement(1, 'Water_Memory_Silvally', GameConstants.AchievementOption.less)]),
+        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 5, GameConstants.AchievementOption.more), new ItemOwnedRequirement('Water_Memory_Silvally', 1, GameConstants.AchievementOption.less)]),
     ],
     true
 );
@@ -6863,7 +6863,7 @@ const LushJungleShop = new Shop(
     ],
     'Mallow\'s Trade',
     [
-        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 7, GameConstants.AchievementOption.more), new ItemRequirement(1, 'Grass_Memory_Silvally', GameConstants.AchievementOption.less)]),
+        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 7, GameConstants.AchievementOption.more), new ItemOwnedRequirement('Grass_Memory_Silvally', 1, GameConstants.AchievementOption.less)]),
     ],
     true
 );
@@ -6873,7 +6873,7 @@ const WelaVolcanoParkShop = new Shop(
     ],
     'Kiawe\'s Trade',
     [
-        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 9, GameConstants.AchievementOption.more), new ItemRequirement(1, 'Fire_Memory_Silvally', GameConstants.AchievementOption.less)]),
+        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 9, GameConstants.AchievementOption.more), new ItemOwnedRequirement('Fire_Memory_Silvally', 1, GameConstants.AchievementOption.less)]),
     ],
     true
 );
@@ -6883,7 +6883,7 @@ const HokulaniObservatoryShop = new Shop(
     ],
     'Sophocles\'s Trade',
     [
-        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 11, GameConstants.AchievementOption.more), new ItemRequirement(1, 'Electric_Memory_Silvally', GameConstants.AchievementOption.less)]),
+        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 11, GameConstants.AchievementOption.more), new ItemOwnedRequirement('Electric_Memory_Silvally', 1, GameConstants.AchievementOption.less)]),
     ],
     true
 );
@@ -6893,7 +6893,7 @@ const MountLanakilaShop = new Shop(
     ],
     'Veteran Aristo\'s Trade',
     [
-        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 13, GameConstants.AchievementOption.more), new ItemRequirement(1, 'Ice_Memory_Silvally', GameConstants.AchievementOption.less)]),
+        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 13, GameConstants.AchievementOption.more), new ItemOwnedRequirement('Ice_Memory_Silvally', 1, GameConstants.AchievementOption.less)]),
     ],
     true
 );
@@ -6903,7 +6903,7 @@ const ExeggutorIslandHillShop = new Shop(
     ],
     'Hapu\'s Trade',
     [
-        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 15, GameConstants.AchievementOption.more), new ItemRequirement(1, 'Ground_Memory_Silvally', GameConstants.AchievementOption.less)]),
+        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 15, GameConstants.AchievementOption.more), new ItemOwnedRequirement('Ground_Memory_Silvally', 1, GameConstants.AchievementOption.less)]),
     ],
     true
 );

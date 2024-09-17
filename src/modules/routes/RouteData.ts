@@ -22,7 +22,7 @@ import Routes from './Routes';
 import SpecialRoutePokemon from './SpecialRoutePokemon';
 import SpecialEventRandomRequirement from '../requirements/SpecialEventRandomRequirement';
 import SeededRand from '../utilities/SeededRand';
-import ItemRequirement from '../requirements/ItemRequirement';
+import ItemOwnedRequirement from '../requirements/ItemOwnedRequirement';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import StatisticRequirement from '../requirements/StatisticRequirement';
 import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
@@ -4240,22 +4240,22 @@ Routes.getRoutesByRegion(Region.kanto).forEach(route => {
     route.pokemon.special.push(
         new SpecialRoutePokemon(['Santa Jynx'], new OneFromManyRequirement([
             new MultiRequirement([
-                new ItemRequirement(11, 'Christmas_present', AchievementOption.less),
+                new ItemOwnedRequirement('Christmas_present', 11, AchievementOption.less),
                 new TemporaryBattleRequirement('Santa Jynx 1'),
                 new SpecialEventRequirement('Merry Christmas!'),
             ]),
             new MultiRequirement([
-                new ItemRequirement(27, 'Christmas_present', AchievementOption.less),
+                new ItemOwnedRequirement('Christmas_present', 27, AchievementOption.less),
                 new TemporaryBattleRequirement('Santa Jynx 2'),
                 new SpecialEventRequirement('Merry Christmas!'),
             ]),
             new MultiRequirement([
-                new ItemRequirement(49, 'Christmas_present', AchievementOption.less),
+                new ItemOwnedRequirement('Christmas_present', 49, AchievementOption.less),
                 new TemporaryBattleRequirement('Santa Jynx 3'),
                 new SpecialEventRequirement('Merry Christmas!'),
             ]),
             new MultiRequirement([
-                new ItemRequirement(150, 'Christmas_present', AchievementOption.less),
+                new ItemOwnedRequirement('Christmas_present', 150, AchievementOption.less),
                 new TemporaryBattleRequirement('Santa Jynx 4'),
                 new SpecialEventRequirement('Merry Christmas!'),
             ]),

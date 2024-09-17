@@ -9772,7 +9772,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Douse_Drive', ignoreDebuff: true},
             {loot: 'Shock_Drive', ignoreDebuff: true},
         ],
-        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemRequirement(1, 'Great_Twisted_Spoon', GameConstants.AchievementOption.less)])}],
+        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemOwnedRequirement('Great_Twisted_Spoon', 1, GameConstants.AchievementOption.less)])}],
     },
     5403000,
     [
