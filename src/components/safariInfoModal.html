@@ -1,29 +1,29 @@
-<div class="modal fade noselect" id="dungeonInfoModal" tabindex="-1" role="dialog" aria-labelledby="dungeonInfoLabel">
+<div class="modal fade noselect" id="safariInfoModal" tabindex="-1" role="dialog" aria-labelledby="safariInfoLabel">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header p-0 border-0">
                 <div class="row w-100 m-0">
                     <div class="col-12 p-3 text-center border-bottom border-secondary">
-                        <h4 class="modal-title d-inline-block" data-bind="text: DungeonInfo.getName()">name</h4>
+                        <h4 class="modal-title d-inline-block" data-bind="text: SafariInfo.getName()">name</h4>
                         <button type="button" class="btn btn-danger position-absolute" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
                     </div>
                     <div class="col-12 p-0">
                         <ul class="nav nav-tabs nav-fill w-100">
-                            <li class="nav-item w-lg-50"><a data-toggle='tab' class='nav-link active' href="#pan-dungeon-pokemons">Pokémon</a></li>
-                            <li class="nav-item w-lg-50"><a data-toggle='tab' class='nav-link' href="#pan-dungeon-items">Items</a></li>
+                            <li class="nav-item w-lg-50"><a data-toggle='tab' class='nav-link active' href="#pan-safari-pokemons">Pokémon</a></li>
+                            <li class="nav-item w-lg-50"><a data-toggle='tab' class='nav-link' href="#pan-safari-items">Items</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="modal-body pt-0" style="background-color: inherit;">
                 <div class="tab-content">
-                    <div id="pan-dungeon-pokemons" class="tab-pane fade p-3 show active">
-                        <!-- ko foreach: { data: Object.entries(DungeonInfo.pokemonList()), as: 'pokemons' } -->
+                    <div id="pan-safari-pokemons" class="tab-pane fade p-3 show active">
+                        <!-- ko foreach: { data: Object.entries(SafariInfo.pokemonList()), as: 'pokemons' } -->
                         <!-- ko if: pokemons[1].data.length -->
-                        <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#dungeon-${pokemons[0]}` }">
+                        <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#safari-${pokemons[0]}` }">
                             <h5 class="my-0 mx-1 text-light" data-bind="text: pokemons[1].category">category</h5>
                         </div>
-                        <div class="collapse show" data-bind="attr: { 'id': `dungeon-${pokemons[0]}` }">
+                        <div class="collapse show" data-bind="attr: { 'id': `safari-${pokemons[0]}` }">
                             <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons[1].data">
                                 <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                     <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
@@ -63,14 +63,13 @@
                         <!-- /ko -->
                         <!-- /ko -->
                     </div>
-                    <div id="pan-dungeon-items" class="tab-pane fade p-3">
-                        <!-- ko foreach: { data: Object.entries(DungeonInfo.itemList()), as: 'items' } -->
+                    <div id="pan-safari-items" class="tab-pane fade p-3">
+                        <!-- ko foreach: { data: Object.entries(SafariInfo.itemList()), as: 'items' } -->
                         <!-- ko if: items[1].data.length -->
-                        <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#dungeon-${items[0]}` }">
-                            <img width="42px" data-bind="attr: { src: `assets/images/dungeons/chest-${items[0]}.png` }" />
+                        <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#safari-${items[0]}` }">
                             <h5 class="my-0 mx-1 text-light" data-bind="text: items[1].category">category</h5>
                         </div>
-                        <div class="collapse show" data-bind="attr: { 'id': `dungeon-${items[0]}` }">
+                        <div class="collapse show" data-bind="attr: { 'id': `safari-${items[0]}` }">
                             <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: items[1].data">
                                 <div class="col-6 col-lg-4 mb-2">
                                     <!-- ko with: EncountersHelper.getItemInformations($data) -->
