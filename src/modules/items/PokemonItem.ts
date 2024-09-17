@@ -22,7 +22,8 @@ export default class PokemonItem extends PokerusIndicatingItem {
         public ignoreEV = false,
         displayName: string = undefined,
         options?: ShopOptions,
-        name: string = pokemon) {
+        name: string = pokemon
+    ) {
         super(name, basePrice, currency, options, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
         this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon)());
