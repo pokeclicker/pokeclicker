@@ -1,5 +1,3 @@
-/// <reference path="./GameConstants.d.ts" />
-
 class Update implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'update';
@@ -2760,6 +2758,11 @@ class Update implements Saveable {
             if (!saveData.challenges.list.regionalAttackDebuff) {
                 settingsData.breedingRegionalAttackDebuffSetting = '-1';
             }
+        },
+
+        '0.10.22': ({playerData}) => {
+            // Reset Key Stone multiplier
+            delete playerData._itemMultipliers.Key_stone;
         },
     };
 

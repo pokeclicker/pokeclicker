@@ -105,6 +105,7 @@ export type ItemNameType
     | 'Lucarionite'
     | 'Manectite'
     | 'Mawilite'
+    | 'Medichamite'
     | 'Metagrossite'
     | 'Meteorite'
     | 'Mewtwonite_X'

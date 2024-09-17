@@ -26,19 +26,16 @@ export default class Gems implements Feature {
     defaults = {
         gemWallet: Array<number>(Gems.nTypes).fill(0),
         gemUpgrades: Array<number>(Gems.nTypes * Gems.nEffects).fill(0),
-        gemCollapsed: Array<boolean>(Gems.nTypes).fill(false),
     };
 
     public gemWallet: Array<KnockoutObservable<number>>;
     public gemUpgrades: Array<KnockoutObservable<number>>;
-    public gemCollapsed: Array<boolean>;
 
     public validUpgrades = {};
 
     constructor() {
         this.gemWallet = this.defaults.gemWallet.map((v) => ko.observable(v));
         this.gemUpgrades = this.defaults.gemUpgrades.map((v) => ko.observable(v));
-        this.gemCollapsed = this.defaults.gemCollapsed;
         GameHelper.enumNumbers(PokemonType).forEach((type) => {
             this.validUpgrades[type] = {};
             this.validUpgrades[type][TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(TypeEffectivenessValue.Immune);
@@ -133,7 +130,6 @@ export default class Gems implements Feature {
         return {
             gemWallet: GameHelper.filterArrayEnd(this.gemWallet.map(ko.unwrap)),
             gemUpgrades: GameHelper.filterArrayEnd(this.gemUpgrades.map(ko.unwrap)),
-            gemCollapsed: GameHelper.filterArrayEnd(this.gemCollapsed),
         };
     }
 
@@ -144,9 +140,6 @@ export default class Gems implements Feature {
             });
             json.gemUpgrades.forEach((v, i) => {
                 this.gemUpgrades[i](v);
-            });
-            json.gemCollapsed?.forEach((v, i) => {
-                this.gemCollapsed[i] = v;
             });
         }
     }
