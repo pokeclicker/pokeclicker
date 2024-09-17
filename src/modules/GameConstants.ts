@@ -180,6 +180,7 @@ export const FREEZE_MULCH_MULTIPLIER = 0;
 export const GOOEY_MULCH_CATCH_BONUS = 10;
 
 export const WANDER_RATE = 0.0005;
+export const WANDER_SHINY_FP_MODIFIER = 5;
 
 export const BerryColor = [
     '#EE8130', // Red

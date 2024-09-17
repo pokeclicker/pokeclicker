@@ -245,6 +245,6 @@ ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.mon
             }
         }
         // babies
-        const baseFormName = App.game.breeding.calculateBaseForm(pokemon.name);
-        return pokemon.name != baseFormName;
+        const baby = pokemonBabyPrevolutionMap[pokemon.name];
+        return baby !== undefined && pokemon.name != baby;
     });
