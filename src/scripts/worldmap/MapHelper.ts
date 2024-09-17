@@ -1,5 +1,5 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/DataStore/StatisticStore/index.d.ts" />
-/// <reference path="../GameConstants.d.ts" />
 
 enum areaStatus {
     locked,
@@ -347,3 +347,5 @@ class MapHelper {
     }
 
 }
+
+MapHelper satisfies TmpMapHelperType;
