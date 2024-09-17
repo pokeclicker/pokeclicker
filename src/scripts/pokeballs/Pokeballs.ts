@@ -73,7 +73,7 @@ class Pokeballs implements Feature {
                 }
 
                 // If area is a water environment,
-                if (MapHelper.getCurrentEnvironment() == 'Water') {
+                if (MapHelper.getCurrentEnvironments().includes('Water')) {
                     return 15;
                 }
                 return 0;
