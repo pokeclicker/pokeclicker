@@ -72,8 +72,9 @@ class PartyPokemon implements Saveable {
         public gender,
         shadow: GameConstants.ShadowStatus
     ) {
-        this.vitaminsUsed = {};
-        GameHelper.enumNumbers(GameConstants.VitaminType).forEach(i => this.vitaminsUsed[i] = ko.observable(0).extend({ numeric: 0 }));
+        this.vitaminsUsed = Object.fromEntries(GameHelper.enumNumbers(GameConstants.VitaminType).map((vitamin) => {
+            return [vitamin, ko.observable(0).extend({ numeric: 0 })];
+        })) as Record<GameConstants.VitaminType, KnockoutObservable<number>>;
         this._breeding = ko.observable(false).extend({ boolean: null });
         this._shiny = ko.observable(shiny).extend({ boolean: null });
         this._level = ko.observable(1).extend({ numeric: 0 });
@@ -374,7 +375,11 @@ class PartyPokemon implements Saveable {
     getBreedingAttackBonus = ko.pureComputed((): number => {
         const attackBonusPercent = (GameConstants.BREEDING_ATTACK_BONUS + this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100;
         const proteinBoost = this.vitaminsUsed[GameConstants.VitaminType.Protein]();
-        return (this.baseAttack * attackBonusPercent) + proteinBoost;
+        let attackBonus = (this.baseAttack * attackBonusPercent) + proteinBoost;
+        if (Settings.getSetting('breedingEfficiencyAllModifiers').observableValue()) {
+            attackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
+        }
+        return attackBonus;
     });
 
     heldItemAttackBonus = ko.pureComputed((): number => {
@@ -386,11 +391,7 @@ class PartyPokemon implements Saveable {
     });
 
     breedingEfficiency = ko.pureComputed((): number => {
-        let breedingAttackBonus = this.getBreedingAttackBonus();
-        if (Settings.getSetting('breedingEfficiencyAllModifiers').observableValue()) {
-            breedingAttackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
-        }
-
+        const breedingAttackBonus = this.getBreedingAttackBonus();
         return (breedingAttackBonus / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
     });
 

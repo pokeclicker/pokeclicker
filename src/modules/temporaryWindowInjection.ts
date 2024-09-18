@@ -161,7 +161,7 @@ import {
 } from './pokemons/evolutions/Base';
 import * as OtherEvos from './pokemons/evolutions/Methods';
 import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
-import TmpPokemonHelper from './pokemons/TmpPokemonHelper';
+import * as PokemonHelper from './pokemons/PokemonHelper';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
@@ -200,7 +200,8 @@ import SafariStepsRequirement from './requirements/SafariStepsRequirement';
 import SafariRocksRequirement from './requirements/SafariRocksRequirement';
 import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
-import ItemRequirement from './requirements/ItemRequirement';
+import ItemOwnedRequirement from './requirements/ItemOwnedRequirement';
+import UniqueItemOwnedRequirement from './requirements/UniqueItemOwnedRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
@@ -381,7 +382,7 @@ Object.assign(<any>window, {
     pokemonList,
     pokemonMap,
     pokemonBabyPrevolutionMap,
-    TmpPokemonHelper,
+    PokemonHelper,
     ItemList,
     Item,
     MultiplierDecreaser,
@@ -417,7 +418,8 @@ Object.assign(<any>window, {
     SafariRocksRequirement,
     SafariItemsRequirement,
     SafariCatchRequirement,
-    ItemRequirement,
+    ItemOwnedRequirement,
+    UniqueItemOwnedRequirement,
     ChristmasPresent,
     DamageCalculator,
     GameLoadState,
