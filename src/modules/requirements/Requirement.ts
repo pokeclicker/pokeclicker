@@ -10,7 +10,15 @@ export default abstract class Requirement {
     }
 
     public getProgressPercentage() {
-        return ((this.getProgress() / this.requiredValue) * 100).toFixed(1);
+        switch (this.option) {
+            case GameConstants.AchievementOption.less:
+            case GameConstants.AchievementOption.equal:
+                return this.isCompleted() ? 100 : 0;
+            case GameConstants.AchievementOption.more:
+            default:
+                const fraction = this.requiredValue != 0 ? (this.getProgress() / this.requiredValue) : +this.isCompleted();
+                return Math.max(fraction * 100, 100).toFixed(1);
+        }
     }
 
     public isCompleted() {
