@@ -45,7 +45,7 @@ namespace GameConstants {
     declare const FLUTE_TYPE_ATTACK_MULTIPLIER: number;
     declare const ROAMING_MIN_CHANCE: number;
     declare const ROAMING_MAX_CHANCE: number;
-    declare const ROAMING_INCREASED_CHANCE: number;
+    declare const ROAMING_INCREASED_CHANCE_BOOSTED_ROUTE: number;
     declare const SHINY_CHANCE_BATTLE: number;
     declare const SHINY_CHANCE_DUNGEON: number;
     declare const SHINY_CHANCE_SHOP: number;

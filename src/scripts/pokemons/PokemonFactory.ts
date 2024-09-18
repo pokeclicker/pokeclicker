@@ -260,7 +260,7 @@ class PokemonFactory {
         const routeInd = allRoutes.indexOf(curRoute);
         // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, RoamingPokemonList.findGroup(region, subRegion.id))()?.number == curRoute?.number;
-        const roamingChance = (max + ((min - max) * (maxRoute - routeInd) / (maxRoute))) / ((increasedChance ? GameConstants.ROAMING_INCREASED_CHANCE : 1) * bonus);
+        const roamingChance = (max + ((min - max) * (maxRoute - routeInd) / (maxRoute))) / ((increasedChance ? GameConstants.ROAMING_INCREASED_CHANCE_BOOSTED_ROUTE : 1) * bonus);
         return Rand.chance(roamingChance);
     }
 
