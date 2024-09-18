@@ -706,25 +706,12 @@
         })
      %>
 
-     <%- include('templates/mapOverlay',
-         { name: "Professor Sycamore's Blimp"
-         , x: 57, y: 52
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Vaniville Town')}, attr:{ class: MapHelper.calculateTownCssClass('Vaniville Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_empty.png"
-         })
-     %>
-
-     <%- include('templates/mapOverlay',
-         { name: "Professor Sycamore's Blimp"
-         , x: 57, y: 52
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Vaniville Town')}, attr:{ class: MapHelper.calculateTownCssClass('Vaniville Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_pikachu.png"
-         })
-     %>
+    <%- include('templates/mapBlimp',
+        { name: "Professor Sycamore"
+        , x: 57, y: 52
+        , town: "Vaniville Town"
+        })
+    %>
 
      <%- include('templates/mapOverlay',
          { name: "Pokémon Trainer Calem"
