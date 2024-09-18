@@ -850,7 +850,7 @@ class Farming implements Feature {
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
             ],
             new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]),
-            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Sizzlipede']
+            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Mothim', 'Sizzlipede']
         );
 
         this.berryData[BerryType.Charti] = new Berry(
@@ -2271,7 +2271,8 @@ class Farming implements Feature {
         const berry = App.game.farming.berryData[plot.wanderer.berry];
 
         const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
-        App.game.wallet.gainFarmPoints(farmPoints);
+        const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;
+        App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
 
         const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
         if (pokeball !== GameConstants.Pokeball.None) {
