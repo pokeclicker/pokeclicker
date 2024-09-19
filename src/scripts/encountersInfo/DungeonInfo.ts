@@ -3,38 +3,9 @@ class DungeonInfo {
         return player.town.name;
     }
 
-    public static pokemonList = ko.pureComputed(() => {
-        return DungeonInfo.isShadow() ? DungeonInfo.getPokemonList() : DungeonInfo.getPokemonList();
-    });
-
     public static itemList = ko.pureComputed(() => {
         return DungeonInfo.getItemList();
     });
-
-    private static isShadow() {
-        return player.region == GameConstants.Region.hoenn && player.subregion == 1;
-    }
-
-    private static getPokemonList() {
-        const pokemonArray =
-            player.town.dungeon?.normalEncounterList
-                .filter((encounter) => !encounter.hide && !encounter.shadowTrainer)
-                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter: encounter, type: 'normal', requirement: NullRequirement, shadow: DungeonInfo.isShadow()}))
-                .sort((a, b) => a.id - b.id);
-        const bossArray =
-            player.town.dungeon?.bossEncounterList
-                .filter((encounter) => !encounter.hide && !encounter.shadowTrainer)
-                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter: encounter, type: 'boss', requirement: NullRequirement, shadow: DungeonInfo.isShadow()}))
-                .sort((a, b) => a.id - b.id);
-        return {
-            pokemon: {category: 'Encounters', data: (pokemonArray ?? [])},
-            boss: {category: 'Boss', data: (bossArray ?? [])},
-        };
-    }
-
-    private getRequirementDungeon(pokemon) {
-        return NullRequirement;
-    }
 
     private static getItemList() {
         const commonArray =
