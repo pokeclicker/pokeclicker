@@ -1,11 +1,11 @@
 class RouteInfo {
-    public static getName() {
-        return Routes.getName(player.route, player.region);
-    }
-
     public static pokemonList = ko.pureComputed(() => {
         return RouteInfo.getPokemonList();
     });
+    
+    public static getName() {
+        return Routes.getName(player.route, player.region);
+    }
 
     private static getPokemonList() {
         const pokemonList = Routes.getRoute(player.region, player.route)?.pokemon;

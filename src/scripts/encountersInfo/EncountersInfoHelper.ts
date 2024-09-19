@@ -1,7 +1,7 @@
-class EncountersHelper {
+class EncountersInfoHelper {
     public static getPokemonRequirementInformations(pokemon) {
         if (pokemon.type == 'roamer') {
-            if (EncountersHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
+            if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
                 return {tooltip: 'Event Roaming Pokémon', image: 'event_roaming.png'};
             } else {
                 return {tooltip: 'Roaming Pokémon', image: 'roaming.png'};
@@ -9,11 +9,11 @@ class EncountersHelper {
         } else if (pokemon.type == 'water' && pokemon?.fishing) {
             return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};
         } else {
-            if (EncountersHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
+            if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
                 return {tooltip: 'Event Pokémon', image: 'event.png'};
-            } else if (EncountersHelper.hasRequirement(pokemon?.requirement, WeatherRequirement)) {
+            } else if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, WeatherRequirement)) {
                 return {tooltip: 'Weather Pokémon', image: 'weather.png'};
-            } else if (EncountersHelper.hasRequirement(pokemon?.requirement, DayOfWeekRequirement)) {
+            } else if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, DayOfWeekRequirement)) {
                 return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
             }
         }
@@ -27,7 +27,7 @@ class EncountersHelper {
         }
         if (requirement?.requirements) {
             for (const req of requirement.requirements) {
-                if (EncountersHelper.hasRequirement(req, type)) {
+                if (EncountersInfoHelper.hasRequirement(req, type)) {
                     return true;
                 }
             }
@@ -37,8 +37,8 @@ class EncountersHelper {
 
     public static getItemInformations(item) {
         const isPokemonAndNotCaught = PokemonHelper.getPokemonByName(item.item).name != 'MissingNo.' && !App.game.party.getPokemonByName(item.item);
-        const name = isPokemonAndNotCaught ? '???' : EncountersHelper.getItemName(item);
-        const image = EncountersHelper.getItemImage(item);
+        const name = isPokemonAndNotCaught ? '???' : EncountersInfoHelper.getItemName(item);
+        const image = EncountersInfoHelper.getItemImage(item);
         const requirement = item.requirement;
         return {isPokemonAndNotCaught, name, image, requirement};
     }

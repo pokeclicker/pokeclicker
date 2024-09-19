@@ -19,7 +19,7 @@
                 <div class="collapse show" data-bind="attr: { 'id': `dungeon-${items[0]}` }">
                     <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: items[1].data">
                         <div class="col-6 col-lg-4 mb-2">
-                            <!-- ko with: EncountersHelper.getItemInformations($data) -->
+                            <!-- ko with: EncountersInfoHelper.getItemInformations($data) -->
                                 <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
                                     <img width="42px" data-bind="attr: { src: image },
                                         style: { 'filter': isPokemonAndNotCaught ? 'brightness(0)' : '' }">

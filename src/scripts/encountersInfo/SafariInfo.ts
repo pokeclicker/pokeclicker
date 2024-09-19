@@ -1,11 +1,11 @@
 class SafariInfo {
-    public static getName() {
-        return player.town.name;
-    }
-
     public static itemList = ko.pureComputed(() => {
         return SafariInfo.getItemList();
     });
+    
+    public static getName() {
+        return player.town.name;
+    }
 
     private static getItemList() {
         const itemsArray =

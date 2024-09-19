@@ -1,11 +1,11 @@
 class DungeonInfo {
-    public static getName() {
-        return player.town.name;
-    }
-
     public static itemList = ko.pureComputed(() => {
         return DungeonInfo.getItemList();
     });
+    
+    public static getName() {
+        return player.town.name;
+    }
 
     private static getItemList() {
         const commonArray =
