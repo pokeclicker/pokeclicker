@@ -25,35 +25,35 @@
                         </div>
                         <div class="collapse show" data-bind="attr: { 'id': `safari-${pokemons[0]}` }">
                             <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons[1].data">
-                                <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
-                                    <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
+                                <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors(name)}">
+                                    <span class="id pokedex-top-text" data-bind="text: (id > 0 ? Math.floor(id) + '' : '???').padStart(3, 0)">number</span>
                                     <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
-                                        <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
+                                        <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(id, true) ? '-shiny' : ''}.svg`}"/>
                                     </div>
                                     <!-- ko if: App.game.party.alreadyCaughtPokemonByName(name) -->
-                                    <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
-                                        <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`},
+                                    <div data-bind="if: App.game.party.getPokemon(id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
+                                        <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(id)?.pokerus]}.png`},
                                         tooltip: {
-                                            title: App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemon($data.id)?.evs().toLocaleString('en-US')}` : '',
+                                            title: App.game.party.getPokemon(id)?.pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemon(id)?.evs().toLocaleString('en-US')}` : '',
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         }"/>
                                     </div>
                                     <!-- /ko -->
-                                    <!-- ko with: EncountersHelper.getPokemonInformations($data) -->
+                                    <!-- ko with: EncountersHelper.getPokemonRequirementInformations($data) -->
                                     <div style="position: absolute;left: 2px;bottom: 5px;">
-                                        <img width="24px" src="" data-bind="attr: { src: `assets/images/encountersInfo/${$data.image}` },
+                                        <img width="24px" src="" data-bind="attr: { src: `assets/images/encountersInfo/${image}` },
                                         tooltip: {
-                                            title: $data.tooltip,
+                                            title: tooltip,
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         }"/>
                                     </div>
                                     <!-- /ko -->
-                                    <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id, undefined, undefined, GameConstants.ShadowStatus.None)}">
-                                    <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokedexHelper.pokemonSeen($data.id)() ? PokemonHelper.displayName($data.name) : '???',
+                                    <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen(id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen(id)() }, attr:{ src: PokemonHelper.getImage(id, undefined, undefined, GameConstants.ShadowStatus.None)}">
+                                    <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokedexHelper.pokemonSeen(id)() ? PokemonHelper.displayName(name) : '???',
                                     tooltip: {
-                                        title: PokemonHelper.displayName($data.name),
+                                        title: PokemonHelper.displayName(name),
                                         trigger: 'hover',
                                         placement: 'bottom'
                                     }">name</span>
@@ -74,17 +74,17 @@
                                 <div class="col-6 col-lg-4 mb-2">
                                     <!-- ko with: EncountersHelper.getItemInformations($data) -->
                                         <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
-                                            <img width="42px" data-bind="attr: { src: $data.image },
-                                                style: { 'filter': $data.isPokemonAndNotCaught ? 'brightness(0)' : '' }">
+                                            <img width="42px" data-bind="attr: { src: image },
+                                                style: { 'filter': isPokemonAndNotCaught ? 'brightness(0)' : '' }">
                                             <div class="flex-grow-1 small ml-2" style="min-width: 0;">
-                                                <div class="text-truncate" data-bind="text: $data.name"></div>
+                                                <div class="text-truncate" data-bind="text: name"></div>
                                             </div>
                                             <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
                                             tooltip: {
-                                                title: $data.requirement?.hint() || '',
+                                                title: requirement?.hint() || '',
                                                 placement: 'bottom',
                                                 trigger: 'hover'
-                                            }, visible: $data.requirement && !$data.requirement.isCompleted()" />
+                                            }, visible: requirement && !requirement.isCompleted()" />
                                         </div>
                                     <!-- /ko -->
                                 </div>

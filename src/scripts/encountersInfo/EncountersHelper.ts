@@ -1,23 +1,23 @@
 class EncountersHelper {
-    public static getPokemonInformations(pokemon) {
+    public static getPokemonRequirementInformations(pokemon) {
         if (pokemon.type == 'roamer') {
-            if (EncountersHelper.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
+            if (EncountersHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
                 return {tooltip: 'Event Roaming Pokémon', image: 'event_roaming.png'};
             } else {
                 return {tooltip: 'Roaming Pokémon', image: 'roaming.png'};
             }
-        } else if (pokemon.type == 'water' && pokemon.fishing) {
+        } else if (pokemon.type == 'water' && pokemon?.fishing) {
             return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};
         } else {
-            if (EncountersHelper.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
+            if (EncountersHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
                 return {tooltip: 'Event Pokémon', image: 'event.png'};
-            } else if (EncountersHelper.hasRequirement(pokemon.requirement, WeatherRequirement)) {
+            } else if (EncountersHelper.hasRequirement(pokemon?.requirement, WeatherRequirement)) {
                 return {tooltip: 'Weather Pokémon', image: 'weather.png'};
-            } else if (EncountersHelper.hasRequirement(pokemon.requirement, DayOfWeekRequirement)) {
+            } else if (EncountersHelper.hasRequirement(pokemon?.requirement, DayOfWeekRequirement)) {
                 return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
-            } else if (EncountersHelper.hasRequirement(pokemon.requirement, SeededDateSelectNRequirement)) {
+            } else if (EncountersHelper.hasRequirement(pokemon?.requirement, SeededDateSelectNRequirement)) {
                 return {tooltip: 'Random Date Pokémon', image: 'random_date.png'};
-            } else if (EncountersHelper.hasRequirement(pokemon.requirement, DayCyclePartRequirement)) {
+            } else if (EncountersHelper.hasRequirement(pokemon?.requirement, DayCyclePartRequirement)) {
                 return {tooltip: 'Day Cycle Part Pokémon', image: 'day_cycle_part.png'};
             }
         }

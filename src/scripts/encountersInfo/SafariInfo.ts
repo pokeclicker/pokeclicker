@@ -14,30 +14,18 @@ class SafariInfo {
     private static getPokemonList() {
         const grassArray =
             SafariPokemonList.list[player.region]?.()
-                .filter((encounter) => {
-                    return encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Grass) != undefined;
-                })
-                .map((encounter) => {
-                    return {id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'grass', requirement: encounter.requirement};
-                })
+                .filter((encounter) => (encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Grass) != undefined))
+                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'grass'}))
                 .sort((a, b) => a.id - b.id);
         const waterArray =
             SafariPokemonList.list[player.region]?.()
-                .filter((encounter) => {
-                    return encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Water) != undefined;
-                })
-                .map((encounter) => {
-                    return {id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'water', requirement: encounter.requirement};
-                })
+                .filter((encounter) => (encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Water) != undefined))
+                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'water'}))
                 .sort((a, b) => a.id - b.id);
         const itemsArray =
             SafariItemController.list[player.region]
-                ?.filter((item) => {
-                    return PokemonHelper.getPokemonByName(item.item.id).name != 'MissingNo.' && item.requirement.isCompleted();
-                })
-                .map((item) => {
-                    return {id: PokemonHelper.getPokemonByName(item.item.id).id, name: item.item.id, type: 'item', requirement: item.requirement};
-                })
+                ?.filter((item) => (PokemonHelper.getPokemonByName(item.item.id).name != 'MissingNo.' && item.requirement.isCompleted()))
+                .map((item) => ({id: PokemonHelper.getPokemonByName(item.item.id).id, name: item.item.id, type: 'item'}))
                 .sort((a, b) => a.id - b.id);
         return {
             pokemon: {category: 'Grass', data: (grassArray ?? [])},
@@ -49,20 +37,12 @@ class SafariInfo {
     private static getItemList() {
         const itemsArray =
             SafariItemController.list[player.region]
-                ?.filter((item) => {
-                    return PokemonHelper.getPokemonByName(item.item.id).name == 'MissingNo.';
-                })
-                .map((item) => {
-                    return {item: item.item.id, type: 'item', requirement: item.requirement};
-                });
+                ?.filter((item) => (PokemonHelper.getPokemonByName(item.item.id).name == 'MissingNo.'))
+                .map((item) => ({item: item.item.id, type: 'item', requirement: item.requirement}));
         const pokemonsArray =
             SafariItemController.list[player.region]
-                ?.filter((item) => {
-                    return PokemonHelper.getPokemonByName(item.item.id).name != 'MissingNo.';
-                })
-                .map((item) => {
-                    return {item: item.item.id, type: 'pokemon', requirement: item.requirement};
-                });
+                ?.filter((item) => (PokemonHelper.getPokemonByName(item.item.id).name != 'MissingNo.'))
+                .map((item) => ({item: item.item.id, type: 'pokemon', requirement: item.requirement}));
         return {
             items: {category: 'Items', data: (itemsArray ?? [])},
             pokemons: {category: 'Pokémons', data: (pokemonsArray ?? [])},

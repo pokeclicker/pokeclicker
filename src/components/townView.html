@@ -55,7 +55,7 @@
                         <img src="assets/images/encountersInfo/encountersInfo.png">
                     </div>
                     <!-- /ko -->
-                    <!-- ko if: player.town.content[0] instanceof SafariTownContent -->
+                    <!-- ko if: player.town.content.find(c => c instanceof SafariTownContent) -->
                     <knockout class="right">
                         <div class="px-1 clickable d-inline-block ml-1" style="align-self: center;" data-bind="tooltip: { title: 'Check the Pokémon/Items available here', trigger: 'hover' }, click: function() { $('#safariInfoModal').modal('show') }" data-original-title="" title="">
                             <img src="assets/images/encountersInfo/encountersInfo.png">
