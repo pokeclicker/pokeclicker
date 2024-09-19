@@ -2,7 +2,7 @@ class DungeonInfo {
     public static itemList = ko.pureComputed(() => {
         return DungeonInfo.getItemList();
     });
-    
+
     public static getName() {
         return player.town.name;
     }

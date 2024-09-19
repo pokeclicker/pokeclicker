@@ -2,7 +2,7 @@ class RouteInfo {
     public static pokemonList = ko.pureComputed(() => {
         return RouteInfo.getPokemonList();
     });
-    
+
     public static getName() {
         return Routes.getName(player.route, player.region);
     }
