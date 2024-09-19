@@ -125,6 +125,13 @@
                             title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon)}"
                     src=""/>
                   </knockout>
+
+                  <!-- ko if: player.town.dungeon.allAvailableShadowPokemon().length -->
+                  <knockout class="ml-1" style="font-size: 0;" data-bind="let: { isMissingShadow: player.town.dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) }">
+                    <img height="20" src="assets/images/status/shadow.svg" data-bind="
+                        css: { 'dungeon-pokemon-locked': isMissingShadow },"/>
+                  </knockout>
+                  <!-- /ko -->
                 </td>
                 <td width="50%">
                   <knockout data-bind="text: `${App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toLocaleString('en-US')} Clears`"></knockout>
