@@ -10,7 +10,7 @@ class SafariInfo {
     private static getItemList() {
         const itemsArray =
             SafariItemController.list[player.region]
-                .map((item) => ({item: item.item.id, type: 'item', requirement: item.requirement}));
+                ?.map((item) => ({item: item.item.id, type: 'item', requirement: item.requirement}));
         return {
             items: {category: 'Items', data: (itemsArray ?? [])},
         };
