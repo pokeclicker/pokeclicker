@@ -49,7 +49,6 @@ const pokeLeagueShop = () => new Shop([
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 10      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
     ItemList.Protein,
-    // TODO VITAMINS: Move these to different shops?
     ItemList.Calcium,
     ItemList.Carbos,
 ]);
@@ -2276,7 +2275,6 @@ const EverGrandeCityShop = new Shop([
     ItemList.Dragon_egg,
     ItemList.Dragon_scale,
 ]);
-// TODO: finalize items and prices
 const BattleFrontierShop = new Shop([
     new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint, undefined, 'Ultra Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }, 'Master Ball'),

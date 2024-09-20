@@ -159,7 +159,7 @@ class Dungeon {
      * @param ignoreRequirement Whether to check if requirements are met. Defaults to false
      */
     public availableBosses(includeTrainers = true, ignoreRequirement = false): Boss[] {
-        // TODO: HLXII - We need this check as this method is called somewhere during initialization when App isn't initialized yet
+        // TODO: We need this check as this method is called somewhere during initialization when App isn't initialized yet
         // the requirement.isCompleted call can sometimes use the App object, which will cause this to crash
         // Once App is moved to modules, this check might be able to be removed.
         if (!App.game) {
