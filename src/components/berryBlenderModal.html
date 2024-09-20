@@ -13,7 +13,7 @@
             </div>
 
             <div data-bind="if: BlendingController.blendingModalTabSelected() === 'blendingRecipeView'">
-            <div class="modal-header text-center">                        
+                <div class="modal-header text-center">                        
                     <table style="width: 100%; table-layout:fixed; font-size: larger;">
                         <tr class="text-light">
                         <th class="bg-dark" colspan="5">Flavor Bank</th>
@@ -31,9 +31,9 @@
                             <td data-bind="text: App.game.blending.flavorBank[2]().toLocaleString('en-US')">Sweet</td>
                             <td data-bind="text: App.game.blending.flavorBank[3]().toLocaleString('en-US')">Bitter</td>
                             <td data-bind="text: App.game.blending.flavorBank[4]().toLocaleString('en-US')">Sour</td>
-                    </tr>
+                        </tr>
                     </table>
-            </div>
+                </div>
             </div>
 
             <div class="modal-body tab-content p-0" style="overflow-x: hidden;">
