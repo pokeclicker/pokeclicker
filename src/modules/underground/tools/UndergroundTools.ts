@@ -58,7 +58,7 @@ export default class UndergroundTools {
                     success: true,
                 };
             }),
-            new UndergroundTool(UndergroundToolType.Survey, 'Survey', 300, 0, 1, 1, () => {
+            new UndergroundTool(UndergroundToolType.Survey, 'Survey', 900, 0, 1, 1, () => {
                 // Get a list of unmined reward coordinates
                 const unminedRewardCoordinates = App.game.underground.mine.grid.reduce<number[]>((previousValue, currentValue, currentIndex) => {
                     if (currentValue.reward && currentValue.layerDepth > 0)
