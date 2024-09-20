@@ -6442,7 +6442,7 @@ TownList['Aquacorde Town'] = new Town(
     'Aquacorde Town',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [ AquacordeTownShop],
+    [AquacordeTownShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
     }
@@ -8828,7 +8828,7 @@ const JungleKoko1 = new NPC ('Koko', [
     'Could you go catch it and bring it back here? If you need help locating it, I\'m sure one of the students at the dojo they have there could help you.',
 ], {
     image: 'assets/images/npcs/Koko.png',
-    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 0), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2, GameConstants.AchievementOption.less )])
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 0), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2, GameConstants.AchievementOption.less )]),
 });
 const JungleKoko2 = new NPC ('Koko', [
     'Great, you found it! Now if you could release it... hmm? It seems to like you. Well, if it wants to stay with you, that\'s its choice, so I guess it\'s fine.',
@@ -8836,7 +8836,7 @@ const JungleKoko2 = new NPC ('Koko', [
     'Zaruza! Zaru Zaru! Zarude!.. Nope, they\'re too angry to listen. Looks like you\'ll have to fight them if we want to calm them down. Zarude are strong, but I\'m sure you\'ll be fine if you are anywhere near as strong as Ash.',
 ], {
     image: 'assets/images/npcs/Koko.png',
-    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 4, GameConstants.AchievementOption.less )])
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 4, GameConstants.AchievementOption.less )]),
 });
 const JungleKoko3 = new NPC ('Koko', [
     'Well, they\'re all knocked out. I\'ll try to talk reason into them when they wake up. Thanks for your help, I\'m glad you found Zarude safe.',
@@ -8844,14 +8844,14 @@ const JungleKoko3 = new NPC ('Koko', [
     'I\'m really sorry, it seems you\'ll have to fight off these ones as well.',
 ], {
     image: 'assets/images/npcs/Koko.png',
-    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 4), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 6, GameConstants.AchievementOption.less )])
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 4), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 6, GameConstants.AchievementOption.less )]),
 });
 const JungleKoko4 = new NPC ('Koko', [
     'Okay... It\'s great that you were able to knock them all out without hurting them too much, but I don\'t think I\'ll be able to calm all of them on my own when they wake up.',
     'Would you be able to bring Ash here? I think the 3 of us together should be able to calm the lot of them down. He\'s probably still at the Master Dojo.',
 ], {
     image: 'assets/images/npcs/Koko.png',
-    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 6), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9, GameConstants.AchievementOption.less )])
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 6), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9, GameConstants.AchievementOption.less )]),
 });
 const JungleAsh2 = new NPC ('Ash Ketchum', [
     'You\'re back! How did it go with the Zarude?',
@@ -8869,7 +8869,7 @@ const JungleKoko5 = new NPC ('Koko', [
     'I should tell you, Dada is much stronger than the rest of the Zarude. Have a good fight, both of you!',
 ], {
     image: 'assets/images/npcs/Koko.png',
-    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11, GameConstants.AchievementOption.less )])
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11, GameConstants.AchievementOption.less )]),
 });
 const JungleAsh3 = new NPC ('Ash Ketchum', [
     'Amazing, you even beat Dada! It\'s really clear that he is really amazed by your strength!',
@@ -8885,7 +8885,7 @@ const JungleKoko6 = new NPC ('Koko', [
     'If you help him with that, I\'m sure he\'ll join you!',
 ], {
     image: 'assets/images/npcs/Koko.png',
-    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13), new QuestLineCompletedRequirement('Secrets of the Jungle', GameConstants.AchievementOption.less )])
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13), new QuestLineCompletedRequirement('Secrets of the Jungle', GameConstants.AchievementOption.less )]),
 });
 const CrownShrineExplorer = new NPC('Explorer', [
     'Whew! This place is quite a trek from Freezington.',
