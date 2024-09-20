@@ -224,21 +224,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <div class="row justify-content-center">
-                            <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
-                                <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
-                                        value="1" min="1" required name="amountOfItems"
-                                        oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
-                                        onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
-                                    <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}" onclick="App.game.blending.buyPokeblock(BlendingController.selectedPokeBlock(), ShopHandler.amount())">
-                                        Buy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div id="blendingBuddiesView" class="tab-pane fade">
@@ -260,6 +245,48 @@
             </div>
 
             <div class="modal-footer">
+                <div class="row justify-content-center" data-bind="if: BlendingController.blendingModalTabSelected() === 'blendingRecipeView'">
+                    <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="BlendingController.resetAmount()">
+                                Reset
+                            </button>
+                        </div>
+                        <input id="recipeAmount" type="number" class="outline-dark form-control form-control-number"
+                                value="1" min="1" required name="recipeAmount"
+                                oninput="BlendingController.amount(parseInt($(this).val().toString(), 10) || 0);"
+                                onchange="BlendingController.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
+                        <div class="input-group-append">
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="BlendingController.increaseAmount(10)">
+                                    +10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="BlendingController.increaseAmount(100)">
+                                    +100
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="BlendingController.multiplyAmount(10)">
+                                    &times;10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="BlendingController.multiplyAmount(0.1)">
+                                    &div;10
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="BlendingController.increaseAmount(100)">
+                                    +100
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="BlendingController.increaseAmount(1000)">
+                                    +1,000
+                                </button>
+                            <!-- /ko -->
+                            <button class="btn-outline-dark" data-bind="attr: {class: BlendingController.calculateButtonCss()}" onclick="App.game.blending.buyPokeblock(BlendingController.selectedPokeBlock(), BlendingController.amount())">
+                                Buy
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
 
