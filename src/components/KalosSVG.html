@@ -714,6 +714,36 @@
     %>
 
      <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Shauna"
+         , x: 56, y: 43
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Shauna 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Shauna 1'] && TemporaryBattleList['Shauna 1'].isVisible()"
+         , image: "assets/images/map/shauna.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Tierno"
+         , x: 38, y: 28
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Tierno 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Tierno 1'] && TemporaryBattleList['Tierno 1'].isVisible()"
+         , image: "assets/images/map/tierno.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Trevor & Pokémon Trainer Tierno"
+         , x: 28, y: 29
+         , width: 8, height: 4
+         , databind: "click: () => TemporaryBattleList['Trevor & Tierno'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Trevor & Tierno'] && TemporaryBattleList['Trevor & Tierno'].isVisible()"
+         , image: "assets/images/map/trevortierno.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
          { name: "Pokémon Trainer Calem"
          , x: 14, y: 15
          , width: 4, height: 4
@@ -750,6 +780,36 @@
          , databind: "click: () => TemporaryBattleList['Calem 4'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Calem 4'] && TemporaryBattleList['Calem 4'].isVisible()"
          , image: "assets/images/map/calem.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Shauna"
+         , x: 78, y: 29
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Shauna 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Shauna 2'] && TemporaryBattleList['Shauna 2'].isVisible()"
+         , image: "assets/images/map/shauna.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Tierno"
+         , x: 78, y: 29
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Tierno 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Tierno 2'] && TemporaryBattleList['Tierno 2'].isVisible()"
+         , image: "assets/images/map/tierno.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Trevor"
+         , x: 78, y: 29
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Trevor'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Trevor'] && TemporaryBattleList['Trevor'].isVisible()"
+         , image: "assets/images/map/shauna.png"
          })
      %>
 
