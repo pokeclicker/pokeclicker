@@ -159,12 +159,13 @@
                             </div>
                         </div>
 
-                        <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
                         <div class="card">
                             <div class="card-header p-2 font-weight-bold position-relative">
                                 Battery
                                 <button class="btn btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 100%;" data-bind="click: () => $('#undergroundBatteryModal').modal('show');">?</button>
                             </div>
+
+                            <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
                             <div class="card-body p-2">
                                 <div class="progress mb-2" style='height: 15px; min-height: 15px;'>
                                     <div class="progress-bar" role="progressbar"
@@ -176,8 +177,13 @@
 
                                 <button class="btn btn-primary" data-bind="click: () => App.game.underground.battery.discharge(), attr: { disabled: App.game.underground.battery.charges < App.game.underground.battery.maxCharges }">Discharge</button>
                             </div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
+                            <div class="card-body p-2">
+                                <p>Equip your Cell Battery Oak Item to use the Battery.</p>
+                            </div>
+                            <!-- /ko -->
                         </div>
-                        <!-- /ko -->
                         <!-- /ko -->
                     </div>
                 </div>
@@ -883,8 +889,9 @@
                             <thead>
                             <tr>
                                 <th>Tier</th>
-                                <th colspan="2">Name</th>
-                                <th>Requirements</th>
+                                <th></th>
+                                <th class="text-left">Name</th>
+                                <th class="text-left">Requirements</th>
                                 <th>Chance</th>
                             </tr>
                             </thead>
@@ -901,7 +908,7 @@
                                             }, visible: !$data.canAccess()" />
                                 </td>
                                 <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
-                                <td class="vertical-middle" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
+                                <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
                                 <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
                             </tr>
                             <!-- /ko -->
