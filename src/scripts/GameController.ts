@@ -202,16 +202,6 @@ class GameController {
                         App.game.underground.tools.selectedToolType = UndergroundToolType.Survey;
                         return e.preventDefault();
                 }
-                if (isNumberKey) {
-                    if (numberKey === 0) {
-                        ItemList.SmallRestore.use(1);
-                    } else if (numberKey === 1) {
-                        ItemList.MediumRestore.use(1);
-                    } else if (numberKey === 2) {
-                        ItemList.LargeRestore.use(1);
-                    }
-                    return e.preventDefault();
-                }
             }
             if ($oakItemsModal.data('bs.modal')?._isShown) {
                 // Toggle oak items
