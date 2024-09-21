@@ -185,7 +185,7 @@
                                 <div class="col-6 col-sm-4 col-lg-3">
                                 <button class="shopItem clickable btn btn-block btn-secondary"
                                     data-bind="click: function() {BlendingController.selectedPokeBlock($data);},
-                                    css: { active: BlendingController.selectedPokeBlock($data) == $data },
+                                    css: { active: BlendingController.selectedPokeBlock() == $data },
                                     tooltip: {
                                         title: $data.description ? `<u>${$data.displayName}:</u><br/>${$data.description}` : '',
                                         trigger: 'hover',

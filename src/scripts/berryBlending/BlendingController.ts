@@ -3,7 +3,7 @@ class BlendingController {
     public static blendingModalTabSelected: KnockoutObservable<string> = ko.observable('blendingView');
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
-    public static selectedPokeBlock: KnockoutObservable<Item> = ko.observable(ItemList.Pokeblock_Red);
+    public static selectedPokeBlock: KnockoutObservable<Item> = ko.observable(ItemList.PokeBlock_Red);
 
     public static getPokeblockList() {
         return Object.values(ItemList).filter((i) => i instanceof PokeBlock);
@@ -42,4 +42,16 @@ class BlendingController {
     }
 
     static amount: KnockoutObservable<number> = ko.observable(1);
+
+    public static calculateButtonCss(): string {
+        const item: Item = this.selectedPokeBlock();
+
+        if (item && (item as PokeBlock).flavors.some((flavor) =>
+            !App.game.blending.hasAmount(new FlavorAmount(flavor.value * this.amount(), flavor.type)))
+                || this.amount() < 1) {
+            return 'btn btn-danger smallButton smallFont';
+        } else {
+            return 'btn btn-success smallButton smallFont';
+        }
+    }
 }
