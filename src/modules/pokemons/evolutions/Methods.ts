@@ -47,7 +47,7 @@ export const AnyDungeonLevelEvolution = anyDungeonRestrict(LevelEvolution);
 export const AnyGymLevelEvolution = anyGymRestrict(LevelEvolution);
 
 // EnvironmentRestrictedLevelEvolution(environment: Environment, basePokemon: string, evolvedPokemon: string, level: number)
-// an Environment is any key of GameConstants.Environments, eg 'Cave' or 'PowerPlant'
+// an Environment is any key of GameConstants.Environments, eg 'MossRock' or 'TrashCloak'
 export const EnvironmentRestrictedLevelEvolution = environmentRestrict(LevelEvolution);
 
 // EnvironmentDungeonLevelEvolution(environment: Environment, basePokemon: string, evolvedPokemon: string, level: number)

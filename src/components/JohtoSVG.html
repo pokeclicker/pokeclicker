@@ -764,25 +764,12 @@
         })
      %>
 
-     <%- include('templates/mapOverlay',
-         { name: "Professor Elm's Blimp"
-         , x: 74, y: 45
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_empty.png"
-         })
-     %>
-
-     <%- include('templates/mapOverlay',
-         { name: "Professor Elm's Blimp"
-         , x: 74, y: 45
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_pikachu.png"
-         })
-     %>
+    <%- include('templates/mapBlimp',
+        { name: "Professor Elm"
+        , x: 74, y: 45
+        , town: "New Bark Town"
+        })
+    %>
 
      <%- include('templates/mapOverlay',
          { name: "Sudowoodo"
