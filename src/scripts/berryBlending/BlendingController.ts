@@ -24,4 +24,6 @@ class BlendingController {
         const newVal = (parseInt(this.amountInput().val().toString(), 10) || 0) * n;
         this.amountInput().val(newVal > 1 ? newVal : 1).change();
     }
+
+    static amount: KnockoutObservable<number> = ko.observable(1);
 }
