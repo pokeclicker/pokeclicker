@@ -25,5 +25,21 @@ class BlendingController {
         this.amountInput().val(newVal > 1 ? newVal : 1).change();
     }
 
+    public static maxAmount() {
+        const item: Item = this.selectedPokeBlock();
+
+        if (!item) {
+            return this.amountInput().val(0).change();
+        }
+
+        const tooMany = (amt: number) => (item as PokeBlock).flavors.some((flavor) =>
+            !App.game.blending.hasAmount(new FlavorAmount(flavor.value * amt, flavor.type))
+        );
+
+        const amt = GameHelper.binarySearch(tooMany, 0, Number.MAX_SAFE_INTEGER);
+
+        this.amountInput().val(amt).change();
+    }
+
     static amount: KnockoutObservable<number> = ko.observable(1);
 }

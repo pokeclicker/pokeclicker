@@ -119,10 +119,6 @@ class Blending implements Feature {
         return block.flavors.forEach((flavor) => this.loseAmount(new FlavorAmount(flavor.value * amount, flavor.type)));
     }
 
-    public amountText(flavor: FlavorType) {
-        return this.flavorBank[flavor]().toLocaleString('en-US');
-    }
-
     public buyPokeblock(block: PokeBlock, amount: number) {
         let blockFlavors = [block.flavors[0], block.flavors[1], block.flavors[2], block.flavors[3], block.flavors[4]];
 
