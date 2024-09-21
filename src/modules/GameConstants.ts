@@ -1615,31 +1615,6 @@ export const HoennDungeons = [
     'Cipher Key Lair',
     'Citadark Isle',
     'Citadark Isle Dome', // 77
-    // These aren't implemented anywhere yet
-    /*
-    "Island Cave",
-    "Desert Ruins",
-    "Scorched Slab",
-    "Ancient Tomb",
-    "Artisan Cave",
-    "Desert Underpass",
-    "Marine Cave",
-    "Terra Cave",
-    "Southern Island",
-    "Faraway Island",
-    "Birth Island",
-    "Devon Corporation",
-    "Oceanic Museum",
-    "Mirage Tower",
-    "Safari Zone",
-    "Mirage Island",
-    "Battle Tower",
-    "Trainer Hill",
-    "Abandoned Ship",
-    "Battle Maison",
-    "Battle Resort",
-    "Mirage Spots",
-    */
 ];
 
 export const SinnohDungeons = [

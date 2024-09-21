@@ -43,15 +43,25 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-center px-2" style="font-size: 1.8rem;" data-bind="text: player.town.name">Town Name</div>
+                <div class="d-flex justify-content-center px-2" style="font-size: 1.8rem;">
+                    <knockout data-bind="text: player.town.name">Town Name</knockout>
+                </div>
 
                 <div class="title-right" data-bind="if: isDungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
-                    <div class="d-flex flex-column justify-content-center small mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
-                        <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
-                        <div style="line-height: normal;">clears</div>
-                    </div>
-                    <div class="px-1 clickable d-inline-block ml-1" style="align-self: center;" data-bind="tooltip: { title: 'Check the Loot available here', trigger: 'hover' }, click: function() { $('#dungeonInfoModal').modal('show') }" data-original-title="" title="">
-                        <img src="assets/images/encountersInfo/encountersInfo.png">
+                    <div class="d-flex ml-auto">
+                        <knockout class="h4 text-danger no-emoji-font mr-2 mb-0 align-self-center" data-bind="
+                            visible: player.highestRegion() - 2 > player.region,
+                            tooltip: {
+                                title: 'This dungeon is debuffed and will be significantly less likely to drop Epic, Legendary, and Mythic loot.',
+                                trigger: 'hover',
+                            }">⚠</knockout>
+                        <div class="d-flex flex-column justify-content-center small mr-1" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
+                            <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
+                            <div style="line-height: normal;">clears</div>
+                        </div>
+                        <div class="px-1 clickable d-inline-block ml-1 align-self-center" data-bind="tooltip: { title: 'See the Loot available in this dungeon.', trigger: 'hover' }, click: function() { $('#dungeonInfoModal').modal('show') }" data-original-title="" title="">
+                            <img src="assets/images/encountersInfo/encountersInfo.png">
+                        </div>
                     </div>
                 </div>
             </div>
