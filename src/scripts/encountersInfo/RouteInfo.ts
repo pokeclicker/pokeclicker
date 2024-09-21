@@ -4,22 +4,74 @@ class RouteInfo {
     });
 
     public static getPokemonList() {
-        const route = player.route;
-        const region = player.region;
-        const subregion = player.subregion;
-
+        const pokemonList = Routes.getRoute(player.region, player.route)?.pokemon;
         const pokemonArray = [];
-        const roamerGroup = RoamingPokemonList.findGroup(region, subregion);
-        const roamingList = RoamingPokemonList.getSubRegionalGroupRoamers(region, roamerGroup);
-        [...new Set(RouteHelper.getAvailablePokemonList(route, region))].forEach(pokemonName => {
-            pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, roamer: false});
-        });
-        if (roamingList.length) {
-            [...new Set(RoamingPokemonList.getSubRegionalGroupRoamers(region, roamerGroup))].forEach(pokemon => {
-                pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemon.pokemonName).id, name: pokemon.pokemonName, roamer: true});
+        if (pokemonList) {
+            [...new Set(pokemonList.land)].forEach(pokemonName => {
+                pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'land'});
             });
+
+            if (App.game.keyItems.hasKeyItem(KeyItemType.Super_rod) || pokemonList.land.length == 0) {
+                [...new Set(pokemonList.water)].forEach(pokemonName => {
+                    pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'water', fishing: pokemonList.land.length != 0});
+                });
+            }
+
+            [...new Set(pokemonList.headbutt)].forEach(pokemonName => {
+                pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'headbutt'});
+            });
+
+            pokemonList.special.filter(p => p.isAvailable()).forEach(special => {
+                [...new Set(special.pokemon)].forEach(pokemonName => {
+                    pokemonArray.push({id: PokemonHelper.getPokemonByName(pokemonName).id, name: pokemonName, type: 'special', requirement: special.req});
+                });
+            });
+
+            pokemonArray.sort((a, b) => a.id - b.id);
         }
-        return pokemonArray;
+
+        const roamerArray =
+            RoamingPokemonList.getSubRegionalGroupRoamers(player.region, RoamingPokemonList.findGroup(player.region, player.subregion))
+                .map((roamer) => ({id: roamer.pokemon.id, name: roamer.pokemonName, type: 'roamer', requirement: roamer.unlockRequirement}))
+                .sort((a, b) => a.id - b.id);
+
+        return roamerArray.length ? {pokemons: pokemonArray, roamers: roamerArray} : {pokemons: pokemonArray};
+    }
+
+    public static getInformations(pokemon) {
+        if (pokemon.type == 'roamer') {
+            if (RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
+                return {tooltip: 'Event Roaming Pokémon', image: 'event_roaming.png'};
+            } else {
+                return {tooltip: 'Roaming Pokémon', image: 'roaming.png'};
+            }
+        } else if (pokemon.type == 'special') {
+            if (RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
+                return {tooltip: 'Event Pokémon', image: 'event.png'};
+            } else if (RouteInfo.hasRequirement(pokemon.requirement, WeatherRequirement)) {
+                return {tooltip: 'Weather Pokémon', image: 'weather.png'};
+            } else if (RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement)) {
+                return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
+            }
+        } else if (pokemon.type == 'water' && pokemon.fishing) {
+            return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};
+        }
+        return null;
+    }
+
+    private static hasRequirement(requirement, type) {
+        //I traverse all the Requirement tree recursively to check if one of the requirements is the one I want
+        if (requirement instanceof type) {
+            return true;
+        }
+        if (requirement?.requirements) {
+            for (const req of requirement.requirements) {
+                if (RouteInfo.hasRequirement(req, type)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static getFullName() {

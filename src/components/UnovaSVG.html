@@ -900,23 +900,10 @@
         })
     %>
 
-    <%- include('templates/mapOverlay',
-        { name: "Professor Juniper's Blimp"
-        , x: 10, y: 48
-        , width: 6, height: 3
-        , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-        , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-        , image: "assets/images/map/blimp_empty.png"
-        })
-    %>
-
-    <%- include('templates/mapOverlay',
-        { name: "Professor Juniper's Blimp"
-        , x: 10, y: 48
-        , width: 6, height: 3
-        , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-        , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-        , image: "assets/images/map/blimp_pikachu.png"
+    <%- include('templates/mapBlimp',
+        { name: "Professor Juniper"
+        , x: 11, y: 48
+        , town: "Aspertia City"
         })
     %>
 

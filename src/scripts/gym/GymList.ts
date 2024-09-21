@@ -156,7 +156,7 @@ GymList['Elite Lorelei'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Earth)],
     undefined,
     undefined,
-    { environment: 'Ice' }
+    { battleBackground: 'Ice' }
 );
 GymList['Elite Bruno'] = new Gym(
     'Bruno',
@@ -174,7 +174,7 @@ GymList['Elite Bruno'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lorelei)],
     undefined,
     undefined,
-    { environment: 'Cave' }
+    { battleBackground: 'Cave' }
 );
 GymList['Elite Agatha'] = new Gym(
     'Agatha',
@@ -192,7 +192,7 @@ GymList['Elite Agatha'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno)],
     undefined,
     undefined,
-    { environment: 'Graveyard' }
+    { battleBackground: 'Graveyard' }
 );
 GymList['Elite Lance'] = new Gym(
     'Lance',
@@ -210,7 +210,7 @@ GymList['Elite Lance'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Agatha)],
     undefined,
     undefined,
-    { environment: 'GemCave' }
+    { battleBackground: 'GemCave' }
 );
 // Kanto Champion
 GymList['Champion Blue'] = new Gym(
@@ -239,7 +239,7 @@ GymList['Champion Blue'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
     () => {},
     { champion: true },
-    { environment: 'GemCave' }
+    { battleBackground: 'GemCave' }
 );
 
 //Johto Gyms
@@ -1061,7 +1061,6 @@ GymList['Champion Cynthia'] = new Gym(
 );
 
 //Unova Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Aspertia City'] = new Gym(
     'Cheren',
     'Aspertia City',
@@ -1177,7 +1176,6 @@ GymList['Humilau City'] = new Gym(
 );
 
 //Unova Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
 GymList['Elite Shauntal'] = new Gym(
     'Shauntal',
     'Elite Shauntal',
@@ -1265,7 +1263,6 @@ GymList['Champion Iris'] = new Gym(
 );
 
 //Kalos Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Santalune City'] = new Gym(
     'Viola',
     'Santalune City',
@@ -1369,7 +1366,6 @@ GymList['Snowbelle City'] = new Gym(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))]
 );
 //Kalos Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
 GymList['Elite Malva'] = new Gym(
     'Malva',
     'Elite Malva',

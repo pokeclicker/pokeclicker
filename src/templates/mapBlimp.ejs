@@ -1,0 +1,33 @@
+<% /* %>
+
+Parameters:
+    - name : Required : String
+        The name of this overlay.
+
+    - x : Required : Number
+        The x axis position of this overlay element.
+
+    - y : Required : Number
+        The y axis position of this overlay element.
+
+    - town : Required : String
+        Any knockout data-bind needed for this element to function.   
+
+
+<% */ %>
+<image
+    x="<%= locals.x * 16 %>"
+    y="<%= locals.y * 16 %>"
+    data-bind="visible: MapHelper.ableToTravel(), attr: {'xlink:href':MapHelper.getBlimpData().image, href:MapHelper.getBlimpData().image, width: MapHelper.getBlimpData().width, height: MapHelper.getBlimpData().height}"/>
+<rect class="city"
+    x="<%= locals.x * 16 %>"
+    y="<%= locals.y * 16 %>"
+    data-bind="visible: MapHelper.ableToTravel(), 
+               click: function() { MapHelper.moveToTown('<%= locals.town%>') }, 
+               attr: { class: MapHelper.calculateTownCssClass('<%= locals.town%>'), 
+                       width: MapHelper.getBlimpData().width, 
+                       height: MapHelper.getBlimpData().height,
+                       },
+                       event: { mouseenter: () => GameController.showMapTooltip(MapHelper.getBlimpData('<%= locals.name %>').name), 
+                                mouseleave: GameController.hideMapTooltip }">
+</rect>
