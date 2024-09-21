@@ -7,14 +7,10 @@
                 <div class="title-left" data-bind="if: isDungeon">
                     <div class="d-flex align-items-center ml-1 mr-auto">
                         <div class="d-flex flex-column">
-                            <!--If all Pokémon in the dungeon are caught-->
-                            <div data-bind="if: (!DungeonRunner.dungeonCompleted(player.town.dungeon, true) && DungeonRunner.dungeonCompleted(player.town.dungeon, false))" style="font-size: 0;">
-                                <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball.svg" />
-                            </div>
-
-                            <!--If all Pokémon in the dungeon are caught shiny-->
-                            <div data-bind="if: DungeonRunner.dungeonCompleted(player.town.dungeon, true)" style="font-size: 0;">
-                                <img title="You have captured all Pokémon shiny in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                            <!--If all Pokémon in the dungeon are caught or caught shiny-->
+                            <div data-bind="if: DungeonRunner.dungeonCompleted(player.town.dungeon, false)" style="font-size: 0;">
+                                <img class="pokeball-smallest ml-0" data-bind="attr: { src: `assets/images/pokeball/Pokeball${DungeonRunner.dungeonCompleted(player.town.dungeon, true) ? '-shiny' : ''}.svg` },
+                                tooltip: { trigger: 'hover', placement: 'bottom', title: `You have captured all Pokémon${DungeonRunner.dungeonCompleted(player.town.dungeon, true) ? ' shiny' : ''} in this dungeon!`}"/>
                             </div>
 
                             <!--Pokérus image-->
@@ -24,7 +20,8 @@
                                 tooltip: {
                                     title: RouteHelper.dungeonPokerusEVs(player.town.dungeon),
                                     placement: 'bottom',
-                                    trigger: 'hover'
+                                    trigger: 'hover',
+                                    html: true
                                 }" />
                             </div>
                         </div>
