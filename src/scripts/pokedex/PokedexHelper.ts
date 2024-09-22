@@ -19,7 +19,7 @@ class PokedexHelper {
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
 
-        if (!this.pokemonSeen(pokemon.id)()) {
+        if (!this.pokemonSeen(pokemon.id)) {
             return 'grey';
         }
         if (pokemon.type2 == PokemonType.None) {
@@ -33,14 +33,12 @@ class PokedexHelper {
      * @param {number} id
      * @returns {boolean}
      */
-    public static pokemonSeen(id: number): KnockoutComputed<boolean> {
-        return ko.pureComputed(() => {
-            try {
-                return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id) || App.game.statistics.pokemonSeen[id]() > 0;
-            } catch (error) {
-                return false;
-            }
-        });
+    public static pokemonSeen(id: number): boolean {
+        try {
+            return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id) || App.game.statistics.pokemonSeen[id]() > 0;
+        } catch (error) {
+            return false;
+        }
     }
 
     private static cachedFilteredList: typeof pokemonList;
