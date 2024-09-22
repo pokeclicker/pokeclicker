@@ -2,7 +2,7 @@ class BerryDeal {
     public berries: { berryType: BerryType, amount: number}[];
     public item: { itemType: Item, amount: number};
 
-    public static list: Record<GameConstants.BerryTraderLocations, KnockoutObservableArray<BerryDeal>> = {};
+    public static list: Partial<Record<GameConstants.BerryTraderLocations, KnockoutObservableArray<BerryDeal>>> = {};
 
     constructor(berry: BerryType[], berryAmount: number[], item: Item, itemAmount: number) {
         this.berries = [];
@@ -30,7 +30,7 @@ class BerryDeal {
     }
 
     private static randomEvoItem(): Item {
-        const evoItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.StoneType).filter(name => !(['None', 'Black_DNA', 'White_DNA', 'Solar_light', 'Key_stone', 'Lunar_light', 'Pure_light', 'Black_mane_hair', 'White_mane_hair']).includes(name)));
+        const evoItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.StoneType).filter(name => !(['None', 'Black_DNA', 'White_DNA', 'Solar_light', 'Key_stone', 'Lunar_light', 'Pure_light', 'Crystallized_shadow', 'Black_mane_hair', 'White_mane_hair']).includes(name)));
         return ItemList[evoItem];
     }
 

@@ -1,3 +1,5 @@
+type OverworldSpriteType = 'base' | 'self' | PokemonNameType;
+
 class SafariEncounter {
     public requirement: Requirement;
     constructor(
@@ -5,7 +7,8 @@ class SafariEncounter {
         public weight: number,
         public environments: SafariEnvironments[] = [SafariEnvironments.Grass],
         requirement?: true | Requirement, // True is used to simplify Friend Safari Pokémon generation
-        public hide = true // Hide from the list
+        public hide = true, // Hide from the list
+        public sprite : OverworldSpriteType = 'base'
     ) {
         this.requirement = requirement === true ? new ObtainedPokemonRequirement(this.name) : requirement;
     }
@@ -16,17 +19,21 @@ class SafariEncounter {
 }
 
 class SafariPokemonList {
-    public static list: Record<GameConstants.Region, KnockoutObservable<Array<SafariEncounter>>> = {
+    public static list: Partial<Record<GameConstants.Region, KnockoutObservable<Array<SafariEncounter>>>> = {
         [GameConstants.Region.kanto]: ko.observableArray(),
         [GameConstants.Region.johto]: ko.observableArray(),
         [GameConstants.Region.sinnoh]: ko.observableArray(),
         [GameConstants.Region.kalos]: ko.observableArray(),
+        [GameConstants.Region.alola]: ko.observableArray(),
     };
 
     public static generateSafariLists() {
         this.generateKantoSafariList();
         this.generateJohtoSafariList();
         this.generateSinnohSafariList();
+        this.generateAlolaSafariList();
+
+        // Always generate Kalos Safari last
         this.generateKalosSafariList();
     }
 
@@ -196,6 +203,35 @@ class SafariPokemonList {
         pokemon.push(new SafariEncounter('Lapras', 2, [SafariEnvironments.Water]));
 
         SafariPokemonList.list[GameConstants.Region.kalos](pokemon);
+    }
+
+    private static generateAlolaSafariList() {
+        // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
+        // Filler
+        const pokemon : SafariEncounter[] = [
+            // Grass
+            new SafariEncounter('Pidgeotto', 2.7),
+            // Water
+            new SafariEncounter('Magikarp', 0.7, [SafariEnvironments.Water]),
+            new SafariEncounter('Magikarp Skelly', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Quick_League), false, 'self'),
+            new SafariEncounter('Magikarp Calico (White, Orange)', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpen'), false, 'self'),
+            new SafariEncounter('Magikarp Pink Dapples', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Fast_League), false, 'self'),
+            new SafariEncounter('Magikarp Grey Diamonds', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpress 3'), false, 'self'),
+            new SafariEncounter('Magikarp Purple Bubbles', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Heal_League), false, 'self'),
+            new SafariEncounter('Magikarp Purple Patches', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Karpella 3'), false, 'self'),
+            new SafariEncounter('Magikarp Brown Tiger', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.Ultra_League), false, 'self'),
+            new SafariEncounter('Magikarp Orange Forehead', 2, [SafariEnvironments.Water], new GymBadgeRequirement(BadgeEnums.E4_League), false, 'self'),
+            new SafariEncounter('Magikarp Black Mask', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Tykarp 2'), false, 'self'),
+            new SafariEncounter('Magikarp Saucy Blue', 2, [SafariEnvironments.Water], new QuestLineCompletedRequirement('Dr. Splash\'s Research Project'), false, 'self'),
+            // Both, meme encounter
+            new SafariEncounter('Ditto (Magikarp)', 0.3, [SafariEnvironments.Water, SafariEnvironments.Grass],
+                new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => Math.floor(p.id) === pokemonMap.Magikarp.id, 'Catch more Magikarp species.', 6),
+                false,
+                'Magikarp'
+            ),
+        ];
+
+        SafariPokemonList.list[GameConstants.Region.alola](pokemon);
     }
 
     // Get SafariEnvironment according to the Pokemon types

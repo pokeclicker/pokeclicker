@@ -1,5 +1,5 @@
 /**
- * TODO(@Isha) refactor this to no longer be global but App properties.
+ * TODO refactor this to no longer be global but App properties.
  * Will be done after the major player refactor.
  */
 let player;

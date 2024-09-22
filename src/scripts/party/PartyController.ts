@@ -1,6 +1,6 @@
 ///<reference path="../../declarations/globals.d.ts"/>
 
-declare const modalUtils: { observableState: typeof observableState };
+declare const DisplayObservables: { modalState: typeof modalState };
 
 class PartyController {
 
@@ -154,9 +154,9 @@ class PartyController {
     }).extend({ rateLimit: 500 });
 
     private static vitaminSortedList = [];
-    static getvitaminSortedList = ko.pureComputed(() => {
+    static getVitaminSortedList = ko.pureComputed(() => {
         // If the vitamin modal is open, we should sort it.
-        if (modalUtils.observableState.pokemonVitaminModal === 'show' || modalUtils.observableState.pokemonVitaminExpandedModal === 'show') {
+        if (DisplayObservables.modalState.pokemonVitaminModal === 'show' || DisplayObservables.modalState.pokemonVitaminExpandedModal === 'show') {
             PartyController.vitaminSortedList = PartyController.getVitaminFilteredList();
             return PartyController.vitaminSortedList.sort(PartyController.compareBy(Settings.getSetting('vitaminSort').observableValue(), Settings.getSetting('vitaminSortDirection').observableValue()));
         }
@@ -191,7 +191,7 @@ class PartyController {
     private static heldItemSortedList = [];
     static getHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
-        if (modalUtils.observableState.heldItemModal === 'show') {
+        if (DisplayObservables.modalState.heldItemModal === 'show') {
             PartyController.heldItemSortedList = PartyController.getHeldItemFilteredList();
             return PartyController.heldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
         }
@@ -229,7 +229,7 @@ class PartyController {
     private static consumableSortedList = [];
     static getConsumableSortedList = ko.pureComputed(() => {
         // If the consumable modal is open, we should sort it.
-        if (modalUtils.observableState.consumableModal === 'show') {
+        if (DisplayObservables.modalState.consumableModal === 'show') {
             PartyController.consumableSortedList = PartyController.getConsumableFilteredList();
             return PartyController.consumableSortedList.sort(PartyController.compareBy(Settings.getSetting('consumableSort').observableValue(), Settings.getSetting('consumableSortDirection').observableValue()));
         }
@@ -265,7 +265,7 @@ class PartyController {
     private static pokemonsWithHeldItemSortedList = [];
     static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
-        if (modalUtils.observableState.heldItemModal === 'show') {
+        if (DisplayObservables.modalState.heldItemModal === 'show') {
             PartyController.pokemonsWithHeldItemSortedList = App.game.party.caughtPokemon.filter(p => p.heldItem());
             return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
         }

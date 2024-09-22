@@ -156,7 +156,7 @@ GymList['Elite Lorelei'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Earth)],
     undefined,
     undefined,
-    { environment: 'Ice' }
+    { battleBackground: 'Ice' }
 );
 GymList['Elite Bruno'] = new Gym(
     'Bruno',
@@ -174,7 +174,7 @@ GymList['Elite Bruno'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lorelei)],
     undefined,
     undefined,
-    { environment: 'Cave' }
+    { battleBackground: 'Cave' }
 );
 GymList['Elite Agatha'] = new Gym(
     'Agatha',
@@ -192,7 +192,7 @@ GymList['Elite Agatha'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno)],
     undefined,
     undefined,
-    { environment: 'Graveyard' }
+    { battleBackground: 'Graveyard' }
 );
 GymList['Elite Lance'] = new Gym(
     'Lance',
@@ -210,7 +210,7 @@ GymList['Elite Lance'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Agatha)],
     undefined,
     undefined,
-    { environment: 'GemCave' }
+    { battleBackground: 'GemCave' }
 );
 // Kanto Champion
 GymList['Champion Blue'] = new Gym(
@@ -239,7 +239,7 @@ GymList['Champion Blue'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
     () => {},
     { champion: true },
-    { environment: 'GemCave' }
+    { battleBackground: 'GemCave' }
 );
 
 //Johto Gyms
@@ -609,7 +609,7 @@ GymList['Elite Drake'] = new Gym(
     [
         new GymPokemon('Shelgon', 1064000, 52),
         new GymPokemon('Altaria', 1072000, 54),
-        new GymPokemon('Flygon', 1076000, 53),
+        new GymPokemon('Kingdra', 1076000, 53),
         new GymPokemon('Flygon', 1076000, 53),
         new GymPokemon('Salamence', 1157000, 55),
     ],
@@ -1061,7 +1061,6 @@ GymList['Champion Cynthia'] = new Gym(
 );
 
 //Unova Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Aspertia City'] = new Gym(
     'Cheren',
     'Aspertia City',
@@ -1177,7 +1176,6 @@ GymList['Humilau City'] = new Gym(
 );
 
 //Unova Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
 GymList['Elite Shauntal'] = new Gym(
     'Shauntal',
     'Elite Shauntal',
@@ -1265,7 +1263,6 @@ GymList['Champion Iris'] = new Gym(
 );
 
 //Kalos Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Santalune City'] = new Gym(
     'Viola',
     'Santalune City',
@@ -1369,7 +1366,6 @@ GymList['Snowbelle City'] = new Gym(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))]
 );
 //Kalos Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
 GymList['Elite Malva'] = new Gym(
     'Malva',
     'Elite Malva',
@@ -1618,7 +1614,14 @@ GymList['Friend League'] = new Gym(
     10000,
     'Your Karp is really Magic!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 31)],
-    undefined,
+    () => {
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
+    },
     undefined,
     { imageName: 'Jump Champ Red' }
 );
@@ -1632,15 +1635,12 @@ GymList['Quick League'] = new Gym(
     'Looks like I flailed...',
     [new TemporaryBattleRequirement('Magikarp Jump Koylee')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Skelly')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Skelly!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Skelly', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     { imageName: 'Jump Champ Blue' }
@@ -1655,15 +1655,12 @@ GymList['Heavy League'] = new Gym(
     'Karpe Diem',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two-Tone')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Orange Two-Tone!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Orange Two-Tone', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1680,7 +1677,14 @@ GymList['Great League'] = new Gym(
     11500,
     'Guess ya got me. Hook, line and sinker!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress')],
-    undefined,
+    () => {
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
+    },
     undefined,
     { imageName: 'Jump Champ Blue' }
 );
@@ -1694,15 +1698,12 @@ GymList['Fast League'] = new Gym(
     'This life is not for me... I will become a Karpenter now...',
     [new TemporaryBattleRequirement('Magikarp Jump Karson')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Dapples')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Pink Dapples!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Pink Dapples', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1720,15 +1721,12 @@ GymList['Luxury League'] = new Gym(
     'Just wait \'til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Orca')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Pink Orca!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Pink Orca', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1746,15 +1744,12 @@ GymList['Heal League'] = new Gym(
     'I\'m getting more old than my rod...',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella 2')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Purple Bubbles')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Purple Bubbles!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Purple Bubbles', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     { imageName: 'Jump Champ Blue' }
@@ -1769,15 +1764,12 @@ GymList['Ultra League'] = new Gym(
     'I knew I smelled something fishy...',
     [new TemporaryBattleRequirement('Magikarp Jump Koylee 2')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Brown Tiger')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Brown Tiger!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Brown Tiger', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1795,15 +1787,12 @@ GymList['E4 League'] = new Gym(
     'That jump really splashed!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella 3')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Forehead')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Orange Forehead!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Orange Forehead', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1819,7 +1808,15 @@ GymList['Master League'] = new Gym(
     BadgeEnums.Master_League,
     13000,
     'Mayor Karp will be proud of you!',
-    [new TemporaryBattleRequirement('Magikarp Jump Tykarp 2')]
+    [new TemporaryBattleRequirement('Magikarp Jump Tykarp 2')],
+    () => {
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
+    }
 );
 
 //Galar Leaders

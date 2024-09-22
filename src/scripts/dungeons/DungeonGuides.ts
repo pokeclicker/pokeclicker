@@ -36,11 +36,8 @@ class DungeonGuide {
                 switch (DungeonRunner.map.currentTile().type()) {
                     case GameConstants.DungeonTileType.chest:
                     case GameConstants.DungeonTileType.boss:
-                        DungeonRunner.handleInteraction();
-                        break;
                     case GameConstants.DungeonTileType.ladder:
                         DungeonRunner.handleInteraction();
-                        DungeonRunner.map.playerMoved(true);
                         break;
                 }
             } catch (e) {
@@ -199,7 +196,7 @@ DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way arou
     }));
 
 
-DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile near them!',
+DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is a treasure chest on a tile near them!',
     [[4, GameConstants.Currency.money],[1, GameConstants.Currency.dungeonToken]], [],
     2000,
     () => {
