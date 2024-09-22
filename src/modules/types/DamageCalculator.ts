@@ -1,5 +1,5 @@
 import PokemonType from '../enums/PokemonType';
-import { Region } from '../GameConstants';
+import { AlolaSubRegions, Region } from '../GameConstants';
 import WeatherType from '../weather/WeatherType';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
 import GameHelper from '../GameHelper';
@@ -9,6 +9,7 @@ export default class DamageCalculator {
     public static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     public static type2 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     public static region = ko.observable(Region.none);
+    public static subregion = ko.observable(-1);
     public static weather = ko.observable(WeatherType.Clear);
     public static includeBreeding = ko.observable(false);
     public static baseAttackOnly = ko.observable(false);
@@ -18,6 +19,13 @@ export default class DamageCalculator {
     public static observableTypeDamageArray = ko.pureComputed(DamageCalculator.getDamageByTypes);
     public static observableTypeDetails = ko.pureComputed(DamageCalculator.getTypeDetail);
     public static observableTotalDamage = ko.pureComputed(DamageCalculator.totalDamage);
+
+    public static initialize(): void {
+        DamageCalculator.region.subscribe((value) => {
+            const subregion = value == Region.none ? -1 : 0;
+            DamageCalculator.subregion(subregion);
+        });
+    }
 
     public static totalDamage(): number {
         const ignoreRegionMultiplier = DamageCalculator.region() == Region.none;
@@ -31,6 +39,8 @@ export default class DamageCalculator {
             DamageCalculator.baseAttackOnly(),
             DamageCalculator.weather(),
             DamageCalculator.ignoreLevel(),
+            true,
+            DamageCalculator.subregion(),
         );
     }
 
@@ -41,6 +51,10 @@ export default class DamageCalculator {
         for (const pokemon of App.game.party.caughtPokemon) {
             const dataPokemon = getPokemonByName(pokemon.name);
             if (dataPokemon.type1 === PokemonType.None) {
+                continue;
+            }
+
+            if (DamageCalculator.region() == Region.alola && DamageCalculator.subregion() == AlolaSubRegions.MagikarpJump && Math.floor(pokemon.id) != 129) {
                 continue;
             }
 
@@ -74,6 +88,8 @@ export default class DamageCalculator {
                 DamageCalculator.baseAttackOnly(),
                 DamageCalculator.weather(),
                 DamageCalculator.ignoreLevel(),
+            	true,
+                DamageCalculator.subregion(),
             ),
             displayName: pokemon.displayName,
         };
