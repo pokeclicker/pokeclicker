@@ -2760,9 +2760,13 @@ class Update implements Saveable {
             }
         },
 
-        '0.10.22': ({playerData}) => {
+        '0.10.22': ({ playerData, saveData, settingsData }) => {
             // Reset Key Stone multiplier
             delete playerData._itemMultipliers.Key_stone;
+
+            // Held item setting change
+            settingsData.heldItemHideHoldingThisItem = settingsData.heldItemShowHoldingThisItem;
+            delete settingsData.heldItemShowHoldingThisItem;
         },
     };
 
