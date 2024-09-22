@@ -8,7 +8,9 @@ class RoamerNPC extends NPC {
         image: string = undefined,
         requirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
-        super(name, dialog, {image: image, requirement: requirement});
+        super(name, dialog, { image: image, requirement: requirement,
+            mentionsPokemon: () => RoamingPokemonList.getSubRegionalGroupRoamers(this.region, this.subRegionRoamerGroup).map(r => r.pokemonName)
+        });
     }
 
     get dialogHTML(): string {
@@ -21,12 +23,6 @@ class RoamerNPC extends NPC {
                 ?? GameConstants.camelCaseToString(GameConstants.Region[this.region]);
             return `There haven't been any reports of roaming Pokémon around ${regionName} lately.`;
         }
-
-        roamers.forEach((roamer) => {
-            if (App.game.statistics.pokemonEncountered[roamer.pokemon.id]() === 0 && App.game.statistics.pokemonSeen[roamer.pokemon.id]() === 0) {
-                GameHelper.incrementObservable(App.game.statistics.pokemonSeen[roamer.pokemon.id]);
-            }
-        });
 
         const roamersHTML = roamers.map(r => `<img class="npc-roamer-image" src="assets/images/pokemon/${r.pokemon.id}.png" />`).join('');
 
