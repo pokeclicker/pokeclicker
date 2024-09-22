@@ -1,5 +1,4 @@
 ///<reference path="../../declarations/globals.d.ts"/>
-///<reference path="PokemonHelper.ts"/>
 ///<reference path="BattlePokemon.ts"/>
 
 class PokemonFactory {
@@ -170,10 +169,10 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, GameConstants.ShadowStatus.None, et, heldItem, ep);
     }
 
-    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean): BattlePokemon {
+    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean, trainerPokemon = 1): BattlePokemon {
         const name = pokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(name);
-        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
+        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)) / (isBoss ? 1 : trainerPokemon ** 0.75));
         const exp: number = basePokemon.exp;
         const shiny: boolean = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
@@ -236,10 +235,10 @@ class PokemonFactory {
     private static roamingEncounter(routeNum: number, region: GameConstants.Region, subRegion: SubRegion): boolean {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);
-        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
+        const routes = Routes.getRoutesByRegion(region).filter(r => RoamingPokemonList.findGroup(region, r.subRegion || 0) == RoamingPokemonList.findGroup(region, subRegion.id));
 
         // Check if the dice rolls in their favor
-        const encounter = PokemonFactory.roamingChance(Math.max(...routes), Math.min(...routes), route, region, subRegion);
+        const encounter = PokemonFactory.roamingChance(route, routes, region, subRegion);
         if (!encounter) {
             return false;
         }
@@ -254,12 +253,13 @@ class PokemonFactory {
         return true;
     }
 
-    private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
+    private static roamingChance(curRoute: RegionRoute, allRoutes: RegionRoute[], region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('roaming');
-        const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
+        const maxRoute = allRoutes.length - 1;
+        const routeInd = allRoutes.indexOf(curRoute);
         // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, RoamingPokemonList.findGroup(region, subRegion.id))()?.number == curRoute?.number;
-        const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / ((increasedChance ? 3 : 1) * bonus);
+        const roamingChance = (max + ((min - max) * (maxRoute - routeInd) / (maxRoute))) / ((increasedChance ? GameConstants.ROAMING_INCREASED_CHANCE : 1) * bonus);
         return Rand.chance(roamingChance);
     }
 
@@ -271,6 +271,10 @@ class PokemonFactory {
 
     private static generateHeldItem(item: BagItem, modifier: number): BagItem | null {
         if (!item || !BagHandler.displayName(item)) {
+            return null;
+        }
+
+        if (!(item.requirement?.isCompleted() ?? true)) {
             return null;
         }
 
@@ -296,6 +300,9 @@ class PokemonFactory {
             case 'Lunar_light':
             case 'Pure_light':
                 chance = GameConstants.LIGHT_ITEM_CHANCE;
+                break;
+            case 'Crystallized_shadow':
+                chance = GameConstants.SHADOW_ITEM_CHANCE;
                 break;
             case 'Rusted_Sword':
             case 'Rusted_Shield':

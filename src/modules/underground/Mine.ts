@@ -384,7 +384,7 @@ export class Mine {
                             message = `${amount == 3 ? 'Lucky' : 'Jackpot'}${jackpotMultiplier}! You found another ${humanifyString(itemName)}!`;
                         }
                         const timeout = Math.min(amount, 4) * 2000 + Math.max(amount - 4, 0) * 100;
-                        Notifier.notify({ message, type, title, timeout });
+                        Notifier.notify({ message, type, title, setting, timeout });
                     }
                 }
 

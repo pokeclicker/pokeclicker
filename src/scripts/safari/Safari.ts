@@ -243,7 +243,10 @@ class Safari {
     }
 
     public static openModal() {
-        if (Safari.inProgress() && Safari.activeRegion() !== player.region) {
+        if (DisplayObservables.modalState.safariModal !== 'hidden') {
+            // Do nothing if the modal is already open or mid-animation
+            return;
+        } else if (Safari.inProgress() && Safari.activeRegion() !== player.region) {
             Safari.safariReset();
         } else {
             App.game.gameState = GameConstants.GameState.safari;
@@ -580,6 +583,9 @@ class Safari {
         const itemOnPlayer = Safari.itemGrid().findIndex(p => p.x === Safari.playerXY.x && p.y === Safari.playerXY.y);
         if (itemOnPlayer >= 0) {
             const item = SafariItemController.getRandomItem();
+            if (item == undefined) {
+                return;
+            }
             const name = BagHandler.displayName(item);
             BagHandler.gainItem(item);
             GameHelper.incrementObservable(App.game.statistics.safariItemsObtained, 1);

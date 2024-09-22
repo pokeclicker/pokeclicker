@@ -16,12 +16,12 @@ import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import type MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
-import type { EvoData } from './evolutions/Base';
 
-// TODO remove when PokemonLocations is ported to modules
-declare class PokemonLocations {
-    public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion?: Region): Array<EvoData>;
+// TODO remove when Dungeon is ported to modules
+declare class Dungeon {
+    public allShadowPokemon(): Array<PokemonNameType>;
 }
+declare const dungeonList: { [dungeonName: string]: Dungeon };
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -160,6 +160,10 @@ export function hasUncaughtGigantamaxForm(pokemonName: PokemonNameType): boolean
 export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
     return pokemonName.startsWith('Gigantamax') || pokemonName.startsWith('Eternamax');
 }
+
+export const getAllShadowPokemon = ko.pureComputed((): Set<PokemonNameType> => {
+    return new Set(Object.values(dungeonList).flatMap(d => d.allShadowPokemon()));
+});
 
 // To have encounter/caught/defeat/hatch statistics in a single place
 export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: BattlePokemonGender, shadow: ShadowStatus) {
