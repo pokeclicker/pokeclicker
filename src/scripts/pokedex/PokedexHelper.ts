@@ -35,10 +35,14 @@ class PokedexHelper {
      */
     public static pokemonSeen(id: number): boolean {
         try {
-            return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id) || App.game.statistics.pokemonSeen[id]() > 0;
+            return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id);
         } catch (error) {
             return false;
         }
+    }
+
+    public static pokemonDiscovered(id: number): boolean {
+        return PokedexHelper.pokemonSeen(id) || App.game.statistics.pokemonDiscovered[id]() > 0;
     }
 
     private static cachedFilteredList: typeof pokemonList;
@@ -73,11 +77,11 @@ class PokedexHelper {
     public static getList(): typeof pokemonList {
         // Peek a computed to avoid subscribing to 1000s of statistics
         const highestDex = ko.pureComputed(() => {
-            const highestSeen = App.game.statistics.pokemonSeen.highestID;
+            const pokemonDiscovered = App.game.statistics.pokemonDiscovered.highestID;
             const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
             const highestDefeated = App.game.statistics.pokemonDefeated.highestID;
             const highestCaught = App.game.statistics.pokemonCaptured.highestID;
-            return Math.max(highestSeen, highestEncountered, highestDefeated, highestCaught);
+            return Math.max(pokemonDiscovered, highestEncountered, highestDefeated, highestCaught);
         }).peek();
 
         const shadowPokemon = PokemonHelper.getAllShadowPokemon.peek();
@@ -112,7 +116,7 @@ class PokedexHelper {
             }
 
             // Calculated after filtering out too-high regions to subscribe to fewer statistics
-            const alreadySeen = alreadyCaught || PokedexHelper.pokemonSeen(pokemon.id);
+            const alreadyDiscovered = alreadyCaught || PokedexHelper.pokemonDiscovered(pokemon.id);
 
             const nameFilterSetting = Settings.getSetting('pokedexNameFilter') as SearchSetting;
             if (nameFilterSetting.observableValue() != '') {
@@ -144,11 +148,11 @@ class PokedexHelper {
 
             const hasBaseFormInSameRegion = () => pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             // Alternate forms that we haven't caught yet
-            if (!alreadyCaught && !alreadySeen && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion()) {
+            if (!alreadyCaught && !alreadyDiscovered && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion()) {
                 return false;
             }
             // Hide uncaught base forms if alternate non-regional form is caught
-            if (!alreadyCaught && !alreadySeen && pokemon.id == Math.floor(pokemon.id) &&
+            if (!alreadyCaught && !alreadyDiscovered && pokemon.id == Math.floor(pokemon.id) &&
                 App.game.party.caughtPokemon.some((p) => Math.floor(p.id) == pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion)
             ) {
                 return false;

@@ -2760,9 +2760,13 @@ class Update implements Saveable {
             }
         },
 
-        '0.10.22': ({playerData}) => {
+        '0.10.22': ({ playerData, saveData, settingsData }) => {
             // Reset Key Stone multiplier
             delete playerData._itemMultipliers.Key_stone;
+
+            // Rename pokemonSeen statistic to pokemonDiscovered for clarity
+            saveData.statistics.pokemonDiscovered = saveData.statistics.pokemonSeen;
+            delete saveData.statistics.pokemonSeen;
         },
     };
 

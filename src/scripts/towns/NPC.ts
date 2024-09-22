@@ -54,8 +54,8 @@ class NPC {
         const speciesMentioned = typeof this.options.mentionsPokemon === 'function' ? this.options.mentionsPokemon() : this.options.mentionsPokemon;
         speciesMentioned.forEach((name) => {
             const id = pokemonMap[name].id;
-            if (id > 0 && !PokedexHelper.pokemonSeen(id)) {
-                GameHelper.incrementObservable(App.game.statistics.pokemonSeen[id]);
+            if (id > 0 && !PokedexHelper.pokemonDiscovered(id)) {
+                App.game.statistics.pokemonDiscovered[id](1);
             }
         });
     }
