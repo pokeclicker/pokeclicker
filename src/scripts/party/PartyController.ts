@@ -204,14 +204,10 @@ class PartyController {
                 return false;
             }
 
-            if (Settings.getSetting('heldItemDropdownPokemonOrItem').observableValue() === 'pokemon') { // Pokemon
-                if (!(Settings.getSetting('heldItemSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
-                    return false;
-                }
-            } else { // Item
-                if (!(Settings.getSetting('heldItemSearchFilter') as SearchSetting).regex().test(pokemon?.heldItem()?.displayName)) {
-                    return false;
-                }
+            const testString = Settings.getSetting('heldItemDropdownPokemonOrItem').observableValue() === 'pokemon'
+                ? pokemon.displayName : pokemon.heldItem()?.displayName;
+            if (!(Settings.getSetting('heldItemSearchFilter') as SearchSetting).regex().test(testString)) {
+                return false;
             }
 
             if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {

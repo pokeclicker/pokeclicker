@@ -60,7 +60,7 @@
                         <div class="form-group col-6 m-0 px-1 py-0">
                             <!-- ko let: { heldItemRegionFilter: Settings.getSetting('heldItemRegionFilter') } -->
                             <label class="mb-1" for="held-item-region-filter">Region</label>
-                            <select id="held-item-region-filter" autocomplete="off" class="custom-select custom-select-sm" 
+                            <select id="held-item-region-filter" autocomplete="off" class="custom-select custom-select-sm"
                                 data-bind="options: heldItemRegionFilter.getValidOptions(),
                                     optionsValue: 'value',
                                     optionsText: 'text',
@@ -71,7 +71,7 @@
                         <div class="form-group col-6 m-0 px-1 py-0">
                             <!-- ko let: { heldItemTypeFilter: Settings.getSetting('heldItemTypeFilter') } -->
                             <label class="mb-1" for="held-item-type-filter">Type</label>
-                            <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm" 
+                            <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm"
                                 data-bind="options: heldItemTypeFilter.options,
                                     optionsValue: 'value',
                                     optionsText: 'text',
@@ -104,10 +104,11 @@
                   <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: () => (DisplayObservables.modalState.heldItemModal === 'hidden') }), childrenComplete: () => { lazyLoadCallback('lazyHeldItemList'); }">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
                       <td class="text-left align-middle"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                      <td class="text-left tight align-middle" data-bind="
-                        html: $data.heldItem() == undefined ? '' : `<img width='20' src='${$data.heldItem().image}' /> ${$data.heldItem().displayName}`,
-                        tooltip: $data.heldItem() != undefined ? { title: $data.heldItem().description, placement: 'bottom', trigger: 'hover'} : undefined
-                      "></td>
+                      <td class="text-left tight align-middle" data-bind="if: $data.heldItem(),
+                        tooltip: { title: $data.heldItem()?.description ?? '', trigger: 'hover', placement: 'bottom' }">
+                            <img width="20" data-bind="attr: { src: $data.heldItem().image }" />
+                            <knockout data-bind="text: $data.heldItem().displayName"></knockout>
+                        </td>
                     </tr>
                   </tbody>
                 </table>
