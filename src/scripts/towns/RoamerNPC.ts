@@ -9,7 +9,7 @@ class RoamerNPC extends NPC {
         requirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         super(name, dialog, { image: image, requirement: requirement,
-            mentionsPokemon: () => RoamingPokemonList.getSubRegionalGroupRoamers(this.region, this.subRegionRoamerGroup).map(r => r.pokemonName)
+            mentionsPokemon: () => RoamingPokemonList.getSubRegionalGroupRoamers(this.region, this.subRegionRoamerGroup).map(r => r.pokemonName),
         });
     }
 
