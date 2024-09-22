@@ -1,5 +1,5 @@
 import PokemonType from '../enums/PokemonType';
-import { Region } from '../GameConstants';
+import { AlolaSubRegions, Region } from '../GameConstants';
 import WeatherType from '../weather/WeatherType';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
 import GameHelper from '../GameHelper';
@@ -32,7 +32,7 @@ export default class DamageCalculator {
             DamageCalculator.baseAttackOnly(),
             DamageCalculator.weather(),
             DamageCalculator.ignoreLevel(),
-            true, 
+            true,
             DamageCalculator.subregion(),
         );
     }
@@ -47,8 +47,12 @@ export default class DamageCalculator {
                 continue;
             }
 
+            if (DamageCalculator.region() == Region.alola && DamageCalculator.subregion() == AlolaSubRegions.MagikarpJump && Math.floor(pokemon.id) != 129) {
+                continue;
+            }
+
             const attack = App.game.party.calculateOnePokemonAttack(pokemon, DamageCalculator.type1(), DamageCalculator.type2(), DamageCalculator.region(), ignoreRegionMultiplier,
-                DamageCalculator.includeBreeding(), DamageCalculator.baseAttackOnly(), DamageCalculator.weather(), DamageCalculator.ignoreLevel(), true, DamageCalculator.subregion());
+                DamageCalculator.includeBreeding(), DamageCalculator.baseAttackOnly(), DamageCalculator.weather(), DamageCalculator.ignoreLevel());
 
             typedamage[dataPokemon.type1] += attack / 2;
             const otherType = dataPokemon.type2 !== PokemonType.None ? dataPokemon.type2 : dataPokemon.type1;
@@ -77,7 +81,7 @@ export default class DamageCalculator {
                 DamageCalculator.baseAttackOnly(),
                 DamageCalculator.weather(),
                 DamageCalculator.ignoreLevel(),
-            	true, 
+            	true,
                 DamageCalculator.subregion(),
             ),
             displayName: pokemon.displayName,
