@@ -2,6 +2,7 @@ type NPCOptionalArgument = {
     requirement?: Requirement | MultiRequirement | OneFromManyRequirement,
     image?: string,
     saveKey?: string,
+    mentionsPokemon?: PokemonNameType[] | (() => PokemonNameType[]);
 };
 
 class NPC {
@@ -27,6 +28,14 @@ class NPC {
         return this.options.requirement?.isCompleted() ?? true;
     }
 
+    public talkToNPC() {
+        this.setTalkedTo();
+
+        if (this.options.mentionsPokemon) {
+            this.markPokemonSeen();
+        }
+    }
+
     public setTalkedTo() {
         this.talkedTo(true);
         if (this.saveKey && !this.hasTalkedTo()) {
@@ -36,5 +45,18 @@ class NPC {
 
     public hasTalkedTo(): boolean {
         return this.saveKey ? App.game.statistics.npcTalkedTo[this.saveKey]() > 0 : false;
+    }
+
+    private markPokemonSeen(): void {
+        if (!this.options.mentionsPokemon) {
+            return;
+        }
+        const speciesMentioned = this.options.mentionsPokemon?.() ?? this.options.mentionsPokemon;
+        speciesMentioned.forEach((name) => {
+            const id = pokemonMap[name].id;
+            if (id > 0 && !PokedexHelper.pokemonSeen(id)) {
+                GameHelper.incrementObservable(App.game.statistics.pokemonSeen[id]);
+            }
+        });
     }
 }

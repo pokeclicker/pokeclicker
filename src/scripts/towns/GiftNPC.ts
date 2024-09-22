@@ -21,6 +21,7 @@ class GiftNPC extends NPC {
     }
 
     public setTalkedTo() {
+        // Override parent method to avoid setting the npcTalkedTo statistic until the gift is accepted 
         this.talkedTo(true);
     }
 }
