@@ -9,7 +9,7 @@ export default class DamageCalculator {
     public static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     public static type2 = ko.observable(PokemonType.None).extend({ numeric: 0 });
     public static region = ko.observable(Region.none);
-    public static subregion = ko.observable();
+    public static subregion = ko.observable(-1);
     public static weather = ko.observable(WeatherType.Clear);
     public static includeBreeding = ko.observable(false);
     public static baseAttackOnly = ko.observable(false);
@@ -19,6 +19,13 @@ export default class DamageCalculator {
     public static observableTypeDamageArray = ko.pureComputed(DamageCalculator.getDamageByTypes);
     public static observableTypeDetails = ko.pureComputed(DamageCalculator.getTypeDetail);
     public static observableTotalDamage = ko.pureComputed(DamageCalculator.totalDamage);
+
+    public static initialize(): void {
+        DamageCalculator.region.subscribe((value) => {
+            const subregion = value == Region.none ? -1 : 0;
+            DamageCalculator.subregion(subregion);
+        });
+    }
 
     public static totalDamage(): number {
         const ignoreRegionMultiplier = DamageCalculator.region() == Region.none;

@@ -29,22 +29,25 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                 <div class="form-group col-4 col-lg">
                     <label>Region</label>
                     <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.region">
-                        <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
-                        <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
+                        <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => GameConstants.Region[r] <= player.highestRegion()) -->
+                        <option data-bind="value: GameConstants.Region[$data], text: GameConstants.camelCaseToString($data)">Region</option>
                         <!-- /ko -->
-                        <option value="-1">None</option>
                     </select>
                 </div>
                 <div class="form-group col-4 col-lg">
                     <label>Subregion</label>
-                    <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.subregion">
-                        <!-- ko foreach: SubRegions.getSubRegions(DamageCalculator.region()) -->
-                        <option data-bind="value: $data.id, text: $data.name">Subregion</option>
-                        <!-- /ko -->
-                        <!-- ko if: DamageCalculator.region() == GameConstants.Region.none -->
+                    <!-- ko if: DamageCalculator.region() != GameConstants.Region.none -->
+                    <select autocomplete="off" class="custom-select" data-bind="
+                        options: SubRegions.getSubRegions(DamageCalculator.region()),
+                        optionsText: 'name',
+                        optionsValue: 'id',
+                        value: DamageCalculator.subregion"></select>
+                    <!-- /ko -->
+                    <!-- ko if: DamageCalculator.region() == GameConstants.Region.none -->
+                    <select autocomplete="off" class="custom-select">
                         <option value="-1">None</option>
-                        <!-- /ko -->
                     </select>
+                    <!-- /ko -->
                 </div>
                 <div class="form-group col-4 col-lg">
                     <label>Weather</label>
