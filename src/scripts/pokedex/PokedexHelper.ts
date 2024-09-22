@@ -113,6 +113,9 @@ class PokedexHelper {
                 return false;
             }
 
+            // Calculated after filtering out too-high regions to subscribe to fewer statistics
+            const alreadySeen = alreadyCaught || PokedexHelper.pokemonSeen(pokemon.id);
+
             const nameFilterSetting = Settings.getSetting('pokedexNameFilter') as SearchSetting;
             if (nameFilterSetting.observableValue() != '') {
                 const nameFilter = nameFilterSetting.regex();
@@ -140,13 +143,14 @@ class PokedexHelper {
             } else if ((type1 != null && !(pokemon as PokemonListData).type.includes(type1)) || (type2 != null && !(pokemon as PokemonListData).type.includes(type2))) {
                 return false;
             }
+
             const hasBaseFormInSameRegion = () => pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             // Alternate forms that we haven't caught yet
-            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion()) {
+            if (!alreadyCaught && !alreadySeen && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion()) {
                 return false;
             }
             // Hide uncaught base forms if alternate non-regional form is caught
-            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) &&
+            if (!alreadyCaught && !alreadySeen && pokemon.id == Math.floor(pokemon.id) &&
                 App.game.party.caughtPokemon.some((p) => Math.floor(p.id) == pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion)
             ) {
                 return false;
