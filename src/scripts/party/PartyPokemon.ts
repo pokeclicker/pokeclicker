@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/party/LevelType.d.ts" />
+
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
@@ -222,6 +224,23 @@ class PartyPokemon implements Saveable {
         return result;
     }
 
+    public gainLevels(amount: number): number {
+        if (amount < 0) {
+            throw new Error(`PartyPokemon ${this.name} cannot gain negative levels!`);
+        }
+        const oldLevel = this.level;
+        const newLevel = Math.min(this.level + amount, App.game.badgeCase.maxLevel());
+        if (oldLevel !== newLevel) {
+            this.level = newLevel;
+            // Adjust exp to match
+            const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
+            this.exp = levelRequirements[levelType][newLevel - 1];
+            // Just leveled up so...
+            this.checkForLevelEvolution();
+        }
+        return newLevel - oldLevel;
+    }
+
     public checkForLevelEvolution() {
         if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
@@ -330,6 +349,12 @@ class PartyPokemon implements Saveable {
             case GameConstants.ConsumableType.Rare_Candy:
             case GameConstants.ConsumableType.Magikarp_Biscuit:
                 amount = Math.min(amount, player.itemList[itemName]());
+                if (this.breeding) {
+                    return Notifier.notify({
+                        message : `You cannot use ${ItemList[itemName].displayName} on Pokémon in the hatchery.`,
+                        type : NotificationConstants.NotificationOption.danger,
+                    });
+                }
                 const curAttack = this.calculateAttack(true);
                 const bonus = GameConstants.BREEDING_ATTACK_BONUS * ((ItemList[itemName] as AttackGainConsumable).bonusMultiplier ?? 1);
                 GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
@@ -338,6 +363,11 @@ class PartyPokemon implements Saveable {
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
+                const levelsGained = this.gainLevels(amount);
+                if (levelsGained === 0) {
+                    // Rare Candies cause level evolutions even at max level
+                    this.checkForLevelEvolution();
+                }
                 break;
             default :
         }
