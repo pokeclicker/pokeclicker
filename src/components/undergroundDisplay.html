@@ -109,6 +109,7 @@
         </div>
     </div>
 
+    <!-- ko ifnot: App.game.challenges.list.disableOakItems.active() -->
     <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
     <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayBattery">
         <span>Battery</span>
@@ -129,5 +130,6 @@
             </div>
         </div>
     </div>
+    <!-- /ko -->
     <!-- /ko -->
 </div>
