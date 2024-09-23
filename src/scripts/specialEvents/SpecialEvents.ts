@@ -1,7 +1,8 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 
-class SpecialEvents implements Feature {
+class SpecialEvents implements Feature, TmpSpecialEventsType {
     name = 'Events';
     saveKey = 'events';
     defaults: Record<string, any>;
