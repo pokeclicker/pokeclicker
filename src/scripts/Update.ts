@@ -2767,6 +2767,14 @@ class Update implements Saveable {
             // Held item setting change
             settingsData.heldItemHideHoldingThisItem = settingsData.heldItemShowHoldingThisItem;
             delete settingsData.heldItemShowHoldingThisItem;
+
+            // Simplify farm module settings
+            if (settingsData.showFarmModule === false) {
+                settingsData.showFarmModule = 'never';
+            } else {
+                settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
+            }
+            delete settingsData.showFarmModuleControls;
         },
     };
 
