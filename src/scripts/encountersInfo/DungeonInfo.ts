@@ -1,51 +1,34 @@
 class DungeonInfo {
-    public static lootList = ko.pureComputed(() => {
-        return DungeonInfo.getLootList();
+    public static itemList = ko.pureComputed(() => {
+        return DungeonInfo.getItemList();
     });
 
-    private static getLootList() {
-        return player.town.dungeon?.lootTable || [];
-    }
-
-    public static getFullName() {
-        return `${DungeonInfo.getDungeonName()} - ${DungeonInfo.getRegionName()} (${DungeonInfo.getSubregionName()})`;
-    }
-
-    private static getDungeonName() {
+    public static getName() {
         return player.town.name;
     }
 
-    private static getRegionName() {
-        return GameConstants.camelCaseToString(GameConstants.Region[player.region]);
-    }
-
-    private static getSubregionName() {
-        return player.subregionObject()?.name;
-    }
-
-    public static getLootImage(input) {
-        switch (true) {
-            case typeof BerryType[input] == 'number':
-                return FarmController.getBerryImage(BerryType[GameConstants.humanifyString(input)]);
-            case UndergroundItems.getByName(input) instanceof UndergroundItem:
-                return UndergroundItems.getByName(input).image;
-            case PokemonHelper.getPokemonByName(input).name != 'MissingNo.':
-                return `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
-            default:
-                return ItemList[input].image;
-        }
-    }
-
-    public static getLootName(input) {
-        switch (true) {
-            case input in ItemList:
-                return ItemList[input]?.displayName;
-            case typeof BerryType[input] == 'number':
-                return `${input} Berry`;
-            case PokemonHelper.getPokemonByName(input).name != 'MissingNo.':
-                return PokemonHelper.displayName(input)();
-            default:
-                return GameConstants.camelCaseToString(GameConstants.humanifyString(input.toLowerCase()));
-        }
+    private static getItemList() {
+        const commonArray =
+            player.town.dungeon?.lootTable.common
+                ?.map((item) => ({item: item.loot, type: 'common', requirement: item.requirement}));
+        const rareArray =
+            player.town.dungeon?.lootTable.rare
+                ?.map((item) => ({item: item.loot, type: 'rare', requirement: item.requirement}));
+        const epicArray =
+            player.town.dungeon?.lootTable.epic
+                ?.map((item) => ({item: item.loot, type: 'epic', requirement: item.requirement}));
+        const legendaryArray =
+            player.town.dungeon?.lootTable.legendary
+                ?.map((item) => ({item: item.loot, type: 'legendary', requirement: item.requirement}));
+        const mythicArray =
+            player.town.dungeon?.lootTable.mythic
+                ?.map((item) => ({item: item.loot, type: 'mythic', requirement: item.requirement}));
+        return {
+            common: {category: 'Common', data: (commonArray ?? [])},
+            rare: {category: 'Rare', data: (rareArray ?? [])},
+            epic: {category: 'Epic', data: (epicArray ?? [])},
+            legendary: {category: 'Legendary', data: (legendaryArray ?? [])},
+            mythic: {category: 'Mythic', data: (mythicArray ?? [])},
+        };
     }
 }
