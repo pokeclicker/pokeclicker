@@ -583,6 +583,9 @@ class Safari {
         const itemOnPlayer = Safari.itemGrid().findIndex(p => p.x === Safari.playerXY.x && p.y === Safari.playerXY.y);
         if (itemOnPlayer >= 0) {
             const item = SafariItemController.getRandomItem();
+            if (item == undefined) {
+                return;
+            }
             const name = BagHandler.displayName(item);
             BagHandler.gainItem(item);
             GameHelper.incrementObservable(App.game.statistics.safariItemsObtained, 1);

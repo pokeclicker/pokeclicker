@@ -3770,11 +3770,7 @@ export const pokemonList = createPokemonArray(
         'exp': 163,
         'eggCycles': 20,
         'evolutions': [
-            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Magneton', 'Magnezone', 20),
-            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Magneton', 'Magnezone', 20),
-            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Magneton', 'Magnezone', 20),
-            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Magneton', 'Magnezone', 20),
-            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Magneton', 'Magnezone', 20),
+            EnvironmentRestrictedLevelEvolution('MagneticField', 'Magneton', 'Magnezone', 20),
             RegionStoneEvolution(galarOnly, 'Magneton', 'Magnezone', StoneType.Thunder_stone),
         ],
         'base': {
@@ -4179,7 +4175,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 70,
         },
-        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
+        'heldItem': { type: ItemType.underground, id: 'Ice Stone' },
     },
     {
         'id': 95.02,
@@ -6165,14 +6161,8 @@ export const pokemonList = createPokemonArray(
             StoneEvolution('Eevee', 'Flareon', StoneType.Fire_stone),
             DayTimedStoneEvolution('Eevee', 'Espeon', StoneType.Soothe_bell),
             NightTimedStoneEvolution('Eevee', 'Umbreon', StoneType.Soothe_bell),
-            DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
-            DungeonRestrictedLevelEvolution('Pinwheel Forest', 'Eevee', 'Leafeon', 20),
-            DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
-            DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
-            DungeonRestrictedLevelEvolution('Lake Acuity', 'Eevee', 'Glaceon', 20),
-            DungeonRestrictedLevelEvolution('Twist Mountain', 'Eevee', 'Glaceon', 20),
-            DungeonRestrictedLevelEvolution('Frost Cavern', 'Eevee', 'Glaceon', 20),
-            DungeonRestrictedLevelEvolution('Mount Lanakila', 'Eevee', 'Glaceon', 20),
+            EnvironmentRestrictedLevelEvolution('MossRock', 'Eevee', 'Leafeon', 20),
+            EnvironmentRestrictedLevelEvolution('IceRock', 'Eevee', 'Glaceon', 20),
             LevelEvolution('Eevee', 'Sylveon', 29),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
@@ -10817,11 +10807,7 @@ export const pokemonList = createPokemonArray(
         'exp': 75,
         'catchRate': 255,
         'evolutions': [
-            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Nosepass', 'Probopass', 20),
-            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Nosepass', 'Probopass', 20),
-            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Nosepass', 'Probopass', 20),
-            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Nosepass', 'Probopass', 20),
-            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Nosepass', 'Probopass', 20),
+            EnvironmentRestrictedLevelEvolution('MagneticField', 'Nosepass', 'Probopass', 20),
         ],
         'base': {
             'hitpoints': 30,
@@ -13502,11 +13488,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('SandyCloak', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('TrashCloak', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13528,10 +13511,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
             LevelEvolution('Burmy (Sand)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Forest', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PlantCloak', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('TrashCloak', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13553,9 +13534,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Forest', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PlantCloak', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('SandyCloak', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -15649,6 +15629,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 127,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -17515,7 +17496,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [DungeonRestrictedLevelEvolution('Dusty Bowl', 'Galarian Yamask', 'Runerigus', 34)],
+        'evolutions': [DungeonRestrictedLevelEvolution('Dusty Bowl', 'Galarian Yamask', 'Runerigus', 34)], // TODO: Change to environment and make Dusty Bowl a route
         'base': {
             'hitpoints': 38,
             'attack': 55,
@@ -22429,11 +22410,7 @@ export const pokemonList = createPokemonArray(
         'exp': 140,
         'catchRate': 120,
         'evolutions': [
-            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Charjabug', 'Vikavolt', 20),
-            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Charjabug', 'Vikavolt', 20),
-            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Charjabug', 'Vikavolt', 20),
-            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Charjabug', 'Vikavolt', 20),
-            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20),
+            EnvironmentRestrictedLevelEvolution('MagneticField', 'Charjabug', 'Vikavolt', 20),
             RegionStoneEvolution(galarOnly, 'Charjabug', 'Vikavolt', StoneType.Thunder_stone),
         ],
         'base': {

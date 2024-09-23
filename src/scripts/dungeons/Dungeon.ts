@@ -159,7 +159,7 @@ class Dungeon {
      * @param ignoreRequirement Whether to check if requirements are met. Defaults to false
      */
     public availableBosses(includeTrainers = true, ignoreRequirement = false): Boss[] {
-        // TODO: HLXII - We need this check as this method is called somewhere during initialization when App isn't initialized yet
+        // TODO: We need this check as this method is called somewhere during initialization when App isn't initialized yet
         // the requirement.isCompleted call can sometimes use the App object, which will cause this to crash
         // Once App is moved to modules, this check might be able to be removed.
         if (!App.game) {
@@ -1859,7 +1859,7 @@ dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
         ],
         mythic: [{loot: 'Lum', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Pattern Bush'))}],
     },
-    500000,
+    720600,
     [new DungeonBossPokemon('Heracross', 3703000, 20)],
     43000, 35,
     () => {},
@@ -9772,7 +9772,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Douse_Drive', ignoreDebuff: true},
             {loot: 'Shock_Drive', ignoreDebuff: true},
         ],
-        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemRequirement(1, 'Great_Twisted_Spoon', GameConstants.AchievementOption.less)])}],
+        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemOwnedRequirement('Great_Twisted_Spoon', 1, GameConstants.AchievementOption.less)])}],
     },
     5403000,
     [
@@ -11117,6 +11117,7 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
         {pokemon: 'Basculin (Blue-Striped)', options: { weight: 1.43 }},
         {pokemon: 'Alomomola', options: { weight: 1.43 }},
         {pokemon: 'Dewpider', options: { weight: 1.43 }},
+        {pokemon: 'Morelull', options: { weight: 1.43, hide: true, requirement: new ObtainedPokemonRequirement('Morelull') }},
         {pokemon: 'Marill', options: { weight: 1.43, hide: true, requirement: new DayOfWeekRequirement(GameConstants.DayOfWeek.Saturday) }},
         {pokemon: 'Marshtomp', options: { weight: 1.43, hide: true, requirement: new DayOfWeekRequirement(GameConstants.DayOfWeek.Saturday) }},
         new DungeonTrainer('Fisherman',
@@ -11268,6 +11269,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         {pokemon: 'Bonsly', options: { weight: 1 }},
         {pokemon: 'Trumbeak', options: { weight: 1 }},
         {pokemon: 'Fomantis', options: { weight: 1 }},
+        {pokemon: 'Morelull', options: { weight: 1, hide: true, requirement: new ObtainedPokemonRequirement('Morelull') }},
         {pokemon: 'Bounsweet', options: { weight: 1 }},
         {pokemon: 'Steenee', options: { weight: 1 }},
         {pokemon: 'Comfey', options: { weight: 1 }},

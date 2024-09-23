@@ -60,8 +60,7 @@
                                 <tr><th colspan="2">Farm</th></tr>
                             </thead>
                             <tbody>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showFarmModule')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showFarmModuleControls')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('showFarmModule')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('farmBoostDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('berryDexMode')}"></tr>

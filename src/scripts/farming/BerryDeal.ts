@@ -2,7 +2,7 @@ class BerryDeal {
     public berries: { berryType: BerryType, amount: number}[];
     public item: { itemType: Item, amount: number};
 
-    public static list: Record<GameConstants.BerryTraderLocations, KnockoutObservableArray<BerryDeal>> = {};
+    public static list: Partial<Record<GameConstants.BerryTraderLocations, KnockoutObservableArray<BerryDeal>>> = {};
 
     constructor(berry: BerryType[], berryAmount: number[], item: Item, itemAmount: number) {
         this.berries = [];
