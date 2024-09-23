@@ -36,7 +36,7 @@ class RouteInfo {
         const boosted = (RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, player.subregion)().number == player.route);
         return {
             pokemons: {category: 'Encounters', data: (pokemonArray ?? [])},
-            roamers: {category: `Roamers${boosted?' (Boosted)':''}`, data: (roamerArray ?? [])},
+            roamers: {category: `Roamers${boosted ? ' (Boosted)' : ''}`, data: (roamerArray ?? [])},
         };
     }
 }
