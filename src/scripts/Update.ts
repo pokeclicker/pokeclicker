@@ -1,5 +1,3 @@
-/// <reference path="./GameConstants.d.ts" />
-
 class Update implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'update';
@@ -2761,7 +2759,15 @@ class Update implements Saveable {
                 settingsData.breedingRegionalAttackDebuffSetting = '-1';
             }
         },
-        '0.10.22': ({ settingsData }) => {
+
+        '0.10.22': ({ playerData, saveData, settingsData }) => {
+            // Reset Key Stone multiplier
+            delete playerData._itemMultipliers.Key_stone;
+
+            // Held item setting change
+            settingsData.heldItemHideHoldingThisItem = settingsData.heldItemShowHoldingThisItem;
+            delete settingsData.heldItemShowHoldingThisItem;
+
             if (settingsData.showFarmModule === false) {
                 settingsData.showFarmModule = 'never';
             } else {
