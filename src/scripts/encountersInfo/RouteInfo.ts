@@ -33,9 +33,10 @@ class RouteInfo {
             RoamingPokemonList.getSubRegionalGroupRoamers(player.region, RoamingPokemonList.findGroup(player.region, player.subregion))
                 ?.map((roamer) => ({id: roamer.pokemon.id, name: roamer.pokemonName, type: 'roamer', requirement: roamer.unlockRequirement}))
                 .sort((a, b) => a.id - b.id);
+        const boosted = (RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, player.subregion)().number == player.route);
         return {
             pokemons: {category: 'Encounters', data: (pokemonArray ?? [])},
-            roamers: {category: 'Roamers', data: (roamerArray ?? [])},
+            roamers: {category: `Roamers${boosted?' (Boosted)':''}`, data: (roamerArray ?? [])},
         };
     }
 }
