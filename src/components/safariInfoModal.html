@@ -7,37 +7,99 @@
                         <h4 class="modal-title d-inline-block" data-bind="text: SafariInfo.getName()">name</h4>
                         <button type="button" class="btn btn-danger position-absolute" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
                     </div>
+                    <div class="col-12 p-0">
+                        <ul class="nav nav-tabs nav-fill w-100">
+                            <li class="nav-item w-lg-50"><a data-toggle='tab' class='nav-link active' href="#pan-safari-pokemons">Pokémon</a></li>
+                            <li class="nav-item w-lg-50"><a data-toggle='tab' class='nav-link' href="#pan-safari-items">Items</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="modal-body pt-0" style="background-color: inherit;">
-                <!-- ko foreach: { data: Object.entries(SafariInfo.itemList()), as: 'items' } -->
-                <!-- ko if: items[1].data.length -->
-                <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#safari-${items[0]}` }">
-                    <h5 class="my-0 mx-1 text-light" data-bind="text: items[1].category">category</h5>
-                </div>
-                <div class="collapse show" data-bind="attr: { 'id': `safari-${items[0]}` }">
-                    <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: items[1].data">
-                        <div class="col-6 col-lg-4 mb-2">
-                            <!-- ko with: EncountersInfoHelper.getItemInformations($data) -->
-                                <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
-                                    <img width="42px" data-bind="attr: { src: image },
-                                        style: { 'filter': isPokemonAndNotCaught ? 'brightness(0)' : '' }">
-                                    <div class="flex-grow-1 small ml-2" style="min-width: 0;">
-                                        <div class="text-truncate" data-bind="text: name"></div>
-                                    </div>
-                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
-                                    tooltip: {
-                                        title: requirement?.hint() || '',
-                                        placement: 'bottom',
-                                        trigger: 'hover'
-                                    }, visible: requirement && !requirement.isCompleted()" />
-                                </div>
-                            <!-- /ko -->
+                <div class="tab-content">
+                    <div id="pan-safari-pokemons" class="tab-pane fade p-3 show active">
+
+
+
+                        <!-- ko foreach: { data: Object.entries(SafariInfo.pokemonList()), as: 'pokemons' } -->
+                        <!-- ko if: pokemons[1].data.length -->
+                        <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#safari-${pokemons[0]}` }">
+                            <h5 class="my-0 mx-1 text-light" data-bind="text: pokemons[1].category">category</h5>
                         </div>
+                        <div class="collapse show" data-bind="attr: { 'id': `safari-${pokemons[0]}` }">
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons[1].data">
+                                <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors(name)}">
+                                    <span class="id pokedex-top-text" data-bind="text: (id > 0 ? Math.floor(id) + '' : '???').padStart(3, 0)">number</span>
+                                    <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
+                                        <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(id, true) ? '-shiny' : ''}.svg`}"/>
+                                    </div>
+                                    <!-- ko if: App.game.party.alreadyCaughtPokemonByName(name) -->
+                                    <div data-bind="if: App.game.party.getPokemon(id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
+                                        <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(id)?.pokerus]}.png`},
+                                        tooltip: {
+                                            title: App.game.party.getPokemon(id)?.pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemon(id)?.evs().toLocaleString('en-US')}` : '',
+                                            placement: 'bottom',
+                                            trigger: 'hover'
+                                        }"/>
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- ko with: EncountersInfoHelper.getPokemonRequirementInformations($data) -->
+                                    <div style="position: absolute;left: 2px;bottom: 5px;">
+                                        <img width="24px" src="" data-bind="attr: { src: `assets/images/encountersInfo/${image}` },
+                                        tooltip: {
+                                            title: tooltip,
+                                            placement: 'bottom',
+                                            trigger: 'hover'
+                                        }"/>
+                                    </div>
+                                    <!-- /ko -->
+                                    <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen(id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen(id)() }, attr:{ src: PokemonHelper.getImage(id, undefined, undefined, GameConstants.ShadowStatus.None)}">
+                                    <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokedexHelper.pokemonSeen(id)() ? PokemonHelper.displayName(name) : '???',
+                                    tooltip: {
+                                        title: PokemonHelper.displayName(name),
+                                        trigger: 'hover',
+                                        placement: 'bottom'
+                                    }">name</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+
+
+
+                    </div>
+                    <div id="pan-safari-items" class="tab-pane fade p-3">
+                        <!-- ko foreach: { data: Object.entries(SafariInfo.itemList()), as: 'items' } -->
+                        <!-- ko if: items[1].data.length -->
+                        <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#safari-${items[0]}` }">
+                            <h5 class="my-0 mx-1 text-light" data-bind="text: items[1].category">category</h5>
+                        </div>
+                        <div class="collapse show" data-bind="attr: { 'id': `safari-${items[0]}` }">
+                            <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: items[1].data">
+                                <div class="col-6 col-lg-4 mb-2">
+                                    <!-- ko with: EncountersInfoHelper.getItemInformations($data) -->
+                                        <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
+                                            <img width="42px" data-bind="attr: { src: image },
+                                                style: { 'filter': isPokemonAndNotCaught ? 'brightness(0)' : '' }">
+                                            <div class="flex-grow-1 small ml-2" style="min-width: 0;">
+                                                <div class="text-truncate" data-bind="text: name"></div>
+                                            </div>
+                                            <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                                            tooltip: {
+                                                title: requirement?.hint() || '',
+                                                placement: 'bottom',
+                                                trigger: 'hover'
+                                            }, visible: requirement && !requirement.isCompleted()" />
+                                        </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
                     </div>
                 </div>
-                <!-- /ko -->
-                <!-- /ko -->
             </div>
         </div>
     </div>
