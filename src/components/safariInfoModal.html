@@ -24,8 +24,8 @@
                             <h5 class="my-0 mx-1 text-light" data-bind="text: pokemons[1].category">category</h5>
                         </div>
                         <div class="collapse show" data-bind="attr: { 'id': `safari-${pokemons[0]}` }">
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons[1].data">
-                                <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors(name)}">
+                            <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons[1].data">
+                                <div class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors(name)}">
                                     <span class="id pokedex-top-text" data-bind="text: (id > 0 ? Math.floor(id) + '' : '???').padStart(3, 0)">number</span>
                                     <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
                                         <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(id, true) ? '-shiny' : ''}.svg`}"/>
@@ -55,8 +55,8 @@
                                         trigger: 'hover',
                                         boundary: 'window'
                                     }" />
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
                         <!-- /ko -->
                         <!-- /ko -->
