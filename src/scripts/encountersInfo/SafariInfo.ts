@@ -13,22 +13,22 @@ class SafariInfo {
 
     private static getPokemonList() {
         const grassArray =
-            SafariPokemonList.list[player.region]?.()
-                .filter((encounter) => (encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Grass) != undefined))
-                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'grass'}))
+            SafariPokemonList.getDisplayList()
+                .filter((encounter) => encounter['grass'])
+                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage, type: 'grass'}))
                 .sort((a, b) => a.id - b.id);
         const waterArray =
-            SafariPokemonList.list[player.region]?.()
-                .filter((encounter) => (encounter.isAvailable() && encounter.environments.find((env) => env == SafariEnvironments.Water) != undefined))
-                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.name).id, name: encounter.name, type: 'water'}))
+            SafariPokemonList.getDisplayList()
+                .filter((encounter) => encounter['water'])
+                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage, type: 'water'}))
                 .sort((a, b) => a.id - b.id);
         const itemsArray =
             SafariItemController.list[player.region]
-                ?.filter((item) => (PokemonHelper.getPokemonByName(item.item.id).name != 'MissingNo.' && item.requirement.isCompleted()))
-                .map((item) => ({id: PokemonHelper.getPokemonByName(item.item.id).id, name: item.item.id, type: 'item'}))
+                ?.filter((item) => (PokemonHelper.getPokemonByName(item.item.id).name != 'MissingNo.'))
+                .map((item) => ({id: PokemonHelper.getPokemonByName(item.item.id).id, name: item.item.id, lock: !item.requirement.isCompleted(), image: PokemonHelper.getImage(PokemonHelper.getPokemonByName(item.item.id).id, undefined, undefined, GameConstants.ShadowStatus.None), lockMessage: item.requirement.hint(), type: 'item'}))
                 .sort((a, b) => a.id - b.id);
         return {
-            pokemon: {category: 'Grass', data: (grassArray ?? [])},
+            grass: {category: 'Grass', data: (grassArray ?? [])},
             water: {category: 'Water', data: (waterArray ?? [])},
             items: {category: 'Items', data: (itemsArray ?? [])},
         };
