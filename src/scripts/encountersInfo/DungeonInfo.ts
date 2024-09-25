@@ -3,7 +3,7 @@ class DungeonInfo {
         return player.town.name;
     }
 
-    public static pokemonList = ko.pureComputed(() => {
+    public static pokemonList : KnockoutObservable<InfoPokemonList[]> = ko.pureComputed(() => {
         return DungeonInfo.getPokemonList();
     });
 
@@ -15,40 +15,40 @@ class DungeonInfo {
         return DungeonInfo.getItemList();
     });
 
-    private static isShadow() {
-        return player.town.dungeon?.allAvailableShadowPokemon().length > 0;
+    private static isShadow() : boolean {
+        return player.town.dungeon?.allAvailableShadowPokemon().length;
     }
 
-    public static hasPokemons() {
-        return player.town.dungeon?.allAvailablePokemon().length > 0;
+    public static hasPokemons() : boolean {
+        return player.town.dungeon?.allAvailablePokemon().length;
     }
 
-    private static getPokemonList() {
-        const pokemonArray =
+    public static hasTrainers() : boolean {
+        return  player.town.dungeon?.normalEncounterList.filter((encounter) => !encounter.hide && encounter.trainer).length ||
+                player.town.dungeon?.bossEncounterList.filter((encounter) => !encounter.hide && encounter.trainer).length;
+    }
+
+    private static getPokemonList() : InfoPokemonList[] {
+        const pokemonArray : InfoPokemon[] =
             player.town.dungeon?.normalEncounterList
                 .filter((encounter) => !encounter.hide && !encounter.trainer && !encounter.mimic)
-                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, shadowBackground: encounter.shadowBackground, lock: encounter.lock, lockMessage: encounter.lockMessage, mimic: encounter.mimic, mimicTier: encounter.mimicTier, requirement: encounter.requirement, shadow: DungeonInfo.isShadow(), type: 'normal'}))
+                .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'dungeon', encounter.image, encounter.requirement, encounter.lock, encounter.lockMessage, encounter.mimic, encounter.mimicTier, DungeonInfo.isShadow(), encounter.shadowBackground)))
                 .sort((a, b) => a.id - b.id);
-        const bossArray =
+        const bossArray : InfoPokemon[] =
             player.town.dungeon?.bossEncounterList
                 .filter((encounter) => !encounter.hide && !encounter.trainer)
-                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, shadowBackground: encounter.shadowBackground, lock: encounter.lock, lockMessage: encounter.lockMessage, mimic: encounter.mimic, mimicTier: encounter.mimicTier, requirement: encounter.requirement, shadow: DungeonInfo.isShadow(), type: 'boss'}))
+                .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'boss', encounter.image, encounter.requirement, encounter.lock, encounter.lockMessage, encounter.mimic, encounter.mimicTier, DungeonInfo.isShadow(), encounter.shadowBackground)))
                 .sort((a, b) => a.id - b.id);
-        const mimicArray =
+        const mimicArray : InfoPokemon[] =
             player.town.dungeon?.normalEncounterList
                 .filter((encounter) => !encounter.hide && !encounter.trainer && encounter.mimic)
-                .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, shadowBackground: encounter.shadowBackground, lock: encounter.lock, lockMessage: encounter.lockMessage, mimic: encounter.mimic, mimicTier: encounter.mimicTier, requirement: encounter.requirement, shadow: DungeonInfo.isShadow(), type: 'mimic'}))
+                .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'mimic', encounter.image, encounter.requirement, encounter.lock, encounter.lockMessage, encounter.mimic, encounter.mimicTier, DungeonInfo.isShadow(), encounter.shadowBackground)))
                 .sort((a, b) => a.id - b.id);
-        return {
-            pokemon: {category: 'Encounters', data: (pokemonArray ?? [])},
-            boss: {category: 'Boss', data: (bossArray ?? [])},
-            mimic: {category: 'Mimics', data: (mimicArray ?? [])},
-        };
-    }
-
-    public static hasTrainers() {
-        return  player.town.dungeon?.normalEncounterList.filter((encounter) => !encounter.hide && encounter.trainer).length > 0 ||
-                player.town.dungeon?.bossEncounterList.filter((encounter) => !encounter.hide && encounter.trainer).length > 0;
+        const array: InfoPokemonList[] = [];
+        array.push(new InfoPokemonList('pokemon', 'Encounters', (pokemonArray ?? [])));
+        array.push(new InfoPokemonList('boss', 'Boss', (bossArray ?? [])));
+        array.push(new InfoPokemonList('mimic', 'Mimics', (mimicArray ?? [])));
+        return array;
     }
 
     private static getTrainerList() {

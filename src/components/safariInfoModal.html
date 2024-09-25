@@ -18,13 +18,13 @@
             <div class="modal-body pt-0" style="background-color: inherit;">
                 <div class="tab-content">
                     <div id="pan-safari-pokemons" class="tab-pane fade p-3 show active">
-                        <!-- ko foreach: { data: Object.entries(SafariInfo.pokemonList()), as: 'pokemons' } -->
-                        <!-- ko if: pokemons[1].data.length -->
-                        <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#safari-${pokemons[0]}` }">
-                            <h5 class="my-0 mx-1 text-light" data-bind="text: pokemons[1].category">category</h5>
+                        <!-- ko foreach: { data: SafariInfo.pokemonList(), as: 'pokemons' } -->
+                        <!-- ko if: pokemons.data.length -->
+                        <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#safari-${pokemons.id}` }">
+                            <h5 class="my-0 mx-1 text-light" data-bind="text: pokemons.category">category</h5>
                         </div>
-                        <div class="collapse show" data-bind="attr: { 'id': `safari-${pokemons[0]}` }">
-                            <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons[1].data">
+                        <div class="collapse show" data-bind="attr: { 'id': `safari-${pokemons.id}` }">
+                            <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons.data">
                                 <div class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors(name)}">
                                     <span class="id pokedex-top-text" data-bind="text: (id > 0 ? Math.floor(id) + '' : '???').padStart(3, 0)">number</span>
                                     <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">

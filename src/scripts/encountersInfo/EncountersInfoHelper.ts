@@ -4,8 +4,14 @@ class InfoPokemon {
         public id: number,
         public name: PokemonNameType,
         public type: string,
+        public image: string,
         public requirement?: Requirement,
-        public fishing?: boolean
+        public lock?: boolean,
+        public lockMessage?: string,
+        public mimic?: boolean,
+        public mimicTier?: LootTier,
+        public shadow?: boolean,
+        public shadowBackground?: string
     ) {}
 }
 class InfoPokemonList {
@@ -57,7 +63,7 @@ class EncountersInfoHelper {
             } else {
                 return new PokemonRequirementInformation('Roaming Pokémon', 'roaming.png');
             }
-        } else if (pokemon.type == 'water' && pokemon?.fishing) {
+        } else if (pokemon.type == 'fishing') {
             return new PokemonRequirementInformation('Fishing Pokémon', 'fishing.png');
         } else {
             if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
@@ -66,6 +72,10 @@ class EncountersInfoHelper {
                 return new PokemonRequirementInformation('Weather Pokémon', 'weather.png');
             } else if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, DayOfWeekRequirement)) {
                 return new PokemonRequirementInformation('Day of Week Pokémon', 'day_of_week.png');
+            } else if (EncountersInfoHelper.hasRequirement(pokemon.requirement, SeededDateSelectNRequirement)) {
+                return new PokemonRequirementInformation('Random Date Pokémon', 'random_date.png');
+            } else if (EncountersInfoHelper.hasRequirement(pokemon.requirement, MoonCyclePhaseRequirement)) {
+                return new PokemonRequirementInformation('Moon Cycle Phase Pokémon', 'moon_cycle_phase.png');
             }
         }
         return null;
@@ -73,11 +83,14 @@ class EncountersInfoHelper {
 
     private static hasRequirement<T extends Requirement>(requirement: Requirement, type: new (...args: any[]) => T) : boolean {
         //I traverse all the Requirement tree recursively to check if one of the requirements is the one I want
-        if (requirement instanceof Requirement && requirement instanceof type) {
+        if (!requirement) {
+            return false;
+        }
+        if (requirement instanceof type) {
             return true;
         }
-        if (requirement instanceof MultiRequirement && requirement?.requirements) {
-            for (const req of requirement.requirements) {
+        if ('requirements' in requirement) {
+            for (const req of requirement.requirements as Requirement[]) {
                 if (EncountersInfoHelper.hasRequirement(req, type)) {
                     return true;
                 }
