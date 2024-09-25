@@ -2,7 +2,7 @@ class DungeonInfo {
     public static getName() : string {
         return player.town.name;
     }
-    
+
     public static pokemonList = ko.pureComputed(() => {
         return DungeonInfo.getPokemonList();
     });

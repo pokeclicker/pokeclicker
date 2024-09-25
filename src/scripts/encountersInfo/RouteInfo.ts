@@ -2,7 +2,7 @@ class RouteInfo {
     public static getName() : string {
         return Routes.getName(player.route, player.region);
     }
-    
+
     public static pokemonList : KnockoutObservable<InfoPokemonList[]> = ko.pureComputed(() => {
         return RouteInfo.getPokemonList();
     });

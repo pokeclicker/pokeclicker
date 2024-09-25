@@ -2,12 +2,12 @@ class SafariInfo {
     public static getName() : string {
         return player.town.name;
     }
-    
-    public static itemList : KnockoutObservable<InfoItemList[]> = ko.pureComputed(() => {
-        return SafariInfo.getItemList();
+
+    public static pokemonList = ko.pureComputed(() => {
+        return SafariInfo.getPokemonList();
     });
 
-    public static itemList = ko.pureComputed(() => {
+    public static itemList : KnockoutObservable<InfoItemList[]> = ko.pureComputed(() => {
         return SafariInfo.getItemList();
     });
 

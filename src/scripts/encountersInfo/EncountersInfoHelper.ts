@@ -5,14 +5,14 @@ class InfoPokemon {
         public name: PokemonNameType,
         public type: string,
         public requirement?: Requirement,
-        public fishing?: boolean,
+        public fishing?: boolean
     ) {}
 }
 class InfoPokemonList {
     constructor(
         public id: string,
         public category: string,
-        public data: InfoPokemon[],
+        public data: InfoPokemon[]
     ) {}
 }
 
@@ -21,14 +21,14 @@ class InfoItem {
     constructor(
         public item: string,
         public type: string,
-        public requirement: Requirement,
+        public requirement: Requirement
     ) {}
 }
 class InfoItemList {
     constructor(
         public id: string,
         public category: string,
-        public data: InfoItem[],
+        public data: InfoItem[]
     ) {}
 }
 
@@ -36,7 +36,7 @@ class InfoItemList {
 class PokemonRequirementInformation {
     constructor(
         public tooltip: string,
-        public image: string,
+        public image: string
     ) {}
 }
 class ItemInformation {
@@ -95,24 +95,26 @@ class EncountersInfoHelper {
     }
 
     private static getItemName(item : InfoItem) : string {
-        if (item.item in ItemList)
+        if (item.item in ItemList) {
             return ItemList[item.item]?.displayName;
-        else if (typeof BerryType[item.item] == 'number')
+        } else if (typeof BerryType[item.item] == 'number') {
             return `${item.item} Berry`;
-        else if (PokemonHelper.getPokemonByName(item.item as PokemonNameType).name != 'MissingNo.')
+        } else if (PokemonHelper.getPokemonByName(item.item as PokemonNameType).name != 'MissingNo.') {
             return PokemonHelper.displayName(item.item)();
-        else
+        } else {
             return GameConstants.camelCaseToString(GameConstants.humanifyString(item.item.toLowerCase()));
+        }
     }
 
     private static getItemImage(item : InfoItem) : string {
-        if (typeof BerryType[item.item] == 'number')
+        if (typeof BerryType[item.item] == 'number') {
             return FarmController.getBerryImage(BerryType[GameConstants.humanifyString(item.item)]);
-        else if (UndergroundItems.getByName(item.item) instanceof UndergroundItem)
+        } else if (UndergroundItems.getByName(item.item) instanceof UndergroundItem) {
             return UndergroundItems.getByName(item.item).image;
-        else if (PokemonHelper.getPokemonByName(item.item as PokemonNameType).name != 'MissingNo.')
+        } else if (PokemonHelper.getPokemonByName(item.item as PokemonNameType).name != 'MissingNo.') {
             return `assets/images/pokemon/${PokemonHelper.getPokemonByName(item.item as PokemonNameType).id}.png`;
-        else
+        } else {
             return ItemList[item.item].image;
+        }
     }
 }
