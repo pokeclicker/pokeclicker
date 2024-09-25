@@ -73,11 +73,14 @@ class EncountersInfoHelper {
 
     private static hasRequirement<T extends Requirement>(requirement: Requirement, type: new (...args: any[]) => T) : boolean {
         //I traverse all the Requirement tree recursively to check if one of the requirements is the one I want
-        if (requirement instanceof Requirement && requirement instanceof type) {
+        if (!requirement) {
+            return false;
+        }
+        if (requirement instanceof type) {
             return true;
         }
-        if (requirement instanceof MultiRequirement && requirement?.requirements) {
-            for (const req of requirement.requirements) {
+        if ('requirements' in requirement) {
+            for (const req of requirement.requirements as Requirement[]) {
                 if (EncountersInfoHelper.hasRequirement(req, type)) {
                     return true;
                 }
