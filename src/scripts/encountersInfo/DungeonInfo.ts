@@ -2,7 +2,7 @@ class DungeonInfo {
     public static getName() : string {
         return player.town.name;
     }
-    
+
     public static itemList : KnockoutObservable<InfoItemList[]> = ko.pureComputed(() => {
         return DungeonInfo.getItemList();
     });
