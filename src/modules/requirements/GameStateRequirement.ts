@@ -11,7 +11,7 @@ export default class GameStateRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `The game must be in the ${
+        return `The game must ${this.option == AchievementOption.less ? 'not ' : '' }be in the ${
             camelCaseToString(GameState[this.gameState])
         } state`;
     }
