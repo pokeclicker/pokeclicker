@@ -515,6 +515,7 @@ Routes.add(new RegionRoute(
     'Pinkan Plains', Region.kanto, 42,
     new RoutePokemon({
         land: ['Pinkan Pidgey', 'Pinkan Rattata', 'Pinkan Nidoran(M)', 'Pinkan Nidoran(F)', 'Pinkan Diglett', 'Pinkan Bellsprout'],
+        special: [new SpecialRoutePokemon(['Pinkan Pidgeotto'], new ObtainedPokemonRequirement('Pinkan Pidgeotto'))],
     }),
     [new RouteKillRequirement(10, Region.kanto, 41)],
     undefined,

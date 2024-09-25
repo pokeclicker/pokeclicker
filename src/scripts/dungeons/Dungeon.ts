@@ -1419,6 +1419,9 @@ dungeonList['Berry Forest'] = new Dungeon('Berry Forest',
 
 dungeonList['New Island'] = new Dungeon('New Island',
     [
+        {pokemon: 'Ivysaur (Clone)', options: { weight: 1, requirement: new ClearDungeonRequirement(30, GameConstants.getDungeonIndex('New Island')) }},
+        {pokemon: 'Charmeleon (Clone)', options: { weight: 1, requirement: new ClearDungeonRequirement(35, GameConstants.getDungeonIndex('New Island')) }},
+        {pokemon: 'Wartortle (Clone)', options: { weight: 1, requirement: new ClearDungeonRequirement(40, GameConstants.getDungeonIndex('New Island')) }},
         new DungeonTrainer('Armored Mewtwo',
             [
                 new GymPokemon('Tentacruel', 18500, 40),
@@ -1467,7 +1470,12 @@ dungeonList['New Island'] = new Dungeon('New Island',
         mythic: [{loot: 'Heart Scale'}],
     },
     18500,
-    [new DungeonBossPokemon('Armored Mewtwo', 131500, 70)],
+    [
+        new DungeonBossPokemon('Venusaur (Clone)', 131500, 70, { requirement: new ClearDungeonRequirement(80, GameConstants.getDungeonIndex('New Island')) }),
+        new DungeonBossPokemon('Charizard (Clone)', 131500, 70, { requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('New Island')) }),
+        new DungeonBossPokemon('Blastoise (Clone)', 131500, 70, { requirement: new ClearDungeonRequirement(120, GameConstants.getDungeonIndex('New Island')) }),
+        new DungeonBossPokemon('Armored Mewtwo', 131500, 70),
+    ],
     1800, 40);
 
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
@@ -7580,7 +7588,16 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 2 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new QuestLineStepCompletedRequirement('Zero\'s Ambition', 13)}),
+        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, { hide: true,
+            requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('Zero\'s Ambition', 13),
+                new QuestLineStepCompletedRequirement('Zero\'s Ambition', 14, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonBossPokemon('Giratina (Origin)', 11880000, 45, { hide: true,
+            requirement: new MultiRequirement([
+                new QuestLineCompletedRequirement('Zero\'s Ambition'),
+                new ObtainedPokemonRequirement('Giratina (Origin)'),
+            ])}),
     ],
     86500, 217);
 
@@ -7702,7 +7719,7 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
     89500, 223);
 
 dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
-    ['Golbat', 'Golduck', 'Graveler', 'Goldeen', 'Magikarp', 'Staravia', 'Bibarel', 'Chingling'],
+    ['Golbat', 'Golduck', 'Graveler', 'Goldeen', 'Magikarp', 'Gyarados', 'Staravia', 'Bibarel', 'Chingling'],
     {
         common: [
             {loot: 'xClick'},
@@ -7721,8 +7738,8 @@ dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
     2603000,
     [
         new DungeonBossPokemon('Seaking', 10000000, 100),
-        new DungeonBossPokemon('Gyarados', 10000000, 100),
         new DungeonBossPokemon('Dusclops', 10000000, 100),
+        new DungeonBossPokemon('Giratina (Altered)', 10000000, 100, {requirement: new QuestLineStepCompletedRequirement('Zero\'s Ambition', 14)}),
     ],
     96500, 230);
 
@@ -7822,7 +7839,7 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     96500, 230);
 
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
-    ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Lombre', 'Seedot', 'Roselia'],
+    ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Jumpluff', 'Lombre', 'Seedot', 'Roselia'],
     {
         common: [
             {loot: 'xAttack'},
@@ -7848,6 +7865,18 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
             hide: true,
             requirement: new MultiRequirement([
                 new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise')),
+                new SpecialEventRequirement('Golden Week'),
+            ])}),
+        new DungeonBossPokemon('Ivysaur (Rose)', 16000000, 100, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Flower Paradise')),
+                new SpecialEventRequirement('Golden Week'),
+            ])}),
+        new DungeonBossPokemon('Venusaur (Rose)', 16000000, 100, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Flower Paradise')),
                 new SpecialEventRequirement('Golden Week'),
             ])}),
         new DungeonBossPokemon('Vivillon (Garden)',  96662023, 60, {
@@ -8256,6 +8285,7 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         new DungeonTrainer('Psychic',
             [new GymPokemon('Sigilyph', 16000000, 23)],
             { weight: 2 }, 'Perry', '(male)'),
+        new DungeonBossPokemon('Darmanitan', 21000000, 100),
         new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}), // don't hide, because the dungeons associated with it are optional
         new DungeonBossPokemon('Vivillon (Sandstorm)',  96662023, 60, {
             hide: true,
@@ -8327,6 +8357,7 @@ dungeonList['Chargestone Cave'] = new Dungeon('Chargestone Cave',
     [
         {pokemon: 'Nosepass', options: { weight: 8.8 }},
         {pokemon: 'Boldore', options: { weight: 8.8 }},
+        {pokemon: 'Drilbur', options: { weight: 8.8 }},
         {pokemon: 'Joltik', options: { weight: 8.8 }},
         {pokemon: 'Ferroseed', options: { weight: 8.8 }},
         {pokemon: 'Klink', options: { weight: 8.8 }},
@@ -8410,7 +8441,7 @@ dungeonList['Chargestone Cave'] = new Dungeon('Chargestone Cave',
                 new GymPokemon('Archen', 12000000, 34),
                 new GymPokemon('Electabuzz', 12000000, 34),
             ], { weight: 1 }, 'Shaye', '(male)'),
-        new DungeonBossPokemon('Drilbur', 22000000, 100),
+        new DungeonBossPokemon('Probopass', 22000000, 100),
         new DungeonBossPokemon('Tynamo', 22000000, 100),
     ],
     186500, 6);
@@ -11874,6 +11905,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
         {pokemon: 'Carbink', options: { weight: 4 }},
         {pokemon: 'Lycanroc (Midday)', options: { weight: 4 }},
         {pokemon: 'Lycanroc (Midnight)', options: { weight: 4 }},
+        {pokemon: 'Lycanroc (Dusk)', options: { weight: 4 }},
         {pokemon: 'Jangmo-o', options: { weight: 4 }},
         {pokemon: 'Hakamo-o', options: { weight: 4 }},
         new DungeonTrainer('Veteran',
@@ -12014,6 +12046,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
         {pokemon: 'Alolan Raticate', options: { weight: 8.67 }},
         {pokemon: 'Alolan Sandshrew', options: { weight: 8.67 }},
         {pokemon: 'Alolan Vulpix', options: { weight: 8.67 }},
+        {pokemon: 'Golbat', options: { weight: 8.67 }},
         {pokemon: 'Sneasel', options: { weight: 8.67 }},
         {pokemon: 'Snorunt', options: { weight: 8.67 }},
         {pokemon: 'Gumshoos', options: { weight: 8.67 }},
@@ -12108,10 +12141,10 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     },
     16312850,
     [
-        new DungeonBossPokemon('Golbat', 81064250, 50),
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
+        new DungeonBossPokemon('Crabominable', 81064250, 50, { requirement: new MultiRequirement([new ObtainedPokemonRequirement('Crabominable'), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Mount Lanakila'))]) }),
         new DungeonBossPokemon('Necrozma', 83527125, 65, { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 5), new GymBadgeRequirement(BadgeEnums.Champion_Stamp)]) }),
         new DungeonTrainer('Trial Site',
             [
