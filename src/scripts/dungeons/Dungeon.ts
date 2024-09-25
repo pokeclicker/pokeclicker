@@ -76,6 +76,8 @@ interface EncounterInfo {
     lock: boolean,
     lockMessage: string,
     pokemonName: PokemonNameType,
+    grass?: boolean,
+    water?: boolean,
 }
 
 // Gain a gym badge after first completion of a dungeon
