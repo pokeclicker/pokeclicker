@@ -10,14 +10,14 @@
                 </div>
             </div>
             <div class="modal-body pt-0" style="background-color: inherit;">
-                <!-- ko foreach: { data: Object.entries(DungeonInfo.itemList()), as: 'items' } -->
-                <!-- ko if: items[1].data.length -->
-                <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#dungeon-${items[0]}` }">
-                    <img width="42px" data-bind="attr: { src: `assets/images/dungeons/chest-${items[0]}.png` }" />
-                    <h5 class="my-0 mx-1 text-light" data-bind="text: items[1].category">category</h5>
+                <!-- ko foreach: { data: DungeonInfo.itemList(), as: 'items' } -->
+                <!-- ko if: items.data.length -->
+                <div class="bg-primary text-center rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#dungeon-${items.id}` }">
+                    <img width="42px" data-bind="attr: { src: `assets/images/dungeons/chest-${items.id}.png` }" />
+                    <h5 class="my-0 mx-1 text-light" data-bind="text: items.category">category</h5>
                 </div>
-                <div class="collapse show" data-bind="attr: { 'id': `dungeon-${items[0]}` }">
-                    <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: items[1].data">
+                <div class="collapse show" data-bind="attr: { 'id': `dungeon-${items.id}` }">
+                    <div class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: items.data">
                         <div class="col-6 col-lg-4 mb-2">
                             <!-- ko with: EncountersInfoHelper.getItemInformations($data) -->
                                 <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">

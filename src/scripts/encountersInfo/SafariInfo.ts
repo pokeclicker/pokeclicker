@@ -1,18 +1,18 @@
 class SafariInfo {
-    public static itemList = ko.pureComputed(() => {
+    public static getName() : string {
+        return player.town.name;
+    }
+    
+    public static itemList : KnockoutObservable<InfoItemList[]> = ko.pureComputed(() => {
         return SafariInfo.getItemList();
     });
 
-    public static getName() {
-        return player.town.name;
-    }
-
-    private static getItemList() {
-        const itemsArray =
+    private static getItemList() : InfoItemList[] {
+        const itemsArray : InfoItem[] =
             SafariItemController.list[player.region]
-                ?.map((item) => ({item: item.item.id, type: 'item', requirement: item.requirement}));
-        return {
-            items: {category: 'Items', data: (itemsArray ?? [])},
-        };
+                ?.map((item) => (new InfoItem(String(item.item.id), 'item', item.requirement)));
+        const array: InfoItemList[] = [];
+        array.push(new InfoItemList('items', 'Items', (itemsArray ?? [])));
+        return array;
     }
 }

@@ -1,31 +1,82 @@
+//Pokémons Manager
+class InfoPokemon {
+    constructor(
+        public id: number,
+        public name: PokemonNameType,
+        public type: string,
+        public requirement?: Requirement,
+        public fishing?: boolean,
+    ) {}
+}
+class InfoPokemonList {
+    constructor(
+        public id: string,
+        public category: string,
+        public data: InfoPokemon[],
+    ) {}
+}
+
+//Items Manager
+class InfoItem {
+    constructor(
+        public item: string,
+        public type: string,
+        public requirement: Requirement,
+    ) {}
+}
+class InfoItemList {
+    constructor(
+        public id: string,
+        public category: string,
+        public data: InfoItem[],
+    ) {}
+}
+
+//Informations Manager
+class PokemonRequirementInformation {
+    constructor(
+        public tooltip: string,
+        public image: string,
+    ) {}
+}
+class ItemInformation {
+    constructor(
+        public isPokemonAndNotCaught: boolean,
+        public name: string,
+        public image: string,
+        public requirement: Requirement
+    ) {}
+}
+
+//Helper
 class EncountersInfoHelper {
-    public static getPokemonRequirementInformations(pokemon) {
+    public static getPokemonRequirementInformations(pokemon) : PokemonRequirementInformation {
         if (pokemon.type == 'roamer') {
             if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
-                return {tooltip: 'Event Roaming Pokémon', image: 'event_roaming.png'};
+                return new PokemonRequirementInformation('Event Roaming Pokémon', 'event_roaming.png');
             } else {
-                return {tooltip: 'Roaming Pokémon', image: 'roaming.png'};
+                return new PokemonRequirementInformation('Roaming Pokémon', 'roaming.png');
             }
         } else if (pokemon.type == 'water' && pokemon?.fishing) {
-            return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};
+            return new PokemonRequirementInformation('Fishing Pokémon', 'fishing.png');
         } else {
             if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, SpecialEventRequirement)) {
-                return {tooltip: 'Event Pokémon', image: 'event.png'};
+                return new PokemonRequirementInformation('Event Pokémon', 'event.png');
             } else if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, WeatherRequirement)) {
-                return {tooltip: 'Weather Pokémon', image: 'weather.png'};
+                return new PokemonRequirementInformation('Weather Pokémon', 'weather.png');
             } else if (EncountersInfoHelper.hasRequirement(pokemon?.requirement, DayOfWeekRequirement)) {
-                return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
+                return new PokemonRequirementInformation('Day of Week Pokémon', 'day_of_week.png');
             }
         }
         return null;
     }
 
-    private static hasRequirement(requirement, type) {
+    private static hasRequirement<T extends Requirement>(requirement: Requirement, type: new (...args: any[]) => T) : boolean {
         //I traverse all the Requirement tree recursively to check if one of the requirements is the one I want
-        if (requirement instanceof type) {
+        if (requirement instanceof Requirement && requirement instanceof type) {
             return true;
         }
-        if (requirement?.requirements) {
+        if (requirement instanceof MultiRequirement && requirement?.requirements) {
             for (const req of requirement.requirements) {
                 if (EncountersInfoHelper.hasRequirement(req, type)) {
                     return true;
@@ -35,37 +86,33 @@ class EncountersInfoHelper {
         return false;
     }
 
-    public static getItemInformations(item) {
-        const isPokemonAndNotCaught = PokemonHelper.getPokemonByName(item.item).name != 'MissingNo.' && !App.game.party.getPokemonByName(item.item);
+    public static getItemInformations(item : InfoItem) : ItemInformation {
+        const isPokemonAndNotCaught = PokemonHelper.getPokemonByName(item.item as PokemonNameType).name != 'MissingNo.' && !App.game.party.getPokemonByName(item.item as PokemonNameType);
         const name = isPokemonAndNotCaught ? '???' : EncountersInfoHelper.getItemName(item);
         const image = EncountersInfoHelper.getItemImage(item);
         const requirement = item.requirement;
-        return {isPokemonAndNotCaught, name, image, requirement};
+        return new ItemInformation(isPokemonAndNotCaught, name, image, requirement);
     }
 
-    private static getItemName(item) {
-        switch (true) {
-            case item.item in ItemList:
-                return ItemList[item.item]?.displayName;
-            case typeof BerryType[item.item] == 'number':
-                return `${item.item} Berry`;
-            case PokemonHelper.getPokemonByName(item.item).name != 'MissingNo.':
-                return PokemonHelper.displayName(item.item)();
-            default:
-                return GameConstants.camelCaseToString(GameConstants.humanifyString(item.item.toLowerCase()));
-        }
+    private static getItemName(item : InfoItem) : string {
+        if (item.item in ItemList)
+            return ItemList[item.item]?.displayName;
+        else if (typeof BerryType[item.item] == 'number')
+            return `${item.item} Berry`;
+        else if (PokemonHelper.getPokemonByName(item.item as PokemonNameType).name != 'MissingNo.')
+            return PokemonHelper.displayName(item.item)();
+        else
+            return GameConstants.camelCaseToString(GameConstants.humanifyString(item.item.toLowerCase()));
     }
 
-    private static getItemImage(item) {
-        switch (true) {
-            case typeof BerryType[item.item] == 'number':
-                return FarmController.getBerryImage(BerryType[GameConstants.humanifyString(item.item)]);
-            case UndergroundItems.getByName(item.item) instanceof UndergroundItem:
-                return UndergroundItems.getByName(item.item).image;
-            case PokemonHelper.getPokemonByName(item.item).name != 'MissingNo.':
-                return `assets/images/pokemon/${PokemonHelper.getPokemonByName(item.item).id}.png`;
-            default:
-                return ItemList[item.item].image;
-        }
+    private static getItemImage(item : InfoItem) : string {
+        if (typeof BerryType[item.item] == 'number')
+            return FarmController.getBerryImage(BerryType[GameConstants.humanifyString(item.item)]);
+        else if (UndergroundItems.getByName(item.item) instanceof UndergroundItem)
+            return UndergroundItems.getByName(item.item).image;
+        else if (PokemonHelper.getPokemonByName(item.item as PokemonNameType).name != 'MissingNo.')
+            return `assets/images/pokemon/${PokemonHelper.getPokemonByName(item.item as PokemonNameType).id}.png`;
+        else
+            return ItemList[item.item].image;
     }
 }

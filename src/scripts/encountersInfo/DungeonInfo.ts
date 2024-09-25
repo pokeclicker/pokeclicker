@@ -1,34 +1,34 @@
 class DungeonInfo {
-    public static itemList = ko.pureComputed(() => {
+    public static getName() : string {
+        return player.town.name;
+    }
+    
+    public static itemList : KnockoutObservable<InfoItemList[]> = ko.pureComputed(() => {
         return DungeonInfo.getItemList();
     });
 
-    public static getName() {
-        return player.town.name;
-    }
-
-    private static getItemList() {
-        const commonArray =
+    private static getItemList() : InfoItemList[] {
+        const commonArray : InfoItem[] =
             player.town.dungeon?.lootTable.common
-                ?.map((item) => ({item: item.loot, type: 'common', requirement: item.requirement}));
-        const rareArray =
+                ?.map((item) => (new InfoItem(item.loot, 'common', item.requirement)));
+        const rareArray : InfoItem[] =
             player.town.dungeon?.lootTable.rare
-                ?.map((item) => ({item: item.loot, type: 'rare', requirement: item.requirement}));
-        const epicArray =
+                ?.map((item) => (new InfoItem(item.loot, 'rare', item.requirement)));
+        const epicArray : InfoItem[] =
             player.town.dungeon?.lootTable.epic
-                ?.map((item) => ({item: item.loot, type: 'epic', requirement: item.requirement}));
-        const legendaryArray =
+                ?.map((item) => (new InfoItem(item.loot, 'epic', item.requirement)));
+        const legendaryArray : InfoItem[] =
             player.town.dungeon?.lootTable.legendary
-                ?.map((item) => ({item: item.loot, type: 'legendary', requirement: item.requirement}));
-        const mythicArray =
+                ?.map((item) => (new InfoItem(item.loot, 'legendary', item.requirement)));
+        const mythicArray : InfoItem[] =
             player.town.dungeon?.lootTable.mythic
-                ?.map((item) => ({item: item.loot, type: 'mythic', requirement: item.requirement}));
-        return {
-            common: {category: 'Common', data: (commonArray ?? [])},
-            rare: {category: 'Rare', data: (rareArray ?? [])},
-            epic: {category: 'Epic', data: (epicArray ?? [])},
-            legendary: {category: 'Legendary', data: (legendaryArray ?? [])},
-            mythic: {category: 'Mythic', data: (mythicArray ?? [])},
-        };
+                ?.map((item) => (new InfoItem(item.loot, 'mythic', item.requirement)));
+        const array: InfoItemList[] = [];
+        array.push(new InfoItemList('common', 'Common', (commonArray ?? [])));
+        array.push(new InfoItemList('rare', 'Rare', (rareArray ?? [])));
+        array.push(new InfoItemList('epic', 'Epic', (epicArray ?? [])));
+        array.push(new InfoItemList('legendary', 'Legendary', (legendaryArray ?? [])));
+        array.push(new InfoItemList('mythic', 'Mythic', (mythicArray ?? [])));
+        return array;
     }
 }
