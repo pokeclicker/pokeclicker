@@ -17,8 +17,8 @@ class EncountersInfoHelper {
                 return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
             } else if (EncountersInfoHelper.hasRequirement(pokemon.requirement, SeededDateSelectNRequirement)) {
                 return {tooltip: 'Random Date Pokémon', image: 'random_date.png'};
-            } else if (EncountersInfoHelper.hasRequirement(pokemon.requirement, DayCyclePartRequirement)) {
-                return {tooltip: 'Day Cycle Part Pokémon', image: 'day_cycle_part.png'};
+            } else if (EncountersInfoHelper.hasRequirement(pokemon.requirement, MoonCyclePhaseRequirement)) {
+                return {tooltip: 'Moon Cycle Phase Pokémon', image: 'moon_cycle_phase.png'};
             }
         }
         return null;

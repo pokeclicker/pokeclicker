@@ -431,6 +431,7 @@ class Dungeon {
                     lockMessage,
                     shadowTrainer: shadowEncounter,
                     trainer: true,
+                    name:  enemy?.name ? enemy.name : enemy.trainerClass,
                     team: enemy.getTeam().map(p => this.getEncounterInfo(p.name, null, hideEncounter, p.shadow == GameConstants.ShadowStatus.Shadow, requirement)),
                 };
                 encounterInfo.push(encounter);
@@ -485,6 +486,7 @@ class Dungeon {
                     lockMessage,
                     shadowTrainer: shadowEncounter,
                     trainer: true,
+                    name:  boss?.name ? boss.name : boss.trainerClass,
                     team: boss.getTeam().map(p => this.getEncounterInfo(p.name, null, hideEncounter, p.shadow == GameConstants.ShadowStatus.Shadow, requirement)),
                 };
                 encounterInfo.push(encounter);

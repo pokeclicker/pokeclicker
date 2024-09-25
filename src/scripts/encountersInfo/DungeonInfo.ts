@@ -55,14 +55,14 @@ class DungeonInfo {
         let id = 0;
         const trainersArray =
             player.town.dungeon?.normalEncounterList
-                .filter((encounter) => !encounter.hide && encounter['trainer'])
-                .map((encounter) => ({id: id++, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage,
+                .filter((encounter) => !encounter.hide && encounter['trainer'] && !(DungeonInfo.isShadow() && encounter.lock))
+                .map((encounter) => ({id: id++, name: encounter.name, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage,
                     team: encounter['team'].map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, shadow: encounter.shadow, type: 'pokemon-trainer'})),
                     shadow: encounter.shadowTrainer, type: 'trainer'}));
         const bossArray =
             player.town.dungeon?.bossEncounterList
-                .filter((encounter) => !encounter.hide && encounter['trainer'])
-                .map((encounter) => ({id: id++, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage,
+                .filter((encounter) => !encounter.hide && encounter['trainer'] && !(DungeonInfo.isShadow() && encounter.lock))
+                .map((encounter) => ({id: id++, name: encounter.name, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage,
                     team: encounter['team'].map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, shadow: encounter.shadow, type: 'pokemon-trainer-boss'})),
                     shadow: encounter.shadowTrainer, type: 'trainer-boss'}));
         return {
