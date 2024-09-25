@@ -366,7 +366,7 @@ class Dungeon {
         const purified = partyPokemon?.shadow >= GameConstants.ShadowStatus.Purified;
         const encounter = {
             pokemonName,
-            image: `assets/images/${(shinyCaught && !partyPokemon.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue())? 'shiny' : ''}${shadow && shadowCaught ? 'shadow' : ''}pokemon/${pokemonMap[pokemonName].id}.png`,
+            image: `assets/images/${(shinyCaught && !partyPokemon.hideShinyImage() && !Settings.getSetting('partyHideShinySprites').observableValue()) ? 'shiny' : ''}${shadow && shadowCaught ? 'shadow' : ''}pokemon/${pokemonMap[pokemonName].id}.png`,
             shadowBackground: shadow && !shadowCaught ? `assets/images/shadowpokemon/${pokemonMap[pokemonName].id}.png` : '',
             pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[pokerus]}.png` : '',
             EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${partyPokemon.evs().toLocaleString('en-US')}` : '',

@@ -2,7 +2,7 @@ class SafariInfo {
     public static pokemonList = ko.pureComputed(() => {
         return SafariInfo.getPokemonList();
     });
-    
+
     public static itemList = ko.pureComputed(() => {
         return SafariInfo.getItemList();
     });
@@ -14,12 +14,12 @@ class SafariInfo {
     private static getPokemonList() {
         const grassArray =
             SafariPokemonList.getDisplayList()
-                .filter((encounter) => encounter['grass'])
+                .filter((encounter) => encounter.grass)
                 .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage, type: 'grass'}))
                 .sort((a, b) => a.id - b.id);
         const waterArray =
             SafariPokemonList.getDisplayList()
-                .filter((encounter) => encounter['water'])
+                .filter((encounter) => encounter.water)
                 .map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage, type: 'water'}))
                 .sort((a, b) => a.id - b.id);
         const itemsArray =
