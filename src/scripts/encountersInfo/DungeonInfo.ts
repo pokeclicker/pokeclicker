@@ -7,7 +7,7 @@ class DungeonInfo {
         return DungeonInfo.getPokemonList();
     });
 
-    public static trainerList = ko.pureComputed(() => {
+    public static trainerList : KnockoutObservable<InfoTrainerList[]> = ko.pureComputed(() => {
         return DungeonInfo.getTrainerList();
     });
 
@@ -32,7 +32,7 @@ class DungeonInfo {
         const pokemonArray : InfoPokemon[] =
             player.town.dungeon?.normalEncounterList
                 .filter((encounter) => !encounter.hide && !encounter.trainer && !encounter.mimic)
-                .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'dungeon', encounter.image, encounter.requirement, encounter.lock, encounter.lockMessage, encounter.mimic, encounter.mimicTier, DungeonInfo.isShadow(), encounter.shadowBackground)))
+                .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'pokemon-dungeon', encounter.image, encounter.requirement, encounter.lock, encounter.lockMessage, encounter.mimic, encounter.mimicTier, DungeonInfo.isShadow(), encounter.shadowBackground)))
                 .sort((a, b) => a.id - b.id);
         const bossArray : InfoPokemon[] =
             player.town.dungeon?.bossEncounterList
@@ -51,24 +51,24 @@ class DungeonInfo {
         return array;
     }
 
-    private static getTrainerList() {
+    private static getTrainerList() : InfoTrainerList[] {
         let id = 0;
-        const trainersArray =
+        const trainersArray : InfoTrainer[] =
             player.town.dungeon?.normalEncounterList
                 .filter((encounter) => !encounter.hide && encounter.trainer && !(DungeonInfo.isShadow() && encounter.lock))
-                .map((encounter) => ({id: id++, name: encounter.name, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage,
-                    team: encounter.team.map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, shadow: encounter.shadow, type: 'pokemon-trainer'})),
-                    shadow: encounter.shadowTrainer, type: 'trainer'}));
-        const bossArray =
+                .map((encounter) => (new InfoTrainer(id++, encounter.name, 'trainer', encounter.image, encounter.lock, encounter.lockMessage, encounter.shadowTrainer, 
+                    encounter.team
+                        .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'pokemon-trainer', encounter.image, null, null, null, null, null, encounter.shadow))))));
+        const bossArray : InfoTrainer[] =
             player.town.dungeon?.bossEncounterList
                 .filter((encounter) => !encounter.hide && encounter.trainer && !(DungeonInfo.isShadow() && encounter.lock))
-                .map((encounter) => ({id: id++, name: encounter.name, image: encounter.image, lock: encounter.lock, lockMessage: encounter.lockMessage,
-                    team: encounter.team.map((encounter) => ({id: PokemonHelper.getPokemonByName(encounter.pokemonName).id, name: encounter.pokemonName, image: encounter.image, shadow: encounter.shadow, type: 'pokemon-trainer-boss'})),
-                    shadow: encounter.shadowTrainer, type: 'trainer-boss'}));
-        return {
-            trainers: {category: 'Encounters', data: (trainersArray ?? [])},
-            boss: {category: 'Boss', data: (bossArray ?? [])},
-        };
+                .map((encounter) => (new InfoTrainer(id++, encounter.name, 'trainer-boss', encounter.image, encounter.lock, encounter.lockMessage, encounter.shadowTrainer, 
+                    encounter.team
+                        .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'pokemon-trainer-boss', encounter.image, null, null, null, null, null, encounter.shadow))))));
+        const array: InfoTrainerList[] = [];
+        array.push(new InfoTrainerList('trainers', 'Encounters', (trainersArray ?? [])));
+        array.push(new InfoTrainerList('trainers-boss', 'Boss', (bossArray ?? [])));
+        return array;
     }
 
     private static getItemList() : InfoItemList[] {

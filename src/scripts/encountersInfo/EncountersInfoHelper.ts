@@ -38,6 +38,27 @@ class InfoItemList {
     ) {}
 }
 
+//Trainers Manager
+class InfoTrainer {
+    constructor(
+        public id: number,
+        public name: PokemonNameType,
+        public type: string,
+        public image: string,
+        public lock: boolean,
+        public lockMessage: string,
+        public shadow: boolean,
+        public team: InfoPokemon[],
+    ) {}
+}
+class InfoTrainerList {
+    constructor(
+        public id: string,
+        public category: string,
+        public data: InfoTrainer[]
+    ) {}
+}
+
 //Informations Manager
 class PokemonRequirementInformation {
     constructor(
