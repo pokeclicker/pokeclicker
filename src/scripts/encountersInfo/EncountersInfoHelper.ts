@@ -48,7 +48,7 @@ class InfoTrainer {
         public lock: boolean,
         public lockMessage: string,
         public shadow: boolean,
-        public team: InfoPokemon[],
+        public team: InfoPokemon[]
     ) {}
 }
 class InfoTrainerList {

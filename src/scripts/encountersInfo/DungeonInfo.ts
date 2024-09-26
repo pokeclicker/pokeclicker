@@ -56,13 +56,13 @@ class DungeonInfo {
         const trainersArray : InfoTrainer[] =
             player.town.dungeon?.normalEncounterList
                 .filter((encounter) => !encounter.hide && encounter.trainer && !(DungeonInfo.isShadow() && encounter.lock))
-                .map((encounter) => (new InfoTrainer(id++, encounter.name, 'trainer', encounter.image, encounter.lock, encounter.lockMessage, encounter.shadowTrainer, 
+                .map((encounter) => (new InfoTrainer(id++, encounter.name, 'trainer', encounter.image, encounter.lock, encounter.lockMessage, encounter.shadowTrainer,
                     encounter.team
                         .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'pokemon-trainer', encounter.image, null, null, null, null, null, encounter.shadow))))));
         const bossArray : InfoTrainer[] =
             player.town.dungeon?.bossEncounterList
                 .filter((encounter) => !encounter.hide && encounter.trainer && !(DungeonInfo.isShadow() && encounter.lock))
-                .map((encounter) => (new InfoTrainer(id++, encounter.name, 'trainer-boss', encounter.image, encounter.lock, encounter.lockMessage, encounter.shadowTrainer, 
+                .map((encounter) => (new InfoTrainer(id++, encounter.name, 'trainer-boss', encounter.image, encounter.lock, encounter.lockMessage, encounter.shadowTrainer,
                     encounter.team
                         .map((encounter) => (new InfoPokemon(PokemonHelper.getPokemonByName(encounter.pokemonName).id, encounter.pokemonName, 'pokemon-trainer-boss', encounter.image, null, null, null, null, null, encounter.shadow))))));
         const array: InfoTrainerList[] = [];
