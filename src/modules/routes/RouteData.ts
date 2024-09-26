@@ -3728,6 +3728,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Swablu', 'Altaria'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Absol'], new WeatherRequirement([WeatherType.Blizzard, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Salamence', 'Garchomp'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
+          new SpecialRoutePokemon(['Archeops'], new ObtainedPokemonRequirement('Archeops')),
       ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Tunnel to the Top'))],
