@@ -1,4 +1,6 @@
+/// <reference path="../../declarations/GameConstants.d.ts" />
 /// <reference path="../../declarations/enums/MulchType.d.ts"/>
+/// <reference path="../../declarations/requirements/InEnvironmentRequirement.d.ts"/>
 
 class FarmController {
 
@@ -317,6 +319,31 @@ class FarmController {
             return 'walkDown';
         }
     }
+
+    public static wandererDexTooltip(p: any) {
+        if (pokemonMap[p].nativeRegion > player.highestRegion()) {
+            return `Reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonMap[p].nativeRegion])} to attract this Pokémon!`;
+        }
+        if (FarmController.wandererRequirement[p]) {
+            return FarmController.wandererRequirement[p].hint();
+        }
+        return '';
+    }
+
+    public static isAvailableWanderer(p: any): boolean {
+        let availability = pokemonMap[p].nativeRegion <= player.highestRegion();
+        if (availability === true && FarmController.wandererRequirement[p]) {
+            availability = FarmController.wandererRequirement[p].isCompleted();
+        }
+        return availability;
+    }
+
+    // use this mindfully, we don't want to lock pokemon behind the same requirements their other obtain methods have
+    public static wandererRequirement: Partial<Record<PokemonNameType, Requirement>> = {
+        'Burmy (Plant)' : new InEnvironmentRequirement('PlantCloak'),
+        'Burmy (Sand)' : new InEnvironmentRequirement('SandyCloak'),
+        'Burmy (Trash)' : new InEnvironmentRequirement('TrashCloak'),
+    };
 
     public static shortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
         return App.game.farming.canAccess() && !Settings.getSetting('showFarmModule').observableValue();
