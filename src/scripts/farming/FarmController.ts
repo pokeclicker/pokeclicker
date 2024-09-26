@@ -1,6 +1,5 @@
 /// <reference path="../../declarations/GameConstants.d.ts" />
 /// <reference path="../../declarations/enums/MulchType.d.ts"/>
-/// <reference path="../../declarations/requirements/InEnvironmentRequirement.d.ts"/>
 
 class FarmController {
 
