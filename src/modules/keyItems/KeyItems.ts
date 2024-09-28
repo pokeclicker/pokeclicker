@@ -107,11 +107,12 @@ export default class KeyItems implements Feature {
     }
 
     fromJSON(json: Record<string, any>): void {
-        Object.keys(json).forEach((key) => {
+        this.itemList.forEach((keyItem) => {
+            const key = KeyItemType[keyItem.name];
             if (json[key] !== undefined) {
                 if (json[key] === true) {
                     // Unlock to dispose unlocker if needed
-                    this.itemList[KeyItemType[key]].unlock();
+                    keyItem.unlock();
                 }
             }
         });
