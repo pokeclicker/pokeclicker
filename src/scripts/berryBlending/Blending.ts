@@ -42,9 +42,23 @@ class Blending implements Feature {
         });
     }
 
+    hasEnoughBerries(berry: BerryType, initial: number = 0): boolean {
+        let total = initial;
+        if (berry != BerryType.None) {
+            this.machines.forEach(m => m.blendSlots.forEach(s => {
+                if (s.berry === berry) {
+                    total += 1;
+                }
+            }));
+            return App.game.farming.berryList[berry]() > total;
+        } else {
+            return false;
+        }
+    }
+
     insertBerry(slotIndex: number, berry: BerryType, machineIndex: number) {
         const slot = this.machines[machineIndex].blendSlots[slotIndex];
-        if (slot.berry != berry) {
+        if (slot.berry != berry && this.hasEnoughBerries(berry, 1)) {
             slot.insertBerry(berry);
         } else {
             slot.insertBerry(BerryType.None);

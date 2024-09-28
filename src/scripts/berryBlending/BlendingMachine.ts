@@ -39,15 +39,14 @@ class BlendingMachine implements Saveable {
                     GameHelper.incrementObservable(App.game.farming.berryList[slot.berry], -1);
                     App.game.blending.gainFlavor(slot.berry);
                     return;
-                }
-            )
+                })
                 this.timer = 0
                 return;
             }
 
-            // Don't let player use berry if there is only one left
+            // Remove berry if there is only one left
             this.blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
-                if (App.game.farming.berryList[slot.berry]() <= 1) {
+                if (!(App.game.blending.hasEnoughBerries(slot.berry))) {
                         slot.berry = BerryType.None;
                     }
                 return;
