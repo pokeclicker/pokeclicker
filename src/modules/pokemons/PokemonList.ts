@@ -24068,8 +24068,8 @@ export const pokemonList = createPokemonArray(
         'exp': 140,
         'catchRate': 45,
         'evolutions': [
-            LevelEvolution('Cosmoem', 'Solgaleo', 53),
-            LevelEvolution('Cosmoem', 'Lunala', 53),
+            DayTimedLevelEvolution('Cosmoem', 'Solgaleo', 53),
+            NightTimedLevelEvolution('Cosmoem', 'Lunala', 53),
         ],
         'base': {
             'hitpoints': 43,
