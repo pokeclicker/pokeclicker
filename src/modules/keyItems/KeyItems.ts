@@ -109,20 +109,14 @@ export default class KeyItems implements Feature {
     fromJSON(json: Record<string, any>): void {
         this.itemList.forEach((keyItem) => {
             const key = KeyItemType[keyItem.name];
-            if (json[key] !== undefined) {
-                if (json[key] === true) {
-                    // Unlock to dispose unlocker if needed
-                    keyItem.unlock();
-                }
+            if (json[key] === true) {
+                // Unlock to dispose unlocker if needed
+                keyItem.unlock();
             }
-        });
 
-        // Gain the item in case the requirements changed.
-        this.itemList.forEach((keyItem) => {
-            if (!keyItem.isUnlocked && keyItem.unlockReq !== null) {
-                if (keyItem.unlockReq()) {
-                    App.game.keyItems.gainKeyItem(keyItem.name);
-                }
+            // Gain the item in case the requirements changed.
+            if (!keyItem.isUnlocked && keyItem.unlockReq()) {
+                App.game.keyItems.gainKeyItem(keyItem.name);
             }
         });
     }
