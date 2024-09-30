@@ -1419,9 +1419,6 @@ dungeonList['Berry Forest'] = new Dungeon('Berry Forest',
 
 dungeonList['New Island'] = new Dungeon('New Island',
     [
-        {pokemon: 'Ivysaur (Clone)', options: { weight: 1, requirement: new ClearDungeonRequirement(30, GameConstants.getDungeonIndex('New Island')) }},
-        {pokemon: 'Charmeleon (Clone)', options: { weight: 1, requirement: new ClearDungeonRequirement(35, GameConstants.getDungeonIndex('New Island')) }},
-        {pokemon: 'Wartortle (Clone)', options: { weight: 1, requirement: new ClearDungeonRequirement(40, GameConstants.getDungeonIndex('New Island')) }},
         new DungeonTrainer('Armored Mewtwo',
             [
                 new GymPokemon('Tentacruel', 18500, 40),
@@ -1470,12 +1467,7 @@ dungeonList['New Island'] = new Dungeon('New Island',
         mythic: [{loot: 'Heart Scale'}],
     },
     18500,
-    [
-        new DungeonBossPokemon('Venusaur (Clone)', 131500, 70, { requirement: new ClearDungeonRequirement(80, GameConstants.getDungeonIndex('New Island')) }),
-        new DungeonBossPokemon('Charizard (Clone)', 131500, 70, { requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('New Island')) }),
-        new DungeonBossPokemon('Blastoise (Clone)', 131500, 70, { requirement: new ClearDungeonRequirement(120, GameConstants.getDungeonIndex('New Island')) }),
-        new DungeonBossPokemon('Armored Mewtwo', 131500, 70),
-    ],
+    [new DungeonBossPokemon('Armored Mewtwo', 131500, 70)],
     1800, 40);
 
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
@@ -7865,18 +7857,6 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
             hide: true,
             requirement: new MultiRequirement([
                 new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise')),
-                new SpecialEventRequirement('Golden Week'),
-            ])}),
-        new DungeonBossPokemon('Ivysaur (Rose)', 16000000, 100, {
-            hide: true,
-            requirement: new MultiRequirement([
-                new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Flower Paradise')),
-                new SpecialEventRequirement('Golden Week'),
-            ])}),
-        new DungeonBossPokemon('Venusaur (Rose)', 16000000, 100, {
-            hide: true,
-            requirement: new MultiRequirement([
-                new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Flower Paradise')),
                 new SpecialEventRequirement('Golden Week'),
             ])}),
         new DungeonBossPokemon('Vivillon (Garden)',  96662023, 60, {
