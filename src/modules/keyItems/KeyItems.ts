@@ -115,8 +115,10 @@ export default class KeyItems implements Feature {
             }
 
             // Gain the item in case the requirements changed.
-            if (!keyItem.isUnlocked && keyItem.unlockReq()) {
-                App.game.keyItems.gainKeyItem(keyItem.name);
+            if (!keyItem.isUnlocked && keyItem.unlockReq !== null) {
+                if (keyItem.unlockReq()) {
+                    App.game.keyItems.gainKeyItem(keyItem.name);
+                }
             }
         });
     }
