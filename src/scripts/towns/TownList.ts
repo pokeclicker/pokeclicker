@@ -320,7 +320,7 @@ const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Come back when you are ready to learn!',
 ]);
 const CeruleanFarmApprentice = new NPC('Farm Apprentice', [
-    'Buying all these water eggs with Quest Points sure is expensive....but one day when I was tending to my Passho berries, a squirtle suddenly appeared!'
+    'Buying all these water eggs with Quest Points sure is expensive....but one day when I was tending to my Passho Berries, a squirtle suddenly appeared!'
     ,'Maybe I could save even MORE Quest Points on eggs if I keep mutating different berries.',
 ], {image: 'assets/images/npcs/Bug Catcher.png'});
 
