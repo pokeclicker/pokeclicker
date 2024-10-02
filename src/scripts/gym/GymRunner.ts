@@ -11,6 +11,7 @@ class GymRunner {
     public static running: KnockoutObservable<boolean> = ko.observable(false);
     public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
     public static initialRun = true;
+    public static lastWinNotification: {notification: {close: () => void, closed: boolean}, gym: Gym} = {notification: {closed: true, close: () => null}, gym: null};
 
     public static startGym(
         gym: Gym,
@@ -100,11 +101,15 @@ class GymRunner {
     public static gymWon(gym: Gym) {
         if (GymRunner.running()) {
             GymRunner.running(false);
-            Notifier.notify({
-                message: `Congratulations, you defeated ${GymBattle.gym.leaderName.replace(/\d/g, '')}!`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.gym_won,
-            });
+            // don't show notifications for the same gym too fast
+            if (this.lastWinNotification.notification.closed || this.lastWinNotification.gym !== gym) {
+                this.lastWinNotification.notification = Notifier.notify({
+                    message: `Congratulations, you defeated ${GymBattle.gym.leaderName.replace(/\d/g, '')}!`,
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.General.gym_won,
+                });
+                this.lastWinNotification.gym = gym;
+            }
             // If this is the first time defeating this gym
             if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
                 gym.firstWinReward();

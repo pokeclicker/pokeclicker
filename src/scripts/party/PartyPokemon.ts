@@ -339,7 +339,7 @@ class PartyPokemon implements Saveable {
     public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
         const itemName = GameConstants.ConsumableType[type];
         if (!player.itemList[itemName]()) {
-            return Notifier.notify({
+            Notifier.notify({
                 message : `You do not have any more ${ItemList[itemName].displayName}`,
                 type : NotificationConstants.NotificationOption.danger,
             });
