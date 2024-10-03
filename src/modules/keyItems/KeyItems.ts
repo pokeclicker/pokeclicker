@@ -85,7 +85,7 @@ export default class KeyItems implements Feature {
     }
 
     hasKeyItem(item: KeyItemType): boolean {
-        const keyItem = this.itemList.find(keyItem => keyItem.name === item);
+        const keyItem = this.itemList.find(k => k.name === item);
         if (keyItem === undefined) {
             return false;
         }
@@ -93,7 +93,7 @@ export default class KeyItems implements Feature {
     }
 
     gainKeyItem(item: KeyItemType, silent = false): void {
-        const keyItem = this.itemList.find(keyItem => keyItem.name === item);
+        const keyItem = this.itemList.find(k => k.name === item);
         if (!this.hasKeyItem(item)) {
             keyItem.unlock();
             keyItem.unlockRewardOnUnlock();
