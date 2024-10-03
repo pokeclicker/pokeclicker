@@ -150,15 +150,4 @@ class GymRunner {
 
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    $('#receiveBadgeModal').on('hidden.bs.modal', () => {
-        if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
-            KeyItemController.showGainModal(KeyItemType.Safari_ticket);
-        }
-        if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
-            KeyItemController.showGainModal(KeyItemType.Gem_case);
-        }
-    });
-});
-
 GymRunner satisfies TmpGymRunnerType;
