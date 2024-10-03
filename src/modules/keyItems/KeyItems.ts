@@ -85,7 +85,7 @@ export default class KeyItems implements Feature {
     }
 
     hasKeyItem(item: KeyItemType): boolean {
-        const keyItem = this.itemList.find(k => k.name === item);
+        const keyItem = this.itemList.find(k => k.id === item);
         if (keyItem === undefined) {
             return false;
         }
@@ -94,7 +94,7 @@ export default class KeyItems implements Feature {
 
     gainKeyItem(item: KeyItemType, silent = false): void {
         if (!this.hasKeyItem(item)) {
-            const keyItem = this.itemList.find(k => k.name === item);
+            const keyItem = this.itemList.find(k => k.id === item);
             keyItem.unlock();
             keyItem.unlockRewardOnUnlock();
             if (!silent) {
@@ -110,7 +110,7 @@ export default class KeyItems implements Feature {
 
     fromJSON(json: Record<string, any>): void {
         this.itemList.forEach((keyItem) => {
-            const key = KeyItemType[keyItem.name];
+            const key = KeyItemType[keyItem.id];
             if (json[key] === true) {
                 // Unlock to dispose unlocker if needed
                 keyItem.unlock();
@@ -119,7 +119,7 @@ export default class KeyItems implements Feature {
             // Gain the item in case the requirements changed.
             if (!keyItem.isUnlocked && keyItem.unlockReq !== null) {
                 if (keyItem.unlockReq()) {
-                    App.game.keyItems.gainKeyItem(keyItem.name);
+                    App.game.keyItems.gainKeyItem(keyItem.id);
                 }
             }
         });
@@ -128,7 +128,7 @@ export default class KeyItems implements Feature {
     toJSON(): Record<string, any> {
         const save = {};
         for (let i = 0; i < this.itemList.length; i++) {
-            save[KeyItemType[this.itemList[i].name]] = this.itemList[i].isUnlocked();
+            save[KeyItemType[this.itemList[i].id]] = this.itemList[i].isUnlocked();
         }
         return save;
     }
