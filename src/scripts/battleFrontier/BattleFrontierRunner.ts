@@ -7,6 +7,8 @@ class BattleFrontierRunner {
     public static checkpoint: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
     public static highest: KnockoutObservable<number> = ko.observable(1);
     public static battleBackground: KnockoutObservable<GameConstants.BattleBackground> = ko.observable('Default');
+    public static readonly STAGES_PER_FLOOR = 10;
+    public static readonly MONEY_TO_BATTLE_POINTS_RATIO = 100;
 
     public static counter = 0;
 
@@ -54,6 +56,32 @@ class BattleFrontierRunner {
     public static nextStage() {
         // Gain any rewards we should have earned for defeating this stage
         BattleFrontierMilestones.gainReward(this.stage());
+        if (this.stage() % this.STAGES_PER_FLOOR == 0) {
+            // Calculate rewards
+            const stageBattlePoints = this.calculateBattlePointsForStage(this.stage());
+            const previouslyEarnedBattlePoints = this.calculateBattlePointsForStage(this.stage() - this.STAGES_PER_FLOOR);
+            const battlePointsEarned = stageBattlePoints - previouslyEarnedBattlePoints;
+            const moneyEarned = battlePointsEarned * this.MONEY_TO_BATTLE_POINTS_RATIO;
+
+            // Award battle points and dollars
+            App.game.wallet.gainBattlePoints(battlePointsEarned);
+            App.game.wallet.gainMoney(moneyEarned, true);
+
+            Notifier.notify({
+                title: 'Battle Frontier',
+                message: `You beat stage ${this.stage().toLocaleString('en-US')}!\nYou earned <img src="./assets/images/currency/battlePoint.svg" height="24px"/>&nbsp;${battlePointsEarned.toLocaleString('en-US')} and <img src="./assets/images/currency/money.svg" height="24px"/>&nbsp;${moneyEarned.toLocaleString('en-US')}.`,
+                strippedMessage: `You beat stage ${this.stage().toLocaleString('en-US')}!\nYou earned ${battlePointsEarned.toLocaleString('en-US')} Battle Points and ${moneyEarned.toLocaleString('en-US')} Pokédollars.`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.General.battle_frontier,
+                sound: NotificationConstants.NotificationSound.General.battle_frontier,
+                timeout: GameConstants.SECOND * this.STAGES_PER_FLOOR,
+            });
+
+            // Change background
+            const currentBackground = BattleFrontierRunner.battleBackground();
+            const backgrounds = Object.keys(GameConstants.BattleBackgrounds).filter((key) => key !== currentBackground);
+            BattleFrontierRunner.battleBackground(Rand.fromArray(backgrounds) as GameConstants.BattleBackground);
+        }
         if (App.game.statistics.battleFrontierHighestStageCompleted() < this.stage()) {
             // Update our highest stage
             App.game.statistics.battleFrontierHighestStageCompleted(this.stage());
@@ -65,12 +93,6 @@ class BattleFrontierRunner {
         BattleFrontierRunner.timeLeftPercentage(100);
 
         this.checkpoint(this.stage());
-
-        if (this.stage() % 25 == 0) {
-            const currentBackground = BattleFrontierRunner.battleBackground();
-            const backgrounds = Object.keys(GameConstants.BattleBackgrounds).filter((key) => key !== currentBackground);
-            BattleFrontierRunner.battleBackground(Rand.fromArray(backgrounds) as GameConstants.BattleBackground);
-        }
     }
 
     public static end() {
@@ -82,29 +104,24 @@ class BattleFrontierRunner {
     public static battleLost() {
         // Current stage - 1 as the player didn't beat the current stage
         const stageBeaten = this.stage() - 1;
-        // Give Battle Points and Money based on how far the user got
-        const battleMultiplier = Math.max(stageBeaten / 100, 1);
-        let battlePointsEarned = Math.round(stageBeaten * battleMultiplier);
-        let moneyEarned = stageBeaten * 100 * battleMultiplier;
-
-        // Award battle points and dollars and retrieve their computed values
-        battlePointsEarned = App.game.wallet.gainBattlePoints(battlePointsEarned).amount;
-        moneyEarned = App.game.wallet.gainMoney(moneyEarned, true).amount;
+        const lastRewardStage = Math.floor(stageBeaten / this.STAGES_PER_FLOOR) * this.STAGES_PER_FLOOR;
+        const totalBattlePointsEarned = this.calculateBattlePointsForStage(lastRewardStage);
+        const totalMoneyEarned = this.MONEY_TO_BATTLE_POINTS_RATIO * totalBattlePointsEarned;
 
         Notifier.notify({
             title: 'Battle Frontier',
-            message: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/battlePoint.svg" height="24px"/> ${battlePointsEarned.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyEarned.toLocaleString('en-US')}.`,
-            strippedMessage: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received ${battlePointsEarned.toLocaleString('en-US')} Battle Points.\nYou received ${moneyEarned.toLocaleString('en-US')} Pokédollars.`,
+            message: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received a total of <img src="./assets/images/currency/battlePoint.svg" height="24px"/> ${totalBattlePointsEarned.toLocaleString('en-US')}.\nYou received a total of <img src="./assets/images/currency/money.svg" height="24px"/> ${totalMoneyEarned.toLocaleString('en-US')}.`,
+            strippedMessage: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received a total of ${totalBattlePointsEarned.toLocaleString('en-US')} Battle Points.\nYou received a total of ${totalMoneyEarned.toLocaleString('en-US')} Pokédollars.`,
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.General.battle_frontier,
             sound: NotificationConstants.NotificationSound.General.battle_frontier,
-            timeout: 30 * GameConstants.MINUTE,
+            timeout: 5 * GameConstants.MINUTE,
         });
         App.game.logbook.newLog(
             LogBookTypes.FRONTIER,
             createLogContent.gainBattleFrontierPoints({
                 stage: stageBeaten.toLocaleString('en-US'),
-                points: battlePointsEarned.toLocaleString('en-US'),
+                points: totalBattlePointsEarned.toLocaleString('en-US'),
             })
         );
 
@@ -112,6 +129,7 @@ class BattleFrontierRunner {
 
         this.end();
     }
+
     public static battleQuit() {
         Notifier.confirm({
             title: 'Battle Frontier',
@@ -131,6 +149,11 @@ class BattleFrontierRunner {
                 this.end();
             }
         });
+    }
+
+    public static calculateBattlePointsForStage(stage: number): number {
+        const battleMultiplier = Math.max(stage / 100, 1);
+        return Math.round(stage * battleMultiplier);
     }
 
     public static timeLeftSeconds = ko.pureComputed(() => {
