@@ -71,7 +71,7 @@ class QuestLineHelper {
 
         // Learn about catching from the Old Man
         const OldManReward = () => {
-            $('#npc-modal').one('hidden.bs.modal', () => {
+            $('#npcModal').one('hidden.bs.modal', () => {
                 Information.show({
                     steps: [
                         {
