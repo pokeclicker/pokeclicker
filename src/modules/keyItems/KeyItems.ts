@@ -85,16 +85,18 @@ export default class KeyItems implements Feature {
     }
 
     hasKeyItem(item: KeyItemType): boolean {
-        if (this.itemList[item] === undefined) {
+        const keyItem = this.itemList.find(keyItem => keyItem.name === item);
+        if (keyItem === undefined) {
             return false;
         }
-        return this.itemList[item].isUnlocked();
+        return keyItem.isUnlocked();
     }
 
     gainKeyItem(item: KeyItemType, silent = false): void {
+        const keyItem = this.itemList.find(keyItem => keyItem.name === item);
         if (!this.hasKeyItem(item)) {
-            this.itemList[item].unlock();
-            this.itemList[item].unlockRewardOnUnlock();
+            keyItem.unlock();
+            keyItem.unlockRewardOnUnlock();
             if (!silent) {
                 KeyItemController.showGainModal(item);
             }
