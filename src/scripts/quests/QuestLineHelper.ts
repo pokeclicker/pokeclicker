@@ -1427,10 +1427,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
-            App.game.keyItems.gainKeyItem(KeyItemType.DNA_splicers, true);
-            $('#temporaryBattleWonModal').one('hidden.bs.modal', () => {
-                KeyItemController.showGainModal(KeyItemType.DNA_splicers);
-            });
+            App.game.keyItems.gainKeyItem(KeyItemType.DNA_splicers);
         };
 
         const clearGhetsis2 = new DefeatTemporaryBattleQuest('Ghetsis 2', 'Defeat Ghetsis one final time!').withCustomReward(ghetsisReward);
@@ -3852,10 +3849,7 @@ class QuestLineHelper {
             ], 'Spectrier and Glastrier are now roaming the Crown Tundra. Catch them when the opportunity arises!'));
 
         const UnityReward = () => {
-            App.game.keyItems.gainKeyItem(KeyItemType.Reins_of_unity, true);
-            $('#npcModal').one('hidden.bs.modal', () => {
-                KeyItemController.showGainModal(KeyItemType.Reins_of_unity);
-            });
+            App.game.keyItems.gainKeyItem(KeyItemType.Reins_of_unity);
         };
 
         const talktoCalyrex4 = new TalkToNPCQuest(Calyrex4, 'Now that you have captured both of its steeds, talk to Calyrex at the Crown Shrine.').withCustomReward(UnityReward);
