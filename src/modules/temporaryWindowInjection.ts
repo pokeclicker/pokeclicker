@@ -93,6 +93,8 @@ import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
 import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
+import Blending from './berryBlending/Blending';
+import BlendingController from './berryBlending/BlendingController';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
@@ -307,6 +309,8 @@ Object.assign(<any>window, {
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
     BerriesUnlockedRequirement,
+    Blending,
+    BlendingController,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,

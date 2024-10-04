@@ -1,7 +1,9 @@
-class FlavorAmount {
+import FlavorType from '../enums/FlavorType';
+
+export default class FlavorAmount {
     constructor(
         public amount: number,
-        public flavor: FlavorType
+        public flavor: FlavorType,
     ) {
         this.amount = Math.round(amount);
         this.flavor = flavor;

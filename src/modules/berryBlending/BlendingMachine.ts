@@ -1,7 +1,13 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+import type {
+    Observable as KnockoutObservable,
+    Computed as KnockoutComputed,
+} from 'knockout';
+import { Saveable } from '../DataStore/common/Saveable';
+import BerryType from '../enums/BerryType';
+import GameHelper from '../GameHelper';
+import BlendingSlot from './BlendingSlot';
 
-class BlendingMachine implements Saveable {
+export default class BlendingMachine implements Saveable {
     saveKey = '';
 
     defaults = {
@@ -32,25 +38,25 @@ class BlendingMachine implements Saveable {
     update(seconds: number): void {
         if (this.blendSlots.some(slot => !slot.isEmpty())) {
 
-            this.timer += seconds * App.game.blending.rpm(this.blendSlots)/100;
+            this.timer += seconds * App.game.blending.rpm(this.blendSlots) / 100;
 
             if (this.timer >= 60) {
                 this.blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
                     GameHelper.incrementObservable(App.game.farming.berryList[slot.berry], -1);
                     App.game.blending.gainFlavor(slot.berry);
                     return;
-                })
-                this.timer = 0
+                });
+                this.timer = 0;
                 return;
             }
 
             // Remove berry if there is only one left
             this.blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
                 if (!(App.game.blending.hasEnoughBerries(slot.berry))) {
-                        slot.berry = BerryType.None;
-                    }
+                    slot.berry = BerryType.None;
+                }
                 return;
-            })
+            });
 
         } else {
             this.timer = 0;

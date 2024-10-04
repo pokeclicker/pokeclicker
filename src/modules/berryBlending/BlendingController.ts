@@ -1,9 +1,18 @@
-class BlendingController {
+import BerryType from '../enums/BerryType';
+import GameHelper from '../GameHelper';
+import Item from '../items/Item';
+import { ItemList } from '../items/ItemList';
+import PokeBlock from '../items/PokeBlock';
+import FlavorAmount from './FlavorAmount';
+
+export default class BlendingController {
 
     public static blendingModalTabSelected: KnockoutObservable<string> = ko.observable('blendingView');
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedPokeBlock: KnockoutObservable<Item> = ko.observable(ItemList.PokeBlock_Red);
+
+    static amount: KnockoutObservable<number> = ko.observable(1);
 
     public static getPokeblockList() {
         return Object.values(ItemList).filter((i) => i instanceof PokeBlock);
@@ -33,15 +42,13 @@ class BlendingController {
         }
 
         const tooMany = (amt: number) => (item as PokeBlock).flavors.some((flavor) =>
-            !App.game.blending.hasAmount(new FlavorAmount(flavor.value * amt, flavor.type))
+            !App.game.blending.hasAmount(new FlavorAmount(flavor.value * amt, flavor.type)),
         );
 
         const amt = GameHelper.binarySearch(tooMany, 0, Number.MAX_SAFE_INTEGER);
 
         this.amountInput().val(amt).change();
     }
-
-    static amount: KnockoutObservable<number> = ko.observable(1);
 
     public static calculateButtonCss(): string {
         const item: Item = this.selectedPokeBlock();

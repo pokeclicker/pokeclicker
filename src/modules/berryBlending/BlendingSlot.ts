@@ -1,7 +1,11 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+import type {
+    Observable as KnockoutObservable,
+    Computed as KnockoutComputed,
+} from 'knockout';
+import { Saveable } from '../DataStore/common/Saveable';
+import BerryType from '../enums/BerryType';
 
-class BlendingSlot implements Saveable {
+export default class BlendingSlot implements Saveable {
     saveKey = '';
     defaults = {
         isUnlocked: false,

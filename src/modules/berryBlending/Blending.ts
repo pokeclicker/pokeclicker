@@ -1,7 +1,15 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+import { Observable as KnockoutObservable } from 'knockout';
+import { Feature } from '../DataStore/common/Feature';
+import BerryType from '../enums/BerryType';
+import FlavorType from '../enums/FlavorType';
+import KeyItemType from '../enums/KeyItemType';
+import GameHelper from '../GameHelper';
+import PokeBlock from '../items/PokeBlock';
+import BlendingMachine from './BlendingMachine';
+import BlendingSlot from './BlendingSlot';
+import FlavorAmount from './FlavorAmount';
 
-class Blending implements Feature {
+export default class Blending implements Feature {
     name = 'Blending';
     saveKey = 'blending';
 
@@ -12,7 +20,7 @@ class Blending implements Feature {
         flavorBank: new Array(GameHelper.enumLength(FlavorType)).fill(0),
         machines: new Array(4).fill(null).map((index) => {
             return new BlendingMachine(index === 0, 0);
-        })
+        }),
     };
 
     blendSlots: Array<BlendingSlot>;
@@ -67,14 +75,14 @@ class Blending implements Feature {
 
     public rpm(slots: BlendingSlot[]) {
         let smoothness = 0;
-        slots.filter(slot => !slot.isEmpty()).forEach(slot =>
-            smoothness += (App.game.farming.berryData[slot.berry].smoothness * 10)
-        );
+        slots.filter(slot => !slot.isEmpty()).forEach(slot => {
+            smoothness += (App.game.farming.berryData[slot.berry].smoothness * 10);
+        });
         return slots.filter(slot => !slot.isEmpty()).length ? Math.round(smoothness / slots.filter(slot => !slot.isEmpty()).length) : 0;
     }
 
     getRPM(index: number): string {
-        return this.rpm(this.machines[index].blendSlots) ? (this.rpm(this.machines[index].blendSlots)/100).toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) : '0.00';
+        return this.rpm(this.machines[index].blendSlots) ? (this.rpm(this.machines[index].blendSlots) / 100).toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) : '0.00';
     }
 
     getTimer(index: number): string {
