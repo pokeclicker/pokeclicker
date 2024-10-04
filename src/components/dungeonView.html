@@ -106,25 +106,26 @@
               <tr>
                 <td width="50%">
                   <knockout data-bind="text: DungeonRunner.dungeon.name">Dungeon name</knockout>
-                  <!--If all Pokémon in the dungeon are caught-->
-                  <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
-                      <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
-                           src="assets/images/pokeball/Pokeball.svg"/>
-                  </knockout>
-
-                  <!--If all Pokémon in the dungeon are caught shiny-->
-                  <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
-                      <img title="You have captured all Pokémon shiny in this dungeon!"
-                           class="pokeball-smallest"
-                           src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                  <!--If all Pokémon in the dungeon are caught or caught shiny-->
+                  <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false)">
+                      <img class="pokeball-smallest"
+                           data-bind="attr: { src: `assets/images/pokeball/Pokeball${DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) ? '-shiny' : ''}.svg`},
+                           tooltip: {
+                            trigger: 'hover', placement: 'bottom', title: `You have captured all Pokémon${DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) ? ' shiny' : ''} in this dungeon!`
+                        }"/>
                   </knockout>
 
                   <!--Pokérus image-->
                   <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon())">
-                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png',
-                            title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon)}"
+                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png' },
+                      tooltip: { title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon), trigger: 'hover', placement: 'bottom', html: true }"
                     src=""/>
                   </knockout>
+
+                  <!-- ko if: player.town.dungeon.allAvailableShadowPokemon().length -->
+                  <img height="19" src="assets/images/status/shadow.svg" data-bind="
+                    css: { 'dungeon-pokemon-locked': player.town.dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) },"/>
+                  <!-- /ko -->
                 </td>
                 <td width="50%">
                   <knockout data-bind="text: `${App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toLocaleString('en-US')} Clears`"></knockout>
