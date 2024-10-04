@@ -1,4 +1,4 @@
-import { GameState, Region, Environment, MegaStoneType, AchievementOption } from '../../GameConstants';
+import { GameState, Region, Environment, MegaStoneType } from '../../GameConstants';
 import { ItemNameType } from '../../items/ItemNameType';
 import { QuestLineNameType } from '../../quests/QuestLineNameType';
 import GameStateRequirement from '../../requirements/GameStateRequirement';
