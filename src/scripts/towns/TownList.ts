@@ -881,7 +881,7 @@ const UnownFigure = new NPC('Unown Figure', [
     'I am the lead scientist specializing in all things related to Unown. If you have any questions, don\'t hesitate to ask. Our study has revealed three key patterns regarding the appearance of Unown:',
     '1. <b>Increased Frequency with Clears</b>: The deeper one ventures into the dungeon, the more Unown emerge. Our most daring researchers have observed up to three Unown at a time.',
     '2. <b> Daily Variations </b>: Different types of Unown seem to appear each day, following what appears to be a specific sequence.',
-    '3. <b> Limited Variety in the Region </b>: Not all versions of Unown are found here. Although 28 forms exist, some have only been encountered in other regions.'
+    '3. <b> Limited Variety in the Region </b>: Not all versions of Unown are found here. Although 28 forms exist, some have only been encountered in other regions.',
 ], { image: 'assets/images/npcs/Scientist (male).png' });
 
 //Kanto Towns
@@ -2051,7 +2051,7 @@ TownList['Ruins of Alph'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.johto, 32)],
     undefined,
     {
-        npcs: [UnownFigure]
+        npcs: [UnownFigure],
     }
 );
 TownList['Union Cave'] = new DungeonTown(
@@ -4769,7 +4769,7 @@ TownList['Solaceon Ruins'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)],
     undefined,
     {
-        npcs: [UnownFigure]
+        npcs: [UnownFigure],
     }
 );
 TownList['Iron Island'] = new DungeonTown(
