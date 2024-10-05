@@ -88,6 +88,7 @@ class Game implements TmpGameType {
         this.weatherApp = new WeatherApp();
         this.zMoves = new ZMoves();
         this.pokemonContest = new PokemonContest();
+        this.blending = new Blending();
 
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
