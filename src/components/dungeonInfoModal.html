@@ -1,11 +1,11 @@
 <div class="modal fade noselect" id="dungeonInfoModal" tabindex="-1" role="dialog" aria-labelledby="dungeonInfoLabel">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h4 class="modal-title" data-bind="text: DungeonInfo.getFullName()">name</h4>
                 <button type="button" class="btn btn-danger position-absolute" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
             </div>
-            <div class="modal-body pt-0 overflow-hidden" style="background-color: inherit;">
+            <div class="modal-body pt-0" style="background-color: inherit;">
                 <!-- ko foreach: { data: Object.entries(DungeonInfo.getLootList()), as: 'lootEntries' } -->
                 <div class="bg-primary text-left rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#tier-${lootEntries[0]}` }">
                     <img width="42px" data-bind="attr: { src: `assets/images/dungeons/chest-${lootEntries[0]}.png` }" />
@@ -19,7 +19,7 @@
                                 <!-- ko using: PokemonHelper.getPokemonByName(item.loot).name != 'MissingNo.' && !App.game.party.getPokemonByName(item.loot), as: 'isPokemonAndNotCaught' -->
                                     <!-- ko using: isPokemonAndNotCaught ? '???' : DungeonInfo.getLootName(item.loot), as: 'lootName' -->
                                         <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
-                                            <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) }, 
+                                            <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) },
                                                 style: { 'filter': isPokemonAndNotCaught ? 'brightness(0)' : '' }">
                                             <div class="flex-grow-1 small ml-2" style="min-width: 0;">
                                                 <div class="text-truncate" data-bind="text: lootName"></div>
@@ -29,7 +29,7 @@
                                                 title: item.requirement?.hint() || '',
                                                 placement: 'bottom',
                                                 trigger: 'hover'
-                                            }, visible: item.requirement" />
+                                            }, visible: item.requirement && !item.requirement.isCompleted()" />
                                         </div>
                                     <!-- /ko -->
                                 <!-- /ko -->
