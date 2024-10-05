@@ -4,10 +4,10 @@ import BerryType from '../enums/BerryType';
 import FlavorType from '../enums/FlavorType';
 import KeyItemType from '../enums/KeyItemType';
 import GameHelper from '../GameHelper';
-import PokeBlock from '../items/PokeBlock';
 import BlendingMachine from './BlendingMachine';
 import BlendingSlot from './BlendingSlot';
 import FlavorAmount from './FlavorAmount';
+import BlendingRecipe from './BlendingRecipe';
 
 export default class Blending implements Feature {
     name = 'Blending';
@@ -137,15 +137,15 @@ export default class Blending implements Feature {
         return true;
     }
 
-    public loseFlavor(block: PokeBlock, amount: number) {
-        return block.flavors.forEach((flavor) => this.loseAmount(new FlavorAmount(flavor.value * amount, flavor.type)));
+    public loseFlavor(recipe: BlendingRecipe, amount: number) {
+        return recipe.flavorPrice.forEach((flavor) => this.loseAmount(new FlavorAmount(flavor.value * amount, flavor.type)));
     }
 
-    public buyPokeblock(block: PokeBlock, amount: number) {
-        let blockFlavors = [block.flavors[0], block.flavors[1], block.flavors[2], block.flavors[3], block.flavors[4]];
+    public buyPokeblock(block: BlendingRecipe, amount: number) {
+        let blockFlavors = [block.flavorPrice[0], block.flavorPrice[1], block.flavorPrice[2], block.flavorPrice[3], block.flavorPrice[4]];
 
         if (blockFlavors.filter(f => f.value > 0).every(f => this.loseAmount(new FlavorAmount(f.value * amount, f.type)))) {
-            GameHelper.incrementObservable(player.itemList[block.name], amount);
+            GameHelper.incrementObservable(player.itemList[block.item], amount);
             return;
         }
     }

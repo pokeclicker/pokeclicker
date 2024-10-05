@@ -95,6 +95,8 @@ import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTo
 import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
 import Blending from './berryBlending/Blending';
 import BlendingController from './berryBlending/BlendingController';
+import BlendingRecipes from './berryBlending/BlendingRecipes';
+import BlendingRecipeType from './enums/BlendingRecipeType';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
@@ -311,6 +313,8 @@ Object.assign(<any>window, {
     BerriesUnlockedRequirement,
     Blending,
     BlendingController,
+    BlendingRecipes,
+    BlendingRecipeType,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,

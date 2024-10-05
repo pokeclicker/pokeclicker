@@ -1,8 +1,7 @@
 import BerryType from '../enums/BerryType';
 import GameHelper from '../GameHelper';
-import Item from '../items/Item';
-import { ItemList } from '../items/ItemList';
-import PokeBlock from '../items/PokeBlock';
+import BlendingRecipe from './BlendingRecipe';
+import BlendingRecipes from './BlendingRecipes';
 import FlavorAmount from './FlavorAmount';
 
 export default class BlendingController {
@@ -10,13 +9,9 @@ export default class BlendingController {
     public static blendingModalTabSelected: KnockoutObservable<string> = ko.observable('blendingView');
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
-    public static selectedPokeBlock: KnockoutObservable<Item> = ko.observable(ItemList.PokeBlock_Red);
+    public static selectedRecipe: KnockoutObservable<BlendingRecipe> = ko.observable(BlendingRecipes.getFullBlendingRecipeList()[0]);
 
     static amount: KnockoutObservable<number> = ko.observable(1);
-
-    public static getPokeblockList() {
-        return Object.values(ItemList).filter((i) => i instanceof PokeBlock);
-    }
 
     public static amountInput = () => $('#berryBlenderModal').find('input[name="recipeAmount"]');
 
@@ -35,13 +30,13 @@ export default class BlendingController {
     }
 
     public static maxAmount() {
-        const item: Item = this.selectedPokeBlock();
+        const recipe: BlendingRecipe = this.selectedRecipe();
 
-        if (!item) {
+        if (!recipe) {
             return this.amountInput().val(0).change();
         }
 
-        const tooMany = (amt: number) => (item as PokeBlock).flavors.some((flavor) =>
+        const tooMany = (amt: number) => (recipe as BlendingRecipe).flavorPrice.some((flavor) =>
             !App.game.blending.hasAmount(new FlavorAmount(flavor.value * amt, flavor.type)),
         );
 
@@ -51,9 +46,9 @@ export default class BlendingController {
     }
 
     public static calculateButtonCss(): string {
-        const item: Item = this.selectedPokeBlock();
+        const recipe: BlendingRecipe = this.selectedRecipe();
 
-        if (item && (item as PokeBlock).flavors.some((flavor) =>
+        if (recipe && (recipe as BlendingRecipe).flavorPrice.some((flavor) =>
             !App.game.blending.hasAmount(new FlavorAmount(flavor.value * this.amount(), flavor.type)))
                 || this.amount() < 1) {
             return 'btn btn-danger smallButton smallFont';
