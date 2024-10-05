@@ -1,5 +1,5 @@
 import FlavorType from '../enums/FlavorType';
-import { PokeBlockColor, Currency } from '../GameConstants';
+import { PokeBlockColor } from '../GameConstants';
 import Item from './Item';
 
 interface BlockFlavor {
@@ -16,7 +16,7 @@ export default class PokeBlock extends Item {
         this.type = color;
         this.flavors = [];
         for (let i = 0; i < 5; i++) {
-            this.flavors.push({type: i, value: flavors[i]});
+            this.flavors.push({ type: i, value: flavors[i] });
         }
     }
     
