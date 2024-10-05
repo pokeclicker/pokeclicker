@@ -94,17 +94,17 @@ ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmP
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
 
-ItemList.PokeBlock_Red          = new PokeBlock(PokeBlockColor.Red, Infinity, [40, 0, 0, 0, 0], 'Boosts the Appeal of Cool Pokémon');
-ItemList.PokeBlock_Blue         = new PokeBlock(PokeBlockColor.Blue, Infinity, [0, 40, 0, 0, 0], 'Boosts the Appeal of Beautiful Pokémon');
-ItemList.PokeBlock_Pink         = new PokeBlock(PokeBlockColor.Pink, Infinity, [0, 0, 40, 0, 0], 'Boosts the Appeal of Cute Pokémon');
-ItemList.PokeBlock_Green        = new PokeBlock(PokeBlockColor.Green, Infinity, [0, 0, 0, 40, 0], 'Boosts the Appeal of Smart Pokémon');
-ItemList.PokeBlock_Yellow       = new PokeBlock(PokeBlockColor.Yellow, Infinity, [0, 0, 0, 0, 40], 'Boosts the Appeal of Tough Pokémon');
-ItemList.PokeBlock_Red_Plus     = new PokeBlock(PokeBlockColor.Red_Plus, Infinity, [3200, 0, 0, 0, 0], 'Changes a Pokémon\'s Contest Type to Cool');
-ItemList.PokeBlock_Blue_Plus    = new PokeBlock(PokeBlockColor.Blue_Plus, Infinity, [0, 3200, 0, 0, 0], 'Changes a Pokémon\'s Contest Type to Beautiful');
-ItemList.PokeBlock_Pink_Plus    = new PokeBlock(PokeBlockColor.Pink_Plus, Infinity, [0, 0, 3200, 0, 0], 'Changes a Pokémon\'s Contest Type to Cute');
-ItemList.PokeBlock_Green_Plus   = new PokeBlock(PokeBlockColor.Green_Plus, Infinity, [0, 0, 0, 3200, 0], 'Changes a Pokémon\'s Contest Type to Smart');
-ItemList.PokeBlock_Yellow_Plus  = new PokeBlock(PokeBlockColor.Yellow_Plus, Infinity, [0, 0, 0, 0, 3200], 'Changes a Pokémon\'s Contest Type to Tough');
-ItemList.PokeBlock_Rainbow      = new PokeBlock(PokeBlockColor.Rainbow, Infinity, [2400, 2400, 2400, 2400, 2400], 'Changes a Pokémon\'s Contest Type to Balanced');
+ItemList.PokeBlock_Red          = new PokeBlock(PokeBlockColor.Red, Infinity, 'Boosts the Appeal of Cool Pokémon');
+ItemList.PokeBlock_Blue         = new PokeBlock(PokeBlockColor.Blue, Infinity, 'Boosts the Appeal of Beautiful Pokémon');
+ItemList.PokeBlock_Pink         = new PokeBlock(PokeBlockColor.Pink, Infinity, 'Boosts the Appeal of Cute Pokémon');
+ItemList.PokeBlock_Green        = new PokeBlock(PokeBlockColor.Green, Infinity, 'Boosts the Appeal of Smart Pokémon');
+ItemList.PokeBlock_Yellow       = new PokeBlock(PokeBlockColor.Yellow, Infinity, 'Boosts the Appeal of Tough Pokémon');
+ItemList.PokeBlock_Red_Plus     = new PokeBlock(PokeBlockColor.Red_Plus, Infinity, 'Changes a Pokémon\'s Contest Type to Cool');
+ItemList.PokeBlock_Blue_Plus    = new PokeBlock(PokeBlockColor.Blue_Plus, Infinity, 'Changes a Pokémon\'s Contest Type to Beautiful');
+ItemList.PokeBlock_Pink_Plus    = new PokeBlock(PokeBlockColor.Pink_Plus, Infinity, 'Changes a Pokémon\'s Contest Type to Cute');
+ItemList.PokeBlock_Green_Plus   = new PokeBlock(PokeBlockColor.Green_Plus, Infinity, 'Changes a Pokémon\'s Contest Type to Smart');
+ItemList.PokeBlock_Yellow_Plus  = new PokeBlock(PokeBlockColor.Yellow_Plus, Infinity, 'Changes a Pokémon\'s Contest Type to Tough');
+ItemList.PokeBlock_Rainbow      = new PokeBlock(PokeBlockColor.Rainbow, Infinity, 'Changes a Pokémon\'s Contest Type to Balanced');
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);
