@@ -4,7 +4,6 @@ import Requirement from '../requirements/Requirement';
 
 export default class BlendingRecipe {
     public flavorPrice: BerryFlavor[];
-    public isUnlocked: KnockoutObservable<boolean>;
 
     constructor(
         public item: ItemNameType,
@@ -15,6 +14,9 @@ export default class BlendingRecipe {
         for (let i = 0; i < 5; i++) {
             this.flavorPrice.push({ type: i, value: flavors[i] });
         }
-        this.isUnlocked = ko.observable(requirement?.isCompleted() ?? true);
+    }
+
+    isUnlocked(): boolean {
+        return this.requirement?.isCompleted() ?? true;
     }
 }

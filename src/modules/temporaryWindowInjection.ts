@@ -12,6 +12,7 @@ import BadgeEnums from './enums/Badges';
 import BerryColor from './enums/BerryColor';
 import BerryFirmness from './enums/BerryFirmness';
 import BerryType from './enums/BerryType';
+import BlendingRecipeType from './enums/BlendingRecipeType';
 import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
@@ -96,7 +97,6 @@ import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequiremen
 import Blending from './berryBlending/Blending';
 import BlendingController from './berryBlending/BlendingController';
 import BlendingRecipes from './berryBlending/BlendingRecipes';
-import BlendingRecipeType from './enums/BlendingRecipeType';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
@@ -224,6 +224,7 @@ Object.assign(<any>window, {
     BerryColor,
     BerryFirmness,
     BerryType,
+    BlendingRecipeType,
     SizeUnits,
     PokemonType,
     CaughtStatus,
@@ -315,7 +316,6 @@ Object.assign(<any>window, {
     Blending,
     BlendingController,
     BlendingRecipes,
-    BlendingRecipeType,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,
