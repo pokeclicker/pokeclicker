@@ -30,7 +30,7 @@ export default class BlendingRecipes {
     public static getFullBlendingRecipeList() {
         let recipes = [];
         GameHelper.enumNumbers(Object.keys(BlendingRecipes.blendingRecipeList)).flatMap(key => {
-            recipes = recipes.concat(BlendingRecipes.getBlendingRecipeSet(key))
+            recipes = recipes.concat(BlendingRecipes.getBlendingRecipeSet(key));
         });
         return recipes;
     }
