@@ -12,7 +12,7 @@ export default class BlendingMachine implements Saveable {
 
     defaults = {
         blendSlots: new Array(4).fill(null).map((index) => {
-            return new BlendingSlot(index === 0, BerryType.None, 0);
+            return new BlendingSlot(index === 0, BerryType.None, index);
         }),
         timer: 0,
         isUnlocked: false,
@@ -94,7 +94,7 @@ export default class BlendingMachine implements Saveable {
             this.blendSlots = this.defaults.blendSlots;
         } else {
             (savedSlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
-                const slot: BlendingSlot = new BlendingSlot(false, BerryType.None, 0);
+                const slot: BlendingSlot = new BlendingSlot(false, BerryType.None, index);
                 slot.fromJSON(value);
                 this.blendSlots[index] = slot;
             });

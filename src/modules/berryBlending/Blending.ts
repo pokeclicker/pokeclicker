@@ -14,21 +14,16 @@ export default class Blending implements Feature {
     saveKey = 'blending';
 
     defaults = {
-        blendSlots: new Array(4).fill(null).map((index) => {
-            return new BlendingSlot(index === 0, BerryType.None, 0);
-        }),
         flavorBank: new Array(GameHelper.enumLength(FlavorType)).fill(0),
         machines: new Array(4).fill(null).map((index) => {
-            return new BlendingMachine(index === 0, 0);
+            return new BlendingMachine(index === 0, index);
         }),
     };
 
-    blendSlots: Array<BlendingSlot>;
     flavorBank: Array<KnockoutObservable<number>>;
     machines: Array<BlendingMachine>;
 
     constructor() {
-        this.blendSlots = this.defaults.blendSlots;
         this.flavorBank = this.defaults.flavorBank.map((v) => ko.observable(v));
         this.machines = this.defaults.machines;
     }
@@ -156,7 +151,6 @@ export default class Blending implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            blendSlots: this.blendSlots.map(slot => slot.toJSON()),
             flavorBank: this.flavorBank.map(ko.unwrap),
             machines: this.machines.map(m => m.toJSON()),
         };
@@ -167,22 +161,12 @@ export default class Blending implements Feature {
             return;
         }
 
-        const savedSlots = json.blendSlots;
-        if (savedSlots == null) {
-            this.blendSlots = this.defaults.blendSlots;
-        } else {
-            (savedSlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
-                const slot: BlendingSlot = new BlendingSlot(false, BerryType.None, 0);
-                slot.fromJSON(value);
-                this.blendSlots[index] = slot;
-            });
-        }
-        const savedJlots = json.machines;
-        if (savedJlots == null) {
+        const savedMachines = json.machines;
+        if (savedMachines == null) {
             this.machines = this.defaults.machines;
         } else {
-            (savedJlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
-                const slot: BlendingMachine = new BlendingMachine(false, 0);
+            (savedMachines as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
+                const slot: BlendingMachine = new BlendingMachine(false, index);
                 slot.fromJSON(value);
                 this.machines[index] = slot;
             });
