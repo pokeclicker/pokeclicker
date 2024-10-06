@@ -35,7 +35,6 @@ export default class Blending implements Feature {
     }
 
     initialize(): void {
-        BlendingRecipes.blendingRecipeList;
     }
 
     update(delta: number): void {
