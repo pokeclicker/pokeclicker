@@ -7580,16 +7580,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 2 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, { hide: true,
-            requirement: new MultiRequirement([
-                new QuestLineStepCompletedRequirement('Zero\'s Ambition', 13),
-                new QuestLineStepCompletedRequirement('Zero\'s Ambition', 14, GameConstants.AchievementOption.less),
-            ])}),
-        new DungeonBossPokemon('Giratina (Origin)', 11880000, 45, { hide: true,
-            requirement: new MultiRequirement([
-                new QuestLineCompletedRequirement('Zero\'s Ambition'),
-                new ObtainedPokemonRequirement('Giratina (Origin)'),
-            ])}),
+        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new QuestLineStepCompletedRequirement('Zero\'s Ambition', 13)}),
     ],
     86500, 217);
 
@@ -7711,7 +7702,7 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
     89500, 223);
 
 dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
-    ['Golbat', 'Golduck', 'Graveler', 'Goldeen', 'Magikarp', 'Gyarados', 'Staravia', 'Bibarel', 'Chingling'],
+    ['Golbat', 'Golduck', 'Graveler', 'Goldeen', 'Magikarp', 'Staravia', 'Bibarel', 'Chingling'],
     {
         common: [
             {loot: 'xClick'},
@@ -7730,8 +7721,8 @@ dungeonList['Sendoff Spring'] = new Dungeon('Sendoff Spring',
     2603000,
     [
         new DungeonBossPokemon('Seaking', 10000000, 100),
+        new DungeonBossPokemon('Gyarados', 10000000, 100),
         new DungeonBossPokemon('Dusclops', 10000000, 100),
-        new DungeonBossPokemon('Giratina (Altered)', 10000000, 100, {requirement: new QuestLineStepCompletedRequirement('Zero\'s Ambition', 14)}),
     ],
     96500, 230);
 
