@@ -9,7 +9,7 @@ export default class BlendingController {
     public static blendingModalTabSelected: KnockoutObservable<string> = ko.observable('blendingView');
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
-    public static selectedRecipe: KnockoutObservable<BlendingRecipe> = ko.observable(BlendingRecipes.getFullBlendingRecipeList()[0]);
+    public static selectedRecipe: KnockoutObservable<BlendingRecipe> = ko.observable(BlendingRecipes.blendingRecipeList[0][0]);
 
     static amount: KnockoutObservable<number> = ko.observable(1);
 

@@ -8,6 +8,7 @@ import BlendingMachine from './BlendingMachine';
 import BlendingSlot from './BlendingSlot';
 import FlavorAmount from './FlavorAmount';
 import BlendingRecipe from './BlendingRecipe';
+import BlendingRecipes from './BlendingRecipes';
 
 export default class Blending implements Feature {
     name = 'Blending';
@@ -34,6 +35,7 @@ export default class Blending implements Feature {
     }
 
     initialize(): void {
+        BlendingRecipes.blendingRecipeList;
     }
 
     update(delta: number): void {

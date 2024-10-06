@@ -1,5 +1,7 @@
 import BlendingRecipeType from '../enums/BlendingRecipeType';
+import { Region } from '../GameConstants';
 import GameHelper from '../GameHelper';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import BlendingRecipe from './BlendingRecipe';
 
 export default class BlendingRecipes {
@@ -10,12 +12,13 @@ export default class BlendingRecipes {
             new BlendingRecipe('PokeBlock_Pink', [0, 0, 40, 0, 0]),
             new BlendingRecipe('PokeBlock_Green', [0, 0, 0, 40, 0]),
             new BlendingRecipe('PokeBlock_Yellow', [0, 0, 0, 0, 40]),
-            // new BlendingRecipe('PokeBlock_Red_Plus', [3200, 0, 0, 0, 0]),
-            // new BlendingRecipe('PokeBlock_Blue_Plus', [0, 3200, 0, 0, 0]),
-            // new BlendingRecipe('PokeBlock_Pink_Plus', [0, 0, 3200, 0, 0]),
-            // new BlendingRecipe('PokeBlock_Green_Plus', [0, 0, 0, 3200, 0]),
-            // new BlendingRecipe('PokeBlock_Yellow_Plus', [0, 0, 0, 0, 3200]),
-            // new BlendingRecipe('PokeBlock_Rainbow', [2400, 2400, 2400, 2400, 2400]),
+            // Todo: OneFromMany requirement(Max region or Contest won)
+            new BlendingRecipe('PokeBlock_Red_Plus', [3200, 0, 0, 0, 0], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Blue_Plus', [0, 3200, 0, 0, 0], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Pink_Plus', [0, 0, 3200, 0, 0], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Green_Plus', [0, 0, 0, 3200, 0], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Yellow_Plus', [0, 0, 0, 0, 3200], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Rainbow', [2400, 2400, 2400, 2400, 2400], new MaxRegionRequirement(Region.kalos)),
         ],
     };
 
