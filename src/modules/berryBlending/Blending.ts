@@ -16,7 +16,7 @@ export default class Blending implements Feature {
     defaults = {
         flavorBank: new Array(GameHelper.enumLength(FlavorType)).fill(0),
         machines: new Array(4).fill(null).map((index) => {
-            return new BlendingMachine(index === 0, index);
+            return new BlendingMachine(index);
         }),
     };
 
@@ -166,7 +166,7 @@ export default class Blending implements Feature {
             this.machines = this.defaults.machines;
         } else {
             (savedMachines as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
-                const slot: BlendingMachine = new BlendingMachine(false, index);
+                const slot: BlendingMachine = new BlendingMachine(index);
                 slot.fromJSON(value);
                 this.machines[index] = slot;
             });

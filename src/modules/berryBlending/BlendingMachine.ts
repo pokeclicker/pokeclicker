@@ -15,21 +15,18 @@ export default class BlendingMachine implements Saveable {
             return new BlendingSlot(index === 0, BerryType.None, index);
         }),
         timer: 0,
-        isUnlocked: false,
         degreesRotated: 0,
     };
 
     blendSlots: Array<BlendingSlot>;
     _timer: KnockoutObservable<number>;
     _degreesRotated: KnockoutObservable<number>;
-    _isUnlocked: KnockoutObservable<boolean>;
     isEmpty: KnockoutComputed<boolean>;
 
-    constructor(isUnlocked: boolean, public index) {
+    constructor(public index) {
         this.blendSlots = this.defaults.blendSlots;
         this._timer = ko.observable(0);
         this._degreesRotated = ko.observable(0);
-        this._isUnlocked = ko.observable(isUnlocked);
         this.isEmpty = ko.pureComputed(() => {
             return this.blendSlots.filter(slot => slot.isEmpty()).length === 4;
         });
@@ -80,7 +77,6 @@ export default class BlendingMachine implements Saveable {
         return {
             blendSlots: this.blendSlots.map(slot => slot.toJSON()),
             timer: this.timer,
-            isUnlocked: this.isUnlocked,
         };
     }
 
@@ -100,17 +96,9 @@ export default class BlendingMachine implements Saveable {
             });
         }
         this.timer = json.timer ?? this.defaults.timer;
-        this.isUnlocked = json.isUnlocked ?? this.defaults.isUnlocked;
     }
 
     // Knockout getters
-    get isUnlocked(): boolean {
-        return this._isUnlocked();
-    }
-    set isUnlocked(value: boolean) {
-        this._isUnlocked(value);
-    }
-
     get timer(): number {
         return this._timer();
     }
