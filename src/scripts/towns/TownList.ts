@@ -877,6 +877,13 @@ const BillGrandpaChristmas = new NPC('Bill\'s Grandpa', [
     ]),
 });
 
+const UnownFigure = new NPC('Unown Figure', [
+    'I am the lead scientist specializing in all things related to Unown. If you have any questions, don\'t hesitate to ask. Our study has revealed three key patterns regarding the appearance of Unown:',
+    '1. <b>Increased Frequency with Clears</b>: The deeper one ventures into the dungeon, the more Unown emerge. Our most daring researchers have observed up to three Unown at a time.',
+    '2. <b>Daily Variations</b>: Different types of Unown seem to appear each day, following what appears to be a specific sequence.',
+    '3. <b>Limited Variety in the Region</b>: Not all versions of Unown are found here. Although 28 forms exist, some have only been encountered in other regions.',
+], { image: 'assets/images/npcs/Scientist (male).png' });
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -1410,7 +1417,7 @@ TownList['Tanoby Ruins'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 39)],
     [TanobyRuinsShop],
     {
-        npcs: [TanobyProfIvy],
+        npcs: [TanobyProfIvy, UnownFigure],
     }
 );
 TownList['Pinkan Mountain'] = new DungeonTown(
@@ -1546,6 +1553,7 @@ const VioletPrimo = new NPC('Primo', [
     'Choose who you select carefully! Once you remove a Held Item from your Pokémon, the item will break!',
     'All righty, be seeing you!',
 ]);
+
 
 const AzaleaElder = new NPC('Elder Li', [
     'You want to know about Celebi? It hasn\'t been seen in a long time.',
@@ -2040,7 +2048,11 @@ TownList['Ruins of Alph'] = new DungeonTown(
     'Ruins of Alph',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 32)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 32)],
+    undefined,
+    {
+        npcs: [UnownFigure],
+    }
 );
 TownList['Union Cave'] = new DungeonTown(
     'Union Cave',
@@ -4754,7 +4766,11 @@ TownList['Solaceon Ruins'] = new DungeonTown(
     'Solaceon Ruins',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)]
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)],
+    undefined,
+    {
+        npcs: [UnownFigure],
+    }
 );
 TownList['Iron Island'] = new DungeonTown(
     'Iron Island',
