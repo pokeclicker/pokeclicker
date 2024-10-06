@@ -7,7 +7,7 @@ import InDungeonRequirement from '../../requirements/InDungeonRequirement';
 import InEnvironmentRequirement from '../../requirements/InEnvironmentRequirement';
 import InGymRequirement from '../../requirements/InGymRequirement';
 import InRegionRequirement from '../../requirements/InRegionRequirement';
-import QuestLineRequirement from '../../requirements/QuestLineRequirement';
+import QuestLineCompletedRequirement from '../../requirements/QuestLineCompletedRequirement';
 import DayCyclePartRequirement from '../../requirements/DayCyclePartRequirement';
 import MoonCyclePhaseRequirement from '../../requirements/MoonCyclePhaseRequirement';
 import WeatherRequirement from '../../requirements/WeatherRequirement';
@@ -64,7 +64,6 @@ export const environmentRestrict = <T extends EvoFn>(evo: T) => (
 ) => restrict(
     evo(...rest),
     new InEnvironmentRequirement(environment),
-    new GameStateRequirement(GameState.battleFrontier, false),
 );
 
 export const heldItemRestrict = <T extends EvoFn>(evo: T) => (
@@ -83,7 +82,7 @@ export const questlineRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    new QuestLineRequirement(questName),
+    new QuestLineCompletedRequirement(questName),
 );
 
 export const weatherRestrict = <T extends EvoFn>(evo: T) => (

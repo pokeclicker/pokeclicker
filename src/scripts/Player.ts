@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../declarations/upgrades/Upgrade.d.ts" />
 
 /**
@@ -14,7 +15,7 @@
  * All player variables need to be saved.
  */
 
-class Player {
+class Player implements TmpPlayerType {
 
     private _route: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
@@ -57,6 +58,9 @@ class Player {
         this._town = ko.observable(TownList[this._townName]);
         this._town.subscribe(value => this._townName = value.name);
 
+        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
+        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
+
         this.regionStarters = new Array<KnockoutObservable<number>>();
         for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
             if (savedPlayer.regionStarters && savedPlayer.regionStarters[i] != undefined) {
@@ -93,8 +97,6 @@ class Player {
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer();
-        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
-        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
@@ -148,9 +150,9 @@ class Player {
 
     set subregion(value: number) {
         if (value < 0) {
-            value = Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id));
+            value = Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id));
         }
-        if (value > Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
+        if (value > Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
             value = 0;
         }
         const changedSubregions = value !== this.subregion;
@@ -162,9 +164,9 @@ class Player {
 
         if (changedSubregions) {
             const subregion = SubRegions.getSubRegionById(this.region, value);
-            if (subregion.startRoute && subregion.startRoute !== player.route) {
-                MapHelper.moveToRoute(subregion.startRoute, player.region);
-            } else if (subregion.startTown && subregion.startTown !== player.town.name) {
+            if (subregion.startRoute && subregion.startRoute !== this.route) {
+                MapHelper.moveToRoute(subregion.startRoute, this.region);
+            } else if (subregion.startTown && subregion.startTown !== this.town.name) {
                 MapHelper.moveToTown(subregion.startTown);
             }
         }
@@ -200,7 +202,7 @@ class Player {
     public gainMegaStone(megaStone: GameConstants.MegaStoneType, notify = true) {
         const name = GameConstants.MegaStoneType[megaStone];
         if (!this.itemList[name]()) {
-            player.gainItem(name, 1);
+            this.gainItem(name, 1);
         }
 
         if (notify) {

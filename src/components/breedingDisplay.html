@@ -36,7 +36,7 @@
             <div style="margin-top: 20px;" class="clickable" data-bind="
                 click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) },
                 tooltip: {
-                    title: BreedingController.getEggPokemonName($data) || '???',
+                    title: BreedingController.getEggPokemonName($data) ? PokemonHelper.displayName(BreedingController.getEggPokemonName($data))() : '???',
                     trigger: 'hover',
                     placement: 'bottom',
                     class: 'no-click',
@@ -86,7 +86,7 @@
         <span style="line-height: 30px;"
             data-bind="
                 text: App.game.breeding.queueList().length + ' / ' + App.game.breeding.usableQueueSlots(),
-                tooltip: { title: BreedingController.queueSizeLimit() > -1 ? 'Queue is currently limited by your Queue Size setting.' : '', trigger: 'hover' }
+                tooltip: { title: Settings.getSetting('breedingQueueSizeSetting').observableValue() > -1 ? 'Queue is currently limited by your Queue Size setting.' : '', trigger: 'hover' }
             "></span>
         <button class="btn btn-sm btn-danger" style="position: absolute; right: 0; width: auto;" data-bind="
             click: () => App.game.breeding.clearQueue(Settings.getSetting('breedingQueueClearConfirmation').observableValue()),
