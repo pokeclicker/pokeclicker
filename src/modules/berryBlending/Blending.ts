@@ -15,7 +15,7 @@ export default class Blending implements Feature {
 
     defaults = {
         flavorBank: new Array(GameHelper.enumLength(FlavorType)).fill(0),
-        machines: new Array(4).fill(null).map((index) => {
+        machines: new Array(4).fill(null).map((value, index) => {
             return new BlendingMachine(index);
         }),
     };

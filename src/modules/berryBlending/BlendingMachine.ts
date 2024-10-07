@@ -11,8 +11,8 @@ export default class BlendingMachine implements Saveable {
     saveKey = '';
 
     defaults = {
-        blendSlots: new Array(4).fill(null).map((index) => {
-            return new BlendingSlot(index === 0, BerryType.None, index);
+        blendSlots: new Array(4).fill(null).map((value, index) => {
+            return new BlendingSlot(index === 0 && this.index === 0, BerryType.None, index);
         }),
         timer: 0,
         degreesRotated: 0,
@@ -23,7 +23,7 @@ export default class BlendingMachine implements Saveable {
     _degreesRotated: KnockoutObservable<number>;
     isEmpty: KnockoutComputed<boolean>;
 
-    constructor(public index) {
+    constructor(public index: number) {
         this.blendSlots = this.defaults.blendSlots;
         this._timer = ko.observable(0);
         this._degreesRotated = ko.observable(0);
