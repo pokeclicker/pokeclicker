@@ -190,6 +190,7 @@ export default class RedeemableCodes implements Saveable {
                 return refund;
             }),
             new RedeemableCode('tutorial-skip', -253994129, false, async () => {
+                App.game.keyItems.gainKeyItem(KeyItemType.Dungeon_ticket, true);
                 const quest = App.game.quests.getQuestLine('Tutorial Quests');
                 if (quest.state() != QuestLineState.started) {
                     Notifier.notify({
