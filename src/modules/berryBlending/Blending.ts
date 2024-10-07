@@ -151,20 +151,30 @@ export default class Blending implements Feature {
         }
     }
 
-    public getBlendingSlotCost(slot: number, machine: number): number {
+    machineToBuy() {
+        return this.machines.find(m => m.blendSlots.some(s => !s.isUnlocked));
+    }
+
+    slotToBuy() {
+        return this.machineToBuy().blendSlots.find(s => !s.isUnlocked);
+    }
+
+    public getBlendingSlotCost(): number {
+        const machine = this.machineToBuy().index + 1;
+        const slot = this.slotToBuy().index + 1;
         const newMachineTax = slot === 1 ? 500 : 0;
         return 50 * slot * machine + (newMachineTax * machine);
     }
 
-    public nextBlendingSlotCost(slotIndex: number, machineIndex: number): Amount {
-        return new Amount(this.getBlendingSlotCost(slotIndex + 1, machineIndex + 1), Currency.contestToken);
+    public nextBlendingSlotCost(): Amount {
+        return new Amount(this.getBlendingSlotCost(), Currency.contestToken);
     }
 
     public buyBlendingSlot(): void {
-        const machine = this.machines.find(m => m.blendSlots.some(s => !s.isUnlocked));
+        const machine = this.machineToBuy();
         if (machine) {
-            const slot = machine.blendSlots.find(s => !s.isUnlocked);
-            const cost: Amount = this.nextBlendingSlotCost(slot.index, machine.index);
+            const slot = this.slotToBuy();
+            const cost: Amount = this.nextBlendingSlotCost();
             if (App.game.wallet.loseAmount(cost)) {
                 slot._isUnlocked(true);
             }
@@ -172,11 +182,10 @@ export default class Blending implements Feature {
     }
 
     public getBlendingSlotCostDisplay(): string {
-        const machine = this.machines.find(m => m.blendSlots.some(s => !s.isUnlocked));
-        const slot = machine.blendSlots.find(s => !s.isUnlocked);
-        const cost = this.nextBlendingSlotCost(slot.index, machine.index).amount.toLocaleString('en-US');
+        const slot = this.slotToBuy();
+        const cost = this.nextBlendingSlotCost().amount.toLocaleString('en-US');
         const slotOrMachine = slot.index === 0 ? 'Machine' : 'Slot';
-        return `New ${slotOrMachine}: ${cost}`;
+        return `New ${slotOrMachine}: <img src="./assets/images/currency/contestToken.svg" height="24px"/> ${cost}`;
     }
 
     canAccess(): boolean {
