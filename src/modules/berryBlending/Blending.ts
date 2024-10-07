@@ -8,6 +8,8 @@ import BlendingMachine from './BlendingMachine';
 import BlendingSlot from './BlendingSlot';
 import FlavorAmount from './FlavorAmount';
 import BlendingRecipe from './BlendingRecipe';
+import { Currency } from '../GameConstants';
+import Amount from '../wallet/Amount';
 
 export default class Blending implements Feature {
     name = 'Blending';
@@ -143,6 +145,34 @@ export default class Blending implements Feature {
             GameHelper.incrementObservable(player.itemList[block.item], amount);
             return;
         }
+    }
+
+    public getBlendingSlotCost(slot: number, machine: number): number {
+        const newMachineTax = slot === 1 ? 500 : 0;
+        return 50 * slot * machine + (newMachineTax * machine);
+    }
+
+    public nextBlendingSlotCost(slotIndex: number, machineIndex: number): Amount {
+        return new Amount(this.getBlendingSlotCost(slotIndex + 1, machineIndex + 1), Currency.contestToken);
+    }
+
+    public buyBlendingSlot(): void {
+        const machine = this.machines.find(m => m.blendSlots.some(s => !s.isUnlocked));
+        if (machine) {
+            const slot = machine.blendSlots.find(s => !s.isUnlocked);
+            const cost: Amount = this.nextBlendingSlotCost(slot.index, machine.index);
+            if (App.game.wallet.loseAmount(cost)) {
+                slot._isUnlocked(true);
+            }
+        }
+    }
+
+    public getBlendingSlotCostDisplay(): string {
+        const machine = this.machines.find(m => m.blendSlots.some(s => !s.isUnlocked));
+        const slot = machine.blendSlots.find(s => !s.isUnlocked);
+        const cost = this.nextBlendingSlotCost(slot.index, machine.index).amount.toLocaleString('en-US');
+        const slotOrMachine = slot.index === 0 ? 'Machine' : 'Slot';
+        return `New ${slotOrMachine}: ${cost}`;
     }
 
     canAccess(): boolean {
