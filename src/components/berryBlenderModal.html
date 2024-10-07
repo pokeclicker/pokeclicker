@@ -198,14 +198,14 @@
                                     data-bind="click: function() {BlendingController.selectedRecipe($data);},
                                     css: { active: BlendingController.selectedRecipe() == $data },
                                     tooltip: {
-                                        title: $data.description ? `<u>${$data.displayName}:</u><br/>${$data.description}` : '',
+                                        title: ItemList[$data.item].description ? `<u>${ItemList[$data.item].displayName}:</u><br/>${ItemList[$data.item].description}` : '',
                                         trigger: 'hover',
                                         placement:'bottom',
                                         boundary: 'viewport',
                                         html: true
                                         }">
                                     <img src="" height="48px" style="image-rendering: pixelated;" data-bind="attr:{ src: ItemList[$data.item].image }">
-                                    <p data-bind="text: $data.displayName">Item Name</p>
+                                    <p data-bind="text: ItemList[$data.item].displayName">Item Name</p>
                                         <div style="display: flex; flex-direction:column; align-items: center; justify-content: center;">
                                             <table style="width: 100%;">
                                                     <thead>
