@@ -40,7 +40,7 @@ export default class BlendingMachine implements Saveable {
             if (this.timer >= 60) {
                 this.blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
                     GameHelper.incrementObservable(App.game.farming.berryList[slot.berry], -1);
-                    App.game.blending.gainFlavor(slot.berry);
+                    App.game.blending.gainFlavorByBerry(slot.berry);
                     return;
                 });
                 this.timer = 0;

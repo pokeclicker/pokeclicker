@@ -112,9 +112,13 @@ export default class Blending implements Feature {
         return [spicy, dry, sweet, bitter, sour];
     }
 
-    public gainFlavor(berry: BerryType) {
+    public gainFlavor(amount: number, flavor: FlavorType): FlavorAmount {
+        return this.addFlavorAmount(new FlavorAmount(amount, flavor));
+    }
+
+    public gainFlavorByBerry(berry: BerryType) {
         const b = App.game.farming.berryData[berry];
-        return b.flavors.forEach((flavor) => this.addFlavorAmount(new FlavorAmount(flavor.value, flavor.type)));
+        return b.flavors.forEach((flavor) => this.gainFlavor(flavor.value, flavor.type));
     }
 
     public hasAmount(flavorAmount: FlavorAmount) {
