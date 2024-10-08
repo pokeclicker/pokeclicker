@@ -445,8 +445,6 @@ export const EP_CHALLENGE_MODIFIER = 10;
 // Mega Evolution
 export const MEGA_REQUIRED_ATTACK_MULTIPLIER = 500;
 
-export const ATTACK_EVO_REQUIRED_ATTACK_MULTIPLIER = 100;
-
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks

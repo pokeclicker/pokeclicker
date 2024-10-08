@@ -21895,7 +21895,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 306,
-        'evolutions': [AttackEvolution('Xerneas', 'Xerneas (Active)', 70)],
+        'evolutions': [AttackEvolution(100, 'Xerneas', 'Xerneas (Active)', 1)],
         'catchRate': 45,
         'base': {
             'hitpoints': 126,

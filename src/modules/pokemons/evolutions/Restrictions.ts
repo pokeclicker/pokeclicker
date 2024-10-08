@@ -130,12 +130,13 @@ export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
 };
 
 export const attackRestrict = <T extends EvoFn>(evo: T) => (
+    attackMultiplier: number,
     ...rest: Parameters<T>
 ) => {
     const data = evo(...rest);
     return restrict(
         data,
-        new AttackEvolveRequirement(data.basePokemon),
+        new AttackEvolveRequirement(data.basePokemon, attackMultiplier),
     );
 
 };
