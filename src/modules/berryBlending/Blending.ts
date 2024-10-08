@@ -10,6 +10,7 @@ import FlavorAmount from './FlavorAmount';
 import BlendingRecipe from './BlendingRecipe';
 import { Currency } from '../GameConstants';
 import Amount from '../wallet/Amount';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 
 export default class Blending implements Feature {
     name = 'Blending';
@@ -189,7 +190,7 @@ export default class Blending implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.keyItems.hasKeyItem(KeyItemType.Wailmer_pail); // TODO: Pokeblock kit
+        return new DevelopmentRequirement().isCompleted() && App.game.keyItems.hasKeyItem(KeyItemType.Wailmer_pail); // TODO: Pokeblock kit
     }
 
     toJSON(): Record<string, any> {

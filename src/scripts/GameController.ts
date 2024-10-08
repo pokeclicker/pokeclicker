@@ -85,6 +85,11 @@ class GameController {
         const $shopModal = $('#shopModal');
         $shopModal.on('hide.bs.modal', _ => $shopModal.data('disable-toggle', true));
         $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
+        // Berry Blending
+        const blenders = App.game.blending;
+        const $blendersModal = $('#berryBlenderModal');
+        $blendersModal.on('hide.bs.modal', _ => $blendersModal.data('disable-toggle', true));
+        $blendersModal.on('hidden.bs.modal shown.bs.modal', _ => $blendersModal.data('disable-toggle', false));
         // Ship
         const $shipModal = $('#ShipModal');
         // Modal Collapse
@@ -437,6 +442,14 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
+                    case Settings.getSetting('hotkey.blending').value:
+                        // Open the Berry Blenders
+                        if (blenders.canAccess() && !$blendersModal.data('disable-toggle')) {
+                            $('.modal').modal('hide');
+                            $blendersModal.modal('toggle');
+                            return e.preventDefault();
+                        }
+                        break;
             }
 
             if (key === 'Space') {
