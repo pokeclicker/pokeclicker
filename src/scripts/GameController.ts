@@ -442,14 +442,14 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
-                    case Settings.getSetting('hotkey.blending').value:
-                        // Open the Berry Blenders
-                        if (blenders.canAccess() && !$blendersModal.data('disable-toggle')) {
-                            $('.modal').modal('hide');
-                            $blendersModal.modal('toggle');
-                            return e.preventDefault();
-                        }
-                        break;
+                case Settings.getSetting('hotkey.blending').value:
+                    // Open the Berry Blenders
+                    if (blenders.canAccess() && !$blendersModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $blendersModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
             }
 
             if (key === 'Space') {
