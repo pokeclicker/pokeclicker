@@ -11,6 +11,8 @@ import BlendingRecipe from './BlendingRecipe';
 import { Currency } from '../GameConstants';
 import Amount from '../wallet/Amount';
 import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
+import Notifier from '../notifications/Notifier';
+import NotificationOption from '../notifications/NotificationOption';
 
 export default class Blending implements Feature {
     name = 'Blending';
@@ -48,7 +50,7 @@ export default class Blending implements Feature {
         });
     }
 
-    hasEnoughBerries(berry: BerryType, initial: number = 0): boolean {
+    hasEnoughBerries(berry: BerryType, initial: number = 1): boolean {
         let total = initial;
         if (berry != BerryType.None) {
             this.machines.forEach(m => m.blendSlots.forEach(s => {
@@ -58,17 +60,50 @@ export default class Blending implements Feature {
             }));
             return App.game.farming.berryList[berry]() > total;
         } else {
-            return false;
+            return true;
         }
     }
 
-    insertBerry(slotIndex: number, berry: BerryType, machineIndex: number) {
+    otherMachineHasBerry(berry: BerryType): boolean {
+        let total = 0;
+        this.machines.forEach(m => m.blendSlots.filter(s => s.berry === berry).forEach(s => total += 1));
+        return total > 1 ? true : false;
+    }
+
+    insertBerry(slotIndex: number, berry: BerryType, machineIndex: number, enableNotifier: boolean = true) {
         const slot = this.machines[machineIndex].blendSlots[slotIndex];
-        if (slot.berry != berry && this.hasEnoughBerries(berry, 1)) {
-            slot.insertBerry(berry);
+
+        if (this.hasEnoughBerries(berry) || slot.berry === berry) {
+            if (slot.berry != berry) {
+                slot.insertBerry(berry);
+            } else {
+                slot.insertBerry(BerryType.None);
+            }
         } else {
-            slot.insertBerry(BerryType.None);
+            if (enableNotifier) {
+                this.notifyBerryLeft(berry);
+            }
         }
+    }
+
+    insertBerryAll(berry: BerryType) {
+        this.machines.forEach(m => m.blendSlots.filter(s => s.isEmpty() && s.isUnlocked).forEach(s => this.insertBerry(s.index, berry, m.index, false)));
+        if (!this.hasEnoughBerries(berry)) {
+            this.notifyBerryLeft(berry);
+        }
+    }
+
+    removeBerryAll() {
+        this.machines.forEach(m => m.blendSlots.forEach(s => s.berry = BerryType.None));
+    }
+
+    notifyBerryLeft(berry: BerryType) {
+        Notifier.notify({
+            message: `You only have one ${BerryType[berry]} Berry left!`,
+            type: NotificationOption.warning,
+            title: 'Berry Blender',
+            image: `assets/images/items/berry/${BerryType[berry]}.png`,
+        });
     }
 
     public rpm(slots: BlendingSlot[]) {

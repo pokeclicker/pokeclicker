@@ -6,6 +6,9 @@ import { Saveable } from '../DataStore/common/Saveable';
 import BerryType from '../enums/BerryType';
 import GameHelper from '../GameHelper';
 import BlendingSlot from './BlendingSlot';
+import NotificationOption from '../notifications/NotificationOption';
+import Notifier from '../notifications/Notifier';
+import { SECOND, camelCaseToString } from '../GameConstants';
 
 export default class BlendingMachine implements Saveable {
     saveKey = '';
@@ -49,7 +52,25 @@ export default class BlendingMachine implements Saveable {
 
             // Remove berry if there is only one left
             this.blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
-                if (!(App.game.blending.hasEnoughBerries(slot.berry))) {
+                if (!(App.game.blending.hasEnoughBerries(slot.berry, 0))) {
+                    if (!App.game.blending.otherMachineHasBerry(slot.berry)) {
+                        Notifier.notify({
+                            message: `You are left with one ${BerryType[slot.berry]} Berry!</br><i>All ${BerryType[slot.berry]} berries have been removed from your Berry Blenders</i>`,
+                            type: NotificationOption.danger,
+                            title: 'Berry Blender',
+                            image: `assets/images/items/berry/${BerryType[slot.berry]}.png`,
+                            timeout: 10 * SECOND,
+                        });
+                    }
+                    if (App.game.blending.otherMachineHasBerry(slot.berry)) {
+                        Notifier.notify({
+                            message: `You are almost out of ${BerryType[slot.berry]} Berries!</br><i>${camelCaseToString(GameHelper.anOrA(BerryType[slot.berry]))} ${BerryType[slot.berry]} berry was removed from a Blending Slot</i>`,
+                            type: NotificationOption.warning,
+                            title: 'Berry Blender',
+                            image: `assets/images/items/berry/${BerryType[slot.berry]}.png`,
+                            timeout: 7 * SECOND,
+                        });
+                    }
                     slot.berry = BerryType.None;
                 }
                 return;

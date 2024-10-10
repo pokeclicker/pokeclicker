@@ -256,6 +256,22 @@
             </div>
 
             <div class="modal-footer">
+                <div class="row m-0" style="margin-bottom: 6px; margin-top: 6px" data-bind="if: BlendingController.blendingModalTabSelected() === 'blendingView'">
+                    <div class="input-group-prepend m-1">
+                        <button type="button" class="btn btn-primary" onclick="App.game.blending.insertBerryAll(BlendingController.selectedBerry())"
+                            data-bind="css: {disabled: !App.game.blending.hasEnoughBerries(BlendingController.selectedBerry()) }">
+                            Fill All Slots
+                        </button>
+                        <btn class="btn btn-sm btn-primary px-1 py-1">
+                            <img height="28px" data-bind="
+                                attr: { src: FarmController.getBerryImage(BlendingController.selectedBerry()) }"/>
+                        </btn>
+                    </div>
+                    <button type="button" class="btn btn-primary m-1" onclick="App.game.blending.removeBerryAll()">
+                        Clear All Slots
+                    </button>
+                </div>
+
                 <div class="row justify-content-center" data-bind="if: BlendingController.blendingModalTabSelected() === 'blendingRecipeView'">
                     <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
                         <div class="input-group-prepend">
@@ -301,6 +317,7 @@
                         </div>
                     </div>
                 </div>
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
 
