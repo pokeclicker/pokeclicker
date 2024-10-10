@@ -140,6 +140,7 @@ export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
+export const ROAMING_INCREASED_CHANCE = 3;
 
 // Shinies
 export const SHINY_CHANCE_BATTLE = 8192;
@@ -1614,31 +1615,6 @@ export const HoennDungeons = [
     'Cipher Key Lair',
     'Citadark Isle',
     'Citadark Isle Dome', // 77
-    // These aren't implemented anywhere yet
-    /*
-    "Island Cave",
-    "Desert Ruins",
-    "Scorched Slab",
-    "Ancient Tomb",
-    "Artisan Cave",
-    "Desert Underpass",
-    "Marine Cave",
-    "Terra Cave",
-    "Southern Island",
-    "Faraway Island",
-    "Birth Island",
-    "Devon Corporation",
-    "Oceanic Museum",
-    "Mirage Tower",
-    "Safari Zone",
-    "Mirage Island",
-    "Battle Tower",
-    "Trainer Hill",
-    "Abandoned Ship",
-    "Battle Maison",
-    "Battle Resort",
-    "Mirage Spots",
-    */
 ];
 
 export const SinnohDungeons = [

@@ -325,23 +325,10 @@
         })
      %>
 
-     <%- include('templates/mapOverlay',
-         { name: "Instructor Jacq's Blimp"
-         , x: 94, y: 57
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Cabo Poco')}, attr:{ class: MapHelper.calculateTownCssClass('Cabo Poco') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_empty.png"
-         })
-     %>
-
-     <%- include('templates/mapOverlay',
-         { name: "Instructor Jacq's Blimp"
-         , x: 94, y: 57
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Cabo Poco')}, attr:{ class: MapHelper.calculateTownCssClass('Cabo Poco') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_pikachu.png"
-         })
-     %>
+    <%- include('templates/mapBlimp',
+        { name: "Instructor Jacq"
+        , x: 94, y: 57
+        , town: "Cabo Poco"
+        })
+    %>
 </g>

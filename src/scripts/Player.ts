@@ -58,6 +58,9 @@ class Player implements TmpPlayerType {
         this._town = ko.observable(TownList[this._townName]);
         this._town.subscribe(value => this._townName = value.name);
 
+        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
+        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
+
         this.regionStarters = new Array<KnockoutObservable<number>>();
         for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
             if (savedPlayer.regionStarters && savedPlayer.regionStarters[i] != undefined) {
@@ -94,8 +97,6 @@ class Player implements TmpPlayerType {
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer();
-        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
-        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
@@ -156,8 +157,7 @@ class Player implements TmpPlayerType {
         const maxUnlockedSubregion = Math.max(...SubRegions.getUnlockedSubRegions(this.region).map(sr => sr.id));
         if (value < 0) {
             value = 0;
-        }
-        if (value > maxUnlockedSubregion) {
+        } else if (value > maxUnlockedSubregion) {
             value = maxUnlockedSubregion;
         }
 
@@ -197,7 +197,7 @@ class Player implements TmpPlayerType {
     public gainMegaStone(megaStone: GameConstants.MegaStoneType, notify = true) {
         const name = GameConstants.MegaStoneType[megaStone];
         if (!this.itemList[name]()) {
-            player.gainItem(name, 1);
+            this.gainItem(name, 1);
         }
 
         if (notify) {
