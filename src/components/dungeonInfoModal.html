@@ -72,12 +72,6 @@
                                         trigger: 'hover',
                                         placement:'bottom'
                                     }">
-                                    <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokedexHelper.pokemonSeen(id)() ? PokemonHelper.displayName(name) : '???',
-                                    tooltip: {
-                                        title: PokedexHelper.pokemonSeen(id)() ? PokemonHelper.displayName(name) : '???',
-                                        trigger: 'hover',
-                                        placement: 'bottom'
-                                    }">name</span>
                                     <img style="position: absolute; width: 60%; left: 24px; bottom: 5px;" src="assets/images/breeding/lock.svg" data-bind="
                                     hidden: !(lock),
                                     tooltip: {
@@ -86,6 +80,12 @@
                                         trigger: 'hover',
                                         boundary: 'window'
                                     }" />
+                                    <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokedexHelper.pokemonSeen(id)() ? PokemonHelper.displayName(name) : '???',
+                                    tooltip: {
+                                        title: PokedexHelper.pokemonSeen(id)() ? PokemonHelper.displayName(name) : '???',
+                                        trigger: 'hover',
+                                        placement: 'bottom'
+                                    }">name</span>
                                 </div>
                             </div>
                         </div>
