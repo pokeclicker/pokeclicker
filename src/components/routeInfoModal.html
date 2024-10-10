@@ -38,10 +38,15 @@
                                 }"/>
                             </div>
                             <!-- /ko -->
-                            <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen(id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen(id)() }, attr:{ src: image}">
+                            <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen(id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen(id)() }, attr:{ src: image},
+                            tooltip: {
+                                title: `Catch Rate: ${PokemonFactory.catchRateHelper(PokemonHelper.getPokemonByName(name).catchRate, true)}%`,
+                                trigger: 'hover',
+                                placement:'bottom'
+                            }">
                             <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokedexHelper.pokemonSeen(id)() ? PokemonHelper.displayName(name) : '???',
                             tooltip: {
-                                title: PokemonHelper.displayName(name),
+                                title: PokedexHelper.pokemonSeen(id)() ? PokemonHelper.displayName(name) : '???',
                                 trigger: 'hover',
                                 placement: 'bottom'
                             }">name</span>
