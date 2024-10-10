@@ -156,6 +156,7 @@ class Game implements TmpGameType {
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
         PokemonContestController.generateDailyContest(now);
+        DamageCalculator.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
