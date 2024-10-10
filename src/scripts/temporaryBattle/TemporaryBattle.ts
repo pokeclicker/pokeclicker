@@ -45,8 +45,8 @@ class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
         return this.optionalArgs.displayName ?? this.name.replace(/( route)? \d+$/, '');
     }
 
-    public getTown() {
-        return this.parent ?? TownList[this.optionalArgs.returnTown] ?? TownList[GameConstants.DockTowns[player.region]];
+    public getTown(): Town | undefined {
+        return this.parent ?? TownList[this.optionalArgs.returnTown];
     }
     public getImage() {
         const imageName = this.optionalArgs?.imageName ?? this.name;
