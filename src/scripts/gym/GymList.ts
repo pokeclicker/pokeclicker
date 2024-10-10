@@ -1061,7 +1061,6 @@ GymList['Champion Cynthia'] = new Gym(
 );
 
 //Unova Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Aspertia City'] = new Gym(
     'Cheren',
     'Aspertia City',
@@ -1177,7 +1176,6 @@ GymList['Humilau City'] = new Gym(
 );
 
 //Unova Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
 GymList['Elite Shauntal'] = new Gym(
     'Shauntal',
     'Elite Shauntal',
@@ -1265,7 +1263,6 @@ GymList['Champion Iris'] = new Gym(
 );
 
 //Kalos Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Santalune City'] = new Gym(
     'Viola',
     'Santalune City',
@@ -1369,7 +1366,6 @@ GymList['Snowbelle City'] = new Gym(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))]
 );
 //Kalos Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
 GymList['Elite Malva'] = new Gym(
     'Malva',
     'Elite Malva',

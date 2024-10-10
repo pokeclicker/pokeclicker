@@ -2763,6 +2763,18 @@ class Update implements Saveable {
             // Reset Key Stone multiplier
             delete playerData._itemMultipliers.Key_stone;
 
+            // Held item setting change
+            settingsData.heldItemHideHoldingThisItem = settingsData.heldItemShowHoldingThisItem;
+            delete settingsData.heldItemShowHoldingThisItem;
+
+            // Simplify farm module settings
+            if (settingsData.showFarmModule === false) {
+                settingsData.showFarmModule = 'never';
+            } else {
+                settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
+            }
+            delete settingsData.showFarmModuleControls;
+
             // Update hatchery EggTypes
             saveData.breeding.eggList?.forEach(egg => {
                 const oldType = egg.type;

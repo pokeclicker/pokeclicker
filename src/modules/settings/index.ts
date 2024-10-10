@@ -115,8 +115,15 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
     ],
     'queue'));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
-Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
-Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
+// Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
+// Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
+Settings.add(new Setting<string>('showFarmModule', 'Show Farm module on main screen',
+    [
+        new SettingOption('Never', 'never'),
+        new SettingOption('Limited Controls', 'limited'),
+        new SettingOption('Extended Controls', 'extended'),
+    ],
+    'extended'));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
@@ -266,11 +273,12 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id, undefined, false));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false, undefined, false));
+Settings.add(new Setting<string>('heldItemDropdownPokemonOrItem', 'Pokémon or Item', [new SettingOption('Pokémon', 'pokemon'), new SettingOption('Item', 'item')], 'pokemon', undefined, false));
 Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2, undefined, false));
 Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
-Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false, undefined, false));
+Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
 
 // Hatchery Filters
 export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',
