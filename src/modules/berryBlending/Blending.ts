@@ -66,7 +66,9 @@ export default class Blending implements Feature {
 
     otherMachineHasBerry(berry: BerryType): boolean {
         let total = 0;
-        this.machines.forEach(m => m.blendSlots.filter(s => s.berry === berry).forEach(() => total += 1));
+        this.machines.forEach(m => m.blendSlots.filter(s => s.berry === berry).forEach(() => {
+            total += 1;
+        }));
         return total > 1 ? true : false;
     }
 
@@ -95,7 +97,7 @@ export default class Blending implements Feature {
 
     removeBerryAll() {
         this.machines.forEach(m => m.blendSlots.forEach(s => {
-            s.berry = BerryType.None
+            s.berry = BerryType.None;
         }));
     }
 
