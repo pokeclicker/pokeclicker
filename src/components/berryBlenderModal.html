@@ -262,8 +262,8 @@
                             data-bind="css: {disabled: !App.game.blending.hasEnoughBerries(BlendingController.selectedBerry()) }">
                             Fill All Slots
                         </button>
-                        <btn class="btn btn-sm btn-primary px-1 py-1">
-                            <img height="28px" data-bind="
+                        <btn id="blendBerryButton" class="btn btn-sm btn-primary px-1 py-1" onclick="BlendingController.berrySpin()">
+                            <img id="blendBerry" height="28px" data-bind="
                                 attr: { src: FarmController.getBerryImage(BlendingController.selectedBerry()) }"/>
                         </btn>
                     </div>

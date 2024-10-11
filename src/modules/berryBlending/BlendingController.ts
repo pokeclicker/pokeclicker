@@ -56,4 +56,12 @@ export default class BlendingController {
             return 'btn btn-success smallButton smallFont';
         }
     }
+
+    public static berrySpin() {
+        let berryImage = document.getElementById('blendBerry');
+        berryImage.style.animation = `spin ${25 / App.game.farming.berryData[BlendingController.selectedBerry()].smoothness}s linear`;
+        berryImage.addEventListener('animationend', function() {
+            berryImage.style.removeProperty('animation');
+        });
+    }
 }
