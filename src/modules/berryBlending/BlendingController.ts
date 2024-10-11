@@ -60,7 +60,7 @@ export default class BlendingController {
     public static berrySpin() {
         let berryImage = document.getElementById('blendBerry');
         berryImage.style.animation = `spin ${25 / App.game.farming.berryData[BlendingController.selectedBerry()].smoothness}s linear`;
-        berryImage.addEventListener('animationend', function() {
+        berryImage.addEventListener('animationend', function () {
             berryImage.style.removeProperty('animation');
         });
     }
