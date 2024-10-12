@@ -1,11 +1,11 @@
 import OakItemType from '../enums/OakItemType';
 import Rand from '../utilities/Rand';
-import { MineConfig, MineConfigs, MineType } from './mine/MineConfig';
+import {MineConfig, MineConfigs, MineType} from './mine/MineConfig';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
-import { ItemList } from '../items/ItemList';
+import {ItemList} from '../items/ItemList';
 import Settings from '../settings';
-import { PureComputed } from 'knockout';
+import {PureComputed} from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
@@ -19,12 +19,14 @@ import {
     PLAYER_EXPERIENCE_HELPER_FRACTION,
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
-    SURVEY_RANGE_REDUCTION_LEVELS, UNDERGROUND_EXPERIENCE_CLEAR_LAYER, UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
+    SURVEY_RANGE_REDUCTION_LEVELS,
+    UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
+    UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
 } from '../GameConstants';
-import { UndergroundHelper } from './helper/UndergroundHelper';
+import {UndergroundHelper} from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
-import { Coordinate } from './mine/Mine';
+import {Coordinate} from './mine/Mine';
 
 export class UndergroundController {
     private static lastMineClick: number = Date.now();
@@ -76,7 +78,13 @@ export class UndergroundController {
     }
 
     public static calculateDiscoverMineTimeout(mineType: MineType): number {
-        if (mineType != MineType.Random || (App.game.underground.mine && !App.game.underground.mine.completed)) {
+        if (mineType === MineType.Random) {
+            if (App.game.underground.mine?.mineType === MineType.Random) {
+                const rewardTiles = App.game.underground.mine.grid.filter(tile => tile.reward);
+                const unminedRewardTiles = rewardTiles.filter(tile => tile.layerDepth > 0);
+                return Math.max(DISCOVER_MINE_TIMEOUT_BASE - DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL * Math.max(0, App.game.underground.undergroundLevel - DISCOVER_MINE_TIMEOUT_LEVEL_START), 0) * (unminedRewardTiles.length / rewardTiles.length);
+            }
+        } else {
             return Math.max(DISCOVER_MINE_TIMEOUT_BASE - DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL * Math.max(0, App.game.underground.undergroundLevel - DISCOVER_MINE_TIMEOUT_LEVEL_START), 0);
         }
 

@@ -345,18 +345,23 @@
                             </p>
 
                             <h4>Discovery Time Calculation</h4>
-                            <p>There is a discovery time when:</p>
+                            <p>The discovery time is calculated as follows:</p>
                             <ul>
                                 <li>
-                                    Random Mine Type
+                                    <strong>Random Mine Type</strong>
                                     <ul>
-                                        <li>Current mine complete - Discovery time: No</li>
-                                        <li>Current mine incomplete - Discovery time: Yes</li>
+                                        <li>
+                                            Current mine is a Random mine:<br/>
+                                            The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>. This is then further reduced by the percentage of the amount of unmined tiles divided by all tiles only taking into account tiles that do contain a reward.
+                                        </li>
+                                        <li>Current mine is not a random mine: No discovery time</li>
                                     </ul>
                                 </li>
-                                <li>Other Mine Type - Discovery time: Yes</li>
+                                <li>
+                                    <strong>Other Mine Type</strong>
+                                    <p>The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>.</p>
+                                </li>
                             </ul>
-                            <p>The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>.</p>
 
                             <h4>Amount of Treasure</h4>
                             <p>The amount of treasure a player can find is random, between the minimum (inclusive) and maximum (inclusive), and increases as their Underground Level increases:</p>

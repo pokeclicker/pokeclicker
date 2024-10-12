@@ -1,4 +1,4 @@
-import { MineConfig } from './MineConfig';
+import {MineConfig, MineType} from './MineConfig';
 import { Observable } from 'knockout';
 import Rand from '../../utilities/Rand';
 import UndergroundItem from '../UndergroundItem';
@@ -418,6 +418,10 @@ export class Mine {
 
     get height(): number {
         return this._mineProperties.height;
+    }
+
+    get mineType(): MineType {
+        return this._mineProperties.config.type;
     }
 
     get initialTimeToDiscover(): number {
