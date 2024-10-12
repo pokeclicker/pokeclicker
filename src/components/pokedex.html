@@ -146,6 +146,18 @@ aria-labelledby="pokedexModalLabel">
                                         <!-- /ko -->
                                     </div>
 
+                                    <div class="form-group col-lg-12 col-6" data-bind="visible: Settings.getSetting('box').value === true">
+                                        <!-- ko let: { pokedexBoxFilter: Settings.getSetting('pokedexBoxFilter') } -->
+                                        <label for="pokedex-filter-boxes-status" data-bind="text: pokedexBoxFilter.displayName">Box Status</label>
+                                        <select id="pokedex-filter-boxes-status" autocomplete="off" class="custom-select"
+                                            data-bind="options: pokedexBoxFilter.options,
+                                                    optionsValue: 'value',
+                                                    optionsText: 'text',
+                                                    value: pokedexBoxFilter.observableValue">
+                                        </select>
+                                        <!-- /ko -->
+                                    </div>
+
                                     <!-- Mega Evolution -->
                                     <!-- ko if: Settings.getSetting('pokedexUniqueTransformationFilter').isUnlocked() -->
                                     <div class="form-group col-lg-12 col-12">
@@ -423,6 +435,12 @@ aria-labelledby="pokedexModalLabel">
                                                     </a>
                                                 </div>
                                             </div>
+                                            <!-- Box System -->
+                                            <img style="position: absolute; bottom: 4px; right: 2px;" src="assets/images/box/box.png" data-bind="css: { 'box-in-party': !App.game.party.getPokemon($data.id).box },
+                                            visible: Settings.getSetting('box').value === true,
+                                            click: () => {
+                                                App.game.party.boxPokemon($data.id, !App.game.party.getPokemon($data.id).box);
+                                            }"/>
                                             <!-- /ko -->
                                         <!-- /ko -->
                                     </li>

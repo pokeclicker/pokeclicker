@@ -91,6 +91,10 @@ class PokedexHelper {
             const alreadyCaughtShadow = App.game.party.alreadyCaughtPokemon(pokemon.id, false, true);
             const alreadyCaughtPurified = App.game.party.alreadyCaughtPokemon(pokemon.id, false, true, true);
 
+            // Checks based on box
+            const party = App.game.party.alreadyCaughtPokemon(pokemon.id) && !App.game.party.getPokemon(pokemon.id).box;
+            const box = App.game.party.alreadyCaughtPokemon(pokemon.id) && App.game.party.getPokemon(pokemon.id).box;
+
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
             if (nativeRegion > player.highestRegion() || nativeRegion == GameConstants.Region.none && !alreadyCaught) {
@@ -186,6 +190,16 @@ class PokedexHelper {
 
             // Only caught purified
             if (caughtStatus == 'caught-purified' && !alreadyCaughtPurified) {
+                return false;
+            }
+
+            const boxFilter = Settings.getSetting('pokedexBoxFilter').observableValue();
+            // Only party
+            if (boxFilter == 'party' && !party) {
+                return false;
+            }
+            // Only boxes
+            if (boxFilter == 'box' && !box) {
                 return false;
             }
 
