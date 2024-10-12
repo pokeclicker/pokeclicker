@@ -107,6 +107,13 @@
                                 <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
                             </div>
                             <!-- /ko -->
+
+                            <!-- ko if: App.game.underground.mine && App.game.underground.mine.completed -->
+                            <div style="position: absolute; inset: 20%; display: grid; gap: 1rem; align-content: center;">
+                                <div>Found all items</div>
+                                <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
+                            </div>
+                            <!-- /ko -->
                         </div>
 
                         <div class='row no-gutters'>
