@@ -9,6 +9,7 @@ enum EvolutionType {
     Weather,
     Other,
     Questline,
+    Attack,
 }
 
 export default EvolutionType;
