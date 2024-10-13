@@ -7,19 +7,19 @@ import KeyItemType from '../enums/KeyItemType';
 import * as GameConstants from '../GameConstants';
 
 export default class KeyItem {
-    public name: KeyItemType;
+    public id: KeyItemType;
     public displayName: string;
     public description: string;
     public unlockReq: KnockoutComputed<boolean>;
     public unlocker: KnockoutSubscription;
     public isUnlocked: KnockoutObservable<boolean>;
 
-    constructor(name: KeyItemType, description: string, unlockReq?: () => boolean, isUnlocked = false,
+    constructor(id: KeyItemType, description: string, unlockReq?: () => boolean, isUnlocked = false,
         public unlockRewardOnClose = () => {},
         displayName?: string,
         public unlockRewardOnUnlock = () => {}) {
-        this.name = name;
-        this.displayName = displayName ?? GameConstants.humanifyString(KeyItemType[this.name]);
+        this.id = id;
+        this.displayName = displayName ?? GameConstants.humanifyString(KeyItemType[this.id]);
         this.description = description;
         this.isUnlocked = ko.observable(isUnlocked ?? false);
 
@@ -31,7 +31,7 @@ export default class KeyItem {
         this.unlockReq = ko.computed<boolean>(unlockReq);
         this.unlocker = this.unlockReq.subscribe(() => {
             if (this.unlockReq()) {
-                App.game.keyItems.gainKeyItem(this.name);
+                App.game.keyItems.gainKeyItem(this.id);
             }
         });
     }
