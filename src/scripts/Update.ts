@@ -2775,6 +2775,12 @@ class Update implements Saveable {
                 settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
             }
             delete settingsData.showFarmModuleControls;
+
+            // Replace all player owned Boost Mulch for Growth Mulch and pass the store multiplier
+            playerData._itemList.Growth_Mulch = playerData._itemList.Boost_Mulch || 0;
+            playerData._itemMultipliers.Growth_Mulch = playerData._itemMultipliers.Boost_Mulch || 0;
+            delete playerData._itemList.Boost_Mulch;
+            delete playerData._itemMultipliers.Boost_Mulch; 
         },
     };
 
