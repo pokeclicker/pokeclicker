@@ -449,11 +449,11 @@ class QuestLineHelper {
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.').withCustomReward(() => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest(0, undefined, true));
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
-        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 1, true);
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 1, true).withDescription('Catch Raikou.');
 
-        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 1, true);
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 1, true).withDescription('Catch Entei.');
 
-        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune');
+        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune').withDescription('Catch Suicune.');
 
         johtoBeastsQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -765,15 +765,15 @@ class QuestLineHelper {
         const southernIslandClearing = new TalkToNPCQuest(SouthernIsland1, 'Claim your Eon Ticket in the Start Menu and investigate the Southern Island.');
         eonDuoQuestLine.addQuest(southernIslandClearing);
 
-        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 1, true);
+        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 1, true).withDescription('Catch Latias.');
 
-        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 1, true);
+        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 1, true).withDescription('Catch Latios.');
 
         eonDuoQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchLatias,
                 catchLatios,
-            ], 'Catch or hatch the Eon Duo.'));
+            ], 'Catch the Eon Duo.'));
 
         App.game.quests.questLines().push(eonDuoQuestLine);
     }
@@ -958,7 +958,7 @@ class QuestLineHelper {
         const fightMetaGroudon1 = new DefeatTemporaryBattleQuest('Meta Groudon', 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!');
         jirachiQuestLine.addQuest(fightMetaGroudon1);
 
-        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 1, true).withDescription('Jirachi has escaped in the chaos and is roaming Hoenn. Catch or hatch Jirachi.');
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 1, true).withDescription('Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi.');
 
         jirachiQuestLine.addQuest(catchJirachi);
 
