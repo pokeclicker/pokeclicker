@@ -2775,6 +2775,23 @@ class Update implements Saveable {
                 settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
             }
             delete settingsData.showFarmModuleControls;
+
+            // Award missed BP+Money for the in-progress BF run
+            const bfCheckpoint = saveData.battleFrontier.checkpoint;
+            if (bfCheckpoint > 10) {
+                const lastRewardStage = Math.floor(bfCheckpoint / BattleFrontierRunner.STAGES_PER_FLOOR) * BattleFrontierRunner.STAGES_PER_FLOOR;
+                const battlePointsEarned = BattleFrontierRunner.calculateBattlePointsForStage(lastRewardStage);
+                const moneyEarned = BattleFrontierRunner.MONEY_TO_BATTLE_POINTS_RATIO * battlePointsEarned;
+                saveData.wallet.currencies[GameConstants.Currency.battlePoint] += battlePointsEarned;
+                saveData.wallet.currencies[GameConstants.Currency.money] += moneyEarned;
+
+                Notifier.notify({
+                    title: 'Battle Frontier Rewards Updated',
+                    message: `You have earned <img src="./assets/images/currency/battlePoint.svg" height="24px"/>&nbsp;${battlePointsEarned.toLocaleString('en-US')} and <img src="./assets/images/currency/money.svg" height="24px"/>&nbsp;${moneyEarned.toLocaleString('en-US')} for your in&nbsp;progress Battle Frontier run.`,
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 5 * GameConstants.MINUTE,
+                });
+            }
         },
     };
 
