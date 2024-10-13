@@ -1,5 +1,6 @@
 import KeyItem from './KeyItem';
 import KeyItemType from '../enums/KeyItemType';
+import BadgeEnums from '../enums/Badges';
 import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
@@ -44,14 +45,15 @@ export default class KeyItems implements Feature {
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémon Attack. Some baby Pokémon can only be found through breeding, too!',
                 () => App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
-            new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
+            new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.',
+                () => App.game.badgeCase.badgeList[BadgeEnums.Soul](), undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
                 () => MapHelper.accessToRoute(11, Region.kanto), undefined, undefined, 'Wailmer Pail'),
-
             new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground.', undefined, undefined, undefined, 'Explorer Kit'),
             new KeyItem(KeyItemType.Eon_ticket, 'A limited edition ticket for a cruise to the Southern Island.', undefined, undefined, undefined, 'Eon Ticket'),
             new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events and let you start events early.', undefined, undefined, undefined, 'Event Calendar'),
-            new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.', undefined, undefined, undefined, 'Gem Case'),
+            new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.',
+                () => App.game.badgeCase.badgeList[BadgeEnums.Earth](), undefined, undefined, 'Gem Case'),
             new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.', undefined, undefined, undefined, 'DNA Splicers'),
             new KeyItem(KeyItemType.Reins_of_unity, 'Reins that people presented to the king. They enhance Calyrex’s power over bountiful harvests and unite Calyrex with its beloved steeds.', undefined, undefined, undefined, 'Reins of Unity'),
             new KeyItem(KeyItemType.Pokerus_virus,

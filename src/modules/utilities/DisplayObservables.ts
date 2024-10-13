@@ -1,12 +1,14 @@
 import type { Observable } from 'knockout';
 
+type BootstrapDisplayType = 'modal' | 'collapse';
+
 enum BootstrapState {
     'hidden' = 'hidden',
     'hide' = 'hide',
     'show' = 'show',
 }
 
-function subscribeToElemState(elemID: string, type: string, obs: Observable<BootstrapState>) {
+function subscribeToElemState(elemID: string, type: BootstrapDisplayType, obs: Observable<BootstrapState>) {
     const $elem = $(`#${elemID}`);
     if (!$elem.length) {
         console.error(`DisplayObservables: ${type} ${elemID} not found, cannot subscribe state observable`);
@@ -18,7 +20,7 @@ function subscribeToElemState(elemID: string, type: string, obs: Observable<Boot
     }
 }
 
-function createStateObservable(elemID: string, type: string): Observable<BootstrapState> {
+function createStateObservable(elemID: string, type: BootstrapDisplayType): Observable<BootstrapState> {
     const obs = ko.observable(BootstrapState.hidden);
     $(document).ready(() => {
         subscribeToElemState(elemID, type, obs);
@@ -26,7 +28,7 @@ function createStateObservable(elemID: string, type: string): Observable<Bootstr
     return obs;
 }
 
-function getObservableState(proxyTarget, elemID: string, type: string) {
+function getObservableState(proxyTarget, elemID: string, type: BootstrapDisplayType) {
     let returnObservable = false;
     if (elemID.endsWith('Observable')) {
         returnObservable = true;
@@ -52,6 +54,26 @@ export const collapseState: Record<string, BootstrapState | Observable<Bootstrap
     get(target, collapseID: string) {
         return getObservableState(target, collapseID, 'collapse');
     },
+});
+
+/*
+    If we initially subscribe to an element during its show animation, it will be read as being hidden, which can cause wonkiness
+    Easy to avoid by subscribing to them all ahead of time
+*/
+$(document).ready(() => {
+    document.querySelectorAll('.modal').forEach(modal => {
+        if (modal.id) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            modalState[modal.id];
+        }
+    });
+    // only bother setting up subscriptions in advance for collapsibles in the main display, too many random collapsibles in modals
+    document.querySelectorAll('.card.sortable .collapse').forEach(collapse => {
+        if (collapse.id) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            collapseState[collapse.id];
+        }
+    });
 });
 
 /*

@@ -265,14 +265,6 @@ class Game implements TmpGameType {
             }
         }
 
-        // Check if Koga has been defeated, but have no safari ticket yet
-        if (App.game.badgeCase.badgeList[BadgeEnums.Soul]() && !App.game.keyItems.itemList[KeyItemType.Safari_ticket].isUnlocked()) {
-            App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
-        }
-        // Check if Giovanni has been defeated, but have no gem case yet
-        if (App.game.badgeCase.badgeList[BadgeEnums.Earth]() && !App.game.keyItems.itemList[KeyItemType.Gem_case].isUnlocked()) {
-            App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
-        }
         // Check that none of our quest are less than their initial value
         App.game.quests.questLines().filter(q => q.state() == 1 && q.curQuest() < q.quests().length).forEach(questLine => {
             const quest = questLine.curQuestObject();
