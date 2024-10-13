@@ -2775,6 +2775,10 @@ class Update implements Saveable {
                 settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
             }
             delete settingsData.showFarmModuleControls;
+
+            // Rename pokemonSeen statistic to pokemonDiscovered for clarity
+            saveData.statistics.pokemonDiscovered = saveData.statistics.pokemonSeen;
+            delete saveData.statistics.pokemonSeen;
         },
     };
 

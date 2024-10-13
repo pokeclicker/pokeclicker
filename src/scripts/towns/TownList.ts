@@ -772,7 +772,7 @@ const RedSpearow = new NPC('Red Spearow', [
 
 const NewIslandJessieAndJames = new RoamerNPC('Jessie & James',
     ['Mewtwo\'s Clones have escaped and are Roaming freely across Kanto. Will you help us track them down? It\'s for a good cause, we swear.'],
-    GameConstants.Region.kanto, 0, 'assets/images/npcs/Jessie and James.png',
+    GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto), 'assets/images/npcs/Jessie and James.png',
     new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island'))
 );
 
@@ -1560,7 +1560,10 @@ const AzaleaElder = new NPC('Elder Li', [
     'I remember, back in the day, it was the Guardian of Ilex Forest. It was a playful Pokémon. It loved playing with children.',
     'It was especially close to a kid named Samuel Oak. When he suddenly moved to Kanto, Celebi was quite sad. He never even said goodbye! I wonder what became of that boy. Maybe he knows more of where Celebi is right now. They certainly have Unfinished Business.',
     'Celebi got over it very quick, playful as it is. There are always other kids to play with. Then, some time later, a strange figure went into the forest with a golden Poké Ball. The Guardian hasn\'t been seen since.',
-], { image: 'assets/images/npcs/Elder Li.png' });
+], {
+    image: 'assets/images/npcs/Elder Li.png',
+    mentionsPokemon: ['Celebi'],
+});
 
 const AzaleaHiker = new NPC('Hiker Daniel', [
     'The PokéManiacs in Union Cave are restless. They have been ranting and raving about a weekly visitor.',
@@ -1605,6 +1608,7 @@ const AzaleaCelebiKurt4 = new NPC('Kurt', [
 ], {
     image: 'assets/images/npcs/Kurt.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 3), new QuestLineStepCompletedRequirement('Unfinished Business', 5, GameConstants.AchievementOption.less), new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]),
+    mentionsPokemon: ['Celebi'],
 });
 
 const AzaleaCelebiOak1 = new NPC('Prof. Oak', [
@@ -1736,6 +1740,7 @@ const EcruteakEusine = new NPC('Eusine', [
 ], {
     image: 'assets/images/npcs/Eusine.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legendary Beasts'), new QuestLineStepCompletedRequirement('The Legendary Beasts', 2, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Raikou', 'Entei', 'Suicune'],
 });
 const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
@@ -1744,8 +1749,7 @@ const EcruteakPokéfan = new NPC('Pokéfan Derek', [
 ], {
     image: 'assets/images/npcs/PokéManiac.png',
     requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 2),
-}
-);
+});
 
 const Zuki = new NPC('Kimono Girl Zuki', [
     'Professor Elm tells me you are a master trainer. Please, show me your skills by training your Pokémon.',
@@ -1787,6 +1791,7 @@ const KimonoGirlsWhirl = new NPC('Kimono Girls', [
 ], {
     image: 'assets/images/npcs/Kimono Girl.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 8), new QuestLineStepCompletedRequirement('Whirl Guardian', 10, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Lugia'],
 });
 
 const KimonoGirlsEcruteak = new NPC('Kimono Girls', [
@@ -1794,6 +1799,7 @@ const KimonoGirlsEcruteak = new NPC('Kimono Girls', [
 ], {
     image: 'assets/images/npcs/Kimono Girl.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Rainbow Guardian'), new QuestLineStepCompletedRequirement('Rainbow Guardian', 1, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Ho-Oh'],
 });
 
 const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
@@ -2396,7 +2402,9 @@ const SkepticalFisherman = new NPC('Skeptical Fisherman', [
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...'],
-{requirement: new QuestLineStartedRequirement('The Delta Episode', GameConstants.AchievementOption.less),
+{
+    requirement: new QuestLineStartedRequirement('The Delta Episode', GameConstants.AchievementOption.less),
+    mentionsPokemon: ['Deoxys'],
 });
 
 const LavaridgeSootCollector = new NPC('Soot Collector', [
@@ -2457,6 +2465,7 @@ const Wallace1 = new NPC('Gym Leader Wallace', [
     'I have heard that Rayquaza once lived high atop the Sky Pillar, maybe that\'s where it is now?',
 ], {image: 'assets/images/npcs/Wallace.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 1), new QuestLineStepCompletedRequirement('The Weather Trio', 3, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Rayquaza'],
 });
 
 const Wallace2 = new NPC('Gym Leader Wallace', [
@@ -2473,6 +2482,7 @@ const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
     '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of thing would never happen if Wallace was still around.</i>',
 ], {image: 'assets/images/npcs/other/WeatherBattle1.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Groudon', 'Kyogre'],
 });
 
 const WeatherBattle2 = new NPC('The Super-Ancient Pokémon Clash', [
@@ -2495,8 +2505,10 @@ const Butler1 = new NPC('Butler', [
     'I have been preparing for the Millennium Festival my whole life, and have big plans for the wish-granting powers it possesses.',
     'I have found what appears to be a crystalline cocoon that contains Jirachi, the Wish Pokémon! I would be honored if you would take this cocoon as thanks for helping me. Legend has it that Jirachi will appear for a trainer who is pure of heart and grant them a wish!',
     '<i>Butler gives you a crystalline cocoon containing Jirachi.</i>',
-], {image: 'assets/images/npcs/Butler.png',
+], {
+    image: 'assets/images/npcs/Butler.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Wish Maker', 1), new QuestLineStepCompletedRequirement('Wish Maker', 3, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Jirachi'],
 });
 
 const CocoonHatch = new NPC('Examine the Crystalline Cocoon', [
@@ -2674,7 +2686,9 @@ const SeaMauvilleRocket2 = new NPC('Rocket Grunt', [
 const SouthernIsland1 = new NPC('Explore the Southern Island', [
     '<i>The Southern Island is a small but lush forest. The clearing near the center of the island is the perfect place for a tired Pokémon to rest.</i>',
     '<i>Latios and Latias are resting in the clearing. You can approach one of them, but the other will probably flee.</i>',
-],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 2), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 2), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Latios', 'Latias'],
 });
 
 const Cozmo1 = new NPC('Dr. Cozmo', [
@@ -3130,7 +3144,7 @@ const EsCade2 = new NPC('Mayor Es Cade', [
 });
 const EviceEscape = new NPC('Watch Evice Escape', [
     '<i>Before the helicopter can land, a fireball shoots across the sky, blowing it up!</i>',
-    '<i>A Ho-oh flies low, screeching a thanks to you for stopping the evil Team Cipher.</i>',
+    '<i>A Ho-Oh flies low, screeching a thanks to you for stopping the evil Team Cipher.</i>',
     '</br><img src="assets/images/pokemon/250.png"/>',
 ], {image: 'assets/images/npcs/other/EviceHelicopter.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 25), new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less)]),
@@ -4181,7 +4195,7 @@ const CanalaveRiley = new NPC('Riley', [
 const CanalaveYoungBoy = new NPC('Young Boy', [
     'Oh, hello! Say, have you ever heard of Cresselia? Once when I was really little I had a really bad dream I couldn’t wake up from, but then a kind trainer went to an island near here and got help from Cresselia to cure me!',
     'Maybe if you can prove yourself by conquering that island, you could find Cresselia roaming around the region...',
-]);
+], {mentionsPokemon: ['Cresselia']});
 
 const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
     '<i>Three Pokémon there were.</i>',
@@ -4193,7 +4207,9 @@ const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
     '<i>From the lake floor they rise.</i>',
     '<i>Bearing with them the power to make vast lands, they rise again.</i>',
 ],{
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)])});
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Uxie', 'Mesprit', 'Azelf'],
+});
 
 const VerityMesprit = new NPC('Mesprit', [
     '<i>You are the trainer looking for the Distortion World, right?</i>',
@@ -4325,6 +4341,7 @@ const ManaphyHastings2 = new NPC('Professor Hastings', [
 ], {
     image: 'assets/images/npcs/Professor Hastings.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 10), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 11, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Manaphy'],
 });
 
 const ManaphyHastings3 = new NPC('Professor Hastings', [
@@ -5059,7 +5076,10 @@ const ExcitedChild = new NPC('Excited Child', [
     'I was just watching my favorite show, The National Gymquirer. It was a live segment! Some hot shot trainer from Kanto defeated Drayden! It was amazing! That trainer is so cool! Drayden is like unbeatable.',
     'Then my programme got interrupted by an emergency broadcast. A report on the first confirmed sightings of Tornadus and Thundurus in over twenty-five years! I\'ve read so much about them, they are my favorites.',
     'Last time they were spotted they just roamed around, causing all kinds of mischief. According to my books anyway. I\'m sure that amazing trainer from the TV will want to catch these mighty forces of nature.',
-], {image: 'assets/images/npcs/School Kid (female).png'});
+], {
+    image: 'assets/images/npcs/School Kid (female).png',
+    mentionsPokemon: ['Tornadus', 'Thundurus'],
+});
 
 const CasteliaMusician = new NPC('Musician', [
     'Sup. Ya like jazz? No? Well then you should check out me and my band at the Sonata Cafe where we never play Jazz.',
@@ -5122,6 +5142,7 @@ const GiantChasmShadowTriad = new NPC('Shadow Triad', [
 ], {
     image: 'assets/images/npcs/specialNPCs/Shadow Triad.png',
     requirement: new MultiRequirement([new TemporaryBattleRequirement('Colress 3'), new TemporaryBattleRequirement('Ghetsis 1', 1, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Kyurem'],
 });
 
 const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
@@ -5195,6 +5216,7 @@ const OldManSwords = new NPC('Old Man', [
 ], {
     image: 'assets/images/npcs/Old Man.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Swords of Justice'), new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Cobalion'],
 });
 const Cobalion1 = new NPC('Cobalion', [
     'Greetings, may I ask who are you? Oh, you\'re a friend of the Old Man? That\'s great, and he sent you here to find me, I assume.',
@@ -5202,6 +5224,7 @@ const Cobalion1 = new NPC('Cobalion', [
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 3, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Terrakion'],
 });
 const Terrakion1 = new NPC('Terrakion', [
     'How did you find me? Cobalion told me this place was well hidden! Anyways, what do you want from me? Cobalion wants to reunite the Swords of Justice? Do you think I\'m dumb enough to fall for lies of a human?',
@@ -5216,6 +5239,7 @@ const Cobalion2 = new NPC('Cobalion', [
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 5, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 7, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Virizion'],
 });
 const Virizion1 = new NPC('Virizion', [
     'Hello, who are you, may I ask? You say you were sent here by Cobalion to reunite the Swords of Justice? I\'m sorry dear, you\'ll have to create a much more believable lie to deceive me. I\'m not so easily fooled.',
@@ -5242,6 +5266,7 @@ const Cobalion4 = new NPC('Cobalion', [
 ], {
     image: 'assets/images/pokemon/638.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Swords of Justice', 13, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Swords of Justice', 15, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Kyurem'],
 });
 const Cobalion5 = new NPC('Cobalion', [
     'Hey, $playername$. It\'s not your fault Kyurem fled, but I\'m thinking it has probably gone into hiding. We should search the Giant Chasm for its lair at once.',
@@ -6194,6 +6219,7 @@ const ProfessorSycamore1 = new NPC('Prof. Sycamore', [
     'By the way, I heard Frost Cavern has a lot of cool Pokémon, why don\'t you go check it out?',
 ], {image: 'assets/images/npcs/Sycamore.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 15), new QuestLineStepCompletedRequirement('A Beautiful World', 17, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Xerneas', 'Yveltal'],
 });
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
@@ -6301,6 +6327,7 @@ const ThanksDiancie = new NPC('Princess Diancie', [
 ], {
     image: 'assets/images/pokemon/719.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Diancie'],
 });
 
 const KalosStoneSalesman1 = new NPC('Stone Salesman', [
@@ -6977,6 +7004,7 @@ const HeaheaGentleman = new NPC('Gentleman', [
 ], {
     image: 'assets/images/npcs/Gentleman.png',
     requirement: new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
+    mentionsPokemon: ['Marshadow'],
 });
 const ProfBurnetAlola2 = new NPC('Professor Burnet', [
     'Long ago, Cosmog was called the child of the stars. Its powers seem to have some connection with Ultra Wormholes.',
@@ -7108,6 +7136,7 @@ const Lillie1 = new NPC('Mysterious Girl', [
 ], {
     image: 'assets/images/npcs/specialNPCs/Lillie (nebby).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 0), new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 1, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Cosmog'],
 });
 const Lillie2 = new NPC('Return Nebby to Lillie', [
     'Nebby! Oh thank goodness you\'re safe. Thank you $playername$, let me heal your Poké- No? Um, very well then.',
@@ -7151,6 +7180,7 @@ const Lillie6 = new NPC('Lillie', [
 ], {
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Child of the Stars', 12), new  QuestLineStepCompletedRequirement('Child of the Stars', 13, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Cosmoem'],
 });
 const Gladion1 = new NPC('Gladion', [
     'The Sun Flute and the Moon Flute. When sounded together, it\'s said that they can call the Legendary Pokémon... That is, if you believe in old myths, anyway. I found one of them downstairs and gave it to Lillie.',
@@ -7174,6 +7204,7 @@ const SunFlute = new NPC('Play the Sun Flute', [
     saveKey: 'SunFlute',
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([1]), new DayCyclePartRequirement([2])])]),
+    mentionsPokemon: ['Solgaleo'],
 });
 const MoonFlute = new NPC('Play the Moon Flute', [
     'Oh my goodness, Nebby! To think you would be the emissary of the moon, Lunala!',
@@ -7182,6 +7213,7 @@ const MoonFlute = new NPC('Play the Moon Flute', [
     saveKey: 'MoonFlute',
     image: 'assets/images/npcs/Lillie (z powered).png',
     requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Emissary of Light', 5), new QuestLineStepCompletedRequirement('Emissary of Light', 6, GameConstants.AchievementOption.less), new OneFromManyRequirement([new DayCyclePartRequirement([0]), new DayCyclePartRequirement([3])])]),
+    mentionsPokemon: ['Lunala'],
 });
 const Lillie7 = new NPC('Lillie', [
     'Nebby... all I ever wanted to do was to help you get back to your own home... But instead you helped me, over and over... I got the chance to finally talk with my mother. Thank you... Thank you so much!',
@@ -7352,6 +7384,7 @@ const PhycoAltar = new NPC('Captain Phyco', [
 ], {
     image: 'assets/images/npcs/Phyco.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('Emissary of Light'), new  QuestLineStepCompletedRequirement('Eater of Light', 0, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Necrozma'],
 });
 // Rotom-Dex
 const RotomDexSun = new NPC('Rotom Dex', [
@@ -7581,6 +7614,7 @@ const RoadsideMotelLooker1 = new NPC('Looker', [
 ], {
     image: 'assets/images/npcs/Looker.png',
     requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1, GameConstants.AchievementOption.less),
+    mentionsPokemon: ['Nihilego'],
 });
 const RoadsideMotelAnabel1 = new NPC('Anabel', [
     'The testing is complete. I see no problem at all with your skills. Rather I would have to praise you for them. Welcome to the team!',
@@ -8527,6 +8561,7 @@ const StowonSideSonia = new NPC ('Sonia', [
 ], {
     image: 'assets/images/npcs/Sonia.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 1), new QuestLineStepCompletedRequirement('The Darkest Day', 3, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Zacian (Crowned Sword)', 'Zamazenta (Crowned Shield)'],
 });
 
 const Archaeologist = new NPC('Archaeologist', [
@@ -8613,6 +8648,7 @@ const EnergyPlantRose = new NPC('Chairman Rose', [
 ], {
     image: 'assets/images/npcs/Macro Cosmos (rose).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 15), new QuestLineStepCompletedRequirement('The Darkest Day', 17, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Eternatus'],
 });
 
 const EternatusCatch = new GiftNPC('Catch Eternatus', [
@@ -8798,6 +8834,7 @@ const Mustard6 = new NPC ('Mustard', [
 ], {
     image: 'assets/images/npcs/Mustard.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 10), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 12, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Kubfu'],
 });
 const Mustard7 = new NPC ('Mustard', [
     'Good! Now then... The first thing for you to do is become best friends with Kubfu! You need to build trust! Kubfu hasn\'t really had a chance to explore the world outside the dojo, so... Maybe it\'ll help you become better friends if you train alongside it!',
@@ -8843,6 +8880,7 @@ const JungleKoko1 = new NPC ('Koko', [
 ], {
     image: 'assets/images/npcs/Koko.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 0), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Zarude'],
 });
 const JungleKoko2 = new NPC ('Koko', [
     'Great, you found it! Now if you could release it... hmm? It seems to like you. Well, if it wants to stay with you, that\'s its choice, so I guess it\'s fine.',
@@ -8884,6 +8922,7 @@ const JungleKoko5 = new NPC ('Koko', [
 ], {
     image: 'assets/images/npcs/Koko.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Zarude (Dada)'],
 });
 const JungleAsh3 = new NPC ('Ash Ketchum', [
     'Amazing, you even beat Dada! It\'s really clear that he is really amazed by your strength!',
@@ -8930,7 +8969,8 @@ const Calyrex1 = new NPC ('Calyrex', [
     'Would you do me the favour of protecting me from wild Pokémon at the Old Cemetery and Snowslide Slope? I wish to grow a Shaderoot Carrot and an Iceroot Carrot which I believe could draw out my loyal steeds.',
 ], {
     image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
-    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 1), new QuestLineStepCompletedRequirement('The Crown of Galar', 3, GameConstants.AchievementOption.less )]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 1), new QuestLineStepCompletedRequirement('The Crown of Galar', 3, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Calyrex'],
 });
 
 const Calyrex2 = new NPC ('Calyrex', [
@@ -8959,6 +8999,7 @@ const Calyrex4 = new NPC ('Calyrex', [
 ], {
     image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 7), new QuestLineStepCompletedRequirement('The Crown of Galar', 9, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Ice Rider Calyrex', 'Shadow Rider Calyrex'],
 });
 const Calyrex5 = new NPC ('Calyrex', [
     '<i>Human child... I look forward to what adventures we might have together.</i>',
@@ -8981,6 +9022,7 @@ const BirdPeony1 = new NPC ('Peony', [
 ], {
     image: 'assets/images/npcs/Peony.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Birds of the Dyna Tree'), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Galarian Articuno', 'Galarian Zapdos', 'Galarian Moltres'],
 });
 const BirdPeony2 = new NPC ('Peony', [
     'You\'re saying you saw some Pokémon that looked like.... Hang on, Chief! There\'s breaking news on the telly! They\'re sayin\' dodgy bird Pokémon are poppin\' up left and right!',
@@ -9541,6 +9583,7 @@ const ForcesCogita2 = new NPC('Cogita', [
     'Catch her then, if you like. She always flits about in the Crimson Mirelands.',
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Enamorus'],
 });
 const ForcesCogita3 = new NPC('Cogita', [
     'Aha, you\'ve caught Enamorus as well. And you know so much about her.',
