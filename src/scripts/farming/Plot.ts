@@ -472,7 +472,7 @@ class Plot implements Saveable {
      */
     getGrowthMultiplier(): number {
         let multiplier = {
-            [MulchType.Boost_Mulch]: GameConstants.BOOST_MULCH_MULTIPLIER,
+            [MulchType.Growth_Mulch]: GameConstants.GROWTH_MULCH_MULTIPLIER,
             [MulchType.Amaze_Mulch]: GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER,
             [MulchType.Freeze_Mulch]: GameConstants.FREEZE_MULCH_MULTIPLIER,
         }[this.mulch] ?? 1;

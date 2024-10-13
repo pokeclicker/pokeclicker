@@ -36,7 +36,7 @@ class SafariItemController {
             {item: {id: 'Luxuryball', type: ItemType.item}, weight: 1},
             {item: {id: 'MediumRestore', type: ItemType.item}, weight: 1},
             {item: {id: 'LargeRestore', type: ItemType.item}, weight: 1},
-            {item: {id: 'Boost_Mulch', type: ItemType.item}, weight: 2},
+            {item: {id: 'Growth_Mulch', type: ItemType.item}, weight: 2},
             {item: {id: 'Rich_Mulch', type: ItemType.item}, weight: 2},
             {item: {id: 'Surprise_Mulch', type: ItemType.item}, weight: 2},
             {item: {id: 'Amaze_Mulch', type: ItemType.item}, weight: 2},
