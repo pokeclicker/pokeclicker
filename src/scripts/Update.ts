@@ -2780,7 +2780,7 @@ class Update implements Saveable {
             playerData._itemList.Growth_Mulch = playerData._itemList.Boost_Mulch || 0;
             playerData._itemMultipliers.Growth_Mulch = playerData._itemMultipliers.Boost_Mulch || 0;
             delete playerData._itemList.Boost_Mulch;
-            delete playerData._itemMultipliers.Boost_Mulch; 
+            delete playerData._itemMultipliers.Boost_Mulch;
         },
     };
 
