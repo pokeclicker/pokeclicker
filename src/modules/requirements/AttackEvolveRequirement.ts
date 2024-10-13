@@ -1,3 +1,4 @@
+import { AchievementOption } from '../GameConstants';
 import { pokemonMap } from '../pokemons/PokemonList';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Requirement from './Requirement';
