@@ -15,13 +15,19 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
         Routes.regionRoutes.filter(r => r.isUnlocked()).forEach(r => {
             Object.values(r.pokemon).flat().forEach(p => {
                 const pokemon = pokemonMap[p];
-                if (!pokemon || pokemon.id <= 0) {
+
+                if (!pokemon || pokemon.id <= 0 || !App.game.party.alreadyCaughtPokemon(pokemon.id)) {
                     return;
                 }
                 pokemon.type.forEach(t => types[t]++);
             });
         });
+
         const max = Math.max(...types);
+        console.log(types);
+        console.log(types.map(v => ((-v + max) / max) * (this.maxWeight - this.minWeight))
+            // map the type and rounded values
+            .map((weight, type) => ({ type, weight: Math.round((weight + this.minWeight) * 100) / 100 })));
         // Calculate the weight
         return types.map(v => ((-v + max) / max) * (this.maxWeight - this.minWeight))
             // map the type and rounded values
@@ -31,7 +37,7 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(50, 250);
         this.weights = this.typeWeights();
-        const type = SeededRand.fromArray(this.weights.filter(w => w.weight < this.maxWeight).map(w => w.type));
+        const type = SeededRand.fromWeightedArray(this.weights.filter(w => w.weight > 0).map(w => w.type), this.weights.map(w => this.maxWeight - w.weight));
         const reward = this.calcReward(amount, type);
         return [amount, reward, type];
     }
