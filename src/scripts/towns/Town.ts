@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
@@ -12,7 +13,7 @@ type TownOptionalArgument = {
     ignoreAreaStatus?: boolean
 };
 
-class Town {
+class Town implements TmpTownType {
     public name: string;
     public region: GameConstants.Region;
     public requirements: Requirement[];

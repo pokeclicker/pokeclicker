@@ -1,4 +1,4 @@
-///<reference path="../GameConstants.d.ts"/>
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 
 enum PokemonLocationType {
     Route,
@@ -780,6 +780,8 @@ class PokemonLocations {
             locations[PokemonLocationType.DreamOrb] ||
             locations[PokemonLocationType.BattleCafe] ||
             locations[PokemonLocationType.SafariItem];
-        return !isEvable && Object.keys(locations).length;
+        return !isEvable && Object.keys(locations).length > 0;
     };
 }
+
+PokemonLocations satisfies TmpPokemonLocationsType;
