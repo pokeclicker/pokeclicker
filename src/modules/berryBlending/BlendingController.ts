@@ -46,6 +46,14 @@ export default class BlendingController {
         this.amountInput().val(amt).change();
     }
 
+    public static calculateSelectionCss(recipe: BlendingRecipe): boolean {
+        if (recipe && (recipe as BlendingRecipe).flavorPrice.some((flavor) =>
+            !App.game.blending.hasAmount(new FlavorAmount(flavor.value * this.amount(), flavor.type)))
+                || this.amount() < 1) {
+            return true;
+        }
+    }
+
     public static calculateButtonCss(): string {
         const recipe: BlendingRecipe = this.selectedRecipe();
 
