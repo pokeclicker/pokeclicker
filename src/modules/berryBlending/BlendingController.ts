@@ -6,6 +6,9 @@ import BlendingRecipes from './BlendingRecipes';
 import FlavorAmount from './FlavorAmount';
 
 export default class BlendingController {
+    public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
+        return App.game.blending.canAccess();
+    });
 
     public static blendingModalTabSelected: KnockoutObservable<string> = ko.observable('blendingView');
 
@@ -73,8 +76,4 @@ export default class BlendingController {
             berryImage.style.removeProperty('animation');
         });
     }
-
-    public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
-        return App.game.blending.canAccess();
-    });
 }
