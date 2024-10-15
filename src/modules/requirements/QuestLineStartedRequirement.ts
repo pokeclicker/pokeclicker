@@ -18,12 +18,10 @@ export default class QuestLineStartedRequirement extends Requirement {
     }
 
     public getProgress(): number {
-        return (this.quest.state() === QuestLineState.started
-            || this.quest.state() === QuestLineState.ended)
-            ? 1 : 0;
+        return +(this.quest.state() !== QuestLineState.inactive);
     }
 
     public hint(): string {
-        return `Questline ${this.questLineName} needs to be started.`;
+        return `Questline ${this.questLineName} needs to ${this.option !== AchievementOption.less ? 'be started' : 'not be started yet'}.`;
     }
 }

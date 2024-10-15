@@ -2,7 +2,7 @@ import CaughtIndicatingItem from './CaughtIndicatingItem';
 import { PokemonNameType } from  '../pokemons/PokemonNameType';
 import CaughtStatus from '../enums/CaughtStatus';
 import { Computed as KnockoutComputed } from 'knockout';
-import { Currency, SHINY_CHANCE_SHOP, SHOPMON_EP_YIELD, ShadowStatus, PokemonStatisticsType, Pokerus, BattlePokemonGender } from '../GameConstants';
+import { Currency, SHINY_CHANCE_SHOP, SHOPMON_EP_YIELD, ShadowStatus, PokemonStatisticsType, Pokerus } from '../GameConstants';
 import { ShopOptions } from './types';
 import * as PokemonHelper from '../pokemons/PokemonHelper';
 import GameHelper from '../GameHelper';
@@ -10,17 +10,6 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import { createLogContent } from '../logbook/helpers';
 import { LogBookTypes } from '../logbook/LogBookTypes';
-
-// TODO remove this when PokemonFactory is moved to modules
-declare class PokemonFactory {
-    static generateShiny(chance: number, skipBonus?: boolean): boolean;
-    static generateGenderById(id: number): BattlePokemonGender;
-}
-// TODO remove this when PartyController is moved to modules
-declare class PartyController {
-    static getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
-    static getPokerusStatusByName: (name: PokemonNameType) => Pokerus;
-}
 
 export default class PokemonItem extends CaughtIndicatingItem {
     type: PokemonNameType;

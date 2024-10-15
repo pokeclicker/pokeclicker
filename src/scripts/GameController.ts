@@ -45,14 +45,6 @@ class GameController {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    static focusedOnEditableElement(): boolean {
-        const activeEl = document.activeElement as HTMLElement;
-        const localName: string = activeEl.localName.toLowerCase();
-        const editables = ['textarea', 'input', 'select'];
-
-        return (editables.includes(localName) || activeEl.isContentEditable);
-    }
-
     // Store keys for multi-key combinations
     static keyHeld: Record<string, KnockoutObservable<boolean>> = {
         Shift: ko.observable(false).extend({ boolean: null }),
@@ -109,7 +101,7 @@ class GameController {
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
-            if (this.focusedOnEditableElement()) {
+            if (GameHelper.focusedOnEditableElement()) {
                 return;
             }
 
@@ -454,7 +446,7 @@ class GameController {
 
         $(document).on('keyup', e => {
             // Ignore any of our controls if focused on an input element
-            if (this.focusedOnEditableElement()) {
+            if (GameHelper.focusedOnEditableElement()) {
                 return;
             }
 
