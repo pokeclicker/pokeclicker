@@ -228,7 +228,7 @@ export default class Blending implements Feature {
         return `New ${slotOrMachine}: <img src="./assets/images/currency/contestToken.svg" height="24px"/> ${cost}`;
     }
 
-    canAccess(): boolean {
+    public canAccess(): boolean {
         return new DevelopmentRequirement().isCompleted() && App.game.keyItems.hasKeyItem(KeyItemType.Wailmer_pail); // TODO: Pokeblock kit
     }
 

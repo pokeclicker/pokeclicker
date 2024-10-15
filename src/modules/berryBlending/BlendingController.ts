@@ -1,3 +1,4 @@
+import type { Computed } from 'knockout';
 import BerryType from '../enums/BerryType';
 import GameHelper from '../GameHelper';
 import BlendingRecipe from './BlendingRecipe';
@@ -64,4 +65,8 @@ export default class BlendingController {
             berryImage.style.removeProperty('animation');
         });
     }
+
+    public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
+        return App.game.blending.canAccess();
+    });
 }
