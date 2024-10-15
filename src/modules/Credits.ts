@@ -717,6 +717,7 @@ export const SpriteCredits: Credit[] = [
             'Hunter (male and female)',
             'Lillie',
             'Lusamine (nihilego) shiny',
+            'PokeBlock_Balanced',
             'Rider (male and female)',
             'Roller Boy',
             'Rotom-Dex',
@@ -985,6 +986,23 @@ export const SpriteCredits: Credit[] = [
             'Shauna',
         ],
         // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'PokeMMO',
+        link: 'https://pokemmo.com/en/',
+        resources: [
+            'PokeBlock_Beautiful',
+            'PokeBlock_Blue',
+            'PokeBlock_Cool',
+            'PokeBlock_Cute',
+            'PokeBlock_Green',
+            'PokeBlock_Pink',
+            'PokeBlock_Red',
+            'PokeBlock_Smart',
+            'PokeBlock_Tough',
+            'PokeBlock_White',
+            'PokeBlock_Yellow',
+        ],
     },
     {
         name: 'Pokemon Showdown',
