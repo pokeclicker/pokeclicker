@@ -1076,12 +1076,13 @@ export enum PokeBlockColor {
     Pink,
     Green,
     Yellow,
-    Red_Plus,
-    Blue_Plus,
-    Pink_Plus,
-    Green_Plus,
-    Yellow_Plus,
-    Rainbow,
+    White,
+    Cool,
+    Beautiful,
+    Cute,
+    Smart,
+    Tough,
+    Balanced,
 }
 
 export enum VitaminType {

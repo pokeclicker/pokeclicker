@@ -377,6 +377,7 @@ class PartyPokemon implements Saveable {
             case GameConstants.PokeBlockColor.Pink:
             case GameConstants.PokeBlockColor.Green:
             case GameConstants.PokeBlockColor.Yellow:
+            case GameConstants.PokeBlockColor.White:
                 amount = Math.min(amount, player.itemList[itemName]());
                 GameHelper.incrementObservable(this._contestAppealBonusAmount, amount);
                 Notifier.notify({
@@ -385,12 +386,12 @@ class PartyPokemon implements Saveable {
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
                 break;
-            case GameConstants.PokeBlockColor.Red_Plus:
-            case GameConstants.PokeBlockColor.Blue_Plus:
-            case GameConstants.PokeBlockColor.Pink_Plus:
-            case GameConstants.PokeBlockColor.Green_Plus:
-            case GameConstants.PokeBlockColor.Yellow_Plus:
-            case GameConstants.PokeBlockColor.Rainbow:
+            case GameConstants.PokeBlockColor.Cool:
+            case GameConstants.PokeBlockColor.Beautiful:
+            case GameConstants.PokeBlockColor.Cute:
+            case GameConstants.PokeBlockColor.Smart:
+            case GameConstants.PokeBlockColor.Tough:
+            case GameConstants.PokeBlockColor.Balanced:
                 amount = 1;
                 let blockType = (ItemList[itemName] as PokeBlock).contestType;
                 let conTypes = this.currentContestType;
