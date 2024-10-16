@@ -1066,7 +1066,7 @@ TownList['Two Island'] = new Town(
     'Two Island',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
-    [TwoIslandShop],
+    [TwoIslandShop, new GenericTraderShop('EverstoneDealer', 'Stonecold Steve')],
     {
         requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 0)],
         npcs: [TwoIslandGameCornerOwner1, TwoIslandGameCornerOwner2],

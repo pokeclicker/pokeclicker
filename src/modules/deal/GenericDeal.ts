@@ -4,8 +4,9 @@ import BerryType from '../enums/BerryType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
 import GameHelper from '../GameHelper';
+import { Currency } from '../GameConstants';
 
-export type GenericTraderShopIdentifier = 'Palaeontologist';
+export type GenericTraderShopIdentifier = 'Palaeontologist' | 'EverstoneDealer';
 
 type DealCostProfit = {
     amount: number,
@@ -167,6 +168,17 @@ export default class GenericDeal {
                 ],
                 [
                     { type: 'Item', item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true },
+                ],
+            ),
+        ]);
+
+        GenericDeal.list.EverstoneDealer = ko.observableArray([
+            new GenericDeal(
+                [
+                    { type: 'Amount', currency: new Amount(375, Currency.diamond), amount: 1 },
+                ],
+                [
+                    { type: 'Item', item: ItemList.Everstone, amount: 1 },
                 ],
             ),
         ]);
