@@ -7,7 +7,6 @@ class ContestRunner {
 
     public static maxAudienceAppeal: KnockoutObservable<number> = ko.observable(1);
     public static audienceAppeal: KnockoutObservable<number> = ko.observable(0);
-    public static audienceAppealPercentage: KnockoutObservable<number> = ko.observable(0);
 
     public static running: KnockoutObservable<boolean> = ko.observable(false);
 
@@ -37,7 +36,6 @@ class ContestRunner {
 
         ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank());
         ContestRunner.audienceAppeal(0);
-        ContestRunner.audienceAppealPercentage(0);
 
         ContestRunner.encoreStatus(false);
         ContestRunner.encoreRounds(0);
@@ -127,7 +125,6 @@ class ContestRunner {
      */
     public static rally(rally: number): void {
         ContestRunner.audienceAppeal(Math.min(ContestRunner.audienceAppeal() + rally, ContestRunner.maxAudienceAppeal()));
-        ContestRunner.audienceAppealPercentage(Math.floor(ContestRunner.audienceAppeal() / ContestRunner.maxAudienceAppeal() * 100));
     }
 
     public static getTrainerList() {
@@ -181,7 +178,6 @@ class ContestRunner {
                 ContestRunner.encoreRounds(ContestRunner.encoreRounds() + 1);
                 // reset audience, time, and encore status
                 ContestRunner.audienceAppeal(0);
-                ContestRunner.audienceAppealPercentage(0);
                 ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());
                 ContestRunner.encoreStatus(false);
                 // increase audience bar (needs updated encore round from above)
@@ -200,7 +196,11 @@ class ContestRunner {
         }
     }
 
-    // Increase and keep track of the amount of trainers defeated
+    // Computables
+    public static audienceAppealPercentage: KnockoutComputed<number> = ko.pureComputed(() => {
+        return Math.floor(ContestRunner.audienceAppeal() / ContestRunner.maxAudienceAppeal() * 100);
+    })
+
     public static encoreRoundsComputable: KnockoutComputed<number> = ko.pureComputed(() => {
         return ContestRunner.encoreRounds();
     });
