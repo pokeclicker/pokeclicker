@@ -667,7 +667,13 @@ class PartyPokemon implements Saveable {
 
         // Don't save anything that is the default option
         Object.entries(output).forEach(([key, value]) => {
-            if (value === this.defaults[PartyPokemonSaveKeys[key]]) {
+            const defaultValue = this.defaults[PartyPokemonSaveKeys[key]];
+            if (Array.isArray(value) && Array.isArray(defaultValue)) {
+                // Compare array contents
+                if (value.length === defaultValue.length && value.every((v, i) => v === defaultValue[i])) {
+                    delete output[key];
+                }
+            } else if (value === defaultValue) {
                 delete output[key];
             }
         });
