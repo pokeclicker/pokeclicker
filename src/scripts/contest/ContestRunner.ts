@@ -143,7 +143,7 @@ class ContestRunner {
                 // Award some tokens
                 const contestTokenMultiplier = ContestBattle.trainerStreak();
                 const rank = ContestRunner.rank();
-                const tokenReward = Math.floor((rank * 2) + (0.1 * contestTokenMultiplier));
+                const tokenReward = Math.floor(5 + (rank * 2) + (0.5 * rank * contestTokenMultiplier));
                 App.game.wallet.gainContestTokens(tokenReward);
                 Notifier.notify({
                     message: `Good job! You got a bonus of ${tokenReward} Contest Tokens!`,
@@ -167,7 +167,8 @@ class ContestRunner {
             // Award tokens after each round
             const contestTokenMultiplier = ContestBattle.trainerStreak();
             const rank = ContestRunner.rank();
-            const tokenReward = Math.floor(5 + (rank * 2) + (0.1 * rank * contestTokenMultiplier));
+            const finaleBonus = this.finaleStatus() ? Math.max(1, contestTokenMultiplier / 10) : 1;
+            const tokenReward = Math.floor(5 + (rank * 2) + (finaleBonus * rank * contestTokenMultiplier));
             App.game.wallet.gainContestTokens(tokenReward);
             Notifier.notify({
                 message: `${ContestHelper.encoreWord(ContestRunner.encoreRounds())} You won ${tokenReward} Contest Tokens!`,
