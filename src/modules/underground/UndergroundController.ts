@@ -1,11 +1,11 @@
 import OakItemType from '../enums/OakItemType';
 import Rand from '../utilities/Rand';
-import {MineConfig, MineConfigs, MineType} from './mine/MineConfig';
+import { MineConfig, MineConfigs, MineType } from './mine/MineConfig';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
-import {ItemList} from '../items/ItemList';
+import { ItemList } from '../items/ItemList';
 import Settings from '../settings';
-import {PureComputed} from 'knockout';
+import { PureComputed } from 'knockout';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
@@ -23,10 +23,10 @@ import {
     UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
     UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
 } from '../GameConstants';
-import {UndergroundHelper} from './helper/UndergroundHelper';
+import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
-import {Coordinate} from './mine/Mine';
+import { Coordinate } from './mine/Mine';
 
 export class UndergroundController {
     private static lastMineClick: number = Date.now();
@@ -78,14 +78,19 @@ export class UndergroundController {
     }
 
     public static calculateDiscoverMineTimeout(mineType: MineType): number {
+        const baseTimeout = Math.max(
+            DISCOVER_MINE_TIMEOUT_BASE - DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL * Math.max(0, App.game.underground.undergroundLevel - DISCOVER_MINE_TIMEOUT_LEVEL_START),
+            0,
+        );
+
         if (mineType === MineType.Random) {
             if (App.game.underground.mine?.mineType === MineType.Random) {
                 const rewardTiles = App.game.underground.mine.grid.filter(tile => tile.reward);
                 const unminedRewardTiles = rewardTiles.filter(tile => tile.layerDepth > 0);
-                return Math.max(DISCOVER_MINE_TIMEOUT_BASE - DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL * Math.max(0, App.game.underground.undergroundLevel - DISCOVER_MINE_TIMEOUT_LEVEL_START), 0) * (unminedRewardTiles.length / rewardTiles.length);
+                return baseTimeout * (unminedRewardTiles.length / rewardTiles.length);
             }
         } else {
-            return Math.max(DISCOVER_MINE_TIMEOUT_BASE - DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL * Math.max(0, App.game.underground.undergroundLevel - DISCOVER_MINE_TIMEOUT_LEVEL_START), 0);
+            return baseTimeout;
         }
 
         return 0;
@@ -183,10 +188,16 @@ export class UndergroundController {
             UndergroundController.notifyItemFound(item, amount, helper);
 
             if (helper) {
-                if (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem) {
-                    UndergroundController.gainProfit(item, amount, helper.autoSellValue);
+                if (Rand.chance(helper.rewardRetention)) {
+                    // Helper keeps the reward
+                    UndergroundController.notifyHelperItemRetention(item, amount, helper);
                 } else {
-                    UndergroundController.gainMineItem(item.id, amount);
+                    // If we can auto sell then do so
+                    if (helper.autoSellToggle && (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem)) {
+                        UndergroundController.gainProfit(item, amount);
+                    } else {
+                        UndergroundController.gainMineItem(item.id, amount);
+                    }
                 }
 
                 UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
@@ -294,5 +305,14 @@ export class UndergroundController {
                 timeout: 3000 + i * 2000,
             });
         }
+    }
+
+    public static notifyHelperItemRetention(item: UndergroundItem, amount: number, helper: UndergroundHelper) {
+        Notifier.notify({
+            message: `${helper.name} kept this treasure as payment.`,
+            type: NotificationConstants.NotificationOption.warning,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+            timeout: 3000,
+        });
     }
 }

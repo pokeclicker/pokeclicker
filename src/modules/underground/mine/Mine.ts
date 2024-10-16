@@ -1,4 +1,4 @@
-import {MineConfig, MineType} from './MineConfig';
+import { MineConfig, MineType } from './MineConfig';
 import { Observable } from 'knockout';
 import Rand from '../../utilities/Rand';
 import UndergroundItem from '../UndergroundItem';

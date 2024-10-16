@@ -275,8 +275,24 @@
                                         <td class="text-right tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>
                                     <tr>
+                                        <td class="text-left">Reward retention</td>
+                                        <td class="text-right tight" data-bind="text: $data.rewardRetention.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                    </tr>
+                                    <tr>
                                         <td class="text-left">Auto-sell</td>
-                                        <td class="text-right tight" data-bind="text: $data.autoSellValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                        <td class="text-center tight align-middle">
+                                            <!-- ko if: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
+                                            <input class="clickable" type="checkbox" data-bind="checked: $data.autoSellToggle">
+                                            <!-- /ko -->
+                                            <!-- ko ifnot: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
+                                            <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                            tooltip: {
+                                                title: `Unlocked when ${$data.name} reaches level ${GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT}`,
+                                                placement: 'bottom',
+                                                trigger: 'hover'
+                                            }" />
+                                            <!-- /ko -->
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Work cycle</td>
@@ -468,11 +484,13 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><strong>Auto-Sell:</strong> When a helper digs up an item that can be sold, they automatically sell it and share the profit with the player.
+                                <li><strong>Reward retention:</strong> When a helper digs up an item, there is a chance that they will keep the item for themselves.
                                     <ul>
                                         <li>
-                                            Player's share starts at <knockout data-bind="text: GameConstants.AUTO_SELL_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and increases by <knockout data-bind="text: GameConstants.AUTO_SELL_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to <knockout data-bind="text: GameConstants.AUTO_SELL_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.
-                                            Player's share is always rounded down.
+                                            The chance starts at <knockout data-bind="text: GameConstants.REWARD_RETENTION_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and decreases by <knockout data-bind="text: GameConstants.REWARD_RETENTION_DECREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, down to <knockout data-bind="text: GameConstants.REWARD_RETENTION_MINIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.
+                                        </li>
+                                        <li>
+                                            From helper level <knockout data-bind="text: GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT"></knockout>, the player can ask to auto-sell diamond and plate items for their respective value.
                                         </li>
                                     </ul>
                                 </li>

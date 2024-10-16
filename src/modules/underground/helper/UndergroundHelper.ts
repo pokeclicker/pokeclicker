@@ -5,12 +5,24 @@ import MultiRequirement from '../../requirements/MultiRequirement';
 import OneFromManyRequirement from '../../requirements/OneFromManyRequirement';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
-import { AUTO_SELL_BASE, AUTO_SELL_INCREASE_PER_LEVEL, AUTO_SELL_MAXIMUM, EnergyRestoreSize,
+import {
+    REWARD_RETENTION_BASE,
+    REWARD_RETENTION_DECREASE_PER_LEVEL,
+    REWARD_RETENTION_MINIMUM,
+    EnergyRestoreSize,
     FAVORITE_MINE_CHANCE_BASE,
     FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL,
     FAVORITE_MINE_CHANCE_MAXIMUM,
-    MAX_HIRES, SECOND, SMART_TOOL_CHANCE_BASE, SMART_TOOL_CHANCE_INCREASE_PER_LEVEL, SMART_TOOL_CHANCE_MAXIMUM,
-    WORKCYCLE_TIMEOUT_BASE, WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL, WORKCYCLE_TIMEOUT_MINIMUM } from '../../GameConstants';
+    MAX_HIRES,
+    SECOND,
+    SMART_TOOL_CHANCE_BASE,
+    SMART_TOOL_CHANCE_INCREASE_PER_LEVEL,
+    SMART_TOOL_CHANCE_MAXIMUM,
+    WORKCYCLE_TIMEOUT_BASE,
+    WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL,
+    WORKCYCLE_TIMEOUT_MINIMUM,
+    HELPER_AUTO_SELL_LEVEL_REQUIREMENT,
+} from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from '../tools/UndergroundToolType';
 import { UndergroundController } from '../UndergroundController';
@@ -26,7 +38,8 @@ export class UndergroundHelper {
     private _progressToNextLevel: PureComputed<number> = ko.pureComputed(() =>
         (this._experience() - UndergroundHelper.convertLevelToExperience(this._level())) /
         (UndergroundHelper.convertLevelToExperience(this._level() + 1) - UndergroundHelper.convertLevelToExperience(this._level())));
-    private _autoSellValue: PureComputed<number> = ko.pureComputed(() => Math.min(AUTO_SELL_BASE + AUTO_SELL_INCREASE_PER_LEVEL * this._level(), AUTO_SELL_MAXIMUM));
+    private _rewardRetention: PureComputed<number> = ko.pureComputed(() => Math.max(REWARD_RETENTION_BASE - REWARD_RETENTION_DECREASE_PER_LEVEL * this._level(), REWARD_RETENTION_MINIMUM));
+    private _autoSellToggle: Observable<boolean> = ko.observable<boolean>(false);
     private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(SMART_TOOL_CHANCE_BASE + SMART_TOOL_CHANCE_INCREASE_PER_LEVEL * this._level(), SMART_TOOL_CHANCE_MAXIMUM));
     private _favoriteMineChance: PureComputed<number> = ko.pureComputed(() =>
         Math.min(FAVORITE_MINE_CHANCE_BASE + FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL * this._level(), FAVORITE_MINE_CHANCE_MAXIMUM));
@@ -193,8 +206,16 @@ export class UndergroundHelper {
         return this._progressToNextLevel();
     }
 
-    get autoSellValue(): number {
-        return this._autoSellValue();
+    get rewardRetention(): number {
+        return this._rewardRetention();
+    }
+
+    get autoSellToggle(): boolean {
+        return this.level >= HELPER_AUTO_SELL_LEVEL_REQUIREMENT ? this._autoSellToggle() : false;
+    }
+
+    set autoSellToggle(value: boolean) {
+        this._autoSellToggle(value);
     }
 
     get smartToolUsageChance(): number {
@@ -245,6 +266,7 @@ export class UndergroundHelper {
             timeSinceWork: this._timeSinceWork(),
             selectedEnergyRestore: this._selectedEnergyRestore(),
             shouldDiscoverFavorite: this._shouldDiscoverFavorite(),
+            autoSellToggle: this._autoSellToggle(),
         };
     }
 
@@ -254,6 +276,7 @@ export class UndergroundHelper {
         this._timeSinceWork(json?.timeSinceWork || 0);
         this._selectedEnergyRestore(json?.selectedEnergyRestore ?? -1);
         this._shouldDiscoverFavorite(json?.shouldDiscoverFavorite ?? false);
+        this._autoSellToggle(json?.autoSellToggle ?? false);
     }
 
     public static convertLevelToExperience(level: number): number {
