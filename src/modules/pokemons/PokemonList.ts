@@ -31804,7 +31804,7 @@ pokemonList.forEach((p) => {
     con = contestTypesOrder.filter((conType) => con.includes(conType));
     // Replace calculated array with a singular Balanced Contest Type if enough bases are covered for simpler effectiveness calculations
     if (con.length > 3) {
-        con = [5];
+        con = [ContestType.Balanced];
     }
     // Fill pokemons contestType with calculated Contest Types if nothing was given
     (p as PokemonListData).contestType = (p as PokemonListData).contestType === undefined ? con : (p as PokemonListData).contestType;
