@@ -70,7 +70,7 @@
                 <!-- /ko -->
                 <tr>
                   <td class="text-left">Contest Type</td>
-                  <td class="text-left tight" data-bind="foreach: App.game.party.getPokemon($data).currentContestType">
+                  <td class="text-left tight" data-bind="foreach: ContestHelper.getPokemonContestTypes($data)">
                     <span class="badge text-light px-1" data-bind="if: $data >= 0,
                                 style: { 'background-color': GameConstants.ContestColor[$data]}">
                       <small><strong

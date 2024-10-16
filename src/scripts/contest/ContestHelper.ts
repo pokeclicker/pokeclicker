@@ -123,4 +123,8 @@ class ContestHelper {
             `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
             `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
     }
+
+    public static getPokemonContestTypes(p: any) {
+        return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestType : pokemonMap[p].contestType;
+    }
 }

@@ -90,7 +90,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._contestAppealBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this._currentContestType = ko.observableArray([null]);
+        this._currentContestType = ko.observableArray(pokemonMap[this.name].contestType);
         this._category = ko.observableArray([0]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
