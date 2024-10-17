@@ -28,7 +28,7 @@ class Quests implements Saveable {
 
     // Get current quests by status
     public completedQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
-        return this.questList().filter(quest => quest.claimed());
+        return this.sortedQuestList().filter(quest => quest.claimed());
     });
     public currentQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
         return this.questList().filter(quest => quest.inProgress());
