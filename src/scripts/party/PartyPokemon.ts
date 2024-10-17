@@ -18,7 +18,7 @@ enum PartyPokemonSaveKeys {
     shadow,
     showShadowImage,
     contestAppealBonusAmount,
-    currentContestType,
+    currentContestTypes,
 }
 
 class PartyPokemon implements Saveable {
@@ -46,7 +46,7 @@ class PartyPokemon implements Saveable {
         shadow: GameConstants.ShadowStatus.None,
         showShadowImage: false,
         contestAppealBonusAmount: 0,
-        currentContestType: pokemonMap[this.name].contestType,
+        currentContestTypes: pokemonMap[this.name].contestType,
     };
 
     // Saveable observables
@@ -69,7 +69,7 @@ class PartyPokemon implements Saveable {
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
     _showShadowImage: KnockoutObservable<boolean>;
     _contestAppealBonusAmount: KnockoutObservable<number>;
-    _currentContestType: KnockoutObservableArray<ContestType>;
+    _currentContestTypes: KnockoutObservableArray<ContestType>;
 
     constructor(
         public id: number,
@@ -90,7 +90,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._contestAppealBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this._currentContestType = ko.observableArray(pokemonMap[this.name].contestType);
+        this._currentContestTypes = ko.observableArray(pokemonMap[this.name].contestType);
         this._category = ko.observableArray([0]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
@@ -425,9 +425,9 @@ class PartyPokemon implements Saveable {
             case GameConstants.PokeBlockColor.Balanced:
                 amount = 1;
                 let blockType = (ItemList[itemName] as PokeBlock).contestType;
-                let conTypes = this.currentContestType;
+                let conTypes = this.currentContestTypes;
 
-                if (this.currentContestType.includes(blockType)) {
+                if (this.currentContestTypes.includes(blockType)) {
                     Notifier.notify({
                         message : `${this.displayName} is already ${ContestType[blockType]}!`,
                         type : NotificationConstants.NotificationOption.warning,
@@ -438,7 +438,7 @@ class PartyPokemon implements Saveable {
 
                 // If the mon has 3 types and one of them is Balanced, remove it. Otherwise, all types are different and combine into Balanced
                 if (conTypes.length > 2) {
-                    if (this.currentContestType.includes(ContestType.Balanced)) {
+                    if (this.currentContestTypes.includes(ContestType.Balanced)) {
                         conTypes = conTypes.filter((type) => type != ContestType.Balanced);
                     } else {
                         conTypes = [];
@@ -453,7 +453,7 @@ class PartyPokemon implements Saveable {
                 conTypes = contestTypesOrder.filter((conType) => conTypes.includes(conType));
 
                 // Apply new contest types
-                this.currentContestType = conTypes;
+                this.currentContestTypes = conTypes;
 
                 Notifier.notify({
                     message : `${this.displayName} became ${ContestType[blockType]}!`,
@@ -736,7 +736,7 @@ class PartyPokemon implements Saveable {
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
         this.contestAppealBonusAmount = json[PartyPokemonSaveKeys.contestAppealBonusAmount] ?? this.defaults.contestAppealBonusAmount;
-        this.currentContestType = json[PartyPokemonSaveKeys.currentContestType] ?? this.defaults.currentContestType;
+        this.currentContestTypes = json[PartyPokemonSaveKeys.currentContestTypes] ?? this.defaults.currentContestTypes;
     }
 
     public toJSON() {
@@ -758,7 +758,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
             [PartyPokemonSaveKeys.contestAppealBonusAmount]: this.contestAppealBonusAmount,
-            [PartyPokemonSaveKeys.currentContestType]: this.currentContestType,
+            [PartyPokemonSaveKeys.currentContestTypes]: this.currentContestTypes,
         };
 
         // Don't save anything that is the default option
@@ -820,12 +820,12 @@ class PartyPokemon implements Saveable {
         this._contestAppealBonusAmount(contestAppealBonusAmount);
     }
 
-    get currentContestType(): ContestType[] {
-        return this._currentContestType();
+    get currentContestTypes(): ContestType[] {
+        return this._currentContestTypes();
     }
 
-    set currentContestType(currentContestType: ContestType[]) {
-        this._currentContestType(currentContestType);
+    set currentContestTypes(currentContestTypes: ContestType[]) {
+        this._currentContestTypes(currentContestTypes);
     }
 
     get pokerus(): GameConstants.Pokerus {
