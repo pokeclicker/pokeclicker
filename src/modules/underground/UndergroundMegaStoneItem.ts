@@ -5,7 +5,7 @@ import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import UndergroundItem from './UndergroundItem';
-import ItemRequirement from '../requirements/ItemRequirement';
+import ItemOwnedRequirement from '../requirements/ItemOwnedRequirement';
 
 export default class UndergroundMegaStoneItem extends UndergroundItem {
     constructor(
@@ -20,7 +20,7 @@ export default class UndergroundMegaStoneItem extends UndergroundItem {
         // The ItemRequirement needs to be 1 and less, because Requirement can't handle 0 and equal
         super(id, itemName, space, value,
             UndergroundItemValueType.MegaStone,
-            new MultiRequirement([new MaxRegionRequirement(Region.kalos), new ObtainedPokemonRequirement(pokemon), new ItemRequirement(1, itemName, AchievementOption.less)]),
+            new MultiRequirement([new MaxRegionRequirement(Region.kalos), new ObtainedPokemonRequirement(pokemon), new ItemOwnedRequirement(itemName, 1, AchievementOption.less)]),
             weight);
     }
 }
