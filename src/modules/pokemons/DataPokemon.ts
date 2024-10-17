@@ -23,9 +23,7 @@ export default class DataPokemon implements PokemonInterface {
         public eggCycles: number,
         public heldItem: BagItem | null,
         public gender,
-        public contestType1: ContestType,
-        public contestType2: ContestType,
-        public contestType3: ContestType,
+        public contestTypes: ContestType[],
     ) {
         this.shiny = false;
     }

@@ -10,12 +10,12 @@ class ContestHelper {
         return Math.round(appeal);
     }
 
-    public static calculateOnePokemonContestAppeal(pokemon: PartyPokemon, type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, includeBreeding = false): number {
+    public static calculateOnePokemonContestAppeal(pokemon: PartyPokemon, type1: ContestType, type2: ContestType, type3: ContestType, includeBreeding = false): number {
         let appeal = 0;
         const pAppeal = pokemon.contestAppeal;
-        const pType1 = pokemon.currentContestType[0] ?? ContestType.None;
-        const pType2 = pokemon.currentContestType[1] ?? ContestType.None;
-        const pType3 = pokemon.currentContestType[2] ?? ContestType.None;
+        const pType1 = pokemon.currentContestType[0];
+        const pType2 = pokemon.currentContestType[1];
+        const pType3 = pokemon.currentContestType[2];
 
         // Check if the Pokemon is currently breeding (no appeal)
         if (includeBreeding || !pokemon.breeding) {

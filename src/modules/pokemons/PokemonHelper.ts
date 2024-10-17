@@ -53,9 +53,7 @@ export function getPokemonByName(name: PokemonNameType): DataPokemon {
     const type1 = basePokemon.type[0];
     const type2: PokemonType = basePokemon.type[1] ?? PokemonType.None;
 
-    const contestType1 = basePokemon.contestType[0];
-    const contestType2: ContestType = basePokemon.contestType[1] ?? ContestType.None;
-    const contestType3: ContestType = basePokemon.contestType[2] ?? ContestType.None;
+    const contestTypes = basePokemon.contestType;
 
     const eggCycles: number = basePokemon.eggCycles || 20;
     return new DataPokemon(
@@ -72,9 +70,7 @@ export function getPokemonByName(name: PokemonNameType): DataPokemon {
         eggCycles,
         basePokemon.heldItem,
         basePokemon.gender,
-        contestType1,
-        contestType2,
-        contestType3,
+        contestTypes,
     );
 }
 

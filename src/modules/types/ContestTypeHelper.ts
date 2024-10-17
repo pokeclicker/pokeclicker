@@ -26,7 +26,14 @@ export default class ContestTypeHelper {
         ];
     })();
 
-    public static getAppealModifier(a1: ContestType, a2: ContestType, a3: ContestType, d1:ContestType, d2: ContestType, d3: ContestType): number {
+    public static getAppealModifier(
+        a1: ContestType = ContestType.None,
+        a2: ContestType = ContestType.None,
+        a3: ContestType = ContestType.None,
+        d1: ContestType = ContestType.None,
+        d2: ContestType = ContestType.None,
+        d3: ContestType = ContestType.None
+    ): number {
         if (a1 === ContestType.None || d1 === ContestType.None) {
             return 1;
         }

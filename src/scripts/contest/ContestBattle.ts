@@ -18,7 +18,7 @@ class ContestBattle extends Battle {
                 return;
             }
             // damage enemy and rally audience every tick
-            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3));
+            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestTypes[0], ContestBattle.enemyPokemon().contestTypes[1], ContestBattle.enemyPokemon().contestTypes[2]));
             // increase the audience bar
             ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestRunner.type()));
 
@@ -28,7 +28,7 @@ class ContestBattle extends Battle {
                     Math.floor(
                         (ContestBattle.enemyPokemon().maxHealth()
                         * 0.2
-                        * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3, ContestRunner.type(), ContestType.None, ContestType.None)
+                        * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes[0], ContestBattle.enemyPokemon().contestTypes[1], ContestBattle.enemyPokemon().contestTypes[2], ContestRunner.type(), ContestType.None, ContestType.None)
                         * (1 + ContestBattle.pokemonIndex() * 0.2))
                     )
                 );
@@ -98,7 +98,7 @@ class ContestBattle extends Battle {
 
     public static pokemonContestAppealTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
         if (ContestBattle.enemyPokemon()) {
-            const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestType1, ContestBattle.enemyPokemon().contestType2, ContestBattle.enemyPokemon().contestType3);
+            const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestTypes[0], ContestBattle.enemyPokemon().contestTypes[1], ContestBattle.enemyPokemon().contestTypes[2]);
             return `${pokemonAppeal.toLocaleString('en-US')} against`;
         } else {
             return '';

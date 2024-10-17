@@ -234,7 +234,7 @@ class PokemonFactory {
         const money = 0;
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
-        return new ContestBattlePokemon(basePokemon.contestType1, basePokemon.contestType2, basePokemon.contestType3, pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
+        return new ContestBattlePokemon(basePokemon.contestTypes, pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
     }
 
     private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {
