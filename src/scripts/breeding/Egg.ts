@@ -143,7 +143,7 @@ class Egg implements Saveable {
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
-                partyPokemon.currentContestTypes = pokemonMap[pokemonID].contestType;
+                partyPokemon.currentContestTypes = pokemonMap[pokemonID].contestTypes;
             }
 
             // Update pokerus status

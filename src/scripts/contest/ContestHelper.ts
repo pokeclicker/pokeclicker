@@ -125,6 +125,6 @@ class ContestHelper {
     }
 
     public static getPokemonContestTypes(p: any) {
-        return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p].contestType;
+        return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p].contestTypes;
     }
 }

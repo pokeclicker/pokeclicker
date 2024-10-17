@@ -291,11 +291,11 @@ class PartyController {
                 }
             }
             const type = Settings.getSetting('pokeblockTypeFilter').observableValue();
-            if (type > -1 && !pokemonMap[pokemon.name].contestType.includes(type)) {
+            if (type > -1 && !pokemonMap[pokemon.name].contestTypes.includes(type)) {
                 return false;
             }
             // return monotypes if they match the block's type
-            if (pokeblock.contestType != undefined && pokeblock.contestType === type && pokemonMap[pokemon.name].contestType.length > 1) {
+            if (pokeblock.contestType != undefined && pokeblock.contestType === type && pokemonMap[pokemon.name].contestTypes.length > 1) {
                 return false;
             }
             if (Settings.getSetting('pokeblockHideShinyPokemon').observableValue() && pokemon.shiny) {

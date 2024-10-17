@@ -46,7 +46,7 @@ class PartyPokemon implements Saveable {
         shadow: GameConstants.ShadowStatus.None,
         showShadowImage: false,
         contestAppealBonusAmount: 0,
-        currentContestTypes: pokemonMap[this.name].contestType,
+        currentContestTypes: pokemonMap[this.name].contestTypes,
     };
 
     // Saveable observables
@@ -90,7 +90,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._contestAppealBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this._currentContestTypes = ko.observableArray(pokemonMap[this.name].contestType);
+        this._currentContestTypes = ko.observableArray(pokemonMap[this.name].contestTypes);
         this._category = ko.observableArray([0]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });

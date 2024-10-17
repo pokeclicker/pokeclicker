@@ -53,7 +53,7 @@ export function getPokemonByName(name: PokemonNameType): DataPokemon {
     const type1 = basePokemon.type[0];
     const type2: PokemonType = basePokemon.type[1] ?? PokemonType.None;
 
-    const contestTypes = basePokemon.contestType;
+    const contestTypes = basePokemon.contestTypes;
 
     const eggCycles: number = basePokemon.eggCycles || 20;
     return new DataPokemon(

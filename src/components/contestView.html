@@ -63,7 +63,7 @@
             </td>
           </tr>
           <tr>
-            <td width="50%" data-bind="foreach: pokemonMap[ContestBattle.enemyPokemon().name].contestType">
+            <td width="50%" data-bind="foreach: pokemonMap[ContestBattle.enemyPokemon().name].contestTypes">
               <span class="badge text-light px-1" data-bind="if: $data >= 0,
                           style: { 'background-color': GameConstants.ContestColor[$data]}">
                 <small><strong
