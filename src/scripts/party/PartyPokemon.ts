@@ -448,12 +448,8 @@ class PartyPokemon implements Saveable {
 
                 conTypes.push(blockType);
 
-                // Put them in order
-                const contestTypesOrder: ContestType[] = [0, 1, 2, 3, 4, 5];
-                conTypes = contestTypesOrder.filter((conType) => conTypes.includes(conType));
-
-                // Apply new contest types
-                this.currentContestTypes = conTypes;
+                // Apply the new contest types in order
+                this.currentContestTypes = conTypes.sort();
 
                 Notifier.notify({
                     message : `${this.displayName} became ${ContestType[blockType]}!`,

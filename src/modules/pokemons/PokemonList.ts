@@ -31800,8 +31800,7 @@ pokemonList.forEach((p) => {
         }
     }
     // Remove duplicate contest types and put them in order
-    const contestTypesOrder: ContestType[] = [0, 1, 2, 3, 4, 5];
-    con = contestTypesOrder.filter((conType) => con.includes(conType));
+    con = [...new Set(con)].sort();
     // Replace calculated array with a singular Balanced Contest Type if enough bases are covered for simpler effectiveness calculations
     if (con.length > 3) {
         con = [ContestType.Balanced];
