@@ -122,6 +122,8 @@ class DungeonGuides {
     }
 
     public static endDungeon(): void {
+        // runEarly as deferred updates can fail to happen before the dungeon is started again, e.g. DefeatDungeonBossQuest
+        ko.tasks.runEarly();
         this.hired()?.end();
     }
 
