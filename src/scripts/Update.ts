@@ -2794,13 +2794,15 @@ class Update implements Saveable {
                 });
             }
 
-            Notifier.notify({
-                title: 'Underground changes',
-                type: NotificationConstants.NotificationOption.warning,
-                timeout: GameConstants.DAY,
-                message: `The Underground has been overhauled! Check out the Underground Help tab for all the details on the new features and how everything works. Dive in and explore the changes!
-                <button class="btn btn-block btn-secondary" onclick="UndergroundController.openUndergroundModal()" data-dismiss="toast">Open Underground</button>`,
-            });
+            if (saveData.keyItems.Explorer_kit) {
+                Notifier.notify({
+                    title: 'Underground changes',
+                    type: NotificationConstants.NotificationOption.warning,
+                    timeout: GameConstants.DAY,
+                    message: `The Underground has been overhauled! Check out the Underground Help tab for all the details on the new features and how everything works. Dive in and explore the changes!
+                    <button class="btn btn-block btn-secondary" onclick="UndergroundController.openUndergroundModal()" data-dismiss="toast">Open Underground</button>`,
+                });
+            }
 
             // Remove the old underground save data
             saveData.underground = null;
