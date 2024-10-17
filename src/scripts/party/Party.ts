@@ -44,13 +44,7 @@ class Party implements Feature {
             // Base power
             // Shiny pokemon help with a 100% boost
             // Resistant pokemon give a 100% boost
-            let caughtPokemon = this.caughtPokemon;
-            if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
-                // Only magikarps can attack in magikarp jump subregion
-                caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
-            }
-
-            const partyClickBonus = caughtPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
+            const partyClickBonus = this.activePartyPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
             return Math.pow(partyClickBonus, 1.4);
         });
 
@@ -177,11 +171,7 @@ class Party implements Feature {
         subregion: GameConstants.SubRegions = player.subregion
     ): number {
         let attack = 0;
-        let pokemon = this.caughtPokemon;
-        if (region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
-            // Only magikarps can attack in magikarp jump
-            pokemon = pokemon.filter(p => Math.floor(p.id) == 129);
-        }
+        const pokemon = this.partyPokemonActiveInSubRegion(region, subregion);
 
         for (const p of pokemon) {
             attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
@@ -296,6 +286,15 @@ class Party implements Feature {
         return this._caughtPokemonLookup().get(pokemonMap[name].id);
     }
 
+    public partyPokemonActiveInSubRegion(region: GameConstants.Region, subregion: GameConstants.SubRegions): Array<PartyPokemon> {
+        let caughtPokemon = this.caughtPokemon as Array<PartyPokemon>;
+        if (region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
+            // Only magikarps can attack in magikarp jump subregion
+            caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
+        }
+        return caughtPokemon;
+    }
+
     alreadyCaughtPokemonByName(name: PokemonNameType, shiny = false) {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
@@ -350,6 +349,10 @@ class Party implements Feature {
 
     get caughtPokemon(): ReadonlyArray<PartyPokemon> {
         return this._caughtPokemon();
+    }
+
+    get activePartyPokemon(): ReadonlyArray<PartyPokemon> {
+        return this.partyPokemonActiveInSubRegion(player.region, player.subregion);
     }
 
 }
