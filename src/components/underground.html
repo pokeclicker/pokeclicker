@@ -5,437 +5,973 @@
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
-                    <li class='nav-item'>
-                        <a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a data-toggle='tab' class='nav-link' href="#upgrades">Upgrades</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a data-toggle='tab' class='nav-link' href="#dailyDeals">
-                            Daily deals
-                        </a>
-                    </li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
-                    <btn class="btn btn-primary">
-                        <span id="diamondCounter" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.diamond]().toLocaleString('en-US')">x</span>
-                        <img src='assets/images/underground/diamond.svg' width="20px'">
-                    </btn>
+                    <li class="d-block"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
                 </ul>
             </div>
             <div class="modal-body tab-content p-0">
-                <div id="dig" class="tab-pane fade in active show" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
-                    <div class="row no-gutters" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
-                        <button class="col-4 btn btn-secondary" data-bind="
-                                click: function(){ ItemList[$data].use();},
-                                css: { disabled: player.itemList[$data]() <= 0}">
-                            <span data-bind="text: '(' + player.itemList[$data]().toLocaleString('en-US') + ')'">(?)</span>
-                            <img class="restore-item" data-bind="attr: { src: ItemList[$data].image }">
-                            <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
-                        </button>
-                    </div>
-                    <div class='row no-gutters' style="text-align:center;">
-                        <div class='progress'>
-                            <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
-                                 aria-valuemin='0' aria-valuemax='100'
-                                 data-bind="style: { width: (Math.floor(App.game.underground.energy)/App.game.underground.getMaxEnergy()*100).toFixed(2) + '%' }">
-                                <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
+                <div id="dig" class="tab-pane fade in active show" data-bind="">
+                    <div class="container">
+                        <div class="row p-2">
+                            <div class="col-6 p-0 d-flex">
+                                <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
+
+                                <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
+                                <button class="btn btn-danger p-2" style="min-width: 36px;" data-bind="
+                                    text: `↻ ${autoRestartUndergroundMine.observableValue() ? 'On' : 'Off'}`,
+                                    css: {
+                                        'btn-danger': !autoRestartUndergroundMine.observableValue(),
+                                        'btn-success': autoRestartUndergroundMine.observableValue()
+                                    },
+                                    tooltip: {
+                                        title: `${autoRestartUndergroundMine.displayName}: ${autoRestartUndergroundMine.observableValue() ? 'On' : 'Off'}`,
+                                        trigger: 'hover',
+                                        placement:'right'
+                                    },
+                                    click: () => autoRestartUndergroundMine.observableValue(!autoRestartUndergroundMine.observableValue())"></button>
+                                <!-- /ko -->
+                            </div>
+
+                            <div class="col-6 p-0" data-bind="tooltip: {
+                                    title: `${(App.game.underground.undergroundExp - Underground.convertLevelToExperience(App.game.underground.undergroundLevel)).toLocaleString('en-US')} / ${(Underground.convertLevelToExperience(App.game.underground.undergroundLevel + 1) - Underground.convertLevelToExperience(App.game.underground.undergroundLevel)).toLocaleString('en-US')}`,
+                                    trigger: 'hover'
+                                }">
+                                <div>Lvl. <knockout data-bind="text: App.game.underground.undergroundLevel"></knockout></div>
+                                <div class="progress" style='height: 5px'>
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                         data-bind="attr:{ style: 'width:' + App.game.underground.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div id="mineBody" class="container" style="margin:auto">
-                    </div>
-                    <div class='row no-gutters'>
-                        <div class="col-12"
-                            id="mine-survey-result"
-                            data-bind="
-                                text: 'Treasures found: ' + Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ', Partially discovered: ' + (Mine.itemsFound() + Mine.itemsPartiallyFound()),
-                                tooltip: {
-                                    title: () =>
-                                        Mine.surveyResult() || 'Conduct a Survey to get more details',
-                                        trigger: 'hover',
-                                        placement: 'top',
-                                        boundary: 'window',
-                                        html: true,
-                                }"
-                            >
+
+                    <div>
+                        <div class="card">
+                            <div class="card-header p-2 font-weight-bold">Treasures</div>
+                            <div class="card-body p-2 d-flex justify-content-center" style="gap: 1.5rem">
+                                <!-- ko if: !App.game.underground.mine || App.game.underground.mine.timeUntilDiscovery > 0 -->
+                                <div>Found • ??</div>
+                                <div>Seen • ??</div>
+                                <div>Buried • ??</div>
+                                <!-- /ko -->
+
+                                <!-- ko ifnot: !App.game.underground.mine || App.game.underground.mine.timeUntilDiscovery > 0 -->
+                                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">
+                                    Found • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout>
+                                </div>
+                                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">
+                                    Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout>
+                                </div>
+                                <div class="">
+                                    Buried • <knockout data-bind="text: App.game.underground.mine?.itemsBuried"></knockout>
+                                </div>
+                                <!-- /ko -->
+                            </div>
                         </div>
-                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
-                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
-                        <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'
-                        data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
-                        <button class='col-12 col-md-4 btn btn-success'
-                                onClick='Mine.survey(); $(this).tooltip("hide")'
-                                data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
-                            Survey (<knockout data-bind="text: App.game.underground.getSurvey_Cost()"></knockout> energy)
-                        </button>
-                        <!-- FIX NUMBER-->
-                        <button class='col-12 col-md-6 btn btn-warning' onClick='Mine.bomb()'
-                        data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
-                        <button class='col-12 col-md-6 btn btn-danger' onClick='Mine.skipLayer(true)'
-                        data-bind="disable: Mine.skipsRemaining() > 0 ? false : true, tooltip: {title: `Skips the current layer. Fully mine a layer to recover one Skip.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
-                    </div>
-                </div>
-                <div id="treasures" class="tab-pane fade">
-                    <div data-bind="if: Underground.playerHasMineItems()">
-                        <table class="table table-sm table-hover table-striped m-0">
-                            <thead>
-                                <tr>
-                                    <th class="clickable" onclick="Underground.updateTreasureSorting('Amount')" data-bind="text: 'Amount' + (Underground.sortOption() === 'Amount' ? (Underground.sortFactor() > 0 ? ' ▴' : ' ▾') : '')"></th>
-                                    <th class="clickable" onclick="Underground.updateTreasureSorting('Item')" data-bind="text: 'Item' + (Underground.sortOption() === 'Item' ? (Underground.sortFactor() > 0 ? ' ▴' : ' ▾') : '')"></th>
-                                    <th class="clickable" onclick="Underground.updateTreasureSorting('Value')" data-bind="text: 'Value' + (Underground.sortOption() === 'Value' ? (Underground.sortFactor() > 0 ? ' ▴' : ' ▾') : '')"></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: Underground.sortedMineInventory().filter(it => player.itemList[it.itemName]() && ![UndergroundItemValueType.EvolutionItem, UndergroundItemValueType.MegaStone].includes(it.valueType))}">
-                            </tbody>
-                        </table>
-                        <button type="button" class="btn btn-success btn-block" onclick="App.game.underground.openUndergroundSellAllModal()">
-                            <span>Sell all treasures</span>
-                        </button>
-                    </div>
-                    <div data-bind="ifnot: Underground.playerHasMineItems()">
-                        You don't have any treasures yet...
-                    </div>
-                </div>
-                <div id="upgrades" class="tab-pane fade">
-                    <table class="table table-sm table-hover table-striped m-0">
-                        <thead>
-                            <tr>
-                                <th class="text-left">Upgrade</th>
-                                <th>Amount</th>
-                                <th>Change</th>
-                                <th>Level</th>
-                                <th>Cost</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getMaxEnergy(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Max)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getMaxItems(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getMinItems(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Items_Min)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getEnergyGain(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getEnergyRegenTime(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getDailyDealsMax(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getBombEfficiency(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Bomb_Efficiency)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': App.game.underground.getSurvey_Cost(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Cost)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus' : App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Items_All)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Shards)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Plates)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Evolution_Items)}}"></tr>
-                            <tr data-bind="template: { name: 'undergroundUpgradeToggleTemplate', 'data': {'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Reduced_Fossil_Pieces)}}"></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="help" class="tab-pane fade pl-5 pr-5">
-                    <h4><u>Dig</u></h4>
-                    <p>In the Underground you can mine for hidden treasures.</p>
 
-                    <p>There are three main ways of breaking tiles:
-                    <br/>Chisel will mine 2 layers on a single tile.
-                    <br/>Hammer will mine 1 layer on all nine tiles of a 3x3 square.
-                    <br/>Bomb will mine 2 layers of 10 random tiles.</p>
+                        <!-- ko if: App.game.underground.mine -->
+                        <div style="position: relative;">
+                            <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
+                                 data-bind="css: {
+                                    'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
+                                    'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durability < App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durabilityPerUse
+                                 },
+                                 class: `${UndergroundToolType[App.game.underground.tools.selectedToolType]}Selected`,
+                                 style: {
+                                    backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
+                                 }">
+                                <!-- ko foreach: App.game.underground.mine.grid -->
+                                <div class="mineSquare" data-bind="event: { mousedown: () => UndergroundController.clickModalMineSquare($index()) }">
+                                    <div class="rock" data-bind="class: `rock${$data.layerDepth}`, style: UndergroundController.calculateMineTileStyle($index())"></div>
 
-                    <p>You can spend some mining energy to conduct a Survey.
-                    <br/>This will give you information about the items to be found in this layer.
-                    <br/>It also damages 1 random tile fully.</p>
+                                    <!-- ko if: $data.survey > 0 -->
+                                    <div class="survey" data-bind="class: `survey-${$data.survey}`"></div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                            </div>
 
-                    <p>If you don't think this level is worth mining, you can Skip it.
-                    <br/>Every time you mine out all items in a level, you will recover one Skip.</p>
+                            <!-- ko if: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
+                            <div style="position: absolute; inset: 20%; display: grid; align-content: center;">
+                                <div>Searching for mine</div>
+                                <div class="progress" style='height: 5px'>
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                         data-bind="attr:{ style: 'width:' + (1 - App.game.underground.mine.timeUntilDiscovery / App.game.underground.mine.initialTimeToDiscover).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
+                                <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
+                            </div>
+                            <!-- /ko -->
 
-                    <h4><u>Treasures</u></h4>
-                    <p>Sell your treasures for gems or diamonds!</p>
-                    <p>If you have found any fossils, you can hatch the Pokémon they contain from the Treasures tab, or from the Day Care.</p>
+                            <!-- ko if: App.game.underground.mine && App.game.underground.mine.completed -->
+                            <div style="position: absolute; inset: 20%; display: grid; gap: 1rem; align-content: center;">
+                                <div>Found all items</div>
+                                <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
+                            </div>
+                            <!-- /ko -->
+                        </div>
 
-                    <h4><u>Upgrades</u></h4>
-                    <p>You can use your diamonds to buy all kinds of upgrades that will help you explore the underground even further!</p>
-                    <p>Some upgrades will make the Underground harder and are less cost-efficient.
-                    <br/>Avoid these until you have the other available upgrades!</p>
+                        <div class='row no-gutters'>
+                            <div class="col-12 row no-gutters">
+                                <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
+                                <!-- ko let: { tool: App.game.underground.tools.getTool($data) } -->
+                                <div class="tool-ui col card clickable" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`, css: { 'border-info': App.game.underground.tools.selectedToolType === $data }, click: () => App.game.underground.tools.selectedToolType = $data">
+                                    <div class="card-header p-1" data-bind="css: { 'bg-info': App.game.underground.tools.selectedToolType === $data }">
+                                        <div data-bind="text: tool.displayName"></div>
+                                    </div>
 
-                    <h4><u>Daily deals</u></h4>
-                    <p>In the Daily deals tab you can trade your items. The trades available change each day at midnight.</p>
-                </div>
-                <div id="dailyDeals" class="tab-pane fade">
-                    <div class="table-responsive" id="dailyDealsBody">
-                        <table class="table table-sm table-hover table-striped m-0 text-left">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">Inv</th>
-                                    <th></th>
-                                    <th>Item</th>
-                                    <th></th>
-                                    <th class="text-center">Inv</th>
-                                    <th></th>
-                                    <th>Item</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- ko foreach: DailyDeal.list -->
-                                <tr>
-                                    <td class='vertical-middle text-center' data-bind="text: player.itemList[$data.item1.itemName]().toLocaleString('en-US')"></td>
-                                    <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: $data.item1.image }'>
-                                    </td>
-                                    <td class="vertical-middle">
-                                        <span data-bind="text: $data.amount1"></span>
-                                        <span data-bind="visible: App.game.underground.tradeAmount() > 1, text: ` (${($data.amount1 * App.game.underground.tradeAmount()).toLocaleString('en-US')})`"></span>
-                                        <span data-bind="text: ` × ${item1.name}`"></span>
-                                    </td>
-                                    <td class='vertical-middle'>→</td>
-                                    <td class='vertical-middle text-center' data-bind="text: player.itemList[$data.item2.itemName]().toLocaleString('en-US')"></td>
-                                    <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: $data.item2.image }'>
-                                    </td>
-                                    <td class="vertical-middle">
-                                        <span data-bind="text: amount2"></span>
-                                        <span data-bind="visible: App.game.underground.tradeAmount() > 1, text: ` (${(amount2 * App.game.underground.tradeAmount()).toLocaleString('en-US')})`"></span>
-                                        <span data-bind="text: ` × ${$data.item2.name}`"></span>
-                                    </td>
-                                    <td class='vertical-middle'>
-                                        <div class="btn-group btn-block">
-                                            <button class="btn btn-primary btn-block" data-bind="click: () => DailyDeal.use($index(), App.game.underground.tradeAmount()), css: { disabled: !DailyDeal.canUse($index()) || App.game.underground.tradeAmount() == 0 }">
-                                                Trade
-                                            </button>
-                                            <button type="button" data-bind="css: { disabled: !DailyDeal.canUse($index()) }"
-                                                class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                            <div class="dropdown-menu text-center p-0">
-                                                <p class="small py-2 m-0">Set Trade Amount</p>
-                                                <div class="dropdown-divider m-0"></div>
-                                                <!-- ko foreach: [0.1, 0.25, 0.5, 0.75, 1] -->
-                                                <button class="dropdown-item small py-1" type="button" data-bind="text: `${$data.toLocaleString('en-US', { style: 'percent' })}`,
-                                                    click: () => { App.game.underground.tradeAmount(Math.floor(player.itemList[$parent.item1.itemName]() * ($data) / $parent.amount1)) }"></button>
-                                                <!-- /ko -->
+                                    <div class="card-body d-flex flex-column p-0 rounded text-center">
+                                        <div class="p-1 d-flex justify-content-center">
+                                            <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: !tool.canUseTool() ? 0.3 : 1 }">
+                                                <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 5px;">
+                                                    <div class="d-flex align-items-center justify-content-center" style="width: 27px; height: 27px;">
+                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
+                                                    </div>
+                                                    <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                                <!-- /ko -->
-                                <!-- ko ifnot: App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max).isMaxLevel() -->
-                                <tr>
-                                    <td colspan="8" class="text-center text-muted p-2">Upgrade the Underground to unlock additional deals!</td>
-                                </tr>
-                                <!-- /ko -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center p-2">
-                        <div class="col-12 col-lg-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont"
-                                        data-bind="click: () => App.game.underground.tradeAmount(1)">Reset</button>
-                                </div>
-                                <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: App.game.underground.tradeAmount" />
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split rounded-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu" data-bind="foreach: [10, 100, 1000]">
-                                        <button class="dropdown-item py-1" type="button" data-bind="text: $data.toLocaleString('en-US'),
-                                            click: () => App.game.underground.tradeAmount($data)"></button>
+
+                                        <div class="text-center text-light bg-dark p-1"><h6 class="m-0 small">Repair</h6></div>
+                                        <!-- ko if: tool.restoreRate > 0 -->
+                                        <div class="progress" style='height: 10px; min-height: 10px;'>
+                                            <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
+                                                 data-bind="style: { 'width': (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                        <div class="small"><knockout data-bind="text: (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: tool.restoreRate > 0 -->
+                                        <div class="progress" style='height: 10px; min-height: 10px;'>
+                                            <div class="progress-bar progress-bar-animated" role="progressbar" style="background: linear-gradient(45deg,var(--tool-color) 25%,transparent 25%,transparent 50%,var(--tool-color) 50%,var(--tool-color) 75%,transparent 75%,transparent); background-size: 1rem 1rem;"
+                                                 data-bind="style: { 'width': '100%' }"
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                        <div class="small">∞</div>
+                                        <!-- /ko -->
                                     </div>
+
+                                    <div class="card-footer p-0">
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                        </div>
+
+                        <!-- ko ifnot: App.game.challenges.list.disableOakItems.active() -->
+                        <div class="card">
+                            <div class="card-header p-2 font-weight-bold position-relative">
+                                Battery
+                                <button class="btn btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 100%;" data-bind="click: () => $('#undergroundBatteryModal').modal('show');">?</button>
+                            </div>
+
+                            <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
+                            <div class="card-body p-2">
+                                <div class="progress mb-2" style='height: 15px; min-height: 15px;'>
+                                    <div class="progress-bar" role="progressbar"
+                                         data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        <span data-bind="text: `${App.game.underground.battery.charges} / ${App.game.underground.battery.maxCharges}`"></span>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary" data-bind="click: () => App.game.underground.battery.discharge(), attr: { disabled: App.game.underground.battery.charges < App.game.underground.battery.maxCharges }">Discharge</button>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
+                            <div class="card-body p-2">
+                                <p>Equip your Cell Battery Oak Item to use the Battery.</p>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <div id="treasures" class="tab-pane fade p-2">
+                    <!-- ko foreach: [UndergroundItemValueType.Diamond, UndergroundItemValueType.Gem, UndergroundItemValueType.Shard, UndergroundItemValueType.Fossil, UndergroundItemValueType.FossilPiece, UndergroundItemValueType.EvolutionItem, UndergroundItemValueType.Special] -->
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: GameConstants.camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[$data])"></span>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === $data) -->
+                                <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                    <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                         data-bind="
+                                            css: { 'bg-info': UndergroundTrading.selectedTradeFromItem === $data },
+                                            template: { name: 'otherItemTemplate', data: $data.itemName },
+                                            click: () => {
+                                                UndergroundTrading.selectedTradeFromItem = $data;
+                                                UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
+                                                $('#treasureDetailModal').modal('show');
+                                            }
+                                         ">
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+
+                <div id="undergroundHelpers" class="tab-pane fade">
+                    <div class="row m-0 justify-content-start" data-bind="foreach: App.game.underground.helpers.available()" style="max-width: 100%;">
+                        <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
+                            <h5 class="card-header">
+                                <knockout data-bind="text: $data.name">Name</knockout>
+                            </h5>
+                            <div class="card-body p-0">
+                                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Information</h5></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-left">Level</td>
+                                        <td class="text-right tight" data-bind="text: $data.level.toLocaleString('en-US')"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="progress" style='height: 5px'>
+                                                <div class="progress-bar bg-info" role="progressbar"
+                                                     data-bind="style: { 'width': $data.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                                     aria-valuemin="0" aria-valuemax="100">
+                                                    <span data-bind="text: `${($data.experience - UndergroundHelper.convertLevelToExperience($data.level)).toLocaleString('en-US')} / ${(UndergroundHelper.convertLevelToExperience($data.level + 1) - UndergroundHelper.convertLevelToExperience($data.level)).toLocaleString('en-US')}`"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Favorite mine</td>
+                                        <td class="text-right tight" data-bind="text: UndergroundController.getMineConfig($data.favoriteMine).displayName"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Discover chance</td>
+                                        <td class="text-right tight" data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Look for favorite</td>
+                                        <td class="text-center tight align-middle">
+                                            <input class="clickable" type="checkbox" data-bind="checked: $data.shouldDiscoverFavorite"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Smart tool use</td>
+                                        <td class="text-right tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Reward retention</td>
+                                        <td class="text-right tight" data-bind="text: $data.rewardRetention.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Auto-sell</td>
+                                        <td class="text-center tight align-middle">
+                                            <!-- ko if: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
+                                            <input class="clickable" type="checkbox" data-bind="checked: $data.autoSellToggle">
+                                            <!-- /ko -->
+                                            <!-- ko ifnot: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
+                                            <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                            tooltip: {
+                                                title: `Unlocked when ${$data.name} reaches level ${GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT}`,
+                                                placement: 'bottom',
+                                                trigger: 'hover'
+                                            }" />
+                                            <!-- /ko -->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Work cycle</td>
+                                        <td class="text-right tight" data-bind="text: `${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></td>
+                                    </tr>
+                                    </tbody>
+
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Energy Restore</h5></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="input-group input-group-sm">
+                                                <select autocomplete="off" class="custom-select" data-bind="options: [
+                                                    { name: 'None', value: -1 },
+                                                    ...GameHelper.enumSelectOption(GameConstants.EnergyRestoreSize),
+                                                ], optionsValue: 'value', optionsText: (item) => item.value < 0 ? `${GameConstants.camelCaseToString(item.name)}` : `${GameConstants.camelCaseToString(item.name)} (${player.itemList[item.name]().toLocaleString('en-US')})`, value: $data.selectedEnergyRestore"></select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer p-0">
+                                <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired && !App.game.underground.helpers.canHire() }, css: { 'btn-success': !$data.hired, 'btn-danger': $data.hired }, click: () => !$data.hired ? $data.hire() : $data.fire(), text: !$data.hired ? 'Hire!' : 'Fire!'">Hire!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="help" class="tab-pane fade p-2 text-left">
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Mines</span>
+                        </div>
+
+                        <div class="card-body">
+                            <p>
+                                There are six different types of mines you can search for in the Underground.
+                                Understanding their unique properties and the discovery times involved is crucial for efficient mining.
+                                The Underground lexicon can be found at the bottom of this page.
+                            </p>
+
+                            <h4>Mine Types</h4>
+                            <ul>
+                                <li>
+                                    <strong>Random Mine:</strong> Contains all possible items (except the items from a Special mine)
+                                </li>
+                                <li>
+                                    <strong>Diamond Mine:</strong> Contains only treasures sellable for diamonds.
+                                </li>
+                                <li>
+                                    <strong>Gem Plate Mine:</strong> Contains only gem plate treasures sellable for gems.
+                                </li>
+                                <li>
+                                    <strong>Shard Mine:</strong> Contains only shard treasures.
+                                </li>
+                                <li>
+                                    <strong>Fossil Mine:</strong> Contains only fossils and fossil pieces.
+                                </li>
+                                <li>
+                                    <strong>Evolution Item Mine:</strong> Contains only evolution items.
+                                </li>
+                            </ul>
+
+                            <h4>Special Mine</h4>
+                            <p>
+                                When you (not your helper) are searching for a mine, there is a 4% chance for the mine to be a Special mine.
+                                This mine only contains 1 item, which can be any of the mega stones (if eligible) or other special items.
+                            </p>
+
+                            <h4>Discovery Time Calculation</h4>
+                            <p>The discovery time is calculated as follows:</p>
+                            <ul>
+                                <li>
+                                    <strong>Random Mine Type</strong>
+                                    <ul>
+                                        <li>
+                                            Current mine is a Random mine:<br/>
+                                            The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>. This is then further reduced by the percentage of the amount of unmined tiles divided by all tiles only taking into account tiles that do contain a reward.
+                                        </li>
+                                        <li>Current mine is not a random mine: No discovery time</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Other Mine Type</strong>
+                                    <p>The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>.</p>
+                                </li>
+                            </ul>
+
+                            <h4>Amount of Treasure</h4>
+                            <p>The amount of treasure a player can find is random, between the minimum (inclusive) and maximum (inclusive), and increases as their Underground Level increases:</p>
+                            <ul>
+                                <li><strong>Minimum:</strong> Starts at 1, increases by 1 at levels: 3, 9, 15, 21 and 27, up to a maximum of 6.</li>
+                                <li><strong>Maximum:</strong> Starts at 3, increases by 1 at levels: 6, 12, 18, 24 and 30, up to a maximum of 8.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Tools</span>
+                        </div>
+
+                        <div class="card-body">
+                            <p>The Underground offers <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
+
+                            <h4>Durability</h4>
+                            <p>
+                                Using a tool is only possible when your tool is durable enough. When you use your tool successfully it will take some damage, which will be repaired over time.
+                                The tool will repair X% over Y seconds. Each tool has its own repair rate and repairs a certain percentage of the tool's durability.
+                                The repair rate is reduced by Z seconds based on your Underground Level.
+                                When a tool reaches a repair rate of 0 seconds, it's durability will stay at 100%.
+                            </p>
+
+                            <h4>Successful Use</h4>
+                            <p>A tool only counts as used if its action is successful, meaning it accomplishes its intended task (e.g., mining layers or indicating tiles).</p>
+
+                            <h4>Tools Overview</h4>
+                            <p>There are <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> different tools available, each with unique functions and properties:</p>
+                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Chisel) } -->
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines 2 layers on the selected spot.' } }"></div>
+                            <!-- /ko -->
+                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Hammer) } -->
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines 1 layer on all 9 tiles in a 3x3 grid.' } }"></div>
+                            <!-- /ko -->
+                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Bomb) } -->
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines a maximum of 2 layers on each of 10 random tiles (both mined and cleared). The number of tiles increases when equipped with the Explosive Charge Oak Item.' } }"></div>
+                            <!-- /ko -->
+                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Survey) } -->
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains an item. The grid shrinks by two tiles in each direction every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }"></div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Battery</span>
+                        </div>
+
+                        <div class="card-body">
+                            <p>
+                                The Battery is a system that charges up as you or your helper mines tiles. In order to charge up you need to have your Cell Battery Oak Item equipped.
+                            </p>
+                            <p>
+                                Each successful mining attempt will add 1 charge, up to a maximum of <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_MAX_CHARGES"></knockout> charges.
+                                You can only gain 1 charge per <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_COOLDOWN_SECONDS"></knockout> second.
+                            </p>
+                            <p>
+                                When your battery is fully charged up, you can discharge it. This discharge will leave a pattern of cleared tiles behind.
+                                With higher level patterns, which damage more tiles, becoming available as you level up your Cell Battery.
+                            </p>
+                            <p>
+                                All patterns and their requirements are available in the help section of the Battery on the Dig tab.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Helpers</span>
+                        </div>
+
+                        <div class="card-body">
+                            <p>Helpers are characters you can hire to assist with mining tasks. They perform actions at certain timing intervals and become more efficient as they level up.</p>
+
+                            <h4>Helper Mechanics</h4>
+                            <ul>
+                                <li><strong>Favorite Mine:</strong> Each helper has a favorite mine they are more likely to find.
+                                    <ul>
+                                        <li>Starts at <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> chance to find their favorite mine when searching.</li>
+                                        <li>Increases by <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to a maximum of <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
+                                        <li>If they don’t find their favorite mine, they will randomly find one of the 6 types of mines.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Smart tool use:</strong> Helpers start out inexperienced and will pick the most efficient tool <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of the time.
+                                    <ul>
+                                        <li>Increases by <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
+                                        <li>
+                                            <strong>Actions</strong>
+                                            <ul>
+                                                <li><strong>Bomb:</strong> When not all items have been seen.</li>
+                                                <li><strong>Hammer:</strong> When all items have been seen, and the spot that is being mined has at least 1 adjacent tile with a reward</li>
+                                                <li><strong>Chisel:</strong> When all items have been seen, and the spot that is being mined has no adjacent tiles with a reward</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><strong>Reward retention:</strong> When a helper digs up an item, there is a chance that they will keep the item for themselves.
+                                    <ul>
+                                        <li>
+                                            The chance starts at <knockout data-bind="text: GameConstants.REWARD_RETENTION_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and decreases by <knockout data-bind="text: GameConstants.REWARD_RETENTION_DECREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, down to <knockout data-bind="text: GameConstants.REWARD_RETENTION_MINIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.
+                                        </li>
+                                        <li>
+                                            From helper level <knockout data-bind="text: GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT"></knockout>, the player can ask to auto-sell diamond and plate items for their respective value.
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Work cycle:</strong> Starts at <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_BASE"></knockout> seconds and decreases by <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL"></knockout> second for every level, up to a minimum of <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_MINIMUM"></knockout> seconds per action.
+                                </li>
+                                <li>
+                                    <strong>Energy restore:</strong> A helper can use an energy potion to restore a portion of the time until they can perform their next action.
+                                    <ul>
+                                        <li><strong>Small restore:</strong> Restores 25% of the time until the next action can be performed</li>
+                                        <li><strong>Medium restore:</strong> Restores 50% of the time until the next action can be performed</li>
+                                        <li><strong>Large restore:</strong> Restores 75% of the time until the next action can be performed</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Experience and Leveling</span>
+                        </div>
+
+                        <div class="card-body">
+                            <p>Using tools and helpers not only helps you gather treasures but also grants experience that helps in leveling up.</p>
+
+                            <h4>Experience</h4>
+                            <ul>
+                                <li>
+                                    <strong>Items:</strong>
+                                    <ul>
+                                        <li>Digging up any item: <knockout data-bind="text: GameConstants.UNDERGROUND_EXPERIENCE_DIG_UP_ITEM"></knockout> experience</li>
+                                        <li>Digging up all items: <knockout data-bind="text: GameConstants.UNDERGROUND_EXPERIENCE_CLEAR_LAYER"></knockout> experience</li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <h4>Shared Experience</h4>
+                            <ul>
+                                <li><strong>Player Actions:</strong> When the player performs an action that gains experience, the active helper will also gain <knockout data-bind="text: GameConstants.PLAYER_EXPERIENCE_HELPER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
+                                <li><strong>Helper Actions:</strong> When the helper performs an action that gains them experience, the player will also gain <knockout data-bind="text: GameConstants.HELPER_EXPERIENCE_PLAYER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Trading</span>
+                        </div>
+
+                        <div class="card-body">
+                            <p>Trading allows you to exchange items within the same category. Here’s how it works:</p>
+                            <ul>
+                                <li><strong>Same Category Trading:</strong> Trades can only be made within the same category of items.</li>
+                                <li><strong>3 to 1 Trade:</strong> Trading always follows a 3 to 1 ratio (e.g., trade 3 items to receive 1 new item).</li>
+                                <li><strong>Exception:</strong> Diamond items cannot be traded.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Oak Items</span>
+                        </div>
+
+                        <div class="card-body">
+                            <h4>Explosive Charge</h4>
+                            <ul>
+                                <li><strong>Progress:</strong> Gains progress to level up when finding all items in a mine</li>
+                                <li><strong>Effect:</strong> Increases the number of tiles the Bomb tool will mine</li>
+                            </ul>
+
+                            <h4>Cell Battery</h4>
+                            <ul>
+                                <li><strong>Progress:</strong> Gains progress to level up when the player uses discharge</li>
+                                <li><strong>Effect:</strong> Triggers a discharge which will clear tiles in a certain pattern, new patterns become available by levelling up Cell Battery</li>
+                            </ul>
+
+                            <h4>Treasure Scanner</h4>
+                            <ul>
+                                <li><strong>Progress:</strong> Gains progress to level up when finding an item in a mine</li>
+                                <li><strong>Effect:</strong> Has a chance to duplicate a found item. Keeps attempting to duplicate until it fails a chance</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Lexicon</span>
+                        </div>
+
+                        <div class="card-body">
+                            <ul>
+                                <li><strong>Seen Item:</strong> At least 1 part of the item is visible to the player</li>
+                                <li><strong>Found Item:</strong> All parts of the item are visible to the player, the item has been claimed</li>
+                                <li><strong>Completed Mine:</strong> All buried items have been found</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer p-0">
+                <div class="container">
+                    <div class="row p-0">
+                        <!-- ko foreach: App.game.underground.helpers.hired() -->
+                        <div class="col p-0">
+                            <div>
+                                <span data-bind="text: $data.name"></span>
+                                <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
+                                <span data-bind="text: ` using ${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></span>
+                                <!-- /ko -->
+                            </div>
+                            <div class="progress" style='height: 5px'>
+                                <div class="progress-bar bg-info" role="progressbar"
+                                     data-bind="attr:{ style: 'width:' + ($data.timeSinceWork / $data.workCycleTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    <span data-bind="text: `${$data.timeSinceWork.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} / ${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} s`"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div aria-labelledby="findNewMineModalLabel" class="modal fade no-select" id="findNewMineModal" role="dialog" style="cursor: default;" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Select a mine</h4>
+                <div class="search-mine-display mb-2">
+                    <!-- ko foreach: [MineType.Random, MineType.Diamond, MineType.GemPlate, MineType.Shard, MineType.Fossil, MineType.EvolutionItem] -->
+                    <div class="mx-1 mb-1">
+                        <div class="card clickable" data-bind="click: () => { App.game.underground.autoSearchMineType = $data; }">
+                            <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': App.game.underground.autoSearchMineType === $data }">
+                                <div class="d-flex flex-column align-items-center">
+                                    <h6 class="card-title m-0" data-bind="text: UndergroundController.getMineConfig($data).displayName"></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+
+                <div class="card mb-2">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).displayName"></span>
+                    </div>
+
+                    <div class="card-body">
+                        <h6>Potential treasures</h6>
+                        <div>
+                            <!-- ko foreach: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).getAvailableItems() -->
+                            <img width="24px" height="24px" data-bind="tooltip: { title: $data.displayName, trigger: 'hover' }, attr: { src: $data.image }" />
+                            <!-- /ko -->
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="small">
+                            Discovery time: <label data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType)), css: { 'text-warning': UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType) > 0 }"></label>
+                        </div>
+
+                        <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);" data-dismiss="modal">Search for mine</button>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
+                    <label for="auto-restart-underground-mine" data-bind="text: autoRestartUndergroundMine.displayName"></label>
+                    <label class="form-check-label toggler-wrapper style-1 float-right">
+                        <input class="form-check-input" type="checkbox" id="auto-restart-underground-mine"
+                               data-bind="checked: autoRestartUndergroundMine.observableValue">
+                        <div class="toggler-slider">
+                            <div class="toggler-knob"></div>
+                        </div>
+                    </label>
+                    <!-- /ko -->
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div aria-labelledby="treasureDetailModalLabel" class="modal fade no-select" id="treasureDetailModal" role="dialog" style="cursor: default;" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header align-items-center">
+                <!-- ko if: UndergroundTrading.selectedTradeFromItem -->
+                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                <div>
+                    <h4 class="m-0" data-bind="text: UndergroundTrading.selectedTradeFromItem.name"></h4>
+                    <small class="m-0" data-bind="text: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US')"></small>
+                </div>
+                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                <!-- /ko -->
+            </div>
+
+            <div class="modal-body" style="min-height: 300px;">
+                <!-- ko if: UndergroundTrading.selectedTradeFromItem?.hasSellValue() -->
+                <div class="card mb-2">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <span class="flex-grow-1 text-center font-weight-bold">Sell</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-3 font-weight-bold" data-bind="css: { 'text-danger': UndergroundTrading.sellAmount > player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]() }">
+                                <label data-bind="text: UndergroundTrading.sellAmount.toLocaleString('en-US')"></label>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label data-bind="text: UndergroundTrading.selectedTradeFromItem.name"></label>
+                                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                                →
+                                <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Gem -->
+                                <img class='mineInventoryItem' data-bind='attr: { src: Gems.image(UndergroundTrading.selectedTradeFromItem.type) }'/>
+                                <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × ${PokemonType[UndergroundTrading.selectedTradeFromItem.type]} Gems`"></label>
+                                <!-- /ko -->
+                                <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Diamond -->
+                                <img class='mineInventoryItem' src="../assets/images/currency/diamond.svg"/>
+                                <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × Diamonds`"></label>
+                                <!-- /ko -->
+                            </div>
+                            <div class="col-12 col-lg-3 font-weight-bold">
+                                <label data-bind="text: (UndergroundTrading.sellAmount * UndergroundTrading.selectedTradeFromItem.value).toLocaleString('en-US')"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12 col-lg-9 mb-2 mb-lg-0">
+                                <div class="input-group">
+                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.sellAmount = 1">Reset</button>
+
+                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
+
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(10)">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 10">
                                         +10
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(100)">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 100">
                                         +100
                                     </button>
                                     <!-- /ko -->
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.multiplyTradeAmount(10)">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount *= 10">
                                         &times;10
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.multiplyTradeAmount(0.1)">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount /= 10">
                                         &div;10
                                     </button>
                                     <!-- /ko -->
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(100)">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 100">
                                         +100
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="App.game.underground.increaseTradeAmount(1000)">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 1000">
                                         +1,000
                                     </button>
                                     <!-- /ko -->
+
+                                    <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu text-center p-0">
+                                        <p class="small py-2 m-0">Set Trade Amount</p>
+                                        <div class="dropdown-divider m-0"></div>
+                                        <!-- ko foreach: [10, 100, 1000] -->
+                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                            text: `${$data.toLocaleString('en-US')}`,
+                                            click: () => { UndergroundTrading.sellAmount = $data }
+                                        "></button>
+                                        <!-- /ko -->
+                                        <div class="dropdown-divider m-0"></div>
+                                        <!-- ko foreach: [0.1, 0.25, 0.5, 0.75, 1] -->
+                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                            text: `${$data.toLocaleString('en-US', { style: 'percent' })}`,
+                                            click: () => { UndergroundTrading.sellAmount = player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]() * $data }
+                                        "></button>
+                                        <!-- /ko -->
+                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="col-12 col-lg-3">
+                                <button class="btn btn-block btn-primary" data-bind="
+                                    enable: UndergroundTrading.canSell,
+                                    click: () => UndergroundTrading.sell()
+                                ">Sell</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <!-- /ko -->
 
-            <div class="modal-footer">
-
-                <button type="button" class="btn mr-auto"
-                    data-bind="visible: Underground.getDiamondNetWorth() > 0,
-                    tooltip: {
-                        title: Underground.netWorthTooltip(),
-                        trigger: 'hover',
-                        placement:'top',
-                        html: true,
-                    }">
-                    <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
-                    <img src='assets/images/underground/diamond.svg' width="20px'">
-                </button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/html" id="undergroundUpgradeTemplate">
-        <!-- ko if: upgrade.isUnlocked() -->
-        <td class="vertical-middle text-left">
-            <div class="font-weight-bold" data-bind="text: upgrade.displayName"></div>
-            <span class="small d-none d-sm-block" data-bind="text: upgrade.description"></span>
-        </td>
-        <td class="vertical-middle" data-bind="text: totalBonus"></td>
-        <td class="vertical-middle"
-            data-bind="text: upgrade.isMaxLevel() ? '' : (upgrade.increasing ? '+' : '-') + upgrade.upgradeBonus()"></td>
-        <td class="vertical-middle"
-            data-bind="text: `${upgrade.level}/${upgrade.maxLevel}`"></td>
-        <td class="vertical-middle text-nowrap">
-            <!-- ko ifnot: upgrade.isMaxLevel() -->
-            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': upgrade.calculateCost().amount, 'currency': upgrade.calculateCost().currency, width: '18px', height: '18px' }}"></span>
-            <!-- /ko -->
-        </td>
-        <td class="vertical-middle">
-            <button class="btn btn-success btn-block"
-                    data-bind="css: { disabled: !upgrade.canBuy() },
-                                text: upgrade.isMaxLevel() ? 'Max' : 'Upgrade',
-                                click: function(){upgrade.buy(); DailyDeal.generateDeals(App.game.underground.getDailyDealsMax(), new Date());}">
-            </button>
-        </td>
-        <!-- /ko -->
-    </script>
-
-    <script type="text/html" id="undergroundUpgradeToggleTemplate">
-        <!-- ko if: upgrade.isUnlocked() -->
-        <td class="vertical-middle text-left">
-            <div class="font-weight-bold" data-bind="text: upgrade.displayName"></div>
-            <span class="small d-none d-sm-block" data-bind="text: upgrade.description"></span>
-        </td>
-        <td class="vertical-middle"></td>
-        <td class="vertical-middle"></td>
-        <td class="vertical-middle"></td>
-        <td class="vertical-middle text-nowrap">
-            <!-- ko ifnot: upgrade.isMaxLevel() -->
-            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': upgrade.calculateCost().amount, 'currency': upgrade.calculateCost().currency, width: '18px', height: '18px' }}"></span>
-            <!-- /ko -->
-        </td>
-        <td class="vertical-middle">
-            <button class="btn btn-block"
-                data-bind="css: {
-                        disabled: (!upgrade.isMaxLevel() && !upgrade.canAfford()) || !upgrade.isUnlocked(),
-                        'btn-success': !upgrade.isMaxLevel() || Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
-                        'btn-danger': upgrade.isMaxLevel() && !Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue(),
-                    },
-                    text: upgrade.isMaxLevel()
-                        ? Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).observableValue()
-                            ? 'Enabled' : 'Disabled'
-                        : 'Unlock',
-                    click: () => !upgrade.isMaxLevel() && upgrade.isUnlocked()
-                        ? upgrade.buy()
-                        : Settings.getSetting(`underground.${UndergroundUpgrade.Upgrades[upgrade.name]}`).toggle()">
-            </button>
-        </td>
-        <!-- /ko -->
-    </script>
-
-    <script type="text/html" id="treasureListTemplate">
-        <tr>
-            <td class='vertical-middle'>
-                <img class='mineInventoryItem' data-bind='attr:{ src: $data.image }'>
-                <span data-bind="text: '('+player.itemList[$data.itemName]().toLocaleString('en-US')+')'"></span>
-            </td>
-            <td class='vertical-middle' data-bind='text: $data.name'></td>
-            <!-- ko ifnot: $data.hasSellValue() -->
-            <td></td>
-            <!-- /ko -->
-            <!-- ko if: $data.hasSellValue() -->
-            <td class='vertical-middle' data-bind='text: $data.value + " " + GameConstants.camelCaseToString(UndergroundItems.getFullResourceName($data, value))'></td>
-            <!-- /ko -->
-            <td class='vertical-middle'>
-                <!-- ko if: $data.isSellable() -->
-                <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
-                    <!-- ko ifnot: $data.valueType == UndergroundItemValueType.Fossil -->
-                    <label
-                    class="input-group-prepend btn btn-success active clickable m-0"
-                        data-bind="text: $data.sellLocked() ? '🔒' : '🔓', attr: { for: 'sellLockedIndicatorOfItem' + id }"
-                    >🔓</label>
-                    <input
-                        class="hidden"
-                        type="checkbox"
-                        data-bind="checked: $data.sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + $data.id }, event: { change: function(){$data.toggleSellLock()} }"
-                    />
-                    <!-- /ko -->
-                    <button class='btn btn-success btn-block'
-                            data-bind="css: { disabled: $data.sellLocked() || ($data.valueType === UndergroundItemValueType.Fossil && !App.game.breeding.hasFreeEggSlot()) },
-                                    text: $data.valueType === UndergroundItemValueType.Fossil ? 'Breed' : 'Sell',
-                                    click: function(){Underground.sellMineItem($data, sellAmount() || 1)}">
-                    </button>
-                    <!-- ko if: $data.valueType !== UndergroundItemValueType.Fossil -->
-                    <button type="button" data-bind="text: sellAmount() + '&nbsp;', css: { disabled:  $data.sellLocked() }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    </button>
-                    <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                        <button class="dropdown-item" type="button" data-bind="click: function(){sellAmount($data)}, text: $data.toLocaleString('en-US')"></button>
+                <!-- ko if: UndergroundTrading.tradeToItemList?.length > 0 -->
+                <div class="card mb-2">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <span class="flex-grow-1 text-center font-weight-bold">Trade</span>
                     </div>
-                    <!-- /ko -->
+
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- ko foreach: UndergroundTrading.tradeToItemList -->
+                            <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                     data-bind="
+                                        css: { 'bg-info': UndergroundTrading.selectedTradeToItem === $data },
+                                        template: { name: 'otherItemTemplate', data: $data.itemName },
+                                        click: () => { UndergroundTrading.selectedTradeToItem = $data; }
+                                     ">
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-3 font-weight-bold" data-bind="css: { 'text-danger': UndergroundTrading.tradeFromAmount > player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]() }">
+                                <label data-bind="text: UndergroundTrading.tradeFromAmount.toLocaleString('en-US')"></label>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label data-bind="text: UndergroundTrading.selectedTradeFromItem.name"></label>
+                                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                                →
+                                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeToItem?.image || null }'>
+                                <label data-bind="text: UndergroundTrading.selectedTradeToItem?.name || '???'"></label>
+                            </div>
+                            <div class="col-12 col-lg-3 font-weight-bold">
+                                <label data-bind="text: UndergroundTrading.tradeAmount.toLocaleString('en-US')"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12 col-lg-9 mb-2 mb-lg-0">
+                                <div class="input-group">
+                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1">Reset</button>
+
+                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
+
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 10">
+                                        +10
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 100">
+                                        +100
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount *= 10">
+                                        &times;10
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount /= 10">
+                                        &div;10
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 100">
+                                        +100
+                                    </button>
+                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 1000">
+                                        +1,000
+                                    </button>
+                                    <!-- /ko -->
+
+                                    <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu text-center p-0">
+                                        <p class="small py-2 m-0">Set Trade Amount</p>
+                                        <div class="dropdown-divider m-0"></div>
+                                        <!-- ko foreach: [10, 100, 1000] -->
+                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                            text: `${$data.toLocaleString('en-US')}`,
+                                            click: () => { UndergroundTrading.tradeAmount = $data }
+                                        "></button>
+                                        <!-- /ko -->
+                                        <div class="dropdown-divider m-0"></div>
+                                        <!-- ko foreach: [0.1, 0.25, 0.5, 0.75, 1] -->
+                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                            text: `${$data.toLocaleString('en-US', { style: 'percent' })}`,
+                                            click: () => { UndergroundTrading.tradeFromAmount = player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]() * $data }
+                                        "></button>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-3">
+                                <button class="btn btn-block btn-primary" data-bind="
+                                    enable: UndergroundTrading.canTrade,
+                                    click: () => UndergroundTrading.trade()
+                                ">Trade</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /ko -->
-            </td>
-        </tr>
-    </script>
-</div>
-
-<div aria-labelledby="mineSellAllTreasuresModalLabel" class="modal fade noselect mt-5" id="mineSellAllTreasuresModal" role="dialog"
-     style="cursor:default" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document" data-bind="let: { filteredMineInventory: UndergroundItems.list.filter(item => item.hasSellValue() && player.itemList[item.itemName]()) }">
-        <div class="modal-content">
-            <div class="modal-header d-block">
-                <h4 class="mb-0">
-                    Sell all selected treasures
-                </h4>
-                (<span data-bind="text: filteredMineInventory.filter(t => !t.sellLocked()).length + ' of ' + filteredMineInventory.length"></span>)
-            </div>
-            <div class="modal-body p-0">
-                <table class="table table-sm table-hover table-striped m-0">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Cumulative Value</th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="template: { name: 'cumulativeValueListTemplate', foreach: Object.keys(Underground.getCumulativeValues()).sort() }">
-                    </tbody>
-                </table>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn mr-auto btn-danger" data-bind="click: function(){Underground.sellAllMineItems()}">
-                    <span>Confirm sell</span>
-                </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-
-    <script type="text/html" id="cumulativeValueListTemplate">
-        <tr data-bind="let: { type: $data, cumulativeValue: Underground.getCumulativeValues()[$data].cumulativeValue, imgSrc: Underground.getCumulativeValues()[$data].imgSrc }">
-            <td>
-                <img width="20px'" data-bind="attr: { src: imgSrc }">
-            </td>
-            <td>
-                <span data-bind="text: cumulativeValue.toLocaleString('en-US') + ' ' + type"></span>
-            </td>
-        </tr>
-    </script>
 </div>
+
+<div aria-labelledby="undergroundBatteryModalLabel" class="modal fade no-select" id="undergroundBatteryModal" role="dialog" style="cursor: default;" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card mb-2">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <span class="flex-grow-1 text-center font-weight-bold">Underground Battery Patterns</span>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table table-hover table-striped table-sm m-0">
+                            <thead>
+                            <tr>
+                                <th>Tier</th>
+                                <th></th>
+                                <th class="text-left">Name</th>
+                                <th class="text-left">Requirements</th>
+                                <th>Chance</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- ko foreach: App.game.underground.battery.patterns -->
+                            <tr>
+                                <td class="vertical-middle" data-bind="text: $data.tier"></td>
+                                <td class="vertical-middle">
+                                    <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                            tooltip: {
+                                                title: $data.hint || '',
+                                                placement: 'bottom',
+                                                trigger: 'hover'
+                                            }, visible: !$data.canAccess()" />
+                                </td>
+                                <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
+                                <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
+                                <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
+                            </tr>
+                            <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="helpToolTemplate">
+    <h6 class="d-flex align-items-center" style="gap: 0.5rem;">
+        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
+        <knockout data-bind="text: $data.tool.displayName"></knockout>
+    </h6>
+    <ul>
+        <li><strong>Action:</strong> <knockout data-bind="text: $data.action"></knockout></li>
+        <li>
+            <strong>Properties:</strong>
+            <ul>
+                <li><strong>Base Repair Rate:</strong> <knockout data-bind="text: $data.tool.restoreRateInSeconds"></knockout> seconds</li>
+                <li><strong>Repair Rate Reduction per Level:</strong> <knockout data-bind="text: $data.tool.restoreRateReductionPerLevel"></knockout> seconds</li>
+                <li><strong>Repair per Tick:</strong> <knockout data-bind="text: $data.tool.durabilityRestoreRate.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></li>
+                <li><strong>Damage per Use:</strong> <knockout data-bind="text: $data.tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></li>
+            </ul>
+        </li>
+    </ul>
+</script>

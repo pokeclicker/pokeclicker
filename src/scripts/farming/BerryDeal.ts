@@ -442,7 +442,7 @@ class BerryDeal {
             const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
             deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {
-                Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
+                UndergroundController.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
             } else {
                 deal.item.itemType.gain(deal.item.amount * maxTrades);
             }

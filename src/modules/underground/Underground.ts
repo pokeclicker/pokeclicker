@@ -1,547 +1,152 @@
-import type { Observable, Computed } from 'knockout';
-import '../koExtenders';
 import { Feature } from '../DataStore/common/Feature';
-import { Currency, EnergyRestoreSize, EnergyRestoreEffect, PLATE_VALUE, Region } from '../GameConstants';
-import GameHelper from '../GameHelper';
 import KeyItemType from '../enums/KeyItemType';
-import OakItemType from '../enums/OakItemType';
-import PokemonType from '../enums/PokemonType';
-import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import { ItemList } from '../items/ItemList';
-import NotificationConstants from '../notifications/NotificationConstants';
+import { Observable, PureComputed } from 'knockout';
+import { UndergroundController } from './UndergroundController';
+import GameHelper from '../GameHelper';
 import Notifier from '../notifications/Notifier';
-import Upgrade from '../upgrades/Upgrade';
-import AmountFactory from '../wallet/AmountFactory';
-import { Mine } from './Mine';
-import UndergroundItem from './UndergroundItem';
-import UndergroundItems from './UndergroundItems';
-import UndergroundUpgrade, { Upgrades } from './UndergroundUpgrade';
-import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
-import Settings from '../settings/Settings';
+import NotificationConstants from '../notifications/NotificationConstants';
+import { Mine } from './mine/Mine';
+import { MineType } from './mine/MineConfig';
+import { UndergroundHelper, UndergroundHelpers } from './helper/UndergroundHelper';
+import { BASE_EXTRA_LAYER_DEPTH,
+    BASE_MAXIMUM_ITEMS, BASE_MINE_HEIGHT, BASE_MINE_WIDTH, BASE_MINIMUM_ITEMS, BASE_MINIMUM_LAYER_DEPTH } from '../GameConstants';
+import UndergroundTools from './tools/UndergroundTools';
+import { UndergroundBattery } from './UndergroundBattery';
 
 export class Underground implements Feature {
     name = 'Underground';
     saveKey = 'underground';
 
-    upgradeList: Array<Upgrade>;
-    defaults: Record<string, any>;
-    private _energy: Observable<number> = ko.observable(Underground.BASE_ENERGY_MAX);
+    defaults: Record<string, any> = {
+        undergroundExp: 0,
+    };
 
-    public static itemSelected;
-    public static energyTick: Observable<number> = ko.observable(60);
-    public static counter = 0;
+    private _undergroundExp: Observable<number> = ko.observable(0);
+    private _undergroundLevel: PureComputed<number> = ko.pureComputed(() => Underground.convertExperienceToLevel(this._undergroundExp()));
+    private _progressToNextLevel: PureComputed<number> = ko.pureComputed(() =>
+        (this._undergroundExp() - Underground.convertLevelToExperience(this._undergroundLevel())) /
+        (Underground.convertLevelToExperience(this._undergroundLevel() + 1) - Underground.convertLevelToExperience(this._undergroundLevel())));
 
-    public static sortDirection = -1;
-    public static lastPropSort = 'none';
-    public static sortOption: Observable<string> = ko.observable('None');
-    public static sortFactor: Observable<number> = ko.observable(-1);
+    private _autoSearchMineType: Observable<MineType> = ko.observable(MineType.Random);
 
-    public static BASE_ENERGY_MAX = 50;
-    public static BASE_ITEMS_MAX = 3;
-    public static BASE_ITEMS_MIN = 1;
-    public static BASE_ENERGY_GAIN = 3;
-    public static BASE_ENERGY_REGEN_TIME = 60;
-    public static BASE_DAILY_DEALS_MAX = 3;
-    public static BASE_BOMB_EFFICIENCY = 10;
+    private _mine: Observable<Mine | null> = ko.observable(null);
+    public helpers = new UndergroundHelpers();
+    public tools = new UndergroundTools();
+    public battery = new UndergroundBattery();
 
-    public static sizeX = 25;
-    public static sizeY = 12;
-
-    public static CHISEL_ENERGY = 1;
-    public static HAMMER_ENERGY = 3;
-    public static BOMB_ENERGY = 10;
-    public static SURVEY_ENERGY = 15;
-
-    // Sort UndergroundItems.list whenever the sort method or quantities change
-    public static sortedMineInventory: Computed<Array<UndergroundItem>> = ko.computed(function () {
-        const sortOption = Underground.sortOption();
-        const direction = Underground.sortFactor();
-        return UndergroundItems.list.sort((a: UndergroundItem, b: UndergroundItem) => {
-            let result = 0;
-            switch (sortOption) {
-                case 'Amount':
-                    result = (player.itemList[a.itemName]() - player.itemList[b.itemName]()) * direction;
-                    break;
-                case 'Value':
-                    result = (a.value - b.value) * direction;
-                    break;
-                case 'Item':
-                    result = a.name > b.name ? direction : -direction;
-                    break;
-            }
-            if (result == 0) {
-                return a.id - b.id;
-            }
-            return result;
-        });
-    });
-
-    public static netWorthTooltip: Computed<string> = ko.pureComputed(() => {
-        let nMineItems = 0;
-        let nFossils = 0;
-        let nPlates = 0;
-        let nShards = 0;
-        UndergroundItems.list.forEach(mineItem => {
-            if (mineItem.valueType == UndergroundItemValueType.Diamond) {
-                nMineItems += player.itemList[mineItem.itemName]();
-            } else if (mineItem.valueType == UndergroundItemValueType.Fossil) {
-                nFossils += player.itemList[mineItem.itemName]();
-            } else if (mineItem.valueType == UndergroundItemValueType.Gem) {
-                nPlates += player.itemList[mineItem.itemName]();
-            } else if (mineItem.valueType == UndergroundItemValueType.Shard) {
-                nShards += player.itemList[mineItem.itemName]();
-            }
-        });
-
-        return `<u>Owned:</u><br>Mine items: ${nMineItems.toLocaleString('en-US')}<br>Fossils: ${nFossils.toLocaleString('en-US')}<br>Plates: ${nPlates.toLocaleString('en-US')}<br>Shards: ${nShards.toLocaleString('en-US')}`;
-    });
-
-    public tradeAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
-
-    public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
-        return App.game.underground.canAccess() && !Settings.getSetting('showUndergroundModule').observableValue();
-    });
-
-    constructor() {
-        this.upgradeList = [];
-        this.tradeAmount.subscribe((value) => {
-            if (value < 0) {
-                this.tradeAmount(0);
-            }
-        });
-    }
-
-    initialize() {
-        this.upgradeList = [
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Max, 'Max Energy', 10,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 500, 50), Currency.diamond),
-                GameHelper.createArray(0, 100, 10),
-                true,
-                'Increases the maximum Energy limit',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Items_Max, 'Max Items', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(200, 800, 200), Currency.diamond),
-                GameHelper.createArray(0, 4, 1),
-                true,
-                'Increases the maximum amount of items that can spawn per layer',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Items_Min, 'Min Items', 4,
-                AmountFactory.createArray(
-                    GameHelper.createArray(500, 5000, 1500), Currency.diamond),
-                GameHelper.createArray(0, 4, 1),
-                true,
-                'Increases the minimum amount of items that can spawn per layer',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Gain, 'Energy Restored', 17,
-                AmountFactory.createArray(
-                    GameHelper.createArray(100, 1700, 100), Currency.diamond),
-                GameHelper.createArray(0, 17, 1),
-                true,
-                'Amount of energy restored at each regen interval',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Energy_Regen_Time, 'Energy Regen Time', 20,
-                AmountFactory.createArray(
-                    GameHelper.createArray(20, 400, 20), Currency.diamond),
-                GameHelper.createArray(0, 20, 1),
-                false,
-                'Decrease the time it takes to restore energy',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Daily_Deals_Max, 'Daily Deals', 2,
-                AmountFactory.createArray(
-                    GameHelper.createArray(150, 300, 150), Currency.diamond),
-                GameHelper.createArray(0, 2, 1),
-                true,
-                'Unlock more daily deal slots',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Bomb_Efficiency, 'Bomb Efficiency', 5,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 250, 50), Currency.diamond),
-                GameHelper.createArray(0, 10, 2),
-                true,
-                'Increase the effectiveness of the bomb',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Survey_Cost, 'Survey Cost', 5,
-                AmountFactory.createArray(
-                    GameHelper.createArray(50, 250, 50), Currency.diamond),
-                GameHelper.createArray(0, 5, 1),
-                false,
-                'Decrease the cost of surveying a layer',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Items_All, '+1 Item', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(3000, 3000, 3000), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Adds an extra item to each layer',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Reduced_Shards, 'Reduced Shards', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(750, 750, 750), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Greatly reduces the number of shards (toggleable)',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Reduced_Plates, 'Reduced Plates', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(1000, 1000, 1000), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Greatly reduces the number of plates (toggleable)',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Reduced_Evolution_Items, 'Reduced Evolution Items', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(500, 500, 500), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Greatly reduces the number of evolution items (toggleable)',
-            ),
-            new UndergroundUpgrade(
-                UndergroundUpgrade.Upgrades.Reduced_Fossil_Pieces, 'Reduced Fossil Pieces', 1,
-                AmountFactory.createArray(
-                    GameHelper.createArray(200, 200, 200), Currency.diamond),
-                GameHelper.createArray(0, 1, 1),
-                true,
-                'Greatly reduces the number of Galar fossil pieces (toggleable)',
-                new MaxRegionRequirement(Region.galar),
-            ),
-        ];
-    }
-
-    update() {
-    }
-
-    getMaxEnergy() {
-        return Underground.BASE_ENERGY_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Max).calculateBonus();
-    }
-
-    getMaxItems() {
-        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus();
-    }
-
-    getEnergyGain() {
-        return Math.round(Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus());
-    }
-
-    getEnergyRegenTime() {
-        return Math.round(Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus());
-    }
-
-    getDailyDealsMax() {
-        return Underground.BASE_DAILY_DEALS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max).calculateBonus();
-    }
-
-    getBombEfficiency() {
-        return Underground.BASE_BOMB_EFFICIENCY + this.getUpgrade(UndergroundUpgrade.Upgrades.Bomb_Efficiency).calculateBonus();
-    }
-
-    getSurvey_Cost() {
-        return Underground.SURVEY_ENERGY - this.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Cost).calculateBonus();
-    }
-
-    getSizeY() {
-        return Underground.sizeY;
-    }
-
-    getMinItems() {
-        return Underground.BASE_ITEMS_MIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Min).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_All).calculateBonus();
-    }
-
-    getUpgrade(upgrade: Upgrades) {
-        for (let i = 0; i < this.upgradeList.length; i++) {
-            if (this.upgradeList[i].name == upgrade) {
-                return this.upgradeList[i];
-            }
-        }
-    }
-
-    public static showMine() {
-        let html = '';
-        for (let i = 0; i < Mine.grid.length; i++) {
-            html += '<div class="row">';
-            for (let j = 0; j < Mine.grid[0].length; j++) {
-                html += Underground.mineSquare(Mine.grid[i][j](), i, j);
-            }
-            html += '</div>';
-        }
-        $('#mineBody').html(html);
-    }
-
-    private static mineSquare(amount: number, i: number, j: number): string {
-        if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() == 0) {
-            Mine.rewardGrid[i][j].revealed = 1;
-            const image = UndergroundItems.getById(Mine.rewardGrid[i][j].value).undergroundImage;
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y} rotations-${Mine.rewardGrid[i][j].rotations}" style="background-image: url('${image}');"></div></div>`;
-        } else {
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'></div>`;
-        }
-    }
-
-    public static calculateCssClass(i: number, j: number): string {
-        return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
-    }
-
-    public static gainMineItem(id: number, num = 1) {
-        const item = UndergroundItems.getById(id);
-        ItemList[item.itemName].gain(num);
-    }
-
-    public static getDiamondNetWorth(): number {
-        let diamondNetWorth = 0;
-        UndergroundItems.list.forEach(mineItem => {
-            if (mineItem.valueType == UndergroundItemValueType.Diamond) {
-                diamondNetWorth += mineItem.value * player.itemList[mineItem.itemName]();
-            }
-        });
-
-        return diamondNetWorth + App.game.wallet.currencies[Currency.diamond]();
-    }
-
-    public static getCumulativeValues(): Record<string, { cumulativeValue: number, imgSrc: string }> {
-        const cumulativeValues = {};
-        UndergroundItems.list.forEach(item => {
-            if (item.hasSellValue() && player.itemList[item.itemName]() > 0 && !item.sellLocked()) {
-                let valueType;
-                switch (item.valueType) {
-                    case UndergroundItemValueType.Gem:
-                        valueType = `${PokemonType[item.type]} Gems`;
-                        break;
-                    case UndergroundItemValueType.Diamond:
-                    default:
-                        valueType = `${UndergroundItemValueType[item.valueType]}s`;
-                }
-
-                let cumulativeValueOfType = cumulativeValues[valueType];
-                if (!cumulativeValueOfType) {
-                    cumulativeValueOfType = { cumulativeValue: 0 };
-                    // Set image source
-                    if (item.valueType == UndergroundItemValueType.Diamond) {
-                        cumulativeValueOfType.imgSrc = 'assets/images/underground/diamond.svg';
-                    } else {
-                        cumulativeValueOfType.imgSrc = item.image;
-                    }
-                    cumulativeValues[valueType] = cumulativeValueOfType;
-                }
-
-                cumulativeValueOfType.cumulativeValue += item.value * player.itemList[item.itemName]();
-            }
-        });
-
-        return cumulativeValues;
-    }
-
-    gainEnergy() {
-        if (this.energy < this.getMaxEnergy()) {
-            const oakMultiplier = App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
-            this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
-            if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify({
-                    message: 'Your mining energy has reached maximum capacity!',
-                    type: NotificationConstants.NotificationOption.success,
-                    timeout: 1e4,
-                    sound: NotificationConstants.NotificationSound.General.underground_energy_full,
-                    setting: NotificationConstants.NotificationSetting.Underground.underground_energy_full,
-                });
-            }
-        }
-    }
-
-    gainEnergyThroughItem(item: EnergyRestoreSize) {
-        // Restore a percentage of maximum energy
-        const effect: number = EnergyRestoreEffect[EnergyRestoreSize[item]];
-        const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
-        this.energy = this.energy + gain;
-        Notifier.notify({
-            message: `You restored ${gain} mining energy!`,
-            type: NotificationConstants.NotificationOption.success,
-            setting: NotificationConstants.NotificationSetting.Underground.underground_energy_restore,
-        });
-    }
-
-    public static updateTreasureSorting(newSortOption: string) {
-        if (Underground.sortOption() === newSortOption) {
-            Underground.sortFactor(Underground.sortFactor() * -1);
-        } else {
-            Underground.sortOption(newSortOption);
-        }
-    }
-
-    public static playerHasMineItems(): boolean {
-        return UndergroundItems.list.some(i => player.itemList[i.itemName]());
-    }
-
-    public static sellMineItem(item: UndergroundItem, amount = 1) {
-        if (item.sellLocked()) {
-            Notifier.notify({
-                message: 'Item is locked for selling, you first have to unlock it.',
-                type: NotificationConstants.NotificationOption.warning,
-            });
-            return;
-        }
-        if (item.valueType == UndergroundItemValueType.Fossil) {
-            amount = 1;
-        }
-        const curAmt = player.itemList[item.itemName]();
-        if (curAmt > 0) {
-            const sellAmt = Math.min(curAmt, amount);
-            const success = Underground.gainProfit(item, sellAmt);
-            if (success) {
-                player.loseItem(item.itemName, sellAmt);
-            }
-            return;
-        }
-    }
-
-    public static sellAllMineItems() {
-        UndergroundItems.list.forEach((item) => {
-            if (!item.sellLocked() && item.hasSellValue()) {
-                Underground.sellMineItem(item, Infinity);
-            }
-        });
-        $('#mineSellAllTreasuresModal').modal('hide');
-    }
-
-    private static gainProfit(item: UndergroundItem, amount: number): boolean {
-        let success = true;
-        switch (item.valueType) {
-            case UndergroundItemValueType.Diamond:
-                App.game.wallet.gainDiamonds(item.value * amount);
-                break;
-            case UndergroundItemValueType.Fossil:
-                if (!App.game.breeding.hasFreeEggSlot()) {
-                    return false;
-                }
-                success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
-                break;
-            case UndergroundItemValueType.Gem:
-                const type = item.type;
-                App.game.gems.gainGems(PLATE_VALUE * amount, type);
-                break;
-            // Nothing else can be sold
-            default:
-                return false;
-        }
-        return success;
-    }
-
-    openUndergroundModal() {
-        if (this.canAccess()) {
-            $('#mineModal').modal('show');
-        } else {
-            Notifier.notify({
-                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island.</i>',
-                type: NotificationConstants.NotificationOption.warning,
-            });
-        }
-    }
-
-    openUndergroundSellAllModal() {
-        if (this.canAccess()) {
-            if (Object.keys(Underground.getCumulativeValues()).length == 0) {
-                Notifier.notify({
-                    message: 'You have no items selected for selling.',
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-                return;
-            }
-            $('#mineSellAllTreasuresModal').modal('show');
-        } else {
-            Notifier.notify({
-                message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island.</i>',
-                type: NotificationConstants.NotificationOption.warning,
-            });
-        }
-    }
-
-    public canAccess() {
+    canAccess(): boolean {
         return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
     }
 
-    calculateItemEffect(item: EnergyRestoreSize) {
-        const effect: number = EnergyRestoreEffect[EnergyRestoreSize[item]];
-        return effect * this.getMaxEnergy();
+    initialize(): void {
+        this.tools.initialize();
+        this.battery.initialize();
     }
 
-    public increaseTradeAmount(amount: number) {
-        this.tradeAmount(this.tradeAmount() + amount);
+    update(delta: number): void {
+        this.mine?.tick(delta);
+        this.helpers?.hired().forEach(helper => helper.tick(delta));
+        this.tools.update(delta);
+        this.battery.update(delta);
     }
 
-    public multiplyTradeAmount(amount: number) {
-        this.tradeAmount(this.tradeAmount() * amount);
+    public generateMine(mineType: MineType, helper: UndergroundHelper = undefined) {
+        const minItemsToGenerate = Underground.calculateMinimumItemsToGenerate(this.undergroundLevel);
+        const maxItemsToGenerate = Underground.calculateMaximumItemsToGenerate(this.undergroundLevel);
+
+        const mine = new Mine({
+            width: BASE_MINE_WIDTH,
+            height: BASE_MINE_HEIGHT,
+            minimumDepth: BASE_MINIMUM_LAYER_DEPTH,
+            maximumExtraLayers: BASE_EXTRA_LAYER_DEPTH,
+            minimumItemsToGenerate: minItemsToGenerate,
+            extraItemsToGenerate: Math.max(maxItemsToGenerate - minItemsToGenerate, 0),
+            timeToDiscover: UndergroundController.calculateDiscoverMineTimeout(mineType),
+            config: UndergroundController.generateMineConfig(mineType, helper),
+        });
+        mine.generate();
+
+        this._mine(mine);
     }
 
-    fromJSON(json: Record<string, any>): void {
-        if (!json) {
-            console.warn('Underground not loaded.');
-            return;
-        }
+    public addUndergroundExp(amount: number) {
+        const currentLevel = this._undergroundLevel();
+        GameHelper.incrementObservable(this._undergroundExp, amount);
 
-        const upgrades = json.upgrades;
-        for (const item in UndergroundUpgrade.Upgrades) {
-            if (isNaN(Number(item))) {
-                this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level = upgrades[item] || 0;
-            }
+        if (this._undergroundLevel() > currentLevel) {
+            Notifier.notify({
+                message: `Your Underground level has increased to ${this._undergroundLevel()}!`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+            });
         }
-        this.energy = json.energy || 0;
+    }
 
-        const mine = json.mine;
-        if (mine) {
-            Mine.loadSavedMine(mine);
-        } else {
-            Mine.loadMine();
-        }
-        UndergroundItems.list.forEach(it => it.sellLocked(json.sellLocks[it.itemName] || false));
+    get mine(): Mine | null {
+        return this._mine();
+    }
+
+    get undergroundExp(): number {
+        return this._undergroundExp();
+    }
+
+    get undergroundLevel(): number {
+        return this._undergroundLevel();
+    }
+
+    get progressToNextLevel(): number {
+        return this._progressToNextLevel();
+    }
+
+    get autoSearchMineType(): MineType {
+        return this._autoSearchMineType();
+    }
+
+    set autoSearchMineType(type: MineType) {
+        this._autoSearchMineType(type);
     }
 
     toJSON(): Record<string, any> {
-        const undergroundSave: Record<string, any> = {};
-        const upgradesSave = {};
-        for (const item in UndergroundUpgrade.Upgrades) {
-            if (isNaN(Number(item))) {
-                upgradesSave[item] = this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level;
-            }
+        return {
+            undergroundExp: this._undergroundExp(),
+            mine: this._mine()?.save(),
+            helpers: this.helpers.toJSON(),
+            tools: this.tools.toJSON(),
+            battery: this.battery.toJSON(),
+            autoSearchMineType: this._autoSearchMineType(),
+        };
+    }
+
+    fromJSON(json: Record<string, any>): void {
+        this._undergroundExp(json.undergroundExp || this.defaults.undergroundExp);
+        this._mine(json.mine ? Mine.load(json.mine) : null);
+        this.helpers.fromJSON(json.helpers);
+        this.tools.fromJSON(json.tools);
+        this.battery.fromJSON(json.battery);
+        this._autoSearchMineType(json.autoSearchMineType || MineType.Random);
+
+        if (this.mine == null) {
+            this.generateMine(MineType.Random);
         }
-        undergroundSave.upgrades = upgradesSave;
-        undergroundSave.energy = this.energy;
-        undergroundSave.mine = Mine.save();
-        undergroundSave.sellLocks = UndergroundItems.list.reduce((sellLocks, item) => {
-            if (item.sellLocked()) {
-                sellLocks[item.itemName] = true;
-            }
-            return sellLocks;
-        }, {});
-        return undergroundSave;
     }
 
-    //  getters/setters
-    get energy(): number {
-        return this._energy();
+    public static calculateMinimumItemsToGenerate(level: number = 0): number {
+        return BASE_MINIMUM_ITEMS + Math.min(Math.floor((level + 3) / 6), 5);
     }
 
-    set energy(value) {
-        this._energy(value);
+    public static calculateMaximumItemsToGenerate(level: number = 0): number {
+        return BASE_MAXIMUM_ITEMS + Math.min(Math.floor(level / 6), 5);
     }
 
-}
+    public static convertLevelToExperience(level: number): number {
+        return Math.ceil(2000 * (1.15 ** level - 1));
+    }
 
-$(document).ready(() => {
-    $('body').on('click', '.mineSquare', function () {
-        Mine.click(parseInt(this.dataset.i, 10), parseInt(this.dataset.j, 10));
-    });
-});
-
-namespace Underground {
+    public static convertExperienceToLevel(experience: number): number {
+        let level = 0;
+        while (experience >= this.convertLevelToExperience(level + 1)) {
+            ++level;
+        }
+        return level;
+    }
 }

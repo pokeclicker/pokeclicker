@@ -2761,6 +2761,56 @@ class Update implements Saveable {
         },
 
         '0.10.22': ({ playerData, saveData, settingsData }) => {
+            // Reimburse and reset the underground upgrades
+            const upgradeCostMap = {
+                'Energy_Max': GameHelper.createArray(50, 500, 50),
+                'Items_Max': GameHelper.createArray(200, 800, 200),
+                'Items_Min': GameHelper.createArray(500, 5000, 1500),
+                'Energy_Gain': GameHelper.createArray(100, 1700, 100),
+                'Energy_Regen_Time': GameHelper.createArray(20, 400, 20),
+                'Daily_Deals_Max': GameHelper.createArray(150, 300, 150),
+                'Bomb_Efficiency': GameHelper.createArray(50, 250, 50),
+                'Survey_Cost': GameHelper.createArray(50, 250, 50),
+                'Items_All': GameHelper.createArray(3000, 3000, 3000),
+                'Reduced_Shards': GameHelper.createArray(750, 750, 750),
+                'Reduced_Plates': GameHelper.createArray(1000, 1000, 1000),
+                'Reduced_Evolution_Items': GameHelper.createArray(500, 500, 500),
+                'Reduced_Fossil_Pieces': GameHelper.createArray(200, 200, 200),
+            };
+
+            const totalReimburse = Object.entries(saveData.underground.upgrades).map(([key, value]) => {
+                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0);
+            }).reduce((acc, cur) => acc + cur, 0);
+            saveData.underground.upgrades = {};
+            saveData.wallet.currencies[GameConstants.Currency.diamond] += totalReimburse;
+
+            if (totalReimburse > 0) {
+                Notifier.notify({
+                    title: 'Underground refund',
+                    type: NotificationConstants.NotificationOption.info,
+                    timeout: GameConstants.DAY,
+                    message: `The old Underground upgrade system has been removed due to recent changes.
+                    We have refunded ${totalReimburse.toLocaleString('en-US')} <img src="./assets/images/currency/diamond.svg" height="24px"/> to your wallet.`,
+                });
+            }
+
+            if (saveData.keyItems.Explorer_kit) {
+                Notifier.notify({
+                    title: 'Underground changes',
+                    type: NotificationConstants.NotificationOption.warning,
+                    timeout: GameConstants.DAY,
+                    message: `The Underground has been overhauled! Check out the Underground Help tab for all the details on the new features and how everything works. Dive in and explore the changes!
+                    <button class="btn btn-block btn-secondary" onclick="UndergroundController.openUndergroundModal()" data-dismiss="toast">Open Underground</button>`,
+                });
+            }
+
+            // Remove the old underground save data
+            saveData.underground = null;
+
+            // Reset the Cell Battery
+            saveData.oakItems[OakItemType[OakItemType.Cell_Battery]].level = 0;
+            saveData.oakItems[OakItemType[OakItemType.Cell_Battery]].exp = 0;
+
             // Reset Key Stone multiplier
             delete playerData._itemMultipliers.Key_stone;
 

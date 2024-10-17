@@ -143,9 +143,9 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
-Settings.add(new BooleanSetting('showUndergroundModuleMineControls', 'Show Underground module mine controls', true));
-Settings.add(new BooleanSetting('showUndergroundModuleDailyTrades', 'Show Underground module daily trades', false));
+Settings.add(new BooleanSetting('enableUndergroundModuleMineControls', 'Enable Underground module mine controls', true));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
@@ -219,12 +219,6 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
-
-// Underground
-Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Plates', 'Reduced Plates', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Evolution_Items', 'Reduced Evolution Items', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Fossil_Pieces', 'Reduced Fossil Pieces', true, undefined, false));
 
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
@@ -457,8 +451,8 @@ Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lo
 
 Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 'H'));
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
-Settings.add(new HotkeySetting('hotkey.underground.survey', 'Survey', 'S'));
-Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Bomb', 'B'));
+Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Switch to Bomb', 'B'));
+Settings.add(new HotkeySetting('hotkey.underground.survey', 'Switch to Survey', 'S'));
 
 Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'W', { prefix: '↑ or ' }));
 Settings.add(new HotkeySetting('hotkey.dungeon.left', 'Move Left', 'A', { prefix: '← or ' }));

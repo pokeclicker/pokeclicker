@@ -1,0 +1,416 @@
+import { Pattern } from '../UndergroundBattery';
+
+export const batteryPatternLeafTornado: Pattern = [
+    [
+        { coordinate:{ x:3, y:8 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:3, y:7 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:3, y:6 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:3, y:5 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:3, y:4 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:3, y:3 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:4, y:2 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:4, y:1 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:5, y:0 }, depth: 4 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:19, y:0 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:20, y:1 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:20, y:2 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:21, y:3 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:21, y:4 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:21, y:5 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:21, y:6 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:21, y:7 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:21, y:8 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:20, y:9 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:20, y:10 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:19, y:11 }, depth: 4 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:6, y:11 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:5, y:10 }, depth: 4 },
+    ],
+    null,
+    [
+        { coordinate:{ x:4, y:8 }, depth: 4 },
+    ],
+    null,
+    [
+        { coordinate:{ x:2, y:5 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:2, y:4 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:2, y:3 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:3, y:2 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:3, y:1 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:4, y:0 }, depth: 4 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:18, y:0 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:19, y:1 }, depth: 4 },
+    ],
+    null,
+    [
+        { coordinate:{ x:20, y:3 }, depth: 4 },
+    ],
+    null,
+    null,
+    [
+        { coordinate:{ x:22, y:6 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:22, y:7 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:22, y:8 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:21, y:9 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:21, y:10 }, depth: 4 },
+    ],
+    [
+        { coordinate:{ x:20, y:11 }, depth: 4 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:3, y:11 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:2, y:10 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:2, y:9 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:1, y:8 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:1, y:7 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:1, y:6 }, depth: 3 },
+    ],
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:2, y:2 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:2, y:1 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:3, y:0 }, depth: 3 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:21, y:0 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:22, y:1 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:22, y:2 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:23, y:3 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:23, y:4 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:23, y:5 }, depth: 3 },
+    ],
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:22, y:9 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:22, y:10 }, depth: 3 },
+    ],
+    [
+        { coordinate:{ x:21, y:11 }, depth: 3 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:4, y:11 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:3, y:10 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:3, y:9 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:2, y:8 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:2, y:7 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:2, y:6 }, depth: 2 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:20, y:0 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:21, y:1 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:21, y:2 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:22, y:3 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:22, y:4 }, depth: 2 },
+    ],
+    [
+        { coordinate:{ x:22, y:5 }, depth: 2 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:1, y:5 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:1, y:4 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:1, y:3 }, depth: 1 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:23, y:6 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:23, y:7 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:23, y:8 }, depth: 1 },
+    ],
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    [
+        { coordinate:{ x:5, y:11 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:4, y:10 }, depth: 1 },
+    ],
+    [
+        { coordinate:{ x:4, y:9 }, depth: 1 },
+    ],
+];
