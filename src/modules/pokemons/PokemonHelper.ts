@@ -16,7 +16,6 @@ import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import type MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
-import ContestType from '../enums/ContestType';
 
 // TODO remove when Dungeon is ported to modules
 declare class Dungeon {
