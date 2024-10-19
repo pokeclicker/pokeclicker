@@ -370,6 +370,13 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
             new GymPokemon('Altaria', 378, 90), // Smart
             new GymPokemon('Altaria', 368, 90), // Tough
         ]), // Ali
+        // Event
+        new ContestTrainer('Red', 'Juggler', [new GymPokemon('Red Spearow', 300, 40)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
+        new ContestTrainer('Dice', 'Painter', [new GymPokemon('Bulbasaur (Rose)', 300, 40)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
+        new ContestTrainer('Ultima', 'Ruin Maniac', [
+            new GymPokemon('Marill', 100000000, 40, new QuestLineCompletedRequirement('How blu mouse?')),
+            new GymPokemon('Pikachu', 100000000, 40, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less)),
+        ], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
     ],
     [ContestRank['Brilliant Shining']]: [
         new ContestTrainer('Luis', 'Camper', [new GymPokemon('Pikachu', 180, 100)]), // Sparky

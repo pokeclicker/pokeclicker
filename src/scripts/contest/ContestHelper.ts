@@ -67,7 +67,7 @@ class ContestHelper {
             tooltipString += '<div>Eligible Types:</div>';
             if (type != ContestType.Balanced) {
                 tooltipString += `<div>${ContestType[type]}</div>`;
-                tooltipString += `<div>${ContestType[5]}</div>`;
+                tooltipString += `<div>${ContestType[ContestType.Balanced]}</div>`;
             } else {
                 tooltipString += '<div>All</div>';
             }
