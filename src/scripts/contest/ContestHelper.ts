@@ -1,25 +1,23 @@
 /// <reference path="../../declarations/enums/ContestType.d.ts"/>
 class ContestHelper {
-    public static calculatePokemonContestAppeal(conRank: ContestRank = ContestRank.Normal, conType: ContestType = ContestType.None, type1: ContestType = ContestType.None, type2: ContestType = ContestType.None, type3: ContestType = ContestType.None, pokemons?: PartyPokemon[], includeBreeding = false): number {
+    public static calculatePokemonContestAppeal(conRank: ContestRank = ContestRank.Normal, conType: ContestType = ContestType.None, types: ContestType[] = [ContestType.None], pokemons?: PartyPokemon[], includeBreeding = false): number {
         let appeal = 0;
         const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
         for (const pokemon of pks) {
-            appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, type1, type2, type3, includeBreeding);
+            appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, types, includeBreeding);
         }
 
         return Math.round(appeal);
     }
 
-    public static calculateOnePokemonContestAppeal(pokemon: PartyPokemon, type1: ContestType, type2: ContestType, type3: ContestType, includeBreeding = false): number {
+    public static calculateOnePokemonContestAppeal(pokemon: PartyPokemon, types: ContestType[], includeBreeding = false): number {
         let appeal = 0;
         const pAppeal = pokemon.contestAppeal;
-        const pType1 = pokemon.currentContestTypes[0];
-        const pType2 = pokemon.currentContestTypes[1];
-        const pType3 = pokemon.currentContestTypes[2];
+        const pType = pokemon.currentContestTypes;
 
         // Check if the Pokemon is currently breeding (no appeal)
         if (includeBreeding || !pokemon.breeding) {
-            appeal = pAppeal * ContestTypeHelper.getAppealModifier(pType1, pType2, pType3, type1, type2, type3);
+            appeal = pAppeal * ContestTypeHelper.getAppealModifier(pType, types);
         }
 
         return appeal;
@@ -62,7 +60,7 @@ class ContestHelper {
 
     public static contestButtonTooltip(rank: ContestRank, type: ContestType): string {
         let tooltipString = '';
-        tooltipString += `<div><strong>Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(rank, type, type).toLocaleString('en-US')}</strong></div>`;
+        tooltipString += `<div><strong>Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(rank, type, [type]).toLocaleString('en-US')}</strong></div>`;
         if (rank == ContestRank.Spectacular) {
             tooltipString += '<div>Eligible Types:</div>';
             if (type != ContestType.Balanced) {

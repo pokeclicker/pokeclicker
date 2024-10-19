@@ -29,7 +29,7 @@
                         <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" width="80px" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano" data-bind="attr: {'contest-type': ContestType[type]}">
                             <g data-bind="html: ContestHelper.getRibbonImage(rank, type)"></g>
                         </svg>
-                        <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(rank, type, type))}`"></p>
+                        <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(rank, type, [type]))}`"></p>
                     </button>
                 </div>
             </div>
