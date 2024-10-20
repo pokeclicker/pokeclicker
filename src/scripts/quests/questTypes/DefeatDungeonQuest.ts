@@ -54,7 +54,9 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return this.customDescription ?? `Defeat the ${this.dungeon} dungeon in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} ${this.amount.toLocaleString('en-US')} times.`;
+        const { subRegion } = TownList[this.dungeon];
+        const subRegionName = SubRegions.getSubRegionById(this.region, subRegion).name;
+        return this.customDescription ?? `Defeat the ${this.dungeon} dungeon in ${subRegionName} ${this.amount.toLocaleString('en-US')} times.`;
     }
 
     toJSON() {
