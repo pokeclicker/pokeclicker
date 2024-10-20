@@ -156,7 +156,7 @@ class Dungeon {
             reqsList.push(this.optionalParameters.requirement.hint());
         }
         if (!this.hasUnlockedBoss()) {
-            reqsList.push('You cannot enter this dungeon right now because all of its bosses are locked.')
+            reqsList.push('You cannot enter this dungeon right now because all of its bosses are locked.');
         }
         return reqsList;
     }
