@@ -296,12 +296,12 @@
                                 <div class="col-2">
                                     <img class="clickable key-item" src=""
                                         data-bind="attr:{
-                                        src: 'assets/images/keyitems/' + KeyItemType[$data.name] + '.png'},
-                                css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
-                                'key-item-selected': KeyItemController.inspectedItem() == $data.name
+                                        src: 'assets/images/keyitems/' + KeyItemType[$data.id] + '.png'},
+                                css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.id),
+                                'key-item-selected': KeyItemController.inspectedItem() == $data.id
                                 },
                                 event: {
-                                    mouseover: function(){KeyItemController.hover($data.name)},
+                                    mouseover: function(){KeyItemController.hover($data.id)},
                                     mouseout : function(){KeyItemController.hoverRelease()}
                                     }">
                                 </div>
