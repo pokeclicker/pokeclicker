@@ -508,7 +508,7 @@ class PokemonLocations {
                     } else if (shop instanceof GenericTraderShop) {
                         GenericDeal.list[shop.traderID]?.().forEach(deal => {
                             deal.profits.forEach(profit => {
-                                if (profit.type === 'Item' && this.pokemonNames.includes(profit.item.type)) {
+                                if (profit.type === DealCostOrProfitType.Item && this.pokemonNames.includes(profit.item.type)) {
                                     townTrades[profit.item.type] = true;
                                 }
                             });

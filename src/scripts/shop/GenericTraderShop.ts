@@ -23,7 +23,7 @@ class GenericTraderShop extends Shop {
             const pokemonDeals: PokemonNameType[] = deals
                 .flatMap(deal => deal.profits)
                 .filter(profit => {
-                    if (profit.type === 'Item') {
+                    if (profit.type === DealCostOrProfitType.Item) {
                         return profit.item.isVisible() && profit.item instanceof PokemonItem;
                     }
                     return false;

@@ -8,45 +8,55 @@ import { Currency } from '../GameConstants';
 
 export type GenericTraderShopIdentifier = 'Palaeontologist' | 'EverstoneDealer';
 
+export enum DealCostOrProfitType {
+    Gem = 'Gem',
+    Shard = 'Shard',
+    Berry = 'Berry',
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    Item = 'Item',
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    Amount = 'Amount',
+}
+
 type DealCostProfit = {
     amount: number,
     hidePlayerInventory?: boolean,
 };
 
 type GemDealCost = {
-    type: 'Gem',
+    type: DealCostOrProfitType.Gem,
     gemType: PokemonType,
 } & DealCostProfit;
 
 type ShardDealCost = {
-    type: 'Shard',
+    type: DealCostOrProfitType.Shard,
     shardItem: Item,
 } & DealCostProfit;
 
 type BerryDealCost = {
-    type: 'Berry',
+    type: DealCostOrProfitType.Berry,
     berryType: BerryType,
 } & DealCostProfit;
 
 type ItemDealCost = {
-    type: 'Item',
+    type: DealCostOrProfitType.Item,
     item: Item,
 } & DealCostProfit;
 
 type AmountDealCost = {
-    type: 'Amount',
+    type: DealCostOrProfitType.Amount,
     currency: Amount,
 } & DealCostProfit;
 
 export type DealCost = GemDealCost | ShardDealCost | BerryDealCost | ItemDealCost | AmountDealCost;
 
 type ItemDealProfit = {
-    type: 'Item',
+    type: DealCostOrProfitType.Item,
     item: Item,
 } & DealCostProfit;
 
 type AmountDealProfit = {
-    type: 'Amount',
+    type: DealCostOrProfitType.Amount,
     currency: Amount,
 } & DealCostProfit;
 
@@ -74,7 +84,7 @@ export default class GenericDeal {
     public isVisible(): boolean {
         return this._profits.every(profit => {
             switch (profit.type) {
-                case 'Item':
+                case DealCostOrProfitType.Item:
                     return profit.item.isVisible();
             }
             return true;
@@ -116,19 +126,19 @@ export default class GenericDeal {
         // Lose the cost
         deal._costs.forEach(cost => {
             switch (cost.type) {
-                case 'Item': player.loseItem(cost.item.name, cost.amount * tradeTimes); break;
-                case 'Shard': player.loseItem(cost.shardItem.name, cost.amount * tradeTimes); break;
-                case 'Berry': GameHelper.incrementObservable(App.game.farming.berryList[cost.berryType], -1 * cost.amount * tradeTimes); break;
-                case 'Gem': GameHelper.incrementObservable(App.game.gems.gemWallet[cost.gemType], -1 * cost.amount * tradeTimes); break;
-                case 'Amount': App.game.wallet.loseAmount(new Amount(cost.currency.amount * cost.amount * tradeTimes, cost.currency.currency)); break;
+                case DealCostOrProfitType.Item: player.loseItem(cost.item.name, cost.amount * tradeTimes); break;
+                case DealCostOrProfitType.Shard: player.loseItem(cost.shardItem.name, cost.amount * tradeTimes); break;
+                case DealCostOrProfitType.Berry: GameHelper.incrementObservable(App.game.farming.berryList[cost.berryType], -1 * cost.amount * tradeTimes); break;
+                case DealCostOrProfitType.Gem: GameHelper.incrementObservable(App.game.gems.gemWallet[cost.gemType], -1 * cost.amount * tradeTimes); break;
+                case DealCostOrProfitType.Amount: App.game.wallet.loseAmount(new Amount(cost.currency.amount * cost.amount * tradeTimes, cost.currency.currency)); break;
             }
         });
 
         // Gain the profit
         deal._profits.forEach(profit => {
             switch (profit.type) {
-                case 'Item': profit.item.gain(profit.amount * tradeTimes); break;
-                case 'Amount': App.game.wallet.addAmount(new Amount(profit.currency.amount * profit.amount * tradeTimes, profit.currency.currency), true); break;
+                case DealCostOrProfitType.Item: profit.item.gain(profit.amount * tradeTimes); break;
+                case DealCostOrProfitType.Amount: App.game.wallet.addAmount(new Amount(profit.currency.amount * profit.amount * tradeTimes, profit.currency.currency), true); break;
             }
         });
     }
@@ -136,7 +146,7 @@ export default class GenericDeal {
     public static anySoldOut(deal: GenericDeal) {
         return deal._profits.some(profit => {
             switch (profit.type) {
-                case 'Item':
+                case DealCostOrProfitType.Item:
                     return ItemList[profit.item.name].isSoldOut();
             }
             return false;
@@ -146,15 +156,15 @@ export default class GenericDeal {
     public static maxTrades(deal: GenericDeal) {
         return Math.min(...deal._costs.map(cost => {
             switch (cost.type) {
-                case 'Item':
+                case DealCostOrProfitType.Item:
                     return Math.floor(player.itemList[cost.item.name]() / cost.amount);
-                case 'Shard':
+                case DealCostOrProfitType.Shard:
                     return Math.floor(player.itemList[cost.shardItem.name]() / cost.amount);
-                case 'Berry':
+                case DealCostOrProfitType.Berry:
                     return Math.floor(App.game.farming.berryList[cost.berryType]() / cost.amount);
-                case 'Gem':
+                case DealCostOrProfitType.Gem:
                     return Math.floor(App.game.gems.gemWallet[cost.gemType]() / cost.amount);
-                case 'Amount':
+                case DealCostOrProfitType.Amount:
                     return Math.floor(App.game.wallet.currencies[cost.currency.currency]() / cost.currency.amount * cost.amount);
             }
         }));
@@ -164,10 +174,10 @@ export default class GenericDeal {
         GenericDeal.list.Palaeontologist = ko.observableArray([
             new GenericDeal(
                 [
-                    { type: 'Item', item: ItemList.Palaeontologist_token, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 },
                 ],
                 [
-                    { type: 'Item', item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true },
+                    { type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true },
                 ],
             ),
         ]);
@@ -175,10 +185,10 @@ export default class GenericDeal {
         GenericDeal.list.EverstoneDealer = ko.observableArray([
             new GenericDeal(
                 [
-                    { type: 'Amount', currency: new Amount(375, Currency.diamond), amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(375, Currency.diamond), amount: 1 },
                 ],
                 [
-                    { type: 'Item', item: ItemList.Everstone, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Everstone, amount: 1 },
                 ],
             ),
         ]);
