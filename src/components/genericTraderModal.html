@@ -21,10 +21,8 @@
                         <div class="font-weight-bold">Inv</div>
                         <div class="font-weight-bold"></div>
 
-                        <!-- ko foreach: GenericDeal.getDeals(ShopHandler.shopObservable().traderID) -->
-                        <!-- ko let: { deal: $data } -->
+                        <!-- ko foreach: { data: GenericDeal.getDeals(ShopHandler.shopObservable().traderID), as: 'deal' } -->
                         <div class="align-items-center" style="display: grid; grid-column: 1 / 9; grid-template-columns: subgrid" data-bind="let: { tradeAmount: ko.observable(1) }">
-<!--                            <div class="align-items-center" data-bind="template: { name: 'traderCostProfitItemTemplate', foreach: deal.costs }" style="display: grid; grid-column: 1 / 4; grid-template-columns: subgrid"></div>-->
                             <div class="align-items-center" style="display: grid; grid-column: 1 / 4; grid-template-columns: subgrid">
                                 <!-- ko foreach: deal.costs -->
                                 <!-- ko template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount(), type: 'cost' } } -->
@@ -55,7 +53,6 @@
                         <div style="grid-column: 1 / 9;">
                             <hr>
                         </div>
-                        <!-- /ko -->
                         <!-- /ko -->
                     </div>
                 </div>
