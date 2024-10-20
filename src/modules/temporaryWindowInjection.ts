@@ -12,6 +12,7 @@ import BadgeEnums from './enums/Badges';
 import BerryColor from './enums/BerryColor';
 import BerryFirmness from './enums/BerryFirmness';
 import BerryType from './enums/BerryType';
+import BlendingRecipeType from './enums/BlendingRecipeType';
 import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
@@ -93,6 +94,9 @@ import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
 import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
+import Blending from './berryBlending/Blending';
+import BlendingController from './berryBlending/BlendingController';
+import BlendingRecipes from './berryBlending/BlendingRecipes';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
@@ -179,6 +183,7 @@ import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
 import ConsumableController from './items/ConsumableController';
+import PokeBlock from './items/PokeBlock';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -219,6 +224,7 @@ Object.assign(<any>window, {
     BerryColor,
     BerryFirmness,
     BerryType,
+    BlendingRecipeType,
     SizeUnits,
     PokemonType,
     CaughtStatus,
@@ -307,6 +313,9 @@ Object.assign(<any>window, {
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
     BerriesUnlockedRequirement,
+    Blending,
+    BlendingController,
+    BlendingRecipes,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,
@@ -399,6 +408,7 @@ Object.assign(<any>window, {
     VitaminController,
     Consumable,
     ConsumableController,
+    PokeBlock,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,

@@ -1195,21 +1195,18 @@ export enum UltraBeastType {
 }
 
 export enum PokeBlockColor {
-    Black,
     Red,
     Blue,
     Pink,
     Green,
     Yellow,
-    Gold,
-    Purple,
-    Indigo,
-    Brown,
-    Light_Blue,
-    Olive,
-    Beige,
-    Gray,
     White,
+    Cool,
+    Beautiful,
+    Cute,
+    Smart,
+    Tough,
+    Balanced,
 }
 
 export enum VitaminType {
