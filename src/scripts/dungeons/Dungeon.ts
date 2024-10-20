@@ -179,6 +179,10 @@ class Dungeon {
         }
     }
 
+    public hasUnlockedBoss(): boolean {
+        return this.bossList.some(boss => boss.options?.requirement?.isCompleted() ?? true);
+    }
+
     /**
      * Retreives the weights for all the possible bosses
      */
