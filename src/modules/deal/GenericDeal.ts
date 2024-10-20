@@ -8,15 +8,15 @@ import { Currency } from '../GameConstants';
 
 export type GenericTraderShopIdentifier = 'Palaeontologist' | 'EverstoneDealer';
 
+/* eslint-disable @typescript-eslint/no-shadow */
 export enum DealCostOrProfitType {
     Gem = 'Gem',
     Shard = 'Shard',
     Berry = 'Berry',
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     Item = 'Item',
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     Amount = 'Amount',
 }
+/* eslint-enable @typescript-eslint/no-shadow */
 
 type DealCostProfit = {
     amount: number,
