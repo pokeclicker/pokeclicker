@@ -505,6 +505,14 @@ class PokemonLocations {
                         deals = ShardDeal.list[shop.location]?.();
                     } else if (shop instanceof BerryMasterShop) {
                         deals = BerryDeal.list[shop.location]?.();
+                    } else if (shop instanceof GenericTraderShop) {
+                        GenericDeal.list[shop.traderID]?.().forEach(deal => {
+                            deal.profits.forEach(profit => {
+                                if (profit.type === DealCostOrProfitType.Item && this.pokemonNames.includes(profit.item.type)) {
+                                    townTrades[profit.item.type] = true;
+                                }
+                            });
+                        });
                     }
                     deals?.forEach(deal => {
                         if (this.pokemonNames.includes(deal.item.itemType.type)) {

@@ -190,6 +190,84 @@
                             </div>
                         </div>
 
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-underground-treasure">
+                            <h5 class="m-0 text-light">Underground Treasure</h5>
+                        </div>
+                        <div id="itemBag-underground-treasure" class="collapse show mt-1">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Diamond) -->
+                                    <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-gem-plates">
+                            <h5 class="m-0 text-light">Gem Plates</h5>
+                        </div>
+                        <div id="itemBag-gem-plates" class="collapse show mt-1">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Gem) -->
+                                    <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-fossils">
+                            <h5 class="m-0 text-light">Fossils</h5>
+                        </div>
+                        <div id="itemBag-fossils" class="collapse show mt-1">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <h5 class="card-title col-12 mb-2">Fossils</h5>
+                                    <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Fossil) -->
+                                    <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+
+                                    <h5 class="card-title col-12 mb-2">Fossil Pieces</h5>
+                                    <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.FossilPiece) -->
+                                    <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-shards">
+                            <h5 class="m-0 text-light">Shards</h5>
+                        </div>
+                        <div id="itemBag-shards" class="collapse show mt-1">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Shard) -->
+                                    <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- ko if: Object.values(ItemList).some((i) => i instanceof MegaStoneItem && player.itemList[i.name]()) -->
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-megaStones">
                             <h5 class="m-0 text-light">Mega Stones</h5>
@@ -218,12 +296,12 @@
                                 <div class="col-2">
                                     <img class="clickable key-item" src=""
                                         data-bind="attr:{
-                                        src: 'assets/images/keyitems/' + KeyItemType[$data.name] + '.png'},
-                                css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
-                                'key-item-selected': KeyItemController.inspectedItem() == $data.name
+                                        src: 'assets/images/keyitems/' + KeyItemType[$data.id] + '.png'},
+                                css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.id),
+                                'key-item-selected': KeyItemController.inspectedItem() == $data.id
                                 },
                                 event: {
-                                    mouseover: function(){KeyItemController.hover($data.name)},
+                                    mouseover: function(){KeyItemController.hover($data.id)},
                                     mouseout : function(){KeyItemController.hoverRelease()}
                                     }">
                                 </div>

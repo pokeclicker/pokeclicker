@@ -19,7 +19,7 @@ export default class ChristmasPresent extends Item {
             [Currency.money]: 50 * 3 ** scaling,
             [Currency.questPoint]: 5 * (1 + scaling) ** 2,
             [Currency.dungeonToken] : 35 * 2 ** scaling,
-            [Currency.diamond]: 1 + scaling * 2,
+            [Currency.diamond]: 5 * (1 + scaling) ** 2,
             [Currency.farmPoint]: 15 * (1 + scaling) ** 2,
         };
         const cur = Number(Rand.fromArray(Object.keys(values)));
@@ -30,7 +30,7 @@ export default class ChristmasPresent extends Item {
             image: this.image,
         });
     }
-    
+
     get description(): string {
         return 'A lovely Christmas Present.';
     }
