@@ -266,6 +266,46 @@ class PartyController {
         });
     }
 
+    private static pokeblockSortedList = [];
+    static getPokeblockSortedList = ko.pureComputed(() => {
+        // If the pokeblock modal is open, we should sort it.
+        if (DisplayObservables.modalState.pokeblockModal === 'show') {
+            PartyController.pokeblockSortedList = PartyController.getPokeblockFilteredList();
+            return PartyController.pokeblockSortedList.sort(PartyController.compareBy(Settings.getSetting('pokeblockSort').observableValue(), Settings.getSetting('pokeblockSortDirection').observableValue()));
+        }
+        return PartyController.pokeblockSortedList;
+    }).extend({ rateLimit: 100 });
+
+    static getPokeblockFilteredList(): Array<PartyPokemon> {
+        return App.game.party.caughtPokemon.filter((pokemon) => {
+            const pokeblock = ItemList[`PokeBlock_${GameConstants.PokeBlockColor[PokeBlockController.currentlySelected()]}`] as PokeBlock;
+            if (!pokeblock.canUse(pokemon)) {
+                return false;
+            }
+            if (!(Settings.getSetting('pokeblockSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
+                return false;
+            }
+            if (Settings.getSetting('pokeblockRegionFilter').observableValue() > -2) {
+                if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('pokeblockRegionFilter').observableValue()) {
+                    return false;
+                }
+            }
+            const type = Settings.getSetting('pokeblockTypeFilter').observableValue();
+            if (type > -1 && !pokemonMap[pokemon.name].contestTypes.includes(type)) {
+                return false;
+            }
+            // return monotypes if they match the block's type
+            if (pokeblock.contestType != undefined && pokeblock.contestType === type && pokemonMap[pokemon.name].contestTypes.length > 1) {
+                return false;
+            }
+            if (Settings.getSetting('pokeblockHideShinyPokemon').observableValue() && pokemon.shiny) {
+                return false;
+            }
+
+            return true;
+        });
+    }
+
     private static pokemonsWithHeldItemSortedList = [];
     static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.

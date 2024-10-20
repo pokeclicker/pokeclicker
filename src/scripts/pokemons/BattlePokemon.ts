@@ -6,6 +6,8 @@ class BattlePokemon implements EnemyPokemonInterface {
     maxHealth: KnockoutObservable<number>;
     healthPercentage: KnockoutObservable<number>;
     _displayName: KnockoutObservable<string>;
+    support: KnockoutObservable<number>;
+    supportPercentage: KnockoutObservable<number>;
 
     /**
      * In case you want to manually create a Pokémon instead of generating it from the route number
@@ -46,10 +48,16 @@ class BattlePokemon implements EnemyPokemonInterface {
         this.maxHealth = ko.observable(maxHealth);
         this.healthPercentage = ko.observable(100);
         this._displayName = PokemonHelper.displayName(name);
+        this.support = ko.observable(0);
+        this.supportPercentage = ko.observable(0);
     }
 
     public isAlive(): boolean {
         return this.health() > 0;
+    }
+
+    public isRallied(): boolean {
+        return this.support() >= this.maxHealth();
     }
 
     /**
@@ -59,6 +67,15 @@ class BattlePokemon implements EnemyPokemonInterface {
     public damage(damage: number): void {
         this.health(Math.max(0, this.health() - damage));
         this.healthPercentage(Math.floor(this.health() / this.maxHealth() * 100));
+    }
+
+    /**
+     * Gain assist points
+     * @param rally
+     */
+    public rally(rally: number): void {
+        this.support(Math.min(this.support() + rally, this.maxHealth()));
+        this.supportPercentage(Math.floor(this.support() / this.maxHealth() * 100));
     }
 
     public defeat(trainer = false): void {

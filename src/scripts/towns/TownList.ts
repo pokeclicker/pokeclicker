@@ -9,6 +9,7 @@
 ///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
 ///<reference path="PokemonContest.ts"/>
+///<reference path="../contest/ContestHall.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -2349,21 +2350,36 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
 
 //Hoenn Contest Shop
 const HoennContestShop = new Shop([
-    ItemList['Tangela (Pom-pom)'],
-    ItemList['Goldeen (Diva)'],
-    ItemList['Weepinbell (Fancy)'],
-    ItemList['Onix (Rocker)'],
-    ItemList['Dugtrio (Punk)'],
-    ItemList['Gengar (Punk)'],
-    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+    // ItemList['Tangela (Pom-pom)'],
+    // ItemList['Goldeen (Diva)'],
+    // ItemList['Weepinbell (Fancy)'],
+    // ItemList['Onix (Rocker)'],
+    // ItemList['Dugtrio (Punk)'],
+    // ItemList['Gengar (Punk)'],
+    ItemList.Pokeblock_case, // only for dev
+    ItemList.PokeBlock_Red,
+    ItemList.PokeBlock_Blue,
+    ItemList.PokeBlock_Pink,
+    ItemList.PokeBlock_Green,
+    ItemList.PokeBlock_Yellow,
+    ItemList.PokeBlock_White,
+    ItemList.PokeBlock_Cool,
+    ItemList.PokeBlock_Beautiful,
+    ItemList.PokeBlock_Cute,
+    ItemList.PokeBlock_Smart,
+    ItemList.PokeBlock_Tough,
+    ItemList.PokeBlock_Balanced,
+    // new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    // new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    // new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    // new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
 ], 'Contest Shop', [PokemonContestController.requirements]);
 
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMaster);
 const HoennStoneSalesman = new GemMasterShop(GameConstants.GemShops.HoennStoneSalesman, 'Stone Salesman', [new TemporaryBattleRequirement('Hoenn Stone Salesman')], true);
+
+const SpectacularContestHall = new ContestHall([ContestRank.Spectacular], [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Balanced]);
 
 //Hoenn NPCs
 
@@ -3298,7 +3314,7 @@ TownList['Slateport City'] = new Town(
     'Slateport City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [SlateportCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Slateport City'])],
+    [new ContestHall([ContestRank.Hyper]), SlateportCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Slateport City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave'))],
         npcs: [SlateportHoennRoamerNPC, MrStone1, MrStone2],
@@ -3328,7 +3344,7 @@ TownList['Verdanturf Town'] = new Town(
     'Verdanturf Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [VerdanturfTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Verdanturf Town'])],
+    [new ContestHall([ContestRank.Normal]), VerdanturfTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Verdanturf Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 117)],
     }
@@ -3346,7 +3362,7 @@ TownList['Fallarbor Town'] = new Town(
     'Fallarbor Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, HoennStoneSalesman, TemporaryBattleList['Hoenn Stone Salesman']],
+    [new ContestHall([ContestRank.Super]), FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, HoennStoneSalesman, TemporaryBattleList['Hoenn Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
         npcs: [FallarborProfessorCozmo, Cozmo1, HoennStoneSalesman1, HoennStoneSalesman2],
@@ -3400,7 +3416,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop],
+    [new ContestHall([ContestRank.Master]), SpectacularContestHall, DepartmentStoreShop, HoennContestShop],
     //[new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
@@ -4118,6 +4134,9 @@ const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Mulch_Shovel,
 ], 'Secret Berry Shop');
 
+// TODO: add to Hearthome when done
+const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master']], undefined, 'Sinnoh Contests');
+const BrilliantShiningContestHall = new ContestHall([ContestRank['Brilliant Shining']], [ContestType.Balanced]);
 
 //Sinnoh NPCs
 
@@ -4556,6 +4575,7 @@ TownList['Hearthome City'] = new Town(
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
     [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
+    // TODO: SuperContests, BrilliantShiningContestHall
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
         npcs: [HearthomeContestFan, LucyStevens1, HappinyWitness6],
