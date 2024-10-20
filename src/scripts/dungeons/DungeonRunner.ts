@@ -254,6 +254,12 @@ class DungeonRunner {
             return;
         }
 
+        if (!DungeonRunner.dungeon.hasUnlockedBoss()) {
+            // Prevent the player from being unable to finish the dungeon if somehow all the bosses became locked after entering
+            DungeonRunner.dungeonWon();
+            return;
+        }
+
         DungeonRunner.fightingBoss(true);
         DungeonBattle.generateNewBoss();
     }

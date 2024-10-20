@@ -136,6 +136,10 @@ class Dungeon {
         if (dungeonRequirement ? !dungeonRequirement.isCompleted() : !dungeonTown.isUnlocked()) {
             return false;
         }
+        // Player should not access the dungeon if every boss is locked
+        if (!this.hasUnlockedBoss()) {
+            return false;
+        }
         return true;
     }
 
@@ -177,6 +181,10 @@ class Dungeon {
                 return false;
             }).map(b => <DungeonBossPokemon>b);
         }
+    }
+
+    public hasUnlockedBoss(): boolean {
+        return this.bossList.some(boss => boss.options?.requirement?.isCompleted() ?? true);
     }
 
     /**
