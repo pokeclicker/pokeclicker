@@ -200,7 +200,7 @@ class MapHelper {
 
     public static isTownCurrentLocation(townName: string): boolean {
         if (App.game.gameState == GameConstants.GameState.temporaryBattle) {
-            return TemporaryBattleRunner.battleObservable().getTown().name == townName;
+            return TemporaryBattleRunner.battleObservable().getTown()?.name == townName;
         }
         return !player.route && player.town.name == townName;
     }
