@@ -239,7 +239,7 @@ class DungeonBattle extends Battle {
         const pokemon = this.trainer().getTeam()[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
         const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
-        const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened(), baseHealth, level, DungeonRunner.fightingBoss());
+        const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened(), baseHealth, level, DungeonRunner.fightingBoss(), this.trainer().getTeam().length);
 
         this.enemyPokemon(enemyPokemon);
     }

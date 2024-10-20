@@ -203,9 +203,13 @@ class PartyController {
             if (!HeldItem.heldItemSelected()?.canUse(pokemon)) {
                 return false;
             }
-            if (!(Settings.getSetting('heldItemSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
+
+            const testString = Settings.getSetting('heldItemDropdownPokemonOrItem').observableValue() === 'pokemon'
+                ? pokemon.displayName : pokemon.heldItem()?.displayName;
+            if (!(Settings.getSetting('heldItemSearchFilter') as SearchSetting).regex().test(testString)) {
                 return false;
             }
+
             if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
                 if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
                     return false;
@@ -218,7 +222,7 @@ class PartyController {
             if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && pokemon.heldItem()) {
                 return false;
             }
-            if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && pokemon.heldItem() !== HeldItem.heldItemSelected()) {
+            if (Settings.getSetting('heldItemHideHoldingThisItem').observableValue() && pokemon.heldItem() === HeldItem.heldItemSelected()) {
                 return false;
             }
 
