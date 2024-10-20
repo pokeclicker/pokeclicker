@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const gulp = require('gulp');
 const changed = require('gulp-changed');
-const minifyHtml = require('gulp-minify-html');
 const concat = require('gulp-concat');
 const autoprefix = require('gulp-autoprefixer');
-const minifyCSS = require('gulp-minify-css');
+const cleanCSS = require('gulp-clean-css');
 const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
 const less = require('gulp-less');
@@ -84,7 +83,6 @@ const srcs = {
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
         'node_modules/sortablejs/Sortable.min.js',
-        'src/libs/*.js',
     ],
 };
 
@@ -139,10 +137,9 @@ gulp.task('browserSync', () => {
 gulp.task('compile-html', (done) => {
     const htmlDest = './build';
     const stream = gulp.src('./src/index.html');
-    // If we want the development banner displayed
-    stream.pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER));
 
     stream.pipe(plumber())
+        .pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER)) // If we want the development banner displayed
         .pipe(gulpImport('./src/components/'))
         .pipe(replace('$VERSION', version))
         .pipe(replace('$DEVELOPMENT', !!config.DEVELOPMENT))
@@ -230,7 +227,7 @@ gulp.task('styles', () => gulp.src(srcs.styles)
     .pipe(less())
     .pipe(concat('styles.min.css'))
     .pipe(autoprefix('last 2 versions'))
-    .pipe(minifyCSS())
+    .pipe(cleanCSS())
     .pipe(gulp.dest(dests.styles))
     .pipe(browserSync.reload({stream: true})));
 
