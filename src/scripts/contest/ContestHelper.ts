@@ -1,6 +1,6 @@
 /// <reference path="../../declarations/enums/ContestType.d.ts"/>
 class ContestHelper {
-    public static calculatePokemonContestAppeal(conRank: ContestRank = ContestRank.Normal, conType: ContestType = ContestType.None, types: ContestType[] = [ContestType.None], pokemons?: PartyPokemon[], includeBreeding = false): number {
+    public static calculatePokemonContestAppeal(conRank: ContestRank, conType: ContestType, types: ContestType[], pokemons?: PartyPokemon[], includeBreeding = false): number {
         let appeal = 0;
         const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
         for (const pokemon of pks) {
