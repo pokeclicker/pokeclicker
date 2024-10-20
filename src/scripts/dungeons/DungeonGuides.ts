@@ -149,6 +149,7 @@ class DungeonGuides {
 
     public static hire(): void {
         const guide = this.list[this.selected()];
+        const dungeon = player.town.dungeon;
         // Check player has enough currency
         if (!this.canAfford()) {
             Notifier.notify({
@@ -159,8 +160,8 @@ class DungeonGuides {
             });
             return;
         }
-        // Just in case a dungeon was re-locked
-        if (!player.town.dungeon.isUnlocked()) {
+        // Just in case the dungeon is locked or something
+        if (!DungeonRunner.canStartDungeon(dungeon)) {
             Notifier.notify({
                 title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${guide.trainerSprite}.png" height="24px" class="pixelated"/> ${guide.name}`,
                 message: 'You can\'t access that dungeon right now!',
@@ -177,7 +178,7 @@ class DungeonGuides {
         // Hire the guide
         guide.hire();
         // Start the dungeon
-        DungeonRunner.initializeDungeon(player.town.dungeon);
+        DungeonRunner.initializeDungeon(dungeon);
     }
 
     public static getRandomWeightedNearbyTile(nearbyTiles: DungeonTile[]): DungeonTile {

@@ -125,11 +125,6 @@ class Dungeon {
     }
 
     public isUnlocked(): boolean {
-        // Even if its requirements are unlocked, players cannot access a dungeon in the rare cases where every boss is locked
-        return this.allRequirementsCompleted() && this.hasUnlockedBoss();
-    }
-
-    public allRequirementsCompleted(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
         if (!App.game.keyItems.hasKeyItem(KeyItemType.Dungeon_ticket)) {
             return false;
@@ -154,9 +149,6 @@ class Dungeon {
         });
         if (this.optionalParameters.requirement ? !this.optionalParameters.requirement.isCompleted() : false) {
             reqsList.push(this.optionalParameters.requirement.hint());
-        }
-        if (!this.hasUnlockedBoss()) {
-            reqsList.push('You cannot enter this dungeon right now because all of its bosses are locked.');
         }
         return reqsList;
     }
