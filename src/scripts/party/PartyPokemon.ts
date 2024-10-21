@@ -436,16 +436,6 @@ class PartyPokemon implements Saveable {
                     break;
                 }
 
-                // If the mon has 3 types and one of them is Balanced, remove it. Otherwise, all types are different and combine into Balanced
-                if (conTypes.length > 2) {
-                    if (this.currentContestTypes.includes(ContestType.Balanced)) {
-                        conTypes = conTypes.filter((type) => type != ContestType.Balanced);
-                    } else {
-                        conTypes = [];
-                        blockType = ContestType.Balanced;
-                    }
-                }
-
                 conTypes.push(blockType);
 
                 // Apply the new contest types in order
