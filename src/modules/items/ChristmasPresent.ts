@@ -28,6 +28,7 @@ export default class ChristmasPresent extends Item {
             message: `You opened the gift and received <img src="assets/images/currency/${Currency[cur]}.svg" height="24px"/> ${amount.toLocaleString('en-US')}.`,
             type: NotificationConstants.NotificationOption.success,
             image: this.image,
+            setting: NotificationConstants.NotificationSetting.Items.dropped_item,
         });
     }
 
