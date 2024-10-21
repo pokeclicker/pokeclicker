@@ -55,6 +55,8 @@ class EvolutionHandler {
             evolvedPartyPokemon.shiny = evolvedPartyPokemon.shiny || basePartyPokemon.shiny;
             evolvedPartyPokemon.attackBonusAmount = bonusAttack;
             evolvedPartyPokemon.vitaminsUsed = basePartyPokemon.vitaminsUsed;
+            evolvedPartyPokemon.nickname = basePartyPokemon.nickname;
+            evolvedPartyPokemon.category = basePartyPokemon.category;
             if (basePartyPokemon.heldItem()?.canUse(evolvedPartyPokemon)) {
                 evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
             }
