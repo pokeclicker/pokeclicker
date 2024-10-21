@@ -1513,7 +1513,6 @@ class Farming implements Feature {
                 BerryType.Grepa,
             ]));
         // Rindo
-        // TODO: HLXII - Change mutation to grow spontaneously when Grass pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Rindo,
             [[10, 15], [0, 0], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
@@ -1543,7 +1542,6 @@ class Farming implements Feature {
             hint: 'I\'ve heard that growing a Watmel Berry near exactly three of its kind will cause it to change!',
         }));
         // Coba
-        // TODO: HLXII - Change mutation to grow spontaneously when Flying pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Coba,
             [[0, 0], [10, 15], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
@@ -1687,7 +1685,6 @@ class Farming implements Feature {
             },
         }));
         // Lansat
-        // TODO: HLXII - Add Mutation to evolve Payapa when Milotic, Gardevoir, Blissey, and Togekiss in party.
         this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, [{ berry: BerryType.Roseli, amountRequired: 23 }], {
             chanceModifier: (chance: number) => chance * (App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Dialga').id]() > 0 ? 2 : 1),
             hint: 'Legends tell of a mysterious Berry that only appears in a field of Roseli Berries and that the power of Dialga helps reveal.',
