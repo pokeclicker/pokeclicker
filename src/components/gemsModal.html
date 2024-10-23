@@ -59,7 +59,7 @@
                         <div class="d-flex align-items-center">
                             <img width="32px" height="32px" data-bind='attr: { src: Gems.image(gemIndex()) }'/>
                             <div class="flex-grow-1 text-center">
-                                <div class="badge text-light px-1" style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="style: { 'background-color': TypeColor[gemIndex()] }">
+                                <div class="badge text-light px-1" style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="style: { 'background-color': GameConstants.TypeColor[gemIndex()] }">
                                   <strong data-bind="text: PokemonType[gemIndex()]"></strong>
                                 </div>
                                 <div data-bind="text: App.game.gems.gemWallet[gemIndex()]()?.toLocaleString('en-US')"></div>
@@ -83,7 +83,7 @@
 
                                         <div>
                                             <!-- ko foreach: TypeHelper.typeMatrix[gemIndex()].map((value, index) => value === TypeHelper.typeToValue($index()) ? index : -1).filter(value => value >= 0) -->
-                                            <span class="badge text-light px-1" style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="style: { 'background-color': TypeColor[$data] }">
+                                            <span class="badge text-light px-1" style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="style: { 'background-color': GameConstants.TypeColor[$data] }">
                                               <small><strong data-bind="text: PokemonType[$data]"></strong></small>
                                             </span>
                                             <!-- /ko -->
@@ -99,7 +99,7 @@
                                     <div class="p-0">
                                         <div class="d-flex" style="gap: 1px">
                                             <!-- ko foreach: [...Array(10).keys()] -->
-                                            <div class="flex-grow-1" style="height: 5px" data-bind="style: { 'background-color': TypeColor[gemIndex()], filter: `brightness(${App.game.gems.getGemUpgrade(gemIndex(), $parentContext.$index()) > $index() ? 1 : 0.5})` }"></div>
+                                            <div class="flex-grow-1" style="height: 5px" data-bind="style: { 'background-color': GameConstants.TypeColor[gemIndex()], filter: `brightness(${App.game.gems.getGemUpgrade(gemIndex(), $parentContext.$index()) > $index() ? 1 : 0.5})` }"></div>
                                             <!-- /ko -->
                                         </div>
                                     </div>

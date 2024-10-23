@@ -235,10 +235,10 @@ class PokemonFactory {
     private static roamingEncounter(routeNum: number, region: GameConstants.Region, subRegion: SubRegion): boolean {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);
-        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
+        const routes = Routes.getRoutesByRegion(region).filter(r => RoamingPokemonList.findGroup(region, r.subRegion || 0) == RoamingPokemonList.findGroup(region, subRegion.id));
 
         // Check if the dice rolls in their favor
-        const encounter = PokemonFactory.roamingChance(Math.max(...routes), Math.min(...routes), route, region, subRegion);
+        const encounter = PokemonFactory.roamingChance(route, routes, region, subRegion);
         if (!encounter) {
             return false;
         }
@@ -253,12 +253,13 @@ class PokemonFactory {
         return true;
     }
 
-    private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
+    private static roamingChance(curRoute: RegionRoute, allRoutes: RegionRoute[], region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('roaming');
-        const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
+        const maxRoute = allRoutes.length - 1;
+        const routeInd = allRoutes.indexOf(curRoute);
         // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, RoamingPokemonList.findGroup(region, subRegion.id))()?.number == curRoute?.number;
-        const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / ((increasedChance ? 3 : 1) * bonus);
+        const roamingChance = (max + ((min - max) * (maxRoute - routeInd) / (maxRoute))) / ((increasedChance ? GameConstants.ROAMING_INCREASED_CHANCE : 1) * bonus);
         return Rand.chance(roamingChance);
     }
 

@@ -305,7 +305,7 @@
         { name: "Underground Entrance"
         , x: 3, y: 56
         , width: 3, height: 4
-        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        , databind: "click:function(){UndergroundController.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
         })
      %>
 
@@ -325,23 +325,10 @@
         })
      %>
 
-     <%- include('templates/mapOverlay',
-         { name: "Instructor Jacq's Blimp"
-         , x: 94, y: 57
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Cabo Poco')}, attr:{ class: MapHelper.calculateTownCssClass('Cabo Poco') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_empty.png"
-         })
-     %>
-
-     <%- include('templates/mapOverlay',
-         { name: "Instructor Jacq's Blimp"
-         , x: 94, y: 57
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Cabo Poco')}, attr:{ class: MapHelper.calculateTownCssClass('Cabo Poco') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_pikachu.png"
-         })
-     %>
+    <%- include('templates/mapBlimp',
+        { name: "Instructor Jacq"
+        , x: 94, y: 57
+        , town: "Cabo Poco"
+        })
+    %>
 </g>

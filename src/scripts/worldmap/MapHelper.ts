@@ -168,9 +168,9 @@ class MapHelper {
 
         if (!MapHelper.accessToRoute(route, region)) {
             cls = areaStatus[areaStatus.locked];
-        } else  if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+        } else if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
             cls = areaStatus[areaStatus.incomplete];
-        } else  if (RouteHelper.isThereQuestAtLocation(route, region)) {
+        } else if (RouteHelper.isThereQuestAtLocation(route, region)) {
             cls = areaStatus[areaStatus.questAtLocation];
         } else if (!RouteHelper.routeCompleted(route, region, false)) {
             cls = areaStatus[areaStatus.uncaughtPokemon];
@@ -344,6 +344,45 @@ class MapHelper {
             }
             $('#pickStarterModal').modal('show');
         }
+    }
+
+    public static getBlimpData(professorName = ''): Blimp {
+        const baseProps = {
+            name: `${professorName}'s Blimp`,
+            width: 6 * 16,
+            height: 3 * 16,
+            image: '',
+        };
+
+        if (!MapHelper.ableToTravel()) {
+            return baseProps as Blimp;
+        }
+
+
+
+        if (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special) {
+            return new Blimp(
+                baseProps.name,
+                baseProps.width,
+                baseProps.height,
+                'assets/images/map/blimp_pikachu.png'
+            );
+        } else if (!App.game.challenges.list.requireCompletePokedex.active()) {
+            return new Blimp(
+                'Team Rocket\'s Blimp',
+                4 * 16,
+                8 * 16,
+                'assets/images/map/blimp_meowth.png'
+            );
+        } else {
+            return new Blimp(
+                baseProps.name,
+                baseProps.width,
+                baseProps.height,
+                'assets/images/map/blimp_empty.png'
+            );
+        }
+
     }
 
 }
