@@ -152,11 +152,22 @@ class DungeonGuides {
             return;
         }
         const guide = this.list[this.selected()];
+        const dungeon = player.town.dungeon;
         // Check player has enough currency
         if (!this.canAfford()) {
             Notifier.notify({
                 title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${guide.trainerSprite}.png" height="24px" class="pixelated"/> ${guide.name}`,
                 message: 'You can\'t currently afford to hire me...',
+                type: NotificationConstants.NotificationOption.warning,
+                timeout: 30 * GameConstants.SECOND,
+            });
+            return;
+        }
+        // Just in case the dungeon is locked or something
+        if (!DungeonRunner.canStartDungeon(dungeon)) {
+            Notifier.notify({
+                title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${guide.trainerSprite}.png" height="24px" class="pixelated"/> ${guide.name}`,
+                message: 'You can\'t access that dungeon right now!',
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 30 * GameConstants.SECOND,
             });
@@ -169,7 +180,7 @@ class DungeonGuides {
         // Hide modals
         $('.modal.show').modal('hide');
         // Start the dungeon
-        DungeonRunner.initializeDungeon(player.town.dungeon);
+        DungeonRunner.initializeDungeon(dungeon);
     }
 
     public static getRandomWeightedNearbyTile(nearbyTiles: DungeonTile[]): DungeonTile {
