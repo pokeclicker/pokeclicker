@@ -148,6 +148,9 @@ class DungeonGuides {
     }
 
     public static hire(): void {
+        if (DungeonGuides.hired()) {
+            return;
+        }
         const guide = this.list[this.selected()];
         // Check player has enough currency
         if (!this.canAfford()) {
@@ -159,13 +162,12 @@ class DungeonGuides {
             });
             return;
         }
-        // Charge the player
+        // Charge the player and hire the guide
+        guide.hire();
         this.calcCost().forEach((cost) => App.game.wallet.loseAmount(cost));
         App.game.wallet.loseAmount(this.calcDungeonCost());
         // Hide modals
         $('.modal.show').modal('hide');
-        // Hire the guide
-        guide.hire();
         // Start the dungeon
         DungeonRunner.initializeDungeon(player.town.dungeon);
     }
