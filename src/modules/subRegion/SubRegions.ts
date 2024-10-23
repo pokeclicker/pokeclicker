@@ -31,7 +31,11 @@ export default class SubRegions {
     }
 
     public static getSubRegions(region: Region): SubRegion[] {
-        return this.list[region]?.filter((s) => s.unlocked());
+        return this.list[region] ?? [];
+    }
+
+    public static getUnlockedSubRegions(region: Region): SubRegion[] {
+        return this.list[region]?.filter((s) => s.unlocked()) ?? [];
     }
 
     public static getSubRegion(region: Region, subregion: string): SubRegion {
