@@ -222,15 +222,7 @@ class BreedingController {
     }
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon): number {
-        // Check if regional debuff is active
-        if (App.game.challenges.list.regionalAttackDebuff.active()) {
-            // Check if regional debuff being applied for sorting
-            const regionalAttackDebuff = Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue();
-            if (regionalAttackDebuff > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== regionalAttackDebuff) {
-                return App.game.party.getRegionAttackMultiplier();
-            }
-        }
-        return 1.0;
+        return PartyController.calculateRegionalMultiplier(pokemon, Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue());
     }
 
     // Queue size limit setting
