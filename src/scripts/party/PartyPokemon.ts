@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/party/LevelType.d.ts" />
+
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
@@ -72,8 +74,9 @@ class PartyPokemon implements Saveable {
         public gender,
         shadow: GameConstants.ShadowStatus
     ) {
-        this.vitaminsUsed = {};
-        GameHelper.enumNumbers(GameConstants.VitaminType).forEach(i => this.vitaminsUsed[i] = ko.observable(0).extend({ numeric: 0 }));
+        this.vitaminsUsed = Object.fromEntries(GameHelper.enumNumbers(GameConstants.VitaminType).map((vitamin) => {
+            return [vitamin, ko.observable(0).extend({ numeric: 0 })];
+        })) as Record<GameConstants.VitaminType, KnockoutObservable<number>>;
         this._breeding = ko.observable(false).extend({ boolean: null });
         this._shiny = ko.observable(shiny).extend({ boolean: null });
         this._level = ko.observable(1).extend({ numeric: 0 });
@@ -221,6 +224,23 @@ class PartyPokemon implements Saveable {
         return result;
     }
 
+    public gainLevels(amount: number): number {
+        if (amount < 0) {
+            throw new Error(`PartyPokemon ${this.name} cannot gain negative levels!`);
+        }
+        const oldLevel = this.level;
+        const newLevel = Math.min(this.level + amount, App.game.badgeCase.maxLevel());
+        if (oldLevel !== newLevel) {
+            this.level = newLevel;
+            // Adjust exp to match
+            const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
+            this.exp = levelRequirements[levelType][newLevel - 1];
+            // Just leveled up so...
+            this.checkForLevelEvolution();
+        }
+        return newLevel - oldLevel;
+    }
+
     public checkForLevelEvolution() {
         if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
@@ -329,6 +349,12 @@ class PartyPokemon implements Saveable {
             case GameConstants.ConsumableType.Rare_Candy:
             case GameConstants.ConsumableType.Magikarp_Biscuit:
                 amount = Math.min(amount, player.itemList[itemName]());
+                if (this.breeding) {
+                    return Notifier.notify({
+                        message : `You cannot use ${ItemList[itemName].displayName} on Pokémon in the hatchery.`,
+                        type : NotificationConstants.NotificationOption.danger,
+                    });
+                }
                 const curAttack = this.calculateAttack(true);
                 const bonus = GameConstants.BREEDING_ATTACK_BONUS * ((ItemList[itemName] as AttackGainConsumable).bonusMultiplier ?? 1);
                 GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
@@ -337,6 +363,11 @@ class PartyPokemon implements Saveable {
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
+                const levelsGained = this.gainLevels(amount);
+                if (levelsGained === 0) {
+                    // Rare Candies cause level evolutions even at max level
+                    this.checkForLevelEvolution();
+                }
                 break;
             default :
         }
@@ -374,7 +405,11 @@ class PartyPokemon implements Saveable {
     getBreedingAttackBonus = ko.pureComputed((): number => {
         const attackBonusPercent = (GameConstants.BREEDING_ATTACK_BONUS + this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100;
         const proteinBoost = this.vitaminsUsed[GameConstants.VitaminType.Protein]();
-        return (this.baseAttack * attackBonusPercent) + proteinBoost;
+        let attackBonus = (this.baseAttack * attackBonusPercent) + proteinBoost;
+        if (Settings.getSetting('breedingEfficiencyAllModifiers').observableValue()) {
+            attackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
+        }
+        return attackBonus;
     });
 
     heldItemAttackBonus = ko.pureComputed((): number => {
@@ -386,11 +421,7 @@ class PartyPokemon implements Saveable {
     });
 
     breedingEfficiency = ko.pureComputed((): number => {
-        let breedingAttackBonus = this.getBreedingAttackBonus();
-        if (Settings.getSetting('breedingEfficiencyAllModifiers').observableValue()) {
-            breedingAttackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
-        }
-
+        const breedingAttackBonus = this.getBreedingAttackBonus();
         return (breedingAttackBonus / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
     });
 
@@ -636,7 +667,13 @@ class PartyPokemon implements Saveable {
 
         // Don't save anything that is the default option
         Object.entries(output).forEach(([key, value]) => {
-            if (value === this.defaults[PartyPokemonSaveKeys[key]]) {
+            const defaultValue = this.defaults[PartyPokemonSaveKeys[key]];
+            if (Array.isArray(value) && Array.isArray(defaultValue)) {
+                // Compare array contents
+                if (value.length === defaultValue.length && value.every((v, i) => v === defaultValue[i])) {
+                    delete output[key];
+                }
+            } else if (value === defaultValue) {
                 delete output[key];
             }
         });

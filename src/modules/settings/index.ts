@@ -115,8 +115,15 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
     ],
     'queue'));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
-Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
-Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
+// Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
+// Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
+Settings.add(new Setting<string>('showFarmModule', 'Show Farm module on main screen',
+    [
+        new SettingOption('Never', 'never'),
+        new SettingOption('Limited Controls', 'limited'),
+        new SettingOption('Extended Controls', 'extended'),
+    ],
+    'extended'));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
@@ -136,9 +143,9 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
-Settings.add(new BooleanSetting('showUndergroundModuleMineControls', 'Show Underground module mine controls', true));
-Settings.add(new BooleanSetting('showUndergroundModuleDailyTrades', 'Show Underground module daily trades', false));
+Settings.add(new BooleanSetting('enableUndergroundModuleMineControls', 'Enable Underground module mine controls', true));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
@@ -213,12 +220,6 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
 
-// Underground
-Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Plates', 'Reduced Plates', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Evolution_Items', 'Reduced Evolution Items', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Fossil_Pieces', 'Reduced Fossil Pieces', true, undefined, false));
-
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
 Settings.add(new BooleanSetting('partyShowPurifiedShadowSprites', 'Show party shadow sprites', false));
@@ -266,11 +267,12 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id, undefined, false));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false, undefined, false));
+Settings.add(new Setting<string>('heldItemDropdownPokemonOrItem', 'Pokémon or Item', [new SettingOption('Pokémon', 'pokemon'), new SettingOption('Item', 'item')], 'pokemon', undefined, false));
 Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2, undefined, false));
 Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
-Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false, undefined, false));
+Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
 
 // Hatchery Filters
 export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',
@@ -449,8 +451,8 @@ Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lo
 
 Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 'H'));
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
-Settings.add(new HotkeySetting('hotkey.underground.survey', 'Survey', 'S'));
-Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Bomb', 'B'));
+Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Switch to Bomb', 'B'));
+Settings.add(new HotkeySetting('hotkey.underground.survey', 'Switch to Survey', 'S'));
 
 Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'W', { prefix: '↑ or ' }));
 Settings.add(new HotkeySetting('hotkey.dungeon.left', 'Move Left', 'A', { prefix: '← or ' }));
@@ -489,6 +491,7 @@ Settings.add(new Setting('discord-rp.large-image', 'Discord main image',
         new SettingOption('Fire Environment', 'background-fire'),
         new SettingOption('Forest Environment', 'background-forest'),
         new SettingOption('Grass Environment', 'background-grass'),
+        new SettingOption('Desert Environment', 'background-desert'),
         new SettingOption('Graveyard Environment', 'background-graveyard'),
         new SettingOption('Ice Environment', 'background-ice'),
         new SettingOption('Mansion Environment', 'background-mansion'),
@@ -530,7 +533,7 @@ Object.keys(LogBookTypes).forEach((logBookType) => {
 
 Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
 Settings.add(new BooleanSetting('catchFilters.invertPriorityOrder', 'Catch Filters priority inverted (bottom-to-top)', false));
-Settings.add(new BooleanSetting('breedingEfficiencyAllModifiers', 'Include attack modifiers (held item, EVs, shadow/purified) in Breeding Efficiency', true));
+Settings.add(new BooleanSetting('breedingEfficiencyAllModifiers', 'Include Attack modifiers (Held Item, EVs, Shadow/Purified) in Attack Bonus and Breeding Efficiency', true));
 
 // Modal Collapsible Panels
 ModalCollapseList.forEach((collapse) => {

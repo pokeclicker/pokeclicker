@@ -1,4 +1,4 @@
-///<reference path="../GameConstants.d.ts"/>
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 
 enum PokemonLocationType {
     Route,
@@ -505,6 +505,14 @@ class PokemonLocations {
                         deals = ShardDeal.list[shop.location]?.();
                     } else if (shop instanceof BerryMasterShop) {
                         deals = BerryDeal.list[shop.location]?.();
+                    } else if (shop instanceof GenericTraderShop) {
+                        GenericDeal.list[shop.traderID]?.().forEach(deal => {
+                            deal.profits.forEach(profit => {
+                                if (profit.type === DealCostOrProfitType.Item && this.pokemonNames.includes(profit.item.type)) {
+                                    townTrades[profit.item.type] = true;
+                                }
+                            });
+                        });
                     }
                     deals?.forEach(deal => {
                         if (this.pokemonNames.includes(deal.item.itemType.type)) {
@@ -780,6 +788,8 @@ class PokemonLocations {
             locations[PokemonLocationType.DreamOrb] ||
             locations[PokemonLocationType.BattleCafe] ||
             locations[PokemonLocationType.SafariItem];
-        return !isEvable && Object.keys(locations).length;
+        return !isEvable && Object.keys(locations).length > 0;
     };
 }
+
+PokemonLocations satisfies TmpPokemonLocationsType;
