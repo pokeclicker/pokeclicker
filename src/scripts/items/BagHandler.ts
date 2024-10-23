@@ -79,7 +79,7 @@ class BagHandler {
                 this.getItem(item.id).gain(amount);
                 return;
             case ItemType.underground:
-                Underground.gainMineItem(this.getUndergroundItem(item.id).id, amount);
+                UndergroundController.gainMineItem(this.getUndergroundItem(item.id).id, amount);
                 return;
             case ItemType.berry:
                 App.game.farming.gainBerry(this.getBerry(item.id), amount, false);

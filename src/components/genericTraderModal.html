@@ -1,0 +1,97 @@
+<div class="modal fade noselect" id="genericTraderModal" tabindex="-1" role="dialog"
+     aria-labelledby="genericTraderModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 data-bind='text: ShopHandler.shopObservable?.().name'></h4>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+            </div>
+            <div>
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#genericTraderTrade">Trades</a></li>
+                </ul>
+            </div>
+            <div class="modal-body tab-content">
+                <div id="genericTraderTrade" class="tab-pane fade in active show" style="min-height: 250px;">
+                    <div style="display: grid; column-gap: 0.5rem; grid-template-columns: auto auto 1fr auto auto auto 1fr auto;">
+                        <div class="font-weight-bold" style="grid-column: 1 / 3">Cost</div>
+                        <div class="font-weight-bold">Inv</div>
+                        <div class="font-weight-bold"></div>
+                        <div class="font-weight-bold" style="grid-column: 5 / 7">Profit</div>
+                        <div class="font-weight-bold">Inv</div>
+                        <div class="font-weight-bold"></div>
+
+                        <!-- ko foreach: { data: GenericDeal.getDeals(ShopHandler.shopObservable().traderID), as: 'deal' } -->
+                        <div class="align-items-center" style="display: grid; grid-column: 1 / 9; grid-template-columns: subgrid" data-bind="let: { tradeAmount: ko.observable(1) }">
+                            <div class="align-items-center" style="display: grid; grid-column: 1 / 4; grid-template-columns: subgrid">
+                                <!-- ko foreach: deal.costs -->
+                                <!-- ko template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount(), type: 'cost' } } -->
+                                <!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                            <div class="mx-4">→</div>
+                            <div class="align-items-center" style="display: grid; grid-column: 5 / 8; grid-template-columns: subgrid">
+                                <!-- ko foreach: deal.profits -->
+                                <!-- ko template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount(), type: 'profit' } } -->
+                                <!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                            <div>
+                                <div class="btn-group btn-block">
+                                    <button class='btn btn-success btn-block' data-bind='click: function(){GenericDeal.use(ShopHandler.shopObservable()?.traderID, $index(), tradeAmount())}, attr: { disabled: tradeAmount() > GenericDeal.maxTrades(deal) || !GenericDeal.canUse(ShopHandler.shopObservable()?.traderID, $index()) }'>
+                                        <knockout data-bind="text: !GenericDeal.anySoldOut(deal) ? 'Trade' : 'Sold out'"></knockout>
+                                    </button>
+                                    <button type="button" data-bind="visible: GenericDeal.maxTrades(deal) > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </button>
+                                    <div class="dropdown-menu" data-bind="foreach: [1, 10, 100]">
+                                        <button class="dropdown-item" type="button" data-bind="visible: GenericDeal.maxTrades(deal) > 1, click: function(){tradeAmount($data)}, text: $data"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="grid-column: 1 / 9;">
+                            <hr>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="traderCostProfitItemTemplate">
+    <!-- ko if: model.type === 'Gem' -->
+    <div><img height="24px" data-bind="attr: {src: Gems.image(model.gemType) }"/></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${PokemonType[model.gemType]}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > App.game.gems.gemWallet[model.gemType]() }"></div>
+    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : App.game.gems.gemWallet[model.gemType]().toLocaleString('en-US')"></div>
+    <!-- /ko -->
+
+    <!-- ko if: model.type === 'Shard' -->
+    <div><img height="24px" data-bind="attr: {src: model.shardItem.image }"/></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.shardItem.displayName}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > player.itemList[model.shardItem.name]() }"></div>
+    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : player.itemList[model.shardItem.name]().toLocaleString('en-US')"></div>
+    <!-- /ko -->
+
+    <!-- ko if: model.type === 'Berry' -->
+    <div><img height="24px" data-bind="attr: {src: FarmController.getBerryImage(model.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[model.berryType]() }"/></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${App.game.farming.unlockedBerries[model.berryType]() ? BerryType[model.berryType] : '???'}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > App.game.farming.berryList[model.berryType]() }"></div>
+    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : App.game.farming.berryList[model.berryType]().toLocaleString('en-US')"></div>
+    <!-- /ko -->
+
+    <!-- ko if: model.type === 'Item' -->
+    <div><img height="24px" data-bind="attr: {src: model.item.image }"/></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.item.displayName}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > player.itemList[model.item.name]() }"></div>
+    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : player.itemList[model.item.name]().toLocaleString('en-US')"></div>
+    <!-- /ko -->
+
+    <!-- ko if: model.type === 'Amount' -->
+    <div><img height="24px" data-bind="attr: {src: `assets/images/currency/${GameConstants.Currency[model.currency.currency]}.svg` }"/></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.currency.amount * model.amount).toLocaleString('en-US')} × ${GameConstants.camelCaseToString(GameConstants.Currency[model.currency.currency])}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.currency.amount * model.amount > App.game.wallet.currencies[model.currency.currency]() }"></div>
+    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : App.game.wallet.currencies[model.currency.currency]().toLocaleString('en-US')"></div>
+    <!-- /ko -->
+</script>
