@@ -107,9 +107,10 @@ class GymRunner {
             });
             // If this is the first time defeating this gym
             if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                gym.firstWinReward();
+                gym.gainBadge();
             }
             GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
+            gym.checkClearRewards();
 
             // Auto restart gym battle
             if (GymRunner.autoRestart()) {

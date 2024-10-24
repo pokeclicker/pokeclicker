@@ -88,7 +88,7 @@ const DungeonGainGymBadge = (gym: Gym) => {
         GymRunner.gymObservable(gym);
         GymBattle.gym = gym;
         // Give the player the badge
-        gym.firstWinReward();
+        gym.gainBadge();
     }
 };
 

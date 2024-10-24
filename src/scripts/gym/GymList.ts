@@ -1,3 +1,4 @@
+///<reference path="GymClearReward.ts"/>
 
 const GymList: { [townName: string]: Gym } = {};
 
@@ -25,9 +26,11 @@ GymList['Cerulean City'] = new Gym(
     500,
     'Wow! You\'re too much, all right! You can have the CascadeBadge to show that you beat me.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-    () => {
-        App.game.quests.getQuestLine('Team Rocket').beginQuest(0, undefined, true);
-    }
+    [
+        new GymClearReward(1, () => {
+            App.game.quests.getQuestLine('Team Rocket').beginQuest(0, undefined, true);
+        }),
+    ]
 );
 GymList['Vermilion City'] = new Gym(
     'Lt. Surge',
@@ -90,10 +93,15 @@ GymList['Fuchsia City'] = new Gym(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ]),
     ],
-    () => {
-        App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
-        App.game.quests.getQuestLine('Mining Expedition').beginQuest(0, undefined, true);
-    }
+    [
+        new GymClearReward(1, () => {
+            App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
+            App.game.quests.getQuestLine('Mining Expedition').beginQuest(0, undefined, true);
+        }),
+        new GymClearReward(100, () => {
+            App.game.party.gainPokemonByName('Magikarp');
+        }),
+    ]
 );
 GymList['Cinnabar Island'] = new Gym(
     'Blaine',
@@ -108,9 +116,11 @@ GymList['Cinnabar Island'] = new Gym(
     5000,
     'I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))],
-    () => {
-        App.game.quests.getQuestLine('Bill\'s Errand').beginQuest(0, undefined, true);
-    }
+    [
+        new GymClearReward(1, () => {
+            App.game.quests.getQuestLine('Bill\'s Errand').beginQuest(0, undefined, true);
+        }),
+    ]
 );
 GymList['Viridian City'] = new Gym(
     'Giovanni',
@@ -131,10 +141,12 @@ GymList['Viridian City'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Marsh),
         new QuestLineCompletedRequirement('Bill\'s Errand'),
     ],
-    () => {
-        App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
-        App.game.quests.getQuestLine('Persons of Interest').beginQuest(0, undefined, true);
-    },
+    [
+        new GymClearReward(1, () => {
+            App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
+            App.game.quests.getQuestLine('Persons of Interest').beginQuest(0, undefined, true);
+        }),
+    ],
     undefined,
     { imageName: 'Team Rocket Boss Giovanni' }
 );
@@ -237,7 +249,7 @@ GymList['Champion Blue'] = new Gym(
     10000,
     'NO! That can\'t be! You beat me at my best! After all that work to become the League Champ? My reign is over already? It\'s not fair!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
-    () => {},
+    [],
     { champion: true },
     { battleBackground: 'GemCave' }
 );
@@ -293,10 +305,12 @@ GymList['Ecruteak City'] = new Gym(
     1500,
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
-    () => {
-        App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
-        App.game.quests.getQuestLine('The Sick Ampharos').beginQuest(0, undefined, true);
-    }
+    [
+        new GymClearReward(1, () => {
+            App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
+            App.game.quests.getQuestLine('The Sick Ampharos').beginQuest(0, undefined, true);
+        }),
+    ]
 );
 GymList['Cianwood City'] = new Gym(
     'Chuck',
@@ -430,7 +444,7 @@ GymList['Champion Lance'] = new Gym(
     7500,
     '…It\'s over. But it\'s an odd feeling. I\'m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Karen)],
-    () => {},
+    [],
     { champion: true }
 );
 
@@ -474,9 +488,11 @@ GymList['Mauville City'] = new Gym(
     3000,
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
     [new TemporaryBattleRequirement('Wally 1')],
-    () => {
-        App.game.quests.getQuestLine('Land vs. Water').beginQuest(0, undefined, true);
-    }
+    [
+        new GymClearReward(1, () => {
+            App.game.quests.getQuestLine('Land vs. Water').beginQuest(0, undefined, true);
+        }),
+    ]
 );
 GymList['Lavaridge Town'] = new Gym(
     'Flannery',
@@ -635,7 +651,7 @@ GymList['Champion Wallace'] = new Gym(
     16000,
     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drake)],
-    () => {},
+    [],
     { champion: true }
 );
 
@@ -880,9 +896,13 @@ GymList['Oreburgh City'] = new Gym(
     250,
     'This is embarrassing... I went and lost to a Trainer who didn\'t have a single Gym Badge... But that\'s tough. You were strong, and I was weak. That\'s all there is. According to Pokémon League rules, I have to give you our Gym Badge since you\'ve beaten me, the Leader. Heres your official Pokémon League Coal Badge.',
     [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-    () => {
-        App.game.quests.getQuestLine('A New World').beginQuest(0, undefined, true);
-    }
+    [
+        new GymClearReward(1, () => {
+            App.game.quests.getQuestLine('A New World').beginQuest(0, undefined, true);
+        }),
+    ],
+    undefined,
+    undefined
 );
 GymList['Eterna City'] = new Gym(
     'Gardenia',
@@ -1056,7 +1076,7 @@ GymList['Champion Cynthia'] = new Gym(
     32000,
     'That was excellent. Truly, an outstanding battle. You gave the support your Pokémon needed to maximize their power. And you guided them with certainty to secure victory. You have both passion and calculating coolness. Together, you and your Pokémon can overcome any challenge that may come your way. Those are the impressions I got from our battle. I\'m glad I got to take part in the crowning of Sinnoh\'s new Champion!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Lucian)],
-    () => {},
+    [],
     { champion: true }
 );
 
@@ -1086,9 +1106,11 @@ GymList['Virbank City'] = new Gym(
     800,
     'Sigh! What are you doing losing, Roxie?! Well…I guess that means you\'re strong! This stinks, but I gave it everything I had, and I feel revitalized and refreshed now! Here! Proof that you beat me!',
     [new GymBadgeRequirement(BadgeEnums.Basic)],
-    () => {
-        App.game.quests.getQuestLine('Hollow Truth and Ideals').beginQuest(0, undefined, true);
-    }
+    [
+        new GymClearReward(1, () => {
+            App.game.quests.getQuestLine('Hollow Truth and Ideals').beginQuest(0, undefined, true);
+        }),
+    ]
 );
 GymList['Castelia City'] = new Gym(
     'Burgh',
@@ -1258,7 +1280,7 @@ GymList['Champion Iris'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Elite_Grimsley),
         new GymBadgeRequirement(BadgeEnums.Elite_Caitlin),
     ],
-    () => {},
+    [],
     { champion: true }
 );
 
@@ -1444,7 +1466,7 @@ GymList['Champion Diantha'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom),
         new GymBadgeRequirement(BadgeEnums.Elite_Drasna),
     ],
-    () => {},
+    [],
     { champion: true }
 );
 
@@ -1601,7 +1623,7 @@ GymList['Champion Hau'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Elite_Acerola),
         new GymBadgeRequirement(BadgeEnums.Elite_Kahili),
     ],
-    () => {},
+    [],
     { champion: true }
 );
 
@@ -1614,14 +1636,16 @@ GymList['Friend League'] = new Gym(
     10000,
     'Your Karp is really Magic!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 31)],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     { imageName: 'Jump Champ Red' }
 );
@@ -1634,14 +1658,16 @@ GymList['Quick League'] = new Gym(
     10500,
     'Looks like I flailed...',
     [new TemporaryBattleRequirement('Magikarp Jump Koylee')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     { imageName: 'Jump Champ Blue' }
 );
@@ -1654,14 +1680,16 @@ GymList['Heavy League'] = new Gym(
     11000,
     'Karpe Diem',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     {
         displayName: 'Kareign\'s Heavy League Gym',
@@ -1677,14 +1705,16 @@ GymList['Great League'] = new Gym(
     11500,
     'Guess ya got me. Hook, line and sinker!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     { imageName: 'Jump Champ Blue' }
 );
@@ -1697,14 +1727,16 @@ GymList['Fast League'] = new Gym(
     12000,
     'This life is not for me... I will become a Karpenter now...',
     [new TemporaryBattleRequirement('Magikarp Jump Karson')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     {
         displayName: 'Kareign\'s Fast League Gym',
@@ -1720,14 +1752,16 @@ GymList['Luxury League'] = new Gym(
     12500,
     'Just wait \'til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     {
         displayName: 'Jump Champ\'s Luxury League Gym',
@@ -1743,14 +1777,16 @@ GymList['Heal League'] = new Gym(
     12500,
     'I\'m getting more old than my rod...',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella 2')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     { imageName: 'Jump Champ Blue' }
 );
@@ -1763,14 +1799,16 @@ GymList['Ultra League'] = new Gym(
     12500,
     'I knew I smelled something fishy...',
     [new TemporaryBattleRequirement('Magikarp Jump Koylee 2')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     {
         displayName: 'Jump Champ\'s Ultra League Gym',
@@ -1786,14 +1824,16 @@ GymList['E4 League'] = new Gym(
     12500,
     'That jump really splashed!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella 3')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    },
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ],
     undefined,
     {
         displayName: 'Jump Champ\'s Elite League Gym',
@@ -1809,14 +1849,16 @@ GymList['Master League'] = new Gym(
     13000,
     'Mayor Karp will be proud of you!',
     [new TemporaryBattleRequirement('Magikarp Jump Tykarp 2')],
-    () => {
-        Notifier.notify({
-            message: 'You were awarded a Magikarp Biscuit!',
-            type: NotificationConstants.NotificationOption.success,
-            image: ItemList.Magikarp_Biscuit.image,
-        });
-        player.gainItem('Magikarp_Biscuit', 1);
-    }
+    [
+        new GymClearReward(1, () => {
+            Notifier.notify({
+                message: 'You were awarded a Magikarp Biscuit!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Magikarp_Biscuit.image,
+            });
+            player.gainItem('Magikarp_Biscuit', 1);
+        }),
+    ]
 );
 
 //Galar Leaders
@@ -1871,12 +1913,15 @@ GymList['Stow-on-Side1'] = new Gym(
     80000,
     'Your strength nearly made me want to turn and run in my bare feet.',
     [new TemporaryBattleRequirement('Hop 5')],
-    // Starts Galar story quest if both Stow-on-Side gyms are defeated.
-    () => {
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
-            App.game.quests.getQuestLine('The Darkest Day').beginQuest(0, undefined, true);
-        }
-    }, undefined, { displayName: 'Bea\'s Stow-on-Side Gym' }
+    [
+        // Starts Galar story quest if both Stow-on-Side gyms are defeated.
+        new GymClearReward(1, () => {
+            if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
+                App.game.quests.getQuestLine('The Darkest Day').beginQuest(0, undefined, true);
+            }
+        }),
+    ],
+    undefined, { displayName: 'Bea\'s Stow-on-Side Gym' }
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1891,12 +1936,15 @@ GymList['Stow-on-Side2'] = new Gym(
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
     [new TemporaryBattleRequirement('Hop 5')],
-    // Starts Galar story quest if both Stow-on-Side gyms are defeated.
-    () => {
-        if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
-            App.game.quests.getQuestLine('The Darkest Day').beginQuest(0, undefined, true);
-        }
-    }, undefined, { displayName: 'Allister\'s Stow-on-Side Gym' }
+    [
+        // Starts Galar story quest if both Stow-on-Side gyms are defeated.
+        new GymClearReward(1, () => {
+            if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
+                App.game.quests.getQuestLine('The Darkest Day').beginQuest(0, undefined, true);
+            }
+        }),
+    ],
+    undefined, { displayName: 'Allister\'s Stow-on-Side Gym' }
 );
 GymList.Ballonlea = new Gym(
     'Opal',
@@ -2041,7 +2089,7 @@ GymList['Champion Leon'] = new Gym(
     250000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
     [new QuestLineStepCompletedRequirement('The Darkest Day', 19)],
-    () => {},
+    [],
     { champion: true }
 );
 
@@ -2210,7 +2258,7 @@ GymList['Temple of Sinnoh'] = new Gym(
     128000,
     'Why? Why you?! Why do you have the blessing of Arceus?!',
     [new DevelopmentRequirement()],
-    () => {},
+    [],
     { champion: true },
     { displayName: 'Pokémon Wielder Volo' }
 );
@@ -2399,7 +2447,7 @@ GymList['Top Champion Geeta'] = new Gym(
     250000,
     '',
     [new GymBadgeRequirement(BadgeEnums.Elite_Hassel)],
-    () => {},
+    [],
     { champion: true }
 );
 GymList['Champion Nemona'] = new Gym(
