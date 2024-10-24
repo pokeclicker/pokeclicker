@@ -98,9 +98,6 @@ GymList['Fuchsia City'] = new Gym(
             App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
             App.game.quests.getQuestLine('Mining Expedition').beginQuest(0, undefined, true);
         }),
-        new GymClearReward(100, () => {
-            App.game.party.gainPokemonByName('Magikarp');
-        }),
     ]
 );
 GymList['Cinnabar Island'] = new Gym(
