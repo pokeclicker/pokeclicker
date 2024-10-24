@@ -36,7 +36,7 @@ export type ItemNameType
     | 'Red_Flute'
     | 'White_Flute'
     | 'Blue_Flute'
-    | 'Boost_Mulch'
+    | 'Growth_Mulch'
     | 'Rich_Mulch'
     | 'Surprise_Mulch'
     | 'Amaze_Mulch'
