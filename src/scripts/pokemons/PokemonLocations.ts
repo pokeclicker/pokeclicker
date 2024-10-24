@@ -436,16 +436,21 @@ class PokemonLocations {
         return cacheLine[pokemonName];
     }
 
-    public static getPokemonGymReward(pokemonName: PokemonNameType): Array<string> {
-        const cache = this.getCache<string[]>(this.getPokemonGymReward.name);
+    public static getPokemonGymReward(pokemonName: PokemonNameType): Array<object> {
+        const cache = this.getCache<object[]>(this.getPokemonGymReward.name);
         if (cache[pokemonName]) {
             return cache[pokemonName];
         }
-        const cacheLine = this.initCacheLine(cache, Array<string>);
+        const cacheLine = this.initCacheLine(cache, Array<object>);
         Object.values(GymList).forEach(gym => {
-            const rewardFunction = gym.rewardFunction?.toString();
-            this.getPokemonRewards(rewardFunction).forEach(pokemon => {
-                cacheLine[pokemon].push(gym.leaderName);
+            gym.clearRewards.forEach(reward => {
+                const rewardFunction = reward.rewardFunction.toString();
+                this.getPokemonRewards(rewardFunction).forEach(pokemon => {
+                    cacheLine[pokemon].push({
+                        gym: gym.town,
+                        clear: reward.clearNumber,
+                    });
+                });
             });
         });
         return cacheLine[pokemonName];
