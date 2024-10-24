@@ -5562,10 +5562,7 @@ TownList['Anville Town'] = new Town(
     GameConstants.UnovaSubRegions.Unova,
     [AnvilleTownShop],
     {
-        requirements: [
-            new ObtainedPokemonRequirement('Meloetta (Aria)'),
-            new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
-        ],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
     }
 );
 TownList['Pokémon League Unova'] = new Town(
