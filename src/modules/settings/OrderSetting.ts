@@ -1,5 +1,5 @@
-import Requirement from "../requirements/Requirement";
-import Setting from "./Setting";
+import Requirement from '../requirements/Requirement';
+import Setting from './Setting';
 
 export default class OrderSetting<T> extends Setting<T[]> {
     constructor(
@@ -20,7 +20,7 @@ export default class OrderSetting<T> extends Setting<T[]> {
     }
 
     validValue(value: T[]): boolean {
-        const all = new Set(value)
-        return this.defaultValue.every(v => all.has(v))
+        const all = new Set(value);
+        return this.defaultValue.every(v => all.has(v));
     }
 }

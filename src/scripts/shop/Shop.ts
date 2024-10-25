@@ -28,7 +28,7 @@ class Shop extends TownContent {
     }
 
     public areaStatus() {
-        const itemStatusArray = [super.areaStatus()];
+        const itemStatusArray = super.areaStatus();
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         this.items.forEach(i => {
             if (i instanceof PokemonItem) {
@@ -41,7 +41,7 @@ class Shop extends TownContent {
                 }
             }
         });
-        return Math.min(...itemStatusArray);
+        return itemStatusArray;
     }
 
     get displayName() {

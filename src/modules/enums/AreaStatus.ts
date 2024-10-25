@@ -1,3 +1,5 @@
+// TODO - someone else update all the areaStatus into AreaStatus please
+// eslint-disable-next-line @typescript-eslint/naming-convention
 enum areaStatus {
     locked,
     incomplete,
@@ -11,4 +13,4 @@ enum areaStatus {
     completed,
 }
 
-export default areaStatus
+export default areaStatus;

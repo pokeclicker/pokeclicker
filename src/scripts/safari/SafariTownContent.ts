@@ -12,9 +12,9 @@ class SafariTownContent extends TownContent {
     public onclick(): void {
         Safari.openModal();
     }
-    public areaStatus(): areaStatus {
+    public areaStatus(): areaStatus[] {
         if (!SafariPokemonList.list[player.region]) {
-            return areaStatus.completed;
+            return [areaStatus.completed];
         }
         const pokemonStatusArray = [areaStatus.completed];
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
@@ -31,6 +31,6 @@ class SafariTownContent extends TownContent {
                 pokemonStatusArray.push(areaStatus.missingResistant);
             }
         });
-        return Math.min(...pokemonStatusArray);
+        return pokemonStatusArray;
     }
 }

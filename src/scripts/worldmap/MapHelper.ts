@@ -180,8 +180,8 @@ class MapHelper {
             states.add(areaStatus.missingResistant);
         }
 
-        const statusPriority = Settings.getSetting('mapAreaStateOrder').observableValue()
-        const mostImportant = statusPriority.find(state => states.has(state))
+        const statusPriority = Settings.getSetting('mapAreaStateOrder').observableValue();
+        const mostImportant = statusPriority.find(state => states.has(state));
         let cls = areaStatus[mostImportant];
 
         // Water routes
@@ -220,38 +220,42 @@ class MapHelper {
 
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 states.add(areaStatus.incomplete);
-            } else if (dungeonList[townName].isThereQuestAtLocation()) {
+            }
+            if (dungeonList[townName].isThereQuestAtLocation()) {
                 states.add(areaStatus.questAtLocation);
-            } else if (!RouteHelper.listCompleted(possiblePokemon, false)) {
+            }
+            if (!RouteHelper.listCompleted(possiblePokemon, false)) {
                 states.add(areaStatus.uncaughtPokemon);
-            } else if (Settings.getSetting(`--${areaStatus[areaStatus.uncaughtShadowPokemon]}`).isUnlocked()
+            }
+            if (Settings.getSetting(`--${areaStatus[areaStatus.uncaughtShadowPokemon]}`).isUnlocked()
                 && shadowPokemon.some(pokemon => App.game.party.getPokemonByName(pokemon)?.shadow < GameConstants.ShadowStatus.Shadow)) {
                 states.add(areaStatus.uncaughtShadowPokemon);
-            } else if (!RouteHelper.listCompleted(possiblePokemon, true)) {
-                if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                    states.add(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
-                } else {
-                    states.add(areaStatus.uncaughtShinyPokemon);
-                }
-            } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
+            }
+            if (!RouteHelper.listCompleted(possiblePokemon, true)) {
+                states.add(areaStatus.uncaughtShinyPokemon);
+            }
+            if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
                 states.add(areaStatus.missingAchievement);
-            } else if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(possiblePokemon) < GameConstants.Pokerus.Resistant) {
+            }
+            if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(possiblePokemon) < GameConstants.Pokerus.Resistant) {
                 states.add(areaStatus.missingResistant);
             }
         }
         const town = TownList[townName];
         town.content.forEach(c => {
+            c.areaStatus().forEach(s => {
             // If the town itself is not locked, it should never show locked
-            if (c.areaStatus() != areaStatus.locked) {
-                states.add(c.areaStatus());
-            }
+                if (s != areaStatus.locked) {
+                    states.add(s);
+                }
+            });
         });
 
         if (states.has(areaStatus.uncaughtShinyPokemon) && states.has(areaStatus.missingAchievement)) {
             states.add(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
         }
-        const statusPriority = Settings.getSetting('mapAreaStateOrder').observableValue()
-        const importantState = statusPriority.find(state => states.has(state))
+        const statusPriority = Settings.getSetting('mapAreaStateOrder').observableValue();
+        const importantState = statusPriority.find(state => states.has(state));
         return areaStatus[importantState];
     }
 
