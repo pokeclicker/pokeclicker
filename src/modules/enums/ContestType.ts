@@ -1,5 +1,4 @@
 enum ContestType {
-    'None' = -1,
     'Cool' = 0,
     'Beautiful' = 1,
     'Cute' = 2,
