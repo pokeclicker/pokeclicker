@@ -1,4 +1,4 @@
-import { AchievementOption, Environment } from '../GameConstants';
+import { AchievementOption, Environment, camelCaseToString } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import Requirement from './Requirement';
 
@@ -8,14 +8,14 @@ export default class InEnvironmentRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Number(MapHelper.getCurrentEnvironment() === this.environment);
+        return Number(MapHelper.getCurrentEnvironments().includes(this.environment));
     }
 
     public hint(): string {
         return `You must be in ${
             GameHelper.anOrA(this.environment)
         } ${
-            this.environment
+            camelCaseToString(this.environment)
         } environment`;
     }
 }
