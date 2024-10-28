@@ -6,6 +6,8 @@ class ContestBattle extends Battle {
     static trainerIndex: KnockoutObservable<number> = ko.observable(0);
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
     static trainerStreak: KnockoutObservable<number> = ko.observable(0);
+    static clickTypes: KnockoutObservableArray<ContestType> = ko.observableArray([]);
+    static clickCombo: KnockoutObservable<number> = ko.observable(0);
 
     public static pokemonAttack() {
         if (ContestRunner.running()) {
@@ -38,8 +40,20 @@ class ContestBattle extends Battle {
     }
 
     public static clickAttack() {
-        if (ContestRunner.running()) {
-            return;
+        switch (ContestRunner.rank()) {
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+            case ContestRank['Brilliant Shining']:
+                return ContestBattle.tallyContestCombo();
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+            case ContestRank.Spectacular:
+                return;
         }
     }
     /**
@@ -88,6 +102,24 @@ class ContestBattle extends Battle {
         const multiplier = 80 * ContestRunner.rank() * (1 + 0.2 * ContestBattle.trainerStreak());
         ContestBattle.enemyPokemon().health(ContestBattle.enemyPokemon().health() * multiplier);
         ContestBattle.enemyPokemon().maxHealth(ContestBattle.enemyPokemon().maxHealth() * multiplier);
+    }
+
+    public static tallyContestCombo() {
+        // store clicked types in a const
+        const clickedTypes = ContestBattle.clickTypes();
+        // switch out clickTypes
+        ContestBattle.clickTypes(ContestBattle.enemyPokemon().contestTypes);
+
+        // Build up or break combo
+        if (clickedTypes.some(ct => ContestBattle.clickTypes().includes(ct))) {
+            ContestBattle.clickCombo(ContestBattle.clickCombo() + 1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+        } else {
+            // Give reward
+            App.game.wallet.gainContestTokens(ContestBattle.trainerStreak() * (ContestBattle.clickCombo() / 100));
+            // Break combo
+            ContestBattle.clickCombo(1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+        }
+        return;
     }
 
     // Increase and keep track of the amount of trainers defeated

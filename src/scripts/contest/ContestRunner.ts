@@ -45,6 +45,8 @@ class ContestRunner {
         ContestBattle.trainerIndex(0);
         ContestBattle.pokemonIndex(0);
         ContestBattle.trainerStreak(0);
+        ContestBattle.clickTypes([]);
+        ContestBattle.clickCombo(0);
         ContestBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.contest;
         ContestRunner.running(true);
