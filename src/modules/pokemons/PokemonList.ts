@@ -31745,6 +31745,9 @@ pokemonList.forEach((p) => {
     if ((p as PokemonListData).name.includes('(Clone)') || (p as PokemonListData).name.includes('Armored')) {
         con = [ContestType.Cool, ContestType.Smart, ContestType.Tough];
     }
+    if ((p as PokemonListData).name.includes('Mega ')) {
+        con.push(ContestType.Balanced);
+    }
     if (Math.floor((p as PokemonListData).id) === 869 && (p as PokemonListData).id != 869.70) {
         const cremie = (p as PokemonListData).name;
         // empty the array
@@ -31796,7 +31799,7 @@ pokemonList.forEach((p) => {
             con.push(ContestType.Cool, ContestType.Smart);
         }
         if (cremie.includes('Rainbow')) {
-            con = [ContestType.Balanced];
+            con.push(ContestType.Balanced);
         }
     }
     // Remove duplicate contest types and put them in order
