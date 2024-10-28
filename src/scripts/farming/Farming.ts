@@ -691,7 +691,7 @@ class Farming implements Feature {
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
             ],
-            new Aura(AuraType.Growth, [1.1, 1.2, 1.3]),
+            new Aura(AuraType.Ripen, [1.1, 1.2, 1.3]),
             ['Pikachu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)', 'Pawmi']
         );
 
