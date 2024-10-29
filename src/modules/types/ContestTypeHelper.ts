@@ -21,7 +21,7 @@ export default class ContestTypeHelper {
             [imm, not, neu, not, imm, imm], // CUTE
             [imm, imm, not, neu, not, imm], // SMART
             [not, imm, imm, not, neu, imm], // TOUGH
-            [neu, neu, neu, neu, neu, neu], // BALANCED
+            [neu, neu, neu, neu, neu, not], // BALANCED
         ];
     })();
 
