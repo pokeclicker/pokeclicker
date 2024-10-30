@@ -87,32 +87,19 @@ class ContestHelper {
         [ContestRank['Brilliant Shining']]: 1640,
     };
 
-    public static encoreWord(rank: ContestRank) {
-        switch (rank) {
-            case ContestRank.Practice:
-                return 'Congratulations!';
-            case ContestRank.Normal:
-                return 'Nice!';
-            case ContestRank.Super:
-                return 'Super!';
-            case ContestRank.Hyper:
-                return 'Amazing!';
-            case ContestRank.Master:
-                return 'Masterful!';
-            case ContestRank['Super Normal']:
-                return 'Super nice!';
-            case ContestRank['Super Great']:
-                return 'Super great!';
-            case ContestRank['Super Ultra']:
-                return 'Super incredible!';
-            case ContestRank['Super Master']:
-                return 'Superbly masterful!';
-            case ContestRank.Spectacular:
-                return 'Spectacularly stunning!';
-            case ContestRank['Brilliant Shining']:
-                return 'Absolutely dazzling! You\'re a brilliant shining star!';
-        }
-    }
+    public static encoreWord: Record<ContestRank, string> = {
+        [ContestRank.Practice]: 'Congratulations!',
+        [ContestRank.Normal]: 'Nice!',
+        [ContestRank.Super]: 'Super!',
+        [ContestRank.Hyper]: 'Hyper!',
+        [ContestRank.Master]: 'Masterful!',
+        [ContestRank['Super Normal']]: 'Super nice!',
+        [ContestRank['Super Great']]: 'Super great!',
+        [ContestRank['Super Ultra']]: 'Super ultra!',
+        [ContestRank['Super Master']]: 'Superbly masterful!',
+        [ContestRank.Spectacular]: 'Spectacular!',
+        [ContestRank['Brilliant Shining']]: 'You\'re a brilliant shining star!',
+    };
 
     public static getRibbonImage(rank: ContestRank, type: ContestType) {
         const RibbonRank = ContestRank[rank];

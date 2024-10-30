@@ -170,7 +170,7 @@ class ContestRunner {
             const tokenReward = Math.floor(5 + (rank * 2) + (finaleBonus * rank * contestTokenMultiplier));
             App.game.wallet.gainContestTokens(tokenReward);
             Notifier.notify({
-                message: `${ContestHelper.encoreWord(ContestRunner.encoreRounds())} You won ${tokenReward} Contest Tokens!`,
+                message: `${ContestHelper.encoreWord[ContestRunner.encoreRounds()]} You won ${tokenReward} Contest Tokens!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
             });
