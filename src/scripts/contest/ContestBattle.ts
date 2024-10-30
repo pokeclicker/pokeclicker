@@ -122,10 +122,17 @@ class ContestBattle extends Battle {
         return;
     }
 
-    // Increase and keep track of the amount of trainers defeated
+    // Computables for contestView
     public static trainerBonusComputable: KnockoutComputed<string> = ko.pureComputed(() => {
-        const rank = ContestRunner.isRallied() ? ContestRunner.rank() : 1;
-        return `Trainer Streak: ${ContestBattle.trainerStreak()} (+${Math.floor(0.1 * ContestBattle.trainerStreak() * rank)} <img src="./assets/images/currency/contestToken.svg" height="16px"/>)`;
+        return `Trainer Streak: ${ContestBattle.trainerStreak()}`;
+    });
+
+    public static encoreBonusComputable: KnockoutComputed<string> = ko.pureComputed(() => {
+        return `Bonus Round: ${ContestRunner.encoreRounds()}/${ContestRunner.rank()}`;
+    });
+
+    public static clickBonusComputable: KnockoutComputed<string> = ko.pureComputed(() => {
+        return `Click Combo: ${ContestBattle.clickCombo()}`;
     });
 
     public static pokemonContestAppealTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
