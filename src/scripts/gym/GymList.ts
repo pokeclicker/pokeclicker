@@ -1838,7 +1838,7 @@ GymList.Hulbury = new Gym(
     [
         new GymPokemon('Goldeen', 119044213, 22),
         new GymPokemon('Arrokuda', 119044213, 23),
-        new GymPokemon('Gigantamax Drednaw', 122651613, 24),
+        new GymPokemon('Drednaw', 122651613, 24),
     ],
     BadgeEnums.Galar_Water,
     60000,
