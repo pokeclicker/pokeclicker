@@ -1156,7 +1156,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 15,
         'evolutions': [
             NightTimedLevelEvolution('Alolan Rattata', 'Alolan Raticate', 20),
-            DummyEvolution("Alolan Rattata", "Totem Raticate")
+            DummyEvolution('Alolan Rattata', 'Totem Raticate'),
         ],
         'base': {
             'hitpoints': 30,
@@ -1181,7 +1181,7 @@ export const pokemonList = createPokemonArray(
             'specialAttack': 25,
             'defense': 35,
             'specialDefense': 35,
-            'speed': 72,va
+            'speed': 72,
         },
         'gender': {
             'visualDifference': true,
@@ -5226,7 +5226,7 @@ export const pokemonList = createPokemonArray(
         'exp': 172,
         'eggCycles': 25,
         'base': {
-            'hitpoints': 65,
+            'hitpoints': 65,ch
             'attack': 83,
             'specialAttack': 95,
             'defense': 57,
@@ -22435,7 +22435,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             EnvironmentRestrictedLevelEvolution('MagneticField', 'Charjabug', 'Vikavolt', 20),
             RegionStoneEvolution(galarOnly, 'Charjabug', 'Vikavolt', StoneType.Thunder_stone),
-            DummyEvolution('Carjabug', 'Totem Vikavolt'),
+            DummyEvolution('Charjabug', 'Totem Vikavolt'),
         ],
         'base': {
             'hitpoints': 57,
@@ -22605,7 +22605,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 190,
         'evolutions': [
             LevelEvolution('Cutiefly', 'Ribombee', 25),
-            DummyEvolution('Cutiefly', 'Totem Rillaboom'),
+            DummyEvolution('Cutiefly', 'Totem Ribombee'),
         ],
         'base': {
             'hitpoints': 40,
