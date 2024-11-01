@@ -5226,7 +5226,7 @@ export const pokemonList = createPokemonArray(
         'exp': 172,
         'eggCycles': 25,
         'base': {
-            'hitpoints': 65,ch
+            'hitpoints': 65,
             'attack': 83,
             'specialAttack': 95,
             'defense': 57,
