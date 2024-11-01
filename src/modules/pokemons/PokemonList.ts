@@ -2992,7 +2992,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 70,
         'eggCycles': 20,
-        'evolutions': [StoneEvolution('Hisuian Growlithe', 'Hisuian Arcanine', StoneType.Fire_stone)],
+        'evolutions': [
+            StoneEvolution('Hisuian Growlithe', 'Hisuian Arcanine', StoneType.Fire_stone),
+            DummyEvolution('Hisuian Growlithe', 'Noble Arcanine'),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 75,
@@ -4335,7 +4338,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [StoneEvolution('Hisuian Voltorb', 'Hisuian Electrode', StoneType.Leaf_stone)],
+        'evolutions': [
+            StoneEvolution('Hisuian Voltorb', 'Hisuian Electrode', StoneType.Leaf_stone),
+            DummyEvolution('Hisuian Voltorb', 'Noble Electrode'),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 30,
@@ -5121,6 +5127,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             StoneEvolution('Scyther', 'Scizor', StoneType.Metal_coat),
             StoneEvolution('Scyther', 'Kleavor', StoneType.Black_augurite),
+            DummyEvolution('Scyther', 'Noble Kleavor'),
         ],
         'base': {
             'hitpoints': 70,
@@ -14405,6 +14412,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 50,
         'evolutions': [
             StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell),
+            DummyEvolution('Munchlax', 'Snorlax (Snowman)'),
         ],
         'baby': true,
         'base': {
@@ -17084,6 +17092,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             RegionStoneEvolution(allButHisui, 'Petilil', 'Lilligant', StoneType.Sun_stone),
             RegionStoneEvolution(hisuiOnly, 'Petilil', 'Hisuian Lilligant', StoneType.Sun_stone),
+            DummyEvolution('Petilil', 'Noble Lilligant'),
         ],
         'base': {
             'hitpoints': 45,
@@ -19873,6 +19882,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
+        'evolutions': [DummyEvolution('Greninja', 'Ash-Greninja', true)],
         'base': {
             'hitpoints': 72,
             'attack': 95,
@@ -19889,7 +19899,7 @@ export const pokemonList = createPokemonArray(
         'id': 658.01,
         'name': 'Ash-Greninja',
         'type': [PokemonType.Water, PokemonType.Dark],
-        'eggCycles': 45,
+        'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
@@ -21829,6 +21839,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Bergmite', 'Avalugg', 37),
             LevelEvolution('Bergmite', 'Hisuian Avalugg', 37),
+            DummyEvolution('Bergmite', 'Noble Avalugg'),
         ],
         'base': {
             'hitpoints': 55,
