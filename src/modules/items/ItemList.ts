@@ -43,6 +43,7 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
+import WeatherItem from './WeatherItem';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -502,3 +503,8 @@ ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 1000, Currency.
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
+// Weather
+ItemList.Damp_rock_fragment = new WeatherItem('Damp_rock_fragment', 'Damp Rock Fragment', 'Description');
+ItemList.Heat_rock_fragment = new WeatherItem('Heat_rock_fragment', 'Heat Rock Fragment', 'Description');
+ItemList.Icy_rock_fragment = new WeatherItem('Icy_rock_fragment', 'Icy Rock Fragment', 'Description');
+ItemList.Smooth_rock_fragment = new WeatherItem('Smooth_rock_fragment', 'Smooth Rock Fragment', 'Description');
