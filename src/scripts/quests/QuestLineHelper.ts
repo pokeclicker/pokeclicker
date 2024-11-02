@@ -234,7 +234,7 @@ class QuestLineHelper {
 
         // Talk to Bill's Grandpa after battling him
         const EeveeReward = () => {
-            App.game.party.gainPokemonByName('Eevee');
+            App.game.party.gainPokemonByName('Eevee', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
                 message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
@@ -2195,7 +2195,7 @@ class QuestLineHelper {
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
         const DetectiveRaichuReward = () => {
-            App.game.party.gainPokemonByName('Detective Raichu');
+            App.game.party.gainPokemonByName('Detective Raichu', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: detectivePikachuQuestLine.name,
                 message: 'Detective Pikachu\'s partner has been nursed back to health!',
@@ -3278,7 +3278,7 @@ class QuestLineHelper {
         const meltanRainbowRocket = new DefeatTemporaryBattleQuest('Team Rainbow Leader Giovanni', 'Defeat Team Rainbow Rocket.');
 
         const meltanGetMelmetal = () => {
-            App.game.party.gainPokemonByName('Melmetal');
+            App.game.party.gainPokemonByName('Melmetal', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: meltanQuestLine.name,
                 message: 'You found Melmetal!',
@@ -3434,7 +3434,7 @@ class QuestLineHelper {
         drSplashQuestLine.quests().forEach(q => q.withCustomReward(karpStepReward));
 
         const SaucyBlueReward = () => {
-            App.game.party.gainPokemonByName('Magikarp Saucy Blue');
+            App.game.party.gainPokemonByName('Magikarp Saucy Blue', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: drSplashQuestLine.name,
                 message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
@@ -4069,7 +4069,7 @@ class QuestLineHelper {
             ]), GameConstants.BulletinBoards.Galar);
 
         const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift').withCustomReward(() => {
-            App.game.party.gainPokemonByName('Magearna (Original Color)');
+            App.game.party.gainPokemonByName('Magearna (Original Color)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: magearnaQuestLine.name,
                 message: 'You obtained Magearna (Original Color)!',
