@@ -1858,8 +1858,8 @@ class Farming implements Feature {
                 message = `A wild ${displayWanderer.name} has wandered onto the farm!`;
                 image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny);
                 type = displayWanderer.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
-                sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
-                setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
+                sound = displayWanderer.shiny ? NotificationConstants.NotificationSound.General.shiny_long : NotificationConstants.NotificationSound.Farming.wandering_pokemon;
+                setting = displayWanderer.shiny ? NotificationConstants.NotificationSetting.General.encountered_shiny : NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
                 break;
         }
 

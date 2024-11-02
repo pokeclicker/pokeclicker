@@ -142,16 +142,15 @@ class Game implements TmpGameType {
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
-        Underground.energyTick(this.underground.getEnergyRegenTime());
         AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
 
         const now = new Date();
         SeededDateRand.seedWithDate(now);
-        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
         GemDeals.generateDeals();
         ShardDeal.generateDeals();
+        GenericDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
@@ -481,13 +480,11 @@ class Game implements TmpGameType {
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
-                DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 BerryDeal.generateDeals(now);
-                if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
+                if (App.game.quests.isDailyQuestsUnlocked()) {
                     Notifier.notify({
                         title: 'It\'s a new day!',
-                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.\n' : ''}` +
-                        `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
+                        message: `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
                         type: NotificationConstants.NotificationOption.info,
                         timeout: 3e4,
                     });
@@ -522,16 +519,8 @@ class Game implements TmpGameType {
         }
 
         // Underground
-        Underground.counter += GameConstants.TICK_TIME;
-        if (Underground.counter >= GameConstants.UNDERGROUND_TICK) {
-            Underground.energyTick(Math.max(0, Underground.energyTick() - 1));
-            if (Underground.energyTick() == 0) {
-                // Check completed in case mine is locked out
-                Mine.checkCompleted();
-                this.underground.gainEnergy();
-                Underground.energyTick(this.underground.getEnergyRegenTime());
-            }
-            Underground.counter = 0;
+        if (this.underground.canAccess()) {
+            this.underground.update(GameConstants.TICK_TIME / GameConstants.SECOND);
         }
 
         // Farm
