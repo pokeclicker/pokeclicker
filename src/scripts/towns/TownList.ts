@@ -3684,7 +3684,7 @@ TownList['Weather Institute'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
-    [new WeatherAppTownContent()],
+    [new WeatherAppTownContent(), new GenericTraderShop('WeatherRocks', 'Rock fragmentation')],
     {
         npcs: [WeatherScan],
     }
