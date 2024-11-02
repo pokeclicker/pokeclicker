@@ -469,7 +469,7 @@ const LaprasGift = new GiftNPC('Silph Co. Employee', [
     'Oh! Hi! You\'re not a member of Team Rocket! You came to save us? Why thank you!',
     'I want you to have this Pokémon for saving us.',
 ], () => {
-    App.game.party.gainPokemonByName('Lapras');
+    App.game.party.gainPokemonByName('Lapras', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
 }, 'assets/images/pokemon/131.png', { saveKey: 'laprasgift', image: 'assets/images/npcs/Office Worker (male).png', requirement: new MultiRequirement([new TemporaryBattleRequirement('Blue 5'), new ObtainedPokemonRequirement('Lapras', true)]) });
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
@@ -6293,7 +6293,7 @@ const Spelunker = new NPC('Spelunker', [
 const ExamineAegislash = new GiftNPC('Millis and Argus Steels\' Aeglislash', [
     '<i>Aegislash wants to join you on your adventure.</i>',
 ], () => {
-    App.game.party.gainPokemonByName('Aegislash (Blade)');
+    App.game.party.gainPokemonByName('Aegislash (Blade)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
 }, 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
 const ThanksDiancie = new NPC('Princess Diancie', [
@@ -8619,7 +8619,7 @@ const EnergyPlantRose = new NPC('Chairman Rose', [
 const EternatusCatch = new GiftNPC('Catch Eternatus', [
     'You caught Eternatus!',
 ], () => {
-    App.game.party.gainPokemonByName('Eternatus');
+    App.game.party.gainPokemonByName('Eternatus', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
 }, 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new MultiRequirement([new TemporaryBattleRequirement('The Darkest Day'), new ObtainedPokemonRequirement('Eternatus', true)]) });
 
 const Leon = new NPC('Leon', [
