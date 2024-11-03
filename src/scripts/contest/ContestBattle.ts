@@ -105,19 +105,21 @@ class ContestBattle extends Battle {
     }
 
     public static tallyContestCombo() {
-        // store clicked types in a const
-        const clickedTypes = ContestBattle.clickTypes();
-        // switch out clickTypes
-        ContestBattle.clickTypes(ContestBattle.enemyPokemon().contestTypes);
+        if (ContestBattle.enemyPokemon() != null) {
+            // store clicked types in a const
+            const clickedTypes = ContestBattle.clickTypes();
+            // switch out clickTypes
+            ContestBattle.clickTypes(ContestBattle.enemyPokemon().contestTypes);
 
-        // Build up or break combo
-        if (clickedTypes.some(ct => ContestBattle.clickTypes().includes(ct))) {
-            ContestBattle.clickCombo(ContestBattle.clickCombo() + 1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
-        } else {
-            // Give reward
-            App.game.wallet.gainContestTokens(ContestBattle.trainerStreak() * (ContestBattle.clickCombo() / 100));
-            // Break combo
-            ContestBattle.clickCombo(1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+            // Build up or break combo
+            if (clickedTypes.some(ct => ContestBattle.clickTypes().includes(ct))) {
+                ContestBattle.clickCombo(ContestBattle.clickCombo() + 1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+            } else {
+                // Give reward
+                App.game.wallet.gainContestTokens(Math.max(ContestBattle.trainerStreak() * (ContestBattle.clickCombo() / 100), 1));
+                // Break combo
+                ContestBattle.clickCombo(1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+            }
         }
         return;
     }
