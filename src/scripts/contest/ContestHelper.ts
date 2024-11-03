@@ -101,6 +101,12 @@ class ContestHelper {
         [ContestRank['Brilliant Shining']]: 'You\'re a brilliant shining star!',
     };
 
+    public static getBackgroundContestColors(type: ContestType, typeArray: ContestType[]) {
+        if (typeArray.includes(type)) {
+            return GameConstants.ContestColor[type];
+        }
+    }
+
     public static getRibbonImage(rank: ContestRank, type: ContestType) {
         const RibbonRank = ContestRank[rank];
         const RibbonType = ContestType[type];

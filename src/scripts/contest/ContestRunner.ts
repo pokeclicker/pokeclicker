@@ -203,10 +203,6 @@ class ContestRunner {
         return Math.floor(ContestRunner.audienceAppeal() / ContestRunner.maxAudienceAppeal() * 100);
     })
 
-    public static encoreRoundsComputable: KnockoutComputed<number> = ko.pureComputed(() => {
-        return ContestRunner.encoreRounds();
-    });
-
     public static audienceStatus: KnockoutComputed<string> = ko.pureComputed(() => {
         if (!ContestRunner.encoreStatus() && !ContestRunner.finaleStatus()) {
             return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;
