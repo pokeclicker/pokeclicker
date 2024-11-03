@@ -63,12 +63,7 @@ class ContestHelper {
         tooltipString += `<div><strong>Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(rank, type, [type]).toLocaleString('en-US')}</strong></div>`;
         if (rank == ContestRank.Spectacular) {
             tooltipString += '<div>Eligible Types:</div>';
-            if (type != ContestType.Balanced) {
-                tooltipString += `<div>${ContestType[type]}</div>`;
-                tooltipString += `<div>${ContestType[ContestType.Balanced]}</div>`;
-            } else {
-                tooltipString += '<div>All</div>';
-            }
+            tooltipString += `<div>${ContestType[type]}</div>`;
         }
         return tooltipString;
     }
