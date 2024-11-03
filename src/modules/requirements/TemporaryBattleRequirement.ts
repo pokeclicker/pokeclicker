@@ -12,7 +12,12 @@ export default class TemporaryBattleRequirement extends Requirement {
 
     public hint(): string {
         const tempBattle = TemporaryBattleList[this.battleName];
-        const locationHint = ` ${tempBattle.parent ? 'in' : 'near'} ${tempBattle.getTown().name.replace(/\.$/, '')}`;
-        return `Requires beating ${tempBattle.getDisplayName()}${locationHint}.`;
+        let locationHint = '';
+        if (tempBattle.getTown()) {
+            locationHint = ` ${tempBattle.parent ? 'in' : 'near'} ${tempBattle.getTown().name}`;
+            locationHint.replace(/\.$/, ''); // remove trailing period since the hint text adds one
+        }
+        const hint = `Requires beating ${tempBattle.getDisplayName()}${locationHint}.`;
+        return hint;
     }
 }

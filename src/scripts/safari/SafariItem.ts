@@ -10,7 +10,7 @@ type SafariItemWeighed = {
 }
 
 class SafariItemController {
-    public static list: Record<GameConstants.Region, Array<SafariItemWeighed>> = {
+    public static list: Partial<Record<GameConstants.Region, Array<SafariItemWeighed>>> = {
         [GameConstants.Region.kanto]: [
             {item: {id: 'Razz', type: ItemType.berry}, weight: 1.8},
             {item: {id: 'Nanab', type: ItemType.berry}, weight: 1.8},
@@ -113,7 +113,7 @@ class SafariItemController {
         ],
     }
 
-    public static getRandomItem() {
+    public static getRandomItem(): BagItem | undefined {
         if (!SafariItemController.list[player.region]) {
             return undefined;
         }
@@ -121,7 +121,7 @@ class SafariItemController {
         return Rand.fromWeightedArray(list.map((i) => i.item), list.map((i) => i.weight));
     }
 
-    public static currentRegionHasItems() : boolean {
+    public static currentRegionHasItems(): boolean {
         if (SafariItemController.getRandomItem()) {
             return true;
         }
