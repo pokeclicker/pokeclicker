@@ -10,7 +10,7 @@ const NotificationConstants = {
     NotificationOption,
     NotificationSound: {
         General: {
-            shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched'),
+            shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched/wandering'),
             new_catch: new Sound('new_catch', 'New Pokémon/shiny captured'),
             roaming: new Sound('roaming', 'Roaming Pokémon encountered'),
             achievement: new Sound('achievement', 'New achievement earned'),
