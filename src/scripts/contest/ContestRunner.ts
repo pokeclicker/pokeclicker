@@ -135,17 +135,20 @@ class ContestRunner {
         });
     }
 
+    public static contestTokenReward() {
+        const trainerBonus = ContestBattle.trainerStreak();
+        const rankBonus = ContestRunner.rank();
+        return Math.floor(5 + (trainerBonus * rankBonus));
+    }
+
     public static contestLost() {
         if (ContestRunner.running()) {
             ContestRunner.running(false);
             if (ContestRunner.encoreRounds() != 0) {
                 // Award some tokens
-                const contestTokenMultiplier = ContestBattle.trainerStreak();
-                const rank = ContestRunner.rank();
-                const tokenReward = Math.floor(5 + (rank * 2) + (0.5 * rank * contestTokenMultiplier));
-                App.game.wallet.gainContestTokens(tokenReward);
+                App.game.wallet.gainContestTokens(Math.floor(ContestRunner.contestTokenReward() / 3));
                 Notifier.notify({
-                    message: `Good job! You got a bonus of ${tokenReward} Contest Tokens!`,
+                    message: `Good job! You got a bonus of ${ContestRunner.contestTokenReward()} Contest Tokens!`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
                 });
@@ -164,13 +167,9 @@ class ContestRunner {
     public static contestWon() {
         if (ContestRunner.running()) {
             // Award tokens after each round
-            const contestTokenMultiplier = ContestBattle.trainerStreak();
-            const rank = ContestRunner.rank();
-            const finaleBonus = this.finaleStatus() ? Math.max(1, contestTokenMultiplier / 10) : 1;
-            const tokenReward = Math.floor(5 + (rank * 2) + (finaleBonus * rank * contestTokenMultiplier));
-            App.game.wallet.gainContestTokens(tokenReward);
+            App.game.wallet.gainContestTokens(ContestRunner.contestTokenReward());
             Notifier.notify({
-                message: `${ContestHelper.encoreWord[ContestRunner.encoreRounds()]} You won ${tokenReward} Contest Tokens!`,
+                message: `${ContestHelper.encoreWord[ContestRunner.encoreRounds()]} You won ${ContestRunner.contestTokenReward()} Contest Tokens!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
             });
