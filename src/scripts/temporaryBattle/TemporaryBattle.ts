@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
+
 type TemporaryBattleOptionalArgument = {
     rewardFunction?: () => void,
     firstTimeRewardFunction?: () => void,
@@ -7,12 +9,13 @@ type TemporaryBattleOptionalArgument = {
     imageName?: string,
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
-    environment?: GameConstants.Environment,
+    environment?: GameConstants.Environment[],
+    battleBackground?: GameConstants.BattleBackground,
     resetDaily?: boolean,
     finalPokemonImage?: string // trainer image when on final pokemon
 };
 
-class TemporaryBattle extends TownContent {
+class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
     completeRequirements: (Requirement | OneFromManyRequirement)[];
 
     public cssClass(): string {

@@ -241,4 +241,12 @@ export default class GameHelper {
             return false;
         }
     }
+
+    public static focusedOnEditableElement(): boolean {
+        const activeEl = document.activeElement as HTMLElement;
+        const localName: string = activeEl.localName.toLowerCase();
+        const editables = ['textarea', 'input', 'select'];
+
+        return (editables.includes(localName) || activeEl.isContentEditable);
+    }
 }

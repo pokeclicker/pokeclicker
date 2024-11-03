@@ -1,4 +1,4 @@
-///<reference path="../GameConstants.d.ts"/>
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 
 enum PokemonLocationType {
     Route,
@@ -89,7 +89,7 @@ class PokemonLocations {
                     if (!cacheLine[name][region]) {
                         cacheLine[name][region] = new Array<object>;
                     }
-                    cacheLine[name][region].push({ route: routeData.number, requirements: special.req.hint() });
+                    cacheLine[name][region].push({ route: routeData.number, requirements: special.req });
                 });
             });
             return true;
@@ -123,7 +123,7 @@ class PokemonLocations {
                 } else if (enemy.hasOwnProperty('pokemon')) {
                     cacheLine[(<DetailedPokemon>enemy).pokemon].push({
                         dungeon: dungeonName,
-                        requirements: enemy?.options?.requirement?.hint(),
+                        requirements: enemy?.options?.requirement,
                     });
                 }
             });
@@ -149,7 +149,7 @@ class PokemonLocations {
             dungeon.availableBosses(false, true).forEach(boss => {
                 const data = {
                     dungeon: dungeonName,
-                    requirements: boss.options?.requirement?.hint(),
+                    requirements: boss.options?.requirement,
                 };
                 cacheLine[boss.name].push(data);
             });
@@ -176,7 +176,7 @@ class PokemonLocations {
                 if (this.pokemonNames.includes(i.loot)) {
                     const data = {
                         dungeon: dungeonName,
-                        requirements: i.requirement?.hint(),
+                        requirements: i.requirement,
                     };
                     cacheLine[i.loot].push(data);
                 }
@@ -267,7 +267,7 @@ class PokemonLocations {
                     if (this.pokemonNames.includes(r.pokemon.name)) {
                         const data = {
                             region: +region,
-                            requirements: r.unlockRequirement?.hint(),
+                            requirements: r.unlockRequirement,
                             roamingGroup: group,
                         };
                         cacheLine[r.pokemon.name].push(data);
@@ -514,6 +514,14 @@ class PokemonLocations {
                         deals = ShardDeal.list[shop.location]?.();
                     } else if (shop instanceof BerryMasterShop) {
                         deals = BerryDeal.list[shop.location]?.();
+                    } else if (shop instanceof GenericTraderShop) {
+                        GenericDeal.list[shop.traderID]?.().forEach(deal => {
+                            deal.profits.forEach(profit => {
+                                if (profit.type === DealCostOrProfitType.Item && this.pokemonNames.includes(profit.item.type)) {
+                                    townTrades[profit.item.type] = true;
+                                }
+                            });
+                        });
                     }
                     deals?.forEach(deal => {
                         if (this.pokemonNames.includes(deal.item.itemType.type)) {
@@ -548,7 +556,7 @@ class PokemonLocations {
                     cacheLine[pokemon].push({
                         town: townName,
                         npc: npc.name,
-                        requirements: npc.options?.requirement?.hint(),
+                        requirements: npc.options?.requirement,
                     });
                 });
             });
@@ -614,7 +622,7 @@ class PokemonLocations {
                 if (this.pokemonNames.includes(pokemonItem)) {
                     cacheLine[pokemonItem][region] = {chance : item.weight / list.reduce((acc, it) => acc + it.weight, 0)};
                     if (item.requirement) {
-                        cacheLine[pokemonItem][region].requirement = item.requirement.hint();
+                        cacheLine[pokemonItem][region].requirement = item.requirement;
                     }
                 }
             });
@@ -789,6 +797,8 @@ class PokemonLocations {
             locations[PokemonLocationType.DreamOrb] ||
             locations[PokemonLocationType.BattleCafe] ||
             locations[PokemonLocationType.SafariItem];
-        return !isEvable && Object.keys(locations).length;
+        return !isEvable && Object.keys(locations).length > 0;
     };
 }
+
+PokemonLocations satisfies TmpPokemonLocationsType;
