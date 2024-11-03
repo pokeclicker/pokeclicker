@@ -1,5 +1,5 @@
 <div class="modal noselect fade" id="heldItemModal" tabindex="-1" role="dialog" aria-labelledby="heldItemModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
@@ -9,12 +9,13 @@
             </div>
             <div class="modal-body p-0" style="background-color: inherit; overflow-x: hidden;">
                 <!-- ko if: HeldItem.heldItemSelected() -->
-                <img data-bind="attr: { src: HeldItem.heldItemSelected().image }" width="40%"/>
+                <img data-bind="attr: { src: HeldItem.heldItemSelected().image }" width="25%"/>
                 <br/>
                 <div class="sticky-top" style="background-color: inherit;">
                   <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
                     <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
                   </div>
+                  <!-- Sort field -->
                   <div class="input-group px-1 mt-1">
                       <!-- ko let: { heldItemSort: Settings.getSetting('heldItemSort') } -->
                       <select id="held-item-sort" autocomplete="off" class="custom-select"
@@ -38,16 +39,28 @@
                       </div>
                       <!-- /ko -->
                   </div>
-                  <div class="form-group px-1 mt-1 mb-0">
+                  <!-- Search field -->
+                  <div class="input-group px-1 mt-1 mb-0">
+                    <div class="input-group-prepend">
+                        <!-- ko let: { heldItemDropdownPokemonOrItem: Settings.getSetting('heldItemDropdownPokemonOrItem') } -->
+                        <select id="held-item-sort" autocomplete="off" class="custom-select"
+                            data-bind="options: heldItemDropdownPokemonOrItem.options,
+                                optionsValue: 'value',
+                                optionsText: 'text',
+                                value: heldItemDropdownPokemonOrItem.observableValue">
+                        </select>
+                        <!-- /ko -->
+                    </div>
                     <input id="held-item-search" autocomplete="off" class="form-control" placeholder="Search"
                         data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue" />
                   </div>
                   <div class="small px-1 pb-2 my-1" style="overflow-x: hidden;">
+                    <!-- Region and Type selects -->
                     <div class="form-row px-1">
                         <div class="form-group col-6 m-0 px-1 py-0">
                             <!-- ko let: { heldItemRegionFilter: Settings.getSetting('heldItemRegionFilter') } -->
                             <label class="mb-1" for="held-item-region-filter">Region</label>
-                            <select id="held-item-region-filter" autocomplete="off" class="custom-select custom-select-sm" 
+                            <select id="held-item-region-filter" autocomplete="off" class="custom-select custom-select-sm"
                                 data-bind="options: heldItemRegionFilter.getValidOptions(),
                                     optionsValue: 'value',
                                     optionsText: 'text',
@@ -58,7 +71,7 @@
                         <div class="form-group col-6 m-0 px-1 py-0">
                             <!-- ko let: { heldItemTypeFilter: Settings.getSetting('heldItemTypeFilter') } -->
                             <label class="mb-1" for="held-item-type-filter">Type</label>
-                            <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm" 
+                            <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm"
                                 data-bind="options: heldItemTypeFilter.options,
                                     optionsValue: 'value',
                                     optionsText: 'text',
@@ -67,6 +80,7 @@
                             <!-- /ko -->
                         </div>
                     </div>
+                    <!-- Hide/Show checkboxes -->
                     <div class="form-check align-middle mt-1">
                         <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
                             data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue" />
@@ -74,8 +88,8 @@
                     </div>
                     <div class="form-check align-middle mt-1">
                         <input type="checkbox" id="show-this-item-pokemon" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('heldItemShowHoldingThisItem').observableValue" />
-                        <label for="show-this-item-pokemon" class="form-check-label">Show <u>only</u> Pokémon holding this item</label>
+                            data-bind="checked: Settings.getSetting('heldItemHideHoldingThisItem').observableValue" />
+                        <label for="show-this-item-pokemon" class="form-check-label">Hide Pokémon holding <u>this</u> item</label>
                     </div>
                   </div>
                 </div>
@@ -89,11 +103,12 @@
                   </thead>
                   <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: () => (DisplayObservables.modalState.heldItemModal === 'hidden') }), childrenComplete: () => { lazyLoadCallback('lazyHeldItemList'); }">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
-                      <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                      <td class="text-center tight" data-bind="
-                        text: $data.heldItem() == undefined ? '' : $data.heldItem().displayName,
-                        tooltip: $data.heldItem() != undefined ? { title: $data.heldItem().description, placement: 'bottom', trigger: 'hover'} : undefined
-                      "></td>
+                      <td class="text-left align-middle"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-left tight align-middle" data-bind="if: $data.heldItem(),
+                        tooltip: { title: $data.heldItem()?.description ?? '', trigger: 'hover', placement: 'bottom' }">
+                            <img width="20" data-bind="attr: { src: $data.heldItem().image }" />
+                            <knockout data-bind="text: $data.heldItem().displayName"></knockout>
+                        </td>
                     </tr>
                   </tbody>
                 </table>

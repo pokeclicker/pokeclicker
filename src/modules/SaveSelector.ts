@@ -62,6 +62,24 @@ export default class SaveSelector {
 
         // Sort our saves
         SortSaves();
+
+        $(document).on('keydown', this.LoadSaveOnKeydown);
+    }
+
+    static LoadSaveOnKeydown(e: JQuery.KeyDownEvent) {
+        if (GameHelper.focusedOnEditableElement()) {
+            return;
+        }
+
+        const key = parseInt(e.key);
+        if (!isNaN(key)) {
+            const chosenSave = key - 1;
+            const allSaves = $('.trainer-card');
+            if (allSaves.length > chosenSave && chosenSave >= 0) {
+                $(document).off(e);
+                allSaves[chosenSave].click();
+            }
+        }
     }
 
     static getTrainerCard(key: string): Element {
