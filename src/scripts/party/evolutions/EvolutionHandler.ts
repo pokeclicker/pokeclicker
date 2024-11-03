@@ -58,7 +58,7 @@ class EvolutionHandler {
             evolvedPartyPokemon.nickname = basePartyPokemon.nickname;
             evolvedPartyPokemon.category = basePartyPokemon.category;
             if (basePartyPokemon.heldItem()?.canUse(evolvedPartyPokemon)) {
-                evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
+                evolvedPartyPokemon.heldItem(basePartyPokemon.heldItem());
             }
             App.game.party.removePokemonByName(data.basePokemon);
         }
