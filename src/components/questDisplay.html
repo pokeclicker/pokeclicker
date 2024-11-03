@@ -13,7 +13,7 @@
         <!-- ko if: App.game.quests.currentQuests().length == 0 && App.game.quests.isDailyQuestsUnlocked() -->
             <span class="pt-2 pb-2">Click "List" to start a new quest.</span>
         <!-- /ko -->
-        <table width="100%">
+        <table width="100%" class="mb-0">
             <!-- List of player quests -->
             <tbody data-bind="foreach: App.game.quests.currentQuests()">
                 <tr class="text-center">
