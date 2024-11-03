@@ -1843,8 +1843,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kala\'e Bay', Region.alola, 20,
     new RoutePokemon({
-        land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Yungoos'],
-        water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Shelgon', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
+        land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Shelgon', 'Yungoos'],
+        water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
         special: [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Horsea'], new DayOfWeekRequirement(DayOfWeek.Wednesday)),
