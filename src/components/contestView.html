@@ -3,8 +3,7 @@
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout>
                 <knockout data-bind="text: ContestBattle.trainer().name.replace(/\d/g,'') + '\'s'"></knockout>
-                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': ContestBattle.enemyPokemon() } }">Pokémon name</knockout>
-                <!-- TODO: Trainer name and Pokemon nickname instead -->
+                <knockout data-bind="text: ContestBattle.enemyPokemon().nickname">Pokémon name</knockout>
             </knockout>
 
             <div class="progress timer">
