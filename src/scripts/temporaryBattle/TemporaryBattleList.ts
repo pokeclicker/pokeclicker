@@ -237,7 +237,7 @@ TemporaryBattleList['Ash Ketchum New Island'] = new TemporaryBattle(
         displayName: 'Ash Ketchum',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Pikachu (Clone)');
+            App.game.party.gainPokemonByName('Pikachu (Clone)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -1008,7 +1008,7 @@ TemporaryBattleList.Latias = new TemporaryBattle(
     {
         displayName: 'Latias',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Latias');
+            App.game.party.gainPokemonByName('Latias', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
         returnTown: 'Southern Island',
         imageName: '../pokemon/380',
@@ -1024,7 +1024,7 @@ TemporaryBattleList.Latios = new TemporaryBattle(
     {
         displayName: 'Latios',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Latios');
+            App.game.party.gainPokemonByName('Latios', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
         returnTown: 'Southern Island',
         imageName: '../pokemon/381',
@@ -1680,7 +1680,7 @@ TemporaryBattleList['Manaphy Egg Protectors'] = new TemporaryBattle(
         displayName: 'Manaphy Egg Protectors',
         imageName: 'specialNPCs/Manaphy Egg',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Manaphy');
+            App.game.party.gainPokemonByName('Manaphy', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -3198,7 +3198,7 @@ TemporaryBattleList['Hoopa 6'] = new TemporaryBattle(
         hideTrainer: true,
         returnTown: 'Kiloude City',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Hoopa (Unbound)');
+            App.game.party.gainPokemonByName('Hoopa (Unbound)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -3443,7 +3443,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Floette (Eternal)');
+            App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );

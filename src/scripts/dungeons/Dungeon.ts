@@ -667,7 +667,7 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
     () => {
         const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
 
-        Underground.gainMineItem(UndergroundItems.getByName(item).id, 1);
+        UndergroundController.gainMineItem(UndergroundItems.getByName(item).id, 1);
         Notifier.notify({
             message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd!`,
             type: NotificationConstants.NotificationOption.success,
@@ -12813,7 +12813,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     2000000, 40,
     () => {
-        App.game.party.gainPokemonByName('Urshifu (Single Strike)');
+        App.game.party.gainPokemonByName('Urshifu (Single Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Single Strike)!',
             type: NotificationConstants.NotificationOption.success,
@@ -12855,7 +12855,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     ],
     2000000, 36,
     () => {
-        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)');
+        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
             type: NotificationConstants.NotificationOption.success,
