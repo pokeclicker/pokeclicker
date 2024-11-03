@@ -2,7 +2,7 @@ class BerryDeal {
     public berries: { berryType: BerryType, amount: number}[];
     public item: { itemType: Item, amount: number};
 
-    public static list: Record<GameConstants.BerryTraderLocations, KnockoutObservableArray<BerryDeal>> = {};
+    public static list: Partial<Record<GameConstants.BerryTraderLocations, KnockoutObservableArray<BerryDeal>>> = {};
 
     constructor(berry: BerryType[], berryAmount: number[], item: Item, itemAmount: number) {
         this.berries = [];
@@ -10,6 +10,10 @@ class BerryDeal {
             this.berries.push({berryType: berry, amount: berryAmount[idx]});
         });
         this.item = {itemType: item, amount: itemAmount};
+    }
+
+    public calculateMaxTrades(): number {
+        return Math.min(...this.berries.map(b => Math.floor(App.game.farming.berryList[b.berryType]() / b.amount)));
     }
 
     public static getDeals(town: GameConstants.BerryTraderLocations) {
@@ -26,7 +30,7 @@ class BerryDeal {
     }
 
     private static randomEvoItem(): Item {
-        const evoItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.StoneType).filter(name => !(['None', 'Black_DNA', 'White_DNA', 'Solar_light', 'Key_stone', 'Lunar_light', 'Pure_light', 'Black_mane_hair', 'White_mane_hair']).includes(name)));
+        const evoItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.StoneType).filter(name => !(['None', 'Black_DNA', 'White_DNA', 'Solar_light', 'Key_stone', 'Lunar_light', 'Pure_light', 'Crystallized_shadow', 'Black_mane_hair', 'White_mane_hair']).includes(name)));
         return ItemList[evoItem];
     }
 
@@ -50,6 +54,18 @@ class BerryDeal {
                     SeededRand.intBetween(5, 15),
                 ],
                 ItemList.Fastball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                ],
+                [
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                ],
+                ItemList.Moonball,
                 1
             ),
             new BerryDeal(
@@ -426,7 +442,7 @@ class BerryDeal {
             const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
             deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {
-                Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
+                UndergroundController.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
             } else {
                 deal.item.itemType.gain(deal.item.amount * maxTrades);
             }

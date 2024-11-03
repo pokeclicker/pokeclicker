@@ -6,7 +6,6 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import AchievementRequirement from '../requirements/AchievementRequirement';
 import { LogBookTypes } from '../logbook/LogBookTypes';
-import LogEvent from '../LogEvent';
 import { createLogContent } from '../logbook/helpers';
 import AchievementCategory from './AchievementCategory';
 
@@ -25,8 +24,8 @@ export default class Achievement {
         public achievableFunction: () => boolean | null = null,
     ) {}
 
-    public check() {
-        if (this.isCompleted()) {
+    public check(): boolean {
+        if (this.isCompleted() && !this.unlocked()) {
             Notifier.notify({
                 title: `[Achievement] ${this.name}`,
                 message: this.description,
@@ -45,9 +44,9 @@ export default class Achievement {
             }
             // TODO: refilter within achievement bonus
             // AchievementHandler.filterAchievementList(true);
-            // Track when users gains an achievement and their total playtime
-            LogEvent('completed achievement', 'achievements', `completed achievement (${this.name})`, App.game.statistics.secondsPlayed());
+            return true;
         }
+        return false;
     }
 
     public getProgress() {

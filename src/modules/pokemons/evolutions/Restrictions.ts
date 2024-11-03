@@ -7,13 +7,16 @@ import InDungeonRequirement from '../../requirements/InDungeonRequirement';
 import InEnvironmentRequirement from '../../requirements/InEnvironmentRequirement';
 import InGymRequirement from '../../requirements/InGymRequirement';
 import InRegionRequirement from '../../requirements/InRegionRequirement';
-import QuestLineRequirement from '../../requirements/QuestLineRequirement';
+import QuestLineCompletedRequirement from '../../requirements/QuestLineCompletedRequirement';
 import DayCyclePartRequirement from '../../requirements/DayCyclePartRequirement';
+import MoonCyclePhaseRequirement from '../../requirements/MoonCyclePhaseRequirement';
 import WeatherRequirement from '../../requirements/WeatherRequirement';
 import WeatherType from '../../weather/WeatherType';
 import MegaEvolveRequirement from '../../requirements/MegaEvolveRequirement';
 import { EvoData, restrict } from './Base';
 import DayCyclePart from '../../dayCycle/DayCyclePart';
+import MoonCyclePhase from '../../moonCycle/MoonCyclePhase';
+import AttackEvolveRequirement from '../../requirements/AttackEvolveRequirement';
 
 export type EvoFn = (...args: unknown[]) => EvoData;
 
@@ -79,7 +82,7 @@ export const questlineRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    new QuestLineRequirement(questName),
+    new QuestLineCompletedRequirement(questName),
 );
 
 export const weatherRestrict = <T extends EvoFn>(evo: T) => (
@@ -106,6 +109,14 @@ export const nightRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => dayCyclePartRestrict(evo)([DayCyclePart.Night, DayCyclePart.Dawn], ...rest);
 
+export const moonCyclePhaseRestrict = <T extends EvoFn>(evo: T) => (
+    moonCyclePhases: MoonCyclePhase[],
+    ...rest: Parameters<T>
+) => restrict(
+    evo(...rest),
+    new MoonCyclePhaseRequirement(moonCyclePhases),
+);
+
 export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
     megaStone: MegaStoneType,
     ...rest: Parameters<T>
@@ -116,4 +127,16 @@ export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
         data,
         new MegaEvolveRequirement(data.basePokemon, megaStone),
     );
+};
+
+export const attackRestrict = <T extends EvoFn>(evo: T) => (
+    attackMultiplier: number,
+    ...rest: Parameters<T>
+) => {
+    const data = evo(...rest);
+    return restrict(
+        data,
+        new AttackEvolveRequirement(data.basePokemon, attackMultiplier),
+    );
+
 };

@@ -85,7 +85,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.category]: {
         text: 'Category',
-        getValue: (p) => p.category,
+        getValue: (p) => p.getCategorySortValues(),
         invert: true,
     },
 

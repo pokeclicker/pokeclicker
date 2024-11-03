@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
 /// <reference path="../declarations/GameHelper.d.ts" />
 /// <reference path="../declarations/party/Category.d.ts"/>
@@ -7,52 +8,86 @@
 /**
  * Main game class.
  */
-class Game {
+class Game implements TmpGameType {
     frameRequest;
     public static achievementCounter = 0;
-
-    // Features
-
     private _gameState: KnockoutObservable<GameConstants.GameState>;
     private worker: Worker;
 
-    /**
-     * TODO(@Isha) pass all features through the constructor
-     */
-    constructor(
-        public update: Update,
-        public profile: Profile,
-        public breeding: Breeding,
-        public pokeballs: Pokeballs,
-        public pokeballFilters: PokeballFilters,
-        public wallet: Wallet,
-        public keyItems: KeyItems,
-        public badgeCase: BadgeCase,
-        public oakItems: OakItems,
-        public oakItemLoadouts: OakItemLoadouts,
-        public categories: PokemonCategories,
-        public party: Party,
-        public gems: Gems,
-        public underground: Underground,
-        public farming: Farming,
-        public logbook: LogBook,
-        public redeemableCodes: RedeemableCodes,
-        public statistics: Statistics,
-        public quests: Quests,
-        public specialEvents: SpecialEvents,
-        public discord: Discord,
-        public achievementTracker: AchievementTracker,
-        public challenges: Challenges,
-        public battleFrontier: BattleFrontier,
-        public multiplier: Multiplier,
-        public saveReminder: SaveReminder,
-        public battleCafe: BattleCafeSaveObject,
-        public dreamOrbController: DreamOrbController,
-        public purifyChamber: PurifyChamber,
-        public weatherApp: WeatherApp,
-        public zMoves: ZMoves,
-        public pokemonContest: PokemonContest
-    ) {
+    // Features
+    public update: Update;
+    public profile: Profile;
+    public breeding: Breeding;
+    public pokeballs: Pokeballs;
+    public pokeballFilters: PokeballFilters;
+    public wallet: Wallet;
+    public keyItems: KeyItems;
+    public badgeCase: BadgeCase;
+    public oakItems: OakItems;
+    public oakItemLoadouts: OakItemLoadouts;
+    public categories: PokemonCategories;
+    public party: Party;
+    public gems: Gems;
+    public underground: Underground;
+    public farming: Farming;
+    public logbook: LogBook;
+    public redeemableCodes: RedeemableCodes;
+    public statistics: Statistics;
+    public quests: Quests;
+    public specialEvents: SpecialEvents;
+    public discord: Discord;
+    public achievementTracker: AchievementTracker;
+    public challenges: Challenges;
+    public battleFrontier: BattleFrontier;
+    public multiplier: Multiplier;
+    public saveReminder: SaveReminder;
+    public battleCafe: BattleCafeSaveObject;
+    public dreamOrbController: DreamOrbController;
+    public purifyChamber: PurifyChamber;
+    public weatherApp: WeatherApp;
+    public zMoves: ZMoves;
+    public pokemonContest: PokemonContest;
+
+    constructor() {
+        // Needs to be loaded first so save data can be updated (specifically "player" data)
+        this.update = new Update();
+        this.multiplier = new Multiplier();
+
+        // Load player
+        player = Save.load();
+
+        // Load other Features
+        this.profile = new Profile();
+        this.breeding = new Breeding(this.multiplier);
+        this.pokeballs = new Pokeballs();
+        this.pokeballFilters = new PokeballFilters();
+        this.wallet = new Wallet(this.multiplier);
+        this.keyItems = new KeyItems();
+        this.badgeCase = new BadgeCase();
+        this.oakItems = new OakItems([20, 50, 100], this.multiplier);
+        this.oakItemLoadouts = new OakItemLoadouts();
+        this.categories = new PokemonCategories();
+        this.party = new Party(this.multiplier);
+        this.gems = new Gems();
+        this.underground = new Underground();
+        this.farming = new Farming(this.multiplier);
+        this.logbook = new LogBook();
+        this.redeemableCodes = new RedeemableCodes();
+        this.statistics = new Statistics();
+        this.quests = new Quests();
+        this.specialEvents = new SpecialEvents();
+        this.discord = new Discord();
+        this.achievementTracker = new AchievementTracker();
+        this.challenges = new Challenges();
+        this.battleFrontier = new BattleFrontier();
+        this.saveReminder = new SaveReminder();
+        this.battleCafe = new BattleCafeSaveObject();
+        this.dreamOrbController = new DreamOrbController();
+        this.purifyChamber = new PurifyChamber();
+        this.weatherApp = new WeatherApp();
+        this.zMoves = new ZMoves();
+        this.pokemonContest = new PokemonContest();
+
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
 
@@ -70,20 +105,15 @@ class Game {
                 console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
             }
         });
-        saveObject.achievements?.forEach(achName => {
-            const ach = AchievementHandler.findByName(achName);
-            if (ach) {
-                ach.unlocked(true);
-            }
-        });
+
+        AchievementHandler.fromJSON(saveObject.achievements);
     }
 
     initialize() {
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
         EffectEngineRunner.initialize(this.multiplier, GameHelper.enumStrings(GameConstants.BattleItemType).map((name) => ItemList[name]));
-        FluteEffectRunner.initialize(this.multiplier);
-        ItemHandler.initilizeEvoStones();
+        ItemHandler.initializeItems();
         BreedingController.initialize();
         PokedexHelper.initialize();
         this.profile.initialize();
@@ -97,7 +127,11 @@ class Game {
         this.pokeballFilters.initialize();
         this.load();
 
-        // Update if the achievements are already completed
+        // Unlock achievements that have already been completed, avoids renotifying
+        AchievementHandler.preCheckAchievements();
+        // Flute bonuses depend on achievements so should be initialized afterwards
+        // but the bonuses can affect some achievements so we need to recheck them once flutes are online
+        FluteEffectRunner.initialize(this.multiplier);
         AchievementHandler.preCheckAchievements();
 
         // TODO refactor to proper initialization methods
@@ -108,20 +142,20 @@ class Game {
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
-        Underground.energyTick(this.underground.getEnergyRegenTime());
         AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
 
         const now = new Date();
         SeededDateRand.seedWithDate(now);
-        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
         GemDeals.generateDeals();
         ShardDeal.generateDeals();
+        GenericDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
         PokemonContestController.generateDailyContest(now);
+        DamageCalculator.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
@@ -138,7 +172,7 @@ class Game {
         }
 
         // If the player isn't on a route, they're in a town/dungeon
-        this.gameState = player.route() ? GameConstants.GameState.fighting : GameConstants.GameState.town;
+        this.gameState = player.route ? GameConstants.GameState.fighting : GameConstants.GameState.town;
     }
 
     computeOfflineEarnings() {
@@ -148,7 +182,7 @@ class Game {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
             let region: GameConstants.Region = player.region;
-            let route: number = player.route() || GameConstants.StartingRoutes[region];
+            let route: number = player.route || GameConstants.StartingRoutes[region];
             if (!MapHelper.validRoute(route, region)) {
                 route = 1;
                 region = GameConstants.Region.kanto;
@@ -168,7 +202,7 @@ class Game {
             if (numberOfPokemonDefeated === 0) {
                 return;
             }
-            const routeMoney: number = PokemonFactory.routeMoney(player.route(), player.region, false);
+            const routeMoney: number = PokemonFactory.routeMoney(player.route, player.region, false);
             const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
             const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
             App.game.wallet.gainMoney(moneyToEarn, true);
@@ -256,7 +290,7 @@ class Game {
         });
         // Check for breeding pokemons not in queue
         const breeding = [...App.game.breeding.eggList.map((l) => l().pokemon), ...App.game.breeding.queueList()];
-        App.game.party._caughtPokemon().filter((p) => p.breeding).forEach((p) => {
+        App.game.party.caughtPokemon.filter((p) => p.breeding).forEach((p) => {
             if (!breeding.includes(p.id)) {
                 p.breeding = false;
             }
@@ -446,13 +480,11 @@ class Game {
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
-                DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 BerryDeal.generateDeals(now);
-                if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
+                if (App.game.quests.isDailyQuestsUnlocked()) {
                     Notifier.notify({
                         title: 'It\'s a new day!',
-                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.\n' : ''}` +
-                        `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
+                        message: `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
                         type: NotificationConstants.NotificationOption.info,
                         timeout: 3e4,
                     });
@@ -487,16 +519,8 @@ class Game {
         }
 
         // Underground
-        Underground.counter += GameConstants.TICK_TIME;
-        if (Underground.counter >= GameConstants.UNDERGROUND_TICK) {
-            Underground.energyTick(Math.max(0, Underground.energyTick() - 1));
-            if (Underground.energyTick() == 0) {
-                // Check completed in case mine is locked out
-                Mine.checkCompleted();
-                this.underground.gainEnergy();
-                Underground.energyTick(this.underground.getEnergyRegenTime());
-            }
-            Underground.counter = 0;
+        if (this.underground.canAccess()) {
+            this.underground.update(GameConstants.TICK_TIME / GameConstants.SECOND);
         }
 
         // Farm

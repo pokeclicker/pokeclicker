@@ -10,7 +10,7 @@ type SafariItemWeighed = {
 }
 
 class SafariItemController {
-    public static list: Record<GameConstants.Region, Array<SafariItemWeighed>> = {
+    public static list: Partial<Record<GameConstants.Region, Array<SafariItemWeighed>>> = {
         [GameConstants.Region.kanto]: [
             {item: {id: 'Razz', type: ItemType.berry}, weight: 1.8},
             {item: {id: 'Nanab', type: ItemType.berry}, weight: 1.8},
@@ -98,9 +98,22 @@ class SafariItemController {
             {item: {id: 'Exeggcute (Single)', type: ItemType.item}, weight: 0.25, requirement: new MultiRequirement([new SafariLevelRequirement(5), new ObtainedPokemonRequirement('Exeggcute')])},
             {item: {id: 'Scizorite', type: ItemType.item}, weight: 1, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.kalos), new ObtainedPokemonRequirement('Scizor'), new SafariLevelRequirement(15)])},
         ],
+        [GameConstants.Region.alola]: [
+            {item: {id: 'Coba', type: ItemType.berry}, weight: 2},
+            {item: {id: 'Iapapa', type: ItemType.berry}, weight: 2},
+            {item: {id: 'Belue', type: ItemType.berry}, weight: 2},
+            {item: {id: 'Figy', type: ItemType.berry}, weight: 2},
+            {item: {id: 'Kelpsy', type: ItemType.berry}, weight: 2},
+            {item: {id: 'Damp Rock', type: ItemType.underground}, weight: 1},
+            {item: {id: 'Protein', type: ItemType.item}, weight: 0.5},
+            {item: {id: 'Carbos', type: ItemType.item}, weight: 0.5},
+            {item: {id: 'Magikarp_Biscuit', type : ItemType.item}, weight : 4},
+            {item: {id: 'Diveball', type: ItemType.item}, weight: 2},
+            {item: {id: 'Repeatball', type: ItemType.item}, weight: 2},
+        ],
     }
 
-    public static getRandomItem() {
+    public static getRandomItem(): BagItem | undefined {
         if (!SafariItemController.list[player.region]) {
             return undefined;
         }
@@ -108,7 +121,7 @@ class SafariItemController {
         return Rand.fromWeightedArray(list.map((i) => i.item), list.map((i) => i.weight));
     }
 
-    public static currentRegionHasItems() : boolean {
+    public static currentRegionHasItems(): boolean {
         if (SafariItemController.getRandomItem()) {
             return true;
         }

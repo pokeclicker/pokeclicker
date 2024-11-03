@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../declarations/upgrades/Upgrade.d.ts" />
 
 /**
@@ -14,7 +15,7 @@
  * All player variables need to be saved.
  */
 
-class Player {
+class Player implements TmpPlayerType {
 
     private _route: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
@@ -46,16 +47,19 @@ class Player {
         }
         this._region = ko.observable(savedPlayer._region);
         this._subregion = ko.observable(savedPlayer._subregion || 0);
-        this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this._region(), this._subregion()));
+        this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this.region, this.subregion));
         this._route = ko.observable(savedPlayer._route);
         // Check that the route is valid, otherwise set it to the regions starting route (route 0 means they are in a town)
-        if (this._route() > 0 && !MapHelper.validRoute(this._route(), this._region())) {
-            this._route(GameConstants.StartingRoutes[this._region()]);
+        if (this.route > 0 && !MapHelper.validRoute(this.route, this.region)) {
+            this.route = GameConstants.StartingRoutes[this.region];
         }
         // Return player to last town or starter town if their town no longer exist for whatever reason
-        this._townName = TownList[savedPlayer._townName] ? savedPlayer._townName : GameConstants.StartingTowns[this._region()];
+        this._townName = TownList[savedPlayer._townName] ? savedPlayer._townName : GameConstants.StartingTowns[this.region];
         this._town = ko.observable(TownList[this._townName]);
         this._town.subscribe(value => this._townName = value.name);
+
+        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
+        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         this.regionStarters = new Array<KnockoutObservable<number>>();
         for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
@@ -66,12 +70,12 @@ class Player {
             } else if (i == (savedPlayer.highestRegion ?? 0)) {
                 this.regionStarters.push(ko.observable(GameConstants.Starter.None));
                 if (i != GameConstants.Region.kanto) { // Kanto has it's own starter code
-                    if (this._region() != i) {
-                        this._region(i);
-                        this._subregion(0);
-                        this.route(undefined);
+                    if (this.region != i) {
+                        this.region = i;
+                        this.subregion = 0;
+                        this.route = undefined;
                         this._townName = GameConstants.StartingTowns[i];
-                        this._town = ko.observable(TownList[this._townName]);
+                        this.town = TownList[this._townName];
                     }
                     $('#pickStarterModal').modal('show');
                 }
@@ -83,8 +87,8 @@ class Player {
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
             for (const key in savedPlayer._itemList) {
-                if (this._itemList[key]) {
-                    this._itemList[key](savedPlayer._itemList[key]);
+                if (this.itemList[key]) {
+                    this.itemList[key](savedPlayer._itemList[key]);
                 }
             }
         }
@@ -93,8 +97,6 @@ class Player {
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer();
-        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
-        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
@@ -112,16 +114,12 @@ class Player {
     public highestRegion: KnockoutObservable<GameConstants.Region>;
     public highestSubRegion: KnockoutObservable<number>;
 
-    set itemList(value: { [p: string]: KnockoutObservable<number> }) {
-        this._itemList = value;
-    }
-
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
     }
 
     public amountOfItem(itemName: string) {
-        return this._itemList[itemName]();
+        return this.itemList[itemName]();
     }
 
     private _itemMultipliers: { [name: string]: number };
@@ -130,12 +128,12 @@ class Player {
         return this._itemMultipliers;
     }
 
-    get route(): KnockoutObservable<number> {
-        return this._route;
+    get route(): number {
+        return this._route();
     }
 
-    set route(value: KnockoutObservable<number>) {
-        this._route = value;
+    set route(value: number) {
+        this._route(value);
     }
 
     get region(): GameConstants.Region {
@@ -152,38 +150,42 @@ class Player {
 
     set subregion(value: number) {
         if (value < 0) {
-            value = Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id));
+            value = Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id));
         }
-        if (value > Math.max(...SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
+        if (value > Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
             value = 0;
         }
+        const changedSubregions = value !== this.subregion;
+
         this._subregion(value);
         if (value > this.highestSubRegion()) {
             this.highestSubRegion(value);
         }
-        const subregion = SubRegions.getSubRegionById(this.region, value);
 
-        if (subregion.startRoute) {
-            MapHelper.moveToRoute(subregion.startRoute, player.region);
-        } else if (subregion.startTown) {
-            MapHelper.moveToTown(subregion.startTown);
+        if (changedSubregions) {
+            const subregion = SubRegions.getSubRegionById(this.region, value);
+            if (subregion.startRoute && subregion.startRoute !== this.route) {
+                MapHelper.moveToRoute(subregion.startRoute, this.region);
+            } else if (subregion.startTown && subregion.startTown !== this.town.name) {
+                MapHelper.moveToTown(subregion.startTown);
+            }
         }
     }
 
-    get town(): KnockoutObservable<Town> {
-        return this._town;
+    get town(): Town {
+        return this._town();
     }
 
-    set town(value: KnockoutObservable<Town>) {
-        this._town = value;
+    set town(value: Town) {
+        this._town(value);
     }
 
     public gainItem(itemName: string, amount: number) {
-        this._itemList[itemName](this._itemList[itemName]() + amount);
+        this.itemList[itemName](this.itemList[itemName]() + amount);
     }
 
     public loseItem(itemName: string, amount: number) {
-        this._itemList[itemName](this._itemList[itemName]() - amount);
+        this.itemList[itemName](this.itemList[itemName]() - amount);
     }
 
     public lowerItemMultipliers(multiplierDecreaser: MultiplierDecreaser, amount = 1) {
@@ -194,13 +196,13 @@ class Player {
     }
 
     public hasMegaStone(megaStone: GameConstants.MegaStoneType): boolean {
-        return this._itemList[GameConstants.MegaStoneType[megaStone]]() > 0;
+        return this.itemList[GameConstants.MegaStoneType[megaStone]]() > 0;
     }
 
     public gainMegaStone(megaStone: GameConstants.MegaStoneType, notify = true) {
         const name = GameConstants.MegaStoneType[megaStone];
-        if (!this._itemList[name]()) {
-            player.gainItem(name, 1);
+        if (!this.itemList[name]()) {
+            this.gainItem(name, 1);
         }
 
         if (notify) {
@@ -211,6 +213,12 @@ class Player {
                 type: NotificationConstants.NotificationOption.success,
             });
         }
+    }
+
+    public pickStarter(index: number) {
+        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+        App.game.party.gainPokemonById(GameConstants.RegionalStarters[this.region][index], shiny);
+        this.regionStarters[this.region](index);
     }
 
     public toJSON() {

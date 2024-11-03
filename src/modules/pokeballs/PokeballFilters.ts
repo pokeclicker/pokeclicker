@@ -52,6 +52,8 @@ export default class PokeballFilters implements Feature {
         delete data.type1;
         delete data.type2;
 
+        data.category = [data.category];
+
         return data;
     });
 
@@ -151,6 +153,10 @@ export default class PokeballFilters implements Feature {
         }
 
         this.list(defaultFilters);
+    }
+
+    toggleAllFiltersEnabled(enabled: boolean) {
+        this.list().forEach((pf) => pf.enabled(enabled));
     }
 
     toJSON() {

@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/achievements/Achievement.d.ts" />
 
@@ -6,6 +7,7 @@ class AchievementHandler {
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
+    public static _cachedAchievementBonus: KnockoutObservable<number> = ko.observable(0);
 
     public static setNavigateIndex(index: number): void {
         if (index < 0 || index >= AchievementHandler.numberOfTabs()) {
@@ -47,7 +49,7 @@ class AchievementHandler {
     public static achievementSortedList = ko.pureComputed(() => {
         const achievementSortValue = Settings.getSetting('achievementSort').observableValue();
 
-        if (modalUtils.observableState.achievementsModal !== 'show') {
+        if (DisplayObservables.modalState.achievementsModal !== 'show') {
             return AchievementHandler.cachedSortedList || AchievementHandler.achievementListFiltered();
         }
 
@@ -116,19 +118,34 @@ class AchievementHandler {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             AchievementHandler.achievementList[i].unlocked(AchievementHandler.achievementList[i].isCompleted());
         }
+        AchievementHandler.updateAchievementBonus();
     }
 
     public static checkAchievements() {
+        let updateBonus = false;
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             if (!AchievementHandler.achievementList[i].unlocked()) {
-                AchievementHandler.achievementList[i].check();
+                const unlocked = AchievementHandler.achievementList[i].check();
+                if (unlocked) {
+                    updateBonus = true;
+                }
             }
+        }
+        if (updateBonus) {
+            AchievementHandler.updateAchievementBonus();
         }
     }
 
     public static toJSON(): string[] {
+        // Saves only achievements which have already been completed but currently don't have their requirements met
         const storage = AchievementHandler.achievementList.filter(a => a.unlocked() && !a.property.isCompleted()).map(a => a.name);
-        return storage.length ? storage : undefined;
+        return storage;
+    }
+
+    public static fromJSON(unlockedAchievements: string[]) {
+        unlockedAchievements?.forEach(achName => {
+            AchievementHandler.findByName(achName)?.unlocked(true);
+        });
     }
 
     public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, category: GameConstants.Region | GameConstants.ExtraAchievementCategories = GameConstants.ExtraAchievementCategories.global, achievableFunction: () => boolean | null = null) {
@@ -157,17 +174,24 @@ class AchievementHandler {
             category.totalWeight = AchievementHandler.achievementList.filter(a => a.category == category && a.achievable()).reduce((sum, a) => sum + a.bonusWeight, 0);
         });
         AchievementHandler.calculateBonus();
+        AchievementHandler.updateAchievementBonus();
     }
 
     public static achievementBonus(): number {
+        return AchievementHandler._cachedAchievementBonus();
+    }
+
+    public static updateAchievementBonus() {
         let sum = 0;
         AchievementHandler.getAchievementCategories().forEach(category => {
-            const total = AchievementHandler.achievementList.filter(a => a.category == category && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0) / category.totalWeight * category.achievementBonus / 100;
+            const total = AchievementHandler.achievementList.filter(a => {
+                return a.category == category && a.isCompleted();
+            }).reduce((sum, a) => sum + a.bonusWeight, 0) / category.totalWeight * category.achievementBonus / 100;
             if (!isNaN(total)) {
                 sum += total;
             }
         });
-        return sum;
+        AchievementHandler._cachedAchievementBonus(sum);
     }
 
     public static achievementBonusPercent(): string {
@@ -325,7 +349,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Day Care Is My Home', 'Hatch 250,000 eggs.', new HatchRequirement(250000), 0.7);
 
         AchievementHandler.addAchievement('Some Nice Help for the Day Care', 'Unlock 5 Hatchery Helpers.', new HatcheryHelperRequirement(5, 0), 0.1);
-        AchievementHandler.addAchievement('Why Do They Have To Work in Shifts?', 'Unlock all 11 Hatchery Helpers.', new HatcheryHelperRequirement(11, 0), 0.3);
+        AchievementHandler.addAchievement('Why Do They Have To Work in Shifts?', 'Unlock 11 Hatchery Helpers.', new HatcheryHelperRequirement(11, 0), 0.3);
         AchievementHandler.addAchievement('My Loyal Helpers', 'Get 3 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(3, 10), 0.4);
         AchievementHandler.addAchievement('Let\'s Try Some Other Helpers Too?', 'Get 5 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(5, 10), 0.5);
         AchievementHandler.addAchievement('Sam Just Wants To Help', 'Get 10 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(10, 10), 1);
@@ -344,11 +368,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Starting a Farming Empire', 'Unlock 6 Farm Hands.', new FarmHandRequirement(6), 0.3);
         AchievementHandler.addAchievement('Will I Ever Need All This Help?', 'Unlock all 9 Farm Hands.', new FarmHandRequirement(9), 0.4);
 
-        AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds.', new DiamondRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds.', new DiamondRequirement(1000), 0.15);
-        AchievementHandler.addAchievement('If You Like It, Then You Should\'ve Put a Ring on It', 'Obtain 10,000 Diamonds.', new DiamondRequirement(10000), 0.25);
-        AchievementHandler.addAchievement('Just Keep Trading!', 'Obtain 25,000 Diamonds.', new DiamondRequirement(25000), 0.4);
-        AchievementHandler.addAchievement('Got All Upgrades Yet?', 'Obtain 100,000 Diamonds.', new DiamondRequirement(100000), 0.6);
+        AchievementHandler.addAchievement('Bling', 'Obtain 1,000 Diamonds.', new DiamondRequirement(1000), 0.05);
+        AchievementHandler.addAchievement('Bling x10!', 'Obtain 10,000 Diamonds.', new DiamondRequirement(10000), 0.15);
+        AchievementHandler.addAchievement('If You Like It, Then You Should\'ve Put a Ring on It', 'Obtain 100,000 Diamonds.', new DiamondRequirement(100000), 0.25);
+        AchievementHandler.addAchievement('Just Keep Trading!', 'Obtain 250,000 Diamonds.', new DiamondRequirement(250000), 0.4);
+        AchievementHandler.addAchievement('Get some daylight!', 'Obtain 1,000,000 Diamonds.', new DiamondRequirement(1000000), 0.6);
 
         AchievementHandler.addAchievement('Is My Thumb Green Yet?', 'Dig up an item in the Underground for the first time.', new UndergroundItemsFoundRequirement(1), 0.01);
         AchievementHandler.addAchievement('My Shovel Is Starting To Crack', 'Dig up 10 items in the Underground.', new UndergroundItemsFoundRequirement(10), 0.02);
@@ -360,6 +384,21 @@ class AchievementHandler {
         AchievementHandler.addAchievement('This Takes Foreverrrrrrr', 'Dig deeper into the Underground 10 times.', new UndergroundLayersMinedRequirement(10), 0.03);
         AchievementHandler.addAchievement('DigDug Ain\'t Got Nothin\' on Me', 'Dig deeper into the Underground 100 times.', new UndergroundLayersMinedRequirement(100), 0.1);
         AchievementHandler.addAchievement('Both My Thumbs Are Green! This Can\'t Be Healthy', 'Dig deeper into the Underground 1,000 times.', new UndergroundLayersMinedRequirement(1000), 0.3);
+
+        AchievementHandler.addAchievement('Well, this is easy', 'Reach Underground Level 10.', new UndergroundLevelRequirement(10), 0.25);
+        AchievementHandler.addAchievement('To infinity and beyond', 'Reach Underground Level 20.', new UndergroundLevelRequirement(20), 0.5);
+        AchievementHandler.addAchievement('Just one more thing', 'Reach Underground Level 50.', new UndergroundLevelRequirement(50), 1);
+
+        AchievementHandler.addAchievement('Just pick one', 'Get at least 1 Underground Helper to level 25.', new UndergroundHelperRequirement(1, 25), 0.3);
+        AchievementHandler.addAchievement('It\'s an honest days work', 'Get at least 5 Underground Helper to level 25.', new UndergroundHelperRequirement(5, 25), 0.6);
+        AchievementHandler.addAchievement('Got a favorite?', 'Get at least 1 Underground Helper to level 50.', new UndergroundHelperRequirement(1, 50), 0.6);
+        AchievementHandler.addAchievement('They\'re all my favorites', 'Get at least 5 Underground Helper to level 50.', new UndergroundHelperRequirement(5, 50), 1.2);
+
+        AchievementHandler.addAchievement('Everyday I\'m chiseling', 'Use the Chisel Tool 1,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Chisel, 1000), 0.25);
+        AchievementHandler.addAchievement('U Can\'t Touch This', 'Use the Hammer Tool 2,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Hammer, 2000), 0.25);
+        AchievementHandler.addAchievement('KABOOM!', 'Use the Bomb Tool 5,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Bomb, 5000), 0.25);
+        AchievementHandler.addAchievement('Eagle Eye', 'Use the Survey Tool 100 times.', new UndergroundUseToolRequirement(UndergroundToolType.Survey, 100), 0.25);
+        AchievementHandler.addAchievement('Fine, I\'ll do it myself', 'Use any tool 10,000 times.', new UndergroundUseToolRequirement(null, 10000), 0.5);
 
         AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Vitamin.', new VitaminObtainRequirement(1), 0.01);
         AchievementHandler.addAchievement('Pre-Workout Supplements', 'Obtain 5 Vitamins.', new VitaminObtainRequirement(5), 0.02);
@@ -456,13 +495,13 @@ class AchievementHandler {
 
                 if (GymList[gym]?.flags?.achievement) {
                     AchievementHandler.addAchievement(
-                        `${elite ? gymRegion : ''} ${gymTitle} Regular`,
+                        `${elite ? `${gymRegion} ` : ''}${gymTitle} Regular`,
                         `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 10 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, category);
                     AchievementHandler.addAchievement(
-                        `${elite ? gymRegion : ''} ${gymTitle} Ruler`,
+                        `${elite ? `${gymRegion} ` : ''}${gymTitle} Ruler`,
                         `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 100 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[1], GameConstants.getGymIndex(gym)), 2, category);
                     AchievementHandler.addAchievement(
-                        `${elite ? gymRegion : ''} ${gymTitle} Owner`,
+                        `${elite ? `${gymRegion} ` : ''}${gymTitle} Owner`,
                         `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 1,000 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[2], GameConstants.getGymIndex(gym)), 3, category);
                 }
             });
@@ -597,3 +636,5 @@ class AchievementHandler {
         }, 1);
     }
 }
+
+AchievementHandler satisfies TmpAchievementHandlerType;

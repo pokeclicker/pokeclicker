@@ -1,5 +1,4 @@
 ///<reference path="../../declarations/globals.d.ts"/>
-///<reference path="PokemonHelper.ts"/>
 ///<reference path="BattlePokemon.ts"/>
 
 class PokemonFactory {
@@ -50,10 +49,6 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
-
-            // Track shinies encountered, and rate of shinies
-            LogEvent('encountered shiny', 'shiny pokemon', 'wild encounter',
-                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         if (roaming) {
             Notifier.notify({
@@ -71,7 +66,7 @@ class PokemonFactory {
                         : createLogContent.roamerShiny
                     : createLogContent.roamer
                 )({
-                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    location: Routes.getRoute(player.region, player.route).routeName,
                     pokemon: name,
                 })
             );
@@ -167,10 +162,6 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
-
-            // Track shinies encountered, and rate of shinies
-            LogEvent('encountered shiny', 'shiny pokemon', 'dungeon encounter',
-                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
 
         const ep = GameConstants.BASE_EP_YIELD * (mimic ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
@@ -178,12 +169,12 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, GameConstants.ShadowStatus.None, et, heldItem, ep);
     }
 
-    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean): BattlePokemon {
+    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean, trainerPokemon = 1): BattlePokemon {
         const name = pokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(name);
-        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
+        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)) / (isBoss ? 1 : trainerPokemon ** 0.75));
         const exp: number = basePokemon.exp;
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const shiny: boolean = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         // Reward 2% or 5% (boss) of dungeon DT cost when the trainer mons are defeated
         const money = 0;
@@ -212,10 +203,6 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
-
-            // Track shinies encountered, and rate of shinies
-            LogEvent('encountered shiny', 'shiny pokemon', 'dungeon boss encounter',
-                Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_BOSS_EP_MODIFIER;
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, gender, GameConstants.ShadowStatus.None, EncounterType.dungeonBoss, heldItem, ep);
@@ -248,10 +235,10 @@ class PokemonFactory {
     private static roamingEncounter(routeNum: number, region: GameConstants.Region, subRegion: SubRegion): boolean {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);
-        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
+        const routes = Routes.getRoutesByRegion(region).filter(r => RoamingPokemonList.findGroup(region, r.subRegion || 0) == RoamingPokemonList.findGroup(region, subRegion.id));
 
         // Check if the dice rolls in their favor
-        const encounter = PokemonFactory.roamingChance(Math.max(...routes), Math.min(...routes), route, region, subRegion);
+        const encounter = PokemonFactory.roamingChance(route, routes, region, subRegion);
         if (!encounter) {
             return false;
         }
@@ -266,12 +253,13 @@ class PokemonFactory {
         return true;
     }
 
-    private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
+    private static roamingChance(curRoute: RegionRoute, allRoutes: RegionRoute[], region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('roaming');
-        const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
+        const maxRoute = allRoutes.length - 1;
+        const routeInd = allRoutes.indexOf(curRoute);
         // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, RoamingPokemonList.findGroup(region, subRegion.id))()?.number == curRoute?.number;
-        const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / ((increasedChance ? 3 : 1) * bonus);
+        const roamingChance = (max + ((min - max) * (maxRoute - routeInd) / (maxRoute))) / ((increasedChance ? GameConstants.ROAMING_INCREASED_CHANCE : 1) * bonus);
         return Rand.chance(roamingChance);
     }
 
@@ -283,6 +271,10 @@ class PokemonFactory {
 
     private static generateHeldItem(item: BagItem, modifier: number): BagItem | null {
         if (!item || !BagHandler.displayName(item)) {
+            return null;
+        }
+
+        if (!(item.requirement?.isCompleted() ?? true)) {
             return null;
         }
 
@@ -309,6 +301,9 @@ class PokemonFactory {
             case 'Pure_light':
                 chance = GameConstants.LIGHT_ITEM_CHANCE;
                 break;
+            case 'Crystallized_shadow':
+                chance = GameConstants.SHADOW_ITEM_CHANCE;
+                break;
             case 'Rusted_Sword':
             case 'Rusted_Shield':
                 chance = GameConstants.RUST_ITEM_CHANCE;
@@ -317,11 +312,15 @@ class PokemonFactory {
             case 'White_mane_hair':
                 chance = GameConstants.MANE_ITEM_CHANCE;
                 break;
+            case 'Magikarp_Biscuit':
+                chance = GameConstants.HELD_MAGIKARP_BISCUIT;
+                break;
             case 'Rare_Candy':
                 chance = GameConstants.HELD_CANDY_ITEM_CHANCE;
                 break;
             case 'Christmas_present':
                 chance = GameConstants.CHRISTMAS_ITEM_CHANCE;
+                break;
         }
 
         chance /= modifier;
@@ -371,9 +370,18 @@ class PokemonFactory {
         return gender;
     }
 
-    public static generateWandererData(berry: Berry): WandererPokemon {
-        const availablePokemon = berry.wander.filter(p => pokemonMap[p].nativeRegion <= player.highestRegion());
-        const pokemon = Rand.fromArray(availablePokemon);
+    public static generateWandererData(plot: Plot): WandererPokemon {
+        const berry = plot.berryData;
+        const mulch = plot.mulch;
+        const availablePokemon = [];
+        const weights = [];
+        berry.wander.forEach((p, i) => {
+            if (pokemonMap[p].nativeRegion <= player.highestRegion()) {
+                availablePokemon.push(p);
+                weights.push(mulch === MulchType.Gooey_Mulch && i >= Berry.baseWander.length ? 2 : 1);
+            }
+        });
+        const pokemon = Rand.fromWeightedArray(availablePokemon, weights);
         const pokemonData = pokemonMap[pokemon];
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
         const catchChance = PokemonFactory.catchRateHelper(pokemonData.catchRate + 25, true);

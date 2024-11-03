@@ -38,12 +38,12 @@
                   <td class="text-left">Type</td>
                   <td class="text-left tight">
                     <span class="badge text-light px-1" data-bind="visible: pokemonMap[$data].type[0] >= 0,
-                                style: { 'background-color': TypeColor[pokemonMap[$data].type[0]] }">
+                                style: { 'background-color': GameConstants.TypeColor[pokemonMap[$data].type[0]] }">
                       <small><strong
                           data-bind="text: PokemonType[pokemonMap[$data].type[0]].toUpperCase()"></strong></small>
                     </span>
                     <span class="badge text-light px-1" data-bind="if: pokemonMap[$data].type[1] >= 0,
-                                style: { 'background-color': TypeColor[pokemonMap[$data].type[1]] }">
+                                style: { 'background-color': GameConstants.TypeColor[pokemonMap[$data].type[1]] }">
                       <small><strong
                           data-bind="text: PokemonType[pokemonMap[$data].type[1]].toUpperCase()"></strong></small>
                     </span>
@@ -100,7 +100,7 @@
                 <tr>
                   <td class="text-left">Breeding Efficiency</td>
                   <td class="text-left tight"><code
-                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumSignificantDigits: 2 })"></code>
+                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumFractionDigits: 3 })"></code>
                   </td>
                 </tr>
                 <!-- /ko -->
@@ -178,7 +178,12 @@
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
                         data-bind="checked: App.game.party.getPokemon($data).showShadowImage">
-                      <div class="toggler-slider">
+                      <div class="toggler-slider" data-bind="tooltip: {
+                        html: true,
+                        title: Settings.getSetting('partyShowPurifiedShadowSprites').observableValue() ?
+                            `<strong><u>${Settings.getSetting('partyShowPurifiedShadowSprites').displayName}</u></strong> is currently overriding this setting.` : '',
+                        trigger: 'hover',
+                      }">
                         <div class="toggler-knob"></div>
                       </div>
                     </label>
