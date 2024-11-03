@@ -275,6 +275,9 @@ class SafariPokemonList {
                 uncaught: !partyPokemon,
                 lock: !e.isAvailable(),
                 lockMessage: e.isAvailable() ? '' : e.requirement.hint(),
+                pokemonName: e.name,
+                grass: e.environments.find((env) => env == SafariEnvironments.Grass) != undefined,
+                water: e.environments.find((env) => env == SafariEnvironments.Water) != undefined,
             };
             encounters.push(eData);
         });
