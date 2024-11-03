@@ -71,9 +71,6 @@ class Gym extends TownContent implements TmpGymType {
     }
 
     public clears() {
-        if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {
-            return undefined;
-        }
         return App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.town)]();
     }
 

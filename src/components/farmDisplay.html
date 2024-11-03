@@ -1,11 +1,11 @@
-<div id="farmDisplay" class="card sortable border-secondary mb-3 pokeclicker-optional-module" data-bind="visible: App.game.farming.canAccess() && Settings.getSetting('showFarmModule').observableValue(), if: Settings.getSetting('showFarmModule').observableValue()">
+<div id="farmDisplay" class="card sortable border-secondary mb-3 pokeclicker-optional-module" data-bind="visible: App.game.farming.canAccess() && Settings.getSetting('showFarmModule').observableValue() !== 'never', if: Settings.getSetting('showFarmModule').observableValue() !== 'never'">
     <div class="card-header p-0" data-toggle="collapse" href="#plotListCard">
         <span>Farm</span>
     </div>
     <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="FarmController.openFarmModal()">
         View
     </button>
-    <!-- ko ifnot: Settings.getSetting('showFarmModuleControls').observableValue() -->
+    <!-- ko if: Settings.getSetting('showFarmModule').observableValue() === 'limited' -->
     <div class="dropdown" style="position: absolute; left: 0px; top: 0px;">
         <button class='btn btn-sm btn-primary dropdown-toggle dropdown-toggle-no-arrow' style="width: auto; height: 41px;" data-toggle="dropdown"
             data-bind="tooltip: {title: App.game.farming.unlockedBerries[FarmController.selectedBerry()]() ? BerryType[FarmController.selectedBerry()] : '???', trigger: 'hover', placement: 'right'}">
@@ -25,7 +25,7 @@
     </div>
     <!-- /ko -->
     <div id="plotListCard" class="card-body p-0 px-2 show" data-bind="css: { ShiftPressed: GameController.keyHeld.Shift() }">
-      <!-- ko if: Settings.getSetting('showFarmModuleControls').observableValue() -->
+      <!-- ko if: Settings.getSetting('showFarmModule').observableValue() === 'extended' -->
       <div class="row py-0 mt-1">
         <div class="col-3 px-1">
             <div class="btn-group w-100">

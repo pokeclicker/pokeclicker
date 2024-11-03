@@ -210,14 +210,12 @@ ItemList.Black_Glasses = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 
 ItemList.Charcoal = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.2, PokemonType.Fire, GameConstants.Region.johto);
 ItemList.Dragon_Fang = new TypeRestrictedAttackBonusHeldItem('Dragon_Fang', 10000, GameConstants.Currency.money, undefined, 'Dragon Fang', 1.2, PokemonType.Dragon, GameConstants.Region.johto);
 ItemList.Magnet = new TypeRestrictedAttackBonusHeldItem('Magnet', 10000, GameConstants.Currency.money, undefined, 'Magnet', 1.2, PokemonType.Electric, GameConstants.Region.johto);
-// TODO: Metal Coat is a evo-stone. Can be turned into a held item evolution
 ItemList.Metal_Powder = new TypeRestrictedAttackBonusHeldItem('Metal_Powder', 10000, GameConstants.Currency.money, undefined, 'Metal Powder', 1.2, PokemonType.Steel, GameConstants.Region.johto);
 ItemList.Miracle_Seed = new TypeRestrictedAttackBonusHeldItem('Miracle_Seed', 10000, GameConstants.Currency.money, undefined, 'Miracle Seed', 1.2, PokemonType.Grass, GameConstants.Region.johto);
 ItemList.Mystic_Water = new TypeRestrictedAttackBonusHeldItem('Mystic_Water', 10000, GameConstants.Currency.money, undefined, 'Mystic Water', 1.2, PokemonType.Water, GameConstants.Region.johto);
 ItemList.Never_Melt_Ice = new TypeRestrictedAttackBonusHeldItem('Never_Melt_Ice', 10000, GameConstants.Currency.money, undefined, 'Never-Melt Ice', 1.2, PokemonType.Ice, GameConstants.Region.johto);
 ItemList.Fairy_Feather = new TypeRestrictedAttackBonusHeldItem('Fairy_Feather', 10000, GameConstants.Currency.money, undefined, 'Fairy Feather', 1.2, PokemonType.Fairy, GameConstants.Region.johto);
 ItemList.Poison_Barb = new TypeRestrictedAttackBonusHeldItem('Poison_Barb', 10000, GameConstants.Currency.money, undefined, 'Poison Barb', 1.2, PokemonType.Poison, GameConstants.Region.johto);
-// TODO: Hard Stone is in the underground. We can keep it there, and give it two uses.
 ItemList.Rock_Incense = new TypeRestrictedAttackBonusHeldItem('Rock_Incense', 10000, GameConstants.Currency.money, undefined, 'Rock Incense', 1.2, PokemonType.Rock, GameConstants.Region.johto);
 ItemList.Sharp_Beak = new TypeRestrictedAttackBonusHeldItem('Sharp_Beak', 10000, GameConstants.Currency.money, undefined, 'Sharp Beak', 1.2, PokemonType.Flying, GameConstants.Region.johto);
 ItemList.Silk_Scarf = new TypeRestrictedAttackBonusHeldItem('Silk_Scarf', 10000, GameConstants.Currency.money, undefined, 'Silk Scarf', 1.2, PokemonType.Normal, GameConstants.Region.johto);

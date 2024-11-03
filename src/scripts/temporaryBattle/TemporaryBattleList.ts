@@ -237,7 +237,7 @@ TemporaryBattleList['Ash Ketchum New Island'] = new TemporaryBattle(
         displayName: 'Ash Ketchum',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Pikachu (Clone)');
+            App.game.party.gainPokemonByName('Pikachu (Clone)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -1008,7 +1008,7 @@ TemporaryBattleList.Latias = new TemporaryBattle(
     {
         displayName: 'Latias',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Latias');
+            App.game.party.gainPokemonByName('Latias', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
         returnTown: 'Southern Island',
         imageName: '../pokemon/380',
@@ -1024,7 +1024,7 @@ TemporaryBattleList.Latios = new TemporaryBattle(
     {
         displayName: 'Latios',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Latios');
+            App.game.party.gainPokemonByName('Latios', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
         returnTown: 'Southern Island',
         imageName: '../pokemon/381',
@@ -1680,7 +1680,7 @@ TemporaryBattleList['Manaphy Egg Protectors'] = new TemporaryBattle(
         displayName: 'Manaphy Egg Protectors',
         imageName: 'specialNPCs/Manaphy Egg',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Manaphy');
+            App.game.party.gainPokemonByName('Manaphy', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -3198,7 +3198,7 @@ TemporaryBattleList['Hoopa 6'] = new TemporaryBattle(
         hideTrainer: true,
         returnTown: 'Kiloude City',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Hoopa (Unbound)');
+            App.game.party.gainPokemonByName('Hoopa (Unbound)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -3291,7 +3291,7 @@ TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
 );
 TemporaryBattleList.Xerneas = new TemporaryBattle(
     'Xerneas',
-    [new GymPokemon('Xerneas', 281500000, 50)],
+    [new GymPokemon('Xerneas (Active)', 281500000, 50)],
     'You calmed down Xerneas and it ran away to the back of the lab.',
     [new QuestLineStepCompletedRequirement('A Beautiful World', 30)],
     undefined,
@@ -3443,7 +3443,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Floette (Eternal)');
+            App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -4756,7 +4756,7 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Pyroar', 225000000, 60),
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Mega Gyarados', 225000000, 60),
-        new GymPokemon('Xerneas', 240000000, 60),
+        new GymPokemon('Xerneas (Active)', 240000000, 60),
         new GymPokemon('Yveltal', 240000000, 60),
     ],
     'I can feel the fire of your convictions burning deep within your heart!',
