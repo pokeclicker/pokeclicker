@@ -3,8 +3,8 @@ class EvolutionStone extends CaughtIndicatingItem {
     type: GameConstants.StoneType;
     public unlockedRegion: GameConstants.Region;
 
-    constructor(type: GameConstants.StoneType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, displayName: string, unlockedRegion?: GameConstants.Region) {
-        super(GameConstants.StoneType[type], basePrice, currency, undefined, displayName, 'An evolution item. See your Item Bag for more information.', 'evolution');
+    constructor(type: GameConstants.StoneType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, displayName: string, unlockedRegion?: GameConstants.Region, options?: ShopOptions) {
+        super(GameConstants.StoneType[type], basePrice, currency, options, displayName, 'An evolution item. See your Item Bag for more information.', 'evolution');
         this.type = type;
         this.unlockedRegion = unlockedRegion;
     }
@@ -104,7 +104,7 @@ ItemList.Black_DNA         = new EvolutionStone(GameConstants.StoneType.Black_DN
 ItemList.White_DNA         = new EvolutionStone(GameConstants.StoneType.White_DNA, 2500, undefined, 'White DNA');
 ItemList.Sachet            = new EvolutionStone(GameConstants.StoneType.Sachet, 2500, undefined , 'Sachet');
 ItemList.Whipped_dream     = new EvolutionStone(GameConstants.StoneType.Whipped_dream, 2500, undefined , 'Whipped Dream');
-ItemList.Key_stone         = new EvolutionStone(GameConstants.StoneType.Key_stone, 25000, GameConstants.Currency.battlePoint, 'Key Stone', GameConstants.Region.kalos);
+ItemList.Key_stone         = new EvolutionStone(GameConstants.StoneType.Key_stone, 250, GameConstants.Currency.battlePoint, 'Key Stone', GameConstants.Region.kalos, {multiplier: 1.1, multiplierDecrease: false});
 ItemList.Ice_stone         = new EvolutionStone(GameConstants.StoneType.Ice_stone, 2500, undefined , 'Ice Stone');
 ItemList.Solar_light       = new EvolutionStone(GameConstants.StoneType.Solar_light, 2500, undefined, 'Solar Light');
 ItemList.Lunar_light       = new EvolutionStone(GameConstants.StoneType.Lunar_light, 2500, undefined, 'Lunar Light');
