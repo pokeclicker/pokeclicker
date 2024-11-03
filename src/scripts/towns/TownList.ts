@@ -6242,6 +6242,13 @@ const RedButton = new NPC('Red Button', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 23), new QuestLineStepCompletedRequirement('A Beautiful World', 24, GameConstants.AchievementOption.less)]),
 });
 
+const XerneasAZ = new NPC('AZ', [
+    'So, you’ve managed to calm the Aura Duo… Quite the feat. But your Xerneas… it seems to have entered a dormant state. That form you see now is but a shadow of its true power. To awaken its full potential, you must strengthen its bond through training. Only then, when its strength has grown a hundredfold, will the light of its true form shine once more.',
+], {
+    image: 'assets/images/npcs/AZ.png',
+    requirement: new MultiRequirement([new ObtainedPokemonRequirement('Xerneas'), new ObtainedPokemonRequirement('Xerneas (Active)', true)]),
+});
+
 const TeamFlareLysandre1 = new NPC('Team Flare Lysandre', [
     'The ultimate weapon\'s flower has finally bloomed above the soil. Don\'t you find its beauty captivating? As we speak, it draws its energy from the Legendary Pokémon.',
     'Even though resources, space, and energy on this planet are limited, the number of people and Pokémon has increased to an unsustainable level. Whether it\'s money or energy, the ones who steal are the ones who win in this world.',
@@ -6723,7 +6730,7 @@ TownList['Team Flare Secret HQ'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('A Beautiful World', 24)],
     [TemporaryBattleList.Xerneas, TemporaryBattleList.Yveltal, TemporaryBattleList['Team Flare Boss Lysandre 1']],
     {
-        npcs: [TeamFlareLysandre1, TeamFlareBossLysandre1],
+        npcs: [TeamFlareLysandre1, TeamFlareBossLysandre1, XerneasAZ],
     }
 );
 TownList['Terminus Cave'] = new DungeonTown(
