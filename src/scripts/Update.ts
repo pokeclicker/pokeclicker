@@ -1,5 +1,3 @@
-/// <reference path="./GameConstants.d.ts" />
-
 class Update implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'update';
@@ -2629,9 +2627,7 @@ class Update implements Saveable {
 
             // Multicategory pokemon
             saveData.party.caughtPokemon.forEach(pokemon => {
-                if (pokemon[6]) {
-                    pokemon[6] = [pokemon[6]];
-                }
+                pokemon[6] = [pokemon[6] ?? 0];
             });
 
             // Add Alola story battles
@@ -2704,6 +2700,131 @@ class Update implements Saveable {
 
             // The NewYLayer upgrades has been refactored to Items_All, copy the level
             saveData.underground.upgrades.Items_All = saveData.underground.upgrades.NewYLayer;
+
+        },
+
+        '0.10.21': ({ playerData, saveData, settingsData }) => {
+            // Rename settings to match pokedex filter name convention
+            settingsData.breedingType1Filter = settingsData.breedingTypeFilter1;
+            delete settingsData.breedingTypeFilter1;
+            settingsData.breedingType2Filter = settingsData.breedingTypeFilter2;
+            delete settingsData.breedingTypeFilter2;
+            // Rename settings to accurately describe purpose
+            settingsData.pokedexCaughtFilter = settingsData.pokedexShinyFilter;
+            delete settingsData.pokedexShinyFilter;
+            settingsData.breedingDisplayTextSetting = settingsData.breedingDisplayFilter;
+            delete settingsData.breedingDisplayFilter;
+
+            // Update breeding filters to use numeric values
+            ['breedingCategoryFilter', 'breedingShinyFilter', 'breedingType1Filter', 'breedingType2Filter', 'breedingRegionFilter', 'breedingPokerusFilter', 'breedingRegionalAttackDebuffSetting']
+                .forEach((filter) => {
+                    const convertedValue = Number.parseInt(settingsData[filter]);
+                    if (!Number.isNaN(convertedValue)) {
+                        settingsData[filter] = convertedValue;
+                    } else {
+                        delete settingsData[filter];
+                    }
+                });
+            // Update breedingHideAltFilter to use actual booleans
+            settingsData.breedingHideAltFilter = settingsData.breedingHideAltFilter === 'true';
+            // Update breeding type filters to use null for 'any type', matching the pokedex filters
+            if (settingsData.breedingType1Filter == -2) {
+                settingsData.breedingType1Filter = null;
+            }
+            if (settingsData.breedingType2Filter == -2) {
+                settingsData.breedingType2Filter = null;
+            }
+            // Pokémon Center renamed
+            if (playerData._townName == 'Route 3 Pokémon Center') {
+                playerData._townName = 'Route 4 Pokémon Center';
+            }
+
+            // Fix all weird amounts of Pokéballs
+            saveData.pokeballs.pokeballs = saveData.pokeballs.pokeballs.map(n => Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, n)));
+
+            // Fix pokemon multi-category bug from 0.10.20 update for very old files
+            saveData.party.caughtPokemon.forEach(pokemon => {
+                if (!Array.isArray(pokemon[6])) {
+                    pokemon[6] = [pokemon[6] ?? 0];
+                }
+            });
+
+            // Reset settings that the player shouldn't have access to yet but might have been
+            // set as default from a different file
+            if (playerData.highestRegion < 5) { // Kalos
+                settingsData.pokedexUniqueTransformationFilter = 'all';
+                settingsData.breedingUniqueTransformationFilter = 'all';
+            }
+            if (!saveData.challenges.list.regionalAttackDebuff) {
+                settingsData.breedingRegionalAttackDebuffSetting = '-1';
+            }
+        },
+
+        '0.10.22': ({ playerData, saveData, settingsData }) => {
+            // Reimburse and reset the underground upgrades
+            const upgradeCostMap = {
+                'Energy_Max': GameHelper.createArray(50, 500, 50),
+                'Items_Max': GameHelper.createArray(200, 800, 200),
+                'Items_Min': GameHelper.createArray(500, 5000, 1500),
+                'Energy_Gain': GameHelper.createArray(100, 1700, 100),
+                'Energy_Regen_Time': GameHelper.createArray(20, 400, 20),
+                'Daily_Deals_Max': GameHelper.createArray(150, 300, 150),
+                'Bomb_Efficiency': GameHelper.createArray(50, 250, 50),
+                'Survey_Cost': GameHelper.createArray(50, 250, 50),
+                'Items_All': GameHelper.createArray(3000, 3000, 3000),
+                'Reduced_Shards': GameHelper.createArray(750, 750, 750),
+                'Reduced_Plates': GameHelper.createArray(1000, 1000, 1000),
+                'Reduced_Evolution_Items': GameHelper.createArray(500, 500, 500),
+                'Reduced_Fossil_Pieces': GameHelper.createArray(200, 200, 200),
+            };
+
+            const totalReimburse = Object.entries(saveData.underground.upgrades).map(([key, value]) => {
+                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0);
+            }).reduce((acc, cur) => acc + cur, 0);
+            saveData.underground.upgrades = {};
+            saveData.wallet.currencies[GameConstants.Currency.diamond] += totalReimburse;
+
+            if (totalReimburse > 0) {
+                Notifier.notify({
+                    title: 'Underground refund',
+                    type: NotificationConstants.NotificationOption.info,
+                    timeout: GameConstants.DAY,
+                    message: `The old Underground upgrade system has been removed due to recent changes.
+                    We have refunded ${totalReimburse.toLocaleString('en-US')} <img src="./assets/images/currency/diamond.svg" height="24px"/> to your wallet.`,
+                });
+            }
+
+            if (saveData.keyItems.Explorer_kit) {
+                Notifier.notify({
+                    title: 'Underground changes',
+                    type: NotificationConstants.NotificationOption.warning,
+                    timeout: GameConstants.DAY,
+                    message: `The Underground has been overhauled! Check out the Underground Help tab for all the details on the new features and how everything works. Dive in and explore the changes!
+                    <button class="btn btn-block btn-secondary" onclick="UndergroundController.openUndergroundModal()" data-dismiss="toast">Open Underground</button>`,
+                });
+            }
+
+            // Remove the old underground save data
+            saveData.underground = null;
+
+            // Reset the Cell Battery
+            saveData.oakItems[OakItemType[OakItemType.Cell_Battery]].level = 0;
+            saveData.oakItems[OakItemType[OakItemType.Cell_Battery]].exp = 0;
+
+            // Reset Key Stone multiplier
+            delete playerData._itemMultipliers.Key_stone;
+
+            // Held item setting change
+            settingsData.heldItemHideHoldingThisItem = settingsData.heldItemShowHoldingThisItem;
+            delete settingsData.heldItemShowHoldingThisItem;
+
+            // Simplify farm module settings
+            if (settingsData.showFarmModule === false) {
+                settingsData.showFarmModule = 'never';
+            } else {
+                settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
+            }
+            delete settingsData.showFarmModuleControls;
         },
     };
 
@@ -2764,7 +2885,7 @@ class Update implements Saveable {
         const settingsData = this.getSettingsData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
+        const backupSaveData = JSON.stringify({ player: playerData, save: saveData, settings: settingsData });
 
         const button = document.createElement('a');
         try {

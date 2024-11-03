@@ -19,7 +19,7 @@ class SafariEncounter {
 }
 
 class SafariPokemonList {
-    public static list: Record<GameConstants.Region, KnockoutObservable<Array<SafariEncounter>>> = {
+    public static list: Partial<Record<GameConstants.Region, KnockoutObservable<Array<SafariEncounter>>>> = {
         [GameConstants.Region.kanto]: ko.observableArray(),
         [GameConstants.Region.johto]: ko.observableArray(),
         [GameConstants.Region.sinnoh]: ko.observableArray(),
@@ -224,7 +224,7 @@ class SafariPokemonList {
             new SafariEncounter('Magikarp Black Mask', 2, [SafariEnvironments.Water], new TemporaryBattleRequirement('Magikarp Jump Tykarp 2'), false, 'self'),
             new SafariEncounter('Magikarp Saucy Blue', 2, [SafariEnvironments.Water], new QuestLineCompletedRequirement('Dr. Splash\'s Research Project'), false, 'self'),
             // Both, meme encounter
-            new SafariEncounter('Ditto (Transforming)', 0.3, [SafariEnvironments.Water, SafariEnvironments.Grass],
+            new SafariEncounter('Ditto (Magikarp)', 0.3, [SafariEnvironments.Water, SafariEnvironments.Grass],
                 new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => Math.floor(p.id) === pokemonMap.Magikarp.id, 'Catch more Magikarp species.', 6),
                 false,
                 'Magikarp'
