@@ -251,7 +251,7 @@ GymList['Violet City'] = new Gym(
         new GymPokemon('Pidgeotto', 112000, 9),
     ],
     BadgeEnums.Zephyr,
-    250,
+    500,
     '...Darn! My Dad\'s cherished bird Pokémon... All right. Take this. It\'s the official Pokémon League Zephyr Badge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sprout Tower'))]
 );
@@ -264,7 +264,7 @@ GymList['Azalea Town'] = new Gym(
         new GymPokemon('Scyther', 119000, 16),
     ],
     BadgeEnums.Hive,
-    500,
+    1000,
     'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. Ok, you win. Take this Badge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slowpoke Well'))]
 );
@@ -276,7 +276,7 @@ GymList['Goldenrod City'] = new Gym(
         new GymPokemon('Miltank', 170000, 20),
     ],
     BadgeEnums.Plain,
-    1000,
+    1500,
     '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.',
     [new RouteKillRequirement(10, GameConstants.Region.johto, 34)]
 );
@@ -290,7 +290,7 @@ GymList['Ecruteak City'] = new Gym(
         new GymPokemon('Haunter', 130000, 23),
     ],
     BadgeEnums.Fog,
-    1500,
+    2500,
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
@@ -306,7 +306,7 @@ GymList['Cianwood City'] = new Gym(
         new GymPokemon('Poliwrath', 183000, 30),
     ],
     BadgeEnums.Storm,
-    2500,
+    3500,
     'Wha? Huh? I lost? How about that! You\'re worthy of the Storm Badge!',
     [new QuestLineStepCompletedRequirement('The Sick Ampharos', 2)]
 );
@@ -319,7 +319,7 @@ GymList['Olivine City'] = new Gym(
         new GymPokemon('Steelix', 182000, 35),
     ],
     BadgeEnums.Mineral,
-    3500,
+    4000,
     '...You are a better trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Badge.',
     [new QuestLineCompletedRequirement('The Sick Ampharos')]
 );
@@ -332,7 +332,7 @@ GymList['Mahogany Town'] = new Gym(
         new GymPokemon('Piloswine', 196000, 31),
     ],
     BadgeEnums.Glacier,
-    4000,
+    5000,
     'Ah, I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Badge!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rocket\'s Hideout'))]
 );
@@ -346,7 +346,7 @@ GymList['Blackthorn City'] = new Gym(
         new GymPokemon('Kingdra', 220000, 40),
     ],
     BadgeEnums.Rising,
-    5000,
+    7500,
     'Here, this is the Rising Badge... Hurry up! Take it!',
     [new GymBadgeRequirement(BadgeEnums.Glacier)]
 );
@@ -363,7 +363,7 @@ GymList['Elite Will'] = new Gym(
         new GymPokemon('Xatu', 260250, 42),
     ],
     BadgeEnums.Elite_Will,
-    7500,
+    10000,
     'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.',
     [new TemporaryBattleRequirement('Silver 5')]
 );
@@ -378,7 +378,7 @@ GymList['Elite Koga'] = new Gym(
         new GymPokemon('Crobat', 260250, 44),
     ],
     BadgeEnums.Elite_Koga,
-    7500,
+    10000,
     'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Will)],
     undefined, undefined, { displayName: 'Elite Koga' }
@@ -394,7 +394,7 @@ GymList['Elite Bruno2'] = new Gym(
         new GymPokemon('Machamp', 260250, 46),
     ],
     BadgeEnums.Elite_Bruno2,
-    7500,
+    10000,
     'Having lost, I have no right to say anything… Go face your next challenge!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Koga)],
     undefined, undefined, { displayName: 'Elite Bruno' }
@@ -410,7 +410,7 @@ GymList['Elite Karen'] = new Gym(
         new GymPokemon('Houndoom', 266000, 47),
     ],
     BadgeEnums.Elite_Karen,
-    7500,
+    10000,
     'Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what\'s important. Go on — — the Champion is waiting.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno2)]
 );
@@ -427,7 +427,7 @@ GymList['Champion Lance'] = new Gym(
         new GymPokemon('Dragonite', 270000, 50),
     ],
     BadgeEnums.Elite_JohtoChampion,
-    7500,
+    13000,
     '…It\'s over. But it\'s an odd feeling. I\'m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Karen)],
     () => {},
@@ -648,7 +648,7 @@ GymList['Mikan Island'] = new Gym(
         new GymPokemon('Blastoise', 2307500, 24),
     ],
     BadgeEnums['Coral-Eye'],
-    740,
+    10000,
     'I can see why you made it so far in the Indigo League, and I bet you\'ll do pretty well in the Orange League.\n' +
     'This is the Coral-Eye Badge of the Mikan Gym, to prove that you won your match!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tanoby Ruins'))]
@@ -664,7 +664,7 @@ GymList['Navel Island'] = new Gym(
         new GymPokemon('Electrode', 923000, 24),
     ],
     BadgeEnums.Sea_Ruby,
-    740,
+    10000,
     'You and the others were great.\nNow I\'d like to give you and your fellow challengers something you really deserve. The Sea Ruby badge. It\'s yours.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lost Cave'))]
 );
@@ -677,7 +677,7 @@ GymList['Trovita Island'] = new Gym(
         new GymPokemon('Starmie', 1538333, 24),
     ],
     BadgeEnums.Spike_Shell,
-    740,
+    10000,
     'Nice job, guys. Here are your Spike Shell badges, guys.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 41)]
 );
@@ -689,7 +689,7 @@ GymList['Kumquat Island'] = new Gym(
         new GymPokemon('Marowak', 2307500, 24),
     ],
     BadgeEnums.Jade_Star,
-    740, //TODO
+    10000,
     'You did a fine job.\nAnd now, as Kumquat Island gym leader, and a member of the Orange Crew, I happily present this token of your victory.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Icefall Cave'))]
 );
@@ -707,7 +707,7 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
         new GymPokemon('Dragonite', 1124400, 37),
     ],
     BadgeEnums.Elite_OrangeChampion,
-    4800,
+    12000,
     'You really deserve that trophy. You\'re a great Pokémon trainer.',
     [
         new GymBadgeRequirement(BadgeEnums['Coral-Eye']),
@@ -729,7 +729,7 @@ GymList['Cipher Admin Ein'] = new Gym (
         new GymPokemon('Manectric', 12099520, 50),
     ],
     BadgeEnums.Elite_F_Disk,
-    10000,
+    12000,
     'Urrrgh… What unbelievable power…',
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Ein' }
@@ -745,7 +745,7 @@ GymList['Cipher Admin Miror B.'] = new Gym (
         new GymPokemon('Armaldo', 11599520, 43),
     ],
     BadgeEnums.Elite_L_Disk,
-    10000,
+    12000,
     'I\'m an awesome dancer… But I can\'t win in battles!',
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Miror B.' }
@@ -761,7 +761,7 @@ GymList['Cipher Admin Dakim'] = new Gym (
         new GymPokemon('Houndoom', 11999520, 47),
     ],
     BadgeEnums.Elite_R_Disk,
-    10000,
+    12000,
     'This can\'t be! The mighty Dakim loses again?',
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Dakim' }
@@ -777,7 +777,7 @@ GymList['Cipher Admin Venus'] = new Gym (
         new GymPokemon('Milotic', 12299520, 48),
     ],
     BadgeEnums.Elite_U_Disk,
-    10000,
+    12000,
     'I shall forget that I ever battled with you. Yes, that\'s what I\'ll do. Ohohohoh!',
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Venus' }
@@ -794,7 +794,7 @@ GymList['Cipher Admin Lovrina'] = new Gym ( //Kalos E4 difficulty, plus 10% per 
         new GymPokemon('Meganium', 30994948, 100),
     ],
     BadgeEnums.Elite_ColosseumLovrina,
-    100000,
+    65000,
     'I was so impressed by your toughness! Because you are so tough, I\'ll let you be the first member in my fan club! Doesn\'t that so make your day?',
     [new QuestLineCompletedRequirement('Gale of Darkness')],
     undefined, undefined, { displayName: 'Challenge Lovrina' }
@@ -1458,7 +1458,7 @@ GymList['Iki Town'] = new Gym(
         new GymPokemon('Crabrawler', 63069612, 16),
     ],
     BadgeEnums.Melemele_Stamp,
-    128000,
+    16000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!</br><img width="100" src="assets/images/items/zCrystal/Fightinium Z.svg"/></br>With this victory... you have cleared all of the trials of Melemele Island, the first of Alola\'s islands! The Melemele stamp is proof of your accomplishments.',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 10), new TemporaryBattleRequirement('Hau 3')])],
     undefined, undefined, { displayName: 'Hala\'s Grand Trial' }
@@ -1472,7 +1472,7 @@ GymList['Konikoni City'] = new Gym(
         new GymPokemon('Lycanroc (Midnight)', 83170680, 28),
     ],
     BadgeEnums.Akala_Stamp,
-    128000,
+    30000,
     'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!</br><img width="100" src="assets/images/items/zCrystal/Rockium Z.svg"/></br>I think your journey will hold many surprises. And I hope it holds many joys.',
     [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
     undefined, undefined, { displayName: 'Olivia\'s Grand Trial' }
@@ -1486,7 +1486,7 @@ GymList['Malie City'] = new Gym(
         new GymPokemon('Alolan Persian', 103271750, 44),
     ],
     BadgeEnums.Ula_Ula_Stamp,
-    128000,
+    52000,
     'Hmph... heh. Let me fix your team up for you. Here. This is yours.</br><img width="100" src="assets/images/items/zCrystal/Darkinium Z.svg"/></br>There. Congratulations or whatever. You\'ve officially finished your Ula\'ula trials. You\'ve got somewhere else to be, don\'t you? Try not to destroy the whole place.',
     [new TemporaryBattleRequirement('Gladion 2')],
     undefined, undefined, { displayName: 'Nanu\'s Grand Trial' }
@@ -1505,7 +1505,7 @@ GymList['Exeggutor Island'] = new Gym(
         new GymPokemon('Mudsdale', 92529615, 54, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
     ],
     BadgeEnums.Poni_Stamp,
-    128000,
+    64000,
     'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!</br><img width="100" src="assets/images/items/zCrystal/Groundium Z.svg"/></br>Then go on with you two! Head straight through here and find the altar!',
     [new QuestLineCompletedRequirement('Emissary of Light')],
     undefined, undefined, { displayName: 'Hapu\'s Grand Trial' }
@@ -1526,7 +1526,7 @@ GymList['Elite Molayne'] = new Gym(
         new GymPokemon('Alolan Dugtrio', 95774052, 57),
     ],
     BadgeEnums.Elite_Molayne,
-    64000,
+    100000,
     'That Kukui... He certainly found an interesting Trainer for me to face!',
     [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
@@ -1541,7 +1541,7 @@ GymList['Elite Olivia'] = new Gym(
         new GymPokemon('Lycanroc (Midnight)', 150439372, 57),
     ],
     BadgeEnums.Elite_Olivia,
-    64000,
+    100000,
     'I don\'t see the same look in your eyes that I saw when we first met on Akala Island. Have you had some experiences that you\'ll carry with you in your heart forever? Well, it\'s time for you to move on.',
     [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
@@ -1556,7 +1556,7 @@ GymList['Elite Acerola'] = new Gym(
         new GymPokemon('Palossand', 103277813, 57),
     ],
     BadgeEnums.Elite_Acerola,
-    64000,
+    100000,
     'I\'m...I\'m speechless! You\'ve done me in!',
     [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
@@ -1571,7 +1571,7 @@ GymList['Elite Kahili'] = new Gym(
         new GymPokemon('Toucannon', 91392090, 57),
     ],
     BadgeEnums.Elite_Kahili,
-    64000,
+    100000,
     'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
     [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
@@ -1593,7 +1593,7 @@ GymList['Champion Hau'] = new Gym(
         new GymPokemon('Incineroar', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     BadgeEnums.Champion_Stamp,
-    100000,
+    150000,
     'We\'re gonna keep moving forward, by staying at full power all the time!',
     [
         new GymBadgeRequirement(BadgeEnums.Elite_Molayne),
