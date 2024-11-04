@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
 class DungeonRunner {
@@ -136,7 +137,7 @@ class DungeonRunner {
     public static handleInteraction(source: GameConstants.DungeonInteractionSource = GameConstants.DungeonInteractionSource.Click) {
         if (DungeonRunner.fighting() && !DungeonBattle.catching() && source === GameConstants.DungeonInteractionSource.Click) {
             DungeonBattle.clickAttack();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind && !DungeonGuides.hired()) {
             DungeonRunner.dungeonLeave();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest) {
             DungeonRunner.openChest();
@@ -198,7 +199,7 @@ class DungeonRunner {
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
         } else if (UndergroundItems.getByName(input) instanceof UndergroundItem) {
             DungeonRunner.lootNotification(input, amount, weight, UndergroundItems.getByName(input).image);
-            return Underground.gainMineItem(UndergroundItems.getByName(input).id, amount);
+            return UndergroundController.gainMineItem(UndergroundItems.getByName(input).id, amount);
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             const image = `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
             DungeonRunner.lootNotification(input, amount, weight, image);
@@ -265,7 +266,9 @@ class DungeonRunner {
         );
         DungeonRunner.map.playerPosition.notifySubscribers();
         DungeonRunner.timeLeft(DungeonRunner.timeLeft() + GameConstants.DUNGEON_LADDER_BONUS);
-        DungeonRunner.map.playerMoved(false);
+        if (!DungeonGuides.hired()) {
+            DungeonRunner.map.playerMoved(false);
+        }
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
@@ -361,3 +364,5 @@ class DungeonRunner {
         return config[index]?.flash;
     }
 }
+
+DungeonRunner satisfies TmpDungeonRunnerType;

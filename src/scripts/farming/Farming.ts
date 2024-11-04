@@ -850,7 +850,7 @@ class Farming implements Feature {
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
             ],
             new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]),
-            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Sizzlipede']
+            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Mothim', 'Sizzlipede']
         );
 
         this.berryData[BerryType.Charti] = new Berry(
@@ -928,6 +928,7 @@ class Farming implements Feature {
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
                 'It has a tendency to overtake nearby plants.',
+                'It also prevents Kasib from mutating.',
             ],
             undefined,
             ['Houndour', 'Absol', 'Stunky', 'Zorua', 'Impidimp']
@@ -966,7 +967,7 @@ class Farming implements Feature {
             3.3,
             BerryFirmness.Very_Soft,
             ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'],
-            undefined,
+            new Aura(AuraType.Egg, [0.99, 0.98, 0.97]),
             ['Snorlax', 'Girafarig', 'Swablu', 'Munchlax', 'Audino', 'Skwovet']
         );
 
@@ -1178,7 +1179,7 @@ class Farming implements Feature {
             BerryFirmness.Very_Hard,
             [
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
-                'This power keeps other Berries alive for longer.',
+                'This power revitalizes and prevents other berries from withering.',
             ],
             undefined,
             ['Mew']
@@ -1512,7 +1513,6 @@ class Farming implements Feature {
                 BerryType.Grepa,
             ]));
         // Rindo
-        // TODO: HLXII - Change mutation to grow spontaneously when Grass pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Rindo,
             [[10, 15], [0, 0], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
@@ -1536,7 +1536,6 @@ class Farming implements Feature {
         // Shuca
         this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItemType.Sprinklotad));
         // Coba
-        // TODO: HLXII - Change mutation to grow spontaneously when Flying pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Coba,
             [[0, 0], [10, 15], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
@@ -1662,7 +1661,6 @@ class Farming implements Feature {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Palkia').id]() > 0,
         }));
         // Lansat
-        // TODO: HLXII - Add Mutation to evolve Payapa when Milotic, Gardevoir, Blissey, and Togekiss in party.
         this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, [{ berry: BerryType.Roseli, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Dialga').id]() > 0,
         }));
@@ -1860,8 +1858,8 @@ class Farming implements Feature {
                 message = `A wild ${displayWanderer.name} has wandered onto the farm!`;
                 image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny);
                 type = displayWanderer.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
-                sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
-                setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
+                sound = displayWanderer.shiny ? NotificationConstants.NotificationSound.General.shiny_long : NotificationConstants.NotificationSound.Farming.wandering_pokemon;
+                setting = displayWanderer.shiny ? NotificationConstants.NotificationSetting.General.encountered_shiny : NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
                 break;
         }
 
@@ -2270,12 +2268,14 @@ class Farming implements Feature {
         const berry = App.game.farming.berryData[plot.wanderer.berry];
 
         const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
-        App.game.wallet.gainFarmPoints(farmPoints);
+        const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;
+        App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
 
         const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
         if (pokeball !== GameConstants.Pokeball.None) {
             wanderer.pokeball(pokeball);
             wanderer.catching(true);
+            App.game.pokeballs.usePokeball(pokeball);
             // Halved catch time in farm, it does not matter in the balance
             setTimeout(() => this.attemptCatchWanderer(plot), App.game.pokeballs.calculateCatchTime(pokeball) / 2);
         } else {
@@ -2286,7 +2286,6 @@ class Farming implements Feature {
 
     public attemptCatchWanderer(plot: Plot) {
         const wanderer = plot.wanderer;
-        App.game.pokeballs.usePokeball(wanderer.pokeball());
         const catchChance = GameConstants.clipNumber(
             wanderer.catchRate
                 + App.game.pokeballs.getCatchBonus(wanderer.pokeball(), { pokemon: wanderer.name, encounterType: EncounterType.wanderer })

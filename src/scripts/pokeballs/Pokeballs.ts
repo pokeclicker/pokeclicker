@@ -73,7 +73,7 @@ class Pokeballs implements Feature {
                 }
 
                 // If area is a water environment,
-                if (MapHelper.getCurrentEnvironment() == 'Water') {
+                if (MapHelper.getCurrentEnvironments().includes('Water')) {
                     return 15;
                 }
                 return 0;
@@ -124,11 +124,11 @@ class Pokeballs implements Feature {
                 return 10;
             }, 1000, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
 
-            new Pokeball(GameConstants.Pokeball.Moonball, () => {
+            new Pokeball(GameConstants.Pokeball.Moonball, (opts) => {
                 const moonCycleMod = MoonCycle.currentMoonCyclePhase();
                 const moonCycleBonus = (4 - Math.abs((moonCycleMod % 8) - 4)) * 5;
 
-                if (GameConstants.MoonEvoPokemon.has(Battle.enemyPokemon().name)) {
+                if (GameConstants.MoonEvoPokemon.has(opts.pokemon)) {
                     return Math.min(20, moonCycleBonus + 10);
                 }
                 return moonCycleBonus;
@@ -187,8 +187,6 @@ class Pokeballs implements Feature {
             category: App.game.party.getPokemon(id)?.category,
         })?.ball() ?? GameConstants.Pokeball.None;
 
-        let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
-
         if (pref == GameConstants.Pokeball.Beastball) {
             if (isUltraBeast && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
                 return GameConstants.Pokeball.Beastball;
@@ -199,20 +197,19 @@ class Pokeballs implements Feature {
             return GameConstants.Pokeball.None;
         }
 
-        if (this.pokeballs[pref]?.quantity()) {
+        if (this.pokeballs[pref]?.quantity() > 0) {
             return pref;
-        } else if (pref <= GameConstants.Pokeball.Masterball) {
-            // Check which Pokeballs we have in stock that are of equal or lesser than selection (upto Masterball)
-            for (let i: number = pref; i >= 0; i--) {
+        } else {
+            // Use a lesser, Pokédollar purchaseable, ball if we have one
+            let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
+            const maxToCheck = Math.min(pref, GameConstants.Pokeball.Ultraball);
+            for (let i: number = maxToCheck; i >= 0; i--) {
                 if (this.pokeballs[i].quantity() > 0) {
                     use = i;
                     break;
                 }
             }
             return use;
-        } else {
-            // Use a normal Pokeball or None if we don't have Pokeballs in stock
-            return this.pokeballs[GameConstants.Pokeball.Pokeball].quantity() ? GameConstants.Pokeball.Pokeball : GameConstants.Pokeball.None;
         }
     }
 

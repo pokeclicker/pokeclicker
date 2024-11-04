@@ -960,7 +960,7 @@
         { name: "Underground Entrance"
         , x: 32, y: 13
         , width: 3, height: 4
-        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        , databind: "click:function(){UndergroundController.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
         })
     %>
 
@@ -980,24 +980,11 @@
         })
     %>
 
-    <%- include('templates/mapOverlay',
-         { name: "Professor Birch's Blimp"
-         , x: 19, y: 43
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_empty.png"
-         })
-    %>
-
-    <%- include('templates/mapOverlay',
-         { name: "Professor Birch's Blimp"
-         , x: 19, y: 43
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_pikachu.png"
-         })
+    <%- include('templates/mapBlimp',
+        { name: "Professor Birch"
+        , x: 19, y: 46
+        , town: "Littleroot Town"
+        })
     %>
 
         <%- include('templates/mapOverlay',
@@ -1363,17 +1350,17 @@
             })
         %>
 
-        <!--Pokemon HQ Lab-->
+        <!--Pokémon HQ Lab-->
         <%- include('templates/mapTown',
-            { name: "Pokemon HQ Lab"
+            { name: "Pokémon HQ Lab"
             , x: 6, y: 12
             , width: 11, height: 7
             })
         %>
 
-        <!--Pokemon HQ Lab extension-->
+        <!--Pokémon HQ Lab extension-->
         <%- include('templates/mapTown',
-            { name: "Pokemon HQ Lab"
+            { name: "Pokémon HQ Lab"
             , x: 9, y: 19
             , width: 5, height: 1
             , isExtension: true

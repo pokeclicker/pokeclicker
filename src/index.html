@@ -106,6 +106,10 @@
 <!-- Dungeon guides modal-->
 @import "dungeonGuidesModal.html"
 
+<!-- Encounters Info modal-->
+@import "routeInfoModal.html"
+@import "dungeonInfoModal.html"
+
 <!--Templates -->
 @import "templates/currencyTemplate.html"
 @import "templates/caughtStatusTemplate.html"
@@ -177,19 +181,27 @@
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
-                    <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
+                    <div id="routeBattleContainer" class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
-                            <h2 class="pageItemTitle" style="display: block;">
-                                <knockout>
-                                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon name</knockout>
-                                    <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
-                                    <knockout style="position: relative; top: -1px;"
+                            <div class="pageItemTitle d-flex justify-content-center">
+                                <div class="title-left"></div>
+                                <div class="d-flex align-items-center px-2">
+                                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }" style="font-size: 1.6rem;">Pokémon name</knockout>
+                                    <knockout class="ml-2" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
+                                    <knockout class="ml-2" style="position: relative;"
                                         data-bind="template: { name: 'pokerusStatusTemplate', data: {
                                             'pokerus': PartyController.getPokerusStatus(Battle.enemyPokemon().id),
                                             'evs': App.game.party.getPokemon(Battle.enemyPokemon().id)?.evs() }}">
                                     </knockout>
-                                </knockout>
-                            </h2>
+                                </div>
+                                <div class="title-right">
+                                    <div class="d-flex align-items-center mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
+                                        <div class="px-1 clickable" data-bind="tooltip: { title: 'See the Pokémon available on this route.', trigger: 'hover' }, click: function() { $('#routeInfoModal').modal('show') }" data-original-title="" title="">
+                                            <img src="assets/images/encountersInfo/encountersInfo.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div>
                                 <div data-bind="visible: !Battle.catching()">
                                     <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon sprite</knockout>
@@ -219,22 +231,19 @@
                                     <td width="50%">
                                       <span style="display: inline;">
                                         <knockout data-bind="text: Routes.getName(player.route, player.region)"></knockout>
-                                        <!--If all Pokémon on the route are caught-->
-                                        <knockout data-bind="if: (!RouteHelper.routeCompleted(player.route, player.region, true) && RouteHelper.routeCompleted(player.route, player.region, false))">
-                                            <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
-                                                 src="assets/images/pokeball/Pokeball.svg"/>
-                                        </knockout>
-
-                                        <!--If all Pokémon on the route are caught shiny-->
-                                        <knockout data-bind="if: RouteHelper.routeCompleted(player.route, player.region, true)">
-                                            <img title="You have captured all Pokémon shiny on this route!" class="pokeball-smallest"
-                                                 src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                                        <!--If all Pokémon in the dungeon are caught or caught shiny-->
+                                        <knockout data-bind="if: RouteHelper.routeCompleted(player.route, player.region, false)">
+                                            <img class="pokeball-smallest"
+                                                 data-bind="attr: { src: `assets/images/pokeball/Pokeball${RouteHelper.routeCompleted(player.route, player.region, true) ? '-shiny' : ''}.svg`},
+                                                 tooltip: {
+                                                trigger: 'hover', placement: 'bottom', title: `You have captured all Pokémon${RouteHelper.routeCompleted(player.route, player.region, true) ? ' shiny' : ''} on this route!`
+                                              }"/>
                                         </knockout>
 
                                         <!--Pokérus image-->
                                         <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route, player.region, true))">
-                                            <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route, player.region, true))] + '.png',
-                                                title: RouteHelper.routePokerusEVs(player.route, player.region)}"
+                                            <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route, player.region, true))] + '.png' },
+                                            tooltip: { title: RouteHelper.routePokerusEVs(player.route, player.region), trigger: 'hover', placement: 'bottom', html: true }"
                                           src=""/>
                                         </knockout>
                                       </span>
@@ -283,13 +292,13 @@
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
                 <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
                     <div class="card-header p-0">
-                        <div style="position: absolute; left: 2px">
-                            <img title="Chests opened in current dungeon" src="assets/images/dungeons/chest.png" height="25px" />
+                        <div style="position: absolute; left: 2px" data-bind="tooltip: { trigger: 'hover', title: 'Chests opened in current dungeon' }">
+                            <img src="assets/images/dungeons/chest.png" height="25px" />
                             <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
                         </div>
-                        
-                        <div style="position: absolute; right: 4px">
-                            <img title="Encounters won in current dungeon" src="assets/images/dungeons/encounter.png" height="25px" />
+
+                        <div style="position: absolute; right: 4px" data-bind="tooltip: { trigger: 'hover', title: 'Encounters won in current dungeon' }">
+                            <img src="assets/images/dungeons/encounter.png" height="25px" />
                             <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
                         </div>
                         <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
@@ -565,6 +574,9 @@
 
 <!-- Shard Master Modal-->
 @import "shardTraderModal.html"
+
+<!-- Generic Trader Modal-->
+@import "genericTraderModal.html"
 
 <!-- Subregion Modal-->
 @import "subregionModal.html"

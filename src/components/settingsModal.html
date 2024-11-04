@@ -60,8 +60,7 @@
                                 <tr><th colspan="2">Farm</th></tr>
                             </thead>
                             <tbody>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showFarmModule')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showFarmModuleControls')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('showFarmModule')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('farmBoostDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('berryDexMode')}"></tr>
@@ -72,8 +71,7 @@
                             </thead>
                             <tbody>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showUndergroundModule')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showUndergroundModuleMineControls')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showUndergroundModuleDailyTrades')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('enableUndergroundModuleMineControls')}"></tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Other</th></tr>
@@ -131,6 +129,8 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('breedingEfficiencyAllModifiers')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableBlinking')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('autoRestartUndergroundMine')}"></tr>
                                 <tr data-bind="with: Settings.getSetting('disableAutoSave')">
                                     <td class="p-2">
                                         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`"></label>
@@ -170,7 +170,7 @@
                                             onchange="(() => {
                                                 const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
                                                 this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
-                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
+                                            })(), Settings.setSettingByName(this.name, +this.value)
                                         ">
                                     </td>
                                 </tr>
@@ -236,8 +236,8 @@
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.hammer')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.chisel')}"></tr>
-                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
                                 <tr>
                                     <td class="p-2">
                                         <knockout data-bind="text: App.translation.get('hotkey.underground.useRestore', 'settings', { defaultValue: 'Use Restore'})"></knockout><span>:</span>

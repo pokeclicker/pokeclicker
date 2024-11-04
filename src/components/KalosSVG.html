@@ -686,7 +686,7 @@
         { name: "Underground Entrance"
         , x: 9, y: 21
         , width: 3, height: 4
-        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        , databind: "click:function(){UndergroundController.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
         })
      %>
 
@@ -706,23 +706,40 @@
         })
      %>
 
+    <%- include('templates/mapBlimp',
+        { name: "Professor Sycamore"
+        , x: 57, y: 52
+        , town: "Vaniville Town"
+        })
+    %>
+
      <%- include('templates/mapOverlay',
-         { name: "Professor Sycamore's Blimp"
-         , x: 57, y: 52
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Vaniville Town')}, attr:{ class: MapHelper.calculateTownCssClass('Vaniville Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_empty.png"
+         { name: "Pokémon Trainer Shauna"
+         , x: 56, y: 43
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Shauna 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Shauna 1'] && TemporaryBattleList['Shauna 1'].isVisible()"
+         , image: "assets/images/map/shauna.png"
          })
      %>
 
      <%- include('templates/mapOverlay',
-         { name: "Professor Sycamore's Blimp"
-         , x: 57, y: 52
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Vaniville Town')}, attr:{ class: MapHelper.calculateTownCssClass('Vaniville Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_pikachu.png"
+         { name: "Pokémon Trainer Tierno"
+         , x: 38, y: 28
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Tierno 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Tierno 1'] && TemporaryBattleList['Tierno 1'].isVisible()"
+         , image: "assets/images/map/tierno.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Trevor & Pokémon Trainer Tierno"
+         , x: 28, y: 29
+         , width: 8, height: 4
+         , databind: "click: () => TemporaryBattleList['Trevor & Tierno'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Trevor & Tierno'] && TemporaryBattleList['Trevor & Tierno'].isVisible()"
+         , image: "assets/images/map/trevortierno.png"
          })
      %>
 
@@ -763,6 +780,36 @@
          , databind: "click: () => TemporaryBattleList['Calem 4'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Calem 4'] && TemporaryBattleList['Calem 4'].isVisible()"
          , image: "assets/images/map/calem.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Shauna"
+         , x: 78, y: 29
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Shauna 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Shauna 2'] && TemporaryBattleList['Shauna 2'].isVisible()"
+         , image: "assets/images/map/shauna.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Tierno"
+         , x: 78, y: 29
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Tierno 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Tierno 2'] && TemporaryBattleList['Tierno 2'].isVisible()"
+         , image: "assets/images/map/tierno.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Trevor"
+         , x: 78, y: 29
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Trevor'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Trevor'] && TemporaryBattleList['Trevor'].isVisible()"
+         , image: "assets/images/map/shauna.png"
          })
      %>
 

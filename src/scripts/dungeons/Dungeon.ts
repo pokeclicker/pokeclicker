@@ -159,7 +159,7 @@ class Dungeon {
      * @param ignoreRequirement Whether to check if requirements are met. Defaults to false
      */
     public availableBosses(includeTrainers = true, ignoreRequirement = false): Boss[] {
-        // TODO: HLXII - We need this check as this method is called somewhere during initialization when App isn't initialized yet
+        // TODO: We need this check as this method is called somewhere during initialization when App isn't initialized yet
         // the requirement.isCompleted call can sometimes use the App object, which will cause this to crash
         // Once App is moved to modules, this check might be able to be removed.
         if (!App.game) {
@@ -667,7 +667,7 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
     () => {
         const item = Rand.boolean() ? 'Dome Fossil' : 'Helix Fossil';
 
-        Underground.gainMineItem(UndergroundItems.getByName(item).id, 1);
+        UndergroundController.gainMineItem(UndergroundItems.getByName(item).id, 1);
         Notifier.notify({
             message: `You were awarded a ${GameConstants.humanifyString(item)} for defeating the Super Nerd!`,
             type: NotificationConstants.NotificationOption.success,
@@ -1859,7 +1859,7 @@ dungeonList['Pattern Bush'] = new Dungeon('Pattern Bush',
         ],
         mythic: [{loot: 'Lum', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Pattern Bush'))}],
     },
-    500000,
+    720600,
     [new DungeonBossPokemon('Heracross', 3703000, 20)],
     43000, 35,
     () => {},
@@ -1892,8 +1892,7 @@ dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
     {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
 // All Unown except "EFHP"
-SeededRand.seed(4567);
-const TanobyUnownList = SeededRand.shuffleArray('ABCDGIJKLMNOQRSTUVWXYZ!?'.split(''));
+const TanobyUnownList = 'ABCDGIJKLMNOQRSTUVWXYZ!?'.split('');
 
 dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
     [
@@ -1925,9 +1924,13 @@ dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
     },
     720600,
     [
-        ...TanobyUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+        ...TanobyUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(TanobyUnownList) == char),
+            requirement: new OneFromManyRequirement([
+                new SeededDateSelectNRequirement(index, TanobyUnownList.length, 1),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
+            ]),
         })),
     ],
     43000, 39,
@@ -2044,8 +2047,7 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     2500, 31);
 
 // All Unown except "E?!"
-SeededRand.seed(1337);
-const AlphUnownList = SeededRand.shuffleArray('ABCDFGHIJKLMNOPQRSTUVWXYZ'.split(''));
+const AlphUnownList = 'ABCDFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
@@ -2084,9 +2086,13 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     },
     60600,
     [
-        ...AlphUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
+        ...AlphUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
+            requirement: new OneFromManyRequirement([
+                new SeededDateSelectNRequirement(index, AlphUnownList.length, 1),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ruins of Alph'))]),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ruins of Alph'))]),
+            ]),
         })),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
             requirement: new MultiRequirement([
@@ -3110,6 +3116,7 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
         {pokemon: 'Goldeen', options: { weight: 0.8 }},
         {pokemon: 'Magikarp', options: { weight: 0.8 }},
         {pokemon: 'Barboach', options: { weight: 0.8 }},
+        {pokemon: 'Bagon', options: { weight: 0.8, hide:true, requirement: new ObtainedPokemonRequirement('Bagon') }},
         new DungeonTrainer('Old Couple',
             [
                 new GymPokemon('Medicham', 18000, 39),
@@ -3196,13 +3203,14 @@ dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
                 new GymPokemon('Mightyena', 450000, 24),
                 new GymPokemon('Zubat', 450000, 24),
                 new GymPokemon('Camerupt', 470000, 25),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Maxie'),
+            ], { weight: 2, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Maxie'),
         new DungeonTrainer('Magma Leader',
             [
                 new GymPokemon('Mightyena', 4500000, 54),
                 new GymPokemon('Zubat', 4500000, 54),
                 new GymPokemon('Mega Camerupt', 4700000, 55),
-            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
+            ], { weight: 2, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
+        new DungeonBossPokemon('Meta Groudon', 1820000, 20, {hide: true, requirement: new QuestLineStepCompletedRequirement('A Meta Discovery', 3)}),
         new DungeonBossPokemon('Vivillon (Sun)',  96662023, 60, {
             hide: true,
             requirement: new OneFromManyRequirement([
@@ -5840,7 +5848,7 @@ dungeonList['Deep Colosseum'] = new Dungeon('Deep Colosseum',
                 new GymPokemon('Kingdra', 1750000, 70),
                 new GymPokemon('Shedinja', 1750000, 68),
                 new GymPokemon('Shuckle', 1750000, 45, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 1 }, 'Angol', '(angol)'),
+            ], { weight: 1 }, 'Agnol', '(angol)'),
     ],
     88800, 134);
 
@@ -6944,6 +6952,11 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
             new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
+        new DungeonBossPokemon('Rotom (Discord)', 4300000, 100, {hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Rotom'),
+            new ObtainedPokemonRequirement('Rotom (Discord)'),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
     ],
     54250, 205);
 
@@ -6952,6 +6965,7 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
         {pokemon: 'Zubat', options: { weight: 6.7 }},
         {pokemon: 'Geodude', options: { weight: 6.7 }},
         {pokemon: 'Onix', options: { weight: 6.7 }},
+        {pokemon: 'Gible', options: { weight: 6.7, hide:true, requirement: new ObtainedPokemonRequirement('Gible') }},
         new DungeonTrainer('Mountain Men',
             [
                 new GymPokemon('Geodude', 903000, 20),
@@ -7029,8 +7043,7 @@ dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
     60500, 207);
 
 // All Unown except "FHP?!"
-SeededRand.seed(420);
-const SolaceonUnownList = SeededRand.shuffleArray('ABCDEGIJKLMNOQRSTUVWXYZ'.split(''));
+const SolaceonUnownList = 'ABCDEGIJKLMNOQRSTUVWXYZ'.split('');
 
 dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     [
@@ -7059,9 +7072,13 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     },
     960000,
     [
-        ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+        ...SolaceonUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(SolaceonUnownList) == char),
+            requirement: new OneFromManyRequirement([
+                new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 1),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Solaceon Ruins'))]),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Solaceon Ruins'))]),
+            ]),
         })),
     ],
     62500, 209);
@@ -7575,6 +7592,7 @@ dungeonList['Victory Road Sinnoh'] = new Dungeon('Victory Road Sinnoh',
         {pokemon: 'Rhyhorn', options: { weight: 9.3 }},
         {pokemon: 'Magneton', options: { weight: 9.3 }},
         {pokemon: 'Floatzel', options: { weight: 9.3 }},
+        {pokemon: 'Gabite', options: { weight: 9.3, hide:true, requirement: new ObtainedPokemonRequirement('Gabite') }},
         new DungeonTrainer('Psychic',
             [
                 new GymPokemon('Haunter', 1503000, 43),
@@ -7777,6 +7795,7 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     [
         new DungeonBossPokemon('Lunatone', 11000000, 100),
         new DungeonBossPokemon('Clefable', 11000000, 100),
+        new DungeonBossPokemon('Cresselia', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.NewMoon, MoonCyclePhase.WaxingCrescent, MoonCyclePhase.WaningCrescent])}),
     ],
     96500, 230);
 
@@ -7798,12 +7817,12 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     [
         new DungeonBossPokemon('Lunatone', 9900000, 100),
         new DungeonBossPokemon('Absol', 9900000, 100),
-        new DungeonBossPokemon('Darkrai', 11000000, 100),
+        new DungeonBossPokemon('Darkrai', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.FullMoon, MoonCyclePhase.WaxingGibbous, MoonCyclePhase.WaningGibbous, MoonCyclePhase.FirstQuarter, MoonCyclePhase.ThirdQuarter])}),
     ],
     96500, 230);
 
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
-    ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Lombre', 'Seedot', 'Roselia'],
+    ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Jumpluff', 'Lombre', 'Seedot', 'Roselia'],
     {
         common: [
             {loot: 'xAttack'},
@@ -8236,7 +8255,8 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
     [
         new DungeonTrainer('Psychic',
             [new GymPokemon('Sigilyph', 16000000, 23)],
-            { weight: 2 }, 'Perry', '(male)'),
+            { weight: 1 }, 'Perry', '(male)'),
+        new DungeonBossPokemon('Darmanitan', 21000000, 100),
         new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}), // don't hide, because the dungeons associated with it are optional
         new DungeonBossPokemon('Vivillon (Sandstorm)',  96662023, 60, {
             hide: true,
@@ -9018,6 +9038,8 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
         {pokemon: 'Druddigon', options: { weight: 5.57 }},
         {pokemon: 'Sawk', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Sawk')}},
         {pokemon: 'Throh', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Throh')}},
+        {pokemon: 'Deino', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Deino')}},
+        {pokemon: 'Zweilous', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Zweilous')}},
         new DungeonTrainer('Ace Trainer',
             [
                 new GymPokemon('Golurk', 326500, 55),
@@ -9751,7 +9773,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Douse_Drive', ignoreDebuff: true},
             {loot: 'Shock_Drive', ignoreDebuff: true},
         ],
-        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemRequirement(1, 'Great_Twisted_Spoon', GameConstants.AchievementOption.less)])}],
+        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemOwnedRequirement('Great_Twisted_Spoon', 1, GameConstants.AchievementOption.less)])}],
     },
     5403000,
     [
@@ -10220,6 +10242,7 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
             {loot: 'Rotom (Fan)'},
             {loot: 'Rotom (Frost)'},
             {loot: 'Rotom (Mow)'},
+            {loot: 'Rotom (Discord)', requirement: new ObtainedPokemonRequirement('Rotom (Discord)')},
             {loot: 'Spell_Tag'},
         ],
         mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Lost Hotel'))}],
@@ -11095,8 +11118,9 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
         {pokemon: 'Basculin (Blue-Striped)', options: { weight: 1.43 }},
         {pokemon: 'Alomomola', options: { weight: 1.43 }},
         {pokemon: 'Dewpider', options: { weight: 1.43 }},
-        {pokemon: 'Marill', options: { weight: 1.43, requirement: new DayOfWeekRequirement(GameConstants.DayOfWeek.Saturday) }},
-        {pokemon: 'Marshtomp', options: { weight: 1.43, requirement: new DayOfWeekRequirement(GameConstants.DayOfWeek.Saturday) }},
+        {pokemon: 'Morelull', options: { weight: 1.43, hide: true, requirement: new ObtainedPokemonRequirement('Morelull') }},
+        {pokemon: 'Marill', options: { weight: 1.43, hide: true, requirement: new DayOfWeekRequirement(GameConstants.DayOfWeek.Saturday) }},
+        {pokemon: 'Marshtomp', options: { weight: 1.43, hide: true, requirement: new DayOfWeekRequirement(GameConstants.DayOfWeek.Saturday) }},
         new DungeonTrainer('Fisherman',
             [new GymPokemon('Tentacool', 12138060, 16)], { weight: 1 }, 'Hal'),
         new DungeonTrainer('Fisherman',
@@ -11246,6 +11270,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
         {pokemon: 'Bonsly', options: { weight: 1 }},
         {pokemon: 'Trumbeak', options: { weight: 1 }},
         {pokemon: 'Fomantis', options: { weight: 1 }},
+        {pokemon: 'Morelull', options: { weight: 1, hide: true, requirement: new ObtainedPokemonRequirement('Morelull') }},
         {pokemon: 'Bounsweet', options: { weight: 1 }},
         {pokemon: 'Steenee', options: { weight: 1 }},
         {pokemon: 'Comfey', options: { weight: 1 }},
@@ -12362,6 +12387,8 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
     [
         new DungeonBossPokemon('Corviknight', 135047520, 60),
         new DungeonBossPokemon('Galarian Weezing', 135047520, 60),
+        new DungeonBossPokemon('Zacian (Crowned Sword)', 169578810, 70, { weight: 0.5, hide: true, requirement: new ObtainedPokemonRequirement('Zacian (Crowned Sword)') }),
+        new DungeonBossPokemon('Zamazenta (Crowned Shield)', 169578810, 70, { weight: 0.5, hide: true, requirement: new ObtainedPokemonRequirement('Zamazenta (Crowned Shield)') }),
     ],
     2000000, 32);
 
@@ -12617,7 +12644,10 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
             {loot: 'LargeRestore'},
             {loot: 'Moonball'},
         ],
-        legendary: [{loot: 'Fairy_Feather'}],
+        legendary: [
+            {loot: 'Fairy_Feather'},
+            {loot: 'Flowering Celebi', ignoreDebuff: true, requirement: new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13)},
+        ],
     },
     23764848,
     [
@@ -12786,7 +12816,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     2000000, 40,
     () => {
-        App.game.party.gainPokemonByName('Urshifu (Single Strike)');
+        App.game.party.gainPokemonByName('Urshifu (Single Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Single Strike)!',
             type: NotificationConstants.NotificationOption.success,
@@ -12828,7 +12858,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     ],
     2000000, 36,
     () => {
-        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)');
+        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
             type: NotificationConstants.NotificationOption.success,
@@ -13274,8 +13304,7 @@ dungeonList.Heartwood = new Dungeon('Heartwood',
     96500, 10);
 
 // All Unown
-SeededRand.seed(123);
-const AncientSolaceonUnownList = SeededRand.shuffleArray('ABCDEFGHIJKLMNOPQRSTUVWXYZ?!'.split(''));
+const AncientSolaceonUnownList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ?!'.split('');
 
 dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
     ['Paras', 'Carnivine', 'Croagunk', 'Yanma', 'Stunky', 'Kirlia'],
@@ -13297,9 +13326,13 @@ dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
     },
     960000,
     [
-        ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+        ...AncientSolaceonUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
             hide: true,
-            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AncientSolaceonUnownList) == char),
+            requirement: new OneFromManyRequirement([
+                new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 1),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ancient Solaceon Ruins'))]),
+                new MultiRequirement([new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ancient Solaceon Ruins'))]),
+            ]),
         })),
     ],
     96500, 13);

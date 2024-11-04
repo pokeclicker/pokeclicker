@@ -15,6 +15,7 @@ import {
     heldItemRestrict,
     weatherRestrict,
     megaEvolveRestrict,
+    attackRestrict,
 } from './Restrictions';
 
 // DayCyclePartRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
@@ -47,7 +48,7 @@ export const AnyDungeonLevelEvolution = anyDungeonRestrict(LevelEvolution);
 export const AnyGymLevelEvolution = anyGymRestrict(LevelEvolution);
 
 // EnvironmentRestrictedLevelEvolution(environment: Environment, basePokemon: string, evolvedPokemon: string, level: number)
-// an Environment is any key of GameConstants.Environments, eg 'Cave' or 'PowerPlant'
+// an Environment is any key of GameConstants.Environments, eg 'MossRock' or 'TrashCloak'
 export const EnvironmentRestrictedLevelEvolution = environmentRestrict(LevelEvolution);
 
 // EnvironmentDungeonLevelEvolution(environment: Environment, basePokemon: string, evolvedPokemon: string, level: number)
@@ -88,3 +89,5 @@ export const DayTimedMegaEvolution = dayRestrict(MegaEvolution);
 
 // NightTimedMegaEvolution(megaStone: GameConstants.MegaStoneType, basePokemon: string, evolvedPokemon: string)
 export const NightTimedMegaEvolution = nightRestrict(MegaEvolution);
+
+export const AttackEvolution = attackRestrict(LevelEvolution);

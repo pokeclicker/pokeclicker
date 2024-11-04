@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
+
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
 //Kanto Temporary Battles
@@ -20,7 +22,7 @@ TemporaryBattleList['Blue 1'] = new TemporaryBattle(
         displayName: 'Rival Blue',
         returnTown: 'Viridian City',
         imageName: 'Blue1',
-        environment: 'Default',
+        battleBackground: 'Default',
     }
 );
 TemporaryBattleList['Blue 2'] = new TemporaryBattle(
@@ -235,7 +237,7 @@ TemporaryBattleList['Ash Ketchum New Island'] = new TemporaryBattle(
         displayName: 'Ash Ketchum',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Pikachu (Clone)');
+            App.game.party.gainPokemonByName('Pikachu (Clone)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -294,7 +296,7 @@ TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemRequirement(11, 'Christmas_present', GameConstants.AchievementOption.less),
+        new ItemOwnedRequirement('Christmas_present', 11, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
@@ -322,8 +324,8 @@ TemporaryBattleList['Santa Jynx 2'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemRequirement(27, 'Christmas_present', GameConstants.AchievementOption.less),
-        new ItemRequirement(11, 'Christmas_present'),
+        new ItemOwnedRequirement('Christmas_present', 27, GameConstants.AchievementOption.less),
+        new ItemOwnedRequirement('Christmas_present', 11),
         new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
@@ -352,8 +354,8 @@ TemporaryBattleList['Santa Jynx 3'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemRequirement(49, 'Christmas_present', GameConstants.AchievementOption.less),
-        new ItemRequirement(27, 'Christmas_present'),
+        new ItemOwnedRequirement('Christmas_present', 49, GameConstants.AchievementOption.less),
+        new ItemOwnedRequirement('Christmas_present', 27),
         new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
@@ -381,7 +383,7 @@ TemporaryBattleList['Santa Jynx 4'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemRequirement(49, 'Christmas_present'),
+        new ItemOwnedRequirement('Christmas_present', 49),
         new TemporaryBattleRequirement('Santa Jynx 1', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
@@ -1006,7 +1008,7 @@ TemporaryBattleList.Latias = new TemporaryBattle(
     {
         displayName: 'Latias',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Latias');
+            App.game.party.gainPokemonByName('Latias', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
         returnTown: 'Southern Island',
         imageName: '../pokemon/380',
@@ -1022,7 +1024,7 @@ TemporaryBattleList.Latios = new TemporaryBattle(
     {
         displayName: 'Latios',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Latios');
+            App.game.party.gainPokemonByName('Latios', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
         returnTown: 'Southern Island',
         imageName: '../pokemon/381',
@@ -1678,7 +1680,7 @@ TemporaryBattleList['Manaphy Egg Protectors'] = new TemporaryBattle(
         displayName: 'Manaphy Egg Protectors',
         imageName: 'specialNPCs/Manaphy Egg',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Manaphy');
+            App.game.party.gainPokemonByName('Manaphy', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -2199,7 +2201,7 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
 TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
     'Terrakion 1',
     [new GymPokemon('Terrakion', 175698480, 50, undefined, false)],
-    'You\'re actually very strong. It\'s very possible that Cobalion trusted you to find us. Well then, where are we supposed to meet? The Moor of Icirrus? Very well, I shall make my way there then. You should come too, Cobalion should know where you might find our companion, Virizion.',
+    'You\'re actually very strong. It\'s very possible that Cobalion trusted you to find us. Well then, where are we supposed to meet? The Moor of Icirrus? Very well, I shall make my way there, then. You should come, too. Cobalion should know where you might find our companion, Virizion.',
     [new QuestLineStepCompletedRequirement('Swords of Justice', 4)],
     undefined,
     {
@@ -2350,7 +2352,7 @@ TemporaryBattleList['Dream Researcher'] = new TemporaryBattle(
     'Dream Researcher',
     [new GymPokemon('Mega Audino', 125000000, 32)],
     'Wow! You have proven that you have total power over the realm of dreams! The location of this Audinite was revealed to me in a dream, you deserve to have it!</br><img src="assets/images/megaStone/Audinite.png"/>',
-    [new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Audino')],
+    [new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Audino'), new MaxRegionRequirement(GameConstants.Region.kalos)],
     undefined,
     {
         imageName: 'Scientist (female)',
@@ -3105,7 +3107,7 @@ TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
 TemporaryBattleList['Hoopa 1'] = new TemporaryBattle(
     'Hoopa 1',
     [new GymPokemon('Lugia', 446974112, 80)],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 7)],
     undefined,
     {
@@ -3122,7 +3124,7 @@ TemporaryBattleList['Hoopa 2'] = new TemporaryBattle(
         new GymPokemon('Latias', 163890507, 80),
         new GymPokemon('Latios', 163890507, 80),
     ],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 8)],
     undefined,
     {
@@ -3141,7 +3143,7 @@ TemporaryBattleList['Hoopa 3'] = new TemporaryBattle(
         new GymPokemon('Dialga', 107273786, 80),
         new GymPokemon('Palkia', 107273786, 80),
     ],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 9)],
     undefined,
     {
@@ -3158,7 +3160,7 @@ TemporaryBattleList['Hoopa 4'] = new TemporaryBattle(
         new GymPokemon('Mega Latias', 193688781, 80),
         new GymPokemon('Mega Latios', 193688781, 80),
     ],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 10)],
     undefined,
     {
@@ -3174,7 +3176,7 @@ TemporaryBattleList['Hoopa 5'] = new TemporaryBattle(
         new GymPokemon('Kyurem (Black)', 312881878, 80),
         new GymPokemon('Kyurem (White)', 312881878, 80),
     ],
-    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    '<i>The Unbound Hoopa casts you through a ring to a faraway land, escaping for now.</i>',
     [new QuestLineStepCompletedRequirement('Clash of Ages', 11)],
     undefined,
     {
@@ -3196,7 +3198,7 @@ TemporaryBattleList['Hoopa 6'] = new TemporaryBattle(
         hideTrainer: true,
         returnTown: 'Kiloude City',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Hoopa (Unbound)');
+            App.game.party.gainPokemonByName('Hoopa (Unbound)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -3289,7 +3291,7 @@ TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
 );
 TemporaryBattleList.Xerneas = new TemporaryBattle(
     'Xerneas',
-    [new GymPokemon('Xerneas', 281500000, 50)],
+    [new GymPokemon('Xerneas (Active)', 281500000, 50)],
     'You calmed down Xerneas and it ran away to the back of the lab.',
     [new QuestLineStepCompletedRequirement('A Beautiful World', 30)],
     undefined,
@@ -3441,7 +3443,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Floette (Eternal)');
+            App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
     }
 );
@@ -3813,6 +3815,7 @@ TemporaryBattleList['Anomaly Mewtwo 1'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.01',
         hideTrainer: true,
+        returnTown: 'Cerulean Cave',
     }
 );
 TemporaryBattleList['Anomaly Mewtwo 2'] = new TemporaryBattle(
@@ -3825,6 +3828,7 @@ TemporaryBattleList['Anomaly Mewtwo 2'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.01',
         hideTrainer: true,
+        returnTown: 'Mt. Silver',
     }
 );
 TemporaryBattleList['Anomaly Mewtwo 3'] = new TemporaryBattle(
@@ -3837,6 +3841,7 @@ TemporaryBattleList['Anomaly Mewtwo 3'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.02',
         hideTrainer: true,
+        returnTown: 'Lilycove City',
     }
 );
 TemporaryBattleList['Anomaly Mewtwo 4'] = new TemporaryBattle(
@@ -3849,6 +3854,7 @@ TemporaryBattleList['Anomaly Mewtwo 4'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.02',
         hideTrainer: true,
+        returnTown: 'Spear Pillar',
     }
 );
 TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
@@ -3861,6 +3867,7 @@ TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
         displayName: 'Anomaly Mewtwo',
         imageName: '../pokemon/150.02',
         hideTrainer: true,
+        returnTown: 'Castelia City',
     }
 );
 
@@ -4749,7 +4756,7 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Pyroar', 225000000, 60),
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Mega Gyarados', 225000000, 60),
-        new GymPokemon('Xerneas', 240000000, 60),
+        new GymPokemon('Xerneas (Active)', 240000000, 60),
         new GymPokemon('Yveltal', 240000000, 60),
     ],
     'I can feel the fire of your convictions burning deep within your heart!',
@@ -5546,7 +5553,7 @@ TemporaryBattleList['Rampaging Gyarados'] = new TemporaryBattle(
     'Rampaging Gyarados',
     [new GymPokemon('Gyarados', 2401180786, 60)],
     '<i>The Rampaging Gyarados fainted.</i>',
-    [new TemporaryBattleRequirement('Rampaging Tsareena')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 4)],
     undefined,
     {
         hideTrainer: true,
@@ -5557,7 +5564,7 @@ TemporaryBattleList['Rampaging Torkoal'] = new TemporaryBattle(
     'Rampaging Torkoal',
     [new GymPokemon('Torkoal', 2401180786, 60)],
     '<i>The Rampaging Torkoal fainted.</i>',
-    [new TemporaryBattleRequirement('Rampaging Gyarados')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 5)],
     undefined,
     {
         hideTrainer: true,
@@ -5581,7 +5588,7 @@ TemporaryBattleList['Rampaging Conkeldurr'] = new TemporaryBattle(
     'Rampaging Conkeldurr',
     [new GymPokemon('Conkeldurr', 2749793992, 60)],
     '<i>The Rampaging Conkeldurr fainted.</i>',
-    [new TemporaryBattleRequirement('Sordward & Shielbert')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 8)],
     undefined,
     {
         hideTrainer: true,
@@ -5592,7 +5599,7 @@ TemporaryBattleList['Rampaging Dusknoir'] = new TemporaryBattle(
     'Rampaging Dusknoir',
     [new GymPokemon('Dusknoir', 2749793992, 60)],
     '<i>The Rampaging Dusknoir fainted.</i>',
-    [new TemporaryBattleRequirement('Sordward & Shielbert')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 8)],
     undefined,
     {
         hideTrainer: true,
@@ -5608,10 +5615,7 @@ TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
         new GymPokemon('Hatterene', 698309136, 63),
     ],
     'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger. I\'ll reach the pinnacle of what Fairy types can do.',
-    [
-        new TemporaryBattleRequirement('Rampaging Conkeldurr'),
-        new TemporaryBattleRequirement('Rampaging Dusknoir'),
-    ],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 9)],
     undefined,
     {imageName: 'Gym Leader Bede'}
 );
@@ -5619,7 +5623,7 @@ TemporaryBattleList['Rampaging Gigalith'] = new TemporaryBattle(
     'Rampaging Gigalith',
     [new GymPokemon('Gigalith', 2749793992, 60)],
     '<i>The Rampaging Gigalith fainted.</i>',
-    [new TemporaryBattleRequirement('Gym Leader Bede')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5630,7 +5634,7 @@ TemporaryBattleList['Rampaging Froslass'] = new TemporaryBattle(
     'Rampaging Froslass',
     [new GymPokemon('Froslass', 2749793992, 60)],
     '<i>The Rampaging Froslass fainted.</i>',
-    [new TemporaryBattleRequirement('Gym Leader Bede')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 10)],
     undefined,
     {
         hideTrainer: true,
@@ -5647,16 +5651,13 @@ TemporaryBattleList['Gym Leader Marnie'] = new TemporaryBattle(
         new GymPokemon('Grimmsnarl', 563532116, 60),
     ],
     'Yeah I lost, but I\'m gonna learn from your battle style and everythin\'!',
-    [
-        new TemporaryBattleRequirement('Rampaging Gigalith'),
-        new TemporaryBattleRequirement('Rampaging Froslass'),
-    ]
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 11)]
 );
 TemporaryBattleList['Rampaging Haxorus'] = new TemporaryBattle(
     'Rampaging Haxorus',
     [new GymPokemon('Haxorus', 2841435245, 60)],
     '<i>The Rampaging Haxorus fainted.</i>',
-    [new TemporaryBattleRequirement('Gym Leader Marnie')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 12)],
     undefined,
     {
         hideTrainer: true,
@@ -5933,9 +5934,8 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     [new GymPokemon('Flowering Celebi', 2960030616, 100)],
     'Cel Cel! Celebi!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 12)],
-    [new ObtainedPokemonRequirement('Flowering Celebi')],
+    undefined,
     {
-        isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/251.01',
     }
@@ -7188,3 +7188,5 @@ TemporaryBattleList['Paradise Protection Protocol'] = new TemporaryBattle(
         new GymBadgeRequirement(BadgeEnums.Violet),
     ]
 );
+
+TemporaryBattleList satisfies TmpTemporaryBattleListType;
