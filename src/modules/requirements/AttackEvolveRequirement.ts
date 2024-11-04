@@ -11,7 +11,7 @@ export default class AttackEvolveRequirement extends Requirement {
     getProgress(): number {
         const partyPokemon = App.game.party.getPokemonByName(this.pokemon);
 
-        return Math.min(Math.trunc(partyPokemon?.attack/ pokemonMap[this.pokemon].attack), this.requiredValue);
+        return Math.min(Math.trunc(partyPokemon?.attack / pokemonMap[this.pokemon].attack), this.requiredValue);
     }
 
     hint(): string {
