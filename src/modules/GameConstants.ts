@@ -2369,7 +2369,7 @@ export enum ShardTraderLocations {
     'Pacifidlog Town',
     'Sootopolis City',
     'Ever Grande City',
-    'Pokemon HQ Lab',
+    'Pokémon HQ Lab',
     'Sandgem Town',
     'Oreburgh City',
     'Floaroma Town',
