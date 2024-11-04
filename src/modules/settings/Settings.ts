@@ -74,7 +74,7 @@ export default class Settings {
         const validatedJSON = {};
         this.list.forEach((setting) => {
             const currentVal = loadedJSON[setting.name];
-            validatedJSON[setting.name] = (currentVal != null && setting.validValue(currentVal)) ? currentVal : setting.defaultValue;
+            validatedJSON[setting.name] = (currentVal !== undefined && setting.validValue(currentVal)) ? currentVal : setting.defaultValue;
         });
         this.fromJSON(validatedJSON);
     }
