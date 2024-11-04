@@ -57,7 +57,7 @@ class Party implements Feature {
 
     gainPokemonById(id: number,
         shiny = false,
-        suppressNotification = false,
+        suppressNewCatchNotification = false,
         gender: GameConstants.BattlePokemonGender = PokemonFactory.generateGenderById(id),
         shadow: GameConstants.ShadowStatus = GameConstants.ShadowStatus.None
     ) {
@@ -86,7 +86,7 @@ class Party implements Feature {
         const { name, displayName } = partyPokemon;
 
         // Notifications
-        if (newCatch) {
+        if (newCatch && !suppressNewCatchNotification) {
             Notifier.notify({
                 message: `You have captured ${GameHelper.anOrA(name)} ${displayName}!`,
                 pokemonImage: PokemonHelper.getImage(id, shiny, gender, shadow),
@@ -116,8 +116,7 @@ class Party implements Feature {
 
         // Logbook entries
         if (newCatch) {
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: name })
-            );
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: name }));
         }
         if (shiny) {
             // Both new and duplicate shinies get logged
