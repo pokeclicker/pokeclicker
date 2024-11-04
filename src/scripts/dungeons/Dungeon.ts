@@ -7822,7 +7822,7 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     96500, 230);
 
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
-    ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Lombre', 'Seedot', 'Roselia'],
+    ['Gloom', 'Bellsprout', 'Tangela', 'Skiploom', 'Jumpluff', 'Lombre', 'Seedot', 'Roselia'],
     {
         common: [
             {loot: 'xAttack'},
@@ -8255,7 +8255,8 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
     [
         new DungeonTrainer('Psychic',
             [new GymPokemon('Sigilyph', 16000000, 23)],
-            { weight: 2 }, 'Perry', '(male)'),
+            { weight: 1 }, 'Perry', '(male)'),
+        new DungeonBossPokemon('Darmanitan', 21000000, 100),
         new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}), // don't hide, because the dungeons associated with it are optional
         new DungeonBossPokemon('Vivillon (Sandstorm)',  96662023, 60, {
             hide: true,
@@ -12386,6 +12387,8 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
     [
         new DungeonBossPokemon('Corviknight', 135047520, 60),
         new DungeonBossPokemon('Galarian Weezing', 135047520, 60),
+        new DungeonBossPokemon('Zacian (Crowned Sword)', 169578810, 70, { weight: 0.5, hide: true, requirement: new ObtainedPokemonRequirement('Zacian (Crowned Sword)') }),
+        new DungeonBossPokemon('Zamazenta (Crowned Shield)', 169578810, 70, { weight: 0.5, hide: true, requirement: new ObtainedPokemonRequirement('Zamazenta (Crowned Shield)') }),
     ],
     2000000, 32);
 
@@ -12813,7 +12816,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     2000000, 40,
     () => {
-        App.game.party.gainPokemonByName('Urshifu (Single Strike)');
+        App.game.party.gainPokemonByName('Urshifu (Single Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Single Strike)!',
             type: NotificationConstants.NotificationOption.success,
@@ -12855,7 +12858,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     ],
     2000000, 36,
     () => {
-        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)');
+        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
             type: NotificationConstants.NotificationOption.success,

@@ -26,4 +26,4 @@ window.CSS = {
         }
         return false;
     },
-}
+};

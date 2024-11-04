@@ -89,7 +89,7 @@ class PokemonLocations {
                     if (!cacheLine[name][region]) {
                         cacheLine[name][region] = new Array<object>;
                     }
-                    cacheLine[name][region].push({ route: routeData.number, requirements: special.req.hint() });
+                    cacheLine[name][region].push({ route: routeData.number, requirements: special.req });
                 });
             });
             return true;
@@ -123,7 +123,7 @@ class PokemonLocations {
                 } else if (enemy.hasOwnProperty('pokemon')) {
                     cacheLine[(<DetailedPokemon>enemy).pokemon].push({
                         dungeon: dungeonName,
-                        requirements: enemy?.options?.requirement?.hint(),
+                        requirements: enemy?.options?.requirement,
                     });
                 }
             });
@@ -149,7 +149,7 @@ class PokemonLocations {
             dungeon.availableBosses(false, true).forEach(boss => {
                 const data = {
                     dungeon: dungeonName,
-                    requirements: boss.options?.requirement?.hint(),
+                    requirements: boss.options?.requirement,
                 };
                 cacheLine[boss.name].push(data);
             });
@@ -176,7 +176,7 @@ class PokemonLocations {
                 if (this.pokemonNames.includes(i.loot)) {
                     const data = {
                         dungeon: dungeonName,
-                        requirements: i.requirement?.hint(),
+                        requirements: i.requirement,
                     };
                     cacheLine[i.loot].push(data);
                 }
@@ -267,7 +267,7 @@ class PokemonLocations {
                     if (this.pokemonNames.includes(r.pokemon.name)) {
                         const data = {
                             region: +region,
-                            requirements: r.unlockRequirement?.hint(),
+                            requirements: r.unlockRequirement,
                             roamingGroup: group,
                         };
                         cacheLine[r.pokemon.name].push(data);
@@ -285,7 +285,7 @@ class PokemonLocations {
         }
         const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<string>);
         Object.entries(pokemonBabyPrevolutionMap).forEach(([parent, baby]) => {
-            if (maxRegion != GameConstants.Region.none && pokemonMap[parent].nativeRegion > maxRegion) {
+            if (maxRegion != GameConstants.Region.none && (pokemonMap[parent].nativeRegion > maxRegion || pokemonMap[pokemonName].nativeRegion > maxRegion)) {
                 return false;
             }
             cacheLine[baby].push(parent);
@@ -338,7 +338,7 @@ class PokemonLocations {
             if (e.trigger === EvoTrigger.NONE) {
                 return false;
             }
-            if (maxRegion != GameConstants.Region.none && p.nativeRegion > maxRegion) {
+            if (maxRegion != GameConstants.Region.none && (p.nativeRegion > maxRegion || pokemonMap[e.evolvedPokemon].nativeRegion > maxRegion)) {
                 return false;
             }
             cacheLine[e.evolvedPokemon].push(e);
@@ -347,7 +347,10 @@ class PokemonLocations {
     }
 
     public static getPokemonLevelPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): EvoData {
-        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.trigger === EvoTrigger.LEVEL && e.evolvedPokemon == pokemonName));
+        if (maxRegion != GameConstants.Region.none && pokemonMap[pokemonName].nativeRegion > maxRegion) {
+            return;
+        }
+        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.some(e => e.trigger === EvoTrigger.LEVEL && e.evolvedPokemon == pokemonName));
         if (maxRegion != GameConstants.Region.none && pokemonMap[evolutionPokemon.name].nativeRegion > maxRegion) {
             return;
         }
@@ -355,7 +358,10 @@ class PokemonLocations {
     }
 
     public static getPokemonStonePrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): EvoData {
-        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.trigger === EvoTrigger.STONE && e.evolvedPokemon == pokemonName));
+        if (maxRegion != GameConstants.Region.none && pokemonMap[pokemonName].nativeRegion > maxRegion) {
+            return;
+        }
+        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.some(e => e.trigger === EvoTrigger.STONE && e.evolvedPokemon == pokemonName));
         if (maxRegion != GameConstants.Region.none && pokemonMap[evolutionPokemon.name].nativeRegion > maxRegion) {
             return;
         }
@@ -377,7 +383,10 @@ class PokemonLocations {
         return cacheLine[pokemonName];
     }
 
-    public static getPokemonWandering(pokemonName: PokemonNameType): Array<string> {
+    public static getPokemonWandering(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        if (maxRegion !== GameConstants.Region.none && maxRegion < pokemonMap[pokemonName].nativeRegion) {
+            return [];
+        }
         const cache = this.getCache<string[]>(this.getPokemonWandering.name);
         if (cache[pokemonName]) {
             return cache[pokemonName];
@@ -547,7 +556,7 @@ class PokemonLocations {
                     cacheLine[pokemon].push({
                         town: townName,
                         npc: npc.name,
-                        requirements: npc.options?.requirement?.hint(),
+                        requirements: npc.options?.requirement,
                     });
                 });
             });
@@ -613,7 +622,7 @@ class PokemonLocations {
                 if (this.pokemonNames.includes(pokemonItem)) {
                     cacheLine[pokemonItem][region] = {chance : item.weight / list.reduce((acc, it) => acc + it.weight, 0)};
                     if (item.requirement) {
-                        cacheLine[pokemonItem][region].requirement = item.requirement.hint();
+                        cacheLine[pokemonItem][region].requirement = item.requirement;
                     }
                 }
             });
@@ -703,7 +712,7 @@ class PokemonLocations {
         }
 
         // Wandering
-        const wandering = PokemonLocations.getPokemonWandering(pokemonName);
+        const wandering = PokemonLocations.getPokemonWandering(pokemonName, maxRegion);
         if (wandering.length) {
             encounterTypes[PokemonLocationType.Wandering] = wandering;
         }

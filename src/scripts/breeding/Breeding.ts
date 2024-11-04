@@ -22,7 +22,7 @@ class Breeding implements Feature {
 
     public readonly hatchList: Record<GameConstants.EggItemType, PokemonNameType[][]> = {
         [GameConstants.EggItemType.Fire_egg]: [
-            ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
+            ['Charmander', 'Vulpix', 'Growlithe', 'Magmar'],
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
             ['Torchic', 'Numel'],
             ['Chimchar'],
