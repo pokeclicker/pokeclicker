@@ -117,7 +117,7 @@ class GameController {
             // Set our number key if defined (-1 for 0 indexed)
             const numberKey = (+key) - 1;
             const isNumberKey = !isNaN(numberKey) && numberKey >= 0;
-            const visibleModals = $('.modal:visible').length;
+            const visibleModals = $('.modal').filter(':visible').length;
 
             //Global Multi-key combinations
             if (isNumberKey) {
@@ -489,5 +489,7 @@ class GameController {
 
 // when stacking modals allow scrolling after top modal hidden
 $(document).on('hidden.bs.modal', '.modal', () => {
-    $('.modal:visible').length && $(document.body).addClass('modal-open');
+    if ($('.modal').filter(':visible').length) {
+        $(document.body).addClass('modal-open');
+    }
 });
