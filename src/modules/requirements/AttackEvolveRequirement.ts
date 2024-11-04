@@ -15,10 +15,10 @@ export default class AttackEvolveRequirement extends Requirement {
     }
 
     hint(): string {
-        const attackRequired = pokemonMap[this.pokemon].attack * this.requiredValue;
-        if (this.getProgress()) {
+        if (this.getProgress() == this.requiredValue) {
             return 'Level up to evolve.';
         } else {
+            const attackRequired = pokemonMap[this.pokemon].attack * this.requiredValue;
             return `Needs at least ${attackRequired.toLocaleString('en-US')} attack to evolve.`;       
         }
     }
