@@ -3,7 +3,7 @@ import { pokemonMap } from '../pokemons/PokemonList';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Requirement from './Requirement';
 
-export default class AttackEvolveRequirement extends Requirement {
+export default class PokemonAttackRequirement extends Requirement {
     constructor(public pokemon: PokemonNameType, attackMultiplier: number) {
         super(attackMultiplier, AchievementOption.equal);
     }
