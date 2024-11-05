@@ -24,7 +24,7 @@ import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
 import PokemonType from '../enums/PokemonType';
 import {
-    Region, StoneType, Genders, MaxIDPerRegion, MegaStoneType, MAX_EGG_CYCLES,
+    Region, StoneType, Genders, MaxIDPerRegion, MegaStoneType, MAX_EGG_CYCLES, AchievementOption,
 } from '../GameConstants';
 import BagItem from '../interfaces/BagItem';
 import {
