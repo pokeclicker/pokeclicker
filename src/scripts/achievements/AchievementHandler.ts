@@ -397,7 +397,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Everyday I\'m chiseling', 'Use the Chisel Tool 1,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Chisel, 1000), 0.25);
         AchievementHandler.addAchievement('U Can\'t Touch This', 'Use the Hammer Tool 2,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Hammer, 2000), 0.25);
         AchievementHandler.addAchievement('KABOOM!', 'Use the Bomb Tool 5,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Bomb, 5000), 0.25);
-        AchievementHandler.addAchievement('Eagle Eye', 'Use the Survey Tool 100 times.', new UndergroundUseToolRequirement(UndergroundToolType.Survey, 100), 0.25);
+        AchievementHandler.addAchievement('Eagle Eye', 'Use the Survey Tool 50 times.', new UndergroundUseToolRequirement(UndergroundToolType.Survey, 50), 0.25);
         AchievementHandler.addAchievement('Fine, I\'ll do it myself', 'Use any tool 10,000 times.', new UndergroundUseToolRequirement(null, 10000), 0.5);
 
         AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Vitamin.', new VitaminObtainRequirement(1), 0.01);
