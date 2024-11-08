@@ -26,7 +26,7 @@ class ContestHelper {
     public static getPartyPokemonByContestType(type: ContestType): PartyPokemon[] {
         return App.game.party.caughtPokemon.filter((p) => {
             const pk = p.currentContestTypes;
-            return pk.some(c => c === type || c === ContestType.Balanced);
+            return pk.some(c => c === type);
         });
     }
 
@@ -47,11 +47,7 @@ class ContestHelper {
                 return App.game.party.caughtPokemon;
             // Kalos (in Hoenn)
             case ContestRank.Spectacular:
-                if (type != ContestType.Balanced) {
-                    return ContestHelper.getPartyPokemonByContestType(type);
-                } else {
-                    return App.game.party.caughtPokemon;
-                }
+                return ContestHelper.getPartyPokemonByContestType(type);
             // Galar (in Sinnoh) - TODO
             case ContestRank['Brilliant Shining']:
                 return App.game.party.caughtPokemon;
