@@ -424,8 +424,8 @@ class PartyPokemon implements Saveable {
             case GameConstants.PokeBlockColor.Tough:
             case GameConstants.PokeBlockColor.Balanced:
                 amount = 1;
-                let blockType = (ItemList[itemName] as PokeBlock).contestType;
-                let conTypes = this.currentContestTypes;
+                const blockType = (ItemList[itemName] as PokeBlock).contestType;
+                const conTypes = this.currentContestTypes;
 
                 if (this.currentContestTypes.includes(blockType)) {
                     Notifier.notify({

@@ -11,9 +11,9 @@ class ContestPokemon extends GymPokemon {
         level: number,
         contestTypes?: ContestType[],
         requirements?: Requirement | Requirement[],
-        shiny?: boolean,
+        shiny?: boolean
     ) {
-        super(name, maxHealth, level, requirements, shiny)
+        super(name, maxHealth, level, requirements, shiny);
         this.nickname = nickname;
         this.contestTypes = contestTypes;
     }
