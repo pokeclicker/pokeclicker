@@ -9,6 +9,7 @@
 ///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
 ///<reference path="PokemonContest.ts"/>
+///<reference path="../shop/GenericTraderShop.ts"/>
 ///<reference path="../contest/ContestHall.ts"/>
 
 const TownList: { [name: string]: Town } = {};
@@ -48,7 +49,7 @@ const pokeLeagueShop = () => new Shop([
     new PokeballItem(GameConstants.Pokeball.Masterball, 75000   , GameConstants.Currency.dungeonToken, { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.dungeonToken]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 10      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 250      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
     ItemList.Protein,
     ItemList.Calcium,
     ItemList.Carbos,
@@ -469,7 +470,7 @@ const LaprasGift = new GiftNPC('Silph Co. Employee', [
     'Oh! Hi! You\'re not a member of Team Rocket! You came to save us? Why thank you!',
     'I want you to have this Pokémon for saving us.',
 ], () => {
-    App.game.party.gainPokemonByName('Lapras');
+    App.game.party.gainPokemonByName('Lapras', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
 }, 'assets/images/pokemon/131.png', { saveKey: 'laprasgift', image: 'assets/images/npcs/Office Worker (male).png', requirement: new MultiRequirement([new TemporaryBattleRequirement('Blue 5'), new ObtainedPokemonRequirement('Lapras', true)]) });
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
@@ -1027,7 +1028,7 @@ TownList['Cinnabar Island'] = new Town(
     'Cinnabar Island',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [CinnabarIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cinnabar Island']), new MoveToDungeon(dungeonList['Pokémon Mansion'])],
+    [CinnabarIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cinnabar Island']), new GenericTraderShop('Palaeontologist', 'Palaeontologist'), new MoveToDungeon(dungeonList['Pokémon Mansion'])],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
@@ -1073,7 +1074,7 @@ TownList['Two Island'] = new Town(
     'Two Island',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
-    [TwoIslandShop],
+    [TwoIslandShop, new GenericTraderShop('EverstoneDealer', 'Rocío Noevo')],
     {
         requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 0)],
         npcs: [TwoIslandGameCornerOwner1, TwoIslandGameCornerOwner2],
@@ -3583,11 +3584,11 @@ TownList['Gateon Port'] = new Town(
     }
 );
 
-TownList['Pokemon HQ Lab'] = new Town(
-    'Pokemon HQ Lab',
+TownList['Pokémon HQ Lab'] = new Town(
+    'Pokémon HQ Lab',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokémon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
         requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
         npcs: [ProfKrane],
@@ -5582,10 +5583,7 @@ TownList['Anville Town'] = new Town(
     GameConstants.UnovaSubRegions.Unova,
     [AnvilleTownShop],
     {
-        requirements: [
-            new ObtainedPokemonRequirement('Meloetta (Aria)'),
-            new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
-        ],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
     }
 );
 TownList['Pokémon League Unova'] = new Town(
@@ -6265,6 +6263,13 @@ const RedButton = new NPC('Red Button', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 23), new QuestLineStepCompletedRequirement('A Beautiful World', 24, GameConstants.AchievementOption.less)]),
 });
 
+const XerneasAZ = new NPC('AZ', [
+    'So, you’ve managed to calm the Aura Duo… Quite the feat. But your Xerneas… it seems to have entered a dormant state. That form you see now is but a shadow of its true power. To awaken its full potential, you must strengthen its bond through training. Only then, when its strength has grown a hundredfold, will the light of its true form shine once more.',
+], {
+    image: 'assets/images/npcs/AZ.png',
+    requirement: new MultiRequirement([new ObtainedPokemonRequirement('Xerneas'), new ObtainedPokemonRequirement('Xerneas (Active)', true)]),
+});
+
 const TeamFlareLysandre1 = new NPC('Team Flare Lysandre', [
     'The ultimate weapon\'s flower has finally bloomed above the soil. Don\'t you find its beauty captivating? As we speak, it draws its energy from the Legendary Pokémon.',
     'Even though resources, space, and energy on this planet are limited, the number of people and Pokémon has increased to an unsustainable level. Whether it\'s money or energy, the ones who steal are the ones who win in this world.',
@@ -6313,7 +6318,7 @@ const Spelunker = new NPC('Spelunker', [
 const ExamineAegislash = new GiftNPC('Millis and Argus Steels\' Aeglislash', [
     '<i>Aegislash wants to join you on your adventure.</i>',
 ], () => {
-    App.game.party.gainPokemonByName('Aegislash (Blade)');
+    App.game.party.gainPokemonByName('Aegislash (Blade)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
 }, 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
 const ThanksDiancie = new NPC('Princess Diancie', [
@@ -6746,7 +6751,7 @@ TownList['Team Flare Secret HQ'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('A Beautiful World', 24)],
     [TemporaryBattleList.Xerneas, TemporaryBattleList.Yveltal, TemporaryBattleList['Team Flare Boss Lysandre 1']],
     {
-        npcs: [TeamFlareLysandre1, TeamFlareBossLysandre1],
+        npcs: [TeamFlareLysandre1, TeamFlareBossLysandre1, XerneasAZ],
     }
 );
 TownList['Terminus Cave'] = new DungeonTown(
@@ -8639,7 +8644,7 @@ const EnergyPlantRose = new NPC('Chairman Rose', [
 const EternatusCatch = new GiftNPC('Catch Eternatus', [
     'You caught Eternatus!',
 ], () => {
-    App.game.party.gainPokemonByName('Eternatus');
+    App.game.party.gainPokemonByName('Eternatus', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
 }, 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new MultiRequirement([new TemporaryBattleRequirement('The Darkest Day'), new ObtainedPokemonRequirement('Eternatus', true)]) });
 
 const Leon = new NPC('Leon', [
