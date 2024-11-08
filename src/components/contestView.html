@@ -58,7 +58,7 @@
             <td colspan="2">
               <span>Current Click Types:</span>
             </td>
-            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType)">
+            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
               <span class="badge text-light px-1" data-bind="
                           attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.clickTypes()) }">
                 <small><strong
@@ -70,7 +70,7 @@
             <td colspan="2">
               <span>Enemy Contest Types:</span>
             </td>
-            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType)">
+            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
               <span class="badge text-light px-1" data-bind="
                           attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.enemyPokemon().contestTypes) }">
                 <small><strong
@@ -102,7 +102,7 @@
             </td>
           </tr>
           <tr>
-            <td width="60%" data-bind="foreach: GameHelper.enumNumbers(ContestType)">
+            <td width="60%" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
               <span class="badge text-light px-1" style="font-size: x-small" data-bind="
                           attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.enemyPokemon().contestTypes) }">
                 <small><strong
