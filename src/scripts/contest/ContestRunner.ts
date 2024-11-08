@@ -77,7 +77,7 @@ class ContestRunner {
         }
         // activate encore if doing well enough
         if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true && ContestRunner.finaleStatus() != true) {
-            if (ContestRunner.encoreRounds() < ContestRunner.rank()) {
+            if (ContestRunner.encoreRounds() < ContestRunner.rank() || ContestRank.Spectacular <= ContestRunner.rank()) {
                 Notifier.notify({
                     message: 'The crowd is cheering! Bonus round incoming!',
                     type: NotificationConstants.NotificationOption.success,
