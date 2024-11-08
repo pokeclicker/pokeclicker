@@ -2381,7 +2381,6 @@ const HoennStoneSalesman = new GemMasterShop(GameConstants.GemShops.HoennStoneSa
 
 const TestSinnohContestHall = new ContestHall([5,6,7,8], undefined, 'Sinnoh Contests');
 const SpectacularContestHall = new ContestHall([ContestRank.Spectacular], [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Balanced]);
-const TestBrilliantShiningContestHall = new ContestHall([ContestRank['Brilliant Shining']], [ContestType.Balanced]);
 
 //Hoenn NPCs
 
@@ -3418,7 +3417,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Master]), TestSinnohContestHall, SpectacularContestHall, TestBrilliantShiningContestHall, HoennContestShop],
+    [new ContestHall([ContestRank.Master]), TestSinnohContestHall, SpectacularContestHall, HoennContestShop],
     //[new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
@@ -4576,8 +4575,8 @@ TownList['Hearthome City'] = new Town(
     'Hearthome City',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
-    // TODO: SuperContests, BrilliantShiningContestHall
+    [SuperContests, HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
+    // TODO: BrilliantShiningContestHall
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
         npcs: [HearthomeContestFan, LucyStevens1, HappinyWitness6],
