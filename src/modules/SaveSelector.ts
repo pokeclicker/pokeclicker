@@ -98,6 +98,7 @@ export default class SaveSelector {
                 saveData.profile?.trainer,
                 saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id,
                 saveData.profile?.pokemonShiny ?? saveData.party.caughtPokemon[0]?.shiny,
+                saveData.profile?.pokemonShadow ?? false,
                 saveData.profile?.pokemonFemale ?? false,
                 saveData.profile?.background,
                 saveData.profile?.textColor,
