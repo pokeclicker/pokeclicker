@@ -657,7 +657,7 @@ Routes.add(new RegionRoute(
                 new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
                 new MultiRequirement([
                     new PokemonLevelRequirement('Phanpy', 51, AchievementOption.less),
-                    new ClearDungeonRequirement(300, getDungeonIndex('Team Rocket\'s Hideout')),
+                    new ClearDungeonRequirement(250, getDungeonIndex('Team Rocket\'s Hideout')),
                 ]),
             ]),
         ]))],
