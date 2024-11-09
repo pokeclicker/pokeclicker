@@ -310,13 +310,13 @@
                             <div class="oak-item-info">
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
-                                        <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem()].displayName"></span></b>
+                                        <b><span data-bind="text: App.game.keyItems.itemList.find(k=> k.id == KeyItemController.inspectedItem()).displayName"></span></b>
                                     </div>
                                 </div>
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
                                         <knockout data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
-                                            <p data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem()].description"></p>
+                                            <p data-bind="html: App.game.keyItems.itemList.find(k=> k.id == KeyItemController.inspectedItem()).description"></p>
                                         </knockout>
                                         <knockout data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
                                             <p>?????</p>
