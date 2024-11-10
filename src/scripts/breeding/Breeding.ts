@@ -39,7 +39,7 @@ class Breeding implements Feature {
 
     initialize(): void {
         this.hatchList[EggType.Fire] = [
-            ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
+            ['Charmander', 'Vulpix', 'Growlithe', 'Magmar'],
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
             ['Torchic', 'Numel'],
             ['Chimchar'],
