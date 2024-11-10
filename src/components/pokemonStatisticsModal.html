@@ -128,6 +128,21 @@
                   <td class="text-left tight text-wrap"><code
                       data-bind="text: App.game.party.getPokemon($data).heldItem()?.displayName || '-'"></code></td>
                 </tr>
+                <!-- ko if: !App.game.challenges.list.disableVitamins.active() && App.game.party.alreadyCaughtPokemon($data) -->
+                <tr data-bind="tooltip: {
+                  html: true,
+                  title: VitaminController.getVitaminStatisticsTooltip($data),
+                  trigger: 'hover',
+                  }">
+                  <td class="text-left">Vitamins Applied</td>
+                  <td class="text-left tight"><code
+                      data-bind="text:
+                        (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).totalVitaminsUsed() : 0).toLocaleString('en-US')
+                        + '/'
+                        + ((player.highestRegion() + 1) * 5).toLocaleString('en-US')">-</code>
+                  </td>
+                </tr>
+                <!-- /ko -->
                 <tr>
                   <td colspan="2" class="text-left tight">
                     <input type="text" class="form-control" placeholder="Nickname"
@@ -335,32 +350,6 @@
                 </tr>
               </tbody>
             </table>
-
-            <!-- ko if: !App.game.challenges.list.disableVitamins.active() && App.game.party.alreadyCaughtPokemon($data) -->
-            <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
-              <thead>
-                <tr class="bg-secondary">
-                  <th colspan="2">Vitamins</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-left">Vitamins Used</td>
-                  <td class="text-left tight"><code
-                      data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).totalVitaminsUsed() : 0).toLocaleString('en-US')">-</code>
-                  </td>
-                </tr>
-                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
-                <tr>
-                  <td class="text-left" data-bind="text: `${GameConstants.VitaminType[$data]}`">X Used</td>
-                  <td class="text-left tight"><code
-                      data-bind="text: (App.game.party.getPokemon($parent) ? App.game.party.getPokemon($parent).vitaminsUsed[$data]() : 0).toLocaleString('en-US')">-</code>
-                  </td>
-                </tr>
-                <!-- /ko -->
-              </tbody>
-            </table>
-            <!-- /ko -->
           </div>
         </div>
       </div>
