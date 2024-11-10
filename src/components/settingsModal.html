@@ -96,7 +96,7 @@
                                 }
                             }">
                             <!-- ko with: Settings.getSetting(`--${areaStatus[$data]}`), as: 'setting' -->
-                                <tr class="mapAreaStateWrapper" data-bind="visible: setting.isUnlocked(), template: { name: 'ColorChoiceSettingTemplate', data: setting}"></tr>
+                                <tr class="mapAreaStateWrapper" data-bind="visible: setting.isUnlocked(), attr: { 'data-areastate': areaStatus[$parent] }, template: { name: 'ColorChoiceSettingTemplate', data: setting}"></tr>
                             <!-- /ko -->
                             </tbody>
                             <tbody>

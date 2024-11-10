@@ -340,7 +340,7 @@
                                 Map locations will be coloured based on the following:
                             </div>
                             ${MapHelper.getUsableFilters().map(setting => {
-                                return `<div class='col-10 legend-item'>
+                                return `<div class='col-10 legend-item ${setting.name}'>
                                     <span>${setting.displayName}:</span>
                                 </div>
                                 <div class='col-2'>
