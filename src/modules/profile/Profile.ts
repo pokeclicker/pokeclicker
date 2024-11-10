@@ -6,6 +6,7 @@ import { Saveable } from '../DataStore/common/Saveable';
 import * as GameConstants from '../GameConstants';
 import Notifier from '../notifications/Notifier';
 import Rand from '../utilities/Rand';
+import GameHelper from '../GameHelper';
 
 export default class Profile implements Saveable {
     public static MAX_TRAINER = 160;
@@ -23,6 +24,18 @@ export default class Profile implements Saveable {
     public pokemonFemale: KnockoutObservable<boolean>;
     public background: KnockoutObservable<number>;
     public textColor: KnockoutObservable<string>;
+
+    public pokemonSearch = ko.observable('');
+    public getCaughtPokemonList = ko.pureComputed(() => {
+        let caughtPokemon = App.game.party.caughtPokemon;
+        if (this.pokemonSearch() != '') {
+            const regex = GameHelper.safelyBuildRegex(this.pokemonSearch());
+            caughtPokemon = caughtPokemon.filter((pokemon) => {
+                return regex.test(pokemon.id) || regex.test(pokemon.name) || regex.test(pokemon.displayName);
+            });
+        }
+        return caughtPokemon.sort((a, b) => a.id - b.id);
+    });
 
     constructor(
         name = 'Trainer',
