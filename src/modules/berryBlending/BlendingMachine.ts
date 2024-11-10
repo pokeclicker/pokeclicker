@@ -52,19 +52,21 @@ export default class BlendingMachine implements Saveable {
 
             // Remove berry if there is only one left
             this.blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
-                if (!(App.game.blending.hasEnoughBerries(slot.berry, 0))) {
+                if (!(App.game.blending.hasEnoughBerries(slot.berry, true))) {
                     if (!App.game.blending.otherMachineHasBerry(slot.berry)) {
                         Notifier.notify({
-                            message: `You are left with one ${BerryType[slot.berry]} Berry!</br><i>All ${BerryType[slot.berry]} berries have been removed from your Berry Blenders</i>`,
+                            message: `You are done blending ${BerryType[slot.berry]} berries!</br>
+                                <i>All ${BerryType[slot.berry]} berries have been removed from your Berry Blenders</br>
+                                Remaining ${BerryType[slot.berry]} berries: ${App.game.farming.berryList[slot.berry]().toLocaleString('en-US')}</i>`,
                             type: NotificationOption.danger,
                             title: 'Berry Blender',
                             image: `assets/images/items/berry/${BerryType[slot.berry]}.png`,
-                            timeout: 10 * SECOND,
+                            timeout: 12 * SECOND,
                         });
                     }
                     if (App.game.blending.otherMachineHasBerry(slot.berry)) {
                         Notifier.notify({
-                            message: `You are almost out of ${BerryType[slot.berry]} Berries!</br><i>${camelCaseToString(GameHelper.anOrA(BerryType[slot.berry]))} ${BerryType[slot.berry]} berry was removed from a Blending Slot</i>`,
+                            message: `You are almost done blending ${BerryType[slot.berry]} berries!</br><i>${camelCaseToString(GameHelper.anOrA(BerryType[slot.berry]))} ${BerryType[slot.berry]} Berry was removed from a Blending Slot</i>`,
                             type: NotificationOption.warning,
                             title: 'Berry Blender',
                             image: `assets/images/items/berry/${BerryType[slot.berry]}.png`,

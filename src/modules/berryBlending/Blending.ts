@@ -23,14 +23,17 @@ export default class Blending implements Feature {
         machines: new Array(4).fill(null).map((value, index) => {
             return new BlendingMachine(index);
         }),
+        berriesToBeBlended: 20,
     };
 
     flavorBank: Array<KnockoutObservable<number>>;
     machines: Array<BlendingMachine>;
+    berriesToBeBlended: KnockoutObservable<number>;
 
     constructor() {
         this.flavorBank = this.defaults.flavorBank.map((v) => ko.observable(v));
         this.machines = this.defaults.machines;
+        this.berriesToBeBlended = ko.observable(this.defaults.berriesToBeBlended);
     }
 
     initialize(): void {
@@ -50,8 +53,9 @@ export default class Blending implements Feature {
         });
     }
 
-    hasEnoughBerries(berry: BerryType, initial: number = 1): boolean {
-        let total = initial;
+    hasEnoughBerries(berry: BerryType, autoCheck: boolean = false): boolean {
+        let total = this.berriesToBeBlended();
+        total -= autoCheck ? 1 : 0;
         if (berry != BerryType.None) {
             this.machines.forEach(m => m.blendSlots.forEach(s => {
                 if (s.berry === berry) {
@@ -83,31 +87,24 @@ export default class Blending implements Feature {
             }
         } else {
             if (enableNotifier) {
-                this.notifyBerryLeft(berry);
+                Notifier.notify({
+                    message: `You can\'t put more berries than your stopping amount!`,
+                    type: NotificationOption.warning,
+                    title: 'Berry Blender',
+                    image: `assets/images/items/berry/${BerryType[berry]}.png`,
+                });
             }
         }
     }
 
     insertBerryAll(berry: BerryType) {
         this.machines.forEach(m => m.blendSlots.filter(s => s.isEmpty() && s.isUnlocked).forEach(s => this.insertBerry(s.index, berry, m.index, false)));
-        if (!this.hasEnoughBerries(berry)) {
-            this.notifyBerryLeft(berry);
-        }
     }
 
     removeBerryAll() {
         this.machines.forEach(m => m.blendSlots.forEach(s => {
             s.berry = BerryType.None;
         }));
-    }
-
-    notifyBerryLeft(berry: BerryType) {
-        Notifier.notify({
-            message: `You only have one ${BerryType[berry]} Berry left!`,
-            type: NotificationOption.warning,
-            title: 'Berry Blender',
-            image: `assets/images/items/berry/${BerryType[berry]}.png`,
-        });
     }
 
     public rpm(slots: BlendingSlot[]) {
@@ -236,6 +233,7 @@ export default class Blending implements Feature {
         return {
             flavorBank: this.flavorBank.map(ko.unwrap),
             machines: this.machines.map(m => m.toJSON()),
+            berriesToBeBlended: this.berriesToBeBlended(),
         };
     }
 
@@ -261,6 +259,13 @@ export default class Blending implements Feature {
             flavorBankJson.forEach((value, index) => {
                 this.flavorBank[index](value || 0);
             });
+        }
+
+        const berriesToBeBlended = json.berriesToBeBlended;
+        if (berriesToBeBlended == null) {
+            this.berriesToBeBlended = ko.observable(this.defaults.berriesToBeBlended);
+        } else {
+            this.berriesToBeBlended(berriesToBeBlended);
         }
     }
 }

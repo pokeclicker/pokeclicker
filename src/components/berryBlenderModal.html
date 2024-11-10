@@ -66,23 +66,23 @@
                                             click: function() { BlendingController.selectedBerry($data); },
                                             css: { 'bg-secondary': BlendingController.selectedBerry() === $data },
                                         ">
-                                            <td style="justify-content: left;">
+                                            <td class="align-middle" style="justify-content: left;">
                                                 <img height="30px" data-bind="attr: {src: FarmController.getBerryImage(App.game.farming.berryData[$data].type)}, css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }"/>
                                                 <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : ''"></span>
                                             </td>
                                             <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
-                                                <td data-bind="text: App.game.farming.berryData[$data].flavors[0].value,
+                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[0].value,
                                                 style:{background: `rgb(238, 129, 48, ${App.game.farming.berryData[$data].flavors[0].value/100})`}">Spicy</td>
-                                                <td data-bind="text: App.game.farming.berryData[$data].flavors[1].value,
+                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[1].value,
                                                 style:{background: `rgb(99, 144, 240, ${App.game.farming.berryData[$data].flavors[1].value/100})`}">Dry</td>
-                                                <td data-bind="text: App.game.farming.berryData[$data].flavors[2].value,
+                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[2].value,
                                                 style:{background: `rgb(214, 133, 173, ${App.game.farming.berryData[$data].flavors[2].value/100})`}">Sweet</td>
-                                                <td data-bind="text: App.game.farming.berryData[$data].flavors[3].value,
+                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[3].value,
                                                 style:{background: `rgb(122, 199, 76, ${App.game.farming.berryData[$data].flavors[3].value/100})`}">Bitter</td>
-                                                <td data-bind="text: App.game.farming.berryData[$data].flavors[4].value,
+                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[4].value,
                                                 style:{background: `rgb(247, 208, 44, ${App.game.farming.berryData[$data].flavors[4].value/100})`}">Sour</td>
-                                                <td data-bind="text: App.game.farming.berryData[$data].smoothness"></td>
-                                                <td data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></td>
+                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].smoothness"></td>
+                                                <td class="align-middle" data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></td>
                                             <!-- /ko -->
                                             <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->
                                                 <td colspan="6">???</td>
@@ -279,24 +279,44 @@
             </div>
 
             <div class="modal-footer">
-                <div class="row m-0" style="margin-bottom: 6px; margin-top: 6px" data-bind="if: BlendingController.blendingModalTabSelected() === 'blendingView'">
-                    <div class="input-group-prepend m-1">
-                        <button type="button" class="btn btn-primary" onclick="App.game.blending.insertBerryAll(BlendingController.selectedBerry())"
-                            data-bind="css: {disabled: !App.game.blending.hasEnoughBerries(BlendingController.selectedBerry()) }">
-                            Fill All Slots
-                        </button>
-                        <btn id="blendBerryButton" class="btn btn-sm btn-primary px-1 py-1" onclick="BlendingController.berrySpin()">
-                            <img id="blendBerry" height="28px" data-bind="
-                                attr: { src: FarmController.getBerryImage(BlendingController.selectedBerry()) }"/>
-                        </btn>
+                <div class="row justify-content-center" data-bind="visible: BlendingController.blendingModalTabSelected() === 'blendingView'">
+                    <div class="input-group m-0 ">
+                        <div class="input-group-prepend">
+                            <btn class="btn btn-info smallButton smallFont" style="pointer-events: none;">
+                                Stop at Berry Amount:
+                            </btn>
+                        </div>
+                        <input id="berriesToBlendAmount" type="number" class="outline-dark form-control form-control-number"
+                            min="0" required name="berriesToBlendAmount"
+                            oninput="App.game.blending.berriesToBeBlended(parseInt($(this).val().toString(), 10) || 0);"
+                            onchange="App.game.blending.berriesToBeBlended(parseInt($(this).val().toString(), 10) || 0);" title=""
+                            data-bind="value: App.game.blending.berriesToBeBlended()"/>
                     </div>
+                </div>
+                <div class="row justify-content-center" data-bind="visible: BlendingController.blendingModalTabSelected() === 'blendingView'">
+                    <div class="input-group m-0">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-primary" onclick="App.game.blending.insertBerryAll(BlendingController.selectedBerry())"
+                                data-bind="css: {disabled: !App.game.blending.hasEnoughBerries(BlendingController.selectedBerry()) }">
+                                Fill All Slots
+                            </button>
+                        </div>
+                        <div class="input-group-append">
+                            <button id="blendBerryButton" class="btn btn-sm btn-primary px-1 py-1" onclick="BlendingController.berrySpin()">
+                                <img id="blendBerry" height="28px" data-bind="
+                                    attr: { src: FarmController.getBerryImage(BlendingController.selectedBerry()) }"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="justify-content-center m-0" data-bind="visible: BlendingController.blendingModalTabSelected() === 'blendingView'">
                     <button type="button" class="btn btn-primary m-1" onclick="App.game.blending.removeBerryAll()">
                         Clear All Slots
                     </button>
                 </div>
 
-                <div class="row justify-content-center" data-bind="if: BlendingController.blendingModalTabSelected() === 'blendingRecipeView'">
-                    <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
+                <div class="row justify-content-center" data-bind="visible: BlendingController.blendingModalTabSelected() === 'blendingRecipeView'">
+                    <div class="input-group m-0">
                         <div class="input-group-prepend">
                             <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="BlendingController.resetAmount()">
                                 Reset
