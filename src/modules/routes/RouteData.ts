@@ -653,7 +653,13 @@ Routes.add(new RegionRoute(
         headbutt: ['Aipom', 'Heracross'],
         special: [new SpecialRoutePokemon(['Meowth (Phanpy)'], new MultiRequirement([
             new StatisticRequirement(['pokemonHatched', getPokemonByName('Phanpy').id], 1, 'Hatch Phanpy first.'),
-            new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
+            new OneFromManyRequirement([
+                new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
+                new MultiRequirement([
+                    new PokemonLevelRequirement('Phanpy', 51, AchievementOption.less),
+                    new ClearDungeonRequirement(250, getDungeonIndex('Team Rocket\'s Hideout')),
+                ]),
+            ]),
         ]))],
     }),
     [

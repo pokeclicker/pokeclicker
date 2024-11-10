@@ -205,7 +205,7 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === $data) -->
                                 <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
                                     <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
@@ -337,6 +337,19 @@
                                 There are six different types of mines you can search for in the Underground.
                                 Understanding their unique properties and the discovery times involved is crucial for efficient mining.
                                 The Underground lexicon can be found at the bottom of this page.
+                            </p>
+
+                            <h4>Finding a new mine</h4>
+                            <p>
+                                A new mine can be manually found by clicking the Find mine button in the Dig tab.<br/>
+                                Automatically starting a new mine happens in the following cases:
+                            </p>
+                            <ul>
+                                <li>A <strong>player</strong> digs up the last item: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
+                                <li>A <strong>helper</strong> digs up the last item: If your helper has the 'Look for favorite' setting enabled, it will try and start it's favorite mine. If this setting is disabled it will start a Random mine.</li>
+                            </ul>
+                            <p>
+                                <u>Note that this does NOT ignore the discovery time needed.</u>
                             </p>
 
                             <h4>Mine Types</h4>
