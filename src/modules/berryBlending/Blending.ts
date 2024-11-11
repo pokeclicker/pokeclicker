@@ -193,19 +193,18 @@ export default class Blending implements Feature {
     }
 
     public incomingFlavors(index: number) {
-        let spicy = 0;
-        let dry = 0;
-        let sweet = 0;
-        let bitter = 0;
-        let sour = 0;
-        this.machines[index].blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
-            spicy += App.game.farming.berryData[slot.berry].flavors[0].value;
-            dry += App.game.farming.berryData[slot.berry].flavors[1].value;
-            sweet += App.game.farming.berryData[slot.berry].flavors[2].value;
-            bitter += App.game.farming.berryData[slot.berry].flavors[3].value;
-            sour += App.game.farming.berryData[slot.berry].flavors[4].value;
+        const filledSlots = this.machines[index].blendSlots.filter(slot => !slot.isEmpty());
+
+        let incomingFlavors: BerryFlavor[] = [];
+        GameHelper.enumNumbers(FlavorType).forEach(flavorType => incomingFlavors.push({type: flavorType, value: 0}));
+
+        filledSlots.forEach(slot => {
+            App.game.farming.berryData[slot.berry].flavors.forEach(f => {
+                incomingFlavors[f.type].value += f.value;
+            });
         });
-        return [spicy, dry, sweet, bitter, sour];
+
+        return incomingFlavors;
     }
 
     public gainFlavor(amount: number, flavor: FlavorType): FlavorAmount {

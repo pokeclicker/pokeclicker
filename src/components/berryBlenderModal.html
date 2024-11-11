@@ -120,17 +120,13 @@
                                                 </div>
                                                 <table style="width: 100%;">
                                                     <tr>
-                                                    <td colspan="5">Incoming Flavors:</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Spicy</td>
-                                                        <td>Dry</td>
-                                                        <td>Sweet</td>
-                                                        <td>Bitter</td>
-                                                        <td>Sour</td>
+                                                        <td colspan="5">Incoming Flavors:</td>
                                                     </tr>
                                                     <tr data-bind="foreach: App.game.blending.incomingFlavors($index())">
-                                                    <td data-bind="text: $data"></td>
+                                                        <td data-bind="text: FlavorType[$data.type]"></td>
+                                                    </tr>
+                                                    <tr data-bind="foreach: App.game.blending.incomingFlavors($index())">
+                                                        <td data-bind="text: $data.value"></td>
                                                     </tr>
                                                 </table>
                                             </div>
