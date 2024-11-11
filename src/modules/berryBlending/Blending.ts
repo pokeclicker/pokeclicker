@@ -174,7 +174,7 @@ export default class Blending implements Feature {
         return Math.round(totalBerryBonus * flavorSpreadBonus * uniqueBerryBonus * 10);
     }
 
-    getRPM(index: number): string {
+    getRPMDisplay(index: number): string {
         return this.rpm(index) ? (this.rpm(index) / 100).toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) : '0.00';
     }
 

@@ -142,7 +142,7 @@
                                                     >
                                                 </div>
                                                 <div>
-                                                    <div data-bind="text: `RPM: ${App.game.blending.getRPM($index())}`"></div>
+                                                    <div data-bind="text: `RPM: ${App.game.blending.getRPMDisplay($index())}`"></div>
                                                     <div class="progress">
                                                         <div class="progress-bar bg-success" role="progressbar"
                                                             data-bind="attr:{ style: 'width:' + App.game.blending.getTimer($index()) + '%' }"
@@ -250,13 +250,14 @@
                         Place berries in slots to extract their flavor values into your Flavor Bank.
                         Each berry has a smoothness value that contributes to how fast all the berries in a machine are processed into flavor points.
                         This is called RPM.
-                        The RPM or each machine is based off the average smoothness of all berries inside its slots.
+                        The base RPM of each machine is based off the average smoothness of all berries inside its slots, but bonus RPM can be attained from synergizing berries to specialize in a flavor.
+                        Combine different berries to get more RPM and blend faster results!
                     </p>
                     <p>
                         Click on a slot to insert the selected berry.
                         To remove a berry from a slot, click on it with the same berry selected or right click it with any berry selected.
-                        Berries will automatically be ejected if blending them will leave you with 0 left.
-                        You cannot use berries if you have only 1 of its kind left.
+                        Berries will automatically be ejected when their amount reaches the specified <i>Stopping Amount</i>.
+                        You cannot use berries if you have less than your <i>Stopping Amount</i>.
                     </p>
                     <p>
                         You can have up to four machines, with four blending slots on each.
