@@ -152,9 +152,9 @@
                                 <!-- /ko -->
                             </div>
                                 <!-- ko if: App.game.blending.machines.some(m => m.blendSlots.some(s => !s.isUnlocked)) -->
-                                    <button class="clickable btn btn-block btn-success" data-bind="
+                                    <button class="clickable btn btn-block btn-success" onclick="App.game.blending.buyBlendingSlot()" data-bind="
                                         css: {disabled: App.game.wallet.currencies[GameConstants.Currency.contestToken]() < App.game.blending.nextBlendingSlotCost().amount},
-                                        click: App.game.blending.buyBlendingSlot()">
+                                        ">
                                         <span data-bind="html: App.game.blending.getBlendingSlotCostDisplay()"</span>
                                     </button>
                                 <!-- /ko -->
@@ -217,11 +217,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <!-- ko foreach: $data.flavorPrice.filter(f => f.value > 0) -->
-                                                                <td data-bind="text: $data.value">Value</td>
+                                                                <td data-bind="text: ($data.value * BlendingController.amount()).toLocaleString('en-US')">Value</td>
                                                             <!-- /ko -->
                                                         </tr>
                                                         <tr>
-                                                            <td class="align-middle" colspan="5" data-bind="text: `Amount: ${player.itemList[$data.item]().toLocaleString('en-US')}`"></td>
+                                                            <td class="align-middle" colspan="5" data-bind="text: `In Bag: ${player.itemList[$data.item]().toLocaleString('en-US')}`"></td>
                                                         </tr>
                                                     </tbody>
                                             </table>
@@ -279,9 +279,9 @@
                 <div class="row justify-content-center" data-bind="visible: BlendingController.blendingModalTabSelected() === 'blendingView'">
                     <div class="input-group m-0 ">
                         <div class="input-group-prepend">
-                            <btn class="btn btn-info smallButton smallFont" style="pointer-events: none;">
+                            <button class="btn btn-info smallButton smallFont" style="pointer-events: none;">
                                 Stop at Berry Amount:
-                            </btn>
+                            </button>
                         </div>
                         <input id="berriesToBlendAmount" type="number" class="outline-dark form-control form-control-number"
                             min="0" required name="berriesToBlendAmount"
