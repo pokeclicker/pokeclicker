@@ -38,7 +38,7 @@ export default class BlendingMachine implements Saveable {
     update(seconds: number): void {
         if (this.blendSlots.some(slot => !slot.isEmpty())) {
 
-            this.timer += seconds * App.game.blending.rpm(this.blendSlots) / 100;
+            this.timer += seconds * App.game.blending.rpm(this.index) / 100;
 
             if (this.timer >= 60) {
                 this.blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
@@ -86,7 +86,7 @@ export default class BlendingMachine implements Saveable {
     animate(): void {
         if (this.blendSlots.some(slot => !slot.isEmpty())) {
         
-            this.degreesRotated = this.degreesRotated + 6 * App.game.blending.rpm(this.blendSlots) / 1000;
+            this.degreesRotated = this.degreesRotated + 6 * App.game.blending.rpm(this.index) / 1000;
 
             if (this.degreesRotated > 360) {
                 this.degreesRotated = 0;

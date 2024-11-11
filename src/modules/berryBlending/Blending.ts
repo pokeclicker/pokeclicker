@@ -13,6 +13,7 @@ import Amount from '../wallet/Amount';
 import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
+import BerryFlavor from '../interfaces/BerryFlavor';
 
 export default class Blending implements Feature {
     name = 'Blending';
@@ -107,16 +108,74 @@ export default class Blending implements Feature {
         }));
     }
 
-    public rpm(slots: BlendingSlot[]) {
+    public rpm(index: number) {
         let smoothness = 0;
-        slots.filter(slot => !slot.isEmpty()).forEach(slot => {
+        this.machines[index].blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
             smoothness += (App.game.farming.berryData[slot.berry].smoothness * 10);
         });
-        return slots.filter(slot => !slot.isEmpty()).length ? Math.round(smoothness / slots.filter(slot => !slot.isEmpty()).length) : 0;
+
+        const totalBerries = this.machines[index].blendSlots.filter(slot => !slot.isEmpty()).length;
+        const baseSmooth = Math.round(smoothness / totalBerries);
+        const bonusSmooth = this.getRpmBonus(index);
+
+        const totalSmooth = baseSmooth + bonusSmooth;
+
+        return totalBerries ? totalSmooth : 0;
+    }
+
+    getSlotBerriesTotal(index: number) {
+        const filledSlots = this.machines[index].blendSlots.filter(s => !s.isEmpty());
+
+        let total = 0;
+        filledSlots.forEach(() => total += 1);
+
+        return total;
+    }
+
+    getSlotBerriesUnique(index: number) {
+        const filledSlots = this.machines[index].blendSlots.filter(s => !s.isEmpty());
+
+        let berriesInSlots: BerryType[] = [];
+        filledSlots.forEach(slot => berriesInSlots.push(slot.berry));
+
+        return [...new Set(berriesInSlots)];
+    }
+
+    getSlotBerriesUniqueNumber(index: number) {
+        const uniqueBerries = this.getSlotBerriesUnique(index);
+
+        return uniqueBerries.length;
+    }
+
+    getSlotBerriesFlavorSpread(index: number) {
+        const filledSlots = this.machines[index].blendSlots.filter(s => !s.isEmpty());
+
+        let sharedFlavors: BerryFlavor[] = [];
+        GameHelper.enumNumbers(FlavorType).forEach(flavorType => sharedFlavors.push({type: flavorType, value: 0}));
+
+        filledSlots.forEach(slot => {
+            App.game.farming.berryData[slot.berry].flavors.forEach(f => {
+                if (f.value > 0) {
+                    sharedFlavors[f.type].value += 1;
+                }
+            });
+        });
+
+        const flavorSpread = sharedFlavors.filter(f => f.value > 0).length;
+
+        return flavorSpread;
+    }
+
+    public getRpmBonus(index: number) {
+        const totalBerryBonus = this.getSlotBerriesTotal(index) / 4;
+        const flavorSpreadBonus = 50 / this.getSlotBerriesFlavorSpread(index);
+        const uniqueBerryBonus = (this.getSlotBerriesUniqueNumber(index) - 1) / 3;
+
+        return Math.round(totalBerryBonus * flavorSpreadBonus * uniqueBerryBonus * 10);
     }
 
     getRPM(index: number): string {
-        return this.rpm(this.machines[index].blendSlots) ? (this.rpm(this.machines[index].blendSlots) / 100).toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) : '0.00';
+        return this.rpm(index) ? (this.rpm(index) / 100).toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) : '0.00';
     }
 
     getTimer(index: number): string {
