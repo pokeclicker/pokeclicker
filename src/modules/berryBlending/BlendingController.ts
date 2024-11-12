@@ -76,4 +76,16 @@ export default class BlendingController {
             berryImage.style.removeProperty('animation');
         });
     }
+
+    public static calculateTableBerryCss(berry: BerryType): string {
+        if (!App.game.blending.machines.some(m => m.blendSlots.some(s => s.berry === berry))) {
+            return 'btn-secondary align-middle';
+        } else {
+            return 'btn-primary align-middle';
+        }
+    }
+
+    public static calculateTableRowCss(berry: BerryType): string {
+        return (BlendingController.selectedBerry() === berry) || App.game.blending.machines.some(m => m.blendSlots.some(s => s.berry === berry)) ? 'background-color: rgba(128, 128, 128, 0.4)' : '';
+    }
 }

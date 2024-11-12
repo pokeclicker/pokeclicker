@@ -64,9 +64,9 @@
                                         <tr class="clickable"
                                             data-bind="
                                             click: function() { BlendingController.selectedBerry($data); },
-                                            css: { 'bg-secondary': BlendingController.selectedBerry() === $data },
+                                            attr: { style: BlendingController.calculateTableRowCss($data) },
                                         ">
-                                            <td class="align-middle" style="justify-content: left;">
+                                            <td style="justify-content: left;" data-bind="attr: {class: BlendingController.calculateTableBerryCss($data)}">
                                                 <img height="30px" data-bind="attr: {src: FarmController.getBerryImage(App.game.farming.berryData[$data].type)}, css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }"/>
                                                 <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : ''"></span>
                                             </td>
@@ -295,7 +295,7 @@
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-primary" onclick="App.game.blending.insertBerryAll(BlendingController.selectedBerry())"
                                 data-bind="css: {disabled: !App.game.blending.hasEnoughBerries(BlendingController.selectedBerry()) }">
-                                Fill All Slots
+                                Fill All Empty Slots
                             </button>
                         </div>
                         <div class="input-group-append">
