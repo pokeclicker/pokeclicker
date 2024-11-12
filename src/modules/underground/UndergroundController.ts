@@ -282,7 +282,7 @@ export class UndergroundController {
     }
 
     public static notifyItemFound(item: UndergroundItem, amount: number, helper?: UndergroundHelper) {
-        const { itemName } = item;
+        const { name: itemName } = item;
 
         Notifier.notify({
             message: `${helper ? `${helper.name}` : 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
@@ -313,6 +313,15 @@ export class UndergroundController {
             type: NotificationConstants.NotificationOption.warning,
             setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
             timeout: 3000,
+        });
+    }
+
+    public static notifyBatteryFull() {
+        Notifier.notify({
+            message: 'Your Underground Battery has been fully charged and is ready to be discharged.',
+            type: NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.battery_full,
+            timeout: 10000,
         });
     }
 }

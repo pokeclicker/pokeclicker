@@ -170,7 +170,7 @@ export default class Profile implements Saveable {
         if (json.trainer !== undefined) this.trainer(json.trainer);
         if (json.pokemon !== undefined) this.pokemon(json.pokemon);
         if (json.pokemonShiny !== undefined) this.pokemonShiny(json.pokemonShiny);
-        if (json.pokemonShadow !== undefined) this.pokemonShadow(json.pokemonShiny);
+        if (json.pokemonShadow !== undefined) this.pokemonShadow(json.pokemonShadow);
         if (json.pokemonFemale !== undefined) this.pokemonFemale(json.pokemonFemale);
         if (json.background !== undefined) this.background(json.background);
         if (json.textColor) this.textColor(json.textColor);
@@ -182,7 +182,7 @@ export default class Profile implements Saveable {
             trainer: this.trainer(),
             pokemon: this.pokemon(),
             pokemonShiny: this.pokemonShiny(),
-            pokemonShadow: this.pokemonShiny(),
+            pokemonShadow: this.pokemonShadow(),
             pokemonFemale: this.pokemonFemale(),
             background: this.background(),
             textColor: this.textColor(),

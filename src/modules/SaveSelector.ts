@@ -5,6 +5,7 @@ import Profile from './profile/Profile';
 import { SortSaves } from './Sortable';
 import Settings from './settings/index';
 import GameHelper from './GameHelper';
+import GameLoadState from './utilities/GameLoadState';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -68,6 +69,11 @@ export default class SaveSelector {
 
     static LoadSaveOnKeydown(e: JQuery.KeyDownEvent) {
         if (GameHelper.focusedOnEditableElement()) {
+            return;
+        }
+
+        if (GameLoadState.getLoadState() !== GameLoadState.states.none) {
+            $(document).off(e);
             return;
         }
 
