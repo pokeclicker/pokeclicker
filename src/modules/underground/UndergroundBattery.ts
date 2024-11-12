@@ -156,7 +156,12 @@ export class UndergroundBattery {
     }
 
     private async handleDischargingPattern() {
-        while (this._activeDischargePattern && this._activeDischargeFrame < this._activeDischargePattern.pattern.length) {
+        while (
+            this._activeDischargePattern &&
+            this._activeDischargeFrame < this._activeDischargePattern.pattern.length &&
+            App.game.underground.mine.timeUntilDiscovery <= 0 &&
+            !App.game.underground.mine.completed
+        ) {
             const patternFrame = this._activeDischargePattern.pattern[this._activeDischargeFrame];
 
             if ((patternFrame?.length || 0) > 0) {
@@ -177,6 +182,7 @@ export class UndergroundBattery {
                 setTimeout(resolve, 15);
             });
         }
+        this._activeDischargePattern = null;
     }
 
     get charges() {
