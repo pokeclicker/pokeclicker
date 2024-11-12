@@ -83,7 +83,7 @@ ItemList.Rich_Mulch  = new MulchItem(MulchType.Rich_Mulch, 100, 'Rich Mulch', 'I
 ItemList.Surprise_Mulch  = new MulchItem(MulchType.Surprise_Mulch, 150, 'Surprise Mulch', 'Increases Berry mutation rate.');
 ItemList.Amaze_Mulch = new MulchItem(MulchType.Amaze_Mulch, 200, 'Amaze Mulch', 'A weaker combination of Boost, Rich and Surprise mulch.');
 ItemList.Freeze_Mulch = new MulchItem(MulchType.Freeze_Mulch, 350, 'Freeze Mulch', 'Stops Berry growth and auras. Mutations will still occur while berries are frozen.');
-ItemList.Gooey_Mulch = new MulchItem(MulchType.Gooey_Mulch, 100, 'Gooey Mulch', 'Helps attract rarer species. Gooed Pokémon are less likely to flee.');
+ItemList.Gooey_Mulch = new MulchItem(MulchType.Gooey_Mulch, 100, 'Gooey Mulch', 'Helps attract rarer species. Gooed Pokémon are more likely to be caught.');
 
 ItemList.Pokeball   = new PokeballItem(Pokeball.Pokeball, 100, undefined, { multiplier: 1 }, 'Poké Ball');
 ItemList.Greatball  = new PokeballItem(Pokeball.Greatball, 500, undefined, undefined, 'Great Ball');
