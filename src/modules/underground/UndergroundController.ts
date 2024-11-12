@@ -315,4 +315,13 @@ export class UndergroundController {
             timeout: 3000,
         });
     }
+
+    public static notifyBatteryFull() {
+        Notifier.notify({
+            message: 'Your Underground Battery has been fully charged and is ready to be discharged.',
+            type: NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.battery_full,
+            timeout: 10000,
+        });
+    }
 }

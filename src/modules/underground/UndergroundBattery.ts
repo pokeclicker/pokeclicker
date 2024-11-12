@@ -122,6 +122,10 @@ export class UndergroundBattery {
 
         GameHelper.incrementObservable(this._charges, 1);
         this._batteryCooldown(UNDERGROUND_BATTERY_COOLDOWN_SECONDS);
+
+        if (this._charges() >= UNDERGROUND_BATTERY_MAX_CHARGES) {
+            UndergroundController.notifyBatteryFull();
+        }
     }
 
     public discharge() {
