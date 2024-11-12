@@ -282,7 +282,7 @@ export class UndergroundController {
     }
 
     public static notifyItemFound(item: UndergroundItem, amount: number, helper?: UndergroundHelper) {
-        const { itemName } = item;
+        const { name: itemName } = item;
 
         Notifier.notify({
             message: `${helper ? `${helper.name}` : 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
