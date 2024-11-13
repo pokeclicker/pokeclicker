@@ -20,32 +20,37 @@ class DungeonRunner {
     public static continuousInteractionInput = false;
 
     public static initializeDungeon(dungeon: Dungeon) {
-        if (!dungeon.isUnlocked()) {
-            if (dungeon.name === 'Viridian Forest') {
-                Notifier.notify({
-                    message: 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
+        if (!DungeonRunner.canStartDungeon(dungeon)) {
+            let message;
+            let notifType;
+            if (!dungeon.isUnlocked()) {
+                if (dungeon.name === 'Viridian Forest') {
+                    message = 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>';
+                    notifType = NotificationConstants.NotificationOption.danger;
+                } else {
+                    message = `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`;
+                    notifType = NotificationConstants.NotificationOption.warning;
+                }
+            } else if (!dungeon.hasUnlockedBoss()) {
+                message = 'You can\'t access this dungeon right now because all of its bosses are locked.';
+                notifType = NotificationConstants.NotificationOption.warning;
+            } else if (!DungeonGuides.hired() && !DungeonRunner.hasEnoughTokens(dungeon)) {
+                message = 'You don\'t have enough Dungeon Tokens.';
+                notifType = NotificationConstants.NotificationOption.danger;
             } else {
-                Notifier.notify({
-                    message: `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`,
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-                return false;
+                message = 'You can\'t enter this dungeon right now.';
+                notifType = NotificationConstants.NotificationOption.danger;
             }
+            Notifier.notify({
+                message: message,
+                type: notifType,
+            });
+            return false;
         }
         DungeonRunner.dungeon = dungeon;
 
         // Only charge the player if they aren't using a dungeon guide as they are charged when they start the dungeon
         if (!DungeonGuides.hired()) {
-            if (!DungeonRunner.hasEnoughTokens()) {
-                Notifier.notify({
-                    message: 'You don\'t have enough Dungeon Tokens.',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
-            }
             App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
         }
         // Reset any trainers/pokemon if there was one previously
@@ -254,6 +259,12 @@ class DungeonRunner {
             return;
         }
 
+        if (!DungeonRunner.dungeon.hasUnlockedBoss()) {
+            // Prevent the player from being unable to finish the dungeon if somehow all the bosses became locked after entering
+            DungeonRunner.dungeonWon();
+            return;
+        }
+
         DungeonRunner.fightingBoss(true);
         DungeonBattle.generateNewBoss();
     }
@@ -342,8 +353,12 @@ class DungeonRunner {
         });
     }
 
-    public static hasEnoughTokens() {
-        return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+    public static canStartDungeon(dungeon: Dungeon = DungeonRunner.dungeon) {
+        return (DungeonGuides.hired() || DungeonRunner.hasEnoughTokens(dungeon)) && dungeon.isUnlocked() && dungeon.hasUnlockedBoss();
+    }
+
+    public static hasEnoughTokens(dungeon: Dungeon = DungeonRunner.dungeon) {
+        return App.game.wallet.hasAmount(new Amount(dungeon.tokenCost, GameConstants.Currency.dungeonToken));
     }
 
     public static dungeonLevel(): number {
