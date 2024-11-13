@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body pt-0" style="background-color: inherit;">
                 <!-- ko foreach: { data: Object.entries(RouteInfo.pokemonList()), as: 'pokemons' } -->
-                <div class="bg-primary text-left rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#route-${pokemons[0]}` }">
+                <div class="bg-primary text-left rounded px-3 py-2 mt-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#route-${pokemons[0]}` }">
                     <h5 class="my-0 mx-1 text-light d-inline-block" data-bind="text: (pokemons[0] == 'roamers' ? 'Roamers' : 'Encounters')">Roamer Status</h5>
                 </div>
                 <div class="collapse show" data-bind="attr: { 'id': `route-${pokemons[0]}` }">
