@@ -2825,6 +2825,10 @@ class Update implements Saveable {
                 settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
             }
             delete settingsData.showFarmModuleControls;
+            // Pokémon Center renamed
+            if (playerData._townName == 'Pokemon HQ Lab') {
+                playerData._townName = 'Pokémon HQ Lab';
+            }
         },
     };
 

@@ -234,21 +234,10 @@
                                 <tr><th colspan="2">Underground</th></tr>
                             </thead>
                             <tbody>
-                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.hammer')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.chisel')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.hammer')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
-                                <tr>
-                                    <td class="p-2">
-                                        <knockout data-bind="text: App.translation.get('hotkey.underground.useRestore', 'settings', { defaultValue: 'Use Restore'})"></knockout><span>:</span>
-                                    </td>
-                                    <td class="p-0" data-bind="tooltip: {
-                                        title: 'Each number refers to a specific Restore',
-                                        trigger: 'hover',
-                                    }">
-                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
-                                    </td>
-                                </tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Oak Items</th></tr>
