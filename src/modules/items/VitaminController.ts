@@ -1,6 +1,5 @@
 import '../koExtenders';
 import { VitaminType } from '../GameConstants';
-import GameHelper from '../GameHelper';
 
 export default class VitaminController {
     public static currentlySelected = ko.observable(VitaminType.Protein).extend({ numeric: 0 });
@@ -23,17 +22,5 @@ export default class VitaminController {
     public static getImage(vitaminType) {
         const vitaminName = VitaminType[vitaminType ?? this.currentlySelected()];
         return `assets/images/items/vitamin/${vitaminName}.png`;
-    }
-
-    public static getVitaminStatisticsTooltip(pokemon) {
-        const tooltip = [];
-
-        if (App.game.party.getPokemon(pokemon)) {
-            GameHelper.enumNumbers(VitaminType).forEach(vitamin => {
-                tooltip.push(`<u>${VitaminType[vitamin]}</u>: ${App.game.party.getPokemon(pokemon).vitaminsUsed[vitamin]().toLocaleString('en-US')}`);
-            });
-        }
-
-        return tooltip.join('<br>');
     }
 }
