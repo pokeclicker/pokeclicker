@@ -5,7 +5,7 @@ class ShardTraderShop extends Shop {
         public location: GameConstants.ShardTraderLocations,
         public name: string = 'Shard Trader',
         public hidePlayerInventory: boolean = false,
-        public currencyName: string = 'Shards'
+        public currencyName: string = 'Item'
     ) {
         super([], name);
     }
