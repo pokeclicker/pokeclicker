@@ -75,7 +75,7 @@
 
                         <!-- ko if: App.game.underground.mine -->
                         <div style="position: relative;">
-                            <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
+                            <div id="mineBody" style="margin:auto; background-image: url('assets/images/underground/rock0.png');"
                                  data-bind="css: {
                                     'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
                                     'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durability < App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durabilityPerUse
@@ -130,7 +130,7 @@
                                             <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: !tool.canUseTool() ? 0.3 : 1 }">
                                                 <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 5px;">
                                                     <div class="d-flex align-items-center justify-content-center" style="width: 27px; height: 27px;">
-                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
+                                                        <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
                                                     </div>
                                                     <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                                 </div>
@@ -288,7 +288,7 @@
                                             <input class="clickable" type="checkbox" data-bind="checked: $data.autoSellToggle">
                                             <!-- /ko -->
                                             <!-- ko ifnot: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
-                                            <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                            <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
                                             tooltip: {
                                                 title: `Unlocked when ${$data.name} reaches level ${GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT}`,
                                                 placement: 'bottom',
@@ -735,7 +735,7 @@
                                 <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × ${PokemonType[UndergroundTrading.selectedTradeFromItem.type]} Gems`"></label>
                                 <!-- /ko -->
                                 <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Diamond -->
-                                <img class='mineInventoryItem' src="../assets/images/currency/diamond.svg"/>
+                                <img class='mineInventoryItem' src="assets/images/currency/diamond.svg"/>
                                 <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × Diamonds`"></label>
                                 <!-- /ko -->
                             </div>
@@ -751,7 +751,7 @@
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.sellAmount = 1">Reset</button>
 
-                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
+                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 10">
@@ -856,7 +856,7 @@
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1">Reset</button>
 
-                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
+                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 10">
@@ -948,7 +948,7 @@
                             <tr>
                                 <td class="vertical-middle" data-bind="text: $data.tier"></td>
                                 <td class="vertical-middle">
-                                    <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
                                             tooltip: {
                                                 title: $data.hint || '',
                                                 placement: 'bottom',
@@ -975,7 +975,7 @@
 
 <script type="text/html" id="helpToolTemplate">
     <h6 class="d-flex align-items-center" style="gap: 0.5rem;">
-        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
+        <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
         <knockout data-bind="text: $data.tool.displayName"></knockout>
     </h6>
     <ul>

@@ -113,6 +113,9 @@ export class UndergroundController {
             });
             return;
         }
+        if (amount <= 0) {
+            return;
+        }
         if (item.valueType == UndergroundItemValueType.Fossil) {
             amount = 1;
         }
@@ -128,6 +131,9 @@ export class UndergroundController {
     }
 
     public static gainProfit(item: UndergroundItem, amount: number, percentage: number = 1): boolean {
+        if (amount <= 0) {
+            return false;
+        }
         let success = true;
         switch (item.valueType) {
             case UndergroundItemValueType.Diamond:
