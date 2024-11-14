@@ -12,7 +12,7 @@ const ChangelogItems = [
     // note that month is 0 indexed
     // v0.10.23
     new ChangelogUpdate('v0.10.23', new Date(2024, 10, 15)),
-    new Changelog(changelogType.FIXED, 'Underground images not loading or displaying incorrectly (new layers only)'),
+    new Changelog(changelogType.FIXED, 'Underground images not loading or displaying incorrectly (might not kick in until a new layer)'),
     new Changelog(changelogType.FIXED, 'Dungeon debuff indicator incorrectly displaying on non-debuffed dungeons'),
     new Changelog(changelogType.FIXED, 'Ability to sell negative underground treasure'),
 
