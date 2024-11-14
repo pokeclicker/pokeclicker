@@ -2835,8 +2835,9 @@ class Update implements Saveable {
             // Remove easier-to-fix locale misformatting from underground grid item tiles
             saveData.underground?.mine.grid.map(t => t.reward).filter(r => r).forEach(r => {
                 if (!r.backgroundPosition.match(/^\d+% \d+%$/)) {
-                    r.backgroundPosition = r.backgroundPosition.replace(/^(\d+)\s% (\d+)\s%$/, '$1% $2%');
-                    r.backgroundPosition = r.backgroundPosition.replace(/^%\s(\d+) %\s(\d+)$/, '$1% $2%');
+                    r.backgroundPosition = r.backgroundPosition.replaceAll(',', '.');
+                    r.backgroundPosition = r.backgroundPosition.replace(/^([\d.]+)\s% ([\d.]+)\s%$/, '$1% $2%');
+                    r.backgroundPosition = r.backgroundPosition.replace(/^%\s([\d.]+) %\s([\d.]+)$/, '$1% $2%');
                 }
             });
         },
