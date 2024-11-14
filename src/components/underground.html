@@ -209,15 +209,18 @@
                                 <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === $data) -->
                                 <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
                                     <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                         data-bind="
+                                            data-bind="
                                             css: { 'bg-info': UndergroundTrading.selectedTradeFromItem === $data },
+                                            style: { cursor: $data.valueType === UndergroundItemValueType.Special ? 'default' : 'pointer' },
                                             template: { name: 'otherItemTemplate', data: $data.itemName },
                                             click: () => {
-                                                UndergroundTrading.selectedTradeFromItem = $data;
-                                                UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
-                                                $('#treasureDetailModal').modal('show');
+                                                if ($data.valueType !== UndergroundItemValueType.Special) {
+                                                    UndergroundTrading.selectedTradeFromItem = $data;
+                                                    UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
+                                                    $('#treasureDetailModal').modal('show');
+                                                }
                                             }
-                                         ">
+                                            ">
                                     </div>
                                 </div>
                                 <!-- /ko -->
