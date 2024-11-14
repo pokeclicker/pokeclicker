@@ -5,6 +5,7 @@ import Profile from './profile/Profile';
 import { SortSaves } from './Sortable';
 import Settings from './settings/index';
 import GameHelper from './GameHelper';
+import GameLoadState from './utilities/GameLoadState';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -24,23 +25,34 @@ export default class SaveSelector {
 
         $('[data-toggle="tooltip"]').tooltip();
 
+        const showContextMenu = (top: number, left: number, key: string) => {
+            $('#saveSelectorContextMenu').html(`
+                <a class="dropdown-item bg-success" href="#" onclick="Save.key = '${key}'; SaveSelector.Download('${key}')">Download (backup)</a>
+                <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">Load</a>
+                <a class="dropdown-item bg-warning" href="#"><label class="clickable my-0" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
+                <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">Delete</a>
+            `).css({
+                display: 'block',
+                position: 'absolute',
+                top,
+                left,
+            }).addClass('show');
+        };
+
         $(container).on('contextmenu', '.trainer-card.clickable', (e) => {
-            const top = e.pageY;
-            const left = e.pageX;
             const { key } = e.currentTarget.dataset;
             if (key) {
-                $('#saveSelectorContextMenu').html(`
-                    <a class="dropdown-item bg-success" href="#" onclick="Save.key = '${key}'; SaveSelector.Download('${key}')">Download (backup)</a>
-                    <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">Load</a>
-                    <a class="dropdown-item bg-warning" href="#"><label class="clickable my-0" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
-                    <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">Delete</a>
-                `).css({
-                    display: 'block',
-                    position: 'absolute',
-                    top,
-                    left,
-                }).addClass('show');
+                showContextMenu(e.pageY, e.pageX, key);
                 return false; // blocks default Webbrowser right click menu
+            }
+            return true;
+        });
+
+        $(container).on('click', '.context-menu-button', (e) => {
+            const { key } = e.currentTarget.closest('.trainer-card.clickable').dataset;
+            if (key) {
+                showContextMenu(e.pageY, e.pageX, key);
+                return false;
             }
             return true;
         });
@@ -51,6 +63,29 @@ export default class SaveSelector {
 
         // Sort our saves
         SortSaves();
+
+        $(document).on('keydown', this.LoadSaveOnKeydown);
+    }
+
+    static LoadSaveOnKeydown(e: JQuery.KeyDownEvent) {
+        if (GameHelper.focusedOnEditableElement()) {
+            return;
+        }
+
+        if (GameLoadState.getLoadState() !== GameLoadState.states.none) {
+            $(document).off(e);
+            return;
+        }
+
+        const key = parseInt(e.key);
+        if (!isNaN(key)) {
+            const chosenSave = key - 1;
+            const allSaves = $('.trainer-card');
+            if (allSaves.length > chosenSave && chosenSave >= 0) {
+                $(document).off(e);
+                allSaves[chosenSave].click();
+            }
+        }
     }
 
     static getTrainerCard(key: string): Element {
@@ -69,6 +104,7 @@ export default class SaveSelector {
                 saveData.profile?.trainer,
                 saveData.profile?.pokemon ?? saveData.party.caughtPokemon[0]?.id,
                 saveData.profile?.pokemonShiny ?? saveData.party.caughtPokemon[0]?.shiny,
+                saveData.profile?.pokemonShadow ?? false,
                 saveData.profile?.pokemonFemale ?? false,
                 saveData.profile?.background,
                 saveData.profile?.textColor,

@@ -46,7 +46,7 @@ export default class KeyItems implements Feature {
                 () => App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
             new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
-                () => MapHelper.accessToRoute(14, Region.kanto), undefined, undefined, 'Wailmer Pail'),
+                () => MapHelper.accessToRoute(11, Region.kanto), undefined, undefined, 'Wailmer Pail'),
 
             new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground.', undefined, undefined, undefined, 'Explorer Kit'),
             new KeyItem(KeyItemType.Eon_ticket, 'A limited edition ticket for a cruise to the Southern Island.', undefined, undefined, undefined, 'Eon Ticket'),
@@ -77,20 +77,26 @@ export default class KeyItems implements Feature {
                     ) || App.game.party.caughtPokemon[0];
                     patientZero.pokerus = Pokerus.Contagious;
                 }),
+            /*new KeyItem(KeyItemType['Z-Power_Ring'],
+                // Using a Z-Crystal boosts the power of all your Pokémon of a shared type for a short while, after which some time is needed to recharge.'
+                'A gift from Melemele\'s kahuna that enables the use of Z-Crystals. What they do is still under development.',
+                undefined, undefined, undefined, 'Z-Power Ring'),*/
         ];
     }
 
     hasKeyItem(item: KeyItemType): boolean {
-        if (this.itemList[item] === undefined) {
+        const keyItem = this.itemList.find(k => k.id === item);
+        if (keyItem === undefined) {
             return false;
         }
-        return this.itemList[item].isUnlocked();
+        return keyItem.isUnlocked();
     }
 
     gainKeyItem(item: KeyItemType, silent = false): void {
         if (!this.hasKeyItem(item)) {
-            this.itemList[item].unlock();
-            this.itemList[item].unlockRewardOnUnlock();
+            const keyItem = this.itemList.find(k => k.id === item);
+            keyItem.unlock();
+            keyItem.unlockRewardOnUnlock();
             if (!silent) {
                 KeyItemController.showGainModal(item);
             }
@@ -103,20 +109,17 @@ export default class KeyItems implements Feature {
     }
 
     fromJSON(json: Record<string, any>): void {
-        Object.keys(json).forEach((key) => {
-            if (json[key] !== undefined) {
-                if (json[key] === true) {
-                    // Unlock to dispose unlocker if needed
-                    this.itemList[KeyItemType[key]].unlock();
-                }
-            }
-        });
-
-        // Gain the item in case the requirements changed.
         this.itemList.forEach((keyItem) => {
+            const key = KeyItemType[keyItem.id];
+            if (json[key] === true) {
+                // Unlock to dispose unlocker if needed
+                keyItem.unlock();
+            }
+
+            // Gain the item in case the requirements changed.
             if (!keyItem.isUnlocked && keyItem.unlockReq !== null) {
                 if (keyItem.unlockReq()) {
-                    App.game.keyItems.gainKeyItem(keyItem.name);
+                    App.game.keyItems.gainKeyItem(keyItem.id);
                 }
             }
         });
@@ -125,7 +128,7 @@ export default class KeyItems implements Feature {
     toJSON(): Record<string, any> {
         const save = {};
         for (let i = 0; i < this.itemList.length; i++) {
-            save[KeyItemType[this.itemList[i].name]] = this.itemList[i].isUnlocked();
+            save[KeyItemType[this.itemList[i].id]] = this.itemList[i].isUnlocked();
         }
         return save;
     }

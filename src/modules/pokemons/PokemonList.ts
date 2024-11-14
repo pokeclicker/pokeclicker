@@ -18,6 +18,7 @@ import {
     MegaEvolution,
     DayTimedMegaEvolution,
     NightTimedMegaEvolution,
+    AttackEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -33,9 +34,11 @@ import LevelType from '../party/LevelType';
 import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
+// import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -1817,6 +1820,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 25.23,
+        'name': 'Pikachu (Palaeontologist)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric, PokemonType.Rock],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+    },
+    {
         'id': 26,
         'name': 'Raichu',
         'catchRate': 75,
@@ -2766,6 +2789,27 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 52.04,
+        'name': 'Meowth (Phanpy)',
+        'catchRate': 255,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 58,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 40,
+            'attack': 45,
+            'specialAttack': 40,
+            'defense': 35,
+            'specialDefense': 40,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
+    },
+    {
         'id': 53,
         'name': 'Persian',
         'catchRate': 90,
@@ -2945,6 +2989,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 55,
         },
+        'gender': {
+            'femaleRatio': 0.25,
+        },
     },
     {
         'id': 59,
@@ -2983,6 +3030,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 90,
         },
+        'gender': {
+            'femaleRatio': 0.25,
+        },
     },
     {
         'id': 59.02,
@@ -3000,6 +3050,9 @@ export const pokemonList = createPokemonArray(
             'defense': 80,
             'specialDefense': 80,
             'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0.25,
         },
     },
     {
@@ -3718,11 +3771,7 @@ export const pokemonList = createPokemonArray(
         'exp': 163,
         'eggCycles': 20,
         'evolutions': [
-            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Magneton', 'Magnezone', 20),
-            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Magneton', 'Magnezone', 20),
-            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Magneton', 'Magnezone', 20),
-            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Magneton', 'Magnezone', 20),
-            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Magneton', 'Magnezone', 20),
+            EnvironmentRestrictedLevelEvolution('MagneticField', 'Magneton', 'Magnezone', 20),
             RegionStoneEvolution(galarOnly, 'Magneton', 'Magnezone', StoneType.Thunder_stone),
         ],
         'base': {
@@ -3754,6 +3803,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 60,
         },
+        'heldItem': { type: ItemType.item, id: 'Leek', requirement: new MaxRegionRequirement(Region.galar) },
     },
     {
         'id': 83.01,
@@ -4126,7 +4176,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 70,
         },
-        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
+        'heldItem': { type: ItemType.underground, id: 'Ice Stone' },
     },
     {
         'id': 95.02,
@@ -4278,6 +4328,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 100,
         },
+        'gender': {
+            'type': Genders.Genderless,
+        },
     },
     {
         'id': 101,
@@ -4316,6 +4369,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 150,
         },
+        'gender': {
+            'type': Genders.Genderless,
+        },
     },
     {
         'id': 101.02,
@@ -4333,6 +4389,9 @@ export const pokemonList = createPokemonArray(
             'defense': 70,
             'specialDefense': 80,
             'speed': 150,
+        },
+        'gender': {
+            'type': Genders.Genderless,
         },
     },
     {
@@ -5358,6 +5417,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5378,6 +5438,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5418,6 +5479,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5438,6 +5500,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5458,6 +5521,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5478,6 +5542,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5498,6 +5563,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5518,6 +5584,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5558,6 +5625,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5598,6 +5666,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5678,6 +5747,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5698,6 +5768,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5758,6 +5829,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5818,6 +5890,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -5838,6 +5911,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.item, id: 'Magikarp_Biscuit' },
         'gender': {
             'visualDifference': true,
         },
@@ -6055,6 +6129,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 132.01,
+        'name': 'Ditto (Magikarp)',
+        'catchRate': 35,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 101,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 48,
+            'attack': 48,
+            'specialAttack': 48,
+            'defense': 48,
+            'specialDefense': 48,
+            'speed': 48,
+        },
+        'gender': {
+            'visualDifference': true,
+        },
+    },
+    {
         'id': 133,
         'name': 'Eevee',
         'catchRate': 45,
@@ -6068,14 +6162,8 @@ export const pokemonList = createPokemonArray(
             StoneEvolution('Eevee', 'Flareon', StoneType.Fire_stone),
             DayTimedStoneEvolution('Eevee', 'Espeon', StoneType.Soothe_bell),
             NightTimedStoneEvolution('Eevee', 'Umbreon', StoneType.Soothe_bell),
-            DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
-            DungeonRestrictedLevelEvolution('Pinwheel Forest', 'Eevee', 'Leafeon', 20),
-            DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
-            DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
-            DungeonRestrictedLevelEvolution('Lake Acuity', 'Eevee', 'Glaceon', 20),
-            DungeonRestrictedLevelEvolution('Twist Mountain', 'Eevee', 'Glaceon', 20),
-            DungeonRestrictedLevelEvolution('Frost Cavern', 'Eevee', 'Glaceon', 20),
-            DungeonRestrictedLevelEvolution('Mount Lanakila', 'Eevee', 'Glaceon', 20),
+            EnvironmentRestrictedLevelEvolution('MossRock', 'Eevee', 'Leafeon', 20),
+            EnvironmentRestrictedLevelEvolution('IceRock', 'Eevee', 'Glaceon', 20),
             LevelEvolution('Eevee', 'Sylveon', 29),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
@@ -6845,6 +6933,9 @@ export const pokemonList = createPokemonArray(
             'defense': 78,
             'specialDefense': 85,
             'speed': 95,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
         },
     },
     {
@@ -8645,7 +8736,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 88,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Hisuian Qwilfish', 'Overqwil', 25)],
+        'evolutions': [HeldItemLevelEvolution('Strong_Scroll', 'Hisuian Qwilfish', 'Overqwil', 25)],
         'base': {
             'hitpoints': 65,
             'attack': 95,
@@ -9199,7 +9290,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 163,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Stantler', 'Wyrdeer', 31)],
+        'evolutions': [HeldItemLevelEvolution('Agile_Scroll', 'Stantler', 'Wyrdeer', 31)],
         'base': {
             'hitpoints': 73,
             'attack': 95,
@@ -10717,11 +10808,7 @@ export const pokemonList = createPokemonArray(
         'exp': 75,
         'catchRate': 255,
         'evolutions': [
-            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Nosepass', 'Probopass', 20),
-            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Nosepass', 'Probopass', 20),
-            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Nosepass', 'Probopass', 20),
-            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Nosepass', 'Probopass', 20),
-            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Nosepass', 'Probopass', 20),
+            EnvironmentRestrictedLevelEvolution('MagneticField', 'Nosepass', 'Probopass', 20),
         ],
         'base': {
             'hitpoints': 30,
@@ -10948,7 +11035,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 144,
         'catchRate': 90,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Medichamite, 'Medicham', 'Mega Medicham')],
+        'evolutions': [MegaEvolution(MegaStoneType.Medichamite, 'Medicham', 'Mega Medicham')],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -11947,7 +12034,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 159,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Bannetite, 'Banette', 'Mega Banette')],
+        'evolutions': [MegaEvolution(MegaStoneType.Banettite, 'Banette', 'Mega Banette')],
         'base': {
             'hitpoints': 64,
             'attack': 115,
@@ -11967,11 +12054,11 @@ export const pokemonList = createPokemonArray(
         'catchRate': 45,
         'base': {
             'hitpoints': 64,
-            'attack': 115,
-            'specialAttack': 83,
-            'defense': 65,
-            'specialDefense': 63,
-            'speed': 65,
+            'attack': 165,
+            'specialAttack': 93,
+            'defense': 75,
+            'specialDefense': 83,
+            'speed': 75,
         },
     },
     {
@@ -13402,11 +13489,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('SandyCloak', 'Burmy (Plant)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('TrashCloak', 'Burmy (Plant)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13428,10 +13512,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
             LevelEvolution('Burmy (Sand)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Forest', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PlantCloak', 'Burmy (Sand)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('TrashCloak', 'Burmy (Sand)', 'Burmy (Trash)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -13453,9 +13535,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Forest', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
-            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
-            EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
+            EnvironmentRestrictedLevelEvolution('PlantCloak', 'Burmy (Trash)', 'Burmy (Plant)', 1, true),
+            EnvironmentRestrictedLevelEvolution('SandyCloak', 'Burmy (Trash)', 'Burmy (Sand)', 1, true),
         ],
         'base': {
             'hitpoints': 40,
@@ -15299,6 +15380,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Adamant_Orb' },
         'base': {
             'hitpoints': 100,
             'attack': 100,
@@ -15338,6 +15420,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
+        'heldItem': { type: ItemType.item, id: 'Lustrous_Orb' },
         'base': {
             'hitpoints': 90,
             'attack': 100,
@@ -15425,6 +15508,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'heldItem': { type: ItemType.item, id: 'Griseous_Orb' },
     },
     {
         'id': 488,
@@ -15546,6 +15630,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 127,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -16135,6 +16220,9 @@ export const pokemonList = createPokemonArray(
             'defense': 80,
             'specialDefense': 65,
             'speed': 85,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
         },
     },
     {
@@ -17027,6 +17115,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 105,
         },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 549.02,
@@ -17044,6 +17135,9 @@ export const pokemonList = createPokemonArray(
             'defense': 75,
             'specialDefense': 75,
             'speed': 105,
+        },
+        'gender': {
+            'femaleRatio': 1,
         },
     },
     {
@@ -17403,7 +17497,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [DungeonRestrictedLevelEvolution('Dusty Bowl', 'Galarian Yamask', 'Runerigus', 34)],
+        'evolutions': [DungeonRestrictedLevelEvolution('Dusty Bowl', 'Galarian Yamask', 'Runerigus', 34)], // TODO: Change to environment and make Dusty Bowl a route
         'base': {
             'hitpoints': 38,
             'attack': 55,
@@ -17606,6 +17700,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 70,
         },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
     },
     {
         'id': 571,
@@ -17643,6 +17740,9 @@ export const pokemonList = createPokemonArray(
             'defense': 60,
             'specialDefense': 60,
             'speed': 110,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
         },
     },
     {
@@ -18832,6 +18932,9 @@ export const pokemonList = createPokemonArray(
             'defense': 70,
             'specialDefense': 70,
             'speed': 65,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -21080,6 +21183,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 686.01,
+        'name': 'Inkay (Pikachu)',
+        'type': [PokemonType.Psychic, PokemonType.Electric],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 58,
+        'catchRate': 190,
+        'base': {
+            'hitpoints': 53,
+            'attack': 54,
+            'specialAttack': 37,
+            'defense': 53,
+            'specialDefense': 46,
+            'speed': 45,
+        },
+    },
+    {
         'id': 687,
         'name': 'Malamar',
         'type': [PokemonType.Dark, PokemonType.Psychic],
@@ -21795,6 +21915,27 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 306,
+        'evolutions': [AttackEvolution(100, 'Xerneas', 'Xerneas (Active)', 1)],
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 126,
+            'attack': 131,
+            'specialAttack': 131,
+            'defense': 95,
+            'specialDefense': 98,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 716.01,
+        'name': 'Xerneas (Active)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 306,
         'catchRate': 45,
         'base': {
             'hitpoints': 126,
@@ -22030,6 +22171,9 @@ export const pokemonList = createPokemonArray(
             'defense': 80,
             'specialDefense': 95,
             'speed': 60,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
         },
     },
     {
@@ -22288,11 +22432,7 @@ export const pokemonList = createPokemonArray(
         'exp': 140,
         'catchRate': 120,
         'evolutions': [
-            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Charjabug', 'Vikavolt', 20),
-            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Charjabug', 'Vikavolt', 20),
-            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Charjabug', 'Vikavolt', 20),
-            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Charjabug', 'Vikavolt', 20),
-            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20),
+            EnvironmentRestrictedLevelEvolution('MagneticField', 'Charjabug', 'Vikavolt', 20),
             RegionStoneEvolution(galarOnly, 'Charjabug', 'Vikavolt', StoneType.Thunder_stone),
         ],
         'base': {
@@ -24346,6 +24486,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
+        'evolutions': [StoneEvolution('Marshadow', 'Marshadow (Zenith)', StoneType.Crystallized_shadow)],
         'base': {
             'hitpoints': 90,
             'attack': 125,
@@ -24357,6 +24498,28 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'heldItem': { type: ItemType.item, id: 'Crystallized_shadow' },
+    },
+    {
+        'id': 802.01,
+        'name': 'Marshadow (Zenith)',
+        'type': [PokemonType.Fighting, PokemonType.Ghost],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 90,
+            'attack': 125,
+            'specialAttack': 90,
+            'defense': 80,
+            'specialDefense': 90,
+            'speed': 125,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+        'heldItem': { type: ItemType.item, id: 'Crystallized_shadow' },
     },
     {
         'id': 803,
@@ -25291,6 +25454,7 @@ export const pokemonList = createPokemonArray(
         'id': 840.01,
         'name': 'Exposed Applin',
         'type': [
+            PokemonType.Bug,
             PokemonType.Dragon,
         ],
         'base': {
@@ -28461,6 +28625,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 78,
         },
+        'gender': {
+            'femaleRatio': 0,
+        },
     },
     {
         'id': 902.01,
@@ -28477,6 +28644,9 @@ export const pokemonList = createPokemonArray(
             'defense': 65,
             'specialDefense': 75,
             'speed': 78,
+        },
+        'gender': {
+            'femaleRatio': 1,
         },
     },
     {
@@ -28529,6 +28699,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 106,
         },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 905.01,
@@ -28545,6 +28718,9 @@ export const pokemonList = createPokemonArray(
             'defense': 110,
             'specialDefense': 100,
             'speed': 46,
+        },
+        'gender': {
+            'femaleRatio': 1,
         },
     },
     // Missingno.
@@ -31322,6 +31498,28 @@ export const pokemonList = createPokemonArray(
     {
         'id': -793,
         'name': '???',
+        'nativeRegion': Region.alola,
+        'type': [PokemonType.Rock, PokemonType.Poison],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 257,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 109,
+            'attack': 53,
+            'specialAttack': 127,
+            'defense': 47,
+            'specialDefense': 131,
+            'speed': 103,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    // Fusion Lusamine
+    {
+        'id': -793.01,
+        'name': 'You hateful little Trainer!',
         'nativeRegion': Region.alola,
         'type': [PokemonType.Rock, PokemonType.Poison],
         'eggCycles': 120,

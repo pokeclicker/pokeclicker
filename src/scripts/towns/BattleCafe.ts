@@ -133,7 +133,7 @@ class BattleCafeController {
         }
         if (+$('#battleCafeDuration').val() > 20 && +$('#battleCafeDuration').val() != 3600) {
             Notifier.notify({
-                message: 'Can\'t spin for more than 20 seconds',
+                message: 'Can\'t spin for more than 20 seconds, unless...',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
@@ -234,7 +234,13 @@ class BattleCafeController {
         }
     }
 
-    public static evolutions: Record<GameConstants.AlcremieSweet, Record<GameConstants.AlcremieSpins, PokemonItem>> = {
+    public static calcMaxSpins(sweet: GameConstants.AlcremieSweet): number {
+        const maxSpins = BattleCafeController.getPrice(sweet)
+            .map((cost) => Math.floor(App.game.farming.berryList[cost.berry]() / cost.amount));
+        return Math.min(...maxSpins);
+    }
+
+    public static evolutions: Record<GameConstants.AlcremieSweet, Record<Exclude<GameConstants.AlcremieSpins, GameConstants.AlcremieSpins.Any3600>, PokemonItem>> = {
         [GameConstants.AlcremieSweet['Strawberry Sweet']]: {
             [GameConstants.AlcremieSpins.dayClockwiseBelow5]: new PokemonItem('Alcremie (Strawberry Vanilla)'),
             [GameConstants.AlcremieSpins.dayCounterclockwiseBelow5]: new PokemonItem('Alcremie (Strawberry Ruby Cream)'),

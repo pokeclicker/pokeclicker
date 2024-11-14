@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 ///<reference path="GymPokemon.ts"/>
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
@@ -16,7 +17,8 @@ interface gymFlags {
 interface optionalGymArgs {
     displayName?: string,
     imageName?: string,
-    environment?: GameConstants.Environment,
+    environment?: GameConstants.Environment[],
+    battleBackground?: GameConstants.BattleBackground,
     hideUntilUnlocked?: boolean,
     visibleRequirement?: Requirement,
 }
@@ -24,7 +26,8 @@ interface optionalGymArgs {
 /**
  * Gym class.
  */
-class Gym extends TownContent {
+class Gym extends TownContent implements TmpGymType {
+    public town: string;
     buttonText: string;
     public tooltip = 'Battle Gym Leaders to earn badges';
     public cssClass() {
@@ -68,15 +71,12 @@ class Gym extends TownContent {
     }
 
     public clears() {
-        if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {
-            return undefined;
-        }
         return App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.town)]();
     }
 
     constructor(
         public leaderName: string,
-        public town: string,
+        town: string,
         private pokemons: GymPokemon[],
         public badgeReward: BadgeEnums,
         public moneyReward: number,
@@ -91,6 +91,7 @@ class Gym extends TownContent {
         public optionalArgs: optionalGymArgs = {}
     ) {
         super(requirements);
+        this.town = town;
         this.flags.quest = quest;
         this.flags.achievement = achievement;
         this.flags.champion = champion;
@@ -135,6 +136,11 @@ class Gym extends TownContent {
         this.rewardFunction();
     }
 
+    public autoRestartReward(): number {
+        const [modifier] = GameConstants.GymAutoRepeatRewardTiers.find(([,threshold]) => this.clears() >= threshold);
+        return this.moneyReward * modifier;
+    }
+
     get imagePath(): string {
         return `assets/images/npcs/${this.imageName ?? this.leaderName}.png`;
     }
@@ -149,5 +155,26 @@ class Gym extends TownContent {
 
     get displayName() {
         return this.optionalArgs.displayName;
+    }
+
+    get autoRestartTooltip(): string {
+        let tooltip = 'Auto Restart Gym<br/>';
+        const clears = this.clears() ?? 0;
+        const cost = clears >= 100 ? 0 : this.moneyReward * 2;
+        if (cost === 0) {
+            tooltip += 'Cost: Free!<br/>';
+        } else {
+            tooltip += `Cost: <img src="assets/images/currency/money.svg" height="18px"/> ${cost.toLocaleString('en-US')} per battle<br/>`;
+        }
+        tooltip += '<br/><span class="text-success">10 Clears - Unlock auto-gym</span><br/>';
+        tooltip += `<span class="${(clears >= 100 ? 'text-success' : 'text-muted')}">100 Clears - Free auto-gym</span>`;
+        GameConstants.GymAutoRepeatRewardTiers.slice(0, -1).reverse().forEach(([modifier, threshold]) => {
+            tooltip += `<br/><span class="${(clears >= threshold ? 'text-success' : 'text-muted')}">${threshold.toLocaleString()}
+                Clears - ${modifier.toLocaleString('en-US', {style: 'percent'})} reward</span>`;
+        });
+        if (clears < 250) {
+            tooltip += '<br/><br/><i class="text-warning">You will not receive Pokédollars for clearing the gym.</i>';
+        }
+        return tooltip;
     }
 }

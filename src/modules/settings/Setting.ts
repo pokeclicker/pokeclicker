@@ -4,6 +4,7 @@ import {
 } from 'knockout';
 import SettingOption from './SettingOption';
 import Requirement from '../requirements/Requirement';
+import GameLoadState from '../utilities/GameLoadState';
 
 export default class Setting<T> {
     private _value: T;
@@ -20,7 +21,8 @@ export default class Setting<T> {
         private _defaultDisplayName: string,
         private _options: SettingOption<T>[] | (() => SettingOption<T>[]),
         public defaultValue: T,
-        public requirement : Requirement = undefined,
+        public requirement: Requirement = undefined,
+        public saveAsDefault: boolean = true,
     ) {
         this._observable = ko.observable(this.defaultValue);
         this.set(defaultValue);
@@ -73,6 +75,11 @@ export default class Setting<T> {
             if (this.options[i].value === value) {
                 return this.options[i].isUnlocked();
             }
+        }
+        if (this.computedOptions && !GameLoadState.reachedLoadState(GameLoadState.states.initialized)) {
+            // computedOptions might depend on game data that hasn't been loaded yet
+            // assume it's fine for now, we'll check it again after initialization
+            return true;
         }
 
         return false;

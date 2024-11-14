@@ -24,8 +24,8 @@ export default class Achievement {
         public achievableFunction: () => boolean | null = null,
     ) {}
 
-    public check() {
-        if (this.isCompleted()) {
+    public check(): boolean {
+        if (this.isCompleted() && !this.unlocked()) {
             Notifier.notify({
                 title: `[Achievement] ${this.name}`,
                 message: this.description,
@@ -44,7 +44,9 @@ export default class Achievement {
             }
             // TODO: refilter within achievement bonus
             // AchievementHandler.filterAchievementList(true);
+            return true;
         }
+        return false;
     }
 
     public getProgress() {

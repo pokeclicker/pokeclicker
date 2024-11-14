@@ -31,7 +31,6 @@ import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
-import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import WeatherApp from './weather/WeatherApp';
@@ -40,10 +39,13 @@ import WeatherForecast from './weather/WeatherForecast';
 import DayCycle from './dayCycle/DayCycle';
 import DayCyclePart from './dayCycle/DayCyclePart';
 import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
+import MoonCycle from './moonCycle/MoonCycle';
+import MoonCyclePhase from './moonCycle/MoonCyclePhase';
+import MoonCyclePhaseRequirement from './requirements/MoonCyclePhaseRequirement';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
-import Settings from './settings/index';
+import Settings, { breedingFilterSettingKeys, pokedexFilterSettingKeys } from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
 import AchievementCategory from './achievements/AchievementCategory';
@@ -64,7 +66,7 @@ import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
 import GenericProxy from './utilities/GenericProxy';
 import { SpriteCredits, CodeCredits } from './Credits';
-import * as modalUtils from './utilities/Modal';
+import * as DisplayObservables from './utilities/DisplayObservables';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
@@ -134,8 +136,12 @@ import UndergroundItemValueType from './enums/UndergroundItemValueType';
 import UndergroundItem from './underground/UndergroundItem';
 import UndergroundItems from './underground/UndergroundItems';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
+import UndergroundHelperRequirement from './requirements/UndergroundHelperRequirement';
+import UndergroundLevelRequirement from './requirements/UndergroundLevelRequirement';
+import UndergroundUseToolRequirement from './requirements/UndergroundUseToolRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
+import PokemonAttackRequirement from './requirements/PokemonAttackRequirement';
 import { SortModules, SortSaves } from './Sortable';
 import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
@@ -159,8 +165,7 @@ import {
 } from './pokemons/evolutions/Base';
 import * as OtherEvos from './pokemons/evolutions/Methods';
 import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
-import TmpPokemonHelper from './pokemons/TmpPokemonHelper';
-import PokedexFilters from './settings/PokedexFilters';
+import * as PokemonHelper from './pokemons/PokemonHelper';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
@@ -186,11 +191,14 @@ import PokeballFilter from './pokeballs/PokeballFilter';
 import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
 import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
-import { DailyDeal } from './underground/DailyDeal';
-import { Mine } from './underground/Mine';
+import { Mine } from './underground/mine/Mine';
+import { MineType } from './underground/mine/MineConfig';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
-import UndergroundUpgrade from './underground/UndergroundUpgrade';
+import { UndergroundController } from './underground/UndergroundController';
+import { UndergroundTrading } from './underground/UndergroundTrading';
+import { UndergroundHelper } from './underground/helper/UndergroundHelper';
+import UndergroundToolType from './underground/tools/UndergroundToolType';
 import SpecialEventRandomRequirement from './requirements/SpecialEventRandomRequirement';
 import SpecialEventRequirement from './requirements/SpecialEventRequirement';
 import EncounterType from './enums/EncounterType';
@@ -199,9 +207,12 @@ import SafariStepsRequirement from './requirements/SafariStepsRequirement';
 import SafariRocksRequirement from './requirements/SafariRocksRequirement';
 import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 import SafariCatchRequirement from './requirements/SafariCatchRequirement';
-import ItemRequirement from './requirements/ItemRequirement';
+import ItemOwnedRequirement from './requirements/ItemOwnedRequirement';
+import UniqueItemOwnedRequirement from './requirements/UniqueItemOwnedRequirement';
 import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
+import GameLoadState from './utilities/GameLoadState';
+import GenericDeal, { DealCostOrProfitType } from './deal/GenericDeal';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -242,13 +253,17 @@ Object.assign(<any>window, {
     DayCycle,
     DayCyclePart,
     DayCyclePartRequirement,
+    MoonCycle,
+    MoonCyclePhase,
+    MoonCyclePhaseRequirement,
     SeededRand,
     SeededDateRand,
     Rand,
     Settings,
+    breedingFilterSettingKeys,
+    pokedexFilterSettingKeys,
     NotificationConstants,
     Notifier,
-    BreedingFilters,
     SortOptionConfigs,
     SortOptions,
     AchievementSortOptionConfigs,
@@ -272,7 +287,7 @@ Object.assign(<any>window, {
     GenericProxy,
     SpriteCredits,
     CodeCredits,
-    modalUtils,
+    DisplayObservables,
     PokemonCategories,
     Information,
     TypeHelper,
@@ -343,8 +358,12 @@ Object.assign(<any>window, {
     UndergroundItem,
     UndergroundItems,
     UndergroundLayersMinedRequirement,
+    UndergroundHelperRequirement,
+    UndergroundLevelRequirement,
+    UndergroundUseToolRequirement,
     WeatherRequirement,
     MegaEvolveRequirement,
+    PokemonAttackRequirement,
     SortModules,
     SortSaves,
     KeyItemController,
@@ -375,8 +394,7 @@ Object.assign(<any>window, {
     pokemonList,
     pokemonMap,
     pokemonBabyPrevolutionMap,
-    TmpPokemonHelper,
-    PokedexFilters,
+    PokemonHelper,
     ItemList,
     Item,
     MultiplierDecreaser,
@@ -402,17 +420,24 @@ Object.assign(<any>window, {
     TextMerger,
     pokeballFilterOptions,
     Mine,
+    MineType,
     Underground,
-    UndergroundUpgrade,
+    UndergroundController,
+    UndergroundTrading,
+    UndergroundHelper,
+    UndergroundToolType,
     ShardDeal,
-    DailyDeal,
+    GenericDeal,
+    DealCostOrProfitType,
     EncounterType,
     SafariBaitRequirement,
     SafariStepsRequirement,
     SafariRocksRequirement,
     SafariItemsRequirement,
     SafariCatchRequirement,
-    ItemRequirement,
+    ItemOwnedRequirement,
+    UniqueItemOwnedRequirement,
     ChristmasPresent,
     DamageCalculator,
+    GameLoadState,
 });

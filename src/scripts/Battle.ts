@@ -1,3 +1,4 @@
+/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
 ///<reference path="pokemons/PokemonFactory.ts"/>
 /// <reference path="../declarations/GameHelper.d.ts" />
 
@@ -27,13 +28,6 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
-        // TODO: figure out a better way of handling this
-        // Limit pokemon attack speed, Only allow 1 attack per 900ms
-        const now = Date.now();
-        if (this.lastPokemonAttack > now - 900) {
-            return;
-        }
-        this.lastPokemonAttack = now;
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
@@ -224,10 +218,12 @@ class Battle {
     public static pokemonAttackTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
         if (Battle.enemyPokemon()) {
             const pokemonAttack = App.game.party.calculatePokemonAttack(Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
-            return `${pokemonAttack.toLocaleString('en-US')} against ${Battle.enemyPokemon().displayName}`;
+            return `${pokemonAttack.toLocaleString('en-US')} against ${pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`;
         } else {
             return '';
         }
     }).extend({rateLimit: 1000});
 
 }
+
+Battle satisfies TmpBattleType;
