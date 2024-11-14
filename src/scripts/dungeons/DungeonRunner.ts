@@ -68,7 +68,7 @@ class DungeonRunner {
         const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
         const generateChestLoot = () => {
             const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon.name)]();
-            const debuffed = (dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(dungeon.name)) < player.highestRegion() - 2;
+            const debuffed = DungeonRunner.isDungeonDebuffed(dungeon);
             // Ignores debuff on first attempt to get loot that ignores debuff.
             let tier = dungeon.getRandomLootTier(clears);
             let loot = dungeon.getRandomLoot(tier);
@@ -377,6 +377,10 @@ class DungeonRunner {
         // findIndex, so we can get next tier when light ball is implemented
         const index = config.findIndex((tier) => tier.clearsNeeded <= clears);
         return config[index]?.flash;
+    }
+
+    public static isDungeonDebuffed(dungeon) {
+        return (dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(dungeon.name)) < player.highestRegion() - 2;
     }
 }
 
