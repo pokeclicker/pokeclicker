@@ -1,16 +1,16 @@
 {
   "type": {
-    "NEW": "",
-    "SHINY": "",
-    "CAUGHT": "",
-    "ESCAPED": "",
-    "ROAMER": "",
-    "ACHIEVE": "",
+    "NEW": "新",
+    "SHINY": "閃光",
+    "CAUGHT": "捕捉",
+    "ESCAPED": "逃脫",
+    "ROAMER": "游走",
+    "ACHIEVE": "成就",
     "QUEST": "",
-    "FOUND": "",
-    "FRONTIER": "",
+    "FOUND": "掉落物",
+    "FRONTIER": "對戰開拓區",
     "WANDER": "",
-    "OTHER": ""
+    "OTHER": "其他"
   },
   "earnedAchievement": "",
   "escapedShiny": "",
