@@ -751,7 +751,7 @@
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.sellAmount = 1">Reset</button>
 
-                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
+                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 10">
@@ -856,7 +856,7 @@
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1">Reset</button>
 
-                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
+                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 10">
