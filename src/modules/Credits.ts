@@ -1377,7 +1377,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1464,
+            1466,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -1465,7 +1465,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            93,
+            98,
         ],
         name: 'umbralOptimatum',
         link: 'https://github.com/umbralOptimatum',
@@ -1601,6 +1601,14 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            25,
+        ],
+        name: 'AevitasDragonkin',
+        link: 'https://github.com/AevitasDragonkin',
+        image: 'https://avatars.githubusercontent.com/u/77356760?v=4',
+    },
+    {
+        resources: [
             24,
         ],
         name: 'DataCrusade',
@@ -1614,14 +1622,6 @@ export const CodeCredits: Credit[] = [
         name: 'davmillar',
         link: 'https://github.com/davmillar',
         image: 'https://avatars.githubusercontent.com/u/576958?v=4',
-    },
-    {
-        resources: [
-            23,
-        ],
-        name: 'AevitasDragonkin',
-        link: 'https://github.com/AevitasDragonkin',
-        image: 'https://avatars.githubusercontent.com/u/77356760?v=4',
     },
     {
         resources: [
