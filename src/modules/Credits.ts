@@ -1313,7 +1313,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'ZacWeavile',
         link: 'https://www.smogon.com/forums/threads/zacweavile-galery.3712625/',
-        image: 'https://www.smogon.com/forums/media/data/avatars/o/522/522483.jpg?1650909371',
+        image: 'https://www.smogon.com/forums/data/avatars/o/522/522483.jpg',
         resources: [
             'Atticus',
             'Charm',
