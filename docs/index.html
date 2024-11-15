@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.10.22"></script>
+    <script src="scripts/modules.min.js?v=0.10.23"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.10.22"></script>
+    <script src="scripts/script.min.js?v=0.10.23"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.10.22" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.10.23" rel="stylesheet">
 
     <style>
         #game.loading {
@@ -2488,7 +2488,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                 <div class="title-right" data-bind="if: isDungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
                     <div class="d-flex ml-auto">
                         <knockout class="h4 text-danger no-emoji-font mr-2 mb-0 align-self-center" data-bind="
-                            visible: player.highestRegion() - 2 > player.region,
+                            visible: DungeonRunner.isDungeonDebuffed(player.town.dungeon),
                             tooltip: {
                                 title: 'This dungeon is debuffed and will be significantly less likely to drop Epic, Legendary, and Mythic loot.',
                                 trigger: 'hover',
@@ -2853,8 +2853,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.22',
-            href:'assets/images/kanto-kanto.png?v=0.10.22'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.23',
+            href:'assets/images/kanto-kanto.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -5385,8 +5385,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.22',
-            href:'assets/images/kanto-sevii123.png?v=0.10.22'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.23',
+            href:'assets/images/kanto-sevii123.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -5952,8 +5952,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.22',
-            href:'assets/images/kanto-sevii4567.png?v=0.10.22'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.23',
+            href:'assets/images/kanto-sevii4567.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -7610,8 +7610,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.10.22',
-        href:'assets/images/johto.png?v=0.10.22'
+        'xlink:href':'assets/images/johto.png?v=0.10.23',
+        href:'assets/images/johto.png?v=0.10.23'
     }"></image>
 
     <!-- ------ -->
@@ -10238,8 +10238,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.10.22',
-        href:'assets/images/hoenn.png?v=0.10.22'
+        'xlink:href':'assets/images/hoenn.png?v=0.10.23',
+        href:'assets/images/hoenn.png?v=0.10.23'
     }"></image>
 
     <!-- ------ -->
@@ -13727,8 +13727,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
      <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Orre').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/orre.png?v=0.10.22',
-            href:'assets/images/orre.png?v=0.10.22'
+            'xlink:href':'assets/images/orre.png?v=0.10.23',
+            href:'assets/images/orre.png?v=0.10.23'
         }"></image>
 
     <!-- ------ -->
@@ -15112,8 +15112,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.10.22',
-        href:'assets/images/sinnoh.png?v=0.10.22'
+        'xlink:href':'assets/images/sinnoh.png?v=0.10.23',
+        href:'assets/images/sinnoh.png?v=0.10.23'
     }"></image>
 
     <!-- ------ -->
@@ -18237,8 +18237,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.10.22',
-        href:'assets/images/unova.png?v=0.10.22'
+        'xlink:href':'assets/images/unova.png?v=0.10.23',
+        href:'assets/images/unova.png?v=0.10.23'
     }"></image>
 
     <!-- ------ -->
@@ -21428,8 +21428,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.10.22',
-        href:'assets/images/kalos.png?v=0.10.22'
+        'xlink:href':'assets/images/kalos.png?v=0.10.23',
+        href:'assets/images/kalos.png?v=0.10.23'
     }"></image>
 
     <!-- ------ -->
@@ -24175,8 +24175,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.10.22',
-            href:'assets/images/alola-melemele.png?v=0.10.22'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.10.23',
+            href:'assets/images/alola-melemele.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -27766,8 +27766,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.10.22',
-            href:'assets/images/alola-akala.png?v=0.10.22'
+            'xlink:href':'assets/images/alola-akala.png?v=0.10.23',
+            href:'assets/images/alola-akala.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -30158,8 +30158,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.22',
-            href:'assets/images/alola-ulaula.png?v=0.10.22'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.23',
+            href:'assets/images/alola-ulaula.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -33065,8 +33065,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.10.22',
-            href:'assets/images/alola-poni.png?v=0.10.22'
+            'xlink:href':'assets/images/alola-poni.png?v=0.10.23',
+            href:'assets/images/alola-poni.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -35488,8 +35488,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Magikarp Jump').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.22',
-            href:'assets/images/alola-magikarp-jump.png?v=0.10.22'
+            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.23',
+            href:'assets/images/alola-magikarp-jump.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -37723,8 +37723,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.10.22',
-            href:'assets/images/galar-south.png?v=0.10.22'
+            'xlink:href':'assets/images/galar-south.png?v=0.10.23',
+            href:'assets/images/galar-south.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -40165,8 +40165,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.10.22',
-            href:'assets/images/galar-north.png?v=0.10.22'
+            'xlink:href':'assets/images/galar-north.png?v=0.10.23',
+            href:'assets/images/galar-north.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -41267,8 +41267,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.22',
-            href:'assets/images/galar-isle-of-armor.png?v=0.10.22'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.23',
+            href:'assets/images/galar-isle-of-armor.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -44188,8 +44188,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.22',
-            href:'assets/images/galar-crown-tundra.png?v=0.10.22'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.23',
+            href:'assets/images/galar-crown-tundra.png?v=0.10.23'
         }"></image>
 
         <!-- ------ -->
@@ -46206,8 +46206,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.hisui'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hsiui.png?v=0.10.22',
-        href:'assets/images/hisui.png?v=0.10.22'
+        'xlink:href':'assets/images/hsiui.png?v=0.10.23',
+        href:'assets/images/hisui.png?v=0.10.23'
     }"></image>
 
     <!-- ------ -->
@@ -55299,8 +55299,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.paldea'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/paldea.png?v=0.10.22',
-        href:'assets/images/paldea.png?v=0.10.22'
+        'xlink:href':'assets/images/paldea.png?v=0.10.23',
+        href:'assets/images/paldea.png?v=0.10.23'
     }"></image>
 
     <!-- ------ -->
@@ -56923,7 +56923,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                         <div style="position: relative; width: 100%; max-width: 50px; aspect-ratio: 1; padding: 2px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: tool.durability < tool.durabilityPerUse ? 0.3 : 1 }">
                             <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 8px;">
                                 <div style="display: flex; align-items: center; justify-content: center;">
-                                    <img style="width: 20px; height: 20px; object-fit: contain;" alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: {  }">
+                                    <img style="width: 20px; height: 20px; object-fit: contain;" alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: {  }">
                                 </div>
                                 <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                             </div>
@@ -60163,7 +60163,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                         <!-- ko if: App.game.underground.mine -->
                         <div style="position: relative;">
-                            <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
+                            <div id="mineBody" style="margin:auto; background-image: url('assets/images/underground/rock0.png');"
                                  data-bind="css: {
                                     'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
                                     'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durability < App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durabilityPerUse
@@ -60218,7 +60218,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: !tool.canUseTool() ? 0.3 : 1 }">
                                                 <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 5px;">
                                                     <div class="d-flex align-items-center justify-content-center" style="width: 27px; height: 27px;">
-                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
+                                                        <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
                                                     </div>
                                                     <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                                 </div>
@@ -60376,7 +60376,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <input class="clickable" type="checkbox" data-bind="checked: $data.autoSellToggle">
                                             <!-- /ko -->
                                             <!-- ko ifnot: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
-                                            <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                            <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
                                             tooltip: {
                                                 title: `Unlocked when ${$data.name} reaches level ${GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT}`,
                                                 placement: 'bottom',
@@ -60823,7 +60823,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × ${PokemonType[UndergroundTrading.selectedTradeFromItem.type]} Gems`"></label>
                                 <!-- /ko -->
                                 <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Diamond -->
-                                <img class='mineInventoryItem' src="../assets/images/currency/diamond.svg"/>
+                                <img class='mineInventoryItem' src="assets/images/currency/diamond.svg"/>
                                 <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × Diamonds`"></label>
                                 <!-- /ko -->
                             </div>
@@ -60839,7 +60839,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.sellAmount = 1">Reset</button>
 
-                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
+                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 10">
@@ -60944,7 +60944,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1">Reset</button>
 
-                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
+                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 10">
@@ -61036,7 +61036,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <tr>
                                 <td class="vertical-middle" data-bind="text: $data.tier"></td>
                                 <td class="vertical-middle">
-                                    <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
                                             tooltip: {
                                                 title: $data.hint || '',
                                                 placement: 'bottom',
@@ -61063,7 +61063,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
 <script type="text/html" id="helpToolTemplate">
     <h6 class="d-flex align-items-center" style="gap: 0.5rem;">
-        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
+        <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
         <knockout data-bind="text: $data.tool.displayName"></knockout>
     </h6>
     <ul>
