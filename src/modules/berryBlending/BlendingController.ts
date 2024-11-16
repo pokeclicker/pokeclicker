@@ -17,18 +17,18 @@ export default class BlendingController {
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedRecipe: KnockoutObservable<BlendingRecipe> = ko.observable(BlendingRecipes.blendingRecipeList[0][0]);
 
-    public static spicy: KnockoutObservable<boolean> = ko.observable(false);
-    public static dry: KnockoutObservable<boolean> = ko.observable(false);
-    public static sweet: KnockoutObservable<boolean> = ko.observable(false);
-    public static bitter: KnockoutObservable<boolean> = ko.observable(false);
-    public static sour: KnockoutObservable<boolean> = ko.observable(false);
+    public static spicyFilter: KnockoutObservable<boolean> = ko.observable(false);
+    public static dryFilter: KnockoutObservable<boolean> = ko.observable(false);
+    public static sweetFilter: KnockoutObservable<boolean> = ko.observable(false);
+    public static bitterFilter: KnockoutObservable<boolean> = ko.observable(false);
+    public static sourFilter: KnockoutObservable<boolean> = ko.observable(false);
 
     static flavorKeys: booleanStringKeys = {
-        [FlavorType[FlavorType.Spicy]]: this.spicy,
-        [FlavorType[FlavorType.Dry]]: this.dry,
-        [FlavorType[FlavorType.Sweet]]: this.sweet,
-        [FlavorType[FlavorType.Bitter]]: this.bitter,
-        [FlavorType[FlavorType.Sour]]: this.sour,
+        [FlavorType[FlavorType.Spicy]]: this.spicyFilter,
+        [FlavorType[FlavorType.Dry]]: this.dryFilter,
+        [FlavorType[FlavorType.Sweet]]: this.sweetFilter,
+        [FlavorType[FlavorType.Bitter]]: this.bitterFilter,
+        [FlavorType[FlavorType.Sour]]: this.sourFilter,
     }
 
     static amount: KnockoutObservable<number> = ko.observable(1);
