@@ -234,7 +234,7 @@ class QuestLineHelper {
 
         // Talk to Bill's Grandpa after battling him
         const EeveeReward = () => {
-            App.game.party.gainPokemonByName('Eevee');
+            App.game.party.gainPokemonByName('Eevee', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
                 message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
@@ -449,11 +449,11 @@ class QuestLineHelper {
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.').withCustomReward(() => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest(0, undefined, true));
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
-        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 1, true);
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 1, true).withDescription('Catch Raikou.');
 
-        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 1, true);
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 1, true).withDescription('Catch Entei.');
 
-        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune');
+        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune').withDescription('Catch Suicune.');
 
         johtoBeastsQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -765,15 +765,15 @@ class QuestLineHelper {
         const southernIslandClearing = new TalkToNPCQuest(SouthernIsland1, 'Claim your Eon Ticket in the Start Menu and investigate the Southern Island.');
         eonDuoQuestLine.addQuest(southernIslandClearing);
 
-        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 1, true);
+        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 1, true).withDescription('Catch Latias.');
 
-        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 1, true);
+        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 1, true).withDescription('Catch Latios.');
 
         eonDuoQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchLatias,
                 catchLatios,
-            ], 'Catch or hatch the Eon Duo.'));
+            ], 'Catch the Eon Duo.'));
 
         App.game.quests.questLines().push(eonDuoQuestLine);
     }
@@ -958,7 +958,7 @@ class QuestLineHelper {
         const fightMetaGroudon1 = new DefeatTemporaryBattleQuest('Meta Groudon', 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!');
         jirachiQuestLine.addQuest(fightMetaGroudon1);
 
-        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 1, true).withDescription('Jirachi has escaped in the chaos and is roaming Hoenn. Catch or hatch Jirachi.');
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 1, true).withDescription('Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi.');
 
         jirachiQuestLine.addQuest(catchJirachi);
 
@@ -1571,7 +1571,7 @@ class QuestLineHelper {
         const talkToGateonSailor = new TalkToNPCQuest(GateonSailor, 'Ask around Gateon Port for clues about new Team Cipher activity.');
         orreXDQuestLine.addQuest(talkToGateonSailor);
 
-        const battleNaps = new DefeatTemporaryBattleQuest('Cipher Peon Naps', 'Fight the Cipher Peons attacking the Pokemon HQ Lab.');
+        const battleNaps = new DefeatTemporaryBattleQuest('Cipher Peon Naps', 'Fight the Cipher Peons attacking the Pokémon HQ Lab.');
         orreXDQuestLine.addQuest(battleNaps);
 
         const clearGateonPort = new DefeatDungeonQuest(1, 0, 'Gateon Port Battles').withDescription('Clear Gateon Port to search for the Cipher Peons who kidnapped Professor Krane.')
@@ -2195,7 +2195,7 @@ class QuestLineHelper {
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
         const DetectiveRaichuReward = () => {
-            App.game.party.gainPokemonByName('Detective Raichu');
+            App.game.party.gainPokemonByName('Detective Raichu', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: detectivePikachuQuestLine.name,
                 message: 'Detective Pikachu\'s partner has been nursed back to health!',
@@ -3278,7 +3278,7 @@ class QuestLineHelper {
         const meltanRainbowRocket = new DefeatTemporaryBattleQuest('Team Rainbow Leader Giovanni', 'Defeat Team Rainbow Rocket.');
 
         const meltanGetMelmetal = () => {
-            App.game.party.gainPokemonByName('Melmetal');
+            App.game.party.gainPokemonByName('Melmetal', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: meltanQuestLine.name,
                 message: 'You found Melmetal!',
@@ -3434,7 +3434,7 @@ class QuestLineHelper {
         drSplashQuestLine.quests().forEach(q => q.withCustomReward(karpStepReward));
 
         const SaucyBlueReward = () => {
-            App.game.party.gainPokemonByName('Magikarp Saucy Blue');
+            App.game.party.gainPokemonByName('Magikarp Saucy Blue', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: drSplashQuestLine.name,
                 message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
@@ -4069,7 +4069,7 @@ class QuestLineHelper {
             ]), GameConstants.BulletinBoards.Galar);
 
         const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift').withCustomReward(() => {
-            App.game.party.gainPokemonByName('Magearna (Original Color)');
+            App.game.party.gainPokemonByName('Magearna (Original Color)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: magearnaQuestLine.name,
                 message: 'You obtained Magearna (Original Color)!',
