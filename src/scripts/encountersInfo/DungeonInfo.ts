@@ -4,7 +4,15 @@ class DungeonInfo {
     });
 
     private static getLootList() {
-        return player.town.dungeon?.lootTable || [];
+        const rawTable = player.town.dungeon?.lootTable || {};
+        const displayTable = {};
+        Object.entries(rawTable).forEach(([tier, loots]) => {
+            const filteredLoots = (loots as Loot[]).filter(l => ItemList[l.loot] || pokemonMap[l.loot].name == 'MissingNo.');
+            if (filteredLoots.length) {
+                displayTable[tier] = filteredLoots;
+            }
+        });
+        return displayTable;
     }
 
     public static getFullName() {
