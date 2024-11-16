@@ -5,6 +5,7 @@ import BlendingRecipe from './BlendingRecipe';
 import BlendingRecipes from './BlendingRecipes';
 import FlavorAmount from './FlavorAmount';
 import FlavorType from '../enums/FlavorType';
+import booleanStringKeys from '../interfaces/BooleanStringKeys';
 
 export default class BlendingController {
     public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
@@ -16,7 +17,19 @@ export default class BlendingController {
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedRecipe: KnockoutObservable<BlendingRecipe> = ko.observable(BlendingRecipes.blendingRecipeList[0][0]);
 
-    public static blendingListFlavorFilters: KnockoutObservableArray<FlavorType> = ko.observableArray([]);
+    public static spicy: KnockoutObservable<boolean> = ko.observable(false);
+    public static dry: KnockoutObservable<boolean> = ko.observable(false);
+    public static sweet: KnockoutObservable<boolean> = ko.observable(false);
+    public static bitter: KnockoutObservable<boolean> = ko.observable(false);
+    public static sour: KnockoutObservable<boolean> = ko.observable(false);
+
+    static flavorKeys: booleanStringKeys = {
+        [FlavorType[FlavorType.Spicy]]: this.spicy,
+        [FlavorType[FlavorType.Dry]]: this.dry,
+        [FlavorType[FlavorType.Sweet]]: this.sweet,
+        [FlavorType[FlavorType.Bitter]]: this.bitter,
+        [FlavorType[FlavorType.Sour]]: this.sour,
+    }
 
     static amount: KnockoutObservable<number> = ko.observable(1);
 
@@ -78,6 +91,17 @@ export default class BlendingController {
         berryImage.addEventListener('animationend', function () {
             berryImage.style.removeProperty('animation');
         });
+    }
+
+    public static blendingListFlavorFilters(): number[] {
+        const flavors = GameHelper.enumNumbers(FlavorType);
+        return flavors.filter(v => BlendingController.flavorKeys[FlavorType[v]]());
+    }
+
+    public static toggleFlavor(flavorEnum: number) {
+        const flavor = FlavorType[flavorEnum];
+        const status = this.flavorKeys[flavor]();
+        return this.flavorKeys[flavor](!status);
     }
 
     public static calculateTableBerryCss(berry: BerryType): string {

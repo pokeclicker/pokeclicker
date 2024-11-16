@@ -52,12 +52,16 @@
                                             <th class="align-middle" rowspan="2">Smooth</th>
                                             <th class="align-middle" rowspan="2">Amount</th>
                                         </tr>
-                                        <tr class="text-dark" style="font-weight: bold;">
-                                            <td data-bind="style:{background: GameConstants.BerryColor[0]}">Spicy</td>
-                                            <td data-bind="style:{background: GameConstants.BerryColor[5]}">Dry</td>
-                                            <td data-bind="style:{background: GameConstants.BerryColor[2]}">Sweet</td>
-                                            <td data-bind="style:{background: GameConstants.BerryColor[3]}">Bitter</td>
-                                            <td data-bind="style:{background: GameConstants.BerryColor[4]}">Sour</td>
+                                        <tr style="font-weight: bold;" data-bind="foreach: GameHelper.enumNumbers(FlavorType)">
+                                            <td class="p-0 tight">
+                                                <btn class="text-small btn btn-block m-0" style="font-size: inherit; font-weight: inherit;"
+                                                    data-bind="
+                                                        attr: { for: 'btncheckBlend' + FlavorType[$data] },
+                                                        css: { 'btn-info': BlendingController.flavorKeys[FlavorType[$data]](), 'btn-dark': !BlendingController.flavorKeys[FlavorType[$data]]() },
+                                                        click: () => BlendingController.toggleFlavor($data),
+                                                        text: FlavorType[$data]">
+                                                </btn>
+                                            </td>
                                         </tr>
                                     </thead>
                                     <tbody data-bind="foreach: FarmController.getFlavorFilteredBerryList(BlendingController.blendingListFlavorFilters())">
