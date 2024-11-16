@@ -54,7 +54,7 @@
                                         </tr>
                                         <tr style="font-weight: bold;" data-bind="foreach: GameHelper.enumNumbers(FlavorType)">
                                             <td class="p-0 tight">
-                                                <btn class="text-small btn btn-block m-0" style="font-size: inherit; font-weight: inherit;"
+                                                <btn class="text-small btn btn-sm btn-block m-0" style="font-size: inherit; font-weight: inherit;"
                                                     data-bind="
                                                         attr: { for: 'btncheckBlend' + FlavorType[$data] },
                                                         css: { 'btn-info': BlendingController.flavorKeys[FlavorType[$data]](), 'btn-dark': !BlendingController.flavorKeys[FlavorType[$data]]() },
