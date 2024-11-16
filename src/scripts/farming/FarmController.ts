@@ -219,7 +219,7 @@ class FarmController {
             return this.getUnlockedBerryList();
         } else {
             return this.getUnlockedBerryList().filter(b => {
-                let fls: number[] = [];
+                const fls: number[] = [];
                 App.game.farming.berryData[b].flavors.filter(flavor => flavor.value > 0).forEach(flavor => fls.push(flavor.type));
                 return flavorTypes.every(f => fls.includes(f));
             });

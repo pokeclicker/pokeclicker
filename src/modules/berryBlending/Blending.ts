@@ -5,7 +5,6 @@ import FlavorType from '../enums/FlavorType';
 import KeyItemType from '../enums/KeyItemType';
 import GameHelper from '../GameHelper';
 import BlendingMachine from './BlendingMachine';
-import BlendingSlot from './BlendingSlot';
 import FlavorAmount from './FlavorAmount';
 import BlendingRecipe from './BlendingRecipe';
 import { Currency } from '../GameConstants';
@@ -89,7 +88,7 @@ export default class Blending implements Feature {
         } else {
             if (enableNotifier) {
                 Notifier.notify({
-                    message: `You can\'t put more berries than your stopping amount!`,
+                    message: 'You can\'t put more berries than your stopping amount!',
                     type: NotificationOption.warning,
                     title: 'Berry Blender',
                     image: `assets/images/items/berry/${BerryType[berry]}.png`,
@@ -127,7 +126,7 @@ export default class Blending implements Feature {
         const filledSlots = this.machines[index].blendSlots.filter(s => !s.isEmpty());
 
         let total = 0;
-        filledSlots.forEach(() => total += 1);
+        filledSlots.forEach(() => { total += 1; });
 
         return total;
     }
@@ -151,7 +150,7 @@ export default class Blending implements Feature {
         const filledSlots = this.machines[index].blendSlots.filter(s => !s.isEmpty());
 
         let sharedFlavors: BerryFlavor[] = [];
-        GameHelper.enumNumbers(FlavorType).forEach(flavorType => sharedFlavors.push({type: flavorType, value: 0}));
+        GameHelper.enumNumbers(FlavorType).forEach(flavorType => sharedFlavors.push({ type: flavorType, value: 0 }));
 
         filledSlots.forEach(slot => {
             App.game.farming.berryData[slot.berry].flavors.forEach(f => {
@@ -196,7 +195,7 @@ export default class Blending implements Feature {
         const filledSlots = this.machines[index].blendSlots.filter(slot => !slot.isEmpty());
 
         let incomingFlavors: BerryFlavor[] = [];
-        GameHelper.enumNumbers(FlavorType).forEach(flavorType => incomingFlavors.push({type: flavorType, value: 0}));
+        GameHelper.enumNumbers(FlavorType).forEach(flavorType => incomingFlavors.push({ type: flavorType, value: 0 }));
 
         filledSlots.forEach(slot => {
             App.game.farming.berryData[slot.berry].flavors.forEach(f => {

@@ -5,7 +5,7 @@ import BlendingRecipe from './BlendingRecipe';
 import BlendingRecipes from './BlendingRecipes';
 import FlavorAmount from './FlavorAmount';
 import FlavorType from '../enums/FlavorType';
-import booleanStringKeys from '../interfaces/BooleanStringKeys';
+import BooleanStringKeys from '../interfaces/BooleanStringKeys';
 
 export default class BlendingController {
     public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
@@ -23,13 +23,13 @@ export default class BlendingController {
     public static bitterFilter: KnockoutObservable<boolean> = ko.observable(false);
     public static sourFilter: KnockoutObservable<boolean> = ko.observable(false);
 
-    static flavorKeys: booleanStringKeys = {
+    static flavorKeys: BooleanStringKeys = {
         [FlavorType[FlavorType.Spicy]]: this.spicyFilter,
         [FlavorType[FlavorType.Dry]]: this.dryFilter,
         [FlavorType[FlavorType.Sweet]]: this.sweetFilter,
         [FlavorType[FlavorType.Bitter]]: this.bitterFilter,
         [FlavorType[FlavorType.Sour]]: this.sourFilter,
-    }
+    };
 
     static amount: KnockoutObservable<number> = ko.observable(1);
 
