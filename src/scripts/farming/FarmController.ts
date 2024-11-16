@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/enums/MulchType.d.ts"/>
+/// <reference path="../../declarations/enums/FlavorType.d.ts"/>
 
 class FarmController {
 
@@ -211,6 +212,18 @@ class FarmController {
 
     public static getUnlockedBerryList() {
         return this.berryListFiltered().filter((berry) => berry <= this.berryListEnd());
+    }
+
+    public static getFlavorFilteredBerryList(flavorTypes: number[]) {
+        if (flavorTypes.length < 1) {
+            return this.getUnlockedBerryList();
+        } else {
+            return this.getUnlockedBerryList().filter(b => {
+                let fls: number[] = [];
+                App.game.farming.berryData[b].flavors.filter(flavor => flavor.value > 0).forEach(flavor => fls.push(flavor.type));
+                return flavorTypes.every(f => fls.includes(f));
+            });
+        }
     }
 
     private static getAmount() {

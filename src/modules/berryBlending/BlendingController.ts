@@ -4,6 +4,7 @@ import GameHelper from '../GameHelper';
 import BlendingRecipe from './BlendingRecipe';
 import BlendingRecipes from './BlendingRecipes';
 import FlavorAmount from './FlavorAmount';
+import FlavorType from '../enums/FlavorType';
 
 export default class BlendingController {
     public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
@@ -14,6 +15,8 @@ export default class BlendingController {
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedRecipe: KnockoutObservable<BlendingRecipe> = ko.observable(BlendingRecipes.blendingRecipeList[0][0]);
+
+    public static blendingListFlavorFilters: KnockoutObservableArray<FlavorType> = ko.observableArray([]);
 
     static amount: KnockoutObservable<number> = ko.observable(1);
 

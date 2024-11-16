@@ -60,7 +60,7 @@
                                             <td data-bind="style:{background: GameConstants.BerryColor[4]}">Sour</td>
                                         </tr>
                                     </thead>
-                                    <tbody data-bind="foreach: FarmController.getUnlockedBerryList()">
+                                    <tbody data-bind="foreach: FarmController.getFlavorFilteredBerryList(BlendingController.blendingListFlavorFilters())">
                                         <tr class="clickable"
                                             data-bind="
                                             click: function() { BlendingController.selectedBerry($data); },
