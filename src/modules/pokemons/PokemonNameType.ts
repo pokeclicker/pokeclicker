@@ -1143,6 +1143,7 @@ export type PokemonNameType
     | 'Noibat'
     | 'Noivern'
     | 'Xerneas'
+    | 'Xerneas (Active)'
     | 'Yveltal'
     | 'Zygarde'
     | 'Diancie'

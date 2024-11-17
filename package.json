@@ -1,6 +1,6 @@
 {
   "name": "pokeclicker",
-  "version": "0.10.22",
+  "version": "0.10.23",
   "description": "PokéClicker repository",
   "main": "index.js",
   "scripts": {
@@ -63,7 +63,6 @@
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.0",
-    "gulp-connect": "^5.7.0",
     "gulp-ejs": "^5.1.0",
     "gulp-file-include": "^2.2.2",
     "gulp-filter": "^6.0.0",

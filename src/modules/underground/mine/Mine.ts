@@ -254,8 +254,8 @@ export class Mine {
 
         const { space } = undergroundItem;
         let backgroundPositionSpace: Array<Array<string>> = Array.from({ length: space.length }, (_, i) => Array.from({ length: space[0].length }, (__, j) => {
-            const xPercentage = (j / (space[0].length - 1)).toLocaleString(undefined, { style: 'percent', maximumFractionDigits: 2 });
-            const yPercentage = (i / (space.length - 1)).toLocaleString(undefined, { style: 'percent', maximumFractionDigits: 2 });
+            const xPercentage = `${(100 * j / (space[0].length - 1)).toFixed(2)}%`;
+            const yPercentage = `${(100 * i / (space.length - 1)).toFixed(2)}%`;
             return `${xPercentage} ${yPercentage}`;
         }));
         backgroundPositionSpace = UndergroundController.rotateMatrix90Clockwise(backgroundPositionSpace, rotations);

@@ -22,7 +22,7 @@ class EvolutionHandler {
             // Notify the player if they haven't already caught the evolution, or notifications are forced
             Notifier.notify({
                 message: `Your ${PokemonHelper.displayName(data.basePokemon)()} evolved into ${shiny ? 'a shiny' : GameHelper.anOrA(evolvedPokemon)} ${PokemonHelper.displayName(evolvedPokemon)()}!`,
-                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny),
+                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, undefined, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -58,7 +58,7 @@ class EvolutionHandler {
             evolvedPartyPokemon.nickname = basePartyPokemon.nickname;
             evolvedPartyPokemon.category = basePartyPokemon.category;
             if (basePartyPokemon.heldItem()?.canUse(evolvedPartyPokemon)) {
-                evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
+                evolvedPartyPokemon.heldItem(basePartyPokemon.heldItem());
             }
             App.game.party.removePokemonByName(data.basePokemon);
         }
