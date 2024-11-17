@@ -2858,7 +2858,7 @@ class Update implements Saveable {
             });
             // Remove unused pokemon egg item
             delete playerData._itemList.Pokemon_egg;
-        }
+        },
     };
 
     constructor() {
