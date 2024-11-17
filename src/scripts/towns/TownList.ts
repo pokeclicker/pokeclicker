@@ -6598,6 +6598,17 @@ TownList['Anistar City'] = new Town(
         npcs: [AnistarKalosRoamerNPC, KalosTVNews],
     }
 );
+TownList['Pikachu Land'] = new Town(
+    'Pikachu Land',
+    GameConstants.Region.kalos,
+    GameConstants.KalosSubRegions.Kalos,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
+        npcs: [],
+        ignoreAreaStatus: true,
+    }
+);
 TownList['Couriway Town'] = new Town(
     'Couriway Town',
     GameConstants.Region.kalos,

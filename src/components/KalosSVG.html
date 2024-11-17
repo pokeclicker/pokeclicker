@@ -713,6 +713,16 @@
         })
     %>
 
+    <%- include('templates/mapOverlay',
+            { name: "Pikachu Land"
+            , x: 73, y: 20
+            , width: 2, height: 2
+            , databind: "click:function(){MapHelper.moveToTown('Pikachu Land')}, attr:{ class: MapHelper.calculateTownCssClass('Pikachu Land') }"
+            , visible:  "App.game.statistics.routeKills['kalos'][17]() >= 10"
+            , image: "assets/images/map/transparent.png"
+            })
+    %>
+
      <%- include('templates/mapOverlay',
          { name: "Pokémon Trainer Shauna"
          , x: 56, y: 43
