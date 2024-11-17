@@ -27,18 +27,29 @@ export default class BlendingRecipes {
         ],
     };
 
-    public static getBlendingRecipeSet(type: BlendingRecipeType) {
-        if (Object.values(BlendingRecipes.blendingRecipeList[type]).some(r => r.isUnlocked())) {
-            return Object.values(BlendingRecipes.blendingRecipeList[type]).filter(r => r.isUnlocked());
+    public static recipeSet(type: BlendingRecipeType): BlendingRecipe[] {
+        return Object.values(BlendingRecipes.blendingRecipeList[type]);
+    }
+
+    public static isUnlocked(type: BlendingRecipeType): boolean {
+        return BlendingRecipes.getBlendingRecipeSet(type).some(r => r.isUnlocked());
+    }
+
+    public static getBlendingRecipeSet(type: BlendingRecipeType, filter: boolean = true): BlendingRecipe[] {
+        const recipes = this.recipeSet(type);
+        if (filter) {
+            return recipes.filter(r => r.isUnlocked());
         } else {
-            return;
+            return recipes;
         }
     }
     
-    public static getFullBlendingRecipeList(): BlendingRecipe[] {
+    public static getFullBlendingRecipeList(filter: boolean = true): BlendingRecipe[] {
         let recipes = [];
-        GameHelper.enumNumbers(Object.keys(BlendingRecipes.blendingRecipeList)).flatMap(key => {
-            recipes = recipes.concat(BlendingRecipes.getBlendingRecipeSet(key));
+        GameHelper.enumNumbers(BlendingRecipeType).flatMap(key => {
+            if (BlendingRecipes.isUnlocked(key) || !filter) {
+                recipes = recipes.concat(BlendingRecipes.getBlendingRecipeSet(key));
+            }
         });
         return recipes;
     }
