@@ -19,11 +19,4 @@ class TrainSpecificPokemonQuest extends Quest implements QuestInterface {
         }
         return `Train ${this.pokemon.name} to ${this.amount} attack.`;
     }
-
-    claim(): boolean {
-        if (this.customReward !== undefined) {
-            this.customReward();
-        }
-        return super.claim();
-    }
 }
