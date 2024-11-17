@@ -2503,10 +2503,9 @@ class QuestLineHelper {
 
         const fightLibrePikachuQuest = new DefeatTemporaryBattleQuest('Pikachu Libre and it\'s gang', 'Defeat Pikachu Libre and it\'s gang!');
 
-        const talkToFrankQuest4 = new TalkToNPCQuest(DirectorFrank5, 'Return to Frank');
-        talkToFrankQuest4.customReward = () => {
+        const talkToFrankQuest4 = new TalkToNPCQuest(DirectorFrank5, 'Return to Frank').withCustomReward(() => {
             App.game.party.gainPokemonByName('Pikachu (Super)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        };
+        });
         lightsCameraPikaQuestLine.addQuest(talkToFrankQuest4);
 
         App.game.quests.questLines().push(lightsCameraPikaQuestLine);
