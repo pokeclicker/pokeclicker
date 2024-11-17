@@ -113,6 +113,9 @@ export class UndergroundController {
             });
             return;
         }
+        if (amount <= 0) {
+            return;
+        }
         const curAmt = player.itemList[item.itemName]();
         if (curAmt > 0) {
             const sellAmt = Math.min(curAmt, amount);
@@ -125,6 +128,9 @@ export class UndergroundController {
     }
 
     public static gainProfit(item: UndergroundItem, amount: number, percentage: number = 1): boolean {
+        if (amount <= 0) {
+            return false;
+        }
         let success = true;
         switch (item.valueType) {
             case UndergroundItemValueType.Diamond:
@@ -273,7 +279,7 @@ export class UndergroundController {
     }
 
     public static notifyItemFound(item: UndergroundItem, amount: number, helper?: UndergroundHelper) {
-        const { itemName } = item;
+        const { name: itemName } = item;
 
         Notifier.notify({
             message: `${helper ? `${helper.name}` : 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
@@ -304,6 +310,15 @@ export class UndergroundController {
             type: NotificationConstants.NotificationOption.warning,
             setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
             timeout: 3000,
+        });
+    }
+
+    public static notifyBatteryFull() {
+        Notifier.notify({
+            message: 'Your Underground Battery has been fully charged and is ready to be discharged.',
+            type: NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.battery_full,
+            timeout: 10000,
         });
     }
 }

@@ -2825,6 +2825,24 @@ class Update implements Saveable {
             }
             delete settingsData.showFarmModuleControls;
 
+            // Pokémon Center renamed
+            if (playerData._townName == 'Pokemon HQ Lab') {
+                playerData._townName = 'Pokémon HQ Lab';
+            }
+        },
+
+        '0.10.23': ({ playerData, saveData, settingsData }) => {
+            // Remove easier-to-fix locale misformatting from underground grid item tiles
+            saveData.underground?.mine.grid.map(t => t.reward).filter(r => r).forEach(r => {
+                if (!r.backgroundPosition.match(/^\d+% \d+%$/)) {
+                    r.backgroundPosition = r.backgroundPosition.replaceAll(',', '.');
+                    r.backgroundPosition = r.backgroundPosition.replace(/^([\d.]+)\s% ([\d.]+)\s%$/, '$1% $2%');
+                    r.backgroundPosition = r.backgroundPosition.replace(/^%\s([\d.]+) %\s([\d.]+)$/, '$1% $2%');
+                }
+            });
+        },
+
+        '0.10.24': ({ playerData, saveData, settingsData }) => {
             // Update hatchery EggTypes
             saveData.breeding.eggList?.forEach(egg => {
                 const oldType = egg.type;
@@ -2840,7 +2858,7 @@ class Update implements Saveable {
             });
             // Remove unused pokemon egg item
             delete playerData._itemList.Pokemon_egg;
-        },
+        }
     };
 
     constructor() {
