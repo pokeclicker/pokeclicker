@@ -2,8 +2,6 @@
 
 class TrainSpecificPokemonQuest extends Quest implements QuestInterface {
     pokemon: PokemonListData;
-    customDescription: string;
-    customReward: () => void;
     includeBreeding: boolean;
 
     constructor(pokemonName: PokemonNameType, attackNeeded: number, reward = 0) {
