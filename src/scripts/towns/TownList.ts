@@ -6463,7 +6463,7 @@ const DirectorFrank2 = new NPC('Frank', [
     'I want the original star back in perfect pika-shape!',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.more, 0), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.less, 3)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 0), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 2, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank3 = new NPC('Frank', [
     'Our pika-star is back!',
@@ -6471,7 +6471,7 @@ const DirectorFrank3 = new NPC('Frank', [
     'Any chance you got a pika-Hawlucha ready for the role?',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.more, 2), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.less, 5)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 2), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 4, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank4 = new NPC('Frank', [
     'That scene was pika-perfect!',
@@ -6479,7 +6479,7 @@ const DirectorFrank4 = new NPC('Frank', [
     'I already have a bunch of extras ready, but the remake needs to be pika-bigger!',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.more, 4), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.less, 7)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 4), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank5 = new NPC('Frank', [
     'I have finished the pika-movie!',
@@ -6488,7 +6488,7 @@ const DirectorFrank5 = new NPC('Frank', [
     'You can keep the pika-costumes, if you want.',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.more, 7),
+    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6, GameConstants.AchievementOption.more),
 });
 
 //Kalos Towns

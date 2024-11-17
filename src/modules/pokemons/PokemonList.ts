@@ -1840,7 +1840,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 25.23,
+        'id': 25.24,
         'name': 'Pikachu (Super)',
         'catchRate': 190,
         'type': [PokemonType.Electric, PokemonType.Rock],

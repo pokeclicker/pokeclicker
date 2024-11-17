@@ -2490,12 +2490,6 @@ class QuestLineHelper {
         const trainHawluchaQuest = new TrainSpecificPokemonQuest('Hawlucha', 50000);
         trainHawluchaQuest.customReward = () => {
             App.game.party.gainPokemonByName('Hawlucha (Stuntman)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-            Notifier.notify({
-                title: lightsCameraPikaQuestLine.name,
-                message: 'You found Hawlucha (Stuntman)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
         };
         lightsCameraPikaQuestLine.addQuest(trainHawluchaQuest);
 
@@ -2503,7 +2497,8 @@ class QuestLineHelper {
         lightsCameraPikaQuestLine.addQuest(talkToFrankQuest3);
 
         const trainPikachusQuest = new CustomQuest(15, undefined, 'Train 15 Pikachus to 25.000 power',
-            () => App.game.party.caughtPokemon.filter(p => Math.floor(p.id) == 25 && p.attack >= 25000));
+            () => App.game.party.caughtPokemon.filter(p => Math.floor(p.id) == 25 && p.attack >= 25000).length);
+        trainPikachusQuest.initialValue = 0;
         lightsCameraPikaQuestLine.addQuest(trainPikachusQuest);
 
         const fightLibrePikachuQuest = new DefeatTemporaryBattleQuest('Pikachu Libre and it\'s gang', 'Defeat Pikachu Libre and it\'s gang!');
@@ -2511,12 +2506,6 @@ class QuestLineHelper {
         const talkToFrankQuest4 = new TalkToNPCQuest(DirectorFrank5, 'Return to Frank');
         talkToFrankQuest4.customReward = () => {
             App.game.party.gainPokemonByName('Pikachu (Super)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-            Notifier.notify({
-                title: lightsCameraPikaQuestLine.name,
-                message: 'You found Pikachu (Super)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
         };
         lightsCameraPikaQuestLine.addQuest(talkToFrankQuest4);
 
