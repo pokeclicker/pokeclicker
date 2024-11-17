@@ -215,6 +215,12 @@ class Player implements TmpPlayerType {
         }
     }
 
+    public pickStarter(index: number) {
+        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+        App.game.party.gainPokemonById(GameConstants.RegionalStarters[this.region][index], shiny);
+        this.regionStarters[this.region](index);
+    }
+
     public toJSON() {
         const keep = [
             '_route',
