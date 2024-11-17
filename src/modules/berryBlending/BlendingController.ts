@@ -16,7 +16,7 @@ export default class BlendingController {
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedRecipe: KnockoutObservable<BlendingRecipe> = ko.observable(BlendingRecipes.blendingRecipeList[0][0]);
-    public static selectedRecipeList: KnockoutObservableArray<BlendingRecipe> = ko.observableArray(BlendingRecipes.getFullBlendingRecipeList());
+    public static selectedRecipeList: KnockoutObservableArray<BlendingRecipe> = ko.observableArray([]);
 
     public static spicyFilter: KnockoutObservable<boolean> = ko.observable(false);
     public static dryFilter: KnockoutObservable<boolean> = ko.observable(false);
