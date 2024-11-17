@@ -2487,10 +2487,9 @@ class QuestLineHelper {
         const talkToFrankQuest2 = new TalkToNPCQuest(DirectorFrank3, 'Return to Frank');
         lightsCameraPikaQuestLine.addQuest(talkToFrankQuest2);
 
-        const trainHawluchaQuest = new TrainSpecificPokemonQuest('Hawlucha', 50000);
-        trainHawluchaQuest.customReward = () => {
+        const trainHawluchaQuest = new TrainSpecificPokemonQuest('Hawlucha', 50000).withCustomReward(() => {
             App.game.party.gainPokemonByName('Hawlucha (Stuntman)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        };
+        });
         lightsCameraPikaQuestLine.addQuest(trainHawluchaQuest);
 
         const talkToFrankQuest3 = new TalkToNPCQuest(DirectorFrank4, 'Return to Frank');
