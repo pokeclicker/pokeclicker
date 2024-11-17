@@ -1,13 +1,15 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
-    <div class="col no-gutters clickable" style="height: 280px; display: block;"
-        data-bind="click: function() { DungeonRunner.handleInteraction() }">
+    <div
+        class="col no-gutters clickable"
+        style="height: 280px; display: block;"
+        data-bind="click: function() { DungeonRunner.handleInteraction() }"
+    >
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
-                <knockout style="position: relative; top: -1px;"
-                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                <knockout style="position: relative; top: -1px;" data-bind="template: { name: 'pokerusStatusTemplate', data: {
                         'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id),
                         'evs': App.game.party.getPokemon(DungeonBattle.enemyPokemon().id)?.evs() }}">
                 </knockout>
@@ -31,19 +33,23 @@
             <!-- ko if: DungeonBattle.trainer() -->
             <knockout class="right">
                 <span data-bind="foreach: new Array(DungeonBattle.defeatedTrainerPokemon())">
-                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated"/>
+                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated">
                 </span>
                 <span data-bind="foreach: new Array(DungeonBattle.remainingTrainerPokemon())">
-                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest"/>
+                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest">
                 </span>
             </knockout>
             <!-- /ko -->
             <div class="progress timer">
-                <div class="progress-bar bg-danger" role="progressbar"
-                     data-bind="attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' },
+                <div
+                    class="progress-bar bg-danger"
+                    role="progressbar"
+                    data-bind="attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' },
                      css: { 'bg-danger': DungeonRunner.timeLeftSeconds() < 20, 'bg-primary': DungeonRunner.timeLeftSeconds() >= 20 }"
-                     aria-valuemin="0" aria-valuemax="100">
-                     <span data-bind="text: DungeonRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                >
+                    <span data-bind="text: DungeonRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
                 </div>
             </div>
         </h2>
@@ -51,26 +57,32 @@
         <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
         <div data-bind="if: DungeonBattle.enemyPokemon">
             <div class="trainer" data-bind="if: DungeonBattle.trainer() && !DungeonBattle.trainer().options?.hideTrainer">
-                <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+                <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';">
             </div>
             <div class="dungeon-enemy">
                 <div data-bind="ifnot: DungeonBattle.catching">
                     <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon sprite</knockout>
                 </div>
                 <div data-bind="if: DungeonBattle.catching" class="catchChance">
-                    <img class="pokeball-animated"
-                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.svg' }"
-                         src=""/>
+                    <img
+                        class="pokeball-animated"
+                        data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.svg' }"
+                        src=""
+                    >
                     <br>
                     Catch Chance:
                     <knockout data-bind="text: Math.floor(DungeonBattle.catchRateActual()) + '%'">Catch Rate</knockout>
                 </div>
             </div>
             <div class="progress hitpoints dungeonhitpoints" style="height: 20px;">
-                <div class="progress-bar bg-danger" role="progressbar"
-                     data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
-                     aria-valuemin="0" aria-valuemax="100">
-                     <span data-bind="text: DungeonBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + DungeonBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                <div
+                    class="progress-bar bg-danger"
+                    role="progressbar"
+                    data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                >
+                    <span data-bind="text: DungeonBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + DungeonBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                 </div>
             </div>
         </div>
@@ -78,7 +90,7 @@
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest -->
         <div data-bind="with: DungeonRunner.map.currentTile()">
             <div class="dungeon-chest" style="height: 95px">
-                <img data-bind='attr: { src: `assets/images/dungeons/chest-${$data.metadata.tier}.png` }'/>
+                <img data-bind="attr: { src: `assets/images/dungeons/chest-${$data.metadata.tier}.png` }">
             </div>
             <button class="btn btn-warning chest-button">
                 <p>Open <span data-bind="text: $data.metadata.tier"></span> chest</p>
@@ -102,46 +114,48 @@
         </div>
         <!-- /ko -->
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
-          <table width="100%">
-              <tr>
-                <td width="50%">
-                  <knockout data-bind="text: DungeonRunner.dungeon.name">Dungeon name</knockout>
-                  <!--If all Pokémon in the dungeon are caught or caught shiny-->
-                  <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false)">
-                      <img class="pokeball-smallest"
-                           data-bind="attr: { src: `assets/images/pokeball/Pokeball${DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) ? '-shiny' : ''}.svg`},
+            <table width="100%">
+                <tr>
+                    <td width="50%">
+                        <knockout data-bind="text: DungeonRunner.dungeon.name">Dungeon name</knockout>
+                        <!--If all Pokémon in the dungeon are caught or caught shiny-->
+                        <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false)">
+                            <img class="pokeball-smallest" data-bind="attr: { src: `assets/images/pokeball/Pokeball${DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) ? '-shiny' : ''}.svg`},
                            tooltip: {
                             trigger: 'hover', placement: 'bottom', title: `You have captured all Pokémon${DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) ? ' shiny' : ''} in this dungeon!`
-                        }"/>
-                  </knockout>
+                        }">
+                        </knockout>
 
-                  <!--Pokérus image-->
-                  <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon())">
-                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png' },
-                      tooltip: { title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon), trigger: 'hover', placement: 'bottom', html: true }"
-                    src=""/>
-                  </knockout>
+                        <!--Pokérus image-->
+                        <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon())">
+                            <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png' },
+                      tooltip: { title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon), trigger: 'hover', placement: 'bottom', html: true }" src="">
+                        </knockout>
 
-                  <!-- ko if: player.town.dungeon.allAvailableShadowPokemon().length -->
-                  <img height="19" src="assets/images/status/shadow.svg" data-bind="
-                    css: { 'dungeon-pokemon-locked': player.town.dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) },"/>
-                  <!-- /ko -->
-                </td>
-                <td width="50%">
-                  <knockout data-bind="text: `${App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toLocaleString('en-US')} Clears`"></knockout>
-                </td>
-              </tr>
-              <tr>
-                <td width="50%">
-                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
-                </td>
-                <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
-                    <span style="display: inline;">Click Attack:
-                        <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
-                    </span>
-                </td>
-              </tr>
-          </table>
+                        <!-- ko if: player.town.dungeon.allAvailableShadowPokemon().length -->
+                        <img
+                            height="19"
+                            src="assets/images/status/shadow.svg"
+                            data-bind="
+                    css: { 'dungeon-pokemon-locked': player.town.dungeon.allAvailableShadowPokemon().some(p => (App.game.party.getPokemonByName(p)?.shadow ?? GameConstants.ShadowStatus.None) < GameConstants.ShadowStatus.Shadow) },"
+                        >
+                        <!-- /ko -->
+                    </td>
+                    <td width="50%">
+                        <knockout data-bind="text: `${App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toLocaleString('en-US')} Clears`"></knockout>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                    </td>
+                    <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
+                        <span style="display: inline;">Click Attack:
+                            <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                        </span>
+                    </td>
+                </tr>
+            </table>
         </h2>
     </div>
 </div>

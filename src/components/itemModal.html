@@ -1,13 +1,31 @@
 <!-- Show Items modal-->
-<div class="modal fade" id="showItemsModal" tabindex="-1" role="dialog"
-     aria-labelledby="showItemModalLabel" aria-hidden="true">
+<div
+    class="modal fade"
+    id="showItemsModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="showItemModalLabel"
+    aria-hidden="true"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content" style="text-align: center">
-            <div class="modal-header p-0" style='justify-content: space-around;'>
+            <div class="modal-header p-0" style="justify-content: space-around;">
                 <ul class="nav nav-tabs nav-fill w-100">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Items</a></li>
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link active"
+                            href="#evoStones"
+                        >Evolution Items</a></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link"
+                            href="#itemBag"
+                        >Item Bag</a></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link"
+                            href="#keyItems"
+                        >Key Items</a></li>
                 </ul>
             </div>
 
@@ -17,8 +35,14 @@
                         <!--<h3 data-bind="text: ItemList[ItemHandler.stoneSelected()].displayName"></h3>-->
                         <div class="row">
                             <div class="col-12 d-lg-none d-block">
-                                <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                                        data-target="#evo-item-list" aria-expanded="false" aria-controls="evo-item-list">
+                                <button
+                                    class="w-100 my-1 btn btn-secondary"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#evo-item-list"
+                                    aria-expanded="false"
+                                    aria-controls="evo-item-list"
+                                >
                                     Evolution Item
                                 </button>
                             </div>
@@ -27,12 +51,15 @@
                                 <h4>Evolution Items</h4>
                                 <div class="scrolling-div" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                     <div class="col-12 evolutionListItem">
-                                        <button class="btn btn-secondary smallButton list-group-item-action pl-2"
-                                                data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
+                                        <button class="btn btn-secondary smallButton list-group-item-action pl-2" data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                                     click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
                                                     visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                             <div class="d-flex align-items-center">
-                                                <img class="mr-3" data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
+                                                <img
+                                                    class="mr-3"
+                                                    data-bind="attr: {src: ItemList[$data].image }"
+                                                    style="max-width: 32px;"
+                                                >
                                                 <div class="flex-grow-1 mr-1" data-bind="text: ItemList[$data].displayName"></div>
                                                 <div class="mr-1" data-bind="text: player.itemList[$data]().toLocaleString('en-US')"></div>
                                                 <!-- ko if: ItemList[$data] instanceof CaughtIndicatingItem -->
@@ -48,20 +75,24 @@
                             </div>
 
                             <div class="col-12 d-lg-none d-block">
-                                <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                                        data-target="#evo-pokemon-list" aria-expanded="false" aria-controls="evo-pokemon-list">
+                                <button
+                                    class="w-100 my-1 btn btn-secondary"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#evo-pokemon-list"
+                                    aria-expanded="false"
+                                    aria-controls="evo-pokemon-list"
+                                >
                                     Pokémon
                                 </button>
                             </div>
                             <!-- Pokemon list -->
                             <div class="col-lg-6 col-12 collapse dont-collapse-lg justify-content-center" id="evo-pokemon-list">
                                 <h4>Pokémon</h4>
-                                <div class="scrolling-div"
-                                    data-bind="foreach: PartyController.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
+                                <div class="scrolling-div" data-bind="foreach: PartyController.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
                                     <div class="col-12 evolutionListItem">
-                                        <button class="btn btn-secondary smallButton list-group-item-action d-flex align-items-center"
-                                            data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
-                                            <img class="smallImage pr-0 mr-3" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
+                                        <button class="btn btn-secondary smallButton list-group-item-action d-flex align-items-center" data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
+                                            <img class="smallImage pr-0 mr-3" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }">
                                             <span class="flex-grow-1 mr-1" data-bind="text: displayName"></span>
                                             <span class="mr-1" data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
                                                 <span class="stoneEvolutionStatuses" data-bind="foreach: statuses">
@@ -94,10 +125,21 @@
                                                 Use evolution items!
                                             </button>
                                             <!-- /ko -->
-                                            <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-bind="text: ItemHandler.amountSelected().toLocaleString('en-US') + '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button
+                                                type="button"
+                                                class="btn btn-success dropdown-toggle dropdown-toggle-split active"
+                                                data-bind="text: ItemHandler.amountSelected().toLocaleString('en-US') + '&nbsp;'"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                            >
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                                                <button class="dropdown-item" type="button" data-bind="click: function(){ItemHandler.amountSelected($data)}, text: $data.toLocaleString('en-US')"></button>
+                                                <button
+                                                    class="dropdown-item"
+                                                    type="button"
+                                                    data-bind="click: function(){ItemHandler.amountSelected($data)}, text: $data.toLocaleString('en-US')"
+                                                ></button>
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +152,11 @@
                     <div id="itemBag" class="tab-pane p-3">
 
                         <!-- ko if: Object.values(ItemList).some((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-questItems">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-questItems"
+                        >
                             <h5 class="m-0 text-light">Quest Items</h5>
                         </div>
                         <div id="itemBag-questItems" class="collapse show">
@@ -118,8 +164,11 @@
                                 <div class="row justify-content-center">
                                     <!-- ko foreach: Object.values(ItemList).filter((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
                                     <div class="col-6 col-lg-3 mb-2">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name }">
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -128,7 +177,11 @@
                         </div>
                         <!-- /ko -->
 
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-vitamins">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-vitamins"
+                        >
                             <h5 class="m-0 text-light">Vitamins</h5>
                         </div>
                         <div id="itemBag-vitamins" class="collapse show">
@@ -136,21 +189,32 @@
                                 <div class="row justify-content-center">
                                     <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                     <div class="col-6 col-lg-3 mb-2">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="padding-top: 1px; padding-bottom: 2px;"
                                             data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]},
-                                                click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }">
+                                                click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
                                 </div>
                                 <div class="row justify-content-center mb-1">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bind="click: () => { $('#pokemonVitaminExpandedModal').modal('show') }">All Vitamins</button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary btn-sm"
+                                        data-bind="click: () => { $('#pokemonVitaminExpandedModal').modal('show') }"
+                                    >All Vitamins</button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- ko if: GameHelper.enumStrings(GameConstants.ConsumableType).some(type => player.itemList[type]()) -->
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-consumables">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-consumables"
+                        >
                             <h5 class="m-0 text-light">Consumables</h5>
                         </div>
                         <div id="itemBag-consumables" class="collapse show">
@@ -158,9 +222,12 @@
                                 <div class="row justify-content-center">
                                     <!-- ko foreach: GameHelper.enumStrings(GameConstants.ConsumableType).filter(type => player.itemList[type]()).map(type => ItemList[type]) -->
                                     <div class="col-6 col-lg-3 mb-2">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="padding-top: 1px; padding-bottom: 2px;"
                                             data-bind="template: { name: 'otherItemTemplate', data: $data.name },
-                                            click: () => { ConsumableController.currentlySelected($data.type); $('#consumableModal').modal('show'); }">
+                                            click: () => { ConsumableController.currentlySelected($data.type); $('#consumableModal').modal('show'); }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -169,7 +236,11 @@
                         </div>
                         <!-- /ko -->
 
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-heldItems">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-heldItems"
+                        >
                             <h5 class="m-0 text-light">Held Items</h5>
                         </div>
                         <div id="itemBag-heldItems" class="collapse show mt-1">
@@ -179,9 +250,12 @@
                                     <h5 class="card-title col-12 mb-2" data-bind="text: $data.title, visible: $data.items.some(i => i.isUnlocked())"></h5>
                                     <!-- ko foreach: $data.items -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="padding-top: 1px; padding-bottom: 2px;"
                                             data-bind="template: { name: 'otherItemTemplate', data: $data.name },
-                                                click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }">
+                                                click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -190,7 +264,11 @@
                             </div>
                         </div>
 
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-underground-treasure">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-underground-treasure"
+                        >
                             <h5 class="m-0 text-light">Underground Treasure</h5>
                         </div>
                         <div id="itemBag-underground-treasure" class="collapse show mt-1">
@@ -198,8 +276,11 @@
                                 <div class="row justify-content-center">
                                     <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Diamond) -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
-                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -207,7 +288,11 @@
                             </div>
                         </div>
 
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-gem-plates">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-gem-plates"
+                        >
                             <h5 class="m-0 text-light">Gem Plates</h5>
                         </div>
                         <div id="itemBag-gem-plates" class="collapse show mt-1">
@@ -215,8 +300,11 @@
                                 <div class="row justify-content-center">
                                     <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Gem) -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
-                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -224,7 +312,11 @@
                             </div>
                         </div>
 
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-fossils">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-fossils"
+                        >
                             <h5 class="m-0 text-light">Fossils</h5>
                         </div>
                         <div id="itemBag-fossils" class="collapse show mt-1">
@@ -233,8 +325,11 @@
                                     <h5 class="card-title col-12 mb-2">Fossils</h5>
                                     <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Fossil) -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
-                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -242,8 +337,11 @@
                                     <h5 class="card-title col-12 mb-2">Fossil Pieces</h5>
                                     <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.FossilPiece) -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
-                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -251,7 +349,11 @@
                             </div>
                         </div>
 
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-shards">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-shards"
+                        >
                             <h5 class="m-0 text-light">Shards</h5>
                         </div>
                         <div id="itemBag-shards" class="collapse show mt-1">
@@ -259,8 +361,11 @@
                                 <div class="row justify-content-center">
                                     <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Shard) -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                        <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
-                                             data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }">
+                                        <div
+                                            class="btn btn-secondary text-left w-100 px-1"
+                                            style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.itemName }"
+                                        >
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -269,7 +374,11 @@
                         </div>
 
                         <!-- ko if: Object.values(ItemList).some((i) => i instanceof MegaStoneItem && player.itemList[i.name]()) -->
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-megaStones">
+                        <div
+                            class="bg-primary text-left rounded-0 px-3 py-2 mb-1"
+                            data-toggle="collapse"
+                            data-target="#itemBag-megaStones"
+                        >
                             <h5 class="m-0 text-light">Mega Stones</h5>
                         </div>
                         <div id="itemBag-megaStones" class="collapse show mt-1">
@@ -291,10 +400,11 @@
 
                     <div id="keyItems" class="tab-pane p-3">
                         <div class="m-0">
-                            <div class="row no-gutters justify-content-sm-center"
-                                data-bind="foreach: App.game.keyItems.itemList">
+                            <div class="row no-gutters justify-content-sm-center" data-bind="foreach: App.game.keyItems.itemList">
                                 <div class="col-2">
-                                    <img class="clickable key-item" src=""
+                                    <img
+                                        class="clickable key-item"
+                                        src=""
                                         data-bind="attr:{
                                         src: 'assets/images/keyitems/' + KeyItemType[$data.id] + '.png'},
                                 css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.id),
@@ -303,7 +413,8 @@
                                 event: {
                                     mouseover: function(){KeyItemController.hover($data.id)},
                                     mouseout : function(){KeyItemController.hoverRelease()}
-                                    }">
+                                    }"
+                                    >
                                 </div>
                             </div>
 
@@ -332,7 +443,11 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>

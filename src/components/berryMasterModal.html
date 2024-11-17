@@ -1,15 +1,34 @@
-<div class="modal fade noselect" id="berryMasterModal" tabindex="-1" role="dialog"
-     aria-labelledby="berryMasterModalLabel">
+<div
+    class="modal fade noselect"
+    id="berryMasterModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="berryMasterModalLabel"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content" data-bind="let: { shopVisible: ko.observable(true) }">
             <div class="modal-header text-center">
                 <h4 data-bind="text: ShopHandler.shopObservable().displayName">Berry Master</h4>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >&times;</button>
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryMasterShop" data-bind="click: function(){shopVisible(true);}">Shop</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryMasterTrade" data-bind="click: function(){shopVisible(false);}">Trades</a></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link active"
+                            href="#berryMasterShop"
+                            data-bind="click: function(){shopVisible(true);}"
+                        >Shop</a></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link"
+                            href="#berryMasterTrade"
+                            data-bind="click: function(){shopVisible(false);}"
+                        >Trades</a></li>
                 </ul>
             </div>
             <div class="modal-body tab-content">
@@ -17,7 +36,11 @@
                     <span data-bind="template: { name: 'shopBodyTemplate' }"></span>
                 </div>
                 <div id="berryMasterTrade" class="tab-pane fade">
-                    <div class="table-responsive" id="dailyDealsBody" style="min-height: 250px;">
+                    <div
+                        class="table-responsive"
+                        id="dailyDealsBody"
+                        style="min-height: 250px;"
+                    >
                         <table class="table table-sm table-striped m-0 text-left">
                             <thead>
                                 <tr>
@@ -45,7 +68,7 @@
                                     <!-- ko if: $index() === 0 -->
                                     <td class="align-middle" data-bind="attr: { rowspan: $parent.berries.length }">→</td>
                                     <td class="align-middle" data-bind="attr: { rowspan: $parent.berries.length }">
-                                        <img class='mineInventoryItem' data-bind="
+                                        <img class="mineInventoryItem" data-bind="
                                             attr: {src: $parent.item.itemType.image},
                                             tooltip: {
                                                 title: $parent.item.itemType.description ? $parent.item.itemType.description : '',
@@ -54,15 +77,14 @@
                                                 html: true
                                               }">
                                     </td>
-                                    <td class="align-middle" data-bind='attr: { rowspan: $parent.berries.length }'>
+                                    <td class="align-middle" data-bind="attr: { rowspan: $parent.berries.length }">
                                         <span data-bind='text: ($parent.item.amount).toLocaleString("en-US") + " (" + ($parent.item.amount * tradeAmount()).toLocaleString("en-US") + ") × " + $parent.item.itemType.displayName'></span>
                                         <span style="float: right; margin-right: 5px">
                                             <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
                                                 <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}"></span>
                                             </knockout>
                                             <knockout data-bind="if: ($parent.item.itemType instanceof PokemonItem)">
-                                                <span style="position: relative; top: -1px;"
-                                                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                <span style="position: relative; top: -1px;" data-bind="template: { name: 'pokerusStatusTemplate', data: {
                                                         'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px',
                                                         'evs': App.game.party.getPokemonByName($parent.item.itemType.type)?.evs() }}">
                                                 </span>
@@ -71,13 +93,24 @@
                                     </td>
                                     <td class="align-middle" data-bind="attr: { rowspan: $parent.berries.length }">
                                         <div class="btn-group btn-block">
-                                            <button class='btn btn-success btn-block' data-bind='attr:{ disabled: (tradeAmount() > $parent.calculateMaxTrades() || !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index())) }, click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: (tradeAmount() > $parent.calculateMaxTrades() || !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index())) }'>
+                                            <button class="btn btn-success btn-block" data-bind="attr:{ disabled: (tradeAmount() > $parent.calculateMaxTrades() || !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index())) }, click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: (tradeAmount() > $parent.calculateMaxTrades() || !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index())) }">
                                                 Trade
                                             </button>
-                                            <button type="button" data-bind="text: tradeAmount().toLocaleString('en-US') + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button
+                                                type="button"
+                                                data-bind="text: tradeAmount().toLocaleString('en-US') + '&nbsp;'"
+                                                class="btn btn-success dropdown-toggle dropdown-toggle-split active"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                            >
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, $parent.calculateMaxTrades()]">
-                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data.toLocaleString('en-US')"></button>
+                                                <button
+                                                    class="dropdown-item"
+                                                    type="button"
+                                                    data-bind="click: function(){tradeAmount($data)}, text: $data.toLocaleString('en-US')"
+                                                ></button>
                                             </div>
                                         </div>
                                     </td>
@@ -99,39 +132,79 @@
                                 Reset
                             </button>
                         </div>
-                        <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
-                                value="1" min="1" required name="amountOfItems"
-                                oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
-                                onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
+                        <input
+                            id="amountOfItems"
+                            type="number"
+                            class="outline-dark form-control form-control-number"
+                            value="1"
+                            min="1"
+                            required
+                            name="amountOfItems"
+                            oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                            onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                            title=""
+                        >
                         <div class="input-group-append">
                             <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
-                                    +10
-                                </button>
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
-                                    +100
-                                </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.increaseAmount(10)"
+                            >
+                                +10
+                            </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.increaseAmount(100)"
+                            >
+                                +100
+                            </button>
                             <!-- /ko -->
                             <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(10)">
-                                    &times;10
-                                </button>
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(0.1)">
-                                    &div;10
-                                </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.multiplyAmount(10)"
+                            >
+                                &times;10
+                            </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.multiplyAmount(0.1)"
+                            >
+                                &div;10
+                            </button>
                             <!-- /ko -->
                             <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
-                                    +100
-                                </button>
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(1000)">
-                                    +1,000
-                                </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.increaseAmount(100)"
+                            >
+                                +100
+                            </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.increaseAmount(1000)"
+                            >
+                                +1,000
+                            </button>
                             <!-- /ko -->
-                            <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
+                            <button
+                                class="btn btn-primary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.maxAmount()"
+                            >
                                 Max
                             </button>
-                            <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}" onclick="ShopHandler.buyItem()">
+                            <button
+                                class="btn-outline-dark"
+                                data-bind="attr: {class: ShopHandler.calculateButtonCss()}"
+                                onclick="ShopHandler.buyItem()"
+                            >
                                 Buy
                             </button>
                         </div>
@@ -139,7 +212,11 @@
                 </div>
                 <!-- /ko -->
                 <!-- ko if: !shopVisible() -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
                 <!-- /ko -->
             </div>
         </div>

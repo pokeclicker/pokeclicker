@@ -1,14 +1,27 @@
-<div class="modal noselect fade" id="QuestModal" tabindex="-1" role="dialog" aria-labelledby="QuestModalLabel">
+<div
+    class="modal noselect fade"
+    id="QuestModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="QuestModalLabel"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill w-100">
-                    <li class="nav-item" onclick="$('#refreshQuests').show()"><a class="nav-link active" href="#questsModalQuestsPane" data-toggle="tab">Quests</a></li>
+                    <li class="nav-item" onclick="$('#refreshQuests').show()"><a
+                            class="nav-link active"
+                            href="#questsModalQuestsPane"
+                            data-toggle="tab"
+                        >Quests</a></li>
                     <li class="nav-item" onclick="$('#refreshQuests').hide()">
-                        <a class="nav-link position-relative" href="#questsModalQuestLinesPane" data-toggle="tab">
+                        <a
+                            class="nav-link position-relative"
+                            href="#questsModalQuestLinesPane"
+                            data-toggle="tab"
+                        >
                             Quest Lines
-                            <span class="position-absolute rounded-circle bg-danger p-1"
-                                data-bind="visible: App.game.quests.questLines().some(q => q.state() === QuestLineState.inactive && q.bulletinBoard !== GameConstants.BulletinBoards.None && q.requirement?.isCompleted())"></span>
+                            <span class="position-absolute rounded-circle bg-danger p-1" data-bind="visible: App.game.quests.questLines().some(q => q.state() === QuestLineState.inactive && q.bulletinBoard !== GameConstants.BulletinBoards.None && q.requirement?.isCompleted())"></span>
                         </a>
                     </li>
                 </ul>
@@ -22,15 +35,19 @@
                             <div class="form-row my-3">
                                 <div class="col-3 align-self-center">
                                     <h5>
-                                        <span class='' data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
+                                        <span class="" data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
                                     </h5>
                                 </div>
-                                <div class='col-6' data-bind="tooltip : App.game.quests.questProgressTooltip()">
-                                    <div>Lvl. <knockout data-bind='text: App.game.quests.level'></knockout></div>
-                                    <div class="progress" style='height: 5px'>
-                                        <div class="progress-bar bg-info" role="progressbar"
-                                                data-bind="attr:{ style: 'width:' + App.game.quests.percentToNextQuestLevel() + '%' }"
-                                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="col-6" data-bind="tooltip : App.game.quests.questProgressTooltip()">
+                                    <div>Lvl. <knockout data-bind="text: App.game.quests.level"></knockout></div>
+                                    <div class="progress" style="height: 5px">
+                                        <div
+                                            class="progress-bar bg-info"
+                                            role="progressbar"
+                                            data-bind="attr:{ style: 'width:' + App.game.quests.percentToNextQuestLevel() + '%' }"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        >
                                         </div>
                                     </div>
                                 </div>
@@ -40,36 +57,43 @@
                             </div>
                         </div>
 
-                        <table class='table table-hover m-0'>
+                        <table class="table table-hover m-0">
                             <thead>
-                            <tr>
-                                <td class="align-middle"><h5 class="mb-0">Description</h5></td>
-                                <td class="align-middle"><h5 class="mb-0">Reward</h5></td>
-                                <td class="align-middle"><h5 class="mb-0">Status</h5></td>
-                            </tr>
+                                <tr>
+                                    <td class="align-middle"><h5 class="mb-0">Description</h5></td>
+                                    <td class="align-middle"><h5 class="mb-0">Reward</h5></td>
+                                    <td class="align-middle"><h5 class="mb-0">Status</h5></td>
+                                </tr>
                             </thead>
-                            <tbody data-bind="foreach: App.game.quests.sortedQuestList" >
-                            <tr>
-                                <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
-                                <td class="align-middle text-center py-0" style="text-align:left">
-                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
-                                </td>
-                                <td class="align-middle text-center py-0">
-                                    <button class='btn btn-primary btn-sm btn-block'
-                                        data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
+                            <tbody data-bind="foreach: App.game.quests.sortedQuestList">
+                                <tr>
+                                    <td
+                                        class="align-middle"
+                                        style="text-align:left"
+                                        data-bind="text: description"
+                                    ></td>
+                                    <td class="align-middle text-center py-0" style="text-align:left">
+                                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
+                                    </td>
+                                    <td class="align-middle text-center py-0">
+                                        <button class="btn btn-primary btn-sm btn-block" data-bind="visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
                                         click: function(){
                                             App.game.quests.beginQuest($data.index);
-                                        }'>
-                                        Start
-                                    </button>
-                                    <button class='btn btn-success btn-sm btn-block' data-bind='visible: !$data.claimed() && $data.isCompleted(),
-                                                                        click: () => { App.game.quests.claimQuest($data.index) }'>
-                                        Claim
-                                    </button>
-                                    <span data-bind='visible: $data.inProgress() && !$data.isCompleted(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: $data.claimed()'>Completed</button>
-                                </td>
-                            </tr>
+                                        }">
+                                            Start
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-block" data-bind="visible: !$data.claimed() && $data.isCompleted(),
+                                                                        click: () => { App.game.quests.claimQuest($data.index) }">
+                                            Claim
+                                        </button>
+                                        <span data-bind='visible: $data.inProgress() && !$data.isCompleted(), text: Math.floor(progress()*100) + "%"'></span>
+                                        <button
+                                            class="btn btn-success btn-sm btn-block"
+                                            disabled
+                                            data-bind="visible: $data.claimed()"
+                                        >Completed</button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -101,13 +125,17 @@
                                         </td>
                                         <td class="text-nowrap align-middle text-center" data-bind="text: `${$data.curQuest() + 1} / ${$data.totalQuests}`"></td>
                                         <td class="align-middle text-center">
-                                            <button type="button" class="btn btn-danger btn-sm" data-bind="click: () => { $data.suspendQuest() }, tooltip: {
+                                            <button
+                                                type="button"
+                                                class="btn btn-danger btn-sm"
+                                                data-bind="click: () => { $data.suspendQuest() }, tooltip: {
                                                 title: $data.pauseTooltip,
                                                 trigger: 'hover',
                                                 placement: 'top',
                                                 html: true,
                                                 boundary: 'window'
-                                            }, css: { disabled: !$data.isPausable() }">Pause</button>
+                                            }, css: { disabled: !$data.isPausable() }"
+                                            >Pause</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -158,23 +186,30 @@
             </div>
 
             <div class="modal-footer">
-                <div id='refreshQuests'>
+                <div id="refreshQuests">
                     <!-- ko if: App.game.quests.freeRefresh() -->
                     <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)">Free Refresh</button>
                     <!-- /ko -->
                     <!-- ko if: !App.game.quests.freeRefresh() -->
-                    <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)"
+                    <button
+                        class="btn btn-primary"
+                        onclick="App.game.quests.refreshQuests(false, true)"
                         data-bind="enable: App.game.quests.canAffordRefresh(),
                             tooltip: {
                                 title: App.game.quests.freeRefresh() ? '' : `Daily free refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`,
                                 trigger: 'hover', placement:'top'
-                            }">
+                            }"
+                    >
                         <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
                     </button>
                     <!-- /ko -->
 
                 </div>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>

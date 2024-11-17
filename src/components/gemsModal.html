@@ -1,6 +1,12 @@
-<div class="modal fade noselect" id="gemModal" tabindex="-1" role="dialog" aria-badgeledby="gemModal">
+<div
+    class="modal fade noselect"
+    id="gemModal"
+    tabindex="-1"
+    role="dialog"
+    aria-badgeledby="gemModal"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-       <div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="mb-0">Gems</h5>
 
@@ -34,17 +40,21 @@
                             },
                             css: { 'bg-info': gemIndex() === $index() }">
                                 <div class="d-flex align-items-center">
-                                    <img width="32px" data-bind='attr: { src: Gems.image($index()) }'/>
+                                    <img width="32px" data-bind="attr: { src: Gems.image($index()) }">
                                     <div class="flex-grow-1 text-left" data-bind="text: PokemonType[$index()]"></div>
                                     <knockout data-bind="text: App.game.gems.gemWallet[$index()]() > 1e6 ? GameHelper.formatAmount(App.game.gems.gemWallet[$index()]()) : App.game.gems.gemWallet[$index()]().toLocaleString('en-US')"></knockout>
                                 </div>
 
                                 <div class="d-flex" style="gap: 0.25rem">
                                     <!-- ko foreach: Array(Gems.nEffects) -->
-                                    <div class="flex-grow-1" style="height: 2px;" data-bind="
+                                    <div
+                                        class="flex-grow-1"
+                                        style="height: 2px;"
+                                        data-bind="
                                         class: App.game.gems.isValidUpgrade($parentContext.$index(), $index()) ? (App.game.gems.hasMaxUpgrade($parentContext.$index(), $index()) ? 'bg-success' : 'bg-warning') : 'bg-success',
                                         style: { opacity: App.game.gems.isValidUpgrade($parentContext.$index(), $index()) ? 1 : 0.25 }
-                                    "></div>
+                                    "
+                                    ></div>
                                     <!-- /ko -->
                                 </div>
                             </div>
@@ -57,77 +67,101 @@
                 <div class="card my-3">
                     <div class="card-header p-1">
                         <div class="d-flex align-items-center">
-                            <img width="32px" height="32px" data-bind='attr: { src: Gems.image(gemIndex()) }'/>
+                            <img
+                                width="32px"
+                                height="32px"
+                                data-bind="attr: { src: Gems.image(gemIndex()) }"
+                            >
                             <div class="flex-grow-1 text-center">
-                                <div class="badge text-light px-1" style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="style: { 'background-color': GameConstants.TypeColor[gemIndex()] }">
-                                  <strong data-bind="text: PokemonType[gemIndex()]"></strong>
+                                <div
+                                    class="badge text-light px-1"
+                                    style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;"
+                                    data-bind="style: { 'background-color': GameConstants.TypeColor[gemIndex()] }"
+                                >
+                                    <strong data-bind="text: PokemonType[gemIndex()]"></strong>
                                 </div>
                                 <div data-bind="text: App.game.gems.gemWallet[gemIndex()]()?.toLocaleString('en-US')"></div>
                             </div>
-                            <img width="32px" height="32px" data-bind='attr: { src: Gems.image(gemIndex()) }'/>
+                            <img
+                                width="32px"
+                                height="32px"
+                                data-bind="attr: { src: Gems.image(gemIndex()) }"
+                            >
                         </div>
                     </div>
 
                     <div class="card-body">
                         <div class="card-deck">
                             <!-- ko foreach: Array(Gems.nEffects) -->
-                                <div class="card" data-bind="style: { opacity: App.game.gems.isValidUpgrade(gemIndex(), $index()) ? 1 : 0.25 }">
-                                    <div class="card-header" data-bind="text: GameConstants.camelCaseToString(GameConstants.TypeEffectiveness[$index()])"></div>
+                            <div class="card" data-bind="style: { opacity: App.game.gems.isValidUpgrade(gemIndex(), $index()) ? 1 : 0.25 }">
+                                <div class="card-header" data-bind="text: GameConstants.camelCaseToString(GameConstants.TypeEffectiveness[$index()])"></div>
 
-                                    <div class="card-body p-2">
-                                        <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                        <div class="font-weight-bold" data-bind="text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]]
+                                <div class="card-body p-2">
+                                    <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
+                                    <div class="font-weight-bold" data-bind="text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]]
                                             + (App.game.gems.getGemUpgrade(gemIndex(), $index()) * GameConstants.GEM_UPGRADE_STEP)).toLocaleString('en-US', { style: 'percent' })"></div>
 
-                                        <div class="text-center m-0 p-1 small">Versus</div>
+                                    <div class="text-center m-0 p-1 small">Versus</div>
 
-                                        <div>
-                                            <!-- ko foreach: TypeHelper.typeMatrix[gemIndex()].map((value, index) => value === TypeHelper.typeToValue($index()) ? index : -1).filter(value => value >= 0) -->
-                                            <span class="badge text-light text-uppercase px-1" style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="style: { 'background-color': GameConstants.TypeColor[$data] }">
-                                              <small><strong data-bind="text: PokemonType[$data]"></strong></small>
-                                            </span>
-                                            <!-- /ko -->
-                                        </div>
+                                    <div>
+                                        <!-- ko foreach: TypeHelper.typeMatrix[gemIndex()].map((value, index) => value === TypeHelper.typeToValue($index()) ? index : -1).filter(value => value >= 0) -->
+                                        <span
+                                            class="badge text-light text-uppercase px-1"
+                                            style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;"
+                                            data-bind="style: { 'background-color': GameConstants.TypeColor[$data] }"
+                                        >
+                                            <small><strong data-bind="text: PokemonType[$data]"></strong></small>
+                                        </span>
                                         <!-- /ko -->
-
-                                        <!-- ko ifnot: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                        <div>N / A</div>
-                                        <!-- /ko -->
-                                    </div>
-
-                                    <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                    <div class="p-0">
-                                        <div class="d-flex" style="gap: 1px">
-                                            <!-- ko foreach: [...Array(10).keys()] -->
-                                            <div class="flex-grow-1" style="height: 5px" data-bind="style: { 'background-color': GameConstants.TypeColor[gemIndex()], filter: `brightness(${App.game.gems.getGemUpgrade(gemIndex(), $parentContext.$index()) > $index() ? 1 : 0.5})` }"></div>
-                                            <!-- /ko -->
-                                        </div>
                                     </div>
                                     <!-- /ko -->
 
-                                    <!-- ko ifnot: App.game.challenges.list.disableGems.active() -->
-                                    <div class="card-footer p-0">
-                                        <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                            <!-- ko if: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
-                                            <div class="btn btn-block no-click">MAXED</div>
-                                            <!-- /ko -->
-
-                                            <!-- ko ifnot: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
-                                            <button class="btn btn-block btn-primary" data-bind="
-                                                enable: App.game.gems.canBuyGemUpgrade(gemIndex(), $index()),
-                                                click: () => { App.game.gems.buyGemUpgrade(gemIndex(), $index()); }">
-                                                Buy (<knockout data-bind="text: App.game.gems.getGemUpgradeCost(gemIndex(), $index()).toLocaleString('en-US')"></knockout><img width="18px" height="18px" data-bind='attr: { src: Gems.image(gemIndex()) }'/>)
-                                                <!-- text: `Buy ()` -->
-                                            </button>
-                                            <!-- /ko -->
-                                        <!-- /ko -->
-
-                                        <!-- ko ifnot: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                            <div class="btn btn-block no-click">N / A</div>
-                                        <!-- /ko -->
-                                    </div>
+                                    <!-- ko ifnot: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
+                                    <div>N / A</div>
                                     <!-- /ko -->
                                 </div>
+
+                                <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
+                                <div class="p-0">
+                                    <div class="d-flex" style="gap: 1px">
+                                        <!-- ko foreach: [...Array(10).keys()] -->
+                                        <div
+                                            class="flex-grow-1"
+                                            style="height: 5px"
+                                            data-bind="style: { 'background-color': GameConstants.TypeColor[gemIndex()], filter: `brightness(${App.game.gems.getGemUpgrade(gemIndex(), $parentContext.$index()) > $index() ? 1 : 0.5})` }"
+                                        ></div>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+
+                                <!-- ko ifnot: App.game.challenges.list.disableGems.active() -->
+                                <div class="card-footer p-0">
+                                    <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
+                                    <!-- ko if: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
+                                    <div class="btn btn-block no-click">MAXED</div>
+                                    <!-- /ko -->
+
+                                    <!-- ko ifnot: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
+                                    <button class="btn btn-block btn-primary" data-bind="
+                                                enable: App.game.gems.canBuyGemUpgrade(gemIndex(), $index()),
+                                                click: () => { App.game.gems.buyGemUpgrade(gemIndex(), $index()); }">
+                                        Buy (<knockout data-bind="text: App.game.gems.getGemUpgradeCost(gemIndex(), $index()).toLocaleString('en-US')"></knockout><img
+                                            width="18px"
+                                            height="18px"
+                                            data-bind="attr: { src: Gems.image(gemIndex()) }"
+                                        >)
+                                        <!-- text: `Buy ()` -->
+                                    </button>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+
+                                    <!-- ko ifnot: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
+                                    <div class="btn btn-block no-click">N / A</div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                            </div>
                             <!-- /ko -->
                         </div>
                     </div>
@@ -137,7 +171,11 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>

@@ -1,16 +1,34 @@
-<div class="modal fade noselect" id="pokemonContestModal" tabindex="-1" role="dialog" aria-labelledby="pokemonContestModalLabel">
+<div
+    class="modal fade noselect"
+    id="pokemonContestModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="pokemonContestModalLabel"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#contest-main-tab" data-toggle="tab">Contest</a>
+                        <a
+                            class="nav-link active"
+                            href="#contest-main-tab"
+                            data-toggle="tab"
+                        >Contest</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contest-prizes-tab" data-toggle="tab">Prizes</a>
+                        <a
+                            class="nav-link"
+                            href="#contest-prizes-tab"
+                            data-toggle="tab"
+                        >Prizes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contest-help-tab" data-toggle="tab">Help</a>
+                        <a
+                            class="nav-link"
+                            href="#contest-help-tab"
+                            data-toggle="tab"
+                        >Help</a>
                     </li>
                 </ul>
                 <div class="d-flex bg-secondary p-3 justify-content-around shadow">
@@ -24,41 +42,55 @@
                     </div>
                 </div>
                 <div class="tab-content my-2">
-                    <div class="tab-pane fade show active" id="contest-main-tab" role="tabpanel">
+                    <div
+                        class="tab-pane fade show active"
+                        id="contest-main-tab"
+                        role="tabpanel"
+                    >
                         <div class="d-flex flex-wrap mt-5" data-bind="foreach: App.game.pokemonContest.entries">
                             <div class="col-12 col-lg-4 px-4">
                                 <div class="small mb-1">Entry #<knockout data-bind="text: $index() + 1"></knockout></div>
                                 <div class="contest-entry-image">
                                     <div class="d-inline-block border border-secondary">
-                                        <img class="m-2" width="96" data-bind="attr: { src: $data.getPokemonImage() }" />
+                                        <img
+                                            class="m-2"
+                                            width="96"
+                                            data-bind="attr: { src: $data.getPokemonImage() }"
+                                        >
                                     </div>
                                 </div>
 
                                 <div class="contest-entry-pokemon-select mt-4">
                                     <div class="form-group text-left">
                                         <label class="small mb-0">Pokémon</label>
-                                        <select class="form-control form-control-sm"
-                                            data-bind="options: PokemonContestController.getValidPokemonList($index()), optionsText: 'displayName', optionsValue: 'name', value: $data.pokemonName, optionsCaption: 'None'">
+                                        <select class="form-control form-control-sm" data-bind="options: PokemonContestController.getValidPokemonList($index()), optionsText: 'displayName', optionsValue: 'name', value: $data.pokemonName, optionsCaption: 'None'">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="contest-entry-berry-select mt-4">
                                     <div class="form-group text-left">
                                         <label class="small mb-0">Berry</label>
-                                        <select class="form-control form-control-sm"
-                                            data-bind="options: PokemonContestController.getBerryList(),
+                                        <select class="form-control form-control-sm" data-bind="options: PokemonContestController.getBerryList(),
                                                 optionsValue: 'type', optionsText: (berry) => BerryType[berry.type], value: $data.berry, optionsCaption: 'None'">
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr class="bg-secondary" />
+                        <hr class="bg-secondary">
                         <div class="my-3">
-                            <button type="button" class="btn btn-primary w-50" data-bind="click: PokemonContestController.startContest">Enter Contest!</button>
+                            <button
+                                type="button"
+                                class="btn btn-primary w-50"
+                                data-bind="click: PokemonContestController.startContest"
+                            >Enter Contest!</button>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="contest-prizes-tab" role="tabpanel">
+                    <div
+                        class="tab-pane fade"
+                        id="contest-prizes-tab"
+                        role="tabpanel"
+                    >
                         <h2>Rewards</h2>
                         <div class="row ml-0 mr-0">
                             <!-- ko foreach: App.game.pokemonContest.prizes.filter(r => !r.claimed() && r.isVisible()) -->
@@ -85,7 +117,11 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="contest-help-tab" role="tabpanel">
+                    <div
+                        class="tab-pane fade"
+                        id="contest-help-tab"
+                        role="tabpanel"
+                    >
                         <h3>Contests</h3>
                         <p>In Pokemon Contests, you select a lineup of three Pokemon to compete in the day’s contest. Each day, there will be only one pokemon Type allowed to enter the contest.</p>
                         <p>The contestants will be judged according to one Style. Each Pokemon can be given one berry to use as part of their entry.</p>
@@ -94,29 +130,29 @@
                         <p>There are five Contest Styles. Each Pokemon’s style rating is a sum of two of their base stats.</p>
                         <p>Each Style also has an associated flavor.</p>
 
-                            The Contest Styles are:
-                            <table class="table table-bordered table-sm" style="color: inherit;">
-                                <tr>
-                                    <td class="align-middle"><b>Cool</b></td>
-                                    <td>This Style is associated with Attack, Special Defense, and Spicy flavor.</td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle"><b>Beautiful</b></td>
-                                    <td>This Style is associated with Special Attack, Defense, and Dry flavor.</td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle"><b>Cute</b></td>
-                                    <td>This Style is associated with Speed, Hit Points, and Sweet flavor.</td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle"><b>Clever</b></td>
-                                    <td>This Style is associated with Special Attack, Special Defense, and Bitter flavor.</td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle"><b>Tough</b></td>
-                                    <td>This Style is associated with Hit Points, Defense, and Sour flavor.</td>
-                                </tr>
-                            </table>
+                        The Contest Styles are:
+                        <table class="table table-bordered table-sm" style="color: inherit;">
+                            <tr>
+                                <td class="align-middle"><b>Cool</b></td>
+                                <td>This Style is associated with Attack, Special Defense, and Spicy flavor.</td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle"><b>Beautiful</b></td>
+                                <td>This Style is associated with Special Attack, Defense, and Dry flavor.</td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle"><b>Cute</b></td>
+                                <td>This Style is associated with Speed, Hit Points, and Sweet flavor.</td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle"><b>Clever</b></td>
+                                <td>This Style is associated with Special Attack, Special Defense, and Bitter flavor.</td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle"><b>Tough</b></td>
+                                <td>This Style is associated with Hit Points, Defense, and Sour flavor.</td>
+                            </tr>
+                        </table>
                         </p>
                         <h3>Ranks</h3>
                         <p>Getting more Style Points in a contest will give a reward of Contest Tokens. If your score is high enough, you may achieve a Rank for the contest.</p>

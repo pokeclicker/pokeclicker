@@ -1,39 +1,97 @@
-<div class="modal fade" id="breedingModal" tabindex="-1" role="dialog"
-aria-labelledby="breedingModalLabel" aria-hidden="true">
+<div
+    class="modal fade"
+    id="breedingModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="breedingModalLabel"
+    aria-hidden="true"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-xl breeding-modal" role="document">
         <div class="modal-content">
             <div class="modal-header p-0">
                 <div class="row w-100 m-0">
                     <div class="col-12 p-0">
                         <ul class="nav nav-tabs nav-fill w-100">
-                            <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab" onclick="$('#breeding-fireall').show()">Pokémon</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').show()">Eggs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').show()">Fossils</a></li>
-                            <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').show()">Help</a></li>
-                            <li class="d-lg-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
+                            <li class="nav-item"><a
+                                    class="nav-link active"
+                                    href="#breeding-pokemon"
+                                    data-toggle="tab"
+                                    onclick="$('#breeding-fireall').show()"
+                                >Pokémon</a></li>
+                            <li class="nav-item"><a
+                                    class="nav-link"
+                                    href="#breeding-eggs"
+                                    data-toggle="tab"
+                                    onclick="$('#breeding-fireall').show()"
+                                >Eggs</a></li>
+                            <li class="nav-item"><a
+                                    class="nav-link"
+                                    href="#breeding-fossils"
+                                    data-toggle="tab"
+                                    onclick="$('#breeding-fireall').show()"
+                                >Fossils</a></li>
+                            <li
+                                class="nav-item"
+                                data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()"
+                                onclick="$('#breeding-fireall').show()"
+                            ><a
+                                    class="nav-link"
+                                    href="#breeding-helpers"
+                                    data-toggle="tab"
+                                >Helpers</a></li>
+                            <li class="nav-item"><a
+                                    class="nav-link"
+                                    href="#breeding-help"
+                                    data-toggle="tab"
+                                    onclick="$('#breeding-fireall').show()"
+                                >Help</a></li>
+                            <li class="d-lg-block d-none"><button
+                                    type="button"
+                                    class="btn btn-danger"
+                                    data-dismiss="modal"
+                                    style="font-size: 18px; font-weight: 700;"
+                                >×</button></li>
                         </ul>
                     </div>
                     <div class="col-12 d-lg-block d-none py-2 px-3" style="min-height: 55px;">
                         <div class="float-left">
-                            <button type="button" class="btn btn-warning hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
+                            <button
+                                type="button"
+                                class="btn btn-warning hatchery-warnings"
+                                style="pointer-events: none;"
+                                data-bind="visible: !App.game.breeding.hasFreeEggSlot()"
+                            >
                                 You don't have any free egg slots.
                             </button>
-                            <button type="button" class="btn btn-danger hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
+                            <button
+                                type="button"
+                                class="btn btn-danger hatchery-warnings"
+                                style="pointer-events: none;"
+                                data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()"
+                            >
                                 Your breeding queue is full or disabled.
                             </button>
                         </div>
                         <div class="float-right d-lg-block d-none">
                             <knockout class="mx-2" data-bind="foreach: App.game.breeding.hatcheryHelpers.hired()">
-                                <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
+                                <img
+                                    class="pixelated"
+                                    src=""
+                                    height="24px"
+                                    data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
                                 tooltip: {
                                     title: $data.tooltip(),
                                     trigger: 'hover',
                                     placement:'top',
                                     html: true,
-                                }">
+                                }"
+                                >
                             </knockout>
-                            <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {
+                            <button
+                                id="breeding-fireall"
+                                type="button"
+                                class="btn btn-danger"
+                                data-bind="attr : {
                                 disabled : !App.game.breeding.hatcheryHelpers.hired().length},
                                 click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})},
                                 tooltip: {
@@ -41,7 +99,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     trigger: 'hover',
                                     placement:'top',
                                     html: true,
-                                }">Fire All
+                                }"
+                            >Fire All
                             </button>
                         </div>
                     </div>
@@ -53,8 +112,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <div class="tab-pane fade in active show" id="breeding-pokemon">
                         <div class="row">
                             <div class="col-12 d-lg-none d-block">
-                                <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                                        data-target="#breeding-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
+                                <button
+                                    class="w-100 my-1 btn btn-secondary"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#breeding-filter-container"
+                                    aria-expanded="false"
+                                    aria-controls="pokedex-filter-container"
+                                >
                                     Filters and Settings
                                 </button>
                             </div>
@@ -68,38 +133,58 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <div class="form-row text-left">
                                             <div class="form-group col-lg-12 col-12">
                                                 <label for="breeding-filter-nameID">Name or ID</label>
-                                                <input id="breeding-filter-nameID" autocomplete="off" class="form-control" placeholder="Search here"
-                                                    oninput="BreedingController.formatSearch(this.value)" data-bind="value: BreedingController.getSearchString()" />
+                                                <input
+                                                    id="breeding-filter-nameID"
+                                                    autocomplete="off"
+                                                    class="form-control"
+                                                    placeholder="Search here"
+                                                    oninput="BreedingController.formatSearch(this.value)"
+                                                    data-bind="value: BreedingController.getSearchString()"
+                                                >
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingType1Filter: Settings.getSetting('breedingType1Filter') } -->
                                                 <label>Types</label>
-                                                <select id="breeding-filter-type1" class="custom-select"
-                                                        data-bind="options: breedingType1Filter.options,
+                                                <select
+                                                    id="breeding-filter-type1"
+                                                    class="custom-select"
+                                                    data-bind="options: breedingType1Filter.options,
                                                                 optionsValue: 'value',
                                                                 optionsText: 'text',
-                                                                value: breedingType1Filter.observableValue">
+                                                                value: breedingType1Filter.observableValue"
+                                                >
                                                 </select>
                                                 <!-- /ko -->
                                             </div>
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingType2Filter: Settings.getSetting('breedingType2Filter') } -->
                                                 <label> </label>
-                                                <select id="breeding-filter-type2" class="custom-select"
-                                                        data-bind="options: breedingType2Filter.options,
+                                                <select
+                                                    id="breeding-filter-type2"
+                                                    class="custom-select"
+                                                    data-bind="options: breedingType2Filter.options,
                                                                 optionsValue: 'value',
                                                                 optionsText: 'text',
-                                                                value: breedingType2Filter.observableValue">
+                                                                value: breedingType2Filter.observableValue"
+                                                >
                                                 </select>
                                                 <!-- /ko -->
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingRegionFilter: Settings.getSetting('breedingRegionFilter') } -->
-                                                <label for="breeding-filter-region" data-bind="text: breedingRegionFilter.displayName">Region(s)</label><br/>
+                                                <label for="breeding-filter-region" data-bind="text: breedingRegionFilter.displayName">Region(s)</label><br>
                                                 <div class="dropdown show">
-                                                    <button id="breeding-filter-region" type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: BreedingController.getRegionFilterString()">
+                                                    <button
+                                                        id="breeding-filter-region"
+                                                        type="button"
+                                                        class="text-left custom-select col-12 btn btn-dropdown"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true"
+                                                        aria-expanded="false"
+                                                        data-bind="text: BreedingController.getRegionFilterString()"
+                                                    >
                                                         Regions
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12">
@@ -124,10 +209,17 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <!-- ko let: { breedingCategoryFilter: Settings.getSetting('breedingCategoryFilter') } -->
                                                 <label for="breeding-filter-category" data-bind="text: breedingCategoryFilter.displayName">Category</label>
                                                 <div class="dropdown show">
-                                                    <button id="breeding-filter-category" type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                    <button
+                                                        id="breeding-filter-category"
+                                                        type="button"
+                                                        class="text-left custom-select col-12 btn btn-dropdown"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true"
+                                                        aria-expanded="false"
                                                         data-bind="text: breedingCategoryFilter.observableValue() == -1 ? 'All'
                                                             : breedingCategoryFilter.observableValue() == -2 ? 'Categorized'
-                                                            : PokemonCategories.categories().find(c => c.id == breedingCategoryFilter.observableValue()).name()">
+                                                            : PokemonCategories.categories().find(c => c.id == breedingCategoryFilter.observableValue()).name()"
+                                                    >
                                                         Categories
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12 category-dropdown">
@@ -144,7 +236,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         </div>
                                                         <!-- /ko-->
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                        <a
+                                                            class="dropdown-item dropdown-text"
+                                                            href="#categoryModal"
+                                                            data-toggle="modal"
+                                                        >
                                                             <i>Edit categories</i>
                                                         </a>
                                                     </div>
@@ -155,22 +251,30 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingShinyFilter: Settings.getSetting('breedingShinyFilter') } -->
                                                 <label for="breeding-filter-shiny-status" data-bind="text: breedingShinyFilter.displayName">Shiny Status</label>
-                                                <select id="breeding-filter-shiny-status" autocomplete="off" class="custom-select"
+                                                <select
+                                                    id="breeding-filter-shiny-status"
+                                                    autocomplete="off"
+                                                    class="custom-select"
                                                     data-bind="options: breedingShinyFilter.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: breedingShinyFilter.observableValue">
+                                                        value: breedingShinyFilter.observableValue"
+                                                >
                                                 </select>
                                                 <!-- /ko -->
                                             </div>
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingPokerusFilter: Settings.getSetting('breedingPokerusFilter') } -->
                                                 <label for="breeding-filter-pokerus-status" data-bind="text: breedingPokerusFilter.displayName">Pokérus Status</label>
-                                                <select id="breeding-filter-pokerus-status" autocomplete="off" class="custom-select"
+                                                <select
+                                                    id="breeding-filter-pokerus-status"
+                                                    autocomplete="off"
+                                                    class="custom-select"
                                                     data-bind="options: breedingPokerusFilter.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: breedingPokerusFilter.observableValue">
+                                                        value: breedingPokerusFilter.observableValue"
+                                                >
                                                 </select>
                                                 <!-- /ko -->
                                             </div>
@@ -179,11 +283,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <div class="form-group col-lg-12 col-12">
                                                 <!-- ko let: { breedingUniqueTransformationFilter: Settings.getSetting('breedingUniqueTransformationFilter') } -->
                                                 <label for="breeding-filter-unique-transformation" data-bind="text: breedingUniqueTransformationFilter.displayName">Unique Transformations</label>
-                                                <select id="breeding-filter-unique-transformation" autocomplete="off" class="custom-select"
+                                                <select
+                                                    id="breeding-filter-unique-transformation"
+                                                    autocomplete="off"
+                                                    class="custom-select"
                                                     data-bind="options: breedingUniqueTransformationFilter.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: breedingUniqueTransformationFilter.observableValue">
+                                                        value: breedingUniqueTransformationFilter.observableValue"
+                                                >
                                                 </select>
                                                 <!-- /ko -->
                                             </div>
@@ -193,8 +301,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <!-- ko let: { breedingHideAltFilter: Settings.getSetting('breedingHideAltFilter') } -->
                                                 <label for="breeding-filter-hide-alternate" data-bind="text: breedingHideAltFilter.displayName">Hide alternate forms</label>
                                                 <label class="form-check-label toggler-wrapper style-1 float-right">
-                                                    <input class="form-check-input" type="checkbox" id="breedingHideAlternateFilter"
-                                                        data-bind="checked: breedingHideAltFilter.observableValue">
+                                                    <input
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                        id="breedingHideAlternateFilter"
+                                                        data-bind="checked: breedingHideAltFilter.observableValue"
+                                                    >
                                                     <div class="toggler-slider">
                                                         <div class="toggler-knob"></div>
                                                     </div>
@@ -209,11 +321,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingDisplayTextSetting: Settings.getSetting('breedingDisplayTextSetting') } -->
                                                 <label for="breeding-setting-display-text" data-bind="text: breedingDisplayTextSetting.displayName">Display Value</label>
-                                                <select id="breeding-setting-display-text" autocomplete="off" class="custom-select"
+                                                <select
+                                                    id="breeding-setting-display-text"
+                                                    autocomplete="off"
+                                                    class="custom-select"
                                                     data-bind="options: breedingDisplayTextSetting.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: breedingDisplayTextSetting.observableValue">
+                                                        value: breedingDisplayTextSetting.observableValue"
+                                                >
                                                 </select>
                                                 <!-- /ko -->
                                             </div>
@@ -221,11 +337,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <div class="form-group col-lg-6 col-6">
                                                 <!-- ko let: { breedingRegionalAttackDebuffSetting: Settings.getSetting('breedingRegionalAttackDebuffSetting') } -->
                                                 <label for="breeding-setting-regional-attack-debuff" data-bind="text: breedingRegionalAttackDebuffSetting.displayName">Regional Debuff</label>
-                                                <select id="breeding-setting-regional-attack-debuff" autocomplete="off" class="custom-select"
+                                                <select
+                                                    id="breeding-setting-regional-attack-debuff"
+                                                    autocomplete="off"
+                                                    class="custom-select"
                                                     data-bind="options: breedingRegionalAttackDebuffSetting.getValidOptions(),
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: breedingRegionalAttackDebuffSetting.observableValue">
+                                                        value: breedingRegionalAttackDebuffSetting.observableValue"
+                                                >
                                                 </select>
                                                 <!-- /ko -->
                                             </div>
@@ -234,25 +354,38 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <!-- ko let: { hatcherySort: Settings.getSetting('hatcherySort') } -->
                                                 <label for="hatchery-setting-sort" data-bind="text: hatcherySort.displayName">Sort</label>
                                                 <div class="input-group">
-                                                    <select id="hatchery-setting-sort" autocomplete="off" class="custom-select"
+                                                    <select
+                                                        id="hatchery-setting-sort"
+                                                        autocomplete="off"
+                                                        class="custom-select"
                                                         data-bind="options: hatcherySort.options,
                                                             optionsValue: 'value',
                                                             optionsText: 'text',
-                                                            value: hatcherySort.observableValue">
+                                                            value: hatcherySort.observableValue"
+                                                    >
                                                     </select>
                                                     <div class="input-group-append bg-primary text-light">
                                                         <!-- ko let: { hatcherySortDirection: Settings.getSetting('hatcherySortDirection') } -->
-                                                        <label for="hatchery-setting-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
+                                                        <label
+                                                            for="hatchery-setting-sort-direction"
+                                                            class="clickable m-0 pl-2 pr-2"
+                                                            style="font-size: 22px;"
                                                             data-bind="text: hatcherySortDirection.observableValue() ? '⥄' : '⥂',
                                                                 tooltip: {
                                                                     title: hatcherySortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
                                                                     trigger: 'hover',
                                                                     placement:'top'
-                                                                }">
+                                                                }"
+                                                        >
                                                             ⥂
                                                         </label>
-                                                        <input id="hatchery-setting-sort-direction" style="vertical-align: middle" class="hidden" type='checkbox'
-                                                            data-bind="checked: hatcherySortDirection.observableValue"/>
+                                                        <input
+                                                            id="hatchery-setting-sort-direction"
+                                                            style="vertical-align: middle"
+                                                            class="hidden"
+                                                            type="checkbox"
+                                                            data-bind="checked: hatcherySortDirection.observableValue"
+                                                        >
                                                         <!-- /ko -->
                                                     </div>
                                                 </div>
@@ -266,14 +399,18 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <!-- Category Mode-->
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <button type="button" class="btn btn-primary btn-block" data-bind="
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-primary btn-block"
+                                                        data-bind="
                                                         click: () => categoryModeEnabled(!categoryModeEnabled()),
                                                         text: categoryModeEnabled() ? 'Disable Category Mode' : 'Enable Category Mode',
                                                         tooltip: {
                                                             title: 'Use Category Mode to quickly assign and remove Pokémon from categories. Select a category then click the desired Pokémon to add or remove.',
                                                             placement: 'top',
                                                             trigger: 'hover'
-                                                        }">
+                                                        }"
+                                                    >
                                                         Enable Category Mode
                                                     </button>
                                                 </div>
@@ -283,8 +420,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <div class="form-group mb-1">
                                                     <label>Selected Category</label>
                                                     <div class="dropdown show">
-                                                        <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                            data-bind="text: PokemonCategories.categories().find(c => c.id == categoryModeSelected()).name()">
+                                                        <button
+                                                            type="button"
+                                                            class="text-left custom-select col-12 btn btn-dropdown"
+                                                            data-toggle="dropdown"
+                                                            aria-haspopup="true"
+                                                            aria-expanded="false"
+                                                            data-bind="text: PokemonCategories.categories().find(c => c.id == categoryModeSelected()).name()"
+                                                        >
                                                             Select A Category
                                                         </button>
                                                         <div class="border-secondary dropdown-menu col-12 category-dropdown" data-bind="foreach: PokemonCategories.categories">
@@ -297,21 +440,29 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 </div>
                                             </div>
                                             <div class="form-group col-6">
-                                                <button type="button" class="btn btn-success btn-block" data-bind="tooltip: {
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-success btn-block"
+                                                    data-bind="tooltip: {
                                                     title: 'Add all Pokémon matching the current filters to this category.',
                                                     placement: 'bottom',
                                                     trigger: 'hover'
                                                 },
-                                                click: () => PartyController.addCategory(BreedingController.hatcheryFilteredList().filter(p => p.isHatchable()), categoryModeSelected())">Add All</button>
+                                                click: () => PartyController.addCategory(BreedingController.hatcheryFilteredList().filter(p => p.isHatchable()), categoryModeSelected())"
+                                                >Add All</button>
                                             </div>
                                             <div class="form-group col-6">
-                                                <button type="button" class="btn btn-danger btn-block" data-bind="tooltip: {
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-danger btn-block"
+                                                    data-bind="tooltip: {
                                                     title: 'Remove all Pokémon matching the current filters from this category.',
                                                     placement: 'bottom',
                                                     trigger: 'hover'
                                                 },
                                                 disable: categoryModeSelected() === 0,
-                                                click: () => PartyController.removeCategory(BreedingController.hatcheryFilteredList().filter(p => p.isHatchable()), categoryModeSelected())">Remove All</button>
+                                                click: () => PartyController.removeCategory(BreedingController.hatcheryFilteredList().filter(p => p.isHatchable()), categoryModeSelected())"
+                                                >Remove All</button>
                                             </div>
                                             <!-- /ko -->
                                         </div>
@@ -323,7 +474,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <div class="col-lg-9 col-12 pokemon-list" id="breeding-pokemon-list-container">
                                 <div class="scrolling-div-breeding-list">
                                     <!-- Check if the player has any level 100 Pokémon or if they have any eggs -->
-                                    <button type="button" class="btn btn-danger hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: DisplayObservables.modalState.breedingModal !== 'hidden' && !App.game.party.hasMaxLevelPokemon()">
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger hatchery-warnings w-100"
+                                        style="pointer-events: none;"
+                                        data-bind="visible: DisplayObservables.modalState.breedingModal !== 'hidden' && !App.game.party.hasMaxLevelPokemon()"
+                                    >
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
                                     <knockout data-bind="using: lazyLoad('lazyHatcheryList', $element, BreedingController.viewSortedFilteredList, { pageSize: 60, reset: BreedingController.resetHatcheryFlag }), as: 'lazyHatcheryList'">
@@ -335,21 +491,41 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled',
                                                 css: { 'category-highlight': categoryModeEnabled() && $data.category.includes(categoryModeSelected()) }">
                                                 <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
-                                                <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
-                                                <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
+                                                <img
+                                                    class="breeding-shadow-icon shadow-icon"
+                                                    src="assets/images/status/shadow.svg"
+                                                    data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"
+                                                >
+                                                <img
+                                                    class="breeding-shadow-icon shadow-icon"
+                                                    src="assets/images/status/purified.svg"
+                                                    data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"
+                                                >
                                                 <div class="breedingListPokerus" data-bind="if: App.game.party.getPokemon($data.id)?.pokerus">
-                                                    <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
+                                                    <img
+                                                        width="32px"
+                                                        src=""
+                                                        data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"
+                                                    >
                                                 </div>
-                                                <img src="" class="pokedex-pokemon-sprite" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
+                                                <img
+                                                    src=""
+                                                    class="pokedex-pokemon-sprite"
+                                                    data-bind="attr:{ src: PokemonHelper.getImage($data.id) }"
+                                                >
                                                 <span class="pokedex-bottom-text" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
-                                                <a class="overlay" href="#breed" data-bind="click: function() {
+                                                <a
+                                                    class="overlay"
+                                                    href="#breed"
+                                                    data-bind="click: function() {
                                                     if (categoryModeEnabled()) {
                                                         $data.toggleCategory(categoryModeSelected());
                                                     } else {
                                                         App.game.breeding.addPokemonToHatchery($data);
                                                         App.game.breeding.checkCloseModal();
                                                     }
-                                                }"></a>
+                                                }"
+                                                ></a>
                                                 <span class="pokedex-top-text text-truncate px-1" data-bind="text: $data.displayName,
                                                     tooltip: {
                                                         title: categoryModeEnabled() ? '' : PokemonHelper.displayName($data.name),
@@ -367,37 +543,59 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         </div>
                                                     </div>
                                                     <div class="border-secondary dropdown-menu multiselect-dropdown category-dropdown px-1">
-                                                        <div class="form-check d-flex align-items-center", data-bind="with: PokemonCategories.categories().find(c => c.id === 0), as: 'pokemonCategory'">
-                                                            <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
+                                                        <div
+                                                            class="form-check d-flex align-items-center"
+                                                            ,
+                                                            data-bind="with: PokemonCategories.categories().find(c => c.id === 0), as: 'pokemonCategory'"
+                                                        >
+                                                            <input
+                                                                type="checkbox"
+                                                                class="form-check-input mt-0"
+                                                                style="cursor: pointer;"
                                                                 data-bind="attr: { id: `${$parent.id}-category0` },
                                                                     checked: pokemon.isUncategorized,
                                                                     disable: pokemon.isUncategorized,
-                                                                    click: () => { pokemon.resetCategory(); return true; }">
-                                                            <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
+                                                                    click: () => { pokemon.resetCategory(); return true; }"
+                                                            >
+                                                            <label
+                                                                class="form-check-label text-truncate w-100 p-1"
+                                                                style="max-width: 200px; cursor: pointer;"
                                                                 data-bind="
                                                                     text: pokemonCategory.name,
                                                                     attr: { for: `${$parent.id}-category0` },
                                                                     style: { color: GameHelper.isColorLight(pokemonCategory.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight(pokemonCategory.color()) ? 'white' : 'black'}` }"
-                                                                onclick="event.stopPropagation();"></label>
+                                                                onclick="event.stopPropagation();"
+                                                            ></label>
                                                         </div>
                                                         <div class="dropdown-divider"></div>
                                                         <!-- ko foreach: { data: PokemonCategories.playerCategories, as: 'pokemonCategory' } -->
                                                         <div class="form-check d-flex align-items-center">
-                                                            <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
+                                                            <input
+                                                                type="checkbox"
+                                                                class="form-check-input mt-0"
+                                                                style="cursor: pointer;"
                                                                 data-bind="
                                                                     attr: { id: `${$parent.id}-category${pokemonCategory.id}` },
                                                                     checked: pokemon._category,
-                                                                    checkedValue: pokemonCategory.id">
-                                                            <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
+                                                                    checkedValue: pokemonCategory.id"
+                                                            >
+                                                            <label
+                                                                class="form-check-label text-truncate w-100 p-1"
+                                                                style="max-width: 200px; cursor: pointer;"
                                                                 data-bind="
                                                                     text: pokemonCategory.name,
                                                                     attr: { for: `${$parent.id}-category${pokemonCategory.id}` },
                                                                     style: { color: GameHelper.isColorLight(pokemonCategory.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight(pokemonCategory.color()) ? 'white' : 'black'}` }"
-                                                                onclick="event.stopPropagation();"></label>
+                                                                onclick="event.stopPropagation();"
+                                                            ></label>
                                                         </div>
                                                         <!-- /ko -->
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                        <a
+                                                            class="dropdown-item dropdown-text"
+                                                            href="#categoryModal"
+                                                            data-toggle="modal"
+                                                        >
                                                             <i>Edit categories</i>
                                                         </a>
                                                     </div>
@@ -415,18 +613,30 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                     <div class="tab-pane fade" id="breeding-eggs">
                         <div class="scrolling-div-breeding-list">
-                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length">
+                            <button
+                                type="button"
+                                class="btn btn-warning hatchery-warnings w-100"
+                                style="pointer-events: none;"
+                                data-bind="visible: !Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length"
+                            >
                                 You don't have any eggs to breed.
                             </button>
                             <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length -->
                             <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]())">
                                 <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
                                     <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.camelCaseToString(GameConstants.humanifyString($data))">egg</span>
-                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
+                                    <img
+                                        src=""
+                                        width="80px"
+                                        data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }"
+                                    >
                                     <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player.itemList[$data]().toLocaleString('en-US')">amount</span>
-                                    <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); App.game.breeding.checkCloseModal(); }"></a>
-                                    <knockout style="position: absolute; right: 2px; top: -14px;"
-                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
+                                    <a
+                                        class="overlay"
+                                        href="#breed"
+                                        data-bind="click: function() { ItemList[$data].use(); App.game.breeding.checkCloseModal(); }"
+                                    ></a>
+                                    <knockout style="position: absolute; right: 2px; top: -14px;" data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"></knockout>
                                 </li>
                             </ul>
                             <!-- /ko -->
@@ -435,18 +645,30 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                     <div class="tab-pane fade" id="breeding-fossils">
                         <div class="scrolling-div-breeding-list">
-                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0).length">
+                            <button
+                                type="button"
+                                class="btn btn-warning hatchery-warnings w-100"
+                                style="pointer-events: none;"
+                                data-bind="visible: !UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0).length"
+                            >
                                 You don't have any fossils to breed.
                             </button>
                             <!-- ko if: UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0).length -->
                             <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0)">
                                 <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
                                     <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
-                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
+                                    <img
+                                        src=""
+                                        width="80px"
+                                        data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }"
+                                    >
                                     <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player.itemList[$data.itemName]().toLocaleString('en-US')">amount</span>
-                                    <a class="overlay" href="#breed" data-bind="click: function() { UndergroundController.sellMineItem($data); App.game.breeding.checkCloseModal(); }"></a>
-                                    <knockout style="position: absolute; right: 2px; top: -14px;"
-                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data.name]) } }"/>
+                                    <a
+                                        class="overlay"
+                                        href="#breed"
+                                        data-bind="click: function() { UndergroundController.sellMineItem($data); App.game.breeding.checkCloseModal(); }"
+                                    ></a>
+                                    <knockout style="position: absolute; right: 2px; top: -14px;" data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data.name]) } }"></knockout>
                                 </li>
                             </ul>
                             <!-- /ko -->
@@ -454,11 +676,20 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     </div>
 
                     <div class="tab-pane fade" id="breeding-helpers">
-                        <div class="row m-0 justify-content-center" data-bind="foreach: App.game.breeding.hatcheryHelpers.available()" style="max-width: 100%;">
+                        <div
+                            class="row m-0 justify-content-center"
+                            data-bind="foreach: App.game.breeding.hatcheryHelpers.available()"
+                            style="max-width: 100%;"
+                        >
                             <div class="card text-left col-md-3 col-sm-6 col-xs-12 p-0">
                                 <h5 class="card-header">
                                     <knockout data-bind="text: $data.name">Name</knockout>
-                                    <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                    <img
+                                        class="float-right pixelated"
+                                        src=""
+                                        height="24px"
+                                        data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }"
+                                    >
                                 </h5>
                                 <div class="card-body p-0">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
@@ -495,16 +726,24 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <td colspan="2" class="p-0">
                                                     <div class="progress">
                                                         <!-- ko if: $data.hatchBonus() < 50 -->
-                                                        <div class="progress-bar bg-primary" role="progressbar"
+                                                        <div
+                                                            class="progress-bar bg-primary"
+                                                            role="progressbar"
                                                             data-bind="attr:{ style: 'width:' + (($data.hatched() - $data.prevBonus()) / ($data.nextBonus() - $data.prevBonus())) * 100 + '%' }"
-                                                            aria-valuemin="0" aria-valuemax="100">
+                                                            aria-valuemin="0"
+                                                            aria-valuemax="100"
+                                                        >
                                                             <span data-bind="text: `${$data.hatchBonus()}%`" class="text-left pl-1">0%</span>
                                                             <span data-bind="text: ($data.hatched() - $data.prevBonus()) + ' / ' + ($data.nextBonus() - $data.prevBonus()) + ' hatches'"></span>
                                                             <span data-bind="text: `${($data.hatchBonus() + 0.1).toFixed(1)}%`" class="text-right pr-1">0.1%</span>
                                                         </div>
                                                         <!-- /ko -->
                                                         <!-- ko if: $data.hatchBonus() >= 50 -->
-                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%">
+                                                        <div
+                                                            class="progress-bar bg-primary"
+                                                            role="progressbar"
+                                                            style="width: 100%"
+                                                        >
                                                             <span>MAX BONUS!</span>
                                                         </div>
                                                         <!-- /ko -->
@@ -515,15 +754,26 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <td class="text-left align-middle">Sort:</td>
                                                 <td class="text-center align-middle">
                                                     <div class="input-group input-group-sm">
-                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => ![SortOptions.level, SortOptions.attack].includes(o.value)), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
+                                                        <select
+                                                            autocomplete="off"
+                                                            class="custom-select"
+                                                            data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => ![SortOptions.level, SortOptions.attack].includes(o.value)), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"
+                                                        ></select>
                                                         <div class="input-group-append bg-primary text-light">
-                                                            <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
+                                                            <label
+                                                                class="clickable m-0 px-2"
+                                                                style="font-size: 20px;"
+                                                                data-bind="
                                                                 attr: {for: 'hatcheryHelperSortDirection' + $index() },
                                                                 text: $data.sortDirection() ? '⥄' : '⥂',
                                                                 tooltip: { title: $data.sortDirection() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
-                                                                ">⥂</label>
-                                                            <input class="hidden" type="checkbox"
-                                                                data-bind="attr: { id: 'hatcheryHelperSortDirection' + $index() }, checked:  $data.sortDirection" />
+                                                                "
+                                                            >⥂</label>
+                                                            <input
+                                                                class="hidden"
+                                                                type="checkbox"
+                                                                data-bind="attr: { id: 'hatcheryHelperSortDirection' + $index() }, checked:  $data.sortDirection"
+                                                            >
                                                         </div>
                                                     </div>
                                                 </td>
@@ -557,16 +807,24 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <td colspan="2" class="text-center">
                                                     <div class="position-relative">
                                                         <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input mt-1" data-bind="checked: $data.useHatcheryFilters,
-                                                                attr: { id: `hatcheryHelperUseFilters${$index()}` }">
+                                                            <input
+                                                                type="checkbox"
+                                                                class="form-check-input mt-1"
+                                                                data-bind="checked: $data.useHatcheryFilters,
+                                                                attr: { id: `hatcheryHelperUseFilters${$index()}` }"
+                                                            >
                                                             <label class="form-check-label" data-bind="attr: { for: `hatcheryHelperUseFilters${$index()}` }">Use Hatchery Filters</label>
                                                         </div>
-                                                        <div class="position-absolute" style="top:0; right: 0;" data-bind="tooltip: {
+                                                        <div
+                                                            class="position-absolute"
+                                                            style="top:0; right: 0;"
+                                                            data-bind="tooltip: {
                                                             html: true,
                                                             title: 'When this option is enabled Hatchery Helpers will use the filters and settings selected in the Hatchery in addition to their own settings. Disabling this option will allow them to work independently and ignore the Hatchery filters.',
                                                             placement: 'top',
                                                             trigger: 'hover'
-                                                        }">ⓘ</div>
+                                                        }"
+                                                        >ⓘ</div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -619,38 +877,58 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             </div>
             <div class="modal-footer d-lg-none d-flex">
                 <div class="mr-auto">
-                    <button type="button" class="btn btn-warning hatchery-warnings"
+                    <button
+                        type="button"
+                        class="btn btn-warning hatchery-warnings"
                         data-bind="visible: !App.game.breeding.hasFreeEggSlot(),
                         tooltip: {
                             title: 'You don\'t have any free egg slots.',
                             trigger: 'hover',
                             placement: 'top',
                             boundary: 'window'
-                        }">
+                        }"
+                    >
                         ⓘ
                     </button>
-                    <button type="button" class="btn btn-danger hatchery-warnings"
+                    <button
+                        type="button"
+                        class="btn btn-danger hatchery-warnings"
                         data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots(),
                         tooltip: {
                             title: 'Your breeding queue is full or disabled.',
                             trigger: 'hover',
                             placement: 'top',
                             boundary: 'window'
-                        }">
+                        }"
+                    >
                         ⓘ
                     </button>
                 </div>
                 <knockout class="" data-bind="foreach: App.game.breeding.hatcheryHelpers.hired()">
-                    <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
+                    <img
+                        class="pixelated"
+                        src=""
+                        height="24px"
+                        data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
                     tooltip: {
                         title: $data.tooltip(),
                         trigger: 'hover',
                         placement:'top',
                         html: true,
-                    }">
+                    }"
+                    >
                 </knockout>
-                <button id="breeding-fireall-footer" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" >Fire All</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    id="breeding-fireall-footer"
+                    type="button"
+                    class="btn btn-danger"
+                    data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}"
+                >Fire All</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>

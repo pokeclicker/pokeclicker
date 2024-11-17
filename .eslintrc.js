@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 module.exports = {
     root: true,
     'env': {
@@ -9,14 +10,40 @@ module.exports = {
         'Atomics': 'readonly',
         'SharedArrayBuffer': 'readonly',
     },
-    'parser': '@typescript-eslint/parser',
-    'parserOptions': {
-        'project': [
-            './tsconfig.eslint.json',
-            './tsconfig.json',
+    rules: {
+        'no-restricted-syntax': [
+            'error',
+            {
+                'selector': "Literal[value=/\\.\\.\\u002Fassets/]",
+                'message': "Use 'assets/' instead of '../assets/'",
+            },
         ],
+        '@html-eslint/no-restricted-attr-values': ["error",  {
+            attrPatterns: [".*"],
+            attrValuePatterns: ["\.\./assets.*"],
+            message: "Use 'assets/' instead of '../assets/'"
+        }]
     },
-    'extends': ['plugin:@typescript-eslint/recommended'],
+    'overrides': [
+        {
+            'files': ['*.html'],
+            'plugins': ['@html-eslint'],
+            'parser': '@html-eslint/parser',
+            'extends': ['plugin:@html-eslint/recommended'],
+            'rules': {
+                '@html-eslint/element-newline': 'off',
+                '@html-eslint/require-img-alt': 'off',
+            }
+        },
+        {
+            'files': ['*.ts'],
+            'parser': '@typescript-eslint/parser',
+            'parserOptions': {
+                'tsconfigRootDir': '.',
+                'project': ['./tsconfig.json'],
+            },
+            'plugins': ['@typescript-eslint'],
+            'extends': ['plugin:@typescript-eslint/recommended'],
     'rules': {
         '@typescript-eslint/member-ordering': ['off'],
         '@typescript-eslint/no-namespace': 'off',
@@ -52,4 +79,6 @@ module.exports = {
         'no-sparse-arrays': 'error',
         'dot-notation': 'error',
     },
+        },
+    ],
 };

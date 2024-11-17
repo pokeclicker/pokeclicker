@@ -1,8 +1,19 @@
-<div class="modal noselect fade" id="pokemonVitaminExpandedModal" tabindex="-1" role="dialog" aria-labelledby="pokemonVitaminExpandedModal">
+<div
+    class="modal noselect fade"
+    id="pokemonVitaminExpandedModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="pokemonVitaminExpandedModal"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
-                <h5 class="modal-title text-light">Vitamins</h5>&nbsp; <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header bg-dark text-light" style="justify-content: space-around;">
+                <h5 class="modal-title text-light">Vitamins</h5>&nbsp; <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -14,27 +25,41 @@
                     <div class="form-row m-0" id="multivitamin-filters">
                         <div class="form-group col-6 col-lg-4 m-0 p-0">
                             <label for="multivitamin-search">Search</label>
-                            <input id="multivitamin-search" autocomplete="off" class="form-control" placeholder="Search here" data-bind="textInput: Settings.getSetting('vitaminSearchFilter').observableValue" />
+                            <input
+                                id="multivitamin-search"
+                                autocomplete="off"
+                                class="form-control"
+                                placeholder="Search here"
+                                data-bind="textInput: Settings.getSetting('vitaminSearchFilter').observableValue"
+                            >
                         </div>
                         <div class="form-group col-6 col-lg-2 m-0 p-0">
                             <!-- ko let: { vitaminRegionFilter: Settings.getSetting('vitaminRegionFilter') } -->
                             <label for="multivitamin-region-filter">Region</label>
-                            <select id="multivitamin-region-filter" autocomplete="off" class="custom-select"
+                            <select
+                                id="multivitamin-region-filter"
+                                autocomplete="off"
+                                class="custom-select"
                                 data-bind="options: vitaminRegionFilter.getValidOptions(),
                                     optionsValue: 'value',
                                     optionsText: 'text',
-                                    value: vitaminRegionFilter.observableValue">
+                                    value: vitaminRegionFilter.observableValue"
+                            >
                             </select>
                             <!-- /ko -->
                         </div>
                         <div class="form-group col-6 col-lg-2 m-0 p-0">
                             <!-- ko let: { vitaminTypeFilter: Settings.getSetting('vitaminTypeFilter') } -->
                             <label for="multivitamin-type-filter">Type</label>
-                            <select id="multivitamin-type-filter" autocomplete="off" class="custom-select"
+                            <select
+                                id="multivitamin-type-filter"
+                                autocomplete="off"
+                                class="custom-select"
                                 data-bind="options: vitaminTypeFilter.options,
                                     optionsValue: 'value',
                                     optionsText: 'text',
-                                    value: vitaminTypeFilter.observableValue">
+                                    value: vitaminTypeFilter.observableValue"
+                            >
                             </select>
                             <!-- /ko -->
                         </div>
@@ -42,23 +67,38 @@
                             <label>Order</label>
                             <div class="input-group">
                                 <!-- ko let: { vitaminSort: Settings.getSetting('vitaminSort') } -->
-                                <select id="multivitamin-sort" autocomplete="off" class="custom-select"
+                                <select
+                                    id="multivitamin-sort"
+                                    autocomplete="off"
+                                    class="custom-select"
                                     data-bind="options: vitaminSort.options,
                                         optionsValue: 'value',
                                         optionsText: 'text',
-                                        value: vitaminSort.observableValue">
+                                        value: vitaminSort.observableValue"
+                                >
                                 </select>
                                 <!-- /ko -->
                                 <!-- ko let: { vitaminSortDirection: Settings.getSetting('vitaminSortDirection') } -->
                                 <div class="input-group-append bg-primary text-light">
-                                    <label for="multivitamin-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                    <label
+                                        for="multivitamin-sort-direction"
+                                        class="clickable m-0 pl-2 pr-2"
+                                        style="font-size: 22px;"
+                                        data-bind="
                                     text: vitaminSortDirection.observableValue() ? '⥄' : '⥂',
                                     tooltip: {
                                         title: vitaminSortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
                                         trigger: 'hover',
                                         placement:'top',
-                                    }">⥂</label>
-                                    <input id="multivitamin-sort-direction" style="vertical-align: middle" class="hidden" type="checkbox" data-bind="checked: vitaminSortDirection.observableValue" />
+                                    }"
+                                    >⥂</label>
+                                    <input
+                                        id="multivitamin-sort-direction"
+                                        style="vertical-align: middle"
+                                        class="hidden"
+                                        type="checkbox"
+                                        data-bind="checked: vitaminSortDirection.observableValue"
+                                    >
                                 </div>
                                 <!-- /ko -->
                             </div>
@@ -68,11 +108,21 @@
                     <div class="form-row m-0 mt-1 align-items-center">
                         <div class="col-12 col-lg-8 text-center text-lg-left">
                             <div class="form-check form-check-inline align-middle">
-                                <input type="checkbox" id="multivitamin-hide-maxed-pokemon" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideMaxedPokemon').observableValue" />
+                                <input
+                                    type="checkbox"
+                                    id="multivitamin-hide-maxed-pokemon"
+                                    class="form-check-input"
+                                    data-bind="checked: Settings.getSetting('vitaminHideMaxedPokemon').observableValue"
+                                >
                                 <label for="multivitamin-hide-maxed-pokemon" class="form-check-label">Hide Pokémon with max vitamins</label>
                             </div>
                             <div class="form-check form-check-inline align-middle">
-                                <input type="checkbox" id="multivitamin-hide-shiny-pokemon" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideShinyPokemon').observableValue" />
+                                <input
+                                    type="checkbox"
+                                    id="multivitamin-hide-shiny-pokemon"
+                                    class="form-check-input"
+                                    data-bind="checked: Settings.getSetting('vitaminHideShinyPokemon').observableValue"
+                                >
                                 <label for="multivitamin-hide-shiny-pokemon" class="form-check-label">Hide shiny Pokémon</label>
                             </div>
                         </div>
@@ -80,20 +130,35 @@
                             <div class="btn-group btn-group-toggle">
                                 <!-- ko foreach: VitaminController.multiplier -->
                                 <label class="btn btn-secondary" data-bind="css: { active: VitaminController.multiplierIndex() == $index() }">
-                                    <input type="radio" name="vitaminAmount"
+                                    <input
+                                        type="radio"
+                                        name="vitaminAmount"
                                         data-bind="value: $index(), checked: VitaminController.multiplierIndex()"
-                                        onchange="VitaminController.multiplierIndex(+this.value)">
+                                        onchange="VitaminController.multiplierIndex(+this.value)"
+                                    >
                                     <knockout data-bind="text: $data"></knockout>
                                 </label>
                                 <!-- /ko -->
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"></button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary dropdown-toggle"
+                                        data-toggle="dropdown"
+                                    ></button>
                                     <div class="dropdown-menu">
                                         <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
-                                        <a class="dropdown-item" href="#" data-bind="text: `Remove All ${GameConstants.VitaminType[$data]}`, click: () => { PartyController.removeVitaminFromParty($data) }"></a>
+                                        <a
+                                            class="dropdown-item"
+                                            href="#"
+                                            data-bind="text: `Remove All ${GameConstants.VitaminType[$data]}`, click: () => { PartyController.removeVitaminFromParty($data) }"
+                                        ></a>
                                         <!-- /ko -->
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#" data-bind="click: () => { PartyController.removeAllVitaminsFromParty() }">Remove ALL Vitamins</a>
+                                        <a
+                                            class="dropdown-item"
+                                            href="#"
+                                            data-bind="click: () => { PartyController.removeAllVitaminsFromParty() }"
+                                        >Remove ALL Vitamins</a>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +173,7 @@
                                 <th class="text-center align-middle">Vitamins Used</th>
                                 <!-- ko foreach: GameHelper.enumStrings(GameConstants.VitaminType) -->
                                 <th class="text-center align-middle">
-                                    <span data-bind="text: $data"></span><br />
+                                    <span data-bind="text: $data"></span><br>
                                     <span class="font-weight-normal small" data-bind="text: `[ ${player.itemList[$data]().toLocaleString('en-US')} ]`"></span>
                                 </th>
                                 <!-- /ko -->
@@ -126,15 +191,27 @@
                                 <td class="text-center align-middle tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')"></td>
                                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                 <td class="text-center align-middle tight">
-                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
+                                    <button
+                                        type="button"
+                                        class="btn btn-link btn-sm text-decoration-none align-text-top"
+                                        style="line-height: 0.6; font-size: 1rem;"
                                         data-bind="
                                             click: () => { $parent.removeVitamin($data, VitaminController.getMultiplier()) },
-                                            class: ($parent.vitaminsUsed[$data]() > 0 && !$parent.breeding ? 'text-success' : 'text-muted')">-</button>
-                                    <knockout class="align-middle d-inline-block" style="width: .875rem;" data-bind="text: $parent.vitaminsUsed[$data]().toLocaleString('en-US')">0</knockout>
-                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
+                                            class: ($parent.vitaminsUsed[$data]() > 0 && !$parent.breeding ? 'text-success' : 'text-muted')"
+                                    >-</button>
+                                    <knockout
+                                        class="align-middle d-inline-block"
+                                        style="width: .875rem;"
+                                        data-bind="text: $parent.vitaminsUsed[$data]().toLocaleString('en-US')"
+                                    >0</knockout>
+                                    <button
+                                        type="button"
+                                        class="btn btn-link btn-sm text-decoration-none align-text-top"
+                                        style="line-height: 0.6; font-size: 1rem;"
                                         data-bind="
                                             click: () => { $parent.useVitamin($data, VitaminController.getMultiplier()) },
-                                            class: ($parent.vitaminUsesRemaining() && player.itemList[GameConstants.VitaminType[$data]]() && !$parent.breeding ? 'text-success' : 'text-muted')">+</button>
+                                            class: ($parent.vitaminUsesRemaining() && player.itemList[GameConstants.VitaminType[$data]]() && !$parent.breeding ? 'text-success' : 'text-muted')"
+                                    >+</button>
                                 </td>
                                 <!-- /ko -->
                                 <td class="text-center align-middle tight" data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue($data).toLocaleString('en-US', { maximumFractionDigits: 3 })">-</td>

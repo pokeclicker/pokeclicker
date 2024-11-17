@@ -1,21 +1,39 @@
-<div class="modal fade" id="pokeballSelectorAdvModal" tabindex="-1" role="dialog"
-    aria-labelledby="PokeballSelectorAdvModal" aria-hidden="true">
+<div
+    class="modal fade"
+    id="pokeballSelectorAdvModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="PokeballSelectorAdvModal"
+    aria-hidden="true"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
         <div class="modal-content">
-            <div class="modal-header p-0" style='justify-content: space-around;'>
+            <div class="modal-header p-0" style="justify-content: space-around;">
                 <ul class="nav nav-tabs nav-fill w-100">
                     <li class="nav-item">
-                        <a data-toggle='tab' class='nav-link active' href="#pokeballFilterConfigTab">
+                        <a
+                            data-toggle="tab"
+                            class="nav-link active"
+                            href="#pokeballFilterConfigTab"
+                        >
                             Configure Filters
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle='tab' class='nav-link' href="#pokeballFilterTestTab">
+                        <a
+                            data-toggle="tab"
+                            class="nav-link"
+                            href="#pokeballFilterTestTab"
+                        >
                             Test Filters
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" class="nav-link" href="#pokeballFilterHelpTab">
+                        <a
+                            data-toggle="tab"
+                            class="nav-link"
+                            href="#pokeballFilterHelpTab"
+                        >
                             Help
                         </a>
                     </li>
@@ -37,8 +55,7 @@
                             <strong class="text-warning" data-bind="text: Settings.getSetting('catchFilters.invertPriorityOrder').observableValue() ? 'bottom' : 'top'">top</strong>
                             have a higher priority! **
                         </p>
-                        <div id="pokeballFilterConfigs"
-                            data-bind="sortable: {
+                        <div id="pokeballFilterConfigs" data-bind="sortable: {
                                 foreach: App.game.pokeballFilters.list,
                                 options: {
                                     group: 'pokeballFilters',
@@ -69,15 +86,13 @@
                                                 },
                                             }
                                         "></div>
-                                        <button class="btn-circle btn-info"
-                                                data-bind="tooltip: {
+                                        <button class="btn-circle btn-info" data-bind="tooltip: {
                                                     title: $data.description,
                                                     trigger: 'hover',
                                                     animation: false,
                                                     placement: 'right',
                                                     html: true,
-                                                }"
-                                        >?</button>
+                                                }">?</button>
                                         <div class="pokeballFilterName">
                                             <input class="form-control" data-bind="textInput: $data._name"></span>
                                         </div>
@@ -95,64 +110,60 @@
                                                 App.game.pokeballs.selectedTitle($data.name);
                                                 $('#pokeballSelectorModal').modal('show')
                                             },
-                                        }" />
+                                        }">
                                     </div>
-                                    <button class="pokeballFilterExpandBtn btn btn-secondary btn-block"
-                                            data-toggle="collapse"
-                                            data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }"
+                                    <button
+                                        class="pokeballFilterExpandBtn btn btn-secondary btn-block"
+                                        data-toggle="collapse"
+                                        data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }"
                                     >Toggle Settings</button>
-                                    <div class="collapse pokeballFilterBody"
-                                        data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
+                                    <div class="collapse pokeballFilterBody" data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
                                         <table class="pokeballFilterOptions">
                                             <tbody>
                                                 <!-- ko foreach: Object.entries($data.options).map(([k, v]) => ({ optionName: k, setting: v })) -->
                                                 <tr>
                                                     <td>
-                                                        <button class="btn-circle btn-danger"
-                                                            data-bind="click: () => App.game.pokeballFilters.removeFilterOption($parent, optionName)">
+                                                        <button class="btn-circle btn-danger" data-bind="click: () => App.game.pokeballFilters.removeFilterOption($parent, optionName)">
                                                             <span>&minus;</span>
                                                         </button>
                                                     </td>
                                                     <!-- ko template: {
-                                                    name: setting instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
-                                                    data: { setting, key: $index() },
-                                                } --><!-- /ko -->
+                                                        name: setting instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
+                                                        data: { setting, key: $index() },
+                                                        } --><!-- /ko -->
                                                 </tr>
                                                 <!-- /ko -->
                                                 <!-- ko foreach: Object.keys(pokeballFilterOptions).filter(k => !(k in $data.options) && pokeballFilterOptions[k].canUse()) -->
                                                 <tr class="bg-faded text-white">
                                                     <td>
-                                                        <button class="btn-circle btn-success"
-                                                            data-bind="click: () => App.game.pokeballFilters.addFilterOption($parent, $data)">
+                                                        <button class="btn-circle btn-success" data-bind="click: () => App.game.pokeballFilters.addFilterOption($parent, $data)">
                                                             <span>&plus;</span>
                                                         </button>
                                                     </td>
-                                                    <td class="p-2"
-                                                        data-bind="text: pokeballFilterOptions[$data].defaultSetting.displayName">
+                                                    <td class="p-2" data-bind="text: pokeballFilterOptions[$data].defaultSetting.displayName">
                                                     </td>
                                                     <td></td>
                                                 </tr>
                                                 <!-- /ko -->
                                                 <!-- Commenting out the invert filter because it is confusing and possibly not even wanted
-                                                     Can be re-enabled in a future release if we find it is wanted
+                                                    Can be re-enabled in a future release if we find it is wanted
                                                     tr>
                                                     <td></td>
                                                     <td class="p-2"><label class="m-0" data-bind="attr: { 'for': `checkbox-inverted-${$index()}` }">Invert Filter:</label></td>
                                                     <td class="p-2" data-bind="template: {
-                                                        name: 'toggleSliderTemplate',
-                                                        data: {
-                                                            value: $data.inverted,
-                                                            key: `checkbox-inverted-${$index()}`,
-                                                        }
+                                                    name: 'toggleSliderTemplate',
+                                                    data: {
+                                                    value: $data.inverted,
+                                                    key: `checkbox-inverted-${$index()}`,
+                                                    }
                                                     }"></td>
-                                                </tr -->
+                                                    </tr -->
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="pokeballFilterDelete">
-                                    <button class="btn bg-danger text-white deleteButton"
-                                        data-bind="click: () => App.game.pokeballFilters.deleteFilter($data)">
+                                    <button class="btn bg-danger text-white deleteButton" data-bind="click: () => App.game.pokeballFilters.deleteFilter($data)">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -181,7 +192,7 @@
                                                                 )">
                             <p id="pokeballFilterTestMatch">
                                 <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'></span>
-                                <span data-bind='visible: !$data'>None of your enabled filters match this scenario</span>
+                                <span data-bind="visible: !$data">None of your enabled filters match this scenario</span>
                                 <!-- ko if: $data -->
                                 <img class="pokeball-selected pokeball-small" data-bind="
                                     attr: {
@@ -192,7 +203,7 @@
                                             animation: false,
                                             placement: 'bottom'
                                         },
-                                }" />
+                                }">
                                 <!-- /ko -->
                             </p>
                             <div data-bind="foreach: App.game.pokeballFilters.displayList()">
@@ -267,7 +278,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>
