@@ -4,9 +4,11 @@ import BerryType from '../enums/BerryType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
 import GameHelper from '../GameHelper';
-import { Currency } from '../GameConstants';
+import { Currency, Region } from '../GameConstants';
+import Requirement from '../requirements/Requirement';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
-export type GenericTraderShopIdentifier = 'Palaeontologist' | 'EverstoneDealer';
+export type GenericTraderShopIdentifier = 'Palaeontologist' | 'EverstoneDealer' | 'FossilReviver';
 
 /* eslint-disable @typescript-eslint/no-shadow */
 export enum DealCostOrProfitType {
@@ -62,9 +64,20 @@ type AmountDealProfit = {
 
 export type DealProfit = ItemDealProfit | AmountDealProfit;
 
+type GenericDealParams = {
+    costs: DealCost[];
+    profits: DealProfit[];
+    tradeRequirement?: Requirement;
+    visibleRequirement?: Requirement;
+    tradeButtonOverride?: string;
+};
+
 export default class GenericDeal {
     private _costs: DealCost[];
     private _profits: DealProfit[];
+    private _tradeRequirement?: Requirement;
+    private _visibleRequirement?: Requirement;
+    private _tradeButtonOverride?: string;
 
     get costs(): DealCost[] {
         return this._costs;
@@ -74,11 +87,30 @@ export default class GenericDeal {
         return this._profits;
     }
 
+    get requirement(): Requirement | undefined {
+        return this._tradeRequirement;
+    }
+
+    get tradeButtonOverride(): string | undefined {
+        return this._tradeButtonOverride;
+    }
+
     public static list: Partial<Record<GenericTraderShopIdentifier, KnockoutObservableArray<GenericDeal>>> = {};
 
-    constructor(costs: DealCost[], profits: DealProfit[]) {
+    constructor(params: GenericDealParams) {
+        const {
+            costs,
+            profits,
+            tradeRequirement = undefined,
+            visibleRequirement = undefined,
+            tradeButtonOverride = undefined,
+        } = params;
+
         this._costs = costs;
         this._profits = profits;
+        this._tradeRequirement = tradeRequirement;
+        this._visibleRequirement = visibleRequirement;
+        this._tradeButtonOverride = tradeButtonOverride;
     }
 
     public isVisible(): boolean {
@@ -88,11 +120,24 @@ export default class GenericDeal {
                     return profit.item.isVisible();
             }
             return true;
-        });
+        }) && (!this._visibleRequirement || this._visibleRequirement?.isCompleted());
     }
 
     public static getDeals(id: GenericTraderShopIdentifier) {
         return GenericDeal.list[id];
+    }
+
+    public static isLocked(id: GenericTraderShopIdentifier, index: number): boolean {
+        const deal = GenericDeal.list[id]?.peek()[index];
+        if (!deal) {
+            return false;
+        }
+
+        if (!deal.requirement) {
+            return false;
+        }
+
+        return !deal.requirement.isCompleted();
     }
 
     public static canUse(id: GenericTraderShopIdentifier, index: number): boolean {
@@ -103,6 +148,11 @@ export default class GenericDeal {
 
         // If some of the profit results are not available, then this trade is not available
         if (this.anySoldOut(deal)) {
+            return false;
+        }
+
+        // If this deal has a requirement that was not yet met
+        if (deal.requirement && !deal.requirement?.isCompleted()) {
             return false;
         }
 
@@ -172,25 +222,126 @@ export default class GenericDeal {
 
     public static generateDeals() {
         GenericDeal.list.Palaeontologist = ko.observableArray([
-            new GenericDeal(
-                [
-                    { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 },
-                ],
-                [
-                    { type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true },
-                ],
-            ),
+            new GenericDeal({
+                costs: [ { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 } ],
+                profits: [ { type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true } ],
+            }),
         ]);
 
         GenericDeal.list.EverstoneDealer = ko.observableArray([
-            new GenericDeal(
-                [
-                    { type: DealCostOrProfitType.Amount, currency: new Amount(375, Currency.diamond), amount: 1 },
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Amount, currency: new Amount(375, Currency.diamond), amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Everstone, amount: 1 }],
+            }),
+        ]);
+
+        GenericDeal.list.FossilReviver = ko.observableArray([
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Helix_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Omanyte, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.kanto),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Dome_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kabuto, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.kanto),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Old_amber, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Aerodactyl, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.kanto),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Root_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Lileep, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.hoenn),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Claw_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Anorith, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.hoenn),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Armor_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Shieldon, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.sinnoh),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Skull_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Cranidos, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.sinnoh),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Cover_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Tirtouga, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.unova),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Plume_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Archen, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.unova),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Jaw_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Tyrunt, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.kalos),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Sail_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Amaura, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.kalos),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_bird, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_drake, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.questPoint), amount: 1 },
                 ],
-                [
-                    { type: DealCostOrProfitType.Item, item: ItemList.Everstone, amount: 1 },
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dracozolt, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.galar),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_bird, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_dino, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.questPoint), amount: 1 },
                 ],
-            ),
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Arctozolt, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.galar),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_fish, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_drake, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.questPoint), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dracovish, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.galar),
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_fish, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_dino, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.questPoint), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Arctovish, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.galar),
+                tradeButtonOverride: 'Revive',
+            }),
         ]);
     }
 }
