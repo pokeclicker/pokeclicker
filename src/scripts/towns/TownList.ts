@@ -6445,6 +6445,52 @@ const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 17), new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less)]),
 });
 
+const DirectorFrank1 = new GiftNPC('Frank', [
+    'I want to make a pika-sequal to my movie!',
+    'I want a pika-Pikachu, who makes my pika-movie shine!',
+    'Your Pikachu has potential. Come back when it has more pika-experience.',
+],
+() => App.game.quests.getQuestLine('Lights! Camera! Pika!').beginQuest(),
+null,
+{
+    image: 'assets/images/npcs/Director Frank.png',
+    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.less, 0),
+});
+const DirectorFrank2 = new NPC('Frank', [
+    'Your Pikachu have incredible pika-star power!',
+    'But I have learned that people only wants pika-remakes today...',
+    'I have been told that the original pika-star is still out there!',
+    'I want the original star back in perfect pika-shape!',
+], {
+    image: 'assets/images/npcs/Director Frank.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.more, 0), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.less, 3)]),
+});
+const DirectorFrank3 = new NPC('Frank', [
+    'Our pika-star is back!',
+    'But the pika-stunt is still too dangous for him...',
+    'Any chance you got a pika-Hawlucha ready for the role?',
+], {
+    image: 'assets/images/npcs/Director Frank.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.more, 2), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.less, 5)]),
+});
+const DirectorFrank4 = new NPC('Frank', [
+    'That scene was pika-perfect!',
+    'The last thing we need for the movie is a bunch of pika-extras!',
+    'I already have a bunch of extras ready, but the remake needs to be pika-bigger!',
+], {
+    image: 'assets/images/npcs/Director Frank.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.more, 4), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.less, 7)]),
+});
+const DirectorFrank5 = new NPC('Frank', [
+    'I have finished the pika-movie!',
+    'I\'s pika-perfect!',
+    'I cannot pika-thank you enough for helping me make this movie.',
+    'You can keep the pika-costumes, if you want.',
+], {
+    image: 'assets/images/npcs/Director Frank.png',
+    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.more, 7),
+});
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -6602,10 +6648,10 @@ TownList['Pikachu Land'] = new Town(
     'Pikachu Land',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [],
+    [TemporaryBattleList['Pikachu Libre and it\'s gang']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
-        npcs: [],
+        npcs: [DirectorFrank1, DirectorFrank2, DirectorFrank3, DirectorFrank4, DirectorFrank5],
         ignoreAreaStatus: true,
     }
 );

@@ -3871,6 +3871,23 @@ TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Pikachu Libre and it\'s gang'] = new TemporaryBattle(
+    'Pikachu Libre and it\'s gang',
+    [
+        new GymPokemon('Pikachu', 90000000, 50),
+        new GymPokemon('Pikachu', 90000000, 50),
+        new GymPokemon('Pikachu', 90000000, 50),
+        new GymPokemon('Pikachu (Libre)', 340000000, 70),
+    ],
+    'I won\'t forget this!',
+    [new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6)],
+    undefined,
+    {
+        imageName: '../pokemon/25.21',
+        hideTrainer: true,
+    }
+);
+
 //Alola Temporary Battles
 TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     'Hau 1',

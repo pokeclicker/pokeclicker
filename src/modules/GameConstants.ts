@@ -2114,6 +2114,7 @@ export const TemporaryBattles = [
     'Anomaly Mewtwo 3',
     'Anomaly Mewtwo 4',
     'Anomaly Mewtwo 5',
+    'Pikachu Libre and it\'s gang',
     'Hau 1',
     'Melemele Spearow',
     'Hau 2',

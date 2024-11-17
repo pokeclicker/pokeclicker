@@ -2472,6 +2472,57 @@ class QuestLineHelper {
         App.game.quests.questLines().push(unrivaledPowerQuestLine);
     }
 
+    public static createLightsCameraPikaQuestLine() {
+        const lightsCameraPikaQuestLine = new QuestLine('Lights! Camera! Pika!', 'Frank is making a new movie, and needs your help with finding his stars.');
+
+        const trainPikachuQuest = new TrainSpecificPokemonQuest('Pikachu', 50000);
+        lightsCameraPikaQuestLine.addQuest(trainPikachuQuest);
+
+        const talkToFrankQuest1 = new TalkToNPCQuest(DirectorFrank2, 'Return to Frank');
+        lightsCameraPikaQuestLine.addQuest(talkToFrankQuest1);
+
+        const trainPikachuKalosQuest = new TrainSpecificPokemonQuest('Pikachu (Kalos Cap)', 50000);
+        lightsCameraPikaQuestLine.addQuest(trainPikachuKalosQuest);
+
+        const talkToFrankQuest2 = new TalkToNPCQuest(DirectorFrank3, 'Return to Frank');
+        lightsCameraPikaQuestLine.addQuest(talkToFrankQuest2);
+
+        const trainHawluchaQuest = new TrainSpecificPokemonQuest('Hawlucha', 50000);
+        trainHawluchaQuest.customReward = () => {
+            App.game.party.gainPokemonByName('Hawlucha (Stuntman)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
+            Notifier.notify({
+                title: lightsCameraPikaQuestLine.name,
+                message: 'You found Hawlucha (Stuntman)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+        lightsCameraPikaQuestLine.addQuest(trainHawluchaQuest);
+
+        const talkToFrankQuest3 = new TalkToNPCQuest(DirectorFrank4, 'Return to Frank');
+        lightsCameraPikaQuestLine.addQuest(talkToFrankQuest3);
+
+        const trainPikachusQuest = new CustomQuest(15, undefined, 'Train 15 Pikachus to 25.000 power',
+            () => App.game.party.caughtPokemon.filter(p => Math.floor(p.id) == 25 && p.attack >= 25000));
+        lightsCameraPikaQuestLine.addQuest(trainPikachusQuest);
+
+        const fightLibrePikachuQuest = new DefeatTemporaryBattleQuest('Pikachu Libre and it\'s gang', 'Defeat Pikachu Libre and it\'s gang!');
+
+        const talkToFrankQuest4 = new TalkToNPCQuest(DirectorFrank5, 'Return to Frank');
+        talkToFrankQuest4.customReward = () => {
+            App.game.party.gainPokemonByName('Pikachu (Super)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
+            Notifier.notify({
+                title: lightsCameraPikaQuestLine.name,
+                message: 'You found Pikachu (Super)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+        lightsCameraPikaQuestLine.addQuest(talkToFrankQuest4);
+
+        App.game.quests.questLines().push(lightsCameraPikaQuestLine);
+    }
+
     /* Alola QuestLines */
     // Melemele Island guide - Started upon deafting Hau 1
     public static createMelemeleAlolaQuestLine() {
@@ -4257,6 +4308,7 @@ class QuestLineHelper {
         this.createPrincessDiancieQuestLine();
         this.createClashOfAgesQuestLine();
         this.createUnrivaledPowerQuestLine();
+        this.createLightsCameraPikaQuestLine();
         this.createMelemeleAlolaQuestLine();
         this.createAkalaAlolaQuestLine();
         this.createUlaulaAlolaQuestLine();
