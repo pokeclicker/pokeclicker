@@ -2841,6 +2841,31 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.24': ({ playerData, saveData, settingsData }) => {
+            for (let i = 0; i < saveData.breeding.eggList.length; ++i) {
+                const pokemonID = saveData.breeding.eggList[i].pokemon;
+
+                const fossilConversionMap = {
+                    138: 'Helix_fossil',
+                    140: 'Dome_fossil',
+                    142: 'Old_amber',
+                    345: 'Root_fossil',
+                    347: 'Claw_fossil',
+                    410: 'Armor_fossil',
+                    408: 'Skull_fossil',
+                    564: 'Cover_fossil',
+                    566: 'Plume_fossil',
+                    696: 'Jaw_fossil',
+                    698: 'Sail_fossil',
+                }
+
+                if (fossilConversionMap[pokemonID]) {
+                    playerData._itemList[fossilConversionMap[pokemonID]] = (playerData._itemList[fossilConversionMap[pokemonID]] || 0) + 1;
+                    saveData.breeding.eggList[i] = null;
+                }
+            }
+        },
     };
 
     constructor() {
