@@ -139,12 +139,6 @@ export class UndergroundController {
             case UndergroundItemValueType.Diamond:
                 App.game.wallet.gainDiamonds(Math.floor(item.value * amount * percentage));
                 break;
-            case UndergroundItemValueType.Fossil:
-                if (!App.game.breeding.hasFreeEggSlot()) {
-                    return false;
-                }
-                success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
-                break;
             case UndergroundItemValueType.Gem:
                 const type = item.type;
                 App.game.gems.gainGems(Math.floor(PLATE_VALUE * amount * percentage), type);

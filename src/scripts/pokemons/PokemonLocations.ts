@@ -293,18 +293,6 @@ class PokemonLocations {
         return cacheLine[pokemonName];
     }
 
-    public static getPokemonFossils(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const cache = this.getRegionalCache<string[]>(this.getPokemonFossils.name);
-        if (cache[maxRegion]) {
-            return cache[maxRegion][pokemonName];
-        }
-        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<string>);
-        Object.entries(GameConstants.FossilToPokemon).forEach(([fossil, pokemon]) => {
-            cacheLine[pokemon].push(fossil);
-        });
-        return cacheLine[pokemonName];
-    }
-
     public static getPokemonSafariChance(pokemonName: PokemonNameType): Record<GameConstants.Region, Record<number, number>> {
         const cache = this.getCache<Record<GameConstants.Region, Record<number, number>>>(this.getPokemonSafariChance.name);
         if (cache[pokemonName]) {
@@ -688,11 +676,6 @@ class PokemonLocations {
         const parents = PokemonLocations.getPokemonParents(pokemonName, maxRegion);
         if (parents.length) {
             encounterTypes[PokemonLocationType.Baby] = parents;
-        }
-        // Fossil
-        const fossils = PokemonLocations.getPokemonFossils(pokemonName);
-        if (fossils.length) {
-            encounterTypes[PokemonLocationType.Fossil] = fossils;
         }
         // Safari
         const safariChance = PokemonLocations.getPokemonSafariChance(pokemonName);

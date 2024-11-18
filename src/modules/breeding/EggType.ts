@@ -8,6 +8,5 @@ enum EggType {
     Dragon,
     Pokemon,
     Mystery,
-    Fossil,
 }
 export default EggType;
