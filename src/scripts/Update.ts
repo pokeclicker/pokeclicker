@@ -2858,7 +2858,7 @@ class Update implements Saveable {
                     566: 'Plume_fossil',
                     696: 'Jaw_fossil',
                     698: 'Sail_fossil',
-                }
+                };
 
                 if (fossilConversionMap[pokemonID]) {
                     playerData._itemList[fossilConversionMap[pokemonID]] = (playerData._itemList[fossilConversionMap[pokemonID]] || 0) + 1;
