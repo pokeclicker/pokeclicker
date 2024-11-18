@@ -2425,7 +2425,6 @@ export enum ShardTraderLocations {
     'Hulbury',
     'Motostoke',
     'Hammerlocke',
-    'Route 6',
     'Stow-on-Side',
     'Ballonlea',
     'Circhester',
