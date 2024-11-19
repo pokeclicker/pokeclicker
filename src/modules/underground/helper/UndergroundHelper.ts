@@ -28,8 +28,10 @@ import UndergroundToolType from '../tools/UndergroundToolType';
 import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
 import UndergroundTool from '../tools/UndergroundTool';
+import SeededRand from '../../utilities/SeededRand';
 
 export class UndergroundHelper {
+    public trainerSprite = 0;
     private _experience: Observable<number> = ko.observable<number>(0);
     private _hired: Observable<boolean> = ko.observable<boolean>(false);
     private _timeSinceWork: Observable<number> = ko.observable<number>(0);
@@ -61,6 +63,7 @@ export class UndergroundHelper {
         private _favoriteMine: MineType,
         private _unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
     ) {
+        this.trainerSprite = SeededRand.intBetween(0, 118);
     }
 
     public isUnlocked(): boolean {
@@ -158,7 +161,7 @@ export class UndergroundHelper {
         this._hired(true);
         this._timeSinceWork(0);
         Notifier.notify({
-            title: `[UNDERGROUND HELPER] ${this._name}`,
+            title: `[UNDERGROUND HELPER] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this._name}`,
             message: 'Thanks for hiring me,\nI won\'t let you down!',
             type: NotificationConstants.NotificationOption.success,
             timeout: 30 * SECOND,
@@ -170,9 +173,9 @@ export class UndergroundHelper {
         this._hired(false);
         this._timeSinceWork(0);
         Notifier.notify({
-            title: `[UNDERGROUND HELPER] ${this._name}`,
-            message: 'Happy to work for you! Let me know when you\'re hiring again!',
-            type: NotificationConstants.NotificationOption.success,
+            title: `[UNDERGROUND HELPER] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this._name}`,
+            message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
+            type: NotificationConstants.NotificationOption.info,
             timeout: 30 * SECOND,
             setting: NotificationConstants.NotificationSetting.Underground.helper,
         });
