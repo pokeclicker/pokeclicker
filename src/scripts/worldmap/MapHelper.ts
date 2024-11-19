@@ -26,11 +26,11 @@ const priorityStatus = new Map([
     [areaStatus.missingResistantAndMissingAchievement, 7],
     [areaStatus.missingResistant, 8],
     [areaStatus.missingAchievement, 9],
-    [areaStatus.completed, 10]
+    [areaStatus.completed, 10],
 ]);
 
 class MapHelper {
-    
+
     public static initialize() {
         this.updatePriorPokerus(Settings.getSetting('priorPokerus').observableValue());
     }
@@ -40,13 +40,13 @@ class MapHelper {
             priorityStatus.set(status, newPriority);
         }
     }
-    
+
     public static getImportantState(states) {
-        return states.reduce((lowest, current) => 
+        return states.reduce((lowest, current) =>
             priorityStatus.get(current) < priorityStatus.get(lowest) ? current : lowest
         );
     }
-    
+
     public static updatePriorPokerus(priorPokerus) {
         if (priorPokerus) {
             this.updatePriority(areaStatus.missingResistantAndMissingAchievement, 5);
