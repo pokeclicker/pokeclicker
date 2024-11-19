@@ -14,7 +14,8 @@ class DiscordPokemonCode extends DiscordCode {
             App.game.party.gainPokemonById(pokemon.id, shiny, true);
             // Notify that the code was activated successfully
             Notifier.notify({
-                message: `You obtained a${shiny ? ' shiny' : ''} ${pokemon.name}!`,
+                message: `You obtained a${shiny ? ' shiny' : ''} ${PokemonHelper.displayName(pokemon.name)()}!`,
+                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonByName(pokemon.name).id, shiny),
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
             });
