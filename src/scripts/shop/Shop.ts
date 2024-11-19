@@ -41,7 +41,7 @@ class Shop extends TownContent {
                 }
             }
         });
-        return Math.min(...itemStatusArray);
+        return MapHelper.getImportantState(itemStatusArray);
     }
 
     get displayName() {

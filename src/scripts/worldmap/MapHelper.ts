@@ -9,12 +9,57 @@ enum areaStatus {
     uncaughtShadowPokemon,
     uncaughtShinyPokemonAndMissingAchievement,
     uncaughtShinyPokemon,
-    missingAchievement,
+    missingResistantAndMissingAchievement,
     missingResistant,
+    missingAchievement,
     completed,
 }
 
+const priorityStatus = new Map([
+    [areaStatus.locked, 0],
+    [areaStatus.incomplete, 1],
+    [areaStatus.questAtLocation, 2],
+    [areaStatus.uncaughtPokemon, 3],
+    [areaStatus.uncaughtShadowPokemon, 4],
+    [areaStatus.uncaughtShinyPokemonAndMissingAchievement, 5],
+    [areaStatus.uncaughtShinyPokemon, 6],
+    [areaStatus.missingResistantAndMissingAchievement, 7],
+    [areaStatus.missingResistant, 8],
+    [areaStatus.missingAchievement, 9],
+    [areaStatus.completed, 10]
+]);
+
 class MapHelper {
+    
+    public static initialize() {
+        this.updatePriorPokerus(Settings.getSetting('priorPokerus').observableValue());
+    }
+
+    private static updatePriority(status, newPriority) {
+        if (priorityStatus.has(status)) {
+            priorityStatus.set(status, newPriority);
+        }
+    }
+    
+    public static getImportantState(states) {
+        return states.reduce((lowest, current) => 
+            priorityStatus.get(current) < priorityStatus.get(lowest) ? current : lowest
+        );
+    }
+    
+    public static updatePriorPokerus(priorPokerus) {
+        if (priorPokerus) {
+            this.updatePriority(areaStatus.missingResistantAndMissingAchievement, 5);
+            this.updatePriority(areaStatus.missingResistant, 6);
+            this.updatePriority(areaStatus.uncaughtShinyPokemonAndMissingAchievement, 7);
+            this.updatePriority(areaStatus.uncaughtShinyPokemon, 8);
+        } else {
+            this.updatePriority(areaStatus.uncaughtShinyPokemonAndMissingAchievement, 5);
+            this.updatePriority(areaStatus.uncaughtShinyPokemon, 6);
+            this.updatePriority(areaStatus.missingResistantAndMissingAchievement, 7);
+            this.updatePriority(areaStatus.missingResistant, 8);
+        }
+    }
 
     public static getUsableFilters(): CssVariableSetting[] {
         return GameHelper.enumStrings(areaStatus).map(status => Settings.getSetting(`--${status}`)).filter(setting => setting.isUnlocked());
@@ -165,6 +210,8 @@ class MapHelper {
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
         let cls = '';
+        const priorPokerus = Settings.getSetting('priorPokerus').observableValue();
+        const missingResistant = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < GameConstants.Pokerus.Resistant;
 
         if (!MapHelper.accessToRoute(route, region)) {
             cls = areaStatus[areaStatus.locked];
@@ -174,14 +221,20 @@ class MapHelper {
             cls = areaStatus[areaStatus.questAtLocation];
         } else if (!RouteHelper.routeCompleted(route, region, false)) {
             cls = areaStatus[areaStatus.uncaughtPokemon];
+        } else if (priorPokerus && missingResistant && !RouteHelper.isAchievementsComplete(route, region)) {
+            cls = areaStatus[areaStatus.missingResistantAndMissingAchievement];
+        } else if (priorPokerus && missingResistant) {
+            cls = areaStatus[areaStatus.missingResistant];
         } else if (!RouteHelper.routeCompleted(route, region, true) && !RouteHelper.isAchievementsComplete(route, region)) {
             cls = areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
         } else if (!RouteHelper.routeCompleted(route, region, true)) {
             cls = areaStatus[areaStatus.uncaughtShinyPokemon];
+        } else if (!priorPokerus && missingResistant && !RouteHelper.isAchievementsComplete(route, region)) {
+            cls = areaStatus[areaStatus.missingResistantAndMissingAchievement];
+        } else if (!priorPokerus && missingResistant) {
+            cls = areaStatus[areaStatus.missingResistant];
         } else if (!RouteHelper.isAchievementsComplete(route, region)) {
             cls = areaStatus[areaStatus.missingAchievement];
-        } else if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < GameConstants.Pokerus.Resistant) {
-            cls = areaStatus[areaStatus.missingResistant];
         } else {
             cls = areaStatus[areaStatus.completed];
         }
@@ -219,6 +272,8 @@ class MapHelper {
         if (dungeonList[townName] && dungeonList[townName].isUnlocked()) {
             const possiblePokemon = dungeonList[townName].allAvailablePokemon();
             const shadowPokemon = dungeonList[townName].allAvailableShadowPokemon();
+            const priorPokerus = Settings.getSetting('priorPokerus').observableValue();
+            const missingResistant = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(possiblePokemon) < GameConstants.Pokerus.Resistant;
 
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 states.push(areaStatus.incomplete);
@@ -229,16 +284,26 @@ class MapHelper {
             } else if (Settings.getSetting(`--${areaStatus[areaStatus.uncaughtShadowPokemon]}`).isUnlocked()
                 && shadowPokemon.some(pokemon => App.game.party.getPokemonByName(pokemon)?.shadow < GameConstants.ShadowStatus.Shadow)) {
                 states.push(areaStatus.uncaughtShadowPokemon);
+            } else if (priorPokerus && missingResistant) {
+                if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
+                    states.push(areaStatus.missingResistantAndMissingAchievement);
+                } else {
+                    states.push(areaStatus.missingResistant);
+                }
             } else if (!RouteHelper.listCompleted(possiblePokemon, true)) {
                 if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
                     states.push(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
                 } else {
                     states.push(areaStatus.uncaughtShinyPokemon);
                 }
+            } else if (!priorPokerus && missingResistant) {
+                if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
+                    states.push(areaStatus.missingResistantAndMissingAchievement);
+                } else {
+                    states.push(areaStatus.missingResistant);
+                }
             } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
                 states.push(areaStatus.missingAchievement);
-            } else if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(possiblePokemon) < GameConstants.Pokerus.Resistant) {
-                states.push(areaStatus.missingResistant);
             }
         }
         const town = TownList[townName];
@@ -249,7 +314,10 @@ class MapHelper {
             }
         });
         if (states.length) {
-            const importantState = Math.min(...states);
+            const importantState = this.getImportantState(states);
+            if (importantState >= areaStatus.missingResistant && states.includes(areaStatus.missingResistant) && states.includes(areaStatus.missingAchievement)) {
+                return areaStatus[areaStatus.missingResistantAndMissingAchievement];
+            }
             if (importantState >= areaStatus.uncaughtShinyPokemon && states.includes(areaStatus.uncaughtShinyPokemon) && states.includes(areaStatus.missingAchievement)) {
                 return areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
             }

@@ -31,6 +31,6 @@ class SafariTownContent extends TownContent {
                 pokemonStatusArray.push(areaStatus.missingResistant);
             }
         });
-        return Math.min(...pokemonStatusArray);
+        return MapHelper.getImportantState(pokemonStatusArray);
     }
 }

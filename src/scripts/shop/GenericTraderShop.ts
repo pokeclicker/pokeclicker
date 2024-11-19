@@ -43,7 +43,7 @@ class GenericTraderShop extends Shop {
             }
         }
 
-        return Math.min(...itemStatusArray);
+        return MapHelper.getImportantState(itemStatusArray);
     }
 
     public isVisible(): boolean {

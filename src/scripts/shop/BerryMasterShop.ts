@@ -36,7 +36,7 @@ class BerryMasterShop extends Shop {
                 itemStatusArray.push(areaStatus.missingResistant);
             }
         }
-        return Math.min(...itemStatusArray);
+        return MapHelper.getImportantState(itemStatusArray);
     }
 
 }
