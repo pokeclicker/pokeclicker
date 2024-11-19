@@ -2,7 +2,6 @@
 
 class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
     pokemon: PokemonListData;
-    customDescription: string;
     customReward: () => void;
     includeBreeding: boolean;
 

@@ -1,4 +1,6 @@
 class QuestLine {
+    private _description: string;
+    private cachedTranslatedDescription?: KnockoutComputed<string>;
     state: KnockoutObservable<QuestLineState> = ko.observable(QuestLineState.inactive).extend({ numeric: 0 });
     quests: KnockoutObservableArray<Quest>;
     curQuest: KnockoutComputed<number>;
@@ -11,7 +13,7 @@ class QuestLine {
 
     constructor(
         public name: QuestLineNameType,
-        public description: string,
+        description: string,
         public requirement?: Requirement,
         public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None,
         private disablePausing = false // applies to bulletin board quests only
@@ -139,6 +141,21 @@ class QuestLine {
         }
 
         return true;
+    }
+
+    set description(description: string) {
+        this._description = description;
+    }
+
+    get description(): string {
+        if (!this.cachedTranslatedDescription) {
+            this.cachedTranslatedDescription = App.translation.get(
+                `${this.name}.description.${GameHelper.hash(this._description)}`,
+                'questlines',
+                { defaultValue: this._description }
+            );
+        }
+        return this.cachedTranslatedDescription();
     }
 
     get pauseTooltip(): string {

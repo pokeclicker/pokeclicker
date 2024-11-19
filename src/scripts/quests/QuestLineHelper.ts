@@ -4286,5 +4286,10 @@ class QuestLineHelper {
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
+        // Enforce unique questline names
+        const numQuestLines = App.game.quests.questLines().length;
+        if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {
+            throw new Error('QuestLineHelper: Duplicate QuestLine names detected');
+        }
     }
 }
