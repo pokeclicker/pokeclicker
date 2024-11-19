@@ -52,7 +52,7 @@ class PokemonFactory {
         }
         if (roaming) {
             Notifier.notify({
-                message: `You encountered a roaming ${name}!`,
+                message: `You encountered a roaming ${PokemonHelper.displayName(name)()}!`,
                 pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.roaming,
