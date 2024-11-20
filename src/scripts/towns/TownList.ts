@@ -6490,6 +6490,11 @@ const DirectorFrank5 = new NPC('Frank', [
     image: 'assets/images/npcs/Director Frank.png',
     requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6, GameConstants.AchievementOption.more),
 });
+const JeanFranksGrandDaughter = new NPC('Jean', [
+    'My grandfather can be found north west of here.',
+    'He\'s a bit unusual. But his love for Pikachu is stronger than anyone else I\'ve ever met!',
+    'And that\'s why I really want to help make my grandfather\'s dream come true.',
+]);
 
 //Kalos Towns
 
@@ -6641,7 +6646,7 @@ TownList['Anistar City'] = new Town(
     [AnistarCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Anistar City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
-        npcs: [AnistarKalosRoamerNPC, KalosTVNews],
+        npcs: [AnistarKalosRoamerNPC, KalosTVNews, JeanFranksGrandDaughter],
     }
 );
 TownList['Pikachu Land'] = new Town(
