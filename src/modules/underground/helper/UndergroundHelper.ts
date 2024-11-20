@@ -29,7 +29,21 @@ import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
 import UndergroundTool from '../tools/UndergroundTool';
 
+type UndergroundHelperParams = {
+    id: string,
+    name: string,
+    images: string[],
+    favoriteMine: MineType,
+    unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
+};
+
 export class UndergroundHelper {
+    private _id: string;
+    private _name: string;
+    private _images: string[];
+    private _favoriteMine: MineType;
+    private _unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement;
+
     private _experience: Observable<number> = ko.observable<number>(0);
     private _hired: Observable<boolean> = ko.observable<boolean>(false);
     private _timeSinceWork: Observable<number> = ko.observable<number>(0);
@@ -55,12 +69,20 @@ export class UndergroundHelper {
         { value: EnergyRestoreSize.LargeRestore, name: 'Large Restore' },
     ];
 
-    constructor(
-        private _id: string,
-        private _name: string,
-        private _favoriteMine: MineType,
-        private _unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
-    ) {
+    constructor(options: UndergroundHelperParams) {
+        const {
+            id,
+            name,
+            images,
+            favoriteMine,
+            unlockRequirement = undefined,
+        } = options;
+
+        this._id = id;
+        this._name = name;
+        this._images = images;
+        this._favoriteMine = favoriteMine;
+        this._unlockRequirement = unlockRequirement;
     }
 
     public isUnlocked(): boolean {
@@ -182,12 +204,21 @@ export class UndergroundHelper {
         GameHelper.incrementObservable(this._experience, experience);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public hasStolenItem(id: number): boolean {
+        return false;
+    }
+
     get id(): string {
         return this._id;
     }
 
     get name(): string {
         return this._name;
+    }
+
+    get images(): string[] {
+        return this._images.map(image => `assets/images/underground/helpers/${image}.png`);
     }
 
     get hired(): boolean {
@@ -331,8 +362,8 @@ export class UndergroundHelpers {
     }
 }
 
-UndergroundHelpers.add(new UndergroundHelper('diamond', 'Steve and Alex', MineType.Diamond, null));
-UndergroundHelpers.add(new UndergroundHelper('gemplates', 'Gemma', MineType.GemPlate, null));
-UndergroundHelpers.add(new UndergroundHelper('shards', 'Sharlene', MineType.Shard, null));
-UndergroundHelpers.add(new UndergroundHelper('fossils', 'Jones', MineType.Fossil, null));
-UndergroundHelpers.add(new UndergroundHelper('evolutionitems', 'Darwin', MineType.EvolutionItem, null));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'diamond', name: 'Steve and Alex', images: ['steve', 'alex'], favoriteMine: MineType.Diamond }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'gemplates', name: 'Gemma', images: ['perrin'], favoriteMine: MineType.GemPlate }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'shards', name: 'Sharlene', images: ['sharlene'], favoriteMine: MineType.Shard }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'fossils', name: 'Jones', images: ['jones'], favoriteMine: MineType.Fossil }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'evolutionitems', name: 'Darwin', images: ['darwin'], favoriteMine: MineType.EvolutionItem }));

@@ -233,8 +233,16 @@
                 <div id="undergroundHelpers" class="tab-pane fade">
                     <div class="row m-0 justify-content-start" data-bind="foreach: App.game.underground.helpers.available()" style="max-width: 100%;">
                         <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
-                            <h5 class="card-header">
+                            <h5 class="card-header d-flex align-items-center justify-content-between">
                                 <knockout data-bind="text: $data.name">Name</knockout>
+                                <div class="d-flex align-items-center position-relative">
+                                    <!-- ko foreach: $data.images -->
+                                    <img class="pixelated" data-bind="attr: { src: $data }" src="" alt="">
+                                    <!-- /ko -->
+                                    <!-- ko if: $data.hasStolenItem(600) -->
+                                    <img class="pixelated position-absolute" src="assets/images/pokemon/25.23.png" alt="" style="width: 24px; right: -16px; bottom: -10px;">
+                                    <!-- /ko -->
+                                </div>
                             </h5>
                             <div class="card-body p-0">
                                 <table class="table table-striped table-hover table-bordered table-sm m-0">
@@ -614,11 +622,22 @@
                     <div class="row p-0">
                         <!-- ko foreach: App.game.underground.helpers.hired() -->
                         <div class="col p-0">
-                            <div>
-                                <span data-bind="text: $data.name"></span>
-                                <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
-                                <span data-bind="text: ` using ${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></span>
-                                <!-- /ko -->
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="d-flex align-items-center position-relative m-2">
+                                    <!-- ko foreach: $data.images -->
+                                    <img class="pixelated" data-bind="attr: { src: $data }" src="" alt="">
+                                    <!-- /ko -->
+                                    <!-- ko if: $data.hasStolenItem(600) -->
+                                    <img class="pixelated position-absolute" src="assets/images/pokemon/25.23.png" alt="" style="width: 24px; right: -16px; bottom: -10px;">
+                                    <!-- /ko -->
+                                </div>
+
+                                <div class="m-2">
+                                    <span data-bind="text: $data.name"></span>
+                                    <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
+                                    <span data-bind="text: ` using ${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></span>
+                                    <!-- /ko -->
+                                </div>
                             </div>
                             <div class="progress" style='height: 5px'>
                                 <div class="progress-bar bg-info" role="progressbar"

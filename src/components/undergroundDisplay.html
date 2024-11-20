@@ -89,7 +89,17 @@
             <!-- ko foreach: App.game.underground.helpers.hired() -->
             <div class="row">
                 <div class="col p-2">
-                    <div data-bind="text: $data.name"></div>
+                    <div class="d-flex justify-content-center">
+                        <div class="d-flex align-items-center justify-content-center position-relative mb-2">
+                            <!-- ko foreach: $data.images -->
+                            <img class="pixelated" data-bind="attr: { src: $data }" src="" alt="">
+                            <!-- /ko -->
+                            <!-- ko if: $data.hasStolenItem(600) -->
+                            <img class="pixelated position-absolute" src="assets/images/pokemon/25.23.png" alt="" style="width: 24px; right: -16px; bottom: -10px;">
+                            <!-- /ko -->
+                        </div>
+                    </div>
+
                     <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
                     <div data-bind="text: `${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></div>
                     <!-- /ko -->
