@@ -31,7 +31,7 @@ class Plot implements Saveable {
     formattedMulchTimeLeft: KnockoutComputed<string>;
     formattedAuras: KnockoutComputed<string>;
 
-    auraGrowth: KnockoutComputed<number>;
+    auraRipen: KnockoutComputed<number>;
     auraHarvest: KnockoutComputed<number>;
     auraMutation: KnockoutComputed<number>;
     auraReplant: KnockoutComputed<number>;
@@ -130,8 +130,8 @@ class Plot implements Saveable {
             return GameConstants.formatTime(this.mulchTimeLeft);
         });
 
-        this.auraGrowth = ko.pureComputed(() => {
-            return this.multiplyNeighbourAura(AuraType.Growth);
+        this.auraRipen = ko.pureComputed(() => {
+            return this.multiplyNeighbourAura(AuraType.Ripen);
         });
         this.auraHarvest = ko.pureComputed(() => {
             return this.multiplyNeighbourAura(AuraType.Harvest);
@@ -154,8 +154,8 @@ class Plot implements Saveable {
 
         this.formattedAuras = ko.pureComputed(() => {
             const auraStr = [];
-            if (this.auraGrowth() !== 1) {
-                auraStr.push(`Growth: ×${this.auraGrowth().toFixed(2)}`);
+            if (this.auraRipen() !== 1) {
+                auraStr.push(`Ripen: ×${this.auraRipen().toFixed(2)}`);
             }
 
             if (this.auraHarvest() !== 1) {
@@ -478,7 +478,7 @@ class Plot implements Saveable {
         }[this.mulch] ?? 1;
 
         if (this.stage() !== PlotStage.Berry) {
-            multiplier *= this.auraGrowth();
+            multiplier *= this.auraRipen();
         } else {
             multiplier *= this.auraDecay();
             // Handle Death Aura
