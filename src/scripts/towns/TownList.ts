@@ -6648,7 +6648,7 @@ TownList['Pikachu Land'] = new Town(
     'Pikachu Land',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Pikachu Libre and it\'s gang']],
+    [TemporaryBattleList['Pikachu Libre and its gang']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
         npcs: [DirectorFrank1, DirectorFrank2, DirectorFrank3, DirectorFrank4, DirectorFrank5],

@@ -2495,11 +2495,11 @@ class QuestLineHelper {
         const talkToFrankQuest3 = new TalkToNPCQuest(DirectorFrank4, 'Return to Frank');
         lightsCameraPikaQuestLine.addQuest(talkToFrankQuest3);
 
-        const trainPikachusQuest = new CustomQuest(15, undefined, 'Train 15 Pikachus to 25.000 power',
+        const trainPikachusQuest = new CustomQuest(15, undefined, 'Train 15 Pikachus to 25.000 attack',
             () => App.game.party.caughtPokemon.filter(p => Math.floor(p.id) == 25 && p.attack >= 25000).length).withInitialValue(0);
         lightsCameraPikaQuestLine.addQuest(trainPikachusQuest);
 
-        const fightLibrePikachuQuest = new DefeatTemporaryBattleQuest('Pikachu Libre and it\'s gang', 'Defeat Pikachu Libre and it\'s gang!');
+        const fightLibrePikachuQuest = new DefeatTemporaryBattleQuest('Pikachu Libre and its gang', 'Defeat Pikachu Libre and its gang!');
 
         const talkToFrankQuest4 = new TalkToNPCQuest(DirectorFrank5, 'Return to Frank').withCustomReward(() => {
             App.game.party.gainPokemonByName('Pikachu (Super)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));

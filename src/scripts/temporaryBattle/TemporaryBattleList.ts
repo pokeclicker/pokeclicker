@@ -3871,8 +3871,8 @@ TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
     }
 );
 
-TemporaryBattleList['Pikachu Libre and it\'s gang'] = new TemporaryBattle(
-    'Pikachu Libre and it\'s gang',
+TemporaryBattleList['Pikachu Libre and its gang'] = new TemporaryBattle(
+    'Pikachu Libre and its gang',
     [
         new GymPokemon('Pikachu', 90000000, 50),
         new GymPokemon('Pikachu', 90000000, 50),
