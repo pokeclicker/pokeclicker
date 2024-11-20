@@ -226,8 +226,9 @@ class BreedingController {
         if (App.game.challenges.list.regionalAttackDebuff.active()) {
             // Check if regional debuff being applied for sorting
             const regionalAttackDebuff = Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue();
-            if (regionalAttackDebuff > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== regionalAttackDebuff) {
-                return App.game.party.getRegionAttackMultiplier();
+            const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+            if (regionalAttackDebuff > -1 && nativeRegion !== regionalAttackDebuff) {
+                return App.game.party.getRegionAttackMultiplier(nativeRegion, regionalAttackDebuff);
             }
         }
         return 1.0;
