@@ -289,6 +289,7 @@ export const SpriteCredits: Credit[] = [
             'Danny',
             'Day cycle images',
             'Detective Pikachu Overworld',
+            'Director Frank',
             'Dr. Splash',
             'Dracovish shop image',
             'Dracozolt shop image',
