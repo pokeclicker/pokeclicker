@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="col p-2">
                     <div class="d-flex justify-content-center">
-                        <div class="d-flex align-items-center justify-content-center position-relative mb-2">
+                        <div class="d-flex align-items-center justify-content-center position-relative">
                             <!-- ko foreach: $data.images -->
                             <img class="pixelated" data-bind="attr: { src: $data }" src="" alt="">
                             <!-- /ko -->
@@ -101,9 +101,11 @@
                     </div>
 
                     <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
-                    <div data-bind="text: `${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></div>
+                    <img class="pixelated" data-bind="attr: { src: ItemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]].image }" src="" alt="" style="height: 26px;">
+                    <span data-bind="text: `× ${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')}`"></span>
                     <!-- /ko -->
-                    <div class="progress" style='height: 5px'>
+
+                    <div class="progress mt-2" style='height: 5px'>
                         <div class="progress-bar bg-info" role="progressbar"
                              data-bind="attr:{ style: 'width:' + ($data.timeSinceWork / $data.workCycleTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
                              aria-valuemin="0" aria-valuemax="100">
