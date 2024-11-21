@@ -5,6 +5,7 @@ import Profile from './profile/Profile';
 import { SortSaves } from './Sortable';
 import Settings from './settings/index';
 import GameHelper from './GameHelper';
+import GameLoadState from './utilities/GameLoadState';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -28,7 +29,7 @@ export default class SaveSelector {
             $('#saveSelectorContextMenu').html(`
                 <a class="dropdown-item bg-success" href="#" onclick="Save.key = '${key}'; SaveSelector.Download('${key}')">Download (backup)</a>
                 <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">Load</a>
-                <a class="dropdown-item bg-warning" href="#"><label class="clickable my-0" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
+                <a class="dropdown-item bg-warning p-0 w-100" href="#"><label class="clickable my-0" style="padding:.75rem;" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
                 <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">Delete</a>
             `).css({
                 display: 'block',
@@ -68,6 +69,11 @@ export default class SaveSelector {
 
     static LoadSaveOnKeydown(e: JQuery.KeyDownEvent) {
         if (GameHelper.focusedOnEditableElement()) {
+            return;
+        }
+
+        if (GameLoadState.getLoadState() !== GameLoadState.states.none) {
+            $(document).off(e);
             return;
         }
 

@@ -43,7 +43,7 @@
                         <div style="position: relative; width: 100%; max-width: 50px; aspect-ratio: 1; padding: 2px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: tool.durability < tool.durabilityPerUse ? 0.3 : 1 }">
                             <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 8px;">
                                 <div style="display: flex; align-items: center; justify-content: center;">
-                                    <img style="width: 20px; height: 20px; object-fit: contain;" alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: {  }">
+                                    <img style="width: 20px; height: 20px; object-fit: contain;" alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: {  }">
                                 </div>
                                 <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                             </div>
