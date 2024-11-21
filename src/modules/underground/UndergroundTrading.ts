@@ -3,6 +3,7 @@ import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import { UndergroundController } from './UndergroundController';
+import GameHelper from '../GameHelper';
 
 export const TRADE_DOWN_AMOUNT = 3;
 
@@ -54,6 +55,8 @@ export class UndergroundTrading {
 
         player.loseItem(this.selectedTradeFromItem.itemName, tradeFromAmount);
         player.gainItem(this.selectedTradeToItem.itemName, tradeToAmount);
+
+        GameHelper.incrementObservable(App.game.statistics.undergroundTrades, tradeToAmount);
 
         return true;
     }
