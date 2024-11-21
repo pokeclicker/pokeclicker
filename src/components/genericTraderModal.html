@@ -41,10 +41,10 @@
                                     <button class='btn btn-success btn-block' data-bind='click: function(){GenericDeal.use(ShopHandler.shopObservable()?.traderID, $index(), tradeAmount())}, attr: { disabled: tradeAmount() > GenericDeal.maxTrades(deal) || !GenericDeal.canUse(ShopHandler.shopObservable()?.traderID, $index()) }'>
                                         <knockout data-bind="text: !GenericDeal.anySoldOut(deal) ? 'Trade' : 'Sold out'"></knockout>
                                     </button>
-                                    <button type="button" data-bind="visible: GenericDeal.maxTrades(deal) > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button type="button" data-bind="visible: GenericDeal.maxTrades(deal) > 1 || tradeAmount() > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </button>
                                     <div class="dropdown-menu" data-bind="foreach: [1, 10, 100]">
-                                        <button class="dropdown-item" type="button" data-bind="visible: GenericDeal.maxTrades(deal) > 1, click: function(){tradeAmount($data)}, text: $data"></button>
+                                        <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
                                     </div>
                                 </div>
                             </div>
