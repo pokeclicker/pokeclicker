@@ -147,7 +147,7 @@ class QuestLine {
     get displayName(): string {
         if (!this.cachedTranslatedName) {
             this.cachedTranslatedName = App.translation.get(
-                `${this.name}.name.${GameHelper.translationHash(this.name)}`,
+                `${this.name}.displayName.${GameHelper.translationHash(this.name)}`,
                 'questlines',
                 { defaultValue: this.name }
             );
