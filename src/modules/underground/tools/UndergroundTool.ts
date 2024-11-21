@@ -45,6 +45,8 @@ export default class UndergroundTool {
         this._restoreRateCounter(this.restoreRateCounter % this.restoreRate);
 
         if (this.durability === 1) {
+            this._restoreRateCounter(0);
+
             Notifier.notify({
                 title: 'Underground tools',
                 message: `${this.displayName} reached 100% durability!`,
