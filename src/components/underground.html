@@ -183,7 +183,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-primary" data-bind="click: () => App.game.underground.battery.discharge(), attr: { disabled: App.game.underground.battery.charges < App.game.underground.battery.maxCharges }">Discharge</button>
+                                <button class="btn btn-primary" data-bind="click: () => App.game.underground.battery.discharge(), enable: App.game.underground.battery.canDischarge">Discharge</button>
                             </div>
                             <!-- /ko -->
                             <!-- ko ifnot: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->

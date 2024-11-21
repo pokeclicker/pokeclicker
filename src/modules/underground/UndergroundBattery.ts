@@ -89,6 +89,13 @@ export class UndergroundBattery {
     private _activeDischargePattern: UndergroundBatteryPattern | null = null;
     private _activeDischargeFrame: number = 0;
 
+    public canDischarge: PureComputed<boolean> = ko.pureComputed(() =>
+        this.charges >= this.maxCharges &&
+        App.game.underground.mine.timeUntilDiscovery <= 0 &&
+        !App.game.underground.mine.completed &&
+        App.game.oakItems.isActive(OakItemType.Cell_Battery) &&
+        UndergroundBattery._patterns.length !== 0);
+
     public static addPattern(pattern: UndergroundBatteryPattern) {
         this._patterns.push(pattern);
     }
@@ -129,15 +136,7 @@ export class UndergroundBattery {
     }
 
     public discharge() {
-        if (!App.game.oakItems.isActive(OakItemType.Cell_Battery)) {
-            return;
-        }
-
-        if (this._charges() < UNDERGROUND_BATTERY_MAX_CHARGES) {
-            return;
-        }
-
-        if (UndergroundBattery._patterns.length === 0) {
+        if (!this.canDischarge()) {
             return;
         }
 
@@ -163,8 +162,7 @@ export class UndergroundBattery {
         while (
             this._activeDischargePattern &&
             this._activeDischargeFrame < this._activeDischargePattern.pattern.length &&
-            App.game.underground.mine.timeUntilDiscovery <= 0 &&
-            !App.game.underground.mine.completed
+            this.canDischarge
         ) {
             const patternFrame = this._activeDischargePattern.pattern[this._activeDischargeFrame];
 
