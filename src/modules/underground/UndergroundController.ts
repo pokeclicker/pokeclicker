@@ -16,7 +16,7 @@ import {
     HELPER_EXPERIENCE_PLAYER_FRACTION,
     humanifyString,
     PLATE_VALUE,
-    PLAYER_EXPERIENCE_HELPER_FRACTION,
+    PLAYER_EXPERIENCE_HELPER_FRACTION, SECOND,
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
     SURVEY_RANGE_REDUCTION_LEVELS,
@@ -313,12 +313,33 @@ export class UndergroundController {
         }
     }
 
+    public static notifyHelperHired(helper: UndergroundHelper) {
+        Notifier.notify({
+            title: `${this.buildHelperNotificationTitle(helper)} ${helper.name}`,
+            message: 'Thanks for hiring me,\nI won\'t let you down!',
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 30 * SECOND,
+            setting: NotificationConstants.NotificationSetting.Underground.helper,
+        });
+    }
+
+    public static notifyHelperFired(helper: UndergroundHelper) {
+        Notifier.notify({
+            title: `${this.buildHelperNotificationTitle(helper)} ${helper.name}`,
+            message: 'Happy to work for you! Let me know when you\'re hiring again!',
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 30 * SECOND,
+            setting: NotificationConstants.NotificationSetting.Underground.helper,
+        });
+    }
+
     public static notifyHelperItemRetention(item: UndergroundItem, amount: number, helper: UndergroundHelper) {
         Notifier.notify({
-            message: `${helper.name} kept this treasure as payment.`,
+            title: `${this.buildHelperNotificationTitle(helper)} ${helper.name}`,
+            message: helper.retentionText,
             type: NotificationConstants.NotificationOption.warning,
             setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
-            timeout: 3000,
+            timeout: 3 * SECOND,
         });
     }
 
@@ -327,7 +348,16 @@ export class UndergroundController {
             message: 'Your Underground Battery has been fully charged and is ready to be discharged.',
             type: NotificationOption.info,
             setting: NotificationConstants.NotificationSetting.Underground.battery_full,
-            timeout: 10000,
+            timeout: 10 * SECOND,
         });
+    }
+
+    private static buildHelperNotificationTitle(helper: UndergroundHelper) {
+        return [
+            '<div class="d-inline-flex align-items-center justify-content-center position-relative mr-2">',
+            ...helper.images.map(image => `<img src="${image}" height="24px" class="pixelated"/>`),
+            (helper.hasStolenItem(600) ? '<img class="pixelated position-absolute" src="assets/images/pokemon/25.23.png" alt="" style="width: 24px; right: -16px; bottom: -10px;">' : ''),
+            '</div>',
+        ].join('');
     }
 }

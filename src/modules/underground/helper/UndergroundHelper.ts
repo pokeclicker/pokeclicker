@@ -35,6 +35,7 @@ type UndergroundHelperParams = {
     images: string[],
     favoriteMine: MineType,
     unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
+    retentionText?: string[],
 };
 
 export class UndergroundHelper {
@@ -43,6 +44,7 @@ export class UndergroundHelper {
     private _images: string[];
     private _favoriteMine: MineType;
     private _unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement;
+    private _retentionText: string[];
 
     private _experience: Observable<number> = ko.observable<number>(0);
     private _hired: Observable<boolean> = ko.observable<boolean>(false);
@@ -76,6 +78,7 @@ export class UndergroundHelper {
             images,
             favoriteMine,
             unlockRequirement = undefined,
+            retentionText = undefined,
         } = options;
 
         this._id = id;
@@ -83,6 +86,7 @@ export class UndergroundHelper {
         this._images = images;
         this._favoriteMine = favoriteMine;
         this._unlockRequirement = unlockRequirement;
+        this._retentionText = retentionText?.length > 0 ? retentionText : [`${name} kept this treasure as payment.`];
     }
 
     public isUnlocked(): boolean {
@@ -179,25 +183,13 @@ export class UndergroundHelper {
     public hire() {
         this._hired(true);
         this._timeSinceWork(0);
-        Notifier.notify({
-            title: `[UNDERGROUND HELPER] ${this._name}`,
-            message: 'Thanks for hiring me,\nI won\'t let you down!',
-            type: NotificationConstants.NotificationOption.success,
-            timeout: 30 * SECOND,
-            setting: NotificationConstants.NotificationSetting.Underground.helper,
-        });
+        UndergroundController.notifyHelperHired(this);
     }
 
     public fire() {
         this._hired(false);
         this._timeSinceWork(0);
-        Notifier.notify({
-            title: `[UNDERGROUND HELPER] ${this._name}`,
-            message: 'Happy to work for you! Let me know when you\'re hiring again!',
-            type: NotificationConstants.NotificationOption.success,
-            timeout: 30 * SECOND,
-            setting: NotificationConstants.NotificationSetting.Underground.helper,
-        });
+        UndergroundController.notifyHelperFired(this);
     }
 
     public addExp(experience: number) {
@@ -239,6 +231,10 @@ export class UndergroundHelper {
 
     get rewardRetention(): number {
         return this._rewardRetention();
+    }
+
+    get retentionText(): string {
+        return Rand.fromArray(this._retentionText);
     }
 
     get autoSellToggle(): boolean {
@@ -362,8 +358,36 @@ export class UndergroundHelpers {
     }
 }
 
-UndergroundHelpers.add(new UndergroundHelper({ id: 'diamond', name: 'Steve and Alex', images: ['steve', 'alex'], favoriteMine: MineType.Diamond }));
-UndergroundHelpers.add(new UndergroundHelper({ id: 'gemplates', name: 'Gemma', images: ['perrin'], favoriteMine: MineType.GemPlate }));
-UndergroundHelpers.add(new UndergroundHelper({ id: 'shards', name: 'Sharlene', images: ['sharlene'], favoriteMine: MineType.Shard }));
-UndergroundHelpers.add(new UndergroundHelper({ id: 'fossils', name: 'Jones', images: ['jones'], favoriteMine: MineType.Fossil }));
-UndergroundHelpers.add(new UndergroundHelper({ id: 'evolutionitems', name: 'Darwin', images: ['darwin'], favoriteMine: MineType.EvolutionItem }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'diamond', name: 'Steve and Alex', images: ['steve', 'alex'], favoriteMine: MineType.Diamond, retentionText: [
+    'This is as rare as a Master Ball. We’re keeping it for our... crafting projects.',
+    'This treasure’s as valuable as diamonds. We’ll hold onto it for now.',
+    'Rare finds like this are hard to come by. Consider it ‘Steve and Alex tax.’',
+] }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'gemplates', name: 'Gemma', images: ['perrin'], favoriteMine: MineType.GemPlate, retentionText: [
+    'Shiny, sparkly, and absolutely mine!',
+    'This is too beautiful to part with. It’s coming with me.',
+    'Looks like I’ve struck crystal gold! Finders keepers, right?',
+    'A treasure this dazzling belongs with someone who appreciates its beauty.',
+    'Ooh, this is as radiant as a Legendary Pokémon! Definitely keeping it.',
+] }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'shards', name: 'Sharlene', images: ['sharlene'], favoriteMine: MineType.Shard, retentionText: [
+    'This is sharp and shiny—just my style. It’s staying with me!',
+    'Looks like another piece for my ultimate collection!',
+    'Items like these hold secrets. I’ll study this one closely.',
+    'This speaks to me. Its place is with me now.',
+    'A perfect item for a perfect treasure hunter. Thanks for the assist!',
+] }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'fossils', name: 'Jones', images: ['jones'], favoriteMine: MineType.Fossil, retentionText: [
+    'This artifact belongs in a museum—or maybe just my backpack!',
+    'A rare treasure like this deserves a careful keeper. That’s me!',
+    'Looks like I’ve uncovered another legendary find. I’ll hold onto it for safekeeping.',
+    'Every dig uncovers a story... and this one’s staying with me.',
+    'Another relic of the underground! Don’t worry, I’ll keep it safe from Team Rocket.',
+] }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'evolutionitems', name: 'Darwin', images: ['darwin'], favoriteMine: MineType.EvolutionItem, retentionText: [
+    'Fascinating! This item clearly demonstrates adaptation at its finest. I’ll study it further.',
+    'A perfect example of survival of the fittest... in my bag.',
+    'This discovery is essential to understanding underground ecosystems. I’ll keep it!',
+    'Nature is full of wonders, and this is one I simply must preserve.',
+    'Remarkable! I’ll add this to my collection of evolutionary evidence.',
+] }));
