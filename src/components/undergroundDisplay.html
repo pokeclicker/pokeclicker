@@ -23,7 +23,7 @@
                 <!-- /ko -->
 
                 <!-- ko ifnot: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
-                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">Found • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout></div>
+                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">Collected • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout></div>
                 <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout></div>
                 <div class="small">Buried • <knockout data-bind="text: App.game.underground.mine?.itemsBuried"></knockout></div>
                 <!-- /ko -->

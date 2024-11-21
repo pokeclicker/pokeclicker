@@ -54,14 +54,14 @@
                             <div class="card-header p-2 font-weight-bold">Treasures</div>
                             <div class="card-body p-2 d-flex justify-content-center" style="gap: 1.5rem">
                                 <!-- ko if: !App.game.underground.mine || App.game.underground.mine.timeUntilDiscovery > 0 -->
-                                <div>Found • ??</div>
+                                <div>Collected • ??</div>
                                 <div>Seen • ??</div>
                                 <div>Buried • ??</div>
                                 <!-- /ko -->
 
                                 <!-- ko ifnot: !App.game.underground.mine || App.game.underground.mine.timeUntilDiscovery > 0 -->
                                 <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">
-                                    Found • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout>
+                                    Collected • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout>
                                 </div>
                                 <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">
                                     Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout>
@@ -110,7 +110,7 @@
 
                             <!-- ko if: App.game.underground.mine && App.game.underground.mine.completed -->
                             <div style="position: absolute; inset: 20%; display: grid; gap: 1rem; align-content: center;">
-                                <div>Found all items</div>
+                                <div>Collected all items</div>
                                 <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
                             </div>
                             <!-- /ko -->
@@ -596,7 +596,7 @@
                             <h4>Treasure Scanner</h4>
                             <ul>
                                 <li><strong>Progress:</strong> Gains progress to level up when finding an item in a mine</li>
-                                <li><strong>Effect:</strong> Has a chance to duplicate a found item. Keeps attempting to duplicate until it fails a chance</li>
+                                <li><strong>Effect:</strong> Has a chance to duplicate a collected item. Keeps attempting to duplicate until it fails a chance</li>
                             </ul>
                         </div>
                     </div>
@@ -609,8 +609,8 @@
                         <div class="card-body">
                             <ul>
                                 <li><strong>Seen Item:</strong> At least 1 part of the item is visible to the player</li>
-                                <li><strong>Found Item:</strong> All parts of the item are visible to the player, the item has been claimed</li>
-                                <li><strong>Completed Mine:</strong> All buried items have been found</li>
+                                <li><strong>Collected Item:</strong> All parts of the item are visible to the player, the item has been claimed</li>
+                                <li><strong>Completed Mine:</strong> All buried items have been collected</li>
                             </ul>
                         </div>
                     </div>
