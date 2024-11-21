@@ -150,7 +150,7 @@ class QuestLine {
     get description(): string {
         if (!this.cachedTranslatedDescription) {
             this.cachedTranslatedDescription = App.translation.get(
-                `${this.name}.description.${GameHelper.hash(this._description)}`,
+                `${this.name}.description.${GameHelper.translationHash(this._description)}`,
                 'questlines',
                 { defaultValue: this._description }
             );

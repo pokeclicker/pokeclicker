@@ -68,7 +68,7 @@ abstract class Quest {
         if (!this.cachedTranslatedDescription) {
             this.cachedTranslatedDescription = App.translation.get(
                 // e.g. Example Quest.step 1.123456789
-                `${this.parentQuestLine.name}.step ${this.parentQuestLine.quests().findIndex(q => q === this) + 1}.${GameHelper.hash(this._customDescription)}`,
+                `${this.parentQuestLine.name}.step ${this.parentQuestLine.quests().findIndex(q => q === this) + 1}.${GameHelper.translationHash(this._customDescription)}`,
                 'questlines',
                 { defaultValue: this._customDescription }
             );
