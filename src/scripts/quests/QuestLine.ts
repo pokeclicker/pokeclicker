@@ -1,4 +1,5 @@
 class QuestLine {
+    private cachedTranslatedName?: KnockoutComputed<string>;
     private _description: string;
     private cachedTranslatedDescription?: KnockoutComputed<string>;
     state: KnockoutObservable<QuestLineState> = ko.observable(QuestLineState.inactive).extend({ numeric: 0 });
@@ -141,6 +142,17 @@ class QuestLine {
         }
 
         return true;
+    }
+
+    get displayName(): string {
+        if (!this.cachedTranslatedName) {
+            this.cachedTranslatedName = App.translation.get(
+                `${this.name}.name.${GameHelper.translationHash(this.name)}`,
+                'questlines',
+                { defaultValue: this.name }
+            );
+        }
+        return this.cachedTranslatedName();
     }
 
     set description(description: string) {
