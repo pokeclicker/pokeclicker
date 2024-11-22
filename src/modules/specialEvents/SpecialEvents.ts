@@ -10,15 +10,15 @@ export default class SpecialEvents implements Feature {
 
     public events: SpecialEvent[] = [];
 
+    constructor() {
+        this.addEvents();
+    }
+
     public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar = false) {
         // Check if the event exist before adding it again
         if (!this.events.find(event => event.title == title)) {
             this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar));
         }
-    }
-
-    constructor() {
-        this.addEvents();
     }
 
     initialize(): void {
@@ -43,8 +43,6 @@ export default class SpecialEvents implements Feature {
     canAccess(): boolean {
         return true;
     }
-
-    update(delta: number): void {}  // This method intentionally left blank
 
     getEvent(eventName: SpecialEventTitleType) {
         return this.events.find((e) => e.title == eventName);
@@ -90,7 +88,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 1, 7, 23), () => {
-            }
+            },
         );
         //Hoopa Day
         /*
@@ -103,7 +101,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 3, 2, 1), () => {
-            }
+            },
         );
         // Easter
         // QuestLineHelper.ts: Introduction questline; 'Egg Hunt'
@@ -114,7 +112,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 3, 29, 23), () => {
-            }
+            },
         );
         /* Golden Week
         Dungeon.ts:
@@ -126,7 +124,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 4, 6, 23), () => {
-            }
+            },
         );
         /* First Event
         RoamingPokemonList.ts:
@@ -139,7 +137,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 6, 12, 23), () => {
-            }
+            },
         );
         /* Pokemon the first movie release date
         RoamingPokemonList.ts:
@@ -157,7 +155,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 6, 24, 23), () => {
-            }
+            },
         );
         // Halloween
         this.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
@@ -166,7 +164,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 10, 5, 23), () => {
-            }
+            },
         );
         /* Let's Go P/E release date
         RoamingPokemonList.ts:
@@ -179,7 +177,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 10, 23, 23), () => {
-            }
+            },
         );
         /* Christmas
         RoamingPokemonList.ts:
@@ -199,7 +197,7 @@ export default class SpecialEvents implements Feature {
             },
             // End
             new Date(new Date().getFullYear(), 11, 31, 23), () => {
-            }
+            },
         );
     }
 }

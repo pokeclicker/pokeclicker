@@ -29,7 +29,6 @@ import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
 import type SpecialEvents from './specialEvents/SpecialEvents';
-import type { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted, 
