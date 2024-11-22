@@ -1,8 +1,8 @@
-/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+import { Feature } from '../DataStore/common/Feature';
+import SpecialEvent, { EventCallback } from './SpecialEvent';
+import type { SpecialEventTitleType } from './SpecialEventTitleType';
 
-class SpecialEvents implements Feature, TmpSpecialEventsType {
+export default class SpecialEvents implements Feature {
     name = 'Events';
     saveKey = 'events';
     defaults: Record<string, any>;
@@ -10,7 +10,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
 
     public events: SpecialEvent[] = [];
 
-    public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback, hideFromEventCalendar = false) {
+    public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar = false) {
         // Check if the event exist before adding it again
         if (!this.events.find(event => event.title == title)) {
             this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar));
