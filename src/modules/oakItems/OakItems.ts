@@ -143,11 +143,6 @@ export default class OakItems implements Feature {
         return save;
     }
 
-    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
-    update(delta: number): void {
-        // This method intentionally left blank
-    }
-
     isActive(item: OakItemType) {
         if (this.itemList[item] === undefined) {
             return false;

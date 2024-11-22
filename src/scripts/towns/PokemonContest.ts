@@ -64,9 +64,6 @@ class PokemonContest implements Feature {
         return PokemonContestController.requirements.isCompleted();
     }
 
-    update(delta: number): void {
-    }
-
     defaults: Record<string, any>;
     toJSON(): Record<string, any> {
         return {
