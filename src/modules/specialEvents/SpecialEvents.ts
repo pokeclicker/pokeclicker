@@ -44,6 +44,8 @@ export default class SpecialEvents implements Feature {
         return true;
     }
 
+    update(delta: number): void {}  // This method intentionally left blank
+
     getEvent(eventName: SpecialEventTitleType) {
         return this.events.find((e) => e.title == eventName);
     }
