@@ -22,8 +22,8 @@ class GainFarmPointsQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} Farm Points.`;
+    get defaultDescription(): string {
+        return `Gain ${this.amount.toLocaleString('en-US')} Farm Points.`;
     }
 
     toJSON() {

@@ -22,10 +22,7 @@ class MineLayersQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        if (this.customDescription) {
-            return this.customDescription;
-        }
+    get defaultDescription(): string {
         const suffix = this.amount > 1 ? 's' : '';
         return `Mine ${this.amount.toLocaleString('en-US')} layer${suffix} in the Underground.`;
     }

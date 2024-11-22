@@ -10,7 +10,7 @@ abstract class Quest {
 
     index: number;
     amount: number
-    private _customDescription?: string;
+    protected customDescription?: string;
     private cachedTranslatedDescription?: KnockoutComputed<string>;
     pointsReward: number;
     progress: KnockoutComputed<number>;
@@ -50,30 +50,24 @@ abstract class Quest {
     }
 
     get description(): string {
-        return this.customDescription ?? 'Generic Quest Description. This should be overriden.';
-    }
-
-    set customDescription(customDescription: string) {
-        this._customDescription = customDescription;
-    }
-
-    get customDescription(): string | undefined {
-        if (!this._customDescription) {
-            return undefined;
-        }
+        const description = this.customDescription ?? this.defaultDescription;
         if (!this.inQuestLine) {
-            // Quest descriptions currently only supported for questlines
-            return this._customDescription;
+            // Quest translations currently only supported for questlines
+            return description;
         }
         if (!this.cachedTranslatedDescription) {
             this.cachedTranslatedDescription = App.translation.get(
-                // e.g. Example Quest.step 1.123456789
-                `${this.parentQuestLine.name}.step ${this.parentQuestLine.quests().findIndex(q => q === this) + 1}.${GameHelper.translationHash(this._customDescription)}`,
+                // Keys are formatted like "Example Quest.step 1.123456789"
+                `${this.parentQuestLine.name}.step ${this.parentQuestLine.quests().findIndex(q => q === this) + 1}.${GameHelper.translationHash(description)}`,
                 'questlines',
-                { defaultValue: this._customDescription }
+                { defaultValue: description }
             );
         }
         return this.cachedTranslatedDescription();
+    }
+
+    get defaultDescription() {
+        return 'Generic Quest Description. This should be overriden.';
     }
 
     public static generateData(): any[] {

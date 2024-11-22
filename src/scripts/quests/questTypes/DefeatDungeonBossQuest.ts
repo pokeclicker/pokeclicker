@@ -9,8 +9,8 @@ class DefeatDungeonBossQuest extends Quest implements QuestInterface {
         this.focus = ko.observable(0);
     }
 
-    get description() {
-        return this.customDescription ?? `Defeat ${this.dungeonBoss} in ${this.dungeon}.`;
+    get defaultDescription() {
+        return `Defeat ${this.dungeonBoss} in ${this.dungeon}.`;
     }
 
     onLoad() {
