@@ -19,9 +19,6 @@ class AchievementTracker implements Feature {
         return App.game.keyItems.hasKeyItem(KeyItemType.Holo_caster);
     }
 
-    update(delta: number): void {
-    }
-
     nextAchievement(): void {
         if (!this.hasTrackedAchievement()) {
             return;

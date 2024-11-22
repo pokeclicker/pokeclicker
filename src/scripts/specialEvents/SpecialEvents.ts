@@ -44,8 +44,6 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
         return true;
     }
 
-    update(delta: number): void {}  // This method intentionally left blank
-
     getEvent(eventName: SpecialEventTitleType) {
         return this.events.find((e) => e.title == eventName);
     }

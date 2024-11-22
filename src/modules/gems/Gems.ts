@@ -123,9 +123,6 @@ export default class Gems implements Feature {
         return App.game.keyItems.hasKeyItem(KeyItemType.Gem_case);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    update(delta: number) {}
-
     toJSON(): Record<string, any> {
         return {
             gemWallet: GameHelper.filterArrayEnd(this.gemWallet.map(ko.unwrap)),
