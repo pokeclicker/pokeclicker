@@ -48,7 +48,7 @@ export default class BlendingRecipes {
         let recipes = [];
         GameHelper.enumNumbers(BlendingRecipeType).flatMap(key => {
             if (BlendingRecipes.isUnlocked(key) || !filter) {
-                recipes = recipes.concat(BlendingRecipes.getBlendingRecipeSet(key));
+                recipes = recipes.concat(BlendingRecipes.getBlendingRecipeSet(key, filter));
             }
         });
         return recipes;

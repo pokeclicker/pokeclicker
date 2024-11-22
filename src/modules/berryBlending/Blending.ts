@@ -13,6 +13,8 @@ import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 import BerryFlavor from '../interfaces/BerryFlavor';
+import BlendingController from './BlendingController';
+import BlendingRecipes from './BlendingRecipes';
 
 export default class Blending implements Feature {
     name = 'Blending';
@@ -37,6 +39,7 @@ export default class Blending implements Feature {
     }
 
     initialize(): void {
+        BlendingController.selectedRecipeList(BlendingRecipes.getFullBlendingRecipeList());
     }
 
     update(delta: number): void {
