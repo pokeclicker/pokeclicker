@@ -6,6 +6,7 @@ import BlendingRecipes from './BlendingRecipes';
 import FlavorAmount from './FlavorAmount';
 import FlavorType from '../enums/FlavorType';
 import BooleanStringKeys from '../interfaces/BooleanStringKeys';
+import BlendingRecipeType from '../enums/BlendingRecipeType';
 
 export default class BlendingController {
     public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
@@ -15,7 +16,6 @@ export default class BlendingController {
     public static blendingModalTabSelected: KnockoutObservable<string> = ko.observable('blendingView');
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
-    public static selectedRecipe: KnockoutObservable<BlendingRecipe> = ko.observable(BlendingRecipes.blendingRecipeList[0][0]);
     public static selectedRecipeList: KnockoutObservableArray<BlendingRecipe> = ko.observableArray([]);
 
     public static spicyFilter: KnockoutObservable<boolean> = ko.observable(false);
@@ -32,57 +32,85 @@ export default class BlendingController {
         [FlavorType[FlavorType.Sour]]: this.sourFilter,
     };
 
-    static amount: KnockoutObservable<number> = ko.observable(1);
+    static amounts: Array<KnockoutObservable<number>>;
 
-    public static amountInput = () => $('#berryBlenderModal').find('input[name="recipeAmount"]');
-
-    public static resetAmount() {
-        this.amountInput().val(1).change();
+    public static recipeIndex(recipe: BlendingRecipe) {
+        return BlendingRecipes.getFullBlendingRecipeList(false).indexOf(recipe);
     }
 
-    public static increaseAmount(n: number) {
-        const newVal = (parseInt(this.amountInput().val().toString(), 10) || 0) + n;
-        this.amountInput().val(newVal > 1 ? newVal : 1).change();
+    public static amountInputElement(recipe: BlendingRecipe) {
+        return $(`#recipeAmount-${recipe.item}`);
     }
 
-    public static multiplyAmount(n: number) {
-        const newVal = (parseInt(this.amountInput().val().toString(), 10) || 0) * n;
-        this.amountInput().val(newVal > 1 ? newVal : 1).change();
+    public static resetAmount(recipe: BlendingRecipe) {
+        this.amountInputElement(recipe).val(1).change();
     }
 
-    public static maxAmount() {
-        const recipe: BlendingRecipe = this.selectedRecipe();
+    public static increaseAmount(recipe: BlendingRecipe, n: number) {
+        const curVal = parseInt(this.amountInputElement(recipe).val().toString(), 10);
+        const newVal = (curVal || 0) + n;
+        this.amountInputElement(recipe).val(newVal > 1 ? newVal : 1).change();
+    }
 
+    public static multiplyAmount(recipe: BlendingRecipe, n: number) {
+        const curVal = parseInt(this.amountInputElement(recipe).val().toString(), 10);
+        const newVal = (curVal || 0) * n;
+        this.amountInputElement(recipe).val(newVal > 1 ? newVal : 1).change();
+    }
+
+    public static maxAmount(recipe: BlendingRecipe) {
         if (!recipe) {
-            return this.amountInput().val(0).change();
+            return this.amountInputElement(recipe).val(0).change();
         }
 
-        const tooMany = (amt: number) => (recipe as BlendingRecipe).flavorPrice.some((flavor) =>
+        const tooMany = (amt: number) => (recipe).flavorPrice.some((flavor) =>
             !App.game.blending.hasAmount(new FlavorAmount(flavor.value * amt, flavor.type)),
         );
 
         const amt = GameHelper.binarySearch(tooMany, 0, Number.MAX_SAFE_INTEGER);
 
-        this.amountInput().val(amt).change();
+        this.amountInputElement(recipe).val(amt).change();
     }
 
-    public static calculateSelectionCss(recipe: BlendingRecipe): boolean {
-        if (recipe && (recipe as BlendingRecipe).flavorPrice.some((flavor) =>
-            !App.game.blending.hasAmount(new FlavorAmount(flavor.value * this.amount(), flavor.type)))
-                || this.amount() < 1) {
-            return true;
-        }
-    }
-
-    public static calculateButtonCss(): string {
-        const recipe: BlendingRecipe = this.selectedRecipe();
-
-        if (recipe && (recipe as BlendingRecipe).flavorPrice.some((flavor) =>
-            !App.game.blending.hasAmount(new FlavorAmount(flavor.value * this.amount(), flavor.type)))
-                || this.amount() < 1) {
+    public static calculateButtonCss(recipe: BlendingRecipe): string {
+        const curVal = parseInt(this.amountInputElement(recipe).val().toString());
+        if (recipe && (recipe).flavorPrice.some((flavor) =>
+            !App.game.blending.hasAmount(new FlavorAmount(flavor.value * curVal, flavor.type)))
+                || curVal < 1) {
             return 'btn btn-danger smallButton smallFont';
         } else {
             return 'btn btn-success smallButton smallFont';
+        }
+    }
+
+    public static scrollIntoView(recipe: BlendingRecipe) {
+        const id = 'recipecard-' + recipe.item;
+        return document.getElementById(id).scrollIntoView();
+    }
+
+    public static inSelectedList(type?: BlendingRecipeType) {
+        const recipeTypes = [];
+
+        const selectedList = this.selectedRecipeList();
+        selectedList.forEach(br => recipeTypes.push(BlendingRecipes.getBlendingRecipeType(br)));
+        const typeList = [...new Set(recipeTypes)];
+
+        if (type) {
+            return typeList.includes(type);
+        } else {
+            const fullList = BlendingRecipes.getFullBlendingRecipeList();
+            return selectedList.length === fullList.length;
+        }
+    }
+
+    public static activeCss(recipeType: string) {
+        const dropdownId = 'dropdown-' + recipeType;
+        const listId = 'recipeList-' + recipeType;
+        let active = document.getElementById(listId).classList.contains('show');
+        if(active){
+            document.getElementById(dropdownId).classList.remove('active');
+        } else {
+            document.getElementById(dropdownId).classList.add('active');    
         }
     }
 

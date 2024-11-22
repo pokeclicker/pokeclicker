@@ -165,6 +165,128 @@
                 </div>
 
                 <div id="blendingRecipeView" class="tab-pane fade">
+                    <div class="modal-body row">
+                        <div class="col-3">
+                            <h4 class="modal-header">
+                                <button class="btn btn-block btn-outline-primary" style="font-size: large;"
+                                data-bind="
+                                click: () => BlendingController.selectedRecipeList(BlendingRecipes.getFullBlendingRecipeList()),
+                                css: { active: BlendingController.inSelectedList() },
+                                ">All Recipes</button>
+                            </h4>
+                            <div style="overflow: auto;">
+                                <!-- ko foreach: GameHelper.enumNumbers(BlendingRecipeType) -->
+                                    <!-- ko if: BlendingRecipes.isUnlocked($data) -->
+                                        <div class="btn-block btn-group my-1">
+                                            <btn class="btn btn-block btn-outline-primary"
+                                            data-bind="
+                                                text: GameConstants.camelCaseToString(BlendingRecipeType[$data]),
+                                                click: () => BlendingController.selectedRecipeList(BlendingRecipes.getBlendingRecipeSet($data)),
+                                                css: { active: BlendingController.inSelectedList(BlendingRecipeType[$data]) },">Recipe Type</btn>
+                                            <div class="btn-group">
+                                            <btn class="btn btn-block btn-outline-primary dropdown-toggle" data-toggle="collapse" aria-expanded="false"
+                                            data-target="#"
+                                            data-bind="attr: { 'data-target': '#recipeList-' + BlendingRecipeType[$data], id: 'dropdown-' + BlendingRecipeType[$data] },
+                                            click: () => BlendingController.activeCss(BlendingRecipeType[$data])"></btn>
+                                            </div>
+                                        </div>
+                                        <div class="collapse" data-bind="attr: { id: 'recipeList-' + BlendingRecipeType[$data] }">
+                                            <ul class="pl-0 list-group-flush" data-bind="foreach: BlendingRecipes.getBlendingRecipeSet($data)">
+                                                <li class="d-flex list-group-item py-1 align-items-center">
+                                                    <img src="" max-height="24px" data-bind="attr:{ src: ItemList[$data.item].image }">
+                                                    <a class="text-info" href="#" data-bind="text: ItemList[$data.item].displayName, click: () => BlendingController.scrollIntoView($data)"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div style="overflow: auto;" data-bind="foreach: BlendingController.selectedRecipeList()">
+                                <div class="pt-2 pb-1" data-bind="attr: { id: 'recipecard-' + $data.item }">
+                                    <div class="card">
+                                        <div class="row no-gutters">
+                                            <button class="col-md-4 btn btn-secondary">
+                                                <img src="" height="48px" style="image-rendering: pixelated;" data-bind="attr:{ src: ItemList[$data.item].image }">
+                                                <p data-bind="text: ItemList[$data.item].description"></p>
+                                                <p data-bind="text: `In Bag: ${player.itemList[$data.item]().toLocaleString('en-US')}`"></p>
+                                            </button>
+                                            <div class="col-md-8">
+                                                <div>
+                                                    <h4 class="card-header" style="text-align: left;" data-bind="text: ItemList[$data.item].displayName">Display Name</h4>
+                                                    <h6 class="m-2 text-muted" style="text-align: left;" data-bind="text: `${GameConstants.camelCaseToString(BlendingRecipes.getBlendingRecipeType($data))} Recipe`">Recipe Type</h6>                                               
+                                                    <ul class="px-5 py-2 list-group-flush">
+                                                        <h5 class="list-group-item p-1 m-0">Ingredient: Cost / Have</h5>
+                                                        <!-- ko foreach: $data.flavorPrice.filter(f => f.value > 0) -->
+                                                            <li class="list-group-item p-1" data-bind="
+                                                                css: { 'text-danger': ($data.value * BlendingController.amounts[BlendingController.recipeIndex($parent)]()) > App.game.blending.flavorBank[$data.type]() },
+                                                                text: `${FlavorType[$data.type]}: ${($data.value * BlendingController.amounts[BlendingController.recipeIndex($parent)]()).toLocaleString('en-US')} / ${App.game.blending.flavorBank[$data.type]().toLocaleString('en-US')}`
+                                                                ">Flavor: Value</li>
+                                                        <!-- /ko -->
+                                                    </ul>
+                                                    <div class="modal-footer">
+                                                        <div class="row justify-content-center">
+                                                            <div class="input-group m-0">
+                                                                <div class="input-group-prepend">
+                                                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont"
+                                                                    data-bind="click: () => BlendingController.resetAmount($data)">
+                                                                        Reset
+                                                                    </button>
+                                                                </div>
+                                                                <input type="number" class="outline-dark form-control form-control-number"
+                                                                        value="1" min="1" required
+                                                                        data-bind="attr: { id: 'recipeAmount-' + $data.item, name: 'recipeAmount-' + $data.item }, textInput: BlendingController.amounts[BlendingController.recipeIndex($data)]"
+                                                                        title=""/>
+                                                                <div class="input-group-append">
+                                                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                                                        <button class="btn btn-secondary smallButton smallFont" type="button"
+                                                                        data-bind="click: () => BlendingController.increaseAmount($data, 10)">
+                                                                            +10
+                                                                        </button>
+                                                                        <button class="btn btn-secondary smallButton smallFont" type="button"
+                                                                        data-bind="click: () => BlendingController.increaseAmount($data, 100)">
+                                                                            +100
+                                                                        </button>
+                                                                    <!-- /ko -->
+                                                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                                                        <button class="btn btn-secondary smallButton smallFont" type="button"
+                                                                        data-bind="click: () => BlendingController.multiplyAmount($data, 10)">
+                                                                            &times;10
+                                                                        </button>
+                                                                        <button class="btn btn-secondary smallButton smallFont" type="button"
+                                                                        data-bind="click: () => BlendingController.multiplyAmount($data, 0.1)">
+                                                                            &div;10
+                                                                        </button>
+                                                                    <!-- /ko -->
+                                                                    <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                                                        <button class="btn btn-secondary smallButton smallFont" type="button"
+                                                                        data-bind="click: () => BlendingController.increaseAmount($data, 100)">
+                                                                            +100
+                                                                        </button>
+                                                                        <button class="btn btn-secondary smallButton smallFont" type="button"
+                                                                        data-bind="click: () => BlendingController.increaseAmount($data, 1000)">
+                                                                            +1,000
+                                                                        </button>
+                                                                    <!-- /ko -->
+                                                                    <button class="btn btn-primary smallButton smallFont" type="button" data-bind="click: () => BlendingController.maxAmount($data)">
+                                                                        Max
+                                                                    </button>
+                                                                    <button class="btn-outline-dark" data-bind="attr: {class: BlendingController.calculateButtonCss($data)}, click: () => App.game.blending.buyPokeblock($data, parseInt($(`#recipeAmount-${$data.item}`).val()))">
+                                                                        Buy
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="blendingBuddiesView" class="tab-pane fade">

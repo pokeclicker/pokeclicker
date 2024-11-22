@@ -40,6 +40,7 @@ export default class Blending implements Feature {
 
     initialize(): void {
         BlendingController.selectedRecipeList(BlendingRecipes.getFullBlendingRecipeList());
+        BlendingController.amounts = new Array(BlendingRecipes.getFullBlendingRecipeList(false).length).fill(1).map((v) => ko.observable(v));
     }
 
     update(delta: number): void {

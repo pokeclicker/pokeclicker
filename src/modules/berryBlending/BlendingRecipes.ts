@@ -53,5 +53,9 @@ export default class BlendingRecipes {
         });
         return recipes;
     }
+
+    public static getBlendingRecipeType(recipe: BlendingRecipe) {
+        return BlendingRecipeType[(Object.keys(BlendingRecipes.blendingRecipeList).filter((v)=>BlendingRecipes.blendingRecipeList[v].includes(recipe)))[0]];
+    }
 }
 
