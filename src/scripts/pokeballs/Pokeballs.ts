@@ -5,6 +5,8 @@ class Pokeballs implements Feature {
     name = 'Pokeballs';
     saveKey = 'pokeballs';
 
+    defaults = {};
+
     public pokeballs: Pokeball[];
 
     public selectedSelection: KnockoutObservable<KnockoutObservable<GameConstants.Pokeball>>;
