@@ -11,7 +11,6 @@ enum PokeBlockColor {
     Brown,
     Olive,
     Orange,
-    Gray,
     Cool,
     Beautiful,
     Cute,

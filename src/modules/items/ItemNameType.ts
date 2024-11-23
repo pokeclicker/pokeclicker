@@ -71,7 +71,6 @@ export type ItemNameType
     | 'PokeBlock_Brown'
     | 'PokeBlock_Olive'
     | 'PokeBlock_Orange'
-    | 'PokeBlock_Gray'
     | 'PokeBlock_Cool'
     | 'PokeBlock_Beautiful'
     | 'PokeBlock_Cute'
