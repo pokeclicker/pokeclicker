@@ -257,7 +257,7 @@ export default class Blending implements Feature {
                 title: 'Blending Recipe',
             });
             return;
-        } else if (flavorPrices.filter(f => f.value > 0).every(f => this.loseAmount(new FlavorAmount(f.value * amount, f.type)))){
+        } else if (flavorPrices.filter(f => f.value > 0).every(f => this.loseAmount(new FlavorAmount(f.value * amount, f.type)))) {
             GameHelper.incrementObservable(player.itemList[r.item], amount);
             return;
         }

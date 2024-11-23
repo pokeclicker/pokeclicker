@@ -107,7 +107,7 @@ export default class BlendingController {
         const dropdownId = 'dropdown-' + recipeType;
         const listId = 'recipeList-' + recipeType;
         let active = document.getElementById(listId).classList.contains('show');
-        if(active){
+        if (active) {
             document.getElementById(dropdownId).classList.remove('active');
         } else {
             document.getElementById(dropdownId).classList.add('active');    
