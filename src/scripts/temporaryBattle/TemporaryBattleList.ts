@@ -3624,18 +3624,17 @@ TemporaryBattleList.Twerps = new TemporaryBattle(
 TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
     'Marquis Grant',
     [
-        new GymPokemon('Aurorus', 110668215, 80),
-        new GymPokemon('Tyrantrum', 110668215, 80),
-        new GymPokemon('Mega Tyranitar', 125000000, 80),
-        new GymPokemon('Mega Aggron', 125000000, 80),
+        new GymPokemon('Aurorus', 152318215, 80),
+        new GymPokemon('Tyrantrum', 152318215, 80),
+        new GymPokemon('Mega Tyranitar', 166650000, 80),
     ],
-    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/Tyranitarite.png"/></br></br><img src="assets/images/megaStone/Aggronite.png"/></br>',
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ClearGymRequirement(2000, GameConstants.getGymIndex('Cyllage City')), new ObtainedPokemonRequirement('Tyranitar'), new ObtainedPokemonRequirement('Aggron')],
+    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/Tyranitarite.png"/></br>',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ClearGymRequirement(2000, GameConstants.getGymIndex('Cyllage City')), new ObtainedPokemonRequirement('Tyranitar')],
     undefined,
     {
         displayName: 'Marquis Grant',
         imageName: 'Grant',
-        firstTimeRewardFunction: () => [player.gainMegaStone(GameConstants.MegaStoneType.Tyranitarite), player.gainMegaStone(GameConstants.MegaStoneType.Aggronite)],
+        firstTimeRewardFunction: () => [player.gainMegaStone(GameConstants.MegaStoneType.Tyranitarite)],
     }
 );
 
