@@ -22,12 +22,12 @@ import {
     FluteItemType,
     MegaStoneType,
     Pokeball,
-    PokeBlockColor,
     Region,
     VitaminType,
 } from '../GameConstants';
 import { MulchShovelItem, ShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
+import PokeBlockColor from '../enums/PokeBlockColor';
 import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
 import EggItem from './EggItem';

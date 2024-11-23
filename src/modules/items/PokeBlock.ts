@@ -1,4 +1,4 @@
-import { PokeBlockColor } from '../GameConstants';
+import PokeBlockColor from '../enums/PokeBlockColor';
 import Item from './Item';
 
 export default class PokeBlock extends Item {

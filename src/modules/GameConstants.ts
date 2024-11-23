@@ -1194,21 +1194,6 @@ export enum UltraBeastType {
     'Naganadel',
 }
 
-export enum PokeBlockColor {
-    Red,
-    Blue,
-    Pink,
-    Green,
-    Yellow,
-    White,
-    Cool,
-    Beautiful,
-    Cute,
-    Smart,
-    Tough,
-    Balanced,
-}
-
 export enum VitaminType {
     Protein,
     Calcium,
