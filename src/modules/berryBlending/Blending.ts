@@ -240,11 +240,25 @@ export default class Blending implements Feature {
         return recipe.flavorPrice.forEach((flavor) => this.loseAmount(new FlavorAmount(flavor.value * amount, flavor.type)));
     }
 
-    public buyPokeblock(block: BlendingRecipe, amount: number) {
-        let blockFlavors = [block.flavorPrice[0], block.flavorPrice[1], block.flavorPrice[2], block.flavorPrice[3], block.flavorPrice[4]];
+    public canCraft(recipe: BlendingRecipe, amount: number): boolean {
+        if (!recipe || !recipe.isUnlocked()) {
+            return false;
+        } else {
+            return recipe.flavorPrice.every(f => App.game.blending.flavorBank[f.type]() >= f.value * amount);
+        }
+    }
+    public craftRecipe(r: BlendingRecipe, amount: number) {
+        let flavorPrices = [r.flavorPrice[0], r.flavorPrice[1], r.flavorPrice[2], r.flavorPrice[3], r.flavorPrice[4]];
 
-        if (blockFlavors.filter(f => f.value > 0).every(f => this.loseAmount(new FlavorAmount(f.value * amount, f.type)))) {
-            GameHelper.incrementObservable(player.itemList[block.item], amount);
+        if (!this.canCraft(r, amount)) {
+            Notifier.notify({
+                message: 'You do not have enough ingredients to make that.',
+                type: NotificationOption.warning,
+                title: 'Blending Recipe',
+            });
+            return;
+        } else if (flavorPrices.filter(f => f.value > 0).every(f => this.loseAmount(new FlavorAmount(f.value * amount, f.type)))){
+            GameHelper.incrementObservable(player.itemList[r.item], amount);
             return;
         }
     }

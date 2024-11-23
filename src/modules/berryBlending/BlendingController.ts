@@ -72,14 +72,14 @@ export default class BlendingController {
         this.amountInputElement(recipe).val(amt).change();
     }
 
-    public static calculateButtonCss(recipe: BlendingRecipe): string {
-        const curVal = parseInt(this.amountInputElement(recipe).val().toString());
+    public static calculateButtonCss(recipe: BlendingRecipe) {
+        const curVal = BlendingController.amounts[BlendingController.recipeIndex(recipe)]();
         if (recipe && (recipe).flavorPrice.some((flavor) =>
             !App.game.blending.hasAmount(new FlavorAmount(flavor.value * curVal, flavor.type)))
                 || curVal < 1) {
-            return 'btn btn-danger smallButton smallFont';
+            return false;
         } else {
-            return 'btn btn-success smallButton smallFont';
+            return true;
         }
     }
 
