@@ -16,12 +16,12 @@ export default class BlendingRecipes {
         ],
         [BlendingRecipeType.Contest_Type]: [
             // Todo: proper requirements
-            new BlendingRecipe('PokeBlock_Black', [5, 5, 5, 5, 5]),
             new BlendingRecipe('PokeBlock_Purple', [80, 80, 0, 0, 0]),
             new BlendingRecipe('PokeBlock_Indigo', [0, 80, 80, 0, 0]),
             new BlendingRecipe('PokeBlock_Brown', [0, 0, 80, 80, 0]),
             new BlendingRecipe('PokeBlock_Olive', [0, 0, 0, 80, 80]),
             new BlendingRecipe('PokeBlock_Orange', [80, 0, 0, 0, 80]),
+            new BlendingRecipe('PokeBlock_Black', [5, 5, 5, 5, 5]),
             new BlendingRecipe('PokeBlock_Cool', [3200, 0, 0, 0, 0], new MaxRegionRequirement(Region.kalos)),
             new BlendingRecipe('PokeBlock_Beautiful', [0, 3200, 0, 0, 0], new MaxRegionRequirement(Region.kalos)),
             new BlendingRecipe('PokeBlock_Cute', [0, 0, 3200, 0, 0], new MaxRegionRequirement(Region.kalos)),
