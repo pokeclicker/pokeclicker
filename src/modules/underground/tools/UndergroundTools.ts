@@ -5,7 +5,7 @@ import { UndergroundController } from '../UndergroundController';
 import { Coordinate } from '../mine/Mine';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
-import { clipNumber } from '../../GameConstants';
+import { clipNumber, UndergroundViews } from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 
 export default class UndergroundTools {
@@ -100,8 +100,22 @@ export default class UndergroundTools {
         return Rand.fromArray(this.tools.filter(value => value.id !== UndergroundToolType.Survey));
     }
 
-    public useTool(toolType: UndergroundToolType, x: number, y: number): void {
+    public randomIntFromInterval(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    public useTool(toolType: UndergroundToolType, x: number | null, y: number | null, from: UndergroundViews): void {
         const tool = this.getTool(toolType);
+
+        if (from === UndergroundViews.Small) {
+            if (tool.id === 0 || tool.id === 1) {
+                x = this.randomIntFromInterval(0, 24);
+                y = this.randomIntFromInterval(0, 11);
+            } else if (tool.id === 2 || tool.id === 3) {
+                x = 0;
+                y = 0;
+            }
+        }
 
         if (!tool ||
             !App.game.underground.mine ||
@@ -117,6 +131,8 @@ export default class UndergroundTools {
                 GameHelper.incrementObservable(App.game.statistics.undergroundToolsUsed[tool.id]);
                 UndergroundController.handleCoordinatesMined(coordinatesMined);
                 tool.reduceDurabilityByUse();
+            } else if (!success && from === UndergroundViews.Small) {
+                this.useTool(toolType, null, null, UndergroundViews.Small);
             }
         }
     }
