@@ -2705,3 +2705,8 @@ export enum ContestStyle {
     Clever,
     Tough,
 }
+
+export enum UndergroundViews {
+    Small = 'Small_module',
+    Large = 'Large_module',
+}

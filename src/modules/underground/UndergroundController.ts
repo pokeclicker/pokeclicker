@@ -22,6 +22,7 @@ import {
     SURVEY_RANGE_REDUCTION_LEVELS,
     UNDERGROUND_EXPERIENCE_CLEAR_LAYER,
     UNDERGROUND_EXPERIENCE_DIG_UP_ITEM,
+    UndergroundViews,
 } from '../GameConstants';
 import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
@@ -176,7 +177,7 @@ export class UndergroundController {
         this.lastMineClick = now;
 
         const coordinates = App.game.underground.mine.getCoordinateForGridIndex(index);
-        App.game.underground.tools.useTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y);
+        App.game.underground.tools.useTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y, UndergroundViews.Large);
     }
 
     public static handleCoordinatesMined(coordinates: Coordinate[], helper: UndergroundHelper = undefined) {
