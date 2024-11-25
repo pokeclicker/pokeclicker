@@ -218,7 +218,7 @@ export class UndergroundHelper {
     }
 
     get experience(): number {
-        return this._experience();
+        return Math.floor(this._experience());
     }
 
     get level(): number {
