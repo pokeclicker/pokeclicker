@@ -111,11 +111,11 @@
                                                 </table>
                                             </div>
                                             <div style="display: flex; flex-direction:column; align-items: center; justify-content: center;">
-                                                <div>
-                                                    <img class="blenderBody" src="assets/images/contest/blenderBody.svg">
+                                                <div style="position: relative;">
                                                     <img class="blenderTop" src="assets/images/contest/blenderTop.svg"
                                                         data-bind="attr: { style: 'rotate: ' + App.game.blending.machines[$index()].degreesRotated +'deg' }"
                                                     >
+                                                    <img class="blenderBody" src="assets/images/contest/blenderBody.svg">
                                                 </div>
                                                 <div>
                                                     <div data-bind="text: `RPM: ${App.game.blending.getRPMDisplay($index())}`"></div>
