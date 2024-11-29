@@ -82,7 +82,8 @@
                                  },
                                  class: `${UndergroundToolType[App.game.underground.tools.selectedToolType]}Selected`,
                                  style: {
-                                    backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
+                                    backgroundSize: `calc(100% / ${App.game.underground.mine?.width})`,
+                                    gridTemplateColumns: `repeat(${App.game.underground.mine?.width}, 1fr)`
                                  }">
                                 <!-- ko foreach: App.game.underground.mine.grid -->
                                 <div class="mineSquare" data-bind="event: { mousedown: () => UndergroundController.clickModalMineSquare($index()) }">
