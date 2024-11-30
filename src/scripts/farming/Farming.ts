@@ -1370,7 +1370,7 @@ class Farming implements Feature {
                 BerryType.Oran,
                 BerryType.Sitrus,
             ], {
-                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by unique ripe Berry plants!',
+                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by Berries that wild Pokémon hold!',
             }));
 
         //#endregion
