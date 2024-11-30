@@ -141,6 +141,7 @@ import UndergroundLevelRequirement from './requirements/UndergroundLevelRequirem
 import UndergroundUseToolRequirement from './requirements/UndergroundUseToolRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
+import PokemonAttackRequirement from './requirements/PokemonAttackRequirement';
 import { SortModules, SortSaves } from './Sortable';
 import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
@@ -362,6 +363,7 @@ Object.assign(<any>window, {
     UndergroundUseToolRequirement,
     WeatherRequirement,
     MegaEvolveRequirement,
+    PokemonAttackRequirement,
     SortModules,
     SortSaves,
     KeyItemController,

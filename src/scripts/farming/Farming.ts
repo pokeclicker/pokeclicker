@@ -967,7 +967,7 @@ class Farming implements Feature {
             3.3,
             BerryFirmness.Very_Soft,
             ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'],
-            undefined,
+            new Aura(AuraType.Egg, [0.99, 0.98, 0.97]),
             ['Snorlax', 'Girafarig', 'Swablu', 'Munchlax', 'Audino', 'Skwovet']
         );
 
@@ -1856,10 +1856,10 @@ class Farming implements Feature {
                 const shinyList = wanderList.filter(w => w.shiny);
                 const displayWanderer = shinyList.length ? Rand.fromArray(shinyList) : Rand.fromArray(wanderList);
                 message = `A wild ${displayWanderer.name} has wandered onto the farm!`;
-                image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny);
+                image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny, undefined, GameConstants.ShadowStatus.None);
                 type = displayWanderer.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
-                sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
-                setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
+                sound = displayWanderer.shiny ? NotificationConstants.NotificationSound.General.shiny_long : NotificationConstants.NotificationSound.Farming.wandering_pokemon;
+                setting = displayWanderer.shiny ? NotificationConstants.NotificationSetting.General.encountered_shiny : NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
                 break;
         }
 

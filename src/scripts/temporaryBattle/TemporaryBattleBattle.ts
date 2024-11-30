@@ -1,7 +1,6 @@
 ///<reference path="../Battle.ts"/>
 class TemporaryBattleBattle extends Battle {
 
-    static battle: TemporaryBattle;
     static index: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(0);
 
@@ -77,4 +76,12 @@ class TemporaryBattleBattle extends Battle {
     public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
         return TemporaryBattleBattle.totalPokemons() - TemporaryBattleBattle.index();
     })
+
+    static get battle(): TemporaryBattle {
+        return TemporaryBattleRunner.battleObservable();
+    }
+
+    static set battle(battle: TemporaryBattle) {
+        TemporaryBattleRunner.battleObservable(battle);
+    }
 }
