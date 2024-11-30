@@ -1,6 +1,3 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../Battle.ts" />
-
 class BattleFrontierBattle extends Battle {
     static alternateAttack = false;
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);

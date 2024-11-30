@@ -1,5 +1,4 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../Battle.ts" />
 
 class DungeonBattle extends Battle {
 

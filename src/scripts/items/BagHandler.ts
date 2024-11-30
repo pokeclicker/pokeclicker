@@ -137,3 +137,6 @@ class BagHandler {
     //#endregion
 
 }
+
+
+BagHandler satisfies TmpBagHandlerType;

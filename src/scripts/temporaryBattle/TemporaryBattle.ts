@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
-
 type TemporaryBattleOptionalArgument = {
     rewardFunction?: () => void,
     firstTimeRewardFunction?: () => void,

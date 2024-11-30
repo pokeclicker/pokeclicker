@@ -1,11 +1,24 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
+import * as GameConstants from '../GameConstants';
+import GameHelper from '../GameHelper';
+import * as PokemonHelper from '../pokemons/PokemonHelper';
+import { createLogContent } from '../logbook/helpers';
+import { LogBookTypes } from '../logbook/LogBookTypes';
+import Notifier from '../notifications/Notifier';
+import NotificationConstants from '../notifications/NotificationConstants';
+import PokemonType from '../enums/PokemonType';
+import Amount from '../wallet/Amount';
+import type { PokemonNameType } from '../pokemons/PokemonNameType';
+import type EnemyPokemonInterface from '../pokemons/EnemyPokemonInterface';
+import type EncounterType from '../enums/EncounterType';
+import type BagItem from '../interfaces/BagItem';
+import type { Observable as KnockoutObservable, Computed as KnockoutComputed } from 'knockout';
 
-class BattlePokemon implements EnemyPokemonInterface {
+export default class BattlePokemon implements EnemyPokemonInterface {
 
     health: KnockoutObservable<number>;
     maxHealth: KnockoutObservable<number>;
     healthPercentage: KnockoutObservable<number>;
-    _displayName: KnockoutObservable<string>;
+    _displayName: KnockoutComputed<string>;
 
     /**
      * In case you want to manually create a Pokémon instead of generating it from the route number
@@ -24,6 +37,7 @@ class BattlePokemon implements EnemyPokemonInterface {
      * @param shadow is shadow or purified
      */
 
+    /* eslint-disable @typescript-eslint/default-param-last */
     constructor(
         public name: PokemonNameType,
         public id: number,
@@ -40,13 +54,14 @@ class BattlePokemon implements EnemyPokemonInterface {
         public shadow: GameConstants.ShadowStatus,
         public encounterType: EncounterType,
         public heldItem?: BagItem,
-        public ep: number = GameConstants.BASE_EP_YIELD
+        public ep: number = GameConstants.BASE_EP_YIELD,
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
         this.healthPercentage = ko.observable(100);
         this._displayName = PokemonHelper.displayName(name);
     }
+    /* eslint-enable @typescript-eslint/default-param-last */
 
     public isAlive(): boolean {
         return this.health() > 0;
@@ -79,7 +94,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             });
             App.game.logbook.newLog(
                 LogBookTypes.FOUND,
-                createLogContent.enemyDrop({ pokemon: this.name, item: name })
+                createLogContent.enemyDrop({ pokemon: this.name, item: name }),
             );
         }
         App.game.party.gainExp(this.exp, this.level, trainer);

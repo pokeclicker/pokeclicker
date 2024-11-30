@@ -27,14 +27,16 @@ export default class Profile implements Saveable {
 
     public pokemonSearch = ko.observable('');
     public getCaughtPokemonList = ko.pureComputed(() => {
-        let caughtPokemon = App.game.party.caughtPokemon;
-        if (this.pokemonSearch() != '') {
+        let caughtPokemon = [...App.game.party.caughtPokemon];
+        if (/^\d+$/.test(this.pokemonSearch())) {
+            // Search by ID
+            caughtPokemon = caughtPokemon.filter((pokemon) => +this.pokemonSearch() == Math.floor(pokemon.id));
+        } else if (this.pokemonSearch() != '') {
+            // Search by name
             const regex = GameHelper.safelyBuildRegex(this.pokemonSearch());
-            caughtPokemon = caughtPokemon.filter((pokemon) => {
-                return regex.test(pokemon.id) || regex.test(pokemon.name) || regex.test(pokemon.displayName);
-            });
+            caughtPokemon = caughtPokemon.filter((pokemon) => regex.test(pokemon.name) || regex.test(pokemon.displayName));
         }
-        return caughtPokemon.sort((a, b) => a.id - b.id);
+        return caughtPokemon;
     });
 
     constructor(

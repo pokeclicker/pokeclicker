@@ -1,12 +1,13 @@
+import type GymPokemon from '../gym/GymPokemon';
 
-class Trainer {
+export default class Trainer {
     public name: string;
 
     constructor(
         public trainerClass: string,
         private team: GymPokemon[],
         name?: string,
-        public subTrainerClass?: string
+        public subTrainerClass?: string,
     ) {
         this.name = name ? `${trainerClass} ${name}` : trainerClass;
     }

@@ -8,7 +8,6 @@
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
-///<reference path="../gym/GymPokemon.ts"/>
 
 interface EnemyOptions {
     weight?: number,

@@ -1,5 +1,3 @@
-///<reference path="../trainers/Trainer.ts"/>
-
 class DungeonTrainer extends Trainer {
 
     constructor(
