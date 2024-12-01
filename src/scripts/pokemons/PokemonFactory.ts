@@ -35,9 +35,9 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
-        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER);
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const encounterType = roaming ? EncounterType.roamer : EncounterType.route;
 
@@ -151,8 +151,8 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         if (shiny) {
             Notifier.notify({
@@ -192,8 +192,8 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_BOSS_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_BOSS_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         if (shiny) {
             Notifier.notify({
@@ -269,7 +269,7 @@ class PokemonFactory {
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
     }
 
-    private static generateHeldItem(item: BagItem, modifier: number): BagItem | null {
+    private static generateHeldItem(item: BagItem, modifier: number, shiny: boolean): BagItem | null {
         if (!item || !BagHandler.displayName(item)) {
             return null;
         }
@@ -329,7 +329,7 @@ class PokemonFactory {
             chance /= 1.5;
         }
 
-        if (Rand.chance(chance)) {
+        if (Rand.chance(chance) || shiny) {
             return item;
         }
 
