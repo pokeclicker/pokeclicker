@@ -278,6 +278,10 @@ class PokemonFactory {
             return null;
         }
 
+        if (shiny) {
+            return item;
+        }
+
         let chance = GameConstants.HELD_ITEM_CHANCE;
 
         // Apply drop chance by item type
@@ -329,7 +333,7 @@ class PokemonFactory {
             chance /= 1.5;
         }
 
-        if (Rand.chance(chance) || shiny) {
+        if (Rand.chance(chance)) {
             return item;
         }
 
