@@ -1256,7 +1256,7 @@ class Farming implements Feature {
             0,
             15000,
             25,
-            [15, 40, 35, 30, 25],
+            [10, 30, 10, 30, 30],
             50,
             BerryColor.Gold,
             5.8,
