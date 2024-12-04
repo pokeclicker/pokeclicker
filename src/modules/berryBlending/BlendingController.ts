@@ -7,6 +7,7 @@ import FlavorAmount from './FlavorAmount';
 import FlavorType from '../enums/FlavorType';
 import BooleanStringKeys from '../interfaces/BooleanStringKeys';
 import BlendingRecipeType from '../enums/BlendingRecipeType';
+import { ItemList } from '../items/ItemList';
 
 export default class BlendingController {
     public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
@@ -81,6 +82,10 @@ export default class BlendingController {
         } else {
             return true;
         }
+    }
+
+    public static spriteMini(recipe: BlendingRecipe) {
+        return recipe.sprite ? `assets/images/blending/${recipe.item}.png` : ItemList[recipe.item].image;
     }
 
     public static scrollIntoView(recipe: BlendingRecipe) {

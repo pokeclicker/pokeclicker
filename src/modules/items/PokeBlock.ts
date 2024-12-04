@@ -4,16 +4,12 @@ import Item from './Item';
 export default class PokeBlock extends Item {
     type: PokeBlockColor;
 
-    constructor(color: PokeBlockColor, basePrice: number, description?: string) {
-        super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, undefined, {}, undefined, description);
+    constructor(color: PokeBlockColor, basePrice: number, description?: string, pixelated = true) {
+        super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, undefined, {}, undefined, description, 'pokeblock', pixelated);
         this.type = color;
     }
     
     get description(): string {
-        return this._description || 'Unobtainable item for future uses';
-    }
-
-    get image() {
-        return `assets/images/items/pokeblock/${this.name}.png`;
+        return this._description || `A ${PokeBlockColor[this.type]} Pokéblock.`;
     }
 }

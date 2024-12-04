@@ -195,7 +195,7 @@
                                         <div class="collapse" data-bind="attr: { id: 'recipeList-' + BlendingRecipeType[$data] }">
                                             <ul class="pl-0 list-group-flush" data-bind="foreach: BlendingRecipes.getBlendingRecipeSet($data)">
                                                 <li class="d-flex list-group-item py-1 align-items-center">
-                                                    <img src="" max-height="24px" data-bind="attr:{ src: ItemList[$data.item].image }">
+                                                    <img src="" max-height="24px" data-bind="attr:{ src: BlendingController.spriteMini($data) }">
                                                     <a class="text-info" href="#" data-bind="text: ItemList[$data.item].displayName, click: () => BlendingController.scrollIntoView($data)"></a>
                                                 </li>
                                             </ul>
@@ -210,7 +210,7 @@
                                     <div class="card">
                                         <div class="row no-gutters">
                                             <button class="col-md-4 btn btn-secondary">
-                                                <img src="" height="48px" style="image-rendering: pixelated;" data-bind="attr:{ src: ItemList[$data.item].image }">
+                                                <img src="" height="48px" style="" data-bind="attr:{ src: ItemList[$data.item].image }, style:{ 'image-rendering': ItemList[$data.item].pixelated ? 'pixelated' : '' }">
                                                 <div class="p-2">
                                                     <p data-bind="text: ItemList[$data.item].description"></p>
                                                     <p data-bind="text: `In Bag: ${player.itemList[$data.item]().toLocaleString('en-US')}`"></p>

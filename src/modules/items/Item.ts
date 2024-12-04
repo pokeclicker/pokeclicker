@@ -25,6 +25,7 @@ export default class Item {
     _displayName: string;
     imageDirectory?: string;
     visible?: Requirement;
+    pixelated: boolean = false;
 
     constructor(
         public name: string,
@@ -41,6 +42,7 @@ export default class Item {
         displayName?: string,
         description?: string,
         imageDirectory?: string,
+        pixelated?: boolean,
     ) {
         // Base price needs to be positive, items that can't be purchased via currency should be priced at Infinity
         if (this.basePrice <= 0) {
@@ -60,6 +62,7 @@ export default class Item {
         this._displayName = displayName;
         this._description = description;
         this.imageDirectory = imageDirectory;
+        this.pixelated = pixelated;
     }
 
     totalPrice(amount: number): number {
