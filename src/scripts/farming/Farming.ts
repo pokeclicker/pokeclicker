@@ -380,8 +380,7 @@ class Farming implements Feature {
                 'This Berry\'s gradual process of storing nutrients beneficial to Pokémon health causes it to mature slowly.',
                 'This Berry multiplies the effect of Berry plants around it.',
             ],
-            new Aura(AuraType.Boost, [1.01, 1.02, 1.03]),
-            ['Eevee']
+            new Aura(AuraType.Boost, [1.01, 1.02, 1.03])
         );
         //#endregion
 
@@ -1086,7 +1085,8 @@ class Farming implements Feature {
                 'In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.',
                 'These berries make catching efforts worth more.',
             ],
-            new Aura(AuraType.Ev, [1.005, 1.01, 1.015])
+            new Aura(AuraType.Ev, [1.005, 1.01, 1.015]),
+            ['Eevee']
         );
 
         this.berryData[BerryType.Kee] = new Berry(
