@@ -346,8 +346,8 @@
                         </div>
                         <input id="berriesToBlendAmount" type="number" class="outline-dark form-control form-control-number"
                             min="0" required name="berriesToBlendAmount"
-                            oninput="App.game.blending.berriesToBeBlended(parseInt($(this).val().toString(), 10) || 0);"
-                            onchange="App.game.blending.berriesToBeBlended(parseInt($(this).val().toString(), 10) || 0);" title=""
+                            oninput="App.game.blending.berriesToBeBlended(Math.max(parseInt($(this).val().toString(), 10), 0) || 0);"
+                            onchange="App.game.blending.berriesToBeBlended(Math.max(parseInt($(this).val().toString(), 10), 0) || 0);" title=""
                             data-bind="value: App.game.blending.berriesToBeBlended()"/>
                     </div>
                 </div>
