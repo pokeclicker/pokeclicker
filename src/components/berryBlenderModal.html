@@ -15,21 +15,20 @@
             <div class="modal-body tab-content p-0" style="overflow-x: hidden;">
 
                 <div id="blendingView" class="tab-pane fade in active show">
-                    
-                    <div id="blenderView" class="justify-content-center no-select row">
+                    <div class="justify-content-center no-select my-2" style="display: flex; flex-direction: row;">
                         
                         <div class="justify-content-center no-select col-12 col-lg-7">
-                            <div class="berryBlendingListColumn mt-1 mb-1" style="overflow-y: auto;">
-                                <table class="table table-hover table-sm">
+                            <div class="berryBlendingColumn" style="overflow-y: auto;">
+                                <table id="berryBlendingListTable" class="table table-hover table-sm mb-0">
                                     <thead class="thead-dark sticky-top">
                                         <tr>
-                                            <th class="align-middle" rowspan="2">Berry</th>
-                                            <th class="align-middle" colspan="5">Flavor</th>
-                                            <th class="align-middle" rowspan="2">Smooth</th>
-                                            <th class="align-middle" rowspan="2">Amount</th>
+                                            <th class="align-middle" rowspan="2" style="border:none;">Berry</th>
+                                            <th class="align-middle" colspan="5" style="border:none;">Flavor</th>
+                                            <th class="align-middle" rowspan="2" style="border:none;">Smooth</th>
+                                            <th class="align-middle" rowspan="2" style="border:none;">Amount</th>
                                         </tr>
                                         <tr style="font-weight: bold;" data-bind="foreach: GameHelper.enumNumbers(FlavorType)">
-                                            <td class="p-0 tight">
+                                            <td class="tight" style="border: none; padding: 0 !important;">
                                                 <btn class="text-small btn btn-sm btn-block m-0" style="font-size: inherit; font-weight: inherit;"
                                                     data-bind="
                                                         attr: { for: 'btncheckBlend' + FlavorType[$data] },
@@ -72,10 +71,32 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     
-                        <div class="col-5">
+                        <div class="berryBlendingColumn col-5" style="overflow-y: auto;">
+                            <div class="modal-content p-0 sticky-top" style="border: none;">
+                                <table style="width: 100%; table-layout:fixed;">
+                                    <tr class="text-light">
+                                    <th class="bg-dark" colspan="5">Flavor Bank</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Spicy</td>
+                                        <td>Dry</td>
+                                        <td>Sweet</td>
+                                        <td>Bitter</td>
+                                        <td>Sour</td>
+                                    </tr>
+                                    <tr data-bind="foreach: App.game.blending.flavorBank">
+                                        <td data-bind="text: GameHelper.formatAmount($data),
+                                        tooltip: {
+                                            title: $data.toLocaleString('en-US'),
+                                            trigger: 'hover',
+                                            placement:'bottom',
+                                          }">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                             <div data-bind="foreach: App.game.blending.machines">
                                 <!-- ko if: $data.blendSlots.some(s => s.isUnlocked) -->
                                     <div class="mt-2 card-header p-0">
@@ -86,7 +107,7 @@
                                             <div>
                                                 <div style="display: flex; flex-direction: row; justify-content: space-evenly;" data-bind="foreach: $data.blendSlots">
                                                     <!-- ko if: $data.isUnlocked -->
-                                                    <div>
+                                                    <div style="position: relative;">
                                                         <div id="blendSlots" class="blendSlotsAnimated" data-bind="visible: !$data.isEmpty()"></div>
                                                         <div id="blendSlots" class="bg-secondary"
                                                             data-bind="ifnot: $data.isEmpty(),
@@ -131,34 +152,13 @@
                                     </div>
                                 <!-- /ko -->
                             </div>
-                                <!-- ko if: App.game.blending.machines.some(m => m.blendSlots.some(s => !s.isUnlocked)) -->
-                                    <button class="clickable btn btn-block btn-success" onclick="App.game.blending.buyBlendingSlot()" data-bind="
-                                        css: {disabled: App.game.wallet.currencies[GameConstants.Currency.contestToken]() < App.game.blending.nextBlendingSlotCost().amount},
-                                        ">
-                                        <span data-bind="html: App.game.blending.getBlendingSlotCostDisplay()"</span>
-                                    </button>
-                                <!-- /ko -->
-                            <div class="mt-3">
-                                <table style="width: 100%; table-layout:fixed;">
-                                    <tr class="text-light">
-                                    <th class="bg-dark" colspan="5">Flavor Bank</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Spicy</td>
-                                        <td>Dry</td>
-                                        <td>Sweet</td>
-                                        <td>Bitter</td>
-                                        <td>Sour</td>
-                                    </tr>
-                                    <tr>
-                                    <td data-bind="text: GameHelper.formatAmount(App.game.blending.flavorBank[0]())">Spicy</td>
-                                    <td data-bind="text: GameHelper.formatAmount(App.game.blending.flavorBank[1]())">Dry</td>
-                                    <td data-bind="text: GameHelper.formatAmount(App.game.blending.flavorBank[2]())">Sweet</td>
-                                    <td data-bind="text: GameHelper.formatAmount(App.game.blending.flavorBank[3]())">Bitter</td>
-                                    <td data-bind="text: GameHelper.formatAmount(App.game.blending.flavorBank[4]())">Sour</td>
-                                </tr>
-                                </table>
-                            </div>
+                            <!-- ko if: App.game.blending.machines.some(m => m.blendSlots.some(s => !s.isUnlocked)) -->
+                                <button class="clickable btn btn-block btn-success" onclick="App.game.blending.buyBlendingSlot()" data-bind="
+                                    css: {disabled: App.game.wallet.currencies[GameConstants.Currency.contestToken]() < App.game.blending.nextBlendingSlotCost().amount},
+                                    ">
+                                    <span data-bind="html: App.game.blending.getBlendingSlotCostDisplay()"</span>
+                                </button>
+                            <!-- /ko -->
                         </div>
 
                     </div>
@@ -166,25 +166,27 @@
 
                 <div id="blendingRecipeView" class="tab-pane fade">
                     <div class="modal-body row">
-                        <div class="col-3">
-                            <h4 class="modal-header">
-                                <button class="btn btn-block btn-outline-primary" style="font-size: large;"
-                                data-bind="
-                                click: () => BlendingController.selectedRecipeList(BlendingRecipes.getFullBlendingRecipeList()),
-                                css: { active: BlendingController.inSelectedList() },
-                                ">All Recipes</button>
-                            </h4>
-                            <div style="overflow: auto;">
+                        <div class="col-3 berryBlendingColumn" style="overflow-y: auto;">
+                            <div class="modal-content p-0 sticky-top" style="border: none;">
+                                <h4 class="modal-header">
+                                    <button class="btn btn-block btn-outline-primary" style="font-size: large;"
+                                    data-bind="
+                                    click: () => BlendingController.selectedRecipeList(BlendingRecipes.getFullBlendingRecipeList()),
+                                    css: { active: BlendingController.inSelectedList() },
+                                    ">All Recipes</button>
+                                </h4>
+                            </div>
+                            <div>
                                 <!-- ko foreach: GameHelper.enumNumbers(BlendingRecipeType) -->
                                     <!-- ko if: BlendingRecipes.isUnlocked($data) -->
                                         <div class="btn-block btn-group my-1">
-                                            <btn class="btn btn-block btn-outline-primary"
+                                            <btn class="btn btn-outline-primary"
                                             data-bind="
                                                 text: GameConstants.camelCaseToString(BlendingRecipeType[$data]),
                                                 click: () => BlendingController.selectedRecipeList(BlendingRecipes.getBlendingRecipeSet($data)),
                                                 css: { active: BlendingController.inSelectedList(BlendingRecipeType[$data]) },">Recipe Type</btn>
                                             <div class="btn-group">
-                                            <btn class="btn btn-block btn-outline-primary dropdown-toggle" data-toggle="collapse" aria-expanded="false"
+                                            <btn class="btn btn-outline-primary dropdown-toggle" data-toggle="collapse" aria-expanded="false"
                                             data-target="#"
                                             data-bind="attr: { 'data-target': '#recipeList-' + BlendingRecipeType[$data], id: 'dropdown-' + BlendingRecipeType[$data] },
                                             click: () => BlendingController.activeCss(BlendingRecipeType[$data])"></btn>
@@ -202,15 +204,17 @@
                                 <!-- /ko -->
                             </div>
                         </div>
-                        <div class="col-9">
+                        <div class="col-9 berryBlendingColumn" style="overflow-y: auto;">
                             <div style="overflow: auto;" data-bind="foreach: BlendingController.selectedRecipeList()">
                                 <div class="pt-2 p-1" data-bind="attr: { id: 'recipecard-' + $data.item }">
                                     <div class="card">
                                         <div class="row no-gutters">
                                             <button class="col-md-4 btn btn-secondary">
                                                 <img src="" height="48px" style="image-rendering: pixelated;" data-bind="attr:{ src: ItemList[$data.item].image }">
-                                                <p data-bind="text: ItemList[$data.item].description"></p>
-                                                <p data-bind="text: `In Bag: ${player.itemList[$data.item]().toLocaleString('en-US')}`"></p>
+                                                <div class="p-2">
+                                                    <p data-bind="text: ItemList[$data.item].description"></p>
+                                                    <p data-bind="text: `In Bag: ${player.itemList[$data.item]().toLocaleString('en-US')}`"></p>
+                                                </div>
                                             </button>
                                             <div class="col-md-8">
                                                 <div>
