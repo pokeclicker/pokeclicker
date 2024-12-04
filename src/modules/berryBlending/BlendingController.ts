@@ -85,7 +85,7 @@ export default class BlendingController {
     }
 
     public static spriteMini(recipe: BlendingRecipe) {
-        return recipe.sprite ? `assets/images/blending/${recipe.item}.png` : ItemList[recipe.item].image;
+        return recipe.sprite ? `assets/images/blending/${recipe.item}_mini.png` : ItemList[recipe.item].image;
     }
 
     public static scrollIntoView(recipe: BlendingRecipe) {
