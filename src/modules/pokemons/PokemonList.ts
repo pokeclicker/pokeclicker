@@ -15600,6 +15600,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.mediumslow,
         'exp': 270,
+        'evolutions': [HeldItemLevelEvolution('Gracidea', 'Shaymin (Land)', 'Shaymin (Sky)', 20, true)],
         'catchRate': 45,
         'base': {
             'hitpoints': 100,
