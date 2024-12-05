@@ -1,0 +1,78 @@
+<div class="modal fade noselect" id="eggPoolModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Egg Pool</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- ko with: App.game.breeding.hatchList[BreedingController.selectedEgg()], as: 'hatchList' -->
+            <div class="modal-body px-0 pt-0">
+                <div class="my-2">
+                    <img data-bind="attr: { src: `assets/images/breeding/${GameConstants.EggItemType[BreedingController.selectedEgg()]}.png` }" width="20%"/>
+                </div>
+                <div class="sticky-top mb-2">
+                    <button class="btn btn-block btn-secondary btn-static rounded-0" data-bind="text: `${EggType[BreedingController.selectedEgg()]} Egg: ${player.itemList[GameConstants.EggItemType[BreedingController.selectedEgg()]]()}`"></button>
+                </div>
+                <div class="mx-2">
+                    <p class="small mb-2" data-bind="visible: BreedingController.selectedEgg() === EggType.Mystery">Mystery Eggs can hatch Pokémon from their own exclusive pool and all other typed egg pools. The exclusive Pokémon are listed below.</p>
+                    <table class="table table-bordered mb-0">
+                        <thead>
+                            <tr>
+                                <th>Pattern</th>
+                                <th class="text-left">Pokémon</th>
+                                <th class="text-nowrap">
+                                    <div data-bind="tooltip: {
+                                        title: 'write some shit here to explain the odds',
+                                        trigger: 'hover'
+                                    }">Odds <span class="font-weight-normal">ⓘ</span></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- ko foreach: {
+                            data: GameHelper.enumNumbers(GameConstants.Region).filter(r => r >= GameConstants.Region.kanto && r <= Math.min(player.highestRegion(), GameConstants.MAX_AVAILABLE_REGION)).reverse(),
+                            as: 'region'
+                        } -->
+                        <tbody data-bind="visible: hatchList[region].length > 0">
+                            <tr>
+                                <td class="table-primary py-1" colspan="3" data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[region])"></td>
+                            </tr>
+                            <!-- ko foreach: hatchList[$data] -->
+                            <tr data-bind="let: { dataPokemon: PokemonHelper.getPokemonByName($data), partyPokemon: App.game.party.getPokemonByName($data) }">
+                                <td class="tight px-2 py-1" data-bind="let: { egg: {
+                                    pokemon: $data,
+                                    pokemonType1: dataPokemon.type1,
+                                    pokemonType2: dataPokemon.type2 === PokemonType.None ? dataPokemon.type1 : dataPokemon.type2,
+                                    progress: () => 0
+                                }}">
+                                    <div class="d-flex align-items-center text-center" style="width: 70px;">
+                                        <div data-bind="template: { name: 'eggSVGTemplate', data: egg }, class: BreedingController.getEggCssClass(egg)"></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-left">
+                                    <knockout data-bind="text: partyPokemon ? PokemonHelper.displayName($data) : '???'"></knockout>
+                                    <sup data-bind="visible: partyPokemon?.shiny ?? false">✨</sup>
+                                </td>
+                                <td class="tight align-middle" data-bind="text: BreedingController.calcEggOdds(BreedingController.selectedEgg(), $data).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })"></td>
+                            </tr>
+                            <!-- /ko -->
+                        </tbody>
+                        <!-- /ko -->
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-block" data-bind="
+                    click: () => { ItemList[GameConstants.EggItemType[BreedingController.selectedEgg()]].use(); App.game.breeding.checkCloseModal(); },
+                    enable: player.itemList[GameConstants.EggItemType[BreedingController.selectedEgg()]]() > 0 && App.game.breeding.hasFreeEggSlot(),
+                    tooltip: {
+                        title: App.game.breeding.hasFreeEggSlot() ? '' : 'You don\'t have any free egg slots.',
+                        trigger: 'hover',
+                    }
+                ">Add to Hatchery</button>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

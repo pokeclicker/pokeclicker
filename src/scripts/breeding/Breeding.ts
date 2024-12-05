@@ -522,10 +522,10 @@ class Breeding implements Feature {
 
     checkCloseModal(): void {
         if (Settings.getSetting('hideHatchery').value == 'queue' && !this.hasFreeEggSlot() && !this.hasFreeQueueSlot()) {
-            $('#breedingModal').modal('hide');
+            $('#breedingModal, #eggPoolModal').modal('hide');
         }
         if (Settings.getSetting('hideHatchery').value == 'egg' && !this.hasFreeEggSlot()) {
-            $('#breedingModal').modal('hide');
+            $('#breedingModal, #eggPoolModal').modal('hide');
         }
     }
 
