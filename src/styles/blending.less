@@ -5,12 +5,15 @@
 
 .berryBlendingColumn {
   @media (min-width: 992px) { // computer
-    height: 70vh;
+    max-height: calc(100vh - 205px);
   }
 
   @media (max-width: 991px) { // tablet
-      height: 50vh;
-    }
+    max-height: calc(100vh - 225px);
+  }
+
+  @media (max-width: 767px) { // phone
+  }
 }
 
 .blenderBody{
