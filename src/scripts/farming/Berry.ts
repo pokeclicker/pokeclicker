@@ -31,7 +31,7 @@ class Berry {
         [BerryColor.Red]: ['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'],
         [BerryColor.Purple]: ['Illumise', 'Oricorio (Sensu)'],
         [BerryColor.Pink]: ['Spewpa', 'Oricorio (Pa\'u)'],
-        [BerryColor.Green]: ['Burmy (Plant)'],
+        [BerryColor.Green]: ['Burmy (Plant)', 'Burmy (Sand)', 'Burmy (Trash)'],
         [BerryColor.Yellow]: ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'],
         [BerryColor.Blue]: ['Volbeat', 'Flabébé (Blue)'],
         [BerryColor.Silver]: ['Flabébé (White)'],
