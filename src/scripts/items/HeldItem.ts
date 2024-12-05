@@ -14,7 +14,7 @@ class HeldItem extends Item {
         description: string,
         regionUnlocked: GameConstants.Region,
         public canUse: (pokemon: PartyPokemon) => boolean,
-        pixelated?: boolean,
+        pixelated?: boolean
     ) {
         super(name, basePrice, currency, shopOptions, displayName, description, 'heldItems', pixelated);
         this.regionUnlocked = regionUnlocked;
@@ -155,7 +155,7 @@ class ExpGainedBonusHeldItem extends HeldItem {
         regionUnlocked: GameConstants.Region,
         pokemonDescription = 'the holding Pokémon',
         canUse = (pokemon: PartyPokemon) => true,
-        pixelated = false,
+        pixelated = false
     ) {
         super(name, basePrice, currency, shopOptions, displayName, `A held item that earns ${pokemonDescription} ${(gainedBonus - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })} bonus Experience Points.`, regionUnlocked, canUse, pixelated);
     }
