@@ -7,6 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <!-- ko if: DisplayObservables.modalState.eggPoolModal === 'show' -->
             <!-- ko with: App.game.breeding.hatchList[BreedingController.selectedEgg()], as: 'hatchList' -->
             <div class="modal-body px-0 pt-0">
                 <div class="my-2">
@@ -73,6 +74,7 @@
                     }
                 ">Add to Hatchery</button>
             </div>
+            <!-- /ko -->
             <!-- /ko -->
         </div>
     </div>
