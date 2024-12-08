@@ -16,23 +16,18 @@
                         <div class="row justify-content-center">
                             <!-- ko foreach: { data: lootEntries[1], as: 'item' } -->
                             <div class="col-6 col-lg-4 mb-2">
-                                <!-- ko using: PokemonHelper.getPokemonByName(item.loot).name != 'MissingNo.' && !App.game.party.getPokemonByName(item.loot), as: 'isPokemonAndNotCaught' -->
-                                    <!-- ko using: isPokemonAndNotCaught ? '???' : DungeonInfo.getLootName(item.loot), as: 'lootName' -->
-                                        <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
-                                            <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) },
-                                                style: { 'filter': isPokemonAndNotCaught ? 'brightness(0)' : '' }">
-                                            <div class="flex-grow-1 small ml-2" style="min-width: 0;">
-                                                <div class="text-truncate" data-bind="text: lootName"></div>
-                                            </div>
-                                            <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
-                                            tooltip: {
-                                                title: item.requirement?.hint() || '',
-                                                placement: 'bottom',
-                                                trigger: 'hover'
-                                            }, visible: item.requirement && !item.requirement.isCompleted()" />
-                                        </div>
-                                    <!-- /ko -->
-                                <!-- /ko -->
+                                <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
+                                    <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) }">
+                                    <div class="flex-grow-1 small ml-2" style="min-width: 0;">
+                                        <div class="text-truncate" data-bind="text: DungeonInfo.getLootName(item.loot)"></div>
+                                    </div>
+                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                                    tooltip: {
+                                        title: item.requirement?.hint() || '',
+                                        placement: 'bottom',
+                                        trigger: 'hover'
+                                    }, visible: item.requirement && !item.requirement.isCompleted()" />
+                                </div>
                             </div>
                             <!-- /ko -->
                         </div>
