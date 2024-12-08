@@ -1248,6 +1248,7 @@ export type PokemonNameType
     | 'Totem Togedemaru'
     | 'Mimikyu'
     | 'Totem Mimikyu'
+    | 'Mimikyu (Busted)'
     | 'Bruxish'
     | 'Drampa'
     | 'Dhelmise'

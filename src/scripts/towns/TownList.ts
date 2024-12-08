@@ -7675,6 +7675,12 @@ const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
+const MimikyuTrainer = new NPC('Mimikyu trainer', [
+    'Mimikyu really cares about it\'s costume.',
+    'The costume often gets busted on battles. It will then spend all night patching it. Poor guy...',
+    'If you defeat enough Mimikyu, you might find one with a busted costume roaming around.',
+    'But please leave it alone! It has been through too much already!',
+]);
 
 // Magikarp Jump NPCs
 const MayorKarp = new NPC('Mayor Karp', [
@@ -8209,7 +8215,7 @@ TownList['Thrifty Megamart'] = new DungeonTown(
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [new MultiRequirement([new TemporaryBattleRequirement('Skull 5'), new RouteKillRequirement(10, GameConstants.Region.alola, 14)])],
     [TemporaryBattleList['Acerola Ghost Memory']],
-    {npcs: [AcerolaSilvally]}
+    {npcs: [MimikyuTrainer, AcerolaSilvally]}
 );
 TownList['Ula\'ula Meadow'] = new DungeonTown(
     'Ula\'ula Meadow',
