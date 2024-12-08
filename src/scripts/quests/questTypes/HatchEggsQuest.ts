@@ -23,8 +23,8 @@ class HatchEggsQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        return this.customDescription ?? `Hatch ${this.amount.toLocaleString('en-US')} ${GameConstants.pluralizeString('Egg', this.amount)}.`;
+    get defaultDescription(): string {
+        return `Hatch ${this.amount.toLocaleString('en-US')} ${GameConstants.pluralizeString('Egg', this.amount)}.`;
     }
 
     toJSON() {

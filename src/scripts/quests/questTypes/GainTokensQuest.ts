@@ -27,8 +27,8 @@ class GainTokensQuest extends Quest implements QuestInterface {
         return GainTokensQuest.randomizeReward(reward);
     }
 
-    get description(): string {
-        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} Dungeon Tokens.`;
+    get defaultDescription(): string {
+        return `Gain ${this.amount.toLocaleString('en-US')} Dungeon Tokens.`;
     }
 
     toJSON() {

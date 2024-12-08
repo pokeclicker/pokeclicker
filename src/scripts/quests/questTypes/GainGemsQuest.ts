@@ -48,8 +48,8 @@ class GainGemsQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        return this.customDescription ?? `Gain ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]} gems.`;
+    get defaultDescription(): string {
+        return `Gain ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]} gems.`;
     }
 
     toJSON() {

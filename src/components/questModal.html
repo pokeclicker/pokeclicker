@@ -96,7 +96,7 @@
                                 <tbody data-bind="foreach: $data.active">
                                     <tr>
                                         <td>
-                                            <knockout class="font-weight-bold d-block" data-bind="text: $data.name"></knockout>
+                                            <knockout class="font-weight-bold d-block" data-bind="text: $data.displayName"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
                                         </td>
                                         <td class="text-nowrap align-middle text-center" data-bind="text: `${$data.curQuest() + 1} / ${$data.totalQuests}`"></td>
@@ -128,7 +128,7 @@
                                 <tbody data-bind="foreach: $data.available">
                                     <tr>
                                         <td>
-                                            <knockout class="font-weight-bold d-block" data-bind="text: $data.name"></knockout>
+                                            <knockout class="font-weight-bold d-block" data-bind="text: $data.displayName"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
                                         </td>
                                         <td class="text-nowrap text-center align-middle" data-bind="text: BulletinBoard.getLocation($data.bulletinBoard)"></td>
@@ -145,7 +145,7 @@
                                 <tbody data-bind="foreach: $data.complete">
                                     <tr>
                                         <td>
-                                            <knockout class="font-weight-bold d-block" data-bind="text: $data.name"></knockout>
+                                            <knockout class="font-weight-bold d-block" data-bind="text: $data.displayName"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
                                         </td>
                                     </tr>
