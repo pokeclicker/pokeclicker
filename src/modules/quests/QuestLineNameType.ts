@@ -46,6 +46,7 @@ export type QuestLineNameType
     | 'Princess Diancie'
     | 'Clash of Ages'
     | 'An Unrivaled Power'
+    | 'Lights! Camera! Pika!'
     | 'Welcome to Paradise, Cousin!'
     | 'Symbiotic Relations'
     | 'Child of the Stars'

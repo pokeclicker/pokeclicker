@@ -17,9 +17,9 @@ abstract class Quest {
     inProgress: KnockoutComputed<boolean>;
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
-    private _focus: KnockoutObservable<any>;
-    private focusSub: KnockoutSubscription;
-    private focusValue: number;
+    protected _focus: KnockoutObservable<any>;
+    protected focusSub: KnockoutSubscription;
+    protected focusValue: number;
     initial: KnockoutObservable<any>;
     notified: boolean;
     autoComplete: boolean;
