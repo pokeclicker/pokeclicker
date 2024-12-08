@@ -2779,7 +2779,7 @@ class Update implements Saveable {
             };
 
             const totalReimburse = Object.entries(saveData.underground.upgrades).map(([key, value]) => {
-                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0);
+                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0) ?? 0;
             }).reduce((acc, cur) => acc + cur, 0);
             saveData.underground.upgrades = {};
             saveData.wallet.currencies[GameConstants.Currency.diamond] += totalReimburse;

@@ -28,7 +28,7 @@ import type CssVariableSetting from './settings/CssVariableSetting';
 import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
-import type { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
+import type SpecialEvents from './specialEvents/SpecialEvents';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted, 
@@ -123,7 +123,7 @@ export type TmpGameType = {
     redeemableCodes: TmpRedeemableCodesType;
     statistics: Statistics;
     quests: TmpQuestsType;
-    specialEvents: TmpSpecialEventsType;
+    specialEvents: SpecialEvents;
     discord: TmpDiscordType;
     achievementTracker: TmpAchievementTrackerType;
     challenges: Challenges;
@@ -296,10 +296,6 @@ export type TmpPokemonFactoryType = {
 export type TmpPartyControllerType = {
     getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
     getPokerusStatusByName: (name: PokemonNameType) => GameConstants.Pokerus;
-};
-
-export type TmpSpecialEventsType = {
-    getEvent: (eventName: SpecialEventTitleType) => any
 };
 
 export type TmpTemporaryBattleListType = {
