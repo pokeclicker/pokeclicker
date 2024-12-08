@@ -22,8 +22,6 @@ import RoamingGroup from './RoamingGroup';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MoonCyclePhaseRequirement from '../requirements/MoonCyclePhaseRequirement';
 import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
-import DefeatedRequirement from '../requirements/DefeatedRequirement';
-import CustomRequirement from '../requirements/CustomRequirement';
 import DefeatedSpecificPokemonRequirement from '../requirements/DefeatedSpecificPokemonRequirement';
 
 export default class RoamingPokemonList {

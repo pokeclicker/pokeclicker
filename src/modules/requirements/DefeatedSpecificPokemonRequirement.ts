@@ -1,6 +1,4 @@
 import * as GameConstants from '../GameConstants';
-import { pokemonList } from '../pokemons/PokemonList';
-import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Requirement from './Requirement';
 
 export default class DefeatedSpecificPokemonRequirement extends Requirement {
