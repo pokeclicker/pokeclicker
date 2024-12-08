@@ -214,18 +214,6 @@ class FarmController {
         return this.berryListFiltered().filter((berry) => berry <= this.berryListEnd());
     }
 
-    public static getFlavorFilteredBerryList(flavorTypes: number[]) {
-        if (flavorTypes.length < 1) {
-            return this.getUnlockedBerryList();
-        } else {
-            return this.getUnlockedBerryList().filter(b => {
-                const fls: number[] = [];
-                App.game.farming.berryData[b].flavors.filter(flavor => flavor.value > 0).forEach(flavor => fls.push(flavor.type));
-                return flavorTypes.every(f => fls.includes(f));
-            });
-        }
-    }
-
     private static getAmount() {
         return Number(this.multipliers[this.multIndex()].replace(/\D/g, '')) || Infinity;
     }

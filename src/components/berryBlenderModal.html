@@ -15,31 +15,31 @@
             <div class="modal-body tab-content p-0" style="overflow-x: hidden;">
 
                 <div id="blendingView" class="tab-pane fade in active show">
-                    <div class="justify-content-center no-select my-2" style="display: flex; flex-direction: row;">
+                    <div class="justify-content-center no-select my-2 d-flex flex-wrap">
                         
                         <div class="justify-content-center no-select col-12 col-lg-7">
                             <div class="berryBlendingColumn" style="overflow-y: auto;">
                                 <table id="berryBlendingListTable" class="table table-hover table-sm mb-0">
                                     <thead class="thead-dark sticky-top">
                                         <tr>
-                                            <th class="align-middle" rowspan="2" style="border:none;">Berry</th>
-                                            <th class="align-middle" colspan="5" style="border:none;">Flavor</th>
-                                            <th class="align-middle" rowspan="2" style="border:none;">Smooth</th>
-                                            <th class="align-middle" rowspan="2" style="border:none;">Amount</th>
+                                            <th class="align-middle clickable" onclick="BlendingListController.updateBlendingSorting('Berry')" rowspan="2" style="border:none;" data-bind="text: 'Berry' + (BlendingListController.sortOption() === 'Berry' ? (BlendingListController.sortFactor() > 0 ? ' ▴' : ' ▾') : ' ▸')"></th>
+                                            <th class="align-middle clickable" onclick="BlendingListController.updateBlendingSorting('Flavor')" colspan="5" style="border:none;" data-bind="text: 'Flavor' + (BlendingListController.sortOption() === 'Flavor' ? (BlendingListController.sortFactor() > 0 ? ' ▴' : ' ▾') : ' ▸')"></th>
+                                            <th class="align-middle clickable" onclick="BlendingListController.updateBlendingSorting('Smooth')" rowspan="2" style="border:none;" data-bind="text: 'Smooth' + (BlendingListController.sortOption() === 'Smooth' ? (BlendingListController.sortFactor() > 0 ? ' ▴' : ' ▾') : ' ▸')"></th>
+                                            <th class="align-middle clickable" onclick="BlendingListController.updateBlendingSorting('Amount')" rowspan="2" style="border:none;" data-bind="text: 'Amount' + (BlendingListController.sortOption() === 'Amount' ? (BlendingListController.sortFactor() > 0 ? ' ▴' : ' ▾') : ' ▸')"></th>
                                         </tr>
                                         <tr style="font-weight: bold;" data-bind="foreach: GameHelper.enumNumbers(FlavorType)">
                                             <td class="tight" style="border: none; padding: 0 !important;">
-                                                <btn class="text-small btn btn-sm btn-block m-0" style="font-size: inherit; font-weight: inherit;"
+                                                <btn class="text-small btn btn-sm btn-block m-0 btn-dark" style="font-size: inherit; font-weight: inherit;"
                                                     data-bind="
                                                         attr: { for: 'btncheckBlend' + FlavorType[$data] },
-                                                        css: { 'btn-info': BlendingController.flavorKeys[FlavorType[$data]](), 'btn-dark': !BlendingController.flavorKeys[FlavorType[$data]]() },
-                                                        click: () => BlendingController.toggleFlavor($data),
+                                                        css: { 'active': BlendingController.flavorKeys[FlavorType[$data]]() },
+                                                        click: () => {BlendingController.toggleFlavor($data), BlendingListController.updateBlendingSorting('Flavor'), BlendingListController.sortFactor(-1) },
                                                         text: FlavorType[$data]">
                                                 </btn>
                                             </td>
                                         </tr>
                                     </thead>
-                                    <tbody data-bind="foreach: FarmController.getFlavorFilteredBerryList(BlendingController.blendingListFlavorFilters())">
+                                    <tbody data-bind="foreach: BlendingListController.sortedBlendingList()">
                                         <tr class="clickable"
                                             data-bind="
                                             click: function() { BlendingController.selectedBerry($data); },
@@ -72,7 +72,7 @@
                                 </table>
                             </div>
                         </div>
-                    
+
                         <div class="berryBlendingColumn col-5" style="overflow-y: auto;">
                             <div class="modal-content p-0 sticky-top" style="border: none;">
                                 <table style="width: 100%; table-layout:fixed;">
