@@ -89,7 +89,12 @@
             <!-- ko foreach: App.game.underground.helpers.hired() -->
             <div class="row">
                 <div class="col p-2">
-                    <div data-bind="text: $data.name"></div>
+                    <div class="row udergroundDisplay-HelperName-row">
+                        <knockout class="udergroundDisplay-HelperIcon pr-2 pt-1" data-bind="foreach: App.game.underground.helpers.hired()">
+                            <img class="pixelated mx-1" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                        </knockout>
+                        <div class="udergroundDisplay-HelperName" data-bind="text: $data.name"></div>
+                    </div>
                     <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
                     <div data-bind="text: `${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></div>
                     <!-- /ko -->
