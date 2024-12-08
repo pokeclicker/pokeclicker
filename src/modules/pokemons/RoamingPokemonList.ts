@@ -22,6 +22,7 @@ import RoamingGroup from './RoamingGroup';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MoonCyclePhaseRequirement from '../requirements/MoonCyclePhaseRequirement';
 import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
+import DefeatedSpecificPokemonRequirement from '../requirements/DefeatedSpecificPokemonRequirement';
 
 export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
@@ -136,6 +137,7 @@ RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Ash-Greninja', new T
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Mimikyu (Busted)', new DefeatedSpecificPokemonRequirement(778, 5, true)));
 // Magikarp Jump
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Purple Diamonds', new GymBadgeRequirement(BadgeEnums.Luxury_League)));
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Apricot Stripes', new GymBadgeRequirement(BadgeEnums.Heal_League)));

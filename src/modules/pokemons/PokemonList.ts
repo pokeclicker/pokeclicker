@@ -23873,6 +23873,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 778.02,
+        'name': 'Mimikyu (Busted)',
+        'type': [PokemonType.Ghost, PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 167,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 55,
+            'attack': 90,
+            'specialAttack': 50,
+            'defense': 80,
+            'specialDefense': 105,
+            'speed': 96,
+        },
+    },
+    {
         'id': 779,
         'name': 'Bruxish',
         'type': [PokemonType.Water, PokemonType.Psychic],
