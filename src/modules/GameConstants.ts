@@ -1239,6 +1239,7 @@ export enum BulletinBoards {
     Sinnoh,
     Unova,
     Kalos,
+    PikachuLand,
     Alola,
     Hoppy,
     Galar,

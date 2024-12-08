@@ -6445,16 +6445,13 @@ const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 17), new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less)]),
 });
 
-const DirectorFrank1 = new GiftNPC('Frank', [
+const DirectorFrank1 = new NPC('Frank', [
     'I want to make a pika-sequal to my movie!',
     'I want a pika-Pikachu, who makes my pika-movie shine!',
     'Your Pikachu has potential. Come back when it has more pika-experience.',
-],
-() => App.game.quests.getQuestLine('Lights! Camera! Pika!').beginQuest(),
-null,
-{
+], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', GameConstants.AchievementOption.less, 0),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Lights! Camera! Pika!'), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 1, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank2 = new NPC('Frank', [
     'Your Pikachu have incredible pika-star power!',
@@ -6463,7 +6460,7 @@ const DirectorFrank2 = new NPC('Frank', [
     'I want the original star back in perfect pika-shape!',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 0), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 2, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 1), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 3, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank3 = new NPC('Frank', [
     'Our pika-star is back!',
@@ -6471,7 +6468,7 @@ const DirectorFrank3 = new NPC('Frank', [
     'Any chance you got a pika-Hawlucha ready for the role?',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 2), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 4, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 3), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 5, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank4 = new NPC('Frank', [
     'That scene was pika-perfect!',
@@ -6479,7 +6476,7 @@ const DirectorFrank4 = new NPC('Frank', [
     'I already have a bunch of extras ready, but the remake needs to be pika-bigger!',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 4), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 5), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 7, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank5 = new NPC('Frank', [
     'I have finished the pika-movie!',
@@ -6488,7 +6485,7 @@ const DirectorFrank5 = new NPC('Frank', [
     'You can keep the pika-costumes, if you want.',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6, GameConstants.AchievementOption.more),
+    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 7, GameConstants.AchievementOption.more),
 });
 const JeanFranksGrandDaughter = new NPC('Jean', [
     'My grandfather can be found north west of here.',
@@ -6653,7 +6650,7 @@ TownList['Pikachu Land'] = new Town(
     'Pikachu Land',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Pikachu Libre and its gang']],
+    [new BulletinBoard(GameConstants.BulletinBoards.PikachuLand), TemporaryBattleList['Pikachu Libre and its gang']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
         npcs: [DirectorFrank1, DirectorFrank2, DirectorFrank3, DirectorFrank4, DirectorFrank5],
