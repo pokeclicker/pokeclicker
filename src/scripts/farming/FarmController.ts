@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/enums/MulchType.d.ts"/>
+/// <reference path="../../declarations/enums/FlavorType.d.ts"/>
 
 class FarmController {
 

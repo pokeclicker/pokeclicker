@@ -1,0 +1,43 @@
+#berryBlenderModal {
+  .modal-lg{
+  max-width: 1000px !important;
+}}
+
+.berryBlendingColumn {
+  @media (min-width: 992px) { // computer
+    max-height: calc(100vh - 205px);
+  }
+
+  @media (max-width: 991px) { // tablet
+    max-height: calc(100vh - 225px);
+  }
+
+  @media (max-width: 767px) { // phone
+  }
+}
+
+.blenderBody{
+  width: 40px;
+}
+
+.blenderTop {
+  position: absolute;
+  width: 40px;
+}
+
+#blendSlots {
+  margin: 5px;
+  width: 40px;
+  height: 40px;
+  border-color: #67e7ff;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.3rcap;
+}
+
+.blendSlotsAnimated {
+  border-style: outset !important;
+  pointer-events: none;
+  position: absolute;
+  animation: spin 1s linear infinite;
+ }

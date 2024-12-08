@@ -47,6 +47,7 @@ class Game implements TmpGameType {
     public weatherApp: WeatherApp;
     public zMoves: ZMoves;
     public pokemonContest: PokemonContest;
+    public blending: Blending;
 
     constructor() {
         // Needs to be loaded first so save data can be updated (specifically "player" data)
@@ -87,6 +88,7 @@ class Game implements TmpGameType {
         this.weatherApp = new WeatherApp();
         this.zMoves = new ZMoves();
         this.pokemonContest = new PokemonContest();
+        this.blending = new Blending();
 
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
@@ -125,6 +127,7 @@ class Game implements TmpGameType {
         this.farming.initialize();
         this.specialEvents.initialize();
         this.pokeballFilters.initialize();
+        this.blending.initialize();
         this.load();
 
         // Unlock achievements that have already been completed, avoids renotifying
@@ -525,6 +528,10 @@ class Game implements TmpGameType {
 
         // Farm
         this.farming.update(GameConstants.TICK_TIME / GameConstants.SECOND);
+
+        // Berry Blender
+        this.blending.update(GameConstants.TICK_TIME / GameConstants.SECOND);
+        this.blending.animate();
 
         // Effect Engine (battle items and flutes)
         EffectEngineRunner.counter += GameConstants.TICK_TIME;
