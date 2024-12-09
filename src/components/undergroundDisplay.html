@@ -89,7 +89,7 @@
             <!-- ko foreach: App.game.underground.helpers.hired() -->
             <div class="row">
                 <div class="col p-2">
-                    <div data-bind="text: $data.name"></div>
+                    <div data-bind="text: `${$data.name} (Level ${$data.level})`"></div>
                     <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
                     <div data-bind="text: `${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></div>
                     <!-- /ko -->
