@@ -29,10 +29,14 @@
                                         </tr>
                                         <tr style="font-weight: bold;" data-bind="foreach: GameHelper.enumNumbers(FlavorType)">
                                             <td class="tight" style="border: none; padding: 0 !important;">
-                                                <btn class="text-small btn btn-sm btn-block m-0 btn-dark" style="font-size: inherit; font-weight: inherit;"
+                                                <btn class="text-small btn btn-sm btn-block m-0" style="font-size: inherit; font-weight: inherit;"
                                                     data-bind="
                                                         attr: { for: 'btncheckBlend' + FlavorType[$data] },
-                                                        css: { 'active': BlendingController.flavorKeys[FlavorType[$data]]() },
+                                                        css: {
+                                                            'btn-dark': !BlendingController.flavorKeys[FlavorType[$data]]() || BlendingListController.sortOption() != 'Flavor',
+                                                            'btn-info': BlendingController.flavorKeys[FlavorType[$data]]() && BlendingListController.sortOption() === 'Flavor',
+                                                            active: BlendingController.flavorKeys[FlavorType[$data]](),
+                                                         },
                                                         click: () => {BlendingController.toggleFlavor($data), BlendingListController.updateBlendingSorting('Flavor'), BlendingListController.sortFactor(-1) },
                                                         text: FlavorType[$data]">
                                                 </btn>
@@ -73,7 +77,7 @@
                             </div>
                         </div>
 
-                        <div class="berryBlendingColumn col-5" style="overflow-y: auto;">
+                        <div class="berryBlendingColumn col-12 col-lg-5" style="overflow-y: auto;">
                             <div class="modal-content p-0 sticky-top" style="border: none;">
                                 <table style="width: 100%; table-layout:fixed;">
                                     <tr class="text-light">
@@ -166,7 +170,7 @@
 
                 <div id="blendingRecipeView" class="tab-pane fade">
                     <div class="modal-body row">
-                        <div class="col-3 berryBlendingColumn" style="overflow-y: auto;">
+                        <div class="col-12 col-md-3 berryBlendingColumn" style="overflow-y: auto;">
                             <div class="modal-content p-0 sticky-top" style="border: none;">
                                 <h4 class="modal-header">
                                     <button class="btn btn-block btn-outline-primary" style="font-size: large;"
@@ -204,12 +208,12 @@
                                 <!-- /ko -->
                             </div>
                         </div>
-                        <div class="col-9 berryBlendingColumn" style="overflow-y: auto;">
+                        <div class="col-12 col-md-9 berryBlendingColumn" style="overflow-y: auto;">
                             <div style="overflow: auto;" data-bind="foreach: BlendingController.selectedRecipeList()">
                                 <div class="pt-2 p-1" data-bind="attr: { id: 'recipecard-' + $data.item }">
                                     <div class="card">
-                                        <div class="row no-gutters">
-                                            <button class="col-md-4 btn btn-secondary">
+                                        <div id="recipeCardContent" class="row no-gutters">
+                                            <button class="col-md-4 btn btn-secondary d-none d-md-block">
                                                 <img src="" height="48px" style="" data-bind="attr:{ src: ItemList[$data.item].image }, style:{ 'image-rendering': ItemList[$data.item].pixelated ? 'pixelated' : '' }">
                                                 <div class="p-2">
                                                     <p data-bind="text: ItemList[$data.item].description"></p>
@@ -218,9 +222,17 @@
                                             </button>
                                             <div class="col-md-8">
                                                 <div>
-                                                    <h4 class="card-header" style="text-align: left;" data-bind="text: ItemList[$data.item].displayName">Display Name</h4>
-                                                    <h6 class="m-2 text-muted" style="text-align: left;" data-bind="text: `${GameConstants.camelCaseToString(BlendingRecipes.getBlendingRecipeType($data))} Recipe`">Recipe Type</h6>                                               
-                                                    <ul class="px-5 py-2 list-group-flush">
+                                                    <h4 class="card-header" style="text-align: left;">
+                                                        <img class="d-md-none" src="" height="48px" style="" data-bind="attr:{ src: ItemList[$data.item].image }, style:{ 'image-rendering': ItemList[$data.item].pixelated ? 'pixelated' : '' }">
+                                                        <span data-bind="text: ItemList[$data.item].displayName"></span>
+                                                        <span class="d-md-none text-muted float-right" data-bind="
+                                                            tooltip: {
+                                                                title: ItemList[$data.item].description,
+                                                                trigger: 'hover',
+                                                            }"
+                                                        >ⓘ</span>
+                                                    </h4>
+                                                    <ul class="m-0 px-5 py-2 list-group-flush">
                                                         <h5 class="list-group-item p-1 m-0">Ingredient: Cost / Have</h5>
                                                         <!-- ko foreach: $data.flavorPrice.filter(f => f.value > 0) -->
                                                             <li class="list-group-item p-1" data-bind="
@@ -229,6 +241,8 @@
                                                                 ">Flavor: Value</li>
                                                         <!-- /ko -->
                                                     </ul>
+                                                    <p class="m-0 d-md-none text-muted" data-bind="text: `In Bag: ${player.itemList[$data.item]().toLocaleString('en-US')}`"></p>
+                                                    <button class="mb-2 d-md-none btn btn-primary">Open Bag</button>
                                                     <div class="modal-footer">
                                                         <div class="row justify-content-center">
                                                             <div class="input-group m-0">

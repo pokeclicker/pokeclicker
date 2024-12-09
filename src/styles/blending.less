@@ -13,6 +13,15 @@
   }
 
   @media (max-width: 767px) { // phone
+    max-height: calc(70vh - 205px);  
+
+    #recipeCardContent {
+      flex-direction:column-reverse;
+    }
+  }
+
+  @media (max-height: 550px) {
+    max-height: calc(40vh - 50px);
   }
 }
 

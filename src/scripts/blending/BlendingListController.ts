@@ -8,7 +8,7 @@ class BlendingListController {
     public static sortFactor: KnockoutObservable<number> = ko.observable(-1);
 
     public static updateBlendingSorting(newSortOption: string) {
-        if (this.sortFactor() === 1) {
+        if (this.sortOption() === newSortOption && this.sortFactor() === 1) {
             this.sortOption('None');
             this.sortFactor(-1);
         } else if (this.sortOption() === newSortOption) {
