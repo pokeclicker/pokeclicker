@@ -1,0 +1,52 @@
+#berryBlenderModal {
+  .modal-lg{
+  max-width: 1000px !important;
+}}
+
+.berryBlendingColumn {
+  @media (min-width: 992px) { // computer
+    max-height: calc(100vh - 205px);
+  }
+
+  @media (max-width: 991px) { // tablet
+    max-height: calc(100vh - 225px);
+  }
+
+  @media (max-width: 767px) { // phone
+    max-height: calc(70vh - 205px);  
+
+    #recipeCardContent {
+      flex-direction:column-reverse;
+    }
+  }
+
+  @media (max-height: 550px) {
+    max-height: calc(40vh - 50px);
+  }
+}
+
+.blenderBody{
+  width: 40px;
+}
+
+.blenderTop {
+  position: absolute;
+  width: 40px;
+}
+
+#blendSlots {
+  margin: 5px;
+  width: 40px;
+  height: 40px;
+  border-color: #67e7ff;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.3rcap;
+}
+
+.blendSlotsAnimated {
+  border-style: outset !important;
+  pointer-events: none;
+  position: absolute;
+  animation: spin 1s linear infinite;
+ }
