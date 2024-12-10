@@ -3,25 +3,33 @@
   max-width: 1000px !important;
 }}
 
-.berryBlendingColumn {
-  @media (min-width: 992px) { // computer
-    max-height: calc(100vh - 205px);
+@media (min-width: 767px) { // computer and tablet
+  .berryBlendingColumn {
+    max-height: calc(98vh - 205px);
+  }
+}
+
+@media (max-width: 767px) { // phone
+  #blendBerryList, #blendersList {
+    max-height: calc(60vh - 255px);
   }
 
-  @media (max-width: 991px) { // tablet
-    max-height: calc(100vh - 225px);
+  #blendRecipesList {
+    max-height: calc(50vh - 255px);
   }
 
-  @media (max-width: 767px) { // phone
-    max-height: calc(70vh - 205px);  
+  #blendRecipeCards {
+    max-height: calc(78vh - 205px);
+  }
 
-    #recipeCardContent {
-      flex-direction:column-reverse;
+  @media (max-height: 650px) {
+    .berryBlendingColumn {
+      max-height: calc(40vh - 60px) !important;
     }
   }
 
-  @media (max-height: 550px) {
-    max-height: calc(40vh - 50px);
+  #recipeCardContent {
+    flex-direction:column-reverse;
   }
 }
 
