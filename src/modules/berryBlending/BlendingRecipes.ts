@@ -31,6 +31,9 @@ export default class BlendingRecipes {
         ],
         [BlendingRecipeType.Alcremie_Sweet]: [
         ],
+        // Keep Event recipes at bottom. Add new recipes anywhere above
+        [BlendingRecipeType.Event]: [
+        ],
     };
 
     public static recipeSet(type: BlendingRecipeType): BlendingRecipe[] {
@@ -65,8 +68,8 @@ export default class BlendingRecipes {
     }
 
     public static getRecipeCompletion() {
-        const total = BlendingRecipes.getFullBlendingRecipeList(false).length;
-        const have = BlendingRecipes.getFullBlendingRecipeList().length;
+        const total = BlendingRecipes.getFullBlendingRecipeList(false).length - BlendingRecipes.getBlendingRecipeSet(BlendingRecipeType.Event, false).length;
+        const have = BlendingRecipes.getFullBlendingRecipeList().length - BlendingRecipes.getBlendingRecipeSet(BlendingRecipeType.Event).length;
         return `${have} out of ${total}`;
     }
 }

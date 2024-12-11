@@ -403,6 +403,9 @@
                         They can be unlocked through progressing in the game or bought in Shops.
                     </p>
                     <p data-bind="text: `You currently have ${BlendingRecipes.getRecipeCompletion()} available recipes.`"></p>
+                    <!-- ko if: BlendingRecipes.getBlendingRecipeSet(BlendingRecipeType.Event).length > 0 -->
+                        <p data-bind="text: `An extra amount of ${BlendingRecipes.getBlendingRecipeSet(BlendingRecipeType.Event).length} Special Event recipe(s) are also active.`"></p>
+                    <!-- /ko -->
 
                     <h4><u>Blending Buddies</u></h4>
                     <p>
