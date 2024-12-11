@@ -1,7 +1,19 @@
 #berryBlenderModal {
   .modal-lg{
-  max-width: 1000px !important;
-}}
+    max-width: 1000px !important;
+  }
+
+  .sticky-top {
+    z-index: 100;
+  }
+
+  .nav-tabs {
+    overflow-x: auto !important;
+    overflow-y:hidden !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+  }
+}
 
 @media (min-width: 767px) { // computer and tablet
   .berryBlendingColumn {
@@ -11,20 +23,24 @@
 
 @media (max-width: 767px) { // phone
   #blendBerryList, #blendersList {
-    max-height: calc(60vh - 255px);
+    max-height: calc(65vh - 255px);
   }
 
   #blendRecipesList {
-    max-height: calc(50vh - 255px);
+    max-height: calc(50vh - 205px);
   }
 
   #blendRecipeCards {
     max-height: calc(78vh - 205px);
   }
 
-  @media (max-height: 650px) {
-    .berryBlendingColumn {
-      max-height: calc(40vh - 60px) !important;
+  @media (max-height: 600px) {
+    #blendRecipesList, #blendRecipeCards {
+      max-height: calc(45vh - 70px);
+    }
+
+    #blendBerryList, #blendersList {
+      max-height: calc(60vh - 194px);
     }
   }
 
