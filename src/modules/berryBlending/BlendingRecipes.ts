@@ -6,6 +6,7 @@ import BlendingRecipe from './BlendingRecipe';
 
 export default class BlendingRecipes {
     public static blendingRecipeList: Record<BlendingRecipeType, BlendingRecipe[]> = {
+        // if there are too many recipe types, you can combine pokeblocks into one "Pokeblock" recipe type for a cleaner list
         [BlendingRecipeType.Contest_Appeal]: [
             new BlendingRecipe('PokeBlock_Red', [40, 0, 0, 0, 0]),
             new BlendingRecipe('PokeBlock_Blue', [0, 40, 0, 0, 0]),
