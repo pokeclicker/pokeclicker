@@ -87,7 +87,7 @@ class GameController {
         $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
         // Berry Blending
         const blenders = App.game.blending;
-        const $blendersModal = $('#berryBlenderModal');
+        const $blendersModal = $('#blendingModal');
         $blendersModal.on('hide.bs.modal', _ => $blendersModal.data('disable-toggle', true));
         $blendersModal.on('hidden.bs.modal shown.bs.modal', _ => $blendersModal.data('disable-toggle', false));
         // Ship

@@ -1,4 +1,4 @@
-/// <reference path="../../declarations/berryBlending/BlendingController.d.ts"/>
+/// <reference path="../../declarations/blending/BlendingController.d.ts"/>
 
 class BlendingListController {
 
