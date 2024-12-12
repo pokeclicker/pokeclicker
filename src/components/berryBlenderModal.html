@@ -353,7 +353,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="input-group-append">
-                                                                <button class="btn smallButton smallFont" data-bind="css: {'btn-success': BlendingController.calculateButtonCss($data), 'btn-danger': !BlendingController.calculateButtonCss($data)}, click: () => App.game.blending.craftRecipe($data, parseInt($(`#recipeAmount-${$data.item}`).val()))">
+                                                                <button class="btn smallButton smallFont" data-bind="css: {'btn-success': BlendingController.calculateButtonCss($data), 'btn-danger': !BlendingController.calculateButtonCss($data)}, click: () => App.game.blending.makeRecipe($data, parseInt($(`#recipeAmount-${$data.item}`).val()))">
                                                                     Buy
                                                                 </button>
                                                             </div>

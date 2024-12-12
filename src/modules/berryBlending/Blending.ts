@@ -240,17 +240,17 @@ export default class Blending implements Feature {
         return recipe.flavorPrice.forEach((flavor) => this.loseAmount(new FlavorAmount(flavor.value * amount, flavor.type)));
     }
 
-    public canCraft(recipe: BlendingRecipe, amount: number): boolean {
+    public canMake(recipe: BlendingRecipe, amount: number): boolean {
         if (!recipe || !recipe.isUnlocked()) {
             return false;
         } else {
             return recipe.flavorPrice.every(f => App.game.blending.flavorBank[f.type]() >= f.value * amount);
         }
     }
-    public craftRecipe(r: BlendingRecipe, amount: number) {
+    public makeRecipe(r: BlendingRecipe, amount: number) {
         let flavorPrices = [r.flavorPrice[0], r.flavorPrice[1], r.flavorPrice[2], r.flavorPrice[3], r.flavorPrice[4]];
 
-        if (!this.canCraft(r, amount)) {
+        if (!this.canMake(r, amount)) {
             Notifier.notify({
                 message: 'You do not have enough ingredients to make that.',
                 type: NotificationOption.warning,
