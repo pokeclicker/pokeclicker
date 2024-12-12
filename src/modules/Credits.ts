@@ -712,6 +712,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Athlete (female)',
             'Bandana Guy',
+            'Blending machine top and body SVG',
             'Bodybuilder (female)',
             'Chaser (male and female)',
             'Cipher Peon (yellow)',

@@ -45,7 +45,7 @@ export default class BlendingRecipes {
     }
 
     public static getBlendingRecipeSet(type: BlendingRecipeType, filter: boolean = true): BlendingRecipe[] {
-        const recipes = this.recipeSet(type);
+        const recipes = BlendingRecipes.recipeSet(type);
         if (filter) {
             return recipes.filter(r => r.isUnlocked());
         } else {

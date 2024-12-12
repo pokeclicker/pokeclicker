@@ -26,11 +26,11 @@ export default class BlendingController {
     public static sourFilter: KnockoutObservable<boolean> = ko.observable(false);
 
     static flavorKeys: BooleanStringKeys = {
-        [FlavorType[FlavorType.Spicy]]: this.spicyFilter,
-        [FlavorType[FlavorType.Dry]]: this.dryFilter,
-        [FlavorType[FlavorType.Sweet]]: this.sweetFilter,
-        [FlavorType[FlavorType.Bitter]]: this.bitterFilter,
-        [FlavorType[FlavorType.Sour]]: this.sourFilter,
+        [FlavorType[FlavorType.Spicy]]: BlendingController.spicyFilter,
+        [FlavorType[FlavorType.Dry]]: BlendingController.dryFilter,
+        [FlavorType[FlavorType.Sweet]]: BlendingController.sweetFilter,
+        [FlavorType[FlavorType.Bitter]]: BlendingController.bitterFilter,
+        [FlavorType[FlavorType.Sour]]: BlendingController.sourFilter,
     };
 
     static amounts: Array<KnockoutObservable<number>>;
@@ -44,24 +44,24 @@ export default class BlendingController {
     }
 
     public static resetAmount(recipe: BlendingRecipe) {
-        this.amountInputElement(recipe).val(1).change();
+        BlendingController.amountInputElement(recipe).val(1).change();
     }
 
     public static increaseAmount(recipe: BlendingRecipe, n: number) {
-        const curVal = parseInt(this.amountInputElement(recipe).val().toString(), 10);
+        const curVal = parseInt(BlendingController.amountInputElement(recipe).val().toString(), 10);
         const newVal = (curVal || 0) + n;
-        this.amountInputElement(recipe).val(newVal > 1 ? newVal : 1).change();
+        BlendingController.amountInputElement(recipe).val(newVal > 1 ? newVal : 1).change();
     }
 
     public static multiplyAmount(recipe: BlendingRecipe, n: number) {
-        const curVal = parseInt(this.amountInputElement(recipe).val().toString(), 10);
+        const curVal = parseInt(BlendingController.amountInputElement(recipe).val().toString(), 10);
         const newVal = (curVal || 0) * n;
-        this.amountInputElement(recipe).val(newVal > 1 ? newVal : 1).change();
+        BlendingController.amountInputElement(recipe).val(newVal > 1 ? newVal : 1).change();
     }
 
     public static maxAmount(recipe: BlendingRecipe) {
         if (!recipe) {
-            return this.amountInputElement(recipe).val(0).change();
+            return BlendingController.amountInputElement(recipe).val(0).change();
         }
 
         const tooMany = (amt: number) => (recipe).flavorPrice.some((flavor) =>
@@ -70,7 +70,7 @@ export default class BlendingController {
 
         const amt = GameHelper.binarySearch(tooMany, 0, Number.MAX_SAFE_INTEGER);
 
-        this.amountInputElement(recipe).val(amt).change();
+        BlendingController.amountInputElement(recipe).val(amt).change();
     }
 
     public static calculateButtonCss(recipe: BlendingRecipe) {
@@ -96,7 +96,7 @@ export default class BlendingController {
     public static inSelectedList(type?: BlendingRecipeType) {
         const recipeTypes = [];
 
-        const selectedList = this.selectedRecipeList();
+        const selectedList = BlendingController.selectedRecipeList();
         selectedList.forEach(br => recipeTypes.push(BlendingRecipes.getBlendingRecipeType(br)));
         const typeList = [...new Set(recipeTypes)];
 
@@ -134,8 +134,8 @@ export default class BlendingController {
 
     public static toggleFlavor(flavorEnum: number) {
         const flavor = FlavorType[flavorEnum];
-        const status = this.flavorKeys[flavor]();
-        return this.flavorKeys[flavor](!status);
+        const status = BlendingController.flavorKeys[flavor]();
+        return BlendingController.flavorKeys[flavor](!status);
     }
 
     public static calculateTableBerryCss(berry: BerryType): string {
