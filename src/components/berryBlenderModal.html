@@ -32,11 +32,11 @@
                                                     data-bind="
                                                         attr: { for: 'btncheckBlend' + FlavorType[$data] },
                                                         css: {
-                                                            'btn-dark': !BlendingController.flavorKeys[FlavorType[$data]]() || BlendingListController.sortOption() != 'Flavor',
+                                                            'btn-dark': !BlendingController.flavorKeys[FlavorType[$data]](),
                                                             'btn-info': BlendingController.flavorKeys[FlavorType[$data]]() && BlendingListController.sortOption() === 'Flavor',
-                                                            active: BlendingController.flavorKeys[FlavorType[$data]](),
+                                                            'btn-secondary': BlendingController.flavorKeys[FlavorType[$data]]() && BlendingListController.sortOption() != 'Flavor',
                                                          },
-                                                        click: () => {BlendingController.toggleFlavor($data), BlendingListController.updateBlendingSorting('Flavor'), BlendingListController.sortFactor(-1) },
+                                                        click: () => {BlendingController.toggleFlavor($data), BlendingListController.updateBlendingSorting('Flavor', true) },
                                                         text: FlavorType[$data]">
                                                 </btn>
                                             </td>

@@ -5,17 +5,17 @@ class BlendingListController {
     // For the berry list in the blending modal
 
     public static sortOption: KnockoutObservable<string> = ko.observable('None');
-    public static sortFactor: KnockoutObservable<number> = ko.observable(-1);
+    public static sortFactor: KnockoutObservable<number> = ko.observable(1);
 
-    public static updateBlendingSorting(newSortOption: string) {
-        if (this.sortOption() === newSortOption && this.sortFactor() === 1) {
-            this.sortOption('None');
-            this.sortFactor(-1);
-        } else if (this.sortOption() === newSortOption) {
-            this.sortFactor(this.sortFactor() * -1);
+    public static updateBlendingSorting(newSortOption: string, flavorButton: boolean = false) {
+        if (BlendingListController.sortOption() === newSortOption && BlendingListController.sortFactor() === -1 && !flavorButton) {
+            BlendingListController.sortOption('None');
+            BlendingListController.sortFactor(1);
+        } else if (BlendingListController.sortOption() === newSortOption) {
+            flavorButton ? BlendingListController.sortFactor() : BlendingListController.sortFactor(BlendingListController.sortFactor() / -1);
         } else {
-            this.sortOption(newSortOption);
-            this.sortFactor(-1);
+            BlendingListController.sortOption(newSortOption);
+            flavorButton ? BlendingListController.sortFactor(-1) : BlendingListController.sortFactor(1);
         }
     }
 
