@@ -72,7 +72,7 @@ class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
         this.completeRequirements = completeRequirements;
     }
 
-    public getPokemonList() {
-        return this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted())));
+    public getPokemonList(fullList = false) {
+        return !fullList ? this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted()))) : this.pokemons;
     }
 }
