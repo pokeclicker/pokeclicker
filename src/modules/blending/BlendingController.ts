@@ -115,7 +115,7 @@ export default class BlendingController {
         if (active) {
             document.getElementById(dropdownId).classList.remove('active');
         } else {
-            document.getElementById(dropdownId).classList.add('active');    
+            document.getElementById(dropdownId).classList.add('active');
         }
     }
 
