@@ -56,7 +56,7 @@ class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
 
     constructor(
         public name: string,
-        private pokemons: GymPokemon[],
+        public readonly pokemons: GymPokemon[],
         public defeatMessage: string,
         requirements: Requirement[] = [],
         completeRequirements: Requirement[] = undefined,
@@ -72,7 +72,7 @@ class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
         this.completeRequirements = completeRequirements;
     }
 
-    public getPokemonList(fullList = false) {
-        return !fullList ? this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted()))) : this.pokemons;
+    public getPokemonList() {
+        return this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted())));
     }
 }

@@ -437,7 +437,7 @@ class PokemonLocations {
             });
 
             if (tempBattle[1].optionalArgs?.isTrainerBattle === false) {
-                tempBattle[1].getPokemonList(true).forEach(p => {
+                tempBattle[1].pokemons.forEach(p => {
                     cacheLine[p.name].push(tempBattle[0]);
                 });
             }
