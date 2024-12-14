@@ -2,7 +2,6 @@
 
 class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
     pokemon: PokemonListData;
-    customDescription: string;
     customReward: () => void;
     includeBreeding: boolean;
 
@@ -13,10 +12,7 @@ class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
         this.includeBreeding = includeBreeding;
     }
 
-    get description(): string {
-        if (this.customDescription) {
-            return this.customDescription;
-        }
+    get defaultDescription(): string {
         if (this.amount === 1) {
             return `Capture ${this.includeBreeding ? 'or hatch ' : ''}${this.pokemon.name}.`;
         }

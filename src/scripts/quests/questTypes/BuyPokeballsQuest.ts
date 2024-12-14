@@ -10,8 +10,8 @@ class BuyPokeballsQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.pokeballsPurchased[this.pokeball];
     }
 
-    get description(): string {
-        return this.customDescription ?? `Buy ${this.amount.toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
+    get defaultDescription(): string {
+        return `Buy ${this.amount.toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
     }
 
     toJSON() {

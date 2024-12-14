@@ -55,7 +55,7 @@
         <div id="questLineDisplayBody" class="card-body p-0 show" data-bind="foreach: activeQuestLines">
     		<div class="questDisplayBlock questLine">
     			<div class="card-header"  data-toggle="collapse" data-bind="attr : {href : '#qlcard_' + $index()}">
-    				<knockout data-bind="text: $data.name"></knockout>
+    				<knockout data-bind="text: $data.displayName"></knockout>
     				<knockout class="info text-primary" data-bind="tooltip: { title: $data.description, trigger: 'hover', placement:'left' }">ⓘ</knockout>
     			</div>
     			<div class="card-body p-0 show"  data-bind="attr : {id : 'qlcard_' + $index()}">
