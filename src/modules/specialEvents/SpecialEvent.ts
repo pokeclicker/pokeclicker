@@ -24,11 +24,12 @@ export default class SpecialEvent {
     hideFromEventCalendar: boolean;
     eventCalendarTimeLeft: KnockoutObservable<number>;
     isActive: KnockoutObservable<boolean>;
+    cssClass: string;
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
 
-    constructor(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar: boolean) {
+    constructor(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar: boolean, cssClass?: string) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
@@ -40,6 +41,7 @@ export default class SpecialEvent {
         this.eventCalendarTimeLeft = ko.observable(0);
         this.eventCalendarTimeLeft.equalityComparer = () => false; // Forcefully update timeLeft
         this.isActive = ko.pureComputed<boolean>(() => this.status() == SpecialEventStatus.started || this.eventCalendarTimeLeft() > 0);
+        this.cssClass = cssClass;
     }
 
     initialize(): void {
@@ -173,11 +175,14 @@ export default class SpecialEvent {
         // Update event status
         this.status(SpecialEventStatus.started);
 
-        // We only wan't the notification displayed for 1 hour, or until the event is over
+        // We only want the notification displayed for 1 hour, or until the event is over
         const timeTillEventEnd = this.timeTillEnd();
         this.notify('on now!', Math.min(1 * HOUR, timeTillEventEnd), NotificationConstants.NotificationOption.success);
 
         this.startFunction();
+        if (this.cssClass) {
+            document.getElementById('battleViewContainer').classList.add(this.cssClass);
+        }
         // Start checking when the event should be ending
         this.checkEnd();
     }
@@ -214,6 +219,9 @@ export default class SpecialEvent {
     end() {
         // Update event status
         this.notify('just ended!', 1 * HOUR, NotificationConstants.NotificationOption.danger);
+        if (this.cssClass) {
+            document.getElementById('battleViewContainer').classList.remove(this.cssClass);
+        }
         this.endFunction();
         this.status(SpecialEventStatus.none);
         this.updateDate();
