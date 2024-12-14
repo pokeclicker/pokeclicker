@@ -888,11 +888,11 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.kanto]: new Set(['Seafoam Islands', 'Icefall Cave']),
         [Region.johto]: new Set(['Mahogany Town', 'Ice Path']),
         [Region.hoenn]: new Set(['Sootopolis City', 'Shoal Cave']),
-        [Region.sinnoh]: new Set([216, 217, 'Snowpoint City', 'Lake Acuity']),
+        [Region.sinnoh]: new Set(['Snowpoint City', 'Lake Acuity']),
         [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
-        [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
+        [Region.kalos]: new Set(['Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
         [Region.alola]: new Set(['Mount Lanakila']),
-        [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 'Freezington', 26, 28, 31, 32, 46, 47, 54, 55]),
+        [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 31, 32, 55]),
     },
 
     Fire: {
@@ -983,6 +983,17 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.galar]: new Set([49]),
     },
 
+    Snow: {
+        [Region.kanto]: new Set(),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set(),
+        [Region.sinnoh]: new Set([216, 216]),
+        [Region.unova]: new Set(),
+        [Region.kalos]: new Set([17]),
+        [Region.alola]: new Set(),
+        [Region.galar]: new Set(['Crown Tundra Station', 'Freezington', 26, 28, 46, 47, 54]),
+    },
+
     // No need to set anything here, only exists for battle overrides
     Default: {},
 };
@@ -1000,6 +1011,7 @@ export const BattleBackgroundImage: Record<BattleBackground, string> = {
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',
+    Snow: 'snow',
     Default: '',
 };
 

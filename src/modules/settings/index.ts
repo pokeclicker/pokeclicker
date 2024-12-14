@@ -496,6 +496,7 @@ Settings.add(new Setting('discord-rp.large-image', 'Discord main image',
         new SettingOption('Ice Environment', 'background-ice'),
         new SettingOption('Mansion Environment', 'background-mansion'),
         new SettingOption('Power Plant Environment', 'background-power-plant'),
+        new SettingOption('Snow Environment', 'background-snow'),
         new SettingOption('Water Environment', 'background-water'),
     ],
     'pokeclickerlogo'));
