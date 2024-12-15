@@ -14,7 +14,16 @@ export default class SpecialEvents implements Feature {
         this.addEvents();
     }
 
-    public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar = false, cssClass?: string) {
+    public newEvent(
+        title: SpecialEventTitleType,
+        description: string,
+        startTime: Date,
+        startFunction: EventCallback,
+        endTime: Date,
+        endFunction: EventCallback,
+        hideFromEventCalendar = false,
+        cssClass?: string
+    ) {
         // Check if the event exist before adding it again
         if (!this.events.find(event => event.title == title)) {
             this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar, cssClass));

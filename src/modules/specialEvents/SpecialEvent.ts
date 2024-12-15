@@ -29,7 +29,16 @@ export default class SpecialEvent {
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
 
-    constructor(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar: boolean, cssClass?: string) {
+    constructor(
+        title: SpecialEventTitleType,
+        description: string,
+        startTime: Date,
+        startFunction: EventCallback,
+        endTime: Date,
+        endFunction: EventCallback,
+        hideFromEventCalendar: boolean,
+        cssClass?: string
+    ) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
