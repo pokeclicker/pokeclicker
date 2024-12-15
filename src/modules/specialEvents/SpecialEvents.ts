@@ -22,7 +22,7 @@ export default class SpecialEvents implements Feature {
         endTime: Date,
         endFunction: EventCallback,
         hideFromEventCalendar = false,
-        cssClass?: string
+        cssClass?: string,
     ) {
         // Check if the event exist before adding it again
         if (!this.events.find(event => event.title == title)) {

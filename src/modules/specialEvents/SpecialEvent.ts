@@ -37,7 +37,7 @@ export default class SpecialEvent {
         endTime: Date,
         endFunction: EventCallback,
         hideFromEventCalendar: boolean,
-        cssClass?: string
+        cssClass?: string,
     ) {
         this.title = title;
         this.description = description;
