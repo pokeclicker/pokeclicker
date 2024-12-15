@@ -11,9 +11,9 @@
     <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id, App.game.party.getPokemonByName($data)?.shiny ?? false, undefined, GameConstants.ShadowStatus.None) },
     css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data) }" onerror="this.src='assets/images/pokemon/0.png';"/>
     <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-    <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: pokemonMap[$data].nativeRegion <= player.highestRegion(),
+    <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: FarmController.isAvailableWanderer($data),
     tooltip: {
-      title: `Reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonMap[$data].nativeRegion])} to attract this Pokémon!`,
+      title: FarmController.wandererDexTooltip($data),
         placement: 'top',
         trigger: 'hover'
     }">
