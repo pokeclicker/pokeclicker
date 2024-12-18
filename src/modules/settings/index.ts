@@ -270,7 +270,16 @@ Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false, undef
 Settings.add(new Setting<string>('heldItemDropdownPokemonOrItem', 'Pokémon or Item', [new SettingOption('Pokémon', 'pokemon'), new SettingOption('Item', 'item')], 'pokemon', undefined, false));
 Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2, undefined, false));
-Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
+Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [
+    new SettingOption('All', -2),
+    ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+    new SettingOption('None', PokemonType.None),
+], -2, undefined, false));
+Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
+    new SettingOption('All', -2),
+    ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+    new SettingOption('None', PokemonType.None),
+], -2, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
 
