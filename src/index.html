@@ -176,7 +176,7 @@
                 <!--RouteBattleView-->
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
-                <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
+                <div id="battleViewContainer" class="battle-view card-body p-0 justify-content-center no-gutters no-select"
                     data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
                         class: MapHelper.calculateBattleCssClass()">
 
