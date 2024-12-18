@@ -987,7 +987,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.kanto]: new Set(),
         [Region.johto]: new Set(),
         [Region.hoenn]: new Set(),
-        [Region.sinnoh]: new Set([216, 216]),
+        [Region.sinnoh]: new Set([216, 217]),
         [Region.unova]: new Set(),
         [Region.kalos]: new Set([17]),
         [Region.alola]: new Set(),
