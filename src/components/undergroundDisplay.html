@@ -76,7 +76,7 @@
     </div>
 
     <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayHelpers">
-        <span>Helper</span>
+        <span>Expert</span>
         <!-- ko if: App.game.underground.helpers.hired().length > 0 -->
         <button class="btn btn-sm btn-danger" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.helpers.hired().forEach(helper => helper.fire())">
             Fire
@@ -116,7 +116,7 @@
             </div>
             <!-- /ko -->
             <!-- ko ifnot: App.game.underground.helpers.hired().length > 0 -->
-            <div class="">No helpers hired. You're on your own!</div>
+            <div class="">No experts hired. You're on your own!</div>
             <!-- /ko -->
         </div>
     </div>

@@ -6,7 +6,7 @@
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Experts</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
                     <li class="d-block"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
                 </ul>
@@ -255,7 +255,7 @@
                                     <tbody>
                                     <tr>
                                         <td class="text-left">Level</td>
-                                        <td class="text-right tight" data-bind="text: $data.level.toLocaleString('en-US')"></td>
+                                        <td class="text-center tight" data-bind="text: $data.level.toLocaleString('en-US')"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
@@ -269,26 +269,26 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Favorite mine</td>
-                                        <td class="text-right tight" data-bind="text: UndergroundController.getMineConfig($data.favoriteMine).displayName"></td>
+                                        <td class="text-left">Expertise</td>
+                                        <td class="text-center tight" data-bind="text: UndergroundController.getMineConfig($data.favoriteMine).displayName"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Discover chance</td>
-                                        <td class="text-right tight" data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                        <td class="text-center tight" data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Look for favorite</td>
+                                        <td class="text-left">Use Expertise</td>
                                         <td class="text-center tight align-middle">
                                             <input class="clickable" type="checkbox" data-bind="checked: $data.shouldDiscoverFavorite"/>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Smart tool use</td>
-                                        <td class="text-right tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                        <td class="text-center tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Reward retention</td>
-                                        <td class="text-right tight" data-bind="text: $data.rewardRetention.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                        <td class="text-center tight" data-bind="text: $data.rewardRetention.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Auto-sell</td>
@@ -308,7 +308,7 @@
                                     </tr>
                                     <tr>
                                         <td class="text-left">Work cycle</td>
-                                        <td class="text-right tight" data-bind="text: `${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></td>
+                                        <td class="text-center tight" data-bind="text: `${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></td>
                                     </tr>
                                     </tbody>
 
@@ -358,7 +358,7 @@
                             </p>
                             <ul>
                                 <li>A <strong>player</strong> digs up the last item: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
-                                <li>A <strong>helper</strong> digs up the last item: If your helper has the 'Look for favorite' setting enabled, it will try and start it's favorite mine. If this setting is disabled it will start a Random mine.</li>
+                                <li>An <strong>expert</strong> digs up the last item: If your expert has the 'Use expertise' setting enabled, it will try to find a specific mine. If this setting is disabled it will find a Random mine.</li>
                             </ul>
                             <p>
                                 <u>Note that this does NOT ignore the discovery time needed.</u>
@@ -388,7 +388,7 @@
 
                             <h4>Special Mine</h4>
                             <p>
-                                When you (not your helper) are searching for a mine, there is a 4% chance for the mine to be a Special mine.
+                                When you (not your expert) are searching for a mine, there is a 4% chance for the mine to be a Special mine.
                                 This mine only contains 1 item, which can be any of the mega stones (if eligible) or other special items.
                             </p>
 
@@ -463,7 +463,7 @@
 
                         <div class="card-body">
                             <p>
-                                The Battery is a system that charges up as you or your helper mines tiles. In order to charge up you need to have your Cell Battery Oak Item equipped.
+                                The Battery is a system that charges up as you or your expert mines tiles. In order to charge up you need to have your Cell Battery Oak Item equipped.
                             </p>
                             <p>
                                 Each successful mining attempt will add 1 charge, up to a maximum of <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_MAX_CHARGES"></knockout> charges.
@@ -481,22 +481,22 @@
 
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Helpers</span>
+                            <span class="flex-grow-1 text-center font-weight-bold">Experts</span>
                         </div>
 
                         <div class="card-body">
-                            <p>Helpers are characters you can hire to assist with mining tasks. They perform actions at certain timing intervals and become more efficient as they level up. Each of them bring their own powerful tools, so their actions will not affect the durability of your tools.</p>
+                            <p>Experts are characters you can hire to assist with mining tasks. They perform actions at certain timing intervals and become more efficient as they level up. Each of them bring their own powerful tools, so their actions will not affect the durability of your tools.</p>
 
-                            <h4>Helper Mechanics</h4>
+                            <h4>Expert Mechanics</h4>
                             <ul>
-                                <li><strong>Favorite Mine:</strong> Each helper has a favorite mine they are more likely to find.
+                                <li><strong>Expertise:</strong> Each expert has an expertise, a specific mine they are more likely to find.
                                     <ul>
-                                        <li>Starts at <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> chance to find their favorite mine when searching.</li>
+                                        <li>Starts at <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> chance to find their specific mine when searching.</li>
                                         <li>Increases by <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to a maximum of <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
-                                        <li>If they don’t find their favorite mine, they will randomly find one of the 6 types of mines.</li>
+                                        <li>If they don’t find their specific mine, they will find a random mine.</li>
                                     </ul>
                                 </li>
-                                <li><strong>Smart tool use:</strong> Helpers start out inexperienced and will pick the most efficient tool <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of the time.
+                                <li><strong>Smart tool use:</strong> Experts start out inexperienced and will pick the most efficient tool <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of the time.
                                     <ul>
                                         <li>Increases by <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
                                         <li>
@@ -509,13 +509,13 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><strong>Reward retention:</strong> When a helper digs up an item, there is a chance that they will keep the item for themselves.
+                                <li><strong>Reward retention:</strong> When an expert digs up an item, there is a chance that they will keep the item for themselves.
                                     <ul>
                                         <li>
                                             The chance starts at <knockout data-bind="text: GameConstants.REWARD_RETENTION_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and decreases by <knockout data-bind="text: GameConstants.REWARD_RETENTION_DECREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, down to <knockout data-bind="text: GameConstants.REWARD_RETENTION_MINIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.
                                         </li>
                                         <li>
-                                            From helper level <knockout data-bind="text: GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT"></knockout>, the player can ask to auto-sell diamond and plate items for their respective value.
+                                            From expert level <knockout data-bind="text: GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT"></knockout>, the player can ask to auto-sell diamond and plate items for their respective value.
                                         </li>
                                     </ul>
                                 </li>
@@ -523,7 +523,7 @@
                                     <strong>Work cycle:</strong> Starts at <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_BASE"></knockout> seconds and decreases by <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL"></knockout> second for every level, up to a minimum of <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_MINIMUM"></knockout> seconds per action.
                                 </li>
                                 <li>
-                                    <strong>Energy restore:</strong> A helper can use an energy potion to restore a portion of the time until they can perform their next action.
+                                    <strong>Energy restore:</strong> An expert can use an energy potion to restore a portion of the time until they can perform their next action.
                                     <ul>
                                         <li><strong>Small restore:</strong> Restores 25% of the time until the next action can be performed</li>
                                         <li><strong>Medium restore:</strong> Restores 50% of the time until the next action can be performed</li>
@@ -540,7 +540,7 @@
                         </div>
 
                         <div class="card-body">
-                            <p>Using tools and helpers not only helps you gather treasures but also grants experience that helps in leveling up.</p>
+                            <p>Using tools and experts not only helps you gather treasures but also grants experience that helps in leveling up.</p>
 
                             <h4>Experience</h4>
                             <ul>
@@ -555,8 +555,8 @@
 
                             <h4>Shared Experience</h4>
                             <ul>
-                                <li><strong>Player Actions:</strong> When the player performs an action that gains experience, the active helper will also gain <knockout data-bind="text: GameConstants.PLAYER_EXPERIENCE_HELPER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
-                                <li><strong>Helper Actions:</strong> When the helper performs an action that gains them experience, the player will also gain <knockout data-bind="text: GameConstants.HELPER_EXPERIENCE_PLAYER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
+                                <li><strong>Player Actions:</strong> When the player performs an action that gains experience, the active expert will also gain <knockout data-bind="text: GameConstants.PLAYER_EXPERIENCE_HELPER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
+                                <li><strong>Expert Actions:</strong> When the expert performs an action that gains them experience, the player will also gain <knockout data-bind="text: GameConstants.HELPER_EXPERIENCE_PLAYER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
                             </ul>
                         </div>
                     </div>
