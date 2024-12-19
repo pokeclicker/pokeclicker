@@ -1,0 +1,40 @@
+<!-- ko if: App.game.gameState === GameConstants.GameState.contest -->
+<div id="contestInformation" class="card sortable-disabled border-secondary mb-3 contest-hall no-select">
+    <div class="card-header p-0" data-toggle="collapse">
+        <span>Contest Hall</span>
+    </div>
+    <div class="card-body text-center">
+        <p>
+            Compete in a Contest!<br/>
+            Max out the audience bar to win. Defeat more trainers for a higher reward. Higher ranks offer more Contest Tokens.</br>
+            <i>This feature is still in development</i><br/>
+        </p>
+        <div class="p-0 modal-body">
+            <div class="justify-content-center" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
+                <h4 class="card-header mb-1 p-1" data-toggle="collapse" data-bind="attr : {href : '#rankCard_' + $index()}, text: `${ContestRank[rank]} Rank`"></h4>
+                <div class="card-body mb-1 p-0 show row" style="justify-content: space-evenly;"  data-bind="attr : {id : 'rankCard_' + $index()}, foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
+                    <button class="d-flex flex-column align-items-center p-0 btn btn-secondary"
+                        data-bind="click: () => {ContestRunner.startContest(rank, type)},
+                        css: { active: ContestRunner.running() && ContestRunner.type() == type && ContestRunner.rank() == rank,
+                            contestButton3: Settings.getSetting('gameDisplayStyle').observableValue() != 'fullWidth5',
+                            contestButton5: Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5' },
+                        tooltip: {
+                            html: true,
+                            title: ContestHelper.contestButtonTooltip(rank, type),
+                            trigger: 'hover',
+                        },
+                        attr:{'aria-label': `${ContestRank[rank]} Rank ${ContestType[type]} Contest. ${ContestHelper.contestButtonTooltip(rank, type)}.`}
+                        ">
+                        <p class="m-0" style="font-weight: bolder;" data-bind="text: `${ContestType[type]}`"></p>
+                        <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" width="80px" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano" data-bind="attr: {'contest-type': ContestType[type]}">
+                            <g data-bind="html: ContestHelper.getRibbonImage(rank, type)"></g>
+                        </svg>
+                        <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(rank, type, [type]))}`"></p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-block btn-danger text-light" onclick="ContestHall.leave()">Leave</a>
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,120 @@
+<div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.contest">
+    <div class="col no-gutters clickable" data-bind="if: ContestBattle.enemyPokemon, click: function() {ContestBattle.clickAttack()}" style="height: 280px; display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
+            <knockout>
+                <knockout data-bind="text: ContestBattle.trainer().name.replace(/\d/g,'') + '\'s'"></knockout>
+                <knockout data-bind="text: ContestBattle.enemyPokemon().nickname">Pokémon name</knockout>
+            </knockout>
+
+            <div class="progress timer">
+                <div class="progress-bar bg-danger" role="progressbar"
+                        data-bind="attr:{ style: 'width:' + ContestRunner.timeLeftPercentage() + '%' },
+                        css: { 'bg-danger': ContestRunner.timeLeftSeconds() < 3, 'bg-primary': ContestRunner.timeLeftSeconds() >= 10 }"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <span data-bind="text: ContestRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+                </div>
+            </div>
+        </h2>
+
+        <div id="gymGoContainer" data-bind="if: Settings.getSetting('showGymGoAnimation').observableValue">
+            <div class="row" style="display: inline-block; vertical-align: middle;">
+              <div class="col-sm-6 offset-sm-3">
+                <img style="width:100%" id="gymGo" src="assets/gifs/go.gif">
+              </div>
+            </div>
+          </div>
+
+        <div class="trainer">
+            <img data-bind="attr:{ src: ContestBattle.trainer().image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+        </div>
+  
+        <div>
+            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.enemyPokemon() } }">Pokémon sprite</knockout>
+        </div>
+        <div class="progress contestpoints trainerhitpoints">
+            <div class="progress-bar bg-danger" role="progressbar"
+                    data-bind="attr:{ style: 'width:' + ContestBattle.enemyPokemon().healthPercentage() + '%' }"
+                    aria-valuemin="0" aria-valuemax="100">
+                <span data-bind="text: ContestBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + ContestBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+            </div>
+        </div>
+        <div class="progress hitpoints trainerhitpoints">
+          <div class="progress-bar bg-success" role="progressbar"
+                  data-bind="attr:{ style: 'width:' + ContestRunner.audienceAppealPercentage() + '%' }, css: {'progress-bar-striped progress-bar-animated': ContestRunner.encoreStatus() || ContestRunner.finaleStatus()} "
+                  aria-valuemin="0" aria-valuemax="100">
+              <span data-bind="html: ContestRunner.audienceStatus()" style="font-size: 12px;"></span>
+          </div>
+      </div>
+      <button class="btn btn-sm btn-danger stop-auto"
+        onclick="ContestRunner.running(false);
+        ContestBattle.enemyPokemon(null);
+        ContestBattle.trainer(null);">
+        Stop Contest
+      </button>
+      <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+        <!-- ko if: ContestRunner.rank() === 5 || ContestRunner.rank() === 6 || ContestRunner.rank() === 7 || ContestRunner.rank() === 8 || ContestRunner.rank() === 10 -->
+        <table width="100%">
+          <tr>
+            <td colspan="2">
+              <span>Current Click Types:</span>
+            </td>
+            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
+              <span class="badge text-light px-1" data-bind="
+                          attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.clickTypes()) }">
+                <small><strong
+                  data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <span>Enemy Contest Types:</span>
+            </td>
+            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
+              <span class="badge text-light px-1" data-bind="
+                          attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.enemyPokemon().contestTypes) }">
+                <small><strong
+                  data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" width="33%">
+              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.encoreBonusComputable())"></knockout>
+            </td>
+            <td colspan="2">
+              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.trainerBonusComputable())"></knockout>
+            </td>
+            <td colspan="2" width="33%">
+              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.clickBonusComputable())"></knockout>
+            </td>
+          </tr>
+        </table>
+        <!-- /ko -->
+        <!-- ko if: ContestRunner.rank() === 1 || ContestRunner.rank() === 2 || ContestRunner.rank() === 3 || ContestRunner.rank() === 4 || ContestRunner.rank() === 9 -->
+        <table width="100%">
+          <tr>
+            <td width="40%">
+              <knockout data-bind="html: ContestBattle.pokemonContestAppealTooltip"></knockout>
+            </td>
+            <td width="60%">
+              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.encoreBonusComputable())"></knockout>
+            </td>
+          </tr>
+          <tr>
+            <td width="60%" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
+              <span class="badge text-light px-1" style="font-size: x-small" data-bind="
+                          attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.enemyPokemon().contestTypes) }">
+                <small><strong
+                  data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
+              </span>
+            </td>
+            <td width="40%">
+              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.trainerBonusComputable())"></knockout>
+            </td>
+          </tr>
+        </table>
+        <!-- /ko -->
+      </h2>
+    </div>
+</div>
