@@ -407,24 +407,6 @@ class Breeding implements Feature {
         return egg;
     }
 
-    public createFossilEgg(fossil: string): Egg {
-        const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossil];
-        const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
-        let fossilEgg: Egg;
-        if (pokemonNativeRegion > player.highestRegion()) {
-            Notifier.notify({
-                message: `You must reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonNativeRegion])} before you can uncover this fossil Pokémon!`,
-                type: NotificationConstants.NotificationOption.warning,
-                timeout: 5e3,
-            });
-            fossilEgg = new Egg();
-        } else {
-            const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
-            fossilEgg = this.createEgg(pokemonId, EggType.Fossil);
-        }
-        return fossilEgg;
-    }
-
     public getSteps(eggCycles: number) {
         if (eggCycles === undefined) {
             return 500;

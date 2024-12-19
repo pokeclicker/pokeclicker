@@ -311,7 +311,7 @@ class QuestLineHelper {
             ItemList.Old_amber.gain(1);
             Notifier.notify({
                 title: undergroundQuestLine.name,
-                message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
+                message: 'You have gained an Old Amber!\n<i>Have a look around Cinnabar island to revive this fossil.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: GameConstants.MINUTE,
             });
