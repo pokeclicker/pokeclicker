@@ -515,6 +515,7 @@ Routes.add(new RegionRoute(
     'Pinkan Plains', Region.kanto, 42,
     new RoutePokemon({
         land: ['Pinkan Pidgey', 'Pinkan Rattata', 'Pinkan Nidoran(M)', 'Pinkan Nidoran(F)', 'Pinkan Diglett', 'Pinkan Bellsprout'],
+        special: [new SpecialRoutePokemon(['Pinkan Pidgeotto'], new ObtainedPokemonRequirement('Pinkan Pidgeotto'))],
     }),
     [new RouteKillRequirement(10, Region.kanto, 41)],
     undefined,
@@ -652,7 +653,13 @@ Routes.add(new RegionRoute(
         headbutt: ['Aipom', 'Heracross'],
         special: [new SpecialRoutePokemon(['Meowth (Phanpy)'], new MultiRequirement([
             new StatisticRequirement(['pokemonHatched', getPokemonByName('Phanpy').id], 1, 'Hatch Phanpy first.'),
-            new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
+            new OneFromManyRequirement([
+                new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
+                new MultiRequirement([
+                    new PokemonLevelRequirement('Phanpy', 51, AchievementOption.less),
+                    new ClearDungeonRequirement(250, getDungeonIndex('Team Rocket\'s Hideout')),
+                ]),
+            ]),
         ]))],
     }),
     [
@@ -1843,8 +1850,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kala\'e Bay', Region.alola, 20,
     new RoutePokemon({
-        land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Yungoos'],
-        water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Shelgon', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
+        land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Shelgon', 'Yungoos'],
+        water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
         special: [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Horsea'], new DayOfWeekRequirement(DayOfWeek.Wednesday)),
@@ -3727,6 +3734,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Swablu', 'Altaria'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Absol'], new WeatherRequirement([WeatherType.Blizzard, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Salamence', 'Garchomp'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
+          new SpecialRoutePokemon(['Archeops'], new ObtainedPokemonRequirement('Archeops')),
       ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Tunnel to the Top'))],

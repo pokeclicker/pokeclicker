@@ -18,6 +18,7 @@ import {
     MegaEvolution,
     DayTimedMegaEvolution,
     NightTimedMegaEvolution,
+    AttackEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -1816,6 +1817,26 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 25.23,
+        'name': 'Pikachu (Palaeontologist)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric, PokemonType.Rock],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -21890,6 +21911,27 @@ export const pokemonList = createPokemonArray(
     {
         'id': 716,
         'name': 'Xerneas',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 306,
+        'evolutions': [AttackEvolution(100, 'Xerneas', 'Xerneas (Active)', 1)],
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 126,
+            'attack': 131,
+            'specialAttack': 131,
+            'defense': 95,
+            'specialDefense': 98,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 716.01,
+        'name': 'Xerneas (Active)',
         'type': [PokemonType.Fairy],
         'eggCycles': 120,
         'levelType': LevelType.slow,

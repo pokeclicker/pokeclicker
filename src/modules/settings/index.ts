@@ -143,9 +143,9 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
-Settings.add(new BooleanSetting('showUndergroundModuleMineControls', 'Show Underground module mine controls', true));
-Settings.add(new BooleanSetting('showUndergroundModuleDailyTrades', 'Show Underground module daily trades', false));
+Settings.add(new BooleanSetting('enableUndergroundModuleMineControls', 'Enable Underground module mine controls', true));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
@@ -166,10 +166,10 @@ Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', tru
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
-Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokemon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
+Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokémon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokémon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokémon and Missing Achievement', [], '#c939fe'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokémon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
 Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ab1707', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
 Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
@@ -219,12 +219,6 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
-
-// Underground
-Settings.add(new BooleanSetting('underground.Reduced_Shards', 'Reduced Shards', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Plates', 'Reduced Plates', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Evolution_Items', 'Reduced Evolution Items', true, undefined, false));
-Settings.add(new BooleanSetting('underground.Reduced_Fossil_Pieces', 'Reduced Fossil Pieces', true, undefined, false));
 
 // Party
 Settings.add(new BooleanSetting('partyHideShinySprites', 'Hide party shiny sprites', false));
@@ -457,8 +451,8 @@ Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lo
 
 Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 'H'));
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
-Settings.add(new HotkeySetting('hotkey.underground.survey', 'Survey', 'S'));
-Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Bomb', 'B'));
+Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Switch to Bomb', 'B'));
+Settings.add(new HotkeySetting('hotkey.underground.survey', 'Switch to Survey', 'S'));
 
 Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'W', { prefix: '↑ or ' }));
 Settings.add(new HotkeySetting('hotkey.dungeon.left', 'Move Left', 'A', { prefix: '← or ' }));
