@@ -147,6 +147,7 @@ export class UndergroundBattery {
         this._activeDischargeFrame = 0;
         this._charges(0);
 
+        GameHelper.incrementObservable(App.game.statistics.undergroundBatteryDischarges[randomPattern.id]);
         App.game.oakItems.use(OakItemType.Cell_Battery);
         Notifier.notify({
             title: 'Cell Battery Discharge',

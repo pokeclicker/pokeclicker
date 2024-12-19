@@ -962,6 +962,7 @@
                                 <th class="text-left">Name</th>
                                 <th class="text-left">Requirements</th>
                                 <th>Chance</th>
+                                <th>Discharges</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -979,6 +980,7 @@
                                 <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
                                 <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
                                 <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
+                                <td class="vertical-middle" data-bind="text: $data.canAccess() ? App.game.statistics.undergroundBatteryDischarges[$data.id]().toLocaleString('en-US') : '-'"></td>
                             </tr>
                             <!-- /ko -->
                             </tbody>
