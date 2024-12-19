@@ -196,9 +196,8 @@ export class UndergroundHelper {
         GameHelper.incrementObservable(this._experience, experience);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public hasStolenItem(id: number): boolean {
-        return false;
+    public hasStolenItem(stolenItemID: number): boolean {
+        return App.game.statistics.undergroundHelperRewardRetention[`${this.id}-${stolenItemID}`]() > 0;
     }
 
     get id(): string {
