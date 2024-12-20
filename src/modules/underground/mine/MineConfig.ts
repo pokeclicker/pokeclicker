@@ -31,25 +31,25 @@ export class MineConfigs {
     }
 }
 
-MineConfigs.add({ type: MineType.Random, displayName: 'Random',
+MineConfigs.add({ type: MineType.Random, displayName: 'Chaos Cavern',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.MegaStone, UndergroundItemValueType.Special].includes(item.valueType)),
 });
-MineConfigs.add({ type: MineType.Diamond, displayName: 'Diamond',
+MineConfigs.add({ type: MineType.Diamond, displayName: 'Treasure Trove',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Diamond),
 });
-MineConfigs.add({ type: MineType.GemPlate, displayName: 'Gem plate',
+MineConfigs.add({ type: MineType.GemPlate, displayName: 'Arceus\' Forge',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Gem),
 });
-MineConfigs.add({ type: MineType.Shard, displayName: 'Shard',
+MineConfigs.add({ type: MineType.Shard, displayName: 'Fractured Quarry',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Shard),
 });
-MineConfigs.add({ type: MineType.Fossil, displayName: 'Fossil',
+MineConfigs.add({ type: MineType.Fossil, displayName: 'Ancient Excavation',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.Fossil || item.valueType === UndergroundItemValueType.FossilPiece),
 });
-MineConfigs.add({ type: MineType.EvolutionItem, displayName: 'Evolution item',
+MineConfigs.add({ type: MineType.EvolutionItem, displayName: 'Evolution Nexus',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => item.valueType === UndergroundItemValueType.EvolutionItem),
 });
-MineConfigs.add({ type: MineType.Special, displayName: 'Special',
+MineConfigs.add({ type: MineType.Special, displayName: 'Mystery Mine',
     getAvailableItems: () => UndergroundItems.getUnlockedItems().filter(item => [UndergroundItemValueType.MegaStone, UndergroundItemValueType.Special].includes(item.valueType)),
     fixedItemCount: 1,
 });

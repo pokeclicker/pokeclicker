@@ -192,7 +192,7 @@ import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
 import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
 import { Mine } from './underground/mine/Mine';
-import { MineType } from './underground/mine/MineConfig';
+import { MineConfigs, MineType } from './underground/mine/MineConfig';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import { UndergroundController } from './underground/UndergroundController';
@@ -421,6 +421,7 @@ Object.assign(<any>window, {
     pokeballFilterOptions,
     Mine,
     MineType,
+    MineConfigs,
     Underground,
     UndergroundController,
     UndergroundTrading,

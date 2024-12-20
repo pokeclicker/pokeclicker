@@ -111,7 +111,7 @@
 
                             <!-- ko if: App.game.underground.mine && App.game.underground.mine.completed -->
                             <div style="position: absolute; inset: 20%; display: grid; gap: 1rem; align-content: center;">
-                                <div>Collected all items</div>
+                                <div>Collected all treasures</div>
                                 <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
                             </div>
                             <!-- /ko -->
@@ -357,8 +357,8 @@
                                 Automatically starting a new mine happens in the following cases:
                             </p>
                             <ul>
-                                <li>A <strong>player</strong> digs up the last item: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
-                                <li>An <strong>expert</strong> digs up the last item: If your expert has the 'Use expertise' setting enabled, it will try to find a specific mine. If this setting is disabled it will find a Random mine.</li>
+                                <li>A <strong>player</strong> digs up the last treasure: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
+                                <li>An <strong>expert</strong> digs up the last treasure: If your expert has the 'Use expertise' setting enabled, it will try to find a specific mine. If this setting is disabled it will find a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>.</li>
                             </ul>
                             <p>
                                 <u>Note that this does NOT ignore the discovery time needed.</u>
@@ -367,42 +367,42 @@
                             <h4>Mine Types</h4>
                             <ul>
                                 <li>
-                                    <strong>Random Mine:</strong> Contains all possible items (except the items from a Special mine)
+                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>:</strong> Contains all possible treasures (except the treasure found in a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>)
                                 </li>
                                 <li>
-                                    <strong>Diamond Mine:</strong> Contains only treasures sellable for diamonds.
+                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Diamond).displayName"></knockout>:</strong> Contains only treasures that can be sold for diamonds.
                                 </li>
                                 <li>
-                                    <strong>Gem Plate Mine:</strong> Contains only gem plate treasures sellable for gems.
+                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.GemPlate).displayName"></knockout>:</strong> Contains only gem plate treasures that can be sold for gems.
                                 </li>
                                 <li>
-                                    <strong>Shard Mine:</strong> Contains only shard treasures.
+                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Shard).displayName"></knockout>:</strong> Contains only shard treasures.
                                 </li>
                                 <li>
-                                    <strong>Fossil Mine:</strong> Contains only fossils and fossil pieces.
+                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Fossil).displayName"></knockout>:</strong> Contains only fossils and fossil pieces.
                                 </li>
                                 <li>
-                                    <strong>Evolution Item Mine:</strong> Contains only evolution items.
+                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.EvolutionItem).displayName"></knockout>:</strong> Contains only evolution items.
                                 </li>
                             </ul>
 
-                            <h4>Special Mine</h4>
+                            <h4><knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout></h4>
                             <p>
-                                When you (not your expert) are searching for a mine, there is a 4% chance for the mine to be a Special mine.
-                                This mine only contains 1 item, which can be any of the mega stones (if eligible) or other special items.
+                                When you (not your expert) are searching for a mine, there is a 4% chance for the mine to be a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>.
+                                This mine only contains 1 treasure, which can be any of the mega stones (if eligible) or other special treasures.
                             </p>
 
                             <h4>Discovery Time Calculation</h4>
                             <p>The discovery time is calculated as follows:</p>
                             <ul>
                                 <li>
-                                    <strong>Random Mine Type</strong>
+                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout></strong>
                                     <ul>
                                         <li>
-                                            Current mine is a Random mine:<br/>
+                                            Current mine is a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>:<br/>
                                             The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>. This is then further reduced by the percentage of the amount of unmined tiles divided by all tiles only taking into account tiles that do contain a reward.
                                         </li>
-                                        <li>Current mine is not a random mine: No discovery time</li>
+                                        <li>Current mine is not a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>: No discovery time</li>
                                     </ul>
                                 </li>
                                 <li>
@@ -451,7 +451,7 @@
                             <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: 'Mines a maximum of 2 layers on each of 10 random tiles (both mined and cleared). The number of tiles increases when equipped with the Explosive Charge Oak Item.' } }"></div>
                             <!-- /ko -->
                             <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Survey) } -->
-                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains an item. The grid shrinks by two tiles in each direction every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }"></div>
+                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains a treasure. The grid shrinks by two tiles in each direction every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }"></div>
                             <!-- /ko -->
                         </div>
                     </div>
@@ -493,7 +493,7 @@
                                     <ul>
                                         <li>Starts at <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> chance to find their specific mine when searching.</li>
                                         <li>Increases by <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to a maximum of <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
-                                        <li>If they don’t find their specific mine, they will find a random mine.</li>
+                                        <li>If they don’t find their specific mine, they will find a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>.</li>
                                     </ul>
                                 </li>
                                 <li><strong>Smart tool use:</strong> Experts start out inexperienced and will pick the most efficient tool <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of the time.
@@ -502,20 +502,20 @@
                                         <li>
                                             <strong>Actions</strong>
                                             <ul>
-                                                <li><strong>Bomb:</strong> When not all items have been seen.</li>
-                                                <li><strong>Hammer:</strong> When all items have been seen, and the spot that is being mined has at least 1 adjacent tile with a reward</li>
-                                                <li><strong>Chisel:</strong> When all items have been seen, and the spot that is being mined has no adjacent tiles with a reward</li>
+                                                <li><strong>Bomb:</strong> When not all treasures have been seen.</li>
+                                                <li><strong>Hammer:</strong> When all treasures have been seen, and the spot that is being mined has at least 1 adjacent tile with a reward</li>
+                                                <li><strong>Chisel:</strong> When all treasures have been seen, and the spot that is being mined has no adjacent tiles with a reward</li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><strong>Reward retention:</strong> When an expert digs up an item, there is a chance that they will keep the item for themselves.
+                                <li><strong>Reward retention:</strong> When an expert digs up a treasure, there is a chance that they will keep the treasure for themselves.
                                     <ul>
                                         <li>
                                             The chance starts at <knockout data-bind="text: GameConstants.REWARD_RETENTION_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and decreases by <knockout data-bind="text: GameConstants.REWARD_RETENTION_DECREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, down to <knockout data-bind="text: GameConstants.REWARD_RETENTION_MINIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.
                                         </li>
                                         <li>
-                                            From expert level <knockout data-bind="text: GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT"></knockout>, the player can ask to auto-sell diamond and plate items for their respective value.
+                                            From expert level <knockout data-bind="text: GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT"></knockout>, the player can ask to auto-sell diamond and plate treasures for their respective value.
                                         </li>
                                     </ul>
                                 </li>
@@ -545,10 +545,10 @@
                             <h4>Experience</h4>
                             <ul>
                                 <li>
-                                    <strong>Items:</strong>
+                                    <strong>Treasures:</strong>
                                     <ul>
-                                        <li>Digging up any item: <knockout data-bind="text: GameConstants.UNDERGROUND_EXPERIENCE_DIG_UP_ITEM"></knockout> experience</li>
-                                        <li>Digging up all items: <knockout data-bind="text: GameConstants.UNDERGROUND_EXPERIENCE_CLEAR_LAYER"></knockout> experience</li>
+                                        <li>Digging up any treasure: <knockout data-bind="text: GameConstants.UNDERGROUND_EXPERIENCE_DIG_UP_ITEM"></knockout> experience</li>
+                                        <li>Digging up all treasures: <knockout data-bind="text: GameConstants.UNDERGROUND_EXPERIENCE_CLEAR_LAYER"></knockout> experience</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -567,11 +567,11 @@
                         </div>
 
                         <div class="card-body">
-                            <p>Trading allows you to exchange items within the same category. Here’s how it works:</p>
+                            <p>Trading allows you to exchange treasures within the same category. Here’s how it works:</p>
                             <ul>
-                                <li><strong>Same Category Trading:</strong> Trades can only be made within the same category of items.</li>
-                                <li><strong>3 to 1 Trade:</strong> Trading always follows a 3 to 1 ratio (e.g., trade 3 items to receive 1 new item).</li>
-                                <li><strong>Exception:</strong> Diamond items cannot be traded.</li>
+                                <li><strong>Same Category Trading:</strong> Trades can only be made within the same category of treasures.</li>
+                                <li><strong>3 to 1 Trade:</strong> Trading always follows a 3 to 1 ratio (e.g., trade 3 treasures to receive 1 new treasure).</li>
+                                <li><strong>Exception:</strong> Diamond treasures cannot be traded.</li>
                             </ul>
                         </div>
                     </div>
@@ -584,7 +584,7 @@
                         <div class="card-body">
                             <h4>Explosive Charge</h4>
                             <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when finding all items in a mine</li>
+                                <li><strong>Progress:</strong> Gains progress to level up when finding all treasures in a mine</li>
                                 <li><strong>Effect:</strong> Increases the number of tiles the Bomb tool will mine</li>
                             </ul>
 
@@ -596,8 +596,8 @@
 
                             <h4>Treasure Scanner</h4>
                             <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when finding an item in a mine</li>
-                                <li><strong>Effect:</strong> Has a chance to duplicate a collected item. Keeps attempting to duplicate until it fails a chance</li>
+                                <li><strong>Progress:</strong> Gains progress to level up when finding a treasure in a mine</li>
+                                <li><strong>Effect:</strong> Has a chance to duplicate a collected treasure. Keeps attempting to duplicate until it fails a chance</li>
                             </ul>
                         </div>
                     </div>
@@ -609,9 +609,9 @@
 
                         <div class="card-body">
                             <ul>
-                                <li><strong>Seen Item:</strong> At least 1 part of the item is visible to the player</li>
-                                <li><strong>Collected Item:</strong> All parts of the item are visible to the player, the item has been claimed</li>
-                                <li><strong>Completed Mine:</strong> All buried items have been collected</li>
+                                <li><strong>Seen treasure:</strong> At least 1 part of the treasure is visible to the player</li>
+                                <li><strong>Collected treasure:</strong> All parts of the treasure are visible to the player, the treasure has been claimed</li>
+                                <li><strong>Completed Mine:</strong> All buried treasures have been collected</li>
                             </ul>
                         </div>
                     </div>
