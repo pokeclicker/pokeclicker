@@ -368,6 +368,7 @@ export class Mine {
 
         App.game.oakItems.use(OakItemType.Treasure_Scanner);
         GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
+        GameHelper.incrementObservable(App.game.statistics.undergroundSpecificItemsFound[digTile.reward.undergroundItemID], amount);
 
         return {
             item: UndergroundItems.getById(digTile.reward.undergroundItemID),
@@ -380,7 +381,7 @@ export class Mine {
             this._completed(true);
 
             GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
-            GameHelper.incrementObservable(App.game.statistics.undergroundMineTypesMined[this.mineType]);
+            GameHelper.incrementObservable(App.game.statistics.undergroundSpecificLayersMined[this.mineType]);
             App.game.oakItems.use(OakItemType.Explosive_Charge);
 
             return true;

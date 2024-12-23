@@ -212,14 +212,12 @@
                                     <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
                                             data-bind="
                                             css: { 'bg-info': UndergroundTrading.selectedTradeFromItem === $data },
-                                            style: { cursor: $data.valueType === UndergroundItemValueType.Special ? 'default' : 'pointer' },
+                                            style: { cursor: 'pointer' },
                                             template: { name: 'otherItemTemplate', data: $data.itemName },
                                             click: () => {
-                                                if ($data.valueType !== UndergroundItemValueType.Special) {
-                                                    UndergroundTrading.selectedTradeFromItem = $data;
-                                                    UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
-                                                    $('#treasureDetailModal').modal('show');
-                                                }
+                                                UndergroundTrading.selectedTradeFromItem = $data;
+                                                UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
+                                                $('#treasureDetailModal').modal('show');
                                             }
                                             ">
                                     </div>
@@ -677,7 +675,7 @@
                 <div class="card mb-2">
                     <div class="card-header d-flex flex-column align-items-center p-2 text-center">
                         <div class="font-weight-bold" data-bind="text: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).displayName"></div>
-                        <div class="small" data-bind="text: `${App.game.statistics.undergroundMineTypesMined[App.game.underground.autoSearchMineType]().toLocaleString('en-US')} clears`"></div>
+                        <div class="small" data-bind="text: `${App.game.statistics.undergroundSpecificLayersMined[App.game.underground.autoSearchMineType]().toLocaleString('en-US')} clears`"></div>
                     </div>
 
                     <div class="card-body">
@@ -728,7 +726,6 @@
                 <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
                 <div>
                     <h4 class="m-0" data-bind="text: UndergroundTrading.selectedTradeFromItem.name"></h4>
-                    <small class="m-0" data-bind="text: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US')"></small>
                 </div>
                 <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
                 <!-- /ko -->
@@ -934,9 +931,62 @@
                     </div>
                 </div>
                 <!-- /ko -->
+
+                <!-- ko if: UndergroundTrading.selectedTradeFromItem -->
+                <div class="card mb-2">
+                    <div class="card-header d-flex align-items-center p-0">
+                        <span class="flex-grow-1 text-center font-weight-bold">Statistics</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+                                    <thead>
+                                    <tr class="bg-secondary">
+                                        <th colspan="2">Mining</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-left">Owned</td>
+                                        <td class="text-left tight"><code data-bind="text: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US')"></code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Mined</td>
+                                        <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundSpecificItemsFound[UndergroundTrading.selectedTradeFromItem.id]().toLocaleString('en-US')"></code></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+                                    <thead>
+                                    <tr class="bg-secondary">
+                                        <th colspan="2">Expert retained</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- ko foreach: App.game.underground.helpers.available() -->
+                                    <tr>
+                                        <td class="text-left" data-bind="text: $data.name"></td>
+                                        <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundHelperRewardRetention[`${$data.id}-${UndergroundTrading.selectedTradeFromItem.id}`]().toLocaleString('en-US')"></code></td>
+                                    </tr>
+                                    <!-- /ko -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer justify-content-between">
+                <!-- ko if: UndergroundTrading.selectedTradeFromItem -->
+                <div>Owned: <knockout data-bind="text: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US')"></knockout></div>
+                <!-- /ko -->
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
