@@ -664,12 +664,10 @@
                 <h4>Select a mine</h4>
                 <div class="search-mine-display mb-2">
                     <!-- ko foreach: [MineType.Random, MineType.Diamond, MineType.GemPlate, MineType.Shard, MineType.Fossil, MineType.EvolutionItem] -->
-                    <div class="mx-1 mb-1">
-                        <div class="card clickable" data-bind="click: () => { App.game.underground.autoSearchMineType = $data; }">
-                            <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': App.game.underground.autoSearchMineType === $data }">
-                                <div class="d-flex flex-column align-items-center">
-                                    <h6 class="card-title m-0" data-bind="text: UndergroundController.getMineConfig($data).displayName"></h6>
-                                </div>
+                    <div class="card clickable" data-bind="click: () => { App.game.underground.autoSearchMineType = $data; }">
+                        <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': App.game.underground.autoSearchMineType === $data }">
+                            <div class="d-flex flex-column align-items-center p-1">
+                                <h6 class="card-title m-0" data-bind="text: UndergroundController.getMineConfig($data).displayName"></h6>
                             </div>
                         </div>
                     </div>
@@ -677,8 +675,9 @@
                 </div>
 
                 <div class="card mb-2">
-                    <div class="card-header d-flex align-items-center p-0">
-                        <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).displayName"></span>
+                    <div class="card-header d-flex flex-column align-items-center p-2 text-center">
+                        <div class="font-weight-bold" data-bind="text: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).displayName"></div>
+                        <div class="small" data-bind="text: `${App.game.statistics.undergroundMineTypesMined[App.game.underground.autoSearchMineType]().toLocaleString('en-US')} clears`"></div>
                     </div>
 
                     <div class="card-body">

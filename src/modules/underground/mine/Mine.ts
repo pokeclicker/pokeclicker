@@ -380,6 +380,7 @@ export class Mine {
             this._completed(true);
 
             GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
+            GameHelper.incrementObservable(App.game.statistics.undergroundMineTypesMined[this.mineType]);
             App.game.oakItems.use(OakItemType.Explosive_Charge);
 
             return true;
