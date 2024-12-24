@@ -48,9 +48,11 @@
                                             click: function() { BlendingController.selectedBerry($data); },
                                             attr: { style: BlendingController.calculateTableRowCss($data) },
                                         ">
-                                            <td data-bind="attr: {class: BlendingController.calculateTableBerryCss($data)}">
-                                                <img height="30px" data-bind="attr: {src: FarmController.getBerryImage(App.game.farming.berryData[$data].type)}, css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }"/>
-                                                <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : ''"></span>
+                                            <td class="p-0">
+                                                <button style="border-radius: 0;" data-bind="attr: { class: BlendingController.calculateTableBerryCss($data) }">
+                                                    <img height="30px" style="pointer-events: none;" data-bind="attr: { src: FarmController.getBerryImage(App.game.farming.berryData[$data].type) }, css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }"/>
+                                                    <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
+                                                </button>
                                             </td>
                                             <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                                 <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[0].value,
@@ -83,11 +85,11 @@
                                     <th class="bg-dark" colspan="5">Flavor Bank</th>
                                     </tr>
                                     <tr>
-                                        <td>Spicy</td>
-                                        <td>Dry</td>
-                                        <td>Sweet</td>
-                                        <td>Bitter</td>
-                                        <td>Sour</td>
+                                        <th>Spicy</th>
+                                        <th>Dry</th>
+                                        <th>Sweet</th>
+                                        <th>Bitter</th>
+                                        <th>Sour</th>
                                     </tr>
                                     <tr data-bind="foreach: App.game.blending.flavorBank">
                                         <td data-bind="text: GameHelper.formatAmount($data),
@@ -179,26 +181,26 @@
                                 </h4>
                             </div>
                             <div class="btn-block btn-group my-1 px-1 d-md-none">
-                                <btn class="btn btn-block btn-outline-primary" style="font-size: large;"
+                                <button class="btn btn-block btn-outline-primary" style="font-size: large;"
                                 data-bind="
                                 click: () => BlendingController.selectedRecipeList(BlendingRecipes.getFullBlendingRecipeList()),
                                 css: { active: BlendingController.inSelectedList() },
-                                ">Show All Recipes</btn>
+                                ">Show All Recipes</button>
                             </div>
                             <div>
                                 <!-- ko foreach: GameHelper.enumNumbers(BlendingRecipeType) -->
                                     <!-- ko if: BlendingRecipes.isUnlocked($data) -->
                                         <div class="btn-block btn-group my-1 px-1">
-                                            <btn class="btn btn-outline-primary"
+                                            <button class="btn btn-outline-primary"
                                             data-bind="
                                                 text: GameConstants.camelCaseToString(BlendingRecipeType[$data]),
                                                 click: () => BlendingController.selectedRecipeList(BlendingRecipes.getBlendingRecipeSet($data)),
-                                                css: { active: BlendingController.inSelectedList(BlendingRecipeType[$data]) },">Recipe Type</btn>
+                                                css: { active: BlendingController.inSelectedList(BlendingRecipeType[$data]) },">Recipe Type</button>
                                             <div class="btn-group">
-                                                <btn class="btn btn-outline-primary dropdown-toggle" data-toggle="collapse" aria-expanded="false"
+                                                <button class="btn btn-outline-primary dropdown-toggle" data-toggle="collapse" aria-expanded="false"
                                                 data-target="#"
                                                 data-bind="attr: { 'data-target': '#recipeList-' + BlendingRecipeType[$data], id: 'dropdown-' + BlendingRecipeType[$data] },
-                                                click: () => BlendingController.activeCss(BlendingRecipeType[$data])"></btn>
+                                                click: () => BlendingController.activeCss(BlendingRecipeType[$data])"></button>
                                             </div>
                                         </div>
                                         <div class="collapse" data-bind="attr: { id: 'recipeList-' + BlendingRecipeType[$data] }">

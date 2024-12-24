@@ -140,9 +140,9 @@ export default class BlendingController {
 
     public static calculateTableBerryCss(berry: BerryType): string {
         if (!App.game.blending.machines.some(m => m.blendSlots.some(s => s.berry === berry))) {
-            return 'btn-secondary align-middle';
+            return 'btn btn-block btn-secondary align-middle p-1';
         } else {
-            return 'btn-primary align-middle';
+            return 'btn btn-block btn-primary align-middle p-1';
         }
     }
 
