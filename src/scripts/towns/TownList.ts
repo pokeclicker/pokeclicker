@@ -4139,7 +4139,7 @@ const TwinleafContestChampion = new NPC('Contest Champion', [
 const RowansAssistant = new NPC('Prof. Rowan\'s Assistant', [
     'Professor Rowan studies the evolution of Pokémon. According to his research, 90% of all Pokémon are somehow tied to evolution! I guess that means some Pokémon must undergo weird evolutions.',
     'The prof recently discovered some Pokémon only evolve after level 20 in certain locations, too. Yup, areas with special rocks like these:',
-    '<img src="assets/images/battleDecoration/Moss Rock.png"/> <img src="assets/images/battleDecoration/Ice Rock.png"/> <img src="assets/images/battleDecoration/Magnetic Field.png"/>'
+    '<img src="assets/images/battleDecoration/Moss Rock.png"/> <img src="assets/images/battleDecoration/Ice Rock.png"/> <img src="assets/images/battleDecoration/Magnetic Field.png"/>',
 ], {image: 'assets/images/npcs/Lucas.png'});
 
 const SandgemBeachcomber = new NPC('Beachcomber', [
@@ -8288,7 +8288,7 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
         TemporaryBattleList['Plumeria Poison Memory'],
     ],
     {
-        npcs: [MagneticRock, HapuCanyon, PlumeriaSilvally]
+        npcs: [MagneticRock, HapuCanyon, PlumeriaSilvally],
     }
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
