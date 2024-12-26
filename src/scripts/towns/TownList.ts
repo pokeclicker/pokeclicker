@@ -3231,17 +3231,23 @@ const OrreColosseumSpectator = new NPC('Colosseum Spectator', [
     'Only the toughest trainers in Orre are allowed to fight here! I\'m just watching until I get stronger.']
 );
 
-// For Leafeon and Glaceon. Show up in Hoenn too
+// For Environment evolutions. Show up in Hoenn too
 const MossRock = new NPC('Moss Rock', [
     'The rock is covered in moss. It feels pleasantly cool.',
 ], {
-    image: 'assets/images/npcs/other/Moss Rock.png',
+    image: 'assets/images/battleDecoration/Moss Rock.png',
     requirement: new MaxRegionRequirement(GameConstants.Region.sinnoh),
 });
 
 const IceRock = new NPC('Ice Rock', [
     'The rock is encrusted in ice. It is freezing to touch.',
-], {image: 'assets/images/npcs/other/Ice Rock.png',
+], {image: 'assets/images/battleDecoration/Ice Rock.png',
+    requirement: new MaxRegionRequirement(GameConstants.Region.sinnoh),
+});
+
+const MagneticRock = new NPC('Magnetic Rock', [
+    'The rock is surrounded in a magnetic field. It feels metallic to touch.',
+], {image: 'assets/images/battleDecoration/Magnetic Field.png',
     requirement: new MaxRegionRequirement(GameConstants.Region.sinnoh),
 });
 
@@ -3677,7 +3683,11 @@ TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new GymBadgeRequirement(BadgeEnums.Balance)]
+    [new GymBadgeRequirement(BadgeEnums.Balance)],
+    undefined,
+    {
+        npcs: [MagneticRock],
+    }
 );
 TownList['Weather Institute'] = new DungeonTown(
     'Weather Institute',
@@ -4126,6 +4136,12 @@ const TwinleafContestChampion = new NPC('Contest Champion', [
     'Welcome to Sinnoh! There are many legends and myths here. For example, it is said that trainers that conquer the Lake nearby, Lake Verity, will meet a mythical Pokémon known for Emotion roaming around the region. It sure would have been awesome to partner with that Pokémon in one of my routines!',
 ], {image: 'assets/images/npcs/Contest Champion (Johanna).png'});
 
+const RowansAssistant = new NPC('Prof. Rowan\'s Assistant', [
+    'Professor Rowan studies the evolution of Pokémon. According to his research, 90% of all Pokémon are somehow tied to evolution! I guess that means some Pokémon must undergo weird evolutions.',
+    'The prof recently discovered some Pokémon only evolve after level 20 in certain locations, too. Yup, areas with special rocks like these:',
+    '<img src="assets/images/battleDecoration/Moss Rock.png"/> <img src="assets/images/battleDecoration/Ice Rock.png"/> <img src="assets/images/battleDecoration/Magnetic Field.png"/>'
+], {image: 'assets/images/npcs/Lucas.png'});
+
 const SandgemBeachcomber = new NPC('Beachcomber', [
     'Hmmm… Oh! Sorry, I didn’t see you there! Sometimes the strangest things wash up on this beach, so I just got caught up in the search.',
     'Just last week a weird blue stone with a red center showed up. A rather slow-looking guy with a slowpoke found it first, and took it to the Pokémon Lab.',
@@ -4497,7 +4513,7 @@ TownList['Sandgem Town'] = new Town(
     [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher'], new ShardTraderShop(GameConstants.ShardTraderLocations['Sandgem Town'], 'Santa\'s Secret Daycare', true, 'Plates')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
-        npcs: [ProfRowan, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
+        npcs: [ProfRowan, RowansAssistant, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
     }
 );
 TownList['Jubilife City'] = new Town(
@@ -4550,6 +4566,7 @@ TownList['Mt. Coronet'] = new Town(
     [new MoveToDungeon(dungeonList['Mt. Coronet South']), new MoveToDungeon(dungeonList['Mt. Coronet North']), new MoveToDungeon(dungeonList['Spear Pillar']), new MoveToDungeon(dungeonList['Hall of Origin'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 207)],
+        npcs: [MagneticRock],
     }
 );
 TownList['Hearthome City'] = new Town(
@@ -5642,7 +5659,11 @@ TownList['Chargestone Cave'] = new DungeonTown(
     'Chargestone Cave',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 6)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 6)],
+    [],
+    {
+        npcs: [MagneticRock],
+    }
 );
 TownList['Mistralton Cave'] = new DungeonTown(
     'Mistralton Cave',
@@ -6705,7 +6726,11 @@ TownList['Kalos Power Plant'] = new DungeonTown(
     'Kalos Power Plant',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13), new GymBadgeRequirement(BadgeEnums.Plant), new QuestLineStepCompletedRequirement('A Beautiful World', 10)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13), new GymBadgeRequirement(BadgeEnums.Plant), new QuestLineStepCompletedRequirement('A Beautiful World', 10)],
+    [],
+    {
+        npcs: [MagneticRock],
+    }
 );
 TownList['Lost Hotel'] = new DungeonTown(
     'Lost Hotel',
@@ -8262,7 +8287,9 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
         TemporaryBattleList['Recon Squad 3'],
         TemporaryBattleList['Plumeria Poison Memory'],
     ],
-    {npcs: [HapuCanyon, PlumeriaSilvally]}
+    {
+        npcs: [MagneticRock, HapuCanyon, PlumeriaSilvally]
+    }
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
     'Mina\'s Houseboat',

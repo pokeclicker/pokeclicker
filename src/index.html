@@ -180,6 +180,11 @@
                     data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
                         class: MapHelper.calculateBattleCssClass()">
 
+                    <div class="deco" data-bind="visible: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
+                        foreach: MapHelper.getCurrentEnvironments().filter(e => MapHelper.hasEnvironmentDeco(e))">
+                        <img data-bind="attr:{ src: `assets/images/battleDecoration/${GameConstants.camelCaseToString($data)}.png` }"/>
+                    </div>
+
                     <!-- Route Battles -->
                     <div id="routeBattleContainer" class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">

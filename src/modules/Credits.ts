@@ -719,6 +719,7 @@ export const SpriteCredits: Credit[] = [
             'Hunter (male and female)',
             'Lillie',
             'Lusamine (nihilego) shiny',
+            'Magnetic Field Rock',
             'Rider (male and female)',
             'Roller Boy',
             'Rotom-Dex',
