@@ -8,7 +8,7 @@ import Rand from './Rand';
 // eslint-disable-next-line import/prefer-default-export
 export function animateCurrency({ amount, currency }: Amount) {
     // Disable animations for async / loading processing
-    if (!App.game.isComputingOffline) {
+    if (App.game.isComputingOffline) {
         return;
     }
     // Check if animations have been disabled
