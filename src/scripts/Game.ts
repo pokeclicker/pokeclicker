@@ -11,6 +11,10 @@
 class Game implements TmpGameType {
     frameRequest;
     public static achievementCounter = 0;
+    /**
+     * If the game is currently processing offline ticks -- skip costly UI / disk features.
+     */
+    private _isComputingOffline = false;
     private _gameState: KnockoutObservable<GameConstants.GameState>;
     private worker: Worker;
 
@@ -157,9 +161,6 @@ class Game implements TmpGameType {
         PokemonContestController.generateDailyContest(now);
         DamageCalculator.initialize();
 
-        if (Settings.getSetting('disableOfflineProgress').value === false) {
-            this.computeOfflineEarnings();
-        }
         this.checkAndFix();
 
         if (Settings.getSetting('disableAutoSave').value === true) {
@@ -175,69 +176,55 @@ class Game implements TmpGameType {
         this.gameState = player.route ? GameConstants.GameState.fighting : GameConstants.GameState.town;
     }
 
-    computeOfflineEarnings() {
+    async computeOfflineEarnings() {
+        if (Settings.getSetting('disableOfflineProgress').value !== false) {
+            return;
+        }
+
+        this._isComputingOffline = true;
+
         const now = Date.now();
-        const timeDiffInSeconds = Math.floor((now - player._lastSeen) / 1000);
-        if (timeDiffInSeconds > 1) {
-            // Only allow up to 24 hours worth of bonuses
-            const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
-            let region: GameConstants.Region = player.region;
-            let route: number = player.route || GameConstants.StartingRoutes[region];
-            if (!MapHelper.validRoute(route, region)) {
-                route = 1;
-                region = GameConstants.Region.kanto;
+        const tickPerSecond = (GameConstants.SECOND / GameConstants.TICK_TIME);
+        const timeDiffInMs = (now - player._lastSeen);
+        const timeDiffInTicks = Math.floor(timeDiffInMs / GameConstants.TICK_TIME);
+        if (timeDiffInTicks > 1) {
+            // Only allow up to 24 hours worth of offline calculation
+            const totalTicks = Math.min(86_400 * tickPerSecond, timeDiffInTicks);
+            let ticksRemaining = totalTicks;
+
+            const chunkSize = 5000;
+            const chunks = Math.floor(totalTicks / chunkSize);
+            const remainder = totalTicks % chunkSize;
+
+            const chunkArray: number[] = new Array(chunks).fill(chunkSize).concat(remainder);
+
+            const computeChunkAsync = async (chunkProcessSize: number) => {
+                return new Promise<void>(resolve => {
+                    setTimeout(() => {
+                        for (let y = (chunks === 1 ? remainder : chunkProcessSize); y > 0; y--) {
+                            App.game.gameTick();
+                            console.log('computing offline tick');
+                        }
+                        resolve();
+                    });
+                });
+            };
+
+            for (const chunk of chunkArray) {
+                await computeChunkAsync(chunk);
+                ticksRemaining -= chunk;
+                Preload.updateOfflineProgressBar(totalTicks - ticksRemaining, totalTicks);
             }
-            const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
-            const maxHealth: number = PokemonFactory.routeHealth(route, region);
-            let hitsToKill = 0;
-            for (const pokemon of availablePokemonMap) {
-                const type1: PokemonType = pokemon.type[0];
-                const type2: PokemonType = pokemon.type.length > 1 ? pokemon.type[1] : PokemonType.None;
-                const attackAgainstPokemon = App.game.party.calculatePokemonAttack(type1, type2);
-                const currentHitsToKill: number = Math.ceil(maxHealth / attackAgainstPokemon);
-                hitsToKill += currentHitsToKill;
-            }
-            hitsToKill = Math.ceil(hitsToKill / availablePokemonMap.length);
-            const numberOfPokemonDefeated = Math.floor(timeDiffOverride / hitsToKill);
-            if (numberOfPokemonDefeated === 0) {
-                return;
-            }
-            const routeMoney: number = PokemonFactory.routeMoney(player.route, player.region, false);
-            const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
-            const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
-            App.game.wallet.gainMoney(moneyToEarn, true);
 
             Notifier.notify({
-                type: NotificationConstants.NotificationOption.info,
-                title: 'Offline Bonus',
-                message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
-                strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} Pokédollars`,
-                timeout: 2 * GameConstants.MINUTE,
-                setting: NotificationConstants.NotificationSetting.General.offline_earnings,
+                title: 'Welcome Back!',
+                message: `Computed offline progress for ${GameConstants.formatTimeFullLetters(timeDiffInMs / 1000)}.`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: GameConstants.MINUTE * 5,
             });
-
-            // Dream orbs
-            if ((new DreamOrbTownContent()).isUnlocked()) {
-                const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
-                const orbsEarned = Math.floor(timeDiffOverride / 3600);
-                if (orbsEarned > 0) {
-                    const orbAmounts = Object.fromEntries(orbsUnlocked.map(o => [o.color, 0]));
-                    for (let i = 0; i < orbsEarned; i++) {
-                        const orb = Rand.fromArray(orbsUnlocked);
-                        GameHelper.incrementObservable(orb.amount);
-                        orbAmounts[orb.color]++;
-                    }
-                    const messageAppend = Object.keys(orbAmounts).filter(key => orbAmounts[key] > 0).map(key => `<li>${orbAmounts[key]} ${key}</li>`).join('');
-                    Notifier.notify({
-                        type: NotificationConstants.NotificationOption.info,
-                        title: 'Dream Orbs',
-                        message: `Gained ${orbsEarned} Dream Orbs while offline:<br /><ul class="mb-0">${messageAppend}</ul>`,
-                        timeout: 2 * GameConstants.MINUTE,
-                        setting: NotificationConstants.NotificationSetting.General.offline_earnings,
-                    });
-                }
-            }
         }
+
+        this._isComputingOffline = false;
     }
 
     checkAndFix() {
@@ -401,11 +388,15 @@ class Game implements TmpGameType {
     }
 
     gameTick() {
-        // Acheivements
+        // Achievements
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter >= GameConstants.ACHIEVEMENT_TICK) {
             Game.achievementCounter = 0;
-            AchievementHandler.checkAchievements();
+
+            if (!this._isComputingOffline) {
+                AchievementHandler.checkAchievements();
+            }
+
             GameHelper.incrementObservable(App.game.statistics.secondsPlayed);
         }
 
@@ -454,7 +445,7 @@ class Game implements TmpGameType {
 
         // Auto Save
         Save.counter += GameConstants.TICK_TIME;
-        if (Save.counter > GameConstants.SAVE_TICK) {
+        if (!this._isComputingOffline && Save.counter > GameConstants.SAVE_TICK) {
             const old = new Date(player._lastSeen);
             const now = new Date();
 
@@ -564,6 +555,10 @@ class Game implements TmpGameType {
         if (Settings.getSetting('disableAutoSave').value === false) {
             Save.store(player);
         }
+    }
+
+    get isComputingOffline() {
+        return this._isComputingOffline;
     }
 
     // Knockout getters/setters
