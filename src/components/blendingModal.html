@@ -15,7 +15,7 @@
             <div class="modal-body tab-content p-0" style="overflow-x: hidden;">
 
                 <div id="blendingView" class="tab-pane fade in active show">
-                    <div class="justify-content-center no-select my-2 d-flex flex-wrap">
+                    <div id="blenderAndList" class="justify-content-center no-select my-2 d-flex flex-wrap">
                         <div class="justify-content-center no-select col-12 col-md-7">
                             <div id="blendBerryList" class="blendingColumn" style="overflow-y: auto;">
                                 <table id="berryBlendingListTable" class="table table-hover table-sm mb-0">
@@ -78,7 +78,7 @@
                             </div>
                         </div>
 
-                        <div id="blendersList" class="blendingColumn col-12 col-md-5" style="overflow-y: auto;">
+                        <div id="blendersList" class="blendingColumn col-12 col-md-5 mb-1" style="overflow-y: auto;">
                             <div class="modal-content p-0 sticky-top" style="border: none;">
                                 <table style="width: 100%; table-layout:fixed;">
                                     <tr class="text-light">
@@ -104,10 +104,10 @@
                             </div>
                             <div data-bind="foreach: App.game.blending.machines">
                                 <!-- ko if: $data.blendSlots.some(s => s.isUnlocked) -->
-                                    <div class="mt-2 card-header p-0">
-                                        <span data-bind="text: `Blender ${$index() + 1}`"></span>
+                                    <div class="mt-1 card-header p-0">
+                                        <span style="font-weight: bold;" data-bind="text: `Blender ${$index() + 1}`"></span>
                                     </div>
-                                    <div>
+                                    <div class="mb-1">
                                         <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
                                             <div>
                                                 <div style="display: flex; flex-direction: row; justify-content: space-evenly;" data-bind="foreach: $data.blendSlots">
@@ -126,13 +126,13 @@
                                                 </div>
                                                 <table style="width: 100%;">
                                                     <tr>
-                                                        <td colspan="5">Incoming Flavors:</td>
+                                                        <td colspan="5" style="text-decoration: underline;">Incoming Flavors</td>
                                                     </tr>
                                                     <tr data-bind="foreach: App.game.blending.incomingFlavors($index())">
-                                                        <td data-bind="text: FlavorType[$data.type]"></td>
+                                                        <th data-bind="text: FlavorType[$data.type], attr: { style: $data.value > 0 ? '' : 'opacity: 30%' }"></th>
                                                     </tr>
                                                     <tr data-bind="foreach: App.game.blending.incomingFlavors($index())">
-                                                        <td data-bind="text: $data.value"></td>
+                                                        <td data-bind="text: $data.value, attr: { style: $data.value > 0 ? '' : 'opacity: 20%' }"></td>
                                                     </tr>
                                                 </table>
                                             </div>
