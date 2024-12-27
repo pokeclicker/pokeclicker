@@ -190,6 +190,19 @@
                             </div>
                         </div>
 
+                        <!-- ko if: App.game.blending.canAccess() -->
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-pokeblocks">
+                            <h5 class="m-0 text-light">Pokéblocks</h5>
+                        </div>
+                        <div id="itemBag-pokeblocks" class="collapse show">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center mb-1">
+                                    <button type="button" class="btn btn-secondary btn-sm" data-bind="click: () => { $('#blendingModal').modal('show') }">Berry Blender</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-underground-treasure">
                             <h5 class="m-0 text-light">Underground Treasure</h5>
                         </div>
@@ -346,7 +359,7 @@
         html: true,
         boundary: 'scrollParent',
     }">
-        <img width="42px" data-bind="attr: { src: ItemList[$data].image }">
+        <img width="42px" data-bind="attr: { src: ItemList[$data].image }, style: { 'image-rendering': ItemList[$data].pixelated ? 'pixelated' : '' }">
         <div class="flex-grow-1 small align-self-end ml-2" style="min-width: 0;">
             <div class="text-truncate" data-bind="text: ItemList[$data].displayName"></div>
             <div data-bind="text: player.itemList[$data]().toLocaleString('en-US')"></div>

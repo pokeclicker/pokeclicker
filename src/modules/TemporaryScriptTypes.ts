@@ -99,6 +99,7 @@ export type TmpZMovesType = any;
 export type TmpPokemonContestType = any;
 export type TmpBattlePokemonType = any;
 export type TmpMultiplierDecreaserType = any;
+export type TmpBlendingType = any;
 
 export type TmpGameType = {
     gameState: GameConstants.GameState;
@@ -136,6 +137,7 @@ export type TmpGameType = {
     weatherApp: TmpWeatherAppType;
     zMoves: TmpZMovesType;
     pokemonContest: TmpPokemonContestType;
+    blending: TmpBlendingType;
 
     // functions
     load: () => void;

@@ -105,6 +105,11 @@
       color: whitesmoke;
     }
   }
+
+  .btn-outline-dark {
+    color: black;
+    border-color: black;
+  }
 }
 
 .darkly {
@@ -200,6 +205,31 @@
   .dropdown-item.active:hover {
     color: #000;
   }
+
+  .berryBlendingListFlavors {
+    padding: 6px;
+  }
+
+  #berryBlendingListTable {
+    button {
+      padding: 0.6rem !important;
+    }
+  }
+
+  #recipeCardContent {
+    @media (max-width: 767px) { 
+      h5 {
+        font-size: small;
+      }
+    }
+
+    .input-group {
+      button {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+  }
 }
 
 .materia {
@@ -231,6 +261,12 @@
 
     .btn-dropdown {
         color: #5a5a5a;
+    }
+
+    #berryBlendingListTable {
+      button {
+        font-size: inherit;
+      }
     }
 }
 

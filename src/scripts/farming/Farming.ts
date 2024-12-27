@@ -82,8 +82,8 @@ class Farming implements Feature {
             0.5, // replant rate, 1 is 100%
             5, // farm points per harvest (farm currency)
             1, // experience per harvest (affects how fast prices of Berry Master items (mulches, shovels, etc) go back to their base cost after being bought)
-            [10, 0, 0, 0, 0], // flavors [Spicy, Dry, Sweet, Bitter, Sour] (for pokeblocks and poffins)
-            25, // smoothness (for pokeblocks and poffins)
+            [10, 0, 0, 0, 0], // flavors [Spicy, Dry, Sweet, Bitter, Sour] (for mutations, pokeblocks)
+            25, // smoothness (for pokeblocks)
             BerryColor.Red, // color
             2, // size
             BerryFirmness.Soft, // firmness
@@ -372,7 +372,7 @@ class Farming implements Feature {
             540,
             3,
             [10, 10, 10, 10, 0],
-            25,
+            20,
             BerryColor.Green,
             3.4,
             BerryFirmness.Super_Hard,
@@ -1256,7 +1256,7 @@ class Farming implements Feature {
             0,
             15000,
             25,
-            [15, 40, 35, 30, 25],
+            [10, 30, 10, 30, 30],
             50,
             BerryColor.Gold,
             5.8,
