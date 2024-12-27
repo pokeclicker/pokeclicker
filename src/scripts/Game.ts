@@ -184,12 +184,10 @@ class Game implements TmpGameType {
         this._isComputingOffline = true;
 
         const now = Date.now();
-        const tickPerSecond = (GameConstants.SECOND / GameConstants.TICK_TIME);
-        const timeDiffInMs = (now - player._lastSeen);
-        const timeDiffInTicks = Math.floor(timeDiffInMs / GameConstants.TICK_TIME);
-        if (timeDiffInTicks > 1) {
-            // Only allow up to 24 hours worth of offline calculation
-            const totalTicks = Math.min(86_400 * tickPerSecond, timeDiffInTicks);
+        // Only allow up to 24 hours worth of offline calculation
+        const timeDiffInMs = Math.min(GameConstants.DAY, now - player._lastSeen);
+        const totalTicks = Math.floor(timeDiffInMs / GameConstants.TICK_TIME);
+        if (totalTicks > 1) {
             let ticksRemaining = totalTicks;
 
             const chunkSize = 5000;
