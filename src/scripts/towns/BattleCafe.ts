@@ -41,20 +41,11 @@ class BattleCafeController {
     static clockwise = ko.observable<boolean>(false);
 
     static spinsPerDay() : number {
-        // Give additional spins for each sweet type completed, shiny, and resistant
-        let spins = this.baseDailySpins;
-        const sweetStatus = GameHelper.enumStrings(GameConstants.AlcremieSweet)
-            .map((s) => ({
-                caught: BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[s])(),
-                pokerus: BattleCafeController.getPokerusStatus(GameConstants.AlcremieSweet[s])(),
-            }));
-        // Caught
-        spins += sweetStatus.filter((s) => s.caught >= CaughtStatus.Caught).length;
-        // Caught Shiny
-        spins += sweetStatus.filter((s) => s.caught == CaughtStatus.CaughtShiny).length;
-        // Resistant
-        spins += sweetStatus.filter((s) => s.pokerus == GameConstants.Pokerus.Resistant).length;
-        return spins;
+        // Give additional spins for each Alcremie obtained, or infinite if all Alcremie are obtained
+        const allCaughtStatuses = Object.values(BattleCafeController.evolutions).flatMap(group => Object.values(group)).map(pokemon => pokemon.getCaughtStatus());
+        const caughtCount = allCaughtStatuses.filter(status => status != CaughtStatus.NotCaught).length;
+
+        return caughtCount === allCaughtStatuses.length ? -1 : this.baseDailySpins + caughtCount;
     }
 
     public static spin(clockwise: boolean) {
@@ -124,7 +115,7 @@ class BattleCafeController {
             });
             return false;
         }
-        if (BattleCafeController.spinsLeft() < 1) {
+        if (BattleCafeController.spinsLeft() < 1 && BattleCafeController.spinsLeft() > -1) {
             Notifier.notify({
                 message: 'No spins left today.',
                 type: NotificationConstants.NotificationOption.danger,

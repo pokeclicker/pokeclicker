@@ -97,7 +97,7 @@
                 <div class="card">
                     <div class="card-header py-2 font-weight-bold">Spin!</div>
                     <div class="card-body col-lg-6 align-self-center p-2">
-                        <div>Remaining Spin Attempts: <span data-bind="text: BattleCafeController.spinsLeft()"></span></div>
+                        <div data-bind="if: BattleCafeController.spinsLeft() > -1">Remaining Spin Attempts: <span data-bind="text: BattleCafeController.spinsLeft()"></span></div>
                         <img style="width: 60px;" src="assets/images/profile/trainer-1.png" data-bind="
                             attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` },
                             class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''" />
