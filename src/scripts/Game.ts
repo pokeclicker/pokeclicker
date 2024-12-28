@@ -401,6 +401,13 @@ class Game implements TmpGameType {
         // Battles
         switch (this.gameState) {
             case GameConstants.GameState.fighting: {
+                if (Battle.catching()) {
+                    Battle.catchCounter += GameConstants.TICK_TIME;
+                    if (Battle.catchCounter >= App.game.pokeballs.calculateCatchTime(Battle.pokeball())) {
+                        Battle.catchTick();
+                    }
+                }
+
                 Battle.counter += GameConstants.TICK_TIME;
                 if (Battle.counter >= GameConstants.BATTLE_TICK) {
                     Battle.tick();
