@@ -2,6 +2,9 @@ class Preload {
     static itemsToLoad = [];
     static itemsLoaded = [];
     static itemsErrored = [];
+    static progressBar: HTMLElement;
+    static progressBarText: HTMLElement;
+    static progressBarLabel: HTMLElement;
 
     public static itemLoading(item: any = 0) {
         this.itemsToLoad.push(item);
@@ -18,17 +21,29 @@ class Preload {
         this.updateProgressBar();
     }
 
+    public static updateOfflineProgressBar(current: number, total: number) {
+        this.progressBarLabel.innerText = 'Processing offline ticks...';
+        const percent = Math.floor(current / total * 100);
+        // Update the progress bar
+        const progressBarEl = this.progressBar;
+        progressBarEl.style.width = `${percent}%`;
+
+        // Update the text
+        const progressTextEl = this.progressBarText;
+        progressTextEl.innerText = `${percent}%`;
+    }
+
     public static updateProgressBar() {
         const toLoad = this.itemsToLoad.length;
         const loaded = this.itemsLoaded.length;
         const errored = this.itemsErrored.length;
 
         // Update the progress bar
-        const progressBarEl = document.getElementById('preload-progress-bar');
+        const progressBarEl =  this.progressBar;
         progressBarEl.style.width = `${(loaded + errored) / toLoad * 100}%`;
 
         // Update the text
-        const progressTextEl = document.getElementById('preload-progress-text');
+        const progressTextEl = this.progressBarText;
         progressTextEl.innerText = `${loaded +  errored} / ${toLoad}`;
     }
 
@@ -46,6 +61,10 @@ class Preload {
     }
 
     public static load(skipWait = false): Promise<void> {
+        Preload.progressBar = document.getElementById('preload-progress-bar');
+        Preload.progressBarText = document.getElementById('preload-progress-text');
+        Preload.progressBarLabel = document.getElementById('preload-progress-label');
+
         console.log(`[${GameConstants.formatDate(new Date())}] %cPreloading Images..`, 'color:#8e44ad;font-weight:900;');
         if (skipWait) {
             return new Promise(resolve => {

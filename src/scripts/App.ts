@@ -17,7 +17,7 @@ class App {
             Object.freeze(GameConstants);
         }
 
-        Preload.load(App.debug).then(() => {
+        Preload.load(App.debug).then(async () => {
             ko.options.deferUpdates = true;
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
@@ -43,8 +43,9 @@ class App {
             ko.applyBindings(App.game);
             GameLoadState.updateLoadState(GameLoadState.states.appliedBindings);
 
-            Preload.hideSplashScreen();
+            await App.game.computeOfflineEarnings();
 
+            Preload.hideSplashScreen();
             App.game.start();
             GameLoadState.updateLoadState(GameLoadState.states.running);
 

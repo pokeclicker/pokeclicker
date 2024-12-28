@@ -9,6 +9,7 @@ class Battle {
     static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
 
     static counter = 0;
+    static catchCounter = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static catchRateActual: KnockoutObservable<number> = ko.observable(null);
     static pokeball: KnockoutObservable<GameConstants.Pokeball> = ko.observable(GameConstants.Pokeball.Pokeball);
@@ -22,6 +23,17 @@ class Battle {
     public static tick() {
         this.counter = 0;
         this.pokemonAttack();
+    }
+
+    /**
+     * Handle catching ticks separately instead of using timeouts to append to battle ticks.
+     */
+    public static catchTick() {
+        this.catchCounter = 0;
+        this.attemptCatch(this.enemyPokemon(), player.route, player.region);
+        if (Battle.route != 0) {
+            this.generateNewEnemy();
+        }
     }
 
     /**
@@ -81,17 +93,6 @@ class Battle {
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(enemyPokemon, pokeBall);
-            setTimeout(
-                () => {
-                    this.attemptCatch(enemyPokemon, catchRoute, region);
-                    if (Battle.route != 0) {
-                        this.generateNewEnemy();
-                    }
-                },
-                App.game.pokeballs.calculateCatchTime(pokeBall)
-            )
-            ;
-
         } else {
             this.generateNewEnemy();
         }
