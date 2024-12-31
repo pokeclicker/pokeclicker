@@ -1,80 +1,127 @@
-<div aria-labelledby="safariModal" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div
+    aria-labelledby="safariModal"
+    class="modal fade noselect"
+    id="safariModal"
+    role="dialog"
+    style="cursor:default"
+    tabindex="-1"
+    data-backdrop="static"
+    data-keyboard="false"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="controls" data-bind="visible: Safari.inProgress() && !Safari.inBattle()">
                 <div style="width:120px">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 411 411">
                         <g>
-                          <path fill="whitesmoke" d="M382 137h-89c-11 0-19-8-19-19V29c0-16-13-29-29-29h-79c-16 0-29 13-29 29v89c0 11-8 19-19 19H29c-16 0-29 13-29 29v79c0 16 13 29 29 29h89c11 0 19 8 19 19v89c0 16 13 29 29 29h79c16 0 29-13 29-29v-89c0-11 8-19 19-19h89c16 0 29-13 29-29v-79c0-16-13-29-29-29zM93 244c0 2-2 3-4 2l-52-38c-2-1-2-4 0-5l52-38c2-1 4 0 4 3v76zm72-155l38-52c1-2 4-2 5 0l38 52c1 2 0 4-2 4h-76c-3 0-4-2-3-4zm81 233l-38 52c-1 2-4 2-5 0l-38-52c-1-2 0-4 3-4h76c2 0 3 2 2 4zm-40-69a47 47 0 110-94 47 47 0 010 94zm168-45l-52 38c-2 1-4 0-4-2v-76c0-3 2-4 4-3l52 38c2 1 2 4 0 5z"/>
-                          <path id="safari-dpad-up" fill="transparent" d="M135 1h142v137H135z" /><!-- up -->
-                          <path id="safari-dpad-left" fill="transparent" d="M1 137h142v137H1z" /><!-- left -->
-                          <path id="safari-dpad-down" fill="transparent" d="M135 273h142v137H135z" /><!-- down -->
-                          <path id="safari-dpad-right" fill="transparent" d="M268 137h142v137H268z" /><!-- right -->
+                            <path fill="whitesmoke" d="M382 137h-89c-11 0-19-8-19-19V29c0-16-13-29-29-29h-79c-16 0-29 13-29 29v89c0 11-8 19-19 19H29c-16 0-29 13-29 29v79c0 16 13 29 29 29h89c11 0 19 8 19 19v89c0 16 13 29 29 29h79c16 0 29-13 29-29v-89c0-11 8-19 19-19h89c16 0 29-13 29-29v-79c0-16-13-29-29-29zM93 244c0 2-2 3-4 2l-52-38c-2-1-2-4 0-5l52-38c2-1 4 0 4 3v76zm72-155l38-52c1-2 4-2 5 0l38 52c1 2 0 4-2 4h-76c-3 0-4-2-3-4zm81 233l-38 52c-1 2-4 2-5 0l-38-52c-1-2 0-4 3-4h76c2 0 3 2 2 4zm-40-69a47 47 0 110-94 47 47 0 010 94zm168-45l-52 38c-2 1-4 0-4-2v-76c0-3 2-4 4-3l52 38c2 1 2 4 0 5z"/>
+                            <path
+                                id="safari-dpad-up"
+                                fill="transparent"
+                                d="M135 1h142v137H135z"
+                            /><!-- up -->
+                            <path
+                                id="safari-dpad-left"
+                                fill="transparent"
+                                d="M1 137h142v137H1z"
+                            /><!-- left -->
+                            <path
+                                id="safari-dpad-down"
+                                fill="transparent"
+                                d="M135 273h142v137H135z"
+                            /><!-- down -->
+                            <path
+                                id="safari-dpad-right"
+                                fill="transparent"
+                                d="M268 137h142v137H268z"
+                            /><!-- right -->
                         </g>
                     </svg>
                 </div>
             </div>
             <div class="modal-header">
-                <h4 style='text-align:center' class="modal-title">
+                <h4 style="text-align:center" class="modal-title">
                     Safari Zone
                     <span data-bind="if: Safari.completed(false, player.region)">
-                        <img class="pokeball-smallest"
-                            data-bind='attr:{
+                        <img class="pokeball-smallest" data-bind='attr:{
                                 title:"You have captured all of the Safari Pokémon" + (Safari.completed(true, player.region) ? " shiny" : "") + "!",
                                 src:"assets/images/pokeball/Pokeball" + (Safari.completed(true, player.region) ? "-shiny" : "") + ".svg"
-                            }'
-                        />
+                            }'>
                     </span>
                 </h4>
-                <div class='col-6' data-bind="tooltip : Safari.safariProgressTooltip()">
-                    <div>Lvl. <knockout data-bind='text: Safari.safariLevel()'></knockout></div>
-                    <div class="progress" style='height: 5px'>
-                        <div class="progress-bar bg-info" role="progressbar"
-                             data-bind="attr:{ style: 'width:' + Safari.percentToNextSafariLevel() + '%' }"
-                             aria-valuemin="0" aria-valuemax="100">
+                <div class="col-6" data-bind="tooltip : Safari.safariProgressTooltip()">
+                    <div>Lvl. <knockout data-bind="text: Safari.safariLevel()"></knockout></div>
+                    <div class="progress" style="height: 5px">
+                        <div
+                            class="progress-bar bg-info"
+                            role="progressbar"
+                            data-bind="attr:{ style: 'width:' + Safari.percentToNextSafariLevel() + '%' }"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                        >
                         </div>
                     </div>
                 </div>
-                <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
+                <button class="btn btn-danger modalClose" onclick="Safari.closeModal()">Leave</button>
             </div>
 
             <div class="modal-body p-0">
                 <!-- Tab Titles -->
                 <ul style="width:100%" class="nav nav-tabs nav-fill">
                     <li class="nav-item">
-                        <a data-toggle='tab' class='nav-link active' href="#safariExplore">Explore</a>
+                        <a
+                            data-toggle="tab"
+                            class="nav-link active"
+                            href="#safariExplore"
+                        >Explore</a>
                     </li>
-                    <li class='nav-item'>
-                        <a class='nav-link' href="#safariHelp" data-bind="attr: {'data-toggle': Safari.inBattle() ? '' : 'tab'}">Help</a>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="#safariHelp"
+                            data-bind="attr: {'data-toggle': Safari.inBattle() ? '' : 'tab'}"
+                        >Help</a>
                     </li>
                 </ul>
 
                 <!-- Tab Contents -->
-                <div class=tab-content>
+                <div class="tab-content">
 
                     <!-- Main tab -->
-                    <div  id="safariExplore" class="tab-pane fade in active show">
+                    <div id="safariExplore" class="tab-pane fade in active show">
                         <div class="modal-body p-0">
 
                             <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
-                                <button id="paySafariButton" class="btn btn-block" onclick="Safari.payEntranceFee()"
-                                    data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
-                                    Pay Entrance Fee <knockout id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></knockout>
+                                <button
+                                    id="paySafariButton"
+                                    class="btn btn-block"
+                                    onclick="Safari.payEntranceFee()"
+                                    data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'"
+                                >
+                                    Pay Entrance Fee <knockout id="safariEntranceCost" data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></knockout>
                                 </button>
-                                <img class='fit-width' src="assets/images/safari/area1.png" />
+                                <img class="fit-width" src="assets/images/safari/area1.png">
                             </div>
 
-                            <div class='container-fluid' data-bind="if: Safari.inProgress()" style="overflow-x: auto; padding: 0px;">
+                            <div
+                                class="container-fluid"
+                                data-bind="if: Safari.inProgress()"
+                                style="overflow-x: auto; padding: 0px;"
+                            >
                                 <div id="safariBody" style="position: relative; width: max-content; overflow-x: hidden;">
                                     <div data-bind="foreach: Safari.grid, childrenComplete: () => Safari.addPlayer()">
-                                        <div class="row flex-nowrap" data-bind="foreach: $data" style="margin: 0 -1px !important;">
+                                        <div
+                                            class="row flex-nowrap"
+                                            data-bind="foreach: $data"
+                                            style="margin: 0 -1px !important;"
+                                        >
                                             <div class="safariSquare" data-bind="attr: { id: `safari-${$parentContext.$index()}-${$context.$index()}` }, style: { 'background-image': `url('assets/images/safari/tiles/${GameConstants.SafariTile[$data]}.png')`, 'z-index': ([GameConstants.SafariTile.treeTopL, GameConstants.SafariTile.treeTopC, GameConstants.SafariTile.treeTopR].includes($data) ? '3' : 'auto') } ">
                                             </div>
                                         </div>
                                     </div>
                                     <div id="sprite" style="position: absolute;"></div>
                                     <!-- ko foreach: Safari.pokemonGrid -->
-                                        <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
+                                    <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
                                         style: {
                                             backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${$data.spriteID.toString()}${$data.shiny ? 's' : ''}.png')`,
                                             top: `${32 * $data.y - 8}px`,
@@ -82,7 +129,7 @@
                                         }"></div>
                                     <!-- /ko -->
                                     <!-- ko foreach: Safari.itemGrid -->
-                                        <div class="safari-item" data-bind="
+                                    <div class="safari-item" data-bind="
                                         style: {
                                             top: `${32 * $data.y}px`,
                                             left: `${32 * $data.x}px`,
@@ -95,7 +142,7 @@
 
 
                     <!-- Help tab -->
-                    <div  id="safariHelp" class="tab-pane fade">
+                    <div id="safariHelp" class="tab-pane fade">
                         <div class="modal-body" style="width: 80%;margin: auto;">
                             <div id="safariHelpText">
                                 <p>The Safari Zone uses a different method of encountering and capturing Pokémon, and it contains several unique Pokémon.</p>

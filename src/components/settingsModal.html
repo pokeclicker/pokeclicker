@@ -1,23 +1,62 @@
-<div class="modal noselect fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel">
+<div
+    class="modal noselect fade"
+    id="settingsModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="settingsModalLabel"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header" style='justify-content: space-around;'>
+            <div class="modal-header" style="justify-content: space-around;">
                 <h5 class="modal-title">Settings</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-game" data-toggle="tab">Gameplay</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab">Sound</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab">Notifications</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-hotkeys" data-toggle="tab">Hotkeys</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings-other" data-toggle="tab">Other</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link active"
+                            href="#settings-display"
+                            data-toggle="tab"
+                        >Display</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link"
+                            href="#settings-game"
+                            data-toggle="tab"
+                        >Gameplay</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link"
+                            href="#settings-sound"
+                            data-toggle="tab"
+                        >Sound</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link"
+                            href="#settings-notifications"
+                            data-toggle="tab"
+                        >Notifications</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link"
+                            href="#settings-hotkeys"
+                            data-toggle="tab"
+                        >Hotkeys</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link"
+                            href="#settings-other"
+                            data-toggle="tab"
+                        >Other</a></li>
                     <!-- ko if: DiscordRichPresence.clientVersion -->
-                        <li class="nav-item"><a class="nav-link" href="#settings-discord" data-toggle="tab">Discord</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link"
+                            href="#settings-discord"
+                            data-toggle="tab"
+                        >Discord</a></li>
                     <!-- /ko -->
                 </ul>
 
@@ -25,11 +64,11 @@
                     <div class="tab-pane active" id="settings-display">
                         <table class="table table-striped table-hover m-0">
                             <!-- <thead>
-                              <tr>
+                                <tr>
                                 <th>Setting</th>
                                 <th>Option</th>
-                              </tr>
-                            </thead> -->
+                                </tr>
+                                </thead> -->
                             <thead>
                                 <tr><th colspan="2">General</th></tr>
                             </thead>
@@ -101,15 +140,19 @@
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
                                 <tr>
                                     <td colspan="2">
-                                        <button type="button" class="btn btn-primary" data-bind="click: () => {
+                                        <button
+                                            type="button"
+                                            class="btn btn-primary"
+                                            data-bind="click: () => {
                                             Settings.list.filter(s => s.name.startsWith('moduleHeight.')).forEach((setting) => {
                                                 const resizeId = setting.name.split('.')[1];
                                                 document.querySelector(`[data-resize-id='${resizeId}']`).style.height = `${setting.defaultValue}px`;
                                             })
-                                        }">Reset Resizable Modules</button>
+                                        }"
+                                        >Reset Resizable Modules</button>
                                     </td>
                                 </tr>
-                            </thead>
+                            </tbody>
                         </table>
                     </div>
 
@@ -136,7 +179,9 @@
                                         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`"></label>
                                     </td>
                                     <td class="p-2">
-                                        <input class="clickable" type="checkbox"
+                                        <input
+                                            class="clickable"
+                                            type="checkbox"
                                             data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
                                             onchange="(() => {
                                                 if (!this.checked) {
@@ -156,13 +201,16 @@
                                                         this.checked = false;
                                                     }
                                                 });
-                                            })()"/>
+                                            })()"
+                                        >
                                     </td>
                                 </tr>
                                 <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
                                     <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
                                     <td class="p-0">
-                                        <input type="text" class="form-control"
+                                        <input
+                                            type="text"
+                                            class="form-control"
                                             data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
                                                 title: `Restrict your hatchery queue to a specific size or disable entirely. Enter a value between 1 and your current max size (${App.game.breeding.queueSlots()}), zero (0) to disable the queue entirely, or -1 for no limit.`,
                                                 trigger: 'hover'
@@ -171,7 +219,8 @@
                                                 const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
                                                 this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
                                             })(), Settings.setSettingByName(this.name, +this.value)
-                                        ">
+                                        "
+                                        >
                                     </td>
                                 </tr>
                             </tbody>
@@ -181,13 +230,17 @@
                     <div class="tab-pane" id="settings-sound">
                         <div data-bind="template: {name: 'RangeSettingTemplate', data: Settings.getSetting('sound.volume')}"></div>
                         <!-- ko foreach: Object.keys(NotificationConstants.NotificationSound) -->
-                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsSound' + $data }"></span>
+                        <span
+                            class="btn btn-block btn-dark clickable mt-1"
+                            data-toggle="collapse"
+                            data-bind="text: $data, attr: { href: '#settingsSound' + $data }"
+                        ></span>
                         <div class="collapse show" data-bind="attr: { id: 'settingsSound' + $data }">
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
-                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSound[$data]) -->
+                                    <!-- ko foreach: Object.values(NotificationConstants.NotificationSound[$data]) -->
                                     <tr data-bind="template: { name: 'SoundSettingTemplate', data: { sound, setting: Settings.getSetting(`sound.${$data.name}`) } }"></tr>
-                                <!-- /ko -->
+                                    <!-- /ko -->
                                 </tbody>
                             </table>
                         </div>
@@ -196,13 +249,17 @@
 
                     <div class="tab-pane" id="settings-notifications">
                         <!-- ko foreach: Object.keys(NotificationConstants.NotificationSetting) -->
-                        <span class="btn btn-block btn-dark clickable mt-1" data-toggle="collapse" data-bind="text: $data, attr: { href: '#settingsNotification' + $data }"></span>
+                        <span
+                            class="btn btn-block btn-dark clickable mt-1"
+                            data-toggle="collapse"
+                            data-bind="text: $data, attr: { href: '#settingsNotification' + $data }"
+                        ></span>
                         <div class="collapse show" data-bind="attr: { id: 'settingsNotification' + $data }">
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
-                                <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting[$data]) -->
+                                    <!-- ko foreach: Object.values(NotificationConstants.NotificationSetting[$data]) -->
                                     <tr data-bind="template: { name: 'NotificationSettingTemplate', data: $data }"></tr>
-                                <!-- /ko -->
+                                    <!-- /ko -->
                                 </tbody>
                             </table>
                         </div>
@@ -251,7 +308,7 @@
                                         title: 'Each number refers to a specific Oak Item',
                                         trigger: 'hover',
                                     }">
-                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                        <kbd class="btn-block" style="padding: 10px 0;"><code>Number Keys</code></kbd>
                                     </td>
                                 </tr>
                             </tbody>
@@ -267,7 +324,7 @@
                                         title: 'Each number refers to a specific Poké Ball',
                                         trigger: 'hover',
                                     }">
-                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                        <kbd class="btn-block" style="padding: 10px 0;"><code>Number Keys</code></kbd>
                                     </td>
                                 </tr>
                             </tbody>
@@ -294,7 +351,7 @@
                                         title: 'Can access anything from Gyms to NPCs. Each number is a button.',
                                         trigger: 'hover',
                                     }">
-                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                        <kbd class="btn-block" style="padding: 10px 0;"><code>Number Keys</code></kbd>
                                     </td>
                                 </tr>
                             </tbody>
@@ -310,7 +367,7 @@
                                         title: 'Each number selects an item in the shop.',
                                         trigger: 'hover',
                                     }">
-                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                        <kbd class="btn-block" style="padding: 10px 0;"><code>Number Keys</code></kbd>
                                     </td>
                                 </tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop.buy')}"></tr>
@@ -330,7 +387,7 @@
                                         title: 'Each number selects a region.',
                                         trigger: 'hover',
                                     }">
-                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>Number Keys</code></kbd>
+                                        <kbd class="btn-block" style="padding: 10px 0;"><code>Number Keys</code></kbd>
                                     </td>
                                 </tr>
                             </tbody>
@@ -355,7 +412,7 @@
                                         title: 'Change routes based on route order',
                                         trigger: 'hover',
                                     }">
-                                        <kbd class="btn-block" style="padding: 10px 0;" ><code>- or +</code></kbd>
+                                        <kbd class="btn-block" style="padding: 10px 0;"><code>- or +</code></kbd>
                                     </td>
                                 </tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.forceSave')}"></tr>
@@ -370,74 +427,123 @@
                             <tbody>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('saveReminder')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
-								<tr data-bind="with : Settings.getSetting('saveFilename')">
-									<td class="p-2" data-bind="text : `${$data.displayName}:`">setting name</td>
-									<td class="p-0">
-										<input type="text" class="form-control"
+                                <tr data-bind="with : Settings.getSetting('saveFilename')">
+                                    <td class="p-2" data-bind="text : `${$data.displayName}:`">setting name</td>
+                                    <td class="p-0">
+                                        <input
+                                            type="text"
+                                            class="form-control"
                                             data-bind="attr : {name : $data.name, id : `setting-${$data.name}`, placeholder : $data.defaultValue}, textInput : $data.observableValue, tooltip : {title: 'Special tags {name}, {version} and {date} are automatically filled', trigger: 'hover'}"
-                                            onchange="Settings.setSettingByName('saveFilename', this.value)"/>
-									</td>
-								</tr>
+                                            onchange="Settings.setSettingByName('saveFilename', this.value)"
+                                        >
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-primary" onclick="Settings.saveDefault();">Save As Default Settings</button>
-                            <button type="button" class="btn btn-warning" onclick="Settings.loadDefault();">Load From Default Settings</button>
-                            <button type="button" class="btn btn-danger" onclick="Settings.resetDefault();">Reset Default Settings</button>
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                onclick="Settings.saveDefault();"
+                            >Save As Default Settings</button>
+                            <button
+                                type="button"
+                                class="btn btn-warning"
+                                onclick="Settings.loadDefault();"
+                            >Load From Default Settings</button>
+                            <button
+                                type="button"
+                                class="btn btn-danger"
+                                onclick="Settings.resetDefault();"
+                            >Reset Default Settings</button>
                         </div>
                     </div>
 
                     <div class="tab-pane" id="settings-discord">
                         <table class="table table-striped table-hover m-0"><tbody>
-                            <tr>
-                            <td colspan="2">
-                                <span>Enable Discord rich presence</span>
-                                <label class="form-check-label toggler-wrapper style-1 float-right">
-                                <input class="clickable" type="checkbox" data-bind="checked: Settings.getSetting('discord-rp.enabled').observableValue()" onchange="Settings.setSettingByName(this.name, this.checked)" name="discord-rp.enabled">
-                                <div class="toggler-slider">
-                                    <div class="toggler-knob"></div>
-                                </div>
-                                </label>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td colspan="2">
-                                <span>Show current session play time (max 24 hours)</span>
-                                <label class="form-check-label toggler-wrapper style-1 float-right">
-                                <input class="clickable" type="checkbox" data-bind="checked: Settings.getSetting('discord-rp.timer').observableValue()" onchange="Settings.setSettingByName(this.name, this.checked)" name="discord-rp.timer">
-                                <div class="toggler-slider">
-                                    <div class="toggler-knob"></div>
-                                </div>
-                                </label>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td colspan="2">
-                                <span>Reset timer on area change</span>
-                                <label class="form-check-label toggler-wrapper style-1 float-right">
-                                <input class="clickable" type="checkbox" data-bind="checked: Settings.getSetting('discord-rp.timer-reset').observableValue()" onchange="Settings.setSettingByName(this.name, this.checked)" name="discord-rp.timer-reset">
-                                <div class="toggler-slider">
-                                    <div class="toggler-knob"></div>
-                                </div>
-                                </label>
-                            </td>
-                            </tr>
-                            <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('discord-rp.large-image')}"></tr>
-                            <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('discord-rp.small-image')}"></tr>
-                            <tr>
-                            <td class="p-2">Line 1 text:</td>
-                            <td class="p-0">
-                                <input class="form-control" onblur="DiscordRichPresence.focusedElement = this" oninput="Settings.setSettingByName(this.name, this.value)" id="discord-rp.line-1" name="discord-rp.line-1" data-bind="value: Settings.getSetting('discord-rp.line-1').observableValue()" placeholder="Shinies: {caught_shiny}/{caught} {sparkle}">
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class="p-2">Line 2 text:</td>
-                            <td class="p-0">
-                                <input class="form-control" onblur="DiscordRichPresence.focusedElement = this" oninput="Settings.setSettingByName(this.name, this.value)" id="discord-rp.line-2" name="discord-rp.line-2" data-bind="value: Settings.getSetting('discord-rp.line-2').observableValue()" placeholder="Total Attack: {attack}">
-                            </td>
-                            </tr>
-                        </tbody></table>
-                        <span>Options:<br/>
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Enable Discord rich presence</span>
+                                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                                            <input
+                                                class="clickable"
+                                                type="checkbox"
+                                                data-bind="checked: Settings.getSetting('discord-rp.enabled').observableValue()"
+                                                onchange="Settings.setSettingByName(this.name, this.checked)"
+                                                name="discord-rp.enabled"
+                                            >
+                                            <div class="toggler-slider">
+                                                <div class="toggler-knob"></div>
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Show current session play time (max 24 hours)</span>
+                                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                                            <input
+                                                class="clickable"
+                                                type="checkbox"
+                                                data-bind="checked: Settings.getSetting('discord-rp.timer').observableValue()"
+                                                onchange="Settings.setSettingByName(this.name, this.checked)"
+                                                name="discord-rp.timer"
+                                            >
+                                            <div class="toggler-slider">
+                                                <div class="toggler-knob"></div>
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Reset timer on area change</span>
+                                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                                            <input
+                                                class="clickable"
+                                                type="checkbox"
+                                                data-bind="checked: Settings.getSetting('discord-rp.timer-reset').observableValue()"
+                                                onchange="Settings.setSettingByName(this.name, this.checked)"
+                                                name="discord-rp.timer-reset"
+                                            >
+                                            <div class="toggler-slider">
+                                                <div class="toggler-knob"></div>
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('discord-rp.large-image')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('discord-rp.small-image')}"></tr>
+                                <tr>
+                                    <td class="p-2">Line 1 text:</td>
+                                    <td class="p-0">
+                                        <input
+                                            class="form-control"
+                                            onblur="DiscordRichPresence.focusedElement = this"
+                                            oninput="Settings.setSettingByName(this.name, this.value)"
+                                            id="discord-rp.line-1"
+                                            name="discord-rp.line-1"
+                                            data-bind="value: Settings.getSetting('discord-rp.line-1').observableValue()"
+                                            placeholder="Shinies: {caught_shiny}/{caught} {sparkle}"
+                                        >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2">Line 2 text:</td>
+                                    <td class="p-0">
+                                        <input
+                                            class="form-control"
+                                            onblur="DiscordRichPresence.focusedElement = this"
+                                            oninput="Settings.setSettingByName(this.name, this.value)"
+                                            id="discord-rp.line-2"
+                                            name="discord-rp.line-2"
+                                            data-bind="value: Settings.getSetting('discord-rp.line-2').observableValue()"
+                                            placeholder="Total Attack: {attack}"
+                                        >
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        <span>Options:<br>
                             <code data-bind="foreach: DiscordRichPresence.outputOptions">
                                 <a href="#" data-bind="click: () => { if (DiscordRichPresence.focusedElement.name) { Settings.setSettingByName(DiscordRichPresence.focusedElement.name, DiscordRichPresence.focusedElement.value += ` {${$data.key}}`) }}, text: `{${$data.key}}`"></a>
                             </code>
@@ -447,7 +553,11 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>

@@ -34,47 +34,47 @@
 
 
 <!--
--------------------
--- Example Usage --
--------------------
+    -------------------
+    -- Example Usage --
+    -------------------
 
-<knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
+    <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
     data: {
-        id: `helper-category${$index()}`,
-        options: PokemonCategories.categories(),
-        optionsText: 'name',
-        optionsValue: 'id',
-        bindingField: $data.categories,
-        buttonText: () => {
-            return $data.categories().map(id => PokemonCategories.categories().find(c => c.id === id)?.name()).join('; ') || 'All Categories';
-        },
-        buttonClass: 'btn-secondary btn-sm',
-        itemLabel: {
-            class: 'text-white small',
-            style: (item) => ({ 'background-color': item.color() })
-        },
-        showSelectAll: true,
-        selectAllText: 'All Categories',
-        selectAllClick: () => $data.categories([]),
+    id: `helper-category${$index()}`,
+    options: PokemonCategories.categories(),
+    optionsText: 'name',
+    optionsValue: 'id',
+    bindingField: $data.categories,
+    buttonText: () => {
+    return $data.categories().map(id => PokemonCategories.categories().find(c => c.id === id)?.name()).join('; ') || 'All Categories';
+    },
+    buttonClass: 'btn-secondary btn-sm',
+    itemLabel: {
+    class: 'text-white small',
+    style: (item) => ({ 'background-color': item.color() })
+    },
+    showSelectAll: true,
+    selectAllText: 'All Categories',
+    selectAllClick: () => $data.categories([]),
     }}">
-</knockout>
+    </knockout>
 
-----------------
--- Properties --
-----------------
+    ----------------
+    -- Properties --
+    ----------------
 
-id - (Required) Unique identifier for this dropdown menu.
-options - (Required) Array of items to display on the dropdown.
-optionsText - (Optional) Property to use as the display text for the item. Will use the item itself if not defined.
-optionsValue - (Optional) Property to use as the value when the item is selected. Will use the item itself if not defined.
-bindingField - (Required) Observable array backing field for the selected items.
-buttonText - (Required) String or function to set the text of the dropdown button.
-buttonClass - (Optional) Additional classes to customize the dropdown button.
-itemLabel - (Optional)
-  class - (Optional) Additional classes to customize the item labels.
-  style - (Optional) Function to customize CSS styling of the item labels.
-showSelectAll - (Optional) Boolean value to display the Select All button. Default is false.
-selectAllText - (Optional) String or function to set the text of the Select All button. Default is 'Select All'.
-selectAllClick - (Optional) Function called when the Select All button is clicked.
+    id - (Required) Unique identifier for this dropdown menu.
+    options - (Required) Array of items to display on the dropdown.
+    optionsText - (Optional) Property to use as the display text for the item. Will use the item itself if not defined.
+    optionsValue - (Optional) Property to use as the value when the item is selected. Will use the item itself if not defined.
+    bindingField - (Required) Observable array backing field for the selected items.
+    buttonText - (Required) String or function to set the text of the dropdown button.
+    buttonClass - (Optional) Additional classes to customize the dropdown button.
+    itemLabel - (Optional)
+    class - (Optional) Additional classes to customize the item labels.
+    style - (Optional) Function to customize CSS styling of the item labels.
+    showSelectAll - (Optional) Boolean value to display the Select All button. Default is false.
+    selectAllText - (Optional) String or function to set the text of the Select All button. Default is 'Select All'.
+    selectAllClick - (Optional) Function called when the Select All button is clicked.
 
 -->

@@ -1,33 +1,70 @@
-<div class="modal fade noselect" id="saveModal" tabindex="-1" role="dialog"
-     aria-labelledby="saveModalLabel">
+<div
+    class="modal fade noselect"
+    id="saveModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="saveModalLabel"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
         <div class="modal-content">
-            <div class="modal-header" style='justify-content: space-around;'>
+            <div class="modal-header" style="justify-content: space-around;">
                 <h5 class="modal-title">Save Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a class="nav-link active" href="#saveTab" data-toggle="tab">Save</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Convert Original Save</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link active"
+                            href="#saveTab"
+                            data-toggle="tab"
+                        >Save</a></li>
+                    <li class="nav-item"><a
+                            class="nav-link"
+                            href="#saveConvert"
+                            data-toggle="tab"
+                        >Convert Original Save</a></li>
                 </ul>
                 <div class="tab-content p-3">
                     <div id="saveTab" class="tab-pane fade in active show">
                         <div>
                             <form class="form-inline input-group">
-                                <input class="outline-dark form-control" placeholder="Enter code..." id="redeemable-code-input" type="text" />
+                                <input
+                                    class="outline-dark form-control"
+                                    placeholder="Enter code..."
+                                    id="redeemable-code-input"
+                                    type="text"
+                                >
                                 <div class="input-group-append">
-                                    <button class="btn btn-info" name="name" value="value" type="submit" onclick="RedeemableCodeController.enterCode(); return false;">Claim!</button>
+                                    <button
+                                        class="btn btn-info"
+                                        name="name"
+                                        value="value"
+                                        type="submit"
+                                        onclick="RedeemableCodeController.enterCode(); return false;"
+                                    >Claim!</button>
                                 </div>
                             </form>
                             <hr>
                             <!-- ko if: App.game.discord.enabled -->
-                            <button class="btn btn-primary btn-block" onClick="App.game.discord.login()" data-bind="visible: !App.game.discord.ID()">Link Discord</button>
-                            <button class="btn btn-warning btn-block" onClick="App.game.discord.logout()" data-bind="visible: App.game.discord.ID()">Unlink Discord</button>
-                            <i class="text-warning"><strong>Note:</strong> This is <strong>not</strong> used for cloud saves;<br/>it just allows you to enter codes received from the Discord bot.</i>
+                            <button
+                                class="btn btn-primary btn-block"
+                                onClick="App.game.discord.login()"
+                                data-bind="visible: !App.game.discord.ID()"
+                            >Link Discord</button>
+                            <button
+                                class="btn btn-warning btn-block"
+                                onClick="App.game.discord.logout()"
+                                data-bind="visible: App.game.discord.ID()"
+                            >Unlink Discord</button>
+                            <i class="text-warning"><strong>Note:</strong> This is <strong>not</strong> used for cloud saves;<br>it just allows you to enter codes received from the Discord bot.</i>
                             <hr>
                             <!-- /ko -->
 
@@ -36,8 +73,13 @@
                             <button class="btn btn-primary btn-block" onclick="Save.copySaveToClipboard()">Copy to Clipboard</button>
                             <hr>
 
-                            <input type="file" id="import-save" accept=".txt" style="display:none;"
-                                    onchange=Save.loadFromFile(this.files[0])>
+                            <input
+                                type="file"
+                                id="import-save"
+                                accept=".txt"
+                                style="display:none;"
+                                onchange
+                            >
                             <label for="import-save" class="btn btn-primary btn-block">Import Save</label>
                             <hr>
                             <h5 class="text-danger">You will not be able to recover your savefile!</h5>
@@ -56,7 +98,11 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>

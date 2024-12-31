@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
-<head>
-    <title>PokéClicker</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta charset="utf-8"/>
-    <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
-    <script>window.featureFlags = $FEATURE_FLAGS;</script>
+    <head>
+        <title>PokéClicker</title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <link
+            href="assets/images/favicon.ico"
+            rel="icon"
+            type="image/x-icon"
+        >
+        <script>window.featureFlags = $FEATURE_FLAGS;</script>
 
-    <!--jQuery-->
-    <script src="libs/jquery.min.js"></script>
+        <!--jQuery-->
+        <script src="libs/jquery.min.js"></script>
 
-    <!--Knockout-->
-    <script src="libs/knockout-latest.js"></script>
+        <!--Knockout-->
+        <script src="libs/knockout-latest.js"></script>
 
-    <!--Sortable-->
-    <script src="libs/Sortable.min.js"></script>
+        <!--Sortable-->
+        <script src="libs/Sortable.min.js"></script>
 
-    <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=$VERSION"></script>
+        <!-- New module-based code from './modules' -->
+        <script src="scripts/modules.min.js?v=$VERSION"></script>
 
-    <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=$VERSION"></script>
+        <!--Minified scripts-->
+        <script src="scripts/script.min.js?v=$VERSION"></script>
 
-    <!--Popper.js-->
-    <script src="libs/popper.min.js"></script>
+        <!--Popper.js-->
+        <script src="libs/popper.min.js"></script>
 
-    <!--Bootstrap-->
-    <link href="libs/bootstrap.min.css" rel="stylesheet">
-    <script src="libs/bootstrap.min.js"></script>
+        <!--Bootstrap-->
+        <link href="libs/bootstrap.min.css" rel="stylesheet">
+        <script src="libs/bootstrap.min.js"></script>
 
-    <!--Notify-->
-    <script src="libs/bootstrap-notify.min.js"></script>
+        <!--Notify-->
+        <script src="libs/bootstrap-notify.min.js"></script>
 
-    <!--Intro.js-->
-    <script src="libs/intro.min.js"></script>
-    <link href="libs/introjs.css" rel="stylesheet">
-    <link href="libs/introjs-modern.css" rel="stylesheet">
+        <!--Intro.js-->
+        <script src="libs/intro.min.js"></script>
+        <link href="libs/introjs.css" rel="stylesheet">
+        <link href="libs/introjs-modern.css" rel="stylesheet">
 
-    <!--Minified styles-->
-    <link href="styles/styles.min.css?v=$VERSION" rel="stylesheet">
+        <!--Minified styles-->
+        <link href="styles/styles.min.css?v=$VERSION" rel="stylesheet">
 
-    <style>
+        <style>
         #game.loading {
             display: none !important;
         }
@@ -75,267 +79,331 @@
             position: relative;
         }
     </style>
-</head>
-<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue(), attr : {'oncontextmenu' : 'return !' + Settings.getSetting('disableRightClickMenu').observableValue().toString() + ';'}">
-@import "dynamicBackground.html"
+    </head>
+    <body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue(), attr : {'oncontextmenu' : 'return !' + Settings.getSetting('disableRightClickMenu').observableValue().toString() + ';'}">
+        @import "dynamicBackground.html"
 
-<div id="toaster"></div>
-<link id="theme-link" href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
+        <div id="toaster"></div>
+        <link
+            id="theme-link"
+            href="https://bootswatch.com/4/yeti/bootstrap.min.css"
+            rel="stylesheet"
+            data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}"
+        >
 
-<!--$DEV_BANNER-->
-@importif $DEV_BANNER "developmentBanner.html"
+        <!--$DEV_BANNER-->
+        @importif $DEV_BANNER "developmentBanner.html"
 
-<!-- Splash Screen -->
-@import "saveSelector.html"
-@import "splash.html"
+        <!-- Splash Screen -->
+        @import "saveSelector.html"
+        @import "splash.html"
 
-<!-- Game menu-->
-@import "gameMenu.html"
+        <!-- Game menu-->
+        @import "gameMenu.html"
 
-<!-- Get Keyitem modal-->
-@import "getKeyItem.html"
+        <!-- Get Keyitem modal-->
+        @import "getKeyItem.html"
 
-<!-- Show profile modal -->
-@import "profileModal.html"
-@import "profileTrainerModal.html"
-@import "profileBackgroundModal.html"
+        <!-- Show profile modal -->
+        @import "profileModal.html"
+        @import "profileTrainerModal.html"
+        @import "profileBackgroundModal.html"
 
-<!-- Show keyitems modal-->
-@import "itemModal.html"
+        <!-- Show keyitems modal-->
+        @import "itemModal.html"
 
-<!-- Dungeon guides modal-->
-@import "dungeonGuidesModal.html"
+        <!-- Dungeon guides modal-->
+        @import "dungeonGuidesModal.html"
 
-<!-- Encounters Info modal-->
-@import "routeInfoModal.html"
-@import "dungeonInfoModal.html"
+        <!-- Encounters Info modal-->
+        @import "routeInfoModal.html"
+        @import "dungeonInfoModal.html"
 
-<!--Templates -->
-@import "templates/currencyTemplate.html"
-@import "templates/caughtStatusTemplate.html"
-@import "templates/pokerusStatusTemplate.html"
-@import "templates/eggSVGTemplate.html"
-@import "templates/multiOptionTemplate.html"
-@import "templates/pokemonNameTemplate.html"
-@import "templates/pokemonSpriteTemplate.html"
-@import "templates/pokemonGenderTemplate.html"
-@import "templates/pokemonAttackTemplate.html"
-@import "templates/pokemonGenderStatisticTemplate.html"
-@import "templates/multiSelectDropdownTemplate.html"
-@import "templates/currencyContainerCurrencyTemplate.html"
-@import "templates/wanderingPokemonDisplay.html"
+        <!--Templates -->
+        @import "templates/currencyTemplate.html"
+        @import "templates/caughtStatusTemplate.html"
+        @import "templates/pokerusStatusTemplate.html"
+        @import "templates/eggSVGTemplate.html"
+        @import "templates/multiOptionTemplate.html"
+        @import "templates/pokemonNameTemplate.html"
+        @import "templates/pokemonSpriteTemplate.html"
+        @import "templates/pokemonGenderTemplate.html"
+        @import "templates/pokemonAttackTemplate.html"
+        @import "templates/pokemonGenderStatisticTemplate.html"
+        @import "templates/multiSelectDropdownTemplate.html"
+        @import "templates/currencyContainerCurrencyTemplate.html"
+        @import "templates/wanderingPokemonDisplay.html"
 
-<div id="game" class="container loading" data-bind="css: {'container': Settings.getSetting('gameDisplayStyle').observableValue() === 'standard3', 'container-fluid': Settings.getSetting('gameDisplayStyle').observableValue() !== 'standard3'}">
-    <div class="row justify-content-center">
-        <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
-        <h1 id="gameTitle">PokéClicker</h1>
-    </div>
-    <div class="row justify-content-lg-center" style="text-align: center">
+        <div
+            id="game"
+            class="container loading"
+            data-bind="css: {'container': Settings.getSetting('gameDisplayStyle').observableValue() === 'standard3', 'container-fluid': Settings.getSetting('gameDisplayStyle').observableValue() !== 'standard3'}"
+        >
+            <div class="row justify-content-center">
+                <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
+                <h1 id="gameTitle">PokéClicker</h1>
+            </div>
+            <div class="row justify-content-lg-center" style="text-align: center">
 
-        <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
-        <!--left column-->
-        <div class="col-lg-3 col-md-6 order-lg-first" data-bind="css: {
+                <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
+                <!--left column-->
+                <div class="col-lg-3 col-md-6 order-lg-first" data-bind="css: {
             'col-lg-3': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
             'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
         }">
-            <div class="row p-0">
-                <div id="left-column-2" class="col-12" data-bind="css: {
+                    <div class="row p-0">
+                        <div
+                            id="left-column-2"
+                            class="col-12"
+                            data-bind="css: {
                     'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
                     'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
-                }"></div>
-                <div id="left-column" class="col-12" data-bind="css: {
+                }"
+                        ></div>
+                        <div
+                            id="left-column"
+                            class="col-12"
+                            data-bind="css: {
                     'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
                     'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
-                }">
+                }"
+                        >
 
-                    <!-- pokeball selector -->
-                    @import "pokeballSelector.html"
+                            <!-- pokeball selector -->
+                            @import "pokeballSelector.html"
 
-                    <!-- Battle Item container-->
-                    @import "battleItemContainer.html"
+                            <!-- Battle Item container-->
+                            @import "battleItemContainer.html"
 
-                    <!-- Pokémon List container-->
-                    @import "pokemonListContainer.html"
+                            <!-- Pokémon List container-->
+                            @import "pokemonListContainer.html"
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <!--Middle column-->
-        <div id="middle-column" class="col-lg-6 col-md-12 order-md-first" data-bind="css: {
+                <!--Middle column-->
+                <div
+                    id="middle-column"
+                    class="col-lg-6 col-md-12 order-md-first"
+                    data-bind="css: {
             'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
             'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
-        }">
-            <div id="middle-top-sort-column">
-                <!-- Achievement Tracker -->
-                @import "achievementTrackerContainer.html"
+        }"
+                >
+                    <div id="middle-top-sort-column">
+                        <!-- Achievement Tracker -->
+                        @import "achievementTrackerContainer.html"
 
-                <!-- Currency container -->
-                @import "currencyContainer.html"
-            </div>
-            <div id="battleContainer" class="card sortable-disabled border-secondary mb-3">
-                <!--RouteBattleView-->
-                <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
+                        <!-- Currency container -->
+                        @import "currencyContainer.html"
+                    </div>
+                    <div id="battleContainer" class="card sortable-disabled border-secondary mb-3">
+                        <!--RouteBattleView-->
+                        <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
-                <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
+                        <div class="battle-view card-body p-0 justify-content-center no-gutters no-select" data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
                         class: MapHelper.calculateBattleCssClass()">
 
-                    <!-- Route Battles -->
-                    <div id="routeBattleContainer" class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
-                        <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
-                            <div class="pageItemTitle d-flex justify-content-center">
-                                <div class="title-left"></div>
-                                <div class="d-flex align-items-center px-2">
-                                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }" style="font-size: 1.6rem;">Pokémon name</knockout>
-                                    <knockout class="ml-2" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
-                                    <knockout class="ml-2" style="position: relative;"
-                                        data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                            <!-- Route Battles -->
+                            <div
+                                id="routeBattleContainer"
+                                class="row justify-content-center no-gutters"
+                                data-bind="if: App.game.gameState === GameConstants.GameState.fighting"
+                            >
+                                <div
+                                    class="col no-gutters clickable"
+                                    data-bind="click: function() {Battle.clickAttack()}"
+                                    style="height: 280px; display: block;"
+                                >
+                                    <div class="pageItemTitle d-flex justify-content-center">
+                                        <div class="title-left"></div>
+                                        <div class="d-flex align-items-center px-2">
+                                            <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }" style="font-size: 1.6rem;">Pokémon name</knockout>
+                                            <knockout class="ml-2" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
+                                            <knockout
+                                                class="ml-2"
+                                                style="position: relative;"
+                                                data-bind="template: { name: 'pokerusStatusTemplate', data: {
                                             'pokerus': PartyController.getPokerusStatus(Battle.enemyPokemon().id),
-                                            'evs': App.game.party.getPokemon(Battle.enemyPokemon().id)?.evs() }}">
-                                    </knockout>
-                                </div>
-                                <div class="title-right">
-                                    <div class="d-flex align-items-center mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
-                                        <div class="px-1 clickable" data-bind="tooltip: { title: 'See the Pokémon available on this route.', trigger: 'hover' }, click: function() { $('#routeInfoModal').modal('show') }" data-original-title="" title="">
-                                            <img src="assets/images/encountersInfo/encountersInfo.png">
+                                            'evs': App.game.party.getPokemon(Battle.enemyPokemon().id)?.evs() }}"
+                                            >
+                                            </knockout>
+                                        </div>
+                                        <div class="title-right">
+                                            <div class="d-flex align-items-center mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
+                                                <div
+                                                    class="px-1 clickable"
+                                                    data-bind="tooltip: { title: 'See the Pokémon available on this route.', trigger: 'hover' }, click: function() { $('#routeInfoModal').modal('show') }"
+                                                    data-original-title=""
+                                                    title=""
+                                                >
+                                                    <img src="assets/images/encountersInfo/encountersInfo.png">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div data-bind="visible: !Battle.catching()">
-                                    <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon sprite</knockout>
-                                </div>
-                                <div data-bind="visible: Battle.catching()" class="catchChance">
-                                    <img class="pokeball-animated"
-                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg'}"
-                                         src=""/>
-                                    <br>
-                                    Catch Chance:
-                                    <knockout data-bind="text: Math.floor(Battle.catchRateActual()) + '%'">Catch Rate</knockout>
-                                </div>
-                            </div>
-                            <div class="progress hitpoints" style="height: 20px;">
-                                <div class="progress-bar bg-danger" role="progressbar"
-                                     data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
-                                     aria-valuemin="0" aria-valuemax="100">
-                                     <span data-bind="text: Battle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + Battle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
-                                </div>
-                            </div>
+                                    <div>
+                                        <div data-bind="visible: !Battle.catching()">
+                                            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon sprite</knockout>
+                                        </div>
+                                        <div data-bind="visible: Battle.catching()" class="catchChance">
+                                            <img
+                                                class="pokeball-animated"
+                                                data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg'}"
+                                                src=""
+                                            >
+                                            <br>
+                                            Catch Chance:
+                                            <knockout data-bind="text: Math.floor(Battle.catchRateActual()) + '%'">Catch Rate</knockout>
+                                        </div>
+                                    </div>
+                                    <div class="progress hitpoints" style="height: 20px;">
+                                        <div
+                                            class="progress-bar bg-danger"
+                                            role="progressbar"
+                                            data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        >
+                                            <span data-bind="text: Battle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + Battle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                                        </div>
+                                    </div>
 
-                            <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
-                              <table width="100%">
-                                  <tr>
-                                    <!-- Routes --->
-                                    <!-- ko if: App.game.gameState === GameConstants.GameState.fighting -->
-                                    <td width="50%">
-                                      <span style="display: inline;">
-                                        <knockout data-bind="text: Routes.getName(player.route, player.region)"></knockout>
-                                        <!--If all Pokémon in the dungeon are caught or caught shiny-->
-                                        <knockout data-bind="if: RouteHelper.routeCompleted(player.route, player.region, false)">
-                                            <img class="pokeball-smallest"
-                                                 data-bind="attr: { src: `assets/images/pokeball/Pokeball${RouteHelper.routeCompleted(player.route, player.region, true) ? '-shiny' : ''}.svg`},
+                                    <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+                                        <table width="100%">
+                                            <tr>
+                                                <!-- Routes --->
+                                                    <!-- ko if: App.game.gameState === GameConstants.GameState.fighting -->
+                                                <td width="50%">
+                                                    <span style="display: inline;">
+                                                        <knockout data-bind="text: Routes.getName(player.route, player.region)"></knockout>
+                                                        <!--If all Pokémon in the dungeon are caught or caught shiny-->
+                                                        <knockout data-bind="if: RouteHelper.routeCompleted(player.route, player.region, false)">
+                                                            <img class="pokeball-smallest" data-bind="attr: { src: `assets/images/pokeball/Pokeball${RouteHelper.routeCompleted(player.route, player.region, true) ? '-shiny' : ''}.svg`},
                                                  tooltip: {
                                                 trigger: 'hover', placement: 'bottom', title: `You have captured all Pokémon${RouteHelper.routeCompleted(player.route, player.region, true) ? ' shiny' : ''} on this route!`
-                                              }"/>
-                                        </knockout>
+                                              }">
+                                                        </knockout>
 
-                                        <!--Pokérus image-->
-                                        <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route, player.region, true))">
-                                            <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route, player.region, true))] + '.png' },
-                                            tooltip: { title: RouteHelper.routePokerusEVs(player.route, player.region), trigger: 'hover', placement: 'bottom', html: true }"
-                                          src=""/>
-                                        </knockout>
-                                      </span>
-                                    </td>
-                                    <td width="50%">
-                                      <knockout data-bind="using: App.game.statistics.routeKills[player.region][player.route]()">
-                                          <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
-                                          <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/ 10</knockout>
-                                          &nbsp;Pokémon defeated
-                                      </knockout>
-                                    </td>
-                                    <!-- /ko -->
-                                  </tr>
-                                  <tr>
-                                    <td width="50%">
-                                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
-                                    </td>
-                                    <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
-                                        <span style="display: inline;">Click Attack:
-                                            <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
-                                        </span>
-                                    </td>
-                                  </tr>
-                                </table>
-                            </h2>
+                                                        <!--Pokérus image-->
+                                                        <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route, player.region, true))">
+                                                            <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route, player.region, true))] + '.png' },
+                                            tooltip: { title: RouteHelper.routePokerusEVs(player.route, player.region), trigger: 'hover', placement: 'bottom', html: true }" src="">
+                                                        </knockout>
+                                                    </span>
+                                                </td>
+                                                <td width="50%">
+                                                    <knockout data-bind="using: App.game.statistics.routeKills[player.region][player.route]()">
+                                                        <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                                                        <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/ 10</knockout>
+                                                        &nbsp;Pokémon defeated
+                                                    </knockout>
+                                                </td>
+                                                <!-- /ko -->
+                                            </tr>
+                                            <tr>
+                                                <td width="50%">
+                                                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                                                </td>
+                                                <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
+                                                    <span style="display: inline;">Click Attack:
+                                                        <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <!-- Dungeon Battles -->
+                            @import "dungeonView.html"
+
+                            <!-- Gym Battles -->
+                            @import "gymView.html"
+
+                            <!-- One Time Battles -->
+                            @import "temporaryBattleView.html"
+
+                            <!-- Battle Frontier Battles -->
+                            @import "battleFrontierView.html"
+
+                            <!--TownView-->
+                            @import "townView.html"
                         </div>
                     </div>
 
-                    <!-- Dungeon Battles -->
-                    @import "dungeonView.html"
+                    <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
+                    <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
+                        <div class="card-header p-0">
+                            <div style="position: absolute; left: 2px" data-bind="tooltip: { trigger: 'hover', title: 'Chests opened in current dungeon' }">
+                                <img src="assets/images/dungeons/chest.png" height="25px">
+                                <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
+                            </div>
 
-                    <!-- Gym Battles -->
-                    @import "gymView.html"
-
-                    <!-- One Time Battles -->
-                    @import "temporaryBattleView.html"
-
-                    <!-- Battle Frontier Battles -->
-                    @import "battleFrontierView.html"
-
-                    <!--TownView-->
-                    @import "townView.html"
-                </div>
-            </div>
-
-            <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
-                <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
-                    <div class="card-header p-0">
-                        <div style="position: absolute; left: 2px" data-bind="tooltip: { trigger: 'hover', title: 'Chests opened in current dungeon' }">
-                            <img src="assets/images/dungeons/chest.png" height="25px" />
-                            <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
-                        </div>
-
-                        <div style="position: absolute; right: 4px" data-bind="tooltip: { trigger: 'hover', title: 'Encounters won in current dungeon' }">
-                            <img src="assets/images/dungeons/encounter.png" height="25px" />
-                            <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
-                        </div>
-                        <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
-                        <!-- ko if: DungeonGuides.hired() -->
-                        <a href="#dungeonGuidesDungeonModal" data-toggle="modal" data-bind="tooltip: {
+                            <div style="position: absolute; right: 4px" data-bind="tooltip: { trigger: 'hover', title: 'Encounters won in current dungeon' }">
+                                <img src="assets/images/dungeons/encounter.png" height="25px">
+                                <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
+                            </div>
+                            <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
+                            <!-- ko if: DungeonGuides.hired() -->
+                            <a
+                                href="#dungeonGuidesDungeonModal"
+                                data-toggle="modal"
+                                data-bind="tooltip: {
                             title: `Attempts remaining: ${DungeonGuides.clears()}`,
                             placement: 'top',
                             trigger: 'hover'
-                        }">
-                            <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${DungeonGuides.hired().trainerSprite}.png` }">
-                        </a>
-                        <!-- /ko -->
+                        }"
+                            >
+                                <img
+                                    class="pixelated"
+                                    src=""
+                                    height="24px"
+                                    data-bind="attr:{ src: `assets/images/profile/trainer-${DungeonGuides.hired().trainerSprite}.png` }"
+                                >
+                            </a>
+                            <!-- /ko -->
+                        </div>
+                        <div class="card-body p-0 text-center">
+                            <table class="dungeon-board">
+                                <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
+                                    <tr data-bind="foreach: $data">
+                                        <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="card-body p-0 text-center">
-                        <table class="dungeon-board">
-                            <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
-                                <tr data-bind="foreach: $data">
-                                    <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            <!-- /ko -->
+                    <!-- /ko -->
 
-            <!-- Battle Frontier Information Container  -->
-            @import "battleFrontierInfo.html"
+                    <!-- Battle Frontier Information Container  -->
+                    @import "battleFrontierInfo.html"
 
-            <div id="middle-bottom-sort-column">
-                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
-                    App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.temporaryBattle || App.game.gameState === GameConstants.GameState.paused)">
-                    <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
-                        <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
-                    </div>
-                    <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
-                    data-content=""
-                    data-placement="bottom" data-bind="attr: {'data-content': `<div class='row map-legend'>
+                    <div id="middle-bottom-sort-column">
+                        <div
+                            id="townMap"
+                            class="card sortable border-secondary mb-3"
+                            data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+                    App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.temporaryBattle || App.game.gameState === GameConstants.GameState.paused)"
+                        >
+                            <div
+                                class="card-header p-0"
+                                data-toggle="collapse"
+                                href="#mapBody"
+                            >
+                                <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
+                            </div>
+                            <button
+                                class="btn btn-sm"
+                                style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;"
+                                data-toggle="popover"
+                                data-trigger="hover"
+                                data-html="true"
+                                data-title="Map Legend:"
+                                data-content=""
+                                data-placement="bottom"
+                                data-bind="attr: {'data-content': `<div class='row map-legend'>
                             <div class='col-12'>
                                 Map locations will be coloured based on the following:
                             </div>
@@ -350,288 +418,345 @@
                             <div class='col-12'>
                                 <i>NOTE: These colors can be customized in the settings menu</i>
                             </div>
-                        </div>`}">ⓘ</button>
-                    <button class='btn btn-sm' style="position: absolute; right: 96px; top: 0px; width: auto; height: 41px;"
-                    data-bind='style: { background: DayCycle.color() },
+                        </div>`}"
+                            >ⓘ</button>
+                            <button
+                                class="btn btn-sm"
+                                style="position: absolute; right: 96px; top: 0px; width: auto; height: 41px;"
+                                data-bind='style: { background: DayCycle.color() },
                         tooltip: {
                             title: DayCycle.tooltip(),
                             html: true,
                             placement: "bottom",
                             trigger: "hover"
-                        }'>
-                        <img width=30px src="" data-bind="attr: { src: DayCycle.image() }"/>
-                    </button>
-                    <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
-                    data-bind='style: { background: Weather.color() },
+                        }'
+                            >
+                                <img
+                                    width="30px"
+                                    src=""
+                                    data-bind="attr: { src: DayCycle.image() }"
+                                >
+                            </button>
+                            <button
+                                class="btn btn-sm"
+                                style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
+                                data-bind='style: { background: Weather.color() },
                         tooltip: {
                             title: Weather.tooltip(),
                             html: true,
                             placement: "bottom",
                             trigger: "hover"
-                        }'>
-                        <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
-                    </button>
-                    <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-                    data-bind='style: { background: MoonCycle.color() },
+                        }'
+                            >
+                                <img
+                                    width="30px"
+                                    src=""
+                                    data-bind="attr: { src: Weather.image() }"
+                                >
+                            </button>
+                            <button
+                                class="btn btn-sm"
+                                style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+                                data-bind='style: { background: MoonCycle.color() },
                         tooltip: {
                             title: MoonCycle.tooltip(),
                             html: true,
                             placement: "bottom",
                             trigger: "hover"
-                        }'>
-                        <img width=30px src="" data-bind="attr: { src: MoonCycle.image() }"/>
-                    </button>
-                    <div id="mapBody" class="card-body p-0 show">
-                        <div id="subregion-travel-buttons" class="btn-group mr-2" role="group" style="width: 100%;" data-bind="
+                        }'
+                            >
+                                <img
+                                    width="30px"
+                                    src=""
+                                    data-bind="attr: { src: MoonCycle.image() }"
+                                >
+                            </button>
+                            <div id="mapBody" class="card-body p-0 show">
+                                <div
+                                    id="subregion-travel-buttons"
+                                    class="btn-group mr-2"
+                                    role="group"
+                                    style="width: 100%;"
+                                    data-bind="
                             visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1,
-                            css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }">
-                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
-                            <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
+                            css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }"
+                                >
+                                    <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
+                                    <button
+                                        class="btn btn-sm btn-primary"
+                                        style="width: 70%;"
+                                        data-bind="
                                 click: () => SubRegions.openModal(),
                                 text: 'Subregional Travel (' + player.subregionObject()?.name + ')'"
-                                >Subregional Travel</button>
-                            <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
+                                    >Subregional Travel</button>
+                                    <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
+                                </div>
+                                <p
+                                    id="mapTooltip"
+                                    class="btn btn-secondary"
+                                    style="visibility: hidden;"
+                                ></p>
+                                <svg
+                                    id="map"
+                                    viewBox="0 0 1600 960"
+                                    preserveAspectRatio="xMaxYMax meet"
+                                >
+                                    <defs>
+                                        <lineargradient
+                                            id="mx-gradient-f8cecc-1-ea583b-1-s-0"
+                                            x1="0%"
+                                            x2="0%"
+                                            y1="0%"
+                                            y2="100%"
+                                        >
+                                            <stop offset="0%" style="stop-color:#909090"></stop>
+                                            <stop offset="100%" style="stop-color:#c1c1c1"></stop>
+                                        </lineargradient>
+                                        <lineargradient
+                                            id="mx-gradient-dae8fc-1-7ea6e0-1-s-0"
+                                            x1="0%"
+                                            x2="0%"
+                                            y1="0%"
+                                            y2="100%"
+                                        >
+                                            <stop offset="0%" style="stop-color:#DAE8FC"></stop>
+                                            <stop offset="100%" style="stop-color:#7EA6E0"></stop>
+                                        </lineargradient>
+                                    </defs>
+
+                                    @import "KantoSVG.html"
+                                    @import "JohtoSVG.html"
+                                    @import "HoennSVG.html"
+                                    @import "SinnohSVG.html"
+                                    @import "UnovaSVG.html"
+                                    @import "KalosSVG.html"
+                                    @import "AlolaSVG.html"
+                                    @import "GalarSVG.html"
+                                    @import "HisuiSVG.html"
+                                    @import "PaldeaSVG.html"
+
+                                    <g id="playerSprite">
+                                        <!-- This group is cleared actively via koExtenders.ts added to fix #3358 -->
+                                        <!-- TODO: Replace current PlayerSprite rendering logic so a singular SVG is used / updated like so:-->
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
-                        <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
-                        <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
-                            <defs>
-                                <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
-                                                y2="100%">
-                                    <stop offset="0%" style="stop-color:#909090"></stop>
-                                    <stop offset="100%" style="stop-color:#c1c1c1"></stop>
-                                </lineargradient>
-                                <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
-                                                y2="100%">
-                                    <stop offset="0%" style="stop-color:#DAE8FC"></stop>
-                                    <stop offset="100%" style="stop-color:#7EA6E0"></stop>
-                                </lineargradient>
-                            </defs>
+                    </div>
+                </div>
 
-                            @import "KantoSVG.html"
-                            @import "JohtoSVG.html"
-                            @import "HoennSVG.html"
-                            @import "SinnohSVG.html"
-                            @import "UnovaSVG.html"
-                            @import "KalosSVG.html"
-                            @import "AlolaSVG.html"
-                            @import "GalarSVG.html"
-                            @import "HisuiSVG.html"
-                            @import "PaldeaSVG.html"
+                <!--Right column-->
+                <div class="col-lg-3 col-md-6" data-bind="css: {
+            'col-lg-3': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+            'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+        }">
+                    <div class="row p-0">
+                        <div
+                            id="right-column"
+                            class="col-12"
+                            data-bind="css: {
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+                }"
+                        >
 
-                            <g id="playerSprite">
-                                <!-- This group is cleared actively via koExtenders.ts added to fix #3358 -->
-                                <!-- TODO: Replace current PlayerSprite rendering logic so a singular SVG is used / updated like so:-->
-                            </g>
-                        </svg>
+                            <!-- Oak Items -->
+                            @import "oakItemsContainer.html"
+
+                            <!-- Current Quest -->
+                            @import "questDisplay.html"
+
+                            <!-- Egg Slots/Breeding-->
+                            @import "breedingDisplay.html"
+
+                            <!-- Farm -->
+                            @import "farmDisplay.html"
+
+                            <!-- Underground -->
+                            @import "undergroundDisplay.html"
+
+                            <!-- Shortcuts Menu -->
+                            @import "shortcutsContainer.html"
+                        </div>
+                        <div
+                            id="right-column-2"
+                            class="col-12"
+                            data-bind="css: {
+                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
+                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+                }"
+                        >
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--Right column-->
-        <div class="col-lg-3 col-md-6" data-bind="css: {
-            'col-lg-3': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
-            'col-lg-4': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
-        }">
-            <div class="row p-0">
-                <div id="right-column" class="col-12" data-bind="css: {
-                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
-                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
-                }">
+        <!-- Challenge Mode Modal -->
+        @import "challengeModeModal.html"
 
-                    <!-- Oak Items -->
-                    @import "oakItemsContainer.html"
+        <!--ShopModal-->
+        @import "shopModal.html"
 
-                    <!-- Current Quest -->
-                    @import "questDisplay.html"
+        <!-- Receive gym badge Modal -->
+        @import "receiveGymBadge.html"
 
-                    <!-- Egg Slots/Breeding-->
-                    @import "breedingDisplay.html"
+        <!-- One time battle won Modal -->
+        @import "temporaryBattleWonModal.html"
 
-                    <!-- Farm -->
-                    @import "farmDisplay.html"
+        <!-- Quest Step Cleared -->
+        @import "questStepClearedModal.html"
 
-                    <!-- Underground -->
-                    @import "undergroundDisplay.html"
+        <!-- Achievements Modal -->
+        @import "achievementsModal.html"
 
-                    <!-- Shortcuts Menu -->
-                    @import "shortcutsContainer.html"
-                </div>
-                <div id="right-column-2" class="col-12" data-bind="css: {
-                    'col-lg-12': Settings.getSetting('gameDisplayStyle').observableValue() !== 'fullWidth5',
-                    'col-lg-6': Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
-                }">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <!-- Oak Items Modal-->
+        @import "oakItemsModal.html"
 
-<!-- Challenge Mode Modal -->
-@import "challengeModeModal.html"
+        <!-- Statistics Modal-->
+        @import "statisticsModal.html"
 
-<!--ShopModal-->
-@import "shopModal.html"
+        <!-- Log Book Modal-->
+        @import "logBookModal.html"
 
-<!-- Receive gym badge Modal -->
-@import "receiveGymBadge.html"
+        <!-- Settings Modal-->
+        @import "settingsModal.html"
 
-<!-- One time battle won Modal -->
-@import "temporaryBattleWonModal.html"
+        <!-- FAQ Modal -->
+        @import "FAQModal.html"
 
-<!-- Quest Step Cleared -->
-@import "questStepClearedModal.html"
+        <!-- Changelog Modal -->
+        @import "changelog.html"
 
-<!-- Achievements Modal -->
-@import "achievementsModal.html"
+        <!-- Credits Modal -->
+        @import "creditsModal.html"
 
-<!-- Oak Items Modal-->
-@import "oakItemsModal.html"
+        <!-- External Links Modal -->
+        @import "externalLinksModal.html"
 
-<!-- Statistics Modal-->
-@import "statisticsModal.html"
+        <!-- Events Modal -->
+        @import "eventsModal.html"
 
-<!-- Log Book Modal-->
-@import "logBookModal.html"
+        <!-- Start Sequence Modal-->
+        @import "startSequence.html"
 
-<!-- Settings Modal-->
-@import "settingsModal.html"
+        <!-- Pick Starter Tutorial Modal-->
+        @import "pickStarterTutorialModal.html"
 
-<!-- FAQ Modal -->
-@import "FAQModal.html"
+        <!-- Pick Starter Modal-->
+        @import "pickStarterModal.html"
 
-<!-- Changelog Modal -->
-@import "changelog.html"
+        <!-- Starter Caught Modal-->
+        @import "starterCaught.html"
 
-<!-- Credits Modal -->
-@import "creditsModal.html"
+        <!-- Hall of Fame Modal -->
+        @import "hallOfFame.html"
 
-<!-- External Links Modal -->
-@import "externalLinksModal.html"
+        <!-- Log Book Modal-->
+        @import "nextRegionModal.html"
 
-<!-- Events Modal -->
-@import "eventsModal.html"
+        <!-- Gems Modal -->
+        @import "gemsModal.html"
 
-<!-- Start Sequence Modal-->
-@import "startSequence.html"
+        <!-- Breeding Modal-->
+        @import "breedingModal.html"
 
-<!-- Pick Starter Tutorial Modal-->
-@import "pickStarterTutorialModal.html"
+        <!-- Underground Modal -->
+        @import "underground.html"
 
-<!-- Pick Starter Modal-->
-@import "pickStarterModal.html"
+        <!-- Pokedex Modal-->
+        @import "pokedex.html"
 
-<!-- Starter Caught Modal-->
-@import "starterCaught.html"
+        <!-- Statistics Modal-->
+        @import "pokemonStatisticsModal.html"
 
-<!-- Hall of Fame Modal -->
-@import "hallOfFame.html"
+        <!-- Vitamin Modal-->
+        @import "pokemonVitaminModal.html"
 
-<!-- Log Book Modal-->
-@import "nextRegionModal.html"
+        <!-- Expanded Vitamin Modal -->
+        @import "pokemonVitaminExpandedModal.html"
 
-<!-- Gems Modal -->
-@import "gemsModal.html"
+        <!-- Badge Case Modal-->
+        @import "badgeCase.html"
 
-<!-- Breeding Modal-->
-@import "breedingModal.html"
+        <!-- Save Modal-->
+        @import "saveModal.html"
 
-<!-- Underground Modal -->
-@import "underground.html"
+        <!-- Quests Modal-->
+        @import "questModal.html"
 
-<!-- Pokedex Modal-->
-@import "pokedex.html"
+        <!-- Farm Modal-->
+        @import "farmModal.html"
 
-<!-- Statistics Modal-->
-@import "pokemonStatisticsModal.html"
+        <!-- Berrydex Modal-->
+        @import "berryDexModal.html"
 
-<!-- Vitamin Modal-->
-@import "pokemonVitaminModal.html"
+        <!-- Berry Master Modal-->
+        @import "berryMasterModal.html"
 
-<!-- Expanded Vitamin Modal -->
-@import "pokemonVitaminExpandedModal.html"
+        <!-- Gem Master Modal-->
+        @import "gemMasterModal.html"
 
-<!-- Badge Case Modal-->
-@import "badgeCase.html"
+        <!-- Shard Master Modal-->
+        @import "shardTraderModal.html"
 
-<!-- Save Modal-->
-@import "saveModal.html"
+        <!-- Generic Trader Modal-->
+        @import "genericTraderModal.html"
 
-<!-- Quests Modal-->
-@import "questModal.html"
+        <!-- Subregion Modal-->
+        @import "subregionModal.html"
 
-<!-- Farm Modal-->
-@import "farmModal.html"
+        <!-- Ship Modal-->
+        @import "shipModal.html"
 
-<!-- Berrydex Modal-->
-@import "berryDexModal.html"
+        <!-- Safari Modal -->
+        @import "safariModal.html"
 
-<!-- Berry Master Modal-->
-@import "berryMasterModal.html"
+        <!-- Safari Modal -->
+        @import "safariBattleModal.html"
 
-<!-- Gem Master Modal-->
-@import "gemMasterModal.html"
+        <!-- NPC Modal-->
+        @import "npcModal.html"
 
-<!-- Shard Master Modal-->
-@import "shardTraderModal.html"
+        <!-- Pokeball Selector Modal -->
+        @import "pokeballSelectorModal.html"
 
-<!-- Generic Trader Modal-->
-@import "genericTraderModal.html"
+        <!-- Pokeball Selector Config Modal -->
+        @import "pokeballSelectorAdvModal.html"
 
-<!-- Subregion Modal-->
-@import "subregionModal.html"
+        <!-- Damage Calculator Modal -->
+        @import "damageCalculatorModal.html"
 
-<!-- Ship Modal-->
-@import "shipModal.html"
+        <!-- Category Modal -->
+        @import "categoryModal.html"
 
-<!-- Safari Modal -->
-@import "safariModal.html"
+        <!-- Bulletin board Modal -->
+        @import "bulletinBoardModal.html"
 
-<!-- Safari Modal -->
-@import "safariBattleModal.html"
+        @import "heldItemModal.html"
 
-<!-- NPC Modal-->
-@import "npcModal.html"
+        <!-- Battle Cafe Modal -->
+        @import "battleCafeModal.html"
 
-<!-- Pokeball Selector Modal -->
-@import "pokeballSelectorModal.html"
+        <!-- Dream Orbs Modal -->
+        @import "dreamOrbsModal.html"
 
-<!-- Pokeball Selector Config Modal -->
-@import "pokeballSelectorAdvModal.html"
+        <!-- Dream Orbs Opened Modal -->
+        @import "dreamOrbsOpenedModal.html"
 
-<!-- Damage Calculator Modal -->
-@import "damageCalculatorModal.html"
+        <!-- Purify Chamber Modal -->
+        @import "purifyChamberModal.html"
 
-<!-- Category Modal -->
-@import "categoryModal.html"
+        <!-- Weather App Modal -->
+        @import "weatherAppModal.html"
 
-<!-- Bulletin board Modal -->
-@import "bulletinBoardModal.html"
+        <!-- Consumable Modal -->
+        @import "consumableModal.html"
 
-@import "heldItemModal.html"
+        <!-- Pokemon Contest Modal -->
+        @import "pokemonContestModal.html"
 
-<!-- Battle Cafe Modal -->
-@import "battleCafeModal.html"
-
-<!-- Dream Orbs Modal -->
-@import "dreamOrbsModal.html"
-
-<!-- Dream Orbs Opened Modal -->
-@import "dreamOrbsOpenedModal.html"
-
-<!-- Purify Chamber Modal -->
-@import "purifyChamberModal.html"
-
-<!-- Weather App Modal -->
-@import "weatherAppModal.html"
-
-<!-- Consumable Modal -->
-@import "consumableModal.html"
-
-<!-- Pokemon Contest Modal -->
-@import "pokemonContestModal.html"
-
-<script type="text/javascript">
+        <script type="text/javascript">
 // Check if we are running in an iframe
 if (self !== top) {
     App = {};
@@ -641,5 +766,5 @@ if (self !== top) {
     </div>`;
 }
 </script>
-</body>
+    </body>
 </html>

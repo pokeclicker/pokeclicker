@@ -1,5 +1,10 @@
-<div class="modal fade noselect" id="purifyChamberModal" tabindex="-1" role="dialog"
-aria-labelledby="purifyChamberModalLabel">
+<div
+    class="modal fade noselect"
+    id="purifyChamberModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="purifyChamberModalLabel"
+>
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,14 +12,17 @@ aria-labelledby="purifyChamberModalLabel">
             </div>
             <div class="modal-body">
                 <!-- ko if: App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow) -->
-                <select id="purify-chamber-selector" class="custom-select" style="margin-right: 8px"
-                        data-bind="options: App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Shadow),
+                <select
+                    id="purify-chamber-selector"
+                    class="custom-select"
+                    style="margin-right: 8px"
+                    data-bind="options: App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Shadow),
                                optionsText: (p) => PokemonHelper.displayName(p.name),
                                value: App.game.purifyChamber.selectedPokemon"
                 >
                 </select>
                 <div>
-                    <img data-bind="visible: App.game.purifyChamber.selectedPokemon(), attr: { src: App.game.purifyChamber.selectedPokemon() ? PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) : '' }"/>
+                    <img data-bind="visible: App.game.purifyChamber.selectedPokemon(), attr: { src: App.game.purifyChamber.selectedPokemon() ? PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) : '' }">
                 </div>
                 <div>
                     <h4>Flow needed for next purification:</h4>
@@ -23,7 +31,11 @@ aria-labelledby="purifyChamberModalLabel">
                     <span data-bind="text: App.game.purifyChamber.flowNeeded().toLocaleString('en-US')"></span>
                 </div>
                 <div>
-                    <button data-bind="visible: App.game.purifyChamber.canPurify()" class="btn btn-primary" onclick="App.game.purifyChamber.purify()">Purify</button>
+                    <button
+                        data-bind="visible: App.game.purifyChamber.canPurify()"
+                        class="btn btn-primary"
+                        onclick="App.game.purifyChamber.purify()"
+                    >Purify</button>
                 </div>
                 <!-- /ko -->
 
@@ -32,7 +44,11 @@ aria-labelledby="purifyChamberModalLabel">
                 <!-- /ko -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>

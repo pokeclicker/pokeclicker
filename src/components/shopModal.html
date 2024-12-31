@@ -1,10 +1,19 @@
-<div class="modal fade noselect" id="shopModal" tabindex="-1" role="dialog"
-     aria-labelledby="shopModalLabel">
+<div
+    class="modal fade noselect"
+    id="shopModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="shopModalLabel"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 data-bind="text: ShopHandler.shopObservable().displayName">Shop</h4>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >&times;</button>
             </div>
             <div class="modal-body">
                 <div>
@@ -19,39 +28,79 @@
                                 Reset
                             </button>
                         </div>
-                        <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
-                                value="1" min="1" required name="amountOfItems"
-                                oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
-                                onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
+                        <input
+                            id="amountOfItems"
+                            type="number"
+                            class="outline-dark form-control form-control-number"
+                            value="1"
+                            min="1"
+                            required
+                            name="amountOfItems"
+                            oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                            onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                            title=""
+                        >
                         <div class="input-group-append">
                             <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
-                                    +10
-                                </button>
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
-                                    +100
-                                </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.increaseAmount(10)"
+                            >
+                                +10
+                            </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.increaseAmount(100)"
+                            >
+                                +100
+                            </button>
                             <!-- /ko -->
                             <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(10)">
-                                    &times;10
-                                </button>
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(0.1)">
-                                    &div;10
-                                </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.multiplyAmount(10)"
+                            >
+                                &times;10
+                            </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.multiplyAmount(0.1)"
+                            >
+                                &div;10
+                            </button>
                             <!-- /ko -->
                             <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
-                                    +100
-                                </button>
-                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(1000)">
-                                    +1,000
-                                </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.increaseAmount(100)"
+                            >
+                                +100
+                            </button>
+                            <button
+                                class="btn btn-secondary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.increaseAmount(1000)"
+                            >
+                                +1,000
+                            </button>
                             <!-- /ko -->
-                            <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
+                            <button
+                                class="btn btn-primary smallButton smallFont"
+                                type="button"
+                                onclick="ShopHandler.maxAmount()"
+                            >
                                 Max
                             </button>
-                            <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}" onclick="ShopHandler.buyItem()">
+                            <button
+                                class="btn-outline-dark"
+                                data-bind="attr: {class: ShopHandler.calculateButtonCss()}"
+                                onclick="ShopHandler.buyItem()"
+                            >
                                 Buy
                             </button>
                         </div>

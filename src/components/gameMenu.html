@@ -1,5 +1,11 @@
-<div id="startMenu" class="dropdown clearfix" style="position:absolute; right:0; top:0; z-index: 100;">
-    <button class="btn btn-secondary mr-1 float-left" style="display: none;"
+<div
+    id="startMenu"
+    class="dropdown clearfix"
+    style="position:absolute; right:0; top:0; z-index: 100;"
+>
+    <button
+        class="btn btn-secondary mr-1 float-left"
+        style="display: none;"
         data-bind="visible: Settings.getSetting('disableAutoSave').observableValue,
             click: () => { Save.store(player) },
             tooltip: {
@@ -7,75 +13,162 @@
                 title: `Save the game.<br/>Shortcut: ${Settings.getSetting('hotkey.forceSave').prefix}${Settings.getSetting('hotkey.forceSave').observableValue()}`,
                 trigger: 'hover',
                 placement: 'bottom'
-            }">
-        <img src="assets/images/floppy-disk.svg" height="20px" width="20px" style="margin-top: -3px;">
+            }"
+    >
+        <img
+            src="assets/images/floppy-disk.svg"
+            height="20px"
+            width="20px"
+            style="margin-top: -3px;"
+        >
     </button>
-    <button class="btn btn-secondary mr-1 float-left"
-        data-bind="visible: Settings.getSetting('showMuteButton').observableValue(),
+    <button class="btn btn-secondary mr-1 float-left" data-bind="visible: Settings.getSetting('showMuteButton').observableValue(),
             click: () => { Settings.getSetting('sound.muted').toggle() },
             tooltip: { title: Settings.getSetting('sound.muted').observableValue() ? 'Click to unmute all sounds.' : 'Click to mute all sounds.', trigger: 'hover', placement: 'bottom' }">
-        <img src="assets/images/volume-high.svg" height="20px" width="20px" style="margin-top: -3px;"
-            data-bind="attr: { src: `assets/images/${Settings.getSetting('sound.muted').observableValue() ? 'volume-xmark' : 'volume-high'}.svg` }">
+        <img
+            src="assets/images/volume-high.svg"
+            height="20px"
+            width="20px"
+            style="margin-top: -3px;"
+            data-bind="attr: { src: `assets/images/${Settings.getSetting('sound.muted').observableValue() ? 'volume-xmark' : 'volume-high'}.svg` }"
+        >
     </button>
-    <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">
+    <button
+        class="btn btn-secondary dropdown-toggle float-right"
+        type="button"
+        data-toggle="dropdown"
+    >
         Start Menu
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
+            <a
+                class="dropdown-item"
+                href="#pokedexModal"
+                data-toggle="modal"
+            >Pokédex</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
+            <a
+                class="dropdown-item"
+                href="#showItemsModal"
+                data-toggle="modal"
+            >Items</a>
         </li>
         <li data-bind="attr: {  title: App.game.gems.canAccess() ? '' : 'Progress further to unlock...'}">
-            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.gems.openGemModal()},
-            attr: {class: App.game.gems.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}">Gems</a>
+            <a
+                class="dropdown-item"
+                href="#"
+                data-bind="click:function(){App.game.gems.openGemModal()},
+            attr: {class: App.game.gems.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}"
+            >Gems</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#profileModal" data-toggle="modal">Profile</a>
+            <a
+                class="dropdown-item"
+                href="#profileModal"
+                data-toggle="modal"
+            >Profile</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal">Badge Case</a>
+            <a
+                class="dropdown-item"
+                href="#badgeCaseModal"
+                data-toggle="modal"
+            >Badge Case</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
+            <a
+                class="dropdown-item"
+                href="#saveModal"
+                data-toggle="modal"
+            >Save</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#settingsModal" data-toggle="modal">Settings</a>
+            <a
+                class="dropdown-item"
+                href="#settingsModal"
+                data-toggle="modal"
+            >Settings</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#eventsModal" data-toggle="modal">Events</a>
+            <a
+                class="dropdown-item"
+                href="#eventsModal"
+                data-toggle="modal"
+            >Events</a>
         </li>
         <li>
-            <button class="dropdown-item" href="#statisticsModal" data-toggle="modal">Statistics</button>
+            <button
+                class="dropdown-item"
+                href="#statisticsModal"
+                data-toggle="modal"
+            >Statistics</button>
         </li>
         <li>
-            <a class="dropdown-item" href="#achievementsModal" data-toggle="modal" onclick="AchievementHandler.filterAchievementList(true);">Achievements</a>
+            <a
+                class="dropdown-item"
+                href="#achievementsModal"
+                data-toggle="modal"
+                onclick="AchievementHandler.filterAchievementList(true);"
+            >Achievements</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
+            <a
+                class="dropdown-item"
+                href="#logBookModal"
+                data-toggle="modal"
+            >Log Book</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#damageCalculatorModal" data-toggle="modal">Damage Calculator</a>
+            <a
+                class="dropdown-item"
+                href="#damageCalculatorModal"
+                data-toggle="modal"
+            >Damage Calculator</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#challengeModeModal" data-toggle="modal">Challenge Modes</a>
+            <a
+                class="dropdown-item"
+                href="#challengeModeModal"
+                data-toggle="modal"
+            >Challenge Modes</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#changelogModal" data-toggle="modal">Changelog</a>
+            <a
+                class="dropdown-item"
+                href="#changelogModal"
+                data-toggle="modal"
+            >Changelog</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#FAQModal" data-toggle="modal">FAQ</a>
+            <a
+                class="dropdown-item"
+                href="#FAQModal"
+                data-toggle="modal"
+            >FAQ</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#creditsModal" data-toggle="modal">Credits</a>
+            <a
+                class="dropdown-item"
+                href="#creditsModal"
+                data-toggle="modal"
+            >Credits</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#externalLinksModal" data-toggle="modal">External Links</a>
+            <a
+                class="dropdown-item"
+                href="#externalLinksModal"
+                data-toggle="modal"
+            >External Links</a>
         </li>
         <li>
-            <a class="dropdown-item" href="https://github.com/pokeclicker/pokeclicker/issues" target="_blank">Report a bug</a>
+            <a
+                class="dropdown-item"
+                href="https://github.com/pokeclicker/pokeclicker/issues"
+                target="_blank"
+            >Report a bug</a>
         </li>
 
     </ul>

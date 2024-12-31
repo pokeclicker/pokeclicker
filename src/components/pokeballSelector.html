@@ -1,17 +1,30 @@
-<div id="pokeballSelector" class="card sortable border-secondary mb-3" data-bind="visible: player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None">
-    <div class="card-header p-0" data-toggle="collapse" href="#pokeballSelectorBody">
+<div
+    id="pokeballSelector"
+    class="card sortable border-secondary mb-3"
+    data-bind="visible: player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None"
+>
+    <div
+        class="card-header p-0"
+        data-toggle="collapse"
+        href="#pokeballSelectorBody"
+    >
         <span>Poké Balls</span>
     </div>
     <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
-    <img class="clickable" src="assets/images/fa-cog.svg"
+    <img
+        class="clickable"
+        src="assets/images/fa-cog.svg"
         style="position: absolute; right: 20px; top: 0px; width: auto; height: 41px; padding: 8px; padding-right: 4px;"
         data-toggle="modal"
         href="#pokeballSelectorAdvModal"
-    />
+    >
     <!-- /ko -->
-    <button type="button" class="btn btn-info"
-            style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
-            data-bind="tooltip: { title: 'Select which Poké Ball to use on Pokémon depending on their status. Right click (or long press on mobile) can be used to toggle filter enabled/disabled.', trigger: 'hover', placement:'left' }">
+    <button
+        type="button"
+        class="btn btn-info"
+        style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
+        data-bind="tooltip: { title: 'Select which Poké Ball to use on Pokémon depending on their status. Right click (or long press on mobile) can be used to toggle filter enabled/disabled.', trigger: 'hover', placement:'left' }"
+    >
         ?
     </button>
     <div id="pokeballSelectorBody" class="card-body p-0 show">
@@ -36,10 +49,9 @@
                                     animation: false,
                                     html: true,
                                 }
-                            "></td>
+                            "></span></td>
                             <td>
-                                <img class="pokeball-small clickable"
-                                    data-bind="
+                                <img class="pokeball-small clickable" data-bind="
                                         attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.ball()] + '.svg'},
                                         css: { 'pokeball-selected': $data.enabled() },
                                         tooltip: {
@@ -48,8 +60,7 @@
                                             placement: 'right'
                                         },
                                         click: function() {App.game.pokeballs.selectedSelection($data.ball); App.game.pokeballs.selectedTitle($data.name); $('#pokeballSelectorModal').modal('show')}
-                                    "
-                                />
+                                    ">
                             </td>
                             <td data-bind="with: {
                                 count: App.game.pokeballs.getBallQuantity($data?.ball())

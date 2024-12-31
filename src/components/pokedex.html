@@ -1,5 +1,10 @@
-<div class="modal fade noselect" id="pokedexModal" tabindex="-1" role="dialog"
-aria-labelledby="pokedexModalLabel">
+<div
+    class="modal fade noselect"
+    id="pokedexModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="pokedexModalLabel"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-xl pokedex-modal" role="document">
         <div class="modal-content">
 
@@ -25,20 +30,35 @@ aria-labelledby="pokedexModalLabel">
                         <!-- /ko -->
                     </div>
                 </div>
-                <button type="button" class="btn btn-danger position-absolute" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
+                <button
+                    type="button"
+                    class="btn btn-danger position-absolute"
+                    data-dismiss="modal"
+                    style="right:0; top:0; font-size: 18px; font-weight: 700;"
+                >×</button>
             </div>
 
             <!-- ko let: { categoryModeEnabled: PokemonCategories.categoryAssignEnabled, categoryModeSelected: PokemonCategories.categoryAssignSelected } -->
             <div class="modal-body pt-0 overflow-hidden" style="background-color: inherit;">
                 <div class="row">
                     <div class="col-12 d-lg-none d-block">
-                        <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                                data-target="#pokedex-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
+                        <button
+                            class="w-100 my-1 btn btn-secondary"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#pokedex-filter-container"
+                            aria-expanded="false"
+                            aria-controls="pokedex-filter-container"
+                        >
                             Filters and Settings
                         </button>
                     </div>
                     <!-- Filters and Settings -->
-                    <div class="col-lg-3 col-12 collapse dont-collapse-lg" id="pokedex-filter-container" style="background-color: inherit; top: 0; z-index: 100;">
+                    <div
+                        class="col-lg-3 col-12 collapse dont-collapse-lg"
+                        id="pokedex-filter-container"
+                        style="background-color: inherit; top: 0; z-index: 100;"
+                    >
                         <div class="pokedex-border-bottom pt-2 d-lg-none d-block">
                             <h4>Filters and Settings</h4>
                         </div>
@@ -48,30 +68,42 @@ aria-labelledby="pokedexModalLabel">
                                     <!--Name or ID-->
                                     <div class="form-group col-lg-12 col-12">
                                         <label for="pokedex-filter-nameID">Name or ID</label>
-                                        <input id="pokedex-filter-nameID" class="form-control" placeholder="Bulbasaur or 1"
-                                            oninput="PokedexHelper.formatSearch(this.value)" data-bind="value: PokedexHelper.getSearchString()">
+                                        <input
+                                            id="pokedex-filter-nameID"
+                                            class="form-control"
+                                            placeholder="Bulbasaur or 1"
+                                            oninput="PokedexHelper.formatSearch(this.value)"
+                                            data-bind="value: PokedexHelper.getSearchString()"
+                                        >
                                     </div>
 
                                     <!--Types-->
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexType1Filter: Settings.getSetting('pokedexType1Filter') } -->
                                         <label>Types</label>
-                                        <select id="pokedex-filter-type1" class="custom-select" style="margin-right: 8px"
-                                                data-bind="options: pokedexType1Filter.options,
+                                        <select
+                                            id="pokedex-filter-type1"
+                                            class="custom-select"
+                                            style="margin-right: 8px"
+                                            data-bind="options: pokedexType1Filter.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: pokedexType1Filter.observableValue">
+                                                        value: pokedexType1Filter.observableValue"
+                                        >
                                         </select>
                                         <!-- /ko -->
                                     </div>
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexType2Filter: Settings.getSetting('pokedexType2Filter') } -->
                                         <label> </label>
-                                        <select id="pokedex-filter-type2" class="custom-select"
-                                                data-bind="options: pokedexType2Filter.options,
+                                        <select
+                                            id="pokedex-filter-type2"
+                                            class="custom-select"
+                                            data-bind="options: pokedexType2Filter.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: pokedexType2Filter.observableValue">
+                                                        value: pokedexType2Filter.observableValue"
+                                        >
                                         </select>
                                         <!-- /ko -->
                                     </div>
@@ -80,11 +112,15 @@ aria-labelledby="pokedexModalLabel">
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexRegionFilter: Settings.getSetting('pokedexRegionFilter') } -->
                                         <label for="pokedex-filter-region" data-bind="text: pokedexRegionFilter.displayName">Region</label>
-                                        <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
-                                                data-bind="options: pokedexRegionFilter.getValidOptions(),
+                                        <select
+                                            id="pokedex-filter-region"
+                                            class="custom-select"
+                                            style="margin-right: 8px"
+                                            data-bind="options: pokedexRegionFilter.getValidOptions(),
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
-                                                        value: pokedexRegionFilter.observableValue">
+                                                        value: pokedexRegionFilter.observableValue"
+                                        >
                                         </select>
                                         <!-- /ko -->
                                     </div>
@@ -94,10 +130,17 @@ aria-labelledby="pokedexModalLabel">
                                         <!-- ko let: { pokedexCategoryFilter: Settings.getSetting('pokedexCategoryFilter') } -->
                                         <label for="pokedex-filter-category" data-bind="text: pokedexCategoryFilter.displayName">Category</label>
                                         <div class="dropdown show">
-                                            <button id="pokedex-filter-category" type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            <button
+                                                id="pokedex-filter-category"
+                                                type="button"
+                                                class="text-left custom-select col-12 btn btn-dropdown"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
                                                 data-bind="text: pokedexCategoryFilter.observableValue() == -1 ? 'All'
                                                     : pokedexCategoryFilter.observableValue() == -2 ? 'Categorized'
-                                                    : PokemonCategories.categories().find(c => c.id == pokedexCategoryFilter.observableValue()).name()">
+                                                    : PokemonCategories.categories().find(c => c.id == pokedexCategoryFilter.observableValue()).name()"
+                                            >
                                                 Categories
                                             </button>
                                             <div class="border-secondary dropdown-menu col-12 category-dropdown">
@@ -114,7 +157,11 @@ aria-labelledby="pokedexModalLabel">
                                                 </div>
                                                 <!-- /ko-->
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                <a
+                                                    class="dropdown-item dropdown-text"
+                                                    href="#categoryModal"
+                                                    data-toggle="modal"
+                                                >
                                                     <i>Edit categories</i>
                                                 </a>
                                             </div>
@@ -125,11 +172,15 @@ aria-labelledby="pokedexModalLabel">
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexCaughtFilter: Settings.getSetting('pokedexCaughtFilter') } -->
                                         <label for="pokedex-filter-caught-status" data-bind="text: pokedexCaughtFilter.displayName">Caught Status</label>
-                                        <select id="pokedex-filter-caught-status" autocomplete="off" class="custom-select"
+                                        <select
+                                            id="pokedex-filter-caught-status"
+                                            autocomplete="off"
+                                            class="custom-select"
                                             data-bind="options: pokedexCaughtFilter.getValidOptions(),
                                                     optionsValue: 'value',
                                                     optionsText: 'text',
-                                                    value: pokedexCaughtFilter.observableValue">
+                                                    value: pokedexCaughtFilter.observableValue"
+                                        >
                                         </select>
                                         <!-- /ko -->
                                     </div>
@@ -137,11 +188,15 @@ aria-labelledby="pokedexModalLabel">
                                     <div class="form-group col-lg-6 col-6">
                                         <!-- ko let: { pokedexPokerusFilter: Settings.getSetting('pokedexPokerusFilter') } -->
                                         <label for="pokedex-filter-pokerus-status" data-bind="text: pokedexPokerusFilter.displayName">Pokérus Status</label>
-                                        <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select"
+                                        <select
+                                            id="pokedex-filter-pokerus-status"
+                                            autocomplete="off"
+                                            class="custom-select"
                                             data-bind="options: pokedexPokerusFilter.options,
                                                     optionsValue: 'value',
                                                     optionsText: 'text',
-                                                    value: pokedexPokerusFilter.observableValue">
+                                                    value: pokedexPokerusFilter.observableValue"
+                                        >
                                         </select>
                                         <!-- /ko -->
                                     </div>
@@ -151,11 +206,15 @@ aria-labelledby="pokedexModalLabel">
                                     <div class="form-group col-lg-12 col-12">
                                         <!-- ko let: { pokedexUniqueTransformationFilter: Settings.getSetting('pokedexUniqueTransformationFilter') } -->
                                         <label for="pokedex-filter-unique-transformation" data-bind="text: pokedexUniqueTransformationFilter.displayName">Unique Transformations</label>
-                                        <select id="pokedex-filter-unique-transformation" autocomplete="off" class="custom-select"
+                                        <select
+                                            id="pokedex-filter-unique-transformation"
+                                            autocomplete="off"
+                                            class="custom-select"
                                             data-bind="options: pokedexUniqueTransformationFilter.options,
                                                 optionsValue: 'value',
                                                 optionsText: 'text',
-                                                value: pokedexUniqueTransformationFilter.observableValue">
+                                                value: pokedexUniqueTransformationFilter.observableValue"
+                                        >
                                         </select>
                                         <!-- /ko -->
                                     </div>
@@ -166,15 +225,23 @@ aria-labelledby="pokedexModalLabel">
                                         <div class="form-group my-2">
                                             <!-- ko let: { pokedexHeldItemFilter: Settings.getSetting('pokedexHeldItemFilter') } -->
                                             <label for="pokedex-filter-held-item" data-bind="text: pokedexHeldItemFilter.displayName">Rare Held Item</label>
-                                            <span class="mx-1"
+                                            <span
+                                                class="mx-1"
                                                 data-bind="tooltip: {
                                                     title: 'Shows Pokémon with a chance to drop an item',
                                                     trigger: 'hover',
                                                     boundary: 'window'
-                                                }" data-original-title="" title="">ⓘ</span>
+                                                }"
+                                                data-original-title=""
+                                                title=""
+                                            >ⓘ</span>
                                             <label class="form-check-label toggler-wrapper style-1 float-right">
-                                                <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
-                                                    data-bind="checked: pokedexHeldItemFilter.observableValue">
+                                                <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    id="pokedex-filter-held-item"
+                                                    data-bind="checked: pokedexHeldItemFilter.observableValue"
+                                                >
                                                 <div class="toggler-slider">
                                                     <div class="toggler-knob"></div>
                                                 </div>
@@ -189,8 +256,12 @@ aria-labelledby="pokedexModalLabel">
                                             <!-- ko let: { pokedexHideAltFilter: Settings.getSetting('pokedexHideAltFilter') } -->
                                             <label for="pokedex-filter-hide-alternate" data-bind="text: pokedexHideAltFilter.displayName">Hide alternate forms</label>
                                             <label class="form-check-label toggler-wrapper style-1 float-right">
-                                                <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-alternate"
-                                                    data-bind="checked: pokedexHideAltFilter.observableValue">
+                                                <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    id="pokedex-filter-hide-alternate"
+                                                    data-bind="checked: pokedexHideAltFilter.observableValue"
+                                                >
                                                 <div class="toggler-slider">
                                                     <div class="toggler-knob"></div>
                                                 </div>
@@ -209,9 +280,14 @@ aria-labelledby="pokedexModalLabel">
                                             <!-- ko let: { partyHideShinySprites: Settings.getSetting('partyHideShinySprites') } -->
                                             <span data-bind="text: partyHideShinySprites.displayName">Hide party shiny sprites</span>
                                             <label class="form-check-label toggler-wrapper style-1 float-right">
-                                                <input class="form-check-input" type="checkbox" id="pokedex-hide-shiny-sprites-checkbox"
-                                                    value="false" data-bind="checked: partyHideShinySprites.observableValue"
-                                                    onchange="Settings.setSettingByName('partyHideShinySprites', this.checked)">
+                                                <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    id="pokedex-hide-shiny-sprites-checkbox"
+                                                    value="false"
+                                                    data-bind="checked: partyHideShinySprites.observableValue"
+                                                    onchange="Settings.setSettingByName('partyHideShinySprites', this.checked)"
+                                                >
                                                 <div class="toggler-slider">
                                                     <div class="toggler-knob"></div>
                                                 </div>
@@ -226,9 +302,14 @@ aria-labelledby="pokedexModalLabel">
                                             <!-- ko let: { partyShowShadowSprites: Settings.getSetting('partyShowPurifiedShadowSprites') } -->
                                             <span data-bind="text: partyShowShadowSprites.displayName">Show party shadow sprites</span>
                                             <label class="form-check-label toggler-wrapper style-1 float-right">
-                                                <input class="form-check-input" type="checkbox" id="pokedex-show-shadow-sprites-checkbox"
-                                                    value="false" data-bind="checked: partyShowShadowSprites.observableValue"
-                                                    onchange="Settings.setSettingByName('partyShowPurifiedShadowSprites', this.checked)">
+                                                <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    id="pokedex-show-shadow-sprites-checkbox"
+                                                    value="false"
+                                                    data-bind="checked: partyShowShadowSprites.observableValue"
+                                                    onchange="Settings.setSettingByName('partyShowPurifiedShadowSprites', this.checked)"
+                                                >
                                                 <div class="toggler-slider" data-bind="tooltip: {
                                                     html: true,
                                                     title: `Display all purified Pokémon with their shadow sprites.`,
@@ -248,14 +329,18 @@ aria-labelledby="pokedexModalLabel">
                                     <!-- Category Mode -->
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-primary btn-block" data-bind="
+                                            <button
+                                                type="button"
+                                                class="btn btn-primary btn-block"
+                                                data-bind="
                                                 click: () => categoryModeEnabled(!categoryModeEnabled()),
                                                 text: categoryModeEnabled() ? 'Disable Category Mode' : 'Enable Category Mode',
                                                 tooltip: {
                                                     title: 'Use Category Mode to quickly assign and remove Pokémon from categories. Select a category then click the desired Pokémon to add or remove.',
                                                     placement: 'top',
                                                     trigger: 'hover'
-                                                }">
+                                                }"
+                                            >
                                                 Enable Category Mode
                                             </button>
                                         </div>
@@ -265,8 +350,14 @@ aria-labelledby="pokedexModalLabel">
                                         <div class="form-group mb-1">
                                             <label>Selected Category</label>
                                             <div class="dropdown show">
-                                                <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                    data-bind="text: PokemonCategories.categories().find(c => c.id == categoryModeSelected()).name()">
+                                                <button
+                                                    type="button"
+                                                    class="text-left custom-select col-12 btn btn-dropdown"
+                                                    data-toggle="dropdown"
+                                                    aria-haspopup="true"
+                                                    aria-expanded="false"
+                                                    data-bind="text: PokemonCategories.categories().find(c => c.id == categoryModeSelected()).name()"
+                                                >
                                                     Select A Category
                                                 </button>
                                                 <div class="border-secondary dropdown-menu col-12 category-dropdown" data-bind="foreach: PokemonCategories.categories">
@@ -279,21 +370,29 @@ aria-labelledby="pokedexModalLabel">
                                         </div>
                                     </div>
                                     <div class="form-group col-6">
-                                        <button type="button" class="btn btn-success btn-block" data-bind="tooltip: {
+                                        <button
+                                            type="button"
+                                            class="btn btn-success btn-block"
+                                            data-bind="tooltip: {
                                             title: 'Add all Pokémon matching the current filters to this category.',
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         },
-                                        click: () => PartyController.addCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected())">Add All</button>
+                                        click: () => PartyController.addCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected())"
+                                        >Add All</button>
                                     </div>
                                     <div class="form-group col-6">
-                                        <button type="button" class="btn btn-danger btn-block" data-bind="tooltip: {
+                                        <button
+                                            type="button"
+                                            class="btn btn-danger btn-block"
+                                            data-bind="tooltip: {
                                             title: 'Remove all Pokémon matching the current filters from this category.',
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         },
                                         disable: categoryModeSelected() === 0,
-                                        click: () => PartyController.removeCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected())">Remove All</button>
+                                        click: () => PartyController.removeCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected())"
+                                        >Remove All</button>
                                     </div>
                                     <!-- /ko -->
                                 </div>
@@ -327,24 +426,53 @@ aria-labelledby="pokedexModalLabel">
                                         css: { 'category-highlight': categoryModeEnabled() && App.game.party.getPokemon($data.id)?.category.includes(categoryModeSelected()) }">
                                         <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
                                         <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
-                                            <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
+                                            <img
+                                                width="18px"
+                                                src=""
+                                                data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"
+                                            >
                                         </div>
                                         <!-- ko if: App.game.party.alreadyCaughtPokemonByName(name) -->
-                                            <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
-                                                <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`}"/>
-                                            </div>
-                                            <!-- ko if: PokemonHelper.hasMegaEvolution($data.name) -->
-                                            <knockout data-bind="foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone))">
-                                                <img width="20px" style="position: absolute; top: 4px;"
-                                                    data-bind="attr: { src: $data.image }, style: { right: `${1 + 17 * $index()}px` }"/>
-                                            </knockout>
-                                            <!-- /ko -->
-                                            <img style="position: absolute; top: 24px; right: 0px;" class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Shadow"/>
-                                            <img style="position: absolute; top: 24px; right: 0px;" class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Purified"/>
+                                        <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
+                                            <img
+                                                width="32px"
+                                                src=""
+                                                data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`}"
+                                            >
+                                        </div>
+                                        <!-- ko if: PokemonHelper.hasMegaEvolution($data.name) -->
+                                        <knockout data-bind="foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone))">
+                                            <img
+                                                width="20px"
+                                                style="position: absolute; top: 4px;"
+                                                data-bind="attr: { src: $data.image }, style: { right: `${1 + 17 * $index()}px` }"
+                                            >
+                                        </knockout>
                                         <!-- /ko -->
-                                        <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id)}">
+                                        <img
+                                            style="position: absolute; top: 24px; right: 0px;"
+                                            class="shadow-icon"
+                                            src="assets/images/status/shadow.svg"
+                                            data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Shadow"
+                                        >
+                                        <img
+                                            style="position: absolute; top: 24px; right: 0px;"
+                                            class="shadow-icon"
+                                            src="assets/images/status/purified.svg"
+                                            data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Purified"
+                                        >
+                                        <!-- /ko -->
+                                        <img
+                                            src=""
+                                            class="pokedex-pokemon-sprite"
+                                            data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id)}"
+                                        >
                                         <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
-                                            <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="
+                                        <a
+                                            class="overlay"
+                                            href="#pokemonStatisticsModal"
+                                            data-toggle="modal"
+                                            data-bind="
                                                 click: (_, event) => {
                                                     if (categoryModeEnabled()) {
                                                         App.game.party.getPokemon($data.id)?.toggleCategory(categoryModeSelected());
@@ -369,61 +497,84 @@ aria-labelledby="pokedexModalLabel">
                                                             : ''),
                                                     trigger: 'hover',
                                                     placement:'bottom'
-                                                }"></a>
+                                                }"
+                                        ></a>
 
-                                            <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokemonHelper.displayName($data.name),
+                                        <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokemonHelper.displayName($data.name),
                                                 tooltip: {
                                                     title: categoryModeEnabled() ? '' : PokemonHelper.displayName($data.name),
                                                     trigger: 'hover',
                                                     placement: 'bottom'
                                                 }">name</span>
 
-                                            <!-- Category Button -->
-                                            <!-- ko if: App.game.party.alreadyCaughtPokemonByName($data.name) -->
-                                            <div class="pokemonCategory dropdown" data-bind="let: { pokemon: App.game.party.getPokemon($data.id) }">
-                                                <div data-toggle="dropdown" style="height: 15px;">
-                                                    <!-- Limit category display to 12 for UI purposes -->
-                                                    <div class="d-flex position-relative category-display" data-bind="foreach: pokemon.category.slice(0, 12)">
-                                                        <button data-bind="class: `category-${$data + 1}`"></button>
-                                                    </div>
+                                        <!-- Category Button -->
+                                        <!-- ko if: App.game.party.alreadyCaughtPokemonByName($data.name) -->
+                                        <div class="pokemonCategory dropdown" data-bind="let: { pokemon: App.game.party.getPokemon($data.id) }">
+                                            <div data-toggle="dropdown" style="height: 15px;">
+                                                <!-- Limit category display to 12 for UI purposes -->
+                                                <div class="d-flex position-relative category-display" data-bind="foreach: pokemon.category.slice(0, 12)">
+                                                    <button data-bind="class: `category-${$data + 1}`"></button>
                                                 </div>
-                                                <div class="border-secondary dropdown-menu multiselect-dropdown category-dropdown px-1">
-                                                    <div class="form-check d-flex align-items-center", data-bind="with: PokemonCategories.categories().find(c => c.id === 0), as: 'pokemonCategory'">
-                                                        <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
-                                                            data-bind="attr: { id: `${$parent.id}-category0` },
+                                            </div>
+                                            <div class="border-secondary dropdown-menu multiselect-dropdown category-dropdown px-1">
+                                                <div
+                                                    class="form-check d-flex align-items-center"
+                                                    ,
+                                                    data-bind="with: PokemonCategories.categories().find(c => c.id === 0), as: 'pokemonCategory'"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        class="form-check-input mt-0"
+                                                        style="cursor: pointer;"
+                                                        data-bind="attr: { id: `${$parent.id}-category0` },
                                                                 checked: pokemon.isUncategorized,
                                                                 disable: pokemon.isUncategorized,
-                                                                click: () => { pokemon.resetCategory(); return true; }">
-                                                        <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
-                                                            data-bind="
+                                                                click: () => { pokemon.resetCategory(); return true; }"
+                                                    >
+                                                    <label
+                                                        class="form-check-label text-truncate w-100 p-1"
+                                                        style="max-width: 200px; cursor: pointer;"
+                                                        data-bind="
                                                                 text: pokemonCategory.name,
                                                                 attr: { for: `${$parent.id}-category0` },
                                                                 style: { color: GameHelper.isColorLight(pokemonCategory.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight(pokemonCategory.color()) ? 'white' : 'black'}` }"
-                                                            onclick="event.stopPropagation();"></label>
-                                                    </div>
-                                                    <div class="dropdown-divider"></div>
-                                                    <!-- ko foreach: { data: PokemonCategories.playerCategories, as: 'pokemonCategory' } -->
-                                                    <div class="form-check d-flex align-items-center">
-                                                        <input type="checkbox" class="form-check-input mt-0" style="cursor: pointer;"
-                                                            data-bind="
+                                                        onclick="event.stopPropagation();"
+                                                    ></label>
+                                                </div>
+                                                <div class="dropdown-divider"></div>
+                                                <!-- ko foreach: { data: PokemonCategories.playerCategories, as: 'pokemonCategory' } -->
+                                                <div class="form-check d-flex align-items-center">
+                                                    <input
+                                                        type="checkbox"
+                                                        class="form-check-input mt-0"
+                                                        style="cursor: pointer;"
+                                                        data-bind="
                                                                 attr: { id: `${$parent.id}-category${pokemonCategory.id}` },
                                                                 checked: pokemon._category,
-                                                                checkedValue: pokemonCategory.id">
-                                                        <label class="form-check-label text-truncate w-100 p-1" style="max-width: 200px; cursor: pointer;"
-                                                            data-bind="
+                                                                checkedValue: pokemonCategory.id"
+                                                    >
+                                                    <label
+                                                        class="form-check-label text-truncate w-100 p-1"
+                                                        style="max-width: 200px; cursor: pointer;"
+                                                        data-bind="
                                                                 text: pokemonCategory.name,
                                                                 attr: { for: `${$parent.id}-category${pokemonCategory.id}` },
                                                                 style: { color: GameHelper.isColorLight(pokemonCategory.color()) ? 'black' : 'white', background: pokemonCategory.color, 'text-shadow': `0 0 6px ${GameHelper.isColorLight(pokemonCategory.color()) ? 'white' : 'black'}` }"
-                                                            onclick="event.stopPropagation();"></label>
-                                                    </div>
-                                                    <!-- /ko -->
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
-                                                        <i>Edit categories</i>
-                                                    </a>
+                                                        onclick="event.stopPropagation();"
+                                                    ></label>
                                                 </div>
+                                                <!-- /ko -->
+                                                <div class="dropdown-divider"></div>
+                                                <a
+                                                    class="dropdown-item dropdown-text"
+                                                    href="#categoryModal"
+                                                    data-toggle="modal"
+                                                >
+                                                    <i>Edit categories</i>
+                                                </a>
                                             </div>
-                                            <!-- /ko -->
+                                        </div>
+                                        <!-- /ko -->
                                         <!-- /ko -->
                                     </li>
                                 </ul>
@@ -435,9 +586,9 @@ aria-labelledby="pokedexModalLabel">
             </div>
             <!-- /ko -->
             <!--
-            <div class="modal-footer">
+                <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
+                </div>
             -->
         </div>
     </div>

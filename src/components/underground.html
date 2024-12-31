@@ -1,25 +1,59 @@
-<div aria-labelledby="myModalLabel" class="modal fade noselect" id="mineModal" role="dialog"
-     style="cursor:default" tabindex="-1">
+<div
+    aria-labelledby="myModalLabel"
+    class="modal fade noselect"
+    id="mineModal"
+    role="dialog"
+    style="cursor:default"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Helpers</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
-                    <li class="d-block"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link active"
+                            href="#dig"
+                        >Dig</a></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link"
+                            href="#treasures"
+                        >Treasures</a></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link"
+                            href="#undergroundHelpers"
+                        >Helpers</a></li>
+                    <li class="nav-item"><a
+                            data-toggle="tab"
+                            class="nav-link"
+                            href="#help"
+                        >Help</a></li>
+                    <li class="d-block"><button
+                            type="button"
+                            class="btn btn-danger"
+                            data-dismiss="modal"
+                            style="font-size: 18px; font-weight: 700;"
+                        >×</button></li>
                 </ul>
             </div>
             <div class="modal-body tab-content p-0">
-                <div id="dig" class="tab-pane fade in active show" data-bind="">
+                <div
+                    id="dig"
+                    class="tab-pane fade in active show"
+                    data-bind=""
+                >
                     <div class="container">
                         <div class="row p-2">
                             <div class="col-6 p-0 d-flex">
                                 <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
 
                                 <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
-                                <button class="btn btn-danger p-2" style="min-width: 36px;" data-bind="
+                                <button
+                                    class="btn btn-danger p-2"
+                                    style="min-width: 36px;"
+                                    data-bind="
                                     text: `↻ ${autoRestartUndergroundMine.observableValue() ? 'On' : 'Off'}`,
                                     css: {
                                         'btn-danger': !autoRestartUndergroundMine.observableValue(),
@@ -30,7 +64,8 @@
                                         trigger: 'hover',
                                         placement:'right'
                                     },
-                                    click: () => autoRestartUndergroundMine.observableValue(!autoRestartUndergroundMine.observableValue())"></button>
+                                    click: () => autoRestartUndergroundMine.observableValue(!autoRestartUndergroundMine.observableValue())"
+                                ></button>
                                 <!-- /ko -->
                             </div>
 
@@ -39,10 +74,14 @@
                                     trigger: 'hover'
                                 }">
                                 <div>Lvl. <knockout data-bind="text: App.game.underground.undergroundLevel"></knockout></div>
-                                <div class="progress" style='height: 5px'>
-                                    <div class="progress-bar bg-info" role="progressbar"
-                                         data-bind="attr:{ style: 'width:' + App.game.underground.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
-                                         aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress" style="height: 5px">
+                                    <div
+                                        class="progress-bar bg-info"
+                                        role="progressbar"
+                                        data-bind="attr:{ style: 'width:' + App.game.underground.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                    >
                                     </div>
                                 </div>
                             </div>
@@ -75,15 +114,18 @@
 
                         <!-- ko if: App.game.underground.mine -->
                         <div style="position: relative;">
-                            <div id="mineBody" style="margin:auto; background-image: url('assets/images/underground/rock0.png');"
-                                 data-bind="css: {
+                            <div
+                                id="mineBody"
+                                style="margin:auto; background-image: url('assets/images/underground/rock0.png');"
+                                data-bind="css: {
                                     'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
                                     'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durability < App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durabilityPerUse
                                  },
                                  class: `${UndergroundToolType[App.game.underground.tools.selectedToolType]}Selected`,
                                  style: {
                                     backgroundSize: `calc(100% / ${App.game.underground.mine?.columnCount})`,
-                                 }">
+                                 }"
+                            >
                                 <!-- ko foreach: App.game.underground.mine.grid -->
                                 <div class="mineSquare" data-bind="event: { mousedown: () => UndergroundController.clickModalMineSquare($index()) }">
                                     <div class="rock" data-bind="class: `rock${$data.layerDepth}`, style: UndergroundController.calculateMineTileStyle($index())"></div>
@@ -98,10 +140,14 @@
                             <!-- ko if: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
                             <div style="position: absolute; inset: 20%; display: grid; align-content: center;">
                                 <div>Searching for mine</div>
-                                <div class="progress" style='height: 5px'>
-                                    <div class="progress-bar bg-info" role="progressbar"
-                                         data-bind="attr:{ style: 'width:' + (1 - App.game.underground.mine.timeUntilDiscovery / App.game.underground.mine.initialTimeToDiscover).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
-                                         aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress" style="height: 5px">
+                                    <div
+                                        class="progress-bar bg-info"
+                                        role="progressbar"
+                                        data-bind="attr:{ style: 'width:' + (1 - App.game.underground.mine.timeUntilDiscovery / App.game.underground.mine.initialTimeToDiscover).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                    >
                                     </div>
                                 </div>
                                 <div data-bind="text: GameConstants.formatTime(App.game.underground.mine.timeUntilDiscovery)"></div>
@@ -116,7 +162,7 @@
                             <!-- /ko -->
                         </div>
 
-                        <div class='row no-gutters'>
+                        <div class="row no-gutters">
                             <div class="col-12 row no-gutters">
                                 <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
                                 <!-- ko let: { tool: App.game.underground.tools.getTool($data) } -->
@@ -139,19 +185,29 @@
 
                                         <div class="text-center text-light bg-dark p-1"><h6 class="m-0 small">Repair</h6></div>
                                         <!-- ko if: tool.restoreRate > 0 -->
-                                        <div class="progress" style='height: 10px; min-height: 10px;'>
-                                            <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
-                                                 data-bind="style: { 'width': (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                                                 aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress" style="height: 10px; min-height: 10px;">
+                                            <div
+                                                class="progress-bar"
+                                                role="progressbar"
+                                                style="background: var(--tool-color)"
+                                                data-bind="style: { 'width': (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"
+                                            >
                                             </div>
                                         </div>
                                         <div class="small"><knockout data-bind="text: (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                         <!-- /ko -->
                                         <!-- ko ifnot: tool.restoreRate > 0 -->
-                                        <div class="progress" style='height: 10px; min-height: 10px;'>
-                                            <div class="progress-bar progress-bar-animated" role="progressbar" style="background: linear-gradient(45deg,var(--tool-color) 25%,transparent 25%,transparent 50%,var(--tool-color) 50%,var(--tool-color) 75%,transparent 75%,transparent); background-size: 1rem 1rem;"
-                                                 data-bind="style: { 'width': '100%' }"
-                                                 aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress" style="height: 10px; min-height: 10px;">
+                                            <div
+                                                class="progress-bar progress-bar-animated"
+                                                role="progressbar"
+                                                style="background: linear-gradient(45deg,var(--tool-color) 25%,transparent 25%,transparent 50%,var(--tool-color) 50%,var(--tool-color) 75%,transparent 75%,transparent); background-size: 1rem 1rem;"
+                                                data-bind="style: { 'width': '100%' }"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"
+                                            >
                                             </div>
                                         </div>
                                         <div class="small">∞</div>
@@ -170,15 +226,23 @@
                         <div class="card">
                             <div class="card-header p-2 font-weight-bold position-relative">
                                 Battery
-                                <button class="btn btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 100%;" data-bind="click: () => $('#undergroundBatteryModal').modal('show');">?</button>
+                                <button
+                                    class="btn btn-primary"
+                                    style="position: absolute; right: 0px; top: 0px; width: auto; height: 100%;"
+                                    data-bind="click: () => $('#undergroundBatteryModal').modal('show');"
+                                >?</button>
                             </div>
 
                             <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
                             <div class="card-body p-2">
-                                <div class="progress mb-2" style='height: 15px; min-height: 15px;'>
-                                    <div class="progress-bar" role="progressbar"
-                                         data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                                         aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress mb-2" style="height: 15px; min-height: 15px;">
+                                    <div
+                                        class="progress-bar"
+                                        role="progressbar"
+                                        data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                    >
                                         <span data-bind="text: `${App.game.underground.battery.charges} / ${App.game.underground.battery.maxCharges}`"></span>
                                     </div>
                                 </div>
@@ -208,8 +272,10 @@
                             <div class="row justify-content-center">
                                 <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === $data) -->
                                 <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                    <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                            data-bind="
+                                    <div
+                                        class="btn btn-secondary text-left w-100 px-1"
+                                        style="padding-top: 1px; padding-bottom: 2px;"
+                                        data-bind="
                                             css: { 'bg-info': UndergroundTrading.selectedTradeFromItem === $data },
                                             style: { cursor: $data.valueType === UndergroundItemValueType.Special ? 'default' : 'pointer' },
                                             template: { name: 'otherItemTemplate', data: $data.itemName },
@@ -220,7 +286,8 @@
                                                     $('#treasureDetailModal').modal('show');
                                                 }
                                             }
-                                            ">
+                                            "
+                                    >
                                     </div>
                                 </div>
                                 <!-- /ko -->
@@ -231,7 +298,11 @@
                 </div>
 
                 <div id="undergroundHelpers" class="tab-pane fade">
-                    <div class="row m-0 justify-content-start" data-bind="foreach: App.game.underground.helpers.available()" style="max-width: 100%;">
+                    <div
+                        class="row m-0 justify-content-start"
+                        data-bind="foreach: App.game.underground.helpers.available()"
+                        style="max-width: 100%;"
+                    >
                         <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
                             <h5 class="card-header">
                                 <knockout data-bind="text: $data.name">Name</knockout>
@@ -239,86 +310,107 @@
                             <div class="card-body p-0">
                                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                                     <thead>
-                                    <tr>
-                                        <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Information</h5></th>
-                                    </tr>
+                                        <tr>
+                                            <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Information</h5></th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-left">Level</td>
-                                        <td class="text-right tight" data-bind="text: $data.level.toLocaleString('en-US')"></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <div class="progress" style='height: 5px'>
-                                                <div class="progress-bar bg-info" role="progressbar"
-                                                     data-bind="style: { 'width': $data.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
-                                                     aria-valuemin="0" aria-valuemax="100">
-                                                    <span data-bind="text: `${($data.experience - UndergroundHelper.convertLevelToExperience($data.level)).toLocaleString('en-US')} / ${(UndergroundHelper.convertLevelToExperience($data.level + 1) - UndergroundHelper.convertLevelToExperience($data.level)).toLocaleString('en-US')}`"></span>
+                                        <tr>
+                                            <td class="text-left">Level</td>
+                                            <td class="text-right tight" data-bind="text: $data.level.toLocaleString('en-US')"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="progress" style="height: 5px">
+                                                    <div
+                                                        class="progress-bar bg-info"
+                                                        role="progressbar"
+                                                        data-bind="style: { 'width': $data.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
+                                                        aria-valuemin="0"
+                                                        aria-valuemax="100"
+                                                    >
+                                                        <span data-bind="text: `${($data.experience - UndergroundHelper.convertLevelToExperience($data.level)).toLocaleString('en-US')} / ${(UndergroundHelper.convertLevelToExperience($data.level + 1) - UndergroundHelper.convertLevelToExperience($data.level)).toLocaleString('en-US')}`"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">Favorite mine</td>
-                                        <td class="text-right tight" data-bind="text: UndergroundController.getMineConfig($data.favoriteMine).displayName"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">Discover chance</td>
-                                        <td class="text-right tight" data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">Look for favorite</td>
-                                        <td class="text-center tight align-middle">
-                                            <input class="clickable" type="checkbox" data-bind="checked: $data.shouldDiscoverFavorite"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">Smart tool use</td>
-                                        <td class="text-right tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">Reward retention</td>
-                                        <td class="text-right tight" data-bind="text: $data.rewardRetention.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">Auto-sell</td>
-                                        <td class="text-center tight align-middle">
-                                            <!-- ko if: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
-                                            <input class="clickable" type="checkbox" data-bind="checked: $data.autoSellToggle">
-                                            <!-- /ko -->
-                                            <!-- ko ifnot: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
-                                            <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Favorite mine</td>
+                                            <td class="text-right tight" data-bind="text: UndergroundController.getMineConfig($data.favoriteMine).displayName"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Discover chance</td>
+                                            <td class="text-right tight" data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Look for favorite</td>
+                                            <td class="text-center tight align-middle">
+                                                <input
+                                                    class="clickable"
+                                                    type="checkbox"
+                                                    data-bind="checked: $data.shouldDiscoverFavorite"
+                                                >
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Smart tool use</td>
+                                            <td class="text-right tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Reward retention</td>
+                                            <td class="text-right tight" data-bind="text: $data.rewardRetention.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Auto-sell</td>
+                                            <td class="text-center tight align-middle">
+                                                <!-- ko if: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
+                                                <input
+                                                    class="clickable"
+                                                    type="checkbox"
+                                                    data-bind="checked: $data.autoSellToggle"
+                                                >
+                                                <!-- /ko -->
+                                                <!-- ko ifnot: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
+                                                <img
+                                                    width="24px"
+                                                    class="lock"
+                                                    src="assets/images/breeding/lock.svg"
+                                                    data-bind="
                                             tooltip: {
                                                 title: `Unlocked when ${$data.name} reaches level ${GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT}`,
                                                 placement: 'bottom',
                                                 trigger: 'hover'
-                                            }" />
-                                            <!-- /ko -->
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">Work cycle</td>
-                                        <td class="text-right tight" data-bind="text: `${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></td>
-                                    </tr>
+                                            }"
+                                                >
+                                                <!-- /ko -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Work cycle</td>
+                                            <td class="text-right tight" data-bind="text: `${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></td>
+                                        </tr>
                                     </tbody>
 
                                     <thead>
-                                    <tr>
-                                        <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Energy Restore</h5></th>
-                                    </tr>
+                                        <tr>
+                                            <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Energy Restore</h5></th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td colspan="2">
-                                            <div class="input-group input-group-sm">
-                                                <select autocomplete="off" class="custom-select" data-bind="options: [
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="input-group input-group-sm">
+                                                    <select
+                                                        autocomplete="off"
+                                                        class="custom-select"
+                                                        data-bind="options: [
                                                     { name: 'None', value: -1 },
                                                     ...GameHelper.enumSelectOption(GameConstants.EnergyRestoreSize),
-                                                ], optionsValue: 'value', optionsText: (item) => item.value < 0 ? `${GameConstants.camelCaseToString(item.name)}` : `${GameConstants.camelCaseToString(item.name)} (${player.itemList[item.name]().toLocaleString('en-US')})`, value: $data.selectedEnergyRestore"></select>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                ], optionsValue: 'value', optionsText: (item) => item.value < 0 ? `${GameConstants.camelCaseToString(item.name)}` : `${GameConstants.camelCaseToString(item.name)} (${player.itemList[item.name]().toLocaleString('en-US')})`, value: $data.selectedEnergyRestore"
+                                                    ></select>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -344,7 +436,7 @@
 
                             <h4>Finding a new mine</h4>
                             <p>
-                                A new mine can be manually found by clicking the Find mine button in the Dig tab.<br/>
+                                A new mine can be manually found by clicking the Find mine button in the Dig tab.<br>
                                 Automatically starting a new mine happens in the following cases:
                             </p>
                             <ul>
@@ -390,7 +482,7 @@
                                     <strong>Random Mine Type</strong>
                                     <ul>
                                         <li>
-                                            Current mine is a Random mine:<br/>
+                                            Current mine is a Random mine:<br>
                                             The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>. This is then further reduced by the percentage of the amount of unmined tiles divided by all tiles only taking into account tiles that do contain a reward.
                                         </li>
                                         <li>Current mine is not a random mine: No discovery time</li>
@@ -620,10 +712,14 @@
                                 <span data-bind="text: ` using ${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></span>
                                 <!-- /ko -->
                             </div>
-                            <div class="progress" style='height: 5px'>
-                                <div class="progress-bar bg-info" role="progressbar"
-                                     data-bind="attr:{ style: 'width:' + ($data.timeSinceWork / $data.workCycleTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                                     aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress" style="height: 5px">
+                                <div
+                                    class="progress-bar bg-info"
+                                    role="progressbar"
+                                    data-bind="attr:{ style: 'width:' + ($data.timeSinceWork / $data.workCycleTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                >
                                     <span data-bind="text: `${$data.timeSinceWork.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} / ${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} s`"></span>
                                 </div>
                             </div>
@@ -636,7 +732,14 @@
     </div>
 </div>
 
-<div aria-labelledby="findNewMineModalLabel" class="modal fade no-select" id="findNewMineModal" role="dialog" style="cursor: default;" tabindex="-1">
+<div
+    aria-labelledby="findNewMineModalLabel"
+    class="modal fade no-select"
+    id="findNewMineModal"
+    role="dialog"
+    style="cursor: default;"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -664,7 +767,11 @@
                         <h6>Potential treasures</h6>
                         <div>
                             <!-- ko foreach: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).getAvailableItems() -->
-                            <img width="24px" height="24px" data-bind="tooltip: { title: $data.displayName, trigger: 'hover' }, attr: { src: $data.image }" />
+                            <img
+                                width="24px"
+                                height="24px"
+                                data-bind="tooltip: { title: $data.displayName, trigger: 'hover' }, attr: { src: $data.image }"
+                            >
                             <!-- /ko -->
                         </div>
                     </div>
@@ -674,7 +781,11 @@
                             Discovery time: <label data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType)), css: { 'text-warning': UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType) > 0 }"></label>
                         </div>
 
-                        <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);" data-dismiss="modal">Search for mine</button>
+                        <button
+                            class="btn btn-primary"
+                            data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);"
+                            data-dismiss="modal"
+                        >Search for mine</button>
                     </div>
                 </div>
 
@@ -682,8 +793,12 @@
                     <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
                     <label for="auto-restart-underground-mine" data-bind="text: autoRestartUndergroundMine.displayName"></label>
                     <label class="form-check-label toggler-wrapper style-1 float-right">
-                        <input class="form-check-input" type="checkbox" id="auto-restart-underground-mine"
-                               data-bind="checked: autoRestartUndergroundMine.observableValue">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="auto-restart-underground-mine"
+                            data-bind="checked: autoRestartUndergroundMine.observableValue"
+                        >
                         <div class="toggler-slider">
                             <div class="toggler-knob"></div>
                         </div>
@@ -693,24 +808,35 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
 
     </div>
 </div>
 
-<div aria-labelledby="treasureDetailModalLabel" class="modal fade no-select" id="treasureDetailModal" role="dialog" style="cursor: default;" tabindex="-1">
+<div
+    aria-labelledby="treasureDetailModalLabel"
+    class="modal fade no-select"
+    id="treasureDetailModal"
+    role="dialog"
+    style="cursor: default;"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header align-items-center">
                 <!-- ko if: UndergroundTrading.selectedTradeFromItem -->
-                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                <img class="mineInventoryItem" data-bind="attr: {src: UndergroundTrading.selectedTradeFromItem.image }">
                 <div>
                     <h4 class="m-0" data-bind="text: UndergroundTrading.selectedTradeFromItem.name"></h4>
                     <small class="m-0" data-bind="text: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US')"></small>
                 </div>
-                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                <img class="mineInventoryItem" data-bind="attr: {src: UndergroundTrading.selectedTradeFromItem.image }">
                 <!-- /ko -->
             </div>
 
@@ -728,14 +854,14 @@
                             </div>
                             <div class="col-12 col-lg-6">
                                 <label data-bind="text: UndergroundTrading.selectedTradeFromItem.name"></label>
-                                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                                <img class="mineInventoryItem" data-bind="attr: {src: UndergroundTrading.selectedTradeFromItem.image }">
                                 →
                                 <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Gem -->
-                                <img class='mineInventoryItem' data-bind='attr: { src: Gems.image(UndergroundTrading.selectedTradeFromItem.type) }'/>
+                                <img class="mineInventoryItem" data-bind="attr: { src: Gems.image(UndergroundTrading.selectedTradeFromItem.type) }">
                                 <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × ${PokemonType[UndergroundTrading.selectedTradeFromItem.type]} Gems`"></label>
                                 <!-- /ko -->
                                 <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Diamond -->
-                                <img class='mineInventoryItem' src="assets/images/currency/diamond.svg"/>
+                                <img class="mineInventoryItem" src="assets/images/currency/diamond.svg">
                                 <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × Diamonds`"></label>
                                 <!-- /ko -->
                             </div>
@@ -751,49 +877,91 @@
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.sellAmount = 1">Reset</button>
 
-                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        class="outline-dark form-control form-control-number"
+                                        data-bind="textInput: UndergroundTrading.sellAmount"
+                                    >
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 10">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.sellAmount += 10"
+                                    >
                                         +10
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 100">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.sellAmount += 100"
+                                    >
                                         +100
                                     </button>
                                     <!-- /ko -->
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount *= 10">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.sellAmount *= 10"
+                                    >
                                         &times;10
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount /= 10">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.sellAmount /= 10"
+                                    >
                                         &div;10
                                     </button>
                                     <!-- /ko -->
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 100">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.sellAmount += 100"
+                                    >
                                         +100
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 1000">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.sellAmount += 1000"
+                                    >
                                         +1,000
                                     </button>
                                     <!-- /ko -->
 
-                                    <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <button
+                                        class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                    ></button>
                                     <div class="dropdown-menu text-center p-0">
                                         <p class="small py-2 m-0">Set Trade Amount</p>
                                         <div class="dropdown-divider m-0"></div>
                                         <!-- ko foreach: [10, 100, 1000] -->
-                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                        <button
+                                            class="dropdown-item small py-1"
+                                            type="button"
+                                            data-bind="
                                             text: `${$data.toLocaleString('en-US')}`,
                                             click: () => { UndergroundTrading.sellAmount = $data }
-                                        "></button>
+                                        "
+                                        ></button>
                                         <!-- /ko -->
                                         <div class="dropdown-divider m-0"></div>
                                         <!-- ko foreach: [0.1, 0.25, 0.5, 0.75, 1] -->
-                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                        <button
+                                            class="dropdown-item small py-1"
+                                            type="button"
+                                            data-bind="
                                             text: `${$data.toLocaleString('en-US', { style: 'percent' })}`,
                                             click: () => { UndergroundTrading.sellAmount = player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]() * $data }
-                                        "></button>
+                                        "
+                                        ></button>
                                         <!-- /ko -->
                                     </div>
                                 </div>
@@ -820,12 +988,15 @@
                         <div class="row">
                             <!-- ko foreach: UndergroundTrading.tradeToItemList -->
                             <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                     data-bind="
+                                <div
+                                    class="btn btn-secondary text-left w-100 px-1"
+                                    style="padding-top: 1px; padding-bottom: 2px;"
+                                    data-bind="
                                         css: { 'bg-info': UndergroundTrading.selectedTradeToItem === $data },
                                         template: { name: 'otherItemTemplate', data: $data.itemName },
                                         click: () => { UndergroundTrading.selectedTradeToItem = $data; }
-                                     ">
+                                     "
+                                >
                                 </div>
                             </div>
                             <!-- /ko -->
@@ -839,9 +1010,9 @@
                             </div>
                             <div class="col-12 col-lg-6">
                                 <label data-bind="text: UndergroundTrading.selectedTradeFromItem.name"></label>
-                                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeFromItem.image }'>
+                                <img class="mineInventoryItem" data-bind="attr: {src: UndergroundTrading.selectedTradeFromItem.image }">
                                 →
-                                <img class='mineInventoryItem' data-bind='attr: {src: UndergroundTrading.selectedTradeToItem?.image || null }'>
+                                <img class="mineInventoryItem" data-bind="attr: {src: UndergroundTrading.selectedTradeToItem?.image || null }">
                                 <label data-bind="text: UndergroundTrading.selectedTradeToItem?.name || '???'"></label>
                             </div>
                             <div class="col-12 col-lg-3 font-weight-bold">
@@ -856,49 +1027,91 @@
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1">Reset</button>
 
-                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        class="outline-dark form-control form-control-number"
+                                        data-bind="textInput: UndergroundTrading.tradeAmount"
+                                    >
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 10">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.tradeAmount += 10"
+                                    >
                                         +10
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 100">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.tradeAmount += 100"
+                                    >
                                         +100
                                     </button>
                                     <!-- /ko -->
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount *= 10">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.tradeAmount *= 10"
+                                    >
                                         &times;10
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount /= 10">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.tradeAmount /= 10"
+                                    >
                                         &div;10
                                     </button>
                                     <!-- /ko -->
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 100">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.tradeAmount += 100"
+                                    >
                                         +100
                                     </button>
-                                    <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 1000">
+                                    <button
+                                        class="btn btn-secondary smallButton smallFont"
+                                        type="button"
+                                        onclick="UndergroundTrading.tradeAmount += 1000"
+                                    >
                                         +1,000
                                     </button>
                                     <!-- /ko -->
 
-                                    <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <button
+                                        class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                    ></button>
                                     <div class="dropdown-menu text-center p-0">
                                         <p class="small py-2 m-0">Set Trade Amount</p>
                                         <div class="dropdown-divider m-0"></div>
                                         <!-- ko foreach: [10, 100, 1000] -->
-                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                        <button
+                                            class="dropdown-item small py-1"
+                                            type="button"
+                                            data-bind="
                                             text: `${$data.toLocaleString('en-US')}`,
                                             click: () => { UndergroundTrading.tradeAmount = $data }
-                                        "></button>
+                                        "
+                                        ></button>
                                         <!-- /ko -->
                                         <div class="dropdown-divider m-0"></div>
                                         <!-- ko foreach: [0.1, 0.25, 0.5, 0.75, 1] -->
-                                        <button class="dropdown-item small py-1" type="button" data-bind="
+                                        <button
+                                            class="dropdown-item small py-1"
+                                            type="button"
+                                            data-bind="
                                             text: `${$data.toLocaleString('en-US', { style: 'percent' })}`,
                                             click: () => { UndergroundTrading.tradeFromAmount = player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]() * $data }
-                                        "></button>
+                                        "
+                                        ></button>
                                         <!-- /ko -->
                                     </div>
                                 </div>
@@ -917,13 +1130,24 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<div aria-labelledby="undergroundBatteryModalLabel" class="modal fade no-select" id="undergroundBatteryModal" role="dialog" style="cursor: default;" tabindex="-1">
+<div
+    aria-labelledby="undergroundBatteryModalLabel"
+    class="modal fade no-select"
+    id="undergroundBatteryModal"
+    role="dialog"
+    style="cursor: default;"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -935,31 +1159,36 @@
                     <div class="card-body">
                         <table class="table table-hover table-striped table-sm m-0">
                             <thead>
-                            <tr>
-                                <th>Tier</th>
-                                <th></th>
-                                <th class="text-left">Name</th>
-                                <th class="text-left">Requirements</th>
-                                <th>Chance</th>
-                            </tr>
+                                <tr>
+                                    <th>Tier</th>
+                                    <th></th>
+                                    <th class="text-left">Name</th>
+                                    <th class="text-left">Requirements</th>
+                                    <th>Chance</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <!-- ko foreach: App.game.underground.battery.patterns -->
-                            <tr>
-                                <td class="vertical-middle" data-bind="text: $data.tier"></td>
-                                <td class="vertical-middle">
-                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                                <!-- ko foreach: App.game.underground.battery.patterns -->
+                                <tr>
+                                    <td class="vertical-middle" data-bind="text: $data.tier"></td>
+                                    <td class="vertical-middle">
+                                        <img
+                                            width="24px"
+                                            class="lock"
+                                            src="assets/images/breeding/lock.svg"
+                                            data-bind="
                                             tooltip: {
                                                 title: $data.hint || '',
                                                 placement: 'bottom',
                                                 trigger: 'hover'
-                                            }, visible: !$data.canAccess()" />
-                                </td>
-                                <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
-                                <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
-                                <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
-                            </tr>
-                            <!-- /ko -->
+                                            }, visible: !$data.canAccess()"
+                                        >
+                                    </td>
+                                    <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
+                                    <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
+                                    <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
+                                </tr>
+                                <!-- /ko -->
                             </tbody>
                         </table>
                     </div>
@@ -967,7 +1196,11 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
     </div>
