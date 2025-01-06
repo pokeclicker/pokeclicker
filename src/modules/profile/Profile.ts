@@ -9,7 +9,7 @@ import Rand from '../utilities/Rand';
 import GameHelper from '../GameHelper';
 
 export default class Profile implements Saveable {
-    public static MAX_TRAINER = 160;
+    public static MAX_TRAINER = 161;
     public static MAX_BACKGROUND = 40;
 
     saveKey = 'profile';
