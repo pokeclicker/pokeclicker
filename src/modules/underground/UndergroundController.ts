@@ -161,6 +161,7 @@ export class UndergroundController {
             $('#mineModal').modal('show');
         } else {
             Notifier.notify({
+                title: 'Underground',
                 message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
@@ -282,6 +283,7 @@ export class UndergroundController {
 
     public static notifyMineCompleted(helper?: UndergroundHelper) {
         Notifier.notify({
+            title: 'Underground',
             message: helper ? `${helper.name} digging deeper...` : 'You dig deeper...',
             type: NotificationOption.info,
             setting: NotificationConstants.NotificationSetting.Underground.underground_dig_deeper,
@@ -289,24 +291,25 @@ export class UndergroundController {
     }
 
     public static notifyItemFound(item: UndergroundItem, amount: number, helper?: UndergroundHelper) {
-        const { name: itemName } = item;
+        const { name: itemName, image } = item;
 
         Notifier.notify({
-            message: `${helper ? `${helper.name}` : 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
+            title: 'Underground',
+            message: `<img src="${image}" height="24px" class="pixelated"/> ${helper?.name ?? 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
             timeout: 3000,
         });
 
         for (let i = 1; i < amount; i++) {
-            let message = `${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
-            if (i === 2) message = `Lucky! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
-            else if (i === 3) message = `Jackpot! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
-            else if (i > 3) message = `Jackpot ×${i - 2}! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            let message = `${helper?.name ?? 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            if (i === 2) message = `Lucky! ${helper?.name ?? 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i === 3) message = `Jackpot! ${helper?.name ?? 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i > 3) message = `Jackpot ×${i - 2}! ${helper?.name ?? 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
 
             Notifier.notify({
                 title: 'Treasure Scanner',
-                message: message,
+                message: `<img src="${image}" height="24px" class="pixelated"/> ${message}`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 timeout: 3000 + i * 2000,
@@ -337,7 +340,7 @@ export class UndergroundController {
     public static notifyHelperItemRetention(item: UndergroundItem, amount: number, helper: UndergroundHelper) {
         Notifier.notify({
             title: `${this.buildHelperNotificationTitle(helper)} ${helper.name}`,
-            message: helper.retentionText,
+            message: `<img src="${item.image}" height="24px" class="pixelated"/> ${helper.retentionText}`,
             type: NotificationConstants.NotificationOption.warning,
             setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
             timeout: 3 * SECOND,
