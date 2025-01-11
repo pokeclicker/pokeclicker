@@ -173,23 +173,19 @@ export default class GenericDeal {
     public static generateDeals() {
         GenericDeal.list.Palaeontologist = ko.observableArray([
             new GenericDeal(
-                [
-                    { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 },
-                ],
-                [
-                    { type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true },
-                ],
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 } ],
+                [ { type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true } ],
+            ),
+            new GenericDeal(
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 } ],
+                [ { type: DealCostOrProfitType.Amount, currency: new Amount(750, Currency.diamond), amount: 1 } ],
             ),
         ]);
 
         GenericDeal.list.EverstoneDealer = ko.observableArray([
             new GenericDeal(
-                [
-                    { type: DealCostOrProfitType.Amount, currency: new Amount(375, Currency.diamond), amount: 1 },
-                ],
-                [
-                    { type: DealCostOrProfitType.Item, item: ItemList.Everstone, amount: 1 },
-                ],
+                [ { type: DealCostOrProfitType.Amount, currency: new Amount(375, Currency.diamond), amount: 1 } ],
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Everstone, amount: 1 } ],
             ),
         ]);
     }
