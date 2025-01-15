@@ -415,11 +415,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                     <div class="tab-pane fade" id="breeding-eggs">
                         <div class="scrolling-div-breeding-list">
-                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length">
-                                You don't have any eggs to breed.
-                            </button>
-                            <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]())">
+                            <div class="alert alert-primary p-2">Pokémon Eggs can be purchased or traded for in shops throughout each region and can be hatched to obtain exclusive Pokémon. Select an egg below for more information.</div>
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: Object.keys(App.game.breeding.hatchList).map(egg => GameConstants.EggItemType[egg])">
                                 <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap">
                                     <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.camelCaseToString(GameConstants.humanifyString($data))">egg</span>
                                     <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
@@ -429,7 +426,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
                                 </li>
                             </ul>
-                            <!-- /ko -->
                         </div>
                     </div>
 
