@@ -45,14 +45,6 @@ class GameController {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    static focusedOnEditableElement(): boolean {
-        const activeEl = document.activeElement as HTMLElement;
-        const localName: string = activeEl.localName.toLowerCase();
-        const editables = ['textarea', 'input', 'select'];
-
-        return (editables.includes(localName) || activeEl.isContentEditable);
-    }
-
     // Store keys for multi-key combinations
     static keyHeld: Record<string, KnockoutObservable<boolean>> = {
         Shift: ko.observable(false).extend({ boolean: null }),
@@ -109,7 +101,7 @@ class GameController {
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
-            if (this.focusedOnEditableElement()) {
+            if (GameHelper.focusedOnEditableElement()) {
                 return;
             }
 
@@ -190,27 +182,17 @@ class GameController {
             if ($undergroundModal.data('bs.modal')?._isShown) {
                 switch (key) {
                     case Settings.getSetting('hotkey.underground.hammer').value:
-                        Mine.toolSelected(Mine.Tool.Hammer);
+                        App.game.underground.tools.selectedToolType = UndergroundToolType.Hammer;
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.chisel').value:
-                        Mine.toolSelected(Mine.Tool.Chisel);
-                        return e.preventDefault();
-                    case Settings.getSetting('hotkey.underground.survey').value:
-                        Mine.survey();
+                        App.game.underground.tools.selectedToolType = UndergroundToolType.Chisel;
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.bomb').value:
-                        Mine.bomb();
+                        App.game.underground.tools.selectedToolType = UndergroundToolType.Bomb;
                         return e.preventDefault();
-                }
-                if (isNumberKey) {
-                    if (numberKey === 0) {
-                        ItemList.SmallRestore.use(1);
-                    } else if (numberKey === 1) {
-                        ItemList.MediumRestore.use(1);
-                    } else if (numberKey === 2) {
-                        ItemList.LargeRestore.use(1);
-                    }
-                    return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.survey').value:
+                        App.game.underground.tools.selectedToolType = UndergroundToolType.Survey;
+                        return e.preventDefault();
                 }
             }
             if ($oakItemsModal.data('bs.modal')?._isShown) {
@@ -303,14 +285,16 @@ class GameController {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
-                    const idx = cycle.findIndex(r => r == player.route);
-                    // Allow '=' to fallthrough to '+' since they share a key on many keyboards
-                    switch (key) {
-                        case '=':
-                        case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
-                            return e.preventDefault();
-                        case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
-                            return e.preventDefault();
+                    if (cycle.length > 1) {
+                        const idx = cycle.findIndex(r => r == player.route);
+                        // Allow '=' to fallthrough to '+' since they share a key on many keyboards
+                        switch (key) {
+                            case '=':
+                            case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
+                                return e.preventDefault();
+                            case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
+                                return e.preventDefault();
+                        }
                     }
                 }
 
@@ -419,6 +403,7 @@ class GameController {
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift()) {
                         Save.store(player);
+                        Notifier.notify({ message: 'Game Saved!'});
                         return e.preventDefault();
                     }
                     break;
@@ -451,7 +436,7 @@ class GameController {
 
         $(document).on('keyup', e => {
             // Ignore any of our controls if focused on an input element
-            if (this.focusedOnEditableElement()) {
+            if (GameHelper.focusedOnEditableElement()) {
                 return;
             }
 

@@ -22,7 +22,6 @@ class TemporaryBattleRunner {
         player.route = 0;
         Battle.route = 0;
         Battle.catching(!(battle.optionalArgs.isTrainerBattle ?? true));
-        TemporaryBattleBattle.battle = battle;
         TemporaryBattleBattle.totalPokemons(battle.getPokemonList().length);
         TemporaryBattleBattle.index(0);
         TemporaryBattleBattle.generateNewEnemy();
@@ -84,7 +83,7 @@ class TemporaryBattleRunner {
                 message: `It appears you are not strong enough to defeat ${TemporaryBattleBattle.battle.getDisplayName()}.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
-            player.town = TemporaryBattleBattle.battle.getTown();
+            player.town = TemporaryBattleBattle.battle.getTown() ?? TownList[GameConstants.StartingTowns[player.region]];
             App.game.gameState = GameConstants.GameState.town;
         }
     }
@@ -100,7 +99,7 @@ class TemporaryBattleRunner {
             }
             battle.optionalArgs.rewardFunction?.();
             GameHelper.incrementObservable(App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]);
-            player.town = battle.getTown();
+            player.town = battle.getTown() ?? TownList[GameConstants.StartingTowns[player.region]];
             App.game.gameState = GameConstants.GameState.town;
         }
     }
@@ -115,9 +114,14 @@ class TemporaryBattleRunner {
 
     public static getEnvironmentArea() {
         const battle = TemporaryBattleRunner.battleObservable();
-        return battle?.optionalArgs.environment
-            ?? battle?.parent?.name
-            ?? battle?.optionalArgs.returnTown;
+        return battle?.optionalArgs.environment;
+    }
+
+    public static getBattleBackgroundImage() {
+        const battle = TemporaryBattleRunner.battleObservable();
+        return battle?.optionalArgs.battleBackground
+        ?? battle?.parent?.name
+        ?? battle?.optionalArgs.returnTown;
     }
 }
 

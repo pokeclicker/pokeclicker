@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/party/LevelType.d.ts" />
+
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
@@ -72,8 +74,9 @@ class PartyPokemon implements Saveable {
         public gender,
         shadow: GameConstants.ShadowStatus
     ) {
-        this.vitaminsUsed = {};
-        GameHelper.enumNumbers(GameConstants.VitaminType).forEach(i => this.vitaminsUsed[i] = ko.observable(0).extend({ numeric: 0 }));
+        this.vitaminsUsed = Object.fromEntries(GameHelper.enumNumbers(GameConstants.VitaminType).map((vitamin) => {
+            return [vitamin, ko.observable(0).extend({ numeric: 0 })];
+        })) as Record<GameConstants.VitaminType, KnockoutObservable<number>>;
         this._breeding = ko.observable(false).extend({ boolean: null });
         this._shiny = ko.observable(shiny).extend({ boolean: null });
         this._level = ko.observable(1).extend({ numeric: 0 });
@@ -221,6 +224,23 @@ class PartyPokemon implements Saveable {
         return result;
     }
 
+    public gainLevels(amount: number): number {
+        if (amount < 0) {
+            throw new Error(`PartyPokemon ${this.name} cannot gain negative levels!`);
+        }
+        const oldLevel = this.level;
+        const newLevel = Math.min(this.level + amount, App.game.badgeCase.maxLevel());
+        if (oldLevel !== newLevel) {
+            this.level = newLevel;
+            // Adjust exp to match
+            const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
+            this.exp = levelRequirements[levelType][newLevel - 1];
+            // Just leveled up so...
+            this.checkForLevelEvolution();
+        }
+        return newLevel - oldLevel;
+    }
+
     public checkForLevelEvolution() {
         if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
@@ -329,6 +349,12 @@ class PartyPokemon implements Saveable {
             case GameConstants.ConsumableType.Rare_Candy:
             case GameConstants.ConsumableType.Magikarp_Biscuit:
                 amount = Math.min(amount, player.itemList[itemName]());
+                if (this.breeding) {
+                    return Notifier.notify({
+                        message : `You cannot use ${ItemList[itemName].displayName} on Pokémon in the hatchery.`,
+                        type : NotificationConstants.NotificationOption.danger,
+                    });
+                }
                 const curAttack = this.calculateAttack(true);
                 const bonus = GameConstants.BREEDING_ATTACK_BONUS * ((ItemList[itemName] as AttackGainConsumable).bonusMultiplier ?? 1);
                 GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
@@ -337,6 +363,11 @@ class PartyPokemon implements Saveable {
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
+                const levelsGained = this.gainLevels(amount);
+                if (levelsGained === 0) {
+                    // Rare Candies cause level evolutions even at max level
+                    this.checkForLevelEvolution();
+                }
                 break;
             default :
         }
@@ -374,7 +405,11 @@ class PartyPokemon implements Saveable {
     getBreedingAttackBonus = ko.pureComputed((): number => {
         const attackBonusPercent = (GameConstants.BREEDING_ATTACK_BONUS + this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100;
         const proteinBoost = this.vitaminsUsed[GameConstants.VitaminType.Protein]();
-        return (this.baseAttack * attackBonusPercent) + proteinBoost;
+        let attackBonus = (this.baseAttack * attackBonusPercent) + proteinBoost;
+        if (Settings.getSetting('breedingEfficiencyAllModifiers').observableValue()) {
+            attackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
+        }
+        return attackBonus;
     });
 
     heldItemAttackBonus = ko.pureComputed((): number => {
@@ -386,11 +421,7 @@ class PartyPokemon implements Saveable {
     });
 
     breedingEfficiency = ko.pureComputed((): number => {
-        let breedingAttackBonus = this.getBreedingAttackBonus();
-        if (Settings.getSetting('breedingEfficiencyAllModifiers').observableValue()) {
-            breedingAttackBonus *= this.calculateEVAttackBonus() * this.heldItemAttackBonus() * this.shadowAttackBonus();
-        }
-
+        const breedingAttackBonus = this.getBreedingAttackBonus();
         return (breedingAttackBonus / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
     });
 
@@ -404,78 +435,88 @@ class PartyPokemon implements Saveable {
 
     public matchesHatcheryFilters = ko.pureComputed(() => {
         // Check if search matches englishName or displayName
-        const displayName = PokemonHelper.displayName(this.name)();
-        const filterName = BreedingFilters.name.value();
-        const partyName = this.displayName;
-        if (!filterName.test(displayName) && !filterName.test(this.name) && !(partyName != undefined && filterName.test(partyName))) {
+        const nameFilterSetting = Settings.getSetting('breedingNameFilter') as SearchSetting;
+        if (nameFilterSetting.observableValue() != '') {
+            const nameFilter = nameFilterSetting.regex();
+            const displayName = PokemonHelper.displayName(this.name)();
+            const partyName = this.displayName;
+            if (!nameFilter.test(displayName) && !nameFilter.test(this.name) && !(partyName != undefined && nameFilter.test(partyName))) {
+                return false;
+            }
+        }
+
+        // Check if search matches species number
+        const idFilter = Settings.getSetting('breedingIDFilter').observableValue();
+        if (idFilter > -1 && idFilter != Math.floor(this.id)) {
             return false;
         }
 
-        const filterID = BreedingFilters.id.value();
-        if (filterID > -1 && filterID != Math.floor(this.id)) {
-            return false;
-        }
-
+        // Check based on categories
+        const categoryFilter = Settings.getSetting('breedingCategoryFilter').observableValue();
         // Categorized only
-        if (BreedingFilters.category.value() == -2 && this.isUncategorized()) {
+        if (categoryFilter == -2 && this.isUncategorized()) {
             return false;
         }
-
         // Selected category
-        if (BreedingFilters.category.value() >= 0 && !this.category.includes(BreedingFilters.category.value())) {
+        if (categoryFilter >= 0 && !this.category.includes(categoryFilter)) {
             return false;
         }
 
         // Check based on shiny status
-        if (BreedingFilters.shinyStatus.value() >= 0) {
-            if (+this.shiny !== BreedingFilters.shinyStatus.value()) {
-                return false;
-            }
+        const shinyFilter = Settings.getSetting('breedingShinyFilter').observableValue();
+        if (shinyFilter >= 0 && +this.shiny !== shinyFilter) {
+            return false;
         }
 
         // Check based on native region
-        const showRegions = BreedingFilters.region.value();
-        const region = PokemonHelper.calcNativeRegion(this.name);
-        const regionBitInFilter = 1 << region & showRegions;
-        const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
-            && region === GameConstants.Region.none;
-        if (!regionBitInFilter && !noneRegionCheck) {
-            return false;
-        }
-
-        // check based on Pokerus status
-        if (BreedingFilters.pokerus.value() > -1) {
-            if (this.pokerus !== BreedingFilters.pokerus.value()) {
+        const unlockedRegionsMask = (2 << player.highestRegion()) - 1;
+        const regionFilterMask = Settings.getSetting('breedingRegionFilter').observableValue() & unlockedRegionsMask;
+        if (regionFilterMask !== unlockedRegionsMask) {
+            const nativeRegion = PokemonHelper.calcNativeRegion(this.name);
+            // With the region filter active, regionless pokemon should be shown only if no regions are selected
+            const nativeRegionInFilter = nativeRegion !== GameConstants.Region.none ?
+                (1 << nativeRegion) & regionFilterMask :
+                regionFilterMask === 0;
+            if (!nativeRegionInFilter) {
                 return false;
             }
         }
 
-        const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
-        const pokemon = PokemonHelper.getPokemonById(this.id);
-        // Only Base Pokémon with Mega available
-        if (uniqueTransformation == 'mega-available' && !PokemonHelper.hasMegaEvolution(pokemon.name)) {
-            return false;
-        }
-        // Only Base Pokémon without Mega Evolution
-        if (uniqueTransformation == 'mega-unobtained' && !PokemonHelper.hasUncaughtMegaEvolution(pokemon.name)) {
-            return false;
-        }
-        // Only Mega Pokémon
-        if (uniqueTransformation == 'mega-evolution' && !PokemonHelper.isMegaEvolution(pokemon.name)) {
+        // Check based on Pokerus status
+        const pokerusFilter = Settings.getSetting('breedingPokerusFilter').observableValue();
+        if (pokerusFilter > -1 && this.pokerus !== pokerusFilter) {
             return false;
         }
 
-        // Check based on alternate form status (if native to a different region have to include for that region's progression)
-        if (BreedingFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
-            const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == region);
+        const uniqueTransformationFilter = Settings.getSetting('breedingUniqueTransformationFilter').observableValue();
+        const pokemon = PokemonHelper.getPokemonById(this.id);
+        // Only Base Pokémon with Mega available
+        if (uniqueTransformationFilter == 'mega-available' && !PokemonHelper.hasMegaEvolution(pokemon.name)) {
+            return false;
+        }
+        // Only Base Pokémon without Mega Evolution
+        if (uniqueTransformationFilter == 'mega-unobtained' && !PokemonHelper.hasUncaughtMegaEvolution(pokemon.name)) {
+            return false;
+        }
+        // Only Mega Pokémon
+        if (uniqueTransformationFilter == 'mega-evolution' && !PokemonHelper.isMegaEvolution(pokemon.name)) {
+            return false;
+        }
+
+        // Check to exclude alternate forms
+        const hideAltFilter = Settings.getSetting('breedingHideAltFilter').observableValue();
+        if (hideAltFilter && !Number.isInteger(pokemon.id)) {
+            // Don't exclude alt forms native to a different region, as they're considered a main form for that region's progression
+            const nativeRegion = PokemonHelper.calcNativeRegion(this.name);
+            const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             if (hasBaseFormInSameRegion) {
                 return false;
             }
         }
 
         // Check if either of the types match
-        const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
-        const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
+        const type1: (PokemonType | null) = Settings.getSetting('breedingType1Filter').observableValue();
+        const type2: (PokemonType | null) = Settings.getSetting('breedingType2Filter').observableValue();
         if (type1 !== null || type2 !== null) {
             const { type: types } = pokemonMap[this.name];
             if ([type1, type2].includes(PokemonType.None)) {
@@ -626,7 +667,13 @@ class PartyPokemon implements Saveable {
 
         // Don't save anything that is the default option
         Object.entries(output).forEach(([key, value]) => {
-            if (value === this.defaults[PartyPokemonSaveKeys[key]]) {
+            const defaultValue = this.defaults[PartyPokemonSaveKeys[key]];
+            if (Array.isArray(value) && Array.isArray(defaultValue)) {
+                // Compare array contents
+                if (value.length === defaultValue.length && value.every((v, i) => v === defaultValue[i])) {
+                    delete output[key];
+                }
+            } else if (value === defaultValue) {
                 delete output[key];
             }
         });
