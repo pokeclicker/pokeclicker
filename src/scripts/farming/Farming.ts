@@ -35,7 +35,7 @@ class Farming implements Feature {
     mulchShovelAmt: KnockoutObservable<number>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
-    possiblePlotMutations: KnockoutComputed<Array<Array<string | undefined>>>;
+    possiblePlotMutations: KnockoutComputed<Array<Array<string>>>;
 
     constructor(private multiplier: Multiplier) {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
