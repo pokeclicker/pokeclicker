@@ -287,6 +287,13 @@ class Plot implements Saveable {
                 tooltip.push(`A wild <strong>${PokemonHelper.displayName(this.wanderer.name)()}</strong> is wandering around`);
             }
 
+            // Mutation
+            const possibleMutations = App.game.farming.possiblePlotMutations()[this.index];
+            if (possibleMutations.length) {
+                tooltip.push('<u>Possible Mutations</u>');
+                possibleMutations.forEach((mutation) => tooltip.push(mutation));
+            }
+
             return tooltip.join('<br/>');
         });
 

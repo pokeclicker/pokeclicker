@@ -71,19 +71,18 @@ class Farming implements Feature {
         });
 
         this.possiblePlotMutations = ko.pureComputed(() => {
-            const plotMutations = [...Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT)];
-
+            const plotMutations = [...Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT)].map(() => []);
             App.game.farming.mutations.forEach((mutation) => {
-                const mutationPlots = mutation.getMutationPlots();
-                mutationPlots.forEach((plot) => {
+                const isUnlocked = App.game.farming.unlockedBerries[mutation.mutatedBerry]();
+                if (!isUnlocked && !mutation.hintSeen) {
+                    return;
+                }
+                mutation.getMutationPlots().forEach((plot) => {
                     if (mutation.getTotalMutationChance(plot) > 0) {
-                        const berry = App.game.farming.unlockedBerries[mutation.mutatedBerry]() ? BerryType[mutation.mutatedBerry] : '???';
-                        plotMutations[plot] = plotMutations[plot] || [];
-                        plotMutations[plot].push(berry);
+                        plotMutations[plot].push(isUnlocked ? BerryType[mutation.mutatedBerry] : '???');
                     }
                 });
             });
-
             return plotMutations;
         });
     }
