@@ -4179,11 +4179,6 @@ const CanalaveRiley = new NPC('Riley', [
     'My partner Lucario evolved from a Riolu during daytime when I used a Soothe Bell.',
 ], {image: 'assets/images/npcs/Riley.png'});
 
-const CanalaveYoungBoy = new NPC('Young Boy', [
-    'Oh, hello! Say, have you ever heard of Cresselia? Once when I was really little I had a really bad dream I couldn’t wake up from, but then a kind trainer went to an island near here and got help from Cresselia to cure me!',
-    'Maybe if you can prove yourself by conquering that island, you could find Cresselia roaming around the region...',
-]);
-
 const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
     '<i>Three Pokémon there were.</i>',
     '<i>Into the lakes they dove.</i>',
@@ -4195,6 +4190,11 @@ const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
     '<i>Bearing with them the power to make vast lands, they rise again.</i>',
 ],{
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)])});
+
+const NewFullMoonIslandResearcher = new RoamerNPC('Dream Researcher', [
+    'Oh, hello there! Have you heard the legend of Cresselia and Darkrai? It\’s said that one of them is roaming the region while the other retreats to its home island. It\'s speculated to have something to do with the moon phase.',
+    'There have been increased sightings of roaming Pokémon on {ROUTE_NAME}.',
+], GameConstants.Region.sinnoh, RoamingPokemonList.findGroup(GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Sinnoh), 'assets/images/npcs/Scientist (female).png');
 
 const VerityMesprit = new NPC('Mesprit', [
     '<i>You are the trainer looking for the Distortion World, right?</i>',
@@ -4261,10 +4261,6 @@ const FightAreaZero2 = new NPC('Zero', [
     image: 'assets/images/npcs/Zero.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 1), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)]),
 });
-
-const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
-    'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.sinnoh, RoamingPokemonList.findGroup(GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Sinnoh), 'assets/images/npcs/Hiker.png');
 
 const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>You are finally here.</i>',
@@ -4618,7 +4614,7 @@ TownList['Canalave City'] = new Town(
     [CanalaveCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Canalave City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
-        npcs: [CanalaveRiley, CanalaveYoungBoy, CanalaveSinnohMyth, ManaphyHastings3, ManaphyHastings4],
+        npcs: [CanalaveRiley, CanalaveSinnohMyth, ManaphyHastings3, ManaphyHastings4],
     }
 );
 TownList['Great Marsh'] = new Town(
@@ -4681,7 +4677,6 @@ TownList['Survival Area'] = new Town(
     [TemporaryBattleList['Barry 7'], SurvivalAreaShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Survival Area'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225)],
-        npcs: [SurvivalAreaSinnohRoamerNPC],
     }
 );
 TownList['Resort Area'] = new Town(
@@ -4870,13 +4865,21 @@ TownList['Fullmoon Island'] = new DungeonTown(
     'Fullmoon Island',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Mine)],
+    [],
+    {
+        npcs: [NewFullMoonIslandResearcher],
+    }
 );
 TownList['Newmoon Island'] = new DungeonTown(
     'Newmoon Island',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Mine)],
+    [],
+    {
+        npcs: [NewFullMoonIslandResearcher],
+    }
 );
 TownList['Flower Paradise'] = new DungeonTown(
     'Flower Paradise',
