@@ -27,6 +27,12 @@ enum PokemonLocationType {
     SafariItem
 }
 
+// this uses dummy evos that we don't want showing up in PokemonLocations
+enum PokemonEvoLineageType {
+    Evolution,
+    EvolutionIncludingDummy
+}
+
 class PokemonLocations {
     /*
     PRETTY MUCH ONLY USED BY THE BOT BELOW
@@ -338,6 +344,22 @@ class PokemonLocations {
             if (e.trigger === EvoTrigger.NONE) {
                 return false;
             }
+            if (maxRegion != GameConstants.Region.none && (p.nativeRegion > maxRegion || pokemonMap[e.evolvedPokemon].nativeRegion > maxRegion)) {
+                return false;
+            }
+            cacheLine[e.evolvedPokemon].push(e);
+        }));
+        return cacheLine[pokemonName];
+    }
+
+    public static getPokemonPrevolutionPlusDummy(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<EvoData> {
+        const cache = this.getRegionalCache<EvoData[]>(this.getPokemonPrevolutionPlusDummy.name);
+        if (cache[maxRegion]) {
+            return cache[maxRegion][pokemonName];
+        }
+        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<EvoData>);
+        const prevolutionPokemon = pokemonList.filter((p: PokemonListData) => p.evolutions);
+        prevolutionPokemon.forEach((p: PokemonListData) => p.evolutions.forEach(e => {
             if (maxRegion != GameConstants.Region.none && (p.nativeRegion > maxRegion || pokemonMap[e.evolvedPokemon].nativeRegion > maxRegion)) {
                 return false;
             }
@@ -799,6 +821,21 @@ class PokemonLocations {
             locations[PokemonLocationType.SafariItem];
         return !isEvable && Object.keys(locations).length > 0;
     };
+
+    public static getEvoLineage = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.MAX_AVAILABLE_REGION) => {
+        const encounterTypes = {};
+        // Evolution
+        const evolutions = PokemonLocations.getPokemonPrevolution(pokemonName, maxRegion);
+        if (evolutions.length) {
+            encounterTypes[PokemonEvoLineageType.Evolution] = evolutions;
+        }
+        // Evolutions with Dummies
+        const evolutionsPlusDummies = PokemonLocations.getPokemonPrevolutionPlusDummy(pokemonName, maxRegion);
+        if (evolutionsPlusDummies.length) {
+            encounterTypes[PokemonEvoLineageType.EvolutionIncludingDummy] = evolutionsPlusDummies;
+        }
+        return encounterTypes;
+    }
 }
 
 PokemonLocations satisfies TmpPokemonLocationsType;

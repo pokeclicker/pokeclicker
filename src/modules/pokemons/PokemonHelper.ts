@@ -145,6 +145,14 @@ export function getMegaStones(pokemonName: PokemonNameType): MegaStoneItem[] {
         .map(s => ItemList[s] as MegaStoneItem);
 }
 
+export function getMegaPokemonStone(pokemonName: PokemonNameType): MegaStoneType {
+    // every evolution uses the same basePokemon, so we'll use the first one
+    const prevo = PokemonLocations.getPokemonPrevolution(pokemonName)[0].basePokemon;
+    // find specific stone
+    const stone = P.pokemonMap[prevo].evolutions.find(e => e.evolvedPokemon === pokemonName).restrictions.find((r) => r instanceof MegaEvolveRequirement) as MegaEvolveRequirement;
+    return this.getMegaStones(prevo).find(s => s.name === MegaStoneType[stone.megaStone]).megaStone;
+}
+
 export function hasGigantamaxForm(pokemonName: PokemonNameType): boolean {
     return P.pokemonMap[`Gigantamax ${pokemonName}`].id > 0 || P.pokemonMap[`Eternamax ${pokemonName}`].id > 0;
 }

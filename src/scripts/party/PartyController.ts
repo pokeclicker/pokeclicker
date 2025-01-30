@@ -20,6 +20,18 @@ class PartyController {
         return CaughtStatus.NotCaught;
     }
 
+    static getCaughtStatusAll(names: PokemonNameType[]): CaughtStatus {
+        if (names.every(p => App.game.party.alreadyCaughtPokemon(pokemonMap[p].id, true))) {
+            return CaughtStatus.CaughtShiny;
+        }
+
+        if (names.every(p => App.game.party.alreadyCaughtPokemon(pokemonMap[p].id, false))) {
+            return CaughtStatus.Caught;
+        }
+
+        return CaughtStatus.NotCaught;
+    }
+
     static getEvs(id:number): number {
         return App.game.party.getPokemon(id)?.evs() ?? 0;
     }

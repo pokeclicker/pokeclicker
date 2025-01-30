@@ -1,6 +1,6 @@
 <div class="modal noselect fade" id="pokemonStatisticsModal" tabindex="-1" role="dialog" aria-labelledby="pokemonStatisticsModal">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal modal-sm" role="document">
-    <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
+    <div class="modal-content tab-content" data-bind="with: App.game.statistics.selectedPokemonID()">
       <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
         <h5 class="modal-title text-muted"
           data-bind="text: `#${pokemonMap[$data].id <= 0 ? '???' : Math.floor(pokemonMap[$data].id).toString().padStart(3,0)}&nbsp;&nbsp;`">
@@ -14,7 +14,15 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body p-0 pb-1">
+
+      <div>
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#pokemonStats">Stats</a></li>
+            <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#pokemonStatsEvo">Evolution Data</a></li>
+        </ul>
+      </div>
+
+      <div id="pokemonStats" class="modal-body p-0 pb-1 tab-pane fade in active show">
         <div class="row m-0 mt-1">
           <div class="col">
             <img data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id) }" src=""/>
@@ -376,6 +384,132 @@
           </div>
         </div>
       </div>
+
+      <div id="pokemonStatsEvo" class="modal-body tab-pane fade">
+        <!-- ko with: PokemonEvoLines.getEvoLine(pokemonMap[$data].name, player.highestRegion()) -->
+          <div class="card-header p-1">
+            <span>Evolutionary Line</span>
+            <span data-bind="template: { name: 'caughtAllStatusTemplate', data: {'status': PartyController.getCaughtStatusAll($data), 'area': 'in this Evolutionary Line'} }"></span>
+            <knockout data-bind="if: RouteHelper.minPokerusCheck($data)">
+              <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus($data)] + '.png' },
+                tooltip: {
+                  title: RouteHelper.evoLinePokerusEVs($data),
+                  trigger: 'hover',
+                  placement: 'bottom',
+                  html: true }"
+                src=""/>
+            </knockout>
+          </div>
+          <ul class="list-inline">
+            <!-- ko foreach: $data -->
+              <li class="list-inline-item">
+                <a href="#" data-toggle="modal" data-bind="click: (_, event) => { !PokedexHelper.pokemonSeen(pokemonMap[$data].id)() ? '' : App.game.statistics.selectedPokemonID(pokemonMap[$data].id); }" data-original-title="" title="">
+                  <img src="assets/images/items/egg/Mystery_egg.png" style="width: 96px; position: absolute; z-index: 1;" data-bind="
+                    css: { 'pokemon-not-seen': !App.game.party.alreadyCaughtPokemonByName($data) && PokedexHelper.pokemonSeen(pokemonMap[$data].id)() },
+                    style: { opacity: !App.game.party.alreadyCaughtPokemonByName($data) && PokedexHelper.pokemonSeen(pokemonMap[$data].id)() ? '30%' : '100%' },
+                    visible: pokemonMap[$data].baby && !App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id),
+                    tooltip: {
+                      title: 'Breed a Pokémon in this Evolutionary Line to obtain!',
+                      placement: 'bottom',
+                      trigger: 'hover'
+                    }"/>
+                  <img data-bind="
+                    css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen(pokemonMap[$data].id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName($data) && PokedexHelper.pokemonSeen(pokemonMap[$data].id)() },
+                    attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id)}"
+                    src=""/>
+                </a>
+              </li>
+            <!-- /ko -->
+          </ul>
+          <div>
+          <!-- ko foreach: Object.entries(PokemonEvoLines.getEvoMethods($data)) -->
+            <!-- ko if: $data[1].length && !App.game.party.alreadyCaughtPokemon(pokemonMap[$data[0]].id) -->
+              <!-- ko with: $data[1] -->
+                <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+                  <thead>
+                    <tr>
+                      <th colspan="100%" data-bind="text: (Math.floor(pokemonMap[$data[0].basePokemon].id) != Math.floor(pokemonMap[$data[0].evolvedPokemon].id) ? 'Evolution' : !$data[0].restrictions.some(r => r.megaStone) ? 'Form Change' : 'Mega Evolution') + ' Requirements'"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tight">
+                        <img data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen(pokemonMap[$data[0].evolvedPokemon].id)() && !PokemonHelper.isMegaEvolution($data[0].evolvedPokemon) },
+                          attr:{ src: !$data[0].restrictions.some(r => r.megaStone) ? `assets/images/pokemon/${pokemonMap[$data[0].evolvedPokemon].id}.png` :
+                          `assets/images/megaStone/${GameConstants.MegaStoneType[$data[0].restrictions.find(r => r.megaStone).megaStone]}.png` }"
+                          src=""/>
+                      </td>
+                      <!-- ko foreach: $data.filter(e => e.trigger != EvoTrigger.NONE) -->
+                        <td>
+                          <ul class="list-inline">
+                            <!-- ko foreach: $data.restrictions.filter(res => res.constructor.name != 'PokemonLevelRequirement' && !res.isCompleted()) -->
+                              <li data-bind="text: (App.game.statistics.pokemonCaptured[pokemonMap[$parent.basePokemon].id]() || $data.constructor.name === 'ObtainedPokemonRequirement') ? $data.hint() : '???'"></li>
+                            <!-- /ko -->
+                            <!-- ko if: $data.trigger == EvoTrigger.LEVEL -->
+                              <li data-bind="text: App.game.statistics.pokemonCaptured[pokemonMap[$data.basePokemon].id]() ? $data.restrictions.find(res=>res.constructor.name == 'PokemonLevelRequirement').hint() : '???'"></li>
+                            <!-- /ko -->
+                            <!-- ko if: $data.trigger == EvoTrigger.STONE -->
+                              <li data-bind="text: App.game.statistics.pokemonCaptured[pokemonMap[$data.basePokemon].id]() ? `Requires using ${GameHelper.anOrA(GameConstants.StoneType[$data.stone])} ${ItemList[GameConstants.StoneType[$data.stone]]._displayName}` : '???'"></li>
+                            <!-- /ko -->
+                          </ul>
+                        </td>
+                      <!-- /ko -->
+                      <!-- ko if: $data.every(e => e.trigger === EvoTrigger.NONE) -->
+                        <td>
+                          <span>This Pokémon is unobtainable through evolution.</span>
+                        </td>
+                      <!-- /ko -->
+                    </tr>
+                  </tbody>
+                </table>
+              <!-- /ko -->
+            <!-- /ko -->
+          <!-- /ko -->
+          </div>
+
+          <!-- ko let: { familyIDs: [...new Set($data.map(p => Math.floor(pokemonMap[p].id)))], familyRegions: [...new Set($data.map(p=>pokemonMap[p].nativeRegion))] } -->
+            <!-- ko with: pokemonList.filter(p => familyIDs.includes(Math.floor(p.id)) && familyRegions.includes(p.nativeRegion) && !$data.includes(p.name) && Object.values(PokemonLocations.getPokemonLocations(p.name)).length).sort((a,b) => familyIDs.indexOf(Math.floor(a.id)) - familyIDs.indexOf(Math.floor(b.id))) -->
+              <!-- ko if: (player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION || $data.filter(p => App.game.statistics.pokemonCaptured[pokemonMap[p.name].id]()).length) && $data.length -->
+                <ul class="list-inline">
+                  <div class="card-header p-1">
+                    <span>Alternate Forms</span>
+                    <span data-bind="template: { name: 'caughtAllStatusTemplate',
+                      data: {'status': PartyController.getCaughtStatusAll($data.map(p => p.name)),
+                      'area': 'Evolutionary Line\'s alternate forms'} },
+                      visible: player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION,
+                    "></span>
+                    <knockout data-bind="if: RouteHelper.minPokerusCheck($data.filter(p => App.game.party.alreadyCaughtPokemon(pokemonMap[p.name].id)).map(p => p.name))">
+                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus($data.filter(p => App.game.party.alreadyCaughtPokemon(pokemonMap[p.name].id)).map(p => p.name))] + '.png' },
+                        tooltip: {
+                          title: RouteHelper.evoLinePokerusEVs($data.filter(p => App.game.party.alreadyCaughtPokemon(pokemonMap[p.name].id)).map(p => p.name)),
+                          trigger: 'hover',
+                          placement: 'bottom',
+                          html: true },
+                          visible: player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION"
+                        src=""/>
+                    </knockout>
+                    <span data-bind="visible: player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION,
+                      tooltip: {
+                        title: 'Reach the final region to see the completion data for alternate forms!',
+                        trigger: 'hover',
+                        placement: 'bottom',
+                        html: true }">ⓘ
+                      </span>
+                  </div>
+                  <!-- ko foreach: $data -->
+                    <li class="list-inline-item" data-bind="visible: App.game.statistics.pokemonCaptured[$data.id]() || player.highestRegion() >= GameConstants.MAX_AVAILABLE_REGION">
+                      <a href="#" data-toggle="modal" data-bind="click: (_, event) => { !PokedexHelper.pokemonSeen($data.id)() ? '' : App.game.statistics.selectedPokemonID($data.id); }" data-original-title="" title="">
+                        <img data-bind="attr:{ src: PokemonHelper.getImage($data.id)}, css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemon($data.id) && PokedexHelper.pokemonSeen($data.id)() }" src=""/>
+                      </a>
+                    </li>
+                  <!-- /ko -->
+                </ul>
+              <!-- /ko -->
+            <!-- /ko -->
+          <!-- /ko -->
+        <!-- /ko -->
+      </div>
+
     </div>
   </div>
 </div>
