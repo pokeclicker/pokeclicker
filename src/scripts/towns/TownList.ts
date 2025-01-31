@@ -1911,6 +1911,12 @@ const ParkResearcher = new NPC('Researcher', [
     'An experimental specimen can be bought here: A Sudowoodo that is no longer weak against Water attacks!',
 ], { image: 'assets/images/npcs/Scientist (male).png' });
 
+const BabyAssistant = new AssistantNPC('Elm\'s Assistant', [
+    'Prof. Elm\'s research is focused on eggs. Pokémon eggs hatch faster when the trainer is battling strong trainers like Gym leaders.',
+], [
+    'Oh? Some of your Pokémon may find an extra egg if left in the hatchery. Would you care to find out what baby will hatch?',
+], 'baby','assets/images/npcs/Scientist (male).png');
+
 //Johto Towns
 TownList['New Bark Town'] = new Town(
     'New Bark Town',
@@ -1919,7 +1925,7 @@ TownList['New Bark Town'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Johto)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
-        npcs: [ProfElm],
+        npcs: [ProfElm, BabyAssistant],
     }
 );
 TownList['Cherrygrove City'] = new Town(
@@ -4478,6 +4484,11 @@ const GrotleAcornParty = new NPC('Grotle and Friends', [
     requirement: new ObtainedPokemonRequirement('Grotle (Acorn)'),
 });
 
+const EvolutionAssistant = new AssistantNPC('Prof. Rowan\'s Assistant', [
+    'Hey, $playername$! According to Prof. Rowan\'s research, 90% of all Pokémon are somehow tied to evolution! Yup, you can also see a Pokémon\'s evolution line in your Pokédex.',
+], [
+    'Speaking of Pokémon! How\'s your Pokédex coming along? Wow! You have so many Pokémon that can evolve!',
+], 'evolution','assets/images/npcs/Lucas.png');
 
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
@@ -4497,7 +4508,7 @@ TownList['Sandgem Town'] = new Town(
     [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher'], new ShardTraderShop(GameConstants.ShardTraderLocations['Sandgem Town'], 'Santa\'s Secret Daycare', true, 'Plates')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
-        npcs: [ProfRowan, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
+        npcs: [ProfRowan, EvolutionAssistant, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
     }
 );
 TownList['Jubilife City'] = new Town(
