@@ -64,23 +64,6 @@
                   </td>
                 </tr>
                 <!-- /ko -->
-                <!-- TODO: fix overlap when too many contest types -->
-                <tr>
-                  <td class="text-left">Contest Type</td>
-                  <td class="text-left tight" data-bind="foreach: ContestHelper.getPokemonContestTypes($data)">
-                    <span class="badge text-light px-1" data-bind="if: $data >= 0,
-                                style: { 'background-color': GameConstants.ContestColor[$data]}">
-                      <small><strong
-                        data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-left">Contest Appeal</td>
-                  <td class="text-left tight"><code
-                    data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).contestAppeal : 0).toLocaleString('en-US')">-</code>
-                  </td>
-                </tr>
                 <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
                 <tr>
                   <td class="text-left">EVs</td>
@@ -375,6 +358,45 @@
                   </td>
                 </tr>
                 <!-- /ko -->
+              </tbody>
+            </table>
+            <!-- /ko -->
+             
+            <!-- ko if:  App.game.keyItems.hasKeyItem(KeyItemType.Pokeblock_case) -->
+            <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+              <thead>
+                <tr class="bg-secondary">
+                  <th colspan="2">Contest Stats</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2" class="text-center">Contest Types</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="text-center tight" style="line-height: normal;">
+                    <!-- ko foreach: GameHelper.enumNumbers(ContestType) -->
+                    <!-- ko if: $data == ContestType.Balanced -->
+                      <br />
+                    <!-- /ko -->
+                    <span class="badge text-light px-1" data-bind="
+                                style: {
+                                  'background-color': GameConstants.ContestColor[$data],
+                                  'text-shadow': ContestHelper.getPokemonContestTypes($parent).includes($data) ? '0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black' : '',
+                                  'opacity': ContestHelper.getPokemonContestTypes($parent).includes($data) ? '1' : '0.2',
+                                }">
+                      <small><strong
+                        data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
+                    </span>
+                    <!-- /ko -->
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-left">Contest Appeal</td>
+                  <td class="text-left tight"><code
+                    data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).contestAppeal : 0).toLocaleString('en-US')">-</code>
+                  </td>
+                </tr>
               </tbody>
             </table>
             <!-- /ko -->

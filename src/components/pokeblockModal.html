@@ -86,7 +86,7 @@
                   <tbody data-bind="foreach: lazyLoad('lazyPokeblockList', $element, PartyController.getPokeblockSortedList, { reset: () => (DisplayObservables.modalState.pokeblockModal === 'hidden') }), childrenComplete: () => { lazyLoadCallback('lazypokeblockList'); }">
                     <tr class="clickable" data-bind="click: () => { $data.usePokeblock(PokeBlockController.currentlySelected(), PokeBlockController.getMultiplier()); }">
                       <td class="text-left text-truncate" style="max-width: 15vw;"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                        <td class="text-left tight" data-bind="foreach: $data.currentContestTypes">
+                        <td class="text-left tight" style="text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="foreach: $data.currentContestTypes">
                           <span class="badge text-light px-1" data-bind="if: $data >= 0,
                                       style: { 'background-color': GameConstants.ContestColor[$data]}">
                             <small><strong
