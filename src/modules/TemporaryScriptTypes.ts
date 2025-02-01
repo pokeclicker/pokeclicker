@@ -253,6 +253,13 @@ export type TmpGymRunnerType = {
     gymObservable: () => TmpGymType;
 };
 
+export type TmpGymListType = {
+    [gymName: string]: {
+        badgeReward: any;
+        buttonText: string;
+    }
+};
+
 export type TmpAchievementHandlerType = {
     achievementList: Achievement[];
     navigateIndex: KnockoutObservable<number>;

@@ -14,6 +14,8 @@ export default class GymBadgeRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Requires the ${GameConstants.camelCaseToString(BadgeEnums[this.badge])} badge.`;
+        return BadgeEnums[this.badge].startsWith('Elite') ?
+        `Requires having beaten ${Object.values(GymList).find(obj => obj.badgeReward === this.badge).buttonText}.` :
+        `Requires the ${GameConstants.camelCaseToString(BadgeEnums[this.badge])} badge.`;
     }
 }
