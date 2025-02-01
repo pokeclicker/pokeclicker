@@ -415,7 +415,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                     <div class="tab-pane fade" id="breeding-eggs">
                         <div class="scrolling-div-breeding-list">
-                            <div class="alert alert-primary p-2">Pokémon Eggs can be purchased or traded for in shops throughout each region and can be hatched to obtain exclusive Pokémon. Select an egg below for more information.</div>
+                            <div class="alert alert-primary small p-2">Pokémon Eggs can be purchased or traded for in shops throughout each region and can be hatched to obtain exclusive Pokémon. Select an egg below for more information.<br />Hatching a Pokémon you've already caught will give it a small attack boost.</div>
                             <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: Object.keys(App.game.breeding.hatchList).map(egg => GameConstants.EggItemType[egg])">
                                 <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap">
                                     <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.camelCaseToString(GameConstants.humanifyString($data))">egg</span>
