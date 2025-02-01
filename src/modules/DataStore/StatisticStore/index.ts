@@ -1,5 +1,4 @@
 import type { Observable as KnockoutObservable } from 'knockout';
-import { ContestResults, ContestStyle } from '../../GameConstants';
 import '../../koExtenders';
 import type { PokemonList } from '../../pokemons/PokemonList';
 import { Saveable } from '../common/Saveable';
@@ -127,9 +126,6 @@ export default class Statistics implements Saveable {
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
     temporaryBattleDefeated: Array<KnockoutObservable<number>>;
-    // Contests
-    contestResults: Record<ContestResults, KnockoutObservable<number>>;
-    contestStyleMaster: Record<ContestStyle, KnockoutObservable<number>>;
     // DungeonGuides
     dungeonGuideAttempts: Array<KnockoutObservable<number>>;
     dungeonGuideClears: Array<KnockoutObservable<number>>;
@@ -258,8 +254,6 @@ export default class Statistics implements Saveable {
         'berriesObtained',
         'mulchesUsed',
         'temporaryBattleDefeated',
-        'contestResults',
-        'contestStyleMaster',
         'dungeonGuideAttempts',
         'dungeonGuideClears',
     ];

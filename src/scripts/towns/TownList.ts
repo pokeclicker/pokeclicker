@@ -8,7 +8,6 @@
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
-///<reference path="PokemonContest.ts"/>
 ///<reference path="../shop/GenericTraderShop.ts"/>
 
 const TownList: { [name: string]: Town } = {};
@@ -2360,7 +2359,7 @@ const HoennContestShop = new Shop([
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
-], 'Contest Shop', [PokemonContestController.requirements]);
+], 'Contest Shop', [new DevelopmentRequirement()]);
 
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMaster);
@@ -3402,7 +3401,7 @@ TownList['Lilycove City'] = new Town(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
     [DepartmentStoreShop],
-    //[new PokemonContestTownContent(), DepartmentStoreShop, HoennContestShop],
+    //[DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }

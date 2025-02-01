@@ -96,7 +96,6 @@ export type TmpDreamOrbControllerType = any;
 export type TmpPurifyChamberType = any;
 export type TmpWeatherAppType = any;
 export type TmpZMovesType = any;
-export type TmpPokemonContestType = any;
 export type TmpBattlePokemonType = any;
 export type TmpMultiplierDecreaserType = any;
 
@@ -135,7 +134,6 @@ export type TmpGameType = {
     purifyChamber: TmpPurifyChamberType;
     weatherApp: TmpWeatherAppType;
     zMoves: TmpZMovesType;
-    pokemonContest: TmpPokemonContestType;
 
     // functions
     load: () => void;
