@@ -425,9 +425,9 @@ class PartyPokemon implements Saveable {
             case GameConstants.PokeBlockColor.Balanced:
                 amount = 1;
                 const blockType = (ItemList[itemName] as PokeBlock).contestType;
-                const conTypes = this.currentContestTypes;
+                const conTypes = this._currentContestTypes();
 
-                if (this.currentContestTypes.includes(blockType)) {
+                if (this._currentContestTypes().includes(blockType)) {
                     Notifier.notify({
                         message : `${this.displayName} is already ${ContestType[blockType]}!`,
                         type : NotificationConstants.NotificationOption.warning,
@@ -436,10 +436,8 @@ class PartyPokemon implements Saveable {
                     break;
                 }
 
-                conTypes.push(blockType);
-
                 // Apply the new contest types in order
-                this.currentContestTypes = conTypes.sort();
+                this._currentContestTypes(conTypes.concat(blockType).sort());
 
                 Notifier.notify({
                     message : `${this.displayName} became ${ContestType[blockType]}!`,
