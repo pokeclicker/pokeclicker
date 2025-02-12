@@ -52,9 +52,8 @@
         Stop Contest
       </button>
       <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
-        <!-- ko if: ContestRunner.rank() === 5 || ContestRunner.rank() === 6 || ContestRunner.rank() === 7 || ContestRunner.rank() === 8 || ContestRunner.rank() === 10 -->
-        <table width="100%">
-          <tr>
+        <table width="100%" style="font-size: small;">
+          <tr data-bind="if: ContestRunner.rank() === 5 || ContestRunner.rank() === 6 || ContestRunner.rank() === 7 || ContestRunner.rank() === 8">
             <td colspan="2">
               <span>Current Click Types:</span>
             </td>
@@ -90,31 +89,6 @@
             </td>
           </tr>
         </table>
-        <!-- /ko -->
-        <!-- ko if: ContestRunner.rank() === 1 || ContestRunner.rank() === 2 || ContestRunner.rank() === 3 || ContestRunner.rank() === 4 || ContestRunner.rank() === 9 -->
-        <table width="100%">
-          <tr>
-            <td width="40%">
-              <knockout data-bind="html: ContestBattle.pokemonContestAppealTooltip"></knockout>
-            </td>
-            <td width="60%">
-              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.encoreBonusComputable())"></knockout>
-            </td>
-          </tr>
-          <tr>
-            <td width="60%" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
-              <span class="badge text-light px-1" style="font-size: x-small" data-bind="
-                          attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.enemyPokemon().contestTypes) }">
-                <small><strong
-                  data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
-              </span>
-            </td>
-            <td width="40%">
-              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.trainerBonusComputable())"></knockout>
-            </td>
-          </tr>
-        </table>
-        <!-- /ko -->
       </h2>
     </div>
 </div>

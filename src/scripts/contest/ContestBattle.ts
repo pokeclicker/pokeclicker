@@ -40,21 +40,7 @@ class ContestBattle extends Battle {
     }
 
     public static clickAttack() {
-        switch (ContestRunner.rank()) {
-            case ContestRank.Practice:
-            case ContestRank['Super Normal']:
-            case ContestRank['Super Great']:
-            case ContestRank['Super Ultra']:
-            case ContestRank['Super Master']:
-            case ContestRank['Brilliant Shining']:
-                return ContestBattle.tallyContestCombo();
-            case ContestRank.Normal:
-            case ContestRank.Super:
-            case ContestRank.Hyper:
-            case ContestRank.Master:
-            case ContestRank.Spectacular:
-                return;
-        }
+        return ContestBattle.updateClickCombo();
     }
     /**
      * Award the player with exp, and go to the next pokemon
@@ -104,21 +90,40 @@ class ContestBattle extends Battle {
         ContestBattle.enemyPokemon().maxHealth(ContestBattle.enemyPokemon().maxHealth() * multiplier);
     }
 
-    public static tallyContestCombo() {
+    public static updateClickCombo() {
         if (ContestBattle.enemyPokemon() != null) {
-            // store clicked types in a const
-            const clickedTypes = ContestBattle.clickTypes();
-            // switch out clickTypes
-            ContestBattle.clickTypes(ContestBattle.enemyPokemon().contestTypes);
-
-            // Build up or break combo
-            if (clickedTypes.some(ct => ContestBattle.clickTypes().includes(ct))) {
-                ContestBattle.clickCombo(ContestBattle.clickCombo() + 1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
-            } else {
-                // Give reward
-                App.game.wallet.gainContestTokens(Math.max(ContestBattle.trainerStreak() * (ContestBattle.clickCombo() / 100), 1));
-                // Break combo
-                ContestBattle.clickCombo(1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+            switch (ContestRunner.rank()) {
+                case ContestRank.Normal:
+                case ContestRank.Super:
+                case ContestRank.Hyper:
+                case ContestRank.Master:
+                    // Increase combo based on type matchup
+                    ContestBattle.clickCombo(ContestBattle.clickCombo() + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+                    break;
+                case ContestRank.Practice:
+                case ContestRank['Super Normal']:
+                case ContestRank['Super Great']:
+                case ContestRank['Super Ultra']:
+                case ContestRank['Super Master']:
+                    // store clicked types in a const
+                    const clickedTypes = ContestBattle.clickTypes();
+                    // switch out clickTypes
+                    ContestBattle.clickTypes(ContestBattle.enemyPokemon().contestTypes);
+        
+                    // Build up or break combo
+                    if (clickedTypes.some(ct => ContestBattle.clickTypes().includes(ct))) {
+                        ContestBattle.clickCombo(ContestBattle.clickCombo() + 1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+                    } else {
+                        // Give reward
+                        App.game.wallet.gainContestTokens(Math.max(ContestBattle.trainerStreak() * (ContestBattle.clickCombo() / 100), 1));
+                        // Break combo
+                        ContestBattle.clickCombo(1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+                    }
+                    break;
+                case ContestRank.Spectacular:
+                case ContestRank['Brilliant Shining']:
+                    // TODO: this
+                    break;
             }
         }
         return;
