@@ -2,6 +2,11 @@
 /// <reference path="../contest/ContestPokemon.ts"/>
 /// <reference path="../../declarations/enums/ContestRank.d.ts"/>
 
+interface ContestTrainerOptions {
+    requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
+    clickPerk?: number,
+}
+
 class ContestTrainer extends Trainer {
 
     constructor(
@@ -9,7 +14,7 @@ class ContestTrainer extends Trainer {
         trainerClass: string,
         team: ContestPokemon[],
         subTrainerClass?: string,
-        public options?: EnemyOptions) {
+        public options?: ContestTrainerOptions) {
         super(trainerClass, team, name, subTrainerClass);
     }
 
@@ -67,9 +72,18 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
             new ContestPokemon('Crobat', 'Batro', 70, 10),
         ], '(male)'),
         new ContestTrainer('Sydney', 'Lass', [new ContestPokemon('Whismur', 'Whiris', 80, 10)]),
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 10)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
+        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 100, 10)], undefined, {
+            requirement: new SpecialEventRequirement('Flying Pikachu'),
+            clickPerk: 2,
+        }),
+        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 100, 10)], undefined, {
+            requirement: new SpecialEventRequirement('Golden Week'),
+            clickPerk: 2,
+        }),
+        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 10)], 'gen3', {
+            requirement: new SpecialEventRequirement('Hoopa Day'),
+            clickPerk: -30,
+        }),
     ],
     [ContestRank.Super]: [
         new ContestTrainer('Aliyah', 'Nurse', [new ContestPokemon('Blissey', 'Bliss', 80, 20)]),
@@ -107,9 +121,18 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Tylor', 'Hex Maniac', [new ContestPokemon('Misdreavus', 'Dreavis', 30, 20)]),
         new ContestTrainer('Willie', 'Ninja Boy', [new ContestPokemon('Cacnea', 'Nacac', 50, 20)]),
         new ContestTrainer('Zeek', 'Psychic', [new ContestPokemon('Drowzee', 'Drowzin', 110, 20)], '(male)'),
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 100, 20)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 100, 20)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 20)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
+        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 100, 20)], undefined, {
+            requirement: new SpecialEventRequirement('Flying Pikachu'),
+            clickPerk: 2,
+        }),
+        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 100, 20)], undefined, {
+            requirement: new SpecialEventRequirement('Golden Week'),
+            clickPerk: 2,
+        }),
+        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 20)], 'gen3', {
+            requirement: new SpecialEventRequirement('Hoopa Day'),
+            clickPerk: -30,
+        }),
     ],
     [ContestRank.Hyper]: [
         new ContestTrainer('Alisha', 'Young Couple', [new ContestPokemon('Beautifly', 'Tifly', 60, 30)], '(female)'),
@@ -150,9 +173,18 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Ronnie', 'Hiker', [new ContestPokemon('Lairon', 'Lairn', 70, 30)]),
         new ContestTrainer('Saul', 'Camper', [new ContestPokemon('Seaking', 'Kingsea', 100, 30)]),
         new ContestTrainer('Selena', 'Madame', [new ContestPokemon('Wailmer', 'Merail', 90, 30)]),
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 120, 30)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 120, 30)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 30)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
+        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 120, 30)], undefined, {
+            requirement: new SpecialEventRequirement('Flying Pikachu'),
+            clickPerk: 3,
+        }),
+        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 120, 30)], undefined, {
+            requirement: new SpecialEventRequirement('Golden Week'),
+            clickPerk: 3,
+        }),
+        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 30)], 'gen3', {
+            requirement: new SpecialEventRequirement('Hoopa Day'),
+            clickPerk: -70,
+        }),
     ],
     [ContestRank.Master]: [
         new ContestTrainer('Aubrey', 'Young Couple', [
@@ -191,9 +223,18 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
         new ContestTrainer('Sasha', 'Twin', [new ContestPokemon('Electrode', 'Rodlect', 80, 40)], 'right frlg'),
         new ContestTrainer('Sergio', 'Dragon Tamer', [new ContestPokemon('Dragonite', 'Drite', 60, 40)]),
         new ContestTrainer('Trey', 'Sailor', [new ContestPokemon('Slowking', 'Slowgo', 60, 40)]),
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 120, 40)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 120, 40)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 40)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
+        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 120, 40)], undefined, {
+            requirement: new SpecialEventRequirement('Flying Pikachu'),
+            clickPerk: 3,
+        }),
+        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 120, 40)], undefined, {
+            requirement: new SpecialEventRequirement('Golden Week'),
+            clickPerk: 3,
+        }),
+        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 40)], 'gen3', {
+            requirement: new SpecialEventRequirement('Hoopa Day'),
+            clickPerk: -70,
+        }),
     ],
     // Sinnoh Super Contests - try to include the default types when possible as to not confuse players
     [ContestRank['Super Normal']]: [

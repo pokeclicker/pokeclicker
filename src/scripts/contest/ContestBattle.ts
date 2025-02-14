@@ -98,7 +98,7 @@ class ContestBattle extends Battle {
                 case ContestRank.Hyper:
                 case ContestRank.Master:
                     // Increase combo based on type matchup
-                    ContestBattle.clickCombo(ContestBattle.clickCombo() + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+                    ContestBattle.clickCombo(ContestBattle.clickCombo() + (ContestBattle.trainer().options?.clickPerk ?? 2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
                     break;
                 case ContestRank.Practice:
                 case ContestRank['Super Normal']:
