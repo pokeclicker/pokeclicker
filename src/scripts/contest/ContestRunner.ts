@@ -138,7 +138,8 @@ class ContestRunner {
     public static contestTokenReward() {
         const trainerBonus = ContestBattle.trainerStreak();
         const rankBonus = ContestRunner.rank();
-        return Math.floor(5 + (trainerBonus * rankBonus));
+        const clickBonus = ContestRunner.rank() < 5 ? ContestBattle.clickCombo() / 50 : 0;
+        return Math.floor(5 + (trainerBonus * rankBonus) + (trainerBonus * clickBonus));
     }
 
     public static contestLost() {
@@ -148,7 +149,7 @@ class ContestRunner {
                 // Award some tokens
                 App.game.wallet.gainContestTokens(Math.floor(ContestRunner.contestTokenReward() / 3));
                 Notifier.notify({
-                    message: `Good job! You got a bonus of ${ContestRunner.contestTokenReward()} Contest Tokens!`,
+                    message: `Good job! You got a bonus of ${Math.floor(ContestRunner.contestTokenReward() / 3)} Contest Tokens!`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
                 });
@@ -169,7 +170,7 @@ class ContestRunner {
             // Award tokens after each round
             App.game.wallet.gainContestTokens(ContestRunner.contestTokenReward());
             Notifier.notify({
-                message: `${ContestHelper.encoreWord[ContestRunner.encoreRounds()]} You won ${ContestRunner.contestTokenReward()} Contest Tokens!`,
+                message: `${ContestHelper.encoreWord[Math.min(ContestRunner.encoreRounds(), ContestRunner.rank())]} You won ${ContestRunner.contestTokenReward()} Contest Tokens!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
             });
