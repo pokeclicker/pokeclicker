@@ -26,6 +26,10 @@ export default class ContestTypeHelper {
     })();
 
     public static getAppealModifier(attackingTypes: ContestType[], defendingTypes: ContestType[]): number {
+        // return nothing if undefined
+        if (!attackingTypes.length || !defendingTypes.length) {
+            return 0;
+        }
         // Find the effectiveness against each defending ContestType
         const defenseEffectiveness = defendingTypes.map(d => {
             let sum = 0;
