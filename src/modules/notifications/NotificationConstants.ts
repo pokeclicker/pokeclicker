@@ -10,7 +10,7 @@ const NotificationConstants = {
     NotificationOption,
     NotificationSound: {
         General: {
-            shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched'),
+            shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched/wandering'),
             new_catch: new Sound('new_catch', 'New Pokémon/shiny captured'),
             roaming: new Sound('roaming', 'Roaming Pokémon encountered'),
             achievement: new Sound('achievement', 'New achievement earned'),
@@ -75,9 +75,10 @@ const NotificationConstants = {
         Underground: {
             underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining tool reached maximum free use storage', true),
             underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining tool restored 1 free use', true),
-            underground_dig_deeper: new NotificationSetting('notifcation.underground_dig_deeper', 'You dig deeper...', true),
+            underground_dig_deeper: new NotificationSetting('notification.underground_dig_deeper', 'You dig deeper...', true),
             underground_item_found: new NotificationSetting('notification.underground_item_found', 'Item found while mining', true),
             helper: new NotificationSetting('notification.underground_helper', 'Underground Helper Hired/Fired', true),
+            battery_full: new NotificationSetting('notification.battery_full', 'Underground Battery is ready to be discharged', true),
         },
         Farming: {
             berry_discovered: new NotificationSetting('notification.berry_discovered', 'New Berry discovered', true),

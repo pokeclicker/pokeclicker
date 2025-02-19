@@ -2779,7 +2779,7 @@ class Update implements Saveable {
             };
 
             const totalReimburse = Object.entries(saveData.underground.upgrades).map(([key, value]) => {
-                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0);
+                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0) ?? 0;
             }).reduce((acc, cur) => acc + cur, 0);
             saveData.underground.upgrades = {};
             saveData.wallet.currencies[GameConstants.Currency.diamond] += totalReimburse;
@@ -2825,6 +2825,21 @@ class Update implements Saveable {
                 settingsData.showFarmModule = settingsData.showFarmModuleControls === false ? 'limited' : 'extended';
             }
             delete settingsData.showFarmModuleControls;
+            // Pokémon Center renamed
+            if (playerData._townName == 'Pokemon HQ Lab') {
+                playerData._townName = 'Pokémon HQ Lab';
+            }
+        },
+
+        '0.10.23': ({ playerData, saveData, settingsData }) => {
+            // Remove easier-to-fix locale misformatting from underground grid item tiles
+            saveData.underground?.mine.grid.map(t => t.reward).filter(r => r).forEach(r => {
+                if (!r.backgroundPosition.match(/^\d+% \d+%$/)) {
+                    r.backgroundPosition = r.backgroundPosition.replaceAll(',', '.');
+                    r.backgroundPosition = r.backgroundPosition.replace(/^([\d.]+)\s% ([\d.]+)\s%$/, '$1% $2%');
+                    r.backgroundPosition = r.backgroundPosition.replace(/^%\s([\d.]+) %\s([\d.]+)$/, '$1% $2%');
+                }
+            });
         },
     };
 
