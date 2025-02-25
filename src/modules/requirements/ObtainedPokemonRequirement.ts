@@ -14,6 +14,6 @@ export default class ObtainedPokemonRequirement extends Requirement {
     public hint(): string {
         return this.option === AchievementOption.more
             ? `${this.pokemon} needs to be owned.`
-            : `${this.pokemon} cannot be caught yet.`;
+            : `${this.pokemon} cannot be owned yet.`;
     }
 }
