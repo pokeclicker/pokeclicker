@@ -2841,6 +2841,10 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.24': ({ playerData, saveData, settingsData }) => {
+
+        },
     };
 
     constructor() {
@@ -3011,6 +3015,9 @@ class Update implements Saveable {
                 }
             }, { playerData, saveData, settingsData });
 
+        //remove missingno
+        updateResult.saveData.party.caughtPokemon = updateResult.saveData.party.caughtPokemon.filter(p => p.id != 0);
+        
         try {
             this.automaticallyDownloadBackup(backupButton, settingsData);
             Notifier.notify({
