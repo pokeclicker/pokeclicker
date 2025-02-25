@@ -3017,7 +3017,7 @@ class Update implements Saveable {
 
         //remove missingno
         updateResult.saveData.party.caughtPokemon = updateResult.saveData.party.caughtPokemon.filter(p => p.id != 0);
-        
+
         try {
             this.automaticallyDownloadBackup(backupButton, settingsData);
             Notifier.notify({
