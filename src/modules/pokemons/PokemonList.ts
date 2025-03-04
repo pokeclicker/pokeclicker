@@ -28226,8 +28226,8 @@ export const pokemonList = createPokemonArray(
             'speed': 72,
         },
         'evolutions': [
-            DummyEvolution('Kubfu', 'Urshifu (Single Strike)'),
-            DummyEvolution('Kubfu', 'Urshifu (Rapid Strike)'),
+            DungeonRestrictedLevelEvolution('Tower of Waters', 'Kubfu', 'Urshifu (Rapid Strike)', 34),
+            DungeonRestrictedLevelEvolution('Tower of Darkness', 'Kubfu', 'Urshifu (Single Strike)', 34),
             DummyEvolution('Kubfu', 'Gigantamax Urshifu (Single Strike)'),
             DummyEvolution('Kubfu', 'Gigantamax Urshifu (Rapid Strike)'),
         ],
