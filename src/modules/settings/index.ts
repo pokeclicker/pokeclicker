@@ -20,6 +20,7 @@ import {
     ModalCollapseList,
     getDungeonIndex,
     Pokerus,
+    ShadowStatus,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -30,6 +31,7 @@ import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequire
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import PokemonCategories from '../party/Category';
+import ShadowPokemonRequirement from '../requirements/ShadowPokemonRequirement';
 
 export default Settings;
 
@@ -445,6 +447,8 @@ Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
 Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
+Settings.add(new HotkeySetting('hotkey.castformApp', 'Castform App', 'W', {}, new ClearDungeonRequirement(250, getDungeonIndex('Weather Institute'))));
+Settings.add(new HotkeySetting('hotkey.purifyChamber', 'Purify Chamber', 'K', {}, new ShadowPokemonRequirement(1, ShadowStatus.Purified)));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
 Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lock', 'L', { suffix: ' or Shift + Click' }));
