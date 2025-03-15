@@ -14,7 +14,7 @@
             <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.battlePoint, tooltip: 'Battle Points<br /><br />Gained at the Battle Frontier.' } },
                 visible: TownList['Battle Frontier'].isUnlocked() || App.game.wallet.currencies[GameConstants.Currency.battlePoint]() > 0"></div>
             <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.contestToken, tooltip: 'Contest Tokens<br /><br />Gained by competing in Contests.' } },
-                visible: App.game.wallet.currencies[GameConstants.Currency.contestToken]() > 0"></div>
+                visible: TownList['National Park'].isUnlocked() || App.game.wallet.currencies[GameConstants.Currency.contestToken]() > 0"></div>
         </div>
     </div>
 </div>
