@@ -3734,13 +3734,13 @@ class QuestLineHelper {
         const talktoMustard9 = new TalkToNPCQuest(Mustard9, 'Talk to Mustard at the Master Dojo.');
         dojoArmorQuestLine.addQuest(talktoMustard9);
 
-        const clearTowerofDarkness = new DefeatDungeonQuest(1, 0, 'Tower of Darkness').withDescription('Defeat Tower of Darkness.');
-        const clearTowerofWaters = new DefeatDungeonQuest(1, 0, 'Tower of Waters').withDescription('Defeat Tower of Waters');
+        const catchUrshifuSingleStrike = new CaptureSpecificPokemonQuest('Urshifu (Single Strike)');
+        const catchUrshifuRapidStrike = new CaptureSpecificPokemonQuest('Urshifu (Rapid Strike)');
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
-                clearTowerofDarkness,
-                clearTowerofWaters,
-            ], 'Complete Kubfu\'s training in the Tower of Darkness and the Tower of Waters so it can evolve!'));
+                catchUrshifuSingleStrike,
+                catchUrshifuRapidStrike,
+            ], 'Level up Kubfu in both of the Towers of Two Fists to obtain Urshifu!'));
 
         const talktoMustard10 = new TalkToNPCQuest(Mustard10, 'Talk to Mustard at one of the Towers of Two Fists.');
         dojoArmorQuestLine.addQuest(talktoMustard10);
