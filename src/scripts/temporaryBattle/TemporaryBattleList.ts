@@ -5836,7 +5836,8 @@ TemporaryBattleList.Kubfu = new TemporaryBattle(
     [new GymPokemon('Kubfu', 2911282519, 50)],
     undefined,
     [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 11)],
-    [new ObtainedPokemonRequirement('Kubfu')],
+    [new OneFromManyRequirement([new ObtainedPokemonRequirement('Kubfu'), new ObtainedPokemonRequirement('Urshifu (Single Strike)'), new ObtainedPokemonRequirement('Urshifu (Rapid Strike)')])],
+    
     {
         isTrainerBattle: false,
         hideTrainer: true,
