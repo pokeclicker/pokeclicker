@@ -103,11 +103,8 @@ class QuestLineHelper {
                     }, 100);
 
                     // Hide the IntroJS overlay once the user selects the Pokeball
-                    const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
-                    selectPokeball.addEventListener('click', () => {
+                    $('#pokeballSelectorModal .clickable').one('click', () => {
                         Information.hide();
-                    }, {
-                        once: true,
                     });
                 });
             });
