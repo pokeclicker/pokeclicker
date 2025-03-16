@@ -48,7 +48,18 @@ class Discord implements Saveable {
         location.href = `$DISCORD_LOGIN_PROXY?action=login&redirect_uri=${encodeURIComponent(location.origin + location.pathname)}`;
     }
 
-    logout(): void {
+    async logout(shouldConfirm = false): Promise<void> {
+        if (shouldConfirm) {
+            if (!await Notifier.confirm({
+                title: 'Unlink Discord?',
+                message: 'Are you sure?',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Continue',
+            })) {
+                return;
+            }
+        }
+
         this.ID(this.defaults.id);
         // Save now
         Save.store(player);
