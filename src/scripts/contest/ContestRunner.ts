@@ -12,7 +12,7 @@ class ContestRunner {
 
     public static rank: KnockoutObservable<ContestRank> = ko.observable();
     public static type: KnockoutObservable<ContestType> = ko.observable();
-    public static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray([]);
+    public static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray();
 
     public static encoreStatus: KnockoutObservable<boolean> = ko.observable(false);
     public static encoreRounds: KnockoutObservable<number> = ko.observable(0);
@@ -49,12 +49,10 @@ class ContestRunner {
         ContestRunner.finaleStatus(false);
 
         ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
-        ContestBattle.trainerIndex(0);
-        ContestBattle.pokemonIndex(0);
         ContestBattle.trainerStreak(0);
         ContestBattle.clickTypes([]);
         ContestBattle.clickCombo(0);
-        ContestBattle.generateNewEnemy();
+        ContestBattle.generateTrainers();
         App.game.gameState = GameConstants.GameState.contest;
         ContestRunner.running(true);
         ContestRunner.resetGif();
@@ -167,8 +165,7 @@ class ContestRunner {
                 });
             }
             // always end the contest if lost
-            ContestBattle.enemyPokemon(null);
-            ContestBattle.trainer(null);
+            ContestBattle.endContest();
         }
     }
 
@@ -199,8 +196,7 @@ class ContestRunner {
             } else {
                 // if neither, end the contest
                 ContestRunner.running(false);
-                ContestBattle.enemyPokemon(null);
-                ContestBattle.trainer(null);
+                ContestBattle.endContest();
             }
 
             // TODO: reward ribbons to party pokemon based on rank, type, and how high their appeal is

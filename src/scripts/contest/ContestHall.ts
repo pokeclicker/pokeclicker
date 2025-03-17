@@ -18,8 +18,7 @@ class ContestHall extends TownContent {
         return this.buttonText ?? `${ContestRank[this.rank[0]]} Rank Contests`;
     }
     public onclick(): void {
-        ContestBattle.enemyPokemon(null);
-        ContestBattle.trainer(null);
+        ContestBattle.endContest();
         ContestRunner.contestRankObservable(this.rank);
         ContestRunner.contestTypeObservable(this.type);
         App.game.gameState = GameConstants.GameState.contest;

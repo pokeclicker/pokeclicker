@@ -1,13 +1,23 @@
 ///<reference path="../Battle.ts"/>
 class ContestBattle extends Battle {
-    static enemyPokemon: KnockoutObservable<ContestBattlePokemon> = ko.observable(null);
+    static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray(null);
+    static pokemons: KnockoutObservableArray<ContestBattlePokemon> = ko.observableArray(null);
+    static pokemonIndexArray: Array<KnockoutObservable<number>> = new Array(1).fill(ko.observable(null));
+    static enemyIndexes: KnockoutObservableArray<number> = ko.observableArray(null);
 
-    static trainer: KnockoutObservable<ContestTrainer> = ko.observable(null);
-    static trainerIndex: KnockoutObservable<number> = ko.observable(0);
-    static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
     static trainerStreak: KnockoutObservable<number> = ko.observable(0);
     static clickTypes: KnockoutObservableArray<ContestType> = ko.observableArray([]);
     static clickCombo: KnockoutObservable<number> = ko.observable(0);
+
+    static selectedEnemy: KnockoutObservable<number> = ko.observable(-1);
+
+    public static enemyTypes(index: number) {
+        if (index >= 0) {
+            return ContestBattle.pokemons()[index].contestTypes;
+        } else {
+            return [ContestRunner.type()];
+        }
+    }
 
     public static pokemonAttack() {
         if (ContestRunner.running()) {
@@ -16,25 +26,12 @@ class ContestBattle extends Battle {
                 return;
             }
             ContestBattle.lastPokemonAttack = now;
-            if (!ContestBattle.enemyPokemon()?.isAlive()) {
-                return;
-            }
-            // damage enemy and rally audience every tick
-            ContestBattle.enemyPokemon().damage(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestTypes));
+
             // increase the audience bar
             ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]));
 
-            if (!ContestBattle.enemyPokemon().isAlive()) {
-                // increase audience bar based off health, type, and index of defeated pokemon
-                ContestRunner.rally(
-                    Math.floor(
-                        (ContestBattle.enemyPokemon().maxHealth()
-                        * 0.2
-                        * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])
-                        * (1 + ContestBattle.pokemonIndex() * 0.2))
-                    )
-                );
-                ContestBattle.defeatPokemon();
+            if (ContestBattle.pokemons().some(p => !p?.isAlive)) {
+                ContestBattle.pokemons().filter(p => !p?.isAlive).forEach(() => ContestBattle.defeatPokemon());
             }
         }
     }
@@ -42,55 +39,93 @@ class ContestBattle extends Battle {
     public static clickAttack() {
         return ContestBattle.updateClickCombo();
     }
+
     /**
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        ContestBattle.enemyPokemon().defeat(true);
+        const enemyIndex = ContestBattle.pokemons().findIndex(p => !p?.isAlive());
+
+        if (ContestBattle.pokemons()[enemyIndex].contestTypes.includes(ContestRunner.type())) {
+            ContestRunner.appealGauge(Math.min(ContestRunner.appealGauge() + 1, 5));
+        }
+
+        ContestBattle.pokemons()[enemyIndex].defeat(true);
+        ContestBattle.pokemonIndexArray[enemyIndex](ContestBattle.pokemonIndexArray[enemyIndex]() + 1);
+
+        if (ContestBattle.pokemonIndexArray[enemyIndex]() + 1 >= ContestBattle.trainers()[enemyIndex].getTeam().length) {
+            // increase trainer streak
+            ContestBattle.trainerStreak(ContestBattle.trainerStreak() + 1);
+            // increase statistic
+            GameHelper.incrementObservable(App.game.statistics.contestTrainersDefeated[ContestRunner.rank()][ContestRunner.type()]);
+        }
 
         // Make contest "route" regionless
         App.game.breeding.progressEggsBattle(ContestRunner.rank() * 3 + 1, GameConstants.Region.none);
 
-        // Check if all of the trainer's party has been used
-        if (ContestBattle.pokemonIndex() + 1 >= ContestRunner.getTrainerList()[ContestBattle.trainerIndex()].getTeam().length) {
-
-            // Reset pokemon index for next trainer
-            ContestBattle.pokemonIndex(0);
-            // increase trainer streak
-            ContestBattle.trainerStreak(ContestBattle.trainerStreak() + 1);
-
-            // Loop through trainers
-            if (ContestBattle.trainerIndex() + 1 >= ContestRunner.getTrainerList().length) {
-                ContestBattle.trainerIndex(0);
-            } else {
-                // move to next trainer
-                ContestBattle.trainerIndex(ContestBattle.trainerIndex() + 1);
-            }
-
-        } else {
-            // Move to next pokemon
-            ContestBattle.pokemonIndex(ContestBattle.pokemonIndex() + 1);
-        }
-
         ContestBattle.generateNewEnemy();
-        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
+
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle); //todo: ContestBattle
+    }
+
+    public static generateTrainers() {
+        // max and default of 4
+        const opponentAmount = ContestRunner.rank() != ContestRank.Practice ? Math.min(ContestRunner.rank(), 4) : 4;
+        const opponents = Rand.shuffleArray(ContestRunner.getTrainerList());
+        ContestBattle.enemyIndexes(new Array((opponentAmount)).fill(null).map((_,i) => i));
+        ContestBattle.trainers(new Array(opponentAmount).fill(null).map((_,i) => opponents[i]));
+        ContestBattle.pokemonIndexArray = new Array(opponentAmount).fill(ko.observable(0));
+        ContestBattle.pokemons(new Array(opponentAmount).fill(null));
+        ContestBattle.pokemons().forEach(() => ContestBattle.generateNewEnemy());
     }
 
     /**
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        ContestBattle.counter = 0;
-        ContestBattle.trainer(ContestRunner.getTrainerList()[ContestBattle.trainerIndex()]);
-        ContestBattle.enemyPokemon(PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainerIndex(), ContestBattle.pokemonIndex()));
+        // do we need this???????? idk
+        // ContestBattle.counter = 0;
+
+        // trainer, enemy, and pokemon indexes are in the same position
+        const enemyIndex = ContestBattle.pokemons().findIndex(p => p === null || !p?.isAlive());
+
+        // Check if all of the trainer's party has been used
+        if (ContestBattle.pokemonIndexArray[enemyIndex]() + 1 >= ContestBattle.trainers()[enemyIndex].getTeam().length) {
+
+            // Reset pokemon index for next trainer
+            ContestBattle.pokemonIndexArray[enemyIndex](0);
+
+            // Select new trainer and pokemon
+            const newTrainer = Rand.fromArray(ContestRunner.getTrainerList().filter(t => !ContestBattle.trainers().some(tr => tr === t)));
+            ContestBattle.trainers()[enemyIndex] = newTrainer;
+            ContestBattle.trainers.notifySubscribers();
+            ContestBattle.pokemons()[enemyIndex] = PokemonFactory.generateContestTrainerPokemon(newTrainer, 0);
+            ContestBattle.pokemons.notifySubscribers();
+
+        } else {
+            // Move to next pokemon
+            ContestBattle.pokemons()[enemyIndex] = PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainers()[enemyIndex], ContestBattle.pokemonIndexArray[enemyIndex]());
+            ContestBattle.pokemons.notifySubscribers();
+    
+        }
 
         // increase the opposing pokemon's hp slightly with each trainer defeated
-        const multiplier = 80 * ContestRunner.rank() * (1 + 0.2 * ContestBattle.trainerStreak());
-        ContestBattle.enemyPokemon().health(ContestBattle.enemyPokemon().health() * multiplier);
-        ContestBattle.enemyPokemon().maxHealth(ContestBattle.enemyPokemon().maxHealth() * multiplier);
+        const multiplier = Math.max(ContestRunner.rank(), 1) + ContestRunner.encoreRounds();
+        ContestBattle.pokemons()[enemyIndex].health(ContestBattle.pokemons()[enemyIndex].health() * multiplier);
+        ContestBattle.pokemons()[enemyIndex].maxHealth(ContestBattle.pokemons()[enemyIndex].maxHealth() * multiplier);
+    }
+
+    public static endContest() {
+        ContestBattle.trainers([]);
+        ContestBattle.pokemons([]);
+        ContestBattle.pokemonIndexArray = [];
+        ContestBattle.enemyIndexes([]);
+    }
+
     }
 
     public static updateClickCombo() {
+        /*
         if (ContestBattle.enemyPokemon() != null) {
             switch (ContestRunner.rank()) {
                 case ContestRank.Normal:
@@ -98,7 +133,7 @@ class ContestBattle extends Battle {
                 case ContestRank.Hyper:
                 case ContestRank.Master:
                     // Increase combo based on type matchup
-                    ContestBattle.clickCombo(ContestBattle.clickCombo() + (ContestBattle.trainer().options?.clickPerk ?? 2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
+                    // ContestBattle.clickCombo(ContestBattle.clickCombo() + (ContestBattle.trainer().options?.clickPerk ?? 2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
                     break;
                 case ContestRank.Practice:
                 case ContestRank['Super Normal']:
@@ -126,6 +161,7 @@ class ContestBattle extends Battle {
                     break;
             }
         }
+        */
         return;
     }
 
@@ -143,11 +179,11 @@ class ContestBattle extends Battle {
     });
 
     public static pokemonContestAppealTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
-        if (ContestBattle.enemyPokemon()) {
-            const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestTypes);
-            return `${pokemonAppeal.toLocaleString('en-US')} against`;
-        } else {
+        // if (ContestBattle.enemyPokemon()) {
+        //     const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestTypes);
+        //     return `${pokemonAppeal.toLocaleString('en-US')} against`;
+        // } else {
             return '';
-        }
+        // }
     }).extend({rateLimit: 1000});
 }
