@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/party/LevelType.d.ts" />
+/// <reference path="../contest/ContestHelper.ts" />
 
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
@@ -159,7 +160,7 @@ class PartyPokemon implements Saveable {
     });
 
     public calculateContestAppeal(): number {
-        return Math.max(0, Math.floor(this.contestAppealBonusAmount));
+        return Math.max(0, this.contestAppealBonusAmount);
     }
 
     public canCatchPokerus(): boolean {
@@ -410,9 +411,10 @@ class PartyPokemon implements Saveable {
             case GameConstants.PokeBlockColor.Yellow:
             case GameConstants.PokeBlockColor.White:
                 amount = Math.min(amount, player.itemList[itemName]());
-                GameHelper.incrementObservable(this._contestAppealBonusAmount, amount);
+                const difference = Math.floor(this._contestAppealBonusAmount() * 10 - ContestHelper.increaseAppeal(this._contestAppealBonusAmount(), amount) * 10);
+                this._contestAppealBonusAmount(ContestHelper.increaseAppeal(this._contestAppealBonusAmount(), amount));
                 Notifier.notify({
-                    message : `${this.displayName} gained ${amount} appeal point(s)`,
+                    message : `${this.displayName} gained ${difference} appeal point(s)`,
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });

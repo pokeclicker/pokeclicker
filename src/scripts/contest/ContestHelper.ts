@@ -4,15 +4,15 @@ class ContestHelper {
         let appeal = 0;
         const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
         for (const pokemon of pks) {
-            appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, types, includeBreeding);
+            appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, types, includeBreeding) * 10;
         }
 
-        return Math.round(appeal);
+        return Math.round(appeal / 10);
     }
 
     public static calculateOnePokemonContestAppeal(pokemon: PartyPokemon, types: ContestType[], includeBreeding = false): number {
         let appeal = 0;
-        const pAppeal = pokemon.contestAppeal;
+        const pAppeal = pokemon.contestAppeal * 10;
         const pType = pokemon.currentContestTypes;
 
         // Check if the Pokemon is currently breeding (no appeal)
@@ -20,7 +20,7 @@ class ContestHelper {
             appeal = pAppeal * ContestTypeHelper.getAppealModifier(pType, types);
         }
 
-        return appeal;
+        return appeal / 10;
     }
 
     public static getPartyPokemonByContestType(type: ContestType): PartyPokemon[] {
@@ -108,6 +108,31 @@ class ContestHelper {
 
     public static getPokemonContestTypes(p: any) {
         return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p].contestTypes;
+    }
+
+    public static increaseAppeal(appeal: number, amount: number, sheen: number = 0) {
+        let sum = appeal * 100;
+
+        let blocksLeft = amount;
+
+        const rankBracket = 10 - Object.values(ContestHelper.rankAppeal).reverse().findIndex(i => i <= Math.min(appeal, ContestHelper.rankAppeal[ContestRank['Brilliant Shining']]));
+
+        for (let i = rankBracket; i <= ContestRank['Brilliant Shining']; i++) {
+            if (blocksLeft > 0) {
+                const multiplier = (10 - i + sheen) * 10;
+                if (i < ContestRank['Brilliant Shining']) {
+                    const addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]) * 100 - appeal * 100, blocksLeft * multiplier);
+                    sum = sum + addition;
+                    blocksLeft = Math.ceil(blocksLeft - addition / multiplier);
+                } else {
+                    const addition = blocksLeft * multiplier;
+                    sum = sum + addition;
+                    blocksLeft = Math.ceil(blocksLeft - addition / multiplier);
+                }
+            }
+        }
+
+        return sum / 100;
     }
 
     public static contestIsUnlocked(rank: ContestRank, type: ContestType) {
