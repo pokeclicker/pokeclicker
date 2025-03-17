@@ -182,6 +182,8 @@ class ContestRunner {
                 setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
             });
 
+            GameHelper.incrementObservable(App.game.statistics.contestRoundsWon[ContestRunner.rank()][ContestRunner.type()]);
+
             if (ContestRunner.encoreStatus()) {
                 // increase encore round
                 ContestRunner.encoreRounds(ContestRunner.encoreRounds() + 1);
