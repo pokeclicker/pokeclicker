@@ -109,4 +109,45 @@ class ContestHelper {
     public static getPokemonContestTypes(p: any) {
         return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p].contestTypes;
     }
+
+    public static contestIsUnlocked(rank: ContestRank, type: ContestType) {
+        if (rank > ContestRank.Normal && type != ContestType.Balanced) {
+            if (rank === ContestRank.Spectacular && new DevelopmentRequirement().isCompleted()) {
+                return App.game.statistics.contestRoundsWon[rank - 5][type]();
+            }
+            return App.game.statistics.contestRoundsWon[rank - 1][type]();
+        }
+        return true;
+    }
+
+    public static getContestHallRequirements(rank: ContestRank): (Requirement | OneFromManyRequirement)[] {
+        if (new DevelopmentRequirement().isCompleted()) {
+            return [];
+        }
+        if (rank <= ContestRank.Normal) {
+            return [];
+        }
+        if (rank === ContestRank.Spectacular) {
+            return [
+                new ContestWonRequirement(1, ContestRank['Super Master'], ContestType.Cool),
+                new ContestWonRequirement(1, ContestRank['Super Master'], ContestType.Beautiful),
+                new ContestWonRequirement(1, ContestRank['Super Master'], ContestType.Cute),
+                new ContestWonRequirement(1, ContestRank['Super Master'], ContestType.Smart),
+                new ContestWonRequirement(1, ContestRank['Super Master'], ContestType.Tough),
+                new MaxRegionRequirement(GameConstants.Region.kalos),
+            ];
+        }
+        if (rank === ContestRank['Brilliant Shining']) {
+            return [
+                new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Cool),
+                new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Beautiful),
+                new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Cute),
+                new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Smart),
+                new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Tough),
+                new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Balanced),
+                new MaxRegionRequirement(GameConstants.Region.galar),
+            ];
+        }
+        return [new ContestWonRequirement(1, rank - 1)];
+    }
 }

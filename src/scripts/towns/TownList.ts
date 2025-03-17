@@ -4137,7 +4137,7 @@ const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
 ], 'Secret Berry Shop');
 
 // TODO: add to Hearthome when done
-const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master']], undefined, 'Sinnoh Contests');
+const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master']], undefined, undefined, 'Sinnoh Contests');
 const BrilliantShiningContestHall = new ContestHall([ContestRank['Brilliant Shining']], [ContestType.Balanced]);
 
 //Sinnoh NPCs

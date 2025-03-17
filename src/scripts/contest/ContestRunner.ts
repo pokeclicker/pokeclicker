@@ -26,6 +26,13 @@ class ContestRunner {
         rank: ContestRank,
         type: ContestType
     ) {
+        if (!ContestHelper.contestIsUnlocked(rank, type)) {
+            Notifier.notify({
+                message: 'You have not won the previous rank\'s contest yet.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return;
+        }
         ContestRunner.running(false);
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
         ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());

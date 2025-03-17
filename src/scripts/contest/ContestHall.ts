@@ -5,9 +5,10 @@ class ContestHall extends TownContent {
     constructor(
         public rank: ContestRank[],
         public type: ContestType[] = [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough],
-        private buttonText?: string
+        public requirements: (Requirement | OneFromManyRequirement)[] = ContestHelper.getContestHallRequirements(rank[0]),
+        private buttonText?: string,
     ) {
-        super([new DevelopmentRequirement()]);
+        super(requirements);
     }
 
     public cssClass(): string {
@@ -30,6 +31,10 @@ class ContestHall extends TownContent {
         App.game.gameState = GameConstants.GameState.town;
     }
     public areaStatus(): areaStatus {
-        return areaStatus.completed;
+        if (this.rank.every(r => this.type.every(t => App.game.statistics.contestRoundsWon[r][t]()))) {
+            return areaStatus.completed;
+        } else {
+            return areaStatus.incomplete;
+        }
     }
 }
