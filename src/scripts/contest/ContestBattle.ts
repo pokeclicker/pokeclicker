@@ -6,7 +6,6 @@ class ContestBattle extends Battle {
     static enemyIndexes: KnockoutObservableArray<number> = ko.observableArray(null);
 
     static trainerStreak: KnockoutObservable<number> = ko.observable(0);
-    static clickTypes: KnockoutObservableArray<ContestType> = ko.observableArray([]);
     static clickCombo: KnockoutObservable<number> = ko.observable(0);
 
     static selectedEnemy: KnockoutObservable<number> = ko.observable(-1);

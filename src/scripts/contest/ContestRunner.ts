@@ -50,7 +50,6 @@ class ContestRunner {
 
         ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
         ContestBattle.trainerStreak(0);
-        ContestBattle.clickTypes([]);
         ContestBattle.clickCombo(0);
         ContestBattle.generateTrainers();
         App.game.gameState = GameConstants.GameState.contest;
