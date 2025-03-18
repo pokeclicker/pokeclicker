@@ -99,11 +99,15 @@ class ContestHelper {
     }
 
     public static getRibbonImage(rank: ContestRank, type: ContestType) {
-        const RibbonRank = ContestRank[rank];
-        const RibbonType = ContestType[type];
-        return RibbonType === 'Balanced' ?
-            `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
-            `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
+        if (rank > ContestRank.Practice) {
+            const RibbonRank = ContestRank[rank];
+            const RibbonType = ContestType[type];
+            return RibbonType === 'Balanced' ?
+                `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
+                `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
+        } else {
+            return `<image href="assets/images/ribbons/Normal Rank Ribbon.svg">`;
+        }
     }
 
     public static getPokemonContestTypes(p: any) {

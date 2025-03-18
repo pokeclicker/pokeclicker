@@ -4,20 +4,41 @@
         <span>Contest Hall</span>
     </div>
     <div class="card-body text-center">
-        <p>
+        <div class="mb-3">
+            <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())" data-bind="text: !ContestRunner.running() ? 'Start Contest' : 'Restart Contest'">Start Contest</button>
+            <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestHall.leave();" data-bind="visible: !ContestRunner.running()">Leave</button>
+            <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestRunner.running(false); ContestBattle.endContest();" data-bind="visible: ContestRunner.running()">Stop Contest</button>
+            <!-- <button class="btn btn-warning" style="min-width: 30%;">Dressing Room</button> -->
+        </div>
+        <div>
+            <button class="btn btn-warning" style="min-width: 30%;" onclick="GameHelper.incrementObservable(App.game.statistics.clickAppeal)">Increase Click Appeal</button>
+            <button class="btn btn-warning min-width: 30%" data-bind="text: App.game.statistics.clickAppeal()"></button>
+            <button class="btn btn-warning" style="min-width: 30%;" data-bind="click: () => {App.game.statistics.clickAppeal(App.game.statistics.clickAppeal() - 1)}">Decrease Click Appeal</button>
+        </div>
+        <!-- <p>
             Compete in a Contest!<br/>
             Max out the audience bar to win. Defeat more trainers for a higher reward. Higher ranks offer more Contest Tokens.</br>
             <i>This feature is still in development</i><br/>
-        </p>
+        </p> -->
         <div class="p-0 modal-body">
             <div class="justify-content-center" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
                 <h4 class="card-header mb-1 p-1" data-toggle="collapse" data-bind="attr : {href : '#rankCard_' + $index()}, text: `${ContestRank[rank]} Rank`"></h4>
                 <div class="card-body mb-1 p-0 show row" style="justify-content: space-evenly;"  data-bind="attr : {id : 'rankCard_' + $index()}, foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
                     <button class="d-flex flex-column align-items-center p-0 btn btn-secondary"
-                        data-bind="click: () => {ContestRunner.startContest(rank, type)},
-                        css: { active: ContestRunner.running() && ContestRunner.type() == type && ContestRunner.rank() == rank,
+                        data-bind="click: () => {
+                           if (!ContestRunner.running()) {
+                            ContestRunner.rank(rank);
+                            ContestRunner.type(type);
+                           } else {
+                            ContestRunner.startContest(rank, type);
+                           };
+                        },
+                        css: {
+                            active: ContestRunner.type() == type && ContestRunner.rank() == rank,
+                            disabled: !ContestHelper.contestIsUnlocked(rank, type),
                             contestButton3: Settings.getSetting('gameDisplayStyle').observableValue() != 'fullWidth5',
-                            contestButton5: Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5' },
+                            contestButton5: Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
+                        },
                         tooltip: {
                             html: true,
                             title: ContestHelper.contestButtonTooltip(rank, type),
@@ -26,7 +47,11 @@
                         attr:{'aria-label': `${ContestRank[rank]} Rank ${ContestType[type]} Contest. ${ContestHelper.contestButtonTooltip(rank, type)}.`}
                         ">
                         <p class="m-0" style="font-weight: bolder;" data-bind="text: `${ContestType[type]}`"></p>
-                        <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" width="80px" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano" data-bind="attr: {'contest-type': ContestType[type]}">
+                        <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" width="80px" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
+                            data-bind="
+                                attr: {'contest-type': ContestType[type]},
+                                css: { 'pokemon-not-seen': !App.game.statistics.contestRoundsWon[rank][type]() },
+                                ">
                             <g data-bind="html: ContestHelper.getRibbonImage(rank, type)"></g>
                         </svg>
                         <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(rank, type, [type]))}`"></p>

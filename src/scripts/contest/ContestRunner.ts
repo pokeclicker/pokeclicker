@@ -19,8 +19,8 @@ class ContestRunner {
     public static finaleStatus: KnockoutObservable<boolean> = ko.observable(false);
 
     // Updated via ContestHall.ts
-    public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([]);
-    public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([]);
+    public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray();
+    public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray();
 
     public static startContest(
         rank: ContestRank,

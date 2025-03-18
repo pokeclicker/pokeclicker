@@ -21,6 +21,8 @@ class ContestHall extends TownContent {
         ContestBattle.endContest();
         ContestRunner.contestRankObservable(this.rank);
         ContestRunner.contestTypeObservable(this.type);
+        ContestRunner.rank(this.rank[0]);
+        ContestRunner.type(this.type[0]);
         App.game.gameState = GameConstants.GameState.contest;
     }
     public static leave(): void {
