@@ -168,9 +168,10 @@ class Party implements Feature {
     ): number {
         let attack = 0;
         const pokemon = this.partyPokemonActiveInSubRegion(region, subregion);
+        const ignoreRegionMultiplierOrMKJ = ignoreRegionMultiplier || region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump;
 
         for (const p of pokemon) {
-            attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
+            attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplierOrMKJ, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
