@@ -10,8 +10,8 @@ class ContestBattle extends Battle {
     static selectedEnemy: KnockoutObservable<number> = ko.observable(-1);
 
     public static trainerInfo(index: number) {
-        if(index >= 0){
-            return ContestBattle.trainers()[index].name.replace(/\d/g,'') + '\'s ' + ContestBattle.pokemons()[index].nickname;
+        if (index >= 0) {
+            return `${ContestBattle.trainers()[index].name.replace(/\d/g,'')}\'s ${ContestBattle.pokemons()[index].nickname}`;
         } else {
             return 'Active Click Type';
         }
@@ -68,7 +68,7 @@ class ContestBattle extends Battle {
                         message: `${ContestBattle.trainers()[enemyIndex].name} defeated. ${BerryType[br.berry]} rewarded.`,
                         type: NotificationConstants.NotificationOption.success,
                     });
-                })
+                });
             }
             if (ContestBattle.trainers()[enemyIndex].options?.itemReward) {
                 ContestBattle.trainers()[enemyIndex].options?.itemReward?.filter(ir => !ir.requirement || ir.requirement?.isCompleted()).forEach(ir => {
@@ -77,7 +77,7 @@ class ContestBattle extends Battle {
                         message: `${ContestBattle.trainers()[enemyIndex].name} defeated. ${ItemList[ir.item].displayName} rewarded.`,
                         type: NotificationConstants.NotificationOption.success,
                     });
-                })
+                });
             }
         }
 
@@ -127,7 +127,6 @@ class ContestBattle extends Battle {
             // Move to next pokemon
             ContestBattle.pokemons()[enemyIndex] = PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainers()[enemyIndex], ContestBattle.pokemonIndexArray[enemyIndex]());
             ContestBattle.pokemons.notifySubscribers();
-    
         }
 
         // increase the opposing pokemon's hp slightly with each trainer defeated
@@ -231,40 +230,39 @@ class ContestBattle extends Battle {
         // remember to check ContestRank.Practice for this
         return ContestRunner.rank() < ContestRank.Spectacular ? `Bonus Round: ${ContestRunner.encoreRounds()}/${ContestRunner.rank()}` : `Round: ${ContestRunner.encoreRounds()}`;
     });
-    
+
     public static maxAppealComputable: KnockoutComputed<string> = ko.pureComputed(() => {
         const appealLeft = '🤍';
         const jam = '🖤';
 
-        let appeal: string[] = [];
+        const appeal: string[] = [];
         ContestRunner.crowdHype().forEach(ct => {
-                switch (ct) {
-                    case ct = ContestType.Cool:
-                        appeal.push('🧡');
-                        break;
-                    case ct = ContestType.Beautiful:
-                        appeal.push('💙');
-                        break;
-                    case ct = ContestType.Cute:
-                        appeal.push('🩷');
-                        break;
-                    case ct = ContestType.Smart:
-                        appeal.push('💚');
-                        break;
-                    case ct = ContestType.Tough:
-                        appeal.push('💛');
-                        break;
-                    case ct = ContestType.Balanced:
-                        appeal.push('💜');
-                        break;
-                }
+            switch (ct) {
+                case ct = ContestType.Cool:
+                    appeal.push('🧡');
+                    break;
+                case ct = ContestType.Beautiful:
+                    appeal.push('💙');
+                    break;
+                case ct = ContestType.Cute:
+                    appeal.push('🩷');
+                    break;
+                case ct = ContestType.Smart:
+                    appeal.push('💚');
+                    break;
+                case ct = ContestType.Tough:
+                    appeal.push('💛');
+                    break;
+                case ct = ContestType.Balanced:
+                    appeal.push('💜');
+                    break;
             }
-        )
+        });
 
         if (!ContestRunner.jamTime()) {
             return appeal.join('').concat(appealLeft.repeat(5 - appeal.length));
         } else {
-            return jam.repeat(Math.min(Math.ceil(ContestRunner.jamTime()/1000), 5)).concat(appealLeft.repeat(5 - Math.min(Math.ceil(ContestRunner.jamTime()/1000), 5)));
+            return jam.repeat(Math.min(Math.ceil(ContestRunner.jamTime() / 1000), 5)).concat(appealLeft.repeat(5 - Math.min(Math.ceil(ContestRunner.jamTime() / 1000), 5)));
         }
     })
 }

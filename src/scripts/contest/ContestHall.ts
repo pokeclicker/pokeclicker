@@ -6,7 +6,7 @@ class ContestHall extends TownContent {
         public rank: ContestRank[],
         public type: ContestType[] = [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough],
         public requirements: (Requirement | OneFromManyRequirement)[] = ContestHelper.getContestHallRequirements(rank[0]),
-        private buttonText?: string,
+        private buttonText?: string
     ) {
         super(requirements);
     }

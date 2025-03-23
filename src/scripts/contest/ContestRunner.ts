@@ -201,7 +201,7 @@ class ContestRunner {
 
     public static audienceStatus: KnockoutComputed<string> = ko.pureComputed(() => {
         if (ContestRunner.jamTime() > 1) {
-            return `<i>Jammed! (${Math.ceil(ContestRunner.jamTime()/1000)}s)</i>`;
+            return `<i>Jammed! (${Math.ceil(ContestRunner.jamTime() / 1000)}s)</i>`;
         }
         if (!ContestRunner.encoreStatus() && !ContestRunner.finaleStatus()) {
             return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;

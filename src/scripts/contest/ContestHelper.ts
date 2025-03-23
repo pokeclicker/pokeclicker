@@ -115,7 +115,7 @@ class ContestHelper {
                 `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
                 `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
         } else {
-            return `<image href="assets/images/ribbons/Normal Rank Ribbon.svg">`;
+            return '<image href="assets/images/ribbons/Normal Rank Ribbon.svg">';
         }
     }
 
@@ -123,7 +123,7 @@ class ContestHelper {
         return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p].contestTypes;
     }
 
-    public static increaseAppeal(appeal: number, amount: number, sheen: number = 0) {
+    public static increaseAppeal(appeal: number, amount: number, sheen = 0) {
         let sum = appeal * 100;
 
         let blocksLeft = amount;
