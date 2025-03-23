@@ -11618,7 +11618,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 172,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Altarianite, 'Altaria', 'Mega Altaria')],
+        'evolutions': [MegaEvolution(MegaStoneType.Altarianite, 'Altaria', 'Mega Altaria')],
         'base': {
             'hitpoints': 75,
             'attack': 70,

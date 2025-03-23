@@ -84,6 +84,7 @@ export type ItemNameType
     | 'Blastoisinite'
     | 'Blazikenite'
     | 'Blue_Orb'
+    | 'Altarianite'
     | 'Cameruptite'
     | 'Charizardite_X'
     | 'Charizardite_Y'
