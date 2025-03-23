@@ -8,6 +8,10 @@ class ContestRunner {
     public static maxAudienceAppeal: KnockoutObservable<number> = ko.observable(1);
     public static audienceAppeal: KnockoutObservable<number> = ko.observable(0);
 
+    // Hoenn contests
+    public static crowdHype: KnockoutObservableArray<ContestType> = ko.observableArray();
+    public static jamTime: KnockoutObservable<number> = ko.observable(0);
+
     public static running: KnockoutObservable<boolean> = ko.observable(false);
 
     public static rank: KnockoutObservable<ContestRank> = ko.observable();
@@ -28,7 +32,7 @@ class ContestRunner {
     ) {
         if (!ContestHelper.contestIsUnlocked(rank, type)) {
             Notifier.notify({
-                message: 'You have not won the previous rank\'s contest yet.',
+                message: `You have not won the previous Rank\'s ${ContestType[type]} contest yet.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
@@ -44,35 +48,18 @@ class ContestRunner {
         ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank());
         ContestRunner.audienceAppeal(0);
 
+        ContestRunner.crowdHype.removeAll();
+        ContestRunner.jamTime(0);
+
         ContestRunner.encoreStatus(false);
         ContestRunner.encoreRounds(0);
         ContestRunner.finaleStatus(false);
 
         ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
         ContestBattle.trainerStreak(0);
-        ContestBattle.clickCombo(0);
         ContestBattle.generateTrainers();
         App.game.gameState = GameConstants.GameState.contest;
         ContestRunner.running(true);
-        ContestRunner.resetGif();
-
-        setTimeout(() => {
-            ContestRunner.hideGif();
-        }, GameConstants.GYM_COUNTDOWN);
-    }
-
-    private static hideGif() {
-        $('#gymGoContainer').hide();
-    }
-
-    public static resetGif() {
-        if (!Settings.getSetting('showGymGoAnimation').value) {
-            return;
-        }
-        $('#gymGoContainer').show();
-        setTimeout(() => {
-            $('#gymGo').attr('src', 'assets/gifs/go.gif');
-        }, 0);
     }
 
     public static tick() {
@@ -102,6 +89,8 @@ class ContestRunner {
         }
         ContestRunner.timeLeft(ContestRunner.timeLeft() - GameConstants.CONTEST_TICK);
         ContestRunner.timeLeftPercentage(Math.floor(ContestRunner.timeLeft() / (GameConstants.CONTEST_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+
+        ContestRunner.jamTime(Math.max(ContestRunner.jamTime() - GameConstants.CONTEST_TICK, 0));
 
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
         if (currentFluteBonus != ContestRunner.timeBonus()) {
@@ -142,8 +131,7 @@ class ContestRunner {
     public static contestTokenReward() {
         const trainerBonus = ContestBattle.trainerStreak();
         const rankBonus = ContestRunner.rank();
-        const clickBonus = ContestRunner.rank() < 5 ? ContestBattle.clickCombo() / 50 : 0;
-        return Math.floor(5 + (trainerBonus * rankBonus) + (trainerBonus * clickBonus));
+        return Math.floor(5 + Math.max(1, trainerBonus * rankBonus));
     }
 
     public static contestLost() {
@@ -153,7 +141,7 @@ class ContestRunner {
                 // Award some tokens
                 App.game.wallet.gainContestTokens(Math.floor(ContestRunner.contestTokenReward() / 3));
                 Notifier.notify({
-                    message: `Good job! You got a bonus of ${Math.floor(ContestRunner.contestTokenReward() / 3)} Contest Tokens!`,
+                    message: `Good job! You got a bonus of <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${Math.floor(ContestRunner.contestTokenReward() / 3)} Contest Tokens!`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
                 });
@@ -173,7 +161,7 @@ class ContestRunner {
             // Award tokens after each round
             App.game.wallet.gainContestTokens(ContestRunner.contestTokenReward());
             Notifier.notify({
-                message: `${ContestHelper.encoreWord[Math.min(ContestRunner.encoreRounds(), ContestRunner.rank())]} You won ${ContestRunner.contestTokenReward()} Contest Tokens!`,
+                message: `${ContestHelper.encoreWord[Math.min(ContestRunner.encoreRounds(), ContestRunner.rank())]} You won <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${ContestRunner.contestTokenReward()} Contest Tokens!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
             });
@@ -212,6 +200,9 @@ class ContestRunner {
     })
 
     public static audienceStatus: KnockoutComputed<string> = ko.pureComputed(() => {
+        if (ContestRunner.jamTime() > 1) {
+            return `<i>Jammed! (${Math.ceil(ContestRunner.jamTime()/1000)}s)</i>`;
+        }
         if (!ContestRunner.encoreStatus() && !ContestRunner.finaleStatus()) {
             return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;
         } else {

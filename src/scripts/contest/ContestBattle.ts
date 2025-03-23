@@ -6,9 +6,16 @@ class ContestBattle extends Battle {
     static enemyIndexes: KnockoutObservableArray<number> = ko.observableArray(null);
 
     static trainerStreak: KnockoutObservable<number> = ko.observable(0);
-    static clickCombo: KnockoutObservable<number> = ko.observable(0);
 
     static selectedEnemy: KnockoutObservable<number> = ko.observable(-1);
+
+    public static trainerInfo(index: number) {
+        if(index >= 0){
+            return ContestBattle.trainers()[index].name.replace(/\d/g,'') + '\'s ' + ContestBattle.pokemons()[index].nickname;
+        } else {
+            return 'Active Click Type';
+        }
+    }
 
     public static enemyTypes(index: number) {
         if (index >= 0) {
@@ -27,16 +34,14 @@ class ContestBattle extends Battle {
             ContestBattle.lastPokemonAttack = now;
 
             // increase the audience bar
-            ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]));
+            if (ContestRunner.jamTime() <= 0) {
+                ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]));
+            }
 
             if (ContestBattle.pokemons().some(p => !p?.isAlive)) {
                 ContestBattle.pokemons().filter(p => !p?.isAlive).forEach(() => ContestBattle.defeatPokemon());
             }
         }
-    }
-
-    public static clickAttack() {
-        return ContestBattle.updateClickCombo();
     }
 
     /**
@@ -45,9 +50,7 @@ class ContestBattle extends Battle {
     public static defeatPokemon() {
         const enemyIndex = ContestBattle.pokemons().findIndex(p => !p?.isAlive());
 
-        if (ContestBattle.pokemons()[enemyIndex].contestTypes.includes(ContestRunner.type())) {
-            ContestRunner.appealGauge(Math.min(ContestRunner.appealGauge() + 1, 5));
-        }
+        ContestBattle.exciteCrowd(enemyIndex);
 
         ContestBattle.pokemons()[enemyIndex].defeat(true);
         ContestBattle.pokemonIndexArray[enemyIndex](ContestBattle.pokemonIndexArray[enemyIndex]() + 1);
@@ -140,47 +143,83 @@ class ContestBattle extends Battle {
         ContestBattle.enemyIndexes([]);
     }
 
-    }
-
-    public static updateClickCombo() {
-        /*
-        if (ContestBattle.enemyPokemon() != null) {
-            switch (ContestRunner.rank()) {
-                case ContestRank.Normal:
-                case ContestRank.Super:
-                case ContestRank.Hyper:
-                case ContestRank.Master:
-                    // Increase combo based on type matchup
-                    // ContestBattle.clickCombo(ContestBattle.clickCombo() + (ContestBattle.trainer().options?.clickPerk ?? 2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
-                    break;
-                case ContestRank.Practice:
-                case ContestRank['Super Normal']:
-                case ContestRank['Super Great']:
-                case ContestRank['Super Ultra']:
-                case ContestRank['Super Master']:
-                    // store clicked types in a const
-                    const clickedTypes = ContestBattle.clickTypes();
-                    // switch out clickTypes
-                    ContestBattle.clickTypes(ContestBattle.enemyPokemon().contestTypes);
-        
-                    // Build up or break combo
-                    if (clickedTypes.some(ct => ContestBattle.clickTypes().includes(ct))) {
-                        ContestBattle.clickCombo(ContestBattle.clickCombo() + 1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
-                    } else {
-                        // Give reward
-                        App.game.wallet.gainContestTokens(Math.max(ContestBattle.trainerStreak() * (ContestBattle.clickCombo() / 100), 1));
-                        // Break combo
-                        ContestBattle.clickCombo(1 + (2 * ContestTypeHelper.getAppealModifier(ContestBattle.enemyPokemon().contestTypes, [ContestRunner.type()])));
-                    }
-                    break;
-                case ContestRank.Spectacular:
-                case ContestRank['Brilliant Shining']:
-                    // TODO: this
-                    break;
+    public static clickAppeal(index: number) {
+        if (ContestRunner.running()) {
+            // click attacks disabled
+            if (App.game.challenges.list.disableClickAttack.active()) {
+                return;
+            }
+            // (Comments copied from clickAttack)
+            // TODO: figure out a better way of handling this
+            // Limit click attack speed, Only allow 1 attack per 50ms (20 per second)
+            const now = Date.now();
+            if (this.lastClickAttack > now - 50) {
+                return;
+            }
+            this.lastClickAttack = now;
+            if (!this.pokemons()[index]?.isAlive()) {
+                return;
+            }
+            this.pokemons()[index].damage(ContestHelper.calculateClickAppeal([ContestRunner.type()], ContestBattle.pokemons()[index].contestTypes));
+            if (!this.pokemons()[index].isAlive()) {
+                this.defeatPokemon();
             }
         }
-        */
-        return;
+    }
+
+    public static maxAppeal() {
+        if (ContestRunner.crowdHype().length >= 5) {
+            // Make const for crowdHype so it doesn't change in Spectacular Rank
+            const hypeFocus = [...new Set(ContestRunner.crowdHype().filter(ct => ct === ContestRunner.type()))].length;
+
+            ContestBattle.pokemons().forEach(p => {
+                // damage opponent
+                p.damage(10 * ContestHelper.calculateClickAppeal([ContestRunner.type()], p.contestTypes));
+
+                // equation for adding audience appeal
+                const multiplier = p.contestTypes.includes(ContestRunner.type()) ? 2 : 1;
+                const baseAudienceAppeal = ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * Math.pow(ContestRunner.rank(), 2);
+                const baseOpponentHealth = p.maxHealth() / (Math.max(ContestRunner.rank(), 1) + ContestRunner.encoreRounds());
+                const HPBonus = baseOpponentHealth * ContestRunner.rank() * 10 * multiplier / (baseAudienceAppeal);
+                const percentBonus = 15 / 100;
+                const baseBonus = Math.floor((((((percentBonus * baseAudienceAppeal) / 80) / (Math.pow(ContestRunner.rank(), 2) * ContestBattle.enemyIndexes().length)) / (80 * ContestRunner.rank())) + HPBonus) * baseAudienceAppeal);
+
+                // Rally and Jam when defeated or, in Spectacular, every time used
+                if (!p?.isAlive() || ContestRunner.rank() === ContestRank.Spectacular) {
+                    ContestRunner.rally(Math.round(baseBonus / hypeFocus));
+                    ContestBattle.contestJam(p);
+                }
+                // Defeat
+                if (!p?.isAlive()) {
+                    ContestBattle.defeatPokemon();
+                }
+            });
+
+            // then empty the click appeal bar
+            ContestRunner.crowdHype.removeAll();
+        }
+    }
+
+    public static exciteCrowd(p: any) {
+        if (ContestRunner.jamTime() <= 0) {
+            if (ContestRunner.rank() < ContestRank.Spectacular && ContestBattle.pokemons()[p].contestTypes.includes(ContestRunner.type())) {
+                // limit to 5, add contest's type
+                const run = ContestRunner.crowdHype().concat(ContestRunner.type()).reverse().slice(0, 5).reverse();
+                ContestRunner.crowdHype(run);
+            }
+            if (ContestRunner.rank() >= ContestRank.Spectacular) {
+                // limit to 5, add opponent's types, keep contest's type
+                const type = ContestRunner.crowdHype().concat(ContestBattle.pokemons()[p].contestTypes).filter(ct => ct === ContestRunner.type());
+                const run = ContestRunner.crowdHype().concat(ContestBattle.pokemons()[p].contestTypes).filter(ct => ct != ContestRunner.type()).reverse().slice(0, 5 - type.length).reverse();
+                ContestRunner.crowdHype(type.concat(run));
+            }
+        }
+    }
+
+    public static contestJam(p: any) {
+        const type = ContestRunner.rank() < ContestRank.Spectacular ? [ContestRunner.type()] : ContestRunner.crowdHype();
+        const jams = p?.contestTypes.filter(ct => ContestTypeHelper.getAppealModifier(type, [ct]) === 0).length;
+        ContestRunner.jamTime(ContestRunner.jamTime() + jams * 1000);
     }
 
     // Computables for contestView
@@ -189,19 +228,43 @@ class ContestBattle extends Battle {
     });
 
     public static encoreBonusComputable: KnockoutComputed<string> = ko.pureComputed(() => {
-        return `Bonus Round: ${ContestRunner.encoreRounds()}/${ContestRunner.rank()}`;
+        // remember to check ContestRank.Practice for this
+        return ContestRunner.rank() < ContestRank.Spectacular ? `Bonus Round: ${ContestRunner.encoreRounds()}/${ContestRunner.rank()}` : `Round: ${ContestRunner.encoreRounds()}`;
     });
+    
+    public static maxAppealComputable: KnockoutComputed<string> = ko.pureComputed(() => {
+        const appealLeft = '🤍';
+        const jam = '🖤';
 
-    public static clickBonusComputable: KnockoutComputed<string> = ko.pureComputed(() => {
-        return `Click Combo: ${ContestBattle.clickCombo()}`;
-    });
+        let appeal: string[] = [];
+        ContestRunner.crowdHype().forEach(ct => {
+                switch (ct) {
+                    case ct = ContestType.Cool:
+                        appeal.push('🧡');
+                        break;
+                    case ct = ContestType.Beautiful:
+                        appeal.push('💙');
+                        break;
+                    case ct = ContestType.Cute:
+                        appeal.push('🩷');
+                        break;
+                    case ct = ContestType.Smart:
+                        appeal.push('💚');
+                        break;
+                    case ct = ContestType.Tough:
+                        appeal.push('💛');
+                        break;
+                    case ct = ContestType.Balanced:
+                        appeal.push('💜');
+                        break;
+                }
+            }
+        )
 
-    public static pokemonContestAppealTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
-        // if (ContestBattle.enemyPokemon()) {
-        //     const pokemonAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), ContestBattle.enemyPokemon().contestTypes);
-        //     return `${pokemonAppeal.toLocaleString('en-US')} against`;
-        // } else {
-            return '';
-        // }
-    }).extend({rateLimit: 1000});
+        if (!ContestRunner.jamTime()) {
+            return appeal.join('').concat(appealLeft.repeat(5 - appeal.length));
+        } else {
+            return jam.repeat(Math.min(Math.ceil(ContestRunner.jamTime()/1000), 5)).concat(appealLeft.repeat(5 - Math.min(Math.ceil(ContestRunner.jamTime()/1000), 5)));
+        }
+    })
 }

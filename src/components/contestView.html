@@ -1,79 +1,100 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.contest">
-    <div class="col no-gutters clickable" data-bind="if: ContestBattle.enemyPokemon, click: function() {ContestBattle.clickAttack()}" style="height: 280px; display: block;">
-        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
-            <knockout>
-                <knockout data-bind="text: ContestBattle.trainer().name.replace(/\d/g,'') + '\'s'"></knockout>
-                <knockout data-bind="text: ContestBattle.enemyPokemon().nickname">Pokémon name</knockout>
-            </knockout>
-
-            <div class="progress timer">
-                <div class="progress-bar bg-danger" role="progressbar"
-                        data-bind="attr:{ style: 'width:' + ContestRunner.timeLeftPercentage() + '%' },
-                        css: { 'bg-danger': ContestRunner.timeLeftSeconds() < 3, 'bg-primary': ContestRunner.timeLeftSeconds() >= 10 }"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <span data-bind="text: ContestRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
-                </div>
-            </div>
-        </h2>
-
-        <div id="gymGoContainer" data-bind="if: Settings.getSetting('showGymGoAnimation').observableValue">
-            <div class="row" style="display: inline-block; vertical-align: middle;">
-              <div class="col-sm-6 offset-sm-3">
-                <img style="width:100%" id="gymGo" src="assets/gifs/go.gif">
-              </div>
-            </div>
-          </div>
-
-        <div class="trainer">
-            <img data-bind="attr:{ src: ContestBattle.trainer().image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+  <div class="col no-gutters" style="height: 280px; display: block;">
+    <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
+      <div data-bind="text: !ContestRunner.running() ? 'Contest Hall' : `${ContestRank[ContestRunner.rank()]} Rank`"></div>
+      <div data-bind="visible: ContestRunner.running()" class="progress timer">
+        <div class="progress-bar bg-danger" role="progressbar"
+          data-bind="attr:{ style: 'width:' + ContestRunner.timeLeftPercentage() + '%' },
+          css: { 'bg-danger': ContestRunner.timeLeftSeconds() < 3, 'bg-primary': ContestRunner.timeLeftSeconds() >= 10 }"
+          aria-valuemin="0" aria-valuemax="100">
+          <span data-bind="text: ContestRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
         </div>
-  
-        <div>
-            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.enemyPokemon() } }">Pokémon sprite</knockout>
-        </div>
-        <div class="progress contestpoints trainerhitpoints">
-            <div class="progress-bar bg-danger" role="progressbar"
-                    data-bind="attr:{ style: 'width:' + ContestBattle.enemyPokemon().healthPercentage() + '%' }"
-                    aria-valuemin="0" aria-valuemax="100">
-                <span data-bind="text: ContestBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + ContestBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
-            </div>
-        </div>
-        <div class="progress hitpoints trainerhitpoints">
-          <div class="progress-bar bg-success" role="progressbar"
-                  data-bind="attr:{ style: 'width:' + ContestRunner.audienceAppealPercentage() + '%' }, css: {'progress-bar-striped progress-bar-animated': ContestRunner.encoreStatus() || ContestRunner.finaleStatus()} "
-                  aria-valuemin="0" aria-valuemax="100">
-              <span data-bind="html: ContestRunner.audienceStatus()" style="font-size: 12px;"></span>
+      </div>
+    </h2>
+        
+    <div class="" data-bind="visible: !ContestRunner.running()">
+      <div style="margin-top: 60px;">
+        <button class="btn btn-success w-25" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())">Start Contest</button>
+      </div>
+      <div class="">
+          <div class="justify-content-center">
+            <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+                <table width="100%">
+                  <th colspan="2" data-bind="text: `${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Contest Stats`"></th>
+                  <tr>
+                    <td data-bind="text: `${ContestType[ContestRunner.type()]} Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]).toLocaleString('en-US')}`"></td>
+                    <td data-bind="text: `Click Appeal: ${App.game.statistics.clickAppeal().toLocaleString('en-US')}`"></td>
+                  </tr>
+                  <!-- <tr>
+                    <td colspan="6">Total trainers defeated: 5 also click here for breakdown include stats somehow</td> -->
+                    <!-- note: befriended trainers can give berries? how would i do that though.... ugh npcs -->
+                  <!-- </tr> -->
+                  <tr>
+                    <td data-bind="text: `Total Rounds Won: ${App.game.statistics.contestRoundsWon[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
+                    <td data-bind="text: `Total Trainers Defeated: ${App.game.statistics.contestTrainersDefeated[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
+                  </tr>
+                  <!-- <tr>
+                    <td colspan="2">Highest Trainer Streak Reached
+                    </td>
+                    <td>Total ribboned mons 10/1200
+                    </td>
+                  </tr> -->
+                </table>
+              </h2>
           </div>
       </div>
-      <button class="btn btn-sm btn-danger stop-auto"
-        onclick="ContestRunner.running(false);
-        ContestBattle.enemyPokemon(null);
-        ContestBattle.trainer(null);">
-        Stop Contest
-      </button>
+    </div>
+
+    <div data-bind="if: ContestRunner.running()">
+      <div class="d-flex contestTrainerLine" data-bind="foreach: ContestBattle.enemyIndexes()">
+        <div style="min-width: 96px;" data-bind="if: ContestBattle.enemyIndexes().length >= $data">
+          <div class="mr-3">
+              <img class="contestTrainer" data-bind="attr:{ src: ContestBattle.trainers()[$data].image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+          </div>
+            <knockout class="clickable enemy-contest" data-bind="click: () => {ContestBattle.clickAppeal($data)}, template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.pokemons()[$data] } },
+              event:{mouseover:function(){ContestBattle.selectedEnemy($data)}, mouseout:function() {ContestBattle.selectedEnemy(-1)}}">Pokémon sprite</knockout>
+            <div class="progress contestpoints trainerhitpoints">
+              <div class="progress-bar bg-danger" role="progressbar"
+                      data-bind="attr:{ style: 'width:' + ContestBattle.pokemons()[$data].healthPercentage() + '%' }"
+                      aria-valuemin="0" aria-valuemax="100">
+                  <span data-bind="text: ContestBattle.pokemons()[$data].health().toLocaleString('en-US')" style="font-size: 12px;"></span>
+              </div>
+            </div>
+        </div>
+      </div>
+      
+      <div class="progress hitpoints audienceappealpoints">
+        <div class="progress-bar" role="progressbar"
+                data-bind="attr:{ style: 'width:' + ContestRunner.audienceAppealPercentage() + '%' }, css: {
+                  'progress-bar-striped progress-bar-animated': ContestRunner.encoreStatus() || ContestRunner.finaleStatus(),
+                  'bg-success': ContestRunner.jamTime() <= 0,
+                  'bg-dark': ContestRunner.jamTime() > 0,
+                } "
+                aria-valuemin="0" aria-valuemax="100">
+            <span data-bind="html: ContestRunner.audienceStatus()" style="font-size: 12px;"></span>
+        </div>
+      </div>
       <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
         <table width="100%" style="font-size: small;">
-          <tr data-bind="if: ContestRunner.rank() === 5 || ContestRunner.rank() === 6 || ContestRunner.rank() === 7 || ContestRunner.rank() === 8">
-            <td colspan="2">
-              <span>Current Click Types:</span>
-            </td>
-            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
-              <span class="badge text-light px-1" data-bind="
-                          attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.clickTypes()) }">
-                <small><strong
-                  data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
-              </span>
+          <tr>
+            <td colspan="4" data-bind="text: ContestBattle.trainerInfo(ContestBattle.selectedEnemy())">Opponent name</td>
+            <td colspan="2" rowspan="3" class="">
+              <button class="btn btn-block" data-bind="css: {'btn-secondary': ContestRunner.crowdHype().length < 5, 'btn-info': ContestRunner.crowdHype().length >= 5}" onclick="ContestBattle.maxAppeal()">
+                <span>MAX APPEAL!</span></br>
+                <span data-bind="text: ContestBattle.maxAppealComputable()"></span>
+              </button>
             </td>
           </tr>
           <tr>
-            <td colspan="2">
-              <span>Enemy Contest Types:</span>
-            </td>
-            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
+            <td colspan="4" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => ContestRunner.rank() < ContestRank.Spectacular ? e != ContestType.Balanced : ContestType[e])">
               <span class="badge text-light px-1" data-bind="
-                          attr:{ style: 'background-color:' + ContestHelper.getBackgroundContestColors($data, ContestBattle.enemyPokemon().contestTypes) }">
-                <small><strong
-                  data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
+                          style: {
+                            'background-color': ContestHelper.getBackgroundContestColors($data, ContestBattle.enemyTypes(ContestBattle.selectedEnemy())),
+                            'border': ContestRunner.type() === $data ? 'thin solid whitesmoke' : '',
+                          }">
+                <small>
+                  <strong data-bind="text: ContestType[$data].toUpperCase()" style="color: white;"></strong>
+                </small>
               </span>
             </td>
           </tr>
@@ -84,11 +105,10 @@
             <td colspan="2">
               <knockout data-bind="html: TextMerger.mergeText(ContestBattle.trainerBonusComputable())"></knockout>
             </td>
-            <td colspan="2" width="33%">
-              <knockout data-bind="html: TextMerger.mergeText(ContestBattle.clickBonusComputable())"></knockout>
-            </td>
           </tr>
         </table>
       </h2>
     </div>
+
+  </div>
 </div>

@@ -11,15 +11,20 @@
             <!-- <button class="btn btn-warning" style="min-width: 30%;">Dressing Room</button> -->
         </div>
         <div>
+            <p data-bind="text: ContestHelper.getClickTestInfo()"></p>
             <button class="btn btn-warning" style="min-width: 30%;" onclick="GameHelper.incrementObservable(App.game.statistics.clickAppeal)">Increase Click Appeal</button>
             <button class="btn btn-warning min-width: 30%" data-bind="text: App.game.statistics.clickAppeal()"></button>
-            <button class="btn btn-warning" style="min-width: 30%;" data-bind="click: () => {App.game.statistics.clickAppeal(App.game.statistics.clickAppeal() - 1)}">Decrease Click Appeal</button>
+            <button class="btn btn-warning" style="min-width: 30%;" data-bind="click: () => {
+                if (App.game.statistics.clickAppeal()) {
+                    App.game.statistics.clickAppeal(App.game.statistics.clickAppeal() - 1);
+                } else {
+                    Notifier.notify({
+                        message: 'Bruh ease on the button',
+                        type: NotificationConstants.NotificationOption.danger,
+                    });
+                };
+            }">Decrease Click Appeal</button>
         </div>
-        <!-- <p>
-            Compete in a Contest!<br/>
-            Max out the audience bar to win. Defeat more trainers for a higher reward. Higher ranks offer more Contest Tokens.</br>
-            <i>This feature is still in development</i><br/>
-        </p> -->
         <div class="p-0 modal-body">
             <div class="justify-content-center" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
                 <h4 class="card-header mb-1 p-1" data-toggle="collapse" data-bind="attr : {href : '#rankCard_' + $index()}, text: `${ContestRank[rank]} Rank`"></h4>
