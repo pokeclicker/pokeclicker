@@ -223,3 +223,5 @@ class ContestRunner {
         return (Math.ceil(ContestRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 }
+
+ContestRunner satisfies TmpContestRunnerType;

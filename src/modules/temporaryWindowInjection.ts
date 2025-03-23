@@ -15,6 +15,8 @@ import BerryType from './enums/BerryType';
 import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
+import ContestType from './enums/ContestType';
+import ContestRank from './enums/ContestRank';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
 import FlavorType from './enums/FlavorType';
@@ -94,13 +96,12 @@ import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
 import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
+import BerryUnlockedRequirement from './requirements/BerryUnlockedRequirement';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
-import ContestType from './enums/ContestType';
-import ContestRank from './enums/ContestRank';
 import CustomRequirement from './requirements/CustomRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DevelopmentRequirement from './requirements/DevelopmentRequirement';
@@ -111,6 +112,7 @@ import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
+import InContestRequirement from './requirements/InContestRequirement';
 import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
@@ -322,6 +324,7 @@ Object.assign(<any>window, {
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
     BerriesUnlockedRequirement,
+    BerryUnlockedRequirement,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,
@@ -338,6 +341,7 @@ Object.assign(<any>window, {
     HatchRequirement,
     HatcheryHelperRequirement,
     InRegionRequirement,
+    InContestRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
