@@ -827,6 +827,7 @@ export const SpriteCredits: Credit[] = [
             'Laventon',
             'Looker',
             'Lillie (z powererd)',
+            'Lisia (lunar new year)',
             'Melli',
             'Miriam',
             'Mr. Fuji',

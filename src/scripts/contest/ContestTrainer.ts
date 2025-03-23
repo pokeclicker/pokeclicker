@@ -365,9 +365,10 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
             // new ContestPokemon('Mega Altaria' , 'Ali', 400, 90, [ContestType.Balanced]),
         ]),
         // Event
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 300, 40)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}), // Sparrow
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 300, 40)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}), // Nice
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 40)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}), // Pikablu
+        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 300, 40)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
+        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 300, 40)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
+        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 40)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
+        new ContestTrainer('', 'Lisia', [new ContestPokemon('Galarian Rapidash', 'Dashie', 400, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Balanced], undefined, true)], '(lunar new year)', {requirement: new SpecialEventRequirement('Lunar New Year')}),
     ],
     [ContestRank['Brilliant Shining']]: [
         new ContestTrainer('Luis', 'Camper', [new ContestPokemon('Pikachu', 'Sparky', 180, 100)]),
