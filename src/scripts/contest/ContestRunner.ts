@@ -178,6 +178,10 @@ class ContestRunner {
                 setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
             });
 
+            if (App.game.statistics.contestRoundsWon[this.rank()][this.type()]() == 0) {
+                $('#contestWonModal').modal('show');
+            }
+
             GameHelper.incrementObservable(App.game.statistics.contestRoundsWon[ContestRunner.rank()][ContestRunner.type()]);
 
             if (ContestRunner.encoreStatus()) {
