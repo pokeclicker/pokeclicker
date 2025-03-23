@@ -63,6 +63,7 @@ import EggType from './breeding/EggType';
 import Multiplier from './multiplier/Multiplier';
 import MultiplierType from './multiplier/MultiplierType';
 import SpecialEvent from './specialEvents/SpecialEvent';
+import SpecialEvents from './specialEvents/SpecialEvents';
 import Challenges from './challenges/Challenges';
 import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
@@ -146,6 +147,7 @@ import UndergroundLevelRequirement from './requirements/UndergroundLevelRequirem
 import UndergroundUseToolRequirement from './requirements/UndergroundUseToolRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
+import PokemonAttackRequirement from './requirements/PokemonAttackRequirement';
 import { SortModules, SortSaves } from './Sortable';
 import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
@@ -288,6 +290,7 @@ Object.assign(<any>window, {
     Multiplier,
     MultiplierType,
     SpecialEvent,
+    SpecialEvents,
     Challenges,
     LevelType,
     levelRequirements,
@@ -374,6 +377,7 @@ Object.assign(<any>window, {
     UndergroundUseToolRequirement,
     WeatherRequirement,
     MegaEvolveRequirement,
+    PokemonAttackRequirement,
     SortModules,
     SortSaves,
     KeyItemController,

@@ -47,7 +47,7 @@
                 <div class="title-right" data-bind="if: isDungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
                     <div class="d-flex ml-auto">
                         <knockout class="h4 text-danger no-emoji-font mr-2 mb-0 align-self-center" data-bind="
-                            visible: player.highestRegion() - 2 > player.region,
+                            visible: DungeonRunner.isDungeonDebuffed(player.town.dungeon),
                             tooltip: {
                                 title: 'This dungeon is debuffed and will be significantly less likely to drop Epic, Legendary, and Mythic loot.',
                                 trigger: 'hover',

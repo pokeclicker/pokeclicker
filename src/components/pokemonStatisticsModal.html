@@ -102,9 +102,21 @@
                 <!-- /ko -->
                 <!-- ko if: BagHandler.displayName(pokemonMap[$data].heldItem) -->
                 <tr>
-                  <td class="text-left align-middle">Rare Hold Item</td>
-                  <td class="text-left tight text-wrap"><code
-                      data-bind="text: BagHandler.displayName(pokemonMap[$data].heldItem)"></code></td>
+                  <td class="text-left align-middle" data-bind="tooltip: {
+                    title: 'Item this Pokémon has a chance to drop upon being defeated.',
+                    placement: 'bottom',
+                    trigger: 'hover'
+                  }">Rare Hold Item</td>
+                  <td class="text-left tight text-wrap">
+                    <code data-bind="text: BagHandler.displayName(pokemonMap[$data].heldItem)"></code>
+                    <!-- ko ifnot: pokemonMap[$data].heldItem.requirement?.isCompleted() ?? true -->
+                    <span class="small" data-bind="tooltip: {
+                        title: pokemonMap[$data].heldItem.requirement.hint(),
+                        placement: 'bottom',
+                        trigger: 'hover'
+                    }">🔒</span>
+                    <!-- /ko -->
+                  </td>
                 </tr>
                 <!-- /ko -->
                 <tr>
