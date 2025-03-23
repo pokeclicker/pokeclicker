@@ -409,12 +409,21 @@ class PartyPokemon implements Saveable {
             case GameConstants.PokeBlockColor.Pink:
             case GameConstants.PokeBlockColor.Green:
             case GameConstants.PokeBlockColor.Yellow:
-            case GameConstants.PokeBlockColor.White:
                 amount = Math.min(amount, player.itemList[itemName]());
                 const difference = Math.floor(this._contestAppealBonusAmount() * 10 - ContestHelper.increaseAppeal(this._contestAppealBonusAmount(), amount) * 10);
                 this._contestAppealBonusAmount(ContestHelper.increaseAppeal(this._contestAppealBonusAmount(), amount));
                 Notifier.notify({
                     message : `${this.displayName} gained ${difference} appeal point(s)`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
+                break;
+            case GameConstants.PokeBlockColor.White:
+                amount = Math.min(amount, player.itemList[itemName]());
+                const difference2 = Math.floor(this._contestAppealBonusAmount() * 10 - ContestHelper.increaseAppeal(this._contestAppealBonusAmount(), amount) * 10);
+                this._contestAppealBonusAmount(ContestHelper.increaseAppeal(this._contestAppealBonusAmount(), amount, 10));
+                Notifier.notify({
+                    message : `${this.displayName} gained ${difference2} appeal point(s)`,
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
