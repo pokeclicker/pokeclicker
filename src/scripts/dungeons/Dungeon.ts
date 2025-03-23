@@ -7799,7 +7799,7 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     [
         new DungeonBossPokemon('Lunatone', 11000000, 100),
         new DungeonBossPokemon('Clefable', 11000000, 100),
-        new DungeonBossPokemon('Cresselia', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.NewMoon, MoonCyclePhase.WaxingCrescent, MoonCyclePhase.WaningCrescent])}),
+        new DungeonBossPokemon('Cresselia', 11000000, 100, {hide: true, requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.NewMoon, MoonCyclePhase.WaxingCrescent, MoonCyclePhase.WaningCrescent])}),
     ],
     96500, 230, undefined, { requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion) });
 
@@ -7807,7 +7807,7 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     ['Volbeat', 'Plusle', 'Sneasel', 'Luvdisc'],
     {
         common: [
-            {loot: 'Lucky_egg', weight: 2},
+            {loot: 'Lucky_egg', weight: 2},S
             {loot: 'Nanab'},
         ],
         rare: [{loot: 'Black Shard'}],
@@ -7821,7 +7821,7 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     [
         new DungeonBossPokemon('Lunatone', 9900000, 100),
         new DungeonBossPokemon('Absol', 9900000, 100),
-        new DungeonBossPokemon('Darkrai', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.FullMoon, MoonCyclePhase.WaxingGibbous, MoonCyclePhase.WaningGibbous, MoonCyclePhase.FirstQuarter, MoonCyclePhase.ThirdQuarter])}),
+        new DungeonBossPokemon('Darkrai', 11000000, 100, {hide: true, requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.FullMoon, MoonCyclePhase.WaxingGibbous, MoonCyclePhase.WaningGibbous, MoonCyclePhase.FirstQuarter, MoonCyclePhase.ThirdQuarter])}),
     ],
     96500, 230, undefined, { requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion) });
 
