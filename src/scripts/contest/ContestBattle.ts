@@ -57,6 +57,25 @@ class ContestBattle extends Battle {
             ContestBattle.trainerStreak(ContestBattle.trainerStreak() + 1);
             // increase statistic
             GameHelper.incrementObservable(App.game.statistics.contestTrainersDefeated[ContestRunner.rank()][ContestRunner.type()]);
+            // give reward
+            if (ContestBattle.trainers()[enemyIndex].options?.berryReward) {
+                ContestBattle.trainers()[enemyIndex].options?.berryReward?.filter(br => !br.requirement || br.requirement?.isCompleted()).forEach(br => {
+                    App.game.farming.gainBerry(br.berry, br.amount, false);
+                    Notifier.notify({
+                        message: `${ContestBattle.trainers()[enemyIndex].name} defeated. ${BerryType[br.berry]} rewarded.`,
+                        type: NotificationConstants.NotificationOption.success,
+                    });
+                })
+            }
+            if (ContestBattle.trainers()[enemyIndex].options?.itemReward) {
+                ContestBattle.trainers()[enemyIndex].options?.itemReward?.filter(ir => !ir.requirement || ir.requirement?.isCompleted()).forEach(ir => {
+                    player.gainItem(ir.item, ir.amount);
+                    Notifier.notify({
+                        message: `${ContestBattle.trainers()[enemyIndex].name} defeated. ${ItemList[ir.item].displayName} rewarded.`,
+                        type: NotificationConstants.NotificationOption.success,
+                    });
+                })
+            }
         }
 
         // Make contest "route" regionless
