@@ -6,6 +6,7 @@ import { ItemList } from '../items/ItemList';
 import GameHelper from '../GameHelper';
 import { Currency } from '../GameConstants';
 import Requirement from '../requirements/Requirement';
+import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 
 export type GenericTraderShopIdentifier =
     'Palaeontologist' |
@@ -249,9 +250,21 @@ export default class GenericDeal {
                 tradeButtonOverride: 'Revive',
             }),
             new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Helix_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Omastar, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Omastar'),
+            }),
+            new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Dome_fossil, amount: 1 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kabuto, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Dome_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kabutops, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Kabutops'),
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Old_amber, amount: 1 }],
@@ -267,22 +280,46 @@ export default class GenericDeal {
                 tradeButtonOverride: 'Revive',
             }),
             new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Root_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Cradily, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Cradily'),
+            }),
+            new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Claw_fossil, amount: 1 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Anorith, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
             }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Claw_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Armaldo, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Armaldo'),
+            }),
         ]);
 
         GenericDeal.list.FossilOreburghMiningMuseum = ko.observableArray([
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Skull_fossil, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Cranidos, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Skull_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Rampardos, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Rampardos'),
+            }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Armor_fossil, amount: 1 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Shieldon, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
             }),
             new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Skull_fossil, amount: 1 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Cranidos, amount: 1, hidePlayerInventory: true }],
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Armor_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Bastiodon, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Bastiodon'),
             }),
         ]);
 
@@ -293,9 +330,21 @@ export default class GenericDeal {
                 tradeButtonOverride: 'Revive',
             }),
             new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Cover_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Carracosta, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Carracosta'),
+            }),
+            new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Plume_fossil, amount: 1 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Archen, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Plume_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Archeops, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Archeops'),
             }),
         ]);
 
@@ -306,9 +355,21 @@ export default class GenericDeal {
                 tradeButtonOverride: 'Revive',
             }),
             new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Jaw_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Tyrantrum, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Tyrantrum'),
+            }),
+            new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Sail_fossil, amount: 1 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Amaura, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Sail_fossil, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Aurorus, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Aurorus'),
             }),
         ]);
 

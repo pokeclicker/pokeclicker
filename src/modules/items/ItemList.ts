@@ -504,14 +504,24 @@ ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questP
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
 // Fossils
 ItemList.Omanyte = new PokemonItem('Omanyte');
+ItemList.Omastar = new PokemonItem('Omastar');
 ItemList.Kabuto = new PokemonItem('Kabuto');
+ItemList.Kabutops = new PokemonItem('Kabutops');
 ItemList.Aerodactyl = new PokemonItem('Aerodactyl');
 ItemList.Lileep = new PokemonItem('Lileep');
+ItemList.Cradily = new PokemonItem('Cradily');
 ItemList.Anorith = new PokemonItem('Anorith');
+ItemList.Armaldo = new PokemonItem('Armaldo');
 ItemList.Cranidos = new PokemonItem('Cranidos');
+ItemList.Rampardos = new PokemonItem('Rampardos');
 ItemList.Shieldon = new PokemonItem('Shieldon');
+ItemList.Bastiodon = new PokemonItem('Bastiodon');
 ItemList.Tirtouga = new PokemonItem('Tirtouga');
+ItemList.Carracosta = new PokemonItem('Carracosta');
 ItemList.Archen = new PokemonItem('Archen');
+ItemList.Archeops = new PokemonItem('Archeops');
 ItemList.Tyrunt = new PokemonItem('Tyrunt');
+ItemList.Tyrantrum = new PokemonItem('Tyrantrum');
 ItemList.Amaura = new PokemonItem('Amaura');
+ItemList.Aurorus = new PokemonItem('Aurorus');
 
