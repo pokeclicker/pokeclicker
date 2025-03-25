@@ -134,7 +134,7 @@ class ContestHelper {
             if (blocksLeft > 0) {
                 const multiplier = (10 - i + sheen) * 10;
                 if (i < ContestRank['Brilliant Shining']) {
-                    const addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]) * 100 - appeal * 100, blocksLeft * multiplier);
+                    const addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]) * 100, blocksLeft * multiplier);
                     sum = sum + addition;
                     blocksLeft = Math.ceil(blocksLeft - addition / multiplier);
                 } else {
