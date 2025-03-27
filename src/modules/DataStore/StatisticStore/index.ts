@@ -18,6 +18,8 @@ export default class Statistics implements Saveable {
 
     selectedBerryID = ko.observable(0).extend({ numeric: 0 });
 
+    selectedQuestName = ko.observable('');
+
     /*
      * observables
      */
