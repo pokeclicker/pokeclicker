@@ -1,9 +1,65 @@
 <!-- ko if: App.game.gameState === GameConstants.GameState.contest -->
-<div id="contestInformation" class="card sortable-disabled border-secondary mb-3 contest-hall no-select">
+<div id="contestInformation" class="card sortable-disabled border-secondary mb-3 contest-hall no-select tab-content">
     <div class="card-header p-0" data-toggle="collapse">
         <span>Contest Hall</span>
     </div>
-    <div class="card-body text-center">
+
+            <div class="modal-header p-0" style='justify-content: space-around;'>
+               <ul class="nav nav-tabs nav-fill w-100">
+                   <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#contestHall">Contest Hall</a></li>
+                   <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#contestTrainers">Trainers</a></li>
+               </ul>
+            </div>
+
+
+
+        <div id="contestTrainers" class="modal-body tab-pane fade">
+            <div class="p-0 modal-body">
+                <p>This table is for testing only. If you believe this is important enough to be included in the final build, please include your reasoning in the testing thread.</p>
+                <div class="justify-content-center" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
+                    <h4 class="card-header mb-1 p-1" data-toggle="collapse" data-bind="attr : {href : '#rankTrainers_' + $index()}, text: `${ContestRank[rank]} Rank`"></h4>
+                    <table class="table table-striped table-hover table-sm mb-1 p-0 show" style="justify-content: space-evenly;" data-bind="attr : {id : 'rankTrainers_' + $index()}">
+                        <thead>
+                            <tr>
+                                <th>Trainer</th>
+                                <th>Pokémon</th>
+                                <!-- ko if: ContestOpponents[rank].some(trainer => trainer.options?.berryReward) || ContestOpponents[rank].some(trainer => trainer.options?.itemReward) -->
+                                <th>Reward</th>
+                                <!-- /ko -->
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: { data: ContestOpponents[rank].filter(t => !(t.options?.requirement instanceof SpecialEventRequirement)), as: 'trainer' }">
+                            <tr class="m-0">
+                                <!-- <td data-bind="attr: { rowspan: trainer.getTeam().length }"> -->
+                                <td class="text-left">
+                                    <img class="smallImage mx-1" data-bind="attr:{ src: trainer.image }">
+                                    <span class="align-middle" data-bind="text: trainer.name"></span>
+                                </td>
+                                <!-- ko foreach: trainer.getTeam() -->
+                                <td class="text-left">
+                                    <img class="smallImage mx-1" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data.name].id, $data.shiny ?? 0) }">
+                                    <span class="align-middle" data-bind="text: $data.nickname"></span>
+                                </td>
+                                <!-- /ko -->
+                                <!-- ko if: trainer.options?.berryReward -->
+                                <td data-bind="foreach: trainer.options?.berryReward">
+                                    <img style="max-width: 24px;" data-bind="attr: {src: FarmController.getBerryImage($data.berry)}">
+                                </td>
+                                <!-- /ko -->
+                                <!-- ko if: trainer.options?.itemReward -->
+                                <td data-bind="foreach: trainer.options?.itemReward">
+                                    <img style="max-width: 24px;" data-bind="attr: {src: ItemList[$data.item].image}">
+                                </td>
+                                <!-- /ko -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    <div id="contestHall" class="tab-pane fade in active show card-body text-center">
         <div class="mb-3">
             <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())" data-bind="text: !ContestRunner.running() ? 'Start Contest' : 'Restart Contest'">Start Contest</button>
             <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestHall.leave();" data-bind="visible: !ContestRunner.running()">Leave</button>
