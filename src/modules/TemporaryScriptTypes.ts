@@ -31,7 +31,7 @@ import type CaughtStatus from './enums/CaughtStatus';
 import type SpecialEvents from './specialEvents/SpecialEvents';
 
 /*
-    These types are only temporary while we are converting things to modules. As things are converted, 
+    These types are only temporary while we are converting things to modules. As things are converted,
     we should import their types here for use, instead of these cheap imitations.
 
     When a file is converted to a module, the types for any /scripts dependencies should be added here
@@ -75,7 +75,7 @@ import type SpecialEvents from './specialEvents/SpecialEvents';
         }
         Example2 satisfies TmpExample2Type;
 
-    If a class has both static and instance properties, it needs separate types for each. 
+    If a class has both static and instance properties, it needs separate types for each.
 
 */
 
@@ -172,8 +172,6 @@ export type TmpSaveType = {
     initializeEffects: (saved?: Array<string>) => Record<string, KnockoutObservable<number>>;
     initializeEffectTimer: () => Record<string, KnockoutObservable<string>>;
     loadFromFile: (file) => void;
-    convert: () => void;
-    convertShinies: (list: Array<any>) => void;
 };
 
 export type TmpPlayerType = {
