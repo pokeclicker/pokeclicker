@@ -132,14 +132,7 @@ class ContestHelper {
 
         for (let i = rankBracket; i <= ContestRank['Brilliant Shining']; i++) {
             if (blocksLeft > 0) {
-                const multiplier = (10 - i + sheen) * 10;
-                if (multiplier === 0) {
-                    Notifier.notify({
-                        message: 'Your pokemon\'s sheen is too low!',
-                        type: NotificationConstants.NotificationOption.danger,
-                    });
-                    return;
-                }
+                const multiplier = Math.max(10 - i + sheen, 1) * 10;
                 if (i < ContestRank['Brilliant Shining']) {
                     const addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]) * 100, blocksLeft * multiplier);
                     sum = sum + addition;
