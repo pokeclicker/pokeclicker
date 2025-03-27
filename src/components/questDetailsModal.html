@@ -1,0 +1,29 @@
+<div class="modal noselect fade" id="questDetailsModal" tabindex="-1" role="dialog" aria-labelledby="questDetailsModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content" data-bind="with: App.game.statistics.selectedQuestName()" style="overflow: auto;">
+            <div class="bg-primary p-2">
+                <h6 class="m-0 text-light font-weight-bold" data-bind="text: $data"></h6>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-sm">
+                <tbody data-bind="foreach: App.game.quests.getQuestDetails($data) || []">
+                    <tr>
+                        <td>
+                            <knockout data-bind="text: taskDescription"></knockout>
+                        </td>
+                        <td>
+                            <button class='btn btn-success btn-sm btn-block disabled-button' disabled
+                                data-bind='visible: $data.isCompleted && !$data.isCurrentTask'>Completed</button>
+                            <button class='btn btn-warning btn-sm btn-block disabled-button' disabled
+                                data-bind='visible: $data.isCurrentTask'>In Progress</button>
+                            <button class='btn btn-danger btn-sm btn-block disabled-button' disabled
+                                data-bind='visible: !$data.isCompleted && !$data.isCurrentTask'>Locked</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
