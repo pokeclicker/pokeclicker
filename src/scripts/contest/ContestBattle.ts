@@ -210,7 +210,7 @@ class ContestBattle extends Battle {
                 // limit to 5, add opponent's types, keep contest's type
                 const type = ContestRunner.crowdHype().concat(ContestBattle.pokemons()[p].contestTypes).filter(ct => ct === ContestRunner.type());
                 const run = ContestRunner.crowdHype().concat(ContestBattle.pokemons()[p].contestTypes).filter(ct => ct != ContestRunner.type()).reverse().slice(0, 5 - type.length).reverse();
-                ContestRunner.crowdHype(type.concat(run));
+                ContestRunner.crowdHype(type.concat(run).slice(0, 5));
             }
         }
     }
