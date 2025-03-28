@@ -4575,8 +4575,7 @@ TownList['Hearthome City'] = new Town(
     'Hearthome City',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [SuperContests, HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
-    // TODO: BrilliantShiningContestHall
+    [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
         npcs: [HearthomeContestFan, LucyStevens1, HappinyWitness6],
