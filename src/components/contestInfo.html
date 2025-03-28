@@ -64,7 +64,6 @@
             <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())" data-bind="text: !ContestRunner.running() ? 'Start Contest' : 'Restart Contest'">Start Contest</button>
             <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestHall.leave();" data-bind="visible: !ContestRunner.running()">Leave</button>
             <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestRunner.running(false); ContestBattle.endContest();" data-bind="visible: ContestRunner.running()">Stop Contest</button>
-            <!-- <button class="btn btn-warning" style="min-width: 30%;">Dressing Room</button> -->
         </div>
         <div>
             <p data-bind="text: ContestHelper.getClickTestInfo()"></p>

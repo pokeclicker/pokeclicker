@@ -104,8 +104,8 @@ class ContestBattle extends Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        // do we need this???????? idk
-        // ContestBattle.counter = 0;
+        // Probably not needed, refer to Battle.ts
+        ContestBattle.counter = 0;
 
         // trainer, enemy, and pokemon indexes are in the same position
         const enemyIndex = ContestBattle.pokemons().findIndex(p => p === null || !p?.isAlive());

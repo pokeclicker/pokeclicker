@@ -25,10 +25,6 @@
                     <td data-bind="text: `${ContestType[ContestRunner.type()]} Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]).toLocaleString('en-US')}`"></td>
                     <td data-bind="text: `Click Appeal: ${App.game.statistics.clickAppeal().toLocaleString('en-US')}`"></td>
                   </tr>
-                  <!-- <tr>
-                    <td colspan="6">Total trainers defeated: 5 also click here for breakdown include stats somehow</td> -->
-                    <!-- note: befriended trainers can give berries? how would i do that though.... ugh npcs -->
-                  <!-- </tr> -->
                   <tr>
                     <td data-bind="text: `Total Rounds Won: ${App.game.statistics.contestRoundsWon[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
                     <td data-bind="text: `Total Trainers Defeated: ${App.game.statistics.contestTrainersDefeated[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>

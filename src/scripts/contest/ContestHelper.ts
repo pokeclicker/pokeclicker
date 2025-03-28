@@ -150,7 +150,7 @@ class ContestHelper {
 
     public static contestIsUnlocked(rank: ContestRank, type: ContestType) {
         if (rank > ContestRank.Normal && type != ContestType.Balanced) {
-            if (rank === ContestRank.Spectacular && new DevelopmentRequirement().isCompleted()) {
+            if (rank === ContestRank.Spectacular) {
                 return App.game.statistics.contestRoundsWon[rank - 5][type]();
             }
             return App.game.statistics.contestRoundsWon[rank - 1][type]();
