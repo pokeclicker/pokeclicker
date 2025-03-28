@@ -61,24 +61,7 @@ class ContestBattle extends Battle {
             // increase statistic
             GameHelper.incrementObservable(App.game.statistics.contestTrainersDefeated[ContestRunner.rank()][ContestRunner.type()]);
             // give reward
-            if (ContestBattle.trainers()[enemyIndex].options?.berryReward) {
-                ContestBattle.trainers()[enemyIndex].options?.berryReward?.filter(br => !br.requirement || br.requirement?.isCompleted()).forEach(br => {
-                    App.game.farming.gainBerry(br.berry, br.amount, false);
-                    Notifier.notify({
-                        message: `${ContestBattle.trainers()[enemyIndex].name} defeated. ${BerryType[br.berry]} rewarded.`,
-                        type: NotificationConstants.NotificationOption.success,
-                    });
-                });
-            }
-            if (ContestBattle.trainers()[enemyIndex].options?.itemReward) {
-                ContestBattle.trainers()[enemyIndex].options?.itemReward?.filter(ir => !ir.requirement || ir.requirement?.isCompleted()).forEach(ir => {
-                    player.gainItem(ir.item, ir.amount);
-                    Notifier.notify({
-                        message: `${ContestBattle.trainers()[enemyIndex].name} defeated. ${ItemList[ir.item].displayName} rewarded.`,
-                        type: NotificationConstants.NotificationOption.success,
-                    });
-                });
-            }
+            ContestBattle.addContestReward(enemyIndex);
         }
 
         // Make contest "route" regionless
@@ -140,6 +123,8 @@ class ContestBattle extends Battle {
         ContestBattle.pokemons([]);
         ContestBattle.pokemonIndexArray = [];
         ContestBattle.enemyIndexes([]);
+        ContestRunner.itemRewards.removeAll();
+        ContestRunner.berryRewards.removeAll();
     }
 
     public static clickAppeal(index: number) {
@@ -265,4 +250,19 @@ class ContestBattle extends Battle {
             return jam.repeat(Math.min(Math.ceil(ContestRunner.jamTime() / 1000), 5)).concat(appealLeft.repeat(5 - Math.min(Math.ceil(ContestRunner.jamTime() / 1000), 5)));
         }
     })
+
+    public static addContestReward(enemyIndex: number) {        
+        ContestBattle.trainers()[enemyIndex].options?.berryReward?.filter(br => !br.requirement || br.requirement?.isCompleted()).forEach(br => {
+            const amountWon = ContestRunner.berryRewards().find(b => b.berry === br.berry)?.amount ?? 0;
+            ContestRunner.berryRewards(ContestRunner.berryRewards().filter(b => b.berry != br.berry).concat({berry: br.berry, amount: br.amount + amountWon}));
+        });
+        ContestBattle.trainers()[enemyIndex].options?.itemReward?.filter(ir => !ir.requirement || ir.requirement?.isCompleted()).forEach(ir => {
+            let amountWon = ContestRunner.itemRewards().find(i => i.item === ir.item)?.amount ?? 0;
+            // limit to one mega stone in case of Lisia being defeated twice in one round
+            if (ir.item === 'Altarianite') {
+                amountWon = 0;
+            }
+            ContestRunner.itemRewards(ContestRunner.itemRewards().filter(i => i.item != ir.item).concat({item: ir.item, amount: ir.amount + amountWon}));
+        });
+    }
 }

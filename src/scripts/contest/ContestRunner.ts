@@ -22,6 +22,10 @@ class ContestRunner {
     public static encoreRounds: KnockoutObservable<number> = ko.observable(0);
     public static finaleStatus: KnockoutObservable<boolean> = ko.observable(false);
 
+    // Rewards
+    public static berryRewards: KnockoutObservableArray<{ berry: BerryType, amount: number }> = ko.observableArray();
+    public static itemRewards: KnockoutObservableArray<{ item: ItemNameType, amount: number }> = ko.observableArray();
+
     // Updated via ContestHall.ts
     public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray();
     public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray();
@@ -54,6 +58,9 @@ class ContestRunner {
         ContestRunner.encoreStatus(false);
         ContestRunner.encoreRounds(0);
         ContestRunner.finaleStatus(false);
+
+        ContestRunner.itemRewards.removeAll();
+        ContestRunner.berryRewards.removeAll();
 
         ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
         ContestBattle.trainerStreak(0);
@@ -165,6 +172,29 @@ class ContestRunner {
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
             });
+
+            // give rewards to player at end of round
+            if (ContestRunner.berryRewards().length) {
+                ContestRunner.berryRewards().forEach(br => {
+                    App.game.farming.gainBerry(br.berry, br.amount, false);
+                    Notifier.notify({
+                        message: `${br.amount} ${BerryType[br.berry]} Berry rewarded.`,
+                        type: NotificationConstants.NotificationOption.success,
+                    });
+                })
+                ContestRunner.berryRewards.removeAll();
+            }
+
+            if (ContestRunner.itemRewards().length) {
+                ContestRunner.itemRewards().forEach(ir => {
+                    player.gainItem(ir.item, ir.amount);
+                    Notifier.notify({
+                        message: `${ir.amount} ${ItemList[ir.item].displayName} rewarded.`,
+                        type: NotificationConstants.NotificationOption.success,
+                    });
+                })
+                ContestRunner.itemRewards.removeAll();
+            }
 
             if (App.game.statistics.contestRoundsWon[this.rank()][this.type()]() == 0) {
                 $('#contestWonModal').modal('show');
