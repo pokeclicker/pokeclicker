@@ -280,6 +280,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 19', Region.kanto, 19,
     new RoutePokemon({
         water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        special: [new SpecialRoutePokemon(['Surfing Pikachu'], new ObtainedPokemonRequirement('Surfing Pikachu'))]
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)],
     undefined,
