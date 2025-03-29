@@ -99,20 +99,21 @@
             <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestHall.leave();" data-bind="visible: !ContestRunner.running()">Leave</button>
             <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestRunner.running(false); ContestBattle.endContest();" data-bind="visible: ContestRunner.running()">Stop Contest</button>
         </div>
-        <div>
-            <p data-bind="text: ContestHelper.getClickTestInfo()"></p>
-            <button class="btn btn-warning" style="min-width: 30%;" onclick="GameHelper.incrementObservable(App.game.statistics.clickAppeal)">Increase Click Appeal</button>
-            <button class="btn btn-warning min-width: 30%" data-bind="text: App.game.statistics.clickAppeal()"></button>
-            <button class="btn btn-warning" style="min-width: 30%;" data-bind="click: () => {
-                if (App.game.statistics.clickAppeal()) {
-                    App.game.statistics.clickAppeal(App.game.statistics.clickAppeal() - 1);
-                } else {
-                    Notifier.notify({
-                        message: 'Bruh ease on the button',
-                        type: NotificationConstants.NotificationOption.danger,
-                    });
-                };
-            }">Decrease Click Appeal</button>
+        <div class="modal-footer">
+            <div class="input-group m-0">
+                <div class="input-group-prepend">
+                    <button class="btn btn-warning smallButton smallFont">
+                        Gold Pokéblocks
+                    </button>
+                </div>
+                <input type="number" class="outline-dark form-control form-control-number"
+                    value="0" min="0" required
+                    data-bind="textInput: ContestRunner.clickPokeblocks, attr: { max: player.itemList['PokeBlock_Gold'](), disabled: ContestRunner.running() }"
+                title=""/>
+                <div class="d-none d-md-flex input-group-append">
+                    <button class="btn btn-warning smallButton smallFont" data-bind="text: `In Bag: ${player.itemList['PokeBlock_Gold']().toLocaleString('en-US')}`"></button>
+                </div>
+            </div>
         </div>
         <div class="p-0 modal-body">
             <div class="justify-content-center" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">

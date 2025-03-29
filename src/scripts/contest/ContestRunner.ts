@@ -12,6 +12,8 @@ class ContestRunner {
     public static crowdHype: KnockoutObservableArray<ContestType> = ko.observableArray();
     public static jamTime: KnockoutObservable<number> = ko.observable(0);
 
+    public static clickPokeblocks: KnockoutObservable<number> = ko.observable(0);
+
     public static running: KnockoutObservable<boolean> = ko.observable(false);
 
     public static rank: KnockoutObservable<ContestRank> = ko.observable();
@@ -66,6 +68,7 @@ class ContestRunner {
         ContestBattle.trainerStreak(0);
         ContestBattle.generateTrainers();
         App.game.gameState = GameConstants.GameState.contest;
+        ContestRunner.useClickPokeblocks();
         ContestRunner.running(true);
     }
 
@@ -222,6 +225,11 @@ class ContestRunner {
 
             // TODO: reward ribbons to party pokemon based on rank, type, and how high their appeal is
         }
+    }
+
+    public static useClickPokeblocks() {
+        ContestRunner.clickPokeblocks(Math.min(ContestRunner.clickPokeblocks(), player.itemList['PokeBlock_Gold']()));
+        ContestRunner.clickPokeblocks() > 0 ? GameHelper.incrementObservable(player.itemList['PokeBlock_Gold'], -ContestRunner.clickPokeblocks()) : '';
     }
 
     // Computables

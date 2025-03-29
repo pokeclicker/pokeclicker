@@ -447,7 +447,13 @@ class PartyPokemon implements Saveable {
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
                 break;
-            default :
+            default:
+                amount = 1;
+                Notifier.notify({
+                    message : `Mmmm! ${this.displayName} enjoyed the Pokeblock!`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
         }
         GameHelper.incrementObservable(player.itemList[itemName], -amount);
         Notifier.notify({

@@ -98,13 +98,14 @@ class ContestHelper {
         }
     }
 
-    public static calculateClickAppeal(clickType, enemyType): number {
-        return Math.max(Math.floor((ContestTypeHelper.getAppealModifier(clickType, enemyType) + 0.5) * App.game.statistics.clickAppeal()), 1);
+    public static calculateBaseClickAppeal(): number {
+        let baseClickAppeal = 0;
+        GameHelper.enumNumbers(ContestRank).forEach(r => GameHelper.enumNumbers(ContestType).forEach(ct => baseClickAppeal += Math.min(1, App.game.statistics.contestRoundsWon[r][ct]() ?? 0)));
+        return baseClickAppeal + Number(ContestRunner.clickPokeblocks());
     }
-    public static getClickTestInfo() {
-        let baseClick = 0;
-        GameHelper.enumNumbers(ContestRank).forEach(r => GameHelper.enumNumbers(ContestType).forEach(ct => baseClick += Math.min(1, App.game.statistics.contestRoundsWon[r][ct]() ?? 0)));
-        return `You have won ${baseClick} different contests. Test a click appeal of this value on non-Spectacular contests.`;
+
+    public static calculateClickAppeal(clickType: ContestType[], enemyType: ContestType[]): number {
+        return Math.floor((ContestTypeHelper.getAppealModifier(clickType, enemyType) + 0.5) * ContestHelper.calculateBaseClickAppeal());
     }
 
     public static getRibbonImage(rank: ContestRank, type: ContestType) {

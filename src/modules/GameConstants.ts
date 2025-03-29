@@ -1213,6 +1213,7 @@ export enum PokeBlockColor {
     Green,
     Yellow,
     White,
+    Gold,
     Cool,
     Beautiful,
     Cute,

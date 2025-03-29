@@ -2364,6 +2364,7 @@ const HoennContestShop = new Shop([
     ItemList.PokeBlock_Green,
     ItemList.PokeBlock_Yellow,
     ItemList.PokeBlock_White,
+    ItemList.PokeBlock_Gold,
     ItemList.PokeBlock_Cool,
     ItemList.PokeBlock_Beautiful,
     ItemList.PokeBlock_Cute,

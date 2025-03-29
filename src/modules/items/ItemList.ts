@@ -118,6 +118,7 @@ ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, 1, undefined,
 ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 1, undefined, ContestType.Tough,
     (pokemon) => pokemon.currentContestTypes.includes(ContestType.Tough), 'A Sour Pokéblock that boosts the Appeal of Tough Pokémon');
 ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 1, undefined, undefined, undefined, 'A mild Pokéblock that boosts the Appeal of any Pokémon');
+ItemList.PokeBlock_Gold     = new PokeBlock(PokeBlockColor.Gold, 1, undefined, undefined, undefined, 'A soft Pokéblock that boosts your Click Appeal');
 ItemList.PokeBlock_Cool      = new PokeBlock(PokeBlockColor.Cool, 1, undefined, ContestType.Cool,
     (pokemon) => !pokemon.currentContestTypes.includes(ContestType.Cool), 'Adds Cool to a Pokémon\'s Contest Types. Breeding reverts this change');
 ItemList.PokeBlock_Beautiful = new PokeBlock(PokeBlockColor.Beautiful, 1, undefined, ContestType.Beautiful,

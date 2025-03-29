@@ -33,6 +33,11 @@ class ContestBattle extends Battle {
             }
             ContestBattle.lastPokemonAttack = now;
 
+            // auto damage enemy if disableClick challenge
+            if (App.game.challenges.list.disableClickAttack.active()) {
+                ContestBattle.pokemons().forEach(p => p.damage(ContestHelper.calculateClickAppeal([ContestRunner.type()], p.contestTypes)));
+            }
+
             // increase the audience bar
             if (ContestRunner.jamTime() <= 0) {
                 ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]));
@@ -87,8 +92,7 @@ class ContestBattle extends Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        // Probably not needed, refer to Battle.ts
-        ContestBattle.counter = 0;
+        // Do NOT reset ContestBattle.counter, because click attacking is separate from idle damage
 
         // trainer, enemy, and pokemon indexes are in the same position
         const enemyIndex = ContestBattle.pokemons().findIndex(p => p === null || !p?.isAlive());
