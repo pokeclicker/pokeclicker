@@ -43,8 +43,8 @@ class ContestBattle extends Battle {
                 ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]));
             }
 
-            if (ContestBattle.pokemons().some(p => !p?.isAlive)) {
-                ContestBattle.pokemons().filter(p => !p?.isAlive).forEach(() => ContestBattle.defeatPokemon());
+            if (ContestBattle.pokemons().some(p => !p?.isAlive())) {
+                ContestBattle.pokemons().filter(p => !p?.isAlive()).forEach(() => ContestBattle.defeatPokemon());
             }
         }
     }

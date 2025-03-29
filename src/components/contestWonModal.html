@@ -14,6 +14,7 @@ aria-labelledby="contestWonModalLabel" aria-hidden="true">
             </div>
             <div class="modal-body">
                 <p data-bind="text: `Congratulations! You have been awarded a ${ContestRank[ContestRunner.rank()]} ${ContestRunner.type() != ContestType.Balanced ? ContestType[ContestRunner.type()] : 'Star'} Ribbon!`"></p>
+                <p><i>Your Click Appeal has increased by 1.</i></p>
             </div>
             <div class="modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
