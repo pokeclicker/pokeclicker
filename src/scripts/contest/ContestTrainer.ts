@@ -533,7 +533,7 @@ const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
                         amount: 1,
                         requirement: new MultiRequirement([
                             new MaxRegionRequirement(GameConstants.Region.kalos),
-                            new CustomRequirement(ko.pureComputed(() => player.hasMegaStone(GameConstants.MegaStoneType.Altarianite)), false, 'Player must not have Altarianite.')
+                            new CustomRequirement(ko.pureComputed(() => player.hasMegaStone(GameConstants.MegaStoneType.Altarianite)), false, 'Player must not have Altarianite.'),
                         ]),
                     },
                     {item: 'PokeBlock_Cool', amount: 1, requirement: new InContestRequirement(ContestType.Cool)},

@@ -108,10 +108,10 @@
                 </div>
                 <input type="number" class="outline-dark form-control form-control-number"
                     value="0" min="0" required
-                    data-bind="textInput: ContestRunner.clickPokeblocks, attr: { max: player.itemList['PokeBlock_Gold'](), disabled: ContestRunner.running() }"
+                    data-bind="textInput: ContestRunner.clickPokeblocks, attr: { max: player.itemList.PokeBlock_Gold(), disabled: ContestRunner.running() }"
                 title=""/>
                 <div class="d-none d-md-flex input-group-append">
-                    <button class="btn btn-warning smallButton smallFont" data-bind="text: `In Bag: ${player.itemList['PokeBlock_Gold']().toLocaleString('en-US')}`"></button>
+                    <button class="btn btn-warning smallButton smallFont" data-bind="text: `In Bag: ${player.itemList.PokeBlock_Gold().toLocaleString('en-US')}`"></button>
                 </div>
             </div>
         </div>

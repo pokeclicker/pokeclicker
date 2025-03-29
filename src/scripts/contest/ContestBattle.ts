@@ -256,7 +256,7 @@ class ContestBattle extends Battle {
         }
     })
 
-    public static addContestReward(enemyIndex: number) {        
+    public static addContestReward(enemyIndex: number) {
         ContestBattle.trainers()[enemyIndex].options?.berryReward?.filter(br => !br.requirement || br.requirement?.isCompleted()).forEach(br => {
             const amountWon = ContestRunner.berryRewards().find(b => b.berry === br.berry)?.amount ?? 0;
             ContestRunner.berryRewards(ContestRunner.berryRewards().filter(b => b.berry != br.berry).concat({berry: br.berry, amount: br.amount + amountWon}));

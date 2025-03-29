@@ -184,7 +184,7 @@ class ContestRunner {
                         message: `${br.amount} ${BerryType[br.berry]} Berry rewarded.`,
                         type: NotificationConstants.NotificationOption.success,
                     });
-                })
+                });
                 ContestRunner.berryRewards.removeAll();
             }
 
@@ -195,7 +195,7 @@ class ContestRunner {
                         message: `${ir.amount} ${ItemList[ir.item].displayName} rewarded.`,
                         type: NotificationConstants.NotificationOption.success,
                     });
-                })
+                });
                 ContestRunner.itemRewards.removeAll();
             }
 
@@ -229,8 +229,8 @@ class ContestRunner {
     }
 
     public static useClickPokeblocks() {
-        ContestRunner.clickPokeblocks(Math.min(ContestRunner.clickPokeblocks(), player.itemList['PokeBlock_Gold']()));
-        ContestRunner.clickPokeblocks() > 0 ? GameHelper.incrementObservable(player.itemList['PokeBlock_Gold'], -ContestRunner.clickPokeblocks()) : '';
+        ContestRunner.clickPokeblocks(Math.min(ContestRunner.clickPokeblocks(), player.itemList.PokeBlock_Gold()));
+        ContestRunner.clickPokeblocks() > 0 ? GameHelper.incrementObservable(player.itemList.PokeBlock_Gold, -ContestRunner.clickPokeblocks()) : '';
     }
 
     // Computables
