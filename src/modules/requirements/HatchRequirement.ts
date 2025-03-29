@@ -11,6 +11,6 @@ export default class HatchRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} eggs need to be hatched.`;
+        return `Hatch ${this.requiredValue.toLocaleString('en-US')} eggs.`;
     }
 }

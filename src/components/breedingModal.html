@@ -454,6 +454,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     </div>
 
                     <div class="tab-pane fade" id="breeding-helpers">
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1">
+                            <h5 class="m-0 text-light">Available Helpers</h5>
+                        </div>
                         <div class="row m-0 justify-content-center" data-bind="foreach: App.game.breeding.hatcheryHelpers.available()" style="max-width: 100%;">
                             <div class="card text-left col-md-3 col-sm-6 col-xs-12 p-0">
                                 <h5 class="card-header">
@@ -582,6 +585,48 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </div>
                             </div>
                         </div>
+
+                        <!-- ko with: HatcheryHelpers.list.filter(f => !f.isUnlocked()), as: 'lockedHelpers' -->
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mt-2">
+                            <h5 class="m-0 text-light">Locked Helpers</h5>
+                        </div>
+                        <div class="row m-0 justify-content-center" data-bind="foreach: lockedHelpers" style="max-width: 100%;">
+                            <div class="card text-left col-md-3 col-sm-6 col-xs-12 p-0 mt-1">
+                                <h5 class="card-header">
+                                    <knockout data-bind="text: $data.name">Name</knockout>
+                                    <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                </h5>
+                                <div class="card-body p-0">
+                                    <table class="table table-bordered table-sm m-0 h-100" style="overflow: visible;">
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left align-middle">Cost / Hatch:</td>
+                                                <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Step Efficiency:</td>
+                                                <td class="text-right">
+                                                    <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left text-nowrap">Attack Efficiency:</td>
+                                                <td class="text-right">
+                                                    <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-center table-secondary">Unlock Requirement</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-center p-2 h-100 align-middle" data-bind="text: $data.unlockRequirement.hint()"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
                     </div>
 
 
