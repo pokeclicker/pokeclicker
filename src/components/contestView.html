@@ -45,7 +45,7 @@
           <div class="mr-3">
               <img class="contestTrainer" data-bind="attr:{ src: ContestBattle.trainers()[$data].image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
           </div>
-            <knockout class="clickable enemy-contest" data-bind="click: () => {ContestBattle.clickAppeal($data)}, template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.pokemons()[$data] } },
+            <knockout class="clickable enemy-contest" data-bind="click: () => { ContestBattle.clickAppeal($data); ContestBattle.selectedEnemy($data); }, template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.pokemons()[$data] } },
               event:{mouseover:function(){ContestBattle.selectedEnemy($data)}, mouseout:function() {ContestBattle.selectedEnemy(-1)}}">Pokémon sprite</knockout>
             <div class="progress contestpoints trainerhitpoints">
               <div class="progress-bar bg-danger" role="progressbar"

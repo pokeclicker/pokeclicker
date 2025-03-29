@@ -105,7 +105,7 @@
                     <button class="btn btn-warning smallButton smallFont" data-bind="
                         tooltip: {
                             title: 'Use Gold Pokéblocks to increase your Click Appeal',
-                            trigger: 'hover',
+                            trigger: 'hover focus',
                         }">
                         Gold Pokéblocks
                     </button>
@@ -114,7 +114,7 @@
                     value="0" min="0" required
                     data-bind="textInput: ContestRunner.clickPokeblocks, attr: { max: player.itemList.PokeBlock_Gold(), disabled: ContestRunner.running() }"
                 title=""/>
-                <div class="d-none d-md-flex input-group-append">
+                <div class="d-md-flex input-group-append">
                     <button class="btn btn-warning smallButton smallFont" data-bind="text: `In Bag: ${player.itemList.PokeBlock_Gold().toLocaleString('en-US')}`"></button>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                         tooltip: {
                             html: true,
                             title: ContestHelper.contestButtonTooltip(rank, type),
-                            trigger: 'hover',
+                            trigger: 'hover focus',
                         },
                         attr:{'aria-label': `${ContestRank[rank]} Rank ${ContestType[type]} Contest. ${ContestHelper.contestButtonTooltip(rank, type)}.`}
                         ">
