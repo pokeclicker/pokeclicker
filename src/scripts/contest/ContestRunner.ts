@@ -204,6 +204,7 @@ class ContestRunner {
             }
 
             GameHelper.incrementObservable(App.game.statistics.contestRoundsWon[ContestRunner.rank()][ContestRunner.type()]);
+            App.game.statistics.contestRoundHighest[ContestRunner.rank()][ContestRunner.type()](Math.max(App.game.statistics.contestRoundHighest[ContestRunner.rank()][ContestRunner.type()](), ContestRunner.encoreRounds() + 1));
 
             if (ContestRunner.encoreStatus()) {
                 // increase encore round

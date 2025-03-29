@@ -63,6 +63,7 @@ class ContestBattle extends Battle {
         if (ContestBattle.pokemonIndexArray[enemyIndex]() + 1 >= ContestBattle.trainers()[enemyIndex].getTeam().length) {
             // increase trainer streak
             ContestBattle.trainerStreak(ContestBattle.trainerStreak() + 1);
+            App.game.statistics.contestTrainerStreak[ContestRunner.rank()][ContestRunner.type()](Math.max(App.game.statistics.contestTrainerStreak[ContestRunner.rank()][ContestRunner.type()](), ContestBattle.trainerStreak()));
             // increase statistic
             GameHelper.incrementObservable(App.game.statistics.contestTrainersDefeated[ContestRunner.rank()][ContestRunner.type()]);
             // give reward
