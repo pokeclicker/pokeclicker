@@ -454,6 +454,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     </div>
 
                     <div class="tab-pane fade" id="breeding-helpers">
+                        <!-- ko if: HatcheryHelpers.list.some(f => f.isUnlocked()) -->
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-bind="visible: HatcheryHelpers.list.some(f => !f.isUnlocked())">
                             <h5 class="m-0 text-light">Available Helpers</h5>
                         </div>
@@ -585,7 +586,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </div>
                             </div>
                         </div>
-
+                        <!-- /ko -->
                         <!-- ko if: HatcheryHelpers.list.some(f => !f.isUnlocked()) -->
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mt-2">
                             <h5 class="m-0 text-light">Locked Helpers</h5>
