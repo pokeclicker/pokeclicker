@@ -1,6 +1,6 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.contest">
   <div class="col no-gutters" style="height: 280px; display: block;">
-    <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
+    <h2 class="pageItemTitle" style="display: block;">
       <div data-bind="text: !ContestRunner.running() ? 'Contest Hall' : `${ContestRank[ContestRunner.rank()]} Rank`"></div>
       <div data-bind="visible: ContestRunner.running()" class="progress timer">
         <div class="progress-bar bg-danger" role="progressbar"
@@ -14,7 +14,11 @@
         
     <div class="" data-bind="visible: !ContestRunner.running()">
       <div style="margin-top: 60px;">
-        <button class="btn btn-success w-25" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())">Start Contest</button>
+        <button class="btn w-25" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())"
+        data-bind="css: {
+          'btn-success': ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]),
+          'btn-danger': !ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]),
+        }">Start Contest</button>
       </div>
       <div class="">
           <div class="justify-content-center">

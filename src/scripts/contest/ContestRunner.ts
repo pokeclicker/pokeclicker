@@ -36,8 +36,18 @@ class ContestRunner {
         rank: ContestRank,
         type: ContestType
     ) {
+        if (!ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()])) {
+            Notifier.notify({
+                title: 'Pokémon Contest',
+                message: 'Your Pokémon don\'t have any Appeal for this Contest! Use Pokéblocks to boost their Appeal.',
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: 5000,
+            });
+            return;
+        }
         if (!ContestHelper.contestIsUnlocked(rank, type)) {
             Notifier.notify({
+                title: 'Pokémon Contest',
                 message: `You have not won the previous Rank\'s ${ContestType[type]} contest yet.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
@@ -80,16 +90,18 @@ class ContestRunner {
         if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true && ContestRunner.finaleStatus() != true) {
             if (ContestRunner.encoreRounds() < ContestRunner.rank() || ContestRank.Spectacular <= ContestRunner.rank()) {
                 Notifier.notify({
+                    title: 'Pokémon Contest',
                     message: 'The crowd is cheering! Bonus round incoming!',
                     type: NotificationConstants.NotificationOption.success,
-                    setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
+                    // TODO: setting: contest notifications
                 });
                 ContestRunner.encoreStatus(true);
             } else {
                 Notifier.notify({
+                    title: 'Pokémon Contest',
                     message: 'What a grand finale! Auto-restart incoming!',
                     type: NotificationConstants.NotificationOption.success,
-                    setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
+                    // TODO: setting: contest notifications
                 });
                 ContestRunner.finaleStatus(true);
             }
@@ -151,12 +163,14 @@ class ContestRunner {
                 // Award some tokens
                 App.game.wallet.gainContestTokens(Math.floor(ContestRunner.contestTokenReward() / 3));
                 Notifier.notify({
+                    title: 'Pokémon Contest',
                     message: `Good job! You got a bonus of <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${Math.floor(ContestRunner.contestTokenReward() / 3)} Contest Tokens!`,
                     type: NotificationConstants.NotificationOption.success,
-                    setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
+                    // TODO: setting: contest notifications
                 });
             } else {
                 Notifier.notify({
+                    title: 'Pokémon Contest',
                     message: 'You did not have enough appeal to win the crowd over.',
                     type: NotificationConstants.NotificationOption.danger,
                 });
@@ -171,9 +185,10 @@ class ContestRunner {
             // Award tokens after each round
             App.game.wallet.gainContestTokens(ContestRunner.contestTokenReward());
             Notifier.notify({
+                title: 'Pokémon Contest',
                 message: `${ContestHelper.encoreWord[Math.min(ContestRunner.encoreRounds(), ContestRunner.rank())]} You won <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${ContestRunner.contestTokenReward()} Contest Tokens!`,
                 type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.gym_won, // TODO: contest notifications
+                // TODO: setting: contest notifications
             });
 
             // give rewards to player at end of round
@@ -181,6 +196,7 @@ class ContestRunner {
                 ContestRunner.berryRewards().forEach(br => {
                     App.game.farming.gainBerry(br.berry, br.amount, false);
                     Notifier.notify({
+                        title: 'Pokémon Contest',
                         message: `${br.amount} ${BerryType[br.berry]} Berry rewarded.`,
                         type: NotificationConstants.NotificationOption.success,
                     });
@@ -192,6 +208,7 @@ class ContestRunner {
                 ContestRunner.itemRewards().forEach(ir => {
                     player.gainItem(ir.item, ir.amount);
                     Notifier.notify({
+                        title: 'Pokémon Contest',
                         message: `${ir.amount} ${ItemList[ir.item].displayName} rewarded.`,
                         type: NotificationConstants.NotificationOption.success,
                     });
