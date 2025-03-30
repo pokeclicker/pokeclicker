@@ -1,30 +1,38 @@
+import ContestRank from '../enums/ContestRank';
+import ContestType from '../enums/ContestType';
 import * as GameConstants from '../GameConstants';
+import GameHelper from '../GameHelper';
 import AchievementRequirement from './AchievementRequirement';
 
 export default class ContestWonRequirement extends AchievementRequirement {
-    constructor(private resultRequired: GameConstants.ContestResults, value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType.Safari);
+    public rank: ContestRank;
+    public type?: ContestType;
+
+    constructor(value: number, rank: ContestRank, type?: ContestType, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(value, option, GameConstants.AchievementType.None); // TODO?: Contest Achievements
+        this.rank = rank;
+        if (type != undefined) {
+            this.type = type;
+        }
     }
 
     public getProgress() {
-        let total = App.game.statistics.contestResults[GameConstants.ContestResults.Normal]();
-        if (this.resultRequired <= GameConstants.ContestResults.Super) {
-            total += App.game.statistics.contestResults[GameConstants.ContestResults.Super]();
+        if (this.type != undefined) {
+            return Math.min(App.game.statistics.contestRoundsWon[this.rank][this.type](), this.requiredValue);
+        } else {
+            const ct = GameHelper.enumNumbers(ContestType).find(t => App.game.statistics.contestRoundsWon[this.rank][t]() >= this.requiredValue);
+            return Math.min(App.game.statistics.contestRoundsWon[this.rank][ct](), this.requiredValue);
         }
-        if (this.resultRequired <= GameConstants.ContestResults.Hyper) {
-            total += App.game.statistics.contestResults[GameConstants.ContestResults.Hyper]();
-        }
-        if (this.resultRequired <= GameConstants.ContestResults.Master) {
-            total += App.game.statistics.contestResults[GameConstants.ContestResults.Master]();
-        }
-        return Math.min(total, this.requiredValue);
     }
 
     public hint(): string {
-        return `You need to complete atleast ${this.requiredValue} Contests with result ${GameConstants.ContestResults[this.resultRequired]} or higher.`;
+        if (this.requiredValue === 1) {
+            return `Requires having won a ${ContestRank[this.rank]} ${ContestType[this.type] ?? 'Rank'} Contest.`;
+        }
+        return `Requires winning a total of ${this.requiredValue} rounds in a ${ContestRank[this.rank]} ${ContestType[this.type] ?? 'Rank'} Contest.`;
     }
 
     public toString(): string {
-        return `${super.toString()} ${this.resultRequired}`;
+        return `${super.toString()} ${this.rank} ${this.type}`;
     }
 }

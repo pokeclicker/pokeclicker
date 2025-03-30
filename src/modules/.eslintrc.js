@@ -28,6 +28,7 @@ module.exports = {
         PokemonLocations: 'readonly',
         PokemonFactory: 'readonly',
         PartyController: 'readonly',
+        ContestRunner: 'readonly',
     },
     rules: {
         indent: 'off',

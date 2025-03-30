@@ -177,7 +177,14 @@
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting ||
+                        App.game.gameState === GameConstants.GameState.dungeon ||
+                        App.game.gameState === GameConstants.GameState.paused ||
+                        App.game.gameState === GameConstants.GameState.town ||
+                        App.game.gameState === GameConstants.GameState.gym ||
+                        App.game.gameState == GameConstants.GameState.battleFrontier ||
+                        App.game.gameState == GameConstants.GameState.temporaryBattle ||
+                        App.game.gameState == GameConstants.GameState.contest),
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
@@ -281,6 +288,9 @@
                     <!-- One Time Battles -->
                     @import "temporaryBattleView.html"
 
+                    <!-- Contest Battles -->
+                    @import "contestView.html"
+
                     <!-- Battle Frontier Battles -->
                     @import "battleFrontierView.html"
 
@@ -326,6 +336,9 @@
 
             <!-- Battle Frontier Information Container  -->
             @import "battleFrontierInfo.html"
+
+            <!-- Contest Information Container -->
+            @import "contestInfo.html"
 
             <div id="middle-bottom-sort-column">
                 <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
@@ -628,8 +641,14 @@
 <!-- Consumable Modal -->
 @import "consumableModal.html"
 
+<!-- PokeBlock Modal-->
+@import "pokeblockModal.html"
+
 <!-- Pokemon Contest Modal -->
 @import "pokemonContestModal.html"
+
+<!-- Contest battle won Modal -->
+@import "contestWonModal.html"
 
 <script type="text/javascript">
 // Check if we are running in an iframe

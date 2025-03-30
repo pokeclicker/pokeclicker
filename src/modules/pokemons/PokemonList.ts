@@ -39,6 +39,7 @@ import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import ContestType from '../enums/ContestType';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -106,6 +107,7 @@ export type PokemonListData = {
         femaleRatio?: number;
         visualDifference?: boolean;
     }
+    contestTypes?: ContestType[];
 };
 
 function createPokemonArray<T extends readonly PokemonListData[] & Array<{ name: V }>, V extends string>(...args: T) {
@@ -901,6 +903,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Balanced],
     },
     {
         'id': 12.04,
@@ -921,6 +924,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Tough],
     },
     {
         'id': 13,
@@ -1289,6 +1293,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 31,
             'speed': 70,
         },
+        'contestTypes': [ContestType.Cool],
     },
     {
         'id': 22,
@@ -1580,6 +1585,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Cute, ContestType.Smart],
     },
     {
         'id': 25.11,
@@ -1597,6 +1603,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'contestTypes': [ContestType.Balanced],
     },
     {
         'id': 25.12,
@@ -1617,6 +1624,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Cute],
     },
     {
         'id': 25.13,
@@ -1637,6 +1645,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cute, ContestType.Smart],
     },
     {
         'id': 25.14,
@@ -1678,6 +1687,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 25.16,
@@ -1718,6 +1728,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Balanced],
     },
     {
         'id': 25.18,
@@ -1738,6 +1749,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Balanced],
     },
     {
         'id': 25.19,
@@ -1758,6 +1770,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cute, ContestType.Balanced],
     },
     {
         'id': 25.20,
@@ -1778,6 +1791,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Smart, ContestType.Balanced],
     },
     {
         'id': 25.21,
@@ -1798,6 +1812,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Tough, ContestType.Balanced],
     },
     {
         'id': 25.22,
@@ -1896,6 +1911,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 27,
@@ -2713,6 +2729,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 120,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Smart],
     },
     {
         'id': 52,
@@ -3387,6 +3404,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 55,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Smart],
     },
     {
         'id': 71,
@@ -4139,6 +4157,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 110,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Smart],
     },
     {
         'id': 95,
@@ -4177,6 +4196,7 @@ export const pokemonList = createPokemonArray(
             'speed': 70,
         },
         'heldItem': { type: ItemType.underground, id: 'Ice Stone' },
+        'contestTypes': [ContestType.Beautiful, ContestType.Tough],
     },
     {
         'id': 95.02,
@@ -4195,6 +4215,7 @@ export const pokemonList = createPokemonArray(
             'speed': 70,
         },
         'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
+        'contestTypes': [ContestType.Cute, ContestType.Tough],
     },
     {
         'id': 96,
@@ -4856,6 +4877,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 60,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Cute],
     },
     {
         'id': 115,
@@ -4995,6 +5017,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 63,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Tough],
     },
     {
         'id': 119,
@@ -6220,6 +6243,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestTypes': [ContestType.Cute, ContestType.Smart],
     },
     {
         'id': 134,
@@ -7238,6 +7262,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 173,
@@ -7590,6 +7615,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'contestTypes': [ContestType.Balanced],
     },
     {
         'id': 186,
@@ -7646,6 +7672,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 50,
         },
+        'contestTypes': [ContestType.Beautiful],
     },
     {
         'id': 188,
@@ -8668,6 +8695,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Tough],
     },
     {
         'id': 209,
@@ -8817,6 +8845,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 230,
             'speed': 5,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Smart, ContestType.Tough],
     },
     {
         'id': 214,
@@ -11589,7 +11618,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 172,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Altarianite, 'Altaria', 'Mega Altaria')],
+        'evolutions': [MegaEvolution(MegaStoneType.Altarianite, 'Altaria', 'Mega Altaria')],
         'base': {
             'hitpoints': 75,
             'attack': 70,
@@ -18006,6 +18035,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 75,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Cute],
     },
     {
         'id': 585.01,
@@ -18024,6 +18054,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 75,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Cute],
     },
     {
         'id': 585.02,
@@ -18042,6 +18073,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 75,
         },
+        'contestTypes': [ContestType.Cute, ContestType.Tough],
     },
     {
         'id': 585.03,
@@ -18060,6 +18092,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 75,
         },
+        'contestTypes': [ContestType.Cute, ContestType.Smart],
     },
     {
         'id': 586,
@@ -18077,6 +18110,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 95,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Cute],
     },
     {
         'id': 586.01,
@@ -18094,6 +18128,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 95,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Beautiful],
     },
     {
         'id': 586.02,
@@ -18111,6 +18146,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 95,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Tough],
     },
     {
         'id': 586.03,
@@ -18128,6 +18164,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 95,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Smart],
     },
     {
         'id': 587,
@@ -19493,6 +19530,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Tough],
     },
     {
         'id': 649.01,
@@ -19513,6 +19551,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Cool],
     },
     {
         'id': 649.02,
@@ -19533,6 +19572,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Beautiful],
     },
     {
         'id': 649.03,
@@ -19553,6 +19593,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Cute],
     },
     {
         'id': 649.04,
@@ -19573,6 +19614,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 649.05,
@@ -19599,6 +19641,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Tough],
     },
     {
         'id': 649.06,
@@ -19619,6 +19662,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Cool],
     },
     {
         'id': 649.07,
@@ -19639,6 +19683,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Beautiful],
     },
     {
         'id': 649.08,
@@ -19659,6 +19704,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Cute],
     },
     {
         'id': 649.09,
@@ -19679,6 +19725,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 650,
@@ -20433,6 +20480,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cute],
     },
     {
         'id': 669.01,
@@ -20454,6 +20502,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Tough],
     },
     {
         'id': 669.02,
@@ -20475,6 +20524,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cool],
     },
     {
         'id': 669.03,
@@ -20496,6 +20546,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Beautiful],
     },
     {
         'id': 669.04,
@@ -20517,6 +20568,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 670,
@@ -20538,6 +20590,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cute],
     },
     {
         'id': 670.01,
@@ -20559,6 +20612,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Tough],
     },
     {
         'id': 670.02,
@@ -20580,6 +20634,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cool],
     },
     {
         'id': 670.03,
@@ -20601,6 +20656,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Beautiful],
     },
     {
         'id': 670.04,
@@ -20622,6 +20678,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 670.05,
@@ -20642,6 +20699,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Balanced],
     },
     {
         'id': 671,
@@ -20662,6 +20720,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cute],
     },
     {
         'id': 671.01,
@@ -20682,6 +20741,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Tough],
     },
     {
         'id': 671.02,
@@ -20702,6 +20762,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Cool],
     },
     {
         'id': 671.03,
@@ -20722,6 +20783,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Beautiful],
     },
     {
         'id': 671.04,
@@ -20742,6 +20804,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 672,
@@ -20846,6 +20909,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Cute, ContestType.Smart],
     },
     {
         'id': 676.02,
@@ -20863,6 +20927,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Beautiful],
     },
     {
         'id': 676.03,
@@ -20880,6 +20945,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Tough],
     },
     {
         'id': 676.04,
@@ -20897,6 +20963,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Beautiful],
     },
     {
         'id': 676.05,
@@ -20914,6 +20981,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Cute],
     },
     {
         'id': 676.06,
@@ -20931,6 +20999,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Smart],
     },
     {
         'id': 676.07,
@@ -20948,6 +21017,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Cute],
     },
     {
         'id': 676.08,
@@ -20965,6 +21035,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Cool],
     },
     {
         'id': 676.09,
@@ -20982,6 +21053,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 102,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Tough],
     },
     {
         'id': 677,
@@ -21676,6 +21748,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 51,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Tough],
     },
     {
         'id': 710.01,
@@ -21694,6 +21767,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 56,
         },
+        'contestTypes': [ContestType.Cute, ContestType.Tough],
     },
     {
         'id': 710.02,
@@ -21712,6 +21786,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 46,
         },
+        'contestTypes': [ContestType.Smart, ContestType.Tough],
     },
     {
         'id': 710.03,
@@ -21730,6 +21805,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 41,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Tough],
     },
     {
         'id': 711,
@@ -21747,6 +21823,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 84,
         },
+        'contestTypes': [ContestType.Cool, ContestType.Tough],
     },
     {
         'id': 711.01,
@@ -21764,6 +21841,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 99,
         },
+        'contestTypes': [ContestType.Cute, ContestType.Tough],
     },
     {
         'id': 711.02,
@@ -21781,6 +21859,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 69,
         },
+        'contestTypes': [ContestType.Smart, ContestType.Tough],
     },
     {
         'id': 711.03,
@@ -21798,6 +21877,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 54,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Tough],
     },
     {
         'id': 712,
@@ -22532,6 +22612,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.75,
         },
+        'contestTypes': [ContestType.Cool],
     },
     {
         'id': 741.01,
@@ -22552,6 +22633,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.75,
         },
+        'contestTypes': [ContestType.Tough],
     },
     {
         'id': 741.02,
@@ -22572,6 +22654,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.75,
         },
+        'contestTypes': [ContestType.Cute],
     },
     {
         'id': 741.03,
@@ -22592,6 +22675,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.75,
         },
+        'contestTypes': [ContestType.Beautiful],
     },
     {
         'id': 742,
@@ -31682,6 +31766,88 @@ pokemonList.forEach((p) => {
     (p as PokemonListData).gender.femaleRatio = (p as PokemonListData).gender.femaleRatio === undefined ? 0.5 : (p as PokemonListData).gender.femaleRatio;
     // Add false as default gender visual difference
     (p as PokemonListData).gender.visualDifference = (p as PokemonListData).gender.visualDifference === undefined ? false : (p as PokemonListData).gender.visualDifference;
+
+    // Calculate Contest Types
+    // Determine based off highest stats
+    const contestStats = ['attack', 'specialAttack', 'speed', 'specialDefense', 'defense']; // order is important
+    const max = Math.max(p.base.attack, p.base.specialAttack, p.base.speed, p.base.specialDefense, p.base.defense);
+    let con = [] as ContestType[];
+    contestStats.forEach((stat) => {
+        if (p.base[stat] === max) {
+            con.push(contestStats.indexOf(stat));
+        }
+    });
+    // Add/Determine based off form
+    if ((p as PokemonListData).name.includes('Pinkan')) {
+        con.push(ContestType.Cute);
+    }
+    if ((p as PokemonListData).name.includes('Valencian')) {
+        con.push(ContestType.Cool);
+    }
+    if ((p as PokemonListData).name.includes('(Clone)') || (p as PokemonListData).name.includes('Armored')) {
+        con = [ContestType.Cool, ContestType.Smart, ContestType.Tough];
+    }
+    if ((p as PokemonListData).name.includes('Mega ')) {
+        con.push(ContestType.Balanced);
+    }
+    if (Math.floor((p as PokemonListData).id) === 869 && (p as PokemonListData).id != 869.70) {
+        const cremie = (p as PokemonListData).name;
+        // empty the array
+        con = [];
+        // Determine contests types by Sweet and Flavor
+        if (cremie.includes('Strawberry')) {
+            con.push(ContestType.Cool);
+        }
+        if (cremie.includes('Berry')) {
+            con.push(ContestType.Beautiful);
+        }
+        if (cremie.includes('Love')) {
+            con.push(ContestType.Cute);
+        }
+        if (cremie.includes('Star')) {
+            con.push(ContestType.Tough);
+        }
+        if (cremie.includes('Clover')) {
+            con.push(ContestType.Smart);
+        }
+        if (cremie.includes('Flower')) {
+            con.push(ContestType.Cute, ContestType.Tough);
+        }
+        if (cremie.includes('Ribbon')) {
+            con.push(ContestType.Cool, ContestType.Beautiful, ContestType.Smart);
+        }
+        if (cremie.includes('Vanilla')) {
+            // nothing; it's vanilla!
+        }
+        if (cremie.includes('Ruby Cream')) {
+            con.push(ContestType.Cute);
+        }
+        if (cremie.includes('Matcha')) {
+            con.push(ContestType.Smart);
+        }
+        if (cremie.includes('Mint')) {
+            con.push(ContestType.Beautiful);
+        }
+        if (cremie.includes('Lemon')) {
+            con.push(ContestType.Tough);
+        }
+        if (cremie.includes('Salted')) {
+            con.push(ContestType.Beautiful, ContestType.Tough);
+        }
+        if (cremie.includes('Ruby Swirl')) {
+            con.push(ContestType.Cool, ContestType.Cute);
+        }
+        if (cremie.includes('Caramel')) {
+            con.push(ContestType.Cool, ContestType.Smart);
+        }
+        if (cremie.includes('Rainbow')) {
+            con.push(ContestType.Balanced);
+        }
+    }
+    // Remove duplicate contest types and put them in order
+    con = [...new Set(con)].sort();
+    // Fill pokemons contestTypes with calculated Contest Types if nothing was given
+    (p as PokemonListData).contestTypes = (p as PokemonListData).contestTypes === undefined ? con : (p as PokemonListData).contestTypes;
 });
 
 export type PokemonMapProxy

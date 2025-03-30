@@ -29,6 +29,8 @@ import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
 import type SpecialEvents from './specialEvents/SpecialEvents';
+import ContestRank from './enums/ContestRank';
+import ContestType from './enums/ContestType';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted, 
@@ -311,4 +313,9 @@ export type TmpTemporaryBattleType = {
 
 export type TmpTownType = {
     name: string;
+};
+
+export type TmpContestRunnerType = {
+    rank: () => ContestRank,
+    type: () => ContestType,
 };

@@ -43,6 +43,7 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
+import ContestType from '../enums/ContestType';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -65,6 +66,7 @@ ItemList.LargeRestore    = new EnergyRestore(EnergyRestoreSize.LargeRestore, 400
 ItemList.Dungeon_ticket = new BuyKeyItem(KeyItemType.Dungeon_ticket, 100, undefined, undefined, 'Dungeon Ticket');
 ItemList.Explorer_kit = new BuyKeyItem(KeyItemType.Explorer_kit, 5000, undefined, undefined, 'Explorer Kit');
 ItemList.Event_calendar = new BuyKeyItem(KeyItemType.Event_calendar, 100000, undefined, undefined, 'Event Calendar');
+ItemList.Pokeblock_case = new BuyKeyItem(KeyItemType.Pokeblock_case, 10, undefined, undefined, 'Pokéblock Case'); // only for dev
 
 ItemList.Squirtbottle = new BuyOakItem(OakItemType.Squirtbottle, 5000, Currency.farmPoint);
 ItemList.Sprinklotad = new BuyOakItem(OakItemType.Sprinklotad, 10000, Currency.farmPoint);
@@ -105,21 +107,30 @@ ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmP
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
 
-ItemList.PokeBlock_Black  = new PokeBlock(PokeBlockColor.Black, Infinity);
-ItemList.PokeBlock_Red    = new PokeBlock(PokeBlockColor.Red, Infinity);
-ItemList.PokeBlock_Blue = new PokeBlock(PokeBlockColor.Blue, Infinity);
-ItemList.PokeBlock_Pink = new PokeBlock(PokeBlockColor.Pink, Infinity);
-ItemList.PokeBlock_Green = new PokeBlock(PokeBlockColor.Green, Infinity);
-ItemList.PokeBlock_Yellow = new PokeBlock(PokeBlockColor.Yellow, Infinity);
-ItemList.PokeBlock_Gold   = new PokeBlock(PokeBlockColor.Gold, Infinity);
-ItemList.PokeBlock_Purple = new PokeBlock(PokeBlockColor.Purple, Infinity);
-ItemList.PokeBlock_Indigo = new PokeBlock(PokeBlockColor.Indigo, Infinity);
-ItemList.PokeBlock_Brown = new PokeBlock(PokeBlockColor.Brown, Infinity);
-ItemList.PokeBlock_Light_Blue = new PokeBlock(PokeBlockColor.Light_Blue, Infinity);
-ItemList.PokeBlock_Olive = new PokeBlock(PokeBlockColor.Olive, Infinity);
-ItemList.PokeBlock_Beige = new PokeBlock(PokeBlockColor.Beige, Infinity);
-ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
-ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
+ItemList.PokeBlock_Red       = new PokeBlock(PokeBlockColor.Red, 1, undefined, ContestType.Cool,
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cool), 'A Spicy Pokéblock that boosts the Appeal of Cool Pokémon');
+ItemList.PokeBlock_Blue      = new PokeBlock(PokeBlockColor.Blue, 1, undefined, ContestType.Beautiful,
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Beautiful), 'A Dry Pokéblock that boosts the Appeal of Beautiful Pokémon');
+ItemList.PokeBlock_Pink      = new PokeBlock(PokeBlockColor.Pink, 1, undefined, ContestType.Cute,
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cute), 'A Sweet Pokéblock that boosts the Appeal of Cute Pokémon');
+ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, 1, undefined, ContestType.Smart,
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Smart), 'A Bitter Pokéblock that boosts the Appeal of Smart Pokémon');
+ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 1, undefined, ContestType.Tough,
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Tough), 'A Sour Pokéblock that boosts the Appeal of Tough Pokémon');
+ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 1, undefined, undefined, undefined, 'A mild Pokéblock that boosts the Appeal of any Pokémon');
+ItemList.PokeBlock_Gold     = new PokeBlock(PokeBlockColor.Gold, 1, undefined, undefined, undefined, 'A soft Pokéblock that boosts your Click Appeal');
+ItemList.PokeBlock_Cool      = new PokeBlock(PokeBlockColor.Cool, 1, undefined, ContestType.Cool,
+    (pokemon) => !pokemon.currentContestTypes.includes(ContestType.Cool), 'Adds Cool to a Pokémon\'s Contest Types. Breeding reverts this change');
+ItemList.PokeBlock_Beautiful = new PokeBlock(PokeBlockColor.Beautiful, 1, undefined, ContestType.Beautiful,
+    (pokemon) => !pokemon.currentContestTypes.includes(ContestType.Beautiful), 'Adds Beautiful to a Pokémon\'s Contest Types. Breeding reverts this change');
+ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, 1, undefined, ContestType.Cute,
+    (pokemon) => !pokemon.currentContestTypes.includes(ContestType.Cute), 'Adds Cute to a Pokémon\'s Contest Types. Breeding reverts this change');
+ItemList.PokeBlock_Smart     = new PokeBlock(PokeBlockColor.Smart, 1, undefined, ContestType.Smart,
+    (pokemon) => !pokemon.currentContestTypes.includes(ContestType.Smart), 'Adds Smart to a Pokémon\'s Contest Types. Breeding reverts this change');
+ItemList.PokeBlock_Tough     = new PokeBlock(PokeBlockColor.Tough, 1, undefined, ContestType.Tough,
+    (pokemon) => !pokemon.currentContestTypes.includes(ContestType.Tough), 'Adds Tough to a Pokémon\'s Contest Types. Breeding reverts this change');
+ItemList.PokeBlock_Balanced  = new PokeBlock(PokeBlockColor.Balanced, 1, undefined, ContestType.Balanced,
+    (pokemon) => !pokemon.currentContestTypes.includes(ContestType.Balanced), 'Adds Balanced to a Pokémon\'s Contest Types. Breeding reverts this change');
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);
@@ -127,7 +138,7 @@ ItemList.Absolite           = new MegaStoneItem(MegaStoneType.Absolite, 'Absol',
 ItemList.Aerodactylite      = new MegaStoneItem(MegaStoneType.Aerodactylite, 'Aerodactyl', 10000);
 ItemList.Aggronite          = new MegaStoneItem(MegaStoneType.Aggronite, 'Aggron', 10000);
 ItemList.Alakazite          = new MegaStoneItem(MegaStoneType.Alakazite, 'Alakazam', 10000);
-//ItemList.Altarianite        = new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
+ItemList.Altarianite        = new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
 ItemList.Ampharosite        = new MegaStoneItem(MegaStoneType.Ampharosite, 'Ampharos', 10000);
 ItemList.Audinite           = new MegaStoneItem(MegaStoneType.Audinite, 'Audino', 10000);
 ItemList.Banettite          = new MegaStoneItem(MegaStoneType.Banettite, 'Banette', 10000);

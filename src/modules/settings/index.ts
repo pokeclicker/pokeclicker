@@ -30,6 +30,7 @@ import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequire
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import PokemonCategories from '../party/Category';
+import ContestType from '../enums/ContestType';
 
 export default Settings;
 
@@ -260,6 +261,17 @@ Settings.add(new BooleanSetting('consumableHideShinyPokemon', 'Hide shiny Pokém
 Settings.add(new SearchSetting('consumableSearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2, undefined, false));
 Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
+
+// Pokeblock Sorting
+const pokeblockSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('pokeblockSort', 'Sort', pokeblockSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('pokeblockSortDirection', 'reverse', false));
+Settings.add(new BooleanSetting('pokeblockHideShinyPokemon', 'Hide shiny Pokémon', false));
+Settings.add(new SearchSetting('pokeblockSearchFilter', 'Search', ''));
+Settings.add(new Setting<number>('pokeblockRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2));
+Settings.add(new Setting<number>('pokeblockTypeFilter', 'Contest Type', [new SettingOption('All', -1), ...Settings.enumToNumberSettingOptionArray(ContestType, (t) => t !== 'None')], -1));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (

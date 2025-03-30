@@ -190,6 +190,24 @@
                             </div>
                         </div>
 
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-pokeblocks">
+                            <h5 class="m-0 text-light">Pokéblocks</h5>
+                        </div>
+                        <div id="itemBag-pokeblocks" class="collapse show">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: GameHelper.enumNumbers(GameConstants.PokeBlockColor) -->
+                                    <div class="col-6 col-lg-3 mb-2">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px; image-rendering: pixelated;"
+                                        data-bind="template: { name: 'otherItemTemplate', data: `PokeBlock_${GameConstants.PokeBlockColor[$data]}` },
+                                        click: () => { PokeBlockController.currentlySelected($data); $('#pokeblockModal').modal('show'); }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-underground-treasure">
                             <h5 class="m-0 text-light">Underground Treasure</h5>
                         </div>
