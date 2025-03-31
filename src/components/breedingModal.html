@@ -585,42 +585,44 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         </div>
                         <!-- /ko -->
                         <!-- ko if: HatcheryHelpers.list.some(f => !f.isUnlocked()) -->
-                        <div class="bg-primary text-left rounded-0 px-3 py-2 mt-2 mb-1 mx-1">
-                            <h5 class="m-0 text-light">Locked Helpers</h5>
+                        <div class="mt-1 px-1">
+                            <button class="btn btn-secondary btn-block" data-toggle="collapse" href="#lockedHatcheryHelpers">Show/Hide Locked Hatchery Helpers</button>
                         </div>
-                        <div class="row m-0 justify-content-center" data-bind="foreach: HatcheryHelpers.list.filter(f => !f.isUnlocked())" style="max-width: 100%;">
-                            <div class="card text-left col-lg-3 col-md-6 col-xs-12 border-0 p-1">
-                                <h5 class="card-header d-flex align-items-center py-2">
-                                    <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
-                                    <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
-                                </h5>
-                                <div class="card-body p-0">
-                                    <table class="table table-bordered table-sm m-0 h-100" style="overflow: visible;">
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-left align-middle">Cost / Hatch:</td>
-                                                <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Step Efficiency:</td>
-                                                <td class="text-right">
-                                                    <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left text-nowrap">Attack Efficiency:</td>
-                                                <td class="text-right">
-                                                    <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" class="text-center table-secondary">Unlock Requirement</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" class="text-center p-2 h-100 align-middle" data-bind="text: $data.unlockRequirement.hint()"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        <div class="collapse mt-1" id="lockedHatcheryHelpers">
+                            <div class="row m-0 justify-content-center" data-bind="foreach: HatcheryHelpers.list.filter(f => !f.isUnlocked())" style="max-width: 100%;">
+                                <div class="card text-left col-lg-3 col-md-6 col-xs-12 border-0 p-1">
+                                    <h5 class="card-header d-flex align-items-center py-2">
+                                        <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                        <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                    </h5>
+                                    <div class="card-body p-0">
+                                        <table class="table table-bordered table-sm m-0 h-100" style="overflow: visible;">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left align-middle">Cost / Hatch:</td>
+                                                    <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Step Efficiency:</td>
+                                                    <td class="text-right">
+                                                        <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left text-nowrap">Attack Efficiency:</td>
+                                                    <td class="text-right">
+                                                        <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text-center table-secondary">Unlock Requirement</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text-center p-2 h-100 align-middle" data-bind="text: $data.unlockRequirement.hint()"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

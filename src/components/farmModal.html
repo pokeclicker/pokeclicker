@@ -567,54 +567,56 @@
                     </div>
                     <!-- /ko -->
                     <!-- ko if: FarmHands.list.some(f => !f.isUnlocked()) -->
-                    <div class="bg-primary text-left rounded-0 px-3 py-2 mt-2 mb-1">
-                        <h5 class="m-0 text-light">Locked Farm Hands</h5>
+                    <div class="my-2">
+                        <button class="btn btn-secondary btn-block" data-toggle="collapse" href="#lockedFarmHands">Show/Hide Locked Farm Hands</button>
                     </div>
-                    <div class="row mx-0 mt-0 mb-1 justify-content-center" data-bind="foreach: FarmHands.list.filter(f => !f.isUnlocked())" style="max-width: 100%;">
-                        <div class="card text-left col-lg-4 col-md-6 col-xs-12 p-0">
-                            <h5 class="card-header d-flex align-items-center py-2">
-                                <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
-                                <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
-                            </h5>
-                            <div class="card-body p-0">
-                                <table class="table table-bordered table-sm h-100 m-0">
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-left">Cost:</td>
-                                            <td class="text-right tight"><img alt="Farm Points" src="assets/images/currency/farmPoint.svg" style="height: 24px; width: 24px;">&nbsp;<knockout data-bind="text: `${$data.cost.amount.toLocaleString('en-US')}/hour`">0/hour</knockout></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left">Work Speed:</td>
-                                            <td class="text-right tight" data-bind="text: GameConstants.formatTimeFullLetters($data.workTick / 1000)">01m 00s</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left">Efficiency:</td>
-                                            <td class="text-right tight">
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-primary" role="progressbar" data-bind="attr:{ style: 'width:' + Math.floor(($data.efficiency / $data.maxEfficiency) * 100) + '%' }" aria-valuemin="0" aria-valuemax="50" style="width:0%">
-                                                        <span data-bind="text: $data.efficiency.toLocaleString('en-US')">0</span>
+                    <div class="collapse" id="lockedFarmHands">
+                        <div class="row mx-0 mt-0 mb-1 justify-content-center" data-bind="foreach: FarmHands.list.filter(f => !f.isUnlocked())" style="max-width: 100%;">
+                            <div class="card text-left col-lg-4 col-md-6 col-xs-12 p-0">
+                                <h5 class="card-header d-flex align-items-center py-2">
+                                    <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                    <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                </h5>
+                                <div class="card-body p-0">
+                                    <table class="table table-bordered table-sm h-100 m-0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left">Cost:</td>
+                                                <td class="text-right tight"><img alt="Farm Points" src="assets/images/currency/farmPoint.svg" style="height: 24px; width: 24px;">&nbsp;<knockout data-bind="text: `${$data.cost.amount.toLocaleString('en-US')}/hour`">0/hour</knockout></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Work Speed:</td>
+                                                <td class="text-right tight" data-bind="text: GameConstants.formatTimeFullLetters($data.workTick / 1000)">01m 00s</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Efficiency:</td>
+                                                <td class="text-right tight">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-primary" role="progressbar" data-bind="attr:{ style: 'width:' + Math.floor(($data.efficiency / $data.maxEfficiency) * 100) + '%' }" aria-valuemin="0" aria-valuemax="50" style="width:0%">
+                                                            <span data-bind="text: $data.efficiency.toLocaleString('en-US')">0</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left">Max Energy:</td>
-                                            <td class="text-right tight">
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-primary" role="progressbar" data-bind="attr:{ style: 'width:' + $data.maxEnergy + '%' }" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                                                        <span data-bind="text: $data.maxEnergy.toLocaleString('en-US')">0</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Max Energy:</td>
+                                                <td class="text-right tight">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-primary" role="progressbar" data-bind="attr:{ style: 'width:' + $data.maxEnergy + '%' }" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                                            <span data-bind="text: $data.maxEnergy.toLocaleString('en-US')">0</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" class="text-center table-secondary">Unlock Requirement</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" class="text-center p-1 h-100 align-middle" data-bind="text: $data.unlockRequirement.hint()"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-center table-secondary">Unlock Requirement</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-center p-1 h-100 align-middle" data-bind="text: $data.unlockRequirement.hint()"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
