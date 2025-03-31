@@ -101,7 +101,7 @@ class ContestHelper {
     public static calculateBaseClickAppeal(): number {
         let baseClickAppeal = 0;
         GameHelper.enumNumbers(ContestRank).forEach(r => GameHelper.enumNumbers(ContestType).forEach(ct => baseClickAppeal += Math.min(1, App.game.statistics.contestRoundsWon[r][ct]() ?? 0)));
-        return baseClickAppeal + Number(ContestRunner.clickPokeblocks());
+        return 1 + baseClickAppeal + Number(ContestRunner.clickPokeblocks());
     }
 
     public static calculateClickAppeal(clickType: ContestType[], enemyType: ContestType[]): number {
