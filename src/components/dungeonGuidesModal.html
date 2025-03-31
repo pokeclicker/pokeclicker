@@ -55,6 +55,49 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- ko if: DungeonGuides.list.some(g => !g.isUnlocked()) -->
+                        <div class="px-2 mt-1 mb-2">
+                            <button class="btn btn-secondary btn-block" data-toggle="collapse" href="#lockedDungeonGuides">Show/Hide Locked Dungeon Guides</button>
+                        </div>
+                        <div class="collapse" id="lockedDungeonGuides">
+                            <div class="row m-0 justify-content-center d-flex px-1" data-bind="foreach: DungeonGuides.list.filter(g => !g.isUnlocked())" style="max-width: 100%;">
+                                <div class="card text-left col-lg-6 col-md-12 p-1 border-0 align-items-stretch">
+                                    <h5 class="card-header d-flex align-items-center py-2">
+                                        <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                        <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                    </h5>
+                                    <div class="card-body p-0 text-center small">
+                                        <table class="table table-bordered table-sm h-100 mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" class="align-middle h-100" data-bind="html: $data.description">Description</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-50 table-secondary" style="height: 1px;">Movement Speed</td>
+                                                    <td class="table-secondary">Currencies</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`"></td>
+                                                    <td class="align-middle" data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
+                                                        <img width="24" src="" data-bind="attr: { src: `assets/images/currency/${GameConstants.Currency[$data.currency]}.svg` }"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="table-secondary" style="height: 1px;">Unlock Requirement</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="align-middle" data-bind="text: $data.unlockRequirement?.hint()"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="card-footer p-2">
+                                        <butto class="btn btn-block btn-sm btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($data.index)">Hire!</butto>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
                         <!-- /ko -->
                     </div>
 
