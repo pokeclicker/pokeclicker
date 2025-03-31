@@ -232,7 +232,7 @@ class PokemonFactory {
         const contestTypes = pokemon.contestTypes ?? basePokemon.contestTypes;
         const gender = pokemon.gender ?? this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const exp = 0;
+        const exp: number = basePokemon.exp;
         const catchRate = 0;
         const money = 0;
         const shadow = GameConstants.ShadowStatus.None;
