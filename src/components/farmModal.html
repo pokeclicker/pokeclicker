@@ -471,9 +471,6 @@
 
                 <div id="farmHandsView" class="tab-pane fade">
                     <!-- ko if: FarmHands.list.some(f => f.isUnlocked()) -->
-                    <div class="bg-primary text-left rounded-0 px-3 py-2 mt-2 mb-1" data-bind="visible: FarmHands.list.some(f => !f.isUnlocked())">
-                        <h5 class="m-0 text-light">Available Farm Hands</h5>
-                    </div>
                     <div class="row m-0 justify-content-center" data-bind="foreach: App.game.farming.farmHands.available()" style="max-width: 100%;">
                         <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
                             <h5 class="card-header">
