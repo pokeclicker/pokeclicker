@@ -63,7 +63,7 @@ class DungeonGuide {
         return this.unlockRequirement?.isCompleted() ?? true;
     }
 
-    calcCost(clears, price, region): Amount[] {
+    calcCost(clears, price, region, includeDungeonCost = false): Amount[] {
         const costs = [];
         let discount = clears ** 0.975;
         discount /= clears;
@@ -75,6 +75,14 @@ class DungeonGuide {
             newCost.amount = Math.round(cost.amount * clears * discount);
             costs.push(new Amount(newCost.amount, newCost.currency));
         });
+        if (includeDungeonCost) {
+            let dtCost = costs.find(c => c.currency === GameConstants.Currency.dungeonToken);
+            if (!dtCost) {
+                dtCost = new Amount(0, GameConstants.Currency.dungeonToken);
+                costs.push(dtCost);
+            }
+            dtCost.amount += price * clears;
+        }
         return costs;
     }
 
@@ -127,8 +135,8 @@ class DungeonGuides {
         this.hired()?.end();
     }
 
-    public static calcCost(): Amount[] {
-        return this.list[this.selected()].calcCost(this.clears(), player.town.dungeon.tokenCost, player.region);
+    public static calcCost(includeDungeonCost = false): Amount[] {
+        return this.list[this.selected()].calcCost(this.clears(), player.town.dungeon.tokenCost, player.region, includeDungeonCost);
     }
 
     public static calcDungeonCost(): Amount {
