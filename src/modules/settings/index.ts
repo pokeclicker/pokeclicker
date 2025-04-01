@@ -10,6 +10,9 @@ import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import {
+    SortOptionConfigs as UndergroundTreasureDisplaySortOptionConfigs,
+    SortOptions as UndergroundTreasureDisplaySortOptions } from '../underground/UndergroundTreasuresSortOptions';
+import {
     Region,
     MAX_AVAILABLE_REGION,
     AchievementType,
@@ -144,13 +147,11 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     ],
     'cm'));
 Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
-Settings.add(new Setting<string>('undergroundTreasureDisplaySorting', 'Sorting',
-    [
-        new SettingOption('Default', 'default'),
-        new SettingOption('Name', 'name'),
-        new SettingOption('Quantity', 'quantity'),
-    ],
-    'default'));
+const undergroundTreasureDisplaySortSettings = Object.keys(UndergroundTreasureDisplaySortOptionConfigs)
+    .map((option) => new SettingOption<number>(UndergroundTreasureDisplaySortOptionConfigs[option].text, parseInt(option, 10)));
+
+Settings.add(new Setting<number>('undergroundTreasureDisplaySorting', 'Sorting', undergroundTreasureDisplaySortSettings, UndergroundTreasureDisplaySortOptions.default));
+Settings.add(new BooleanSetting('undergroundTreasureDisplaySortingDirection', 'reverse', false));
 Settings.add(new Setting<string>('undergroundTreasureDisplayGrouping', 'Grouping',
     [
         new SettingOption('None', 'none'),

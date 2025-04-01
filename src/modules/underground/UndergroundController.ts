@@ -28,6 +28,7 @@ import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
 import { Coordinate } from './mine/Mine';
+import {SortOptionConfigs, SortOptions} from './UndergroundTreasuresSortOptions';
 
 export class UndergroundController {
     private static lastMineClick: number = Date.now();
@@ -368,16 +369,20 @@ export class UndergroundController {
 
     public static organisedTreasuresList = ko.pureComputed(() => {
         const exceptions = [ UndergroundItemValueType.MegaStone ];
-        const list = UndergroundItems.list.filter(item => !exceptions.includes(item.valueType));
+        const list = UndergroundItems.list
+            .filter(item => !exceptions.includes(item.valueType))
+            .sort(UndergroundController.organisedTreasuresListCompareBy(Settings.getSetting('undergroundTreasureDisplaySorting').observableValue(), Settings.getSetting('undergroundTreasureDisplaySortingDirection').observableValue()));
 
         switch (Settings.getSetting('undergroundTreasureDisplayGrouping').observableValue()) {
             case 'type':
-                return GameHelper.enumNumbers(UndergroundItemValueType).map(enumValue => {
-                    return {
-                        title: camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[enumValue]),
-                        treasures: list.filter(item => item.valueType === enumValue),
-                    };
-                });
+                return GameHelper.enumNumbers(UndergroundItemValueType)
+                    .filter(value => !exceptions.includes(value))
+                    .map(enumValue => {
+                        return {
+                            title: camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[enumValue]),
+                            treasures: list.filter(item => item.valueType === enumValue),
+                        };
+                    });
             case 'none':
             default:
                 return [{
@@ -386,4 +391,16 @@ export class UndergroundController {
                 }];
         }
     });
+
+    private static organisedTreasuresListCompareBy(option: SortOptions, direction: boolean): (a: UndergroundItem, b: UndergroundItem) => number {
+        return function (a, b) {
+            const config = SortOptionConfigs[option];
+
+            if (config.getValue(a) < config.getValue(b))
+                return direction ? 1 : -1;
+            if (config.getValue(a) > config.getValue(b))
+                return direction ? -1 : 1;
+            return 0;
+        };
+    }
 }

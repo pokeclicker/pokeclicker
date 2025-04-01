@@ -213,6 +213,35 @@
                         <!-- /ko -->
                     </div>
 
+                    <div class="form-group col-lg-12 col-12" style="max-width: 100%; flex-grow: 1">
+                        <!-- ko let: { undergroundTreasureDisplaySorting: Settings.getSetting('undergroundTreasureDisplaySorting') } -->
+                        <label for="underground-treasure-display-sorting" data-bind="text: undergroundTreasureDisplaySorting.displayName">Sort</label>
+                        <div class="input-group">
+                            <select id="underground-treasure-display-sorting" autocomplete="off" class="custom-select"
+                                    data-bind="options: undergroundTreasureDisplaySorting.options,
+                                                            optionsValue: 'value',
+                                                            optionsText: 'text',
+                                                            value: undergroundTreasureDisplaySorting.observableValue">
+                            </select>
+                            <div class="input-group-append bg-primary text-light">
+                                <!-- ko let: { undergroundTreasureDisplaySortingDirection: Settings.getSetting('undergroundTreasureDisplaySortingDirection') } -->
+                                <label for="underground-treasure-display-sorting-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
+                                       data-bind="text: undergroundTreasureDisplaySortingDirection.observableValue() ? '⥄' : '⥂',
+                                                                tooltip: {
+                                                                    title: undergroundTreasureDisplaySortingDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                                                    trigger: 'hover',
+                                                                    placement:'top'
+                                                                }">
+                                    ⥂
+                                </label>
+                                <input id="underground-treasure-display-sorting-direction" style="vertical-align: middle" class="hidden" type='checkbox'
+                                       data-bind="checked: undergroundTreasureDisplaySortingDirection.observableValue"/>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+
                     <!-- ko foreach: UndergroundController.organisedTreasuresList -->
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
