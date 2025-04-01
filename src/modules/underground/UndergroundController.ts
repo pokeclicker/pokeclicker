@@ -10,6 +10,7 @@ import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import {
+    camelCaseToString,
     DISCOVER_MINE_TIMEOUT_BASE,
     DISCOVER_MINE_TIMEOUT_LEVEL_START,
     DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL,
@@ -364,4 +365,25 @@ export class UndergroundController {
             '</div>',
         ].join('');
     }
+
+    public static organisedTreasuresList = ko.pureComputed(() => {
+        const exceptions = [ UndergroundItemValueType.MegaStone ];
+        const list = UndergroundItems.list.filter(item => !exceptions.includes(item.valueType));
+
+        switch (Settings.getSetting('undergroundTreasureDisplayGrouping').observableValue()) {
+            case 'type':
+                return GameHelper.enumNumbers(UndergroundItemValueType).map(enumValue => {
+                    return {
+                        title: camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[enumValue]),
+                        treasures: list.filter(item => item.valueType === enumValue),
+                    };
+                });
+            case 'none':
+            default:
+                return [{
+                    title: 'All',
+                    treasures: list,
+                }];
+        }
+    });
 }

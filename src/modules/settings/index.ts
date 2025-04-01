@@ -144,6 +144,20 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     ],
     'cm'));
 Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
+Settings.add(new Setting<string>('undergroundTreasureDisplaySorting', 'Sorting',
+    [
+        new SettingOption('Default', 'default'),
+        new SettingOption('Name', 'name'),
+        new SettingOption('Quantity', 'quantity'),
+    ],
+    'default'));
+Settings.add(new Setting<string>('undergroundTreasureDisplayGrouping', 'Grouping',
+    [
+        new SettingOption('None', 'none'),
+        new SettingOption('Type', 'type'),
+    ],
+    'type'));
+
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
 Settings.add(new BooleanSetting('enableUndergroundModuleMineControls', 'Enable Underground module mine controls', true));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));

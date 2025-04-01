@@ -199,15 +199,29 @@
                 </div>
 
                 <div id="treasures" class="tab-pane fade p-2">
-                    <!-- ko foreach: [UndergroundItemValueType.Diamond, UndergroundItemValueType.Gem, UndergroundItemValueType.Shard, UndergroundItemValueType.Fossil, UndergroundItemValueType.FossilPiece, UndergroundItemValueType.EvolutionItem, UndergroundItemValueType.Special] -->
+                    <p>Click on your treasure to open up a detail view</p>
+
+                    <div>
+                        <!-- ko let: { groupTreasuresByType: Settings.getSetting('undergroundTreasureDisplayGrouping') } -->
+                        <label for="group-treasures-by-type" data-bind="text: groupTreasuresByType.displayName"></label>
+                        <select id="group-treasures-by-type" autocomplete="off" class="custom-select"
+                                data-bind="options: groupTreasuresByType.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: groupTreasuresByType.observableValue">
+                        </select>
+                        <!-- /ko -->
+                    </div>
+
+                    <!-- ko foreach: UndergroundController.organisedTreasuresList -->
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: GameConstants.camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[$data])"></span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: $data.title"></span>
                         </div>
 
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === $data) -->
+                                <!-- ko foreach: $data.treasures -->
                                 <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
                                     <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
                                             data-bind="
