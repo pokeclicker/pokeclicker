@@ -17,7 +17,7 @@ import {
     HELPER_EXPERIENCE_PLAYER_FRACTION,
     humanifyString,
     PLATE_VALUE,
-    PLAYER_EXPERIENCE_HELPER_FRACTION, SECOND,
+    PLAYER_EXPERIENCE_HELPER_FRACTION, Region, SECOND,
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
     SURVEY_RANGE_REDUCTION_LEVELS,
@@ -29,6 +29,7 @@ import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
 import { Coordinate } from './mine/Mine';
 import {SortOptionConfigs, SortOptions} from './UndergroundTreasuresSortOptions';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export class UndergroundController {
     private static lastMineClick: number = Date.now();
@@ -391,6 +392,16 @@ export class UndergroundController {
                     title: 'Cannot be sold',
                     treasures: list.filter(item => !item.hasSellValue()),
                 }];
+            case 'region':
+                return GameHelper.enumNumbers(Region).sort((a, b) => a - b)
+                    .map(enumValue => {
+                        return {
+                            title: camelCaseToString(Region[enumValue]),
+                            treasures: list.filter(item => (!(item.requirement instanceof MaxRegionRequirement) && enumValue === Region.none) ||
+                                (item.requirement instanceof MaxRegionRequirement && (item.requirement as MaxRegionRequirement).requiredValue === enumValue)),
+                        };
+                    })
+                    .filter(value => value.treasures.length > 0);
             case 'none':
             default:
                 return [{
