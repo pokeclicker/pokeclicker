@@ -372,6 +372,7 @@ export class UndergroundController {
         const exceptions = [ UndergroundItemValueType.MegaStone ];
         const list = UndergroundItems.list
             .filter(item => !exceptions.includes(item.valueType))
+            .filter(item => item.isUnlocked() || Settings.getSetting('undergroundTreasureDisplayShowLocked').observableValue())
             .sort(UndergroundController.organisedTreasuresListCompareBy(Settings.getSetting('undergroundTreasureDisplaySorting').observableValue(), Settings.getSetting('undergroundTreasureDisplaySortingDirection').observableValue()));
 
         switch (Settings.getSetting('undergroundTreasureDisplayGrouping').observableValue()) {
