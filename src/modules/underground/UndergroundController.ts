@@ -383,6 +383,14 @@ export class UndergroundController {
                             treasures: list.filter(item => item.valueType === enumValue),
                         };
                     });
+            case 'sellable':
+                return [{
+                    title: 'Can be sold',
+                    treasures: list.filter(item => item.hasSellValue()),
+                }, {
+                    title: 'Cannot be sold',
+                    treasures: list.filter(item => !item.hasSellValue()),
+                }];
             case 'none':
             default:
                 return [{

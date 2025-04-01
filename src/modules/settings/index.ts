@@ -156,6 +156,7 @@ Settings.add(new Setting<string>('undergroundTreasureDisplayGrouping', 'Grouping
     [
         new SettingOption('None', 'none'),
         new SettingOption('Type', 'type'),
+        new SettingOption('Can be sold', 'sellable'),
     ],
     'type'));
 
