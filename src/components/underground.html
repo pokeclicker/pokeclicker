@@ -199,8 +199,6 @@
                 </div>
 
                 <div id="treasures" class="tab-pane fade p-2">
-                    <p>Click on your treasure to open up a detail view</p>
-
                     <div>
                         <!-- ko let: { groupTreasuresByType: Settings.getSetting('undergroundTreasureDisplayGrouping') } -->
                         <label for="group-treasures-by-type" data-bind="text: groupTreasuresByType.displayName"></label>
@@ -213,7 +211,7 @@
                         <!-- /ko -->
                     </div>
 
-                    <div class="form-group col-lg-12 col-12" style="max-width: 100%; flex-grow: 1">
+                    <div>
                         <!-- ko let: { undergroundTreasureDisplaySorting: Settings.getSetting('undergroundTreasureDisplaySorting') } -->
                         <label for="underground-treasure-display-sorting" data-bind="text: undergroundTreasureDisplaySorting.displayName">Sort</label>
                         <div class="input-group">
@@ -242,7 +240,7 @@
                         <!-- /ko -->
                     </div>
 
-                    <div class="form-group col-lg-12 col-12 mb-0">
+                    <div>
                         <!-- ko let: { undergroundTreasureDisplayShowLocked: Settings.getSetting('undergroundTreasureDisplayShowLocked') } -->
                         <label for="underground-treasure-display-show-locked" data-bind="text: undergroundTreasureDisplayShowLocked.displayName">Hide alternate forms</label>
                         <label class="form-check-label toggler-wrapper style-1 float-right">
@@ -254,6 +252,28 @@
                         </label>
                         <!-- /ko -->
                     </div>
+
+                    <div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-block" data-bind="
+                                click: () => UndergroundTrading.quickSellEnabled(!UndergroundTrading.quickSellEnabled()),
+                                text: `${UndergroundTrading.quickSellEnabled() ? 'Disable' : 'Enable'} Quick-Sell Mode`,
+                                tooltip: {
+                                    title: 'With Quick-Sell Mode enabled, clicking an item sells all of it instantly',
+                                    placement: 'top',
+                                    trigger: 'hover',
+                                }
+                            ">
+                                Quick-Sell Mode
+                            </button>
+                        </div>
+                    </div>
+
+                    <p data-bind="ifnot: UndergroundTrading.quickSellEnabled()">Click on your treasure to open up a detail view</p>
+                    <p data-bind="if: UndergroundTrading.quickSellEnabled()">
+                        <label class="h3 text-danger font-weight-bold">Quick-Sell Mode enabled</label><br/>
+                        Clicking your treasure will sell your entire stash of that item.
+                    </p>
 
                     <!-- ko foreach: UndergroundController.organisedTreasuresList -->
                     <div class="card mb-2">

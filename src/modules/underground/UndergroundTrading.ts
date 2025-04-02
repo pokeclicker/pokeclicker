@@ -16,6 +16,8 @@ export class UndergroundTrading {
     private static _tradeAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
     private static _sellAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
 
+    public static quickSellEnabled: Observable<boolean> = ko.observable(false);
+
     private static  _computedAvailableItemsToTradeList: PureComputed<UndergroundItem[]> = ko.pureComputed<UndergroundItem[]>(() => {
         return UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.Diamond, UndergroundItemValueType.MegaStone].includes(item.valueType));
     });
@@ -137,5 +139,10 @@ export class UndergroundTrading {
             type: NotificationOption.success,
             timeout: 10 * SECOND,
         });
+    }
+
+    public static quickSell(item: UndergroundItem) {
+        if (!item.hasSellValue()) return;
+        UndergroundController.sellMineItem(item, player.itemList[item.itemName]());
     }
 }
