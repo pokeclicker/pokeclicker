@@ -203,12 +203,7 @@ export class UndergroundController {
                     GameHelper.incrementObservable(App.game.statistics.undergroundHelperRewardRetention[`${helper.id}-${item.id}`], amount);
                     UndergroundController.notifyHelperItemRetention(item, amount, helper);
                 } else {
-                    // If we can auto sell then do so
-                    if (helper.autoSellToggle && (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem)) {
-                        UndergroundController.gainProfit(item, amount);
-                    } else {
-                        UndergroundController.gainMineItem(item.id, amount);
-                    }
+                    UndergroundController.gainMineItem(item.id, amount);
                 }
 
                 UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
