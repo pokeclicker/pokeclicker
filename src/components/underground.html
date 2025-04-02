@@ -316,15 +316,23 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <div class="justify-content-center treasure-item-container" data-bind="css: Settings.getSetting('undergroundTreasureViewMode').observableValue()">
+                                    <div class="justify-content-center treasure-item-container" data-bind="
+                                        class: Settings.getSetting('undergroundTreasureViewMode').observableValue(),
+                                        css: { quickSellMode: UndergroundTrading.quickSellEnabled() }
+                                    ">
                                         <!-- ko foreach: $data.treasures -->
                                         <div data-bind="
                                             template: { name: 'undergroundTreasureItemTemplate', data: { undergroundItem: $data, highlight: false } },
                                             click: () => {
                                                 if ($data.isUnlocked()) {
-                                                    UndergroundTrading.selectedTradeFromItem = $data;
-                                                    UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
-                                                    $('#treasureDetailModal').modal('show');
+                                                    if (UndergroundTrading.quickSellEnabled()) {
+                                                        UndergroundTrading.quickSell($data);
+                                                    }
+                                                    else {
+                                                        UndergroundTrading.selectedTradeFromItem = $data;
+                                                        UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
+                                                        $('#treasureDetailModal').modal('show');
+                                                    }
                                                 }
                                             }
                                         "></div>
@@ -1176,6 +1184,7 @@
     <div class="btn btn-secondary w-100 h-100 p-1 position-relative overflow-hidden" data-bind="
         enable: undergroundItem.isUnlocked(),
         css: {
+            'has-sell-value': undergroundItem.hasSellValue(),
             disabled: !undergroundItem.isUnlocked(),
             'bg-info': highlight
         }
