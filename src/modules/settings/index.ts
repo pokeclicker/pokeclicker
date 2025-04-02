@@ -477,6 +477,7 @@ Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
 Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Switch to Bomb', 'B'));
 Settings.add(new HotkeySetting('hotkey.underground.survey', 'Switch to Survey', 'S'));
+Settings.add(new HotkeySetting('hotkey.underground.discharge', 'Discharge', 'D'));
 
 Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'W', { prefix: '↑ or ' }));
 Settings.add(new HotkeySetting('hotkey.dungeon.left', 'Move Left', 'A', { prefix: '← or ' }));

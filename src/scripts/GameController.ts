@@ -193,6 +193,9 @@ class GameController {
                     case Settings.getSetting('hotkey.underground.survey').value:
                         App.game.underground.tools.selectedToolType = UndergroundToolType.Survey;
                         return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.discharge').value:
+                        App.game.underground.battery.discharge();
+                        return e.preventDefault();
                 }
             }
             if ($oakItemsModal.data('bs.modal')?._isShown) {
