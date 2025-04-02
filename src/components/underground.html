@@ -465,19 +465,6 @@
                                 The Underground Glossary can be found at the bottom of this page.
                             </p>
 
-                            <h4>Finding a new mine</h4>
-                            <p>
-                                A new mine can be manually found by clicking the Find mine button in the Dig tab.<br/>
-                                Automatically starting a new mine happens in the following cases:
-                            </p>
-                            <ul>
-                                <li>A <strong>player</strong> digs up the last treasure: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
-                                <li>An <strong>expert</strong> digs up the last treasure: If your expert has the 'Use expertise' setting enabled, it will try to find a specific mine. If this setting is disabled it will find a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>.</li>
-                            </ul>
-                            <p>
-                                <u>Note that this does NOT ignore the discovery time needed.</u>
-                            </p>
-
                             <h4>Mine Types</h4>
                             <ul>
                                 <li>
@@ -498,12 +485,30 @@
                                 <li>
                                     <strong><knockout data-bind="text: MineConfigs.find(MineType.EvolutionItem).displayName"></knockout>:</strong> Contains only evolution items.
                                 </li>
+                                <li>
+                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>:</strong> Can only be found when special conditions are met (see below). Contains only special items.
+                                </li>
                             </ul>
 
                             <h4><knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout></h4>
                             <p>
                                 When you (not your expert) are searching for a mine, there is a 4% chance for the mine to be a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>.
                                 This mine only contains 1 treasure, which can be any of the mega stones (if eligible) or other special treasures.
+                                <br>
+                                <i>Note: The auto-restart triggered by the player digging up the last item <u>can</u> trigger a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>.</i>
+                            </p>
+
+                            <h4>Finding a new mine</h4>
+                            <p>
+                                A new mine can be manually found by clicking the Find mine button in the Dig tab.<br/>
+                                Automatically starting a new mine happens in the following cases:
+                            </p>
+                            <ul>
+                                <li>A <strong>player</strong> digs up the last treasure: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
+                                <li>An <strong>expert</strong> digs up the last treasure: If your expert has the 'Use expertise' setting enabled, it will try to find a specific mine. If this setting is disabled it will find a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>.</li>
+                            </ul>
+                            <p>
+                                <i>Note: This step happens before calculating a potential discovery time</i>
                             </p>
 
                             <h4>Discovery Time Calculation</h4>
@@ -512,11 +517,11 @@
                                 <li>
                                     <strong><knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout></strong>
                                     <ul>
+                                        <li>Current mine is not a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>: No discovery time</li>
                                         <li>
                                             Current mine is a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>:<br/>
-                                            The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>. This is then further reduced by the percentage of the amount of unmined tiles divided by all tiles only taking into account tiles that do contain a reward.
+                                            The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>. This is then further reduced as you discover treasures in your current mine.
                                         </li>
-                                        <li>Current mine is not a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>: No discovery time</li>
                                     </ul>
                                 </li>
                                 <li>
@@ -612,9 +617,6 @@
                                 When a tool reaches a repair rate of 0 seconds, its durability will stay at 100%.
                             </p>
 
-                            <h4>Successful Use</h4>
-                            <p>A tool only counts as used if its action is successful, meaning it accomplishes its intended task (e.g., mining layers or indicating tiles).</p>
-
                             <h4>Tools Overview</h4>
                             <p>There are <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> different tools available, each with unique functions and properties:</p>
                             <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Chisel) } -->
@@ -629,6 +631,32 @@
                             <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Survey) } -->
                             <div data-bind="template: { name: 'helpToolTemplate', data: { tool, action: `Indicates a ${GameConstants.SURVEY_RANGE_BASE}x${GameConstants.SURVEY_RANGE_BASE} grid where at least one tile contains a treasure. The grid shrinks by two tiles in each direction every ${GameConstants.SURVEY_RANGE_REDUCTION_LEVELS} levels.` } }"></div>
                             <!-- /ko -->
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center p-0">
+                            <span class="flex-grow-1 text-center font-weight-bold">Oak Items</span>
+                        </div>
+
+                        <div class="card-body">
+                            <h4>Explosive Charge</h4>
+                            <ul>
+                                <li><strong>Progress:</strong> Gains progress to level up when finding all treasures in a mine</li>
+                                <li><strong>Effect:</strong> Increases the number of tiles the Bomb tool will mine</li>
+                            </ul>
+
+                            <h4>Cell Battery</h4>
+                            <ul>
+                                <li><strong>Progress:</strong> Gains progress to level up when the player uses discharge</li>
+                                <li><strong>Effect:</strong> Triggers a discharge which will clear tiles in a certain pattern, new patterns become available by levelling up Cell Battery</li>
+                            </ul>
+
+                            <h4>Treasure Scanner</h4>
+                            <ul>
+                                <li><strong>Progress:</strong> Gains progress to level up when finding a treasure in a mine</li>
+                                <li><strong>Effect:</strong> Has a chance to duplicate a collected treasure. Keeps attempting to duplicate until it fails a chance</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -670,6 +698,7 @@
                                         <li>Starts at <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> chance to find their specific mine when searching.</li>
                                         <li>Increases by <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to a maximum of <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
                                         <li>If they don’t find their specific mine, they will find a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>.</li>
+                                        <li><i>Experts will never discover a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>.</i></li>
                                     </ul>
                                 </li>
                                 <li><strong>Smart tool use:</strong> Experts start out inexperienced and will pick the most efficient tool <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of the time.
@@ -685,7 +714,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><strong>Reward retention:</strong> When an expert digs up a treasure, there is a chance that they will keep the treasure for themselves.
+                                <li><strong>Reward retention:</strong> When an expert digs up a treasure (last click), there is a chance that they will keep the treasure for themselves.
                                     <ul>
                                         <li>
                                             The chance starts at <knockout data-bind="text: GameConstants.REWARD_RETENTION_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and decreases by <knockout data-bind="text: GameConstants.REWARD_RETENTION_DECREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, down to <knockout data-bind="text: GameConstants.REWARD_RETENTION_MINIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.
@@ -734,6 +763,15 @@
                                 <li><strong>Player Actions:</strong> When the player performs an action that gains experience, the active expert will also gain <knockout data-bind="text: GameConstants.PLAYER_EXPERIENCE_HELPER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
                                 <li><strong>Expert Actions:</strong> When the expert performs an action that gains them experience, the player will also gain <knockout data-bind="text: GameConstants.HELPER_EXPERIENCE_PLAYER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
                             </ul>
+
+                            <h4>Underground Level</h4>
+                            <p>Your underground level will affect the following:</p>
+                            <ul>
+                                <li>Increases the minimum and maximum amount of treasures that can be found in a mine</li>
+                                <li>Increases the rate at which tools gain durability</li>
+                                <li>Reduces the discovery time of mines when applicable</li>
+                                <li>Reduces the Survey area</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -747,33 +785,7 @@
                             <ul>
                                 <li><strong>Same Category Trading:</strong> Trades can only be made within the same category of treasures.</li>
                                 <li><strong>3 to 1 Trade:</strong> Trading always follows a 3 to 1 ratio (e.g., trade 3 treasures to receive 1 new treasure).</li>
-                                <li><strong>Exception:</strong> Diamond treasures cannot be traded.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="card mb-2">
-                        <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Oak Items</span>
-                        </div>
-
-                        <div class="card-body">
-                            <h4>Explosive Charge</h4>
-                            <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when finding all treasures in a mine</li>
-                                <li><strong>Effect:</strong> Increases the number of tiles the Bomb tool will mine</li>
-                            </ul>
-
-                            <h4>Cell Battery</h4>
-                            <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when the player uses discharge</li>
-                                <li><strong>Effect:</strong> Triggers a discharge which will clear tiles in a certain pattern, new patterns become available by levelling up Cell Battery</li>
-                            </ul>
-
-                            <h4>Treasure Scanner</h4>
-                            <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when finding a treasure in a mine</li>
-                                <li><strong>Effect:</strong> Has a chance to duplicate a collected treasure. Keeps attempting to duplicate until it fails a chance</li>
+                                <li><strong>Exception:</strong> Diamond treasures cannot be traded for other items, only sold for diamonds.</li>
                             </ul>
                         </div>
                     </div>
@@ -788,6 +800,7 @@
                                 <li><strong>Seen treasure:</strong> At least 1 part of the treasure is visible to the player</li>
                                 <li><strong>Collected treasure:</strong> All parts of the treasure are visible to the player, the treasure has been claimed</li>
                                 <li><strong>Completed Mine:</strong> All buried treasures have been collected</li>
+                                <li><strong>Successful Tool Use:</strong> A tool only counts as used if its action is successful, meaning it accomplishes its intended task (e.g., mining layers or indicating tiles)</li>
                             </ul>
                         </div>
                     </div>
