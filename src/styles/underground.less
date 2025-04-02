@@ -244,3 +244,76 @@
         --tool-color: #FFC300;
     }
 }
+
+.treasure-item-container {
+    display: grid;
+    gap: 0.25rem;
+
+    text-align: center;
+
+    > div {
+        container-type: inline-size;
+        //container-name: treasureitemcontainerchild;
+    }
+
+    &.grid-view {
+        grid-template-columns: repeat(auto-fit, 75px);
+
+        > div {
+            aspect-ratio: 1 / 1;
+
+            > div:first-child {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    &.list-view {
+        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    }
+
+    .treasure-item-data-wrapper {
+        //display: flex;
+        //flex-wrap: wrap;
+        display: grid;
+        flex: 1;
+        gap: 0.25rem;
+        justify-content: center;
+    }
+}
+
+.treasure-item {
+    display: grid;
+    gap: 0.25rem;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+@container (max-width: 100px) {
+    .treasure-item {
+        .treasure-item-name {
+            display: none;
+        }
+
+        .long-format {
+            display: none;
+        }
+    }
+}
+
+@container (min-width: 100px) {
+    .treasure-item {
+        display: flex;
+
+        .treasure-item-data-wrapper {
+            text-align: left;
+            justify-content: space-between;
+        }
+
+        .short-format {
+            display: none;
+        }
+    }
+}

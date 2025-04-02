@@ -282,22 +282,18 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="row justify-content-center">
+                            <div class="justify-content-center treasure-item-container list-view">
                                 <!-- ko foreach: $data.treasures -->
-                                <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                    <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                            data-bind="
-                                            css: { 'bg-info': UndergroundTrading.selectedTradeFromItem === $data },
-                                            style: { cursor: 'pointer' },
-                                            template: { name: 'otherItemTemplate', data: $data.itemName },
-                                            click: () => {
-                                                UndergroundTrading.selectedTradeFromItem = $data;
-                                                UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
-                                                $('#treasureDetailModal').modal('show');
-                                            }
-                                            ">
-                                    </div>
-                                </div>
+                                <div data-bind="
+                                    template: { name: 'undergroundTreasureItemTemplate', data: { undergroundItem: $data, highlight: false } },
+                                    click: () => {
+                                        if ($data.isUnlocked()) {
+                                            UndergroundTrading.selectedTradeFromItem = $data;
+                                            UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
+                                            $('#treasureDetailModal').modal('show');
+                                        }
+                                    }
+                                "></div>
                                 <!-- /ko -->
                             </div>
                         </div>
@@ -910,17 +906,16 @@
                     </div>
 
                     <div class="card-body">
-                        <div class="row">
+                        <div class="justify-content-center treasure-item-container list-view">
                             <!-- ko foreach: UndergroundTrading.tradeToItemList -->
-                            <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
-                                <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                     data-bind="
-                                        css: { 'bg-info': UndergroundTrading.selectedTradeToItem === $data },
-                                        template: { name: 'otherItemTemplate', data: $data.itemName },
-                                        click: () => { UndergroundTrading.selectedTradeToItem = $data; }
-                                     ">
-                                </div>
-                            </div>
+                            <div data-bind="
+                                    template: { name: 'undergroundTreasureItemTemplate', data: { undergroundItem: $data, highlight: UndergroundTrading.selectedTradeToItem === $data } },
+                                    click: () => {
+                                        if ($data.isUnlocked()) {
+                                            UndergroundTrading.selectedTradeToItem = $data
+                                        }
+                                    }
+                                "></div>
                             <!-- /ko -->
                         </div>
 
@@ -1138,4 +1133,42 @@
             </ul>
         </li>
     </ul>
+</script>
+
+<script type="text/html" id="undergroundTreasureItemTemplate">
+<!-- ko let: { itemName: undergroundItem.itemName } -->
+    <div class="btn btn-secondary w-100 h-100 p-1 position-relative overflow-hidden" data-bind="
+        enable: undergroundItem.isUnlocked(),
+        css: {
+            disabled: !undergroundItem.isUnlocked(),
+            'bg-info': highlight
+        }
+    ">
+        <div class="treasure-item" data-bind="style: { opacity: undergroundItem.isUnlocked() ? 1 : 0.25 },
+            tooltip: {
+                title: `<u>${ItemList[itemName].displayName}</u><br/>${ItemList[itemName].description}<br/>${player.itemList[itemName]().toLocaleString('en-US')}`,
+                trigger: 'hover',
+                html: true
+            }
+        ">
+            <img width="42px" data-bind="attr: { src: ItemList[itemName].image }" />
+            <div class="treasure-item-data-wrapper">
+                <div class="treasure-item-name small" style="line-height: 1rem;" data-bind="text: ItemList[itemName].displayName"></div>
+                <div class="small font-weight-bold short-format" style="line-height: 1rem; word-break: break-all" data-bind="text: GameConstants.formatNumber(player.itemList[itemName]())"></div>
+                <div class="small font-weight-bold long-format" style="line-height: 1rem; word-break: break-all" data-bind="text: player.itemList[itemName]().toLocaleString('en-US')"></div>
+            </div>
+        </div>
+
+        <!-- ko ifnot: undergroundItem.isUnlocked() -->
+        <div class="d-flex justify-content-center align-items-center position-absolute" style="background-color: rgba(255, 255, 255, 0.5); inset: 0;" data-bind="
+            tooltip: {
+                title: undergroundItem.requirement?.hint() ?? '',
+                trigger: 'hover'
+            }
+        ">
+            <img width="24px" class="lock" src="assets/images/breeding/lock.svg" />
+        </div>
+        <!-- /ko -->
+    </div>
+<!-- /ko -->
 </script>
