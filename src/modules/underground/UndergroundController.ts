@@ -384,7 +384,8 @@ export class UndergroundController {
                             title: camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[enumValue]),
                             treasures: list.filter(item => item.valueType === enumValue),
                         };
-                    });
+                    })
+                    .filter(value => value.treasures.length > 0);
             case 'sellable':
                 return [{
                     title: 'Can be sold',
