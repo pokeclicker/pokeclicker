@@ -1,6 +1,6 @@
 <div aria-labelledby="myModalLabel" class="modal fade noselect" id="mineModal" role="dialog"
      style="cursor:default" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
@@ -198,120 +198,143 @@
                     </div>
                 </div>
 
-                <div id="treasures" class="tab-pane fade p-2">
-                    <div>
-                        <!-- ko let: { groupTreasuresByType: Settings.getSetting('undergroundTreasureDisplayGrouping') } -->
-                        <label for="group-treasures-by-type" data-bind="text: groupTreasuresByType.displayName"></label>
-                        <select id="group-treasures-by-type" autocomplete="off" class="custom-select"
-                                data-bind="options: groupTreasuresByType.options,
-                                                        optionsValue: 'value',
-                                                        optionsText: 'text',
-                                                        value: groupTreasuresByType.observableValue">
-                        </select>
-                        <!-- /ko -->
-                    </div>
-
-                    <div>
-                        <!-- ko let: { undergroundTreasureDisplaySorting: Settings.getSetting('undergroundTreasureDisplaySorting') } -->
-                        <label for="underground-treasure-display-sorting" data-bind="text: undergroundTreasureDisplaySorting.displayName">Sort</label>
-                        <div class="input-group">
-                            <select id="underground-treasure-display-sorting" autocomplete="off" class="custom-select"
-                                    data-bind="options: undergroundTreasureDisplaySorting.options,
-                                                            optionsValue: 'value',
-                                                            optionsText: 'text',
-                                                            value: undergroundTreasureDisplaySorting.observableValue">
-                            </select>
-                            <div class="input-group-append bg-primary text-light">
-                                <!-- ko let: { undergroundTreasureDisplaySortingDirection: Settings.getSetting('undergroundTreasureDisplaySortingDirection') } -->
-                                <label for="underground-treasure-display-sorting-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
-                                       data-bind="text: undergroundTreasureDisplaySortingDirection.observableValue() ? '⥄' : '⥂',
-                                                                tooltip: {
-                                                                    title: undergroundTreasureDisplaySortingDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
-                                                                    trigger: 'hover',
-                                                                    placement:'top'
-                                                                }">
-                                    ⥂
-                                </label>
-                                <input id="underground-treasure-display-sorting-direction" style="vertical-align: middle" class="hidden" type='checkbox'
-                                       data-bind="checked: undergroundTreasureDisplaySortingDirection.observableValue"/>
-                                <!-- /ko -->
-                            </div>
-                        </div>
-                        <!-- /ko -->
-                    </div>
-
-                    <div>
-                        <!-- ko let: { undergroundTreasureDisplayShowLocked: Settings.getSetting('undergroundTreasureDisplayShowLocked') } -->
-                        <label for="underground-treasure-display-show-locked" data-bind="text: undergroundTreasureDisplayShowLocked.displayName">Hide alternate forms</label>
-                        <label class="form-check-label toggler-wrapper style-1 float-right">
-                            <input class="form-check-input" type="checkbox" id="underground-treasure-display-show-locked"
-                                   data-bind="checked: undergroundTreasureDisplayShowLocked.observableValue">
-                            <div class="toggler-slider">
-                                <div class="toggler-knob"></div>
-                            </div>
-                        </label>
-                        <!-- /ko -->
-                    </div>
-
-                    <div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block" data-bind="
-                                click: () => UndergroundTrading.quickSellEnabled(!UndergroundTrading.quickSellEnabled()),
-                                text: `${UndergroundTrading.quickSellEnabled() ? 'Disable' : 'Enable'} Quick-Sell Mode`,
-                                tooltip: {
-                                    title: 'With Quick-Sell Mode enabled, clicking an item sells all of it instantly',
-                                    placement: 'top',
-                                    trigger: 'hover',
-                                }
-                            ">
-                                Quick-Sell Mode
+                <div id="treasures" class="tab-pane fade p-3">
+                    <div class="row">
+                        <div class="col-12 d-lg-none d-block">
+                            <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
+                            data-target="#underground-treasure-filter-container" aria-expanded="false" aria-controls="underground-treasure-filter-container">
+                                Filters and Settings
                             </button>
                         </div>
-                    </div>
 
-                    <div>
-                        <div class="btn-group btn-group-toggle">
-                            <label class="btn btn-secondary" data-bind="css: { active: Settings.getSetting('undergroundTreasureViewMode').observableValue() === 'list-view' }">
-                                <input type="radio" name="treasure-view-mode" value="list-view" onchange="Settings.setSettingByName('undergroundTreasureViewMode', this.value)">
-                                List
-                            </label>
-                            <label class="btn btn-secondary" data-bind="css: { active: Settings.getSetting('undergroundTreasureViewMode').observableValue() === 'grid-view' }">
-                                <input type="radio" name="treasure-view-mode" value="grid-view" onchange="Settings.setSettingByName('undergroundTreasureViewMode', this.value)">
-                                Grid
-                            </label>
-                        </div>
-                    </div>
+                        <div class="col-lg-3 col-12 collapse dont-collapse-lg" id="underground-treasure-filter-container">
+                            <div>
+                                <h4>Filters and Settings</h4>
+                            </div>
 
-                    <p data-bind="ifnot: UndergroundTrading.quickSellEnabled()">Click on your treasure to open up a detail view</p>
-                    <p data-bind="if: UndergroundTrading.quickSellEnabled()">
-                        <label class="h3 text-danger font-weight-bold">Quick-Sell Mode enabled</label><br/>
-                        Clicking your treasure will sell your entire stash of that item.
-                    </p>
+                            <hr>
 
-                    <!-- ko foreach: UndergroundController.organisedTreasuresList -->
-                    <div class="card mb-2">
-                        <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: $data.title"></span>
-                        </div>
+                            <div class="container-fluid">
+                                <div class="form-row text-left">
+                                    <div class="form-group col-12">
+                                        <div class="btn-group btn-group-toggle">
+                                            <label class="btn btn-secondary" data-bind="css: { active: Settings.getSetting('undergroundTreasureViewMode').observableValue() === 'list-view' }">
+                                                <input type="radio" name="treasure-view-mode" value="list-view" onchange="Settings.setSettingByName('undergroundTreasureViewMode', this.value)">
+                                                List
+                                            </label>
+                                            <label class="btn btn-secondary" data-bind="css: { active: Settings.getSetting('undergroundTreasureViewMode').observableValue() === 'grid-view' }">
+                                                <input type="radio" name="treasure-view-mode" value="grid-view" onchange="Settings.setSettingByName('undergroundTreasureViewMode', this.value)">
+                                                Grid
+                                            </label>
+                                        </div>
+                                    </div>
 
-                        <div class="card-body">
-                            <div class="justify-content-center treasure-item-container" data-bind="css: Settings.getSetting('undergroundTreasureViewMode').observableValue()">
-                                <!-- ko foreach: $data.treasures -->
-                                <div data-bind="
-                                    template: { name: 'undergroundTreasureItemTemplate', data: { undergroundItem: $data, highlight: false } },
-                                    click: () => {
-                                        if ($data.isUnlocked()) {
-                                            UndergroundTrading.selectedTradeFromItem = $data;
-                                            UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
-                                            $('#treasureDetailModal').modal('show');
-                                        }
-                                    }
-                                "></div>
-                                <!-- /ko -->
+                                    <div class="form-group col-12">
+                                        <!-- ko let: { groupTreasuresByType: Settings.getSetting('undergroundTreasureDisplayGrouping') } -->
+                                        <label for="group-treasures-by-type" data-bind="text: groupTreasuresByType.displayName"></label>
+                                        <select id="group-treasures-by-type" autocomplete="off" class="custom-select"
+                                                data-bind="options: groupTreasuresByType.options,
+                                                                        optionsValue: 'value',
+                                                                        optionsText: 'text',
+                                                                        value: groupTreasuresByType.observableValue">
+                                        </select>
+                                        <!-- /ko -->
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <!-- ko let: { undergroundTreasureDisplaySorting: Settings.getSetting('undergroundTreasureDisplaySorting') } -->
+                                        <label for="underground-treasure-display-sorting" data-bind="text: undergroundTreasureDisplaySorting.displayName">Sort</label>
+                                        <div class="input-group">
+                                            <select id="underground-treasure-display-sorting" autocomplete="off" class="custom-select"
+                                                    data-bind="options: undergroundTreasureDisplaySorting.options,
+                                                                optionsValue: 'value',
+                                                                optionsText: 'text',
+                                                                value: undergroundTreasureDisplaySorting.observableValue">
+                                            </select>
+                                            <div class="input-group-append bg-primary text-light">
+                                                <!-- ko let: { undergroundTreasureDisplaySortingDirection: Settings.getSetting('undergroundTreasureDisplaySortingDirection') } -->
+                                                <label for="underground-treasure-display-sorting-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
+                                                       data-bind="text: undergroundTreasureDisplaySortingDirection.observableValue() ? '⥄' : '⥂',
+                                                                    tooltip: {
+                                                                        title: undergroundTreasureDisplaySortingDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                                                        trigger: 'hover',
+                                                                        placement:'top'
+                                                                    }">
+                                                    ⥂
+                                                </label>
+                                                <input id="underground-treasure-display-sorting-direction" style="vertical-align: middle" class="hidden" type='checkbox'
+                                                       data-bind="checked: undergroundTreasureDisplaySortingDirection.observableValue"/>
+                                                <!-- /ko -->
+                                            </div>
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <!-- ko let: { undergroundTreasureDisplayShowLocked: Settings.getSetting('undergroundTreasureDisplayShowLocked') } -->
+                                        <label for="underground-treasure-display-show-locked" data-bind="text: undergroundTreasureDisplayShowLocked.displayName">Hide alternate forms</label>
+                                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                                            <input class="form-check-input" type="checkbox" id="underground-treasure-display-show-locked"
+                                                   data-bind="checked: undergroundTreasureDisplayShowLocked.observableValue">
+                                            <div class="toggler-slider">
+                                                <div class="toggler-knob"></div>
+                                            </div>
+                                        </label>
+                                        <!-- /ko -->
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group col-12">
+                                        <button type="button" class="btn btn-primary btn-block" data-bind="
+                                            click: () => UndergroundTrading.quickSellEnabled(!UndergroundTrading.quickSellEnabled()),
+                                            text: `${UndergroundTrading.quickSellEnabled() ? 'Disable' : 'Enable'} Quick-Sell Mode`,
+                                            tooltip: {
+                                                title: 'With Quick-Sell Mode enabled, clicking an item sells all of it instantly',
+                                                placement: 'top',
+                                                trigger: 'hover',
+                                            }
+                                        ">
+                                            Quick-Sell Mode
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="col-lg-9 col-12">
+                            <p data-bind="ifnot: UndergroundTrading.quickSellEnabled()">Click on your treasure to open up a detail view</p>
+                            <p data-bind="if: UndergroundTrading.quickSellEnabled()">
+                                <label class="h3 text-danger font-weight-bold">Quick-Sell Mode enabled</label><br/>
+                                Clicking your treasure will sell your entire stash of that item.
+                            </p>
+
+                            <!-- ko foreach: UndergroundController.organisedTreasuresList -->
+                            <div class="card mb-2">
+                                <div class="card-header d-flex align-items-center p-0">
+                                    <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: $data.title"></span>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="justify-content-center treasure-item-container" data-bind="css: Settings.getSetting('undergroundTreasureViewMode').observableValue()">
+                                        <!-- ko foreach: $data.treasures -->
+                                        <div data-bind="
+                                            template: { name: 'undergroundTreasureItemTemplate', data: { undergroundItem: $data, highlight: false } },
+                                            click: () => {
+                                                if ($data.isUnlocked()) {
+                                                    UndergroundTrading.selectedTradeFromItem = $data;
+                                                    UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
+                                                    $('#treasureDetailModal').modal('show');
+                                                }
+                                            }
+                                        "></div>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
                     </div>
-                    <!-- /ko -->
                 </div>
 
                 <div id="undergroundHelpers" class="tab-pane fade">
