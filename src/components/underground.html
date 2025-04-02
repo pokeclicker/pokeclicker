@@ -269,6 +269,19 @@
                         </div>
                     </div>
 
+                    <div>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn btn-secondary" data-bind="css: { active: Settings.getSetting('undergroundTreasureViewMode').observableValue() === 'list-view' }">
+                                <input type="radio" name="treasure-view-mode" value="list-view" onchange="Settings.setSettingByName('undergroundTreasureViewMode', this.value)">
+                                List
+                            </label>
+                            <label class="btn btn-secondary" data-bind="css: { active: Settings.getSetting('undergroundTreasureViewMode').observableValue() === 'grid-view' }">
+                                <input type="radio" name="treasure-view-mode" value="grid-view" onchange="Settings.setSettingByName('undergroundTreasureViewMode', this.value)">
+                                Grid
+                            </label>
+                        </div>
+                    </div>
+
                     <p data-bind="ifnot: UndergroundTrading.quickSellEnabled()">Click on your treasure to open up a detail view</p>
                     <p data-bind="if: UndergroundTrading.quickSellEnabled()">
                         <label class="h3 text-danger font-weight-bold">Quick-Sell Mode enabled</label><br/>
@@ -282,7 +295,7 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="justify-content-center treasure-item-container list-view">
+                            <div class="justify-content-center treasure-item-container" data-bind="css: Settings.getSetting('undergroundTreasureViewMode').observableValue()">
                                 <!-- ko foreach: $data.treasures -->
                                 <div data-bind="
                                     template: { name: 'undergroundTreasureItemTemplate', data: { undergroundItem: $data, highlight: false } },
@@ -906,7 +919,7 @@
                     </div>
 
                     <div class="card-body">
-                        <div class="justify-content-center treasure-item-container list-view">
+                        <div class="justify-content-center treasure-item-container" data-bind="css: Settings.getSetting('undergroundTreasureViewMode').observableValue()">
                             <!-- ko foreach: UndergroundTrading.tradeToItemList -->
                             <div data-bind="
                                     template: { name: 'undergroundTreasureItemTemplate', data: { undergroundItem: $data, highlight: UndergroundTrading.selectedTradeToItem === $data } },

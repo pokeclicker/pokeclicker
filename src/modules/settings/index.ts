@@ -161,6 +161,12 @@ Settings.add(new Setting<string>('undergroundTreasureDisplayGrouping', 'Grouping
     ],
     'type'));
 Settings.add(new BooleanSetting('undergroundTreasureDisplayShowLocked', 'Show locked items', false));
+Settings.add(new Setting<string>('undergroundTreasureViewMode', 'Underground Treasure View Mode',
+    [
+        new SettingOption('List', 'list-view'),
+        new SettingOption('Grid', 'grid-view'),
+    ],
+    'list-view'));
 
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
 Settings.add(new BooleanSetting('enableUndergroundModuleMineControls', 'Enable Underground module mine controls', true));
