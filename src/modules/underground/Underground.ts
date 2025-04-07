@@ -65,6 +65,7 @@ export class Underground implements Feature {
             config: UndergroundController.generateMineConfig(mineType, helper),
         });
         mine.generate();
+        this.tools.resetCharges();
 
         this._mine(mine);
     }
