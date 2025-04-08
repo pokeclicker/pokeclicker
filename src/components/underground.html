@@ -148,36 +148,42 @@
                         <!-- Battery -->
                         <!-- ko ifnot: App.game.challenges.list.disableOakItems.active() -->
                         <div class="card underground-mining-container__cell-battery">
-                            <div class="card-header p-2 font-weight-bold position-relative">
-                                Battery
-                                <button class="btn btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 100%;" data-bind="click: () => $('#undergroundBatteryModal').modal('show');">?</button>
-                            </div>
+                            <div class="card-body d-flex p-0 p-xl-2">
+                                <button class="btn btn-primary" data-bind="click: () => $('#undergroundBatteryModal').modal('show');">?</button>
 
-                            <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
-                            <div class="card-body p-2">
-                                <div class="progress mb-2" style='height: 15px; min-height: 15px;'>
-                                    <div class="progress-bar" role="progressbar"
-                                         data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span data-bind="text: `${App.game.underground.battery.charges} / ${App.game.underground.battery.maxCharges}`"></span>
+                                <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
+                                <div class="flex-grow-1 underground-all-tools-container">
+                                    <div class="underground-tool-container underground-tool-color underground-tool-color__discharge" data-bind="
+                                        css: { 'clickable': App.game.underground.battery.canDischarge() },
+                                        click: () => { App.game.underground.battery.discharge() }
+                                    ">
+                                        <div class="card-body bg-secondary rounded border border-secondary text-center p-1">
+                                            <div class="underground-tool__background-gradient conic" data-bind="style: { '--gradient-percentage': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
+                                                <div class="bg-secondary p-1 p-xl-2">
+                                                    <img alt="" width="27px" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[OakItemType.Cell_Battery] + '.png'}">
+                                                    <div class="small font-weight-bold">
+                                                        <knockout data-bind="text: App.game.underground.battery.charges, css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }"></knockout> / <knockout data-bind="text: App.game.underground.battery.maxCharges"></knockout>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="small" data-bind="">Click to Discharge (<knockout data-bind="text: Settings.getSetting('hotkey.underground.discharge')?.value"></knockout>)</div>
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- /ko -->
 
-                                <button class="btn btn-primary" data-bind="click: () => App.game.underground.battery.discharge(), enable: App.game.underground.battery.canDischarge">Discharge</button>
+                                <!-- ko ifnot: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
+                                <p class="flex-grow-1 p-2">Equip your Cell Battery Oak Item to use the Battery.</p>
+                                <!-- /ko -->
                             </div>
-                            <!-- /ko -->
-                            <!-- ko ifnot: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
-                            <div class="card-body p-2">
-                                <p>Equip your Cell Battery Oak Item to use the Battery.</p>
-                            </div>
-                            <!-- /ko -->
                         </div>
                         <!-- /ko -->
 
                         <!-- Active tool info -->
                         <!-- ko let: { tool: App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType) } -->
                         <div class="card underground-mining-container__tool-info">
-                            <div class="card-header p-2 font-weight-bold" data-bind="text: tool.displayName"></div>
+                            <div class="card-header p-2 font-weight-bold" data-bind="text: `${tool.displayName} (${Settings.getSetting('hotkey.underground.' + UndergroundToolType[tool.id].toLowerCase())?.value})`"></div>
 
                             <div class="card-body p-2 d-flex flex-wrap align-content-start" style="gap: 0.5rem;">
                                 <!-- ko if: tool.durabilityPerUse > 0 -->
