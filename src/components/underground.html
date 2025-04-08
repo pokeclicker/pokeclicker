@@ -124,19 +124,22 @@
                         <div class="card underground-mining-container__tools p-0 p-xl-2">
                             <div class="underground-all-tools-container">
                                 <!-- ko foreach: App.game.underground.tools.tools -->
-                                <div class="underground-tool-container underground-tool-color clickable" data-bind="class: `underground-tool-color__${UndergroundToolType[$data.id].toLowerCase()}`, click: () => App.game.underground.tools.selectedToolType = $data.id">
-
+                                <div class="underground-tool-container underground-tool-color clickable" data-bind="
+                                    class: `underground-tool-color__${UndergroundToolType[$data.id].toLowerCase()}`,
+                                    click: () => App.game.underground.tools.selectedToolType = $data.id
+                                ">
                                     <div class="card-body bg-secondary rounded border border-secondary text-center p-1" data-bind="css: { 'border-info': App.game.underground.tools.selectedToolType === $data.id }">
                                         <div class="underground-tool__background-gradient" data-bind="css: { 'conic': $data.durabilityPerUse > 0, 'infinite': $data.durabilityPerUse === 0 }, style: { '--gradient-percentage': $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
                                             <div class="bg-secondary p-1 p-xl-2">
                                                 <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.id]}.png` }">
-                                                <div class="small font-weight-bold"><knockout data-bind="text: $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout></div>
+                                                <div class="small font-weight-bold" data-bind="css: { 'text-warning': $data.durability < $data.durabilityPerUse }">
+                                                    <knockout data-bind="text: $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="small" data-bind="text: $data.charges === Infinity ? '∞' : `${$data.charges} / ${$data.maximumChargesPerMine}`, css: { 'text-warning': $data.charges === 0 }"></div>
                                     </div>
-
                                 </div>
                                 <!-- /ko -->
                             </div>

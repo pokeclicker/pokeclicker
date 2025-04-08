@@ -30,29 +30,32 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="row d-flex justify-content-center flex-wrap" style="gap: 2px;">
-                <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
-                <!-- ko let: { tool: App.game.underground.tools.getTool($data) } -->
-                <div class="tool-ui" style="flex: 1; min-width: 50px;" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`">
-                    <div class="p-0 mb-1 d-flex justify-content-center" data-bind="css: { 'clickable': [UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data) && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() }, click: () => {
-                        if ([UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data) && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
-                            App.game.underground.tools.useTool($data, 0, 0);
-                        }
-                    }">
-                        <div style="position: relative; width: 100%; max-width: 50px; aspect-ratio: 1; padding: 2px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: tool.durability < tool.durabilityPerUse ? 0.3 : 1 }">
-                            <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 8px;">
-                                <div style="display: flex; align-items: center; justify-content: center;">
-                                    <img style="width: 20px; height: 20px; object-fit: contain;" alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: {  }">
-                                </div>
-                                <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+        <div class="underground-all-tools-container mini">
+            <!-- ko foreach: App.game.underground.tools.tools -->
+            <div class="underground-tool-container underground-tool-color" data-bind="
+                class: `underground-tool-color__${UndergroundToolType[$data.id].toLowerCase()}`,
+                css: { 'clickable': [UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data.id) && $data.canUseTool() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() },
+                style: { opacity: $data.canUseTool() ? 1 : 0.3 }
+                click: () => {
+                    if ([UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data.id) && $data.canUseTool() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
+                        App.game.underground.tools.useTool($data.id, 0, 0);
+                    }
+                }
+            ">
+                <div class="card-body text-center p-0">
+                    <div class="underground-tool__background-gradient" data-bind="css: { 'conic': $data.durabilityPerUse > 0, 'infinite': $data.durabilityPerUse === 0 }, style: { '--gradient-percentage': $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
+                        <div class="bg-secondary">
+                            <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.id]}.png` }">
+                            <div class="small" data-bind="css: { 'text-warning': $data.durability < $data.durabilityPerUse }">
+                                <knockout data-bind="text: $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout>
                             </div>
                         </div>
                     </div>
+
+                    <div class="small" data-bind="text: $data.charges === Infinity ? '∞' : `${$data.charges} / ${$data.maximumChargesPerMine}`, css: { 'text-warning': $data.charges === 0 }"></div>
                 </div>
-                <!-- /ko -->
-                <!-- /ko -->
             </div>
+            <!-- /ko -->
         </div>
     </div>
 

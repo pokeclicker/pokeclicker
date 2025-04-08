@@ -298,35 +298,37 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
     gap: 0.5rem;
-}
 
-.underground-tool-container {
-    > div {
-        display: grid;
-        gap: 0.25rem;
-        justify-content: center;
+    .underground-tool-container {
+        > div {
+            display: grid;
+            gap: 0.25rem;
+            justify-content: center;
+        }
+
+        .underground-tool__background-gradient {
+            border-radius: 10px;
+            padding: 5px;
+            aspect-ratio: 1;
+
+            > :first-child {
+                border-radius: 5px;
+            }
+
+            &.conic {
+                background: conic-gradient(var(--tool-color) var(--gradient-percentage, 50%), var(--tool-color-darker) 0);
+            }
+
+            &.infinite {
+                background-image: linear-gradient(45deg,var(--tool-color) 25%,var(--tool-color-darker) 25%,var(--tool-color-darker) 50%,var(--tool-color) 50%,var(--tool-color) 75%,var(--tool-color-darker) 75%,var(--tool-color-darker));
+                background-size: 1rem 1rem;
+                animation: 3s linear infinite progress-bar-stripes;
+            }
+        }
     }
 }
 
-.underground-tool__background-gradient {
-    border-radius: 10px;
-    padding: 5px;
-    aspect-ratio: 1;
 
-    > :first-child {
-        border-radius: 5px;
-    }
-
-    &.conic {
-        background: conic-gradient(var(--tool-color) var(--gradient-percentage, 50%), var(--tool-color-darker) 0);
-    }
-
-    &.infinite {
-        background-image: linear-gradient(45deg,var(--tool-color) 25%,var(--tool-color-darker) 25%,var(--tool-color-darker) 50%,var(--tool-color) 50%,var(--tool-color) 75%,var(--tool-color-darker) 75%,var(--tool-color-darker));
-        background-size: 1rem 1rem;
-        animation: 3s linear infinite progress-bar-stripes;
-    }
-}
 
 .underground-tool-color {
     --tool-color: white;
@@ -349,6 +351,30 @@
     }
 }
 
+.underground-all-tools-container.mini {
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 0;
+
+    .underground-tool-container {
+        > div {
+            gap: 0;
+        }
+
+        .underground-tool__background-gradient {
+            padding: 2px;
+
+            > :first-child {
+                border-radius: 8px;
+            }
+
+            img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+            }
+        }
+    }
+}
 
 
 .tool-ui {
