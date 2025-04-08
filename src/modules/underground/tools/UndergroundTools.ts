@@ -107,11 +107,12 @@ export default class UndergroundTools {
                     const xShift = Rand.intBetween(-halfShift, halfShift);
                     const yShift = Rand.intBetween(-halfShift, halfShift);
 
-                    const { x, y } = App.game.underground.mine.getCoordinateForGridIndex(Rand.fromArray(unminedRewardCoordinates));
+                    const randomUnminedGridIndex = Rand.fromArray(unminedRewardCoordinates);
+                    const { x, y } = App.game.underground.mine.getCoordinateForGridIndex(randomUnminedGridIndex);
                     const xSurveyCoordinate = clipNumber(x + xShift, halfShift, App.game.underground.mine.width - 1 - halfShift);
                     const ySurveyCoordinate = clipNumber(y + yShift, halfShift, App.game.underground.mine.height - 1 - halfShift);
 
-                    App.game.underground.mine.survey({ x: xSurveyCoordinate, y: ySurveyCoordinate }, range);
+                    App.game.underground.mine.survey({ x: xSurveyCoordinate, y: ySurveyCoordinate }, range, App.game.underground.mine.grid[randomUnminedGridIndex].reward.rewardID);
                     return {
                         coordinatesMined: [],
                         success: true,

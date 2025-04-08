@@ -101,10 +101,12 @@ class Tile {
     private _layerDepth: Observable<number>;
     private _reward?: Reward;
     private _survey: Observable<number>;
+    private _surveyRewardID: Observable<number>;
 
     constructor(layerDepth: number) {
         this._layerDepth = ko.observable<number>(layerDepth);
         this._survey = ko.observable<number>(-1);
+        this._surveyRewardID = ko.observable<number>(-1);
     }
 
     get layerDepth(): number {
@@ -131,15 +133,25 @@ class Tile {
         this._survey(range);
     }
 
+    get surveyRewardID(): number | undefined {
+        return this._surveyRewardID?.();
+    }
+
+    set surveyRewardID(rewardID: number | undefined) {
+        this._surveyRewardID(rewardID ?? -1);
+    }
+
     public save = () => ({
         layerDepth: this._layerDepth(),
         reward: this._reward?.save(),
         survey: this._survey(),
+        surveyRewardID: this._surveyRewardID(),
     });
 
     public static load = (json): Tile => {
         const tile = new Tile(json.layerDepth);
         tile.survey = json.survey;
+        tile.surveyRewardID = json.surveyRewardID;
 
         if (json.reward) {
             tile.reward = Reward.load(json.reward);
@@ -318,7 +330,7 @@ export class Mine {
         return this._grid[index];
     }
 
-    public survey(coordinate: Coordinate, range: number) {
+    public survey(coordinate: Coordinate, range: number, rewardID: number) {
         const tile = this.getTileForCoordinate(coordinate);
 
         if (!tile) {
@@ -326,6 +338,14 @@ export class Mine {
         }
 
         tile.survey = range;
+        tile.surveyRewardID = rewardID;
+    }
+
+    public removeSurveyForRewardID(rewardID: number) {
+        this.grid.filter(tile => tile.surveyRewardID === rewardID).forEach(tile => {
+            tile.survey = -1;
+            tile.surveyRewardID = -1;
+        });
     }
 
     public attemptBreakTile(coordinate: Coordinate, layers: number = 1): boolean {
@@ -361,6 +381,7 @@ export class Mine {
         undergroundItemTiles.forEach(tile => {
             tile.reward.rewarded = true;
         });
+        this.removeSurveyForRewardID(undergroundItemTiles[0].reward.rewardID);
 
         this._updateItemsFoundObservable();
 
