@@ -431,15 +431,15 @@ export class Mine {
     }
 
     private _updateItemsBuriedObservable() {
-        this._itemsBuried(new Set(this._grid.filter(tile => tile.reward).map(tile => tile.reward.rewardID)).size);
+        this._itemsBuried(Mine.buriedItemsIDSet(this).size);
     }
 
     private _updateItemsFoundObservable() {
-        this._itemsFound(new Set(this._grid.filter(tile => tile.reward && tile.reward.rewarded).map(tile => tile.reward.rewardID)).size);
+        this._itemsFound(Mine.foundItemsIDSet(this).size);
     }
 
     private _updateItemsPartiallyFoundObservable() {
-        this._itemsPartiallyFound(new Set(this._grid.filter(tile => tile.reward && tile.layerDepth === 0).map(tile => tile.reward.rewardID)).size);
+        this._itemsPartiallyFound(Mine.partiallyFoundItemsIDSet(this).size);
     }
 
     public save() {
@@ -462,5 +462,26 @@ export class Mine {
         mine._updateItemsPartiallyFoundObservable();
 
         return mine;
+    }
+
+    public static buriedItemsIDSet(mine: Mine): Set<number> {
+        return new Set(mine.grid.filter(tile => tile.reward).map(tile => tile.reward.rewardID));
+    }
+
+    public static hiddenItemsIDSet(mine: Mine): Set<number> {
+        const buried = this.buriedItemsIDSet(mine);
+
+        this.foundItemsIDSet(mine).forEach(value => buried.delete(value));
+        this.partiallyFoundItemsIDSet(mine).forEach(value => buried.delete(value));
+
+        return buried;
+    }
+
+    public static foundItemsIDSet(mine: Mine): Set<number> {
+        return new Set(mine.grid.filter(tile => tile.reward && tile.reward.rewarded).map(tile => tile.reward.rewardID));
+    }
+
+    public static partiallyFoundItemsIDSet(mine: Mine): Set<number> {
+        return new Set(mine.grid.filter(tile => tile.reward && tile.layerDepth === 0).map(tile => tile.reward.rewardID));
     }
 }

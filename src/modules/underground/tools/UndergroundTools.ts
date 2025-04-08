@@ -2,7 +2,7 @@ import UndergroundTool from './UndergroundTool';
 import UndergroundToolType from './UndergroundToolType';
 import { Observable } from 'knockout';
 import { UndergroundController } from '../UndergroundController';
-import { Coordinate } from '../mine/Mine';
+import { Coordinate, Mine } from '../mine/Mine';
 import Rand from '../../utilities/Rand';
 import OakItemType from '../../enums/OakItemType';
 import { clipNumber, SURVEY_RANGE_BASE, SURVEY_RANGE_REDUCTION_LEVELS } from '../../GameConstants';
@@ -86,12 +86,18 @@ export default class UndergroundTools {
                 durabilityPerUse: 1,
                 maximumChargesPerMine: 1,
                 action: () => {
-                    // Get a list of unmined reward coordinates
-                    const unminedRewardCoordinates = App.game.underground.mine.grid.reduce<number[]>((previousValue, currentValue, currentIndex) => {
-                        if (currentValue.reward && currentValue.layerDepth > 0)
-                            previousValue.push(currentIndex);
-                        return previousValue;
-                    }, []);
+                    const hiddenItemsIDSet: Set<number> = Mine.hiddenItemsIDSet(App.game.underground.mine);
+
+                    // Get a list of unmined reward coordinates, focus on fully hidden treasures first if there are any
+                    const unminedRewardCoordinates = App.game.underground.mine.grid
+                        .map((tile, index) => {
+                            if (!tile.reward)
+                                return null;
+                            if (hiddenItemsIDSet.size > 0)
+                                return hiddenItemsIDSet.has(tile.reward.rewardID) ? index : null;
+                            return tile.layerDepth > 0 ? index : null;
+                        })
+                        .filter(Number.isInteger);
 
                     // Determine the range of the survey box
                     const range = UndergroundController.calculateSurveyRange();
