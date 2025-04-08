@@ -49,8 +49,10 @@
                         </div>
                     </div>
 
-                    <div class="p-lg-2">
-                        <div class="card">
+                    <!-- ko if: App.game.underground.mine -->
+                    <div class="underground-mining-container p-0 p-lg-2">
+                        <!-- Treasure count -->
+                        <div class="card underground-mining-container__treasure-count">
                             <div class="card-body p-2 d-flex justify-content-center" style="gap: 1.5rem">
                                 <!-- ko if: !App.game.underground.mine || App.game.underground.mine.timeUntilDiscovery > 0 -->
                                 <div>Collected • ??</div>
@@ -71,10 +73,7 @@
                                 <!-- /ko -->
                             </div>
                         </div>
-                    </div>
 
-                    <!-- ko if: App.game.underground.mine -->
-                    <div class="underground-mining-container p-0 p-lg-2">
                         <!-- Mine -->
                         <div class="card underground-mining-container__mine position-relative">
                             <div class="card-body p-0 p-lg-2 position-relative">
@@ -122,28 +121,49 @@
                         </div>
 
                         <!-- Tools -->
-                        <div class="card underground-mining-container__tools">
-                            <div class="card-body p-2 flex-grow-0 d-flex flex-wrap justify-content-center">
+                        <div class="card underground-mining-container__tools p-0 p-xl-2">
+                            <div class="underground-all-tools-container">
                                 <!-- ko foreach: App.game.underground.tools.tools -->
-                                <div class="tool-ui clickable" style="width: 75px;" data-bind="class: `${UndergroundToolType[$data.id]}-tool-ui`, css: { 'border-info': App.game.underground.tools.selectedToolType === $data.id }, click: () => App.game.underground.tools.selectedToolType = $data.id">
-                                    <div class="p-1 d-flex flex-column justify-content-center" style="gap: 5px;">
-                                        <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${$data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: !$data.canUseTool() ? 0.3 : 1 }">
-                                            <div class="d-flex flex-column align-items-center justify-content-center bg-secondary position-relative" style="width: 100%; height: 100%; border-radius: 5px;">
-                                                <div class="d-flex align-items-center justify-content-center" style="width: 27px; height: 27px;">
-                                                    <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.id]}.png` }">
-                                                </div>
-                                                <div class="font-weight-bold"><knockout data-bind="text: $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout></div>
+                                <div class="underground-tool-container underground-tool-color clickable" data-bind="class: `underground-tool-color__${UndergroundToolType[$data.id].toLowerCase()}`, click: () => App.game.underground.tools.selectedToolType = $data.id">
+
+                                    <div class="card-body bg-secondary rounded border border-secondary text-center p-1" data-bind="css: { 'border-info': App.game.underground.tools.selectedToolType === $data.id }">
+                                        <div class="underground-tool__background-gradient" data-bind="css: { 'conic': $data.durabilityPerUse > 0, 'infinite': $data.durabilityPerUse === 0 }, style: { '--gradient-percentage': $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
+                                            <div class="bg-secondary p-1 p-xl-2">
+                                                <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.id]}.png` }">
+                                                <div class="small font-weight-bold"><knockout data-bind="text: $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout></div>
                                             </div>
                                         </div>
 
-                                        <div class="bg-secondary" style="border-radius: 10px;">
-                                            <knockout data-bind="text: $data.maximumChargesPerMine === Infinity ? '∞' : $data.maximumChargesPerMine"></knockout>
-                                        </div>
+                                        <div class="small" data-bind="text: $data.charges === Infinity ? '∞' : `${$data.charges} / ${$data.maximumChargesPerMine}`"></div>
                                     </div>
+
                                 </div>
                                 <!-- /ko -->
                             </div>
                         </div>
+
+<!--                        <div class="card underground-mining-container__tools">-->
+<!--                            <div class="card-body p-2 flex-grow-0 d-flex flex-wrap justify-content-center">-->
+<!--                                &lt;!&ndash; ko foreach: App.game.underground.tools.tools &ndash;&gt;-->
+<!--                                <div class="tool-ui clickable" style="width: 75px;" data-bind="class: `${UndergroundToolType[$data.id]}-tool-ui`, css: { 'border-info': App.game.underground.tools.selectedToolType === $data.id }, click: () => App.game.underground.tools.selectedToolType = $data.id">-->
+<!--                                    <div class="p-1 d-flex flex-column justify-content-center" style="gap: 5px;">-->
+<!--                                        <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(&#45;&#45;tool-color) ${$data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: !$data.canUseTool() ? 0.3 : 1 }">-->
+<!--                                            <div class="d-flex flex-column align-items-center justify-content-center bg-secondary position-relative" style="width: 100%; height: 100%; border-radius: 5px;">-->
+<!--                                                <div class="d-flex align-items-center justify-content-center" style="width: 27px; height: 27px;">-->
+<!--                                                    <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.id]}.png` }">-->
+<!--                                                </div>-->
+<!--                                                <div class="font-weight-bold"><knockout data-bind="text: $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout></div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="small bg-secondary" style="border-radius: 10px;">-->
+<!--                                            <knockout data-bind="text: $data.charges === Infinity ? '∞' : $data.charges"></knockout>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; /ko &ndash;&gt;-->
+<!--                            </div>-->
+<!--                        </div>-->
 
                         <!-- Battery -->
                         <!-- ko ifnot: App.game.challenges.list.disableOakItems.active() -->
