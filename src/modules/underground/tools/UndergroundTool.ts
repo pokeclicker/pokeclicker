@@ -26,6 +26,8 @@ export default class UndergroundTool {
     public canUseTool: PureComputed<boolean> = ko.pureComputed(() => this.durability >= this.durabilityPerUse && this.charges > 0);
     public restoreRatePerSecond: PureComputed<number> = ko.pureComputed(() => this.calculateDurabilityRestoreRatePerSecond(App.game.underground.undergroundLevel));
 
+    private maxDurabilityPerSecond: PureComputed<number> = ko.pureComputed(() => this._toolProperties.durabilityPerUse * 20);
+
     constructor(toolProperties: UndergroundToolProperties) {
         this._toolProperties = toolProperties;
     }
@@ -60,8 +62,8 @@ export default class UndergroundTool {
     }
 
     public reduceDurabilityByUse() {
-        GameHelper.incrementObservable(this._charges, -1);
-        GameHelper.incrementObservable(this._durability, -this.durabilityPerUse);
+        this._charges(this._charges() - 1);
+        this._durability(this._durability() - this.durabilityPerUse);
     }
 
     public resetCharges() {
@@ -81,7 +83,7 @@ export default class UndergroundTool {
     }
 
     get durabilityPerUse(): number {
-        return this._toolProperties.durabilityPerUse;
+        return this.restoreRatePerSecond() >= this.maxDurabilityPerSecond() ? 0 : this._toolProperties.durabilityPerUse;
     }
 
     get durability(): number {

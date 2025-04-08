@@ -190,11 +190,11 @@
                                         <tbody>
                                         <tr>
                                             <td class="text-left">Current</td>
-                                            <td class="text-left tight"><code data-bind="text: tool.restoreRatePerSecond().toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 3, maximumFractionDigits: 3 })"></code></td>
+                                            <td class="text-left tight"><code data-bind="text: tool.restoreRatePerSecond().toLocaleString('en-US', { style: 'percent', maximumSignificantDigits: 3 })"></code></td>
                                         </tr>
                                         <tr>
                                             <td class="text-left">Next level</td>
-                                            <td class="text-left tight"><code data-bind="text: tool.calculateDurabilityRestoreRatePerSecond(App.game.underground.undergroundLevel + 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 3, maximumFractionDigits: 3 })"></code></td>
+                                            <td class="text-left tight"><code data-bind="text: tool.calculateDurabilityRestoreRatePerSecond(App.game.underground.undergroundLevel + 1).toLocaleString('en-US', { style: 'percent', maximumSignificantDigits: 3 })"></code></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -210,15 +210,15 @@
                                         <tbody>
                                         <tr>
                                             <td class="text-left">Durability per use</td>
-                                            <td class="text-left tight"><code data-bind="text: tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 2 })"></code></td>
+                                            <td class="text-left tight"><code data-bind="text: tool.durabilityPerUse === 0 ? 'Free' : tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 2 })"></code></td>
                                         </tr>
                                         <tr>
                                             <td class="text-left">Maximum uses per mine</td>
-                                            <td class="text-left tight"><code data-bind="text: tool.maximumChargesPerMine"></code></td>
+                                            <td class="text-left tight"><code data-bind="text: tool.maximumChargesPerMine === Infinity ? '∞' : tool.maximumChargesPerMine.toLocaleString('en-US')"></code></td>
                                         </tr>
                                         <tr>
                                             <td class="text-left">Lifetime usage</td>
-                                            <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundToolsUsed[tool.id]()"></code></td>
+                                            <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundToolsUsed[tool.id]().toLocaleString('en-US')"></code></td>
                                         </tr>
                                         </tbody>
                                     </table>
