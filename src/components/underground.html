@@ -80,7 +80,7 @@
                                 <div id="mineBody" style="margin:auto; background-image: url('assets/images/underground/rock0.png');"
                                      data-bind="css: {
                                         'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
-                                        'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durability < App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durabilityPerUse
+                                        'tool-cooldown': !App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).canUseTool()
                                      },
                                      class: `${UndergroundToolType[App.game.underground.tools.selectedToolType]}Selected`,
                                      style: {
@@ -134,7 +134,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="small" data-bind="text: $data.charges === Infinity ? '∞' : `${$data.charges} / ${$data.maximumChargesPerMine}`"></div>
+                                        <div class="small" data-bind="text: $data.charges === Infinity ? '∞' : `${$data.charges} / ${$data.maximumChargesPerMine}`, css: { 'text-warning': $data.charges === 0 }"></div>
                                     </div>
 
                                 </div>
