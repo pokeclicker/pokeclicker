@@ -142,29 +142,6 @@
                             </div>
                         </div>
 
-<!--                        <div class="card underground-mining-container__tools">-->
-<!--                            <div class="card-body p-2 flex-grow-0 d-flex flex-wrap justify-content-center">-->
-<!--                                &lt;!&ndash; ko foreach: App.game.underground.tools.tools &ndash;&gt;-->
-<!--                                <div class="tool-ui clickable" style="width: 75px;" data-bind="class: `${UndergroundToolType[$data.id]}-tool-ui`, css: { 'border-info': App.game.underground.tools.selectedToolType === $data.id }, click: () => App.game.underground.tools.selectedToolType = $data.id">-->
-<!--                                    <div class="p-1 d-flex flex-column justify-content-center" style="gap: 5px;">-->
-<!--                                        <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(&#45;&#45;tool-color) ${$data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: !$data.canUseTool() ? 0.3 : 1 }">-->
-<!--                                            <div class="d-flex flex-column align-items-center justify-content-center bg-secondary position-relative" style="width: 100%; height: 100%; border-radius: 5px;">-->
-<!--                                                <div class="d-flex align-items-center justify-content-center" style="width: 27px; height: 27px;">-->
-<!--                                                    <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.id]}.png` }">-->
-<!--                                                </div>-->
-<!--                                                <div class="font-weight-bold"><knockout data-bind="text: $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout></div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-
-<!--                                        <div class="small bg-secondary" style="border-radius: 10px;">-->
-<!--                                            <knockout data-bind="text: $data.charges === Infinity ? '∞' : $data.charges"></knockout>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                &lt;!&ndash; /ko &ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-
                         <!-- Battery -->
                         <!-- ko ifnot: App.game.challenges.list.disableOakItems.active() -->
                         <div class="card underground-mining-container__cell-battery">
