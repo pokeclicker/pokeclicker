@@ -179,7 +179,8 @@
                         <div class="card underground-mining-container__tool-info">
                             <div class="card-header p-2 font-weight-bold" data-bind="text: tool.displayName"></div>
 
-                            <div class="card-body p-2 d-flex flex-wrap" style="gap: 0.5rem;">
+                            <div class="card-body p-2 d-flex flex-wrap align-content-start" style="gap: 0.5rem;">
+                                <!-- ko if: tool.durabilityPerUse > 0 -->
                                 <div class="flex-grow-1">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0">
                                         <thead>
@@ -199,6 +200,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <!-- /ko -->
 
                                 <div class="flex-grow-1">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0">
