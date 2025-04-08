@@ -28,8 +28,10 @@ import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
 import { Coordinate } from './mine/Mine';
-import {SortOptionConfigs, SortOptions} from './UndergroundTreasuresSortOptions';
+import { SortOptionConfigs, SortOptions } from './UndergroundTreasuresSortOptions';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+
+export const UNDERGROUND_MAX_CLICKS_PER_SECOND = 20;
 
 export class UndergroundController {
     private static lastMineClick: number = Date.now();
@@ -174,7 +176,7 @@ export class UndergroundController {
     public static clickModalMineSquare(index: number) {
         const now = Date.now();
 
-        if (this.lastMineClick > now - 50) {
+        if (this.lastMineClick > now - (1000 / UNDERGROUND_MAX_CLICKS_PER_SECOND)) {
             return;
         }
         this.lastMineClick = now;

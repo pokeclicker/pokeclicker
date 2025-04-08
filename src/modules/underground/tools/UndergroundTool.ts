@@ -1,9 +1,9 @@
-import GameHelper from '../../GameHelper';
 import UndergroundToolType from './UndergroundToolType';
 import { Coordinate } from '../mine/Mine';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
 import { Observable, PureComputed } from 'knockout';
+import { UNDERGROUND_MAX_CLICKS_PER_SECOND } from '../UndergroundController';
 
 type UndergroundToolProperties = {
     id: UndergroundToolType;
@@ -26,7 +26,7 @@ export default class UndergroundTool {
     public canUseTool: PureComputed<boolean> = ko.pureComputed(() => this.durability >= this.durabilityPerUse && this.charges > 0);
     public restoreRatePerSecond: PureComputed<number> = ko.pureComputed(() => this.calculateDurabilityRestoreRatePerSecond(App.game.underground.undergroundLevel));
 
-    private maxDurabilityPerSecond: PureComputed<number> = ko.pureComputed(() => this._toolProperties.durabilityPerUse * 20);
+    private maxDurabilityPerSecond: PureComputed<number> = ko.pureComputed(() => this._toolProperties.durabilityPerUse * UNDERGROUND_MAX_CLICKS_PER_SECOND);
 
     constructor(toolProperties: UndergroundToolProperties) {
         this._toolProperties = toolProperties;
@@ -104,7 +104,7 @@ export default class UndergroundTool {
 
     public fromJSON(save) {
         this._durability(save?.durability ?? 1);
-        this._charges(save?.charges || this._toolProperties.maximumChargesPerMine);
+        this._charges(save?.charges ?? this._toolProperties.maximumChargesPerMine);
     }
 
     public toJSON() {

@@ -61,7 +61,7 @@ export default class UndergroundTools {
                 displayName: 'Bomb',
                 description: 'Mines a maximum of 2 layers on each of 10 random tiles (both mined and cleared). The number of tiles increases when equipped with the Explosive Charge Oak Item.',
                 durabilityPerUse: 0.18,
-                maximumChargesPerMine: Infinity,
+                maximumChargesPerMine: 25,
                 action: () => {
                     const coordinatesActuallyMined: Array<Coordinate> = [];
                     const baseBombTiles: number = 10;
@@ -85,6 +85,7 @@ export default class UndergroundTools {
                 description: `Indicates a ${SURVEY_RANGE_BASE}x${SURVEY_RANGE_BASE} grid where at least one tile contains a treasure. The grid shrinks by two tiles in each direction every ${SURVEY_RANGE_REDUCTION_LEVELS} levels.`,
                 durabilityPerUse: 1,
                 maximumChargesPerMine: 1,
+                customRestoreRateFn: () => 1 / 900,
                 action: () => {
                     const hiddenItemsIDSet: Set<number> = Mine.hiddenItemsIDSet(App.game.underground.mine);
 
