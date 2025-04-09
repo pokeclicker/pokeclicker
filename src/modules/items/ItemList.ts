@@ -59,8 +59,8 @@ ItemList.ShucaBerry      = new BerryItem(BerryType.Shuca, 10000, Currency.farmPo
 ItemList.ChartiBerry     = new BerryItem(BerryType.Charti, 10000, Currency.farmPoint, BerryType.Cornn);
 
 ItemList.SmallRestore    = new EnergyRestore(EnergyRestoreSize.SmallRestore, 30000, undefined, 'Small Restore');
-ItemList.MediumRestore   = new EnergyRestore(EnergyRestoreSize.MediumRestore, 100000, undefined, 'Medium Restore');
-ItemList.LargeRestore    = new EnergyRestore(EnergyRestoreSize.LargeRestore, 400000, undefined, 'Large Restore');
+ItemList.MediumRestore   = new EnergyRestore(EnergyRestoreSize.MediumRestore, 75000, undefined, 'Medium Restore');
+ItemList.LargeRestore    = new EnergyRestore(EnergyRestoreSize.LargeRestore, 200000, undefined, 'Large Restore');
 
 ItemList.Dungeon_ticket = new BuyKeyItem(KeyItemType.Dungeon_ticket, 100, undefined, undefined, 'Dungeon Ticket');
 ItemList.Explorer_kit = new BuyKeyItem(KeyItemType.Explorer_kit, 5000, undefined, undefined, 'Explorer Kit');
