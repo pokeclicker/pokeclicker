@@ -2,6 +2,8 @@ import { Feature } from '../DataStore/common/Feature';
 import WeatherType from './WeatherType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
+import { Region } from '../GameConstants';
+import { Observable } from 'knockout';
 
 export class WeatherOverride implements Feature {
     name = 'Weather Override';
@@ -57,6 +59,9 @@ export class WeatherOverride implements Feature {
         ],
     };
 
+    private _costModifier: { [region in Region]?: Observable<number> } = {};
+    private _overrides: { [region in Region]?: { weather: WeatherType, time: Observable<number> } } = {};
+
     canAccess(): boolean {
         return true;
     }
@@ -71,8 +76,20 @@ export class WeatherOverride implements Feature {
         }
     }
 
+    public purchaseWeatherOverride(region: Region, weatherType: WeatherType, cycles: number) {
+        // TODO : Get the calculated cost
+
+        // TODO : Add the cycles to the _costModifiers
+
+        // TODO : Add the time to the _overrides
+    }
+
     public reduceCostModifierInHours(hours: number) {
         // TODO : Reduce the _costModifiers
+    }
+
+    public getWeatherForRegion(region: Region): WeatherType | null {
+        return this._overrides[region]?.weather ?? null;
     }
 
     toJSON(): Record<string, any> {
