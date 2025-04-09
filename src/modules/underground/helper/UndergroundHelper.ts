@@ -199,7 +199,7 @@ export class UndergroundHelper {
     }
 
     public hasStolenItem(stolenItemID: number): boolean {
-        return App.game.statistics.undergroundHelperRewardRetention[`${this.id}-${stolenItemID}`]() > 0;
+        return false && App.game.statistics.undergroundHelperRewardRetention[`${this.id}-${stolenItemID}`]() > 0;
     }
 
     get id(): string {

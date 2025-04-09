@@ -36,6 +36,51 @@ export const UNDERGROUND_MAX_CLICKS_PER_SECOND = 20;
 export class UndergroundController {
     private static lastMineClick: number = Date.now();
 
+    public static organisedTreasuresList = ko.pureComputed(() => {
+        const exceptions = [ UndergroundItemValueType.MegaStone ];
+        const list = UndergroundItems.list
+            .filter(item => !exceptions.includes(item.valueType))
+            .filter(item => item.isUnlocked() || Settings.getSetting('undergroundTreasureDisplayShowLocked').observableValue())
+            .sort(UndergroundController.organisedTreasuresListCompareBy(Settings.getSetting('undergroundTreasureDisplaySorting').observableValue(), Settings.getSetting('undergroundTreasureDisplaySortingDirection').observableValue()));
+
+        switch (Settings.getSetting('undergroundTreasureDisplayGrouping').observableValue()) {
+            case 'type':
+                return GameHelper.enumNumbers(UndergroundItemValueType)
+                    .filter(value => !exceptions.includes(value))
+                    .map(enumValue => {
+                        return {
+                            title: camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[enumValue]),
+                            treasures: list.filter(item => item.valueType === enumValue),
+                        };
+                    })
+                    .filter(value => value.treasures.length > 0);
+            case 'sellable':
+                return [{
+                    title: 'Can be sold',
+                    treasures: list.filter(item => item.hasSellValue()),
+                }, {
+                    title: 'Cannot be sold',
+                    treasures: list.filter(item => !item.hasSellValue()),
+                }];
+            case 'region':
+                return GameHelper.enumNumbers(Region).sort((a, b) => a - b)
+                    .map(enumValue => {
+                        return {
+                            title: camelCaseToString(Region[enumValue]),
+                            treasures: list.filter(item => (!(item.requirement instanceof MaxRegionRequirement) && enumValue === Region.none) ||
+                                (item.requirement instanceof MaxRegionRequirement && (item.requirement as MaxRegionRequirement).requiredValue === enumValue)),
+                        };
+                    })
+                    .filter(value => value.treasures.length > 0);
+            case 'none':
+            default:
+                return [{
+                    title: 'All',
+                    treasures: list,
+                }];
+        }
+    });
+
     public static shortcutVisible: PureComputed<boolean> = ko.pureComputed(() => {
         return App.game.underground.canAccess() && !Settings.getSetting('showUndergroundModule').observableValue();
     });
@@ -364,51 +409,6 @@ export class UndergroundController {
             '</div>',
         ].join('');
     }
-
-    public static organisedTreasuresList = ko.pureComputed(() => {
-        const exceptions = [ UndergroundItemValueType.MegaStone ];
-        const list = UndergroundItems.list
-            .filter(item => !exceptions.includes(item.valueType))
-            .filter(item => item.isUnlocked() || Settings.getSetting('undergroundTreasureDisplayShowLocked').observableValue())
-            .sort(UndergroundController.organisedTreasuresListCompareBy(Settings.getSetting('undergroundTreasureDisplaySorting').observableValue(), Settings.getSetting('undergroundTreasureDisplaySortingDirection').observableValue()));
-
-        switch (Settings.getSetting('undergroundTreasureDisplayGrouping').observableValue()) {
-            case 'type':
-                return GameHelper.enumNumbers(UndergroundItemValueType)
-                    .filter(value => !exceptions.includes(value))
-                    .map(enumValue => {
-                        return {
-                            title: camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[enumValue]),
-                            treasures: list.filter(item => item.valueType === enumValue),
-                        };
-                    })
-                    .filter(value => value.treasures.length > 0);
-            case 'sellable':
-                return [{
-                    title: 'Can be sold',
-                    treasures: list.filter(item => item.hasSellValue()),
-                }, {
-                    title: 'Cannot be sold',
-                    treasures: list.filter(item => !item.hasSellValue()),
-                }];
-            case 'region':
-                return GameHelper.enumNumbers(Region).sort((a, b) => a - b)
-                    .map(enumValue => {
-                        return {
-                            title: camelCaseToString(Region[enumValue]),
-                            treasures: list.filter(item => (!(item.requirement instanceof MaxRegionRequirement) && enumValue === Region.none) ||
-                                (item.requirement instanceof MaxRegionRequirement && (item.requirement as MaxRegionRequirement).requiredValue === enumValue)),
-                        };
-                    })
-                    .filter(value => value.treasures.length > 0);
-            case 'none':
-            default:
-                return [{
-                    title: 'All',
-                    treasures: list,
-                }];
-        }
-    });
 
     private static organisedTreasuresListCompareBy(option: SortOptions, direction: boolean): (a: UndergroundItem, b: UndergroundItem) => number {
         return function (a, b) {
