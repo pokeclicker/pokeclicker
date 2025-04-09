@@ -184,7 +184,6 @@
                             <div class="card-header p-2 font-weight-bold" data-bind="text: `${tool.displayName} (${Settings.getSetting('hotkey.underground.' + UndergroundToolType[tool.id].toLowerCase())?.value})`"></div>
 
                             <div class="card-body p-2 d-flex flex-wrap align-content-start" style="gap: 0.5rem;">
-                                <!-- ko if: tool.durabilityPerUse > 0 -->
                                 <div class="flex-grow-1">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0">
                                         <thead>
@@ -193,6 +192,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <!-- ko if: tool.durabilityPerUse > 0 -->
                                         <tr>
                                             <td class="text-left">Current</td>
                                             <td class="text-left tight"><code data-bind="text: tool.restoreRatePerSecond().toLocaleString('en-US', { style: 'percent', maximumSignificantDigits: 3 })"></code></td>
@@ -201,10 +201,16 @@
                                             <td class="text-left">Next level</td>
                                             <td class="text-left tight"><code data-bind="text: tool.calculateDurabilityRestoreRatePerSecond(App.game.underground.undergroundLevel + 1).toLocaleString('en-US', { style: 'percent', maximumSignificantDigits: 3 })"></code></td>
                                         </tr>
+                                        <!-- /ko -->
+
+                                        <!-- ko ifnot: tool.durabilityPerUse > 0 -->
+                                        <tr>
+                                            <td colspan="2" class="text-center">Your restore rate has grown so much that this tool has now become free to use.</td>
+                                        </tr>
+                                        <!-- /ko -->
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- /ko -->
 
                                 <div class="flex-grow-1">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0">
