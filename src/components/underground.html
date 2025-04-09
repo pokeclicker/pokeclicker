@@ -647,16 +647,18 @@
                         <div class="card-body">
                             <p>The Underground offers <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
 
-                            <h4>Durability</h4>
+                            <h4>Durability / Maximum charges</h4>
                             <p>
-                                Using a tool is only possible when your tool is durable enough. When you use your tool successfully it will take some damage, which will be repaired over time.
-                                The tool will repair X% over Y seconds. Each tool has its own repair rate and repairs a certain percentage of the tool's durability.
-                                The repair rate is reduced by Z seconds based on your Underground Level.
-                                When a tool reaches a repair rate of 0 seconds, its durability will stay at 100%.
+                                Using a tool is only possible when your tool is durable enough and has enough charges left.
+                                When you use your tool successfully it will remove some of its durability, which will be restored over time.
+                                It will also take up 1 charge. These charges are not restored over time, but will be restored to their maximum limited when you start a new mine.
+                            </p>
+                            <p>
+                                The restore rate of your tools depends on your Underground level.
                             </p>
 
                             <h4>Tools Overview</h4>
-                            <p>There are <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> different tools available, each with unique functions and properties:</p>
+                            <p>There are <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> different tools available, each with unique functions:</p>
                             <table class="table table-sm table-striped">
                                 <thead class="thead-dark">
                                 <tr>
