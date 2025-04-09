@@ -1,10 +1,8 @@
-import { Observable, PureComputed } from 'knockout';
+import { Observable, ObservableArray, PureComputed } from 'knockout';
 import { MineType } from '../mine/MineConfig';
 import Requirement from '../../requirements/Requirement';
 import MultiRequirement from '../../requirements/MultiRequirement';
 import OneFromManyRequirement from '../../requirements/OneFromManyRequirement';
-import Notifier from '../../notifications/Notifier';
-import NotificationConstants from '../../notifications/NotificationConstants';
 import {
     REWARD_RETENTION_BASE,
     REWARD_RETENTION_DECREASE_PER_LEVEL,
@@ -14,7 +12,6 @@ import {
     FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL,
     FAVORITE_MINE_CHANCE_MAXIMUM,
     MAX_HIRES,
-    SECOND,
     SMART_TOOL_CHANCE_BASE,
     SMART_TOOL_CHANCE_INCREASE_PER_LEVEL,
     SMART_TOOL_CHANCE_MAXIMUM,
@@ -60,14 +57,8 @@ export class UndergroundHelper {
     private _shouldDiscoverFavorite: Observable<boolean> = ko.observable<boolean>(false);
     private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(WORKCYCLE_TIMEOUT_BASE - WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL * this._level(), WORKCYCLE_TIMEOUT_MINIMUM));
 
-    private _selectedEnergyRestore: Observable<EnergyRestoreSize> = ko.observable(-1);
-
-    public static RESTORE_OPTIONS = [
-        { value: null, name: 'None' },
-        { value: EnergyRestoreSize.SmallRestore, name: 'Small Restore' },
-        { value: EnergyRestoreSize.MediumRestore, name: 'Medium Restore' },
-        { value: EnergyRestoreSize.LargeRestore, name: 'Large Restore' },
-    ];
+    private _allowedEnergyRestores: ObservableArray<EnergyRestoreSize> = ko.observableArray([]);
+    public selectedEnergyRestore: PureComputed<EnergyRestoreSize | -1> = ko.pureComputed(() => this._allowedEnergyRestores().find(potion => player.itemList[EnergyRestoreSize[potion]]() > 0) ?? -1);
 
     constructor(options: UndergroundHelperParams) {
         const {
@@ -156,14 +147,14 @@ export class UndergroundHelper {
     }
 
     public tryUseEnergyPotion() {
-        if (this.selectedEnergyRestore < 0)
+        if (this.selectedEnergyRestore() < 0)
             return;
 
-        const potionName = EnergyRestoreSize[this.selectedEnergyRestore];
+        const potionName = EnergyRestoreSize[this.selectedEnergyRestore()];
         if (player.itemList[potionName]() <= 0)
             return;
 
-        switch (this.selectedEnergyRestore) {
+        switch (this.selectedEnergyRestore()) {
             case EnergyRestoreSize.SmallRestore:
                 GameHelper.incrementObservable(this._timeSinceWork, 0.25 * this.workCycleTime);
                 break;
@@ -188,6 +179,19 @@ export class UndergroundHelper {
         this._hired(false);
         this._timeSinceWork(0);
         UndergroundController.notifyHelperFired(this);
+    }
+
+    public toggleEnergyRestore(energyRestore: EnergyRestoreSize) {
+        if (this._allowedEnergyRestores().includes(energyRestore)) {
+            this._allowedEnergyRestores.remove(energyRestore);
+        } else {
+            this._allowedEnergyRestores.push(energyRestore);
+            this._allowedEnergyRestores.sort().reverse();
+        }
+    }
+
+    public hasAllowedEnergyRestore(energyRestore: EnergyRestoreSize) {
+        return this._allowedEnergyRestores().includes(energyRestore);
     }
 
     public addExp(experience: number) {
@@ -266,21 +270,13 @@ export class UndergroundHelper {
         return this._workCycleTime();
     }
 
-    get selectedEnergyRestore(): EnergyRestoreSize | null {
-        return this._selectedEnergyRestore();
-    }
-
-    set selectedEnergyRestore(value: EnergyRestoreSize | null) {
-        this._selectedEnergyRestore(value);
-    }
-
     public toJSON(): Record<string, any> {
         return {
             id: this.id,
             experience: this._experience(),
             hired: this._hired(),
             timeSinceWork: this._timeSinceWork(),
-            selectedEnergyRestore: this._selectedEnergyRestore(),
+            allowedEnergyRestores: this._allowedEnergyRestores(),
             shouldDiscoverFavorite: this._shouldDiscoverFavorite(),
         };
     }
@@ -289,7 +285,7 @@ export class UndergroundHelper {
         this._experience(json?.experience || 0);
         this._hired(json?.hired || false);
         this._timeSinceWork(json?.timeSinceWork || 0);
-        this._selectedEnergyRestore(json?.selectedEnergyRestore ?? -1);
+        this._allowedEnergyRestores(json?.allowedEnergyRestores ?? []);
         this._shouldDiscoverFavorite(json?.shouldDiscoverFavorite ?? false);
     }
 

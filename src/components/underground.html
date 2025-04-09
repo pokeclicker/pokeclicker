@@ -391,7 +391,7 @@
 
                 <div id="undergroundHelpers" class="tab-pane fade">
                     <div class="row m-0 justify-content-start" data-bind="foreach: App.game.underground.helpers.available()" style="max-width: 100%;">
-                        <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0">
+                        <div class="card text-left col-12 col-lg-6 col-xl-4 p-0">
                             <h5 class="card-header d-flex align-items-center justify-content-between">
                                 <knockout data-bind="text: $data.name">Name</knockout>
                                 <div class="d-flex align-items-center position-relative">
@@ -462,11 +462,17 @@
                                     <tbody>
                                     <tr>
                                         <td colspan="2">
-                                            <div class="input-group input-group-sm">
-                                                <select autocomplete="off" class="custom-select" data-bind="options: [
-                                                    { name: 'None', value: -1 },
-                                                    ...GameHelper.enumSelectOption(GameConstants.EnergyRestoreSize),
-                                                ], optionsValue: 'value', optionsText: (item) => item.value < 0 ? `${GameConstants.camelCaseToString(item.name)}` : `${GameConstants.camelCaseToString(item.name)} (${player.itemList[item.name]().toLocaleString('en-US')})`, value: $data.selectedEnergyRestore"></select>
+                                            <div class="small text-center">Click to select</div>
+                                            <div class="d-flex flex-wrap justify-content-center" style="gap: 1rem;">
+                                                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.EnergyRestoreSize) -->
+                                                <div class="d-flex flex-column align-items-center clickable" data-bind="click: () => { $parent.toggleEnergyRestore($data); }">
+                                                    <img class="pixelated" src="" alt="" style="height: 26px;" data-bind="
+                                                        attr: { src: ItemList[GameConstants.EnergyRestoreSize[$data]].image },
+                                                        style: { opacity: $parent.hasAllowedEnergyRestore($data) ? 1 : 0.3 }
+                                                    ">
+                                                    <div class="small" data-bind="text: `${ItemList[GameConstants.EnergyRestoreSize[$data]].displayName.replace(' Restore', '')} [${player.itemList[GameConstants.EnergyRestoreSize[$data]]().toLocaleString('en-US', { notation: 'compact' })}]`"></div>
+                                                </div>
+                                                <!-- /ko -->
                                             </div>
                                         </td>
                                     </tr>
@@ -753,7 +759,7 @@
                                     <strong>Work cycle:</strong> Starts at <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_BASE"></knockout> seconds and decreases by <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL"></knockout> second for every level, up to a minimum of <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_MINIMUM"></knockout> seconds per action.
                                 </li>
                                 <li>
-                                    <strong>Energy restore:</strong> An expert can use an energy potion to restore a portion of the time until they can perform their next action.
+                                    <strong>Energy restore:</strong> An expert can use an energy potion to restore a portion of the time until they can perform their next action. When an expert is allowed to use multiple restores they will first use the best restore at their disposal.
                                     <ul>
                                         <li><strong>Small restore:</strong> Restores 25% of the time until the next action can be performed</li>
                                         <li><strong>Medium restore:</strong> Restores 50% of the time until the next action can be performed</li>
@@ -849,9 +855,9 @@
 
                                 <div class="m-2">
                                     <span data-bind="text: $data.name"></span>
-                                    <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
-                                    <img class="pixelated" data-bind="attr: { src: ItemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]].image }" src="" alt="" style="height: 26px;">
-                                    <span data-bind="text: `× ${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')}`"></span>
+                                    <!-- ko ifnot: $data.selectedEnergyRestore() < 0 -->
+                                    <img class="pixelated" data-bind="attr: { src: ItemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore()]].image }" src="" alt="" style="height: 26px;">
+                                    <span data-bind="text: `× ${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore()]]().toLocaleString('en-US')}`"></span>
                                     <!-- /ko -->
                                 </div>
                             </div>
