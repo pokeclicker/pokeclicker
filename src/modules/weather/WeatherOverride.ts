@@ -71,6 +71,10 @@ export class WeatherOverride implements Feature {
         }
     }
 
+    public reduceCostModifierInHours(hours: number) {
+        // TODO : Reduce the _costModifiers
+    }
+
     toJSON(): Record<string, any> {
         return {
 

@@ -45,6 +45,7 @@ class Game implements TmpGameType {
     public dreamOrbController: DreamOrbController;
     public purifyChamber: PurifyChamber;
     public weatherApp: WeatherApp;
+    public weatherOverride: WeatherOverride;
     public zMoves: ZMoves;
     public pokemonContest: PokemonContest;
 
@@ -85,6 +86,7 @@ class Game implements TmpGameType {
         this.dreamOrbController = new DreamOrbController();
         this.purifyChamber = new PurifyChamber();
         this.weatherApp = new WeatherApp();
+        this.weatherOverride = new WeatherOverride();
         this.zMoves = new ZMoves();
         this.pokemonContest = new PokemonContest();
 
@@ -125,6 +127,7 @@ class Game implements TmpGameType {
         this.farming.initialize();
         this.specialEvents.initialize();
         this.pokeballFilters.initialize();
+        this.weatherOverride.initialize();
         this.load();
 
         // Unlock achievements that have already been completed, avoids renotifying
@@ -511,6 +514,7 @@ class Game implements TmpGameType {
                 // Check if it's weather change time
                 if (now.getHours() % Weather.period === 0) {
                     WeatherApp.checkDateHasPassed();
+                    this.weatherOverride.reduceCostModifierInHours(Weather.period);
                 }
             }
 
@@ -521,6 +525,10 @@ class Game implements TmpGameType {
         // Underground
         if (this.underground.canAccess()) {
             this.underground.update(GameConstants.TICK_TIME / GameConstants.SECOND);
+        }
+
+        if (this.weatherOverride.canAccess()) {
+            this.weatherOverride.update(GameConstants.TICK_TIME / GameConstants.SECOND);
         }
 
         // Farm

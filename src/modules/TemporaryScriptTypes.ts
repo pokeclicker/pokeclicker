@@ -29,9 +29,10 @@ import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
 import type SpecialEvents from './specialEvents/SpecialEvents';
+import type { WeatherOverride } from './weather/WeatherOverride';
 
 /*
-    These types are only temporary while we are converting things to modules. As things are converted, 
+    These types are only temporary while we are converting things to modules. As things are converted,
     we should import their types here for use, instead of these cheap imitations.
 
     When a file is converted to a module, the types for any /scripts dependencies should be added here
@@ -75,7 +76,7 @@ import type SpecialEvents from './specialEvents/SpecialEvents';
         }
         Example2 satisfies TmpExample2Type;
 
-    If a class has both static and instance properties, it needs separate types for each. 
+    If a class has both static and instance properties, it needs separate types for each.
 
 */
 
@@ -134,6 +135,7 @@ export type TmpGameType = {
     dreamOrbController: TmpDreamOrbControllerType;
     purifyChamber: TmpPurifyChamberType;
     weatherApp: TmpWeatherAppType;
+    weatherOverride: WeatherOverride;
     zMoves: TmpZMovesType;
     pokemonContest: TmpPokemonContestType;
 
