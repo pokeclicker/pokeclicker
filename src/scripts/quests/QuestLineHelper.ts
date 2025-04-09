@@ -316,7 +316,7 @@ class QuestLineHelper {
                 timeout: GameConstants.MINUTE,
             });
         };
-        const mineLayers = new MineLayersQuest(5, 0).withDescription('Mine 5 layers in the Underground.').withCustomReward(oldAmberReward);
+        const mineLayers = new MineLayersQuest(5, 0).withDescription('Collect all buried treasure 5 times in the Underground mines.').withCustomReward(oldAmberReward);
         undergroundQuestLine.addQuest(mineLayers);
 
         App.game.quests.questLines().push(undergroundQuestLine);
