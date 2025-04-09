@@ -651,18 +651,25 @@
 
                             <h4>Tools Overview</h4>
                             <p>There are <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> different tools available, each with unique functions and properties:</p>
-                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Chisel) } -->
-                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool } }"></div>
-                            <!-- /ko -->
-                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Hammer) } -->
-                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool } }"></div>
-                            <!-- /ko -->
-                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Bomb) } -->
-                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool } }"></div>
-                            <!-- /ko -->
-                            <!-- ko let: { tool: App.game.underground.tools.getTool(UndergroundToolType.Survey) } -->
-                            <div data-bind="template: { name: 'helpToolTemplate', data: { tool } }"></div>
-                            <!-- /ko -->
+                            <table class="table table-sm table-striped">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th colspan="2" class="text-center">Tool</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- ko foreach: App.game.underground.tools.tools -->
+                                <tr>
+                                    <td class="vertical-middle">
+                                        <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.id]}.png` }">
+                                    </td>
+                                    <td class="vertical-middle text-left" data-bind="text: $data.displayName"></td>
+                                    <td class="vertical-middle text-left" data-bind="text: $data.description"></td>
+                                </tr>
+                                <!-- /ko -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -713,19 +720,19 @@
                             <table class="table table-sm table-striped">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Tier</th>
-                                    <th></th>
+                                    <th class="text-center">Tier</th>
+                                    <th data-bind="css: { 'd-none': App.game.underground.battery.patterns.every(pattern => pattern.canAccess()) }"></th>
                                     <th class="text-left">Name</th>
-                                    <th class="text-left">Requirements</th>
-                                    <th>Chance</th>
-                                    <th>Discharges</th>
+                                    <th class="text-left" data-bind="css: { 'd-none': App.game.underground.battery.patterns.every(pattern => pattern.canAccess()) }">Requirements</th>
+                                    <th class="text-center">Chance</th>
+                                    <th class="text-center">Discharges</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <!-- ko foreach: App.game.underground.battery.patterns -->
                                 <tr>
-                                    <td class="vertical-middle" data-bind="text: $data.tier"></td>
-                                    <td class="vertical-middle">
+                                    <td class="vertical-middle text-center" data-bind="text: $data.tier"></td>
+                                    <td class="vertical-middle" data-bind="css: { 'd-none': App.game.underground.battery.patterns.every(pattern => pattern.canAccess()) }">
                                         <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
                                             tooltip: {
                                                 title: $data.hint || '',
@@ -734,9 +741,9 @@
                                             }, visible: !$data.canAccess()" />
                                     </td>
                                     <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
-                                    <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
-                                    <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
-                                    <td class="vertical-middle" data-bind="text: $data.canAccess() ? App.game.statistics.undergroundBatteryDischarges[$data.id]().toLocaleString('en-US') : '-'"></td>
+                                    <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : '', css: { 'd-none': App.game.underground.battery.patterns.every(pattern => pattern.canAccess()) }"></td>
+                                    <td class="vertical-middle text-center" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
+                                    <td class="vertical-middle text-center" data-bind="text: $data.canAccess() ? App.game.statistics.undergroundBatteryDischarges[$data.id]().toLocaleString('en-US') : '-'"></td>
                                 </tr>
                                 <!-- /ko -->
                                 </tbody>
@@ -1240,14 +1247,6 @@
         </div>
     </div>
 </div>
-
-<script type="text/html" id="helpToolTemplate">
-    <h6 class="d-flex align-items-center" style="gap: 0.5rem;">
-        <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
-        <knockout data-bind="text: $data.tool.displayName"></knockout>
-    </h6>
-    <p data-bind="text: $data.tool.description"></p>
-</script>
 
 <script type="text/html" id="undergroundTreasureItemTemplate">
 <!-- ko let: { itemName: undergroundItem.itemName } -->
