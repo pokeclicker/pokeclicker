@@ -35,7 +35,6 @@
             <div class="underground-tool-container underground-tool-color" data-bind="
                 class: `underground-tool-color__${UndergroundToolType[$data.id].toLowerCase()}`,
                 css: { 'clickable': [UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data.id) && $data.canUseTool() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() },
-                style: { opacity: $data.canUseTool() ? 1 : 0.3 }
                 click: () => {
                     if ([UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data.id) && $data.canUseTool() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
                         App.game.underground.tools.useTool($data.id, 0, 0);
@@ -115,7 +114,6 @@
         <div class="underground-all-tools-container mini">
             <div class="underground-tool-container underground-tool-color underground-tool-color__discharge" data-bind="
                 css: { 'clickable': App.game.underground.battery.canDischarge() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() },
-                style: { opacity: App.game.underground.battery.canDischarge() ? 1 : 0.3 },
                 click: () => {
                     if (App.game.underground.battery.canDischarge() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
                         App.game.underground.battery.discharge();
