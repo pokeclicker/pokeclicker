@@ -329,7 +329,7 @@ export class UndergroundController {
     public static notifyMineCompleted(helper?: UndergroundHelper) {
         Notifier.notify({
             title: 'Underground',
-            message: helper ? `${helper.name} digging deeper...` : 'You dig deeper...',
+            message: helper ? `${helper.name} dug deeper...` : 'You dug deeper...',
             type: NotificationOption.info,
             setting: NotificationConstants.NotificationSetting.Underground.underground_dig_deeper,
         });
