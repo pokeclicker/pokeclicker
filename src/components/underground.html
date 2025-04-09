@@ -149,8 +149,6 @@
                         <!-- ko ifnot: App.game.challenges.list.disableOakItems.active() -->
                         <div class="card underground-mining-container__cell-battery">
                             <div class="card-body d-flex p-0 p-xl-2">
-                                <button class="btn btn-primary" data-bind="click: () => $('#undergroundBatteryModal').modal('show');">?</button>
-
                                 <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
                                 <div class="flex-grow-1 underground-all-tools-container">
                                     <div class="underground-tool-container underground-tool-color underground-tool-color__discharge" data-bind="
@@ -711,9 +709,38 @@
                                 When your battery is fully charged up, you can discharge it. This discharge will leave a pattern of cleared tiles behind.
                                 With higher level patterns, which damage more tiles, becoming available as you level up your Cell Battery.
                             </p>
-                            <p>
-                                All patterns and their requirements are available in the help section of the Battery on the Dig tab.
-                            </p>
+
+                            <table class="table table-sm table-striped">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Tier</th>
+                                    <th></th>
+                                    <th class="text-left">Name</th>
+                                    <th class="text-left">Requirements</th>
+                                    <th>Chance</th>
+                                    <th>Discharges</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- ko foreach: App.game.underground.battery.patterns -->
+                                <tr>
+                                    <td class="vertical-middle" data-bind="text: $data.tier"></td>
+                                    <td class="vertical-middle">
+                                        <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                                            tooltip: {
+                                                title: $data.hint || '',
+                                                placement: 'bottom',
+                                                trigger: 'hover'
+                                            }, visible: !$data.canAccess()" />
+                                    </td>
+                                    <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
+                                    <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
+                                    <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
+                                    <td class="vertical-middle" data-bind="text: $data.canAccess() ? App.game.statistics.undergroundBatteryDischarges[$data.id]().toLocaleString('en-US') : '-'"></td>
+                                </tr>
+                                <!-- /ko -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -1208,58 +1235,6 @@
                 <!-- ko if: UndergroundTrading.selectedTradeFromItem -->
                 <div>Owned: <knockout data-bind="text: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US')"></knockout></div>
                 <!-- /ko -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div aria-labelledby="undergroundBatteryModalLabel" class="modal fade no-select" id="undergroundBatteryModal" role="dialog" style="cursor: default;" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="card mb-2">
-                    <div class="card-header d-flex align-items-center p-0">
-                        <span class="flex-grow-1 text-center font-weight-bold">Underground Battery Patterns</span>
-                    </div>
-
-                    <div class="card-body">
-                        <table class="table table-hover table-striped table-sm m-0">
-                            <thead>
-                            <tr>
-                                <th>Tier</th>
-                                <th></th>
-                                <th class="text-left">Name</th>
-                                <th class="text-left">Requirements</th>
-                                <th>Chance</th>
-                                <th>Discharges</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!-- ko foreach: App.game.underground.battery.patterns -->
-                            <tr>
-                                <td class="vertical-middle" data-bind="text: $data.tier"></td>
-                                <td class="vertical-middle">
-                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
-                                            tooltip: {
-                                                title: $data.hint || '',
-                                                placement: 'bottom',
-                                                trigger: 'hover'
-                                            }, visible: !$data.canAccess()" />
-                                </td>
-                                <td class="vertical-middle text-left" data-bind="text: $data.name"></td>
-                                <td class="vertical-middle text-left" data-bind="text: !$data.canAccess() ? $data.hint : ''"></td>
-                                <td class="vertical-middle" data-bind="text: $data.canAccess() ? ($data.weight / App.game.underground.battery.patterns.filter(p => p.canAccess()).reduce((prev, cur) => prev + cur.weight, 0)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'"></td>
-                                <td class="vertical-middle" data-bind="text: $data.canAccess() ? App.game.statistics.undergroundBatteryDischarges[$data.id]().toLocaleString('en-US') : '-'"></td>
-                            </tr>
-                            <!-- /ko -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
