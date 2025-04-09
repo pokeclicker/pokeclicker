@@ -85,7 +85,16 @@ export default class UndergroundTools {
                 description: `Indicates a ${SURVEY_RANGE_BASE}x${SURVEY_RANGE_BASE} grid where at least one tile contains a treasure. The grid shrinks by two tiles in each direction every ${SURVEY_RANGE_REDUCTION_LEVELS} levels.`,
                 durabilityPerUse: 1,
                 maximumChargesPerMine: 1,
-                customRestoreRateFn: () => 1 / 900,
+                customRestoreRateFn: (tool, level) => {
+                    const [minimumLevel, maximumLevel] = [15, 40];
+                    const deltaLevel = maximumLevel - minimumLevel;
+
+                    const baseLog = (base, value) => Math.log(value) / Math.log(base);
+                    const scale = baseLog(deltaLevel + 1, Math.min(Math.max(level - minimumLevel, 0), deltaLevel) + 1);
+
+                    // Scale from 15 minutes to 1 minute
+                    return 1 / (900 - (900 - 60) * scale);
+                },
                 action: () => {
                     const hiddenItemsIDSet: Set<number> = Mine.hiddenItemsIDSet(App.game.underground.mine);
 
