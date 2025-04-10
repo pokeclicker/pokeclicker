@@ -149,7 +149,6 @@
                         <!-- ko ifnot: App.game.challenges.list.disableOakItems.active() -->
                         <div class="card underground-mining-container__cell-battery">
                             <div class="card-body d-flex p-0 p-xl-2">
-                                <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
                                 <div class="flex-grow-1 underground-all-tools-container">
                                     <div class="underground-tool-container underground-tool-color underground-tool-color__discharge" data-bind="
                                         css: { 'clickable': App.game.underground.battery.canDischarge() },
@@ -169,11 +168,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /ko -->
-
-                                <!-- ko ifnot: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
-                                <p class="flex-grow-1 p-2">Equip your Cell Battery Oak Item to use the Battery.</p>
-                                <!-- /ko -->
                             </div>
                         </div>
                         <!-- /ko -->
@@ -713,15 +707,16 @@
 
                         <div class="card-body">
                             <p>
-                                The Battery is a system that charges up as you or your expert mines tiles. In order to charge up you need to have your Cell Battery Oak Item equipped.
+                                The Battery is a system that charges up as you or your expert mines tiles.
                             </p>
                             <p>
                                 Each successful mining attempt will add 1 charge, up to a maximum of <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_MAX_CHARGES"></knockout> charges.
                                 You can only gain 1 charge per <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_COOLDOWN_SECONDS"></knockout> second.
+                                Equipping your Cell Battery Oak Item will reduce the maximum charges needed to discharge.
                             </p>
                             <p>
                                 When your battery is fully charged up, you can discharge it. This discharge will leave a pattern of cleared tiles behind.
-                                With higher level patterns, which damage more tiles, becoming available as you level up your Cell Battery.
+                                With higher level patterns, which damage more tiles, becoming available as you level up.
                             </p>
 
                             <table class="table table-sm table-striped">
