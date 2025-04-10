@@ -23,7 +23,6 @@ export default class UndergroundTools {
                 displayName: 'Chisel',
                 description: 'Mines 2 layers on the selected spot.',
                 durabilityPerUse: 0.02,
-                maximumChargesPerMine: Infinity,
                 action: (x, y) => {
                     const coordinatesActuallyMined: Array<Coordinate> = [];
                     if (App.game.underground.mine?.attemptBreakTile({ x, y }, 2)) {
@@ -40,7 +39,6 @@ export default class UndergroundTools {
                 displayName: 'Hammer',
                 description: 'Mines 1 layer on all 9 tiles in a 3x3 grid.',
                 durabilityPerUse: 0.06,
-                maximumChargesPerMine: Infinity,
                 action: (x, y) => {
                     const coordinatesActuallyMined: Array<Coordinate> = [];
                     for (let deltaX = -1; deltaX <= 1; deltaX++) {
@@ -59,9 +57,8 @@ export default class UndergroundTools {
             new UndergroundTool({
                 id: UndergroundToolType.Bomb,
                 displayName: 'Bomb',
-                description: 'Mines a maximum of 2 layers on each of 10 random tiles (including fully mined tiles). The number of tiles increases when equipped with the Explosive Charge Oak Item.',
+                description: 'Mines a maximum of 2 layers on each of 10 random tiles (including fully mined tiles). The number of tiles increases when equipped with the Explosive Charge Oak Item. Items cannot be mined with the Bomb tool and will instead be destroyed. You will not receive XP for these items.',
                 durabilityPerUse: 0.18,
-                maximumChargesPerMine: 1000,
                 itemDestroyChance: 1,
                 action: () => {
                     const coordinatesActuallyMined: Array<Coordinate> = [];
@@ -85,7 +82,6 @@ export default class UndergroundTools {
                 displayName: 'Survey',
                 description: `Indicates a ${SURVEY_RANGE_BASE}x${SURVEY_RANGE_BASE} grid where at least one tile contains a treasure. The grid shrinks by two tiles in each direction every ${SURVEY_RANGE_REDUCTION_LEVELS} levels.`,
                 durabilityPerUse: 1,
-                maximumChargesPerMine: 1,
                 customRestoreRateFn: (tool, level) => {
                     const [minimumLevel, maximumLevel] = [15, 40];
                     const deltaLevel = maximumLevel - minimumLevel;
@@ -135,10 +131,6 @@ export default class UndergroundTools {
 
     update(delta: number) {
         this.tools.forEach(tool => tool.tick(delta));
-    }
-
-    public resetCharges() {
-        this.tools.forEach(tool => tool.resetCharges());
     }
 
     public getTool(toolType: UndergroundToolType): UndergroundTool {

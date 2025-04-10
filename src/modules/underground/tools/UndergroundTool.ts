@@ -11,7 +11,6 @@ type UndergroundToolProperties = {
     description: string;
 
     durabilityPerUse: number;
-    maximumChargesPerMine: number;
     itemDestroyChance?: number;
 
     customRestoreRateFn?: (tool: UndergroundTool, level: number) => number;
@@ -22,9 +21,8 @@ export default class UndergroundTool {
     private _toolProperties: UndergroundToolProperties;
 
     private _durability: Observable<number> = ko.observable(1).extend({ numeric: 5 });
-    private _charges: Observable<number> = ko.observable(0).extend({ numeric: 0 });
 
-    public canUseTool: PureComputed<boolean> = ko.pureComputed(() => this.durability >= this.durabilityPerUse && this.charges > 0);
+    public canUseTool: PureComputed<boolean> = ko.pureComputed(() => this.durability >= this.durabilityPerUse);
     public restoreRatePerSecond: PureComputed<number> = ko.pureComputed(() => this.calculateDurabilityRestoreRatePerSecond(App.game.underground.undergroundLevel));
 
     private maxDurabilityPerSecond: PureComputed<number> = ko.pureComputed(() => this._toolProperties.durabilityPerUse * UNDERGROUND_MAX_CLICKS_PER_SECOND);
@@ -63,12 +61,7 @@ export default class UndergroundTool {
     }
 
     public reduceDurabilityByUse() {
-        this._charges(this._charges() - 1);
         this._durability(this._durability() - this.durabilityPerUse);
-    }
-
-    public resetCharges() {
-        this._charges(Math.max(this.charges, this._toolProperties.maximumChargesPerMine));
     }
 
     get id(): UndergroundToolType {
@@ -91,14 +84,6 @@ export default class UndergroundTool {
         return this._durability();
     }
 
-    get maximumChargesPerMine(): number {
-        return this._toolProperties.maximumChargesPerMine;
-    }
-
-    get charges(): number {
-        return this._charges();
-    }
-
     get itemDestroyChance(): number {
         return this._toolProperties.itemDestroyChance ?? 0;
     }
@@ -109,13 +94,11 @@ export default class UndergroundTool {
 
     public fromJSON(save) {
         this._durability(save?.durability ?? 1);
-        this._charges(save?.charges ?? this._toolProperties.maximumChargesPerMine);
     }
 
     public toJSON() {
         return {
             durability: this._durability(),
-            charges: this._charges(),
         };
     }
 

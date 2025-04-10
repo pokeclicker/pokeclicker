@@ -51,7 +51,13 @@
                         </div>
                     </div>
 
-                    <div class="small" data-bind="text: $data.charges === Infinity ? '∞' : `${$data.charges} / ${$data.maximumChargesPerMine}`, css: { 'text-warning': $data.charges === 0 }"></div>
+                    <div class="small" data-bind="
+                        text: $data.durabilityPerUse === 0 ? '∞' : `${Math.floor($data.durability / $data.durabilityPerUse)}`,
+                        css: {
+                            'text-success': $data.durabilityPerUse === 0 || (1 - $data.durability) <= 1 % $data.durabilityPerUse,
+                            'text-warning': Math.floor($data.durability / $data.durabilityPerUse) === 0
+                        }
+                    "></div>
                 </div>
             </div>
             <!-- /ko -->

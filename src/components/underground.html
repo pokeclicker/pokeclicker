@@ -138,7 +138,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="small" data-bind="text: $data.charges === Infinity ? '∞' : `${$data.charges} / ${$data.maximumChargesPerMine}`, css: { 'text-warning': $data.charges === 0 }"></div>
+                                        <div class="small" data-bind="
+                                            text: $data.durabilityPerUse === 0 ? '∞' : `${Math.floor($data.durability / $data.durabilityPerUse)}`,
+                                            css: {
+                                                'text-success': $data.durabilityPerUse === 0 || (1 - $data.durability) <= 1 % $data.durabilityPerUse,
+                                                'text-warning': Math.floor($data.durability / $data.durabilityPerUse) === 0
+                                            }
+                                        "></div>
                                     </div>
                                 </div>
                                 <!-- /ko -->
@@ -217,10 +223,6 @@
                                         <tr>
                                             <td class="text-left">Durability per use</td>
                                             <td class="text-left tight"><code data-bind="text: tool.durabilityPerUse === 0 ? 'Free' : tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 2 })"></code></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left">Maximum uses per mine</td>
-                                            <td class="text-left tight"><code data-bind="text: tool.maximumChargesPerMine === Infinity ? '∞' : tool.maximumChargesPerMine.toLocaleString('en-US')"></code></td>
                                         </tr>
                                         <tr>
                                             <td class="text-left">Lifetime usage</td>
@@ -640,11 +642,10 @@
                         <div class="card-body">
                             <p>The Underground offers <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
 
-                            <h4>Durability / Maximum charges</h4>
+                            <h4>Durability</h4>
                             <p>
-                                Using a tool is only possible when your tool is durable enough and has enough charges left.
+                                Using a tool is only possible when your tool is durable enough.
                                 When you use your tool successfully it will remove some of its durability, which will be restored over time.
-                                It will also take up 1 charge. These charges are not restored over time, but will be restored to their maximum limited when you start a new mine.
                             </p>
                             <p>
                                 The restore rate of your tools depends on your Underground level.
