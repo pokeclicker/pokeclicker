@@ -1,11 +1,31 @@
-#mineModal {
-    ul.nav {
-        width: 100%;
+.underground-tool-color {
+    --tool-color: white;
+    --tool-color-darker: hsl(from var(--tool-color) h s calc(l - 40));
+
+    &.underground-tool-color__chisel {
+        --tool-color: #5468EC;
+    }
+
+    &.underground-tool-color__hammer {
+        --tool-color: #F86058;
+    }
+
+    &.underground-tool-color__bomb {
+        --tool-color: #85DD9D;
+    }
+
+    &.underground-tool-color__survey {
+        --tool-color: #FFC300;
+    }
+
+    &.underground-tool-color__discharge {
+        --tool-color: rgb(177, 215, 237);
     }
 }
 
 .underground-mining-container {
     display: grid;
+    gap: 0.5rem;
     grid-template-columns: repeat(12, 1fr);
 
     .underground-mining-container__treasure-count {
@@ -29,40 +49,12 @@
     }
 
     @media (min-width: 992px) {
-        gap: 0.25rem;
-
         .underground-mining-container__tools {
-            grid-column-end: span 3;
-        }
-
-        .underground-mining-container__cell-battery {
-            grid-column-end: span 2;
-            grid-row-start: 3;
-        }
-
-        .underground-mining-container__tool-info {
-            grid-column-end: span 7;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        gap: 0.5rem;
-
-        .underground-mining-container__mine {
-            grid-column: 1 / span 9;
-        }
-
-        .underground-mining-container__tools {
-            grid-column: 4 / span 6;
+            grid-column-end: span 9;
         }
 
         .underground-mining-container__cell-battery {
             grid-column-end: span 3;
-        }
-
-        .underground-mining-container__tool-info {
-            grid-column: 10 / span 3;
-            grid-row: 2 / span 2;
         }
     }
 }
@@ -288,8 +280,6 @@
     gap: 0.25rem;
 }
 
-
-
 .underground-all-tools-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
@@ -324,33 +314,6 @@
     }
 }
 
-
-
-.underground-tool-color {
-    --tool-color: white;
-    --tool-color-darker: hsl(from var(--tool-color) h s calc(l - 40));
-
-    &.underground-tool-color__chisel {
-        --tool-color: #5468EC;
-    }
-
-    &.underground-tool-color__hammer {
-        --tool-color: #F86058;
-    }
-
-    &.underground-tool-color__bomb {
-        --tool-color: #85DD9D;
-    }
-
-    &.underground-tool-color__survey {
-        --tool-color: #FFC300;
-    }
-
-    &.underground-tool-color__discharge {
-        --tool-color: rgb(177, 215, 237);
-    }
-}
-
 .underground-all-tools-container.mini {
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     gap: 0;
@@ -376,27 +339,6 @@
     }
 }
 
-
-.tool-ui {
-    --tool-color: white;
-
-    &.Chisel-tool-ui {
-        --tool-color: #5468EC;
-    }
-
-    &.Hammer-tool-ui {
-        --tool-color: #F86058;
-    }
-
-    &.Bomb-tool-ui {
-        --tool-color: #85DD9D;
-    }
-
-    &.Survey-tool-ui {
-        --tool-color: #FFC300;
-    }
-}
-
 .treasure-item-container {
     display: grid;
     gap: 0.25rem;
@@ -404,7 +346,6 @@
 
     > div {
         container-type: inline-size;
-        //container-name: treasureitemcontainerchild;
     }
 
     &.grid-view {
@@ -425,8 +366,6 @@
     }
 
     .treasure-item-data-wrapper {
-        //display: flex;
-        //flex-wrap: wrap;
         display: grid;
         flex: 1;
         gap: 0.25rem;

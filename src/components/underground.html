@@ -1,9 +1,9 @@
 <div aria-labelledby="myModalLabel" class="modal fade noselect" id="mineModal" role="dialog"
      style="cursor:default" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header p-0">
-                <ul class="nav nav-tabs nav-fill">
+                <ul class="nav nav-tabs nav-fill w-100">
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
                     <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Experts</a></li>
@@ -50,7 +50,7 @@
                     </div>
 
                     <!-- ko if: App.game.underground.mine -->
-                    <div class="underground-mining-container p-0 p-lg-2">
+                    <div class="underground-mining-container p-2 p-lg-2">
                         <!-- Treasure count -->
                         <div class="card underground-mining-container__treasure-count">
                             <div class="card-body p-2 d-flex justify-content-center" style="gap: 1.5rem">
@@ -75,8 +75,8 @@
                         </div>
 
                         <!-- Mine -->
-                        <div class="card underground-mining-container__mine position-relative">
-                            <div class="card-body p-0 p-lg-2 position-relative">
+                        <div class="underground-mining-container__mine position-relative">
+                            <div class="position-relative">
                                 <div id="mineBody" style="margin:auto; background-image: url('assets/images/underground/rock0.png');"
                                      data-bind="css: {
                                         'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
@@ -121,7 +121,7 @@
                         </div>
 
                         <!-- Tools -->
-                        <div class="card underground-mining-container__tools p-0 p-xl-2">
+                        <div class="underground-mining-container__tools">
                             <div class="underground-all-tools-container">
                                 <!-- ko foreach: App.game.underground.tools.tools -->
                                 <div class="underground-tool-container underground-tool-color clickable" data-bind="
@@ -152,8 +152,8 @@
                         </div>
 
                         <!-- Battery -->
-                        <div class="card underground-mining-container__cell-battery">
-                            <div class="card-body d-flex p-0 p-xl-2">
+                        <div class="underground-mining-container__cell-battery">
+                            <div class="d-flex">
                                 <div class="flex-grow-1 underground-all-tools-container">
                                     <div class="underground-tool-container underground-tool-color underground-tool-color__discharge" data-bind="
                                         css: { 'clickable': App.game.underground.battery.canDischarge() },
@@ -181,46 +181,50 @@
                         <div class="card underground-mining-container__tool-info">
                             <div class="card-header p-2 font-weight-bold" data-bind="text: `${tool.displayName} (${Settings.getSetting('hotkey.underground.' + UndergroundToolType[tool.id].toLowerCase())?.value})`"></div>
 
-                            <div class="card-body p-2 d-flex flex-wrap align-content-start" style="gap: 0.5rem;">
-                                <div class="flex-grow-1">
-                                    <table class="table table-striped table-hover table-bordered table-sm m-0">
-                                        <thead>
-                                        <tr class="bg-secondary">
-                                            <th colspan="2">Info</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <!-- ko if: tool.durabilityPerUse > 0 -->
-                                        <tr>
-                                            <td class="text-left">Next use</td>
-                                            <td class="text-left tight"><code data-bind="text: GameConstants.formatTime(Math.max(tool.durabilityPerUse - tool.durability, 0) / tool.restoreRatePerSecond())"></code></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left">Time until 100%</td>
-                                            <td class="text-left tight"><code data-bind="text: GameConstants.formatTime((1 - tool.durability) / tool.restoreRatePerSecond())"></code></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left">Durability per use</td>
-                                            <td class="text-left tight"><code data-bind="text: tool.durabilityPerUse === 0 ? 'Free' : tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 2 })"></code></td>
-                                        </tr>
-                                        <!-- /ko -->
+                            <div class="card-body p-2">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-5 mb-2">
+                                            <table class="table table-striped table-hover table-bordered table-sm m-0">
+                                                <thead>
+                                                <tr class="bg-secondary">
+                                                    <th colspan="2">Info</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <!-- ko if: tool.durabilityPerUse > 0 -->
+                                                <tr>
+                                                    <td class="text-left">Next use</td>
+                                                    <td class="text-left tight"><code data-bind="text: GameConstants.formatTime(Math.max(tool.durabilityPerUse - tool.durability, 0) / tool.restoreRatePerSecond())"></code></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Time until 100%</td>
+                                                    <td class="text-left tight"><code data-bind="text: GameConstants.formatTime((1 - tool.durability) / tool.restoreRatePerSecond())"></code></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Durability per use</td>
+                                                    <td class="text-left tight"><code data-bind="text: tool.durabilityPerUse === 0 ? 'Free' : tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 2 })"></code></td>
+                                                </tr>
+                                                <!-- /ko -->
 
-                                        <!-- ko ifnot: tool.durabilityPerUse > 0 -->
-                                        <tr>
-                                            <td colspan="2" class="text-center">Your restore rate has grown so much that this tool has now become free to use.</td>
-                                        </tr>
-                                        <!-- /ko -->
+                                                <!-- ko ifnot: tool.durabilityPerUse > 0 -->
+                                                <tr>
+                                                    <td colspan="2" class="text-center">Your restore rate has grown so much that this tool has now become free to use.</td>
+                                                </tr>
+                                                <!-- /ko -->
 
-                                        <tr>
-                                            <td class="text-left">Lifetime usage</td>
-                                            <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundToolsUsed[tool.id]().toLocaleString('en-US')"></code></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                <tr>
+                                                    <td class="text-left">Lifetime usage</td>
+                                                    <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundToolsUsed[tool.id]().toLocaleString('en-US')"></code></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                <div class="d-flex justify-content-center align-items-center flex-grow-1">
-                                    <p class="small m-0" data-bind="text: tool.description"></p>
+                                        <div class="col-12 col-lg-7">
+                                            <p class="small text-left m-0" data-bind="text: tool.description"></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -346,7 +350,7 @@
                                     <span class="flex-grow-1 text-center font-weight-bold" data-bind="text: $data.title"></span>
                                 </div>
 
-                                <div class="card-body">
+                                <div class="card-body p-2">
                                     <div class="justify-content-center treasure-item-container" data-bind="
                                         class: Settings.getSetting('undergroundTreasureViewMode').observableValue(),
                                         css: { quickSellMode: UndergroundTrading.quickSellEnabled() }
