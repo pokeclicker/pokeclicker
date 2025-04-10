@@ -10,7 +10,7 @@ import SeededRand from '../utilities/SeededRand';
 export default class Weather {
     private static _regionalWeather: Observable<WeatherType>[] = Array<WeatherType>(GameHelper.enumLength(Region)).fill(WeatherType.Clear).map((v) => ko.observable<WeatherType>(v));
 
-    public static currentWeather: Computed<WeatherType> = ko.pureComputed(() => this._regionalWeather[player.region]());
+    public static currentWeather: Computed<WeatherType> = ko.pureComputed(() => this.getRegionalWeather(player.region));
 
     public static image: Computed<string> = ko.pureComputed(() => {
         return `assets/images/weather/${WeatherType[Weather.currentWeather()]}.png`;

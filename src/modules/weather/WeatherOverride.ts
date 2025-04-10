@@ -4,6 +4,7 @@ import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
 import { Region } from '../GameConstants';
 import { Observable } from 'knockout';
+import GameHelper from '../GameHelper';
 
 export class WeatherOverride implements Feature {
     name = 'Weather Override';
@@ -60,20 +61,26 @@ export class WeatherOverride implements Feature {
     };
 
     private _costModifier: { [region in Region]?: Observable<number> } = {};
-    private _overrides: { [region in Region]?: { weather: WeatherType, time: Observable<number> } } = {};
+    private _overrides: { [region in Region]?: { weather: Observable<WeatherType | null>, time: Observable<number> } } = {};
 
     canAccess(): boolean {
         return true;
     }
 
     initialize() {
-
+        GameHelper.enumNumbers(Region).forEach(value => {
+            this._overrides[value] = { weather: ko.observable(null), time: ko.observable(0) };
+        });
     }
 
     update(delta: number) {
-        if (delta > 0) {
+        Object.values(this._overrides).forEach(regionOverride => {
+            regionOverride.time(regionOverride.time() - delta);
 
-        }
+            if (regionOverride.time() <= 0) {
+                regionOverride.weather(null);
+            }
+        });
     }
 
     public purchaseWeatherOverride(region: Region, weatherType: WeatherType, cycles: number) {
@@ -89,7 +96,7 @@ export class WeatherOverride implements Feature {
     }
 
     public getWeatherForRegion(region: Region): WeatherType | null {
-        return this._overrides[region]?.weather ?? null;
+        return this._overrides[region]?.weather() ?? null;
     }
 
     toJSON(): Record<string, any> {
