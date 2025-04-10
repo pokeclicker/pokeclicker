@@ -167,7 +167,7 @@ export class UndergroundBattery {
                     }
                 });
 
-                UndergroundController.handleCoordinatesMined(Array.from(tilesMined));
+                UndergroundController.handleCoordinatesMined(Array.from(tilesMined), null);
             }
 
             ++this._activeDischargeFrame;

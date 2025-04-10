@@ -17,7 +17,9 @@ import {
     HELPER_EXPERIENCE_PLAYER_FRACTION,
     humanifyString,
     PLATE_VALUE,
-    PLAYER_EXPERIENCE_HELPER_FRACTION, Region, SECOND,
+    PLAYER_EXPERIENCE_HELPER_FRACTION,
+    Region,
+    SECOND,
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
     SURVEY_RANGE_REDUCTION_LEVELS,
@@ -30,6 +32,7 @@ import GameHelper from '../GameHelper';
 import { Coordinate } from './mine/Mine';
 import { SortOptionConfigs, SortOptions } from './UndergroundTreasuresSortOptions';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import UndergroundToolType from './tools/UndergroundToolType';
 
 export const UNDERGROUND_MAX_CLICKS_PER_SECOND = 20;
 
@@ -230,7 +233,7 @@ export class UndergroundController {
         App.game.underground.tools.useTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y);
     }
 
-    public static handleCoordinatesMined(coordinates: Coordinate[], helper: UndergroundHelper = undefined) {
+    public static handleCoordinatesMined(coordinates: Coordinate[], toolType: UndergroundToolType | null, helper: UndergroundHelper = undefined) {
         if (coordinates.length === 0) {
             return;
         }
@@ -240,8 +243,18 @@ export class UndergroundController {
             .filter(item => item);
 
         // Handle gaining items
-        itemsFound.forEach(value => {
-            const { item, amount } = value;
+        itemsFound.forEach(item => {
+            const amount = UndergroundController.calculateRewardAmountFromMining();
+
+            App.game.oakItems.use(OakItemType.Treasure_Scanner);
+            GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
+            GameHelper.incrementObservable(App.game.statistics.undergroundSpecificItemsFound[item.id], amount);
+
+            if (Rand.chance(App.game.underground.tools.getTool(toolType)?.itemDestroyChance ?? 0)) {
+                UndergroundController.notifyItemDestroyed(item, amount, helper);
+                return;
+            }
+
             UndergroundController.notifyItemFound(item, amount, helper);
 
             if (helper) {
@@ -360,6 +373,18 @@ export class UndergroundController {
                 timeout: 3000 + i * 2000,
             });
         }
+    }
+
+    public static notifyItemDestroyed(item: UndergroundItem, amount: number, helper?: UndergroundHelper) {
+        const { name: itemName, image } = item;
+
+        Notifier.notify({
+            title: 'Underground',
+            message: `<img src="${image}" height="24px" class="pixelated"/> ${helper?.name ?? 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}, but the item was destroyed in the process.`,
+            type: NotificationConstants.NotificationOption.warning,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+            timeout: 3000,
+        });
     }
 
     public static notifyHelperHired(helper: UndergroundHelper) {

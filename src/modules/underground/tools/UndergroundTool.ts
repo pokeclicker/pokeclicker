@@ -12,6 +12,7 @@ type UndergroundToolProperties = {
 
     durabilityPerUse: number;
     maximumChargesPerMine: number;
+    itemDestroyChance?: number;
 
     customRestoreRateFn?: (tool: UndergroundTool, level: number) => number;
     action: (x: number, y: number) => { coordinatesMined: Array<Coordinate>, success: boolean };
@@ -96,6 +97,10 @@ export default class UndergroundTool {
 
     get charges(): number {
         return this._charges();
+    }
+
+    get itemDestroyChance(): number {
+        return this._toolProperties.itemDestroyChance ?? 0;
     }
 
     get action() {

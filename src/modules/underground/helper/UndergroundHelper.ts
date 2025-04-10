@@ -132,7 +132,7 @@ export class UndergroundHelper {
         const { coordinatesMined, success } = tool.action(x, y);
 
         if (success) {
-            UndergroundController.handleCoordinatesMined(coordinatesMined, this);
+            UndergroundController.handleCoordinatesMined(coordinatesMined, tool.id, this);
         }
     }
 

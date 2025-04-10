@@ -61,7 +61,8 @@ export default class UndergroundTools {
                 displayName: 'Bomb',
                 description: 'Mines a maximum of 2 layers on each of 10 random tiles (including fully mined tiles). The number of tiles increases when equipped with the Explosive Charge Oak Item.',
                 durabilityPerUse: 0.18,
-                maximumChargesPerMine: 25,
+                maximumChargesPerMine: 1000,
+                itemDestroyChance: 1,
                 action: () => {
                     const coordinatesActuallyMined: Array<Coordinate> = [];
                     const baseBombTiles: number = 10;
@@ -164,7 +165,7 @@ export default class UndergroundTools {
 
             if (success) {
                 GameHelper.incrementObservable(App.game.statistics.undergroundToolsUsed[tool.id]);
-                UndergroundController.handleCoordinatesMined(coordinatesMined);
+                UndergroundController.handleCoordinatesMined(coordinatesMined, tool.id);
                 tool.reduceDurabilityByUse();
             }
         }

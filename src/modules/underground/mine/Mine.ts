@@ -365,7 +365,7 @@ export class Mine {
         return false;
     }
 
-    public attemptFindItem(coordinate: Coordinate): { item: UndergroundItem, amount: number } {
+    public attemptFindItem(coordinate: Coordinate): UndergroundItem {
         const digTile: Tile = this.getTileForCoordinate(coordinate);
 
         if (!digTile || !digTile.reward || digTile.layerDepth > 0 || digTile.reward.rewarded) {
@@ -385,16 +385,7 @@ export class Mine {
 
         this._updateItemsFoundObservable();
 
-        const amount = UndergroundController.calculateRewardAmountFromMining();
-
-        App.game.oakItems.use(OakItemType.Treasure_Scanner);
-        GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
-        GameHelper.incrementObservable(App.game.statistics.undergroundSpecificItemsFound[digTile.reward.undergroundItemID], amount);
-
-        return {
-            item: UndergroundItems.getById(digTile.reward.undergroundItemID),
-            amount: amount,
-        };
+        return UndergroundItems.getById(digTile.reward.undergroundItemID);
     }
 
     public attemptCompleteLayer(): boolean {
