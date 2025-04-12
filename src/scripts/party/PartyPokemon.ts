@@ -341,7 +341,7 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        const diff = amount - this.vitaminsUsed[vitamin]();
+        const diff = Math.floor(amount) - this.vitaminsUsed[vitamin]();
         if (diff === 0) {
             return;
         } else if (diff > 0) {
