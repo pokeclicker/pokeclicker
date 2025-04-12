@@ -133,7 +133,7 @@
 
                                     <knockout class="align-middle d-inline-block border border-secondary rounded" style="width: 2rem; overflow: hidden;" data-bind="text: $parent.vitaminsUsed[$data], event: {
                                         blur: (data, event) => { $parent.setVitaminAmount($data, +event.currentTarget.textContent); $parent.vitaminsUsed[$data].notifySubscribers(); window.getSelection().empty(); }
-                                    }" contenteditable="plaintext-only" tabindex="1" onfocus="window.getSelection().selectAllChildren(this)">0</knockout>
+                                    }, attr: { contenteditable: $parent.breeding ? false : 'plaintext-only' }" tabindex="1" onfocus="window.getSelection().selectAllChildren(this)">0</knockout>
 
                                     <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" tabindex="-1" style="line-height: 0.6; font-size: 1rem;"
                                         data-bind="
