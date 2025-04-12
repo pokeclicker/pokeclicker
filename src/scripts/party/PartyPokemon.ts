@@ -336,6 +336,26 @@ class PartyPokemon implements Saveable {
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
     }
 
+    public updateVitamin(vitamin: GameConstants.VitaminType, amount: number) {
+        if (this.breeding || isNaN(amount) || amount < 0) {
+            return;
+        }
+
+        const origAmount = this.vitaminsUsed[vitamin]();
+        const usesRemaining = this.vitaminUsesRemaining() + origAmount;
+        amount = Math.min(amount, player.itemList[GameConstants.VitaminType[vitamin]](), usesRemaining);
+
+        if (amount === origAmount) {
+            return;
+        }
+
+        if (amount > origAmount) {
+            this.useVitamin(vitamin, amount - origAmount);
+        } else {
+            this.removeVitamin(vitamin, origAmount - amount);
+        }
+    }
+
     public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
         const itemName = GameConstants.ConsumableType[type];
         if (!player.itemList[itemName]()) {
