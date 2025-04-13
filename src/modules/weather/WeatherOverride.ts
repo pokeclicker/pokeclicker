@@ -2,9 +2,10 @@ import { Feature } from '../DataStore/common/Feature';
 import WeatherType from './WeatherType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
-import { HOUR, MINUTE, Region } from '../GameConstants';
+import {HOUR, MINUTE, Region, SECOND} from '../GameConstants';
 import { Observable } from 'knockout';
 import GameHelper from '../GameHelper';
+import Weather from './Weather';
 
 export class WeatherOverride implements Feature {
     name = 'Weather Override';
@@ -102,7 +103,7 @@ export class WeatherOverride implements Feature {
 
         WeatherOverride.weatherCost[weatherType].forEach(cost => {
             const { item, amount } = cost;
-            player.loseItem(item.name, amount * multiplier);
+            player.loseItem(item.name, Math.floor(amount * multiplier));
         });
 
         // TODO : Add the cycles to the _costModifiers
@@ -119,17 +120,31 @@ export class WeatherOverride implements Feature {
         return WeatherOverride.weatherCost[weatherType].every(cost => {
             const { item, amount } = cost;
 
-            return player.itemList[item.name]() >= amount * multiplier;
+            return player.itemList[item.name]() >= Math.floor(amount * multiplier);
         });
     }
 
+    public getAllowedWeather(region: Region): WeatherType[] {
+        return Weather.weatherDistribution[region] || GameHelper.enumNumbers(WeatherType);
+    }
+
     public isWeatherAllowedInRegion(region: Region, weatherType: WeatherType): boolean {
-        // TODO : Check if this weather is allowed in this region
-        return true;
+        return this.getAllowedWeather(region).includes(weatherType);
     }
 
     public calculateCostMultiplier(region: Region, cycles: number): number {
-        return Math.floor(Math.min(this._costModifier[region](), 0) / WeatherOverride.CYLCE_TIME) + cycles;
+        const totalCycles = Math.floor(Math.min(this._costModifier[region](), 0) / WeatherOverride.CYLCE_TIME) + cycles;
+
+        // Magic number calculated as follows:
+        // 5 minutes: 100 fragments
+        // 60 minutes: 12,000 fragments
+        // This results in 1 hour of weather equal to 1 hour of mining UG
+        // 12000 = 100 * 12 * x ^ 11
+        // This can be simplified as Math.pow(10, 1 / 11)
+        const magicNumber = 1.2328467394420661;
+
+        // Cost per cycle is capped after the hour
+        return totalCycles * magicNumber ** (Math.min(totalCycles, 12) - 1);
     }
 
     public reduceCostModifierInHours(hours: number) {
