@@ -28,7 +28,7 @@ import type CssVariableSetting from './settings/CssVariableSetting';
 import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
-import type { SpecialEventTitleType } from './specialEvents/SpecialEventTitleType';
+import type SpecialEvents from './specialEvents/SpecialEvents';
 import type PokemonType from './enums/PokemonType';
 import type WeatherType from './weather/WeatherType';
 import type { MultiplierDecreaser } from './items/types';
@@ -36,7 +36,7 @@ import type BagItem from './interfaces/BagItem';
 import type BattlePokemon from './battles/BattlePokemon';
 
 /*
-    These types are only temporary while we are converting things to modules. As things are converted, 
+    These types are only temporary while we are converting things to modules. As things are converted,
     we should import their types here for use, instead of these cheap imitations.
 
     When a file is converted to a module, the types for any /scripts dependencies should be added here
@@ -80,7 +80,7 @@ import type BattlePokemon from './battles/BattlePokemon';
         }
         Example2 satisfies TmpExample2Type;
 
-    If a class has both static and instance properties, it needs separate types for each. 
+    If a class has both static and instance properties, it needs separate types for each.
 
 */
 
@@ -126,7 +126,7 @@ export type TmpGameType = {
     redeemableCodes: TmpRedeemableCodesType;
     statistics: Statistics;
     quests: TmpQuestsType;
-    specialEvents: TmpSpecialEventsType;
+    specialEvents: SpecialEvents;
     discord: TmpDiscordType;
     achievementTracker: TmpAchievementTrackerType;
     challenges: Challenges;
@@ -357,10 +357,6 @@ export type TmpBagHandlerType = {
     displayName(item: BagItem): string;
     image(item: BagItem): string;
     gainItem(item: BagItem, amount?: number): void;
-};
-
-export type TmpSpecialEventsType = {
-    getEvent: (eventName: SpecialEventTitleType) => any
 };
 
 export type TmpTemporaryBattleListType = {
