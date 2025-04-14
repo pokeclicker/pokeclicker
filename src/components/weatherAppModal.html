@@ -74,15 +74,15 @@
 
                     <hr>
 
-                    <div class="mb-2">
-                        <!-- ko using: GameHelper.enumNumbers(GameConstants.Region).filter((r) => r >= 0 && r <= player.highestRegion()), as: 'regions' -->
-                        <label for="weather-override-region-select">Select region</label>
-                        <select id="weather-override-region-select" autocomplete="off" class="custom-select" data-bind="
-                            options: regions.map(region => ({ value: region, text: GameConstants.camelCaseToString(GameConstants.Region[region]) })),
-                            optionsValue: 'value',
-                            optionsText: 'text',
-                            value: WeatherOverride.selectedRegion">
-                        </select>
+                    <div class="mb-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.25rem;">
+                        <!-- ko foreach: GameHelper.enumNumbers(GameConstants.Region).filter(r => r >= 0 && r <= GameConstants.MAX_AVAILABLE_REGION) -->
+                        <div class="card clickable" data-bind="click: () => { WeatherOverride.selectedRegion = $data }">
+                            <div class="card-body bg-secondary rounded text-center p-1" data-bind="css: { 'bg-info': $data === WeatherOverride.selectedRegion }">
+                                <div class="d-flex flex-column align-items-center p-1">
+                                    <h6 class="card-title m-0" data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[$data])"></h6>
+                                </div>
+                            </div>
+                        </div>
                         <!-- /ko -->
                     </div>
 
