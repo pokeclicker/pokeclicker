@@ -63,6 +63,8 @@ export class WeatherOverride implements Feature {
         ],
     };
 
+    private static _selectedRegion: Observable<Region> = ko.observable(Region.kanto);
+    private static _selectedCycles: Observable<number> = ko.observable(1).extend({ numeric: 0 });
     private _costModifier: { [region in Region]?: Observable<number> } = {};
     private _overrides: { [region in Region]?: { weather: Observable<WeatherType | null>, time: Observable<number> } } = {};
 
@@ -110,8 +112,15 @@ export class WeatherOverride implements Feature {
         GameHelper.incrementObservable(this._costModifier[region], cycles * WeatherOverride.CYLCE_TIME);
 
         // TODO : Add the time to the _overrides
+        if (this._overrides[region].weather() === weatherType) {
+            // Extend if it's the same weather
+            this._overrides[region].time(this._overrides[region].time() + cycles * WeatherOverride.CYLCE_TIME);
+        } else {
+            this._overrides[region].time(cycles * WeatherOverride.CYLCE_TIME);
+        }
+
+        // TODO : Change the weather
         this._overrides[region].weather(weatherType);
-        this._overrides[region].time(cycles * WeatherOverride.CYLCE_TIME);
 
         // TODO : Notify the player
     }
@@ -133,7 +142,7 @@ export class WeatherOverride implements Feature {
     }
 
     public calculateCostMultiplier(region: Region, cycles: number): number {
-        const totalCycles = Math.floor(Math.min(this._costModifier[region](), 0) / WeatherOverride.CYLCE_TIME) + cycles;
+        const totalCycles = Math.floor(Math.max(this._costModifier[region](), 0) / WeatherOverride.CYLCE_TIME) + cycles;
 
         // Magic number calculated as follows:
         // 5 minutes: 100 fragments
@@ -156,6 +165,26 @@ export class WeatherOverride implements Feature {
 
     public getWeatherForRegion(region: Region): WeatherType | null {
         return this._overrides[region]?.weather() ?? null;
+    }
+
+    public getTimeForRegion(region: Region): number | null {
+        return this._overrides[region]?.time() ?? null;
+    }
+
+    static get selectedRegion(): Region {
+        return this._selectedRegion();
+    }
+
+    static set selectedRegion(region: Region) {
+        this._selectedRegion(region);
+    }
+
+    static get selectedCycles(): number {
+        return this._selectedCycles();
+    }
+
+    static set selectedCycles(cycles: number) {
+        this._selectedCycles(+cycles);
     }
 
     toJSON(): Record<string, any> {
