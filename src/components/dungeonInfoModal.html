@@ -30,6 +30,13 @@
                                                 placement: 'bottom',
                                                 trigger: 'hover'
                                             }, visible: item.requirement && !item.requirement.isCompleted()" />
+                                            <knockout class="h4 text-success no-emoji-font mr-2 mb-0 align-self-center" data-bind="
+                                                visible: DungeonRunner.isDungeonDebuffed(player.town.dungeon) && item.ignoreDebuff && (item.requirement?.isCompleted() ?? true),
+                                                tooltip: {
+                                                    title: 'The odds for this item are preserved despite the dungeon being debuffed.',
+                                                    trigger: 'hover',
+                                                }">⚠
+                                            </knockout>
                                         </div>
                                     <!-- /ko -->
                                 <!-- /ko -->
