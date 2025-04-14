@@ -78,14 +78,21 @@
             <!-- ko foreach: App.game.underground.helpers.hired() -->
             <div class="row">
                 <div class="col p-2">
-                    <div class="d-flex justify-content-center">
-                        <div class="d-flex align-items-center justify-content-center position-relative">
-                            <!-- ko foreach: $data.images -->
-                            <img class="pixelated" data-bind="attr: { src: $data }" src="" alt="">
-                            <!-- /ko -->
-                            <!-- ko if: $data.hasStolenItem(600) -->
-                            <img class="pixelated position-absolute" src="assets/images/pokemon/25.23.png" alt="" style="width: 24px; right: -16px; bottom: -10px;">
-                            <!-- /ko -->
+                    <div class="d-flex flex-wrap align-items-center justify-content-center">
+                        <div class="d-flex justify-content-center">
+                            <div class="d-flex align-items-center justify-content-center position-relative">
+                                <!-- ko foreach: $data.images -->
+                                <img class="pixelated" data-bind="attr: { src: $data }" src="" alt="">
+                                <!-- /ko -->
+                                <!-- ko if: $data.hasStolenItem(600) -->
+                                <img class="pixelated position-absolute" src="assets/images/pokemon/25.23.png" alt="" style="width: 24px; right: -16px; bottom: -10px;">
+                                <!-- /ko -->
+                            </div>
+                        </div>
+
+                        <div class="mx-2">
+                            <div style="line-height: 1.2rem;" data-bind="text: $data.name"></div>
+                            <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: `Level ${$data.level}`"></div>
                         </div>
                     </div>
 

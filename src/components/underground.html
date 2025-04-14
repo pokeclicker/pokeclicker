@@ -871,8 +871,11 @@
                                     <!-- /ko -->
                                 </div>
 
-                                <div class="m-2">
-                                    <span data-bind="text: $data.name"></span>
+                                <div class="d-flex flex-wrap align-items-center m-2">
+                                    <div>
+                                        <div style="line-height: 1.2rem;" data-bind="text: $data.name"></div>
+                                        <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: `Level ${$data.level}`"></div>
+                                    </div>
                                     <!-- ko ifnot: $data.selectedEnergyRestore() < 0 -->
                                     <img class="pixelated" data-bind="attr: { src: ItemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore()]].image }" src="" alt="" style="height: 26px;">
                                     <span data-bind="text: `× ${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore()]]().toLocaleString('en-US')}`"></span>
