@@ -1,11 +1,16 @@
-import { Feature } from '../DataStore/common/Feature';
+import {Feature} from '../DataStore/common/Feature';
 import WeatherType from './WeatherType';
 import Item from '../items/Item';
-import { ItemList } from '../items/ItemList';
-import {HOUR, MINUTE, Region, SECOND} from '../GameConstants';
-import { Observable } from 'knockout';
+import {ItemList} from '../items/ItemList';
+import {HOUR, MINUTE, Region} from '../GameConstants';
+import {Observable} from 'knockout';
 import GameHelper from '../GameHelper';
 import Weather from './Weather';
+import Requirement from '../requirements/Requirement';
+import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
+import BadgeEnums from '../enums/Badges';
+import MultiRequirement from '../requirements/MultiRequirement';
+import UndergroundLevelRequirement from '../requirements/UndergroundLevelRequirement';
 
 export class WeatherOverride implements Feature {
     name = 'Weather Override';
@@ -15,7 +20,7 @@ export class WeatherOverride implements Feature {
 
     };
 
-    public static CYLCE_TIME = 5 * MINUTE / 1000;
+    public static CYCLE_TIME = 5 * MINUTE / 1000;
 
     public static weatherCost: { [weather in WeatherType]?: Array<{ item: Item, amount: number }> } = {
         [WeatherType.Clear]: [
@@ -61,6 +66,17 @@ export class WeatherOverride implements Feature {
             { item: ItemList.Damp_rock_fragment, amount: 35 },
             { item: ItemList.Heat_rock_fragment, amount: 65 },
         ],
+    };
+
+    public static overrideRequirements: { [region in Region]?: Requirement } = {
+        [Region.kanto]: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion),
+        [Region.johto]: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
+        [Region.hoenn]: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
+        [Region.sinnoh]: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
+        [Region.unova]: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+        [Region.kalos]: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+        [Region.alola]: new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
+        [Region.galar]: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new UndergroundLevelRequirement(100)]),
     };
 
     private static _selectedRegion: Observable<Region> = ko.observable(Region.kanto);
@@ -109,14 +125,14 @@ export class WeatherOverride implements Feature {
         });
 
         // TODO : Add the cycles to the _costModifiers
-        GameHelper.incrementObservable(this._costModifier[region], cycles * WeatherOverride.CYLCE_TIME);
+        GameHelper.incrementObservable(this._costModifier[region], cycles * WeatherOverride.CYCLE_TIME);
 
         // TODO : Add the time to the _overrides
         if (this._overrides[region].weather() === weatherType) {
             // Extend if it's the same weather
-            this._overrides[region].time(this._overrides[region].time() + cycles * WeatherOverride.CYLCE_TIME);
+            this._overrides[region].time(this._overrides[region].time() + cycles * WeatherOverride.CYCLE_TIME);
         } else {
-            this._overrides[region].time(cycles * WeatherOverride.CYLCE_TIME);
+            this._overrides[region].time(cycles * WeatherOverride.CYCLE_TIME);
         }
 
         // TODO : Change the weather
@@ -142,7 +158,7 @@ export class WeatherOverride implements Feature {
     }
 
     public calculateCostMultiplier(region: Region, cycles: number): number {
-        const totalCycles = Math.floor(Math.max(this._costModifier[region](), 0) / WeatherOverride.CYLCE_TIME) + cycles;
+        const totalCycles = Math.floor(Math.max(this._costModifier[region](), 0) / WeatherOverride.CYCLE_TIME) + cycles;
 
         // Magic number calculated as follows:
         // 5 minutes: 100 fragments
