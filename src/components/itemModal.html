@@ -308,21 +308,23 @@
                             </div>
 
                             <div class="oak-item-info">
+                                <!-- ko with: App.game.keyItems.itemList.find(k=> k.id == KeyItemController.inspectedItem()) -->
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
-                                        <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem()].displayName"></span></b>
+                                        <b><span data-bind="text: $data.displayName"></span></b>
                                     </div>
                                 </div>
                                 <div class="row justify-content-sm-center">
                                     <div class="col-xs-10">
                                         <knockout data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
-                                            <p data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem()].description"></p>
+                                            <p data-bind="html: $data.description"></p>
                                         </knockout>
                                         <knockout data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem())">
                                             <p>?????</p>
                                         </knockout>
                                     </div>
                                 </div>
+                                <!-- /ko -->
                             </div>
                         </div>
                     </div>

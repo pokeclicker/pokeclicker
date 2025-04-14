@@ -8,7 +8,6 @@
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
-///<reference path="../gym/GymPokemon.ts"/>
 
 interface EnemyOptions {
     weight?: number,
@@ -177,6 +176,10 @@ class Dungeon {
                 return false;
             }).map(b => <DungeonBossPokemon>b);
         }
+    }
+
+    public hasUnlockedBoss(): boolean {
+        return this.bossList.some(boss => boss.options?.requirement?.isCompleted() ?? true);
     }
 
     /**
@@ -3847,7 +3850,7 @@ dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
     },
     500000,
     [
-        new DungeonBossPokemon('Golbat', 4500000, 20, {hide: true, requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8, GameConstants.AchievementOption.less)}),
+        new DungeonBossPokemon('Golbat', 4500000, 20, {weight: 0.25}),
         new DungeonBossPokemon('Regirock', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
         new DungeonBossPokemon('Regice', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
         new DungeonBossPokemon('Registeel', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
