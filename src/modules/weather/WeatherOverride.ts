@@ -1,9 +1,9 @@
-import {Feature} from '../DataStore/common/Feature';
+import { Feature } from '../DataStore/common/Feature';
 import WeatherType from './WeatherType';
 import Item from '../items/Item';
-import {ItemList} from '../items/ItemList';
-import {camelCaseToString, HOUR, humanifyString, MINUTE, Region} from '../GameConstants';
-import {Observable} from 'knockout';
+import { ItemList } from '../items/ItemList';
+import { camelCaseToString, HOUR, humanifyString, MINUTE, Region } from '../GameConstants';
+import { Observable } from 'knockout';
 import GameHelper from '../GameHelper';
 import Weather from './Weather';
 import Requirement from '../requirements/Requirement';
