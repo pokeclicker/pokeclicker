@@ -214,13 +214,15 @@ export class WeatherOverride implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-
+            selectedCycles: WeatherOverride.selectedCycles,
+            selectedRegion: WeatherOverride.selectedRegion,
         };
     }
 
     fromJSON(json: Record<string, any>) {
         if (json !== null) {
-
+            WeatherOverride.selectedCycles = json.selectedCycles ?? 1;
+            WeatherOverride.selectedRegion = json.selectedRegion ?? Region.kanto;
         }
     }
 }
