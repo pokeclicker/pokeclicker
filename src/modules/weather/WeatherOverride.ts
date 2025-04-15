@@ -213,9 +213,28 @@ export class WeatherOverride implements Feature {
     }
 
     toJSON(): Record<string, any> {
+        const overrides = {};
+        Object.entries(this._overrides).forEach(([key, value]) => {
+            if (value.weather() !== null) {
+                overrides[key] = {
+                    weather: value.weather(),
+                    time: value.time(),
+                };
+            }
+        });
+
+        const costModifiers = {};
+        Object.entries(this._costModifier).forEach(([key, value]) => {
+            if (value() > 0) {
+                costModifiers[key] = value();
+            }
+        });
+
         return {
             selectedCycles: WeatherOverride.selectedCycles,
             selectedRegion: WeatherOverride.selectedRegion,
+            overrides: overrides,
+            costModifiers: costModifiers,
         };
     }
 
@@ -223,6 +242,15 @@ export class WeatherOverride implements Feature {
         if (json !== null) {
             WeatherOverride.selectedCycles = json.selectedCycles ?? 1;
             WeatherOverride.selectedRegion = json.selectedRegion ?? Region.kanto;
+
+            Object.keys(this._overrides).forEach(value => {
+                this._overrides[value].weather(json.overrides[value]?.weather ?? null);
+                this._overrides[value].time(json.overrides[value]?.time ?? 0);
+            });
+
+            Object.keys(this._costModifier).forEach(value => {
+                this._costModifier[value](json.costModifiers[value] ?? 0);
+            });
         }
     }
 }
