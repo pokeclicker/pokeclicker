@@ -2,7 +2,7 @@ import {Feature} from '../DataStore/common/Feature';
 import WeatherType from './WeatherType';
 import Item from '../items/Item';
 import {ItemList} from '../items/ItemList';
-import {HOUR, MINUTE, Region} from '../GameConstants';
+import {camelCaseToString, HOUR, humanifyString, MINUTE, Region} from '../GameConstants';
 import {Observable} from 'knockout';
 import GameHelper from '../GameHelper';
 import Weather from './Weather';
@@ -11,6 +11,8 @@ import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import BadgeEnums from '../enums/Badges';
 import MultiRequirement from '../requirements/MultiRequirement';
 import UndergroundLevelRequirement from '../requirements/UndergroundLevelRequirement';
+import Notifier from '../notifications/Notifier';
+import NotificationOption from '../notifications/NotificationOption';
 
 export class WeatherOverride implements Feature {
     name = 'Weather Override';
@@ -107,12 +109,18 @@ export class WeatherOverride implements Feature {
 
     public purchaseWeatherOverride(region: Region, weatherType: WeatherType, cycles: number) {
         if (!this.isWeatherAllowedInRegion(region, weatherType)) {
-            // TODO : Notify the player
+            Notifier.warning({
+                title: 'Weather',
+                message: `${humanifyString(WeatherType[weatherType])} cannot occur in ${camelCaseToString(Region[region])}`,
+            });
             return;
         }
 
         if (!this.canAffordWeather(region, weatherType, cycles)) {
-            // TODO : Notify the player
+            Notifier.warning({
+                title: 'Weather',
+                message: `You cannot afford to activate ${humanifyString(WeatherType[weatherType])} in ${camelCaseToString(Region[region])}`,
+            });
             return;
         }
 
@@ -121,10 +129,8 @@ export class WeatherOverride implements Feature {
             player.loseItem(item.name, this.calculatePrice(region, weatherType, cycles));
         });
 
-        // TODO : Add the cycles to the _costModifiers
         GameHelper.incrementObservable(this._costModifier[region], cycles * WeatherOverride.CYCLE_TIME);
 
-        // TODO : Add the time to the _overrides
         if (this._overrides[region].weather() === weatherType) {
             // Extend if it's the same weather
             this._overrides[region].time(this._overrides[region].time() + cycles * WeatherOverride.CYCLE_TIME);
@@ -132,10 +138,13 @@ export class WeatherOverride implements Feature {
             this._overrides[region].time(cycles * WeatherOverride.CYCLE_TIME);
         }
 
-        // TODO : Change the weather
         this._overrides[region].weather(weatherType);
 
-        // TODO : Notify the player
+        Notifier.notify({
+            title: 'Weather',
+            message: `The weather in ${camelCaseToString(Region[region])} has changed to ${humanifyString(WeatherType[weatherType])}`,
+            type: NotificationOption.success,
+        });
     }
 
     public canAffordWeather(region: Region, weatherType: WeatherType, cycles: number): boolean {
@@ -174,7 +183,6 @@ export class WeatherOverride implements Feature {
     }
 
     public reduceCostModifierInHours(hours: number) {
-        // TODO : Reduce the _costModifiers
         Object.values(this._costModifier).forEach(modifier => {
             modifier(Math.max(modifier() - hours * HOUR / 1000, 0));
         });

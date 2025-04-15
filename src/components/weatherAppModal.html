@@ -95,21 +95,27 @@
                         <!-- /ko -->
                     </div>
 
-                    <div>Select cycles</div>
+                    <h4>Cycles</h4>
 
-                    <div class="input-group">
-                        <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => WeatherOverride.selectedCycles = 1">Reset</button>
-                        <input type="number" min="1" class="outline-dark form-control form-control-number" oninput="this.value = Math.max(this.value, 1)" data-bind="textInput: WeatherOverride.selectedCycles">
-                        <div>
-                            <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME * WeatherOverride.selectedCycles)"></code>
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-9">
+                            <div class="input-group">
+                                <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => WeatherOverride.selectedCycles = 1">Reset</button>
+                                <input type="number" min="1" class="outline-dark form-control form-control-number" oninput="this.value = Math.max(this.value, 1)" data-bind="textInput: WeatherOverride.selectedCycles">
+                            </div>
                         </div>
+                        <div class="col-12 col-md-3">Time: <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME * WeatherOverride.selectedCycles)"></code></div>
                     </div>
 
-                    <div>
-                        Override time remaining: <knockout data-bind="text: GameConstants.formatTime(App.game.weatherOverride.getTimeForRegion(WeatherOverride.selectedRegion) ?? 0)"></knockout>
-                    </div>
+                    <div class="small">1 cycle equals <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME)"></code></div>
 
-                    <table class="table table-striped table-hover table-bordered table-sm m-0">
+                    <!-- ko if: (App.game.weatherOverride.getTimeForRegion(WeatherOverride.selectedRegion) ?? 0) > 0 -->
+                    <div class="m-2">
+                        Current weather override active for <code data-bind="text: GameConstants.formatTime(App.game.weatherOverride.getTimeForRegion(WeatherOverride.selectedRegion) ?? 0)"></code>
+                    </div>
+                    <!-- /ko -->
+
+                    <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
                         <tbody>
                         <!-- ko foreach: { data: App.game.weatherOverride.getAllowedWeather(WeatherOverride.selectedRegion), as: 'weatherType' } -->
                         <tr data-bind="
@@ -127,22 +133,47 @@
                                 <!-- ko foreach: WeatherOverride.weatherCost[weatherType] -->
                                 <div class="d-flex" style="gap: 1rem;">
                                     <div><img data-bind="attr: { src: $data.item.image }" height="24px"></div>
-                                    <div class="text-left" data-bind="text: `${App.game.weatherOverride.calculatePrice(WeatherOverride.selectedRegion, $data.amount, WeatherOverride.selectedCycles).toLocaleString('en-US')} × ${$data.item.displayName}`"></div>
+                                    <div class="text-left" data-bind="
+                                        text: `${App.game.weatherOverride.calculatePrice(WeatherOverride.selectedRegion, $data.amount, WeatherOverride.selectedCycles).toLocaleString('en-US')} × ${$data.item.displayName}`,
+                                        css: { 'text-danger': App.game.weatherOverride.calculatePrice(WeatherOverride.selectedRegion, $data.amount, WeatherOverride.selectedCycles) > player.itemList[$data.item.name]() }
+                                    "></div>
                                 </div>
                                 <!-- /ko -->
                             </td>
                             <td class="vertical-middle">
+                                <!-- ko if: weatherType === Weather.getRegionalWeather(WeatherOverride.selectedRegion) -->
+                                    <!-- ko if: weatherType === App.game.weatherOverride.getWeatherForRegion(WeatherOverride.selectedRegion) -->
+                                    <button class="btn btn-secondary" data-bind="
+                                        click: () => { App.game.weatherOverride.purchaseWeatherOverride(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles) },
+                                        enable: App.game.weatherOverride.canAffordWeather(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles)
+                                    ">
+                                        Extend
+                                    </button>
+                                    <!-- /ko -->
+
+                                    <!-- ko ifnot: weatherType === App.game.weatherOverride.getWeatherForRegion(WeatherOverride.selectedRegion) -->
+                                    <code>Active weather</code>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+
+                                <!-- ko ifnot: weatherType === Weather.getRegionalWeather(WeatherOverride.selectedRegion) -->
                                 <button class="btn btn-secondary" data-bind="
                                     click: () => { App.game.weatherOverride.purchaseWeatherOverride(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles) },
                                     enable: App.game.weatherOverride.canAffordWeather(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles)
                                 ">
                                     Activate
                                 </button>
+                                <!-- /ko -->
                             </td>
                         </tr>
                         <!-- /ko -->
                         </tbody>
                     </table>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2 active-weather-highlight">Current weather</div>
+                        <div class="col-12 col-md-6 p-2 original-weather-highlight">Original weather</div>
+                    </div>
                 </div>
             </div>
         </div>
