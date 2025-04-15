@@ -111,17 +111,14 @@ export class WeatherOverride implements Feature {
             return;
         }
 
-        // TODO : Get the calculated cost
-        const multiplier = this.calculateCostMultiplier(region, cycles);
-
-        if (!this.canAffordWeather(weatherType, multiplier)) {
+        if (!this.canAffordWeather(region, weatherType, cycles)) {
             // TODO : Notify the player
             return;
         }
 
         WeatherOverride.weatherCost[weatherType].forEach(cost => {
-            const { item, amount } = cost;
-            player.loseItem(item.name, Math.floor(amount * multiplier));
+            const { item } = cost;
+            player.loseItem(item.name, this.calculatePrice(region, weatherType, cycles));
         });
 
         // TODO : Add the cycles to the _costModifiers
@@ -141,11 +138,11 @@ export class WeatherOverride implements Feature {
         // TODO : Notify the player
     }
 
-    public canAffordWeather(weatherType: WeatherType, multiplier: number): boolean {
+    public canAffordWeather(region: Region, weatherType: WeatherType, cycles: number): boolean {
         return WeatherOverride.weatherCost[weatherType].every(cost => {
             const { item, amount } = cost;
 
-            return player.itemList[item.name]() >= Math.floor(amount * multiplier);
+            return player.itemList[item.name]() >= this.calculatePrice(region, amount, cycles);
         });
     }
 
@@ -157,19 +154,23 @@ export class WeatherOverride implements Feature {
         return this.getAllowedWeather(region).includes(weatherType);
     }
 
-    public calculateCostMultiplier(region: Region, cycles: number): number {
-        const totalCycles = Math.floor(Math.max(this._costModifier[region](), 0) / WeatherOverride.CYCLE_TIME) + cycles;
+    public calculatePrice(region: Region, basePrice: number, cycles: number) {
+        const multiplier = 1.2328467394420661; // Magic number Math.pow(10, 1/11) => x10 base price per 5 minutes at 12+ cycles
+        const multiplierExponentCap = 12;
 
-        // Magic number calculated as follows:
-        // 5 minutes: 100 fragments
-        // 60 minutes: 12,000 fragments
-        // This results in 1 hour of weather equal to 1 hour of mining UG
-        // 12000 = 100 * 12 * x ^ 11
-        // This can be simplified as Math.pow(10, 1 / 11)
-        const magicNumber = 1.2328467394420661;
+        const startAmount = Math.floor(Math.max(this._costModifier[region](), 0) / WeatherOverride.CYCLE_TIME);
+        const endAmount = startAmount + cycles;
 
-        // Cost per cycle is capped after the hour
-        return totalCycles * magicNumber ** (Math.min(totalCycles, 12) - 1);
+        const incrementalStartAmount = Math.min(startAmount, multiplierExponentCap);
+        const incrementalEndAmount = Math.min(endAmount, multiplierExponentCap);
+
+        const incrementalPriceSum = Math.round(basePrice * ((multiplier ** incrementalEndAmount) - (multiplier ** incrementalStartAmount)) / (multiplier - 1));
+
+        const cappedAmount = Math.max(0, endAmount - Math.max(multiplierExponentCap, startAmount));
+        const cappedPricePerItem = basePrice * multiplier ** (multiplierExponentCap - 1);
+        const cappedPriceSum = Math.round(cappedPricePerItem * cappedAmount);
+
+        return incrementalPriceSum + cappedPriceSum;
     }
 
     public reduceCostModifierInHours(hours: number) {

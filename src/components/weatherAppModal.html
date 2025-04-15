@@ -127,14 +127,14 @@
                                 <!-- ko foreach: WeatherOverride.weatherCost[weatherType] -->
                                 <div class="d-flex" style="gap: 1rem;">
                                     <div><img data-bind="attr: { src: $data.item.image }" height="24px"></div>
-                                    <div class="text-left" data-bind="text: `${Math.floor($data.amount * App.game.weatherOverride.calculateCostMultiplier(WeatherOverride.selectedRegion, WeatherOverride.selectedCycles)).toLocaleString('en-US')} × ${$data.item.displayName}`"></div>
+                                    <div class="text-left" data-bind="text: `${App.game.weatherOverride.calculatePrice(WeatherOverride.selectedRegion, $data.amount, WeatherOverride.selectedCycles).toLocaleString('en-US')} × ${$data.item.displayName}`"></div>
                                 </div>
                                 <!-- /ko -->
                             </td>
                             <td class="vertical-middle">
                                 <button class="btn btn-secondary" data-bind="
                                     click: () => { App.game.weatherOverride.purchaseWeatherOverride(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles) },
-                                    enable: App.game.weatherOverride.canAffordWeather(weatherType, App.game.weatherOverride.calculateCostMultiplier(WeatherOverride.selectedRegion, WeatherOverride.selectedCycles))
+                                    enable: App.game.weatherOverride.canAffordWeather(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles)
                                 ">
                                     Activate
                                 </button>
