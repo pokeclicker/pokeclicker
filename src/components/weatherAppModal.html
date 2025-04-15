@@ -120,7 +120,7 @@
                         <!-- ko foreach: { data: App.game.weatherOverride.getAllowedWeather(WeatherOverride.selectedRegion), as: 'weatherType' } -->
                         <tr data-bind="
                             css: {
-                                'active-weather-highlight': weatherType === Weather.getRegionalWeather(WeatherOverride.selectedRegion),
+                                'override-weather-highlight': weatherType === App.game.weatherOverride.getWeatherForRegion(WeatherOverride.selectedRegion),
                                 'original-weather-highlight': weatherType === Weather._regionalWeather[WeatherOverride.selectedRegion]()
                             }
                         ">
@@ -171,8 +171,8 @@
                     </table>
 
                     <div class="row">
-                        <div class="col-12 col-md-6 p-2 active-weather-highlight">Current weather</div>
-                        <div class="col-12 col-md-6 p-2 original-weather-highlight">Original weather</div>
+                        <div class="col-12 col-md-6 p-2 original-weather-highlight">Regional weather</div>
+                        <div class="col-12 col-md-6 p-2 override-weather-highlight">Override weather</div>
                     </div>
                 </div>
             </div>
