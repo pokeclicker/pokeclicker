@@ -1,4 +1,3 @@
-///<reference path="../Battle.ts"/>
 class TemporaryBattleBattle extends Battle {
 
     static index: KnockoutObservable<number> = ko.observable(0);
