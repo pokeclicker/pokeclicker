@@ -5,13 +5,7 @@ class Pokeballs implements Feature {
     name = 'Pokeballs';
     saveKey = 'pokeballs';
 
-    defaults = {
-        alreadyCaughtSelection: GameConstants.Pokeball.None,
-        alreadyCaughtContagiousSelection: GameConstants.Pokeball.None,
-        alreadyCaughtShinySelection: GameConstants.Pokeball.Pokeball,
-        notCaughtSelection: GameConstants.Pokeball.Pokeball,
-        notCaughtShinySelection: GameConstants.Pokeball.Pokeball,
-    };
+    defaults = {};
 
     public pokeballs: Pokeball[];
 

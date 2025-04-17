@@ -1,8 +1,8 @@
-/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+import { Feature } from '../DataStore/common/Feature';
+import SpecialEvent, { EventCallback } from './SpecialEvent';
+import type { SpecialEventTitleType } from './SpecialEventTitleType';
 
-class SpecialEvents implements Feature, TmpSpecialEventsType {
+export default class SpecialEvents implements Feature {
     name = 'Events';
     saveKey = 'events';
     defaults: Record<string, any>;
@@ -10,15 +10,15 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
 
     public events: SpecialEvent[] = [];
 
-    public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback, hideFromEventCalendar = false) {
+    constructor() {
+        this.addEvents();
+    }
+
+    public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar = false) {
         // Check if the event exist before adding it again
         if (!this.events.find(event => event.title == title)) {
             this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar));
         }
-    }
-
-    constructor() {
-        this.addEvents();
     }
 
     initialize(): void {
@@ -88,7 +88,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 1, 7, 23), () => {
-            }
+            },
         );
         //Hoopa Day
         /*
@@ -101,7 +101,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 3, 2, 1), () => {
-            }
+            },
         );
         // Easter
         // QuestLineHelper.ts: Introduction questline; 'Egg Hunt'
@@ -112,7 +112,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 3, 29, 23), () => {
-            }
+            },
         );
         /* Golden Week
         Dungeon.ts:
@@ -124,7 +124,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 4, 6, 23), () => {
-            }
+            },
         );
         /* First Event
         RoamingPokemonList.ts:
@@ -137,7 +137,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 6, 12, 23), () => {
-            }
+            },
         );
         /* Pokemon the first movie release date
         RoamingPokemonList.ts:
@@ -155,7 +155,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 6, 24, 23), () => {
-            }
+            },
         );
         // Halloween
         this.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
@@ -164,7 +164,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 10, 5, 23), () => {
-            }
+            },
         );
         /* Let's Go P/E release date
         RoamingPokemonList.ts:
@@ -177,7 +177,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 10, 23, 23), () => {
-            }
+            },
         );
         /* Christmas
         RoamingPokemonList.ts:
@@ -197,7 +197,7 @@ class SpecialEvents implements Feature, TmpSpecialEventsType {
             },
             // End
             new Date(new Date().getFullYear(), 11, 31, 23), () => {
-            }
+            },
         );
     }
 }
