@@ -9,8 +9,6 @@ import Weather from './Weather';
 import Requirement from '../requirements/Requirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import BadgeEnums from '../enums/Badges';
-import MultiRequirement from '../requirements/MultiRequirement';
-import UndergroundLevelRequirement from '../requirements/UndergroundLevelRequirement';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 
