@@ -78,7 +78,7 @@ export class WeatherOverride implements Feature {
         [Region.unova]: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
         [Region.kalos]: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
         [Region.alola]: new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
-        [Region.galar]: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new UndergroundLevelRequirement(100)]),
+        [Region.galar]: new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
     };
 
     private static _selectedRegion: Observable<Region> = ko.observable(Region.kanto);
@@ -125,8 +125,8 @@ export class WeatherOverride implements Feature {
         }
 
         WeatherOverride.weatherCost[weatherType].forEach(cost => {
-            const { item } = cost;
-            player.loseItem(item.name, this.calculatePrice(region, weatherType, cycles));
+            const { item, amount } = cost;
+            player.loseItem(item.name, this.calculatePrice(region, amount, cycles));
         });
 
         GameHelper.incrementObservable(this._costModifier[region], cycles * WeatherOverride.CYCLE_TIME);
