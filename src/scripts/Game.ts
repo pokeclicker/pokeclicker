@@ -64,7 +64,7 @@ class Game implements TmpGameType {
         this.wallet = new Wallet(this.multiplier);
         this.keyItems = new KeyItems();
         this.badgeCase = new BadgeCase();
-        this.oakItems = new OakItems([20, 50, 100], this.multiplier);
+        this.oakItems = new OakItems([new CaughtPokemonRequirement(20), new CaughtPokemonRequirement(50), new CaughtPokemonRequirement(100)], this.multiplier);
         this.oakItemLoadouts = new OakItemLoadouts();
         this.categories = new PokemonCategories();
         this.party = new Party(this.multiplier);

@@ -55,8 +55,7 @@ export class UndergroundController {
             return 1;
         }
 
-        // Treasure scanner bonus is listed as integers, so we need to divide by 100
-        const treasureScannerChance = App.game.oakItems.calculateBonus(OakItemType.Treasure_Scanner) / 100;
+        const treasureScannerChance = App.game.oakItems.calculateBonus(OakItemType.Treasure_Scanner);
 
         let amount = 1;
         while (Rand.chance(treasureScannerChance)) {

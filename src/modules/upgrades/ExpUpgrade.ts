@@ -1,8 +1,12 @@
 import {
-    Observable as KnockoutObservable,
+    Observable as KnockoutObservable, PureComputed,
 } from 'knockout';
-import Amount from '../wallet/Amount';
-import Upgrade from './Upgrade';
+import Upgrade, {UpgradeProperties} from './Upgrade';
+
+export type ExpUpgradeProperties = UpgradeProperties & {
+    experienceList: number[];
+    allowExperienceOverflow?: boolean;
+};
 
 /**
  * An upgrade that requires experience to level up.
@@ -11,65 +15,72 @@ export default class ExpUpgrade extends Upgrade {
     defaults = {
         level: 0,
         exp: 0,
+        allowExperienceOverflow: false,
     };
 
-    expList: number[];
+    private readonly _experienceList: number[];
+    private readonly _allowExperienceOverflow: boolean = false;
 
-    private expKO: KnockoutObservable<number>;
+    private _experience: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
+    public isUpgradeAvailable: PureComputed<boolean> = ko.pureComputed(() => this.hasEnoughExp(this.level + 1) && !this.isMaxLevel());
 
-    constructor(name: any, displayName: string, maxLevel: number, expList: number[], costList: Amount[], bonusList: number[], increasing: boolean) {
-        super(name, displayName, maxLevel, costList, bonusList, increasing);
-        this.expList = expList;
-        this.expKO = ko.observable(0);
+    constructor(properties: ExpUpgradeProperties) {
+        super(properties);
+        this._experienceList = properties.experienceList;
+        this._allowExperienceOverflow = properties.allowExperienceOverflow ?? this.defaults.allowExperienceOverflow;
+        this._experience = ko.observable(0);
     }
 
-    gainExp(exp: number) {
-        this.exp = Math.min(this.expList[this.level], this.exp + exp);
+    gainExp(experience: number) {
+        if (this._allowExperienceOverflow) {
+            this.experience += experience;
+        } else if (this.experience < this._experienceList[this.level + 1]) {
+            this.experience = Math.min(this._experienceList[this.level + 1], this.experience + experience);
+        }
     }
 
-    canBuy(): boolean {
-        return super.canBuy() && this.hasEnoughExp();
+    canBuy(level: number = this.level): boolean {
+        return super.canBuy(level) && this.hasEnoughExp(level);
     }
 
-    hasEnoughExp() {
-        return this.exp >= this.expList[this.level];
+    hasEnoughExp(level: number = this.level) {
+        return this.experience >= this._experienceList[level];
+    }
+
+    public getExperienceForLevel(level: number = this.level): number {
+        return this._experienceList[level];
+    }
+
+    get experiencePercentage(): number {
+        return Math.min(1, this.experience / this._experienceList[this.level + 1]);
+    }
+
+    get normalizedExperiencePercentage(): number {
+        return this.normalizedExperience / (this._experienceList[this.level + 1] - this._experienceList[this.level]);
+    }
+
+    get normalizedExperience(): number {
+        if (this.level === 0)
+            return this.experience;
+        return Math.min(Math.max(this.experience - this._experienceList[this.level], 0), this._experienceList[this.level + 1] - this._experienceList[this.level]);
+    }
+
+    get experience() {
+        return this._experience();
+    }
+
+    private set experience(exp: number) {
+        this._experience(exp);
     }
 
     toJSON(): Record<string, any> {
         const json = super.toJSON();
-        json.exp = this.exp;
+        json.exp = this.experience;
         return json;
     }
 
     fromJSON(json: Record<string, any>): void {
         super.fromJSON(json);
-        this.exp = json.exp ?? this.defaults.exp;
-    }
-
-    // Knockout getters/setters
-    get normalizedExp() {
-        if (this.level === 0) {
-            return this.exp;
-        }
-        return this.exp - this.expList[this.level - 1];
-    }
-
-    get expPercentage() {
-        const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return (Math.round(this.normalizedExp) / nextLevelExp) * 100;
-    }
-
-    get progressString(): string {
-        const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return `${Math.round(this.normalizedExp)}/${nextLevelExp}`;
-    }
-
-    // Private as external sources should use gainExp and normalizedExp
-    private get exp() {
-        return this.expKO();
-    }
-
-    private set exp(exp: number) {
-        this.expKO(exp);
+        this.experience = json.exp ?? this.defaults.exp;
     }
 }

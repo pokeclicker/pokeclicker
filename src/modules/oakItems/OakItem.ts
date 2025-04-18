@@ -1,71 +1,63 @@
 import {
-    Observable as KnockoutObservable,
+    Observable as KnockoutObservable, PureComputed,
 } from 'knockout';
-import { Currency } from '../GameConstants';
 import GameHelper from '../GameHelper';
-import ExpUpgrade from '../upgrades/ExpUpgrade';
-import Amount from '../wallet/Amount';
-import AmountFactory from '../wallet/AmountFactory';
+import ExpUpgrade, {ExpUpgradeProperties} from '../upgrades/ExpUpgrade';
+import Requirement from '../requirements/Requirement';
+
+type OakItemProperties = ExpUpgradeProperties & {
+    inactiveBonus: number;
+
+    allowInactiveExperienceGain?: boolean;
+    unlockRequirement?: Requirement;
+};
 
 export default class OakItem extends ExpUpgrade {
-    defaults = {
-        level: 0,
-        exp: 0,
-        isActive: false,
-    };
+    private readonly _inactiveBonus: number;
+    private readonly _allowInactiveExperienceGain: boolean = false;
+    private readonly _unlockRequirement: Requirement;
 
-    private isActiveKO: KnockoutObservable<boolean>;
+    private _isActive: KnockoutObservable<boolean> = ko.observable(false);
+    public isUnlocked: PureComputed<boolean> = ko.pureComputed(() => this._unlockRequirement?.isCompleted() ?? true);
 
-    constructor(
-        name: any,
-        displayName: string,
-        public description: string,
-        increasing: boolean,
-        bonusList: number[],
-        public inactiveBonus: number,
-        public unlockReq: number,
-        public expGain: number,
-        expList: number[] = [500, 1000, 2500, 5000, 10000],
-        maxLevel = 5,
-        costList: Amount[] = AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], Currency.money),
-        public bonusSymbol: string = '×',
-    ) {
-        super(name, displayName, maxLevel, expList, costList, bonusList, increasing);
-        this.isActiveKO = ko.observable(false);
+    constructor(properties: OakItemProperties) {
+        super(properties);
+        this._inactiveBonus = properties.inactiveBonus;
+        this._allowInactiveExperienceGain = properties.allowInactiveExperienceGain;
+        this._unlockRequirement = properties.unlockRequirement;
     }
 
-    use(exp: number = this.expGain, scale = 1) {
-        if (!this.isActive) {
+    use(experience: number = 1, scale = 1) {
+        if (!this.isActive && !this._allowInactiveExperienceGain) {
             return;
         }
-        if (!this.isMaxLevel()) {
-            this.gainExp(exp * scale);
-        }
+
+        this.gainExp(experience * scale);
+
         GameHelper.incrementObservable(App.game.statistics.oakItemUses[this.name]);
     }
 
-    isUnlocked(): boolean {
-        return App.game.party.caughtPokemon.length >= this.unlockReq;
-    }
-
-    // TODO: do we need both of these hint methods?
-    getHint(): string {
-        return `Capture ${this.unlockReq - App.game.party.caughtPokemon.length} more unique Pokémon`;
-    }
-
-    get hint() {
-        return ko.pureComputed(() => `Capture ${this.unlockReq - App.game.party.caughtPokemon.length} more unique Pokémon`);
-    }
-
-    calculateBonus(level: number = this.level): number {
-        if (!this.isActive) {
-            return this.inactiveBonus;
+    calculateBonus(level: number = this.level, ignoreActive: boolean = false): number {
+        if (!this.isActive && !ignoreActive) {
+            return this._inactiveBonus;
         }
         return super.calculateBonus(level);
     }
 
-    calculateBonusIfActive(level: number = this.level) {
-        return super.calculateBonus(level);
+    public formatBonus(level: number = this.level, ignoreActive: boolean = false): string {
+        return this._bonusFormat?.(this.calculateBonus(level, ignoreActive)) ?? this.calculateBonus(level, ignoreActive).toLocaleString('en-US');
+    }
+
+    get requirement(): Requirement | null {
+        return this._unlockRequirement;
+    }
+
+    get isActive(): boolean {
+        return this._isActive();
+    }
+
+    set isActive(bool: boolean) {
+        this._isActive(bool);
     }
 
     toJSON(): Record<string, any> {
@@ -76,33 +68,6 @@ export default class OakItem extends ExpUpgrade {
 
     fromJSON(json: Record<string, any>): void {
         super.fromJSON(json);
-        this.isActive = json.isActive ?? this.defaults.isActive;
-    }
-
-    // Knockout getters/setters
-    get expPercentage() {
-        const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return (Math.ceil(this.normalizedExp / this.expGain) / Math.ceil(nextLevelExp / this.expGain)) * 100;
-    }
-
-    get progressString(): string {
-        const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return `${Math.ceil(this.normalizedExp / this.expGain).toLocaleString('en-US')} / ${Math.ceil(nextLevelExp / this.expGain).toLocaleString('en-US')}`;
-    }
-
-    get isActive() {
-        return this.isActiveKO();
-    }
-
-    set isActive(bool: boolean) {
-        this.isActiveKO(bool);
-    }
-
-    get bonusText(): string {
-        return `${this.calculateBonusIfActive()}${this.bonusSymbol}`;
-    }
-
-    get tooltip() {
-        return ko.pureComputed(() => `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}/${this.maxLevel}</strong><br/>Bonus: <strong>${this.bonusText}</strong>`);
+        this.isActive = json.isActive ?? false;
     }
 }

@@ -1,147 +1,238 @@
 <div class="modal fade noselect" id="oakItemsModal" tabindex="-1" role="dialog" aria-badgeledby="oakItemsModal">
-  <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header p-0">
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a data-toggle='tab' class='p-2 nav-link active' href="#oakItemSelector">Selector</a></li>
-            <li class='nav-item'><a data-toggle='tab' class='p-2 nav-link' href="#oakItemLoadouts">Loadouts</a></li>
-        </ul>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div data-bind="visible: App.game.challenges.list.disableOakItems.active()" class="modal-body bg-danger my-0 py-0">
-        Oak Items are disabled.
-      </div>
-      <div class="modal-body tab-content">
-          <div id="oakItemSelector" class="tab-pane fade in active show">
-            <div class="modal-header">
-              <h5 style="position: left" data-bind="text: 'Oak Items Equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()">Oak Items</h5>
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-0">
+                <ul class="nav nav-tabs nav-fill w-100">
+                    <li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#oakItemSelector">Selector</a></li>
+                    <li class='nav-item'><a data-toggle="tab" class="nav-link" href="#oakItemLoadouts">Loadouts</a></li>
+                    <li class="d-block"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
+                </ul>
             </div>
-            <ul class="row justify-content-center p-0 my-0"
-              data-bind="foreach: App.game.oakItems.itemList"
-              style="list-style-type: none;">
-                <!-- ko if: $index() % 4 == 0 -->
-                <div class="w-100"></div>
-                <!-- /ko -->
-                <li class="col p-1">
-                    <button class="p-0 btn"
-                        data-bind="css: {
-                           'btn-primary': $data.isActive,
-                           'btn-outline-secondary': !$data.isActive
-                         }">
-                        <img class="clickable" style="width: 80%;" src=""
-                             data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'},
-                              css: {
-                                'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
-                              },
-                              event: {
-                                mouseover: function(){OakItemController.hover($data.name)},
-                                click: function(){OakItemController.click($data.name);},
-                              }">
-                    </button>
-                </li>
-            </ul>
-          </div>
-          <div id="oakItemLoadouts" class="tab-pane fade">
-            <div class="modal-header p-1">
-              <select name="loadoutSelector" autocomplete="off" class="custom-select"
-                onchange="App.game.oakItemLoadouts.selectedLoadout(this.value)">
-                <!-- ko foreach: App.game.oakItemLoadouts.loadouts -->
-                <option data-bind="text: $data.name, value: $index(), attr:{ selected: App.game.oakItemLoadouts.selectedLoadout() == $data.value}"></option>
-                <!-- /ko -->
-              </select>
-            </div>
-            <div class="form-row p-0" id="loadoutNameEdit">
-                <div class="form-group col-12">
-                    <label>Name</label>
-                    <input autocomplete="off" class="form-control" placeholder="name" data-bind="textInput: App.game.oakItemLoadouts.getSelectedLoadout().name"/>
-                </div>
-            </div>
-            <ul class="row justify-content-center p-0 my-0"
-              data-bind="foreach: App.game.oakItems.itemList"
-              style="list-style-type: none;">
-                  <!-- ko if: $index() % 4 == 0 -->
-                  <div class="w-100"></div>
-                  <!-- /ko -->
-                  <li class="col p-1">
-                    <button class="p-0 btn"
-                        data-bind="css: {
-                          'btn-primary': App.game.oakItemLoadouts.hasItem($index())(),
-                          'btn-outline-secondary': !App.game.oakItemLoadouts.hasItem($index())(),
-                        }">
-                        <img class="clickable" style="width: 80%;" src=""
-                            data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'},
-                              css: {
-                                'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
-                              },
-                              event: {
-                                mouseover: function(){OakItemController.hover($data.name)},
-                                click: function(){App.game.oakItemLoadouts.toggleItem($data.name);},
-                              }">
-                      </button>
-                  </li>
-            </ul>
-          </div>
-      </div>
-      <div class="modal-footer p-0">
-        <table class="table table-bordered text-center m-0">
-          <thead>
-            <th colspan="2">
-              <strong data-bind="text: GameConstants.humanifyString(OakItemType[OakItemController.inspectedItem])"></strong>
-            </th>
-          </thead>
-          <tbody>
-            <!-- ko if: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
-            <tr>
-              <td colspan="2" data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].description"></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="p-0">
-                <div class="progress" style="height: 40px;">
-                    <div class="progress-bar bg-primary" role="progressbar"
-                        data-bind="attr:{ style: 'width:' + (App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() ? 100 : App.game.oakItems.itemList[OakItemController.inspectedItem].expPercentage) + '%' },
-                            css: {
-                              'bg-success': App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
-                              'bg-primary': !App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
-                            }"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <!-- ko if: !App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                        <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString" style="font-size: 15px;"></span>
+
+            <div class="modal-body tab-content">
+                <div id="oakItemSelector" class="tab-pane fade in active show">
+                    <!-- Display the grid with the available slots: filled / empty / requirements -->
+                    <div class="d-flex justify-content-center mb-2" style="gap: 1rem;">
+                        <!-- ko foreach: App.game.oakItems.itemList.filter(item => item.isActive) -->
+                        <div class="card clickable" style="width: 75px; height: 75px;" data-bind="
+                            click: () => App.game.oakItems.deactivate($data.name),
+                            tooltip: {
+                                title: `<u>${$data.displayName}</u><br>${$data.description}<br><br>Level: ${$data.level} / ${$data.maxLevel}<br>Bonus: ${$data.formatBonus()}`,
+                                html: true,
+                                trigger: 'hover',
+                                placement: 'bottom'
+                            }
+                        ">
+                            <div class="card-body p-0 d-flex justify-content-center align-items-center">
+                                <img class="w-100 h-100" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }">
+                            </div>
+                        </div>
                         <!-- /ko -->
-                        <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                        <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().currency] + '.svg height=18px/>)',
-                          click: function(){ App.game.oakItems.itemList[OakItemController.inspectedItem].buy(); }" style="font-size: 15px;">
-                          Upgrade
-                        </span>
+
+                        <!-- ko foreach: new Array(App.game.oakItems.maxActiveCount() - App.game.oakItems.itemList.filter(item => item.isActive).length).fill(0) -->
+                        <div class="card" style="width: 75px; height: 75px;">
+                            <div class="card-body p-0 d-flex justify-content-center align-items-center">
+                                <code>Empty</code>
+                            </div>
+                        </div>
                         <!-- /ko -->
-                        <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                        <span style="font-size: 15px;">MAX LEVEL!</span>
+
+                        <!-- ko foreach: App.game.oakItems.unlockRequirements.filter(requirement => !requirement.isCompleted()) -->
+                        <div class="card" style="width: 75px; height: 75px;">
+                            <div class="card-body p-0 d-flex justify-content-center align-items-center">
+                                <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                                    tooltip: {
+                                        title: $data.hint(),
+                                        placement: 'bottom',
+                                        trigger: 'hover'
+                                    }
+                                " />
+                            </div>
+                        </div>
                         <!-- /ko -->
                     </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="table-dark" style="width: 50%">
-                Level: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
-              </td>
-              <td class="table-dark" style="width: 50%">
-                Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].bonusText"></span>
-              </td>
-            </tr>
-            <!-- /ko -->
-            <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
-            <tr>
-              <td colspan="2">Locked!<br/><span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].hint()"></span></td>
-            </tr>
-            <tr>
 
-            </tr>
-            <!-- /ko -->
-          </tbody>
-        </table>
-      </div>
+                    <!-- ko if: App.game.oakItems.itemList.some(value => value.isUpgradeAvailable()) -->
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="highlight-success p-3">Upgrades Available</div>
+                    </div>
+                    <!-- /ko -->
+
+                    <!-- Oak Item Table -->
+                    <table class="table table-striped table-hover table-bordered table-sm table-responsive-md m-0 mb-2">
+                        <tbody>
+                        <!-- ko foreach: App.game.oakItems.itemList -->
+                        <!-- ko if: $data.isUnlocked() -->
+                        <tr data-bind="
+                            css: {
+                                'highlight-success': $data.isUpgradeAvailable()
+                            }
+                        ">
+                            <td class="vertical-middle"><img height="36" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }"></td>
+                            <td class="vertical-middle text-left">
+                                <div class="font-weight-bold" data-bind="text: $data.displayName"></div>
+                                <div data-bind="text: $data.description"></div>
+                            </td>
+                            <td class="vertical-middle text-center text-nowrap">
+                                <div style="line-height: 1.2rem;" data-bind="text: $data.formatBonus($data.level, true)"></div>
+                                <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: `Level ${$data.level}`"></div>
+                            </td>
+                            <td class="vertical-middle">
+                                <!-- ko if: $data.isActive -->
+                                <button type="button" class="btn btn-danger w-100" data-bind="click: () => App.game.oakItems.deactivate($data.name)">
+                                    Deactivate
+                                </button>
+                                <!-- /ko -->
+
+                                <!-- ko ifnot: $data.isActive -->
+                                <button type="button" class="btn btn-secondary w-100" data-bind="
+                                    click: () => App.game.oakItems.activate($data.name),
+                                    enable: App.game.oakItems.hasAvailableSlot()
+                                ">
+                                    Activate
+                                </button>
+                                <!-- /ko -->
+                            </td>
+                            <td class="vertical-middle p-0">
+                                <a class="btn btn-primary" href="#oakItemDetailModal" data-toggle="modal" data-bind="
+                                    click: () => {
+                                        App.game.oakItems.selectedOakItem($data.name);
+                                    }
+                                ">?</a>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+
+                        <!-- ko ifnot: $data.isUnlocked() -->
+                        <tr>
+                            <td class="vertical-middle"><img height="36" class="oak-item-locked" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }"></td>
+                            <td class="vertical-middle text-left">
+                                <code>Locked</code><br/>
+                                <code class="small" data-bind="text: $data.requirement.hint()"></code>
+                            </td>
+                            <td class="vertical-middle text-left"></td>
+                            <td class="vertical-middle text-left"></td>
+                            <td class="vertical-middle text-left"></td>
+                        </tr>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="oakItemLoadouts" class="tab-pane fade">
+                    <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+                        <tbody>
+                        <!-- ko foreach: { data: App.game.oakItemLoadouts.loadouts, as: 'loadout', noChildContext: true } -->
+                        <tr>
+                            <td class="vertical-middle">
+                                <div class="input-group" style="max-width: 150px;">
+                                    <input type="text" class="outline-dark form-control form-control-number" data-bind="value: loadout.name">
+                                </div>
+                            </td>
+                            <td class="vertical-middle">
+                                <div class="d-flex flex-wrap justify-content-center" style="gap: 0.25rem;">
+                                    <!-- ko foreach: { data: App.game.oakItems.itemList, as: 'oakItem' } -->
+                                    <button type="button" class="btn p-0" data-bind="
+                                        css: {
+                                            'oak-item-locked': !App.game.oakItems.isUnlocked(oakItem.name),
+                                            'bg-info': App.game.oakItemLoadouts.loadoutHasOakItem(loadoutIndex(), oakItem.name)
+                                        },
+                                        style: {
+                                            opacity: !App.game.oakItemLoadouts.loadoutHasOakItem(loadoutIndex(), oakItem.name)() && loadout.loadout().length === App.game.oakItems.maxActiveCount() ? 0.5 : 1
+                                        }
+                                        enable: App.game.oakItems.isUnlocked(oakItem.name),
+                                        click: () => App.game.oakItemLoadouts.toggleOakItemInLoadout(loadoutIndex(), oakItem.name)
+                                    ">
+                                        <img height="36" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[oakItem.name]}.png` }">
+                                    </button>
+                                    <!-- /ko -->
+                                </div>
+                            </td>
+                            <td class="vertical-middle text-center">
+                                <!-- ko if: App.game.oakItemLoadouts.isLoadoutActive(loadoutIndex()) -->
+                                <code>Active</code>
+                                <!-- /ko -->
+                                <!-- ko ifnot: App.game.oakItemLoadouts.isLoadoutActive(loadoutIndex()) -->
+                                <button class="btn btn-secondary" data-bind="click: () => App.game.oakItemLoadouts.activateLoadout(loadoutIndex())">Load</button>
+                                <!-- /ko -->
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                        </tbody>
+                    </table>
+
+                    <p class="font-italic small m-0">
+                        Select up to <knockout data-bind="text: App.game.oakItems.maxActiveCount()"></knockout> Oak Items per loadout. Click an item to select or deselect it.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+<div aria-labelledby="oakItemDetailModalLabel" class="modal fade no-select" id="oakItemDetailModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content" data-bind="with: App.game.oakItems.itemList.find(item => item.name === App.game.oakItems.selectedOakItem())">
+            <div class="modal-header align-items-center">
+                <img height="36" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }">
+                <h4 class="m-0" data-bind="text: $data.displayName"></h4>
+                <img height="36" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }">
+            </div>
+
+            <div class="modal-body">
+                <!-- ko if: $data.isUpgradeAvailable() -->
+                <div class="mb-2">
+                    <h4 class="font-weight-bold">Upgrade available</h4>
+                    <button class="btn btn-success" data-bind="click: () => $data.buy()">
+                        Upgrade (<knockout data-bind="text: $data.calculateCost($data.level + 1).amount.toLocaleString('en-US')"></knockout> <img height="18px" data-bind="attr: { src: `assets/images/currency/${GameConstants.Currency[$data.calculateCost($data.level + 1).currency]}.svg` }">)
+                    </button>
+                </div>
+                <!-- /ko -->
+
+                <div>Effect: <knockout data-bind="text: $data.description"></knockout></div>
+
+                <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+                    <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Effect</th>
+                        <th>Progress</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- ko foreach: new Array($data.maxLevel + 1).fill(0) -->
+                    <tr data-bind="css: { 'highlight-success': $parent.level === $index() }">
+                        <td class="vertical-middle" data-bind="text: $index()"></td>
+                        <td class="vertical-middle" data-bind="text: $parent.formatBonus($index(), true)"></td>
+                        <td class="vertical-middle">
+                            <!-- ko if: $index() > 0 -->
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="
+                                    css: {
+                                        'bg-success': $index() > $parent.level && $parent.experience >= $parent.getExperienceForLevel($index()),
+                                        'bg-warning': $index() > $parent.level && $parent.experience < $parent.getExperienceForLevel($index())
+                                    },
+                                    style: {
+                                        width: Math.min(1, $parent.experience / $parent.getExperienceForLevel($index())).toLocaleString('en-US', { style: 'percent' })
+                                    }
+                                ">
+                                    <span>
+                                        <knockout data-bind="text: Math.min($parent.experience, $parent.getExperienceForLevel($index())).toLocaleString('en-US')"></knockout> / <knockout data-bind="text: $parent.getExperienceForLevel($index()).toLocaleString('en-US')"></knockout>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

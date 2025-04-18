@@ -146,7 +146,7 @@ export default class Battle {
 
     protected static calculateActualCatchRate(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
         const pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
-        const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
+        const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball) * 100;
         const totalChance = GameConstants.clipNumber(enemyPokemon.catchRate + pokeballBonus + oakBonus, 0, 100);
         return totalChance;
     }

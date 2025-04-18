@@ -1,3 +1,5 @@
+import OakItemType from '../enums/OakItemType';
+
 export default class OakItemLoadout {
     public name: ko.Observable<string>;
     public loadout: ko.ObservableArray<number>;
@@ -9,5 +11,9 @@ export default class OakItemLoadout {
 
     public static copy(old: OakItemLoadout): OakItemLoadout {
         return new OakItemLoadout(old.name(), old.loadout());
+    }
+
+    get htmlTooltip(): string {
+        return `${this.name()}<br/>${this.loadout().map(oakItem => `<img height="32" src="assets/images/oakitems/${OakItemType[oakItem]}.png">`).join('')}`;
     }
 }
