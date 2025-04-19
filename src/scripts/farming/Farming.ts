@@ -1740,9 +1740,11 @@ class Farming implements Feature {
     }
 
     getReplantMultiplier(): number {
-        let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
-        return multiplier;
+        return 1;
+    }
+
+    getMulchDurationMultiplier(): number {
+        return App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
     }
 
     getMutationMultiplier(): number {
@@ -2049,6 +2051,7 @@ class Farming implements Feature {
 
         amount = Math.min(this.mulchList[mulch](), amount);
 
+        App.game.oakItems.use(OakItemType.Sprinklotad, amount);
         GameHelper.incrementObservable(this.mulchList[mulch], -amount);
         GameHelper.incrementObservable(App.game.statistics.totalMulchesUsed, amount);
         GameHelper.incrementObservable(App.game.statistics.mulchesUsed[mulch], amount);
