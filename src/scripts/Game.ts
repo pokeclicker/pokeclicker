@@ -514,7 +514,6 @@ class Game implements TmpGameType {
                 // Check if it's weather change time
                 if (now.getHours() % Weather.period === 0) {
                     WeatherApp.checkDateHasPassed();
-                    this.weatherOverride.reduceCostModifierInHours(Weather.period);
                 }
             }
 

@@ -6,9 +6,6 @@ import { camelCaseToString, HOUR, humanifyString, MINUTE, Region } from '../Game
 import { Observable } from 'knockout';
 import GameHelper from '../GameHelper';
 import Weather from './Weather';
-import Requirement from '../requirements/Requirement';
-import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
-import BadgeEnums from '../enums/Badges';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 
@@ -66,17 +63,6 @@ export class WeatherOverride implements Feature {
             { item: ItemList.Damp_rock_fragment, amount: 35 },
             { item: ItemList.Heat_rock_fragment, amount: 65 },
         ],
-    };
-
-    public static overrideRequirements: { [region in Region]?: Requirement } = {
-        [Region.kanto]: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion),
-        [Region.johto]: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
-        [Region.hoenn]: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
-        [Region.sinnoh]: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
-        [Region.unova]: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
-        [Region.kalos]: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
-        [Region.alola]: new GymBadgeRequirement(BadgeEnums.Champion_Stamp),
-        [Region.galar]: new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion),
     };
 
     private static _selectedRegion: Observable<Region> = ko.observable(Region.kanto);
