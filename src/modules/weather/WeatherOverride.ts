@@ -2,7 +2,7 @@ import { Feature } from '../DataStore/common/Feature';
 import WeatherType from './WeatherType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
-import { camelCaseToString, HOUR, humanifyString, MINUTE, Region } from '../GameConstants';
+import { camelCaseToString, getGymIndex, HOUR, humanifyString, MINUTE, Region, RegionGyms } from '../GameConstants';
 import { Observable } from 'knockout';
 import GameHelper from '../GameHelper';
 import Weather from './Weather';
@@ -151,16 +151,23 @@ export class WeatherOverride implements Feature {
         const multiplier = 1.2328467394420661; // Magic number Math.pow(10, 1/11) => x10 base price per 5 minutes at 12+ cycles
         const multiplierExponentCap = 12;
 
+        const gymCountForRegion = RegionGyms[region].length;
+        const gymDefeatedCountForRegion = RegionGyms[region].filter(gym => App.game.statistics.gymsDefeated[getGymIndex(gym)]() > 0).length;
+        const baseLog = (base, value) => Math.log(value) / Math.log(base);
+        const scale = baseLog(101, (1 - gymDefeatedCountForRegion / gymCountForRegion) * 100 + 1);
+
+        const regionCompletionMultiplier = 29 * scale + 1;
+
         const startAmount = Math.floor(Math.max(this._costModifier[region](), 0) / WeatherOverride.CYCLE_TIME);
         const endAmount = startAmount + cycles;
 
         const incrementalStartAmount = Math.min(startAmount, multiplierExponentCap);
         const incrementalEndAmount = Math.min(endAmount, multiplierExponentCap);
 
-        const incrementalPriceSum = Math.round(basePrice * ((multiplier ** incrementalEndAmount) - (multiplier ** incrementalStartAmount)) / (multiplier - 1));
+        const incrementalPriceSum = Math.round(basePrice * regionCompletionMultiplier * ((multiplier ** incrementalEndAmount) - (multiplier ** incrementalStartAmount)) / (multiplier - 1));
 
         const cappedAmount = Math.max(0, endAmount - Math.max(multiplierExponentCap, startAmount));
-        const cappedPricePerItem = basePrice * multiplier ** (multiplierExponentCap - 1);
+        const cappedPricePerItem = basePrice * regionCompletionMultiplier * (multiplier ** (multiplierExponentCap - 1));
         const cappedPriceSum = Math.round(cappedPricePerItem * cappedAmount);
 
         return incrementalPriceSum + cappedPriceSum;
