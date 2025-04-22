@@ -154,7 +154,7 @@ export class WeatherOverride implements Feature {
         const gymCountForRegion = RegionGyms[region].length;
         const gymDefeatedCountForRegion = RegionGyms[region].filter(gym => App.game.statistics.gymsDefeated[getGymIndex(gym)]() > 0).length;
         const baseLog = (base, value) => Math.log(value) / Math.log(base);
-        const scale = baseLog(101, (1 - gymDefeatedCountForRegion / gymCountForRegion) * 100 + 1);
+        const scale = baseLog(gymCountForRegion + 1, gymCountForRegion - gymDefeatedCountForRegion + 1);
 
         const regionCompletionMultiplier = 29 * scale + 1;
 
