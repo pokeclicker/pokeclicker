@@ -188,6 +188,8 @@ class Plot implements Saveable {
             return this.berry === BerryType.None;
         });
 
+        this.isMulched = ko.pureComputed(() => this.mulch !== MulchType.None);
+
         this.stage = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;

@@ -52,7 +52,7 @@ export default class OakItems implements Feature {
             new BoughtOakItem(OakItemType.Squirtbottle, 'Squirtbottle', 'Increases the chance of berry mutations', 'Johto Berry Master',
                 true, [1.25, 1.5, 1.75, 2, 2.25, 2.5], 1, 10, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),
             new BoughtOakItem(OakItemType.Sprinklotad, 'Sprinklotad', 'Increases the duration of Mulch', 'Hoenn Berry Master',
-                true, [1.25, 1.40, 1.55, 1.70, 1.85, 2.00], 1, 5, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),
+                true, [1.25, 1.40, 1.55, 1.70, 1.85, 2.00], 1, 1, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),
             new BoughtOakItem(OakItemType.Explosive_Charge, 'Explosive Charge', 'Increases the number of tiles the Bomb tool can target', 'Cinnabar Island Shop',
                 true, [1, 2, 3, 6, 8, 10], 1, 50, undefined, undefined, AmountFactory.createArray([50000, 100000, 400000, 1000000, 2000000], Currency.money), ''),
             new BoughtOakItem(OakItemType.Treasure_Scanner, 'Treasure Scanner', 'Chance to multiply mining rewards', 'Cinnabar Island Shop',

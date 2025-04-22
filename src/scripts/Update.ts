@@ -2841,6 +2841,18 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.24': ({ playerData, saveData, settingsData }) => {
+            const reimburseFarmPoints = [0, 2000, 5000, 10000, 20000, 50000]
+                .slice(0, saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].level + 1)
+                .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+
+            saveData.wallet.currencies[GameConstants.Currency.farmPoint] += reimburseFarmPoints;
+
+            // Reset the Sprinklotad
+            saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].level = 0;
+            saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].exp = 0;
+        },
     };
 
     constructor() {

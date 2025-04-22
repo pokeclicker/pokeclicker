@@ -13,6 +13,7 @@ class Farming implements Feature {
 
     mutationCounter = 0;
     wanderCounter = 0;
+    mulchCounter = 0;
 
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
@@ -1807,6 +1808,12 @@ class Farming implements Feature {
         }
 
         this.farmHands.tick();
+
+        this.mulchCounter += GameConstants.TICK_TIME;
+        if (this.mulchCounter >= GameConstants.MULCH_OAK_ITEM_TICK) {
+            App.game.oakItems.use(OakItemType.Sprinklotad, this.plotList.filter(value => value.isMulched()).length);
+            this.mulchCounter = 0;
+        }
     }
 
     handleNotification(farmNotiType: FarmNotificationType, wanderList?: WandererPokemon[]): void {
@@ -2051,7 +2058,6 @@ class Farming implements Feature {
 
         amount = Math.min(this.mulchList[mulch](), amount);
 
-        App.game.oakItems.use(OakItemType.Sprinklotad, amount);
         GameHelper.incrementObservable(this.mulchList[mulch], -amount);
         GameHelper.incrementObservable(App.game.statistics.totalMulchesUsed, amount);
         GameHelper.incrementObservable(App.game.statistics.mulchesUsed[mulch], amount);
