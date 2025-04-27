@@ -915,5 +915,14 @@
          , image: "assets/images/map/Ring.png"
          })
      %>
+     <%- include('templates/mapOverlay',
+         { name: "Hoopa Hoop"
+         , x: 68, y: 44
+         , width: 5, height: 5
+         , databind: "click: () => TemporaryBattleList['Hoopa (Unbound)'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Hoopa (Unbound)'] && TemporaryBattleList['Hoopa (Unbound)'].isVisible()"
+         , image: "assets/images/map/Ring.png"
+         })
+     %>
 
 </g>

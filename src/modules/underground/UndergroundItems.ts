@@ -9,6 +9,7 @@ import UndergroundGemItem from './UndergroundGemItem';
 import UndergroundItem from './UndergroundItem';
 import UndergroundMegaStoneItem from './UndergroundMegaStoneItem';
 import UndergroundShardItem from './UndergroundShardItem';
+import QuestLineCompletedRequirement from '../requirements/QuestLineCompletedRequirement';
 
 export default class UndergroundItems {
     public static list: Array<UndergroundItem> = [];
@@ -152,3 +153,4 @@ UndergroundItems.addItem(new UndergroundMegaStoneItem(MegaStoneType.Sablenite, 5
 
 // Other
 UndergroundItems.addItem(new UndergroundItem(600, 'Palaeontologist_token', [[0, 0, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1], [0, 0, 1, 1, 1, 0], [0, 0, 0, 1, 1, 0], [0, 0, 0, 1, 1, 1]], 1, UndergroundItemValueType.Special));
+UndergroundItems.addItem(new UndergroundItem(601, 'Prison_bottle', [[0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 1, UndergroundItemValueType.Special, new QuestLineCompletedRequirement('Clash of Ages')));

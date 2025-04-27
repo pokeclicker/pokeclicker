@@ -2347,7 +2347,7 @@ class QuestLineHelper {
         const catch100Hoopa = new CustomQuest(100, 0, 'Catch 100 Hoopa.', () => 100 * (App.game.statistics.pokemonCaptured[hoopaID]() - App.game.statistics.pokemonHatched[hoopaID]()));
         clashOfAgesQuestLine.addQuest(catch100Hoopa);
 
-        const talkToBaraz4 = new TalkToNPCQuest(Baraz4, 'This is ridiculous. Talk to Baraz in Kiloude City.').withCustomReward(() => ItemList.Prison_Bottle.gain(1));
+        const talkToBaraz4 = new TalkToNPCQuest(Baraz4, 'This is ridiculous. Talk to Baraz in Kiloude City.');
         clashOfAgesQuestLine.addQuest(talkToBaraz4);
 
         const clearHoopa1 = new DefeatTemporaryBattleQuest('Hoopa 1', 'Defeat the Unbound Hoopa and its summoned defenders near Kiloude City.');
