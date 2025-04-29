@@ -622,6 +622,22 @@ td.tight {
   color: var(--completed);
 }
 
+.highlight-success {
+    box-shadow:inset 0 0 6px 2px var(--success);
+}
+
+.highlight-info {
+    box-shadow:inset 0 0 6px 2px var(--info);
+}
+
+.highlight-warning {
+    box-shadow:inset 0 0 6px 2px var(--warning);
+}
+
+.highlight-danger {
+    box-shadow:inset 0 0 6px 2px var(--danger);
+}
+
 .animated-currency {
   pointer-events: none;
   position: absolute;
@@ -793,9 +809,13 @@ button.btn-circle {
 }
 
 // Weather Forecast
-.weatherForecastPassed {
-  opacity: .25;
+.weather-forecast-passed {
+  opacity: .1;
   pointer-events: none;
+}
+
+.weather-forecast-obscured {
+    opacity: .25;
 }
 
 .original-weather-highlight {
