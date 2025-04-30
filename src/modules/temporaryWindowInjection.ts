@@ -107,6 +107,7 @@ import CustomRequirement from './requirements/CustomRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DevelopmentRequirement from './requirements/DevelopmentRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
+import InEnvironmentRequirement from './requirements/InEnvironmentRequirement';
 import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
 import FarmPointsRequirement from './requirements/FarmPointsRequirement';
@@ -334,6 +335,7 @@ Object.assign(<any>window, {
     DefeatedRequirement,
     DevelopmentRequirement,
     DiamondRequirement,
+    InEnvironmentRequirement,
     FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
     FarmPointsRequirement,
