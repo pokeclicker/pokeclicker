@@ -7816,7 +7816,7 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
             new CustomRequirement(
                 ko.pureComputed(() => cresseliaDungeonMoonReq.isCompleted()),
                 true,
-                'Cresselia lives on the island aroud New Moon, and roams Sinnoh during other moon phases.'
+                'Cresselia lives on the island around New Moon, and roams Sinnoh during other moon phases.'
             ),
         ])}),
     ],
