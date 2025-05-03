@@ -234,7 +234,7 @@ class FarmHand {
                     berry = berry < 0 ? BerryType.Cheri : berry;
                     // Only plant and work if the player has a berry to plant
                     if (App.game.farming.hasBerry(berry)) {
-                        App.game.farming.plant(emptyPlotIndex, berry as BerryType);
+                        App.game.farming.plant(emptyPlotIndex, berry as BerryType, true);
                         workTimes--;
                         worked = true;
                     }

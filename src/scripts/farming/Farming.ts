@@ -1940,7 +1940,7 @@ class Farming implements Feature {
         this.plotList[index].isSafeLocked = !this.plotList[index].isSafeLocked;
     }
 
-    plant(index: number, berry: BerryType) {
+    plant(index: number, berry: BerryType, isFarmHand = false): void {
         const plot = this.plotList[index];
         if (!plot.isEmpty() || !plot.isUnlocked || !this.hasBerry(berry) || plot.isSafeLocked) {
             return;
@@ -1948,6 +1948,11 @@ class Farming implements Feature {
 
         GameHelper.incrementObservable(this.berryList[berry], -1);
         plot.plant(berry);
+
+        if (isFarmHand) {
+            // Skip ahead a short time to allow the Farm Hand to consistently maintain a plant that exactly matches a multiple of the Farm Hand's work cycle
+            plot.age += 0.1;
+        }
     }
 
     plantAll(berry: BerryType) {
