@@ -2,7 +2,7 @@
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 ///<reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 
-class Party implements Feature {
+class Party implements Feature, TmpPartyType {
     name = 'Pokemon Party';
     saveKey = 'party';
 
@@ -71,6 +71,9 @@ class Party implements Feature {
         if (newCatch) {
             // Create new party pokemon
             this._caughtPokemon.push(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow));
+
+            // Keep caughtPokemon array sorted by ID
+            this._caughtPokemon.sort((a, b) => a.id - b.id);
         }
 
         // Update existing party pokemon
@@ -186,7 +189,7 @@ class Party implements Feature {
         ignoreRegionMultiplier = false,
         includeBreeding = false,
         useBaseAttack = false,
-        overrideWeather: WeatherType,
+        overrideWeather?: WeatherType,
         ignoreLevel = false,
         includeTempBonuses = true
     ): number {
@@ -324,11 +327,12 @@ class Party implements Feature {
         }
 
         const caughtPokemonSave = json.caughtPokemon;
-        for (let i = 0; i < caughtPokemonSave.length; i++) {
-            const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
-            partyPokemon.fromJSON(caughtPokemonSave[i]);
-            this._caughtPokemon.push(partyPokemon);
-        }
+        const caughtPokemon = caughtPokemonSave.map(caughtPoke => {
+            const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPoke.id);
+            partyPokemon.fromJSON(caughtPoke);
+            return partyPokemon;
+        });
+        this._caughtPokemon(caughtPokemon);
     }
 
     initialize(): void {
