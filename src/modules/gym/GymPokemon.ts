@@ -1,4 +1,8 @@
-class GymPokemon {
+import * as GameConstants from '../GameConstants';
+import Requirement from '../requirements/Requirement';
+import type { PokemonNameType } from '../pokemons/PokemonNameType';
+
+export default class GymPokemon {
     name: PokemonNameType;
     maxHealth: number;
     level: number;

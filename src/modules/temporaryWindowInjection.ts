@@ -27,6 +27,10 @@ import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
 import FarmingTool from './enums/FarmingTool';
 // end enums
+import Battle from './battles/Battle';
+import BattlePokemon from './battles/BattlePokemon';
+import Trainer from './battles/Trainer';
+import GymPokemon from './gym/GymPokemon';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -244,6 +248,10 @@ Object.assign(<any>window, {
     WeatherForecastStatus,
     SafariEnvironments,
     FarmingTool,
+    Battle,
+    BattlePokemon,
+    Trainer,
+    GymPokemon,
     BooleanSetting,
     RangeSetting,
     Setting,
