@@ -111,16 +111,15 @@
                     <h4>Cycles</h4>
 
                     <div class="row align-items-center">
-                        <div class="col-12 col-md-9">
+                        <div class="col-12">
                             <div class="input-group">
                                 <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => WeatherOverride.selectedCycles = 1">Reset</button>
                                 <input type="number" min="1" class="outline-dark form-control form-control-number" oninput="this.value = Math.max(this.value, 1)" data-bind="textInput: WeatherOverride.selectedCycles">
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">Time: <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME * WeatherOverride.selectedCycles)"></code></div>
                     </div>
 
-                    <div class="small">1 cycle equals <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME)"></code></div>
+                    <div class="small">1 cycle equals <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME)"></code> • Total <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME * WeatherOverride.selectedCycles)"></code></div>
 
                     <!-- ko if: (App.game.weatherOverride.getTimeForRegion(WeatherOverride.selectedRegion) ?? 0) > 0 -->
                     <div class="m-2">
