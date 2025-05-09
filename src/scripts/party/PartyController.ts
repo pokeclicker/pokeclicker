@@ -215,10 +215,20 @@ class PartyController {
                     return false;
                 }
             }
-            const type = Settings.getSetting('heldItemTypeFilter').observableValue();
-            if (type > -2 && !pokemonMap[pokemon.name].type.includes(type)) {
-                return false;
+            const type1 = Settings.getSetting('heldItemTypeFilter').observableValue();
+            const type2 = Settings.getSetting('heldItemType2Filter').observableValue();
+            if (type1 !== -2 || type2 !== -2) {
+                const { type: types } = pokemonMap[pokemon.name];
+                if ([type1, type2].includes(PokemonType.None)) {
+                    const type = (type1 == PokemonType.None) ? type2 : type1;
+                    if (!BreedingController.isPureType(pokemon, type === -2 ? null : type)) {
+                        return false;
+                    }
+                } else if ((type1 !== -2 && !types.includes(type1)) || (type2 !== -2 && !types.includes(type2))) {
+                    return false;
+                }
             }
+
             if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && pokemon.heldItem()) {
                 return false;
             }

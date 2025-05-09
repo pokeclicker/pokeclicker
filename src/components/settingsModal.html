@@ -221,6 +221,12 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.pokeballSelection')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dailyQuests')}"></tr>
+                                <!-- ko if: Settings.getSetting('hotkey.castformApp').isUnlocked() -->
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.castformApp')}"></tr>
+                                <!-- /ko -->
+                                <!-- ko if: Settings.getSetting('hotkey.purifyChamber').isUnlocked() -->
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.purifyChamber')}"></tr>
+                                <!-- /ko -->
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Farm</th></tr>
