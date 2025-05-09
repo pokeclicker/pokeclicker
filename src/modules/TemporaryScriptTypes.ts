@@ -175,8 +175,6 @@ export type TmpSaveType = {
     initializeEffects: (saved?: Array<string>) => Record<string, KnockoutObservable<number>>;
     initializeEffectTimer: () => Record<string, KnockoutObservable<string>>;
     loadFromFile: (file) => void;
-    convert: () => void;
-    convertShinies: (list: Array<any>) => void;
 };
 
 export type TmpPlayerType = {

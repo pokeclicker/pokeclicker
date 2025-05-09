@@ -217,46 +217,6 @@ class Save {
             }
         }, 1000);
     }
-
-    public static convert() {
-        const base64 = $('#convertTextArea').val().toString();
-        try {
-            const json = atob(base64);
-            const p = JSON.parse(json);
-            Save.convertShinies(p.caughtPokemonList);
-            $('#saveModal').modal('hide');
-        } catch (e) {
-            Notifier.notify({
-                message: 'Invalid save data.',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-        }
-    }
-
-    public static convertShinies(list: Array<any>) {
-        const converted = [];
-        list = list.filter(p => p.shiny);
-        for (const pokemon of list) {
-            const id = +pokemon.id;
-            const partyPokemon = App.game.party.getPokemon(id);
-            if (partyPokemon) {
-                converted.push(pokemon.name);
-                partyPokemon.shiny = true;
-            }
-        }
-        if (converted.length > 0) {
-            Notifier.notify({
-                message: `You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`,
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 1e4,
-            });
-        } else {
-            Notifier.notify({
-                message: 'No new shiny Pokémon to import.',
-                type: NotificationConstants.NotificationOption.info,
-            });
-        }
-    }
 }
 
 Save satisfies TmpSaveType;
