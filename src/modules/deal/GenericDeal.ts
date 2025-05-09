@@ -6,7 +6,7 @@ import { ItemList } from '../items/ItemList';
 import GameHelper from '../GameHelper';
 import { Currency } from '../GameConstants';
 
-export type GenericTraderShopIdentifier = 'Palaeontologist' | 'EverstoneDealer';
+export type GenericTraderShopIdentifier = 'Palaeontologist' | 'EverstoneDealer' | 'WeatherRocks';
 
 /* eslint-disable @typescript-eslint/no-shadow */
 export enum DealCostOrProfitType {
@@ -190,6 +190,25 @@ export default class GenericDeal {
                 [
                     { type: DealCostOrProfitType.Item, item: ItemList.Everstone, amount: 1 },
                 ],
+            ),
+        ]);
+
+        GenericDeal.list.WeatherRocks = ko.observableArray([
+            new GenericDeal(
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Damp_rock, amount: 1 } ],
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Damp_rock_fragment, amount: 100 } ],
+            ),
+            new GenericDeal(
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Heat_rock, amount: 1 } ],
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Heat_rock_fragment, amount: 100 } ],
+            ),
+            new GenericDeal(
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Icy_rock, amount: 1 } ],
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Icy_rock_fragment, amount: 100 } ],
+            ),
+            new GenericDeal(
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Smooth_rock, amount: 1 } ],
+                [ { type: DealCostOrProfitType.Item, item: ItemList.Smooth_rock_fragment, amount: 100 } ],
             ),
         ]);
     }

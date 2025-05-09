@@ -38,6 +38,7 @@ import SettingOption from './settings/SettingOption';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import WeatherApp from './weather/WeatherApp';
+import { WeatherOverride } from './weather/WeatherOverride';
 import RegionalForecast from './weather/RegionalForecast';
 import WeatherForecast from './weather/WeatherForecast';
 import DayCycle from './dayCycle/DayCycle';
@@ -182,6 +183,7 @@ import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
+import WeatherItem from './items/WeatherItem';
 import PokeballItem from './items/PokeballItem';
 import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
@@ -257,6 +259,7 @@ Object.assign(<any>window, {
     WeatherType,
     Weather,
     WeatherApp,
+    WeatherOverride,
     RegionalForecast,
     WeatherForecast,
     DayCycle,
@@ -415,6 +418,7 @@ Object.assign(<any>window, {
     PokemonItem,
     EggItem,
     MegaStoneItem,
+    WeatherItem,
     PokeballItem,
     QuestItem,
     Vitamin,

@@ -8,15 +8,9 @@ import PokemonType from '../enums/PokemonType';
 import SeededRand from '../utilities/SeededRand';
 
 export default class Weather {
-    public static regionalWeather: Observable<WeatherType>[] = Array<WeatherType>(GameHelper.enumLength(Region)).fill(WeatherType.Clear).map((v) => ko.observable<WeatherType>(v));
+    private static _regionalWeather: Observable<WeatherType>[] = Array<WeatherType>(GameHelper.enumLength(Region)).fill(WeatherType.Clear).map((v) => ko.observable<WeatherType>(v));
 
-    public static currentWeather: Computed<WeatherType> = ko.pureComputed(() => {
-        const weather = Weather.regionalWeather[player.region]();
-
-        // TODO: Add weather overrides
-
-        return weather;
-    });
+    public static currentWeather: Computed<WeatherType> = ko.pureComputed(() => this.getRegionalWeather(player.region));
 
     public static image: Computed<string> = ko.pureComputed(() => {
         return `assets/images/weather/${WeatherType[Weather.currentWeather()]}.png`;
@@ -121,6 +115,10 @@ export default class Weather {
      */
     public static period = 4;
 
+    public static getRegionalWeather(region: Region): WeatherType {
+        return App.game.weatherOverride.getWeatherForRegion(region) ?? this._regionalWeather[region]();
+    }
+
     /**
      * Generates the current Weather condition
      * @param date The current date
@@ -128,7 +126,7 @@ export default class Weather {
     public static generateWeather(date: Date): void {
         SeededRand.seedWithDateHour(date, this.period);
 
-        Weather.regionalWeather.forEach((weather: Observable<WeatherType>, region: Region) => {
+        this._regionalWeather.forEach((weather: Observable<WeatherType>, region: Region) => {
             // If no distribution set, assume all weather available
             const dist = Weather.weatherDistribution[region] || GameHelper.enumNumbers(WeatherType);
 

@@ -34,6 +34,7 @@ import type WeatherType from './weather/WeatherType';
 import type { MultiplierDecreaser } from './items/types';
 import type BagItem from './interfaces/BagItem';
 import type BattlePokemon from './battles/BattlePokemon';
+import type { WeatherOverride } from './weather/WeatherOverride';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted,
@@ -137,6 +138,7 @@ export type TmpGameType = {
     dreamOrbController: TmpDreamOrbControllerType;
     purifyChamber: TmpPurifyChamberType;
     weatherApp: TmpWeatherAppType;
+    weatherOverride: WeatherOverride;
     zMoves: TmpZMovesType;
     pokemonContest: TmpPokemonContestType;
 

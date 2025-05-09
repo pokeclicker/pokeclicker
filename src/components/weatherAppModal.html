@@ -1,78 +1,193 @@
 <div class="modal fade" id="weatherAppModal" tabindex="-1" role="dialog" aria-labelledby="weatherAppModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg h-100" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Castform App</h4>
-                <div style="width: 100px;">
-                    <!-- ko using: GameHelper.enumNumbers(GameConstants.Region).filter((r) => r >= 0 && r <= player.highestRegion()), as: 'regions' -->
-                    <select class="custom-select" onchange="WeatherApp.selectedRegion(+this.value);">
-                        <!-- ko foreach: regions -->
-                        <option data-bind="attr: { value: $data, selected: WeatherApp.selectedRegion() === $data }, text: GameConstants.camelCaseToString(GameConstants.Region[$data])"></option>
+            <div class="modal-header p-0">
+                <ul class="nav nav-tabs nav-fill w-100">
+                    <li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#castform-app">Castform App</a></li>
+                    <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#weather-override">Weather Override</a></li>
+                    <li class="d-block"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
+                </ul>
+            </div>
+
+            <div class="modal-body tab-content">
+                <div id="castform-app" class="tab-pane fade in active show">
+                    <div class="mb-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.25rem;">
+                        <!-- ko foreach: GameHelper.enumNumbers(GameConstants.Region).filter(r => r >= 0 && r <= player.highestRegion()) -->
+                        <button class="btn btn-secondary position-relative" data-bind="
+                            css: { 'btn-info': $data === WeatherApp.selectedRegion() },
+                            click: () => { WeatherApp.selectedRegion($data) }
+                        ">
+                            <knockout data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[$data])"></knockout>
+                        </button>
                         <!-- /ko -->
-                    </select>
+                    </div>
+
+                    <table class="table table-striped table-hover table-bordered table-sm table-responsive-sm m-0 mb-3" data-bind="with: WeatherApp.fullForecast(), as: 'forecast'">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <!-- ko foreach: { data: WeatherApp.dateList(), as: 'date' } -->
+                            <th data-bind="text: $data.toLocaleDateString(undefined, { weekday: 'short' })"></th>
+                            <!-- /ko -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- ko foreach: { data: WeatherApp.generateHourList(), as: 'hour' } -->
+                        <tr>
+                            <td data-bind="text: `${GameHelper.twoDigitNumber(+hour)}:00 - ${GameHelper.twoDigitNumber(+hour + (Weather.period - 1))}:59`"></td>
+
+                            <!-- ko foreach: { data: WeatherApp.dateList(), as: 'date' } -->
+                            <!-- ko with: forecast.find(rf => rf.region == WeatherApp.selectedRegion()).weatherForecastList()[hourIndex()][dateIndex()] -->
+                            <td class="vertical-middle p-2" data-bind="
+                                css: {
+                                    'weather-forecast-passed': $data.status() === WeatherForecastStatus.hasPassed,
+                                    'weather-forecast-obscured': WeatherApp.highlightedWeather !== null && $data.weatherType !== WeatherApp.highlightedWeather && $data.status() !== WeatherForecastStatus.hasPassed,
+                                    'bg-primary': $data.weatherType === WeatherApp.highlightedWeather
+                                 },
+                                tooltip: {
+                                    title: GameConstants.humanifyString(WeatherType[$data.weatherType]),
+                                    placement: 'bottom',
+                                    trigger: 'hover',
+                                    boundary: 'window'
+                                }
+                            ">
+                                <div data-bind="style: { background: Weather.weatherConditions[$data.weatherType].color }">
+                                    <img width="30px" data-bind="attr: { src: `assets/images/weather/${WeatherType[$data.weatherType]}.png` }">
+                                </div>
+                            </td>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </tr>
+                        <!-- /ko -->
+                        </tbody>
+                    </table>
+
+                    <p class="font-italic small m-0">Click to highlight weather</p>
+                    <div class="" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(65px, 1fr)); gap: 0.25rem;">
+                        <!-- ko foreach: Weather.weatherDistribution[WeatherApp.selectedRegion()] || GameHelper.enumNumbers(WeatherType) -->
+                        <div class="d-flex flex-column align-items-center clickable" data-bind="
+                            click: () => { WeatherApp.highlightedWeather = WeatherApp.highlightedWeather !== $data ? $data : null }
+                        ">
+                            <div class="p-2" data-bind="
+                                css: {
+                                    'weather-forecast-obscured': WeatherApp.highlightedWeather !== null && $data !== WeatherApp.highlightedWeather,
+                                    'bg-primary': $data === WeatherApp.highlightedWeather
+                                },
+                            ">
+                                <div data-bind="style: { background: Weather.weatherConditions[$data].color }">
+                                    <img width="30px" data-bind="attr: { src: `assets/images/weather/${WeatherType[$data]}.png` }">
+                                </div>
+                            </div>
+                            <div style="font-size: 0.6rem;" data-bind="text: GameConstants.humanifyString(WeatherType[$data])"></div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <div id="weather-override" class="tab-pane fade">
+                    <div class="d-flex flex-wrap justify-content-center" style="gap: 1rem;">
+                        <!-- ko foreach: [...new Set(Object.values(WeatherOverride.weatherCost).flatMap(value => value).map(value => value.item.name))] -->
+                        <div class="d-flex flex-column align-items-center">
+                            <img class="pixelated" src="" alt="" style="height: 26px;" data-bind="attr: { src: ItemList[$data].image }">
+                            <div class="small" data-bind="text: `${ItemList[$data].displayName}`"></div>
+                            <div class="small" data-bind="text: `[${player.itemList[$data]().toLocaleString('en-US')}]`"></div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.25rem;">
+                        <!-- ko foreach: GameHelper.enumNumbers(GameConstants.Region).filter(r => r >= 0 && r <= GameConstants.MAX_AVAILABLE_REGION) -->
+                        <button class="btn btn-secondary position-relative" data-bind="
+                            css: { 'btn-info': $data === WeatherOverride.selectedRegion },
+                            click: () => { WeatherOverride.selectedRegion = $data }
+                        ">
+                            <knockout data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[$data])"></knockout>
+                        </button>
+                        <!-- /ko -->
+                    </div>
+
+                    <h4>Cycles</h4>
+
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => WeatherOverride.selectedCycles = 1">Reset</button>
+                                <input type="number" min="1" class="outline-dark form-control form-control-number" oninput="this.value = Math.max(this.value, 1)" data-bind="textInput: WeatherOverride.selectedCycles">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="small">1 cycle equals <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME)"></code> • Total <code data-bind="text: GameConstants.formatTime(WeatherOverride.CYCLE_TIME * WeatherOverride.selectedCycles)"></code></div>
+
+                    <!-- ko if: (App.game.weatherOverride.getTimeForRegion(WeatherOverride.selectedRegion) ?? 0) > 0 -->
+                    <div class="m-2">
+                        Current weather override active for <code data-bind="text: GameConstants.formatTime(App.game.weatherOverride.getTimeForRegion(WeatherOverride.selectedRegion) ?? 0)"></code>
+                    </div>
                     <!-- /ko -->
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="row m-0 w-100 h-100">
-                    <div class="col-2 w-100 px-0" id="timeTable">
-                        <table class="w-100 h-100" border="1">
-                            <thead>
-                                <tr>
-                                    <th style="height: 26px;">Time</th>
-                                </tr>
-                            </thead>
-                            <tbody data-bind="foreach: WeatherApp.generateHourList()">
-                                <tr>
-                                    <td style="height: 60px;" data-bind="text: `${GameHelper.twoDigitNumber(+$data)}:00 - ${GameHelper.twoDigitNumber(+$data + (Weather.period - 1))}:59`"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-10 w-100 px-0 overflow-auto" id="forecastTable">
-                        <table class="w-100 h-100" border="1">
-                            <thead>
-                                <tr>
-                                    <!-- ko foreach: WeatherApp.dateList() -->
-                                    <th style="height: 26px;" data-bind="text: GameConstants.DayOfWeek[$data.getDay()].slice(0, 3),
-                                        tooltip: {
-                                            title: $data.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
-                                            placement: 'bottom',
-                                            trigger: 'hover',
-                                            boundary: 'window',
-                                        }">
-                                    </th>
+
+                    <table class="table table-striped table-hover table-bordered table-sm table-responsive m-0 mb-2">
+                        <tbody>
+                        <!-- ko foreach: { data: App.game.weatherOverride.getAllowedWeather(WeatherOverride.selectedRegion), as: 'weatherType' } -->
+                        <tr data-bind="
+                            css: {
+                                'override-weather-highlight': weatherType === App.game.weatherOverride.getWeatherForRegion(WeatherOverride.selectedRegion),
+                                'original-weather-highlight': weatherType === Weather._regionalWeather[WeatherOverride.selectedRegion]()
+                            }
+                        ">
+                            <td class="vertical-middle" data-bind="style: { background: Weather.weatherConditions[weatherType].color }">
+                                <img width=30px src="" data-bind="attr: { src: `assets/images/weather/${WeatherType[weatherType]}.png` }"/>
+                            </td>
+                            <td class="vertical-middle text-left" data-bind="text: GameConstants.humanifyString(WeatherType[weatherType])"></td>
+                            <td class="vertical-middle text-left" data-bind="html: Weather.weatherConditions[weatherType].tooltip"></td>
+                            <td class="vertical-middle">
+                                <!-- ko foreach: WeatherOverride.weatherCost[weatherType] -->
+                                <div class="d-flex" style="gap: 1rem;">
+                                    <div><img data-bind="attr: { src: $data.item.image }" height="24px"></div>
+                                    <div class="text-left" data-bind="
+                                        text: `${App.game.weatherOverride.calculatePrice(WeatherOverride.selectedRegion, $data.amount, WeatherOverride.selectedCycles).toLocaleString('en-US')} × ${$data.item.displayName}`,
+                                        css: { 'text-danger': App.game.weatherOverride.calculatePrice(WeatherOverride.selectedRegion, $data.amount, WeatherOverride.selectedCycles) > player.itemList[$data.item.name]() }
+                                    "></div>
+                                </div>
+                                <!-- /ko -->
+                            </td>
+                            <td class="vertical-middle">
+                                <!-- ko if: weatherType === Weather.getRegionalWeather(WeatherOverride.selectedRegion) -->
+                                    <!-- ko if: weatherType === App.game.weatherOverride.getWeatherForRegion(WeatherOverride.selectedRegion) -->
+                                    <button class="btn btn-secondary" data-bind="
+                                        click: () => { App.game.weatherOverride.purchaseWeatherOverride(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles) },
+                                        enable: App.game.weatherOverride.canAffordWeather(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles)
+                                    ">
+                                        Extend
+                                    </button>
                                     <!-- /ko -->
-                                </tr>
-                            </thead>
-                            <tbody data-bind="foreach: { data: WeatherApp.fullForecast().find((rf) => rf.region == WeatherApp.selectedRegion()).weatherForecastList(), as: 'hourForecast' }">
-                                <tr class="py-2" data-bind="template: { name: 'weatherAppTemplate', data: {'hourForecast': hourForecast, 'region': WeatherApp.selectedRegion()} }"></tr>
-                            </tbody>
-                        </table>
+
+                                    <!-- ko ifnot: weatherType === App.game.weatherOverride.getWeatherForRegion(WeatherOverride.selectedRegion) -->
+                                    <code>Active weather</code>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+
+                                <!-- ko ifnot: weatherType === Weather.getRegionalWeather(WeatherOverride.selectedRegion) -->
+                                <button class="btn btn-secondary" data-bind="
+                                    click: () => { App.game.weatherOverride.purchaseWeatherOverride(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles) },
+                                    enable: App.game.weatherOverride.canAffordWeather(WeatherOverride.selectedRegion, weatherType, WeatherOverride.selectedCycles)
+                                ">
+                                    Activate
+                                </button>
+                                <!-- /ko -->
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2 original-weather-highlight">Regional weather</div>
+                        <div class="col-12 col-md-6 p-2 override-weather-highlight">Override weather</div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-
-<script type="text/html" id="weatherAppTemplate">
-    <!-- ko foreach: { data: $data.hourForecast, as: 'weatherForecast' } -->
-    <td class="px-3 clickable" style="height: 60px; position: relative;"
-        data-bind="css: { 'weatherForecastPassed': weatherForecast.status() === WeatherForecastStatus.hasPassed }">
-        <button class='btn btn-sm' style="right: 0px; top: 0px; width: auto; height: 41px;"
-        data-bind='style: { background: Weather.weatherConditions[weatherForecast.weatherType].color },
-            tooltip: {
-                title: GameConstants.humanifyString(WeatherType[weatherForecast.weatherType]),
-                placement: "bottom",
-                trigger: "hover",
-                boundary: "window",
-            }'>
-            <img width=30px src="" data-bind="attr: { src: `assets/images/weather/${WeatherType[weatherForecast.weatherType]}.png` }"/>
-        </button>
-    </td>
-    <!-- /ko -->
-</script>
