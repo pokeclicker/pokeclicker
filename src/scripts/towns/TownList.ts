@@ -6491,7 +6491,7 @@ const DirectorFrank5 = new NPC('Frank', [
     'You can keep the pika-costumes, if you want.',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 7, GameConstants.AchievementOption.more),
+    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 8, GameConstants.AchievementOption.more),
 });
 const JeanFranksGrandDaughter = new NPC('Jean', [
     'My grandfather can be found north west of here.',
