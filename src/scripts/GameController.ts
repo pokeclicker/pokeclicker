@@ -427,6 +427,20 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
+                case Settings.getSetting('hotkey.castformApp').value:
+                    if (WeatherApp.shortcutVisible()) {
+                        $('.modal').modal('hide');
+                        WeatherApp.openWeatherAppModal();
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.purifyChamber').value:
+                    if (PurifyChamber.shortcutVisible()) {
+                        $('.modal').modal('hide');
+                        PurifyChamber.openPurifyChamberModal();
+                        return e.preventDefault();
+                    }
+                    break;
             }
 
             if (key === 'Space') {
