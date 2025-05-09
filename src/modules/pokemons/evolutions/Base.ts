@@ -57,8 +57,8 @@ export const restrict = <T extends EvoData>(evo: T, ...restrictions: EvoData['re
     return evo;
 };
 
-export const DummyEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType): DummyEvoData => ({
-    ...Evo(basePokemon, evolvedPokemon, EvoTrigger.NONE, false),
+export const DummyEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, ignoreECChange = false): DummyEvoData => ({
+    ...Evo(basePokemon, evolvedPokemon, EvoTrigger.NONE, ignoreECChange),
 });
 
 export const LevelEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, level: number, ignoreECChange = false): LevelEvoData => restrict(

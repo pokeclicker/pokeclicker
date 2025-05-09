@@ -207,7 +207,6 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Ivysaur', 'Venusaur', 32),
-            DummyEvolution('Ivysaur', 'Gigantamax Venusaur'),
         ],
         'base': {
             'hitpoints': 60,
@@ -292,7 +291,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 236,
         'eggCycles': 20,
-        'evolutions': [MegaEvolution(MegaStoneType.Venusaurite, 'Venusaur', 'Mega Venusaur')],
+        'evolutions': [
+            MegaEvolution(MegaStoneType.Venusaurite, 'Venusaur', 'Mega Venusaur'),
+            DummyEvolution('Venusaur', 'Gigantamax Venusaur', true),
+        ],
         'base': {
             'hitpoints': 80,
             'attack': 82,
@@ -459,7 +461,6 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Charmeleon', 'Charizard', 36),
-            DummyEvolution('Charmeleon', 'Gigantamax Charizard'),
         ],
         'base': {
             'hitpoints': 58,
@@ -505,6 +506,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             DayTimedMegaEvolution(MegaStoneType.Charizardite_X, 'Charizard', 'Mega Charizard X'),
             NightTimedMegaEvolution(MegaStoneType.Charizardite_Y, 'Charizard', 'Mega Charizard Y'),
+            DummyEvolution('Charizard', 'Gigantamax Charizard', true),
         ],
         'base': {
             'hitpoints': 78,
@@ -650,7 +652,6 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Wartortle', 'Blastoise', 36),
-            DummyEvolution('Wartortle', 'Gigantamax Blastoise'),
         ],
         'base': {
             'hitpoints': 59,
@@ -693,7 +694,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'eggCycles': 20,
-        'evolutions': [MegaEvolution(MegaStoneType.Blastoisinite, 'Blastoise', 'Mega Blastoise')],
+        'evolutions': [
+            MegaEvolution(MegaStoneType.Blastoisinite, 'Blastoise', 'Mega Blastoise'),
+            DummyEvolution('Blastoise', 'Gigantamax Blastoise', true),
+        ],
         'base': {
             'hitpoints': 79,
             'attack': 83,
@@ -814,7 +818,6 @@ export const pokemonList = createPokemonArray(
             DummyEvolution('Metapod', 'Valencian Butterfree'),
             DummyEvolution('Metapod', 'Pink Butterfree'),
             DummyEvolution('Metapod', 'Ash\'s Butterfree'),
-            DummyEvolution('Metapod', 'Gigantamax Butterfree'),
         ],
         'base': {
             'hitpoints': 50,
@@ -833,6 +836,9 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 178,
         'eggCycles': 15,
+        'evolutions': [
+            DummyEvolution('Butterfree', 'Gigantamax Butterfree', true),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 45,
@@ -1149,7 +1155,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 51,
         'eggCycles': 15,
-        'evolutions': [NightTimedLevelEvolution('Alolan Rattata', 'Alolan Raticate', 20)],
+        'evolutions': [
+            NightTimedLevelEvolution('Alolan Rattata', 'Alolan Raticate', 20),
+            DummyEvolution('Alolan Rattata', 'Totem Raticate'),
+        ],
         'base': {
             'hitpoints': 30,
             'attack': 56,
@@ -1225,7 +1234,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Dark, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 145,
-        'eggCycles': 23,
+        'eggCycles': 15,
         'base': {
             'hitpoints': 75,
             'attack': 71,
@@ -1372,7 +1381,8 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 10,
         'evolutions': [
             RegionStoneEvolution(allButAlola, 'Pikachu', 'Raichu', StoneType.Thunder_stone),
-            RegionStoneEvolution(alolaOnly, 'Pikachu', 'Alolan Raichu', StoneType.Thunder_stone),
+            RegionStoneEvolution(alolaOnly, 'Pikachu', 'Alolan Raichu', StoneType.Thunder_stone),            
+            DummyEvolution('Pikachu', 'Gigantamax Pikachu', true),
         ],
         'base': {
             'hitpoints': 35,
@@ -2722,7 +2732,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Meowth', 'Persian', 28)],
+        'evolutions': [
+            LevelEvolution('Meowth', 'Persian', 28),
+            DummyEvolution('Meowth', 'Gigantamax Meowth', true),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -2980,7 +2993,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 70,
         'eggCycles': 20,
-        'evolutions': [StoneEvolution('Hisuian Growlithe', 'Hisuian Arcanine', StoneType.Fire_stone)],
+        'evolutions': [
+            StoneEvolution('Hisuian Growlithe', 'Hisuian Arcanine', StoneType.Fire_stone),
+            DummyEvolution('Hisuian Growlithe', 'Noble Arcanine'),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 75,
@@ -3243,7 +3259,6 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             StoneEvolution('Machoke', 'Machamp', StoneType.Linking_cord),
-            DummyEvolution('Machoke', 'Gigantamax Machamp'),
         ],
         'base': {
             'hitpoints': 80,
@@ -3265,6 +3280,9 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 227,
         'eggCycles': 20,
+        'evolutions': [
+            DummyEvolution('Machamp', 'Gigantamax Machamp', true),
+        ],
         'base': {
             'hitpoints': 90,
             'attack': 130,
@@ -4059,7 +4077,6 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             StoneEvolution('Haunter', 'Gengar', StoneType.Linking_cord),
-            DummyEvolution('Haunter', 'Gigantamax Gengar'),
             DummyEvolution('Haunter', 'Gengar (Punk)'),
         ],
         'base': {
@@ -4079,7 +4096,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 225,
         'eggCycles': 20,
-        'evolutions': [MegaEvolution(MegaStoneType.Gengarite, 'Gengar', 'Mega Gengar')],
+        'evolutions': [
+            MegaEvolution(MegaStoneType.Gengarite, 'Gengar', 'Mega Gengar'),
+            DummyEvolution('Gengar', 'Gigantamax Gengar', true),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 65,
@@ -4244,7 +4264,6 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Krabby', 'Kingler', 28),
-            DummyEvolution('Krabby', 'Gigantamax Kingler'),
         ],
         'base': {
             'hitpoints': 30,
@@ -4263,6 +4282,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 166,
         'eggCycles': 20,
+        'evolutions': [DummyEvolution('Kingler', 'Gigantamax Kingler', true)],
         'base': {
             'hitpoints': 55,
             'attack': 130,
@@ -4319,7 +4339,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [StoneEvolution('Hisuian Voltorb', 'Hisuian Electrode', StoneType.Leaf_stone)],
+        'evolutions': [
+            StoneEvolution('Hisuian Voltorb', 'Hisuian Electrode', StoneType.Leaf_stone),
+            DummyEvolution('Hisuian Voltorb', 'Noble Electrode'),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 30,
@@ -4496,6 +4519,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             RegionLevelEvolution(allButAlola, 'Cubone', 'Marowak', 28),
             RegionNightTimedLevelEvolution(alolaOnly, 'Cubone', 'Alolan Marowak', 28),
+            DummyEvolution('Cubone', 'Totem Marowak'),
         ],
         'base': {
             'hitpoints': 50,
@@ -4552,7 +4576,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fire, PokemonType.Ghost],
         'levelType': LevelType.mediumfast,
         'exp': 149,
-        'eggCycles': 30,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 60,
             'attack': 80,
@@ -5104,6 +5128,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             StoneEvolution('Scyther', 'Scizor', StoneType.Metal_coat),
             StoneEvolution('Scyther', 'Kleavor', StoneType.Black_augurite),
+            DummyEvolution('Scyther', 'Noble Kleavor'),
         ],
         'base': {
             'hitpoints': 70,
@@ -6082,6 +6107,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 187,
         'eggCycles': 40,
+        'evolutions': [DummyEvolution('Lapras', 'Gigantamax Lapras', true)],
         'base': {
             'hitpoints': 130,
             'attack': 85,
@@ -6167,6 +6193,7 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Eevee', 'Sylveon', 29),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
+            DummyEvolution('Eevee', 'Gigantamax Eevee', true),
         ],
         'base': {
             'hitpoints': 55,
@@ -6433,6 +6460,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'eggCycles': 40,
+        'evolutions': [DummyEvolution('Snorlax', 'Gigantamax Snorlax', true)],
         'base': {
             'hitpoints': 160,
             'attack': 110,
@@ -14385,7 +14413,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 50,
         'evolutions': [
             StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell),
-            DummyEvolution('Munchlax', 'Gigantamax Snorlax'),
+            DummyEvolution('Munchlax', 'Snorlax (Snowman)'),
         ],
         'baby': true,
         'base': {
@@ -17065,6 +17093,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             RegionStoneEvolution(allButHisui, 'Petilil', 'Lilligant', StoneType.Sun_stone),
             RegionStoneEvolution(hisuiOnly, 'Petilil', 'Hisuian Lilligant', StoneType.Sun_stone),
+            DummyEvolution('Petilil', 'Noble Lilligant'),
         ],
         'base': {
             'hitpoints': 45,
@@ -17616,7 +17645,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 190,
         'evolutions': [
             LevelEvolution('Trubbish', 'Garbodor', 36),
-            DummyEvolution('Trubbish', 'Gigantamax Garbodor'),
         ],
         'base': {
             'hitpoints': 50,
@@ -17635,6 +17663,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 166,
         'catchRate': 60,
+        'evolutions': [DummyEvolution('Garbodor', 'Gigantamax Garbodor', true)],
         'base': {
             'hitpoints': 80,
             'attack': 95,
@@ -19854,6 +19883,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
+        'evolutions': [DummyEvolution('Greninja', 'Ash-Greninja', true)],
         'base': {
             'hitpoints': 72,
             'attack': 95,
@@ -19870,7 +19900,7 @@ export const pokemonList = createPokemonArray(
         'id': 658.01,
         'name': 'Ash-Greninja',
         'type': [PokemonType.Water, PokemonType.Dark],
-        'eggCycles': 45,
+        'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
@@ -21810,6 +21840,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Bergmite', 'Avalugg', 37),
             LevelEvolution('Bergmite', 'Hisuian Avalugg', 37),
+            DummyEvolution('Bergmite', 'Noble Avalugg'),
         ],
         'base': {
             'hitpoints': 55,
@@ -22361,7 +22392,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 51,
         'catchRate': 255,
-        'evolutions': [DayTimedLevelEvolution('Yungoos', 'Gumshoos', 20)],
+        'evolutions': [
+            DayTimedLevelEvolution('Yungoos', 'Gumshoos', 20),
+            DummyEvolution('Yungoos', 'Totem Gumshoos'),
+        ],
         'base': {
             'hitpoints': 48,
             'attack': 70,
@@ -22392,7 +22426,7 @@ export const pokemonList = createPokemonArray(
         'id': 735.01,
         'name': 'Totem Gumshoos',
         'type': [PokemonType.Normal],
-        'eggCycles': 23,
+        'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 146,
         'catchRate': 127,
@@ -22434,6 +22468,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             EnvironmentRestrictedLevelEvolution('MagneticField', 'Charjabug', 'Vikavolt', 20),
             RegionStoneEvolution(galarOnly, 'Charjabug', 'Vikavolt', StoneType.Thunder_stone),
+            DummyEvolution('Charjabug', 'Totem Vikavolt'),
         ],
         'base': {
             'hitpoints': 57,
@@ -22465,7 +22500,7 @@ export const pokemonList = createPokemonArray(
         'id': 738.01,
         'name': 'Totem Vikavolt',
         'type': [PokemonType.Bug, PokemonType.Electric],
-        'eggCycles': 35,
+        'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 225,
         'catchRate': 45,
@@ -22601,7 +22636,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [LevelEvolution('Cutiefly', 'Ribombee', 25)],
+        'evolutions': [
+            LevelEvolution('Cutiefly', 'Ribombee', 25),
+            DummyEvolution('Cutiefly', 'Totem Ribombee'),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -22632,7 +22670,7 @@ export const pokemonList = createPokemonArray(
         'id': 743.01,
         'name': 'Totem Ribombee',
         'type': [PokemonType.Bug, PokemonType.Fairy],
-        'eggCycles': 30,
+        'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 162,
         'catchRate': 75,
@@ -22727,7 +22765,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
-        'evolutions': [LevelEvolution('Wishiwashi (Solo)', 'Wishiwashi (School)', 20)],
+        'evolutions': [
+            LevelEvolution('Wishiwashi (Solo)', 'Wishiwashi (School)', 20),
+            DummyEvolution('Wishiwashi (Solo)', 'Totem Wishiwashi'),
+        ],
         'base': {
             'hitpoints': 45,
             'attack': 20,
@@ -22758,7 +22799,7 @@ export const pokemonList = createPokemonArray(
         'id': 746.02,
         'name': 'Totem Wishiwashi',
         'type': [PokemonType.Water],
-        'eggCycles': 23,
+        'eggCycles': 15,
         'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
@@ -22849,7 +22890,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 54,
         'catchRate': 200,
-        'evolutions': [LevelEvolution('Dewpider', 'Araquanid', 22)],
+        'evolutions': [
+            LevelEvolution('Dewpider', 'Araquanid', 22),
+            DummyEvolution('Dewpider', 'Totem Araquanid'),
+        ],
         'base': {
             'hitpoints': 38,
             'attack': 40,
@@ -22880,7 +22924,7 @@ export const pokemonList = createPokemonArray(
         'id': 752.01,
         'name': 'Totem Araquanid',
         'type': [PokemonType.Water, PokemonType.Bug],
-        'eggCycles': 23,
+        'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 159,
         'catchRate': 100,
@@ -22901,7 +22945,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 50,
         'catchRate': 190,
-        'evolutions': [DayTimedLevelEvolution('Fomantis', 'Lurantis', 34)],
+        'evolutions': [
+            DayTimedLevelEvolution('Fomantis', 'Lurantis', 34),
+            DummyEvolution('Fomantis', 'Totem Lurantis'),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 55,
@@ -22932,7 +22979,7 @@ export const pokemonList = createPokemonArray(
         'id': 754.01,
         'name': 'Totem Lurantis',
         'type': [PokemonType.Grass],
-        'eggCycles': 30,
+        'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 168,
         'catchRate': 75,
@@ -22988,7 +23035,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'catchRate': 120,
-        'evolutions': [LevelEvolution('Salandit', 'Salazzle', 33)],
+        'evolutions': [
+            LevelEvolution('Salandit', 'Salazzle', 33),
+            DummyEvolution('Salandit', 'Totem Salazzle'),
+        ],
         'base': {
             'hitpoints': 48,
             'attack': 44,
@@ -23025,7 +23075,7 @@ export const pokemonList = createPokemonArray(
         'id': 758.01,
         'name': 'Totem Salazzle',
         'type': [PokemonType.Poison, PokemonType.Fire],
-        'eggCycles': 30,
+        'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 168,
         'catchRate': 45,
@@ -23954,7 +24004,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [LevelEvolution('Hakamo-o', 'Kommo-o', 45)],
+        'evolutions': [
+            LevelEvolution('Hakamo-o', 'Kommo-o', 45),
+            DummyEvolution('Hakamo-o', 'Totem Kommo-o'),
+        ],
         'base': {
             'hitpoints': 55,
             'attack': 75,
@@ -23987,7 +24040,7 @@ export const pokemonList = createPokemonArray(
         'id': 784.01,
         'name': 'Totem Kommo-o',
         'type': [PokemonType.Dragon, PokemonType.Fighting],
-        'eggCycles': 90,
+        'eggCycles': 40,
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 45,
@@ -24633,7 +24686,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 3,
         'evolutions': [
             DummyEvolution('Meltan', 'Melmetal'),
-            DummyEvolution('Meltan', 'Gigantamax Melmetal'),
         ],
         'base': {
             'hitpoints': 46,
@@ -24656,6 +24708,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
+        'evolutions': [DummyEvolution('Melmetal', 'Gigantamax Melmetal', true)],
         'base': {
             'hitpoints': 135,
             'attack': 143,
@@ -24728,7 +24781,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 45,
         'evolutions': [
             LevelEvolution('Thwackey', 'Rillaboom', 35),
-            DummyEvolution('Thwackey', 'Gigantamax Rillaboom'),
         ],
         'gender': {
             'femaleRatio': 0.125,
@@ -24746,6 +24798,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 85,
         },
+        'evolutions': [DummyEvolution('Rillaboom', 'Gigantamax Rillaboom', true)],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 265,
@@ -24813,7 +24866,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 45,
         'evolutions': [
             LevelEvolution('Raboot', 'Cinderace', 35),
-            DummyEvolution('Raboot', 'Gigantamax Cinderace'),
         ],
         'gender': {
             'femaleRatio': 0.125,
@@ -24831,6 +24883,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 119,
         },
+        'evolutions': [DummyEvolution('Cinderace', 'Gigantamax Cinderace', true)],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 265,
@@ -24898,7 +24951,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 45,
         'evolutions': [
             LevelEvolution('Drizzile', 'Inteleon', 35),
-            DummyEvolution('Drizzile', 'Gigantamax Inteleon'),
         ],
         'gender': {
             'femaleRatio': 0.125,
@@ -24916,6 +24968,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 120,
         },
+        'evolutions': [DummyEvolution('Inteleon', 'Gigantamax Inteleon', true)],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 265,
@@ -25015,7 +25068,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 120,
         'evolutions': [
             LevelEvolution('Corvisquire', 'Corviknight', 38),
-            DummyEvolution('Corvisquire', 'Gigantamax Corviknight'),
         ],
     },
     {
@@ -25033,6 +25085,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 67,
         },
+        'evolutions': [DummyEvolution('Corviknight', 'Gigantamax Corviknight', true)],
         'eggCycles': 15,
         'levelType': LevelType.mediumslow,
         'exp': 248,
@@ -25097,7 +25150,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 120,
         'evolutions': [
             LevelEvolution('Dottler', 'Orbeetle', 30),
-            DummyEvolution('Dottler', 'Gigantamax Orbeetle'),
         ],
     },
     {
@@ -25115,6 +25167,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 120,
             'speed': 90,
         },
+        'evolutions': [DummyEvolution('Orbeetle', 'Gigantamax Orbeetle', true)],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 253,
@@ -25263,7 +25316,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 255,
         'evolutions': [
             LevelEvolution('Chewtle', 'Drednaw', 22),
-            DummyEvolution('Chewtle', 'Gigantamax Drednaw'),
         ],
     },
     {
@@ -25281,6 +25333,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 68,
             'speed': 74,
         },
+        'evolutions': [DummyEvolution('Drednaw', 'Gigantamax Drednaw', true)],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 170,
@@ -25380,7 +25433,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 120,
         'evolutions': [
             LevelEvolution('Carkol', 'Coalossal', 34),
-            DummyEvolution('Carkol', 'Gigantamax Coalossal'),
         ],
     },
     {
@@ -25398,6 +25450,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 30,
         },
+        'evolutions': [DummyEvolution('Coalossal', 'Gigantamax Coalossal', true)],
         'eggCycles': 15,
         'levelType': LevelType.mediumslow,
         'exp': 255,
@@ -25443,8 +25496,6 @@ export const pokemonList = createPokemonArray(
             StoneEvolution('Applin', 'Flapple', StoneType.Tart_apple),
             StoneEvolution('Applin', 'Appletun', StoneType.Sweet_apple),
             StoneEvolution('Applin', 'Dipplin', StoneType.Syrupy_apple),
-            DummyEvolution('Applin', 'Gigantamax Flapple'),
-            DummyEvolution('Applin', 'Gigantamax Appletun'),
         ],
         'levelType': LevelType.erratic,
         'exp': 52,
@@ -25485,6 +25536,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 70,
         },
+        'evolutions': [DummyEvolution('Flapple', 'Gigantamax Flapple', true)],
         'eggCycles': 20,
         'levelType': LevelType.erratic,
         'exp': 170,
@@ -25525,6 +25577,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 30,
         },
+        'evolutions': [DummyEvolution('Appletun', 'Gigantamax Appletun', true)],
         'eggCycles': 20,
         'levelType': LevelType.erratic,
         'exp': 170,
@@ -25568,7 +25621,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 255,
         'evolutions': [
             LevelEvolution('Silicobra', 'Sandaconda', 36),
-            DummyEvolution('Silicobra', 'Gigantamax Sandaconda'),
         ],
     },
     {
@@ -25583,6 +25635,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 71,
         },
+        'evolutions': [DummyEvolution('Sandaconda', 'Gigantamax Sandaconda', true)],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 179,
@@ -25723,7 +25776,6 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
             LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
-            DummyEvolution('Toxel', 'Gigantamax Toxtricity'),
         ],
     },
     {
@@ -25741,6 +25793,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 75,
         },
+        'evolutions': [DummyEvolution('Toxtricity (Amped)', 'Gigantamax Toxtricity', true)],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
         'exp': 176,
@@ -25761,6 +25814,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 75,
         },
+        'evolutions': [DummyEvolution('Toxtricity (Low Key)', 'Gigantamax Toxtricity', true)],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
         'exp': 176,
@@ -25807,7 +25861,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 190,
         'evolutions': [
             LevelEvolution('Sizzlipede', 'Centiskorch', 28),
-            DummyEvolution('Sizzlipede', 'Gigantamax Centiskorch'),
         ],
     },
     {
@@ -25825,6 +25878,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 65,
         },
+        'evolutions': [DummyEvolution('Centiskorch', 'Gigantamax Centiskorch', true)],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 184,
@@ -25965,7 +26019,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 120,
         'evolutions': [
             LevelEvolution('Hattrem', 'Hatterene', 42),
-            DummyEvolution('Hattrem', 'Gigantamax Hatterene'),
         ],
         'gender': {
             'femaleRatio': 1,
@@ -25986,6 +26039,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 103,
             'speed': 29,
         },
+        'evolutions': [DummyEvolution('Hatterene', 'Gigantamax Hatterene', true)],
         'eggCycles': 20,
         'levelType': LevelType.slow,
         'exp': 255,
@@ -26062,7 +26116,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 120,
         'evolutions': [
             LevelEvolution('Morgrem', 'Grimmsnarl', 42),
-            DummyEvolution('Morgrem', 'Gigantamax Grimmsnarl'),
         ],
         'gender': {
             'femaleRatio': 0,
@@ -26083,6 +26136,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 60,
         },
+        'evolutions': [DummyEvolution('Grimmsnarl', 'Gigantamax Grimmsnarl', true)],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 255,
@@ -26310,7 +26364,6 @@ export const pokemonList = createPokemonArray(
             DummyEvolution('Milcery', 'Alcremie (Ribbon Lemon)'),
             DummyEvolution('Milcery', 'Alcremie (Ribbon Mint)'),
             DummyEvolution('Milcery', 'Alcremie (Ribbon Rainbow)'),
-            DummyEvolution('Milcery', 'Gigantamax Alcremie'),
         ],
         'gender': {
             'femaleRatio': 1,
@@ -26348,6 +26401,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 121,
             'speed': 64,
         },
+        'evolutions': [DummyEvolution('Alcremie (Strawberry Vanilla)', 'Gigantamax Alcremie', true)],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 173,
@@ -27849,7 +27903,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 190,
         'evolutions': [
             LevelEvolution('Cufant', 'Copperajah', 34),
-            DummyEvolution('Cufant', 'Gigantamax Copperajah'),
         ],
     },
     {
@@ -27864,6 +27917,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 69,
             'speed': 30,
         },
+        'evolutions': [DummyEvolution('Copperajah', 'Gigantamax Copperajah', true)],
         'eggCycles': 25,
         'levelType': LevelType.mediumfast,
         'exp': 175,
@@ -27997,7 +28051,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 187,
         'catchRate': 45,
-        'evolutions': [StoneEvolution('Duraludon', 'Archaludon', StoneType.Metal_alloy)],
+        'evolutions': [
+            StoneEvolution('Duraludon', 'Archaludon', StoneType.Metal_alloy),
+            DummyEvolution('Duraludon', 'Gigantamax Duraludon', true),
+        ],
     },
     {
         'id': 884.01,
@@ -28228,8 +28285,6 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             DummyEvolution('Kubfu', 'Urshifu (Single Strike)'),
             DummyEvolution('Kubfu', 'Urshifu (Rapid Strike)'),
-            DummyEvolution('Kubfu', 'Gigantamax Urshifu (Single Strike)'),
-            DummyEvolution('Kubfu', 'Gigantamax Urshifu (Rapid Strike)'),
         ],
         'catchRate': 3,
         'eggCycles': 120,
@@ -28254,6 +28309,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 97,
         },
+        'evolutions': [DummyEvolution('Urshifu (Single Strike)', 'Gigantamax Urshifu (Single Strike)', true)],
         'catchRate': 3,
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -28277,6 +28333,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 97,
         },
+        'evolutions': [DummyEvolution('Urshifu (Rapid Strike)', 'Gigantamax Urshifu (Rapid Strike)', true)],
         'catchRate': 3,
         'eggCycles': 120,
         'levelType': LevelType.slow,
