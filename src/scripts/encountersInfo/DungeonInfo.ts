@@ -4,7 +4,15 @@ class DungeonInfo {
     });
 
     private static getLootList() {
-        return player.town.dungeon?.lootTable || [];
+        const rawTable = player.town.dungeon?.lootTable || {};
+        const displayTable = {};
+        Object.entries(rawTable).forEach(([tier, loots]) => {
+            const filteredLoots = (loots as Loot[]).filter(l => ItemList[l.loot] || pokemonMap[l.loot].name == 'MissingNo.');
+            if (filteredLoots.length) {
+                displayTable[tier] = filteredLoots;
+            }
+        });
+        return displayTable;
     }
 
     public static getFullName() {
@@ -29,8 +37,6 @@ class DungeonInfo {
                 return FarmController.getBerryImage(BerryType[GameConstants.humanifyString(input)]);
             case UndergroundItems.getByName(input) instanceof UndergroundItem:
                 return UndergroundItems.getByName(input).image;
-            case PokemonHelper.getPokemonByName(input).name != 'MissingNo.':
-                return `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
             default:
                 return ItemList[input].image;
         }
@@ -42,8 +48,6 @@ class DungeonInfo {
                 return ItemList[input]?.displayName;
             case typeof BerryType[input] == 'number':
                 return `${input} Berry`;
-            case PokemonHelper.getPokemonByName(input).name != 'MissingNo.':
-                return PokemonHelper.displayName(input)();
             default:
                 return GameConstants.camelCaseToString(GameConstants.humanifyString(input.toLowerCase()));
         }

@@ -3,7 +3,7 @@ import { Region } from '../GameConstants';
 import WeatherType from '../weather/WeatherType';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
 import GameHelper from '../GameHelper';
-import type { PokemonNameType } from '../pokemons/PokemonNameType';
+import type { TmpPartyPokemonType } from '../TemporaryScriptTypes';
 
 export default class DamageCalculator {
     public static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
@@ -67,7 +67,7 @@ export default class DamageCalculator {
     }
 
     // TODO replace temporary type with PartyPokemon type once that class is ported
-    public static getOneTypeDetail(pokemon: { name: PokemonNameType, displayName: string }): TypeDetail {
+    public static getOneTypeDetail(pokemon: TmpPartyPokemonType): TypeDetail {
         const ignoreRegionMultiplier = DamageCalculator.region() == Region.none;
         const dataPokemon = getPokemonByName(pokemon.name);
         return {
@@ -86,7 +86,6 @@ export default class DamageCalculator {
                 DamageCalculator.weather(),
                 DamageCalculator.ignoreLevel(),
             	true,
-                DamageCalculator.subregion(),
             ),
             displayName: pokemon.displayName,
         };
