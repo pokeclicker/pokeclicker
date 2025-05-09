@@ -20,7 +20,7 @@
                     <hr>
                     <!-- ko if: App.game.discord.enabled -->
                     <button class="btn btn-primary btn-block" onClick="App.game.discord.login()" data-bind="visible: !App.game.discord.ID()">Link Discord</button>
-                    <button class="btn btn-warning btn-block" onClick="App.game.discord.logout()" data-bind="visible: App.game.discord.ID()">Unlink Discord</button>
+                    <button class="btn btn-warning btn-block" onClick="App.game.discord.logout()" data-bind="visible: App.game.discord.ID(true)">Unlink Discord</button>
                     <i class="text-warning"><strong>Note:</strong> This is <strong>not</strong> used for cloud saves;<br/>it just allows you to enter codes received from the Discord bot.</i>
                     <hr>
                     <!-- /ko -->
