@@ -67,7 +67,7 @@
                                         Claim
                                     </button>
                                     <span data-bind='visible: $data.inProgress() && !$data.isCompleted(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: $data.claimed()'>Completed</button>
+                                    <button class='btn btn-success btn-sm btn-block disabled-button' disabled data-bind='visible: $data.claimed()'>Completed</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -94,8 +94,8 @@
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: $data.active">
-                                    <tr>
-                                        <td>
+                                    <tr class="questListRow">
+                                        <td data-toggle="modal" href="#questDetailsModal" data-bind="click: () => { App.game.statistics.selectedQuestName($data.name) }">
                                             <knockout class="font-weight-bold d-block" data-bind="text: $data.name"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
                                         </td>
@@ -143,7 +143,7 @@
                             </div>
                             <table class="table table-striped table-bordered table-hover table-sm">
                                 <tbody data-bind="foreach: $data.complete">
-                                    <tr>
+                                    <tr class="questListRow" data-toggle="modal" href="#questDetailsModal" data-bind="click: () => { App.game.statistics.selectedQuestName($data.name) }">
                                         <td>
                                             <knockout class="font-weight-bold d-block" data-bind="text: $data.name"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>

@@ -200,6 +200,32 @@ class Quests implements Saveable {
         }
     }
 
+    public getQuestDetails(questName: QuestLineNameType) {
+        type DetailsQuest = {
+            taskDescription: string;
+            isCompleted: boolean;
+            isCurrentTask: boolean;
+        };
+
+        const quest = this.getQuestLine(questName);
+        const tasks = quest.quests();
+        const returnObject = new Array<DetailsQuest>();
+
+        tasks.forEach(task => {
+            if (task.customDescription !== undefined) {
+                const detailsQuest: DetailsQuest = {
+                    taskDescription: task.index - 1 <= quest.curQuest() || quest.state() === QuestLineState.ended ? task.customDescription : 'Continue to progress through the quest to unlock the next tasks.',
+                    isCompleted: task.index - 1 < quest.curQuest() || quest.state() === QuestLineState.ended ? true : false,
+                    isCurrentTask: task.index - 1 === quest.curQuest() && quest.state() !== QuestLineState.ended,
+                };
+
+                returnObject.push(detailsQuest);
+            }
+        });
+
+        return returnObject;
+    }
+
     public resetRefreshes() {
         this.refreshes(0);
     }
