@@ -438,6 +438,7 @@ export type ItemNameType
     | 'Adamant_Orb'
     | 'Lustrous_Orb'
     | 'Griseous_Orb'
+    | 'Gracidea'
     | 'Burn_Drive'
     | 'Chill_Drive'
     | 'Douse_Drive'
