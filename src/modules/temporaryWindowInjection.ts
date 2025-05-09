@@ -27,6 +27,10 @@ import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
 import FarmingTool from './enums/FarmingTool';
 // end enums
+import Battle from './battles/Battle';
+import BattlePokemon from './battles/BattlePokemon';
+import Trainer from './battles/Trainer';
+import GymPokemon from './gym/GymPokemon';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -61,6 +65,7 @@ import EggType from './breeding/EggType';
 import Multiplier from './multiplier/Multiplier';
 import MultiplierType from './multiplier/MultiplierType';
 import SpecialEvent from './specialEvents/SpecialEvent';
+import SpecialEvents from './specialEvents/SpecialEvents';
 import Challenges from './challenges/Challenges';
 import LevelType, { levelRequirements } from './party/LevelType';
 import WalletClasses from './wallet/inject';
@@ -241,6 +246,10 @@ Object.assign(<any>window, {
     WeatherForecastStatus,
     SafariEnvironments,
     FarmingTool,
+    Battle,
+    BattlePokemon,
+    Trainer,
+    GymPokemon,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -280,6 +289,7 @@ Object.assign(<any>window, {
     Multiplier,
     MultiplierType,
     SpecialEvent,
+    SpecialEvents,
     Challenges,
     LevelType,
     levelRequirements,
