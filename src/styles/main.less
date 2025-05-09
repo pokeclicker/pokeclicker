@@ -208,6 +208,8 @@ body:hover {
 
   .dropdown-item {
     font-family: pokemonFont, "Helvetica Neue", sans-serif;
+    white-space: nowrap !important;
+    padding: 0.25rem 1rem;
   }
 
   .dropdown-toggle {
@@ -833,47 +835,6 @@ button.btn-circle {
   height: 90px; /* same as .loader-pokeball before padding */
   padding-bottom: 10px;
   overflow: hidden;
-}
-
-// Currency module
-#middle-column {
-    .currency-wrapper {
-        .currency-line {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: space-evenly;
-        }
-
-        &.short-currencies {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-
-            > .currency-line {
-                display: contents;
-            }
-
-            .currency-display {
-                flex-direction: column;
-            }
-        }
-    }
-}
-
-#left-column, #left-column-2, #right-column, #right-column-2 {
-    .currency-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-
-        .currency-line {
-            display: contents;
-        }
-
-        .currency-display {
-            flex-direction: column;
-        }
-    }
 }
 
 .dropdown-toggle-no-arrow::after {

@@ -1,5 +1,4 @@
 ///<reference path="../../declarations/globals.d.ts"/>
-///<reference path="BattlePokemon.ts"/>
 
 class PokemonFactory {
 
