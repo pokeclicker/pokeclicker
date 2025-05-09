@@ -19,7 +19,7 @@ enum PartyPokemonSaveKeys {
     showShadowImage,
 }
 
-class PartyPokemon implements Saveable {
+class PartyPokemon implements Saveable, TmpPartyPokemonType {
     saveKey: string;
     public exp = 0;
     public evs: KnockoutComputed<number>;
