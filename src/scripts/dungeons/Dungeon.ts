@@ -8,7 +8,6 @@
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
-///<reference path="../gym/GymPokemon.ts"/>
 
 interface EnemyOptions {
     weight?: number,
@@ -7847,7 +7846,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Parasect', 9900000, 50),
         new DungeonBossPokemon('Breloom', 9900000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
-        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {hide: true, requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
+        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {hide: true, requirement: new ObtainedPokemonRequirement('Shaymin (Sky)')}),
         new DungeonBossPokemon('Bulbasaur (Rose)', 16000000, 100, {
             hide: true,
             requirement: new MultiRequirement([

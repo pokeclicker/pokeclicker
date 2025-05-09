@@ -9,7 +9,7 @@ class PurifyChamberTownContent extends TownContent {
         return 'Purify Chamber';
     }
     public onclick(): void {
-        $('#purifyChamberModal').modal('show');
+        PurifyChamber.openPurifyChamberModal();
     }
 
     public isUnlocked(): boolean {
@@ -30,6 +30,14 @@ class PurifyChamber implements Saveable {
     public currentFlow: KnockoutObservable<number>;
     public flowNeeded: KnockoutComputed<number>;
     private notified = false;
+
+    private static shortcutRequirement = new MultiRequirement([
+        new ShadowPokemonRequirement(1, GameConstants.ShadowStatus.Purified),
+        new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified, GameConstants.AchievementOption.less),
+    ]);
+    public static shortcutVisible = ko.pureComputed((): boolean => {
+        return PurifyChamber.shortcutRequirement.isCompleted();
+    });
 
     constructor() {
         this.selectedPokemon = ko.observable(undefined);
@@ -80,6 +88,17 @@ class PurifyChamber implements Saveable {
                 type: NotificationConstants.NotificationOption.primary,
                 sound: NotificationConstants.NotificationSound.General.max_flow,
                 timeout: 15 * GameConstants.MINUTE,
+            });
+        }
+    }
+
+    public static openPurifyChamberModal() {
+        if (PurifyChamber.requirements.isCompleted()) {
+            $('#purifyChamberModal').modal('show');
+        } else {
+            Notifier.notify({
+                message: 'You need to progress in the Shadows in the Desert quest line to unlock this feature.',
+                type: NotificationConstants.NotificationOption.warning,
             });
         }
     }
