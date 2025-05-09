@@ -21498,7 +21498,7 @@ export const pokemonList = createPokemonArray(
         'heldItem': { type: ItemType.item, id: 'Kings_rock' },
     },
     {
-        'id': 701,
+        'id': 701.01,
         'name': 'Hawlucha (Stuntman)',
         'type': [PokemonType.Fighting, PokemonType.Flying],
         'eggCycles': 20,
