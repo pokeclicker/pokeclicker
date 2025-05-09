@@ -33,6 +33,25 @@
               </button>
             </td>
           </tr>
+          <tr data-bind="visible: WeatherApp.shortcutVisible">
+            <td class="p-0">
+              <button class="btn btn-block btn-primary m-0" onclick="WeatherApp.openWeatherAppModal()">
+                Castform App
+                <knockout data-bind="text: `[${Settings.getSetting('hotkey.castformApp').observableValue()}]`,
+                    visible: Settings.getSetting('hotkey.castformApp').observableValue() != 'None'"></knockout>
+              </button>
+            </td>
+          </tr>
+          <tr data-bind="visible: PurifyChamber.shortcutVisible">
+            <td class="p-0">
+              <button class="btn btn-block btn-primary m-0" onclick="PurifyChamber.openPurifyChamberModal()">
+                Purify Chamber
+                <knockout data-bind="text: `(${(Math.min(1, Math.trunc((App.game.purifyChamber.currentFlow() / App.game.purifyChamber.flowNeeded()) * 10 ** 4) / 10 ** 4)).toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 4 })})`"></knockout>
+                <knockout data-bind="text: `[${Settings.getSetting('hotkey.purifyChamber').observableValue()}]`,
+                    visible: Settings.getSetting('hotkey.purifyChamber').observableValue() != 'None'"></knockout>
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

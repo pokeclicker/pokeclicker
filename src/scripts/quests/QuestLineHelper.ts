@@ -82,34 +82,30 @@ class QuestLineHelper {
                     exitOnEsc: false,
                     showButtons: false,
                 });
-                const caughtSelector: HTMLElement = document.querySelector('tr[data-name="Caught"] img.pokeball-small.clickable.pokeball-selected');
-                caughtSelector.addEventListener('click', () => {
-                    Information.hide();
-                    $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
-                        // Need to set a timeout, otherwise it messes up the modal layout
-                        setTimeout(() => {
-                            Information.show({
-                                steps: [
-                                    {
-                                        element: document.querySelector('#pokeballSelectorModal .modal-body'),
-                                        intro: 'Select the <img title="Poké Ball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Poké Ball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
-                                    },
-                                ],
-                                // Needed for IntroJs on modals
-                                overlayOpacity: 0,
-                            });
-                        }, 100);
 
-                        // Hide the IntroJS overlay once the user selects the Pokeball
-                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
-                        selectPokeball.addEventListener('click', () => {
-                            Information.hide();
-                        }, {
-                            once: true,
+                $('#pokeballSelectorModal').one('show.bs.modal', () => {
+                    Information.hide();
+                });
+
+                $('#pokeballSelectorModal').one('shown.bs.modal', () => {
+                    // Need to set a timeout, otherwise it messes up the modal layout
+                    setTimeout(() => {
+                        Information.show({
+                            steps: [
+                                {
+                                    element: document.querySelector('#pokeballSelectorModal .modal-body'),
+                                    intro: 'Select the <img title="Poké Ball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Poké Ball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
+                                },
+                            ],
+                            // Needed for IntroJs on modals
+                            overlayOpacity: 0,
                         });
+                    }, 100);
+
+                    // Hide the IntroJS overlay once the user selects the Pokeball
+                    $('#pokeballSelectorModal .clickable').one('click', () => {
+                        Information.hide();
                     });
-                }, {
-                    once: true,
                 });
             });
         };
