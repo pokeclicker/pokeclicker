@@ -7,7 +7,7 @@ aria-labelledby="purifyChamberModalLabel">
             </div>
             <div class="modal-body">
                 <!-- ko if: App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow) -->
-                <select id="purify-chamber-selector" class="custom-select" style="margin-right: 8px"
+                <select id="purify-chamber-selector" class="custom-select"
                         data-bind="options: App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Shadow),
                                optionsText: (p) => PokemonHelper.displayName(p.name),
                                value: App.game.purifyChamber.selectedPokemon"

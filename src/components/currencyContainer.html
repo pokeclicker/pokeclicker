@@ -3,22 +3,18 @@
         <span>Currency</span>
     </div>
     <div id="currencyBody" class="card-body p-0 show">
-        <div class="currency-wrapper p-1" data-bind="css: { 'short-currencies': Settings.getSetting('currencyMainDisplayReduced').observableValue() }">
-            <div class="currency-line">
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.money, tooltip: 'Pokédollars<br /><br />Gained by defeating Pokémon and trainers in battle.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.dungeonToken, tooltip: 'Dungeon Tokens<br /><br />Gained by catching wild Pokémon.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.questPoint, tooltip: 'Quest Points<br /><br />Gained by completing Quests.' } }"></div>
-            </div>
-
-            <!-- ko if: Settings.getSetting('currencyMainDisplayExtended').observableValue() -->
-            <div class="currency-line">
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.farmPoint, tooltip: 'Farm Points<br /><br />Gained by harvesting berries on the Farm.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.diamond, tooltip: 'Diamonds<br /><br />Gained by selling treasure found in the Underground.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.battlePoint, tooltip: 'Battle Points<br /><br />Gained at the Battle Frontier.' } }"></div>
-                <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.contestToken, tooltip: 'Contest Tokens<br /><br />Gained by competing in Contests.' } },
-                    visible: App.game.wallet.currencies[GameConstants.Currency.contestToken]() > 0"></div>
-            </div>
-            <!-- /ko -->
+        <div class="currency-wrapper d-flex flex-wrap justify-content-around p-1" data-bind="css: { 'short-currencies': Settings.getSetting('currencyMainDisplayReduced').observableValue() }">
+            <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.money, tooltip: 'Pokédollars<br /><br />Gained by defeating Pokémon and trainers in battle.' } }"></div>
+            <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.dungeonToken, tooltip: 'Dungeon Tokens<br /><br />Gained by catching wild Pokémon.' } }"></div>
+            <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.questPoint, tooltip: 'Quest Points<br /><br />Gained by completing Quests.' } }"></div>
+            <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.farmPoint, tooltip: 'Farm Points<br /><br />Gained by harvesting berries on the Farm.' } },
+                visible: App.game.farming.canAccess() || App.game.wallet.currencies[GameConstants.Currency.farmPoint]() > 0"></div>
+            <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.diamond, tooltip: 'Diamonds<br /><br />Gained by selling treasure found in the Underground.' } },
+                visible: App.game.underground.canAccess() || App.game.wallet.currencies[GameConstants.Currency.diamond]() > 0"></div>
+            <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.battlePoint, tooltip: 'Battle Points<br /><br />Gained at the Battle Frontier.' } },
+                visible: TownList['Battle Frontier'].isUnlocked() || App.game.wallet.currencies[GameConstants.Currency.battlePoint]() > 0"></div>
+            <div data-bind="template: { name: 'currency-display-template', data: { currency: GameConstants.Currency.contestToken, tooltip: 'Contest Tokens<br /><br />Gained by competing in Contests.' } },
+                visible: TownList['National Park'].isUnlocked() || App.game.wallet.currencies[GameConstants.Currency.contestToken]() > 0"></div>
         </div>
     </div>
 </div>
