@@ -4153,7 +4153,7 @@ const EternaLassCaroline = new NPC('Lass Caroline', [
 
 const SinnohBerryMasterAssistant = new NPC('Berry Master Assistant', [
     'I have so many Gracidea right now, so i\'ll sell you one.',
-    'If you give it to you Shaymin, it can change form!',
+    'If you give it to your Shaymin, it can change form!',
 ]);
 
 const OreburghConstructionWorker = new NPC('Construction Worker', [
