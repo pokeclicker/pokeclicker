@@ -166,10 +166,10 @@ Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', tru
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
-Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokemon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
+Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokémon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokémon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokémon and Missing Achievement', [], '#c939fe'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokémon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
 Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ab1707', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
 Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
@@ -270,7 +270,16 @@ Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false, undef
 Settings.add(new Setting<string>('heldItemDropdownPokemonOrItem', 'Pokémon or Item', [new SettingOption('Pokémon', 'pokemon'), new SettingOption('Item', 'item')], 'pokemon', undefined, false));
 Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2, undefined, false));
-Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
+Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [
+    new SettingOption('All', -2),
+    ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+    new SettingOption('None', PokemonType.None),
+], -2, undefined, false));
+Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
+    new SettingOption('All', -2),
+    ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+    new SettingOption('None', PokemonType.None),
+], -2, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
 
