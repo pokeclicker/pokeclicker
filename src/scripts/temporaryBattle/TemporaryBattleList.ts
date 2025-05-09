@@ -3880,7 +3880,7 @@ TemporaryBattleList['Pikachu Libre and its gang'] = new TemporaryBattle(
         new GymPokemon('Pikachu (Libre)', 340000000, 70),
     ],
     'I won\'t forget this!',
-    [new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6)],
+    [new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 7)],
     undefined,
     {
         imageName: '../pokemon/25.21',
