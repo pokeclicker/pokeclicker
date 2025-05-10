@@ -12813,7 +12813,7 @@ dungeonList['Brawlers\' Cave'] = new Dungeon('Brawlers\' Cave',
 
 dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     [
-        {pokemon: 'Kubfu', options: { weight: 2 }},
+        {pokemon: 'Kubfu', options: { weight: 1 }},
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Zorua', 28886112, 65)],
             { weight: 1 }, 'Student'),
@@ -12853,7 +12853,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
 
 dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     [
-        {pokemon: 'Kubfu', options: { weight: 4 }},
+        {pokemon: 'Kubfu', options: { weight: 1 }},
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Psyduck', 28886112, 65)],
             { weight: 1 }, 'Student'),
