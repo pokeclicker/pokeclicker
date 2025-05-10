@@ -2852,6 +2852,12 @@ class Update implements Saveable {
             // Reset the Sprinklotad
             saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].level = 0;
             saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].exp = 0;
+
+            // Resets An Unrivaled Power Red tempbattle if needed
+            const megaMewtwoQl = saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power');
+            if (megaMewtwoQl && [1, 3].includes(megaMewtwoQl.state) && megaMewtwoQl.quest === 0) {
+                megaMewtwoQl.initial = 0;
+            }
         },
     };
 
