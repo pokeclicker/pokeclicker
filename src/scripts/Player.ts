@@ -221,6 +221,11 @@ class Player implements TmpPlayerType {
         this.regionStarters[this.region](index);
     }
 
+    public hasBeatenChampOfRegion(region: GameConstants.Region = this.highestRegion()) {
+        const champion = GameConstants.RegionGyms[region].find(gym => GymList[gym]?.flags.champion);
+        return App.game.badgeCase.hasBadge(GymList[champion].badgeReward);
+    }
+
     public toJSON() {
         const keep = [
             '_route',
