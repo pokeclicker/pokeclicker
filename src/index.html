@@ -262,7 +262,12 @@
                                         <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
                                     </td>
                                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
-                                        <span style="display: inline;">Click Attack:
+                                        <span style="display: inline;" data-bind="tooltip: {
+                                            title: 'See the Click Attack tab in the Start → Statistics menu for details.',
+                                            placement: 'bottom',
+                                            trigger: 'hover'
+                                        }">
+                                            Click Attack:
                                             <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                                         </span>
                                     </td>
