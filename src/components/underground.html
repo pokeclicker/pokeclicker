@@ -75,7 +75,7 @@
 
                         <!-- ko if: App.game.underground.mine -->
                         <div style="position: relative;">
-                            <div id="mineBody" style="margin:auto; background-image: url('../assets/images/underground/rock0.png');"
+                            <div id="mineBody" style="margin:auto; background-image: url('assets/images/underground/rock0.png');"
                                  data-bind="css: {
                                     'disabled': App.game.underground.mine.timeUntilDiscovery > 0 || App.game.underground.mine.completed,
                                     'tool-cooldown': App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durability < App.game.underground.tools.getTool(App.game.underground.tools.selectedToolType).durabilityPerUse
@@ -130,7 +130,7 @@
                                             <div style="position: relative; width: 100%; max-width: 75px; aspect-ratio: 1; padding: 5px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: !tool.canUseTool() ? 0.3 : 1 }">
                                                 <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 5px;">
                                                     <div class="d-flex align-items-center justify-content-center" style="width: 27px; height: 27px;">
-                                                        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
+                                                        <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[tool.id]}.png` }">
                                                     </div>
                                                     <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
                                                 </div>
@@ -205,19 +205,22 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === $data) -->
                                 <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
                                     <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                         data-bind="
+                                            data-bind="
                                             css: { 'bg-info': UndergroundTrading.selectedTradeFromItem === $data },
+                                            style: { cursor: $data.valueType === UndergroundItemValueType.Special ? 'default' : 'pointer' },
                                             template: { name: 'otherItemTemplate', data: $data.itemName },
                                             click: () => {
-                                                UndergroundTrading.selectedTradeFromItem = $data;
-                                                UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
-                                                $('#treasureDetailModal').modal('show');
+                                                if ($data.valueType !== UndergroundItemValueType.Special) {
+                                                    UndergroundTrading.selectedTradeFromItem = $data;
+                                                    UndergroundTrading.selectedTradeToItem = UndergroundTrading.tradeToItemList[0];
+                                                    $('#treasureDetailModal').modal('show');
+                                                }
                                             }
-                                         ">
+                                            ">
                                     </div>
                                 </div>
                                 <!-- /ko -->
@@ -285,7 +288,7 @@
                                             <input class="clickable" type="checkbox" data-bind="checked: $data.autoSellToggle">
                                             <!-- /ko -->
                                             <!-- ko ifnot: $data.level >= GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT -->
-                                            <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                            <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
                                             tooltip: {
                                                 title: `Unlocked when ${$data.name} reaches level ${GameConstants.HELPER_AUTO_SELL_LEVEL_REQUIREMENT}`,
                                                 placement: 'bottom',
@@ -337,6 +340,19 @@
                                 There are six different types of mines you can search for in the Underground.
                                 Understanding their unique properties and the discovery times involved is crucial for efficient mining.
                                 The Underground lexicon can be found at the bottom of this page.
+                            </p>
+
+                            <h4>Finding a new mine</h4>
+                            <p>
+                                A new mine can be manually found by clicking the Find mine button in the Dig tab.<br/>
+                                Automatically starting a new mine happens in the following cases:
+                            </p>
+                            <ul>
+                                <li>A <strong>player</strong> digs up the last item: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
+                                <li>A <strong>helper</strong> digs up the last item: If your helper has the 'Look for favorite' setting enabled, it will try and start it's favorite mine. If this setting is disabled it will start a Random mine.</li>
+                            </ul>
+                            <p>
+                                <u>Note that this does NOT ignore the discovery time needed.</u>
                             </p>
 
                             <h4>Mine Types</h4>
@@ -460,7 +476,7 @@
                         </div>
 
                         <div class="card-body">
-                            <p>Helpers are characters you can hire to assist with mining tasks. They perform actions at certain timing intervals and become more efficient as they level up.</p>
+                            <p>Helpers are characters you can hire to assist with mining tasks. They perform actions at certain timing intervals and become more efficient as they level up. Each of them bring their own powerful tools, so their actions will not affect the durability of your tools.</p>
 
                             <h4>Helper Mechanics</h4>
                             <ul>
@@ -719,7 +735,7 @@
                                 <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × ${PokemonType[UndergroundTrading.selectedTradeFromItem.type]} Gems`"></label>
                                 <!-- /ko -->
                                 <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Diamond -->
-                                <img class='mineInventoryItem' src="../assets/images/currency/diamond.svg"/>
+                                <img class='mineInventoryItem' src="assets/images/currency/diamond.svg"/>
                                 <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × Diamonds`"></label>
                                 <!-- /ko -->
                             </div>
@@ -735,7 +751,7 @@
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.sellAmount = 1">Reset</button>
 
-                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
+                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.sellAmount += 10">
@@ -840,7 +856,7 @@
                                 <div class="input-group">
                                     <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1">Reset</button>
 
-                                    <input type="number" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
+                                    <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
 
                                     <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                     <button class="btn btn-secondary smallButton smallFont" type="button" onclick="UndergroundTrading.tradeAmount += 10">
@@ -932,7 +948,7 @@
                             <tr>
                                 <td class="vertical-middle" data-bind="text: $data.tier"></td>
                                 <td class="vertical-middle">
-                                    <img width="24px" class="lock" src="../assets/images/breeding/lock.svg" data-bind="
+                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
                                             tooltip: {
                                                 title: $data.hint || '',
                                                 placement: 'bottom',
@@ -959,7 +975,7 @@
 
 <script type="text/html" id="helpToolTemplate">
     <h6 class="d-flex align-items-center" style="gap: 0.5rem;">
-        <img alt="" data-bind="attr: { src: `../assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
+        <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.tool.id]}.png` }">
         <knockout data-bind="text: $data.tool.displayName"></knockout>
     </h6>
     <ul>

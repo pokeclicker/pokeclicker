@@ -15,14 +15,14 @@
                 <div id="genericTraderTrade" class="tab-pane fade in active show" style="min-height: 250px;">
                     <div style="display: grid; column-gap: 0.5rem; grid-template-columns: auto auto 1fr auto auto auto 1fr auto;">
                         <div class="font-weight-bold" style="grid-column: 1 / 3">Cost</div>
-                        <div class="font-weight-bold">Inv</div>
+                        <div class="font-weight-bold">Inventory</div>
                         <div class="font-weight-bold"></div>
                         <div class="font-weight-bold" style="grid-column: 5 / 7">Profit</div>
-                        <div class="font-weight-bold">Inv</div>
+                        <div class="font-weight-bold">Inventory</div>
                         <div class="font-weight-bold"></div>
 
                         <!-- ko foreach: { data: GenericDeal.getDeals(ShopHandler.shopObservable().traderID), as: 'deal' } -->
-                        <div class="align-items-center" style="display: grid; grid-column: 1 / 9; grid-template-columns: subgrid" data-bind="let: { tradeAmount: ko.observable(1) }">
+                        <div class="align-items-center mt-1" style="display: grid; grid-column: 1 / 9; grid-template-columns: subgrid" data-bind="let: { tradeAmount: ko.observable(1) }">
                             <div class="align-items-center" style="display: grid; grid-column: 1 / 4; grid-template-columns: subgrid">
                                 <!-- ko foreach: deal.costs -->
                                 <!-- ko template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount(), type: 'cost' } } -->
@@ -51,7 +51,7 @@
                         </div>
 
                         <div style="grid-column: 1 / 9;">
-                            <hr>
+                            <hr class="my-2">
                         </div>
                         <!-- /ko -->
                     </div>
@@ -68,30 +68,30 @@
     <!-- ko if: model.type === 'Gem' -->
     <div><img height="24px" data-bind="attr: {src: Gems.image(model.gemType) }"/></div>
     <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${PokemonType[model.gemType]}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > App.game.gems.gemWallet[model.gemType]() }"></div>
-    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : App.game.gems.gemWallet[model.gemType]().toLocaleString('en-US')"></div>
+    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : App.game.gems.gemWallet[model.gemType]().toLocaleString('en-US')"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Shard' -->
     <div><img height="24px" data-bind="attr: {src: model.shardItem.image }"/></div>
     <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.shardItem.displayName}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > player.itemList[model.shardItem.name]() }"></div>
-    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : player.itemList[model.shardItem.name]().toLocaleString('en-US')"></div>
+    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : player.itemList[model.shardItem.name]().toLocaleString('en-US')"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Berry' -->
     <div><img height="24px" data-bind="attr: {src: FarmController.getBerryImage(model.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[model.berryType]() }"/></div>
     <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${App.game.farming.unlockedBerries[model.berryType]() ? BerryType[model.berryType] : '???'}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > App.game.farming.berryList[model.berryType]() }"></div>
-    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : App.game.farming.berryList[model.berryType]().toLocaleString('en-US')"></div>
+    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : App.game.farming.berryList[model.berryType]().toLocaleString('en-US')"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Item' -->
     <div><img height="24px" data-bind="attr: {src: model.item.image }"/></div>
     <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.item.displayName}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > player.itemList[model.item.name]() }"></div>
-    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : player.itemList[model.item.name]().toLocaleString('en-US')"></div>
+    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : player.itemList[model.item.name]().toLocaleString('en-US')"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Amount' -->
     <div><img height="24px" data-bind="attr: {src: `assets/images/currency/${GameConstants.Currency[model.currency.currency]}.svg` }"/></div>
     <div class="text-left" data-bind="text: `${(tradeAmount * model.currency.amount * model.amount).toLocaleString('en-US')} × ${GameConstants.camelCaseToString(GameConstants.Currency[model.currency.currency])}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.currency.amount * model.amount > App.game.wallet.currencies[model.currency.currency]() }"></div>
-    <div class="text-right" data-bind="text: model.hidePlayerInventory ? '' : App.game.wallet.currencies[model.currency.currency]().toLocaleString('en-US')"></div>
+    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : App.game.wallet.currencies[model.currency.currency]().toLocaleString('en-US')"></div>
     <!-- /ko -->
 </script>

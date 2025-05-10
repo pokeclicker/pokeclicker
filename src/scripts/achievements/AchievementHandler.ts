@@ -390,14 +390,14 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Just one more thing', 'Reach Underground Level 50.', new UndergroundLevelRequirement(50), 1);
 
         AchievementHandler.addAchievement('Just pick one', 'Get at least 1 Underground Helper to level 25.', new UndergroundHelperRequirement(1, 25), 0.3);
-        AchievementHandler.addAchievement('It\'s an honest days work', 'Get at least 5 Underground Helper to level 25.', new UndergroundHelperRequirement(5, 25), 0.6);
+        AchievementHandler.addAchievement('It\'s an honest days work', 'Get all 5 Underground Helpers to level 25.', new UndergroundHelperRequirement(5, 25), 0.6);
         AchievementHandler.addAchievement('Got a favorite?', 'Get at least 1 Underground Helper to level 50.', new UndergroundHelperRequirement(1, 50), 0.6);
-        AchievementHandler.addAchievement('They\'re all my favorites', 'Get at least 5 Underground Helper to level 50.', new UndergroundHelperRequirement(5, 50), 1.2);
+        AchievementHandler.addAchievement('They\'re all my favorites', 'Get all 5 Underground Helpers to level 50.', new UndergroundHelperRequirement(5, 50), 1.2);
 
         AchievementHandler.addAchievement('Everyday I\'m chiseling', 'Use the Chisel Tool 1,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Chisel, 1000), 0.25);
         AchievementHandler.addAchievement('U Can\'t Touch This', 'Use the Hammer Tool 2,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Hammer, 2000), 0.25);
         AchievementHandler.addAchievement('KABOOM!', 'Use the Bomb Tool 5,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Bomb, 5000), 0.25);
-        AchievementHandler.addAchievement('Eagle Eye', 'Use the Survey Tool 100 times.', new UndergroundUseToolRequirement(UndergroundToolType.Survey, 100), 0.25);
+        AchievementHandler.addAchievement('Eagle Eye', 'Use the Survey Tool 50 times.', new UndergroundUseToolRequirement(UndergroundToolType.Survey, 50), 0.25);
         AchievementHandler.addAchievement('Fine, I\'ll do it myself', 'Use any tool 10,000 times.', new UndergroundUseToolRequirement(null, 10000), 0.5);
 
         AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Vitamin.', new VitaminObtainRequirement(1), 0.01);

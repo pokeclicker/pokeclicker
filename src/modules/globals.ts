@@ -17,4 +17,5 @@ declare global {
     const PokemonFactory: TempTypes.TmpPokemonFactoryType;
     const PartyController: TempTypes.TmpPartyControllerType;
     const TemporaryBattleList: TempTypes.TmpTemporaryBattleListType;
+    const BagHandler: TempTypes.TmpBagHandlerType;
 }

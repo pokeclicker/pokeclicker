@@ -9,20 +9,41 @@
             </div>
             <div class="modal-body text-left p-2">
                 <div class="form-row p-0" id="profileEdit">
-                    <div class="form-group col-6">
+                    <div class="form-group col-5">
                         <label>Name</label>
                         <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: App.game.profile.name()"/>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-7">
                         <label>Pokémon</label>
-                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.pokemon(+this.value), App.game.profile.pokemonShiny(false), App.game.profile.pokemonFemale(false)">
-                            <!-- ko foreach: App.game.party.caughtPokemon.sort((a, b) => a.id - b.id) -->
-                            <option data-bind="attr: { value: $data.id, selected: App.game.profile.pokemon() === $data.id }, text: '#'+($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)+' '+$data.displayName + ($data.shiny ? ' ✨' : '')">Pokemon</option>
-                            <!-- /ko -->
-                        </select>
+                        <div class="dropdown">
+                            <button class="btn btn-dropdown custom-select text-left" type="button" data-toggle="dropdown" data-display="static">
+                                <div class="text-truncate btn-text" data-bind="with: App.game.party.getPokemon(App.game.profile.pokemon())">
+                                    <span data-bind="text: `#${($data.id > 0 ? Math.floor($data.id).toString() : '???').padStart(3, 0)} ${$data.displayName}`"></span>
+                                    <span data-bind="visible: $data.shiny">✨</span>
+                                    <span data-bind="visible: $data.shadow !== GameConstants.ShadowStatus.None">
+                                        <img style="width: 18px;" src="assets/images/status/shadow.svg"/>
+                                    </span>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu px-2 w-100" style="max-height: 280px; overflow-y: auto;">
+                                <input type="text" class="form-control form-control-sm" placeholder="Search" data-bind="textInput: App.game.profile.pokemonSearch" />
+                                <div class="dropdown-divider"></div>
+                                <!-- ko if: DisplayObservables.modalState.profileModal === 'show' -->
+                                <div data-bind="foreach: App.game.profile.getCaughtPokemonList()">
+                                    <button class="dropdown-item small px-1" type="button" data-bind="click: () => { App.game.profile.pokemon($data.id); App.game.profile.pokemonShiny(false); App.game.profile.pokemonFemale(false); App.game.profile.pokemonShadow(false); }">
+                                        <span data-bind="text: `#${($data.id > 0 ? Math.floor($data.id).toString() : '???').padStart(3, 0)} ${$data.displayName}`"></span>
+                                        <span data-bind="visible: $data.shiny">✨</span>
+                                        <span data-bind="visible: $data.shadow !== GameConstants.ShadowStatus.None">
+                                            <img style="width: 16px;" src="assets/images/status/shadow.svg"/>
+                                        </span>
+                                    </button>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="form-group col-6">
+
+                    <div class="form-group col-4">
                         <label>Shiny</label>
                         <label class="form-check-label toggler-wrapper style-1 float-right">
                             <input class="form-check-input" type="checkbox" id="profile-shiny-toggle"
@@ -32,8 +53,20 @@
                             </div>
                         </label>
                     </div>
+                    <!-- ko if: SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre) -->
+                    <div class="form-group col-4">
+                        <label>Shadow</label>
+                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                            <input class="form-check-input" type="checkbox" id="profile-shadow-toggle"
+                                data-bind="checked: App.game.profile.pokemonShadow, enable: App.game.party.alreadyCaughtPokemon(App.game.profile.pokemon(), false, true)">
+                            <div class="toggler-slider" data-bind="tooltip: { title: !App.game.party.alreadyCaughtPokemon(App.game.profile.pokemon(), false, true) ? `Shadow ${PokemonHelper.getPokemonById(App.game.profile.pokemon()).name} is not unlocked yet or does not exist` : '', trigger: 'hover' }">
+                                <div class="toggler-knob" data-bind="css: { 'checkbox-disabled': !App.game.party.alreadyCaughtPokemon(App.game.profile.pokemon(), false, true) }"></div>
+                            </div>
+                        </label>
+                    </div>
+                    <!-- /ko -->
                     <!-- ko if: PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference -->
-                    <div class="form-group col-6">
+                    <div class="form-group col-4">
                         <label>Gender</label>
                         <label class="form-check-label toggler-wrapper style-1 float-right"
                             data-bind="css: { 'gender-toggle': PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference }">

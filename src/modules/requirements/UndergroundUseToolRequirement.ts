@@ -9,7 +9,7 @@ export default class UndergroundUseToolRequirement extends AchievementRequiremen
     }
 
     public getProgress(): number {
-        if (this.toolType) {
+        if (this.toolType !== null) {
             return Math.min(App.game.statistics.undergroundToolsUsed[this.toolType](), this.requiredValue);
         }
 

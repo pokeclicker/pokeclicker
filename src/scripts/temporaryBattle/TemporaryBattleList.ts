@@ -1412,7 +1412,7 @@ TemporaryBattleList['Barry 3'] = new TemporaryBattle(
         new GymPokemon('Prinplup', 2329444, 27, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
         new GymPokemon('Grotle', 2329444, 27, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
     ],
-    'Waaah! It goes to show my surefire winning strategy doesn\'t work',
+    'Waaah! It goes to show my surefire winning strategy doesn\'t work.',
     [new GymBadgeRequirement(BadgeEnums.Relic)],
     undefined,
     {
@@ -5836,7 +5836,7 @@ TemporaryBattleList.Kubfu = new TemporaryBattle(
     [new GymPokemon('Kubfu', 2911282519, 50)],
     undefined,
     [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 11)],
-    [new ObtainedPokemonRequirement('Kubfu')],
+    [new OneFromManyRequirement([new ObtainedPokemonRequirement('Kubfu'), new ObtainedPokemonRequirement('Urshifu (Single Strike)'), new ObtainedPokemonRequirement('Urshifu (Rapid Strike)')])],
     {
         isTrainerBattle: false,
         hideTrainer: true,
