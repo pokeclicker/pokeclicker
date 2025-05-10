@@ -12787,7 +12787,7 @@ dungeonList['Brawlers\' Cave'] = new Dungeon('Brawlers\' Cave',
 
 dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     [
-        {pokemon: 'Kubfu', options: { weight: 4 }},
+        {pokemon: 'Kubfu', options: { weight: 2 }},
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Zorua', 28886112, 65)],
             { weight: 1 }, 'Student'),
@@ -12815,7 +12815,11 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     },
     28886112,
     [
-        new DungeonBossPokemon('Urshifu (Single Strike)', 160924440, 60, {requirement: new ObtainedPokemonRequirement('Urshifu (Single Strike)')}),
+        new DungeonBossPokemon('Urshifu (Single Strike)', 160924440, 60, {
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+                new ObtainedPokemonRequirement('Urshifu (Single Strike)'),
+            ])}),
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
@@ -12851,7 +12855,11 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     },
     28886112,
     [
-        new DungeonBossPokemon('Urshifu (Rapid Strike)', 160924440, 60, {requirement: new ObtainedPokemonRequirement('Urshifu (Rapid Strike)')}),
+        new DungeonBossPokemon('Urshifu (Rapid Strike)', 160924440, 60, {
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Waters')),
+                new ObtainedPokemonRequirement('Urshifu (Rapid Strike)'),
+            ])}),
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
