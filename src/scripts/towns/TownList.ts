@@ -1911,6 +1911,12 @@ const ParkResearcher = new NPC('Researcher', [
     'An experimental specimen can be bought here: A Sudowoodo that is no longer weak against Water attacks!',
 ], { image: 'assets/images/npcs/Scientist (male).png' });
 
+const BabyAssistant = new AssistantNPC('Elm\'s Assistant', [
+    'Prof. Elm\'s research is focused on eggs. Pokémon eggs hatch faster when the trainer is battling strong trainers like Gym leaders.',
+], [
+    'Oh? Some of your Pokémon may find an extra egg if left in the hatchery. Would you care to find out what baby will hatch?',
+], 'baby','assets/images/npcs/Scientist (male).png');
+
 //Johto Towns
 TownList['New Bark Town'] = new Town(
     'New Bark Town',
@@ -1919,7 +1925,7 @@ TownList['New Bark Town'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Johto)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
-        npcs: [ProfElm],
+        npcs: [ProfElm, BabyAssistant],
     }
 );
 TownList['Cherrygrove City'] = new Town(
@@ -2538,7 +2544,7 @@ const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
 
 const EasterEggHunter = new NPC('Egg Hunter', [
     'My eggs! They ran away!',
-    'Can you help me get them back? They have most likely fleed to a dungeon in Kanto, Hoenn or Johto.',
+    'Can you help me get them back? They have most likely fled to a dungeon in Kanto, Hoenn or Johto.',
     'But be careful! If you defeat them, they will run away again!',
 ], {
     image: 'assets/images/npcs/Egg Hunter.png',
@@ -2649,7 +2655,7 @@ const Television2 = new NPC('Watch More Television', [
 
 const TicketClaim = new NPC('Contest Attendant', [
     'Thank you for reserving your Eon Ticket!',
-    'To claim the ticket, all you have to do is go to your Start Menu, select "Save", and enter the following code in the "Enter Code..." box:',
+    'To claim the ticket, all you have to do is go to your Start Menu, select "Save / Enter Code", and enter the following code in the "Enter Code..." box:',
     'EON-TICKET',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 1), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
 });
@@ -4109,6 +4115,7 @@ const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Freeze_Mulch,
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
+    ItemList.Gracidea,
     ItemList.FarmHandRiley,
 ], 'Sinnoh Berry Master');
 
@@ -4149,6 +4156,11 @@ const FloaromaFlowerGirl = new NPC('Flower Girl', [
 const EternaLassCaroline = new NPC('Lass Caroline', [
     'Oh, you came from the Forest! That Old Chateau is so creepy, isn’t it? I’ve heard that trainers that catch the weird ghost in the TV have found ghosts in other appliances. Even lawnmowers!',
 ], {image: 'assets/images/npcs/Lass.png'});
+
+const SinnohBerryMasterAssistant = new NPC('Berry Master Assistant', [
+    'I have so many Gracidea right now, so i\'ll sell you one.',
+    'If you give it to your Shaymin, it can change form!',
+]);
 
 const OreburghConstructionWorker = new NPC('Construction Worker', [
     'I was doing some exploring in Mt. Coronet last week, and my Nosepass gained a lot of levels.',
@@ -4478,6 +4490,11 @@ const GrotleAcornParty = new NPC('Grotle and Friends', [
     requirement: new ObtainedPokemonRequirement('Grotle (Acorn)'),
 });
 
+const EvolutionAssistant = new AssistantNPC('Prof. Rowan\'s Assistant', [
+    'Hey, $playername$! According to Prof. Rowan\'s research, 90% of all Pokémon are somehow tied to evolution! Yup, you can also see a Pokémon\'s evolution line in your Pokédex.',
+], [
+    'Speaking of Pokémon! How\'s your Pokédex coming along? Wow! You have so many Pokémon that can evolve!',
+], 'evolution','assets/images/npcs/Lucas.png');
 
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
@@ -4497,7 +4514,7 @@ TownList['Sandgem Town'] = new Town(
     [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher'], new ShardTraderShop(GameConstants.ShardTraderLocations['Sandgem Town'], 'Santa\'s Secret Daycare', true, 'Plates')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
-        npcs: [ProfRowan, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
+        npcs: [ProfRowan, EvolutionAssistant, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
     }
 );
 TownList['Jubilife City'] = new Town(
@@ -4559,7 +4576,7 @@ TownList['Hearthome City'] = new Town(
     [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
-        npcs: [HearthomeContestFan, LucyStevens1, HappinyWitness6],
+        npcs: [HearthomeContestFan, SinnohBerryMasterAssistant, LucyStevens1, HappinyWitness6],
     }
 );
 TownList['Solaceon Town'] = new Town(

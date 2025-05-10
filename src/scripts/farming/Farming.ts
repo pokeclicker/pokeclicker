@@ -1371,7 +1371,7 @@ class Farming implements Feature {
                 BerryType.Oran,
                 BerryType.Sitrus,
             ], {
-                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by unique ripe Berry plants!',
+                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by the 8 different Berries that wild Pokémon hold!',
             }));
 
         //#endregion
@@ -1436,7 +1436,10 @@ class Farming implements Feature {
         this.mutations.push(new EvolveNearBerryMutation(.0003, BerryType.Rabuta, BerryType.Aspear, [BerryType.Aguav]));
         // Nomel
         this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Nomel,
-            [BerryType.Pinap]));
+            [
+                BerryType.Wepear,
+                BerryType.Pinap,
+            ]));
         // Spelon
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Spelon, BerryType.Tamato,
             [[130, 160], [0, 80], [0, 80], [0, 80], [0, 80]], {
