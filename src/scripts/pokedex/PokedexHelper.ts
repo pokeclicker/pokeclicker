@@ -79,14 +79,7 @@ class PokedexHelper {
             const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
             const highestDefeated = App.game.statistics.pokemonDefeated.highestID;
             const highestCaught = App.game.statistics.pokemonCaptured.highestID;
-            let highestRegionID = -1;
-            if (player.hasBeatenChampOfRegion()) {
-                const regionPokemonIds = pokemonMap
-                    .filter(p => p.nativeRegion === player.highestRegion())
-                    .map(p => p.id);
-
-                highestRegionID = Math.max(...regionPokemonIds);
-            }
+            const highestRegionID = player.hasBeatenChampOfRegion() ? GameConstants.MaxIDPerRegion[player.highestRegion()] : -1;
             return Math.max(highestSeen, highestEncountered, highestDefeated, highestCaught, highestRegionID);
         }).peek();
 
