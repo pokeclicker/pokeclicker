@@ -6045,15 +6045,12 @@ const FossilScientist = new NPC('Fossil Scientist', [
 });
 
 const CyllageStoneCollector = new NPC('Vivid Stone Collector', [
-    'You see these beautiful gemstones in Grant\'s gym? There is no mistake, these are genuine Mega Stones!',
-    'Oh, what I would pay to add them to my collection! But money is of no help here. I bet Grant would be willing to part with them if I challenge him enough times and prove my skills to him.',
-    'Unfortunately my skills as a collector far surpass my skills as a Pokémon trainer. But anyone who can become the Champion of Kalos surely can convince Grant that these stones will be in good hands.',
+    'You see that beautiful gemstone in Grant\'s gym? There is no mistake, that is a genuine Mega Stone!',
+    'Oh, what I would pay to add it to my collection! But money is of no help here. I bet Grant would be willing to part with it if I challenge him enough times and prove my skills to him.',
+    'Unfortunately my skills as a collector far surpass my skills as a Pokémon trainer. But anyone who can become the Champion of Kalos surely can convince Grant that this stone will be in good hands.',
 ], {
     image: 'assets/images/npcs/Collector.png',
-    requirement: new MultiRequirement([
-        new ObtainedPokemonRequirement('Aggron'),
-        new ObtainedPokemonRequirement('Tyranitar'),
-    ]),
+    requirement: new ObtainedPokemonRequirement('Tyranitar'),
 });
 
 const TeamFlareGrunt1 = new NPC('Team Flare Grunt', [
