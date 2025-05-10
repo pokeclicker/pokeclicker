@@ -2,25 +2,28 @@ import QuestLineState from '../quests/QuestLineState';
 import { QuestLineNameType } from '../quests/QuestLineNameType';
 import Item from './Item';
 import { ShopOptions } from './types';
-import { Currency } from '../GameConstants';
+import { AchievementOption, Currency } from '../GameConstants';
+import MultiRequirement from '../requirements/MultiRequirement';
+import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
+import Requirement from '../requirements/Requirement';
+import CollectibleItem from './CollectibleItem';
 
-export default class QuestItem extends Item {
+export default class QuestItem extends CollectibleItem {
     constructor(
         name: string,
         displayName : string,
         description : string,
         private questlineName : QuestLineNameType,
-        private endQuestlineName = questlineName,
+        private endQuestlineName : QuestLineNameType | false = questlineName, // false means no end
         basePrice?: number,
         currency?: Currency,
         options?: ShopOptions,
     ) {
-        super(name, basePrice, currency, { maxAmount: 1, ...options }, displayName, description, 'quest');
-    }
-
-    public isActive() : boolean {
-        return App.game.quests.getQuestLine(this.questlineName).state() > QuestLineState.inactive &&
-            App.game.quests.getQuestLine(this.endQuestlineName).state() < QuestLineState.ended;
+        let req : Requirement = new QuestLineStartedRequirement(questlineName);
+        if (endQuestlineName) {
+            req = new MultiRequirement([req, new QuestLineStartedRequirement(endQuestlineName, AchievementOption.less)]);
+        }
+        super(name, displayName, description, req, basePrice, currency, options);
     }
 
     isSoldOut(): boolean {
