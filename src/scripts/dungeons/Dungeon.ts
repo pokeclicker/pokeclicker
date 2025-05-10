@@ -12813,6 +12813,7 @@ dungeonList['Brawlers\' Cave'] = new Dungeon('Brawlers\' Cave',
 
 dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     [
+        {pokemon: 'Kubfu', options: { weight: 1 }},
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Zorua', 28886112, 65)],
             { weight: 1 }, 'Student'),
@@ -12840,21 +12841,19 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     },
     28886112,
     [
+        new DungeonBossPokemon('Urshifu (Single Strike)', 160924440, 60, {
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+                new ObtainedPokemonRequirement('Urshifu (Single Strike)'),
+            ])}),
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    2000000, 40,
-    () => {
-        App.game.party.gainPokemonByName('Urshifu (Single Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        Notifier.notify({
-            message: 'Kubfu evolved into Urshifu (Single Strike)!',
-            type: NotificationConstants.NotificationOption.success,
-            timeout: 3e4,
-        });
-    });
+    2000000, 40);
 
 dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     [
+        {pokemon: 'Kubfu', options: { weight: 1 }},
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Psyduck', 28886112, 65)],
             { weight: 1 }, 'Student'),
@@ -12882,18 +12881,15 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     },
     28886112,
     [
+        new DungeonBossPokemon('Urshifu (Rapid Strike)', 160924440, 60, {
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Waters')),
+                new ObtainedPokemonRequirement('Urshifu (Rapid Strike)'),
+            ])}),
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    2000000, 36,
-    () => {
-        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        Notifier.notify({
-            message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
-            type: NotificationConstants.NotificationOption.success,
-            timeout: 3e4,
-        });
-    });
+    2000000, 36);
 
 //Crown Tundra
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
