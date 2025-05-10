@@ -3628,7 +3628,7 @@ TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
         new GymPokemon('Tyrantrum', 152318215, 80),
         new GymPokemon('Mega Tyranitar', 166650000, 80),
     ],
-    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/Tyranitarite.png"/></br>',
+    'To commemorate such an impressive show of teamwork, please accept this gift!</br><img src="assets/images/megaStone/Tyranitarite.png"/></br>',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ClearGymRequirement(2000, GameConstants.getGymIndex('Cyllage City')), new ObtainedPokemonRequirement('Tyranitar')],
     undefined,
     {
