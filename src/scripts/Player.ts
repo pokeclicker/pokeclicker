@@ -223,7 +223,7 @@ class Player implements TmpPlayerType {
 
     public hasBeatenChampOfRegion(region: GameConstants.Region = this.highestRegion()) {
         const champion = GameConstants.RegionGyms[region].find(gym => GymList[gym]?.flags.champion);
-        return App.game.badgeCase.hasBadge(GymList[champion].badgeReward);
+        return champion === undefined ? false : App.game.badgeCase.hasBadge(GymList[champion].badgeReward);
     }
 
     public toJSON() {
