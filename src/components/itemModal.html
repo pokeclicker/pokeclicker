@@ -138,13 +138,10 @@
                                     <div class="col-6 col-lg-3 mb-2">
                                         <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
                                             data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]},
-                                                click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }">
+                                                click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminExpandedModal').modal('show'); }">
                                         </div>
                                     </div>
                                     <!-- /ko -->
-                                </div>
-                                <div class="row justify-content-center mb-1">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bind="click: () => { $('#pokemonVitaminExpandedModal').modal('show') }">All Vitamins</button>
                                 </div>
                             </div>
                         </div>
