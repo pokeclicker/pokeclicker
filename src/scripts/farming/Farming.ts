@@ -13,6 +13,7 @@ class Farming implements Feature {
 
     mutationCounter = 0;
     wanderCounter = 0;
+    mulchCounter = 0;
 
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
@@ -1387,7 +1388,7 @@ class Farming implements Feature {
                 BerryType.Oran,
                 BerryType.Sitrus,
             ], {
-                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by unique ripe Berry plants!',
+                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by the 8 different Berries that wild Pokémon hold!',
             }));
 
         //#endregion
@@ -1452,7 +1453,10 @@ class Farming implements Feature {
         this.mutations.push(new EvolveNearBerryMutation(.0003, BerryType.Rabuta, BerryType.Aspear, [BerryType.Aguav]));
         // Nomel
         this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Nomel,
-            [BerryType.Pinap]));
+            [
+                BerryType.Wepear,
+                BerryType.Pinap,
+            ]));
         // Spelon
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Spelon, BerryType.Tamato,
             [[130, 160], [0, 80], [0, 80], [0, 80], [0, 80]], {
@@ -1757,9 +1761,11 @@ class Farming implements Feature {
     }
 
     getReplantMultiplier(): number {
-        let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
-        return multiplier;
+        return 1;
+    }
+
+    getMulchDurationMultiplier(): number {
+        return App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
     }
 
     getMutationMultiplier(): number {
@@ -1822,6 +1828,12 @@ class Farming implements Feature {
         }
 
         this.farmHands.tick();
+
+        this.mulchCounter += GameConstants.TICK_TIME;
+        if (this.mulchCounter >= GameConstants.MULCH_OAK_ITEM_TICK) {
+            App.game.oakItems.use(OakItemType.Sprinklotad, this.plotList.filter(value => value.isMulched()).length);
+            this.mulchCounter = 0;
+        }
     }
 
     handleNotification(farmNotiType: FarmNotificationType, wanderList?: WandererPokemon[]): void {

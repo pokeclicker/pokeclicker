@@ -27,6 +27,10 @@ import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
 import FarmingTool from './enums/FarmingTool';
 // end enums
+import Battle from './battles/Battle';
+import BattlePokemon from './battles/BattlePokemon';
+import Trainer from './battles/Trainer';
+import GymPokemon from './gym/GymPokemon';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -159,7 +163,6 @@ import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import ClientRequirement from './requirements/ClientRequirement';
-import ContestWonRequirement from './requirements/ContestWonRequirement';
 import { lazyLoad, lazyLoadCallback } from './utilities/LazyLoader';
 import {
     beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
@@ -242,6 +245,10 @@ Object.assign(<any>window, {
     WeatherForecastStatus,
     SafariEnvironments,
     FarmingTool,
+    Battle,
+    BattlePokemon,
+    Trainer,
+    GymPokemon,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -385,7 +392,6 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     ClientRequirement,
-    ContestWonRequirement,
     lazyLoad,
     lazyLoadCallback,
     LevelEvolution,
