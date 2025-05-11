@@ -4,6 +4,9 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import { StoneType } from '../GameConstants';
+import CollectibleItem from './CollectibleItem';
+import EventCollectibleItem from './EventCollectibleItem';
+import QuestItem from './QuestItem';
 
 export default class ItemHandler {
     public static stoneSelected: Observable<string> = ko.observable(StoneType[0]);
@@ -98,5 +101,10 @@ export default class ItemHandler {
     public static initializeItems() {
         // Set our unlock regions
         Object.values(ItemList).forEach((item) => item.init());
+    }
+
+    public static collectibleSort(a: CollectibleItem, b: CollectibleItem): number {
+        const sortTable = [QuestItem, EventCollectibleItem];
+        return sortTable.findIndex(t => b instanceof t) - sortTable.findIndex(t => a instanceof t);
     }
 }
