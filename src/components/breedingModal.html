@@ -48,7 +48,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 </div>
             </div>
             <div class="modal-body p-0">
-                <div class="tab-content p-3 h-100">
+                <div class="tab-content p-2 h-100">
                     <!-- ko let: { categoryModeEnabled: PokemonCategories.categoryAssignEnabled, categoryModeSelected: PokemonCategories.categoryAssignSelected } -->
                     <div class="tab-pane fade in active show" id="breeding-pokemon">
                         <div class="row">
@@ -517,11 +517,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     </div>
 
                     <div class="tab-pane fade" id="breeding-helpers">
+                        <!-- ko if: HatcheryHelpers.list.some(f => f.isUnlocked()) -->
                         <div class="row m-0 justify-content-center" data-bind="foreach: App.game.breeding.hatcheryHelpers.available()" style="max-width: 100%;">
-                            <div class="card text-left col-md-3 col-sm-6 col-xs-12 p-0">
-                                <h5 class="card-header">
-                                    <knockout data-bind="text: $data.name">Name</knockout>
-                                    <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                            <div class="card text-left col-lg-3 col-md-6 col-xs-12 border-0 p-1">
+                                <h5 class="card-header d-flex align-items-center py-2">
+                                    <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                    <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
                                 </h5>
                                 <div class="card-body p-0">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
@@ -645,6 +646,50 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
+                        <!-- ko if: HatcheryHelpers.list.some(f => !f.isUnlocked()) -->
+                        <div class="mt-1 px-1">
+                            <button class="btn btn-secondary btn-block" data-toggle="collapse" href="#lockedHatcheryHelpers">Show/Hide Locked Hatchery Helpers</button>
+                        </div>
+                        <div class="collapse mt-1" id="lockedHatcheryHelpers">
+                            <div class="row m-0 justify-content-center" data-bind="foreach: HatcheryHelpers.list.filter(f => !f.isUnlocked())" style="max-width: 100%;">
+                                <div class="card text-left col-lg-3 col-md-6 col-xs-12 border-0 p-1">
+                                    <h5 class="card-header d-flex align-items-center py-2">
+                                        <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                        <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                    </h5>
+                                    <div class="card-body p-0">
+                                        <table class="table table-bordered table-sm m-0 h-100" style="overflow: visible;">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left align-middle">Cost / Hatch:</td>
+                                                    <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Step Efficiency:</td>
+                                                    <td class="text-right">
+                                                        <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left text-nowrap">Attack Efficiency:</td>
+                                                    <td class="text-right">
+                                                        <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text-center table-secondary">Unlock Requirement</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text-center p-2 h-100 align-middle" data-bind="text: $data.unlockRequirement.hint()"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
                     </div>
 
 
