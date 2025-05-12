@@ -7185,6 +7185,12 @@ const HapuHope = new NPC('Hapu', [
     image: 'assets/images/npcs/Hapu.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 0), new  QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)]),
 });
+
+const AlolanAstronomer = new NPC('Alolan Astronomer', [
+    'I have been studing Cosmoem and noticed that it needs the light from either the sun or the moon to reach its fullest potential.',
+    'When exposed to the light of the sun and leveling up, it will transform into Solgaleo. And it will turn into Lunala with the light of the Moon.',
+]);
+
 const SunFlute = new NPC('Play the Sun Flute', [
     'Oh my goodness, Nebby! To think you would be the emissary of the sun, Solgaleo!',
     '<img src="assets/images/pokemon/791.png">',
@@ -7947,7 +7953,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList.Lusamine, TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], TemporaryBattleList.Lillie, AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8],
+        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8, AlolanAstronomer],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
