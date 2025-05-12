@@ -2841,6 +2841,24 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.24': ({ playerData, saveData, settingsData }) => {
+            const reimburseFarmPoints = [0, 2000, 5000, 10000, 20000, 50000]
+                .slice(0, saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].level + 1)
+                .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+
+            saveData.wallet.currencies[GameConstants.Currency.farmPoint] += reimburseFarmPoints;
+
+            // Reset the Sprinklotad
+            saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].level = 0;
+            saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].exp = 0;
+
+            // Resets An Unrivaled Power Red tempbattle if needed
+            const megaMewtwoQl = saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power');
+            if (megaMewtwoQl && [1, 3].includes(megaMewtwoQl.state) && megaMewtwoQl.quest === 0) {
+                megaMewtwoQl.initial = 0;
+            }
+        },
     };
 
     constructor() {
