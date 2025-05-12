@@ -7188,7 +7188,7 @@ const HapuHope = new NPC('Hapu', [
 
 const AlolanAstronomer = new NPC('Alolan Astronomer', [
     'I have been studing Cosmoem and noticed that it needs the light from either the sun or the moon to reach its fullest potential.',
-    'When exposed to the light of the sun and leveling up, it will transform into Solgaleo. And it will turn into Lunala with the light of the Moon.',
+    'When exposed to the light of the sun and leveling up, it will transform into Solgaleo. And it will turn into Lunala with the light of the moon.',
 ]);
 
 const SunFlute = new NPC('Play the Sun Flute', [
