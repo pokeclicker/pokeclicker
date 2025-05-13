@@ -335,7 +335,7 @@ class PokemonFactory {
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
             chance /= 1.5;
         }
-        console.log(chance);
+
         if (Rand.chance(chance)) {
             return item;
         }
