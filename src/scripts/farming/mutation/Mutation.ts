@@ -56,7 +56,7 @@ abstract class Mutation {
      * Determines whether the player can even cause this mutation
      */
     get unlocked(): boolean {
-        if (!this._unlockReq) {
+        if (!this._unlockReq || App.game.farming.unlockedBerries[this.mutatedBerry]()) {
             return true;
         }
         return this._unlockReq();
