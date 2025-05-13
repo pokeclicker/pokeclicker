@@ -2841,6 +2841,14 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.24': ({ playerData, saveData, settingsData }) => {
+            // Add the new default shadow filter to save files that haven't reached the requirements yet
+            const shadowsInTheDesert = saveData.quests.questLines.find((q) => q.name == 'Shadows in the Desert');
+            if (!shadowsInTheDesert || (shadowsInTheDesert.state !== 2 && shadowsInTheDesert.quest < 4)) {
+                saveData.pokeballFilters?.list?.push({ name: 'New Shadow', options: { shadow: true, caughtShadow: false } });
+            }
+        },
     };
 
     constructor() {
