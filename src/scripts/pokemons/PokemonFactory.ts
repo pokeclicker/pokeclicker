@@ -324,6 +324,10 @@ class PokemonFactory {
             case 'Christmas_present':
                 chance = GameConstants.CHRISTMAS_ITEM_CHANCE;
                 break;
+            case BerryType.Snover:
+                const snoverMutation = App.game.farming.mutations.find(m => m.mutatedBerry == BerryType.Snover);
+                chance = 1 - snoverMutation.getMutationPlots().reduce((c, p) => c * (1 - snoverMutation.getTotalMutationChance(p)), 1);
+                break;
         }
 
         chance /= modifier;
@@ -331,7 +335,7 @@ class PokemonFactory {
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
             chance /= 1.5;
         }
-
+        console.log(chance);
         if (Rand.chance(chance)) {
             return item;
         }
