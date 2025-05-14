@@ -21,6 +21,6 @@ export default class OrderSetting<T> extends Setting<T[]> {
 
     validValue(value: T[]): boolean {
         const all = new Set(value);
-        return this.defaultValue.every(v => all.has(v));
+        return value.length === this.defaultValue.length && this.defaultValue.every(v => all.has(v));
     }
 }
