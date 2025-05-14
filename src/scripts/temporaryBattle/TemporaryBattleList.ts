@@ -3761,7 +3761,7 @@ TemporaryBattleList['Unrivaled Red'] = new TemporaryBattle(
         new GymPokemon('Mega Venusaur', 90263333, 85),
     ],
     '... ... ...!',
-    [new QuestLineStartedRequirement('An Unrivaled Power')],
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 0, GameConstants.AchievementOption.less), new QuestLineStartedRequirement('An Unrivaled Power')])],
     undefined,
     {
         displayName: 'Pokémon Trainer Red',
