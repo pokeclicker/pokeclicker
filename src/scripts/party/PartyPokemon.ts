@@ -19,7 +19,7 @@ enum PartyPokemonSaveKeys {
     showShadowImage,
 }
 
-class PartyPokemon implements Saveable {
+class PartyPokemon implements Saveable, TmpPartyPokemonType {
     saveKey: string;
     public exp = 0;
     public evs: KnockoutComputed<number>;
@@ -334,6 +334,21 @@ class PartyPokemon implements Saveable {
 
         GameHelper.incrementObservable(this.vitaminsUsed[vitamin], -amount);
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
+    }
+
+    public setVitaminAmount(vitamin: GameConstants.VitaminType, amount: number) {
+        if (this.breeding || isNaN(amount) || amount < 0) {
+            return;
+        }
+
+        const diff = Math.floor(amount) - this.vitaminsUsed[vitamin]();
+        if (diff === 0) {
+            return;
+        } else if (diff > 0) {
+            this.useVitamin(vitamin, diff);
+        } else if (diff < 0) {
+            this.removeVitamin(vitamin, Math.abs(diff));
+        }
     }
 
     public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
