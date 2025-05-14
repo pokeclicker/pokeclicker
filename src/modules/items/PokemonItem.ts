@@ -43,8 +43,8 @@ export default class PokemonItem extends CaughtIndicatingItem {
             // Statistics
             if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
                 const gender = PokemonFactory.generateGenderById(pokemonID);
-                const shadow = ShadowStatus.None;
-                PokemonHelper.incrementPokemonStatistics(pokemonID, PokemonStatisticsType.Captured, shinyBool, gender, shadow);
+                const shinyStatistic = shinyBool && numShiny > 1;
+                PokemonHelper.incrementPokemonStatistics(pokemonID, PokemonStatisticsType.Captured, shinyStatistic, gender, ShadowStatus.None);
             }
         }
 
