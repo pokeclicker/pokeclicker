@@ -316,6 +316,32 @@ class Party implements Feature, TmpPartyType {
         return Math.floor(clickAttack * bonus);
     }
 
+    public clickAttackBreakdown = ko.pureComputed((): ClickAttackBreakdown => {
+        let numShiny = 0, numResistant = 0, numPurified = 0;
+        this.activePartyPokemon.forEach((p) => {
+            if (p.shiny) {
+                numShiny += 1;
+            }
+            if (p.pokerus >= GameConstants.Pokerus.Resistant) {
+                numResistant += 1;
+            }
+            if (p.shadow >= GameConstants.ShadowStatus.Purified) {
+                numPurified += 1;
+            }
+        });
+
+        return {
+            caughtPokemon: this.activePartyPokemon.length,
+            shinyPokemon: numShiny,
+            resistantPokemon: numResistant,
+            purifiedPokemon: numPurified,
+            xClickModifier: EffectEngineRunner.isActive(ItemList.xClick.name)() ? (ItemList.xClick as BattleItem).multiplyBy : 1,
+            blackFluteModifier: FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Black_Flute),
+            rockyHelmetModifier: App.game.oakItems.calculateBonus(OakItemType.Rocky_Helmet),
+            baseClickAttack: Math.floor(App.game.party.calculateBaseClickAttack() * (1 + AchievementHandler.achievementBonus())),
+        };
+    });
+
     canAccess(): boolean {
         return true;
     }
