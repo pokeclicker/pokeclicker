@@ -126,12 +126,16 @@
                                 <td class="text-center align-middle tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')"></td>
                                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                 <td class="text-center align-middle tight">
-                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
+                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" tabindex="-1" style="line-height: 0.6; font-size: 1rem;"
                                         data-bind="
                                             click: () => { $parent.removeVitamin($data, VitaminController.getMultiplier()) },
                                             class: ($parent.vitaminsUsed[$data]() > 0 && !$parent.breeding ? 'text-success' : 'text-muted')">-</button>
-                                    <knockout class="align-middle d-inline-block" style="width: .875rem;" data-bind="text: $parent.vitaminsUsed[$data]().toLocaleString('en-US')">0</knockout>
-                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
+
+                                    <knockout class="align-middle d-inline-block border border-secondary rounded" style="width: 2rem; overflow: hidden;" data-bind="text: $parent.vitaminsUsed[$data], event: {
+                                        blur: (data, event) => { $parent.setVitaminAmount($data, +event.currentTarget.textContent); $parent.vitaminsUsed[$data].notifySubscribers(); window.getSelection().empty(); }
+                                    }, attr: { contenteditable: $parent.breeding ? false : 'plaintext-only' }" tabindex="1" onfocus="window.getSelection().selectAllChildren(this)">0</knockout>
+
+                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" tabindex="-1" style="line-height: 0.6; font-size: 1rem;"
                                         data-bind="
                                             click: () => { $parent.useVitamin($data, VitaminController.getMultiplier()) },
                                             class: ($parent.vitaminUsesRemaining() && player.itemList[GameConstants.VitaminType[$data]]() && !$parent.breeding ? 'text-success' : 'text-muted')">+</button>

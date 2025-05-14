@@ -36,8 +36,8 @@ export default class Settings {
         return json;
     }
 
-    static fromJSON(dict) {
-        Object.entries(dict || {})?.forEach(([name, value]) => {
+    static fromJSON(dict: Record<string, unknown>) {
+        Object.entries(dict).forEach(([name, value]) => {
             this.setSettingByName(name, value);
         });
     }
@@ -70,11 +70,13 @@ export default class Settings {
     }
 
     static loadDefault() {
-        const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+        const loadedJSON = JSON.parse(localStorage.getItem('settings') || '{}');
+        const validatedJSON = {};
         this.list.forEach((setting) => {
-            settings[setting.name] = settings[setting.name] ?? setting.defaultValue;
+            const currentVal = loadedJSON[setting.name];
+            validatedJSON[setting.name] = (currentVal !== undefined && setting.validValue(currentVal)) ? currentVal : setting.defaultValue;
         });
-        this.fromJSON(settings);
+        this.fromJSON(validatedJSON);
     }
 
     static resetDefault() {

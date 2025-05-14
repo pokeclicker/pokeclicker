@@ -20,6 +20,7 @@ import {
     ModalCollapseList,
     getDungeonIndex,
     Pokerus,
+    ShadowStatus,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -30,6 +31,7 @@ import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequire
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import PokemonCategories from '../party/Category';
+import ShadowPokemonRequirement from '../requirements/ShadowPokemonRequirement';
 import OrderSetting from './OrderSetting';
 import areaStatus from '../enums/AreaStatus';
 
@@ -149,7 +151,6 @@ Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart sele
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
 Settings.add(new BooleanSetting('enableUndergroundModuleMineControls', 'Enable Underground module mine controls', true));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
-Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
 Settings.add(new BooleanSetting('breedingQueueClearConfirmation', 'Confirm before clearing the hatchery queue', true));
@@ -168,10 +169,10 @@ Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', tru
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
-Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
-Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokemon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
-Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
+Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokémon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokémon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokémon and Missing Achievement', [], '#c939fe'));
+Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokémon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
 Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ab1707', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
 Settings.add(new CssVariableSetting('completed', 'None of the Above', [], '#ffffff'));
@@ -273,7 +274,16 @@ Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false, undef
 Settings.add(new Setting<string>('heldItemDropdownPokemonOrItem', 'Pokémon or Item', [new SettingOption('Pokémon', 'pokemon'), new SettingOption('Item', 'item')], 'pokemon', undefined, false));
 Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2, undefined, false));
-Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
+Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [
+    new SettingOption('All', -2),
+    ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+    new SettingOption('None', PokemonType.None),
+], -2, undefined, false));
+Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
+    new SettingOption('All', -2),
+    ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+    new SettingOption('None', PokemonType.None),
+], -2, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
 
@@ -448,6 +458,8 @@ Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
 Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
+Settings.add(new HotkeySetting('hotkey.castformApp', 'Castform App', 'W', {}, new ClearDungeonRequirement(250, getDungeonIndex('Weather Institute'))));
+Settings.add(new HotkeySetting('hotkey.purifyChamber', 'Purify Chamber', 'K', {}, new ShadowPokemonRequirement(1, ShadowStatus.Purified)));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
 Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lock', 'L', { suffix: ' or Shift + Click' }));

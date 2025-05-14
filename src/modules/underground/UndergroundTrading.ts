@@ -79,19 +79,19 @@ export class UndergroundTrading {
     }
 
     static get tradeFromAmount(): number {
-        return this._tradeAmount() * TRADE_DOWN_AMOUNT;
+        return Math.max(this._tradeAmount() * TRADE_DOWN_AMOUNT, 0);
     }
 
     static set tradeFromAmount(value: number) {
-        this._tradeAmount(Math.floor(value / TRADE_DOWN_AMOUNT));
+        this._tradeAmount(Math.max(Math.floor(value / TRADE_DOWN_AMOUNT), 0));
     }
 
     static get tradeAmount(): number {
-        return this._tradeAmount();
+        return Math.max(this._tradeAmount(), 0);
     }
 
     static set tradeAmount(value: number) {
-        this._tradeAmount(value);
+        this._tradeAmount(Math.max(value, 0));
     }
 
     static get availableItemsToTrade(): Array<UndergroundItem> {
@@ -105,11 +105,11 @@ export class UndergroundTrading {
     // Selling
 
     static get sellAmount(): number {
-        return this._sellAmount();
+        return Math.max(this._sellAmount(), 0);
     }
 
     static set sellAmount(amount: number) {
-        this._sellAmount(amount);
+        this._sellAmount(Math.max(amount, 0));
     }
 
     static get canSell(): boolean {

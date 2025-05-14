@@ -43,8 +43,8 @@ export default class PokemonItem extends CaughtIndicatingItem {
             // Statistics
             if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
                 const gender = PokemonFactory.generateGenderById(pokemonID);
-                const shadow = ShadowStatus.None;
-                PokemonHelper.incrementPokemonStatistics(pokemonID, PokemonStatisticsType.Captured, shinyBool, gender, shadow);
+                const shinyStatistic = shinyBool && numShiny > 1;
+                PokemonHelper.incrementPokemonStatistics(pokemonID, PokemonStatisticsType.Captured, shinyStatistic, gender, ShadowStatus.None);
             }
         }
 
@@ -52,7 +52,7 @@ export default class PokemonItem extends CaughtIndicatingItem {
             const newCatch = !(shiny && App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true));
             Notifier.notify({
                 message: `${(shiny) ? `✨ You obtained a shiny ${pokemonName}! ✨` : `You obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`}`,
-                pokemonImage: PokemonHelper.getImage(pokemonID, shiny),
+                pokemonImage: PokemonHelper.getImage(pokemonID, shiny, undefined, ShadowStatus.None),
                 type: (shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success),
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: (newCatch ? NotificationConstants.NotificationSound.General.new_catch : null),

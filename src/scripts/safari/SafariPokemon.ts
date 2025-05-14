@@ -37,7 +37,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${this.displayName}! ✨`,
-                pokemonImage: PokemonHelper.getImage(this.id, this.shiny, this.gender),
+                pokemonImage: PokemonHelper.getImage(this.id, this.shiny, this.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
