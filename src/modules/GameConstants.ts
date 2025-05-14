@@ -26,6 +26,7 @@ export const MIN_LOAD_TIME = 0.5 * SECOND;
 export const MAX_LOAD_TIME = 20 * SECOND;
 export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
+export const MULCH_OAK_ITEM_TICK = 1 * MINUTE;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 export const SPECIAL_EVENT_TICK = 1 * SECOND;
@@ -2660,18 +2661,3 @@ export const ZMOVE_ACTIVE_MULTIPLIER = 1.5;
 export const ZMOVE_COUNTERACTIVE_MULTIPLIER = 0.75;
 export const ZMOVE_ACTIVE_TIME = 1 * MINUTE;
 export const ZMOVE_COUNTERACTIVE_TIME = 4 * MINUTE;
-
-export enum ContestResults {
-    Normal,
-    Super,
-    Hyper,
-    Master,
-}
-
-export enum ContestStyle {
-    Cool,
-    Beautiful,
-    Cute,
-    Clever,
-    Tough,
-}
