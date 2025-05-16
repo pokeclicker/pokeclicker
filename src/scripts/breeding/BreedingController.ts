@@ -5,6 +5,8 @@
 /// <reference path="../party/PartyController.ts" />
 
 class BreedingController {
+    public static selectedEgg: KnockoutObservable<EggType> = ko.observable(undefined);
+
     public static initialize() {
         // Track view settings for hatchery list rerendering
         const hatcheryListSettings = [...breedingFilterSettingKeys, 'hatcherySort', 'hatcherySortDirection'];
@@ -149,6 +151,25 @@ class BreedingController {
             }
         }
         return 1.0;
+    }
+
+    public static calcEggOdds(eggType: EggType, pokemon: PokemonNameType): number {
+        const hatchList = App.game.breeding.hatchList[eggType];
+        const region = hatchList.findIndex(r => r.includes(pokemon));
+
+        if (region === -1) {
+            return 0;
+        }
+
+        const regionPoolCount = eggType === EggType.Mystery
+            ? Object.values(App.game.breeding.hatchList).reduce((total, eggTypePool) => total += eggTypePool[region].length, 0)
+            : hatchList[region].length;
+
+        const regionDiff = 1 + (player.highestRegion() - Math.max(1, region));
+        // odds of this region pool
+        const odds = 1 / Math.pow(2, regionDiff);
+        // odds of pokemon in this region pool
+        return odds / regionPoolCount;
     }
 
     // Queue size limit setting
