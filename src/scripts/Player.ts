@@ -215,6 +215,17 @@ class Player implements TmpPlayerType {
         }
     }
 
+    public pickStarter(index: number) {
+        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+        App.game.party.gainPokemonById(GameConstants.RegionalStarters[this.region][index], shiny);
+        this.regionStarters[this.region](index);
+    }
+
+    public hasBeatenChampOfRegion(region: GameConstants.Region = this.highestRegion()) {
+        const champion = GameConstants.RegionGyms[region].find(gym => GymList[gym]?.flags.champion);
+        return champion === undefined ? false : App.game.badgeCase.hasBadge(GymList[champion].badgeReward);
+    }
+
     public toJSON() {
         const keep = [
             '_route',

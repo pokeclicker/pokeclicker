@@ -49,7 +49,7 @@ class UseOakItemQuest extends Quest implements QuestInterface {
         if (this.item == OakItemType.Magic_Ball) {
             desc.push(`capture ${this.amount.toLocaleString('en-US')} wild Pokémon.`);
         } else if (this.item == OakItemType.Amulet_Coin) {
-            desc.push(`earn Pokédollars ${this.amount.toLocaleString('en-US')} times.`);
+            desc.push(`earn bonus Pokédollars ${this.amount.toLocaleString('en-US')} times.`);
         } else if (this.item == OakItemType.Exp_Share) {
             desc.push(`defeat ${this.amount.toLocaleString('en-US')} Pokémon.`);
         } else {

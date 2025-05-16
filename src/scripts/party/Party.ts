@@ -2,7 +2,7 @@
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 ///<reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 
-class Party implements Feature {
+class Party implements Feature, TmpPartyType {
     name = 'Pokemon Party';
     saveKey = 'party';
 
@@ -44,97 +44,90 @@ class Party implements Feature {
             // Base power
             // Shiny pokemon help with a 100% boost
             // Resistant pokemon give a 100% boost
-            let caughtPokemon = this.caughtPokemon;
-            if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
-                // Only magikarps can attack in magikarp jump subregion
-                caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
-            }
-
-            const partyClickBonus = caughtPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
+            const partyClickBonus = this.activePartyPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
             return Math.pow(partyClickBonus, 1.4);
         });
 
     }
 
-    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = undefined, shadow = GameConstants.ShadowStatus.None) {
+    gainPokemonByName(name: PokemonNameType, shiny?: boolean, suppressNotification?: boolean, gender?: GameConstants.BattlePokemonGender, shadow?: GameConstants.ShadowStatus) {
         const pokemon = pokemonMap[name];
         this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender, shadow);
     }
 
-    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender: GameConstants.BattlePokemonGender = PokemonFactory.generateGenderById(id), shadow = GameConstants.ShadowStatus.None) {
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow), suppressNotification);
-    }
+    gainPokemonById(id: number,
+        shiny = false,
+        suppressNewCatchNotification = false,
+        gender: GameConstants.BattlePokemonGender = PokemonFactory.generateGenderById(id),
+        shadow: GameConstants.ShadowStatus = GameConstants.ShadowStatus.None
+    ) {
+        const isShadow = shadow === GameConstants.ShadowStatus.Shadow;
+        PokemonHelper.incrementPokemonStatistics(id, GameConstants.PokemonStatisticsType.Captured, shiny, gender, shadow);
 
-    gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender, pokemon.shadow);
+        const newCatch = !this.alreadyCaughtPokemon(id);
+        const newShiny = shiny && !this.alreadyCaughtPokemon(id, true);
+        const newShadow = isShadow && !this.alreadyCaughtPokemon(id, false, true);
 
-        const alreadyCaughtRegular = this.alreadyCaughtPokemon(pokemon.id);
+        if (newCatch) {
+            // Create new party pokemon
+            this._caughtPokemon.push(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow));
 
-        // Handle shadow
-        if (pokemon.shadow) {
-            const alreadyCaughtShadow = this.alreadyCaughtPokemon(pokemon.id, false, true);
-
-            // Only set the shadow status if we have the regular in our party it doesn't already have the shadow status
-            if (alreadyCaughtRegular && !alreadyCaughtShadow) {
-                this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
-            }
-
-            // Only log and notify the first time we catch a shadow pokemon
-            if (!alreadyCaughtShadow) {
-                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: pokemon.name }));
-
-                Notifier.notify({
-                    message: `You have captured a shadow ${pokemon.displayName}!`,
-                    type: NotificationConstants.NotificationOption.warning,
-                    sound: NotificationConstants.NotificationSound.General.new_catch,
-                    setting: NotificationConstants.NotificationSetting.General.new_catch,
-                });
-            }
+            // Keep caughtPokemon array sorted by ID
+            this._caughtPokemon.sort((a, b) => a.id - b.id);
         }
 
-        // Handle shiny
-        if (pokemon.shiny) {
-            const alreadyCaughtShiny = this.alreadyCaughtPokemon(pokemon.id, true);
-
-            // Only set the shiny status if we have the regular in our party it doesn't already have the shiny status
-            if (alreadyCaughtRegular && !alreadyCaughtShiny) {
-                this.getPokemon(pokemon.id).shiny = true;
-            }
-
-            // If we already have the shiny, log it
-            // If we catch a new shiny, log it and notify
-            if (alreadyCaughtShiny) {
-                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShinyDupe({ pokemon: pokemon.name }));
-            } else {
-                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShiny({ pokemon: pokemon.name }));
-
-                Notifier.notify({
-                    message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
-                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
-                    type: NotificationConstants.NotificationOption.warning,
-                    sound: NotificationConstants.NotificationSound.General.new_catch,
-                    setting: NotificationConstants.NotificationSetting.General.new_catch,
-                });
-            }
+        // Update existing party pokemon
+        const partyPokemon = this.getPokemon(id);
+        if (newShiny) {
+            partyPokemon.shiny = true;
+        }
+        if (newShadow) {
+            partyPokemon.shadow = GameConstants.ShadowStatus.Shadow;
         }
 
-        // Handle the regular
-        if (!alreadyCaughtRegular) {
-            // We don't have this pokemon in our party yet, so add it
-            this._caughtPokemon.push(pokemon);
+        // Properties of the PartyPokemon used for notifications -- shininess, shadow status, etc. comes from this catch
+        const { name, displayName } = partyPokemon;
 
-            // Handle logging and notifying
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: pokemon.name }));
+        // Notifications
+        if (newCatch && !suppressNewCatchNotification) {
+            Notifier.notify({
+                message: `You have captured ${GameHelper.anOrA(name)} ${displayName}!`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender, shadow),
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
+        }
+        if (newShiny) {
+            Notifier.notify({
+                message: `✨ You have captured a shiny ${displayName}! ✨`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender, shadow),
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
+        }
+        if (newShadow) {
+            Notifier.notify({
+                message: `You have captured a shadow ${displayName}!`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender, shadow),
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
+        }
 
-            if (!suppressNotification) {
-                Notifier.notify({
-                    message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
-                    pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.General.new_catch,
-                    setting: NotificationConstants.NotificationSetting.General.new_catch,
-                });
-            }
+        // Logbook entries
+        if (newCatch) {
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.captured({ pokemon: name }));
+        }
+        if (shiny) {
+            // Both new and duplicate shinies get logged
+            const shinyLogContent = newShiny ? createLogContent.capturedShiny : createLogContent.capturedShinyDupe;
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, shinyLogContent({ pokemon: name }));
+        }
+        if (newShadow) {
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: name }));
         }
     }
 
@@ -177,14 +170,11 @@ class Party implements Feature {
         subregion: GameConstants.SubRegions = player.subregion
     ): number {
         let attack = 0;
-        let pokemon = this.caughtPokemon;
-        if (region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
-            // Only magikarps can attack in magikarp jump
-            pokemon = pokemon.filter(p => Math.floor(p.id) == 129);
-        }
+        const pokemon = this.partyPokemonActiveInSubRegion(region, subregion);
+        const ignoreRegionMultiplierOrMKJ = ignoreRegionMultiplier || region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump;
 
         for (const p of pokemon) {
-            attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
+            attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplierOrMKJ, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
@@ -199,7 +189,7 @@ class Party implements Feature {
         ignoreRegionMultiplier = false,
         includeBreeding = false,
         useBaseAttack = false,
-        overrideWeather: WeatherType,
+        overrideWeather?: WeatherType,
         ignoreLevel = false,
         includeTempBonuses = true
     ): number {
@@ -296,6 +286,15 @@ class Party implements Feature {
         return this._caughtPokemonLookup().get(pokemonMap[name].id);
     }
 
+    public partyPokemonActiveInSubRegion(region: GameConstants.Region, subregion: GameConstants.SubRegions): Array<PartyPokemon> {
+        let caughtPokemon = this.caughtPokemon as Array<PartyPokemon>;
+        if (region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
+            // Only magikarps can attack in magikarp jump subregion
+            caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
+        }
+        return caughtPokemon;
+    }
+
     alreadyCaughtPokemonByName(name: PokemonNameType, shiny = false) {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
@@ -318,6 +317,32 @@ class Party implements Feature {
         return Math.floor(clickAttack * bonus);
     }
 
+    public clickAttackBreakdown = ko.pureComputed((): ClickAttackBreakdown => {
+        let numShiny = 0, numResistant = 0, numPurified = 0;
+        this.activePartyPokemon.forEach((p) => {
+            if (p.shiny) {
+                numShiny += 1;
+            }
+            if (p.pokerus >= GameConstants.Pokerus.Resistant) {
+                numResistant += 1;
+            }
+            if (p.shadow >= GameConstants.ShadowStatus.Purified) {
+                numPurified += 1;
+            }
+        });
+
+        return {
+            caughtPokemon: this.activePartyPokemon.length,
+            shinyPokemon: numShiny,
+            resistantPokemon: numResistant,
+            purifiedPokemon: numPurified,
+            xClickModifier: EffectEngineRunner.isActive(ItemList.xClick.name)() ? (ItemList.xClick as BattleItem).multiplyBy : 1,
+            blackFluteModifier: FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Black_Flute),
+            rockyHelmetModifier: App.game.oakItems.calculateBonus(OakItemType.Rocky_Helmet),
+            baseClickAttack: Math.floor(App.game.party.calculateBaseClickAttack() * (1 + AchievementHandler.achievementBonus())),
+        };
+    });
+
     canAccess(): boolean {
         return true;
     }
@@ -328,11 +353,12 @@ class Party implements Feature {
         }
 
         const caughtPokemonSave = json.caughtPokemon;
-        for (let i = 0; i < caughtPokemonSave.length; i++) {
-            const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
-            partyPokemon.fromJSON(caughtPokemonSave[i]);
-            this._caughtPokemon.push(partyPokemon);
-        }
+        const caughtPokemon = caughtPokemonSave.map(caughtPoke => {
+            const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPoke.id);
+            partyPokemon.fromJSON(caughtPoke);
+            return partyPokemon;
+        });
+        this._caughtPokemon(caughtPokemon);
     }
 
     initialize(): void {
@@ -350,6 +376,10 @@ class Party implements Feature {
 
     get caughtPokemon(): ReadonlyArray<PartyPokemon> {
         return this._caughtPokemon();
+    }
+
+    get activePartyPokemon(): ReadonlyArray<PartyPokemon> {
+        return this.partyPokemonActiveInSubRegion(player.region, player.subregion);
     }
 
 }

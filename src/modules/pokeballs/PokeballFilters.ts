@@ -155,6 +155,10 @@ export default class PokeballFilters implements Feature {
         this.list(defaultFilters);
     }
 
+    toggleAllFiltersEnabled(enabled: boolean) {
+        this.list().forEach((pf) => pf.enabled(enabled));
+    }
+
     toJSON() {
         return {
             list: this.list().map((pf) => pf.toJSON()),

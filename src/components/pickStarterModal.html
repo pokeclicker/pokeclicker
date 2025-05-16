@@ -18,7 +18,7 @@ data-backdrop="static" data-keyboard="false">
                            <input class="image-starter" type="image"
                                   data-bind="
                                     attr: { src: 'assets/images/pokemon/' + $data + '.png' },
-                                    click: () => { App.game.party.gainPokemonById($data); player.regionStarters[player.region]($index()); $('#pickStarterModal').modal('hide'); }
+                                    click: () => { player.pickStarter($index()); $('#pickStarterModal').modal('hide'); }
                                     ">
                        </div>
                    </div>

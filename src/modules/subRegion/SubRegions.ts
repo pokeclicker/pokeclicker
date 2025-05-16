@@ -19,6 +19,7 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
+import LazyRequirementWrapper from '../requirements/LazyRequirementWrapper';
 
 export default class SubRegions {
     public static list: Record<number, SubRegion[]> = {};
@@ -73,7 +74,7 @@ SubRegions.addSubRegion(Region.alola, new SubRegion('Poni Island', AlolaSubRegio
 SubRegions.addSubRegion(Region.alola, new SubRegion('Magikarp Jump', AlolaSubRegions.MagikarpJump, new QuestLineStartedRequirement('Magikarp Jump'), 'Hoppy Town'));
 
 SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegions.SouthGalar, undefined, 'Hulbury'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Hammerlocke'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new LazyRequirementWrapper(() => new RouteKillRequirement(10, GameConstants.Region.galar, 22)), 'Hammerlocke'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubRegions.IsleofArmor, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
 

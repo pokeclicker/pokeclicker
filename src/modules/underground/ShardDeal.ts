@@ -483,7 +483,7 @@ export class ShardDeal {
                     1),
             ],
         );
-        ShardDeal.list[ShardTraderLocations['Pokemon HQ Lab']] = ko.observableArray(
+        ShardDeal.list[ShardTraderLocations['Pokémon HQ Lab']] = ko.observableArray(
             [
                 new ShardDeal(
                     [{ shardTypeString: 'Blue Shard', amount: 40 }],
