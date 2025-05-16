@@ -345,7 +345,7 @@
                                 Map locations will be coloured based on the following:
                             </div>
                             ${MapHelper.getUsableFilters().map(setting => {
-                                return `<div class='col-10 legend-item'>
+                                return `<div class='col-10 legend-item ${setting.name}'>
                                     <span>${setting.displayName}:</span>
                                 </div>
                                 <div class='col-2'>
@@ -353,7 +353,7 @@
                                 </div>`
                             }).join('\n')}
                             <div class='col-12'>
-                                <i>NOTE: These colors can be customized in the settings menu</i>
+                                <i>NOTE: Colors and priority can be customized in the settings menu</i>
                             </div>
                         </div>`}">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 96px; top: 0px; width: auto; height: 41px;"

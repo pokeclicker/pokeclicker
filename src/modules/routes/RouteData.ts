@@ -2191,7 +2191,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    33750,
+    47250,
 ));
 Routes.add(new RegionRoute(
     'Quick League Bridge', Region.alola, 32,
@@ -2202,7 +2202,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    67500,
+    94500,
 ));
 Routes.add(new RegionRoute(
     'Heavy League Bridge', Region.alola, 33,
@@ -2213,7 +2213,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    168750,
+    236250,
 ));
 Routes.add(new RegionRoute(
     'Great League Bridge', Region.alola, 34,
@@ -2224,7 +2224,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    270000,
+    378000,
 ));
 Routes.add(new RegionRoute(
     'Fast League Bridge', Region.alola, 35,
@@ -2235,7 +2235,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    506250,
+    708750,
 ));
 Routes.add(new RegionRoute(
     'Luxury League Bridge', Region.alola, 36,
@@ -2246,7 +2246,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    675000,
+    945000,
 ));
 Routes.add(new RegionRoute(
     'Heal League Bridge', Region.alola, 37,
@@ -2257,7 +2257,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    1012500,
+    1417500,
 ));
 Routes.add(new RegionRoute(
     'Ultra League Bridge', Region.alola, 38,
@@ -2268,7 +2268,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    1350000,
+    1890000,
 ));
 Routes.add(new RegionRoute(
     'Elite Four League Pier', Region.alola, 39,
@@ -2279,7 +2279,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    2025000,
+    2835000,
 ));
 Routes.add(new RegionRoute(
     'Master League Pier', Region.alola, 40,
@@ -2290,7 +2290,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    2700000,
+    3780000,
 ));
 
 /*
