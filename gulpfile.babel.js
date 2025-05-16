@@ -60,7 +60,7 @@ const htmlImportIf = (html_str, is_true) => {
 
 /* Adapted from https://github.com/jrainlau/gulp-html-import */
 const importHTML = (componentsUrl) => {
-    const fileReg = /@import\s"([^"\n]*)"/gi;
+    const fileReg = /(?<=^\s*)@import\s"([^"\n]*)"/gim;
 
     const recursiveImport = (data, importPaths) => {
         const curPath = importPaths.at(-1);
@@ -76,7 +76,7 @@ const importHTML = (componentsUrl) => {
                 const importContents = fs.readFileSync(matchPath, {
                     encoding: 'utf8',
                 });
-                return recursiveImport(importContents, importPathsNew);
+                return `<!-- imported from ${matchPath} -->\n` + recursiveImport(importContents, importPathsNew);
             } catch (e) {
                 if (e.code === 'ENOENT') {
                     throw new Error(`HTML importer can't find imported file ${matchPath}`);
