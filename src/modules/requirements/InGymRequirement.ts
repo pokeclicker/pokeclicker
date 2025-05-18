@@ -13,6 +13,6 @@ export default class InGymRequirement extends Requirement {
     public hint(): string {
         return `You must be in the ${
             this.gymTown
-        } dungeon`;
+        } gym.`;
     }
 }

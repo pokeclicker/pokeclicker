@@ -1,4 +1,4 @@
-///<reference path="GymPokemon.ts"/>
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
@@ -16,7 +16,8 @@ interface gymFlags {
 interface optionalGymArgs {
     displayName?: string,
     imageName?: string,
-    environment?: GameConstants.Environment,
+    environment?: GameConstants.Environment[],
+    battleBackground?: GameConstants.BattleBackground,
     hideUntilUnlocked?: boolean,
     visibleRequirement?: Requirement,
 }
@@ -24,7 +25,8 @@ interface optionalGymArgs {
 /**
  * Gym class.
  */
-class Gym extends TownContent {
+class Gym extends TownContent implements TmpGymType {
+    public town: string;
     buttonText: string;
     public tooltip = 'Battle Gym Leaders to earn badges';
     public cssClass() {
@@ -54,29 +56,30 @@ class Gym extends TownContent {
         champion: false,
     };
 
-    public areaStatus(): areaStatus {
+    public areaStatus(): areaStatus[] {
+        const states = [];
         if (!this.isUnlocked()) {
-            return areaStatus.locked;
-        } else if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
-            return areaStatus.incomplete;
-        } else if (this.isThereQuestAtLocation()) {
-            return areaStatus.questAtLocation;
-        } else if (!this.isAchievementsComplete()) {
-            return areaStatus.missingAchievement;
+            states.push(areaStatus.locked);
         }
-        return areaStatus.completed;
+        if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
+            states.push(areaStatus.incomplete);
+        }
+        if (this.isThereQuestAtLocation()) {
+            states.push(areaStatus.questAtLocation);
+        }
+        if (!this.isAchievementsComplete()) {
+            states.push(areaStatus.missingAchievement);
+        }
+        return states;
     }
 
     public clears() {
-        if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {
-            return undefined;
-        }
         return App.game.statistics.gymsDefeated[GameConstants.getGymIndex(this.town)]();
     }
 
     constructor(
         public leaderName: string,
-        public town: string,
+        town: string,
         private pokemons: GymPokemon[],
         public badgeReward: BadgeEnums,
         public moneyReward: number,
@@ -91,6 +94,7 @@ class Gym extends TownContent {
         public optionalArgs: optionalGymArgs = {}
     ) {
         super(requirements);
+        this.town = town;
         this.flags.quest = quest;
         this.flags.achievement = achievement;
         this.flags.champion = champion;

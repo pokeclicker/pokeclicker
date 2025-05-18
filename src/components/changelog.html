@@ -21,7 +21,7 @@
               <!-- ko if: type.label == 'UPDATE' -->
                 <td class="text-left" >
                   <span data-bind="html: description"></span>
-                  <a target="_BLANK" class="float-right" data-bind="attr: { href: `https://github.com/pokeclicker/pokeclicker/compare/${ChangelogItems.find((c, i) => c.version && i > $index())?.version}...${$data.version}` }">Full Changelog</a>
+                  <a target="_BLANK" class="float-right" data-bind="attr: { href: `https://github.com/pokeclicker/pokeclicker/releases/tag/${$data.version}` }">View full changelog notes</a>
                 </td>
               <!-- /ko -->
               <!-- ko ifnot: type.label == 'UPDATE' -->

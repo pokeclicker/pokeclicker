@@ -3,21 +3,14 @@
      class="justify-content-center no-gutters no-select">
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
-            <button type="button" class="btn btn-outline-info" style="float: right;"
-                data-bind="visible: player.town instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
-
             <div class="pageItemTitle d-flex justify-content-center" data-bind="let: { isDungeon: player.town instanceof DungeonTown && player.town.dungeon }">
                 <div class="title-left" data-bind="if: isDungeon">
                     <div class="d-flex align-items-center ml-1 mr-auto">
                         <div class="d-flex flex-column">
-                            <!--If all Pokémon in the dungeon are caught-->
-                            <div data-bind="if: (!DungeonRunner.dungeonCompleted(player.town.dungeon, true) && DungeonRunner.dungeonCompleted(player.town.dungeon, false))" style="font-size: 0;">
-                                <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball.svg" />
-                            </div>
-
-                            <!--If all Pokémon in the dungeon are caught shiny-->
-                            <div data-bind="if: DungeonRunner.dungeonCompleted(player.town.dungeon, true)" style="font-size: 0;">
-                                <img title="You have captured all Pokémon shiny in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                            <!--If all Pokémon in the dungeon are caught or caught shiny-->
+                            <div data-bind="if: DungeonRunner.dungeonCompleted(player.town.dungeon, false)" style="font-size: 0;">
+                                <img class="pokeball-smallest ml-0" data-bind="attr: { src: `assets/images/pokeball/Pokeball${DungeonRunner.dungeonCompleted(player.town.dungeon, true) ? '-shiny' : ''}.svg` },
+                                tooltip: { trigger: 'hover', placement: 'bottom', title: `You have captured all Pokémon${DungeonRunner.dungeonCompleted(player.town.dungeon, true) ? ' shiny' : ''} in this dungeon!`}"/>
                             </div>
 
                             <!--Pokérus image-->
@@ -27,7 +20,8 @@
                                 tooltip: {
                                     title: RouteHelper.dungeonPokerusEVs(player.town.dungeon),
                                     placement: 'bottom',
-                                    trigger: 'hover'
+                                    trigger: 'hover',
+                                    html: true
                                 }" />
                             </div>
                         </div>
@@ -46,12 +40,26 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-center px-2" style="font-size: 1.8rem;" data-bind="text: player.town.name">Town Name</div>
+                <div class="d-flex justify-content-center px-2" style="font-size: 1.8rem;">
+                    <knockout data-bind="text: player.town.name">Town Name</knockout>
+                </div>
 
                 <div class="title-right" data-bind="if: isDungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
-                    <div class="d-flex flex-column justify-content-center small mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
-                        <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
-                        <div style="line-height: normal;">clears</div>
+                    <div class="d-flex ml-auto">
+                        <knockout class="h4 no-emoji-font mr-2 mb-0 align-self-center" data-bind="
+                            visible: DungeonRunner.isDungeonDebuffed(player.town.dungeon),
+                            class: Object.values(player.town.dungeon.lootTable).flat().find(l => l.ignoreDebuff && (l.requirement?.isCompleted() ?? true)) ? 'text-warning' : 'text-danger',
+                            tooltip: {
+                                title: 'This dungeon is debuffed and will be significantly less likely to drop Epic, Legendary, and Mythic loot.',
+                                trigger: 'hover',
+                            }">⚠</knockout>
+                        <div class="d-flex flex-column justify-content-center small mr-1" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
+                            <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
+                            <div style="line-height: normal;">clears</div>
+                        </div>
+                        <div class="px-1 clickable d-inline-block ml-1 align-self-center" data-bind="tooltip: { title: 'See the Loot available in this dungeon.', trigger: 'hover' }, click: function() { $('#dungeonInfoModal').modal('show') }" data-original-title="" title="">
+                            <img src="assets/images/encountersInfo/encountersInfo.png">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,6 +81,9 @@
                         tooltip: { html: true, title: `Hire a Dungeon Guide!`, trigger: 'hover', placement:'right' },
                         visible: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.dungeon.name)]() >= 10">↻</button>
                 </div>
+                <button type="button" class="btn btn-info p-0" data-bind="
+                    visible: player.town instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'),
+                    tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'right' }">?</button>
                 <!-- /ko -->
 
                 <!-- ko foreach: player.town.content -->
@@ -113,7 +124,7 @@
 
     </div>
     <div style="flex-grow: 1;"></div>
-    <knockout data-bind="if: (player.town.dungeon && player.town instanceof DungeonTown)">
+    <knockout data-bind="if: (player.town.dungeon && player.town instanceof DungeonTown && player.town.dungeon.isUnlocked())">
       <div id="dungeonPokemonList" class="card pt-2 pb-3 px-1">
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline mb-0">
@@ -182,5 +193,34 @@
         </ul>
       </div>
     </knockout>
+    <knockout data-bind="if: player.town.content.find(c => c instanceof SafariTownContent)">
+        <div id="dungeonPokemonList" class="card pt-2 pb-3 px-1">
+          <!--Display all available Pokémon in this Safari-->
+          <ul class="list-inline mb-0">
+            <!-- ko foreach: SafariPokemonList.getDisplayList() -->
+            <li class="list-inline-item">
+              <img class="dungeon-pokemon-pkrs" src="" data-bind="
+                  attr:{ src: $data.pkrsImage },
+                  tooltip: {
+                      title: $data.EVs,
+                      placement: 'bottom',
+                      trigger: 'hover'
+                  }" />
+              <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
+                  css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+              <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
+              <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                  hidden: !$data.lock,
+                  tooltip: {
+                      title: $data.lockMessage,
+                      placement: 'top',
+                      trigger: 'hover',
+                      boundary: 'window'
+                  }" />
+            </li>
+            <!-- /ko -->
+          </ul>
+        </div>
+      </knockout>
 </div>
 </knockout>

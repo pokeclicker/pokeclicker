@@ -13,6 +13,6 @@ export default class SpecialEventRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Event ${this.specialEventName} has not started.`;
+        return `${this.specialEventName} must be started.`;
     }
 }

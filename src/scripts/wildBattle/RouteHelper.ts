@@ -39,12 +39,12 @@ class RouteHelper {
     }
 
     public static routePokerusEVs(route:number, region:GameConstants.Region): string {
-        const possiblePokemon: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
+        const possiblePokemon: PokemonNameType[] = [...new Set(RouteHelper.getAvailablePokemonList(route, region))];
         if (this.minPokerus(possiblePokemon) == GameConstants.Pokerus.Resistant) {
             return 'All Pokémon on this route are resistant!';
         }
         const currentEVs = this.getEvs(possiblePokemon);
-        return `EVs until all Pokémon are resistant on this route: ${currentEVs} / ${50 * possiblePokemon.length}.`;
+        return `EVs until all Pokémon are resistant on this route: ${currentEVs}&nbsp;/&nbsp;${50 * possiblePokemon.length}.`;
     }
 
     public static dungeonPokerusEVs(dungeon: Dungeon): string {
@@ -53,7 +53,7 @@ class RouteHelper {
             return 'All Pokémon in this dungeon are resistant!';
         }
         const currentEVs = this.getEvs(possiblePokemon);
-        return `EVs until all Pokémon are resistant in this dungeon: ${currentEVs} / ${50 * possiblePokemon.length}.`;
+        return `EVs until all Pokémon are resistant in this dungeon: ${currentEVs}&nbsp;/&nbsp;${50 * possiblePokemon.length}.`;
 
     }
 

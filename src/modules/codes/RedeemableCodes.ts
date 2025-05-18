@@ -68,6 +68,19 @@ export default class RedeemableCodes implements Saveable {
 
                 return true;
             }),
+            new RedeemableCode('everstone', 1389168938, false, async () => {
+                // Give the player 1 Everstone
+                player.gainItem('Everstone', 1);
+                // Notify that the code was activated successfully
+                Notifier.notify({
+                    title: 'Code activated!',
+                    message: 'You gained 1 Everstone!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
+
+                return true;
+            }),
             new RedeemableCode('typed-held-item', -2046503095, false, async () => {
                 // Give the player 3 random typed held items
                 const items = Object.values(ItemList).filter((i) => i.constructor.name === 'TypeRestrictedAttackBonusHeldItem')
@@ -202,9 +215,10 @@ export default class RedeemableCodes implements Saveable {
                     quest.curQuestObject().complete();
                 }
                 App.game.wallet.gainDungeonTokens(200);
+                App.game.keyItems.gainKeyItem(KeyItemType.Dungeon_ticket, true);
                 Notifier.notify({
                     title: 'Tutorial Skip',
-                    message: 'You have skipped the tutorial, and found a stash of Dungeon Tokens.',
+                    message: 'You have skipped the tutorial, and found a stash of Dungeon Tokens with a Dungeon Ticket.',
                     type: NotificationConstants.NotificationOption.warning,
                     timeout: 1e4,
                 });

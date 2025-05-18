@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
 class DungeonRunner {
@@ -19,10 +20,30 @@ class DungeonRunner {
     public static continuousInteractionInput = false;
 
     public static initializeDungeon(dungeon: Dungeon) {
-        if (!dungeon.isUnlocked()) {
+        if (!DungeonRunner.canStartDungeon(dungeon)) {
+            let message;
+            let notifType;
+            if (!dungeon.isUnlocked()) {
+                if (dungeon.name === 'Viridian Forest') {
+                    message = 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>';
+                    notifType = NotificationConstants.NotificationOption.danger;
+                } else {
+                    message = `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`;
+                    notifType = NotificationConstants.NotificationOption.warning;
+                }
+            } else if (!dungeon.hasUnlockedBoss()) {
+                message = 'You can\'t access this dungeon right now because all of its bosses are locked.';
+                notifType = NotificationConstants.NotificationOption.warning;
+            } else if (!DungeonGuides.hired() && !DungeonRunner.hasEnoughTokens(dungeon)) {
+                message = 'You don\'t have enough Dungeon Tokens.';
+                notifType = NotificationConstants.NotificationOption.danger;
+            } else {
+                message = 'You can\'t enter this dungeon right now.';
+                notifType = NotificationConstants.NotificationOption.danger;
+            }
             Notifier.notify({
-                message: `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`,
-                type: NotificationConstants.NotificationOption.warning,
+                message: message,
+                type: notifType,
             });
             return false;
         }
@@ -30,13 +51,6 @@ class DungeonRunner {
 
         // Only charge the player if they aren't using a dungeon guide as they are charged when they start the dungeon
         if (!DungeonGuides.hired()) {
-            if (!DungeonRunner.hasEnoughTokens()) {
-                Notifier.notify({
-                    message: 'You don\'t have enough Dungeon Tokens.',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
-            }
             App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
         }
         // Reset any trainers/pokemon if there was one previously
@@ -54,7 +68,7 @@ class DungeonRunner {
         const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
         const generateChestLoot = () => {
             const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon.name)]();
-            const debuffed = (dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(dungeon.name)) < player.highestRegion() - 2;
+            const debuffed = DungeonRunner.isDungeonDebuffed(dungeon);
             // Ignores debuff on first attempt to get loot that ignores debuff.
             let tier = dungeon.getRandomLootTier(clears);
             let loot = dungeon.getRandomLoot(tier);
@@ -128,7 +142,7 @@ class DungeonRunner {
     public static handleInteraction(source: GameConstants.DungeonInteractionSource = GameConstants.DungeonInteractionSource.Click) {
         if (DungeonRunner.fighting() && !DungeonBattle.catching() && source === GameConstants.DungeonInteractionSource.Click) {
             DungeonBattle.clickAttack();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind && !DungeonGuides.hired()) {
             DungeonRunner.dungeonLeave();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest) {
             DungeonRunner.openChest();
@@ -160,13 +174,15 @@ class DungeonRunner {
             mythic: 0,
         }[tier];
 
+        // Decreasing chance for rarer items (41.7% → 8.3%), ×150% with Dowsing Machine on
+        let moreItemsChance = 0.5 / (4 / (tierWeight + 1)) / 1.5;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
-            // Decreasing chance for rarer items (62.5% → 12.5%)
-            const magnetChance = 0.5 / (4 / (tierWeight + 1));
-            if (Rand.chance(magnetChance)) {
-                // Gain more items in higher regions
-                amount += Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
-            }
+            moreItemsChance *= 1.5;
+        }
+        if (Rand.chance(moreItemsChance)) {
+            // Gain more items in higher regions
+            const region = DungeonRunner.dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(DungeonRunner.dungeon.name);
+            amount *= 1 + Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (region + 1)));
         }
 
         DungeonRunner.gainLoot(loot.loot, amount, tierWeight);
@@ -190,7 +206,7 @@ class DungeonRunner {
             return App.game.pokeballs.gainPokeballs(GameConstants.Pokeball[GameConstants.humanifyString(input)],amount, false);
         } else if (UndergroundItems.getByName(input) instanceof UndergroundItem) {
             DungeonRunner.lootNotification(input, amount, weight, UndergroundItems.getByName(input).image);
-            return Underground.gainMineItem(UndergroundItems.getByName(input).id, amount);
+            return UndergroundController.gainMineItem(UndergroundItems.getByName(input).id, amount);
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             const image = `assets/images/pokemon/${PokemonHelper.getPokemonByName(input).id}.png`;
             DungeonRunner.lootNotification(input, amount, weight, image);
@@ -245,6 +261,12 @@ class DungeonRunner {
             return;
         }
 
+        if (!DungeonRunner.dungeon.hasUnlockedBoss()) {
+            // Prevent the player from being unable to finish the dungeon if somehow all the bosses became locked after entering
+            DungeonRunner.dungeonWon();
+            return;
+        }
+
         DungeonRunner.fightingBoss(true);
         DungeonBattle.generateNewBoss();
     }
@@ -257,7 +279,9 @@ class DungeonRunner {
         );
         DungeonRunner.map.playerPosition.notifySubscribers();
         DungeonRunner.timeLeft(DungeonRunner.timeLeft() + GameConstants.DUNGEON_LADDER_BONUS);
-        DungeonRunner.map.playerMoved(false);
+        if (!DungeonGuides.hired()) {
+            DungeonRunner.map.playerMoved(false);
+        }
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
@@ -331,8 +355,12 @@ class DungeonRunner {
         });
     }
 
-    public static hasEnoughTokens() {
-        return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+    public static canStartDungeon(dungeon: Dungeon = DungeonRunner.dungeon) {
+        return (DungeonGuides.hired() || DungeonRunner.hasEnoughTokens(dungeon)) && dungeon.isUnlocked() && dungeon.hasUnlockedBoss();
+    }
+
+    public static hasEnoughTokens(dungeon: Dungeon = DungeonRunner.dungeon) {
+        return App.game.wallet.hasAmount(new Amount(dungeon.tokenCost, GameConstants.Currency.dungeonToken));
     }
 
     public static dungeonLevel(): number {
@@ -352,4 +380,10 @@ class DungeonRunner {
         const index = config.findIndex((tier) => tier.clearsNeeded <= clears);
         return config[index]?.flash;
     }
+
+    public static isDungeonDebuffed(dungeon) {
+        return (dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(dungeon.name)) < player.highestRegion() - 2;
+    }
 }
+
+DungeonRunner satisfies TmpDungeonRunnerType;

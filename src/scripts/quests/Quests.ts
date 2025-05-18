@@ -111,6 +111,11 @@ class Quests implements Saveable {
         const quest  = this.questList()[index];
         if (quest && quest.isCompleted() && !quest.claimed()) {
             quest.claim();
+            if (player.highestRegion() >= GameConstants.Region.kalos && App.game.party.alreadyCaughtPokemonByName('Medicham') && !player.hasMegaStone(GameConstants.MegaStoneType.Medichamite)) {
+                if (Rand.chance(Math.max(0, (App.game.quests.level() - 15) / 8192))) {
+                    player.gainMegaStone(GameConstants.MegaStoneType.Medichamite);
+                }
+            }
             // Once the player completes every available quest, refresh the list for free
             if (this.allQuestClaimed()) {
                 this.refreshQuests(true);

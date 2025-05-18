@@ -40,7 +40,7 @@
                                         aria-expanded="false" title="Move Pokémon from this category to another category."></button>
                                     <div class="dropdown-menu pt-0">
                                         <p class="small text-center p-2 mb-0">Move Pokémon To:</p>
-                                        <div data-bind="foreach: PokemonCategories.categories()">
+                                        <div data-bind="foreach: PokemonCategories.categories">
                                             <!-- ko if: $data.id !== $parent.id -->
                                             <button class="dropdown-item small" type="button"
                                                 data-bind="text: $data.name,

@@ -106,7 +106,17 @@ export default class TypeHelper {
     }
 
     public static typeToValue(type: TypeEffectiveness): TypeEffectivenessValue {
-        return TypeEffectivenessValue[TypeEffectivenessValue[type]];
+        switch (type) {
+            case TypeEffectiveness.Immune:
+                return TypeEffectivenessValue.Immune;
+            case TypeEffectiveness.NotVery:
+                return TypeEffectivenessValue.NotVery;
+            case TypeEffectiveness.Very:
+                return TypeEffectivenessValue.Very;
+            case TypeEffectiveness.Neutral:
+            default:
+                return TypeEffectivenessValue.Neutral;
+        }
     }
 
     public static valueToType(value: TypeEffectivenessValue): TypeEffectiveness {

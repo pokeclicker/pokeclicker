@@ -270,9 +270,21 @@ class SafariBattle {
         }
     }
 
-    public static run() {
+    public static async run() {
         if (Safari.inBattle() && !SafariBattle.busy()) {
             SafariBattle.busy(true);
+            if (SafariBattle.enemy.shiny) {
+                if (!await Notifier.confirm({
+                    title: 'Shiny Encounter',
+                    message: 'Are you sure you want to run away from this battle?',
+                    type: NotificationConstants.NotificationOption.danger,
+                    confirm: 'Yes',
+                    cancel: 'No',
+                })) {
+                    SafariBattle.busy(false);
+                    return;
+                }
+            }
             SafariBattle.text('You flee.');
             SafariBattle.delay(SafariBattle.Speed.turnLength)
                 .then(() => SafariBattle.endBattle());

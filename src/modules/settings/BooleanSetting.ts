@@ -1,8 +1,15 @@
+import Requirement from '../requirements/Requirement';
 import Setting from './Setting';
 import SettingOption from './SettingOption';
 
 export default class BooleanSetting extends Setting<boolean> {
-    constructor(name: string, displayName: string, defaultValue: boolean) {
+    constructor(
+        name: string,
+        displayName: string,
+        defaultValue: boolean,
+        requirement: Requirement = undefined,
+        saveAsDefault: boolean = true,
+    ) {
         super(
             name,
             displayName,
@@ -11,6 +18,8 @@ export default class BooleanSetting extends Setting<boolean> {
                 new SettingOption<boolean>('Off', false),
             ],
             defaultValue,
+            requirement,
+            saveAsDefault,
         );
     }
 

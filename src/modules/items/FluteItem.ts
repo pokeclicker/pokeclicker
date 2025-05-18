@@ -28,6 +28,14 @@ export default class FluteItem extends Item {
         return `+${(this.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} bonus to ${this.description}`;
     }
 
+    getFormattedTooltip(): string {
+        let tooltipString = '';
+        tooltipString += `<div><strong>${this.displayName}</strong></div>`;
+        tooltipString += `<div>${this.getDescription()}</div>`;
+        tooltipString += `<div>Consuming ${FluteEffectRunner.numActiveFlutes()} Gem(s)/Second</div>`;
+        return tooltipString;
+    }
+
     public getMultiplier() {
         return (this.multiplyBy - 1) * (AchievementHandler.achievementBonus() + 1) + 1;
     }
@@ -37,22 +45,6 @@ export default class FluteItem extends Item {
     }
 
     checkCanUse(): boolean {
-        if (App.game.challenges.list.disableGems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Gems are Disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
-        if (App.game.challenges.list.disableBattleItems.active()) {
-            Notifier.notify({
-                title: 'Challenge Mode',
-                message: 'Battle Items are Disabled',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
-        }
         if (!FluteEffectRunner.isActive(FluteItemType[this.name])() && !player.itemList[this.name]()) {
             Notifier.notify({
                 message: `You don't have the ${this.displayName}...`,
@@ -71,5 +63,3 @@ export default class FluteItem extends Item {
     }
 
 }
-
-

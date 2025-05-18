@@ -1,6 +1,3 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../Battle.ts" />
-
 class BattleFrontierBattle extends Battle {
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(3);
@@ -31,9 +28,9 @@ class BattleFrontierBattle extends Battle {
      * Award the player with exp, gems and go to the next pokemon
      */
     public static defeatPokemon() {
+        this.enemyPokemon().defeat(true);
         // This needs to stay as none so the stage number isn't adjusted
         App.game.breeding.progressEggsBattle(BattleFrontierRunner.computedDifficultyStage(), GameConstants.Region.none);
-        this.enemyPokemon().defeat(true);
         // Next pokemon
         GameHelper.incrementObservable(this.pokemonIndex);
 

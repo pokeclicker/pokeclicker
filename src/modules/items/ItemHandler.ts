@@ -95,7 +95,7 @@ export default class ItemHandler {
         });
     }
 
-    public static initilizeEvoStones() {
+    public static initializeItems() {
         // Set our unlock regions
         Object.values(ItemList).forEach((item) => item.init());
     }

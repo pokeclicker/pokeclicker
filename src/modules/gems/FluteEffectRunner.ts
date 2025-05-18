@@ -25,6 +25,26 @@ export default class FluteEffectRunner {
     public static numActiveFlutes: KnockoutObservable<number> = ko.observable(0);
     public static activeGemTypes: KnockoutObservableArray<number> = ko.observableArray();
 
+    public static additionalInfoTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        const tooltip = [];
+
+        // List all types boosted
+        if (this.activeGemTypes().length < 18) {
+            this.activeGemTypes().forEach(idx => {
+                tooltip.push(`<i>${PokemonType[idx]}<i/>`);
+            });
+        } else {
+            tooltip.push('<i>All Types<i/>');
+        }
+
+        // Adding header when active
+        if (tooltip.length) {
+            tooltip.unshift('+0.5% boost to:');
+        }
+
+        return tooltip.join('<br>');
+    });
+
     public static initialize(multiplier: Multiplier) {
         FluteEffectRunner.numActiveFlutes(0);
         GameHelper.enumStrings(FluteItemType).forEach((itemName: FluteItemType) => {
@@ -122,12 +142,7 @@ export default class FluteEffectRunner {
 
     public static fluteTooltip(itemName: FluteItemType): string {
         const str = [];
-        str.push(`Gems/Second: ${FluteEffectRunner.numActiveFlutes()} <br><br>Gem Types Used:`);
-        const item = (ItemList[itemName] as FluteItem);
-        item.gemTypes.forEach(t => {
-            str.push(`${t}: ${App.game.gems.gemWallet[PokemonType[t]]().toLocaleString('en-US')}`);
-        });
-        str.push(`<br>Time Remaining:<br> ${formatSecondsToTime(this.fluteFormattedTime(itemName))}`);
+        str.push(`<strong>Time Remaining:</strong><br> ${formatSecondsToTime(this.fluteFormattedTime(itemName))}`);
         return str.join('<br>');
     }
 
@@ -155,5 +170,20 @@ export default class FluteEffectRunner {
             }
             return !!player.effectList[itemName]();
         });
+    }
+
+    public static fluteGemTooltip(item): string {
+        let tooltipString = '';
+        tooltipString += '<div><strong>Consumes:</strong></div>';
+        tooltipString += '<table class="w-100">';
+        for (const gem of item.gemTypes) {
+            tooltipString += '<tr>';
+            tooltipString += `<td class="text-left" px-1">${gem} gems</td>`;
+            tooltipString += '<td></td>';
+            tooltipString += `<td class="text-right" px-1">(${App.game.gems.gemWallet[PokemonType[gem]]().toLocaleString('en-US')})</td>`;
+            tooltipString += '</tr>';
+        }
+        tooltipString += '</table>';
+        return tooltipString;
     }
 }

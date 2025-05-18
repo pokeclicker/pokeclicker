@@ -13,6 +13,7 @@ class Farming implements Feature {
 
     mutationCounter = 0;
     wanderCounter = 0;
+    mulchCounter = 0;
 
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
@@ -35,6 +36,7 @@ class Farming implements Feature {
     mulchShovelAmt: KnockoutObservable<number>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
+    possiblePlotMutations: KnockoutComputed<Array<Array<string>>>;
 
     constructor(private multiplier: Multiplier) {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
@@ -67,6 +69,22 @@ class Farming implements Feature {
                 }
             }
             return 0;
+        });
+
+        this.possiblePlotMutations = ko.pureComputed(() => {
+            const plotMutations = [...Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT)].map(() => []);
+            App.game.farming.mutations.forEach((mutation) => {
+                const isUnlocked = App.game.farming.unlockedBerries[mutation.mutatedBerry]();
+                if (!isUnlocked && !mutation.hintSeen) {
+                    return;
+                }
+                mutation.getMutationPlots().forEach((plot) => {
+                    if (mutation.getTotalMutationChance(plot) > 0) {
+                        plotMutations[plot].push(isUnlocked ? BerryType[mutation.mutatedBerry] : '???');
+                    }
+                });
+            });
+            return plotMutations;
         });
     }
 
@@ -850,7 +868,7 @@ class Farming implements Feature {
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
             ],
             new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]),
-            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Sizzlipede']
+            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Mothim', 'Sizzlipede']
         );
 
         this.berryData[BerryType.Charti] = new Berry(
@@ -928,6 +946,7 @@ class Farming implements Feature {
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
                 'It has a tendency to overtake nearby plants.',
+                'It also prevents Kasib from mutating.',
             ],
             undefined,
             ['Houndour', 'Absol', 'Stunky', 'Zorua', 'Impidimp']
@@ -966,7 +985,7 @@ class Farming implements Feature {
             3.3,
             BerryFirmness.Very_Soft,
             ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'],
-            undefined,
+            new Aura(AuraType.Egg, [0.99, 0.98, 0.97]),
             ['Snorlax', 'Girafarig', 'Swablu', 'Munchlax', 'Audino', 'Skwovet']
         );
 
@@ -1178,7 +1197,7 @@ class Farming implements Feature {
             BerryFirmness.Very_Hard,
             [
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
-                'This power keeps other Berries alive for longer.',
+                'This power revitalizes and prevents other berries from withering.',
             ],
             undefined,
             ['Mew']
@@ -1369,7 +1388,7 @@ class Farming implements Feature {
                 BerryType.Oran,
                 BerryType.Sitrus,
             ], {
-                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by unique ripe Berry plants!',
+                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by the 8 different Berries that wild Pokémon hold!',
             }));
 
         //#endregion
@@ -1434,7 +1453,10 @@ class Farming implements Feature {
         this.mutations.push(new EvolveNearBerryMutation(.0003, BerryType.Rabuta, BerryType.Aspear, [BerryType.Aguav]));
         // Nomel
         this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Nomel,
-            [BerryType.Pinap]));
+            [
+                BerryType.Wepear,
+                BerryType.Pinap,
+            ]));
         // Spelon
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Spelon, BerryType.Tamato,
             [[130, 160], [0, 80], [0, 80], [0, 80], [0, 80]], {
@@ -1512,7 +1534,6 @@ class Farming implements Feature {
                 BerryType.Grepa,
             ]));
         // Rindo
-        // TODO: HLXII - Change mutation to grow spontaneously when Grass pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Rindo,
             [[10, 15], [0, 0], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
@@ -1536,7 +1557,6 @@ class Farming implements Feature {
         // Shuca
         this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItemType.Sprinklotad));
         // Coba
-        // TODO: HLXII - Change mutation to grow spontaneously when Flying pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Coba,
             [[0, 0], [10, 15], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
@@ -1662,7 +1682,6 @@ class Farming implements Feature {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Palkia').id]() > 0,
         }));
         // Lansat
-        // TODO: HLXII - Add Mutation to evolve Payapa when Milotic, Gardevoir, Blissey, and Togekiss in party.
         this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, [{ berry: BerryType.Roseli, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Dialga').id]() > 0,
         }));
@@ -1728,7 +1747,7 @@ class Farming implements Feature {
         // Starf
         this.mutations.push(new BlankMutation(0, BerryType.Starf,
             {
-                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders near open soil.',
+                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders and is caught near open soil.',
                 unlockReq: () => App.game.farming.highestUnlockedBerry() >= BerryType.Occa,
             }));
 
@@ -1742,9 +1761,11 @@ class Farming implements Feature {
     }
 
     getReplantMultiplier(): number {
-        let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
-        return multiplier;
+        return 1;
+    }
+
+    getMulchDurationMultiplier(): number {
+        return App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
     }
 
     getMutationMultiplier(): number {
@@ -1807,6 +1828,12 @@ class Farming implements Feature {
         }
 
         this.farmHands.tick();
+
+        this.mulchCounter += GameConstants.TICK_TIME;
+        if (this.mulchCounter >= GameConstants.MULCH_OAK_ITEM_TICK) {
+            App.game.oakItems.use(OakItemType.Sprinklotad, this.plotList.filter(value => value.isMulched()).length);
+            this.mulchCounter = 0;
+        }
     }
 
     handleNotification(farmNotiType: FarmNotificationType, wanderList?: WandererPokemon[]): void {
@@ -1858,10 +1885,10 @@ class Farming implements Feature {
                 const shinyList = wanderList.filter(w => w.shiny);
                 const displayWanderer = shinyList.length ? Rand.fromArray(shinyList) : Rand.fromArray(wanderList);
                 message = `A wild ${displayWanderer.name} has wandered onto the farm!`;
-                image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny);
+                image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny, undefined, GameConstants.ShadowStatus.None);
                 type = displayWanderer.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
-                sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
-                setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
+                sound = displayWanderer.shiny ? NotificationConstants.NotificationSound.General.shiny_long : NotificationConstants.NotificationSound.Farming.wandering_pokemon;
+                setting = displayWanderer.shiny ? NotificationConstants.NotificationSetting.General.encountered_shiny : NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
                 break;
         }
 
@@ -2131,7 +2158,7 @@ class Farming implements Feature {
     }
 
     canAccess(): boolean {
-        return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Wailmer_pail);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Wailmer_pail);
     }
 
     unlockBerry(berry: BerryType) {
@@ -2258,7 +2285,7 @@ class Farming implements Feature {
     };
 
     public auraDisplay(berry: BerryType, stage: number) {
-        return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 3 })}`;
     }
 
     public handleWanderer(plot: Plot) {
@@ -2270,12 +2297,14 @@ class Farming implements Feature {
         const berry = App.game.farming.berryData[plot.wanderer.berry];
 
         const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
-        App.game.wallet.gainFarmPoints(farmPoints);
+        const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;
+        App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
 
         const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
         if (pokeball !== GameConstants.Pokeball.None) {
             wanderer.pokeball(pokeball);
             wanderer.catching(true);
+            App.game.pokeballs.usePokeball(pokeball);
             // Halved catch time in farm, it does not matter in the balance
             setTimeout(() => this.attemptCatchWanderer(plot), App.game.pokeballs.calculateCatchTime(pokeball) / 2);
         } else {
@@ -2286,7 +2315,6 @@ class Farming implements Feature {
 
     public attemptCatchWanderer(plot: Plot) {
         const wanderer = plot.wanderer;
-        App.game.pokeballs.usePokeball(wanderer.pokeball());
         const catchChance = GameConstants.clipNumber(
             wanderer.catchRate
                 + App.game.pokeballs.getCatchBonus(wanderer.pokeball(), { pokemon: wanderer.name, encounterType: EncounterType.wanderer })
@@ -2347,5 +2375,4 @@ class Farming implements Feature {
             plot.wanderer = undefined;
         }, 250);
     }
-
 }

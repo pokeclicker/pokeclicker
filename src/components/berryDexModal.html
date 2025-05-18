@@ -170,47 +170,51 @@
                     <tr>
                       <td class="p-0" colspan="2">
                         <table class="table table-striped table-hover table-bordered table-sm m-0">
-                          <tr class="text-light">
-                            <th class="bg-dark">Wandering Pokémon</th>
-                          </tr>
-                          <tr>
-                            <th colspan="2" data-bind="text: 'Attracted by all Berries'">Base Wanderers</th>
-                          </tr>
-                          <tr id="wanderRow">
-                            <td id="wanderPokemonList">
-                              <ul class="list-inline">
-                              <!-- ko foreach: Berry.baseWander.filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                          <thead>
+                            <tr class="text-light">
+                              <th class="bg-dark">Wandering Pokémon</th>
+                            </tr>
+                            <tr>
+                              <th colspan="2" data-bind="text: 'Attracted by all Berries'">Base Wanderers</th>
+                            </tr>
+                          </thead>
+                          <tbody class="wanderPokemonList">
+                            <tr>
+                              <td>
+                                <ul class="list-inline">
+                                <!-- ko foreach: Berry.baseWander.filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                  <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
+                                <!-- /ko -->
+                                </ul>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th colspan="2" data-bind="text: `Attracted to ${BerryColor[App.game.farming.berryData[$data].color]}-Colored Berries`">Color Wanderers</th>
+                            </tr>
+                            <tr>
+                              <td>
+                                <ul class="list-inline">
+                                <!-- ko foreach: Berry.colorWander[App.game.farming.berryData[$data].color].filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
                                 <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
-                              <!-- /ko -->
-                              </ul>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th colspan="2" data-bind="text: `Attracted to ${BerryColor[App.game.farming.berryData[$data].color]}-Colored Berries`">Color Wanderers</th>
-                          </tr>
-                          <tr id="wanderRow">
-                            <td id="wanderPokemonList">
-                              <ul class="list-inline">
-                              <!-- ko foreach: Berry.colorWander[App.game.farming.berryData[$data].color].filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
-                              <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
-                              <!-- /ko -->
-                              </ul>
-                            </td>
-                          </tr>
-                          <!-- ko if: App.game.farming.berryData[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
-                          <tr>
-                            <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
-                          </tr>
-                          <tr id="wanderRow">
-                            <td id="wanderPokemonList">
-                              <ul class="list-inline">
-                              <!-- ko foreach: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
-                                <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
-                              <!-- /ko -->
-                              </ul>
-                            </td>
-                          </tr>
-                          <!-- /ko -->
+                                <!-- /ko -->
+                                </ul>
+                              </td>
+                            </tr>
+                            <!-- ko if: App.game.farming.berryData[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                            <tr>
+                              <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
+                            </tr>
+                            <tr>
+                              <td>
+                                <ul class="list-inline">
+                                <!-- ko foreach: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                  <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
+                                <!-- /ko -->
+                                </ul>
+                              </td>
+                            </tr>
+                            <!-- /ko -->
+                          </tbody>
                         </table>
                       </td>
                     </tr>              

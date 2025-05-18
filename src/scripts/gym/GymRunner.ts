@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/enums/Badges.d.ts" />
 
@@ -142,6 +143,11 @@ class GymRunner {
         return gym.optionalArgs.environment;
     }
 
+    public static getBattleBackgroundImage() {
+        const gym = GymRunner.gymObservable();
+        return gym.optionalArgs.battleBackground;
+    }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -154,3 +160,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+GymRunner satisfies TmpGymRunnerType;
