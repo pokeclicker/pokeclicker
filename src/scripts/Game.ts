@@ -433,7 +433,7 @@ class Game implements TmpGameType {
             }
             case GameConstants.GameState.battleFrontier: {
                 BattleFrontierBattle.counter += GameConstants.TICK_TIME;
-                if (BattleFrontierBattle.counter >= GameConstants.BATTLE_FRONTIER_TICK) {
+                if (BattleFrontierBattle.counter >= GameConstants.BATTLE_TICK) {
                     BattleFrontierBattle.tick();
                 }
                 BattleFrontierRunner.tick();
