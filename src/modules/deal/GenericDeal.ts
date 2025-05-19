@@ -81,11 +81,11 @@ type GenericDealParams = {
 };
 
 export default class GenericDeal {
-    private _costs: DealCost[];
-    private _profits: DealProfit[];
-    private _tradeRequirement?: Requirement;
-    private _visibleRequirement?: Requirement;
-    private _tradeButtonOverride?: string;
+    private readonly _costs: DealCost[];
+    private readonly _profits: DealProfit[];
+    private readonly _tradeRequirement?: Requirement;
+    private readonly _visibleRequirement?: Requirement;
+    private readonly _tradeButtonOverride?: string;
 
     get costs(): DealCost[] {
         return this._costs;
@@ -226,6 +226,17 @@ export default class GenericDeal {
                     return Math.floor(App.game.wallet.currencies[cost.currency.currency]() / cost.currency.amount * cost.amount);
             }
         }));
+    }
+
+    public static inventoryAmount(a: DealCost | DealProfit): number {
+        switch (a.type) {
+            case DealCostOrProfitType.Gem: return App.game.gems.gemWallet[a.gemType]();
+            case DealCostOrProfitType.Shard: return player.itemList[a.shardItem.name]();
+            case DealCostOrProfitType.Berry: return App.game.farming.berryList[a.berryType]();
+            case DealCostOrProfitType.Item: return player.itemList[a.item.name]();
+            case DealCostOrProfitType.Amount: return App.game.wallet.currencies[a.currency.currency]();
+            default: return 0;
+        }
     }
 
     public static generateDeals() {
