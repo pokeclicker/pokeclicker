@@ -28,29 +28,31 @@
                             <tbody data-bind="foreach: { data: GenericDeal.getDeals(ShopHandler.shopObservable().traderID)?.().filter(deal => deal.isVisible()), as: 'deal' }">
                             <tr data-bind="let: { tradeAmount: ko.observable(1) }">
                                 <td class="align-middle text-center cost-section">
-                                    <div class="d-flex flex-column" data-bind="foreach: deal.costs">
+                                    <div class="d-flex flex-column pr-2" data-bind="foreach: deal.costs">
                                         <div class="d-flex" style="height: 24px; gap: 8px;" data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount() } }"></div>
                                     </div>
                                 </td>
                                 <td class="align-middle text-center cost-inventory">
-                                    <div class="d-flex flex-column" data-bind="foreach: deal.costs">
+                                    <div class="d-flex flex-column px-2" data-bind="foreach: deal.costs">
                                         <div class="text-center" style="height: 24px;" data-bind="text: $data.hidePlayerInventory ? '' : GenericDeal.inventoryAmount($data).toLocaleString('en-US')"></div>
                                     </div>
                                 </td>
-                                <td class="align-middle" style="width: 1px;">→</td>
                                 <td class="align-middle">
-                                    <div class="d-flex flex-column" data-bind="foreach: deal.profits">
+                                    <div class="px-2">→</div>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-column px-2" data-bind="foreach: deal.profits">
                                         <div class="d-flex" style="height: 24px; gap: 8px;" data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount() } }"></div>
                                     </div>
                                 </td>
                                 <td class="align-middle profit-inventory">
-                                    <div class="d-flex flex-column" data-bind="foreach: deal.profits">
+                                    <div class="d-flex flex-column px-2" data-bind="foreach: deal.profits">
                                         <div class="text-center" style="height: 24px;" data-bind="text: $data.hidePlayerInventory ? '' : GenericDeal.inventoryAmount($data).toLocaleString('en-US')"></div>
                                     </div>
                                 </td>
                                 <td class="align-middle">
                                     <!-- ko if: GenericDeal.isLocked(ShopHandler.shopObservable()?.traderID, $index()) -->
-                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                                    <img width="24px" class="lock pl-2" src="assets/images/breeding/lock.svg" data-bind="
                                         tooltip: {
                                             title: deal.requirement?.hint() || '',
                                             placement: 'bottom',
@@ -59,7 +61,7 @@
                                     " />
                                     <!-- /ko -->
                                     <!-- ko ifnot: GenericDeal.isLocked(ShopHandler.shopObservable()?.traderID, $index()) -->
-                                    <div class="btn-group btn-block">
+                                    <div class="btn-group btn-block pl-2">
                                         <button class='btn btn-success btn-block' data-bind='click: function(){GenericDeal.use(ShopHandler.shopObservable()?.traderID, $index(), tradeAmount())}, attr: { disabled: tradeAmount() > GenericDeal.maxTrades(deal) || !GenericDeal.canUse(ShopHandler.shopObservable()?.traderID, $index()) }'>
                                             <knockout data-bind="text: !GenericDeal.anySoldOut(deal) ? (deal.tradeButtonOverride ?? 'Trade') : 'Sold out'"></knockout>
                                         </button>
