@@ -57,7 +57,7 @@
                   <div class="small px-1 pb-2 my-1" style="overflow-x: hidden;">
                     <!-- Region and Type selects -->
                     <div class="form-row px-1">
-                        <div class="form-group col-6 m-0 px-1 py-0">
+                        <div class="form-group col-4 m-0 px-1 py-0">
                             <!-- ko let: { heldItemRegionFilter: Settings.getSetting('heldItemRegionFilter') } -->
                             <label class="mb-1" for="held-item-region-filter">Region</label>
                             <select id="held-item-region-filter" autocomplete="off" class="custom-select custom-select-sm"
@@ -68,7 +68,7 @@
                             </select>
                             <!-- /ko -->
                         </div>
-                        <div class="form-group col-6 m-0 px-1 py-0">
+                        <div class="form-group col-4 m-0 px-1 py-0">
                             <!-- ko let: { heldItemTypeFilter: Settings.getSetting('heldItemTypeFilter') } -->
                             <label class="mb-1" for="held-item-type-filter">Type</label>
                             <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm"
@@ -79,17 +79,34 @@
                             </select>
                             <!-- /ko -->
                         </div>
+                        <div class="form-group col-4 m-0 px-1 py-0">
+                            <!-- ko let: { heldItemType2Filter: Settings.getSetting('heldItemType2Filter') } -->
+                            <label class="mb-1" for="held-item-type2-filter">Type 2</label>
+                            <select id="held-item-type2-filter" name="heldItemType2Filter" autocomplete="off" class="custom-select custom-select-sm"
+                                data-bind="options: heldItemType2Filter.options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: heldItemType2Filter.observableValue">
+                            </select>
+                            <!-- /ko -->
+                        </div>
                     </div>
                     <!-- Hide/Show checkboxes -->
-                    <div class="form-check align-middle mt-1">
-                        <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue" />
-                        <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
-                    </div>
-                    <div class="form-check align-middle mt-1">
-                        <input type="checkbox" id="show-this-item-pokemon" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('heldItemHideHoldingThisItem').observableValue" />
-                        <label for="show-this-item-pokemon" class="form-check-label">Hide Pokémon holding <u>this</u> item</label>
+                    <div class="form-row mt-2">
+                        <div class="col-12 col-sm-6 text-center">
+                            <div class="form-check align-middle">
+                                <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
+                                    data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue" />
+                                <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 text-center">
+                            <div class="form-check align-middle">
+                                <input type="checkbox" id="show-this-item-pokemon" class="form-check-input"
+                                    data-bind="checked: Settings.getSetting('heldItemHideHoldingThisItem').observableValue" />
+                                <label for="show-this-item-pokemon" class="form-check-label">Hide Pokémon holding <u>this</u> item</label>
+                            </div>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -102,14 +119,24 @@
                       </tr>
                   </thead>
                   <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: () => (DisplayObservables.modalState.heldItemModal === 'hidden') }), childrenComplete: () => { lazyLoadCallback('lazyHeldItemList'); }">
-                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
-                      <td class="text-left align-middle"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                      <td class="text-left tight align-middle" data-bind="if: $data.heldItem(),
-                        tooltip: { title: $data.heldItem()?.description ?? '', trigger: 'hover', placement: 'bottom' }">
-                            <img width="20" data-bind="attr: { src: $data.heldItem().image }" />
-                            <knockout data-bind="text: $data.heldItem().displayName"></knockout>
+                      <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
+                        <td class="text-left">
+                          <knockout data-bind="text: $data.displayName"></knockout>
+                          <knockout data-bind="visible: $data.shiny">✨</knockout>
+                          <img width="28" data-bind="visible: $data.pokerus, attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`}" />
+                          <img height="16" class="ml-1" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow === GameConstants.ShadowStatus.Shadow" />
+                          <img height="16" class="ml-1" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow === GameConstants.ShadowStatus.Purified" />
                         </td>
-                    </tr>
+                        <td class="text-left tight align-middle" data-bind="if: $data.heldItem(),
+                          tooltip: {
+                            title: $data.heldItem()?.description ?? '',
+                            trigger: 'hover',
+                            placement: 'bottom'
+                        }">
+                          <img width="20" data-bind="attr: { src: $data.heldItem().image }" />
+                          <knockout data-bind="text: $data.heldItem().displayName"></knockout>
+                        </td>
+                      </tr>
                   </tbody>
                 </table>
             </div>
