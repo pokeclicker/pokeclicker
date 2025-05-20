@@ -29,7 +29,7 @@
                             <tr data-bind="let: { tradeAmount: ko.observable(1) }">
                                 <td class="align-middle text-center cost-section">
                                     <div class="d-flex flex-column pr-2" data-bind="foreach: deal.costs">
-                                        <div class="d-flex" style="height: 24px; gap: 8px;" data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount() } }"></div>
+                                        <div class="d-flex align-items-center" style="height: 24px; gap: 8px;" data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount() } }"></div>
                                     </div>
                                 </td>
                                 <td class="align-middle text-center cost-inventory">
@@ -42,7 +42,7 @@
                                 </td>
                                 <td class="align-middle">
                                     <div class="d-flex flex-column px-2" data-bind="foreach: deal.profits">
-                                        <div class="d-flex" style="height: 24px; gap: 8px;" data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount() } }"></div>
+                                        <div class="d-flex align-items-center" style="height: 24px; gap: 8px;" data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount() } }"></div>
                                     </div>
                                 </td>
                                 <td class="align-middle profit-inventory">
