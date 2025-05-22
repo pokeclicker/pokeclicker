@@ -2779,7 +2779,7 @@ class Update implements Saveable {
             };
 
             const totalReimburse = Object.entries(saveData.underground.upgrades).map(([key, value]) => {
-                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0);
+                return upgradeCostMap[key]?.slice(0, value).reduce((acc, cur) => acc + cur, 0) ?? 0;
             }).reduce((acc, cur) => acc + cur, 0);
             saveData.underground.upgrades = {};
             saveData.wallet.currencies[GameConstants.Currency.diamond] += totalReimburse;
@@ -2828,6 +2828,59 @@ class Update implements Saveable {
             // Pokémon Center renamed
             if (playerData._townName == 'Pokemon HQ Lab') {
                 playerData._townName = 'Pokémon HQ Lab';
+            }
+        },
+
+        '0.10.23': ({ playerData, saveData, settingsData }) => {
+            // Remove easier-to-fix locale misformatting from underground grid item tiles
+            saveData.underground?.mine.grid.map(t => t.reward).filter(r => r).forEach(r => {
+                if (!r.backgroundPosition.match(/^\d+% \d+%$/)) {
+                    r.backgroundPosition = r.backgroundPosition.replaceAll(',', '.');
+                    r.backgroundPosition = r.backgroundPosition.replace(/^([\d.]+)\s% ([\d.]+)\s%$/, '$1% $2%');
+                    r.backgroundPosition = r.backgroundPosition.replace(/^%\s([\d.]+) %\s([\d.]+)$/, '$1% $2%');
+                }
+            });
+        },
+
+        '0.10.24': ({ playerData, saveData, settingsData }) => {
+            const reimburseFarmPoints = [0, 2000, 5000, 10000, 20000, 50000]
+                .slice(0, saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].level + 1)
+                .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+
+            saveData.wallet.currencies[GameConstants.Currency.farmPoint] += reimburseFarmPoints;
+
+            // Reset the Sprinklotad
+            saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].level = 0;
+            saveData.oakItems[OakItemType[OakItemType.Sprinklotad]].exp = 0;
+
+            // Resets An Unrivaled Power Red tempbattle if needed
+            const megaMewtwoQl = saveData.quests.questLines.find(ql => ql.name === 'An Unrivaled Power');
+            if (megaMewtwoQl && [1, 3].includes(megaMewtwoQl.state) && megaMewtwoQl.quest === 0) {
+                megaMewtwoQl.initial = 0;
+            }
+
+            // Remove & refund any fossils in the hatchery
+            for (let i = 0; i < saveData.breeding.eggList.length; ++i) {
+                const pokemonID = saveData.breeding.eggList[i].pokemon;
+
+                const fossilConversionMap = {
+                    138: 'Helix_fossil',
+                    140: 'Dome_fossil',
+                    142: 'Old_amber',
+                    345: 'Root_fossil',
+                    347: 'Claw_fossil',
+                    410: 'Armor_fossil',
+                    408: 'Skull_fossil',
+                    564: 'Cover_fossil',
+                    566: 'Plume_fossil',
+                    696: 'Jaw_fossil',
+                    698: 'Sail_fossil',
+                };
+
+                if (fossilConversionMap[pokemonID]) {
+                    playerData._itemList[fossilConversionMap[pokemonID]] = (playerData._itemList[fossilConversionMap[pokemonID]] || 0) + 1;
+                    saveData.breeding.eggList[i] = null;
+                }
             }
         },
     };

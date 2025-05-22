@@ -174,13 +174,15 @@ class DungeonRunner {
             mythic: 0,
         }[tier];
 
+        // Decreasing chance for rarer items (41.7% → 8.3%), ×150% with Dowsing Machine on
+        let moreItemsChance = 0.5 / (4 / (tierWeight + 1)) / 1.5;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
-            // Decreasing chance for rarer items (62.5% → 12.5%)
-            const magnetChance = 0.5 / (4 / (tierWeight + 1));
-            if (Rand.chance(magnetChance)) {
-                // Gain more items in higher regions
-                amount += Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
-            }
+            moreItemsChance *= 1.5;
+        }
+        if (Rand.chance(moreItemsChance)) {
+            // Gain more items in higher regions
+            const region = DungeonRunner.dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(DungeonRunner.dungeon.name);
+            amount *= 1 + Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (region + 1)));
         }
 
         DungeonRunner.gainLoot(loot.loot, amount, tierWeight);
