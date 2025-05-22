@@ -49,9 +49,25 @@ class DungeonGuide {
     end() {
         // Check if more clears already paid for
         if (DungeonGuides.clears() > 0) {
-            // Need to reset the map
-            DungeonRunner.map.board([]);
-            DungeonRunner.initializeDungeon(player.town.dungeon);
+            if (DungeonRunner.canStartDungeon(player.town.dungeon)) {
+                // Need to reset the map
+                DungeonRunner.map.board([]);
+                DungeonRunner.initializeDungeon(player.town.dungeon);
+            } else {
+                // Most likely, dungeon is not open anymore
+                Notifier.notify({
+                    title: `[DUNGEON GUIDE] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
+                    message: 'I could not enter the dungeon anymore. Here is a refund.',
+                    type: NotificationConstants.NotificationOption.danger,
+                    timeout: 5 * GameConstants.MINUTE,
+                });
+                const uncompleteRatio = DungeonGuides.clears() / DungeonGuides.totalClears;
+                const refunds = this.calcCost(DungeonGuides.totalClears, player.town.dungeon.tokenCost, player.town.dungeon.difficulty, true);
+                // Only refund for the cancelled attempts
+                refunds.forEach(a => a.amount = Math.round(uncompleteRatio * a.amount));
+                refunds.forEach(a => App.game.wallet.addAmount(a, true));
+                this.fire();
+            }
         } else {
             // No more clears, fire the guide, reset clears to 1 for modal
             this.fire();
@@ -63,7 +79,7 @@ class DungeonGuide {
         return this.unlockRequirement?.isCompleted() ?? true;
     }
 
-    calcCost(clears, price, region, includeDungeonCost = false): Amount[] {
+    calcCost(clears: number, price: number, region: GameConstants.Region, includeDungeonCost = false): Amount[] {
         const costs = [];
         let discount = clears ** 0.975;
         discount /= clears;
@@ -107,6 +123,7 @@ class DungeonGuide {
         $('.modal.show').modal('hide');
         // Reset our clears
         DungeonGuides.clears(1);
+        DungeonGuides.totalClears = 1;
         DungeonGuides.hired(null);
     }
 }
@@ -123,6 +140,7 @@ class DungeonGuides {
     public static selected: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public static hired: KnockoutObservable<DungeonGuide> = ko.observable(null);
     public static clears: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
+    public static totalClears = 1;
 
     public static startDungeon(): void {
         // Add steps and attack based on efficiency
@@ -136,7 +154,7 @@ class DungeonGuides {
     }
 
     public static calcCost(includeDungeonCost = false): Amount[] {
-        return this.list[this.selected()].calcCost(this.clears(), player.town.dungeon.tokenCost, player.region, includeDungeonCost);
+        return this.list[this.selected()].calcCost(this.clears(), player.town.dungeon.tokenCost, player.town.dungeon.difficulty, includeDungeonCost);
     }
 
     public static calcDungeonCost(): Amount {
@@ -185,6 +203,7 @@ class DungeonGuides {
         guide.hire();
         this.calcCost().forEach((cost) => App.game.wallet.loseAmount(cost));
         App.game.wallet.loseAmount(this.calcDungeonCost());
+        DungeonGuides.totalClears = DungeonGuides.clears();
         // Hide modals
         $('.modal.show').modal('hide');
         // Start the dungeon

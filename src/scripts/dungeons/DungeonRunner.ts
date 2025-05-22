@@ -62,7 +62,7 @@ class DungeonRunner {
 
         DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
-        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.optionalParameters.dungeonRegionalDifficulty ?? player.region);
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.difficulty);
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
         dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
         const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
@@ -181,7 +181,7 @@ class DungeonRunner {
         }
         if (Rand.chance(moreItemsChance)) {
             // Gain more items in higher regions
-            const region = DungeonRunner.dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(DungeonRunner.dungeon.name);
+            const region = DungeonRunner.dungeon.difficulty;
             amount *= 1 + Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (region + 1)));
         }
 
@@ -284,6 +284,14 @@ class DungeonRunner {
         }
     }
 
+    public static returnToTown() {
+        MapHelper.moveToTown(DungeonRunner.dungeon.name);
+        if (App.game.gameState !== GameConstants.GameState.town) {
+            // MoveToTown failed and the player is stuck in the dungeon
+            MapHelper.moveToTown(DungeonRunner.dungeon.name, true);
+        }
+    }
+
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTileType.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
             return;
@@ -299,8 +307,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            App.game.gameState = GameConstants.GameState.town;
-            DungeonGuides.clears(0);
+            DungeonRunner.returnToTown();
             DungeonGuides.endDungeon();
         }
     }
@@ -310,7 +317,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            App.game.gameState = GameConstants.GameState.town;
+            DungeonRunner.returnToTown();
             Notifier.notify({
                 message: 'You could not complete the dungeon in time.',
                 type: NotificationConstants.NotificationOption.danger,
@@ -329,7 +336,7 @@ class DungeonRunner {
                 GameHelper.incrementObservable(App.game.statistics.dungeonGuideClears[DungeonGuides.hired().index]);
             }
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name);
+            DungeonRunner.returnToTown();
             Notifier.notify({
                 message: 'You have successfully completed the dungeon.',
                 type: NotificationConstants.NotificationOption.success,

@@ -267,8 +267,8 @@ class MapHelper {
         return town.isUnlocked();
     }
 
-    public static moveToTown(townName: string) {
-        if (MapHelper.accessToTown(townName)) {
+    public static moveToTown(townName: string, force = false) {
+        if (force || MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
             player.route = 0;
             Battle.route = 0;
