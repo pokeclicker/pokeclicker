@@ -288,7 +288,8 @@ class DungeonRunner {
         MapHelper.moveToTown(DungeonRunner.dungeon.name);
         if (App.game.gameState !== GameConstants.GameState.town) {
             // MoveToTown failed and the player is stuck in the dungeon
-            MapHelper.moveToTown(DungeonRunner.dungeon.name, true);
+            const dest = GameConstants.StartingTowns[player.region];
+            MapHelper.moveToTown(dest);
         }
     }
 

@@ -49,7 +49,7 @@ class DungeonGuide {
     end() {
         // Check if more clears already paid for
         if (DungeonGuides.clears() > 0) {
-            if (DungeonRunner.canStartDungeon(player.town.dungeon)) {
+            if (DungeonRunner.canStartDungeon(DungeonRunner.dungeon)) {
                 // Need to reset the map
                 DungeonRunner.map.board([]);
                 DungeonRunner.initializeDungeon(player.town.dungeon);
@@ -62,7 +62,7 @@ class DungeonGuide {
                     timeout: 5 * GameConstants.MINUTE,
                 });
                 const uncompleteRatio = DungeonGuides.clears() / DungeonGuides.totalClears;
-                const refunds = this.calcCost(DungeonGuides.totalClears, player.town.dungeon.tokenCost, player.town.dungeon.difficulty, true);
+                const refunds = this.calcCost(DungeonGuides.totalClears, DungeonRunner.dungeon.tokenCost, DungeonRunner.dungeon.difficulty, true);
                 // Only refund for the cancelled attempts
                 refunds.forEach(a => a.amount = Math.round(uncompleteRatio * a.amount));
                 refunds.forEach(a => App.game.wallet.addAmount(a, true));
