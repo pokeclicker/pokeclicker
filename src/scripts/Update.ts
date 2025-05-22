@@ -3017,6 +3017,8 @@ class Update implements Saveable {
 
         //remove missingno
         updateResult.saveData.party.caughtPokemon = updateResult.saveData.party.caughtPokemon.filter(p => p.id != 0);
+        updateResult.saveData.breeding.queueList = updateResult.saveData.breeding.queueList.filter(p => p != 0);
+        updateResult.saveData.breeding.eggList.forEach((e, i) => e.pokemon === 0 && (updateResult.saveData.breeding.eggList[i] = new Egg()));
 
         try {
             this.automaticallyDownloadBackup(backupButton, settingsData);

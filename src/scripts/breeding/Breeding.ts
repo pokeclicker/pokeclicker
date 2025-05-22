@@ -144,6 +144,12 @@ class Breeding implements Feature {
         this.queueSlots(json.queueSlots ?? this.defaults.queueSlots);
         this._queueList(json.queueList ? json.queueList : this.defaults.queueList);
         this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
+
+        let emptySpaces = this._eggList.slice(0 ,this._eggSlots()).filter(e => e().type == -1).length;
+        for (let i = 0; i < emptySpaces; i++) {
+            this.queueList().length && this.nextEggFromQueue();
+        }
+        
     }
 
 
