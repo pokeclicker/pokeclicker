@@ -427,7 +427,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </div>
                             </div>
 
-                            <div class="egg-display" data-bind="foreach: Object.keys(App.game.breeding.hatchList).map(egg => GameConstants.EggItemType[egg])">
+                            <div class="egg-display" data-bind="foreach: GameHelper.enumStrings(GameConstants.EggItemType)">
                                 <div>
                                     <div class="card clickable" data-bind="click: () => { BreedingController.selectedEggItem(GameConstants.EggItemType[$data]); },
                                         css: { 'border-danger': BreedingController.selectedEggItem() === GameConstants.EggItemType[$data] }">
