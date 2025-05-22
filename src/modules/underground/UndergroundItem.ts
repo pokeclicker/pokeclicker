@@ -5,7 +5,6 @@ import { ItemList } from '../items/ItemList';
 import { humanifyString, camelCaseToString } from '../GameConstants';
 
 export default class UndergroundItem {
-    public space: Array<Array<any>>;
     public type?: number;
     private weight: number;
     private customWeight?: () => number;
@@ -14,21 +13,13 @@ export default class UndergroundItem {
     constructor(
         public id: number,
         public itemName: string,
-        space: Array<Array<number>>,
+        public space: Array<Array<number>>,
         public value = 1,
         public valueType = UndergroundItemValueType.Diamond,
         public requirement?: Requirement,
         weight?: (() => number) | number,
     ) {
         // Map out our item sizing
-        this.space = space.map((r, y) => r.map((v, x) => ({
-            sizeX: r.length,
-            sizeY: space.length,
-            x,
-            y,
-            value: v ? this.id : 0,
-            rotations: 0,
-        })));
         this.weight = typeof weight === 'number' ? weight : 1;
         this.customWeight = typeof weight === 'function' ? weight : undefined;
         this.sellLocked = ko.observable(false);
@@ -37,7 +28,7 @@ export default class UndergroundItem {
     public isUnlocked(): boolean {
         return this.requirement ? this.requirement.isCompleted() : true;
     }
-    
+
     public isSellable(): boolean {
         return [UndergroundItemValueType.Fossil, UndergroundItemValueType.Diamond, UndergroundItemValueType.Gem].includes(this.valueType);
     }

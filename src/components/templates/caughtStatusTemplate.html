@@ -1,19 +1,19 @@
 <script type="text/html" id="caughtStatusTemplate">
     <knockout style="display: inline;">
         <!-- ko if: $data.status == CaughtStatus.NotCaught -->
-        <img title="You have not captured this Pokémon yet!"
+        <img data-bind="tooltip: {trigger: 'hover', title: 'You have not captured this Pokémon yet!', placement: 'top'}"
              class="pokeball-smallest"
              src="assets/images/pokeball/None.svg"
         />
         <!-- /ko -->
         <!-- ko if: $data.status == CaughtStatus.Caught -->
-        <img title="You have captured this Pokémon!"
+        <img data-bind="tooltip: {trigger: 'hover', title: 'You have captured this Pokémon!', placement: 'top'}"
              class="pokeball-smallest"
              src="assets/images/pokeball/Pokeball.svg"
         />
         <!-- /ko -->
         <!-- ko if: $data.status == CaughtStatus.CaughtShiny -->
-        <img title="You have captured this Pokémon shiny!"
+        <img data-bind="tooltip: {trigger: 'hover', title: 'You have captured this Pokémon shiny!', placement: 'top'}"
              class="pokeball-smallest"
              src="assets/images/pokeball/Pokeball-shiny.svg"
         />

@@ -19,7 +19,7 @@ export default class BerryItem extends Item {
     }
 
     isAvailable(): boolean {
-        const hasBerry = !!App.game.farming.berryList[this.berry]() ?? false;
+        const hasBerry = !!App.game.farming.berryList[this.berry]();
         const unlockedBerryReq = App.game.farming.unlockedBerries[this.berryReq]?.() ?? false;
         const noOakItemChallenge = App.game.challenges.list.disableOakItems.active();
         return super.isAvailable() && !hasBerry && unlockedBerryReq && noOakItemChallenge;

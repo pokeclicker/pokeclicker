@@ -26,6 +26,7 @@ export const MIN_LOAD_TIME = 0.5 * SECOND;
 export const MAX_LOAD_TIME = 20 * SECOND;
 export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
+export const MULCH_OAK_ITEM_TICK = 1 * MINUTE;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 export const SPECIAL_EVENT_TICK = 1 * SECOND;
@@ -140,6 +141,7 @@ export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
+export const ROAMING_INCREASED_CHANCE = 3;
 
 // Shinies
 export const SHINY_CHANCE_BATTLE = 8192;
@@ -500,7 +502,7 @@ export const LuxuryBallCurrencyRate: Record<Currency, number> = {
     [Currency.money]: 300000,
     [Currency.questPoint]: 900,
     [Currency.dungeonToken]: 15000,
-    [Currency.diamond]: 15,
+    [Currency.diamond]: 1500,
     [Currency.farmPoint]: 900,
     [Currency.battlePoint]: 150,
     [Currency.contestToken]: 900,
@@ -1249,6 +1251,51 @@ export enum BulletinBoards {
 }
 
 // Underground
+export const BASE_MINE_WIDTH = 25;
+export const BASE_MINE_HEIGHT = 12;
+
+export const BASE_MINIMUM_LAYER_DEPTH = 3;
+export const BASE_EXTRA_LAYER_DEPTH = 2;
+
+export const BASE_MINIMUM_ITEMS = 1;
+export const BASE_MAXIMUM_ITEMS = 3;
+
+export const DISCOVER_MINE_TIMEOUT_LEVEL_START = 20;
+export const DISCOVER_MINE_TIMEOUT_BASE = 15 * 60;
+export const DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL = 30;
+
+export const SPECIAL_MINE_CHANCE = 1 / 25;
+
+export const UNDERGROUND_EXPERIENCE_DIG_UP_ITEM = 25;
+export const UNDERGROUND_EXPERIENCE_CLEAR_LAYER = 100;
+
+export const SURVEY_RANGE_BASE = 9;
+export const SURVEY_RANGE_REDUCTION_LEVELS = 15;
+
+export const MAX_HIRES = 1;
+
+export const REWARD_RETENTION_BASE = 0.6;
+export const REWARD_RETENTION_DECREASE_PER_LEVEL = 0.01;
+export const REWARD_RETENTION_MINIMUM = 0.1;
+export const HELPER_AUTO_SELL_LEVEL_REQUIREMENT = 20;
+
+export const SMART_TOOL_CHANCE_BASE = 0.5;
+export const SMART_TOOL_CHANCE_INCREASE_PER_LEVEL = 0.025;
+export const SMART_TOOL_CHANCE_MAXIMUM = 1;
+
+export const FAVORITE_MINE_CHANCE_BASE = 0.5;
+export const FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL = 0.01;
+export const FAVORITE_MINE_CHANCE_MAXIMUM = 1;
+
+export const WORKCYCLE_TIMEOUT_BASE = 60;
+export const WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL = 1.1;
+export const WORKCYCLE_TIMEOUT_MINIMUM = 5;
+
+export const PLAYER_EXPERIENCE_HELPER_FRACTION = 0.25;
+export const HELPER_EXPERIENCE_PLAYER_FRACTION = 0.25;
+
+export const UNDERGROUND_BATTERY_COOLDOWN_SECONDS = 1;
+export const UNDERGROUND_BATTERY_MAX_CHARGES = 60;
 
 export enum EnergyRestoreSize {
     SmallRestore,
@@ -1260,35 +1307,6 @@ export const EnergyRestoreEffect = {
     SmallRestore: 0.1,
     MediumRestore: 0.2,
     LargeRestore: 0.5,
-};
-
-export const FossilToPokemon = {
-    'Helix Fossil': 'Omanyte',
-    'Dome Fossil': 'Kabuto',
-    'Old Amber': 'Aerodactyl',
-    'Root Fossil': 'Lileep',
-    'Claw Fossil': 'Anorith',
-    'Armor Fossil': 'Shieldon',
-    'Skull Fossil': 'Cranidos',
-    'Cover Fossil': 'Tirtouga',
-    'Plume Fossil': 'Archen',
-    'Jaw Fossil': 'Tyrunt',
-    'Sail Fossil': 'Amaura',
-};
-
-// Used for image name
-export const PokemonToFossil = {
-    Omanyte: 'Helix Fossil',
-    Kabuto: 'Dome Fossil',
-    Aerodactyl: 'Old Amber',
-    Lileep: 'Root Fossil',
-    Anorith: 'Claw Fossil',
-    Shieldon: 'Armor Fossil',
-    Cranidos: 'Skull Fossil',
-    Tirtouga: 'Cover Fossil',
-    Archen: 'Plume Fossil',
-    Tyrunt: 'Jaw Fossil',
-    Amaura: 'Sail Fossil',
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)
@@ -1614,31 +1632,6 @@ export const HoennDungeons = [
     'Cipher Key Lair',
     'Citadark Isle',
     'Citadark Isle Dome', // 77
-    // These aren't implemented anywhere yet
-    /*
-    "Island Cave",
-    "Desert Ruins",
-    "Scorched Slab",
-    "Ancient Tomb",
-    "Artisan Cave",
-    "Desert Underpass",
-    "Marine Cave",
-    "Terra Cave",
-    "Southern Island",
-    "Faraway Island",
-    "Birth Island",
-    "Devon Corporation",
-    "Oceanic Museum",
-    "Mirage Tower",
-    "Safari Zone",
-    "Mirage Island",
-    "Battle Tower",
-    "Trainer Hill",
-    "Abandoned Ship",
-    "Battle Maison",
-    "Battle Resort",
-    "Mirage Spots",
-    */
 ];
 
 export const SinnohDungeons = [
@@ -2348,7 +2341,7 @@ export enum ShardTraderLocations {
     'Pacifidlog Town',
     'Sootopolis City',
     'Ever Grande City',
-    'Pokemon HQ Lab',
+    'Pokémon HQ Lab',
     'Sandgem Town',
     'Oreburgh City',
     'Floaroma Town',
@@ -2404,7 +2397,6 @@ export enum ShardTraderLocations {
     'Hulbury',
     'Motostoke',
     'Hammerlocke',
-    'Route 6',
     'Stow-on-Side',
     'Ballonlea',
     'Circhester',
@@ -2621,6 +2613,7 @@ export const ModalCollapseList = [
     'achievementTrackerBody',
     'battleItemContainerBody',
     'dailyQuestDisplayBody',
+    'questLineDisplayBody',
     'eggList',
     'fluteItemContainerBody',
     'oakItemsBody',
@@ -2668,18 +2661,3 @@ export const ZMOVE_ACTIVE_MULTIPLIER = 1.5;
 export const ZMOVE_COUNTERACTIVE_MULTIPLIER = 0.75;
 export const ZMOVE_ACTIVE_TIME = 1 * MINUTE;
 export const ZMOVE_COUNTERACTIVE_TIME = 4 * MINUTE;
-
-export enum ContestResults {
-    Normal,
-    Super,
-    Hyper,
-    Master,
-}
-
-export enum ContestStyle {
-    Cool,
-    Beautiful,
-    Cute,
-    Clever,
-    Tough,
-}

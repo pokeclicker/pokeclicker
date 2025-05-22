@@ -17,7 +17,7 @@ export default abstract class Requirement {
             case GameConstants.AchievementOption.more:
             default:
                 const fraction = this.requiredValue != 0 ? (this.getProgress() / this.requiredValue) : +this.isCompleted();
-                return Math.max(fraction * 100, 100).toFixed(1);
+                return Math.min(fraction * 100, 100).toFixed(1);
         }
     }
 

@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/party/LevelType.d.ts" />
+
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
@@ -17,7 +19,7 @@ enum PartyPokemonSaveKeys {
     showShadowImage,
 }
 
-class PartyPokemon implements Saveable {
+class PartyPokemon implements Saveable, TmpPartyPokemonType {
     saveKey: string;
     public exp = 0;
     public evs: KnockoutComputed<number>;
@@ -222,6 +224,23 @@ class PartyPokemon implements Saveable {
         return result;
     }
 
+    public gainLevels(amount: number): number {
+        if (amount < 0) {
+            throw new Error(`PartyPokemon ${this.name} cannot gain negative levels!`);
+        }
+        const oldLevel = this.level;
+        const newLevel = Math.min(this.level + amount, App.game.badgeCase.maxLevel());
+        if (oldLevel !== newLevel) {
+            this.level = newLevel;
+            // Adjust exp to match
+            const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
+            this.exp = levelRequirements[levelType][newLevel - 1];
+            // Just leveled up so...
+            this.checkForLevelEvolution();
+        }
+        return newLevel - oldLevel;
+    }
+
     public checkForLevelEvolution() {
         if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
@@ -317,6 +336,21 @@ class PartyPokemon implements Saveable {
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
     }
 
+    public setVitaminAmount(vitamin: GameConstants.VitaminType, amount: number) {
+        if (this.breeding || isNaN(amount) || amount < 0) {
+            return;
+        }
+
+        const diff = Math.floor(amount) - this.vitaminsUsed[vitamin]();
+        if (diff === 0) {
+            return;
+        } else if (diff > 0) {
+            this.useVitamin(vitamin, diff);
+        } else if (diff < 0) {
+            this.removeVitamin(vitamin, Math.abs(diff));
+        }
+    }
+
     public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
         const itemName = GameConstants.ConsumableType[type];
         if (!player.itemList[itemName]()) {
@@ -330,6 +364,12 @@ class PartyPokemon implements Saveable {
             case GameConstants.ConsumableType.Rare_Candy:
             case GameConstants.ConsumableType.Magikarp_Biscuit:
                 amount = Math.min(amount, player.itemList[itemName]());
+                if (this.breeding) {
+                    return Notifier.notify({
+                        message : `You cannot use ${ItemList[itemName].displayName} on Pokémon in the hatchery.`,
+                        type : NotificationConstants.NotificationOption.danger,
+                    });
+                }
                 const curAttack = this.calculateAttack(true);
                 const bonus = GameConstants.BREEDING_ATTACK_BONUS * ((ItemList[itemName] as AttackGainConsumable).bonusMultiplier ?? 1);
                 GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
@@ -338,6 +378,11 @@ class PartyPokemon implements Saveable {
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
+                const levelsGained = this.gainLevels(amount);
+                if (levelsGained === 0) {
+                    // Rare Candies cause level evolutions even at max level
+                    this.checkForLevelEvolution();
+                }
                 break;
             default :
         }
@@ -637,7 +682,13 @@ class PartyPokemon implements Saveable {
 
         // Don't save anything that is the default option
         Object.entries(output).forEach(([key, value]) => {
-            if (value === this.defaults[PartyPokemonSaveKeys[key]]) {
+            const defaultValue = this.defaults[PartyPokemonSaveKeys[key]];
+            if (Array.isArray(value) && Array.isArray(defaultValue)) {
+                // Compare array contents
+                if (value.length === defaultValue.length && value.every((v, i) => v === defaultValue[i])) {
+                    delete output[key];
+                }
+            } else if (value === defaultValue) {
                 delete output[key];
             }
         });

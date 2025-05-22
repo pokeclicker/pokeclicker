@@ -1,5 +1,6 @@
 import * as GameConstants from '../GameConstants';
 import RegionRoute from './RegionRoute';
+import SubRegions from '../subRegion/SubRegions';
 
 export default class Routes {
     public static regionRoutes: RegionRoute[] = [];
@@ -28,11 +29,17 @@ export default class Routes {
         return this.regionRoutes.find((routeData) => routeData.number === route).region;
     }
 
-    public static getName(route: number, region: number, alwaysIncludeRegionName = false): string {
+    public static getName(route: number, region: number, alwaysIncludeRegionName = false, includeSubRegionName = false): string {
         const regionName = GameConstants.camelCaseToString(GameConstants.Region[region]);
-        let routeName = this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route)?.routeName ?? 'Unknown Route';
+        let resultRoute = this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route);
+        let routeName = resultRoute?.routeName ?? 'Unknown Route';
         if (alwaysIncludeRegionName && !routeName.includes(regionName)) {
             routeName += ` in ${regionName}`;
+        } else if (includeSubRegionName && resultRoute) {
+            const subRegionName = SubRegions.getSubRegionById(region, resultRoute.subRegion ?? 0).name;
+            if (!routeName.includes(subRegionName)) {
+                routeName += ` in ${subRegionName}`;
+            }
         }
         return routeName;
     }

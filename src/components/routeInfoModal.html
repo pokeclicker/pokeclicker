@@ -7,12 +7,20 @@
             </div>
             <div class="modal-body pt-0" style="background-color: inherit;">
                 <!-- ko foreach: { data: Object.entries(RouteInfo.pokemonList()), as: 'pokemons' } -->
-                <div class="bg-primary text-left rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#route-${pokemons[0]}` }">
+                <div class="bg-primary text-left rounded px-3 py-2 mt-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#route-${pokemons[0]}` }">
                     <h5 class="my-0 mx-1 text-light d-inline-block" data-bind="text: (pokemons[0] == 'roamers' ? 'Roamers' : 'Encounters')">Roamer Status</h5>
                 </div>
                 <div class="collapse show" data-bind="attr: { 'id': `route-${pokemons[0]}` }">
                     <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons[1]">
-                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
+                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-toggle="modal" href="#pokemonStatisticsModal" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)},
+                            click: () => {
+                                if (PokedexHelper.pokemonSeen($data.id)()) {
+                                    App.game.statistics.selectedPokemonID($data.id);
+                                } else {
+                                    event.stopPropagation();
+                                }
+                            },
+                            css: { 'clickable': PokedexHelper.pokemonSeen($data.id)() }">
                             <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
                             <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
                                 <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
@@ -39,11 +47,11 @@
                             <!-- /ko -->
                             <img src="" class="pokedex-pokemon-sprite" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id, undefined, undefined, GameConstants.ShadowStatus.None)}">
                             <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: PokedexHelper.pokemonSeen($data.id)() ? PokemonHelper.displayName($data.name) : '???',
-                            tooltip: {
+                            tooltip: PokedexHelper.pokemonSeen($data.id)() ? {
                                 title: PokemonHelper.displayName($data.name),
                                 trigger: 'hover',
                                 placement: 'bottom'
-                            }">name</span>
+                            } : null">name</span>
                         </li>
                     </ul>
                 </div>

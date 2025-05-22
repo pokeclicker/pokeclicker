@@ -660,7 +660,7 @@
             { name: "Underground Entrance"
             , x: 72, y: 39
             , width: 3, height: 4
-            , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+            , databind: "click:function(){UndergroundController.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
             })
         %>
 
@@ -690,23 +690,10 @@
             })
         %>
 
-        <%- include('templates/mapOverlay',
-            { name: "Professor Oak's Blimp"
+        <%- include('templates/mapBlimp',
+            { name: "Professor Oak"
             , x: 27, y: 37
-            , width: 6, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Pallet Town')}, attr:{ class: MapHelper.calculateTownCssClass('Pallet Town') }"
-            , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-            , image: "assets/images/map/blimp_empty.png"
-            })
-        %>
-
-        <%- include('templates/mapOverlay',
-            { name: "Professor Oak's Blimp"
-            , x: 27, y: 37
-            , width: 6, height: 3
-            , databind: "click:function(){MapHelper.moveToTown('Pallet Town')}, attr:{ class: MapHelper.calculateTownCssClass('Pallet Town') }"
-            , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-            , image: "assets/images/map/blimp_pikachu.png"
+            , town: "Pallet Town"
             })
         %>
 
@@ -984,7 +971,7 @@
             , x: 72, y: 6
             , width: 16, height: 16
             , databind: "style: {'pointer-events': 'none'}"
-            , visible:  "App.isUsingClient && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cinnabar Island')]() >= 1"
+            , visible:  "App.isUsingClient && App.game.badgeCase.hasBadge(BadgeEnums.Volcano)"
             , image: "assets/images/map/client_island.png"
             })
         %>
@@ -994,7 +981,7 @@
             , x: 76, y: 12
             , width: 7, height: 4
             , databind: "click:function(){MapHelper.moveToTown('Client Island')}, attr:{ class: MapHelper.calculateTownCssClass('Client Island') }"
-            , visible:  "App.isUsingClient && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cinnabar Island')]() >= 1"
+            , visible:  "App.isUsingClient && App.game.badgeCase.hasBadge(BadgeEnums.Volcano)"
             , image: "assets/images/map/transparent.png"
             , connectedToTown: "Client Island"
             })
@@ -1005,7 +992,7 @@
             , x: 77, y: 16
             , width: 5, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Client Island')}, attr:{ class: MapHelper.calculateTownCssClass('Client Island') }"
-            , visible:  "App.isUsingClient && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cinnabar Island')]() >= 1"
+            , visible:  "App.isUsingClient && App.game.badgeCase.hasBadge(BadgeEnums.Volcano)"
             , image: "assets/images/map/transparent.png"
             , isExtension: true
             })
@@ -1016,7 +1003,7 @@
             , x: 77, y: 11
             , width: 6, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Client Island')}, attr:{ class: MapHelper.calculateTownCssClass('Client Island') }"
-            , visible:  "App.isUsingClient && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cinnabar Island')]() >= 1"
+            , visible:  "App.isUsingClient && App.game.badgeCase.hasBadge(BadgeEnums.Volcano)"
             , image: "assets/images/map/transparent.png"
             , isExtension: true
             })
@@ -1027,7 +1014,7 @@
             , x: 78, y: 10
             , width: 3, height: 1
             , databind: "click:function(){MapHelper.moveToTown('Client Island')}, attr:{ class: MapHelper.calculateTownCssClass('Client Island') }"
-            , visible:  "App.isUsingClient && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cinnabar Island')]() >= 1"
+            , visible:  "App.isUsingClient && App.game.badgeCase.hasBadge(BadgeEnums.Volcano)"
             , image: "assets/images/map/transparent.png"
             , isExtension: true
             })

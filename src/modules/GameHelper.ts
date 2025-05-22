@@ -1,4 +1,4 @@
-import {
+import type {
     Observable as KnockoutObservable,
     Computed as KnockoutComputed,
 } from 'knockout';
@@ -240,5 +240,13 @@ export default class GameHelper {
         } catch (e) {
             return false;
         }
+    }
+
+    public static focusedOnEditableElement(): boolean {
+        const activeEl = document.activeElement as HTMLElement;
+        const localName: string = activeEl.localName.toLowerCase();
+        const editables = ['textarea', 'input', 'select'];
+
+        return (editables.includes(localName) || activeEl.isContentEditable);
     }
 }

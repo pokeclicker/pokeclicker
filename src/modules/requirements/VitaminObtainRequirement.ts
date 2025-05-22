@@ -11,6 +11,6 @@ export default class VitaminObtainRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} Proteins need to be obtained.`;
+        return `${this.requiredValue} Vitamins need to be obtained.`;
     }
 }
