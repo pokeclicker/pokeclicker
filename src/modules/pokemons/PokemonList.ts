@@ -24154,7 +24154,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Psychic, PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 306,
         'catchRate': 45,
         'base': {
             'hitpoints': 137,
@@ -24197,7 +24197,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 306,
         'catchRate': 45,
         'base': {
             'hitpoints': 137,
