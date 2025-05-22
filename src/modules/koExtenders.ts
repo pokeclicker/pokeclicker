@@ -14,33 +14,53 @@ import type { Subscribable, Observable, Computed } from 'knockout';
 // Knockout types don't have a way to accurately require writable computeds yet
 type MaybeWritable = Observable | Computed;
 
-function sanitizeNumericValues(val: number): number {
-    if (val > Number.MAX_SAFE_INTEGER) {
-        return Number.MAX_SAFE_INTEGER;
-    } else if (val < Number.MIN_SAFE_INTEGER) {
-        return Number.MIN_SAFE_INTEGER;
-    } else {
-        return val;
-    }
-}
-
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
+// Rounds to <precision> decimal places, can be negative
 const numericExtender = (target: MaybeWritable, precision: number) => {
     if (!ko.isWritableObservable(target)) {
         throw new Error('Cannot apply \'numeric\' extender to a non-writable observable!');
+    }
+    if (!Number.isInteger(precision)) {
+        throw new Error('The \'numeric\' extender requires integer precision!');
     }
     // create a writable computed observable to intercept writes to our observable
     const result = ko.pureComputed<number>({
         read: target, // always return the original observable's value
         write: (newValueRaw: string | number) => {
-            let newValue = Number(newValueRaw);
-            if (Number.isNaN(newValue)) { return; }
-            newValue = sanitizeNumericValues(newValue);
-
+            const newValue = Number(newValueRaw);
             const current = target();
-            const roundingMultiplier = 10 ** precision;
-            const valueToWrite = Math.round(newValue * roundingMultiplier) / roundingMultiplier;
 
+            if (Number.isNaN(newValue)) {
+                // Force a notification so subscribers (i.e. form fields) know the value hasn't changed
+                result.notifySubscribers(current);
+                return;
+            }
+
+            let valueToWrite = newValue;
+
+            // Restrict all values to the safe integer range
+            if (Math.abs(valueToWrite) > Number.MAX_SAFE_INTEGER) {
+                valueToWrite = Number.MAX_SAFE_INTEGER * Math.sign(valueToWrite);
+            }
+
+            // Round to the specified precision
+            if (precision > 0) {
+                // Round the decimal component separately for greater precision and to avoid potential MAX_SAFE_INT issues
+                const roundingMultiplier = 10 ** precision;
+                const integerComponent = Math.trunc(newValue);
+                const fractionComponent = newValue - integerComponent;
+                valueToWrite = Math.round(fractionComponent * roundingMultiplier) / roundingMultiplier + integerComponent;
+            } else if (precision < 0) {
+                const roundingDivisor = 10 ** -precision;
+                const roundedValue = Math.round(newValue / roundingDivisor) * roundingDivisor;
+                if (roundedValue > Number.MAX_SAFE_INTEGER) {
+                    // If rounding to this precision would round up to above MAX_SAFE_INTEGER, round down instead
+                    valueToWrite = Math.floor(newValue / roundingDivisor) * roundingDivisor;
+                } else {
+                    valueToWrite = roundedValue;
+                }
+            }
+            
             // only write if it changed
             if (valueToWrite !== current) {
                 target(valueToWrite);
@@ -58,7 +78,7 @@ const numericExtender = (target: MaybeWritable, precision: number) => {
         // forcibly convert NaN to 0
         result(0);
     } else {
-        result(sanitizeNumericValues(initialValue));
+        result(initialValue);
     }
 
     // return the new computed observable
