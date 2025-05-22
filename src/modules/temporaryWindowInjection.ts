@@ -163,7 +163,6 @@ import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import ClientRequirement from './requirements/ClientRequirement';
-import ContestWonRequirement from './requirements/ContestWonRequirement';
 import { lazyLoad, lazyLoadCallback } from './utilities/LazyLoader';
 import {
     beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
@@ -179,6 +178,7 @@ import EnergyRestore from './items/EnergyRestore';
 import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokerusIndicatingItem from './items/PokerusIndicatingItem';
 import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
@@ -218,6 +218,7 @@ import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
 import GenericDeal, { DealCostOrProfitType } from './deal/GenericDeal';
+import areaStatus from './enums/AreaStatus';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -393,7 +394,6 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     ClientRequirement,
-    ContestWonRequirement,
     lazyLoad,
     lazyLoadCallback,
     LevelEvolution,
@@ -412,6 +412,7 @@ Object.assign(<any>window, {
     EffectEngineRunner,
     ItemHandler,
     CaughtIndicatingItem,
+    PokerusIndicatingItem,
     PokemonItem,
     EggItem,
     MegaStoneItem,
@@ -450,4 +451,5 @@ Object.assign(<any>window, {
     ChristmasPresent,
     DamageCalculator,
     GameLoadState,
+    areaStatus,
 });

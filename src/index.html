@@ -79,7 +79,7 @@
 <body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue(), attr : {'oncontextmenu' : 'return !' + Settings.getSetting('disableRightClickMenu').observableValue().toString() + ';'}">
 @import "dynamicBackground.html"
 
-<div id="toaster"></div>
+<div id="toaster" class="mw-100"></div>
 <link id="theme-link" href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 
 <!--$DEV_BANNER-->
@@ -120,7 +120,6 @@
 @import "templates/pokemonSpriteTemplate.html"
 @import "templates/pokemonGenderTemplate.html"
 @import "templates/pokemonAttackTemplate.html"
-@import "templates/pokemonGenderStatisticTemplate.html"
 @import "templates/multiSelectDropdownTemplate.html"
 @import "templates/currencyContainerCurrencyTemplate.html"
 @import "templates/wanderingPokemonDisplay.html"
@@ -262,7 +261,12 @@
                                         <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
                                     </td>
                                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
-                                        <span style="display: inline;">Click Attack:
+                                        <span style="display: inline;" data-bind="tooltip: {
+                                            title: 'See the Click Attack tab in the Start → Statistics menu for details.',
+                                            placement: 'bottom',
+                                            trigger: 'hover'
+                                        }">
+                                            Click Attack:
                                             <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                                         </span>
                                     </td>
@@ -340,7 +344,7 @@
                                 Map locations will be coloured based on the following:
                             </div>
                             ${MapHelper.getUsableFilters().map(setting => {
-                                return `<div class='col-10 legend-item'>
+                                return `<div class='col-10 legend-item ${setting.name}'>
                                     <span>${setting.displayName}:</span>
                                 </div>
                                 <div class='col-2'>
@@ -348,7 +352,7 @@
                                 </div>`
                             }).join('\n')}
                             <div class='col-12'>
-                                <i>NOTE: These colors can be customized in the settings menu</i>
+                                <i>NOTE: Colors and priority can be customized in the settings menu</i>
                             </div>
                         </div>`}">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 96px; top: 0px; width: auto; height: 41px;"
@@ -545,9 +549,6 @@
 <!-- Statistics Modal-->
 @import "pokemonStatisticsModal.html"
 
-<!-- Vitamin Modal-->
-@import "pokemonVitaminModal.html"
-
 <!-- Expanded Vitamin Modal -->
 @import "pokemonVitaminExpandedModal.html"
 
@@ -627,9 +628,6 @@
 
 <!-- Consumable Modal -->
 @import "consumableModal.html"
-
-<!-- Pokemon Contest Modal -->
-@import "pokemonContestModal.html"
 
 <script type="text/javascript">
 // Check if we are running in an iframe
