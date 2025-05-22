@@ -715,6 +715,8 @@ export const SpriteCredits: Credit[] = [
             'Bodybuilder (female)',
             'Chaser (male and female)',
             'Cipher Peon (yellow)',
+            'Egg pattern SVG - Manaphy',
+            'Egg pattern SVG - Phione',
             'Es Cade',
             'Hunter (male and female)',
             'Lillie',

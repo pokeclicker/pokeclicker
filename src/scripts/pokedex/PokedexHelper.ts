@@ -77,11 +77,12 @@ class PokedexHelper {
     public static getList(): typeof pokemonList {
         // Peek a computed to avoid subscribing to 1000s of statistics
         const highestDex = ko.pureComputed(() => {
-            const pokemonDiscovered = App.game.statistics.pokemonDiscovered.highestID;
+            const highestDiscovered = App.game.statistics.pokemonDiscovered.highestID;
             const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
             const highestDefeated = App.game.statistics.pokemonDefeated.highestID;
             const highestCaught = App.game.statistics.pokemonCaptured.highestID;
-            return Math.max(pokemonDiscovered, highestEncountered, highestDefeated, highestCaught);
+            const highestRegionID = player.hasBeatenChampOfRegion() ? GameConstants.MaxIDPerRegion[player.highestRegion()] : -1;
+            return Math.max(highestDiscovered, highestEncountered, highestDefeated, highestCaught, highestRegionID);
         }).peek();
 
         const shadowPokemon = PokemonHelper.getAllShadowPokemon.peek();
@@ -151,7 +152,7 @@ class PokedexHelper {
             if (!alreadyCaught && !alreadyDiscovered && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion()) {
                 return false;
             }
-            // Hide uncaught base forms if alternate non-regional form is caught
+            // Hide uncaught base forms if alternate same-region form is caught
             if (!alreadyCaught && !alreadyDiscovered && pokemon.id == Math.floor(pokemon.id) &&
                 App.game.party.caughtPokemon.some((p) => Math.floor(p.id) == pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion)
             ) {
