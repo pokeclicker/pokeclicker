@@ -1,10 +1,8 @@
-import EggType from '../breeding/EggType';
 import CaughtStatus from '../enums/CaughtStatus';
 import { Currency, EggItemType } from '../GameConstants';
 import CaughtIndicatingItem from './CaughtIndicatingItem';
-import HatchableItem from '../interfaces/HatchableItem';
 
-export default class EggItem extends CaughtIndicatingItem implements HatchableItem {
+export default class EggItem extends CaughtIndicatingItem {
     type: EggItemType;
 
     constructor(type: EggItemType, basePrice: number, currency: Currency = Currency.questPoint, displayName?: string) {
@@ -17,7 +15,7 @@ export default class EggItem extends CaughtIndicatingItem implements HatchableIt
     }
 
     addToHatchery(): boolean {
-        return App.game.breeding.addItemToHatchery(this.name, EggType.EggItem);
+        return App.game.breeding.addEggItemToHatchery(this.type);
     }
 
     getCaughtStatus(): CaughtStatus {

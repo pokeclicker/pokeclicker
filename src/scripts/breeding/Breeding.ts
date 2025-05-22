@@ -274,19 +274,19 @@ class Breeding implements Feature {
         return false;
     }
 
-    public addItemToHatchery(itemName: ItemNameType, type: EggType.EggItem | EggType.Fossil) {
-        const item = ItemList[itemName];
-        if (player.itemList[itemName]() <= 0) {
-            return false;
-        } else if (!(type === EggType.EggItem && item instanceof EggItem ||
-            type === EggType.Fossil && item instanceof FossilItem)) {
+    public addEggItemToHatchery(eggItem: GameConstants.EggItemType) {
+        if (GameConstants.EggItemType[eggItem] == undefined) {
             // Only allow hatchable items
-            console.error(`Item '${itemName}' cannot be added to the hatchery!`);
+            console.error('Undefined EggItem could not be added to the hatchery!');
+            return false;
+        }
+        const item = ItemList[GameConstants.EggItemType[eggItem]];
+        if (player.itemList[item.name]() <= 0) {
             return false;
         }
         // If they have a free eggslot, create an egg for this item now
         if (this.hasFreeEggSlot()) {
-            return this.gainItemEgg(itemName, type);
+            return this.gainItemEgg(eggItem);
         }
         const message = 'You don\'t have any free egg slots';
         /*
@@ -362,16 +362,11 @@ class Breeding implements Feature {
         return success;
     }
 
-    private gainItemEgg(itemName: ItemNameType, type: EggType.EggItem | EggType.Fossil) {
-        let egg;
-        if (type === EggType.EggItem) {
-            egg = this.createItemEgg(GameConstants.EggItemType[itemName]);
-        } else if (type === EggType.Fossil) {
-            egg = this.createFossilEgg(GameConstants.FossilType[itemName]);
-        }
+    private gainItemEgg(eggItem: GameConstants.EggItemType) {
+        const egg = this.createItemEgg(eggItem);
         const success = this.gainEgg(egg);
         if (success) {
-            player.loseItem(itemName, 1);
+            player.loseItem(GameConstants.EggItemType[eggItem], 1);
         }
         return success;
     }
@@ -420,8 +415,8 @@ class Breeding implements Feature {
         return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonId);
     }
 
-    private createItemEgg(type: GameConstants.EggItemType): Egg {
-        const hatchIndex = type === GameConstants.EggItemType.Mystery_egg ? Rand.fromEnum(GameConstants.EggItemType) : type;
+    private createItemEgg(eggItem: GameConstants.EggItemType): Egg {
+        const hatchIndex = eggItem === GameConstants.EggItemType.Mystery_egg ? Rand.fromEnum(GameConstants.EggItemType) : eggItem;
         const hatchList = this.hatchList[hatchIndex] as PokemonNameType[][];
         const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter(list => list.length);
 
@@ -432,28 +427,6 @@ class Breeding implements Feature {
         const pokemonName = Rand.fromArray(possibleHatches);
         const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
         return this.createEgg(pokemonId, EggType.EggItem);
-    }
-
-    public createFossilEgg(fossil: GameConstants.FossilType): Egg {
-        const fossilName = GameConstants.FossilType[fossil];
-        const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossilName];
-        if (!pokemonName) {
-            throw new Error(`Cannot create fossil egg for invalid fossil '${fossilName}`);
-        }
-        const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
-        let fossilEgg: Egg;
-        if (pokemonNativeRegion > player.highestRegion()) {
-            Notifier.notify({
-                message: `You must reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonNativeRegion])} before you can uncover this fossil Pokémon!`,
-                type: NotificationConstants.NotificationOption.warning,
-                timeout: 5e3,
-            });
-            fossilEgg = new Egg();
-        } else {
-            const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
-            fossilEgg = this.createEgg(pokemonId, EggType.Fossil);
-        }
-        return fossilEgg;
     }
 
     public getSteps(eggCycles: number) {

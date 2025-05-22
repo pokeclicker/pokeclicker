@@ -178,9 +178,9 @@ import EnergyRestore from './items/EnergyRestore';
 import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokerusIndicatingItem from './items/PokerusIndicatingItem';
 import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
-import FossilItem from './items/FossilItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
 import QuestItem from './items/QuestItem';
@@ -218,6 +218,7 @@ import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
 import GenericDeal, { DealCostOrProfitType } from './deal/GenericDeal';
+import areaStatus from './enums/AreaStatus';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -411,9 +412,9 @@ Object.assign(<any>window, {
     EffectEngineRunner,
     ItemHandler,
     CaughtIndicatingItem,
+    PokerusIndicatingItem,
     PokemonItem,
     EggItem,
-    FossilItem,
     MegaStoneItem,
     PokeballItem,
     QuestItem,
@@ -450,4 +451,5 @@ Object.assign(<any>window, {
     ChristmasPresent,
     DamageCalculator,
     GameLoadState,
+    areaStatus,
 });

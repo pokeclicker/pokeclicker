@@ -1321,35 +1321,6 @@ export const EnergyRestoreEffect = {
     LargeRestore: 0.5,
 };
 
-export const FossilToPokemon = {
-    'Helix_fossil': 'Omanyte',
-    'Dome_fossil': 'Kabuto',
-    'Old_amber': 'Aerodactyl',
-    'Root_fossil': 'Lileep',
-    'Claw_fossil': 'Anorith',
-    'Armor_fossil': 'Shieldon',
-    'Skull_fossil': 'Cranidos',
-    'Cover_fossil': 'Tirtouga',
-    'Plume_fossil': 'Archen',
-    'Jaw_fossil': 'Tyrunt',
-    'Sail_fossil': 'Amaura',
-} as const satisfies Record<keyof typeof FossilType, PokemonNameType>;
-
-// Used for image name
-export const PokemonToFossil: Record<(typeof FossilToPokemon)[keyof typeof FossilToPokemon], keyof typeof FossilToPokemon> = {
-    Omanyte: 'Helix_fossil',
-    Kabuto: 'Dome_fossil',
-    Aerodactyl: 'Old_amber',
-    Lileep: 'Root_fossil',
-    Anorith: 'Claw_fossil',
-    Shieldon: 'Armor_fossil',
-    Cranidos: 'Skull_fossil',
-    Tirtouga: 'Cover_fossil',
-    Archen: 'Plume_fossil',
-    Tyrunt: 'Jaw_fossil',
-    Amaura: 'Sail_fossil',
-};
-
 // For random quest, name matches entry in gymList (created in Gym.ts)
 export const KantoGyms = [
     'Pewter City',
@@ -2438,7 +2409,6 @@ export enum ShardTraderLocations {
     'Hulbury',
     'Motostoke',
     'Hammerlocke',
-    'Route 6',
     'Stow-on-Side',
     'Ballonlea',
     'Circhester',

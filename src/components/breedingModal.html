@@ -8,7 +8,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <ul class="nav nav-tabs nav-fill w-100">
                             <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab" onclick="$('#breeding-fireall').show()">Pokémon</a></li>
                             <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').show()">Eggs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').show()">Fossils</a></li>
                             <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers</a></li>
                             <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').show()">Help</a></li>
                             <li class="d-lg-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
@@ -497,29 +496,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <!-- /ko -->
                         </div>
                     </div>
-
-                    <div class="tab-pane fade" id="breeding-fossils">
-                        <div class="scrolling-div-breeding-list">
-                        <!-- ko let: { fossilItems: GameHelper.enumStrings(GameConstants.FossilType).filter(f=>player.itemList[f]()) } -->
-                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !fossilItems.length">
-                                You don't have any fossils to breed.
-                            </button>
-                            <!-- ko if: fossilItems.length -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: fossilItems">
-                                <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
-                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ItemList[$data].displayName">fossil</span>
-                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${ItemList[$data].displayName}.png` }">
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player.itemList[$data]().toLocaleString('en-US')">amount</span>
-                                    <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); App.game.breeding.checkCloseModal(); }"></a>
-                                    <knockout style="position: absolute; right: 2px; top: -14px;"
-                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data]) } }"/>
-                                </li>
-                            </ul>
-                            <!-- /ko -->
-                        <!-- /ko -->
-                        </div>
-                    </div>
-
                     <div class="tab-pane fade" id="breeding-helpers">
                         <!-- ko if: HatcheryHelpers.list.some(f => f.isUnlocked()) -->
                         <div class="row m-0 justify-content-center" data-bind="foreach: App.game.breeding.hatcheryHelpers.available()" style="max-width: 100%;">

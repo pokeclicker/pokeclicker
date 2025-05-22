@@ -41,7 +41,6 @@ import QuestItem from './QuestItem';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
-import FossilItem from './FossilItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
 // eslint-disable-next-line import/prefer-default-export
@@ -307,17 +306,17 @@ ItemList.Zap_plate = new TreasureItem('Zap_plate', UndergroundItemValueType.Gem,
 ItemList.Pixie_plate = new TreasureItem('Pixie_plate', UndergroundItemValueType.Gem, 'Pixie Plate');
 ItemList.Blank_plate = new TreasureItem('Blank_plate', UndergroundItemValueType.Gem, 'Blank Plate');
 // Fossils
-ItemList.Helix_fossil = new FossilItem('Helix_fossil', 'Helix Fossil');
-ItemList.Dome_fossil = new FossilItem('Dome_fossil', 'Dome Fossil');
-ItemList.Old_amber = new FossilItem('Old_amber', 'Old Amber');
-ItemList.Root_fossil = new FossilItem('Root_fossil', 'Root Fossil');
-ItemList.Claw_fossil = new FossilItem('Claw_fossil', 'Claw Fossil');
-ItemList.Armor_fossil = new FossilItem('Armor_fossil', 'Armor Fossil');
-ItemList.Skull_fossil = new FossilItem('Skull_fossil', 'Skull Fossil');
-ItemList.Cover_fossil = new FossilItem('Cover_fossil', 'Cover Fossil');
-ItemList.Plume_fossil = new FossilItem('Plume_fossil', 'Plume Fossil');
-ItemList.Jaw_fossil = new FossilItem('Jaw_fossil', 'Jaw Fossil');
-ItemList.Sail_fossil = new FossilItem('Sail_fossil', 'Sail Fossil');
+ItemList.Helix_fossil = new TreasureItem('Helix_fossil', UndergroundItemValueType.Fossil, 'Helix Fossil');
+ItemList.Dome_fossil = new TreasureItem('Dome_fossil', UndergroundItemValueType.Fossil, 'Dome Fossil');
+ItemList.Old_amber = new TreasureItem('Old_amber', UndergroundItemValueType.Fossil, 'Old Amber');
+ItemList.Root_fossil = new TreasureItem('Root_fossil', UndergroundItemValueType.Fossil, 'Root Fossil');
+ItemList.Claw_fossil = new TreasureItem('Claw_fossil', UndergroundItemValueType.Fossil, 'Claw Fossil');
+ItemList.Armor_fossil = new TreasureItem('Armor_fossil', UndergroundItemValueType.Fossil, 'Armor Fossil');
+ItemList.Skull_fossil = new TreasureItem('Skull_fossil', UndergroundItemValueType.Fossil, 'Skull Fossil');
+ItemList.Cover_fossil = new TreasureItem('Cover_fossil', UndergroundItemValueType.Fossil, 'Cover Fossil');
+ItemList.Plume_fossil = new TreasureItem('Plume_fossil', UndergroundItemValueType.Fossil, 'Plume Fossil');
+ItemList.Jaw_fossil = new TreasureItem('Jaw_fossil', UndergroundItemValueType.Fossil, 'Jaw Fossil');
+ItemList.Sail_fossil = new TreasureItem('Sail_fossil', UndergroundItemValueType.Fossil, 'Sail Fossil');
 ItemList.Fossilized_bird = new TreasureItem('Fossilized_bird', UndergroundItemValueType.FossilPiece, 'Fossilized Bird');
 ItemList.Fossilized_fish = new TreasureItem('Fossilized_fish', UndergroundItemValueType.FossilPiece, 'Fossilized Fish');
 ItemList.Fossilized_drake = new TreasureItem('Fossilized_drake', UndergroundItemValueType.FossilPiece, 'Fossilized Drake');
@@ -502,3 +501,26 @@ ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 1000, Currency.
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
+// Fossils
+ItemList.Omanyte = new PokemonItem('Omanyte');
+ItemList.Omastar = new PokemonItem('Omastar');
+ItemList.Kabuto = new PokemonItem('Kabuto');
+ItemList.Kabutops = new PokemonItem('Kabutops');
+ItemList.Aerodactyl = new PokemonItem('Aerodactyl');
+ItemList.Lileep = new PokemonItem('Lileep');
+ItemList.Cradily = new PokemonItem('Cradily');
+ItemList.Anorith = new PokemonItem('Anorith');
+ItemList.Armaldo = new PokemonItem('Armaldo');
+ItemList.Cranidos = new PokemonItem('Cranidos');
+ItemList.Rampardos = new PokemonItem('Rampardos');
+ItemList.Shieldon = new PokemonItem('Shieldon');
+ItemList.Bastiodon = new PokemonItem('Bastiodon');
+ItemList.Tirtouga = new PokemonItem('Tirtouga');
+ItemList.Carracosta = new PokemonItem('Carracosta');
+ItemList.Archen = new PokemonItem('Archen');
+ItemList.Archeops = new PokemonItem('Archeops');
+ItemList.Tyrunt = new PokemonItem('Tyrunt');
+ItemList.Tyrantrum = new PokemonItem('Tyrantrum');
+ItemList.Amaura = new PokemonItem('Amaura');
+ItemList.Aurorus = new PokemonItem('Aurorus');
+

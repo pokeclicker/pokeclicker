@@ -2859,13 +2859,32 @@ class Update implements Saveable {
                 megaMewtwoQl.initial = 0;
             }
 
+            // Remove & refund any fossils in the hatchery
             // Update hatchery EggTypes
-            saveData.breeding.eggList?.forEach(egg => {
+            const fossilConversionMap = {
+                138: 'Helix_fossil',
+                140: 'Dome_fossil',
+                142: 'Old_amber',
+                345: 'Root_fossil',
+                347: 'Claw_fossil',
+                410: 'Armor_fossil',
+                408: 'Skull_fossil',
+                564: 'Cover_fossil',
+                566: 'Plume_fossil',
+                696: 'Jaw_fossil',
+                698: 'Sail_fossil',
+            };
+            saveData.breeding.eggList?.forEach((egg, i) => {
                 const oldType = egg.type;
                 if (egg.type === 6) {
                     egg.type = 0; // EggType.Pokemon
                 } else if (egg.type === 8) {
-                    egg.type = 2; // EggType.Fossil
+                    // EggType.Fossil no longer exists, refund the fossil item and remove the egg
+                    const fossil = fossilConversionMap[egg.pokemon];
+                    if (fossil) {
+                        playerData._itemList[fossil] = (playerData._itemList[fossil] || 0) + 1;
+                    }
+                    saveData.breeding.eggList[i] = null;
                 } else if ([0, 1, 2, 3, 4, 5, 7].includes(egg.type)) {
                     egg.type = 1; // EggType.EggItem now covers every EggItemType
                 } else {
