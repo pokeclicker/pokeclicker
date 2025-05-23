@@ -2256,6 +2256,7 @@ export const TemporaryBattles = [
     'Kyurem 2',
     'Kyurem 3',
     'Twerps',
+    'Hoopa (Unbound)',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
