@@ -116,9 +116,6 @@ export class UndergroundController {
         if (amount <= 0) {
             return;
         }
-        if (item.valueType == UndergroundItemValueType.Fossil) {
-            amount = 1;
-        }
         const curAmt = player.itemList[item.itemName]();
         if (curAmt > 0) {
             const sellAmt = Math.min(curAmt, amount);
