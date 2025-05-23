@@ -2700,7 +2700,6 @@ class Update implements Saveable {
 
             // The NewYLayer upgrades has been refactored to Items_All, copy the level
             saveData.underground.upgrades.Items_All = saveData.underground.upgrades.NewYLayer;
-
         },
 
         '0.10.21': ({ playerData, saveData, settingsData }) => {
@@ -2861,28 +2860,39 @@ class Update implements Saveable {
             }
 
             // Remove & refund any fossils in the hatchery
-            for (let i = 0; i < saveData.breeding.eggList.length; ++i) {
-                const pokemonID = saveData.breeding.eggList[i].pokemon;
-
-                const fossilConversionMap = {
-                    138: 'Helix_fossil',
-                    140: 'Dome_fossil',
-                    142: 'Old_amber',
-                    345: 'Root_fossil',
-                    347: 'Claw_fossil',
-                    410: 'Armor_fossil',
-                    408: 'Skull_fossil',
-                    564: 'Cover_fossil',
-                    566: 'Plume_fossil',
-                    696: 'Jaw_fossil',
-                    698: 'Sail_fossil',
-                };
-
-                if (fossilConversionMap[pokemonID]) {
-                    playerData._itemList[fossilConversionMap[pokemonID]] = (playerData._itemList[fossilConversionMap[pokemonID]] || 0) + 1;
+            // Update hatchery EggTypes
+            const fossilConversionMap = {
+                138: 'Helix_fossil',
+                140: 'Dome_fossil',
+                142: 'Old_amber',
+                345: 'Root_fossil',
+                347: 'Claw_fossil',
+                410: 'Armor_fossil',
+                408: 'Skull_fossil',
+                564: 'Cover_fossil',
+                566: 'Plume_fossil',
+                696: 'Jaw_fossil',
+                698: 'Sail_fossil',
+            };
+            saveData.breeding.eggList?.forEach((egg, i) => {
+                const oldType = egg.type;
+                if (egg.type === 6) {
+                    egg.type = 0; // EggType.Pokemon
+                } else if (egg.type === 8) {
+                    // EggType.Fossil no longer exists, refund the fossil item and remove the egg
+                    const fossil = fossilConversionMap[egg.pokemon];
+                    if (fossil) {
+                        playerData._itemList[fossil] = (playerData._itemList[fossil] || 0) + 1;
+                    }
                     saveData.breeding.eggList[i] = null;
+                } else if ([0, 1, 2, 3, 4, 5, 7].includes(egg.type)) {
+                    egg.type = 1; // EggType.EggItem now covers every EggItemType
+                } else {
+                    egg.type = -1; // EggType.None
                 }
-            }
+            });
+            // Remove unused pokemon egg item
+            delete playerData._itemList.Pokemon_egg;
 
             // Rename pokemonSeen statistic to pokemonDiscovered for clarity
             saveData.statistics.pokemonDiscovered = saveData.statistics.pokemonSeen;
